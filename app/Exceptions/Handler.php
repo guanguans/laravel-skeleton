@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Jiannei\Response\Laravel\Support\Facades\Response;
 use Jiannei\Response\Laravel\Support\Traits\ExceptionTrait;
 use Throwable;
 
@@ -40,5 +41,14 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($request->is('api/*')) {
+            return $this->prepareJsonResponse($request, $e);
+        }
+
+        return parent::render($request, $e);
     }
 }
