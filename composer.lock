@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "205715ede924e15a6b5ffc6af8a6ed3f",
+    "content-hash": "586be14a6ee12c363f8e72eef40e4553",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -692,6 +692,322 @@
                 }
             ],
             "time": "2021-08-28T21:34:50+00:00"
+        },
+        {
+            "name": "guanguans/laravel-dump-sql",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guanguans/laravel-dump-sql.git",
+                "reference": "3d0a1a92625a09acc163439903a0478ac8a5289f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/3d0a1a92625a09acc163439903a0478ac8a5289f",
+                "reference": "3d0a1a92625a09acc163439903a0478ac8a5289f",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "laravel/framework": "^5.1 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^3.7",
+                "phpunit/phpunit": "~8.0"
+            },
+            "type": "laravel",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Guanguans\\LaravelDumpSql\\ServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer test",
+                        "composer check-style"
+                    ],
+                    "pre-push": [
+                        "composer test",
+                        "composer check-style"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Guanguans\\LaravelDumpSql\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "guanguans",
+                    "email": "ityaozm@gmail.com"
+                }
+            ],
+            "description": "laravel 中轻松容易的输出完整的 SQL 语句。 - Easy output of complete SQL statements for laravel framework.",
+            "keywords": [
+                "dd",
+                "debug",
+                "dump",
+                "laravel",
+                "mysql",
+                "sql"
+            ],
+            "support": {
+                "issues": "https://github.com/guanguans/laravel-dump-sql/issues",
+                "source": "https://github.com/guanguans/laravel-dump-sql"
+            },
+            "funding": [
+                {
+                    "url": "https://www.guanguans.cn/images/wechat.jpeg",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/guanguans",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-06-11T07:56:25+00:00"
+        },
+        {
+            "name": "guanguans/laravel-exception-notify",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guanguans/laravel-exception-notify.git",
+                "reference": "64ac9774550c5acd8e21bfd8b12245d442c14fd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/64ac9774550c5acd8e21bfd8b12245d442c14fd5",
+                "reference": "64ac9774550c5acd8e21bfd8b12245d442c14fd5",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guanguans/notify": "^1.0",
+                "laravel/framework": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "mockery/mockery": "^1.2",
+                "nyholm/nsa": "^1.2",
+                "overtrue/phplint": "^2.3",
+                "phpbench/phpbench": "^1.0",
+                "phpunit/phpunit": "^7.0 || ^8.0",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Guanguans\\LaravelExceptionNotify\\ExceptionNotifyServiceProvider"
+                    ],
+                    "aliases": {
+                        "ExceptionNotifier": "Guanguans\\LaravelExceptionNotify\\Facades\\Notifier"
+                    }
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer lint",
+                        "composer style-lint",
+                        "composer md-lint",
+                        "composer test"
+                    ],
+                    "pre-push": [
+                        "composer lint",
+                        "composer style-lint",
+                        "composer md-lint",
+                        "composer test"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Guanguans\\LaravelExceptionNotify\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "guanguans",
+                    "email": "ityaozm@gmail.com",
+                    "homepage": "https://www.guanguans.cn",
+                    "role": "developer"
+                }
+            ],
+            "description": "Multiple channels of laravel exception notification(Bark、Chanify、DingTalk、FeiShu、ServerChan、WeWork、XiZhi). - 多种通道的 laravel 异常通知(Bark、Chanify、钉钉群机器人、飞书群机器人、Server 酱、企业微信群机器人、息知)。",
+            "homepage": "https://github.com/guanguans/laravel-exception-notify",
+            "keywords": [
+                "Bark",
+                "Feishu",
+                "Server酱",
+                "chanify",
+                "dingtalk",
+                "error",
+                "exception",
+                "laravel",
+                "monitor",
+                "notice",
+                "notification",
+                "notifier",
+                "notify",
+                "sdk",
+                "serverChan",
+                "wework",
+                "xiZhi",
+                "企业微信",
+                "企业微信群机器人",
+                "微信",
+                "息知",
+                "机器人",
+                "钉钉",
+                "钉钉群",
+                "钉钉群机器人",
+                "飞书",
+                "飞书群机器人"
+            ],
+            "support": {
+                "issues": "https://github.com/guanguans/laravel-exception-notify/issues",
+                "source": "https://github.com/guanguans/laravel-exception-notify"
+            },
+            "funding": [
+                {
+                    "url": "https://www.guanguans.cn/images/wechat.jpeg",
+                    "type": "wechat"
+                }
+            ],
+            "time": "2021-07-22T02:20:13+00:00"
+        },
+        {
+            "name": "guanguans/notify",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guanguans/notify.git",
+                "reference": "b855f7ae2cf3af483a7083bf294066d759b7886d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/b855f7ae2cf3af483a7083bf294066d759b7886d",
+                "reference": "b855f7ae2cf3af483a7083bf294066d759b7886d",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "overtrue/http": "^1.2",
+                "php": ">=7.2",
+                "symfony/options-resolver": "^5.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "mockery/mockery": "^1.2",
+                "overtrue/phplint": "^2.3",
+                "phpunit/phpunit": "^7 || ^8",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "extra": {
+                "hooks": {
+                    "pre-commit": [
+                        "composer lint",
+                        "composer style-lint",
+                        "composer md-lint",
+                        "composer test"
+                    ],
+                    "pre-push": [
+                        "composer lint",
+                        "composer style-lint",
+                        "composer md-lint",
+                        "composer test"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Guanguans\\Notify\\": "src"
+                },
+                "files": [
+                    "src/Support/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "guanguans",
+                    "email": "ityaozm@gmail.com",
+                    "homepage": "https://www.guanguans.cn",
+                    "role": "developer"
+                }
+            ],
+            "description": "Multi platform notification SDK(Bark、Chanify、DingTalk、FeiShu、ServerChan、WeWork、XiZhi). - 多平台通知 SDK(Bark、Chanify、钉钉群机器人、飞书群机器人、Server 酱、企业微信群机器人、息知)。",
+            "homepage": "https://github.com/guanguans/notify",
+            "keywords": [
+                "Bark",
+                "Feishu",
+                "Server酱",
+                "chanify",
+                "dingtalk",
+                "notification",
+                "notifier",
+                "notify",
+                "sdk",
+                "serverChan",
+                "wework",
+                "xiZhi",
+                "企业微信",
+                "企业微信群机器人",
+                "微信",
+                "息知",
+                "机器人",
+                "钉钉",
+                "钉钉群",
+                "钉钉群机器人",
+                "飞书",
+                "飞书群机器人"
+            ],
+            "support": {
+                "issues": "https://github.com/guanguans/notify/issues",
+                "source": "https://github.com/guanguans/notify"
+            },
+            "funding": [
+                {
+                    "url": "https://www.guanguans.cn/images/wechat.jpeg",
+                    "type": "wechat"
+                }
+            ],
+            "time": "2021-05-16T07:31:42+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2562,6 +2878,127 @@
             "time": "2021-04-09T13:42:10+00:00"
         },
         {
+            "name": "overtrue/http",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/http.git",
+                "reference": "e77697a678a48ded841aa1c778458c31a2c3aedf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/http/zipball/e77697a678a48ded841aa1c778458c31a2c3aedf",
+                "reference": "e77697a678a48ded841aa1c778458c31a2c3aedf",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-simplexml": "*",
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "mockery/mockery": "^1.0",
+                "overtrue/phplint": "^1.1 || ^2.0",
+                "phpunit/phpunit": "^6.5 || ^8.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\Http\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "A simple http client wrapper.",
+            "support": {
+                "issues": "https://github.com/overtrue/http/issues",
+                "source": "https://github.com/overtrue/http/tree/master"
+            },
+            "time": "2020-07-30T01:49:05+00:00"
+        },
+        {
+            "name": "overtrue/laravel-query-logger",
+            "version": "2.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-query-logger.git",
+                "reference": "46b546aa2c4f6319ce798c8f8128b08718b32bae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-query-logger/zipball/46b546aa2c4f6319ce798c8f8128b08718b32bae",
+                "reference": "46b546aa2c4f6319ce798c8f8128b08718b32bae",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "laravel/framework": "~5.5||~6.0||~7.0||~8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelQueryLogger\\ServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer test",
+                        "composer fix-style"
+                    ],
+                    "pre-push": [
+                        "composer test",
+                        "composer check-style"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelQueryLogger\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "A dev tool to log all queries for laravel application.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-query-logger/issues",
+                "source": "https://github.com/overtrue/laravel-query-logger/tree/2.1.4"
+            },
+            "time": "2021-08-12T08:49:45+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.8.0",
             "source": {
@@ -4374,6 +4811,81 @@
                 }
             ],
             "time": "2021-08-20T11:40:01+00:00"
+        },
+        {
+            "name": "symfony/options-resolver",
+            "version": "v5.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/options-resolver.git",
+                "reference": "4b78e55b179003a42523a362cc0e8327f7a69b5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/4b78e55b179003a42523a362cc0e8327f7a69b5e",
+                "reference": "4b78e55b179003a42523a362cc0e8327f7a69b5e",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/polyfill-php73": "~1.0",
+                "symfony/polyfill-php80": "^1.16"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\OptionsResolver\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides an improved replacement for the array_replace PHP function",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "config",
+                "configuration",
+                "options"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/options-resolver/tree/v5.3.7"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-08-04T21:20:46+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -7690,6 +8202,187 @@
                 }
             ],
             "time": "2021-08-29T12:00:00+00:00"
+        },
+        {
+            "name": "guanguans/laravel-soar",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guanguans/laravel-soar.git",
+                "reference": "625eae710b2080e0bf433c4c75787d7fd52c38ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/625eae710b2080e0bf433c4c75787d7fd52c38ba",
+                "reference": "625eae710b2080e0bf433c4c75787d7fd52c38ba",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guanguans/laravel-dump-sql": "^1.0.4",
+                "guanguans/soar-php": "^2.2",
+                "laravel/framework": "^5.5 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^3.7",
+                "overtrue/phplint": "^2.4",
+                "phpunit/phpunit": "^8.0",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "laravel",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Guanguans\\LaravelSoar\\SoarServiceProvider"
+                    ],
+                    "aliases": {
+                        "Soar": "Guanguans\\LaravelSoar\\Facades\\Soar"
+                    }
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer lint",
+                        "composer style-lint",
+                        "composer md-lint",
+                        "composer test"
+                    ],
+                    "pre-push": [
+                        "composer lint",
+                        "composer style-lint",
+                        "composer md-lint",
+                        "composer test"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Guanguans\\LaravelSoar\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "guanguans",
+                    "email": "ityaozm@gmail.com"
+                }
+            ],
+            "description": "An extension package for optimizing sql statements easily and easily in laravel applications. - 在 Laravel 应用程序中轻松容易的优化 sql 语句的扩展包。",
+            "keywords": [
+                "debug",
+                "laravel",
+                "mysql",
+                "optimize",
+                "rewrite",
+                "soar",
+                "sql",
+                "statement"
+            ],
+            "support": {
+                "issues": "https://github.com/guanguans/laravel-soar/issues",
+                "source": "https://github.com/guanguans/laravel-soar"
+            },
+            "funding": [
+                {
+                    "url": "https://www.guanguans.cn/images/wechat.jpeg",
+                    "type": "wechat"
+                }
+            ],
+            "time": "2021-06-17T08:51:19+00:00"
+        },
+        {
+            "name": "guanguans/soar-php",
+            "version": "v2.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guanguans/soar-php.git",
+                "reference": "fc9f023137ee997d042e211aedb8b34eedcf45c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guanguans/soar-php/zipball/fc9f023137ee997d042e211aedb8b34eedcf45c8",
+                "reference": "fc9f023137ee997d042e211aedb8b34eedcf45c8",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-pdo": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.7",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "mockery/mockery": "^1.2",
+                "phpunit/phpunit": "^7 || ^8",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "extra": {
+                "hooks": {
+                    "pre-commit": [
+                        "composer test",
+                        "composer check-style"
+                    ],
+                    "pre-push": [
+                        "composer test",
+                        "composer check-style"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Guanguans\\SoarPHP\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "琯琯",
+                    "email": "yzmguanguan@gmail.com"
+                }
+            ],
+            "description": "SQL optimizer and rewriter php extension package.",
+            "keywords": [
+                "debug",
+                "mysql",
+                "php",
+                "soar",
+                "sql"
+            ],
+            "support": {
+                "issues": "https://github.com/guanguans/soar-php/issues",
+                "source": "https://github.com/guanguans/soar-php"
+            },
+            "funding": [
+                {
+                    "url": "https://www.guanguans.cn/images/wechat.jpeg",
+                    "type": "wechat"
+                }
+            ],
+            "time": "2021-07-07T09:08:59+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
