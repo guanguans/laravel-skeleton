@@ -43,8 +43,7 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\SetJsonAcceptHeader::class,
-            \App\Http\Middleware\VerifySignature::class,
+            'accept.header:json',
         ],
     ];
 
@@ -65,5 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'accept.header' => \App\Http\Middleware\SetAcceptHeader::class,
+        'signatured' => \App\Http\Middleware\VerifySignature::class,
     ];
 }

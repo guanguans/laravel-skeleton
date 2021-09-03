@@ -20,7 +20,8 @@
         "laravel/telescope": "^4.6",
         "laravel/tinker": "^2.5",
         "overtrue/laravel-query-logger": "^2.1",
-        "spatie/laravel-json-api-paginate": "^1.10"
+        "spatie/laravel-json-api-paginate": "^1.10",
+        "timacdonald/has-parameters": "^1.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

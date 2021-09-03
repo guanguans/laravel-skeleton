@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'signer' => [
+        'default'=>[
+            'secret' => env('SIGNER_SECRET', ''),
+            'algo' => env('SIGNER_ALGO', 'sha256'),
+        ],
+    ]
 ];

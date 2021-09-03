@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\VerifySignature;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['api'])->prefix('v1')->namespace('App\Http\Controllers\Api')->group(function (Router $router) {
-    Route::get('ping', 'ApiController@ping');
+    Route::middleware([
+        VerifySignature::with([
+            'secret' => config('services.signer.default.secret'),
+        ]),
+    ])->group(function (Router $router) {
+        Route::any('ping', 'PingController@ping');
+    });
 });
