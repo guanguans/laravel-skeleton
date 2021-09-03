@@ -19,3 +19,4 @@ _ide_helper_models.php
 .php-cs-fixer.cache
 cghooks.lock
 tests.php
+public/xhgui
