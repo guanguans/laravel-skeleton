@@ -19,7 +19,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/telescope": "^4.6",
         "laravel/tinker": "^2.5",
-        "overtrue/laravel-query-logger": "^2.1"
+        "overtrue/laravel-query-logger": "^2.1",
+        "spatie/laravel-json-api-paginate": "^1.10"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
