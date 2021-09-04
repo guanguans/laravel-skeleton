@@ -6,10 +6,7 @@ abstract class Signer
 {
     abstract public function sign(array $payload): string;
 
-    public function validate(string $signature, array $payload): bool
-    {
-        return hash_equals($signature, $this->sign($payload));
-    }
+    abstract public function validate(string $signature, array $payload): bool;
 
     protected function sort(array $payload)
     {
@@ -24,6 +21,6 @@ abstract class Signer
     {
         $sortedPayload = $this->sort($payload);
 
-        return http_build_query($sortedPayload);
+        return json_encode($sortedPayload);
     }
 }
