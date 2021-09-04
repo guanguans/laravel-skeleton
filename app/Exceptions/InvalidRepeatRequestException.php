@@ -7,8 +7,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class InvalidRepeatRequestException extends HttpException
 {
-    public function __construct(string $message = 'Invalid repeat request.', int $statusCode =  HttpStatusCodeEnum::HTTP_FORBIDDEN)
+    public function __construct()
     {
-        parent::__construct($statusCode, $message);
+        parent::__construct(HttpStatusCodeEnum::HTTP_FORBIDDEN, 'Invalid repeat request.');
     }
 }

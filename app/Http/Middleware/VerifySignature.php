@@ -27,7 +27,7 @@ class VerifySignature
      */
     public function handle(Request $request, Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true)
     {
-        // $this->validateParams($request, $effectiveTime);
+        $this->validateParams($request, $effectiveTime);
 
         $this->validateSignature($request, $secret);
 
