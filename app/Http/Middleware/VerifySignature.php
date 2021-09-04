@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\InvalidRepeatRequestException;
+use App\Exceptions\InvalidRequestParameterException;
 use App\Support\Signer\HmacSigner;
 use Closure;
 use Illuminate\Http\Request;
@@ -13,14 +15,6 @@ use TiMacDonald\Middleware\HasParameters;
 class VerifySignature
 {
     use HasParameters;
-    /**
-     * @var string[]
-     */
-    protected $rules = [
-        'signature' => 'required|string',
-        'timestamp' => 'required|int',
-        'nonce' => 'required|string|size:16',
-    ];
 
     /**
      * @param  \Illuminate\Http\Request  $request
@@ -33,60 +27,59 @@ class VerifySignature
      */
     public function handle(Request $request, Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true)
     {
-        // 参数
-        $this->validateParams([
-            'signature' => $signature = $request->header('signature'),
-            'timestamp' => $timestamp = $request->header('timestamp'),
-            'nonce'     => $nonce = $request->header('nonce'),
+        $this->validateParams($request, $effectiveTime);
+
+        $this->validateSignature($request, $secret);
+
+        $checkRepeatRequest and $this->validateRepeatRequest($request, $effectiveTime);
+
+        return $next($request);
+    }
+
+    protected function validateParams(Request $request, int $effectiveTime)
+    {
+        $validator = Validator::make([
+            'signature' => $request->header('signature'),
+            'timestamp' => $request->header('timestamp'),
+            'nonce'     => $request->header('nonce'),
+        ], [
+            'signature' => 'required|string',
+            'nonce'     => 'required|string|size:16',
+            'timestamp' => sprintf('required|int|max:%s|min:%s', $time = time(), $time - $effectiveTime),
         ]);
 
-        // 有效期
-        $this->validateEffectiveTime($timestamp, $effectiveTime);
+        if ($validator->fails()) {
+            throw new InvalidRequestParameterException($validator->errors()->first());
+        }
+    }
 
+    protected function validateSignature(Request $request, string $secret)
+    {
         if ($request->isMethod('GET') || $request->isMethod('HEAD')) {
             $params = $request->query();
         } else {
             $params = $request->post();
         }
 
-        $params['timestamp'] = $timestamp;
-        $params['nonce'] = $nonce;
+        $params = array_merge($params, [
+            'timestamp' => $request->header('timestamp'),
+            'nonce'     => $request->header('nonce'),
+        ]);
 
         /* @var HmacSigner $signer */
         $signer = app(HmacSigner::class, [$secret]);
-        // dd($signer->sign($params));
-        if (!$signer->validate($signature, $params)) {
-            throw new InvalidSignatureException();
-        }
-
-        // 重放
-        $checkRepeatRequest and $this->validateRepeatRequest($signature, $params, $effectiveTime);
-
-        return $next($request);
-    }
-
-    protected function validateParams(array $params)
-    {
-        $validator = Validator::make($params, $this->rules);
-        if ($validator->fails()) {
-            throw new \InvalidArgumentException($validator->errors()->first());
-        }
-    }
-
-    protected function validateEffectiveTime(int $timestamp, int $effectiveTime)
-    {
-        if (($time = time()) < $timestamp || ($time - $timestamp) > $effectiveTime) {
+        if (! $signer->validate($request->header('signature'), $params)) {
             throw new InvalidSignatureException();
         }
     }
 
-    protected function validateRepeatRequest(string $signature, array $params, int $effectiveTime)
+    protected function validateRepeatRequest(Request $request, int $effectiveTime)
     {
-        $cacheSignature = Cache::get($signature);
+        $cacheSignature = Cache::get($signature = $request->header('signature'));
         if ($cacheSignature) {
-            throw new InvalidSignatureException();
+            throw new InvalidRepeatRequestException();
         }
 
-        Cache::put($signature, $params, $effectiveTime);
+        Cache::put($signature, $signature, $effectiveTime);
     }
 }
