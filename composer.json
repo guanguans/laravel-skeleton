@@ -22,7 +22,8 @@
         "laravel/tinker": "^2.5",
         "overtrue/laravel-query-logger": "^2.1",
         "spatie/laravel-json-api-paginate": "^1.10",
-        "timacdonald/has-parameters": "^1.2"
+        "timacdonald/has-parameters": "^1.2",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
