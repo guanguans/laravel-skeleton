@@ -10,8 +10,6 @@ abstract class Signer
 
     protected function sort(array $payload)
     {
-        $payload = array_filter($payload);
-
         ksort($payload);
 
         return $payload;

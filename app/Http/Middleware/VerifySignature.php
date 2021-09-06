@@ -55,13 +55,7 @@ class VerifySignature
 
     protected function validateSignature(Request $request, string $secret)
     {
-        if ($request->isMethod('GET') || $request->isMethod('HEAD')) {
-            $params = $request->query();
-        } else {
-            $params = $request->post();
-        }
-
-        $params = array_merge($params, [
+        $params = array_merge($request->input(), [
             'timestamp' => $request->header('timestamp'),
             'nonce'     => $request->header('nonce'),
         ]);
