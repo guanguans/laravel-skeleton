@@ -5,12 +5,12 @@ return [
     /*
      * The HTML <title> for the generated documentation. If this is empty, Scribe will infer it from config('app.name').
      */
-    'title' => null,
+    'title' => '怪猫国内 SDK 对接文档',
 
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => '',
+    'description' => '怪猫国内 SDK 对接文档',
 
 
     /*
@@ -130,7 +130,7 @@ return [
      * - "static" will generate a static HTMl page in the /public/docs folder,
      * - "laravel" will generate the documentation as a Blade view, so you can add routing and authentication.
      */
-    'type' => 'static',
+    'type' => 'laravel',
 
     /*
      * Settings for `static` type output.
@@ -169,7 +169,7 @@ return [
      * Add a Try It Out button to your endpoints so consumers can test endpoints right from their browser.
      * Don't forget to enable CORS headers for your endpoints.
      */
-    'interactive' => true,
+    'interactive' => false,
 
     /*
      * How is your API authenticated? This information will be used in the displayed docs, generated examples and response calls.
@@ -221,10 +221,10 @@ return [
      * Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
      */
     'intro_text' => <<<INTRO
-This documentation aims to provide all the information you need to work with our API.
+本文档旨在提供您使用我们的 API 所需的所有信息。
 
-<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
-You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<aside>当您滚动时，您会在右侧的黑暗区域（或作为移动设备内容的一部分）看到使用不同编程语言的 API 的代码示例。
+您可以通过右上角的选项卡（或从移动设备左上角的导航菜单）切换使用的语言。</aside>
 INTRO
     ,
 
@@ -237,6 +237,7 @@ INTRO
     'example_languages' => [
         'bash',
         'javascript',
+        'php',
     ],
 
     /*

@@ -23,3 +23,5 @@ public/xhgui
 public/docs/
 resources/docs/
 tests.html
+resources/views/scribe/
+public/vendor/scribe/

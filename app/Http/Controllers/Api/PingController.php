@@ -5,20 +5,17 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 
 /**
- * @group Example management
- *
- * APIs for managing Example
+ * @group Ping - 示例接口管理
  */
 class PingController extends Controller
 {
     /**
-     * This is a successful example.
+     * 示例接口
      *
-     * @queryParam sort string Field to sort by. Defaults to 'id'.
-     *
-     * @urlParam id integer required The ID of the post.
-     *
-     * @bodyParam user_id int required The id of the user. Example: 9
+     * @header Content-Type application/json
+     * @urlParam id integer required
+     * @queryParam is_bad integer 错误请求示例. 默认值 0.
+     * @bodyParam is_bad integer 错误请求示例. 默认值 0.
      *
      * @response {
      *     "status": "success",
@@ -32,7 +29,7 @@ class PingController extends Controller
      */
     public function ping(Request $request)
     {
-        if ($request->get('is_bad')) {
+        if ($request->input('is_bad')) {
             return $this->errorBadRequest('This is a bad example.');
         }
 

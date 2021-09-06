@@ -26,6 +26,6 @@ Route::middleware(['api'])->prefix('v1')->namespace('App\Http\Controllers\Api')-
             'secret' => config('services.signer.default.secret'),
         ]),
     ])->group(function (Router $router) {
-        Route::any('ping', 'PingController@ping');
+        Route::match(['GET', 'POST'], 'ping', 'PingController@ping');
     });
 });
