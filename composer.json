@@ -76,7 +76,8 @@
         ],
         "cghooks": "./vendor/bin/cghooks",
         "check-style": "@php artisan fixer:fix --diff --dry-run --ansi",
-        "fix-style": "@php artisan fixer:fix --ansi"
+        "fix-style": "@php artisan fixer:fix --ansi",
+        "docs-generate": "@php artisan scribe:generate --ansi"
     },
     "extra": {
         "laravel": {
