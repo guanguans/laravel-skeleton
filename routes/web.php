@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// 接口文档
+Route::get('docs', function () {
+    return view('scribe.index');
+})->name('docs')->middleware('signed');
