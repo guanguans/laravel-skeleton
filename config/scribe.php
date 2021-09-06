@@ -163,7 +163,7 @@ return [
          * Middleware to attach to the docs endpoint (if `add_routes` is true).
          */
         'middleware' => [
-            \App\Http\Middleware\VerifySignature::class
+            // \App\Http\Middleware\VerifySignature::class
         ],
     ],
 
@@ -284,7 +284,7 @@ INTRO
     /*
      * Name for the group of endpoints which do not have a @group set.
      */
-    'default_group' => 'Endpoints',
+    'default_group' => 'Other - 其他',
 
     /*
      * Custom logo path. This will be used as the value of the src attribute for the <img> tag,
