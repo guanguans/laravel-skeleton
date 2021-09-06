@@ -74,6 +74,6 @@ class VerifySignature
             throw new InvalidRepeatRequestException();
         }
 
-        Cache::put($signature, $signature, $effectiveTime);
+        Cache::put($signature, spl_object_hash($request), $effectiveTime);
     }
 }
