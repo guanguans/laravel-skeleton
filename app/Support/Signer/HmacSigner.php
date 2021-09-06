@@ -17,7 +17,7 @@ class HmacSigner extends Signer
     {
         $preEncryptedData = $this->getPreEncryptedData($payload);
 
-        $hash = hash_hmac($this->algo, $preEncryptedData, $this->secret, true);
+        $hash = hash_hmac($this->algo, $preEncryptedData, $this->secret);
 
         return md5($hash);
     }

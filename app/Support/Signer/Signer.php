@@ -19,6 +19,6 @@ abstract class Signer
     {
         $sortedPayload = $this->sort($payload);
 
-        return json_encode($sortedPayload);
+        return json_encode($sortedPayload, JSON_UNESCAPED_UNICODE);
     }
 }
