@@ -31,7 +31,7 @@ return [
     ],
 
     'signer' => [
-        'default'=>[
+        'default' => [
             'secret' => env('SIGNER_SECRET', ''),
             'algo' => env('SIGNER_ALGO', 'sha256'),
         ],

@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Jiannei\Response\Laravel\Support\Facades\Response;
 use Jiannei\Response\Laravel\Support\Traits\ExceptionTrait;
 use Throwable;
 

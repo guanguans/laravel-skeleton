@@ -14,7 +14,7 @@ class SetAcceptHeader
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, string $type ='html')
+    public function handle(Request $request, Closure $next, string $type = 'html')
     {
         $request->headers->set('Accept', "application/$type");
 

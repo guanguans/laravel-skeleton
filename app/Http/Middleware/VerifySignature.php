@@ -41,10 +41,10 @@ class VerifySignature
         $validator = Validator::make([
             'signature' => $request->header('signature'),
             'timestamp' => $request->header('timestamp'),
-            'nonce'     => $request->header('nonce'),
+            'nonce' => $request->header('nonce'),
         ], [
             'signature' => 'required|string',
-            'nonce'     => 'required|string|size:16',
+            'nonce' => 'required|string|size:16',
             'timestamp' => sprintf('required|int|max:%s|min:%s', $time = time(), $time - $effectiveTime),
         ]);
 
@@ -57,7 +57,7 @@ class VerifySignature
     {
         $params = array_merge($request->input(), [
             'timestamp' => $request->header('timestamp'),
-            'nonce'     => $request->header('nonce'),
+            'nonce' => $request->header('nonce'),
         ]);
 
         /* @var HmacSigner $signer */

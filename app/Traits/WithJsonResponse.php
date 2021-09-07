@@ -98,7 +98,6 @@ trait WithJsonResponse
         return $this->fail($message, 401);
     }
 
-
     /**
      * Return a 403 forbidden error.
      *

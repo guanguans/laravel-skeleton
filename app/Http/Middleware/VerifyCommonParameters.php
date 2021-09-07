@@ -2,11 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Support\Signer\HmacSigner;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Exceptions\InvalidSignatureException;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use TiMacDonald\Middleware\HasParameters;
 
