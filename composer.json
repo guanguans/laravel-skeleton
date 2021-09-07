@@ -85,8 +85,8 @@
         },
         "hooks": {
             "pre-commit": [
-                "composer check-style",
-                "composer docs-generate"
+                "composer docs-generate",
+                "composer check-style"
             ]
         }
     },
