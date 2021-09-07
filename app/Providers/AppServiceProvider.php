@@ -2,15 +2,18 @@
 
 namespace App\Providers;
 
-use App\Validators\PhoneValidator;
+use App\Rules\PhoneRule;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
-    protected $validators = [
-        'phone' => PhoneValidator::class,
+    /**
+     * @var string[]
+     */
+    protected $rules = [
+        PhoneRule::class,
     ];
 
     /**
@@ -36,12 +39,15 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register validators.
+     * Register rule.
      */
     protected function registerValidators()
     {
-        foreach ($this->validators as $rule => $validator) {
-            Validator::extend($rule, "{$validator}@validate");
+        foreach ($this->rules as $ruleClass) {
+            /* @var \App\Rules\Rule $rule */
+            $rule = app($ruleClass);
+
+            Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
         }
     }
 }
