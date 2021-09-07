@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\InvalidRequestParameterException;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -42,7 +43,7 @@ class VerifyCommonParameters
     {
         $validator = Validator::make($params, $this->rules);
         if ($validator->fails()) {
-            throw new \InvalidArgumentException($validator->errors()->first());
+            throw new InvalidRequestParameterException($validator->errors()->first());
         }
     }
 }
