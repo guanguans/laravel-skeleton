@@ -42,6 +42,14 @@ class Handler extends ExceptionHandler
         });
     }
 
+    public function report(Throwable $e)
+    {
+        // 异常报错通知
+        $this->shouldReport($e) and \ExceptionNotifier::report($e);
+
+        parent::report($e);
+    }
+
     public function render($request, Throwable $e)
     {
         if ($request->is('api/*')) {

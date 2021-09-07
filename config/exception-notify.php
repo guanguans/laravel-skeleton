@@ -57,7 +57,7 @@ return [
     /*
      * Default channel.
      */
-    'defaultChannel' => env('EXCEPTION_NOTIFY_DEFAULT_CHANNEL', 'dingTalk'),
+    'defaultChannel' => env('EXCEPTION_NOTIFY_DEFAULT_CHANNEL', 'xiZhi'),
 
     /*
      * Supported channels
@@ -84,13 +84,13 @@ return [
 
         // 企业微信群机器人
         'weWork' => [
-            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'Your token.'),
+            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'f422629b-f896-40ad-9507-797a782db9c1'),
         ],
 
         // 息知
         'xiZhi' => [
-            'type' => 'single', // [single, channel]
-            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'Your token.'),
+            'type' => 'channel', // [single, channel]
+            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'XZf0db6d069509ec52afc1f3493b76e47b'),
         ],
     ],
 ];
