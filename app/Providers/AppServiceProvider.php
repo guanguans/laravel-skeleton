@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Rules\IdCardRule;
 use App\Rules\PhoneRule;
+use App\Rules\PostalCodeRule;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      * @var string[]
      */
     protected $rules = [
+        IdCardRule::class,
         PhoneRule::class,
+        PostalCodeRule::class,
     ];
 
     /**
