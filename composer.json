@@ -28,6 +28,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
+        "beyondcode/laravel-query-detector": "^1.5",
         "brainmaestro/composer-git-hooks": "^2.8",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
