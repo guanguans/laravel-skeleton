@@ -61,7 +61,7 @@ class VerifySignature
         ]);
 
         /* @var HmacSigner $signer */
-        $signer = app(HmacSigner::class, [$secret]);
+        $signer = app(HmacSigner::class, ['secret' => $secret]);
         if (! $signer->validate($request->header('signature'), $params)) {
             throw new InvalidSignatureException();
         }
