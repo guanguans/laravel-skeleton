@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9eb310d75aff81b421dc5a39cc440771",
+    "content-hash": "e07a8283a76a33f38fd5487f364b4628",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -320,6 +320,69 @@
                 }
             ],
             "time": "2020-05-25T17:44:05+00:00"
+        },
+        {
+            "name": "doctrine/sql-formatter",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/sql-formatter.git",
+                "reference": "56070bebac6e77230ed7d306ad13528e60732871"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/56070bebac6e77230ed7d306ad13528e60732871",
+                "reference": "56070bebac6e77230ed7d306ad13528e60732871",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4"
+            },
+            "bin": [
+                "bin/sql-formatter"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\SqlFormatter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Dorn",
+                    "email": "jeremy@jeremydorn.com",
+                    "homepage": "http://jeremydorn.com/"
+                }
+            ],
+            "description": "a PHP SQL highlighting library",
+            "homepage": "https://github.com/doctrine/sql-formatter/",
+            "keywords": [
+                "highlight",
+                "sql"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/sql-formatter/issues",
+                "source": "https://github.com/doctrine/sql-formatter/tree/1.1.x"
+            },
+            "time": "2020-07-30T16:57:33+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -877,16 +940,16 @@
         },
         {
             "name": "guanguans/laravel-dump-sql",
-            "version": "v1.0.4",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-dump-sql.git",
-                "reference": "3d0a1a92625a09acc163439903a0478ac8a5289f"
+                "reference": "386c3992e8e5bb9bb1c7cd890ebde6441ab2fc1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/3d0a1a92625a09acc163439903a0478ac8a5289f",
-                "reference": "3d0a1a92625a09acc163439903a0478ac8a5289f",
+                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/386c3992e8e5bb9bb1c7cd890ebde6441ab2fc1d",
+                "reference": "386c3992e8e5bb9bb1c7cd890ebde6441ab2fc1d",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -896,7 +959,10 @@
                 ]
             },
             "require": {
-                "laravel/framework": "^5.1 || ^6.0 || ^7.0 || ^8.0"
+                "doctrine/sql-formatter": "^1.1",
+                "illuminate/database": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "php": ">=7.1"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.7",
@@ -961,7 +1027,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-06-11T07:56:25+00:00"
+            "time": "2021-10-26T10:11:02+00:00"
         },
         {
             "name": "guanguans/laravel-exception-notify",
