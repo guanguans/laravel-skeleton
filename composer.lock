@@ -1708,16 +1708,16 @@
         },
         {
             "name": "jiannei/laravel-enum",
-            "version": "1.3.2",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jiannei/laravel-enum.git",
-                "reference": "3b141ddf9e8fd8560af5f398383402775e66e198"
+                "reference": "f051880910001d7e2c971b8ecd330f7fb02afd46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jiannei/laravel-enum/zipball/3b141ddf9e8fd8560af5f398383402775e66e198",
-                "reference": "3b141ddf9e8fd8560af5f398383402775e66e198",
+                "url": "https://api.github.com/repos/Jiannei/laravel-enum/zipball/f051880910001d7e2c971b8ecd330f7fb02afd46",
+                "reference": "f051880910001d7e2c971b8ecd330f7fb02afd46",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1728,11 +1728,13 @@
             },
             "require": {
                 "ext-json": "*",
-                "jiannei/helpers": "^0.2.1"
+                "jiannei/helpers": "^0.2.1",
+                "php": ">=7.0.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.4",
-                "phpunit/phpunit": "^9.4"
+                "orchestra/database": "^3.5",
+                "orchestra/testbench": "^3.5",
+                "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "extra": {
@@ -1757,25 +1759,25 @@
                     "email": "longjian.huang@foxmail.com"
                 }
             ],
-            "description": "Laravel Enum support",
+            "description": "A simple and easy-to-use enumeration extension package to help you manage enumerations in your project more conveniently, supporting Laravel and Lumen",
             "support": {
                 "issues": "https://github.com/Jiannei/laravel-enum/issues",
-                "source": "https://github.com/Jiannei/laravel-enum/tree/1.3.2"
+                "source": "https://github.com/Jiannei/laravel-enum/tree/v1.4.1"
             },
-            "time": "2021-06-16T03:08:57+00:00"
+            "time": "2021-09-19T13:26:30+00:00"
         },
         {
             "name": "jiannei/laravel-response",
-            "version": "1.7.0",
+            "version": "v1.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jiannei/laravel-response.git",
-                "reference": "2b7974c28439b05055f853592f21b2ceb52c296d"
+                "reference": "a6c5f30c8509893a4a9df91de1918568db5a8d93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jiannei/laravel-response/zipball/2b7974c28439b05055f853592f21b2ceb52c296d",
-                "reference": "2b7974c28439b05055f853592f21b2ceb52c296d",
+                "url": "https://api.github.com/repos/Jiannei/laravel-response/zipball/a6c5f30c8509893a4a9df91de1918568db5a8d93",
+                "reference": "a6c5f30c8509893a4a9df91de1918568db5a8d93",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1784,12 +1786,15 @@
                     }
                 ]
             },
+            "require": {
+                "php": ">=7.0.0"
+            },
             "require-dev": {
-                "jiannei/laravel-enum": "^1.2",
-                "laravel/legacy-factories": "^1.0.4",
+                "jiannei/laravel-enum": "~1.4",
                 "league/fractal": "^0.19.2",
-                "orchestra/testbench": "^6.4",
-                "phpunit/phpunit": "^9.4"
+                "orchestra/database": "^3.5",
+                "orchestra/testbench": "^3.5",
+                "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "extra": {
@@ -1820,9 +1825,9 @@
             "description": "Laravel api response data format.",
             "support": {
                 "issues": "https://github.com/Jiannei/laravel-response/issues",
-                "source": "https://github.com/Jiannei/laravel-response/tree/1.7.0"
+                "source": "https://github.com/Jiannei/laravel-response/tree/v1.8.4"
             },
-            "time": "2021-08-16T02:06:08+00:00"
+            "time": "2021-10-30T02:12:34+00:00"
         },
         {
             "name": "knuckleswtf/pastel",
