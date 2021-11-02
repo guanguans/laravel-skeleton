@@ -6,12 +6,9 @@ use App\Exceptions\InvalidRequestParameterException;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use TiMacDonald\Middleware\HasParameters;
 
 class VerifyCommonParameters
 {
-    use HasParameters;
-
     /**
      * @var string[]
      */

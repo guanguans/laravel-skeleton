@@ -10,12 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
-use TiMacDonald\Middleware\HasParameters;
 
 class VerifySignature
 {
-    use HasParameters;
-
     /**
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
