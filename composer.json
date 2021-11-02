@@ -9,7 +9,7 @@
         "ext-json": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guanguans/laravel-dump-sql": "^1.0",
-        "guanguans/laravel-exception-notify": "^1.0",
+        "guanguans/laravel-exception-notify": "^1.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-enum": "^1.3",

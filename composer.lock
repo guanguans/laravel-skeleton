@@ -965,16 +965,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "v1.0.7",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "64ac9774550c5acd8e21bfd8b12245d442c14fd5"
+                "reference": "57bac87158933f260ea540ef9c964b339c0c1eac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/64ac9774550c5acd8e21bfd8b12245d442c14fd5",
-                "reference": "64ac9774550c5acd8e21bfd8b12245d442c14fd5",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/57bac87158933f260ea540ef9c964b339c0c1eac",
+                "reference": "57bac87158933f260ea540ef9c964b339c0c1eac",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -985,18 +985,21 @@
             },
             "require": {
                 "guanguans/notify": "^1.0",
-                "laravel/framework": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/bus": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/contracts": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/queue": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
                 "php": ">=7.2"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.7",
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
                 "mockery/mockery": "^1.2",
                 "nyholm/nsa": "^1.2",
-                "overtrue/phplint": "^2.3",
+                "overtrue/phplint": "^2.4 || ^3.0",
                 "phpbench/phpbench": "^1.0",
                 "phpunit/phpunit": "^7.0 || ^8.0",
-                "vimeo/psalm": "^3.11"
+                "vimeo/psalm": "^4.0"
             },
             "type": "library",
             "extra": {
@@ -1081,7 +1084,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2021-07-22T02:20:13+00:00"
+            "time": "2021-10-16T07:02:38+00:00"
         },
         {
             "name": "guanguans/notify",
