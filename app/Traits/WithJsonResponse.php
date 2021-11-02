@@ -25,6 +25,20 @@ trait WithJsonResponse
     }
 
     /**
+     * Alias of success method, no need to specify data parameter.
+     *
+     * @param  string  $message
+     * @param  int  $code
+     * @param  array  $headers
+     * @param  int  $option
+     * @return JsonResponse|JsonResource
+     */
+    public function ok(string $message = '', int $code = 200, array $headers = [], int $option = 0)
+    {
+        return $this->success([], $message, $code, $headers, $option);
+    }
+
+    /**
      *  Respond with an accepted response and associate a location and/or content if provided.
      *
      * @param  null  $data

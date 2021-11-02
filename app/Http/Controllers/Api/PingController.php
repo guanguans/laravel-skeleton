@@ -20,10 +20,8 @@ class PingController extends Controller
      * @response {
      *     "status": "success",
      *     "code": 200,
-     *     "message": "Http ok",
-     *     "data": [
-     *             "This is a successful example."
-     *         ],
+     *     "message": "This is a successful example.",
+     *     "data": {},
      *     "error": {}
      * }
      */
@@ -33,6 +31,7 @@ class PingController extends Controller
             return $this->errorBadRequest('This is a bad example.');
         }
 
-        return $this->success('This is a successful example.');
+
+        return $this->ok('This is a successful example.');
     }
 }
