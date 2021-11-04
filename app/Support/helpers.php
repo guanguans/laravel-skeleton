@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('array_key_reduce')) {
+if (! function_exists('array_reduces')) {
     /**
      * @param  array  $array
      * @param  callable  $callback
@@ -8,7 +8,7 @@ if (! function_exists('array_key_reduce')) {
      *
      * @return null|mixed
      */
-    function array_key_reduce(array $array, callable $callback, $carry = null)
+    function array_reduces(array $array, callable $callback, $carry = null)
     {
         foreach ($array as $key => $value) {
             $carry = call_user_func($callback, $carry, $value, $key);

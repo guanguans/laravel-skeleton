@@ -27,7 +27,7 @@ class VerifyCommonParameters
      */
     public function handle(Request $request, Closure $next, array $parameters = null)
     {
-        $this->validateParams(array_key_reduce($this->rules, function ($carry, $rule, $parameter) use ($request) {
+        $this->validateParams(array_reduces($this->rules, function ($carry, $rule, $parameter) use ($request) {
             $carry[$parameter] = $request->header($parameter);
 
             return $carry;
