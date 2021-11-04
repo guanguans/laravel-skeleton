@@ -42,6 +42,6 @@ class DocsTemporarySignedUrlGenerate extends Command
 
         $this->info($signedUrl);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
