@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerLocalServices();
     }
 
     /**
@@ -39,13 +39,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale('zh');
 
-        $this->registerValidators();
+        $this->extendValidators();
     }
 
     /**
      * Register rule.
      */
-    protected function registerValidators()
+    protected function extendValidators()
     {
         foreach ($this->rules as $ruleClass) {
             /* @var \App\Rules\Rule $rule */
@@ -53,5 +53,17 @@ class AppServiceProvider extends ServiceProvider
 
             Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
         }
+    }
+
+    /**
+     * Register local services.
+     */
+    protected function registerLocalServices()
+    {
+        if (! $this->app->isLocal()) {
+            return;
+        }
+
+        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
     }
 }
