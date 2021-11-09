@@ -2,24 +2,17 @@
 
 namespace App\Providers;
 
-use App\Rules\IdCardRule;
-use App\Rules\PhoneRule;
-use App\Rules\PostalCodeRule;
+use App\Rules\Rule;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
+use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * @var string[]
-     */
-    protected $rules = [
-        IdCardRule::class,
-        PhoneRule::class,
-        PostalCodeRule::class,
-    ];
-
     /**
      * Register any application services.
      *
@@ -47,9 +40,31 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function extendValidators()
     {
-        foreach ($this->rules as $ruleClass) {
-            /* @var \App\Rules\Rule $rule */
-            $rule = app($ruleClass);
+        $files = (new Finder())
+            ->files()
+            ->name('*Rule.php')
+            ->in($this->app->path('Rules'));
+
+        foreach ($files as $file) {
+            $ruleClass = value(function (SplFileInfo $file, $basePath) {
+                $class = trim(Str::replaceFirst($basePath, '', $file->getRealPath()), DIRECTORY_SEPARATOR);
+
+                return str_replace(
+                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
+                    ['\\', app()->getNamespace()],
+                    ucfirst(Str::replaceLast('.php', '', $class))
+                );
+            }, $file, base_path());
+
+            try {
+                /* @var \App\Rules\Rule $rule */
+                $rule = app($ruleClass);
+                if (! $rule instanceof Rule) {
+                    continue;
+                }
+            } catch (Throwable $e) {
+                continue;
+            }
 
             Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
         }

@@ -8,6 +8,6 @@ class MimeTypeRule extends Rule
     {
         $this->attribute = $attribute;
 
-        return preg_match("/^(multipart|application|audio|image|message|multipart|text|video|font|example|model)\/([-+.\w]+)$/i", $value) > 0;
+        return preg_match("/^(multipart|application|audio|image|message|text|video|font|example|model)\/([-+.\w]+)$/i", $value) > 0;
     }
 }
