@@ -2,6 +2,8 @@
 
 namespace App\Rules;
 
+use Illuminate\Support\Str;
+
 abstract class Rule implements \Illuminate\Contracts\Validation\Rule
 {
     /**
@@ -31,6 +33,8 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
      */
     public function getName(): string
     {
+        $this->name or $this->name = Str::of(class_basename($this))->remove('Rule')->snake();
+
         return $this->name;
     }
 }
