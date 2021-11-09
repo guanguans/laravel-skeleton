@@ -14,7 +14,6 @@
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-enum": "^1.4",
         "jiannei/laravel-response": "^1.8",
-        "knuckleswtf/scribe": "^2.7",
         "laravel-lang/lang": "^10.1",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
@@ -29,6 +28,7 @@
         "brainmaestro/composer-git-hooks": "^2.8",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "knuckleswtf/scribe": "^2.7",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
@@ -79,7 +79,9 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "barryvdh/laravel-ide-helper"
+                "barryvdh/laravel-ide-helper",
+                "knuckleswtf/scribe",
+                "nunomaduro/collision"
             ]
         },
         "hooks": {

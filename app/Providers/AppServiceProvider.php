@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerLocalServices();
+        $this->registerNotProductionServices();
     }
 
     /**
@@ -58,12 +58,14 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register local services.
      */
-    protected function registerLocalServices()
+    protected function registerNotProductionServices()
     {
-        if (! $this->app->isLocal()) {
+        if ($this->app->isProduction()) {
             return;
         }
 
         $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        $this->app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
+        $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
     }
 }
