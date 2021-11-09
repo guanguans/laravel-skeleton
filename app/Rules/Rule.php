@@ -12,6 +12,11 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $attribute;
+
+    /**
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
@@ -26,7 +31,10 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
      *
      * @return string
      */
-    abstract public function message();
+    public function message()
+    {
+        return sprintf('无效的 %s', Str::of($this->attribute)->replace('_', ' ')->title());
+    }
 
     /**
      * @return string
