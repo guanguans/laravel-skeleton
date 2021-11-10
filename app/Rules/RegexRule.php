@@ -2,8 +2,15 @@
 
 namespace App\Rules;
 
-class Base64Rule extends Rule
+abstract class RegexRule extends Rule
 {
+    /**
+     * REGEX pattern of rule
+     *
+     * @var string
+     */
+    abstract protected function pattern(): string;
+
     /**
      * Determine if the validation rule passes.
      *
@@ -15,6 +22,6 @@ class Base64Rule extends Rule
     {
         $this->attribute = $attribute;
 
-        return base64_encode(base64_decode($value, true)) === $value;
+        return (bool) preg_match($this->pattern(), $value);
     }
 }

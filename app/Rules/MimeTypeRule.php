@@ -2,12 +2,10 @@
 
 namespace App\Rules;
 
-class MimeTypeRule extends Rule
+class MimeTypeRule extends RegexRule
 {
-    public function passes($attribute, $value)
+    protected function pattern(): string
     {
-        $this->attribute = $attribute;
-
-        return preg_match("/^(multipart|application|audio|image|message|text|video|font|example|model)\/([-+.\w]+)$/i", $value) > 0;
+        return "/^(multipart|application|audio|image|message|text|video|font|example|model)\/([-+.\w]+)$/i";
     }
 }

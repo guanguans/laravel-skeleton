@@ -17,16 +17,6 @@ class MacAddressRule extends Rule
 
         $value = preg_replace("/[\. :-]/i", '', $value);
 
-        return preg_match("/^[0-9a-f]{12}$/i", $value) > 0;
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return 'The :attribute must be a valid MAC address.';
+        return (bool)preg_match("/^[0-9a-f]{12}$/i", $value);
     }
 }
