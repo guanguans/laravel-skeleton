@@ -15,7 +15,7 @@ return [
         base_path('/app'),
         base_path('/config'),
         database_path(),
-        resource_path(),
+        // resource_path(),
         base_path('/routes'),
         base_path('/tests')
 
