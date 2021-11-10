@@ -21,8 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['api'])->prefix('v1')->namespace('App\Http\Controllers\Api')->group(function (Router $router) {
     Route::middleware([
-        sprintf('signatured:%s', config('services.signer.default.secret'))
+        // sprintf('signatured:%s', config('services.signer.default.secret'))
     ])->group(function (Router $router) {
         Route::match(['GET', 'POST'], 'ping', 'PingController@ping');
+
+        Route::prefix('auth')->group(function (Router $router) {
+            Route::post('login', 'AuthController@login');
+            Route::post('logout', 'AuthController@logout');
+            Route::post('refresh', 'AuthController@refresh');
+            Route::get('me', 'AuthController@me');
+        });
     });
 });
