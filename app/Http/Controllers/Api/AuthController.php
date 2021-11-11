@@ -34,16 +34,10 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validateData(
-            $credentials = [
-                'email' => $request->post('email'),
-                'password' => $request->post('password'),
-            ],
-            [
-                'email' => 'required|email',
-                'password' => 'required|string',
-            ]
-        );
+        $credentials = $request->validateInput([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
         if (! $token = auth()->attempt($credentials)) {
             return $this->fail('邮箱或者密码错误');

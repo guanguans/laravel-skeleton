@@ -3,10 +3,13 @@
 namespace App\Providers;
 
 use App\Rules\Rule;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Throwable;
@@ -33,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('zh');
 
         $this->extendValidators();
+        $this->registerRequestMacros();
     }
 
     /**
@@ -82,5 +86,45 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         $this->app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
         $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
+    }
+
+    /**
+     * Register the "validate" macro on the request.
+     *
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function registerRequestMacros()
+    {
+        Request::macro('strictInput', function ($keys = null) {
+            $input = array_replace_recursive($this->getInputSource()->all(), $this->allFiles());
+
+            if (! $keys) {
+                return $input;
+            }
+
+            $results = [];
+
+            foreach (is_array($keys) ? $keys : func_get_args() as $key) {
+                Arr::set($results, $key, Arr::get($input, $key));
+            }
+
+            return $results;
+        });
+
+        Request::macro('validateInput', function (array $rules, ...$params) {
+            return validator()->validate($this->strictInput(), $rules, ...$params);
+        });
+
+        Request::macro('validateInputAllWithBag', function (string $errorBag, array $rules, ...$params) {
+            try {
+                return $this->validateInput($rules, ...$params);
+            } catch (ValidationException $e) {
+                $e->errorBag = $errorBag;
+
+                throw $e;
+            }
+        });
     }
 }
