@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traits\ValidatesData;
+use App\Traits\ValidateStrictInput;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,4 +15,5 @@ class Controller extends BaseController
     use DispatchesJobs;
     use ValidatesRequests;
     use ValidatesData;
+    use ValidateStrictInput;
 }
