@@ -20,8 +20,6 @@ abstract class RegexRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
-
         return (bool) preg_match($this->pattern(), $value);
     }
 }
