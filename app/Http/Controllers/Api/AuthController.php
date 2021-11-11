@@ -34,7 +34,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->validateInput([
+        $credentials = $request->validateStrictAll([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);

@@ -97,7 +97,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerRequestMacros()
     {
-        Request::macro('strictInput', function ($keys = null) {
+        Request::macro('strictAll', function ($keys = null) {
             $input = array_replace_recursive($this->getInputSource()->all(), $this->allFiles());
 
             if (! $keys) {
@@ -113,13 +113,13 @@ class AppServiceProvider extends ServiceProvider
             return $results;
         });
 
-        Request::macro('validateInput', function (array $rules, ...$params) {
-            return validator()->validate($this->strictInput(), $rules, ...$params);
+        Request::macro('validateStrictAll', function (array $rules, ...$params) {
+            return validator()->validate($this->strictAll(), $rules, ...$params);
         });
 
-        Request::macro('validateInputAllWithBag', function (string $errorBag, array $rules, ...$params) {
+        Request::macro('validateStrictAllWithBag', function (string $errorBag, array $rules, ...$params) {
             try {
-                return $this->validateInput($rules, ...$params);
+                return $this->validateStrictAll($rules, ...$params);
             } catch (ValidationException $e) {
                 $e->errorBag = $errorBag;
 

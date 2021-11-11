@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-trait ValidateStrictInput
+trait ValidateStrictAll
 {
     /**
      * Run the validation routine against the given validator.
@@ -17,12 +17,12 @@ trait ValidateStrictInput
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateInputWith($validator, Request $request = null)
+    public function validateStrictAllWith($validator, Request $request = null)
     {
         $request = $request ?: request();
 
         if (is_array($validator)) {
-            $validator = $this->getValidationInputFactory()->make($request->strictInput(), $validator);
+            $validator = $this->getValidationStrictAllFactory()->make($request->strictAll(), $validator);
         }
 
         return $validator->validate();
@@ -39,14 +39,14 @@ trait ValidateStrictInput
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateInput(
+    public function validateStrictAll(
         Request $request,
         array $rules,
         array $messages = [],
         array $customAttributes = []
     ) {
-        return $this->getValidationInputFactory()->make(
-            $request->strictInput(),
+        return $this->getValidationStrictAllFactory()->make(
+            $request->strictAll(),
             $rules,
             $messages,
             $customAttributes
@@ -65,7 +65,7 @@ trait ValidateStrictInput
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateInputWithBag(
+    public function validateStrictAllWithBag(
         $errorBag,
         Request $request,
         array $rules,
@@ -73,7 +73,7 @@ trait ValidateStrictInput
         array $customAttributes = []
     ) {
         try {
-            return $this->validateInput($request, $rules, $messages, $customAttributes);
+            return $this->validateStrictAll($request, $rules, $messages, $customAttributes);
         } catch (ValidationException $e) {
             $e->errorBag = $errorBag;
 
@@ -86,7 +86,7 @@ trait ValidateStrictInput
      *
      * @return \Illuminate\Contracts\Validation\Factory
      */
-    protected function getValidationInputFactory()
+    protected function getValidationStrictAllFactory()
     {
         return app(Factory::class);
     }
