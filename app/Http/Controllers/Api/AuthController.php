@@ -16,7 +16,7 @@ class AuthController extends Controller
     /**
      * login - 登录
      *
-     * @header Content-Type application/json
+     * @unauthenticated
      * @bodyParam email string 邮箱。
      * @bodyParam password string 密码。
      *
@@ -49,9 +49,6 @@ class AuthController extends Controller
     /**
      * me - 用户信息
      *
-     * @header Content-Type application/json
-     * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
-     *
      * @response {
      *     "status": "success",
      *     "code": 200,
@@ -75,9 +72,6 @@ class AuthController extends Controller
     /**
      * logout - 退出
      *
-     * @header Content-Type application/json
-     * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
-     *
      * @response {
      *     "status": "success",
      *     "code": 200,
@@ -95,9 +89,6 @@ class AuthController extends Controller
 
     /**
      * refresh - 重刷 token
-     *
-     * @header Content-Type application/json
-     * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
      *
      * @response {
      *     "status": "success",

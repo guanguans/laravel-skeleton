@@ -22,14 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware([
     'api',
     // sprintf('signatured:%s', config('services.signer.default.secret')),
-    'auth:api'
 ])->prefix('v1')->namespace('App\Http\Controllers\Api')->group(function (Router $router) {
-    Route::match(['GET', 'POST'], 'ping', 'PingController@ping');
+    Route::middleware([])->group(function (Router $router) {
+        Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping.ping');
+    });
 
-    Route::prefix('auth')->group(function (Router $router) {
-        Route::post('login', 'AuthController@login')->withoutMiddleware('auth:api');
-        Route::post('logout', 'AuthController@logout');
-        Route::post('refresh', 'AuthController@refresh');
-        Route::get('me', 'AuthController@me');
+    Route::middleware(['auth:api'])->group(function (Router $router) {
+        Route::prefix('auth')->group(function (Router $router) {
+            Route::post('login', 'AuthController@login')->name('auth.login')->withoutMiddleware('auth:api');
+            Route::post('logout', 'AuthController@logout')->name('auth.logout');
+            Route::post('refresh', 'AuthController@refresh')->name('auth.refresh');
+            Route::get('me', 'AuthController@me')->name('auth.me');
+        });
     });
 });

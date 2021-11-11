@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\Signer\HmacSigner;
+
 return [
 
     /*
@@ -67,6 +69,19 @@ return [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
+
+                    'timestamp' => $timestamp = time(),
+                    'nonce' => $nonce = \Illuminate\Support\Str::random(),
+                    'signature' => value(function ($timestamp, $nonce) {
+                        $params = array_merge($input = [], [
+                            'timestamp' => $timestamp,
+                            'nonce' => $nonce,
+                        ]);
+                        /* @var HmacSigner $signer */
+                        $signer = app(HmacSigner::class, ['secret' => config('services.signer.default.secret', '')]);
+
+                        return $signer->sign($params);
+                    }, $timestamp, $nonce),
                 ],
 
                 /*
@@ -180,13 +195,13 @@ return [
         /*
          * Set this to true if any endpoints in your API use authentication.
          */
-        'enabled' => false,
+        'enabled' => true,
 
         /*
          * Set this to true if your API should be authenticated by default. If so, you must also set `enabled` (above) to true.
          * You can then use @unauthenticated or @authenticated on individual endpoints to change their status from the default.
          */
-        'default' => false,
+        'default' => true,
 
         /*
          * Where is the auth value meant to be sent in a request?

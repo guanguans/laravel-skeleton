@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 class PingController extends Controller
 {
     /**
-     * 示例接口
+     * ping - 示例接口
      *
-     * @header Content-Type application/json
-     * @urlParam id integer required
+     * @unauthenticated
+     * @urlParam is_bad integer 错误请求示例. 默认值 0.
      * @queryParam is_bad integer 错误请求示例. 默认值 0.
      * @bodyParam is_bad integer 错误请求示例. 默认值 0.
      *
@@ -25,12 +25,15 @@ class PingController extends Controller
      *     "error": {}
      * }
      */
-    public function ping(Request $request)
+    public function ping($is_bad = 0, Request $request)
     {
-        if ($request->input('is_bad')) {
+        $validatedParameters = $request->validateStrictAll([
+            'is_bad' => 'integer',
+        ]);
+
+        if (($validatedParameters['is_bad'] ?? 0) || $is_bad) {
             return $this->errorBadRequest('This is a bad example.');
         }
-
 
         return $this->ok('This is a successful example.');
     }
