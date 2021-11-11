@@ -19,6 +19,7 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "overtrue/laravel-lang": "^5.0",
         "overtrue/laravel-query-logger": "^2.1",
         "spatie/laravel-json-api-paginate": "^1.10",
         "tymon/jwt-auth": "^1.0"
