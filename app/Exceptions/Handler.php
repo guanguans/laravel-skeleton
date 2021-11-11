@@ -3,20 +3,12 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Validation\ValidationException;
-use Jiannei\Response\Laravel\Support\Facades\Response;
 use Jiannei\Response\Laravel\Support\Traits\ExceptionTrait;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    use ExceptionTrait{
-        invalidJson as invalidValidationJson;
-    }
+    use ExceptionTrait;
 
     /**
      * A list of the exception types that are not reported.
@@ -60,26 +52,6 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        // if ($request->is('api/*')) {
-        //     return $this->prepareJsonResponse($request, $e);
-        // }
-
         return parent::render($request, $e);
-    }
-
-    /**
-     * Custom Failed Validation Response for Laravel.
-     *
-     * @param  Request  $request
-     * @param  ValidationException  $exception
-     * @return JsonResponse
-     */
-    protected function invalidJson($request, ValidationException $exception)
-    {
-        return Response::fail(
-            $exception->validator->errors()->first(),
-            Arr::get(Config::get('response.exception'), ValidationException::class.'.code', 422),
-            $exception->errors()
-        );
     }
 }
