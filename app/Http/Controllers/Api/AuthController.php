@@ -14,7 +14,7 @@ class AuthController extends Controller
     }
 
     /**
-     * 登录
+     * login - 登录
      *
      * @header Content-Type application/json
      * @bodyParam email string 邮箱。
@@ -53,7 +53,7 @@ class AuthController extends Controller
     }
 
     /**
-     * 当前用户
+     * me - 用户信息
      *
      * @header Content-Type application/json
      * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
@@ -79,7 +79,7 @@ class AuthController extends Controller
     }
 
     /**
-     * 退出
+     * logout - 退出
      *
      * @header Content-Type application/json
      * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
@@ -100,7 +100,7 @@ class AuthController extends Controller
     }
 
     /**
-     * 重刷 token
+     * refresh - 重刷 token
      *
      * @header Content-Type application/json
      * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
