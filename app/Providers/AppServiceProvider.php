@@ -34,9 +34,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::setLocale('zh');
-
-        $this->extendValidators();
         $this->registerRequestMacros();
+        $this->extendValidators();
     }
 
     /**
@@ -89,16 +88,28 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the "validate" macro on the request.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * Register request macros.
      */
     protected function registerRequestMacros()
     {
+        Request::macro('strictInput', function ($keys = null) {
+            $input = $this->getInputSource()->all();
+
+            if (! $keys) {
+                return $input;
+            }
+
+            $results = [];
+
+            foreach (is_array($keys) ? $keys : func_get_args() as $key) {
+                Arr::set($results, $key, Arr::get($input, $key));
+            }
+
+            return $results;
+        });
+
         Request::macro('strictAll', function ($keys = null) {
-            $input = array_replace_recursive($this->getInputSource()->all(), $this->allFiles());
+            $input = array_replace_recursive($this->strictInput(), $this->allFiles());
 
             if (! $keys) {
                 return $input;
