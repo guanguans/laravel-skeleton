@@ -4,22 +4,33 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
+/**
+ * @group Auth - 认证接口管理
+ */
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
     }
 
     /**
-     * Get a JWT via given credentials.
+     * 登录
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @header Content-Type application/json
+     * @bodyParam email string 邮箱。
+     * @bodyParam password string 密码。
+     *
+     * @response {
+     *     "status": "success",
+     *     "code": 200,
+     *     "message": "Http ok",
+     *     "data": {
+     *         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+     *         "token_type": "bearer",
+     *         "expires_in": 3600
+     *     },
+     *     "error": {}
+     * }
      */
     public function login(Request $request)
     {
@@ -29,7 +40,7 @@ class AuthController extends Controller
                 'password' => $request->post('password'),
             ],
             [
-                'email' => 'required|string|email',
+                'email' => 'required|email',
                 'password' => 'required|string',
             ]
         );
@@ -42,31 +53,69 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the authenticated User.
+     * 当前用户
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @header Content-Type application/json
+     * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+     *
+     * @response {
+     *     "status": "success",
+     *     "code": 200,
+     *     "message": "Http ok",
+     *     "data": {
+     *         "id": 1,
+     *         "name": "admin",
+     *         "email": "admin@admin.com",
+     *         "email_verified_at": "2021-11-10T07:56:41.000000Z",
+     *         "created_at": "2021-11-10T07:56:41.000000Z",
+     *         "updated_at": "2021-11-10T07:56:41.000000Z"
+     *     },
+     *     "error": {}
+     * }
      */
-    public function me()
+    public function me(Request $request)
     {
-        return $this->success(auth()->user());
+        return $this->success($request->user());
     }
 
     /**
-     * Log the user out (Invalidate the token).
+     * 退出
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @header Content-Type application/json
+     * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+     *
+     * @response {
+     *     "status": "success",
+     *     "code": 200,
+     *     "message": "退出成功",
+     *     "data": {},
+     *     "error": {}
+     * }
      */
     public function logout()
     {
-        auth()->logout();
-
-        return $this->ok('退出成功');
+        return tap($this->ok('退出成功'), function ($response) {
+            auth()->logout();
+        });
     }
 
     /**
-     * Refresh a token.
+     * 重刷 token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @header Content-Type application/json
+     * @header Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+     *
+     * @response {
+     *     "status": "success",
+     *     "code": 200,
+     *     "message": "Http ok",
+     *     "data": {
+     *         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+     *         "token_type": "bearer",
+     *         "expires_in": 3600
+     *     },
+     *     "error": {}
+     * }
      */
     public function refresh()
     {
@@ -74,11 +123,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the token array structure.
+     * @param $token
      *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
     protected function respondWithToken($token)
     {
