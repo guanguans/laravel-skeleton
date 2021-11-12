@@ -49,7 +49,7 @@ class AuthController extends Controller
             return $this->fail('邮箱或者密码错误');
         }
 
-        // Mail::to($request->user())->send(new UserRegisteredMail());
+        // Mail::to($request->user())->queue(new UserRegisteredMail());
 
         return $this->respondWithToken($token);
     }
