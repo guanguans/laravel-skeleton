@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Auth\IndexRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Mail\UserRegisteredMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * @group Auth - 认证接口管理
@@ -46,6 +48,8 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return $this->fail('邮箱或者密码错误');
         }
+
+        // Mail::to($request->user())->send(new UserRegisteredMail());
 
         return $this->respondWithToken($token);
     }
