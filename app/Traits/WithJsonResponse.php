@@ -2,9 +2,9 @@
 
 namespace App\Traits;
 
+use App\Support\Facades\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Jiannei\Response\Laravel\Support\Facades\Response;
 
 trait WithJsonResponse
 {
