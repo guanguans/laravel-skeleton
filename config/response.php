@@ -82,7 +82,7 @@ return [
                                     'total_pages' => ['alias' => 'total_pages', 'show' => true],
                                     'links' => [
                                         'alias' => 'links',
-                                        'show' => true,
+                                        'show' => false,
 
                                         'fields' => [
                                             'previous' => ['alias' => 'previous', 'show' => true],

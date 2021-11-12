@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -106,6 +108,52 @@ class AuthController extends Controller
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
+    }
+
+    /**
+     * index - 用户列表
+     *
+     * @unauthenticated
+     * @queryParam per_page integer 分页大小. 默认值 15.
+     * @queryParam page integer 第几页. 默认值 1.
+     *
+     * @response {
+     *     "status": "success",
+     *     "code": 200,
+     *     "message": "Http ok",
+     *     "data": {
+     *         "data": [
+     *             {
+     *                 "id": 2,
+     *                 "name": "Kenyatta Roberts",
+     *                 "email": "wintheiser.laron@example.com",
+     *                 "created_at": "2021-11-10T07:56:41.000000Z",
+     *                 "updated_at": "2021-11-10T07:56:41.000000Z"
+     *             }
+     *         ],
+     *         "meta": {
+     *             "pagination": {
+     *                 "total": 0,
+     *                 "count": 2,
+     *                 "per_page": "1",
+     *                 "current_page": 2,
+     *                 "total_pages": 0
+     *             }
+     *         }
+     *     },
+     *     "error": {}
+     * }
+     */
+    public function index(Request $request)
+    {
+        $validatedParameters = $request->validateStrictAll([
+            'per_page' => 'integer|min:5|max:50',
+            'page' => 'integer|min:1'
+        ]);
+
+        $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null);
+
+        return $this->success(UserCollection::make($users));
     }
 
     /**

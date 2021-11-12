@@ -33,6 +33,7 @@ Route::middleware([
             Route::post('logout', 'AuthController@logout')->name('auth.logout');
             Route::post('refresh', 'AuthController@refresh')->name('auth.refresh');
             Route::get('me', 'AuthController@me')->name('auth.me');
+            Route::get('index', 'AuthController@index')->name('auth.index')->withoutMiddleware('auth:api');
         });
     });
 });
