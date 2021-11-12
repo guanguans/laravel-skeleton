@@ -28,7 +28,7 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
      */
     public function message()
     {
-        return sprintf(':attribute 必须是有效的 %s', Str::of($this->getName())->replace('_', ' ')->title());
+        return sprintf(':attribute 必须是有效的 %s: :input', Str::of($this->getName())->replace('_', ' ')->title());
     }
 
     /**
