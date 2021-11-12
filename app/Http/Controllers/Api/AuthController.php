@@ -7,6 +7,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Mail\UserRegisteredMail;
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -50,6 +51,7 @@ class AuthController extends Controller
         }
 
         // Mail::to($request->user())->queue(new UserRegisteredMail());
+        // $request->user()->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
 
         return $this->respondWithToken($token);
     }
