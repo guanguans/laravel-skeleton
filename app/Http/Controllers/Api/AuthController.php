@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Auth\IndexRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -144,12 +145,14 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function index(Request $request)
+    public function index(IndexRequest $request)
     {
-        $validatedParameters = $request->validateStrictAll([
-            'per_page' => 'integer|min:5|max:50',
-            'page' => 'integer|min:1'
-        ]);
+        // $validatedParameters = $request->validateStrictAll([
+        //     'per_page' => 'integer|min:5|max:50',
+        //     'page' => 'integer|min:1'
+        // ]);
+
+        $validatedParameters = $request->validated();
 
         $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null);
 
