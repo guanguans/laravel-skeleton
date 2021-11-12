@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
 /**
@@ -66,7 +67,7 @@ class AuthController extends Controller
      */
     public function me(Request $request)
     {
-        return $this->success($request->user());
+        return $this->success(UserResource::make($request->user()));
     }
 
     /**

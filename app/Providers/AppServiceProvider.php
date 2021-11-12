@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Rules\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::setLocale('zh');
+        JsonResource::withoutWrapping();
         $this->registerRequestMacros();
         $this->extendValidators();
     }
