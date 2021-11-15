@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32971fcfac905f3d2370eabc0c9ae2e6",
+    "content-hash": "d9de626ff2d8014f4df260554ed03780",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1546,16 +1546,16 @@
         },
         {
             "name": "jiannei/laravel-response",
-            "version": "v1.8.4",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jiannei/laravel-response.git",
-                "reference": "a6c5f30c8509893a4a9df91de1918568db5a8d93"
+                "reference": "a02f269b506c0466cc290a4a7e160542cadc2bb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jiannei/laravel-response/zipball/a6c5f30c8509893a4a9df91de1918568db5a8d93",
-                "reference": "a6c5f30c8509893a4a9df91de1918568db5a8d93",
+                "url": "https://api.github.com/repos/Jiannei/laravel-response/zipball/a02f269b506c0466cc290a4a7e160542cadc2bb0",
+                "reference": "a02f269b506c0466cc290a4a7e160542cadc2bb0",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1565,14 +1565,15 @@
                 ]
             },
             "require": {
-                "php": ">=7.0.0"
+                "php": "^7.2.5|^8.0"
             },
             "require-dev": {
-                "jiannei/laravel-enum": "~1.4",
+                "jiannei/laravel-enum": "^3.0",
+                "laravel/legacy-factories": "^1.1",
                 "league/fractal": "^0.19.2",
-                "orchestra/database": "^3.5",
-                "orchestra/testbench": "^3.5",
-                "phpunit/phpunit": "~6.0"
+                "orchestra/database": "^6.0",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3.3"
             },
             "type": "library",
             "extra": {
@@ -1603,9 +1604,9 @@
             "description": "Laravel api response data format.",
             "support": {
                 "issues": "https://github.com/Jiannei/laravel-response/issues",
-                "source": "https://github.com/Jiannei/laravel-response/tree/v1.8.4"
+                "source": "https://github.com/Jiannei/laravel-response/tree/v4.0.4"
             },
-            "time": "2021-10-30T02:12:34+00:00"
+            "time": "2021-10-30T02:15:07+00:00"
         },
         {
             "name": "laminas/laminas-code",
