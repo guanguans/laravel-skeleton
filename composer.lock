@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8077b3ff4c8892bdfe3dd03e173a754d",
+    "content-hash": "32971fcfac905f3d2370eabc0c9ae2e6",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1543,109 +1543,6 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
-        },
-        {
-            "name": "jiannei/helpers",
-            "version": "v0.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Jiannei/helpers.git",
-                "reference": "1fa669201e3c4f9b384ffdb5ab3ea4caabc594f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Jiannei/helpers/zipball/1fa669201e3c4f9b384ffdb5ab3ea4caabc594f3",
-                "reference": "1fa669201e3c4f9b384ffdb5ab3ea4caabc594f3",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "jiannei",
-                    "email": "longjian.huang@foxmail.com"
-                }
-            ],
-            "description": "Some helper functions.",
-            "support": {
-                "issues": "https://github.com/Jiannei/helpers/issues",
-                "source": "https://github.com/Jiannei/helpers/tree/v0.2.1"
-            },
-            "time": "2021-06-16T03:01:10+00:00"
-        },
-        {
-            "name": "jiannei/laravel-enum",
-            "version": "v1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Jiannei/laravel-enum.git",
-                "reference": "f051880910001d7e2c971b8ecd330f7fb02afd46"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Jiannei/laravel-enum/zipball/f051880910001d7e2c971b8ecd330f7fb02afd46",
-                "reference": "f051880910001d7e2c971b8ecd330f7fb02afd46",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "ext-json": "*",
-                "jiannei/helpers": "^0.2.1",
-                "php": ">=7.0.0"
-            },
-            "require-dev": {
-                "orchestra/database": "^3.5",
-                "orchestra/testbench": "^3.5",
-                "phpunit/phpunit": "~6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Jiannei\\Enum\\Laravel\\Providers\\LaravelServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jiannei\\Enum\\Laravel\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "jiannei",
-                    "email": "longjian.huang@foxmail.com"
-                }
-            ],
-            "description": "A simple and easy-to-use enumeration extension package to help you manage enumerations in your project more conveniently, supporting Laravel and Lumen",
-            "support": {
-                "issues": "https://github.com/Jiannei/laravel-enum/issues",
-                "source": "https://github.com/Jiannei/laravel-enum/tree/v1.4.1"
-            },
-            "time": "2021-09-19T13:26:30+00:00"
         },
         {
             "name": "jiannei/laravel-response",

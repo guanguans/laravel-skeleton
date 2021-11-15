@@ -13,7 +13,6 @@
         "guanguans/laravel-exception-notify": "^1.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "jenssegers/agent": "^2.6",
-        "jiannei/laravel-enum": "^1.4",
         "jiannei/laravel-response": "^1.8",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
