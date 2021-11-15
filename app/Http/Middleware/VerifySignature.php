@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\InvalidRepeatRequestException;
-use App\Exceptions\InvalidRequestParameterException;
 use App\Support\Signer\HmacSigner;
 use Closure;
 use Illuminate\Http\Request;
@@ -24,7 +23,7 @@ class VerifySignature
      */
     public function handle(Request $request, Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true)
     {
-        $this->validateParams($request, $effectiveTime);
+        $this->validateParameters($request, $effectiveTime);
 
         $this->validateSignature($request, $secret);
 
@@ -33,33 +32,25 @@ class VerifySignature
         return $next($request);
     }
 
-    protected function validateParams(Request $request, int $effectiveTime)
+    protected function validateParameters(Request $request, int $effectiveTime)
     {
-        $validator = Validator::make([
-            'signature' => $request->header('signature'),
-            'timestamp' => $request->header('timestamp'),
-            'nonce' => $request->header('nonce'),
-        ], [
+        Validator::make($request->headers(), [
             'signature' => 'required|string',
             'nonce' => 'required|string|size:16',
             'timestamp' => sprintf('required|int|max:%s|min:%s', $time = time(), $time - $effectiveTime),
-        ]);
-
-        if ($validator->fails()) {
-            throw new InvalidRequestParameterException($validator->errors()->first());
-        }
+        ])->validate();
     }
 
     protected function validateSignature(Request $request, string $secret)
     {
-        $params = array_merge($request->input(), [
+        $parameters = array_merge($request->input(), [
             'timestamp' => $request->header('timestamp'),
             'nonce' => $request->header('nonce'),
         ]);
 
         /* @var HmacSigner $signer */
         $signer = app(HmacSigner::class, ['secret' => $secret]);
-        if (! $signer->validate($request->header('signature'), $params)) {
+        if (! $signer->validate($request->header('signature'), $parameters)) {
             throw new InvalidSignatureException();
         }
     }

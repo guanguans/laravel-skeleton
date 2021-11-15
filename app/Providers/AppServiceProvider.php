@@ -94,6 +94,18 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerRequestMacros()
     {
+        Request::macro('headers', function ($key = null, $default = null) {
+            if (is_null($key)) {
+                return collect($this->header())
+                    ->map(function ($header) {
+                        return $header[0];
+                    })
+                    ->toArray();
+            }
+
+            return $this->header($key, $default);
+        });
+
         Request::macro('strictInput', function ($keys = null) {
             $input = $this->getInputSource()->all();
 
