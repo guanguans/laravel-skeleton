@@ -6,6 +6,7 @@ use App\Http\Requests\Auth\IndexRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Mail\UserRegisteredMail;
+use App\Models\JWTUser;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class AuthController extends Controller
         // Mail::to($request->user())->queue(new UserRegisteredMail());
         // $request->user()->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
 
-        return $this->respondWithToken($token);
+        return $this->success(JWTUser::wrapToken($token));
     }
 
     /**
@@ -114,7 +115,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->success(JWTUser::wrapToken(auth()->refresh()));
     }
 
     /**
@@ -163,19 +164,5 @@ class AuthController extends Controller
         $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null);
 
         return $this->success(UserCollection::make($users));
-    }
-
-    /**
-     * @param $token
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
-     */
-    protected function respondWithToken($token)
-    {
-        return $this->success([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
     }
 }
