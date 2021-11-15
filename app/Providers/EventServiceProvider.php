@@ -44,8 +44,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected function registerObservers(): void
     {
+        /* @var \Illuminate\Database\Eloquent\Model $class */
         foreach ($this->observers as $class => $observer) {
-            /* @var \Illuminate\Database\Eloquent\Model $class */
             $class::observe($observer);
         }
     }
