@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\InvalidRequestParameterException;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,22 +24,10 @@ class VerifyCommonParameters
      *
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, array $parameters = null)
+    public function handle(Request $request, Closure $next)
     {
-        $this->validateParams(array_reduces($this->rules, function ($carry, $rule, $parameter) use ($request) {
-            $carry[$parameter] = $request->header($parameter);
-
-            return $carry;
-        }, []));
+        Validator::make($request->headers(), $this->rules)->validate();
 
         return $next($request);
-    }
-
-    protected function validateParams(array $params)
-    {
-        $validator = Validator::make($params, $this->rules);
-        if ($validator->fails()) {
-            throw new InvalidRequestParameterException($validator->errors()->first());
-        }
     }
 }
