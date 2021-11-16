@@ -21,3 +21,10 @@ Route::get('/', function () {
 Route::get('docs', function () {
     return view('scribe.index');
 })->name('docs')->middleware('signed');
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')
+    ->middleware([function (\Illuminate\Http\Request $request, $next) {
+        abort_if(\Illuminate\Support\Facades\App::isProduction(), 404);
+
+        return $next($request);
+    }])->name('logs');
