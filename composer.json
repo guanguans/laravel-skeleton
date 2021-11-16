@@ -81,12 +81,15 @@
         "laravel": {
             "dont-discover": [
                 "barryvdh/laravel-ide-helper",
-                "knuckleswtf/scribe",
                 "nunomaduro/collision"
             ]
         },
         "hooks": {
             "pre-commit": [
+                "composer docs-generate",
+                "composer check-style"
+            ],
+            "post-merge": [
                 "composer docs-generate",
                 "composer check-style"
             ]

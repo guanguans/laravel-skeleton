@@ -85,7 +85,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        $this->app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
+        // $this->app->register(\Knuckles\Scribe\ScribeServiceProvider::class);
         $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
     }
 
