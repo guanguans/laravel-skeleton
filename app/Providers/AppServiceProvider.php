@@ -37,18 +37,18 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('zh');
         JsonResource::withoutWrapping();
         $this->registerRequestMacros();
-        $this->extendValidators();
+        $this->extendValidators($this->app->path('Rules'));
     }
 
     /**
      * Register rule.
      */
-    protected function extendValidators()
+    protected function extendValidators($dirs, $patterns = '*Rule.php')
     {
-        $files = (new Finder())
+        $files = Finder::create()
             ->files()
-            ->name('*Rule.php')
-            ->in($this->app->path('Rules'));
+            ->name($patterns)
+            ->in($dirs);
 
         foreach ($files as $file) {
             $ruleClass = value(function (SplFileInfo $file, $basePath) {

@@ -39,7 +39,7 @@ class TailLog extends Command
      */
     public function handle()
     {
-        $file = $this->argument('file') or $file = $this->guessLogFile();
+        $file = $this->argument('file') or $file = $this->guessLogFile(storage_path('logs'));
 
         passthru(sprintf('tail -f %s -n %s -v', $file, $this->argument('lines')));
 
@@ -50,7 +50,7 @@ class TailLog extends Command
      * @param  null  $dirs
      * @param  string  $patterns
      */
-    protected function guessLogFile($dirs = null, $patterns = '*.log')
+    protected function guessLogFile($dirs, $patterns = '*.log')
     {
         $files = Finder::create()
             ->files()
@@ -58,7 +58,7 @@ class TailLog extends Command
             // ->sortByName()
             ->sortByModifiedTime()
             ->reverseSorting()
-            ->in($dirs ?: storage_path('logs'));
+            ->in($dirs);
 
         foreach ($files as $file) {
             return $file->getPathname();
