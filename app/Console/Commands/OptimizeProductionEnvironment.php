@@ -11,7 +11,7 @@ class OptimizeProductionEnvironment extends Command
      *
      * @var string
      */
-    protected $signature = 'production:optimize';
+    protected $signature = 'production:optimize {--f|force : Force optimize.}';
 
     /**
      * The console command description.
@@ -37,7 +37,7 @@ class OptimizeProductionEnvironment extends Command
      */
     public function handle()
     {
-        if (! $this->getLaravel()->isProduction()) {
+        if (! $this->getLaravel()->isProduction() && ! $this->option('force')) {
             return;
         }
 
