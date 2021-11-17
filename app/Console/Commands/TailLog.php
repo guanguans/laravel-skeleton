@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Process\Process;
 
 class TailLog extends Command
 {
@@ -12,15 +13,19 @@ class TailLog extends Command
      *
      * @var string
      */
-    protected $signature = 'tail {file? : 指定的文件。}
-                                 {lines=-10 : 输出最后 N 行，而非默认的最后 10 行。}';
+    protected $signature = 'tail
+                            {--file= : Name of the log file to tail}
+                            {--lines=0 : Output the last number of lines}
+                            {--clear : Clear the terminal screen}
+                            {--grep= : Grep specified string}
+                            {--debug : Display the underlying tail command}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Tail a log file.';
+    protected $description = 'Tail the latest logfile.';
 
     /**
      * Create a new command instance.
@@ -39,9 +44,22 @@ class TailLog extends Command
      */
     public function handle()
     {
-        $file = $this->argument('file') or $file = $this->guessLogFile(storage_path('logs'));
+        if ($this->option('debug')) {
+            $this->info($this->getTailCommand());
 
-        passthru(sprintf('tail -f %s -n %s -v', $file, $this->argument('lines')));
+            return;
+        }
+
+        $this->handleClearOption();
+
+        Process::fromShellCommandline($this->getTailCommand(), storage_path('logs'))
+            ->setTty(true)
+            ->setTimeout(null)
+            ->run(function ($type, $line) {
+                $this->handleClearOption();
+
+                $this->output->write($line);
+            });
 
         return 0;
     }
@@ -63,5 +81,29 @@ class TailLog extends Command
         foreach ($files as $file) {
             return $file->getPathname();
         }
+    }
+
+    protected function handleClearOption()
+    {
+        if (! $this->option('clear')) {
+            return;
+        }
+
+        $this->output->write(sprintf("\033\143\e[3J"));
+    }
+
+    protected function getTailFile(): string
+    {
+        return $this->option('file') ?? '`\ls -t | \head -1`';
+    }
+
+    protected function getTailCommand(): string
+    {
+        return sprintf('\tail -f -n %s "%s" %s', $this->option('lines'), $this->getTailFile(), $this->getTailGrep());
+    }
+
+    protected function getTailGrep(): string
+    {
+        return $this->option('grep') ? sprintf(' | \grep "%s"', $this->option('grep')) : '';
     }
 }
