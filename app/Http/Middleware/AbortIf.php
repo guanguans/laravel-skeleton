@@ -5,21 +5,35 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AbortIf
+abstract class AbortIf
 {
     /**
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param $condition
-     * @param  int  $code
-     * @param  string  $message
      *
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $condition, $code = 404, $message = '', $headers = [])
+    public function handle(Request $request, Closure $next)
     {
-        abort_if($condition, $code, $message, $headers);
+        return tap($next($request), function () {
+            abort_if($this->condition(), $this->code(), $this->message(), $this->headers());
+        });
+    }
 
-        return $next($request);
+    abstract protected function condition(): bool;
+
+    protected function code()
+    {
+        return 404;
+    }
+
+    protected function message()
+    {
+        return '';
+    }
+
+    protected function headers(): array
+    {
+        return [];
     }
 }
