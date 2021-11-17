@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class OptimizeProductionEnvironment extends Command
+class OptimizeEnvironmentCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'production:optimize {--f|force : Force optimize.}';
+    protected $signature = 'optimize:environment {--f|force : Force optimize.}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Optimize production environment.';
+    protected $description = 'Optimize environment.';
 
     /**
      * Create a new command instance.
