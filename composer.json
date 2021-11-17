@@ -21,6 +21,7 @@
         "overtrue/laravel-query-logger": "^2.1",
         "rap2hpoutre/laravel-log-viewer": "^2.0",
         "spatie/laravel-json-api-paginate": "^1.10",
+        "symfony/stopwatch": "^5.3",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
