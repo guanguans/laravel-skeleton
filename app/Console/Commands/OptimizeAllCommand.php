@@ -41,11 +41,13 @@ class OptimizeAllCommand extends Command
             return;
         }
 
-        passthru('composer dump-autoload --optimize');
-        $this->call('config:cache');
-        $this->call('event:cache');
-        $this->call('route:cache');
-        $this->call('view:cache');
+        stopwatch($this->getName(), function () {
+            passthru('composer dump-autoload --optimize');
+            $this->call('config:cache');
+            $this->call('event:cache');
+            $this->call('route:cache');
+            $this->call('view:cache');
+        });
 
         return self::SUCCESS;
     }
