@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -28,6 +29,31 @@ if (! function_exists('stopwatch')) {
         $stopwatchEvent = $stopwatch->stop($name) and $logger->info("End stopwatch [$name] [$stopwatchEvent]");
 
         return $called;
+    }
+}
+
+if (! function_exists('wrap_query_log')) {
+    /**
+     * @param callable|string $callback
+     * @param ...$parameter
+     *
+     * @return array
+     */
+    function wrap_query_log($callback, ...$parameter)
+    {
+        return (new Pipeline())
+            ->send($callback)
+            ->through(function ($callback, $next) {
+                DB::enableQueryLog();
+                DB::flushQueryLog();
+
+                return $next($callback);
+            })
+            ->then(function ($callback) use ($parameter) {
+                Laravel::call($callback, $parameter);
+
+                return DB::getQueryLog();
+            });
     }
 }
 
