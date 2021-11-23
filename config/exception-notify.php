@@ -113,7 +113,7 @@ return [
 
         // 企业微信群机器人
         'weWork' => [
-            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'f422629b-f896-40ad-9507-797a782db9c1'),
+            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', '1ee65d5a-c9e1-4a27-a30f-12e560a1f13a'),
         ],
 
         // 息知

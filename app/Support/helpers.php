@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
@@ -54,6 +55,23 @@ if (! function_exists('wrap_query_log')) {
 
                 return DB::getQueryLog();
             });
+    }
+}
+
+if (! function_exists('dumpa')) {
+    function dumpa(...$vars)
+    {
+        foreach ($vars as $var) {
+            $var instanceof Arrayable ? dump($var->toArray()) : dump($var);
+        }
+    }
+}
+
+if (! function_exists('dda')) {
+    function dda(...$vars)
+    {
+        dumpa(...$vars);
+        exit(1);
     }
 }
 
