@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 /**
  * @method static filter(array $input = [])
  */
-trait Filterable
+trait FilterAble
 {
     public function scopeFilter(Builder $query, ?array $input = null)
     {
