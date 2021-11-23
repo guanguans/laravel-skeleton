@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8ffdecbe6579ea3239d43341be7576e",
+    "content-hash": "62422bd9efbf7e56fa86f3a7a14e419d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -411,69 +411,6 @@
             "time": "2020-05-25T17:44:05+00:00"
         },
         {
-            "name": "doctrine/sql-formatter",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "56070bebac6e77230ed7d306ad13528e60732871"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/56070bebac6e77230ed7d306ad13528e60732871",
-                "reference": "56070bebac6e77230ed7d306ad13528e60732871",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.4"
-            },
-            "bin": [
-                "bin/sql-formatter"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Doctrine\\SqlFormatter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeremy Dorn",
-                    "email": "jeremy@jeremydorn.com",
-                    "homepage": "http://jeremydorn.com/"
-                }
-            ],
-            "description": "a PHP SQL highlighting library",
-            "homepage": "https://github.com/doctrine/sql-formatter/",
-            "keywords": [
-                "highlight",
-                "sql"
-            ],
-            "support": {
-                "issues": "https://github.com/doctrine/sql-formatter/issues",
-                "source": "https://github.com/doctrine/sql-formatter/tree/1.1.x"
-            },
-            "time": "2020-07-30T16:57:33+00:00"
-        },
-        {
             "name": "dragonmantank/cron-expression",
             "version": "v3.1.0",
             "source": {
@@ -766,16 +703,16 @@
         },
         {
             "name": "guanguans/laravel-dump-sql",
-            "version": "v1.2.0",
+            "version": "v2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-dump-sql.git",
-                "reference": "386c3992e8e5bb9bb1c7cd890ebde6441ab2fc1d"
+                "reference": "b0144efad0ee516713ced6c9b45ed38072c37e7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/386c3992e8e5bb9bb1c7cd890ebde6441ab2fc1d",
-                "reference": "386c3992e8e5bb9bb1c7cd890ebde6441ab2fc1d",
+                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/b0144efad0ee516713ced6c9b45ed38072c37e7f",
+                "reference": "b0144efad0ee516713ced6c9b45ed38072c37e7f",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -785,17 +722,19 @@
                 ]
             },
             "require": {
-                "doctrine/sql-formatter": "^1.1",
-                "illuminate/database": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "php": ">=7.1"
+                "illuminate/console": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/database": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/http": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/log": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/support": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+                "php": ">=7.2",
+                "symfony/var-dumper": "^4.1 || ^5.0"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.7",
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "mockery/mockery": "^1.2",
-                "orchestra/testbench": "^3.7",
-                "phpunit/phpunit": "~8.0"
+                "phpunit/phpunit": "^8.0"
             },
             "type": "laravel",
             "extra": {
@@ -818,7 +757,10 @@
             "autoload": {
                 "psr-4": {
                     "Guanguans\\LaravelDumpSql\\": "src"
-                }
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -853,20 +795,20 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-10-26T10:11:02+00:00"
+            "time": "2021-11-05T07:43:39+00:00"
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "v1.1.5",
+            "version": "v1.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "57bac87158933f260ea540ef9c964b339c0c1eac"
+                "reference": "75be90e0640d425e7592da80f768bb7806d5dccb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/57bac87158933f260ea540ef9c964b339c0c1eac",
-                "reference": "57bac87158933f260ea540ef9c964b339c0c1eac",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/75be90e0640d425e7592da80f768bb7806d5dccb",
+                "reference": "75be90e0640d425e7592da80f768bb7806d5dccb",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -879,6 +821,7 @@
                 "guanguans/notify": "^1.0",
                 "illuminate/bus": "^5.5 || ^6.0 || ^7.0 || ^8.0",
                 "illuminate/contracts": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/http": "^5.5 || ^6.0 || ^7.0 || ^8.0",
                 "illuminate/queue": "^5.5 || ^6.0 || ^7.0 || ^8.0",
                 "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
                 "php": ">=7.2"
@@ -921,7 +864,10 @@
             "autoload": {
                 "psr-4": {
                     "Guanguans\\LaravelExceptionNotify\\": "src"
-                }
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -976,7 +922,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2021-10-16T07:02:38+00:00"
+            "time": "2021-11-07T13:33:24+00:00"
         },
         {
             "name": "guanguans/notify",
@@ -12724,5 +12670,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
