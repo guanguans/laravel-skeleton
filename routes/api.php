@@ -29,6 +29,7 @@ Route::middleware([
 
     Route::middleware(['auth:api'])->group(function (Router $router) {
         Route::prefix('auth')->group(function (Router $router) {
+            Route::post('register', 'AuthController@register')->name('auth.register')->withoutMiddleware('auth:api');
             Route::post('login', 'AuthController@login')->name('auth.login')->withoutMiddleware('auth:api');
             Route::post('logout', 'AuthController@logout')->name('auth.logout');
             Route::post('refresh', 'AuthController@refresh')->name('auth.refresh');

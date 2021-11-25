@@ -9,7 +9,9 @@ use App\Mail\UserRegisteredMail;
 use App\Models\JWTUser;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
+use Faker\Generator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -19,6 +21,53 @@ class AuthController extends Controller
 {
     public function __construct()
     {
+    }
+
+    /**
+     * register - 注册
+     *
+     * @unauthenticated
+     * @bodyParam email string 邮箱。
+     * @bodyParam password string 密码。
+     * @bodyParam repeat_password string 重复密码。
+     *
+     * @response {
+     *     "status": "success",
+     *     "code": 200,
+     *     "message": "Http ok",
+     *     "data": {
+     *         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+     *         "token_type": "bearer",
+     *         "expires_in": 3600
+     *     },
+     *     "error": {}
+     * }
+     */
+    public function register(Request $request)
+    {
+        $validatedParameters = $request->validateStrictAll([
+            'email' => 'required|email|unique:App\Models\JWTUser,email',
+            'password' => 'required|string|size:8',
+            'repeat_password' => 'required|same:password',
+        ]);
+
+        $validatedParameters['name'] = app(Generator::class)->name;
+        $validatedParameters['password'] = Hash::make($validatedParameters['password']);
+
+        $user = JWTUser::query()->create($validatedParameters);
+        if (! $user instanceof JWTUser) {
+            return $this->fail('创建用户失败');
+        }
+
+        $validatedParameters['password'] = $validatedParameters['repeat_password'];
+        if (! $token = auth()->attempt($validatedParameters)) {
+            return $this->fail('邮箱或者密码错误');
+        }
+
+        // Mail::to($request->user())->queue(new UserRegisteredMail());
+        // $request->user()->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
+
+        return $this->success(JWTUser::wrapToken($token));
     }
 
     /**
@@ -50,9 +99,6 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return $this->fail('邮箱或者密码错误');
         }
-
-        // Mail::to($request->user())->queue(new UserRegisteredMail());
-        // $request->user()->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
 
         return $this->success(JWTUser::wrapToken($token));
     }
@@ -154,11 +200,6 @@ class AuthController extends Controller
      */
     public function index(IndexRequest $request)
     {
-        // $validatedParameters = $request->validateStrictAll([
-        //     'per_page' => 'integer|min:5|max:50',
-        //     'page' => 'integer|min:1'
-        // ]);
-
         $validatedParameters = $request->validated();
 
         $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null);
