@@ -12,7 +12,6 @@ use App\Notifications\WelcomeNotification;
 use Faker\Generator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 /**
  * @group Auth - 认证接口管理
@@ -64,10 +63,10 @@ class AuthController extends Controller
             return $this->fail('邮箱或者密码错误');
         }
 
-        // Mail::to($request->user())->queue(new UserRegisteredMail());
-        // $request->user()->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
-
-        return $this->success(JWTUser::wrapToken($token));
+        return tap($this->success(JWTUser::wrapToken($token)), function ($response) use ($user) {
+            // Mail::to($user)->queue(new UserRegisteredMail());
+            $user->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
+        });
     }
 
     /**
