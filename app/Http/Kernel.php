@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'signatured' => \App\Http\Middleware\VerifySignature::class,
         'parameter.verified' => \App\Http\Middleware\VerifyCommonParameters::class,
         'production.aborted' => \App\Http\Middleware\ProductionEnvironmentAbort::class,
+        'email.verified' => \App\Http\Middleware\VerifyEmail::class,
     ];
 }
