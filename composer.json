@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
+        "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
         "guanguans/laravel-dump-sql": "^2.0",
