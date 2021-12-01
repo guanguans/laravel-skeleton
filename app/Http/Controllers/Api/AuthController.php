@@ -28,7 +28,7 @@ class AuthController extends Controller
      * @unauthenticated
      * @bodyParam email string 邮箱。
      * @bodyParam password string 密码。
-     * @bodyParam repeat_password string 重复密码。
+     * @bodyParam password_confirmation string 重复密码。
      *
      * @response {
      *     "status": "success",
@@ -44,22 +44,21 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validatedParameters = $request->validateStrictAll([
+        $validated = $request->validateStrictAll([
             'email' => 'required|email|unique:App\Models\JWTUser,email',
-            'password' => 'required|string|size:8',
-            'repeat_password' => 'required|same:password',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|same:password',
         ]);
 
-        $validatedParameters['name'] = app(Generator::class)->name;
-        $validatedParameters['password'] = Hash::make($validatedParameters['password']);
-
-        $user = JWTUser::query()->create($validatedParameters);
+        $validated['name'] = app(Generator::class)->name;
+        $validated['password'] = Hash::make($validated['password']);
+        $user = JWTUser::query()->create($validated);
         if (! $user instanceof JWTUser) {
             return $this->fail('创建用户失败');
         }
 
-        $validatedParameters['password'] = $validatedParameters['repeat_password'];
-        if (! $token = auth()->attempt($validatedParameters)) {
+        $validated['password'] = $validated['password_confirmation'];
+        if (! $token = auth()->attempt($validated)) {
             return $this->fail('邮箱或者密码错误');
         }
 
