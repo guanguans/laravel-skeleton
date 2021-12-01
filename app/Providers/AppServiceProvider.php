@@ -19,6 +19,15 @@ use Throwable;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * All of the container singletons that should be registered.
+     *
+     * @var string[]
+     */
+    public $singletons = [
+        \App\Support\Response::class => \App\Support\Response::class
+    ];
+
+    /**
      * Register any application services.
      *
      * @return void
