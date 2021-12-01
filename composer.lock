@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84564c9766c656e03007666e66613c98",
+    "content-hash": "7fbef709f6e6c31c61156a4b5c92a189",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7387,6 +7387,71 @@
                 }
             ],
             "time": "2020-11-27T12:32:42+00:00"
+        },
+        {
+            "name": "vectorface/whip",
+            "version": "v0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vectorface/whip.git",
+                "reference": "daa06bad325cff3fca5b870a5f167173ac88f4ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vectorface/whip/zipball/daa06bad325cff3fca5b870a5f167173ac88f4ad",
+                "reference": "daa06bad325cff3fca5b870a5f167173ac88f4ad",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "~2.0",
+                "vectorface/dunit": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vectorface\\Whip\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Bruce",
+                    "email": "dbruce@vectorface.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Cory Darby",
+                    "email": "ckdarby@vectorface.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP class for retrieving accurate IP address information for the client.",
+            "homepage": "https://github.com/Vectorface/whip",
+            "keywords": [
+                "IP",
+                "cdn",
+                "cloudflare"
+            ],
+            "support": {
+                "issues": "https://github.com/Vectorface/whip/issues",
+                "source": "https://github.com/Vectorface/whip"
+            },
+            "time": "2020-08-25T13:45:06+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

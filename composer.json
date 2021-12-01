@@ -26,7 +26,8 @@
         "spatie/laravel-json-api-paginate": "^1.10",
         "symfony/stopwatch": "^5.3",
         "timacdonald/has-parameters": "^1.2",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "vectorface/whip": "^0.4.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
