@@ -24,17 +24,17 @@ Route::middleware([
     // sprintf('signatured:%s', config('services.signer.default.secret')),
 ])->prefix('v1')->namespace('App\Http\Controllers\Api')->group(function (Router $router) {
     Route::middleware([])->group(function (Router $router) {
-        Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping.ping');
+        Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping');
     });
 
     Route::middleware(['auth:api'])->group(function (Router $router) {
-        Route::prefix('auth')->group(function (Router $router) {
-            Route::post('register', 'AuthController@register')->name('auth.register')->withoutMiddleware(['auth:api']);
-            Route::post('login', 'AuthController@login')->name('auth.login')->withoutMiddleware(['auth:api']);
-            Route::post('logout', 'AuthController@logout')->name('auth.logout');
-            Route::post('refresh', 'AuthController@refresh')->name('auth.refresh');
-            Route::get('me', 'AuthController@me')->name('auth.me');
-            Route::get('index', 'AuthController@index')->name('auth.index')->withoutMiddleware(['auth:api']);
+        Route::prefix('auth')->name('auth.')->group(function (Router $router) {
+            Route::post('register', 'AuthController@register')->name('register')->withoutMiddleware(['auth:api']);
+            Route::post('login', 'AuthController@login')->name('login')->withoutMiddleware(['auth:api']);
+            Route::post('logout', 'AuthController@logout')->name('logout');
+            Route::post('refresh', 'AuthController@refresh')->name('refresh');
+            Route::get('me', 'AuthController@me')->name('me');
+            Route::get('index', 'AuthController@index')->name('index')->withoutMiddleware(['auth:api']);
         });
     });
 });
