@@ -9,6 +9,7 @@
         "ext-json": "*",
         "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^4.0",
+        "deployer/deployer": "^6.8",
         "fruitcake/laravel-cors": "^2.0",
         "guanguans/laravel-dump-sql": "^2.0",
         "guanguans/laravel-exception-notify": "^1.1",
