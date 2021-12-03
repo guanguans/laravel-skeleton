@@ -19,7 +19,7 @@ set('keep_releases', 10);
 set('git_tty', true);
 
 // Composer options
-// set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-suggest');
+set('composer_options', '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-suggest');
 
 // Writable use sudo
 set('writable_use_sudo', false);
