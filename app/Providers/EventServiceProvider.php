@@ -35,7 +35,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
         $this->registerObservers();
     }
 
@@ -44,9 +43,9 @@ class EventServiceProvider extends ServiceProvider
      */
     protected function registerObservers(): void
     {
-        /* @var \Illuminate\Database\Eloquent\Model $class */
-        foreach ($this->observers as $class => $observer) {
-            $class::observe($observer);
+        /** @var \Illuminate\Database\Eloquent\Model $modelClass */
+        foreach ($this->observers as $modelClass => $observer) {
+            $modelClass::observe($observer);
         }
     }
 }
