@@ -89,9 +89,9 @@ task('supervisor:reload', function () {
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 after('deploy:shared', 'env:upload');
-after('deploy:symlink', 'opcache:reset');
-after('deploy:symlink', 'php-fpm:restart');
-after('deploy:symlink', 'supervisor:reload');
+// after('deploy:symlink', 'opcache:reset');
+// after('deploy:symlink', 'php-fpm:restart');
+// after('deploy:symlink', 'supervisor:reload');
 
 // Migrate database before symlink new release.
 before('deploy:symlink', 'artisan:migrate');

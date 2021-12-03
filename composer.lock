@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "234aae44eadc31157dfb68cbfa6a57fe",
+    "content-hash": "6e7c629626d4aa3ae7724e7e585824b4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -224,6 +224,72 @@
             "time": "2021-11-09T10:08:21+00:00"
         },
         {
+            "name": "beyondcode/laravel-query-detector",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beyondcode/laravel-query-detector.git",
+                "reference": "4a3a0cfb5d5ddc5da59d530ef5c13e260adc6d07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/4a3a0cfb5d5ddc5da59d530ef5c13e260adc6d07",
+                "reference": "4a3a0cfb5d5ddc5da59d530ef5c13e260adc6d07",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.0",
+                "orchestra/testbench": "^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BeyondCode\\QueryDetector\\QueryDetectorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BeyondCode\\QueryDetector\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "marcel@beyondco.de",
+                    "homepage": "https://beyondcode.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel N+1 Query Detector",
+            "homepage": "https://github.com/beyondcode/laravel-query-detector",
+            "keywords": [
+                "beyondcode",
+                "laravel-query-detector"
+            ],
+            "support": {
+                "issues": "https://github.com/beyondcode/laravel-query-detector/issues",
+                "source": "https://github.com/beyondcode/laravel-query-detector/tree/1.5.0"
+            },
+            "time": "2021-02-16T22:51:38+00:00"
+        },
+        {
             "name": "brainmaestro/composer-git-hooks",
             "version": "v2.8.5",
             "source": {
@@ -367,146 +433,6 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
-        },
-        {
-            "name": "deployer/deployer",
-            "version": "v6.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/deployphp/deployer.git",
-                "reference": "4e243a64ed61e779fbb31c5a74e258a8e52fdaff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/4e243a64ed61e779fbb31c5a74e258a8e52fdaff",
-                "reference": "4e243a64ed61e779fbb31c5a74e258a8e52fdaff",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "deployer/phar-update": "~2.2",
-                "php": "^7.2",
-                "pimple/pimple": "~3.0",
-                "symfony/console": "~2.7|~3.0|~4.0|~5.0",
-                "symfony/process": "~2.7|~3.0|~4.0|~5.0",
-                "symfony/yaml": "~2.7|~3.0|~4.0|~5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8"
-            },
-            "bin": [
-                "bin/dep"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Deployer\\": "src/"
-                },
-                "files": [
-                    "src/Support/helpers.php",
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anton Medvedev",
-                    "email": "anton@medv.io"
-                }
-            ],
-            "description": "Deployment Tool",
-            "homepage": "https://deployer.org",
-            "support": {
-                "docs": "https://deployer.org/docs",
-                "issues": "https://github.com/deployphp/deployer/issues",
-                "source": "https://github.com/deployphp/deployer"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/antonmedv",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/deployer",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2020-04-25T16:05:31+00:00"
-        },
-        {
-            "name": "deployer/phar-update",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/deployphp/phar-update.git",
-                "reference": "9ad07422f2cd43a1382ee8e134bdcd3a374848e3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/phar-update/zipball/9ad07422f2cd43a1382ee8e134bdcd3a374848e3",
-                "reference": "9ad07422f2cd43a1382ee8e134bdcd3a374848e3",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/console": "~2.7|~3.0|~4.0|~5.0"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "1.1.0",
-                "phpunit/phpunit": "3.7.*",
-                "symfony/process": "~2.7|~3.0|~4.0|~5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Deployer\\Component\\PharUpdate\\": "src/",
-                    "Deployer\\Component\\PHPUnit\\": "src/PHPUnit/",
-                    "Deployer\\Component\\Version\\": "src/Version/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kevin Herrera",
-                    "email": "kevin@herrera.io",
-                    "homepage": "http://kevin.herrera.io"
-                },
-                {
-                    "name": "Anton Medvedev",
-                    "email": "anton@medv.io",
-                    "homepage": "https://medv.io"
-                }
-            ],
-            "description": "Integrates Phar Update to Symfony Console.",
-            "homepage": "https://github.com/deployphp/phar-update",
-            "keywords": [
-                "console",
-                "phar",
-                "update"
-            ],
-            "support": {
-                "issues": "https://github.com/deployphp/phar-update/issues",
-                "source": "https://github.com/deployphp/phar-update/tree/v2.2.0"
-            },
-            "abandoned": true,
-            "time": "2019-12-12T13:45:57+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -4268,65 +4194,6 @@
                 }
             ],
             "time": "2021-08-28T21:27:29+00:00"
-        },
-        {
-            "name": "pimple/pimple",
-            "version": "v3.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "a94b3a4db7fb774b3d78dad2315ddc07629e1bed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/a94b3a4db7fb774b3d78dad2315ddc07629e1bed",
-                "reference": "a94b3a4db7fb774b3d78dad2315ddc07629e1bed",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": ">=7.2.5",
-                "psr/container": "^1.1 || ^2.0"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "^5.4@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Pimple": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Pimple, a simple Dependency Injection Container",
-            "homepage": "https://pimple.symfony.com",
-            "keywords": [
-                "container",
-                "dependency injection"
-            ],
-            "support": {
-                "source": "https://github.com/silexphp/Pimple/tree/v3.5.0"
-            },
-            "time": "2021-10-28T11:13:42+00:00"
         },
         {
             "name": "psr/container",
@@ -9207,72 +9074,6 @@
             "time": "2018-12-13T10:34:14+00:00"
         },
         {
-            "name": "beyondcode/laravel-query-detector",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/beyondcode/laravel-query-detector.git",
-                "reference": "4a3a0cfb5d5ddc5da59d530ef5c13e260adc6d07"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/beyondcode/laravel-query-detector/zipball/4a3a0cfb5d5ddc5da59d530ef5c13e260adc6d07",
-                "reference": "4a3a0cfb5d5ddc5da59d530ef5c13e260adc6d07",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "laravel/legacy-factories": "^1.0",
-                "orchestra/testbench": "^3.0 || ^4.0 || ^5.0 || ^6.0",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "BeyondCode\\QueryDetector\\QueryDetectorServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "BeyondCode\\QueryDetector\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marcel Pociot",
-                    "email": "marcel@beyondco.de",
-                    "homepage": "https://beyondcode.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel N+1 Query Detector",
-            "homepage": "https://github.com/beyondcode/laravel-query-detector",
-            "keywords": [
-                "beyondcode",
-                "laravel-query-detector"
-            ],
-            "support": {
-                "issues": "https://github.com/beyondcode/laravel-query-detector/issues",
-                "source": "https://github.com/beyondcode/laravel-query-detector/tree/1.5.0"
-            },
-            "time": "2021-02-16T22:51:38+00:00"
-        },
-        {
             "name": "composer/ca-bundle",
             "version": "1.2.10",
             "source": {
@@ -9853,6 +9654,146 @@
                 }
             ],
             "time": "2021-07-31T17:03:58+00:00"
+        },
+        {
+            "name": "deployer/deployer",
+            "version": "v6.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/deployphp/deployer.git",
+                "reference": "4e243a64ed61e779fbb31c5a74e258a8e52fdaff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/4e243a64ed61e779fbb31c5a74e258a8e52fdaff",
+                "reference": "4e243a64ed61e779fbb31c5a74e258a8e52fdaff",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "deployer/phar-update": "~2.2",
+                "php": "^7.2",
+                "pimple/pimple": "~3.0",
+                "symfony/console": "~2.7|~3.0|~4.0|~5.0",
+                "symfony/process": "~2.7|~3.0|~4.0|~5.0",
+                "symfony/yaml": "~2.7|~3.0|~4.0|~5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8"
+            },
+            "bin": [
+                "bin/dep"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Deployer\\": "src/"
+                },
+                "files": [
+                    "src/Support/helpers.php",
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Medvedev",
+                    "email": "anton@medv.io"
+                }
+            ],
+            "description": "Deployment Tool",
+            "homepage": "https://deployer.org",
+            "support": {
+                "docs": "https://deployer.org/docs",
+                "issues": "https://github.com/deployphp/deployer/issues",
+                "source": "https://github.com/deployphp/deployer"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/antonmedv",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/deployer",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-04-25T16:05:31+00:00"
+        },
+        {
+            "name": "deployer/phar-update",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/deployphp/phar-update.git",
+                "reference": "9ad07422f2cd43a1382ee8e134bdcd3a374848e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/deployphp/phar-update/zipball/9ad07422f2cd43a1382ee8e134bdcd3a374848e3",
+                "reference": "9ad07422f2cd43a1382ee8e134bdcd3a374848e3",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/console": "~2.7|~3.0|~4.0|~5.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.1.0",
+                "phpunit/phpunit": "3.7.*",
+                "symfony/process": "~2.7|~3.0|~4.0|~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Deployer\\Component\\PharUpdate\\": "src/",
+                    "Deployer\\Component\\PHPUnit\\": "src/PHPUnit/",
+                    "Deployer\\Component\\Version\\": "src/Version/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Herrera",
+                    "email": "kevin@herrera.io",
+                    "homepage": "http://kevin.herrera.io"
+                },
+                {
+                    "name": "Anton Medvedev",
+                    "email": "anton@medv.io",
+                    "homepage": "https://medv.io"
+                }
+            ],
+            "description": "Integrates Phar Update to Symfony Console.",
+            "homepage": "https://github.com/deployphp/phar-update",
+            "keywords": [
+                "console",
+                "phar",
+                "update"
+            ],
+            "support": {
+                "issues": "https://github.com/deployphp/phar-update/issues",
+                "source": "https://github.com/deployphp/phar-update/tree/v2.2.0"
+            },
+            "abandoned": true,
+            "time": "2019-12-12T13:45:57+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -11851,6 +11792,65 @@
                 }
             ],
             "time": "2021-08-31T06:47:40+00:00"
+        },
+        {
+            "name": "pimple/pimple",
+            "version": "v3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silexphp/Pimple.git",
+                "reference": "a94b3a4db7fb774b3d78dad2315ddc07629e1bed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/a94b3a4db7fb774b3d78dad2315ddc07629e1bed",
+                "reference": "a94b3a4db7fb774b3d78dad2315ddc07629e1bed",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "psr/container": "^1.1 || ^2.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^5.4@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple, a simple Dependency Injection Container",
+            "homepage": "https://pimple.symfony.com",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "support": {
+                "source": "https://github.com/silexphp/Pimple/tree/v3.5.0"
+            },
+            "time": "2021-10-28T11:13:42+00:00"
         },
         {
             "name": "psr/cache",

@@ -9,8 +9,8 @@
         "ext-json": "*",
         "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^4.0",
+        "beyondcode/laravel-query-detector": "^1.5",
         "brainmaestro/composer-git-hooks": "^2.8",
-        "deployer/deployer": "^6.8",
         "fruitcake/laravel-cors": "^2.0",
         "guanguans/laravel-dump-sql": "^2.0",
         "guanguans/laravel-exception-notify": "^1.1",
@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
-        "beyondcode/laravel-query-detector": "^1.5",
+        "deployer/deployer": "^6.8",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
