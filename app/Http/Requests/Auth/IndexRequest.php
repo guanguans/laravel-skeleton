@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\JWTUser;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IndexRequest extends FormRequest
@@ -13,6 +14,7 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
+        // return optional($this->user())->can('viewAny', JWTUser::class);
         return true;
     }
 
