@@ -138,6 +138,7 @@ class AuthController extends Controller
     public function logout()
     {
         return tap($this->ok('退出成功'), function ($response) {
+            $this->authorize('update', auth()->user());
             auth()->logout();
         });
     }
@@ -157,8 +158,12 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function refresh()
+    public function refresh(Request $request)
     {
+        if ($request->user()->cant('update', $request->user())) {
+            return $this->errorForbidden();
+        }
+
         return $this->success(JWTUser::wrapToken(auth()->refresh()));
     }
 
