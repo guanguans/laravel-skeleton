@@ -3,15 +3,14 @@
 namespace App\Providers;
 
 use App\Rules\Rule;
+use App\Support\Macros\RequestMacro;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Throwable;
@@ -24,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
      * @var string[]
      */
     public $singletons = [
-        \App\Support\Response::class => \App\Support\Response::class
+        \App\Support\Response::class => \App\Support\Response::class,
+        \App\Support\Macros\RequestMacro::class => \App\Support\Macros\RequestMacro::class
     ];
 
     /**
@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Carbon::setLocale('zh');
         JsonResource::withoutWrapping();
-        $this->registerRequestMacros();
+        $this->registerMacros();
         $this->extendValidators($this->app->path('Rules'));
     }
 
@@ -101,66 +101,10 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register request macros.
+     * Register macros.
      */
-    protected function registerRequestMacros()
+    protected function registerMacros()
     {
-        Request::macro('headers', function ($key = null, $default = null) {
-            if (is_null($key)) {
-                return collect($this->header())
-                    ->map(function ($header) {
-                        return $header[0];
-                    })
-                    ->toArray();
-            }
-
-            return $this->header($key, $default);
-        });
-
-        Request::macro('strictInput', function ($keys = null) {
-            $input = $this->getInputSource()->all();
-
-            if (! $keys) {
-                return $input;
-            }
-
-            $results = [];
-
-            foreach (is_array($keys) ? $keys : func_get_args() as $key) {
-                Arr::set($results, $key, Arr::get($input, $key));
-            }
-
-            return $results;
-        });
-
-        Request::macro('strictAll', function ($keys = null) {
-            $input = array_replace_recursive($this->strictInput(), $this->allFiles());
-
-            if (! $keys) {
-                return $input;
-            }
-
-            $results = [];
-
-            foreach (is_array($keys) ? $keys : func_get_args() as $key) {
-                Arr::set($results, $key, Arr::get($input, $key));
-            }
-
-            return $results;
-        });
-
-        Request::macro('validateStrictAll', function (array $rules, ...$params) {
-            return validator()->validate($this->strictAll(), $rules, ...$params);
-        });
-
-        Request::macro('validateStrictAllWithBag', function (string $errorBag, array $rules, ...$params) {
-            try {
-                return $this->validateStrictAll($rules, ...$params);
-            } catch (ValidationException $e) {
-                $e->errorBag = $errorBag;
-
-                throw $e;
-            }
-        });
+        Request::mixin($this->app->make(RequestMacro::class));
     }
 }
