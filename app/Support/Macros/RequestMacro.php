@@ -7,6 +7,14 @@ use Illuminate\Validation\ValidationException;
 
 class RequestMacro
 {
+    public function isAdmin(): callable
+    {
+        return function () {
+            /** @var \Illuminate\Http\Request $this */
+            return (bool)optional($this->user())->is_admin;
+        };
+    }
+
     public function headers(): callable
     {
         return function ($key = null, $default = null) {
