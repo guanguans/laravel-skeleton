@@ -31,6 +31,7 @@
         "spatie/laravel-backup": "^6.16",
         "spatie/laravel-http-logger": "^1.8",
         "spatie/laravel-json-api-paginate": "^1.10",
+        "spatie/laravel-translatable": "^4.6",
         "symfony/stopwatch": "^5.3",
         "timacdonald/has-parameters": "^1.2",
         "tymon/jwt-auth": "^1.0",
