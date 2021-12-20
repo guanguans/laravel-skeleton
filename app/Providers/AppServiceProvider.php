@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Rules\Rule;
+use App\Support\Macros\CollectionMacro;
 use App\Support\Macros\RequestMacro;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -24,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public $singletons = [
         \App\Support\Response::class => \App\Support\Response::class,
-        \App\Support\Macros\RequestMacro::class => \App\Support\Macros\RequestMacro::class
+        \App\Support\Macros\RequestMacro::class => \App\Support\Macros\RequestMacro::class,
+        \App\Support\Macros\CollectionMacro::class => \App\Support\Macros\CollectionMacro::class
     ];
 
     /**
@@ -105,5 +108,6 @@ class AppServiceProvider extends ServiceProvider
     protected function registerMacros()
     {
         Request::mixin($this->app->make(RequestMacro::class));
+        Collection::mixin($this->app->make(CollectionMacro::class));
     }
 }
