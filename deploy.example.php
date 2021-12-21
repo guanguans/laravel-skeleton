@@ -33,7 +33,7 @@ add('writable_dirs', []);
 set('writable_dirs', []);
 
 // Hosts
-// production
+// production ./vendor/bin/dep deploy production -vvv
 host('127.0.0.1')
     ->stage('production')
     ->set('branch', 'master')
@@ -46,7 +46,7 @@ host('127.0.0.1')
     ->multiplexing(true)
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no');
-// develop
+// develop ./vendor/bin/dep deploy develop -vvv
 host('192.168.10.10')
     ->stage('develop')
     ->set('branch', 'dev')
@@ -86,13 +86,29 @@ task('supervisor:reload', function () {
     run('sudo supervisorctl reload');
 });
 
+desc('Deployment succeed');
+task('deployer:succeed', function () {
+    writeln('<info>Successfully deployed!</info>');
+    run('{{bin/php}} {{release_path}}/artisan deployer:succeed');
+});
+
+desc('Deployment failed');
+task('deployer:failed', function () {
+    writeln('<info>Failed deployed!</info>');
+    run('{{bin/php}} {{release_path}}/artisan deployer:failed');
+});
+
 // [Optional] if deploy fails automatically unlock.
+after('success', 'deployer:succeed');
+
 after('deploy:failed', 'deploy:unlock');
+after('deploy:failed', 'deployer:failed');
+
 after('deploy:shared', 'env:upload');
+
 // after('deploy:symlink', 'opcache:reset');
 // after('deploy:symlink', 'php-fpm:restart');
 // after('deploy:symlink', 'supervisor:reload');
 
 // Migrate database before symlink new release.
 before('deploy:symlink', 'artisan:migrate');
-
