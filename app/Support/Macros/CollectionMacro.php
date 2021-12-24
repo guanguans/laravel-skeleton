@@ -6,6 +6,22 @@ use Illuminate\Support\Collection;
 
 class CollectionMacro
 {
+    public function head(): callable
+    {
+        return function () {
+            /** @var \Illuminate\Support\Collection $this */
+            return $this->first();
+        };
+    }
+
+    public function end(): callable
+    {
+        return function () {
+            /** @var \Illuminate\Support\Collection $this */
+            return $this->last();
+        };
+    }
+
     public function after(): callable
     {
         return function ($currentItem, $fallback = null) {
