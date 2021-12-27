@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait CopyAble
+trait Copyable
 {
     public function copy()
     {
