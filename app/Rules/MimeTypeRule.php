@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class MimeTypeRule extends RegexRule
+final class MimeTypeRule extends RegexRule
 {
     protected function pattern(): string
     {

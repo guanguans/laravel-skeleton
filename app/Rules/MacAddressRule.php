@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class MacAddressRule extends Rule
+final class MacAddressRule extends Rule
 {
     /**
      * Determine if the validation rule passes.

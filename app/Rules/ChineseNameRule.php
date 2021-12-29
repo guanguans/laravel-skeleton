@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class ChineseNameRule extends RegexRule
+final class ChineseNameRule extends RegexRule
 {
     /**
      * 中文姓名.

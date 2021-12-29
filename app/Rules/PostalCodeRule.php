@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class PostalCodeRule extends RegexRule
+final class PostalCodeRule extends RegexRule
 {
     protected function pattern(): string
     {

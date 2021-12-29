@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class IdCardRule extends RegexRule
+final class IdCardRule extends RegexRule
 {
     protected function pattern(): string
     {

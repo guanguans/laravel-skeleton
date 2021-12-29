@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class SemverRule extends RegexRule
+final class SemverRule extends RegexRule
 {
     protected function pattern(): string
     {

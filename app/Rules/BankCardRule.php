@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class BankCardRule extends RegexRule
+final class BankCardRule extends RegexRule
 {
     protected function pattern(): string
     {

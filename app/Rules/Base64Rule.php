@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class Base64Rule extends Rule
+final class Base64Rule extends Rule
 {
     /**
      * Determine if the validation rule passes.

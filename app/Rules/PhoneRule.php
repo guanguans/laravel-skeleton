@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class PhoneRule extends RegexRule
+final class PhoneRule extends RegexRule
 {
     protected function pattern(): string
     {
