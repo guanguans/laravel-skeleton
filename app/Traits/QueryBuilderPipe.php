@@ -4,23 +4,32 @@ namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pipeline\Pipeline;
+use InvalidArgumentException;
 
 /**
- * @method Builder|static pipe($middleware)
+ * @method static Builder|static pipe(...$pipes)
  */
 trait QueryBuilderPipe
 {
     /**
      * ```
      * User::query()
-     *     ->pipe(function (Builder $builder, Closure $next){
-     *         $builder->where('id', '>', 1);
+     *     ->pipe(
+     *         function (Builder $builder, $next){
+     *             $builder->where('id', '>', 10);
      *
-     *         return $next($builder);
-     *     })
+     *             return $next($builder);
+     *         },
+     *         function (Builder $builder, $next){
+     *             $builder->where('id', '<', 100);
+     *
+     *             return $next($builder);
+     *         }
+     *     )
      *     ->pipe(function (Builder $builder){
-     *         $builder->limit(10);
+     *         return $builder->where('name', 'like', '张%');
      *     })
+     *     // ->dd()
      *     ->get();
      * ```
      *
@@ -29,11 +38,17 @@ trait QueryBuilderPipe
      *
      * @return Builder
      */
-    public function scopePipe(Builder $builder, $pipes)
+    public function scopePipe(Builder $builder, ...$pipes)
     {
-        return app(Pipeline::class)
+        array_unshift($pipes, function (Builder $builder, $next) {
+            if (! $next($builder) instanceof Builder) {
+                throw new InvalidArgumentException(sprintf('Query builder pipeline must be return a %s instance.', Builder::class));
+            }
+        });
+
+        return (new Pipeline(app()))
             ->send($builder)
-            ->through($pipes)
+            ->through(...$pipes)
             ->thenReturn();
     }
 }
