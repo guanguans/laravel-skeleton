@@ -6,6 +6,14 @@ use Illuminate\Support\Collection;
 
 class CollectionMacro
 {
+    public function pluckToArray(): callable
+    {
+        return function ($value, $key = null): array {
+            /** @var \Illuminate\Support\Collection $this */
+            return $this->pluck($value, $key)->toArray();
+        };
+    }
+
     public function head(): callable
     {
         return function () {
