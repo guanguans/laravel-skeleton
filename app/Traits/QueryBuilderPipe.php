@@ -15,18 +15,18 @@ trait QueryBuilderPipe
      * ```
      * User::query()
      *     ->pipe(
-     *         function (Builder $builder, $next){
+     *         function (Builder $builder, $next): Builder {
      *             $builder->where('id', '>', 10);
      *
      *             return $next($builder);
      *         },
-     *         function (Builder $builder, $next){
+     *         function (Builder $builder, $next): Builder {
      *             $builder->where('id', '<', 100);
      *
      *             return $next($builder);
      *         }
      *     )
-     *     ->pipe(function (Builder $builder){
+     *     ->pipe(function (Builder $builder): Builder {
      *         return $builder->where('name', 'like', '张%');
      *     })
      *     // ->dd()
