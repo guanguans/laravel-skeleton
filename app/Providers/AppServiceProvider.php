@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Rules\Rule;
 use App\Support\Macros\CollectionMacro;
 use App\Support\Macros\RequestMacro;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
@@ -47,6 +48,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // 预防 N+1 查询问题
+        Model::preventLazyLoading(! $this->app->isProduction());
         Schema::defaultStringLength(191);
         Carbon::setLocale('zh');
         JsonResource::withoutWrapping();
