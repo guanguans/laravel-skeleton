@@ -11,6 +11,7 @@ class QueryBuilderMacro
     public function pipe(): callable
     {
         return function (...$pipes): Builder {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return tap($this, function (Builder $builder) use ($pipes) {
                 array_unshift($pipes, function (Builder $builder, $next) {
                     if (! $next($builder) instanceof Builder) {
@@ -23,6 +24,23 @@ class QueryBuilderMacro
                     ->through(...$pipes)
                     ->thenReturn();
             });
+        };
+    }
+
+    public function getToArray(): callable
+    {
+        return function ($columns = ['*']): array {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->get($columns)->toArray();
+        };
+    }
+
+    public function firstToArray(): callable
+    {
+        return function ($columns = ['*']): ?array {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            // return optional($this->first($columns))->toArray();
+            return ($model = $this->first($columns)) ? $model->toArray() : (array)$model;
         };
     }
 }

@@ -6,8 +6,10 @@ use App\Rules\Rule;
 use App\Support\Macros\CollectionMacro;
 use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
@@ -114,6 +116,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Request::mixin($this->app->make(RequestMacro::class));
         Collection::mixin($this->app->make(CollectionMacro::class));
-        Builder::mixin($this->app->make(QueryBuilderMacro::class));
+        QueryBuilder::mixin($queryBuilderMacro = $this->app->make(QueryBuilderMacro::class));
+        EloquentBuilder::mixin($queryBuilderMacro);
+        Relation::mixin($queryBuilderMacro);
     }
 }
