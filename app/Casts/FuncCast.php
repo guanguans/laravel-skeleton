@@ -16,22 +16,23 @@ class FuncCast implements CastsInboundAttributes
     /**
      * @var int
      */
-    private $position;
+    private $mainArgIndex;
 
     /**
      * @var array
      */
-    private $args;
+    private $secondaryArgs;
 
     /**
      * @param  string  $name
-     * @param ...$args
+     * @param  int  $mainArgIndex
+     * @param ...$secondaryArgs
      */
-    public function __construct(string $name, int $position = 0, ...$args)
+    public function __construct(string $name, int $mainArgIndex = 0, ...$secondaryArgs)
     {
         $this->name = $name;
-        $this->position = $position;
-        $this->args = $args;
+        $this->mainArgIndex = $mainArgIndex;
+        $this->secondaryArgs = $secondaryArgs;
     }
 
     /**
@@ -52,8 +53,8 @@ class FuncCast implements CastsInboundAttributes
             $callback = [Arr::class, $this->name];
         }
 
-        array_splice($this->args, $this->position, 0, $value);
+        array_splice($this->secondaryArgs, $this->mainArgIndex, 0, $value);
 
-        return call_user_func($callback, ...$this->args);
+        return call_user_func($callback, ...$this->secondaryArgs);
     }
 }
