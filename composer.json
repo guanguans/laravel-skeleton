@@ -11,6 +11,7 @@
         "bensampo/laravel-enum": "^4.0",
         "beyondcode/laravel-query-detector": "^1.5",
         "brainmaestro/composer-git-hooks": "^2.8",
+        "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guanguans/laravel-dump-sql": "^2.0",
