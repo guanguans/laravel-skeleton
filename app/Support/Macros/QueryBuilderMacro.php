@@ -2,7 +2,9 @@
 
 namespace App\Support\Macros;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pipeline\Pipeline;
 use InvalidArgumentException;
 
@@ -10,12 +12,23 @@ class QueryBuilderMacro
 {
     public function pipe(): callable
     {
-        return function (...$pipes): Builder {
+        return function (...$pipes) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return tap($this, function (Builder $builder) use ($pipes) {
-                array_unshift($pipes, function (Builder $builder, $next) {
-                    if (! $next($builder) instanceof Builder) {
-                        throw new InvalidArgumentException(sprintf('Query builder pipeline must be return a %s instance.', Builder::class));
+            return tap($this, function ($builder) use ($pipes) {
+                array_unshift($pipes, function ($builder, $next) {
+                    if (
+                        ! ($piped = $next($builder)) instanceof EloquentBuilder
+                        && ! $piped instanceof QueryBuilder
+                        && ! $piped instanceof Relation
+                    ) {
+                        throw new InvalidArgumentException(
+                            sprintf(
+                                'Query builder pipeline must be return a %s or %s or %s instance.',
+                                EloquentBuilder::class,
+                                QueryBuilder::class,
+                                Relation::class,
+                            )
+                        );
                     }
                 });
 
