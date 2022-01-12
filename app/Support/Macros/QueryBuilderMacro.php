@@ -56,4 +56,12 @@ class QueryBuilderMacro
             return ($model = $this->first($columns)) ? $model->toArray() : (array)$model;
         };
     }
+
+    public function whereFindInSet(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->whereRaw("FIND_IN_SET(?, $column)", $value);
+        };
+    }
 }
