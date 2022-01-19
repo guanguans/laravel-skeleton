@@ -6,6 +6,8 @@ use App\Rules\Rule;
 use App\Support\Macros\CollectionMacro;
 use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
+use App\Support\Macros\StringableMacro;
+use App\Support\Macros\StrMacro;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -18,6 +20,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Throwable;
@@ -32,7 +35,9 @@ class AppServiceProvider extends ServiceProvider
     public $singletons = [
         \App\Support\Response::class => \App\Support\Response::class,
         \App\Support\Macros\RequestMacro::class => \App\Support\Macros\RequestMacro::class,
-        \App\Support\Macros\CollectionMacro::class => \App\Support\Macros\CollectionMacro::class
+        \App\Support\Macros\CollectionMacro::class => \App\Support\Macros\CollectionMacro::class,
+        \App\Support\Macros\StrMacro::class => \App\Support\Macros\StrMacro::class,
+        \App\Support\Macros\StringableMacro::class => \App\Support\Macros\StringableMacro::class
     ];
 
     /**
@@ -119,5 +124,7 @@ class AppServiceProvider extends ServiceProvider
         QueryBuilder::mixin($queryBuilderMacro = $this->app->make(QueryBuilderMacro::class));
         EloquentBuilder::mixin($queryBuilderMacro);
         Relation::mixin($queryBuilderMacro);
+        Str::mixin($this->app->make(StrMacro::class));
+        Stringable::mixin($this->app->make(StringableMacro::class));
     }
 }
