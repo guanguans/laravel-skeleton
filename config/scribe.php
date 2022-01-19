@@ -7,12 +7,12 @@ return [
     /*
      * The HTML <title> for the generated documentation. If this is empty, Scribe will infer it from config('app.name').
      */
-    'title' => '怪猫国内 SDK 对接文档',
+    'title' => 'API 文档',
 
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => '怪猫国内 SDK 对接文档',
+    'description' => 'API 文档',
 
 
     /*
