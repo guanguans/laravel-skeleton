@@ -26,4 +26,14 @@ class StringableMacro
             );
         };
     }
+
+    public function mbSubstrCount(): callable
+    {
+        return function ($needle, $encoding = null) {
+            /** @var Stringable $this */
+            return new Stringable(
+                Str::mbSubstrCount($this->__toString(), $needle, $encoding)
+            );
+        };
+    }
 }
