@@ -2,6 +2,8 @@
 
 namespace App\Support\Macros;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 
 class CollectionMacro
@@ -89,6 +91,43 @@ class CollectionMacro
         return function ($if,  $then = null,  $else = null) {
             /** @var \Illuminate\Support\Collection $this */
             return value($if, $this) ? value($then, $this) : value($else, $this);
+        };
+    }
+
+    public function paginate(): callable
+    {
+        return function ($perPage = 15, $pageName = 'page', $page = null, $total = null, $options = []) {
+            $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
+
+            /** @var \Illuminate\Support\Collection $this */
+            $items = $this->forPage($page, $perPage)->values();
+
+            $total = $total ?: $this->count();
+
+            $options += [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => $pageName,
+            ];
+
+
+            return new LengthAwarePaginator($items, $total, $perPage, $page, $options);
+        };
+    }
+
+    public function simplePaginate(): callable
+    {
+        return function ($perPage = 15, $pageName = 'page', $page = null, $options = []) {
+            $page = $page ?: Paginator::resolveCurrentPage($pageName);
+
+            /** @var \Illuminate\Support\Collection $this */
+            $items = $this->slice(($page - 1) * $perPage)->take($perPage + 1);
+
+            $options += [
+                'path' => Paginator::resolveCurrentPath(),
+                'pageName' => $pageName,
+            ];
+
+            return new Paginator($items, $perPage, $page, $options);
         };
     }
 }
