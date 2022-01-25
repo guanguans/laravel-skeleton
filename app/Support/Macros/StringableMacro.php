@@ -36,4 +36,12 @@ class StringableMacro
             );
         };
     }
+
+    public function get(): callable
+    {
+        return function () {
+            /** @var Stringable $this */
+            return $this->__toString();
+        };
+    }
 }
