@@ -62,7 +62,7 @@ if (! function_exists('dumpa')) {
     function dumpa(...$vars)
     {
         foreach ($vars as $var) {
-            $var instanceof Arrayable ? dump($var->toArray()) : dump($var);
+            ($var instanceof Arrayable or method_exists($var, 'toArray')) ? dump($var->toArray()) : dump($var);
         }
     }
 }
