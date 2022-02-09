@@ -92,3 +92,21 @@ if (! function_exists('array_reduces')) {
         return $carry;
     }
 }
+
+if (! function_exists('array_maps')) {
+    /**
+     * @param  callable  $callback
+     * @param  array  $array
+     *
+     * @return array
+     */
+    function array_maps(callable $callback, array $array)
+    {
+        $arr = [];
+        foreach ($array as $key => $value) {
+            $arr[$key] = call_user_func($callback, $value, $key);
+        }
+
+        return $arr;
+    }
+}
