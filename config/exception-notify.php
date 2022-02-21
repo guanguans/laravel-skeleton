@@ -110,13 +110,13 @@ return [
 
         // 企业微信群机器人
         'weWork' => [
-            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', '1ee65d5a-c9e1-4a27-a30f-12e560a1f13a'),
+            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'Your token.'),
         ],
 
         // 息知
         'xiZhi' => [
             'type' => 'channel', // [single, channel]
-            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'XZf0db6d069509ec52afc1f3493b76e47b'),
+            'token' => env('EXCEPTION_NOTIFY_CHANNEL_TOKEN', 'Your token.'),
         ],
     ],
 ];
