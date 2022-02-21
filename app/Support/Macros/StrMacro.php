@@ -28,4 +28,11 @@ class StrMacro
             return mb_substr_count($haystack, $needle, $encoding);
         };
     }
+
+    public static function pipe(): callable
+    {
+        return function ($value, callable $callback) {
+            return call_user_func($callback, $value);
+        };
+    }
 }
