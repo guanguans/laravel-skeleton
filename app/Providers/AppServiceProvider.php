@@ -17,6 +17,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -62,6 +63,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Carbon::setLocale('zh');
         JsonResource::withoutWrapping();
+        $this->bootProduction();
         $this->registerMacros();
         $this->extendValidators($this->app->path('Rules'));
     }
@@ -126,5 +128,19 @@ class AppServiceProvider extends ServiceProvider
         Relation::mixin($queryBuilderMacro);
         Str::mixin($this->app->make(StrMacro::class));
         Stringable::mixin($this->app->make(StringableMacro::class));
+    }
+
+    /**
+     * Boot Production.
+     */
+    protected function bootProduction()
+    {
+        if (! $this->app->isProduction()) {
+            return;
+        }
+
+        // URL::forceScheme('https');
+        // $this->app->make(Request::class)->server->set('HTTPS', 'on');
+        // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
     }
 }
