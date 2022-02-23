@@ -83,10 +83,10 @@ class HealthCheckCommand extends Command
      * @return bool
      * @throws \Exception
      */
-    protected function checkDatabase(): bool
+    protected function checkDatabase($connection = null): bool
     {
         try {
-            DB::connection(config('database.default'))->getPdo();
+            DB::connection($connection ?: config('database.default'))->getPdo();
         } catch (Throwable $e) {
             throw new Exception("Could not connect to the database: `{$e->getMessage()}`");
         }
