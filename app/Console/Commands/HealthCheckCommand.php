@@ -46,7 +46,7 @@ class HealthCheckCommand extends Command
     {
         collect((new ReflectionObject($this))->getMethods(ReflectionMethod::IS_PROTECTED | ReflectionMethod::IS_PRIVATE))
             ->filter(function (ReflectionMethod $method) {
-                return Str::startsWith($method->name, 'check');
+                return Str::of($method->name)->startsWith('check');
             })
             ->reduce(function (Collection $carry, ReflectionMethod $method) {
                 try {
@@ -69,11 +69,20 @@ class HealthCheckCommand extends Command
         return 0;
     }
 
-    protected function isHealthy($healthyState): bool
+    /**
+     * @param bool|string $checkedResult
+     *
+     * @return bool
+     */
+    protected function isHealthy($checkedResult): bool
     {
-        return true === $healthyState;
+        return true === $checkedResult;
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     protected function checkDatabase(): bool
     {
         try {
@@ -85,6 +94,10 @@ class HealthCheckCommand extends Command
         return true;
     }
 
+    /**
+     * @return bool
+     * @throws \Exception
+     */
     protected function checkSqlSafeUpdates(): bool
     {
         $sqlSafeUpdates = DB::select("SHOW VARIABLES LIKE 'sql_safe_updates' ")[0];
@@ -95,11 +108,29 @@ class HealthCheckCommand extends Command
         return true;
     }
 
-    protected function checkStrictAllTables(): bool
+    /**
+     * @param array|string $checkedSqlModes
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    protected function checkSqlMode($checkedSqlModes = 'strict_all_tables'): bool
     {
-        $sqlMode = DB::select("SHOW VARIABLES LIKE 'sql_mode' ")[0];
-        if (! Str::of($sqlMode->Value)->lower()->contains('strict_all_tables')) {
-            throw new Exception('`sql_mode` is not set to strict_all_tables. Please set it.');
+        $sqlModes = DB::select("SHOW VARIABLES LIKE 'sql_mode' ")[0];
+        /* @var Collection $diffSqlModes */
+        $diffSqlModes = Str::of($sqlModes->Value)
+            ->lower()
+            ->explode(',')
+            ->pipe(function (Collection $sqlModes) use ($checkedSqlModes): Collection {
+                return collect($checkedSqlModes)
+                    ->transform(function (string $checkedSqlMode) {
+                        return Str::of($checkedSqlMode)->lower();
+                    })
+                    ->diff($sqlModes);
+            });
+
+        if ($diffSqlModes->isNotEmpty()) {
+            throw new Exception("`sql_mode` is not set to `{$diffSqlModes->implode('、')}`. Please set to them.");
         }
 
         return true;
