@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Enums\HealthCheckStateEnum;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -133,6 +135,22 @@ class HealthCheckCommand extends Command
         if ($diffSqlModes->isNotEmpty()) {
             return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($diffSqlModes) {
                 $state->description = "`sql_mode` is not set to `{$diffSqlModes->implode('、')}`. Please set to them.";
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
+
+    protected function checkTimezone(): HealthCheckStateEnum
+    {
+        $dbTimeZone = DB::select("SHOW VARIABLES LIKE 'time_zone' ")[0]->Value;
+        Str::of($dbTimeZone)->lower()->is('system') and $dbTimeZone = DB::select("SHOW VARIABLES LIKE 'system_time_zone' ")[0]->Value;
+
+        $dbDateTime = (new DateTime('now', new DateTimeZone($dbTimeZone)))->format('YmdH');
+        $appDateTime = (new DateTime('now', new DateTimeZone($appTimezone = config('app.timezone'))))->format('YmdH');
+        if ($dbDateTime !== $appDateTime) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($appTimezone, $dbTimeZone) {
+                $state->description = "The database timezone(`$dbTimeZone`) is not equal to app timezone(`$appTimezone`).";
             });
         }
 
