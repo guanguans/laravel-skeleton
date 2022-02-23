@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Exception;
+use App\Enums\HealthCheckStateEnum;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -49,16 +49,13 @@ class HealthCheckCommand extends Command
                 return Str::of($method->name)->startsWith('check');
             })
             ->reduce(function (Collection $carry, ReflectionMethod $method) {
-                try {
-                    $result = call_user_func([$this, $method->name]);
-                } catch (Throwable $e) {
-                    $result = $e->getMessage();
-                }
+                /* @var HealthCheckStateEnum $state */
+                $state = call_user_func([$this, $method->name]);
 
                 return $carry->add([
                     'resource' => Str::of($method->name)->replaceFirst('check', '')->__toString(),
-                    'state' => $this->isHealthy($result) ? '<info>healthy</info>' : '<error>failing</error>',
-                    'message' => $this->isHealthy($result) ? null : $result,
+                    'state' => $state->value,
+                    'message' => $state->description,
                 ]);
             }, collect())
             ->pipe(function (Collection $checks) {
@@ -70,53 +67,59 @@ class HealthCheckCommand extends Command
     }
 
     /**
-     * @param bool|string $checkedResult
+     * @param $connection
      *
-     * @return bool
+     * @return \App\Enums\HealthCheckStateEnum
      */
-    protected function isHealthy($checkedResult): bool
-    {
-        return true === $checkedResult;
-    }
-
-    /**
-     * @return bool
-     * @throws \Exception
-     */
-    protected function checkDatabase($connection = null): bool
+    protected function checkDatabase($connection = null): HealthCheckStateEnum
     {
         try {
             DB::connection($connection ?: config('database.default'))->getPdo();
         } catch (Throwable $e) {
-            throw new Exception("Could not connect to the database: `{$e->getMessage()}`");
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($e) {
+                $state->description = "Could not connect to the database: `{$e->getMessage()}`";
+            });
         }
 
-        return true;
+        return HealthCheckStateEnum::OK();
     }
 
     /**
-     * @return bool
-     * @throws \Exception
+     * @return \App\Enums\HealthCheckStateEnum
      */
-    protected function checkSqlSafeUpdates(): bool
+    protected function checkSqlSafeUpdates(): HealthCheckStateEnum
     {
-        $sqlSafeUpdates = DB::select("SHOW VARIABLES LIKE 'sql_safe_updates' ")[0];
-        if (! Str::of($sqlSafeUpdates->Value)->lower()->is('on')) {
-            throw new Exception('`sql_safe_updates` is disabled. Please enable it.');
+        if (config('database.default') !== 'mysql') {
+            return tap(HealthCheckStateEnum::WARNING(), function (HealthCheckStateEnum $state) {
+                $state->description = 'This check is only available for MySQL.';
+            });
         }
 
-        return true;
+        $sqlSafeUpdates = DB::select("SHOW VARIABLES LIKE 'sql_safe_updates' ")[0];
+        if (! Str::of($sqlSafeUpdates->Value)->lower()->is('on')) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) {
+                $state->description = '`sql_safe_updates` is disabled. Please enable it.';
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
     }
 
     /**
      * @param array|string $checkedSqlModes
      *
-     * @return bool
-     * @throws \Exception
+     * @return \App\Enums\HealthCheckStateEnum
      */
-    protected function checkSqlMode($checkedSqlModes = 'strict_all_tables'): bool
+    protected function checkSqlMode($checkedSqlModes = 'strict_all_tables'): HealthCheckStateEnum
     {
+        if (config('database.default') !== 'mysql') {
+            return tap(HealthCheckStateEnum::WARNING(), function (HealthCheckStateEnum $state) {
+                $state->description = 'This check is only available for MySQL.';
+            });
+        }
+
         $sqlModes = DB::select("SHOW VARIABLES LIKE 'sql_mode' ")[0];
+
         /* @var Collection $diffSqlModes */
         $diffSqlModes = Str::of($sqlModes->Value)
             ->lower()
@@ -128,11 +131,12 @@ class HealthCheckCommand extends Command
                     })
                     ->diff($sqlModes);
             });
-
         if ($diffSqlModes->isNotEmpty()) {
-            throw new Exception("`sql_mode` is not set to `{$diffSqlModes->implode('、')}`. Please set to them.");
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($diffSqlModes) {
+                $state->description = "`sql_mode` is not set to `{$diffSqlModes->implode('、')}`. Please set to them.";
+            });
         }
 
-        return true;
+        return HealthCheckStateEnum::OK();
     }
 }
