@@ -48,20 +48,19 @@ class HealthCheckCommand extends Command
             ->filter(function (ReflectionMethod $method) {
                 return Str::of($method->name)->startsWith('check');
             })
-            ->reduce(function (Collection $carry, ReflectionMethod $method) {
+            ->map(function (ReflectionMethod $method) {
                 /* @var HealthCheckStateEnum $state */
                 $state = call_user_func([$this, $method->name]);
 
-                return $carry->add([
+                return [
                     'resource' => Str::of($method->name)->replaceFirst('check', '')->__toString(),
                     'state' => $state->value,
                     'message' => $state->description,
-                ]);
-            }, collect())
+                ];
+            })
             ->pipe(function (Collection $checks) {
                 $this->table(['Resource', 'State', 'Message'], $checks);
             });
-
 
         return 0;
     }
@@ -106,7 +105,7 @@ class HealthCheckCommand extends Command
     }
 
     /**
-     * @param array|string $checkedSqlModes
+     * @param  array|string  $checkedSqlModes
      *
      * @return \App\Enums\HealthCheckStateEnum
      */
