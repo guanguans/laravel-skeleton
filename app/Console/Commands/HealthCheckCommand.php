@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -44,16 +45,20 @@ class HealthCheckCommand extends Command
     public function handle()
     {
         collect((new ReflectionObject($this))->getMethods(ReflectionMethod::IS_PROTECTED | ReflectionMethod::IS_PRIVATE))
-            ->filter(function ($method) {
+            ->filter(function (ReflectionMethod $method) {
                 return Str::startsWith($method->name, 'check');
             })
-            ->reduce(function (Collection $carry, $method) {
-                $state = call_user_func([$this, $method->name]);
+            ->reduce(function (Collection $carry, ReflectionMethod $method) {
+                try {
+                    $result = call_user_func([$this, $method->name]);
+                } catch (Throwable $e) {
+                    $result = $e->getMessage();
+                }
 
                 return $carry->add([
-                    'resource' => Str::of($method->name)->replace('check', '')->__toString(),
-                    'state' => $this->isHealthy($state) ? '<info>healthy</info>' : '<error>failing</error>',
-                    'message' => $this->isHealthy($state) ? null : $state,
+                    'resource' => Str::of($method->name)->replaceFirst('check', '')->__toString(),
+                    'state' => $this->isHealthy($result) ? '<info>healthy</info>' : '<error>failing</error>',
+                    'message' => $this->isHealthy($result) ? null : $result,
                 ]);
             }, collect())
             ->pipe(function (Collection $checks) {
@@ -64,42 +69,39 @@ class HealthCheckCommand extends Command
         return 0;
     }
 
-    protected function getHealthyState(): string
+    protected function isHealthy($healthyState): bool
     {
-        return 'ok';
+        return true === $healthyState;
     }
 
-    protected function isHealthy(string $healthyState): bool
-    {
-        return $this->getHealthyState() === $healthyState;
-    }
-
-    protected function checkDatabase(): string
+    protected function checkDatabase(): bool
     {
         try {
             DB::connection(config('database.default'))->getPdo();
-
-            return $this->getHealthyState();
         } catch (Throwable $e) {
-            return "Could not connect to the database: `{$e->getMessage()}`";
+            throw new Exception("Could not connect to the database: `{$e->getMessage()}`");
         }
+
+        return true;
     }
 
-    protected function checkSqlSafeUpdates(): string
+    protected function checkSqlSafeUpdates(): bool
     {
         $sqlSafeUpdates = DB::select("SHOW VARIABLES LIKE 'sql_safe_updates' ")[0];
+        if (! Str::of($sqlSafeUpdates->Value)->lower()->is('on')) {
+            throw new Exception('`sql_safe_updates` is disabled. Please enable it.');
+        }
 
-        return Str::of($sqlSafeUpdates->Value)->lower()->is('on')
-            ? $this->getHealthyState()
-            : '`sql_safe_updates` is disabled. Please enable it.';
+        return true;
     }
 
-    protected function checkStrictAllTables(): string
+    protected function checkStrictAllTables(): bool
     {
         $sqlMode = DB::select("SHOW VARIABLES LIKE 'sql_mode' ")[0];
+        if (! Str::of($sqlMode->Value)->lower()->contains('strict_all_tables')) {
+            throw new Exception('`sql_mode` is not set to strict_all_tables. Please set it.');
+        }
 
-        return Str::of($sqlMode->Value)->lower()->contains('strict_all_tables')
-            ? $this->getHealthyState()
-            : '`sql_mode` is not set to strict_all_tables. Please set it.';
+        return true;
     }
 }
