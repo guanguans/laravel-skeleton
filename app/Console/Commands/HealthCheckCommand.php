@@ -8,6 +8,7 @@ use DateTimeZone;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 use ReflectionObject;
@@ -161,6 +162,25 @@ class HealthCheckCommand extends Command
         if ($dbDateTime !== $appDateTime) {
             return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($appTimezone, $dbTimeZone) {
                 $state->description = "The database timezone(`$dbTimeZone`) is not equal to app timezone(`$appTimezone`).";
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
+
+    /**
+     * @param  null|string  $url
+     *
+     * @return \App\Enums\HealthCheckStateEnum
+     */
+    protected function checkPing(?string $url = null): HealthCheckStateEnum
+    {
+        $url = $url ?: config('app.url');
+
+        $response = Http::get($url);
+        if ($response->failed()) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($response) {
+                $state->description = "Could not connect to the application: `{$response->body()}`";
             });
         }
 
