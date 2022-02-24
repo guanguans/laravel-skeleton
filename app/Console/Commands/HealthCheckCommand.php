@@ -141,8 +141,18 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
-    protected function checkTimezone(): HealthCheckStateEnum
+    /**
+     * @return \App\Enums\HealthCheckStateEnum
+     * @throws \Exception
+     */
+    protected function checkTimeZone(): HealthCheckStateEnum
     {
+        if (config('database.default') !== 'mysql') {
+            return tap(HealthCheckStateEnum::WARNING(), function (HealthCheckStateEnum $state) {
+                $state->description = 'This check is only available for MySQL.';
+            });
+        }
+
         $dbTimeZone = DB::select("SHOW VARIABLES LIKE 'time_zone' ")[0]->Value;
         Str::of($dbTimeZone)->lower()->is('system') and $dbTimeZone = DB::select("SHOW VARIABLES LIKE 'system_time_zone' ")[0]->Value;
 
