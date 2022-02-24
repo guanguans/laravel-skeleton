@@ -51,18 +51,21 @@ class HealthCheckCommand extends Command
             ->filter(function (ReflectionMethod $method) {
                 return Str::of($method->name)->startsWith('check');
             })
-            ->map(function (ReflectionMethod $method) {
-                /* @var HealthCheckStateEnum $state */
-                $state = call_user_func([$this, $method->name]);
+            ->pipe(function (Collection $methods) {
+                $this->withProgressBar($methods, function ($method) use (&$checks) {
+                    /* @var HealthCheckStateEnum $state */
+                    $state = call_user_func([$this, $method->name]);
 
-                return [
-                    'resource' => Str::of($method->name)->replaceFirst('check', '')->__toString(),
-                    'state' => $state->value,
-                    'message' => $state->description,
-                ];
-            })
-            ->pipe(function (Collection $checks) {
-                $this->table(['Resource', 'State', 'Message'], $checks);
+                    $checks[] = [
+                        'index' => count((array)$checks) + 1,
+                        'resource' => Str::of($method->name)->replaceFirst('check', '')->__toString(),
+                        'state' => $state->value,
+                        'message' => $state->description,
+                    ];
+                });
+
+                $this->newLine();
+                $this->table(['Index', 'Resource', 'State', 'Message'], $checks);
             });
 
         return 0;
