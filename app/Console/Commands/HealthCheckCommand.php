@@ -189,4 +189,18 @@ class HealthCheckCommand extends Command
 
         return HealthCheckStateEnum::OK();
     }
+
+    /**
+     * @return \App\Enums\HealthCheckStateEnum
+     */
+    protected function checkPhpVersion(): HealthCheckStateEnum
+    {
+        if (version_compare(PHP_VERSION, '7.3.0', '<')) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) {
+                $state->description = 'PHP version is less than 7.3.0.';
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
 }
