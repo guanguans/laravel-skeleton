@@ -203,4 +203,35 @@ class HealthCheckCommand extends Command
 
         return HealthCheckStateEnum::OK();
     }
+
+    protected function checkPhpExtensions(): HealthCheckStateEnum
+    {
+        $extensions = [
+            'curl',
+            'gd',
+            'mbstring',
+            'openssl',
+            'pdo',
+            'pdo_mysql',
+            'xml',
+            'zip',
+            'swoole',
+        ];
+
+        /* @var Collection $missingExtensions */
+        $missingExtensions = collect($extensions)
+            ->reduce(function (Collection $missingExtensions, $extension) {
+                return $missingExtensions->when(! extension_loaded($extension), function (Collection $missingExtensions) use ($extension) {
+                    return $missingExtensions->add($extension);
+                });
+            }, collect());
+
+        if ($missingExtensions->isNotEmpty()) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($missingExtensions) {
+                $state->description = "The following PHP extensions are missing: `{$missingExtensions->implode('、')}`.";
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
 }
