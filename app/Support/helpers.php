@@ -6,6 +6,21 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('call')) {
+    /**
+     * Call the given Closure / class@method and inject its dependencies.
+     *
+     * @param  callable|string  $callback
+     * @param  array  $parameters
+     * @param  string|null  $defaultMethod
+     * @return mixed
+     */
+    function call($callback, array $parameters = [], $defaultMethod = null)
+    {
+        app()->call($callback, $parameters, $defaultMethod);
+    }
+}
+
 if (! function_exists('stopwatch')) {
     /**
      * @param  string  $name
