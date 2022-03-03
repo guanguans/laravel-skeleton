@@ -234,4 +234,19 @@ class HealthCheckCommand extends Command
 
         return HealthCheckStateEnum::OK();
     }
+
+    /**
+     * @return \App\Enums\HealthCheckStateEnum
+     */
+    protected function checkDiskSpace(): HealthCheckStateEnum
+    {
+        $diskSpace = sprintf('%.1f', disk_free_space(base_path()) / (3 * 1024 * 1024 * 1024));
+        if ($diskSpace < 3) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($diskSpace) {
+                $state->description = "The disk space is less than 3GB: `$diskSpace`.";
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
 }
