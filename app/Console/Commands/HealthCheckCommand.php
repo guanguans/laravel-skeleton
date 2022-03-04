@@ -240,10 +240,18 @@ class HealthCheckCommand extends Command
      */
     protected function checkDiskSpace(): HealthCheckStateEnum
     {
-        $diskSpace = sprintf('%.1f', disk_free_space(base_path()) / (3 * 1024 * 1024 * 1024));
-        if ($diskSpace < 3) {
+        $freeSpace = disk_free_space(base_path());
+        $diskSpace = sprintf('%.1f', $freeSpace / (1024 * 1024));
+        if ($diskSpace < 100) {
             return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($diskSpace) {
-                $state->description = "The disk space is less than 3GB: `$diskSpace`.";
+                $state->description = "The disk space is less than 100MB: `$diskSpace`.";
+            });
+        }
+
+        $diskSpace = sprintf('%.1f', $freeSpace / (1024 * 1024 * 1024));
+        if ($diskSpace < 1) {
+            return tap(HealthCheckStateEnum::WARNING(), function (HealthCheckStateEnum $state) use ($diskSpace) {
+                $state->description = "The disk space is less than 1GB: `$diskSpace`.";
             });
         }
 
