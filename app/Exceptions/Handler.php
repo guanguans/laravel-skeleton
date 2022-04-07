@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
     public function report(Throwable $e)
     {
         // 异常报错通知
-        $this->shouldReport($e) and \ExceptionNotifier::report($e);
+        \ExceptionNotifier::reportIf($this->shouldReport($e), $e);
 
         parent::report($e);
     }

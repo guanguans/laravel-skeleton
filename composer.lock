@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82f933f3e7330b61357156fe87a60c97",
+    "content-hash": "2e6fcd778aa7efeb523bcde679309e2b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1741,46 +1741,36 @@
         },
         {
             "name": "guanguans/laravel-dump-sql",
-            "version": "v2.0.9",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-dump-sql.git",
-                "reference": "b0144efad0ee516713ced6c9b45ed38072c37e7f"
+                "reference": "9f014bbb70ea51647c09c9927543e8b6a648990e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/b0144efad0ee516713ced6c9b45ed38072c37e7f",
-                "reference": "b0144efad0ee516713ced6c9b45ed38072c37e7f",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/9f014bbb70ea51647c09c9927543e8b6a648990e",
+                "reference": "9f014bbb70ea51647c09c9927543e8b6a648990e",
+                "shasum": ""
             },
             "require": {
-                "illuminate/console": "^5.6 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/database": "^5.6 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/http": "^5.6 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/log": "^5.6 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/support": "^5.6 || ^6.0 || ^7.0 || ^8.0",
+                "illuminate/console": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/database": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/http": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/log": "^6.10 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/support": "^6.10 || ^7.0 || ^8.0 || ^9.0",
                 "php": ">=7.2",
-                "symfony/var-dumper": "^4.1 || ^5.0"
+                "symfony/var-dumper": "^4.3 || ^5.0 || ^6.0"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.7",
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^3.3 || ^4.0 || ^5.0 || ^6.0",
                 "phpunit/phpunit": "^8.0"
             },
             "type": "laravel",
             "extra": {
-                "laravel": {
-                    "providers": [
-                        "Guanguans\\LaravelDumpSql\\ServiceProvider"
-                    ]
-                },
                 "hooks": {
                     "pre-commit": [
                         "composer test",
@@ -1790,15 +1780,20 @@
                         "composer test",
                         "composer check-style"
                     ]
+                },
+                "laravel": {
+                    "providers": [
+                        "Guanguans\\LaravelDumpSql\\ServiceProvider"
+                    ]
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Guanguans\\LaravelDumpSql\\": "src"
-                },
                 "files": [
                     "src/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Guanguans\\LaravelDumpSql\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1833,44 +1828,39 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-11-05T07:43:39+00:00"
+            "time": "2022-04-01T07:33:04+00:00"
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "v1.1.12",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "8553e1165a6a7b75c6a5b8d236f6f64548db3220"
+                "reference": "b17163efdfccc761262f6ae9f6a6d9c6717a0392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/8553e1165a6a7b75c6a5b8d236f6f64548db3220",
-                "reference": "8553e1165a6a7b75c6a5b8d236f6f64548db3220",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/b17163efdfccc761262f6ae9f6a6d9c6717a0392",
+                "reference": "b17163efdfccc761262f6ae9f6a6d9c6717a0392",
+                "shasum": ""
             },
             "require": {
-                "guanguans/notify": "^1.0",
-                "illuminate/bus": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/contracts": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/http": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/queue": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
+                "ext-json": "*",
+                "guanguans/notify": "^1.19",
+                "illuminate/bus": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/contracts": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/events": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/http": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/log": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/queue": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "php": ">=7.2"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.7",
-                "friendsofphp/php-cs-fixer": "^2.16 || ^3.0",
+                "friendsofphp/php-cs-fixer": "^3.0",
                 "mockery/mockery": "^1.2",
                 "nyholm/nsa": "^1.2",
-                "overtrue/phplint": "^2.4 || ^3.0",
-                "phpbench/phpbench": "^1.0",
                 "phpunit/phpunit": "^7.0 || ^8.0",
                 "vimeo/psalm": "^4.0"
             },
@@ -1881,31 +1871,28 @@
                         "Guanguans\\LaravelExceptionNotify\\ExceptionNotifyServiceProvider"
                     ],
                     "aliases": {
-                        "ExceptionNotifier": "Guanguans\\LaravelExceptionNotify\\Facades\\Notifier"
+                        "ExceptionNotifier": "Guanguans\\LaravelExceptionNotify\\Facades\\ExceptionNotify",
+                        "ExceptionNotify": "Guanguans\\LaravelExceptionNotify\\Facades\\ExceptionNotify"
                     }
                 },
                 "hooks": {
                     "pre-commit": [
-                        "composer lint",
                         "composer style-lint",
-                        "composer md-lint",
                         "composer test"
                     ],
                     "pre-push": [
-                        "composer lint",
                         "composer style-lint",
-                        "composer md-lint",
                         "composer test"
                     ]
                 }
             },
             "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
                 "psr-4": {
                     "Guanguans\\LaravelExceptionNotify\\": "src"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1919,17 +1906,21 @@
                     "role": "developer"
                 }
             ],
-            "description": "Multiple channels of laravel exception notification(Bark、Chanify、DingTalk、FeiShu、ServerChan、WeWork、XiZhi). - 多种通道的 laravel 异常通知(Bark、Chanify、钉钉群机器人、飞书群机器人、Server 酱、企业微信群机器人、息知)。",
+            "description": "Laravel 中异常监控报警通知(Bark、Chanify、钉钉群机器人、Discord、飞书群机器人、邮件、PushDeer、QQ 频道机器人、Server 酱、Slack、Telegram、企业微信群机器人、息知)。",
             "homepage": "https://github.com/guanguans/laravel-exception-notify",
             "keywords": [
                 "Bark",
                 "Feishu",
+                "PushDeer",
+                "QQ 频道机器人",
                 "Server酱",
                 "chanify",
                 "dingtalk",
+                "discord",
                 "error",
                 "exception",
                 "laravel",
+                "mail",
                 "monitor",
                 "notice",
                 "notification",
@@ -1937,6 +1928,8 @@
                 "notify",
                 "sdk",
                 "serverChan",
+                "slack",
+                "telegram",
                 "wework",
                 "xiZhi",
                 "企业微信",
@@ -1960,65 +1953,59 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2021-12-03T09:32:22+00:00"
+            "time": "2022-03-30T06:29:46+00:00"
         },
         {
             "name": "guanguans/notify",
-            "version": "v1.0.1",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "b855f7ae2cf3af483a7083bf294066d759b7886d"
+                "reference": "9ca088680bf4e5b489a94c80a635db39e10dda63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/b855f7ae2cf3af483a7083bf294066d759b7886d",
-                "reference": "b855f7ae2cf3af483a7083bf294066d759b7886d",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/9ca088680bf4e5b489a94c80a635db39e10dda63",
+                "reference": "9ca088680bf4e5b489a94c80a635db39e10dda63",
+                "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "overtrue/http": "^1.2",
-                "php": ">=7.2",
-                "symfony/options-resolver": "^5.0"
+                "php": ">=7.2.5",
+                "psr/log": "^1.1 || ^2.0 || ^3.0",
+                "symfony/mailer": "^5.3 || ^6.0",
+                "symfony/options-resolver": "^5.3 || ^6.0",
+                "textalk/websocket": "^1.5"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.7",
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^3.0",
                 "mockery/mockery": "^1.2",
-                "overtrue/phplint": "^2.3",
-                "phpunit/phpunit": "^7 || ^8",
-                "vimeo/psalm": "^3.11"
+                "overtrue/phplint": "^3.0",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+                "vimeo/psalm": "^4.10"
             },
             "type": "library",
             "extra": {
                 "hooks": {
                     "pre-commit": [
-                        "composer lint",
                         "composer style-lint",
-                        "composer md-lint",
                         "composer test"
                     ],
                     "pre-push": [
-                        "composer lint",
                         "composer style-lint",
-                        "composer md-lint",
                         "composer test"
                     ]
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Guanguans\\Notify\\": "src"
-                },
                 "files": [
                     "src/Support/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Guanguans\\Notify\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2032,26 +2019,50 @@
                     "role": "developer"
                 }
             ],
-            "description": "Multi platform notification SDK(Bark、Chanify、DingTalk、FeiShu、ServerChan、WeWork、XiZhi). - 多平台通知 SDK(Bark、Chanify、钉钉群机器人、飞书群机器人、Server 酱、企业微信群机器人、息知)。",
+            "description": "推送通知 sdk(Bark、Chanify、钉钉群机器人、Discord、邮件、飞书群机器人、Gitter、Google Chat、iGot、Logger、Mattermost、Now Push、PushBack、Push、PushDeer、PushPlus、QQ 频道机器人、Rocket Chat、Server 酱、Showdoc Push、Slack、Telegram、Webhook、企业微信群机器人、息知、Zulip)。",
             "homepage": "https://github.com/guanguans/notify",
             "keywords": [
                 "Bark",
                 "Feishu",
+                "Mattermost",
+                "PushDeer",
+                "QQ Bot",
+                "QQ 机器人",
+                "QQ 频道",
+                "QQ 频道机器人",
                 "Server酱",
                 "chanify",
                 "dingtalk",
+                "discord",
+                "email",
+                "gitter",
+                "googleChat",
+                "iGot",
+                "logger",
                 "notification",
                 "notifier",
                 "notify",
+                "now push",
+                "push",
+                "pushBack",
+                "pushPlus",
+                "qq",
+                "rocketchat",
                 "sdk",
                 "serverChan",
+                "showdoc push",
+                "slack",
+                "telegram",
+                "webhook",
                 "wework",
                 "xiZhi",
+                "zulip",
                 "企业微信",
                 "企业微信群机器人",
                 "微信",
                 "息知",
                 "机器人",
+                "邮件",
                 "钉钉",
                 "钉钉群",
                 "钉钉群机器人",
@@ -2068,7 +2079,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2021-05-16T07:31:42+00:00"
+            "time": "2022-03-31T07:00:37+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -4580,23 +4591,17 @@
         },
         {
             "name": "overtrue/http",
-            "version": "1.2.0",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/http.git",
-                "reference": "e77697a678a48ded841aa1c778458c31a2c3aedf"
+                "reference": "e6e4c2ff274b1050d681288495878ee8fd3f1209"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/http/zipball/e77697a678a48ded841aa1c778458c31a2c3aedf",
-                "reference": "e77697a678a48ded841aa1c778458c31a2c3aedf",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://api.github.com/repos/overtrue/http/zipball/e6e4c2ff274b1050d681288495878ee8fd3f1209",
+                "reference": "e6e4c2ff274b1050d681288495878ee8fd3f1209",
+                "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
@@ -4608,9 +4613,9 @@
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.7",
-                "friendsofphp/php-cs-fixer": "^2.15",
+                "friendsofphp/php-cs-fixer": "^2.15 || ^3.0",
                 "mockery/mockery": "^1.0",
-                "overtrue/phplint": "^1.1 || ^2.0",
+                "overtrue/phplint": "^1.1 || ^2.0 || ^3.0",
                 "phpunit/phpunit": "^6.5 || ^8.5"
             },
             "type": "library",
@@ -4632,9 +4637,15 @@
             "description": "A simple http client wrapper.",
             "support": {
                 "issues": "https://github.com/overtrue/http/issues",
-                "source": "https://github.com/overtrue/http/tree/master"
+                "source": "https://github.com/overtrue/http/tree/1.2.3"
             },
-            "time": "2020-07-30T01:49:05+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/overtrue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-03-14T06:24:13+00:00"
         },
         {
             "name": "overtrue/laravel-lang",
@@ -7203,6 +7214,82 @@
             "time": "2021-08-30T12:37:19+00:00"
         },
         {
+            "name": "symfony/mailer",
+            "version": "v5.4.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mailer.git",
+                "reference": "03332035eef89557db9eb7ead4e899685d5962b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/03332035eef89557db9eb7ead4e899685d5962b9",
+                "reference": "03332035eef89557db9eb7ead4e899685d5962b9",
+                "shasum": ""
+            },
+            "require": {
+                "egulias/email-validator": "^2.1.10|^3",
+                "php": ">=7.2.5",
+                "psr/event-dispatcher": "^1",
+                "psr/log": "^1|^2|^3",
+                "symfony/deprecation-contracts": "^2.1|^3",
+                "symfony/event-dispatcher": "^4.4|^5.0|^6.0",
+                "symfony/mime": "^5.2.6|^6.0",
+                "symfony/polyfill-php80": "^1.16",
+                "symfony/service-contracts": "^1.1|^2|^3"
+            },
+            "conflict": {
+                "symfony/http-kernel": "<4.4"
+            },
+            "require-dev": {
+                "symfony/http-client-contracts": "^1.1|^2|^3",
+                "symfony/messenger": "^4.4|^5.0|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mailer\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Helps sending emails",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/mailer/tree/v5.4.7"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-03-18T16:00:30+00:00"
+        },
+        {
             "name": "symfony/mime",
             "version": "v5.3.7",
             "source": {
@@ -9152,6 +9239,55 @@
                 }
             ],
             "time": "2021-07-29T06:20:01+00:00"
+        },
+        {
+            "name": "textalk/websocket",
+            "version": "1.5.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Textalk/websocket-php.git",
+                "reference": "1712325e99b6bf869ccbf9bf41ab749e7328ea46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Textalk/websocket-php/zipball/1712325e99b6bf869ccbf9bf41ab749e7328ea46",
+                "reference": "1712325e99b6bf869ccbf9bf41ab749e7328ea46",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 | ^8.0",
+                "psr/log": "^1 | ^2 | ^3"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WebSocket\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Fredrik Liljegren"
+                },
+                {
+                    "name": "Sören Jensen",
+                    "email": "soren@abicart.se"
+                }
+            ],
+            "description": "WebSocket client and server",
+            "support": {
+                "issues": "https://github.com/Textalk/websocket-php/issues",
+                "source": "https://github.com/Textalk/websocket-php/tree/1.5.7"
+            },
+            "time": "2022-03-29T09:46:59+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -13780,5 +13916,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
