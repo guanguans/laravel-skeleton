@@ -13,7 +13,6 @@ use Guanguans\LaravelExceptionNotify\Pipelines\LengthLimitPipeline;
 use Guanguans\LaravelExceptionNotify\Pipelines\StrReplacePipeline;
 use Guanguans\LaravelExceptionNotify\Pipelines\ToHtmlPipeline;
 use Guanguans\LaravelExceptionNotify\Pipelines\ToMarkdownPipeline;
-use Guanguans\LaravelExceptionNotify\Pipelines\TrimPipeline;
 
 return [
     /*
@@ -69,32 +68,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Collector configuration.
+    | List of collectors.
     |--------------------------------------------------------------------------
     |
-    | Responsible for collecting and transforming the exception data.
+    | Responsible for collecting the exception data.
     |
     */
     'collector' => [
-        // List of collectors
-        'class' => [
-            \Guanguans\LaravelExceptionNotify\Collectors\LaravelCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\AnnexCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\ExceptionTraceCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\RequestHeaderCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\RequestQueryCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\RequestPostCollector::class,
-            \Guanguans\LaravelExceptionNotify\Collectors\RequestFileCollector::class,
-            // \Guanguans\LaravelExceptionNotify\Collectors\RequestMiddlewareCollector::class,
-            // \Guanguans\LaravelExceptionNotify\Collectors\RequestServerCollector::class,
-            // \Guanguans\LaravelExceptionNotify\Collectors\RequestCookieCollector::class,
-            // \Guanguans\LaravelExceptionNotify\Collectors\RequestSessionCollector::class,
-        ],
-        // The transformer is used to transformer collectors to reports.
-        'transformer' => \Guanguans\LaravelExceptionNotify\CollectorTransformer::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\LaravelCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\AnnexCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\ExceptionTraceCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\RequestHeaderCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\RequestQueryCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\RequestPostCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\RequestFileCollector::class,
+        // \Guanguans\LaravelExceptionNotify\Collectors\RequestMiddlewareCollector::class,
+        // \Guanguans\LaravelExceptionNotify\Collectors\RequestServerCollector::class,
+        // \Guanguans\LaravelExceptionNotify\Collectors\RequestCookieCollector::class,
+        // \Guanguans\LaravelExceptionNotify\Collectors\RequestSessionCollector::class,
     ],
 
     /*
@@ -123,17 +117,6 @@ return [
         // \Guanguans\LaravelExceptionNotify\Listeners\Reported\LogReportResultListener::class,
         // \Guanguans\LaravelExceptionNotify\Listeners\Reported\DumpReportResultListener::class,
         // \Guanguans\LaravelExceptionNotify\Listeners\Reported\DdReportResultListener::class,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Global pipeline.
-    |--------------------------------------------------------------------------
-    | The global pipeline are used to pipeline report data.
-    |
-    */
-    'pipeline' => [
-        TrimPipeline::class,
     ],
 
     /*

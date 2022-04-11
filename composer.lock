@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e6fcd778aa7efeb523bcde679309e2b",
+    "content-hash": "b3d3ca31169af11c777affa34a1f1f4d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1832,16 +1832,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "v2.7.1",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "b17163efdfccc761262f6ae9f6a6d9c6717a0392"
+                "reference": "653189d2860ea5a7aa9ed43d93660416d512be28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/b17163efdfccc761262f6ae9f6a6d9c6717a0392",
-                "reference": "b17163efdfccc761262f6ae9f6a6d9c6717a0392",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/653189d2860ea5a7aa9ed43d93660416d512be28",
+                "reference": "653189d2860ea5a7aa9ed43d93660416d512be28",
                 "shasum": ""
             },
             "require": {
@@ -1953,7 +1953,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2022-03-30T06:29:46+00:00"
+            "time": "2022-04-09T04:45:33+00:00"
         },
         {
             "name": "guanguans/notify",
