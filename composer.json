@@ -34,6 +34,7 @@
         "spatie/laravel-json-api-paginate": "^1.10",
         "spatie/laravel-translatable": "^4.6",
         "symfony/stopwatch": "^5.3",
+        "tenantcloud/laravel-boolean-softdeletes": "^3.1",
         "timacdonald/has-parameters": "^1.2",
         "tymon/jwt-auth": "^1.0",
         "vectorface/whip": "^0.4.0"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3d3ca31169af11c777affa34a1f1f4d",
+    "content-hash": "22883b44a30c24c400f84f523c2dc07a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9239,6 +9239,69 @@
                 }
             ],
             "time": "2021-07-29T06:20:01+00:00"
+        },
+        {
+            "name": "tenantcloud/laravel-boolean-softdeletes",
+            "version": "3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tenantcloud/laravel-boolean-softdeletes.git",
+                "reference": "7dcbbda0d99d9617bb4ea9a1b3d7fb26ea6a4229"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tenantcloud/laravel-boolean-softdeletes/zipball/7dcbbda0d99d9617bb4ea9a1b3d7fb26ea6a4229",
+                "reference": "7dcbbda0d99d9617bb4ea9a1b3d7fb26ea6a4229",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5|~6|~7|~8",
+                "illuminate/support": "~5|~6|~7|~8",
+                "php": "~5.6|~7|~8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=5.4.3",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Webkid\\LaravelBooleanSoftdeletes\\LaravelBooleanSoftdeletesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webkid\\LaravelBooleanSoftdeletes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Kolodiy",
+                    "email": "ivan@tenantcloud.com",
+                    "homepage": "https://tenantcloud.com",
+                    "role": "CTO"
+                }
+            ],
+            "description": "Laravel soft deletes optimization for high load queries",
+            "homepage": "https://github.com/tenantcloud/laravel-boolean-softdeletes",
+            "keywords": [
+                "LaravelBooleanSoftdeletes",
+                "TenantCloud"
+            ],
+            "support": {
+                "issues": "https://github.com/tenantcloud/laravel-boolean-softdeletes/issues",
+                "source": "https://github.com/tenantcloud/laravel-boolean-softdeletes/tree/3.1"
+            },
+            "time": "2021-07-13T08:07:40+00:00"
         },
         {
             "name": "textalk/websocket",
