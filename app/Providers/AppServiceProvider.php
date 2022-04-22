@@ -34,7 +34,6 @@ class AppServiceProvider extends ServiceProvider
      * @var string[]
      */
     public $singletons = [
-        \App\Support\Response::class => \App\Support\Response::class,
         \App\Support\Macros\RequestMacro::class => \App\Support\Macros\RequestMacro::class,
         \App\Support\Macros\CollectionMacro::class => \App\Support\Macros\CollectionMacro::class,
         \App\Support\Macros\StrMacro::class => \App\Support\Macros\StrMacro::class,
