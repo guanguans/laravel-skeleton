@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait CreateStaticAble
+trait CreateStaticable
 {
     public static function create(...$parameters)
     {
