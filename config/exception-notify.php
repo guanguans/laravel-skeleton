@@ -58,6 +58,35 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Exception notification rate limiter.
+    |--------------------------------------------------------------------------
+    |
+    | The exception notification rate limiter is used to prevent sending
+    | exception notification to the same channel too frequently.
+    |
+    */
+    'rate_limiter' => [
+        // Config.
+        'config' => [
+            'limit' => (int) env('EXCEPTION_NOTIFY_LIMIT', 1),
+            'rate' => [
+                // https://www.php.net/manual/en/datetime.formats.php
+                'interval' => env('EXCEPTION_NOTIFY_INTERVAL', '1 minutes'),
+            ],
+        ],
+
+        // Storage.
+        'storage' => [
+            // \Psr\Cache\CacheItemPoolInterface::class
+            'class' => \Symfony\Component\Cache\Adapter\PhpFilesAdapter::class,
+            'parameters' => [
+                'directory' => storage_path('framework/cache/exception-notify'),
+            ],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Report title.
     |--------------------------------------------------------------------------
     |
@@ -76,7 +105,7 @@ return [
     */
     'collector' => [
         \Guanguans\LaravelExceptionNotify\Collectors\LaravelCollector::class,
-        \Guanguans\LaravelExceptionNotify\Collectors\AnnexCollector::class,
+        \Guanguans\LaravelExceptionNotify\Collectors\AdditionCollector::class,
         \Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
         \Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector::class,
         \Guanguans\LaravelExceptionNotify\Collectors\ExceptionTraceCollector::class,
@@ -89,34 +118,6 @@ return [
         // \Guanguans\LaravelExceptionNotify\Collectors\RequestServerCollector::class,
         // \Guanguans\LaravelExceptionNotify\Collectors\RequestCookieCollector::class,
         // \Guanguans\LaravelExceptionNotify\Collectors\RequestSessionCollector::class,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Reporting event.
-    |--------------------------------------------------------------------------
-    |
-    | The event that will be triggered when the report is ready.
-    |
-    */
-    'reporting' => [
-        // \Guanguans\LaravelExceptionNotify\Listeners\Reporting\LogReportListener::class,
-        // \Guanguans\LaravelExceptionNotify\Listeners\Reporting\DumpReportListener::class,
-        // \Guanguans\LaravelExceptionNotify\Listeners\Reporting\DdReportListener::class,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Reported event.
-    |--------------------------------------------------------------------------
-    |
-    | The event that will be triggered when the report is reported.
-    |
-    */
-    'reported' => [
-        // \Guanguans\LaravelExceptionNotify\Listeners\Reported\LogReportResultListener::class,
-        // \Guanguans\LaravelExceptionNotify\Listeners\Reported\DumpReportResultListener::class,
-        // \Guanguans\LaravelExceptionNotify\Listeners\Reported\DdReportResultListener::class,
     ],
 
     /*
