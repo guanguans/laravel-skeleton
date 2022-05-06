@@ -257,4 +257,26 @@ class HealthCheckCommand extends Command
 
         return HealthCheckStateEnum::OK();
     }
+
+    protected function checkMemoryLimit(int $limit = 128): HealthCheckStateEnum
+    {
+        $inis = collect(ini_get_all())->filter(function ($value, $key) {
+            return str_contains($key, 'memory_limit');
+        });
+
+        if ($inis->isEmpty()) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) {
+                $state->description = "The memory limit is not set.";
+            });
+        }
+
+        $localValue = $inis->first()['local_value'];
+        if ($localValue < $limit) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($limit, $localValue) {
+                $state->description = "The memory limit is less than {$limit}M: `$localValue`.";
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
 }
