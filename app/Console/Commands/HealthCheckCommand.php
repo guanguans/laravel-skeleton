@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 use ReflectionObject;
@@ -274,6 +275,17 @@ class HealthCheckCommand extends Command
         if ($localValue < $limit) {
             return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) use ($limit, $localValue) {
                 $state->description = "The memory limit is less than {$limit}M: `$localValue`.";
+            });
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
+
+    protected function checkQueue(): HealthCheckStateEnum
+    {
+        if (! Queue::connected()) {
+            return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) {
+                $state->description = "The queue is not connected.";
             });
         }
 
