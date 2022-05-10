@@ -38,7 +38,7 @@ class GenerateSignedDocsUrlCommand extends Command
      */
     public function handle()
     {
-        $signedUrl = URL::temporarySignedRoute('docs', now()->addDays(30));
+        $signedUrl = URL::temporarySignedRoute('docs', now()->addDays(7));
 
         $this->info($signedUrl);
 
