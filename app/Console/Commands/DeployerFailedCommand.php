@@ -38,7 +38,7 @@ class DeployerFailedCommand extends Command
     public function handle()
     {
         // todo something
-        notifier_report($this->description);
+        exception_notify_report($this->description);
 
         return 0;
     }
