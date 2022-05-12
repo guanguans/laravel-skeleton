@@ -8,14 +8,14 @@ abstract class Signer
 
     abstract public function validate(string $signature, array $payload): bool;
 
-    protected function sort(array $payload)
+    protected function sort(array $payload): array
     {
         ksort($payload);
 
         return $payload;
     }
 
-    protected function getPreEncryptedData(array $payload): string
+    protected function transformToPreEncryptedData(array $payload): string
     {
         $sortedPayload = $this->sort($payload);
 
