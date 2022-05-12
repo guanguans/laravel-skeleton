@@ -130,4 +130,14 @@ class CollectionMacro
             return new Paginator($items, $perPage, $page, $options);
         };
     }
+
+    public function filterFilled(): callable
+    {
+        return function () {
+            /** @var \Illuminate\Support\Collection $this */
+            return $this->filter(function ($value) {
+                return filled($value);
+            });
+        };
+    }
 }

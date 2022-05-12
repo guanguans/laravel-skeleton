@@ -6,6 +6,20 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('array_filter_filled')) {
+    /**
+     * @param  array  $array
+     *
+     * @return array
+     */
+    function array_filter_filled(array $array)
+    {
+        return array_filter($array, function ($item) {
+            return filled($item);
+        });
+    }
+}
+
 if (! function_exists('call')) {
     /**
      * Call the given Closure / class@method and inject its dependencies.
