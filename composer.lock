@@ -1832,16 +1832,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "v2.11.2",
+            "version": "v2.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "99aa2ec7f8aae65588666d1e753135b2b02a4dda"
+                "reference": "89cb63f1a62275719c259a666caf78bc87ab822c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/99aa2ec7f8aae65588666d1e753135b2b02a4dda",
-                "reference": "99aa2ec7f8aae65588666d1e753135b2b02a4dda",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/89cb63f1a62275719c259a666caf78bc87ab822c",
+                "reference": "89cb63f1a62275719c259a666caf78bc87ab822c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1861,7 +1861,7 @@
                 "illuminate/queue": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "php": ">=7.2",
-                "symfony/cache": "^5.0 || 6.0",
+                "symfony/cache": "^5.0 || ^6.0",
                 "symfony/rate-limiter": "^5.0 || ^6.0"
             },
             "require-dev": {
@@ -1961,7 +1961,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2022-05-04T13:54:01+00:00"
+            "time": "2022-05-12T01:55:24+00:00"
         },
         {
             "name": "guanguans/notify",
