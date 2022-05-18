@@ -4,7 +4,7 @@ namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
-class Currency implements CastsAttributes
+class CurrencyCast implements CastsAttributes
 {
     /**
      * The amount of digits.

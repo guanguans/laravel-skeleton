@@ -4,7 +4,7 @@ namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
-class Encrypted implements CastsAttributes
+class ArrayedCast implements CastsAttributes
 {
     /**
      * Cast the given value.
@@ -17,7 +17,13 @@ class Encrypted implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-        return $value ? decrypt($value) : null;
+        if (! $value) {
+            return [];
+        }
+
+        $value = @json_decode($value, true);
+
+        return $value ?: [];
     }
 
     /**
@@ -31,6 +37,6 @@ class Encrypted implements CastsAttributes
      */
     public function set($model, $key, $value, $attributes)
     {
-        return $value ? encrypt($value) : null;
+        return json_encode($value);
     }
 }
