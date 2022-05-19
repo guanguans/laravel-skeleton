@@ -3,15 +3,13 @@
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsInboundAttributes;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
-class FuncCast implements CastsInboundAttributes
+class CallFuncSetCast implements CastsInboundAttributes
 {
     /**
      * @var string
      */
-    private $name;
+    private $funcName;
 
     /**
      * @var int
@@ -24,13 +22,21 @@ class FuncCast implements CastsInboundAttributes
     private $secondaryArgs;
 
     /**
-     * @param  string  $name
+     * @var string[]
+     */
+    private $supportedClasses = [
+        \Illuminate\Support\Str::class,
+        \Illuminate\Support\Arr::class,
+    ];
+
+    /**
+     * @param  string  $funcName
      * @param  int  $mainArgIndex
      * @param ...$secondaryArgs
      */
-    public function __construct(string $name, int $mainArgIndex = 0, ...$secondaryArgs)
+    public function __construct(string $funcName, int $mainArgIndex = 0, ...$secondaryArgs)
     {
-        $this->name = $name;
+        $this->funcName = $funcName;
         $this->mainArgIndex = $mainArgIndex;
         $this->secondaryArgs = $secondaryArgs;
     }
@@ -46,11 +52,14 @@ class FuncCast implements CastsInboundAttributes
      */
     public function set($model, string $key, $value, array $attributes)
     {
-        $callback = $this->name;
-        if (method_exists(Str::class, $this->name)) {
-            $callback = [Str::class, $this->name];
-        } elseif (method_exists(Arr::class, $this->name)) {
-            $callback = [Arr::class, $this->name];
+        $callback = $this->funcName;
+
+        foreach ($this->supportedClasses as $class) {
+            if (method_exists($class, $this->funcName)) {
+                $callback = [$class, $this->funcName];
+
+                break;
+            }
         }
 
         array_splice($this->secondaryArgs, $this->mainArgIndex, 0, $value);
