@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Rules\Rule;
+use App\Support\Macros\BlueprintMacro;
 use App\Support\Macros\CollectionMacro;
+use App\Support\Macros\GrammarMacro;
 use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
@@ -12,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
@@ -37,7 +41,10 @@ class AppServiceProvider extends ServiceProvider
         \App\Support\Macros\RequestMacro::class => \App\Support\Macros\RequestMacro::class,
         \App\Support\Macros\CollectionMacro::class => \App\Support\Macros\CollectionMacro::class,
         \App\Support\Macros\StrMacro::class => \App\Support\Macros\StrMacro::class,
-        \App\Support\Macros\StringableMacro::class => \App\Support\Macros\StringableMacro::class
+        \App\Support\Macros\StringableMacro::class => \App\Support\Macros\StringableMacro::class,
+        \App\Support\Macros\QueryBuilderMacro::class => \App\Support\Macros\QueryBuilderMacro::class,
+        \App\Support\Macros\BlueprintMacro::class => \App\Support\Macros\BlueprintMacro::class,
+        \App\Support\Macros\GrammarMacro::class => \App\Support\Macros\GrammarMacro::class,
     ];
 
     /**
@@ -127,6 +134,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::mixin($queryBuilderMacro);
         Str::mixin($this->app->make(StrMacro::class));
         Stringable::mixin($this->app->make(StringableMacro::class));
+        Blueprint::mixin($this->app->make(BlueprintMacro::class));
+        Grammar::mixin($this->app->make(GrammarMacro::class));
     }
 
     /**
