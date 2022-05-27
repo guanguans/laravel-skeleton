@@ -7,6 +7,12 @@ class BlueprintMacro
     /**
      * Add a comment to the table.
      *
+     * ```php
+     * \Illuminate\Support\Facades\Schema::table('users', function (Blueprint $table) {
+     *    $table->comment('用户表');
+     * });
+     * ```
+     *
      * @param  string  $comment
      * @return \Illuminate\Support\Fluent
      */
