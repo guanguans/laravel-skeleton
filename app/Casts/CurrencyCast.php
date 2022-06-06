@@ -53,7 +53,7 @@ class CurrencyCast implements CastsAttributes
      * @param  string                              $key        The property name.
      * @param  mixed                               $value      The property value.
      * @param  array                               $attributes The model attributes array.
-     * @return array
+     * @return int
      */
     public function set($model, string $key, $value, array $attributes)
     {
