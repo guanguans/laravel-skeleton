@@ -140,4 +140,16 @@ class CollectionMacro
             });
         };
     }
+
+    public function reduces(): callable
+    {
+        return function (callable $callback, $carry = null) {
+            /** @var \Illuminate\Support\Collection $this */
+            foreach ($this as $key => $value) {
+                $carry = call_user_func($callback, $carry, $value, $key);
+            }
+
+            return $carry;
+        };
+    }
 }
