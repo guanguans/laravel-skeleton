@@ -152,4 +152,17 @@ class CollectionMacro
             return $carry;
         };
     }
+
+    public function maps(): callable
+    {
+        return function (callable $callback) {
+            $arr = [];
+            /** @var \Illuminate\Support\Collection $this */
+            foreach ($this as $key => $value) {
+                $arr[$key] = call_user_func($callback, $value, $key);
+            }
+
+            return $arr;
+        };
+    }
 }
