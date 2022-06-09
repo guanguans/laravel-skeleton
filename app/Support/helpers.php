@@ -6,6 +6,22 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('validate')) {
+    /**
+     * @param  array  $data
+     * @param  array  $rules
+     * @param  array  $messages
+     * @param  array  $customAttributes
+     *
+     * @return array
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    function validate(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
+    {
+        return validator($data, $rules, $messages, $customAttributes)->validate();
+    }
+}
+
 if (! function_exists('array_filter_filled')) {
     /**
      * @param  array  $array
