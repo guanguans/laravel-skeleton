@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Traits\ValidatesData;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Client\PendingRequest;
@@ -9,18 +10,13 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
-use Symfony\Component\OptionsResolver\Exception\AccessException;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
-use Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
-use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class FoundationSdk
 {
     use Conditionable;
     use Tappable;
+    use ValidatesData;
 
     /**
      * @var array
@@ -34,8 +30,8 @@ abstract class FoundationSdk
 
     public function __construct(array $config)
     {
-        $this->config = $this->validateConfigureOptions($config);
-        $this->pendingRequest = $this->buildDefaultPendingRequest($this->config);
+        $this->config = $this->validateConfig($config);
+        $this->pendingRequest = $this->initPendingRequest($this->config);
     }
 
     /**
@@ -52,7 +48,7 @@ abstract class FoundationSdk
 
     /**
      * ```php
-     * protected function configureOptions(array $config): array
+     * protected function validateConfig(array $config): array
      * {
      *     return configure_options($config, function (OptionsResolver $optionsResolver) {
      *         $optionsResolver
@@ -63,25 +59,34 @@ abstract class FoundationSdk
      * }
      * ```
      *
+     * ```php
+     * protected function validateConfig(array $config): array
+     * {
+     *     return $this->validateData($config, [
+     *         'http_options' => 'array',
+     *     ]);
+     * }
+     * ```
+     *
      * @param  array  $config
      *
      * @return array The merged and validated options
      *
-     * @throws UndefinedOptionsException If an option name is undefined
-     * @throws InvalidOptionsException   If an option doesn't fulfill the
-     *                                   specified validation rules
-     * @throws MissingOptionsException   If a required option is missing
-     * @throws OptionDefinitionException If there is a cyclic dependency between
-     *                                   lazy options and/or normalizers
-     * @throws NoSuchOptionException     If a lazy option reads an unavailable option
-     * @throws AccessException           If called from a lazy option or normalizer
+     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException If an option name is undefined
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException   If an option doesn't fulfill the specified validation rules
+     * @throws \Symfony\Component\OptionsResolver\Exception\MissingOptionsException   If a required option is missing
+     * @throws \Symfony\Component\OptionsResolver\Exception\OptionDefinitionException If there is a cyclic dependency between lazy options and/or normalizers
+     * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException     If a lazy option reads an unavailable option
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException           If called from a lazy option or normalizer
+     *
+     * @throws \Illuminate\Validation\ValidationException Laravel validation rules.
      */
-    abstract protected function validateConfigureOptions(array $config): array;
+    abstract protected function validateConfig(array $config): array;
 
     /**
      *
      * ```php
-     * protected function buildDefaultPendingRequest(array $config): PendingRequest
+     * protected function initPendingRequest(array $config): PendingRequest
      * {
      *     return Http::withOptions($config['options'])
      *         // ->dd()
@@ -95,5 +100,5 @@ abstract class FoundationSdk
      *
      * @return \Illuminate\Http\Client\PendingRequest
      */
-    abstract protected function buildDefaultPendingRequest(array $config): PendingRequest;
+    abstract protected function initPendingRequest(array $config): PendingRequest;
 }
