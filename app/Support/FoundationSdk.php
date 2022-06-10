@@ -6,11 +6,13 @@ use App\Traits\ValidatesData;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\VarDumper\VarDumper;
 
 abstract class FoundationSdk
 {
@@ -32,6 +34,29 @@ abstract class FoundationSdk
     {
         $this->config = $this->validateConfig($config);
         $this->pendingRequest = $this->initPendingRequest($this->config);
+    }
+
+    public function dd()
+    {
+        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+            $pendingRequest->dd();
+        });
+    }
+
+    public function dump()
+    {
+        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+            $pendingRequest->dump();
+        });
+    }
+
+    public function dumpRequestData()
+    {
+        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+            $pendingRequest->beforeSending(function (Request $request, array $options) {
+                VarDumper::dump($options['laravel_data']);
+            });
+        });
     }
 
     /**
