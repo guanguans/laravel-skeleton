@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -56,6 +57,15 @@ abstract class FoundationSdk
             $pendingRequest->beforeSending(function (Request $request, array $options) {
                 VarDumper::dump($options['laravel_data']);
             });
+        });
+    }
+
+    public function withLogMiddleware(LoggerInterface $logger = null, $formatter = null, string $logLevel = 'info')
+    {
+        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger) {
+            $logger or $logger = Log::channel('daily');
+            $formatter or $formatter = (new MessageFormatter(MessageFormatter::DEBUG));
+            $pendingRequest->withMiddleware(Middleware::log($logger, $formatter, $logLevel));
         });
     }
 
