@@ -64,4 +64,31 @@ class QueryBuilderMacro
             return $this->whereRaw("FIND_IN_SET(?, $column)", $value);
         };
     }
+
+    public function orderByWith(): callable
+    {
+        return function ($relation, $column, $direction = 'asc') {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            if (is_string($relation)) {
+                $relation = $this->getRelationWithoutConstraints($relation);
+            }
+
+            return $this->orderBy(
+                $relation->getRelationExistenceQuery(
+                    $relation->getRelated()->newQueryWithoutRelationships(),
+                    $this,
+                    $column
+                ),
+                $direction
+            );
+        };
+    }
+
+    public function orderByWithDesc(): callable
+    {
+        return function ($relation, $column) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->orderByWith($relation, $column, 'desc');
+        };
+    }
 }
