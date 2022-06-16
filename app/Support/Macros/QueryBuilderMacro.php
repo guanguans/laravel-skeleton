@@ -131,4 +131,20 @@ class QueryBuilderMacro
             return $this->orWhere($column, 'not like', "%$value%");
         };
     }
+
+    public function whereStartsWith(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->where($column, 'like', "$value%");
+        };
+    }
+
+    public function orWhereStartsWith(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->orWhere($column, 'like', "$value%");
+        };
+    }
 }
