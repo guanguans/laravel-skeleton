@@ -91,4 +91,20 @@ class QueryBuilderMacro
             return $this->orderByWith($relation, $column, 'desc');
         };
     }
+
+    public function whereLike(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->where($column, 'like', "%$value%");
+        };
+    }
+
+    public function whereNotLike(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->where($column, 'not like', "%$value%");
+        };
+    }
 }
