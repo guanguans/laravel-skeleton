@@ -65,6 +65,14 @@ class QueryBuilderMacro
         };
     }
 
+    public function orWhereFindInSet(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->orWhereRaw("FIND_IN_SET(?, $column)", $value);
+        };
+    }
+
     public function orderByWith(): callable
     {
         return function ($relation, $column, $direction = 'asc') {
