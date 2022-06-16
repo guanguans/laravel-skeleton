@@ -147,4 +147,20 @@ class QueryBuilderMacro
             return $this->orWhere($column, 'like', "$value%");
         };
     }
+
+    public function whereEndsWith(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->where($column, 'like', "%$value");
+        };
+    }
+
+    public function orWhereEndsWith(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->orWhere($column, 'like', "%$value");
+        };
+    }
 }
