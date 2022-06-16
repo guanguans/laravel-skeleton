@@ -108,11 +108,27 @@ class QueryBuilderMacro
         };
     }
 
+    public function orWhereLike(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->orWhere($column, 'like', "%$value%");
+        };
+    }
+
     public function whereNotLike(): callable
     {
         return function ($column, $value) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->where($column, 'not like', "%$value%");
+        };
+    }
+
+    public function orWhereNotLike(): callable
+    {
+        return function ($column, $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->orWhere($column, 'not like', "%$value%");
         };
     }
 }
