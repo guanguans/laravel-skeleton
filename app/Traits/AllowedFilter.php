@@ -151,4 +151,22 @@ trait AllowedFilter
 
         return $query;
     }
+
+    public function scopeAllowedSort(Builder $query, string $name, $default = null, ?string $internalName = null)
+    {
+        if (request()->hasAny([$name, '-' . $name]) || $default !== null) {
+            $column = $internalName ?: $name;
+            if (request()->has('-' . $name)) {
+                $direction = 'desc';
+            } elseif (request()->has($name)) {
+                $direction = 'asc';
+            } else {
+                $direction = $default;
+            }
+
+            $query->orderBy($query->qualifyColumn($column), $direction);
+        }
+
+        return $query;
+    }
 }
