@@ -17,23 +17,23 @@ class CallbackGetCast implements CastsAttributes
     /**
      * @var int
      */
-    protected $mainArgIndex;
+    protected $castingAttributeCallbackArgIndex;
 
     /**
      * @var array
      */
-    protected $secondaryArgs;
+    protected $remainingCallbackArgs;
 
     /**
-     * @param  string  $callback [function, class::method, class@method]
-     * @param  int  $mainArgIndex
-     * @param ...$secondaryArgs
+     * @param  string  $callback The callback(function、class::method、class@method) to be used to cast the attribute.
+     * @param  int  $castingAttributeCallbackArgIndex The index of the argument that will be the attribute being casted.
+     * @param ...$remainingCallbackArgs These are the remaining callback arguments.
      */
-    public function __construct(string $callback, int $mainArgIndex = 0, ...$secondaryArgs)
+    public function __construct(string $callback, int $castingAttributeCallbackArgIndex = 0, ...$remainingCallbackArgs)
     {
         $this->callback = $this->resolveCallback($callback);
-        $this->mainArgIndex = $mainArgIndex;
-        $this->secondaryArgs = $secondaryArgs;
+        $this->castingAttributeCallbackArgIndex = $castingAttributeCallbackArgIndex;
+        $this->remainingCallbackArgs = $remainingCallbackArgs;
     }
 
     /**
@@ -61,9 +61,9 @@ class CallbackGetCast implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        array_splice($this->secondaryArgs, $this->mainArgIndex, 0, $value);
+        array_splice($this->remainingCallbackArgs, $this->castingAttributeCallbackArgIndex, 0, $value);
 
-        return call_user_func($this->callback, ...$this->secondaryArgs);
+        return call_user_func($this->callback, ...$this->remainingCallbackArgs);
     }
 
     /**
@@ -82,6 +82,7 @@ class CallbackGetCast implements CastsAttributes
             throw new InvalidArgumentException("Invalid callback: $callback");
         }
 
+        /* @var array $segments */
         $segments = explode('@', $callback);
         if (is_callable($segments)) {
             return $segments;
@@ -94,7 +95,7 @@ class CallbackGetCast implements CastsAttributes
         try {
             return [resolve($segments[0]), $segments[1]];
         } catch (Throwable $e) {
-            throw new InvalidArgumentException("Invalid callback: $callback");
+            throw new InvalidArgumentException("Invalid callback: $callback({$e->getMessage()})");
         }
     }
 }
