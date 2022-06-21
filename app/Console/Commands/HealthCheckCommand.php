@@ -52,6 +52,9 @@ class HealthCheckCommand extends Command
             ->filter(function (ReflectionMethod $method) {
                 return Str::of($method->name)->startsWith('check');
             })
+            ->sortBy(function (ReflectionMethod $method) {
+                return $method->name;
+            })
             ->pipe(function (Collection $methods) {
                 $this->withProgressBar($methods, function ($method) use (&$checks) {
                     /* @var HealthCheckStateEnum $state */
