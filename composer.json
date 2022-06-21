@@ -47,6 +47,7 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "nunomaduro/larastan": "^1.0",
         "phpunit/phpunit": "^9.3.3",
         "stechstudio/laravel-php-cs-fixer": "^3.0"
     },
@@ -89,8 +90,14 @@
         "cghooks": "./vendor/bin/cghooks",
         "check-style": "@php artisan fixer:fix --diff --dry-run --ansi",
         "fix-style": "@php artisan fixer:fix --ansi",
-        "docs-generate": "@php artisan scribe:generate --ansi"
+        "docs-generate": "@php artisan scribe:generate --ansi",
+        "phpstan": [
+            "./vendor/bin/phpstan analyse"
+          ]
     },
+    "scripts-descriptions": {
+        "phpstan": "Run PHPStan static analysis against your application."
+      },
     "extra": {
         "laravel": {
             "dont-discover": [
