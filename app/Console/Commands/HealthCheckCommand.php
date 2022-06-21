@@ -59,7 +59,7 @@ class HealthCheckCommand extends Command
 
                     $checks[] = [
                         'index' => count((array)$checks) + 1,
-                        'resource' => Str::of($method->name)->replaceFirst('check', '')->__toString(),
+                        'resource' => Str::of($method->name)->replaceFirst('check', ''),
                         'state' => $state->value,
                         'message' => $state->description,
                     ];
@@ -67,6 +67,26 @@ class HealthCheckCommand extends Command
 
                 $this->newLine();
                 $this->table(['Index', 'Resource', 'State', 'Message'], $checks);
+
+                return collect($checks);
+            })
+            ->tap(function (Collection $checks) {
+                $checks
+                    ->filter(function ($check) {
+                        return $check['state'] !== HealthCheckStateEnum::OK;
+                    })
+                    ->whenNotEmpty(function (Collection $notOkChecks) {
+                        // event(new HealthCheckFailed($notOkChecks));
+                        $this->error('Health check failed.');
+
+                        return $notOkChecks;
+                    })
+                    ->whenEmpty(function (Collection $okChecks) {
+                        // event(new HealthCheckPassed());
+                        $this->info('Health check passed.');
+
+                        return $okChecks;
+                    });
             });
 
         return 0;
