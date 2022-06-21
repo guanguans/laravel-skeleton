@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use ReflectionMethod;
 use ReflectionObject;
 use Throwable;
@@ -32,6 +33,13 @@ class HealthCheckCommand extends Command
     protected $description = 'Health check.';
 
     /**
+     * @var array
+     */
+    protected $except = [
+        '*Queue'
+    ];
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -50,7 +58,9 @@ class HealthCheckCommand extends Command
     {
         collect((new ReflectionObject($this))->getMethods(ReflectionMethod::IS_PROTECTED | ReflectionMethod::IS_PRIVATE))
             ->filter(function (ReflectionMethod $method) {
-                return Str::of($method->name)->startsWith('check');
+                return (bool)(string)Str::of($method->name)->pipe(function (Stringable $name) {
+                    return $name->startsWith('check') && ! $name->is($this->except);
+                });
             })
             ->sortBy(function (ReflectionMethod $method) {
                 return $method->name;
@@ -63,7 +73,7 @@ class HealthCheckCommand extends Command
                     $checks[] = [
                         'index' => count((array)$checks) + 1,
                         'resource' => Str::of($method->name)->replaceFirst('check', ''),
-                        'state' => $state->value,
+                        'state' => $state,
                         'message' => $state->description,
                     ];
                 });
@@ -76,7 +86,7 @@ class HealthCheckCommand extends Command
             ->tap(function (Collection $checks) {
                 $checks
                     ->filter(function ($check) {
-                        return $check['state'] !== HealthCheckStateEnum::OK;
+                        return $check['state']->isNot(HealthCheckStateEnum::OK);
                     })
                     ->whenNotEmpty(function (Collection $notOkChecks) {
                         // event(new HealthCheckFailed($notOkChecks));
@@ -84,11 +94,11 @@ class HealthCheckCommand extends Command
 
                         return $notOkChecks;
                     })
-                    ->whenEmpty(function (Collection $okChecks) {
+                    ->whenEmpty(function (Collection $notOkChecks) {
                         // event(new HealthCheckPassed());
                         $this->info('Health check passed.');
 
-                        return $okChecks;
+                        return $notOkChecks;
                     });
             });
 
