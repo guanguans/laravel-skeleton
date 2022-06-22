@@ -1,11 +1,14 @@
 {
     "name": "laravel/laravel",
-    "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "type": "project",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.3 || ^8.0",
         "ext-json": "*",
         "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^4.0",
@@ -51,6 +54,8 @@
         "phpunit/phpunit": "^9.3.3",
         "stechstudio/laravel-php-cs-fixer": "^3.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "App\\": "app/",
@@ -66,10 +71,33 @@
             "Tests\\": "tests/"
         }
     },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "hooks": {
+            "post-merge": [
+                "composer docs-generate",
+                "composer style-lint"
+            ],
+            "pre-commit": [
+                "composer docs-generate",
+                "composer style-lint"
+            ]
+        },
+        "laravel": {
+            "dont-discover": [
+                "barryvdh/laravel-ide-helper",
+                "nunomaduro/collision"
+            ]
+        }
+    },
     "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+        "post-install-cmd": [
+            "cghooks add --ignore-lock",
+            "cghooks update"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi",
@@ -77,50 +105,20 @@
             "@php artisan ide-helper:meta",
             "cghooks update"
         ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "post-install-cmd": [
-            "cghooks add --ignore-lock",
-            "cghooks update"
-        ],
         "cghooks": "./vendor/bin/cghooks",
-        "check-style": "@php artisan fixer:fix --diff --dry-run --ansi",
-        "fix-style": "@php artisan fixer:fix --ansi",
         "docs-generate": "@php artisan scribe:generate --ansi",
-        "phpstan": [
-            "./vendor/bin/phpstan analyse"
-          ]
-    },
-    "scripts-descriptions": {
-        "phpstan": "Run PHPStan static analysis against your application."
-      },
-    "extra": {
-        "laravel": {
-            "dont-discover": [
-                "barryvdh/laravel-ide-helper",
-                "nunomaduro/collision"
-            ]
-        },
-        "hooks": {
-            "pre-commit": [
-                "composer docs-generate",
-                "composer check-style"
-            ],
-            "post-merge": [
-                "composer docs-generate",
-                "composer check-style"
-            ]
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+        "phpstan": "./vendor/bin/phpstan analyse --memory-limit=2G --ansi",
+        "style-fix": "@php artisan fixer:fix --ansi",
+        "style-lint": "@php artisan fixer:fix --diff --dry-run --ansi"
+    }
 }
