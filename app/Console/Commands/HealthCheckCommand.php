@@ -89,13 +89,13 @@ class HealthCheckCommand extends Command
                         return $check['state']->isNot(HealthCheckStateEnum::OK);
                     })
                     ->whenNotEmpty(function (Collection $notOkChecks) {
-                        // event(new HealthCheckFailed($notOkChecks));
+                        // event(new HealthCheckFailedEvent($notOkChecks));
                         $this->error('Health check failed.');
 
                         return $notOkChecks;
                     })
                     ->whenEmpty(function (Collection $notOkChecks) {
-                        // event(new HealthCheckPassed());
+                        // event(new HealthCheckPassedEvent());
                         $this->info('Health check passed.');
 
                         return $notOkChecks;
