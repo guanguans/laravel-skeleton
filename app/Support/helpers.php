@@ -103,8 +103,8 @@ if (! function_exists('wrap_query_log')) {
     }
 }
 
-if (! function_exists('dumpa')) {
-    function dumpa(...$vars)
+if (! function_exists('dump_to_array')) {
+    function dump_to_array(...$vars)
     {
         foreach ($vars as $var) {
             ($var instanceof Arrayable or method_exists($var, 'toArray')) ? dump($var->toArray()) : dump($var);
@@ -112,10 +112,10 @@ if (! function_exists('dumpa')) {
     }
 }
 
-if (! function_exists('dda')) {
-    function dda(...$vars)
+if (! function_exists('dd_to_array')) {
+    function dd_to_array(...$vars)
     {
-        dumpa(...$vars);
+        dump_to_array(...$vars);
         exit(1);
     }
 }
