@@ -47,6 +47,7 @@
         "deployer/deployer": "^6.8",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "lanin/laravel-api-debugger": "^4.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
@@ -90,6 +91,7 @@
         "laravel": {
             "dont-discover": [
                 "barryvdh/laravel-ide-helper",
+                "lanin/laravel-api-debugger",
                 "nunomaduro/collision"
             ]
         }

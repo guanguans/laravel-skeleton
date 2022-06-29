@@ -120,8 +120,9 @@ class AppServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
+        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
     }
 
     /**
