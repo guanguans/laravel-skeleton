@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
-use Illuminate\Support\Stringable;
 use ReflectionMethod;
 use ReflectionObject;
 use Throwable;
@@ -58,9 +57,10 @@ class HealthCheckCommand extends Command
     {
         collect((new ReflectionObject($this))->getMethods(ReflectionMethod::IS_PROTECTED | ReflectionMethod::IS_PRIVATE))
             ->filter(function (ReflectionMethod $method) {
-                return (bool)(string)Str::of($method->name)->pipe(function (Stringable $name) {
-                    return $name->startsWith('check') && ! $name->is($this->except);
-                });
+                return Str::of($method->name)->startsWith('check');
+            })
+            ->reject(function (ReflectionMethod $method) {
+                return Str::of($method->name)->is($this->except);
             })
             ->sortBy(function (ReflectionMethod $method) {
                 return $method->name;
