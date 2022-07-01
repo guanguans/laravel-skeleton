@@ -100,4 +100,30 @@ class RequestMacro
             }
         };
     }
+
+    public function whenRouteIs(): callable
+    {
+        /** @var string|string[] $patterns */
+        return function ($patterns, callable $callback) {
+            /** @var \Illuminate\Http\Request $this */
+            if ($value = $this->routeIs($patterns)) {
+                return $callback($this, $value) ?: $this;
+            }
+
+            return $this;
+        };
+    }
+
+    public function whenIs(): callable
+    {
+        /** @var string|string[] $patterns */
+        return function ($patterns, callable $callback) {
+            /** @var \Illuminate\Http\Request $this */
+            if ($value = $this->is($patterns)) {
+                return $callback($this, $value) ?: $this;
+            }
+
+            return $this;
+        };
+    }
 }
