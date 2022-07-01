@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Auth\IndexRequest;
+use App\Http\Requests\Auth\AuthRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Mail\UserRegisteredMail;
@@ -42,13 +42,14 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function register(Request $request)
+    public function register(AuthRequest $request)
     {
-        $validated = $request->validateStrictAll([
-            'email' => 'required|email|unique:App\Models\JWTUser,email',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required|same:password',
-        ]);
+        // $validated = $request->validateStrictAll([
+        //     'email' => 'required|email|unique:App\Models\JWTUser,email',
+        //     'password' => 'required|string|min:8|confirmed',
+        //     'password_confirmation' => 'required|same:password',
+        // ]);
+        $validated = $request->validated();
 
         $validated['name'] = app(Generator::class)->name;
         $validated['password'] = Hash::make($validated['password']);
@@ -87,12 +88,13 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function login(Request $request)
+    public function login(AuthRequest $request)
     {
-        $credentials = $request->validateStrictAll([
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
+        // $credentials = $request->validateStrictAll([
+        //     'email' => 'required|email',
+        //     'password' => 'required|string',
+        // ]);
+        $credentials = $request->validated();
 
         if (! $token = auth()->attempt($credentials)) {
             return $this->fail('邮箱或者密码错误');
@@ -201,7 +203,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function index(IndexRequest $request)
+    public function index(AuthRequest $request)
     {
         $validatedParameters = $request->validated();
 
