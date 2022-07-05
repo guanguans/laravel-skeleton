@@ -181,7 +181,14 @@ class QueryBuilderMacro
                 }
 
                 return array_reduce($columns, function ($sortedValue, $column) use ($value) {
-                    $sortedValue[$column] = $value[$column];
+                    $sortedValue[$column] = $value[$column] ?? trigger_error(
+                        sprintf(
+                            '%s: %s',
+                            'The value of the column is not found in the array.',
+                            $column
+                        ),
+                        E_USER_ERROR
+                    );
 
                     return $sortedValue;
                 }, []);
