@@ -175,6 +175,18 @@ class QueryBuilderMacro
             $rawColumns = implode(',', $columns);
 
             $values instanceof Arrayable and $values = $values->toArray();
+            $values = array_map(function ($value) use ($columns) {
+                if (array_is_list($value)) {
+                    return $value;
+                }
+
+                return array_reduce($columns, function ($sortedValue, $column) use ($value) {
+                    $sortedValue[$column] = $value[$column];
+
+                    return $sortedValue;
+                }, []);
+            }, $values);
+
             $rawValue = sprintf('(%s)', implode(',', array_fill(0, count($values), '?')));
             $rawValues = implode(',', array_fill(0, count($columns), $rawValue));
 
