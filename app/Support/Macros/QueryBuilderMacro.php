@@ -125,33 +125,32 @@ class QueryBuilderMacro
 
     public function whereLike(): callable
     {
-        return function ($column, $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->where($column, 'like', "%$value%");
-        };
-    }
+        return function ($column, string $value, string $boolean = 'and', bool $not = false) {
+            $type = $not ? 'not like' : 'like';
 
-    public function orWhereLike(): callable
-    {
-        return function ($column, $value) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->orWhere($column, 'like', "%$value%");
+            return $this->where($column, $type, "%$value%", $boolean);
         };
     }
 
     public function whereNotLike(): callable
     {
-        return function ($column, $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->where($column, 'not like', "%$value%");
+        return function ($column, string $value) {
+            return $this->whereLike($column, $value, 'and', true);
+        };
+    }
+
+    public function orWhereLike(): callable
+    {
+        return function ($column, string $value) {
+            return $this->whereLike($column, $value, 'or');
         };
     }
 
     public function orWhereNotLike(): callable
     {
-        return function ($column, $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->orWhere($column, 'not like', "%$value%");
+        return function ($column, string $value) {
+            return $this->whereLike($column, $value, 'or', true);
         };
     }
 
