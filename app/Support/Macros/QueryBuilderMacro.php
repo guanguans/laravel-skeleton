@@ -187,17 +187,32 @@ class QueryBuilderMacro
 
     public function whereEndsWith(): callable
     {
-        return function ($column, $value) {
+        return function ($column, string $value, string $boolean = 'and', bool $not = false) {
+            $type = $not ? 'not like' : 'like';
+
             /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->where($column, 'like', "%$value");
         };
     }
 
+    public function whereNotEndsWith(): callable
+    {
+        return function ($column, string $value) {
+            return $this->whereEndsWith($column, $value, 'and', true);
+        };
+    }
+
     public function orWhereEndsWith(): callable
     {
-        return function ($column, $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->orWhere($column, 'like', "%$value");
+        return function ($column, string $value) {
+            return $this->whereEndsWith($column, $value, 'or');
+        };
+    }
+
+    public function orWhereNotEndsWith(): callable
+    {
+        return function ($column, string $value) {
+            return $this->whereEndsWith($column, $value, 'or', true);
         };
     }
 
