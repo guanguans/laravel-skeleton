@@ -156,17 +156,32 @@ class QueryBuilderMacro
 
     public function whereStartsWith(): callable
     {
-        return function ($column, $value) {
+        return function ($column, string $value, string $boolean = 'and', bool $not = false) {
+            $type = $not ? 'not like' : 'like';
+
             /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->where($column, 'like', "$value%");
+            return $this->where($column, $type, "$value%");
+        };
+    }
+
+    public function whereNotStartsWith(): callable
+    {
+        return function ($column, string $value) {
+            return $this->whereStartsWith($column, $value, 'and', true);
         };
     }
 
     public function orWhereStartsWith(): callable
     {
-        return function ($column, $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->orWhere($column, 'like', "$value%");
+        return function ($column, string $value) {
+            return $this->whereStartsWith($column, $value, 'or');
+        };
+    }
+
+    public function orWhereNotStartsWith(): callable
+    {
+        return function ($column, string $value) {
+            return $this->whereStartsWith($column, $value, 'or', true);
         };
     }
 
