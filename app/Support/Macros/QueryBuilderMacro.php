@@ -241,8 +241,8 @@ class QueryBuilderMacro
                 }, []);
             }, $values);
 
-            $rawValue = sprintf('(%s)', implode(',', array_fill(0, count($values), '?')));
-            $rawValues = implode(',', array_fill(0, count($columns), $rawValue));
+            $rawValue = sprintf('(%s)', implode(',', array_fill(0, count($columns), '?')));
+            $rawValues = implode(',', array_fill(0, count($values), $rawValue));
 
             $raw = "($rawColumns) $type ($rawValues)";
 
