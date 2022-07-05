@@ -2,6 +2,7 @@
 
 namespace App\Support\Macros;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -161,6 +162,49 @@ class QueryBuilderMacro
         return function ($column, $value) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->orWhere($column, 'like', "%$value");
+        };
+    }
+
+    public function whereIns(): callable
+    {
+        /* @var Arrayable|array[] $values */
+        return function (array $columns, $values, string $boolean = 'and', bool $not = false) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            $type = $not ? 'not in' : 'in';
+
+            $rawColumns = implode(',', $columns);
+
+            $values instanceof Arrayable and $values = $values->toArray();
+            $rawValue = sprintf('(%s)', implode(',', array_fill(0, count($values), '?')));
+            $rawValues = implode(',', array_fill(0, count($columns), $rawValue));
+
+            $raw = "($rawColumns) $type ($rawValues)";
+
+            return $this->whereRaw($raw, $values, $boolean);
+        };
+    }
+
+    public function whereNotIns(): callable
+    {
+        return function (array $columns, $values) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->whereIns($columns, $values, 'and', true);
+        };
+    }
+
+    public function orWhereIns(): callable
+    {
+        return function (array $columns, $values) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->whereIns($columns, $values, 'or');
+        };
+    }
+
+    public function orWhereNotIns(): callable
+    {
+        return function (array $columns, $values) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->whereIns($columns, $values, 'or', true);
         };
     }
 }
