@@ -60,17 +60,39 @@ class QueryBuilderMacro
 
     public function whereFindInSet(): callable
     {
-        return function ($column, $value) {
+        /* @var string|Arrayable|string[] $values */
+        return function (string $column, $values, string $boolean = 'and', bool $not = false) {
+            $type = $not ? "not find_in_set(?, $column)" : "find_in_set(?, $column)";
+
+            $values instanceof Arrayable and $values = $values->toArray();
+            is_array($values) and $values = implode(',', $values);
+
             /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereRaw("FIND_IN_SET(?, $column)", $value);
+            return $this->whereRaw($type, $values, $boolean);
+        };
+    }
+
+    public function whereNotFindInSet(): callable
+    {
+        /* @var string|Arrayable|string[] $values */
+        return function (string $column, $values) {
+            return $this->whereFindInSet($column, $values, 'and', true);
         };
     }
 
     public function orWhereFindInSet(): callable
     {
-        return function ($column, $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->orWhereRaw("FIND_IN_SET(?, $column)", $value);
+        /* @var string|Arrayable|string[] $values */
+        return function (string $column, $values) {
+            return $this->whereFindInSet($column, $values, 'or');
+        };
+    }
+
+    public function orWhereNotFindInSet(): callable
+    {
+        /* @var string|Arrayable|string[] $values */
+        return function (string $column, $values) {
+            return $this->whereFindInSet($column, $values, 'or', true);
         };
     }
 
