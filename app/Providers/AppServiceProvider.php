@@ -55,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // $this->registerGlobalFunctions();
         $this->registerNotProductionServices();
     }
 
@@ -108,6 +109,14 @@ class AppServiceProvider extends ServiceProvider
             }
 
             Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
+        }
+    }
+
+    protected function registerGlobalFunctions()
+    {
+        $files = glob($this->app->path('Support/*helpers.php'));
+        foreach ($files as $file) {
+            require_once $file;
         }
     }
 
