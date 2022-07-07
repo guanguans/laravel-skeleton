@@ -19,6 +19,11 @@ abstract class Signer
     {
         $sortedPayload = $this->sort($payload);
 
-        return urldecode(http_build_query($sortedPayload));
+        $preEncryptedData = '';
+        foreach ($sortedPayload as $key => $val) {
+            $preEncryptedData .= "&$key=$val";
+        }
+
+        return substr($preEncryptedData, 1);
     }
 }
