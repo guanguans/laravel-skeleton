@@ -7,22 +7,17 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 if (! function_exists('user_http_build_query')) {
+}
+
+if (! function_exists('validate')) {
     /**
      * http_build_query 的实现。
      *
      * ```
      * $queryPayload = [
-     *     'user' => [
-     *         'name' => 'Bob Smith',
-     *         'age' => 47,
-     *         'sex' => 'M',
-     *         'dob' => '5/12/1956'
-     *     ],
-     *     'pastimes' => ['golf', 'opera', 'poker', 'rap'],
-     *     'children' => [
-     *         'sally' => ['age' => 8, 'sex' => null],
-     *         'bobby' => ['sex' => 'M', 'age' => 12],
-     *     ],
+     *     1 => 'a',
+     *     '10' => 'b',
+     *     '01' => 'c',
      *     'keyO1' => null,
      *     'keyO2' => false,
      *     'keyO3' => true,
@@ -33,6 +28,17 @@ if (! function_exists('user_http_build_query')) {
      *     'keyO8' => [],
      *     'keyO9' => '',
      *     'key10' => new \stdClass(),
+     *     'pastimes' => ['golf', 'opera', 'poker', 'rap'],
+     *     'user' => [
+     *         'name' => 'Bob Smith',
+     *         'age' => 47,
+     *         'sex' => 'M',
+     *         'dob' => '5/12/1956'
+     *     ],
+     *     'children' => [
+     *         'sally' => ['age' => 8, 'sex' => null],
+     *         'bobby' => ['sex' => 'M', 'age' => 12],
+     *     ],
      * ];
      * ```
      *
@@ -83,7 +89,7 @@ if (! function_exists('user_http_build_query')) {
             }
 
             // 为了对数据进行解码时获取合法的变量名
-            if (is_numeric($k)) {
+            if (is_numeric($k) && ! is_string($k)) {
                 $k = $numericPrefix . $k;
             }
 
@@ -94,9 +100,6 @@ if (! function_exists('user_http_build_query')) {
 
         return substr($queryStr, 0, -strlen($argSeparator));
     }
-}
-
-if (! function_exists('validate')) {
     /**
      * @param  array  $data
      * @param  array  $rules
