@@ -7,9 +7,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 if (! function_exists('user_http_build_query')) {
-}
-
-if (! function_exists('validate')) {
     /**
      * http_build_query 的实现。
      *
@@ -100,6 +97,9 @@ if (! function_exists('validate')) {
 
         return substr($queryStr, 0, -strlen($argSeparator));
     }
+}
+
+if (! function_exists('validate')) {
     /**
      * @param  array  $data
      * @param  array  $rules
