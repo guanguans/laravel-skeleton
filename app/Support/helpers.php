@@ -41,7 +41,7 @@ if (! function_exists('user_http_build_query')) {
      *
      * @return string
      */
-    function user_http_build_query(array $queryPayload, bool $isUrlencoded = true): string
+    function user_http_build_query(array $queryPayload, string $numericPrefix = '', string $argSeparator = '&', int $encType = PHP_QUERY_RFC1738): string
     {
         /**
          * 转换值是非标量的情况
@@ -51,7 +51,7 @@ if (! function_exists('user_http_build_query')) {
          *
          * @return string
          */
-        $toQueryStr = static function (string $key, $value, bool $isUrlencoded) use (&$toQueryStr): string {
+        $toQueryStr = static function (string $key, $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
             $queryStr = '';
             foreach ($value as $k => $v) {
                 // 特殊值处理
@@ -64,8 +64,8 @@ if (! function_exists('user_http_build_query')) {
 
                 $fullKey = "{$key}[{$k}]";
                 $queryStr .= is_scalar($v)
-                    ? sprintf("%s=%s&", $isUrlencoded ? urlencode($fullKey) : $fullKey, $isUrlencoded ? urlencode($v) : $v)
-                    : $toQueryStr($fullKey, $v, $isUrlencoded);
+                    ? sprintf("%s=%s$argSeparator", $encType === PHP_QUERY_RFC3986 ? rawurlencode($fullKey) : urlencode($fullKey), $encType === PHP_QUERY_RFC3986 ? rawurlencode($v) : urlencode($v))
+                    : $toQueryStr($fullKey, $v, $argSeparator, $encType); // 递归调用
             }
 
             return $queryStr;
@@ -82,12 +82,17 @@ if (! function_exists('user_http_build_query')) {
                 $v = '0';
             }
 
+            // 为了对数据进行解码时获取合法的变量名
+            if (is_numeric($k)) {
+                $k = $numericPrefix . $k;
+            }
+
             $queryStr .= is_scalar($v)
-                ? sprintf("%s=%s&", $isUrlencoded ? urlencode($k) : $k, $isUrlencoded ? urlencode($v) : $v)
-                : $toQueryStr($k, $v, $isUrlencoded);
+                ? sprintf("%s=%s$argSeparator", $encType === PHP_QUERY_RFC3986 ? rawurlencode($k) : urlencode($k), $encType === PHP_QUERY_RFC3986 ? rawurlencode($v) : urlencode($v))
+                : $toQueryStr($k, $v, $argSeparator, $encType);
         }
 
-        return substr($queryStr, 0, -1);
+        return substr($queryStr, 0, -strlen($argSeparator));
     }
 }
 
