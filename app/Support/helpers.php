@@ -6,6 +6,91 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('user_http_build_query')) {
+    /**
+     * http_build_query 的实现。
+     *
+     * ```
+     * $queryPayload = [
+     *     'user' => [
+     *         'name' => 'Bob Smith',
+     *         'age' => 47,
+     *         'sex' => 'M',
+     *         'dob' => '5/12/1956'
+     *     ],
+     *     'pastimes' => ['golf', 'opera', 'poker', 'rap'],
+     *     'children' => [
+     *         'sally' => ['age' => 8, 'sex' => null],
+     *         'bobby' => ['sex' => 'M', 'age' => 12],
+     *     ],
+     *     'keyO1' => null,
+     *     'keyO2' => false,
+     *     'keyO3' => true,
+     *     'keyO4' => 0,
+     *     'keyO5' => 1,
+     *     'keyO6' => 0.0,
+     *     'keyO7' => 0.1,
+     *     'keyO8' => [],
+     *     'keyO9' => '',
+     *     'key10' => new \stdClass(),
+     * ];
+     * ```
+     *
+     * @param  array  $queryPayload
+     * @param  bool  $isUrlencoded
+     *
+     * @return string
+     */
+    function user_http_build_query(array $queryPayload, bool $isUrlencoded = true): string
+    {
+        /**
+         * 转换值是非标量的情况
+         *
+         * @param  string  $key
+         * @param array|object $value
+         *
+         * @return string
+         */
+        $toQueryStr = static function (string $key, $value, bool $isUrlencoded) use (&$toQueryStr): string {
+            $queryStr = '';
+            foreach ($value as $k => $v) {
+                // 特殊值处理
+                if ($v === null) {
+                    continue;
+                }
+                if ($v === 0 || $v === false) {
+                    $v = '0';
+                }
+
+                $fullKey = "{$key}[{$k}]";
+                $queryStr .= is_scalar($v)
+                    ? sprintf("%s=%s&", $isUrlencoded ? urlencode($fullKey) : $fullKey, $isUrlencoded ? urlencode($v) : $v)
+                    : $toQueryStr($fullKey, $v, $isUrlencoded);
+            }
+
+            return $queryStr;
+        };
+
+        reset($queryPayload);
+        $queryStr = '';
+        foreach ($queryPayload as $k => $v) {
+            // 特殊值处理
+            if ($v === null) {
+                continue;
+            }
+            if ($v === 0 || $v === false) {
+                $v = '0';
+            }
+
+            $queryStr .= is_scalar($v)
+                ? sprintf("%s=%s&", $isUrlencoded ? urlencode($k) : $k, $isUrlencoded ? urlencode($v) : $v)
+                : $toQueryStr($k, $v, $isUrlencoded);
+        }
+
+        return substr($queryStr, 0, -1);
+    }
+}
+
 if (! function_exists('validate')) {
     /**
      * @param  array  $data
