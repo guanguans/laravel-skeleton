@@ -12,6 +12,10 @@ abstract class Signer
     {
         ksort($payload);
 
+        foreach ($payload as &$item) {
+            is_array($item) and $item = $this->sort($item);
+        }
+
         return $payload;
     }
 
@@ -19,11 +23,6 @@ abstract class Signer
     {
         $sortedPayload = $this->sort($payload);
 
-        $preEncryptedData = '';
-        foreach ($sortedPayload as $key => $val) {
-            $preEncryptedData .= "&$key=$val";
-        }
-
-        return substr($preEncryptedData, 1);
+        return http_build_query($sortedPayload);
     }
 }
