@@ -40,7 +40,9 @@ if (! function_exists('user_http_build_query')) {
      * ```
      *
      * @param  array  $queryPayload
-     * @param  bool  $isUrlencoded
+     * @param  string  $numericPrefix
+     * @param  string  $argSeparator
+     * @param  int  $encType
      *
      * @return string
      */
@@ -50,7 +52,9 @@ if (! function_exists('user_http_build_query')) {
          * 转换值是非标量的情况
          *
          * @param  string  $key
-         * @param array|object $value
+         * @param  array|object $value
+         * @param  string  $argSeparator
+         * @param  int  $encType
          *
          * @return string
          */
