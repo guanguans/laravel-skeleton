@@ -3,7 +3,6 @@
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Throwable;
 
@@ -76,10 +75,6 @@ class CallbackGetCast implements CastsAttributes
     {
         if (is_callable($callback)) {
             return $callback;
-        }
-
-        if (! Str::contains($callback, '@')) {
-            throw new InvalidArgumentException("Invalid callback: $callback");
         }
 
         /* @var array $segments */
