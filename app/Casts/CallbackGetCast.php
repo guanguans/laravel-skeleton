@@ -66,9 +66,11 @@ class CallbackGetCast implements CastsAttributes
     }
 
     /**
-     * @param  string  $callback
+     * It takes a string and returns a callable
      *
-     * @return callable
+     * @param  string  $callback The callback to be executed.
+     *
+     * @return callable A callable.
      * @throws \InvalidArgumentException
      */
     protected function resolveCallback(string $callback): callable
