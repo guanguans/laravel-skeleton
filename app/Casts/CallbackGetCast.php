@@ -83,7 +83,7 @@ class CallbackGetCast implements CastsAttributes
         }
 
         /* @var array $segments */
-        $segments = explode('@', $callback);
+        $segments = explode('@', $callback, 2);
         if (is_callable($segments)) {
             return $segments;
         }
