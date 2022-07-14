@@ -2,6 +2,9 @@
 
 namespace App\Support\Macros;
 
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Fluent;
+
 class BlueprintMacro
 {
     /**
@@ -21,6 +24,28 @@ class BlueprintMacro
         return function ($comment) {
             /* @var \Illuminate\Database\Schema\Blueprint $this */
             return $this->addCommand('tableComment', compact('comment'));
+        };
+    }
+
+    public function hasIndex(): callable
+    {
+        return  function (string $index): bool {
+            $schemaManager = Schema::getConnection()->getDoctrineSchemaManager();
+
+            /** @var \Illuminate\Database\Schema\Blueprint $this */
+            return $schemaManager->listTableDetails($this->getTable())->hasIndex($index);
+        };
+    }
+
+    public function dropIndexIfExists(): callable
+    {
+        return function (string $index): Fluent {
+            /** @var \Illuminate\Database\Schema\Blueprint $this */
+            if ($this->hasIndex($index)) {
+                return $this->dropIndex($index);
+            }
+
+            return new Fluent();
         };
     }
 }
