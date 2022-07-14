@@ -6,6 +6,17 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('format_bytes')) {
+    function format_bytes(float $size, int $precision = 2): string
+    {
+        $base = log($size, 1024);
+
+        $suffixes = ['', 'K', 'M', 'G', 'T'];
+
+        return round(1024 ** ($base - floor($base)), $precision) . ' ' . $suffixes[(int)floor($base)];
+    }
+}
+
 if (! function_exists('user_http_build_query')) {
     /**
      * http_build_query 的实现。
