@@ -175,14 +175,14 @@ if (! function_exists('stopwatch')) {
     }
 }
 
-if (! function_exists('wrap_query_log')) {
+if (! function_exists('rercord_query_log')) {
     /**
      * @param callable|string $callback
      * @param ...$parameter
      *
      * @return array
      */
-    function wrap_query_log($callback, ...$parameter)
+    function rercord_query_log($callback, ...$parameter)
     {
         return (new Pipeline())
             ->send($callback)
