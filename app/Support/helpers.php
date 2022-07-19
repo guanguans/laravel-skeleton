@@ -7,7 +7,14 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 if (! function_exists('is_json')) {
-    function is_json(string $str)
+    /**
+     * If the string is valid JSON, return true, otherwise return false
+     *
+     * @param string $str The string to check.
+     *
+     * @return bool The function is_json() is returning a boolean value.
+     */
+    function is_json(string $str): bool
     {
         json_decode($str);
 
