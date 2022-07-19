@@ -6,14 +6,12 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
-if (! function_exists('format_bytes')) {
-    function format_bytes(float $size, int $precision = 2): string
+if (! function_exists('is_json')) {
+    function is_json(string $str)
     {
-        $base = log($size, 1024);
+        json_decode($str);
 
-        $suffixes = ['', 'K', 'M', 'G', 'T'];
-
-        return round(1024 ** ($base - floor($base)), $precision) . ' ' . $suffixes[(int)floor($base)];
+        return json_last_error() === JSON_ERROR_NONE;
     }
 }
 
