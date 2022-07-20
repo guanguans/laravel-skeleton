@@ -179,6 +179,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('config', $this->app->make('config'));
         });
 
+        $this->app->make('view')->creator('*', function ($view) {
+            $view->with('request', $this->app->make(Request::class));
+        });
+
         $this->app->make('view')->share('request', $this->app->make(Request::class));
         $this->app->make('view')->share('user', $this->app->make('auth')->user());
         $this->app->make('view')->share('config', $this->app->make('config'));
