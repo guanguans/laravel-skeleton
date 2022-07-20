@@ -75,6 +75,7 @@ class AppServiceProvider extends ServiceProvider
         $this->bootProduction();
         $this->registerMacros();
         $this->extendValidators($this->app->path('Rules'));
+        // $this->extendView();
     }
 
     /**
@@ -162,5 +163,24 @@ class AppServiceProvider extends ServiceProvider
         // URL::forceScheme('https');
         // $this->app->make(Request::class)->server->set('HTTPS', 'on');
         // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
+    }
+
+    protected function extendView()
+    {
+        $this->app->make('view')->composer('*', function ($view) {
+            $view->with('request', $this->app->make(Request::class));
+        });
+
+        $this->app->make('view')->composer('*', function ($view) {
+            $view->with('user', $this->app->make('auth')->user());
+        });
+
+        $this->app->make('view')->composer('*', function ($view) {
+            $view->with('config', $this->app->make('config'));
+        });
+
+        $this->app->make('view')->share('request', $this->app->make(Request::class));
+        $this->app->make('view')->share('user', $this->app->make('auth')->user());
+        $this->app->make('view')->share('config', $this->app->make('config'));
     }
 }
