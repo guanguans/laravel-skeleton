@@ -27,9 +27,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
-use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -81,32 +81,28 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register rule.
      */
-    protected function extendValidators($dirs, $patterns = '*Rule.php')
+    protected function extendValidators($dirs, $name = '*Rule.php', $notName = ['Rule.php', 'RegexRule.php'])
     {
         $files = Finder::create()
             ->files()
-            ->name($patterns)
+            ->name($name)
+            ->notName($notName)
             ->in($dirs);
 
         foreach ($files as $file) {
-            $ruleClass = value(function (SplFileInfo $file, $basePath) {
-                $class = trim(Str::replaceFirst($basePath, '', $file->getRealPath()), DIRECTORY_SEPARATOR);
+            $ruleClass = transform($file, function (SplFileInfo $file) {
+                $class = trim(Str::replaceFirst(base_path(), '', $file->getRealPath()), DIRECTORY_SEPARATOR);
 
                 return str_replace(
                     [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
                     ['\\', app()->getNamespace()],
                     ucfirst(Str::replaceLast('.php', '', $class))
                 );
-            }, $file, base_path());
+            });
 
-            try {
-                /* @var \App\Rules\Rule $rule */
-                $rule = app($ruleClass);
-                if (! $rule instanceof Rule) {
-                    continue;
-                }
-            } catch (Throwable $e) {
-                continue;
+            /** @var \App\Rules\Rule $rule */
+            if (! ($rule = app($ruleClass)) instanceof Rule) {
+                throw new RuntimeException("$ruleClass must be an instance of App\Rules\Rule");
             }
 
             Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
