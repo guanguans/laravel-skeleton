@@ -36,7 +36,7 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
      */
     public function getName(): string
     {
-        $this->name or $this->name = Str::of(class_basename($this))->remove('Rule')->snake();
+        $this->name or $this->name = Str::of(class_basename($this))->replaceLast('Rule', '')->snake();
 
         return $this->name;
     }
