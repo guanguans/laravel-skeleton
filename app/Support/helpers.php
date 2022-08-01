@@ -6,6 +6,79 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('curry')) {
+    function curry($function)
+    {
+        $accumulator = function ($arguments) use ($function, &$accumulator) {
+            return function (...$args) use ($function, $arguments, $accumulator) {
+                $arguments = array_merge($arguments, $args);
+                $reflection = new ReflectionFunction($function);
+                $totalArguments = $reflection->getNumberOfRequiredParameters();
+
+                if ($totalArguments <= count($arguments)) {
+                    return $function(...$arguments);
+                }
+
+                return $accumulator($arguments);
+            };
+        };
+
+        return $accumulator([]);
+    }
+}
+
+if (! function_exists('compose')) {
+    function compose(...$functions)
+    {
+        return array_reduce(
+            $functions,
+            function ($carry, $function) {
+                return function ($x) use ($carry, $function) {
+                    return $function($carry($x));
+                };
+            },
+            function ($x) {
+                return $x;
+            }
+        );
+    }
+}
+
+if (! function_exists('memoize')) {
+    function memoize($function)
+    {
+        return function () use ($function) {
+            static $cache = [];
+
+            $args = func_get_args();
+            $key = serialize($args);
+            $cached = true;
+
+            if (! isset($cache[$key])) {
+                $cache[$key] = $function(...$args);
+                $cached = false;
+            }
+
+            return ['result' => $cache[$key], 'cached' => $cached];
+        };
+    }
+}
+
+if (! function_exists('once')) {
+    function once($function)
+    {
+        return function (...$args) use ($function) {
+            static $called = false;
+            if ($called) {
+                return;
+            }
+            $called = true;
+
+            return $function(...$args);
+        };
+    }
+}
+
 if (! function_exists('is_json')) {
     /**
      * If the string is valid JSON, return true, otherwise return false
