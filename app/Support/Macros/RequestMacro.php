@@ -2,8 +2,11 @@
 
 namespace App\Support\Macros;
 
+use Illuminate\Routing\Route;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 
 class RequestMacro
 {
@@ -124,6 +127,61 @@ class RequestMacro
             }
 
             return $this;
+        };
+    }
+
+    public function propertyAware(): callable
+    {
+        return function ($property, $value) {
+            /** @var \Illuminate\Http\Request $this */
+            if (! property_exists($this, $property)) {
+                throw new InvalidArgumentException('The property not exists.');
+            }
+
+            app()->has('original_properties') or app()->instance('original_properties', []);
+            app()->extend('original_properties', function ($properties) use ($property) {
+                isset($properties[$property]) or $properties[$property] = $this->{$property};
+
+                return $properties;
+            });
+
+            $this->{$property} = $value;
+
+            return $this;
+        };
+    }
+
+    public function recoverProperties(): callable
+    {
+        return function () {
+            if (! app()->has('original_properties')) {
+                return;
+            }
+
+            /** @var \Illuminate\Http\Request $this */
+            foreach (app('original_properties') as $property => $value) {
+                $this->{$property} = $value;
+            }
+        };
+    }
+
+    public function matchRoute(): callable
+    {
+        return function ($includingMethod = true) {
+            /* @var \Illuminate\Routing\RouteCollection $routeCollection */
+            $routeCollection = app(Router::class)->getRoutes();
+            /** @var \Illuminate\Http\Request $this */
+            $routes = is_null($this->method())
+                ? $routeCollection->getRoutes()
+                : Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
+            [$fallbacks, $routes] = collect($routes)->partition(function ($route) {
+                return $route->isFallback;
+            });
+
+            return $routes->merge($fallbacks)->first(function (Route $route) use ($includingMethod) {
+                /** @var \Illuminate\Http\Request $this */
+                return $route->matches($this, $includingMethod);
+            });
         };
     }
 }
