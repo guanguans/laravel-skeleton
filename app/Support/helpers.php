@@ -6,8 +6,30 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('partical')) {
+    /**
+     * 偏函数
+     * @param  callable  $function
+     * @param ...$args
+     *
+     * @return callable
+     */
+    function partical(callable $function, ...$args): callable
+    {
+        return function (...$moreArgs) use ($args, $function) {
+            return $function(...$args, ...$moreArgs);
+        };
+    }
+}
+
 if (! function_exists('curry')) {
-    function curry($function)
+    /**
+     * 柯里化函数
+     * @param  callable  $function
+     *
+     * @return callable
+     */
+    function curry(callable $function): callable
     {
         $accumulator = function ($arguments) use ($function, &$accumulator) {
             return function (...$args) use ($function, $arguments, $accumulator) {
@@ -28,11 +50,17 @@ if (! function_exists('curry')) {
 }
 
 if (! function_exists('compose')) {
-    function compose(...$functions)
+    /**
+     * 合成函数
+     * @param  callable  ...$functions
+     *
+     * @return callable
+     */
+    function compose(callable ...$functions): callable
     {
         return array_reduce(
             $functions,
-            function ($carry, $function) {
+            function (callable $carry, callable $function) {
                 return function ($x) use ($carry, $function) {
                     return $function($carry($x));
                 };
@@ -45,7 +73,12 @@ if (! function_exists('compose')) {
 }
 
 if (! function_exists('memoize')) {
-    function memoize($function)
+    /**
+     * @param  callable  $function
+     *
+     * @return callable
+     */
+    function memoize(callable $function): callable
     {
         return function () use ($function) {
             static $cache = [];
@@ -65,7 +98,12 @@ if (! function_exists('memoize')) {
 }
 
 if (! function_exists('once')) {
-    function once($function)
+    /**
+     * @param  callable  $function
+     *
+     * @return callable
+     */
+    function once(callable $function): callable
     {
         return function (...$args) use ($function) {
             static $called = false;
