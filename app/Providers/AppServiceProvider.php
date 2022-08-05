@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
@@ -76,6 +77,9 @@ class AppServiceProvider extends ServiceProvider
         $this->registerMacros();
         $this->extendValidators($this->app->path('Rules'));
         // $this->extendView();
+        ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
+            return $request->is('api/*');
+        });
     }
 
     /**
