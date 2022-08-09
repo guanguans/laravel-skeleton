@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
+use InvalidArgumentException;
 
 class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 {
@@ -20,7 +21,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
      */
     public function validationData()
     {
-        $method = $this->getActionMethod() . 'ValidationData';
+        $method = $this->getHandleMethod(__FUNCTION__);
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -30,7 +31,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     public function authorize(): bool
     {
-        $method = $this->getActionMethod() . 'Authorize';
+        $method = $this->getHandleMethod(__FUNCTION__);
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -40,7 +41,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     public function rules(): array
     {
-        $method = $this->getActionMethod() . 'Rules';
+        $method = $this->getHandleMethod(__FUNCTION__);
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -50,7 +51,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     public function messages(): array
     {
-        $method = $this->getActionMethod() . 'Messages';
+        $method = $this->getHandleMethod(__FUNCTION__);
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -60,7 +61,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     public function attributes(): array
     {
-        $method = $this->getActionMethod() . 'Attributes';
+        $method = $this->getHandleMethod(__FUNCTION__);
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -73,7 +74,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        $method = $this->getActionMethod() . 'FailedValidation';
+        $method = $this->getHandleMethod(__FUNCTION__);
         if (method_exists($this, $method)) {
             return $this->$method($validator);
         }
@@ -86,7 +87,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
      */
     protected function failedAuthorization()
     {
-        $method = $this->getActionMethod() . 'FailedAuthorization';
+        $method = $this->getHandleMethod(__FUNCTION__);
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -106,10 +107,16 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     }
 
     /**
+     * @param  string  $type
+     *
      * @return string
      */
-    protected function getActionMethod(): string
+    protected function getHandleMethod(string $type): string
     {
-        return $this->route()->getActionMethod();
+        if (! in_array(lcfirst($type), ['validationData', 'authorize', 'rules', 'messages', 'attributes', 'failedValidation', 'failedAuthorization'], true)) {
+            throw new InvalidArgumentException('Invalid type');
+        }
+
+        return optional($this->route())->getActionMethod().ucfirst($type);
     }
 }
