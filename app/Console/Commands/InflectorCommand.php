@@ -43,7 +43,14 @@ class InflectorCommand extends Command
     {
         collect()
             ->pipe(function (Collection $collection) {
-                while (true) {
+                // while (true) {
+                //     $phrase = $this->ask('Please enter a phrase to inflect.');
+                //     if (filled($phrase)) {
+                //         break;
+                //     }
+                // }
+
+                for (;;) {
                     $phrase = $this->ask('Please enter a phrase to inflect.');
                     if (filled($phrase)) {
                         break;
