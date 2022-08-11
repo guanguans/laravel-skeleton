@@ -11,6 +11,7 @@ use PhpParser\Builder\Use_;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Trait_;
 use PhpParser\NodeDumper;
 use PhpParser\NodeFinder;
 use PhpParser\NodeTraverser;
@@ -25,9 +26,13 @@ use Symfony\Component\Finder\Finder;
 
 class GenerateTestCommand extends Command
 {
-    protected $signature = 'generate:test';
+    protected $signature = 'generate:test-method
+                            {--test-class-base-namespace=Tests\\Unit : Base namespace of the test class}
+                            {--test-class-base-dirname=tests/Unit/ : Base dirname of the test class}
+                            {--test-method-format=snake : Format of the test method}
+                            {--default-test-class-path=tests/Unit/ExampleTest.php : Path of the default test class}';
 
-    protected $description = 'Generate test.';
+    protected $description = 'Generate test method.';
 
     /**
      * @var \PhpParser\Parser
@@ -59,9 +64,37 @@ class GenerateTestCommand extends Command
      */
     private $nodeVisitor;
 
+    /**
+     * @var array
+     */
+    private $config = [];
+
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         parent::initialize($input, $output);
+
+        $this->config = [
+            'finder' => [
+                'in' => [app_path('Services'), app_path('Support'), app_path('Traits')],
+                'notPath' => ['Macros', 'Facades'],
+            ],
+            'test_class_base_namespace' => 'Tests\\Unit\\',
+            'test_class_base_dirname' => base_path('tests/Unit/'),
+            'test_method_format' => 'snake', // snake, camel
+            'default_test_class_path' => base_path('tests/Unit/ExampleTest.php')
+        ];
+        if ($baseNamespace = $this->option('test-class-base-namespace')) {
+            $this->config['test_class_base_namespace'] = Str::finish($baseNamespace, '\\');
+        }
+        if ($baseDirname = $this->option('test-class-base-dirname')) {
+            $this->config['test_class_base_dirname'] = file_exists($baseDirname = Str::finish($baseDirname, '/')) ? $baseDirname : base_path($baseDirname);
+        }
+        if ($methodFormat = $this->option('test-method-format')) {
+            $this->config['test_method_format'] = $methodFormat;
+        }
+        if ($defaultTestClassPath = $this->option('default-test-class-path')) {
+            $this->config['default_test_class_path'] = file_exists($defaultTestClassPath) ? $defaultTestClassPath : base_path($defaultTestClassPath);
+        }
 
         $this->parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
         $this->nodeFinder = new NodeFinder();
@@ -114,12 +147,11 @@ class GenerateTestCommand extends Command
 
     public function handle()
     {
-        $files = Finder::create()
-            ->files()
-            ->in([app_path('Services'), app_path('Support'), app_path('Traits')])
-            ->notPath(['Macros', 'Facades'])
-            ->name('*.php')
-            ->sortByName();
+        $files = tap(Finder::create()->files()->name('*.php')->sortByName(), function (Finder $finder) {
+            foreach ($this->config['finder'] as $key => $value) {
+                $finder->{$key}($value);
+            }
+        });
 
         foreach ($files as $file) {
             try {
@@ -130,22 +162,24 @@ class GenerateTestCommand extends Command
                 continue;
             }
 
-            $classNodes = $this->nodeFinder->findInstanceOf($stmts, Class_::class);
-            /** @var Class_ $classNode */
+            $classNodes = $this->nodeFinder->find($stmts, function (Node $node) {
+                return $node instanceof Class_ || $node instanceof Trait_;
+            });
+            /** @var Class_|Trait_ $classNode */
             foreach ($classNodes as $classNode) {
                 // 准备基本信息
                 $originalClassName = $classNode->name->name;
                 $testClassName = "{$originalClassName}Test";
                 $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $file->getPath());
-                $testClassNamespace = 'Tests\\Unit\\'.str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
+                $testClassNamespace = $this->config['test_class_base_namespace'].str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
                 $testClassFullName = $testClassNamespace.'\\'.$testClassName;
-                $testClassPath = base_path("tests/Unit/$testClassBaseName/$testClassName.php") ;
+                $testClassPath = $this->config['test_class_base_dirname']. "$testClassBaseName/$testClassName.php";
                 $testClassDir = dirname($testClassPath);
 
                 $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
-                    $node->flags = 0;
+                    $node->flags = Node\Stmt\Class_::MODIFIER_PUBLIC;
                     $node->byRef = false;
-                    $node->name->name = 'test_' . Str::snake($node->name->name);
+                    $node->name->name = Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name));
                     $node->params = [];
                     $node->returnType = null;
                     $node->stmts = [];
@@ -157,7 +191,7 @@ class GenerateTestCommand extends Command
                     return $node->isPublic() && ! $node->isAbstract();
                 }));
                 $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
-                    return Str::snake($node->name->name);
+                    return $node->name->name;
                 }, $originalClassMethodNames);
                 if (file_exists($testClassPath)) {
                     $originalTestReflectionClass = new ReflectionClass($testClassFullName);
@@ -167,7 +201,10 @@ class GenerateTestCommand extends Command
                         return Str::startsWith($name, 'test');
                     });
 
-                    $testClassDiffMethodNames = array_diff($testClassDiffMethodNames, $originalTestClassMethodNames);
+                    $testClassDiffMethodNames = array_diff(
+                        array_map([Str::class, $this->config['test_method_format']], $testClassDiffMethodNames),
+                        array_map([Str::class, $this->config['test_method_format']], $originalTestClassMethodNames)
+                    );
                     if (empty($testClassDiffMethodNames)) {
                         continue;
                     }
@@ -195,11 +232,7 @@ class GenerateTestCommand extends Command
                 // $testNodes = [$testNamespaceBuilder->getNode()];
 
                 // 修改抽象语法树(遍历节点)
-                $stmts = $this->parser->parse(
-                    file_exists($testClassPath)
-                    ? file_get_contents($testClassPath)
-                    : file_get_contents(base_path('tests/Unit/ExampleTest.php'))
-                );
+                $stmts = $this->parser->parse(file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']));
                 $nodeVisitor = tap($this->nodeVisitor, function ($nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
                     $nodeVisitor->setTestClassNamespace($testClassNamespace);
                     $nodeVisitor->setTestClassName($testClassName);
