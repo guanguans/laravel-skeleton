@@ -25,6 +25,7 @@ use Symfony\Component\Finder\SplFileInfo;
 class GenerateTestCommand extends Command
 {
     protected $signature = 'generate:test-method
+                            {--parse-mode=1 : Parse mode of the PHP parser factory}
                             {--test-class-base-namespace=Tests\\Unit : Base namespace of the test class}
                             {--test-class-base-dirname=tests/Unit/ : Base dirname of the test class}
                             {--test-method-format=snake : Format of the test method}
@@ -32,39 +33,19 @@ class GenerateTestCommand extends Command
 
     protected $description = 'Generate test method.';
 
-    /**
-     * @var \PhpParser\Parser
-     */
+    /** @var \PhpParser\Parser */
     private $parser;
-
-    /**
-     * @var \PhpParser\NodeFinder
-     */
+    /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
-
-    /**
-     * @var \PhpParser\NodeDumper
-     */
+    /** @var \PhpParser\NodeDumper */
     private $nodeDumper;
-
-    /**
-     * @var \PhpParser\PrettyPrinter\Standard
-     */
+    /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
-
-    /**
-     * @var \PhpParser\NodeTraverser
-     */
+    /** @var \PhpParser\NodeTraverser */
     private $nodeTraverser;
-
-    /**
-     * @var \PhpParser\NodeVisitorAbstract
-     */
+    /** @var \PhpParser\NodeVisitorAbstract */
     private $nodeVisitor;
-
-    /**
-     * @var array
-     */
+    /** @var array */
     private $config = [];
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -76,11 +57,15 @@ class GenerateTestCommand extends Command
                 'in' => [app_path('Services'), app_path('Support'), app_path('Traits')],
                 'notPath' => ['Macros', 'Facades'],
             ],
+            'parse_mode' => ParserFactory::PREFER_PHP7,
             'test_class_base_namespace' => 'Tests\\Unit\\',
             'test_class_base_dirname' => base_path('tests/Unit/'),
             'test_method_format' => 'snake', // snake, camel
             'default_test_class_path' => base_path('tests/Unit/ExampleTest.php')
         ];
+        if ((int)$parseMode = $this->option('parse-mode')) {
+            $this->config['parse_mode'] = $parseMode;
+        }
         if ($baseNamespace = $this->option('test-class-base-namespace')) {
             $this->config['test_class_base_namespace'] = Str::finish($baseNamespace, '\\');
         }
@@ -94,7 +79,7 @@ class GenerateTestCommand extends Command
             $this->config['default_test_class_path'] = file_exists($defaultTestClassPath) ? $defaultTestClassPath : base_path($defaultTestClassPath);
         }
 
-        $this->parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+        $this->parser = (new ParserFactory())->create($this->config['parse_mode']);
         $this->nodeFinder = new NodeFinder();
         $this->nodeDumper = new NodeDumper();
         $this->prettyPrinter = new Standard();
@@ -171,14 +156,14 @@ class GenerateTestCommand extends Command
                 $statistics['all_classes']++;
 
                 // 准备基本信息
-                $originalClassName = $classNode->name->name;
-                $testClassName = "{$originalClassName}Test";
+                $testClassName = "{$classNode->name->name}Test";
                 $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $file->getPath());
                 $testClassNamespace = $this->config['test_class_base_namespace'].str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
                 $testClassFullName = $testClassNamespace.'\\'.$testClassName;
                 $testClassPath = $this->config['test_class_base_dirname']. "$testClassBaseName/$testClassName.php";
                 $testClassDir = dirname($testClassPath);
 
+                // 默认生成源类的全部方法节点
                 $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
                     $node->flags = Node\Stmt\Class_::MODIFIER_PUBLIC;
                     $node->byRef = false;
@@ -196,6 +181,8 @@ class GenerateTestCommand extends Command
                 $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
                     return $node->name->name;
                 }, $originalClassMethodNames);
+
+                // 获取需要生成的测试方法节点
                 if (file_exists($testClassPath)) {
                     $originalTestReflectionClass = new ReflectionClass($testClassFullName);
                     $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
@@ -219,13 +206,12 @@ class GenerateTestCommand extends Command
 
                 // 修改抽象语法树(遍历节点)
                 $stmts = $this->parser->parse(file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']));
-                $nodeVisitor = tap($this->nodeVisitor, function ($nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
+                $nodeTraverser = clone $this->nodeTraverser;
+                $nodeTraverser->addVisitor(tap($this->nodeVisitor, function ($nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
                     $nodeVisitor->setTestClassNamespace($testClassNamespace);
                     $nodeVisitor->setTestClassName($testClassName);
                     $nodeVisitor->setTestClassMethodNodes($testClassDiffMethodNodes);
-                });
-                $nodeTraverser = clone $this->nodeTraverser;
-                $nodeTraverser->addVisitor($nodeVisitor);
+                }));
                 $testNodes = $nodeTraverser->traverse($stmts);
 
                 // 打印输出语法树
