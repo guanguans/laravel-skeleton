@@ -5,9 +5,6 @@ namespace App\Console\Commands;
 use Error;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use PhpParser\Builder\Method;
-use PhpParser\Builder\Namespace_;
-use PhpParser\Builder\Use_;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -23,6 +20,7 @@ use ReflectionMethod;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class GenerateTestCommand extends Command
 {
@@ -147,19 +145,22 @@ class GenerateTestCommand extends Command
 
     public function handle()
     {
-        $files = tap(Finder::create()->files()->name('*.php')->sortByName(), function (Finder $finder) {
+        /** @var Finder $files */
+        $files = tap(Finder::create()->files()->name('*.php'), function (Finder $finder) {
             foreach ($this->config['finder'] as $key => $value) {
                 $finder->{$key}($value);
             }
         });
 
-        foreach ($files as $file) {
+        $statistics = ['all_files' => $files->count(), 'all_classes' => 0, 'related_classes' => 0, 'added_methods' => 0];
+
+        $this->withProgressBar($files, function (SplFileInfo $file) use (&$statistics) {
             try {
                 $stmts = $this->parser->parse(file_get_contents($file->getRealPath()));
             } catch (Error $e) {
                 $this->error(sprintf("The file of %s parse error: %s.", $file->getRealPath(), $e->getMessage()));
 
-                continue;
+                return;
             }
 
             $classNodes = $this->nodeFinder->find($stmts, function (Node $node) {
@@ -167,6 +168,8 @@ class GenerateTestCommand extends Command
             });
             /** @var Class_|Trait_ $classNode */
             foreach ($classNodes as $classNode) {
+                $statistics['all_classes']++;
+
                 // 准备基本信息
                 $originalClassName = $classNode->name->name;
                 $testClassName = "{$originalClassName}Test";
@@ -214,23 +217,6 @@ class GenerateTestCommand extends Command
                     });
                 }
 
-                // // 构建抽象语法树()
-                // $testClassBuilder = new \PhpParser\Builder\Class_($testClassName);
-                // $testClassBuilder->extend(new Node\Name('TestCase'));
-                // $testClassDiffMethodNodes = array_map(function ($testMethodName) {
-                //     $method = new Method($testMethodName);
-                //     $method->makePublic();
-                //
-                //     return $method->getNode();
-                // }, $testClassDiffMethodNames);
-                // $testClassBuilder->addStmts($testClassDiffMethodNodes);
-                // $testClassNode = $testClassBuilder->getNode();
-                //
-                // $testNamespaceBuilder = new Namespace_($testClassNamespace);
-                // $testNamespaceBuilder->addStmt(new Use_('PHPUnit\Framework\TestCase',  Node\Stmt\Use_::TYPE_NORMAL));
-                // $testNamespaceBuilder->addStmt($testClassNode);
-                // $testNodes = [$testNamespaceBuilder->getNode()];
-
                 // 修改抽象语法树(遍历节点)
                 $stmts = $this->parser->parse(file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']));
                 $nodeVisitor = tap($this->nodeVisitor, function ($nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
@@ -245,7 +231,15 @@ class GenerateTestCommand extends Command
                 // 打印输出语法树
                 file_exists($testClassDir) or mkdir($testClassDir, 0755, true);
                 file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testNodes));
+
+                $statistics['related_classes']++;
+                $statistics['added_methods'] += count($testClassDiffMethodNodes);
             }
-        }
+        });
+
+        $this->newLine();
+        $this->table(['All files', 'All classes', 'Related classes', 'Added methods'], [$statistics]);
+
+        return 0;
     }
 }
