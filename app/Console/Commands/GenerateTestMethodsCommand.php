@@ -36,6 +36,8 @@ class GenerateTestMethodsCommand extends Command
 
     /** @var \PhpParser\Parser */
     private $parser;
+    /** @var \PhpParser\BuilderFactory */
+    private $builderFactory;
     /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
     /** @var \PhpParser\NodeDumper */
@@ -83,6 +85,7 @@ class GenerateTestMethodsCommand extends Command
         }
 
         $this->parser = (new ParserFactory())->create($this->config['parse_mode']);
+        $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
         $this->nodeDumper = new NodeDumper();
         $this->prettyPrinter = new Standard();
@@ -160,7 +163,7 @@ class GenerateTestMethodsCommand extends Command
 
                 // 默认生成源类的全部方法节点
                 $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
-                    return (new BuilderFactory())
+                    return $this->builderFactory
                         ->method(Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name)))
                         ->makePublic()
                         ->getNode();
