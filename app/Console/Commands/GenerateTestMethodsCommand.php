@@ -140,16 +140,11 @@ class GenerateTestMethodsCommand extends Command
             }
 
             $classNodes = $this->nodeFinder->find($stmts, function (Node $node) {
-                return $node instanceof Class_ || $node instanceof Trait_;
+                return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
             });
             /** @var Class_|Trait_ $classNode */
             foreach ($classNodes as $classNode) {
                 $statistics['all_classes']++;
-
-                // 匿名类不处理
-                if (empty($classNode->name)) {
-                    continue;
-                }
 
                 // 准备基本信息
                 $testClassName = "{$classNode->name->name}Test";
