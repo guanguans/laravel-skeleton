@@ -101,26 +101,26 @@ class GenerateTestMethodsCommand extends Command
                 return;
             }
 
-            $originalNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
-                return ($node instanceof Node\Stmt\Namespace_ && $node->name);
+            $originalNamespaceNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
+                return $node instanceof Node\Stmt\Namespace_ && $node->name;
             });
 
-            foreach ($originalNodes as $originalNode) {
-                $originalClassNamespace = $originalNode->name->toString();
-                $originalClassNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
+            foreach ($originalNamespaceNodes as $originalNamespaceNode) {
+                $originalClassNamespace = $originalNamespaceNode->name->toString();
+
+                $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, function (Node $node) {
                     return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
                 });
-
                 /** @var Class_|Trait_ $originalClassNode */
                 foreach ($originalClassNodes as $originalClassNode) {
                     self::$statistics['all_classes']++;
 
                     // 准备基本信息
-                    $testClassName = "{$originalClassNode->name->name}Test";
-                    $testClassBaseName = str_replace('\\', DIRECTORY_SEPARATOR, $originalClassNamespace);
                     $testClassNamespace = Str::finish($this->option('test-class-base-namespace'), '\\').$originalClassNamespace;
+                    $testClassName = "{$originalClassNode->name->name}Test";
                     $testClassFullName = $testClassNamespace.'\\'.$testClassName;
-                    $testClassPath = Str::finish($this->option('test-class-base-dirname'), '/'). "$testClassBaseName/$testClassName.php";
+                    $testClassBaseName = str_replace('\\', DIRECTORY_SEPARATOR, $originalClassNamespace);
+                    $testClassPath = Str::finish($this->option('test-class-base-dirname'), DIRECTORY_SEPARATOR). $testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
 
                     // 默认生成源类的全部方法节点
                     $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
