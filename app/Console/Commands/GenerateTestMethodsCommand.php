@@ -36,11 +36,12 @@ class GenerateTestMethodsCommand extends Command
                             {--in-dirs=* : Dirs to search for files}
                             {--not-paths=* : Paths to exclude from the search}
                             {--not-names=* : Names to exclude from the search}
-                            {--parse-mode=1 : Parse mode of the PHP parser factory}
+                            {--m|parse-mode=1 : Parse mode of the PHP parser factory}
                             {--test-class-base-namespace=Tests\\Unit : Base namespace of the test class}
                             {--test-class-base-dirname=tests/Unit/ : Base dirname of the test class}
-                            {--test-method-format=snake : Format of the test method}
-                            {--default-test-class-path=tests/Unit/ExampleTest.php : Path of the default test class}';
+                            {--f|test-method-format=snake : Format of the test method}
+                            {--default-test-class-path=tests/Unit/ExampleTest.php : Path of the default test class}
+                            {--M|memory-limit= : Memory usage limit}';
 
     protected $description = 'Generate test methods.';
 
@@ -239,6 +240,7 @@ class GenerateTestMethodsCommand extends Command
 
         extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
         ini_set('zend.assertions', 0);
+        $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
 
     protected function initializeProperties()
