@@ -155,17 +155,6 @@ class GenerateTestCommand extends Command
 
                 // 默认生成源类的全部方法节点
                 $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
-                    // $node->flags = Node\Stmt\Class_::MODIFIER_PUBLIC;
-                    // $node->byRef = false;
-                    // $node->name->name = Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name));
-                    // $node->params = [];
-                    // $node->returnType = null;
-                    // $node->stmts = [];
-                    // $node->attrGroups = [];
-                    // $node->setAttribute('comments', []);
-                    //
-                    // return $node;
-
                     return (new BuilderFactory())
                         ->method(Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name)))
                         ->makePublic()
