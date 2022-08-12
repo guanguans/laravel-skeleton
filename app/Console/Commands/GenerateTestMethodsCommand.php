@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use PhpParser\BuilderFactory;
 use PhpParser\Error;
+use PhpParser\Lexer\Emulative;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -13,6 +14,7 @@ use PhpParser\Node\Stmt\Trait_;
 use PhpParser\NodeDumper;
 use PhpParser\NodeFinder;
 use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor\CloningVisitor;
 use PhpParser\NodeVisitorAbstract;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
@@ -34,6 +36,8 @@ class GenerateTestMethodsCommand extends Command
 
     protected $description = 'Generate test methods.';
 
+    /** @var \PhpParser\Lexer\Emulative */
+    private $lexer;
     /** @var \PhpParser\Parser */
     private $parser;
     /** @var \PhpParser\BuilderFactory */
@@ -84,12 +88,18 @@ class GenerateTestMethodsCommand extends Command
             $this->config['default_test_class_path'] = file_exists($defaultTestClassPath) ? $defaultTestClassPath : base_path($defaultTestClassPath);
         }
 
-        $this->parser = (new ParserFactory())->create($this->config['parse_mode']);
+        $this->lexer = new Emulative(['usedAttributes' => [
+            'comments',
+            'startLine', 'endLine',
+            'startTokenPos', 'endTokenPos',
+        ]]);
+        $this->parser = (new ParserFactory())->create($this->config['parse_mode'], $this->lexer);
         $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
         $this->nodeDumper = new NodeDumper();
         $this->prettyPrinter = new Standard();
         $this->nodeTraverser = new NodeTraverser();
+        $this->nodeTraverser->addVisitor(new CloningVisitor());
         $this->nodeVisitor = new class('', '', []) extends NodeVisitorAbstract {
             /** @var string */
             public $testClassNamespace;
@@ -200,7 +210,8 @@ class GenerateTestMethodsCommand extends Command
 
                 // 打印输出语法树
                 file_exists($testClassDir) or mkdir($testClassDir, 0755, true);
-                file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testNodes));
+                // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testNodes));
+                file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testNodes, $stmts, $this->lexer->getTokens()));
 
                 $statistics['related_classes']++;
                 $statistics['added_methods'] += count($testClassDiffMethodNodes);
