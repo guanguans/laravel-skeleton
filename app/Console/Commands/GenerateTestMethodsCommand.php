@@ -115,8 +115,6 @@ class GenerateTestMethodsCommand extends Command
                     $node->name->name = $this->testClassName;
                     $node->stmts = array_merge($node->stmts, $this->testClassDiffMethodNodes);
                 }
-
-                return $node;
             }
         };
     }
