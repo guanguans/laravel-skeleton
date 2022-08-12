@@ -295,18 +295,9 @@ class GenerateTestMethodsCommand extends Command
         };
 
         $this->prettyPrinter = new class() extends Standard {
-            /** @var \PhpParser\Node\Stmt\Nop */
-            private $nopStmt;
-
-            public function __construct(array $options = [])
-            {
-                parent::__construct($options);
-                $this->nopStmt = new Node\Stmt\Nop();
-            }
-
             protected function pStmt_ClassMethod(ClassMethod $node)
             {
-                return ($node->getAttribute('isAdded') ? $this->nl : $this->pStmt_Nop($this->nopStmt)) . parent::pStmt_ClassMethod($node);
+                return ($node->getAttribute('isAdded') ? $this->nl : '') . parent::pStmt_ClassMethod($node);
             }
         };
     }
