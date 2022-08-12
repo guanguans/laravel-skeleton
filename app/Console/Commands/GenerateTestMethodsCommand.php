@@ -23,16 +23,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class GenerateTestCommand extends Command
+class GenerateTestMethodsCommand extends Command
 {
-    protected $signature = 'generate:test-method
+    protected $signature = 'generate:test-methods
                             {--parse-mode=1 : Parse mode of the PHP parser factory}
                             {--test-class-base-namespace=Tests\\Unit : Base namespace of the test class}
                             {--test-class-base-dirname=tests/Unit/ : Base dirname of the test class}
                             {--test-method-format=snake : Format of the test method}
                             {--default-test-class-path=tests/Unit/ExampleTest.php : Path of the default test class}';
 
-    protected $description = 'Generate test method.';
+    protected $description = 'Generate test methods.';
 
     /** @var \PhpParser\Parser */
     private $parser;
