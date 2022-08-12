@@ -33,6 +33,9 @@ use Symfony\Component\Finder\SplFileInfo;
 class GenerateTestMethodsCommand extends Command
 {
     protected $signature = 'generate:test-methods
+                            {--in-dirs=* : Dirs to search for files}
+                            {--not-paths=* : Paths to exclude from the search}
+                            {--not-names=* : Names to exclude from the search}
                             {--parse-mode=1 : Parse mode of the PHP parser factory}
                             {--test-class-base-namespace=Tests\\Unit : Base namespace of the test class}
                             {--test-class-base-dirname=tests/Unit/ : Base dirname of the test class}
@@ -227,8 +230,9 @@ class GenerateTestMethodsCommand extends Command
     {
         $this->finder = tap(Finder::create()->files()->name('*.php'), function (Finder $finder) {
             $finderOperationalOptions = [
-                'in' => [app_path('Services'), app_path('Support'), app_path('Traits')],
-                'notPath' => ['Macros', 'Facades'],
+                'in' => $this->option('in-dirs') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
+                'notPath' => $this->option('not-paths') ?: ['Macros', 'Facades'],
+                'notName' => $this->option('not-names') ?: [],
             ];
             foreach ($finderOperationalOptions as $operating => $options) {
                 $finder->{$operating}($options);
@@ -240,6 +244,7 @@ class GenerateTestMethodsCommand extends Command
             'startLine', 'endLine',
             'startTokenPos', 'endTokenPos',
         ]]);
+
         $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'), $this->lexer);
         $this->errorHandler = new Collecting();
         $this->builderFactory = new BuilderFactory();
@@ -252,6 +257,7 @@ class GenerateTestMethodsCommand extends Command
         $this->nodeConnectingVisitor = new NodeConnectingVisitor();
         $this->cloningVisitor = new CloningVisitor();
         $this->nodeTraverser->addVisitor($this->cloningVisitor);
+
         $this->classUpdatingVisitor = new class('', '', []) extends NodeVisitorAbstract {
             /** @var string */
             public $testClassNamespace;
