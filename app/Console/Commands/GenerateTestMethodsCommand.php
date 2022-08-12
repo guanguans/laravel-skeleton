@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Composer\XdebugHandler\XdebugHandler;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use PhpParser\BuilderFactory;
@@ -71,6 +72,10 @@ class GenerateTestMethodsCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        $xdebug = new XdebugHandler(__CLASS__);
+        $xdebug->check();
+        unset($xdebug);
+
         extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
         ini_set('zend.assertions', 0);
 
