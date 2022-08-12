@@ -41,6 +41,8 @@ class GenerateTestMethodsCommand extends Command
 
     protected $description = 'Generate test methods.';
 
+    /** @var \Symfony\Component\Finder\Finder */
+    private $finder;
     /** @var \PhpParser\Lexer\Emulative */
     private $lexer;
     /** @var \PhpParser\Parser */
@@ -67,10 +69,151 @@ class GenerateTestMethodsCommand extends Command
     private $cloningVisitor;
     /** @var \PhpParser\NodeVisitorAbstract */
     private $classUpdatingVisitor;
-    /** @var array */
-    private $config = [];
 
+    /** @var array */
     protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        parent::initialize($input, $output);
+        $this->checkOptions();
+        $this->initEnvs();
+        $this->initClasses();
+    }
+
+    public function handle()
+    {
+        $statistics = ['all_files' => $this->finder->count(), 'all_classes' => 0, 'related_classes' => 0, 'added_methods' => 0];
+
+        $this->withProgressBar($this->finder, function (SplFileInfo $file) use (&$statistics) {
+            try {
+                $originalNodes = $this->parser->parse(file_get_contents($file->getRealPath()));
+            } catch (Error $e) {
+                $this->newLine();
+                $this->error(sprintf("The file of %s parse error: %s.", $file->getRealPath(), $e->getMessage()));
+
+                return;
+            }
+
+            $originalClassNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
+                return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
+            });
+            /** @var Class_|Trait_ $originalClassNode */
+            foreach ($originalClassNodes as $originalClassNode) {
+                $statistics['all_classes']++;
+
+                // 准备基本信息
+                $testClassName = "{$originalClassNode->name->name}Test";
+                $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $file->getPath());
+                $testClassNamespace = Str::finish($this->option('test-class-base-namespace'), '\\').str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
+                $testClassFullName = $testClassNamespace.'\\'.$testClassName;
+                $testClassPath = Str::finish($this->option('test-class-base-dirname'), '/'). "$testClassBaseName/$testClassName.php";
+
+                // 默认生成源类的全部方法节点
+                $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
+                    return $this->builderFactory
+                        ->method(Str::{$this->option('test-method-format')}('test_' . Str::snake($node->name->name)))
+                        ->makePublic()
+                        ->getNode();
+                }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
+                    return $node->isPublic() && ! $node->isAbstract();
+                }));
+                $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
+                    return $node->name->name;
+                }, $testClassDiffMethodNodes);
+
+                // 获取需要生成的测试方法节点
+                if (file_exists($testClassPath)) {
+                    $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
+                        return $method->getName();
+                    }, (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
+                        return Str::startsWith($name, 'test');
+                    });
+
+                    $testClassDiffMethodNames = array_diff(
+                        array_map([Str::class, $this->option('test-method-format')], $testClassDiffMethodNames),
+                        array_map([Str::class, $this->option('test-method-format')], $originalTestClassMethodNames)
+                    );
+                    if (empty($testClassDiffMethodNames)) {
+                        continue;
+                    }
+
+                    $testClassDiffMethodNodes = array_filter($testClassDiffMethodNodes, function (ClassMethod $node) use ($testClassDiffMethodNames) {
+                        return in_array($node->name->name, $testClassDiffMethodNames, true);
+                    });
+                }
+
+                // 修改抽象语法树(遍历节点)
+                $originalTestClassNodes = $this->parser->parse(
+                    file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->option('default-test-class-path')),
+                    $this->errorHandler
+                );
+                $nodeTraverser = clone $this->nodeTraverser;
+                $nodeTraverser->addVisitor(tap($this->classUpdatingVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
+                    $nodeVisitor->testClassNamespace = $testClassNamespace;
+                    $nodeVisitor->testClassName = $testClassName;
+                    $nodeVisitor->testClassDiffMethodNodes = $testClassDiffMethodNodes;
+                }));
+                $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
+
+                // 打印输出语法树
+                file_exists($testClassDir = dirname($testClassPath)) or mkdir($testClassDir, 0755, true);
+                // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testNodes));
+                file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
+
+                $statistics['related_classes']++;
+                $statistics['added_methods'] += count($testClassDiffMethodNodes);
+            }
+        });
+
+        $this->newLine();
+        $this->table(['All files', 'All classes', 'Related classes', 'Added methods'], [$statistics]);
+
+        return 0;
+    }
+
+    protected function checkOptions()
+    {
+        if (! in_array($this->option('parse-mode'), [
+            ParserFactory::PREFER_PHP7,
+            ParserFactory::PREFER_PHP5,
+            ParserFactory::ONLY_PHP7,
+            ParserFactory::ONLY_PHP5])
+        ) {
+            $this->error('The parse-mode option is not valid(1,2,3,4).');
+            exit(1);
+        }
+
+        if (! $this->option('test-class-base-namespace')) {
+            $this->error('The test-class-base-namespace option is required.');
+            exit(1);
+        }
+
+        if (! $this->option('test-class-base-dirname')) {
+            $this->error('The test-class-base-dirname option is required.');
+            exit(1);
+        }
+
+        if (! file_exists($this->option('test-class-base-dirname'))) {
+            $this->error('The test-class-base-dirname option is not a valid directory.');
+            exit(1);
+        }
+
+        if (! in_array($this->option('test-method-format'), ['snake','camel'])) {
+            $this->error('The test-method-format option is not valid(snake/camel).');
+            exit(1);
+        }
+
+        if (! $this->option('default-test-class-path')) {
+            $this->error('The default-test-class-path option is required.');
+            exit(1);
+        }
+
+        if (! file_exists($this->option('default-test-class-path'))) {
+            $this->error('The default-test-class-path option is not a valid file.');
+            exit(1);
+        }
+    }
+
+    protected function initEnvs()
     {
         $xdebug = new XdebugHandler(__CLASS__);
         $xdebug->check();
@@ -78,42 +221,26 @@ class GenerateTestMethodsCommand extends Command
 
         extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
         ini_set('zend.assertions', 0);
+    }
 
-        parent::initialize($input, $output);
-
-        $this->config = [
-            'finder' => [
+    protected function initClasses()
+    {
+        $this->finder = tap(Finder::create()->files()->name('*.php'), function (Finder $finder) {
+            $finderOperationalOptions = [
                 'in' => [app_path('Services'), app_path('Support'), app_path('Traits')],
                 'notPath' => ['Macros', 'Facades'],
-            ],
-            'parse_mode' => ParserFactory::PREFER_PHP7,
-            'test_class_base_namespace' => 'Tests\\Unit\\',
-            'test_class_base_dirname' => base_path('tests/Unit/'),
-            'test_method_format' => 'snake', // snake, camel
-            'default_test_class_path' => base_path('tests/Unit/ExampleTest.php')
-        ];
-        if ((int)$parseMode = $this->option('parse-mode')) {
-            $this->config['parse_mode'] = $parseMode;
-        }
-        if ($baseNamespace = $this->option('test-class-base-namespace')) {
-            $this->config['test_class_base_namespace'] = Str::finish($baseNamespace, '\\');
-        }
-        if ($baseDirname = $this->option('test-class-base-dirname')) {
-            $this->config['test_class_base_dirname'] = file_exists($baseDirname = Str::finish($baseDirname, '/')) ? $baseDirname : base_path($baseDirname);
-        }
-        if ($methodFormat = $this->option('test-method-format')) {
-            $this->config['test_method_format'] = $methodFormat;
-        }
-        if ($defaultTestClassPath = $this->option('default-test-class-path')) {
-            $this->config['default_test_class_path'] = file_exists($defaultTestClassPath) ? $defaultTestClassPath : base_path($defaultTestClassPath);
-        }
+            ];
+            foreach ($finderOperationalOptions as $operating => $options) {
+                $finder->{$operating}($options);
+            }
+        });
 
         $this->lexer = new Emulative(['usedAttributes' => [
             'comments',
             'startLine', 'endLine',
             'startTokenPos', 'endTokenPos',
         ]]);
-        $this->parser = (new ParserFactory())->create($this->config['parse_mode'], $this->lexer);
+        $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'), $this->lexer);
         $this->errorHandler = new Collecting();
         $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
@@ -152,103 +279,5 @@ class GenerateTestMethodsCommand extends Command
                 }
             }
         };
-    }
-
-    public function handle()
-    {
-        /** @var Finder $files */
-        $files = tap(Finder::create()->files()->name('*.php'), function (Finder $finder) {
-            foreach ($this->config['finder'] as $key => $value) {
-                $finder->{$key}($value);
-            }
-        });
-
-        $statistics = ['all_files' => $files->count(), 'all_classes' => 0, 'related_classes' => 0, 'added_methods' => 0];
-
-        $this->withProgressBar($files, function (SplFileInfo $file) use (&$statistics) {
-            try {
-                $originalNodes = $this->parser->parse(file_get_contents($file->getRealPath()));
-            } catch (Error $e) {
-                $this->newLine();
-                $this->error(sprintf("The file of %s parse error: %s.", $file->getRealPath(), $e->getMessage()));
-
-                return;
-            }
-
-            $originalClassNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
-                return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
-            });
-            /** @var Class_|Trait_ $originalClassNode */
-            foreach ($originalClassNodes as $originalClassNode) {
-                $statistics['all_classes']++;
-
-                // 准备基本信息
-                $testClassName = "{$originalClassNode->name->name}Test";
-                $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $file->getPath());
-                $testClassNamespace = $this->config['test_class_base_namespace'].str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
-                $testClassFullName = $testClassNamespace.'\\'.$testClassName;
-                $testClassPath = $this->config['test_class_base_dirname']. "$testClassBaseName/$testClassName.php";
-
-                // 默认生成源类的全部方法节点
-                $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
-                    return $this->builderFactory
-                        ->method(Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name)))
-                        ->makePublic()
-                        ->getNode();
-                }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
-                    return $node->isPublic() && ! $node->isAbstract();
-                }));
-                $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
-                    return $node->name->name;
-                }, $testClassDiffMethodNodes);
-
-                // 获取需要生成的测试方法节点
-                if (file_exists($testClassPath)) {
-                    $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
-                        return $method->getName();
-                    }, (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
-                        return Str::startsWith($name, 'test');
-                    });
-
-                    $testClassDiffMethodNames = array_diff(
-                        array_map([Str::class, $this->config['test_method_format']], $testClassDiffMethodNames),
-                        array_map([Str::class, $this->config['test_method_format']], $originalTestClassMethodNames)
-                    );
-                    if (empty($testClassDiffMethodNames)) {
-                        continue;
-                    }
-
-                    $testClassDiffMethodNodes = array_filter($testClassDiffMethodNodes, function (ClassMethod $node) use ($testClassDiffMethodNames) {
-                        return in_array($node->name->name, $testClassDiffMethodNames, true);
-                    });
-                }
-
-                // 修改抽象语法树(遍历节点)
-                $originalTestClassNodes = $this->parser->parse(
-                    file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']),
-                    $this->errorHandler
-                );
-                $nodeTraverser = clone $this->nodeTraverser;
-                $nodeTraverser->addVisitor(tap($this->classUpdatingVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
-                    $nodeVisitor->testClassNamespace = $testClassNamespace;
-                    $nodeVisitor->testClassName = $testClassName;
-                    $nodeVisitor->testClassDiffMethodNodes = $testClassDiffMethodNodes;
-                }));
-                $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
-
-                // 打印输出语法树
-                file_exists($testClassDir = dirname($testClassPath)) or mkdir($testClassDir, 0755, true);
-                // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testNodes));
-                file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
-
-                $statistics['related_classes']++;
-                $statistics['added_methods'] += count($testClassDiffMethodNodes);
-            }
-        });
-
-        $this->newLine();
-        $this->table(['All files', 'All classes', 'Related classes', 'Added methods'], [$statistics]);
-
-        return 0;
     }
 }
