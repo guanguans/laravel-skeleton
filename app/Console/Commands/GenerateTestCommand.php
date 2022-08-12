@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use PhpParser\BuilderFactory;
 use PhpParser\Error;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -154,16 +155,21 @@ class GenerateTestCommand extends Command
 
                 // 默认生成源类的全部方法节点
                 $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
-                    $node->flags = Node\Stmt\Class_::MODIFIER_PUBLIC;
-                    $node->byRef = false;
-                    $node->name->name = Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name));
-                    $node->params = [];
-                    $node->returnType = null;
-                    $node->stmts = [];
-                    $node->attrGroups = [];
-                    $node->setAttribute('comments', []);
+                    // $node->flags = Node\Stmt\Class_::MODIFIER_PUBLIC;
+                    // $node->byRef = false;
+                    // $node->name->name = Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name));
+                    // $node->params = [];
+                    // $node->returnType = null;
+                    // $node->stmts = [];
+                    // $node->attrGroups = [];
+                    // $node->setAttribute('comments', []);
+                    //
+                    // return $node;
 
-                    return $node;
+                    return (new BuilderFactory())
+                        ->method(Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name)))
+                        ->makePublic()
+                        ->getNode();
                 }, $originalClassMethodNames = array_filter($classNode->getMethods(), function (ClassMethod $node) {
                     return $node->isPublic() && ! $node->isAbstract();
                 }));
