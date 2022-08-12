@@ -44,8 +44,15 @@ class GenerateTestMethodsCommand extends Command
 
     protected $description = 'Generate test methods.';
 
+    /** @var array */
+    private static $statistics = [
+        'all_files' => 0,
+        'all_classes' => 0,
+        'related_classes' => 0,
+        'added_methods' => 0
+    ];
     /** @var \Symfony\Component\Finder\Finder */
-    private $finder;
+    private $fileFinder;
     /** @var \PhpParser\Lexer\Emulative */
     private $lexer;
     /** @var \PhpParser\Parser */
@@ -78,20 +85,18 @@ class GenerateTestMethodsCommand extends Command
     {
         parent::initialize($input, $output);
         $this->checkOptions();
-        $this->initEnvs();
-        $this->initClasses();
+        $this->initializeEnvs();
+        $this->initializeProperties();
     }
 
     public function handle()
     {
-        $statistics = ['all_files' => $this->finder->count(), 'all_classes' => 0, 'related_classes' => 0, 'added_methods' => 0];
-
-        $this->withProgressBar($this->finder, function (SplFileInfo $file) use (&$statistics) {
+        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) {
             try {
-                $originalNodes = $this->parser->parse(file_get_contents($file->getRealPath()));
+                $originalNodes = $this->parser->parse(file_get_contents($fileInfo->getRealPath()));
             } catch (Error $e) {
                 $this->newLine();
-                $this->error(sprintf("The file of %s parse error: %s.", $file->getRealPath(), $e->getMessage()));
+                $this->error(sprintf("The file of %s parse error: %s.", $fileInfo->getRealPath(), $e->getMessage()));
 
                 return;
             }
@@ -101,21 +106,23 @@ class GenerateTestMethodsCommand extends Command
             });
             /** @var Class_|Trait_ $originalClassNode */
             foreach ($originalClassNodes as $originalClassNode) {
-                $statistics['all_classes']++;
+                self::$statistics['all_classes']++;
 
                 // 准备基本信息
                 $testClassName = "{$originalClassNode->name->name}Test";
-                $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $file->getPath());
+                $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $fileInfo->getPath());
                 $testClassNamespace = Str::finish($this->option('test-class-base-namespace'), '\\').str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
                 $testClassFullName = $testClassNamespace.'\\'.$testClassName;
                 $testClassPath = Str::finish($this->option('test-class-base-dirname'), '/'). "$testClassBaseName/$testClassName.php";
 
                 // 默认生成源类的全部方法节点
                 $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
-                    return $this->builderFactory
+                    return tap(
+                        $this->builderFactory
                         ->method(Str::{$this->option('test-method-format')}('test_' . Str::snake($node->name->name)))
                         ->makePublic()
-                        ->getNode();
+                        ->getNode()
+                    )->setAttribute('isAdded', true);
                 }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
                     return $node->isPublic() && ! $node->isAbstract();
                 }));
@@ -159,16 +166,16 @@ class GenerateTestMethodsCommand extends Command
 
                 // 打印输出语法树
                 file_exists($testClassDir = dirname($testClassPath)) or mkdir($testClassDir, 0755, true);
-                // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testNodes));
+                // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testClassNodes));
                 file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
 
-                $statistics['related_classes']++;
-                $statistics['added_methods'] += count($testClassDiffMethodNodes);
+                self::$statistics['related_classes']++;
+                self::$statistics['added_methods'] += count($testClassDiffMethodNodes);
             }
         });
 
         $this->newLine();
-        $this->table(['All files', 'All classes', 'Related classes', 'Added methods'], [$statistics]);
+        $this->table(['All files', 'All classes', 'Related classes', 'Added methods'], [self::$statistics]);
 
         return 0;
     }
@@ -216,7 +223,7 @@ class GenerateTestMethodsCommand extends Command
         }
     }
 
-    protected function initEnvs()
+    protected function initializeEnvs()
     {
         $xdebug = new XdebugHandler(__CLASS__);
         $xdebug->check();
@@ -226,9 +233,9 @@ class GenerateTestMethodsCommand extends Command
         ini_set('zend.assertions', 0);
     }
 
-    protected function initClasses()
+    protected function initializeProperties()
     {
-        $this->finder = tap(Finder::create()->files()->name('*.php'), function (Finder $finder) {
+        $this->fileFinder = tap(Finder::create()->files()->name('*.php'), function (Finder $finder) {
             $finderOperationalOptions = [
                 'in' => $this->option('in-dirs') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
                 'notPath' => $this->option('not-paths') ?: ['Macros', 'Facades'],
@@ -237,6 +244,8 @@ class GenerateTestMethodsCommand extends Command
             foreach ($finderOperationalOptions as $operating => $options) {
                 $finder->{$operating}($options);
             }
+
+            self::$statistics['all_files'] = $finder->count();
         });
 
         $this->lexer = new Emulative(['usedAttributes' => [
@@ -251,7 +260,6 @@ class GenerateTestMethodsCommand extends Command
         $this->nodeFinder = new NodeFinder();
         $this->nodeDumper = new NodeDumper();
         $this->jsonDecoder = new JsonDecoder();
-        $this->prettyPrinter = new Standard();
         $this->nodeTraverser = new NodeTraverser();
         $this->parentConnectingVisitor = new ParentConnectingVisitor();
         $this->nodeConnectingVisitor = new NodeConnectingVisitor();
@@ -283,6 +291,22 @@ class GenerateTestMethodsCommand extends Command
                     $node->name->name = $this->testClassName;
                     $node->stmts = array_merge($node->stmts, $this->testClassDiffMethodNodes);
                 }
+            }
+        };
+
+        $this->prettyPrinter = new class() extends Standard {
+            /** @var \PhpParser\Node\Stmt\Nop */
+            private $nopStmt;
+
+            public function __construct(array $options = [])
+            {
+                parent::__construct($options);
+                $this->nopStmt = new Node\Stmt\Nop();
+            }
+
+            protected function pStmt_ClassMethod(ClassMethod $node)
+            {
+                return ($node->getAttribute('isAdded') ? $this->nl : $this->pStmt_Nop($this->nopStmt)) . parent::pStmt_ClassMethod($node);
             }
         };
     }
