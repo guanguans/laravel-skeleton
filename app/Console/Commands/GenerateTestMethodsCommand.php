@@ -101,76 +101,84 @@ class GenerateTestMethodsCommand extends Command
                 return;
             }
 
-            $originalClassNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
-                return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
+            $originalNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
+                return ($node instanceof Node\Stmt\Namespace_ && $node->name);
             });
-            /** @var Class_|Trait_ $originalClassNode */
-            foreach ($originalClassNodes as $originalClassNode) {
-                self::$statistics['all_classes']++;
 
-                // 准备基本信息
-                $testClassName = "{$originalClassNode->name->name}Test";
-                $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $fileInfo->getPath());
-                $testClassNamespace = Str::finish($this->option('test-class-base-namespace'), '\\').str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
-                $testClassFullName = $testClassNamespace.'\\'.$testClassName;
-                $testClassPath = Str::finish($this->option('test-class-base-dirname'), '/'). "$testClassBaseName/$testClassName.php";
+            foreach ($originalNodes as $originalNode) {
+                $originalClassNamespace = $originalNode->name->toString();
+                $originalClassNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
+                    return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
+                });
 
-                // 默认生成源类的全部方法节点
-                $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
-                    return tap(
-                        $this->builderFactory
-                        ->method(Str::{$this->option('test-method-format')}('test_' . Str::snake($node->name->name)))
-                        ->makePublic()
-                        ->getNode()
-                    )->setAttribute('isAdded', true);
-                }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
-                    return $node->isPublic() && ! $node->isAbstract();
-                }));
-                $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
-                    return $node->name->name;
-                }, $testClassDiffMethodNodes);
+                /** @var Class_|Trait_ $originalClassNode */
+                foreach ($originalClassNodes as $originalClassNode) {
+                    self::$statistics['all_classes']++;
 
-                // 获取需要生成的测试方法节点
-                if (file_exists($testClassPath)) {
-                    $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
-                        return $method->getName();
-                    }, (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
-                        return Str::startsWith($name, 'test');
-                    });
+                    // 准备基本信息
+                    $testClassName = "{$originalClassNode->name->name}Test";
+                    $testClassBaseName = str_replace('\\', DIRECTORY_SEPARATOR, $originalClassNamespace);
+                    $testClassNamespace = Str::finish($this->option('test-class-base-namespace'), '\\').$originalClassNamespace;
+                    $testClassFullName = $testClassNamespace.'\\'.$testClassName;
+                    $testClassPath = Str::finish($this->option('test-class-base-dirname'), '/'). "$testClassBaseName/$testClassName.php";
 
-                    $testClassDiffMethodNames = array_diff(
-                        array_map([Str::class, $this->option('test-method-format')], $testClassDiffMethodNames),
-                        array_map([Str::class, $this->option('test-method-format')], $originalTestClassMethodNames)
-                    );
-                    if (empty($testClassDiffMethodNames)) {
-                        continue;
+                    // 默认生成源类的全部方法节点
+                    $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
+                        return tap(
+                            $this->builderFactory
+                                ->method(Str::{$this->option('test-method-format')}('test_' . Str::snake($node->name->name)))
+                                ->makePublic()
+                                ->getNode()
+                        )->setAttribute('isAdded', true);
+                    }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
+                        return $node->isPublic() && ! $node->isAbstract();
+                    }));
+                    $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
+                        return $node->name->name;
+                    }, $testClassDiffMethodNodes);
+
+                    // 获取需要生成的测试方法节点
+                    if (file_exists($testClassPath)) {
+                        $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
+                            return $method->getName();
+                        }, (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
+                            return Str::startsWith($name, 'test');
+                        });
+
+                        $testClassDiffMethodNames = array_diff(
+                            array_map([Str::class, $this->option('test-method-format')], $testClassDiffMethodNames),
+                            array_map([Str::class, $this->option('test-method-format')], $originalTestClassMethodNames)
+                        );
+                        if (empty($testClassDiffMethodNames)) {
+                            continue;
+                        }
+
+                        $testClassDiffMethodNodes = array_filter($testClassDiffMethodNodes, function (ClassMethod $node) use ($testClassDiffMethodNames) {
+                            return in_array($node->name->name, $testClassDiffMethodNames, true);
+                        });
                     }
 
-                    $testClassDiffMethodNodes = array_filter($testClassDiffMethodNodes, function (ClassMethod $node) use ($testClassDiffMethodNames) {
-                        return in_array($node->name->name, $testClassDiffMethodNames, true);
-                    });
+                    // 修改抽象语法树(遍历节点)
+                    $originalTestClassNodes = $this->parser->parse(
+                        file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->option('default-test-class-path')),
+                        $this->errorHandler
+                    );
+                    $nodeTraverser = clone $this->nodeTraverser;
+                    $nodeTraverser->addVisitor(tap($this->classUpdatingVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
+                        $nodeVisitor->testClassNamespace = $testClassNamespace;
+                        $nodeVisitor->testClassName = $testClassName;
+                        $nodeVisitor->testClassDiffMethodNodes = $testClassDiffMethodNodes;
+                    }));
+                    $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
+
+                    // 打印输出语法树
+                    file_exists($testClassDir = dirname($testClassPath)) or mkdir($testClassDir, 0755, true);
+                    // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testClassNodes));
+                    file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
+
+                    self::$statistics['related_classes']++;
+                    self::$statistics['added_methods'] += count($testClassDiffMethodNodes);
                 }
-
-                // 修改抽象语法树(遍历节点)
-                $originalTestClassNodes = $this->parser->parse(
-                    file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->option('default-test-class-path')),
-                    $this->errorHandler
-                );
-                $nodeTraverser = clone $this->nodeTraverser;
-                $nodeTraverser->addVisitor(tap($this->classUpdatingVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
-                    $nodeVisitor->testClassNamespace = $testClassNamespace;
-                    $nodeVisitor->testClassName = $testClassName;
-                    $nodeVisitor->testClassDiffMethodNodes = $testClassDiffMethodNodes;
-                }));
-                $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
-
-                // 打印输出语法树
-                file_exists($testClassDir = dirname($testClassPath)) or mkdir($testClassDir, 0755, true);
-                // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testClassNodes));
-                file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
-
-                self::$statistics['related_classes']++;
-                self::$statistics['added_methods'] += count($testClassDiffMethodNodes);
             }
         });
 
