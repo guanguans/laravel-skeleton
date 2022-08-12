@@ -159,12 +159,12 @@ class GenerateTestMethodsCommand extends Command
                         ->method(Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name)))
                         ->makePublic()
                         ->getNode();
-                }, $originalClassMethodNames = array_filter($classNode->getMethods(), function (ClassMethod $node) {
+                }, array_filter($classNode->getMethods(), function (ClassMethod $node) {
                     return $node->isPublic() && ! $node->isAbstract();
                 }));
                 $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
                     return $node->name->name;
-                }, $originalClassMethodNames);
+                }, $testClassDiffMethodNodes);
 
                 // 获取需要生成的测试方法节点
                 if (file_exists($testClassPath)) {
