@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use PhpParser\BuilderFactory;
 use PhpParser\Error;
+use PhpParser\ErrorHandler\Collecting;
 use PhpParser\Lexer\Emulative;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -40,6 +41,8 @@ class GenerateTestMethodsCommand extends Command
     private $lexer;
     /** @var \PhpParser\Parser */
     private $parser;
+    /** @var \PhpParser\ErrorHandler\Collecting */
+    private $errorHandler;
     /** @var \PhpParser\BuilderFactory */
     private $builderFactory;
     /** @var \PhpParser\NodeFinder */
@@ -94,6 +97,7 @@ class GenerateTestMethodsCommand extends Command
             'startTokenPos', 'endTokenPos',
         ]]);
         $this->parser = (new ParserFactory())->create($this->config['parse_mode'], $this->lexer);
+        $this->errorHandler = new Collecting();
         $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
         $this->nodeDumper = new NodeDumper();
@@ -144,6 +148,7 @@ class GenerateTestMethodsCommand extends Command
             try {
                 $stmts = $this->parser->parse(file_get_contents($file->getRealPath()));
             } catch (Error $e) {
+                $this->newLine();
                 $this->error(sprintf("The file of %s parse error: %s.", $file->getRealPath(), $e->getMessage()));
 
                 return;
@@ -199,7 +204,10 @@ class GenerateTestMethodsCommand extends Command
                 }
 
                 // 修改抽象语法树(遍历节点)
-                $stmts = $this->parser->parse(file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']));
+                $stmts = $this->parser->parse(
+                    file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']),
+                    $this->errorHandler
+                );
                 $nodeTraverser = clone $this->nodeTraverser;
                 $nodeTraverser->addVisitor(tap($this->nodeVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
                     $nodeVisitor->testClassNamespace = $testClassNamespace;
