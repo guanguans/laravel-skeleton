@@ -33,15 +33,17 @@ use Symfony\Component\Finder\SplFileInfo;
 class GenerateTestMethodsCommand extends Command
 {
     protected $signature = 'generate:test-methods
-                            {--in-dirs=* : Dirs to search for files}
-                            {--not-paths=* : Paths to exclude from the search}
-                            {--not-names=* : Names to exclude from the search}
-                            {--m|parse-mode=1 : Parse mode of the PHP parser factory}
-                            {--test-class-base-namespace=Tests\\Unit : Base namespace of the test class}
-                            {--test-class-base-dirname=tests/Unit/ : Base dirname of the test class}
-                            {--f|test-method-format=snake : Format of the test method}
-                            {--default-test-class-path=tests/Unit/ExampleTest.php : Path of the default test class}
-                            {--M|memory-limit= : Memory usage limit}';
+                            {--in-dir=* : The directories to search for files}
+                            {--path=* : The paths to search for files}
+                            {--name=* : The names to search for files}
+                            {--not-path=* : The paths to exclude from the search}
+                            {--not-name=* : The names to exclude from the search}
+                            {--base-namespace=Tests\\Unit : The base namespace for the generated tests}
+                            {--base-dir=./tests/Unit/ : The base directory for the generated tests}
+                            {--default-class=./tests/Unit/ExampleTest.php : The default class to use for the generated tests}
+                            {--f|method-format=snake : The format to use for the method names}
+                            {--m|parse-mode=1 : The mode to use for the PHP parser}
+                            {--M|memory-limit= : The memory limit to use for the PHP parser}';
 
     protected $description = 'Generate test methods.';
 
@@ -112,22 +114,21 @@ class GenerateTestMethodsCommand extends Command
                 $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, function (Node $node) {
                     return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
                 });
+                self::$statistics['all_classes'] += count($originalClassNodes);
                 /** @var Class_|Trait_ $originalClassNode */
                 foreach ($originalClassNodes as $originalClassNode) {
-                    self::$statistics['all_classes']++;
-
                     // 准备基本信息
-                    $testClassNamespace = Str::finish($this->option('test-class-base-namespace'), '\\').$originalClassNamespace;
+                    $testClassNamespace = Str::finish($this->option('base-namespace'), '\\').$originalClassNamespace;
                     $testClassName = "{$originalClassNode->name->name}Test";
                     $testClassFullName = $testClassNamespace.'\\'.$testClassName;
                     $testClassBaseName = str_replace('\\', DIRECTORY_SEPARATOR, $originalClassNamespace);
-                    $testClassPath = Str::finish($this->option('test-class-base-dirname'), DIRECTORY_SEPARATOR). $testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
+                    $testClassPath = Str::finish($this->option('base-dir'), DIRECTORY_SEPARATOR). $testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
 
                     // 默认生成源类的全部方法节点
                     $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
                         return tap(
                             $this->builderFactory
-                                ->method(Str::{$this->option('test-method-format')}('test_' . Str::snake($node->name->name)))
+                                ->method(Str::{$this->option('method-format')}('test_' . Str::snake($node->name->name)))
                                 ->makePublic()
                                 ->getNode()
                         )->setAttribute('isAdded', true);
@@ -147,8 +148,8 @@ class GenerateTestMethodsCommand extends Command
                         });
 
                         $testClassDiffMethodNames = array_diff(
-                            array_map([Str::class, $this->option('test-method-format')], $testClassDiffMethodNames),
-                            array_map([Str::class, $this->option('test-method-format')], $originalTestClassMethodNames)
+                            array_map([Str::class, $this->option('method-format')], $testClassDiffMethodNames),
+                            array_map([Str::class, $this->option('method-format')], $originalTestClassMethodNames)
                         );
                         if (empty($testClassDiffMethodNames)) {
                             continue;
@@ -161,7 +162,7 @@ class GenerateTestMethodsCommand extends Command
 
                     // 修改抽象语法树(遍历节点)
                     $originalTestClassNodes = $this->parser->parse(
-                        file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->option('default-test-class-path')),
+                        file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->option('default-class')),
                         $this->errorHandler
                     );
                     $nodeTraverser = clone $this->nodeTraverser;
@@ -201,33 +202,33 @@ class GenerateTestMethodsCommand extends Command
             exit(1);
         }
 
-        if (! $this->option('test-class-base-namespace')) {
-            $this->error('The test-class-base-namespace option is required.');
+        if (! $this->option('base-namespace')) {
+            $this->error('The base-namespace option is required.');
             exit(1);
         }
 
-        if (! $this->option('test-class-base-dirname')) {
-            $this->error('The test-class-base-dirname option is required.');
+        if (! $this->option('base-dir')) {
+            $this->error('The base-dir option is required.');
             exit(1);
         }
 
-        if (! file_exists($this->option('test-class-base-dirname'))) {
-            $this->error('The test-class-base-dirname option is not a valid directory.');
+        if (! file_exists($this->option('base-dir'))) {
+            $this->error('The base-dir option is not a valid directory.');
             exit(1);
         }
 
-        if (! in_array($this->option('test-method-format'), ['snake','camel'])) {
-            $this->error('The test-method-format option is not valid(snake/camel).');
+        if (! in_array($this->option('method-format'), ['snake','camel'])) {
+            $this->error('The method-format option is not valid(snake/camel).');
             exit(1);
         }
 
-        if (! $this->option('default-test-class-path')) {
-            $this->error('The default-test-class-path option is required.');
+        if (! $this->option('default-class')) {
+            $this->error('The default-class option is required.');
             exit(1);
         }
 
-        if (! file_exists($this->option('default-test-class-path'))) {
-            $this->error('The default-test-class-path option is not a valid file.');
+        if (! file_exists($this->option('default-class'))) {
+            $this->error('The default-class option is not a valid file.');
             exit(1);
         }
     }
@@ -245,14 +246,16 @@ class GenerateTestMethodsCommand extends Command
 
     protected function initializeProperties()
     {
-        $this->fileFinder = tap(Finder::create()->files()->name('*.php'), function (Finder $finder) {
-            $finderOperationalOptions = [
-                'in' => $this->option('in-dirs') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
-                'notPath' => $this->option('not-paths') ?: ['Macros', 'Facades'],
-                'notName' => $this->option('not-names') ?: [],
+        $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder) {
+            $operations = [
+                'in' => $this->option('in-dir') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
+                'path' => $this->option('path') ?: [],
+                'notPath' => $this->option('not-path') ?: ['Macros', 'Facades'],
+                'name' => $this->option('name') ?: ['*.php'],
+                'notName' => $this->option('not-name') ?: [],
             ];
-            foreach ($finderOperationalOptions as $operating => $options) {
-                $finder->{$operating}($options);
+            foreach ($operations as $operation => $parameters) {
+                $finder->{$operation}($parameters);
             }
 
             self::$statistics['all_files'] = $finder->count();
