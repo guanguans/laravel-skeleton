@@ -145,6 +145,11 @@ class GenerateTestMethodsCommand extends Command
             foreach ($classNodes as $classNode) {
                 $statistics['all_classes']++;
 
+                // 匿名类不处理
+                if (empty($classNode->name)) {
+                    continue;
+                }
+
                 // 准备基本信息
                 $testClassName = "{$classNode->name->name}Test";
                 $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $file->getPath());
