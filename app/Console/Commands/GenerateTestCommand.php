@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Error;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use PhpParser\Error;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -50,6 +50,8 @@ class GenerateTestCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
+
         parent::initialize($input, $output);
 
         $this->config = [
@@ -86,17 +88,17 @@ class GenerateTestCommand extends Command
         $this->nodeTraverser = new NodeTraverser();
         $this->nodeVisitor = new class('', '', []) extends NodeVisitorAbstract {
             /** @var string */
-            private $testClassNamespace;
+            public $testClassNamespace;
             /** @var string */
-            private $testClassName;
+            public $testClassName;
             /** @var \PhpParser\Node\Stmt\ClassMethod[] */
-            private $testClassMethodNodes;
+            public $testClassDiffMethodNodes = [];
 
-            public function __construct(string $testClassNamespace, string $testClassName, array $testClassMethodNodes)
+            public function __construct(string $testClassNamespace, string $testClassName, array $testClassDiffMethodNodes)
             {
                 $this->testClassNamespace = $testClassNamespace;
                 $this->testClassName = $testClassName;
-                $this->testClassMethodNodes = $testClassMethodNodes;
+                $this->testClassDiffMethodNodes = $testClassDiffMethodNodes;
             }
 
             public function leaveNode(Node $node)
@@ -107,23 +109,10 @@ class GenerateTestCommand extends Command
 
                 if ($node instanceof Node\Stmt\Class_) {
                     $node->name->name = $this->testClassName;
-                    $node->stmts = array_merge($node->stmts, $this->testClassMethodNodes);
+                    $node->stmts = array_merge($node->stmts, $this->testClassDiffMethodNodes);
                 }
-            }
 
-            public function setTestClassNamespace(string $testClassNamespace)
-            {
-                $this->testClassNamespace = $testClassNamespace;
-            }
-
-            public function setTestClassName(string $testClassName)
-            {
-                $this->testClassName = $testClassName;
-            }
-
-            public function setTestClassMethodNodes(array $testClassMethodNodes)
-            {
-                $this->testClassMethodNodes = $testClassMethodNodes;
+                return $node;
             }
         };
     }
@@ -184,10 +173,9 @@ class GenerateTestCommand extends Command
 
                 // 获取需要生成的测试方法节点
                 if (file_exists($testClassPath)) {
-                    $originalTestReflectionClass = new ReflectionClass($testClassFullName);
                     $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
                         return $method->getName();
-                    }, $originalTestReflectionClass->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
+                    }, (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
                         return Str::startsWith($name, 'test');
                     });
 
@@ -207,10 +195,10 @@ class GenerateTestCommand extends Command
                 // 修改抽象语法树(遍历节点)
                 $stmts = $this->parser->parse(file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']));
                 $nodeTraverser = clone $this->nodeTraverser;
-                $nodeTraverser->addVisitor(tap($this->nodeVisitor, function ($nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
-                    $nodeVisitor->setTestClassNamespace($testClassNamespace);
-                    $nodeVisitor->setTestClassName($testClassName);
-                    $nodeVisitor->setTestClassMethodNodes($testClassDiffMethodNodes);
+                $nodeTraverser->addVisitor(tap($this->nodeVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
+                    $nodeVisitor->testClassNamespace = $testClassNamespace;
+                    $nodeVisitor->testClassName = $testClassName;
+                    $nodeVisitor->testClassDiffMethodNodes = $testClassDiffMethodNodes;
                 }));
                 $testNodes = $nodeTraverser->traverse($stmts);
 
