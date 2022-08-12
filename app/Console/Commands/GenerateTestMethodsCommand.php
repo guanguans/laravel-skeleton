@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use PhpParser\BuilderFactory;
 use PhpParser\Error;
 use PhpParser\ErrorHandler\Collecting;
+use PhpParser\JsonDecoder;
 use PhpParser\Lexer\Emulative;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -16,6 +17,8 @@ use PhpParser\NodeDumper;
 use PhpParser\NodeFinder;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\CloningVisitor;
+use PhpParser\NodeVisitor\NodeConnectingVisitor;
+use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use PhpParser\NodeVisitorAbstract;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
@@ -49,18 +52,27 @@ class GenerateTestMethodsCommand extends Command
     private $nodeFinder;
     /** @var \PhpParser\NodeDumper */
     private $nodeDumper;
+    /** @var \PhpParser\JsonDecoder */
+    private $jsonDecoder;
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
     /** @var \PhpParser\NodeTraverser */
     private $nodeTraverser;
+    /** @var \PhpParser\NodeVisitor\ParentConnectingVisitor */
+    private $parentConnectingVisitor;
+    /** @var \PhpParser\NodeVisitor\NodeConnectingVisitor */
+    private $nodeConnectingVisitor;
+    /** @var \PhpParser\NodeVisitor\CloningVisitor */
+    private $cloningVisitor;
     /** @var \PhpParser\NodeVisitorAbstract */
-    private $nodeVisitor;
+    private $classUpdatingVisitor;
     /** @var array */
     private $config = [];
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
+        ini_set('zend.assertions', 0);
 
         parent::initialize($input, $output);
 
@@ -101,10 +113,14 @@ class GenerateTestMethodsCommand extends Command
         $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
         $this->nodeDumper = new NodeDumper();
+        $this->jsonDecoder = new JsonDecoder();
         $this->prettyPrinter = new Standard();
         $this->nodeTraverser = new NodeTraverser();
-        $this->nodeTraverser->addVisitor(new CloningVisitor());
-        $this->nodeVisitor = new class('', '', []) extends NodeVisitorAbstract {
+        $this->parentConnectingVisitor = new ParentConnectingVisitor();
+        $this->nodeConnectingVisitor = new NodeConnectingVisitor();
+        $this->cloningVisitor = new CloningVisitor();
+        $this->nodeTraverser->addVisitor($this->cloningVisitor);
+        $this->classUpdatingVisitor = new class('', '', []) extends NodeVisitorAbstract {
             /** @var string */
             public $testClassNamespace;
             /** @var string */
@@ -146,7 +162,7 @@ class GenerateTestMethodsCommand extends Command
 
         $this->withProgressBar($files, function (SplFileInfo $file) use (&$statistics) {
             try {
-                $stmts = $this->parser->parse(file_get_contents($file->getRealPath()));
+                $originalNodes = $this->parser->parse(file_get_contents($file->getRealPath()));
             } catch (Error $e) {
                 $this->newLine();
                 $this->error(sprintf("The file of %s parse error: %s.", $file->getRealPath(), $e->getMessage()));
@@ -154,20 +170,19 @@ class GenerateTestMethodsCommand extends Command
                 return;
             }
 
-            $classNodes = $this->nodeFinder->find($stmts, function (Node $node) {
+            $originalClassNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
                 return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
             });
-            /** @var Class_|Trait_ $classNode */
-            foreach ($classNodes as $classNode) {
+            /** @var Class_|Trait_ $originalClassNode */
+            foreach ($originalClassNodes as $originalClassNode) {
                 $statistics['all_classes']++;
 
                 // 准备基本信息
-                $testClassName = "{$classNode->name->name}Test";
+                $testClassName = "{$originalClassNode->name->name}Test";
                 $testClassBaseName = str_replace(app_path().DIRECTORY_SEPARATOR, '', $file->getPath());
                 $testClassNamespace = $this->config['test_class_base_namespace'].str_replace(DIRECTORY_SEPARATOR, '\\', $testClassBaseName);
                 $testClassFullName = $testClassNamespace.'\\'.$testClassName;
                 $testClassPath = $this->config['test_class_base_dirname']. "$testClassBaseName/$testClassName.php";
-                $testClassDir = dirname($testClassPath);
 
                 // 默认生成源类的全部方法节点
                 $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
@@ -175,7 +190,7 @@ class GenerateTestMethodsCommand extends Command
                         ->method(Str::{$this->config['test_method_format']}('test_' . Str::snake($node->name->name)))
                         ->makePublic()
                         ->getNode();
-                }, array_filter($classNode->getMethods(), function (ClassMethod $node) {
+                }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
                     return $node->isPublic() && ! $node->isAbstract();
                 }));
                 $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
@@ -204,22 +219,22 @@ class GenerateTestMethodsCommand extends Command
                 }
 
                 // 修改抽象语法树(遍历节点)
-                $stmts = $this->parser->parse(
+                $originalTestClassNodes = $this->parser->parse(
                     file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->config['default_test_class_path']),
                     $this->errorHandler
                 );
                 $nodeTraverser = clone $this->nodeTraverser;
-                $nodeTraverser->addVisitor(tap($this->nodeVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
+                $nodeTraverser->addVisitor(tap($this->classUpdatingVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
                     $nodeVisitor->testClassNamespace = $testClassNamespace;
                     $nodeVisitor->testClassName = $testClassName;
                     $nodeVisitor->testClassDiffMethodNodes = $testClassDiffMethodNodes;
                 }));
-                $testNodes = $nodeTraverser->traverse($stmts);
+                $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
 
                 // 打印输出语法树
-                file_exists($testClassDir) or mkdir($testClassDir, 0755, true);
+                file_exists($testClassDir = dirname($testClassPath)) or mkdir($testClassDir, 0755, true);
                 // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testNodes));
-                file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testNodes, $stmts, $this->lexer->getTokens()));
+                file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
 
                 $statistics['related_classes']++;
                 $statistics['added_methods'] += count($testClassDiffMethodNodes);
