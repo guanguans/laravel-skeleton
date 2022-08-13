@@ -30,9 +30,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class GenerateTestMethodsCommand extends Command
+class GenerateTestsCommand extends Command
 {
-    protected $signature = 'generate:test-methods
+    protected $signature = 'generate:tests
                             {--in-dir=* : The directories to search for files}
                             {--path=* : The paths to search for files}
                             {--name=* : The names to search for files}
@@ -45,7 +45,7 @@ class GenerateTestMethodsCommand extends Command
                             {--m|parse-mode=1 : The mode to use for the PHP parser}
                             {--M|memory-limit= : The memory limit to use for the PHP parser}';
 
-    protected $description = 'Generate test methods.';
+    protected $description = 'Generate tests for the given files.';
 
     /** @var array */
     private static $statistics = [
