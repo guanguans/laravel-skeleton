@@ -246,7 +246,7 @@ class GenerateTestsCommand extends Command
                 'path' => $this->option('path') ?: [],
                 'notPath' => $this->option('not-path') ?: ['tests', 'Tests', 'test', 'Test', 'Macros', 'Facades'],
                 'name' => $this->option('name') ?: ['*.php'],
-                'notName' => $this->option('not-name') ?: ['*Test.php', '*TestCase.php'],
+                'notName' => $this->option('not-name') ?: ['*Test.php', '*TestCase.php', '*.blade.php'],
             ];
             foreach ($methods as $method => $parameters) {
                 $finder->{$method}($parameters);
