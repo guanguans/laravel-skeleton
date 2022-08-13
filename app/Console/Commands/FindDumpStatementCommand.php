@@ -16,6 +16,7 @@ namespace App\Console\Commands;
 use Composer\XdebugHandler\XdebugHandler;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use PhpParser\Error;
 use PhpParser\Node;
 use PhpParser\NodeFinder;
@@ -25,7 +26,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class FindDumpCommand extends Command
+class FindDumpStatementCommand extends Command
 {
     /** @var string */
     protected $signature = <<<'signature'
@@ -35,11 +36,31 @@ class FindDumpCommand extends Command
         {--name=* : The names to search for files}
         {--not-path=* : The paths to exclude from the search}
         {--not-name=* : The names to exclude from the search}
+        {--s|struct=* : The structs to search}
+        {--f|func=* : The funcs to search}
         {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
         {--M|memory-limit= : The memory limit to use for the PHP parser}'
     signature;
     /** @var string */
-    protected $description = 'Find dump calls in PHP files.';
+    protected $description = 'Find dump statement calls in PHP files.';
+    /** @var \string[][] */
+    private $statements = [
+        'struct' => [
+            'echo',
+            'print',
+            'die',
+            'exit',
+        ],
+        'func' => [
+            'printf',
+            'vprintf',
+            'var_dump',
+            'dump',
+            'dd',
+            'print_r',
+            'var_export'
+        ]
+    ];
 
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
@@ -58,8 +79,10 @@ class FindDumpCommand extends Command
 
     public function handle()
     {
-        $findInfos = [];
-        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos) {
+        $infos = [];
+        $odd = false;
+
+        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$infos, &$odd) {
             try {
                 $nodes = $this->parser->parse(file_get_contents($fileInfo->getRealPath()));
             } catch (Error $e) {
@@ -70,43 +93,62 @@ class FindDumpCommand extends Command
             }
 
             $dumpNodes = $this->nodeFinder->find($nodes, function (Node $node) {
-                foreach ([Node\Stmt\Echo_::class, Node\Expr\Print_::class, Node\Expr\Exit_::class] as $stmt) {
-                    if ($node instanceof $stmt) {
-                        return true;
-                    }
-                }
-
-                if (! $node instanceof Node\Stmt\Expression || ! $node->expr instanceof Node\Expr\FuncCall || ! $node->expr->name instanceof Node\Name) {
-                    return false;
-                }
-
-                if (in_array($node->expr->name->toString(), ['printf', 'vprintf', 'var_dump', 'dump', 'dd', 'print_r', 'var_export'])) {
+                if (
+                    $node instanceof Node\Stmt\Expression
+                    && $node->expr instanceof Node\Expr\FuncCall
+                    && $node->expr->name instanceof Node\Name
+                    && in_array($node->expr->name->toString(), $this->statements['func'])
+                ) {
                     return true;
                 }
 
-                return false;
+                return Str::of(class_basename(get_class($node)))
+                    ->lower()
+                    ->replaceLast('_', '')
+                    ->is($this->statements['struct']);
             });
+            if (empty($dumpNodes)) {
+                return;
+            }
 
-            $findInfos[] = array_map(function (Node $dumpNode) use ($fileInfo) {
+            $odd = ! $odd;
+            $infos[] = array_map(function (Node $dumpNode) use ($fileInfo, $odd) {
                 if ($dumpNode instanceof Node\Stmt\Expression && $dumpNode->expr instanceof Node\Expr\FuncCall) {
-                    $name = $dumpNode->expr->name->parts[0];
-                    $type = 'func';
+                    $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
+                    $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename(get_class($dumpNode)))->lower()->replaceLast('_', '');
-                    $type = 'struct';
+                    $name = Str::of(class_basename(get_class($dumpNode)))->lower()->replaceLast('_', '')->pipe(function (Stringable $name) {
+                        return "<fg=red>$name</>";
+                    });
+                    $type = '<fg=red>struct</>';
                 }
 
-                return [
-                    'file' => Str::replace(base_path(), '', $fileInfo->getRealPath()),
-                    'line' => $dumpNode->getAttribute('startLine'),
-                    'type' => $type,
-                    'name' => $name,
-                ];
+                $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(function (Stringable $file) use ($odd) {
+                    return $odd ? "<fg=blue>$file</>" : "<fg=green>$file</>";
+                });
+                $line = $odd ? "<fg=blue>{$dumpNode->getAttribute('startLine')}</>" : "<fg=green>{$dumpNode->getAttribute('startLine')}</>";
+
+                return [$name, $type, $file, $line];
             }, $dumpNodes);
         });
 
+        $infos = collect(array_merge([], ...$infos))->map(function ($info, $index) {
+            $index++;
+            array_unshift($info, "<fg=yellow>$index</>");
+
+            return $info;
+        });
+
         $this->newLine();
-        $this->table(['File', 'Line', 'Type', 'Name'], array_merge(...$findInfos));
+        if (empty($infos)) {
+            $this->info('The print statement was not found.');
+
+            return 0;
+        }
+
+        $this->table(['Index', 'Name', 'Type', 'File', 'Line'], $infos);
+
+        return 1;
     }
 
     protected function checkOptions()
@@ -119,6 +161,14 @@ class FindDumpCommand extends Command
         ) {
             $this->error('The parse-mode option is not valid(1,2,3,4).');
             exit(1);
+        }
+
+        if ($this->option('struct')) {
+            $this->statements['struct'] = array_intersect($this->statements['struct'], $this->option('struct'));
+        }
+
+        if ($this->option('func')) {
+            $this->statements['func'] = array_intersect($this->statements['func'], $this->option('func'));
         }
     }
 
@@ -137,9 +187,9 @@ class FindDumpCommand extends Command
     {
         $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder) {
             $methods = [
-                'in' => $this->option('dir') ?: [app_path()],
+                'in' => $this->option('dir') ?: [base_path()],
                 'path' => $this->option('path') ?: [],
-                'notPath' => $this->option('not-path') ?: [],
+                'notPath' => $this->option('not-path') ?: ['vendor', 'storage'],
                 'name' => $this->option('name') ?: ['*.php'],
                 'notName' => $this->option('not-name') ?: [],
             ];
