@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use Composer\XdebugHandler\XdebugHandler;
@@ -32,28 +42,31 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class GenerateTestsCommand extends Command
 {
-    protected $signature = 'generate:tests
-                            {--in-dir=* : The directories to search for files}
-                            {--path=* : The paths to search for files}
-                            {--name=* : The names to search for files}
-                            {--not-path=* : The paths to exclude from the search}
-                            {--not-name=* : The names to exclude from the search}
-                            {--base-namespace=Tests\\Unit : The base namespace for the generated tests}
-                            {--base-dir=./tests/Unit/ : The base directory for the generated tests}
-                            {--default-class=./tests/Unit/ExampleTest.php : The default class to use for the generated tests}
-                            {--f|method-format=snake : The format to use for the method names}
-                            {--m|parse-mode=1 : The mode to use for the PHP parser}
-                            {--M|memory-limit= : The memory limit to use for the PHP parser}';
-
-    protected $description = 'Generate tests for the given files.';
-
+    /** @var string */
+    protected $signature = <<<'signature'
+        generate:tests
+        {--dir=* : The directories to search for files}
+        {--path=* : The paths to search for files}
+        {--name=* : The names to search for files}
+        {--not-path=* : The paths to exclude from the search}
+        {--not-name=* : The names to exclude from the search}
+        {--base-namespace=Tests\Unit : The base namespace for the generated tests}
+        {--base-dir=./tests/Unit/ : The base directory for the generated tests}
+        {--t|template-file=./tests/Unit/ExampleTest.php : The template file to use for the generated tests}
+        {--f|method-format=snake : The format(snake/camel) to use for the method names}
+        {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
+        {--M|memory-limit= : The memory limit to use for the PHP parser}'
+    signature;
+    /** @var string */
+    protected $description = 'Generate tests for the given files';
     /** @var array */
     private static $statistics = [
-        'all_files' => 0,
-        'all_classes' => 0,
+        'scanned_files' => 0,
+        'scanned_classes' => 0,
         'related_classes' => 0,
         'added_methods' => 0
     ];
+
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
     /** @var \PhpParser\Lexer\Emulative */
@@ -83,7 +96,6 @@ class GenerateTestsCommand extends Command
     /** @var \PhpParser\NodeVisitorAbstract */
     private $classUpdatingVisitor;
 
-    /** @var array */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         parent::initialize($input, $output);
@@ -111,21 +123,21 @@ class GenerateTestsCommand extends Command
             foreach ($originalNamespaceNodes as $originalNamespaceNode) {
                 $originalClassNamespace = $originalNamespaceNode->name->toString();
 
+                /** @var Class_[]|Trait_[] $originalClassNodes */
                 $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, function (Node $node) {
                     return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
                 });
-                self::$statistics['all_classes'] += count($originalClassNodes);
-                /** @var Class_|Trait_ $originalClassNode */
+                self::$statistics['scanned_classes'] += count($originalClassNodes);
                 foreach ($originalClassNodes as $originalClassNode) {
                     // 准备基本信息
                     $testClassNamespace = Str::finish($this->option('base-namespace'), '\\').$originalClassNamespace;
                     $testClassName = "{$originalClassNode->name->name}Test";
                     $testClassFullName = $testClassNamespace.'\\'.$testClassName;
                     $testClassBaseName = str_replace('\\', DIRECTORY_SEPARATOR, $originalClassNamespace);
-                    $testClassPath = Str::finish($this->option('base-dir'), DIRECTORY_SEPARATOR). $testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
+                    $testClassFile = Str::finish($this->option('base-dir'), DIRECTORY_SEPARATOR). $testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
 
-                    // 默认生成源类的全部方法节点
-                    $testClassDiffMethodNodes = array_map(function (ClassMethod $node) {
+                    // 获取需要生成的测试方法节点
+                    $testClassAddedMethodNodes = array_map(function (ClassMethod $node) {
                         return tap(
                             $this->builderFactory
                                 ->method(Str::{$this->option('method-format')}('test_' . Str::snake($node->name->name)))
@@ -133,59 +145,51 @@ class GenerateTestsCommand extends Command
                                 ->getNode()
                         )->setAttribute('isAdded', true);
                     }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
-                        return $node->isPublic() && ! $node->isAbstract();
+                        return $node->isPublic() && ! $node->isAbstract() && $node->name->toString() !== '__construct';
                     }));
-                    $testClassDiffMethodNames = array_map(function (ClassMethod $node) {
-                        return $node->name->name;
-                    }, $testClassDiffMethodNodes);
-
-                    // 获取需要生成的测试方法节点
-                    if (file_exists($testClassPath)) {
+                    if ($isExistsTestClassFile = file_exists($testClassFile)) {
                         $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
-                            return $method->getName();
+                            return Str::{$this->option('method-format')}($method->getName());
                         }, (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
                             return Str::startsWith($name, 'test');
                         });
 
-                        $testClassDiffMethodNames = array_diff(
-                            array_map([Str::class, $this->option('method-format')], $testClassDiffMethodNames),
-                            array_map([Str::class, $this->option('method-format')], $originalTestClassMethodNames)
-                        );
-                        if (empty($testClassDiffMethodNames)) {
+                        $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, function (ClassMethod $node) use ($originalTestClassMethodNames) {
+                            return ! in_array($node->name->name, $originalTestClassMethodNames, true);
+                        });
+                        if (empty($testClassAddedMethodNodes)) {
                             continue;
                         }
-
-                        $testClassDiffMethodNodes = array_filter($testClassDiffMethodNodes, function (ClassMethod $node) use ($testClassDiffMethodNames) {
-                            return in_array($node->name->name, $testClassDiffMethodNames, true);
-                        });
                     }
 
                     // 修改抽象语法树(遍历节点)
                     $originalTestClassNodes = $this->parser->parse(
-                        file_exists($testClassPath) ? file_get_contents($testClassPath) : file_get_contents($this->option('default-class')),
+                        $isExistsTestClassFile ? file_get_contents($testClassFile) : file_get_contents($this->option('template-file')),
                         $this->errorHandler
                     );
+
+                    $this->classUpdatingVisitor->testClassNamespace = $testClassNamespace;
+                    $this->classUpdatingVisitor->testClassName = $testClassName;
+                    $this->classUpdatingVisitor->testClassAddedMethodNodes = $testClassAddedMethodNodes;
+
                     $nodeTraverser = clone $this->nodeTraverser;
-                    $nodeTraverser->addVisitor(tap($this->classUpdatingVisitor, function (NodeVisitorAbstract $nodeVisitor) use ($testClassNamespace, $testClassName, $testClassDiffMethodNodes) {
-                        $nodeVisitor->testClassNamespace = $testClassNamespace;
-                        $nodeVisitor->testClassName = $testClassName;
-                        $nodeVisitor->testClassDiffMethodNodes = $testClassDiffMethodNodes;
-                    }));
+                    $nodeTraverser->addVisitor($this->classUpdatingVisitor);
                     $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
 
                     // 打印输出语法树
-                    file_exists($testClassDir = dirname($testClassPath)) or mkdir($testClassDir, 0755, true);
-                    // file_put_contents($testClassPath, $this->prettyPrinter->prettyPrintFile($testClassNodes));
-                    file_put_contents($testClassPath, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
+                    file_exists($testClassDir = dirname($testClassFile)) or mkdir($testClassDir, 0755, true);
+                    file_put_contents($testClassFile, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
 
                     self::$statistics['related_classes']++;
-                    self::$statistics['added_methods'] += count($testClassDiffMethodNodes);
+                    self::$statistics['added_methods'] += count($testClassAddedMethodNodes);
                 }
             }
         });
 
         $this->newLine();
-        $this->table(['All files', 'All classes', 'Related classes', 'Added methods'], [self::$statistics]);
+        $this->table(array_map(function ($name) {
+            return Str::of($name)->replace('_', ' ')->title();
+        }, array_keys(self::$statistics)), [self::$statistics]);
 
         return 0;
     }
@@ -202,33 +206,23 @@ class GenerateTestsCommand extends Command
             exit(1);
         }
 
-        if (! $this->option('base-namespace')) {
-            $this->error('The base-namespace option is required.');
-            exit(1);
-        }
-
-        if (! $this->option('base-dir')) {
-            $this->error('The base-dir option is required.');
-            exit(1);
-        }
-
-        if (! file_exists($this->option('base-dir'))) {
-            $this->error('The base-dir option is not a valid directory.');
-            exit(1);
-        }
-
         if (! in_array($this->option('method-format'), ['snake','camel'])) {
             $this->error('The method-format option is not valid(snake/camel).');
             exit(1);
         }
 
-        if (! $this->option('default-class')) {
-            $this->error('The default-class option is required.');
+        if (! $this->option('base-namespace')) {
+            $this->error('The base-namespace option is required.');
             exit(1);
         }
 
-        if (! file_exists($this->option('default-class'))) {
-            $this->error('The default-class option is not a valid file.');
+        if (! $this->option('base-dir') || ! file_exists($this->option('base-dir')) || ! is_dir($this->option('base-dir'))) {
+            $this->error('The base-dir option is not a valid directory.');
+            exit(1);
+        }
+
+        if (! $this->option('template-file') || ! file_exists($this->option('template-file')) || ! is_file($this->option('template-file'))) {
+            $this->error('The template-file option is not a valid file.');
             exit(1);
         }
     }
@@ -247,26 +241,21 @@ class GenerateTestsCommand extends Command
     protected function initializeProperties()
     {
         $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder) {
-            $operations = [
-                'in' => $this->option('in-dir') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
+            $methods = [
+                'in' => $this->option('dir') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
                 'path' => $this->option('path') ?: [],
-                'notPath' => $this->option('not-path') ?: ['Macros', 'Facades'],
+                'notPath' => $this->option('not-path') ?: ['tests', 'Tests', 'test', 'Test', 'Macros', 'Facades'],
                 'name' => $this->option('name') ?: ['*.php'],
-                'notName' => $this->option('not-name') ?: [],
+                'notName' => $this->option('not-name') ?: ['*Test.php', '*TestCase.php'],
             ];
-            foreach ($operations as $operation => $parameters) {
-                $finder->{$operation}($parameters);
+            foreach ($methods as $method => $parameters) {
+                $finder->{$method}($parameters);
             }
 
-            self::$statistics['all_files'] = $finder->count();
+            self::$statistics['scanned_files'] = $finder->count();
         });
 
-        $this->lexer = new Emulative(['usedAttributes' => [
-            'comments',
-            'startLine', 'endLine',
-            'startTokenPos', 'endTokenPos',
-        ]]);
-
+        $this->lexer = new Emulative(['usedAttributes' => ['comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos']]);
         $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'), $this->lexer);
         $this->errorHandler = new Collecting();
         $this->builderFactory = new BuilderFactory();
@@ -285,13 +274,13 @@ class GenerateTestsCommand extends Command
             /** @var string */
             public $testClassName;
             /** @var \PhpParser\Node\Stmt\ClassMethod[] */
-            public $testClassDiffMethodNodes = [];
+            public $testClassAddedMethodNodes = [];
 
-            public function __construct(string $testClassNamespace, string $testClassName, array $testClassDiffMethodNodes)
+            public function __construct(string $testClassNamespace, string $testClassName, array $testClassAddedMethodNodes)
             {
                 $this->testClassNamespace = $testClassNamespace;
                 $this->testClassName = $testClassName;
-                $this->testClassDiffMethodNodes = $testClassDiffMethodNodes;
+                $this->testClassAddedMethodNodes = $testClassAddedMethodNodes;
             }
 
             public function leaveNode(Node $node)
@@ -302,7 +291,7 @@ class GenerateTestsCommand extends Command
 
                 if ($node instanceof Node\Stmt\Class_) {
                     $node->name->name = $this->testClassName;
-                    $node->stmts = array_merge($node->stmts, $this->testClassDiffMethodNodes);
+                    $node->stmts = array_merge($node->stmts, $this->testClassAddedMethodNodes);
                 }
             }
         };
