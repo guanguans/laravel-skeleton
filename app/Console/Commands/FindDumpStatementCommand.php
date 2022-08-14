@@ -71,7 +71,6 @@ class FindDumpStatementCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        parent::initialize($input, $output);
         $this->checkOptions();
         $this->initializeEnvs();
         $this->initializeProperties();
@@ -79,10 +78,11 @@ class FindDumpStatementCommand extends Command
 
     public function handle()
     {
-        $infos = [];
-        $odd = false;
+        $findInfos = [];
 
-        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$infos, &$odd) {
+        $odd = true;
+
+        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd) {
             try {
                 $nodes = $this->parser->parse(file_get_contents($fileInfo->getRealPath()));
             } catch (Error $e) {
@@ -111,8 +111,7 @@ class FindDumpStatementCommand extends Command
                 return;
             }
 
-            $odd = ! $odd;
-            $infos[] = array_map(function (Node $dumpNode) use ($fileInfo, $odd) {
+            $findInfos[] = array_map(function (Node $dumpNode) use ($fileInfo, $odd) {
                 if ($dumpNode instanceof Node\Stmt\Expression && $dumpNode->expr instanceof Node\Expr\FuncCall) {
                     $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
                     $type = '<fg=cyan>func</>';
@@ -128,25 +127,36 @@ class FindDumpStatementCommand extends Command
                 });
                 $line = $odd ? "<fg=blue>{$dumpNode->getAttribute('startLine')}</>" : "<fg=green>{$dumpNode->getAttribute('startLine')}</>";
 
-                return [$name, $type, $file, $line];
+                return [
+                    'index' => null,
+                    'name' => $name,
+                    'type' => $type,
+                    'file' => $file,
+                    'line' => $line,
+                ];
             }, $dumpNodes);
-        });
 
-        $infos = collect(array_merge([], ...$infos))->map(function ($info, $index) {
-            $index++;
-            array_unshift($info, "<fg=yellow>$index</>");
-
-            return $info;
+            $odd = ! $odd;
         });
 
         $this->newLine();
-        if (empty($infos)) {
+
+        if (empty($findInfos)) {
             $this->info('The print statement was not found.');
 
             return 0;
         }
 
-        $this->table(['Index', 'Name', 'Type', 'File', 'Line'], $infos);
+        $findInfos = array_map(function ($info, $index) {
+            $index++;
+            $info['index'] = "<fg=yellow>$index</>";
+
+            return $info;
+        }, $findInfos = array_merge([], ...$findInfos), array_keys($findInfos));
+
+        $this->table(array_map(function ($name) {
+            return Str::of($name)->snake()->replace('_', ' ')->title();
+        }, array_keys($findInfos[0])), $findInfos);
 
         return 1;
     }
