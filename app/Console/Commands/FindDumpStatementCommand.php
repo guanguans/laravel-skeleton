@@ -21,6 +21,7 @@ use PhpParser\Error;
 use PhpParser\Node;
 use PhpParser\NodeFinder;
 use PhpParser\ParserFactory;
+use PhpParser\PrettyPrinter\Standard;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
@@ -68,6 +69,8 @@ class FindDumpStatementCommand extends Command
     private $parser;
     /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
+    /** @var \PhpParser\PrettyPrinter\Standard */
+    private $prettyPrinter;
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
@@ -125,7 +128,12 @@ class FindDumpStatementCommand extends Command
                 $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(function (Stringable $file) use ($odd) {
                     return $odd ? "<fg=blue>$file</>" : "<fg=green>$file</>";
                 });
-                $line = $odd ? "<fg=blue>{$dumpNode->getAttribute('startLine')}</>" : "<fg=green>{$dumpNode->getAttribute('startLine')}</>";
+                $line = Str::of($dumpNode->getAttribute('startLine'))->pipe(function (Stringable $line) use ($odd) {
+                    return $odd ? "<fg=blue>$line</>" : "<fg=green>$line</>";
+                });
+                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(function (Stringable $formattedCode) use ($odd) {
+                    return $odd ? "<fg=blue>$formattedCode</>" : "<fg=green>$formattedCode</>";
+                });
 
                 return [
                     'index' => null,
@@ -133,6 +141,7 @@ class FindDumpStatementCommand extends Command
                     'type' => $type,
                     'file' => $file,
                     'line' => $line,
+                    'formatted_code' => $formattedCode,
                 ];
             }, $dumpNodes);
 
@@ -210,5 +219,6 @@ class FindDumpStatementCommand extends Command
 
         $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'));
         $this->nodeFinder = new NodeFinder();
+        $this->prettyPrinter = new Standard();
     }
 }
