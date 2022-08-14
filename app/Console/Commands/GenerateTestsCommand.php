@@ -98,7 +98,6 @@ class GenerateTestsCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        parent::initialize($input, $output);
         $this->checkOptions();
         $this->initializeEnvs();
         $this->initializeProperties();
@@ -188,7 +187,7 @@ class GenerateTestsCommand extends Command
 
         $this->newLine();
         $this->table(array_map(function ($name) {
-            return Str::of($name)->replace('_', ' ')->title();
+            return Str::of($name)->snake()->replace('_', ' ')->title();
         }, array_keys(self::$statistics)), [self::$statistics]);
 
         return 0;
