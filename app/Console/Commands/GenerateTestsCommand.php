@@ -35,6 +35,8 @@ use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
 use ReflectionClass;
 use ReflectionMethod;
+use SebastianBergmann\Timer\ResourceUsageFormatter;
+use SebastianBergmann\Timer\Timer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
@@ -69,6 +71,8 @@ class GenerateTestsCommand extends Command
 
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
+    /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
+    private $resourceUsageFormatter;
     /** @var \PhpParser\Lexer\Emulative */
     private $lexer;
     /** @var \PhpParser\Parser */
@@ -103,8 +107,9 @@ class GenerateTestsCommand extends Command
         $this->initializeProperties();
     }
 
-    public function handle()
+    public function handle(Timer $timer)
     {
+        $timer->start();
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) {
             try {
                 $originalNodes = $this->parser->parse(file_get_contents($fileInfo->getRealPath()));
@@ -190,6 +195,8 @@ class GenerateTestsCommand extends Command
             return Str::of($name)->snake()->replace('_', ' ')->title();
         }, array_keys(self::$statistics)), [self::$statistics]);
 
+        $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
+
         return 0;
     }
 
@@ -254,6 +261,7 @@ class GenerateTestsCommand extends Command
             self::$statistics['scanned_files'] = $finder->count();
         });
 
+        $this->resourceUsageFormatter = new ResourceUsageFormatter();
         $this->lexer = new Emulative(['usedAttributes' => ['comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos']]);
         $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'), $this->lexer);
         $this->errorHandler = new Collecting();
