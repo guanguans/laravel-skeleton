@@ -22,6 +22,8 @@ use PhpParser\Node;
 use PhpParser\NodeFinder;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
+use SebastianBergmann\Timer\ResourceUsageFormatter;
+use SebastianBergmann\Timer\Timer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
@@ -71,6 +73,8 @@ class FindDumpStatementCommand extends Command
     private $nodeFinder;
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
+    /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
+    private $resourceUsageFormatter;
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
@@ -79,10 +83,10 @@ class FindDumpStatementCommand extends Command
         $this->initializeProperties();
     }
 
-    public function handle()
+    public function handle(Timer $timer)
     {
+        $timer->start();
         $findInfos = [];
-
         $odd = true;
 
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd) {
@@ -152,6 +156,7 @@ class FindDumpStatementCommand extends Command
 
         if (empty($findInfos)) {
             $this->info('The print statement was not found.');
+            $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
             return 0;
         }
@@ -166,6 +171,8 @@ class FindDumpStatementCommand extends Command
         $this->table(array_map(function ($name) {
             return Str::of($name)->snake()->replace('_', ' ')->title();
         }, array_keys($findInfos[0])), $findInfos);
+
+        $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
         return 1;
     }
@@ -220,5 +227,6 @@ class FindDumpStatementCommand extends Command
         $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'));
         $this->nodeFinder = new NodeFinder();
         $this->prettyPrinter = new Standard();
+        $this->resourceUsageFormatter = new ResourceUsageFormatter();
     }
 }
