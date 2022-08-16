@@ -86,9 +86,6 @@ class FindDumpStatementCommand extends Command
     public function handle(Timer $timer)
     {
         $timer->start();
-        $findInfos = [];
-        $odd = true;
-
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd) {
             try {
                 $nodes = $this->parser->parse(file_get_contents($fileInfo->getRealPath()));
@@ -130,13 +127,13 @@ class FindDumpStatementCommand extends Command
                 }
 
                 $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(function (Stringable $file) use ($odd) {
-                    return $odd ? "<fg=blue>$file</>" : "<fg=green>$file</>";
+                    return $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>";
                 });
                 $line = Str::of($dumpNode->getAttribute('startLine'))->pipe(function (Stringable $line) use ($odd) {
-                    return $odd ? "<fg=blue>$line</>" : "<fg=green>$line</>";
+                    return $odd ? "<fg=green>$line</>" : "<fg=blue>$line</>";
                 });
                 $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(function (Stringable $formattedCode) use ($odd) {
-                    return $odd ? "<fg=blue>$formattedCode</>" : "<fg=green>$formattedCode</>";
+                    return $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>";
                 });
 
                 return [
