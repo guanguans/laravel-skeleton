@@ -83,23 +83,20 @@ class HealthCheckCommand extends Command
 
                 return collect($checks);
             })
-            ->tap(function (Collection $checks) {
-                $checks
-                    ->filter(function ($check) {
-                        return $check['state']->isNot(HealthCheckStateEnum::OK);
-                    })
-                    ->whenNotEmpty(function (Collection $notOkChecks) {
-                        // event(new HealthCheckFailedEvent($notOkChecks));
-                        $this->error('Health check failed.');
+            ->filter(function ($check) {
+                return $check['state']->isNot(HealthCheckStateEnum::OK);
+            })
+            ->whenNotEmpty(function (Collection $notOkChecks) {
+                // event(new HealthCheckFailedEvent($notOkChecks));
+                $this->error('Health check failed.');
 
-                        return $notOkChecks;
-                    })
-                    ->whenEmpty(function (Collection $notOkChecks) {
-                        // event(new HealthCheckPassedEvent());
-                        $this->info('Health check passed.');
+                return $notOkChecks;
+            })
+            ->whenEmpty(function (Collection $notOkChecks) {
+                // event(new HealthCheckPassedEvent());
+                $this->info('Health check passed.');
 
-                        return $notOkChecks;
-                    });
+                return $notOkChecks;
             });
 
         return 0;
