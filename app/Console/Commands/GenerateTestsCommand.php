@@ -35,6 +35,7 @@ use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
 use ReflectionClass;
 use ReflectionMethod;
+use RuntimeException;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\Console\Input\InputInterface;
@@ -112,7 +113,7 @@ class GenerateTestsCommand extends Command
         $timer->start();
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) {
             try {
-                $originalNodes = $this->parser->parse(file_get_contents($fileInfo->getRealPath()));
+                $originalNodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $e) {
                 $this->newLine();
                 $this->error(sprintf("The file of %s parse error: %s.", $fileInfo->getRealPath(), $e->getMessage()));
@@ -181,7 +182,9 @@ class GenerateTestsCommand extends Command
                     $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
 
                     // 打印输出语法树
-                    file_exists($testClassDir = dirname($testClassFile)) or mkdir($testClassDir, 0755, true);
+                    if (! file_exists($testClassDir = dirname($testClassFile)) && ! mkdir($testClassDir, 0755, true) && ! is_dir($testClassDir)) {
+                        throw new RuntimeException(sprintf('Directory "%s" was not created', $testClassDir));
+                    }
                     file_put_contents($testClassFile, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
 
                     self::$statistics['related_classes']++;

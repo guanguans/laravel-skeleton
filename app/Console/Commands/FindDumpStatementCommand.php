@@ -40,12 +40,12 @@ class FindDumpStatementCommand extends Command
         {--not-path=* : The paths to exclude from the search}
         {--not-name=* : The names to exclude from the search}
         {--s|struct=* : The structs to search}
-        {--f|func=* : The funcs to search}
+        {--f|func=* : The functions to search}
         {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
         {--M|memory-limit= : The memory limit to use for the PHP parser}'
     signature;
     /** @var string */
-    protected $description = 'Find dump statement calls in PHP files.';
+    protected $description = 'Find dump statements in PHP files.';
     /** @var \string[][] */
     private $statements = [
         'struct' => [
