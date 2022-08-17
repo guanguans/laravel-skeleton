@@ -88,7 +88,7 @@ class FindDumpStatementCommand extends Command
         $timer->start();
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd) {
             try {
-                $nodes = $this->parser->parse(file_get_contents($fileInfo->getRealPath()));
+                $nodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $e) {
                 $this->newLine();
                 $this->error(sprintf("The file of %s parse error: %s.", $fileInfo->getRealPath(), $e->getMessage()));
