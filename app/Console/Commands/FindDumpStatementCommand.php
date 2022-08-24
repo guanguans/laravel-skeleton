@@ -155,7 +155,7 @@ class FindDumpStatementCommand extends Command
             $this->info('The print statement was not found.');
             $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
-            return 0;
+            return static::INVALID;
         }
 
         $findInfos = array_map(function ($info, $index) {
@@ -171,7 +171,7 @@ class FindDumpStatementCommand extends Command
 
         $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
-        return 1;
+        return static::SUCCESS;
     }
 
     protected function checkOptions()
