@@ -120,6 +120,7 @@
         "cghooks": "./vendor/bin/cghooks",
         "docs-generate": "@php artisan scribe:generate --ansi",
         "phpstan": "./vendor/bin/phpstan analyse --memory-limit=2G --ansi",
+        "phpstan-generate-baseline": "phpstan --generate-baseline=phpstan-baseline.neon",
         "style-fix": "@php artisan fixer:fix --ansi",
         "style-lint": "@php artisan fixer:fix --diff --dry-run --ansi"
     }
