@@ -273,4 +273,44 @@ class QueryBuilderMacro
             return $this->whereIns($columns, $values, 'or', true);
         };
     }
+
+    /**
+     * @see https://github.com/ankane/hightop-php
+     */
+    public function top(): callable
+    {
+        return function ($column, ?int $limit = null, ?bool $null = false, ?int $min = null, ?string $distinct = null) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            if ($distinct === null) {
+                $op = 'count(*)';
+            } else {
+                $quotedDistinct = $this->getGrammar()->wrap($distinct);
+                $op = "count(distinct $quotedDistinct)";
+            }
+
+            $relation = $this->select($column)->selectRaw($op)->groupBy($column)->orderByRaw('1 desc')->orderBy($column);
+
+            if ($limit !== null) {
+                $relation = $relation->limit($limit);
+            }
+
+            if (! $null) {
+                $relation = $relation->whereNotNull($column);
+            }
+
+            if ($min !== null) {
+                $relation = $relation->havingRaw("$op >= ?", [$min]);
+            }
+
+            // can't use pluck with expressions in Postgres without an alias
+            $rows = $relation->get()->toArray();
+            $result = [];
+            foreach ($rows as $row) {
+                $values = array_values($row);
+                $result[$values[0]] = $values[1];
+            }
+
+            return $result;
+        };
+    }
 }
