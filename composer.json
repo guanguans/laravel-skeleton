@@ -98,14 +98,14 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "cghooks add --ignore-lock",
-            "cghooks update"
+            "@cghooks add --ignore-lock",
+            "@cghooks update"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:meta",
-            "cghooks update"
+            "@cghooks update"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -119,8 +119,8 @@
         ],
         "cghooks": "./vendor/bin/cghooks",
         "docs-generate": "@php artisan scribe:generate --ansi",
-        "phpstan": "./vendor/bin/phpstan analyse --memory-limit=2G --ansi",
-        "phpstan-generate-baseline": "phpstan --generate-baseline=phpstan-baseline.neon",
+        "phpstan": "./vendor/bin/phpstan analyse --memory-limit=2G --ansi -vv",
+        "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
         "style-fix": "@php artisan fixer:fix --ansi",
         "style-lint": "@php artisan fixer:fix --diff --dry-run --ansi"
     }
