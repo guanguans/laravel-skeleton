@@ -101,6 +101,6 @@ class InflectorCommand extends Command
                 );
             });
 
-        return 0;
+        return self::SUCCESS;
     }
 }

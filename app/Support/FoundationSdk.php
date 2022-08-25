@@ -4,6 +4,7 @@ namespace App\Support;
 
 use App\Traits\ValidatesData;
 use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\MessageFormatterInterface;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Request;
@@ -60,7 +61,7 @@ abstract class FoundationSdk
         });
     }
 
-    public function withLogMiddleware(LoggerInterface $logger = null, $formatter = null, string $logLevel = 'info')
+    public function withLogMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info')
     {
         return $this->tapPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger) {
             $logger or $logger = Log::channel('daily');

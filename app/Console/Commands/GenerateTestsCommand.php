@@ -84,21 +84,20 @@ class GenerateTestsCommand extends Command
     private $builderFactory;
     /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
-    /** @var \PhpParser\NodeDumper */
-    private $nodeDumper;
-    /** @var \PhpParser\JsonDecoder */
-    private $jsonDecoder;
+    // /** @var \PhpParser\NodeDumper */
+    // private $nodeDumper;
+    // /** @var \PhpParser\JsonDecoder */
+    // private $jsonDecoder;
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
     /** @var \PhpParser\NodeTraverser */
     private $nodeTraverser;
-    /** @var \PhpParser\NodeVisitor\ParentConnectingVisitor */
-    private $parentConnectingVisitor;
-    /** @var \PhpParser\NodeVisitor\NodeConnectingVisitor */
-    private $nodeConnectingVisitor;
+    // /** @var \PhpParser\NodeVisitor\ParentConnectingVisitor */
+    // private $parentConnectingVisitor;
+    // /** @var \PhpParser\NodeVisitor\NodeConnectingVisitor */
+    // private $nodeConnectingVisitor;
     /** @var \PhpParser\NodeVisitor\CloningVisitor */
     private $cloningVisitor;
-    /** @var \PhpParser\NodeVisitorAbstract */
     private $classUpdatingVisitor;
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -125,6 +124,7 @@ class GenerateTestsCommand extends Command
                 return $node instanceof Node\Stmt\Namespace_ && $node->name;
             });
 
+            /** @var Node\Stmt\Namespace_ $originalNamespaceNode */
             foreach ($originalNamespaceNodes as $originalNamespaceNode) {
                 $originalClassNamespace = $originalNamespaceNode->name->toString();
 
@@ -200,7 +200,7 @@ class GenerateTestsCommand extends Command
 
         $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
-        return 0;
+        return self::SUCCESS;
     }
 
     protected function checkOptions()
@@ -270,11 +270,11 @@ class GenerateTestsCommand extends Command
         $this->errorHandler = new Collecting();
         $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
-        $this->nodeDumper = new NodeDumper();
-        $this->jsonDecoder = new JsonDecoder();
+        // $this->nodeDumper = new NodeDumper();
+        // $this->jsonDecoder = new JsonDecoder();
         $this->nodeTraverser = new NodeTraverser();
-        $this->parentConnectingVisitor = new ParentConnectingVisitor();
-        $this->nodeConnectingVisitor = new NodeConnectingVisitor();
+        // $this->parentConnectingVisitor = new ParentConnectingVisitor();
+        // $this->nodeConnectingVisitor = new NodeConnectingVisitor();
         $this->cloningVisitor = new CloningVisitor();
         $this->nodeTraverser->addVisitor($this->cloningVisitor);
 

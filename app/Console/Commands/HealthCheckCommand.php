@@ -99,7 +99,7 @@ class HealthCheckCommand extends Command
                 return $notOkChecks;
             });
 
-        return 0;
+        return self::SUCCESS;
     }
 
     /**

@@ -13,8 +13,6 @@ final class Base64Rule extends Rule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
-
         return base64_encode(base64_decode($value, true)) === $value;
     }
 }

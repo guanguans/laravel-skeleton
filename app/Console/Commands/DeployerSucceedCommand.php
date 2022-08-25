@@ -40,6 +40,6 @@ class DeployerSucceedCommand extends Command
         // todo something
         exception_notify_report($this->description);
 
-        return 0;
+        return self::SUCCESS;
     }
 }

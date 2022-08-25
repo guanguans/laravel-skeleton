@@ -38,7 +38,7 @@ class OptimizeAllCommand extends Command
     public function handle()
     {
         if (! $this->getLaravel()->isProduction() && ! $this->option('force')) {
-            return;
+            return self::INVALID;
         }
 
         stopwatch($this->getName(), function () {

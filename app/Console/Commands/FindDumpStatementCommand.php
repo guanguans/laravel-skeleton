@@ -171,7 +171,7 @@ class FindDumpStatementCommand extends Command
 
         $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
-        return static::SUCCESS;
+        return self::SUCCESS;
     }
 
     protected function checkOptions()

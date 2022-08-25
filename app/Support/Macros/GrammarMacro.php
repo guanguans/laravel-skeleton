@@ -11,13 +11,16 @@ class GrammarMacro
 {
     /**
      * Compile a table comment command.
-     *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-     * @param  \Illuminate\Support\Fluent  $command
-     * @return string
      */
     public function compileTableComment(): callable
     {
+        /**
+         * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+         * @param  \Illuminate\Support\Fluent  $command
+         * @param  \Illuminate\Database\Connection  $connection
+         *
+         * @return string
+         */
         return function (Blueprint $blueprint, Fluent $command, Connection $connection) {
             /* @var \Illuminate\Database\Schema\Grammars\Grammar $this */
             switch ($connection->getDriverName()) {

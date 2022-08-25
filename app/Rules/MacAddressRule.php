@@ -13,8 +13,6 @@ final class MacAddressRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
-
         $value = preg_replace("/[\. :-]/i", '', $value);
 
         return (bool)preg_match("/^[0-9a-f]{12}$/i", $value);

@@ -15,12 +15,14 @@ class BlueprintMacro
      *    $table->comment('用户表');
      * });
      * ```
-     *
-     * @param  string  $comment
-     * @return \Illuminate\Support\Fluent
      */
     public function comment(): callable
     {
+        /**
+         * @param  string  $comment
+         *
+         * @return \Illuminate\Support\Fluent
+         */
         return function ($comment) {
             /* @var \Illuminate\Database\Schema\Blueprint $this */
             return $this->addCommand('tableComment', compact('comment'));

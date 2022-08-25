@@ -76,6 +76,7 @@ class QueryBuilderMacro
     {
         /* @var string|Arrayable|string[] $values */
         return function (string $column, $values) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereFindInSet($column, $values, 'and', true);
         };
     }
@@ -84,6 +85,7 @@ class QueryBuilderMacro
     {
         /* @var string|Arrayable|string[] $values */
         return function (string $column, $values) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereFindInSet($column, $values, 'or');
         };
     }
@@ -92,6 +94,7 @@ class QueryBuilderMacro
     {
         /* @var string|Arrayable|string[] $values */
         return function (string $column, $values) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereFindInSet($column, $values, 'or', true);
         };
     }
@@ -136,6 +139,7 @@ class QueryBuilderMacro
     public function whereNotLike(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereLike($column, $value, 'and', true);
         };
     }
@@ -143,6 +147,7 @@ class QueryBuilderMacro
     public function orWhereLike(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereLike($column, $value, 'or');
         };
     }
@@ -150,6 +155,7 @@ class QueryBuilderMacro
     public function orWhereNotLike(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereLike($column, $value, 'or', true);
         };
     }
@@ -167,6 +173,7 @@ class QueryBuilderMacro
     public function whereNotStartsWith(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereStartsWith($column, $value, 'and', true);
         };
     }
@@ -174,6 +181,7 @@ class QueryBuilderMacro
     public function orWhereStartsWith(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereStartsWith($column, $value, 'or');
         };
     }
@@ -181,6 +189,7 @@ class QueryBuilderMacro
     public function orWhereNotStartsWith(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereStartsWith($column, $value, 'or', true);
         };
     }
@@ -198,6 +207,7 @@ class QueryBuilderMacro
     public function whereNotEndsWith(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereEndsWith($column, $value, 'and', true);
         };
     }
@@ -205,6 +215,7 @@ class QueryBuilderMacro
     public function orWhereEndsWith(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereEndsWith($column, $value, 'or');
         };
     }
@@ -212,6 +223,7 @@ class QueryBuilderMacro
     public function orWhereNotEndsWith(): callable
     {
         return function ($column, string $value) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereEndsWith($column, $value, 'or', true);
         };
     }

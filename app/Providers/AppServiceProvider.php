@@ -104,12 +104,12 @@ class AppServiceProvider extends ServiceProvider
                 );
             });
 
-            /** @var \App\Rules\Rule $rule */
-            if (! ($rule = app($ruleClass)) instanceof Rule) {
-                throw new RuntimeException("$ruleClass must be an instance of App\Rules\Rule");
+            if (! is_subclass_of($ruleClass, Rule::class)) {
+                throw new RuntimeException("$ruleClass must be a subclass of App\Rules\Rule");
             }
 
-            Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
+            /** @var \App\Rules\Rule $rule */
+            Validator::extend(($rule = app($ruleClass))->getName(), "$ruleClass@passes", $rule->message());
         }
     }
 

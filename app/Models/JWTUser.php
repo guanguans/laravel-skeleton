@@ -38,6 +38,7 @@ class JWTUser extends User implements JWTSubject
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
+            /** @var \Illuminate\Auth\AuthManager|\Tymon\JWTAuth\JWTGuard|\Tymon\JWTAuth\JWT */
             'expires_in' => auth()->factory()->getTTL() * 60
         ];
     }

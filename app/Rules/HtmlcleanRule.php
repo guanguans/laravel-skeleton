@@ -13,8 +13,6 @@ final class HtmlcleanRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
-
         return strip_tags($value) == $value;
     }
 }

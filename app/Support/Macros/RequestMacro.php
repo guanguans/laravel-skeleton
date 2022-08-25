@@ -171,9 +171,7 @@ class RequestMacro
             /* @var \Illuminate\Routing\RouteCollection $routeCollection */
             $routeCollection = app(Router::class)->getRoutes();
             /** @var \Illuminate\Http\Request $this */
-            $routes = is_null($this->method())
-                ? $routeCollection->getRoutes()
-                : Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
+            $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
             [$fallbacks, $routes] = collect($routes)->partition(function ($route) {
                 return $route->isFallback;
             });

@@ -305,7 +305,7 @@ if (! function_exists('stopwatch')) {
 if (! function_exists('rercord_query_log')) {
     /**
      * @param callable|string $callback
-     * @param ...$parameter
+     * @param  ...$parameter
      *
      * @return array
      */
@@ -320,6 +320,7 @@ if (! function_exists('rercord_query_log')) {
                 return $next($callback);
             })
             ->then(function ($callback) use ($parameter) {
+                /** @var array<string, mixed> $parameter */
                 Laravel::call($callback, $parameter);
 
                 return DB::getQueryLog();

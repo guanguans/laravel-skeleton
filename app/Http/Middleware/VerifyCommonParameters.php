@@ -20,7 +20,6 @@ class VerifyCommonParameters
     /**
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  null|array  $parameters
      *
      * @return mixed
      */

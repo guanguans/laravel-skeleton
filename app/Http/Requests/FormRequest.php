@@ -70,7 +70,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     }
 
     /**
-     * @inheritdoc
+     * @return null|void
      */
     protected function failedValidation(Validator $validator)
     {
@@ -83,7 +83,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     }
 
     /**
-     * @inheritdoc
+     * @return void|null
      */
     protected function failedAuthorization()
     {

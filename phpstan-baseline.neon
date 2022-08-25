@@ -4,3 +4,68 @@ parameters:
 			message: "#^Dead catch \\- Throwable is never thrown in the try block\\.$#"
 			count: 1
 			path: app/Casts/CallbackGetCast.php
+
+		-
+			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, int given\\.$#"
+			count: 2
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
+			message: "#^Property App\\\\Console\\\\Commands\\\\FindDumpStatementCommand\\:\\:\\$statements \\(array\\<array\\<string\\>\\>\\) does not accept default value of type array\\<string, array\\<int, string\\>\\>\\.$#"
+			count: 1
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
+			message: "#^Property App\\\\Console\\\\Commands\\\\FindDumpStatementCommand\\:\\:\\$statements has unknown class string as its type\\.$#"
+			count: 1
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, int given\\.$#"
+			count: 2
+			path: app/Console/Commands/GenerateTestsCommand.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Auth\\\\AuthManager\\:\\:factory\\(\\)\\.$#"
+			count: 1
+			path: app/Models/JWTUser.php
+
+		-
+			message: "#^Parameter \\#3 \\$logLevel of static method GuzzleHttp\\\\Middleware\\:\\:log\\(\\) expects 'alert'\\|'critical'\\|'debug'\\|'emergency'\\|'error'\\|'info'\\|'notice'\\|'warning', string given\\.$#"
+			count: 1
+			path: app/Support/FoundationSdk.php
+
+		-
+			message: "#^Right side of \\|\\| is always true\\.$#"
+			count: 2
+			path: app/Support/FoundationSdk.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Support\\\\Macros\\\\BlueprintMacro\\:\\:addCommand\\(\\)\\.$#"
+			count: 1
+			path: app/Support/Macros/BlueprintMacro.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Support\\\\Fluent\\:\\:\\$comment\\.$#"
+			count: 2
+			path: app/Support/Macros/GrammarMacro.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Support\\\\Macros\\\\GrammarMacro\\:\\:wrapTable\\(\\)\\.$#"
+			count: 2
+			path: app/Support/Macros/GrammarMacro.php
+
+		-
+			message: "#^Call to protected method getRelationWithoutConstraints\\(\\) of class Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\.$#"
+			count: 1
+			path: app/Support/Macros/QueryBuilderMacro.php
+
+		-
+			message: "#^Call to protected method getInputSource\\(\\) of class Illuminate\\\\Http\\\\Request\\.$#"
+			count: 1
+			path: app/Support/Macros/RequestMacro.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 2
+			path: app/Support/helpers.php

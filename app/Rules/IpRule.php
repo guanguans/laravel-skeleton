@@ -68,8 +68,6 @@ final class IpRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
-
         return $this->isPublic ? $this->isPublic($value) : $this->isPrivate($value);
     }
 }

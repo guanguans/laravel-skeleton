@@ -46,7 +46,7 @@ class TailCommand extends Command
         if ($this->option('debug')) {
             $this->info($this->getTailCommand());
 
-            return;
+            return self::SUCCESS;
         }
 
         $this->handleClearOption();
@@ -60,7 +60,7 @@ class TailCommand extends Command
                 $this->output->write($line);
             });
 
-        return 0;
+        return self::SUCCESS;
     }
 
     protected function handleClearOption()

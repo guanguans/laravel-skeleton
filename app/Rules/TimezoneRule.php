@@ -15,8 +15,6 @@ final class TimezoneRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        $this->attribute = $attribute;
-
         return in_array($value, DateTimeZone::listIdentifiers());
     }
 }
