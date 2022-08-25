@@ -32,7 +32,7 @@ use Symfony\Component\Finder\SplFileInfo;
 class FindDumpStatementCommand extends Command
 {
     /** @var string */
-    protected $signature = <<<'signature'
+    protected $signature = '
         find:dump
         {--dir=* : The directories to search for files}
         {--path=* : The paths to search for files}
@@ -42,8 +42,7 @@ class FindDumpStatementCommand extends Command
         {--s|struct=* : The structs to search}
         {--f|func=* : The functions to search}
         {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
-        {--M|memory-limit= : The memory limit to use for the PHP parser}'
-    signature;
+        {--M|memory-limit= : The memory limit to use for the PHP parser}';
     /** @var string */
     protected $description = 'Find dump statements in PHP files.';
     /** @var \string[][] */

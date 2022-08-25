@@ -26,6 +26,26 @@ parameters:
 			path: app/Console/Commands/GenerateTestsCommand.php
 
 		-
+			message: "#^Property App\\\\Console\\\\Commands\\\\GenerateTestsCommand\\:\\:\\$jsonDecoder is unused\\.$#"
+			count: 1
+			path: app/Console/Commands/GenerateTestsCommand.php
+
+		-
+			message: "#^Property App\\\\Console\\\\Commands\\\\GenerateTestsCommand\\:\\:\\$nodeConnectingVisitor is unused\\.$#"
+			count: 1
+			path: app/Console/Commands/GenerateTestsCommand.php
+
+		-
+			message: "#^Property App\\\\Console\\\\Commands\\\\GenerateTestsCommand\\:\\:\\$nodeDumper is unused\\.$#"
+			count: 1
+			path: app/Console/Commands/GenerateTestsCommand.php
+
+		-
+			message: "#^Property App\\\\Console\\\\Commands\\\\GenerateTestsCommand\\:\\:\\$parentConnectingVisitor is unused\\.$#"
+			count: 1
+			path: app/Console/Commands/GenerateTestsCommand.php
+
+		-
 			message: "#^Call to an undefined method Illuminate\\\\Auth\\\\AuthManager\\:\\:factory\\(\\)\\.$#"
 			count: 1
 			path: app/Models/JWTUser.php

@@ -13,11 +13,11 @@ class TailCommand extends Command
      * @var string
      */
     protected $signature = 'tail
-                            {--file= : Name of the log file to tail}
-                            {--lines=0 : Output the last number of lines}
-                            {--clear : Clear the terminal screen}
-                            {--grep= : Grep specified string}
-                            {--debug : Display the underlying tail command}';
+        {--file= : Name of the log file to tail}
+        {--lines=0 : Output the last number of lines}
+        {--clear : Clear the terminal screen}
+        {--grep= : Grep specified string}
+        {--debug : Display the underlying tail command}';
 
     /**
      * The console command description.

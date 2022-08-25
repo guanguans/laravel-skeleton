@@ -46,7 +46,7 @@ use Symfony\Component\Finder\SplFileInfo;
 class GenerateTestsCommand extends Command
 {
     /** @var string */
-    protected $signature = <<<'signature'
+    protected $signature = '
         generate:tests
         {--dir=* : The directories to search for files}
         {--path=* : The paths to search for files}
@@ -58,8 +58,7 @@ class GenerateTestsCommand extends Command
         {--t|template-file=./tests/Unit/ExampleTest.php : The template file to use for the generated tests}
         {--f|method-format=snake : The format(snake/camel) to use for the method names}
         {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
-        {--M|memory-limit= : The memory limit to use for the PHP parser}'
-    signature;
+        {--M|memory-limit= : The memory limit to use for the PHP parser}';
     /** @var string */
     protected $description = 'Generate tests for the given files';
     /** @var array */
@@ -84,18 +83,18 @@ class GenerateTestsCommand extends Command
     private $builderFactory;
     /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
-    // /** @var \PhpParser\NodeDumper */
-    // private $nodeDumper;
-    // /** @var \PhpParser\JsonDecoder */
-    // private $jsonDecoder;
+    /** @var \PhpParser\NodeDumper */
+    private $nodeDumper;
+    /** @var \PhpParser\JsonDecoder */
+    private $jsonDecoder;
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
     /** @var \PhpParser\NodeTraverser */
     private $nodeTraverser;
-    // /** @var \PhpParser\NodeVisitor\ParentConnectingVisitor */
-    // private $parentConnectingVisitor;
-    // /** @var \PhpParser\NodeVisitor\NodeConnectingVisitor */
-    // private $nodeConnectingVisitor;
+    /** @var \PhpParser\NodeVisitor\ParentConnectingVisitor */
+    private $parentConnectingVisitor;
+    /** @var \PhpParser\NodeVisitor\NodeConnectingVisitor */
+    private $nodeConnectingVisitor;
     /** @var \PhpParser\NodeVisitor\CloningVisitor */
     private $cloningVisitor;
     private $classUpdatingVisitor;
