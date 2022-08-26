@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,33 +19,28 @@ use Illuminate\Support\Facades\Validator;
 trait ControllerCrud
 {
     /**
-     * Disabling logs if not needed
+     * @param  bool  $forRedirect
      *
-     * @var bool
-     */
-    public $disableLogs = false;
-
-    /**
-     * @param $forRedirect
      * @return string
      */
-    public function getViewPath($forRedirect = false): string
+    public function getViewPath(bool $forRedirect = false): string
     {
-        $ns_prefix = '';
-        $ns_prefix_arr = explode('\\', (new \ReflectionObject($this))->getNamespaceName());
-        if (end($ns_prefix_arr) != 'Controllers') {
-            $ns_prefix = strtolower(end($ns_prefix_arr)) . ($forRedirect ? '/' : '.');
+        $nsPrefix = '';
+        $nsPrefixes = explode('\\', (new \ReflectionObject($this))->getNamespaceName());
+        if (end($nsPrefixes) !== 'Controllers') {
+            $nsPrefix = strtolower(end($nsPrefixes)) . ($forRedirect ? '/' : '.');
         }
-        $model_name_arr = explode('\\', $this->modelClass);
+        $modelNames = explode('\\', $this->modelClass);
 
-        return $ns_prefix . strtolower(end($model_name_arr));
+        return $nsPrefix . strtolower(end($modelNames));
     }
 
     /**
-     * List index
+     * List index.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -63,7 +59,7 @@ trait ControllerCrud
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -73,12 +69,13 @@ trait ControllerCrud
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
+        /** @var \App\Http\Controllers\Controller $this */
         if ($request->ajax() || $request->wantsJson()) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
             if ($validation->fails()) {
@@ -89,13 +86,16 @@ trait ControllerCrud
         } else {
             $this->validate($request, $this->modelClass::validateOn());
         }
+
         $model = new $this->modelClass();
         $model->fill($request->only($model->getFillable()));
         $model->save();
+
         $this->handleFileUploads($request, $model);
         if ($request->ajax() || $request->wantsJson()) {
             return $this->jsonModel($model);
         }
+
         $url = ! $request->input('url_return') ? $this->getViewPath(true) . '/' . $model->id : $request->input('url_return');
 
         return redirect($url)->with('flash_message', trans('crud.added'));
@@ -104,9 +104,10 @@ trait ControllerCrud
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param mixed $id
      *
-     * @param  mixed $id
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
     public function show(Request $request, $id)
     {
@@ -120,14 +121,15 @@ trait ControllerCrud
             return $this->jsonModel($model);
         }
 
-        return view($this->getViewPath() . '.show', ! $this->disableLogs ? compact('model', 'logs') : compact('model'));
+        return view($this->getViewPath() . '.show', compact('model'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  mixed $id
-     * @return \Illuminate\View\View
+     * @param mixed $id
+     *
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
@@ -139,13 +141,14 @@ trait ControllerCrud
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param  mixed $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param mixed $id
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
+        /** @var \App\Http\Controllers\Controller $this */
         if ($this->isAjax($request)) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn('update', $id));
             if ($validation->fails()) {
@@ -156,9 +159,11 @@ trait ControllerCrud
         } else {
             $this->validate($request, $this->modelClass::validateOn('update', $id));
         }
+
         $model = $this->modelClass::findOrFail($id);
         $this->handleFileUploads($request, $model);
         $model->update($request->only($model->getFillable()));
+
         $url = ! $request->input('url_return') ? $this->getViewPath(true) . '/' . $model->id : $request->input('url_return');
 
         return $this->isAjax($request) ? $this->jsonModel($model) : redirect($url)->with('flash_message', trans('crud.updated'));
@@ -167,9 +172,10 @@ trait ControllerCrud
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
-     * @param mixed $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Request $request, $id)
     {
@@ -183,6 +189,7 @@ trait ControllerCrud
         } else {
             $count = $this->modelClass::destroy($id);
         }
+
         $url = ! $request->input('url_return') ? $this->getViewPath(true) : $request->input('url_return');
         $success = $count > 0;
         $error = ! $success;
@@ -192,7 +199,8 @@ trait ControllerCrud
     }
 
     /**
-     * @param Request $request
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return bool
      */
     private function isAjax(Request $request): bool
@@ -201,12 +209,13 @@ trait ControllerCrud
     }
 
     /**
-     * Returns JSON representation of object
+     * Returns JSON representation of object.
      *
-     * @param $model
-     * @return JsonResponse
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    private function jsonModel($model): JsonResponse
+    private function jsonModel(Model $model): JsonResponse
     {
         /** @var string $resourceForSearch */
         $output = isset($this->modelClass::$resourceForSearch) ? new $this->modelClass::$resourceForSearch($model) : $model;
@@ -215,18 +224,19 @@ trait ControllerCrud
     }
 
     /**
-     * @param Request $request
-     * @param \Illuminate\Database\Eloquent\Model|null $model
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Database\Eloquent\Model|null  $model
+     *
      * @return void
      */
-    public function handleFileUploads(Request $request, $model = null): void
+    public function handleFileUploads(Request $request, Model $model = null): void
     {
-        $file_uploads = $this->modelClass::fileUploads($model);
-        foreach ($file_uploads as $file_upload => $file_data) {
-            if ($request->hasFile($file_upload)) {
-                $file = $request->file($file_upload);
-                $upload = Storage::putFileAs($file_data['path'], $file, ! isset($file_data['name']) ? $file->getClientOriginalName() : $file_data['name']);
-                $requestData[$file_upload] = $upload;
+        $fileUploads = $this->modelClass::fileUploads($model);
+        foreach ($fileUploads as $fileUpload => $fileData) {
+            if ($request->hasFile($fileUpload)) {
+                $file = $request->file($fileUpload);
+                $upload = Storage::putFileAs($fileData['path'], $file, ! isset($fileData['name']) ? $file->getClientOriginalName() : $fileData['name']);
+                $requestData[$fileUpload] = $upload;
             }
         }
     }
