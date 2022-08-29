@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,10 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('docs:generate-signed-url', function () {
+    $signedUrl = URL::temporarySignedRoute('docs', now()->addDays(7));
+    $this->info($signedUrl);
+
+    return $this::SUCCESS;
+})->purpose('生成接口文档签名地址');
