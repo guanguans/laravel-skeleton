@@ -15,8 +15,12 @@ $finder = PhpCsFixer\Finder::create()
         __DIR__.'/routes',
         __DIR__.'/tests',
     ])
+    ->append([
+        __DIR__.'/.php-cs-fixer.php',
+        __DIR__.'/deploy.example.php',
+    ])
     ->exclude([
-        __DIR__.'/vendor',
+        'vendor',
     ])
     ->name('*.php')
     ->notName('*.blade.php')
