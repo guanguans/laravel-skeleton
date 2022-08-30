@@ -7,6 +7,9 @@ use Closure;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @see https://github.com/Torann/laravel-repository
+ */
 trait Cacheable
 {
     /**
@@ -14,7 +17,7 @@ trait Cacheable
      *
      * @var CacheManager
      */
-    protected static $cache = null;
+    protected static $cache;
 
     /**
      * Flush the cache after create/update/delete events.
@@ -82,6 +85,8 @@ trait Cacheable
                 $a = get_class($a) . '|' . $a->getKey();
             }
         }
+
+        unset($a);
 
         // Create hash from arguments and query
         $args = serialize($args) . serialize($this->getScopeQuery());
