@@ -286,6 +286,46 @@ class QueryBuilderMacro
         };
     }
 
+    public function whereFullText(): callable
+    {
+        /**
+         * Add a "where fulltext" clause to the query.
+         *
+         * @param  string|string[]  $columns
+         * @param  string  $value
+         * @param  string  $boolean
+         *
+         * @return $this
+         */
+        return function ($columns, $value, array $options = [], $boolean = 'and') {
+            $type = 'Fulltext';
+
+            $columns = (array)$columns;
+
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            $this->wheres[] = compact('type', 'columns', 'value', 'options', 'boolean');
+
+            $this->addBinding($value);
+
+            return $this;
+        };
+    }
+
+    public function orWhereFullText(): callable
+    {
+        /**
+         * Add a "or where fulltext" clause to the query.
+         *
+         * @param  string|string[]  $columns
+         * @param  string  $value
+         * @return $this|callable
+         */
+        return function ($columns, $value, array $options = []) {
+            /** @var \Illuminate\Database\Eloquent\Builder $this */
+            return $this->whereFulltext($columns, $value, $options, 'or');
+        };
+    }
+
     /**
      * @see https://github.com/ankane/hightop-php
      */

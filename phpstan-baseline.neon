@@ -6,7 +6,7 @@ parameters:
 			path: app/Casts/CallbackGetCast.php
 
 		-
-			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, int given\\.$#"
+			message: "#^Parameter \\#2 \\$value of function ini_set expects string, int given\\.$#"
 			count: 2
 			path: app/Console/Commands/FindDumpStatementCommand.php
 
@@ -21,7 +21,7 @@ parameters:
 			path: app/Console/Commands/FindDumpStatementCommand.php
 
 		-
-			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, int given\\.$#"
+			message: "#^Parameter \\#2 \\$value of function ini_set expects string, int given\\.$#"
 			count: 2
 			path: app/Console/Commands/GenerateTestsCommand.php
 
@@ -76,6 +76,11 @@ parameters:
 			path: app/Support/Macros/GrammarMacro.php
 
 		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Builder\\:\\:\\$wheres\\.$#"
+			count: 1
+			path: app/Support/Macros/QueryBuilderMacro.php
+
+		-
 			message: "#^Call to protected method getRelationWithoutConstraints\\(\\) of class Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\.$#"
 			count: 1
 			path: app/Support/Macros/QueryBuilderMacro.php
@@ -84,6 +89,21 @@ parameters:
 			message: "#^Call to protected method getInputSource\\(\\) of class Illuminate\\\\Http\\\\Request\\.$#"
 			count: 1
 			path: app/Support/Macros/RequestMacro.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:onlyTrashed\\(\\)\\.$#"
+			count: 2
+			path: app/Support/Repository.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:restore\\(\\)\\.$#"
+			count: 1
+			path: app/Support/Repository.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:withTrashed\\(\\)\\.$#"
+			count: 1
+			path: app/Support/Repository.php
 
 		-
 			message: "#^Left side of && is always true\\.$#"

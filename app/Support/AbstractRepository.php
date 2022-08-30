@@ -53,7 +53,7 @@ abstract class AbstractRepository
     protected $errors;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Builder
+     * @var \Illuminate\Database\Eloquent\Builder|$this
      */
     protected $query;
 
@@ -166,7 +166,7 @@ abstract class AbstractRepository
      *
      * @param bool $skipOrdering
      *
-     * @return self
+     * @return $this
      */
     public function newQuery($skipOrdering = false)
     {

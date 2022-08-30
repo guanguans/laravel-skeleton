@@ -148,7 +148,7 @@ trait Cacheable
     /**
      * Return the time until expires in minutes.
      *
-     * @param int $time
+     * @param int|string $time
      *
      * @return int
      */

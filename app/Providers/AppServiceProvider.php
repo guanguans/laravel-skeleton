@@ -6,6 +6,7 @@ use App\Rules\Rule;
 use App\Support\Macros\BlueprintMacro;
 use App\Support\Macros\CollectionMacro;
 use App\Support\Macros\GrammarMacro;
+use App\Support\Macros\MySqlGrammarMacro;
 use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
@@ -47,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Support\Macros\QueryBuilderMacro::class => \App\Support\Macros\QueryBuilderMacro::class,
         \App\Support\Macros\BlueprintMacro::class => \App\Support\Macros\BlueprintMacro::class,
         \App\Support\Macros\GrammarMacro::class => \App\Support\Macros\GrammarMacro::class,
+        \App\Support\Macros\MySqlGrammarMacro::class => \App\Support\Macros\MySqlGrammarMacro::class,
     ];
 
     /**
@@ -149,6 +152,7 @@ class AppServiceProvider extends ServiceProvider
         Stringable::mixin($this->app->make(StringableMacro::class));
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
+        MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
     }
 
     /**
