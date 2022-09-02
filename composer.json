@@ -120,11 +120,17 @@
             "@php artisan key:generate --ansi"
         ],
         "checks": [
+            "@mark-start",
             "@style-lint",
-            "@docs-generate"
+            "@mark-separate",
+            "@docs-generate",
+            "@mark-finish"
         ],
         "cghooks": "./vendor/bin/cghooks",
         "docs-generate": "@php artisan scribe:generate --ansi",
+        "mark-finish": "printf '\\n!\\n!\\t\\033[0;32m%s\\033[0m\\n!\\n\\n' \"Finished\"",
+        "mark-separate": "printf '\\n!\\n!\\t\\033[0;33m%s\\033[0m\\n!\\n\\n' \"----------------\"",
+        "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",
         "phpstan": "./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
         "style-fix": "@php artisan fixer:fix --ansi",
