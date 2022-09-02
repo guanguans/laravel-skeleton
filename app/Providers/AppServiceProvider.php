@@ -37,6 +37,13 @@ use Symfony\Component\Finder\SplFileInfo;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * All of the container bindings that should be registered.
+     *
+     * @var string[]
+     */
+    public $bindings = [];
+
+    /**
      * All of the container singletons that should be registered.
      *
      * @var string[]
@@ -136,6 +143,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
         $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
+        $this->app->register(\Reliese\Coders\CodersServiceProvider::class);
     }
 
     /**
