@@ -2,18 +2,15 @@
 
 namespace App\Traits;
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\App;
-
 trait Singleton
 {
     public static function instance(...$parameters)
     {
-        App::singletonIf(static::class, function (Application $app) use ($parameters) {
+        app()->singletonIf(static::class, function () use ($parameters) {
             return new static(...$parameters);
         });
 
-        return App::make(static::class);
+        return app(static::class);
     }
 
     protected function __construct(...$parameters)
