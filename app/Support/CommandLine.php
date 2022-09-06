@@ -97,7 +97,10 @@ class CommandLine
         return $processOutput;
     }
 
-    protected function user()
+    /**
+     * @return string
+     */
+    public function user()
     {
         if (! isset($_SERVER['SUDO_USER'])) {
             return $_SERVER['USER'];
