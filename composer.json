@@ -41,7 +41,8 @@
         "tenantcloud/laravel-boolean-softdeletes": "^3.1",
         "timacdonald/has-parameters": "^1.2",
         "tymon/jwt-auth": "^1.0",
-        "vectorface/whip": "^0.4.0"
+        "vectorface/whip": "^0.4.0",
+        "watson/validating": "^6.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

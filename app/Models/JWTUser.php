@@ -3,10 +3,18 @@
 namespace App\Models;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Watson\Validating\ValidatingTrait;
 
 class JWTUser extends User implements JWTSubject
 {
+    use ValidatingTrait;
+
     protected $table = 'users';
+
+    protected $rules = [
+        // 'email' => 'required|email',
+        // 'password' => 'required|string',
+    ];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

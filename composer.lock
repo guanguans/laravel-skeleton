@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0e18ce9fde93a22ec49d9b7f4c1f4fb",
+    "content-hash": "5cd0284474cc51bc01c3de2576d52010",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9597,6 +9597,66 @@
                 }
             ],
             "time": "2020-11-12T00:07:28+00:00"
+        },
+        {
+            "name": "watson/validating",
+            "version": "6.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dwightwatson/validating.git",
+                "reference": "fda4daaf804ead4aef641e1fb3f3b40a8448167e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/fda4daaf804ead4aef641e1fb3f3b40a8448167e",
+                "reference": "fda4daaf804ead4aef641e1fb3f3b40a8448167e",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "illuminate/contracts": "~8.0",
+                "illuminate/database": "~8.0",
+                "illuminate/events": "~8.0",
+                "illuminate/support": "~8.0",
+                "illuminate/validation": "~8.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.1",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Watson\\Validating\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dwight Watson",
+                    "email": "dwight@studiousapp.com"
+                }
+            ],
+            "description": "Eloquent model validating trait.",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/dwightwatson/validating/issues",
+                "source": "https://github.com/dwightwatson/validating/tree/6.1.1"
+            },
+            "time": "2021-09-10T23:13:21+00:00"
         },
         {
             "name": "webmozart/assert",
