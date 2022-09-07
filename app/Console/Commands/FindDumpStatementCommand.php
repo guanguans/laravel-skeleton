@@ -33,7 +33,7 @@ class FindDumpStatementCommand extends Command
 {
     /** @var string */
     protected $signature = '
-        find:dump
+        find:dump-statement
         {--dir=* : The directories to search for files}
         {--path=* : The paths to search for files}
         {--name=* : The names to search for files}
