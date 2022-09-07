@@ -128,8 +128,8 @@ class FindDumpStatementCommand extends Command
                 $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(function (Stringable $file) use ($odd) {
                     return $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>";
                 });
-                $line = Str::of($dumpNode->getAttribute('startLine'))->pipe(function (Stringable $line) use ($odd) {
-                    return $odd ? "<fg=green>$line</>" : "<fg=blue>$line</>";
+                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(function (Stringable $startLine) use ($odd) {
+                    return $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>";
                 });
                 $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(function (Stringable $formattedCode) use ($odd) {
                     return $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>";
@@ -140,7 +140,7 @@ class FindDumpStatementCommand extends Command
                     'name' => $name,
                     'type' => $type,
                     'file' => $file,
-                    'line' => $line,
+                    'start_line' => $startLine,
                     'formatted_code' => $formattedCode,
                 ];
             }, $dumpNodes);
