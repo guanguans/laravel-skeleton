@@ -25,3 +25,14 @@ Artisan::command('docs:generate-signed-url', function () {
 
     return $this::SUCCESS;
 })->purpose('生成接口文档签名地址');
+
+Artisan::command('deployer:notify {result}', function () {
+    /** @var \Illuminate\Foundation\Console\ClosureCommand $this */
+    if (! in_array($this->argument('result'), ['FAILURE', 'SUCCESS'])) {
+        throw new InvalidArgumentException('Invalid result parameters(FAILURE/SUCCESS).');
+    }
+
+    exception_notify_report(str_replace('{result}', $this->argument('result'), $this->signature));
+
+    return $this::SUCCESS;
+})->purpose('Deployer notify report.');
