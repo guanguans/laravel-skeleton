@@ -51,6 +51,76 @@ parameters:
 			path: app/Models/JWTUser.php
 
 		-
+			message: "#^Call to an undefined method App\\\\Models\\\\Model\\:\\:scopeExactFilter\\(\\)\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\:\\:onlyTrashed\\(\\)\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\:\\:withTrashed\\(\\)\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\:\\:withoutTrashed\\(\\)\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\:\\:ordered\\(\\)\\.$#"
+			count: 3
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:setHighestOrderNumber\\(\\)\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:shouldSortWhenCreating\\(\\)\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to method save\\(\\) on an unknown class App\\\\Traits\\\\Sortable\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Call to method swapOrderWithModel\\(\\) on an unknown class App\\\\Traits\\\\Sortable\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Parameter \\$model of method App\\\\Models\\\\Model\\:\\:swapOrder\\(\\) has invalid type App\\\\Traits\\\\Sortable\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Parameter \\$otherModel of method App\\\\Models\\\\Model\\:\\:swapOrder\\(\\) has invalid type App\\\\Traits\\\\Sortable\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Parameter \\$otherModel of method App\\\\Models\\\\Model\\:\\:swapOrderWithModel\\(\\) has invalid type App\\\\Traits\\\\Sortable\\.$#"
+			count: 1
+			path: app/Models/Model.php
+
+		-
+			message: "#^Right side of && is always true\\.$#"
+			count: 2
+			path: app/Models/Model.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 2
+			path: app/Models/Model.php
+
+		-
 			message: "#^Parameter \\#3 \\$logLevel of static method GuzzleHttp\\\\Middleware\\:\\:log\\(\\) expects 'alert'\\|'critical'\\|'debug'\\|'emergency'\\|'error'\\|'info'\\|'notice'\\|'warning', string given\\.$#"
 			count: 1
 			path: app/Support/FoundationSdk.php
@@ -89,6 +159,11 @@ parameters:
 			message: "#^Call to protected method getInputSource\\(\\) of class Illuminate\\\\Http\\\\Request\\.$#"
 			count: 1
 			path: app/Support/Macros/RequestMacro.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 4
+			path: app/Support/PureModel.php
 
 		-
 			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:onlyTrashed\\(\\)\\.$#"
