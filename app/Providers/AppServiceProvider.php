@@ -121,6 +121,21 @@ class AppServiceProvider extends ServiceProvider
             /** @var \App\Rules\Rule $rule */
             Validator::extend(($rule = app($ruleClass))->getName(), "$ruleClass@passes", $rule->message());
         }
+
+        // 默认值规则
+        Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
+            if ($value === null || $value === '') {
+                $validator->setData(
+                    transform($validator->getData(), function (array $data) use ($attribute, $value, $parameters) {
+                        $data[$attribute] = $parameters[0] ?? $value;
+
+                        return $data;
+                    })
+                );
+            }
+
+            return true;
+        });
     }
 
     protected function registerGlobalFunctions()
