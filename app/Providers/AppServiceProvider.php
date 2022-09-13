@@ -95,7 +95,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register rule.
      */
-    protected function extendValidators($dirs, $name = '*Rule.php', $notName = ['Rule.php', 'RegexRule.php'])
+    protected function extendValidators($dirs, $name = '*Rule.php', $notName = ['Rule.php', 'RegexRule.php', 'ImplicitRule.php', 'RegexImplicitRule.php'])
     {
         $files = Finder::create()
             ->files()
