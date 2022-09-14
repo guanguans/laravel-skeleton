@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Rules\DefaultRule;
 use App\Rules\ImplicitRule;
 use App\Rules\Rule;
 use App\Support\Macros\BlueprintMacro;
@@ -148,14 +149,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // 默认值规则
         Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
-            if ($value === null || $value === '') {
-                $data = $validator->getData();
-                $default = $parameters[0] ?? $value;
-                $data[$attribute] = $default;
-                $validator->setData($data);
-            }
-
-            return true;
+            return (new DefaultRule($parameters[0] ?? $value))
+                ->setValidator($validator)
+                ->passes($attribute, $value);
         });
     }
 

@@ -4,12 +4,11 @@ namespace App\Rules;
 
 use App\Rules\Concerns\DataAware;
 use App\Rules\Concerns\ValidatorAware;
-use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 
-final class DefaultRule extends ImplicitRule implements DataAwareRule, ValidatorAwareRule
+final class DefaultRule extends ImplicitRule implements ValidatorAwareRule
 {
-    use DataAware;
+    // use DataAware;
     use ValidatorAware;
 
     /**
@@ -33,8 +32,9 @@ final class DefaultRule extends ImplicitRule implements DataAwareRule, Validator
     {
         if ($value === null || $value === '') {
             $default = $this->default ?: $value;
-            $this->data[$attribute] = $default;
-            $this->validator->setData($this->data);
+            $data = $this->validator->getData();
+            $data[$attribute] = $default;
+            $this->validator->setData($data);
         }
 
         return true;
