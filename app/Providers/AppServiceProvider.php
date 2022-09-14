@@ -124,15 +124,14 @@ class AppServiceProvider extends ServiceProvider
 
         // 默认值规则
         Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
-            if ($value === null || $value === '') {
-                $validator->setData(
-                    transform($validator->getData(), function (array $data) use ($attribute, $value, $parameters) {
-                        $data[$attribute] = $parameters[0] ?? $value;
-
-                        return $data;
-                    })
-                );
+            if ($value !== null && $value !== '') {
+                return true;
             }
+
+            $data = $validator->getData();
+            $default = $parameters[0] ?? $value;
+            $data[$attribute] = $default;
+            $validator->setData($data);
 
             return true;
         });
