@@ -31,13 +31,11 @@ final class DefaultRule extends ImplicitRule implements DataAwareRule, Validator
      */
     public function passes($attribute, $value)
     {
-        if ($value !== null && $value !== '') {
-            return true;
+        if ($value === null || $value === '') {
+            $default = $this->default ?: $value;
+            $this->data[$attribute] = $default;
+            $this->validator->setData($this->data);
         }
-
-        $default = $this->default ?: $value;
-        $this->data[$attribute] = $default;
-        $this->validator->setData($this->data);
 
         return true;
     }

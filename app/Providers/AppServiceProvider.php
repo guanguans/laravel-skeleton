@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Rules\ImplicitRule;
 use App\Rules\Rule;
 use App\Support\Macros\BlueprintMacro;
 use App\Support\Macros\CollectionMacro;
@@ -11,6 +12,8 @@ use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
+use Illuminate\Contracts\Validation\DataAwareRule;
+use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -22,6 +25,7 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
@@ -85,7 +89,8 @@ class AppServiceProvider extends ServiceProvider
         // Paginator::useBootstrap();
         $this->bootProduction();
         $this->registerMacros();
-        $this->extendValidators($this->app->path('Rules'));
+        $this->extendValidatorsFromCallback();
+        $this->extendValidatorsFromPath($this->app->path('Rules'));
         // $this->extendView();
         ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
             return $request->is('api/*');
@@ -95,17 +100,19 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register rule.
      */
-    protected function extendValidators($dirs, $name = '*Rule.php', $notName = ['Rule.php', 'RegexRule.php', 'ImplicitRule.php', 'RegexImplicitRule.php'])
-    {
-        $files = Finder::create()
-            ->files()
-            ->name($name)
-            ->notName($notName)
-            ->in($dirs);
-
-        foreach ($files as $file) {
-            $ruleClass = transform($file, function (SplFileInfo $file) {
-                $class = trim(Str::replaceFirst(base_path(), '', $file->getRealPath()), DIRECTORY_SEPARATOR);
+    protected function extendValidatorsFromPath(
+        $dirs,
+        $name = '*Rule.php',
+        $notName = [
+            'Rule.php',
+            'RegexRule.php',
+            'ImplicitRule.php',
+            'RegexImplicitRule.php'
+        ]
+    ) {
+        foreach (Finder::create()->files()->name($name)->notName($notName)->depth(1)->in($dirs) as $splFileInfo) {
+            $ruleClass = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
+                $class = trim(Str::replaceFirst(base_path(), '', $splFileInfo->getRealPath()), DIRECTORY_SEPARATOR);
 
                 return str_replace(
                     [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
@@ -119,19 +126,34 @@ class AppServiceProvider extends ServiceProvider
             }
 
             /** @var \App\Rules\Rule $rule */
-            Validator::extend(($rule = app($ruleClass))->getName(), "$ruleClass@passes", $rule->message());
-        }
+            $rule = app($ruleClass);
 
-        // 默认值规则
-        Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
-            if ($value !== null && $value !== '') {
-                return true;
+            if (
+                Arr::first([DataAwareRule::class, ValidatorAwareRule::class], function ($class) use ($rule) {
+                    return $rule instanceof $class;
+                })
+            ) {
+                continue;
             }
 
-            $data = $validator->getData();
-            $default = $parameters[0] ?? $value;
-            $data[$attribute] = $default;
-            $validator->setData($data);
+            if ($rule instanceof ImplicitRule) {
+                Validator::extendImplicit($rule->getName(), "$ruleClass@passes", $rule->message());
+            }
+
+            Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
+        }
+    }
+
+    protected function extendValidatorsFromCallback(): void
+    {
+        // 默认值规则
+        Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
+            if ($value === null || $value === '') {
+                $data = $validator->getData();
+                $default = $parameters[0] ?? $value;
+                $data[$attribute] = $default;
+                $validator->setData($data);
+            }
 
             return true;
         });
