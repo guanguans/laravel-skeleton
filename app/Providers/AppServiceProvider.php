@@ -84,6 +84,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // 预防 N+1 查询问题
         Model::preventLazyLoading(! $this->app->isProduction());
+        // 防止模型静默丢弃不在 fillable 中的字段
+        // Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
         Schema::defaultStringLength(191);
         Carbon::setLocale('zh');
         JsonResource::withoutWrapping();
