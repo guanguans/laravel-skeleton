@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5cd0284474cc51bc01c3de2576d52010",
+    "content-hash": "cd8ec505095b02b1e265c4ef0ea0a1b8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2369,17 +2369,23 @@
         },
         {
             "name": "jiannei/laravel-response",
-            "version": "v4.3.0",
+            "version": "v4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jiannei/laravel-response.git",
-                "reference": "f40372b14540cefd0334a9a090dfe2bf98f2240d"
+                "reference": "79e74fc770702aaf3cfdb3a8745c8f9f320c6427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jiannei/laravel-response/zipball/f40372b14540cefd0334a9a090dfe2bf98f2240d",
-                "reference": "f40372b14540cefd0334a9a090dfe2bf98f2240d",
-                "shasum": ""
+                "url": "https://api.github.com/repos/jiannei/laravel-response/zipball/79e74fc770702aaf3cfdb3a8745c8f9f320c6427",
+                "reference": "79e74fc770702aaf3cfdb3a8745c8f9f320c6427",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "php": "^7.2.5|^8.0"
@@ -2418,9 +2424,9 @@
             "description": "Laravel api response data format.",
             "support": {
                 "issues": "https://github.com/jiannei/laravel-response/issues",
-                "source": "https://github.com/jiannei/laravel-response/tree/v4.3.0"
+                "source": "https://github.com/jiannei/laravel-response/tree/v4.4.0"
             },
-            "time": "2022-04-27T08:26:28+00:00"
+            "time": "2022-05-31T15:03:27+00:00"
         },
         {
             "name": "kitloong/laravel-migrations-generator",
