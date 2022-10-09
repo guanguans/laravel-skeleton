@@ -4,12 +4,15 @@ namespace App\Traits;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property \App\Models\User $creator
- * @property string           $creator_id
- * @method static creating(\Closure $param)
- * @method static updating(\Closure $param)
+ * @property int           $creator_id
+ * @method static creating(\Closure $closure)
+ * @method static updating(\Closure $closure)
+ *
+ * @mixin \Illuminate\Database\Eloquent\Model
  */
 trait BelongsToCreator
 {
@@ -28,17 +31,13 @@ trait BelongsToCreator
         );
     }
 
-    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'creator_id')->withTrashed();
     }
 
     public function isCreatedBy(User $user): bool
     {
-        if ($user instanceof User) {
-            $user = $user->id;
-        }
-
-        return $this->creator_id == (int)$user;
+        return $this->creator_id == $user->id;
     }
 }
