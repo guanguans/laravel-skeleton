@@ -5,6 +5,9 @@ namespace App\Traits;
 use Carbon\Carbon;
 use DateTimeInterface;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Model
+ */
 trait SerializeDate
 {
     /**

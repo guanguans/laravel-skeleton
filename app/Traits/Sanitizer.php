@@ -4,6 +4,9 @@ namespace App\Traits;
 
 use Illuminate\Support\Arr;
 
+/**
+ * @mixin \Illuminate\Http\Request
+ */
 trait Sanitizer
 {
     /**

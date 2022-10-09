@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Model
+ */
 trait Observable
 {
     public static function bootObservable(): void

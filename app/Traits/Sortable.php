@@ -4,15 +4,18 @@ namespace App\Traits;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use InvalidArgumentException;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Model
+ */
 trait Sortable
 {
     public static function bootSortableTrait()
     {
-        static::creating(function ($model) {
-            /** @var \Illuminate\Database\Eloquent\Model $model */
+        static::creating(function (Model $model) {
             if ($model->shouldSortWhenCreating()) {
                 $model->setHighestOrderNumber();
             }

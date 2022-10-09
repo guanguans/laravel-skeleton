@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+/**
+ * @mixin \App\Models\User|\App\Models\JWTUser
+ */
 trait HasWrapedApiTokens
 {
     /**
@@ -30,7 +33,6 @@ trait HasWrapedApiTokens
      */
     public function createTokenWithoutName(array $abilities = ['*'])
     {
-        /* @var \App\Models\User|\App\Models\JWTUser $this */
         return $this->createToken(self::getDevice(), $abilities);
     }
 

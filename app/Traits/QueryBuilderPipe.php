@@ -42,7 +42,9 @@ trait QueryBuilderPipe
     {
         array_unshift($pipes, function (Builder $builder, $next) {
             if (! $next($builder) instanceof Builder) {
-                throw new InvalidArgumentException(sprintf('Query builder pipeline must be return a %s instance.', Builder::class));
+                throw new InvalidArgumentException(
+                    sprintf('Query builder pipeline must be return a %s instance.', Builder::class)
+                );
             }
         });
 

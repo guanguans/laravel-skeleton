@@ -21,6 +21,8 @@ use Illuminate\Support\Str;
  * @property bool $onlyTrashedForbidden onlyTrashed() gets forbidden on this class
  * @property bool $noPaginationForbidden allow remove pagination forbidden on this class
  *
+ * @mixin Model
+ *
  * @see https://github.com/thiagoprz/crud-tools
  */
 trait ModelCrud
