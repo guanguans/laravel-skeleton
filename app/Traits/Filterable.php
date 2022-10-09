@@ -12,7 +12,7 @@ trait Filterable
 {
     public function scopeFilter(Builder $query, ?array $input = null)
     {
-        $input = $input && \is_array($input) ? $input : \request()->query();
+        $input = (array)($input && \is_array($input)) ? $input : \request()->query();
 
         foreach ($input as $key => $value) {
             if ($value == ($this->ignoreFilterValue ?? 'all')) {
