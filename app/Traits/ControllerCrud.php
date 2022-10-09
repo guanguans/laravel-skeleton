@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
  *
  * @property \Illuminate\Database\Eloquent\Model|string $modelClass
  *
+ * @mixin \Illuminate\Routing\Controller|\App\Http\Controllers\Controller
+ *
  * @see https://github.com/thiagoprz/crud-tools
  */
 trait ControllerCrud
@@ -96,7 +98,9 @@ trait ControllerCrud
             return $this->jsonModel($model);
         }
 
-        $url = ! $request->input('url_return') ? $this->getViewPath(true) . '/' . $model->id : $request->input('url_return');
+        $url = ! $request->input('url_return')
+            ? $this->getViewPath(true) . '/' . $model->id
+            : $request->input('url_return');
 
         return redirect($url)->with('flash_message', trans('crud.added'));
     }
@@ -111,7 +115,7 @@ trait ControllerCrud
      */
     public function show(Request $request, $id)
     {
-        if (isset($request->with_trashed) && ! isset($this->modelClass::$withTrashedForbidden)) {
+        if ($request->has('with_trashed') && property_exists($this->modelClass, 'withTrashedForbidden')) {
             $model = $this->modelClass::withTrashed()->findOrFail($id);
         } else {
             $model = $this->modelClass::findOrFail($id);
@@ -164,9 +168,13 @@ trait ControllerCrud
         $this->handleFileUploads($request, $model);
         $model->update($request->only($model->getFillable()));
 
-        $url = ! $request->input('url_return') ? $this->getViewPath(true) . '/' . $model->id : $request->input('url_return');
+        $url = ! $request->input('url_return')
+            ? $this->getViewPath(true) . '/' . $model->id
+            : $request->input('url_return');
 
-        return $this->isAjax($request) ? $this->jsonModel($model) : redirect($url)->with('flash_message', trans('crud.updated'));
+        return $this->isAjax($request)
+            ? $this->jsonModel($model)
+            : redirect($url)->with('flash_message', trans('crud.updated'));
     }
 
     /**
@@ -179,7 +187,7 @@ trait ControllerCrud
      */
     public function destroy(Request $request, $id)
     {
-        if (isset($request->with_trashed) && property_exists($this->modelClass, 'withTrashedForbidden')) {
+        if ($request->has('with_trashed') && property_exists($this->modelClass, 'withTrashedForbidden')) {
             $model = $this->modelClass::withTrashed()->findOrFail($id);
             if ($model->deleted_at) {
                 $count = $model->forceDelete();
@@ -195,7 +203,9 @@ trait ControllerCrud
         $error = ! $success;
         $message = ! $success ? __('No records were deleted') : __('crud.deleted');
 
-        return $this->isAjax($request) ? response()->json(compact('success', 'error', 'message')) : redirect($url)->with('flash_message', $message);
+        return $this->isAjax($request)
+            ? response()->json(compact('success', 'error', 'message'))
+            : redirect($url)->with('flash_message', $message);
     }
 
     /**
@@ -218,7 +228,9 @@ trait ControllerCrud
     private function jsonModel(Model $model): JsonResponse
     {
         /** @var string $resourceForSearch */
-        $output = isset($this->modelClass::$resourceForSearch) ? new $this->modelClass::$resourceForSearch($model) : $model;
+        $output = isset($this->modelClass::$resourceForSearch)
+            ? new $this->modelClass::$resourceForSearch($model)
+            : $model;
 
         return response()->json($output);
     }
@@ -235,7 +247,11 @@ trait ControllerCrud
         foreach ($fileUploads as $fileUpload => $fileData) {
             if ($request->hasFile($fileUpload)) {
                 $file = $request->file($fileUpload);
-                $upload = Storage::putFileAs($fileData['path'], $file, ! isset($fileData['name']) ? $file->getClientOriginalName() : $fileData['name']);
+                $upload = Storage::putFileAs(
+                    $fileData['path'],
+                    $file,
+                    ! isset($fileData['name']) ? $file->getClientOriginalName() : $fileData['name']
+                );
                 $requestData[$fileUpload] = $upload;
             }
         }
