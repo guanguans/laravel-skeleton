@@ -54,6 +54,16 @@ abstract class FoundationSdk
         });
     }
 
+    public function ddRequestData()
+    {
+        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+            $pendingRequest->beforeSending(function (Request $request, array $options) {
+                VarDumper::dump($options['laravel_data']);
+                exit(1);
+            });
+        });
+    }
+
     public function dumpRequestData()
     {
         return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
@@ -63,21 +73,17 @@ abstract class FoundationSdk
         });
     }
 
-    public function withLogMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info')
+    public function withLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info')
     {
         return $this->tapPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger) {
-            $logger or $logger = Log::channel('daily');
-            $formatter or $formatter = (new MessageFormatter(MessageFormatter::DEBUG));
+            $logger = $logger ?: Log::channel('daily');
+            $formatter = $formatter ?: new MessageFormatter(MessageFormatter::DEBUG);
+
             $pendingRequest->withMiddleware(Middleware::log($logger, $formatter, $logLevel));
         });
     }
 
-    /**
-     * @param  callable  $callback
-     *
-     * @return $this
-     */
-    public function tapPendingRequest($callback)
+    public function tapPendingRequest(callable $callback)
     {
         $this->pendingRequest = tap($this->pendingRequest, $callback);
 
@@ -127,7 +133,7 @@ abstract class FoundationSdk
      * protected function initPendingRequest(array $config): PendingRequest
      * {
      *     return Http::withOptions($config['options'])
-     *         // ->dd()
+     *         // ->dump()
      *         ->baseUrl($config['baseUrl'])
      *         ->asJson()
      *         ->withMiddleware(Middleware::log(Log::channel('daily'), new MessageFormatter(MessageFormatter::DEBUG)));

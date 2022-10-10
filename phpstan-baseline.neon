@@ -126,11 +126,6 @@ parameters:
 			path: app/Support/FoundationSdk.php
 
 		-
-			message: "#^Right side of \\|\\| is always true\\.$#"
-			count: 2
-			path: app/Support/FoundationSdk.php
-
-		-
 			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
 			count: 1
 			path: app/Support/Macros/BlueprintMacro.php
