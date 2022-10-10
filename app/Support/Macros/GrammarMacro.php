@@ -7,6 +7,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Fluent;
 use RuntimeException;
 
+/**
+ * @mixin \Illuminate\Database\Schema\Grammars\Grammar
+ */
 class GrammarMacro
 {
     /**
@@ -22,7 +25,6 @@ class GrammarMacro
          * @return string
          */
         return function (Blueprint $blueprint, Fluent $command, Connection $connection) {
-            /* @var \Illuminate\Database\Schema\Grammars\Grammar $this */
             switch ($connection->getDriverName()) {
                 case 'mysql':
                     return sprintf(

@@ -9,12 +9,14 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pipeline\Pipeline;
 use InvalidArgumentException;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class QueryBuilderMacro
 {
     public function pipe(): callable
     {
         return function (...$pipes) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return tap($this, function ($builder) use ($pipes) {
                 array_unshift($pipes, function ($builder, $next) {
                     if (
@@ -44,7 +46,6 @@ class QueryBuilderMacro
     public function getToArray(): callable
     {
         return function ($columns = ['*']): array {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->get($columns)->toArray();
         };
     }
@@ -52,7 +53,6 @@ class QueryBuilderMacro
     public function firstToArray(): callable
     {
         return function ($columns = ['*']): ?array {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             // return optional($this->first($columns))->toArray();
             return ($model = $this->first($columns)) ? $model->toArray() : (array)$model;
         };
@@ -67,7 +67,6 @@ class QueryBuilderMacro
             $values instanceof Arrayable and $values = $values->toArray();
             is_array($values) and $values = implode(',', $values);
 
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereRaw($type, $values, $boolean);
         };
     }
@@ -102,11 +101,11 @@ class QueryBuilderMacro
     public function orderByWith(): callable
     {
         return function ($relation, $column, $direction = 'asc') {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             if (is_string($relation)) {
                 $relation = $this->getRelationWithoutConstraints($relation);
             }
 
+            /** @noinspection PhpParamsInspection */
             return $this->orderBy(
                 $relation->getRelationExistenceQuery(
                     $relation->getRelated()->newQueryWithoutRelationships(),
@@ -131,7 +130,6 @@ class QueryBuilderMacro
         return function ($column, string $value, string $boolean = 'and', bool $not = false) {
             $type = $not ? 'not like' : 'like';
 
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->where($column, $type, "%$value%", $boolean);
         };
     }
@@ -165,7 +163,6 @@ class QueryBuilderMacro
         return function ($column, string $value, string $boolean = 'and', bool $not = false) {
             $type = $not ? 'not like' : 'like';
 
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->where($column, $type, "$value%");
         };
     }
@@ -199,7 +196,6 @@ class QueryBuilderMacro
         return function ($column, string $value, string $boolean = 'and', bool $not = false) {
             $type = $not ? 'not like' : 'like';
 
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->where($column, 'like', "%$value");
         };
     }
@@ -232,7 +228,6 @@ class QueryBuilderMacro
     {
         /* @var Arrayable|array[] $values */
         return function (array $columns, $values, string $boolean = 'and', bool $not = false) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             $type = $not ? 'not in' : 'in';
 
             $rawColumns = implode(',', $columns);
@@ -302,7 +297,6 @@ class QueryBuilderMacro
 
             $columns = (array)$columns;
 
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             $this->wheres[] = compact('type', 'columns', 'value', 'options', 'boolean');
 
             $this->addBinding($value);
@@ -332,7 +326,6 @@ class QueryBuilderMacro
     public function top(): callable
     {
         return function ($column, ?int $limit = null, ?bool $null = false, ?int $min = null, ?string $distinct = null) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
             if ($distinct === null) {
                 $op = 'count(*)';
             } else {

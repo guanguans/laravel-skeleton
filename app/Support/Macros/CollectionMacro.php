@@ -6,12 +6,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 
+/**
+ * @mixin \Illuminate\Support\Collection
+ */
 class CollectionMacro
 {
     public function pluckToArray(): callable
     {
         return function ($value, $key = null): array {
-            /** @var \Illuminate\Support\Collection $this */
             return $this->pluck($value, $key)->toArray();
         };
     }
@@ -19,7 +21,6 @@ class CollectionMacro
     public function head(): callable
     {
         return function () {
-            /** @var \Illuminate\Support\Collection $this */
             return $this->first();
         };
     }
@@ -27,7 +28,6 @@ class CollectionMacro
     public function end(): callable
     {
         return function () {
-            /** @var \Illuminate\Support\Collection $this */
             return $this->last();
         };
     }
@@ -35,7 +35,6 @@ class CollectionMacro
     public function after(): callable
     {
         return function ($currentItem, $fallback = null) {
-            /** @var \Illuminate\Support\Collection $this */
             $currentKey = $this->search($currentItem, true);
 
             if ($currentKey === false) {
@@ -57,7 +56,6 @@ class CollectionMacro
     public function before(): callable
     {
         return function ($currentItem, $fallback = null) {
-            /** @var \Illuminate\Support\Collection $this */
             return $this->reverse()->after($currentItem, $fallback);
         };
     }
@@ -65,7 +63,6 @@ class CollectionMacro
     public function ifAny(): callable
     {
         return function (callable $callback): Collection {
-            /** @var \Illuminate\Support\Collection $this */
             if (! $this->isEmpty()) {
                 $callback($this);
             }
@@ -89,7 +86,6 @@ class CollectionMacro
     public function if(): callable
     {
         return function ($if,  $then = null,  $else = null) {
-            /** @var \Illuminate\Support\Collection $this */
             return value($if, $this) ? value($then, $this) : value($else, $this);
         };
     }
@@ -99,7 +95,6 @@ class CollectionMacro
         return function ($perPage = 15, $pageName = 'page', $page = null, $total = null, $options = []) {
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
 
-            /** @var \Illuminate\Support\Collection $this */
             $items = $this->forPage($page, $perPage)->values();
 
             $total = $total ?: $this->count();
@@ -119,7 +114,6 @@ class CollectionMacro
         return function ($perPage = 15, $pageName = 'page', $page = null, $options = []) {
             $page = $page ?: Paginator::resolveCurrentPage($pageName);
 
-            /** @var \Illuminate\Support\Collection $this */
             $items = $this->slice(($page - 1) * $perPage)->take($perPage + 1);
 
             $options += [
@@ -134,7 +128,6 @@ class CollectionMacro
     public function filterFilled(): callable
     {
         return function () {
-            /** @var \Illuminate\Support\Collection $this */
             return $this->filter(function ($value) {
                 return filled($value);
             });
@@ -144,7 +137,6 @@ class CollectionMacro
     public function reduces(): callable
     {
         return function (callable $callback, $carry = null) {
-            /** @var \Illuminate\Support\Collection $this */
             foreach ($this as $key => $value) {
                 $carry = call_user_func($callback, $carry, $value, $key);
             }
@@ -157,7 +149,6 @@ class CollectionMacro
     {
         return function (callable $callback) {
             $arr = [];
-            /** @var \Illuminate\Support\Collection $this */
             foreach ($this as $key => $value) {
                 $arr[$key] = call_user_func($callback, $value, $key);
             }

@@ -4,6 +4,9 @@ namespace App\Support\Macros;
 
 use Illuminate\Database\Query\Builder;
 
+/**
+ * @mixin \Illuminate\Database\Query\Grammars\MySqlGrammar
+ */
 class MySqlGrammarMacro
 {
     public function whereFulltext(): callable
@@ -16,7 +19,6 @@ class MySqlGrammarMacro
          * @return string
          */
         return function (Builder $query, $where) {
-            /** @var \Illuminate\Database\Query\Grammars\MySqlGrammar $this */
             $columns = $this->columnize($where['columns']);
 
             $value = $this->parameter($where['value']);

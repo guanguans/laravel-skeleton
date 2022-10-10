@@ -4,6 +4,9 @@ namespace App\Support\Macros;
 
 use Illuminate\Support\Str;
 
+/**
+ * @mixin \Illuminate\Support\Str
+ */
 class StrMacro
 {
     public static function appendIf(): callable

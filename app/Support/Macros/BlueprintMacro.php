@@ -5,6 +5,9 @@ namespace App\Support\Macros;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Fluent;
 
+/**
+ * @mixin \Illuminate\Database\Schema\Blueprint
+ */
 class BlueprintMacro
 {
     /**
@@ -24,7 +27,6 @@ class BlueprintMacro
          * @return \Illuminate\Support\Fluent
          */
         return function ($comment) {
-            /* @var \Illuminate\Database\Schema\Blueprint $this */
             return $this->addCommand('tableComment', compact('comment'));
         };
     }
@@ -34,7 +36,6 @@ class BlueprintMacro
         return  function (string $index): bool {
             $schemaManager = Schema::getConnection()->getDoctrineSchemaManager();
 
-            /** @var \Illuminate\Database\Schema\Blueprint $this */
             return $schemaManager->listTableDetails($this->getTable())->hasIndex($index);
         };
     }
