@@ -131,9 +131,19 @@ parameters:
 			path: app/Support/FoundationSdk.php
 
 		-
-			message: "#^Call to an undefined method App\\\\Support\\\\Macros\\\\BlueprintMacro\\:\\:addCommand\\(\\)\\.$#"
+			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
 			count: 1
 			path: app/Support/Macros/BlueprintMacro.php
+
+		-
+			message: "#^Anonymous function should return Illuminate\\\\Support\\\\Collection but returns \\$this\\(App\\\\Support\\\\Macros\\\\CollectionMacro\\)\\.$#"
+			count: 1
+			path: app/Support/Macros/CollectionMacro.php
+
+		-
+			message: "#^Argument of an invalid type App\\\\Support\\\\Macros\\\\CollectionMacro supplied for foreach, only iterables are supported\\.$#"
+			count: 2
+			path: app/Support/Macros/CollectionMacro.php
 
 		-
 			message: "#^Access to an undefined property Illuminate\\\\Support\\\\Fluent\\:\\:\\$comment\\.$#"
@@ -141,12 +151,7 @@ parameters:
 			path: app/Support/Macros/GrammarMacro.php
 
 		-
-			message: "#^Call to an undefined method App\\\\Support\\\\Macros\\\\GrammarMacro\\:\\:wrapTable\\(\\)\\.$#"
-			count: 2
-			path: app/Support/Macros/GrammarMacro.php
-
-		-
-			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Builder\\:\\:\\$wheres\\.$#"
+			message: "#^Access to an undefined property App\\\\Support\\\\Macros\\\\QueryBuilderMacro\\:\\:\\$wheres\\.$#"
 			count: 1
 			path: app/Support/Macros/QueryBuilderMacro.php
 
@@ -184,3 +189,13 @@ parameters:
 			message: "#^Left side of && is always true\\.$#"
 			count: 2
 			path: app/Support/helpers.php
+
+		-
+			message: "#^PHPDoc tag @property has invalid value \\(\\$filterable\\)\\: Unexpected token \"\\$filterable\", expected type at offset 17$#"
+			count: 1
+			path: app/Traits/Filterable.php
+
+		-
+			message: "#^PHPDoc tag @property has invalid value \\(\\$ignoreFilterValue\\)\\: Unexpected token \"\\$ignoreFilterValue\", expected type at offset 42$#"
+			count: 1
+			path: app/Traits/Filterable.php

@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 /**
+ * @property $filterable
+ * @property $ignoreFilterValue
+ *
  * @method static filter(array $input = [])
+ *
+ * @mixin \Illuminate\Database\Eloquent\Model
  */
 trait Filterable
 {
     public function scopeFilter(Builder $query, ?array $input = null)
     {
-        $input = (array)($input && \is_array($input)) ? $input : \request()->query();
+        $input = $input ?: \request()->query();
 
         foreach ($input as $key => $value) {
             if ($value == ($this->ignoreFilterValue ?? 'all')) {
