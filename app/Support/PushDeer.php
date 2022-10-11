@@ -10,7 +10,7 @@ use Psr\Http\Message\RequestInterface;
 
 class PushDeer extends FoundationSdk
 {
-    public function messagePush(string $text, string $desp = '', string $type = ''): Response
+    public function messagePush(string $text, string $desp = '', string $type = 'markdown'): Response
     {
         return $this->pendingRequest->post(
             'message/push',
@@ -23,7 +23,24 @@ class PushDeer extends FoundationSdk
                 [
                     'text' => 'required|string',
                     'desp' => 'string',
-                    'type' => 'in:text,markdown',
+                    'type' => 'in:markdown,text,image',
+                ]
+            )
+        );
+    }
+
+    public function messageList(string $token, int $limit = 10): Response
+    {
+        return $this->pendingRequest->post(
+            'message/list',
+            $this->validateData(
+                [
+                    'token' => $token,
+                    'limit' => $limit,
+                ],
+                [
+                    'token' => 'required|string',
+                    'limit' => 'int',
                 ]
             )
         );
