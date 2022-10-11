@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Rules\DefaultRule;
 use App\Rules\ImplicitRule;
+use App\Rules\InstanceofRule;
 use App\Rules\Rule;
 use App\Support\Macros\BlueprintMacro;
 use App\Support\Macros\CollectionMacro;
@@ -14,6 +15,7 @@ use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
 use App\Support\PushDeer;
+use ArgumentCountError;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -116,10 +118,11 @@ class AppServiceProvider extends ServiceProvider
             'Rule.php',
             'RegexRule.php',
             'ImplicitRule.php',
-            'RegexImplicitRule.php'
+            'RegexImplicitRule.php',
+            'InstanceofRule.php'
         ]
     ) {
-        foreach (Finder::create()->files()->name($name)->notName($notName)->depth(1)->in($dirs) as $splFileInfo) {
+        foreach (Finder::create()->files()->name($name)->notName($notName)->in($dirs) as $splFileInfo) {
             $ruleClass = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
                 $class = trim(Str::replaceFirst(base_path(), '', $splFileInfo->getRealPath()), DIRECTORY_SEPARATOR);
 
@@ -161,6 +164,22 @@ class AppServiceProvider extends ServiceProvider
                 ->setValidator($validator)
                 ->passes($attribute, $value);
         });
+
+        // instanceof 规则
+        Validator::extend('instanceof', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
+            if (empty($parameters)) {
+                throw new ArgumentCountError(
+                    sprintf(
+                        'Too few arguments to function App\Rules\InstanceofRule::__construct(), 0 passed in %s on line %s and exactly 1 expected',
+                        __FILE__,
+                        __LINE__
+                    )
+                );
+            }
+
+            return (new InstanceofRule($parameters[0]))
+                ->passes($attribute, $value);
+        }, (new InstanceofRule(''))->message());
     }
 
     protected function registerGlobalFunctions()
