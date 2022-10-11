@@ -29,17 +29,15 @@ class PushDeer extends FoundationSdk
         );
     }
 
-    public function messageList(string $token, int $limit = 10): Response
+    public function messageList(int $limit = 10): Response
     {
         return $this->pendingRequest->post(
             'message/list',
             $this->validateData(
                 [
-                    'token' => $token,
                     'limit' => $limit,
                 ],
                 [
-                    'token' => 'required|string',
                     'limit' => 'int',
                 ]
             )
@@ -78,18 +76,20 @@ class PushDeer extends FoundationSdk
             'options.timeout' => 'numeric',
             'options.version' => 'string|numeric',
 
+            'token' => 'required|string',
             'key' => 'required|string',
             'base_url' => 'required|url'
         ]);
     }
 
-    protected function initPendingRequest(array $config): PendingRequest
+    protected function buildPendingRequest(array $config): PendingRequest
     {
         return Http::withOptions($config['options'])
             ->baseUrl($config['base_url'])
             ->asJson()
             ->withOptions([
                 'json' => $data = [
+                    'token' => $this->config['token'],
                     'pushkey' => $this->config['key']
                 ],
                 'form_params' => $data,

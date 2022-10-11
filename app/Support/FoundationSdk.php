@@ -37,7 +37,7 @@ abstract class FoundationSdk
     public function __construct(array $config)
     {
         $this->config = $this->validateConfig($config);
-        $this->pendingRequest = $this->initPendingRequest($this->config);
+        $this->pendingRequest = $this->buildPendingRequest($this->config);
     }
 
     public function dd()
@@ -87,7 +87,7 @@ abstract class FoundationSdk
         return $this;
     }
 
-    protected function buildLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info'): callable
+    public static function buildLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info'): callable
     {
         $logger = $logger ?: Log::channel('daily');
         $formatter = $formatter ?: new MessageFormatter(MessageFormatter::DEBUG);
@@ -135,7 +135,7 @@ abstract class FoundationSdk
     /**
      *
      * ```php
-     * protected function initPendingRequest(array $config): PendingRequest
+     * protected function buildPendingRequest(array $config): PendingRequest
      * {
      *     return Http::withOptions($config['options'])
      *         ->baseUrl($config['baseUrl'])
@@ -148,5 +148,5 @@ abstract class FoundationSdk
      *
      * @return \Illuminate\Http\Client\PendingRequest
      */
-    abstract protected function initPendingRequest(array $config): PendingRequest;
+    abstract protected function buildPendingRequest(array $config): PendingRequest;
 }
