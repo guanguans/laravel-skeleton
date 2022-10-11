@@ -13,6 +13,7 @@ use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
+use App\Support\PushDeer;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -22,6 +23,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -73,6 +75,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // $this->registerGlobalFunctions();
         $this->registerNotProductionServices();
+
+        $this->app->singleton(PushDeer::class, function (Application $application) {
+            return new PushDeer($application['config']['services.pushdeer']);
+        });
     }
 
     /**

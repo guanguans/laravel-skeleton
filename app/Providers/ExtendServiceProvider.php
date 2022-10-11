@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Support\PushDeer;
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class ExtendServiceProvider extends ServiceProvider implements DeferrableProvider
@@ -21,7 +24,9 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register()
     {
-        //
+        $this->app->singleton(PushDeer::class, function (Application $application) {
+            return new PushDeer($application['config']['services.pushdeer']);
+        });
     }
 
     /**

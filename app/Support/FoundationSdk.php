@@ -76,10 +76,7 @@ abstract class FoundationSdk
     public function withLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info')
     {
         return $this->tapPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger) {
-            $logger = $logger ?: Log::channel('daily');
-            $formatter = $formatter ?: new MessageFormatter(MessageFormatter::DEBUG);
-
-            $pendingRequest->withMiddleware(Middleware::log($logger, $formatter, $logLevel));
+            $pendingRequest->withMiddleware($this->buildLoggerMiddleware($logger, $formatter, $logLevel));
         });
     }
 
@@ -90,15 +87,23 @@ abstract class FoundationSdk
         return $this;
     }
 
+    protected function buildLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info'): callable
+    {
+        $logger = $logger ?: Log::channel('daily');
+        $formatter = $formatter ?: new MessageFormatter(MessageFormatter::DEBUG);
+
+        return Middleware::log($logger, $formatter, $logLevel);
+    }
+
     /**
      * ```php
      * protected function validateConfig(array $config): array
      * {
      *     return configure_options($config, function (OptionsResolver $optionsResolver) {
      *         $optionsResolver
-     *             ->setDefined('http_options')
-     *             ->setDefault('http_options', [])
-     *             ->addAllowedTypes('http_options', 'array');
+     *             ->setDefined('options')
+     *             ->setDefault('options', [])
+     *             ->addAllowedTypes('options', 'array');
      *     });
      * }
      * ```
@@ -107,7 +112,7 @@ abstract class FoundationSdk
      * protected function validateConfig(array $config): array
      * {
      *     return $this->validateData($config, [
-     *         'http_options' => 'array',
+     *         'options' => 'array',
      *     ]);
      * }
      * ```
@@ -133,10 +138,9 @@ abstract class FoundationSdk
      * protected function initPendingRequest(array $config): PendingRequest
      * {
      *     return Http::withOptions($config['options'])
-     *         // ->dump()
      *         ->baseUrl($config['baseUrl'])
      *         ->asJson()
-     *         ->withMiddleware(Middleware::log(Log::channel('daily'), new MessageFormatter(MessageFormatter::DEBUG)));
+     *         ->withMiddleware($this->buildLoggerMiddleware());
      * }
      * ```
      *

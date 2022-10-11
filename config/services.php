@@ -35,5 +35,13 @@ return [
             'secret' => env('SIGNER_DEFAULT_SECRET', ''),
             'algo' => env('SIGNER_DEFAULT_ALGO', 'sha256'),
         ],
+    ],
+    'pushdeer' => [
+        'options' => [
+            'connect_timeout' => 3,
+            'timeout' => 30,
+        ],
+        'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com'),
+        'key' => env('PUSHDEER_KEY'),
     ]
 ];
