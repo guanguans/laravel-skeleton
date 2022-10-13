@@ -2,11 +2,14 @@
 
 namespace App\Support;
 
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class PushDeer extends FoundationSdk
 {
@@ -98,9 +101,27 @@ class PushDeer extends FoundationSdk
             ->withMiddleware(function (callable $handler): callable {
                 return function (RequestInterface $request, array $options) use ($handler) {
                     $options['laravel_data']['pushkey'] = $this->config['key'];
+                    $request->withHeader('X-Timestamp', microtime(true));
 
-                    return $handler($request, $options);
+                    /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
+                    $promise = $handler($request, $options);
+
+                    return $promise->then(function (ResponseInterface $response) {
+                        return $response->withHeader('X-Timestamp', microtime(true));
+                    });
                 };
-            });
+            })
+            ->withMiddleware(Middleware::mapRequest(function (RequestInterface $request) {
+                return $request->withHeader('X-Date-Time', now()->toDateTimeString());
+            }))
+            ->withMiddleware(Middleware::mapResponse(function (ResponseInterface $response) {
+                return $response->withHeader('X-Date-Time', now()->toDateTimeString());
+            }))
+            ->withMiddleware(Middleware::tap(
+                function (RequestInterface $request, array $options) {
+                },
+                function (RequestInterface $request, array $options, PromiseInterface $promise) {
+                }
+            ));
     }
 }

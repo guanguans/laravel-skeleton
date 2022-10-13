@@ -41,7 +41,7 @@ return [
             'connect_timeout' => 3,
             'timeout' => 30,
         ],
-        'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com'),
+        'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com/'),
         'token' => env('PUSHDEER_TOKEN', 'token'),
         'key' => env('PUSHDEER_KEY'),
     ]
