@@ -79,6 +79,8 @@ class GenerateTestsCommand extends Command
     private $parser;
     /** @var \PhpParser\ErrorHandler\Collecting */
     private $errorHandler;
+    /** @var null|\PhpParser\Node\Stmt[] */
+    private $templateTestClassNodes;
     /** @var \PhpParser\BuilderFactory */
     private $builderFactory;
     /** @var \PhpParser\NodeFinder */
@@ -167,6 +169,11 @@ class GenerateTestsCommand extends Command
                     }
 
                     // 修改抽象语法树(遍历节点)
+
+                    // $originalTestClassNodes = $isExistsTestClassFile
+                    //     ? $this->parser->parse(file_get_contents($testClassFile), $this->errorHandler)
+                    //     : $this->templateTestClassNodes;
+
                     $originalTestClassNodes = $this->parser->parse(
                         $isExistsTestClassFile ? file_get_contents($testClassFile) : file_get_contents($this->option('template-file')),
                         $this->errorHandler
@@ -267,6 +274,7 @@ class GenerateTestsCommand extends Command
         $this->lexer = new Emulative(['usedAttributes' => ['comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos']]);
         $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'), $this->lexer);
         $this->errorHandler = new Collecting();
+        $this->templateTestClassNodes = $this->parser->parse(file_get_contents($this->option('template-file')), $this->errorHandler);
         $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
         // $this->nodeDumper = new NodeDumper();
