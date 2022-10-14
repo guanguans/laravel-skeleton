@@ -14,7 +14,6 @@ use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
-use App\Support\PushDeer;
 use ArgumentCountError;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
@@ -77,10 +76,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // $this->registerGlobalFunctions();
         $this->registerNotProductionServices();
-
-        $this->app->singleton(PushDeer::class, function (Application $application) {
-            return new PushDeer($application['config']['services.pushdeer']);
-        });
     }
 
     /**
