@@ -36,6 +36,7 @@
         "spatie/laravel-backup": "^6.16",
         "spatie/laravel-http-logger": "^1.8",
         "spatie/laravel-json-api-paginate": "^1.10",
+        "spatie/laravel-missing-page-redirector": "^2.9",
         "spatie/laravel-translatable": "^4.6",
         "symfony/stopwatch": "^5.3",
         "tenantcloud/laravel-boolean-softdeletes": "^3.1",
