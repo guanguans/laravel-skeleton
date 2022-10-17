@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f92e4d674b161a0614e7134edfcf4d00",
+    "content-hash": "f447a5fbabd555a8f5e299b033200246",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -264,6 +264,60 @@
                 "source": "https://github.com/beyondcode/laravel-query-detector/tree/1.5.0"
             },
             "time": "2021-02-16T22:51:38+00:00"
+        },
+        {
+            "name": "biiiiiigmonster/hasin",
+            "version": "v1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/biiiiiigmonster/hasin.git",
+                "reference": "1dc46aa8f35c7e528dd5a119f1e6c9571038aa0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/biiiiiigmonster/hasin/zipball/1dc46aa8f35c7e528dd5a119f1e6c9571038aa0a",
+                "reference": "1dc46aa8f35c7e528dd5a119f1e6c9571038aa0a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.5|^6|^7|^8|^9",
+                "php": ">=7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BiiiiiigMonster\\Hasin\\HasinServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BiiiiiigMonster\\Hasin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "YunFeng Lu",
+                    "email": "603707288@qq.com"
+                }
+            ],
+            "description": "Laravel framework relation has in implement",
+            "keywords": [
+                "laravel",
+                "orm",
+                "relation",
+                "whereHas"
+            ],
+            "support": {
+                "issues": "https://github.com/biiiiiigmonster/hasin/issues",
+                "source": "https://github.com/biiiiiigmonster/hasin/tree/v1.4.2"
+            },
+            "time": "2022-03-10T07:20:32+00:00"
         },
         {
             "name": "brainmaestro/composer-git-hooks",
