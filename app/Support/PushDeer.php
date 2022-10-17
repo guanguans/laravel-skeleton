@@ -91,15 +91,15 @@ class PushDeer extends FoundationSdk
             ->asJson()
             ->withOptions([
                 'json' => $data = [
-                    'token' => $this->config['token'],
-                    'pushkey' => $this->config['key']
+                    'token' => $config['token'],
+                    'pushkey' => $config['key']
                 ],
                 'form_params' => $data,
                 'query' => $data
             ])
-            ->withMiddleware(function (callable $handler): callable {
-                return function (RequestInterface $request, array $options) use ($handler) {
-                    $options['laravel_data']['pushkey'] = $this->config['key'];
+            ->withMiddleware(function (callable $handler) use ($config): callable {
+                return function (RequestInterface $request, array $options) use ($config, $handler) {
+                    $options['laravel_data']['pushkey'] = $config['key'];
                     $request->withHeader('X-Timestamp', microtime(true));
 
                     /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
