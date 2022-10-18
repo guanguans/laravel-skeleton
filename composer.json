@@ -19,6 +19,7 @@
         "dyrynda/laravel-cascade-soft-deletes": "^4.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "goldspecdigital/laravel-eloquent-uuid": "^8.0",
         "guanguans/laravel-dump-sql": "^2.2",
         "guanguans/laravel-exception-notify": "^2.11",
         "guzzlehttp/guzzle": "^7.0.1",
