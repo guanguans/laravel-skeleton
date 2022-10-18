@@ -54,6 +54,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
+        "davidhsianturi/laravel-compass": "^1.2",
         "deployer/deployer": "^6.8",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
