@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59897b6d1a24a0aec3035a826964016e",
+    "content-hash": "914ebdc505f30ae0beeb09ee2e328411",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4534,6 +4534,215 @@
                 }
             ],
             "time": "2021-08-28T21:27:29+00:00"
+        },
+        {
+            "name": "phpunit/php-timer",
+            "version": "5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-timer.git",
+                "reference": "5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2",
+                "reference": "5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Utility class for timing",
+            "homepage": "https://github.com/sebastianbergmann/php-timer/",
+            "keywords": [
+                "timer"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-timer/issues",
+                "source": "https://github.com/sebastianbergmann/php-timer/tree/5.0.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-26T13:16:10+00:00"
+        },
+        {
+            "name": "pragmarx/health",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antonioribeiro/health.git",
+                "reference": "eff81f2177f0b7b9fd43cd087cf26cb7c67bf1ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antonioribeiro/health/zipball/eff81f2177f0b7b9fd43cd087cf26cb7c67bf1ec",
+                "reference": "eff81f2177f0b7b9fd43cd087cf26cb7c67bf1ec",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/support": ">=5.5",
+                "php": ">=7.1",
+                "phpunit/php-timer": "^1.0|^2.0|^3.0|^4.0|^5.0",
+                "pragmarx/yaml": ">=0.1"
+            },
+            "require-dev": {
+                "docusign/esign-client": ">=2.0",
+                "guzzlehttp/guzzle": ">=6.0",
+                "laravel/laravel": ">=5.5",
+                "nesbot/carbon": ">=1.34",
+                "orchestra/testbench": ">=3.5",
+                "phpunit/phpunit": ">=6.5",
+                "predis/predis": ">=1.0",
+                "sensiolabs/security-checker": ">=4.1"
+            },
+            "suggest": {
+                "docusign/esign-client": ">=2.0",
+                "guzzlehttp/guzzle": ">=6.0",
+                "league/flysystem-aws-s3-v3": ">=1.0",
+                "predis/predis": ">=1.0",
+                "sensiolabs/security-checker": ">=4.1",
+                "spatie/ssl-certificate": ">=1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PragmaRX\\Health\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "PragmaRX\\Health\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Carlos Ribeiro",
+                    "email": "acr@antoniocarlosribeiro.com",
+                    "role": "Creator & Designer"
+                }
+            ],
+            "description": "Laravel Server & App Health Monitor and Notifier",
+            "keywords": [
+                "app",
+                "health",
+                "laravel",
+                "monitor",
+                "notifications",
+                "panel",
+                "pragmarx",
+                "server"
+            ],
+            "support": {
+                "issues": "https://github.com/antonioribeiro/health/issues",
+                "source": "https://github.com/antonioribeiro/health/tree/v1.1.3"
+            },
+            "time": "2021-12-02T18:34:17+00:00"
+        },
+        {
+            "name": "pragmarx/yaml",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antonioribeiro/yaml.git",
+                "reference": "56a12f5310807a9defbd9d63aaebb53957fc34b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antonioribeiro/yaml/zipball/56a12f5310807a9defbd9d63aaebb53957fc34b0",
+                "reference": "56a12f5310807a9defbd9d63aaebb53957fc34b0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.5.33",
+                "php": ">=7.0",
+                "symfony/yaml": "^3.4|^4.0|^5.0|^6.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.5|^3.6|^4.0|^5.0",
+                "phpunit/phpunit": "^4.0|^6.4|^7.0|^8.0|^9.0"
+            },
+            "suggest": {
+                "ext-yaml": "Required to use the PECL YAML."
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "laravel": {
+                    "providers": [
+                        "PragmaRX\\Yaml\\Package\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Yaml": "PragmaRX\\Yaml\\Package\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PragmaRX\\Yaml\\Tests\\": "tests/",
+                    "PragmaRX\\Yaml\\Package\\": "src/package"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Carlos Ribeiro",
+                    "email": "acr@antoniocarlosribeiro.com",
+                    "role": "Creator & Designer"
+                }
+            ],
+            "description": "Load your Laravel config files using yaml",
+            "keywords": [
+                "config",
+                "laravel",
+                "yaml"
+            ],
+            "support": {
+                "issues": "https://github.com/antonioribeiro/yaml/issues",
+                "source": "https://github.com/antonioribeiro/yaml/tree/v1.3.0"
+            },
+            "time": "2022-06-13T21:27:41+00:00"
         },
         {
             "name": "propaganistas/laravel-disposable-email",
@@ -13341,65 +13550,6 @@
                 }
             ],
             "time": "2020-10-26T05:33:50+00:00"
-        },
-        {
-            "name": "phpunit/php-timer",
-            "version": "5.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2",
-                "reference": "5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
-                }
-            ],
-            "description": "Utility class for timing",
-            "homepage": "https://github.com/sebastianbergmann/php-timer/",
-            "keywords": [
-                "timer"
-            ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-timer/issues",
-                "source": "https://github.com/sebastianbergmann/php-timer/tree/5.0.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-10-26T13:16:10+00:00"
         },
         {
             "name": "phpunit/phpunit",

@@ -34,6 +34,7 @@
         "laravel/tinker": "^2.5",
         "overtrue/laravel-lang": "^5.0",
         "overtrue/laravel-query-logger": "^2.1",
+        "pragmarx/health": "^1.1",
         "propaganistas/laravel-disposable-email": "^2.1",
         "rap2hpoutre/laravel-log-viewer": "^2.0",
         "rennokki/laravel-eloquent-query-cache": "^3.2",
