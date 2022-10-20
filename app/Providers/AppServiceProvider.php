@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use Illuminate\View\View;
 use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -238,22 +239,21 @@ class AppServiceProvider extends ServiceProvider
 
     protected function extendView()
     {
-        $this->app->make('view')->composer('*', function ($view) {
-            $view->with('request', $this->app->make(Request::class));
+        // 合成器
+        $this->app->make('view')->composer('*', function (View $view) {
+            $view->with('request', $this->app->make(Request::class))
+                ->with('user', $this->app->make('auth')->user())
+                ->with('config', $this->app->make('config'));
         });
 
-        $this->app->make('view')->composer('*', function ($view) {
-            $view->with('user', $this->app->make('auth')->user());
+        // 构造器
+        $this->app->make('view')->creator('*', function (View $view) {
+            $view->with('request', $this->app->make(Request::class))
+                ->with('user', $this->app->make('auth')->user())
+                ->with('config', $this->app->make('config'));
         });
 
-        $this->app->make('view')->composer('*', function ($view) {
-            $view->with('config', $this->app->make('config'));
-        });
-
-        $this->app->make('view')->creator('*', function ($view) {
-            $view->with('request', $this->app->make(Request::class));
-        });
-
+        // 共享数据
         $this->app->make('view')->share('request', $this->app->make(Request::class));
         $this->app->make('view')->share('user', $this->app->make('auth')->user());
         $this->app->make('view')->share('config', $this->app->make('config'));
