@@ -20,6 +20,7 @@
         "f9webltd/laravel-api-response-helpers": "^1.5",
         "fideloper/proxy": "^4.4",
         "flugger/laravel-responder": "^3.2",
+        "fntneves/laravel-transactional-events": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
         "goldspecdigital/laravel-eloquent-uuid": "^8.0",
         "guanguans/laravel-dump-sql": "^2.2",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "914ebdc505f30ae0beeb09ee2e328411",
+    "content-hash": "b1a3db64bf50ae6dded098501c8344ab",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1352,6 +1352,62 @@
                 "source": "https://github.com/flugg/laravel-responder/tree/v3.2.0"
             },
             "time": "2022-02-16T16:13:17+00:00"
+        },
+        {
+            "name": "fntneves/laravel-transactional-events",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fntneves/laravel-transactional-events.git",
+                "reference": "af0665a6a4fda7971716279db7e9a9119926d2ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fntneves/laravel-transactional-events/zipball/af0665a6a4fda7971716279db7e9a9119926d2ef",
+                "reference": "af0665a6a4fda7971716279db7e9a9119926d2ef",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.0",
+                "illuminate/events": "^8.0",
+                "illuminate/support": "^8.0",
+                "loophp/phptree": "^2.5"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Neves\\Events\\EventServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Neves/Events/functions.php"
+                ],
+                "psr-0": {
+                    "Neves\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Francisco Neves",
+                    "email": "hey@francisconeves.com"
+                }
+            ],
+            "description": "Transaction-aware Event Dispatcher for Laravel",
+            "support": {
+                "issues": "https://github.com/fntneves/laravel-transactional-events/issues",
+                "source": "https://github.com/fntneves/laravel-transactional-events/tree/2.0.1"
+            },
+            "time": "2020-10-13T12:21:49+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -3560,6 +3616,75 @@
                 }
             ],
             "time": "2021-01-18T20:58:21+00:00"
+        },
+        {
+            "name": "loophp/phptree",
+            "version": "2.6.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/loophp/phptree.git",
+                "reference": "de740fe0801dccce958a330c1e24d1e5f2bd68af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/loophp/phptree/zipball/de740fe0801dccce958a330c1e24d1e5f2bd68af",
+                "reference": "de740fe0801dccce958a330c1e24d1e5f2bd68af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7.1"
+            },
+            "require-dev": {
+                "drupol/launcher": "^2.2",
+                "drupol/php-conventions": "^5",
+                "drupol/phpmerkle": "^2.2",
+                "friends-of-phpspec/phpspec-code-coverage": "^5",
+                "graphp/graphviz": "^0.2",
+                "infection/infection": "^0.22",
+                "infection/phpspec-adapter": "^0.1",
+                "loophp/launcher": "^2.2.2",
+                "microsoft/tolerant-php-parser": "^0.0.20",
+                "nikic/php-parser": "^4",
+                "phpspec/phpspec": "^7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "loophp\\phptree\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pol Dellaiera",
+                    "email": "pol.dellaiera@protonmail.com"
+                }
+            ],
+            "description": "An implementation of tree data structure",
+            "keywords": [
+                "binary tree",
+                "data structure",
+                "php",
+                "tree"
+            ],
+            "support": {
+                "issues": "https://github.com/loophp/phptree/issues",
+                "source": "https://github.com/loophp/phptree"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/drupol",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.paypal.me/drupol",
+                    "type": "paypal"
+                }
+            ],
+            "time": "2022-01-20T09:56:49+00:00"
         },
         {
             "name": "mnapoli/front-yaml",
