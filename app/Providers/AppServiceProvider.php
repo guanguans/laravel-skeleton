@@ -14,6 +14,9 @@ use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
+use App\View\Components\AlertComponent;
+use App\View\Composers\RequestComposer;
+use App\View\Creators\RequestCreator;
 use ArgumentCountError;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
@@ -32,6 +35,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
@@ -99,6 +103,8 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('zh');
         JsonResource::withoutWrapping();
         // Paginator::useBootstrap();
+        // 禁用 HTML 实体双重编码
+        // Blade::withoutDoubleEncoding();
         $this->bootProduction();
         $this->registerMacros();
         $this->extendValidatorsFromCallback();
@@ -240,6 +246,7 @@ class AppServiceProvider extends ServiceProvider
     protected function extendView()
     {
         // 合成器
+        $this->app->make('view')->composer('*', RequestComposer::class);
         $this->app->make('view')->composer('*', function (View $view) {
             $view->with('request', $this->app->make(Request::class))
                 ->with('user', $this->app->make('auth')->user())
@@ -247,6 +254,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // 构造器
+        $this->app->make('view')->creator('*', RequestCreator::class);
         $this->app->make('view')->creator('*', function (View $view) {
             $view->with('request', $this->app->make(Request::class))
                 ->with('user', $this->app->make('auth')->user())
@@ -257,5 +265,18 @@ class AppServiceProvider extends ServiceProvider
         $this->app->make('view')->share('request', $this->app->make(Request::class));
         $this->app->make('view')->share('user', $this->app->make('auth')->user());
         $this->app->make('view')->share('config', $this->app->make('config'));
+
+        // 注册组件
+        Blade::component('alert', AlertComponent::class);
+
+        // 扩展 Blade
+        Blade::directive('datetime', function (\DateTime $dateTime) {
+            return "<?php echo ($dateTime)->format('Y-m-d H:i:s'); ?>";
+        });
+
+        // 回显变量
+        Blade::stringable(function (Request $request) {
+            return json_encode($request->all(), JSON_PRETTY_PRINT);
+        });
     }
 }
