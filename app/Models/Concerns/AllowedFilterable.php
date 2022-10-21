@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -14,15 +14,17 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder allowedCallbackFilter(string $name, callable $callback)
  * @method static \Illuminate\Database\Eloquent\Builder allowedTrashedFilter(string $name = 'trashed')
  * @method static \Illuminate\Database\Eloquent\Builder allowedSorts(array $allowedSorts, array $default = [], string $name = 'sorts')
+ *
+ * @mixin \Illuminate\Database\Eloquent\Model
  */
-trait AllowedFilter
+trait AllowedFilterable
 {
-    public function scopeAllowedFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = [])
+    public function scopeAllowedFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         return $this->scopeExactFilter($query, $name, $default, $internalName, $ignore);
     }
 
-    public function scopeAllowedExactFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = [])
+    public function scopeAllowedExactFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
             (request()->has($name) || $default !== null) &&
@@ -38,7 +40,7 @@ trait AllowedFilter
         return $query;
     }
 
-    public function scopeAllowedPartialFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = [])
+    public function scopeAllowedPartialFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
             (request()->has($name) || $default !== null) &&
@@ -96,7 +98,7 @@ trait AllowedFilter
         return $query;
     }
 
-    public function scopeAllowedCallbackFilter(Builder $query, string $name, callable $callback)
+    public function scopeAllowedCallbackFilter(Builder $query, string $name, callable $callback): Builder
     {
         if (request()->has($name)) {
             return call_user_func($callback, $query, request()->input($name), $name);
@@ -105,7 +107,7 @@ trait AllowedFilter
         return $query;
     }
 
-    public function scopeAllowedTrashedFilter(Builder $query, string $name = 'trashed')
+    public function scopeAllowedTrashedFilter(Builder $query, string $name = 'trashed'): Builder
     {
         if (request()->has($name)) {
             if (($value = request()->input($name)) === 'with') {
@@ -131,7 +133,7 @@ trait AllowedFilter
      * sorts[created_at]:asc
      * ```
      */
-    public function scopeAllowedSorts(Builder $query, array $allowedSorts, array $default = [], string $name = 'sorts')
+    public function scopeAllowedSorts(Builder $query, array $allowedSorts, array $default = [], string $name = 'sorts'): Builder
     {
         $sorts = request()->input($name, $default);
 
@@ -152,7 +154,7 @@ trait AllowedFilter
         return $query;
     }
 
-    public function scopeAllowedSort(Builder $query, string $name, $default = null, ?string $internalName = null)
+    public function scopeAllowedSort(Builder $query, string $name, $default = null, ?string $internalName = null): Builder
     {
         if (request()->hasAny([$name, '-' . $name]) || $default !== null) {
             $column = $internalName ?: $name;

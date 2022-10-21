@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use Illuminate\Support\Str;
 
+/**
+ * @mixin \Illuminate\Database\Eloquent\Model
+ */
 trait UsingUuidAsPrimaryKey
 {
     public static function bootUsingUuidAsPrimaryKey(): void
     {
         static::creating(function (self $model): void {
-            /* @var \Illuminate\Database\Eloquent\Model|\App\Traits\UsingUuidAsPrimaryKey $model */
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = Str::orderedUuid()->toString();
             }

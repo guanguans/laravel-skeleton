@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
@@ -17,6 +17,7 @@ trait Filterable
 {
     public function scopeFilter(Builder $query, ?array $input = null)
     {
+        /** @noinspection CallableParameterUseCaseInTypeContextInspection */
         $input = $input ?: \request()->query();
 
         foreach ($input as $key => $value) {
@@ -48,16 +49,13 @@ trait Filterable
      *  order_by=id:desc
      *  order_by=age:desc,created_at:asc...
      * </pre>
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string                                $value
      */
-    public function filterOrderBy(Builder $query, $value)
+    public function filterOrderBy(Builder $query, string $value)
     {
         $segments = \explode(',', $value);
 
         foreach ($segments as $segment) {
-            list($key, $direction) = array_pad(\explode(':', $segment), 2, 'desc');
+            [$key, $direction] = array_pad(\explode(':', $segment), 2, 'desc');
 
             $query->orderBy($key, $direction);
         }

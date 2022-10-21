@@ -8,6 +8,8 @@ use Illuminate\Cache\CacheManager;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @mixin \App\Support\AbstractRepository
+ *
  * @see https://github.com/Torann/laravel-repository
  */
 trait Cacheable
@@ -35,8 +37,6 @@ trait Cacheable
 
     /**
      * Set cache manager.
-     *
-     * @param CacheManager $cache
      */
     public static function setCacheInstance(CacheManager $cache)
     {
@@ -45,10 +45,8 @@ trait Cacheable
 
     /**
      * Get cache manager.
-     *
-     * @return CacheManager
      */
-    public static function getCacheInstance()
+    public static function getCacheInstance(): CacheManager
     {
         if (self::$cache === null) {
             self::$cache = app('cache');
@@ -59,10 +57,8 @@ trait Cacheable
 
     /**
      * Determine if the cache will be skipped
-     *
-     * @return bool
      */
-    public function skippedCache()
+    public function skippedCache(): bool
     {
         return config('repositories.cache_enabled', false) === false
                || app('request')->has(config('repositories.cache_skip_param', 'skipCache')) === true;
@@ -71,16 +67,12 @@ trait Cacheable
     /**
      * Get Cache key for the method
      *
-     * @param string $method
      * @param mixed  $args
-     * @param string $tag
-     *
-     * @return string
      */
-    public function getCacheKey($method, $args = null, $tag = '')
+    public function getCacheKey(string $method, ?array $args = null, string $tag = ''): string
     {
         // Sort through arguments
-        foreach ($args as &$a) {
+        foreach ((array)$args as &$a) {
             if ($a instanceof Model) {
                 $a = get_class($a) . '|' . $a->getKey();
             }
@@ -103,14 +95,11 @@ trait Cacheable
     /**
      * Get an item from the cache, or store the default value.
      *
-     * @param string   $method
-     * @param array    $args
-     * @param \Closure $callback
-     * @param int      $time
+     * @param int|string|null $time
      *
      * @return mixed
      */
-    public function cacheCallback($method, $args, Closure $callback, $time = null)
+    public function cacheCallback(string $method, array $args, Closure $callback, $time = null)
     {
         // Cache disabled, just execute query & return result
         if ($this->skippedCache() === true) {
@@ -129,10 +118,8 @@ trait Cacheable
 
     /**
      * Flush the cache for the given repository.
-     *
-     * @return bool
      */
-    public function flushCache()
+    public function flushCache(): bool
     {
         // Cache disabled, just ignore this
         if ($this->eventFlushCache === false || config('repositories.cache_enabled', false) === false) {
@@ -148,11 +135,9 @@ trait Cacheable
     /**
      * Return the time until expires in minutes.
      *
-     * @param int|string $time
-     *
-     * @return int
+     * @param int|string|null $time
      */
-    protected function getCacheExpiresTime($time = null)
+    protected function getCacheExpiresTime($time = null): int
     {
         if ($time === self::EXPIRES_END_OF_DAY) {
             return class_exists(Carbon::class)

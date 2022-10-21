@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -9,34 +9,18 @@ use Illuminate\Support\Facades\DB;
  * @method Builder useIndex(string|string[] $index)
  * @method Builder forceIndex(string|string[] $index)
  * @method Builder ignoreIndex(string|string[] $index)
+ *
+ * @mixin \Illuminate\Database\Eloquent\Model
  */
-trait ForceUseIndex
+trait ForceUseIndexable
 {
     protected $from = [];
 
     /**
-     * @param  string|array  $index
-     *
-     * @return string
+     * @param string|string[] $index
      */
-    protected function parseIndexName($index): string
+    public function scopeUseIndex(Builder $query, $index): Builder
     {
-        if (is_array($index)) {
-            return "`" . implode("`, `", $index) . "`";
-        }
-
-        return "`" . $index . "`";
-    }
-
-    /**
-     * @param $query
-     * @param  string|array  $index
-     *
-     * @return Builder
-     */
-    public function scopeUseIndex($query, $index): Builder
-    {
-        /* @var \Illuminate\Database\Eloquent\Model $this */
         $table = $this->getTable();
 
         $index = $this->parseIndexName($index);
@@ -50,14 +34,10 @@ trait ForceUseIndex
     }
 
     /**
-     * @param $query
-     * @param  string|array  $index
-     *
-     * @return Builder
+     * @param string|string[] $index
      */
-    public function scopeForceIndex($query, $index): Builder
+    public function scopeForceIndex(Builder $query, $index): Builder
     {
-        /* @var \Illuminate\Database\Eloquent\Model $this */
         $table = $this->getTable();
 
         $index = $this->parseIndexName($index);
@@ -71,14 +51,10 @@ trait ForceUseIndex
     }
 
     /**
-     * @param $query
-     * @param  string|array  $index
-     *
-     * @return Builder
+     * @param string|string[] $index
      */
-    public function scopeIgnoreIndex($query, $index): Builder
+    public function scopeIgnoreIndex(Builder $query, $index): Builder
     {
-        /* @var \Illuminate\Database\Eloquent\Model $this */
         $table = $this->getTable();
 
         $index = $this->parseIndexName($index);
@@ -89,5 +65,17 @@ trait ForceUseIndex
 
         /* @var Builder $query */
         return $query->from(DB::raw($raw));
+    }
+
+    /**
+     * @param string|string[] $index
+     */
+    protected function parseIndexName($index): string
+    {
+        if (is_array($index)) {
+            return "`" . implode("`, `", $index) . "`";
+        }
+
+        return "`" . $index . "`";
     }
 }

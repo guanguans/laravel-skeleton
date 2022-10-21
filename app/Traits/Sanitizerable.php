@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 /**
  * @mixin \Illuminate\Http\Request
  */
-trait Sanitizer
+trait Sanitizerable
 {
     /**
      * Sanitizes the data of a request. This is a superior version of php built-in array_filter() as it preserves

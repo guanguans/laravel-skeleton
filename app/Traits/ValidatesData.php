@@ -5,18 +5,19 @@ namespace App\Traits;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @mixin \App\Http\Controllers\Controller
+ */
 trait ValidatesData
 {
     /**
      * Run the validation routine against the given validator.
      *
      * @param  \Illuminate\Contracts\Validation\Validator|array  $validator
-     * @param  array  $data
-     * @return array
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateDataWith($validator, array $data)
+    public function validateDataWith($validator, array $data): array
     {
         if (is_array($validator)) {
             $validator = $this->getValidationDataFactory()->make($data, $validator);
@@ -28,12 +29,6 @@ trait ValidatesData
     /**
      * Validate the given request with the given rules.
      *
-     * @param  array  $data
-     * @param  array  $rules
-     * @param  array  $messages
-     * @param  array  $customAttributes
-     * @return array
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function validateData(
@@ -41,7 +36,7 @@ trait ValidatesData
         array $rules,
         array $messages = [],
         array $customAttributes = []
-    ) {
+    ): array {
         return $this->getValidationDataFactory()->make(
             $data,
             $rules,
@@ -53,22 +48,15 @@ trait ValidatesData
     /**
      * Validate the given request with the given rules.
      *
-     * @param  string  $errorBag
-     * @param  array $data
-     * @param  array  $rules
-     * @param  array  $messages
-     * @param  array  $customAttributes
-     * @return array
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function validateDataWithBag(
-        $errorBag,
+        string $errorBag,
         array $data,
         array $rules,
         array $messages = [],
         array $customAttributes = []
-    ) {
+    ): array {
         try {
             return $this->validateData($data, $rules, $messages, $customAttributes);
         } catch (ValidationException $e) {

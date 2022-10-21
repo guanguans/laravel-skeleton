@@ -2,33 +2,30 @@
 
 namespace App\Traits;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use ReflectionObject;
 
 /**
  * Trait ControllerCrud.
  *
  * @property \Illuminate\Database\Eloquent\Model|string $modelClass
  *
- * @mixin \Illuminate\Routing\Controller|\App\Http\Controllers\Controller
+ * @mixin \App\Http\Controllers\Controller
  *
  * @see https://github.com/thiagoprz/crud-tools
  */
-trait ControllerCrud
+trait ControllerCrudable
 {
-    /**
-     * @param  bool  $forRedirect
-     *
-     * @return string
-     */
     public function getViewPath(bool $forRedirect = false): string
     {
         $nsPrefix = '';
-        $nsPrefixes = explode('\\', (new \ReflectionObject($this))->getNamespaceName());
+        $nsPrefixes = explode('\\', (new ReflectionObject($this))->getNamespaceName());
         if (end($nsPrefixes) !== 'Controllers') {
             $nsPrefix = strtolower(end($nsPrefixes)) . ($forRedirect ? '/' : '.');
         }
@@ -39,8 +36,6 @@ trait ControllerCrud
 
     /**
      * List index.
-     *
-     * @param  \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
@@ -60,10 +55,8 @@ trait ControllerCrud
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(): View
     {
         return view($this->getViewPath() . '.create');
     }
@@ -71,13 +64,10 @@ trait ControllerCrud
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        /** @var \App\Http\Controllers\Controller $this */
         if ($request->ajax() || $request->wantsJson()) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
             if ($validation->fails()) {
@@ -108,7 +98,6 @@ trait ControllerCrud
     /**
      * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param mixed $id
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
@@ -133,9 +122,8 @@ trait ControllerCrud
      *
      * @param mixed $id
      *
-     * @return \Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit($id): View
     {
         $model = $this->modelClass::findOrFail($id);
 
@@ -145,7 +133,6 @@ trait ControllerCrud
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param mixed $id
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -180,7 +167,6 @@ trait ControllerCrud
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  mixed  $id
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -208,11 +194,6 @@ trait ControllerCrud
             : redirect($url)->with('flash_message', $message);
     }
 
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return bool
-     */
     private function isAjax(Request $request): bool
     {
         return $request->ajax() || $request->wantsJson();
@@ -220,10 +201,6 @@ trait ControllerCrud
 
     /**
      * Returns JSON representation of object.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     private function jsonModel(Model $model): JsonResponse
     {
@@ -236,12 +213,9 @@ trait ControllerCrud
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Database\Eloquent\Model|null  $model
-     *
-     * @return void
+     * @param  ?Model  $model
      */
-    public function handleFileUploads(Request $request, Model $model = null): void
+    public function handleFileUploads(Request $request, ?Model $model = null): void
     {
         $fileUploads = $this->modelClass::fileUploads($model);
         foreach ($fileUploads as $fileUpload => $fileData) {

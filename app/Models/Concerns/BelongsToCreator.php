@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property \App\Models\User $creator
- * @property int           $creator_id
+ * @property int $creator_id
+ *
  * @method static creating(\Closure $closure)
  * @method static updating(\Closure $closure)
  *

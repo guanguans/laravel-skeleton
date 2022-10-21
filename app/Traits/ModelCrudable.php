@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,18 +22,14 @@ use Illuminate\Support\Str;
  * @property bool $onlyTrashedForbidden onlyTrashed() gets forbidden on this class
  * @property bool $noPaginationForbidden allow remove pagination forbidden on this class
  *
- * @mixin Model
+ * @mixin \Illuminate\Database\Eloquent\Model
  *
  * @see https://github.com/thiagoprz/crud-tools
  */
-trait ModelCrud
+trait ModelCrudable
 {
     /**
-     * @see ModelCrud::$validations
-     *
-     * @param  null|int  $id
-     *
-     * @return array
+     * @see ModelCrudable::$validations
      */
     public static function validations(?int $id = null): array
     {
@@ -48,12 +45,7 @@ trait ModelCrud
     /**
      * Return the validations for the given scenario
      *
-     * @see ModelCrud::$validations
-     *
-     * @param  string  $scenario
-     * @param  null|int  $id
-     *
-     * @return array
+     * @see ModelCrudable::$validations
      */
     public static function validateOn(string $scenario = 'create', ?int $id = null): array
     {
@@ -65,12 +57,7 @@ trait ModelCrud
         return self::$validations[$scenario];
     }
 
-    /**
-     * @param  array  $data
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public static function search(array $data)
+    public static function search(array $data): LengthAwarePaginator
     {
         // Starts query
         $query = self::query();
@@ -108,8 +95,9 @@ trait ModelCrud
 
         /**
          * If model uses SoftDeletes allows query excluded records
-         * @see ModelCrud::$onlyTrashedForbidden
-         * @see ModelCrud::$withTrashedForbidden
+         *
+         * @see ModelCrudable::$onlyTrashedForbidden
+         * @see ModelCrudable::$withTrashedForbidden
          */
         if (in_array(SoftDeletes::class, class_uses(self::class), true)) {
             self::applyOnlyTrashed($query, $data);
@@ -125,12 +113,7 @@ trait ModelCrud
     }
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  array  $data
-     *
-     * @return void
-     *@see ModelCrud::$searchOrder
-     *
+     * @see ModelCrudable::$searchOrder
      */
     public static function searchOrder(Builder $query, array $data): void
     {
@@ -151,11 +134,7 @@ trait ModelCrud
     /**
      * Attaches related records to every result on the search query
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     *
-     * @return void
-     *@see ModelCrud::$searchCount
-     *
+     * @see ModelCrudable::$searchCount
      */
     public static function searchWithCount(Builder $query): void
     {
@@ -167,10 +146,7 @@ trait ModelCrud
     }
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     *
-     * @return void
-     *@see ModelCrud::$searchWith
+     * @see ModelCrudable::$searchWith
      */
     public static function searchWith(Builder $query): void
     {
@@ -182,12 +158,9 @@ trait ModelCrud
     }
 
     /**
-     * @see ModelCrud::$paginationForSearch
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @see ModelCrudable::$paginationForSearch
      */
-    public static function setSearchPagination(Builder $query): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public static function setSearchPagination(Builder $query): LengthAwarePaginator
     {
         $pagination = self::$paginationForSearch ?? 10;
 
@@ -195,12 +168,7 @@ trait ModelCrud
     }
 
     /**
-     * @see ModelCrud::$withTrashedForbidden
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  array  $data
-     *
-     * @return void
+     * @see ModelCrudable::$withTrashedForbidden
      */
     public static function applyWithTrashed(Builder $query, array $data): void
     {
@@ -210,12 +178,7 @@ trait ModelCrud
     }
 
     /**
-     * @see ModelCrud::$onlyTrashedForbidden
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  array  $data
-     *
-     * @return void
+     * @see ModelCrudable::$onlyTrashedForbidden
      */
     public static function applyOnlyTrashed(Builder $query, array $data): void
     {
@@ -231,11 +194,9 @@ trait ModelCrud
      * @param  string  $field "The" field
      * @param  string  $type Type of field (string, int, date, datetime...)
      * @param  array  $data Data sent on $request
-     * @param  string|null  $aliasField Alias name for field (where inside a related table "table.column")
-     *
-     * @return void
+     * @param  ?string  $aliasField Alias name for field (where inside a related table "table.column")
      */
-    private static function buildQuery(Builder $query, string $field, string $type, array $data, string $aliasField = null): void
+    private static function buildQuery(Builder $query, string $field, string $type, array $data, ?string $aliasField = null): void
     {
         if (! $aliasField) {
             $aliasField = $field;
@@ -260,14 +221,6 @@ trait ModelCrud
         }
     }
 
-    /**
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $field
-     * @param  array  $data
-     * @param  string  $aliasField
-     *
-     * @return void
-     */
     private static function exactFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
         if (is_array($data[$field])) {
@@ -283,14 +236,6 @@ trait ModelCrud
         }
     }
 
-    /**
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $field
-     * @param  array  $data
-     * @param  string  $aliasField
-     *
-     * @return void
-     */
     private static function likeFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
         if (is_array($data[$field])) {
@@ -304,15 +249,6 @@ trait ModelCrud
         }
     }
 
-    /**
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $field
-     * @param  array  $data
-     * @param  string  $aliasField
-     * @param  string  $type
-     *
-     * @return void
-     */
     private static function rangeFilter(Builder $query, string $field, array $data, string $aliasField, string $type): void
     {
         if (! empty($data[$field . '_from'])) {
@@ -331,11 +267,6 @@ trait ModelCrud
         }
     }
 
-    /**
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     *
-     * @return array
-     */
     public static function fileUploads(Model $model): array
     {
         return [];

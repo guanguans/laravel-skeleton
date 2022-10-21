@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
+
+use Jenssegers\Agent\Facades\Agent;
+use Laravel\Sanctum\NewAccessToken;
 
 /**
- * @mixin \App\Models\User|\App\Models\JWTUser
+ * @mixin \App\Models\User
  */
 trait HasWrapedApiTokens
 {
-    /**
-     * @param  string  $token
-     *
-     * @return array
-     */
     public static function wrapToken(string $token): array
     {
         return [
@@ -23,15 +21,10 @@ trait HasWrapedApiTokens
 
     public static function getDevice(?string $userAgent = null): string
     {
-        return \Jenssegers\Agent\Facades\Agent::device($userAgent) ?: 'unknown';
+        return Agent::device($userAgent) ?: 'unknown';
     }
 
-    /**
-     * @param  array  $abilities
-     *
-     * @return \Laravel\Sanctum\NewAccessToken
-     */
-    public function createTokenWithoutName(array $abilities = ['*'])
+    public function createTokenWithoutName(array $abilities = ['*']): NewAccessToken
     {
         return $this->createToken(self::getDevice(), $abilities);
     }

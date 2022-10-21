@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -12,12 +12,14 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 /**
- * @url https://dev.mysql.com/doc/refman/5.7/en/index-hints.html
- *
  * @method static Builder|Model forceIndex(array|string[] $indexes, string $for = '', string $as = '')
  * @method static Builder|Model useIndex(string|string[] $indexes, string $for = '', string $as = '')
  * @method static Builder|Model ignoreIndex(array|string[] $indexes, string $for = '', string $as = '')
  * @method static Builder|Model getTable()
+ *
+ * @mixin \Illuminate\Database\Eloquent\Model
+ *
+ * @see https://dev.mysql.com/doc/refman/5.7/en/index-hints.html
  */
 trait IndexHintsable
 {
@@ -27,12 +29,8 @@ trait IndexHintsable
     protected $preparedIndexes = '';
 
     /**
-     * @param  Builder  $query
-     * @param  string|string[]  $indexes
-     * @param  string  $for  JOIN|ORDER BY|GROUP BY
-     * @param  string  $as
-     *
-     * @return Builder
+     * @param string|string[] $indexes
+     * @param string $for JOIN|ORDER BY|GROUP BY
      */
     public function scopeForceIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -56,12 +54,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param  Builder  $query
-     * @param  string|string[]  $indexes
-     * @param  string  $for
-     * @param  string  $as
-     *
-     * @return Builder
+     * @param string|string[] $indexes
      */
     public function scopeUseIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -85,12 +78,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param  Builder  $query
-     * @param  string|string[]  $indexes
-     * @param  string  $for
-     * @param  string  $as
-     *
-     * @return Builder
+     * @param string|string[] $indexes
      */
     public function scopeIgnoreIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -120,10 +108,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param $indexes
-     * @param  string|string[]  $type
-     *
-     * @return bool
+     * @param string|string[] $indexes
      */
     protected function tableIndexExists($indexes, string $type): bool
     {
@@ -131,6 +116,7 @@ trait IndexHintsable
             $index = strtolower($index);
 
             Schema::table(self::getTable(), function (Blueprint $table) use ($index, $type) {
+                /** @noinspection PhpVoidFunctionResultUsedInspection */
                 return $this->fillIndexes($table, $index, $type);
             });
         }
@@ -138,7 +124,7 @@ trait IndexHintsable
         return ! empty($this->forceIndexes) || ! empty($this->ignoreIndexes) || ! empty($this->useIndexes);
     }
 
-    protected function fillIndexes(Blueprint $table, $index, $type): void
+    protected function fillIndexes(Blueprint $table, string $index, string $type): void
     {
         if (! $table->hasIndex($index)) {
             return;
@@ -165,7 +151,7 @@ trait IndexHintsable
             return false;
         }
         $for = strtoupper(str_replace('_', ' ', $for));
-        $this->preparedIndexes .= " FOR {$for}";
+        $this->preparedIndexes .= " FOR $for";
 
         return true;
     }

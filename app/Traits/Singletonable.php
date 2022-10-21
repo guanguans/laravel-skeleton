@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait Singleton
+trait Singletonable
 {
     public static function instance(...$parameters)
     {

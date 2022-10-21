@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pipeline\Pipeline;
@@ -8,8 +8,10 @@ use InvalidArgumentException;
 
 /**
  * @method static Builder|static pipe(...$pipes)
+ *
+ * @mixin \Illuminate\Database\Eloquent\Model
  */
-trait QueryBuilderPipe
+trait Pipeable
 {
     /**
      * ```
@@ -33,12 +35,9 @@ trait QueryBuilderPipe
      *     ->get();
      * ```
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $builder
-     * @param  array|string|\Closure  $pipes
-     *
-     * @return Builder
+     * @param  callable[]  $pipes
      */
-    public function scopePipe(Builder $builder, ...$pipes)
+    public function scopePipe(Builder $builder, ...$pipes): Builder
     {
         array_unshift($pipes, function (Builder $builder, $next) {
             if (! $next($builder) instanceof Builder) {

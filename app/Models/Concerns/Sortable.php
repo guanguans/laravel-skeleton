@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Models\Concerns;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Builder;
@@ -54,7 +54,7 @@ trait Sortable
 
         $orderColumnName = $model->determineOrderColumnName();
 
-        if (is_null($primaryKeyColumn)) {
+        if (null === $primaryKeyColumn) {
             $primaryKeyColumn = $model->getKeyName();
         }
 
