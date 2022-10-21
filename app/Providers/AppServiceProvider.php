@@ -18,6 +18,7 @@ use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use ArgumentCountError;
+use DateTime;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -109,7 +110,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerMacros();
         $this->extendValidatorsFromCallback();
         $this->extendValidatorsFromPath($this->app->path('Rules'));
-        // $this->extendView();
+        $this->extendView();
         ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
             return $request->is('api/*');
         });
@@ -270,7 +271,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('alert', AlertComponent::class);
 
         // 扩展 Blade
-        Blade::directive('datetime', function (\DateTime $dateTime) {
+        Blade::directive('datetime', function (DateTime $dateTime) {
             return "<?php echo ($dateTime)->format('Y-m-d H:i:s'); ?>";
         });
 

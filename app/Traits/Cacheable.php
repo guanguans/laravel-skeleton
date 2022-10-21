@@ -67,7 +67,7 @@ trait Cacheable
     /**
      * Get Cache key for the method
      *
-     * @param mixed  $args
+     * @param ?array  $args
      */
     public function getCacheKey(string $method, ?array $args = null, string $tag = ''): string
     {

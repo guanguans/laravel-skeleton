@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 /**
- * @property $filterable
- * @property $ignoreFilterValue
+ * @property array $filterable
+ * @property mixed $ignoreFilterValue
  *
  * @method static filter(array $input = [])
  *

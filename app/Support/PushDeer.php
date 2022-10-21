@@ -100,13 +100,13 @@ class PushDeer extends FoundationSdk
             ->withMiddleware(function (callable $handler) use ($config): callable {
                 return function (RequestInterface $request, array $options) use ($config, $handler) {
                     $options['laravel_data']['pushkey'] = $config['key'];
-                    $request->withHeader('X-Timestamp', microtime(true));
+                    $request->withHeader('X-Timestamp', (string)microtime(true));
 
                     /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
                     $promise = $handler($request, $options);
 
                     return $promise->then(function (ResponseInterface $response) {
-                        return $response->withHeader('X-Timestamp', microtime(true));
+                        return $response->withHeader('X-Timestamp', (string)microtime(true));
                     });
                 };
             })

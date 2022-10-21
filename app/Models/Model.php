@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
-use App\Traits\AllowedFilter;
-use App\Traits\Filterable;
-use App\Traits\ForceUseIndex;
-use App\Traits\Observable;
-use App\Traits\QueryBuilderPipe;
-use App\Traits\SerializeDate;
-use App\Traits\Sortable;
+use App\Models\Concerns\AllowedFilterable;
+use App\Models\Concerns\Filterable;
+use App\Models\Concerns\ForceUseIndexable;
+use App\Models\Concerns\Observable;
+use App\Models\Concerns\Pipeable;
+use App\Models\Concerns\SerializeDate;
+use App\Models\Concerns\Sortable;
 use Watson\Validating\ValidatingTrait;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {
-    use AllowedFilter;
+    use AllowedFilterable;
     use Filterable;
-    use ForceUseIndex;
+    use ForceUseIndexable;
     use Observable;
-    use QueryBuilderPipe;
+    use Pipeable;
     use SerializeDate;
     use Sortable;
     use ValidatingTrait;

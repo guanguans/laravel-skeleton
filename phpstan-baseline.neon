@@ -46,6 +46,11 @@ parameters:
 			path: app/Console/Commands/GenerateTestsCommand.php
 
 		-
+			message: "#^Property App\\\\Console\\\\Commands\\\\GenerateTestsCommand\\:\\:\\$templateTestClassNodes is never read, only written\\.$#"
+			count: 1
+			path: app/Console/Commands/GenerateTestsCommand.php
+
+		-
 			message: "#^Call to an undefined method Illuminate\\\\Auth\\\\AuthManager\\:\\:factory\\(\\)\\.$#"
 			count: 1
 			path: app/Models/JWTUser.php
@@ -86,27 +91,27 @@ parameters:
 			path: app/Models/Model.php
 
 		-
-			message: "#^Call to method save\\(\\) on an unknown class App\\\\Traits\\\\Sortable\\.$#"
+			message: "#^Call to method save\\(\\) on an unknown class App\\\\Models\\\\Concerns\\\\Sortable\\.$#"
 			count: 1
 			path: app/Models/Model.php
 
 		-
-			message: "#^Call to method swapOrderWithModel\\(\\) on an unknown class App\\\\Traits\\\\Sortable\\.$#"
+			message: "#^Call to method swapOrderWithModel\\(\\) on an unknown class App\\\\Models\\\\Concerns\\\\Sortable\\.$#"
 			count: 1
 			path: app/Models/Model.php
 
 		-
-			message: "#^Parameter \\$model of method App\\\\Models\\\\Model\\:\\:swapOrder\\(\\) has invalid type App\\\\Traits\\\\Sortable\\.$#"
+			message: "#^Parameter \\$model of method App\\\\Models\\\\Model\\:\\:swapOrder\\(\\) has invalid type App\\\\Models\\\\Concerns\\\\Sortable\\.$#"
 			count: 1
 			path: app/Models/Model.php
 
 		-
-			message: "#^Parameter \\$otherModel of method App\\\\Models\\\\Model\\:\\:swapOrder\\(\\) has invalid type App\\\\Traits\\\\Sortable\\.$#"
+			message: "#^Parameter \\$otherModel of method App\\\\Models\\\\Model\\:\\:swapOrder\\(\\) has invalid type App\\\\Models\\\\Concerns\\\\Sortable\\.$#"
 			count: 1
 			path: app/Models/Model.php
 
 		-
-			message: "#^Parameter \\$otherModel of method App\\\\Models\\\\Model\\:\\:swapOrderWithModel\\(\\) has invalid type App\\\\Traits\\\\Sortable\\.$#"
+			message: "#^Parameter \\$otherModel of method App\\\\Models\\\\Model\\:\\:swapOrderWithModel\\(\\) has invalid type App\\\\Models\\\\Concerns\\\\Sortable\\.$#"
 			count: 1
 			path: app/Models/Model.php
 
@@ -119,6 +124,11 @@ parameters:
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 2
 			path: app/Models/Model.php
+
+		-
+			message: "#^Part \\$dateTime \\(DateTime\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: app/Providers/AppServiceProvider.php
 
 		-
 			message: "#^Parameter \\#3 \\$logLevel of static method GuzzleHttp\\\\Middleware\\:\\:log\\(\\) expects 'alert'\\|'critical'\\|'debug'\\|'emergency'\\|'error'\\|'info'\\|'notice'\\|'warning', string given\\.$#"
@@ -184,13 +194,3 @@ parameters:
 			message: "#^Left side of && is always true\\.$#"
 			count: 2
 			path: app/Support/helpers.php
-
-		-
-			message: "#^PHPDoc tag @property has invalid value \\(\\$filterable\\)\\: Unexpected token \"\\$filterable\", expected type at offset 17$#"
-			count: 1
-			path: app/Traits/Filterable.php
-
-		-
-			message: "#^PHPDoc tag @property has invalid value \\(\\$ignoreFilterValue\\)\\: Unexpected token \"\\$ignoreFilterValue\", expected type at offset 42$#"
-			count: 1
-			path: app/Traits/Filterable.php
