@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Guanguans\LaravelExceptionNotify\Jobs\ReportExceptionJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -29,6 +30,11 @@ class Kernel extends ConsoleKernel
         // $schedule->command('backup:run')->daily()->at('02:00');
         // $schedule->command('backup:monitor')->daily()->at('03:00');
         $schedule->command('disposable:update')->weekly()->at('04:00');
+
+        // $schedule->job(ReportExceptionJob::class)->everyMinute();
+        // $schedule->call(function () {
+        //     dump(Inspiring::quote());
+        // })->everyMinute();
     }
 
     /**
