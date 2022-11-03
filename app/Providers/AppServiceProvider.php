@@ -14,6 +14,7 @@ use App\Support\Macros\QueryBuilderMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
+use App\Support\Macros\WhereNotMacro;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -37,6 +38,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
@@ -119,6 +121,8 @@ class AppServiceProvider extends ServiceProvider
 
         // Preventing Stray Requests
         // Http::preventStrayRequests($this->app->environment('testing'));
+
+        // DB::handleExceedingCumulativeQueryDuration();
     }
 
     /**
@@ -233,6 +237,7 @@ class AppServiceProvider extends ServiceProvider
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
+        WhereNotMacro::addMacro();
     }
 
     /**
