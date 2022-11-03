@@ -6,6 +6,51 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('format_bits')) {
+    function format_bits(int $bits, $precision = 2, $suffix = true)
+    {
+        if ($bits > 0) {
+            $i = floor(log($bits) / log(1000));
+
+            if (! $suffix) {
+                return round($bits / (1000 ** $i), $precision);
+            }
+
+            $sizes = ['B', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'];
+
+            return sprintf('%.02F', round($bits / (1000 ** $i), $precision)) * 1 . ' ' . @$sizes[$i];
+        }
+
+        return 0;
+    }
+}
+
+if (! function_exists('format_bytes')) {
+    function format_bytes(int $bytes, $precision = 2)
+    {
+        if ($bytes > 0) {
+            $i = floor(log($bytes) / log(1024));
+
+            $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 . ' ' . @$sizes[$i];
+        }
+
+        return 0;
+    }
+}
+
+if (! function_exists('bytes_to_bits')) {
+    function bytes_to_bits(int $bytes)
+    {
+        if ($bytes > 0) {
+            return $bytes * 8;
+        }
+
+        return 0;
+    }
+}
+
 if (! function_exists('partical')) {
     /**
      * 偏函数
