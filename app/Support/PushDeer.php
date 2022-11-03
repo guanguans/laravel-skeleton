@@ -4,6 +4,7 @@ namespace App\Support;
 
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Psr7\Utils;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -101,6 +102,9 @@ class PushDeer extends FoundationSdk
                 return function (RequestInterface $request, array $options) use ($config, $handler) {
                     $options['laravel_data']['pushkey'] = $config['key'];
                     $request->withHeader('X-Timestamp', (string)microtime(true));
+
+                    // 修改请求
+                    Utils::modifyRequest($request, []);
 
                     /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
                     $promise = $handler($request, $options);
