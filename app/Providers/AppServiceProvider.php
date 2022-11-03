@@ -37,6 +37,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
@@ -115,6 +116,9 @@ class AppServiceProvider extends ServiceProvider
         ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
             return $request->is('api/*');
         });
+
+        // Preventing Stray Requests
+        // Http::preventStrayRequests($this->app->environment('testing'));
     }
 
     /**
