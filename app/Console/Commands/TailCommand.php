@@ -56,7 +56,6 @@ class TailCommand extends Command
             ->setTimeout(null)
             ->run(function ($type, $line) {
                 $this->handleClearOption();
-
                 $this->output->write($line);
             });
 
@@ -75,7 +74,6 @@ class TailCommand extends Command
     protected function getTailCommand(): string
     {
         $file = $this->option('file') ?? '`\ls -t | \head -1`';
-
         $grep = $this->option('grep') ? sprintf(' | \grep "%s"', $this->option('grep')) : '';
 
         return sprintf('\tail -f -n %s "%s" %s', $this->option('lines'), $file, $grep);

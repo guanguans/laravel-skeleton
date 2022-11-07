@@ -31,10 +31,8 @@ class InstallCommand extends Command
     {
         if (! $this->option('force')) {
             $this->newLine(2);
-
             $this->info("Running the install will reset all of the application's data.");
             $this->warn('!!! ALL OF THE DATA WILL BE DELETED !!!');
-
             if (! $this->confirm('Do you wish to continue?')) {
                 $this->info('Install cancelled.');
 
@@ -43,19 +41,12 @@ class InstallCommand extends Command
         }
 
         $this->info('Starting to install the application...');
-
         $this->newLine();
-
         $this->checkAppKey();
-
         $this->line('⏳ Optimizing the cache...');
-
         Artisan::call('optimize');
-
         $this->line('✅ Optimized cache');
-
         $this->newLine();
-
         $this->line('⏳ Migrating the database...');
 
         try {
@@ -69,9 +60,7 @@ class InstallCommand extends Command
         }
 
         $this->line('✅ Database migrated');
-
         $this->newLine();
-
         $this->line('🚀 Finished installing the application!');
 
         return 0;
@@ -81,9 +70,7 @@ class InstallCommand extends Command
     {
         if (empty(config('app.key'))) {
             $this->line('🔑  Creating an application key');
-
             Artisan::call('key:generate');
-
             $this->line('✅  Application key created');
         }
     }

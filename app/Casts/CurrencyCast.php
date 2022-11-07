@@ -57,6 +57,6 @@ class CurrencyCast implements CastsAttributes
      */
     public function set($model, string $key, $value, array $attributes)
     {
-        return (int) ($value * (10 ** $this->digits));
+        return $value * (10 ** $this->digits);
     }
 }
