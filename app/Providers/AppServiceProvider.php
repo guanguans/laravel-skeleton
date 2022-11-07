@@ -15,6 +15,7 @@ use App\Support\Macros\RequestMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
 use App\Support\Macros\WhereNotMacro;
+use App\Traits\Conditionable;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -53,6 +54,8 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use Conditionable;
+
     /**
      * All of the container bindings that should be registered.
      *
@@ -83,8 +86,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->registerGlobalFunctions();
-        $this->registerNotProductionServices();
+        $this->while(true, function () {
+            $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
+        });
+
+        $this->unless($this->app->isProduction(), function () {
+            $this->registerNotProductionServiceProviders();
+        });
     }
 
     /**
@@ -94,41 +102,105 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Eloquent 严格模式
-        // Model::shouldBeStrict(! $this->app->isProduction());
-        // 预防 N+1 查询问题
-        Model::preventLazyLoading(! $this->app->isProduction());
-        // 防止模型静默丢弃不在 fillable 中的字段
-        // Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
-        // Triggers MissingAttributeException: "The attribute [status] either does not exist or was not retrieved."
-        // Model::preventsAccessingMissingAttributes(! $this->app->isProduction());
-
-        // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
-        Schema::defaultStringLength(191);
-        Carbon::setLocale(config('app.locale'));
-        JsonResource::withoutWrapping();
-        // Paginator::useBootstrap();
-        // 禁用 HTML 实体双重编码
-        // Blade::withoutDoubleEncoding();
-        $this->bootProduction();
-        $this->registerMacros();
-        $this->extendValidatorsFromCallback();
-        $this->extendValidatorsFromPath($this->app->path('Rules'));
-        $this->extendView();
-        ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
-            return $request->is('api/*');
+        $this->while(true, function () {
+            // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
+            Schema::defaultStringLength(191);
+            Carbon::setLocale(config('app.locale'));
+            JsonResource::withoutWrapping();
+            Paginator::useBootstrap();
+            // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
+            $this->registerMacros();
+            $this->extendValidator();
+            $this->extendValidatorFrom($this->app->path('Rules'));
+            $this->extendView();
+            ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
+                return $request->is('api/*');
+            });
         });
 
-        // Preventing Stray Requests
-        // Http::preventStrayRequests($this->app->environment('testing'));
+        $this->while($this->app->isProduction(), function () {
+            // URL::forceScheme('https');
+            // $this->app->make(Request::class)->server->set('HTTPS', 'on');
+            // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
+        });
 
-        // DB::handleExceedingCumulativeQueryDuration();
+        $this->while($this->app->environment('testing'), function () {
+            // Http::preventStrayRequests(); // Preventing Stray Requests
+        });
+
+        $this->unless($this->app->isProduction(), function () {
+            // Model::shouldBeStrict(); // Eloquent 严格模式
+            Model::preventLazyLoading(); // 预防 N+1 查询问题
+            // Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
+            // Model::preventsAccessingMissingAttributes(); // Triggers MissingAttributeException
+            // DB::handleExceedingCumulativeQueryDuration();
+        });
+    }
+
+    protected function registerGlobalFunctionsFrom(string $pattern)
+    {
+        $files = glob($pattern);
+        foreach ($files as $file) {
+            require_once $file;
+        }
+    }
+
+    protected function registerNotProductionServiceProviders()
+    {
+        $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
+        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
+        $this->app->register(\Reliese\Coders\CodersServiceProvider::class);
+    }
+
+    /**
+     * Register macros.
+     */
+    protected function registerMacros()
+    {
+        Request::mixin($this->app->make(RequestMacro::class));
+        Collection::mixin($this->app->make(CollectionMacro::class));
+        QueryBuilder::mixin($queryBuilderMacro = $this->app->make(QueryBuilderMacro::class));
+        EloquentBuilder::mixin($queryBuilderMacro);
+        Relation::mixin($queryBuilderMacro);
+        Str::mixin($this->app->make(StrMacro::class));
+        Stringable::mixin($this->app->make(StringableMacro::class));
+        Blueprint::mixin($this->app->make(BlueprintMacro::class));
+        Grammar::mixin($this->app->make(GrammarMacro::class));
+        MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
+        WhereNotMacro::addMacro();
+    }
+
+    protected function extendValidator(): void
+    {
+        // 默认值规则
+        Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
+            return (new DefaultRule($parameters[0] ?? $value))
+                ->setValidator($validator)
+                ->passes($attribute, $value);
+        });
+
+        // instanceof 规则
+        Validator::extend('instanceof', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
+            if (empty($parameters)) {
+                throw new ArgumentCountError(
+                    sprintf(
+                        'Too few arguments to function App\Rules\InstanceofRule::__construct(), 0 passed in %s on line %s and exactly 1 expected',
+                        __FILE__,
+                        __LINE__
+                    )
+                );
+            }
+
+            return (new InstanceofRule($parameters[0]))
+                ->passes($attribute, $value);
+        }, (new InstanceofRule(''))->message());
     }
 
     /**
      * Register rule.
      */
-    protected function extendValidatorsFromPath(
+    protected function extendValidatorFrom(
         $dirs,
         $name = '*Rule.php',
         $notName = [
@@ -171,87 +243,6 @@ class AppServiceProvider extends ServiceProvider
 
             Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
         }
-    }
-
-    protected function extendValidatorsFromCallback(): void
-    {
-        // 默认值规则
-        Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
-            return (new DefaultRule($parameters[0] ?? $value))
-                ->setValidator($validator)
-                ->passes($attribute, $value);
-        });
-
-        // instanceof 规则
-        Validator::extend('instanceof', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
-            if (empty($parameters)) {
-                throw new ArgumentCountError(
-                    sprintf(
-                        'Too few arguments to function App\Rules\InstanceofRule::__construct(), 0 passed in %s on line %s and exactly 1 expected',
-                        __FILE__,
-                        __LINE__
-                    )
-                );
-            }
-
-            return (new InstanceofRule($parameters[0]))
-                ->passes($attribute, $value);
-        }, (new InstanceofRule(''))->message());
-    }
-
-    protected function registerGlobalFunctions()
-    {
-        $files = glob($this->app->path('Support/*helpers.php'));
-        foreach ($files as $file) {
-            require_once $file;
-        }
-    }
-
-    /**
-     * Register local services.
-     */
-    protected function registerNotProductionServices()
-    {
-        if ($this->app->isProduction()) {
-            return;
-        }
-
-        $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
-        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-        $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
-        $this->app->register(\Reliese\Coders\CodersServiceProvider::class);
-    }
-
-    /**
-     * Register macros.
-     */
-    protected function registerMacros()
-    {
-        Request::mixin($this->app->make(RequestMacro::class));
-        Collection::mixin($this->app->make(CollectionMacro::class));
-        QueryBuilder::mixin($queryBuilderMacro = $this->app->make(QueryBuilderMacro::class));
-        EloquentBuilder::mixin($queryBuilderMacro);
-        Relation::mixin($queryBuilderMacro);
-        Str::mixin($this->app->make(StrMacro::class));
-        Stringable::mixin($this->app->make(StringableMacro::class));
-        Blueprint::mixin($this->app->make(BlueprintMacro::class));
-        Grammar::mixin($this->app->make(GrammarMacro::class));
-        MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
-        WhereNotMacro::addMacro();
-    }
-
-    /**
-     * Boot Production.
-     */
-    protected function bootProduction()
-    {
-        if (! $this->app->isProduction()) {
-            return;
-        }
-
-        // URL::forceScheme('https');
-        // $this->app->make(Request::class)->server->set('HTTPS', 'on');
-        // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
     }
 
     protected function extendView()
