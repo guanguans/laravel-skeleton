@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Pivots;
+namespace App\Models\Pivots;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
-class PivotWithCreatorPivot extends Pivot
+class MorphPivotWithCreatorPivot extends MorphPivot
 {
     public function fill(array $attributes)
     {

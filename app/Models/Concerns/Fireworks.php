@@ -12,11 +12,9 @@ use Illuminate\Support\Str;
  */
 trait Fireworks
 {
-    protected static function boot(): void
+    protected static function bootFireworks(): void
     {
-        parent::boot();
-
-        $self = (new self());
+        $model = (new static());
 
         // before event list
         $beforeEvents = ['creating', 'updating', 'saving', 'deleting'];
@@ -24,9 +22,9 @@ trait Fireworks
         $afterEvents = ['retrieved', 'created', 'updated', 'saved', 'deleted'];
 
         foreach ($beforeEvents as $event) {
-            static::{$event}(function (Model $model) use ($self, $event) {
+            static::{$event}(function (Model $model) use ($model, $event) {
                 $method = sprintf('onModel%s', Str::studly($event));
-                $self->callBeforeEvent($model, $event);
+                $model->callBeforeEvent($model, $event);
                 if (method_exists($model, $method)) {
                     call_user_func_array([$model, $method], [$model]);
                 }
@@ -34,12 +32,12 @@ trait Fireworks
         }
 
         foreach ($afterEvents as $event) {
-            static::{$event}(function (Model $model) use ($self, $event) {
+            static::{$event}(function (Model $model) use ($model, $event) {
                 $method = sprintf('onModel%s', Str::studly($event));
                 if (method_exists($model, $method)) {
                     call_user_func_array([$model, $method], [$model]);
                 }
-                $self->callAfterEvent($model, $event);
+                $model->callAfterEvent($model, $event);
             });
         }
     }
