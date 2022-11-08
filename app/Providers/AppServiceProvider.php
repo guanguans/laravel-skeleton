@@ -11,6 +11,7 @@ use App\Macros\RequestMacro;
 use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
 use App\Macros\WhereNotQueryBuilderMacro;
+use App\Rules\BetweenWordsRule;
 use App\Rules\DefaultRule;
 use App\Rules\ImplicitRule;
 use App\Rules\InstanceofRule;
@@ -47,6 +48,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Illuminate\View\View;
+use ReflectionClass;
 use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -181,21 +183,14 @@ class AppServiceProvider extends ServiceProvider
                 ->passes($attribute, $value);
         });
 
-        // instanceof 规则
-        Validator::extend('instanceof', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
-            if (empty($parameters)) {
-                throw new ArgumentCountError(
-                    sprintf(
-                        'Too few arguments to function App\Rules\InstanceofRule::__construct(), 0 passed in %s on line %s and exactly 1 expected',
-                        __FILE__,
-                        __LINE__
-                    )
-                );
-            }
-
-            return (new InstanceofRule($parameters[0]))
-                ->passes($attribute, $value);
-        }, (new InstanceofRule(''))->message());
+        foreach (
+            [
+                InstanceofRule::class,
+                BetweenWordsRule::class
+            ] as $classOfRule
+        ) {
+            $this->ruleRegistrar($classOfRule);
+        }
     }
 
     /**
@@ -205,6 +200,7 @@ class AppServiceProvider extends ServiceProvider
         $dirs,
         $name = '*Rule.php',
         $notName = [
+            'BetweenWordsRule.php',
             'Rule.php',
             'RegexRule.php',
             'ImplicitRule.php',
@@ -244,6 +240,48 @@ class AppServiceProvider extends ServiceProvider
 
             Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
         }
+    }
+
+    protected function ruleRegistrar(string $classOfRule)
+    {
+        $name = Str::of(class_basename($classOfRule))->replaceLast('Rule', '')->snake()->__toString();
+
+        Validator::extend($name, function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($classOfRule) {
+            $numberOfRequiredParameters = value(function (string $class): int {
+                $constructor = (new ReflectionClass($class))->getConstructor();
+                if (is_null($constructor)) {
+                    return 0;
+                }
+
+                $parametersOfConstructor = $constructor->getParameters();
+                $numberOfRequiredParameters = 0;
+                foreach ($parametersOfConstructor as $parameter) {
+                    if ($parameter->isDefaultValueAvailable()) {
+                        break;
+                    }
+
+                    $numberOfRequiredParameters++;
+                }
+
+                return $numberOfRequiredParameters;
+            }, $classOfRule);
+
+            $numberOfIncoming = count($parameters);
+            if ($numberOfIncoming !== $numberOfRequiredParameters) {
+                throw new ArgumentCountError(
+                    sprintf(
+                        'Too few arguments to function %s::__construct(), %s passed in %s on line %s and exactly %s expected',
+                        $classOfRule,
+                        $numberOfIncoming,
+                        __FILE__,
+                        __LINE__,
+                        $numberOfRequiredParameters
+                    )
+                );
+            }
+
+            return (new $classOfRule(...$parameters))->passes($attribute, $value);
+        });
     }
 
     protected function extendView()
