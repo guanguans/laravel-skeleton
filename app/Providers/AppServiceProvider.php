@@ -10,7 +10,7 @@ use App\Macros\QueryBuilderMacro;
 use App\Macros\RequestMacro;
 use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
-use App\Macros\WhereNotMacro;
+use App\Macros\WhereNotQueryBuilderMacro;
 use App\Rules\DefaultRule;
 use App\Rules\ImplicitRule;
 use App\Rules\InstanceofRule;
@@ -160,14 +160,16 @@ class AppServiceProvider extends ServiceProvider
         Request::mixin($this->app->make(RequestMacro::class));
         Collection::mixin($this->app->make(CollectionMacro::class));
         QueryBuilder::mixin($queryBuilderMacro = $this->app->make(QueryBuilderMacro::class));
+        QueryBuilder::mixin($whereNotQueryBuilderMacro = $this->app->make(WhereNotQueryBuilderMacro::class));
         EloquentBuilder::mixin($queryBuilderMacro);
+        EloquentBuilder::mixin($whereNotQueryBuilderMacro);
         Relation::mixin($queryBuilderMacro);
+        Relation::mixin($whereNotQueryBuilderMacro);
         Str::mixin($this->app->make(StrMacro::class));
         Stringable::mixin($this->app->make(StringableMacro::class));
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
-        WhereNotMacro::addMacro();
     }
 
     protected function extendValidator(): void
