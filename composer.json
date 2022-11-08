@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "ext-json": "*",
+        "appstract/laravel-blade-directives": "^1.12",
         "awobaz/compoships": "^2.1",
         "bensampo/laravel-enum": "^4.0",
         "beyondcode/laravel-query-detector": "^1.5",
