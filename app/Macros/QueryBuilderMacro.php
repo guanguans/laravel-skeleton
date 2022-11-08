@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Macros;
+namespace App\Macros;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Macros;
+namespace App\Macros;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Fluent;

@@ -2,19 +2,19 @@
 
 namespace App\Providers;
 
+use App\Macros\BlueprintMacro;
+use App\Macros\CollectionMacro;
+use App\Macros\GrammarMacro;
+use App\Macros\MySqlGrammarMacro;
+use App\Macros\QueryBuilderMacro;
+use App\Macros\RequestMacro;
+use App\Macros\StringableMacro;
+use App\Macros\StrMacro;
+use App\Macros\WhereNotMacro;
 use App\Rules\DefaultRule;
 use App\Rules\ImplicitRule;
 use App\Rules\InstanceofRule;
 use App\Rules\Rule;
-use App\Support\Macros\BlueprintMacro;
-use App\Support\Macros\CollectionMacro;
-use App\Support\Macros\GrammarMacro;
-use App\Support\Macros\MySqlGrammarMacro;
-use App\Support\Macros\QueryBuilderMacro;
-use App\Support\Macros\RequestMacro;
-use App\Support\Macros\StringableMacro;
-use App\Support\Macros\StrMacro;
-use App\Support\Macros\WhereNotMacro;
 use App\Traits\Conditionable;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
@@ -68,14 +68,14 @@ class AppServiceProvider extends ServiceProvider
      * @var string[]
      */
     public $singletons = [
-        \App\Support\Macros\RequestMacro::class => \App\Support\Macros\RequestMacro::class,
-        \App\Support\Macros\CollectionMacro::class => \App\Support\Macros\CollectionMacro::class,
-        \App\Support\Macros\StrMacro::class => \App\Support\Macros\StrMacro::class,
-        \App\Support\Macros\StringableMacro::class => \App\Support\Macros\StringableMacro::class,
-        \App\Support\Macros\QueryBuilderMacro::class => \App\Support\Macros\QueryBuilderMacro::class,
-        \App\Support\Macros\BlueprintMacro::class => \App\Support\Macros\BlueprintMacro::class,
-        \App\Support\Macros\GrammarMacro::class => \App\Support\Macros\GrammarMacro::class,
-        \App\Support\Macros\MySqlGrammarMacro::class => \App\Support\Macros\MySqlGrammarMacro::class,
+        \App\Macros\RequestMacro::class => \App\Macros\RequestMacro::class,
+        \App\Macros\CollectionMacro::class => \App\Macros\CollectionMacro::class,
+        \App\Macros\StrMacro::class => \App\Macros\StrMacro::class,
+        \App\Macros\StringableMacro::class => \App\Macros\StringableMacro::class,
+        \App\Macros\QueryBuilderMacro::class => \App\Macros\QueryBuilderMacro::class,
+        \App\Macros\BlueprintMacro::class => \App\Macros\BlueprintMacro::class,
+        \App\Macros\GrammarMacro::class => \App\Macros\GrammarMacro::class,
+        \App\Macros\MySqlGrammarMacro::class => \App\Macros\MySqlGrammarMacro::class,
     ];
 
     /**
