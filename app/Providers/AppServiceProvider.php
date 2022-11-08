@@ -20,7 +20,6 @@ use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use ArgumentCountError;
-use DateTime;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -271,9 +270,23 @@ class AppServiceProvider extends ServiceProvider
         // 注册组件
         Blade::component('alert', AlertComponent::class);
 
-        // 扩展 Blade
-        Blade::directive('datetime', function (DateTime $dateTime) {
-            return "<?php echo ($dateTime)->format('Y-m-d H:i:s'); ?>";
+        /**
+         * 扩展 Blade
+         *
+         * ```blade
+         * @datetime($timestamp, $format)
+         * ```
+         */
+        Blade::directive('datetime', function (string $expression) {
+            /** @var string[] $args */
+            $args = array_slice(explode(',', $expression), 0, 2);
+
+            empty($args[0]) and $args[0] = 'time()';
+            empty($args[1]) and $args[1] = "'Y m d H:i:s'";
+
+            $newExpression = implode(', ', array_reverse($args));
+
+            return "<?php echo date($newExpression);?>";
         });
 
         // 回显变量
