@@ -51,6 +51,46 @@ parameters:
 			path: app/Console/Commands/GenerateTestsCommand.php
 
 		-
+			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
+			count: 1
+			path: app/Macros/BlueprintMacro.php
+
+		-
+			message: "#^Anonymous function should return Illuminate\\\\Support\\\\Collection but returns \\$this\\(App\\\\Macros\\\\CollectionMacro\\)\\.$#"
+			count: 1
+			path: app/Macros/CollectionMacro.php
+
+		-
+			message: "#^Argument of an invalid type App\\\\Macros\\\\CollectionMacro supplied for foreach, only iterables are supported\\.$#"
+			count: 2
+			path: app/Macros/CollectionMacro.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Support\\\\Fluent\\:\\:\\$comment\\.$#"
+			count: 2
+			path: app/Macros/GrammarMacro.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Macros\\\\QueryBuilderMacro\\:\\:\\$wheres\\.$#"
+			count: 1
+			path: app/Macros/QueryBuilderMacro.php
+
+		-
+			message: "#^Call to protected method getRelationWithoutConstraints\\(\\) of class Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\.$#"
+			count: 1
+			path: app/Macros/QueryBuilderMacro.php
+
+		-
+			message: "#^Call to protected method getInputSource\\(\\) of class Illuminate\\\\Http\\\\Request\\.$#"
+			count: 1
+			path: app/Macros/RequestMacro.php
+
+		-
+			message: "#^Undefined variable\\: \\$this$#"
+			count: 1
+			path: app/Macros/WhereNotQueryBuilderMacro.php
+
+		-
 			message: "#^Call to an undefined method Illuminate\\\\Auth\\\\AuthManager\\:\\:factory\\(\\)\\.$#"
 			count: 1
 			path: app/Models/JWTUser.php
@@ -126,49 +166,9 @@ parameters:
 			path: app/Models/Model.php
 
 		-
-			message: "#^Part \\$dateTime \\(DateTime\\) of encapsed string cannot be cast to string\\.$#"
-			count: 1
-			path: app/Providers/AppServiceProvider.php
-
-		-
 			message: "#^Parameter \\#3 \\$logLevel of static method GuzzleHttp\\\\Middleware\\:\\:log\\(\\) expects 'alert'\\|'critical'\\|'debug'\\|'emergency'\\|'error'\\|'info'\\|'notice'\\|'warning', string given\\.$#"
 			count: 1
 			path: app/Support/FoundationSdk.php
-
-		-
-			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
-			count: 1
-			path: app/Support/Macros/BlueprintMacro.php
-
-		-
-			message: "#^Anonymous function should return Illuminate\\\\Support\\\\Collection but returns \\$this\\(App\\\\Support\\\\Macros\\\\CollectionMacro\\)\\.$#"
-			count: 1
-			path: app/Support/Macros/CollectionMacro.php
-
-		-
-			message: "#^Argument of an invalid type App\\\\Support\\\\Macros\\\\CollectionMacro supplied for foreach, only iterables are supported\\.$#"
-			count: 2
-			path: app/Support/Macros/CollectionMacro.php
-
-		-
-			message: "#^Access to an undefined property Illuminate\\\\Support\\\\Fluent\\:\\:\\$comment\\.$#"
-			count: 2
-			path: app/Support/Macros/GrammarMacro.php
-
-		-
-			message: "#^Access to an undefined property App\\\\Support\\\\Macros\\\\QueryBuilderMacro\\:\\:\\$wheres\\.$#"
-			count: 1
-			path: app/Support/Macros/QueryBuilderMacro.php
-
-		-
-			message: "#^Call to protected method getRelationWithoutConstraints\\(\\) of class Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\.$#"
-			count: 1
-			path: app/Support/Macros/QueryBuilderMacro.php
-
-		-
-			message: "#^Call to protected method getInputSource\\(\\) of class Illuminate\\\\Http\\\\Request\\.$#"
-			count: 1
-			path: app/Support/Macros/RequestMacro.php
 
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"

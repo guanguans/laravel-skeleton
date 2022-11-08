@@ -280,13 +280,26 @@ class AppServiceProvider extends ServiceProvider
          * ```
          */
         Blade::directive('datetime', function (string $expression) {
-            /** @var string[] $args */
-            $args = array_slice(explode(',', $expression), 0, 2);
+            // 通用解析表达式
+            $parts = value(function (string $expression): array {
+                // clean
+                $parts = array_map(function (string $part) {
+                    return trim($part);
+                }, explode(',', Blade::stripParentheses($expression)));
 
-            empty($args[0]) and $args[0] = 'time()';
-            empty($args[1]) and $args[1] = "'Y m d H:i:s'";
+                // filter
+                $parts = array_filter($parts, function (string $part) {
+                    return $part !== '';
+                });
 
-            $newExpression = implode(', ', array_reverse($args));
+                // default
+                return $parts + [
+                    0 => 'time()',
+                    1 => "'Y m d H:i:s'",
+                ];
+            }, $expression);
+
+            $newExpression = implode(', ', array_reverse($parts));
 
             return "<?php echo date($newExpression);?>";
         });
