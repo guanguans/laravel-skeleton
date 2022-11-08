@@ -35,7 +35,6 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
@@ -49,9 +48,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Illuminate\View\View;
 use ReflectionClass;
-use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -185,8 +184,8 @@ class AppServiceProvider extends ServiceProvider
 
         foreach (
             [
-                InstanceofRule::class,
-                BetweenWordsRule::class
+                BetweenWordsRule::class,
+                InstanceofRule::class
             ] as $classOfRule
         ) {
             $this->ruleRegistrar($classOfRule);
@@ -196,53 +195,37 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register rule.
      */
-    protected function extendValidatorFrom(
-        $dirs,
-        $name = '*Rule.php',
-        $notName = [
-            'BetweenWordsRule.php',
-            'Rule.php',
-            'RegexRule.php',
-            'ImplicitRule.php',
-            'RegexImplicitRule.php',
-            'InstanceofRule.php'
-        ]
-    ) {
+    protected function extendValidatorFrom($dirs, $name = '*Rule.php', $notName = [])
+    {
         foreach (Finder::create()->files()->name($name)->notName($notName)->in($dirs) as $splFileInfo) {
-            $ruleClass = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
+            $classOfRule = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
                 $class = trim(Str::replaceFirst(base_path(), '', $splFileInfo->getRealPath()), DIRECTORY_SEPARATOR);
 
                 return str_replace(
-                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
+                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())) . '\\'],
                     ['\\', app()->getNamespace()],
                     ucfirst(Str::replaceLast('.php', '', $class))
                 );
             });
 
-            if (! is_subclass_of($ruleClass, Rule::class)) {
-                throw new RuntimeException("$ruleClass must be a subclass of App\Rules\Rule");
-            }
-
-            /** @var \App\Rules\Rule $rule */
-            $rule = app($ruleClass);
-
-            if (
-                Arr::first([DataAwareRule::class, ValidatorAwareRule::class], function ($class) use ($rule) {
-                    return $rule instanceof $class;
-                })
-            ) {
+            try {
+                /** @var \App\Rules\Rule $rule */
+                $rule = app($classOfRule);
+            } catch (Throwable $e) {
                 continue;
             }
 
-            if ($rule instanceof ImplicitRule) {
-                Validator::extendImplicit($rule->getName(), "$ruleClass@passes", $rule->message());
+            if (! $rule instanceof Rule || $rule instanceof DataAwareRule || $rule instanceof ValidatorAwareRule) {
+                continue;
             }
 
-            Validator::extend($rule->getName(), "$ruleClass@passes", $rule->message());
+            $methodOfExtend = 'extend';
+            $rule instanceof ImplicitRule and $methodOfExtend = 'extendImplicit';
+            Validator::$methodOfExtend($rule->getName(), "$classOfRule@passes", $rule->message());
         }
     }
 
-    protected function ruleRegistrar(string $classOfRule)
+    protected function ruleRegistrar(string $classOfRule): void
     {
         $name = Str::of(class_basename($classOfRule))->replaceLast('Rule', '')->snake()->__toString();
 
