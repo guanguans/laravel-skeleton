@@ -109,7 +109,7 @@ class CompressResponseContent
 
         $compressingFormtedContentSize = $this->formatBytes($compressingContentSize);
         $compressedFormtedContentSize = $this->formatBytes($compressedContentSize);
-        $percent = sprintf("%.02F%%", $compressedContentSize / $compressingContentSize * 100);
+        $percentReduction = sprintf('%.02F%%', (1 - $compressedContentSize / $compressingContentSize) * 100);
 
         return /** @lang HTML */ <<<HTML
 <br>
@@ -117,12 +117,12 @@ class CompressResponseContent
     <tr>
         <th>Compressing</th>
         <th>Compressed</th>
-        <th>Percent</th>
+        <th>Percent reduction</th>
     </tr>
     <tr>
         <td>$compressingFormtedContentSize</td>
         <td>$compressedFormtedContentSize</td>
-        <td>$percent</td>
+        <td>$percentReduction</td>
     </tr>
 </table>
 HTML;
