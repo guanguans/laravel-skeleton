@@ -46,6 +46,8 @@ use LogicException;
  * dd($handlerStack('hello world'));
  * ```
  *
+ * @see https://github.com/guzzle/guzzle/blob/master/src/HandlerStack.php
+ *
  * @final
  */
 class HandlerStack
