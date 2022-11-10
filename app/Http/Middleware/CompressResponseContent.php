@@ -46,6 +46,7 @@ class CompressResponseContent
         }
 
         $response->setContent($compressedContent);
+        $response->headers->remove('Content-Length');
 
         ini_set('pcre.recursion_limit', '16777');
         ini_set('zlib.output_compression', '4096'); // Some browser cant get content type.
@@ -70,7 +71,7 @@ class CompressResponseContent
      *
      * @return void
      */
-    public static function setReplacementRules(array $replacementRules)
+    public static function mergeReplacementRules(array $replacementRules)
     {
         static::$replacementRules = array_merge(static::$replacementRules, $replacementRules);
     }
@@ -173,7 +174,7 @@ HTML;
             ":\n" => ':',
             ";\n" => ';',
             "{\n" => '{',
-            // "}\n"  => "}", // because I forget to put semicolons after function assignments
+            // "}\n" => "}", // because I forget to put semicolons after function assignments
             "\n]" => ']',
             "\n)" => ')',
             "\n}" => '}',
@@ -192,13 +193,13 @@ HTML;
             "#\n\s+<#" => "\n<", // strip excess whitespace using new line
             '/\>[^\S ]+/s' => '>',
             // Strip all whitespaces after tags, except space
-            '/[^\S ]+\</s' => '<',// strip whitespaces before tags, except space
+            '/[^\S ]+\</s' => '<', // strip whitespaces before tags, except space
             /**
-             * '/\s+     # Match one or more whitespace characters
-             * (?!       # but only if it is impossible to match...
-             * [^<>]*    # any characters except angle brackets
-             * >         # followed by a closing bracket.
-             * )         # End of lookahead
+             * '/\s+    # Match one or more whitespace characters
+             * (?!      # but only if it is impossible to match...
+             * [^<>]*   # any characters except angle brackets
+             * >        # followed by a closing bracket.
+             * )        # End of lookahead
              * /x',
              */
 
@@ -214,7 +215,7 @@ HTML;
         $replaceWordsRules = [
             // OldWord will be replaced by the NewWord
             // OldWord <-> NewWord DO NOT REMOVE THIS LINE. {REFERENCE LINE}
-            //'/\bOldWord\b/i' =>'NewWord'
+            // '/\bOldWord\b/i' => 'NewWord'
         ];
 
         $rules = array_merge($replaceWordsRules, $commentRules, $whiteSpaceRules, static::$replacementRules);
@@ -252,25 +253,25 @@ HTML;
          * [Regex Source]
          * https://github.com/bcit-ci/codeigniter/wiki/compress-html-output
          * http://stackoverflow.com/questions/5312349/minifying-final-html-output-using-regular-expressions-with-codeigniter
-         * %# Collapse ws everywhere but in blacklisted elements.
-         * (?>             # Match all whitespaces other than single space.
-         * [^\S ]\s*     # Either one [\t\r\n\f\v] and zero or more ws,
-         * | \s{2,}        # or two or more consecutive-any-whitespace.
-         * ) # Note: The remaining regex consumes no text at all...
-         * (?=             # Ensure we are not in a blacklist tag.
-         * (?:           # Begin (unnecessary) group.
+         * %           # Collapse ws everywhere but in blacklisted elements.
+         * (?>         # Match all whitespaces other than single space.
+         * [^\S ]\s*   # Either one [\t\r\n\f\v] and zero or more ws,
+         * | \s{2,}    # or two or more consecutive-any-whitespace.
+         * )           # Note: The remaining regex consumes no text at all...
+         * (?=         # Ensure we are not in a blacklist tag.
+         * (?:         # Begin (unnecessary) group.
          * (?:         # Zero or more of...
-         * [^<]++    # Either one or more non-"<"
+         * [^<]++      # Either one or more non-"<"
          * | <         # or a < starting a non-blacklist tag.
          * (?!/?(?:textarea|pre)\b)
          * )*+         # (This could be "unroll-the-loop"ified.)
-         * )             # End (unnecessary) group.
-         * (?:           # Begin alternation group.
+         * )           # End (unnecessary) group.
+         * (?:         # Begin alternation group.
          * <           # Either a blacklist start tag.
          * (?>textarea|pre)\b
-         * | \z          # or end of file.
-         * )             # End alternation group.
-         * )  # If we made it here, we are not in a blacklist tag.
+         * | \z        # or end of file.
+         * )           # End alternation group.
+         * )           # If we made it here, we are not in a blacklist tag.
          * %ix
          */
         $regexOfRemoveWhiteSpace = '%(?>[^\S ]\s*| \s{2,})(?=(?:(?:[^<]++| <(?!/?(?:textarea|pre)\b))*+)(?:<(?>textarea|pre)\b|\z))%ix';
