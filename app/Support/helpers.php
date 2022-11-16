@@ -6,6 +6,29 @@ use Illuminate\Support\Facades\App as Laravel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
+if (! function_exists('environment')) {
+    function environment(): string
+    {
+        if (defined('STDIN')) {
+            return 'cli';
+        }
+
+        if (php_sapi_name() === 'cli') {
+            return 'cli';
+        }
+
+        if ((stripos(PHP_SAPI, 'cgi') !== false && getenv('TERM'))) {
+            return 'cli';
+        }
+
+        if ((empty($_SERVER['REMOTE_ADDR']) && ! isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0)) {
+            return 'cli';
+        }
+
+        return 'web';
+    }
+}
+
 if (! function_exists('format_bits')) {
     function format_bits(int $bits, $precision = 2, $suffix = true)
     {
