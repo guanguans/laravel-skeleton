@@ -22,7 +22,9 @@ class Kernel extends ConsoleKernel
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     *
      * @return void
+     * @noinspection PhpParamsInspection
      */
     protected function schedule(Schedule $schedule)
     {
@@ -39,6 +41,8 @@ class Kernel extends ConsoleKernel
         // $schedule->call(function (ConsoleOutput $consoleOutput) {
         //     $consoleOutput->writeln(Inspiring::quote());
         // })->everyMinute();
+
+        // $schedule->exec('php', ['-v'])->everyMinute();
     }
 
     /**
