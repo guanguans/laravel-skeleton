@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Macros\BlueprintMacro;
 use App\Macros\CollectionMacro;
+use App\Macros\CommandMacro;
 use App\Macros\GrammarMacro;
 use App\Macros\MySqlGrammarMacro;
 use App\Macros\QueryBuilderMacro;
@@ -21,6 +22,7 @@ use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use ArgumentCountError;
+use Illuminate\Console\Command;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
@@ -77,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
         \App\Macros\BlueprintMacro::class => \App\Macros\BlueprintMacro::class,
         \App\Macros\GrammarMacro::class => \App\Macros\GrammarMacro::class,
         \App\Macros\MySqlGrammarMacro::class => \App\Macros\MySqlGrammarMacro::class,
+        \App\Macros\CommandMacro::class => \App\Macros\CommandMacro::class,
     ];
 
     /**
@@ -171,6 +174,7 @@ class AppServiceProvider extends ServiceProvider
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
+        Command::mixin($this->app->make(CommandMacro::class));
     }
 
     protected function extendValidator(): void
