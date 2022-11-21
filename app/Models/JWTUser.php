@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Watson\Validating\ValidatingTrait;
 
 class JWTUser extends User implements JWTSubject
@@ -46,7 +46,7 @@ class JWTUser extends User implements JWTSubject
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            /** @var \Illuminate\Auth\AuthManager|\Tymon\JWTAuth\JWTGuard|\Tymon\JWTAuth\JWT */
+            /** @var \Illuminate\Auth\AuthManager|\PHPOpenSourceSaver\JWTAuth\JWTGuard|\PHPOpenSourceSaver\JWTAuth\JWT */
             'expires_in' => auth()->factory()->getTTL() * 60
         ];
     }
