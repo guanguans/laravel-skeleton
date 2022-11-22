@@ -285,7 +285,7 @@ class GenerateTestsCommand extends Command
         $this->cloningVisitor = new CloningVisitor();
         $this->nodeTraverser->addVisitor($this->cloningVisitor);
 
-        $this->classUpdatingVisitor = new class('', '', []) extends NodeVisitorAbstract {
+        $this->classUpdatingVisitor = new class ('', '', []) extends NodeVisitorAbstract {
             /** @var string */
             public $testClassNamespace;
             /** @var string */
@@ -313,7 +313,7 @@ class GenerateTestsCommand extends Command
             }
         };
 
-        $this->prettyPrinter = new class() extends Standard {
+        $this->prettyPrinter = new class () extends Standard {
             protected function pStmt_ClassMethod(ClassMethod $node)
             {
                 return ($node->getAttribute('isAdded') ? $this->nl : '') . parent::pStmt_ClassMethod($node);

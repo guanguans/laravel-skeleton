@@ -305,7 +305,6 @@ abstract class AbstractRepository
         $this->skipOrderingOnce = true;
 
         return $this->addScopeQuery(function ($query) use ($column, $direction) {
-
             // Get valid sort order
             $direction = in_array(strtolower($direction), ['desc', 'asc']) ? $direction : 'asc';
 
