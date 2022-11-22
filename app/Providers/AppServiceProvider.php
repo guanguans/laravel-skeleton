@@ -71,15 +71,15 @@ class AppServiceProvider extends ServiceProvider
      * @var string[]
      */
     public $singletons = [
-        \App\Macros\RequestMacro::class => \App\Macros\RequestMacro::class,
-        \App\Macros\CollectionMacro::class => \App\Macros\CollectionMacro::class,
-        \App\Macros\StrMacro::class => \App\Macros\StrMacro::class,
-        \App\Macros\StringableMacro::class => \App\Macros\StringableMacro::class,
-        \App\Macros\QueryBuilderMacro::class => \App\Macros\QueryBuilderMacro::class,
-        \App\Macros\BlueprintMacro::class => \App\Macros\BlueprintMacro::class,
-        \App\Macros\GrammarMacro::class => \App\Macros\GrammarMacro::class,
-        \App\Macros\MySqlGrammarMacro::class => \App\Macros\MySqlGrammarMacro::class,
-        \App\Macros\CommandMacro::class => \App\Macros\CommandMacro::class,
+        \App\Macros\RequestMacro::class,
+        \App\Macros\CollectionMacro::class,
+        \App\Macros\StrMacro::class,
+        \App\Macros\StringableMacro::class,
+        \App\Macros\QueryBuilderMacro::class,
+        \App\Macros\BlueprintMacro::class,
+        \App\Macros\GrammarMacro::class,
+        \App\Macros\MySqlGrammarMacro::class,
+        \App\Macros\CommandMacro::class,
     ];
 
     /**
@@ -132,8 +132,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->unless($this->app->isProduction(), function () {
-            // Model::shouldBeStrict(); // Eloquent 严格模式
-            Model::preventLazyLoading(); // 预防 N+1 查询问题
+            Model::shouldBeStrict(); // Eloquent 严格模式
+            // Model::preventLazyLoading(); // 预防 N+1 查询问题
             // Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
             // Model::preventsAccessingMissingAttributes(); // Triggers MissingAttributeException
             // DB::handleExceedingCumulativeQueryDuration();
