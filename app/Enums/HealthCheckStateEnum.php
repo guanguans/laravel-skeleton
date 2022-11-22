@@ -12,6 +12,8 @@ use BenSampo\Enum\Enum;
 final class HealthCheckStateEnum extends Enum
 {
     public const OK = '<info>ok</info>';
+
     public const WARNING = '<comment>warning</comment>';
+
     public const FAILING = '<error>failing</error>';
 }

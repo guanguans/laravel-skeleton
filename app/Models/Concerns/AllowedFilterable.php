@@ -156,9 +156,9 @@ trait AllowedFilterable
 
     public function scopeAllowedSort(Builder $query, string $name, $default = null, ?string $internalName = null): Builder
     {
-        if (request()->hasAny([$name, '-' . $name]) || $default !== null) {
+        if (request()->hasAny([$name, '-'.$name]) || $default !== null) {
             $column = $internalName ?: $name;
-            if (request()->has('-' . $name)) {
+            if (request()->has('-'.$name)) {
                 $direction = 'desc';
             } elseif (request()->has($name)) {
                 $direction = 'asc';

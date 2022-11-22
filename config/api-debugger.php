@@ -19,5 +19,5 @@ return [
         \Lanin\Laravel\ApiDebugger\Collections\MemoryCollection::class,
     ],
 
-    'response_key' => env('API_DEBUGGER_KEY', 'debug')
+    'response_key' => env('API_DEBUGGER_KEY', 'debug'),
 ];

@@ -6,7 +6,6 @@ trait CreateStaticable
 {
     /**
      * @param ...$parameters
-     *
      * @return static
      */
     public static function create(...$parameters)
@@ -16,7 +15,6 @@ trait CreateStaticable
 
     /**
      * @param ...$parameters
-     *
      * @return static
      */
     public static function make(...$parameters)

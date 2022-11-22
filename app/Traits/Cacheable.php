@@ -67,21 +67,21 @@ trait Cacheable
     /**
      * Get Cache key for the method
      *
-     * @param ?array  $args
+     * @param  ?array  $args
      */
     public function getCacheKey(string $method, ?array $args = null, string $tag = ''): string
     {
         // Sort through arguments
-        foreach ((array)$args as &$a) {
+        foreach ((array) $args as &$a) {
             if ($a instanceof Model) {
-                $a = get_class($a) . '|' . $a->getKey();
+                $a = get_class($a).'|'.$a->getKey();
             }
         }
 
         unset($a);
 
         // Create hash from arguments and query
-        $args = serialize($args) . serialize($this->getScopeQuery());
+        $args = serialize($args).serialize($this->getScopeQuery());
 
         return sprintf(
             '%s-%s@%s-%s',
@@ -95,8 +95,7 @@ trait Cacheable
     /**
      * Get an item from the cache, or store the default value.
      *
-     * @param int|string|null $time
-     *
+     * @param  int|string|null  $time
      * @return mixed
      */
     public function cacheCallback(string $method, array $args, Closure $callback, $time = null)
@@ -135,7 +134,7 @@ trait Cacheable
     /**
      * Return the time until expires in minutes.
      *
-     * @param int|string|null $time
+     * @param  int|string|null  $time
      */
     protected function getCacheExpiresTime($time = null): int
     {

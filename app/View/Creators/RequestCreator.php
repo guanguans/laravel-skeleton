@@ -20,7 +20,7 @@ class RequestCreator
     /**
      * 绑定视图数据.
      *
-     * @param \Illuminate\View\View  $view
+     * @param  \Illuminate\View\View  $view
      * @return void
      */
     public function create(View $view)

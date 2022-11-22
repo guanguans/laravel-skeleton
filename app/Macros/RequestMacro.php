@@ -23,7 +23,7 @@ class RequestMacro
     public function isAdmin(): callable
     {
         return function () {
-            return (bool)optional($this->user())->is_admin;
+            return (bool) optional($this->user())->is_admin;
         };
     }
 
@@ -160,7 +160,7 @@ class RequestMacro
     public function matchRoute(): callable
     {
         return function ($includingMethod = true) {
-            /* @var \Illuminate\Routing\RouteCollection $routeCollection */
+            /** @var \Illuminate\Routing\RouteCollection $routeCollection */
             $routeCollection = app(Router::class)->getRoutes();
 
             $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);

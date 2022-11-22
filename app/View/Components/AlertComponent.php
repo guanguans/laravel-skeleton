@@ -21,15 +21,14 @@ class AlertComponent extends Component
     public $message;
 
     protected $except = [
-        'type'
+        'type',
     ];
 
     /**
      * Create a new component instance.
      *
-     * @param string $type
-     * @param string $message
-     *
+     * @param  string  $type
+     * @param  string  $message
      * @return void
      */
     public function __construct(string $type, string $message)

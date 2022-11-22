@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -28,7 +29,7 @@ set('writable_use_sudo', false);
 add('shared_files', []);
 add('shared_dirs', []);
 
-// Writable dirs by web server 
+// Writable dirs by web server
 add('writable_dirs', []);
 set('writable_dirs', []);
 
@@ -59,7 +60,7 @@ host('192.168.10.10')
     ->multiplexing(true)
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no');
-    
+
 // Tasks
 desc('Building');
 task('build', function () {
@@ -67,7 +68,7 @@ task('build', function () {
 });
 
 desc('Upload .env file');
-task('env:upload', function() {
+task('env:upload', function () {
     upload('.env', '{{release_path}}/.env');
 });
 

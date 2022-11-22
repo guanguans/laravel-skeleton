@@ -24,13 +24,16 @@ use InvalidArgumentException;
 trait IndexHintsable
 {
     protected $forceIndexes = [];
+
     protected $useIndexes = [];
+
     protected $ignoreIndexes = [];
+
     protected $preparedIndexes = '';
 
     /**
-     * @param string|string[] $indexes
-     * @param string $for JOIN|ORDER BY|GROUP BY
+     * @param  string|string[]  $indexes
+     * @param  string  $for JOIN|ORDER BY|GROUP BY
      */
     public function scopeForceIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -46,7 +49,7 @@ trait IndexHintsable
 
         $indexesToSting = implode(',', $this->forceIndexes);
         $this->forceIndexes = [];
-        $this->preparedIndexes .= " FORCE INDEX";
+        $this->preparedIndexes .= ' FORCE INDEX';
         $this->prepareFor($for);
         $this->preparedIndexes .= " ($indexesToSting)";
 
@@ -54,7 +57,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param string|string[] $indexes
+     * @param  string|string[]  $indexes
      */
     public function scopeUseIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -70,7 +73,7 @@ trait IndexHintsable
 
         $indexesToSting = implode(',', $this->useIndexes);
         $this->useIndexes = [];
-        $this->preparedIndexes .= " USE INDEX";
+        $this->preparedIndexes .= ' USE INDEX';
         $this->prepareFor($for);
         $this->preparedIndexes .= " ($indexesToSting)";
 
@@ -78,7 +81,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param string|string[] $indexes
+     * @param  string|string[]  $indexes
      */
     public function scopeIgnoreIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -90,7 +93,7 @@ trait IndexHintsable
 
         $indexesToSting = implode(',', $this->ignoreIndexes);
         $this->ignoreIndexes = [];
-        $this->preparedIndexes .= " IGNORE INDEX";
+        $this->preparedIndexes .= ' IGNORE INDEX';
         $this->prepareFor($for);
         $this->preparedIndexes .= " ($indexesToSting)";
 
@@ -108,7 +111,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param string|string[] $indexes
+     * @param  string|string[]  $indexes
      */
     protected function tableIndexExists($indexes, string $type): bool
     {
@@ -142,7 +145,7 @@ trait IndexHintsable
                 $this->useIndexes[] = $index;
 
                 break;
-        };
+        }
     }
 
     protected function prepareFor(string $for = ''): bool

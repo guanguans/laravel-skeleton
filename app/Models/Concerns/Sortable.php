@@ -181,14 +181,14 @@ trait Sortable
     {
         $orderColumnName = $this->determineOrderColumnName();
 
-        return (int)$this->$orderColumnName === $this->getHighestOrderNumber();
+        return (int) $this->$orderColumnName === $this->getHighestOrderNumber();
     }
 
     public function isFirstInOrder(): bool
     {
         $orderColumnName = $this->determineOrderColumnName();
 
-        return (int)$this->$orderColumnName === $this->getLowestOrderNumber();
+        return (int) $this->$orderColumnName === $this->getLowestOrderNumber();
     }
 
     public function buildSortQuery(): Builder

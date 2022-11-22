@@ -80,7 +80,7 @@ trait ModelCrudable
             $realField = $arr[1];
             $table = $arr[0];
             $query->whereHas($table, function ($where) use ($data, $realField, $definition) {
-                self::buildQuery($where, $realField, $definition['type'], $data, $definition['table'] . '.' . $realField);
+                self::buildQuery($where, $realField, $definition['type'], $data, $definition['table'].'.'.$realField);
             });
         }
 
@@ -202,7 +202,7 @@ trait ModelCrudable
             $aliasField = $field;
         }
         if (isset($data[$field]) && $data[$field] !== null) {
-            $customMethod = 'search' . ucfirst($field);
+            $customMethod = 'search'.ucfirst($field);
             if (method_exists(self::class, $customMethod)) { // If field has custom "search" method uses it
                 $query->where(function ($query) use ($field, $data, $customMethod) {
                     self::$customMethod($query, $data[$field]);
@@ -241,25 +241,25 @@ trait ModelCrudable
         if (is_array($data[$field])) {
             $query->where(function ($query) use ($field, $data, $aliasField) {
                 foreach ($data[$field] as $datum) {
-                    $query->orWhere($aliasField, 'LIKE', '%' . $datum . '%');
+                    $query->orWhere($aliasField, 'LIKE', '%'.$datum.'%');
                 }
             });
         } else {
-            $query->where($field, 'LIKE', '%' . $data[$field] . '%');
+            $query->where($field, 'LIKE', '%'.$data[$field].'%');
         }
     }
 
     private static function rangeFilter(Builder $query, string $field, array $data, string $aliasField, string $type): void
     {
-        if (! empty($data[$field . '_from'])) {
-            $value = $data[$field . '_from'];
+        if (! empty($data[$field.'_from'])) {
+            $value = $data[$field.'_from'];
             if ($type === 'datetime' && strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 00:00:00';
             }
             $query->where($field, '>=', $value);
         }
-        if (! empty($data[$field . '_to'])) {
-            $value = $data[$field . '_to'];
+        if (! empty($data[$field.'_to'])) {
+            $value = $data[$field.'_to'];
             if ($type === 'datetime' && strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 23:59:59';
             }

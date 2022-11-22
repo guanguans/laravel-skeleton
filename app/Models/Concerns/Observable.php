@@ -20,10 +20,10 @@ trait Observable
         $class = static::class;
 
         foreach ($events as $event) {
-            $method = 'on' . ucfirst($event);
+            $method = 'on'.ucfirst($event);
 
             if (method_exists($class, $method)) {
-                static::registerModelEvent($event, $class . '@' . $method);
+                static::registerModelEvent($event, $class.'@'.$method);
             }
         }
     }
@@ -34,7 +34,7 @@ trait Observable
         $events = [];
 
         foreach (class_uses_recursive($class) as $trait) {
-            $method = 'register' . class_basename($trait) . 'Events';
+            $method = 'register'.class_basename($trait).'Events';
 
             if (method_exists($class, $method)) {
                 foreach (static::{$method}() as $event) {

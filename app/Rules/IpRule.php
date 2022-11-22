@@ -15,7 +15,7 @@ final class IpRule extends Rule
         '127.0.0.0/8',
         '172.16.0.0/12',
         '192.168.0.0/16',
-        '169.254.0.0/16'
+        '169.254.0.0/16',
     ];
 
     /**
@@ -27,6 +27,7 @@ final class IpRule extends Rule
         'fd00::/8',
         'fe80::/10',
     ];
+
     /**
      * @var bool
      */

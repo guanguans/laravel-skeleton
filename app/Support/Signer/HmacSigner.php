@@ -5,6 +5,7 @@ namespace App\Support\Signer;
 class HmacSigner extends Signer
 {
     private $secret;
+
     private $algo;
 
     public function __construct(string $secret = '', string $algo = 'sha256')

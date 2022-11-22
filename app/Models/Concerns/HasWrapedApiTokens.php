@@ -15,7 +15,7 @@ trait HasWrapedApiTokens
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => config('sanctum.expiration') * 60
+            'expires_in' => config('sanctum.expiration') * 60,
         ];
     }
 

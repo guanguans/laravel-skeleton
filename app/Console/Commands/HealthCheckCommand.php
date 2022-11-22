@@ -35,7 +35,7 @@ class HealthCheckCommand extends Command
      * @var array
      */
     protected $except = [
-        '*Queue'
+        '*Queue',
     ];
 
     /**
@@ -67,11 +67,11 @@ class HealthCheckCommand extends Command
             })
             ->pipe(function (Collection $methods) {
                 $this->withProgressBar($methods, function ($method) use (&$checks) {
-                    /* @var HealthCheckStateEnum $state */
+                    /** @var HealthCheckStateEnum $state */
                     $state = call_user_func([$this, $method->name]);
 
                     $checks[] = [
-                        'index' => count((array)$checks) + 1,
+                        'index' => count((array) $checks) + 1,
                         'resource' => Str::of($method->name)->replaceFirst('check', ''),
                         'state' => $state,
                         'message' => $state->description,
@@ -104,7 +104,6 @@ class HealthCheckCommand extends Command
 
     /**
      * @param $connection
-     *
      * @return \App\Enums\HealthCheckStateEnum
      */
     protected function checkDatabase($connection = null): HealthCheckStateEnum
@@ -143,7 +142,6 @@ class HealthCheckCommand extends Command
 
     /**
      * @param  array|string  $checkedSqlModes
-     *
      * @return \App\Enums\HealthCheckStateEnum
      */
     protected function checkSqlMode($checkedSqlModes = 'strict_all_tables'): HealthCheckStateEnum
@@ -156,7 +154,7 @@ class HealthCheckCommand extends Command
 
         $sqlModes = DB::select("SHOW VARIABLES LIKE 'sql_mode' ")[0];
 
-        /* @var Collection $diffSqlModes */
+        /** @var Collection $diffSqlModes */
         $diffSqlModes = Str::of($sqlModes->Value)
             ->lower()
             ->explode(',')
@@ -178,6 +176,7 @@ class HealthCheckCommand extends Command
 
     /**
      * @return \App\Enums\HealthCheckStateEnum
+     *
      * @throws \Exception
      */
     protected function checkTimeZone(): HealthCheckStateEnum
@@ -204,7 +203,6 @@ class HealthCheckCommand extends Command
 
     /**
      * @param  null|string  $url
-     *
      * @return \App\Enums\HealthCheckStateEnum
      */
     protected function checkPing(?string $url = null): HealthCheckStateEnum
@@ -249,7 +247,7 @@ class HealthCheckCommand extends Command
             'swoole',
         ];
 
-        /* @var Collection $missingExtensions */
+        /** @var Collection $missingExtensions */
         $missingExtensions = collect($extensions)
             ->reduce(function (Collection $missingExtensions, $extension) {
                 return $missingExtensions->when(! extension_loaded($extension), function (Collection $missingExtensions) use ($extension) {
@@ -297,7 +295,7 @@ class HealthCheckCommand extends Command
 
         if ($inis->isEmpty()) {
             return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) {
-                $state->description = "The memory limit is not set.";
+                $state->description = 'The memory limit is not set.';
             });
         }
 
@@ -315,7 +313,7 @@ class HealthCheckCommand extends Command
     {
         if (! Queue::connected()) {
             return tap(HealthCheckStateEnum::FAILING(), function (HealthCheckStateEnum $state) {
-                $state->description = "The queue is not connected.";
+                $state->description = 'The queue is not connected.';
             });
         }
 

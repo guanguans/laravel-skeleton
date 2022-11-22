@@ -16,7 +16,6 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
-     *
      * @return bool
      */
     abstract public function passes($attribute, $value);
@@ -41,7 +40,6 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
 
     /**
      * @param  string  $name
-     *
      * @return $this
      */
     public function setName(string $name)

@@ -16,7 +16,7 @@ trait Castable
         }
     }
 
-    protected function castValue(string $key,  $value)
+    protected function castValue(string $key, $value)
     {
         $cast = $this->castKey($key);
 

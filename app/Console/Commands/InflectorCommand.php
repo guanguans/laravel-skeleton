@@ -50,7 +50,7 @@ class InflectorCommand extends Command
                 //     }
                 // }
 
-                for (;;) {
+                for (; ;) {
                     $phrase = $this->ask('Please enter a phrase to inflect.');
                     if (filled($phrase)) {
                         break;

@@ -69,8 +69,8 @@ class CallbackGetCast implements CastsAttributes
      * It takes a string and returns a callable
      *
      * @param  string  $callback The callback to be executed.
-     *
      * @return callable A callable.
+     *
      * @throws \InvalidArgumentException
      */
     protected function resolveCallback(string $callback): callable
@@ -79,7 +79,7 @@ class CallbackGetCast implements CastsAttributes
             return $callback;
         }
 
-        /* @var array $segments */
+        /** @var array $segments */
         $segments = explode('@', $callback, 2);
         if (is_callable($segments)) {
             return $segments;

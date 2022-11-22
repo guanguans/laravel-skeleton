@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 class PushDeer extends Facade
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected static function getFacadeAccessor()
     {

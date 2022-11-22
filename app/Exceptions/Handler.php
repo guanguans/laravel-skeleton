@@ -12,14 +12,14 @@ class Handler extends ExceptionHandler
     use ExceptionTrait;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $dontReport = [
         //
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $dontFlash = [
         'current_password',

@@ -43,17 +43,17 @@ trait Fireworks
     }
 
     /**
-     * @param Model $model
-     * @param string $event
+     * @param  Model  $model
+     * @param  string  $event
      */
     private function callBeforeEvent(Model $model, string $event): void
     {
-        $this->callColumnsEvent($model, ('onModel%s' . Str::studly($event)));
+        $this->callColumnsEvent($model, ('onModel%s'.Str::studly($event)));
     }
 
     /**
-     * @param Model $model
-     * @param string $event
+     * @param  Model  $model
+     * @param  string  $event
      */
     private function callAfterEvent(Model $model, string $event): void
     {
@@ -61,8 +61,8 @@ trait Fireworks
     }
 
     /**
-     * @param Model $model
-     * @param string $methodConvention
+     * @param  Model  $model
+     * @param  string  $methodConvention
      */
     private function callColumnsEvent(Model $model, string $methodConvention): void
     {

@@ -149,8 +149,7 @@ abstract class AbstractRepository
     /**
      * Get a new entity instance
      *
-     * @param array $attributes
-     *
+     * @param  array  $attributes
      * @return  \Illuminate\Database\Eloquent\Model
      */
     public function getNew(array $attributes = [])
@@ -164,8 +163,7 @@ abstract class AbstractRepository
      * Get a new query builder instance with the applied
      * the order by and scopes.
      *
-     * @param bool $skipOrdering
-     *
+     * @param  bool  $skipOrdering
      * @return $this
      */
     public function newQuery($skipOrdering = false)
@@ -190,9 +188,8 @@ abstract class AbstractRepository
     /**
      * Find data by its primary key.
      *
-     * @param mixed $id
-     * @param array $columns
-     *
+     * @param  mixed  $id
+     * @param  array  $columns
      * @return Model|Collection
      */
     public function find($id, $columns = ['*'])
@@ -205,9 +202,8 @@ abstract class AbstractRepository
     /**
      * Find a model by its primary key or throw an exception.
      *
-     * @param string $id
-     * @param array  $columns
-     *
+     * @param  string  $id
+     * @param  array  $columns
      * @return \Illuminate\Database\Eloquent\Model
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
@@ -226,10 +222,9 @@ abstract class AbstractRepository
     /**
      * Find data by field and value
      *
-     * @param string $field
-     * @param string $value
-     * @param array  $columns
-     *
+     * @param  string  $field
+     * @param  string  $value
+     * @param  array  $columns
      * @return Model|Collection
      */
     public function findBy($field, $value, $columns = ['*'])
@@ -242,10 +237,9 @@ abstract class AbstractRepository
     /**
      * Find data by field
      *
-     * @param string $attribute
-     * @param mixed  $value
-     * @param array  $columns
-     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @param  array  $columns
      * @return mixed
      */
     public function findAllBy($attribute, $value, $columns = ['*'])
@@ -263,9 +257,8 @@ abstract class AbstractRepository
     /**
      * Find data by multiple fields
      *
-     * @param array $where
-     * @param array $columns
-     *
+     * @param  array  $where
+     * @param  array  $columns
      * @return mixed
      */
     public function findWhere(array $where, $columns = ['*'])
@@ -287,9 +280,8 @@ abstract class AbstractRepository
     /**
      * Order results by.
      *
-     * @param string $column
-     * @param string $direction
-     *
+     * @param  string  $column
+     * @param  string  $direction
      * @return self
      */
     public function orderBy($column, $direction)
@@ -328,9 +320,8 @@ abstract class AbstractRepository
     /**
      * Set searchable array.
      *
-     * @param array|string $key
-     * @param mixed        $value
-     *
+     * @param  array|string  $key
+     * @param  mixed  $value
      * @return self
      */
     public function setSearchable($key, $value = null)
@@ -385,8 +376,7 @@ abstract class AbstractRepository
     /**
      * Filter results by given query params.
      *
-     * @param string|array $queries
-     *
+     * @param  string|array  $queries
      * @return self
      */
     public function search($queries)
@@ -419,10 +409,10 @@ abstract class AbstractRepository
 
                 // Loop though the columns and look for relationships
                 foreach ($columns as $key => $column) {
-                    @list($joining_table, $options) = explode(':', $column);
+                    @[$joining_table, $options] = explode(':', $column);
 
                     if ($options !== null) {
-                        @list($column, $foreign_key, $related_key, $alias) = explode(',', $options);
+                        @[$column, $foreign_key, $related_key, $alias] = explode(',', $options);
 
                         // Join the table if it hasn't already been joined
                         if (isset($joined[$joining_table]) == false) {
@@ -460,7 +450,7 @@ abstract class AbstractRepository
 
             // Ensure only the current model's table attributes are return
             $query->addSelect([
-                $this->getModel()->getTable() . '.*',
+                $this->getModel()->getTable().'.*',
             ]);
 
             return $query;
@@ -470,8 +460,7 @@ abstract class AbstractRepository
     /**
      * Set the "limit" value of the query.
      *
-     * @param int $limit
-     *
+     * @param  int  $limit
      * @return self
      */
     public function limit($limit)
@@ -484,8 +473,7 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository
      *
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return Collection
      */
     public function all($columns = ['*'])
@@ -498,8 +486,7 @@ abstract class AbstractRepository
     /**
      * Retrieve the "count" result of the query.
      *
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return int
      */
     public function count($columns = ['*'])
@@ -512,9 +499,8 @@ abstract class AbstractRepository
     /**
      * Get an array with the values of a given column.
      *
-     * @param string $value
-     * @param string $key
-     *
+     * @param  string  $value
+     * @param  string  $key
      * @return array
      */
     public function pluck($value, $key = null)
@@ -533,11 +519,10 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param int|null|mixed      $per_page
-     * @param array    $columns
-     * @param string   $page_name
-     * @param int|null $page
-     *
+     * @param  int|null|mixed  $per_page
+     * @param  array  $columns
+     * @param  string  $page_name
+     * @param  int|null  $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function paginate($per_page = null, $columns = ['*'], $page_name = 'page', $page = null)
@@ -562,11 +547,10 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param int|null|mixed $per_page
-     * @param array    $columns
-     * @param string   $page_name
-     * @param int|null $page
-     *
+     * @param  int|null|mixed  $per_page
+     * @param  array  $columns
+     * @param  string  $page_name
+     * @param  int|null  $page
      * @return \Illuminate\Contracts\Pagination\Paginator
      */
     public function simplePaginate($per_page = null, $columns = ['*'], $page_name = 'page', $page = null)
@@ -582,8 +566,7 @@ abstract class AbstractRepository
     /**
      * Save a new entity in repository
      *
-     * @param array $attributes
-     *
+     * @param  array  $attributes
      * @return Model|bool
      */
     public function create(array $attributes)
@@ -602,9 +585,8 @@ abstract class AbstractRepository
     /**
      * Update an entity with the given attributes and persist it
      *
-     * @param Model $entity
-     * @param array $attributes
-     *
+     * @param  Model  $entity
+     * @param  array  $attributes
      * @return bool
      */
     public function update(Model $entity, array $attributes)
@@ -621,8 +603,7 @@ abstract class AbstractRepository
     /**
      * Delete a entity in repository
      *
-     * @param mixed $entity
-     *
+     * @param  mixed  $entity
      * @return bool|null
      *
      * @throws \Exception
@@ -646,6 +627,7 @@ abstract class AbstractRepository
      * Create model instance.
      *
      * @return \Illuminate\Database\Eloquent\Builder
+     *
      * @throws \RuntimeException
      */
     public function makeModel()
@@ -661,8 +643,7 @@ abstract class AbstractRepository
      * Get a new query builder instance with the applied
      * the order by and scopes.
      *
-     * @param bool $skipOrdering
-     *
+     * @param  bool  $skipOrdering
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function getBuilder(bool $skipOrdering = false)
@@ -697,8 +678,7 @@ abstract class AbstractRepository
     /**
      * Add query scope.
      *
-     * @param Closure $scope
-     *
+     * @param  Closure  $scope
      * @return $this
      */
     public function addScopeQuery(Closure $scope)
@@ -730,9 +710,8 @@ abstract class AbstractRepository
     /**
      * Add a message to the repository's error messages.
      *
-     * @param string $message
-     * @param string $key
-     *
+     * @param  string  $message
+     * @param  string  $key
      * @return self
      */
     public function addError($message, string $key = 'message')
@@ -759,8 +738,7 @@ abstract class AbstractRepository
     /**
      * Get the repository's first error message.
      *
-     * @param string $default
-     *
+     * @param  string  $default
      * @return string
      */
     public function getErrorMessage($default = '')
@@ -771,15 +749,14 @@ abstract class AbstractRepository
     /**
      * Append table name to column.
      *
-     * @param string $column
-     *
+     * @param  string  $column
      * @return string
      */
     protected function appendTableName($column)
     {
         // If missing prepend the table name
         if (strpos($column, '.') === false) {
-            return $this->modelInstance->getTable() . '.' . $column;
+            return $this->modelInstance->getTable().'.'.$column;
         }
 
         // Remove alias prefix indicator
@@ -793,16 +770,16 @@ abstract class AbstractRepository
     /**
      * Add a search where clause to the query.
      *
-     * @param Builder $query
-     * @param string  $param
-     * @param string  $column
-     * @param mixed  $value
-     * @param string  $boolean
+     * @param  Builder  $query
+     * @param  string  $param
+     * @param  string  $column
+     * @param  mixed  $value
+     * @param  string  $boolean
      */
     protected function createSearchClause(Builder $query, $param, $column, $value, $boolean = 'and')
     {
         if ($param === 'query') {
-            $query->where($this->appendTableName($column), self::$searchOperator, '%' . $value . '%', $boolean);
+            $query->where($this->appendTableName($column), self::$searchOperator, '%'.$value.'%', $boolean);
         } elseif (is_array($value)) {
             $query->whereIn($this->appendTableName($column), $value, $boolean);
         } else {
@@ -813,12 +790,11 @@ abstract class AbstractRepository
     /**
      * Add a search join to the query.
      *
-     * @param Builder $query
-     * @param string  $joining_table
-     * @param string  $foreign_key
-     * @param string  $related_key
-     * @param string  $alias
-     *
+     * @param  Builder  $query
+     * @param  string  $joining_table
+     * @param  string  $foreign_key
+     * @param  string  $related_key
+     * @param  string  $alias
      * @return string
      */
     protected function addSearchJoin(Builder $query, $joining_table, $foreign_key, $related_key, $alias)
@@ -841,10 +817,9 @@ abstract class AbstractRepository
     /**
      * Add a range clause to the query.
      *
-     * @param Builder $query
-     * @param mixed  $value
-     * @param array   $columns
-     *
+     * @param  Builder  $query
+     * @param  mixed  $value
+     * @param  array  $columns
      * @return bool
      */
     protected function createSearchRangeClause(Builder $query, $value, array $columns)
@@ -894,15 +869,14 @@ abstract class AbstractRepository
     /**
      * Handle dynamic static method calls into the method.
      *
-     * @param string $method
-     * @param array  $parameters
-     *
+     * @param  string  $method
+     * @param  array  $parameters
      * @return mixed
      */
     public function __call($method, $parameters)
     {
         // Check for scope method and call
-        if (method_exists($this, $scope = 'scope' . ucfirst($method))) {
+        if (method_exists($this, $scope = 'scope'.ucfirst($method))) {
             return call_user_func_array([$this, $scope], $parameters);
         }
 

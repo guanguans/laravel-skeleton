@@ -21,7 +21,6 @@ class GrammarMacro
          * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
          * @param  \Illuminate\Support\Fluent  $command
          * @param  \Illuminate\Database\Connection  $connection
-         *
          * @return string
          */
         return function (Blueprint $blueprint, Fluent $command, Connection $connection) {

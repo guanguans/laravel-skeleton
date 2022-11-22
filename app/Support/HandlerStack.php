@@ -101,8 +101,7 @@ class HandlerStack
     /**
      * Invokes the handler stack as a composed handler.
      *
-     * @param mixed $passable
-     *
+     * @param  mixed  $passable
      * @return mixed
      */
     public function call($passable)
@@ -113,8 +112,7 @@ class HandlerStack
     /**
      * Invokes the handler stack as a composed handler.
      *
-     * @param mixed $passable
-     *
+     * @param  mixed  $passable
      * @return mixed
      */
     public function __invoke($passable)
@@ -135,14 +133,14 @@ class HandlerStack
         $stack = [];
 
         if ($this->handler !== null) {
-            $stack[] = "0) Handler: " . $this->debugCallable($this->handler);
+            $stack[] = '0) Handler: '.$this->debugCallable($this->handler);
         }
 
         $result = '';
         foreach (\array_reverse($this->stack) as $tuple) {
             $depth++;
             $str = "{$depth}) Name: '{$tuple[1]}', ";
-            $str .= "Function: " . $this->debugCallable($tuple[0]);
+            $str .= 'Function: '.$this->debugCallable($tuple[0]);
             $result = "> {$str}\n{$result}";
             $stack[] = $str;
         }
@@ -157,7 +155,7 @@ class HandlerStack
     /**
      * Set the HTTP handler that actually returns a promise.
      *
-     * @param callable(mixed): mixed $handler Accepts a request and array of options and returns a Promise.
+     * @param  callable(mixed): mixed  $handler Accepts a request and array of options and returns a Promise.
      */
     public function setHandler(callable $handler): void
     {
@@ -170,14 +168,14 @@ class HandlerStack
      */
     public function hasHandler(): bool
     {
-        return $this->handler !== null ;
+        return $this->handler !== null;
     }
 
     /**
      * Unshift a middleware to the bottom of the stack.
      *
-     * @param callable(callable): callable $middleware Middleware function
-     * @param string                       $name       Name to register for this middleware.
+     * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $name       Name to register for this middleware.
      */
     public function unshift(callable $middleware, ?string $name = null): void
     {
@@ -188,8 +186,8 @@ class HandlerStack
     /**
      * Push a middleware to the top of the stack.
      *
-     * @param callable(callable): callable $middleware Middleware function
-     * @param string                       $name       Name to register for this middleware.
+     * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $name       Name to register for this middleware.
      */
     public function push(callable $middleware, string $name = ''): void
     {
@@ -200,9 +198,9 @@ class HandlerStack
     /**
      * Add a middleware before another middleware by name.
      *
-     * @param string                       $findName   Middleware to find
-     * @param callable(callable): callable $middleware Middleware function
-     * @param string                       $withName   Name to register for this middleware.
+     * @param  string  $findName   Middleware to find
+     * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $withName   Name to register for this middleware.
      */
     public function before(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -212,9 +210,9 @@ class HandlerStack
     /**
      * Add a middleware after another middleware by name.
      *
-     * @param string                       $findName   Middleware to find
-     * @param callable(callable): callable $middleware Middleware function
-     * @param string                       $withName   Name to register for this middleware.
+     * @param  string  $findName   Middleware to find
+     * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $withName   Name to register for this middleware.
      */
     public function after(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -224,7 +222,7 @@ class HandlerStack
     /**
      * Remove a middleware by instance or name from the stack.
      *
-     * @param callable|string $remove Middleware to remove by instance or name.
+     * @param  callable|string  $remove Middleware to remove by instance or name.
      */
     public function remove($remove): void
     {
@@ -303,7 +301,7 @@ class HandlerStack
     /**
      * Provides a debug string for a given callable.
      *
-     * @param callable|string $fn Function to write as a string.
+     * @param  callable|string  $fn Function to write as a string.
      */
     private function debugCallable($fn): string
     {
@@ -314,10 +312,10 @@ class HandlerStack
         if (\is_array($fn)) {
             return \is_string($fn[0])
                 ? "callable({$fn[0]}::{$fn[1]})"
-                : "callable(['" . \get_class($fn[0]) . "', '{$fn[1]}'])";
+                : "callable(['".\get_class($fn[0])."', '{$fn[1]}'])";
         }
 
         /** @var object $fn */
-        return 'callable(' . \spl_object_hash($fn) . ')';
+        return 'callable('.\spl_object_hash($fn).')';
     }
 }

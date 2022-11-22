@@ -17,7 +17,7 @@ trait ForceUseIndexable
     protected $from = [];
 
     /**
-     * @param string|string[] $index
+     * @param  string|string[]  $index
      */
     public function scopeUseIndex(Builder $query, $index): Builder
     {
@@ -27,14 +27,14 @@ trait ForceUseIndexable
 
         $this->from[] = "USE INDEX($index)";
 
-        $raw = "`$table` " . implode(" ", $this->from);
+        $raw = "`$table` ".implode(' ', $this->from);
 
         /* @var Builder $query */
         return $query->from(DB::raw($raw));
     }
 
     /**
-     * @param string|string[] $index
+     * @param  string|string[]  $index
      */
     public function scopeForceIndex(Builder $query, $index): Builder
     {
@@ -44,14 +44,14 @@ trait ForceUseIndexable
 
         $this->from[] = "FORCE INDEX($index)";
 
-        $raw = "`$table` " . implode(" ", $this->from);
+        $raw = "`$table` ".implode(' ', $this->from);
 
         /* @var Builder $query */
         return $query->from(DB::raw($raw));
     }
 
     /**
-     * @param string|string[] $index
+     * @param  string|string[]  $index
      */
     public function scopeIgnoreIndex(Builder $query, $index): Builder
     {
@@ -61,21 +61,21 @@ trait ForceUseIndexable
 
         $this->from[] = "IGNORE INDEX($index)";
 
-        $raw = "`$table` " . implode(" ", $this->from);
+        $raw = "`$table` ".implode(' ', $this->from);
 
         /* @var Builder $query */
         return $query->from(DB::raw($raw));
     }
 
     /**
-     * @param string|string[] $index
+     * @param  string|string[]  $index
      */
     protected function parseIndexName($index): string
     {
         if (is_array($index)) {
-            return "`" . implode("`, `", $index) . "`";
+            return '`'.implode('`, `', $index).'`';
         }
 
-        return "`" . $index . "`";
+        return '`'.$index.'`';
     }
 }

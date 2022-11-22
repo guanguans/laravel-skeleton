@@ -15,6 +15,6 @@ final class MacAddressRule extends Rule
     {
         $value = preg_replace("/[\. :-]/i", '', $value);
 
-        return (bool)preg_match("/^[0-9a-f]{12}$/i", $value);
+        return (bool) preg_match('/^[0-9a-f]{12}$/i', $value);
     }
 }

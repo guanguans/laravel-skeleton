@@ -41,7 +41,7 @@ if (! function_exists('format_bits')) {
 
             $sizes = ['B', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'];
 
-            return sprintf('%.02F', round($bits / (1000 ** $i), $precision)) * 1 . ' ' . @$sizes[$i];
+            return sprintf('%.02F', round($bits / (1000 ** $i), $precision)) * 1 .' '.@$sizes[$i];
         }
 
         return 0;
@@ -56,7 +56,7 @@ if (! function_exists('format_bytes')) {
 
             $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 . ' ' . @$sizes[$i];
+            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.@$sizes[$i];
         }
 
         return 0;
@@ -77,9 +77,9 @@ if (! function_exists('bytes_to_bits')) {
 if (! function_exists('partical')) {
     /**
      * 偏函数
+     *
      * @param  callable  $function
      * @param ...$args
-     *
      * @return callable
      */
     function partical(callable $function, ...$args): callable
@@ -93,8 +93,8 @@ if (! function_exists('partical')) {
 if (! function_exists('curry')) {
     /**
      * 柯里化函数
-     * @param  callable  $function
      *
+     * @param  callable  $function
      * @return callable
      */
     function curry(callable $function): callable
@@ -120,8 +120,8 @@ if (! function_exists('curry')) {
 if (! function_exists('compose')) {
     /**
      * 合成函数
-     * @param  callable  ...$functions
      *
+     * @param  callable  ...$functions
      * @return callable
      */
     function compose(callable ...$functions): callable
@@ -143,7 +143,6 @@ if (! function_exists('compose')) {
 if (! function_exists('memoize')) {
     /**
      * @param  callable  $function
-     *
      * @return callable
      */
     function memoize(callable $function): callable
@@ -168,7 +167,6 @@ if (! function_exists('memoize')) {
 if (! function_exists('once')) {
     /**
      * @param  callable  $function
-     *
      * @return callable
      */
     function once(callable $function): callable
@@ -189,8 +187,7 @@ if (! function_exists('is_json')) {
     /**
      * If the string is valid JSON, return true, otherwise return false
      *
-     * @param string $str The string to check.
-     *
+     * @param  string  $str The string to check.
      * @return bool The function is_json() is returning a boolean value.
      */
     function is_json(string $str): bool
@@ -238,7 +235,6 @@ if (! function_exists('user_http_build_query')) {
      * @param  string  $numericPrefix
      * @param  string  $argSeparator
      * @param  int  $encType
-     *
      * @return string
      */
     function user_http_build_query(array $queryPayload, string $numericPrefix = '', string $argSeparator = '&', int $encType = PHP_QUERY_RFC1738): string
@@ -247,10 +243,9 @@ if (! function_exists('user_http_build_query')) {
          * 转换值是非标量的情况
          *
          * @param  string  $key
-         * @param  array|object $value
+         * @param  array|object  $value
          * @param  string  $argSeparator
          * @param  int  $encType
-         *
          * @return string
          */
         $toQueryStr = static function (string $key, $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
@@ -286,7 +281,7 @@ if (! function_exists('user_http_build_query')) {
 
             // 为了对数据进行解码时获取合法的变量名
             if (is_numeric($k) && ! is_string($k)) {
-                $k = $numericPrefix . $k;
+                $k = $numericPrefix.$k;
             }
 
             $queryStr .= is_scalar($v)
@@ -304,8 +299,8 @@ if (! function_exists('validate')) {
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
-     *
      * @return array
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     function validate(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
@@ -317,7 +312,6 @@ if (! function_exists('validate')) {
 if (! function_exists('array_filter_filled')) {
     /**
      * @param  array  $array
-     *
      * @return array
      */
     function array_filter_filled(array $array)
@@ -346,12 +340,11 @@ if (! function_exists('call')) {
 if (! function_exists('stopwatch')) {
     /**
      * @param  string  $name
-     * @param  callable|string $callback
+     * @param  callable|string  $callback
      * @param  array  $parameters
      * @param  null|string  $category
      * @param  bool  $morePrecision
      * @param  null|\Psr\Log\LoggerInterface  $logger
-     *
      * @return mixed
      */
     function stopwatch(string $name, $callback, array $parameters = [], string $category = null, bool $morePrecision = false, LoggerInterface $logger = null)
@@ -372,9 +365,8 @@ if (! function_exists('stopwatch')) {
 
 if (! function_exists('rercord_query_log')) {
     /**
-     * @param callable|string $callback
-     * @param  ...$parameter
-     *
+     * @param  callable|string  $callback
+     * @param    ...$parameter
      * @return array
      */
     function rercord_query_log($callback, ...$parameter)
@@ -418,7 +410,6 @@ if (! function_exists('array_reduces')) {
      * @param  array  $array
      * @param  callable  $callback
      * @param  null  $carry
-     *
      * @return null|mixed
      */
     function array_reduces(array $array, callable $callback, $carry = null)
@@ -435,7 +426,6 @@ if (! function_exists('array_maps')) {
     /**
      * @param  callable  $callback
      * @param  array  $array
-     *
      * @return array
      */
     function array_maps(callable $callback, array $array)

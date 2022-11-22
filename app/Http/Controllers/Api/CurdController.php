@@ -77,12 +77,10 @@ class CurdController extends Controller
     }
 
     /**
-     *
      * Find model.
      *
      * @param  int  $id
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return \Illuminate\Database\Eloquent\Model
      */
     protected function findModel($id, $columns = ['*'])

@@ -54,7 +54,7 @@ class QueryBuilderMacro
     {
         return function ($columns = ['*']): ?array {
             // return optional($this->first($columns))->toArray();
-            return ($model = $this->first($columns)) ? $model->toArray() : (array)$model;
+            return ($model = $this->first($columns)) ? $model->toArray() : (array) $model;
         };
     }
 
@@ -289,13 +289,12 @@ class QueryBuilderMacro
          * @param  string|string[]  $columns
          * @param  string  $value
          * @param  string  $boolean
-         *
          * @return $this
          */
         return function ($columns, $value, array $options = [], $boolean = 'and') {
             $type = 'Fulltext';
 
-            $columns = (array)$columns;
+            $columns = (array) $columns;
 
             $this->wheres[] = compact('type', 'columns', 'value', 'options', 'boolean');
 

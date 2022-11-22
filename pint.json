@@ -1,0 +1,37 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "blank_line_before_statement": {
+            "statements": [
+                "break",
+                "continue",
+                "declare",
+                "return",
+                "throw",
+                "try"
+            ]
+        },
+        "comment_to_phpdoc": {
+            "ignored_tags": []
+        }
+    },
+    "exclude": [
+        ".github",
+        ".scribe",
+        "docs",
+        "public",
+        "storage",
+        "vendor",
+        "node_modules"
+    ],
+    "notName": [
+        "_ide_helper_actions.php",
+        "_ide_helper_models.php",
+        "_ide_helper.php",
+        ".phpstorm.meta.php",
+        "*.blade.php"
+    ],
+    "notPath": [
+        "path/to/excluded-file.php"
+    ]
+}

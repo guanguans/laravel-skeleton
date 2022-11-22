@@ -44,5 +44,5 @@ return [
         'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com/'),
         'token' => env('PUSHDEER_TOKEN', 'token'),
         'key' => env('PUSHDEER_KEY'),
-    ]
+    ],
 ];

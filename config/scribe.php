@@ -15,7 +15,6 @@ return [
      */
     'description' => 'API 文档',
 
-
     /*
      * Tell Scribe what routes to generate documentation for.
      * Each group contains rules defining which routes should be included ('match', 'include' and 'exclude' sections)
@@ -78,7 +77,7 @@ return [
                             'timestamp' => $timestamp,
                             'nonce' => $nonce,
                         ]);
-                        /* @var HmacSigner $signer */
+                        /** @var HmacSigner $signer */
                         $signer = app(HmacSigner::class, ['secret' => config('services.signer.default.secret', '')]);
 
                         return $signer->sign($params);
@@ -238,7 +237,7 @@ return [
     /*
      * Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
      */
-    'intro_text' => <<<INTRO
+    'intro_text' => <<<'INTRO'
 本文档旨在提供您使用我们的 API 所需的所有信息。
 
 <aside>当您滚动时，您会在右侧的黑暗区域（或作为移动设备内容的一部分）看到使用不同编程语言的 API 的代码示例。
@@ -370,7 +369,7 @@ INTRO
      * Tell Scribe which connections should be transacted here. If you only use the default db connection, you can leave this as is.
      */
     'database_connections_to_transact' => [
-        config('database.default')
+        config('database.default'),
     ],
 
     'theme' => 'default',
@@ -446,5 +445,5 @@ INTRO
          * You can reorder or remove strategies here.
          */
         'models_source' => ['factoryCreate', 'factoryMake', 'databaseFirst'],
-    ]
+    ],
 ];

@@ -59,46 +59,63 @@ class GenerateTestsCommand extends Command
         {--f|method-format=snake : The format(snake/camel) to use for the method names}
         {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
         {--M|memory-limit= : The memory limit to use for the PHP parser}';
+
     /** @var string */
     protected $description = 'Generate tests for the given files';
+
     /** @var array */
     private static $statistics = [
         'scanned_files' => 0,
         'scanned_classes' => 0,
         'related_classes' => 0,
-        'added_methods' => 0
+        'added_methods' => 0,
     ];
 
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
+
     /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
     private $resourceUsageFormatter;
+
     /** @var \PhpParser\Lexer\Emulative */
     private $lexer;
+
     /** @var \PhpParser\Parser */
     private $parser;
+
     /** @var \PhpParser\ErrorHandler\Collecting */
     private $errorHandler;
+
     /** @var null|\PhpParser\Node\Stmt[] */
     private $templateTestClassNodes;
+
     /** @var \PhpParser\BuilderFactory */
     private $builderFactory;
+
     /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
+
     /** @var \PhpParser\NodeDumper */
     private $nodeDumper;
+
     /** @var \PhpParser\JsonDecoder */
     private $jsonDecoder;
+
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
+
     /** @var \PhpParser\NodeTraverser */
     private $nodeTraverser;
+
     /** @var \PhpParser\NodeVisitor\ParentConnectingVisitor */
     private $parentConnectingVisitor;
+
     /** @var \PhpParser\NodeVisitor\NodeConnectingVisitor */
     private $nodeConnectingVisitor;
+
     /** @var \PhpParser\NodeVisitor\CloningVisitor */
     private $cloningVisitor;
+
     private $classUpdatingVisitor;
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -116,7 +133,7 @@ class GenerateTestsCommand extends Command
                 $originalNodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $e) {
                 $this->newLine();
-                $this->error(sprintf("The file of %s parse error: %s.", $fileInfo->getRealPath(), $e->getMessage()));
+                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $e->getMessage()));
 
                 return;
             }
@@ -140,13 +157,13 @@ class GenerateTestsCommand extends Command
                     $testClassName = "{$originalClassNode->name->name}Test";
                     $testClassFullName = $testClassNamespace.'\\'.$testClassName;
                     $testClassBaseName = str_replace('\\', DIRECTORY_SEPARATOR, $originalClassNamespace);
-                    $testClassFile = Str::finish($this->option('base-dir'), DIRECTORY_SEPARATOR). $testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
+                    $testClassFile = Str::finish($this->option('base-dir'), DIRECTORY_SEPARATOR).$testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
 
                     // 获取需要生成的测试方法节点
                     $testClassAddedMethodNodes = array_map(function (ClassMethod $node) {
                         return tap(
                             $this->builderFactory
-                                ->method(Str::{$this->option('method-format')}('test_' . Str::snake($node->name->name)))
+                                ->method(Str::{$this->option('method-format')}('test_'.Str::snake($node->name->name)))
                                 ->makePublic()
                                 ->getNode()
                         )->setAttribute('isAdded', true);
@@ -215,13 +232,13 @@ class GenerateTestsCommand extends Command
             ParserFactory::PREFER_PHP7,
             ParserFactory::PREFER_PHP5,
             ParserFactory::ONLY_PHP7,
-            ParserFactory::ONLY_PHP5])
+            ParserFactory::ONLY_PHP5, ])
         ) {
             $this->error('The parse-mode option is not valid(1,2,3,4).');
             exit(1);
         }
 
-        if (! in_array($this->option('method-format'), ['snake','camel'])) {
+        if (! in_array($this->option('method-format'), ['snake', 'camel'])) {
             $this->error('The method-format option is not valid(snake/camel).');
             exit(1);
         }
@@ -272,7 +289,7 @@ class GenerateTestsCommand extends Command
 
         $this->resourceUsageFormatter = new ResourceUsageFormatter();
         $this->lexer = new Emulative(['usedAttributes' => ['comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos']]);
-        $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'), $this->lexer);
+        $this->parser = (new ParserFactory())->create((int) $this->option('parse-mode'), $this->lexer);
         $this->errorHandler = new Collecting();
         $this->templateTestClassNodes = $this->parser->parse(file_get_contents($this->option('template-file')), $this->errorHandler);
         $this->builderFactory = new BuilderFactory();
@@ -285,11 +302,14 @@ class GenerateTestsCommand extends Command
         $this->cloningVisitor = new CloningVisitor();
         $this->nodeTraverser->addVisitor($this->cloningVisitor);
 
-        $this->classUpdatingVisitor = new class ('', '', []) extends NodeVisitorAbstract {
+        $this->classUpdatingVisitor = new class('', '', []) extends NodeVisitorAbstract
+        {
             /** @var string */
             public $testClassNamespace;
+
             /** @var string */
             public $testClassName;
+
             /** @var \PhpParser\Node\Stmt\ClassMethod[] */
             public $testClassAddedMethodNodes = [];
 
@@ -313,10 +333,11 @@ class GenerateTestsCommand extends Command
             }
         };
 
-        $this->prettyPrinter = new class () extends Standard {
+        $this->prettyPrinter = new class() extends Standard
+        {
             protected function pStmt_ClassMethod(ClassMethod $node)
             {
-                return ($node->getAttribute('isAdded') ? $this->nl : '') . parent::pStmt_ClassMethod($node);
+                return ($node->getAttribute('isAdded') ? $this->nl : '').parent::pStmt_ClassMethod($node);
             }
         };
     }

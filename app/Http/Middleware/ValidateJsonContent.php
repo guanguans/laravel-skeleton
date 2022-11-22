@@ -26,8 +26,8 @@ class ValidateJsonContent
 
         if (! str_contains($acceptHeader, $contentType)) {
             $warnCode = '199'; // https://www.iana.org/assignments/http-warn-codes/http-warn-codes.xhtml
-            $warnMessage = 'Missing request header [ accept = ' . $contentType . ' ] when calling a JSON API.';
-            $response->headers->set('Warning', $warnCode . ' ' . $warnMessage);
+            $warnMessage = 'Missing request header [ accept = '.$contentType.' ] when calling a JSON API.';
+            $response->headers->set('Warning', $warnCode.' '.$warnMessage);
         }
 
         return $response;

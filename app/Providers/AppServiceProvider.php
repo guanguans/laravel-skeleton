@@ -189,7 +189,7 @@ class AppServiceProvider extends ServiceProvider
         foreach (
             [
                 BetweenWordsRule::class,
-                InstanceofRule::class
+                InstanceofRule::class,
             ] as $classOfRule
         ) {
             $this->ruleRegistrar($classOfRule);
@@ -206,7 +206,7 @@ class AppServiceProvider extends ServiceProvider
                 $class = trim(Str::replaceFirst(base_path(), '', $splFileInfo->getRealPath()), DIRECTORY_SEPARATOR);
 
                 return str_replace(
-                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())) . '\\'],
+                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
                     ['\\', app()->getNamespace()],
                     ucfirst(Str::replaceLast('.php', '', $class))
                 );
@@ -301,6 +301,7 @@ class AppServiceProvider extends ServiceProvider
          * 扩展 Blade
          *
          * ```blade
+         *
          * @datetime($timestamp, $format)
          * ```
          */

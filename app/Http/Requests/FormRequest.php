@@ -108,7 +108,6 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     /**
      * @param  string  $type
-     *
      * @return string
      */
     protected function getHandleMethod(string $type): string

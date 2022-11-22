@@ -24,10 +24,9 @@ class CompressResponseContent
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @param bool $debug
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  bool  $debug
      * @return \Illuminate\Http\Response
      */
     public function handle($request, Closure $next, bool $debug = false)
@@ -67,8 +66,7 @@ class CompressResponseContent
     }
 
     /**
-     * @param array<string, string> $replacementRules
-     *
+     * @param  array<string, string>  $replacementRules
      * @return void
      */
     public static function mergeReplacementRules(array $replacementRules)
@@ -77,7 +75,7 @@ class CompressResponseContent
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      */
     protected function shouldCompress($request): bool
     {
@@ -85,7 +83,7 @@ class CompressResponseContent
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      */
     protected function shouldntCompress($request): bool
     {
@@ -156,7 +154,7 @@ HTML;
             '#(//[^\n]*\n)#s' => "\\1\n",
             // extra line feed after any comments left
             // (important given later replacements)
-            '#/([\'"])\+\'\'\+([\'"])\*#' => '/*'
+            '#/([\'"])\+\'\'\+([\'"])\*#' => '/*',
             // restore comments in strings
         ];
         $compressedContent = preg_replace(array_keys($replaceRules), $replaceRules, $content);
@@ -194,14 +192,14 @@ HTML;
             '/\>[^\S ]+/s' => '>',
             // Strip all whitespaces after tags, except space
             '/[^\S ]+\</s' => '<', // strip whitespaces before tags, except space
-            /**
-             * '/\s+    # Match one or more whitespace characters
-             * (?!      # but only if it is impossible to match...
-             * [^<>]*   # any characters except angle brackets
-             * >        # followed by a closing bracket.
-             * )        # End of lookahead
-             * /x',
-             */
+        /**
+         * '/\s+    # Match one or more whitespace characters
+         * (?!      # but only if it is impossible to match...
+         * [^<>]*   # any characters except angle brackets
+         * >        # followed by a closing bracket.
+         * )        # End of lookahead
+         * /x',
+         */
 
             // Remove all whitespaces except content between html tags.
             // MOST DANGEROUS
@@ -228,11 +226,11 @@ HTML;
     protected function formatBytes(int $bytes, $precision = 2): string
     {
         if ($bytes > 0) {
-            $i = (int)floor(log($bytes) / log(1024));
+            $i = (int) floor(log($bytes) / log(1024));
 
             $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 . ' ' . $sizes[$i] ?? '';
+            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.$sizes[$i] ?? '';
         }
 
         return '0';
@@ -241,9 +239,9 @@ HTML;
     /**
      * This method will no longer support.
      *
-     * @param string $content
-     *
+     * @param  string  $content
      * @return string
+     *
      * @deprecated
      */
     protected function simpleCompression(string $content): string

@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * This file is part of the guanguans/laravel-skeleton.
  *
@@ -43,8 +42,10 @@ class FindDumpStatementCommand extends Command
         {--f|func=* : The functions to search}
         {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
         {--M|memory-limit= : The memory limit to use for the PHP parser}';
+
     /** @var string */
     protected $description = 'Find dump statements in PHP files.';
+
     /** @var \string[][] */
     private $statements = [
         'struct' => [
@@ -60,18 +61,22 @@ class FindDumpStatementCommand extends Command
             'dump',
             'dd',
             'print_r',
-            'var_export'
-        ]
+            'var_export',
+        ],
     ];
 
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
+
     /** @var \PhpParser\Parser */
     private $parser;
+
     /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
+
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
+
     /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
     private $resourceUsageFormatter;
 
@@ -90,7 +95,7 @@ class FindDumpStatementCommand extends Command
                 $nodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $e) {
                 $this->newLine();
-                $this->error(sprintf("The file of %s parse error: %s.", $fileInfo->getRealPath(), $e->getMessage()));
+                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $e->getMessage()));
 
                 return;
             }
@@ -179,7 +184,7 @@ class FindDumpStatementCommand extends Command
             ParserFactory::PREFER_PHP7,
             ParserFactory::PREFER_PHP5,
             ParserFactory::ONLY_PHP7,
-            ParserFactory::ONLY_PHP5])
+            ParserFactory::ONLY_PHP5, ])
         ) {
             $this->error('The parse-mode option is not valid(1,2,3,4).');
             exit(1);
@@ -220,7 +225,7 @@ class FindDumpStatementCommand extends Command
             }
         });
 
-        $this->parser = (new ParserFactory())->create((int)$this->option('parse-mode'));
+        $this->parser = (new ParserFactory())->create((int) $this->option('parse-mode'));
         $this->nodeFinder = new NodeFinder();
         $this->prettyPrinter = new Standard();
         $this->resourceUsageFormatter = new ResourceUsageFormatter();

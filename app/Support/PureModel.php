@@ -615,7 +615,7 @@ abstract class PureModel implements ArrayAccess, Arrayable, Jsonable, JsonSerial
      * Get the value of an attribute using its mutator.
      *
      * @param  string  $key
-     * @param  mixed   $value
+     * @param  mixed  $value
      * @return mixed
      */
     protected function mutateAttribute($key, $value)
@@ -627,7 +627,7 @@ abstract class PureModel implements ArrayAccess, Arrayable, Jsonable, JsonSerial
      * Get the value of an attribute using its mutator for array conversion.
      *
      * @param  string  $key
-     * @param  mixed   $value
+     * @param  mixed  $value
      * @return mixed
      */
     protected function mutateAttributeForArray($key, $value)
@@ -815,7 +815,7 @@ abstract class PureModel implements ArrayAccess, Arrayable, Jsonable, JsonSerial
     /**
      * Extract and cache all the mutated attributes of a class.
      *
-     * @param string $class
+     * @param  string  $class
      * @return void
      */
     public static function cacheMutatedAttributes($class)
@@ -933,7 +933,7 @@ abstract class PureModel implements ArrayAccess, Arrayable, Jsonable, JsonSerial
      * Handle dynamic static method calls into the method.
      *
      * @param  string  $method
-     * @param  array   $parameters
+     * @param  array  $parameters
      * @return mixed
      */
     public static function __callStatic($method, $parameters)

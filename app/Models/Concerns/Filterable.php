@@ -25,7 +25,7 @@ trait Filterable
                 continue;
             }
 
-            $method = 'filter' . Str::studly($key);
+            $method = 'filter'.Str::studly($key);
             if (\method_exists($this, $method)) {
                 \call_user_func([$this, $method], $query, $value, $key);
             } elseif ($this->isFilterable($key)) {

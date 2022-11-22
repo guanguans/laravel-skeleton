@@ -58,7 +58,7 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
     public function provides()
     {
         return [
-            PushDeer::class, 'pushdeer'
+            PushDeer::class, 'pushdeer',
         ];
     }
 

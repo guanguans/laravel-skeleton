@@ -33,7 +33,6 @@ class Base64Cast implements CastsAttributes
      * @param  string  $key
      * @param  mixed  $value
      * @param  array  $attributes
-     *
      * @return mixed
      */
     public function get($model, string $key, $value, array $attributes)
@@ -48,7 +47,6 @@ class Base64Cast implements CastsAttributes
      * @param  string  $key
      * @param  mixed  $value
      * @param  array  $attributes
-     *
      * @return mixed
      */
     public function set($model, string $key, $value, array $attributes)

@@ -30,7 +30,7 @@
         "jiannei/laravel-response": "^4.4",
         "kevinrob/guzzle-cache-middleware": "^4.0",
         "knuckleswtf/scribe": "^4.6",
-        "laravel/framework": "^9.33",
+        "laravel/framework": "^9.40",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "overtrue/laravel-lang": "^6.0",
@@ -61,9 +61,10 @@
         "barryvdh/laravel-ide-helper": "^2.12",
         "brainmaestro/composer-git-hooks": "^3.0",
         "deployer/deployer": "^7.0",
-        "fakerphp/faker": "^1.19",
+        "fakerphp/faker": "^1.20",
         "kitloong/laravel-migrations-generator": "^6.6",
         "lanin/laravel-api-debugger": "^4.0",
+        "laravel/pint": "^1.2",
         "laravel/sail": "^1.16",
         "mockery/mockery": "^1.5",
         "nunomaduro/collision": "^6.3",
@@ -71,8 +72,7 @@
         "orangehill/iseed": "^3.0",
         "phpunit/phpunit": "^9.5",
         "reliese/laravel": "^1.1",
-        "spatie/laravel-ignition": "^1.4",
-        "stechstudio/laravel-php-cs-fixer": "^3.1"
+        "spatie/laravel-ignition": "^1.6"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -140,7 +140,7 @@
         "cghooks": "./vendor/bin/cghooks",
         "checks": [
             "@mark-start",
-            "@style-lint",
+            "@pint-test",
             "@mark-separate",
             "@docs-generate",
             "@mark-finish"
@@ -151,7 +151,7 @@
         "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",
         "phpstan": "./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
-        "style-fix": "@php artisan fixer:fix --ansi",
-        "style-lint": "@php artisan fixer:fix --diff --dry-run --ansi"
+        "pint": "./vendor/bin/pint -v",
+        "pint-test": "@pint --test"
     }
 }

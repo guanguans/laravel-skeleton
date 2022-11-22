@@ -23,7 +23,6 @@ class BlueprintMacro
     {
         /**
          * @param  string  $comment
-         *
          * @return \Illuminate\Support\Fluent
          */
         return function ($comment) {

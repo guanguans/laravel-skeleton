@@ -27,11 +27,11 @@ trait ControllerCrudable
         $nsPrefix = '';
         $nsPrefixes = explode('\\', (new ReflectionObject($this))->getNamespaceName());
         if (end($nsPrefixes) !== 'Controllers') {
-            $nsPrefix = strtolower(end($nsPrefixes)) . ($forRedirect ? '/' : '.');
+            $nsPrefix = strtolower(end($nsPrefixes)).($forRedirect ? '/' : '.');
         }
         $modelNames = explode('\\', $this->modelClass);
 
-        return $nsPrefix . strtolower(end($modelNames));
+        return $nsPrefix.strtolower(end($modelNames));
     }
 
     /**
@@ -50,7 +50,7 @@ trait ControllerCrudable
             return response()->json($items);
         }
 
-        return view($this->getViewPath() . '.index', compact('items'));
+        return view($this->getViewPath().'.index', compact('items'));
     }
 
     /**
@@ -58,7 +58,7 @@ trait ControllerCrudable
      */
     public function create(): View
     {
-        return view($this->getViewPath() . '.create');
+        return view($this->getViewPath().'.create');
     }
 
     /**
@@ -72,7 +72,7 @@ trait ControllerCrudable
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
             if ($validation->fails()) {
                 return response()->json([
-                    'error' => true,'errors' => $validation->errors()->messages()
+                    'error' => true, 'errors' => $validation->errors()->messages(),
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         } else {
@@ -89,7 +89,7 @@ trait ControllerCrudable
         }
 
         $url = ! $request->input('url_return')
-            ? $this->getViewPath(true) . '/' . $model->id
+            ? $this->getViewPath(true).'/'.$model->id
             : $request->input('url_return');
 
         return redirect($url)->with('flash_message', trans('crud.added'));
@@ -98,8 +98,7 @@ trait ControllerCrudable
     /**
      * Display the specified resource.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
     public function show(Request $request, $id)
@@ -114,27 +113,25 @@ trait ControllerCrudable
             return $this->jsonModel($model);
         }
 
-        return view($this->getViewPath() . '.show', compact('model'));
+        return view($this->getViewPath().'.show', compact('model'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      */
     public function edit($id): View
     {
         $model = $this->modelClass::findOrFail($id);
 
-        return view($this->getViewPath() . '.edit', compact('model'));
+        return view($this->getViewPath().'.edit', compact('model'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
@@ -144,7 +141,7 @@ trait ControllerCrudable
             $validation = Validator::make($request->all(), $this->modelClass::validateOn('update', $id));
             if ($validation->fails()) {
                 return response()->json([
-                    'error' => true,'errors' => $validation->errors()->messages()
+                    'error' => true, 'errors' => $validation->errors()->messages(),
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         } else {
@@ -156,7 +153,7 @@ trait ControllerCrudable
         $model->update($request->only($model->getFillable()));
 
         $url = ! $request->input('url_return')
-            ? $this->getViewPath(true) . '/' . $model->id
+            ? $this->getViewPath(true).'/'.$model->id
             : $request->input('url_return');
 
         return $this->isAjax($request)
@@ -168,7 +165,6 @@ trait ControllerCrudable
      * Remove the specified resource from storage.
      *
      * @param  mixed  $id
-     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Request $request, $id)

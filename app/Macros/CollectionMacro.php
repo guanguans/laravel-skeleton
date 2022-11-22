@@ -85,7 +85,7 @@ class CollectionMacro
 
     public function if(): callable
     {
-        return function ($if,  $then = null,  $else = null) {
+        return function ($if, $then = null, $else = null) {
             return value($if, $this) ? value($then, $this) : value($else, $this);
         };
     }
@@ -103,7 +103,6 @@ class CollectionMacro
                 'path' => LengthAwarePaginator::resolveCurrentPath(),
                 'pageName' => $pageName,
             ];
-
 
             return new LengthAwarePaginator($items, $total, $perPage, $page, $options);
         };

@@ -50,11 +50,11 @@ class AuthRequest extends FormRequest
             ->whenRouteIs('auth.index', function () use (&$rules) {
                 $rules = [
                     'per_page' => 'integer|min:5|max:50',
-                    'page' => 'integer|min:1'
+                    'page' => 'integer|min:1',
                 ];
             });
 
-        return (array)$rules;
+        return (array) $rules;
     }
 
     public function authorize(): bool

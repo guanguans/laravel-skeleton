@@ -18,7 +18,6 @@ class VerifySignature
      * @param  string  $secret
      * @param  int  $effectiveTime
      * @param  bool  $checkRepeatRequest
-     *
      * @return mixed
      */
     public function handle(Request $request, Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true)
@@ -48,7 +47,7 @@ class VerifySignature
             'nonce' => $request->header('nonce'),
         ]);
 
-        /* @var HmacSigner $signer */
+        /** @var HmacSigner $signer */
         $signer = app(HmacSigner::class, ['secret' => $secret]);
         if (! $signer->validate($request->header('signature'), $parameters)) {
             throw new InvalidSignatureException();

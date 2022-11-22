@@ -11,5 +11,6 @@ use BenSampo\Enum\Enum;
 final class IntegerBooleanEnum extends Enum
 {
     public const False = 0;
+
     public const True = 1;
 }

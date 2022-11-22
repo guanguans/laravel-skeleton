@@ -81,7 +81,7 @@ class PushDeer extends FoundationSdk
 
             'token' => 'required|string',
             'key' => 'required|string',
-            'base_url' => 'required|url'
+            'base_url' => 'required|url',
         ]);
     }
 
@@ -93,15 +93,15 @@ class PushDeer extends FoundationSdk
             ->withOptions([
                 'json' => $data = [
                     'token' => $config['token'],
-                    'pushkey' => $config['key']
+                    'pushkey' => $config['key'],
                 ],
                 'form_params' => $data,
-                'query' => $data
+                'query' => $data,
             ])
             ->withMiddleware(function (callable $handler) use ($config): callable {
                 return function (RequestInterface $request, array $options) use ($config, $handler) {
                     $options['laravel_data']['pushkey'] = $config['key'];
-                    $request->withHeader('X-Timestamp', (string)microtime(true));
+                    $request->withHeader('X-Timestamp', (string) microtime(true));
 
                     // 修改请求
                     Utils::modifyRequest($request, []);
@@ -110,7 +110,7 @@ class PushDeer extends FoundationSdk
                     $promise = $handler($request, $options);
 
                     return $promise->then(function (ResponseInterface $response) {
-                        return $response->withHeader('X-Timestamp', (string)microtime(true));
+                        return $response->withHeader('X-Timestamp', (string) microtime(true));
                     });
                 };
             })

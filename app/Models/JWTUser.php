@@ -38,7 +38,6 @@ class JWTUser extends User implements JWTSubject
 
     /**
      * @param  string  $token
-     *
      * @return array
      */
     public static function wrapToken(string $token): array
@@ -47,7 +46,7 @@ class JWTUser extends User implements JWTSubject
             'access_token' => $token,
             'token_type' => 'bearer',
             /** @var \Illuminate\Auth\AuthManager|\PHPOpenSourceSaver\JWTAuth\JWTGuard|\PHPOpenSourceSaver\JWTAuth\JWT */
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
         ];
     }
 }

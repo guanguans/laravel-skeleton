@@ -118,7 +118,6 @@ abstract class FoundationSdk
      * ```
      *
      * @param  array  $config
-     *
      * @return array The merged and validated options
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException If an option name is undefined
@@ -127,13 +126,11 @@ abstract class FoundationSdk
      * @throws \Symfony\Component\OptionsResolver\Exception\OptionDefinitionException If there is a cyclic dependency between lazy options and/or normalizers
      * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException     If a lazy option reads an unavailable option
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException           If called from a lazy option or normalizer
-     *
      * @throws \Illuminate\Validation\ValidationException Laravel validation rules.
      */
     abstract protected function validateConfig(array $config): array;
 
     /**
-     *
      * ```php
      * protected function buildPendingRequest(array $config): PendingRequest
      * {
@@ -145,7 +142,6 @@ abstract class FoundationSdk
      * ```
      *
      * @param  array  $config
-     *
      * @return \Illuminate\Http\Client\PendingRequest
      */
     abstract protected function buildPendingRequest(array $config): PendingRequest;
