@@ -28,7 +28,7 @@
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^4.4",
         "kevinrob/guzzle-cache-middleware": "^4.0",
-        "knuckleswtf/scribe": "^3.0",
+        "knuckleswtf/scribe": "^4.6",
         "laravel/framework": "^9.33",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",

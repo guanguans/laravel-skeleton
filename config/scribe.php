@@ -1,6 +1,7 @@
 <?php
 
 use App\Support\Signer\HmacSigner;
+use Knuckles\Scribe\Extracting\Strategies;
 
 return [
 
@@ -180,13 +181,13 @@ return [
         'middleware' => [
             // \App\Http\Middleware\VerifySignature::class
         ],
+        /*
+         * Directory within `public` in which to store CSS and JS assets.
+         * By default, assets are stored in `public/vendor/scribe`.
+         * If set, assets will be stored in `public/{{assets_directory}}`
+         */
+        'assets_directory' => null,
     ],
-
-    /**
-     * Add a Try It Out button to your endpoints so consumers can test endpoints right from their browser.
-     * Don't forget to enable CORS headers for your endpoints.
-     */
-    'interactive' => false,
 
     /*
      * How is your API authenticated? This information will be used in the displayed docs, generated examples and response calls.
@@ -297,11 +298,6 @@ INTRO
     ],
 
     /*
-     * Name for the group of endpoints which do not have a @group set.
-     */
-    'default_group' => 'Other - 其他',
-
-    /*
      * Custom logo path. This will be used as the value of the src attribute for the <img> tag,
      * so make sure it points to a public URL or path accessible from your web server. For best results, the image width should be 230px.
      * Set this to false to not use a logo.
@@ -312,17 +308,6 @@ INTRO
      *
      */
     'logo' => false,
-
-    /*
-     * The router your API is using (Laravel or Dingo).
-     */
-    'router' => 'laravel',
-
-    /*
-     * If you would like the package to generate the same example values for parameters on each run,
-     * set this to any number (eg. 1234)
-     */
-    'faker_seed' => null,
 
     /**
      * The strategies Scribe will use to extract information about your routes at each stage.
@@ -339,6 +324,8 @@ INTRO
         ],
         'queryParameters' => [
             \Knuckles\Scribe\Extracting\Strategies\QueryParameters\GetFromQueryParamTag::class,
+            Strategies\QueryParameters\GetFromFormRequest::class,
+            Strategies\QueryParameters\GetFromInlineValidator::class,
         ],
         'headers' => [
             \Knuckles\Scribe\Extracting\Strategies\Headers\GetFromRouteRules::class,
@@ -347,6 +334,7 @@ INTRO
         'bodyParameters' => [
             \Knuckles\Scribe\Extracting\Strategies\BodyParameters\GetFromFormRequest::class,
             \Knuckles\Scribe\Extracting\Strategies\BodyParameters\GetFromBodyParamTag::class,
+            Strategies\BodyParameters\GetFromInlineValidator::class,
         ],
         'responses' => [
             \Knuckles\Scribe\Extracting\Strategies\Responses\UseTransformerTags::class,
@@ -378,17 +366,85 @@ INTRO
     'routeMatcher' => \Knuckles\Scribe\Matching\RouteMatcher::class,
 
     /**
-     * [Advanced] If one of your app's database drivers does not support transactions,
-     * docs generation (instantiating Eloquent models and making response calls) will likely fail.
-     * To avoid that, you can add the driver class name here. Be warned: that means all database changes will persist.
-     */
-    'continue_without_database_transactions' => [],
-
-    /**
      * For response calls, api resource responses and transformer responses, Scribe will try to start database transactions, so no changes are persisted to your database.
      * Tell Scribe which connections should be transacted here. If you only use the default db connection, you can leave this as is.
      */
     'database_connections_to_transact' => [
-        // config('database.default')
+        config('database.default')
+    ],
+
+    'theme' => 'default',
+
+    'try_it_out' => [
+        /**
+         * Add a Try It Out button to your endpoints so consumers can test endpoints right from their browser.
+         * Don't forget to enable CORS headers for your endpoints.
+         */
+        'enabled' => true,
+        /**
+         * The base URL for the API tester to use (for example, you can set this to your staging URL).
+         * Leave as null to use the current app URL (config(app.url)).
+         */
+        'base_url' => null,
+        /**
+         * Fetch a CSRF token before each request, and add it as an X-XSRF-TOKEN header. Needed if you're using Laravel Sanctum.
+         */
+        'use_csrf' => false,
+        /**
+         * The URL to fetch the CSRF token from (if `use_csrf` is true).
+         */
+        'csrf_url' => '/sanctum/csrf-cookie',
+    ],
+    'groups' => [
+        /*
+         * Endpoints which don't have a @group will be placed in this default group.
+         */
+        'default' => 'Other - 其他',
+        /*
+         * By default, Scribe will sort groups alphabetically, and endpoints in the order their routes are defined.
+         * You can override this by listing the groups, subgroups and endpoints here in the order you want them.
+         *
+         * Any groups, subgroups or endpoints you don't list here will be added as usual after the ones here.
+         * If an endpoint/subgroup is listed under a group it doesn't belong in, it will be ignored.
+         * Note: you must include the initial '/' when writing an endpoint.
+         */
+        'order' => [
+            'Ping - 示例接口管理' => [
+                'ping - 示例接口',
+            ],
+            'Auth - 认证接口管理' => [
+                'register - 注册',
+                'login - 登录',
+                'logout - 退出',
+                'refresh - 重刷 token',
+                'me - 用户信息',
+                'index - 用户列表',
+            ],
+        ],
+    ],
+    /**
+     * Customize the "Last updated" value displayed in the docs by specifying tokens and formats.
+     * Examples:
+     * - {date:F j Y} => March 28, 2022
+     * - {git:short} => Short hash of the last Git commit
+     *
+     * Available tokens are `{date:<format>}` and `{git:<format>}`.
+     * The format you pass to `date` will be passed to PhP's `date()` function.
+     * The format you pass to `git` can be either "short" or "long".
+     */
+    'last_updated' => '最后更新: {date:Y-m-d H:i:s}',
+
+    'examples' => [
+        /*
+         * If you would like the package to generate the same example values for parameters on each run,
+         * set this to any number (eg. 1234)
+         */
+        'faker_seed' => null,
+        /*
+         * With API resources and transformers, Scribe tries to generate example models to use in your API responses.
+         * By default, Scribe will try the model's factory, and if that fails, try fetching the first from the database.
+         * You can reorder or remove strategies here.
+         */
+        'models_source' => ['factoryCreate', 'factoryMake', 'databaseFirst'],
     ]
 ];

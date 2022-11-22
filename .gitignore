@@ -26,3 +26,4 @@ tests.html
 resources/views/scribe/
 public/vendor/scribe/
 deploy.php
+/.scribe
