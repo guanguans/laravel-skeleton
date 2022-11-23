@@ -12,18 +12,15 @@ use App\Macros\RequestMacro;
 use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
 use App\Macros\WhereNotQueryBuilderMacro;
-use App\Rules\BetweenWordsRule;
-use App\Rules\DefaultRule;
-use App\Rules\ImplicitRule;
-use App\Rules\InstanceofRule;
 use App\Rules\Rule;
 use App\Traits\Conditionable;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
-use ArgumentCountError;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Validation\DataAwareRule;
+use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
@@ -49,10 +46,11 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Illuminate\View\View;
+use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
 use ReflectionClass;
+use Reliese\Coders\CodersServiceProvider;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
-use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -71,15 +69,15 @@ class AppServiceProvider extends ServiceProvider
      * @var string[]
      */
     public $singletons = [
-        \App\Macros\RequestMacro::class,
-        \App\Macros\CollectionMacro::class,
-        \App\Macros\StrMacro::class,
-        \App\Macros\StringableMacro::class,
-        \App\Macros\QueryBuilderMacro::class,
-        \App\Macros\BlueprintMacro::class,
-        \App\Macros\GrammarMacro::class,
-        \App\Macros\MySqlGrammarMacro::class,
-        \App\Macros\CommandMacro::class,
+        RequestMacro::class,
+        CollectionMacro::class,
+        StrMacro::class,
+        StringableMacro::class,
+        QueryBuilderMacro::class,
+        BlueprintMacro::class,
+        GrammarMacro::class,
+        MySqlGrammarMacro::class,
+        CommandMacro::class,
     ];
 
     /**
@@ -113,7 +111,6 @@ class AppServiceProvider extends ServiceProvider
             Paginator::useBootstrap();
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
             $this->registerMacros();
-            $this->extendValidator();
             $this->extendValidatorFrom($this->app->path('Rules'));
             $this->extendView();
             ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
@@ -150,10 +147,10 @@ class AppServiceProvider extends ServiceProvider
 
     protected function registerNotProductionServiceProviders()
     {
-        $this->app->register(\NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class);
-        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        $this->app->register(CollisionServiceProvider::class);
+        $this->app->register(IdeHelperServiceProvider::class);
         $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
-        $this->app->register(\Reliese\Coders\CodersServiceProvider::class);
+        $this->app->register(CodersServiceProvider::class);
     }
 
     /**
@@ -177,29 +174,10 @@ class AppServiceProvider extends ServiceProvider
         Command::mixin($this->app->make(CommandMacro::class));
     }
 
-    protected function extendValidator(): void
-    {
-        // 默认值规则
-        Validator::extendImplicit('default', function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) {
-            return (new DefaultRule($parameters[0] ?? $value))
-                ->setValidator($validator)
-                ->passes($attribute, $value);
-        });
-
-        foreach (
-            [
-                BetweenWordsRule::class,
-                InstanceofRule::class,
-            ] as $classOfRule
-        ) {
-            $this->ruleRegistrar($classOfRule);
-        }
-    }
-
     /**
      * Register rule.
      */
-    protected function extendValidatorFrom($dirs, $name = '*Rule.php', $notName = [])
+    protected function extendValidatorFrom(string|array $dirs, string|array $name = '*Rule.php', string|array $notName = [])
     {
         foreach (Finder::create()->files()->name($name)->notName($notName)->in($dirs) as $splFileInfo) {
             $classOfRule = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
@@ -212,63 +190,43 @@ class AppServiceProvider extends ServiceProvider
                 );
             });
 
-            try {
-                /** @var \App\Rules\Rule $rule */
-                $rule = app($classOfRule);
-            } catch (Throwable $e) {
+            if (! is_subclass_of($classOfRule, Rule::class)) {
                 continue;
             }
 
-            if (! $rule instanceof Rule || $rule instanceof DataAwareRule || $rule instanceof ValidatorAwareRule) {
+            $reflectionClass = new ReflectionClass($classOfRule);
+            if (! $reflectionClass->isInstantiable()) {
                 continue;
             }
 
-            $methodOfExtend = 'extend';
-            $rule instanceof ImplicitRule and $methodOfExtend = 'extendImplicit';
+            $methodOfExtend = transform($classOfRule, function (string $classOfRule) {
+                $method = 'extend';
+                if (is_subclass_of($classOfRule, ImplicitRule::class)) {
+                    $method = 'extendImplicit';
+                }
+
+                return $method;
+            });
+
+            // 有构造函数
+            if ($reflectionClass->getConstructor() && $reflectionClass->getConstructor()->getNumberOfParameters()) {
+                /** @var \Symfony\Component\Finder\SplFileInfo $splFileInfo */
+                $nameOfRule = Str::of($splFileInfo->getBasename('.php'))->replaceLast('Rule', '')->snake()->__toString();
+
+                Validator::$methodOfExtend($nameOfRule, function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($classOfRule) {
+                    return tap((new $classOfRule(...$parameters)), function (Rule $rule) use ($validator) {
+                        $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
+                        $rule instanceof DataAwareRule and $rule->setData($validator->getData());
+                    })->passes($attribute, $value);
+                });
+
+                continue;
+            }
+
+            /** @var \App\Rules\Rule $rule */
+            $rule = new $classOfRule();
             Validator::$methodOfExtend($rule->getName(), "$classOfRule@passes", $rule->message());
         }
-    }
-
-    protected function ruleRegistrar(string $classOfRule): void
-    {
-        $name = Str::of(class_basename($classOfRule))->replaceLast('Rule', '')->snake()->__toString();
-
-        Validator::extend($name, function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($classOfRule) {
-            $numberOfRequiredParameters = value(function (string $class): int {
-                $constructor = (new ReflectionClass($class))->getConstructor();
-                if (is_null($constructor)) {
-                    return 0;
-                }
-
-                $parametersOfConstructor = $constructor->getParameters();
-                $numberOfRequiredParameters = 0;
-                foreach ($parametersOfConstructor as $parameter) {
-                    if ($parameter->isDefaultValueAvailable()) {
-                        break;
-                    }
-
-                    $numberOfRequiredParameters++;
-                }
-
-                return $numberOfRequiredParameters;
-            }, $classOfRule);
-
-            $numberOfIncoming = count($parameters);
-            if ($numberOfIncoming !== $numberOfRequiredParameters) {
-                throw new ArgumentCountError(
-                    sprintf(
-                        'Too few arguments to function %s::__construct(), %s passed in %s on line %s and exactly %s expected',
-                        $classOfRule,
-                        $numberOfIncoming,
-                        __FILE__,
-                        __LINE__,
-                        $numberOfRequiredParameters
-                    )
-                );
-            }
-
-            return (new $classOfRule(...$parameters))->passes($attribute, $value);
-        });
     }
 
     protected function extendView()

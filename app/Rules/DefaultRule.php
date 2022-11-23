@@ -4,9 +4,10 @@ namespace App\Rules;
 
 use App\Rules\Concerns\DataAware;
 use App\Rules\Concerns\ValidatorAware;
+use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 
-final class DefaultRule extends ImplicitRule implements ValidatorAwareRule
+final class DefaultRule extends Rule implements ImplicitRule, ValidatorAwareRule
 {
     // use DataAware;
     use ValidatorAware;
@@ -16,7 +17,7 @@ final class DefaultRule extends ImplicitRule implements ValidatorAwareRule
      */
     protected $default;
 
-    public function __construct($default = null)
+    public function __construct($default)
     {
         $this->default = $default;
     }
@@ -30,10 +31,9 @@ final class DefaultRule extends ImplicitRule implements ValidatorAwareRule
      */
     public function passes($attribute, $value)
     {
-        if ($value === null || $value === '') {
-            $default = $this->default ?: $value;
+        if ($value === null) {
             $data = $this->validator->getData();
-            $data[$attribute] = $default;
+            $data[$attribute] = $this->default;
             $this->validator->setData($data);
         }
 
