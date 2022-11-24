@@ -2,9 +2,9 @@
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Pipeline\Pipeline;
-use Illuminate\Support\Facades\App as Laravel;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Stopwatch\Stopwatch;
+use Illuminate\Support\Facades\DB;
+use SebastianBergmann\Timer\ResourceUsageFormatter;
+use SebastianBergmann\Timer\Timer;
 
 if (! function_exists('environment')) {
     function environment(): string
@@ -337,29 +337,21 @@ if (! function_exists('call')) {
     }
 }
 
-if (! function_exists('stopwatch')) {
+if (! function_exists('catch_resource_usage')) {
     /**
-     * @param  string  $name
      * @param  callable|string  $callback
-     * @param  array  $parameters
-     * @param  null|string  $category
-     * @param  bool  $morePrecision
-     * @param  null|\Psr\Log\LoggerInterface  $logger
-     * @return mixed
+     * @param ...$parameter
+     * @return string
      */
-    function stopwatch(string $name, $callback, array $parameters = [], string $category = null, bool $morePrecision = false, LoggerInterface $logger = null)
+    function catch_resource_usage($callback, ...$parameter)
     {
-        $stopwatch = new Stopwatch($morePrecision);
+        $timer = new Timer;
+        $timer->start();
 
-        $logger or $logger = Laravel::make(LoggerInterface::class);
+        /** @var array<string, mixed> $parameter */
+        app()->call($callback, $parameter);
 
-        $stopwatch->start($name, $category) and $logger->info("Start stopwatch [$name]");
-
-        $called = Laravel::call($callback, $parameters);
-
-        $stopwatchEvent = $stopwatch->stop($name) and $logger->info("End stopwatch [$name] [$stopwatchEvent]");
-
-        return $called;
+        return (new ResourceUsageFormatter)->resourceUsage($timer->stop());
     }
 }
 
@@ -374,20 +366,20 @@ if (! function_exists('catch_query_log')) {
         return (new Pipeline(app()))
             ->send($callback)
             ->through(function ($callback, Closure $next) {
-                \Illuminate\Support\Facades\DB::enableQueryLog();
-                \Illuminate\Support\Facades\DB::flushQueryLog();
+                DB::enableQueryLog();
+                DB::flushQueryLog();
 
                 $queryLog = $next($callback);
 
-                \Illuminate\Support\Facades\DB::disableQueryLog();
+                DB::disableQueryLog();
 
                 return $queryLog;
             })
             ->then(function ($callback) use ($parameter) {
                 /** @var array<string, mixed> $parameter */
-                Laravel::call($callback, $parameter);
+                app()->call($callback, $parameter);
 
-                return \Illuminate\Support\Facades\DB::getQueryLog();
+                return DB::getQueryLog();
             });
     }
 }

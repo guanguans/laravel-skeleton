@@ -41,13 +41,15 @@ class OptimizeAllCommand extends Command
             return self::INVALID;
         }
 
-        stopwatch($this->getName(), function () {
+        $resourceUsage = catch_resource_usage(function () {
             passthru('composer dump-autoload --optimize');
             $this->call('config:cache');
             $this->call('event:cache');
             $this->call('route:cache');
             $this->call('view:cache');
         });
+
+        $this->info($resourceUsage);
 
         return self::SUCCESS;
     }
