@@ -119,6 +119,10 @@ class AppServiceProvider extends ServiceProvider
             });
         });
 
+        $this->while(\request()?->user()?->locale, static function (self $serviceProvider, $locale) {
+            $serviceProvider->app->setLocale($locale);
+        });
+
         $this->while($this->app->isProduction(), function () {
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
