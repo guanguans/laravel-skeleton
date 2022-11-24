@@ -59,25 +59,26 @@ class AppServiceProvider extends ServiceProvider
     /**
      * All of the container bindings that should be registered.
      *
-     * @var string[]
+     * @var array<string, string>
      */
     public $bindings = [];
 
     /**
      * All of the container singletons that should be registered.
      *
-     * @var string[]
+     * @var array<array-key, string>
      */
     public $singletons = [
-        RequestMacro::class,
-        CollectionMacro::class,
-        StrMacro::class,
-        StringableMacro::class,
-        QueryBuilderMacro::class,
         BlueprintMacro::class,
+        CollectionMacro::class,
+        CommandMacro::class,
         GrammarMacro::class,
         MySqlGrammarMacro::class,
-        CommandMacro::class,
+        QueryBuilderMacro::class,
+        RequestMacro::class,
+        StringableMacro::class,
+        StrMacro::class,
+        WhereNotQueryBuilderMacro::class,
     ];
 
     /**
@@ -158,20 +159,25 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function registerMacros()
     {
-        Request::mixin($this->app->make(RequestMacro::class));
-        Collection::mixin($this->app->make(CollectionMacro::class));
-        QueryBuilder::mixin($queryBuilderMacro = $this->app->make(QueryBuilderMacro::class));
-        QueryBuilder::mixin($whereNotQueryBuilderMacro = $this->app->make(WhereNotQueryBuilderMacro::class));
-        EloquentBuilder::mixin($queryBuilderMacro);
-        EloquentBuilder::mixin($whereNotQueryBuilderMacro);
-        Relation::mixin($queryBuilderMacro);
-        Relation::mixin($whereNotQueryBuilderMacro);
-        Str::mixin($this->app->make(StrMacro::class));
-        Stringable::mixin($this->app->make(StringableMacro::class));
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
+        Collection::mixin($this->app->make(CollectionMacro::class));
+        Command::mixin($this->app->make(CommandMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
-        Command::mixin($this->app->make(CommandMacro::class));
+        Request::mixin($this->app->make(RequestMacro::class));
+        Stringable::mixin($this->app->make(StringableMacro::class));
+        Str::mixin($this->app->make(StrMacro::class));
+
+        foreach (
+            [
+                QueryBuilderMacro::class,
+                WhereNotQueryBuilderMacro::class,
+            ] as $queryBuilderMacroClass
+        ) {
+            QueryBuilder::mixin($queryBuilderMacro = $this->app->make($queryBuilderMacroClass));
+            EloquentBuilder::mixin($queryBuilderMacro);
+            Relation::mixin($queryBuilderMacro);
+        }
     }
 
     /**
@@ -210,22 +216,21 @@ class AppServiceProvider extends ServiceProvider
 
             // 有构造函数
             if ($reflectionClass->getConstructor() && $reflectionClass->getConstructor()->getNumberOfParameters()) {
-                /** @var \Symfony\Component\Finder\SplFileInfo $splFileInfo */
-                $nameOfRule = Str::of($splFileInfo->getBasename('.php'))->replaceLast('Rule', '')->snake()->__toString();
-
-                Validator::$methodOfExtend($nameOfRule, function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($classOfRule) {
-                    return tap((new $classOfRule(...$parameters)), function (Rule $rule) use ($validator) {
-                        $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
-                        $rule instanceof DataAwareRule and $rule->setData($validator->getData());
-                    })->passes($attribute, $value);
-                });
+                Validator::$methodOfExtend(
+                    $classOfRule::name(),
+                    function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($classOfRule) {
+                        return tap((new $classOfRule(...$parameters)), function (Rule $rule) use ($validator) {
+                            $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
+                            $rule instanceof DataAwareRule and $rule->setData($validator->getData());
+                        })->passes($attribute, $value);
+                    },
+                    $classOfRule::fallbackMessage()
+                );
 
                 continue;
             }
 
-            /** @var \App\Rules\Rule $rule */
-            $rule = new $classOfRule();
-            Validator::$methodOfExtend($rule->getName(), "$classOfRule@passes", $rule->message());
+            Validator::$methodOfExtend($classOfRule::name(), "$classOfRule@passes", $classOfRule::fallbackMessage());
         }
     }
 

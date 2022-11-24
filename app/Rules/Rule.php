@@ -7,11 +7,6 @@ use Illuminate\Support\Str;
 abstract class Rule implements \Illuminate\Contracts\Validation\Rule
 {
     /**
-     * @var string
-     */
-    protected $name;
-
-    /**
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
@@ -27,25 +22,25 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
      */
     public function message()
     {
-        return sprintf(':attribute 必须是有效的 %s: :input', Str::of($this->getName())->replace('_', ' ')->title());
+        return static::fallbackMessage();
     }
 
-    /**
-     * @return string
-     */
-    public function getName(): string
+    public static function fallbackMessage(): string
     {
-        return $this->name ?: $this->name = Str::of(class_basename($this))->replaceLast('Rule', '')->snake();
+        $transMessage = __($transKey = sprintf('validation.%s', $name = static::name()));
+        if ($transMessage === $transKey) {
+            $transMessage = app()->isLocale('zh_CN')
+                ? ':attribute(:input) 必须是有效的 %s。'
+                : 'The :attribute(:input) must be a valid %s.';
+
+            $transMessage = sprintf($transMessage, Str::of($name)->replace('_', ' ')->title());
+        }
+
+        return $transMessage;
     }
 
-    /**
-     * @param  string  $name
-     * @return $this
-     */
-    public function setName(string $name)
+    public static function name(): string
     {
-        $this->name = $name;
-
-        return $this;
+        return Str::of(class_basename(static::class))->replaceLast('Rule', '')->snake();
     }
 }
