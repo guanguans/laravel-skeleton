@@ -22,21 +22,25 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
      */
     public function message()
     {
-        return static::fallbackMessage();
+        return static::localizedMessage();
+    }
+
+    public static function localizedMessage(): string
+    {
+        $transMessage = __($transKey = sprintf('validation.%s', static::name()));
+
+        return $transMessage === $transKey ? static::fallbackMessage() : $transMessage;
     }
 
     public static function fallbackMessage(): string
     {
-        $transMessage = __($transKey = sprintf('validation.%s', $name = static::name()));
-        if ($transMessage === $transKey) {
-            $transMessage = app()->isLocale('zh_CN')
-                ? ':attribute(:input) 必须是有效的 %s。'
-                : 'The :attribute(:input) must be a valid %s.';
+        $transKey = app()->isLocale('zh_CN')
+            ? ':Attribute(:input) 必须是有效的 :Name。'
+            : 'The :attribute(:input) must be a valid :Name.';
 
-            $transMessage = sprintf($transMessage, Str::of($name)->replace('_', ' ')->title());
-        }
-
-        return $transMessage;
+        return __($transKey, [
+            'name' => Str::of(static::name())->replace('_', ' '),
+        ]);
     }
 
     public static function name(): string

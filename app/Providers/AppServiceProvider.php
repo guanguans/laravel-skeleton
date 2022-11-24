@@ -228,13 +228,13 @@ class AppServiceProvider extends ServiceProvider
                             $rule instanceof DataAwareRule and $rule->setData($validator->getData());
                         })->passes($attribute, $value);
                     },
-                    $classOfRule::fallbackMessage()
+                    $classOfRule::localizedMessage()
                 );
 
                 continue;
             }
 
-            Validator::$methodOfExtend($classOfRule::name(), "$classOfRule@passes", $classOfRule::fallbackMessage());
+            Validator::$methodOfExtend($classOfRule::name(), "$classOfRule@passes", $classOfRule::localizedMessage());
         }
     }
 
