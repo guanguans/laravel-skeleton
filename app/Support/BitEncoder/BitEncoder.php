@@ -3,6 +3,7 @@
 namespace App\Support\BitEncoder;
 
 use InvalidArgumentException;
+use LengthException;
 
 /**
  * 主要用来处理数据库多个值单字段储存问题。
@@ -53,40 +54,53 @@ class BitEncoder implements BitEncoderInterface
     /**
      * @var mixed[]
      */
-    private array $set;
+    protected array $set;
 
     public function __construct(array $set)
     {
-        if (! array_is_list($set)) {
-            throw new InvalidArgumentException(sprintf('The set is not list array.'));
-        }
-
-        $maxCount = (PHP_INT_SIZE == 4 ? 32 : 64) - 1;
-        if (($count = count($set)) > $maxCount) {
-            throw new InvalidArgumentException(sprintf('The maximum number of elements is %s.:%s', $maxCount, $count));
-        }
-
-        $this->set = $set;
+        $this->setSet($set);
     }
 
     public function encode(array $set): int
     {
-        $intersectSetIndices = array_keys(array_intersect($this->set, $set));
+        $intersectedSet = array_intersect($this->set, $set);
 
-        return array_reduce($intersectSetIndices, function (int $value, int $index) {
-            return $value | (2 ** $index);
+        return array_reduce(array_keys($intersectedSet), function (int $value, int $index) {
+            return $value | (1 << $index);
         }, 0);
     }
 
     public function decode(int $value): array
     {
         $set = [];
-        foreach ($this->set as  $index => $item) {
-            if (($value & (2 ** $index)) > 0) {
+        foreach ($this->set as $index => $item) {
+            if (($value & (1 << $index)) > 0) {
                 $set[] = $item;
             }
         }
 
         return $set;
+    }
+
+    public function getSet(): array
+    {
+        return $this->set;
+    }
+
+    public function setSet(array $set): void
+    {
+        if (! array_is_list($set)) {
+            throw new InvalidArgumentException('The set is not an array of lists.');
+        }
+
+        if (array_filter(array_count_values($set), fn (int $count) => $count > 1)) {
+            throw new InvalidArgumentException('The set is not a unique array of values.');
+        }
+
+        if (($count = count($set)) > ($maxCount = PHP_INT_SIZE == 4 ? 31 : 63)) {
+            throw new LengthException("The number({$maxCount}) of elements is greater than the maximum length({$count}).");
+        }
+
+        $this->set = $set;
     }
 }
