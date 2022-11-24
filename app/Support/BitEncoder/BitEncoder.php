@@ -8,7 +8,7 @@ use LengthException;
 /**
  * 主要用来处理数据库多个值单字段储存问题。
  *
- * ```
+ * ```php
  * $provinceSet = [
  *     110000,
  *     120000,
@@ -45,13 +45,15 @@ use LengthException;
  *
  * $bitEncoder = new BitEncoder($provinceSet);
  * $provinces = [110000, 210000, 310000, 410000, 510000, 610000];
- * $bitEncoder->encode($provinces);// 71336225
+ * $bitEncoder->encode($provinces); // 71336225
  * $bitEncoder->decode(71336225); // [110000, 210000, 310000, 410000, 510000, 610000]
  * ```
  */
 class BitEncoder implements BitEncoderInterface
 {
     /**
+     * 无重复元素的数组.
+     *
      * @var mixed[]
      */
     protected array $set;
@@ -61,25 +63,106 @@ class BitEncoder implements BitEncoderInterface
         $this->setSet($set);
     }
 
+    /**
+     * 编码.
+     *
+     * @throws \InvalidArgumentException
+     */
     public function encode(array $set): int
     {
-        $intersectedSet = array_intersect($this->set, $set);
-
-        return array_reduce(array_keys($intersectedSet), function (int $value, int $index) {
-            return $value | (1 << $index);
-        }, 0);
+        return $this->attach(0, ...$set);
     }
 
+    /**
+     * 解码.
+     *
+     * @throws \InvalidArgumentException
+     */
     public function decode(int $value): array
     {
-        $set = [];
-        foreach ($this->set as $index => $item) {
-            if (($value & (1 << $index)) > 0) {
-                $set[] = $item;
-            }
+        return array_filter($this->set, fn ($item) => $this->has($value, $item));
+    }
+
+    /**
+     * 附加.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function attach(int $value, ...$set): int
+    {
+        if ($value < 0) {
+            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
         }
 
-        return $set;
+        return array_reduce($set, function (int $value, $item) {
+            $index = array_search($item, $this->set, true);
+            if ($index !== false) {
+                $value |= (1 << $index);
+            }
+
+            return $value;
+        }, $value);
+    }
+
+    /**
+     * 移除.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function detach(int $value, ...$set): int
+    {
+        if ($value < 0) {
+            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
+        }
+
+        return array_reduce($set, function (int $value, $item) {
+            $index = array_search($item, $this->set, true);
+            if ($index !== false) {
+                $value &= (~(1 << $index));
+            }
+
+            return $value;
+        }, $value);
+    }
+
+    /**
+     * 拥有.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function has(int $value, $item): bool
+    {
+        if ($value < 0) {
+            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
+        }
+
+        $index = array_search($item, $this->set, true);
+        if ($index === false) {
+            return false;
+        }
+
+        $bit = 1 << $index;
+
+        return ($value & $bit) === $bit;
+    }
+
+    /**
+     * 缺少.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function lack(int $value, $item): bool
+    {
+        if ($value < 0) {
+            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
+        }
+
+        $index = array_search($item, $this->set, true);
+        if ($index === false) {
+            return true;
+        }
+
+        return ($value & (1 << $index)) === 0;
     }
 
     public function getSet(): array
@@ -94,7 +177,7 @@ class BitEncoder implements BitEncoderInterface
         }
 
         if (array_filter(array_count_values($set), fn (int $count) => $count > 1)) {
-            throw new InvalidArgumentException('The set is not a unique array of values.');
+            throw new InvalidArgumentException('The set must be an array with no duplicate elements.');
         }
 
         if (($count = count($set)) > ($maxCount = PHP_INT_SIZE == 4 ? 31 : 63)) {
