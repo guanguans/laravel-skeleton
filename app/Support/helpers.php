@@ -363,27 +363,31 @@ if (! function_exists('stopwatch')) {
     }
 }
 
-if (! function_exists('rercord_query_log')) {
+if (! function_exists('catch_query_log')) {
     /**
      * @param  callable|string  $callback
      * @param    ...$parameter
      * @return array
      */
-    function rercord_query_log($callback, ...$parameter)
+    function catch_query_log($callback, ...$parameter)
     {
-        return (new Pipeline())
+        return (new Pipeline(app()))
             ->send($callback)
-            ->through(function ($callback, $next) {
-                DB::enableQueryLog();
-                DB::flushQueryLog();
+            ->through(function ($callback, Closure $next) {
+                \Illuminate\Support\Facades\DB::enableQueryLog();
+                \Illuminate\Support\Facades\DB::flushQueryLog();
 
-                return $next($callback);
+                $queryLog = $next($callback);
+
+                \Illuminate\Support\Facades\DB::disableQueryLog();
+
+                return $queryLog;
             })
             ->then(function ($callback) use ($parameter) {
                 /** @var array<string, mixed> $parameter */
                 Laravel::call($callback, $parameter);
 
-                return DB::getQueryLog();
+                return \Illuminate\Support\Facades\DB::getQueryLog();
             });
     }
 }
