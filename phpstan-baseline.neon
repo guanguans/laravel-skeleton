@@ -6,6 +6,21 @@ parameters:
 			path: app/Casts/CallbackGetCast.php
 
 		-
+			message: "#^Call to method check\\(\\) on an unknown class Composer\\\\XdebugHandler\\\\XdebugHandler\\.$#"
+			count: 1
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
+			message: "#^Instantiated class Composer\\\\XdebugHandler\\\\XdebugHandler not found\\.$#"
+			count: 1
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$pattern of method Illuminate\\\\Support\\\\Stringable\\:\\:is\\(\\) expects iterable\\<string\\>\\|string, array\\<string\\> given\\.$#"
+			count: 1
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
 			message: "#^Parameter \\#2 \\$value of function ini_set expects string, int given\\.$#"
 			count: 2
 			path: app/Console/Commands/FindDumpStatementCommand.php
@@ -19,6 +34,16 @@ parameters:
 			message: "#^Property App\\\\Console\\\\Commands\\\\FindDumpStatementCommand\\:\\:\\$statements has unknown class string as its type\\.$#"
 			count: 1
 			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
+			message: "#^Call to method check\\(\\) on an unknown class Composer\\\\XdebugHandler\\\\XdebugHandler\\.$#"
+			count: 1
+			path: app/Console/Commands/GenerateTestsCommand.php
+
+		-
+			message: "#^Instantiated class Composer\\\\XdebugHandler\\\\XdebugHandler not found\\.$#"
+			count: 1
+			path: app/Console/Commands/GenerateTestsCommand.php
 
 		-
 			message: "#^Parameter \\#2 \\$value of function ini_set expects string, int given\\.$#"
@@ -51,6 +76,11 @@ parameters:
 			path: app/Console/Commands/GenerateTestsCommand.php
 
 		-
+			message: "#^Parameter \\#1 \\$callback of method Illuminate\\\\Support\\\\Collection\\<int,ReflectionMethod\\>\\:\\:pipe\\(\\) expects callable\\(Illuminate\\\\Support\\\\Collection\\<int, ReflectionMethod\\>\\)\\: Illuminate\\\\Support\\\\Collection\\<int, array\\{index\\: int, message\\: string\\|null, resource\\: Illuminate\\\\Support\\\\Stringable, state\\: App\\\\Enums\\\\HealthCheckStateEnum\\}\\>, Closure\\(Illuminate\\\\Support\\\\Collection\\)\\: Illuminate\\\\Support\\\\Collection\\<int, array\\{index\\: int\\<1, max\\>, message\\: string\\|null, resource\\: Illuminate\\\\Support\\\\Stringable, state\\: App\\\\Enums\\\\HealthCheckStateEnum\\}\\> given\\.$#"
+			count: 1
+			path: app/Console/Commands/HealthCheckCommand.php
+
+		-
 			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
 			count: 1
 			path: app/Macros/BlueprintMacro.php
@@ -64,6 +94,11 @@ parameters:
 			message: "#^Argument of an invalid type App\\\\Macros\\\\CollectionMacro supplied for foreach, only iterables are supported\\.$#"
 			count: 2
 			path: app/Macros/CollectionMacro.php
+
+		-
+			message: "#^Access to protected property App\\\\Macros\\\\CommandMacro\\:\\:\\$output\\.$#"
+			count: 6
+			path: app/Macros/CommandMacro.php
 
 		-
 			message: "#^Access to an undefined property Illuminate\\\\Support\\\\Fluent\\:\\:\\$comment\\.$#"
@@ -156,19 +191,34 @@ parameters:
 			path: app/Models/Model.php
 
 		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 2
-			path: app/Models/Model.php
-
-		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
 			count: 2
 			path: app/Models/Model.php
 
 		-
+			message: "#^Access to an undefined property App\\\\Models\\\\JWTUser\\:\\:\\$locale\\.$#"
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: "#^Using nullsafe method call on non\\-nullable type Illuminate\\\\Http\\\\Request\\. Use \\-\\> instead\\.$#"
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
 			message: "#^Parameter \\#3 \\$logLevel of static method GuzzleHttp\\\\Middleware\\:\\:log\\(\\) expects 'alert'\\|'critical'\\|'debug'\\|'emergency'\\|'error'\\|'info'\\|'notice'\\|'warning', string given\\.$#"
 			count: 1
 			path: app/Support/FoundationSdk.php
+
+		-
+			message: "#^PHPDoc tag @param references unknown parameter\\: \\$handler$#"
+			count: 1
+			path: app/Support/HandlerStack.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 1
+			path: app/Support/HandlerStack.php
 
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"

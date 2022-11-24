@@ -230,7 +230,7 @@ HTML;
 
             $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.$sizes[$i] ?? '';
+            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.$sizes[$i];
         }
 
         return '0';
