@@ -2,6 +2,7 @@
 
 namespace App\Support\BitEncoder;
 
+use Generator;
 use InvalidArgumentException;
 use LengthException;
 
@@ -130,6 +131,91 @@ class BitEncoder implements BitEncoderInterface
         }
 
         return ($value & (1 << $index)) === 0;
+    }
+
+    /**
+     * 获取包含该集合的所有组合的编码值.
+     */
+    public function getHasCombinationsValues(array $set, int $length = 1024): array
+    {
+        return array_map(function (array $set) {
+            return $this->encode($set);
+        }, $this->getHasCombinations($set, $length));
+    }
+
+    /**
+     * 获取包含该集合的所有组合.
+     */
+    public function getHasCombinations(array $set, int $length = 1024): array
+    {
+        $combinationsCount = $this->getHasCombinationsCount($set);
+        if ($combinationsCount > $length) {
+            trigger_error('Did not get all combinations.');
+        }
+
+        $combinations = [];
+        foreach ($this->getHasCombinationsGenerator($set) as $index => $combination) {
+            if ($length >= 0 && $index >= $length) {
+                break;
+            }
+
+            $combinations[] = $combination;
+        }
+
+        return $combinations;
+    }
+
+    /**
+     * 获取包含该集合的所有组合的生成器.
+     */
+    public function getHasCombinationsGenerator(array $set): Generator
+    {
+        $set = array_intersect($this->set, $set);
+        if (empty($set)) {
+            return; // 中断
+        }
+
+        $subSetCount = count($set);
+        $setCount = count($this->set);
+        for ($i = $subSetCount; $i <= $setCount; $i++) {
+            foreach ($this->combinationGenerator($this->set, $i) as $combination) {
+                if (array_values(array_intersect($combination, $set)) === array_values($set)) {
+                    yield $combination;
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取包含该集合的所有组合的数量.
+     */
+    public function getHasCombinationsCount(array $set): int
+    {
+        return 2 ** (count($this->set) - count(array_intersect($this->set, $set)));
+    }
+
+    /**
+     * 组合生成器.
+     */
+    protected function combinationGenerator(array $set, int $length): Generator
+    {
+        $originalLength = count($set);
+        $remainingLength = $originalLength - $length + 1;
+
+        for ($i = 0; $i < $remainingLength; $i++) {
+            $current = $set[$i];
+
+            if (1 === $length) {
+                yield [$current];
+            } else {
+                $remaining = array_slice($set, $i + 1);
+
+                foreach ($this->combinationGenerator($remaining, $length - 1) as $permutation) {
+                    array_unshift($permutation, $current);
+                    yield $permutation;
+                }
+            }
+        }
     }
 
     public function getSet(): array
