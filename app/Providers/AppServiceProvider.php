@@ -297,6 +297,28 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo date($newExpression);?>";
         });
 
+        /**
+         * 自定义 if 声明
+         *
+         * ```blade
+         *
+         * @disk('local')
+         *     <! --应用正在使用 local 存储...-->
+         * @elsedisk('s3')
+         *     <! --应用正在使用 s3 存储...-->
+         * @else
+         *     <! --应用正在使用其他存储...-->
+         * @enddisk
+         *
+         * @unlessdisk('local')
+         *     < ! --应用当前没有使用 local 存储...-->
+         * @enddisk
+         * ```
+         */
+        Blade::if('disk', function ($value) {
+            return config('filesystems.default') === $value;
+        });
+
         // 回显变量
         Blade::stringable(function (Request $request) {
             return json_encode($request->all(), JSON_PRETTY_PRINT);
