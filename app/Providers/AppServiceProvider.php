@@ -7,11 +7,9 @@ use App\Macros\CollectionMacro;
 use App\Macros\CommandMacro;
 use App\Macros\GrammarMacro;
 use App\Macros\MySqlGrammarMacro;
-use App\Macros\QueryBuilderMacro;
 use App\Macros\RequestMacro;
 use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
-use App\Macros\WhereNotQueryBuilderMacro;
 use App\Rules\Rule;
 use App\Traits\Conditionable;
 use App\View\Components\AlertComponent;
@@ -29,7 +27,6 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar;
-use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -37,10 +34,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -74,11 +68,9 @@ class AppServiceProvider extends ServiceProvider
         CommandMacro::class,
         GrammarMacro::class,
         MySqlGrammarMacro::class,
-        QueryBuilderMacro::class,
         RequestMacro::class,
         StringableMacro::class,
         StrMacro::class,
-        WhereNotQueryBuilderMacro::class,
     ];
 
     /**
@@ -172,13 +164,18 @@ class AppServiceProvider extends ServiceProvider
         Stringable::mixin($this->app->make(StringableMacro::class));
         Str::mixin($this->app->make(StrMacro::class));
 
-        foreach (
-            [
-                QueryBuilderMacro::class,
-                WhereNotQueryBuilderMacro::class,
-            ] as $queryBuilderMacroClass
-        ) {
-            QueryBuilder::mixin($queryBuilderMacro = $this->app->make($queryBuilderMacroClass));
+        foreach (Finder::create()->files()->name('*ueryBuilderMacro.php')->in($this->app->path('Macros/QueryBuilder')) as $splFileInfo) {
+            $classOfQueryBuilderMacro = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
+                $class = trim(Str::replaceFirst(base_path(), '', $splFileInfo->getRealPath()), DIRECTORY_SEPARATOR);
+
+                return str_replace(
+                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
+                    ['\\', app()->getNamespace()],
+                    ucfirst(Str::replaceLast('.php', '', $class))
+                );
+            });
+
+            QueryBuilder::mixin($queryBuilderMacro = $this->app->make($classOfQueryBuilderMacro));
             EloquentBuilder::mixin($queryBuilderMacro);
             Relation::mixin($queryBuilderMacro);
         }

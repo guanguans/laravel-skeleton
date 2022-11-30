@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Macros;
+namespace App\Macros\QueryBuilder;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Illuminate\Database\Query\Builder
+ * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  *
  * @see https://github.com/protonemedia/laravel-eloquent-where-not
  */
