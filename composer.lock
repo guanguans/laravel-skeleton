@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f55b4f955008e0d0838efddac49e427",
+    "content-hash": "cbe55201652ecc4c366a9e1c65716048",
     "packages": [
         {
             "name": "appstract/laravel-blade-directives",
@@ -12114,6 +12114,67 @@
             "time": "2022-09-07T15:32:08+00:00"
         },
         {
+            "name": "mortexa/laravel-arkitect",
+            "version": "v0.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smortexa/laravel-arkitect.git",
+                "reference": "2c4fe61112bd864aec80b7f5a358ce1674509350"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smortexa/laravel-arkitect/zipball/2c4fe61112bd864aec80b7f5a358ce1674509350",
+                "reference": "2c4fe61112bd864aec80b7f5a358ce1674509350",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^8.0",
+                "phparkitect/phparkitect": "^0.2.26"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^6.6|^7.6",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.2",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mortexa\\LaravelArkitect\\ArkitectServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mortexa\\LaravelArkitect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SMortexa Ebadi",
+                    "email": "seyed.me720@gmail.com"
+                }
+            ],
+            "description": "Test and enforce architectural rules in your Laravel applications",
+            "support": {
+                "issues": "https://github.com/smortexa/laravel-arkitect/issues",
+                "source": "https://github.com/smortexa/laravel-arkitect/tree/v0.3.3"
+            },
+            "time": "2022-08-19T01:29:29+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.11.0",
             "source": {
@@ -12505,6 +12566,83 @@
                 "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
             "time": "2022-02-21T01:04:05+00:00"
+        },
+        {
+            "name": "phparkitect/phparkitect",
+            "version": "0.2.32",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phparkitect/arkitect.git",
+                "reference": "66b5f5ee0f2da606ee50cfb58be52f73fd76c148"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phparkitect/arkitect/zipball/66b5f5ee0f2da606ee50cfb58be52f73fd76c148",
+                "reference": "66b5f5ee0f2da606ee50cfb58be52f73fd76c148",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-json": "*",
+                "nikic/php-parser": "~4",
+                "php": "^7.1|^8",
+                "symfony/console": "^3.0|^4.0|^5.0|^6.0",
+                "symfony/event-dispatcher": "^3.0|^4.0|^5.0|^6.0",
+                "symfony/finder": "^3.0|^4.0|^5.0|^6.0",
+                "symfony/polyfill-php80": "^1.20",
+                "webmozart/assert": "^1.9"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "mikey179/vfsstream": "^1.6",
+                "phpspec/prophecy": "^1.10",
+                "phpunit/phpunit": "^7.5|^9.0",
+                "roave/security-advisories": "dev-master",
+                "symfony/var-dumper": "^3.0|^4.0|^5.0|^6.0",
+                "vimeo/psalm": "^4.6"
+            },
+            "bin": [
+                "bin-stub/phparkitect"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arkitect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pietro Campagnano",
+                    "email": "hello@pietro.camp"
+                },
+                {
+                    "name": "Patrick Luca Fazzi",
+                    "email": "patrick91@live.it"
+                },
+                {
+                    "name": "Alessandro Minoccheri",
+                    "email": "alessandro.minoccheri@gmail.com"
+                },
+                {
+                    "name": "Michele Orselli",
+                    "email": "michele.orselli@gmail.com"
+                }
+            ],
+            "description": "Enforce architectural constraints in your PHP applications",
+            "support": {
+                "issues": "https://github.com/phparkitect/arkitect/issues",
+                "source": "https://github.com/phparkitect/arkitect/tree/0.2.32"
+            },
+            "time": "2022-10-11T16:36:19+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

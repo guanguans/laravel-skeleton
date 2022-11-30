@@ -67,6 +67,7 @@
         "laravel/pint": "^1.2",
         "laravel/sail": "^1.16",
         "mockery/mockery": "^1.5",
+        "mortexa/laravel-arkitect": "^0.3.3",
         "nunomaduro/collision": "^6.3",
         "nunomaduro/larastan": "^2.2",
         "orangehill/iseed": "^3.0",
@@ -137,6 +138,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
+        "arkitect": "@php artisan test:arkitect",
         "cghooks": "./vendor/bin/cghooks",
         "checks": [
             "@mark-start",
