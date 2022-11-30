@@ -94,7 +94,7 @@ class BitEncoder implements BitEncoderInterface
     }
 
     /**
-     * 拥有.
+     * 包含.
      *
      * @throws \InvalidArgumentException
      */
@@ -144,17 +144,49 @@ class BitEncoder implements BitEncoderInterface
     }
 
     /**
+     * 获取缺少该集合的所有组合的编码值.
+     */
+    public function getLackCombinationsValues(array $set, int $length = 1024): array
+    {
+        return array_map(function (array $set) {
+            return $this->encode($set);
+        }, $this->getLackCombinations($set, $length));
+    }
+
+    /**
      * 获取包含该集合的所有组合.
      */
     public function getHasCombinations(array $set, int $length = 1024): array
     {
         $combinationsCount = $this->getHasCombinationsCount($set);
         if ($combinationsCount > $length) {
-            trigger_error('Did not get all combinations.');
+            trigger_error('Did not get all has combinations.');
         }
 
         $combinations = [];
         foreach ($this->getHasCombinationsGenerator($set) as $index => $combination) {
+            if ($length >= 0 && $index >= $length) {
+                break;
+            }
+
+            $combinations[] = $combination;
+        }
+
+        return $combinations;
+    }
+
+    /**
+     * 获取缺少该集合的所有组合.
+     */
+    public function getLackCombinations(array $set, int $length = 1024): array
+    {
+        $combinationsCount = $this->getLackCombinationsCount($set);
+        if ($combinationsCount > $length) {
+            trigger_error('Did not get all lack combinations.');
+        }
+
+        $combinations = [];
+        foreach ($this->getLackCombinationsGenerator($set) as $index => $combination) {
             if ($length >= 0 && $index >= $length) {
                 break;
             }
@@ -187,46 +219,6 @@ class BitEncoder implements BitEncoderInterface
     }
 
     /**
-     * 获取包含该集合的所有组合的数量.
-     */
-    public function getHasCombinationsCount(array $set): int
-    {
-        return 2 ** (count($this->set) - count(array_intersect($this->set, $set)));
-    }
-
-    /**
-     * 获取缺少该集合的所有组合的编码值.
-     */
-    public function getLackCombinationsValues(array $set, int $length = 1024): array
-    {
-        return array_map(function (array $set) {
-            return $this->encode($set);
-        }, $this->getLackCombinations($set, $length));
-    }
-
-    /**
-     * 获取缺少该集合的所有组合.
-     */
-    public function getLackCombinations(array $set, int $length = 1024): array
-    {
-        $combinationsCount = $this->getLackCombinationsCount($set);
-        if ($combinationsCount > $length) {
-            trigger_error('Did not get all combinations.');
-        }
-
-        $combinations = [];
-        foreach ($this->getLackCombinationsGenerator($set) as $index => $combination) {
-            if ($length >= 0 && $index >= $length) {
-                break;
-            }
-
-            $combinations[] = $combination;
-        }
-
-        return $combinations;
-    }
-
-    /**
      * 获取缺少该集合的所有组合的生成器.
      */
     public function getLackCombinationsGenerator(array $set): Generator
@@ -254,11 +246,30 @@ class BitEncoder implements BitEncoderInterface
     }
 
     /**
+     * 获取包含该集合的所有组合的数量.
+     */
+    public function getHasCombinationsCount(array $set): int
+    {
+        if (($subSetCount = count(array_intersect($this->set, $set))) === 0) {
+            return 0;
+        }
+
+        return 2 ** (count($this->set) - $subSetCount);
+    }
+
+    /**
      * 获取缺少该集合的所有组合的数量.
      */
     public function getLackCombinationsCount(array $set): int
     {
-        return 2 ** (count($this->set) - count(array_intersect($this->set, $set)));
+        if (count(array_intersect($this->set, $set)) === 0) {
+            return 0;
+        }
+
+        // ((2 ** n) - 1) - (2 ** (n - m))
+        // ((2 ** n) - 1) - (2 ** n ) / (2 ** m)
+
+        return $this->getCombinationsCount() - $this->getHasCombinationsCount($set);
     }
 
     /**
@@ -266,7 +277,7 @@ class BitEncoder implements BitEncoderInterface
      */
     public function getCombinationsCount(): int
     {
-        return 2 ** (count($this->set) - count(array_intersect($this->set, $set)));
+        return 2 ** count($this->set) - 1;
     }
 
     /**
