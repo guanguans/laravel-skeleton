@@ -6,6 +6,44 @@ use Illuminate\Support\Facades\DB;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
+if (! function_exists('make')) {
+    /**
+     * @param  string|array  $abstract
+     * @return mixed
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    function make($abstract, array $parameters = [])
+    {
+        if (! in_array(gettype($abstract), ['string', 'array'])) {
+            throw new \InvalidArgumentException(sprintf('Invalid argument type(string/array): %s.', gettype($abstract)));
+        }
+
+        if (is_string($abstract)) {
+            return app($abstract, $parameters);
+        }
+
+        if (isset($abstract['__class'])) {
+            $parameters = Arr::except($abstract, '__class') + $parameters;
+            /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+            $abstract = $abstract['__class'];
+
+            return make($abstract, $parameters);
+        }
+
+        if (isset($abstract['class'])) {
+            $parameters = Arr::except($abstract, '__class') + $parameters;
+            /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+            $abstract = $abstract['class'];
+
+            return make($abstract, $parameters);
+        }
+
+        throw new \InvalidArgumentException('Argument must be an array containing a "class" or "__class" element.');
+    }
+}
+
 if (! function_exists('resolve_class_from_real_path')) {
     function resolve_class_from_real_path(string $realPath, ?string $basePath = null, ?string $baseVendorName = null, ?string $baseVendorNamespace = null): string
     {
