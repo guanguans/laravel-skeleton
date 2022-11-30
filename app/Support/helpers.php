@@ -6,6 +6,24 @@ use Illuminate\Support\Facades\DB;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
+if (! function_exists('resolve_class_from_real_path')) {
+    function resolve_class_from_real_path(string $realPath, ?string $basePath = null, ?string $baseVendorName = null, ?string $baseVendorNamespace = null): string
+    {
+        $basePath ??= base_path();
+        $baseVendorName ??= basename(app()->path()); // app
+        $baseVendorNamespace ??= app()->getNamespace(); // App\
+
+        return \str($realPath)
+            ->replaceFirst($basePath, '')
+            ->replaceLast('.php', '')
+            ->replace(
+                [DIRECTORY_SEPARATOR, $baseVendorName.'\\'],
+                ['\\', $baseVendorNamespace],
+            )
+            ->toString();
+    }
+}
+
 if (! function_exists('environment')) {
     function environment(): string
     {

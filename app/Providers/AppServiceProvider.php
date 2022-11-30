@@ -44,7 +44,6 @@ use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
 use ReflectionClass;
 use Reliese\Coders\CodersServiceProvider;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -165,17 +164,8 @@ class AppServiceProvider extends ServiceProvider
         Str::mixin($this->app->make(StrMacro::class));
 
         foreach (Finder::create()->files()->name('*ueryBuilderMacro.php')->in($this->app->path('Macros/QueryBuilder')) as $splFileInfo) {
-            $classOfQueryBuilderMacro = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
-                $class = trim(Str::replaceFirst(base_path(), '', $splFileInfo->getRealPath()), DIRECTORY_SEPARATOR);
-
-                return str_replace(
-                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
-                    ['\\', app()->getNamespace()],
-                    ucfirst(Str::replaceLast('.php', '', $class))
-                );
-            });
-
-            QueryBuilder::mixin($queryBuilderMacro = $this->app->make($classOfQueryBuilderMacro));
+            $class = resolve_class_from_real_path($splFileInfo->getRealPath());
+            QueryBuilder::mixin($queryBuilderMacro = $this->app->make($class));
             EloquentBuilder::mixin($queryBuilderMacro);
             Relation::mixin($queryBuilderMacro);
         }
@@ -187,16 +177,7 @@ class AppServiceProvider extends ServiceProvider
     protected function extendValidatorFrom(string|array $dirs, string|array $name = '*Rule.php', string|array $notName = [])
     {
         foreach (Finder::create()->files()->name($name)->notName($notName)->in($dirs) as $splFileInfo) {
-            $classOfRule = transform($splFileInfo, function (SplFileInfo $splFileInfo) {
-                $class = trim(Str::replaceFirst(base_path(), '', $splFileInfo->getRealPath()), DIRECTORY_SEPARATOR);
-
-                return str_replace(
-                    [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
-                    ['\\', app()->getNamespace()],
-                    ucfirst(Str::replaceLast('.php', '', $class))
-                );
-            });
-
+            $classOfRule = resolve_class_from_real_path($splFileInfo->getRealPath());
             if (! is_subclass_of($classOfRule, Rule::class)) {
                 continue;
             }
