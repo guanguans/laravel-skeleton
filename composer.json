@@ -24,7 +24,7 @@
         "fruitcake/laravel-cors": "^3.0",
         "goldspecdigital/laravel-eloquent-uuid": "^9.0",
         "guanguans/laravel-dump-sql": "^2.2",
-        "guanguans/laravel-exception-notify": "^2.12",
+        "guanguans/laravel-exception-notify": "^2.14",
         "guzzlehttp/guzzle": "^7.5",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^4.4",

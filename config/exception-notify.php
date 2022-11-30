@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of the guanguans/laravel-exception-notify.
  *
@@ -9,6 +11,7 @@
  */
 
 use Guanguans\LaravelExceptionNotify\Pipelines\AppendContentPipeline;
+use Guanguans\LaravelExceptionNotify\Pipelines\FixPrettyJsonPipeline;
 use Guanguans\LaravelExceptionNotify\Pipelines\LengthLimitPipeline;
 use Guanguans\LaravelExceptionNotify\Pipelines\StrReplacePipeline;
 use Guanguans\LaravelExceptionNotify\Pipelines\ToHtmlPipeline;
@@ -58,6 +61,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Connection of queue.
+    |--------------------------------------------------------------------------
+    */
+    'queue_connection' => env('EXCEPTION_NOTIFY_QUEUE_CONNECTION', config('queue.default', 'sync')),
+
+    /*
+    |--------------------------------------------------------------------------
     | Exception notification rate limiter.
     |--------------------------------------------------------------------------
     |
@@ -66,12 +76,12 @@ return [
     |
     */
     'rate_limiter' => [
-        // Config.
+        // Config(相同异常生产环境默认每 5 分钟通知 1 次).
         'config' => [
-            'limit' => (int) env('EXCEPTION_NOTIFY_LIMIT', 1),
+            'limit' => (int) env('EXCEPTION_NOTIFY_LIMIT', config('app.debug') ? 50 : 1),
             'rate' => [
                 // https://www.php.net/manual/en/datetime.formats.php
-                'interval' => env('EXCEPTION_NOTIFY_INTERVAL', '1 minutes'),
+                'interval' => env('EXCEPTION_NOTIFY_INTERVAL', '5 minutes'),
             ],
         ],
 
@@ -93,7 +103,7 @@ return [
     | The title of the exception notification report.
     |
     */
-    'title' => env('EXCEPTION_NOTIFY_REPORT_TITLE', sprintf('%s application exception report.', config('app.name'))),
+    'title' => env('EXCEPTION_NOTIFY_REPORT_TITLE', sprintf('%s application exception report', config('app.name'))),
 
     /*
     |--------------------------------------------------------------------------
@@ -147,6 +157,7 @@ return [
             'group' => env('EXCEPTION_NOTIFY_BARK_GROUP', config('app.name')),
             'pipeline' => [
                 sprintf('%s:%s', LengthLimitPipeline::class, 1024),
+                FixPrettyJsonPipeline::class,
             ],
         ],
 
@@ -157,6 +168,7 @@ return [
             'token' => env('EXCEPTION_NOTIFY_CHANIFY_TOKEN'),
             'pipeline' => [
                 sprintf('%s:%s', LengthLimitPipeline::class, 1024),
+                FixPrettyJsonPipeline::class,
             ],
         ],
 
@@ -168,6 +180,7 @@ return [
             'keyword' => env('EXCEPTION_NOTIFY_DINGTALK_KEYWORD'),
             'pipeline' => [
                 sprintf('%s:%s', LengthLimitPipeline::class, 20000),
+                FixPrettyJsonPipeline::class,
                 sprintf('%s:%s', AppendContentPipeline::class, env('EXCEPTION_NOTIFY_DINGTALK_KEYWORD')),
             ],
         ],
@@ -178,6 +191,7 @@ return [
             'webhook_url' => env('EXCEPTION_NOTIFY_DISCORD_WEBHOOK_URL'),
             'pipeline' => [
                 sprintf('%s:%s', LengthLimitPipeline::class, 2000),
+                FixPrettyJsonPipeline::class,
             ],
         ],
 
@@ -189,6 +203,7 @@ return [
             'keyword' => env('EXCEPTION_NOTIFY_FEISHU_KEYWORD'),
             'pipeline' => [
                 sprintf('%s:%s', LengthLimitPipeline::class, 30720),
+                FixPrettyJsonPipeline::class,
                 sprintf('%s:%s', AppendContentPipeline::class, env('EXCEPTION_NOTIFY_FEISHU_KEYWORD')),
             ],
         ],
@@ -202,8 +217,10 @@ return [
         ],
 
         // 邮件
+        // 安装依赖 composer require symfony/mailer -vvv
         'mail' => [
             'driver' => 'mail',
+            // smtp://53***11@qq.com:***password***@smtp.qq.com:465?verify_peer=0
             'dsn' => env('EXCEPTION_NOTIFY_MAIL_DSN'),
             'from' => env('EXCEPTION_NOTIFY_MAIL_FROM'),
             'to' => env('EXCEPTION_NOTIFY_MAIL_TO'),
@@ -223,6 +240,7 @@ return [
         ],
 
         // QQ Channel Bot
+        // 安装依赖 composer require textalk/websocket -vvv
         'qqChannelBot' => [
             'driver' => 'qqChannelBot',
             'appid' => env('EXCEPTION_NOTIFY_QQCHANNELBOT_APPID'),
@@ -259,6 +277,7 @@ return [
             'chat_id' => env('EXCEPTION_NOTIFY_TELEGRAM_CHAT_ID'),
             'pipeline' => [
                 sprintf('%s:%s', LengthLimitPipeline::class, 4096),
+                FixPrettyJsonPipeline::class,
             ],
         ],
 
@@ -268,6 +287,7 @@ return [
             'token' => env('EXCEPTION_NOTIFY_WEWORK_TOKEN'),
             'pipeline' => [
                 sprintf('%s:%s', LengthLimitPipeline::class, 5120),
+                FixPrettyJsonPipeline::class,
             ],
         ],
 
