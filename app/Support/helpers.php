@@ -8,7 +8,8 @@ use SebastianBergmann\Timer\Timer;
 
 if (! function_exists('make')) {
     /**
-     * @param  string|array  $abstract
+     * @psalm-param string|array<string, mixed> $abstract
+     *
      * @return mixed
      *
      * @throws \InvalidArgumentException
@@ -17,30 +18,30 @@ if (! function_exists('make')) {
     function make($abstract, array $parameters = [])
     {
         if (! in_array(gettype($abstract), ['string', 'array'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid argument type(string/array): %s.', gettype($abstract)));
+            throw new \InvalidArgumentException(
+                sprintf('Invalid argument type(string/array): %s.', gettype($abstract))
+            );
         }
 
         if (is_string($abstract)) {
             return app($abstract, $parameters);
         }
 
-        if (isset($abstract['__class'])) {
-            $parameters = Arr::except($abstract, '__class') + $parameters;
-            /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-            $abstract = $abstract['__class'];
+        $classes = ['__class', '_class', 'class'];
+        foreach ($classes as $class) {
+            if (! isset($abstract[$class])) {
+                continue;
+            }
+
+            $parameters = Arr::except($abstract, $class) + $parameters;
+            $abstract = $abstract[$class];
 
             return make($abstract, $parameters);
         }
 
-        if (isset($abstract['class'])) {
-            $parameters = Arr::except($abstract, '__class') + $parameters;
-            /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-            $abstract = $abstract['class'];
-
-            return make($abstract, $parameters);
-        }
-
-        throw new \InvalidArgumentException('Argument must be an array containing a "class" or "__class" element.');
+        throw new \InvalidArgumentException(
+            sprintf('The argument of abstract must be an array containing a `%s` element.', implode('` or `', $classes))
+        );
     }
 }
 
