@@ -163,9 +163,9 @@ class AppServiceProvider extends ServiceProvider
         Stringable::mixin($this->app->make(StringableMacro::class));
         Str::mixin($this->app->make(StrMacro::class));
 
-        foreach (Finder::create()->files()->name('*ueryBuilderMacro.php')->in($this->app->path('Macros/QueryBuilder')) as $splFileInfo) {
-            $class = resolve_class_from_real_path($splFileInfo->getRealPath());
-            QueryBuilder::mixin($queryBuilderMacro = $this->app->make($class));
+        $files = glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php'));
+        foreach ($files as $file) {
+            QueryBuilder::mixin($queryBuilderMacro = $this->app->make(resolve_class_from_path($file)));
             EloquentBuilder::mixin($queryBuilderMacro);
             Relation::mixin($queryBuilderMacro);
         }
@@ -177,17 +177,17 @@ class AppServiceProvider extends ServiceProvider
     protected function extendValidatorFrom(string|array $dirs, string|array $name = '*Rule.php', string|array $notName = [])
     {
         foreach (Finder::create()->files()->name($name)->notName($notName)->in($dirs) as $splFileInfo) {
-            $classOfRule = resolve_class_from_real_path($splFileInfo->getRealPath());
-            if (! is_subclass_of($classOfRule, Rule::class)) {
+            $class = resolve_class_from_path($splFileInfo->getRealPath());
+            if (! is_subclass_of($class, Rule::class)) {
                 continue;
             }
 
-            $reflectionClass = new ReflectionClass($classOfRule);
+            $reflectionClass = new ReflectionClass($class);
             if (! $reflectionClass->isInstantiable()) {
                 continue;
             }
 
-            $methodOfExtend = transform($classOfRule, function (string $classOfRule) {
+            $methodOfExtend = transform($class, function (string $classOfRule) {
                 $method = 'extend';
                 if (is_subclass_of($classOfRule, ImplicitRule::class)) {
                     $method = 'extendImplicit';
@@ -199,20 +199,20 @@ class AppServiceProvider extends ServiceProvider
             // 有构造函数
             if ($reflectionClass->getConstructor() && $reflectionClass->getConstructor()->getNumberOfParameters()) {
                 Validator::$methodOfExtend(
-                    $classOfRule::name(),
-                    function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($classOfRule) {
-                        return tap((new $classOfRule(...$parameters)), function (Rule $rule) use ($validator) {
+                    $class::name(),
+                    function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($class) {
+                        return tap((new $class(...$parameters)), function (Rule $rule) use ($validator) {
                             $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
                             $rule instanceof DataAwareRule and $rule->setData($validator->getData());
                         })->passes($attribute, $value);
                     },
-                    $classOfRule::localizedMessage()
+                    $class::localizedMessage()
                 );
 
                 continue;
             }
 
-            Validator::$methodOfExtend($classOfRule::name(), "$classOfRule@passes", $classOfRule::localizedMessage());
+            Validator::$methodOfExtend($class::name(), "$class@passes", $class::localizedMessage());
         }
     }
 

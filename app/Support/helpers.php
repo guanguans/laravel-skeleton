@@ -45,20 +45,25 @@ if (! function_exists('make')) {
     }
 }
 
-if (! function_exists('resolve_class_from_real_path')) {
-    function resolve_class_from_real_path(string $realPath, ?string $basePath = null, ?string $baseVendorName = null, ?string $baseVendorNamespace = null): string
+if (! function_exists('resolve_class_from_path')) {
+    /**
+     * @param  string  $path 文件路径
+     * @param  null|string  $vendorPath 供应商路径
+     * @param  null|string  $vendorNamespace 供应商命名空间
+     * @return string
+     */
+    function resolve_class_from_path(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
     {
-        $basePath ??= base_path();
-        $baseVendorName ??= basename(app()->path()); // app
-        $baseVendorNamespace ??= app()->getNamespace(); // App\
+        /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+        $vendorPath = $vendorPath ? realpath($vendorPath) : app_path();
+        $vendorNamespace ??= app()->getNamespace(); // App\
 
-        return \str($realPath)
-            ->replaceFirst($basePath, '')
+        return \str(realpath($path))
+            ->replaceFirst($vendorPath, $vendorNamespace)
             ->replaceLast('.php', '')
-            ->replace(
-                [DIRECTORY_SEPARATOR, $baseVendorName.'\\'],
-                ['\\', $baseVendorNamespace],
-            )
+            ->replace(DIRECTORY_SEPARATOR, '\\')
+            ->replace('\\\\', '\\')
+            ->start('\\')
             ->toString();
     }
 }
