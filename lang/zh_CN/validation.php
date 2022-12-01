@@ -1,15 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Validation Language Lines
-|--------------------------------------------------------------------------
-|
-| The following language lines contain the default error messages used by
-| the validator class. Some of these rules have multiple versions such
-| as the size rules. Feel free to tweak each of these messages here.
-|
-*/
+declare(strict_types=1);
 
 return [
     'accepted' => '您必须接受 :attribute。',
@@ -128,6 +119,79 @@ return [
     'uploaded' => ':attribute 上传失败。',
     'url' => ':attribute 格式不正确。',
     'uuid' => ':attribute 必须是有效的 UUID。',
+    'attributes' => [
+        'address' => '地址',
+        'age' => '年龄',
+        'amount' => 'Amount',
+        'area' => 'Area',
+        'available' => '可用的',
+        'birthday' => 'Birthday',
+        'body' => 'Body',
+        'city' => '城市',
+        'content' => '内容',
+        'country' => '国家',
+        'created_at' => 'Created At',
+        'creator' => 'Creator',
+        'current_password' => 'Current Password',
+        'date' => '日期',
+        'date_of_birth' => 'Date Of Birth',
+        'day' => '天',
+        'deleted_at' => 'Deleted At',
+        'description' => '描述',
+        'district' => 'District',
+        'duration' => 'Duration',
+        'email' => '邮箱',
+        'excerpt' => '摘要',
+        'filter' => 'Filter',
+        'first_name' => '名',
+        'gender' => '性别',
+        'group' => 'Group',
+        'hour' => '时',
+        'image' => 'Image',
+        'last_name' => '姓',
+        'lesson' => 'Lesson',
+        'line_address_1' => 'Line Address 1',
+        'line_address_2' => 'Line Address 2',
+        'message' => 'Message',
+        'middle_name' => 'Middle Name',
+        'minute' => '分',
+        'mobile' => '手机',
+        'month' => '月',
+        'name' => '名称',
+        'national_code' => 'National Code',
+        'number' => 'Number',
+        'password' => '密码',
+        'password_confirmation' => '确认密码',
+        'phone' => '电话',
+        'photo' => 'Photo',
+        'postal_code' => 'Postal Code',
+        'price' => 'Price',
+        'province' => 'Province',
+        'recaptcha_response_field' => 'Recaptcha Response Field',
+        'remember' => 'Remember',
+        'restored_at' => 'Restored At',
+        'result_text_under_image' => 'Result Text Under Image',
+        'role' => 'Role',
+        'second' => '秒',
+        'sex' => '性别',
+        'short_text' => 'Short Text',
+        'size' => '大小',
+        'state' => 'State',
+        'street' => 'Street',
+        'student' => 'Student',
+        'subject' => 'Subject',
+        'teacher' => 'Teacher',
+        'terms' => 'Terms',
+        'test_description' => 'Test Description',
+        'test_locale' => 'Test Locale',
+        'test_name' => 'Test Name',
+        'text' => 'Text',
+        'time' => '时间',
+        'title' => '标题',
+        'updated_at' => 'Updated At',
+        'username' => '用户名',
+        'year' => '年',
+    ],
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
