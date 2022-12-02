@@ -31,6 +31,7 @@
         "kevinrob/guzzle-cache-middleware": "^4.0",
         "knuckleswtf/scribe": "^4.6",
         "laravel/framework": "^9.40",
+        "laravel/octane": "^1.3",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "overtrue/laravel-query-logger": "^3.0",
