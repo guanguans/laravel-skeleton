@@ -26,6 +26,7 @@
         "guanguans/laravel-dump-sql": "^2.2",
         "guanguans/laravel-exception-notify": "^2.14",
         "guzzlehttp/guzzle": "^7.5",
+        "hammerstone/fast-paginate": "^0.1.11",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^4.4",
         "kevinrob/guzzle-cache-middleware": "^4.0",
