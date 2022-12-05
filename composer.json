@@ -147,12 +147,18 @@
         "cghooks": "./vendor/bin/cghooks",
         "checks": [
             "@mark-start",
+            "@lint",
+            "@mark-separate",
             "@pint-test",
             "@mark-separate",
             "@docs-generate",
             "@mark-finish"
         ],
         "docs-generate": "@php artisan scribe:generate --ansi",
+        "lint": [
+            "for dir in .; do find $dir -maxdepth 1 -type f -name '*.php' -exec php -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done",
+            "for dir in ./app ./config ./routes; do find $dir -maxdepth 5 -type f -name '*.php' -type f ! -name 'Singletonable.php' -type f ! -name 'Fireworks.php' -exec php -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done"
+        ],
         "mark-finish": "printf '\\n!\\n!\\t\\033[0;32m%s\\033[0m\\n!\\n\\n' \"Finished\"",
         "mark-separate": "printf '\\n!\\n!\\t\\033[0;33m%s\\033[0m\\n!\\n\\n' \"----------------\"",
         "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",

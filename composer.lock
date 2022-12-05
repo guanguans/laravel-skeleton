@@ -1882,13 +1882,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/89ecacf3bd84be1b258e2450a7e72e5a3a797d39",
                 "reference": "89ecacf3bd84be1b258e2450a7e72e5a3a797d39",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -11914,13 +11908,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/TheDragonCode/contracts/zipball/27e5a9f27b3e6e5f1c184e55076b26101f3e5652",
                 "reference": "27e5a9f27b3e6e5f1c184e55076b26101f3e5652",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
@@ -11991,13 +11979,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/TheDragonCode/pretty-array/zipball/385ca81ee7e9a65fb5696692c173a1234fc2ad7d",
                 "reference": "385ca81ee7e9a65fb5696692c173a1234fc2ad7d",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "dragon-code/contracts": "^2.6",
@@ -12077,13 +12059,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/TheDragonCode/support/zipball/7be34dc2ab76029b1ee8203717747ab71f0ee8bd",
                 "reference": "7be34dc2ab76029b1ee8203717747ab71f0ee8bd",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "dragon-code/contracts": "^2.18",
@@ -12383,13 +12359,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/2a6b4715b02fffeeb7954158f52f5e7c01cf8707",
                 "reference": "2a6b4715b02fffeeb7954158f52f5e7c01cf8707",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -12467,13 +12437,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Laravel-Lang/http-statuses/zipball/2de194362eda52125994150c635c440ce4eca9b4",
                 "reference": "2de194362eda52125994150c635c440ce4eca9b4",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -12549,13 +12513,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/e341421d40f2cd28feca24ab2cb84fa5cb5ddaf6",
                 "reference": "e341421d40f2cd28feca24ab2cb84fa5cb5ddaf6",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*"
@@ -12633,13 +12591,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Laravel-Lang/publisher/zipball/0af88a10d491138c1b7e492d0f4556bb474816df",
                 "reference": "0af88a10d491138c1b7e492d0f4556bb474816df",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "dragon-code/contracts": "^2.15",
@@ -12936,13 +12888,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/smortexa/laravel-arkitect/zipball/2c4fe61112bd864aec80b7f5a358ce1674509350",
                 "reference": "2c4fe61112bd864aec80b7f5a358ce1674509350",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": "^8.0",
@@ -13390,13 +13336,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phparkitect/arkitect/zipball/66b5f5ee0f2da606ee50cfb58be52f73fd76c148",
                 "reference": "66b5f5ee0f2da606ee50cfb58be52f73fd76c148",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
