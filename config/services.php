@@ -45,4 +45,11 @@ return [
         'token' => env('PUSHDEER_TOKEN', 'token'),
         'key' => env('PUSHDEER_KEY'),
     ],
+    'chatGPT' => [
+        'options' => [
+            'connect_timeout' => 3,
+            'timeout' => 60,
+        ],
+        'session_token' => env('CHATGPT_SESSION_TOKEN', 'token'),
+    ],
 ];
