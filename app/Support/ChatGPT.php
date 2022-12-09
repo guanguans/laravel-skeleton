@@ -4,113 +4,98 @@
 
 namespace App\Support;
 
-use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Utils;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Psr\Http\Message\RequestInterface;
 
 class ChatGPT extends FoundationSdk
 {
     public function refreshAccessToken()
     {
-        return Http::withOptions($this->config['options'])
-            ->asJson()
-            ->withUserAgent($this->config['user_agent'])
+        return $this->pendingRequest
             ->withHeaders([
                 'cookie' => "__Secure-next-auth.session-token={$this->config['session_token']}",
             ])
-            ->get($this->config['auth_url']);
+            ->get('api/auth/session')
+            ->throw();
     }
 
-    public function sendMessage(string $message)
+    public function conversation(string $prompt, ?string $conversationId = null, ?string $messageId = null)
     {
+        // 待优化
         if (! Cache::get(__CLASS__)) {
-            Cache::put(__CLASS__, $this->refreshAccessToken()->json('accessToken'));
+            Cache::put(
+                __CLASS__,
+                $this->refreshAccessToken()->json('accessToken'),
+                $this->config['access_token_cache_ttl']
+            );
         }
 
         $accessToken = Cache::get(__CLASS__);
 
-        return $this->pendingRequest
+        $originalResponse = $this->pendingRequest
+            ->withOptions([
+                // 'stream' => true,
+            ])
             ->withHeaders([
                 'Authorization' => "Bearer $accessToken",
             ])
-            ->post($this->config['conversation_url'], [
+            ->post('backend-api/conversation', [
                 'action' => 'next',
+                'conversation_id' => $conversationId,
                 'messages' => [
                     [
-                        'id' => Str::uuid(),
+                        'id' => $messageId ?? Str::uuid(),
                         'role' => 'user',
                         'content' => [
                             'content_type' => 'text',
-                            'parts' => [$message],
+                            'parts' => [$prompt],
                         ],
                     ],
                 ],
                 'model' => 'text-davinci-002-render',
                 'parent_message_id' => Str::uuid(),
             ]);
+
+        $contents = \str($originalResponse->throw()->getBody()->getContents())
+            ->explode("\n\n")
+            ->last(function (string $data) {
+                return $data && $data !== 'data: [DONE]';
+            });
+
+        return new Response(
+            $originalResponse
+                ->toPsrResponse()
+                ->withBody(Utils::streamFor(substr($contents, 6)))
+        );
     }
 
     protected function validateConfig(array $config): array
     {
         return $this->validateData($config, [
-            'options' => 'array',
-            'options.allow_redirects' => 'bool|array',
-            'options.auth' => 'array|string|nullable',
-            'options.body' => 'string|resource|\Psr\Http\Message\StreamInterface',
-            'options.cert' => 'string|array',
-            'options.cookies' => '\GuzzleHttp\Cookie\CookieJarInterface',
-            'options.connect_timeout' => 'numeric',
-            'options.debug' => 'bool|resource',
-            'options.decode_content' => 'string|bool',
-            'options.delay' => 'numeric',
-            'options.expect' => 'bool|integer',
-            'options.form_params' => 'array',
-            'options.headers' => 'array',
-            'options.http_errors' => 'bool',
-            'options.idn_conversion' => 'bool',
-            'options.json' => 'nullable|string|integer|numeric|array|object',
-            'options.multipart' => 'array',
-            'options.on_headers' => 'callable',
-            'options.on_stats' => 'callable',
-            'options.proxy' => 'string|array',
-            'options.query' => 'array|string',
-            'options.sink' => 'string|resource|\Psr\Http\Message\StreamInterface',
-            'options.ssl_key' => 'string|array',
-            'options.stream' => 'bool',
-            'options.synchronous' => 'bool',
-            'options.verify' => 'bool|string',
-            'options.timeout' => 'numeric',
-            'options.version' => 'string|numeric',
-
+            'http_options' => 'array',
             'session_token' => 'required|string',
+            'user_agent' => 'string',
+            'base_url' => 'string',
+            'access_token_cache_ttl' => 'int',
 
         ]) +
                [
+                   'http_options' => [],
                    'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
-                   'conversation_url' => 'https://chat.openai.com/backend-api/conversation',
-                   'auth_url' => 'https://chat.openai.com/api/auth/session',
+                   'base_url' => 'https://chat.openai.com/',
+                   'access_token_cache_ttl' => 3600,
                ];
     }
 
     protected function buildPendingRequest(array $config): PendingRequest
     {
-        return Http::withOptions($config['options'])
-            // ->baseUrl($config['base_url'])
+        return Http::withOptions($config['http_options'])
+            ->baseUrl($config['base_url'])
             ->asJson()
-            ->withUserAgent($this->config['user_agent'])
-            // ->withOptions([
-            //     'json' => $data = [
-            //         'token' => $config['token'],
-            //         'pushkey' => $config['key'],
-            //     ],
-            //     'form_params' => $data,
-            //     'query' => $data,
-            // ])
-            ->withMiddleware(Middleware::mapRequest(function (RequestInterface $request) {
-                return $request->withHeader('X-Date-Time', now()->toDateTimeString());
-            }));
+            ->withUserAgent($this->config['user_agent']);
     }
 }
