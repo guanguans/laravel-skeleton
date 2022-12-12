@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware([
     'api',
     // sprintf('signatured:%s', config('services.signer.default.secret')),
+    'log.http',
 ])->prefix('v1')->namespace('App\Http\Controllers\Api')->group(function (Router $router) {
     Route::middleware([])->group(function (Router $router) {
         Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping');

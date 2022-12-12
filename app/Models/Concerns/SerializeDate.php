@@ -15,6 +15,7 @@ trait SerializeDate
      */
     protected function serializeDate(DateTimeInterface $date): string
     {
-        return $date->format($this->dateFormat ?: Carbon::DEFAULT_TO_STRING_FORMAT);
+        // return $date->format($this->dateFormat ?: Carbon::DEFAULT_TO_STRING_FORMAT);
+        return $date->format($this->getDateFormat());
     }
 }
