@@ -463,36 +463,41 @@ if (! function_exists('dd_to_array')) {
     }
 }
 
-if (! function_exists('array_reduces')) {
+if (! function_exists('array_reduce_with_keys')) {
     /**
      * @param  array  $array
      * @param  callable  $callback
      * @param  null  $carry
      * @return null|mixed
      */
-    function array_reduces(array $array, callable $callback, $carry = null)
+    function array_reduce_with_keys(array $array, callable $callback, $carry = null)
     {
         foreach ($array as $key => $value) {
-            $carry = call_user_func($callback, $carry, $value, $key);
+            $carry = $callback($carry, $value, $key);
         }
 
         return $carry;
     }
 }
 
-if (! function_exists('array_maps')) {
+if (! function_exists('array_map_with_keys')) {
     /**
      * @param  callable  $callback
      * @param  array  $array
      * @return array
      */
-    function array_maps(callable $callback, array $array)
+    function array_map_with_keys(callable $callback, array $array)
     {
-        $arr = [];
+        $result = [];
+
         foreach ($array as $key => $value) {
-            $arr[$key] = call_user_func($callback, $value, $key);
+            $assoc = $callback($value, $key);
+
+            foreach ($assoc as $mapKey => $mapValue) {
+                $result[$mapKey] = $mapValue;
+            }
         }
 
-        return $arr;
+        return $result;
     }
 }
