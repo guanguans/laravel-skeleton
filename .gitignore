@@ -27,3 +27,5 @@ resources/views/scribe/
 public/vendor/scribe/
 deploy.php
 /.scribe
+openai.gif
+.DS_Store
