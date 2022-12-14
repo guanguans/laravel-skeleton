@@ -36,24 +36,30 @@ return [
             'algo' => env('SIGNER_DEFAULT_ALGO', 'sha256'),
         ],
     ],
-    'pushdeer' => [
-        'options' => [
-            'connect_timeout' => 3,
-            'timeout' => 30,
-        ],
-        'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com/'),
-        'token' => env('PUSHDEER_TOKEN', 'token'),
-        'key' => env('PUSHDEER_KEY'),
-    ],
-    'chatGPT' => [
-        'options' => [
+
+    'chatgpt' => [
+        'http_options' => [
             'connect_timeout' => 3,
             'timeout' => 60,
         ],
-        'session_token' => env('CHATGPT_SESSION_TOKEN', 'token'),
+        'session_token' => env('CHATGPT_SESSION_TOKEN', ''),
     ],
+
     'openai' => [
-        'http_options' => [],
+        'http_options' => [
+            'connect_timeout' => 3,
+            'timeout' => 60,
+        ],
         'api_key' => env('OPENAI_API_KEY', ''),
+    ],
+
+    'pushdeer' => [
+        'http_options' => [
+            'connect_timeout' => 3,
+            'timeout' => 30,
+        ],
+        'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com'),
+        'token' => env('PUSHDEER_TOKEN', ''),
+        'key' => env('PUSHDEER_KEY'),
     ],
 ];

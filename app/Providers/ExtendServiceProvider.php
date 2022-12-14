@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\ChatGPT;
 use App\Support\OpenAI;
 use App\Support\PushDeer;
 use App\Traits\Conditionable;
@@ -28,8 +29,9 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register()
     {
-        $this->registerPushDeer();
+        $this->registerChatGPT();
         $this->registerOpenAI();
+        $this->registerPushDeer();
     }
 
     /**
@@ -60,9 +62,22 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
     public function provides()
     {
         return [
-            PushDeer::class, 'pushdeer',
+            ChatGPT::class, 'chatgpt',
             OpenAI::class, 'openai',
+            PushDeer::class, 'pushdeer',
         ];
+    }
+
+    /**
+     * @return void
+     */
+    protected function registerOpenAI(): void
+    {
+        $this->app->singleton(OpenAI::class, function (Application $application) {
+            return new OpenAI($application['config']['services.openai']);
+        });
+
+        $this->app->alias(OpenAI::class, 'openai');
     }
 
     /**
@@ -80,12 +95,12 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
     /**
      * @return void
      */
-    protected function registerOpenAI(): void
+    protected function registerChatGPT(): void
     {
-        $this->app->singleton(OpenAI::class, function (Application $application) {
-            return new OpenAI($application['config']['services.openai']);
+        $this->app->singleton(ChatGPT::class, function (Application $application) {
+            return new ChatGPT($application['config']['services.chatgpt']);
         });
 
-        $this->app->alias(OpenAI::class, 'openai');
+        $this->app->alias(ChatGPT::class, 'chatgpt');
     }
 }

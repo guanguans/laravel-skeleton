@@ -19,8 +19,7 @@ class ChatGPT extends FoundationSdk
             ->withHeaders([
                 'cookie' => "__Secure-next-auth.session-token={$this->config['session_token']}",
             ])
-            ->get('api/auth/session')
-            ->throw();
+            ->get('api/auth/session');
     }
 
     public function conversation(string $prompt, ?string $conversationId = null, ?string $messageId = null)
@@ -60,7 +59,7 @@ class ChatGPT extends FoundationSdk
                 'parent_message_id' => Str::uuid(),
             ]);
 
-        $contents = \str($originalResponse->throw()->getBody()->getContents())
+        $contents = \str($originalResponse->getBody()->getContents())
             ->explode("\n\n")
             ->last(function (string $data) {
                 return $data && $data !== 'data: [DONE]';
@@ -75,27 +74,29 @@ class ChatGPT extends FoundationSdk
 
     protected function validateConfig(array $config): array
     {
-        return $this->validateData($config, [
-            'http_options' => 'array',
-            'session_token' => 'required|string',
-            'user_agent' => 'string',
-            'base_url' => 'string',
-            'access_token_cache_ttl' => 'int',
-
-        ]) +
-               [
-                   'http_options' => [],
-                   'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
-                   'base_url' => 'https://chat.openai.com/',
-                   'access_token_cache_ttl' => 3600,
-               ];
+        return array_merge_recursive(
+            [
+                'http_options' => [],
+                'base_url' => 'https://chat.openai.com',
+                'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
+                'access_token_cache_ttl' => 3600,
+            ],
+            $this->validateData($config, [
+                'http_options' => 'array',
+                'session_token' => 'required|string',
+                'base_url' => 'string',
+                'user_agent' => 'string',
+                'access_token_cache_ttl' => 'int',
+            ])
+        );
     }
 
     protected function buildPendingRequest(array $config): PendingRequest
     {
-        return Http::withOptions($config['http_options'])
-            ->baseUrl($config['base_url'])
+        return Http::baseUrl($config['base_url'])
             ->asJson()
-            ->withUserAgent($this->config['user_agent']);
+            ->throw()
+            ->withUserAgent($this->config['user_agent'])
+            ->withOptions($config['http_options']);
     }
 }
