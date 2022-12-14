@@ -49,12 +49,13 @@ Output ./resources/openai.gif
 Require php
 
 Set FontSize 20
-Set Width 1250
-Set Height 773
-Set TypingSpeed 500ms
+Set Width 1200
+Set Height 742
+Set TypingSpeed 100ms
+Set PlaybackSpeed 0.618
 
 Type "php artisan openai:completion" Sleep 1s
 Enter 1 Sleep 3s
-Type "用 PHP 编写一个简单的 web 框架" Sleep 1s
+Type "用 PHP 编写一个 web 框架" Sleep 1s
 Enter 1 Sleep 15s
 Ctrl+C Sleep 3s

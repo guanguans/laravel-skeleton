@@ -6,6 +6,9 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
+/**
+ * @see https://beta.openai.com/docs/api-reference/introduction
+ */
 class OpenAI extends FoundationSdk
 {
     public function completions(array $data): Response
@@ -18,25 +21,25 @@ class OpenAI extends FoundationSdk
                     'model' => [
                         'required',
                         'string',
-                        'in:text-davinci-003,text-curie-001,text-babbage-001,text-ada-001,code-davinci-002,code-cushman-001',
+                        'in:text-davinci-003,text-curie-001,text-babbage-001,text-ada-001,code-davinci-002,code-cushman-001,content-filter-alpha',
                     ],
                     // 'prompt' => 'string|array',
                     'prompt' => 'string',
-                    'suffix' => 'string',
+                    'suffix' => 'nullable|string',
                     'max_tokens' => 'integer',
                     'temperature' => 'numeric',
                     'top_p' => 'numeric',
                     'n' => 'integer',
                     'stream' => 'bool',
-                    'logprobs' => 'integer',
+                    'logprobs' => 'nullable|integer',
                     'echo' => 'bool',
-                    // 'stop' => 'string|array',
-                    'stop' => 'string',
+                    // 'stop' => 'nullable|string|array',
+                    'stop' => 'nullable|string',
                     'presence_penalty' => 'numeric',
                     'frequency_penalty' => 'numeric',
                     'best_of' => 'integer',
-                    'logit_bias' => 'array',
-                    'user' => 'string',
+                    'logit_bias' => 'array', // map
+                    'user' => 'string|uuid',
                 ]
             ));
     }

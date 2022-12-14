@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Http;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @see http://www.pushdeer.com/dev.html
+ */
 class PushDeer extends FoundationSdk
 {
     public function messagePush(string $text, string $desp = '', string $type = 'markdown'): Response
