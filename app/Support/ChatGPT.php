@@ -74,7 +74,7 @@ class ChatGPT extends FoundationSdk
 
     protected function validateConfig(array $config): array
     {
-        return array_merge_recursive(
+        return array_merge(
             [
                 'http_options' => [],
                 'base_url' => 'https://chat.openai.com',

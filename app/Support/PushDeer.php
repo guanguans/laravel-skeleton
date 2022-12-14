@@ -37,59 +37,62 @@ class PushDeer extends FoundationSdk
         return $this->pendingRequest->post(
             'message/list',
             $this->validateData(
-                [
-                    'limit' => $limit,
-                ],
-                [
-                    'limit' => 'int',
-                ]
+                ['limit' => $limit],
+                ['limit' => 'int']
             )
         );
     }
 
     protected function validateConfig(array $config): array
     {
-        return $this->validateData($config, [
-            'http_options' => 'array',
-            'http_options.allow_redirects' => 'bool|array',
-            'http_options.auth' => 'array|string|nullable',
-            'http_options.body' => 'string|resource|\Psr\Http\Message\StreamInterface',
-            'http_options.cert' => 'string|array',
-            'http_options.cookies' => '\GuzzleHttp\Cookie\CookieJarInterface',
-            'http_options.connect_timeout' => 'numeric',
-            'http_options.debug' => 'bool|resource',
-            'http_options.decode_content' => 'string|bool',
-            'http_options.delay' => 'numeric',
-            'http_options.expect' => 'bool|integer',
-            'http_options.form_params' => 'array',
-            'http_options.headers' => 'array',
-            'http_options.http_errors' => 'bool',
-            'http_options.idn_conversion' => 'bool',
-            'http_options.json' => 'nullable|string|integer|numeric|array|object',
-            'http_options.multipart' => 'array',
-            'http_options.on_headers' => 'callable',
-            'http_options.on_stats' => 'callable',
-            'http_options.proxy' => 'string|array',
-            'http_options.query' => 'array|string',
-            'http_options.sink' => 'string|resource|\Psr\Http\Message\StreamInterface',
-            'http_options.ssl_key' => 'string|array',
-            'http_options.stream' => 'bool',
-            'http_options.synchronous' => 'bool',
-            'http_options.verify' => 'bool|string',
-            'http_options.timeout' => 'numeric',
-            'http_options.version' => 'string|numeric',
+        return array_merge(
+            [
+                'http_options' => [],
+                'base_url' => 'https://api2.pushdeer.com',
+            ],
+            $this->validateData($config, [
+                'http_options' => 'array',
+                'http_options.allow_redirects' => 'bool|array',
+                'http_options.auth' => 'array|string|nullable',
+                'http_options.body' => 'string|resource|\Psr\Http\Message\StreamInterface',
+                'http_options.cert' => 'string|array',
+                'http_options.cookies' => '\GuzzleHttp\Cookie\CookieJarInterface',
+                'http_options.connect_timeout' => 'numeric',
+                'http_options.debug' => 'bool|resource',
+                'http_options.decode_content' => 'string|bool',
+                'http_options.delay' => 'numeric',
+                'http_options.expect' => 'bool|integer',
+                'http_options.form_params' => 'array',
+                'http_options.headers' => 'array',
+                'http_options.http_errors' => 'bool',
+                'http_options.idn_conversion' => 'bool',
+                'http_options.json' => 'nullable|string|integer|numeric|array|object',
+                'http_options.multipart' => 'array',
+                'http_options.on_headers' => 'callable',
+                'http_options.on_stats' => 'callable',
+                'http_options.proxy' => 'string|array',
+                'http_options.query' => 'array|string',
+                'http_options.sink' => 'string|resource|\Psr\Http\Message\StreamInterface',
+                'http_options.ssl_key' => 'string|array',
+                'http_options.stream' => 'bool',
+                'http_options.synchronous' => 'bool',
+                'http_options.verify' => 'bool|string',
+                'http_options.timeout' => 'numeric',
+                'http_options.version' => 'string|numeric',
 
-            'token' => 'required|string',
-            'key' => 'required|string',
-            'base_url' => 'required|url',
-        ]);
+                'base_url' => 'required|url',
+                'key' => 'required|string',
+                'token' => 'required|string',
+            ])
+        );
     }
 
     protected function buildPendingRequest(array $config): PendingRequest
     {
-        return Http::withOptions($config['options'])
-            ->baseUrl($config['base_url'])
+        return Http::baseUrl($config['base_url'])
+            ->throw()
             ->asJson()
+            ->withOptions($config['http_options'])
             ->withOptions([
                 'json' => $data = [
                     'token' => $config['token'],
