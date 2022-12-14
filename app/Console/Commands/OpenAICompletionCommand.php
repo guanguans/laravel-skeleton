@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Orhanerday\OpenAi\OpenAi;
 
-class OpenaiCompletionCommand extends Command
+class OpenAICompletionCommand extends Command
 {
     protected $signature = 'openai:completion';
 
@@ -32,6 +32,7 @@ class OpenaiCompletionCommand extends Command
                 }
             })
             ->pipe(static function () use ($prompt): Collection {
+                /** @var array{id: string, object: string, created: int, model: string, choices: array<int, array{text: string, index: int, logprobs: array{tokens: array<int, string>, token_logprobs: array<int, float>, top_logprobs: array<int, string>|null, text_offset: array<int, int>}|null, finish_reason: string}>, usage: array{prompt_tokens: int, completion_tokens: int, total_tokens: int}} $completion */
                 $completion = (new OpenAi(config('services.openai_api_key')))
                     ->completion([
                         'model' => 'text-davinci-003',

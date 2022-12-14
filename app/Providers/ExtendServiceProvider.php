@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\OpenAI;
 use App\Support\PushDeer;
 use App\Traits\Conditionable;
 use Illuminate\Container\Container;
@@ -28,6 +29,7 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
     public function register()
     {
         $this->registerPushDeer();
+        $this->registerOpenAI();
     }
 
     /**
@@ -59,6 +61,7 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
     {
         return [
             PushDeer::class, 'pushdeer',
+            OpenAI::class, 'openai',
         ];
     }
 
@@ -72,5 +75,17 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
         });
 
         $this->app->alias(PushDeer::class, 'pushdeer');
+    }
+
+    /**
+     * @return void
+     */
+    protected function registerOpenAI(): void
+    {
+        $this->app->singleton(OpenAI::class, function (Application $application) {
+            return new OpenAI($application['config']['services.openai']);
+        });
+
+        $this->app->alias(OpenAI::class, 'openai');
     }
 }

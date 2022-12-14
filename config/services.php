@@ -52,5 +52,8 @@ return [
         ],
         'session_token' => env('CHATGPT_SESSION_TOKEN', 'token'),
     ],
-    'openai_api_key' => env('OPENAI_API_KEY', ''),
+    'openai' => [
+        'http_options' => [],
+        'api_key' => env('OPENAI_API_KEY', ''),
+    ],
 ];
