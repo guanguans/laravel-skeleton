@@ -8,11 +8,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class OpenAICompletionCommand extends Command
+class OpenAIHelpCommand extends Command
 {
-    protected $signature = 'openai:completion';
+    protected $signature = 'openai:help';
 
-    protected $description = 'OpenAI completion.';
+    protected $description = 'OpenAI help.';
 
     public function handle(OpenAI $openAI)
     {

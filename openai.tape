@@ -54,8 +54,10 @@ Set Height 742
 Set TypingSpeed 100ms
 Set PlaybackSpeed 0.618
 
-Type "php artisan openai:completion" Sleep 1s
-Enter 1 Sleep 3s
+Type "php artisan openai:help" Sleep 1s
+Enter 1 Sleep 5s
 Type "用 PHP 编写一个 web 框架" Sleep 1s
 Enter 1 Sleep 15s
+Type "简单的中文姓名正则" Sleep 1s
+Enter 1 Sleep 5s
 Ctrl+C Sleep 3s
