@@ -70,9 +70,7 @@ class OpenAI extends FoundationSdk
         return Http::baseUrl($config['base_url'])
             ->throw()
             ->asJson()
-            ->withHeaders([
-                'Authorization' => "Bearer {$config['api_key']}",
-            ])
+            ->withToken($config['api_key'])
             ->withOptions($config['http_options']);
     }
 }

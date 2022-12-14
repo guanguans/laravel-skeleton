@@ -28,15 +28,19 @@ class ChatGPT extends FoundationSdk
     public function conversation(string $prompt, ?string $conversationId = null, ?string $messageId = null)
     {
         // 待优化
-        if (! Cache::get(__CLASS__)) {
+        $accessToken = value(function () {
+            if ($cachedAccessToken = Cache::get(__CLASS__)) {
+                return $cachedAccessToken;
+            }
+
             Cache::put(
                 __CLASS__,
-                $this->refreshAccessToken()->json('accessToken'),
+                $accessToken = $this->refreshAccessToken()->json('accessToken'),
                 $this->config['access_token_cache_ttl']
             );
-        }
 
-        $accessToken = Cache::get(__CLASS__);
+            return $accessToken;
+        });
 
         $originalResponse = $this->pendingRequest
             ->withOptions([
