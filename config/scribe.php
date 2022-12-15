@@ -1,6 +1,6 @@
 <?php
 
-use App\Support\Signer\HmacSigner;
+use App\Support\HmacSigner;
 use Knuckles\Scribe\Extracting\Strategies;
 
 return [

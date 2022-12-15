@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\InvalidRepeatRequestException;
-use App\Support\Signer\HmacSigner;
+use App\Support\HmacSigner;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;

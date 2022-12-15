@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Support\BitEncoder;
+namespace App\Contracts;
 
-interface BitEncoderInterface
+interface BitEncoderContract
 {
     /**
      * @param  mixed[]  $set

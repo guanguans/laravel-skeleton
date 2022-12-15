@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Support\BitEncoder;
+namespace App\Support;
 
+use App\Contracts\BitEncoderContract;
 use Generator;
 use InvalidArgumentException;
 use LengthException;
@@ -17,7 +18,7 @@ use LengthException;
  * $bitEncoder->decode(71336225); // [11, 21, 31, 41, 51, 61]
  * ```
  */
-class BitEncoder implements BitEncoderInterface
+class BitEncoder implements BitEncoderContract
 {
     /**
      * 无重复元素的数组.
