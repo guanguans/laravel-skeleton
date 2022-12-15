@@ -99,6 +99,7 @@ class AppServiceProvider extends ServiceProvider
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             Carbon::setLocale(config('app.locale'));
+            // JsonResource::wrap('data');
             JsonResource::withoutWrapping();
             Paginator::useBootstrap();
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
