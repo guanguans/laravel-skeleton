@@ -101,9 +101,9 @@ abstract class FoundationSdk
      * {
      *     return configure_options($config, function (OptionsResolver $optionsResolver) {
      *         $optionsResolver
-     *             ->setDefined('options')
-     *             ->setDefault('options', [])
-     *             ->addAllowedTypes('options', 'array');
+     *             ->setDefined('http_options')
+     *             ->setDefault('http_options', [])
+     *             ->addAllowedTypes('http_options', 'array');
      *     });
      * }
      * ```
@@ -112,7 +112,7 @@ abstract class FoundationSdk
      * protected function validateConfig(array $config): array
      * {
      *     return $this->validateData($config, [
-     *         'options' => 'array',
+     *         'http_options' => 'array',
      *     ]);
      * }
      * ```
@@ -134,7 +134,7 @@ abstract class FoundationSdk
      * ```php
      * protected function buildPendingRequest(array $config): PendingRequest
      * {
-     *     return Http::withOptions($config['options'])
+     *     return Http::withOptions($config['http_options'])
      *         ->baseUrl($config['baseUrl'])
      *         ->asJson()
      *         ->withMiddleware($this->buildLoggerMiddleware());
