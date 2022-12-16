@@ -21,7 +21,7 @@ class OpenAI extends FoundationSdk
                     'model' => [
                         'required',
                         'string',
-                        'in:text-davinci-003,text-curie-001,text-babbage-001,text-ada-001,code-davinci-002,code-cushman-001,content-filter-alpha',
+                        'in:text-davinci-003,text-curie-001,text-babbage-001,text-ada-001,text-embedding-ada-002,code-davinci-002,code-cushman-001,content-filter-alpha',
                     ],
                     // 'prompt' => 'string|array',
                     'prompt' => 'string',
