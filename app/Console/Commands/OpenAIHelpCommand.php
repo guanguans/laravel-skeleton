@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use App\Support\OpenAI;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 class OpenAIHelpCommand extends Command
 {
@@ -24,32 +24,40 @@ class OpenAIHelpCommand extends Command
         }
 
         $openAI
-            ->completions([
-                'model' => 'text-davinci-003',
-                'prompt' => $prompt,
-                'suffix' => null,
-                'max_tokens' => 4000,
-                'temperature' => 0,
-                'top_p' => 1,
-                'n' => 1,
-                'stream' => false,
-                'logprobs' => null,
-                'echo' => false,
-                'stop' => null,
-                'presence_penalty' => 0,
-                'frequency_penalty' => 0,
-                'best_of' => 1,
-                // 'logit_bias' => null,
-                'user' => Str::uuid()->toString(),
-            ])
-            ->collect()
-            ->tap(function (Collection $collection) {
-                if (! $text = Arr::get($collection, 'choices.0.text')) {
-                    $this->warn($collection->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-                }
+            ->completions(
+                [
+                    'model' => 'text-davinci-003',
+                    'prompt' => $prompt,
+                    'suffix' => null,
+                    'max_tokens' => 4000,
+                    'temperature' => 0,
+                    'top_p' => 1,
+                    'n' => 1,
+                    'stream' => true,
+                    'logprobs' => null,
+                    'echo' => false,
+                    'stop' => null,
+                    'presence_penalty' => 0,
+                    'frequency_penalty' => 0,
+                    'best_of' => 1,
+                    // 'logit_bias' => null,
+                    'user' => Str::uuid()->toString(),
+                ],
+                function (string $data) {
+                    \str($data)
+                        ->replaceFirst('data: ', '')
+                        ->rtrim()
+                        ->tap(function (Stringable $stringable) {
+                            if ($stringable->startsWith('[DONE]')) {
+                                return;
+                            }
 
-                $this->line($text);
-            })
+                            $text = Arr::get(json_decode($stringable, true), 'choices.0.text');
+                            $text and $this->output->write($text);
+                        });
+                }
+            )
+            ->collect()
             ->tap(fn () => $this->call(self::class));
     }
 }

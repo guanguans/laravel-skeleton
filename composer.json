@@ -9,6 +9,7 @@
     ],
     "require": {
         "php": "^8.0.2",
+        "ext-curl": "*",
         "ext-json": "*",
         "appstract/laravel-blade-directives": "^1.12",
         "awobaz/compoships": "^2.1",
