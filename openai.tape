@@ -51,6 +51,7 @@ Require php
 Set FontSize 20
 Set Width 1200
 Set Height 742
+Set Padding 30
 Set TypingSpeed 100ms
 Set PlaybackSpeed 0.618
 
