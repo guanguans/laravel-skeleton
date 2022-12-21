@@ -8,17 +8,26 @@ trait CreateStaticable
      * @param ...$parameters
      * @return static
      */
-    public static function create(...$parameters)
+    public static function create(...$parameters): static
     {
-        return new static(...$parameters);
+        return static::new(...$parameters);
     }
 
     /**
      * @param ...$parameters
      * @return static
      */
-    public static function make(...$parameters)
+    public static function make(...$parameters): static
     {
-        return static::create(...$parameters);
+        return static::new(...$parameters);
+    }
+
+    /**
+     * @param ...$parameters
+     * @return static
+     */
+    public static function new(...$parameters): static
+    {
+        return new static(...$parameters);
     }
 }
