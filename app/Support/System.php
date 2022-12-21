@@ -213,6 +213,7 @@ class System
      * Helper function to read a Linux System's /proc/stat data and convert it into an array.
      *
      * @return array
+     *
      * @noinspection OffsetOperationsInspection
      */
     private static function getProcStatData(): array
@@ -292,6 +293,7 @@ class System
      * @return float
      *
      * @throws Exception
+     *
      * @noinspection OffsetOperationsInspection*/
     public static function getCPUUsage(int $duration = 1): float
     {
@@ -416,6 +418,7 @@ class System
      * Helper function to read a Linux System's /proc/diskstats data and convert it into an array.
      *
      * @return array
+     *
      * @noinspection OffsetOperationsInspection
      */
     private static function getDiskStats()
@@ -456,6 +459,7 @@ class System
      * @return array
      *
      * @throws Exception
+     *
      * @noinspection OffsetOperationsInspection*/
     public static function getIOUsage($duration = 1): array
     {
@@ -515,6 +519,7 @@ class System
      * @return array
      *
      * @throws Exception
+     *
      * @noinspection OffsetOperationsInspection*/
     public static function getNetworkUsage($duration = 1): array
     {

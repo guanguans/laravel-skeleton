@@ -26,6 +26,7 @@ class AuthController extends Controller
      * register - 注册
      *
      * @unauthenticated
+     *
      * @bodyParam email string 邮箱。
      * @bodyParam password string 密码。
      * @bodyParam password_confirmation string 重复密码。
@@ -73,6 +74,7 @@ class AuthController extends Controller
      * login - 登录
      *
      * @unauthenticated
+     *
      * @bodyParam email string 邮箱。
      * @bodyParam password string 密码。
      *
@@ -173,6 +175,7 @@ class AuthController extends Controller
      * index - 用户列表
      *
      * @unauthenticated
+     *
      * @queryParam per_page integer 分页大小. 默认值 15.
      * @queryParam page integer 第几页. 默认值 1.
      *

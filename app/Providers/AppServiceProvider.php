@@ -285,12 +285,15 @@ class AppServiceProvider extends ServiceProvider
          *     <! --应用正在使用 local 存储...-->
          * @elsedisk('s3')
          *     <! --应用正在使用 s3 存储...-->
+         *
          * @else
          *     <! --应用正在使用其他存储...-->
+         *
          * @enddisk
          *
          * @unlessdisk('local')
          *     < ! --应用当前没有使用 local 存储...-->
+         *
          * @enddisk
          * ```
          */
