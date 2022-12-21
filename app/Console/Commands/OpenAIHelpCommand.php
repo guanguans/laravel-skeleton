@@ -52,8 +52,8 @@ class OpenAIHelpCommand extends Command
                                 return;
                             }
 
-                            $text = Arr::get(json_decode($stringable, true), 'choices.0.text');
-                            $text and $this->output->write($text);
+                            $text = Arr::get(json_decode($stringable, true), 'choices.0.text', '');
+                            $this->output->write($text);
                         });
                 }
             )

@@ -18,17 +18,31 @@ class OpenAI extends FoundationSdk
     public function completions(array $data, ?callable $writer = null): Response
     {
         return (clone $this->pendingRequest)
-            ->when(is_callable($writer), function (PendingRequest $pendingRequest) use ($writer) {
-                $pendingRequest->withOptions([
-                    'curl' => [
-                        CURLOPT_WRITEFUNCTION => static function ($ch, string $data) use ($writer) {
-                            $writer and $writer($data, $ch);
+            ->when(
+                static fn (PendingRequest $pendingRequest) => $writer,
+                static function (PendingRequest $pendingRequest, ?callable $writer) {
+                    $pendingRequest->withOptions([
+                        'curl' => [
+                            CURLOPT_WRITEFUNCTION => static function (object $ch, string $data) use ($writer) {
+                                // \str($data)
+                                //     ->replaceFirst('data: ', '')
+                                //     ->rtrim()
+                                //     ->tap(function (Stringable $stringable) {
+                                //         if ($stringable->startsWith('[DONE]')) {
+                                //             return;
+                                //         }
+                                //
+                                //         echo Arr::get(json_decode($stringable, true), 'choices.0.text', '');
+                                //     });
 
-                            return strlen($data);
-                        },
-                    ],
-                ]);
-            })
+                                $writer($data, $ch);
+
+                                return strlen($data);
+                            },
+                        ],
+                    ]);
+                }
+            )
             ->post('completions', $this->validateData(
                 $data,
                 [
@@ -60,7 +74,7 @@ class OpenAI extends FoundationSdk
 
     public function completionsByCurl(array $data, ?callable $writer = null): Collection
     {
-        curl_setopt_array($curl = curl_init(), [
+        $options = [
             CURLOPT_URL => "{$this->config['base_url']}/completions",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -101,21 +115,15 @@ class OpenAI extends FoundationSdk
             // CURLOPT_TCP_KEEPALIVE => true, // 开启心跳检测
             // CURLOPT_TCP_KEEPIDLE => 10, // 空闲10秒检测一次
             // CURLOPT_TCP_KEEPINTVL => 10, // 每隔10秒检测一次
-            CURLOPT_WRITEFUNCTION => function ($ch, string $data) use ($writer) {
-                // \str($data)
-                //     ->replaceFirst('data: [DONE]', '')
-                //     ->replaceFirst('data: ', '')
-                //     ->rtrim()
-                //     ->tap(function (Stringable $stringable) {
-                //         $text = Arr::get(json_decode($stringable, true), 'choices.0.text');
-                //         $text and dump($text);
-                //     });
+        ];
 
-                $writer and $writer($data, $ch);
+        $writer and $options[CURLOPT_WRITEFUNCTION] = static function (object $ch, string $data) use ($writer) {
+            $writer($data, $ch);
 
-                return strlen($data); // 必须返回接收到的数据的长度，否则会断开连接。
-            },
-        ]);
+            return strlen($data); // 必须返回接收到的数据的长度，否则会断开连接。
+        };
+
+        curl_setopt_array($curl = curl_init(), $options);
 
         $response = curl_exec($curl);
         // dump(curl_error($curl), curl_errno($curl), curl_getinfo($curl));
