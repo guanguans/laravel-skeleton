@@ -501,3 +501,21 @@ if (! function_exists('array_map_with_keys')) {
         return $result;
     }
 }
+
+if (! function_exists('pd')) {
+    function pd(...$vars): void
+    {
+        pp(...$vars);
+        exit(1);
+    }
+}
+
+if (! function_exists('pp')) {
+    function pp(...$vars): void
+    {
+        foreach ($vars as $var) {
+            /** @noinspection DebugFunctionUsageInspection */
+            highlight_string(sprintf("\n<?php\n\$var = %s;\n?>\n", var_export($var, true)));
+        }
+    }
+}
