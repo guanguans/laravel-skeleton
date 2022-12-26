@@ -23,7 +23,7 @@ use LogicException;
  *     return function ($passable) use ($handler){
  *         $passable = ucfirst($passable);
  *
- *         // @var Stringable $stringable
+ *         // @var \Stringable $stringable
  *         $stringable = $handler($passable);
  *
  *         return $stringable->title();
@@ -34,7 +34,7 @@ use LogicException;
  *     return function ($passable) use ($handler){
  *         $passable = ucwords($passable);
  *
- *         // @var Stringable $stringable
+ *         // @var \Stringable $stringable
  *         $stringable = $handler($passable);
  *
  *         return $stringable->finish('!');
