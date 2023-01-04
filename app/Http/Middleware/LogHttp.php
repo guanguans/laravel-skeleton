@@ -9,24 +9,22 @@ use Illuminate\Support\Arr;
 
 class LogHttp
 {
-    protected $except = [
-    ];
+    protected $exceptMethods = [];
 
-    protected $exceptMethod = [
-    ];
+    protected $exceptPaths = [];
 
-    protected static $skipCallbacks = [];
-
-    protected $removedHeader = [
+    protected $removedHeaders = [
         'Authorization',
     ];
 
-    protected $removedInput = [
+    protected $removedInputs = [
         'password',
         'password_confirmation',
         'new_password',
         'old_password',
     ];
+
+    protected static $skipCallbacks = [];
 
     /**
      * Handle an incoming request.
@@ -70,13 +68,13 @@ class LogHttp
 
     protected function shouldntLogHttp(Request $request): bool
     {
-        if (in_array($request->method(), array_map('strtoupper', $this->exceptMethod), true)) {
+        if (in_array($request->method(), array_map('strtoupper', $this->exceptMethods), true)) {
             return true;
         }
 
-        foreach ($this->except as $except) {
-            $except === '/' or $except = trim($except, '/');
-            if ($request->fullUrlIs($except) || $request->is($except)) {
+        foreach ($this->exceptPaths as $exceptPath) {
+            $exceptPath === '/' or $exceptPath = trim($exceptPath, '/');
+            if ($request->fullUrlIs($exceptPath) || $request->is($exceptPath)) {
                 return true;
             }
         }
@@ -132,7 +130,7 @@ class LogHttp
     {
         $header = Arr::except(
             $requestOrResponse->headers->all(),
-            array_map('strtolower', $this->removedHeader)
+            array_map('strtolower', $this->removedHeaders)
         );
 
         return (string) json_encode($header);
@@ -140,7 +138,7 @@ class LogHttp
 
     protected function extractInput(Request $request): string
     {
-        return (string) json_encode($request->except($this->removedInput));
+        return (string) json_encode($request->except($this->removedInputs));
     }
 
     protected function calculateDuration(): string
