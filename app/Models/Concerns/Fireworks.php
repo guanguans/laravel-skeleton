@@ -22,7 +22,7 @@ trait Fireworks
         $afterEvents = ['retrieved', 'created', 'updated', 'saved', 'deleted'];
 
         foreach ($beforeEvents as $event) {
-            static::{$event}(function (Model $model) use ($model, $event) {
+            static::{$event}(function (Model $m) use ($model, $event) {
                 $method = sprintf('onModel%s', Str::studly($event));
                 $model->callBeforeEvent($model, $event);
                 if (method_exists($model, $method)) {
@@ -32,7 +32,7 @@ trait Fireworks
         }
 
         foreach ($afterEvents as $event) {
-            static::{$event}(function (Model $model) use ($model, $event) {
+            static::{$event}(function (Model $m) use ($model, $event) {
                 $method = sprintf('onModel%s', Str::studly($event));
                 if (method_exists($model, $method)) {
                     call_user_func_array([$model, $method], [$model]);

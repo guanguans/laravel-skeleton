@@ -21,7 +21,7 @@ trait Singletonable
     {
     }
 
-    protected function __wakeup()
+    final public function __wakeup()
     {
     }
 }

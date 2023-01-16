@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2dd5d59641a3e05ff7a7ca03798cde39",
+    "content-hash": "255b5f5c4125985432b3fffdd62df352",
     "packages": [
         {
             "name": "appstract/laravel-blade-directives",
@@ -7164,6 +7164,82 @@
             "time": "2022-10-13T09:55:55+00:00"
         },
         {
+            "name": "spatie/laravel-morph-map-generator",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-morph-map-generator.git",
+                "reference": "dc2355b9adcd2b8870e50b7a3a74aee5b4a033ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-morph-map-generator/zipball/dc2355b9adcd2b8870e50b7a3a74aee5b4a033ef",
+                "reference": "dc2355b9adcd2b8870e50b7a3a74aee5b4a033ef",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^8.0|^9.0|^10.0",
+                "illuminate/contracts": "^8.0|^9.0|^10.0",
+                "illuminate/database": "^8.0|^9.0|^10.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.24|^7.0|^8.0",
+                "pestphp/pest-plugin-laravel": "^1.3",
+                "phpunit/phpunit": "^9.5.13",
+                "spatie/temporary-directory": "^1.2",
+                "vimeo/psalm": "^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelMorphMapGenerator\\MorphMapGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelMorphMapGenerator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben Van Assche",
+                    "email": "ruben@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Automatically generate morph maps in your Laravel application",
+            "homepage": "https://github.com/spatie/laravel-morph-map-generator",
+            "keywords": [
+                "laravel-morph-map-generator",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-morph-map-generator/issues",
+                "source": "https://github.com/spatie/laravel-morph-map-generator/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/spatie",
+                    "type": "github"
+                },
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "other"
+                }
+            ],
+            "time": "2023-01-14T21:11:46+00:00"
+        },
+        {
             "name": "spatie/laravel-package-tools",
             "version": "1.13.8",
             "source": {
@@ -7296,21 +7372,97 @@
             "time": "2022-12-02T21:28:40+00:00"
         },
         {
-            "name": "spatie/laravel-signal-aware-command",
-            "version": "1.2.0",
+            "name": "spatie/laravel-schemaless-attributes",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spatie/laravel-signal-aware-command.git",
-                "reference": "d15a5b69bf715fc557b7034b4abd5a1472ae7ec8"
+                "url": "https://github.com/spatie/laravel-schemaless-attributes.git",
+                "reference": "ae19842763fe8d5a5059f8a7c0802bee6662b00c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-signal-aware-command/zipball/d15a5b69bf715fc557b7034b4abd5a1472ae7ec8",
-                "reference": "d15a5b69bf715fc557b7034b4abd5a1472ae7ec8",
+                "url": "https://api.github.com/repos/spatie/laravel-schemaless-attributes/zipball/ae19842763fe8d5a5059f8a7c0802bee6662b00c",
+                "reference": "ae19842763fe8d5a5059f8a7c0802bee6662b00c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^8.35|^9.0",
+                "illuminate/contracts": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.4.3"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.2",
+                "mockery/mockery": "^1.4",
+                "nunomaduro/collision": "^5.3|^6.0",
+                "orchestra/testbench": "^6.15|^7.0|^8.0",
+                "pestphp/pest-plugin-laravel": "^1.3",
+                "phpunit/phpunit": "^9.5.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\SchemalessAttributes\\SchemalessAttributesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\SchemalessAttributes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add schemaless attributes to Eloquent models",
+            "homepage": "https://github.com/spatie/laravel-schemaless-attributes",
+            "keywords": [
+                "laravel-schemaless-attributes",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-schemaless-attributes/issues",
+                "source": "https://github.com/spatie/laravel-schemaless-attributes/tree/2.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-01-14T20:58:52+00:00"
+        },
+        {
+            "name": "spatie/laravel-signal-aware-command",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-signal-aware-command.git",
+                "reference": "46cda09a85aef3fd47fb73ddc7081f963e255571"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-signal-aware-command/zipball/46cda09a85aef3fd47fb73ddc7081f963e255571",
+                "reference": "46cda09a85aef3fd47fb73ddc7081f963e255571",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.35|^9.0|^10.0",
                 "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.4.3"
             },
@@ -7318,7 +7470,8 @@
                 "brianium/paratest": "^6.2",
                 "ext-pcntl": "*",
                 "nunomaduro/collision": "^5.3|^6.0",
-                "orchestra/testbench": "^6.16|^7.0",
+                "orchestra/testbench": "^6.16|^7.0|^8.0",
+                "pestphp/pest-plugin-laravel": "^1.3",
                 "phpunit/phpunit": "^9.5",
                 "spatie/laravel-ray": "^1.17"
             },
@@ -7358,7 +7511,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-signal-aware-command/issues",
-                "source": "https://github.com/spatie/laravel-signal-aware-command/tree/1.2.0"
+                "source": "https://github.com/spatie/laravel-signal-aware-command/tree/1.3.0"
             },
             "funding": [
                 {
@@ -7366,7 +7519,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-12T19:42:44+00:00"
+            "time": "2023-01-14T21:10:59+00:00"
         },
         {
             "name": "spatie/laravel-translatable",
@@ -15775,6 +15928,71 @@
                 }
             ],
             "time": "2023-01-03T19:28:04+00:00"
+        },
+        {
+            "name": "spatie/laravel-stubs",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-stubs.git",
+                "reference": "374397b50789c00b0ac6e8665185d5f1de49de31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-stubs/zipball/374397b50789c00b0ac6e8665185d5f1de49de31",
+                "reference": "374397b50789c00b0ac6e8665185d5f1de49de31",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.71|^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.24|^7.0",
+                "pestphp/pest": "^1.22"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Stubs\\StubsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Stubs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Opinionated Laravel stubs",
+            "homepage": "https://github.com/spatie/laravel-stubs",
+            "keywords": [
+                "laravel-stubs",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/laravel-stubs/tree/2.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2023-01-15T11:47:40+00:00"
         },
         {
             "name": "theseer/tokenizer",
