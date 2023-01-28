@@ -5,7 +5,7 @@ namespace App\Support;
 /**
  * @see https://github.com/deployphp/deployer/blob/master/src/Utility/Httpie.php
  */
-class Httpie
+class HttpClient
 {
     /**
      * @var string
@@ -47,7 +47,7 @@ class Httpie
         }
     }
 
-    public static function get(string $url): Httpie
+    public static function get(string $url): HttpClient
     {
         $http = new self;
         $http->method = 'GET';
@@ -56,7 +56,7 @@ class Httpie
         return $http;
     }
 
-    public static function post(string $url): Httpie
+    public static function post(string $url): HttpClient
     {
         $http = new self;
         $http->method = 'POST';
@@ -65,7 +65,7 @@ class Httpie
         return $http;
     }
 
-    public static function patch(string $url): Httpie
+    public static function patch(string $url): HttpClient
     {
         $http = new self;
         $http->method = 'PATCH';
@@ -74,7 +74,7 @@ class Httpie
         return $http;
     }
 
-    public function query(array $params): Httpie
+    public function query(array $params): HttpClient
     {
         $http = clone $this;
         $http->url .= '?'.http_build_query($params);
@@ -82,7 +82,7 @@ class Httpie
         return $http;
     }
 
-    public function header(string $header, string $value): Httpie
+    public function header(string $header, string $value): HttpClient
     {
         $http = clone $this;
         $http->headers[$header] = $value;
@@ -90,7 +90,7 @@ class Httpie
         return $http;
     }
 
-    public function body(string $body): Httpie
+    public function body(string $body): HttpClient
     {
         $http = clone $this;
         $http->body = $body;
@@ -102,7 +102,7 @@ class Httpie
         return $http;
     }
 
-    public function jsonBody(array $data): Httpie
+    public function jsonBody(array $data): HttpClient
     {
         $http = clone $this;
         $http->body = json_encode($data, JSON_PRETTY_PRINT);
@@ -114,7 +114,7 @@ class Httpie
         return $http;
     }
 
-    public function formBody(array $data): Httpie
+    public function formBody(array $data): HttpClient
     {
         $http = clone $this;
         $http->body = http_build_query($data);
@@ -129,7 +129,7 @@ class Httpie
     /**
      * @param  mixed  $value
      */
-    public function setopt(int $key, $value): Httpie
+    public function setopt(int $key, $value): HttpClient
     {
         $http = clone $this;
         $http->curlopts[$key] = $value;
@@ -137,7 +137,7 @@ class Httpie
         return $http;
     }
 
-    public function nothrow(bool $on = true): Httpie
+    public function nothrow(bool $on = true): HttpClient
     {
         $http = clone $this;
         $http->nothrow = $on;
