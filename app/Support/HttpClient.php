@@ -47,34 +47,34 @@ class HttpClient
         }
     }
 
-    public static function get(string $url): HttpClient
+    public static function get(string $url): static
     {
-        $http = new self;
+        $http = new static;
         $http->method = 'GET';
         $http->url = $url;
 
         return $http;
     }
 
-    public static function post(string $url): HttpClient
+    public static function post(string $url): static
     {
-        $http = new self;
+        $http = new static;
         $http->method = 'POST';
         $http->url = $url;
 
         return $http;
     }
 
-    public static function patch(string $url): HttpClient
+    public static function patch(string $url): static
     {
-        $http = new self;
+        $http = new static;
         $http->method = 'PATCH';
         $http->url = $url;
 
         return $http;
     }
 
-    public function query(array $params): HttpClient
+    public function query(array $params): static
     {
         $http = clone $this;
         $http->url .= '?'.http_build_query($params);
@@ -82,7 +82,7 @@ class HttpClient
         return $http;
     }
 
-    public function header(string $header, string $value): HttpClient
+    public function header(string $header, string $value): static
     {
         $http = clone $this;
         $http->headers[$header] = $value;
@@ -90,7 +90,7 @@ class HttpClient
         return $http;
     }
 
-    public function body(string $body): HttpClient
+    public function body(string $body): static
     {
         $http = clone $this;
         $http->body = $body;
@@ -102,7 +102,7 @@ class HttpClient
         return $http;
     }
 
-    public function jsonBody(array $data): HttpClient
+    public function jsonBody(array $data): static
     {
         $http = clone $this;
         $http->body = json_encode($data, JSON_PRETTY_PRINT);
@@ -114,7 +114,7 @@ class HttpClient
         return $http;
     }
 
-    public function formBody(array $data): HttpClient
+    public function formBody(array $data): static
     {
         $http = clone $this;
         $http->body = http_build_query($data);
@@ -129,18 +129,18 @@ class HttpClient
     /**
      * @param  mixed  $value
      */
-    public function setopt(int $key, $value): HttpClient
+    public function setopt(int $setopt, $value): static
     {
         $http = clone $this;
-        $http->curlopts[$key] = $value;
+        $http->curlopts[$setopt] = $value;
 
         return $http;
     }
 
-    public function nothrow(bool $on = true): HttpClient
+    public function nothrow(bool $nothrow = true): static
     {
         $http = clone $this;
-        $http->nothrow = $on;
+        $http->nothrow = $nothrow;
 
         return $http;
     }
@@ -148,47 +148,43 @@ class HttpClient
     public function send(?array &$info = null): string
     {
         $ch = curl_init($this->url);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Deployer '.DEPLOYER_VERSION);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
+
         $headers = [];
         foreach ($this->headers as $key => $value) {
             $headers[] = "$key: $value";
         }
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->body);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        foreach ($this->curlopts as $key => $value) {
-            curl_setopt($ch, $key, $value);
-        }
+
+        curl_setopt_array($ch, $this->curlopts + [
+            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_USERAGENT => 'Laravel '.app()->version(),
+            CURLOPT_CUSTOMREQUEST => $this->method,
+            CURLOPT_POSTFIELDS => $this->body,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => 5,
+        ]);
+
         $result = curl_exec($ch);
         $info = curl_getinfo($ch);
-        if ($result === false) {
-            if ($this->nothrow) {
-                $result = '';
-            } else {
-                $error = curl_error($ch);
-                $errno = curl_errno($ch);
-                curl_close($ch);
 
-                throw new \RuntimeException($error, $errno);
-            }
+        if ($result === false && ! $this->nothrow) {
+            $error = curl_error($ch);
+            $errno = curl_errno($ch);
+            curl_close($ch);
+
+            throw new \RuntimeException($error, $errno);
         }
+
         curl_close($ch);
 
-        return $result;
+        return (string) $result;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getJson()
+    public function getJson(): array
     {
-        $result = $this->send();
-        $response = json_decode($result, true);
+        $response = json_decode($this->send(), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new \RuntimeException('JSON Error: '.json_last_error_msg());
         }
