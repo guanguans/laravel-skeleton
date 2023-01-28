@@ -31,8 +31,8 @@
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^4.4",
         "kevinrob/guzzle-cache-middleware": "^4.0",
-        "knuckleswtf/scribe": "^4.12",
-        "laravel/framework": "^9.47",
+        "knuckleswtf/scribe": "^4.13",
+        "laravel/framework": "^9.48",
         "laravel/octane": "^1.4",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
@@ -65,7 +65,7 @@
         "wendelladriel/laravel-validated-dto": "^1.1"
     },
     "require-dev": {
-        "andreaselia/laravel-api-to-postman": "^1.13",
+        "andreaselia/laravel-api-to-postman": "^1.14",
         "barryvdh/laravel-ide-helper": "^2.12",
         "brainmaestro/composer-git-hooks": "^3.0",
         "deployer/deployer": "^7.1",
@@ -152,8 +152,12 @@
             "@php artisan key:generate --ansi"
         ],
         "arkitect": "@php artisan test:arkitect",
-        "cghooks": "./vendor/bin/cghooks",
+        "cghooks": "@php ./vendor/bin/cghooks",
         "checks": [
+            "@mark-start",
+            "@composer-check-platform-reqs",
+            "@mark-start",
+            "@composer-validate",
             "@mark-start",
             "@pint-test",
             "@mark-separate",
@@ -170,9 +174,9 @@
         "mark-finish": "printf '\\n!\\n!\\t\\033[0;32m%s\\033[0m\\n!\\n\\n' \"Finished\"",
         "mark-separate": "printf '\\n!\\n!\\t\\033[0;33m%s\\033[0m\\n!\\n\\n' \"----------------\"",
         "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",
-        "phpstan": "./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
-        "pint": "./vendor/bin/pint -v",
+        "pint": "@php ./vendor/bin/pint -v",
         "pint-test": "@pint --test"
     }
 }
