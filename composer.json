@@ -156,9 +156,9 @@
         "checks": [
             "@mark-start",
             "@composer-check-platform-reqs",
-            "@mark-start",
+            "@mark-separate",
             "@composer-validate",
-            "@mark-start",
+            "@mark-separate",
             "@pint-test",
             "@mark-separate",
             "@docs-generate",
