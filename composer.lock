@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb82b38cacd6dd89d619e5f21a263860",
+    "content-hash": "8be5ddcc4b4bc3f4de5faa25e4d572ea",
     "packages": [
         {
             "name": "appstract/laravel-blade-directives",
@@ -5106,6 +5106,68 @@
                 }
             ],
             "time": "2023-01-03T12:54:54+00:00"
+        },
+        {
+            "name": "nunomaduro/laravel-console-task",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nunomaduro/laravel-console-task.git",
+                "reference": "7613432d2eb77498d5c7bdce560a33b7d82d8eeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nunomaduro/laravel-console-task/zipball/7613432d2eb77498d5c7bdce560a33b7d82d8eeb",
+                "reference": "7613432d2eb77498d5c7bdce560a33b7d82d8eeb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.2.5|^8.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.20"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NunoMaduro\\LaravelConsoleTask\\LaravelConsoleTaskServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NunoMaduro\\LaravelConsoleTask\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "Laravel Console Task is a output method for your Laravel/Laravel Zero commands.",
+            "keywords": [
+                "artisan",
+                "cli",
+                "command-line",
+                "console",
+                "laravel",
+                "laravel-zero",
+                "php",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/nunomaduro/laravel-console-task/issues",
+                "source": "https://github.com/nunomaduro/laravel-console-task"
+            },
+            "time": "2022-01-13T14:40:41+00:00"
         },
         {
             "name": "nunomaduro/termwind",

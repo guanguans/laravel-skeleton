@@ -36,6 +36,7 @@
         "laravel/octane": "^1.4",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "nunomaduro/laravel-console-task": "^1.7",
         "overtrue/laravel-query-logger": "^3.0",
         "php-open-source-saver/jwt-auth": "^2.0",
         "pragmarx/health": "^2.0",
