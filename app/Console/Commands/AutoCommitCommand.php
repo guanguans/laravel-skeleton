@@ -41,47 +41,53 @@ class AutoCommitCommand extends Command
             return self::FAILURE;
         }
 
-        $openAI
-            ->completions(
-                [
-                    'model' => 'code-davinci-002',
-                    'prompt' => $this->getPromptOfOpenAI($stagedDiff),
-                    'max_tokens' => 62,
-                    'temperature' => 0,
-                    // 'top_p' => 1,
-                    'stream' => true,
-                    // 'user' => Str::uuid()->toString(),
-                ],
-                function (string $data) use (&$commitMessage) {
-                    \str($data)
-                        ->replaceFirst('data: ', '')
-                        ->rtrim()
-                        ->tap(function (Stringable $stringable) use (&$commitMessage) {
-                            if ($stringable->startsWith('[DONE]')) {
-                                return;
-                            }
+        self::task('Getting commit message', function () use (&$commitMessage, $stagedDiff, $openAI) {
+            $openAI
+                ->completions(
+                    [
+                        'model' => 'code-davinci-002',
+                        'prompt' => $this->getPromptOfOpenAI($stagedDiff),
+                        'max_tokens' => 62,
+                        'temperature' => 0,
+                        // 'top_p' => 1,
+                        'stream' => true,
+                        // 'user' => Str::uuid()->toString(),
+                    ],
+                    function (string $data) use (&$commitMessage) {
+                        \str($data)
+                            ->replaceFirst('data: ', '')
+                            ->rtrim()
+                            ->tap(function (Stringable $stringable) use (&$commitMessage) {
+                                if ($stringable->startsWith('[DONE]')) {
+                                    return;
+                                }
 
-                            $text = Arr::get(json_decode($stringable, true), 'choices.0.text', '');
-                            $commitMessage .= $text;
-                            $this->output->write($text);
-                        });
-                }
-            )
-            ->collect()
-            ->tap(function () {
-                $this->newLine(3);
-            });
+                                $text = Arr::get(json_decode($stringable, true), 'choices.0.text', '');
+                                $commitMessage .= $text;
+                                $this->output->write("<info>$text</info>");
+                            });
+                    }
+                )
+                ->collect()
+                ->tap(function () {
+                    $this->newLine(2);
+                });
+
+            return true;
+        });
 
         if ($this->option('only-dry-run')) {
             return self::SUCCESS;
         }
 
-        (new Process($this->getCommitCommand($commitMessage)))
-            ->setTty(true)
-            ->setTimeout(null)
-            ->mustRun(function ($type, $buffer) {
-                $this->output->write($buffer);
-            });
+        self::task('Committing message', function () use ($commitMessage) {
+            (new Process($this->getCommitCommand($commitMessage)))
+                ->setTty(true)
+                ->setTimeout(null)
+                ->mustRun();
+
+            return true;
+        });
 
         return self::SUCCESS;
     }
