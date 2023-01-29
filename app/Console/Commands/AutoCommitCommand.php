@@ -13,9 +13,9 @@ class AutoCommitCommand extends Command
 {
     protected $signature = "
         auto-commit
-        {--no-edit : Do not force edit commits}
-        {--only-dry-run : Output the generated message, but don't create a commit}
-        {--l|lang=English : Output the generated message, but don't create a commit}
+        {--no-edit : Do not force edit commit message}
+        {--only-dry-run : Output the generated commit message but don't create a commit}
+        {--l|lang=english : Try to generate commit message in this language}
     ";
 
     protected $description = 'Automagically generate commit messages.';
@@ -51,8 +51,8 @@ class AutoCommitCommand extends Command
                         'model' => 'text-davinci-003',
                         'prompt' => $this->getPromptOfOpenAI($stagedDiff),
                         'max_tokens' => 62,
-                        'temperature' => 0,
-                        'top_p' => 1,
+                        'temperature' => 0.0,
+                        'top_p' => 1.0,
                         'stream' => true,
                         'user' => Str::uuid()->toString(),
                     ],
@@ -110,16 +110,16 @@ class AutoCommitCommand extends Command
 
     protected function getPromptOfOpenAI(string $stagedDiff): string
     {
-        $prompt = <<<'prompt'
+        $lang = ucfirst($this->option('lang') ?? 'english');
+
+        return <<<prompt
 I want you to act as a commit message generator. 
 I will provide you with information about the task and the prefix for the task code, 
 and I would like you to generate an appropriate commit message using the conventional commit format. 
 Do not write any explanations or other words, just reply with the commit message.
-In %s.
+In $lang.
 
-%s
+$stagedDiff
 prompt;
-
-        return sprintf($prompt, $this->option('lang') ?? 'English', $stagedDiff);
     }
 }
