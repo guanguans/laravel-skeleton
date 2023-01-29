@@ -15,6 +15,7 @@ class AutoCommitCommand extends Command
         auto-commit
         {--no-edit : Do not force edit commits}
         {--only-dry-run : Output the generated message, but don't create a commit}
+        {--l|lang=English : Output the generated message, but don't create a commit}
     ";
 
     protected $description = 'Automagically generate commit messages.';
@@ -42,16 +43,18 @@ class AutoCommitCommand extends Command
         }
 
         self::task('Getting commit message', function () use (&$commitMessage, $stagedDiff, $openAI) {
+            $this->newLine();
+
             $openAI
                 ->completions(
                     [
-                        'model' => 'code-davinci-002',
+                        'model' => 'text-davinci-003',
                         'prompt' => $this->getPromptOfOpenAI($stagedDiff),
                         'max_tokens' => 62,
                         'temperature' => 0,
-                        // 'top_p' => 1,
+                        'top_p' => 1,
                         'stream' => true,
-                        // 'user' => Str::uuid()->toString(),
+                        'user' => Str::uuid()->toString(),
                     ],
                     function (string $data) use (&$commitMessage) {
                         \str($data)
@@ -67,11 +70,9 @@ class AutoCommitCommand extends Command
                                 $this->output->write("<info>$text</info>");
                             });
                     }
-                )
-                ->collect()
-                ->tap(function () {
-                    $this->newLine(2);
-                });
+                );
+
+            $this->newLine(2);
 
             return true;
         });
@@ -94,7 +95,12 @@ class AutoCommitCommand extends Command
 
     protected function getCommitCommand(string $commitMessage): array
     {
-        $command = ['git', 'commit', '--message', $commitMessage];
+        $clearedCommitMessage = \str($commitMessage)
+            ->trim()
+            ->ltrim('Commit message: ')
+            ->ltrim('Message: ');
+
+        $command = ['git', 'commit', '--message', $clearedCommitMessage];
         if (! $this->option('no-edit')) {
             $command[] = '--edit';
         }
@@ -104,9 +110,16 @@ class AutoCommitCommand extends Command
 
     protected function getPromptOfOpenAI(string $stagedDiff): string
     {
-        return sprintf(
-            "git diff --staged\\^!\n{%s}\n\n# Write a commit message describing the changes and the reasoning behind them\ngit commit -F- <<EOF",
-            $stagedDiff
-        );
+        $prompt = <<<'prompt'
+I want you to act as a commit message generator. 
+I will provide you with information about the task and the prefix for the task code, 
+and I would like you to generate an appropriate commit message using the conventional commit format. 
+Do not write any explanations or other words, just reply with the commit message.
+In %s.
+
+%s
+prompt;
+
+        return sprintf($prompt, $this->option('lang') ?? 'English', $stagedDiff);
     }
 }
