@@ -114,7 +114,7 @@ class OpenAICommitCommand extends Command
             return $commitMessage === $choice;
         });
 
-        is_array($commitMessage) and $commitMessage = $commitMessage['subject'].PHP_EOL.$commitMessage['body'];
+        is_array($commitMessage) and $commitMessage = $commitMessage['subject'].str_repeat(PHP_EOL, 2).$commitMessage['body'];
 
         self::task(
             'Committing message',
