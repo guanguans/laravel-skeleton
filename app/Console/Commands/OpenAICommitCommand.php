@@ -144,7 +144,7 @@ class OpenAICommitCommand extends Command
 
     protected function getPromptOfOpenAI(string $stagedDiff): string
     {
-        $prompt = $this->option('prompt') ?: $this->promtps()[1]['prompt'];
+        $prompt = $this->option('prompt') ?: $this->promtps()[3]['prompt'];
 
         return \str($prompt)
             ->replace(['{{diff}}', '{{num}}'], [$stagedDiff, $this->option('num') ?: 3])
