@@ -82,10 +82,44 @@ class OpenAICommitCommand extends Command
             return self::SUCCESS;
         }
 
+        if (\str($commitMessages)->isEmpty()) {
+            $this->error('No commit message generated.');
+
+            return self::FAILURE;
+        }
+
+        if (! \str($commitMessages)->isJson()) {
+            $this->error('The generated commit message is an invalid JSON.');
+
+            return self::FAILURE;
+        }
+
+        $commitMessages = collect(json_decode($commitMessages, true)['commit_messages']);
+        $choice = $this->choice(
+            'Please choice a commit message?',
+            $commitMessages
+                ->map(function ($commitMessage): string {
+                    is_array($commitMessage) and $commitMessage = $commitMessage['subject'];
+
+                    return $commitMessage;
+                })
+                ->all()
+        );
+
+        $commitMessage = $commitMessages->first(function ($commitMessage) use ($choice) {
+            if (is_array($commitMessage)) {
+                return $commitMessage['subject'] === $choice;
+            }
+
+            return $commitMessage === $choice;
+        });
+
+        is_array($commitMessage) and $commitMessage = $commitMessage['subject'].PHP_EOL.$commitMessage['body'];
+
         self::task(
             'Committing message',
-            function () use ($commitMessages) {
-                (new Process($this->getCommitCommand($commitMessages)))
+            function () use ($commitMessage) {
+                (new Process($this->getCommitCommand($commitMessage)))
                     ->setTty(true)
                     ->setTimeout(null)
                     ->mustRun();
@@ -98,14 +132,9 @@ class OpenAICommitCommand extends Command
         return self::SUCCESS;
     }
 
-    protected function getCommitCommand(string $commitMessages): array
+    protected function getCommitCommand(string $commitMessage): array
     {
-        $clearedCommitMessage = \str($commitMessages)
-            ->trim()
-            ->replace(/** @lang PhpRegExp */ '/(\r\n|\n|\r|\'|"|`|)/gm', '')
-            ->trim();
-
-        $command = ['git', 'commit', '--message', $clearedCommitMessage];
+        $command = ['git', 'commit', '--message', \str($commitMessage)->trim()];
         if (! $this->option('no-edit')) {
             $command[] = '--edit';
         }
@@ -115,18 +144,7 @@ class OpenAICommitCommand extends Command
 
     protected function getPromptOfOpenAI(string $stagedDiff): string
     {
-        $prompt = $this->option('prompt') ?: <<<'prompt'
-I want you to act as a commit message generator. 
-I will provide you with information about the task and the prefix for the task code, 
-and I would like you to generate an appropriate commit message using the conventional commit format. 
-Do not write any explanations or other words, just reply with the commit message.
-
-```
-{{diff}}
-```
-prompt;
-
-        $prompt = $this->option('prompt') ?: $this->promtps()[2]['prompt'];
+        $prompt = $this->option('prompt') ?: $this->promtps()[1]['prompt'];
 
         return \str($prompt)
             ->replace(['{{diff}}', '{{num}}'], [$stagedDiff, $this->option('num') ?: 3])
