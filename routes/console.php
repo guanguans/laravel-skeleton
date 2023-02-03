@@ -26,8 +26,10 @@ Artisan::command('docs:generate-signed-url', function () {
     return $this::SUCCESS;
 })->purpose('生成接口文档签名地址');
 
+/**
+ * @var \Illuminate\Foundation\Console\ClosureCommand $this
+ */
 Artisan::command('deployer:notify {result}', function () {
-    /** @var \Illuminate\Foundation\Console\ClosureCommand $this */
     if (! in_array($this->argument('result'), ['FAILURE', 'SUCCESS'])) {
         throw new InvalidArgumentException('Invalid result parameters(FAILURE/SUCCESS).');
     }
