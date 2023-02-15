@@ -71,6 +71,7 @@
         "brainmaestro/composer-git-hooks": "^3.0",
         "deployer/deployer": "^7.1",
         "fakerphp/faker": "^1.21",
+        "guanguans/ai-commit": "^1.1",
         "kitloong/laravel-migrations-generator": "^6.7",
         "lanin/laravel-api-debugger": "^4.0",
         "laravel-lang/attributes": "^1.1",
@@ -152,6 +153,7 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
+        "ai-commit": "@php ./vendor/bin/ai-commit commit",
         "arkitect": "@php artisan test:arkitect",
         "cghooks": "@php ./vendor/bin/cghooks",
         "checks": [
