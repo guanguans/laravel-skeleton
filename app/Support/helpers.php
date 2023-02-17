@@ -45,14 +45,14 @@ if (! function_exists('make')) {
     }
 }
 
-if (! function_exists('resolve_class_from_path')) {
+if (! function_exists('resolve_class_from')) {
     /**
      * @param  string  $path 文件路径
      * @param  null|string  $vendorPath 供应商路径
      * @param  null|string  $vendorNamespace 供应商命名空间
      * @return string
      */
-    function resolve_class_from_path(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
+    function resolve_class_from(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
         $vendorPath = $vendorPath ? realpath($vendorPath) : app_path();

@@ -166,7 +166,7 @@ class AppServiceProvider extends ServiceProvider
 
         $files = glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php'));
         foreach ($files as $file) {
-            QueryBuilder::mixin($queryBuilderMacro = $this->app->make(resolve_class_from_path($file)));
+            QueryBuilder::mixin($queryBuilderMacro = $this->app->make(resolve_class_from($file)));
             EloquentBuilder::mixin($queryBuilderMacro);
             Relation::mixin($queryBuilderMacro);
         }
@@ -178,7 +178,7 @@ class AppServiceProvider extends ServiceProvider
     protected function extendValidatorFrom(string|array $dirs, string|array $name = '*Rule.php', string|array $notName = [])
     {
         foreach (Finder::create()->files()->name($name)->notName($notName)->in($dirs) as $splFileInfo) {
-            $class = resolve_class_from_path($splFileInfo->getRealPath());
+            $class = resolve_class_from($splFileInfo->getRealPath());
             if (! is_subclass_of($class, Rule::class)) {
                 continue;
             }
