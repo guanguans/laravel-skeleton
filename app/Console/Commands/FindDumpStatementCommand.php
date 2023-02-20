@@ -80,6 +80,11 @@ class FindDumpStatementCommand extends Command
     /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
     private $resourceUsageFormatter;
 
+    public function isEnabled()
+    {
+        return ! $this->laravel->isProduction();
+    }
+
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->checkOptions();

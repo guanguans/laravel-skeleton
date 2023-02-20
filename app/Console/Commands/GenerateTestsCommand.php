@@ -118,6 +118,11 @@ class GenerateTestsCommand extends Command
 
     private $classUpdatingVisitor;
 
+    public function isEnabled()
+    {
+        return ! $this->laravel->isProduction();
+    }
+
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->checkOptions();
