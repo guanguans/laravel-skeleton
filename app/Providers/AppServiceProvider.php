@@ -310,5 +310,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::stringable(function (Request $request) {
             return json_encode($request->all(), JSON_PRETTY_PRINT);
         });
+
+        // Directive::callback('limit', function ($value, $limit = 100, $end = '...') {
+        //     return Str::limit($value, $limit, $end);
+        // });
     }
 }

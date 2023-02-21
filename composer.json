@@ -57,6 +57,7 @@
         "staudenmeir/eloquent-has-many-deep": "^1.17",
         "staudenmeir/eloquent-json-relations": "^1.7",
         "stevebauman/location": "^6.5",
+        "stillat/blade-directives": "^1.2",
         "surgiie/transformer": "^0.2.0",
         "symfony/stopwatch": "^6.0",
         "tenantcloud/laravel-boolean-softdeletes": "^4.0",
