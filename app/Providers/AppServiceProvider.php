@@ -43,6 +43,7 @@ use Illuminate\View\View;
 use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
 use ReflectionClass;
 use Reliese\Coders\CodersServiceProvider;
+use Stillat\BladeDirectives\Support\Facades\Directive;
 use Symfony\Component\Finder\Finder;
 
 class AppServiceProvider extends ServiceProvider
@@ -311,8 +312,12 @@ class AppServiceProvider extends ServiceProvider
             return json_encode($request->all(), JSON_PRETTY_PRINT);
         });
 
-        // Directive::callback('limit', function ($value, $limit = 100, $end = '...') {
-        //     return Str::limit($value, $limit, $end);
-        // });
+        Directive::callback('limit', function ($value, $limit = 100, $end = '...') {
+            return Str::limit($value, $limit, $end);
+        });
+
+        Directive::compile('slugify', function ($title, $separator = '-', $language = 'en', $dictionary = ['@' => 'at']) {
+            return '<?php echo \Illuminate\Support\Str::slug($title, $separator, $language, $dictionary); ?>';
+        });
     }
 }
