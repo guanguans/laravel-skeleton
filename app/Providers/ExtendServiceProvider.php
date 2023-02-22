@@ -68,9 +68,6 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function registerOpenAI(): void
     {
         $this->app->singleton(OpenAI::class, function (Application $application) {
@@ -80,9 +77,6 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
         $this->app->alias(OpenAI::class, 'openai');
     }
 
-    /**
-     * @return void
-     */
     protected function registerPushDeer(): void
     {
         $this->app->singleton(PushDeer::class, function (Application $application) {
@@ -92,9 +86,6 @@ class ExtendServiceProvider extends ServiceProvider implements DeferrableProvide
         $this->app->alias(PushDeer::class, 'pushdeer');
     }
 
-    /**
-     * @return void
-     */
     protected function registerChatGPT(): void
     {
         $this->app->singleton(ChatGPT::class, function (Application $application) {

@@ -102,10 +102,6 @@ class HealthCheckCommand extends Command
         return self::SUCCESS;
     }
 
-    /**
-     * @param $connection
-     * @return \App\Enums\HealthCheckStateEnum
-     */
     protected function checkDatabase($connection = null): HealthCheckStateEnum
     {
         try {
@@ -119,9 +115,6 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
-    /**
-     * @return \App\Enums\HealthCheckStateEnum
-     */
     protected function checkSqlSafeUpdates(): HealthCheckStateEnum
     {
         if (config('database.default') !== 'mysql') {
@@ -142,7 +135,6 @@ class HealthCheckCommand extends Command
 
     /**
      * @param  array|string  $checkedSqlModes
-     * @return \App\Enums\HealthCheckStateEnum
      */
     protected function checkSqlMode($checkedSqlModes = 'strict_all_tables'): HealthCheckStateEnum
     {
@@ -175,8 +167,6 @@ class HealthCheckCommand extends Command
     }
 
     /**
-     * @return \App\Enums\HealthCheckStateEnum
-     *
      * @throws \Exception
      */
     protected function checkTimeZone(): HealthCheckStateEnum
@@ -201,10 +191,6 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
-    /**
-     * @param  null|string  $url
-     * @return \App\Enums\HealthCheckStateEnum
-     */
     protected function checkPing(?string $url = null): HealthCheckStateEnum
     {
         $url = $url ?: config('app.url');
@@ -219,9 +205,6 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
-    /**
-     * @return \App\Enums\HealthCheckStateEnum
-     */
     protected function checkPhpVersion(): HealthCheckStateEnum
     {
         if (version_compare(PHP_VERSION, '7.3.0', '<')) {
@@ -264,9 +247,6 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
-    /**
-     * @return \App\Enums\HealthCheckStateEnum
-     */
     protected function checkDiskSpace(): HealthCheckStateEnum
     {
         $freeSpace = disk_free_space(base_path());

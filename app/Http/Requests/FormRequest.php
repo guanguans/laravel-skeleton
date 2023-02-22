@@ -106,10 +106,6 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         return $validator;
     }
 
-    /**
-     * @param  string  $type
-     * @return string
-     */
     protected function getHandleMethod(string $type): string
     {
         if (! in_array(lcfirst($type), ['validationData', 'authorize', 'rules', 'messages', 'attributes', 'failedValidation', 'failedAuthorization'], true)) {

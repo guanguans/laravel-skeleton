@@ -27,8 +27,6 @@ class AlertComponent extends Component
     /**
      * Create a new component instance.
      *
-     * @param  string  $type
-     * @param  string  $message
      * @return void
      */
     public function __construct(string $type, string $message)

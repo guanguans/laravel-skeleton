@@ -117,7 +117,6 @@ abstract class FoundationSdk
      * }
      * ```
      *
-     * @param  array  $config
      * @return array The merged and validated options
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException If an option name is undefined
@@ -140,9 +139,6 @@ abstract class FoundationSdk
      *         ->withMiddleware($this->buildLoggerMiddleware());
      * }
      * ```
-     *
-     * @param  array  $config
-     * @return \Illuminate\Http\Client\PendingRequest
      */
     abstract protected function buildPendingRequest(array $config): PendingRequest;
 }

@@ -14,19 +14,12 @@ class Repository
 
     /**
      * Repository constructor.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
      */
     public function __construct(Model $model)
     {
         $this->model = $model;
     }
 
-    /**
-     * @param  array  $columns
-     * @param  array  $relations
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
     public function all(array $columns = ['*'], array $relations = []): Collection
     {
         return $this->model->with($relations)->get($columns);
@@ -34,8 +27,6 @@ class Repository
 
     /**
      * Get all trashed models.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function allTrashed(): Collection
     {
@@ -44,12 +35,6 @@ class Repository
 
     /**
      * Find model by id.
-     *
-     * @param  int  $modelId
-     * @param  array  $columns
-     * @param  array  $relations
-     * @param  array  $appends
-     * @return null|\Illuminate\Database\Eloquent\Model
      */
     public function findById(int $modelId, array $columns = ['*'], array $relations = [], array $appends = []): ?Model
     {
@@ -58,9 +43,6 @@ class Repository
 
     /**
      * Find trashed model by id.
-     *
-     * @param  int  $modelId
-     * @return null|\Illuminate\Database\Eloquent\Model
      */
     public function findTrashedById(int $modelId): ?Model
     {
@@ -69,9 +51,6 @@ class Repository
 
     /**
      * Find only trashed model by id.
-     *
-     * @param  int  $modelId
-     * @return null|\Illuminate\Database\Eloquent\Model
      */
     public function findOnlyTrashedById(int $modelId): ?Model
     {
@@ -80,9 +59,6 @@ class Repository
 
     /**
      * Create a model.
-     *
-     * @param  array  $payload
-     * @return null|\Illuminate\Database\Eloquent\Model
      */
     public function create(array $payload): ?Model
     {
@@ -93,10 +69,6 @@ class Repository
 
     /**
      * Update existing model.
-     *
-     * @param  int  $modelId
-     * @param  array  $payload
-     * @return bool
      */
     public function update(int $modelId, array $payload): bool
     {
@@ -107,9 +79,6 @@ class Repository
 
     /**
      * Delete model by id.
-     *
-     * @param  int  $modelId
-     * @return bool
      */
     public function deleteById(int $modelId): bool
     {
@@ -118,9 +87,6 @@ class Repository
 
     /**
      * Restore model by id.
-     *
-     * @param  int  $modelId
-     * @return bool
      */
     public function restoreById(int $modelId): bool
     {
@@ -129,9 +95,6 @@ class Repository
 
     /**
      * Permanently delete model by id.
-     *
-     * @param  int  $modelId
-     * @return bool
      */
     public function permanentlyDeleteById(int $modelId): bool
     {

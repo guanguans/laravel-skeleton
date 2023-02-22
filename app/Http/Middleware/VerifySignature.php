@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Validator;
 class VerifySignature
 {
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $secret
-     * @param  int  $effectiveTime
-     * @param  bool  $checkRepeatRequest
      * @return mixed
      */
     public function handle(Request $request, Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true)

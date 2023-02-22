@@ -6,8 +6,6 @@ final class ChineseNameRule extends RegexRule
 {
     /**
      * 中文姓名.
-     *
-     * @return string
      */
     protected function pattern(): string
     {

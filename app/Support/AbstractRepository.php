@@ -149,7 +149,6 @@ abstract class AbstractRepository
     /**
      * Get a new entity instance
      *
-     * @param  array  $attributes
      * @return  \Illuminate\Database\Eloquent\Model
      */
     public function getNew(array $attributes = [])
@@ -257,7 +256,6 @@ abstract class AbstractRepository
     /**
      * Find data by multiple fields
      *
-     * @param  array  $where
      * @param  array  $columns
      * @return mixed
      */
@@ -566,7 +564,6 @@ abstract class AbstractRepository
     /**
      * Save a new entity in repository
      *
-     * @param  array  $attributes
      * @return Model|bool
      */
     public function create(array $attributes)
@@ -585,8 +582,6 @@ abstract class AbstractRepository
     /**
      * Update an entity with the given attributes and persist it
      *
-     * @param  Model  $entity
-     * @param  array  $attributes
      * @return bool
      */
     public function update(Model $entity, array $attributes)
@@ -643,7 +638,6 @@ abstract class AbstractRepository
      * Get a new query builder instance with the applied
      * the order by and scopes.
      *
-     * @param  bool  $skipOrdering
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function getBuilder(bool $skipOrdering = false)
@@ -678,7 +672,6 @@ abstract class AbstractRepository
     /**
      * Add query scope.
      *
-     * @param  Closure  $scope
      * @return $this
      */
     public function addScopeQuery(Closure $scope)
@@ -711,7 +704,6 @@ abstract class AbstractRepository
      * Add a message to the repository's error messages.
      *
      * @param  string  $message
-     * @param  string  $key
      * @return self
      */
     public function addError($message, string $key = 'message')
@@ -770,7 +762,6 @@ abstract class AbstractRepository
     /**
      * Add a search where clause to the query.
      *
-     * @param  Builder  $query
      * @param  string  $param
      * @param  string  $column
      * @param  mixed  $value
@@ -790,7 +781,6 @@ abstract class AbstractRepository
     /**
      * Add a search join to the query.
      *
-     * @param  Builder  $query
      * @param  string  $joining_table
      * @param  string  $foreign_key
      * @param  string  $related_key
@@ -817,9 +807,7 @@ abstract class AbstractRepository
     /**
      * Add a range clause to the query.
      *
-     * @param  Builder  $query
      * @param  mixed  $value
-     * @param  array  $columns
      * @return bool
      */
     protected function createSearchRangeClause(Builder $query, $value, array $columns)

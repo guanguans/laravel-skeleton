@@ -20,7 +20,6 @@ class RequestComposer
     /**
      * 绑定视图数据.
      *
-     * @param  \Illuminate\View\View  $view
      * @return void
      */
     public function compose(View $view)

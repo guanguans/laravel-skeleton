@@ -64,8 +64,6 @@ class System
 
     /**
      * Returns the system's OS.
-     *
-     * @return string
      */
     public static function getOS(): string
     {
@@ -74,8 +72,6 @@ class System
 
     /**
      * Returns the architecture of the system's processor.
-     *
-     * @return string
      */
     public static function getArch(): string
     {
@@ -85,7 +81,6 @@ class System
     /**
      * Returns the architecture's Enum of the system's processor.
      *
-     * @return string
      *
      * @throws Exception
      */
@@ -115,8 +110,6 @@ class System
 
     /**
      * Returns the system's hostname.
-     *
-     * @return string
      */
     public static function getHostname(): string
     {
@@ -125,8 +118,6 @@ class System
 
     /**
      * Checks if the system is running on an ARM architecture.
-     *
-     * @return bool
      */
     public static function isArm(): bool
     {
@@ -135,8 +126,6 @@ class System
 
     /**
      * Checks if the system is running on an X86 architecture.
-     *
-     * @return bool
      */
     public static function isX86(): bool
     {
@@ -145,8 +134,6 @@ class System
 
     /**
      * Checks if the system is running on an PowerPC architecture.
-     *
-     * @return bool
      */
     public static function isPPC(): bool
     {
@@ -157,8 +144,6 @@ class System
      * Checks if the system is the passed architecture.
      * You should pass `System::X86`, `System::PPC`, `System::ARM` or an equivalent string.
      *
-     * @param  string  $arch
-     * @return bool
      *
      * @throws Exception
      */
@@ -188,7 +173,6 @@ class System
     /**
      * Gets the system's total amount of CPU cores.
      *
-     * @return int
      *
      * @throws Exception
      */
@@ -212,7 +196,6 @@ class System
     /**
      * Helper function to read a Linux System's /proc/stat data and convert it into an array.
      *
-     * @return array
      *
      * @noinspection OffsetOperationsInspection
      */
@@ -289,8 +272,6 @@ class System
      * Get percentage CPU usage (between 0 and 100)
      * Reference for formula: https://stackoverflow.com/a/23376195/17300412
      *
-     * @param  int  $duration
-     * @return float
      *
      * @throws Exception
      *
@@ -326,7 +307,6 @@ class System
     /**
      * Returns the total amount of RAM available on the system as Megabytes.
      *
-     * @return int
      *
      * @throws Exception
      */
@@ -356,7 +336,6 @@ class System
     /**
      * Returns the total amount of Free RAM available on the system as Megabytes.
      *
-     * @return int
      *
      * @throws Exception
      */
@@ -381,7 +360,6 @@ class System
     /**
      * Returns the total amount of Disk space on the system as Megabytes.
      *
-     * @return int
      *
      * @throws Exception
      */
@@ -399,7 +377,6 @@ class System
     /**
      * Returns the total amount of Disk space free on the system as Megabytes.
      *
-     * @return int
      *
      * @throws Exception
      */
@@ -456,7 +433,6 @@ class System
      * There is also a ['total'] key that contains the total amount of read and write usage.
      *
      * @param  int  $duration
-     * @return array
      *
      * @throws Exception
      *
@@ -516,7 +492,6 @@ class System
      * and upload
      *
      * @param  int  $duration The buffer duration to fetch the data points
-     * @return array
      *
      * @throws Exception
      *

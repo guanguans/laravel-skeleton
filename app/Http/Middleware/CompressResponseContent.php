@@ -25,8 +25,6 @@ class CompressResponseContent
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  bool  $debug
      * @return \Illuminate\Http\Response
      */
     public function handle($request, Closure $next, bool $debug = false)
@@ -57,7 +55,6 @@ class CompressResponseContent
     /**
      * Register a callback that instructs the middleware to be skipped.
      *
-     * @param  \Closure  $callback
      * @return void
      */
     public static function skipWhen(Closure $callback)
@@ -239,8 +236,6 @@ HTML;
     /**
      * This method will no longer support.
      *
-     * @param  string  $content
-     * @return string
      *
      * @deprecated
      */

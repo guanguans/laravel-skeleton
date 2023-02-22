@@ -36,10 +36,6 @@ class JWTUser extends User implements JWTSubject
         return [];
     }
 
-    /**
-     * @param  string  $token
-     * @return array
-     */
     public static function wrapToken(string $token): array
     {
         return [

@@ -50,7 +50,6 @@ if (! function_exists('resolve_class_from')) {
      * @param  string  $path 文件路径
      * @param  null|string  $vendorPath 供应商路径
      * @param  null|string  $vendorNamespace 供应商命名空间
-     * @return string
      */
     function resolve_class_from(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
     {
@@ -139,10 +138,6 @@ if (! function_exists('bytes_to_bits')) {
 if (! function_exists('partical')) {
     /**
      * 偏函数
-     *
-     * @param  callable  $function
-     * @param ...$args
-     * @return callable
      */
     function partical(callable $function, ...$args): callable
     {
@@ -155,9 +150,6 @@ if (! function_exists('partical')) {
 if (! function_exists('curry')) {
     /**
      * 柯里化函数
-     *
-     * @param  callable  $function
-     * @return callable
      */
     function curry(callable $function): callable
     {
@@ -182,9 +174,6 @@ if (! function_exists('curry')) {
 if (! function_exists('compose')) {
     /**
      * 合成函数
-     *
-     * @param  callable  ...$functions
-     * @return callable
      */
     function compose(callable ...$functions): callable
     {
@@ -203,10 +192,7 @@ if (! function_exists('compose')) {
 }
 
 if (! function_exists('memoize')) {
-    /**
-     * @param  callable  $function
-     * @return callable
-     */
+
     function memoize(callable $function): callable
     {
         return function () use ($function) {
@@ -227,10 +213,7 @@ if (! function_exists('memoize')) {
 }
 
 if (! function_exists('once')) {
-    /**
-     * @param  callable  $function
-     * @return callable
-     */
+
     function once(callable $function): callable
     {
         return function (...$args) use ($function) {
@@ -292,12 +275,6 @@ if (! function_exists('user_http_build_query')) {
      *     ],
      * ];
      * ```
-     *
-     * @param  array  $queryPayload
-     * @param  string  $numericPrefix
-     * @param  string  $argSeparator
-     * @param  int  $encType
-     * @return string
      */
     function user_http_build_query(array $queryPayload, string $numericPrefix = '', string $argSeparator = '&', int $encType = PHP_QUERY_RFC1738): string
     {
@@ -357,10 +334,6 @@ if (! function_exists('user_http_build_query')) {
 
 if (! function_exists('validate')) {
     /**
-     * @param  array  $data
-     * @param  array  $rules
-     * @param  array  $messages
-     * @param  array  $customAttributes
      * @return array
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -373,7 +346,6 @@ if (! function_exists('validate')) {
 
 if (! function_exists('array_filter_filled')) {
     /**
-     * @param  array  $array
      * @return array
      */
     function array_filter_filled(array $array)
@@ -389,7 +361,6 @@ if (! function_exists('call')) {
      * Call the given Closure / class@method and inject its dependencies.
      *
      * @param  callable|string  $callback
-     * @param  array  $parameters
      * @param  string|null  $defaultMethod
      * @return mixed
      */
@@ -402,7 +373,6 @@ if (! function_exists('call')) {
 if (! function_exists('catch_resource_usage')) {
     /**
      * @param  callable|string  $callback
-     * @param ...$parameter
      * @return string
      */
     function catch_resource_usage($callback, ...$parameter)
@@ -420,7 +390,6 @@ if (! function_exists('catch_resource_usage')) {
 if (! function_exists('catch_query_log')) {
     /**
      * @param  callable|string  $callback
-     * @param    ...$parameter
      * @return array
      */
     function catch_query_log($callback, ...$parameter)
@@ -465,8 +434,6 @@ if (! function_exists('dd_to_array')) {
 
 if (! function_exists('array_reduce_with_keys')) {
     /**
-     * @param  array  $array
-     * @param  callable  $callback
      * @param  null  $carry
      * @return null|mixed
      */
@@ -482,8 +449,6 @@ if (! function_exists('array_reduce_with_keys')) {
 
 if (! function_exists('array_map_with_keys')) {
     /**
-     * @param  callable  $callback
-     * @param  array  $array
      * @return array
      */
     function array_map_with_keys(callable $callback, array $array)
