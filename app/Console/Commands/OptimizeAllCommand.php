@@ -49,7 +49,7 @@ class OptimizeAllCommand extends Command
             $this->call('view:cache');
         });
 
-        $this->info($resourceUsage);
+        $this->output->success($resourceUsage);
 
         return self::SUCCESS;
     }
