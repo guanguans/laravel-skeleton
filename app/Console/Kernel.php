@@ -5,6 +5,9 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Inspiring;
+use Spatie\Health\Commands\RunHealthChecksCommand;
+use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
+use Spatie\ShortSchedule\ShortSchedule;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class Kernel extends ConsoleKernel
@@ -42,6 +45,15 @@ class Kernel extends ConsoleKernel
         // })->everyMinute();
 
         // $schedule->exec('php', ['-v'])->everyMinute();
+
+        $schedule->command(RunHealthChecksCommand::class)->everyMinute();
+        $schedule->command('model:prune', ['--model' => MonitoredScheduledTaskLogItem::class])->daily();
+    }
+
+    protected function shortSchedule(ShortSchedule $shortSchedule)
+    {
+        // this artisan command will run every second
+        $shortSchedule->command('inspire')->everySecond();
     }
 
     /**
