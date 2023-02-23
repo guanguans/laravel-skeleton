@@ -39,7 +39,6 @@
         "nunomaduro/laravel-console-task": "^1.7",
         "overtrue/laravel-query-logger": "^3.1",
         "php-open-source-saver/jwt-auth": "^2.1",
-        "pragmarx/health": "^2.0",
         "propaganistas/laravel-disposable-email": "^2.2",
         "rap2hpoutre/laravel-log-viewer": "^2.2",
         "rennokki/laravel-eloquent-query-cache": "^3.3",
