@@ -8,6 +8,7 @@ use App\Macros\CommandMacro;
 use App\Macros\GrammarMacro;
 use App\Macros\MySqlGrammarMacro;
 use App\Macros\RequestMacro;
+use App\Macros\ResponseFactoryMacro;
 use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
 use App\Rules\Rule;
@@ -31,6 +32,7 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
@@ -69,6 +71,7 @@ class AppServiceProvider extends ServiceProvider
         GrammarMacro::class,
         MySqlGrammarMacro::class,
         RequestMacro::class,
+        ResponseFactoryMacro::class,
         StringableMacro::class,
         StrMacro::class,
     ];
@@ -166,6 +169,7 @@ class AppServiceProvider extends ServiceProvider
         Grammar::mixin($this->app->make(GrammarMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
         Request::mixin($this->app->make(RequestMacro::class));
+        ResponseFactory::mixin($this->app->make(ResponseFactoryMacro::class));
         Stringable::mixin($this->app->make(StringableMacro::class));
         Str::mixin($this->app->make(StrMacro::class));
 

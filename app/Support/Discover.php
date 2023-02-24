@@ -13,6 +13,9 @@ use ReflectionMethod;
 use ReflectionProperty;
 use Symfony\Component\Finder\SplFileInfo;
 
+/**
+ * @see https://github.com/Laragear/Meta
+ */
 class Discover
 {
     /**
