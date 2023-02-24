@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83ffb2e0c60f638c77cfac8e03c0f22f",
+    "content-hash": "99b2383290abaa5bb98d999614aa3634",
     "packages": [
         {
             "name": "appstract/laravel-blade-directives",
@@ -3339,6 +3339,156 @@
                 }
             ],
             "time": "2022-12-20T12:22:40+00:00"
+        },
+        {
+            "name": "laragear/cache-query",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/CacheQuery.git",
+                "reference": "52231e35020511655e4ece6c77c42a6cc3d51556"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/52231e35020511655e4ece6c77c42a6cc3d51556",
+                "reference": "52231e35020511655e4ece6c77c42a6cc3d51556",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "9.*|10.*",
+                "illuminate/config": "9.*|10.*",
+                "illuminate/container": "9.*|10.*",
+                "illuminate/contracts": "9.*|10.*",
+                "illuminate/database": "9.*|10.*",
+                "illuminate/support": "9.*|10.*",
+                "php": "8.*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.22|8.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\CacheQuery\\CacheQueryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\CacheQuery\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Baeza C.",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter"
+                }
+            ],
+            "description": "Remember your query results using only one method. Yes, only one.",
+            "support": {
+                "issues": "https://github.com/laragear/cache-query/issues",
+                "source": "https://github.com/laragear/cache-query"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2023-02-21T00:18:08+00:00"
+        },
+        {
+            "name": "laragear/preload",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/Preload.git",
+                "reference": "b0fab320793d30e95a748aa07d92991204481190"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/Preload/zipball/b0fab320793d30e95a748aa07d92991204481190",
+                "reference": "b0fab320793d30e95a748aa07d92991204481190",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/config": "9.*|10.*",
+                "illuminate/console": "9.*|10.*",
+                "illuminate/contracts": "9.*|10.*",
+                "illuminate/events": "9.*|10.*",
+                "illuminate/http": "9.*|10.*",
+                "illuminate/pipeline": "9.*|10.*",
+                "illuminate/queue": "9.*|10.*",
+                "illuminate/support": "9.*|10.*",
+                "php": "8.*",
+                "symfony/finder": "6.*"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "*",
+                "orchestra/testbench": "^7.22|8.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\Preload\\PreloadServiceProvider"
+                    ],
+                    "aliases": {
+                        "Preload": "Laragear\\Preload\\Facades\\Preload"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\Preload\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "darkghosthunter@gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter"
+                }
+            ],
+            "description": "Effortlessly make a Preload script for your Laravel application.",
+            "keywords": [
+                "Opcache",
+                "laragear",
+                "laravel",
+                "php",
+                "preload",
+                "preloader"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/Preload/issues",
+                "source": "https://github.com/Laragear/Preload/tree/v1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2023-02-21T00:41:22+00:00"
         },
         {
             "name": "laravel/framework",
