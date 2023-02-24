@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Dead catch \\- Throwable is never thrown in the try block\\.$#"
-			count: 1
-			path: app/Casts/CallbackGetCast.php
-
-		-
 			message: "#^Call to method check\\(\\) on an unknown class Composer\\\\XdebugHandler\\\\XdebugHandler\\.$#"
 			count: 1
 			path: app/Console/Commands/FindDumpStatementCommand.php
@@ -32,6 +27,11 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Console\\\\Commands\\\\FindDumpStatementCommand\\:\\:\\$statements has unknown class string as its type\\.$#"
+			count: 1
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
+			message: "#^Variable \\$findInfos in empty\\(\\) always exists and is not falsy\\.$#"
 			count: 1
 			path: app/Console/Commands/FindDumpStatementCommand.php
 
@@ -76,9 +76,29 @@ parameters:
 			path: app/Console/Commands/GenerateTestsCommand.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of method Illuminate\\\\Support\\\\Collection\\<int,ReflectionMethod\\>\\:\\:pipe\\(\\) expects callable\\(Illuminate\\\\Support\\\\Collection\\<int, ReflectionMethod\\>\\)\\: Illuminate\\\\Support\\\\Collection\\<int, array\\{index\\: int, message\\: string\\|null, resource\\: Illuminate\\\\Support\\\\Stringable, state\\: App\\\\Enums\\\\HealthCheckStateEnum\\}\\>, Closure\\(Illuminate\\\\Support\\\\Collection\\)\\: Illuminate\\\\Support\\\\Collection\\<int, array\\{index\\: int\\<1, max\\>, message\\: string\\|null, resource\\: Illuminate\\\\Support\\\\Stringable, state\\: App\\\\Enums\\\\HealthCheckStateEnum\\}\\> given\\.$#"
+			message: "#^PHPDoc type array\\<string, array\\<int, string\\>\\> of property App\\\\Http\\\\Kernel\\:\\:\\$middleware is not covariant with PHPDoc type array\\<int, string\\> of overridden property Illuminate\\\\Foundation\\\\Http\\\\Kernel\\:\\:\\$middleware\\.$#"
 			count: 1
-			path: app/Console/Commands/HealthCheckCommand.php
+			path: app/Http/Kernel.php
+
+		-
+			message: "#^PHPDoc type array\\<string, string\\> of property App\\\\Http\\\\Kernel\\:\\:\\$middlewareGroups is not covariant with PHPDoc type array\\<string, array\\<int, string\\>\\> of overridden property Illuminate\\\\Foundation\\\\Http\\\\Kernel\\:\\:\\$middlewareGroups\\.$#"
+			count: 1
+			path: app/Http/Kernel.php
+
+		-
+			message: "#^Property App\\\\Http\\\\Kernel\\:\\:\\$middleware \\(array\\<string, array\\<int, string\\>\\>\\) does not accept default value of type array\\<int, string\\>\\.$#"
+			count: 1
+			path: app/Http/Kernel.php
+
+		-
+			message: "#^Property App\\\\Http\\\\Kernel\\:\\:\\$middlewareGroups \\(array\\<string, string\\>\\) does not accept default value of type array\\<string, array\\<int, string\\>\\>\\.$#"
+			count: 1
+			path: app/Http/Kernel.php
+
+		-
+			message: "#^Parameter \\#1 \\$requestOrResponse of method App\\\\Http\\\\Middleware\\\\LogHttp\\:\\:extractHeader\\(\\) expects Illuminate\\\\Http\\\\JsonResponse\\|Illuminate\\\\Http\\\\RedirectResponse, Illuminate\\\\Http\\\\Request given\\.$#"
+			count: 1
+			path: app/Http/Middleware/LogHttp.php
 
 		-
 			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
@@ -106,24 +126,19 @@ parameters:
 			path: app/Macros/GrammarMacro.php
 
 		-
-			message: "#^Access to an undefined property App\\\\Macros\\\\QueryBuilderMacro\\:\\:\\$wheres\\.$#"
-			count: 1
-			path: app/Macros/QueryBuilderMacro.php
-
-		-
 			message: "#^Call to protected method getRelationWithoutConstraints\\(\\) of class Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\.$#"
 			count: 1
-			path: app/Macros/QueryBuilderMacro.php
+			path: app/Macros/QueryBuilder/OrderByWithQueryBuilderMacro.php
+
+		-
+			message: "#^Undefined variable\\: \\$this$#"
+			count: 1
+			path: app/Macros/QueryBuilder/WhereNotQueryBuilderMacro.php
 
 		-
 			message: "#^Call to protected method getInputSource\\(\\) of class Illuminate\\\\Http\\\\Request\\.$#"
 			count: 1
 			path: app/Macros/RequestMacro.php
-
-		-
-			message: "#^Undefined variable\\: \\$this$#"
-			count: 1
-			path: app/Macros/WhereNotQueryBuilderMacro.php
 
 		-
 			message: "#^Call to an undefined method Illuminate\\\\Auth\\\\AuthManager\\:\\:factory\\(\\)\\.$#"
@@ -206,9 +221,14 @@ parameters:
 			path: app/Providers/AppServiceProvider.php
 
 		-
-			message: "#^Parameter \\#3 \\$logLevel of static method GuzzleHttp\\\\Middleware\\:\\:log\\(\\) expects 'alert'\\|'critical'\\|'debug'\\|'emergency'\\|'error'\\|'info'\\|'notice'\\|'warning', string given\\.$#"
+			message: "#^Unary operation \"~\" on mixed results in an error\\.$#"
 			count: 1
-			path: app/Support/FoundationSdk.php
+			path: app/Support/BitEncoder.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Http\\\\Client\\\\Response\\:\\:getBody\\(\\)\\.$#"
+			count: 1
+			path: app/Support/ChatGPT.php
 
 		-
 			message: "#^PHPDoc tag @param references unknown parameter\\: \\$handler$#"
@@ -219,6 +239,16 @@ parameters:
 			message: "#^Result of && is always false\\.$#"
 			count: 1
 			path: app/Support/HandlerStack.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 3
+			path: app/Support/HttpClient.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, bool\\|string given\\.$#"
+			count: 1
+			path: app/Support/OpenAI.php
 
 		-
 			message: "#^Unsafe usage of new static\\(\\)\\.$#"
@@ -241,6 +271,46 @@ parameters:
 			path: app/Support/Repository.php
 
 		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 2
-			path: app/Support/helpers.php
+			message: "#^Offset 'guest' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Offset 'idle' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Offset 'iowait' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Offset 'irq' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Offset 'nice' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Offset 'softirq' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Offset 'steal' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Offset 'system' on array\\{user\\: int\\|string, nice\\: int\\|string, system\\: int\\|string, idle\\: int\\|string, iowait\\: int\\|string, irq\\: int\\|string, softirq\\: int\\|string, steal\\: int\\|string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/Support/System.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 10
+			path: app/Support/System.php

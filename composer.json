@@ -193,7 +193,7 @@
         "mark-finish": "printf '\\n!\\n!\\t\\033[0;32m%s\\033[0m\\n!\\n\\n' \"Finished\"",
         "mark-separate": "printf '\\n!\\n!\\t\\033[0;33m%s\\033[0m\\n!\\n\\n' \"----------------\"",
         "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",
-        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --xdebug --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
         "pint": "@php ./vendor/bin/pint -v",
         "pint-test": "@pint --test"
