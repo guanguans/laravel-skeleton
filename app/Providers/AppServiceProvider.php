@@ -12,7 +12,6 @@ use App\Macros\ResponseFactoryMacro;
 use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
 use App\Rules\Rule;
-use App\Traits\Conditionable;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -41,6 +40,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use Illuminate\Support\Traits\Conditionable;
 use Illuminate\View\View;
 use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
 use ReflectionClass;
@@ -50,7 +50,9 @@ use Symfony\Component\Finder\Finder;
 
 class AppServiceProvider extends ServiceProvider
 {
-    use Conditionable;
+    use Conditionable {
+        when as whenever;
+    }
 
     /**
      * All of the container bindings that should be registered.
@@ -83,7 +85,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->while(true, function () {
+        $this->whenever(true, function () {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
         });
 
@@ -99,7 +101,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->while(true, function () {
+        $this->whenever(true, function () {
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->app->setLocale($locale = config('app.locale'));
@@ -119,17 +121,17 @@ class AppServiceProvider extends ServiceProvider
             });
         });
 
-        $this->while(\request()?->user()?->locale, static function (self $serviceProvider, $locale) {
+        $this->whenever(\request()?->user()?->locale, static function (self $serviceProvider, $locale) {
             $serviceProvider->app->setLocale($locale);
         });
 
-        $this->while($this->app->isProduction(), function () {
+        $this->whenever($this->app->isProduction(), function () {
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
         });
 
-        $this->while($this->app->environment('testing'), function () {
+        $this->whenever($this->app->environment('testing'), function () {
             // Http::preventStrayRequests(); // Preventing Stray Requests
         });
 

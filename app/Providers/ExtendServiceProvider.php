@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Support\ChatGPT;
 use App\Support\OpenAI;
 use App\Support\PushDeer;
-use App\Traits\Conditionable;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application;
@@ -13,8 +12,6 @@ use Illuminate\Support\ServiceProvider;
 
 class ExtendServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    use Conditionable;
-
     /**
      * All of the container singletons that should be registered.
      *
