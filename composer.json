@@ -17,6 +17,7 @@
         "beyondcode/laravel-query-detector": "^1.7",
         "biiiiiigmonster/hasin": "^2.1",
         "binarytorch/larecipe": "^2.6",
+        "calebporzio/parental": "^1.3",
         "dyrynda/laravel-cascade-soft-deletes": "^4.2",
         "f9webltd/laravel-api-response-helpers": "^1.5",
         "fideloper/proxy": "^4.4",

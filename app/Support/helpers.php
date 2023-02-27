@@ -192,7 +192,6 @@ if (! function_exists('compose')) {
 }
 
 if (! function_exists('memoize')) {
-
     function memoize(callable $function): callable
     {
         return function () use ($function) {
@@ -213,7 +212,6 @@ if (! function_exists('memoize')) {
 }
 
 if (! function_exists('once')) {
-
     function once(callable $function): callable
     {
         return function (...$args) use ($function) {

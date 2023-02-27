@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99b2383290abaa5bb98d999614aa3634",
+    "content-hash": "245b7e2cc898fcdc3adce523e5b2f7f4",
     "packages": [
         {
             "name": "appstract/laravel-blade-directives",
@@ -463,6 +463,65 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "calebporzio/parental",
+            "version": "v1.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tighten/parental.git",
+                "reference": "9fffd10b4430c4cf6e459dc5d6bf0b8db8866d54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tighten/parental/zipball/9fffd10b4430c4cf6e459dc5d6bf0b8db8866d54",
+                "reference": "9fffd10b4430c4cf6e459dc5d6bf0b8db8866d54",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^9.0||^10.0",
+                "illuminate/events": "^9.0||^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0||^8.0",
+                "phpunit/phpunit": "^9.5.10||^10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Parental\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com",
+                    "homepage": "https://calebporzio.com/",
+                    "role": "author"
+                },
+                {
+                    "name": "Steve McDougall",
+                    "email": "juststevemcd@gmail.com",
+                    "homepage": "https://www.juststeveking.uk/",
+                    "role": "developer"
+                }
+            ],
+            "description": "A simple eloquent trait that allows relationships to be accessed through child models.",
+            "support": {
+                "source": "https://github.com/tighten/parental/tree/v1.3.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/calebporzio",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-16T18:23:03+00:00"
         },
         {
             "name": "composer/ca-bundle",
