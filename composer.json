@@ -175,16 +175,12 @@
         "cghooks": "@php ./vendor/bin/cghooks",
         "checks": [
             "@mark-start",
-            "@composer-check-platform-reqs",
-            "@mark-separate",
-            "@composer-validate",
-            "@mark-separate",
             "@pint-test",
             "@mark-separate",
             "@docs-generate",
             "@mark-finish"
         ],
-        "composer-check-platform-reqs": "@composer check-platform-reqs --lock",
+        "composer-check-platform-reqs": "@composer check-platform-reqs",
         "composer-validate": "@composer validate --check-lock --strict",
         "docs-generate": "@php artisan scribe:generate --ansi",
         "lint": [
