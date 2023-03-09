@@ -3,23 +3,22 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Process\Process;
 
-class OptimizeAllCommand extends Command
+class ClearAllCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'optimize:all {--f|force : Force optimize.}';
+    protected $signature = 'clear:all {--f|force : Force clear optimized.}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Optimize all.';
+    protected $description = 'clear optimized all.';
 
     /**
      * Create a new command instance.
@@ -38,19 +37,17 @@ class OptimizeAllCommand extends Command
      */
     public function handle()
     {
-        if (! $this->getLaravel()->isProduction() && ! $this->option('force')) {
+        if ($this->getLaravel()->isProduction() && ! $this->option('force')) {
             return self::INVALID;
         }
 
         $resourceUsage = catch_resource_usage(function () {
-            Process::fromShellCommandline('composer dump-autoload --optimize --ansi')
-                ->mustRun(function (string $type, string $line): void {
-                    $this->output->write($line);
-                });
-            $this->call('config:cache');
-            $this->call('event:cache');
-            $this->call('route:cache');
-            $this->call('view:cache');
+            $this->call('config:clear');
+            $this->call('event:clear');
+            $this->call('route:clear');
+            $this->call('view:clear');
+            $this->call('optimize:clear');
+            $this->call('clear-compiled');
         });
 
         $this->output->success($resourceUsage);
