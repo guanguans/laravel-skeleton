@@ -29,7 +29,7 @@ class OpenAIHelpCommand extends Command
                     'model' => 'text-davinci-003',
                     'prompt' => $prompt,
                     'suffix' => null,
-                    'max_tokens' => 4000,
+                    // 'max_tokens' => 4000,
                     'temperature' => 0,
                     'top_p' => 1,
                     'n' => 1,
