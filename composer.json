@@ -13,6 +13,7 @@
         "ext-json": "*",
         "bensampo/laravel-enum": "^6.3",
         "biiiiiigmonster/hasin": "^2.1",
+        "cerbero/command-validator": "^2.5",
         "f9webltd/laravel-api-response-helpers": "^1.5",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^3.0",
