@@ -30,6 +30,7 @@
         "opcodesio/log-viewer": "^2.3",
         "overtrue/laravel-query-logger": "^3.1",
         "php-open-source-saver/jwt-auth": "^2.1",
+        "rahul900day/laravel-console-spinner": "^1.1",
         "rennokki/laravel-eloquent-query-cache": "^3.3",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-backup": "^8.1",
@@ -160,7 +161,7 @@
         "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",
         "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --xdebug --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
-        "pint": "@php ./vendor/bin/pint -v",
+        "pint": "@php ./vendor/bin/pint --dirty -v",
         "pint-test": "@pint --test"
     }
 }
