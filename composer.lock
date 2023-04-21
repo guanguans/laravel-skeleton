@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc3f9716c0c33c4eff4ec1c387cac546",
+    "content-hash": "1da121efe9b55441627d41fba219d570",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -10679,6 +10679,67 @@
                 }
             ],
             "time": "2023-02-07T20:47:28+00:00"
+        },
+        {
+            "name": "xint0/laravel-optimistic-locking",
+            "version": "1.3.3",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:xint0-open-source/laravel-optimistic-locking.git",
+                "reference": "2720e71d022686bcfbaa0c2ecb67270f9110aab7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/xint0-open-source%2Flaravel-optimistic-locking/repository/archive.zip?sha=2720e71d022686bcfbaa0c2ecb67270f9110aab7",
+                "reference": "2720e71d022686bcfbaa0c2ecb67270f9110aab7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.2 || ^8.0"
+            },
+            "replace": {
+                "reshadman/laravel-optimistic-locking": "1.*"
+            },
+            "require-dev": {
+                "ext-pdo_sqlite": "*",
+                "mockery/mockery": "^1.0.0",
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.8.0|^4.0|^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Reshadman\\OptimisticLocking\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rogelio Jacinto",
+                    "email": "rogelio.jacinto@gmail.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Adds optimistic locking feature to eloquent models.",
+            "homepage": "https://gitlab.com/xint0-open-source/laravel-optimistic-locking",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "locking",
+                "optimistic locking"
+            ],
+            "support": {
+                "email": "xint0+laravel-optimistic-locking@xint0.com",
+                "issues": "https://gitlab.com/xint0-open-source/laravel-optimistic-locking/-/issues",
+                "source": "https://gitlab.com/xint0-open-source/laravel-optimistic-locking"
+            },
+            "time": "2022-12-14T05:45:35+00:00"
         }
     ],
     "packages-dev": [
