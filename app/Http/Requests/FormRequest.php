@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Contracts\Validation\Validator;
 use InvalidArgumentException;
 
@@ -14,104 +15,103 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
      */
     protected $stopOnFirstFailure = true;
 
-    /**
-     * Get data to be validated from the request.
-     *
-     * @return array
-     */
     public function validationData()
     {
-        $method = $this->getHandleMethod(__FUNCTION__);
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        }
-
-        return parent::validationData();
+        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
     public function authorize(): bool
     {
-        $method = $this->getHandleMethod(__FUNCTION__);
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        }
-
-        return true;
+        return $this->call(__FUNCTION__, func_get_args(), true);
     }
 
     public function rules(): array
     {
-        $method = $this->getHandleMethod(__FUNCTION__);
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        }
-
-        return [];
+        return $this->call(__FUNCTION__, func_get_args(), []);
     }
 
     public function messages(): array
     {
-        $method = $this->getHandleMethod(__FUNCTION__);
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        }
-
-        return parent::messages();
+        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
     public function attributes(): array
     {
-        $method = $this->getHandleMethod(__FUNCTION__);
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        }
-
-        return parent::attributes();
+        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
-    /**
-     * @return null|void
-     */
     protected function failedValidation(Validator $validator)
     {
-        $method = $this->getHandleMethod(__FUNCTION__);
-        if (method_exists($this, $method)) {
-            return $this->$method($validator);
-        }
-
-        parent::failedValidation($validator);
+        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
-    /**
-     * @return void|null
-     */
     protected function failedAuthorization()
     {
-        $method = $this->getHandleMethod(__FUNCTION__);
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        }
+        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
+    }
 
-        parent::failedAuthorization();
+    public function validator(ValidationFactory $factory): Validator
+    {
+        return $this->call(__FUNCTION__, func_get_args(), $this->createDefaultValidator($factory));
+    }
+
+    protected function withValidator(Validator $validator): Validator
+    {
+        return $this->call(__FUNCTION__, func_get_args(), $validator);
     }
 
     /**
-     * Configure the validator instance.
-     *
-     * @param  \Illuminate\Validation\Validator  $validator
-     * @return Validator
+     * @return callable|string
      */
-    public function withValidator($validator)
+    protected function after()
     {
-        return $validator;
+        return $this->call(
+            __FUNCTION__,
+            func_get_args(),
+            /**
+             * @return mixed
+             *
+             * @throws \Throwable
+             */
+            static function (Validator $validator) {
+                return $validator;
+            }
+        );
     }
 
-    protected function getHandleMethod(string $type): string
+    protected function call(string $method, array $args = [], $defaultReturn = null)
     {
-        if (! in_array(lcfirst($type), ['validationData', 'authorize', 'rules', 'messages', 'attributes', 'failedValidation', 'failedAuthorization'], true)) {
-            throw new InvalidArgumentException('Invalid type');
+        $actionMethod = transform($method, function (string $method) {
+            if (! in_array(
+                $method,
+                [
+                    'validationData',
+                    'authorize',
+                    'rules',
+                    'messages',
+                    'attributes',
+                    'failedValidation',
+                    'failedAuthorization',
+                    'validator',
+                    'withValidator',
+                    'after',
+                ],
+                true
+            )) {
+                throw new InvalidArgumentException("Can't call the method[$method].");
+            }
+
+            return $this->route()?->getActionMethod().ucfirst($method);
+        });
+
+        if (method_exists($this, $actionMethod)) {
+            return $this->$actionMethod(...$args);
         }
 
-        return optional($this->route())->getActionMethod().ucfirst($type);
+        if (method_exists(parent::class, $method)) {
+            return parent::$method(...$args);
+        }
+
+        return $defaultReturn;
     }
 }
