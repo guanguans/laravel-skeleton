@@ -43,4 +43,16 @@ class StringableMacro
             return $this->__toString();
         };
     }
+
+    /**
+     * @see https://github.com/koenhendriks/laravel-str-acronym
+     */
+    public function acronym(): callable
+    {
+        return function (string $delimiter = '') {
+            return new Stringable(
+                Str::acronym($this->value, $delimiter)
+            );
+        };
+    }
 }

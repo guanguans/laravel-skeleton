@@ -38,4 +38,26 @@ class StrMacro
             return call_user_func($callback, $value);
         };
     }
+
+    /**
+     * @see https://github.com/koenhendriks/laravel-str-acronym
+     */
+    public static function acronym(): callable
+    {
+        return function ($string, $delimiter = '') {
+            if (empty($string)) {
+                return '';
+            }
+
+            $acronym = '';
+            foreach (preg_split('/[^\p{L}]+/u', $string) as $word) {
+                if (! empty($word)) {
+                    $first_letter = mb_substr($word, 0, 1);
+                    $acronym .= $first_letter.$delimiter;
+                }
+            }
+
+            return $acronym;
+        };
+    }
 }
