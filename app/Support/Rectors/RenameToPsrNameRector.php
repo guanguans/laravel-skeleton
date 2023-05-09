@@ -4,13 +4,28 @@ namespace App\Support\Rectors;
 
 use Illuminate\Support\Str;
 use PhpParser\Node;
+use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
+use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
+use RectorPrefix202305\Webmozart\Assert\Assert;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-class RenameToPsrNameRector extends AbstractRector
+class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
 {
+    /**
+     * @var array<string>
+     */
+    protected $except = [
+        '*::*',
+        'class',
+        'false',
+        'null',
+        'stdClass',
+        'true',
+    ];
+
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
@@ -18,51 +33,119 @@ class RenameToPsrNameRector extends AbstractRector
             [
                 new CodeSample(
                     <<<'CODE_SAMPLE'
+// lower snake
 function functionName(){}
 functionName();
+call_user_func('functionName');
+call_user_func_array('functionName');
+function_exists('functionName');
 
+// ucfirst camel
 class class_name{}
-class_name::CONST;
+enum enum_name{}
+enum Enum{case case_name;}
+interface interface_name{}
+trait trait_name{}
+class Foo extends class_name implements interface_name{}
 class_name::$property;
+class_name::CONST;
 class_name::method();
+enum Enum implements interface_name{}
+use class_name;
+use trait_name;
+class_alias('class_name', 'alias_class_name');
+class_exists('class_name');
+class_implements('class_name');
+class_parents('class_name');
+class_uses('class_name');
+enum_exists('enum_name');
+get_class_methods('class_name');
+get_class_vars('class_name');
+get_parent_class('class_name');
+interface_exists('interface_name');
+is_subclass_of('class_name', 'parent_class_name');
+trait_exists('trait_name', true);
 
-class Foo{public const const_name = 'const';}
-Foo::const_name;
-define('const_name', 'const');
-const_name;
+// upper snake
+class Foo{public const constName = 'const';}
+Foo::constName;
+define('constName', 'const');
+defined('constName');
+constant('constName');
+constant('Foo::constName');
+constName;
 
+// lcfirst camel
 $var_name;
-class Foo{public $property_name;}
-class Foo{public int $property_name;}
-class Foo{public function method_name(){}}
-$object->property_name;
-Foo::$property_name;
 $object->method_name();
+$object->property_name;
+call_user_method('method_name', $object);
+call_user_method_array('method_name', $object);
+class Foo{public $property_name;}
+class Foo{public function method_name(){}}
+class Foo{public int $property_name;}
+Foo::$property_name;
 Foo::method_name();
+method_exists($object, 'method_name');
+property_exists($object, 'property_name');
 CODE_SAMPLE
                     ,
                     <<<'CODE_SAMPLE'
+// lower snake
 function function_name(){}
 function_name();
+call_user_func('function_name');
+call_user_func_array('function_name');
+function_exists('function_name');
 
+// ucfirst camel
 class ClassName{}
-ClassName::CONST;
+enum EnumName{}
+enum Enum{case CaseName;}
+interface InterfaceName{}
+trait TraitName{}
+class Foo extends ClassName implements InterfaceName{}
 ClassName::$property;
+ClassName::CONST;
 ClassName::method();
+enum Enum implements InterfaceName{}
+use ClassName;
+use TraitName;
+class_alias('ClassName', 'AliasClassName');
+class_exists('ClassName');
+class_implements('ClassName');
+class_parents('ClassName');
+class_uses('ClassName');
+enum_exists('EnumName');
+get_class_methods('ClassName');
+get_class_vars('ClassName');
+get_parent_class('ClassName');
+interface_exists('InterfaceName');
+is_subclass_of('ClassName', 'ParentClassName');
+trait_exists('TraitName', true);
 
+// upper snake
 class Foo{public const CONST_NAME = 'const';}
 Foo::CONST_NAME;
 define('CONST_NAME', 'const');
+defined('CONST_NAME');
+constant('CONST_NAME');
+constant('Foo::CONST_NAME');
 CONST_NAME;
 
-$varName;
-class Foo{public $propertyName;}
-class Foo{public int $propertyName;}
-class Foo{public function methodName(){}}
-$object->propertyName;
-Foo::$propertyName;
+// lcfirst camel
+$varName
 $object->methodName();
+$object->propertyName;
+class Foo{public $propertyName;}
+class Foo{public function methodName(){}}
+class Foo{public int $propertyName;}
+Foo::$propertyName;
 Foo::methodName();
+call_user_method('methodName', $object);
+call_user_method_array('methodName', $object);
+method_exists($object, 'methodName');
+property_exists($object, 'propertyName');
 CODE_SAMPLE
                 ),
             ]);
@@ -74,43 +157,51 @@ CODE_SAMPLE
     public function getNodeTypes(): array
     {
         return [
-            Name::class,
-            Node\Expr\FuncCall::class,
-            Node\Expr\Variable::class,
-            Node\Identifier::class,
+            \PhpParser\Node\Name::class,
+            \PhpParser\Node\Expr\FuncCall::class,
+            \PhpParser\Node\Expr\Variable::class,
+            \PhpParser\Node\Identifier::class,
         ];
     }
 
     /**
-     * @param  Name|Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier  $node
+     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
      */
     public function refactor(Node $node)
     {
-        if ($this->shouldLowerSnakeName($node)) {
-            return $this->rename($node, static fn (string $name): string => Str::lower(Str::snake($name)));
-        }
+        try {
+            if ($this->shouldLowerSnakeName($node)) {
+                return $this->rename($node, static fn (string $name): string => Str::lower(Str::snake($name)));
+            }
 
-        if ($this->shouldUcfirstCamelName($node)) {
-            return $this->rename($node, static fn (string $name): string => Str::ucfirst(Str::camel($name)));
-        }
+            if ($this->shouldUcfirstCamelName($node)) {
+                return $this->rename($node, static fn (string $name): string => Str::ucfirst(Str::camel($name)));
+            }
 
-        if ($this->shouldUpperSnakeName($node)) {
-            return $this->rename($node, static fn (string $name): string => Str::upper(Str::snake($name)));
-        }
+            if ($this->shouldUpperSnakeName($node)) {
+                return $this->rename($node, static fn (string $name): string => Str::upper(Str::snake($name)));
+            }
 
-        if ($this->shouldLcfirstCamelName($node)) {
-            return $this->rename($node, static fn (string $name): string => Str::lcfirst(Str::camel($name)));
+            if ($this->shouldLcfirstCamelName($node)) {
+                return $this->rename($node, static fn (string $name): string => Str::lcfirst(Str::camel($name)));
+            }
+        } catch (\RuntimeException $e) {
+            // skip
         }
 
         return null;
     }
 
     /**
-     * @param  Name|Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier  $node
+     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
      */
-    protected function rename(Node $node, callable $callback): Node
+    protected function rename(Node $node, callable $renamer): Node
     {
-        $preprocessor = static function (string $value): string {
+        $preprocessor = function (string $value): string {
+            if ($this->is($this->except, $value)) {
+                throw new \RuntimeException("The name[$value] is skipped.");
+            }
+
             if (ctype_upper(preg_replace('/[^a-zA-Z]/', '', $value))) {
                 return mb_strtolower($value, 'UTF-8');
             }
@@ -119,25 +210,61 @@ CODE_SAMPLE
         };
 
         if ($node instanceof Name) {
-            $node->parts[count($node->parts) - 1] = $callback($preprocessor($node->getLast()));
+            $node->parts[count($node->parts) - 1] = $renamer($preprocessor($node->parts[count($node->parts) - 1]));
 
             return $node;
         }
 
-        if ($this->isSubclasses($node, [
-            Node\Expr\Variable::class,
-            Node\Identifier::class,
-        ])) {
-            $node->name = $callback($preprocessor($node->name));
+        if (
+            $this->isSubclasses($node, [
+                Node\Expr\Variable::class,
+                Node\Identifier::class,
+            ])
+        ) {
+            $node->name = $renamer($preprocessor($node->name));
 
             return $node;
         }
 
-        if ($node instanceof Node\Expr\FuncCall) {
-            if ($this->isName($node, 'define') && isset($node->args[0])) {
-                $node->args[0]->value->value = $callback($preprocessor($node->args[0]->value->value));
+        if ($node instanceof FuncCall) {
+            if (
+                $this->isNames($node, [
+                    'call_user_func',
+                    'call_user_func_array',
+                    'call_user_method',
+                    'call_user_method_array',
+                    'class_alias',
+                    'class_exists',
+                    'class_implements',
+                    'class_parents',
+                    'class_uses',
+                    'constant',
+                    'define',
+                    'defined',
+                    'enum_exists',
+                    'function_exists',
+                    'get_class_methods',
+                    'get_class_vars',
+                    'get_parent_class',
+                    'interface_exists',
+                    'is_subclass_of',
+                    'trait_exists',
+                ])
+                && $this->hasFuncCallIndexStringArg($node, 0)
+            ) {
+                $node->args[0]->value->value = $renamer($preprocessor($node->args[0]->value->value));
+            }
 
-                return $node;
+            if (
+                $this->isNames($node, [
+                    'class_alias',
+                    'is_subclass_of',
+                    'method_exists',
+                    'property_exists',
+                ])
+                && $this->hasFuncCallIndexStringArg($node, 1)
+            ) {
+                $node->args[1]->value->value = $renamer($preprocessor($node->args[1]->value->value));
             }
         }
 
@@ -145,56 +272,130 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  Name|Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier  $node
+     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
      */
     protected function shouldLowerSnakeName(Node $node): bool
     {
         $parent = $node->getAttribute('parent');
-        if ($node instanceof Node\Identifier) {
-            if ($this->isSubclasses($parent, [
-                // function function_name(){}
-                Node\Stmt\Function_::class,
-            ])) {
-                return true;
-            }
+
+        // function function_name(){}
+        if ($node instanceof Node\Identifier && $parent instanceof Node\Stmt\Function_) {
+            return true;
         }
 
-        if ($node instanceof Node\Name) {
-            if ($this->isSubclasses($parent, [
-                // function_name();
-                Node\Expr\FuncCall::class,
-            ])) {
-                return true;
-            }
+        // function_name();
+        if ($node instanceof Node\Name && $parent instanceof FuncCall) {
+            return true;
+        }
+
+        if (
+            $node instanceof FuncCall
+            && $this->isNames($node, [
+                // function_exists('function_name');
+                'function_exists',
+                // call_user_func('function_name');
+                'call_user_func',
+                // call_user_func_array('function_name');
+                'call_user_func_array',
+            ])
+            && $this->hasFuncCallIndexStringArg($node, 0)
+        ) {
+            return true;
         }
 
         return false;
     }
 
     /**
-     * @param  Name|Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier  $node
+     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
      */
     protected function shouldUcfirstCamelName(Node $node): bool
     {
         $parent = $node->getAttribute('parent');
-        if ($node instanceof Node\Identifier) {
-            if ($this->isSubclasses($parent, [
+
+        if (
+            $node instanceof Node\Identifier
+            && $this->isSubclasses($parent, [
+                // interface InterfaceName{}
+                Node\Stmt\Interface_::class,
                 // class ClassName{}
                 Node\Stmt\Class_::class,
-            ])) {
-                return true;
-            }
+                // trait TraitName{}
+                Node\Stmt\Trait_::class,
+                // enum EnumName{}
+                Node\Stmt\Enum_::class,
+                // enum Enum{case CaseName;}
+                Node\Stmt\EnumCase::class,
+            ])
+        ) {
+            return true;
         }
 
-        if ($node instanceof Node\Name && ! $this->isNames($node, ['stdClass'])) {
-            if ($this->isSubclasses($parent, [
+        if (
+            $node instanceof Node\Name
+            && ! $this->isName($node, 'stdClass')
+            && $this->isSubclasses($parent, [
                 // ClassName::CONST;
                 Node\Expr\ClassConstFetch::class,
                 // ClassName::$property;
                 Node\Expr\StaticPropertyFetch::class,
                 // ClassName::method();
                 Node\Expr\StaticCall::class,
-            ])) {
+                // class Foo extends ClassName implements InterfaceName{}
+                Node\Stmt\Class_::class,
+                // enum Enum implements InterfaceName{}
+                Node\Stmt\Enum_::class,
+                // use ClassName;
+                Node\Stmt\UseUse::class,
+                // use TraitName;
+                Node\Stmt\TraitUse::class,
+            ])
+        ) {
+            return true;
+        }
+
+        if ($node instanceof FuncCall) {
+            if (
+                $this->isNames($node, [
+                    // class_alias('ClassName', 'AliasClassName');
+                    'class_alias',
+                    // class_exists('ClassName');
+                    'class_exists',
+                    // class_implements('ClassName');
+                    'class_implements',
+                    // class_parents('ClassName');
+                    'class_parents',
+                    // class_uses('ClassName');
+                    'class_uses',
+                    // enum_exists('EnumName');
+                    'enum_exists',
+                    // get_class_methods('ClassName');
+                    'get_class_methods',
+                    // get_class_vars('ClassName');
+                    'get_class_vars',
+                    // get_parent_class('ClassName');
+                    'get_parent_class',
+                    // interface_exists('InterfaceName');
+                    'interface_exists',
+                    // is_subclass_of('ClassName', 'ParentClassName');
+                    'is_subclass_of',
+                    // trait_exists('TraitName', true);
+                    'trait_exists',
+                ])
+                && $this->hasFuncCallIndexStringArg($node, 0)
+            ) {
+                return true;
+            }
+
+            if (
+                $this->isNames($node, [
+                    // class_alias('ClassName', 'AliasClassName');
+                    'class_alias',
+                    // is_subclass_of('ClassName', 'ParentClassName');
+                    'is_subclass_of',
+                ])
+                && $this->hasFuncCallIndexStringArg($node, 1)
+            ) {
                 return true;
             }
         }
@@ -203,41 +404,54 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  Name|Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier  $node
+     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
      */
     protected function shouldUpperSnakeName(Node $node): bool
     {
         $parent = $node->getAttribute('parent');
-        if ($node instanceof Node\Identifier && ! $this->isNames($node, ['class'])) {
-            if ($this->isSubclasses($parent, [
+
+        if (
+            $node instanceof Node\Identifier
+            && ! $this->isName($node, 'class')
+            && $this->isSubclasses($parent, [
                 // class Foo{public const CONST_NAME = 'const';}
                 Node\Const_::class,
                 // Foo::CONST_NAME;
                 Node\Expr\ClassConstFetch::class,
-            ])) {
-                return true;
-            }
-        }
-
-        if ($node instanceof Node\Expr\FuncCall && $this->isName($node, 'define')) {
-            // define('CONST_NAME', 'const');
+            ])
+        ) {
             return true;
         }
 
-        if ($node instanceof Name && ! $this->isNames($node, ['null', 'true', 'false'])) {
-            if ($this->isSubclasses($parent, [
-                // CONST_NAME;
-                Node\Expr\ConstFetch::class,
-            ])) {
-                return true;
-            }
+        if (
+            $node instanceof FuncCall
+            && $this->isNames($node, [
+                // define('CONST_NAME', 'const');
+                'define',
+                // defined('CONST_NAME');
+                'defined',
+                // constant('Foo::CONST_NAME');
+                'constant',
+            ])
+            && $this->hasFuncCallIndexStringArg($node, 0)
+        ) {
+            return true;
+        }
+
+        // CONST_NAME;
+        if (
+            $node instanceof Name
+            && ! $this->isNames($node, ['null', 'true', 'false'])
+            && $parent instanceof Node\Expr\ConstFetch
+        ) {
+            return true;
         }
 
         return false;
     }
 
     /**
-     * @param  Name|Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier  $node
+     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
      */
     protected function shouldLcfirstCamelName(Node $node): bool
     {
@@ -246,9 +460,9 @@ CODE_SAMPLE
             return true;
         }
 
-        $parent = $node->getAttribute('parent');
-        if ($node instanceof Node\Identifier) {
-            if ($this->isSubclasses($parent, [
+        if (
+            $node instanceof Node\Identifier
+            && $this->isSubclasses($node->getAttribute('parent'), [
                 // class Foo{public $propertyName;}
                 Node\Stmt\Property::class,
                 // class Foo{public int $propertyName;}
@@ -263,7 +477,33 @@ CODE_SAMPLE
                 Node\Expr\MethodCall::class,
                 // Foo::methodName();
                 Node\Expr\StaticCall::class,
-            ])) {
+            ])
+        ) {
+            return true;
+        }
+
+        if ($node instanceof FuncCall) {
+            if (
+                $this->isNames($node, [
+                    // call_user_method('methodName', $object);
+                    'call_user_method',
+                    // call_user_method_array('methodName', $object);
+                    'call_user_method_array',
+                ])
+                && $this->hasFuncCallIndexStringArg($node, 0)
+            ) {
+                return true;
+            }
+
+            if (
+                $this->isNames($node, [
+                    // method_exists($object, 'methodName');
+                    'method_exists',
+                    // property_exists($object, 'propertyName');
+                    'property_exists',
+                ])
+                && $this->hasFuncCallIndexStringArg($node, 1)
+            ) {
                 return true;
             }
         }
@@ -284,5 +524,59 @@ CODE_SAMPLE
         }
 
         return false;
+    }
+
+    /**
+     * @param  string|iterable<string>  $patterns
+     * @param  string  $value
+     */
+    public function is($patterns, $value): bool
+    {
+        $value = (string) $value;
+        if (! is_iterable($patterns)) {
+            $patterns = [$patterns];
+        }
+
+        foreach ($patterns as $pattern) {
+            $pattern = (string) $pattern;
+            if ($pattern === $value) {
+                return true;
+            }
+
+            $pattern = preg_quote($pattern, '#');
+            $pattern = str_replace('\*', '.*', $pattern);
+            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected function hasFuncCallIndexStringArg(FuncCall $funcCall, int $index): bool
+    {
+        return isset($funcCall->args[$index])
+            && $funcCall->args[$index]->name === null
+            && $funcCall->args[$index]->value instanceof Node\Scalar\String_;
+    }
+
+    protected function hasFuncCallNameStringArg(FuncCall $funcCall, string $name): bool
+    {
+        foreach ($funcCall->args as $arg) {
+            if (
+                $arg->name instanceof Node\Identifier
+                && $arg->name->name === $name
+                && $arg->value instanceof Node\Scalar\String_) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function configure(array $configuration): void
+    {
+        Assert::allStringNotEmpty($configuration);
+        $this->except = [...$this->except, ...$configuration];
     }
 }
