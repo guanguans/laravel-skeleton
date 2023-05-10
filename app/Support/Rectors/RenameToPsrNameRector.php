@@ -4,8 +4,6 @@ namespace App\Support\Rectors;
 
 use Illuminate\Support\Str;
 use PhpParser\Node;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Name;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use RectorPrefix202305\Webmozart\Assert\Assert;
@@ -22,6 +20,8 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         'class',
         'false',
         'null',
+        'self',
+        'static',
         'stdClass',
         'true',
     ];
@@ -157,15 +157,15 @@ CODE_SAMPLE
     public function getNodeTypes(): array
     {
         return [
-            \PhpParser\Node\Name::class,
-            \PhpParser\Node\Expr\FuncCall::class,
-            \PhpParser\Node\Expr\Variable::class,
-            \PhpParser\Node\Identifier::class,
+            Node\Expr\FuncCall::class,
+            Node\Expr\Variable::class,
+            Node\Identifier::class,
+            Node\Name::class,
         ];
     }
 
     /**
-     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     public function refactor(Node $node)
     {
@@ -193,23 +193,23 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function rename(Node $node, callable $renamer): Node
     {
-        $preprocessor = function (string $value): string {
-            if ($this->is($this->except, $value)) {
-                throw new \RuntimeException("The name[$value] is skipped.");
+        $preprocessor = function (string $name): string {
+            if ($this->isMatches($name, $this->except)) {
+                throw new \RuntimeException("The name[$name] is skipped.");
             }
 
-            if (ctype_upper(preg_replace('/[^a-zA-Z]/', '', $value))) {
-                return mb_strtolower($value, 'UTF-8');
+            if (ctype_upper(preg_replace('/[^a-zA-Z]/', '', $name))) {
+                return mb_strtolower($name, 'UTF-8');
             }
 
-            return $value;
+            return $name;
         };
 
-        if ($node instanceof Name) {
+        if ($node instanceof Node\Name) {
             $node->parts[count($node->parts) - 1] = $renamer($preprocessor($node->parts[count($node->parts) - 1]));
 
             return $node;
@@ -226,7 +226,7 @@ CODE_SAMPLE
             return $node;
         }
 
-        if ($node instanceof FuncCall) {
+        if ($node instanceof Node\Expr\FuncCall) {
             if (
                 $this->isNames($node, [
                     'call_user_func',
@@ -272,7 +272,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldLowerSnakeName(Node $node): bool
     {
@@ -284,19 +284,19 @@ CODE_SAMPLE
         }
 
         // function_name();
-        if ($node instanceof Node\Name && $parent instanceof FuncCall) {
+        if ($node instanceof Node\Name && $parent instanceof Node\Expr\FuncCall) {
             return true;
         }
 
         if (
-            $node instanceof FuncCall
+            $node instanceof Node\Expr\FuncCall
             && $this->isNames($node, [
-                // function_exists('function_name');
-                'function_exists',
                 // call_user_func('function_name');
                 'call_user_func',
                 // call_user_func_array('function_name');
                 'call_user_func_array',
+                // function_exists('function_name');
+                'function_exists',
             ])
             && $this->hasFuncCallIndexStringArg($node, 0)
         ) {
@@ -307,7 +307,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldUcfirstCamelName(Node $node): bool
     {
@@ -335,12 +335,6 @@ CODE_SAMPLE
             $node instanceof Node\Name
             && ! $this->isName($node, 'stdClass')
             && $this->isSubclasses($parent, [
-                // ClassName::CONST;
-                Node\Expr\ClassConstFetch::class,
-                // ClassName::$property;
-                Node\Expr\StaticPropertyFetch::class,
-                // ClassName::method();
-                Node\Expr\StaticCall::class,
                 // class Foo extends ClassName implements InterfaceName{}
                 Node\Stmt\Class_::class,
                 // enum Enum implements InterfaceName{}
@@ -349,12 +343,18 @@ CODE_SAMPLE
                 Node\Stmt\UseUse::class,
                 // use TraitName;
                 Node\Stmt\TraitUse::class,
+                // ClassName::CONST;
+                Node\Expr\ClassConstFetch::class,
+                // ClassName::$property;
+                Node\Expr\StaticPropertyFetch::class,
+                // ClassName::method();
+                Node\Expr\StaticCall::class,
             ])
         ) {
             return true;
         }
 
-        if ($node instanceof FuncCall) {
+        if ($node instanceof Node\Expr\FuncCall) {
             if (
                 $this->isNames($node, [
                     // class_alias('ClassName', 'AliasClassName');
@@ -404,7 +404,7 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldUpperSnakeName(Node $node): bool
     {
@@ -424,7 +424,7 @@ CODE_SAMPLE
         }
 
         if (
-            $node instanceof FuncCall
+            $node instanceof Node\Expr\FuncCall
             && $this->isNames($node, [
                 // define('CONST_NAME', 'const');
                 'define',
@@ -440,7 +440,7 @@ CODE_SAMPLE
 
         // CONST_NAME;
         if (
-            $node instanceof Name
+            $node instanceof Node\Name
             && ! $this->isNames($node, ['null', 'true', 'false'])
             && $parent instanceof Node\Expr\ConstFetch
         ) {
@@ -451,12 +451,12 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  \PhpParser\Node\Name|\PhpParser\Node\Expr\FuncCall|\PhpParser\Node\Expr\Variable|\PhpParser\Node\Identifier  $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldLcfirstCamelName(Node $node): bool
     {
         // $varName;
-        if ($node instanceof Node\Expr\Variable) {
+        if ($node instanceof Node\Expr\Variable && is_string($node->name)) {
             return true;
         }
 
@@ -482,7 +482,7 @@ CODE_SAMPLE
             return true;
         }
 
-        if ($node instanceof FuncCall) {
+        if ($node instanceof Node\Expr\FuncCall) {
             if (
                 $this->isNames($node, [
                     // call_user_method('methodName', $object);
@@ -527,10 +527,10 @@ CODE_SAMPLE
     }
 
     /**
-     * @param  string|iterable<string>  $patterns
      * @param  string  $value
+     * @param  string|iterable<string>  $patterns
      */
-    public function is($patterns, $value): bool
+    public function isMatches($value, $patterns): bool
     {
         $value = (string) $value;
         if (! is_iterable($patterns)) {
@@ -553,20 +553,21 @@ CODE_SAMPLE
         return false;
     }
 
-    protected function hasFuncCallIndexStringArg(FuncCall $funcCall, int $index): bool
+    protected function hasFuncCallIndexStringArg(Node\Expr\FuncCall $funcCall, int $index): bool
     {
         return isset($funcCall->args[$index])
             && $funcCall->args[$index]->name === null
             && $funcCall->args[$index]->value instanceof Node\Scalar\String_;
     }
 
-    protected function hasFuncCallNameStringArg(FuncCall $funcCall, string $name): bool
+    protected function hasFuncCallNameStringArg(Node\Expr\FuncCall $funcCall, string $name): bool
     {
         foreach ($funcCall->args as $arg) {
             if (
                 $arg->name instanceof Node\Identifier
                 && $arg->name->name === $name
-                && $arg->value instanceof Node\Scalar\String_) {
+                && $arg->value instanceof Node\Scalar\String_
+            ) {
                 return true;
             }
         }
