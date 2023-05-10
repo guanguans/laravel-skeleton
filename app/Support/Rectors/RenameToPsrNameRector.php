@@ -197,7 +197,7 @@ CODE_SAMPLE
      */
     protected function rename(Node $node, callable $renamer): Node
     {
-        $preprocessor = function (string $name): string {
+        $renamer = fn (string $name): string => $renamer((function (string $name): string {
             if ($this->isMatches($name, $this->except)) {
                 throw new \RuntimeException("The name[$name] is skipped.");
             }
@@ -207,10 +207,10 @@ CODE_SAMPLE
             }
 
             return $name;
-        };
+        })($name));
 
         if ($node instanceof Node\Name) {
-            $node->parts[count($node->parts) - 1] = $renamer($preprocessor($node->parts[count($node->parts) - 1]));
+            $node->parts[count($node->parts) - 1] = $renamer($node->parts[count($node->parts) - 1]);
 
             return $node;
         }
@@ -221,7 +221,7 @@ CODE_SAMPLE
                 Node\Identifier::class,
             ])
         ) {
-            $node->name = $renamer($preprocessor($node->name));
+            $node->name = $renamer($node->name);
 
             return $node;
         }
@@ -252,7 +252,7 @@ CODE_SAMPLE
                 ])
                 && $this->hasFuncCallIndexStringArg($node, 0)
             ) {
-                $node->args[0]->value->value = $renamer($preprocessor($node->args[0]->value->value));
+                $node->args[0]->value->value = $renamer($node->args[0]->value->value);
             }
 
             if (
@@ -264,7 +264,7 @@ CODE_SAMPLE
                 ])
                 && $this->hasFuncCallIndexStringArg($node, 1)
             ) {
-                $node->args[1]->value->value = $renamer($preprocessor($node->args[1]->value->value));
+                $node->args[1]->value->value = $renamer($node->args[1]->value->value);
             }
         }
 
