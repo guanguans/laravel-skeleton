@@ -7,7 +7,7 @@ use PhpParser\Node;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use RectorPrefix202305\Webmozart\Assert\Assert;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
@@ -31,7 +31,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         return new RuleDefinition(
             'Rename to psr name',
             [
-                new CodeSample(
+                new ConfiguredCodeSample(
                     <<<'CODE_SAMPLE'
 // lower snake
 function functionName(){}
@@ -147,6 +147,8 @@ call_user_method_array('methodName', $object);
 method_exists($object, 'methodName');
 property_exists($object, 'propertyName');
 CODE_SAMPLE
+                    ,
+                    ['exceptName']
                 ),
             ]);
     }
