@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  *     return new ServerSentEventStreamedResponse(
  *         new ServerSentEvent(static function (ServerSentEvent $event): void {
  *             $event->setData(['time' => time()]);
- *             $event->setId(time());
+ *             $event->setId(uniqid('', true));
  *             $event->setEvent('news');
  *             $event->setRetry(3000);
  *             $event->setSleep(3);
@@ -35,6 +35,12 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  *     // source.close(); // disconnect stream
  * });
  * ```
+ *
+ * @see https://developer.mozilla.org/zh-CN/docs/Web/API/EventSource
+ * @see https://developer.mozilla.org/zh-CN/docs/Web/API/Server-sent_events/Using_server-sent_events
+ * @see https://github.com/hhxsv5/php-sse
+ * @see https://github.com/sarfraznawaz2005/laravel-sse
+ * @see https://github.com/qruto/laravel-wave
  */
 class ServerSentEventStreamedResponse extends StreamedResponse
 {
