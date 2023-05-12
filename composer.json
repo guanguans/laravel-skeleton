@@ -24,6 +24,7 @@
         "hammerstone/laravel-pseudo-daemon": "^1.1",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^4.4",
+        "joetannenbaum/terminalia": "*",
         "knuckleswtf/scribe": "^4.16",
         "laravel/framework": "^9.52",
         "laravel/octane": "^1.5",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1da121efe9b55441627d41fba219d570",
+    "content-hash": "6b41400edf26a3b28d597c25a28ffd3d",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -2434,6 +2434,56 @@
                 "source": "https://github.com/jiannei/laravel-response/tree/v4.4.0"
             },
             "time": "2022-05-31T15:03:27+00:00"
+        },
+        {
+            "name": "joetannenbaum/terminalia",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joetannenbaum/terminalia.git",
+                "reference": "501f7abf668b48bc576932bf89627972f4d83858"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joetannenbaum/terminalia/zipball/501f7abf668b48bc576932bf89627972f4d83858",
+                "reference": "501f7abf668b48bc576932bf89627972f4d83858",
+                "shasum": ""
+            },
+            "require": {
+                "spatie/fork": "^1.1"
+            },
+            "require-dev": {
+                "tightenco/duster": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Terminalia\\Providers\\TerminaliaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Terminalia\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Tannenbaum",
+                    "email": "joe@joe.codes"
+                }
+            ],
+            "description": "Beautiful command line output for Laravel.",
+            "support": {
+                "issues": "https://github.com/joetannenbaum/terminalia/issues",
+                "source": "https://github.com/joetannenbaum/terminalia/tree/0.2.2"
+            },
+            "time": "2023-05-08T14:42:27+00:00"
         },
         {
             "name": "knuckleswtf/scribe",
@@ -6144,6 +6194,70 @@
                 }
             ],
             "time": "2022-04-22T08:51:55+00:00"
+        },
+        {
+            "name": "spatie/fork",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/fork.git",
+                "reference": "d0232e94926c89e3bba7abbff8385140619bd826"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/fork/zipball/d0232e94926c89e3bba7abbff8385140619bd826",
+                "reference": "d0232e94926c89e3bba7abbff8385140619bd826",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "ext-sockets": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "nesbot/carbon": "^2.47",
+                "phpunit/phpunit": "^9.5",
+                "spatie/ray": "^1.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Fork\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight solution for running code concurrently in PHP",
+            "homepage": "https://github.com/spatie/fork",
+            "keywords": [
+                "fork",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/fork/issues",
+                "source": "https://github.com/spatie/fork/tree/1.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-03T13:44:48+00:00"
         },
         {
             "name": "spatie/laravel-activitylog",
