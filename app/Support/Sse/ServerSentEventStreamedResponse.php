@@ -7,9 +7,32 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 /**
  * ```php
  * Route::get('stream', function () {
- *     return new ServerSentEventStreamedResponse(new ServerSentEvent(function (ServerSentEvent $event) {
- *         $event->setData(json_encode(['message' => 'Hello World'.time()]));
- *     }));
+ *     return new ServerSentEventStreamedResponse(
+ *         new ServerSentEvent(static function (ServerSentEvent $event): void {
+ *             $event->setData(['time' => time()]);
+ *             $event->setId(time());
+ *             $event->setEvent('news');
+ *             $event->setRetry(3000);
+ *             $event->setSleep(3);
+ *             $event->setComment('comment');
+ *         }),
+ *         ServerSentEventStreamedResponse::HTTP_OK,
+ *         ['Access-Control-Allow-Origin' => '*']
+ *     );
+ * });
+ * ```
+ *
+ * ```js
+ * const source = new EventSource('https://strangecat-api.test/stream');
+ * source.onopen = event => console.log('onopen', event);
+ * source.onerror = event => console.log('onerror', event);
+ * source.onmessage = event => {
+ *     console.log(event.data);
+ *     // source.close(); // disconnect stream
+ * };
+ * source.addEventListener('news', event => {
+ *     console.log(event.data);
+ *     // source.close(); // disconnect stream
  * });
  * ```
  */
