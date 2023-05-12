@@ -21,5 +21,3 @@ Route::get('/', function () {
 Route::get('docs', function () {
     return view('scribe.index');
 })->middleware(['production.aborted', 'signed'])->name('docs');
-
-Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('production.aborted')->name('logs');
