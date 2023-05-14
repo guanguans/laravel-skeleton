@@ -68,16 +68,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class ServerSentEventStreamedResponse extends StreamedResponse
 {
-    /**
-     * @var array<string, string>
-     */
-    protected const HEADERS = [
-        'Content-Type' => 'text/event-stream',
-        'Connection' => 'keep-alive',
-        'Cache-Control' => 'no-cache, no-store, must-revalidate, pre-check=0, post-check=0',
-        'X-Accel-Buffering' => 'no',
-    ];
-
     public function __construct(ServerSentEvent $serverSentEvent = null, int $status = 200, array $headers = [])
     {
         parent::__construct($serverSentEvent, $status, $headers);
@@ -90,14 +80,5 @@ class ServerSentEventStreamedResponse extends StreamedResponse
         }
 
         return parent::setCallback($callback);
-    }
-
-    public function sendHeaders(): static
-    {
-        foreach (self::HEADERS as $name => $header) {
-            $this->headers->set($name, $header);
-        }
-
-        return parent::sendHeaders();
     }
 }

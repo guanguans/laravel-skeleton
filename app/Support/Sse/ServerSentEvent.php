@@ -10,9 +10,21 @@ namespace App\Support\Sse;
 class ServerSentEvent implements \Stringable
 {
     /**
+     * @var array<string, string>
+     */
+    public const HEADERS = [
+        'Content-Type' => 'text/event-stream',
+        'Connection' => 'keep-alive',
+        'Cache-Control' => 'no-cache, no-store, must-revalidate, pre-check=0, post-check=0',
+        'X-Accel-Buffering' => 'no',
+    ];
+
+    /**
      * @var callable|null
      */
     private $tapper;
+
+    private bool $headersSent = false;
 
     public function __construct(
         ?callable $tapper = null,
@@ -86,11 +98,40 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    public function sendHeaders(): self
+    {
+        if ($this->headersSent) {
+            return $this;
+        }
+
+        $this->headersSent = true;
+
+        // headers have already been sent by the developer
+        if (headers_sent()) {
+            return $this;
+        }
+
+        // headers
+        foreach (self::HEADERS as $name => $value) {
+            header($name.': '.$value, 0 === strcasecmp($name, 'Content-Type'));
+        }
+
+        return $this;
+    }
+
+    public function sendContent(): self
+    {
+        echo($this->tapper)($this);
+
+        return $this;
+    }
+
     public function send(): self
     {
-        echo $self = ($this->tapper)($this);
+        $this->sendHeaders();
+        $this->sendContent();
 
-        return $self;
+        return $this;
     }
 
     public function __toString(): string
@@ -123,7 +164,8 @@ class ServerSentEvent implements \Stringable
                 // Echo server sent event.
                 $this->send();
             } catch (CloseServerSentEventException $e) {
-                $e->serverSentEvent?->send();
+                // $e->serverSentEvent?->send();
+                $e->serverSentEvent?->sendContent();
 
                 return;
             } finally {
