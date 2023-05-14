@@ -27,11 +27,6 @@ class ServerSentEvent implements \Stringable
         $this->setData($data);
     }
 
-    public function callTapper(): self
-    {
-        return ($this->tapper)($this);
-    }
-
     public function setTapper(?callable $tapper): self
     {
         $this->tapper = static function (self $serverSentEvent) use ($tapper): self {
@@ -91,6 +86,13 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    public function send(): self
+    {
+        echo $self = ($this->tapper)($this);
+
+        return $self;
+    }
+
     public function __toString(): string
     {
         $event = [];
@@ -119,9 +121,9 @@ class ServerSentEvent implements \Stringable
         while (true) {
             try {
                 // Echo server sent event.
-                echo $this->callTapper();
+                $this->send();
             } catch (CloseServerSentEventException $e) {
-                echo $e->serverSentEvent?->callTapper();
+                $e->serverSentEvent?->send();
 
                 return;
             } finally {
