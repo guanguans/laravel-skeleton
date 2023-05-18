@@ -32,7 +32,7 @@ abstract class Rule implements \Illuminate\Contracts\Validation\Rule
         return $transMessage === $transKey ? static::fallbackMessage() : $transMessage;
     }
 
-    public static function fallbackMessage(): string
+    protected static function fallbackMessage(): string
     {
         $transKey = app()->isLocale('zh_CN')
             ? ':Attribute(:input) 必须是有效的 :Name。'

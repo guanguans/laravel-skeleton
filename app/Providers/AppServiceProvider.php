@@ -12,6 +12,7 @@ use App\Macros\ResponseFactoryMacro;
 use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
 use App\Rules\Rule;
+use App\Support\Discover;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -46,7 +47,6 @@ use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
 use ReflectionClass;
 use Reliese\Coders\CodersServiceProvider;
 use Stillat\BladeDirectives\Support\Facades\Directive;
-use Symfony\Component\Finder\Finder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -114,7 +114,7 @@ class AppServiceProvider extends ServiceProvider
             Paginator::useBootstrap();
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
             $this->registerMacros();
-            $this->extendValidatorFrom($this->app->path('Rules'));
+            $this->extendValidator();
             $this->extendView();
             ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
                 return $request->is('api/*');
@@ -186,46 +186,23 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register rule.
      */
-    protected function extendValidatorFrom(string|array $dirs, string|array $name = '*Rule.php', string|array $notName = [])
+    protected function extendValidator()
     {
-        foreach (Finder::create()->files()->name($name)->notName($notName)->in($dirs) as $splFileInfo) {
-            $class = resolve_class_from($splFileInfo->getRealPath());
-            if (! is_subclass_of($class, Rule::class)) {
-                continue;
-            }
-
-            $reflectionClass = new ReflectionClass($class);
-            if (! $reflectionClass->isInstantiable()) {
-                continue;
-            }
-
-            $methodOfExtend = transform($class, function (string $classOfRule) {
-                $method = 'extend';
-                if (is_subclass_of($classOfRule, ImplicitRule::class)) {
-                    $method = 'extendImplicit';
-                }
-
-                return $method;
-            });
-
-            // 有构造函数
-            if ($reflectionClass->getConstructor() && $reflectionClass->getConstructor()->getNumberOfParameters()) {
-                Validator::$methodOfExtend(
-                    $class::name(),
-                    function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($class) {
-                        return tap((new $class(...$parameters)), function (Rule $rule) use ($validator) {
+        Discover::in('Rules')
+            ->instanceOf(Rule::class)
+            ->all()
+            ->each(static function (ReflectionClass $ruleReflectionClass, $ruleClass): void {
+                Validator::{is_subclass_of($ruleClass, ImplicitRule::class) ? 'extendImplicit' : 'extend'}(
+                    $ruleClass::name(),
+                    function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($ruleClass) {
+                        return tap((new $ruleClass(...$parameters)), function (Rule $rule) use ($validator) {
                             $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
                             $rule instanceof DataAwareRule and $rule->setData($validator->getData());
                         })->passes($attribute, $value);
                     },
-                    $class::localizedMessage()
+                    $ruleClass::localizedMessage()
                 );
-
-                continue;
-            }
-
-            Validator::$methodOfExtend($class::name(), "$class@passes", $class::localizedMessage());
-        }
+            });
     }
 
     protected function extendView()
