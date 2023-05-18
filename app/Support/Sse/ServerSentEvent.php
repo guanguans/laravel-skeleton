@@ -157,16 +157,12 @@ class ServerSentEvent implements \Stringable
 
     public function sendHeaders(): self
     {
-        if ($this->headersSent) {
+        // headers have already been sent by the developer
+        if ($this->headersSent || headers_sent()) {
             return $this;
         }
 
         $this->headersSent = true;
-
-        // headers have already been sent by the developer
-        if (headers_sent()) {
-            return $this;
-        }
 
         // headers
         foreach (self::HEADERS as $name => $value) {
