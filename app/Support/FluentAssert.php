@@ -16,7 +16,7 @@ use Webmozart\Assert\Assert;
  * @method self boolean($message = '')
  * @method self scalar($message = '')
  * @method self object($message = '')
- * @method self resource($type = NULL, $message = '')
+ * @method self resource($type = null, $message = '')
  * @method self isCallable($message = '')
  * @method self isArray($message = '')
  * @method self isTraversable($message = '')
@@ -25,10 +25,10 @@ use Webmozart\Assert\Assert;
  * @method self isIterable($message = '')
  * @method self isInstanceOf($class, $message = '')
  * @method self notInstanceOf($class, $message = '')
- * @method self isInstanceOfAny($classes, $message = '')
+ * @method self isInstanceOfAny(array $classes, $message = '')
  * @method self isAOf($class, $message = '')
  * @method self isNotA($class, $message = '')
- * @method self isAnyOf($classes, $message = '')
+ * @method self isAnyOf(array $classes, $message = '')
  * @method self isEmpty($message = '')
  * @method self notEmpty($message = '')
  * @method self null($message = '')
@@ -50,8 +50,8 @@ use Webmozart\Assert\Assert;
  * @method self lessThan($limit, $message = '')
  * @method self lessThanEq($limit, $message = '')
  * @method self range($min, $max, $message = '')
- * @method self oneOf($values, $message = '')
- * @method self inArray($values, $message = '')
+ * @method self oneOf(array $values, $message = '')
+ * @method self inArray(array $values, $message = '')
  * @method self contains($subString, $message = '')
  * @method self notContains($subString, $message = '')
  * @method self notWhitespaceOnly($message = '')
@@ -131,9 +131,9 @@ use Webmozart\Assert\Assert;
  * @method self nullOrObject($message = '')
  * @method self allObject($message = '')
  * @method self allNullOrObject($message = '')
- * @method self nullOrResource($type = NULL, $message = '')
- * @method self allResource($type = NULL, $message = '')
- * @method self allNullOrResource($type = NULL, $message = '')
+ * @method self nullOrResource($type = null, $message = '')
+ * @method self allResource($type = null, $message = '')
+ * @method self allNullOrResource($type = null, $message = '')
  * @method self nullOrIsCallable($message = '')
  * @method self allIsCallable($message = '')
  * @method self allNullOrIsCallable($message = '')
@@ -408,6 +408,7 @@ class FluentAssert
      * @internal this method is not part of this class and should not be used directly
      *
      * @noinspection DebugFunctionUsageInspection
+     * @noinspection PhpVoidFunctionResultUsedInspection
      */
     final public static function dumpDocblock(): void
     {
@@ -416,27 +417,43 @@ class FluentAssert
             return $method->isStatic() && ! str_starts_with($method->getName(), '__');
         });
 
-        $docblock = array_reduce($methods, static function (string $docblock, \ReflectionMethod $method): string {
+        $docblock = array_map(static function (\ReflectionMethod $method): string {
             $parameters = $method->getParameters();
             unset($parameters[0]);
-            $trailing = ', ';
 
-            $arguments = array_reduce($parameters, static function (string $arguments, \ReflectionParameter $parameter) use ($trailing): string {
-                $argument = $parameter->isDefaultValueAvailable()
-                    ? sprintf('$%s = %s', $parameter->getName(), var_export($parameter->getDefaultValue(), true))
-                    : sprintf('$%s', $parameter->getName());
+            $arguments = array_map(static function (\ReflectionParameter $parameter): string {
+                $type = ($type = $parameter->getType()?->getName()) ? "$type " : '';
 
-                return $arguments.$argument.$trailing;
-            }, '');
+                $defaultValue = static function ($value): string {
+                    if (null === $value) {
+                        return 'null';
+                    }
 
-            return $docblock.PHP_EOL.sprintf(' * @method self %s(%s)', $method->getName(), rtrim($arguments, $trailing));
-        }, '/**');
+                    if ([] === $value) {
+                        return '[]';
+                    }
 
-        echo $docblock.<<<'docblock'
+                    return var_export($value, true);
+                };
 
-             *
-             * @mixin \Webmozart\Assert\Assert
-             */
-            docblock;
+                return $parameter->isDefaultValueAvailable()
+                    ? sprintf('%s$%s = %s', $type, $parameter->getName(), $defaultValue($parameter->getDefaultValue()))
+                    : sprintf('%s$%s', $type, $parameter->getName());
+            }, $parameters);
+
+            return sprintf(' * @method self %s(%s)', $method->getName(), implode(', ', $arguments));
+        }, $methods);
+
+        echo sprintf(
+            <<<'docblock'
+                /**
+                %s
+                 *
+                 * @mixin \Webmozart\Assert\Assert
+                 */
+                docblock
+            ,
+            implode(PHP_EOL, $docblock)
+        );
     }
 }
