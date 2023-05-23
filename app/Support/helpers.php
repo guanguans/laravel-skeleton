@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
@@ -57,13 +58,84 @@ if (! function_exists('resolve_class_from')) {
         $vendorPath = $vendorPath ? realpath($vendorPath) : app_path();
         $vendorNamespace ??= app()->getNamespace(); // App\
 
-        return \str(realpath($path))
+        return str(realpath($path))
             ->replaceFirst($vendorPath, $vendorNamespace)
             ->replaceLast('.php', '')
             ->replace(DIRECTORY_SEPARATOR, '\\')
             ->replace('\\\\', '\\')
             ->start('\\')
             ->toString();
+    }
+}
+
+if (! function_exists('resolve_facade_docblock')) {
+    /**
+     * @noinspection DebugFunctionUsageInspection
+     * @noinspection PhpUndefinedMethodInspection
+     * @noinspection NullPointerExceptionInspection
+     * @noinspection PhpVoidFunctionResultUsedInspection
+     */
+    function resolve_facade_docblock(string $class): string
+    {
+        return collect((new \ReflectionClass($class))->getMethods(\ReflectionMethod::IS_PUBLIC))
+            ->reject(static fn (\ReflectionMethod $method): bool => str_starts_with($method->getName(), '__'))
+            ->reduce(static function (Stringable $docblock, ReflectionMethod $method): Stringable {
+                $parameters = collect($method->getParameters())
+                    ->map(static function (ReflectionParameter $parameter): string {
+                        $defaultValue = static function ($value): string {
+                            if ($value === null) {
+                                return 'null';
+                            }
+
+                            if ($value === []) {
+                                return '[]';
+                            }
+
+                            $varExport = var_export($value, true);
+                            if (is_scalar($value)) {
+                                return $varExport;
+                            }
+
+                            return str($varExport)
+                                ->remove(PHP_EOL)
+                                ->replace('array (  ', '[')
+                                ->replace(',)', ']')
+                                ->replace(',  ', ', ')
+                                ->when(array_is_list($value), static function (Stringable $stringable) use ($value): Stringable {
+                                    return $stringable->remove(
+                                        collect($value)->keys()->map(static fn (int $index): string => "$index => ")
+                                    );
+                                });
+                        };
+
+                        $type = str($parameter->getType()?->getName())
+                            ->whenNotEmpty(fn (Stringable $stringable): Stringable => $stringable->append(' '));
+
+                        return $parameter->isDefaultValueAvailable()
+                            ? sprintf('%s$%s = %s', $type, $parameter->getName(), $defaultValue($parameter->getDefaultValue()))
+                            : sprintf('%s$%s', $type, $parameter->getName());
+                    })
+                    ->join(', ');
+
+                $returnType = (static function (ReflectionMethod $method): string {
+                    return $method->getReturnType()?->getName()
+                        ?: str($method->getDocComment())
+                            ->match(/** @lang PHP */ '/^\s+\*\s+@return\s+\$?([\w|\\\]+)/m')
+                            ->replace('this', 'self')
+                        ?? 'mixed';
+                })($method);
+
+                return $docblock
+                    ->newLine()
+                    ->append(sprintf(' * @method static %s %s(%s)', $returnType, $method->getName(), $parameters));
+            }, str(''))
+            ->prepend('/**')
+            ->append(<<<docblock
+
+             *
+             * @see \\$class
+             */
+            docblock);
     }
 }
 
