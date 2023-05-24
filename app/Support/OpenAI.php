@@ -43,7 +43,7 @@ class OpenAI extends FoundationSdk
                     ]);
                 }
             )
-            ->post('completions', $this->validateData(
+            ->post('completions', $this->validate(
                 $data,
                 [
                     'model' => [
@@ -80,7 +80,7 @@ class OpenAI extends FoundationSdk
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => json_encode(
-                $this->validateData(
+                $this->validate(
                     $data,
                     [
                         'model' => [
@@ -148,7 +148,7 @@ class OpenAI extends FoundationSdk
                     'throw' => true,
                 ],
             ],
-            $this->validateData($config, [
+            $this->validate($config, [
                 'http_options' => 'array',
                 'base_url' => 'string',
                 'api_key' => 'required|string',

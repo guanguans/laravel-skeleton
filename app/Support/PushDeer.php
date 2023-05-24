@@ -20,7 +20,7 @@ class PushDeer extends FoundationSdk
     {
         return $this->pendingRequest->post(
             'message/push',
-            $this->validateData(
+            $this->validate(
                 [
                     'text' => $text,
                     'desp' => $desp,
@@ -39,7 +39,7 @@ class PushDeer extends FoundationSdk
     {
         return $this->pendingRequest->post(
             'message/list',
-            $this->validateData(
+            $this->validate(
                 ['limit' => $limit],
                 ['limit' => 'int']
             )
@@ -53,7 +53,7 @@ class PushDeer extends FoundationSdk
                 'http_options' => [],
                 'base_url' => 'https://api2.pushdeer.com',
             ],
-            $this->validateData($config, [
+            $this->validate($config, [
                 'http_options' => 'array',
                 'http_options.allow_redirects' => 'bool|array',
                 'http_options.auth' => 'array|string|nullable',

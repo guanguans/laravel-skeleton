@@ -21,9 +21,6 @@ use Illuminate\Support\Facades\Facade;
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
  * @method static void flushMacros()
- * @method static array validateDataWith(\Illuminate\Contracts\Validation\Validator|array $validator, array $data)
- * @method static array validateData(array $data, array $rules, array $messages = [], array $customAttributes = [])
- * @method static array validateDataWithBag(string $errorBag, array $data, array $rules, array $messages = [], array $customAttributes = [])
  *
  * @see \App\Support\PushDeer
  */

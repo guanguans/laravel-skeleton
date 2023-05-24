@@ -2,7 +2,6 @@
 
 namespace App\Support;
 
-use App\Traits\ValidatesData;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\MessageFormatterInterface;
 use GuzzleHttp\Middleware;
@@ -22,7 +21,6 @@ abstract class FoundationSdk
     use Conditionable;
     use Tappable;
     use Macroable;
-    use ValidatesData;
 
     /**
      * @var array
@@ -96,6 +94,16 @@ abstract class FoundationSdk
     }
 
     /**
+     * @return array
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validate(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
+    {
+        return validator($data, $rules, $messages, $customAttributes)->validate();
+    }
+
+    /**
      * ```php
      * protected function validateConfig(array $config): array
      * {
@@ -111,7 +119,7 @@ abstract class FoundationSdk
      * ```php
      * protected function validateConfig(array $config): array
      * {
-     *     return $this->validateData($config, [
+     *     return $this->validate($config, [
      *         'http_options' => 'array',
      *     ]);
      * }
