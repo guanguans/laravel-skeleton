@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\LogHttp;
 use App\Macros\BlueprintMacro;
 use App\Macros\CollectionMacro;
 use App\Macros\CommandMacro;
@@ -118,6 +119,9 @@ class AppServiceProvider extends ServiceProvider
             $this->extendView();
             ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
                 return $request->is('api/*');
+            });
+            LogHttp::skipWhen(function () {
+                return $this->app->runningUnitTests();
             });
         });
 

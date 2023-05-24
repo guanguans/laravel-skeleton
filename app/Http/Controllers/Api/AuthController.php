@@ -54,12 +54,13 @@ class AuthController extends Controller
 
         $validated['name'] = app(Generator::class)->name;
         $validated['password'] = Hash::make($validated['password']);
+        unset($validated['password_confirmation']);
         $user = JWTUser::query()->create($validated);
         if (! $user instanceof JWTUser) {
             return $this->fail('创建用户失败');
         }
 
-        $validated['password'] = $validated['password_confirmation'];
+        $validated['password'] = $request->post('password_confirmation');
         if (! $token = auth()->attempt($validated)) {
             return $this->fail('邮箱或者密码错误');
         }
