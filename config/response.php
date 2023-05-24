@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Jiannei/laravel-response.
+ * This file is part of the jiannei/laravel-response.
  *
  * (c) Jiannei <longjian.huang@foxmail.com>
  *
@@ -52,7 +52,8 @@ return [
 
     // Set the structure of the response data
     'format' => [
-        'fields' => [
+        \Jiannei\Response\Laravel\Support\Format::class,
+        [
             'status' => ['alias' => 'status', 'show' => true],
             'code' => ['alias' => 'code', 'show' => true],
             'message' => ['alias' => 'message', 'show' => true],
@@ -66,7 +67,7 @@ return [
                     'data' => ['alias' => 'data', 'show' => true], // data/rows/list
 
                     'meta' => [
-                        'alia' => 'meta',
+                        'alias' => 'meta',
                         'show' => true,
 
                         'fields' => [
@@ -82,7 +83,7 @@ return [
                                     'total_pages' => ['alias' => 'total_pages', 'show' => true],
                                     'links' => [
                                         'alias' => 'links',
-                                        'show' => false,
+                                        'show' => true,
 
                                         'fields' => [
                                             'previous' => ['alias' => 'previous', 'show' => true],

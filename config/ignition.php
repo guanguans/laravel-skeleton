@@ -17,6 +17,7 @@ use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingImportSolutionProv
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingLivewireComponentSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingMixManifestSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingViteManifestSolutionProvider;
+use Spatie\LaravelIgnition\Solutions\SolutionProviders\OpenAiSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\TableNotFoundSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\UndefinedViewVariableSolutionProvider;
@@ -115,6 +116,7 @@ return [
         MissingLivewireComponentSolutionProvider::class,
         UndefinedViewVariableSolutionProvider::class,
         GenericLaravelExceptionSolutionProvider::class,
+        OpenAiSolutionProvider::class,
     ],
 
     /*
@@ -231,4 +233,9 @@ return [
         LogRecorder::class,
         QueryRecorder::class,
     ],
+
+    /*
+     * When a key is set, we'll send your exceptions to Open AI to generate a solution
+     */
+    'open_ai_key' => env('IGNITION_OPEN_AI_KEY'),
 ];

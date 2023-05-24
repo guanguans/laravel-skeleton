@@ -1,21 +1,21 @@
 <?php
 
-/*
- * This file is part of the "laravel-lang/publisher" project.
+/**
+ * This file is part of the "Laravel-Lang/publisher" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @author Andrey Helldar <helldar@ai-rus.com>
- *
- * @copyright 2021 Andrey Helldar
- *
+ * @author Andrey Helldar <helldar@dragon-code.pro>
+ * @copyright 2023 Andrey Helldar
  * @license MIT
  *
  * @see https://github.com/Laravel-Lang/publisher
  */
 
 declare(strict_types=1);
+
+use LaravelLang\Publisher\Constants\Locales;
 
 return [
     /*
@@ -24,9 +24,10 @@ return [
      * `true` means inline files will be used.
      * `false` means that default files will be used.
      *
-     * The difference between them can be seen here:
-     * @see https://github.com/Laravel-Lang/lang/blob/master/source/validation.php
-     * @see https://github.com/Laravel-Lang/lang/blob/master/source/validation-inline.php
+     * For example, the difference between them can be seen here:
+     *
+     * The :attribute must be accepted. // default
+     * This field must be accepted.     // inline
      *
      * By default, `false`.
      */
@@ -39,30 +40,72 @@ return [
      * By default, true
      */
 
-    'alignment' => true,
+    'align' => true,
 
-    // Key exclusion when combining.
+    /*
+     * This option determines the mechanism for converting translation
+     * keys into a typographic version.
+     *
+     * For example:
+     *   for `false`:
+     *     "It's super-configurable... you can even use additional extensions to expand its capabilities -- just like this one!"
+     *   for `true`:
+     *     “It’s super-configurable… you can even use additional extensions to expand its capabilities – just like this one!”
+     *
+     * By default, false
+     */
 
-    'excludes' => [
-        // 'auth' => ['throttle'],
-        // 'pagination' => ['previous'],
-        // 'passwords' => ['reset', 'throttled', 'user'],
-        // '{locale}' => ['Confirm Password'],
+    'smart_punctuation' => [
+        'enable' => false,
+
+        'common' => [
+            'double_quote_opener' => '“',
+            'double_quote_closer' => '”',
+            'single_quote_opener' => '‘',
+            'single_quote_closer' => '’',
+        ],
+
+        'locales' => [
+            Locales::FRENCH->value => [
+                'double_quote_opener' => '«&nbsp;',
+                'double_quote_closer' => '&nbsp;»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+
+            Locales::RUSSIAN->value => [
+                'double_quote_opener' => '«',
+                'double_quote_closer' => '»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+
+            Locales::UKRAINIAN->value => [
+                'double_quote_opener' => '«',
+                'double_quote_closer' => '»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+
+            Locales::BELARUSIAN->value => [
+                'double_quote_opener' => '«',
+                'double_quote_closer' => '»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+        ],
     ],
 
     /*
-     * Change key case.
+     * The language codes chosen for the files in this repository may not
+     * match the preferences for your project.
      *
-     * Available values:
-     *
-     *   0 - Case does not change
-     *   1 - camelCase
-     *   2 - snake_case
-     *   3 - kebab-case
-     *   4 - PascalCase
-     *
-     * By default, 0
+     * Specify here mappings of localizations with your project.
      */
 
-    'case' => 0,
+    'aliases' => [
+        //\LaravelLang\Publisher\Constants\Locales::GERMAN->value => 'de-DE',
+        //
+        //\LaravelLang\Publisher\Constants\Locales::GERMAN_SWITZERLAND->value => 'de-CH',
+    ],
 ];
