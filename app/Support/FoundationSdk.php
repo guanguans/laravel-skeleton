@@ -2,13 +2,16 @@
 
 namespace App\Support;
 
+use Composer\InstalledVersions;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\MessageFormatterInterface;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
@@ -28,33 +31,39 @@ abstract class FoundationSdk
     protected $config;
 
     /**
+     * @var \Illuminate\Http\Client\Factory
+     */
+    protected $http;
+
+    /**
      * @var \Illuminate\Http\Client\PendingRequest
      */
-    protected $pendingRequest;
+    protected $defaultPendingRequest;
 
     public function __construct(array $config)
     {
         $this->config = $this->validateConfig($config);
-        $this->pendingRequest = $this->buildPendingRequest($this->config);
+        $this->http = Http::getFacadeRoot();
+        $this->defaultPendingRequest = $this->buildDefaultPendingRequest($this->config);
     }
 
     public function dd()
     {
-        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
             $pendingRequest->dd();
         });
     }
 
     public function dump()
     {
-        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
             $pendingRequest->dump();
         });
     }
 
     public function ddRequestData()
     {
-        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
             $pendingRequest->beforeSending(function (Request $request, array $options) {
                 VarDumper::dump($options['laravel_data']);
                 exit(1);
@@ -64,7 +73,7 @@ abstract class FoundationSdk
 
     public function dumpRequestData()
     {
-        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
             $pendingRequest->beforeSending(function (Request $request, array $options) {
                 VarDumper::dump($options['laravel_data']);
             });
@@ -73,24 +82,75 @@ abstract class FoundationSdk
 
     public function withLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info')
     {
-        return $this->tapPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger) {
             $pendingRequest->withMiddleware($this->buildLoggerMiddleware($logger, $formatter, $logLevel));
         });
     }
 
-    public function tapPendingRequest(callable $callback)
-    {
-        $this->pendingRequest = tap($this->pendingRequest, $callback);
-
-        return $this;
-    }
-
-    public static function buildLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info'): callable
+    public function buildLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info'): callable
     {
         $logger = $logger ?: Log::channel('daily');
         $formatter = $formatter ?: new MessageFormatter(MessageFormatter::DEBUG);
 
         return Middleware::log($logger, $formatter, $logLevel);
+    }
+
+    public function tapDefaultPendingRequest(callable $callback)
+    {
+        $this->defaultPendingRequest = tap($this->defaultPendingRequest, $callback);
+
+        return $this;
+    }
+
+    /**
+     * @psalm-suppress UndefinedThisPropertyFetch
+     *
+     * @noinspection PhpUndefinedFieldInspection
+     */
+    public function cloneDefaultPendingRequest(): PendingRequest
+    {
+        return tap(clone $this->defaultPendingRequest, function (PendingRequest $request): void {
+            $getStubCallbacks = function (): Collection {
+                return $this->stubCallbacks;
+            };
+
+            $request->stub($getStubCallbacks->call($this->http));
+        });
+    }
+
+    /**
+     * ```php
+     * protected function buildDefaultPendingRequest(array $config): PendingRequest
+     * {
+     *     return parent::buildDefaultPendingRequest($config)
+     *         ->baseUrl($config['baseUrl'])
+     *         ->asJson()
+     *         ->withMiddleware($this->buildLogMiddleware());
+     * }
+     * ```.
+     */
+    protected function buildDefaultPendingRequest(array $config): PendingRequest
+    {
+        return $this->http->withUserAgent($this->userAgent());
+    }
+
+    protected function userAgent(): string
+    {
+        static $userAgent;
+
+        if (null === $userAgent) {
+            $userAgent = implode(' ', [
+                sprintf('laravel/%s', \str(app()->version())->whenStartsWith('v', static function (Stringable $version): Stringable {
+                    return $version->replaceFirst('v', '');
+                })),
+                sprintf('guzzle/%s', InstalledVersions::getPrettyVersion('guzzlehttp/guzzle')),
+                sprintf('curl/%s', curl_version()['version']),
+                sprintf('PHP/%s', PHP_VERSION),
+                sprintf('%s/%s', PHP_OS, php_uname('r')),
+            ]);
+        }
+
+        return $userAgent;
     }
 
     /**
@@ -136,17 +196,4 @@ abstract class FoundationSdk
      * @throws \Illuminate\Validation\ValidationException Laravel validation rules.
      */
     abstract protected function validateConfig(array $config): array;
-
-    /**
-     * ```php
-     * protected function buildPendingRequest(array $config): PendingRequest
-     * {
-     *     return Http::withOptions($config['http_options'])
-     *         ->baseUrl($config['baseUrl'])
-     *         ->asJson()
-     *         ->withMiddleware($this->buildLoggerMiddleware());
-     * }
-     * ```
-     */
-    abstract protected function buildPendingRequest(array $config): PendingRequest;
 }

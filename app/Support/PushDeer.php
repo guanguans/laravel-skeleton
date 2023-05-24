@@ -18,7 +18,7 @@ class PushDeer extends FoundationSdk
 {
     public function messagePush(string $text, string $desp = '', string $type = 'markdown'): Response
     {
-        return $this->pendingRequest->post(
+        return $this->cloneDefaultPendingRequest()->post(
             'message/push',
             $this->validate(
                 [
@@ -37,7 +37,7 @@ class PushDeer extends FoundationSdk
 
     public function messageList(int $limit = 10): Response
     {
-        return $this->pendingRequest->post(
+        return $this->cloneDefaultPendingRequest()->post(
             'message/list',
             $this->validate(
                 ['limit' => $limit],
@@ -90,9 +90,10 @@ class PushDeer extends FoundationSdk
         );
     }
 
-    protected function buildPendingRequest(array $config): PendingRequest
+    protected function buildDefaultPendingRequest(array $config): PendingRequest
     {
-        return Http::baseUrl($config['base_url'])
+        return parent::buildDefaultPendingRequest($config)
+            ->baseUrl($config['base_url'])
             ->throw()
             ->asJson()
             ->withOptions($config['http_options'])
