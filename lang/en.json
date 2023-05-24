@@ -1,4 +1,6 @@
 {
+    "(and :count more error)": "(and :count more error)",
+    "(and :count more errors)": "(and :count more errors)",
     "A fresh verification link has been sent to your email address.": "A fresh verification link has been sent to your email address.",
     "All rights reserved.": "All rights reserved.",
     "Before proceeding, please check your email for a verification link.": "Before proceeding, please check your email for a verification link.",
@@ -24,6 +26,7 @@
     "Page Expired": "Page Expired",
     "Pagination Navigation": "Pagination Navigation",
     "Password": "Password",
+    "Payment Required": "Payment Required",
     "Please click the button below to verify your email address.": "Please click the button below to verify your email address.",
     "Regards": "Regards",
     "Register": "Register",
@@ -40,6 +43,7 @@
     "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.",
     "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.",
     "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute.",
+    "The given data was invalid.": "The given data was invalid.",
     "This action is unauthorized.": "This action is unauthorized.",
     "This password reset link will expire in :count minutes.": "This password reset link will expire in :count minutes.",
     "to": "to",
