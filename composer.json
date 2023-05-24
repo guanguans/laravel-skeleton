@@ -8,32 +8,30 @@
         "laravel"
     ],
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "ext-curl": "*",
         "ext-json": "*",
         "bensampo/laravel-enum": "^6.3",
-        "biiiiiigmonster/hasin": "^2.1",
+        "biiiiiigmonster/hasin": "^3.0",
         "cerbero/command-validator": "^2.5",
         "f9webltd/laravel-api-response-helpers": "^1.5",
-        "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^3.0",
-        "guanguans/laravel-dump-sql": "^2.2",
-        "guanguans/laravel-exception-notify": "^2.14",
-        "guzzlehttp/guzzle": "^7.5",
-        "hammerstone/fast-paginate": "^0.1.12",
+        "guanguans/laravel-dump-sql": "^2.3",
+        "guanguans/laravel-exception-notify": "^2.15",
+        "guzzlehttp/guzzle": "^7.7",
+        "hammerstone/fast-paginate": "^1.0",
         "hammerstone/laravel-pseudo-daemon": "^1.1",
         "jenssegers/agent": "^2.6",
-        "jiannei/laravel-response": "^4.4",
-        "knuckleswtf/scribe": "^4.16",
-        "laravel/framework": "^9.52",
-        "laravel/octane": "^1.5",
+        "jiannei/laravel-response": "^5.2",
+        "knuckleswtf/scribe": "^4.19",
+        "laravel/framework": "^10.12",
+        "laravel/octane": "^2.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "opcodesio/log-viewer": "^2.3",
+        "opcodesio/log-viewer": "^2.4",
         "overtrue/laravel-query-logger": "^3.1",
         "php-open-source-saver/jwt-auth": "^2.1",
         "rahul900day/laravel-console-spinner": "^1.1",
-        "rennokki/laravel-eloquent-query-cache": "^3.3",
+        "rennokki/laravel-eloquent-query-cache": "^3.4",
         "spatie/fork": "^1.1",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-backup": "^8.1",
@@ -44,43 +42,38 @@
         "spatie/laravel-schemaless-attributes": "^2.4",
         "spatie/laravel-short-schedule": "^1.5",
         "stillat/blade-directives": "^1.2",
-        "surgiie/transformer": "^0.2.0",
-        "symfony/stopwatch": "^6.0",
-        "vectorface/whip": "^0.4.0",
-        "watson/validating": "^7.0",
-        "wendelladriel/laravel-validated-dto": "^2.2",
-        "xint0/laravel-optimistic-locking": "^1.3"
+        "symfony/stopwatch": "^6.2",
+        "vectorface/whip": "^0.3",
+        "watson/validating": "^8.1",
+        "wendelladriel/laravel-validated-dto": "^2.10"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
         "bennett-treptow/laravel-migration-generator": "^4.3",
-        "brainmaestro/composer-git-hooks": "^3.0",
-        "deployer/deployer": "^7.1",
-        "fakerphp/faker": "^1.21",
-        "guanguans/ai-commit": "^1.3",
-        "kitloong/laravel-migrations-generator": "^6.8",
+        "brainmaestro/composer-git-hooks": "^3.0@alpha",
+        "deployer/deployer": "^7.3",
+        "fakerphp/faker": "^1.22",
+        "guanguans/ai-commit": "^1.4",
+        "kitloong/laravel-migrations-generator": "^6.10",
         "lanin/laravel-api-debugger": "^4.0",
         "laracademy/generators": "^3.6",
         "laracasts/generators": "^2.0",
-        "laravel-lang/attributes": "^1.1",
-        "laravel-lang/http-statuses": "^2.1",
-        "laravel-lang/lang": "^10.9",
-        "laravel-lang/publisher": "^13.0",
+        "laravel-lang/common": "^3.1",
         "laravel-shift/factory-generator": "dev-master",
-        "laravel/pint": "^1.5",
-        "laravel/sail": "^1.21",
+        "laravel/pint": "^1.10",
+        "laravel/sail": "^1.22",
         "mockery/mockery": "^1.5",
-        "mortexa/laravel-arkitect": "^0.3.3",
-        "nunomaduro/collision": "^6.4",
-        "nunomaduro/larastan": "^2.5",
+        "mortexa/laravel-arkitect": "^0.6",
+        "nunomaduro/collision": "^7.5",
+        "nunomaduro/larastan": "^2.6",
         "orangehill/iseed": "^3.0",
-        "phpunit/phpunit": "^9.6 || ^10.0",
-        "reliese/laravel": "^1.1",
+        "phpunit/phpunit": "^10.1",
+        "reliese/laravel": "^1.2",
         "roave/security-advisories": "dev-latest",
-        "spatie/laravel-ignition": "^1.6",
+        "spatie/laravel-ignition": "^2.1",
         "thedoctor0/laravel-factory-generator": "^1.3"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
@@ -99,6 +92,8 @@
     },
     "config": {
         "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
             "symfony/runtime": true
         },
         "optimize-autoloader": true,
@@ -128,24 +123,24 @@
             "@cghooks update"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi",
-            "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:meta",
+            "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
+            "@php artisan ide-helper:generate --ansi -v",
+            "@php artisan ide-helper:meta --ansi -v",
             "@cghooks update"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi -v"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+            "@php artisan key:generate --ansi -v"
         ],
-        "ai-commit": "@php ./vendor/bin/ai-commit commit",
-        "arkitect": "@php artisan test:arkitect",
-        "cghooks": "@php ./vendor/bin/cghooks",
+        "ai-commit": "@php ./vendor/bin/ai-commit commit --ansi -v",
+        "arkitect": "@php artisan test:arkitect --ansi -v",
+        "cghooks": "@php ./vendor/bin/cghooks --ansi -v",
         "checks": [
             "@mark-start",
             "@pint-test",
@@ -153,9 +148,9 @@
             "@docs-generate",
             "@mark-finish"
         ],
-        "composer-check-platform-reqs": "@composer check-platform-reqs",
-        "composer-validate": "@composer validate --check-lock --strict",
-        "docs-generate": "@php artisan scribe:generate --ansi",
+        "composer-check-platform-reqs": "@composer check-platform-reqs --ansi -v",
+        "composer-validate": "@composer validate --check-lock --strict --ansi -v",
+        "docs-generate": "@php artisan scribe:generate --ansi -v",
         "lint": [
             "for dir in .; do find $dir -maxdepth 1 -type f -name '*.php' -exec php -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done",
             "for dir in ./app ./config ./routes; do find $dir -maxdepth 5 -type f -name '*.php' -type f ! -name 'Singletonable.php' -type f ! -name 'Fireworks.php' -exec php -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done"
@@ -163,9 +158,9 @@
         "mark-finish": "printf '\\n!\\n!\\t\\033[0;32m%s\\033[0m\\n!\\n\\n' \"Finished\"",
         "mark-separate": "printf '\\n!\\n!\\t\\033[0;33m%s\\033[0m\\n!\\n\\n' \"----------------\"",
         "mark-start": "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\"",
-        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --xdebug --ansi -vv",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --xdebug --ansi -v",
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
-        "pint": "@php ./vendor/bin/pint --dirty -v",
+        "pint": "@php ./vendor/bin/pint --dirty --ansi -v",
         "pint-test": "@pint --test"
     }
 }
