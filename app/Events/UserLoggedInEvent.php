@@ -6,11 +6,12 @@ use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 
-class UserLoggedInEvent
+class UserLoggedInEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -31,7 +32,7 @@ class UserLoggedInEvent
     {
         return [
             new Channel(Str::snake(class_basename(__CLASS__), '-')),
-            new PrivateChannel(Str::snake(class_basename(__CLASS__), '-')),
+            // new PrivateChannel(Str::snake(class_basename(__CLASS__), '-')),
         ];
     }
 }
