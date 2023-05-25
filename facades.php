@@ -226,16 +226,16 @@ function resolveDocblockTypes($method, $typeNode)
 {
     if ($typeNode instanceof UnionTypeNode) {
         return '('.collect($typeNode->types)
-                ->map(fn ($node) => resolveDocblockTypes($method, $node))
-                ->unique()
-                ->implode('|').')';
+            ->map(fn ($node) => resolveDocblockTypes($method, $node))
+            ->unique()
+            ->implode('|').')';
     }
 
     if ($typeNode instanceof IntersectionTypeNode) {
         return '('.collect($typeNode->types)
-                ->map(fn ($node) => resolveDocblockTypes($method, $node))
-                ->unique()
-                ->implode('&').')';
+            ->map(fn ($node) => resolveDocblockTypes($method, $node))
+            ->unique()
+            ->implode('&').')';
     }
 
     if ($typeNode instanceof GenericTypeNode) {

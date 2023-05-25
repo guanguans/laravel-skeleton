@@ -32,6 +32,6 @@
         "*.blade.php"
     ],
     "notPath": [
-        "facades.php"
+        "xxx.php"
     ]
 }

@@ -6,7 +6,7 @@ use App\Exceptions\BadRequestException;
 use Closure;
 use Illuminate\Http\Request;
 
-class ValidateJsonContent
+class VerifyJsonContent
 {
     /**
      * @throws BadRequestException

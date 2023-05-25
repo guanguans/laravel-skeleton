@@ -179,12 +179,13 @@ class AppServiceProvider extends ServiceProvider
         Stringable::mixin($this->app->make(StringableMacro::class));
         Str::mixin($this->app->make(StrMacro::class));
 
-        $files = glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php'));
-        foreach ($files as $file) {
-            QueryBuilder::mixin($queryBuilderMacro = $this->app->make(resolve_class_from($file)));
-            EloquentBuilder::mixin($queryBuilderMacro);
-            Relation::mixin($queryBuilderMacro);
-        }
+        collect(glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php')))
+            ->each(function ($file) {
+                $queryBuilderMacro = $this->app->make(resolve_class_from($file));
+                QueryBuilder::mixin($queryBuilderMacro);
+                EloquentBuilder::mixin($queryBuilderMacro);
+                Relation::mixin($queryBuilderMacro);
+            });
     }
 
     /**

@@ -12,7 +12,7 @@ class SetAcceptHeader
      *
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, string $type = 'html')
+    public function handle(Request $request, Closure $next, string $type = 'json')
     {
         $request->headers->set('Accept', "application/$type");
 

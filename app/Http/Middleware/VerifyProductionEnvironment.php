@@ -4,10 +4,15 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\App;
 
-class ProductionEnvironmentAbort extends AbortIf
+class VerifyProductionEnvironment extends AbortIf
 {
     protected function condition(): bool
     {
         return App::isProduction();
+    }
+
+    protected function code(): int
+    {
+        return 403;
     }
 }

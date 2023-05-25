@@ -35,7 +35,7 @@ class PingController extends Controller
         ]);
 
         if (($validatedParameters['is_bad'] ?? 0) || $is_bad) {
-            return $this->errorBadRequest('This is a bad example.');
+            $this->errorBadRequest('This is a bad example.');
         }
 
         return $this->ok('This is a successful example.');

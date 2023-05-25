@@ -19,10 +19,7 @@ abstract class AbortIf
 
     abstract protected function condition(): bool;
 
-    protected function code()
-    {
-        return 404;
-    }
+    abstract protected function code(): int;
 
     protected function message()
     {

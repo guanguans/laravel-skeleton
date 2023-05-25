@@ -20,4 +20,4 @@ Route::get('/', function () {
 // 接口文档
 Route::get('docs', function () {
     return view('scribe.index');
-})->middleware(['production.aborted', 'signed'])->name('docs');
+})->middleware(['verify.production.environment', 'signed'])->name('docs');
