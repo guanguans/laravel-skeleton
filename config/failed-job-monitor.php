@@ -24,7 +24,8 @@ return [
     /*
      * The channels to which the notification will be sent.
      */
-    'channels' => ['mail', 'slack'],
+    // 'channels' => ['mail', 'slack'],
+    'channels' => [],
 
     'mail' => [
         'to' => ['email@example.com'],

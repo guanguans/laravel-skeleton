@@ -13,10 +13,12 @@
     },
     "devDependencies": {
         "axios": "^0.21",
+        "laravel-echo": "^1.15.1",
         "laravel-mix": "^6.0.6",
         "laravel-vite-plugin": "^0.7.0",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
+        "pusher-js": "^8.0.2",
         "vite": "^3.0.0"
     }
 }
