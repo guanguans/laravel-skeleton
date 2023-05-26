@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f88e6670bc3ce8bebf6e11669e5376a2",
+    "content-hash": "ee067cf1c830bf6fdf5c9c79aa7e6846",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -7700,16 +7700,16 @@
         },
         {
             "name": "spatie/laravel-schedule-monitor",
-            "version": "3.2.1",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-schedule-monitor.git",
-                "reference": "9291e272ec3134caa7b4c2e38ade6dde4b2069f6"
+                "reference": "125190175b6ebb6a437c766a479be3440bf19699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/9291e272ec3134caa7b4c2e38ade6dde4b2069f6",
-                "reference": "9291e272ec3134caa7b4c2e38ade6dde4b2069f6",
+                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/125190175b6ebb6a437c766a479be3440bf19699",
+                "reference": "125190175b6ebb6a437c766a479be3440bf19699",
                 "shasum": ""
             },
             "require": {
@@ -7766,7 +7766,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-schedule-monitor/issues",
-                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.2.1"
+                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.3.0"
             },
             "funding": [
                 {
@@ -7774,7 +7774,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-01T19:24:32+00:00"
+            "time": "2023-05-24T11:57:18+00:00"
         },
         {
             "name": "spatie/laravel-schemaless-attributes",
@@ -13249,16 +13249,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "12.21.6",
+            "version": "12.21.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "b73e3d96d633c1555ce33005e60b284f44ff3d00"
+                "reference": "5f91bfb3a309b8f3961d598f1b45dbae884a334f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/b73e3d96d633c1555ce33005e60b284f44ff3d00",
-                "reference": "b73e3d96d633c1555ce33005e60b284f44ff3d00",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/5f91bfb3a309b8f3961d598f1b45dbae884a334f",
+                "reference": "5f91bfb3a309b8f3961d598f1b45dbae884a334f",
                 "shasum": ""
             },
             "require": {
@@ -13311,7 +13311,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-05-23T11:57:01+00:00"
+            "time": "2023-05-24T14:50:27+00:00"
         },
         {
             "name": "laravel-lang/publisher",
@@ -16839,16 +16839,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "f747d83c6d7cb6229b462f3ddbb3a82dc0db0f78"
+                "reference": "ad13a6792992411e05d3d3b293e26bdf9f9a7321"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/f747d83c6d7cb6229b462f3ddbb3a82dc0db0f78",
-                "reference": "f747d83c6d7cb6229b462f3ddbb3a82dc0db0f78",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/ad13a6792992411e05d3d3b293e26bdf9f9a7321",
+                "reference": "ad13a6792992411e05d3d3b293e26bdf9f9a7321",
                 "shasum": ""
             },
             "require": {
@@ -16918,20 +16918,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-04T13:20:26+00:00"
+            "time": "2023-05-25T10:19:32+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "2f99fa6b732a6049e78ed34e4608ce589605ae54"
+                "reference": "35711943d4725aa80f8033e4f1cb3a6775530b25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/2f99fa6b732a6049e78ed34e4608ce589605ae54",
-                "reference": "2f99fa6b732a6049e78ed34e4608ce589605ae54",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/35711943d4725aa80f8033e4f1cb3a6775530b25",
+                "reference": "35711943d4725aa80f8033e4f1cb3a6775530b25",
                 "shasum": ""
             },
             "require": {
@@ -17010,7 +17010,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-09T07:19:31+00:00"
+            "time": "2023-05-25T11:30:27+00:00"
         },
         {
             "name": "symfony/polyfill-php81",
@@ -17216,7 +17216,8 @@
     "platform": {
         "php": "^8.1",
         "ext-curl": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-pdo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

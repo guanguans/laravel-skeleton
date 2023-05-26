@@ -25,6 +25,7 @@ use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
@@ -117,12 +118,14 @@ class AppServiceProvider extends ServiceProvider
             $this->registerMacros();
             $this->extendValidator();
             $this->extendView();
+            $this->listenEvents();
             ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
                 return $request->is('api/*');
             });
             LogHttp::skipWhen(function () {
                 return $this->app->runningUnitTests();
             });
+
         });
 
         $this->whenever(\request()?->user()?->locale, static function (self $serviceProvider, $locale) {
@@ -306,6 +309,13 @@ class AppServiceProvider extends ServiceProvider
 
         Directive::compile('slugify', function ($title, $separator = '-', $language = 'en', $dictionary = ['@' => 'at']) {
             return '<?php echo \Illuminate\Support\Str::slug($title, $separator, $language, $dictionary); ?>';
+        });
+    }
+
+    protected function listenEvents(): void
+    {
+        $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
+            $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
         });
     }
 }
