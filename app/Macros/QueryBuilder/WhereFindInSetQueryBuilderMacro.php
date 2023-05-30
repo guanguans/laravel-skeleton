@@ -3,6 +3,7 @@
 namespace App\Macros\QueryBuilder;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -15,6 +16,10 @@ class WhereFindInSetQueryBuilderMacro
     {
         /* @var string|Arrayable|string[] $values */
         return function (string $column, $values, string $boolean = 'and', bool $not = false) {
+            if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && ! str_starts_with($column, $tablePrefix)) {
+                $column = $tablePrefix.$column;
+            }
+
             $sql = $not ? "not find_in_set(?, $column)" : "find_in_set(?, $column)";
 
             $values instanceof Arrayable and $values = $values->toArray();

@@ -3,6 +3,7 @@
 namespace App\Macros\QueryBuilder;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -17,7 +18,14 @@ class WhereInsQueryBuilderMacro
         return function (array $columns, $values, string $boolean = 'and', bool $not = false) {
             $operator = $not ? 'not in' : 'in';
 
-            $rawColumns = implode(',', $columns);
+            $sterilizedColumns = array_map(static function (string $column): string {
+                if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && ! str_starts_with($column, $tablePrefix)) {
+                    $column = $tablePrefix.$column;
+                }
+
+                return $column;
+            }, $columns);
+            $rawColumns = implode(',', $sterilizedColumns);
 
             $values instanceof Arrayable and $values = $values->toArray();
             $values = array_map(function ($value) use ($columns) {
