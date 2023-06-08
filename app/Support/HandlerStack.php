@@ -49,21 +49,15 @@ namespace App\Support;
  *
  * @final
  */
-class HandlerStack
+class HandlerStack implements \Stringable
 {
-    /**
-     * @var null|(callable(mixed): mixed)
-     */
+    /** @var null|(callable(mixed): mixed) */
     private $handler;
 
-    /**
-     * @var array{(callable(callable(mixed): mixed): callable), (null|string)}[]
-     */
+    /** @var array{(callable(callable(mixed): mixed): callable), (null|string)}[] */
     private array $stack = [];
 
-    /**
-     * @var null|(callable(mixed): mixed)
-     */
+    /** @var null|(callable(mixed): mixed) */
     private $cached;
 
     /**
@@ -163,8 +157,8 @@ class HandlerStack
     /**
      * Unshift a middleware to the bottom of the stack.
      *
-     * @param callable(callable): callable $middleware Middleware function
      * @param string $name name to register for this middleware
+     * @param callable(callable): callable $middleware Middleware function
      */
     public function unshift(callable $middleware, ?string $name = null): void
     {
@@ -175,8 +169,8 @@ class HandlerStack
     /**
      * Push a middleware to the top of the stack.
      *
-     * @param callable(callable): callable $middleware Middleware function
      * @param string $name name to register for this middleware
+     * @param callable(callable): callable $middleware Middleware function
      */
     public function push(callable $middleware, string $name = ''): void
     {
@@ -188,8 +182,8 @@ class HandlerStack
      * Add a middleware before another middleware by name.
      *
      * @param string $findName Middleware to find
-     * @param callable(callable): callable $middleware Middleware function
      * @param string $withName name to register for this middleware
+     * @param callable(callable): callable $middleware Middleware function
      */
     public function before(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -200,8 +194,8 @@ class HandlerStack
      * Add a middleware after another middleware by name.
      *
      * @param string $findName Middleware to find
-     * @param callable(callable): callable $middleware Middleware function
      * @param string $withName name to register for this middleware
+     * @param callable(callable): callable $middleware Middleware function
      */
     public function after(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -302,7 +296,6 @@ class HandlerStack
                 : "callable(['".\get_class($fn[0])."', '{$fn[1]}'])";
         }
 
-        /** @var object $fn */
         return 'callable('.spl_object_hash($fn).')';
     }
 }

@@ -43,9 +43,6 @@ class WhereFullTextQueryBuilderMacro
          * @param  string  $value
          * @return $this|callable
          */
-        return function ($columns, $value, array $options = []) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereFulltext($columns, $value, $options, 'or');
-        };
+        return fn ($columns, $value, array $options = []) => $this->whereFulltext($columns, $value, $options, 'or');
     }
 }

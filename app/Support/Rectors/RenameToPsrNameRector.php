@@ -14,9 +14,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    /**
-     * @var array<string>
-     */
+    /** @var array<string> */
     protected array $except = [
         '*::*',
         'class',

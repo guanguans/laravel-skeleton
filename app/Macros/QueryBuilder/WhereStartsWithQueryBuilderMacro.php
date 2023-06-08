@@ -22,25 +22,16 @@ class WhereStartsWithQueryBuilderMacro
 
     public function whereNotStartsWith(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereStartsWith($column, $value, 'and', true);
-        };
+        return fn ($column, string $value) => $this->whereStartsWith($column, $value, 'and', true);
     }
 
     public function orWhereStartsWith(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereStartsWith($column, $value, 'or');
-        };
+        return fn ($column, string $value) => $this->whereStartsWith($column, $value, 'or');
     }
 
     public function orWhereNotStartsWith(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereStartsWith($column, $value, 'or', true);
-        };
+        return fn ($column, string $value) => $this->whereStartsWith($column, $value, 'or', true);
     }
 }

@@ -41,9 +41,7 @@ abstract class AbstractRepository
      */
     protected \Illuminate\Support\MessageBag $errors;
 
-    /**
-     * @var|\Illuminate\Database\Eloquent\Builder
-     */
+    /** @var|\Illuminate\Database\Eloquent\Builder */
     protected $query;
 
     /**

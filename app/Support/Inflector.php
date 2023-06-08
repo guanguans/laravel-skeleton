@@ -201,8 +201,6 @@ class Inflector
      * @param string $type the type of inflection, either 'plural', 'singular',
      *                     or 'uninflected'
      * @param array $rules array of rules to be added
-     * @param bool $reset if true, will unset default inflections for all
-     *                    new rules that are being defined in $rules
      */
     public static function rules(string $type, array $rules, bool $reset = false): void
     {

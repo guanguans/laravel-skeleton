@@ -32,9 +32,6 @@ class OrderByWithQueryBuilderMacro
 
     public function orderByWithDesc(): callable
     {
-        return function ($relation, $column) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->orderByWith($relation, $column, 'desc');
-        };
+        return fn ($relation, $column) => $this->orderByWith($relation, $column, 'desc');
     }
 }

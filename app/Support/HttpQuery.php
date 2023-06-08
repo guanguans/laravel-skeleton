@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use ArrayAccess;
-use Iterator;
-
 /**
- * @implements ArrayAccess<int|string, mixed>
- * @implements Iterator<int|string, mixed>
+ * @implements \ArrayAccess<int|string, mixed>
+ * @implements \Iterator<int|string, mixed>
  *
  * @see https://github.com/crwlrsoft/query-string
  */
-final class HttpQuery implements \ArrayAccess, \Iterator
+final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
 {
     /**
      * Dots and spaces in query strings are temporarily converted to these placeholders when converting a query string
@@ -27,9 +24,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
 
     private ?string $string = null;
 
-    /**
-     * @var null|mixed[]
-     */
+    /** @var null|array<mixed> */
     private ?array $array = null;
 
     private string $separator = '&';
@@ -48,7 +43,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     private ?\Closure $dirtyHookCallback = null;
 
     /**
-     * @param mixed[]|string $query
+     * @param array<mixed>|string $query
      *
      * @throws \Exception
      */
@@ -80,7 +75,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $queryArray
+     * @param array<mixed> $queryArray
      *
      * @return static
      *
@@ -114,7 +109,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      *
      * @throws \Exception
      */
@@ -124,7 +119,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @return null|HttpQuery|mixed|string
+     * @return null|self|mixed|string
      *
      * @throws \Exception
      */
@@ -146,7 +141,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[]|string $value
+     * @param array<mixed>|string $value
      *
      * @throws \Exception
      */
@@ -190,7 +185,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[]|string $value
+     * @param array<mixed>|string $value
      *
      * @throws \Exception
      */
@@ -210,7 +205,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @return bool|HttpQuery|int|mixed|string
+     * @return bool|self|int|mixed|string
      *
      * @throws \Exception
      */
@@ -222,7 +217,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @return bool|HttpQuery|int|mixed|string
+     * @return bool|self|int|mixed|string
      *
      * @throws \Exception
      */
@@ -567,9 +562,9 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $query
+     * @param array<mixed> $query
      *
-     * @return mixed[]
+     * @return array<mixed>
      *
      * @throws \Exception
      */
@@ -585,9 +580,9 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $query
+     * @param array<mixed> $query
      *
-     * @return mixed[]
+     * @return array<mixed>
      */
     private function boolValuesToStringInSanitizeArray(array $query): array
     {
@@ -605,10 +600,10 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $query
-     * @param mixed[] $originalQuery
+     * @param array<mixed> $query
+     * @param array<mixed> $originalQuery
      *
-     * @return mixed[]
+     * @return array<mixed>
      */
     private function revertBoolValuesInSanitizeArray(array $query, array $originalQuery): array
     {
@@ -657,7 +652,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
      * When keys within a query string contain dots, PHP's parse_str() method converts them to underscores.
      * This method works around this issue so the requested query array returns the proper keys with dots.
      *
-     * @return mixed[]
+     * @return array<mixed>
      *
      * @throws \Exception
      */
@@ -673,9 +668,9 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param array<mixed>|HttpQuery $query
+     * @param array<mixed>|self $query
      *
-     * @return array<mixed>|HttpQuery
+     * @return array<mixed>|self
      *
      * @throws \Exception
      */
@@ -718,7 +713,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param array<mixed>|HttpQuery $query
+     * @param array<mixed>|self $query
      */
     private function arrayContainsDotOrSpacesInKey(array|HttpQuery $query): bool
     {
@@ -751,9 +746,9 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $queryStringArray
+     * @param array<mixed> $queryStringArray
      *
-     * @return mixed[]
+     * @return array<mixed>
      */
     private function revertDotAndSpaceReplacementsInKeys(array $queryStringArray): array
     {
@@ -791,7 +786,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      *
      * @throws \Exception
      */
@@ -816,7 +811,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @return mixed[]
+     * @return array<mixed>
      *
      * @throws \Exception
      */
@@ -834,7 +829,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $query
+     * @param array<mixed> $query
      *
      * @throws \Exception
      */
@@ -854,9 +849,9 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $array
+     * @param array<mixed> $array
      *
-     * @return mixed[]
+     * @return array<mixed>
      *
      * @throws \Exception
      */
@@ -872,7 +867,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @return bool|HttpQuery|int|mixed|string
+     * @return bool|self|int|mixed|string
      *
      * @throws \Exception
      */
@@ -900,7 +895,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[]|string $query
+     * @param array<mixed>|string $query
      *
      * @return $this
      *
@@ -935,10 +930,10 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $array
-     * @param mixed[]|string $value
+     * @param array<mixed> $array
+     * @param array<mixed>|string $value
      *
-     * @return mixed[]
+     * @return array<mixed>
      */
     private function appendToArray(array $array, string|array $value): array
     {
@@ -956,7 +951,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $array
+     * @param array<mixed> $array
      */
     private function isAssociativeArray(array $array): bool
     {
@@ -970,10 +965,10 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param mixed[] $appendTo
-     * @param mixed[] $associativeArray
+     * @param array<mixed> $appendTo
+     * @param array<mixed> $associativeArray
      *
-     * @return mixed[]
+     * @return array<mixed>
      */
     private function appendAssociativeArrayToArray(array $appendTo, array $associativeArray): array
     {
@@ -993,9 +988,9 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     }
 
     /**
-     * @param HttpQuery<mixed[]>|mixed[] $array
+     * @param array<mixed>|self<array<mixed>> $array
      *
-     * @return HttpQuery<mixed[]>|mixed[]
+     * @return array<mixed>|self<array<mixed>>
      */
     private function boolsToString(self|array $array): self|array
     {

@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * Trait ControllerCrud.
- *
  * @property \Illuminate\Database\Eloquent\Model|string $modelClass
  *
  * @mixin \App\Http\Controllers\Controller
@@ -223,7 +221,6 @@ trait ControllerCrudable
      */
     private function jsonModel(Model $model): JsonResponse
     {
-        /** @var string $resourceForSearch */
         $output = isset($this->modelClass::$resourceForSearch)
             ? new $this->modelClass::$resourceForSearch($model)
             : $model;

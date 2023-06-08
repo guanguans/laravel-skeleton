@@ -22,7 +22,7 @@ class BitEncoder implements BitEncoderContract
     /**
      * 无重复元素的数组.
      *
-     * @var mixed[]
+     * @var array<mixed>
      */
     protected array $set;
 

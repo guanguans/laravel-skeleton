@@ -22,25 +22,16 @@ class WhereLikeQueryBuilderMacro
 
     public function whereNotLike(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereLike($column, $value, 'and', true);
-        };
+        return fn ($column, string $value) => $this->whereLike($column, $value, 'and', true);
     }
 
     public function orWhereLike(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereLike($column, $value, 'or');
-        };
+        return fn ($column, string $value) => $this->whereLike($column, $value, 'or');
     }
 
     public function orWhereNotLike(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereLike($column, $value, 'or', true);
-        };
+        return fn ($column, string $value) => $this->whereLike($column, $value, 'or', true);
     }
 }

@@ -204,7 +204,8 @@ class System
      *
      * @throws \Exception
      *
-     * @noinspection OffsetOperationsInspection*/
+     * @noinspection OffsetOperationsInspection
+     */
     public static function getCPUUsage(int $duration = 1): float
     {
         switch (self::getOS()) {
@@ -328,7 +329,8 @@ class System
      *
      * @throws \Exception
      *
-     * @noinspection OffsetOperationsInspection*/
+     * @noinspection OffsetOperationsInspection
+     */
     public static function getIOUsage(int $duration = 1): array
     {
         $diskStat = self::getDiskStats();
@@ -367,8 +369,8 @@ class System
 
         // Compute Delta
         foreach ($diskStat as $key => $disk) {
-            $stats[$key]['read'] = (((int) $diskStat2[$key][5] - (int) $disk[5]) * 512 / 1048576);
-            $stats[$key]['write'] = (((int) $diskStat2[$key][9] - (int) $disk[9]) * 512 / 1048576);
+            $stats[$key]['read'] = ((int) $diskStat2[$key][5] - (int) $disk[5]) * 512 / 1048576;
+            $stats[$key]['write'] = ((int) $diskStat2[$key][9] - (int) $disk[9]) * 512 / 1048576;
         }
 
         $stats['total']['read'] = array_sum(array_column($stats, 'read'));
@@ -387,7 +389,8 @@ class System
      *
      * @throws \Exception
      *
-     * @noinspection OffsetOperationsInspection*/
+     * @noinspection OffsetOperationsInspection
+     */
     public static function getNetworkUsage(int $duration = 1): array
     {
         // Create a list of interfaces

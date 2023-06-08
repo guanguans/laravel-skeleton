@@ -8,8 +8,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
-use ReflectionException;
-use ReflectionMethod;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
@@ -35,7 +33,7 @@ class Discover
     /**
      * List of filters to iterate on each discovered class.
      *
-     * @var array|null[]
+     * @var array|array<null>
      */
     protected array $filters = ['class' => null, 'method' => null, 'property' => null, 'using' => null];
 
@@ -130,7 +128,7 @@ class Discover
     }
 
     /**
-     * Filter classes implementing the given method using a callback for the ReflectionMethod object.
+     * Filter classes implementing the given method using a callback for the \ReflectionMethod object.
      *
      * @param \Closure(\ReflectionMethod):bool $callback
      *
@@ -230,7 +228,7 @@ class Discover
             // Try to get the class from the file. If we can't then it's not a class file.
             try {
                 $reflection = new \ReflectionClass($this->classFromFile($file));
-            } catch (ReflectionException) {
+            } catch (\ReflectionException) {
                 continue;
             }
 

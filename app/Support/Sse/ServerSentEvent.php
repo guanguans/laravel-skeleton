@@ -66,9 +66,6 @@ namespace App\Support\Sse;
  */
 class ServerSentEvent implements \Stringable
 {
-    /**
-     * @var array<string, string>
-     */
     public const HEADERS = [
         'Content-Type' => 'text/event-stream',
         'Connection' => 'keep-alive',
@@ -76,9 +73,7 @@ class ServerSentEvent implements \Stringable
         'X-Accel-Buffering' => 'no',
     ];
 
-    /**
-     * @var null|callable
-     */
+    /** @var null|callable */
     private $tapper;
 
     private bool $headersSent = false;
@@ -226,7 +221,7 @@ class ServerSentEvent implements \Stringable
 
     public function sendContent(): self
     {
-        echo($this->tapper)($this);
+        echo ($this->tapper)($this);
 
         return $this;
     }

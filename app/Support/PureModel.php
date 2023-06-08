@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
  *
  * @see https://github.com/swisnl/json-api-client/blob/master/src/Item.php
  */
-abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, Jsonable
+abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable, Arrayable, Jsonable
 {
     /**
      * Indicates whether attributes are snake cased on arrays.

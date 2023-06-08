@@ -57,7 +57,6 @@ class RequestMacro
     public function strictAll(): callable
     {
         return function ($keys = null) {
-            /** @var \Illuminate\Http\Request $this */
             $input = array_replace_recursive($this->strictInput(), $this->allFiles());
 
             if (! $keys) {
@@ -83,7 +82,6 @@ class RequestMacro
     {
         return function (string $errorBag, array $rules, ...$params) {
             try {
-                /** @var \Illuminate\Http\Request $this */
                 return $this->validateStrictAll($rules, ...$params);
             } catch (ValidationException $e) {
                 $e->errorBag = $errorBag;
@@ -95,7 +93,6 @@ class RequestMacro
 
     public function whenRouteIs(): callable
     {
-        /** @var string|string[] $patterns */
         return function ($patterns, callable $callback) {
             if ($value = $this->routeIs($patterns)) {
                 return $callback($this, $value) ?: $this;
@@ -107,7 +104,6 @@ class RequestMacro
 
     public function whenIs(): callable
     {
-        /** @var string|string[] $patterns */
         return function ($patterns, callable $callback) {
             if ($value = $this->is($patterns)) {
                 return $callback($this, $value) ?: $this;
@@ -160,10 +156,7 @@ class RequestMacro
 
             [$fallbacks, $routes] = collect($routes)->partition(fn ($route) => $route->isFallback);
 
-            return $routes->merge($fallbacks)->first(function (Route $route) use ($includingMethod) {
-                /** @var \Illuminate\Http\Request $this */
-                return $route->matches($this, $includingMethod);
-            });
+            return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
         };
     }
 }

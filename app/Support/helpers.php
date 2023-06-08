@@ -21,7 +21,7 @@ if (! function_exists('make')) {
     function make($abstract, array $parameters = []): mixed
     {
         if (! in_array(gettype($abstract), ['string', 'array'], true)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Invalid argument type(string/array): %s.', gettype($abstract))
             );
         }
@@ -42,7 +42,7 @@ if (! function_exists('make')) {
             return make($abstract, $parameters);
         }
 
-        throw new \InvalidArgumentException(
+        throw new InvalidArgumentException(
             sprintf('The argument of abstract must be an array containing a `%s` element.', implode('` or `', $classes))
         );
     }
@@ -79,8 +79,8 @@ if (! function_exists('resolve_facade_docblock')) {
      */
     function resolve_facade_docblock(string $class): string
     {
-        return collect((new \ReflectionClass($class))->getMethods(\ReflectionMethod::IS_PUBLIC))
-            ->reject(static fn (\ReflectionMethod $method): bool => str_starts_with($method->getName(), '__'))
+        return collect((new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC))
+            ->reject(static fn (ReflectionMethod $method): bool => str_starts_with($method->getName(), '__'))
             ->reduce(static function (Stringable $docblock, ReflectionMethod $method): Stringable {
                 $parameters = collect($method->getParameters())
                     ->map(static function (ReflectionParameter $parameter): string {
@@ -436,7 +436,6 @@ if (! function_exists('catch_resource_usage')) {
         $timer = new Timer();
         $timer->start();
 
-        /** @var array<string, mixed> $parameter */
         app()->call($callback, $parameter);
 
         return (new ResourceUsageFormatter())->resourceUsage($timer->stop());
@@ -462,7 +461,6 @@ if (! function_exists('catch_query_log')) {
                 return $queryLog;
             })
             ->then(function ($callback) use ($parameter) {
-                /** @var array<string, mixed> $parameter */
                 app()->call($callback, $parameter);
 
                 return DB::getQueryLog();

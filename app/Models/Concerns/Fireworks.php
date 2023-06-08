@@ -16,7 +16,7 @@ trait Fireworks
 {
     protected static function boot(): void
     {
-        $self = (new self());
+        $self = new self();
 
         // before event list
         $beforeEvents = ['creating', 'updating', 'saving', 'deleting'];

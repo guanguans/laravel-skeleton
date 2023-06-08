@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 /**
- * Trait ModelCrud.
- *
  * @property array $validations Validations definitions on create, update and delete scenarios
  * @property array $searchable Allows specifying fields that can be searched on search() method
  * @property array $searchOrder Defines search() method order fields. Through request use field with name order and defined value like this: "field,direction|field_2,direction_2|..." (use as many fields to order as you wish just separating them with pipes "|")

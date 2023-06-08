@@ -22,25 +22,16 @@ class WhereEndsWithQueryBuilderMacro
 
     public function whereNotEndsWith(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereEndsWith($column, $value, 'and', true);
-        };
+        return fn ($column, string $value) => $this->whereEndsWith($column, $value, 'and', true);
     }
 
     public function orWhereEndsWith(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereEndsWith($column, $value, 'or');
-        };
+        return fn ($column, string $value) => $this->whereEndsWith($column, $value, 'or');
     }
 
     public function orWhereNotEndsWith(): callable
     {
-        return function ($column, string $value) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            return $this->whereEndsWith($column, $value, 'or', true);
-        };
+        return fn ($column, string $value) => $this->whereEndsWith($column, $value, 'or', true);
     }
 }
