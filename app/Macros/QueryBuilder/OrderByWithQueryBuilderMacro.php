@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros\QueryBuilder;
 
 /**
@@ -12,7 +14,7 @@ class OrderByWithQueryBuilderMacro
     public function orderByWith(): callable
     {
         return function ($relation, $column, $direction = 'asc') {
-            if (is_string($relation)) {
+            if (\is_string($relation)) {
                 $relation = $this->getRelationWithoutConstraints($relation);
             }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros\QueryBuilder;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -17,15 +19,13 @@ class WhereNotQueryBuilderMacro
 {
     /**
      * The count for each table.
-     *
-     * @var array
      */
-    protected static $tableSubCount = [];
+    protected static array $tableSubCount = [];
 
     public static function whereNot(): callable
     {
         return function ($withQuery): Builder {
-            $callable = is_callable($withQuery)
+            $callable = \is_callable($withQuery)
                 ? $withQuery
                 : transform($withQuery, function ($value): callable {
                     // We both allow single and multiple scopes...
@@ -63,7 +63,7 @@ class WhereNotQueryBuilderMacro
 
                 // Instantiate a new model that uses the aliased table.
                 $aliasedTable = transform($originalTable, function ($table) {
-                    if (! array_key_exists($table, static::$tableSubCount)) {
+                    if (! \array_key_exists($table, static::$tableSubCount)) {
                         static::$tableSubCount[$table] = 0;
                     }
 

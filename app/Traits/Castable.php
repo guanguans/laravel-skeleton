@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use Illuminate\Support\Str;
@@ -41,7 +43,7 @@ trait Castable
             return [];
         }
 
-        if (is_array($value)) {
+        if (\is_array($value)) {
             return $value;
         }
 

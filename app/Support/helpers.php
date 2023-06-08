@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\DB;
@@ -11,12 +13,12 @@ if (! function_exists('make')) {
     /**
      * @psalm-param string|array<string, mixed> $abstract
      *
-     * @return mixed
+     * @param  mixed  $abstract
      *
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    function make($abstract, array $parameters = [])
+    function make($abstract, array $parameters = []): mixed
     {
         if (! in_array(gettype($abstract), ['string', 'array'])) {
             throw new \InvalidArgumentException(
@@ -83,11 +85,11 @@ if (! function_exists('resolve_facade_docblock')) {
                 $parameters = collect($method->getParameters())
                     ->map(static function (ReflectionParameter $parameter): string {
                         $defaultValue = static function ($value): string {
-                            if ($value === null) {
+                            if (null === $value) {
                                 return 'null';
                             }
 
-                            if ($value === []) {
+                            if ([] === $value) {
                                 return '[]';
                             }
 
@@ -146,15 +148,15 @@ if (! function_exists('environment')) {
             return 'cli';
         }
 
-        if (php_sapi_name() === 'cli') {
+        if ('cli' === php_sapi_name()) {
             return 'cli';
         }
 
-        if ((stripos(PHP_SAPI, 'cgi') !== false && getenv('TERM'))) {
+        if (false !== stripos(PHP_SAPI, 'cgi') && getenv('TERM')) {
             return 'cli';
         }
 
-        if ((empty($_SERVER['REMOTE_ADDR']) && ! isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0)) {
+        if (empty($_SERVER['REMOTE_ADDR']) && ! isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0) {
             return 'cli';
         }
 
@@ -302,14 +304,14 @@ if (! function_exists('is_json')) {
     /**
      * If the string is valid JSON, return true, otherwise return false
      *
-     * @param  string  $str The string to check.
-     * @return bool The function is_json() is returning a boolean value.
+     * @param  string  $str the string to check
+     * @return bool the function is_json() is returning a boolean value
      */
     function is_json(string $str): bool
     {
         json_decode($str);
 
-        return json_last_error() === JSON_ERROR_NONE;
+        return JSON_ERROR_NONE === json_last_error();
     }
 }
 
@@ -361,16 +363,16 @@ if (! function_exists('user_http_build_query')) {
             $queryStr = '';
             foreach ($value as $k => $v) {
                 // 特殊值处理
-                if ($v === null) {
+                if (null === $v) {
                     continue;
                 }
-                if ($v === 0 || $v === false) {
+                if (0 === $v || false === $v) {
                     $v = '0';
                 }
 
                 $fullKey = "{$key}[{$k}]";
                 $queryStr .= is_scalar($v)
-                    ? sprintf("%s=%s$argSeparator", $encType === PHP_QUERY_RFC3986 ? rawurlencode($fullKey) : urlencode($fullKey), $encType === PHP_QUERY_RFC3986 ? rawurlencode($v) : urlencode($v))
+                    ? sprintf("%s=%s$argSeparator", PHP_QUERY_RFC3986 === $encType ? rawurlencode($fullKey) : urlencode($fullKey), PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
                     : $toQueryStr($fullKey, $v, $argSeparator, $encType); // 递归调用
             }
 
@@ -381,10 +383,10 @@ if (! function_exists('user_http_build_query')) {
         $queryStr = '';
         foreach ($queryPayload as $k => $v) {
             // 特殊值处理
-            if ($v === null) {
+            if (null === $v) {
                 continue;
             }
-            if ($v === 0 || $v === false) {
+            if (0 === $v || false === $v) {
                 $v = '0';
             }
 
@@ -394,7 +396,7 @@ if (! function_exists('user_http_build_query')) {
             }
 
             $queryStr .= is_scalar($v)
-                ? sprintf("%s=%s$argSeparator", $encType === PHP_QUERY_RFC3986 ? rawurlencode($k) : urlencode($k), $encType === PHP_QUERY_RFC3986 ? rawurlencode($v) : urlencode($v))
+                ? sprintf("%s=%s$argSeparator", PHP_QUERY_RFC3986 === $encType ? rawurlencode($k) : urlencode($k), PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
                 : $toQueryStr($k, $v, $argSeparator, $encType);
         }
 
@@ -404,21 +406,16 @@ if (! function_exists('user_http_build_query')) {
 
 if (! function_exists('validate')) {
     /**
-     * @return array
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
-    function validate(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
+    function validate(array $data = [], array $rules = [], array $messages = [], array $customAttributes = []): array
     {
         return validator($data, $rules, $messages, $customAttributes)->validate();
     }
 }
 
 if (! function_exists('array_filter_filled')) {
-    /**
-     * @return array
-     */
-    function array_filter_filled(array $array)
+    function array_filter_filled(array $array): array
     {
         return array_filter($array, function ($item) {
             return filled($item);
@@ -431,10 +428,8 @@ if (! function_exists('call')) {
      * Call the given Closure / class@method and inject its dependencies.
      *
      * @param  callable|string  $callback
-     * @param  string|null  $defaultMethod
-     * @return mixed
      */
-    function call($callback, array $parameters = [], $defaultMethod = null)
+    function call($callback, array $parameters = [], ?string $defaultMethod = null): mixed
     {
         app()->call($callback, $parameters, $defaultMethod);
     }
@@ -443,26 +438,24 @@ if (! function_exists('call')) {
 if (! function_exists('catch_resource_usage')) {
     /**
      * @param  callable|string  $callback
-     * @return string
      */
-    function catch_resource_usage($callback, ...$parameter)
+    function catch_resource_usage($callback, ...$parameter): string
     {
-        $timer = new Timer;
+        $timer = new Timer();
         $timer->start();
 
         /** @var array<string, mixed> $parameter */
         app()->call($callback, $parameter);
 
-        return (new ResourceUsageFormatter)->resourceUsage($timer->stop());
+        return (new ResourceUsageFormatter())->resourceUsage($timer->stop());
     }
 }
 
 if (! function_exists('catch_query_log')) {
     /**
      * @param  callable|string  $callback
-     * @return array
      */
-    function catch_query_log($callback, ...$parameter)
+    function catch_query_log($callback, ...$parameter): array
     {
         return (new Pipeline(app()))
             ->send($callback)
@@ -498,6 +491,7 @@ if (! function_exists('dd_to_array')) {
     function dd_to_array(...$vars)
     {
         dump_to_array(...$vars);
+
         exit(1);
     }
 }
@@ -507,7 +501,7 @@ if (! function_exists('array_reduce_with_keys')) {
      * @param  null  $carry
      * @return null|mixed
      */
-    function array_reduce_with_keys(array $array, callable $callback, $carry = null)
+    function array_reduce_with_keys(array $array, callable $callback, $carry = null): mixed
     {
         foreach ($array as $key => $value) {
             $carry = $callback($carry, $value, $key);
@@ -518,10 +512,7 @@ if (! function_exists('array_reduce_with_keys')) {
 }
 
 if (! function_exists('array_map_with_keys')) {
-    /**
-     * @return array
-     */
-    function array_map_with_keys(callable $callback, array $array)
+    function array_map_with_keys(callable $callback, array $array): array
     {
         $result = [];
 
@@ -541,6 +532,7 @@ if (! function_exists('pd')) {
     function pd(...$vars): void
     {
         pp(...$vars);
+
         exit(1);
     }
 }

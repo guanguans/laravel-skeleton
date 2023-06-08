@@ -1,11 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 use ArrayAccess;
-use Closure;
-use Exception;
-use InvalidArgumentException;
 use Iterator;
 
 /**
@@ -14,7 +13,7 @@ use Iterator;
  *
  * @see https://github.com/crwlrsoft/query-string
  */
-final class HttpQuery implements ArrayAccess, Iterator
+final class HttpQuery implements \ArrayAccess, \Iterator
 {
     /**
      * Dots and spaces in query strings are temporarily converted to these placeholders when converting a query string
@@ -46,26 +45,34 @@ final class HttpQuery implements ArrayAccess, Iterator
 
     private bool $isDirty = false;
 
-    private ?Closure $dirtyHookCallback = null;
+    private ?\Closure $dirtyHookCallback = null;
 
     /**
-     * @param  string|mixed[]  $query
+     * @param  mixed[]|string  $query
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(string|array $query)
     {
-        if (is_string($query)) {
+        if (\is_string($query)) {
             $this->string = $this->sanitizeAndEncode($query);
         }
 
-        if (is_array($query)) {
+        if (\is_array($query)) {
             $this->array = $this->sanitizeArray($query);
         }
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
+     */
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
+
+    /**
+     * @throws \Exception
      */
     public static function fromString(string $queryString): self
     {
@@ -76,7 +83,7 @@ final class HttpQuery implements ArrayAccess, Iterator
      * @param  mixed[]  $queryArray
      * @return static
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function fromArray(array $queryArray): self
     {
@@ -84,11 +91,11 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function toString(): string
     {
-        if ($this->string === null || $this->isDirty) {
+        if (null === $this->string || $this->isDirty) {
             $array = $this->toArray();
 
             $this->string = $this->arrayToString($array);
@@ -98,7 +105,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function toStringWithUnencodedBrackets(?string $query = null): string
     {
@@ -106,17 +113,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
-     */
-    public function __toString(): string
-    {
-        return $this->toString();
-    }
-
-    /**
      * @return mixed[]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function toArray(): array
     {
@@ -124,9 +123,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @return string|HttpQuery|null|mixed
+     * @return null|HttpQuery|mixed|string
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function get(string|int $key): mixed
     {
@@ -136,7 +135,7 @@ final class HttpQuery implements ArrayAccess, Iterator
             return null;
         }
 
-        if (is_array($queryArray[$key])) {
+        if (\is_array($queryArray[$key])) {
             $this->array[$key] = $this->newWithSameSettings($queryArray[$key]);
 
             return $this->array[$key];
@@ -146,15 +145,15 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @param  string|mixed[]  $value
+     * @param  mixed[]|string  $value
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function set(string $key, string|array $value): self
     {
         $this->initArray();
 
-        $this->array[$key] = is_array($value) ? $this->newWithSameSettings($value) : $value;
+        $this->array[$key] = \is_array($value) ? $this->newWithSameSettings($value) : $value;
 
         $this->setDirty();
 
@@ -162,7 +161,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function has(int|string $key): bool
     {
@@ -172,17 +171,17 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function isArray(int|string $key): bool
     {
         $this->initArray();
 
-        return isset($this->array[$key]) && (is_array($this->array[$key]) || $this->array[$key] instanceof HttpQuery);
+        return isset($this->array[$key]) && (\is_array($this->array[$key]) || $this->array[$key] instanceof HttpQuery);
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function isScalar(int|string $key): bool
     {
@@ -190,9 +189,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @param  string|mixed[]  $value
+     * @param  mixed[]|string  $value
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function appendTo(string $key, string|array $value): self
     {
@@ -210,9 +209,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @return mixed|string|bool|int|HttpQuery
+     * @return bool|HttpQuery|int|mixed|string
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function first(?string $key = null): mixed
     {
@@ -222,9 +221,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @return mixed|string|bool|int|HttpQuery
+     * @return bool|HttpQuery|int|mixed|string
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function last(?string $key = null): mixed
     {
@@ -234,7 +233,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function remove(string $key): self
     {
@@ -250,7 +249,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function removeValueFrom(string $fromKey, mixed $removeValue): self
     {
@@ -267,7 +266,7 @@ final class HttpQuery implements ArrayAccess, Iterator
                 }
             }
 
-            if (! $isAssociativeArray && is_array($fromKeyValue->array)) {
+            if (! $isAssociativeArray && \is_array($fromKeyValue->array)) {
                 $fromKeyValue->array = array_values($fromKeyValue->array);
             }
         }
@@ -276,7 +275,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function boolToInt(): self
     {
@@ -298,7 +297,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function boolToString(): self
     {
@@ -320,7 +319,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function separator(string $separator): self
     {
@@ -342,11 +341,11 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function spaceCharacterEncoding(int $spaceCharacterEncodingConst): self
     {
-        if (in_array($spaceCharacterEncodingConst, [PHP_QUERY_RFC1738, PHP_QUERY_RFC3986], true)) {
+        if (\in_array($spaceCharacterEncodingConst, [PHP_QUERY_RFC1738, PHP_QUERY_RFC3986], true)) {
             if ($spaceCharacterEncodingConst === $this->spaceCharacterEncoding) {
                 return $this;
             }
@@ -366,7 +365,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function spaceCharacterPlus(): self
     {
@@ -374,7 +373,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function spaceCharacterPercentTwenty(): self
     {
@@ -382,9 +381,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
-    public function filter(Closure $filterCallback): self
+    public function filter(\Closure $filterCallback): self
     {
         $this->array = array_filter($this->toArray(), $filterCallback, ARRAY_FILTER_USE_BOTH);
 
@@ -394,9 +393,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
-    public function map(Closure $mappingCallback): self
+    public function map(\Closure $mappingCallback): self
     {
         $this->array = array_map($mappingCallback, $this->toArray());
 
@@ -405,7 +404,7 @@ final class HttpQuery implements ArrayAccess, Iterator
         return $this;
     }
 
-    public function setDirtyHook(Closure $callback): self
+    public function setDirtyHook(\Closure $callback): self
     {
         $this->dirtyHookCallback = $callback;
 
@@ -415,26 +414,26 @@ final class HttpQuery implements ArrayAccess, Iterator
     /**
      * @param  int|string  $offset
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function offsetExists(mixed $offset): bool
     {
-        if (! is_int($offset) && ! is_string($offset)) {
-            throw new InvalidArgumentException('Argument offset must be of type int or string.');
+        if (! \is_int($offset) && ! \is_string($offset)) {
+            throw new \InvalidArgumentException('Argument offset must be of type int or string.');
         }
 
-        return array_key_exists($offset, $this->array());
+        return \array_key_exists($offset, $this->array());
     }
 
     /**
      * @param  int|string  $offset
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function offsetGet(mixed $offset): mixed
     {
-        if (! is_int($offset) && ! is_string($offset)) {
-            throw new InvalidArgumentException('Argument offset must be of type int or string.');
+        if (! \is_int($offset) && ! \is_string($offset)) {
+            throw new \InvalidArgumentException('Argument offset must be of type int or string.');
         }
 
         return $this->array()[$offset];
@@ -443,12 +442,12 @@ final class HttpQuery implements ArrayAccess, Iterator
     /**
      * @param  int|string  $offset
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (! is_int($offset) && ! is_string($offset)) {
-            throw new InvalidArgumentException('Argument offset must be of type int or string.');
+        if (! \is_int($offset) && ! \is_string($offset)) {
+            throw new \InvalidArgumentException('Argument offset must be of type int or string.');
         }
 
         $queryArray = $this->array();
@@ -459,17 +458,17 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function offsetUnset(mixed $offset): void
     {
-        if (! is_int($offset) && ! is_string($offset)) {
-            throw new InvalidArgumentException('Argument offset must be of type int or string.');
+        if (! \is_int($offset) && ! \is_string($offset)) {
+            throw new \InvalidArgumentException('Argument offset must be of type int or string.');
         }
 
         $queryArray = $this->array();
 
-        if (array_key_exists($offset, $queryArray)) {
+        if (\array_key_exists($offset, $queryArray)) {
             unset($queryArray[$offset]);
         }
     }
@@ -477,7 +476,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     /**
      * @return false|mixed
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function current(): mixed
     {
@@ -487,25 +486,25 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function next(): void
     {
         $this->initArray();
 
-        if (is_array($this->array)) {
+        if (\is_array($this->array)) {
             next($this->array);
         }
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function key(): int|string|null
     {
         $this->initArray();
 
-        if (is_array($this->array)) {
+        if (\is_array($this->array)) {
             return key($this->array);
         }
 
@@ -513,13 +512,13 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function valid(): bool
     {
         $this->initArray();
 
-        if ($this->key() === null) {
+        if (null === $this->key()) {
             return false;
         }
 
@@ -527,11 +526,11 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function rewind(): void
     {
-        if ($this->array === null) {
+        if (null === $this->array) {
             $this->array();
         } else {
             reset($this->array);
@@ -539,7 +538,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     private function sanitizeAndEncode(string $query): string
     {
@@ -549,7 +548,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     private function sanitize(string $query): string
     {
@@ -558,7 +557,7 @@ final class HttpQuery implements ArrayAccess, Iterator
         }
 
         while (str_ends_with($query, '&')) {
-            $query = substr($query, 0, strlen($query) - 1);
+            $query = substr($query, 0, \strlen($query) - 1);
         }
 
         $query = preg_replace('/&+/', '&', $query) ?? $query;
@@ -570,7 +569,7 @@ final class HttpQuery implements ArrayAccess, Iterator
      * @param  mixed[]  $query
      * @return mixed[]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function sanitizeArray(array $query): array
     {
@@ -590,11 +589,11 @@ final class HttpQuery implements ArrayAccess, Iterator
     private function boolValuesToStringInSanitizeArray(array $query): array
     {
         foreach ($query as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $query[$key] = $this->boolValuesToStringInSanitizeArray($value);
             }
 
-            if (is_bool($value)) {
+            if (\is_bool($value)) {
                 $query[$key] = $value ? 'true' : 'false';
             }
         }
@@ -610,12 +609,12 @@ final class HttpQuery implements ArrayAccess, Iterator
     private function revertBoolValuesInSanitizeArray(array $query, array $originalQuery): array
     {
         foreach ($query as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $query[$key] = $this->revertBoolValuesInSanitizeArray($value, $originalQuery[$key]);
             }
 
-            if (in_array($value, ['true', 'false'], true) && is_bool($originalQuery[$key])) {
-                $query[$key] = $value === 'true';
+            if (\in_array($value, ['true', 'false'], true) && \is_bool($originalQuery[$key])) {
+                $query[$key] = 'true' === $value;
             }
         }
 
@@ -634,7 +633,7 @@ final class HttpQuery implements ArrayAccess, Iterator
         return preg_replace_callback(
             '/[^a-zA-Z0-9-._~!$&\'()*+,;=:@\/%]/',  // pchar + / and %
             function (array $match) {
-                return $match[0] === ' ' ? $this->spaceCharacter() : rawurlencode($match[0]);
+                return ' ' === $match[0] ? $this->spaceCharacter() : rawurlencode($match[0]);
             },
             $query
         ) ?? $query;
@@ -658,7 +657,7 @@ final class HttpQuery implements ArrayAccess, Iterator
      *
      * @return mixed[]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function fixKeysContainingDotsOrSpaces(string $query): array
     {
@@ -675,7 +674,7 @@ final class HttpQuery implements ArrayAccess, Iterator
      * @param  array<mixed>|HttpQuery  $query
      * @return array<mixed>|HttpQuery
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function replaceDotsAndSpacesInArrayKeys(array|HttpQuery $query): array|HttpQuery
     {
@@ -686,7 +685,7 @@ final class HttpQuery implements ArrayAccess, Iterator
         }
 
         foreach ($query as $key => $value) {
-            if (is_array($value) || $value instanceof HttpQuery) {
+            if (\is_array($value) || $value instanceof HttpQuery) {
                 $value = $this->replaceDotsAndSpacesInArrayKeys($value);
             }
 
@@ -696,7 +695,7 @@ final class HttpQuery implements ArrayAccess, Iterator
                 $key,
             );
 
-            if (is_array($newQuery)) {
+            if (\is_array($newQuery)) {
                 $newQuery[$key] = $value;
             } else {
                 $newQuery->set($key, $value);
@@ -707,12 +706,12 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     private function containsDotOrSpaceInKey(string $query): bool
     {
-        return preg_match('/(?:^|&)([^\[=&]*\.)/', $this->toStringWithUnencodedBrackets($query)) ||
-               preg_match('/(?:^|&)([^\[=&]* )/', $this->toStringWithUnencodedBrackets($query));
+        return preg_match('/(?:^|&)([^\[=&]*\.)/', $this->toStringWithUnencodedBrackets($query))
+               || preg_match('/(?:^|&)([^\[=&]* )/', $this->toStringWithUnencodedBrackets($query));
     }
 
     /**
@@ -721,7 +720,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     private function arrayContainsDotOrSpacesInKey(array|HttpQuery $query): bool
     {
         foreach ($query as $key => $value) {
-            if (is_array($value) && $this->arrayContainsDotOrSpacesInKey($value)) {
+            if (\is_array($value) && $this->arrayContainsDotOrSpacesInKey($value)) {
                 return true;
             }
 
@@ -778,11 +777,11 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     private function initArray(): void
     {
-        if ($this->array === null) {
+        if (null === $this->array) {
             $this->array();
         }
     }
@@ -790,24 +789,23 @@ final class HttpQuery implements ArrayAccess, Iterator
     /**
      * @return mixed[]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function array(): array
     {
-        if ($this->array === null) {
+        if (null === $this->array) {
             if (empty($this->string)) {
                 return [];
-            } else {
-                if ($this->separator !== '&') {
-                    throw new Exception(
-                        'Converting a query string to array with custom separator isn\'t implemented, because PHP\'s '.
-                        'parse_str() function doesn\'t have that functionality. If you\'d need this, reach out to crwlr '.
-                        'on github or twitter.'
-                    );
-                }
-
-                $this->array = $this->stringToArray($this->string);
             }
+            if ('&' !== $this->separator) {
+                throw new \Exception(
+                    'Converting a query string to array with custom separator isn\'t implemented, because PHP\'s '.
+                    'parse_str() function doesn\'t have that functionality. If you\'d need this, reach out to crwlr '.
+                    'on github or twitter.'
+                );
+            }
+
+            $this->array = $this->stringToArray($this->string);
         }
 
         return $this->array;
@@ -816,7 +814,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     /**
      * @return mixed[]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function stringToArray(string $query): array
     {
@@ -834,7 +832,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     /**
      * @param  mixed[]  $query
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function arrayToString(array $query): string
     {
@@ -855,7 +853,7 @@ final class HttpQuery implements ArrayAccess, Iterator
      * @param  mixed[]  $array
      * @return mixed[]
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function cleanArray(array $array): array
     {
@@ -869,24 +867,24 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @return mixed|string|bool|int|HttpQuery
+     * @return bool|HttpQuery|int|mixed|string
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function firstOrLast(?string $key = null, bool $first = true): mixed
     {
-        if (! is_array($this->array) || ($key && ! isset($this->array[$key]))) {
+        if (! \is_array($this->array) || ($key && ! isset($this->array[$key]))) {
             return null;
         }
 
-        if ($key === null) {
+        if (null === $key) {
             $value = $first ? reset($this->array) : end($this->array);
 
-            return is_array($value) ? $this->newWithSameSettings($value) : $value;
+            return \is_array($value) ? $this->newWithSameSettings($value) : $value;
         }
 
-        if ($this->array[$key] instanceof HttpQuery || is_array($this->array[$key])) {
-            if (is_array($this->array[$key])) {
+        if ($this->array[$key] instanceof HttpQuery || \is_array($this->array[$key])) {
+            if (\is_array($this->array[$key])) {
                 $this->array[$key] = $this->newWithSameSettings($this->array[$key]);
             }
 
@@ -897,10 +895,10 @@ final class HttpQuery implements ArrayAccess, Iterator
     }
 
     /**
-     * @param  string|mixed[]  $query
+     * @param  mixed[]|string  $query
      * @return $this
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function newWithSameSettings(string|array $query): self
     {
@@ -932,12 +930,12 @@ final class HttpQuery implements ArrayAccess, Iterator
 
     /**
      * @param  mixed[]  $array
-     * @param  string|mixed[]  $value
+     * @param  mixed[]|string  $value
      * @return mixed[]
      */
     private function appendToArray(array $array, string|array $value): array
     {
-        if (is_array($value)) {
+        if (\is_array($value)) {
             if ($this->isAssociativeArray($value)) {
                 $array = $this->appendAssociativeArrayToArray($array, $value);
             } else {
@@ -973,7 +971,7 @@ final class HttpQuery implements ArrayAccess, Iterator
     {
         foreach ($associativeArray as $key => $val) {
             if (isset($appendTo[$key])) {
-                if (! is_array($appendTo[$key])) {
+                if (! \is_array($appendTo[$key])) {
                     $appendTo[$key] = [$appendTo[$key]];
                 }
 
@@ -993,9 +991,9 @@ final class HttpQuery implements ArrayAccess, Iterator
     private function boolsToString(HttpQuery|array $array): HttpQuery|array
     {
         foreach ($array as $key => $value) {
-            if (is_bool($value)) {
+            if (\is_bool($value)) {
                 $array[$key] = $value ? 'true' : 'false';
-            } elseif ($value instanceof HttpQuery || is_array($value)) {
+            } elseif ($value instanceof HttpQuery || \is_array($value)) {
                 $array[$key] = $this->boolsToString($value);
             }
         }
@@ -1005,7 +1003,7 @@ final class HttpQuery implements ArrayAccess, Iterator
 
     private function spaceCharacter(): string
     {
-        if ($this->spaceCharacterEncoding === PHP_QUERY_RFC1738) {
+        if (PHP_QUERY_RFC1738 === $this->spaceCharacterEncoding) {
             return '+';
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
@@ -14,7 +16,7 @@ trait ValidateStrictAll
     /**
      * Run the validation routine against the given validator.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator|array  $validator
+     * @param  array|\Illuminate\Contracts\Validation\Validator  $validator
      * @param  ?Request  $request
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -24,7 +26,7 @@ trait ValidateStrictAll
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
         $request = $request ?: request();
 
-        if (is_array($validator)) {
+        if (\is_array($validator)) {
             $validator = $this->getValidationStrictAllFactory()->make($request->strictAll(), $validator);
         }
 
@@ -73,10 +75,8 @@ trait ValidateStrictAll
 
     /**
      * Get a validation factory instance.
-     *
-     * @return \Illuminate\Contracts\Validation\Factory
      */
-    protected function getValidationStrictAllFactory()
+    protected function getValidationStrictAllFactory(): Factory
     {
         return app(Factory::class);
     }

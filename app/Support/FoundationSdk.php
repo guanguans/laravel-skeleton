@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 use Composer\InstalledVersions;
@@ -25,20 +27,11 @@ abstract class FoundationSdk
     use Tappable;
     use Macroable;
 
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config;
 
-    /**
-     * @var \Illuminate\Http\Client\Factory
-     */
-    protected $http;
+    protected \Illuminate\Http\Client\Factory $http;
 
-    /**
-     * @var \Illuminate\Http\Client\PendingRequest
-     */
-    protected $defaultPendingRequest;
+    protected \Illuminate\Http\Client\PendingRequest $defaultPendingRequest;
 
     public function __construct(array $config)
     {
@@ -66,6 +59,7 @@ abstract class FoundationSdk
         return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
             $pendingRequest->beforeSending(function (Request $request, array $options) {
                 VarDumper::dump($options['laravel_data']);
+
                 exit(1);
             });
         });
@@ -140,7 +134,7 @@ abstract class FoundationSdk
 
         if (null === $userAgent) {
             $userAgent = implode(' ', [
-                sprintf('laravel/%s', \str(app()->version())->whenStartsWith('v', static function (Stringable $version): Stringable {
+                sprintf('laravel/%s', str(app()->version())->whenStartsWith('v', static function (Stringable $version): Stringable {
                     return $version->replaceFirst('v', '');
                 })),
                 sprintf('guzzle/%s', InstalledVersions::getPrettyVersion('guzzlehttp/guzzle')),
@@ -154,11 +148,9 @@ abstract class FoundationSdk
     }
 
     /**
-     * @return array
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
-    protected function validate(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
+    protected function validate(array $data = [], array $rules = [], array $messages = [], array $customAttributes = []): array
     {
         return validator($data, $rules, $messages, $customAttributes)->validate();
     }
@@ -188,12 +180,12 @@ abstract class FoundationSdk
      * @return array The merged and validated options
      *
      * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException If an option name is undefined
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException   If an option doesn't fulfill the specified validation rules
-     * @throws \Symfony\Component\OptionsResolver\Exception\MissingOptionsException   If a required option is missing
+     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException If an option doesn't fulfill the specified validation rules
+     * @throws \Symfony\Component\OptionsResolver\Exception\MissingOptionsException If a required option is missing
      * @throws \Symfony\Component\OptionsResolver\Exception\OptionDefinitionException If there is a cyclic dependency between lazy options and/or normalizers
-     * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException     If a lazy option reads an unavailable option
-     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException           If called from a lazy option or normalizer
-     * @throws \Illuminate\Validation\ValidationException Laravel validation rules.
+     * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException If a lazy option reads an unavailable option
+     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException If called from a lazy option or normalizer
+     * @throws \Illuminate\Validation\ValidationException laravel validation rules
      */
     abstract protected function validateConfig(array $config): array;
 }

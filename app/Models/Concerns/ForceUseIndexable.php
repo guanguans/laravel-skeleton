@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -29,7 +31,7 @@ trait ForceUseIndexable
 
         $raw = "`$table` ".implode(' ', $this->from);
 
-        /* @var Builder $query */
+        // @var Builder $query
         return $query->from(DB::raw($raw));
     }
 
@@ -46,7 +48,7 @@ trait ForceUseIndexable
 
         $raw = "`$table` ".implode(' ', $this->from);
 
-        /* @var Builder $query */
+        // @var Builder $query
         return $query->from(DB::raw($raw));
     }
 
@@ -63,7 +65,7 @@ trait ForceUseIndexable
 
         $raw = "`$table` ".implode(' ', $this->from);
 
-        /* @var Builder $query */
+        // @var Builder $query
         return $query->from(DB::raw($raw));
     }
 
@@ -72,7 +74,7 @@ trait ForceUseIndexable
      */
     protected function parseIndexName($index): string
     {
-        if (is_array($index)) {
+        if (\is_array($index)) {
             return '`'.implode('`, `', $index).'`';
         }
 

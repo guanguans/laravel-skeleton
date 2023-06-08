@@ -19,7 +19,7 @@ final class OpenAI extends FoundationSDK
 {
     public static function hydrateData(string $data): string
     {
-        return (string) \str($data)->whenStartsWith($prefix = 'data: ', static function (Stringable $data) use ($prefix): Stringable {
+        return (string) str($data)->whenStartsWith($prefix = 'data: ', static function (Stringable $data) use ($prefix): Stringable {
             return $data->replaceFirst($prefix, '');
         });
     }
@@ -239,85 +239,6 @@ final class OpenAI extends FoundationSDK
         return $this->cloneDefaultPendingRequest()->get('models')->throw();
     }
 
-    /**
-     * @psalm-suppress UnusedVariable
-     * @psalm-suppress UnevaluatedCode
-     */
-    private function completion(string $url, array $parameters, array $rules, ?callable $writer = null, array $messages = [], array $customAttributes = []): Response
-    {
-        $response = $this
-            ->cloneDefaultPendingRequest()
-            ->when(
-                ($parameters['stream'] ?? false) && is_callable($writer),
-                static function (PendingRequest $pendingRequest) use ($writer, &$rowData): PendingRequest {
-                    return $pendingRequest->withOptions([
-                        'curl' => [
-                            CURLOPT_WRITEFUNCTION => static function ($ch, string $data) use ($writer, &$rowData): int {
-                                if (! str($data)->startsWith('data: [DONE]')) {
-                                    $rowData = $data;
-                                }
-
-                                $writer($data, $ch);
-
-                                return strlen($data);
-                            },
-                        ],
-                    ]);
-                }
-            )
-            // ->withMiddleware(
-            //     Middleware::mapResponse(static function (ResponseInterface $response): ResponseInterface {
-            //         $contents = $response->getBody()->getContents();
-            //
-            //         // $parameters['stream'] === true && $writer === null
-            //         if ($contents && ! \str($contents)->isJson()) {
-            //             $data = \str($contents)
-            //                 ->explode("\n\n")
-            //                 ->reverse()
-            //                 ->skip(2)
-            //                 ->reverse()
-            //                 ->map(static function (string $rowData): array {
-            //                     return json_decode(self::hydrateData($rowData), true);
-            //                 })
-            //                 ->reduce(static function (array $data, array $rowData): array {
-            //                     if (empty($data)) {
-            //                         return $rowData;
-            //                     }
-            //
-            //                     foreach ($data['choices'] as $index => $choice) {
-            //                         $data['choices'][$index]['text'] .= $rowData['choices'][$index]['text'];
-            //                     }
-            //
-            //                     return $data;
-            //                 }, []);
-            //
-            //             return $response->withBody(Utils::streamFor(json_encode($data)));
-            //         }
-            //
-            //         return $response;
-            //     })
-            // )
-            ->post($url, $this->validate($parameters, $rules, $messages, $customAttributes))
-            // ->onError(function (Response $response) use ($rowData) {
-            //     if ($rowData && empty($response->body())) {
-            //         (function (Response $response) use ($rowData): void {
-            //             $this->response = $response->toPsrResponse()->withBody(
-            //                 Utils::streamFor(OpenAI::hydrateData($rowData))
-            //             );
-            //         })->call($response, $response);
-            //     }
-            // })
-;
-
-        if ($rowData && empty($response->body())) {
-            $response = new Response(
-                $response->toPsrResponse()->withBody(Utils::streamFor(self::hydrateData($rowData)))
-            );
-        }
-
-        return $response->throw();
-    }
-
     public function completionsByCurl(array $data, ?callable $writer = null): Collection
     {
         $options = [
@@ -366,7 +287,7 @@ final class OpenAI extends FoundationSDK
         $writer and $options[CURLOPT_WRITEFUNCTION] = static function (object $ch, string $data) use ($writer) {
             $writer($data, $ch);
 
-            return strlen($data); // 必须返回接收到的数据的长度，否则会断开连接。
+            return \strlen($data); // 必须返回接收到的数据的长度，否则会断开连接。
         };
 
         curl_setopt_array($curl = curl_init(), $options);
@@ -378,9 +299,6 @@ final class OpenAI extends FoundationSDK
         return collect($response);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     protected function validateConfig(array $config): array
     {
         return array_replace_recursive(
@@ -412,9 +330,6 @@ final class OpenAI extends FoundationSDK
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     protected function buildDefaultPendingRequest(array $config): PendingRequest
     {
         return parent::buildDefaultPendingRequest($config)
@@ -430,5 +345,83 @@ final class OpenAI extends FoundationSDK
             //     // $config['retry']['throw']
             // )
             ->withOptions($config['http_options']);
+    }
+
+    /**
+     * @psalm-suppress UnusedVariable
+     * @psalm-suppress UnevaluatedCode
+     */
+    private function completion(string $url, array $parameters, array $rules, ?callable $writer = null, array $messages = [], array $customAttributes = []): Response
+    {
+        $response = $this
+            ->cloneDefaultPendingRequest()
+            ->when(
+                ($parameters['stream'] ?? false) && \is_callable($writer),
+                static function (PendingRequest $pendingRequest) use ($writer, &$rowData): PendingRequest {
+                    return $pendingRequest->withOptions([
+                        'curl' => [
+                            CURLOPT_WRITEFUNCTION => static function ($ch, string $data) use ($writer, &$rowData): int {
+                                if (! str($data)->startsWith('data: [DONE]')) {
+                                    $rowData = $data;
+                                }
+
+                                $writer($data, $ch);
+
+                                return \strlen($data);
+                            },
+                        ],
+                    ]);
+                }
+            )
+            // ->withMiddleware(
+            //     Middleware::mapResponse(static function (ResponseInterface $response): ResponseInterface {
+            //         $contents = $response->getBody()->getContents();
+            //
+            //         // $parameters['stream'] === true && $writer === null
+            //         if ($contents && ! \str($contents)->isJson()) {
+            //             $data = \str($contents)
+            //                 ->explode("\n\n")
+            //                 ->reverse()
+            //                 ->skip(2)
+            //                 ->reverse()
+            //                 ->map(static function (string $rowData): array {
+            //                     return json_decode(self::hydrateData($rowData), true);
+            //                 })
+            //                 ->reduce(static function (array $data, array $rowData): array {
+            //                     if (empty($data)) {
+            //                         return $rowData;
+            //                     }
+            //
+            //                     foreach ($data['choices'] as $index => $choice) {
+            //                         $data['choices'][$index]['text'] .= $rowData['choices'][$index]['text'];
+            //                     }
+            //
+            //                     return $data;
+            //                 }, []);
+            //
+            //             return $response->withBody(Utils::streamFor(json_encode($data)));
+            //         }
+            //
+            //         return $response;
+            //     })
+            // )
+            ->post($url, $this->validate($parameters, $rules, $messages, $customAttributes));
+        // ->onError(function (Response $response) use ($rowData) {
+        //     if ($rowData && empty($response->body())) {
+        //         (function (Response $response) use ($rowData): void {
+        //             $this->response = $response->toPsrResponse()->withBody(
+        //                 Utils::streamFor(OpenAI::hydrateData($rowData))
+        //             );
+        //         })->call($response, $response);
+        //     }
+        // })
+
+        if ($rowData && empty($response->body())) {
+            $response = new Response(
+                $response->toPsrResponse()->withBody(Utils::streamFor(self::hydrateData($rowData)))
+            );
+        }
+
+        return $response->throw();
     }
 }

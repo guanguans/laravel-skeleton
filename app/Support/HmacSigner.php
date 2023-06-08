@@ -1,20 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 use App\Contracts\SignerContract;
 
 class HmacSigner implements SignerContract
 {
-    /**
-     * @var string
-     */
-    private $secret;
+    private string $secret;
 
-    /**
-     * @var string
-     */
-    private $algo;
+    private string $algo;
 
     public function __construct(string $secret = '', string $algo = 'sha256')
     {
@@ -37,7 +33,7 @@ class HmacSigner implements SignerContract
         ksort($payload);
 
         foreach ($payload as &$item) {
-            is_array($item) and $item = $this->sort($item);
+            \is_array($item) and $item = $this->sort($item);
         }
 
         return $payload;

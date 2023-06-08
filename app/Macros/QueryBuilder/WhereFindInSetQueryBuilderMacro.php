@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros\QueryBuilder;
 
 use Illuminate\Contracts\Support\Arrayable;
@@ -14,7 +16,7 @@ class WhereFindInSetQueryBuilderMacro
 {
     public function whereFindInSet(): callable
     {
-        /* @var string|Arrayable|string[] $values */
+        // @var string|Arrayable|string[] $values
         return function (string $column, $values, string $boolean = 'and', bool $not = false) {
             if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && ! str_starts_with($column, $tablePrefix)) {
                 $column = $tablePrefix.$column;
@@ -23,7 +25,7 @@ class WhereFindInSetQueryBuilderMacro
             $sql = $not ? "not find_in_set(?, $column)" : "find_in_set(?, $column)";
 
             $values instanceof Arrayable and $values = $values->toArray();
-            is_array($values) and $values = implode(',', $values);
+            \is_array($values) and $values = implode(',', $values);
 
             return $this->whereRaw($sql, $values, $boolean);
         };
@@ -31,7 +33,7 @@ class WhereFindInSetQueryBuilderMacro
 
     public function whereNotFindInSet(): callable
     {
-        /* @var string|Arrayable|string[] $values */
+        // @var string|Arrayable|string[] $values
         return function (string $column, $values) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereFindInSet($column, $values, 'and', true);
@@ -40,7 +42,7 @@ class WhereFindInSetQueryBuilderMacro
 
     public function orWhereFindInSet(): callable
     {
-        /* @var string|Arrayable|string[] $values */
+        // @var string|Arrayable|string[] $values
         return function (string $column, $values) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereFindInSet($column, $values, 'or');
@@ -49,7 +51,7 @@ class WhereFindInSetQueryBuilderMacro
 
     public function orWhereNotFindInSet(): callable
     {
-        /* @var string|Arrayable|string[] $values */
+        // @var string|Arrayable|string[] $values
         return function (string $column, $values) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
             return $this->whereFindInSet($column, $values, 'or', true);

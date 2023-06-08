@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros;
 
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -37,7 +39,7 @@ class CollectionMacro
         return function ($currentItem, $fallback = null) {
             $currentKey = $this->search($currentItem, true);
 
-            if ($currentKey === false) {
+            if (false === $currentKey) {
                 return $fallback;
             }
 
@@ -137,7 +139,7 @@ class CollectionMacro
     {
         return function (callable $callback, $carry = null) {
             foreach ($this as $key => $value) {
-                $carry = call_user_func($callback, $carry, $value, $key);
+                $carry = $callback($carry, $value, $key);
             }
 
             return $carry;
@@ -149,7 +151,7 @@ class CollectionMacro
         return function (callable $callback) {
             $arr = [];
             foreach ($this as $key => $value) {
-                $arr[$key] = call_user_func($callback, $value, $key);
+                $arr[$key] = $callback($value, $key);
             }
 
             return $arr;

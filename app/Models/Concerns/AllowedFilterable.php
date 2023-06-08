@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -27,10 +29,10 @@ trait AllowedFilterable
     public function scopeAllowedExactFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
-            (request()->has($name) || $default !== null) &&
-            ! in_array($value = request()->input($name, $default), Arr::wrap($ignore))
+            (request()->has($name) || null !== $default)
+            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore))
         ) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 return $query->whereIn($query->qualifyColumn($internalName ?: $name), $value);
             }
 
@@ -43,15 +45,15 @@ trait AllowedFilterable
     public function scopeAllowedPartialFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
-            (request()->has($name) || $default !== null) &&
-            ! in_array($value = request()->input($name, $default), Arr::wrap($ignore))
+            (request()->has($name) || null !== $default)
+            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore))
         ) {
             $wrappedProperty = $query->getQuery()->getGrammar()->wrap($query->qualifyColumn($internalName ?: $name));
 
             $sql = "LOWER({$wrappedProperty}) LIKE ?";
 
-            if (is_array($value)) {
-                if (count(array_filter($value, 'strlen')) === 0) {
+            if (\is_array($value)) {
+                if (0 === \count(array_filter($value, 'strlen'))) {
                     return $query;
                 }
 
@@ -77,8 +79,8 @@ trait AllowedFilterable
     public function scopeAllowedScopeFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
-            (request()->has($name) || $default !== null) &&
-            ! in_array($value = request()->input($name, $default), Arr::wrap($ignore))
+            (request()->has($name) || null !== $default)
+            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore))
         ) {
             $nameParts = collect(explode('.', $internalName ?: $name));
 
@@ -88,11 +90,11 @@ trait AllowedFilterable
 
             if ($relation) {
                 return $query->whereHas($relation, function (Builder $query) use ($scope, $value) {
-                    return $query->$scope($value);
+                    return $query->{$scope}($value);
                 });
             }
 
-            return $query->$scope($value);
+            return $query->{$scope}($value);
         }
 
         return $query;
@@ -101,7 +103,7 @@ trait AllowedFilterable
     public function scopeAllowedCallbackFilter(Builder $query, string $name, callable $callback): Builder
     {
         if (request()->has($name)) {
-            return call_user_func($callback, $query, request()->input($name), $name);
+            return $callback($query, request()->input($name), $name);
         }
 
         return $query;
@@ -114,7 +116,7 @@ trait AllowedFilterable
                 return $query->withTrashed();
             }
 
-            if ($value === 'only') {
+            if ('only' === $value) {
                 return $query->onlyTrashed();
             }
 
@@ -138,13 +140,13 @@ trait AllowedFilterable
         $sorts = request()->input($name, $default);
 
         foreach ($sorts as $direction => $column) {
-            if (is_int($column)) {
-                $direction[0] === '-'
+            if (\is_int($column)) {
+                '-' === $direction[0]
                 ? ($column = ltrim($direction, '-') and $direction = 'desc')
                 : ($column = $direction and $direction = 'asc');
             }
 
-            if (! in_array($column, $allowedSorts)) {
+            if (! \in_array($column, $allowedSorts)) {
                 continue;
             }
 
@@ -156,7 +158,7 @@ trait AllowedFilterable
 
     public function scopeAllowedSort(Builder $query, string $name, $default = null, ?string $internalName = null): Builder
     {
-        if (request()->hasAny([$name, '-'.$name]) || $default !== null) {
+        if (request()->hasAny([$name, '-'.$name]) || null !== $default) {
             $column = $internalName ?: $name;
             if (request()->has('-'.$name)) {
                 $direction = 'desc';

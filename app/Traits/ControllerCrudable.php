@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use Illuminate\Contracts\View\View;
@@ -9,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use ReflectionObject;
 
 /**
  * Trait ControllerCrud.
@@ -25,8 +26,8 @@ trait ControllerCrudable
     public function getViewPath(bool $forRedirect = false): string
     {
         $nsPrefix = '';
-        $nsPrefixes = explode('\\', (new ReflectionObject($this))->getNamespaceName());
-        if (end($nsPrefixes) !== 'Controllers') {
+        $nsPrefixes = explode('\\', (new \ReflectionObject($this))->getNamespaceName());
+        if ('Controllers' !== end($nsPrefixes)) {
             $nsPrefix = strtolower(end($nsPrefixes)).($forRedirect ? '/' : '.');
         }
         $modelNames = explode('\\', $this->modelClass);
@@ -190,24 +191,6 @@ trait ControllerCrudable
             : redirect($url)->with('flash_message', $message);
     }
 
-    private function isAjax(Request $request): bool
-    {
-        return $request->ajax() || $request->wantsJson();
-    }
-
-    /**
-     * Returns JSON representation of object.
-     */
-    private function jsonModel(Model $model): JsonResponse
-    {
-        /** @var string $resourceForSearch */
-        $output = isset($this->modelClass::$resourceForSearch)
-            ? new $this->modelClass::$resourceForSearch($model)
-            : $model;
-
-        return response()->json($output);
-    }
-
     /**
      * @param  ?Model  $model
      */
@@ -225,5 +208,23 @@ trait ControllerCrudable
                 $requestData[$fileUpload] = $upload;
             }
         }
+    }
+
+    private function isAjax(Request $request): bool
+    {
+        return $request->ajax() || $request->wantsJson();
+    }
+
+    /**
+     * Returns JSON representation of object.
+     */
+    private function jsonModel(Model $model): JsonResponse
+    {
+        /** @var string $resourceForSearch */
+        $output = isset($this->modelClass::$resourceForSearch)
+            ? new $this->modelClass::$resourceForSearch($model)
+            : $model;
+
+        return response()->json($output);
     }
 }

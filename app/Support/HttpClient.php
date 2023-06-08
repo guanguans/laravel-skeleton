@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 /**
@@ -7,39 +9,21 @@ namespace App\Support;
  */
 class HttpClient
 {
-    /**
-     * @var string
-     */
-    private $method = 'GET';
+    private string $method = 'GET';
 
-    /**
-     * @var string
-     */
-    private $url = '';
+    private string $url = '';
 
-    /**
-     * @var array
-     */
-    private $headers = [];
+    private array $headers = [];
 
-    /**
-     * @var string
-     */
-    private $body = '';
+    private string $body = '';
 
-    /**
-     * @var array
-     */
-    private $curlopts = [];
+    private array $curlopts = [];
 
-    /**
-     * @var bool
-     */
-    private $nothrow = false;
+    private bool $nothrow = false;
 
     public function __construct()
     {
-        if (! extension_loaded('curl')) {
+        if (! \extension_loaded('curl')) {
             throw new \RuntimeException(
                 "Please, install curl extension.\n".
                 'https://goo.gl/yTAeZh'
@@ -49,7 +33,7 @@ class HttpClient
 
     public static function get(string $url): static
     {
-        $http = new static;
+        $http = new static();
         $http->method = 'GET';
         $http->url = $url;
 
@@ -58,7 +42,7 @@ class HttpClient
 
     public static function post(string $url): static
     {
-        $http = new static;
+        $http = new static();
         $http->method = 'POST';
         $http->url = $url;
 
@@ -67,7 +51,7 @@ class HttpClient
 
     public static function patch(string $url): static
     {
-        $http = new static;
+        $http = new static();
         $http->method = 'PATCH';
         $http->url = $url;
 
@@ -96,7 +80,7 @@ class HttpClient
         $http->body = $body;
         $http->headers = array_merge($http->headers, [
             'Content-Type' => 'application/json',
-            'Content-Length' => strlen($http->body),
+            'Content-Length' => \strlen($http->body),
         ]);
 
         return $http;
@@ -108,7 +92,7 @@ class HttpClient
         $http->body = json_encode($data, JSON_PRETTY_PRINT);
         $http->headers = array_merge($http->headers, [
             'Content-Type' => 'application/json',
-            'Content-Length' => strlen($http->body),
+            'Content-Length' => \strlen($http->body),
         ]);
 
         return $http;
@@ -120,7 +104,7 @@ class HttpClient
         $http->body = http_build_query($data);
         $http->headers = array_merge($this->headers, [
             'Content-type' => 'application/x-www-form-urlencoded',
-            'Content-Length' => strlen($http->body),
+            'Content-Length' => \strlen($http->body),
         ]);
 
         return $http;
@@ -169,7 +153,7 @@ class HttpClient
         $result = curl_exec($ch);
         $info = curl_getinfo($ch);
 
-        if ($result === false && ! $this->nothrow) {
+        if (false === $result && ! $this->nothrow) {
             $error = curl_error($ch);
             $errno = curl_errno($ch);
             curl_close($ch);
@@ -185,7 +169,7 @@ class HttpClient
     public function getJson(): array
     {
         $response = json_decode($this->send(), true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \RuntimeException('JSON Error: '.json_last_error_msg());
         }
 

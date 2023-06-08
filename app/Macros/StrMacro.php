@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros;
 
 use Illuminate\Support\Str;
@@ -19,7 +21,7 @@ class StrMacro
     public static function prependIf(): callable
     {
         return function ($value, $prefix) {
-            return  Str::startsWith($value, $prefix) ? $value : $prefix.$value;
+            return Str::startsWith($value, $prefix) ? $value : $prefix.$value;
         };
     }
 
@@ -35,7 +37,7 @@ class StrMacro
     public static function pipe(): callable
     {
         return function ($value, callable $callback) {
-            return call_user_func($callback, $value);
+            return $callback($value);
         };
     }
 

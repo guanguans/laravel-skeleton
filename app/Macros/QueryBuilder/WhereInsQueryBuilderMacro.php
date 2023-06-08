@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros\QueryBuilder;
 
 use Illuminate\Contracts\Support\Arrayable;
@@ -14,7 +16,7 @@ class WhereInsQueryBuilderMacro
 {
     public function whereIns(): callable
     {
-        /* @var Arrayable|array[] $values */
+        // @var Arrayable|array[] $values
         return function (array $columns, $values, string $boolean = 'and', bool $not = false) {
             $operator = $not ? 'not in' : 'in';
 
@@ -43,8 +45,8 @@ class WhereInsQueryBuilderMacro
                 }, []);
             }, $values);
 
-            $rawValue = sprintf('(%s)', implode(',', array_fill(0, count($columns), '?')));
-            $rawValues = implode(',', array_fill(0, count($values), $rawValue));
+            $rawValue = sprintf('(%s)', implode(',', array_fill(0, \count($columns), '?')));
+            $rawValues = implode(',', array_fill(0, \count($values), $rawValue));
 
             $raw = "($rawColumns) $operator ($rawValues)";
 

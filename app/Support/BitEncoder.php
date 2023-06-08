@@ -1,11 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 use App\Contracts\BitEncoderContract;
-use Generator;
-use InvalidArgumentException;
-use LengthException;
 
 /**
  * 主要用来处理数据库多个值单字段储存问题。
@@ -60,12 +59,12 @@ class BitEncoder implements BitEncoderContract
     public function attach(int $value, ...$set): int
     {
         if ($value < 0) {
-            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
+            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
         }
 
         return array_reduce($set, function (int $value, $item) {
             $index = array_search($item, $this->set, true);
-            if ($index !== false) {
+            if (false !== $index) {
                 $value |= (1 << $index);
             }
 
@@ -81,12 +80,12 @@ class BitEncoder implements BitEncoderContract
     public function detach(int $value, ...$set): int
     {
         if ($value < 0) {
-            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
+            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
         }
 
         return array_reduce($set, function (int $value, $item) {
             $index = array_search($item, $this->set, true);
-            if ($index !== false) {
+            if (false !== $index) {
                 $value &= (~(1 << $index));
             }
 
@@ -97,16 +96,18 @@ class BitEncoder implements BitEncoderContract
     /**
      * 包含.
      *
+     * @param  mixed  $item
+     *
      * @throws \InvalidArgumentException
      */
     public function has(int $value, $item): bool
     {
         if ($value < 0) {
-            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
+            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
         }
 
         $index = array_search($item, $this->set, true);
-        if ($index === false) {
+        if (false === $index) {
             return false;
         }
 
@@ -118,16 +119,18 @@ class BitEncoder implements BitEncoderContract
     /**
      * 缺少.
      *
+     * @param  mixed  $item
+     *
      * @throws \InvalidArgumentException
      */
     public function lack(int $value, $item): bool
     {
         if ($value < 0) {
-            throw new InvalidArgumentException("The value($value) is an invalid positive integer.");
+            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
         }
 
         $index = array_search($item, $this->set, true);
-        if ($index === false) {
+        if (false === $index) {
             return true;
         }
 
@@ -201,15 +204,15 @@ class BitEncoder implements BitEncoderContract
     /**
      * 获取包含该集合的所有组合的生成器.
      */
-    public function getHasCombinationsGenerator(array $set): Generator
+    public function getHasCombinationsGenerator(array $set): \Generator
     {
         $set = array_intersect($this->set, $set);
         if (empty($set)) {
             return; // 中断
         }
 
-        $subSetCount = count($set);
-        $setCount = count($this->set);
+        $subSetCount = \count($set);
+        $setCount = \count($this->set);
         for ($i = $subSetCount; $i <= $setCount; $i++) {
             foreach ($this->combinationGenerator($this->set, $i) as $combination) {
                 if (array_values(array_intersect($combination, $set)) === array_values($set)) {
@@ -222,15 +225,15 @@ class BitEncoder implements BitEncoderContract
     /**
      * 获取缺少该集合的所有组合的生成器.
      */
-    public function getLackCombinationsGenerator(array $set): Generator
+    public function getLackCombinationsGenerator(array $set): \Generator
     {
         $set = array_intersect($this->set, $set);
         if (empty($set)) {
             return; // 中断
         }
 
-        $subSetCount = count($set);
-        $setCount = count($this->set);
+        $subSetCount = \count($set);
+        $setCount = \count($this->set);
         for ($i = 1; $i <= $setCount; $i++) {
             foreach ($this->combinationGenerator($this->set, $i) as $combination) {
                 if ($i < $subSetCount) {
@@ -251,11 +254,11 @@ class BitEncoder implements BitEncoderContract
      */
     public function getHasCombinationsCount(array $set): int
     {
-        if (($subSetCount = count(array_intersect($this->set, $set))) === 0) {
+        if (($subSetCount = \count(array_intersect($this->set, $set))) === 0) {
             return 0;
         }
 
-        return 2 ** (count($this->set) - $subSetCount);
+        return 2 ** (\count($this->set) - $subSetCount);
     }
 
     /**
@@ -263,7 +266,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getLackCombinationsCount(array $set): int
     {
-        if (count(array_intersect($this->set, $set)) === 0) {
+        if (0 === \count(array_intersect($this->set, $set))) {
             return 0;
         }
 
@@ -278,31 +281,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getCombinationsCount(): int
     {
-        return 2 ** count($this->set) - 1;
-    }
-
-    /**
-     * 组合生成器.
-     */
-    protected function combinationGenerator(array $set, int $length): Generator
-    {
-        $originalLength = count($set);
-        $remainingLength = $originalLength - $length + 1;
-
-        for ($i = 0; $i < $remainingLength; $i++) {
-            $current = $set[$i];
-
-            if (1 === $length) {
-                yield [$current];
-            } else {
-                $remaining = array_slice($set, $i + 1);
-
-                foreach ($this->combinationGenerator($remaining, $length - 1) as $permutation) {
-                    array_unshift($permutation, $current);
-                    yield $permutation;
-                }
-            }
-        }
+        return 2 ** \count($this->set) - 1;
     }
 
     public function getSet(): array
@@ -313,17 +292,42 @@ class BitEncoder implements BitEncoderContract
     public function setSet(array $set): void
     {
         if (! array_is_list($set)) {
-            throw new InvalidArgumentException('The set is not an array of lists.');
+            throw new \InvalidArgumentException('The set is not an array of lists.');
         }
 
         if (array_filter(array_count_values($set), fn (int $count) => $count > 1)) {
-            throw new InvalidArgumentException('The set must be an array with no duplicate elements.');
+            throw new \InvalidArgumentException('The set must be an array with no duplicate elements.');
         }
 
-        if (($count = count($set)) > ($maxCount = PHP_INT_SIZE == 4 ? 31 : 63)) {
-            throw new LengthException("The number({$maxCount}) of elements is greater than the maximum length({$count}).");
+        if (($count = \count($set)) > ($maxCount = PHP_INT_SIZE == 4 ? 31 : 63)) {
+            throw new \LengthException("The number({$maxCount}) of elements is greater than the maximum length({$count}).");
         }
 
         $this->set = $set;
+    }
+
+    /**
+     * 组合生成器.
+     */
+    protected function combinationGenerator(array $set, int $length): \Generator
+    {
+        $originalLength = \count($set);
+        $remainingLength = $originalLength - $length + 1;
+
+        for ($i = 0; $i < $remainingLength; $i++) {
+            $current = $set[$i];
+
+            if (1 === $length) {
+                yield [$current];
+            } else {
+                $remaining = \array_slice($set, $i + 1);
+
+                foreach ($this->combinationGenerator($remaining, $length - 1) as $permutation) {
+                    array_unshift($permutation, $current);
+
+                    yield $permutation;
+                }
+            }
+        }
     }
 }

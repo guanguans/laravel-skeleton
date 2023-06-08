@@ -1,17 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 use App\Traits\Cacheable;
-use BadMethodCallException;
-use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\MessageBag;
-use RuntimeException;
 
 /**
  * @see https://github.com/Torann/laravel-repository
@@ -30,39 +29,27 @@ abstract class AbstractRepository
      *
      * This might be different when using a
      * different database driver.
-     *
-     * @var string
      */
-    public static $searchOperator = 'LIKE';
+    public static string $searchOperator = 'LIKE';
 
-    /**
-     * @var string
-     */
-    protected $model;
+    protected string $model;
 
-    /**
-     * @var \Illuminate\Database\Eloquent\Model
-     */
-    protected $modelInstance;
+    protected \Illuminate\Database\Eloquent\Model $modelInstance;
 
     /**
      * The errors message bag instance
-     *
-     * @var \Illuminate\Support\MessageBag
      */
-    protected $errors;
+    protected \Illuminate\Support\MessageBag $errors;
 
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|$this
+     * @var|\Illuminate\Database\Eloquent\Builder
      */
     protected $query;
 
     /**
      * Global query scope.
-     *
-     * @var array
      */
-    protected $scopeQuery = [];
+    protected array $scopeQuery = [];
 
     /**
      * Valid orderable columns.
@@ -80,25 +67,19 @@ abstract class AbstractRepository
 
     /**
      * Default order by column and direction pairs.
-     *
-     * @var array
      */
-    protected $orderBy = [];
+    protected array $orderBy = [];
 
     /**
      * One time skip of ordering. This is done when the
      * ordering is overwritten by the orderBy method.
-     *
-     * @var bool
      */
-    protected $skipOrderingOnce = false;
+    protected bool $skipOrderingOnce = false;
 
     /**
      * A set of keys used to perform range queries.
-     *
-     * @var array
      */
-    protected $range_keys = [
+    protected array $range_keys = [
         'lt', 'gt',
         'bt', 'ne',
     ];
@@ -115,43 +96,39 @@ abstract class AbstractRepository
     }
 
     /**
+     * Handle dynamic static method calls into the method.
+     */
+    public function __call(string $method, array $parameters): mixed
+    {
+        // Check for scope method and call
+        if (method_exists($this, $scope = 'scope'.ucfirst($method))) {
+            return \call_user_func_array([$this, $scope], $parameters);
+        }
+
+        $className = \get_class($this);
+
+        throw new \BadMethodCallException("Call to undefined method {$className}::{$method}()");
+    }
+
+    /**
      * The "booting" method of the repository.
      */
     public function boot()
     {
-        //
     }
 
     /**
      * Return model instance.
-     *
-     * @return Model
      */
-    public function getModel()
+    public function getModel(): Model
     {
         return $this->modelInstance;
     }
 
     /**
-     * Reset internal Query
-     *
-     * @return $this
-     */
-    protected function scopeReset()
-    {
-        $this->scopeQuery = [];
-
-        $this->query = $this->newQuery();
-
-        return $this;
-    }
-
-    /**
      * Get a new entity instance
-     *
-     * @return  \Illuminate\Database\Eloquent\Model
      */
-    public function getNew(array $attributes = [])
+    public function getNew(array $attributes = []): Model
     {
         $this->errors = new MessageBag();
 
@@ -162,15 +139,14 @@ abstract class AbstractRepository
      * Get a new query builder instance with the applied
      * the order by and scopes.
      *
-     * @param  bool  $skipOrdering
      * @return $this
      */
-    public function newQuery($skipOrdering = false)
+    public function newQuery(bool $skipOrdering = false)
     {
         $this->query = $this->getNew()->newQuery();
 
         // Apply order by
-        if ($skipOrdering === false && $this->skipOrderingOnce === false) {
+        if (false === $skipOrdering && false === $this->skipOrderingOnce) {
             foreach ($this->getOrderBy() as $column => $dir) {
                 $this->query->orderBy($column, $dir);
             }
@@ -188,10 +164,9 @@ abstract class AbstractRepository
      * Find data by its primary key.
      *
      * @param  mixed  $id
-     * @param  array  $columns
-     * @return Model|Collection
+     * @return Collection|Model
      */
-    public function find($id, $columns = ['*'])
+    public function find($id, array $columns = ['*'])
     {
         $this->newQuery();
 
@@ -201,13 +176,9 @@ abstract class AbstractRepository
     /**
      * Find a model by its primary key or throw an exception.
      *
-     * @param  string  $id
-     * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Model
-     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function findOrFail($id, $columns = ['*'])
+    public function findOrFail(string $id, array $columns = ['*']): Model
     {
         $this->newQuery();
 
@@ -221,12 +192,9 @@ abstract class AbstractRepository
     /**
      * Find data by field and value
      *
-     * @param  string  $field
-     * @param  string  $value
-     * @param  array  $columns
-     * @return Model|Collection
+     * @return Collection|Model
      */
-    public function findBy($field, $value, $columns = ['*'])
+    public function findBy(string $field, string $value, array $columns = ['*'])
     {
         $this->newQuery();
 
@@ -236,17 +204,14 @@ abstract class AbstractRepository
     /**
      * Find data by field
      *
-     * @param  string  $attribute
      * @param  mixed  $value
-     * @param  array  $columns
-     * @return mixed
      */
-    public function findAllBy($attribute, $value, $columns = ['*'])
+    public function findAllBy(string $attribute, $value, array $columns = ['*']): mixed
     {
         $this->newQuery();
 
         // Perform where in
-        if (is_array($value)) {
+        if (\is_array($value)) {
             return $this->query->whereIn($attribute, $value)->get($columns);
         }
 
@@ -255,16 +220,13 @@ abstract class AbstractRepository
 
     /**
      * Find data by multiple fields
-     *
-     * @param  array  $columns
-     * @return mixed
      */
-    public function findWhere(array $where, $columns = ['*'])
+    public function findWhere(array $where, array $columns = ['*']): mixed
     {
         $this->newQuery();
 
         foreach ($where as $field => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 [$field, $condition, $val] = $value;
                 $this->query->where($field, $condition, $val);
             } else {
@@ -277,16 +239,12 @@ abstract class AbstractRepository
 
     /**
      * Order results by.
-     *
-     * @param  string  $column
-     * @param  string  $direction
-     * @return self
      */
-    public function orderBy($column, $direction)
+    public function orderBy(string $column, string $direction): self
     {
         // Ensure the sort is valid
-        if (in_array($column, $this->getOrderable()) === false
-            && array_key_exists($column, $this->getOrderable()) === false
+        if (false === \in_array($column, $this->getOrderable())
+            && false === \array_key_exists($column, $this->getOrderable())
         ) {
             return $this;
         }
@@ -296,7 +254,7 @@ abstract class AbstractRepository
 
         return $this->addScopeQuery(function ($query) use ($column, $direction) {
             // Get valid sort order
-            $direction = in_array(strtolower($direction), ['desc', 'asc']) ? $direction : 'asc';
+            $direction = \in_array(strtolower($direction), ['desc', 'asc']) ? $direction : 'asc';
 
             // Check for table column mask
             $column = Arr::get($this->getOrderable(), $column, $column);
@@ -307,10 +265,8 @@ abstract class AbstractRepository
 
     /**
      * Return the order by array.
-     *
-     * @return array
      */
-    public function getOrderBy()
+    public function getOrderBy(): array
     {
         return $this->orderBy;
     }
@@ -320,12 +276,11 @@ abstract class AbstractRepository
      *
      * @param  array|string  $key
      * @param  mixed  $value
-     * @return self
      */
-    public function setSearchable($key, $value = null)
+    public function setSearchable($key, $value = null): self
     {
         // Allow for a batch assignment
-        if (is_array($key) === false) {
+        if (false === \is_array($key)) {
             $key = [$key => $value];
         }
 
@@ -339,34 +294,28 @@ abstract class AbstractRepository
 
     /**
      * Return searchable keys.
-     *
-     * @return array
      */
-    public function getSearchableKeys()
+    public function getSearchableKeys(): array
     {
         $return = $this->getSearchable();
 
         return array_values(array_map(function ($value, $key) {
-            return (is_array($value) || is_numeric($key) === false) ? $key : $value;
+            return (\is_array($value) || false === is_numeric($key)) ? $key : $value;
         }, $return, array_keys($return)));
     }
 
     /**
      * Return searchable array.
-     *
-     * @return array
      */
-    public function getSearchable()
+    public function getSearchable(): array
     {
         return $this->searchable;
     }
 
     /**
      * Return orderable array.
-     *
-     * @return array
      */
-    public function getOrderable()
+    public function getOrderable(): array
     {
         return $this->orderable;
     }
@@ -374,13 +323,12 @@ abstract class AbstractRepository
     /**
      * Filter results by given query params.
      *
-     * @param  string|array  $queries
-     * @return self
+     * @param  array|string  $queries
      */
-    public function search($queries)
+    public function search($queries): self
     {
         // Adjust for simple search queries
-        if (is_string($queries)) {
+        if (\is_string($queries)) {
             $queries = [
                 'query' => $queries,
             ];
@@ -398,7 +346,7 @@ abstract class AbstractRepository
                 $value = Arr::get($queries, $param, '');
 
                 // Validate value
-                if ($value === '' || $value === null) {
+                if ('' === $value || null === $value) {
                     continue;
                 }
 
@@ -409,11 +357,11 @@ abstract class AbstractRepository
                 foreach ($columns as $key => $column) {
                     @[$joining_table, $options] = explode(':', $column);
 
-                    if ($options !== null) {
+                    if (null !== $options) {
                         @[$column, $foreign_key, $related_key, $alias] = explode(',', $options);
 
                         // Join the table if it hasn't already been joined
-                        if (isset($joined[$joining_table]) == false) {
+                        if (false == isset($joined[$joining_table])) {
                             $joined[$joining_table] = $this->addSearchJoin(
                                 $query,
                                 $joining_table,
@@ -435,7 +383,7 @@ abstract class AbstractRepository
                 }
 
                 // Create standard query
-                if (count($columns) > 1) {
+                if (\count($columns) > 1) {
                     $query->where(function ($q) use ($columns, $param, $value) {
                         foreach ($columns as $column) {
                             $this->createSearchClause($q, $param, $column, $value, 'or');
@@ -457,11 +405,8 @@ abstract class AbstractRepository
 
     /**
      * Set the "limit" value of the query.
-     *
-     * @param  int  $limit
-     * @return self
      */
-    public function limit($limit)
+    public function limit(int $limit): self
     {
         return $this->addScopeQuery(function ($query) use ($limit) {
             return $query->limit($limit);
@@ -470,11 +415,8 @@ abstract class AbstractRepository
 
     /**
      * Retrieve all data of repository
-     *
-     * @param  array  $columns
-     * @return Collection
      */
-    public function all($columns = ['*'])
+    public function all(array $columns = ['*']): Collection
     {
         $this->newQuery();
 
@@ -483,11 +425,8 @@ abstract class AbstractRepository
 
     /**
      * Retrieve the "count" result of the query.
-     *
-     * @param  array  $columns
-     * @return int
      */
-    public function count($columns = ['*'])
+    public function count(array $columns = ['*']): int
     {
         $this->newQuery();
 
@@ -497,17 +436,15 @@ abstract class AbstractRepository
     /**
      * Get an array with the values of a given column.
      *
-     * @param  string  $value
      * @param  string  $key
-     * @return array
      */
-    public function pluck($value, $key = null)
+    public function pluck(string $value, ?string $key = null): array
     {
         $this->newQuery();
 
         $lists = $this->query->pluck($value, $key);
 
-        if (is_array($lists)) {
+        if (\is_array($lists)) {
             return $lists;
         }
 
@@ -517,13 +454,9 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param  int|null|mixed  $per_page
-     * @param  array  $columns
-     * @param  string  $page_name
-     * @param  int|null  $page
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @param  null|int|mixed  $per_page
      */
-    public function paginate($per_page = null, $columns = ['*'], $page_name = 'page', $page = null)
+    public function paginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         // Get the default per page when not set
         $per_page = $per_page ?: config('repositories.per_page', 15);
@@ -545,13 +478,9 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param  int|null|mixed  $per_page
-     * @param  array  $columns
-     * @param  string  $page_name
-     * @param  int|null  $page
-     * @return \Illuminate\Contracts\Pagination\Paginator
+     * @param  null|int|mixed  $per_page
      */
-    public function simplePaginate($per_page = null, $columns = ['*'], $page_name = 'page', $page = null)
+    public function simplePaginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\Paginator
     {
         $this->newQuery();
 
@@ -564,7 +493,7 @@ abstract class AbstractRepository
     /**
      * Save a new entity in repository
      *
-     * @return Model|bool
+     * @return bool|Model
      */
     public function create(array $attributes)
     {
@@ -581,10 +510,8 @@ abstract class AbstractRepository
 
     /**
      * Update an entity with the given attributes and persist it
-     *
-     * @return bool
      */
-    public function update(Model $entity, array $attributes)
+    public function update(Model $entity, array $attributes): bool
     {
         if ($entity->update($attributes)) {
             $this->flushCache();
@@ -599,11 +526,10 @@ abstract class AbstractRepository
      * Delete a entity in repository
      *
      * @param  mixed  $entity
-     * @return bool|null
      *
      * @throws \Exception
      */
-    public function delete($entity)
+    public function delete($entity): ?bool
     {
         if (($entity instanceof Model) === false) {
             $entity = $this->find($entity);
@@ -621,14 +547,12 @@ abstract class AbstractRepository
     /**
      * Create model instance.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
-     *
      * @throws \RuntimeException
      */
-    public function makeModel()
+    public function makeModel(): Builder
     {
         if (empty($this->model)) {
-            throw new RuntimeException('The model class must be set on the repository.');
+            throw new \RuntimeException('The model class must be set on the repository.');
         }
 
         return $this->modelInstance = new $this->model();
@@ -637,10 +561,8 @@ abstract class AbstractRepository
     /**
      * Get a new query builder instance with the applied
      * the order by and scopes.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getBuilder(bool $skipOrdering = false)
+    public function getBuilder(bool $skipOrdering = false): Builder
     {
         $this->newQuery($skipOrdering);
 
@@ -649,10 +571,8 @@ abstract class AbstractRepository
 
     /**
      * Get the raw SQL statements for the request
-     *
-     * @return string
      */
-    public function toSql()
+    public function toSql(): string
     {
         $this->newQuery();
 
@@ -661,10 +581,8 @@ abstract class AbstractRepository
 
     /**
      * Return query scope.
-     *
-     * @return array
      */
-    public function getScopeQuery()
+    public function getScopeQuery(): array
     {
         return $this->scopeQuery;
     }
@@ -674,9 +592,53 @@ abstract class AbstractRepository
      *
      * @return $this
      */
-    public function addScopeQuery(Closure $scope)
+    public function addScopeQuery(\Closure $scope)
     {
         $this->scopeQuery[] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Add a message to the repository's error messages.
+     */
+    public function addError(string $message, string $key = 'message'): self
+    {
+        $this->getErrors()->add($key, $message);
+
+        return $this;
+    }
+
+    /**
+     * Get the repository's error messages.
+     */
+    public function getErrors(): MessageBag
+    {
+        if (null === $this->errors) {
+            $this->errors = new MessageBag();
+        }
+
+        return $this->errors;
+    }
+
+    /**
+     * Get the repository's first error message.
+     */
+    public function getErrorMessage(string $default = ''): string
+    {
+        return $this->getErrors()->first('message') ?: $default;
+    }
+
+    /**
+     * Reset internal Query
+     *
+     * @return $this
+     */
+    protected function scopeReset()
+    {
+        $this->scopeQuery = [];
+
+        $this->query = $this->newQuery();
 
         return $this;
     }
@@ -689,7 +651,7 @@ abstract class AbstractRepository
     protected function applyScope()
     {
         foreach ($this->scopeQuery as $callback) {
-            if (is_callable($callback)) {
+            if (\is_callable($callback)) {
                 $this->query = $callback($this->query);
             }
         }
@@ -701,58 +663,17 @@ abstract class AbstractRepository
     }
 
     /**
-     * Add a message to the repository's error messages.
-     *
-     * @param  string  $message
-     * @return self
-     */
-    public function addError($message, string $key = 'message')
-    {
-        $this->getErrors()->add($key, $message);
-
-        return $this;
-    }
-
-    /**
-     * Get the repository's error messages.
-     *
-     * @return \Illuminate\Support\MessageBag
-     */
-    public function getErrors()
-    {
-        if ($this->errors === null) {
-            $this->errors = new MessageBag();
-        }
-
-        return $this->errors;
-    }
-
-    /**
-     * Get the repository's first error message.
-     *
-     * @param  string  $default
-     * @return string
-     */
-    public function getErrorMessage($default = '')
-    {
-        return $this->getErrors()->first('message') ?: $default;
-    }
-
-    /**
      * Append table name to column.
-     *
-     * @param  string  $column
-     * @return string
      */
-    protected function appendTableName($column)
+    protected function appendTableName(string $column): string
     {
         // If missing prepend the table name
-        if (strpos($column, '.') === false) {
+        if (false === strpos($column, '.')) {
             return $this->modelInstance->getTable().'.'.$column;
         }
 
         // Remove alias prefix indicator
-        if (preg_match('/^_\./', $column) != false) {
+        if (false != preg_match('/^_\./', $column)) {
             return preg_replace('/^_\./', '', $column);
         }
 
@@ -762,16 +683,13 @@ abstract class AbstractRepository
     /**
      * Add a search where clause to the query.
      *
-     * @param  string  $param
-     * @param  string  $column
      * @param  mixed  $value
-     * @param  string  $boolean
      */
-    protected function createSearchClause(Builder $query, $param, $column, $value, $boolean = 'and')
+    protected function createSearchClause(Builder $query, string $param, string $column, $value, string $boolean = 'and')
     {
-        if ($param === 'query') {
+        if ('query' === $param) {
             $query->where($this->appendTableName($column), self::$searchOperator, '%'.$value.'%', $boolean);
-        } elseif (is_array($value)) {
+        } elseif (\is_array($value)) {
             $query->whereIn($this->appendTableName($column), $value, $boolean);
         } else {
             $query->where($this->appendTableName($column), '=', $value, $boolean);
@@ -780,14 +698,8 @@ abstract class AbstractRepository
 
     /**
      * Add a search join to the query.
-     *
-     * @param  string  $joining_table
-     * @param  string  $foreign_key
-     * @param  string  $related_key
-     * @param  string  $alias
-     * @return string
      */
-    protected function addSearchJoin(Builder $query, $joining_table, $foreign_key, $related_key, $alias)
+    protected function addSearchJoin(Builder $query, string $joining_table, string $foreign_key, string $related_key, string $alias): string
     {
         // We need to join to the intermediate table
         $local_table = $this->getModel()->getTable();
@@ -808,12 +720,11 @@ abstract class AbstractRepository
      * Add a range clause to the query.
      *
      * @param  mixed  $value
-     * @return bool
      */
-    protected function createSearchRangeClause(Builder $query, $value, array $columns)
+    protected function createSearchRangeClause(Builder $query, $value, array $columns): bool
     {
         // Skip arrays
-        if (is_array($value) === true) {
+        if (true === \is_array($value)) {
             return false;
         }
 
@@ -822,7 +733,7 @@ abstract class AbstractRepository
 
         // Perform a range based query if the range is valid
         // and the separator matches.
-        if (substr($value, 2, 1) === ':' && in_array($range_type, $this->range_keys)) {
+        if (':' === substr($value, 2, 1) && \in_array($range_type, $this->range_keys)) {
             // Get the true value
             $value = substr($value, 3);
 
@@ -831,17 +742,20 @@ abstract class AbstractRepository
                     $query->where($this->appendTableName($columns[0]), '>', $value, 'and');
 
                     break;
+
                 case 'lt':
                     $query->where($this->appendTableName($columns[0]), '<', $value, 'and');
 
                     break;
+
                 case 'ne':
                     $query->where($this->appendTableName($columns[0]), '<>', $value, 'and');
 
                     break;
+
                 case 'bt':
                     // Because this can only have two values
-                    if (count($values = explode(',', $value)) === 2) {
+                    if (2 === \count($values = explode(',', $value))) {
                         $query->whereBetween($this->appendTableName($columns[0]), $values);
                     }
 
@@ -852,24 +766,5 @@ abstract class AbstractRepository
         }
 
         return false;
-    }
-
-    /**
-     * Handle dynamic static method calls into the method.
-     *
-     * @param  string  $method
-     * @param  array  $parameters
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        // Check for scope method and call
-        if (method_exists($this, $scope = 'scope'.ucfirst($method))) {
-            return call_user_func_array([$this, $scope], $parameters);
-        }
-
-        $className = get_class($this);
-
-        throw new BadMethodCallException("Call to undefined method {$className}::{$method}()");
     }
 }

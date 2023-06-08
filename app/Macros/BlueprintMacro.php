@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros;
 
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +23,7 @@ class BlueprintMacro
      */
     public function comment(): callable
     {
-        /**
+        /*
          * @param  string  $comment
          * @return \Illuminate\Support\Fluent
          */
@@ -32,7 +34,7 @@ class BlueprintMacro
 
     public function hasIndex(): callable
     {
-        return  function (string $index): bool {
+        return function (string $index): bool {
             $schemaManager = Schema::getConnection()->getDoctrineSchemaManager();
 
             return $schemaManager->listTableDetails($this->getTable())->hasIndex($index);

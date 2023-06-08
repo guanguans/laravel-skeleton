@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros;
 
 use Illuminate\Database\Query\Builder;
@@ -11,7 +13,7 @@ class MySqlGrammarMacro
 {
     public function whereFulltext(): callable
     {
-        /**
+        /*
          * Compile a "where fulltext" clause.
          *
          * @param  \Illuminate\Database\Query\Builder  $query

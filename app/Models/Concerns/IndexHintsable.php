@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -9,7 +11,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
 
 /**
  * @method static Builder|Model forceIndex(array|string[] $indexes, string $for = '', string $as = '')
@@ -38,7 +39,7 @@ trait IndexHintsable
     public function scopeForceIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
         if (Str::contains($this->preparedIndexes, 'USE')) {
-            throw new InvalidArgumentException('It is an error to mix USE INDEX and FORCE INDEX for the same table.');
+            throw new \InvalidArgumentException('It is an error to mix USE INDEX and FORCE INDEX for the same table.');
         }
 
         if (! $this->tableIndexExists($indexes, 'force')) {
@@ -132,15 +133,18 @@ trait IndexHintsable
         if (! $table->hasIndex($index)) {
             return;
         }
+
         switch ($type) {
             case 'force':
                 $this->forceIndexes[] = $index;
 
                 break;
-            case  'ignore':
+
+            case 'ignore':
                 $this->ignoreIndexes[] = $index;
 
                 break;
+
             case 'use':
                 $this->useIndexes[] = $index;
 

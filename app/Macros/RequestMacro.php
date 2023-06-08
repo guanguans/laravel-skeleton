@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros;
 
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
-use InvalidArgumentException;
 
 /**
  * @mixin \Illuminate\Http\Request
@@ -30,7 +31,7 @@ class RequestMacro
     public function headers(): callable
     {
         return function ($key = null, $default = null) {
-            return $key === null
+            return null === $key
                 ? collect($this->header())
                     ->map(function ($header) {
                         return $header[0];
@@ -51,7 +52,7 @@ class RequestMacro
 
             $results = [];
 
-            foreach (is_array($keys) ? $keys : func_get_args() as $key) {
+            foreach (\is_array($keys) ? $keys : \func_get_args() as $key) {
                 Arr::set($results, $key, Arr::get($input, $key));
             }
 
@@ -71,7 +72,7 @@ class RequestMacro
 
             $results = [];
 
-            foreach (is_array($keys) ? $keys : func_get_args() as $key) {
+            foreach (\is_array($keys) ? $keys : \func_get_args() as $key) {
                 Arr::set($results, $key, Arr::get($input, $key));
             }
 
@@ -128,7 +129,7 @@ class RequestMacro
     {
         return function ($property, $value) {
             if (! property_exists($this, $property)) {
-                throw new InvalidArgumentException('The property not exists.');
+                throw new \InvalidArgumentException('The property not exists.');
             }
 
             app()->has('original_properties') or app()->instance('original_properties', []);

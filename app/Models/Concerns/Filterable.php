@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -18,7 +20,7 @@ trait Filterable
     public function scopeFilter(Builder $query, ?array $input = null)
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-        $input = $input ?: \request()->query();
+        $input = $input ?: request()->query();
 
         foreach ($input as $key => $value) {
             if ($value == ($this->ignoreFilterValue ?? 'all')) {
@@ -26,7 +28,7 @@ trait Filterable
             }
 
             $method = 'filter'.Str::studly($key);
-            if (\method_exists($this, $method)) {
+            if (method_exists($this, $method)) {
                 \call_user_func([$this, $method], $query, $value, $key);
             } elseif ($this->isFilterable($key)) {
                 if (\is_array($value)) {
@@ -40,7 +42,7 @@ trait Filterable
 
     public function isFilterable(string $key): bool
     {
-        return \property_exists($this, 'filterable') && \in_array($key, $this->filterable);
+        return property_exists($this, 'filterable') && \in_array($key, $this->filterable);
     }
 
     /**
@@ -52,10 +54,10 @@ trait Filterable
      */
     public function filterOrderBy(Builder $query, string $value)
     {
-        $segments = \explode(',', $value);
+        $segments = explode(',', $value);
 
         foreach ($segments as $segment) {
-            [$key, $direction] = array_pad(\explode(':', $segment), 2, 'desc');
+            [$key, $direction] = array_pad(explode(':', $segment), 2, 'desc');
 
             $query->orderBy($key, $direction);
         }

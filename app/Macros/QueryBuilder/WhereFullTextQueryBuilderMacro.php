@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros\QueryBuilder;
 
 /**
@@ -11,7 +13,7 @@ class WhereFullTextQueryBuilderMacro
 {
     public function whereFullText(): callable
     {
-        /**
+        /*
          * Add a "where fulltext" clause to the query.
          *
          * @param  string|string[]  $columns
@@ -34,7 +36,7 @@ class WhereFullTextQueryBuilderMacro
 
     public function orWhereFullText(): callable
     {
-        /**
+        /*
          * Add a "or where fulltext" clause to the query.
          *
          * @param  string|string[]  $columns

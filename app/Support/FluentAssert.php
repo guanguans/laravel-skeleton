@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 use Webmozart\Assert\Assert;
@@ -387,14 +389,14 @@ class FluentAssert
 
     public static function __callStatic($name, $arguments): void
     {
-        call_user_func_array([Assert::class, $name], $arguments);
+        \call_user_func_array([Assert::class, $name], $arguments);
     }
 
     public function __call($name, $arguments): self
     {
         array_unshift($arguments, $this->value);
 
-        call_user_func_array([Assert::class, $name], $arguments);
+        \call_user_func_array([Assert::class, $name], $arguments);
 
         return $this;
     }

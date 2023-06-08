@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 class OS
@@ -11,37 +13,37 @@ class OS
 
     public function isWindows(): bool
     {
-        return $this->family() === 'windows';
+        return 'windows' === $this->family();
     }
 
     public function isBSD(): bool
     {
-        return $this->family() === 'bsd';
+        return 'bsd' === $this->family();
     }
 
     public function isDarwin(): bool
     {
-        return $this->family() === 'darwin';
+        return 'darwin' === $this->family();
     }
 
     public function isSolaris(): bool
     {
-        return $this->family() === 'solaris';
+        return 'solaris' === $this->family();
     }
 
     public function isLinux(): bool
     {
-        return $this->family() === 'linux';
+        return 'linux' === $this->family();
     }
 
     public function isUnknown(): bool
     {
-        return $this->family() === 'unknown';
+        return 'unknown' === $this->family();
     }
 
     public function family(): string
     {
-        /** @see https://www.php.net/manual/zh/reserved.constants.php */
+        // @see https://www.php.net/manual/zh/reserved.constants.php
         return strtolower(PHP_OS_FAMILY);
     }
 }

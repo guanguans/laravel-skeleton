@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Macros\QueryBuilder;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pipeline\Pipeline;
-use InvalidArgumentException;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -25,7 +26,7 @@ class QueryBuilderMacro
                         && ! $piped instanceof QueryBuilder
                         && ! $piped instanceof Relation
                     ) {
-                        throw new InvalidArgumentException(
+                        throw new \InvalidArgumentException(
                             sprintf(
                                 'Query builder pipeline must be return a %s or %s or %s instance.',
                                 EloquentBuilder::class,
@@ -65,7 +66,7 @@ class QueryBuilderMacro
     public function top(): callable
     {
         return function ($column, ?int $limit = null, ?bool $null = false, ?int $min = null, ?string $distinct = null) {
-            if ($distinct === null) {
+            if (null === $distinct) {
                 $op = 'count(*)';
             } else {
                 $quotedDistinct = $this->getGrammar()->wrap($distinct);
@@ -74,7 +75,7 @@ class QueryBuilderMacro
 
             $relation = $this->select($column)->selectRaw($op)->groupBy($column)->orderByRaw('1 desc')->orderBy($column);
 
-            if ($limit !== null) {
+            if (null !== $limit) {
                 $relation = $relation->limit($limit);
             }
 
@@ -82,7 +83,7 @@ class QueryBuilderMacro
                 $relation = $relation->whereNotNull($column);
             }
 
-            if ($min !== null) {
+            if (null !== $min) {
                 $relation = $relation->havingRaw("$op >= ?", [$min]);
             }
 
@@ -91,6 +92,7 @@ class QueryBuilderMacro
             $result = [];
             foreach ($rows as $row) {
                 $values = array_values($row);
+
                 /** @noinspection OffsetOperationsInspection */
                 $result[$values[0]] = $values[1];
             }

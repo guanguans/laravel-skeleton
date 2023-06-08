@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Support;
+declare(strict_types=1);
 
-use InvalidArgumentException;
-use LogicException;
+namespace App\Support;
 
 /**
  * Creates a composed Guzzle handler function by stacking middlewares on top of
@@ -53,43 +52,22 @@ use LogicException;
 class HandlerStack
 {
     /**
-     * @var (callable(mixed): mixed)|null
+     * @var null|(callable(mixed): mixed)
      */
     private $handler;
 
     /**
-     * @var array{(callable(callable(mixed): mixed): callable), (string|null)}[]
+     * @var array{(callable(callable(mixed): mixed): callable), (null|string)}[]
      */
-    private $stack = [];
+    private array $stack = [];
 
     /**
-     * @var (callable(mixed): mixed)|null
+     * @var null|(callable(mixed): mixed)
      */
     private $cached;
 
     /**
-     * Creates a default handler stack that can be used by clients.
-     *
-     * The returned handler will wrap the provided handler or use the most
-     * appropriate default handler for your system. The returned HandlerStack has
-     * support for cookies, redirects, HTTP error exceptions, and preparing a body
-     * before sending.
-     *
-     * The returned handler stack can be passed to a client in the "handler"
-     * option.
-     *
-     * @param (callable(mixed): mixed)|null $handler HTTP handler function to use with the stack. If no
-     *                                               handler is provided, the best handler for your
-     *                                               system will be utilized.
-     */
-    public static function create(): self
-    {
-        /** @noinspection PhpParamsInspection */
-        return new self(...func_get_args());
-    }
-
-    /**
-     * @param (callable(mixed): mixed)|null $handler Underlying HTTP handler.
+     * @param null|(callable(mixed): mixed) $handler underlying HTTP handler
      */
     public function __construct(?callable $handler = null)
     {
@@ -102,20 +80,8 @@ class HandlerStack
      * Invokes the handler stack as a composed handler.
      *
      * @param  mixed  $passable
-     * @return mixed
      */
-    public function call($passable)
-    {
-        return $this($passable);
-    }
-
-    /**
-     * Invokes the handler stack as a composed handler.
-     *
-     * @param  mixed  $passable
-     * @return mixed
-     */
-    public function __invoke($passable)
+    public function __invoke($passable): mixed
     {
         $handler = $this->resolve();
 
@@ -124,20 +90,18 @@ class HandlerStack
 
     /**
      * Dumps a string representation of the stack.
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $depth = 0;
         $stack = [];
 
-        if ($this->handler !== null) {
+        if (null !== $this->handler) {
             $stack[] = '0) Handler: '.$this->debugCallable($this->handler);
         }
 
         $result = '';
-        foreach (\array_reverse($this->stack) as $tuple) {
+        foreach (array_reverse($this->stack) as $tuple) {
             $depth++;
             $str = "{$depth}) Name: '{$tuple[1]}', ";
             $str .= 'Function: '.$this->debugCallable($tuple[0]);
@@ -145,7 +109,7 @@ class HandlerStack
             $stack[] = $str;
         }
 
-        foreach (\array_keys($stack) as $k) {
+        foreach (array_keys($stack) as $k) {
             $result .= "< {$stack[$k]}\n";
         }
 
@@ -153,9 +117,36 @@ class HandlerStack
     }
 
     /**
+     * Creates a default handler stack that can be used by clients.
+     *
+     * The returned handler will wrap the provided handler or use the most
+     * appropriate default handler for your system. The returned HandlerStack has
+     * support for cookies, redirects, HTTP error exceptions, and preparing a body
+     * before sending.
+     *
+     * The returned handler stack can be passed to a client in the "handler"
+     * option.
+     */
+    public static function create(): self
+    {
+        /** @noinspection PhpParamsInspection */
+        return new self(...\func_get_args());
+    }
+
+    /**
+     * Invokes the handler stack as a composed handler.
+     *
+     * @param  mixed  $passable
+     */
+    public function call($passable): mixed
+    {
+        return $this($passable);
+    }
+
+    /**
      * Set the HTTP handler that actually returns a promise.
      *
-     * @param  callable(mixed): mixed  $handler Accepts a request and array of options and returns a Promise.
+     * @param  callable(mixed): mixed  $handler accepts a request and array of options and returns a Promise
      */
     public function setHandler(callable $handler): void
     {
@@ -168,18 +159,18 @@ class HandlerStack
      */
     public function hasHandler(): bool
     {
-        return $this->handler !== null;
+        return null !== $this->handler;
     }
 
     /**
      * Unshift a middleware to the bottom of the stack.
      *
      * @param  callable(callable): callable  $middleware Middleware function
-     * @param  string  $name       Name to register for this middleware.
+     * @param  string  $name name to register for this middleware
      */
     public function unshift(callable $middleware, ?string $name = null): void
     {
-        \array_unshift($this->stack, [$middleware, $name]);
+        array_unshift($this->stack, [$middleware, $name]);
         $this->cached = null;
     }
 
@@ -187,7 +178,7 @@ class HandlerStack
      * Push a middleware to the top of the stack.
      *
      * @param  callable(callable): callable  $middleware Middleware function
-     * @param  string  $name       Name to register for this middleware.
+     * @param  string  $name name to register for this middleware
      */
     public function push(callable $middleware, string $name = ''): void
     {
@@ -198,9 +189,9 @@ class HandlerStack
     /**
      * Add a middleware before another middleware by name.
      *
-     * @param  string  $findName   Middleware to find
+     * @param  string  $findName Middleware to find
      * @param  callable(callable): callable  $middleware Middleware function
-     * @param  string  $withName   Name to register for this middleware.
+     * @param  string  $withName name to register for this middleware
      */
     public function before(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -210,9 +201,9 @@ class HandlerStack
     /**
      * Add a middleware after another middleware by name.
      *
-     * @param  string  $findName   Middleware to find
+     * @param  string  $findName Middleware to find
      * @param  callable(callable): callable  $middleware Middleware function
-     * @param  string  $withName   Name to register for this middleware.
+     * @param  string  $withName name to register for this middleware
      */
     public function after(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -222,17 +213,17 @@ class HandlerStack
     /**
      * Remove a middleware by instance or name from the stack.
      *
-     * @param  callable|string  $remove Middleware to remove by instance or name.
+     * @param  callable|string  $remove middleware to remove by instance or name
      */
     public function remove($remove): void
     {
-        if (! is_string($remove) && ! is_callable($remove)) {
+        if (! \is_string($remove) && ! \is_callable($remove)) {
             trigger_deprecation('guzzlehttp/guzzle', '7.4', 'Not passing a callable or string to %s::%s() is deprecated and will cause an error in 8.0.', __CLASS__, __FUNCTION__);
         }
 
         $this->cached = null;
         $idx = \is_callable($remove) ? 0 : 1;
-        $this->stack = \array_values(\array_filter(
+        $this->stack = array_values(array_filter(
             $this->stack,
             static function ($tuple) use ($idx, $remove) {
                 return $tuple[$idx] !== $remove;
@@ -247,12 +238,12 @@ class HandlerStack
      */
     public function resolve(): callable
     {
-        if ($this->cached === null) {
+        if (null === $this->cached) {
             if (($prev = $this->handler) === null) {
-                throw new LogicException('No handler has been specified');
+                throw new \LogicException('No handler has been specified');
             }
 
-            foreach (\array_reverse($this->stack) as $fn) {
+            foreach (array_reverse($this->stack) as $fn) {
                 /** @var callable(mixed): mixed $prev */
                 $prev = $fn[0]($prev);
             }
@@ -271,7 +262,7 @@ class HandlerStack
             }
         }
 
-        throw new InvalidArgumentException("Middleware not found: $name");
+        throw new \InvalidArgumentException("Middleware not found: $name");
     }
 
     /**
@@ -284,24 +275,24 @@ class HandlerStack
         $tuple = [$middleware, $withName];
 
         if ($before) {
-            if ($idx === 0) {
-                \array_unshift($this->stack, $tuple);
+            if (0 === $idx) {
+                array_unshift($this->stack, $tuple);
             } else {
                 $replacement = [$tuple, $this->stack[$idx]];
-                \array_splice($this->stack, $idx, 1, $replacement);
+                array_splice($this->stack, $idx, 1, $replacement);
             }
         } elseif ($idx === \count($this->stack) - 1) {
             $this->stack[] = $tuple;
         } else {
             $replacement = [$this->stack[$idx], $tuple];
-            \array_splice($this->stack, $idx, 1, $replacement);
+            array_splice($this->stack, $idx, 1, $replacement);
         }
     }
 
     /**
      * Provides a debug string for a given callable.
      *
-     * @param  callable|string  $fn Function to write as a string.
+     * @param  callable|string  $fn function to write as a string
      */
     private function debugCallable($fn): string
     {
@@ -316,6 +307,6 @@ class HandlerStack
         }
 
         /** @var object $fn */
-        return 'callable('.\spl_object_hash($fn).')';
+        return 'callable('.spl_object_hash($fn).')';
     }
 }

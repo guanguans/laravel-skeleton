@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
-use ArrayAccess;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use InvalidArgumentException;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Model
@@ -26,7 +26,7 @@ trait Sortable
     {
         $orderColumnName = $this->determineOrderColumnName();
 
-        $this->$orderColumnName = $this->getHighestOrderNumber() + 1;
+        $this->{$orderColumnName} = $this->getHighestOrderNumber() + 1;
     }
 
     public function getHighestOrderNumber(): int
@@ -44,10 +44,10 @@ trait Sortable
         return $query->orderBy($this->determineOrderColumnName(), $direction);
     }
 
-    public static function setNewOrder($ids, int $startOrder = 1, string $primaryKeyColumn = null): void
+    public static function setNewOrder($ids, int $startOrder = 1, ?string $primaryKeyColumn = null): void
     {
-        if (! is_array($ids) && ! $ids instanceof ArrayAccess) {
-            throw new InvalidArgumentException('You must pass an array or ArrayAccess object to setNewOrder');
+        if (! \is_array($ids) && ! $ids instanceof \ArrayAccess) {
+            throw new \InvalidArgumentException('You must pass an array or ArrayAccess object to setNewOrder');
         }
 
         $model = new static();
@@ -89,7 +89,7 @@ trait Sortable
 
         $swapWithModel = $this->buildSortQuery()->limit(1)
             ->ordered()
-            ->where($orderColumnName, '>', $this->$orderColumnName)
+            ->where($orderColumnName, '>', $this->{$orderColumnName})
             ->first();
 
         if (! $swapWithModel) {
@@ -105,7 +105,7 @@ trait Sortable
 
         $swapWithModel = $this->buildSortQuery()->limit(1)
             ->ordered('desc')
-            ->where($orderColumnName, '<', $this->$orderColumnName)
+            ->where($orderColumnName, '<', $this->{$orderColumnName})
             ->first();
 
         if (! $swapWithModel) {
@@ -119,12 +119,12 @@ trait Sortable
     {
         $orderColumnName = $this->determineOrderColumnName();
 
-        $oldOrderOfOtherModel = $otherModel->$orderColumnName;
+        $oldOrderOfOtherModel = $otherModel->{$orderColumnName};
 
-        $otherModel->$orderColumnName = $this->$orderColumnName;
+        $otherModel->{$orderColumnName} = $this->{$orderColumnName};
         $otherModel->save();
 
-        $this->$orderColumnName = $oldOrderOfOtherModel;
+        $this->{$orderColumnName} = $oldOrderOfOtherModel;
         $this->save();
 
         return $this;
@@ -147,7 +147,7 @@ trait Sortable
 
         $orderColumnName = $this->determineOrderColumnName();
 
-        $this->$orderColumnName = $firstModel->$orderColumnName;
+        $this->{$orderColumnName} = $firstModel->{$orderColumnName};
         $this->save();
 
         $this->buildSortQuery()->where($this->getKeyName(), '!=', $this->getKey())->increment($orderColumnName);
@@ -161,13 +161,13 @@ trait Sortable
 
         $orderColumnName = $this->determineOrderColumnName();
 
-        if ($this->$orderColumnName === $maxOrder) {
+        if ($this->{$orderColumnName} === $maxOrder) {
             return $this;
         }
 
-        $oldOrder = $this->$orderColumnName;
+        $oldOrder = $this->{$orderColumnName};
 
-        $this->$orderColumnName = $maxOrder;
+        $this->{$orderColumnName} = $maxOrder;
         $this->save();
 
         $this->buildSortQuery()->where($this->getKeyName(), '!=', $this->getKey())
@@ -181,14 +181,14 @@ trait Sortable
     {
         $orderColumnName = $this->determineOrderColumnName();
 
-        return (int) $this->$orderColumnName === $this->getHighestOrderNumber();
+        return (int) $this->{$orderColumnName} === $this->getHighestOrderNumber();
     }
 
     public function isFirstInOrder(): bool
     {
         $orderColumnName = $this->determineOrderColumnName();
 
-        return (int) $this->$orderColumnName === $this->getLowestOrderNumber();
+        return (int) $this->{$orderColumnName} === $this->getLowestOrderNumber();
     }
 
     public function buildSortQuery(): Builder

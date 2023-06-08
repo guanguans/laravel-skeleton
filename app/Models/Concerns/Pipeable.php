@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pipeline\Pipeline;
-use InvalidArgumentException;
 
 /**
  * @method static Builder|static pipe(...$pipes)
@@ -41,7 +42,7 @@ trait Pipeable
     {
         array_unshift($pipes, function (Builder $builder, $next) {
             if (! $next($builder) instanceof Builder) {
-                throw new InvalidArgumentException(
+                throw new \InvalidArgumentException(
                     sprintf('Query builder pipeline must be return a %s instance.', Builder::class)
                 );
             }

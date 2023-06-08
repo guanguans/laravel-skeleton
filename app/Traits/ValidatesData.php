@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
@@ -13,13 +15,13 @@ trait ValidatesData
     /**
      * Run the validation routine against the given validator.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator|array  $validator
+     * @param  array|\Illuminate\Contracts\Validation\Validator  $validator
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function validateDataWith($validator, array $data): array
     {
-        if (is_array($validator)) {
+        if (\is_array($validator)) {
             $validator = $this->getValidationDataFactory()->make($data, $validator);
         }
 
@@ -68,10 +70,8 @@ trait ValidatesData
 
     /**
      * Get a validation factory instance.
-     *
-     * @return \Illuminate\Contracts\Validation\Factory
      */
-    protected function getValidationDataFactory()
+    protected function getValidationDataFactory(): Factory
     {
         return app(Factory::class);
     }

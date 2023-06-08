@@ -77,7 +77,7 @@ class ServerSentEvent implements \Stringable
     ];
 
     /**
-     * @var callable|null
+     * @var null|callable
      */
     private $tapper;
 
@@ -94,6 +94,58 @@ class ServerSentEvent implements \Stringable
     ) {
         $this->setTapper($tapper);
         $this->setData($data);
+    }
+
+    public function __toString(): string
+    {
+        $event = [];
+        if (null !== $this->event) {
+            $event[] = "event: $this->event";
+        }
+        if (null !== $this->data) {
+            $event[] = "data: $this->data";
+        }
+        if (null !== $this->id) {
+            $event[] = "id: $this->id";
+        }
+        if (null !== $this->comment) {
+            $event[] = ": $this->comment";
+        }
+        if (null !== $this->retry) {
+            $event[] = "retry: $this->retry";
+        }
+
+        return implode(PHP_EOL, $event).PHP_EOL.PHP_EOL;
+    }
+
+    public function __invoke()
+    {
+        // Event loop.
+        for (; ;) {
+            try {
+                // Echo server sent event.
+                $this->send();
+            } catch (CloseServerSentEventException $e) {
+                // $e->serverSentEvent?->send();
+                $e->serverSentEvent?->sendContent();
+
+                return;
+            } finally {
+                // Flush the output buffer and send echoed messages to the browser.
+                if (ob_get_level() > 0) {
+                    ob_flush();
+                }
+                flush();
+
+                // Break the loop if the client aborted the connection.
+                if (connection_aborted()) {
+                    return;
+                }
+
+                // Sleep seconds before running the loop again.
+                sleep($this->sleep);
+            }
+        }
     }
 
     public function setTapper(?callable $tapper): self
@@ -185,57 +237,5 @@ class ServerSentEvent implements \Stringable
         $this->sendContent();
 
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        $event = [];
-        if ($this->event !== null) {
-            $event[] = "event: $this->event";
-        }
-        if ($this->data !== null) {
-            $event[] = "data: $this->data";
-        }
-        if ($this->id !== null) {
-            $event[] = "id: $this->id";
-        }
-        if ($this->comment !== null) {
-            $event[] = ": $this->comment";
-        }
-        if ($this->retry !== null) {
-            $event[] = "retry: $this->retry";
-        }
-
-        return implode(PHP_EOL, $event).PHP_EOL.PHP_EOL;
-    }
-
-    public function __invoke()
-    {
-        // Event loop.
-        while (true) {
-            try {
-                // Echo server sent event.
-                $this->send();
-            } catch (CloseServerSentEventException $e) {
-                // $e->serverSentEvent?->send();
-                $e->serverSentEvent?->sendContent();
-
-                return;
-            } finally {
-                // Flush the output buffer and send echoed messages to the browser.
-                if (ob_get_level() > 0) {
-                    ob_flush();
-                }
-                flush();
-
-                // Break the loop if the client aborted the connection.
-                if (connection_aborted()) {
-                    return;
-                }
-
-                // Sleep seconds before running the loop again.
-                sleep($this->sleep);
-            }
-        }
     }
 }

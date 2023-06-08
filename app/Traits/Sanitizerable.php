@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use Illuminate\Support\Arr;
@@ -28,7 +30,7 @@ trait Sanitizerable
         // create a multidimensional array based on $fields
         // which was submitted as DOT notation (e.g., data.name)
         foreach ($fields as $key => $value) {
-            if (is_string($key)) {
+            if (\is_string($key)) {
                 // save fields with default values
                 $fieldsWithDefaultValue[$key] = $value;
                 Arr::set($inputAsArray, $key, $value);
@@ -60,7 +62,7 @@ trait Sanitizerable
         $a = array_intersect_key($a, $b);
 
         foreach ($a as $key => &$value) {
-            if (is_array($value) && is_array($b[$key])) {
+            if (\is_array($value) && \is_array($b[$key])) {
                 $value = $this->recursiveArrayIntersectKey($value, $b[$key]);
             }
         }

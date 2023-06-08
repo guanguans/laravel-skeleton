@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
 /**
@@ -13,7 +15,7 @@ trait Observable
 
         $traitEvents = self::collectEventsRegisteredByTraits();
 
-        if ($traitEvents !== null) {
+        if (null !== $traitEvents) {
             $events = array_values(array_unique(array_merge($events, $traitEvents)));
         }
 

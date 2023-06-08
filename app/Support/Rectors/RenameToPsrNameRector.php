@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Rectors;
 
 use Illuminate\Support\Str;
@@ -15,7 +17,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @var array<string>
      */
-    protected $except = [
+    protected array $except = [
         '*::*',
         'class',
         'false',
@@ -150,12 +152,10 @@ CODE_SAMPLE
                     ,
                     ['exceptName']
                 ),
-            ]);
+            ]
+        );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getNodeTypes(): array
     {
         return [
@@ -190,8 +190,38 @@ CODE_SAMPLE
         } catch (\RuntimeException $e) {
             // skip
         }
+    }
 
-        return null;
+    /**
+     * @param  iterable<string>|string  $patterns
+     */
+    public function isMatches(string $value, $patterns): bool
+    {
+        $value = (string) $value;
+        if (! is_iterable($patterns)) {
+            $patterns = [$patterns];
+        }
+
+        foreach ($patterns as $pattern) {
+            $pattern = (string) $pattern;
+            if ($pattern === $value) {
+                return true;
+            }
+
+            $pattern = preg_quote($pattern, '#');
+            $pattern = str_replace('\*', '.*', $pattern);
+            if (1 === preg_match('#^'.$pattern.'\z#u', $value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function configure(array $configuration): void
+    {
+        Assert::allStringNotEmpty($configuration);
+        $this->except = [...$this->except, ...$configuration];
     }
 
     /**
@@ -212,7 +242,7 @@ CODE_SAMPLE
         })($name));
 
         if ($node instanceof Node\Name) {
-            $node->parts[count($node->parts) - 1] = $renamer($node->parts[count($node->parts) - 1]);
+            $node->parts[\count($node->parts) - 1] = $renamer($node->parts[\count($node->parts) - 1]);
 
             return $node;
         }
@@ -290,7 +320,7 @@ CODE_SAMPLE
             return true;
         }
 
-        if (
+        return (bool) (
             $node instanceof Node\Expr\FuncCall
             && $this->isNames($node, [
                 // call_user_func('function_name');
@@ -301,11 +331,7 @@ CODE_SAMPLE
                 'function_exists',
             ])
             && $this->hasFuncCallIndexStringArg($node, 0)
-        ) {
-            return true;
-        }
-
-        return false;
+        );
     }
 
     /**
@@ -441,15 +467,11 @@ CODE_SAMPLE
         }
 
         // CONST_NAME;
-        if (
+        return (bool) (
             $node instanceof Node\Name
             && ! $this->isNames($node, ['null', 'true', 'false'])
             && $parent instanceof Node\Expr\ConstFetch
-        ) {
-            return true;
-        }
-
-        return false;
+        );
     }
 
     /**
@@ -458,7 +480,7 @@ CODE_SAMPLE
     protected function shouldLcfirstCamelName(Node $node): bool
     {
         // $varName;
-        if ($node instanceof Node\Expr\Variable && is_string($node->name)) {
+        if ($node instanceof Node\Expr\Variable && \is_string($node->name)) {
             return true;
         }
 
@@ -515,7 +537,7 @@ CODE_SAMPLE
 
     protected function isSubclasses($object, array $classes): bool
     {
-        if (! is_object($object)) {
+        if (! \is_object($object)) {
             return false;
         }
 
@@ -528,37 +550,10 @@ CODE_SAMPLE
         return false;
     }
 
-    /**
-     * @param  string  $value
-     * @param  string|iterable<string>  $patterns
-     */
-    public function isMatches($value, $patterns): bool
-    {
-        $value = (string) $value;
-        if (! is_iterable($patterns)) {
-            $patterns = [$patterns];
-        }
-
-        foreach ($patterns as $pattern) {
-            $pattern = (string) $pattern;
-            if ($pattern === $value) {
-                return true;
-            }
-
-            $pattern = preg_quote($pattern, '#');
-            $pattern = str_replace('\*', '.*', $pattern);
-            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     protected function hasFuncCallIndexStringArg(Node\Expr\FuncCall $funcCall, int $index): bool
     {
         return isset($funcCall->args[$index])
-            && $funcCall->args[$index]->name === null
+            && null === $funcCall->args[$index]->name
             && $funcCall->args[$index]->value instanceof Node\Scalar\String_;
     }
 
@@ -575,11 +570,5 @@ CODE_SAMPLE
         }
 
         return false;
-    }
-
-    public function configure(array $configuration): void
-    {
-        Assert::allStringNotEmpty($configuration);
-        $this->except = [...$this->except, ...$configuration];
     }
 }

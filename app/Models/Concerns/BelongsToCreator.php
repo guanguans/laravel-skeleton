@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Concerns;
 
 use App\Models\User;
@@ -21,13 +23,13 @@ trait BelongsToCreator
     {
         static::creating(
             function (Model $model) {
-                $model->creator_id = $model->creator_id ?? \auth()->id();
+                $model->creator_id = $model->creator_id ?? auth()->id();
             }
         );
 
         static::updating(
             function (Model $model) {
-                \abort_if($model->isDirty('creator_id'), 403, '创建者不可更新');
+                abort_if($model->isDirty('creator_id'), 403, '创建者不可更新');
             }
         );
     }

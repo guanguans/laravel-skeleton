@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -50,7 +52,7 @@ trait ModelCrudable
     public static function validateOn(string $scenario = 'create', ?int $id = null): array
     {
         $validations = self::validations($id);
-        if ($scenario === 'update' && empty($validations['update'])) {
+        if ('update' === $scenario && empty($validations['update'])) {
             $scenario = 'create';
         }
 
@@ -65,7 +67,7 @@ trait ModelCrudable
         $searchableFields = method_exists(__CLASS__, 'searchable') ? self::searchable() : self::$searchable;
         $query->where(function ($where) use ($data, $searchableFields) {
             foreach ($searchableFields as $field => $type) {
-                if (strpos($field, '.') !== false) {
+                if (false !== strpos($field, '.')) {
                     continue;
                 }
                 self::buildQuery($where, $field, $type, $data);
@@ -73,7 +75,7 @@ trait ModelCrudable
         });
 
         foreach ($searchableFields as $field => $definition) {
-            if (strpos($field, '.') === false) {
+            if (false === strpos($field, '.')) {
                 continue;
             }
             $arr = explode('.', $field);
@@ -93,13 +95,13 @@ trait ModelCrudable
         // Defines "order by"
         self::searchOrder($query, $data);
 
-        /**
+        /*
          * If model uses SoftDeletes allows query excluded records
          *
          * @see ModelCrudable::$onlyTrashedForbidden
          * @see ModelCrudable::$withTrashedForbidden
          */
-        if (in_array(SoftDeletes::class, class_uses(self::class), true)) {
+        if (\in_array(SoftDeletes::class, class_uses(self::class), true)) {
             self::applyOnlyTrashed($query, $data);
             self::applyWithTrashed($query, $data);
         }
@@ -187,6 +189,11 @@ trait ModelCrudable
         }
     }
 
+    public static function fileUploads(Model $model): array
+    {
+        return [];
+    }
+
     /**
      * Builds the main query based on a informed field
      *
@@ -201,35 +208,35 @@ trait ModelCrudable
         if (! $aliasField) {
             $aliasField = $field;
         }
-        if (isset($data[$field]) && $data[$field] !== null) {
+        if (isset($data[$field]) && null !== $data[$field]) {
             $customMethod = 'search'.ucfirst($field);
             if (method_exists(self::class, $customMethod)) { // If field has custom "search" method uses it
                 $query->where(function ($query) use ($field, $data, $customMethod) {
                     self::$customMethod($query, $data[$field]);
                 });
             } else {
-                if ($type === 'string_match' || $type === 'date' || $type === 'datetime' || $type === 'int') { // Exact search
+                if ('string_match' === $type || 'date' === $type || 'datetime' === $type || 'int' === $type) { // Exact search
                     self::exactFilter($query, $field, $data, $aliasField);
-                } elseif ($type === 'string') { // Like Search
+                } elseif ('string' === $type) { // Like Search
                     self::likeFilter($query, $field, $data, $aliasField);
                 }
             }
         }
         // Date, Datetime and Decimal implementation for range field search (_from and _to suffixed fields)
-        if ($type === 'date' || $type === 'datetime' || $type === 'decimal' || $type === 'int') {
+        if ('date' === $type || 'datetime' === $type || 'decimal' === $type || 'int' === $type) {
             self::rangeFilter($query, $field, $data, $aliasField, $type);
         }
     }
 
     private static function exactFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
-        if (is_array($data[$field])) {
+        if (\is_array($data[$field])) {
             $query->where(function ($query) use ($field, $data, $aliasField) {
                 foreach ($data[$field] as $datum) {
                     $query->orWhere($aliasField, $datum);
                 }
             });
-        } elseif (strncmp($data[$field], '!=', 2) === 0) {
+        } elseif (0 === strncmp($data[$field], '!=', 2)) {
             $query->where($field, '!=', str_replace('!=', '', $data[$field]));
         } else {
             $query->where($field, $data[$field]);
@@ -238,7 +245,7 @@ trait ModelCrudable
 
     private static function likeFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
-        if (is_array($data[$field])) {
+        if (\is_array($data[$field])) {
             $query->where(function ($query) use ($field, $data, $aliasField) {
                 foreach ($data[$field] as $datum) {
                     $query->orWhere($aliasField, 'LIKE', '%'.$datum.'%');
@@ -253,22 +260,17 @@ trait ModelCrudable
     {
         if (! empty($data[$field.'_from'])) {
             $value = $data[$field.'_from'];
-            if ($type === 'datetime' && strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
+            if ('datetime' === $type && \strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 00:00:00';
             }
             $query->where($field, '>=', $value);
         }
         if (! empty($data[$field.'_to'])) {
             $value = $data[$field.'_to'];
-            if ($type === 'datetime' && strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
+            if ('datetime' === $type && \strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 23:59:59';
             }
             $query->where($aliasField, '<=', $value);
         }
-    }
-
-    public static function fileUploads(Model $model): array
-    {
-        return [];
     }
 }

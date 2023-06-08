@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Support;
+declare(strict_types=1);
 
-use Exception;
+namespace App\Support;
 
 /**
  * @see https://github.com/utopia-php/system/blob/main/src/System/System.php
@@ -81,28 +81,30 @@ class System
     /**
      * Returns the architecture's Enum of the system's processor.
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function getArchEnum(): string
     {
         $arch = self::getArch();
+
         switch (1) {
             case preg_match(self::RegExX86, $arch):
                 return System::X86;
 
                 break;
+
             case preg_match(self::RegExPPC, $arch):
                 return System::PPC;
 
                 break;
+
             case preg_match(self::RegExARM, $arch):
                 return System::ARM;
 
                 break;
 
             default:
-                throw new Exception("'{$arch}' enum not found.");
+                throw new \Exception("'{$arch}' enum not found.");
 
                 break;
         }
@@ -144,8 +146,7 @@ class System
      * Checks if the system is the passed architecture.
      * You should pass `System::X86`, `System::PPC`, `System::ARM` or an equivalent string.
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function isArch(string $arch): bool
     {
@@ -154,17 +155,19 @@ class System
                 return self::isX86();
 
                 break;
+
             case self::PPC:
                 return self::isPPC();
 
                 break;
+
             case self::ARM:
                 return self::isArm();
 
                 break;
 
             default:
-                throw new Exception("'{$arch}' not found.");
+                throw new \Exception("'{$arch}' not found.");
 
                 break;
         }
@@ -173,8 +176,7 @@ class System
     /**
      * Gets the system's total amount of CPU cores.
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function getCPUCores(): int
     {
@@ -183,97 +185,24 @@ class System
                 $cpuinfo = file_get_contents('/proc/cpuinfo');
                 preg_match_all('/^processor/m', $cpuinfo, $matches);
 
-                return count($matches[0]);
+                return \count($matches[0]);
+
             case 'Darwin':
                 return (int) shell_exec('sysctl -n hw.ncpu');
+
             case 'Windows':
                 return (int) shell_exec('wmic cpu get NumberOfCores');
+
             default:
-                throw new Exception(self::getOS().' not supported.');
+                throw new \Exception(self::getOS().' not supported.');
         }
-    }
-
-    /**
-     * Helper function to read a Linux System's /proc/stat data and convert it into an array.
-     *
-     *
-     * @noinspection OffsetOperationsInspection
-     */
-    private static function getProcStatData(): array
-    {
-        $data = [];
-
-        $totalCPUExists = false;
-
-        $cpustats = file_get_contents('/proc/stat');
-
-        $cpus = explode("\n", $cpustats);
-
-        // Remove non-CPU lines
-        $cpus = array_filter($cpus, function ($cpu) {
-            return preg_match('/^cpu[0-999]/', $cpu);
-        });
-
-        foreach ($cpus as $cpu) {
-            $cpu = explode(' ', $cpu);
-
-            // get CPU number
-            $cpuNumber = substr($cpu[0], 3);
-
-            if ($cpu[0] === 'cpu') {
-                $totalCPUExists = true;
-                $cpuNumber = 'total';
-            }
-
-            $data[$cpuNumber]['user'] = $cpu[1] ?? 0;
-            $data[$cpuNumber]['nice'] = $cpu[2] ?? 0;
-            $data[$cpuNumber]['system'] = $cpu[3] ?? 0;
-            $data[$cpuNumber]['idle'] = $cpu[4] ?? 0;
-            $data[$cpuNumber]['iowait'] = $cpu[5] ?? 0;
-            $data[$cpuNumber]['irq'] = $cpu[6] ?? 0;
-            $data[$cpuNumber]['softirq'] = $cpu[7] ?? 0;
-
-            // These might not exist on older kernels.
-            $data[$cpuNumber]['steal'] = $cpu[8] ?? 0;
-            $data[$cpuNumber]['guest'] = $cpu[9] ?? 0;
-        }
-
-        if (! $totalCPUExists) {
-            // Combine all values
-            $data['total'] = [
-                'user' => 0,
-                'nice' => 0,
-                'system' => 0,
-                'idle' => 0,
-                'iowait' => 0,
-                'irq' => 0,
-                'softirq' => 0,
-                'steal' => 0,
-                'guest' => 0,
-            ];
-
-            foreach ($data as $cpu) {
-                $data['total']['user'] += (int) $cpu['user'];
-                $data['total']['nice'] += (int) ($cpu['nice'] ?? 0);
-                $data['total']['system'] += (int) ($cpu['system'] ?? 0);
-                $data['total']['idle'] += (int) ($cpu['idle'] ?? 0);
-                $data['total']['iowait'] += (int) ($cpu['iowait'] ?? 0);
-                $data['total']['irq'] += (int) ($cpu['irq'] ?? 0);
-                $data['total']['softirq'] += (int) ($cpu['softirq'] ?? 0);
-                $data['total']['steal'] += (int) ($cpu['steal'] ?? 0);
-                $data['total']['guest'] += (int) ($cpu['guest'] ?? 0);
-            }
-        }
-
-        return $data;
     }
 
     /**
      * Get percentage CPU usage (between 0 and 100)
      * Reference for formula: https://stackoverflow.com/a/23376195/17300412
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      *
      * @noinspection OffsetOperationsInspection*/
     public static function getCPUUsage(int $duration = 1): float
@@ -281,7 +210,7 @@ class System
         switch (self::getOS()) {
             case 'Linux':
                 $startCpu = self::getProcStatData()['total'];
-                \sleep($duration);
+                sleep($duration);
                 $endCpu = self::getProcStatData()['total'];
 
                 $prevIdle = $startCpu['idle'] + $startCpu['iowait'];
@@ -299,16 +228,16 @@ class System
                 $percentage = ($totalDiff - $idleDiff) / $totalDiff;
 
                 return $percentage * 100;
+
             default:
-                throw new Exception(self::getOS().' not supported.');
+                throw new \Exception(self::getOS().' not supported.');
         }
     }
 
     /**
      * Returns the total amount of RAM available on the system as Megabytes.
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function getMemoryTotal(): int
     {
@@ -318,26 +247,27 @@ class System
                 preg_match('/MemTotal:\s+(\d+)/', $meminfo, $matches);
 
                 if (isset($matches[1])) {
-                    return intval(intval($matches[1]) / 1024);
-                } else {
-                    throw new Exception('Could not find MemTotal in /proc/meminfo.');
+                    return \intval(\intval($matches[1]) / 1024);
                 }
 
+                throw new \Exception('Could not find MemTotal in /proc/meminfo.');
+
                 break;
+
             case 'Darwin':
                 return (int) ((int) shell_exec('sysctl -n hw.memsize') / 1024 / 1024);
 
                 break;
+
             default:
-                throw new Exception(self::getOS().' not supported.');
+                throw new \Exception(self::getOS().' not supported.');
         }
     }
 
     /**
      * Returns the total amount of Free RAM available on the system as Megabytes.
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function getMemoryFree(): int
     {
@@ -349,26 +279,26 @@ class System
                     return (int) ((int) $matches[1] / 1024);
                 }
 
-                throw new Exception('Could not find MemFree in /proc/meminfo.');
+                throw new \Exception('Could not find MemFree in /proc/meminfo.');
             case 'Darwin':
-                return intval(intval(shell_exec('sysctl -n vm.page_free_count')) / 1024 / 1024);
+                return \intval(\intval(shell_exec('sysctl -n vm.page_free_count')) / 1024 / 1024);
+
             default:
-                throw new Exception(self::getOS().' not supported.');
+                throw new \Exception(self::getOS().' not supported.');
         }
     }
 
     /**
      * Returns the total amount of Disk space on the system as Megabytes.
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function getDiskTotal(): int
     {
         $totalSpace = disk_total_space(__DIR__);
 
-        if ($totalSpace === false) {
-            throw new Exception('Unable to get disk space');
+        if (false === $totalSpace) {
+            throw new \Exception('Unable to get disk space');
         }
 
         return (int) ($totalSpace / 1024 / 1024);
@@ -377,54 +307,17 @@ class System
     /**
      * Returns the total amount of Disk space free on the system as Megabytes.
      *
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     public static function getDiskFree(): int
     {
         $totalSpace = disk_free_space(__DIR__);
 
-        if ($totalSpace === false) {
-            throw new Exception('Unable to get free disk space');
+        if (false === $totalSpace) {
+            throw new \Exception('Unable to get free disk space');
         }
 
         return (int) ($totalSpace / 1024 / 1024);
-    }
-
-    /**
-     * Helper function to read a Linux System's /proc/diskstats data and convert it into an array.
-     *
-     * @return array
-     *
-     * @noinspection OffsetOperationsInspection
-     */
-    private static function getDiskStats()
-    {
-        // Read /proc/diskstats
-        $diskstats = file_get_contents('/proc/diskstats');
-
-        // Split the data
-        $diskstats = explode("\n", $diskstats);
-
-        // Remove excess spaces
-        $diskstats = array_map(function ($data) {
-            return preg_replace('/\t+/', ' ', trim($data));
-        }, $diskstats);
-
-        // Remove empty lines
-        $diskstats = array_filter($diskstats, function ($data) {
-            return ! empty($data);
-        });
-
-        $data = [];
-        foreach ($diskstats as $disk) {
-            // Breakdown the data
-            $disk = explode(' ', $disk);
-
-            $data[$disk[2]] = $disk;
-        }
-
-        return $data;
     }
 
     /**
@@ -432,12 +325,10 @@ class System
      * the current read and write usage in Megabytes.
      * There is also a ['total'] key that contains the total amount of read and write usage.
      *
-     * @param  int  $duration
-     *
-     * @throws Exception
+     * @throws \Exception
      *
      * @noinspection OffsetOperationsInspection*/
-    public static function getIOUsage($duration = 1): array
+    public static function getIOUsage(int $duration = 1): array
     {
         $diskStat = self::getDiskStats();
         sleep($duration);
@@ -493,10 +384,10 @@ class System
      *
      * @param  int  $duration The buffer duration to fetch the data points
      *
-     * @throws Exception
+     * @throws \Exception
      *
      * @noinspection OffsetOperationsInspection*/
-    public static function getNetworkUsage($duration = 1): array
+    public static function getNetworkUsage(int $duration = 1): array
     {
         // Create a list of interfaces
         $interfaces = scandir('/sys/class/net', SCANDIR_SORT_NONE);
@@ -530,5 +421,113 @@ class System
         $IOUsage['total']['upload'] = array_sum(array_column($IOUsage, 'upload'));
 
         return $IOUsage;
+    }
+
+    /**
+     * Helper function to read a Linux System's /proc/stat data and convert it into an array.
+     *
+     * @noinspection OffsetOperationsInspection
+     */
+    private static function getProcStatData(): array
+    {
+        $data = [];
+
+        $totalCPUExists = false;
+
+        $cpustats = file_get_contents('/proc/stat');
+
+        $cpus = explode("\n", $cpustats);
+
+        // Remove non-CPU lines
+        $cpus = array_filter($cpus, function ($cpu) {
+            return preg_match('/^cpu[0-999]/', $cpu);
+        });
+
+        foreach ($cpus as $cpu) {
+            $cpu = explode(' ', $cpu);
+
+            // get CPU number
+            $cpuNumber = substr($cpu[0], 3);
+
+            if ('cpu' === $cpu[0]) {
+                $totalCPUExists = true;
+                $cpuNumber = 'total';
+            }
+
+            $data[$cpuNumber]['user'] = $cpu[1] ?? 0;
+            $data[$cpuNumber]['nice'] = $cpu[2] ?? 0;
+            $data[$cpuNumber]['system'] = $cpu[3] ?? 0;
+            $data[$cpuNumber]['idle'] = $cpu[4] ?? 0;
+            $data[$cpuNumber]['iowait'] = $cpu[5] ?? 0;
+            $data[$cpuNumber]['irq'] = $cpu[6] ?? 0;
+            $data[$cpuNumber]['softirq'] = $cpu[7] ?? 0;
+
+            // These might not exist on older kernels.
+            $data[$cpuNumber]['steal'] = $cpu[8] ?? 0;
+            $data[$cpuNumber]['guest'] = $cpu[9] ?? 0;
+        }
+
+        if (! $totalCPUExists) {
+            // Combine all values
+            $data['total'] = [
+                'user' => 0,
+                'nice' => 0,
+                'system' => 0,
+                'idle' => 0,
+                'iowait' => 0,
+                'irq' => 0,
+                'softirq' => 0,
+                'steal' => 0,
+                'guest' => 0,
+            ];
+
+            foreach ($data as $cpu) {
+                $data['total']['user'] += (int) $cpu['user'];
+                $data['total']['nice'] += (int) ($cpu['nice'] ?? 0);
+                $data['total']['system'] += (int) ($cpu['system'] ?? 0);
+                $data['total']['idle'] += (int) ($cpu['idle'] ?? 0);
+                $data['total']['iowait'] += (int) ($cpu['iowait'] ?? 0);
+                $data['total']['irq'] += (int) ($cpu['irq'] ?? 0);
+                $data['total']['softirq'] += (int) ($cpu['softirq'] ?? 0);
+                $data['total']['steal'] += (int) ($cpu['steal'] ?? 0);
+                $data['total']['guest'] += (int) ($cpu['guest'] ?? 0);
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Helper function to read a Linux System's /proc/diskstats data and convert it into an array.
+     *
+     * @noinspection OffsetOperationsInspection
+     */
+    private static function getDiskStats(): array
+    {
+        // Read /proc/diskstats
+        $diskstats = file_get_contents('/proc/diskstats');
+
+        // Split the data
+        $diskstats = explode("\n", $diskstats);
+
+        // Remove excess spaces
+        $diskstats = array_map(function ($data) {
+            return preg_replace('/\t+/', ' ', trim($data));
+        }, $diskstats);
+
+        // Remove empty lines
+        $diskstats = array_filter($diskstats, function ($data) {
+            return ! empty($data);
+        });
+
+        $data = [];
+        foreach ($diskstats as $disk) {
+            // Breakdown the data
+            $disk = explode(' ', $disk);
+
+            $data[$disk[2]] = $disk;
+        }
+
+        return $data;
     }
 }

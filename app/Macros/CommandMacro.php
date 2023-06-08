@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Macros;
+declare(strict_types=1);
 
-use Throwable;
+namespace App\Macros;
 
 /**
  * @mixin \Illuminate\Console\Command
@@ -44,12 +44,12 @@ class CommandMacro
         return function (string $title, $task = null, $loadingText = 'loading...') {
             $this->output->write("$title: <comment>{$loadingText}</comment>");
 
-            if ($task === null) {
+            if (null === $task) {
                 $result = true;
             } else {
                 try {
-                    $result = $task() === false ? false : true;
-                } catch (Throwable $taskException) {
+                    $result = false === $task() ? false : true;
+                } catch (\Throwable $taskException) {
                     $result = false;
                 }
             }
