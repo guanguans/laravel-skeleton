@@ -16,16 +16,12 @@ class RequestMacro
 {
     public function userId(): callable
     {
-        return function () {
-            return optional($this->user())->id;
-        };
+        return fn () => optional($this->user())->id;
     }
 
     public function isAdmin(): callable
     {
-        return function () {
-            return (bool) optional($this->user())->is_admin;
-        };
+        return fn () => (bool) optional($this->user())->is_admin;
     }
 
     public function headers(): callable
@@ -33,9 +29,7 @@ class RequestMacro
         return function ($key = null, $default = null) {
             return null === $key
                 ? collect($this->header())
-                    ->map(function ($header) {
-                        return $header[0];
-                    })
+                    ->map(fn ($header) => $header[0])
                     ->toArray()
                 : $this->header($key, $default);
         };
@@ -82,9 +76,7 @@ class RequestMacro
 
     public function validateStrictAll(): callable
     {
-        return function (array $rules, ...$params) {
-            return validator()->validate($this->strictAll(), $rules, ...$params);
-        };
+        return fn (array $rules, ...$params) => validator()->validate($this->strictAll(), $rules, ...$params);
     }
 
     public function validateStrictAllWithBag(): callable
@@ -147,7 +139,7 @@ class RequestMacro
 
     public function recoverProperties(): callable
     {
-        return function () {
+        return function (): void {
             if (! app()->has('original_properties')) {
                 return;
             }
@@ -166,9 +158,7 @@ class RequestMacro
 
             $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
 
-            [$fallbacks, $routes] = collect($routes)->partition(function ($route) {
-                return $route->isFallback;
-            });
+            [$fallbacks, $routes] = collect($routes)->partition(fn ($route) => $route->isFallback);
 
             return $routes->merge($fallbacks)->first(function (Route $route) use ($includingMethod) {
                 /** @var \Illuminate\Http\Request $this */

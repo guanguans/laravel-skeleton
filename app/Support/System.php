@@ -280,6 +280,7 @@ class System
                 }
 
                 throw new \Exception('Could not find MemFree in /proc/meminfo.');
+
             case 'Darwin':
                 return \intval(\intval(shell_exec('sysctl -n vm.page_free_count')) / 1024 / 1024);
 
@@ -382,7 +383,7 @@ class System
      * There is also a ['total'] key that contains the total amount of download
      * and upload
      *
-     * @param  int  $duration The buffer duration to fetch the data points
+     * @param int $duration The buffer duration to fetch the data points
      *
      * @throws \Exception
      *
@@ -439,9 +440,7 @@ class System
         $cpus = explode("\n", $cpustats);
 
         // Remove non-CPU lines
-        $cpus = array_filter($cpus, function ($cpu) {
-            return preg_match('/^cpu[0-999]/', $cpu);
-        });
+        $cpus = array_filter($cpus, fn ($cpu) => preg_match('/^cpu[0-999]/', $cpu));
 
         foreach ($cpus as $cpu) {
             $cpu = explode(' ', $cpu);
@@ -511,14 +510,10 @@ class System
         $diskstats = explode("\n", $diskstats);
 
         // Remove excess spaces
-        $diskstats = array_map(function ($data) {
-            return preg_replace('/\t+/', ' ', trim($data));
-        }, $diskstats);
+        $diskstats = array_map(fn ($data) => preg_replace('/\t+/', ' ', trim($data)), $diskstats);
 
         // Remove empty lines
-        $diskstats = array_filter($diskstats, function ($data) {
-            return ! empty($data);
-        });
+        $diskstats = array_filter($diskstats, fn ($data) => ! empty($data));
 
         $data = [];
         foreach ($diskstats as $disk) {

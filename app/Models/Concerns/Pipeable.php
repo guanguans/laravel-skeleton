@@ -36,11 +36,11 @@ trait Pipeable
      *     ->get();
      * ```
      *
-     * @param  callable[]  $pipes
+     * @param callable[] $pipes
      */
     public function scopePipe(Builder $builder, ...$pipes): Builder
     {
-        array_unshift($pipes, function (Builder $builder, $next) {
+        array_unshift($pipes, function (Builder $builder, $next): void {
             if (! $next($builder) instanceof Builder) {
                 throw new \InvalidArgumentException(
                     sprintf('Query builder pipeline must be return a %s instance.', Builder::class)

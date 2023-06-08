@@ -415,9 +415,7 @@ class FluentAssert
     final public static function dumpDocblock(): void
     {
         $methods = (new \ReflectionClass(Assert::class))->getMethods(\ReflectionMethod::IS_PUBLIC);
-        $methods = array_filter($methods, static function (\ReflectionMethod $method): bool {
-            return $method->isStatic() && ! str_starts_with($method->getName(), '__');
-        });
+        $methods = array_filter($methods, static fn (\ReflectionMethod $method): bool => $method->isStatic() && ! str_starts_with($method->getName(), '__'));
 
         $docblock = array_map(static function (\ReflectionMethod $method): string {
             $parameters = $method->getParameters();

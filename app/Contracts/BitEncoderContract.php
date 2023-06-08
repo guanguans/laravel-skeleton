@@ -7,7 +7,7 @@ namespace App\Contracts;
 interface BitEncoderContract
 {
     /**
-     * @param  mixed[]  $set
+     * @param mixed[] $set
      */
     public function encode(array $set): int;
 

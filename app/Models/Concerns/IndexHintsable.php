@@ -33,8 +33,8 @@ trait IndexHintsable
     protected $preparedIndexes = '';
 
     /**
-     * @param  string|string[]  $indexes
-     * @param  string  $for JOIN|ORDER BY|GROUP BY
+     * @param string|string[] $indexes
+     * @param string $for JOIN|ORDER BY|GROUP BY
      */
     public function scopeForceIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -58,7 +58,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param  string|string[]  $indexes
+     * @param string|string[] $indexes
      */
     public function scopeUseIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -82,7 +82,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param  string|string[]  $indexes
+     * @param string|string[] $indexes
      */
     public function scopeIgnoreIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
     {
@@ -112,7 +112,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param  string|string[]  $indexes
+     * @param string|string[] $indexes
      */
     protected function tableIndexExists($indexes, string $type): bool
     {

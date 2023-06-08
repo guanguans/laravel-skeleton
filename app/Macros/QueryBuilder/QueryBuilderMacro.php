@@ -19,8 +19,8 @@ class QueryBuilderMacro
     public function pipe(): callable
     {
         return function (...$pipes) {
-            return tap($this, function ($builder) use ($pipes) {
-                array_unshift($pipes, function ($builder, $next) {
+            return tap($this, function ($builder) use ($pipes): void {
+                array_unshift($pipes, function ($builder, $next): void {
                     if (
                         ! ($piped = $next($builder)) instanceof EloquentBuilder
                         && ! $piped instanceof QueryBuilder
@@ -47,9 +47,7 @@ class QueryBuilderMacro
 
     public function getToArray(): callable
     {
-        return function ($columns = ['*']): array {
-            return $this->get($columns)->toArray();
-        };
+        return fn ($columns = ['*']): array => $this->get($columns)->toArray();
     }
 
     public function firstToArray(): callable

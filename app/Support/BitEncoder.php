@@ -96,7 +96,7 @@ class BitEncoder implements BitEncoderContract
     /**
      * 包含.
      *
-     * @param  mixed  $item
+     * @param mixed $item
      *
      * @throws \InvalidArgumentException
      */
@@ -119,7 +119,7 @@ class BitEncoder implements BitEncoderContract
     /**
      * 缺少.
      *
-     * @param  mixed  $item
+     * @param mixed $item
      *
      * @throws \InvalidArgumentException
      */
@@ -142,9 +142,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getHasCombinationsValues(array $set, int $length = 1024): array
     {
-        return array_map(function (array $set) {
-            return $this->encode($set);
-        }, $this->getHasCombinations($set, $length));
+        return array_map(fn (array $set) => $this->encode($set), $this->getHasCombinations($set, $length));
     }
 
     /**
@@ -152,9 +150,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getLackCombinationsValues(array $set, int $length = 1024): array
     {
-        return array_map(function (array $set) {
-            return $this->encode($set);
-        }, $this->getLackCombinations($set, $length));
+        return array_map(fn (array $set) => $this->encode($set), $this->getLackCombinations($set, $length));
     }
 
     /**
@@ -213,7 +209,7 @@ class BitEncoder implements BitEncoderContract
 
         $subSetCount = \count($set);
         $setCount = \count($this->set);
-        for ($i = $subSetCount; $i <= $setCount; $i++) {
+        for ($i = $subSetCount; $i <= $setCount; ++$i) {
             foreach ($this->combinationGenerator($this->set, $i) as $combination) {
                 if (array_values(array_intersect($combination, $set)) === array_values($set)) {
                     yield $combination;
@@ -234,7 +230,7 @@ class BitEncoder implements BitEncoderContract
 
         $subSetCount = \count($set);
         $setCount = \count($this->set);
-        for ($i = 1; $i <= $setCount; $i++) {
+        for ($i = 1; $i <= $setCount; ++$i) {
             foreach ($this->combinationGenerator($this->set, $i) as $combination) {
                 if ($i < $subSetCount) {
                     yield $combination;
@@ -314,7 +310,7 @@ class BitEncoder implements BitEncoderContract
         $originalLength = \count($set);
         $remainingLength = $originalLength - $length + 1;
 
-        for ($i = 0; $i < $remainingLength; $i++) {
+        for ($i = 0; $i < $remainingLength; ++$i) {
             $current = $set[$i];
 
             if (1 === $length) {

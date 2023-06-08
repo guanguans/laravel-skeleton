@@ -27,9 +27,7 @@ class BlueprintMacro
          * @param  string  $comment
          * @return \Illuminate\Support\Fluent
          */
-        return function ($comment) {
-            return $this->addCommand('tableComment', compact('comment'));
-        };
+        return fn ($comment) => $this->addCommand('tableComment', compact('comment'));
     }
 
     public function hasIndex(): callable

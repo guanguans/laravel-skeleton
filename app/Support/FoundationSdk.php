@@ -42,22 +42,22 @@ abstract class FoundationSdk
 
     public function dd()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
             $pendingRequest->dd();
         });
     }
 
     public function dump()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
             $pendingRequest->dump();
         });
     }
 
     public function ddRequestData()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
-            $pendingRequest->beforeSending(function (Request $request, array $options) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
+            $pendingRequest->beforeSending(function (Request $request, array $options): void {
                 VarDumper::dump($options['laravel_data']);
 
                 exit(1);
@@ -67,8 +67,8 @@ abstract class FoundationSdk
 
     public function dumpRequestData()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) {
-            $pendingRequest->beforeSending(function (Request $request, array $options) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
+            $pendingRequest->beforeSending(function (Request $request, array $options): void {
                 VarDumper::dump($options['laravel_data']);
             });
         });
@@ -76,7 +76,7 @@ abstract class FoundationSdk
 
     public function withLoggerMiddleware(?LoggerInterface $logger = null, ?MessageFormatterInterface $formatter = null, string $logLevel = 'info')
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger) {
+        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest) use ($logLevel, $formatter, $logger): void {
             $pendingRequest->withMiddleware($this->buildLoggerMiddleware($logger, $formatter, $logLevel));
         });
     }
@@ -104,9 +104,7 @@ abstract class FoundationSdk
     public function cloneDefaultPendingRequest(): PendingRequest
     {
         return tap(clone $this->defaultPendingRequest, function (PendingRequest $request): void {
-            $getStubCallbacks = function (): Collection {
-                return $this->stubCallbacks;
-            };
+            $getStubCallbacks = fn (): Collection => $this->stubCallbacks;
 
             $request->stub($getStubCallbacks->call($this->http));
         });
@@ -134,9 +132,7 @@ abstract class FoundationSdk
 
         if (null === $userAgent) {
             $userAgent = implode(' ', [
-                sprintf('laravel/%s', str(app()->version())->whenStartsWith('v', static function (Stringable $version): Stringable {
-                    return $version->replaceFirst('v', '');
-                })),
+                sprintf('laravel/%s', str(app()->version())->whenStartsWith('v', static fn (Stringable $version): Stringable => $version->replaceFirst('v', ''))),
                 sprintf('guzzle/%s', InstalledVersions::getPrettyVersion('guzzlehttp/guzzle')),
                 sprintf('curl/%s', curl_version()['version']),
                 sprintf('PHP/%s', PHP_VERSION),

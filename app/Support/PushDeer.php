@@ -118,21 +118,15 @@ class PushDeer extends FoundationSdk
                     /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
                     $promise = $handler($request, $options);
 
-                    return $promise->then(function (ResponseInterface $response) {
-                        return $response->withHeader('X-Timestamp', (string) microtime(true));
-                    });
+                    return $promise->then(fn (ResponseInterface $response) => $response->withHeader('X-Timestamp', (string) microtime(true)));
                 };
             })
-            ->withMiddleware(Middleware::mapRequest(function (RequestInterface $request) {
-                return $request->withHeader('X-Date-Time', now()->toDateTimeString());
-            }))
-            ->withMiddleware(Middleware::mapResponse(function (ResponseInterface $response) {
-                return $response->withHeader('X-Date-Time', now()->toDateTimeString());
-            }))
+            ->withMiddleware(Middleware::mapRequest(fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString())))
+            ->withMiddleware(Middleware::mapResponse(fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString())))
             ->withMiddleware(Middleware::tap(
-                function (RequestInterface $request, array $options) {
+                function (RequestInterface $request, array $options): void {
                 },
-                function (RequestInterface $request, array $options, PromiseInterface $promise) {
+                function (RequestInterface $request, array $options, PromiseInterface $promise): void {
                 }
             ));
     }

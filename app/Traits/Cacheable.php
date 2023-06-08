@@ -33,7 +33,7 @@ trait Cacheable
     /**
      * Set cache manager.
      */
-    public static function setCacheInstance(CacheManager $cache)
+    public static function setCacheInstance(CacheManager $cache): void
     {
         self::$cache = $cache;
     }
@@ -62,14 +62,14 @@ trait Cacheable
     /**
      * Get Cache key for the method
      *
-     * @param  ?array  $args
+     * @param ?array $args
      */
     public function getCacheKey(string $method, ?array $args = null, string $tag = ''): string
     {
         // Sort through arguments
         foreach ((array) $args as &$a) {
             if ($a instanceof Model) {
-                $a = \get_class($a).'|'.$a->getKey();
+                $a = $a::class.'|'.$a->getKey();
             }
         }
 
@@ -90,7 +90,7 @@ trait Cacheable
     /**
      * Get an item from the cache, or store the default value.
      *
-     * @param  null|int|string  $time
+     * @param null|int|string $time
      */
     public function cacheCallback(string $method, array $args, \Closure $callback, $time = null): mixed
     {
@@ -128,7 +128,7 @@ trait Cacheable
     /**
      * Return the time until expires in minutes.
      *
-     * @param  null|int|string  $time
+     * @param null|int|string $time
      */
     protected function getCacheExpiresTime($time = null): int
     {

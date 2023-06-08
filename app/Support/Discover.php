@@ -132,14 +132,13 @@ class Discover
     /**
      * Filter classes implementing the given method using a callback for the ReflectionMethod object.
      *
-     * @param  \Closure(\ReflectionMethod):bool  $callback
+     * @param \Closure(\ReflectionMethod):bool $callback
+     *
      * @return $this
      */
     public function withMethodReflection(string $method, \Closure $callback): static
     {
-        $this->filters['method'] = static function (\ReflectionClass $class) use ($method, $callback): bool {
-            return $class->hasMethod($method) && $callback($class->getMethod($method));
-        };
+        $this->filters['method'] = static fn (\ReflectionClass $class): bool => $class->hasMethod($method) && $callback($class->getMethod($method));
 
         return $this;
     }
@@ -288,9 +287,7 @@ class Discover
     protected function buildPath(): string
     {
         return (string) Str::of($this->path)
-            ->when($this->path, static function (Stringable $string): Stringable {
-                return $string->start(DIRECTORY_SEPARATOR);
-            })
+            ->when($this->path, static fn (Stringable $string): Stringable => $string->start(DIRECTORY_SEPARATOR))
             ->prepend($this->basePath)
             ->start(DIRECTORY_SEPARATOR)
             ->prepend($this->projectPath);

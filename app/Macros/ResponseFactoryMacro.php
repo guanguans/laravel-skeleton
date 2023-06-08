@@ -37,7 +37,7 @@ class ResponseFactoryMacro
         ): StreamedResponse {
             $client ??= new Client();
 
-            return $this->streamDownload(function () use ($client, $url, $chunk) {
+            return $this->streamDownload(function () use ($client, $url, $chunk): void {
                 $body = $client->get($url, ['stream' => true])->getBody();
                 while (! $body->eof()) {
                     echo $body->read($chunk);

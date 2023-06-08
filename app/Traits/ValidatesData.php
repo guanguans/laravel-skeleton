@@ -15,7 +15,7 @@ trait ValidatesData
     /**
      * Run the validation routine against the given validator.
      *
-     * @param  array|\Illuminate\Contracts\Validation\Validator  $validator
+     * @param array|\Illuminate\Contracts\Validation\Validator $validator
      *
      * @throws \Illuminate\Validation\ValidationException
      */

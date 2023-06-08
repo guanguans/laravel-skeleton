@@ -118,10 +118,10 @@ class ServerSentEvent implements \Stringable
         return implode(PHP_EOL, $event).PHP_EOL.PHP_EOL;
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         // Event loop.
-        for (; ;) {
+        for (;;) {
             try {
                 // Echo server sent event.
                 $this->send();

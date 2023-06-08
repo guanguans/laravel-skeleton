@@ -65,38 +65,38 @@ host('192.168.10.10')
 
 // Tasks
 desc('Building');
-task('build', function () {
+task('build', function (): void {
     run('cd {{release_path}} && build');
 });
 
 desc('Upload .env file');
-task('env:upload', function () {
+task('env:upload', function (): void {
     upload('.env', '{{release_path}}/.env');
 });
 
 desc('Reset opcache');
-task('opcache:reset', function () {
+task('opcache:reset', function (): void {
     run('{{bin/php}} -r \'opcache_reset();\'');
 });
 
 desc('Restart php-fpm');
-task('php-fpm:restart', function () {
+task('php-fpm:restart', function (): void {
     run('sudo systemctl restart php-fpm.service');
 });
 
 desc('Reload supervisor');
-task('supervisor:reload', function () {
+task('supervisor:reload', function (): void {
     run('sudo supervisorctl reload');
 });
 
 desc('Deployment succeed');
-task('deployer:succeed', function () {
+task('deployer:succeed', function (): void {
     writeln('<info>Successfully deployed!</info>');
     run('{{bin/php}} {{release_path}}/artisan deployer:succeed');
 });
 
 desc('Deployment failed');
-task('deployer:failed', function () {
+task('deployer:failed', function (): void {
     writeln('<info>Failed deployed!</info>');
     run('{{bin/php}} {{release_path}}/artisan deployer:failed');
 });

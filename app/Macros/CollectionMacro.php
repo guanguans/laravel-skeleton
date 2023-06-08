@@ -15,23 +15,17 @@ class CollectionMacro
 {
     public function pluckToArray(): callable
     {
-        return function ($value, $key = null): array {
-            return $this->pluck($value, $key)->toArray();
-        };
+        return fn ($value, $key = null): array => $this->pluck($value, $key)->toArray();
     }
 
     public function head(): callable
     {
-        return function () {
-            return $this->first();
-        };
+        return fn () => $this->first();
     }
 
     public function end(): callable
     {
-        return function () {
-            return $this->last();
-        };
+        return fn () => $this->last();
     }
 
     public function after(): callable
@@ -57,9 +51,7 @@ class CollectionMacro
 
     public function before(): callable
     {
-        return function ($currentItem, $fallback = null) {
-            return $this->reverse()->after($currentItem, $fallback);
-        };
+        return fn ($currentItem, $fallback = null) => $this->reverse()->after($currentItem, $fallback);
     }
 
     public function ifAny(): callable
@@ -87,9 +79,7 @@ class CollectionMacro
 
     public function if(): callable
     {
-        return function ($if, $then = null, $else = null) {
-            return value($if, $this) ? value($then, $this) : value($else, $this);
-        };
+        return fn ($if, $then = null, $else = null) => value($if, $this) ? value($then, $this) : value($else, $this);
     }
 
     public function paginate(): callable
@@ -128,11 +118,7 @@ class CollectionMacro
 
     public function filterFilled(): callable
     {
-        return function () {
-            return $this->filter(function ($value) {
-                return filled($value);
-            });
-        };
+        return fn () => $this->filter(fn ($value) => filled($value));
     }
 
     public function reduces(): callable

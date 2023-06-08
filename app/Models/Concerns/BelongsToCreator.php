@@ -19,16 +19,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 trait BelongsToCreator
 {
-    public static function bootBelongsToCreator()
+    public static function bootBelongsToCreator(): void
     {
         static::creating(
-            function (Model $model) {
-                $model->creator_id = $model->creator_id ?? auth()->id();
+            function (Model $model): void {
+                $model->creator_id ??= auth()->id();
             }
         );
 
         static::updating(
-            function (Model $model) {
+            function (Model $model): void {
                 abort_if($model->isDirty('creator_id'), 403, '创建者不可更新');
             }
         );

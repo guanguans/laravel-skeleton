@@ -113,7 +113,7 @@ abstract class AbstractRepository
     /**
      * The "booting" method of the repository.
      */
-    public function boot()
+    public function boot(): void
     {
     }
 
@@ -163,7 +163,8 @@ abstract class AbstractRepository
     /**
      * Find data by its primary key.
      *
-     * @param  mixed  $id
+     * @param mixed $id
+     *
      * @return Collection|Model
      */
     public function find($id, array $columns = ['*'])
@@ -204,7 +205,7 @@ abstract class AbstractRepository
     /**
      * Find data by field
      *
-     * @param  mixed  $value
+     * @param mixed $value
      */
     public function findAllBy(string $attribute, $value, array $columns = ['*']): mixed
     {
@@ -274,8 +275,8 @@ abstract class AbstractRepository
     /**
      * Set searchable array.
      *
-     * @param  array|string  $key
-     * @param  mixed  $value
+     * @param array|string $key
+     * @param mixed $value
      */
     public function setSearchable($key, $value = null): self
     {
@@ -299,9 +300,7 @@ abstract class AbstractRepository
     {
         $return = $this->getSearchable();
 
-        return array_values(array_map(function ($value, $key) {
-            return (\is_array($value) || false === is_numeric($key)) ? $key : $value;
-        }, $return, array_keys($return)));
+        return array_values(array_map(fn ($value, $key) => (\is_array($value) || false === is_numeric($key)) ? $key : $value, $return, array_keys($return)));
     }
 
     /**
@@ -323,7 +322,7 @@ abstract class AbstractRepository
     /**
      * Filter results by given query params.
      *
-     * @param  array|string  $queries
+     * @param array|string $queries
      */
     public function search($queries): self
     {
@@ -384,7 +383,7 @@ abstract class AbstractRepository
 
                 // Create standard query
                 if (\count($columns) > 1) {
-                    $query->where(function ($q) use ($columns, $param, $value) {
+                    $query->where(function ($q) use ($columns, $param, $value): void {
                         foreach ($columns as $column) {
                             $this->createSearchClause($q, $param, $column, $value, 'or');
                         }
@@ -408,9 +407,7 @@ abstract class AbstractRepository
      */
     public function limit(int $limit): self
     {
-        return $this->addScopeQuery(function ($query) use ($limit) {
-            return $query->limit($limit);
-        });
+        return $this->addScopeQuery(fn ($query) => $query->limit($limit));
     }
 
     /**
@@ -436,7 +433,7 @@ abstract class AbstractRepository
     /**
      * Get an array with the values of a given column.
      *
-     * @param  string  $key
+     * @param string $key
      */
     public function pluck(string $value, ?string $key = null): array
     {
@@ -454,7 +451,7 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param  null|int|mixed  $per_page
+     * @param null|int|mixed $per_page
      */
     public function paginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
@@ -478,7 +475,7 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param  null|int|mixed  $per_page
+     * @param null|int|mixed $per_page
      */
     public function simplePaginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\Paginator
     {
@@ -525,7 +522,7 @@ abstract class AbstractRepository
     /**
      * Delete a entity in repository
      *
-     * @param  mixed  $entity
+     * @param mixed $entity
      *
      * @throws \Exception
      */
@@ -668,7 +665,7 @@ abstract class AbstractRepository
     protected function appendTableName(string $column): string
     {
         // If missing prepend the table name
-        if (false === strpos($column, '.')) {
+        if (! str_contains($column, '.')) {
             return $this->modelInstance->getTable().'.'.$column;
         }
 
@@ -683,9 +680,9 @@ abstract class AbstractRepository
     /**
      * Add a search where clause to the query.
      *
-     * @param  mixed  $value
+     * @param mixed $value
      */
-    protected function createSearchClause(Builder $query, string $param, string $column, $value, string $boolean = 'and')
+    protected function createSearchClause(Builder $query, string $param, string $column, $value, string $boolean = 'and'): void
     {
         if ('query' === $param) {
             $query->where($this->appendTableName($column), self::$searchOperator, '%'.$value.'%', $boolean);
@@ -719,7 +716,7 @@ abstract class AbstractRepository
     /**
      * Add a range clause to the query.
      *
-     * @param  mixed  $value
+     * @param mixed $value
      */
     protected function createSearchRangeClause(Builder $query, $value, array $columns): bool
     {

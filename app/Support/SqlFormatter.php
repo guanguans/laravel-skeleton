@@ -212,8 +212,9 @@ class SqlFormatter
     /**
      * Format the whitespace in a SQL string to make it easier to read.
      *
-     * @param  string  $string The SQL string
-     * @param  bool  $highlight If true, syntax highlighting will also be performed
+     * @param string $string The SQL string
+     * @param bool $highlight If true, syntax highlighting will also be performed
+     *
      * @return string The SQL string with HTML styles and formatting wrapped in a <pre> tag
      */
     public static function format(string $string, bool $highlight = true): string
@@ -252,13 +253,13 @@ class SqlFormatter
             }
             // If we are increasing the special indent level now
             if ($increase_special_indent) {
-                $indent_level++;
+                ++$indent_level;
                 $increase_special_indent = false;
                 array_unshift($indent_types, 'special');
             }
             // If we are increasing the block indent level now
             if ($increase_block_indent) {
-                $indent_level++;
+                ++$indent_level;
                 $increase_block_indent = false;
                 array_unshift($indent_types, 'block');
             }
@@ -288,7 +289,7 @@ class SqlFormatter
                     $return = rtrim($return, ' ');
                     if ($inline_indented) {
                         array_shift($indent_types);
-                        $indent_level--;
+                        --$indent_level;
                         $return .= "\n".str_repeat($tab, $indent_level);
                     }
                     $inline_parentheses = false;
@@ -310,7 +311,7 @@ class SqlFormatter
                 // Examples are "NOW()", "COUNT(*)", "int(10)", key(`somecolumn`), DECIMAL(7,2)
                 // Allow up to 3 non-whitespace tokens inside inline parentheses
                 $length = 0;
-                for ($j = 1; $j <= 250; $j++) {
+                for ($j = 1; $j <= 250; ++$j) {
                     // Reached end of string
                     if (! isset($tokens[$i + $j])) {
                         break;
@@ -353,11 +354,11 @@ class SqlFormatter
             elseif (')' === $token[self::TOKEN_VALUE]) {
                 // Remove whitespace before the closing parentheses
                 $return = rtrim($return, ' ');
-                $indent_level--;
+                --$indent_level;
                 // Reset indent level
                 while ($j = array_shift($indent_types)) {
                     if ('special' === $j) {
-                        $indent_level--;
+                        --$indent_level;
                     } else {
                         break;
                     }
@@ -382,7 +383,7 @@ class SqlFormatter
                 // If the last indent type was 'special', decrease the special indent for this round
                 reset($indent_types);
                 if ('special' === current($indent_types)) {
-                    $indent_level--;
+                    --$indent_level;
                     array_shift($indent_types);
                 }
                 // Add a newline after the top level reserved word
@@ -396,7 +397,7 @@ class SqlFormatter
                     $return = rtrim($return, $tab).str_repeat($tab, $indent_level);
                 }
                 // If the token may have extra whitespace
-                if (false !== strpos($token[self::TOKEN_VALUE], ' ') || false !== strpos($token[self::TOKEN_VALUE], "\n") || false !== strpos($token[self::TOKEN_VALUE], "\t")) {
+                if (str_contains($token[self::TOKEN_VALUE], ' ') || str_contains($token[self::TOKEN_VALUE], "\n") || str_contains($token[self::TOKEN_VALUE], "\t")) {
                     $highlighted = preg_replace('/\s+/', ' ', $highlighted);
                 }
                 // if SQL 'LIMIT' clause, start variable to reset newline
@@ -427,7 +428,7 @@ class SqlFormatter
                     $return .= "\n".str_repeat($tab, $indent_level);
                 }
                 // If the token may have extra whitespace
-                if (false !== strpos($token[self::TOKEN_VALUE], ' ') || false !== strpos($token[self::TOKEN_VALUE], "\n") || false !== strpos($token[self::TOKEN_VALUE], "\t")) {
+                if (str_contains($token[self::TOKEN_VALUE], ' ') || str_contains($token[self::TOKEN_VALUE], "\n") || str_contains($token[self::TOKEN_VALUE], "\t")) {
                     $highlighted = preg_replace('/\s+/', ' ', $highlighted);
                 }
             }
@@ -473,7 +474,8 @@ class SqlFormatter
     /**
      * Add syntax highlighting to a SQL string
      *
-     * @param  string  $string The SQL string
+     * @param string $string The SQL string
+     *
      * @return string The SQL string with HTML styles applied
      */
     public static function highlight(string $string): string
@@ -491,7 +493,8 @@ class SqlFormatter
      * Split a SQL string into multiple queries.
      * Uses ";" as a query delimiter.
      *
-     * @param  string  $string The SQL string
+     * @param string $string The SQL string
+     *
      * @return array An array of individual query strings without trailing semicolons
      */
     public static function splitQuery(string $string): array
@@ -527,7 +530,8 @@ class SqlFormatter
     /**
      * Remove all comments from a SQL string
      *
-     * @param  string  $string The SQL string
+     * @param string $string The SQL string
+     *
      * @return string The SQL string without comments
      */
     public static function removeComments(string $string): string
@@ -548,7 +552,8 @@ class SqlFormatter
     /**
      * Compress a query by collapsing white space and removing comments
      *
-     * @param  string  $string The SQL string
+     * @param string $string The SQL string
+     *
      * @return string The SQL string without comments
      */
     public static function compress(string $string): string
@@ -585,7 +590,7 @@ class SqlFormatter
     /**
      * Stuff that only needs to be done once.  Builds regular expressions and sorts the reserved words.
      */
-    protected static function init()
+    protected static function init(): void
     {
         if (self::$init) {
             return;
@@ -607,8 +612,9 @@ class SqlFormatter
      * Return the next token and token type in a SQL string.
      * Quoted strings, comments, reserved words, whitespace, and punctuation are all their own tokens.
      *
-     * @param  string  $string The SQL string
-     * @param  array  $previous The result of the previous getNextToken() call
+     * @param string $string The SQL string
+     * @param array $previous The result of the previous getNextToken() call
+     *
      * @return array an associative array containing the type and value of the token
      */
     protected static function getNextToken(string $string, ?array $previous = null): array
@@ -748,7 +754,8 @@ class SqlFormatter
      * Takes a SQL string and breaks it into tokens.
      * Each token is an associative array with type and value.
      *
-     * @param  string  $string The SQL string
+     * @param string $string The SQL string
+     *
      * @return array an array of tokens
      */
     protected static function tokenize(string $string): array
@@ -784,12 +791,12 @@ class SqlFormatter
                 // Retrieve from cache
                 $token = self::$token_cache[$cacheKey];
                 $token_length = \strlen($token[self::TOKEN_VALUE]);
-                self::$cache_hits++;
+                ++self::$cache_hits;
             } else {
                 // Get the next token and the token type
                 $token = self::getNextToken($string, $token);
                 $token_length = \strlen($token[self::TOKEN_VALUE]);
-                self::$cache_misses++;
+                ++self::$cache_misses;
                 // If the token is shorter than the max length, store it in cache
                 if ($cacheKey && $token_length < self::$max_cachekey_size) {
                     self::$token_cache[$cacheKey] = $token;
@@ -807,7 +814,8 @@ class SqlFormatter
     /**
      * Highlights a token depending on its type.
      *
-     * @param  array  $token an associative array containing type and value
+     * @param array $token an associative array containing type and value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightToken(array $token): string
@@ -859,7 +867,8 @@ class SqlFormatter
     /**
      * Highlights a quoted string
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightQuote(string $value): string
@@ -874,7 +883,8 @@ class SqlFormatter
     /**
      * Highlights a backtick quoted string
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightBacktickQuote(string $value): string
@@ -889,7 +899,8 @@ class SqlFormatter
     /**
      * Highlights a reserved word
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightReservedWord(string $value): string
@@ -904,7 +915,8 @@ class SqlFormatter
     /**
      * Highlights a boundary token
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightBoundary(string $value): string
@@ -922,7 +934,8 @@ class SqlFormatter
     /**
      * Highlights a number
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightNumber(string $value): string
@@ -937,7 +950,8 @@ class SqlFormatter
     /**
      * Highlights an error
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightError(string $value): string
@@ -952,7 +966,8 @@ class SqlFormatter
     /**
      * Highlights a comment
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightComment(string $value): string
@@ -967,7 +982,8 @@ class SqlFormatter
     /**
      * Highlights a word token
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightWord(string $value): string
@@ -982,7 +998,8 @@ class SqlFormatter
     /**
      * Highlights a variable token
      *
-     * @param  string  $value The token's value
+     * @param string $value The token's value
+     *
      * @return string HTML code of the highlighted token
      */
     protected static function highlightVariable(string $value): string
@@ -997,7 +1014,8 @@ class SqlFormatter
     /**
      * Helper function for building regular expressions for reserved words and boundary characters
      *
-     * @param  string  $a The string to be quoted
+     * @param string $a The string to be quoted
+     *
      * @return string The quoted string
      */
     private static function quote_regex(string $a): string
@@ -1008,7 +1026,8 @@ class SqlFormatter
     /**
      * Helper function for building string output
      *
-     * @param  string  $string The string to be quoted
+     * @param string $string The string to be quoted
+     *
      * @return string The quoted string
      */
     private static function output(string $string): string

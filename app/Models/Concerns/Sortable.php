@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
  */
 trait Sortable
 {
-    public static function bootSortableTrait()
+    public static function bootSortableTrait(): void
     {
-        static::creating(function (Model $model) {
+        static::creating(function (Model $model): void {
             if ($model->shouldSortWhenCreating()) {
                 $model->setHighestOrderNumber();
             }
@@ -65,7 +65,7 @@ trait Sortable
         }
     }
 
-    public static function setNewOrderByCustomColumn(string $primaryKeyColumn, $ids, int $startOrder = 1)
+    public static function setNewOrderByCustomColumn(string $primaryKeyColumn, $ids, int $startOrder = 1): void
     {
         self::setNewOrder($ids, $startOrder, $primaryKeyColumn);
     }

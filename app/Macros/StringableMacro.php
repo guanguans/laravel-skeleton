@@ -41,9 +41,7 @@ class StringableMacro
 
     public function get(): callable
     {
-        return function () {
-            return $this->__toString();
-        };
+        return fn () => $this->__toString();
     }
 
     /**

@@ -19,7 +19,7 @@ trait ForceUseIndexable
     protected $from = [];
 
     /**
-     * @param  string|string[]  $index
+     * @param string|string[] $index
      */
     public function scopeUseIndex(Builder $query, $index): Builder
     {
@@ -36,7 +36,7 @@ trait ForceUseIndexable
     }
 
     /**
-     * @param  string|string[]  $index
+     * @param string|string[] $index
      */
     public function scopeForceIndex(Builder $query, $index): Builder
     {
@@ -53,7 +53,7 @@ trait ForceUseIndexable
     }
 
     /**
-     * @param  string|string[]  $index
+     * @param string|string[] $index
      */
     public function scopeIgnoreIndex(Builder $query, $index): Builder
     {
@@ -70,7 +70,7 @@ trait ForceUseIndexable
     }
 
     /**
-     * @param  string|string[]  $index
+     * @param string|string[] $index
      */
     protected function parseIndexName($index): string
     {

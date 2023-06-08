@@ -57,7 +57,7 @@ trait AllowedFilterable
                     return $query;
                 }
 
-                $query->where(function (Builder $query) use ($value, $sql) {
+                $query->where(function (Builder $query) use ($value, $sql): void {
                     foreach (array_filter($value, 'strlen') as $partialValue) {
                         $partialValue = mb_strtolower($partialValue, 'UTF8');
 
@@ -89,9 +89,7 @@ trait AllowedFilterable
             $relation = $nameParts->implode('.');
 
             if ($relation) {
-                return $query->whereHas($relation, function (Builder $query) use ($scope, $value) {
-                    return $query->{$scope}($value);
-                });
+                return $query->whereHas($relation, fn (Builder $query) => $query->{$scope}($value));
             }
 
             return $query->{$scope}($value);

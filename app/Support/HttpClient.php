@@ -111,7 +111,7 @@ class HttpClient
     }
 
     /**
-     * @param  mixed  $value
+     * @param mixed $value
      */
     public function setopt(int $setopt, $value): static
     {

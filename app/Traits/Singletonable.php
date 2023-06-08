@@ -14,15 +14,13 @@ trait Singletonable
     {
     }
 
-    final public function __wakeup()
+    final public function __wakeup(): void
     {
     }
 
     public static function instance(...$parameters)
     {
-        app()->singletonIf(static::class, function () use ($parameters) {
-            return new static(...$parameters);
-        });
+        app()->singletonIf(static::class, fn () => new static(...$parameters));
 
         return app(static::class);
     }

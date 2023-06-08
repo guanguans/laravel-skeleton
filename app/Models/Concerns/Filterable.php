@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
  */
 trait Filterable
 {
-    public function scopeFilter(Builder $query, ?array $input = null)
+    public function scopeFilter(Builder $query, ?array $input = null): void
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
         $input = $input ?: request()->query();
@@ -52,7 +52,7 @@ trait Filterable
      *  order_by=age:desc,created_at:asc...
      * </pre>
      */
-    public function filterOrderBy(Builder $query, string $value)
+    public function filterOrderBy(Builder $query, string $value): void
     {
         $segments = explode(',', $value);
 

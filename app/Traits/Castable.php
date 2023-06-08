@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
  */
 trait Castable
 {
-    protected function cast(array &$source)
+    protected function cast(array &$source): void
     {
         foreach ($source as $key => &$value) {
             $value = $this->castValue($key, $value);
