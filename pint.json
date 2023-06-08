@@ -4,15 +4,30 @@
         "blank_line_before_statement": {
             "statements": [
                 "break",
+                "case",
                 "continue",
                 "declare",
+                "default",
+                "exit",
+                "goto",
+                "include",
+                "include_once",
+                "phpdoc",
+                "require",
+                "require_once",
                 "return",
+                "switch",
                 "throw",
-                "try"
+                "try",
+                "yield",
+                "yield_from"
             ]
         },
         "comment_to_phpdoc": {
             "ignored_tags": []
+        },
+        "increment_style": {
+            "style": "pre"
         }
     },
     "exclude": [

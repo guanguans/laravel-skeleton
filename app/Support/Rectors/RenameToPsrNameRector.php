@@ -165,7 +165,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     public function refactor(Node $node)
     {
@@ -191,7 +191,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param iterable<string>|string $patterns
+     * @param  iterable<string>|string  $patterns
      */
     public function isMatches(string $value, $patterns): bool
     {
@@ -223,7 +223,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function rename(Node $node, callable $renamer): Node
     {
@@ -302,7 +302,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldLowerSnakeName(Node $node): bool
     {
@@ -333,7 +333,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldUcfirstCamelName(Node $node): bool
     {
@@ -430,7 +430,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldUpperSnakeName(Node $node): bool
     {
@@ -473,7 +473,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
+     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
     protected function shouldLcfirstCamelName(Node $node): bool
     {

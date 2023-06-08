@@ -130,8 +130,7 @@ class Discover
     /**
      * Filter classes implementing the given method using a callback for the \ReflectionMethod object.
      *
-     * @param \Closure(\ReflectionMethod):bool $callback
-     *
+     * @param  \Closure(\ReflectionMethod):bool  $callback
      * @return $this
      */
     public function withMethodReflection(string $method, \Closure $callback): static

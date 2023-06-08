@@ -97,8 +97,7 @@ trait ControllerCrudable
     /**
      * Display the specified resource.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
     public function show(Request $request, $id)
@@ -119,7 +118,7 @@ trait ControllerCrudable
     /**
      * Show the form for editing the specified resource.
      *
-     * @param mixed $id
+     * @param  mixed  $id
      */
     public function edit($id): View
     {
@@ -131,8 +130,7 @@ trait ControllerCrudable
     /**
      * Update the specified resource in storage.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
@@ -165,8 +163,7 @@ trait ControllerCrudable
     /**
      * Remove the specified resource from storage.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Request $request, $id)
@@ -193,7 +190,7 @@ trait ControllerCrudable
     }
 
     /**
-     * @param ?Model $model
+     * @param  ?Model  $model
      */
     public function handleFileUploads(Request $request, ?Model $model = null): void
     {

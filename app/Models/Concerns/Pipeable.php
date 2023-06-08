@@ -36,7 +36,7 @@ trait Pipeable
      *     ->get();
      * ```
      *
-     * @param array<callable> $pipes
+     * @param  array<callable>  $pipes
      */
     public function scopePipe(Builder $builder, ...$pipes): Builder
     {

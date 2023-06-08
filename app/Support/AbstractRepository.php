@@ -161,8 +161,7 @@ abstract class AbstractRepository
     /**
      * Find data by its primary key.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return Collection|Model
      */
     public function find($id, array $columns = ['*'])
@@ -203,7 +202,7 @@ abstract class AbstractRepository
     /**
      * Find data by field
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     public function findAllBy(string $attribute, $value, array $columns = ['*']): mixed
     {
@@ -273,8 +272,8 @@ abstract class AbstractRepository
     /**
      * Set searchable array.
      *
-     * @param array|string $key
-     * @param mixed $value
+     * @param  array|string  $key
+     * @param  mixed  $value
      */
     public function setSearchable($key, $value = null): self
     {
@@ -320,7 +319,7 @@ abstract class AbstractRepository
     /**
      * Filter results by given query params.
      *
-     * @param array|string $queries
+     * @param  array|string  $queries
      */
     public function search($queries): self
     {
@@ -431,7 +430,7 @@ abstract class AbstractRepository
     /**
      * Get an array with the values of a given column.
      *
-     * @param string $key
+     * @param  string  $key
      */
     public function pluck(string $value, ?string $key = null): array
     {
@@ -449,7 +448,7 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param null|int|mixed $per_page
+     * @param  null|int|mixed  $per_page
      */
     public function paginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
@@ -473,7 +472,7 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param null|int|mixed $per_page
+     * @param  null|int|mixed  $per_page
      */
     public function simplePaginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\Paginator
     {
@@ -520,7 +519,7 @@ abstract class AbstractRepository
     /**
      * Delete a entity in repository
      *
-     * @param mixed $entity
+     * @param  mixed  $entity
      *
      * @throws \Exception
      */
@@ -678,7 +677,7 @@ abstract class AbstractRepository
     /**
      * Add a search where clause to the query.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     protected function createSearchClause(Builder $query, string $param, string $column, $value, string $boolean = 'and'): void
     {
@@ -714,7 +713,7 @@ abstract class AbstractRepository
     /**
      * Add a range clause to the query.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     protected function createSearchRangeClause(Builder $query, $value, array $columns): bool
     {

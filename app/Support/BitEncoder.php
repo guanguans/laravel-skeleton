@@ -96,7 +96,7 @@ class BitEncoder implements BitEncoderContract
     /**
      * 包含.
      *
-     * @param mixed $item
+     * @param  mixed  $item
      *
      * @throws \InvalidArgumentException
      */
@@ -119,7 +119,7 @@ class BitEncoder implements BitEncoderContract
     /**
      * 缺少.
      *
-     * @param mixed $item
+     * @param  mixed  $item
      *
      * @throws \InvalidArgumentException
      */

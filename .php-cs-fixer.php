@@ -231,13 +231,13 @@ return (new Config())
         'phpdoc_align' => [
             'align' => 'left',
             'tags' => [
-                'method',
-                'param',
-                'property',
-                'return',
-                'throws',
-                'type',
-                'var',
+                // 'method',
+                // 'param',
+                // 'property',
+                // 'return',
+                // 'throws',
+                // 'type',
+                // 'var',
             ],
         ],
         'general_phpdoc_annotation_remove' => [
@@ -265,6 +265,10 @@ return (new Config())
                 'noinspection',
                 'var',
             ],
+        ],
+        'phpdoc_separation' => [
+            'groups' => [],
+            'skip_unlisted_annotations' => true,
         ],
 
         // return_notation

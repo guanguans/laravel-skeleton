@@ -86,7 +86,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Dynamically set attributes on the model.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     public function __set(string $key, $value): void
     {
@@ -211,7 +211,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Add hidden attributes for the model.
      *
-     * @param null|array|string $attributes
+     * @param  null|array|string  $attributes
      */
     public function addHidden($attributes = null): void
     {
@@ -223,8 +223,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Make the given, typically hidden, attributes visible.
      *
-     * @param array|string $attributes
-     *
+     * @param  array|string  $attributes
      * @return $this
      */
     public function withHidden($attributes)
@@ -257,7 +256,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Add visible attributes for the model.
      *
-     * @param null|array|string $attributes
+     * @param  null|array|string  $attributes
      */
     public function addVisible($attributes = null): void
     {
@@ -490,8 +489,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Set a given attribute on the model.
      *
-     * @param mixed $value
-     *
+     * @param  mixed  $value
      * @return $this
      */
     public function setAttribute(string $key, $value)
@@ -591,7 +589,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Determine if the given attribute exists.
      *
-     * @param mixed $offset
+     * @param  mixed  $offset
      */
     public function offsetExists($offset): bool
     {
@@ -601,7 +599,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Get the value for a given offset.
      *
-     * @param mixed $offset
+     * @param  mixed  $offset
      */
     public function offsetGet($offset): mixed
     {
@@ -611,8 +609,8 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Set the value for a given offset.
      *
-     * @param mixed $offset
-     * @param mixed $value
+     * @param  mixed  $offset
+     * @param  mixed  $value
      */
     public function offsetSet($offset, $value): void
     {
@@ -622,7 +620,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Unset the value for a given offset.
      *
-     * @param mixed $offset
+     * @param  mixed  $offset
      */
     public function offsetUnset($offset): void
     {
@@ -712,7 +710,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Get the value of an attribute using its mutator.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     protected function mutateAttribute(string $key, $value): mixed
     {
@@ -722,7 +720,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Get the value of an attribute using its mutator for array conversion.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     protected function mutateAttributeForArray(string $key, $value): mixed
     {
@@ -761,7 +759,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Cast an attribute to a native PHP type.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     protected function castAttribute(string $key, $value): mixed
     {
@@ -801,7 +799,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Encode the given value as JSON.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     protected function asJson($value): string
     {

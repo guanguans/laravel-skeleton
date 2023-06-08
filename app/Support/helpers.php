@@ -13,7 +13,7 @@ if (! function_exists('make')) {
     /**
      * @psalm-param string|array<string, mixed> $abstract
      *
-     * @param mixed $abstract
+     * @param  mixed  $abstract
      *
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
@@ -50,9 +50,9 @@ if (! function_exists('make')) {
 
 if (! function_exists('resolve_class_from')) {
     /**
-     * @param string $path 文件路径
-     * @param null|string $vendorPath 供应商路径
-     * @param null|string $vendorNamespace 供应商命名空间
+     * @param  string  $path 文件路径
+     * @param  null|string  $vendorPath 供应商路径
+     * @param  null|string  $vendorNamespace 供应商命名空间
      */
     function resolve_class_from(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
     {
@@ -296,8 +296,7 @@ if (! function_exists('is_json')) {
     /**
      * If the string is valid JSON, return true, otherwise return false
      *
-     * @param string $str the string to check
-     *
+     * @param  string  $str the string to check
      * @return bool the function is_json() is returning a boolean value
      */
     function is_json(string $str): bool
@@ -346,11 +345,10 @@ if (! function_exists('user_http_build_query')) {
         /**
          * 转换值是非标量的情况
          *
-         * @param string $key
-         * @param array|object $value
-         * @param string $argSeparator
-         * @param int $encType
-         *
+         * @param  string  $key
+         * @param  array|object  $value
+         * @param  string  $argSeparator
+         * @param  int  $encType
          * @return string
          */
         $toQueryStr = static function (string $key, $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
@@ -419,7 +417,7 @@ if (! function_exists('call')) {
     /**
      * Call the given Closure / class@method and inject its dependencies.
      *
-     * @param callable|string $callback
+     * @param  callable|string  $callback
      */
     function call($callback, array $parameters = [], ?string $defaultMethod = null): mixed
     {
@@ -429,7 +427,7 @@ if (! function_exists('call')) {
 
 if (! function_exists('catch_resource_usage')) {
     /**
-     * @param callable|string $callback
+     * @param  callable|string  $callback
      */
     function catch_resource_usage($callback, ...$parameter): string
     {
@@ -444,7 +442,7 @@ if (! function_exists('catch_resource_usage')) {
 
 if (! function_exists('catch_query_log')) {
     /**
-     * @param callable|string $callback
+     * @param  callable|string  $callback
      */
     function catch_query_log($callback, ...$parameter): array
     {
@@ -488,8 +486,7 @@ if (! function_exists('dd_to_array')) {
 
 if (! function_exists('array_reduce_with_keys')) {
     /**
-     * @param null $carry
-     *
+     * @param  null  $carry
      * @return null|mixed
      */
     function array_reduce_with_keys(array $array, callable $callback, $carry = null): mixed
