@@ -76,7 +76,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
      */
     public static function fromString(string $queryString): self
     {
-        return new HttpQuery($queryString);
+        return new self($queryString);
     }
 
     /**
@@ -88,7 +88,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
      */
     public static function fromArray(array $queryArray): self
     {
-        return new HttpQuery($queryArray);
+        return new self($queryArray);
     }
 
     /**
@@ -178,7 +178,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     {
         $this->initArray();
 
-        return isset($this->array[$key]) && (\is_array($this->array[$key]) || $this->array[$key] instanceof HttpQuery);
+        return isset($this->array[$key]) && (\is_array($this->array[$key]) || $this->array[$key] instanceof self);
     }
 
     /**
@@ -198,7 +198,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     {
         $currentValue = $this->get($key);
 
-        $currentValueArray = $currentValue instanceof HttpQuery ? $currentValue->toArray() : [$currentValue];
+        $currentValueArray = $currentValue instanceof self ? $currentValue->toArray() : [$currentValue];
 
         $newQueryArray = $this->appendToArray($currentValueArray, $value);
 
@@ -256,7 +256,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     {
         $fromKeyValue = $this->get($fromKey);
 
-        if ($fromKeyValue instanceof HttpQuery) {
+        if ($fromKeyValue instanceof self) {
             $isAssociativeArray = $this->isAssociativeArray($fromKeyValue->array ?? []);
 
             foreach ($fromKeyValue as $key => $value) {
@@ -287,7 +287,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
         $this->boolToInt = true;
 
         foreach ($this->array() as $value) {
-            if ($value instanceof HttpQuery) {
+            if ($value instanceof self) {
                 $value->boolToInt();
             }
         }
@@ -309,7 +309,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
         $this->boolToInt = false;
 
         foreach ($this->array() as $value) {
-            if ($value instanceof HttpQuery) {
+            if ($value instanceof self) {
                 $value->boolToString();
             }
         }
@@ -331,7 +331,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
         $this->separator = $separator;
 
         foreach ($this->array() as $value) {
-            if ($value instanceof HttpQuery) {
+            if ($value instanceof self) {
                 $value->separator($separator);
             }
         }
@@ -354,7 +354,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
             $this->spaceCharacterEncoding = $spaceCharacterEncodingConst;
 
             foreach ($this->array() as $value) {
-                if ($value instanceof HttpQuery) {
+                if ($value instanceof self) {
                     $value->spaceCharacterEncoding($spaceCharacterEncodingConst);
                 }
             }
@@ -683,12 +683,12 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     {
         $newQuery = [];
 
-        if ($query instanceof HttpQuery) {
-            $newQuery = new HttpQuery($query->toArray());
+        if ($query instanceof self) {
+            $newQuery = new self($query->toArray());
         }
 
         foreach ($query as $key => $value) {
-            if (\is_array($value) || $value instanceof HttpQuery) {
+            if (\is_array($value) || $value instanceof self) {
                 $value = $this->replaceDotsAndSpacesInArrayKeys($value);
             }
 
@@ -863,7 +863,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
     private function cleanArray(array $array): array
     {
         foreach ($array as $key => $value) {
-            if ($value instanceof HttpQuery) {
+            if ($value instanceof self) {
                 $array[$key] = $value->toArray();
             }
         }
@@ -888,7 +888,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator
             return \is_array($value) ? $this->newWithSameSettings($value) : $value;
         }
 
-        if ($this->array[$key] instanceof HttpQuery || \is_array($this->array[$key])) {
+        if ($this->array[$key] instanceof self || \is_array($this->array[$key])) {
             if (\is_array($this->array[$key])) {
                 $this->array[$key] = $this->newWithSameSettings($this->array[$key]);
             }
@@ -997,12 +997,12 @@ final class HttpQuery implements \ArrayAccess, \Iterator
      *
      * @return HttpQuery<mixed[]>|mixed[]
      */
-    private function boolsToString(HttpQuery|array $array): HttpQuery|array
+    private function boolsToString(self|array $array): self|array
     {
         foreach ($array as $key => $value) {
             if (\is_bool($value)) {
                 $array[$key] = $value ? 'true' : 'false';
-            } elseif ($value instanceof HttpQuery || \is_array($value)) {
+            } elseif ($value instanceof self || \is_array($value)) {
                 $array[$key] = $this->boolsToString($value);
             }
         }

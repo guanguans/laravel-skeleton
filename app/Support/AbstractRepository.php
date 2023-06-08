@@ -105,7 +105,7 @@ abstract class AbstractRepository
             return \call_user_func_array([$this, $scope], $parameters);
         }
 
-        $className = \get_class($this);
+        $className = static::class;
 
         throw new \BadMethodCallException("Call to undefined method {$className}::{$method}()");
     }
@@ -244,7 +244,7 @@ abstract class AbstractRepository
     public function orderBy(string $column, string $direction): self
     {
         // Ensure the sort is valid
-        if (false === \in_array($column, $this->getOrderable())
+        if (false === \in_array($column, $this->getOrderable(), true)
             && false === \array_key_exists($column, $this->getOrderable())
         ) {
             return $this;
@@ -255,7 +255,7 @@ abstract class AbstractRepository
 
         return $this->addScopeQuery(function ($query) use ($column, $direction) {
             // Get valid sort order
-            $direction = \in_array(strtolower($direction), ['desc', 'asc']) ? $direction : 'asc';
+            $direction = \in_array(strtolower($direction), ['desc', 'asc'], true) ? $direction : 'asc';
 
             // Check for table column mask
             $column = Arr::get($this->getOrderable(), $column, $column);
@@ -360,7 +360,7 @@ abstract class AbstractRepository
                         @[$column, $foreign_key, $related_key, $alias] = explode(',', $options);
 
                         // Join the table if it hasn't already been joined
-                        if (false == isset($joined[$joining_table])) {
+                        if (false === isset($joined[$joining_table])) {
                             $joined[$joining_table] = $this->addSearchJoin(
                                 $query,
                                 $joining_table,
@@ -670,7 +670,7 @@ abstract class AbstractRepository
         }
 
         // Remove alias prefix indicator
-        if (false != preg_match('/^_\./', $column)) {
+        if (false !== preg_match('/^_\./', $column)) {
             return preg_replace('/^_\./', '', $column);
         }
 
@@ -730,7 +730,7 @@ abstract class AbstractRepository
 
         // Perform a range based query if the range is valid
         // and the separator matches.
-        if (':' === substr($value, 2, 1) && \in_array($range_type, $this->range_keys)) {
+        if (':' === substr($value, 2, 1) && \in_array($range_type, $this->range_keys, true)) {
             // Get the true value
             $value = substr($value, 3);
 

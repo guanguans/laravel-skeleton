@@ -56,7 +56,7 @@ class Discover
 
         if (! $this->basePath) {
             // @phpstan-ignore-next-line
-            $this->basePath = (string) Str::of($this->app->path())->after($this->projectPath)->trim(DIRECTORY_SEPARATOR);
+            $this->basePath = (string) Str::of($this->app->path())->after($this->projectPath)->trim(\DIRECTORY_SEPARATOR);
         }
     }
 
@@ -287,9 +287,9 @@ class Discover
     protected function buildPath(): string
     {
         return (string) Str::of($this->path)
-            ->when($this->path, static fn (Stringable $string): Stringable => $string->start(DIRECTORY_SEPARATOR))
+            ->when($this->path, static fn (Stringable $string): Stringable => $string->start(\DIRECTORY_SEPARATOR))
             ->prepend($this->basePath)
-            ->start(DIRECTORY_SEPARATOR)
+            ->start(\DIRECTORY_SEPARATOR)
             ->prepend($this->projectPath);
     }
 
@@ -300,11 +300,11 @@ class Discover
     {
         return (string) Str::of($file->getRealPath())
             ->after($this->projectPath)
-            ->trim(DIRECTORY_SEPARATOR)
+            ->trim(\DIRECTORY_SEPARATOR)
             ->beforeLast('.php')
             ->ucfirst()
             ->replace(
-                [DIRECTORY_SEPARATOR, ucfirst($this->basePath.'\\')],
+                [\DIRECTORY_SEPARATOR, ucfirst($this->basePath.'\\')],
                 ['\\', $this->baseNamespace],
             );
     }

@@ -30,7 +30,7 @@ trait AllowedFilterable
     {
         if (
             (request()->has($name) || null !== $default)
-            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore))
+            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             if (\is_array($value)) {
                 return $query->whereIn($query->qualifyColumn($internalName ?: $name), $value);
@@ -46,7 +46,7 @@ trait AllowedFilterable
     {
         if (
             (request()->has($name) || null !== $default)
-            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore))
+            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             $wrappedProperty = $query->getQuery()->getGrammar()->wrap($query->qualifyColumn($internalName ?: $name));
 
@@ -80,7 +80,7 @@ trait AllowedFilterable
     {
         if (
             (request()->has($name) || null !== $default)
-            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore))
+            && ! \in_array($value = request()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             $nameParts = collect(explode('.', $internalName ?: $name));
 
@@ -144,7 +144,7 @@ trait AllowedFilterable
                 : ($column = $direction and $direction = 'asc');
             }
 
-            if (! \in_array($column, $allowedSorts)) {
+            if (! \in_array($column, $allowedSorts, true)) {
                 continue;
             }
 

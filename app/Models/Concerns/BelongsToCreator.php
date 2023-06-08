@@ -41,6 +41,6 @@ trait BelongsToCreator
 
     public function isCreatedBy(User $user): bool
     {
-        return $this->creator_id == $user->id;
+        return $this->creator_id === $user->id;
     }
 }

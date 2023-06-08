@@ -100,7 +100,7 @@ trait Cacheable
         }
 
         // Use the called class name as the tag
-        $tag = \get_called_class();
+        $tag = static::class;
 
         return self::getCacheInstance()->tags(['repositories', $tag])->remember(
             $this->getCacheKey($method, $args, $tag),
@@ -120,7 +120,7 @@ trait Cacheable
         }
 
         // Use the called class name as the tag
-        $tag = \get_called_class();
+        $tag = static::class;
 
         return self::getCacheInstance()->tags(['repositories', $tag])->flush();
     }

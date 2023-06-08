@@ -459,7 +459,7 @@ class SqlFormatter
             }
         }
         // If there are unmatched parentheses
-        if ($highlight && false !== array_search('block', $indent_types)) {
+        if ($highlight && false !== array_search('block', $indent_types, true)) {
             $return .= "\n".self::highlightError('WARNING: unclosed parentheses or section');
         }
         // Replace tab characters with the configuration tab character
@@ -1049,6 +1049,6 @@ class SqlFormatter
             return self::$cli;
         }
 
-        return 'cli' === php_sapi_name();
+        return 'cli' === \PHP_SAPI;
     }
 }

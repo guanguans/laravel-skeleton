@@ -24,8 +24,8 @@ use Symfony\Component\VarDumper\VarDumper;
 abstract class FoundationSdk
 {
     use Conditionable;
-    use Tappable;
     use Macroable;
+    use Tappable;
 
     protected array $config;
 

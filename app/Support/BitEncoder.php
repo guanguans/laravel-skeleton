@@ -295,7 +295,7 @@ class BitEncoder implements BitEncoderContract
             throw new \InvalidArgumentException('The set must be an array with no duplicate elements.');
         }
 
-        if (($count = \count($set)) > ($maxCount = PHP_INT_SIZE == 4 ? 31 : 63)) {
+        if (($count = \count($set)) > ($maxCount = \PHP_INT_SIZE === 4 ? 31 : 63)) {
             throw new \LengthException("The number({$maxCount}) of elements is greater than the maximum length({$count}).");
         }
 

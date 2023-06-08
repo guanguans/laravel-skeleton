@@ -20,7 +20,7 @@ if (! function_exists('make')) {
      */
     function make($abstract, array $parameters = []): mixed
     {
-        if (! in_array(gettype($abstract), ['string', 'array'])) {
+        if (! in_array(gettype($abstract), ['string', 'array'], true)) {
             throw new \InvalidArgumentException(
                 sprintf('Invalid argument type(string/array): %s.', gettype($abstract))
             );
@@ -148,7 +148,7 @@ if (! function_exists('environment')) {
             return 'cli';
         }
 
-        if ('cli' === php_sapi_name()) {
+        if ('cli' === PHP_SAPI) {
             return 'cli';
         }
 

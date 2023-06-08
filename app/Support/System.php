@@ -89,17 +89,17 @@ class System
 
         switch (1) {
             case preg_match(self::RegExX86, $arch):
-                return System::X86;
+                return self::X86;
 
                 break;
 
             case preg_match(self::RegExPPC, $arch):
-                return System::PPC;
+                return self::PPC;
 
                 break;
 
             case preg_match(self::RegExARM, $arch):
-                return System::ARM;
+                return self::ARM;
 
                 break;
 
@@ -247,7 +247,7 @@ class System
                 preg_match('/MemTotal:\s+(\d+)/', $meminfo, $matches);
 
                 if (isset($matches[1])) {
-                    return \intval(\intval($matches[1]) / 1024);
+                    return (int) ((int) $matches[1] / 1024);
                 }
 
                 throw new \Exception('Could not find MemTotal in /proc/meminfo.');
@@ -282,7 +282,7 @@ class System
                 throw new \Exception('Could not find MemFree in /proc/meminfo.');
 
             case 'Darwin':
-                return \intval(\intval(shell_exec('sysctl -n vm.page_free_count')) / 1024 / 1024);
+                return (int) ((int) shell_exec('sysctl -n vm.page_free_count') / 1024 / 1024);
 
             default:
                 throw new \Exception(self::getOS().' not supported.');

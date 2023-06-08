@@ -23,7 +23,7 @@ trait Filterable
         $input = $input ?: request()->query();
 
         foreach ($input as $key => $value) {
-            if ($value == ($this->ignoreFilterValue ?? 'all')) {
+            if ($value === ($this->ignoreFilterValue ?? 'all')) {
                 continue;
             }
 
@@ -42,7 +42,7 @@ trait Filterable
 
     public function isFilterable(string $key): bool
     {
-        return property_exists($this, 'filterable') && \in_array($key, $this->filterable);
+        return property_exists($this, 'filterable') && \in_array($key, $this->filterable, true);
     }
 
     /**

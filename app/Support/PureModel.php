@@ -99,7 +99,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
     public function __isset(string $key): bool
     {
         return (isset($this->attributes[$key]) || isset($this->relations[$key]))
-               || ($this->hasGetMutator($key) && ! \is_null($this->getAttributeValue($key)));
+               || ($this->hasGetMutator($key) && null !== $this->getAttributeValue($key));
     }
 
     /**
@@ -372,7 +372,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
         // If the key is in the "fillable" array, we can of course assume that it's
         // a fillable attribute. Otherwise, we will check the guarded array when
         // we need to determine if the attribute is black-listed on the model.
-        if (\in_array($key, $this->fillable)) {
+        if (\in_array($key, $this->fillable, true)) {
             return true;
         }
 
@@ -388,7 +388,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
      */
     public function isGuarded(string $key): bool
     {
-        return \in_array($key, $this->guarded) || $this->guarded == ['*'];
+        return \in_array($key, $this->guarded, true) || $this->guarded === ['*'];
     }
 
     /**
@@ -396,7 +396,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
      */
     public function totallyGuarded(): bool
     {
-        return 0 == \count($this->fillable) && $this->guarded == ['*'];
+        return 0 === \count($this->fillable) && $this->guarded === ['*'];
     }
 
     /**
@@ -451,7 +451,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
         // will not perform the cast on those attributes to avoid any confusion.
         foreach ($this->casts as $key => $value) {
             if (! \array_key_exists($key, $attributes)
-                || \in_array($key, $mutatedAttributes)) {
+                || \in_array($key, $mutatedAttributes, true)) {
                 continue;
             }
 
@@ -505,7 +505,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
             return $this->{$method}($value);
         }
 
-        if ($this->isJsonCastable($key) && ! \is_null($value)) {
+        if ($this->isJsonCastable($key) && null !== $value) {
             $value = $this->asJson($value);
         }
 
@@ -556,7 +556,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
     public function getMutatedAttributes(): array
     {
         /** @var string $class */
-        $class = \get_class($this);
+        $class = static::class;
 
         if (! isset(static::$mutatorCache[$class])) {
             static::cacheMutatedAttributes($class);
@@ -765,7 +765,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, Arrayable, 
      */
     protected function castAttribute(string $key, $value): mixed
     {
-        if (\is_null($value)) {
+        if (null === $value) {
             return $value;
         }
 
