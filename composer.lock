@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fbbed7774f6f4f8b059b346cdf8ac51",
+    "content-hash": "8e72616f6ff60c15d0371b07a8c65780",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -928,6 +928,61 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "envant/fireable",
+            "version": "v1.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/envant/fireable.git",
+                "reference": "572f3ab74d8a3631e4fa8acf12998ef376fac87d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/envant/fireable/zipball/572f3ab74d8a3631e4fa8acf12998ef376fac87d",
+                "reference": "572f3ab74d8a3631e4fa8acf12998ef376fac87d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.8|^6|^7|^8|^9|^10.0",
+                "illuminate/support": "^5.8|^6|^7|^8|^9|^10.0",
+                "php": "^7.2|^8"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "orchestra/testbench": "^3.8 || ^4 || ^5 || ^6 || ^7|^8.0",
+                "phpunit/phpunit": "^7.5 || ^8 || ^9.5",
+                "sempro/phpunit-pretty-print": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Envant\\Fireable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Boris Lepikhin",
+                    "email": "info@envant.me",
+                    "homepage": "https://envant.me"
+                }
+            ],
+            "description": "An elegant way to trigger events based on attributes changes",
+            "homepage": "https://github.com/envant/fireable",
+            "keywords": [
+                "Fireable",
+                "event",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/envant/fireable/issues",
+                "source": "https://github.com/envant/fireable/tree/v1.0.11"
+            },
+            "time": "2023-03-08T22:51:16+00:00"
         },
         {
             "name": "erusev/parsedown",

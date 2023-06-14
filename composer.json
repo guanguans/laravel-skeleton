@@ -16,6 +16,7 @@
         "beyondcode/laravel-websockets": "^1.14",
         "biiiiiigmonster/hasin": "^3.0",
         "cerbero/command-validator": "^2.5",
+        "envant/fireable": "^1.0",
         "f9webltd/laravel-api-response-helpers": "^1.5",
         "guanguans/laravel-dump-sql": "^2.3",
         "guanguans/laravel-exception-notify": "^2.15",
