@@ -56,6 +56,7 @@
         "bennett-treptow/laravel-migration-generator": "^4.3",
         "brainmaestro/composer-git-hooks": "^3.0@alpha",
         "deployer/deployer": "^7.3",
+        "elao/enum": "^2.2",
         "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.19",
         "guanguans/ai-commit": "^1.6",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "342347968bd2e330fe898e94bae555e8",
+    "content-hash": "6e5d6aef52c96dc5d9bde0fcc7bf8c04",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -12750,6 +12750,90 @@
                 }
             ],
             "time": "2023-04-19T08:29:55+00:00"
+        },
+        {
+            "name": "elao/enum",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Elao/PhpEnums.git",
+                "reference": "d555de9dcffc36db5fe18d2abd528e380874e59b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/d555de9dcffc36db5fe18d2abd528e380874e59b",
+                "reference": "d555de9dcffc36db5fe18d2abd528e380874e59b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "composer/semver": "^3.2",
+                "doctrine/dbal": "^3.2",
+                "doctrine/doctrine-bundle": "^2.5",
+                "doctrine/orm": "^2.10",
+                "ext-pdo_sqlite": "*",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-symfony": "^1.2",
+                "symfony/browser-kit": "^5.4|^6.0",
+                "symfony/config": "^5.4|^6.0",
+                "symfony/dependency-injection": "^5.4.2|^6.0.1",
+                "symfony/filesystem": "^5.4|^6.0",
+                "symfony/form": "^5.4|^6.0",
+                "symfony/framework-bundle": "^5.4|^6.0",
+                "symfony/http-kernel": "^5.4.2|^6.0.1",
+                "symfony/phpunit-bridge": "^5.4|^6.0",
+                "symfony/var-dumper": "^5.4|^6.0",
+                "symfony/yaml": "^5.4|^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Bridge/Symfony/VarDumper/Resources/register_caster.php"
+                ],
+                "psr-4": {
+                    "Elao\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Elao",
+                    "homepage": "https://www.elao.com"
+                },
+                {
+                    "name": "Maxime Steinhausser",
+                    "email": "maxime.steinhausser@gmail.com",
+                    "homepage": "https://github.com/ogizanagi"
+                }
+            ],
+            "description": "Extended PHP enums capabilities and frameworks integrations",
+            "homepage": "https://github.com/Elao/PhpEnums",
+            "keywords": [
+                "doctrine",
+                "enum",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/Elao/PhpEnums/issues",
+                "source": "https://github.com/Elao/PhpEnums/tree/v2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ogizanagi",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-24T15:08:02+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
