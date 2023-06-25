@@ -34,22 +34,16 @@ $finder = Finder::create()
         'vendor/',
         '__snapshots__/',
     ])
-    ->append([
-        __FILE__,
-        // __DIR__.'/bin/facades.php',
-        // __DIR__.'/.phpstorm.meta.php',
-        // __DIR__.'/_ide_helper.php',
-        __DIR__.'/composer-unused.php',
-        __DIR__.'/doctum.php',
-        __DIR__.'/rector.php',
-        __DIR__.'/rector-laravel.php',
-        __DIR__.'/monorepo-builder.php',
-        __DIR__.'/phparkitect.php',
-        // __DIR__.'/examples/soar.options.docblock.php',
-        __DIR__.'/examples/soar.options.example.php',
-        __DIR__.'/examples/soar.options.full.php',
-        __DIR__.'/deploy.example.php',
-    ])
+    ->append(array_filter(
+        glob(__DIR__.'/{*,.*}.php', GLOB_BRACE),
+        static fn (string $filename): bool => ! in_array($filename, [
+            __DIR__.'/.phpstorm.meta.php',
+            __DIR__.'/_ide_helper.php',
+            __DIR__.'/_ide_helper_models.php',
+            __DIR__.'/facades.php',
+            __DIR__.'/server.php',
+        ], true)
+    ))
     ->notPath([
         'bootstrap/*',
         'storage/*',
@@ -59,7 +53,10 @@ $finder = Finder::create()
     ->name('*.php')
     ->notName([
         '*.blade.php',
+        '.phpstorm.meta.php',
         '_ide_helper.php',
+        '_ide_helper_models.php',
+        'facades.php',
     ])
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
@@ -204,7 +201,8 @@ return (new Config())
         // list_notation
 
         // namespace_notation
-        'no_blank_lines_before_namespace' => false,
+        // 'no_blank_lines_before_namespace' => false,
+        'blank_lines_before_namespace' => true,
 
         // naming
 

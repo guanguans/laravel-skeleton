@@ -669,7 +669,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      *
      * @throws \Exception
      */
-    private function replaceDotsAndSpacesInArrayKeys(array|HttpQuery $query): array|HttpQuery
+    private function replaceDotsAndSpacesInArrayKeys(array|self $query): array|self
     {
         $newQuery = [];
 
@@ -710,7 +710,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
     /**
      * @param  array<mixed>|self  $query
      */
-    private function arrayContainsDotOrSpacesInKey(array|HttpQuery $query): bool
+    private function arrayContainsDotOrSpacesInKey(array|self $query): bool
     {
         foreach ($query as $key => $value) {
             if (\is_array($value) && $this->arrayContainsDotOrSpacesInKey($value)) {
