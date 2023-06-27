@@ -297,7 +297,7 @@ abstract class AbstractRepository
     {
         $return = $this->getSearchable();
 
-        return array_values(array_map(fn ($value, $key) => (\is_array($value) || false === is_numeric($key)) ? $key : $value, $return, array_keys($return)));
+        return array_values(array_map(static fn ($value, $key) => (\is_array($value) || false === is_numeric($key)) ? $key : $value, $return, array_keys($return)));
     }
 
     /**
@@ -404,7 +404,7 @@ abstract class AbstractRepository
      */
     public function limit(int $limit): self
     {
-        return $this->addScopeQuery(fn ($query) => $query->limit($limit));
+        return $this->addScopeQuery(static fn ($query) => $query->limit($limit));
     }
 
     /**

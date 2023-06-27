@@ -13,24 +13,24 @@ class StrMacro
 {
     public static function appendIf(): callable
     {
-        return fn ($value, $suffix) => Str::endsWith($value, $suffix) ? $value : $value.$suffix;
+        return static fn ($value, $suffix) => Str::endsWith($value, $suffix) ? $value : $value.$suffix;
     }
 
     public static function prependIf(): callable
     {
-        return fn ($value, $prefix) => Str::startsWith($value, $prefix) ? $value : $prefix.$value;
+        return static fn ($value, $prefix) => Str::startsWith($value, $prefix) ? $value : $prefix.$value;
     }
 
     public static function mbSubstrCount(): callable
     {
         // return fn($haystack, $needle, $encoding = null) => mb_substr_count($haystack, $needle, $encoding);
 
-        return fn ($haystack, $needle, $encoding = null) => mb_substr_count($haystack, $needle, $encoding);
+        return static fn ($haystack, $needle, $encoding = null) => mb_substr_count($haystack, $needle, $encoding);
     }
 
     public static function pipe(): callable
     {
-        return fn ($value, callable $callback) => $callback($value);
+        return static fn ($value, callable $callback) => $callback($value);
     }
 
     /**
@@ -38,7 +38,7 @@ class StrMacro
      */
     public static function acronym(): callable
     {
-        return function ($string, $delimiter = '') {
+        return static function ($string, $delimiter = '') {
             if (empty($string)) {
                 return '';
             }

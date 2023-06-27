@@ -118,7 +118,7 @@ class CollectionMacro
 
     public function filterFilled(): callable
     {
-        return fn () => $this->filter(fn ($value) => filled($value));
+        return fn () => $this->filter(static fn ($value) => filled($value));
     }
 
     public function reduces(): callable

@@ -30,12 +30,12 @@ class WhereInsQueryBuilderMacro
             $rawColumns = implode(',', $sterilizedColumns);
 
             $values instanceof Arrayable and $values = $values->toArray();
-            $values = array_map(function ($value) use ($columns) {
+            $values = array_map(static function ($value) use ($columns) {
                 if (array_is_list($value)) {
                     return $value;
                 }
 
-                return array_reduce($columns, function ($sortedValue, $column) use ($value) {
+                return array_reduce($columns, static function ($sortedValue, $column) use ($value) {
                     $sortedValue[$column] = $value[$column] ?? trigger_error(
                         sprintf('The value of the column is not found in the array.: %s', $column),
                         E_USER_ERROR

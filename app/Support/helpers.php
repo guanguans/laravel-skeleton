@@ -111,7 +111,7 @@ if (! function_exists('resolve_facade_docblock')) {
                         };
 
                         $type = str($parameter->getType()?->getName())
-                            ->whenNotEmpty(fn (Stringable $stringable): Stringable => $stringable->append(' '));
+                            ->whenNotEmpty(static fn (Stringable $stringable): Stringable => $stringable->append(' '));
 
                         return $parameter->isDefaultValueAvailable()
                             ? sprintf('%s$%s = %s', $type, $parameter->getName(), $defaultValue($parameter->getDefaultValue()))
@@ -215,7 +215,7 @@ if (! function_exists('partical')) {
      */
     function partical(callable $function, ...$args): callable
     {
-        return fn (...$moreArgs) => $function(...$args, ...$moreArgs);
+        return static fn (...$moreArgs) => $function(...$args, ...$moreArgs);
     }
 }
 
@@ -225,8 +225,8 @@ if (! function_exists('curry')) {
      */
     function curry(callable $function): callable
     {
-        $accumulator = function ($arguments) use ($function, &$accumulator) {
-            return function (...$args) use ($function, $arguments, $accumulator) {
+        $accumulator = static function ($arguments) use ($function, &$accumulator) {
+            return static function (...$args) use ($function, $arguments, $accumulator) {
                 $arguments = array_merge($arguments, $args);
                 $reflection = new ReflectionFunction($function);
                 $totalArguments = $reflection->getNumberOfRequiredParameters();
@@ -251,8 +251,8 @@ if (! function_exists('compose')) {
     {
         return array_reduce(
             $functions,
-            fn (callable $carry, callable $function) => fn ($x) => $function($carry($x)),
-            fn ($x) => $x
+            static fn (callable $carry, callable $function) => static fn ($x) => $function($carry($x)),
+            static fn ($x) => $x
         );
     }
 }
@@ -260,7 +260,7 @@ if (! function_exists('compose')) {
 if (! function_exists('memoize')) {
     function memoize(callable $function): callable
     {
-        return function () use ($function) {
+        return static function () use ($function) {
             static $cache = [];
 
             $args = func_get_args();
@@ -280,7 +280,7 @@ if (! function_exists('memoize')) {
 if (! function_exists('once')) {
     function once(callable $function): callable
     {
-        return function (...$args) use ($function) {
+        return static function (...$args) use ($function) {
             static $called = false;
             if ($called) {
                 return;
@@ -409,7 +409,7 @@ if (! function_exists('validate')) {
 if (! function_exists('array_filter_filled')) {
     function array_filter_filled(array $array): array
     {
-        return array_filter($array, fn ($item) => filled($item));
+        return array_filter($array, static fn ($item) => filled($item));
     }
 }
 
@@ -448,7 +448,7 @@ if (! function_exists('catch_query_log')) {
     {
         return (new Pipeline(app()))
             ->send($callback)
-            ->through(function ($callback, Closure $next) {
+            ->through(static function ($callback, Closure $next) {
                 DB::enableQueryLog();
                 DB::flushQueryLog();
 
@@ -458,7 +458,7 @@ if (! function_exists('catch_query_log')) {
 
                 return $queryLog;
             })
-            ->then(function ($callback) use ($parameter) {
+            ->then(static function ($callback) use ($parameter) {
                 app()->call($callback, $parameter);
 
                 return DB::getQueryLog();

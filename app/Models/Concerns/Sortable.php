@@ -15,7 +15,7 @@ trait Sortable
 {
     public static function bootSortableTrait(): void
     {
-        static::creating(function (Model $model): void {
+        static::creating(static function (Model $model): void {
             if ($model->shouldSortWhenCreating()) {
                 $model->setHighestOrderNumber();
             }

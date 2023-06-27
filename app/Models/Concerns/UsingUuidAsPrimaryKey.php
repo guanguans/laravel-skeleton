@@ -13,7 +13,7 @@ trait UsingUuidAsPrimaryKey
 {
     public static function bootUsingUuidAsPrimaryKey(): void
     {
-        static::creating(function (self $model): void {
+        static::creating(static function (self $model): void {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = Str::orderedUuid()->toString();
             }

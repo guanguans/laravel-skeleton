@@ -338,7 +338,7 @@ class System
         $diskStat2 = self::getDiskStats();
 
         // Remove invalid disks
-        $diskStat = array_filter($diskStat, function ($disk) {
+        $diskStat = array_filter($diskStat, static function ($disk) {
             foreach (self::INVALIDDISKS as $filter) {
                 if (! isset($disk[2])) {
                     return false;
@@ -351,7 +351,7 @@ class System
             return true;
         });
 
-        $diskStat2 = array_filter($diskStat2, function ($disk) {
+        $diskStat2 = array_filter($diskStat2, static function ($disk) {
             foreach (self::INVALIDDISKS as $filter) {
                 if (! isset($disk[2])) {
                     return false;
@@ -397,7 +397,7 @@ class System
         $interfaces = scandir('/sys/class/net', SCANDIR_SORT_NONE);
 
         // Remove all unwanted interfaces
-        $interfaces = array_filter($interfaces, function ($interface) {
+        $interfaces = array_filter($interfaces, static function ($interface) {
             foreach (self::INVALIDNETINTERFACES as $filter) {
                 if (str_contains($interface, $filter)) {
                     return false;
@@ -443,7 +443,7 @@ class System
         $cpus = explode("\n", $cpustats);
 
         // Remove non-CPU lines
-        $cpus = array_filter($cpus, fn ($cpu) => preg_match('/^cpu[0-999]/', $cpu));
+        $cpus = array_filter($cpus, static fn ($cpu) => preg_match('/^cpu[0-999]/', $cpu));
 
         foreach ($cpus as $cpu) {
             $cpu = explode(' ', $cpu);
@@ -513,10 +513,10 @@ class System
         $diskstats = explode("\n", $diskstats);
 
         // Remove excess spaces
-        $diskstats = array_map(fn ($data) => preg_replace('/\t+/', ' ', trim($data)), $diskstats);
+        $diskstats = array_map(static fn ($data) => preg_replace('/\t+/', ' ', trim($data)), $diskstats);
 
         // Remove empty lines
-        $diskstats = array_filter($diskstats, fn ($data) => ! empty($data));
+        $diskstats = array_filter($diskstats, static fn ($data) => ! empty($data));
 
         $data = [];
         foreach ($diskstats as $disk) {

@@ -61,11 +61,11 @@ class HandlerStack implements \Stringable
     private $cached;
 
     /**
-     * @param null|(callable(mixed): mixed) $handler underlying HTTP handler
+     * @param  null|(callable(mixed): mixed)  $handler underlying HTTP handler
      */
     public function __construct(?callable $handler = null)
     {
-        $this->handler = $handler ?: fn ($passable) => $passable;
+        $this->handler = $handler ?: static fn ($passable) => $passable;
     }
 
     /**
@@ -157,8 +157,8 @@ class HandlerStack implements \Stringable
     /**
      * Unshift a middleware to the bottom of the stack.
      *
-     * @param  string  $name name to register for this middleware
      * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $name name to register for this middleware
      */
     public function unshift(callable $middleware, ?string $name = null): void
     {
@@ -169,8 +169,8 @@ class HandlerStack implements \Stringable
     /**
      * Push a middleware to the top of the stack.
      *
-     * @param  string  $name name to register for this middleware
      * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $name name to register for this middleware
      */
     public function push(callable $middleware, string $name = ''): void
     {
@@ -182,8 +182,8 @@ class HandlerStack implements \Stringable
      * Add a middleware before another middleware by name.
      *
      * @param  string  $findName Middleware to find
-     * @param  string  $withName name to register for this middleware
      * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $withName name to register for this middleware
      */
     public function before(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -194,8 +194,8 @@ class HandlerStack implements \Stringable
      * Add a middleware after another middleware by name.
      *
      * @param  string  $findName Middleware to find
-     * @param  string  $withName name to register for this middleware
      * @param  callable(callable): callable  $middleware Middleware function
+     * @param  string  $withName name to register for this middleware
      */
     public function after(string $findName, callable $middleware, string $withName = ''): void
     {

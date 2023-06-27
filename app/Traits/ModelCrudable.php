@@ -33,7 +33,7 @@ trait ModelCrudable
      */
     public static function validations(?int $id = null): array
     {
-        return array_map(function (array $rules) use ($id) {
+        return array_map(static function (array $rules) use ($id) {
             foreach ($rules as $scenario => $rule) {
                 $rules[$scenario] = Str::replace('$id', $id, $rule);
             }
@@ -63,7 +63,7 @@ trait ModelCrudable
         $query = self::query();
 
         $searchableFields = method_exists(__CLASS__, 'searchable') ? self::searchable() : self::$searchable;
-        $query->where(function ($where) use ($data, $searchableFields): void {
+        $query->where(static function ($where) use ($data, $searchableFields): void {
             foreach ($searchableFields as $field => $type) {
                 if (str_contains($field, '.')) {
                     continue;
@@ -79,7 +79,7 @@ trait ModelCrudable
             $arr = explode('.', $field);
             $realField = $arr[1];
             $table = $arr[0];
-            $query->whereHas($table, function ($where) use ($data, $realField, $definition): void {
+            $query->whereHas($table, static function ($where) use ($data, $realField, $definition): void {
                 self::buildQuery($where, $realField, $definition['type'], $data, $definition['table'].'.'.$realField);
             });
         }
@@ -118,7 +118,7 @@ trait ModelCrudable
     public static function searchOrder(Builder $query, array $data): void
     {
         if (isset($data['order'])) {
-            $sortFields = array_map(fn ($item) => explode(',', $item), explode('|', $data['order']));
+            $sortFields = array_map(static fn ($item) => explode(',', $item), explode('|', $data['order']));
             foreach ($sortFields as $sortField) {
                 $query->orderBy($sortField[0], $sortField[1] ?? 'ASC');
             }
@@ -207,7 +207,7 @@ trait ModelCrudable
         if (isset($data[$field]) && null !== $data[$field]) {
             $customMethod = 'search'.ucfirst($field);
             if (method_exists(self::class, $customMethod)) { // If field has custom "search" method uses it
-                $query->where(function ($query) use ($field, $data, $customMethod): void {
+                $query->where(static function ($query) use ($field, $data, $customMethod): void {
                     self::$customMethod($query, $data[$field]);
                 });
             } else {
@@ -227,7 +227,7 @@ trait ModelCrudable
     private static function exactFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
         if (\is_array($data[$field])) {
-            $query->where(function ($query) use ($field, $data, $aliasField): void {
+            $query->where(static function ($query) use ($field, $data, $aliasField): void {
                 foreach ($data[$field] as $datum) {
                     $query->orWhere($aliasField, $datum);
                 }
@@ -242,7 +242,7 @@ trait ModelCrudable
     private static function likeFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
         if (\is_array($data[$field])) {
-            $query->where(function ($query) use ($field, $data, $aliasField): void {
+            $query->where(static function ($query) use ($field, $data, $aliasField): void {
                 foreach ($data[$field] as $datum) {
                     $query->orWhere($aliasField, 'LIKE', '%'.$datum.'%');
                 }

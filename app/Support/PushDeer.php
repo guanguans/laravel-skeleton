@@ -106,8 +106,8 @@ class PushDeer extends FoundationSdk
                 'form_params' => $data,
                 'query' => $data,
             ])
-            ->withMiddleware(function (callable $handler) use ($config): callable {
-                return function (RequestInterface $request, array $options) use ($config, $handler) {
+            ->withMiddleware(static function (callable $handler) use ($config): callable {
+                return static function (RequestInterface $request, array $options) use ($config, $handler) {
                     $options['laravel_data']['pushkey'] = $config['key'];
                     $request->withHeader('X-Timestamp', (string) microtime(true));
 
@@ -117,15 +117,15 @@ class PushDeer extends FoundationSdk
                     /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
                     $promise = $handler($request, $options);
 
-                    return $promise->then(fn (ResponseInterface $response) => $response->withHeader('X-Timestamp', (string) microtime(true)));
+                    return $promise->then(static fn (ResponseInterface $response) => $response->withHeader('X-Timestamp', (string) microtime(true)));
                 };
             })
-            ->withMiddleware(Middleware::mapRequest(fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString())))
-            ->withMiddleware(Middleware::mapResponse(fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString())))
+            ->withMiddleware(Middleware::mapRequest(static fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString())))
+            ->withMiddleware(Middleware::mapResponse(static fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString())))
             ->withMiddleware(Middleware::tap(
-                function (RequestInterface $request, array $options): void {
+                static function (RequestInterface $request, array $options): void {
                 },
-                function (RequestInterface $request, array $options, PromiseInterface $promise): void {
+                static function (RequestInterface $request, array $options, PromiseInterface $promise): void {
                 }
             ));
     }

@@ -19,8 +19,8 @@ class QueryBuilderMacro
     public function pipe(): callable
     {
         return function (...$pipes) {
-            return tap($this, function ($builder) use ($pipes): void {
-                array_unshift($pipes, function ($builder, $next): void {
+            return tap($this, static function ($builder) use ($pipes): void {
+                array_unshift($pipes, static function ($builder, $next): void {
                     if (
                         ! ($piped = $next($builder)) instanceof EloquentBuilder
                         && ! $piped instanceof QueryBuilder

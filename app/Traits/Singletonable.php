@@ -20,7 +20,7 @@ trait Singletonable
 
     public static function instance(...$parameters)
     {
-        app()->singletonIf(static::class, fn () => new static(...$parameters));
+        app()->singletonIf(static::class, static fn () => new static(...$parameters));
 
         return app(static::class);
     }

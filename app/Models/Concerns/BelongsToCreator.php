@@ -22,13 +22,13 @@ trait BelongsToCreator
     public static function bootBelongsToCreator(): void
     {
         static::creating(
-            function (Model $model): void {
+            static function (Model $model): void {
                 $model->creator_id ??= auth()->id();
             }
         );
 
         static::updating(
-            function (Model $model): void {
+            static function (Model $model): void {
                 abort_if($model->isDirty('creator_id'), 403, '创建者不可更新');
             }
         );

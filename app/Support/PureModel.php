@@ -165,7 +165,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
         // the model in a variable, which we will then use in the closure.
         $model = $this;
 
-        return static::unguarded(fn () => $model->fill($attributes));
+        return static::unguarded(static fn () => $model->fill($attributes));
     }
 
     /**
@@ -183,7 +183,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     {
         $instance = new static();
 
-        $items = array_map(fn ($item) => $instance->newInstance($item), $items);
+        $items = array_map(static fn ($item) => $instance->newInstance($item), $items);
 
         return $items;
     }

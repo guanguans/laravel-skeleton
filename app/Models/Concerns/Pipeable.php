@@ -40,7 +40,7 @@ trait Pipeable
      */
     public function scopePipe(Builder $builder, ...$pipes): Builder
     {
-        array_unshift($pipes, function (Builder $builder, $next): void {
+        array_unshift($pipes, static function (Builder $builder, $next): void {
             if (! $next($builder) instanceof Builder) {
                 throw new \InvalidArgumentException(
                     sprintf('Query builder pipeline must be return a %s instance.', Builder::class)

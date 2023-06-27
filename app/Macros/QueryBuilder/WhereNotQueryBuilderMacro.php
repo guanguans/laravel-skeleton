@@ -27,11 +27,11 @@ class WhereNotQueryBuilderMacro
         return function ($withQuery): Builder {
             $callable = \is_callable($withQuery)
                 ? $withQuery
-                : transform($withQuery, function ($value): callable {
+                : transform($withQuery, static function ($value): callable {
                     // We both allow single and multiple scopes...
                     $scopes = Arr::wrap($value);
 
-                    return function ($query) use ($scopes) {
+                    return static function ($query) use ($scopes) {
                         // If $scope is numeric, there are no arguments, and we can
                         // safely assume the scope is in the $arguments variable.
                         foreach ($scopes as $scope => $arguments) {
@@ -52,7 +52,7 @@ class WhereNotQueryBuilderMacro
             /** @var \Illuminate\Database\Eloquent\Builder $builder */
             $builder = $this;
 
-            return $builder->whereNotExists(function ($query) use ($callable, $builder): void {
+            return $builder->whereNotExists(static function ($query) use ($callable, $builder): void {
                 // Create a new Eloquent Query Builder with the given Query Builder and
                 // set the model from the original builder.
                 $query = new Builder($query);
@@ -62,7 +62,7 @@ class WhereNotQueryBuilderMacro
                 $originalTable = $model->getTable();
 
                 // Instantiate a new model that uses the aliased table.
-                $aliasedTable = transform($originalTable, function ($table) {
+                $aliasedTable = transform($originalTable, static function ($table) {
                     if (! \array_key_exists($table, static::$tableSubCount)) {
                         static::$tableSubCount[$table] = 0;
                     }
@@ -80,7 +80,7 @@ class WhereNotQueryBuilderMacro
                     ->from($originalTable, $aliasedTable)
                     ->whereColumn($aliasedModel->getQualifiedKeyName(), $qualifiedKeyName)
                     ->limit(1)
-                    ->tap(fn ($query) => $callable($query));
+                    ->tap(static fn ($query) => $callable($query));
             });
         };
     }

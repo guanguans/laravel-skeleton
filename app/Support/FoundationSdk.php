@@ -42,22 +42,22 @@ abstract class FoundationSdk
 
     public function dd()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
+        return $this->tapDefaultPendingRequest(static function (PendingRequest $pendingRequest): void {
             $pendingRequest->dd();
         });
     }
 
     public function dump()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
+        return $this->tapDefaultPendingRequest(static function (PendingRequest $pendingRequest): void {
             $pendingRequest->dump();
         });
     }
 
     public function ddRequestData()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
-            $pendingRequest->beforeSending(function (Request $request, array $options): void {
+        return $this->tapDefaultPendingRequest(static function (PendingRequest $pendingRequest): void {
+            $pendingRequest->beforeSending(static function (Request $request, array $options): void {
                 VarDumper::dump($options['laravel_data']);
 
                 exit(1);
@@ -67,8 +67,8 @@ abstract class FoundationSdk
 
     public function dumpRequestData()
     {
-        return $this->tapDefaultPendingRequest(function (PendingRequest $pendingRequest): void {
-            $pendingRequest->beforeSending(function (Request $request, array $options): void {
+        return $this->tapDefaultPendingRequest(static function (PendingRequest $pendingRequest): void {
+            $pendingRequest->beforeSending(static function (Request $request, array $options): void {
                 VarDumper::dump($options['laravel_data']);
             });
         });
