@@ -190,7 +190,7 @@ return (new Config())
         ],
         'regular_callable_call' => true,
         'single_line_throw' => false,
-        'static_lambda' => false, // pest
+        'static_lambda' => true, // pest
 
         // import
         'group_import' => false,
@@ -259,8 +259,14 @@ return (new Config())
         ],
         'phpdoc_to_comment' => [
             'ignored_tags' => [
+                'author',
                 'lang',
                 'noinspection',
+                'param',
+                'psalm-suppress',
+                'return',
+                'see',
+                'throw',
                 'var',
             ],
         ],

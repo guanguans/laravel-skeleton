@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
@@ -19,6 +21,7 @@ use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
@@ -46,7 +49,8 @@ use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\View\View;
 use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
-use ReflectionClass;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Reliese\Coders\CodersServiceProvider;
 use Stillat\BladeDirectives\Support\Facades\Directive;
 
@@ -61,14 +65,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @var array<string, string>
      */
-    public $bindings = [];
+    public array $bindings = [];
 
     /**
      * All of the container singletons that should be registered.
      *
      * @var array<array-key, string>
      */
-    public $singletons = [
+    public array $singletons = [
         BlueprintMacro::class,
         CollectionMacro::class,
         CommandMacro::class,
@@ -83,15 +87,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      *
-     * @return void
+     * @noinspection PhpMissingParentCallCommonInspection
      */
-    public function register()
+    public function register(): void
     {
-        $this->whenever(true, function () {
+        $this->whenever(true, function (): void {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
         });
 
-        $this->unless($this->app->isProduction(), function () {
+        $this->unless($this->app->isProduction(), function (): void {
             $this->registerNotProductionServiceProviders();
         });
     }
@@ -99,18 +103,19 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
-     * @return void
+     * @throws BindingResolutionException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws \ReflectionException
      */
-    public function boot()
+    public function boot(): void
     {
-        $this->whenever(true, function () {
+        $this->whenever(true, function (): void {
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->app->setLocale($locale = config('app.locale'));
             Carbon::setLocale($locale);
-            Carbon::serializeUsing(function (Carbon $timestamp) {
-                return $timestamp->format('Y-m-d H:i:s');
-            });
+            Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
             // JsonResource::wrap('data');
             JsonResource::withoutWrapping();
             Paginator::useBootstrap();
@@ -119,30 +124,25 @@ class AppServiceProvider extends ServiceProvider
             $this->extendValidator();
             $this->extendView();
             $this->listenEvents();
-            ConvertEmptyStringsToNull::skipWhen(function (Request $request) {
-                return $request->is('api/*');
-            });
-            LogHttp::skipWhen(function () {
-                return $this->app->runningUnitTests();
-            });
-
+            ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
+            LogHttp::skipWhen(fn () => $this->app->runningUnitTests());
         });
 
-        $this->whenever(\request()?->user()?->locale, static function (self $serviceProvider, $locale) {
+        $this->whenever(request()?->user()?->locale, static function (self $serviceProvider, $locale): void {
             $serviceProvider->app->setLocale($locale);
         });
 
-        $this->whenever($this->app->isProduction(), function () {
+        $this->whenever($this->app->isProduction(), static function (): void {
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
         });
 
-        $this->whenever($this->app->environment('testing'), function () {
+        $this->whenever($this->app->environment('testing'), static function (): void {
             // Http::preventStrayRequests(); // Preventing Stray Requests
         });
 
-        $this->unless($this->app->isProduction(), function () {
+        $this->unless($this->app->isProduction(), static function (): void {
             Model::shouldBeStrict(); // Eloquent 严格模式
             // Model::preventLazyLoading(); // 预防 N+1 查询问题
             // Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
@@ -151,7 +151,7 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    protected function registerGlobalFunctionsFrom(string $pattern)
+    protected function registerGlobalFunctionsFrom(string $pattern): void
     {
         $files = glob($pattern);
         foreach ($files as $file) {
@@ -159,7 +159,7 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
-    protected function registerNotProductionServiceProviders()
+    protected function registerNotProductionServiceProviders(): void
     {
         $this->app->register(CollisionServiceProvider::class);
         $this->app->register(IdeHelperServiceProvider::class);
@@ -169,8 +169,11 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Register macros.
+     *
+     * @throws BindingResolutionException
+     * @throws \ReflectionException
      */
-    protected function registerMacros()
+    protected function registerMacros(): void
     {
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Collection::mixin($this->app->make(CollectionMacro::class));
@@ -183,7 +186,7 @@ class AppServiceProvider extends ServiceProvider
         Str::mixin($this->app->make(StrMacro::class));
 
         collect(glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php')))
-            ->each(function ($file) {
+            ->each(function ($file): void {
                 $queryBuilderMacro = $this->app->make(resolve_class_from($file));
                 QueryBuilder::mixin($queryBuilderMacro);
                 EloquentBuilder::mixin($queryBuilderMacro);
@@ -194,16 +197,16 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register rule.
      */
-    protected function extendValidator()
+    protected function extendValidator(): void
     {
         Discover::in('Rules')
             ->instanceOf(Rule::class)
             ->all()
-            ->each(static function (ReflectionClass $ruleReflectionClass, $ruleClass): void {
+            ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
                 Validator::{is_subclass_of($ruleClass, ImplicitRule::class) ? 'extendImplicit' : 'extend'}(
                     $ruleClass::name(),
-                    function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($ruleClass) {
-                        return tap((new $ruleClass(...$parameters)), function (Rule $rule) use ($validator) {
+                    static function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($ruleClass) {
+                        return tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {
                             $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
                             $rule instanceof DataAwareRule and $rule->setData($validator->getData());
                         })->passes($attribute, $value);
@@ -213,11 +216,14 @@ class AppServiceProvider extends ServiceProvider
             });
     }
 
-    protected function extendView()
+    /**
+     * @throws BindingResolutionException
+     */
+    protected function extendView(): void
     {
         // 合成器
         $this->app->make('view')->composer('*', RequestComposer::class);
-        $this->app->make('view')->composer('*', function (View $view) {
+        $this->app->make('view')->composer('*', function (View $view): void {
             $view->with('request', $this->app->make(Request::class))
                 ->with('user', $this->app->make('auth')->user())
                 ->with('config', $this->app->make('config'));
@@ -225,7 +231,7 @@ class AppServiceProvider extends ServiceProvider
 
         // 构造器
         $this->app->make('view')->creator('*', RequestCreator::class);
-        $this->app->make('view')->creator('*', function (View $view) {
+        $this->app->make('view')->creator('*', function (View $view): void {
             $view->with('request', $this->app->make(Request::class))
                 ->with('user', $this->app->make('auth')->user())
                 ->with('config', $this->app->make('config'));
@@ -239,7 +245,7 @@ class AppServiceProvider extends ServiceProvider
         // 注册组件
         Blade::component('alert', AlertComponent::class);
 
-        /**
+        /*
          * 扩展 Blade
          *
          * ```blade
@@ -247,24 +253,15 @@ class AppServiceProvider extends ServiceProvider
          * @datetime($timestamp, $format)
          * ```
          */
-        Blade::directive('datetime', function (string $expression) {
+        Blade::directive('datetime', static function (string $expression) {
             // 通用解析表达式
-            $parts = value(function (string $expression): array {
+            $parts = value(static function (string $expression): array {
                 // clean
-                $parts = array_map(function (string $part) {
-                    return trim($part);
-                }, explode(',', Blade::stripParentheses($expression)));
-
+                $parts = array_map(trim(...), explode(',', Blade::stripParentheses($expression)));
                 // filter
-                $parts = array_filter($parts, function (string $part) {
-                    return $part !== '';
-                });
-
+                $parts = array_filter($parts, static fn (string $part) => '' !== $part);
                 // default
-                return $parts + [
-                    0 => 'time()',
-                    1 => "'Y m d H:i:s'",
-                ];
+                return $parts + ['time()', "'Y m d H:i:s'"];
             }, $expression);
 
             $newExpression = implode(', ', array_reverse($parts));
@@ -272,7 +269,7 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo date($newExpression);?>";
         });
 
-        /**
+        /*
          * 自定义 if 声明
          *
          * ```blade
@@ -294,24 +291,32 @@ class AppServiceProvider extends ServiceProvider
          * @enddisk
          * ```
          */
-        Blade::if('disk', function ($value) {
-            return config('filesystems.default') === $value;
-        });
+        Blade::if('disk', static fn ($value) => config('filesystems.default') === $value);
 
         // 回显变量
-        Blade::stringable(function (Request $request) {
-            return json_encode($request->all(), JSON_PRETTY_PRINT);
-        });
+        Blade::stringable(static fn (Request $request) => json_encode(
+            $request->all(),
+            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
+        ));
 
-        Directive::callback('limit', function ($value, $limit = 100, $end = '...') {
-            return Str::limit($value, $limit, $end);
-        });
+        Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
+            $value,
+            $limit,
+            $end
+        ));
 
-        Directive::compile('slugify', function ($title, $separator = '-', $language = 'en', $dictionary = ['@' => 'at']) {
-            return '<?php echo \Illuminate\Support\Str::slug($title, $separator, $language, $dictionary); ?>';
-        });
+        Directive::compile('slugify', static fn (
+            $title,
+            $separator = '-',
+            $language = 'en',
+            $dictionary = ['@' => 'at']
+        ) => '<?php echo \Illuminate\Support\Str::slug($title, $separator, $language, $dictionary); ?>');
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     protected function listenEvents(): void
     {
         $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
