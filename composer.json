@@ -61,7 +61,7 @@
         "friendsofphp/php-cs-fixer": "^3.19",
         "guanguans/ai-commit": "^1.6",
         "kitloong/laravel-migrations-generator": "^6.10",
-        "kubawerlos/php-cs-fixer-custom-fixers": "^3.14",
+        "kubawerlos/php-cs-fixer-custom-fixers": "^3.15",
         "lanin/laravel-api-debugger": "^4.0",
         "laracademy/generators": "^3.6",
         "laracasts/generators": "^2.0",
