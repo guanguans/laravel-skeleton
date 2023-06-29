@@ -96,7 +96,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->unless($this->app->isProduction(), function (): void {
-            $this->registerNotProductionServiceProviders();
+            $this->app->register(CollisionServiceProvider::class);
+            $this->app->register(IdeHelperServiceProvider::class);
+            $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
+            $this->app->register(CodersServiceProvider::class);
         });
     }
 
@@ -151,20 +154,11 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    protected function registerGlobalFunctionsFrom(string $pattern): void
+    protected function registerGlobalFunctionsFrom(string $pattern, int $flags = 0): void
     {
-        $files = glob($pattern);
-        foreach ($files as $file) {
+        foreach (glob($pattern, $flags | GLOB_BRACE) as $file) {
             require_once $file;
         }
-    }
-
-    protected function registerNotProductionServiceProviders(): void
-    {
-        $this->app->register(CollisionServiceProvider::class);
-        $this->app->register(IdeHelperServiceProvider::class);
-        $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
-        $this->app->register(CodersServiceProvider::class);
     }
 
     /**
