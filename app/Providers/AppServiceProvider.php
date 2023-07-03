@@ -41,6 +41,7 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -143,6 +144,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->whenever($this->app->environment('testing'), static function (): void {
             // Http::preventStrayRequests(); // Preventing Stray Requests
+            // Mail::alwaysTo('taylor@example.com');
         });
 
         $this->unless($this->app->isProduction(), static function (): void {
