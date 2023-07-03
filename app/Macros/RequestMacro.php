@@ -24,6 +24,11 @@ class RequestMacro
         return fn () => (bool) optional($this->user())->is_admin;
     }
 
+    public function isWechat(): callable
+    {
+        return fn () => str_contains($this->userAgent(), 'MicroMessenger');
+    }
+
     public function headers(): callable
     {
         return function ($key = null, $default = null) {
