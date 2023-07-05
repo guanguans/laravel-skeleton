@@ -1,0 +1,14 @@
+{
+    "preset": "laravel",
+    "exec": "vendor/bin/tlint",
+    "disabled": [
+        "QualifiedNamesOnlyForClassName",
+        "RemoveLeadingSlashNamespaces"
+    ],
+    "paths": [
+        "app/"
+    ],
+    "excluded": [
+        "tests/"
+    ]
+}
