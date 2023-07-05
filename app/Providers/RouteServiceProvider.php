@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Models\User;
@@ -15,8 +17,6 @@ class RouteServiceProvider extends ServiceProvider
      * The path to the "home" route for your application.
      *
      * This is used by Laravel authentication to redirect users after login.
-     *
-     * @var string
      */
     public const HOME = '/home';
 
@@ -24,21 +24,21 @@ class RouteServiceProvider extends ServiceProvider
      * The controller namespace for the application.
      *
      * When present, controller route declarations will automatically be prefixed with this namespace.
-     *
-     * @var string|null
      */
     // protected $namespace = 'App\\Http\\Controllers';
 
+    protected $routeModels = [
+        'user' => \App\Models\User::class,
+    ];
+
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
+        $this->routes(function (): void {
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
@@ -49,28 +49,31 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        $this->bindRouteModel();
+        Route::pattern('id', '[0-9]+');
+        $this->bindRouteModels();
     }
 
     /**
      * Configure the rate limiters for the application.
-     *
-     * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
+        RateLimiter::for(
+            'api',
+            static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
+        );
     }
 
-    /**
-     * @return void
-     */
-    protected function bindRouteModel()
+    protected function bindRouteModels(): void
     {
-        Route::bind('user', function ($value) {
-            return User::query()->where('id', $value)->firstOrFail();
-        });
+        Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
+
+        foreach ($this->routeModels as $name => $model) {
+            if (\is_int($name)) {
+                $name = str(class_basename($model))->snake('-')->toString();
+            }
+
+            Route::model($name, $model);
+        }
     }
 }

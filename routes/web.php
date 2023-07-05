@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', static fn () => view('welcome'));
 
 // 接口文档
-Route::get('docs', function () {
-    return view('scribe.index');
-})->middleware(['verify.production.environment', 'signed'])->name('docs');
+Route::get('docs', static fn () => view('scribe.index'))->middleware(['verify.production.environment', 'signed'])->name('docs');
+
+// fallback 路由应该始终是应用程序注册的最后一个路由
+Route::fallback(static function (): void {
+    // redirect 404
+});
