@@ -22,8 +22,8 @@ return [
                 To authenticate requests, include an **`Authorization`** header with the value **`"Bearer :placeholder"`**.
                 TEXT,
             'basic' => <<<'TEXT'
-                To authenticate requests, include an **`Authorization`** header in the form **`"Basic {credentials}"`**.
-                The value of `{credentials}` should be your username/id and your password, joined with a colon (:),
+                To authenticate requests, include an **`Authorization`** header in the form **`"Basic {credentials}"`**. 
+                The value of `{credentials}` should be your username/id and your password, joined with a colon (:), 
                 and then base64-encoded.
                 TEXT,
             'header' => <<<'TEXT'
@@ -33,17 +33,6 @@ return [
         'details' => <<<'TEXT'
             All authenticated endpoints are marked with a `requires authentication` badge in the documentation below.
             TEXT,
-    ],
-
-    'base_url' => [
-        'Base URL',
-    ],
-
-    'base_url' => 'Base URL',
-
-    'headers' => [
-        'introduction' => 'Introduction',
-        'auth' => 'Authenticating requests',
     ],
 
     'headings' => [
