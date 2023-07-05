@@ -123,6 +123,8 @@ class AppServiceProvider extends ServiceProvider
             // JsonResource::wrap('data');
             JsonResource::withoutWrapping();
             Paginator::useBootstrap();
+            // Paginator::defaultView('pagination::bulma');
+            // Paginator::defaultSimpleView('pagination::simple-bulma');
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
             $this->registerMacros();
             $this->extendValidator();
