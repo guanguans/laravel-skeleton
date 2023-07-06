@@ -40,7 +40,6 @@ $finder = Finder::create()
             __DIR__.'/.phpstorm.meta.php',
             __DIR__.'/_ide_helper.php',
             __DIR__.'/_ide_helper_models.php',
-            __DIR__.'/_ide_helper_redis.php',
             __DIR__.'/facades.php',
             __DIR__.'/server.php',
         ], true)

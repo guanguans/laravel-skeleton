@@ -62,7 +62,6 @@
         "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.21",
         "guanguans/ai-commit": "^1.6",
-        "huangdijia/laravel-redis-ide-helper": "^3.0",
         "kitloong/laravel-migrations-generator": "^6.10",
         "kubawerlos/php-cs-fixer-custom-fixers": "^3.15",
         "lanin/laravel-api-debugger": "^4.0",
@@ -138,7 +137,6 @@
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
             "@php artisan ide-helper:generate --ansi -v",
             "@php artisan ide-helper:meta --ansi -v",
-            "@php artisan ide-helper:redis --ansi -v",
             "@cghooks update"
         ],
         "post-autoload-dump": [

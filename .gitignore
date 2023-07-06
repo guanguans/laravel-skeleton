@@ -16,7 +16,6 @@ yarn-error.log
 .phpstorm.meta.php
 _ide_helper.php
 _ide_helper_models.php
-_ide_helper_redis.php
 .php-cs-fixer.cache
 cghooks.lock
 tests.php
