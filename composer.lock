@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ac2f027e36238e2cefa130fcb381ec6",
+    "content-hash": "5dd00d2f5244adde9561c8e72a9b920c",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -5246,6 +5246,67 @@
                 }
             ],
             "time": "2023-02-25T19:38:58+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/predis/predis.git",
+                "reference": "33b70b971a32b0d28b4f748b0547593dce316e0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/predis/predis/zipball/33b70b971a32b0d28b4f748b0547593dce316e0d",
+                "reference": "33b70b971a32b0d28b4f748b0547593dce316e0d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.3",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^8.0 || ~9.4.4"
+            },
+            "suggest": {
+                "ext-relay": "Faster connection with in-memory caching (>=0.6.2)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A flexible and feature-complete Redis client for PHP.",
+            "homepage": "http://github.com/predis/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/predis/predis/issues",
+                "source": "https://github.com/predis/predis/tree/v2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tillkruss",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-06-14T10:37:31+00:00"
         },
         {
             "name": "psr/cache",
@@ -13152,6 +13213,69 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "huangdijia/laravel-redis-ide-helper",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/huangdijia/laravel-redis-ide-helper.git",
+                "reference": "b1dea8ae7694c0630b67719ed704b2c456f128a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/huangdijia/laravel-redis-ide-helper/zipball/b1dea8ae7694c0630b67719ed704b2c456f128a3",
+                "reference": "b1dea8ae7694c0630b67719ed704b2c456f128a3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^9.0|^10.0",
+                "illuminate/support": "^9.0|^10.0",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "huangdijia/php-coding-standard": "^1.1",
+                "laravel/framework": "^9.0|^10.0",
+                "nikic/php-parser": "^4.16",
+                "phpstan/phpstan": "^1.0",
+                "predis/predis": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Huangdijia\\RedisIdeHelper\\RedisIdeHelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "Huangdijia\\RedisIdeHelper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "huangdijia",
+                    "email": "huangdijia@gmail.com"
+                }
+            ],
+            "description": "redis-ide-helper for laravel",
+            "homepage": "https://github.com/huangdijia/laravel-redis-ide-helper",
+            "keywords": [
+                "ide-helper",
+                "laravel",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/huangdijia/laravel-redis-ide-helper/issues",
+                "source": "https://github.com/huangdijia/laravel-redis-ide-helper/tree/v3.0.1"
+            },
+            "time": "2023-07-05T12:40:35+00:00"
         },
         {
             "name": "kitloong/laravel-migrations-generator",
