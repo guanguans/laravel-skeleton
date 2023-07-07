@@ -387,9 +387,11 @@ class FluentAssert
         $this->value = $value;
     }
 
-    public static function __callStatic($name, $arguments): void
+    public static function __callStatic($name, $arguments): self
     {
         \call_user_func_array([Assert::class, $name], $arguments);
+
+        return self::create($arguments[0]);
     }
 
     public function __call($name, $arguments): self
@@ -401,13 +403,15 @@ class FluentAssert
         return $this;
     }
 
-    public static function create($value): static
+    public static function create($value): self
     {
-        return new static($value);
+        return new self($value);
     }
 
     /**
      * @internal this method is not part of this class and should not be used directly
+     *
+     * @throws \ReflectionException
      *
      * @noinspection DebugFunctionUsageInspection
      * @noinspection PhpVoidFunctionResultUsedInspection
