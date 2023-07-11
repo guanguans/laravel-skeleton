@@ -121,7 +121,7 @@ class CollectionMacro
         return fn () => $this->filter(static fn ($value) => filled($value));
     }
 
-    public function reduces(): callable
+    public function reduceWithKeys(): callable
     {
         return function (callable $callback, $carry = null) {
             foreach ($this as $key => $value) {
@@ -129,18 +129,6 @@ class CollectionMacro
             }
 
             return $carry;
-        };
-    }
-
-    public function maps(): callable
-    {
-        return function (callable $callback) {
-            $arr = [];
-            foreach ($this as $key => $value) {
-                $arr[$key] = $callback($value, $key);
-            }
-
-            return $arr;
         };
     }
 }
