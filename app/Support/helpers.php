@@ -9,6 +9,19 @@ use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
+if (! function_exists('home_dir')) {
+    /**
+     * @noinspection PhpComposerExtensionStubsInspection
+     * @noinspection OffsetOperationsInspection
+     */
+    function home_dir(): string
+    {
+        return function_exists('posix_getuid')
+            ? posix_getpwuid(posix_getuid())['dir'] // Mac or Linux
+            : exec('echo %USERPROFILE%'); // Windows
+    }
+}
+
 if (! function_exists('make')) {
     /**
      * @psalm-param string|array<string, mixed> $abstract
