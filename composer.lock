@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "221bf2013193c5e5d46e0f2812c30b4e",
+    "content-hash": "7fea350743e8745d61283880d675c09d",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -7102,6 +7102,61 @@
                 }
             ],
             "time": "2023-04-01T12:26:34+00:00"
+        },
+        {
+            "name": "richardstyles/eloquent-aes",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RichardStyles/eloquent-aes.git",
+                "reference": "e152318a67016e606ded881138e3a827cdb572eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RichardStyles/eloquent-aes/zipball/e152318a67016e606ded881138e3a827cdb572eb",
+                "reference": "e152318a67016e606ded881138e3a827cdb572eb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/encryption": "^8.12.0|^9.0|^10.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^8.5.19|^9.5.8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RichardStyles\\EloquentAES\\EloquentAESServiceProvider"
+                    ],
+                    "aliases": {
+                        "EloquentAES": "RichardStyles\\EloquentAES\\EloquentAesFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RichardStyles\\EloquentAES\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Richard Styles",
+                    "email": "richardstyles@gmail.com"
+                }
+            ],
+            "description": "A Laravel Eloquent package to allow for model attribute encryption, using a seperate key",
+            "support": {
+                "issues": "https://github.com/RichardStyles/eloquent-aes/issues",
+                "source": "https://github.com/RichardStyles/eloquent-aes/tree/v2.3.0"
+            },
+            "time": "2023-03-18T17:29:31+00:00"
         },
         {
             "name": "ringcentral/psr7",

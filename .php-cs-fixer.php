@@ -224,6 +224,7 @@ return (new Config())
             'methods' => [],
         ],
         'php_unit_test_class_requires_covers' => false,
+        'php_unit_data_provider_return_type' => true,
 
         // phpdoc
         'phpdoc_align' => [
@@ -322,7 +323,7 @@ return (new Config())
         ],
         // PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\DataProviderNameFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\DataProviderReturnTypeFixer::name() => true,
+        // PhpCsFixerCustomFixers\Fixer\DataProviderReturnTypeFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\DeclareAfterOpeningTagFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\EmptyFunctionBodyFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\IssetToArrayKeyExistsFixer::name() => true,
