@@ -9,6 +9,18 @@ use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
+if (! function_exists('matching')) {
+    function matching($value)
+    {
+        switch (true) {
+            case 'a' === $value:
+            case 'b' === $value: return 'a or b';
+
+            default: return 'default';
+        }
+    }
+}
+
 if (! function_exists('home_dir')) {
     /**
      * @noinspection PhpComposerExtensionStubsInspection
@@ -67,7 +79,7 @@ if (! function_exists('resolve_class_from')) {
      * @param  null|string  $vendorPath 供应商路径
      * @param  null|string  $vendorNamespace 供应商命名空间
      */
-    function resolve_class_from(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
+    function resolve_class_from(string $path, string $vendorPath = null, string $vendorNamespace = null): string
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
         $vendorPath = $vendorPath ? realpath($vendorPath) : app_path();
@@ -432,7 +444,7 @@ if (! function_exists('call')) {
      *
      * @param  callable|string  $callback
      */
-    function call($callback, array $parameters = [], ?string $defaultMethod = null): mixed
+    function call($callback, array $parameters = [], string $defaultMethod = null): mixed
     {
         app()->call($callback, $parameters, $defaultMethod);
     }
