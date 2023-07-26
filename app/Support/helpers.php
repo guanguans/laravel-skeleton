@@ -10,14 +10,31 @@ use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
 if (! function_exists('matching')) {
-    function matching($value)
+    /**
+     * This function is used to simulate the `match` expression of PHP 8.0.
+     * This is just an example, don't call it in your code.
+     *
+     * @param  mixed  $value
+     *
+     * @internal
+     */
+    function matching($value): bool
     {
-        switch (true) {
-            case 'a' === $value:
-            case 'b' === $value: return 'a or b';
+        $switch = (function ($value) {
+            switch (true) {
+                case 'a' === $value:
+                case 'b' === $value:return 'a or b';
 
-            default: return 'default';
-        }
+                default:return 'default';
+            }
+        })($value);
+
+        $match = match ($value) {
+            'a','b' => 'a or b',
+            default => 'default',
+        };
+
+        return $switch === $match;
     }
 }
 
