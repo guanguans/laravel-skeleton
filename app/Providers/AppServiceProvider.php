@@ -135,8 +135,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->whenever(true, static function (): void {
+            request()->headers->set('X-Request-Id', $uuid = (string) Str::uuid());
+
             // Share context across channels and stacks.
-            \Illuminate\Support\Facades\Log::shareContext(\request()->headers());
+            \Illuminate\Support\Facades\Log::shareContext(['X-Request-Id' => $uuid]);
 
             // // With context for current channel and stack.
             // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
