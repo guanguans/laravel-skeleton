@@ -166,10 +166,8 @@
         "arkitect": "@php artisan test:arkitect --ansi -v",
         "cghooks": "@php ./vendor/bin/cghooks --ansi -v",
         "checks": [
-            "@mark-start",
-            "@pint-test",
-            "@mark-separate",
-            "@mark-finish"
+            "@composer-validate",
+            "@pint-test"
         ],
         "composer-check-platform-reqs": "@composer check-platform-reqs --ansi -v",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
