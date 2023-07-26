@@ -16,6 +16,7 @@ use App\Macros\StringableMacro;
 use App\Macros\StrMacro;
 use App\Rules\Rule;
 use App\Support\Discover;
+use App\Support\Monolog\AppendExtraDataProcessor;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -41,7 +42,6 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -132,6 +132,18 @@ class AppServiceProvider extends ServiceProvider
             $this->listenEvents();
             ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
             LogHttp::skipWhen(fn () => $this->app->runningUnitTests());
+        });
+
+        $this->whenever(true, static function (): void {
+            // Share context across channels and stacks.
+            \Illuminate\Support\Facades\Log::shareContext(\request()->headers());
+
+            // // With context for current channel and stack.
+            // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
+
+            if (($logger = \Illuminate\Support\Facades\Log::getLogger()) instanceof \Monolog\Logger) {
+                // $logger->pushProcessor(new AppendExtraDataProcessor(\request()->headers()));
+            }
         });
 
         $this->whenever(request()?->user()?->locale, static function (self $serviceProvider, $locale): void {
