@@ -141,9 +141,9 @@ class AppServiceProvider extends ServiceProvider
             // // With context for current channel and stack.
             // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
 
-            if (($logger = \Illuminate\Support\Facades\Log::getLogger()) instanceof \Monolog\Logger) {
-                // $logger->pushProcessor(new AppendExtraDataProcessor(\request()->headers()));
-            }
+            // if (($logger = \Illuminate\Support\Facades\Log::getLogger()) instanceof \Monolog\Logger) {
+            //     $logger->pushProcessor(new AppendExtraDataProcessor(\request()->headers()));
+            // }
         });
 
         $this->whenever(request()?->user()?->locale, static function (self $serviceProvider, $locale): void {
