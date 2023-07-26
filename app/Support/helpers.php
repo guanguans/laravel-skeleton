@@ -9,6 +9,22 @@ use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
+if (! function_exists('get_throwables')) {
+    /**
+     * @return array<\Throwable>
+     */
+    function get_throwables(Throwable $throwable): array
+    {
+        $throwables = [];
+        while ($throwable) {
+            $throwables[] = $throwable;
+            $throwable = $throwable->getPrevious();
+        }
+
+        return $throwables;
+    }
+}
+
 if (! function_exists('matching')) {
     /**
      * This function is used to simulate the `match` expression of PHP 8.0.
@@ -20,12 +36,12 @@ if (! function_exists('matching')) {
      */
     function matching($value): bool
     {
-        $switch = (function ($value) {
+        $switch = (static function ($value) {
             switch (true) {
                 case 'a' === $value:
-                case 'b' === $value:return 'a or b';
+                case 'b' === $value: return 'a or b';
 
-                default:return 'default';
+                default: return 'default';
             }
         })($value);
 
