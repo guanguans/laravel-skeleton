@@ -28,7 +28,11 @@
         },
         "increment_style": {
             "style": "pre"
-        }
+        },
+        "nullable_type_declaration_for_default_null_value": {
+            "use_nullable_type_declaration": true
+        },
+        "no_extra_blank_lines": false
     },
     "exclude": [
         ".github",

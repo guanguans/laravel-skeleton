@@ -7,9 +7,17 @@ namespace App\Support\Monolog;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Level;
 use Monolog\LogRecord;
+
 use function Termwind\render;
 
-class NasiLineFormatter extends LineFormatter
+/**
+ * ```php
+ * if ($handler instanceof \Monolog\Handler\FormattableHandlerInterface) {
+ *     $handler->setFormatter(new AnsiLineFormatter());
+ * }
+ * ```
+ */
+class AnsiLineFormatter extends LineFormatter
 {
     public function format(LogRecord $record): string
     {

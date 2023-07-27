@@ -1,6 +1,6 @@
 <?php
 
-use App\Support\Monolog\NasiLineFormatter;
+use App\Support\Monolog\AnsiLineFormatter;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -77,7 +77,7 @@ return [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
-            'formatter' => env('LOG_STDERR_FORMATTER', NasiLineFormatter::class),
+            'formatter' => env('LOG_STDERR_FORMATTER', AnsiLineFormatter::class),
             'with' => [
                 'stream' => 'php://stderr',
             ],

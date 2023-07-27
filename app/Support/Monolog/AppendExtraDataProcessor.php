@@ -9,7 +9,7 @@ use Monolog\Processor\ProcessorInterface;
 
 /**
  * ```
- * $monolog->pushProcessor(new TraceProcessor('trace-id'));
+ * $monolog->pushProcessor(new TraceProcessor($extraData));
  * ```
  *
  * @see https://github.com/creitive/monolog-extra-data-processor
@@ -17,7 +17,7 @@ use Monolog\Processor\ProcessorInterface;
  */
 class AppendExtraDataProcessor implements ProcessorInterface
 {
-    public function __construct(public array $extraData)
+    public function __construct(private array $extraData)
     {
     }
 
