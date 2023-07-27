@@ -4,181 +4,102 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use Nyholm\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class SimpleHttpClient implements ClientInterface
 {
-    /**
-     * 发送HTTP请求
-     *
-     * @param  RequestInterface  $request HTTP请求对象
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        $context = $this->createContext($request);
-        $response = file_get_contents($request->getUri(), false, $context);
-        $statusLine = strtok($response, "\r\n");
-        $headers = [];
-        while ($header = trim(strtok("\r\n"))) {
-            $headers[] = $header;
-        }
-        $body = substr($response, strpos($response, "\r\n\r\n") + 4);
-
-        return new \Psr\Http\Message\Response($statusLine, $headers, $body);
-    }
-
-    /**
-     * 发送GET请求
-     *
-     * @param  string  $uri 请求的URI
-     * @param  array  $headers 请求头部信息
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
-    public function get(string $uri, array $headers = []): ResponseInterface
-    {
-        $request = new \Psr\Http\Message\Request('GET', $uri, $headers);
-
-        return $this->sendRequest($request);
-    }
-
-    /**
-     * 发送POST请求
-     *
-     * @param  string  $uri 请求的URI
-     * @param  array|\Psr\Http\Message\StreamInterface|string  $body 请求数据
-     * @param  array  $headers 请求头部信息
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
-    public function post(string $uri, $body = null, array $headers = []): ResponseInterface
-    {
-        $request = new \Psr\Http\Message\Request('POST', $uri, $headers, $body);
-
-        return $this->sendRequest($request);
-    }
-
-    /**
-     * 发送PUT请求
-     *
-     * @param  string  $uri 请求的URI
-     * @param  array|\Psr\Http\Message\StreamInterface|string  $body 请求数据
-     * @param  array  $headers 请求头部信息
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
-    public function put(string $uri, $body = null, array $headers = []): ResponseInterface
-    {
-        $request = new \Psr\Http\Message\Request('PUT', $uri, $headers, $body);
-
-        return $this->sendRequest($request);
-    }
-
-    /**
-     * 发送PATCH请求
-     *
-     * @param  string  $uri 请求的URI
-     * @param  array|\Psr\Http\Message\StreamInterface|string  $body 请求数据
-     * @param  array  $headers 请求头部信息
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
-    public function patch(string $uri, $body = null, array $headers = []): ResponseInterface
-    {
-        $request = new \Psr\Http\Message\Request('PATCH', $uri, $headers, $body);
-
-        return $this->sendRequest($request);
-    }
-
-    /**
-     * 发送DELETE请求
-     *
-     * @param  string  $uri 请求的URI
-     * @param  array  $headers 请求头部信息
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
-    public function delete(string $uri, array $headers = []): ResponseInterface
-    {
-        $request = new \Psr\Http\Message\Request('DELETE', $uri, $headers);
-
-        return $this->sendRequest($request);
-    }
-
-    /**
-     * 发送HEAD请求
-     *
-     * @param  string  $uri 请求的URI
-     * @param  array  $headers 请求头部信息
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
-    public function head(string $uri, array $headers = []): ResponseInterface
-    {
-        $request = new \Psr\Http\Message\Request('HEAD', $uri, $headers);
-
-        return $this->sendRequest($request);
-    }
-
-    /**
-     * 发送OPTIONS请求
-     *
-     * @param  string  $uri 请求的URI
-     * @param  array  $headers 请求头部信息
-     * @return ResponseInterface HTTP响应对象
-     *
-     * @throws \Psr\Http\Client\ClientExceptionInterface 如果发送请求失败，则抛出异常
-     */
-    public function options(string $uri, array $headers = []): ResponseInterface
-    {
-        $request = new \Psr\Http\Message\Request('OPTIONS', $uri, $headers);
-
-        return $this->sendRequest($request);
-    }
-
-    /**
-     * 创建请求上下文
-     *
-     * @param  RequestInterface  $request HTTP请求对象
-     * @return resource 请求上下文资源
-     */
-    private function createContext(RequestInterface $request)
-    {
-        $options = [
-            'http' => [
-                'method' => $request->getMethod(),
-                'header' => $this->buildHeaders($request->getHeaders()),
-                'content' => $request->getBody()->getContents(),
-            ],
+        $streamContextOptions = [
+            'protocol_version' => $request->getProtocolVersion(),
+            'method' => $request->getMethod(),
+            'header' => $this->toLineHeaders($request),
+            'timeout' => 30,
+            'ignore_errors' => true,
+            'follow_location' => 0,
+            'max_redirects' => 100,
+            'content' => (string) $request->getBody(),
         ];
 
-        return stream_context_create($options);
-    }
+        $streamContext = stream_context_create([
+            'http' => $streamContextOptions,
+            'https' => $streamContextOptions,
+            'ssl' => [
+                'verify_peer' => false,
+            ],
+        ]);
 
-    /**
-     * 构建请求头部信息
-     *
-     * @param  array  $headers 请求头部信息
-     * @return string 构建完成的请求头部字符串
-     */
-    private function buildHeaders(array $headers): string
-    {
-        $headerLines = [];
-        foreach ($headers as $key => $value) {
-            $headerLines[] = sprintf('%s: %s', $key, implode(', ', $value));
+        /*
+         * file_get_contents() will issue PHP warnings, these should be converted to exceptions thus
+         * set_error_handler() / restore_error_handler() is used
+         */
+        set_error_handler(static function ($errno, $errstr, $errfile, $errline, $errcontext) use (&$errors): void {
+            $errors[] = $errstr;
+        });
+        $responseBody = file_get_contents((string) $request->getUri(), false, $streamContext);
+        restore_error_handler();
+
+        if (false === $responseBody && $errors) {
+            throw new \RuntimeException(implode('; ', $errors));
         }
 
-        return implode("\r\n", $headerLines);
+        [$status, $version, $reason] = $this->getHttp();
+
+        return new Response(
+            $status,
+            $this->toAssocHeaders(\array_slice($http_response_header, 1)),
+            $responseBody,
+            $version,
+            $reason
+        );
+    }
+
+    private function getHttp()
+    {
+        /** @var array $http */
+        $http = explode(' ', $http_response_header[0]);
+
+        return [
+            'status' => (int) $http[1],
+            'protocol' => explode('/', $http[0], 2)[1],
+            'reason' => implode(' ', \array_slice($http, 2)),
+        ];
+
+    }
+
+    private function toLineHeaders(RequestInterface $request): string
+    {
+        $headers = array_reduce(
+            array_keys($request->getHeaders()),
+            static function (array $headers, string $name) use ($request): array {
+                $values = 'content-length' === strtolower($name)
+                    ? [\strlen((string) $request->getBody())]
+                    : $request->getHeader($name);
+
+                return array_reduce($values, static function (array $headers, string $value) use ($name): array {
+                    $headers[] = "{$name}: {$value}";
+
+                    return $headers;
+                }, $headers);
+            },
+            []
+        );
+
+        return implode("\r\n", $headers);
+    }
+
+    private function toAssocHeaders(array $lineHeaders)
+    {
+        return array_column(
+            array_map(
+                static fn ($lineHeader) => preg_split('#:\s+#', $lineHeader, 2),
+                $lineHeaders
+            ),
+            1,
+            0
+        );
     }
 }
