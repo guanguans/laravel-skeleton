@@ -46,18 +46,18 @@ class SimpleHttpClient implements ClientInterface
             throw new \RuntimeException(implode('; ', $errors));
         }
 
-        [$status, $version, $reason] = $this->getHttp();
+        $http = $this->toHttp($http_response_header);
 
         return new Response(
-            $status,
-            $this->toAssocHeaders(\array_slice($http_response_header, 1)),
+            $http['status'],
+            $this->toAssocHeaders($http_response_header),
             $responseBody,
-            $version,
-            $reason
+            $http['protocol'],
+            $http['reason']
         );
     }
 
-    private function getHttp()
+    private function toHttp(array $http_response_header)
     {
         /** @var array $http */
         $http = explode(' ', $http_response_header[0]);
@@ -67,7 +67,6 @@ class SimpleHttpClient implements ClientInterface
             'protocol' => explode('/', $http[0], 2)[1],
             'reason' => implode(' ', \array_slice($http, 2)),
         ];
-
     }
 
     private function toLineHeaders(RequestInterface $request): string
@@ -91,12 +90,14 @@ class SimpleHttpClient implements ClientInterface
         return implode("\r\n", $headers);
     }
 
-    private function toAssocHeaders(array $lineHeaders)
+    private function toAssocHeaders(array $http_response_header)
     {
+        $sterilizedLineHeaders = \array_slice($http_response_header, 1);
+
         return array_column(
             array_map(
                 static fn ($lineHeader) => preg_split('#:\s+#', $lineHeader, 2),
-                $lineHeaders
+                $sterilizedLineHeaders
             ),
             1,
             0
