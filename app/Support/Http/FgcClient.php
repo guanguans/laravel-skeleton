@@ -18,6 +18,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
+/**
+ * A simple http client that uses PHP's file_get_contents() function.
+ */
 class FgcClient implements ClientInterface
 {
     use ClientTrait;
