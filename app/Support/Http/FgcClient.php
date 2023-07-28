@@ -1,11 +1,16 @@
 <?php
 
+/** @noinspection PhpInternalEntityUsedInspection */
+
 declare(strict_types=1);
 
 namespace App\Support\Http;
 
 use GuzzleHttp\Handler\HeaderProcessor;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\UriResolver;
 use GuzzleHttp\Utils;
 use Nyholm\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
@@ -66,7 +71,7 @@ class FgcClient implements ClientInterface
         if (\is_array($body)) {
             throw $this->invalidBody();
         }
-        $request = new \GuzzleHttp\Psr7\Request($method, $uri, $headers, $body, $version);
+        $request = new Request($method, $uri, $headers, $body, $version);
         // Remove the option so that they are not doubly-applied.
         unset($options['headers'], $options['body'], $options['version']);
 
@@ -86,7 +91,7 @@ class FgcClient implements ClientInterface
     private function buildUri(UriInterface $uri, array $config): UriInterface
     {
         if (isset($config['base_uri'])) {
-            $uri = \GuzzleHttp\Psr7\UriResolver::resolve(\GuzzleHttp\Psr7\Utils::uriFor($config['base_uri']), $uri);
+            $uri = UriResolver::resolve(\GuzzleHttp\Psr7\Utils::uriFor($config['base_uri']), $uri);
         }
 
         if (isset($config['idn_conversion']) && (false !== $config['idn_conversion'])) {
@@ -226,16 +231,8 @@ class FgcClient implements ClientInterface
         }
 
         [$ver, $status, $reason, $headers] = HeaderProcessor::parseHeaders($http_response_header);
-        dd($ver, $status, $reason, $headers);
-        $http = $this->toHttp($http_response_header);
 
-        return new Response(
-            $http['status'],
-            $this->toAssocHeaders($http_response_header),
-            $responseBody,
-            $http['protocol'],
-            $http['reason']
-        );
+        return new Response($status, $headers, $responseBody, $ver, $reason);
     }
 
     /**
@@ -271,7 +268,7 @@ class FgcClient implements ClientInterface
         }
 
         if (isset($options['multipart'])) {
-            $options['body'] = new \GuzzleHttp\Psr7\MultipartStream($options['multipart']);
+            $options['body'] = new MultipartStream($options['multipart']);
             unset($options['multipart']);
         }
 
@@ -342,7 +339,7 @@ class FgcClient implements ClientInterface
         }
 
         $request = \GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify);
-        if ($request->getBody() instanceof \GuzzleHttp\Psr7\MultipartStream) {
+        if ($request->getBody() instanceof MultipartStream) {
             // Use a multipart/form-data POST if a Content-Type is not set.
             // Ensure that we don't have the header in different case and set the new value.
             $options['_conditional'] = \GuzzleHttp\Psr7\Utils::caselessRemove(['Content-Type'], $options['_conditional']);
@@ -379,16 +376,16 @@ class FgcClient implements ClientInterface
             .'request option to send a multipart/form-data request.');
     }
 
-    private function toHttp(array $http_response_header): array
+    private function toStreamContext(RequestInterface $request)
     {
-        /** @var array $http */
-        $http = explode(' ', $http_response_header[0]);
+        $options = [
+            'method' => $request->getMethod(),
+            'header' => $this->toIndexHeaders($request),
+            'content' => (string) $request->getBody(),
+            'protocol_version' => $request->getProtocolVersion(),
+        ] + $this->config;
 
-        return [
-            'status' => (int) $http[1],
-            'protocol' => explode('/', $http[0], 2)[1],
-            'reason' => implode(' ', \array_slice($http, 2)),
-        ];
+        return stream_context_create(['http' => $options]);
     }
 
     private function toIndexHeaders(RequestInterface $request): array
@@ -408,31 +405,5 @@ class FgcClient implements ClientInterface
             },
             []
         );
-    }
-
-    private function toAssocHeaders(array $http_response_header): array
-    {
-        $sterilizedLineHeaders = \array_slice($http_response_header, 1);
-
-        return array_column(
-            array_map(
-                static fn ($lineHeader) => preg_split('#:\s+#', $lineHeader, 2),
-                $sterilizedLineHeaders
-            ),
-            1,
-            0
-        );
-    }
-
-    private function toStreamContext(RequestInterface $request)
-    {
-        $options = [
-            'method' => $request->getMethod(),
-            'header' => $this->toIndexHeaders($request),
-            'content' => (string) $request->getBody(),
-            'protocol_version' => $request->getProtocolVersion(),
-        ] + $this->config;
-
-        return stream_context_create(['http' => $options]);
     }
 }
