@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Support;
+namespace App\Support\Http;
 
 use Nyholm\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class SimpleHttpClient implements ClientInterface
+class Client implements ClientInterface
 {
+    use ClientTrait;
+
     public function __construct(private array $options = [])
     {
         $this->setOptions($options);
@@ -30,6 +32,13 @@ class SimpleHttpClient implements ClientInterface
             'protocol_version' => '1.1',
             'timeout' => \ini_get('default_socket_timeout'),
             'ignore_errors' => true,
+
+            'base_uri' => '',
+            'body' => [],
+            'form_params' => [],
+            'json' => [],
+            'multipart' => [],
+            'query' => [],
         ];
 
         return $this;
@@ -38,6 +47,11 @@ class SimpleHttpClient implements ClientInterface
     public function getOptions(): array
     {
         return $this->options;
+    }
+
+    public function request(string $method, $uri, array $options = []): ResponseInterface
+    {
+        // TODO: Implement request() method.
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface
