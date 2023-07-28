@@ -5,14 +5,18 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 Route::any('/any', function (Request $request) {
+    $request->validate([
+        'file_name' => 'file',
+    ]);
+
     return response()->json([
         'method' => $request->method(),
         'headers' => $request->header(),
         'query' => $request->query(),
         'post' => $request->post(),
-        'files' => $request->allFiles(),
-        // 'server' => $request->server(),
-        // 'cookie' => $request->cookie(),
+        'FILES' => $_FILES,
+        'files' => $request->file(),
+        'cookie' => $request->cookie(),
     ]);
 });
 

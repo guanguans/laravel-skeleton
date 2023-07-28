@@ -65,7 +65,7 @@ class FgcClient implements ClientInterface
         // Remove request modifying parameter because it can be done up-front.
         $headers = $options['headers'] ?? [];
         $body = $options['body'] ?? null;
-        $version = $options['version'] ?? '1.1';
+        $version = $options['protocol_version'] ?? '1.1';
         // Merge the URI into the base URI.
         $uri = $this->buildUri(\GuzzleHttp\Psr7\Utils::uriFor($uri), $options);
         if (\is_array($body)) {
@@ -73,7 +73,7 @@ class FgcClient implements ClientInterface
         }
         $request = new Request($method, $uri, $headers, $body, $version);
         // Remove the option so that they are not doubly-applied.
-        unset($options['headers'], $options['body'], $options['version']);
+        unset($options['headers'], $options['body'], $options['protocol_version']);
 
         return $this->transfer($request, $options);
     }
@@ -114,13 +114,18 @@ class FgcClient implements ClientInterface
             // 'timeout' => \ini_get('default_socket_timeout'),
             'ignore_errors' => true,
 
+            // 'auth' => [],
             // 'base_uri' => '',
             // 'body' => '',
+            'decode_content' => true,
             // 'form_params' => [],
+            // 'handler' => null,
+            'idn_conversion' => false,
             // 'json' => [],
             // 'multipart' => [],
             // 'query' => [],
-            // 'handler' => null,
+            // 'sink' => '',
+            // 'cookies' => false,
         ];
 
         // Use the standard Linux HTTP_PROXY and HTTPS_PROXY if set.
@@ -297,8 +302,8 @@ class FgcClient implements ClientInterface
             }
         }
 
-        if (isset($options['version'])) {
-            $modify['version'] = $options['version'];
+        if (isset($options['protocol_version'])) {
+            $modify['protocol_version'] = $options['protocol_version'];
         }
 
         $request = \GuzzleHttp\Psr7\Utils::modifyRequest($request, $modify);
@@ -375,7 +380,10 @@ class FgcClient implements ClientInterface
 
             set_error_handler(static function (int $errno, string $errstr, ?string $errfile = null, ?int $errline = null) use (&$errors): void {
                 // Warning: file_get_contents(/api/any): Failed to open stream: No such file or directory in /.../Support/SimpleHttpClient.php on line 25
-                $errors[] = sprintf('%s: %s in %s on line %s', $errno, $errstr, $errfile, $errline);
+                $error = sprintf('%s: %s', $errno, $errstr);
+                $errfile and $error .= " in {$errfile}";
+                $errline and $error .= " on line {$errline}";
+                $errors[] = $error;
             });
             $responseBody = file_get_contents($uri, false, $streamContext);
             restore_error_handler();
