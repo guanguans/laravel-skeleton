@@ -13,12 +13,12 @@ use Psr\Http\Message\UriInterface;
 trait ClientTrait
 {
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     abstract public function request(string $method, $uri, array $options = []): ResponseInterface;
 
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     public function get($uri, array $options = []): ResponseInterface
     {
@@ -26,7 +26,7 @@ trait ClientTrait
     }
 
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     public function head($uri, array $options = []): ResponseInterface
     {
@@ -34,7 +34,7 @@ trait ClientTrait
     }
 
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     public function put($uri, array $options = []): ResponseInterface
     {
@@ -42,7 +42,7 @@ trait ClientTrait
     }
 
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     public function post($uri, array $options = []): ResponseInterface
     {
@@ -50,7 +50,7 @@ trait ClientTrait
     }
 
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     public function patch($uri, array $options = []): ResponseInterface
     {
@@ -58,7 +58,7 @@ trait ClientTrait
     }
 
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     public function delete($uri, array $options = []): ResponseInterface
     {

@@ -35,6 +35,11 @@ class FgcClient implements ClientInterface
         $this->configureDefaults($config);
     }
 
+    public function sendRequest(RequestInterface $request): ResponseInterface
+    {
+        return $this->send($request);
+    }
+
     public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
         // Merge the base URI into the request URI if needed.
@@ -44,11 +49,6 @@ class FgcClient implements ClientInterface
             $request->withUri($this->buildUri($request->getUri(), $options), $request->hasHeader('Host')),
             $options
         );
-    }
-
-    public function sendRequest(RequestInterface $request): ResponseInterface
-    {
-        return $this->send($request);
     }
 
     /**
