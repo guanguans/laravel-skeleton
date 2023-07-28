@@ -10,9 +10,9 @@ use GuzzleHttp\Handler\HeaderProcessor;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\UriResolver;
 use GuzzleHttp\Utils;
-use Nyholm\Psr7\Response;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -27,7 +27,7 @@ class FgcClient implements ClientInterface
     public function __construct(array $config = [])
     {
         if (! isset($config['handler'])) {
-            $config['handler'] = HandlerStack::create();
+            $config['handler'] = new HandlerStack($this->handler());
         } elseif (! \is_callable($config['handler'])) {
             throw new \InvalidArgumentException('handler must be a callable');
         }
@@ -57,7 +57,7 @@ class FgcClient implements ClientInterface
     }
 
     /**
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string|UriInterface  $uri
      */
     public function request(string $method, $uri = '', array $options = []): ResponseInterface
     {
@@ -78,9 +78,6 @@ class FgcClient implements ClientInterface
         return $this->transfer($request, $options);
     }
 
-    /**
-     * @param  null|string  $option the config option to retrieve
-     */
     public function getConfig(?string $option = null): mixed
     {
         return null === $option
@@ -102,9 +99,6 @@ class FgcClient implements ClientInterface
         return '' === $uri->getScheme() && '' !== $uri->getHost() ? $uri->withScheme('http') : $uri;
     }
 
-    /**
-     * Configures the default options for a client.
-     */
     private function configureDefaults(array $config): void
     {
         $defaults = [
@@ -162,11 +156,6 @@ class FgcClient implements ClientInterface
         }
     }
 
-    /**
-     * Merges default options into the array.
-     *
-     * @param  array  $options Options to modify by reference
-     */
     private function prepareDefaults(array $options): array
     {
         $defaults = $this->config;
@@ -202,14 +191,6 @@ class FgcClient implements ClientInterface
         return $result;
     }
 
-    /**
-     * Transfers the given request and applies request options.
-     *
-     * The URI of the request is not modified and the request options are used
-     * as-is without merging in default options.
-     *
-     * @param  array  $options see \GuzzleHttp\RequestOptions
-     */
     private function transfer(RequestInterface $request, array $options): ResponseInterface
     {
         $request = $this->applyOptions($request, $options);
@@ -217,27 +198,9 @@ class FgcClient implements ClientInterface
         /** @var HandlerStack $handler */
         $handler = $options['handler'];
 
-        set_error_handler(static function (int $errno, string $errstr, ?string $errfile = null, ?int $errline = null) use (&$errors): void {
-            // Warning: file_get_contents(/api/any): Failed to open stream: No such file or directory in /Users/yaozm/Documents/wwwroot/laravel-skeleton/app/Support/SimpleHttpClient.php on line 25
-            $errors[] = sprintf('%s: %s in %s on line %s', $errno, $errstr, $errfile, $errline);
-        });
-
-        $responseBody = file_get_contents((string) $request->getUri(), false, $this->toStreamContext($request));
-
-        restore_error_handler();
-
-        if (false === $responseBody && $errors) {
-            throw new \RuntimeException(implode(PHP_EOL, $errors));
-        }
-
-        [$ver, $status, $reason, $headers] = HeaderProcessor::parseHeaders($http_response_header);
-
-        return new Response($status, $headers, $responseBody, $ver, $reason);
+        return $handler($request, $options);
     }
 
-    /**
-     * Applies the array of request options to a request.
-     */
     private function applyOptions(RequestInterface $request, array &$options): RequestInterface
     {
         $modify = [
@@ -310,7 +273,7 @@ class FgcClient implements ClientInterface
                     break;
 
                 default:
-                    throw new \InvalidArgumentException('Invalid or unsupport auth type specified: '.$type);
+                    throw new \InvalidArgumentException('Invalid or unsupported auth type specified: '.$type);
             }
         }
 
@@ -364,9 +327,6 @@ class FgcClient implements ClientInterface
         return $request;
     }
 
-    /**
-     * Return an \InvalidArgumentException with pre-set message.
-     */
     private function invalidBody(): \InvalidArgumentException
     {
         return new \InvalidArgumentException('Passing in the "body" request '
@@ -397,13 +357,36 @@ class FgcClient implements ClientInterface
                     ? [\strlen((string) $request->getBody())]
                     : $request->getHeader($name);
 
-                return array_reduce($values, static function (array $headers, string $value) use ($name): array {
+                foreach ($values as $value) {
                     $headers[] = "{$name}: {$value}";
+                }
 
-                    return $headers;
-                }, $headers);
+                return $headers;
             },
             []
         );
+    }
+
+    private function handler(): callable
+    {
+        return function (RequestInterface $request, array $options): ResponseInterface {
+            $uri = (string) $request->getUri();
+            $streamContext = $this->toStreamContext($request);
+
+            set_error_handler(static function (int $errno, string $errstr, ?string $errfile = null, ?int $errline = null) use (&$errors): void {
+                // Warning: file_get_contents(/api/any): Failed to open stream: No such file or directory in /.../Support/SimpleHttpClient.php on line 25
+                $errors[] = sprintf('%s: %s in %s on line %s', $errno, $errstr, $errfile, $errline);
+            });
+            $responseBody = file_get_contents($uri, false, $streamContext);
+            restore_error_handler();
+
+            if (false === $responseBody && $errors) {
+                throw new \RuntimeException(implode(PHP_EOL, $errors));
+            }
+
+            [$ver, $status, $reason, $headers] = HeaderProcessor::parseHeaders($http_response_header);
+
+            return new Response($status, $headers, $responseBody, $ver, $reason);
+        };
     }
 }
