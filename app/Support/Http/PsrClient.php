@@ -27,11 +27,14 @@ class PsrClient implements ClientInterface
      *     protocol_version: float,
      *     timeout: float,
      *     ignore_errors: bool,
-     *     notification: null|callable,
-     *     progress: null|callable,
+     *     notification: null|callable(int, int, string, int, int, int): void,
+     *     progress: null|callable(int, int): void,
      * } $config
      *
+     * @see https://www.php.net/manual/zh/function.file-get-contents
+     * @see https://www.php.net/manual/zh/function.stream-context-create.php
      * @see https://www.php.net/manual/zh/context.http.php
+     * @see https://www.php.net/manual/zh/function.stream-context-set-params.php
      * @see https://www.php.net/manual/zh/function.stream-notification-callback.php
      */
     public function __construct(private array $config = [])
@@ -108,18 +111,8 @@ class PsrClient implements ClientInterface
     private function configureDefaults(array $config): void
     {
         $defaults = [
-            // 'method' => 'GET',
-            // 'header' => [],
-            // 'user_agent' => \ini_get('user_agent'),
-            // 'content' => '',
-            // 'proxy' => '',
-            // 'request_fulluri' => false,
-            // 'follow_location' => 1,
-            // 'max_redirects' => 20,
             'protocol_version' => '1.1',
-            // 'timeout' => \ini_get('default_socket_timeout'),
             'ignore_errors' => true,
-
             'notification' => null,
             'progress' => null,
         ];
