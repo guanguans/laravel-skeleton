@@ -14,6 +14,26 @@ use Psr\Http\Message\ResponseInterface;
 
 class PsrClient implements ClientInterface
 {
+    /**
+     * @param array{
+     *     method: string,
+     *     header: array|string,
+     *     user_agent: string,
+     *     content: string,
+     *     proxy: string,
+     *     request_fulluri: bool,
+     *     follow_location: int,
+     *     max_redirects: int,
+     *     protocol_version: float,
+     *     timeout: float,
+     *     ignore_errors: bool,
+     *     notification: null|callable,
+     *     progress: null|callable,
+     * } $config
+     *
+     * @see https://www.php.net/manual/zh/context.http.php
+     * @see https://www.php.net/manual/zh/function.stream-notification-callback.php
+     */
     public function __construct(private array $config = [])
     {
         $this->configureDefaults($config);
@@ -100,7 +120,6 @@ class PsrClient implements ClientInterface
             // 'timeout' => \ini_get('default_socket_timeout'),
             'ignore_errors' => true,
 
-            // https://www.php.net/manual/zh/function.stream-notification-callback.php
             'notification' => null,
             'progress' => null,
         ];
