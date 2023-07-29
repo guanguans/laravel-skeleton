@@ -65,6 +65,9 @@ class PsrClient implements ClientInterface
             'protocol_version' => '1.1',
             // 'timeout' => \ini_get('default_socket_timeout'),
             'ignore_errors' => true,
+
+            // https://www.php.net/manual/zh/function.stream-notification-callback.php
+            'notification' => null,
         ];
 
         $this->options = $options + $defaults;
@@ -79,7 +82,7 @@ class PsrClient implements ClientInterface
             'protocol_version' => $request->getProtocolVersion(),
         ] + $this->options;
 
-        return stream_context_create(['http' => $options]);
+        return stream_context_create(['http' => $options], ['notification' => $options['notification']]);
     }
 
     private function toIndexHeaders(RequestInterface $request): array
