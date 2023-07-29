@@ -34,10 +34,11 @@ class PsrClient implements ClientInterface
             ?int $errline = null
         ) use (&$errors): void {
             // Warning: file_get_contents(/api/any): Failed to open stream: No such file or directory in /...Client.php on line 25
-            $error = "Errno {$errno}: {$errstr}";
-            $errfile and $error .= " in {$errfile}";
-            $errline and $error .= " on line {$errline}";
-            $errors[] = $error;
+            // $error = "Errno {$errno}: {$errstr}";
+            // $errfile and $error .= " in {$errfile}";
+            // $errline and $error .= " on line {$errline}";
+            // $errors[] = $error;
+            $errors[] = $errstr;
         });
         $responseBody = file_get_contents($uri, false, $streamContext);
         restore_error_handler();
