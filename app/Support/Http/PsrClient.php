@@ -68,9 +68,30 @@ class PsrClient implements ClientInterface
 
             // https://www.php.net/manual/zh/function.stream-notification-callback.php
             'notification' => null,
+            'progress' => null,
         ];
 
-        $this->options = $options + $defaults;
+        $options += $defaults;
+
+        if (\is_callable($options['progress']) && ! \is_callable($options['notification'])) {
+            $options['notification'] = static function (
+                $notificationCode,
+                $severity,
+                $message,
+                $messageCode,
+                $bytesTransferred,
+                $bytesMax
+            ) use ($options): void {
+                switch ($notificationCode) {
+                    case STREAM_NOTIFY_PROGRESS:
+                        // https://www.php.net/manual/zh/function.stream-notification-callback.php#121236
+                        $bytesTransferred > 0 and $bytesTransferred += 8192;
+                        $options['progress']($bytesMax, $bytesTransferred);
+                }
+            };
+        }
+
+        $this->options = $options;
     }
 
     private function toStreamContext(RequestInterface $request)
