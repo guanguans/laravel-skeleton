@@ -14,9 +14,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-class Client implements ClientInterface
+class SyncClient implements ClientInterface
 {
-    use ClientTrait;
+    use SyncClientTrait;
 
     public function __construct(private array $config = [], private ?ClientInterface $client = null)
     {

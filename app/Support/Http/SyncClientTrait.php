@@ -8,9 +8,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
- * Client interface for sending HTTP requests.
+ * Sync client interface for sending HTTP requests.
  */
-trait ClientTrait
+trait SyncClientTrait
 {
     /**
      * @param  string|UriInterface  $uri
