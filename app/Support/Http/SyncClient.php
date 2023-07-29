@@ -336,37 +336,6 @@ class SyncClient implements ClientInterface
             .'request option to send a multipart/form-data request.');
     }
 
-    private function toStreamContext(RequestInterface $request)
-    {
-        $options = [
-            'method' => $request->getMethod(),
-            'header' => $this->toIndexHeaders($request),
-            'content' => (string) $request->getBody(),
-            'protocol_version' => $request->getProtocolVersion(),
-        ] + $this->config;
-
-        return stream_context_create(['http' => $options]);
-    }
-
-    private function toIndexHeaders(RequestInterface $request): array
-    {
-        return array_reduce(
-            array_keys($request->getHeaders()),
-            static function (array $headers, string $name) use ($request): array {
-                $values = 'content-length' === strtolower($name)
-                    ? [\strlen((string) $request->getBody())]
-                    : $request->getHeader($name);
-
-                foreach ($values as $value) {
-                    $headers[] = "{$name}: {$value}";
-                }
-
-                return $headers;
-            },
-            []
-        );
-    }
-
     private function handler(): callable
     {
         return fn (RequestInterface $request, array $options): ResponseInterface => $this->client->sendRequest($request);
