@@ -24,7 +24,7 @@ class PsrClient implements ClientInterface
      *     request_fulluri: bool,
      *     follow_location: int,
      *     max_redirects: int,
-     *     protocol_version: float,
+     *     protocol_version: float|string,
      *     timeout: float,
      *     ignore_errors: bool,
      *     notification: null|callable(int, int, string, int, int, int): void,
