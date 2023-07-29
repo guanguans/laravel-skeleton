@@ -1,16 +1,12 @@
 <?php
 
-/** @noinspection PhpInternalEntityUsedInspection */
-
 declare(strict_types=1);
 
 namespace App\Support\Http;
 
-use GuzzleHttp\Handler\HeaderProcessor;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\UriResolver;
 use GuzzleHttp\Utils;
 use Psr\Http\Client\ClientInterface;
@@ -18,16 +14,11 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-/**
- * A simple http client that uses PHP's file_get_contents() function.
- */
-class FgcClient implements ClientInterface
+class Client implements ClientInterface
 {
     use ClientTrait;
 
-    private array $config;
-
-    public function __construct(array $config = [])
+    public function __construct(private array $config = [], private ?ClientInterface $client = null)
     {
         if (! isset($config['handler'])) {
             $config['handler'] = new HandlerStack($this->handler());
@@ -41,6 +32,7 @@ class FgcClient implements ClientInterface
         }
 
         $this->configureDefaults($config);
+        $this->client ??= new PsrClient($this->config);
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface
@@ -377,27 +369,6 @@ class FgcClient implements ClientInterface
 
     private function handler(): callable
     {
-        return function (RequestInterface $request, array $options): ResponseInterface {
-            $uri = (string) $request->getUri();
-            $streamContext = $this->toStreamContext($request);
-
-            set_error_handler(static function (int $errno, string $errstr, ?string $errfile = null, ?int $errline = null) use (&$errors): void {
-                // Warning: file_get_contents(/api/any): Failed to open stream: No such file or directory in /.../Support/SimpleHttpClient.php on line 25
-                $error = sprintf('%s: %s', $errno, $errstr);
-                $errfile and $error .= " in {$errfile}";
-                $errline and $error .= " on line {$errline}";
-                $errors[] = $error;
-            });
-            $responseBody = file_get_contents($uri, false, $streamContext);
-            restore_error_handler();
-
-            if (false === $responseBody && $errors) {
-                throw new \RuntimeException(implode(PHP_EOL, $errors));
-            }
-
-            [$ver, $status, $reason, $headers] = HeaderProcessor::parseHeaders($http_response_header);
-
-            return new Response($status, $headers, $responseBody, $ver, $reason);
-        };
+        return fn (RequestInterface $request, array $options): ResponseInterface => $this->client->sendRequest($request);
     }
 }

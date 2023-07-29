@@ -14,9 +14,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class PsrClient implements ClientInterface
 {
-    public function __construct(private array $options = [])
+    public function __construct(private array $config = [])
     {
-        $this->setOptions($options);
+        $this->configureDefaults($config);
     }
 
     /**
@@ -34,7 +34,7 @@ class PsrClient implements ClientInterface
             ?int $errline = null
         ) use (&$errors): void {
             // Warning: file_get_contents(/api/any): Failed to open stream: No such file or directory in /...Client.php on line 25
-            $error = sprintf('Errno %s: %s', $errno, $errstr);
+            $error = "Errno {$errno}: {$errstr}";
             $errfile and $error .= " in {$errfile}";
             $errline and $error .= " on line {$errline}";
             $errors[] = $error;
@@ -51,7 +51,7 @@ class PsrClient implements ClientInterface
         return new Response($status, $headers, $responseBody, $version, $reason);
     }
 
-    private function setOptions(array $options): void
+    private function configureDefaults(array $config): void
     {
         $defaults = [
             // 'method' => 'GET',
@@ -71,39 +71,47 @@ class PsrClient implements ClientInterface
             'progress' => null,
         ];
 
-        $options += $defaults;
+        $config += $defaults;
 
-        if (\is_callable($options['progress']) && ! \is_callable($options['notification'])) {
-            $options['notification'] = static function (
-                $notificationCode,
-                $severity,
-                $message,
-                $messageCode,
-                $bytesTransferred,
-                $bytesMax
-            ) use ($options): void {
-                switch ($notificationCode) {
-                    case STREAM_NOTIFY_PROGRESS:
-                        // https://www.php.net/manual/zh/function.stream-notification-callback.php#121236
-                        $bytesTransferred > 0 and $bytesTransferred += 8192;
-                        $options['progress']($bytesMax, $bytesTransferred);
-                }
-            };
+        if (isset($config['notification'], $config['progress'])) {
+            throw new \InvalidArgumentException('You cannot use notification and progress at the same time.');
         }
 
-        $this->options = $options;
+        if (\is_callable($config['progress'])) {
+            $config['notification'] = $this->progressNotification($config['progress']);
+        }
+
+        $this->config = $config;
+    }
+
+    private function progressNotification(callable $process): \Closure
+    {
+        return static function (
+            int $notificationCode,
+            int $severity,
+            string $message,
+            int $messageCode,
+            int $bytesTransferred,
+            int $bytesMax
+        ) use ($process): void {
+            // https://www.php.net/manual/zh/function.stream-notification-callback.php#121236
+            if (STREAM_NOTIFY_PROGRESS === $notificationCode) {
+                $bytesTransferred > 0 and $bytesTransferred += 8192;
+                $process($bytesMax, $bytesTransferred);
+            }
+        };
     }
 
     private function toStreamContext(RequestInterface $request)
     {
-        $options = [
+        $config = [
             'method' => $request->getMethod(),
             'header' => $this->toIndexHeaders($request),
             'content' => (string) $request->getBody(),
             'protocol_version' => $request->getProtocolVersion(),
-        ] + $this->options;
+        ] + $this->config;
 
-        return stream_context_create(['http' => $options], ['notification' => $options['notification']]);
+        return stream_context_create(['http' => $config], ['notification' => $config['notification']]);
     }
 
     private function toIndexHeaders(RequestInterface $request): array
