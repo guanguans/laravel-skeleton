@@ -10,6 +10,7 @@ use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\InvalidArgumentException;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise as P;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\RedirectMiddleware;
@@ -28,6 +29,8 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
 
     /** @var array Default request options */
     private array $config;
+
+    private ?\Psr\Http\Client\ClientInterface $client;
 
     /**
      * Clients accept an array of constructor parameters.
@@ -60,10 +63,10 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      *
      * @see \GuzzleHttp\RequestOptions for a list of available request options.
      */
-    public function __construct(array $config = [])
+    public function __construct(array $config = [], ?\Psr\Http\Client\ClientInterface $client = null)
     {
         if (! isset($config['handler'])) {
-            $config['handler'] = HandlerStack::create();
+            $config['handler'] = $this->getDefaultHandlerStack();
         } elseif (! \is_callable($config['handler'])) {
             throw new InvalidArgumentException('handler must be a callable');
         }
@@ -74,6 +77,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         }
 
         $this->configureDefaults($config);
+        $this->client = $client ?? new PsrClient($this->config);
     }
 
     /**
@@ -489,5 +493,16 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
             .'Please use the "form_params" request option to send a '
             .'application/x-www-form-urlencoded request, or the "multipart" '
             .'request option to send a multipart/form-data request.');
+    }
+
+    private function getDefaultHandlerStack(): HandlerStack
+    {
+        $handlerStack = new HandlerStack(fn (RequestInterface $request, array $options): ResponseInterface => $this->client->sendRequest($request));
+        $handlerStack->push(Middleware::httpErrors(), 'http_errors');
+        $handlerStack->push(Middleware::redirect(), 'allow_redirects');
+        $handlerStack->push(Middleware::cookies(), 'cookies');
+        $handlerStack->push(Middleware::prepareBody(), 'prepare_body');
+
+        return $handlerStack;
     }
 }
