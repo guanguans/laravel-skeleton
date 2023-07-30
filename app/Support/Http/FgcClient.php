@@ -14,9 +14,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-class SyncClient implements ClientInterface
+class FgcClient implements ClientInterface
 {
-    use SyncClientTrait;
+    use FgcClientTrait;
 
     public function __construct(private array $config = [], private ?ClientInterface $client = null)
     {
@@ -32,7 +32,7 @@ class SyncClient implements ClientInterface
         }
 
         $this->configureDefaults($config);
-        $this->client ??= new PsrClient($this->config);
+        $this->client ??= new FgcPsrClient($this->config);
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface

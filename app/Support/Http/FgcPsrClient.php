@@ -12,7 +12,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class PsrClient implements ClientInterface
+class FgcPsrClient implements ClientInterface
 {
     /**
      * @param array{

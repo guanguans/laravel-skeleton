@@ -10,7 +10,7 @@ use Psr\Http\Message\UriInterface;
 /**
  * Sync client interface for sending HTTP requests.
  */
-trait SyncClientTrait
+trait FgcClientTrait
 {
     /**
      * @param  string|UriInterface  $uri
