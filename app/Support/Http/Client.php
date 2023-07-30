@@ -15,16 +15,16 @@ use Psr\Http\Message\RequestInterface;
 
 class Client extends \GuzzleHttp\Client
 {
-    private ClientInterface $client;
+    private ClientInterface $psrClient;
 
-    public function __construct(array $config = [], ?ClientInterface $client = null)
+    public function __construct(array $config = [], ?ClientInterface $psrClient = null)
     {
         if (! isset($config['handler'])) {
             $config['handler'] = $this->getDefaultHandlerStack();
         }
 
         parent::__construct($config);
-        $this->client = $client ?? new PsrClient($this->getConfig());
+        $this->psrClient = $psrClient ?? new PsrClient($this->getConfig());
     }
 
     /**
@@ -35,7 +35,7 @@ class Client extends \GuzzleHttp\Client
     {
         $handlerStack = new HandlerStack(function (RequestInterface $request, array $options): PromiseInterface {
             try {
-                return new FulfilledPromise($this->client->sendRequest($request));
+                return new FulfilledPromise($this->psrClient->sendRequest($request));
             } catch (\Throwable $e) {
                 return P\Create::rejectionFor(
                     new RequestException('An error was encountered while creating the response', $request, null, $e)
