@@ -12,6 +12,9 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @see \GuzzleHttp\Handler\StreamHandler
+ */
 class FgcPsrClient implements ClientInterface
 {
     /**
