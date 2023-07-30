@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Support\Http;
 
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Handler\Proxy;
+use GuzzleHttp\Handler\StreamHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise as P;
@@ -33,7 +35,7 @@ class Client extends \GuzzleHttp\Client
      */
     private function getDefaultHandlerStack(): HandlerStack
     {
-        $handlerStack = new HandlerStack(function (RequestInterface $request, array $options): PromiseInterface {
+        $handler = function (RequestInterface $request, array $options): PromiseInterface {
             try {
                 return new FulfilledPromise($this->psrClient->sendRequest($request));
             } catch (\Throwable $e) {
@@ -41,7 +43,13 @@ class Client extends \GuzzleHttp\Client
                     new RequestException('An error was encountered while creating the response', $request, null, $e)
                 );
             }
-        });
+        };
+
+        if (\ini_get('allow_url_fopen')) {
+            $handler = Proxy::wrapStreaming($handler, new StreamHandler());
+        }
+
+        $handlerStack = new HandlerStack($handler);
         $handlerStack->push(Middleware::httpErrors(), 'http_errors');
         $handlerStack->push(Middleware::redirect(), 'allow_redirects');
         $handlerStack->push(Middleware::cookies(), 'cookies');
