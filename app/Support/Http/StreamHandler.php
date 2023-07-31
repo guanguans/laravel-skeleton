@@ -1,15 +1,20 @@
 <?php
 
+/** @noinspection PhpInternalEntityUsedInspection */
+/** @noinspection PhpExpressionResultUnusedInspection */
+
 declare(strict_types=1);
 
 namespace App\Support\Http;
 
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Handler\HeaderProcessor;
 use GuzzleHttp\Promise as P;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\InflateStream;
 use GuzzleHttp\TransferStats;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\RequestInterface;
@@ -166,7 +171,7 @@ class StreamHandler
             if (isset($normalizedKeys['content-encoding'])) {
                 $encoding = $headers[$normalizedKeys['content-encoding']];
                 if ('gzip' === $encoding[0] || 'deflate' === $encoding[0]) {
-                    $stream = new Psr7\InflateStream(Psr7\Utils::streamFor($stream));
+                    $stream = new InflateStream(Psr7\Utils::streamFor($stream));
                     $headers['x-encoded-content-encoding'] = $headers[$normalizedKeys['content-encoding']];
 
                     // Remove content-encoding header
@@ -436,9 +441,12 @@ class StreamHandler
 
     /**
      * Parses the given proxy URL to make it compatible with the format PHP's stream context expects.
+     *
+     * @noinspection OffsetOperationsInspection
      */
     private function parse_proxy(string $url): array
     {
+        /** @var array|false $parsed */
         $parsed = parse_url($url);
 
         if (false !== $parsed && isset($parsed['scheme']) && 'http' === $parsed['scheme']) {
