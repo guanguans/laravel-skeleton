@@ -10,9 +10,6 @@ namespace App\Support\Http;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\HeaderProcessor;
-use GuzzleHttp\Promise as P;
-use GuzzleHttp\Promise\FulfilledPromise;
-use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\InflateStream;
 use GuzzleHttp\TransferStats;
@@ -37,7 +34,7 @@ class StreamHandler
      * @param  RequestInterface  $request request to send
      * @param  array  $options request transfer options
      */
-    public function __invoke(RequestInterface $request, array $options): PromiseInterface
+    public function __invoke(RequestInterface $request, array $options): ResponseInterface
     {
         // Sleep if there is a delay specified.
         if (isset($options['delay'])) {
@@ -79,7 +76,7 @@ class StreamHandler
             }
             $this->invokeStats($options, $request, $startTime, null, $e);
 
-            return P\Create::rejectionFor($e);
+            throw $e;
         }
     }
 
@@ -99,7 +96,7 @@ class StreamHandler
     /**
      * @param  resource  $stream
      */
-    private function createResponse(RequestInterface $request, array $options, $stream, ?float $startTime): PromiseInterface
+    private function createResponse(RequestInterface $request, array $options, $stream, ?float $startTime): ResponseInterface
     {
         $hdrs = $this->lastHeaders;
         $this->lastHeaders = [];
@@ -107,9 +104,7 @@ class StreamHandler
         try {
             [$ver, $status, $reason, $headers] = HeaderProcessor::parseHeaders($hdrs);
         } catch (\Exception $e) {
-            return P\Create::rejectionFor(
-                new RequestException('An error was encountered while creating the response', $request, null, $e)
-            );
+            throw new RequestException('An error was encountered while creating the response', $request, null, $e);
         }
 
         [$stream, $headers] = $this->checkDecode($options, $headers, $stream);
@@ -123,18 +118,14 @@ class StreamHandler
         try {
             $response = new Psr7\Response($status, $headers, $sink, $ver, $reason);
         } catch (\Exception $e) {
-            return P\Create::rejectionFor(
-                new RequestException('An error was encountered while creating the response', $request, null, $e)
-            );
+            throw new RequestException('An error was encountered while creating the response', $request, null, $e);
         }
 
         if (isset($options['on_headers'])) {
             try {
                 $options['on_headers']($response);
             } catch (\Exception $e) {
-                return P\Create::rejectionFor(
-                    new RequestException('An error was encountered during the on_headers event', $request, $response, $e)
-                );
+                throw new RequestException('An error was encountered during the on_headers event', $request, $response, $e);
             }
         }
 
@@ -146,7 +137,7 @@ class StreamHandler
 
         $this->invokeStats($options, $request, $startTime, $response, null);
 
-        return new FulfilledPromise($response);
+        return $response;
     }
 
     private function createSink(StreamInterface $stream, array $options): StreamInterface
