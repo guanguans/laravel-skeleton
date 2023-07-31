@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Http;
+namespace App\Support\Http\Concerns;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -10,7 +10,7 @@ use Psr\Http\Message\UriInterface;
 /**
  * Sync client interface for sending HTTP requests.
  */
-trait FgcClientTrait
+trait ConcreteHttpRequestMethods
 {
     /**
      * @param  string|UriInterface  $uri

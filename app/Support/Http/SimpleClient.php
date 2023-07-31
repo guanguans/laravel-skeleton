@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support\Http;
 
+use App\Support\Http\Concerns\ConcreteHttpRequestMethods;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
@@ -14,11 +15,11 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
-class FgcClient implements ClientInterface
+class SimpleClient implements ClientInterface
 {
-    use FgcClientTrait;
+    use ConcreteHttpRequestMethods;
 
-    public function __construct(private array $config = [], private ?ClientInterface $client = null)
+    public function __construct(private array $config = [], private ?ClientInterface $psrClient = null)
     {
         if (! isset($config['handler'])) {
             $config['handler'] = new HandlerStack($this->handler());
@@ -32,7 +33,7 @@ class FgcClient implements ClientInterface
         }
 
         $this->configureDefaults($config);
-        $this->client ??= new FgcPsrClient($this->config);
+        $this->psrClient ??= new PsrClient($this->config);
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface
@@ -338,6 +339,6 @@ class FgcClient implements ClientInterface
 
     private function handler(): callable
     {
-        return fn (RequestInterface $request, array $options): ResponseInterface => $this->client->sendRequest($request);
+        return fn (RequestInterface $request, array $options): ResponseInterface => $this->psrClient->sendRequest($request);
     }
 }
