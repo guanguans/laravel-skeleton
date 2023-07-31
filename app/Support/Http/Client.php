@@ -26,9 +26,6 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
 {
     use ConcreteHttpRequestMethods;
 
-    /** @var array Default request options */
-    private array $config;
-
     /**
      * Clients accept an array of constructor parameters.
      *
@@ -60,9 +57,10 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      *
      * @see \GuzzleHttp\RequestOptions for a list of available request options.
      */
-    public function __construct(array $config = [], private ?\Psr\Http\Client\ClientInterface $psrClient = null)
-    {
-        $this->config = $config;
+    public function __construct(
+        private array $config = [],
+        private ?\Psr\Http\Client\ClientInterface $psrClient = null
+    ) {
         if (! isset($config['handler'])) {
             $config['handler'] = $this->getDefaultHandlerStack();
         } elseif (! \is_callable($config['handler'])) {
@@ -79,17 +77,17 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
     }
 
     /**
-     * @return ResponseInterface|mixed
+     * @param  mixed  $method
+     * @param  mixed  $args
+     * @return mixed|ResponseInterface
      */
     public function __call($method, $args)
     {
         if (method_exists($this->psrClient, $method)) {
             return $this->psrClient->{$method}(...$args);
-
         }
 
         throw new \BadMethodCallException("Method [$method] does not exist.");
-
     }
 
     /**
@@ -453,7 +451,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      */
     private function getDefaultHandlerStack(): HandlerStack
     {
-        $handlerStack = new HandlerStack(function (RequestInterface $request, array $options): ResponseInterface {
+        return new HandlerStack(function (RequestInterface $request, array $options): ResponseInterface {
             try {
                 return $this->psrClient->sendRequest($request);
             } catch (\Throwable $e) {
@@ -464,7 +462,5 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         // $handlerStack->push(Middleware::redirect(), 'allow_redirects');
         // $handlerStack->push(Middleware::cookies(), 'cookies');
         // $handlerStack->push(Middleware::prepareBody(), 'prepare_body');
-
-        return $handlerStack;
     }
 }

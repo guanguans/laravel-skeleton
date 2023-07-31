@@ -12,6 +12,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-pdo": "*",
+        "ext-simplexml": "*",
         "bensampo/laravel-enum": "^6.4",
         "beyondcode/laravel-websockets": "^1.14",
         "biiiiiigmonster/hasin": "^3.0",
