@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Support\Http\Responses;
 
+use App\Support\Http\Support\Collection;
+use App\Support\Http\Support\XML;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
-use Overtrue\Http\Support\Collection;
-use Overtrue\Http\Support\XML;
 use Psr\Http\Message\ResponseInterface;
 
 class Response extends GuzzleResponse implements \Stringable
