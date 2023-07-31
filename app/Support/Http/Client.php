@@ -24,7 +24,7 @@ class Client extends \GuzzleHttp\Client
         }
 
         parent::__construct($config);
-        $this->psrClient = $psrClient ?? new StreamPsrClient($this->getConfig());
+        $this->psrClient = $psrClient ?? new PsrClient($this->getConfig());
     }
 
     /**

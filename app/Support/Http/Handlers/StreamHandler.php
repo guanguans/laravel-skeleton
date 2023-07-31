@@ -5,8 +5,9 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Http;
+namespace App\Support\Http\Handlers;
 
+use App\Support\Http\Contracts\Handler;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\HeaderProcessor;
@@ -24,7 +25,7 @@ use Psr\Http\Message\UriInterface;
  *
  * @final
  */
-class StreamHandler
+class StreamHandler implements Handler
 {
     private array $lastHeaders = [];
 
@@ -45,6 +46,10 @@ class StreamHandler
      */
     public function __invoke(RequestInterface $request, array $options): ResponseInterface
     {
+        if (! \ini_get('allow_url_fopen')) {
+            throw new \RuntimeException('StreamPsrClient require `allow_url_fopen` to be enabled in php.ini');
+        }
+
         // Sleep if there is a delay specified.
         if (isset($options['delay'])) {
             usleep($options['delay'] * 1000);
