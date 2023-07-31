@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support\Http;
 
+use App\Support\Http\Concerns\ConcreteEasyHttpRequestMethods;
 use App\Support\Http\Concerns\ConcreteHttpRequestMethods;
 use App\Support\Http\Contracts\ClientInterface;
 use App\Support\Http\Responses\Response;
@@ -24,7 +25,8 @@ use Psr\Http\Message\UriInterface;
  */
 class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
 {
-    use ConcreteHttpRequestMethods;
+    // use ConcreteHttpRequestMethods;
+    use ConcreteEasyHttpRequestMethods;
 
     /**
      * Clients accept an array of constructor parameters.
