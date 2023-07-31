@@ -22,6 +22,10 @@ class StreamPsrClient implements ClientInterface
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
+        if (! \ini_get('allow_url_fopen')) {
+            throw new \RuntimeException('StreamPsrClient require `allow_url_fopen` to be enabled in php.ini');
+        }
+
         return ($this->streamHandler)($request, $this->options);
     }
 }
