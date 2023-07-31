@@ -14,8 +14,6 @@ use Psr\Http\Message\UriInterface;
  */
 trait ConcreteEasyHttpRequestMethods
 {
-    protected string $bodyFormat = 'json';
-
     /**
      * @param  string|UriInterface  $uri
      */
@@ -69,67 +67,46 @@ trait ConcreteEasyHttpRequestMethods
         return $this->request('DELETE', $uri, array_merge_recursive($options, [$this->bodyFormat => $data]));
     }
 
-    /**
-     * Attach a raw body to the request.
-     *
-     * @return $this
-     */
-    public function asBody(string $contentType = 'application/json')
+    public function upload($uri, array $files = [], array $form = [], array $options = [])
     {
-        return $this->bodyFormat('body')->contentType($contentType);
+        $this->asMultipart();
+
+        $fileMultipart = [];
+        foreach ($files as $name => $contents) {
+            $contents = \is_resource($contents) ? $contents : fopen($contents, 'r');
+            $fileMultipart[] = compact('name', 'contents');
+        }
+
+        $formMultipart = [];
+        foreach ($form as $name => $contents) {
+            $formMultipart[] = $this->normalizeMultipartField($name, $contents);
+        }
+
+        $multipart = array_merge($fileMultipart, ...$formMultipart);
+
+        return $this->request('POST', $uri, array_merge_recursive($options, [$this->bodyFormat => $multipart]));
     }
 
-    /**
-     * Indicate the request contains JSON.
-     *
-     * @return $this
-     */
-    public function asJson()
+    public function normalizeMultipartField(string $name, mixed $contents): array
     {
-        return $this->bodyFormat('json')->contentType('application/json');
-    }
+        $field = [];
 
-    /**
-     * Indicate the request contains form parameters.
-     *
-     * @return $this
-     */
-    public function asForm()
-    {
-        return $this->bodyFormat('form_params')->contentType('application/x-www-form-urlencoded');
-    }
+        if (! \is_array($contents)) {
+            return [compact('name', 'contents')];
+        }
 
-    /**
-     * Indicate the request is a multi-part form request.
-     *
-     * @return $this
-     */
-    public function asMultipart()
-    {
-        return $this->bodyFormat('multipart');
-    }
+        foreach ($contents as $key => $value) {
+            $key = sprintf('%s[%s]', $name, $key);
 
-    /**
-     * Specify the body format of the request.
-     *
-     * @return $this
-     */
-    public function bodyFormat(string $format)
-    {
-        $this->bodyFormat = $format;
+            /** @noinspection SlowArrayOperationsInLoopInspection */
+            $field = array_merge(
+                $field,
+                \is_array($value)
+                    ? $this->normalizeMultipartField($key, $value)
+                    : [['name' => $key, 'contents' => $value]]
+            );
+        }
 
-        return $this;
-    }
-
-    /**
-     * Specify the request's content type.
-     *
-     * @return $this
-     */
-    public function contentType(string $contentType)
-    {
-        $this->config['headers']['Content-Type'] = $contentType;
-
-        return $this;
+        return $field;
     }
 }
