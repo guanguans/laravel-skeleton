@@ -33,6 +33,15 @@ class StreamHandler
      *
      * @param  RequestInterface  $request request to send
      * @param  array  $options request transfer options
+     *
+     * @see \GuzzleHttp\HandlerStack::create
+     * @see \GuzzleHttp\Utils::chooseHandler
+     * @see \GuzzleHttp\Handler\StreamHandler
+     * @see https://www.php.net/manual/zh/function.file-get-contents
+     * @see https://www.php.net/manual/zh/function.stream-context-create.php
+     * @see https://www.php.net/manual/zh/context.http.php
+     * @see https://www.php.net/manual/zh/function.stream-context-set-params.php
+     * @see https://www.php.net/manual/zh/function.stream-notification-callback.php
      */
     public function __invoke(RequestInterface $request, array $options): ResponseInterface
     {
@@ -542,6 +551,8 @@ class StreamHandler
             $params,
             static function ($code, $a, $b, $c, $transferred, $total) use ($value): void {
                 if (STREAM_NOTIFY_PROGRESS === $code) {
+                    // // https://www.php.net/manual/zh/function.stream-notification-callback.php#121236
+                    // $transferred > 0 and $transferred += 8192;
                     // The upload progress cannot be determined. Use 0 for cURL compatibility:
                     // https://curl.se/libcurl/c/CURLOPT_PROGRESSFUNCTION.html
                     $value($total, $transferred, 0, 0);
