@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Support\Http;
 
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\ClientTrait;
+use App\Support\Http\Concerns\ConcreteHttpRequestMethods;
+use App\Support\Http\Contracts\ClientInterface;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\InvalidArgumentException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Promise as P;
 use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\RedirectMiddleware;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -21,7 +25,7 @@ use Psr\Http\Message\UriInterface;
  */
 class EasyClient implements \Psr\Http\Client\ClientInterface, ClientInterface
 {
-    use ClientTrait;
+    use ConcreteHttpRequestMethods;
 
     /** @var array Default request options */
     private array $config;
@@ -78,7 +82,7 @@ class EasyClient implements \Psr\Http\Client\ClientInterface, ClientInterface
      *
      * @deprecated Client::__call will be removed in guzzlehttp/guzzle:8.0.
      */
-    public function __call(string $method, array $args)
+    public function __call($method, $args)
     {
         if (\count($args) < 1) {
             throw new InvalidArgumentException('Magic request methods require a URI and optional options array');
