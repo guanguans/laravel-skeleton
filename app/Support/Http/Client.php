@@ -6,11 +6,11 @@ namespace App\Support\Http;
 
 use App\Support\Http\Concerns\ConcreteHttpRequestMethods;
 use App\Support\Http\Contracts\ClientInterface;
+use App\Support\Http\Responses\Response;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\InvalidArgumentException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\RedirectMiddleware;
 use GuzzleHttp\RequestOptions;
@@ -129,8 +129,8 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * contain the query string as well. Use an array to provide a URL
      * template and additional variables to use in the URL template expansion.
      *
-     * @param  string  $method  HTTP method
-     * @param  string|UriInterface  $uri     URI object or string
+     * @param  string  $method HTTP method
+     * @param  string|UriInterface  $uri URI object or string
      * @param  array  $options Request options to apply. See \GuzzleHttp\RequestOptions.
      */
     public function request(string $method, $uri = '', array $options = []): ResponseInterface
@@ -451,16 +451,28 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      */
     private function getDefaultHandlerStack(): HandlerStack
     {
-        return new HandlerStack(function (RequestInterface $request, array $options): ResponseInterface {
+        $handlerStack = new HandlerStack(function (RequestInterface $request, array $options): ResponseInterface {
             try {
                 return $this->psrClient->sendRequest($request);
             } catch (\Throwable $e) {
                 throw new RequestException('An error was encountered while creating the response', $request, null, $e);
             }
         });
-        // $handlerStack->push(Middleware::httpErrors(), 'http_errors');
+        $handlerStack->push(Middleware::httpErrors(), 'http_errors');
         // $handlerStack->push(Middleware::redirect(), 'allow_redirects');
-        // $handlerStack->push(Middleware::cookies(), 'cookies');
+        $handlerStack->push(Middleware::cookies(), 'cookies');
         // $handlerStack->push(Middleware::prepareBody(), 'prepare_body');
+        $handlerStack->push(
+            static function (callable $handler): callable {
+                return static function ($request, array $options) use ($handler) {
+                    $response = $handler($request, $options);
+
+                    return Response::buildFromPsrResponse($response);
+                };
+            },
+            'transform_response'
+        );
+
+        return $handlerStack;
     }
 }
