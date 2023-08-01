@@ -53,9 +53,9 @@ class StreamResponse extends Response
 
     private function getStreamExt(): ?string
     {
-        $wrapperData = $this->getBody()->getMetadata('wrapper_data');
+        $wrapperData = (array) $this->getBody()->getMetadata('wrapper_data');
 
-        if (preg_match('/\bstream\/(.+)$/', $wrapperData[0], $matches)) {
+        if (preg_match('/\bstream\/(.+)$/', $wrapperData[0] ?? '', $matches)) {
             return $matches[1];
         }
 
