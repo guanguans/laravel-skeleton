@@ -8,6 +8,7 @@ use App\Support\Http\Concerns\ConcreteConfigMethods;
 use App\Support\Http\Concerns\ConcreteEasyHttpRequestMethods;
 use App\Support\Http\Concerns\ConcreteHttpRequestMethods;
 use App\Support\Http\Contracts\ClientInterface;
+use App\Support\Http\Handlers\StreamHandler;
 use App\Support\Http\Responses\Response;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\InvalidArgumentException;
@@ -61,10 +62,8 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      *
      * @see \GuzzleHttp\RequestOptions for a list of available request options.
      */
-    public function __construct(
-        private array $config = [],
-        private ?\Psr\Http\Client\ClientInterface $psrClient = null
-    ) {
+    public function __construct(private array $config = [])
+    {
         if (! isset($config['handler'])) {
             $config['handler'] = $this->getDefaultHandlerStack();
         } elseif (! \is_callable($config['handler'])) {
@@ -77,7 +76,6 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         }
 
         $this->configureDefaults($config);
-        $this->psrClient ??= new PsrClient($this->config);
     }
 
     /**
@@ -87,11 +85,14 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      */
     public function __call($method, $args)
     {
-        if (method_exists($this->psrClient, $method)) {
-            return $this->psrClient->{$method}(...$args);
+        if (\count($args) < 1) {
+            throw new InvalidArgumentException('Magic request methods require a URI and optional options array');
         }
 
-        throw new \BadMethodCallException("Method [$method] does not exist.");
+        $uri = $args[0];
+        $opts = $args[1] ?? [];
+
+        return $this->request($method, $uri, $opts);
     }
 
     /**
@@ -455,9 +456,9 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      */
     private function getDefaultHandlerStack(): HandlerStack
     {
-        $handlerStack = new HandlerStack(function (RequestInterface $request, array $options): ResponseInterface {
+        $handlerStack = new HandlerStack(static function (RequestInterface $request, array $options): ResponseInterface {
             try {
-                return $this->psrClient->sendRequest($request);
+                return (new StreamHandler())($request, $options);
             } catch (\Throwable $e) {
                 throw new RequestException('An error was encountered while creating the response', $request, null, $e);
             }

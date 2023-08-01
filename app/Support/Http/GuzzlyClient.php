@@ -4,27 +4,24 @@ declare(strict_types=1);
 
 namespace App\Support\Http;
 
+use App\Support\Http\Handlers\StreamHandler;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise as P;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\PromiseInterface;
-use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 
 class GuzzlyClient extends \GuzzleHttp\Client
 {
-    private ClientInterface $psrClient;
-
-    public function __construct(array $config = [], ?ClientInterface $psrClient = null)
+    public function __construct(array $config = [])
     {
         if (! isset($config['handler'])) {
             $config['handler'] = $this->getDefaultHandlerStack();
         }
 
         parent::__construct($config);
-        $this->psrClient = $psrClient ?? new PsrClient($this->getConfig());
     }
 
     /**
@@ -33,9 +30,9 @@ class GuzzlyClient extends \GuzzleHttp\Client
      */
     private function getDefaultHandlerStack(): HandlerStack
     {
-        $handlerStack = new HandlerStack(function (RequestInterface $request, array $options): PromiseInterface {
+        $handlerStack = new HandlerStack(static function (RequestInterface $request, array $options): PromiseInterface {
             try {
-                return new FulfilledPromise($this->psrClient->sendRequest($request));
+                return new FulfilledPromise((new StreamHandler())($request, $options));
             } catch (\Throwable $e) {
                 return P\Create::rejectionFor(
                     new RequestException('An error was encountered while creating the response', $request, null, $e)
