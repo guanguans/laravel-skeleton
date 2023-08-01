@@ -25,6 +25,11 @@ class PsrClient implements ClientInterface
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        return ($this->handler)($request, $this->options);
+        return $this->send($request);
+    }
+
+    public function send(RequestInterface $request, array $options = []): ResponseInterface
+    {
+        return ($this->handler)($request, $options + $this->options);
     }
 }
