@@ -123,7 +123,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         $options[RequestOptions::ALLOW_REDIRECTS] = false;
         $options[RequestOptions::HTTP_ERRORS] = false;
 
-        return $this->sendAsync($request, $options)->wait();
+        return $this->send($request, $options);
     }
 
     /**
