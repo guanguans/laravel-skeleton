@@ -2,14 +2,11 @@
 
 namespace App\Rules;
 
-class EvenNumberRule extends RegexRule
+final class UlidRule extends RegexRule
 {
-    /**
-     * {@inheritDoc}
-     */
     protected function pattern(): string
     {
         /** @lang PhpRegExp */
-        return '/^\d*[02468]$/';
+        return '/[0-7][0-9A-HJKMNP-TV-Z]{25}/';
     }
 }
