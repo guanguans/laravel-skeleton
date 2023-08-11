@@ -59,7 +59,7 @@
         "stillat/blade-directives": "^1.2",
         "symfony/stopwatch": "^6.3",
         "teamtnt/laravel-scout-tntsearch-driver": "^12.5",
-        "vectorface/whip": "^0.3",
+        "vectorface/whip": "^0.4",
         "watson/validating": "^8.1",
         "wendelladriel/laravel-validated-dto": "^2.11"
     },
