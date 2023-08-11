@@ -1,6 +1,5 @@
 <?php
 
-use App\Support\HmacSigner;
 use Knuckles\Scribe\Extracting\Strategies;
 
 return [
@@ -10,12 +9,12 @@ return [
     /*
      * The HTML <title> for the generated documentation. If this is empty, Scribe will infer it from config('app.name').
      */
-    'title' => 'API 文档',
+    'title' => null,
 
     /*
      * A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
      */
-    'description' => 'API 文档',
+    'description' => '',
 
     /*
      * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
@@ -76,19 +75,6 @@ return [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
-
-                    'timestamp' => $timestamp = time(),
-                    'nonce' => $nonce = \Illuminate\Support\Str::random(),
-                    'signature' => value(function ($timestamp, $nonce) {
-                        $params = array_merge($input = [], [
-                            'timestamp' => $timestamp,
-                            'nonce' => $nonce,
-                        ]);
-                        /** @var HmacSigner $signer */
-                        $signer = app(HmacSigner::class, ['secret' => config('services.signer.default.secret', '')]);
-
-                        return $signer->sign($params);
-                    }, $timestamp, $nonce),
                 ],
 
                 /*
@@ -152,7 +138,7 @@ return [
      * - "static" will generate a static HTMl page in the /public/docs folder,
      * - "laravel" will generate the documentation as a Blade view, so you can add routing and authentication.
      */
-    'type' => 'laravel',
+    'type' => 'static',
 
     /*
      * Settings for `static` type output.
@@ -191,9 +177,7 @@ return [
         /*
          * Middleware to attach to the docs endpoint (if `add_routes` is true).
          */
-        'middleware' => [
-            // \App\Http\Middleware\VerifySignature::class
-        ],
+        'middleware' => [],
     ],
 
     'try_it_out' => [
@@ -227,13 +211,13 @@ return [
         /*
          * Set this to true if any endpoints in your API use authentication.
          */
-        'enabled' => true,
+        'enabled' => false,
 
         /*
          * Set this to true if your API should be authenticated by default. If so, you must also set `enabled` (above) to true.
          * You can then use @unauthenticated or @authenticated on individual endpoints to change their status from the default.
          */
-        'default' => true,
+        'default' => false,
 
         /*
          * Where is the auth value meant to be sent in a request?
@@ -270,10 +254,10 @@ return [
      * Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
      */
     'intro_text' => <<<'INTRO'
-本文档旨在提供您使用我们的 API 所需的所有信息。
+This documentation aims to provide all the information you need to work with our API.
 
-<aside>当您滚动时，您会在右侧的黑暗区域（或作为移动设备内容的一部分）看到使用不同编程语言的 API 的代码示例。
-您可以通过右上角的选项卡（或从移动设备左上角的导航菜单）切换使用的语言。</aside>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
 INTRO
     ,
 
@@ -286,7 +270,6 @@ INTRO
     'example_languages' => [
         'bash',
         'javascript',
-        'php',
     ],
 
     /*
@@ -327,7 +310,8 @@ INTRO
         /*
          * Endpoints which don't have a @group will be placed in this default group.
          */
-        'default' => 'Other - 其他',
+        'default' => 'Endpoints',
+
         /*
          * By default, Scribe will sort groups alphabetically, and endpoints in the order their routes are defined.
          * You can override this by listing the groups, subgroups and endpoints here in the order you want them.
@@ -337,17 +321,17 @@ INTRO
          * Note: you must include the initial '/' when writing an endpoint.
          */
         'order' => [
-            'Ping - 示例接口管理' => [
-                'ping - 示例接口',
-            ],
-            'Auth - 认证接口管理' => [
-                'register - 注册',
-                'login - 登录',
-                'logout - 退出',
-                'refresh - 重刷 token',
-                'me - 用户信息',
-                'index - 用户列表',
-            ],
+            // 'This group will come first',
+            // 'This group will come next' => [
+            //     'POST /this-endpoint-will-comes-first',
+            //     'GET /this-endpoint-will-comes-next',
+            // ],
+            // 'This group will come third' => [
+            //     'This subgroup will come first' => [
+            //         'GET /this-other-endpoint-will-comes-first',
+            //         'GET /this-other-endpoint-will-comes-next',
+            //     ]
+            // ]
         ],
     ],
 
@@ -369,10 +353,10 @@ INTRO
      * - {git:short} => Short hash of the last Git commit
      *
      * Available tokens are `{date:<format>}` and `{git:<format>}`.
-     * The format you pass to `date` will be passed to PhP's `date()` function.
+     * The format you pass to `date` will be passed to PHP's `date()` function.
      * The format you pass to `git` can be either "short" or "long".
      */
-    'last_updated' => '最后更新: {date:Y-m-d H:i:s}',
+    'last_updated' => 'Last updated: {date:F j, Y}',
 
     'examples' => [
         /*
