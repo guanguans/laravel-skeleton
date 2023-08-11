@@ -24,7 +24,7 @@
         "envant/fireable": "^1.0",
         "f9webltd/laravel-api-response-helpers": "^1.5",
         "guanguans/laravel-dump-sql": "^2.3",
-        "guanguans/laravel-exception-notify": "^2.16",
+        "guanguans/laravel-exception-notify": "^3.1",
         "guzzlehttp/guzzle": "^7.7",
         "hammerstone/fast-paginate": "^1.0",
         "hammerstone/laravel-pseudo-daemon": "^1.1",

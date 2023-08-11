@@ -35,8 +35,6 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            // 异常报错通知
-            ExceptionNotifier::reportIf($this->shouldReport($e), $e);
         });
     }
 
