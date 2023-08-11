@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98ec3b9a75b5aaa683a43fd67d57c970",
+    "content-hash": "a768b3173486e46485ea90b7a7ccfcda",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -15109,29 +15109,29 @@
         },
         {
             "name": "laravel-lang/common",
-            "version": "v3.1.1",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/common.git",
-                "reference": "ce2d52543846052dc79de6d3060044b49545e018"
+                "reference": "31744c7f64610990a77c7705e590e04c1fca372d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/common/zipball/ce2d52543846052dc79de6d3060044b49545e018",
-                "reference": "ce2d52543846052dc79de6d3060044b49545e018",
+                "url": "https://api.github.com/repos/Laravel-Lang/common/zipball/31744c7f64610990a77c7705e590e04c1fca372d",
+                "reference": "31744c7f64610990a77c7705e590e04c1fca372d",
                 "shasum": ""
             },
             "require": {
-                "laravel-lang/attributes": "^2.0",
-                "laravel-lang/http-statuses": "^3.0",
-                "laravel-lang/lang": "^12.0",
-                "laravel-lang/publisher": "^14.0",
-                "php": "^8.0"
+                "laravel-lang/attributes": "^2.3.3",
+                "laravel-lang/http-statuses": "^3.3.1",
+                "laravel-lang/lang": "^13.0",
+                "laravel-lang/publisher": "^14.6.4",
+                "php": "^8.1"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0",
-                "phpunit/phpunit": "^9.6",
-                "symfony/var-dumper": "^5.4 || ^6.0"
+                "orchestra/testbench": "^8.5 || ^9.0",
+                "phpunit/phpunit": "^10.0",
+                "symfony/var-dumper": "^6.3"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -15154,19 +15154,27 @@
                 "Laravel-lang",
                 "attribute",
                 "attributes",
+                "breeze",
+                "cashier",
+                "fortify",
+                "framework",
                 "http",
                 "http-status",
                 "http-status-code",
                 "i18n",
+                "jetstream",
                 "lang",
                 "language",
                 "languages",
                 "laravel",
                 "locale",
                 "locales",
+                "nova",
                 "publisher",
+                "spark",
                 "translation",
-                "translations"
+                "translations",
+                "ui"
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/common/issues",
@@ -15178,7 +15186,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-02-17T12:46:13+00:00"
+            "time": "2023-08-09T09:24:50+00:00"
         },
         {
             "name": "laravel-lang/http-statuses",
@@ -15258,16 +15266,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "12.24.2",
+            "version": "13.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "5a6a3e7751a91dec3ee7d69c12db4690643d59a0"
+                "reference": "69b3a29907ee0018ebd75ce37a217d020cd9aa21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/5a6a3e7751a91dec3ee7d69c12db4690643d59a0",
-                "reference": "5a6a3e7751a91dec3ee7d69c12db4690643d59a0",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/69b3a29907ee0018ebd75ce37a217d020cd9aa21",
+                "reference": "69b3a29907ee0018ebd75ce37a217d020cd9aa21",
                 "shasum": ""
             },
             "require": {
@@ -15276,8 +15284,8 @@
                 "php": "^8.1"
             },
             "require-dev": {
-                "laravel-lang/status-generator": "^1.15",
-                "phpunit/phpunit": "^9.6",
+                "laravel-lang/status-generator": "^1.19",
+                "phpunit/phpunit": "^10.0",
                 "symfony/var-dumper": "^6.0"
             },
             "type": "library",
@@ -15320,7 +15328,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-07-25T22:28:42+00:00"
+            "time": "2023-08-09T08:51:25+00:00"
         },
         {
             "name": "laravel-lang/publisher",
