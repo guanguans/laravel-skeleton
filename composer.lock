@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19929e364aba6e93b42ce007a5e93184",
+    "content-hash": "98ec3b9a75b5aaa683a43fd67d57c970",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -12311,16 +12311,16 @@
         },
         {
             "name": "teamtnt/laravel-scout-tntsearch-driver",
-            "version": "v12.5.0",
+            "version": "v13.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/teamtnt/laravel-scout-tntsearch-driver.git",
-                "reference": "d926f3a4fa3d91f7998ff8b7b87369b757eaeb6b"
+                "reference": "e9d912cbea676caae79c52bdd96f5a8d8a99e3d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/teamtnt/laravel-scout-tntsearch-driver/zipball/d926f3a4fa3d91f7998ff8b7b87369b757eaeb6b",
-                "reference": "d926f3a4fa3d91f7998ff8b7b87369b757eaeb6b",
+                "url": "https://api.github.com/repos/teamtnt/laravel-scout-tntsearch-driver/zipball/e9d912cbea676caae79c52bdd96f5a8d8a99e3d3",
+                "reference": "e9d912cbea676caae79c52bdd96f5a8d8a99e3d3",
                 "shasum": ""
             },
             "require": {
@@ -12331,7 +12331,7 @@
                 "illuminate/support": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0",
                 "laravel/scout": "7.*|^8.0|^8.3|^9.0|^10",
                 "php": ">=7.1|^8",
-                "teamtnt/tntsearch": "2.7.0|^2.8|^3.0"
+                "teamtnt/tntsearch": "2.7.0|^2.8|^3.0|^4.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
@@ -12375,29 +12375,30 @@
             ],
             "support": {
                 "issues": "https://github.com/teamtnt/laravel-scout-tntsearch-driver/issues",
-                "source": "https://github.com/teamtnt/laravel-scout-tntsearch-driver/tree/v12.5.0"
+                "source": "https://github.com/teamtnt/laravel-scout-tntsearch-driver/tree/v13.2.0"
             },
-            "time": "2023-07-05T10:42:31+00:00"
+            "time": "2023-07-14T12:32:13+00:00"
         },
         {
             "name": "teamtnt/tntsearch",
-            "version": "v3.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/teamtnt/tntsearch.git",
-                "reference": "177c4252b1539458c295fc67b32f7e2be3a1c1b1"
+                "reference": "d3fc3e7ccc1760dc4b8604807be01140fa7f69c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/teamtnt/tntsearch/zipball/177c4252b1539458c295fc67b32f7e2be3a1c1b1",
-                "reference": "177c4252b1539458c295fc67b32f7e2be3a1c1b1",
+                "url": "https://api.github.com/repos/teamtnt/tntsearch/zipball/d3fc3e7ccc1760dc4b8604807be01140fa7f69c5",
+                "reference": "d3fc3e7ccc1760dc4b8604807be01140fa7f69c5",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ext-pdo_sqlite": "*",
                 "ext-sqlite3": "*",
-                "php": "~7.1|^8"
+                "php": "~7.1|^8",
+                "predis/predis": "^2.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "7.*|8.*|9.*",
@@ -12439,7 +12440,7 @@
             ],
             "support": {
                 "issues": "https://github.com/teamtnt/tntsearch/issues",
-                "source": "https://github.com/teamtnt/tntsearch/tree/v3.2.0"
+                "source": "https://github.com/teamtnt/tntsearch/tree/v4.2.1"
             },
             "funding": [
                 {
@@ -12455,7 +12456,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-05-04T09:38:01+00:00"
+            "time": "2023-07-19T10:35:23+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
