@@ -28,7 +28,7 @@
         "guzzlehttp/guzzle": "^7.7",
         "hammerstone/fast-paginate": "^1.0",
         "hammerstone/laravel-pseudo-daemon": "^1.1",
-        "jasny/sso": "^0.3.0",
+        "jasny/sso": "^0.5.0",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^5.2",
         "joetannenbaum/terminalia": "^0.3",
