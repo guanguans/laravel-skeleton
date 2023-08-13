@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad0e3e33972625ca7c37871ff640252a",
+    "content-hash": "ac058714b11e08a159c59ce6f736b38f",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -5921,16 +5921,16 @@
         },
         {
             "name": "opcodesio/log-viewer",
-            "version": "v2.5.4",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opcodesio/log-viewer.git",
-                "reference": "583a2fa0d709a7bc2c12ebd2b75584eaa47cd4aa"
+                "reference": "40ed823a38a8b5b175778bc460162ab1d72a8244"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/583a2fa0d709a7bc2c12ebd2b75584eaa47cd4aa",
-                "reference": "583a2fa0d709a7bc2c12ebd2b75584eaa47cd4aa",
+                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/40ed823a38a8b5b175778bc460162ab1d72a8244",
+                "reference": "40ed823a38a8b5b175778bc460162ab1d72a8244",
                 "shasum": ""
             },
             "require": {
@@ -5944,11 +5944,10 @@
                 "guzzlehttp/guzzle": "^7.2",
                 "itsgoingd/clockwork": "^5.1",
                 "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^6.0",
+                "nunomaduro/collision": "^7.0",
                 "orchestra/testbench": "^7.6|^8.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpunit/phpunit": "^9.5",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
                 "spatie/test-time": "^1.3"
             },
             "suggest": {
@@ -5993,7 +5992,7 @@
             ],
             "support": {
                 "issues": "https://github.com/opcodesio/log-viewer/issues",
-                "source": "https://github.com/opcodesio/log-viewer/tree/v2.5.4"
+                "source": "https://github.com/opcodesio/log-viewer/tree/v3.0.0"
             },
             "funding": [
                 {
@@ -6005,7 +6004,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-10T06:33:41+00:00"
+            "time": "2023-08-11T12:00:35+00:00"
         },
         {
             "name": "overtrue/http",

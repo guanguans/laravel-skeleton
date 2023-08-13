@@ -39,7 +39,7 @@
         "laravel/tinker": "^2.8",
         "nunomaduro/termwind": "^1.15",
         "nyholm/psr7": "^1.8",
-        "opcodesio/log-viewer": "^2.5",
+        "opcodesio/log-viewer": "^3.0",
         "overtrue/laravel-query-logger": "^3.1",
         "php-open-source-saver/jwt-auth": "^2.1",
         "predis/predis": "^2.2",
