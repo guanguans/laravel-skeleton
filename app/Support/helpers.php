@@ -9,6 +9,89 @@ use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 
+if (! function_exists('env_explode')) {
+    /**
+     * @noinspection LaravelFunctionsInspection
+     */
+    function env_explode(string $key, mixed $default = null, string $delimiter = ',', int $limit = PHP_INT_MAX): mixed
+    {
+        $env = env($key, $default);
+
+        return is_string($env) ? explode($delimiter, $env, $limit) : $env;
+    }
+}
+
+if (! function_exists('env_getcsv')) {
+    /**
+     * @noinspection LaravelFunctionsInspection
+     */
+    function env_getcsv(
+        string $key,
+        mixed $default = null,
+        string $delimiter = ',',
+        string $enclosure = '"',
+        string $escape = '\\'
+    ): mixed {
+        $env = env($key, $default);
+
+        return is_string($env) ? str_getcsv($env, $delimiter, $enclosure, $escape) : $env;
+    }
+}
+
+if (! function_exists('env_json_decode')) {
+    /**
+     * @noinspection LaravelFunctionsInspection
+     */
+    function env_json_decode(
+        string $key,
+        mixed $default,
+        bool $assoc = true,
+        int $depth = 512,
+        int $options = JSON_THROW_ON_ERROR
+    ): mixed {
+        $env = env($key, $default);
+
+        return is_string($env) ? json_decode($env, $assoc, $depth, $options) : $env;
+    }
+}
+
+if (! function_exists('human_bytes')) {
+    /**
+     * Convert bytes to human readable format.
+     *
+     * @param  int  $bytes the amount of bytes to convert to human readable format
+     * @param  int  $decimals the number of decimals to use in the resulting string
+     *
+     * @see https://stackoverflow.com/a/23888858/1580028
+     */
+    function human_bytes(int $bytes, int $decimals = 2): string
+    {
+        $size = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        $factor = (int) floor((strlen((string) $bytes) - 1) / 3);
+
+        if (0 === $factor) {
+            $decimals = 0;
+        }
+
+        return sprintf("%.{$decimals}f%s", $bytes / (1024 ** $factor), $size[$factor]);
+    }
+}
+
+if (! function_exists('human_milliseconds')) {
+    function human_milliseconds(float $milliseconds, int $precision = 2): string
+    {
+        if ($milliseconds < 1) {
+            return sprintf('%sμs', round($milliseconds * 1000, $precision));
+        }
+
+        if ($milliseconds < 1000) {
+            return sprintf('%sms', round($milliseconds, $precision));
+        }
+
+        return sprintf('%ss', round($milliseconds / 1000, $precision));
+    }
+}
+
 if (! function_exists('get_throwables')) {
     /**
      * @return array<\Throwable>
