@@ -67,6 +67,7 @@
         "barryvdh/laravel-ide-helper": "^2.13",
         "bennett-treptow/laravel-migration-generator": "^4.3",
         "brainmaestro/composer-git-hooks": "^3.0@alpha",
+        "dedoc/scramble": "*",
         "deployer/deployer": "^7.3",
         "dragon-code/benchmark": "^2.5",
         "elao/enum": "^2.2",
