@@ -14967,31 +14967,31 @@
         },
         {
             "name": "laradumps/laradumps",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "f3ccab02b1a6fe17471deb94b6a8f870da59abfd"
+                "reference": "b0b954854aadc13b539c368bcd52c031eab57a23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/f3ccab02b1a6fe17471deb94b6a8f870da59abfd",
-                "reference": "f3ccab02b1a6fe17471deb94b6a8f870da59abfd",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/b0b954854aadc13b539c368bcd52c031eab57a23",
+                "reference": "b0b954854aadc13b539c368bcd52c031eab57a23",
                 "shasum": ""
             },
             "require": {
                 "illuminate/mail": "^9.0|^10.0",
                 "illuminate/support": "^9.0|^10.0",
-                "laradumps/laradumps-core": "^0.2.0",
+                "laradumps/laradumps-core": "^0.3.0",
                 "nunomaduro/termwind": "^1.15.1",
                 "php": "^8.0"
             },
             "require-dev": {
-                "laravel/pint": "^1.7",
-                "nunomaduro/larastan": "^2.4",
-                "orchestra/testbench": "^7.22|^8.0",
-                "pestphp/pest": "^2.2",
-                "symfony/var-dumper": "^5.0|^6.0"
+                "laravel/pint": "^1.10.6",
+                "nunomaduro/larastan": "^2.6.4",
+                "orchestra/testbench": "^7.22|^8.8",
+                "pestphp/pest": "^2.14",
+                "symfony/var-dumper": "^5.0|^6.3.3"
             },
             "type": "library",
             "extra": {
@@ -15024,7 +15024,7 @@
             "homepage": "https://github.com/laradumps/laradumps",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v2.1.0"
+                "source": "https://github.com/laradumps/laradumps/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -15032,20 +15032,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-03T13:17:38+00:00"
+            "time": "2023-08-15T13:40:01+00:00"
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "d4ae3a1c6480285053910f57d6f2f51c9df5e76a"
+                "reference": "80e65e0a3a9bec82f2cabee1c58597a50d12acad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/d4ae3a1c6480285053910f57d6f2f51c9df5e76a",
-                "reference": "d4ae3a1c6480285053910f57d6f2f51c9df5e76a",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/80e65e0a3a9bec82f2cabee1c58597a50d12acad",
+                "reference": "80e65e0a3a9bec82f2cabee1c58597a50d12acad",
                 "shasum": ""
             },
             "require": {
@@ -15092,7 +15092,7 @@
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v0.2.0"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v0.3.0"
             },
             "funding": [
                 {
@@ -15100,7 +15100,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-03T13:10:12+00:00"
+            "time": "2023-08-15T13:31:02+00:00"
         },
         {
             "name": "laravel-lang/attributes",
