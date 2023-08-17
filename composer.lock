@@ -2494,16 +2494,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "3.3.1",
+            "version": "3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "8177d8697f692a88503b5870dfbe667b06a9221e"
+                "reference": "fbb456a8d4cac92f448e0d342f15510d6dca5137"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/8177d8697f692a88503b5870dfbe667b06a9221e",
-                "reference": "8177d8697f692a88503b5870dfbe667b06a9221e",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/fbb456a8d4cac92f448e0d342f15510d6dca5137",
+                "reference": "fbb456a8d4cac92f448e0d342f15510d6dca5137",
                 "shasum": ""
             },
             "require": {
@@ -2621,20 +2621,20 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2023-08-14T07:18:22+00:00"
+            "time": "2023-08-17T03:47:14+00:00"
         },
         {
             "name": "guanguans/notify",
-            "version": "v1.25.1",
+            "version": "1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "1795da37fd850cd8923a142f4b39f412180195cb"
+                "reference": "f9432f42b7486178ec4a46232561a6e6b6e253c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/1795da37fd850cd8923a142f4b39f412180195cb",
-                "reference": "1795da37fd850cd8923a142f4b39f412180195cb",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/f9432f42b7486178ec4a46232561a6e6b6e253c3",
+                "reference": "f9432f42b7486178ec4a46232561a6e6b6e253c3",
                 "shasum": ""
             },
             "require": {
@@ -2645,27 +2645,22 @@
                 "symfony/options-resolver": "^5.4 || ^6.0"
             },
             "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.8",
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "dms/phpunit-arraysubset-asserts": "^0.4.0",
+                "dms/phpunit-arraysubset-asserts": "^0.5",
+                "ergebnis/composer-normalize": "^2.19",
                 "friendsofphp/php-cs-fixer": "^3.4",
-                "jetbrains/phpstorm-attributes": "^1.0",
-                "johnkary/phpunit-speedtrap": "^4.0",
                 "mockery/mockery": "^1.3",
-                "nyholm/nsa": "^1.3",
-                "php-mock/php-mock-phpunit": "^2.6",
-                "phpbench/phpbench": "^1.1",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.9",
+                "php-mock/php-mock-phpunit": "^2.7",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-deprecation-rules": "^1.1",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "rector/rector": "^0.15.7",
-                "roave/security-advisories": "dev-latest",
-                "spatie/phpunit-snapshot-assertions": "^3.0 || ^4.2",
+                "phpunit/phpunit": "^8.5 || ^9.0 || ^10.0",
+                "rector/rector": "^0.17",
                 "symfony/mailer": "^5.4 || ^6.0",
                 "symfony/var-dumper": "^5.4 || ^6.0",
                 "textalk/websocket": "^1.5",
-                "vimeo/psalm": "^4.30 || ^5.4"
+                "vimeo/psalm": "^4.30 || ^5.0"
             },
             "suggest": {
                 "symfony/mailer": "Required to use the email.",
@@ -2769,7 +2764,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2023-01-19T03:13:50+00:00"
+            "time": "2023-08-16T07:01:47+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
