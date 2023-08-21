@@ -6,7 +6,7 @@ namespace App\Support\Http\Support;
 
 use JetBrains\PhpStorm\Pure;
 
-class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonSerializable
+class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonSerializable, \Stringable
 {
     protected array $items = [];
 
