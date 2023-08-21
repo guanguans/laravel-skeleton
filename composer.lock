@@ -5923,16 +5923,16 @@
         },
         {
             "name": "opcodesio/log-viewer",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opcodesio/log-viewer.git",
-                "reference": "d83a5be3b4b2f2446dcdf7c010af571cb8a1a4ea"
+                "reference": "9ed226399cb5ce4de27e6b92634a5866bdb42b30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/d83a5be3b4b2f2446dcdf7c010af571cb8a1a4ea",
-                "reference": "d83a5be3b4b2f2446dcdf7c010af571cb8a1a4ea",
+                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/9ed226399cb5ce4de27e6b92634a5866bdb42b30",
+                "reference": "9ed226399cb5ce4de27e6b92634a5866bdb42b30",
                 "shasum": ""
             },
             "require": {
@@ -5994,7 +5994,7 @@
             ],
             "support": {
                 "issues": "https://github.com/opcodesio/log-viewer/issues",
-                "source": "https://github.com/opcodesio/log-viewer/tree/v3.0.3"
+                "source": "https://github.com/opcodesio/log-viewer/tree/v3.0.4"
             },
             "funding": [
                 {
@@ -6006,7 +6006,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-18T19:10:02+00:00"
+            "time": "2023-08-21T14:11:55+00:00"
         },
         {
             "name": "overtrue/http",
