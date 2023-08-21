@@ -8952,16 +8952,16 @@
         },
         {
             "name": "spatie/laravel-query-builder",
-            "version": "5.2.0",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-query-builder.git",
-                "reference": "7b3911f61dcaa27804b80f30b73a468a9539e850"
+                "reference": "77ada3e5d80e682864dc63e429bddf7dd1198c14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/7b3911f61dcaa27804b80f30b73a468a9539e850",
-                "reference": "7b3911f61dcaa27804b80f30b73a468a9539e850",
+                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/77ada3e5d80e682864dc63e429bddf7dd1198c14",
+                "reference": "77ada3e5d80e682864dc63e429bddf7dd1198c14",
                 "shasum": ""
             },
             "require": {
@@ -8976,6 +8976,7 @@
                 "mockery/mockery": "^1.4",
                 "orchestra/testbench": "^7.0|^8.0",
                 "pestphp/pest": "^1.20",
+                "spatie/invade": "^2.0",
                 "spatie/laravel-ray": "^1.28"
             },
             "type": "library",
@@ -9020,7 +9021,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-02-24T15:48:30+00:00"
+            "time": "2023-08-21T10:51:49+00:00"
         },
         {
             "name": "spatie/laravel-schedule-monitor",
