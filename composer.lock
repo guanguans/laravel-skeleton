@@ -3645,16 +3645,16 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "4.23.0",
+            "version": "4.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "8daa74c96c2b99c326293f209e392eceb823888f"
+                "reference": "4960403638439ef3fc83a0843e795fb92a5fc4f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/8daa74c96c2b99c326293f209e392eceb823888f",
-                "reference": "8daa74c96c2b99c326293f209e392eceb823888f",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/4960403638439ef3fc83a0843e795fb92a5fc4f1",
+                "reference": "4960403638439ef3fc83a0843e795fb92a5fc4f1",
                 "shasum": ""
             },
             "require": {
@@ -3728,7 +3728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/knuckleswtf/scribe/issues",
-                "source": "https://github.com/knuckleswtf/scribe/tree/4.23.0"
+                "source": "https://github.com/knuckleswtf/scribe/tree/4.23.1"
             },
             "funding": [
                 {
@@ -3736,7 +3736,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-08-24T21:07:05+00:00"
+            "time": "2023-08-25T16:33:56+00:00"
         },
         {
             "name": "laminas/laminas-code",
