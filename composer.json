@@ -21,6 +21,7 @@
         "dragon-code/extended-routes": "^3.2",
         "dragon-code/laravel-http-logger": "^1.3",
         "dragon-code/laravel-route-names": "^1.4",
+        "emreyarligan/enum-concern": "^1.0",
         "envant/fireable": "^1.0",
         "f9webltd/laravel-api-response-helpers": "^1.5",
         "guanguans/laravel-dump-sql": "^2.3",

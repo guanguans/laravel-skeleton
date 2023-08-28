@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e3c7acf98a372e3a4fe1a7e0bdf9844",
+    "content-hash": "406a558405eb7db519df1ed479eff162",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -1813,6 +1813,56 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "emreyarligan/enum-concern",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/emreyarligan/enum-concern.git",
+                "reference": "857ba62fd27d650d98bf8ec2367b08130e18eca2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/emreyarligan/enum-concern/zipball/857ba62fd27d650d98bf8ec2367b08130e18eca2",
+                "reference": "857ba62fd27d650d98bf8ec2367b08130e18eca2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/collections": "^10.17",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EmreYarligan\\EnumConcern\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emre Yarlıgan"
+                }
+            ],
+            "description": "A PHP package for effortless Enumeration handling with Laravel Collections 📦 ✨",
+            "homepage": "https://github.com/emreyarligan/enum-concern",
+            "keywords": [
+                "concern",
+                "enum",
+                "enumeration",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/emreyarligan/enum-concern/issues",
+                "source": "https://github.com/emreyarligan/enum-concern/tree/1.0.0"
+            },
+            "time": "2023-08-20T13:13:02+00:00"
         },
         {
             "name": "envant/fireable",
