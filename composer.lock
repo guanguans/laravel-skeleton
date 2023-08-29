@@ -2545,16 +2545,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "81f370ad334594e45e5c8b8f18f80a162eebd2b0"
+                "reference": "c54ca21da9484a361e7d2c4f5bc755e96b3dee6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/81f370ad334594e45e5c8b8f18f80a162eebd2b0",
-                "reference": "81f370ad334594e45e5c8b8f18f80a162eebd2b0",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/c54ca21da9484a361e7d2c4f5bc755e96b3dee6c",
+                "reference": "c54ca21da9484a361e7d2c4f5bc755e96b3dee6c",
                 "shasum": ""
             },
             "require": {
@@ -2581,7 +2581,7 @@
                 "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-deprecation-rules": "^1.1",
                 "rector/rector": "^0.18",
-                "vimeo/psalm": "^5.14"
+                "vimeo/psalm": "^5.15"
             },
             "type": "library",
             "extra": {
@@ -2677,7 +2677,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2023-08-20T08:29:59+00:00"
+            "time": "2023-08-29T07:11:18+00:00"
         },
         {
             "name": "guanguans/notify",
