@@ -429,8 +429,6 @@ abstract class AbstractRepository
 
     /**
      * Get an array with the values of a given column.
-     *
-     * @param  string  $key
      */
     public function pluck(string $value, ?string $key = null): array
     {
