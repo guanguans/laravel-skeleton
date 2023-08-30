@@ -85,6 +85,7 @@
         "laradumps/laradumps": "^2.2",
         "laravel-lang/common": "^4.0",
         "laravel-shift/factory-generator": "dev-master",
+        "laravel/facade-documenter": "dev-main",
         "laravel/pint": "^1.12",
         "laravel/sail": "^1.23",
         "mockery/mockery": "^1.6",
@@ -129,6 +130,11 @@
         "sort-packages": true
     },
     "extra": {
+        "bamarni-bin": {
+            "bin-links": true,
+            "forward-command": true,
+            "target-directory": "vendor-bin"
+        },
         "hooks": {
             "post-merge": [
                 "composer checks"
@@ -184,8 +190,8 @@
         "composer-unused-checker": "@php ./vendor/bin/composer-unused --ansi -v",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
         "docs-generate": "@php artisan scribe:generate --ansi -v",
-        "facades-lint": "@facades-update -- --lint",
-        "facades-update": "@php -f ./bin/facades.php",
+        "facade-lint": "@facade-update --lint",
+        "facade-update": "@php -f ./facade.php -- App\\\\Support\\\\Facades\\\\OpenAI App\\\\Support\\\\Facades\\\\PushDeer",
         "lint": [
             "for dir in .; do find $dir -maxdepth 1 -type f -name '*.php' -exec php -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done",
             "for dir in ./app ./config ./routes; do find $dir -maxdepth 5 -type f -name '*.php' -type f ! -name 'Singletonable.php' -type f ! -name 'Fireworks.php' -exec php -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done"
@@ -204,5 +210,11 @@
         "test-migrate-configuration": "@pest-migrate-configuration",
         "tlint": "@php ./vendor/bin/tlint lint --diff --ansi -v",
         "tlint-format": "@php ./vendor/bin/tlint format --diff --ansi -v"
+    },
+    "repositories": {
+        "facade-documenter": {
+            "type": "vcs",
+            "url": "https://github.com/laravel/facade-documenter.git"
+        }
     }
 }

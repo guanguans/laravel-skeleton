@@ -40,7 +40,6 @@ $finder = Finder::create()
             __DIR__.'/.phpstorm.meta.php',
             __DIR__.'/_ide_helper.php',
             __DIR__.'/_ide_helper_models.php',
-            __DIR__.'/facades.php',
             __DIR__.'/server.php',
         ], true)
     ))
@@ -56,7 +55,6 @@ $finder = Finder::create()
         '.phpstorm.meta.php',
         '_ide_helper.php',
         '_ide_helper_models.php',
-        'facades.php',
     ])
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);

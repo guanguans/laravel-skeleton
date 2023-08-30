@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82ce7c0fa214b4c750331105c73b513c",
+    "content-hash": "1ed79b221be5aa82ed31ac72258ef91c",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -15677,6 +15677,38 @@
             "time": "2023-03-09T16:47:45+00:00"
         },
         {
+            "name": "laravel/facade-documenter",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/facade-documenter.git",
+                "reference": "52b95aa5b5eb4549c93b7b4b5bd868eceba4e971"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/facade-documenter/zipball/52b95aa5b5eb4549c93b7b4b5bd868eceba4e971",
+                "reference": "52b95aa5b5eb4549c93b7b4b5bd868eceba4e971",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9.51|^10.0",
+                "phpstan/phpdoc-parser": "^1.16"
+            },
+            "default-branch": true,
+            "bin": [
+                "facade.php"
+            ],
+            "type": "library",
+            "license": [
+                "MIT"
+            ],
+            "support": {
+                "source": "https://github.com/laravel/facade-documenter/tree/main",
+                "issues": "https://github.com/laravel/facade-documenter/issues"
+            },
+            "time": "2023-08-25T04:47:04+00:00"
+        },
+        {
             "name": "laravel/pint",
             "version": "v1.12.0",
             "source": {
@@ -19630,6 +19662,7 @@
     "stability-flags": {
         "brainmaestro/composer-git-hooks": 15,
         "laravel-shift/factory-generator": 20,
+        "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
