@@ -3380,16 +3380,16 @@
         },
         {
             "name": "jasny/sso",
-            "version": "v0.5.0",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jasny/sso.git",
-                "reference": "ef9f9171f827a0fdf41f84790b7fdb8962f60d62"
+                "reference": "1bc161917489f2c1871af6a819fa5b2bd9b7cb4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jasny/sso/zipball/ef9f9171f827a0fdf41f84790b7fdb8962f60d62",
-                "reference": "ef9f9171f827a0fdf41f84790b7fdb8962f60d62",
+                "url": "https://api.github.com/repos/jasny/sso/zipball/1bc161917489f2c1871af6a819fa5b2bd9b7cb4a",
+                "reference": "1bc161917489f2c1871af6a819fa5b2bd9b7cb4a",
                 "shasum": ""
             },
             "require": {
@@ -3397,7 +3397,7 @@
                 "jasny/immutable": "^2.1",
                 "php": "^8.0",
                 "psr/log": "*",
-                "psr/simple-cache": "^1.0"
+                "psr/simple-cache": "*"
             },
             "require-dev": {
                 "codeception/codeception": "^4.1",
@@ -3437,7 +3437,7 @@
                 "issues": "https://github.com/jasny/sso/issues",
                 "source": "https://github.com/jasny/sso"
             },
-            "time": "2023-08-09T12:59:14+00:00"
+            "time": "2023-08-15T02:00:23+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -7010,25 +7010,25 @@
         },
         {
             "name": "psr/simple-cache",
-            "version": "1.0.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
-                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/764e0b3939f5ca87cb904f570ef9be2d78a07865",
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -7043,7 +7043,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interfaces for simple caching",
@@ -7055,9 +7055,9 @@
                 "simple-cache"
             ],
             "support": {
-                "source": "https://github.com/php-fig/simple-cache/tree/master"
+                "source": "https://github.com/php-fig/simple-cache/tree/3.0.0"
             },
-            "time": "2017-10-23T01:57:42+00:00"
+            "time": "2021-10-29T13:26:27+00:00"
         },
         {
             "name": "psy/psysh",
