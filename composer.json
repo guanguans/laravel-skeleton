@@ -62,7 +62,7 @@
         "teamtnt/laravel-scout-tntsearch-driver": "^13.2",
         "vectorface/whip": "^0.4",
         "watson/validating": "^8.1",
-        "wendelladriel/laravel-validated-dto": "^2.11"
+        "wendelladriel/laravel-validated-dto": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
