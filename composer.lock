@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ed79b221be5aa82ed31ac72258ef91c",
+    "content-hash": "9abe753b82145fa0a3a0e6e4d1ea7464",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -12947,16 +12947,16 @@
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
-            "version": "v2.11.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
-                "reference": "a1d7eda3f46b9541705849712e21cd228c821020"
+                "reference": "d497907f366ff2ea31ff0eacaf435e50fe807e7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/a1d7eda3f46b9541705849712e21cd228c821020",
-                "reference": "a1d7eda3f46b9541705849712e21cd228c821020",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/d497907f366ff2ea31ff0eacaf435e50fe807e7b",
+                "reference": "d497907f366ff2ea31ff0eacaf435e50fe807e7b",
                 "shasum": ""
             },
             "require": {
@@ -12965,13 +12965,13 @@
                 "illuminate/http": "^9.0|^10.0",
                 "illuminate/support": "^9.0|^10.0",
                 "illuminate/validation": "^9.0|^10.0",
-                "php": "^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
-                "laravel/pint": "~1.5.0",
-                "orchestra/testbench": "^6.0|^7.20|^8.0",
-                "pestphp/pest": "v1.22.6",
-                "pestphp/pest-plugin-faker": "^1.0.0"
+                "laravel/pint": "^1.11",
+                "orchestra/testbench": "^7.20|^8.10",
+                "pestphp/pest": "v2.15",
+                "pestphp/pest-plugin-faker": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -13017,7 +13017,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-11T11:38:13+00:00"
+            "time": "2023-09-06T15:41:39+00:00"
         }
     ],
     "packages-dev": [
