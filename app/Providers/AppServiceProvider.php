@@ -26,9 +26,12 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
+use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Events\DatabaseBusy;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
@@ -42,6 +45,8 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -122,7 +127,9 @@ class AppServiceProvider extends ServiceProvider
             Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
             // JsonResource::wrap('data');
             JsonResource::withoutWrapping();
-            Paginator::useBootstrap();
+            // Paginator::useBootstrap();
+            // Paginator::useBootstrapFour();
+            // Paginator::useBootstrapFive();
             // Paginator::defaultView('pagination::bulma');
             // Paginator::defaultSimpleView('pagination::simple-bulma');
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
@@ -132,6 +139,19 @@ class AppServiceProvider extends ServiceProvider
             $this->listenEvents();
             ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
             LogHttp::skipWhen(fn () => $this->app->runningUnitTests());
+
+            // 自定义多态类型
+            Relation::enforceMorphMap([
+                'post' => 'App\Models\Post',
+                'video' => 'App\Models\Video',
+            ]);
+
+            /** @var \App\Models\Post $post */
+            // $alias = $post->getMorphClass();
+            // $class = Relation::getMorphedModel($alias);
+            // Order::resolveRelationUsing('customer', function (Order $order) {
+            //     return $order->belongsTo(Customer::class, 'customer_id');
+            // });
         });
 
         $this->whenever(true, static function (): void {
@@ -168,7 +188,15 @@ class AppServiceProvider extends ServiceProvider
             // Model::preventLazyLoading(); // 预防 N+1 查询问题
             // Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
             // Model::preventsAccessingMissingAttributes(); // Triggers MissingAttributeException
+            // Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
             // DB::handleExceedingCumulativeQueryDuration();
+            // DB::whenQueryingForLongerThan(500, function (Connection $connection, QueryExecuted $event) {
+            //     // 通知开发团队...
+            // });
+            // Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
+            //     $class = get_class($model);
+            //     info("Attempted to lazy load [{$relation}] on model [{$class}].");
+            // });
         });
     }
 
@@ -272,6 +300,7 @@ class AppServiceProvider extends ServiceProvider
                 $parts = array_map(trim(...), explode(',', Blade::stripParentheses($expression)));
                 // filter
                 $parts = array_filter($parts, static fn (string $part) => '' !== $part);
+
                 // default
                 return $parts + ['time()', "'Y m d H:i:s'"];
             }, $expression);
@@ -334,5 +363,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
             $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
         });
+
+        // $this->app->get('events')->listen(DatabaseBusy::class, static function (DatabaseBusy $event) {
+        //     Notification::route('mail', 'dev@example.com')
+        //         ->notify(new DatabaseApproachingMaxConnections(
+        //             $event->connectionName,
+        //             $event->connections
+        //         ));
+        // });
     }
 }

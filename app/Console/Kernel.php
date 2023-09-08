@@ -46,6 +46,7 @@ class Kernel extends ConsoleKernel
 
         // $schedule->exec('php', ['-v'])->everyMinute();
 
+        $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->everyMinute();
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();
         $schedule->command('model:prune', ['--model' => MonitoredScheduledTaskLogItem::class])->daily();
     }
