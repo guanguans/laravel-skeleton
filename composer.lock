@@ -8729,16 +8729,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "8.3.3",
+            "version": "8.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "a20718e833daa77a8f496fb06ac208521669a838"
+                "reference": "c79ec56ddc96da769e4438bd45de6227b1be368f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/a20718e833daa77a8f496fb06ac208521669a838",
-                "reference": "a20718e833daa77a8f496fb06ac208521669a838",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/c79ec56ddc96da769e4438bd45de6227b1be368f",
+                "reference": "c79ec56ddc96da769e4438bd45de6227b1be368f",
                 "shasum": ""
             },
             "require": {
@@ -8812,7 +8812,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/8.3.3"
+                "source": "https://github.com/spatie/laravel-backup/tree/8.3.4"
             },
             "funding": [
                 {
@@ -8824,7 +8824,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-09-04T13:41:27+00:00"
+            "time": "2023-09-18T11:25:57+00:00"
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
