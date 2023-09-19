@@ -17360,16 +17360,16 @@
         },
         {
             "name": "plannr/laravel-fast-refresh-database",
-            "version": "v1.0.2",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PlannrCrm/laravel-fast-refresh-database.git",
-                "reference": "55052efd70ea24fc29ba530bf2dd9b68e97592cd"
+                "reference": "f5055bd4406ea896be77530e9c0e61c47ea2d42d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PlannrCrm/laravel-fast-refresh-database/zipball/55052efd70ea24fc29ba530bf2dd9b68e97592cd",
-                "reference": "55052efd70ea24fc29ba530bf2dd9b68e97592cd",
+                "url": "https://api.github.com/repos/PlannrCrm/laravel-fast-refresh-database/zipball/f5055bd4406ea896be77530e9c0e61c47ea2d42d",
+                "reference": "f5055bd4406ea896be77530e9c0e61c47ea2d42d",
                 "shasum": ""
             },
             "require": {
@@ -17401,9 +17401,9 @@
             "description": "Refresh your database faster than you've ever seen before 🚀",
             "support": {
                 "issues": "https://github.com/PlannrCrm/laravel-fast-refresh-database/issues",
-                "source": "https://github.com/PlannrCrm/laravel-fast-refresh-database/tree/v1.0.2"
+                "source": "https://github.com/PlannrCrm/laravel-fast-refresh-database/tree/v1.1.1"
             },
-            "time": "2023-01-05T10:19:20+00:00"
+            "time": "2023-09-19T12:18:50+00:00"
         },
         {
             "name": "reliese/laravel",
