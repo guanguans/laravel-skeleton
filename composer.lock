@@ -2018,16 +2018,16 @@
         },
         {
             "name": "f9webltd/laravel-api-response-helpers",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/f9webltd/laravel-api-response-helpers.git",
-                "reference": "f6d06461e5dd4a3ccc7da07a5e7ef76cbfcbe39f"
+                "reference": "538c19c53e690e0051ddf6fa785551c16cfdf034"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/f9webltd/laravel-api-response-helpers/zipball/f6d06461e5dd4a3ccc7da07a5e7ef76cbfcbe39f",
-                "reference": "f6d06461e5dd4a3ccc7da07a5e7ef76cbfcbe39f",
+                "url": "https://api.github.com/repos/f9webltd/laravel-api-response-helpers/zipball/538c19c53e690e0051ddf6fa785551c16cfdf034",
+                "reference": "538c19c53e690e0051ddf6fa785551c16cfdf034",
                 "shasum": ""
             },
             "require": {
@@ -2066,9 +2066,9 @@
             ],
             "support": {
                 "issues": "https://github.com/f9webltd/laravel-api-response-helpers/issues",
-                "source": "https://github.com/f9webltd/laravel-api-response-helpers/tree/1.5.2"
+                "source": "https://github.com/f9webltd/laravel-api-response-helpers/tree/1.5.3"
             },
-            "time": "2023-01-31T18:16:26+00:00"
+            "time": "2023-10-01T10:16:25+00:00"
         },
         {
             "name": "facade/ignition-contracts",
