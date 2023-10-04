@@ -12958,16 +12958,16 @@
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
-                "reference": "9f8d8424e20dd6ecc7ee590f195e81148a080d87"
+                "reference": "010a519a45216087e1ebd329ea65f960f99b49f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/9f8d8424e20dd6ecc7ee590f195e81148a080d87",
-                "reference": "9f8d8424e20dd6ecc7ee590f195e81148a080d87",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/010a519a45216087e1ebd329ea65f960f99b49f6",
+                "reference": "010a519a45216087e1ebd329ea65f960f99b49f6",
                 "shasum": ""
             },
             "require": {
@@ -13028,7 +13028,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-18T12:55:55+00:00"
+            "time": "2023-10-04T10:25:48+00:00"
         }
     ],
     "packages-dev": [
