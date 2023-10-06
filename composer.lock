@@ -1749,16 +1749,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "3a85486b709bc384dae8eb78fb2eec649bdb64ff"
+                "reference": "ebaaf5be6c0286928352e054f2d5125608e5405e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/3a85486b709bc384dae8eb78fb2eec649bdb64ff",
-                "reference": "3a85486b709bc384dae8eb78fb2eec649bdb64ff",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ebaaf5be6c0286928352e054f2d5125608e5405e",
+                "reference": "ebaaf5be6c0286928352e054f2d5125608e5405e",
                 "shasum": ""
             },
             "require": {
@@ -1767,8 +1767,8 @@
                 "symfony/polyfill-intl-idn": "^1.26"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.5.27",
-                "vimeo/psalm": "^4.30"
+                "phpunit/phpunit": "^10.2",
+                "vimeo/psalm": "^5.12"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -1804,7 +1804,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/4.0.1"
+                "source": "https://github.com/egulias/EmailValidator/tree/4.0.2"
             },
             "funding": [
                 {
@@ -1812,7 +1812,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-14T14:17:03+00:00"
+            "time": "2023-10-06T06:47:41+00:00"
         },
         {
             "name": "emreyarligan/enum-concern",
@@ -12958,16 +12958,16 @@
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
-            "version": "v3.1.0",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
-                "reference": "010a519a45216087e1ebd329ea65f960f99b49f6"
+                "reference": "3cfbda2f095638a01205055394d4ec8d6a2190f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/010a519a45216087e1ebd329ea65f960f99b49f6",
-                "reference": "010a519a45216087e1ebd329ea65f960f99b49f6",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/3cfbda2f095638a01205055394d4ec8d6a2190f3",
+                "reference": "3cfbda2f095638a01205055394d4ec8d6a2190f3",
                 "shasum": ""
             },
             "require": {
@@ -13028,7 +13028,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-04T10:25:48+00:00"
+            "time": "2023-10-06T15:00:13+00:00"
         }
     ],
     "packages-dev": [
