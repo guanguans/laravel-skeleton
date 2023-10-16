@@ -2320,21 +2320,21 @@
         },
         {
             "name": "fruitcake/php-cors",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fruitcake/php-cors.git",
-                "reference": "58571acbaa5f9f462c9c77e911700ac66f446d4e"
+                "reference": "3d158f36e7875e2f040f37bc0573956240a5a38b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/php-cors/zipball/58571acbaa5f9f462c9c77e911700ac66f446d4e",
-                "reference": "58571acbaa5f9f462c9c77e911700ac66f446d4e",
+                "url": "https://api.github.com/repos/fruitcake/php-cors/zipball/3d158f36e7875e2f040f37bc0573956240a5a38b",
+                "reference": "3d158f36e7875e2f040f37bc0573956240a5a38b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "symfony/http-foundation": "^4.4|^5.4|^6"
+                "symfony/http-foundation": "^4.4|^5.4|^6|^7"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.4",
@@ -2344,7 +2344,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2375,7 +2375,7 @@
             ],
             "support": {
                 "issues": "https://github.com/fruitcake/php-cors/issues",
-                "source": "https://github.com/fruitcake/php-cors/tree/v1.2.0"
+                "source": "https://github.com/fruitcake/php-cors/tree/v1.3.0"
             },
             "funding": [
                 {
@@ -2387,7 +2387,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-20T15:07:15+00:00"
+            "time": "2023-10-12T05:21:21+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -12958,16 +12958,16 @@
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
-            "version": "v3.2.0",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
-                "reference": "93e7086b9d5794be6357d53907801caec5400b40"
+                "reference": "13bef8e54a4fd0e8932d91aa630d316747766733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/93e7086b9d5794be6357d53907801caec5400b40",
-                "reference": "93e7086b9d5794be6357d53907801caec5400b40",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/13bef8e54a4fd0e8932d91aa630d316747766733",
+                "reference": "13bef8e54a4fd0e8932d91aa630d316747766733",
                 "shasum": ""
             },
             "require": {
@@ -13028,7 +13028,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-10T11:35:59+00:00"
+            "time": "2023-10-16T11:50:50+00:00"
         }
     ],
     "packages-dev": [
