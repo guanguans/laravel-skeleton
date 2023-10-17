@@ -23,7 +23,7 @@
         "dragon-code/laravel-route-names": "^1.4",
         "emreyarligan/enum-concern": "^1.0",
         "envant/fireable": "^1.0",
-        "f9webltd/laravel-api-response-helpers": "^1.5",
+        "f9webltd/laravel-api-response-helpers": "^2.0",
         "guanguans/laravel-dump-sql": "^2.3",
         "guanguans/laravel-exception-notify": "^3.4",
         "guzzlehttp/guzzle": "^7.7",
