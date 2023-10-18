@@ -2544,21 +2544,21 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "3.4.2",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "c54ca21da9484a361e7d2c4f5bc755e96b3dee6c"
+                "reference": "4232a01f597bd0a6b62547eb73a9556f149ac5d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/c54ca21da9484a361e7d2c4f5bc755e96b3dee6c",
-                "reference": "c54ca21da9484a361e7d2c4f5bc755e96b3dee6c",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/4232a01f597bd0a6b62547eb73a9556f149ac5d8",
+                "reference": "4232a01f597bd0a6b62547eb73a9556f149ac5d8",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guanguans/notify": "^1.26",
+                "guanguans/notify": "^1.27",
                 "illuminate/contracts": "^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "illuminate/support": "^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "php": ">=7.4"
@@ -2566,10 +2566,10 @@
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
                 "ergebnis/composer-normalize": "^2.28",
-                "friendsofphp/php-cs-fixer": "^3.14",
+                "friendsofphp/php-cs-fixer": "^3.35",
                 "guanguans/ai-commit": "^1.8",
                 "guanguans/monorepo-builder-worker": "^1.2",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.13",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.16",
                 "laravel/lumen-framework": "^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "mockery/mockery": "^1.6",
                 "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0",
@@ -2676,20 +2676,20 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2023-08-29T07:11:18+00:00"
+            "time": "2023-10-18T10:12:24+00:00"
         },
         {
             "name": "guanguans/notify",
-            "version": "1.26.0",
+            "version": "1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "f9432f42b7486178ec4a46232561a6e6b6e253c3"
+                "reference": "1df9a2635060bdf550bb62a7dd912c333bc82ca7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/f9432f42b7486178ec4a46232561a6e6b6e253c3",
-                "reference": "f9432f42b7486178ec4a46232561a6e6b6e253c3",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/1df9a2635060bdf550bb62a7dd912c333bc82ca7",
+                "reference": "1df9a2635060bdf550bb62a7dd912c333bc82ca7",
                 "shasum": ""
             },
             "require": {
@@ -2711,7 +2711,7 @@
                 "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-deprecation-rules": "^1.1",
                 "phpunit/phpunit": "^8.5 || ^9.0 || ^10.0",
-                "rector/rector": "^0.17",
+                "rector/rector": "^0.17 || ^0.18",
                 "symfony/mailer": "^5.4 || ^6.0",
                 "symfony/var-dumper": "^5.4 || ^6.0",
                 "textalk/websocket": "^1.5",
@@ -2819,7 +2819,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2023-08-16T07:01:47+00:00"
+            "time": "2023-10-07T06:55:29+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -6809,16 +6809,16 @@
         },
         {
             "name": "psr/http-client",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-client.git",
-                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31"
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-client/zipball/0955afe48220520692d2d09f7ab7e0f93ffd6a31",
-                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/bb5906edc1c324c9a05aa0873d40117941e5fa90",
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90",
                 "shasum": ""
             },
             "require": {
@@ -6855,9 +6855,9 @@
                 "psr-18"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-client/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-client"
             },
-            "time": "2023-04-10T20:12:12+00:00"
+            "time": "2023-09-23T14:17:50+00:00"
         },
         {
             "name": "psr/http-factory",
