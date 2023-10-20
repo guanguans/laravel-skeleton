@@ -203,7 +203,7 @@
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",
         "pint": "@php ./vendor/bin/pint --dirty --ansi -v",
         "pint-test": "@pint --test",
-        "style-fix": "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --ansi -v",
+        "style-fix": "@php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --ansi -v",
         "style-lint": "@style-fix --dry-run --diff",
         "test": "@pest",
         "test-coverage": "@pest-coverage",

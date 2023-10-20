@@ -46,6 +46,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
@@ -152,6 +153,18 @@ class AppServiceProvider extends ServiceProvider
             // Order::resolveRelationUsing('customer', function (Order $order) {
             //     return $order->belongsTo(Customer::class, 'customer_id');
             // });
+
+            // Intercept any Gate and check if it's super admin, Or if you use some permissions package...
+            Gate::before(static function($user, $ability) {
+                // if ($user->is_super_admin == 1) {
+                //     return true;
+                // }
+                //
+                // if ($user->hasPermission('root')) {
+                //     return true;
+                // }
+            });
+
         });
 
         $this->whenever(true, static function (): void {
