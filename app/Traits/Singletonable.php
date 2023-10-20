@@ -6,17 +6,11 @@ namespace App\Traits;
 
 trait Singletonable
 {
-    protected function __construct(...$parameters)
-    {
-    }
+    protected function __construct(...$parameters) {}
 
-    protected function __clone()
-    {
-    }
+    protected function __clone() {}
 
-    final public function __wakeup(): void
-    {
-    }
+    final public function __wakeup(): void {}
 
     public static function instance(...$parameters)
     {

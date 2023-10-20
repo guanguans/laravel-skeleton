@@ -111,9 +111,7 @@ abstract class AbstractRepository
     /**
      * The "booting" method of the repository.
      */
-    public function boot(): void
-    {
-    }
+    public function boot(): void {}
 
     /**
      * Return model instance.

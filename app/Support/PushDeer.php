@@ -123,10 +123,8 @@ class PushDeer extends FoundationSdk
             ->withMiddleware(Middleware::mapRequest(static fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString())))
             ->withMiddleware(Middleware::mapResponse(static fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString())))
             ->withMiddleware(Middleware::tap(
-                static function (RequestInterface $request, array $options): void {
-                },
-                static function (RequestInterface $request, array $options, PromiseInterface $promise): void {
-                }
+                static function (RequestInterface $request, array $options): void {},
+                static function (RequestInterface $request, array $options, PromiseInterface $promise): void {}
             ));
     }
 }

@@ -6,6 +6,4 @@ namespace App\Support\Http\Exceptions;
 
 use App\Support\Http\Contracts\Throwable;
 
-class RuntimeException extends \RuntimeException implements Throwable
-{
-}
+class RuntimeException extends \RuntimeException implements Throwable {}

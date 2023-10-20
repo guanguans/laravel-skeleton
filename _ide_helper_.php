@@ -11,9 +11,7 @@ namespace Illuminate\Support\Facades {
      * @mixin \Predis\Client
      * @mixin \Redis
      */
-    class Redis extends Facade
-    {
-    }
+    class Redis extends Facade {}
 }
 
 namespace App\Support\Facades {

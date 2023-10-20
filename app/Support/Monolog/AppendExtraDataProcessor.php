@@ -17,9 +17,7 @@ use Monolog\Processor\ProcessorInterface;
  */
 class AppendExtraDataProcessor implements ProcessorInterface
 {
-    public function __construct(private array $extraData)
-    {
-    }
+    public function __construct(private array $extraData) {}
 
     public function __invoke(LogRecord $record)
     {

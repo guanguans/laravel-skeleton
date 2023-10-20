@@ -8,9 +8,7 @@ use App\Contracts\SignerContract;
 
 class HmacSigner implements SignerContract
 {
-    public function __construct(private string $secret = '', private string $algo = 'sha256')
-    {
-    }
+    public function __construct(private string $secret = '', private string $algo = 'sha256') {}
 
     public function sign(array $payload): string
     {
