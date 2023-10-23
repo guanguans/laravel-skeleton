@@ -32,7 +32,10 @@
         "nullable_type_declaration_for_default_null_value": {
             "use_nullable_type_declaration": true
         },
-        "no_extra_blank_lines": false
+        "no_extra_blank_lines": false,
+        "yoda_style": false,
+        "space_after_semicolon": false,
+        "no_spaces_after_function_name": false
     },
     "exclude": [
         ".github",

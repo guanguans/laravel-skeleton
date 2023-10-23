@@ -67,7 +67,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
         return new static($return);
     }
 
-    public function except(string|array $keys): self
+    public function except(array|string $keys): self
     {
         $keys = \is_array($keys) ? $keys : \func_get_args();
 

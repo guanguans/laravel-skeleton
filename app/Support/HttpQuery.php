@@ -47,7 +47,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      *
      * @throws \Exception
      */
-    public function __construct(string|array $query)
+    public function __construct(array|string $query)
     {
         if (\is_string($query)) {
             $this->string = $this->sanitizeAndEncode($query);
@@ -122,7 +122,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      *
      * @throws \Exception
      */
-    public function get(string|int $key): mixed
+    public function get(int|string $key): mixed
     {
         $queryArray = $this->array();
 
@@ -144,7 +144,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      *
      * @throws \Exception
      */
-    public function set(string $key, string|array $value): self
+    public function set(string $key, array|string $value): self
     {
         $this->initArray();
 
@@ -188,7 +188,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      *
      * @throws \Exception
      */
-    public function appendTo(string $key, string|array $value): self
+    public function appendTo(string $key, array|string $value): self
     {
         $currentValue = $this->get($key);
 
@@ -495,7 +495,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
     /**
      * @throws \Exception
      */
-    public function key(): int|string|null
+    public function key(): null|int|string
     {
         $this->initArray();
 
@@ -893,7 +893,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      *
      * @throws \Exception
      */
-    private function newWithSameSettings(string|array $query): self
+    private function newWithSameSettings(array|string $query): self
     {
         $instance = new self($query);
 
@@ -926,7 +926,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      * @param  array<mixed>|string  $value
      * @return array<mixed>
      */
-    private function appendToArray(array $array, string|array $value): array
+    private function appendToArray(array $array, array|string $value): array
     {
         if (\is_array($value)) {
             if ($this->isAssociativeArray($value)) {
@@ -981,7 +981,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
      * @param  array<mixed>|self<array<mixed>>  $array
      * @return array<mixed>|self<array<mixed>>
      */
-    private function boolsToString(self|array $array): self|array
+    private function boolsToString(array|self $array): array|self
     {
         foreach ($array as $key => $value) {
             if (\is_bool($value)) {

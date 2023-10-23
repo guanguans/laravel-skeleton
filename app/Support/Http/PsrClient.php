@@ -18,7 +18,7 @@ class PsrClient implements ClientInterface
     /**
      * @see \GuzzleHttp\RequestOptions for a list of available request options.
      */
-    public function __construct(private array $options = [], null|Handler|callable $handler = null)
+    public function __construct(private array $options = [], null|callable|Handler $handler = null)
     {
         $this->handler = $handler ?? new StreamHandler();
     }

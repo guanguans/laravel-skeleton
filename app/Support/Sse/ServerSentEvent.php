@@ -80,10 +80,10 @@ class ServerSentEvent implements \Stringable
 
     public function __construct(
         ?callable $tapper = null,
-        private string|\Stringable|null $event = null,
-        private string|array|\Stringable|null $data = null,
-        private string|\Stringable|null $id = null,
-        private string|\Stringable|null $comment = null,
+        private null|string|\Stringable $event = null,
+        private null|array|string|\Stringable $data = null,
+        private null|string|\Stringable $id = null,
+        private null|string|\Stringable $comment = null,
         private ?int $retry = 3000,
         private int $sleep = 3,
     ) {
@@ -156,14 +156,14 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
-    public function setEvent(\Stringable|string|null $event): self
+    public function setEvent(null|string|\Stringable $event): self
     {
         $this->event = $event;
 
         return $this;
     }
 
-    public function setData(\Stringable|array|string|null $data, $options = JSON_THROW_ON_ERROR): self
+    public function setData(null|array|string|\Stringable $data, $options = JSON_THROW_ON_ERROR): self
     {
         if (\is_array($data)) {
             $data = json_encode($data, $options);
@@ -174,14 +174,14 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
-    public function setId(\Stringable|string|null $id): self
+    public function setId(null|string|\Stringable $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function setComment(\Stringable|string|null $comment): self
+    public function setComment(null|string|\Stringable $comment): self
     {
         $this->comment = $comment;
 

@@ -6,7 +6,7 @@ namespace App\Support\Http\Support;
 
 class XML
 {
-    public static function parse($xml): \SimpleXMLElement|array
+    public static function parse($xml): array|\SimpleXMLElement
     {
         return self::normalize(simplexml_load_string(self::sanitize($xml), 'SimpleXMLElement', LIBXML_COMPACT | LIBXML_NOCDATA | LIBXML_NOBLANKS));
     }
@@ -42,7 +42,7 @@ class XML
         return sprintf('<![CDATA[%s]]>', $string);
     }
 
-    public static function sanitize($xml): array|string|null
+    public static function sanitize($xml): null|array|string
     {
         return preg_replace('/[^\x{9}\x{A}\x{D}\x{20}-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $xml);
     }
