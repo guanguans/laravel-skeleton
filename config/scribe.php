@@ -17,7 +17,8 @@ return [
     'description' => '',
 
     /*
-     * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url').
+     * The base URL displayed in the docs. If this is empty, Scribe will use the value of config('app.url') at generation time.
+     * If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
      */
     'base_url' => null,
 
@@ -189,7 +190,7 @@ return [
 
         /**
          * The base URL for the API tester to use (for example, you can set this to your staging URL).
-         * Leave as null to use the current app URL (config(app.url)).
+         * Leave as null to use the current app URL when generating (config("app.url")).
          */
         'base_url' => null,
 
@@ -316,7 +317,8 @@ INTRO
          * By default, Scribe will sort groups alphabetically, and endpoints in the order their routes are defined.
          * You can override this by listing the groups, subgroups and endpoints here in the order you want them.
          *
-         * Any groups, subgroups or endpoints you don't list here will be added as usual after the ones here.
+         * Any groups, subgroups or endpoints you don't list here will be added as usual after the ones here unless you
+         * use the "*" character as this specifies the position of all unspecified groups
          * If an endpoint/subgroup is listed under a group it doesn't belong in, it will be ignored.
          * Note: you must include the initial '/' when writing an endpoint.
          */
