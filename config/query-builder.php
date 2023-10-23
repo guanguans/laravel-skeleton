@@ -27,6 +27,12 @@ return [
     'count_suffix' => 'Count',
 
     /*
+     * Related model exists are included using the relationship name suffixed with this string.
+     * For example: GET /users?include=postsExists
+     */
+    'exists_suffix' => 'Exists',
+
+    /*
      * By default the package will throw an `InvalidFilterQuery` exception when a filter in the
      * URL is not allowed in the `allowedFilters()` method.
      */
@@ -37,13 +43,4 @@ return [
      * URL is not allowed in the `allowedSorts()` method.
      */
     'disable_invalid_sort_query_exception' => false,
-
-    /*
-     * By default the package inspects query string of request using $request->query().
-     * You can change this behavior to inspect the request body using $request->input()
-     * by setting this value to `body`.
-     *
-     * Possible values: `query_string`, `body`
-     */
-    'request_data_source' => 'query_string',
 ];

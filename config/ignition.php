@@ -19,6 +19,7 @@ use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingMixManifestSolutio
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\MissingViteManifestSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\OpenAiSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\RunningLaravelDuskInProductionProvider;
+use Spatie\LaravelIgnition\Solutions\SolutionProviders\SailNetworkSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\TableNotFoundSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\UndefinedViewVariableSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\UnknownValidationSolutionProvider;
@@ -89,7 +90,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | You may specify a list of solution providers (as fully qualified class
-    | names) that shouldn't be loaded. Ignition will ignore these classes
+    | names) that should be loaded. Ignition will ignore these classes
     | and possible solutions provided by them will never be displayed.
     |
     */
@@ -117,6 +118,7 @@ return [
         UndefinedViewVariableSolutionProvider::class,
         GenericLaravelExceptionSolutionProvider::class,
         OpenAiSolutionProvider::class,
+        SailNetworkSolutionProvider::class,
     ],
 
     /*
@@ -237,6 +239,7 @@ return [
     /*
      * When a key is set, we'll send your exceptions to Open AI to generate a solution
      */
+
     'open_ai_key' => env('IGNITION_OPEN_AI_KEY'),
 
     /*
@@ -261,6 +264,7 @@ return [
     | specify a list of classes here which summarize the variables.
     |
     */
+
     'argument_reducers' => [
         \Spatie\Backtrace\Arguments\Reducers\BaseTypeArgumentReducer::class,
         \Spatie\Backtrace\Arguments\Reducers\ArrayArgumentReducer::class,
@@ -274,4 +278,5 @@ return [
         \Spatie\LaravelIgnition\ArgumentReducers\CollectionArgumentReducer::class,
         \Spatie\Backtrace\Arguments\Reducers\StringableArgumentReducer::class,
     ],
+
 ];

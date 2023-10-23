@@ -14,8 +14,8 @@ use Guanguans\LaravelExceptionNotify\Pipes\AddKeywordPipe;
 use Guanguans\LaravelExceptionNotify\Pipes\FixPrettyJsonPipe;
 use Guanguans\LaravelExceptionNotify\Pipes\LimitLengthPipe;
 use Guanguans\LaravelExceptionNotify\Pipes\ReplaceStrPipe;
-use Guanguans\LaravelExceptionNotify\Pipes\ToHtmlPipe;
-use Guanguans\LaravelExceptionNotify\Pipes\ToMarkdownPipe;
+use Guanguans\LaravelExceptionNotify\Pipes\SprintfHtmlPipe;
+use Guanguans\LaravelExceptionNotify\Pipes\SprintfMarkdownPipe;
 use Guanguans\LaravelExceptionNotify\ReportUsingCreator;
 
 return [
@@ -222,7 +222,7 @@ return [
             'from' => env('EXCEPTION_NOTIFY_MAIL_FROM'),
             'to' => env('EXCEPTION_NOTIFY_MAIL_TO'),
             'pipes' => [
-                ToHtmlPipe::class,
+                SprintfHtmlPipe::class,
             ],
         ],
 
@@ -236,7 +236,7 @@ return [
             'token' => env('EXCEPTION_NOTIFY_PUSHDEER_TOKEN'),
             'base_uri' => env('EXCEPTION_NOTIFY_PUSHDEER_BASE_URI'),
             'pipes' => [
-                ToMarkdownPipe::class,
+                SprintfMarkdownPipe::class,
             ],
         ],
 
@@ -280,7 +280,7 @@ return [
             'webhook_url' => env('EXCEPTION_NOTIFY_SLACK_WEBHOOK_URL'),
             'channel' => env('EXCEPTION_NOTIFY_SLACK_CHANNEL'),
             'pipes' => [
-                ToMarkdownPipe::class,
+                SprintfMarkdownPipe::class,
             ],
         ],
 
@@ -323,7 +323,7 @@ return [
             'type' => env('EXCEPTION_NOTIFY_XIZHI_TYPE', 'single'), // [single, channel]
             'token' => env('EXCEPTION_NOTIFY_XIZHI_TOKEN'),
             'pipes' => [
-                ToMarkdownPipe::class,
+                SprintfMarkdownPipe::class,
             ],
         ],
     ],
