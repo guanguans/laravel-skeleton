@@ -65,9 +65,19 @@ function display_help {
     echo "  ${GREEN}sail npx${NC}            Run a npx command"
     echo "  ${GREEN}sail npm run prod${NC}"
     echo
+    echo "${YELLOW}PNPM Commands:${NC}"
+    echo "  ${GREEN}sail pnpm ...${NC}        Run a pnpm command"
+    echo "  ${GREEN}sail pnpx${NC}            Run a pnpx command"
+    echo "  ${GREEN}sail pnpm run prod${NC}"
+    echo
     echo "${YELLOW}Yarn Commands:${NC}"
     echo "  ${GREEN}sail yarn ...${NC}        Run a Yarn command"
     echo "  ${GREEN}sail yarn run prod${NC}"
+    echo
+    echo "${YELLOW}Bun Commands:${NC}"
+    echo "  ${GREEN}sail bun ...${NC}        Run a bun command"
+    echo "  ${GREEN}sail bunx${NC}           Run a bunx command"
+    echo "  ${GREEN}sail bun run prod${NC}"
     echo
     echo "${YELLOW}Database Commands:${NC}"
     echo "  ${GREEN}sail mysql${NC}     Start a MySQL CLI session within the 'mysql' container"
@@ -391,6 +401,30 @@ elif [ "$1" == "npx" ]; then
         sail_is_not_running
     fi
 
+# Proxy PNPM commands to the "pnpm" binary on the application container...
+elif [ "$1" == "pnpm" ]; then
+    shift 1
+
+    if [ "$EXEC" == "yes" ]; then
+        ARGS+=(exec -u sail)
+        [ ! -t 0 ] && ARGS+=(-T)
+        ARGS+=("$APP_SERVICE" pnpm "$@")
+    else
+        sail_is_not_running
+    fi
+
+# Proxy PNPX commands to the "pnpx" binary on the application container...
+elif [ "$1" == "pnpx" ]; then
+    shift 1
+
+    if [ "$EXEC" == "yes" ]; then
+        ARGS+=(exec -u sail)
+        [ ! -t 0 ] && ARGS+=(-T)
+        ARGS+=("$APP_SERVICE" pnpx "$@")
+    else
+        sail_is_not_running
+    fi
+
 # Proxy YARN commands to the "yarn" binary on the application container...
 elif [ "$1" == "yarn" ]; then
     shift 1
@@ -399,6 +433,30 @@ elif [ "$1" == "yarn" ]; then
         ARGS+=(exec -u sail)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" yarn "$@")
+    else
+        sail_is_not_running
+    fi
+
+# Proxy Bun commands to the "bun" binary on the application container...
+elif [ "$1" == "bun" ]; then
+    shift 1
+
+    if [ "$EXEC" == "yes" ]; then
+        ARGS+=(exec -u sail)
+        [ ! -t 0 ] && ARGS+=(-T)
+        ARGS+=("$APP_SERVICE" bun "$@")
+    else
+        sail_is_not_running
+    fi
+
+# Proxy Bun X commands to the "bunx" binary on the application container...
+elif [ "$1" == "bunx" ]; then
+    shift 1
+
+    if [ "$EXEC" == "yes" ]; then
+        ARGS+=(exec -u sail)
+        [ ! -t 0 ] && ARGS+=(-T)
+        ARGS+=("$APP_SERVICE" bunx "$@")
     else
         sail_is_not_running
     fi
