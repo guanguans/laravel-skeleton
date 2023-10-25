@@ -14975,16 +14975,16 @@
         },
         {
             "name": "laracraft-tech/laravel-schema-rules",
-            "version": "v1.3.3",
+            "version": "v1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laracraft-tech/laravel-schema-rules.git",
-                "reference": "71a45c9608c4095774ff75d52ad81757f1c6dd34"
+                "reference": "77dd3605228ba071f628d706a74dda26e606e213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laracraft-tech/laravel-schema-rules/zipball/71a45c9608c4095774ff75d52ad81757f1c6dd34",
-                "reference": "71a45c9608c4095774ff75d52ad81757f1c6dd34",
+                "url": "https://api.github.com/repos/laracraft-tech/laravel-schema-rules/zipball/77dd3605228ba071f628d706a74dda26e606e213",
+                "reference": "77dd3605228ba071f628d706a74dda26e606e213",
                 "shasum": ""
             },
             "require": {
@@ -15038,9 +15038,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laracraft-tech/laravel-schema-rules/issues",
-                "source": "https://github.com/laracraft-tech/laravel-schema-rules/tree/v1.3.3"
+                "source": "https://github.com/laracraft-tech/laravel-schema-rules/tree/v1.3.4"
             },
-            "time": "2023-10-19T14:17:18+00:00"
+            "time": "2023-10-25T14:31:10+00:00"
         },
         {
             "name": "laradumps/laradumps",
