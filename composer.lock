@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8136140f442804d68e171417ef6e4606",
+    "content-hash": "79f1c608d2db0a7844c5fe6689808f1d",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -3853,20 +3853,20 @@
         },
         {
             "name": "laminas/laminas-diactoros",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-diactoros.git",
-                "reference": "aca73646e658dce3f079f6b8648c651e193e331e"
+                "reference": "4db52734837c60259c9b2d7caf08eef8f7f9b9ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/aca73646e658dce3f079f6b8648c651e193e331e",
-                "reference": "aca73646e658dce3f079f6b8648c651e193e331e",
+                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/4db52734837c60259c9b2d7caf08eef8f7f9b9ac",
+                "reference": "4db52734837c60259c9b2d7caf08eef8f7f9b9ac",
                 "shasum": ""
             },
             "require": {
-                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
                 "psr/http-factory": "^1.0.2",
                 "psr/http-message": "^1.1 || ^2.0"
             },
@@ -3884,7 +3884,7 @@
                 "php-http/psr7-integration-tests": "^1.3",
                 "phpunit/phpunit": "^9.5.28",
                 "psalm/plugin-phpunit": "^0.18.4",
-                "vimeo/psalm": "^5.9"
+                "vimeo/psalm": "^5.15.0"
             },
             "type": "library",
             "extra": {
@@ -3934,7 +3934,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-09-03T13:11:37+00:00"
+            "time": "2023-10-26T11:01:07+00:00"
         },
         {
             "name": "laravel/framework",
@@ -12368,16 +12368,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v6.3.3",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "e23292e8c07c85b971b44c1c4b87af52133e2add"
+                "reference": "9758b6c69d179936435d0ffb577c3708d57e38a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/e23292e8c07c85b971b44c1c4b87af52133e2add",
-                "reference": "e23292e8c07c85b971b44c1c4b87af52133e2add",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/9758b6c69d179936435d0ffb577c3708d57e38a8",
+                "reference": "9758b6c69d179936435d0ffb577c3708d57e38a8",
                 "shasum": ""
             },
             "require": {
@@ -12420,7 +12420,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v6.3.3"
+                "source": "https://github.com/symfony/yaml/tree/v6.3.7"
             },
             "funding": [
                 {
@@ -12436,7 +12436,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-31T07:08:24+00:00"
+            "time": "2023-10-28T23:31:00+00:00"
         },
         {
             "name": "teamtnt/laravel-scout-tntsearch-driver",
@@ -16987,16 +16987,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.39",
+            "version": "1.10.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "d9dedb0413f678b4d03cbc2279a48f91592c97c4"
+                "reference": "93c84b5bf7669920d823631e39904d69b9c7dc5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d9dedb0413f678b4d03cbc2279a48f91592c97c4",
-                "reference": "d9dedb0413f678b4d03cbc2279a48f91592c97c4",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/93c84b5bf7669920d823631e39904d69b9c7dc5d",
+                "reference": "93c84b5bf7669920d823631e39904d69b9c7dc5d",
                 "shasum": ""
             },
             "require": {
@@ -17045,7 +17045,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-17T15:46:26+00:00"
+            "time": "2023-10-30T14:48:31+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -17585,12 +17585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "071e279195120273036c983c79580a2e92508d04"
+                "reference": "d66cd3b4db7200802bbdd73f3dab535a0aebeee6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/071e279195120273036c983c79580a2e92508d04",
-                "reference": "071e279195120273036c983c79580a2e92508d04",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d66cd3b4db7200802bbdd73f3dab535a0aebeee6",
+                "reference": "d66cd3b4db7200802bbdd73f3dab535a0aebeee6",
                 "shasum": ""
             },
             "conflict": {
@@ -17634,7 +17634,7 @@
                 "barrelstrength/sprout-forms": "<3.9",
                 "barryvdh/laravel-translation-manager": "<0.6.2",
                 "barzahlen/barzahlen-php": "<2.0.1",
-                "baserproject/basercms": "<4.7.5",
+                "baserproject/basercms": "<4.8",
                 "bassjobsen/bootstrap-3-typeahead": ">4.0.2",
                 "bigfork/silverstripe-form-capture": ">=3,<3.1.1",
                 "billz/raspap-webgui": "<=2.9.2",
@@ -17666,7 +17666,7 @@
                 "cockpit-hq/cockpit": "<=2.6.3",
                 "codeception/codeception": "<3.1.3|>=4,<4.1.22",
                 "codeigniter/framework": "<3.1.9",
-                "codeigniter4/framework": "<4.3.5",
+                "codeigniter4/framework": "<=4.4.2",
                 "codeigniter4/shield": "<1.0.0.0-beta4",
                 "codiad/codiad": "<=2.8.4",
                 "composer/composer": "<1.10.27|>=2,<2.2.22|>=2.3,<2.6.4",
@@ -17836,7 +17836,7 @@
                 "kelvinmo/simplexrd": "<3.1.1",
                 "kevinpapst/kimai2": "<1.16.7",
                 "khodakhah/nodcms": "<=3",
-                "kimai/kimai": "<1.1",
+                "kimai/kimai": "<=2.1",
                 "kitodo/presentation": "<3.2.3|>=3.3,<3.3.4",
                 "klaviyo/magento2-extension": ">=1,<3",
                 "knplabs/knp-snappy": "<=1.4.2",
@@ -17918,6 +17918,7 @@
                 "october/october": "<=3.4.4",
                 "october/rain": "<1.0.472|>=1.1,<1.1.2",
                 "october/system": "<1.0.476|>=1.1,<1.1.12|>=2,<2.2.34|>=3,<3.0.66",
+                "omeka/omeka-s": "<4.0.3",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "open-web-analytics/open-web-analytics": "<1.7.4",
@@ -18262,7 +18263,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-20T23:04:46+00:00"
+            "time": "2023-10-30T16:04:37+00:00"
         },
         {
             "name": "sebastian/cli-parser",
