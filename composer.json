@@ -83,7 +83,7 @@
         "laracasts/generators": "^2.0",
         "laracraft-tech/laravel-schema-rules": "^1.3",
         "laradumps/laradumps": "^2.2",
-        "laravel-lang/common": "^4.0",
+        "laravel-lang/common": "^5.0",
         "laravel-shift/factory-generator": "dev-master",
         "laravel/facade-documenter": "dev-main",
         "laravel/pint": "^1.13",
