@@ -1816,16 +1816,16 @@
         },
         {
             "name": "emreyarligan/enum-concern",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/emreyarligan/enum-concern.git",
-                "reference": "20bca0c67fcb3757e30538aa3be5072849d3beff"
+                "reference": "2a67fec4dc423fd0bb27def41c5d9cb06df1cdc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emreyarligan/enum-concern/zipball/20bca0c67fcb3757e30538aa3be5072849d3beff",
-                "reference": "20bca0c67fcb3757e30538aa3be5072849d3beff",
+                "url": "https://api.github.com/repos/emreyarligan/enum-concern/zipball/2a67fec4dc423fd0bb27def41c5d9cb06df1cdc9",
+                "reference": "2a67fec4dc423fd0bb27def41c5d9cb06df1cdc9",
                 "shasum": ""
             },
             "require": {
@@ -1860,9 +1860,9 @@
             ],
             "support": {
                 "issues": "https://github.com/emreyarligan/enum-concern/issues",
-                "source": "https://github.com/emreyarligan/enum-concern/tree/1.0.1"
+                "source": "https://github.com/emreyarligan/enum-concern/tree/1.0.2"
             },
-            "time": "2023-10-16T13:53:59+00:00"
+            "time": "2023-11-09T21:06:32+00:00"
         },
         {
             "name": "envant/fireable",
