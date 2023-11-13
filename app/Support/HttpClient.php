@@ -110,10 +110,7 @@ class HttpClient
         return $http;
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function setopt(int $setopt, $value): static
+    public function setopt(int $setopt, mixed $value): static
     {
         $http = clone $this;
         $http->curlopts[$setopt] = $value;

@@ -16,12 +16,11 @@ trait ValidateStrictAll
     /**
      * Run the validation routine against the given validator.
      *
-     * @param array|\Illuminate\Contracts\Validation\Validator $validator
-     * @param ?Request $request
+     * @param  ?Request  $request
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateStrictAllWith($validator, ?Request $request = null): array
+    public function validateStrictAllWith(array|\Illuminate\Contracts\Validation\Validator $validator, ?Request $request = null): array
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
         $request = $request ?: request();

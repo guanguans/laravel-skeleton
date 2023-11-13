@@ -70,10 +70,8 @@ class HandlerStack implements \Stringable
 
     /**
      * Invokes the handler stack as a composed handler.
-     *
-     * @param  mixed  $passable
      */
-    public function __invoke($passable): mixed
+    public function __invoke(mixed $passable): mixed
     {
         $handler = $this->resolve();
 
@@ -127,10 +125,8 @@ class HandlerStack implements \Stringable
 
     /**
      * Invokes the handler stack as a composed handler.
-     *
-     * @param  mixed  $passable
      */
-    public function call($passable): mixed
+    public function call(mixed $passable): mixed
     {
         return $this($passable);
     }
@@ -207,7 +203,7 @@ class HandlerStack implements \Stringable
      *
      * @param  callable|string  $remove middleware to remove by instance or name
      */
-    public function remove($remove): void
+    public function remove(callable|string $remove): void
     {
         if (! \is_string($remove) && ! \is_callable($remove)) {
             trigger_deprecation('guzzlehttp/guzzle', '7.4', 'Not passing a callable or string to %s::%s() is deprecated and will cause an error in 8.0.', __CLASS__, __FUNCTION__);
@@ -284,7 +280,7 @@ class HandlerStack implements \Stringable
      *
      * @param  callable|string  $fn function to write as a string
      */
-    private function debugCallable($fn): string
+    private function debugCallable(callable|string $fn): string
     {
         if (\is_string($fn)) {
             return "callable({$fn})";

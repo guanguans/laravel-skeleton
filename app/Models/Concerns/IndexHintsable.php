@@ -36,7 +36,7 @@ trait IndexHintsable
      * @param  array<string>|string  $indexes
      * @param  string  $for JOIN|ORDER BY|GROUP BY
      */
-    public function scopeForceIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
+    public function scopeForceIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
         if (Str::contains($this->preparedIndexes, 'USE')) {
             throw new \InvalidArgumentException('It is an error to mix USE INDEX and FORCE INDEX for the same table.');
@@ -60,7 +60,7 @@ trait IndexHintsable
     /**
      * @param  array<string>|string  $indexes
      */
-    public function scopeUseIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
+    public function scopeUseIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
         if (Str::contains($this->preparedIndexes, 'FORCE')) {
             throw new \Exception('However, it is an error to mix USE INDEX and FORCE INDEX for the same table:');
@@ -84,7 +84,7 @@ trait IndexHintsable
     /**
      * @param  array<string>|string  $indexes
      */
-    public function scopeIgnoreIndex(Builder $query, $indexes, string $for = '', string $as = ''): Builder
+    public function scopeIgnoreIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
         if (! $this->tableIndexExists($indexes, 'ignore')) {
             return $query;
@@ -114,7 +114,7 @@ trait IndexHintsable
     /**
      * @param  array<string>|string  $indexes
      */
-    protected function tableIndexExists($indexes, string $type): bool
+    protected function tableIndexExists(array|string $indexes, string $type): bool
     {
         foreach (Arr::wrap($indexes) as $index) {
             $index = strtolower($index);

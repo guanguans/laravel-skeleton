@@ -15,11 +15,9 @@ trait ValidatesData
     /**
      * Run the validation routine against the given validator.
      *
-     * @param array|\Illuminate\Contracts\Validation\Validator $validator
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateDataWith($validator, array $data): array
+    public function validateDataWith(array|\Illuminate\Contracts\Validation\Validator $validator, array $data): array
     {
         if (\is_array($validator)) {
             $validator = $this->getValidationDataFactory()->make($data, $validator);

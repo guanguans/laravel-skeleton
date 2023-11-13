@@ -414,7 +414,7 @@ class StreamHandler implements Handler
     /**
      * @param  mixed  $value as passed via Request transfer options
      */
-    private function add_proxy(RequestInterface $request, array &$options, $value, array &$params): void
+    private function add_proxy(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         $uri = null;
 
@@ -478,7 +478,7 @@ class StreamHandler implements Handler
     /**
      * @param  mixed  $value as passed via Request transfer options
      */
-    private function add_timeout(RequestInterface $request, array &$options, $value, array &$params): void
+    private function add_timeout(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         if ($value > 0) {
             $options['http']['timeout'] = $value;
@@ -488,7 +488,7 @@ class StreamHandler implements Handler
     /**
      * @param  mixed  $value as passed via Request transfer options
      */
-    private function add_crypto_method(RequestInterface $request, array &$options, $value, array &$params): void
+    private function add_crypto_method(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         if (
             STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT === $value
@@ -507,7 +507,7 @@ class StreamHandler implements Handler
     /**
      * @param  mixed  $value as passed via Request transfer options
      */
-    private function add_verify(RequestInterface $request, array &$options, $value, array &$params): void
+    private function add_verify(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         if (false === $value) {
             $options['ssl']['verify_peer'] = false;
@@ -533,7 +533,7 @@ class StreamHandler implements Handler
     /**
      * @param  mixed  $value as passed via Request transfer options
      */
-    private function add_cert(RequestInterface $request, array &$options, $value, array &$params): void
+    private function add_cert(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         if (\is_array($value)) {
             $options['ssl']['passphrase'] = $value[1];
@@ -550,7 +550,7 @@ class StreamHandler implements Handler
     /**
      * @param  mixed  $value as passed via Request transfer options
      */
-    private function add_progress(RequestInterface $request, array &$options, $value, array &$params): void
+    private function add_progress(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         self::addNotification(
             $params,
@@ -569,7 +569,7 @@ class StreamHandler implements Handler
     /**
      * @param  mixed  $value as passed via Request transfer options
      */
-    private function add_debug(RequestInterface $request, array &$options, $value, array &$params): void
+    private function add_debug(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         if (false === $value) {
             return;

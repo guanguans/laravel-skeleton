@@ -88,7 +88,7 @@ final class Middleware
      *
      * @throws \InvalidArgumentException if container is not an array or ArrayAccess
      */
-    public static function history(&$container): callable
+    public static function history(array|\ArrayAccess &$container): callable
     {
         if (! \is_array($container) && ! $container instanceof \ArrayAccess) {
             throw new \InvalidArgumentException('history container must be an array or object implementing ArrayAccess');
@@ -191,7 +191,7 @@ final class Middleware
      * @param  string  $logLevel  level at which to log requests
      * @return callable returns a function that accepts the next handler
      */
-    public static function log(LoggerInterface $logger, $formatter, string $logLevel = 'info'): callable
+    public static function log(LoggerInterface $logger, MessageFormatter|MessageFormatterInterface $formatter, string $logLevel = 'info'): callable
     {
         // To be compatible with Guzzle 7.1.x we need to allow users to pass a MessageFormatter
         if (! $formatter instanceof MessageFormatter && ! $formatter instanceof MessageFormatterInterface) {

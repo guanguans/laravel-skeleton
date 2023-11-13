@@ -35,7 +35,8 @@
         "no_extra_blank_lines": false,
         "yoda_style": false,
         "space_after_semicolon": false,
-        "no_spaces_after_function_name": false
+        "no_spaces_after_function_name": false,
+        "single_line_empty_body": true
     },
     "exclude": [
         ".github",

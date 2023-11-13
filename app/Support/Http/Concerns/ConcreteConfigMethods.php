@@ -114,10 +114,9 @@ trait ConcreteConfigMethods
     /**
      * Add the given header to the request.
      *
-     * @param  mixed  $value
      * @return $this
      */
-    public function withHeader(string $name, $value)
+    public function withHeader(string $name, mixed $value)
     {
         return $this->withHeaders([$name => $value]);
     }

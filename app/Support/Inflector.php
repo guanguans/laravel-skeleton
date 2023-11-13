@@ -500,7 +500,7 @@ class Inflector
      * @param  false|string  $value Inflected value
      * @return false|string inflected value on cache hit or false on cache miss
      */
-    protected static function cache(string $type, string $key, $value = false)
+    protected static function cache(string $type, string $key, bool|string $value = false): bool|string
     {
         $key = '_'.$key;
         $type = '_'.$type;

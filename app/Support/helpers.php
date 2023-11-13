@@ -113,11 +113,9 @@ if (! function_exists('matching')) {
      * This function is used to simulate the `match` expression of PHP 8.0.
      * This is just an example, don't call it in your code.
      *
-     * @param  mixed  $value
-     *
      * @internal
      */
-    function matching($value): bool
+    function matching(mixed $value): bool
     {
         $switch = (static function ($value) {
             switch (true) {
@@ -154,12 +152,10 @@ if (! function_exists('make')) {
     /**
      * @psalm-param string|array<string, mixed> $abstract
      *
-     * @param  mixed  $abstract
-     *
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    function make($abstract, array $parameters = []): mixed
+    function make(mixed $abstract, array $parameters = []): mixed
     {
         if (! in_array(gettype($abstract), ['string', 'array'], true)) {
             throw new InvalidArgumentException(
@@ -557,20 +553,15 @@ if (! function_exists('array_filter_filled')) {
 if (! function_exists('call')) {
     /**
      * Call the given Closure / class@method and inject its dependencies.
-     *
-     * @param  callable|string  $callback
      */
-    function call($callback, array $parameters = [], ?string $defaultMethod = null): mixed
+    function call(callable|string $callback, array $parameters = [], ?string $defaultMethod = null): mixed
     {
         app()->call($callback, $parameters, $defaultMethod);
     }
 }
 
 if (! function_exists('catch_resource_usage')) {
-    /**
-     * @param  callable|string  $callback
-     */
-    function catch_resource_usage($callback, ...$parameter): string
+    function catch_resource_usage(callable|string $callback, ...$parameter): string
     {
         $timer = new Timer();
         $timer->start();
@@ -582,10 +573,7 @@ if (! function_exists('catch_resource_usage')) {
 }
 
 if (! function_exists('catch_query_log')) {
-    /**
-     * @param  callable|string  $callback
-     */
-    function catch_query_log($callback, ...$parameter): array
+    function catch_query_log(callable|string $callback, ...$parameter): array
     {
         return (new Pipeline(app()))
             ->send($callback)

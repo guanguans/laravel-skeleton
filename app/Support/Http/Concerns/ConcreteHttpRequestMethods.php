@@ -12,55 +12,34 @@ use Psr\Http\Message\UriInterface;
  */
 trait ConcreteHttpRequestMethods
 {
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    abstract public function request(string $method, $uri, array $options = []): ResponseInterface;
+    abstract public function request(string $method, string|UriInterface $uri, array $options = []): ResponseInterface;
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function get($uri, array $options = []): ResponseInterface
+    public function get(string|UriInterface $uri, array $options = []): ResponseInterface
     {
         return $this->request('GET', $uri, $options);
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function head($uri, array $options = []): ResponseInterface
+    public function head(string|UriInterface $uri, array $options = []): ResponseInterface
     {
         return $this->request('HEAD', $uri, $options);
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function put($uri, array $options = []): ResponseInterface
+    public function put(string|UriInterface $uri, array $options = []): ResponseInterface
     {
         return $this->request('PUT', $uri, $options);
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function post($uri, array $options = []): ResponseInterface
+    public function post(string|UriInterface $uri, array $options = []): ResponseInterface
     {
         return $this->request('POST', $uri, $options);
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function patch($uri, array $options = []): ResponseInterface
+    public function patch(string|UriInterface $uri, array $options = []): ResponseInterface
     {
         return $this->request('PATCH', $uri, $options);
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function delete($uri, array $options = []): ResponseInterface
+    public function delete(string|UriInterface $uri, array $options = []): ResponseInterface
     {
         return $this->request('DELETE', $uri, $options);
     }

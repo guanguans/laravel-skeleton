@@ -35,10 +35,8 @@ trait ControllerCrudable
 
     /**
      * List index.
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse|View
     {
         $items = $this->modelClass::search($request->all());
         if ($request->ajax() || $request->wantsJson()) {
@@ -62,10 +60,8 @@ trait ControllerCrudable
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|JsonResponse
     {
         if ($request->ajax() || $request->wantsJson()) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
@@ -96,11 +92,8 @@ trait ControllerCrudable
 
     /**
      * Display the specified resource.
-     *
-     * @param  mixed  $id
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, mixed $id): JsonResponse|View
     {
         if ($request->has('with_trashed') && property_exists($this->modelClass, 'withTrashedForbidden')) {
             $model = $this->modelClass::withTrashed()->findOrFail($id);
@@ -117,10 +110,8 @@ trait ControllerCrudable
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  mixed  $id
      */
-    public function edit($id): View
+    public function edit(mixed $id): View
     {
         $model = $this->modelClass::findOrFail($id);
 
@@ -129,11 +120,8 @@ trait ControllerCrudable
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  mixed  $id
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, mixed $id): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|JsonResponse
     {
         /** @var \App\Http\Controllers\Controller $this */
         if ($this->isAjax($request)) {
@@ -162,11 +150,8 @@ trait ControllerCrudable
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  mixed  $id
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, mixed $id): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|JsonResponse
     {
         if ($request->has('with_trashed') && property_exists($this->modelClass, 'withTrashedForbidden')) {
             $model = $this->modelClass::withTrashed()->findOrFail($id);

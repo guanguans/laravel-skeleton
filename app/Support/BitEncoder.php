@@ -96,11 +96,9 @@ class BitEncoder implements BitEncoderContract
     /**
      * 包含.
      *
-     * @param  mixed  $item
-     *
      * @throws \InvalidArgumentException
      */
-    public function has(int $value, $item): bool
+    public function has(int $value, mixed $item): bool
     {
         if ($value < 0) {
             throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
@@ -119,11 +117,9 @@ class BitEncoder implements BitEncoderContract
     /**
      * 缺少.
      *
-     * @param  mixed  $item
-     *
      * @throws \InvalidArgumentException
      */
-    public function lack(int $value, $item): bool
+    public function lack(int $value, mixed $item): bool
     {
         if ($value < 0) {
             throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
@@ -291,7 +287,7 @@ class BitEncoder implements BitEncoderContract
             throw new \InvalidArgumentException('The set is not an array of lists.');
         }
 
-        if (array_filter(array_count_values($set), fn (int $count) => $count > 1)) {
+        if (array_filter(array_count_values($set), static fn (int $count) => $count > 1)) {
             throw new \InvalidArgumentException('The set must be an array with no duplicate elements.');
         }
 

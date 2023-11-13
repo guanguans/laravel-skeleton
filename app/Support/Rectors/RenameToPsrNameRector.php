@@ -193,7 +193,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param  iterable<string>|string  $patterns
      */
-    public function isMatches(string $value, $patterns): bool
+    public function isMatches(string $value, iterable|string $patterns): bool
     {
         $value = (string) $value;
         if (! is_iterable($patterns)) {

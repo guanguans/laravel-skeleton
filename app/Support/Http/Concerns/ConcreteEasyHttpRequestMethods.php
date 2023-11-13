@@ -14,55 +14,34 @@ use Psr\Http\Message\UriInterface;
  */
 trait ConcreteEasyHttpRequestMethods
 {
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    abstract public function request(string $method, $uri, array $options = []): ResponseInterface;
+    abstract public function request(string $method, string|UriInterface $uri, array $options = []): ResponseInterface;
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function get($uri, array|string $query = [], array $options = []): ResponseInterface
+    public function get(string|UriInterface $uri, array|string $query = [], array $options = []): ResponseInterface
     {
         return $this->request('GET', $uri, array_merge_recursive($options, ['query' => $query]));
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function head($uri, array|string $query = [], array $options = []): ResponseInterface
+    public function head(string|UriInterface $uri, array|string $query = [], array $options = []): ResponseInterface
     {
         return $this->request('HEAD', $uri, array_merge_recursive($options, ['query' => $query]));
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function put($uri, array $data = [], array $options = []): ResponseInterface
+    public function put(string|UriInterface $uri, array $data = [], array $options = []): ResponseInterface
     {
         return $this->request('PUT', $uri, array_merge_recursive($options, [$this->bodyFormat => $data]));
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function post($uri, array $data = [], array $options = []): ResponseInterface
+    public function post(string|UriInterface $uri, array $data = [], array $options = []): ResponseInterface
     {
         return $this->request('POST', $uri, array_merge_recursive($options, [$this->bodyFormat => $data]));
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function patch($uri, array $data = [], array $options = []): ResponseInterface
+    public function patch(string|UriInterface $uri, array $data = [], array $options = []): ResponseInterface
     {
         return $this->request('PATCH', $uri, array_merge_recursive($options, [$this->bodyFormat => $data]));
     }
 
-    /**
-     * @param  string|UriInterface  $uri
-     */
-    public function delete($uri, array $data = [], array $options = []): ResponseInterface
+    public function delete(string|UriInterface $uri, array $data = [], array $options = []): ResponseInterface
     {
         return $this->request('DELETE', $uri, array_merge_recursive($options, [$this->bodyFormat => $data]));
     }

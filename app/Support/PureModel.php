@@ -85,10 +85,8 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Dynamically set attributes on the model.
-     *
-     * @param  mixed  $value
      */
-    public function __set(string $key, $value): void
+    public function __set(string $key, mixed $value): void
     {
         $this->setAttribute($key, $value);
     }
@@ -210,10 +208,8 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Add hidden attributes for the model.
-     *
-     * @param  null|array|string  $attributes
      */
-    public function addHidden($attributes = null): void
+    public function addHidden(null|array|string $attributes = null): void
     {
         $attributes = \is_array($attributes) ? $attributes : \func_get_args();
 
@@ -223,10 +219,9 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Make the given, typically hidden, attributes visible.
      *
-     * @param  array|string  $attributes
      * @return $this
      */
-    public function withHidden($attributes)
+    public function withHidden(array|string $attributes)
     {
         $this->hidden = array_diff($this->hidden, (array) $attributes);
 
@@ -255,10 +250,8 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Add visible attributes for the model.
-     *
-     * @param  null|array|string  $attributes
      */
-    public function addVisible($attributes = null): void
+    public function addVisible(null|array|string $attributes = null): void
     {
         $attributes = \is_array($attributes) ? $attributes : \func_get_args();
 
@@ -489,10 +482,9 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Set a given attribute on the model.
      *
-     * @param  mixed  $value
      * @return $this
      */
-    public function setAttribute(string $key, $value)
+    public function setAttribute(string $key, mixed $value)
     {
         // First we will check for the presence of a mutator for the set operation
         // which simply lets the developers tweak the attribute as it is set on
@@ -588,41 +580,32 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Determine if the given attribute exists.
-     *
-     * @param  mixed  $offset
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->{$offset});
     }
 
     /**
      * Get the value for a given offset.
-     *
-     * @param  mixed  $offset
      */
-    public function offsetGet($offset): mixed
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->{$offset};
     }
 
     /**
      * Set the value for a given offset.
-     *
-     * @param  mixed  $offset
-     * @param  mixed  $value
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->{$offset} = $value;
     }
 
     /**
      * Unset the value for a given offset.
-     *
-     * @param  mixed  $offset
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->{$offset});
     }
@@ -709,20 +692,16 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Get the value of an attribute using its mutator.
-     *
-     * @param  mixed  $value
      */
-    protected function mutateAttribute(string $key, $value): mixed
+    protected function mutateAttribute(string $key, mixed $value): mixed
     {
         return $this->{'get'.Str::studly($key).'Attribute'}($value);
     }
 
     /**
      * Get the value of an attribute using its mutator for array conversion.
-     *
-     * @param  mixed  $value
      */
-    protected function mutateAttributeForArray(string $key, $value): mixed
+    protected function mutateAttributeForArray(string $key, mixed $value): mixed
     {
         $value = $this->mutateAttribute($key, $value);
 
@@ -758,10 +737,8 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Cast an attribute to a native PHP type.
-     *
-     * @param  mixed  $value
      */
-    protected function castAttribute(string $key, $value): mixed
+    protected function castAttribute(string $key, mixed $value): mixed
     {
         if (null === $value) {
             return $value;
@@ -798,10 +775,8 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Encode the given value as JSON.
-     *
-     * @param  mixed  $value
      */
-    protected function asJson($value): string
+    protected function asJson(mixed $value): string
     {
         return json_encode($value);
     }

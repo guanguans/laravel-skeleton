@@ -43,7 +43,7 @@ interface ClientInterface
      *
      * @throws GuzzleException
      */
-    public function request(string $method, $uri, array $options = []): ResponseInterface;
+    public function request(string $method, string|UriInterface $uri, array $options = []): ResponseInterface;
 
     /**
      * Get a client configuration option.

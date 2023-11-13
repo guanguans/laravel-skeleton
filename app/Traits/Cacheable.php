@@ -62,7 +62,7 @@ trait Cacheable
     /**
      * Get Cache key for the method
      *
-     * @param ?array $args
+     * @param  ?array  $args
      */
     public function getCacheKey(string $method, ?array $args = null, string $tag = ''): string
     {
@@ -89,10 +89,8 @@ trait Cacheable
 
     /**
      * Get an item from the cache, or store the default value.
-     *
-     * @param null|int|string $time
      */
-    public function cacheCallback(string $method, array $args, \Closure $callback, $time = null): mixed
+    public function cacheCallback(string $method, array $args, \Closure $callback, null|int|string $time = null): mixed
     {
         // Cache disabled, just execute query & return result
         if (true === $this->skippedCache()) {
@@ -127,10 +125,8 @@ trait Cacheable
 
     /**
      * Return the time until expires in minutes.
-     *
-     * @param null|int|string $time
      */
-    protected function getCacheExpiresTime($time = null): int
+    protected function getCacheExpiresTime(null|int|string $time = null): int
     {
         if (self::EXPIRES_END_OF_DAY === $time) {
             return class_exists(Carbon::class)

@@ -78,12 +78,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         $this->configureDefaults($config);
     }
 
-    /**
-     * @param  mixed  $method
-     * @param  mixed  $args
-     * @return mixed|ResponseInterface
-     */
-    public function __call($method, $args)
+    public function __call(mixed $method, mixed $args): null|mixed|ResponseInterface
     {
         if (\count($args) < 1) {
             throw new InvalidArgumentException('Magic request methods require a URI and optional options array');
@@ -138,7 +133,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * @param  string|UriInterface  $uri URI object or string
      * @param  array  $options Request options to apply. See \GuzzleHttp\RequestOptions.
      */
-    public function request(string $method, $uri = '', array $options = []): ResponseInterface
+    public function request(string $method, string|UriInterface $uri = '', array $options = []): ResponseInterface
     {
         $options = $this->prepareDefaults($options);
         // Remove request modifying parameter because it can be done up-front.

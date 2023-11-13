@@ -34,7 +34,7 @@ class RequestMacro
         return function ($key = null, $default = null) {
             return null === $key
                 ? collect($this->header())
-                    ->map(fn ($header) => $header[0])
+                    ->map(static fn ($header) => $header[0])
                     ->toArray()
                 : $this->header($key, $default);
         };

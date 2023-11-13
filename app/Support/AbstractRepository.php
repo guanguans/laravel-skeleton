@@ -158,11 +158,8 @@ abstract class AbstractRepository
 
     /**
      * Find data by its primary key.
-     *
-     * @param  mixed  $id
-     * @return Collection|Model
      */
-    public function find($id, array $columns = ['*'])
+    public function find(mixed $id, array $columns = ['*']): Collection|Model
     {
         $this->newQuery();
 
@@ -187,10 +184,8 @@ abstract class AbstractRepository
 
     /**
      * Find data by field and value
-     *
-     * @return Collection|Model
      */
-    public function findBy(string $field, string $value, array $columns = ['*'])
+    public function findBy(string $field, string $value, array $columns = ['*']): Collection|Model
     {
         $this->newQuery();
 
@@ -199,10 +194,8 @@ abstract class AbstractRepository
 
     /**
      * Find data by field
-     *
-     * @param  mixed  $value
      */
-    public function findAllBy(string $attribute, $value, array $columns = ['*']): mixed
+    public function findAllBy(string $attribute, mixed $value, array $columns = ['*']): mixed
     {
         $this->newQuery();
 
@@ -269,11 +262,8 @@ abstract class AbstractRepository
 
     /**
      * Set searchable array.
-     *
-     * @param  array|string  $key
-     * @param  mixed  $value
      */
-    public function setSearchable($key, $value = null): self
+    public function setSearchable(array|string $key, mixed $value = null): self
     {
         // Allow for a batch assignment
         if (false === \is_array($key)) {
@@ -316,10 +306,8 @@ abstract class AbstractRepository
 
     /**
      * Filter results by given query params.
-     *
-     * @param  array|string  $queries
      */
-    public function search($queries): self
+    public function search(array|string $queries): self
     {
         // Adjust for simple search queries
         if (\is_string($queries)) {
@@ -443,10 +431,8 @@ abstract class AbstractRepository
 
     /**
      * Retrieve all data of repository, paginated
-     *
-     * @param  null|int|mixed  $per_page
      */
-    public function paginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public function paginate(null|int|mixed $per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         // Get the default per page when not set
         $per_page = $per_page ?: config('repositories.per_page', 15);
@@ -467,10 +453,8 @@ abstract class AbstractRepository
 
     /**
      * Retrieve all data of repository, paginated
-     *
-     * @param  null|int|mixed  $per_page
      */
-    public function simplePaginate($per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\Paginator
+    public function simplePaginate(null|int|mixed $per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\Paginator
     {
         $this->newQuery();
 
@@ -482,10 +466,8 @@ abstract class AbstractRepository
 
     /**
      * Save a new entity in repository
-     *
-     * @return bool|Model
      */
-    public function create(array $attributes)
+    public function create(array $attributes): bool|Model
     {
         $entity = $this->getNew($attributes);
 
@@ -515,11 +497,9 @@ abstract class AbstractRepository
     /**
      * Delete a entity in repository
      *
-     * @param  mixed  $entity
-     *
      * @throws \Exception
      */
-    public function delete($entity): ?bool
+    public function delete(mixed $entity): ?bool
     {
         if (($entity instanceof Model) === false) {
             $entity = $this->find($entity);
@@ -672,10 +652,8 @@ abstract class AbstractRepository
 
     /**
      * Add a search where clause to the query.
-     *
-     * @param  mixed  $value
      */
-    protected function createSearchClause(Builder $query, string $param, string $column, $value, string $boolean = 'and'): void
+    protected function createSearchClause(Builder $query, string $param, string $column, mixed $value, string $boolean = 'and'): void
     {
         if ('query' === $param) {
             $query->where($this->appendTableName($column), self::$searchOperator, '%'.$value.'%', $boolean);
@@ -708,10 +686,8 @@ abstract class AbstractRepository
 
     /**
      * Add a range clause to the query.
-     *
-     * @param  mixed  $value
      */
-    protected function createSearchRangeClause(Builder $query, $value, array $columns): bool
+    protected function createSearchRangeClause(Builder $query, mixed $value, array $columns): bool
     {
         // Skip arrays
         if (true === \is_array($value)) {
