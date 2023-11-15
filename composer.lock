@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bensampo/laravel-enum",
-            "version": "v6.6.4",
+            "version": "v6.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BenSampo/laravel-enum.git",
-                "reference": "5c867210ef3ec074f26980dc51e5743428ce3eec"
+                "reference": "b4320ac20d5452b50cc2147038a38c3dc91de876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/5c867210ef3ec074f26980dc51e5743428ce3eec",
-                "reference": "5c867210ef3ec074f26980dc51e5743428ce3eec",
+                "url": "https://api.github.com/repos/BenSampo/laravel-enum/zipball/b4320ac20d5452b50cc2147038a38c3dc91de876",
+                "reference": "b4320ac20d5452b50cc2147038a38c3dc91de876",
                 "shasum": ""
             },
             "require": {
@@ -87,7 +87,7 @@
             ],
             "support": {
                 "issues": "https://github.com/BenSampo/laravel-enum/issues",
-                "source": "https://github.com/BenSampo/laravel-enum/tree/v6.6.4"
+                "source": "https://github.com/BenSampo/laravel-enum/tree/v6.7.0"
             },
             "funding": [
                 {
@@ -95,7 +95,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-26T12:34:43+00:00"
+            "time": "2023-11-15T15:39:24+00:00"
         },
         {
             "name": "beyondcode/laravel-websockets",
