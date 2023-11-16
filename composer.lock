@@ -14441,16 +14441,16 @@
         },
         {
             "name": "guanguans/ai-commit",
-            "version": "1.8.5",
+            "version": "1.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "15b5587c0a9109452120339c3c62be02ac79b075"
+                "reference": "5a21789cc87831484909c8fde0d08e3fd3e69674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/15b5587c0a9109452120339c3c62be02ac79b075",
-                "reference": "15b5587c0a9109452120339c3c62be02ac79b075",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/5a21789cc87831484909c8fde0d08e3fd3e69674",
+                "reference": "5a21789cc87831484909c8fde0d08e3fd3e69674",
                 "shasum": ""
             },
             "require": {
@@ -14555,7 +14555,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2023-11-13T07:07:06+00:00"
+            "time": "2023-11-16T09:44:02+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
