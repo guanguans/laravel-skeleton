@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a344c9e920f20189dd0368e693f1c44",
+    "content-hash": "c137f9e4c50787c5b59dcb67408cdb31",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -3938,16 +3938,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.32.1",
+            "version": "v10.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b30e44f20d244f7ba125283e14a8bbac167f4e5b"
+                "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b30e44f20d244f7ba125283e14a8bbac167f4e5b",
-                "reference": "b30e44f20d244f7ba125283e14a8bbac167f4e5b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
+                "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
                 "shasum": ""
             },
             "require": {
@@ -4136,7 +4136,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-11-14T22:57:08+00:00"
+            "time": "2023-11-21T14:49:31+00:00"
         },
         {
             "name": "laravel/octane",
@@ -18320,16 +18320,16 @@
         },
         {
             "name": "salahhusa9/laravel-updater",
-            "version": "v0.0.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/salahhusa9/laravel-updater.git",
-                "reference": "78309865388e524fe8ee3136a7fa33b277c357da"
+                "reference": "8d56698edb0a13fdcf6940bb0ef61e057c9653b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/78309865388e524fe8ee3136a7fa33b277c357da",
-                "reference": "78309865388e524fe8ee3136a7fa33b277c357da",
+                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/8d56698edb0a13fdcf6940bb0ef61e057c9653b2",
+                "reference": "8d56698edb0a13fdcf6940bb0ef61e057c9653b2",
                 "shasum": ""
             },
             "require": {
@@ -18391,9 +18391,15 @@
             ],
             "support": {
                 "issues": "https://github.com/salahhusa9/laravel-updater/issues",
-                "source": "https://github.com/salahhusa9/laravel-updater/tree/v0.0.1"
+                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.0.0"
             },
-            "time": "2023-10-29T19:32:27+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/salahhusa9",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-11-21T12:35:50+00:00"
         },
         {
             "name": "sebastian/cli-parser",
