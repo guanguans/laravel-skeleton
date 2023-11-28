@@ -3942,16 +3942,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.33.0",
+            "version": "v10.34.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8"
+                "reference": "c581caa233e380610b34cc491490bfa147a3b62b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
-                "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c581caa233e380610b34cc491490bfa147a3b62b",
+                "reference": "c581caa233e380610b34cc491490bfa147a3b62b",
                 "shasum": ""
             },
             "require": {
@@ -4140,24 +4140,24 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-11-21T14:49:31+00:00"
+            "time": "2023-11-28T19:06:27+00:00"
         },
         {
             "name": "laravel/octane",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/octane.git",
-                "reference": "6dbb1d81aa13be7af764f1efbf48861237cf25a0"
+                "reference": "5237a36a51b105851f362a9013eb9f50aa008621"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/octane/zipball/6dbb1d81aa13be7af764f1efbf48861237cf25a0",
-                "reference": "6dbb1d81aa13be7af764f1efbf48861237cf25a0",
+                "url": "https://api.github.com/repos/laravel/octane/zipball/5237a36a51b105851f362a9013eb9f50aa008621",
+                "reference": "5237a36a51b105851f362a9013eb9f50aa008621",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-diactoros": "^3.0.0",
+                "laminas/laminas-diactoros": "^3.0",
                 "laravel/framework": "^10.10.1",
                 "laravel/serializable-closure": "^1.3.0",
                 "nesbot/carbon": "^2.66.0",
@@ -4227,7 +4227,7 @@
                 "issues": "https://github.com/laravel/octane/issues",
                 "source": "https://github.com/laravel/octane"
             },
-            "time": "2023-10-18T14:16:52+00:00"
+            "time": "2023-11-27T14:31:24+00:00"
         },
         {
             "name": "laravel/prompts",
