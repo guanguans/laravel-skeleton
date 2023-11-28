@@ -22,6 +22,8 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   ├── Base64Cast.php
 │   ├── CallbackGetCast.php
 │   ├── CallbackSetCast.php
+│   ├── CommaSeparatedToArrayCast.php
+│   ├── CommaSeparatedToIntegerArrayCast.php
 │   └── CurrencyCast.php
 ├── Console
 │   ├── Commands
@@ -117,6 +119,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   │   ├── Filterable.php
 │   │   ├── Fireworks.php
 │   │   ├── ForceUseIndexable.php
+│   │   ├── HasPivot.php
 │   │   ├── HasWrapedApiTokens.php
 │   │   ├── IndexHintsable.php
 │   │   ├── Observable.php
@@ -146,9 +149,15 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   ├── ExtendServiceProvider.php
 │   └── RouteServiceProvider.php
 ├── Rules
+│   ├── AddressIPV4Rule.php
+│   ├── AddressIPV6Rule.php
 │   ├── BankCardRule.php
 │   ├── Base64Rule.php
 │   ├── BetweenWordsRule.php
+│   ├── BitcoinAddressRule.php
+│   ├── CamelCaseRule.php
+│   ├── CapitalCharWithNumberRule.php
+│   ├── CarNumberRule.php
 │   ├── ChineseNameRule.php
 │   ├── Concerns
 │   │   ├── DataAware.php
@@ -156,33 +165,46 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   ├── CurrentUserPasswordRule.php
 │   ├── DefaultRule.php
 │   ├── DomainRule.php
+│   ├── DuplicateRule.php
 │   ├── EmailRule.php
+│   ├── EvenNumberRule.php
+│   ├── HexColorRule.php
 │   ├── HexRule.php
+│   ├── HtmlTagRule.php
 │   ├── HtmlcleanRule.php
 │   ├── IdCardRule.php
+│   ├── ImeiRule.php
 │   ├── InstanceofRule.php
 │   ├── IntegerBooleanRule.php
 │   ├── IpRule.php
 │   ├── JwtRule.php
+│   ├── KebabCaseRule.php
 │   ├── LocationCoordinatesRule.php
 │   ├── MacAddressRule.php
 │   ├── MimeTypeRule.php
+│   ├── OddNumberRule.php
 │   ├── PhoneCisRule.php
 │   ├── PhoneRule.php
 │   ├── PhoneWorldRule.php
+│   ├── PortRule.php
 │   ├── PostalCodeRule.php
 │   ├── RegexRule.php
 │   ├── Rule.php
 │   ├── SemverRule.php
 │   ├── SlugRule.php
+│   ├── SnakeCaseRule.php
 │   ├── StrongPassword.php
 │   ├── TimezoneRule.php
+│   ├── UlidRule.php
 │   ├── UrlRule.php
+│   ├── UuidRule.php
 │   └── WithoutWhitespaceRule.php
+├── Scopes
 ├── Services
 ├── Support
 │   ├── AbstractRepository.php
 │   ├── BitEncoder.php
+│   ├── ConsoleWriter.php
 │   ├── Discover.php
 │   ├── Facades
 │   │   ├── OpenAI.php
@@ -191,9 +213,36 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   ├── FoundationSdk.php
 │   ├── HandlerStack.php
 │   ├── HmacSigner.php
+│   ├── Http
+│   │   ├── Client.php
+│   │   ├── Concerns
+│   │   │   ├── ConcreteConfigMethods.php
+│   │   │   ├── ConcreteEasyHttpRequestMethods.php
+│   │   │   └── ConcreteHttpRequestMethods.php
+│   │   ├── Contracts
+│   │   │   ├── ClientInterface.php
+│   │   │   ├── Handler.php
+│   │   │   └── Throwable.php
+│   │   ├── Exceptions
+│   │   │   └── RuntimeException.php
+│   │   ├── GuzzlyClient.php
+│   │   ├── Handlers
+│   │   │   ├── FgcHandler.php
+│   │   │   └── StreamHandler.php
+│   │   ├── Middleware.php
+│   │   ├── PsrClient.php
+│   │   ├── Responses
+│   │   │   ├── Response.php
+│   │   │   └── StreamResponse.php
+│   │   └── Support
+│   │       ├── Collection.php
+│   │       └── XML.php
 │   ├── HttpClient.php
 │   ├── HttpQuery.php
 │   ├── Inflector.php
+│   ├── Monolog
+│   │   ├── AnsiLineFormatter.php
+│   │   └── AppendExtraDataProcessor.php
 │   ├── OS.php
 │   ├── OpenAI.php
 │   ├── PureModel.php
@@ -229,7 +278,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
     └── Creators
         └── RequestCreator.php
 
-40 directories, 170 files
+50 directories, 210 files
 ```
 
 ## Learning Laravel
