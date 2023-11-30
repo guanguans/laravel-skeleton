@@ -55,6 +55,7 @@ $finder = Finder::create()
         '.phpstorm.meta.php',
         '_ide_helper.php',
         '_ide_helper_models.php',
+        'PsrClient.php',
     ])
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
