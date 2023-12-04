@@ -4415,35 +4415,35 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.0.0-beta2",
+            "version": "v1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "1de2604de554c6a0c8c29f706615b4e30995628d"
+                "reference": "6d27eede84bed499b5baaf720a14ccec7f6bb9c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/1de2604de554c6a0c8c29f706615b4e30995628d",
-                "reference": "1de2604de554c6a0c8c29f706615b4e30995628d",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/6d27eede84bed499b5baaf720a14ccec7f6bb9c9",
+                "reference": "6d27eede84bed499b5baaf720a14ccec7f6bb9c9",
                 "shasum": ""
             },
             "require": {
                 "doctrine/sql-formatter": "^1.1",
                 "guzzlehttp/promises": "^1.0 || ^2.0",
-                "illuminate/auth": "^9.0 || ^10.0",
-                "illuminate/cache": "^9.0 || ^10.0",
-                "illuminate/config": "^9.0 || ^10.0",
-                "illuminate/console": "^9.0 || ^10.0",
-                "illuminate/contracts": "^9.0 || ^10.0",
-                "illuminate/database": "^9.0 || ^10.0",
-                "illuminate/events": "^9.0 || ^10.0",
-                "illuminate/http": "^9.0 || ^10.0",
-                "illuminate/queue": "^9.0 || ^10.0",
-                "illuminate/redis": "^9.0 || ^10.0",
-                "illuminate/routing": "^9.0 || ^10.0",
-                "illuminate/support": "^9.0 || ^10.0",
-                "illuminate/view": "^9.0 || ^10.0",
-                "livewire/livewire": "^3.0",
+                "illuminate/auth": "^10.21",
+                "illuminate/cache": "^10.21",
+                "illuminate/config": "^10.21",
+                "illuminate/console": "^10.21",
+                "illuminate/contracts": "^10.21",
+                "illuminate/database": "^10.21",
+                "illuminate/events": "^10.21",
+                "illuminate/http": "^10.21",
+                "illuminate/queue": "^10.21",
+                "illuminate/redis": "^10.21",
+                "illuminate/routing": "^10.21",
+                "illuminate/support": "^10.21",
+                "illuminate/view": "^10.21",
+                "livewire/livewire": "^3.02",
                 "nesbot/carbon": "^2.67",
                 "php": "^8.1"
             },
@@ -4457,7 +4457,7 @@
                 "pestphp/pest": "^2.0",
                 "pestphp/pest-plugin-laravel": "^2.2",
                 "phpstan/phpstan": "^1.11",
-                "predis/predis": "^2.2"
+                "predis/predis": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
@@ -4496,7 +4496,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2023-12-01T18:46:10+00:00"
+            "time": "2023-12-04T16:15:29+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5302,16 +5302,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.2.3",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "724e712cac25c40455102f0b5abd002fd269433b"
+                "reference": "ecded08cdc4b36bbb4b26bcc7f7a171ea2e4368c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/724e712cac25c40455102f0b5abd002fd269433b",
-                "reference": "724e712cac25c40455102f0b5abd002fd269433b",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/ecded08cdc4b36bbb4b26bcc7f7a171ea2e4368c",
+                "reference": "ecded08cdc4b36bbb4b26bcc7f7a171ea2e4368c",
                 "shasum": ""
             },
             "require": {
@@ -5364,7 +5364,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.2.3"
+                "source": "https://github.com/livewire/livewire/tree/v3.2.6"
             },
             "funding": [
                 {
@@ -5372,7 +5372,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-02T18:55:31+00:00"
+            "time": "2023-12-04T21:20:19+00:00"
         },
         {
             "name": "lorisleiva/cron-translator",
