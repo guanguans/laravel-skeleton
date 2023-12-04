@@ -203,6 +203,7 @@ class AppServiceProvider extends ServiceProvider
             // Model::preventsAccessingMissingAttributes(); // Triggers MissingAttributeException
             // Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
             // DB::handleExceedingCumulativeQueryDuration();
+            // Model::unguard();
             // DB::whenQueryingForLongerThan(500, function (Connection $connection, QueryExecuted $event) {
             //     // 通知开发团队...
             // });
