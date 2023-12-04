@@ -36,6 +36,7 @@
         "knuckleswtf/scribe": "^4.26",
         "laravel/framework": "^10.33",
         "laravel/octane": "^2.1",
+        "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "nunomaduro/termwind": "^1.15",
@@ -108,7 +109,7 @@
             "url": "https://github.com/laravel/facade-documenter.git"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
