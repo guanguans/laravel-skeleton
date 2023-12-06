@@ -15374,21 +15374,21 @@
         },
         {
             "name": "laracraft-tech/laravel-schema-rules",
-            "version": "v1.3.5",
+            "version": "v1.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laracraft-tech/laravel-schema-rules.git",
-                "reference": "4354e8315ae6c0e95641f06e3facd86ed4d8ebb0"
+                "reference": "f58b0c9d8b977fc8a0e6a378afe3a2ae92079926"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laracraft-tech/laravel-schema-rules/zipball/4354e8315ae6c0e95641f06e3facd86ed4d8ebb0",
-                "reference": "4354e8315ae6c0e95641f06e3facd86ed4d8ebb0",
+                "url": "https://api.github.com/repos/laracraft-tech/laravel-schema-rules/zipball/f58b0c9d8b977fc8a0e6a378afe3a2ae92079926",
+                "reference": "f58b0c9d8b977fc8a0e6a378afe3a2ae92079926",
                 "shasum": ""
             },
             "require": {
                 "brick/varexporter": "^0.3.8",
-                "doctrine/dbal": "^3.6",
+                "doctrine/dbal": "^3.6 || ^4.0",
                 "illuminate/contracts": "^8.0 || ^9.0 || ^10.0",
                 "illuminate/database": "^8.0 || ^9.0 || ^10.0",
                 "illuminate/support": "^8.0 || ^9.0 || ^10.0",
@@ -15437,9 +15437,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laracraft-tech/laravel-schema-rules/issues",
-                "source": "https://github.com/laracraft-tech/laravel-schema-rules/tree/v1.3.5"
+                "source": "https://github.com/laracraft-tech/laravel-schema-rules/tree/v1.3.6"
             },
-            "time": "2023-11-29T20:50:52+00:00"
+            "time": "2023-12-06T21:03:47+00:00"
         },
         {
             "name": "laradumps/laradumps",
