@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fd75069b46e070cc26d97adc27121f1",
+    "content-hash": "dfb4df4ca42e911d18a6d0bfd736e19c",
     "packages": [
         {
             "name": "bensampo/laravel-enum",
@@ -6025,6 +6025,52 @@
             "time": "2023-08-13T19:53:39+00:00"
         },
         {
+            "name": "not-empty/jwt-manager-php-lib",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/not-empty/jwt-manager-php-lib.git",
+                "reference": "dea2da5e54409391a3f54824b3bdb6f21204bb95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/not-empty/jwt-manager-php-lib/zipball/dea2da5e54409391a3f54824b3bdb6f21204bb95",
+                "reference": "dea2da5e54409391a3f54824b3bdb6f21204bb95",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "phpmd/phpmd": "^2.14",
+                "phpunit/phpunit": "^9.6",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JwtManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Not Empty Foundation",
+                    "email": "dev@not-empty.com"
+                }
+            ],
+            "description": "PHP library to manage JWT authentication",
+            "support": {
+                "issues": "https://github.com/not-empty/jwt-manager-php-lib/issues",
+                "source": "https://github.com/not-empty/jwt-manager-php-lib/tree/5.0.0"
+            },
+            "time": "2023-11-03T15:53:09+00:00"
+        },
+        {
             "name": "nunomaduro/collision",
             "version": "v7.10.0",
             "source": {
@@ -6852,6 +6898,52 @@
                 }
             ],
             "time": "2023-11-12T21:59:55+00:00"
+        },
+        {
+            "name": "phpyh/lru-memoizer",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpyh/lru-memoizer.git",
+                "reference": "f15a81cd731f8b3d72137ca527683daecba2663e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpyh/lru-memoizer/zipball/f15a81cd731f8b3d72137ca527683daecba2663e",
+                "reference": "f15a81cd731f8b3d72137ca527683daecba2663e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.14.3",
+                "phpunit/phpunit": "^10.0",
+                "phpyh/coding-standard": "^1.0",
+                "vimeo/psalm": "^5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPyh\\LRUMemoizer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Valentin Udaltsov",
+                    "email": "udaltsov.valentin@gmail.com"
+                }
+            ],
+            "description": "PHPyh LRU Memoizer",
+            "support": {
+                "issues": "https://github.com/phpyh/lru-memoizer/issues",
+                "source": "https://github.com/phpyh/lru-memoizer/tree/0.2.0"
+            },
+            "time": "2023-02-25T04:45:09+00:00"
         },
         {
             "name": "predis/predis",
