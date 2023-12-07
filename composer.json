@@ -18,6 +18,7 @@
         "biiiiiigmonster/hasin": "^3.0",
         "bramus/monolog-colored-line-formatter": "^3.1",
         "cerbero/command-validator": "^2.5",
+        "divineomega/password_exposed": "^3.2",
         "dragon-code/extended-routes": "^3.2",
         "dragon-code/laravel-http-logger": "^1.3",
         "dragon-code/laravel-route-names": "^1.4",
@@ -63,6 +64,8 @@
         "stillat/blade-directives": "^1.2",
         "symfony/stopwatch": "^6.3",
         "teamtnt/laravel-scout-tntsearch-driver": "^13.2",
+        "unicodeveloper/laravel-password": "^1.0",
+        "valorin/pwned-validator": "^1.3",
         "vectorface/whip": "^0.4",
         "watson/validating": "^8.1",
         "wendelladriel/laravel-validated-dto": "^3.3"
