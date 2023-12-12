@@ -4623,16 +4623,16 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.0.0-beta5",
+            "version": "v1.0.0-beta6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "27055078f4cf3ad771e4fa23ec6da50a170c5d1d"
+                "reference": "e471b1f6cb81476a1bc780f9685ad4d39a66a93b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/27055078f4cf3ad771e4fa23ec6da50a170c5d1d",
-                "reference": "27055078f4cf3ad771e4fa23ec6da50a170c5d1d",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/e471b1f6cb81476a1bc780f9685ad4d39a66a93b",
+                "reference": "e471b1f6cb81476a1bc780f9685ad4d39a66a93b",
                 "shasum": ""
             },
             "require": {
@@ -4651,7 +4651,7 @@
                 "illuminate/routing": "^10.21",
                 "illuminate/support": "^10.21",
                 "illuminate/view": "^10.21",
-                "livewire/livewire": "^3.02",
+                "livewire/livewire": "^3.2",
                 "nesbot/carbon": "^2.67",
                 "php": "^8.1"
             },
@@ -4661,7 +4661,7 @@
             "require-dev": {
                 "guzzlehttp/guzzle": "^7.7",
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^8.0",
+                "orchestra/testbench": "^8.16",
                 "pestphp/pest": "^2.0",
                 "pestphp/pest-plugin-laravel": "^2.2",
                 "phpstan/phpstan": "^1.11",
@@ -4696,6 +4696,7 @@
                     "email": "taylor@laravel.com"
                 }
             ],
+            "description": "Laravel Pulse is a real-time application performance monitoring tool and dashboard for your Laravel application.",
             "homepage": "https://github.com/laravel/pulse",
             "keywords": [
                 "laravel"
@@ -4704,7 +4705,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2023-12-05T22:49:00+00:00"
+            "time": "2023-12-12T00:04:52+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5510,16 +5511,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.2.6",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "ecded08cdc4b36bbb4b26bcc7f7a171ea2e4368c"
+                "reference": "7c1f609515e74ef1197c08e56a5606571b3ec1d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/ecded08cdc4b36bbb4b26bcc7f7a171ea2e4368c",
-                "reference": "ecded08cdc4b36bbb4b26bcc7f7a171ea2e4368c",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/7c1f609515e74ef1197c08e56a5606571b3ec1d9",
+                "reference": "7c1f609515e74ef1197c08e56a5606571b3ec1d9",
                 "shasum": ""
             },
             "require": {
@@ -5572,7 +5573,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.2.6"
+                "source": "https://github.com/livewire/livewire/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -5580,7 +5581,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-04T21:20:19+00:00"
+            "time": "2023-12-11T18:04:00+00:00"
         },
         {
             "name": "lorisleiva/cron-translator",
