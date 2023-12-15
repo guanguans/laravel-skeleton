@@ -9959,16 +9959,16 @@
         },
         {
             "name": "spatie/laravel-schedule-monitor",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-schedule-monitor.git",
-                "reference": "d5d24aa9b6b6f2422cc420cd90f78778cd382e98"
+                "reference": "0a0b7993563091837acacd65404e693066e8f3bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/d5d24aa9b6b6f2422cc420cd90f78778cd382e98",
-                "reference": "d5d24aa9b6b6f2422cc420cd90f78778cd382e98",
+                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/0a0b7993563091837acacd65404e693066e8f3bb",
+                "reference": "0a0b7993563091837acacd65404e693066e8f3bb",
                 "shasum": ""
             },
             "require": {
@@ -10026,7 +10026,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-schedule-monitor/issues",
-                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.4.1"
+                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.4.2"
             },
             "funding": [
                 {
@@ -10034,7 +10034,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-29T09:15:27+00:00"
+            "time": "2023-12-14T22:34:35+00:00"
         },
         {
             "name": "spatie/laravel-schemaless-attributes",
