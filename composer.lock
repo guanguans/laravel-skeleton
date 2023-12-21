@@ -4482,16 +4482,16 @@
         },
         {
             "name": "laravel/octane",
-            "version": "v2.2.3",
+            "version": "v2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/octane.git",
-                "reference": "c235d9839290067df61c8bf7f257917848ed072a"
+                "reference": "05c0858739d49b1c8e47093eba5a84a09d28c1b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/octane/zipball/c235d9839290067df61c8bf7f257917848ed072a",
-                "reference": "c235d9839290067df61c8bf7f257917848ed072a",
+                "url": "https://api.github.com/repos/laravel/octane/zipball/05c0858739d49b1c8e47093eba5a84a09d28c1b6",
+                "reference": "05c0858739d49b1c8e47093eba5a84a09d28c1b6",
                 "shasum": ""
             },
             "require": {
@@ -4566,7 +4566,7 @@
                 "issues": "https://github.com/laravel/octane/issues",
                 "source": "https://github.com/laravel/octane"
             },
-            "time": "2023-12-20T16:03:20+00:00"
+            "time": "2023-12-21T18:33:52+00:00"
         },
         {
             "name": "laravel/prompts",
