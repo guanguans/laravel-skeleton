@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\File;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Spatie\ShortSchedule\ShortSchedule;
@@ -67,5 +68,21 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    private function toOutputPath(string $command): string
+    {
+        $path = str($command)
+            ->classBasename()
+            ->snake('-')
+            ->replaceLast('-command', '')
+            ->finish(date('-Y-m-d'))
+            ->append('.log')
+            ->prepend(storage_path('logs/commands/'))
+            ->toString();
+
+        File::ensureDirectoryExists(\dirname($path));
+
+        return $path;
     }
 }
