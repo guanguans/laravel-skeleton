@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Macros;
+namespace App\Support\Macros;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;

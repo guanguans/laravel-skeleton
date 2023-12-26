@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Macros\QueryBuilder;
+namespace App\Support\Macros\QueryBuilder;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;

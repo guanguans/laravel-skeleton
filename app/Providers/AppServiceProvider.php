@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
-use App\Macros\BlueprintMacro;
-use App\Macros\CollectionMacro;
-use App\Macros\CommandMacro;
-use App\Macros\GrammarMacro;
-use App\Macros\MySqlGrammarMacro;
-use App\Macros\RequestMacro;
-use App\Macros\ResponseFactoryMacro;
-use App\Macros\StringableMacro;
-use App\Macros\StrMacro;
 use App\Rules\Rule;
 use App\Support\Discover;
-use App\Support\Monolog\AppendExtraDataProcessor;
+use App\Support\Macros\BlueprintMacro;
+use App\Support\Macros\CollectionMacro;
+use App\Support\Macros\CommandMacro;
+use App\Support\Macros\GrammarMacro;
+use App\Support\Macros\MySqlGrammarMacro;
+use App\Support\Macros\RequestMacro;
+use App\Support\Macros\ResponseFactoryMacro;
+use App\Support\Macros\StringableMacro;
+use App\Support\Macros\StrMacro;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -26,12 +25,9 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
-use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Events\DatabaseBusy;
-use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
@@ -40,15 +36,12 @@ use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -82,17 +75,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @var array<array-key, string>
      */
-    public array $singletons = [
-        BlueprintMacro::class,
-        CollectionMacro::class,
-        CommandMacro::class,
-        GrammarMacro::class,
-        MySqlGrammarMacro::class,
-        RequestMacro::class,
-        ResponseFactoryMacro::class,
-        StringableMacro::class,
-        StrMacro::class,
-    ];
+    public array $singletons = [];
 
     /**
      * Register any application services.

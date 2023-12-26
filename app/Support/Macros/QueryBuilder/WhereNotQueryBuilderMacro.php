@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Macros\QueryBuilder;
+namespace App\Support\Macros\QueryBuilder;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;

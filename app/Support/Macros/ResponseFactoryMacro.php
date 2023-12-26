@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Macros;
+namespace App\Support\Macros;
 
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\StreamedResponse;
