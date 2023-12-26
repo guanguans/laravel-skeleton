@@ -29,6 +29,7 @@ final class ImeiRule extends Rule
 
             $log[] = $n; // Append log
         }
+
         $sum = array_sum($log) * 9; // Sum log & multiply by 9
 
         return substr($sum, -1) === $imeiLast;

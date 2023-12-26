@@ -28,15 +28,7 @@ final class IpRule extends Rule
         'fe80::/10',
     ];
 
-    /**
-     * @var bool
-     */
-    protected $isPublic;
-
-    public function __construct(bool $isPublic = true)
-    {
-        $this->isPublic = $isPublic;
-    }
+    public function __construct(protected bool $isPublic = true) {}
 
     public function isV4(string $ip)
     {

@@ -4,15 +4,7 @@ namespace App\Rules;
 
 final class InstanceofRule extends Rule
 {
-    /**
-     * @var string
-     */
-    protected $class;
-
-    public function __construct(string $class)
-    {
-        $this->class = $class;
-    }
+    public function __construct(protected string $class) {}
 
     /**
      * Determine if the validation rule passes.

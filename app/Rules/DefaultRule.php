@@ -12,15 +12,7 @@ final class DefaultRule extends Rule implements ImplicitRule, ValidatorAwareRule
     // use DataAware;
     use ValidatorAware;
 
-    /**
-     * @var null|mixed
-     */
-    protected $default;
-
-    public function __construct($default)
-    {
-        $this->default = $default;
-    }
+    public function __construct(protected $default) {}
 
     /**
      * Determine if the validation rule passes.

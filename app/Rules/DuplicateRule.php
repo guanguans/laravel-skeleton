@@ -4,12 +4,7 @@ namespace App\Rules;
 
 final class DuplicateRule extends Rule
 {
-    private string $delimiter;
-
-    public function __construct(?string $delimiter = null)
-    {
-        $this->delimiter = $delimiter;
-    }
+    public function __construct(private readonly ?string $delimiter = null) {}
 
     /**
      * Determine if the validation rule passes.

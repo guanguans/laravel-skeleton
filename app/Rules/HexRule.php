@@ -4,21 +4,7 @@ namespace App\Rules;
 
 final class HexRule extends RegexRule
 {
-    /**
-     * @var bool
-     */
-    protected $forceFull;
-
-    /**
-     * @var bool
-     */
-    protected $allowAlpha;
-
-    public function __construct(bool $forceFull = false, bool $allowAlpha = false)
-    {
-        $this->forceFull = $forceFull;
-        $this->allowAlpha = $allowAlpha;
-    }
+    public function __construct(protected bool $forceFull = false, protected bool $allowAlpha = false) {}
 
     protected function pattern(): string
     {
@@ -36,8 +22,6 @@ final class HexRule extends RegexRule
             }
         }
 
-        $pattern .= ')$/';
-
-        return $pattern;
+        return $pattern.')$/';
     }
 }

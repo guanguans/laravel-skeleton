@@ -4,21 +4,7 @@ namespace App\Rules;
 
 final class BetweenWordsRule extends Rule
 {
-    /**
-     * @var int
-     */
-    protected $min;
-
-    /**
-     * @var int
-     */
-    protected $max;
-
-    public function __construct(int $min, int $max)
-    {
-        $this->min = $min;
-        $this->max = $max;
-    }
+    public function __construct(protected int $min, protected int $max) {}
 
     /**
      * Determine if the validation rule passes.
