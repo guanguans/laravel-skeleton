@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace App\Casts;
 
-use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-
-class CommaSeparatedToIntegerArrayCast implements CastsAttributes
+class CommaSeparatedToIntegerArrayCast extends CommaSeparatedToArrayCast
 {
-    public function get($model, $key, $value, $attributes)
+    public function get($model, $key, $value, $attributes): array
     {
-        return $value ? array_map('intval', explode(',', $value)) : [];
-    }
-
-    public function set($model, $key, $value, $attributes)
-    {
-        return $value;
+        return array_map('\intval', parent::get($model, $key, $value, $attributes));
     }
 }

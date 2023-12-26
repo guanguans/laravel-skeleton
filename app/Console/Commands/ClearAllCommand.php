@@ -20,38 +20,23 @@ class ClearAllCommand extends Command
      */
     protected $description = 'clear optimized all.';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function handle(): void
     {
-        parent::__construct();
-    }
+        if (! $this->option('force') && $this->getLaravel()->isProduction()) {
+            $this->output->warning('Please use --force option in production.');
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
-        if ($this->getLaravel()->isProduction() && ! $this->option('force')) {
-            return self::INVALID;
+            return;
         }
 
-        $resourceUsage = catch_resource_usage(function () {
-            $this->call('config:clear');
-            $this->call('event:clear');
-            $this->call('route:clear');
-            $this->call('view:clear');
-            $this->call('optimize:clear');
-            $this->call('clear-compiled');
-        });
+        $this->output->info('Clearing all...');
 
-        $this->output->success($resourceUsage);
+        $this->call('config:clear', $arguments = ['--ansi' => true, '-v' => true]);
+        $this->call('event:clear', $arguments);
+        $this->call('route:clear', $arguments);
+        $this->call('view:clear', $arguments);
+        $this->call('optimize:clear', $arguments);
+        $this->call('clear-compiled', $arguments);
 
-        return self::SUCCESS;
+        $this->output->success('All cleared.');
     }
 }

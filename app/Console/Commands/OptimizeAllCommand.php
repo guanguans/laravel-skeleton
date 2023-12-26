@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 use Symfony\Component\Process\Process;
 
 class OptimizeAllCommand extends Command
@@ -21,40 +22,37 @@ class OptimizeAllCommand extends Command
      */
     protected $description = 'Optimize all.';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function handle(): void
     {
-        parent::__construct();
-    }
+        if (! $this->option('force') && $this->getLaravel()->isProduction()) {
+            $this->output->warning('Please use --force option in production.');
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
-        if (! $this->getLaravel()->isProduction() && ! $this->option('force')) {
-            return self::INVALID;
+            return;
         }
 
-        $resourceUsage = catch_resource_usage(function () {
-            Process::fromShellCommandline('composer dump-autoload --optimize --ansi')
-                ->mustRun(function (string $type, string $line): void {
-                    $this->output->write($line);
-                });
-            $this->call('config:cache');
-            $this->call('event:cache');
-            $this->call('route:cache');
-            $this->call('view:cache');
+        $this->output->info('Optimizing all...');
+
+        $this->call('config:cache', $arguments = ['--ansi' => true, '-v' => true]);
+        $this->call('event:cache', $arguments);
+        $this->call('route:cache', $arguments);
+
+        try {
+            $this->call('view:cache', $arguments);
+        } catch (DirectoryNotFoundException $directoryNotFoundException) {
+            $this->output->error($directoryNotFoundException->getMessage());
+        }
+
+        Process::fromShellCommandline(sprintf(
+            '%s dump-autoload --no-interaction --optimize --ansi -v',
+            match ($this->laravel->environment()) {
+                'local' => 'composer',
+                'testing' => '/usr/bin/php8.1 /usr/local/bin/composer2',
+                'production' => 'composer2',
+            }
+        ))->mustRun(function (string $type, string $line): void {
+            $this->output->write($line);
         });
 
-        $this->output->success($resourceUsage);
-
-        return self::SUCCESS;
+        $this->output->success('All optimized.');
     }
 }
