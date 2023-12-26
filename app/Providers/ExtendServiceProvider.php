@@ -75,19 +75,13 @@ class ExtendServiceProvider extends ServiceProvider
 
     protected function registerOpenAI(): void
     {
-        $this->app->singleton(OpenAI::class, function (Application $application) {
-            return new OpenAI($application['config']['services.openai']);
-        });
-
+        $this->app->singleton(OpenAI::class, static fn (Application $application) => new OpenAI($application['config']['services.openai']));
         $this->app->alias(OpenAI::class, 'openai');
     }
 
     protected function registerPushDeer(): void
     {
-        $this->app->singleton(PushDeer::class, function (Application $application) {
-            return new PushDeer($application['config']['services.pushdeer']);
-        });
-
+        $this->app->singleton(PushDeer::class, static fn (Application $application) => new PushDeer($application['config']['services.pushdeer']));
         $this->app->alias(PushDeer::class, 'pushdeer');
     }
 }

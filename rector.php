@@ -59,7 +59,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->paths([
-        __DIR__.'/app/Models',
+        __DIR__.'/app/Providers',
         __DIR__.'/config',
         __DIR__.'/routes',
         __DIR__.'/.*.php',

@@ -243,12 +243,15 @@ class AppServiceProvider extends ServiceProvider
             ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
                 Validator::{is_subclass_of($ruleClass, ImplicitRule::class) ? 'extendImplicit' : 'extend'}(
                     $ruleClass::name(),
-                    static function (string $attribute, $value, array $parameters, \Illuminate\Validation\Validator $validator) use ($ruleClass) {
-                        return tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {
-                            $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
-                            $rule instanceof DataAwareRule and $rule->setData($validator->getData());
-                        })->passes($attribute, $value);
-                    },
+                    static fn (
+                        string $attribute,
+                        $value,
+                        array $parameters,
+                        \Illuminate\Validation\Validator $validator
+                    ) => tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {
+                        $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
+                        $rule instanceof DataAwareRule and $rule->setData($validator->getData());
+                    })->passes($attribute, $value),
                     $ruleClass::localizedMessage()
                 );
             });
@@ -349,7 +352,7 @@ class AppServiceProvider extends ServiceProvider
             $separator = '-',
             $language = 'en',
             $dictionary = ['@' => 'at']
-        ) => '<?php echo \Illuminate\Support\Str::slug($title, $separator, $language, $dictionary); ?>');
+        ) => '<?php echo '.\Illuminate\Support\Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
     }
 
     /**
