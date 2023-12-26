@@ -53,7 +53,7 @@ trait AllowedFilterable
             $sql = "LOWER({$wrappedProperty}) LIKE ?";
 
             if (\is_array($value)) {
-                if (0 === \count(array_filter($value, 'strlen'))) {
+                if ([] === array_filter($value, 'strlen')) {
                     return $query;
                 }
 

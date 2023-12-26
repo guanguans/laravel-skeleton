@@ -108,7 +108,7 @@ trait IndexHintsable
         }
 
         $this->preparedIndexes = self::getTable();
-        $this->preparedIndexes .= ! empty($as) ? " {$as}" : '';
+        $this->preparedIndexes .= empty($as) ? '' : " {$as}";
     }
 
     /**
@@ -119,10 +119,9 @@ trait IndexHintsable
         foreach (Arr::wrap($indexes) as $index) {
             $index = strtolower($index);
 
-            Schema::table(self::getTable(), function (Blueprint $table) use ($index, $type) {
+            Schema::table(self::getTable(), fn (Blueprint $table) =>
                 /** @noinspection PhpVoidFunctionResultUsedInspection */
-                return $this->fillIndexes($table, $index, $type);
-            });
+                $this->fillIndexes($table, $index, $type));
         }
 
         return ! empty($this->forceIndexes) || ! empty($this->ignoreIndexes) || ! empty($this->useIndexes);
@@ -157,6 +156,7 @@ trait IndexHintsable
         if (empty($for)) {
             return false;
         }
+
         $for = strtoupper(str_replace('_', ' ', $for));
         $this->preparedIndexes .= " FOR $for";
 

@@ -45,7 +45,7 @@ trait Observable
             }
         }
 
-        if (empty($events)) {
+        if ($events === []) {
             return null;
         }
 

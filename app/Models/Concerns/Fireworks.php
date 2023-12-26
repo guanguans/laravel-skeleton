@@ -39,6 +39,7 @@ trait Fireworks
                 if (method_exists($model, $method)) {
                     \call_user_func_array([$model, $method], [$model]);
                 }
+
                 $self->callAfterEvent($model, $event);
             });
         }

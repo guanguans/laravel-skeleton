@@ -8,6 +8,6 @@ class MorphPivotWithCreatorPivot extends MorphPivot
 {
     public function fill(array $attributes)
     {
-        return parent::fill(array_merge($attributes, ['creator_id' => $attributes['creator_id'] ?? auth()->id()]));
+        return parent::fill([...$attributes, 'creator_id' => $attributes['creator_id'] ?? auth()->id()]);
     }
 }
