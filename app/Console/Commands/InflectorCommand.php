@@ -75,11 +75,9 @@ class InflectorCommand extends Command
                 ];
 
                 return collect($type === 'all' ? \array_slice($types, 1) : [$type])
-                    ->reduce(function (Collection $results, string $type) use ($phrase, $classPluck) {
+                    ->reduce(static function (Collection $results, string $type) use ($phrase, $classPluck) {
                         $result = Str::of($type)->explode(':')
-                            ->pipe(function (Collection $parts) use ($phrase, $classPluck) {
-                                return $classPluck[$parts->first()]::{$parts->last()}($phrase);
-                            });
+                            ->pipe(static fn (Collection $parts) => $classPluck[$parts->first()]::{$parts->last()}($phrase));
 
                         return $results->add([
                             'type' => $type,

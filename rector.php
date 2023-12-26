@@ -18,7 +18,9 @@ use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
 use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
+use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
@@ -57,7 +59,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->paths([
-        __DIR__.'/app/Casts',
+        __DIR__.'/app/Console',
         __DIR__.'/config',
         __DIR__.'/routes',
         __DIR__.'/.*.php',
@@ -81,6 +83,12 @@ return static function (RectorConfig $rectorConfig): void {
 
         MakeInheritedMethodVisibilitySameAsParentRector::class => [
             __DIR__.'/app/Admin/Actions/Show',
+        ],
+        RemovePhpVersionIdCheckRector::class => [
+            __DIR__.'/app/Console/Commands/HealthCheckCommand.php',
+        ],
+        UnwrapFutureCompatibleIfPhpVersionRector::class => [
+            __DIR__.'/app/Console/Commands/HealthCheckCommand.php',
         ],
         RemoveAlwaysTrueIfConditionRector::class => [
             __DIR__.'/app/Support/Discover.php',

@@ -86,32 +86,17 @@ class GenerateTestsCommand extends Command
     /** @var \PhpParser\ErrorHandler\Collecting */
     private $errorHandler;
 
-    /** @var null|\PhpParser\Node\Stmt[] */
-    private $templateTestClassNodes;
-
     /** @var \PhpParser\BuilderFactory */
     private $builderFactory;
 
     /** @var \PhpParser\NodeFinder */
     private $nodeFinder;
 
-    /** @var \PhpParser\NodeDumper */
-    private $nodeDumper;
-
-    /** @var \PhpParser\JsonDecoder */
-    private $jsonDecoder;
-
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
 
     /** @var \PhpParser\NodeTraverser */
     private $nodeTraverser;
-
-    /** @var \PhpParser\NodeVisitor\ParentConnectingVisitor */
-    private $parentConnectingVisitor;
-
-    /** @var \PhpParser\NodeVisitor\NodeConnectingVisitor */
-    private $nodeConnectingVisitor;
 
     /** @var \PhpParser\NodeVisitor\CloningVisitor */
     private $cloningVisitor;
@@ -136,25 +121,21 @@ class GenerateTestsCommand extends Command
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) {
             try {
                 $originalNodes = $this->parser->parse($fileInfo->getContents());
-            } catch (Error $e) {
+            } catch (Error $error) {
                 $this->newLine();
-                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $e->getMessage()));
+                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $error->getMessage()));
 
                 return;
             }
 
-            $originalNamespaceNodes = $this->nodeFinder->find($originalNodes, function (Node $node) {
-                return $node instanceof Node\Stmt\Namespace_ && $node->name;
-            });
+            $originalNamespaceNodes = $this->nodeFinder->find($originalNodes, static fn (Node $node) => $node instanceof Node\Stmt\Namespace_ && $node->name);
 
             /** @var Node\Stmt\Namespace_ $originalNamespaceNode */
             foreach ($originalNamespaceNodes as $originalNamespaceNode) {
                 $originalClassNamespace = $originalNamespaceNode->name->toString();
 
                 /** @var Class_[]|Trait_[] $originalClassNodes */
-                $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, function (Node $node) {
-                    return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
-                });
+                $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, static fn (Node $node) => ($node instanceof Class_ || $node instanceof Trait_) && $node->name);
                 self::$statistics['scanned_classes'] += \count($originalClassNodes);
                 foreach ($originalClassNodes as $originalClassNode) {
                     // 准备基本信息
@@ -165,27 +146,17 @@ class GenerateTestsCommand extends Command
                     $testClassFile = Str::finish($this->option('base-dir'), DIRECTORY_SEPARATOR).$testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
 
                     // 获取需要生成的测试方法节点
-                    $testClassAddedMethodNodes = array_map(function (ClassMethod $node) {
-                        return tap(
-                            $this->builderFactory
-                                ->method(Str::{$this->option('method-format')}('test_'.Str::snake($node->name->name)))
-                                ->makePublic()
-                                ->getNode()
-                        )->setAttribute('isAdded', true);
-                    }, array_filter($originalClassNode->getMethods(), function (ClassMethod $node) {
-                        return $node->isPublic() && ! $node->isAbstract() && $node->name->toString() !== '__construct';
-                    }));
+                    $testClassAddedMethodNodes = array_map(fn (ClassMethod $node) => tap(
+                        $this->builderFactory
+                            ->method(Str::{$this->option('method-format')}('test_'.Str::snake($node->name->name)))
+                            ->makePublic()
+                            ->getNode()
+                    )->setAttribute('isAdded', true), array_filter($originalClassNode->getMethods(), static fn (ClassMethod $node) => $node->isPublic() && ! $node->isAbstract() && $node->name->toString() !== '__construct'));
                     if ($isExistsTestClassFile = file_exists($testClassFile)) {
-                        $originalTestClassMethodNames = array_filter(array_map(function (ReflectionMethod $method) {
-                            return Str::{$this->option('method-format')}($method->getName());
-                        }, (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), function ($name) {
-                            return Str::startsWith($name, 'test');
-                        });
+                        $originalTestClassMethodNames = array_filter(array_map(fn (ReflectionMethod $method) => Str::{$this->option('method-format')}($method->getName()), (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), static fn ($name) => Str::startsWith($name, 'test'));
 
-                        $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, function (ClassMethod $node) use ($originalTestClassMethodNames) {
-                            return ! \in_array($node->name->name, $originalTestClassMethodNames, true);
-                        });
-                        if (empty($testClassAddedMethodNodes)) {
+                        $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, static fn (ClassMethod $node) => ! \in_array($node->name->name, $originalTestClassMethodNames, true));
+                        if ($testClassAddedMethodNodes === []) {
                             continue;
                         }
                     }
@@ -213,6 +184,7 @@ class GenerateTestsCommand extends Command
                     if (! file_exists($testClassDir = \dirname($testClassFile)) && ! mkdir($testClassDir, 0755, true) && ! is_dir($testClassDir)) {
                         throw new RuntimeException(sprintf('Directory "%s" was not created', $testClassDir));
                     }
+
                     file_put_contents($testClassFile, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
 
                     ++self::$statistics['related_classes'];
@@ -222,9 +194,7 @@ class GenerateTestsCommand extends Command
         });
 
         $this->newLine();
-        $this->table(array_map(function ($name) {
-            return Str::of($name)->snake()->replace('_', ' ')->title();
-        }, array_keys(self::$statistics)), [self::$statistics]);
+        $this->table(array_map(static fn ($name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys(self::$statistics)), [self::$statistics]);
 
         $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
@@ -271,7 +241,7 @@ class GenerateTestsCommand extends Command
 
     protected function initializeEnvs()
     {
-        $xdebug = new XdebugHandler(__CLASS__);
+        $xdebug = new XdebugHandler(self::class);
         $xdebug->check();
         unset($xdebug);
 
@@ -301,7 +271,6 @@ class GenerateTestsCommand extends Command
         $this->lexer = new Emulative(['usedAttributes' => ['comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos']]);
         $this->parser = (new ParserFactory())->create((int) $this->option('parse-mode'), $this->lexer);
         $this->errorHandler = new Collecting();
-        $this->templateTestClassNodes = $this->parser->parse(file_get_contents($this->option('template-file')), $this->errorHandler);
         $this->builderFactory = new BuilderFactory();
         $this->nodeFinder = new NodeFinder();
         // $this->nodeDumper = new NodeDumper();

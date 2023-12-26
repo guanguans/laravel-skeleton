@@ -98,9 +98,9 @@ class FindDumpStatementCommand extends Command
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd) {
             try {
                 $nodes = $this->parser->parse($fileInfo->getContents());
-            } catch (Error $e) {
+            } catch (Error $error) {
                 $this->newLine();
-                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $e->getMessage()));
+                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $error->getMessage()));
 
                 return;
             }
@@ -115,7 +115,7 @@ class FindDumpStatementCommand extends Command
                     return true;
                 }
 
-                return Str::of(class_basename(\get_class($node)))
+                return Str::of(class_basename($node::class))
                     ->lower()
                     ->replaceLast('_', '')
                     ->is($this->statements['struct']);
@@ -129,21 +129,13 @@ class FindDumpStatementCommand extends Command
                     $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename(\get_class($dumpNode)))->lower()->replaceLast('_', '')->pipe(function (Stringable $name) {
-                        return "<fg=red>$name</>";
-                    });
+                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn (Stringable $name) => "<fg=red>$name</>");
                     $type = '<fg=red>struct</>';
                 }
 
-                $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(function (Stringable $file) use ($odd) {
-                    return $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>";
-                });
-                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(function (Stringable $startLine) use ($odd) {
-                    return $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>";
-                });
-                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(function (Stringable $formattedCode) use ($odd) {
-                    return $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>";
-                });
+                $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(static fn (Stringable $file) => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>");
+                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(static fn (Stringable $startLine) => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>");
+                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(static fn (Stringable $formattedCode) => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>");
 
                 return [
                     'index' => null,
@@ -167,16 +159,14 @@ class FindDumpStatementCommand extends Command
             return static::INVALID;
         }
 
-        $findInfos = array_map(function ($info, $index) {
+        $findInfos = array_map(static function ($info, $index) {
             ++$index;
             $info['index'] = "<fg=yellow>$index</>";
 
             return $info;
         }, $findInfos = array_merge([], ...$findInfos), array_keys($findInfos));
 
-        $this->table(array_map(function ($name) {
-            return Str::of($name)->snake()->replace('_', ' ')->title();
-        }, array_keys($findInfos[0])), $findInfos);
+        $this->table(array_map(static fn ($name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])), $findInfos);
 
         $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
@@ -207,7 +197,7 @@ class FindDumpStatementCommand extends Command
 
     protected function initializeEnvs()
     {
-        $xdebug = new XdebugHandler(__CLASS__);
+        $xdebug = new XdebugHandler(self::class);
         $xdebug->check();
         unset($xdebug);
 
