@@ -1,18 +1,43 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
-    - ./phpstan-baseline.neon
+    - phpstan-baseline.neon
+#    - vendor/larastan/larastan/extension.neon
+#    - vendor/roave/no-floaters/rules.neon
+#    - vendor/phpstan/phpstan-strict-rules/rules.neon
+#    - vendor/ergebnis/phpstan-rules/rules.neon
+#    - vendor/ekino/phpstan-banned-code/extension.neon
 
 parameters:
+    level: 1
     paths:
-        - app
-
-    # The level 9 is the highest level
-    level: 5
-
-    ignoreErrors:
-        - '#PHPDoc tag @var#'
-
+#        - app/
+        - lang/
     excludePaths:
         - ./*/*/FileToBeExcluded.php
+    tmpDir: build/phpstan
+#    checkOctaneCompatibility: true
+#    checkModelProperties: true
+#    checkMissingIterableValueType: true
+#    disallowFloatsEverywhere: true
 
-    checkMissingIterableValueType: false
+#    strictRules:
+#        allRules: false
+#        booleansInConditions: false
+#        uselessCast: false
+#        requireParentConstructorCall: false
+#        disallowedConstructs: false
+#        overwriteVariablesWithLoop: false
+#        closureUsesThis: false
+#        matchingInheritedMethodNames: false
+#        numericOperandsInArithmeticOperators: false
+#        strictCalls: false
+#        switchConditionsMatchingType: false
+#        noVariableVariables: false
+    ignoreErrors:
+#        - '#PHPDoc tag @var#'
+        - "#^.* on an unknown class App\\\\Libraries\\\\ApiQmxbCp\\.$#"
+        - "#^.* on an unknown class App\\\\Libraries\\\\ApiQmxbGm88\\.$#"
+        - "#^Access to an undefined property App\\\\Admin\\\\Actions\\\\Grid\\\\.*\\:\\:\\$row\\.$#"
+        - "#^Access to an undefined property App\\\\Admin\\\\Controllers\\\\.*Controller\\:\\:\\$.*\\.$#"
+#        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
+        - "#^Call to an undefined static method App\\\\Support\\\\Facades\\\\CP\\:\\:gmt.*\\(\\)\\.$#"
+        - "#^Method App\\\\Support\\\\Macros\\\\.*Macro\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"

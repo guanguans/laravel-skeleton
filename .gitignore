@@ -30,3 +30,8 @@ deploy.php
 openai.gif
 .DS_Store
 .ai-commit.json
+/tests.*
+/build
+/dcat_admin_ide_helper.php
+Envoy.blade.php
+.user.ini

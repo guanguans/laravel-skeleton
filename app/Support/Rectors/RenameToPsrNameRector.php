@@ -8,9 +8,9 @@ use Illuminate\Support\Str;
 use PhpParser\Node;
 use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
-use RectorPrefix202305\Webmozart\Assert\Assert;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Webmozart\Assert\Assert;
 
 class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
 {
@@ -24,6 +24,14 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         'static',
         'stdClass',
         'true',
+        '_SERVER',
+        '_GET',
+        '_POST',
+        '_REQUEST',
+        '_SESSION',
+        '_COOKIE',
+        '_FILES',
+        '_ENV',
     ];
 
     public function getRuleDefinition(): RuleDefinition
