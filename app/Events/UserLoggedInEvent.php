@@ -13,7 +13,9 @@ use Illuminate\Support\Str;
 
 class UserLoggedInEvent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
@@ -31,7 +33,7 @@ class UserLoggedInEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel(Str::snake(class_basename(__CLASS__), '-')),
+            new Channel(Str::snake(class_basename(self::class), '-')),
             // new PrivateChannel(Str::snake(class_basename(__CLASS__), '-')),
         ];
     }
