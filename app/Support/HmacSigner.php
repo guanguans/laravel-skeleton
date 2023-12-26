@@ -12,7 +12,7 @@ class HmacSigner implements SignerContract
 
     public function sign(array $payload): string
     {
-        return hash_hmac($this->algo, $this->transformToPreEncryptedData($payload), $this->secret);
+        return hash_hmac($this->algo, $this->toPreEncryptedData($payload), $this->secret);
     }
 
     public function validate(string $signature, array $payload): bool
@@ -31,10 +31,8 @@ class HmacSigner implements SignerContract
         return $payload;
     }
 
-    protected function transformToPreEncryptedData(array $payload): string
+    protected function toPreEncryptedData(array $payload): string
     {
-        $sortedPayload = $this->sort($payload);
-
-        return http_build_query($sortedPayload);
+        return urldecode(http_build_query($this->sort($payload)));
     }
 }
