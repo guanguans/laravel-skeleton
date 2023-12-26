@@ -66,33 +66,33 @@ return [
         ],
 
         'locales' => [
-            Locale::French->value => [
-                'double_quote_opener' => '«&nbsp;',
-                'double_quote_closer' => '&nbsp;»',
-                'single_quote_opener' => '‘',
-                'single_quote_closer' => '’',
-            ],
-
-            Locale::Russian->value => [
-                'double_quote_opener' => '«',
-                'double_quote_closer' => '»',
-                'single_quote_opener' => '‘',
-                'single_quote_closer' => '’',
-            ],
-
-            Locale::Ukrainian->value => [
-                'double_quote_opener' => '«',
-                'double_quote_closer' => '»',
-                'single_quote_opener' => '‘',
-                'single_quote_closer' => '’',
-            ],
-
-            Locale::Belarusian->value => [
-                'double_quote_opener' => '«',
-                'double_quote_closer' => '»',
-                'single_quote_opener' => '‘',
-                'single_quote_closer' => '’',
-            ],
+            // Locale::French->value => [
+            //     'double_quote_opener' => '«&nbsp;',
+            //     'double_quote_closer' => '&nbsp;»',
+            //     'single_quote_opener' => '‘',
+            //     'single_quote_closer' => '’',
+            // ],
+            //
+            // Locale::Russian->value => [
+            //     'double_quote_opener' => '«',
+            //     'double_quote_closer' => '»',
+            //     'single_quote_opener' => '‘',
+            //     'single_quote_closer' => '’',
+            // ],
+            //
+            // Locale::Ukrainian->value => [
+            //     'double_quote_opener' => '«',
+            //     'double_quote_closer' => '»',
+            //     'single_quote_opener' => '‘',
+            //     'single_quote_closer' => '’',
+            // ],
+            //
+            // Locale::Belarusian->value => [
+            //     'double_quote_opener' => '«',
+            //     'double_quote_closer' => '»',
+            //     'single_quote_opener' => '‘',
+            //     'single_quote_closer' => '’',
+            // ],
         ],
     ],
 ];

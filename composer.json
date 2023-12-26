@@ -13,6 +13,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
+        "appstract/laravel-opcache": "^4.0",
         "bensampo/laravel-enum": "^6.7",
         "beyondcode/laravel-websockets": "^1.14",
         "biiiiiigmonster/hasin": "^3.0",
