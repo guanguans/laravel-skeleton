@@ -129,7 +129,7 @@ abstract class FoundationSDK
     {
         return $this
             ->http
-            // ->withHeader(AppServiceProvider::REQUEST_ID_NAME, app(AppServiceProvider::REQUEST_ID_NAME))
+            ->withHeader(AppServiceProvider::REQUEST_ID_NAME, app(AppServiceProvider::REQUEST_ID_NAME))
             ->withUserAgent(static::userAgent());
     }
 

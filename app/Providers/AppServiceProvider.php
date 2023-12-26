@@ -47,6 +47,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
@@ -66,6 +67,8 @@ class AppServiceProvider extends ServiceProvider
     use Conditionable {
         when as whenever;
     }
+
+    final public const REQUEST_ID_NAME = 'x-request-id';
 
     /**
      * All of the container bindings that should be registered.
@@ -121,6 +124,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->whenever(true, function (): void {
+            $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
+            request()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
+            Log::shareContext($this->getSharedLogContext());
+
+            // // With context for current channel and stack.
+            // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
+
+            // if (($logger = \Illuminate\Support\Facades\Log::getLogger()) instanceof \Monolog\Logger) {
+            //     $logger->pushProcessor(new AppendExtraDataProcessor(\request()->headers()));
+            // }
+        });
+
+        $this->whenever(true, function (): void {
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->app->setLocale($locale = config('app.locale'));
@@ -155,7 +171,7 @@ class AppServiceProvider extends ServiceProvider
             // });
 
             // Intercept any Gate and check if it's super admin, Or if you use some permissions package...
-            Gate::before(static function($user, $ability) {
+            Gate::before(static function ($user, $ability) {
                 // if ($user->is_super_admin == 1) {
                 //     return true;
                 // }
@@ -167,19 +183,6 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
-        $this->whenever(true, static function (): void {
-            request()->headers->set('X-Request-Id', $uuid = (string) Str::uuid());
-
-            // Share context across channels and stacks.
-            \Illuminate\Support\Facades\Log::shareContext(['X-Request-Id' => $uuid]);
-
-            // // With context for current channel and stack.
-            // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
-
-            // if (($logger = \Illuminate\Support\Facades\Log::getLogger()) instanceof \Monolog\Logger) {
-            //     $logger->pushProcessor(new AppendExtraDataProcessor(\request()->headers()));
-            // }
-        });
 
         $this->whenever(request()?->user()?->locale, static function (self $serviceProvider, $locale): void {
             $serviceProvider->app->setLocale($locale);
@@ -385,5 +388,25 @@ class AppServiceProvider extends ServiceProvider
         //             $event->connections
         //         ));
         // });
+    }
+
+    /**
+     * @throws BindingResolutionException
+     */
+    protected function getSharedLogContext(): array
+    {
+        return collect([
+            self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
+            'running-in-console' => $this->app->runningInConsole(),
+            'interface' => \PHP_SAPI,
+        ])->when(
+            ! $this->app->runningInConsole(),
+            static fn (Collection $context): Collection => $context->merge([
+                'url' => request()->url(),
+                'ip' => request()->ip(),
+                'method' => request()->method(),
+                // 'action' => request()->route()?->getActionName(),
+            ])
+        )->all();
     }
 }

@@ -5,18 +5,29 @@ namespace App\Providers;
 use App\Support\OpenAI;
 use App\Support\PushDeer;
 use Illuminate\Container\Container;
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
 
-class ExtendServiceProvider extends ServiceProvider implements DeferrableProvider
+class ExtendServiceProvider extends ServiceProvider
 {
+    use Conditionable {
+        when as whenever;
+    }
+
+    /**
+     * All of the container bindings that should be registered.
+     *
+     * @var array<string, string>
+     */
+    public array $bindings = [];
+
     /**
      * All of the container singletons that should be registered.
      *
-     * @var string[]
+     * @var array<array-key, string>
      */
-    public $singletons = [];
+    public array $singletons = [];
 
     /**
      * Register services.
