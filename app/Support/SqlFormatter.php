@@ -212,9 +212,8 @@ class SqlFormatter
     /**
      * Format the whitespace in a SQL string to make it easier to read.
      *
-     * @param string $string The SQL string
-     * @param bool $highlight If true, syntax highlighting will also be performed
-     *
+     * @param  string  $string The SQL string
+     * @param  bool  $highlight If true, syntax highlighting will also be performed
      * @return string The SQL string with HTML styles and formatting wrapped in a <pre> tag
      */
     public static function format(string $string, bool $highlight = true): string
@@ -474,8 +473,7 @@ class SqlFormatter
     /**
      * Add syntax highlighting to a SQL string
      *
-     * @param string $string The SQL string
-     *
+     * @param  string  $string The SQL string
      * @return string The SQL string with HTML styles applied
      */
     public static function highlight(string $string): string
@@ -493,8 +491,7 @@ class SqlFormatter
      * Split a SQL string into multiple queries.
      * Uses ";" as a query delimiter.
      *
-     * @param string $string The SQL string
-     *
+     * @param  string  $string The SQL string
      * @return array An array of individual query strings without trailing semicolons
      */
     public static function splitQuery(string $string): array
@@ -530,8 +527,7 @@ class SqlFormatter
     /**
      * Remove all comments from a SQL string
      *
-     * @param string $string The SQL string
-     *
+     * @param  string  $string The SQL string
      * @return string The SQL string without comments
      */
     public static function removeComments(string $string): string
@@ -552,8 +548,7 @@ class SqlFormatter
     /**
      * Compress a query by collapsing white space and removing comments
      *
-     * @param string $string The SQL string
-     *
+     * @param  string  $string The SQL string
      * @return string The SQL string without comments
      */
     public static function compress(string $string): string
@@ -612,9 +607,8 @@ class SqlFormatter
      * Return the next token and token type in a SQL string.
      * Quoted strings, comments, reserved words, whitespace, and punctuation are all their own tokens.
      *
-     * @param string $string The SQL string
-     * @param array $previous The result of the previous getNextToken() call
-     *
+     * @param  string  $string The SQL string
+     * @param  array  $previous The result of the previous getNextToken() call
      * @return array an associative array containing the type and value of the token
      */
     protected static function getNextToken(string $string, ?array $previous = null): array
@@ -754,8 +748,7 @@ class SqlFormatter
      * Takes a SQL string and breaks it into tokens.
      * Each token is an associative array with type and value.
      *
-     * @param string $string The SQL string
-     *
+     * @param  string  $string The SQL string
      * @return array an array of tokens
      */
     protected static function tokenize(string $string): array
@@ -814,8 +807,7 @@ class SqlFormatter
     /**
      * Highlights a token depending on its type.
      *
-     * @param array $token an associative array containing type and value
-     *
+     * @param  array  $token an associative array containing type and value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightToken(array $token): string
@@ -867,8 +859,7 @@ class SqlFormatter
     /**
      * Highlights a quoted string
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightQuote(string $value): string
@@ -883,8 +874,7 @@ class SqlFormatter
     /**
      * Highlights a backtick quoted string
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightBacktickQuote(string $value): string
@@ -899,8 +889,7 @@ class SqlFormatter
     /**
      * Highlights a reserved word
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightReservedWord(string $value): string
@@ -915,8 +904,7 @@ class SqlFormatter
     /**
      * Highlights a boundary token
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightBoundary(string $value): string
@@ -934,8 +922,7 @@ class SqlFormatter
     /**
      * Highlights a number
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightNumber(string $value): string
@@ -950,8 +937,7 @@ class SqlFormatter
     /**
      * Highlights an error
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightError(string $value): string
@@ -966,8 +952,7 @@ class SqlFormatter
     /**
      * Highlights a comment
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightComment(string $value): string
@@ -982,8 +967,7 @@ class SqlFormatter
     /**
      * Highlights a word token
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightWord(string $value): string
@@ -998,8 +982,7 @@ class SqlFormatter
     /**
      * Highlights a variable token
      *
-     * @param string $value The token's value
-     *
+     * @param  string  $value The token's value
      * @return string HTML code of the highlighted token
      */
     protected static function highlightVariable(string $value): string
@@ -1014,8 +997,7 @@ class SqlFormatter
     /**
      * Helper function for building regular expressions for reserved words and boundary characters
      *
-     * @param string $a The string to be quoted
-     *
+     * @param  string  $a The string to be quoted
      * @return string The quoted string
      */
     private static function quote_regex(string $a): string
@@ -1026,8 +1008,7 @@ class SqlFormatter
     /**
      * Helper function for building string output
      *
-     * @param string $string The string to be quoted
-     *
+     * @param  string  $string The string to be quoted
      * @return string The quoted string
      */
     private static function output(string $string): string

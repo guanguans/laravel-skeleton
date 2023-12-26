@@ -155,7 +155,7 @@ class GenerateTestsCommand extends Command
                 $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, function (Node $node) {
                     return ($node instanceof Class_ || $node instanceof Trait_) && $node->name;
                 });
-                self::$statistics['scanned_classes'] += count($originalClassNodes);
+                self::$statistics['scanned_classes'] += \count($originalClassNodes);
                 foreach ($originalClassNodes as $originalClassNode) {
                     // 准备基本信息
                     $testClassNamespace = Str::finish($this->option('base-namespace'), '\\').$originalClassNamespace;
@@ -183,7 +183,7 @@ class GenerateTestsCommand extends Command
                         });
 
                         $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, function (ClassMethod $node) use ($originalTestClassMethodNames) {
-                            return ! in_array($node->name->name, $originalTestClassMethodNames, true);
+                            return ! \in_array($node->name->name, $originalTestClassMethodNames, true);
                         });
                         if (empty($testClassAddedMethodNodes)) {
                             continue;
@@ -210,13 +210,13 @@ class GenerateTestsCommand extends Command
                     $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
 
                     // 打印输出语法树
-                    if (! file_exists($testClassDir = dirname($testClassFile)) && ! mkdir($testClassDir, 0755, true) && ! is_dir($testClassDir)) {
+                    if (! file_exists($testClassDir = \dirname($testClassFile)) && ! mkdir($testClassDir, 0755, true) && ! is_dir($testClassDir)) {
                         throw new RuntimeException(sprintf('Directory "%s" was not created', $testClassDir));
                     }
                     file_put_contents($testClassFile, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
 
-                    self::$statistics['related_classes']++;
-                    self::$statistics['added_methods'] += count($testClassAddedMethodNodes);
+                    ++self::$statistics['related_classes'];
+                    self::$statistics['added_methods'] += \count($testClassAddedMethodNodes);
                 }
             }
         });
@@ -233,33 +233,38 @@ class GenerateTestsCommand extends Command
 
     protected function checkOptions()
     {
-        if (! in_array($this->option('parse-mode'), [
+        if (! \in_array($this->option('parse-mode'), [
             ParserFactory::PREFER_PHP7,
             ParserFactory::PREFER_PHP5,
             ParserFactory::ONLY_PHP7,
             ParserFactory::ONLY_PHP5, ])
         ) {
             $this->error('The parse-mode option is not valid(1,2,3,4).');
+
             exit(1);
         }
 
-        if (! in_array($this->option('method-format'), ['snake', 'camel'])) {
+        if (! \in_array($this->option('method-format'), ['snake', 'camel'])) {
             $this->error('The method-format option is not valid(snake/camel).');
+
             exit(1);
         }
 
         if (! $this->option('base-namespace')) {
             $this->error('The base-namespace option is required.');
+
             exit(1);
         }
 
         if (! $this->option('base-dir') || ! file_exists($this->option('base-dir')) || ! is_dir($this->option('base-dir'))) {
             $this->error('The base-dir option is not a valid directory.');
+
             exit(1);
         }
 
         if (! $this->option('template-file') || ! file_exists($this->option('template-file')) || ! is_file($this->option('template-file'))) {
             $this->error('The template-file option is not a valid file.');
+
             exit(1);
         }
     }
@@ -270,7 +275,7 @@ class GenerateTestsCommand extends Command
         $xdebug->check();
         unset($xdebug);
 
-        extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
+        \extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
         ini_set('zend.assertions', 0);
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
@@ -327,7 +332,7 @@ class GenerateTestsCommand extends Command
 
             public function leaveNode(Node $node)
             {
-                if ($node instanceof  Node\Stmt\Namespace_) {
+                if ($node instanceof Node\Stmt\Namespace_) {
                     $node->name = new Node\Name($this->testClassNamespace);
                 }
 

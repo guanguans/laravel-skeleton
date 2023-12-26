@@ -13,6 +13,6 @@ final class IntegerBooleanRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        return in_array($value, [0, 1]);
+        return \in_array($value, [0, 1]);
     }
 }

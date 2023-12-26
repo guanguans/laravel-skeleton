@@ -8,7 +8,6 @@ final class DuplicateRule extends Rule
 
     public function __construct(?string $delimiter = null)
     {
-
         $this->delimiter = $delimiter;
     }
 
@@ -21,7 +20,6 @@ final class DuplicateRule extends Rule
      */
     public function passes($attribute, $value)
     {
-
         return collect($this->delimiter === null ? str_split($value) : explode($this->delimiter, $value))
             ->duplicates()
             ->isEmpty();

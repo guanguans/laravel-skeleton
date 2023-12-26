@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * register - 注册

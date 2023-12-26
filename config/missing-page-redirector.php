@@ -25,5 +25,4 @@ return [
         //        '/non-existing-page' => '/existing-page',
         //        '/old-blog/{url}' => '/new-blog/{url}',
     ],
-
 ];

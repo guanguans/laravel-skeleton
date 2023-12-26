@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use Guanguans\LaravelExceptionNotify\Facades\ExceptionNotifier;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Jiannei\Response\Laravel\Support\Traits\ExceptionTrait;
 use Throwable;
@@ -34,8 +33,7 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-        });
+        $this->reportable(function (Throwable $e) {});
     }
 
     public function report(Throwable $e)

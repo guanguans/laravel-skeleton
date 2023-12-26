@@ -58,7 +58,7 @@ class CallbackGetCast implements CastsAttributes
     {
         array_splice($this->remainingCallbackArgs, $this->castingAttributeCallbackArgIndex, 0, $value);
 
-        return call_user_func($this->callback, ...$this->remainingCallbackArgs);
+        return \call_user_func($this->callback, ...$this->remainingCallbackArgs);
     }
 
     /**
@@ -71,17 +71,17 @@ class CallbackGetCast implements CastsAttributes
      */
     protected function resolveCallback(string $callback): callable
     {
-        if (is_callable($callback)) {
+        if (\is_callable($callback)) {
             return $callback;
         }
 
         /** @var array $segments */
         $segments = explode('@', $callback, 2);
-        if (is_callable($segments)) {
+        if (\is_callable($segments)) {
             return $segments;
         }
 
-        if (count($segments) !== 2 || ! method_exists($segments[0], $segments[1])) {
+        if (\count($segments) !== 2 || ! method_exists($segments[0], $segments[1])) {
             throw new InvalidArgumentException("Invalid callback: $callback");
         }
 

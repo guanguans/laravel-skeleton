@@ -44,7 +44,7 @@ class OpenAIHelpCommand extends Command
                     'user' => Str::uuid()->toString(),
                 ],
                 function (string $data) {
-                    \str($data)
+                    str($data)
                         ->replaceFirst('data: ', '')
                         ->rtrim()
                         ->tap(function (Stringable $stringable) {

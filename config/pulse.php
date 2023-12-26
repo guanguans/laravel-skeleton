@@ -4,7 +4,6 @@ use Laravel\Pulse\Http\Middleware\Authorize;
 use Laravel\Pulse\Recorders;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Pulse Domain

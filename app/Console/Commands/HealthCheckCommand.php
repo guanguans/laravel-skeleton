@@ -68,10 +68,10 @@ class HealthCheckCommand extends Command
             ->pipe(function (Collection $methods) {
                 $this->withProgressBar($methods, function ($method) use (&$checks) {
                     /** @var HealthCheckStateEnum $state */
-                    $state = call_user_func([$this, $method->name]);
+                    $state = \call_user_func([$this, $method->name]);
 
                     $checks[] = [
-                        'index' => count((array) $checks) + 1,
+                        'index' => \count((array) $checks) + 1,
                         'resource' => Str::of($method->name)->replaceFirst('check', ''),
                         'state' => $state,
                         'message' => $state->description,
@@ -233,7 +233,7 @@ class HealthCheckCommand extends Command
         /** @var Collection $missingExtensions */
         $missingExtensions = collect($extensions)
             ->reduce(function (Collection $missingExtensions, $extension) {
-                return $missingExtensions->when(! extension_loaded($extension), function (Collection $missingExtensions) use ($extension) {
+                return $missingExtensions->when(! \extension_loaded($extension), function (Collection $missingExtensions) use ($extension) {
                     return $missingExtensions->add($extension);
                 });
             }, collect());

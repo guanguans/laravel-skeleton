@@ -99,35 +99,35 @@ class CompressResponseContent
 
     protected function debugInformation(string $content, string $compressedContent): string
     {
-        $compressingContentSize = strlen($content);
-        $compressedContentSize = strlen($compressedContent);
+        $compressingContentSize = \strlen($content);
+        $compressedContentSize = \strlen($compressedContent);
 
         $compressingFormtedContentSize = $this->formatBytes($compressingContentSize);
         $compressedFormtedContentSize = $this->formatBytes($compressedContentSize);
         $percentReduction = sprintf('%.02F%%', (1 - $compressedContentSize / $compressingContentSize) * 100);
 
         return /** @lang HTML */ <<<HTML
-<br>
-<table style="border: 1px solid #7fa273;background-color: #ffffaa;text-align: center;position: fixed;right: 20px;bottom: 20px;">
-    <tr>
-        <th>Compressing</th>
-        <th>Compressed</th>
-        <th>Percent reduction</th>
-    </tr>
-    <tr>
-        <td>$compressingFormtedContentSize</td>
-        <td>$compressedFormtedContentSize</td>
-        <td>$percentReduction</td>
-    </tr>
-</table>
-HTML;
+            <br>
+            <table style="border: 1px solid #7fa273;background-color: #ffffaa;text-align: center;position: fixed;right: 20px;bottom: 20px;">
+                <tr>
+                    <th>Compressing</th>
+                    <th>Compressed</th>
+                    <th>Percent reduction</th>
+                </tr>
+                <tr>
+                    <td>$compressingFormtedContentSize</td>
+                    <td>$compressedFormtedContentSize</td>
+                    <td>$percentReduction</td>
+                </tr>
+            </table>
+            HTML;
     }
 
     protected function compress(string $content): string
     {
         $compressedContent = $this->compressJavacript($content);
 
-        return  $this->compressHtml($compressedContent);
+        return $this->compressHtml($compressedContent);
     }
 
     protected function compressJavacript(string $content): string

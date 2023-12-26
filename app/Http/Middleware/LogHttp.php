@@ -68,7 +68,7 @@ class LogHttp
 
     protected function shouldntLogHttp(Request $request): bool
     {
-        if (in_array($request->method(), array_map('strtoupper', $this->exceptMethods), true)) {
+        if (\in_array($request->method(), array_map('strtoupper', $this->exceptMethods), true)) {
             return true;
         }
 

@@ -2,7 +2,6 @@
 
 // config for Salahhusa9/Updater
 return [
-
     'git_path' => null,
 
     'repository_source' => \Salahhusa9\Updater\RepositorySource\GithubRepository::class,
@@ -45,5 +44,4 @@ return [
     'after_update_pipelines' => [
         // you can add your own pipelines here
     ],
-
 ];

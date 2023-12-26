@@ -17,47 +17,47 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     public function validationData()
     {
-        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
+        return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
     public function authorize(): bool
     {
-        return $this->call(__FUNCTION__, func_get_args(), true);
+        return $this->call(__FUNCTION__, \func_get_args(), true);
     }
 
     public function rules(): array
     {
-        return $this->call(__FUNCTION__, func_get_args(), []);
+        return $this->call(__FUNCTION__, \func_get_args(), []);
     }
 
     public function messages(): array
     {
-        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
+        return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
     public function attributes(): array
     {
-        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
+        return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
     protected function failedValidation(Validator $validator)
     {
-        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
+        return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
     protected function failedAuthorization()
     {
-        return $this->call(__FUNCTION__, $args = func_get_args(), parent::{__FUNCTION__}(...$args));
+        return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
     public function validator(ValidationFactory $factory): Validator
     {
-        return $this->call(__FUNCTION__, func_get_args(), $this->createDefaultValidator($factory));
+        return $this->call(__FUNCTION__, \func_get_args(), $this->createDefaultValidator($factory));
     }
 
     protected function withValidator(Validator $validator): Validator
     {
-        return $this->call(__FUNCTION__, func_get_args(), $validator);
+        return $this->call(__FUNCTION__, \func_get_args(), $validator);
     }
 
     /**
@@ -67,7 +67,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     {
         return $this->call(
             __FUNCTION__,
-            func_get_args(),
+            \func_get_args(),
             /**
              * @return mixed
              *
@@ -82,7 +82,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     protected function call(string $method, array $args = [], $defaultReturn = null)
     {
         $actionMethod = transform($method, function (string $method) {
-            if (! in_array(
+            if (! \in_array(
                 $method,
                 [
                     'validationData',

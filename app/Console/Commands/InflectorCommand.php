@@ -74,7 +74,7 @@ class InflectorCommand extends Command
                     'CakePHP' => Inflector::class,
                 ];
 
-                return collect($type === 'all' ? array_slice($types, 1) : [$type])
+                return collect($type === 'all' ? \array_slice($types, 1) : [$type])
                     ->reduce(function (Collection $results, string $type) use ($phrase, $classPluck) {
                         $result = Str::of($type)->explode(':')
                             ->pipe(function (Collection $parts) use ($phrase, $classPluck) {

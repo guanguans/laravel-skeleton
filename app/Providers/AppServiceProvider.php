@@ -163,9 +163,7 @@ class AppServiceProvider extends ServiceProvider
                 //     return true;
                 // }
             });
-
         });
-
 
         $this->whenever(request()?->user()?->locale, static function (self $serviceProvider, $locale): void {
             $serviceProvider->app->setLocale($locale);

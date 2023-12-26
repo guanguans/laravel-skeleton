@@ -13,7 +13,7 @@ final class ImeiRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        if (strlen($value) != 15 || ! ctype_digit($value)) {
+        if (\strlen($value) != 15 || ! ctype_digit($value)) {
             return false;
         }
 

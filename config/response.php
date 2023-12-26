@@ -40,7 +40,6 @@ return [
             'code' => 422,
         ],
         \Illuminate\Auth\AuthenticationException::class => [
-
         ],
         \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class => [
             'message' => '',

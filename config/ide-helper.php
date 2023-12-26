@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Filename & Format
@@ -152,7 +151,6 @@ return [
     */
 
     'ignored_models' => [
-
     ],
 
     /*
@@ -197,7 +195,6 @@ return [
     */
 
     'interfaces' => [
-
     ],
 
     /*
@@ -227,7 +224,6 @@ return [
     |
     */
     'custom_db_types' => [
-
     ],
 
     /*
@@ -339,5 +335,4 @@ return [
     'post_migrate' => [
         // 'ide-helper:models --nowrite',
     ],
-
 ];

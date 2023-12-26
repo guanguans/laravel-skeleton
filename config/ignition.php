@@ -26,7 +26,6 @@ use Spatie\LaravelIgnition\Solutions\SolutionProviders\UnknownValidationSolution
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\ViewNotFoundSolutionProvider;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Editor
@@ -133,7 +132,6 @@ return [
     */
 
     'ignored_solution_providers' => [
-
     ],
 
     /*
@@ -278,5 +276,4 @@ return [
         \Spatie\LaravelIgnition\ArgumentReducers\CollectionArgumentReducer::class,
         \Spatie\Backtrace\Arguments\Reducers\StringableArgumentReducer::class,
     ],
-
 ];

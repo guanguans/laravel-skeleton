@@ -110,12 +110,12 @@ class FindDumpStatementCommand extends Command
                     $node instanceof Node\Stmt\Expression
                     && $node->expr instanceof Node\Expr\FuncCall
                     && $node->expr->name instanceof Node\Name
-                    && in_array($node->expr->name->toString(), $this->statements['func'])
+                    && \in_array($node->expr->name->toString(), $this->statements['func'])
                 ) {
                     return true;
                 }
 
-                return Str::of(class_basename(get_class($node)))
+                return Str::of(class_basename(\get_class($node)))
                     ->lower()
                     ->replaceLast('_', '')
                     ->is($this->statements['struct']);
@@ -129,7 +129,7 @@ class FindDumpStatementCommand extends Command
                     $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename(get_class($dumpNode)))->lower()->replaceLast('_', '')->pipe(function (Stringable $name) {
+                    $name = Str::of(class_basename(\get_class($dumpNode)))->lower()->replaceLast('_', '')->pipe(function (Stringable $name) {
                         return "<fg=red>$name</>";
                     });
                     $type = '<fg=red>struct</>';
@@ -168,7 +168,7 @@ class FindDumpStatementCommand extends Command
         }
 
         $findInfos = array_map(function ($info, $index) {
-            $index++;
+            ++$index;
             $info['index'] = "<fg=yellow>$index</>";
 
             return $info;
@@ -185,13 +185,14 @@ class FindDumpStatementCommand extends Command
 
     protected function checkOptions()
     {
-        if (! in_array($this->option('parse-mode'), [
+        if (! \in_array($this->option('parse-mode'), [
             ParserFactory::PREFER_PHP7,
             ParserFactory::PREFER_PHP5,
             ParserFactory::ONLY_PHP7,
             ParserFactory::ONLY_PHP5, ])
         ) {
             $this->error('The parse-mode option is not valid(1,2,3,4).');
+
             exit(1);
         }
 
@@ -210,7 +211,7 @@ class FindDumpStatementCommand extends Command
         $xdebug->check();
         unset($xdebug);
 
-        extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
+        \extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
         ini_set('zend.assertions', 0);
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }

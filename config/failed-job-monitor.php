@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * The notification that will be sent when a job fails.
      */
