@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use App\Contracts\SignerContract;
+use App\Support\Contracts\SignerContract;
 
 class HmacSigner implements SignerContract
 {

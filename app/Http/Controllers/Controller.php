@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\ValidatesData;
-use App\Traits\ValidateStrictAll;
+use App\Support\Traits\ValidatesData;
+use App\Support\Traits\ValidateStrictAll;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests;
     use DispatchesJobs;
-    use ValidatesRequests;
     use ValidatesData;
+    use ValidatesRequests;
     use ValidateStrictAll;
 }

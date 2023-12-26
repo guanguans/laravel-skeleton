@@ -2,25 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App\Traits;
+namespace App\Support\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 /**
  * @mixin \App\Http\Controllers\Controller
  */
-trait ValidatesData
+trait ValidateStrictAll
 {
     /**
      * Run the validation routine against the given validator.
      *
+     * @param  ?Request  $request
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateDataWith(array|\Illuminate\Contracts\Validation\Validator $validator, array $data): array
+    public function validateStrictAllWith(array|\Illuminate\Contracts\Validation\Validator $validator, ?Request $request = null): array
     {
+        /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+        $request = $request ?: request();
+
         if (\is_array($validator)) {
-            $validator = $this->getValidationDataFactory()->make($data, $validator);
+            $validator = $this->getValidationStrictAllFactory()->make($request->strictAll(), $validator);
         }
 
         return $validator->validate();
@@ -31,14 +37,14 @@ trait ValidatesData
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateData(
-        array $data,
+    public function validateStrictAll(
+        Request $request,
         array $rules,
         array $messages = [],
         array $customAttributes = []
     ): array {
-        return $this->getValidationDataFactory()->make(
-            $data,
+        return $this->getValidationStrictAllFactory()->make(
+            $request->strictAll(),
             $rules,
             $messages,
             $customAttributes
@@ -50,15 +56,15 @@ trait ValidatesData
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateDataWithBag(
+    public function validateStrictAllWithBag(
         string $errorBag,
-        array $data,
+        Request $request,
         array $rules,
         array $messages = [],
         array $customAttributes = []
     ): array {
         try {
-            return $this->validateData($data, $rules, $messages, $customAttributes);
+            return $this->validateStrictAll($request, $rules, $messages, $customAttributes);
         } catch (ValidationException $e) {
             $e->errorBag = $errorBag;
 
@@ -69,7 +75,7 @@ trait ValidatesData
     /**
      * Get a validation factory instance.
      */
-    protected function getValidationDataFactory(): Factory
+    protected function getValidationStrictAllFactory(): Factory
     {
         return app(Factory::class);
     }

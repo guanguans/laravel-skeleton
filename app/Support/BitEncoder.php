@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use App\Contracts\BitEncoderContract;
+use App\Support\Contracts\BitEncoderContract;
 
 /**
  * 主要用来处理数据库多个值单字段储存问题。

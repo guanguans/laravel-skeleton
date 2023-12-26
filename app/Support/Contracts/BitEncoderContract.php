@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Contracts;
+namespace App\Support\Contracts;
 
 interface BitEncoderContract
 {

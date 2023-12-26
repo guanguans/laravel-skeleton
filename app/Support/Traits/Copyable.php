@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Traits;
+namespace App\Support\Traits;
 
 use function DeepCopy\deep_copy;
 
