@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ClearLogsCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Inspiring;
@@ -32,10 +33,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly()->withoutOverlapping(60);
-        // $schedule->command('backup:clean')->daily()->at('01:00');
-        // $schedule->command('backup:run')->daily()->at('02:00');
-        // $schedule->command('backup:monitor')->daily()->at('03:00');
+        $schedule->command('backup:clean')->daily()->at('05:15')->withoutOverlapping();
+        $schedule->command('backup:run')->daily()->at('05:30')->withoutOverlapping();
+        $schedule->command('backup:monitor')->daily()->at('05:45')->withoutOverlapping();
+        $schedule->command('model:prune', ['--model' => MonitoredScheduledTaskLogItem::class])->daily()->withoutOverlapping();
+        $schedule->command('telescope:prune')->daily()->skip($this->app->isProduction())->withoutOverlapping();
+        $schedule->command(ClearLogsCommand::class)->daily()->appendOutputTo($this->toOutputPath(ClearLogsCommand::class))->withoutOverlapping();
         $schedule->command('disposable:update')->weekly()->at('04:00');
+        $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->everyMinute();
+        $schedule->command(RunHealthChecksCommand::class)->everyMinute();
 
         // $schedule->job(function (ConsoleOutput $consoleOutput) {
         //     $consoleOutput->writeln(Inspiring::quote());
@@ -46,10 +52,6 @@ class Kernel extends ConsoleKernel
         // })->everyMinute();
 
         // $schedule->exec('php', ['-v'])->everyMinute();
-
-        $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->everyMinute();
-        $schedule->command(RunHealthChecksCommand::class)->everyMinute();
-        $schedule->command('model:prune', ['--model' => MonitoredScheduledTaskLogItem::class])->daily();
     }
 
     protected function shortSchedule(ShortSchedule $shortSchedule)

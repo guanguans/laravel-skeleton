@@ -32,11 +32,42 @@
         "nullable_type_declaration_for_default_null_value": {
             "use_nullable_type_declaration": true
         },
-        "no_extra_blank_lines": false,
         "yoda_style": false,
         "space_after_semicolon": false,
         "no_spaces_after_function_name": false,
-        "single_line_empty_body": true
+        "single_line_empty_body": true,
+        "heredoc_indentation": {
+            "indentation": "start_plus_one"
+        },
+        "native_function_invocation": {
+            "include": [
+                "@compiler_optimized",
+                "is_scalar"
+            ],
+            "exclude": [
+                "auth"
+            ],
+            "scope": "namespaced",
+            "strict": true
+        },
+        "no_extra_blank_lines": {
+            "tokens": [
+                "attribute",
+                "break",
+                "case",
+                "continue",
+                "curly_brace_block",
+                "default",
+                "extra",
+                "parenthesis_brace_block",
+                "return",
+                "square_brace_block",
+                "switch",
+                "throw",
+                "use",
+                "use_trait"
+            ]
+        }
     },
     "exclude": [
         ".github",
