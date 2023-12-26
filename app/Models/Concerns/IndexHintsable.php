@@ -120,7 +120,7 @@ trait IndexHintsable
             $index = strtolower($index);
 
             Schema::table(self::getTable(), fn (Blueprint $table) =>
-                /** @noinspection PhpVoidFunctionResultUsedInspection */
+                /** @noinspection PhpVoidFuqnctionResultUsedInspection */
                 $this->fillIndexes($table, $index, $type));
         }
 
