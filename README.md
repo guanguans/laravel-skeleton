@@ -17,7 +17,6 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ## App directory structure
 
 ```shell
-.
 ├── Casts
 │   ├── Base64Cast.php
 │   ├── CallbackGetCast.php
@@ -28,18 +27,20 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ├── Console
 │   ├── Commands
 │   │   ├── ClearAllCommand.php
+│   │   ├── ClearLogsCommand.php
+│   │   ├── Command.php
 │   │   ├── FindDumpStatementCommand.php
 │   │   ├── GenerateTestsCommand.php
 │   │   ├── HealthCheckCommand.php
 │   │   ├── InflectorCommand.php
+│   │   ├── ListSchedule.php
+│   │   ├── OpcacheUrlCommand.php
 │   │   ├── OpenAIHelpCommand.php
 │   │   └── OptimizeAllCommand.php
 │   └── Kernel.php
-├── Contracts
-│   ├── BitEncoderContract.php
-│   └── SignerContract.php
 ├── Enums
 │   ├── BooleanEnum.php
+│   ├── Enum.php
 │   ├── HealthCheckStateEnum.php
 │   ├── HttpStatusCodeEnum.php
 │   ├── IntegerBooleanEnum.php
@@ -90,26 +91,6 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ├── Jobs
 ├── Listeners
 │   └── CollectGarbageListener.php
-├── Macros
-│   ├── BlueprintMacro.php
-│   ├── CollectionMacro.php
-│   ├── CommandMacro.php
-│   ├── GrammarMacro.php
-│   ├── MySqlGrammarMacro.php
-│   ├── QueryBuilder
-│   │   ├── OrderByWithQueryBuilderMacro.php
-│   │   ├── QueryBuilderMacro.php
-│   │   ├── WhereEndsWithQueryBuilderMacro.php
-│   │   ├── WhereFindInSetQueryBuilderMacro.php
-│   │   ├── WhereFullTextQueryBuilderMacro.php
-│   │   ├── WhereInsQueryBuilderMacro.php
-│   │   ├── WhereLikeQueryBuilderMacro.php
-│   │   ├── WhereNotQueryBuilderMacro.php
-│   │   └── WhereStartsWithQueryBuilderMacro.php
-│   ├── RequestMacro.php
-│   ├── ResponseFactoryMacro.php
-│   ├── StrMacro.php
-│   └── StringableMacro.php
 ├── Mail
 │   └── UserRegisteredMail.php
 ├── Models
@@ -130,14 +111,15 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   ├── HttpLog.php
 │   ├── JWTUser.php
 │   ├── Model.php
+│   ├── Pivots
+│   │   ├── MorphPivotWithCreatorPivot.php
+│   │   └── PivotWithCreatorPivot.php
+│   ├── Scopes
 │   └── User.php
 ├── Notifications
 │   └── WelcomeNotification.php
 ├── Observers
 │   └── UserObserver.php
-├── Pivots
-│   ├── MorphPivotWithCreatorPivot.php
-│   └── PivotWithCreatorPivot.php
 ├── Policies
 │   ├── Policy.php
 │   └── UserPolicy.php
@@ -199,18 +181,20 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   ├── UrlRule.php
 │   ├── UuidRule.php
 │   └── WithoutWhitespaceRule.php
-├── Scopes
 ├── Services
 ├── Support
 │   ├── AbstractRepository.php
 │   ├── BitEncoder.php
 │   ├── ConsoleWriter.php
+│   ├── Contracts
+│   │   ├── BitEncoderContract.php
+│   │   └── SignerContract.php
 │   ├── Discover.php
 │   ├── Facades
 │   │   ├── OpenAI.php
 │   │   └── PushDeer.php
 │   ├── FluentAssert.php
-│   ├── FoundationSdk.php
+│   ├── FoundationSDK.php
 │   ├── HandlerStack.php
 │   ├── HmacSigner.php
 │   ├── Http
@@ -240,6 +224,26 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   ├── HttpClient.php
 │   ├── HttpQuery.php
 │   ├── Inflector.php
+│   ├── Macros
+│   │   ├── BlueprintMacro.php
+│   │   ├── CollectionMacro.php
+│   │   ├── CommandMacro.php
+│   │   ├── GrammarMacro.php
+│   │   ├── MySqlGrammarMacro.php
+│   │   ├── QueryBuilder
+│   │   │   ├── OrderByWithQueryBuilderMacro.php
+│   │   │   ├── QueryBuilderMacro.php
+│   │   │   ├── WhereEndsWithQueryBuilderMacro.php
+│   │   │   ├── WhereFindInSetQueryBuilderMacro.php
+│   │   │   ├── WhereFullTextQueryBuilderMacro.php
+│   │   │   ├── WhereInsQueryBuilderMacro.php
+│   │   │   ├── WhereLikeQueryBuilderMacro.php
+│   │   │   ├── WhereNotQueryBuilderMacro.php
+│   │   │   └── WhereStartsWithQueryBuilderMacro.php
+│   │   ├── RequestMacro.php
+│   │   ├── ResponseFactoryMacro.php
+│   │   ├── StrMacro.php
+│   │   └── StringableMacro.php
 │   ├── Monolog
 │   │   ├── AnsiLineFormatter.php
 │   │   └── AppendExtraDataProcessor.php
@@ -254,18 +258,18 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 │   │   ├── CloseServerSentEventException.php
 │   │   └── ServerSentEvent.php
 │   ├── System.php
+│   ├── Traits
+│   │   ├── Cacheable.php
+│   │   ├── Castable.php
+│   │   ├── ControllerCrudable.php
+│   │   ├── Copyable.php
+│   │   ├── CreateStaticable.php
+│   │   ├── ModelCrudable.php
+│   │   ├── Sanitizerable.php
+│   │   ├── Singletonable.php
+│   │   ├── ValidateStrictAll.php
+│   │   └── ValidatesData.php
 │   └── helpers.php
-├── Traits
-│   ├── Cacheable.php
-│   ├── Castable.php
-│   ├── ControllerCrudable.php
-│   ├── Copyable.php
-│   ├── CreateStaticable.php
-│   ├── ModelCrudable.php
-│   ├── Sanitizerable.php
-│   ├── Singletonable.php
-│   ├── ValidateStrictAll.php
-│   └── ValidatesData.php
 └── View
     ├── Components
     │   ├── AlertComponent.php
@@ -278,7 +282,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
     └── Creators
         └── RequestCreator.php
 
-50 directories, 210 files
+50 directories, 215 files
 ```
 
 ## Learning Laravel
