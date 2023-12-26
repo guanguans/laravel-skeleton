@@ -63,7 +63,7 @@ class AuthController extends Controller
             return $this->fail('邮箱或者密码错误');
         }
 
-        return tap($this->success(JWTUser::wrapToken($token)), function ($response) use ($user) {
+        return tap($this->success(JWTUser::wrapToken($token)), static function ($response) use ($user) {
             // Mail::to($user)->queue(new UserRegisteredMail());
             $user->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
         });

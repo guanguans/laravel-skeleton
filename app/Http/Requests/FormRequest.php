@@ -73,9 +73,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
              *
              * @throws \Throwable
              */
-            static function (Validator $validator) {
-                return $validator;
-            }
+            static fn (Validator $validator) => $validator
         );
     }
 

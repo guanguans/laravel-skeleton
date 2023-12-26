@@ -68,7 +68,7 @@ class CompressResponseContent
      */
     public static function mergeReplacementRules(array $replacementRules)
     {
-        static::$replacementRules = array_merge(static::$replacementRules, $replacementRules);
+        static::$replacementRules = [...static::$replacementRules, ...$replacementRules];
     }
 
     /**
@@ -213,7 +213,7 @@ class CompressResponseContent
             // '/\bOldWord\b/i' => 'NewWord'
         ];
 
-        $rules = array_merge($replaceWordsRules, $commentRules, $whiteSpaceRules, static::$replacementRules);
+        $rules = [...$replaceWordsRules, ...$commentRules, ...$whiteSpaceRules, ...static::$replacementRules];
 
         $compressedContent = preg_replace(array_keys($rules), $rules, $content);
 

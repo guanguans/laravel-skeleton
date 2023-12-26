@@ -28,13 +28,13 @@ class PingController extends Controller
      *     "error": {}
      * }
      */
-    public function ping(Request $request, $is_bad = 0)
+    public function ping(Request $request, $isBad = 0)
     {
         $validatedParameters = $request->validateStrictAll([
             'is_bad' => 'integer',
         ]);
 
-        if (($validatedParameters['is_bad'] ?? 0) || $is_bad) {
+        if (($validatedParameters['is_bad'] ?? 0) || $isBad) {
             $this->errorBadRequest('This is a bad example.');
         }
 

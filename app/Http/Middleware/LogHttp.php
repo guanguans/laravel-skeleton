@@ -79,11 +79,7 @@ class LogHttp
             }
         }
 
-        if ($this->shouldSkip($request)) {
-            return true;
-        }
-
-        return false;
+        return $this->shouldSkip($request);
     }
 
     protected function shouldSkip(Request $request): bool

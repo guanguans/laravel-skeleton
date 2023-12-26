@@ -34,20 +34,20 @@ class AuthRequest extends FormRequest
         //     });
 
         $this
-            ->whenRouteIs('auth.login', function (self $request, $value) use (&$rules) {
+            ->whenRouteIs('auth.login', static function (self $request, $value) use (&$rules) {
                 $rules = [
                     'email' => 'required|email',
                     'password' => 'required|string',
                 ];
             })
-            ->whenRouteIs('auth.register', function (self $request) use (&$rules) {
+            ->whenRouteIs('auth.register', static function (self $request) use (&$rules) {
                 $rules = [
                     'email' => 'required|email|unique:App\Models\JWTUser,email',
                     'password' => 'required|string|min:8|confirmed',
                     'password_confirmation' => 'required|same:password',
                 ];
             })
-            ->whenRouteIs('auth.index', function () use (&$rules) {
+            ->whenRouteIs('auth.index', static function () use (&$rules) {
                 $rules = [
                     'per_page' => 'integer|min:5|max:50',
                     'page' => 'integer|min:1',
