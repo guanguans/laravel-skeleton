@@ -87,8 +87,8 @@ class CallbackGetCast implements CastsAttributes
 
         try {
             return [resolve($segments[0]), $segments[1]];
-        } catch (Throwable $e) {
-            throw new InvalidArgumentException("Invalid callback: $callback({$e->getMessage()})");
+        } catch (Throwable $throwable) {
+            throw new InvalidArgumentException("Invalid callback: $callback({$throwable->getMessage()})", $throwable->getCode(), $throwable);
         }
     }
 }

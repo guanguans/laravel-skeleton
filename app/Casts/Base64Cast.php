@@ -6,21 +6,10 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class Base64Cast implements CastsAttributes
 {
-    /**
-     * @var bool
-     */
-    private $isCastGet;
-
-    /**
-     * @var bool
-     */
-    private $isCastSet;
-
-    public function __construct(bool $isCastGet = true, bool $isCastSet = false)
-    {
-        $this->isCastGet = $isCastGet;
-        $this->isCastSet = $isCastSet;
-    }
+    public function __construct(
+        private readonly bool $isCastGet = true,
+        private readonly bool $isCastSet = false
+    ) {}
 
     /**
      * Cast the given value.
