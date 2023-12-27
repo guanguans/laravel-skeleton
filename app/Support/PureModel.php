@@ -391,8 +391,10 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
     /**
      * Convert the model instance to JSON.
+     *
+     * @param  int  $options
      */
-    public function toJson(int $options = 0): string
+    public function toJson($options = 0): string
     {
         return json_encode($this->jsonSerialize(), $options);
     }
@@ -683,9 +685,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     protected function getAttributeFromArray(string $key): mixed
     {
-        if (\array_key_exists($key, $this->attributes)) {
-            return $this->attributes[$key];
-        }
+        return $this->attributes[$key] ?? null;
     }
 
     /**

@@ -4,9 +4,6 @@ namespace App\Rules;
 
 final class ImeiRule extends Rule
 {
-    /**
-     * Determine if the validation rule passes.
-     */
     public function passes(string $attribute, mixed $value): bool
     {
         if (\strlen($value) != 15 || ! ctype_digit($value)) {

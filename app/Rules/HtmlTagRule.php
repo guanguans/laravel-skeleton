@@ -4,9 +4,6 @@ namespace App\Rules;
 
 class HtmlTagRule extends RegexRule
 {
-    /**
-     * {@inheritDoc}
-     */
     protected function pattern(): string
     {
         /** @lang PhpRegExp */

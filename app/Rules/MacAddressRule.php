@@ -4,9 +4,6 @@ namespace App\Rules;
 
 final class MacAddressRule extends Rule
 {
-    /**
-     * Determine if the validation rule passes.
-     */
     public function passes(string $attribute, mixed $value): bool
     {
         $value = preg_replace("/[\. :-]/i", '', $value);

@@ -4,9 +4,6 @@ namespace App\Rules;
 
 final class ChineseNameRule extends RegexRule
 {
-    /**
-     * 中文姓名.
-     */
     protected function pattern(): string
     {
         /** @lang PhpRegExp */
