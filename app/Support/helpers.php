@@ -99,7 +99,7 @@ if (! function_exists('get_throwables')) {
     function get_throwables(Throwable $throwable): array
     {
         $throwables = [];
-        while ($throwable) {
+        while ($throwable instanceof \Throwable) {
             $throwables[] = $throwable;
             $throwable = $throwable->getPrevious();
         }
@@ -117,13 +117,9 @@ if (! function_exists('matching')) {
      */
     function matching(mixed $value): bool
     {
-        $switch = (static function ($value) {
-            switch (true) {
-                case 'a' === $value:
-                case 'b' === $value: return 'a or b';
-
-                default: return 'default';
-            }
+        $switch = (static fn ($value) => match (true) {
+            'a' === $value, 'b' === $value => 'a or b',
+            default => 'default',
         })($value);
 
         $match = match ($value) {
@@ -240,11 +236,9 @@ if (! function_exists('resolve_facade_docblock')) {
                                 ->replace('array (  ', '[')
                                 ->replace(',)', ']')
                                 ->replace(',  ', ', ')
-                                ->when(array_is_list($value), static function (Stringable $stringable) use ($value): Stringable {
-                                    return $stringable->remove(
-                                        collect($value)->keys()->map(static fn (int $index): string => "$index => ")
-                                    );
-                                });
+                                ->when(array_is_list($value), static fn (Stringable $stringable): Stringable => $stringable->remove(
+                                    collect($value)->keys()->map(static fn (int $index): string => "$index => ")
+                                ));
                         };
 
                         $type = str($parameter->getType()?->getName())
@@ -256,13 +250,11 @@ if (! function_exists('resolve_facade_docblock')) {
                     })
                     ->join(', ');
 
-                $returnType = (static function (ReflectionMethod $method): string {
-                    return $method->getReturnType()?->getName()
-                        ?: str($method->getDocComment())
-                            ->match(/** @lang PHP */ '/^\s+\*\s+@return\s+\$?([\w|\\\]+)/m')
-                            ->replace('this', 'self')
-                        ?? 'mixed';
-                })($method);
+                $returnType = (static fn (ReflectionMethod $method): string => $method->getReturnType()?->getName()
+                    ?: str($method->getDocComment())
+                        ->match(/** @lang PHP */ '/^\s+\*\s+@return\s+\$?([\w|\\\]+)/m')
+                        ->replace('this', 'self')
+                    ?? 'mixed')($method);
 
                 return $docblock
                     ->newLine()
@@ -362,18 +354,16 @@ if (! function_exists('curry')) {
      */
     function curry(callable $function): callable
     {
-        $accumulator = static function ($arguments) use ($function, &$accumulator) {
-            return static function (...$args) use ($function, $arguments, $accumulator) {
-                $arguments = array_merge($arguments, $args);
-                $reflection = new ReflectionFunction($function);
-                $totalArguments = $reflection->getNumberOfRequiredParameters();
+        $accumulator = static fn ($arguments) => static function (...$args) use ($function, $arguments, &$accumulator) {
+            $arguments = array_merge($arguments, $args);
+            $reflection = new ReflectionFunction($function);
+            $totalArguments = $reflection->getNumberOfRequiredParameters();
 
-                if ($totalArguments <= count($arguments)) {
-                    return $function(...$arguments);
-                }
+            if ($totalArguments <= count($arguments)) {
+                return $function(...$arguments);
+            }
 
-                return $accumulator($arguments);
-            };
+            return $accumulator($arguments);
         };
 
         return $accumulator([]);
@@ -397,10 +387,8 @@ if (! function_exists('compose')) {
 if (! function_exists('memoize')) {
     function memoize(callable $function): callable
     {
-        return static function () use ($function) {
+        return static function (...$args) use ($function) {
             static $cache = [];
-
-            $args = func_get_args();
             $key = serialize($args);
             $cached = true;
 
@@ -422,6 +410,7 @@ if (! function_exists('once')) {
             if ($called) {
                 return;
             }
+
             $called = true;
 
             return $function(...$args);
@@ -495,6 +484,7 @@ if (! function_exists('user_http_build_query')) {
                 if (null === $v) {
                     continue;
                 }
+
                 if (0 === $v || false === $v) {
                     $v = '0';
                 }
@@ -515,6 +505,7 @@ if (! function_exists('user_http_build_query')) {
             if (null === $v) {
                 continue;
             }
+
             if (0 === $v || false === $v) {
                 $v = '0';
             }
@@ -556,7 +547,7 @@ if (! function_exists('call')) {
      */
     function call(callable|string $callback, array $parameters = [], ?string $defaultMethod = null): mixed
     {
-        app()->call($callback, $parameters, $defaultMethod);
+        return app()->call($callback, $parameters, $defaultMethod);
     }
 }
 
@@ -596,6 +587,10 @@ if (! function_exists('catch_query_log')) {
 }
 
 if (! function_exists('dump_to_array')) {
+    /**
+     * @noinspection ForgottenDebugOutputInspection
+     * @noinspection DebugFunctionUsageInspection
+     */
     function dump_to_array(...$vars): void
     {
         foreach ($vars as $var) {
@@ -605,7 +600,7 @@ if (! function_exists('dump_to_array')) {
 }
 
 if (! function_exists('dd_to_array')) {
-    function dd_to_array(...$vars): void
+    function dd_to_array(...$vars): never
     {
         dump_to_array(...$vars);
 
@@ -646,7 +641,7 @@ if (! function_exists('array_map_with_keys')) {
 }
 
 if (! function_exists('pd')) {
-    function pd(...$vars): void
+    function pd(...$vars): never
     {
         pp(...$vars);
 

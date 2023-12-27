@@ -206,7 +206,7 @@ class HandlerStack implements \Stringable
     public function remove(callable|string $remove): void
     {
         if (! \is_string($remove) && ! \is_callable($remove)) {
-            trigger_deprecation('guzzlehttp/guzzle', '7.4', 'Not passing a callable or string to %s::%s() is deprecated and will cause an error in 8.0.', __CLASS__, __FUNCTION__);
+            trigger_deprecation('guzzlehttp/guzzle', '7.4', 'Not passing a callable or string to %s::%s() is deprecated and will cause an error in 8.0.', self::class, __FUNCTION__);
         }
 
         $this->cached = null;
@@ -289,7 +289,7 @@ class HandlerStack implements \Stringable
         if (\is_array($fn)) {
             return \is_string($fn[0])
                 ? "callable({$fn[0]}::{$fn[1]})"
-                : "callable(['".\get_class($fn[0])."', '{$fn[1]}'])";
+                : "callable(['".$fn[0]::class."', '{$fn[1]}'])";
         }
 
         return 'callable('.spl_object_hash($fn).')';

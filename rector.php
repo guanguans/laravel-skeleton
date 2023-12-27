@@ -61,7 +61,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->paths([
-        __DIR__.'/app/Support/FoundationSDK.php',
+        __DIR__.'/app/Support/helpers.php',
         __DIR__.'/config',
         __DIR__.'/routes',
         __DIR__.'/.*.php',
