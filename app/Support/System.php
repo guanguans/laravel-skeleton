@@ -9,11 +9,11 @@ namespace App\Support;
  */
 class System
 {
-    public const X86 = 'x86';
+    final public const X86 = 'x86';
 
-    public const PPC = 'ppc';
+    final public const PPC = 'ppc';
 
-    public const ARM = 'arm';
+    final public const ARM = 'arm';
 
     private const RegExX86 = '/(x86*|i386|i686)/';
 
@@ -87,27 +87,12 @@ class System
     {
         $arch = self::getArch();
 
-        switch (1) {
-            case preg_match(self::RegExX86, $arch):
-                return self::X86;
-
-                break;
-
-            case preg_match(self::RegExPPC, $arch):
-                return self::PPC;
-
-                break;
-
-            case preg_match(self::RegExARM, $arch):
-                return self::ARM;
-
-                break;
-
-            default:
-                throw new \Exception("'{$arch}' enum not found.");
-
-                break;
-        }
+        return match (1) {
+            preg_match(self::RegExX86, $arch) => self::X86,
+            preg_match(self::RegExPPC, $arch) => self::PPC,
+            preg_match(self::RegExARM, $arch) => self::ARM,
+            default => throw new \Exception("'{$arch}' enum not found."),
+        };
     }
 
     /**
@@ -150,27 +135,12 @@ class System
      */
     public static function isArch(string $arch): bool
     {
-        switch ($arch) {
-            case self::X86:
-                return self::isX86();
-
-                break;
-
-            case self::PPC:
-                return self::isPPC();
-
-                break;
-
-            case self::ARM:
-                return self::isArm();
-
-                break;
-
-            default:
-                throw new \Exception("'{$arch}' not found.");
-
-                break;
-        }
+        return match ($arch) {
+            self::X86 => self::isX86(),
+            self::PPC => self::isPPC(),
+            self::ARM => self::isArm(),
+            default => throw new \Exception("'{$arch}' not found."),
+        };
     }
 
     /**
@@ -253,12 +223,8 @@ class System
 
                 throw new \Exception('Could not find MemTotal in /proc/meminfo.');
 
-                break;
-
             case 'Darwin':
                 return (int) ((int) shell_exec('sysctl -n hw.memsize') / 1024 / 1024);
-
-                break;
 
             default:
                 throw new \Exception(self::getOS().' not supported.');
@@ -343,6 +309,7 @@ class System
                 if (! isset($disk[2])) {
                     return false;
                 }
+
                 if (str_contains($disk[2], $filter)) {
                     return false;
                 }
@@ -369,8 +336,8 @@ class System
 
         // Compute Delta
         foreach ($diskStat as $key => $disk) {
-            $stats[$key]['read'] = ((int) $diskStat2[$key][5] - (int) $disk[5]) * 512 / 1048576;
-            $stats[$key]['write'] = ((int) $diskStat2[$key][9] - (int) $disk[9]) * 512 / 1048576;
+            $stats[$key]['read'] = ((int) $diskStat2[$key][5] - (int) $disk[5]) * 512 / 1_048_576;
+            $stats[$key]['write'] = ((int) $diskStat2[$key][9] - (int) $disk[9]) * 512 / 1_048_576;
         }
 
         $stats['total']['read'] = array_sum(array_column($stats, 'read'));
@@ -408,7 +375,7 @@ class System
         });
 
         // Get the total IO Usage
-        $IOUsage = [];
+        $iOUsage = [];
 
         foreach ($interfaces as $interface) {
             $tx1 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/tx_bytes');
@@ -417,14 +384,14 @@ class System
             $tx2 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/tx_bytes');
             $rx2 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/rx_bytes');
 
-            $IOUsage[$interface]['download'] = round(($rx2 - $rx1) / 1048576, 2);
-            $IOUsage[$interface]['upload'] = round(($tx2 - $tx1) / 1048576, 2);
+            $iOUsage[$interface]['download'] = round(($rx2 - $rx1) / 1_048_576, 2);
+            $iOUsage[$interface]['upload'] = round(($tx2 - $tx1) / 1_048_576, 2);
         }
 
-        $IOUsage['total']['download'] = array_sum(array_column($IOUsage, 'download'));
-        $IOUsage['total']['upload'] = array_sum(array_column($IOUsage, 'upload'));
+        $iOUsage['total']['download'] = array_sum(array_column($iOUsage, 'download'));
+        $iOUsage['total']['upload'] = array_sum(array_column($iOUsage, 'upload'));
 
-        return $IOUsage;
+        return $iOUsage;
     }
 
     /**

@@ -349,6 +349,7 @@ abstract class AbstractRepository
                             $alias
                         );
                     }
+
                     $columns[$key] = "{$joined[$joiningTable]}.{$column}";
                 }
 
