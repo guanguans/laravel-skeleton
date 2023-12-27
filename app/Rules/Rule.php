@@ -20,7 +20,7 @@ abstract class Rule implements ValidationRule
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (! $this->passes($attribute, $value)) {
-            $fail(self::message())->translate();
+            $fail(static::message())->translate();
         }
     }
 
@@ -38,12 +38,17 @@ abstract class Rule implements ValidationRule
 
     protected static function fallbackMessage(): string
     {
-        $transKey = app()->isLocale('zh_CN')
-            ? ':Attribute(:input) 必须是有效的 :Name。'
-            : 'The :attribute(:input) must be a valid :Name.';
+        return __(
+            app()->isLocale('zh_CN')
+                ? ':Attribute [:input] 必须是有效的 :Name。'
+                : 'The :attribute [:input] must be a valid :Name.',
+            [
+                'name' => value(static function () {
+                    $name = __($key = sprintf('validation.attributes.%s', static::name()));
 
-        return __($transKey, [
-            'name' => Str::of(static::name())->replace('_', ' '),
-        ]);
+                    return $name === $key ? str(static::name())->replace('_', ' ') : $name;
+                }),
+            ]
+        );
     }
 }
