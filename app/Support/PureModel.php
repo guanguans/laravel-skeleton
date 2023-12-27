@@ -171,7 +171,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     public function newInstance(array $attributes = []): static
     {
-        return new static((array) $attributes);
+        return new static($attributes);
     }
 
     /**
@@ -181,9 +181,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     {
         $instance = new static();
 
-        $items = array_map(static fn ($item) => $instance->newInstance($item), $items);
-
-        return $items;
+        return array_map(static fn ($item) => $instance->newInstance($item), $items);
     }
 
     /**
@@ -213,7 +211,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     {
         $attributes = \is_array($attributes) ? $attributes : \func_get_args();
 
-        $this->hidden = array_merge($this->hidden, $attributes);
+        $this->hidden = [...$this->hidden, ...$attributes];
     }
 
     /**
@@ -255,7 +253,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     {
         $attributes = \is_array($attributes) ? $attributes : \func_get_args();
 
-        $this->visible = array_merge($this->visible, $attributes);
+        $this->visible = [...$this->visible, ...$attributes];
     }
 
     /**
@@ -372,7 +370,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
             return false;
         }
 
-        return empty($this->fillable);
+        return $this->fillable === [];
     }
 
     /**
@@ -388,7 +386,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     public function totallyGuarded(): bool
     {
-        return 0 === \count($this->fillable) && $this->guarded === ['*'];
+        return [] === $this->fillable && $this->guarded === ['*'];
     }
 
     /**
@@ -441,7 +439,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
         // Next we will handle any casts that have been setup for this model and cast
         // the values to their appropriate type. If the attribute has a mutator we
         // will not perform the cast on those attributes to avoid any confusion.
-        foreach ($this->casts as $key => $value) {
+        foreach (array_keys($this->casts) as $key) {
             if (! \array_key_exists($key, $attributes)
                 || \in_array($key, $mutatedAttributes, true)) {
                 continue;
@@ -615,7 +613,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     protected function fillableFromArray(array $attributes): array
     {
-        if (\count($this->fillable) > 0 && ! static::$unguarded) {
+        if ($this->fillable !== [] && ! static::$unguarded) {
             return array_intersect_key($attributes, array_flip($this->fillable));
         }
 
@@ -635,7 +633,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     protected function getArrayableAppends(): array
     {
-        if (! \count($this->appends)) {
+        if ($this->appends === []) {
             return [];
         }
 
@@ -649,7 +647,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     protected function getArrayableItems(array $values): array
     {
-        if (\count($this->getVisible()) > 0) {
+        if ($this->getVisible() !== []) {
             return array_intersect_key($values, array_flip($this->getVisible()));
         }
 
@@ -744,33 +742,15 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
             return $value;
         }
 
-        switch ($this->getCastType($key)) {
-            case 'int':
-            case 'integer':
-                return (int) $value;
-
-            case 'real':
-            case 'float':
-            case 'double':
-                return (float) $value;
-
-            case 'string':
-                return (string) $value;
-
-            case 'bool':
-            case 'boolean':
-                return (bool) $value;
-
-            case 'object':
-                return $this->fromJson($value, true);
-
-            case 'array':
-            case 'json':
-                return $this->fromJson($value);
-
-            default:
-                return $value;
-        }
+        return match ($this->getCastType($key)) {
+            'int', 'integer' => (int) $value,
+            'real', 'float', 'double' => (float) $value,
+            'string' => (string) $value,
+            'bool', 'boolean' => (bool) $value,
+            'object' => $this->fromJson($value, true),
+            'array', 'json' => $this->fromJson($value),
+            default => $value,
+        };
     }
 
     /**

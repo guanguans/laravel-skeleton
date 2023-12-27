@@ -8,6 +8,7 @@ use App\Providers\AppServiceProvider;
 use Composer\InstalledVersions;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Request;
@@ -43,6 +44,22 @@ abstract class FoundationSDK
         $this->http = Http::getFacadeRoot();
         $this->defaultPendingRequest = $this->buildDefaultPendingRequest($this->config);
     }
+
+    /**
+     * ```php
+     * protected function validateConfig(array $config): array
+     * {
+     *     return $this->>validate($config, [
+     *         'http_options' => 'array',
+     *     ]);
+     * }
+     * ```.
+     *
+     * @return array The merged and validated options
+     *
+     * @throws \Illuminate\Validation\ValidationException laravel validation rules
+     */
+    abstract protected function validateConfig(array $config): array;
 
     /**
      * @psalm-suppress UnusedClosureParam
@@ -100,22 +117,6 @@ abstract class FoundationSDK
 
     /**
      * ```php
-     * protected function validateConfig(array $config): array
-     * {
-     *     return validate($config, [
-     *         'http_options' => 'array',
-     *     ]);
-     * }
-     * ```.
-     *
-     * @return array The merged and validated options
-     *
-     * @throws \Illuminate\Validation\ValidationException laravel validation rules
-     */
-    abstract protected function validateConfig(array $config): array;
-
-    /**
-     * ```php
      * protected function buildPendingRequest(array $config): PendingRequest
      * {
      *     return Http::withOptions($config['http_options'])
@@ -131,6 +132,17 @@ abstract class FoundationSDK
             ->http
             ->withHeader(AppServiceProvider::REQUEST_ID_NAME, app(AppServiceProvider::REQUEST_ID_NAME))
             ->withUserAgent(static::userAgent());
+    }
+
+    /**
+     * Validate the given data with the given rules.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws BindingResolutionException
+     */
+    protected function validate(array $data, array $rules, array $messages = [], array $customAttributes = []): array
+    {
+        return app(\Illuminate\Validation\Factory::class)->make($data, $rules, $messages, $customAttributes)->validate();
     }
 
     protected static function userAgent(): string

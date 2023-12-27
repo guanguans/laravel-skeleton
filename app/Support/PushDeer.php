@@ -49,18 +49,14 @@ class PushDeer extends FoundationSdk
 
     protected function validateConfig(array $config): array
     {
-        return array_merge(
-            [
-                'http_options' => [],
-                'base_url' => 'https://api2.pushdeer.com',
-            ],
-            $this->validate($config, [
+        return [
+            'http_options' => [], 'base_url' => 'https://api2.pushdeer.com', ...$this->validate($config, [
                 'http_options' => 'array',
                 'http_options.allow_redirects' => 'bool|array',
                 'http_options.auth' => 'array|string|nullable',
                 'http_options.body' => 'string|resource|\Psr\Http\Message\StreamInterface',
                 'http_options.cert' => 'string|array',
-                'http_options.cookies' => '\GuzzleHttp\Cookie\CookieJarInterface',
+                'http_options.cookies' => \GuzzleHttp\Cookie\CookieJarInterface::class,
                 'http_options.connect_timeout' => 'numeric',
                 'http_options.debug' => 'bool|resource',
                 'http_options.decode_content' => 'string|bool',
@@ -87,8 +83,8 @@ class PushDeer extends FoundationSdk
                 'base_url' => 'required|url',
                 'key' => 'required|string',
                 'token' => 'required|string',
-            ])
-        );
+            ]),
+        ];
     }
 
     protected function buildDefaultPendingRequest(array $config): PendingRequest
@@ -106,19 +102,17 @@ class PushDeer extends FoundationSdk
                 'form_params' => $data,
                 'query' => $data,
             ])
-            ->withMiddleware(static function (callable $handler) use ($config): callable {
-                return static function (RequestInterface $request, array $options) use ($config, $handler) {
-                    $options['laravel_data']['pushkey'] = $config['key'];
-                    $request->withHeader('X-Timestamp', (string) microtime(true));
+            ->withMiddleware(static fn (callable $handler): callable => static function (RequestInterface $request, array $options) use ($config, $handler) {
+                $options['laravel_data']['pushkey'] = $config['key'];
+                $request->withHeader('X-Timestamp', (string) microtime(true));
 
-                    // 修改请求
-                    Utils::modifyRequest($request, []);
+                // 修改请求
+                Utils::modifyRequest($request, []);
 
-                    /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
-                    $promise = $handler($request, $options);
+                /** @var \GuzzleHttp\Promise\PromiseInterface $promise */
+                $promise = $handler($request, $options);
 
-                    return $promise->then(static fn (ResponseInterface $response) => $response->withHeader('X-Timestamp', (string) microtime(true)));
-                };
+                return $promise->then(static fn (ResponseInterface $response) => $response->withHeader('X-Timestamp', (string) microtime(true)));
             })
             ->withMiddleware(Middleware::mapRequest(static fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString())))
             ->withMiddleware(Middleware::mapResponse(static fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString())))
