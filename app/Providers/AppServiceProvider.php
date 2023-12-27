@@ -239,25 +239,22 @@ class AppServiceProvider extends ServiceProvider
         Discover::in('Rules')
             ->instanceOf(Rule::class)
             ->all()
-            ->each(
-                static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
-                    $isImplicit = $ruleReflectionClass->getDefaultProperties()['implicit'] ?? false;
-
-                    /** @var Rule&class-string $ruleClass */
-                    Validator::{$isImplicit ? 'extendImplicit' : 'extend'}(
-                        $ruleClass::name(),
-                        static fn (
-                            string $attribute,
-                            mixed $value,
-                            array $parameters,
-                            \Illuminate\Validation\Validator $validator
-                        ): bool => tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {
-                            $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
-                            $rule instanceof DataAwareRule and $rule->setData($validator->getData());
-                        })->passes($attribute, $value),
-                        $ruleClass::message()
-                    );
-                });
+            ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
+                /** @var Rule&class-string $ruleClass */
+                Validator::{$ruleClass::extendMethod()}(
+                    $ruleClass::name(),
+                    static fn (
+                        string $attribute,
+                        mixed $value,
+                        array $parameters,
+                        \Illuminate\Validation\Validator $validator
+                    ): bool => tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {
+                        $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
+                        $rule instanceof DataAwareRule and $rule->setData($validator->getData());
+                    })->passes($attribute, $value),
+                    $ruleClass::message()
+                );
+            });
     }
 
     /**

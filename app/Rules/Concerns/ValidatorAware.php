@@ -2,20 +2,16 @@
 
 namespace App\Rules\Concerns;
 
+use Illuminate\Validation\Validator;
+
 trait ValidatorAware
 {
-    /**
-     * @var \Illuminate\Validation\Validator
-     */
-    protected $validator;
+    protected Validator $validator;
 
     /**
      * Set the current validator.
-     *
-     * @param  \Illuminate\Validation\Validator  $validator
-     * @return $this
      */
-    public function setValidator($validator)
+    public function setValidator(Validator $validator): self
     {
         $this->validator = $validator;
 

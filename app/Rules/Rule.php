@@ -36,6 +36,20 @@ abstract class Rule implements ValidationRule
         return $transMessage === $transKey ? static::fallbackMessage() : $transMessage;
     }
 
+    public static function extendMethod(): string
+    {
+        $ruleReflectionClass = new \ReflectionClass(static::class);
+
+        $isImplicit = $ruleReflectionClass->getDefaultProperties()['implicit'] ?? false;
+        if ($isImplicit) {
+            return 'extendImplicit';
+        }
+
+        // extendDependent todo
+
+        return 'extend';
+    }
+
     protected static function fallbackMessage(): string
     {
         return __(
