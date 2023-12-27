@@ -1047,7 +1047,7 @@ class SqlFormatter
      * @param  string  $a The string to be quoted
      * @return string The quoted string
      */
-    private function quote_regex(string $a): string
+    private static function quote_regex(string $a): string
     {
         return preg_quote($a, '/');
     }

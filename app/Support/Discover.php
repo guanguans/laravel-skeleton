@@ -53,7 +53,6 @@ class Discover
         }
 
         if (! $this->basePath) {
-            // @phpstan-ignore-next-line
             $this->basePath = (string) Str::of($this->app->path())->after($this->projectPath)->trim(\DIRECTORY_SEPARATOR);
         }
     }
@@ -239,15 +238,12 @@ class Discover
             // Preemptively pass this class. Now it's left for the filters to keep allowing it.
             $passes = true;
 
-            // @phpstan-ignore-next-line
             foreach ($filters as $callback) {
-                // If the callback returns false, then didn't pass.
                 if (! $passes = $callback($reflection)) {
                     break;
                 }
             }
 
-            // @phpstan-ignore-next-line
             if ($passes) {
                 $classes->put($reflection->name, $reflection);
             }

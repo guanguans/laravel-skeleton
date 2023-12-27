@@ -78,7 +78,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         $this->configureDefaults($config);
     }
 
-    public function __call(mixed $method, mixed $args): null|mixed|ResponseInterface
+    public function __call(mixed $method, mixed $args): ?ResponseInterface
     {
         if (\count($args) < 1) {
             throw new InvalidArgumentException('Magic request methods require a URI and optional options array');

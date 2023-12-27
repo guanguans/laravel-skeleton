@@ -9,10 +9,10 @@ includes:
 parameters:
     level: 1
     paths:
-#        - app/
-        - lang/
+        - app/
     excludePaths:
         - ./*/*/FileToBeExcluded.php
+        - app/Support/Http/
     tmpDir: build/phpstan
 #    checkOctaneCompatibility: true
 #    checkModelProperties: true
@@ -33,11 +33,7 @@ parameters:
 #        switchConditionsMatchingType: false
 #        noVariableVariables: false
     ignoreErrors:
-#        - '#PHPDoc tag @var#'
-        - "#^.* on an unknown class App\\\\Libraries\\\\ApiQmxbCp\\.$#"
-        - "#^.* on an unknown class App\\\\Libraries\\\\ApiQmxbGm88\\.$#"
-        - "#^Access to an undefined property App\\\\Admin\\\\Actions\\\\Grid\\\\.*\\:\\:\\$row\\.$#"
-        - "#^Access to an undefined property App\\\\Admin\\\\Controllers\\\\.*Controller\\:\\:\\$.*\\.$#"
-#        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
-        - "#^Call to an undefined static method App\\\\Support\\\\Facades\\\\CP\\:\\:gmt.*\\(\\)\\.$#"
+        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
         - "#^Method App\\\\Support\\\\Macros\\\\.*Macro\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
+        - "#^Unsafe usage of new static\\(\\)\\.$#"
+        - "#^Access to undefined constant Spatie\\\\Health\\\\Enums\\\\Status\\:\\:.*\\.$#"
