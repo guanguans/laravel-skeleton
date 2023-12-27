@@ -46,8 +46,8 @@ class StrMacro
             $acronym = '';
             foreach (preg_split('/[^\p{L}]+/u', $string) as $word) {
                 if (! empty($word)) {
-                    $first_letter = mb_substr($word, 0, 1);
-                    $acronym .= $first_letter.$delimiter;
+                    $firstLetter = mb_substr($word, 0, 1);
+                    $acronym .= $firstLetter.$delimiter;
                 }
             }
 

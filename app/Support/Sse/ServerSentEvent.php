@@ -66,7 +66,7 @@ namespace App\Support\Sse;
  */
 class ServerSentEvent implements \Stringable
 {
-    public const HEADERS = [
+    final public const HEADERS = [
         'Content-Type' => 'text/event-stream',
         'Connection' => 'keep-alive',
         'Cache-Control' => 'no-cache, no-store, must-revalidate, pre-check=0, post-check=0',
@@ -97,15 +97,19 @@ class ServerSentEvent implements \Stringable
         if (null !== $this->event) {
             $event[] = "event: $this->event";
         }
+
         if (null !== $this->data) {
             $event[] = "data: $this->data";
         }
+
         if (null !== $this->id) {
             $event[] = "id: $this->id";
         }
+
         if (null !== $this->comment) {
             $event[] = ": $this->comment";
         }
+
         if (null !== $this->retry) {
             $event[] = "retry: $this->retry";
         }
@@ -130,6 +134,7 @@ class ServerSentEvent implements \Stringable
                 if (ob_get_level() > 0) {
                     ob_flush();
                 }
+
                 flush();
 
                 // Break the loop if the client aborted the connection.

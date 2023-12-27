@@ -26,7 +26,7 @@ class WhereFullTextQueryBuilderMacro
 
             $columns = (array) $columns;
 
-            $this->wheres[] = compact('type', 'columns', 'value', 'options', 'boolean');
+            $this->wheres[] = ['type' => $type, 'columns' => $columns, 'value' => $value, 'options' => $options, 'boolean' => $boolean];
 
             $this->addBinding($value);
 

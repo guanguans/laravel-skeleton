@@ -18,31 +18,29 @@ class QueryBuilderMacro
 {
     public function pipe(): callable
     {
-        return function (...$pipes) {
-            return tap($this, static function ($builder) use ($pipes): void {
-                array_unshift($pipes, static function ($builder, $next): void {
-                    if (
-                        ! ($piped = $next($builder)) instanceof EloquentBuilder
-                        && ! $piped instanceof QueryBuilder
-                        && ! $piped instanceof Relation
-                    ) {
-                        throw new \InvalidArgumentException(
-                            sprintf(
-                                'Query builder pipeline must be return a %s or %s or %s instance.',
-                                EloquentBuilder::class,
-                                QueryBuilder::class,
-                                Relation::class,
-                            )
-                        );
-                    }
-                });
-
-                (new Pipeline(app()))
-                    ->send($builder)
-                    ->through(...$pipes)
-                    ->thenReturn();
+        return fn (...$pipes) => tap($this, static function ($builder) use ($pipes): void {
+            array_unshift($pipes, static function ($builder, $next): void {
+                if (
+                    ! ($piped = $next($builder)) instanceof EloquentBuilder
+                    && ! $piped instanceof QueryBuilder
+                    && ! $piped instanceof Relation
+                ) {
+                    throw new \InvalidArgumentException(
+                        sprintf(
+                            'Query builder pipeline must be return a %s or %s or %s instance.',
+                            EloquentBuilder::class,
+                            QueryBuilder::class,
+                            Relation::class,
+                        )
+                    );
+                }
             });
-        };
+
+            (new Pipeline(app()))
+                ->send($builder)
+                ->through(...$pipes)
+                ->thenReturn();
+        });
     }
 
     public function getToArray(): callable
@@ -52,10 +50,9 @@ class QueryBuilderMacro
 
     public function firstToArray(): callable
     {
-        return function ($columns = ['*']): ?array {
+        return fn ($columns = ['*']): ?array =>
             // return optional($this->first($columns))->toArray();
-            return ($model = $this->first($columns)) ? $model->toArray() : (array) $model;
-        };
+            ($model = $this->first($columns)) ? $model->toArray() : (array) $model;
     }
 
     /**

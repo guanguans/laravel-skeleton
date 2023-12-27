@@ -48,7 +48,7 @@ class CommandMacro
                 $result = true;
             } else {
                 try {
-                    $result = false === $task() ? false : true;
+                    $result = false !== $task();
                 } catch (\Throwable $taskException) {
                     $result = false;
                 }

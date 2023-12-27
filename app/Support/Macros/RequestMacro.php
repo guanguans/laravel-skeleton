@@ -31,13 +31,11 @@ class RequestMacro
 
     public function headers(): callable
     {
-        return function ($key = null, $default = null) {
-            return null === $key
-                ? collect($this->header())
-                    ->map(static fn ($header) => $header[0])
-                    ->toArray()
-                : $this->header($key, $default);
-        };
+        return fn ($key = null, $default = null) => null === $key
+            ? collect($this->header())
+                ->map(static fn ($header) => $header[0])
+                ->toArray()
+            : $this->header($key, $default);
     }
 
     public function strictInput(): callable
@@ -88,10 +86,10 @@ class RequestMacro
         return function (string $errorBag, array $rules, ...$params) {
             try {
                 return $this->validateStrictAll($rules, ...$params);
-            } catch (ValidationException $e) {
-                $e->errorBag = $errorBag;
+            } catch (ValidationException $validationException) {
+                $validationException->errorBag = $errorBag;
 
-                throw $e;
+                throw $validationException;
             }
         };
     }

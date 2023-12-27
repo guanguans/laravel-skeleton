@@ -24,27 +24,18 @@ class GrammarMacro
          * @param  \Illuminate\Database\Connection  $connection
          * @return string
          */
-        return function (Blueprint $blueprint, Fluent $command, Connection $connection) {
-            switch ($connection->getDriverName()) {
-                case 'mysql':
-                    return sprintf(
-                        'alter table %s comment = %s',
-                        $this->wrapTable($blueprint),
-                        "'".str_replace("'", "''", $command->comment)."'"
-                    );
-
-                case 'pgsql':
-                    return sprintf(
-                        'comment on table %s is %s',
-                        $this->wrapTable($blueprint),
-                        "'".str_replace("'", "''", $command->comment)."'"
-                    );
-
-                case 'sqlsrv':
-                case 'sqlite':
-                default:
-                    throw new \RuntimeException('The database driver in use does not support table comment.');
-            }
+        return fn (Blueprint $blueprint, Fluent $command, Connection $connection) => match ($connection->getDriverName()) {
+            'mysql' => sprintf(
+                'alter table %s comment = %s',
+                $this->wrapTable($blueprint),
+                "'".str_replace("'", "''", $command->comment)."'"
+            ),
+            'pgsql' => sprintf(
+                'comment on table %s is %s',
+                $this->wrapTable($blueprint),
+                "'".str_replace("'", "''", $command->comment)."'"
+            ),
+            default => throw new \RuntimeException('The database driver in use does not support table comment.'),
         };
     }
 }

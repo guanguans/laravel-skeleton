@@ -23,6 +23,7 @@ use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
+use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
 use Rector\Php80\ValueObject\AnnotationToAttribute;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
@@ -59,7 +60,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->paths([
-        __DIR__.'/app/Rules',
+        __DIR__.'/app/Support/Traits',
         __DIR__.'/config',
         __DIR__.'/routes',
         __DIR__.'/.*.php',
@@ -81,6 +82,9 @@ return static function (RectorConfig $rectorConfig): void {
         SplitDoubleAssignRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,
 
+        RemoveUnusedVariableInCatchRector::class => [
+            __DIR__.'/app/Support/Macros/CommandMacro.php',
+        ],
         MakeInheritedMethodVisibilitySameAsParentRector::class => [
             __DIR__.'/app/Admin/Actions/Show',
         ],
@@ -111,6 +115,7 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__.'/dcat_admin_ide_helper.php',
         __DIR__.'/deploy.php',
         __DIR__.'/deploy.example.php',
+        __DIR__.'/app/Support/Http',
         '**/Fixture*',
         '**/Fixture/*',
         '**/Fixtures*',

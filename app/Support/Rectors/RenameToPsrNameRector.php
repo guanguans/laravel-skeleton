@@ -193,7 +193,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
             if ($this->shouldLcfirstCamelName($node)) {
                 return $this->rename($node, static fn (string $name): string => Str::lcfirst(Str::camel($name)));
             }
-        } catch (\RuntimeException $e) {
+        } catch (\RuntimeException) {
             // skip
         }
     }
@@ -203,7 +203,6 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
      */
     public function isMatches(string $value, iterable|string $patterns): bool
     {
-        $value = (string) $value;
         if (! is_iterable($patterns)) {
             $patterns = [$patterns];
         }
@@ -326,18 +325,16 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
             return true;
         }
 
-        return (bool) (
-            $node instanceof Node\Expr\FuncCall
-            && $this->isNames($node, [
-                // call_user_func('function_name');
-                'call_user_func',
-                // call_user_func_array('function_name');
-                'call_user_func_array',
-                // function_exists('function_name');
-                'function_exists',
-            ])
-            && $this->hasFuncCallIndexStringArg($node, 0)
-        );
+        return $node instanceof Node\Expr\FuncCall
+        && $this->isNames($node, [
+            // call_user_func('function_name');
+            'call_user_func',
+            // call_user_func_array('function_name');
+            'call_user_func_array',
+            // function_exists('function_name');
+            'function_exists',
+        ])
+        && $this->hasFuncCallIndexStringArg($node, 0);
     }
 
     /**
@@ -473,11 +470,9 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         }
 
         // CONST_NAME;
-        return (bool) (
-            $node instanceof Node\Name
-            && ! $this->isNames($node, ['null', 'true', 'false'])
-            && $parent instanceof Node\Expr\ConstFetch
-        );
+        return $node instanceof Node\Name
+        && ! $this->isNames($node, ['null', 'true', 'false'])
+        && $parent instanceof Node\Expr\ConstFetch;
     }
 
     /**

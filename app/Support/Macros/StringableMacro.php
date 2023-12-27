@@ -14,29 +14,23 @@ class StringableMacro
 {
     public function appendIf(): callable
     {
-        return function ($suffix) {
-            return new Stringable(
-                Str::appendIf($this->__toString(), $suffix)
-            );
-        };
+        return fn ($suffix) => new Stringable(
+            Str::appendIf($this->__toString(), $suffix)
+        );
     }
 
     public function prependIf(): callable
     {
-        return function ($prefix) {
-            return new Stringable(
-                Str::prependIf($this->__toString(), $prefix)
-            );
-        };
+        return fn ($prefix) => new Stringable(
+            Str::prependIf($this->__toString(), $prefix)
+        );
     }
 
     public function mbSubstrCount(): callable
     {
-        return function ($needle, $encoding = null) {
-            return new Stringable(
-                Str::mbSubstrCount($this->__toString(), $needle, $encoding)
-            );
-        };
+        return fn ($needle, $encoding = null) => new Stringable(
+            Str::mbSubstrCount($this->__toString(), $needle, $encoding)
+        );
     }
 
     public function get(): callable
@@ -49,10 +43,8 @@ class StringableMacro
      */
     public function acronym(): callable
     {
-        return function (string $delimiter = '') {
-            return new Stringable(
-                Str::acronym($this->value, $delimiter)
-            );
-        };
+        return fn (string $delimiter = '') => new Stringable(
+            Str::acronym($this->value, $delimiter)
+        );
     }
 }
