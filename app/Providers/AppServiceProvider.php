@@ -251,7 +251,7 @@ class AppServiceProvider extends ServiceProvider
                         $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
                         $rule instanceof DataAwareRule and $rule->setData($validator->getData());
                     })->passes($attribute, $value),
-                    $ruleClass::localizedMessage()
+                    $ruleClass::message()
                 );
             });
     }

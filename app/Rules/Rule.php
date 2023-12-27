@@ -10,7 +10,7 @@ abstract class Rule implements ValidationRule
     /**
      * Determine if the validation rule passes.
      */
-    abstract public function passes($attribute, $value);
+    abstract public function passes(string $attribute, mixed $value): bool;
 
     /**
      * Run the validation rule.
@@ -20,21 +20,16 @@ abstract class Rule implements ValidationRule
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (! $this->passes($attribute, $value)) {
-            $fail($this->message())->translate();
+            $fail(self::message())->translate();
         }
     }
 
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
+    public static function name(): string
     {
-        return static::localizedMessage();
+        return Str::of(class_basename(static::class))->replaceLast('Rule', '')->snake();
     }
 
-    public static function localizedMessage(): string
+    public static function message(): string
     {
         $transMessage = __($transKey = sprintf('validation.%s', static::name()));
 
@@ -50,10 +45,5 @@ abstract class Rule implements ValidationRule
         return __($transKey, [
             'name' => Str::of(static::name())->replace('_', ' '),
         ]);
-    }
-
-    public static function name(): string
-    {
-        return Str::of(class_basename(static::class))->replaceLast('Rule', '')->snake();
     }
 }

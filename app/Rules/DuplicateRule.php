@@ -8,12 +8,8 @@ final class DuplicateRule extends Rule
 
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, mixed $value): bool
     {
         return collect($this->delimiter === null ? str_split($value) : explode($this->delimiter, $value))
             ->duplicates()

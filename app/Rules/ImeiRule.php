@@ -6,12 +6,8 @@ final class ImeiRule extends Rule
 {
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, mixed $value): bool
     {
         if (\strlen($value) != 15 || ! ctype_digit($value)) {
             return false;

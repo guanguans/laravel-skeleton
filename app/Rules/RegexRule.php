@@ -11,7 +11,7 @@ abstract class RegexRule extends Rule
      */
     abstract protected function pattern(): string;
 
-    public function passes($attribute, $value)
+    public function passes(string $attribute, mixed $value): bool
     {
         return (bool) preg_match($this->pattern(), $value);
     }

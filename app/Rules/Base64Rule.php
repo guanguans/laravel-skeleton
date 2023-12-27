@@ -6,12 +6,8 @@ final class Base64Rule extends Rule
 {
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, mixed $value): bool
     {
         return base64_encode(base64_decode($value, true)) === $value;
     }

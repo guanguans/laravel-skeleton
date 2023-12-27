@@ -4,24 +4,24 @@ namespace App\Rules;
 
 use App\Rules\Concerns\DataAware;
 use App\Rules\Concerns\ValidatorAware;
-use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 
-final class DefaultRule extends Rule implements ImplicitRule, ValidatorAwareRule
+final class DefaultRule extends Rule implements ValidatorAwareRule
 {
     // use DataAware;
     use ValidatorAware;
+
+    /**
+     * Indicates whether the rule should be implicit.
+     */
+    public bool $implicit = true;
 
     public function __construct(protected $default) {}
 
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, mixed $value): bool
     {
         if ($value === null) {
             $data = $this->validator->getData();

@@ -54,12 +54,8 @@ final class IpRule extends Rule
 
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, mixed $value): bool
     {
         return $this->isPublic ? $this->isPublic($value) : $this->isPrivate($value);
     }
