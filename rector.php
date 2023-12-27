@@ -18,6 +18,7 @@ use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
 use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
 use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
@@ -60,7 +61,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->paths([
-        __DIR__.'/app/Support/Traits',
+        __DIR__.'/app/Support/AbstractRepository.php',
         __DIR__.'/config',
         __DIR__.'/routes',
         __DIR__.'/.*.php',
@@ -79,6 +80,7 @@ return static function (RectorConfig $rectorConfig): void {
         NullToStrictStringFuncCallArgRector::class,
         PostIncDecToPreIncDecRector::class,
         RemoveExtraParametersRector::class,
+        RemoveUnusedPrivateMethodRector::class,
         SplitDoubleAssignRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,
 

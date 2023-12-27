@@ -22,7 +22,7 @@ abstract class AbstractRepository
     /**
      * Cache expires constants
      */
-    public const EXPIRES_END_OF_DAY = 'eod';
+    final public const EXPIRES_END_OF_DAY = 'eod';
 
     /**
      * Searching operator.
@@ -34,12 +34,12 @@ abstract class AbstractRepository
 
     protected string $model;
 
-    protected \Illuminate\Database\Eloquent\Model $modelInstance;
+    protected Model $modelInstance;
 
     /**
      * The errors message bag instance
      */
-    protected \Illuminate\Support\MessageBag $errors;
+    protected MessageBag $errors;
 
     /** @var|\Illuminate\Database\Eloquent\Builder */
     protected $query;
@@ -96,7 +96,7 @@ abstract class AbstractRepository
     /**
      * Handle dynamic static method calls into the method.
      */
-    public function __call(string $method, array $parameters): mixed
+    public function __call($method, $parameters): mixed
     {
         // Check for scope method and call
         if (method_exists($this, $scope = 'scope'.ucfirst($method))) {
@@ -169,7 +169,7 @@ abstract class AbstractRepository
     /**
      * Find a model by its primary key or throw an exception.
      *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws ModelNotFoundException
      */
     public function findOrFail(string $id, array $columns = ['*']): Model
     {
@@ -337,25 +337,19 @@ abstract class AbstractRepository
 
                 // Loop though the columns and look for relationships
                 foreach ($columns as $key => $column) {
-                    @[$joining_table, $options] = explode(':', $column);
-
-                    if (null !== $options) {
-                        @[$column, $foreign_key, $related_key, $alias] = explode(',', $options);
-
-                        // Join the table if it hasn't already been joined
-                        if (false === isset($joined[$joining_table])) {
-                            $joined[$joining_table] = $this->addSearchJoin(
-                                $query,
-                                $joining_table,
-                                $foreign_key,
-                                $related_key ?: $param, // Allow for related key overriding
-                                $alias
-                            );
-                        }
-
-                        // Set a new column search
-                        $columns[$key] = "{$joined[$joining_table]}.{$column}";
+                    @[$joiningTable, $options] = explode(':', $column);
+                    @[$column, $foreignKey, $relatedKey, $alias] = explode(',', $options);
+                    // Join the table if it hasn't already been joined
+                    if (false === isset($joined[$joiningTable])) {
+                        $joined[$joiningTable] = $this->addSearchJoin(
+                            $query,
+                            $joiningTable,
+                            $foreignKey,
+                            $relatedKey ?: $param, // Allow for related key overriding
+                            $alias
+                        );
                     }
+                    $columns[$key] = "{$joined[$joiningTable]}.{$column}";
                 }
 
                 // Perform a range based query if the range is valid
@@ -432,36 +426,36 @@ abstract class AbstractRepository
     /**
      * Retrieve all data of repository, paginated
      */
-    public function paginate(null|int|mixed $per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public function paginate(?int $perPage = null, array $columns = ['*'], string $pageName = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         // Get the default per page when not set
-        $per_page = $per_page ?: config('repositories.per_page', 15);
+        $perPage = $perPage ?: config('repositories.per_page', 15);
 
         // Get the per page max
-        $per_page_max = config('repositories.max_per_page', 100);
+        $perPageMax = config('repositories.max_per_page', 100);
 
         // Ensure the user can never make the per
         // page limit higher than the defined max.
-        if ($per_page > $per_page_max) {
-            $per_page = $per_page_max;
+        if ($perPage > $perPageMax) {
+            $perPage = $perPageMax;
         }
 
         $this->newQuery();
 
-        return $this->query->paginate($per_page, $columns, $page_name, $page);
+        return $this->query->paginate($perPage, $columns, $pageName, $page);
     }
 
     /**
      * Retrieve all data of repository, paginated
      */
-    public function simplePaginate(null|int|mixed $per_page = null, array $columns = ['*'], string $page_name = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\Paginator
+    public function simplePaginate(?int $perPage = null, array $columns = ['*'], string $pageName = 'page', ?int $page = null): \Illuminate\Contracts\Pagination\Paginator
     {
         $this->newQuery();
 
         // Get the default per page when not set
-        $per_page = $per_page ?: config('repositories.per_page', 15);
+        $perPage = $perPage ?: config('repositories.per_page', 15);
 
-        return $this->query->simplePaginate($per_page, $columns, $page_name, $page);
+        return $this->query->simplePaginate($perPage, $columns, $pageName, $page);
     }
 
     /**
@@ -584,7 +578,7 @@ abstract class AbstractRepository
      */
     public function getErrors(): MessageBag
     {
-        if (null === $this->errors) {
+        if (! $this->errors instanceof MessageBag) {
             $this->errors = new MessageBag();
         }
 
@@ -667,19 +661,19 @@ abstract class AbstractRepository
     /**
      * Add a search join to the query.
      */
-    protected function addSearchJoin(Builder $query, string $joining_table, string $foreign_key, string $related_key, string $alias): string
+    protected function addSearchJoin(Builder $query, string $joiningTable, string $foreignKey, string $relatedKey, string $alias): string
     {
         // We need to join to the intermediate table
-        $local_table = $this->getModel()->getTable();
+        $localTable = $this->getModel()->getTable();
 
         // Set the way the table will be join, with an alias or without
-        $table = $alias ? "{$joining_table} as {$alias}" : $joining_table;
+        $table = $alias ? "{$joiningTable} as {$alias}" : $joiningTable;
 
         // Create an alias for the join
-        $alias = $alias ?: $joining_table;
+        $alias = $alias ?: $joiningTable;
 
         // Create the join
-        $query->join($table, "{$alias}.{$foreign_key}", "{$local_table}.{$related_key}");
+        $query->join($table, "{$alias}.{$foreignKey}", "{$localTable}.{$relatedKey}");
 
         return $alias;
     }
@@ -690,20 +684,20 @@ abstract class AbstractRepository
     protected function createSearchRangeClause(Builder $query, mixed $value, array $columns): bool
     {
         // Skip arrays
-        if (true === \is_array($value)) {
+        if (\is_array($value)) {
             return false;
         }
 
         // Get the range type
-        $range_type = strtolower(substr($value, 0, 2));
+        $rangeType = strtolower(substr($value, 0, 2));
 
         // Perform a range based query if the range is valid
         // and the separator matches.
-        if (':' === substr($value, 2, 1) && \in_array($range_type, $this->range_keys, true)) {
+        if (':' === substr($value, 2, 1) && \in_array($rangeType, $this->range_keys, true)) {
             // Get the true value
             $value = substr($value, 3);
 
-            switch ($range_type) {
+            switch ($rangeType) {
                 case 'gt':
                     $query->where($this->appendTableName($columns[0]), '>', $value, 'and');
 
