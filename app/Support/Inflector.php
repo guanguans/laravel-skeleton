@@ -174,11 +174,12 @@ class Inflector
      */
     public static function reset(): void
     {
-        if (empty(static::$initialState)) {
+        if (static::$initialState === []) {
             static::$initialState = get_class_vars(self::class);
 
             return;
         }
+
         foreach (static::$initialState as $key => $val) {
             if ('_initialState' !== $key) {
                 static::${$key} = $val;
@@ -209,10 +210,7 @@ class Inflector
         if ($reset) {
             static::${$var} = $rules;
         } elseif ('uninflected' === $type) {
-            static::$uninflected = array_merge(
-                $rules,
-                static::$uninflected
-            );
+            static::$uninflected = [...$rules, ...static::$uninflected];
         } else {
             static::${$var} = $rules + static::${$var};
         }
@@ -325,6 +323,7 @@ class Inflector
                 return static::$cache['singularize'][$word];
             }
         }
+
         static::$cache['singularize'][$word] = $word;
 
         return $word;
@@ -402,6 +401,7 @@ class Inflector
             foreach ($result as &$word) {
                 $word = mb_strtoupper(mb_substr($word, 0, 1)).mb_substr($word, 1);
             }
+
             $result = implode(' ', $result);
             static::cache($cacheKey, $string, $result);
         }
@@ -509,6 +509,7 @@ class Inflector
 
             return $value;
         }
+
         if (! isset(static::$cache[$type][$key])) {
             return false;
         }
