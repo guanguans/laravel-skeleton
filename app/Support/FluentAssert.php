@@ -380,12 +380,7 @@ use Webmozart\Assert\Assert;
  */
 class FluentAssert
 {
-    protected $value;
-
-    public function __construct($value)
-    {
-        $this->value = $value;
-    }
+    public function __construct(protected $value) {}
 
     public static function __callStatic($name, $arguments): self
     {

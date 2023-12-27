@@ -199,7 +199,7 @@ class BitEncoder implements BitEncoderContract
     public function getHasCombinationsGenerator(array $set): \Generator
     {
         $set = array_intersect($this->set, $set);
-        if (empty($set)) {
+        if ($set === []) {
             return; // 中断
         }
 
@@ -220,7 +220,7 @@ class BitEncoder implements BitEncoderContract
     public function getLackCombinationsGenerator(array $set): \Generator
     {
         $set = array_intersect($this->set, $set);
-        if (empty($set)) {
+        if ($set === []) {
             return; // 中断
         }
 
@@ -258,7 +258,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getLackCombinationsCount(array $set): int
     {
-        if (0 === \count(array_intersect($this->set, $set))) {
+        if ([] === array_intersect($this->set, $set)) {
             return 0;
         }
 

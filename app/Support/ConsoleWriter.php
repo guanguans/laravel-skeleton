@@ -15,13 +15,13 @@ use Symfony\Component\Process\Process;
  */
 class ConsoleWriter extends OutputStyle
 {
-    public const BLUE = 'fg=blue';
+    final public const BLUE = 'fg=blue';
 
-    public const GREEN = 'fg=green';
+    final public const GREEN = 'fg=green';
 
-    public const RED = 'fg=red';
+    final public const RED = 'fg=red';
 
-    public const MAGENTA = 'fg=magenta';
+    final public const MAGENTA = 'fg=magenta';
 
     public static function formatString(string $string, string $format): string
     {
