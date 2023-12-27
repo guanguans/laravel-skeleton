@@ -23,7 +23,6 @@ use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
-use Illuminate\Contracts\Validation\ImplicitRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
@@ -241,11 +240,11 @@ class AppServiceProvider extends ServiceProvider
             ->instanceOf(Rule::class)
             ->all()
             ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
-                Validator::{is_subclass_of($ruleClass, ImplicitRule::class) ? 'extendImplicit' : 'extend'}(
+                Validator::extend(
                     $ruleClass::name(),
                     static fn (
                         string $attribute,
-                        $value,
+                        mixed $value,
                         array $parameters,
                         \Illuminate\Validation\Validator $validator
                     ) => tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {

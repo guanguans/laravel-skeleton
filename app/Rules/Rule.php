@@ -2,18 +2,27 @@
 
 namespace App\Rules;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Str;
 
-abstract class Rule implements \Illuminate\Contracts\Validation\Rule
+abstract class Rule implements ValidationRule
 {
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
     abstract public function passes($attribute, $value);
+
+    /**
+     * Run the validation rule.
+     *
+     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     */
+    public function validate(string $attribute, mixed $value, \Closure $fail): void
+    {
+        if (! $this->passes($attribute, $value)) {
+            $fail($this->message())->translate();
+        }
+    }
 
     /**
      * Get the validation error message.
