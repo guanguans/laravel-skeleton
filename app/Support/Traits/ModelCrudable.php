@@ -62,12 +62,13 @@ trait ModelCrudable
         // Starts query
         $query = self::query();
 
-        $searchableFields = method_exists(__CLASS__, 'searchable') ? self::searchable() : self::$searchable;
+        $searchableFields = method_exists(self::class, 'searchable') ? self::searchable() : self::$searchable;
         $query->where(static function ($where) use ($data, $searchableFields): void {
             foreach ($searchableFields as $field => $type) {
                 if (str_contains($field, '.')) {
                     continue;
                 }
+
                 self::buildQuery($where, $field, $type, $data);
             }
         });
@@ -76,6 +77,7 @@ trait ModelCrudable
             if (! str_contains($field, '.')) {
                 continue;
             }
+
             $arr = explode('.', $field);
             $realField = $arr[1];
             $table = $arr[0];
@@ -204,20 +206,22 @@ trait ModelCrudable
         if (! $aliasField) {
             $aliasField = $field;
         }
+
         if (isset($data[$field]) && null !== $data[$field]) {
             $customMethod = 'search'.ucfirst($field);
-            if (method_exists(self::class, $customMethod)) { // If field has custom "search" method uses it
+            if (method_exists(self::class, $customMethod)) {
+                // If field has custom "search" method uses it
                 $query->where(static function ($query) use ($field, $data, $customMethod): void {
                     self::$customMethod($query, $data[$field]);
                 });
-            } else {
-                if ('string_match' === $type || 'date' === $type || 'datetime' === $type || 'int' === $type) { // Exact search
-                    self::exactFilter($query, $field, $data, $aliasField);
-                } elseif ('string' === $type) { // Like Search
-                    self::likeFilter($query, $field, $data, $aliasField);
-                }
+            } elseif ('string_match' === $type || 'date' === $type || 'datetime' === $type || 'int' === $type) {
+                // Exact search
+                self::exactFilter($query, $field, $data, $aliasField);
+            } elseif ('string' === $type) { // Like Search
+                self::likeFilter($query, $field, $data, $aliasField);
             }
         }
+
         // Date, Datetime and Decimal implementation for range field search (_from and _to suffixed fields)
         if ('date' === $type || 'datetime' === $type || 'decimal' === $type || 'int' === $type) {
             self::rangeFilter($query, $field, $data, $aliasField, $type);
@@ -232,7 +236,7 @@ trait ModelCrudable
                     $query->orWhere($aliasField, $datum);
                 }
             });
-        } elseif (0 === strncmp($data[$field], '!=', 2)) {
+        } elseif (str_starts_with($data[$field], '!=')) {
             $query->where($field, '!=', str_replace('!=', '', $data[$field]));
         } else {
             $query->where($field, $data[$field]);
@@ -259,13 +263,16 @@ trait ModelCrudable
             if ('datetime' === $type && \strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 00:00:00';
             }
+
             $query->where($field, '>=', $value);
         }
+
         if (! empty($data[$field.'_to'])) {
             $value = $data[$field.'_to'];
             if ('datetime' === $type && \strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 23:59:59';
             }
+
             $query->where($aliasField, '<=', $value);
         }
     }

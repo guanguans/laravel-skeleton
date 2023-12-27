@@ -16,7 +16,6 @@ trait ValidateStrictAll
     /**
      * Run the validation routine against the given validator.
      *
-     * @param  ?Request  $request
      *
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -65,10 +64,10 @@ trait ValidateStrictAll
     ): array {
         try {
             return $this->validateStrictAll($request, $rules, $messages, $customAttributes);
-        } catch (ValidationException $e) {
-            $e->errorBag = $errorBag;
+        } catch (ValidationException $validationException) {
+            $validationException->errorBag = $errorBag;
 
-            throw $e;
+            throw $validationException;
         }
     }
 

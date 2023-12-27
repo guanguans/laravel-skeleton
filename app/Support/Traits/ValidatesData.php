@@ -59,10 +59,10 @@ trait ValidatesData
     ): array {
         try {
             return $this->validateData($data, $rules, $messages, $customAttributes);
-        } catch (ValidationException $e) {
-            $e->errorBag = $errorBag;
+        } catch (ValidationException $validationException) {
+            $validationException->errorBag = $errorBag;
 
-            throw $e;
+            throw $validationException;
         }
     }
 

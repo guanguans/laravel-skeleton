@@ -28,6 +28,7 @@ trait ControllerCrudable
         if ('Controllers' !== end($nsPrefixes)) {
             $nsPrefix = strtolower(end($nsPrefixes)).($forRedirect ? '/' : '.');
         }
+
         $modelNames = explode('\\', $this->modelClass);
 
         return $nsPrefix.strtolower(end($modelNames));
@@ -47,7 +48,7 @@ trait ControllerCrudable
             return response()->json($items);
         }
 
-        return view($this->getViewPath().'.index', compact('items'));
+        return view($this->getViewPath().'.index', ['items' => $items]);
     }
 
     /**
@@ -83,9 +84,7 @@ trait ControllerCrudable
             return $this->jsonModel($model);
         }
 
-        $url = ! $request->input('url_return')
-            ? $this->getViewPath(true).'/'.$model->id
-            : $request->input('url_return');
+        $url = $request->input('url_return') ?: $this->getViewPath(true).'/'.$model->id;
 
         return redirect($url)->with('flash_message', trans('crud.added'));
     }
@@ -105,7 +104,7 @@ trait ControllerCrudable
             return $this->jsonModel($model);
         }
 
-        return view($this->getViewPath().'.show', compact('model'));
+        return view($this->getViewPath().'.show', ['model' => $model]);
     }
 
     /**
@@ -115,7 +114,7 @@ trait ControllerCrudable
     {
         $model = $this->modelClass::findOrFail($id);
 
-        return view($this->getViewPath().'.edit', compact('model'));
+        return view($this->getViewPath().'.edit', ['model' => $model]);
     }
 
     /**
@@ -139,9 +138,7 @@ trait ControllerCrudable
         $this->handleFileUploads($request, $model);
         $model->update($request->only($model->getFillable()));
 
-        $url = ! $request->input('url_return')
-            ? $this->getViewPath(true).'/'.$model->id
-            : $request->input('url_return');
+        $url = $request->input('url_return') ?: $this->getViewPath(true).'/'.$model->id;
 
         return $this->isAjax($request)
             ? $this->jsonModel($model)
@@ -155,28 +152,21 @@ trait ControllerCrudable
     {
         if ($request->has('with_trashed') && property_exists($this->modelClass, 'withTrashedForbidden')) {
             $model = $this->modelClass::withTrashed()->findOrFail($id);
-            if ($model->deleted_at) {
-                $count = $model->forceDelete();
-            } else {
-                $count = $this->modelClass::destroy($id);
-            }
+            $count = $model->deleted_at ? $model->forceDelete() : $this->modelClass::destroy($id);
         } else {
             $count = $this->modelClass::destroy($id);
         }
 
-        $url = ! $request->input('url_return') ? $this->getViewPath(true) : $request->input('url_return');
+        $url = $request->input('url_return') ?: $this->getViewPath(true);
         $success = $count > 0;
         $error = ! $success;
-        $message = ! $success ? __('No records were deleted') : __('crud.deleted');
+        $message = $success ? __('crud.deleted') : __('No records were deleted');
 
         return $this->isAjax($request)
-            ? response()->json(compact('success', 'error', 'message'))
+            ? response()->json(['success' => $success, 'error' => $error, 'message' => $message])
             : redirect($url)->with('flash_message', $message);
     }
 
-    /**
-     * @param  ?Model  $model
-     */
     public function handleFileUploads(Request $request, ?Model $model = null): void
     {
         $fileUploads = $this->modelClass::fileUploads($model);
@@ -186,7 +176,7 @@ trait ControllerCrudable
                 $upload = Storage::putFileAs(
                     $fileData['path'],
                     $file,
-                    ! isset($fileData['name']) ? $file->getClientOriginalName() : $fileData['name']
+                    $fileData['name'] ?? $file->getClientOriginalName()
                 );
                 $requestData[$fileUpload] = $upload;
             }

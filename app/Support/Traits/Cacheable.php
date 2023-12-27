@@ -43,7 +43,7 @@ trait Cacheable
      */
     public static function getCacheInstance(): CacheManager
     {
-        if (null === self::$cache) {
+        if (! self::$cache instanceof \Illuminate\Cache\CacheManager) {
             self::$cache = app('cache');
         }
 
@@ -61,8 +61,6 @@ trait Cacheable
 
     /**
      * Get Cache key for the method
-     *
-     * @param  ?array  $args
      */
     public function getCacheKey(string $method, ?array $args = null, string $tag = ''): string
     {
