@@ -16,6 +16,9 @@ trait CreateStaticable
         return static::new(...$parameters);
     }
 
+    /**
+     * @noinspection PhpMethodParametersCountMismatchInspection
+     */
     public static function new(...$parameters): static
     {
         return new static(...$parameters);

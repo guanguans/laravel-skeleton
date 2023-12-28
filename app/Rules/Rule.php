@@ -2,11 +2,14 @@
 
 namespace App\Rules;
 
+use App\Support\Traits\CreateStaticable;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Str;
 
 abstract class Rule implements ValidationRule
 {
+    use CreateStaticable;
+
     /**
      * Determine if the validation rule passes.
      */
