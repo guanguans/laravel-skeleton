@@ -5683,34 +5683,34 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.0.0-beta7",
+            "version": "v1.0.0-beta8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "1f2d6667b4a68ea4780a149677757193ed692702"
+                "reference": "32fb030ebf9679a30c373cada2905568d3cf818e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/1f2d6667b4a68ea4780a149677757193ed692702",
-                "reference": "1f2d6667b4a68ea4780a149677757193ed692702",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/32fb030ebf9679a30c373cada2905568d3cf818e",
+                "reference": "32fb030ebf9679a30c373cada2905568d3cf818e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/sql-formatter": "^1.1",
                 "guzzlehttp/promises": "^1.0 || ^2.0",
-                "illuminate/auth": "^10.21",
-                "illuminate/cache": "^10.21",
-                "illuminate/config": "^10.21",
-                "illuminate/console": "^10.21",
-                "illuminate/contracts": "^10.21",
-                "illuminate/database": "^10.21",
-                "illuminate/events": "^10.21",
-                "illuminate/http": "^10.21",
-                "illuminate/queue": "^10.21",
-                "illuminate/redis": "^10.21",
-                "illuminate/routing": "^10.21",
-                "illuminate/support": "^10.21",
-                "illuminate/view": "^10.21",
+                "illuminate/auth": "^10.34",
+                "illuminate/cache": "^10.34",
+                "illuminate/config": "^10.34",
+                "illuminate/console": "^10.34",
+                "illuminate/contracts": "^10.34",
+                "illuminate/database": "^10.34",
+                "illuminate/events": "^10.34",
+                "illuminate/http": "^10.34",
+                "illuminate/queue": "^10.34",
+                "illuminate/redis": "^10.34",
+                "illuminate/routing": "^10.34",
+                "illuminate/support": "^10.34",
+                "illuminate/view": "^10.34",
                 "livewire/livewire": "^3.2",
                 "nesbot/carbon": "^2.67",
                 "php": "^8.1"
@@ -5765,7 +5765,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2023-12-13T00:05:37+00:00"
+            "time": "2023-12-27T14:15:20+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -14291,21 +14291,21 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "b3313c2dbffaf71c8de2934e2ea56ed2291a3838"
+                "reference": "fe07cbc8d837f60caf7018068e350cc5163681a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/b3313c2dbffaf71c8de2934e2ea56ed2291a3838",
-                "reference": "b3313c2dbffaf71c8de2934e2ea56ed2291a3838",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/fe07cbc8d837f60caf7018068e350cc5163681a0",
+                "reference": "fe07cbc8d837f60caf7018068e350cc5163681a0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "psr/container": "^2.0"
+                "psr/container": "^1.1|^2.0"
             },
             "conflict": {
                 "ext-psr": "<1.1|>=2"
@@ -14353,7 +14353,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/v3.4.0"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.4.1"
             },
             "funding": [
                 {
@@ -14369,7 +14369,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-30T20:28:31+00:00"
+            "time": "2023-12-26T14:02:43+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -14616,16 +14616,16 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "dee0c6e5b4c07ce851b462530088e64b255ac9c5"
+                "reference": "06450585bf65e978026bda220cdebca3f867fde7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/dee0c6e5b4c07ce851b462530088e64b255ac9c5",
-                "reference": "dee0c6e5b4c07ce851b462530088e64b255ac9c5",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/06450585bf65e978026bda220cdebca3f867fde7",
+                "reference": "06450585bf65e978026bda220cdebca3f867fde7",
                 "shasum": ""
             },
             "require": {
@@ -14674,7 +14674,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v3.4.0"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.4.1"
             },
             "funding": [
                 {
@@ -14690,7 +14690,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-25T15:08:44+00:00"
+            "time": "2023-12-26T14:02:43+00:00"
         },
         {
             "name": "symfony/uid",
