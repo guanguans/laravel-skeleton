@@ -14,6 +14,7 @@ use App\Support\Macros\GrammarMacro;
 use App\Support\Macros\MySqlGrammarMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\ResponseFactoryMacro;
+use App\Support\Macros\SchedulingEventMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
 use App\View\Components\AlertComponent;
@@ -21,6 +22,7 @@ use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Console\Command;
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
@@ -215,12 +217,13 @@ class AppServiceProvider extends ServiceProvider
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Collection::mixin($this->app->make(CollectionMacro::class));
         Command::mixin($this->app->make(CommandMacro::class));
+        Event::mixin($this->app->make(SchedulingEventMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
         Request::mixin($this->app->make(RequestMacro::class));
         ResponseFactory::mixin($this->app->make(ResponseFactoryMacro::class));
-        Stringable::mixin($this->app->make(StringableMacro::class));
         Str::mixin($this->app->make(StrMacro::class));
+        Stringable::mixin($this->app->make(StringableMacro::class));
 
         collect(glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php')))
             ->each(function ($file): void {
