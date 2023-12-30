@@ -24,6 +24,11 @@ class RequestMacro
         return fn () => (bool) optional($this->user())->is_admin;
     }
 
+    public static function isAdminDeveloper(): callable
+    {
+        return static fn (): bool => str(request()->user()?->username)->is(config('services.develop.fingerprints'));
+    }
+
     public function isWechat(): callable
     {
         return fn () => str_contains($this->userAgent(), 'MicroMessenger');

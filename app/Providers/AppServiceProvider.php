@@ -21,6 +21,7 @@ use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use Guanguans\LaravelSoar\SoarServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -44,17 +45,25 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\View\View;
+use KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider;
+use LaracraftTech\LaravelSchemaRules\LaravelSchemaRulesServiceProvider;
+use Laravel\Sail\SailServiceProvider;
+use Laravel\Telescope\Telescope;
 use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
+use Opcodes\LogViewer\Facades\LogViewer;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Reliese\Coders\CodersServiceProvider;
+use Spatie\LaravelIgnition\IgnitionServiceProvider;
 use Stillat\BladeDirectives\Support\Facades\Directive;
+use Worksome\Envy\EnvyServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -62,7 +71,7 @@ class AppServiceProvider extends ServiceProvider
         when as whenever;
     }
 
-    final public const REQUEST_ID_NAME = 'x-request-id';
+    final public const REQUEST_ID_NAME = 'X-Request-Id';
 
     /**
      * All of the container bindings that should be registered.
@@ -89,11 +98,27 @@ class AppServiceProvider extends ServiceProvider
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
         });
 
+        $this->whenever($this->app->isLocal(), function (): void {
+            $this->app->register(SoarServiceProvider::class);
+        });
+
         $this->unless($this->app->isProduction(), function (): void {
-            $this->app->register(CollisionServiceProvider::class);
-            $this->app->register(IdeHelperServiceProvider::class);
             $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
+            $this->app->register(\LaravelLang\Attributes\ServiceProvider::class);
+            $this->app->register(\LaravelLang\HttpStatuses\ServiceProvider::class);
+            $this->app->register(\LaravelLang\Lang\ServiceProvider::class);
+            $this->app->register(\LaravelLang\Locales\ServiceProvider::class);
+            $this->app->register(\LaravelLang\Publisher\ServiceProvider::class);
             $this->app->register(CodersServiceProvider::class);
+            $this->app->register(CollisionServiceProvider::class);
+            $this->app->register(EnvyServiceProvider::class);
+            $this->app->register(IdeHelperServiceProvider::class);
+            $this->app->register(IgnitionServiceProvider::class);
+            $this->app->register(LaravelSchemaRulesServiceProvider::class);
+            $this->app->register(MigrationsGeneratorServiceProvider::class);
+            $this->app->register(SailServiceProvider::class);
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
         });
     }
 
@@ -139,7 +164,9 @@ class AppServiceProvider extends ServiceProvider
             $this->extendView();
             $this->listenEvents();
             ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
-            LogHttp::skipWhen(fn () => $this->app->runningUnitTests());
+            LogHttp::skipWhen(fn (Request $request) => $this->app->runningUnitTests() || $request->isMethodSafe());
+            LogViewer::auth(static fn (): bool => request()::isAdminDeveloper());
+            class_exists(Telescope::class) and Telescope::auth(static fn (): bool => request()::isAdminDeveloper());
 
             // 自定义多态类型
             Relation::enforceMorphMap([
@@ -174,6 +201,13 @@ class AppServiceProvider extends ServiceProvider
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
+
+            // DB::whenQueryingForLongerThan(500, function (Connection $connection, QueryExecuted $event) {
+            //     // 通知开发团队...
+            // });
+            // Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
+            //     info(sprintf('Attempted to lazy load [%s] on model [%s].', $relation, get_class($model)));
+            // });
         });
 
         $this->whenever($this->app->environment('testing'), static function (): void {
@@ -189,13 +223,6 @@ class AppServiceProvider extends ServiceProvider
             // Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
             // DB::handleExceedingCumulativeQueryDuration();
             // Model::unguard();
-            // DB::whenQueryingForLongerThan(500, function (Connection $connection, QueryExecuted $event) {
-            //     // 通知开发团队...
-            // });
-            // Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
-            //     $class = get_class($model);
-            //     info("Attempted to lazy load [{$relation}] on model [{$class}].");
-            // });
         });
     }
 
