@@ -17639,16 +17639,16 @@
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
-            "version": "v3.17.1",
+            "version": "v3.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers.git",
-                "reference": "1adfc79e5bd11ff713b1c2a512c382cc8fcff34e"
+                "reference": "e03b07a58e08133c92c9e7a5ccc69e1457f8c98d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/1adfc79e5bd11ff713b1c2a512c382cc8fcff34e",
-                "reference": "1adfc79e5bd11ff713b1c2a512c382cc8fcff34e",
+                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/e03b07a58e08133c92c9e7a5ccc69e1457f8c98d",
+                "reference": "e03b07a58e08133c92c9e7a5ccc69e1457f8c98d",
                 "shasum": ""
             },
             "require": {
@@ -17679,9 +17679,9 @@
             "description": "A set of custom fixers for PHP CS Fixer",
             "support": {
                 "issues": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/issues",
-                "source": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/tree/v3.17.1"
+                "source": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/tree/v3.18.0"
             },
-            "time": "2023-12-23T14:34:27+00:00"
+            "time": "2023-12-31T13:36:45+00:00"
         },
         {
             "name": "lanin/laravel-api-debugger",
