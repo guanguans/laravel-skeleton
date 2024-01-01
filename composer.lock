@@ -7809,16 +7809,16 @@
         },
         {
             "name": "opcodesio/log-viewer",
-            "version": "v3.1.10",
+            "version": "v3.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opcodesio/log-viewer.git",
-                "reference": "ca84af049e944fe4a731b8a500246c7ffd65615e"
+                "reference": "2d4a741d17fe96d842ba4134663b0958162e72bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/ca84af049e944fe4a731b8a500246c7ffd65615e",
-                "reference": "ca84af049e944fe4a731b8a500246c7ffd65615e",
+                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/2d4a741d17fe96d842ba4134663b0958162e72bb",
+                "reference": "2d4a741d17fe96d842ba4134663b0958162e72bb",
                 "shasum": ""
             },
             "require": {
@@ -7881,7 +7881,7 @@
             ],
             "support": {
                 "issues": "https://github.com/opcodesio/log-viewer/issues",
-                "source": "https://github.com/opcodesio/log-viewer/tree/v3.1.10"
+                "source": "https://github.com/opcodesio/log-viewer/tree/v3.1.11"
             },
             "funding": [
                 {
@@ -7893,7 +7893,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-14T19:04:57+00:00"
+            "time": "2023-12-30T15:28:03+00:00"
         },
         {
             "name": "opcodesio/mail-parser",
