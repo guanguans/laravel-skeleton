@@ -16,7 +16,6 @@ trait ValidateStrictAll
     /**
      * Run the validation routine against the given validator.
      *
-     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function validateStrictAllWith(array|\Illuminate\Contracts\Validation\Validator $validator, ?Request $request = null): array

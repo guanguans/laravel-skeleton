@@ -91,25 +91,26 @@ class SchedulingEventMacro
 
                     $normalizedFilename = str($filename)
                         // ->replaceMatches([sprintf('/\%s/', DIRECTORY_SEPARATOR), '/\s+/'], ['-', '-'])
-                        ->replace([DIRECTORY_SEPARATOR, '\\', ' '], ['-', '-', '-']);
+                        ->replace([\DIRECTORY_SEPARATOR, '\\', ' '], ['-', '-', '-']);
 
                     return (
                         $dirname
                             ? str($dirname)
                             : str(storage_path('logs'))
-                                ->finish(DIRECTORY_SEPARATOR)
+                                ->finish(\DIRECTORY_SEPARATOR)
                                 ->append('schedules')
-                                ->finish(DIRECTORY_SEPARATOR)
+                                ->finish(\DIRECTORY_SEPARATOR)
                                 ->append($normalizedFilename)
                     )
-                        ->finish(DIRECTORY_SEPARATOR)
+                        ->finish(\DIRECTORY_SEPARATOR)
                         ->append($normalizedFilename)
                         ->when(
                             $suffixRule,
                             static fn (
                                 Stringable $stringable,
                                 string $suffixRule
-                            ) => $stringable->finish('-')->finish(date($suffixRule)))
+                            ) => $stringable->finish('-')->finish(date($suffixRule))
+                        )
                         ->append('.log')
                         ->toString();
                 },
@@ -121,7 +122,7 @@ class SchedulingEventMacro
             // dump($outputPath);
 
             return $this
-                ->before(function () use ($outputPath) {
+                ->before(function () use ($outputPath): void {
                     $singleLogPath = config('logging.channels.single.path');
                     $unsetSingleChannelHandler = function (): void {
                         unset($this->channels['single']);

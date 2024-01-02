@@ -96,7 +96,7 @@ abstract class AbstractRepository
     /**
      * Handle dynamic static method calls into the method.
      */
-    public function __call($method, $parameters): mixed
+    public function __call(mixed $method, mixed $parameters): mixed
     {
         // Check for scope method and call
         if (method_exists($this, $scope = 'scope'.ucfirst($method))) {

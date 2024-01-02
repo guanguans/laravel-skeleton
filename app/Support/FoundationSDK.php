@@ -46,22 +46,6 @@ abstract class FoundationSDK
     }
 
     /**
-     * ```php
-     * protected function validateConfig(array $config): array
-     * {
-     *     return $this->>validate($config, [
-     *         'http_options' => 'array',
-     *     ]);
-     * }
-     * ```.
-     *
-     * @return array The merged and validated options
-     *
-     * @throws \Illuminate\Validation\ValidationException laravel validation rules
-     */
-    abstract protected function validateConfig(array $config): array;
-
-    /**
      * @psalm-suppress UnusedClosureParam
      */
     public function ddRequestData(): static
@@ -114,6 +98,22 @@ abstract class FoundationSDK
             $request->stub($getStubCallbacks->call($this->http));
         });
     }
+
+    /**
+     * ```php
+     * protected function validateConfig(array $config): array
+     * {
+     *     return $this->>validate($config, [
+     *         'http_options' => 'array',
+     *     ]);
+     * }
+     * ```.
+     *
+     * @return array The merged and validated options
+     *
+     * @throws \Illuminate\Validation\ValidationException laravel validation rules
+     */
+    abstract protected function validateConfig(array $config): array;
 
     /**
      * ```php
