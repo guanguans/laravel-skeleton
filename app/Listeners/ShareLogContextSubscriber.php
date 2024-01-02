@@ -15,19 +15,19 @@ class ShareLogContextSubscriber
     public function subscribe(Dispatcher $dispatcher): array
     {
         return [
-            RouteMatched::class => static function (RouteMatched $routeMatched): void {
+            RouteMatched::class => static function (RouteMatched $event): void {
                 Log::shareContext([
-                    'action' => $routeMatched->route?->getActionName(),
+                    'action' => $event->route?->getActionName(),
                 ]);
             },
-            CommandStarting::class => static function (CommandStarting $commandStarting): void {
+            CommandStarting::class => static function (CommandStarting $event): void {
                 Log::shareContext([
-                    'command' => $commandStarting->command,
+                    'command' => $event->command ?? $event->input->getArguments()['command'] ?? 'default',
                 ]);
             },
-            ScheduledTaskStarting::class => static function (ScheduledTaskStarting $scheduledTaskStarting): void {
+            ScheduledTaskStarting::class => static function (ScheduledTaskStarting $event): void {
                 Log::shareContext([
-                    'command' => $scheduledTaskStarting->task->command ?: $scheduledTaskStarting->task->description,
+                    'command' => $event->task->command ?: $event->task->description ?: 'Closure',
                 ]);
             },
         ];
