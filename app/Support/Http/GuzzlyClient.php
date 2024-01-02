@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support\Http;
 
 use App\Support\Http\Handlers\StreamHandler;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
@@ -13,7 +14,7 @@ use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 
-class GuzzlyClient extends \GuzzleHttp\Client
+class GuzzlyClient extends Client
 {
     public function __construct(array $config = [])
     {

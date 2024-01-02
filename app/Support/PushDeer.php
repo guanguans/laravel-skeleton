@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use GuzzleHttp\Cookie\CookieJarInterface;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Utils;
@@ -56,7 +57,7 @@ class PushDeer extends FoundationSdk
                 'http_options.auth' => 'array|string|nullable',
                 'http_options.body' => 'string|resource|\Psr\Http\Message\StreamInterface',
                 'http_options.cert' => 'string|array',
-                'http_options.cookies' => \GuzzleHttp\Cookie\CookieJarInterface::class,
+                'http_options.cookies' => CookieJarInterface::class,
                 'http_options.connect_timeout' => 'numeric',
                 'http_options.debug' => 'bool|resource',
                 'http_options.decode_content' => 'string|bool',

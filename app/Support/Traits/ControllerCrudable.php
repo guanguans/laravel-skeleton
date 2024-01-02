@@ -7,8 +7,10 @@ namespace App\Support\Traits;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -62,7 +64,7 @@ trait ControllerCrudable
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|JsonResponse
+    public function store(Request $request): JsonResponse|Redirector|RedirectResponse
     {
         if ($request->ajax() || $request->wantsJson()) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
@@ -120,7 +122,7 @@ trait ControllerCrudable
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, mixed $id): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|JsonResponse
+    public function update(Request $request, mixed $id): JsonResponse|Redirector|RedirectResponse
     {
         /** @var \App\Http\Controllers\Controller $this */
         if ($this->isAjax($request)) {
@@ -148,7 +150,7 @@ trait ControllerCrudable
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, mixed $id): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|JsonResponse
+    public function destroy(Request $request, mixed $id): JsonResponse|Redirector|RedirectResponse
     {
         if ($request->has('with_trashed') && property_exists($this->modelClass, 'withTrashedForbidden')) {
             $model = $this->modelClass::withTrashed()->findOrFail($id);

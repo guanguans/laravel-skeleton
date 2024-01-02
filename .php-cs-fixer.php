@@ -15,11 +15,8 @@ $header = <<<'HEADER'
 
 $finder = Finder::create()
     ->in([
-        // __DIR__.'/app/Contracts',
-        // __DIR__.'/app/Macros',
         __DIR__.'/app/Models/Concerns',
         __DIR__.'/app/Support',
-        // __DIR__.'/app/Traits',
         // __DIR__.'/app',
         // __DIR__.'/config',
         // __DIR__.'/database',
@@ -315,7 +312,32 @@ return (new Config())
         ],
         'statement_indentation' => true,
         'yoda_style' => false,
-        'fully_qualified_strict_types' => false,
+        'fully_qualified_strict_types' => [
+            'import_symbols' => false,
+            'leading_backslash_in_global_namespace' => false,
+            'phpdoc_tags' => [
+                // 'param',
+                // 'phpstan-param',
+                // 'phpstan-property',
+                // 'phpstan-property-read',
+                // 'phpstan-property-write',
+                // 'phpstan-return',
+                // 'phpstan-var',
+                // 'property',
+                // 'property-read',
+                // 'property-write',
+                // 'psalm-param',
+                // 'psalm-property',
+                // 'psalm-property-read',
+                // 'psalm-property-write',
+                // 'psalm-return',
+                // 'psalm-var',
+                // 'return',
+                // 'see',
+                // 'throws',
+                // 'var',
+            ],
+        ],
 
         // https://github.com/kubawerlos/php-cs-fixer-custom-fixers
         PhpCsFixerCustomFixers\Fixer\CommentSurroundedBySpacesFixer::name() => true,
