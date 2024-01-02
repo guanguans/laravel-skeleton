@@ -59,6 +59,7 @@
         "rahul900day/laravel-console-spinner": "^1.1",
         "rennokki/laravel-eloquent-query-cache": "^3.4",
         "richardstyles/eloquent-aes": "^2.3",
+        "skywarth/chaotic-schedule": "^1.0",
         "spatie/fork": "^1.2",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-backup": "^8.4",

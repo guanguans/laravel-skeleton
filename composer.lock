@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72b477e163aaf404f571fcfafe74073d",
+    "content-hash": "e737a7bf6432d79e379fb9ec4a3d7c52",
     "packages": [
         {
             "name": "amphp/amp",
@@ -8255,6 +8255,53 @@
             "time": "2020-10-15T08:29:30+00:00"
         },
         {
+            "name": "paragonie/seedspring",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/seedspring.git",
+                "reference": "e7b36ac18069f5374500dfe863475626a777ed5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/seedspring/zipball/e7b36ac18069f5374500dfe863475626a777ed5c",
+                "reference": "e7b36ac18069f5374500dfe863475626a777ed5c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "paragonie/constant_time_encoding": "^1|^2",
+                "paragonie/random_compat": ">=2",
+                "php": ">= 5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5|^6|^7|^8|^9",
+                "vimeo/psalm": "^1|^2|^3|^4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ParagonIE\\SeedSpring\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "info@paragonie.com"
+                }
+            ],
+            "description": "Seeded, deterministic random number generator",
+            "support": {
+                "issues": "https://github.com/paragonie/seedspring/issues",
+                "source": "https://github.com/paragonie/seedspring/tree/v1.2.0"
+            },
+            "time": "2022-05-12T04:03:57+00:00"
+        },
+        {
             "name": "paragonie/sodium_compat",
             "version": "v1.20.0",
             "source": {
@@ -10465,6 +10512,71 @@
                 }
             ],
             "time": "2023-02-06T01:20:37+00:00"
+        },
+        {
+            "name": "skywarth/chaotic-schedule",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/skywarth/chaotic-schedule.git",
+                "reference": "fb55a98fd0ee00b67c956f2f2c52ec317151718f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/skywarth/chaotic-schedule/zipball/fb55a98fd0ee00b67c956f2f2c52ec317151718f",
+                "reference": "fb55a98fd0ee00b67c956f2f2c52ec317151718f",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/seedspring": "^1.2",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.28",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "laravel-package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Skywarth\\ChaoticSchedule\\Providers\\RNGFactoryServiceProvider",
+                        "Skywarth\\ChaoticSchedule\\Providers\\SeedGenerationServiceProvider",
+                        "Skywarth\\ChaoticSchedule\\Providers\\ChaoticScheduleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Skywarth\\ChaoticSchedule\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "skywarth",
+                    "email": "yigitk.ersoy@gmail.com"
+                }
+            ],
+            "description": "Randomize scheduled command execution time and date intervals",
+            "keywords": [
+                "PRNG",
+                "command",
+                "laravel",
+                "laravel-random",
+                "random",
+                "random-frequency",
+                "random-interval",
+                "random-schedule",
+                "schedule"
+            ],
+            "support": {
+                "issues": "https://github.com/skywarth/chaotic-schedule/issues",
+                "source": "https://github.com/skywarth/chaotic-schedule/tree/v1.0.2"
+            },
+            "time": "2023-12-26T23:17:49+00:00"
         },
         {
             "name": "spatie/data-transfer-object",
