@@ -17190,16 +17190,16 @@
         },
         {
             "name": "guanguans/ai-commit",
-            "version": "1.8.6",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "5a21789cc87831484909c8fde0d08e3fd3e69674"
+                "reference": "d951f2c596411c7aa171b7ce56fc48e650abb3b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/5a21789cc87831484909c8fde0d08e3fd3e69674",
-                "reference": "5a21789cc87831484909c8fde0d08e3fd3e69674",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/d951f2c596411c7aa171b7ce56fc48e650abb3b1",
+                "reference": "d951f2c596411c7aa171b7ce56fc48e650abb3b1",
                 "shasum": ""
             },
             "require": {
@@ -17219,7 +17219,7 @@
                 "laravel-zero/phar-updater": "^1.1",
                 "mockery/mockery": "^1.6",
                 "pestphp/pest": "^1.23",
-                "php-mock/php-mock-phpunit": "^2.8"
+                "php-mock/php-mock-phpunit": "^2.9"
             },
             "bin": [
                 "builds/ai-commit"
@@ -17304,7 +17304,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2023-11-16T09:44:02+00:00"
+            "time": "2024-01-02T08:34:30+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
