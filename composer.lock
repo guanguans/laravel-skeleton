@@ -17190,16 +17190,16 @@
         },
         {
             "name": "guanguans/ai-commit",
-            "version": "1.9.1",
+            "version": "1.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "d951f2c596411c7aa171b7ce56fc48e650abb3b1"
+                "reference": "aee0b4bd05235301ee984f755a03795f43531b2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/d951f2c596411c7aa171b7ce56fc48e650abb3b1",
-                "reference": "d951f2c596411c7aa171b7ce56fc48e650abb3b1",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/aee0b4bd05235301ee984f755a03795f43531b2b",
+                "reference": "aee0b4bd05235301ee984f755a03795f43531b2b",
                 "shasum": ""
             },
             "require": {
@@ -17271,7 +17271,7 @@
                     "role": "developer"
                 }
             ],
-            "description": "Automagically generate conventional git commit messages with AI. - 使用 AI 自动生成约定式 git 提交信息。",
+            "description": "Automagically generate conventional git commit message with AI. - 使用 AI 自动生成约定式 git 提交信息。",
             "homepage": "https://github.com/guanguans/ai-commit",
             "keywords": [
                 "ChatGpt",
@@ -17304,7 +17304,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-01-02T08:34:30+00:00"
+            "time": "2024-01-03T09:44:57+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
