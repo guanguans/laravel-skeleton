@@ -13,6 +13,14 @@ use Illuminate\Support\Collection;
  */
 class CollectionMacro
 {
+    public static function makeFromJson(): callable
+    {
+        return static function (string $json, int $depth = 512, int $options = 0): Collection {
+            /** @noinspection JsonEncodingApiUsageInspection */
+            return static::make(json_decode($json, true, $depth, $options));
+        };
+    }
+
     public function pluckToArray(): callable
     {
         return fn ($value, $key = null): array => $this->pluck($value, $key)->toArray();
