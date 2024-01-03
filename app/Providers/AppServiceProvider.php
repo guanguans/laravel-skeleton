@@ -416,6 +416,7 @@ class AppServiceProvider extends ServiceProvider
         ])->when(
             ! $this->app->runningInConsole(),
             static fn (Collection $context): Collection => $context->merge([
+                'user-id' => request()->user()?->id,
                 'url' => request()->url(),
                 'ip' => request()->ip(),
                 'method' => request()->method(),
