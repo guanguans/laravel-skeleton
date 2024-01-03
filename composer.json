@@ -216,7 +216,9 @@
         "cghooks-ignore": "[ ! -f \"./vendor/bin/cghooks\" ] && exit 0 || php ./vendor/bin/cghooks --ansi -v",
         "checks": [
             "@composer-validate",
-            "@pint-test"
+            "@pint-test",
+            "@phpstan",
+            "@rector-dry-run"
         ],
         "composer-bin-all-update": "@composer bin all update --ansi -v",
         "composer-check-platform-reqs": "@composer check-platform-reqs --ansi -v",

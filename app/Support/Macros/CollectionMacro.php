@@ -15,10 +15,9 @@ class CollectionMacro
 {
     public static function makeFromJson(): callable
     {
-        return static function (string $json, int $depth = 512, int $options = 0): Collection {
+        return static fn (string $json, int $depth = 512, int $options = 0): Collection =>
             /** @noinspection JsonEncodingApiUsageInspection */
-            return static::make(json_decode($json, true, $depth, $options));
-        };
+            static::make(json_decode($json, true, $depth, $options));
     }
 
     public function pluckToArray(): callable

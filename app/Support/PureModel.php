@@ -392,7 +392,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Convert the model instance to JSON.
      */
-    public function toJson($options = 0): string
+    public function toJson(mixed $options = 0): string
     {
         return json_encode($this->jsonSerialize(), $options);
     }

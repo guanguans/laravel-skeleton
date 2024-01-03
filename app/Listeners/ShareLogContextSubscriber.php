@@ -27,7 +27,7 @@ class ShareLogContextSubscriber
             },
             ScheduledTaskStarting::class => static function (ScheduledTaskStarting $event): void {
                 Log::shareContext([
-                    'command' => $event->task->command ?: $event->task->description ?: 'Closure',
+                    'command' => ($event->task->command ?: $event->task->description) ?: 'Closure',
                 ]);
             },
         ];
