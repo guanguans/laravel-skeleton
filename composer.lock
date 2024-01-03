@@ -2876,16 +2876,16 @@
         },
         {
             "name": "elao/enum",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Elao/PhpEnums.git",
-                "reference": "d555de9dcffc36db5fe18d2abd528e380874e59b"
+                "reference": "a64a1fa1bdb09ffa68cb463452fd6a8d43067cda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/d555de9dcffc36db5fe18d2abd528e380874e59b",
-                "reference": "d555de9dcffc36db5fe18d2abd528e380874e59b",
+                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/a64a1fa1bdb09ffa68cb463452fd6a8d43067cda",
+                "reference": "a64a1fa1bdb09ffa68cb463452fd6a8d43067cda",
                 "shasum": ""
             },
             "require": {
@@ -2907,6 +2907,7 @@
                 "symfony/framework-bundle": "^5.4|^6.0",
                 "symfony/http-kernel": "^5.4.2|^6.0.1",
                 "symfony/phpunit-bridge": "^5.4|^6.0",
+                "symfony/translation": "^5.4|^6.0",
                 "symfony/var-dumper": "^5.4|^6.0",
                 "symfony/yaml": "^5.4|^6.0"
             },
@@ -2948,7 +2949,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Elao/PhpEnums/issues",
-                "source": "https://github.com/Elao/PhpEnums/tree/v2.2.0"
+                "source": "https://github.com/Elao/PhpEnums/tree/v2.3.0"
             },
             "funding": [
                 {
@@ -2956,7 +2957,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-24T15:08:02+00:00"
+            "time": "2024-01-03T14:13:19+00:00"
         },
         {
             "name": "emreyarligan/enum-concern",
