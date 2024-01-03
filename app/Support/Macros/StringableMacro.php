@@ -12,6 +12,16 @@ use Illuminate\Support\Stringable;
  */
 class StringableMacro
 {
+    /**
+     * @psalm-suppress InaccessibleProperty
+     */
+    public function jsonValidate(): \Closure
+    {
+        return function (int $depth = 512, int $flags = 0): bool {
+            return Str::jsonValidate($this->value, $depth, $flags);
+        };
+    }
+
     public function appendIf(): callable
     {
         return fn ($suffix) => new Stringable(
