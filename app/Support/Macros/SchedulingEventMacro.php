@@ -23,7 +23,7 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, 'Y-m-d', $dirname);
+        ): Event => $this->userAppendOutputTo($filename, sprintf('daily-%s', date('Y-m-d')), $dirname);
     }
 
     public function userAppendOutputToWeekly(): callable
@@ -31,7 +31,7 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, 'Y-W', $dirname);
+        ): Event => $this->userAppendOutputTo($filename, sprintf('weekly-%s', date('Y-W')), $dirname);
     }
 
     public function userAppendOutputToMonthly(): callable
@@ -39,7 +39,7 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, 'Y-m', $dirname);
+        ): Event => $this->userAppendOutputTo($filename, sprintf('monthly-%s', date('Y-m')), $dirname);
     }
 
     public function userAppendOutputToQuarterly(): callable
@@ -47,7 +47,11 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, sprintf('Y-%s', now()->quarter), $dirname);
+        ): Event => $this->userAppendOutputTo(
+            $filename,
+            sprintf('quarterly-%s-%s', date('Y'), now()->quarter),
+            $dirname
+        );
     }
 
     public function userAppendOutputToYearly(): callable
@@ -55,14 +59,14 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, 'Y', $dirname);
+        ): Event => $this->userAppendOutputTo($filename, sprintf('yearly-%s', date('Y')), $dirname);
     }
 
     public function userAppendOutputTo(): callable
     {
-        return function (?string $filename = null, ?string $suffixRule = null, ?string $dirname = null): Event {
+        return function (?string $filename = null, ?string $suffix = null, ?string $dirname = null): Event {
             $outputPath = value(
-                function (?string $filename, ?string $suffixRule, ?string $dirname): string {
+                function (?string $filename, ?string $suffix, ?string $dirname): string {
                     $filename = value(
                         function (?string $filename): string {
                             if ($filename) {
@@ -77,7 +81,7 @@ class SchedulingEventMacro
                             }
 
                             /** @see \Illuminate\Console\Scheduling\CallbackEvent::withoutOverlapping */
-                            if ($this->description === null) {
+                            if (empty($this->description)) {
                                 throw new \LogicException(
                                     "Please incoming the \$filename parameter, Or use the 'name' method before 'userAppendOutputTo'."
                                 );
@@ -89,9 +93,7 @@ class SchedulingEventMacro
                         $filename
                     );
 
-                    $normalizedFilename = str($filename)
-                        // ->replaceMatches([sprintf('/\%s/', DIRECTORY_SEPARATOR), '/\s+/'], ['-', '-'])
-                        ->replace([\DIRECTORY_SEPARATOR, '\\', ' '], ['-', '-', '-']);
+                    $normalizedFilename = str($filename)->replace([\DIRECTORY_SEPARATOR, '\\', ' '], ['-', '-', '-']);
 
                     return (
                         $dirname
@@ -105,17 +107,17 @@ class SchedulingEventMacro
                         ->finish(\DIRECTORY_SEPARATOR)
                         ->append($normalizedFilename)
                         ->when(
-                            $suffixRule,
+                            $suffix,
                             static fn (
                                 Stringable $stringable,
-                                string $suffixRule
-                            ) => $stringable->finish('-')->finish(date($suffixRule))
+                                string $suffix
+                            ) => $stringable->finish('-')->finish($suffix)
                         )
                         ->append('.log')
                         ->toString();
                 },
                 $filename,
-                $suffixRule,
+                $suffix,
                 $dirname,
             );
 
