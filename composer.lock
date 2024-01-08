@@ -11238,16 +11238,16 @@
         },
         {
             "name": "spatie/laravel-health",
-            "version": "1.23.8",
+            "version": "1.23.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-health.git",
-                "reference": "f0219fa7fa89c55ba65f387e792304732ca2a797"
+                "reference": "223e12d73b9b19ac89bcd58888a48855e3bfbb82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/f0219fa7fa89c55ba65f387e792304732ca2a797",
-                "reference": "f0219fa7fa89c55ba65f387e792304732ca2a797",
+                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/223e12d73b9b19ac89bcd58888a48855e3bfbb82",
+                "reference": "223e12d73b9b19ac89bcd58888a48855e3bfbb82",
                 "shasum": ""
             },
             "require": {
@@ -11266,10 +11266,10 @@
                 "symfony/process": "^5.4|^6.0"
             },
             "require-dev": {
+                "larastan/larastan": "^1.0.3|^2.4",
                 "laravel/horizon": "^5.9.10",
                 "laravel/slack-notification-channel": "^2.4",
                 "nunomaduro/collision": "^5.10|^6.2.1|^6.1",
-                "nunomaduro/larastan": "^1.0.3|^2.4",
                 "orchestra/testbench": "^6.23|^7.6|^8.0",
                 "pestphp/pest": "^1.21.3",
                 "pestphp/pest-plugin-laravel": "^1.2",
@@ -11318,7 +11318,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-health/tree/1.23.8"
+                "source": "https://github.com/spatie/laravel-health/tree/1.23.9"
             },
             "funding": [
                 {
@@ -11326,7 +11326,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-05T17:30:53+00:00"
+            "time": "2024-01-07T22:51:50+00:00"
         },
         {
             "name": "spatie/laravel-medialibrary",
