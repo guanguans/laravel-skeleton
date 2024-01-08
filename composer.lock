@@ -17310,16 +17310,16 @@
         },
         {
             "name": "guanguans/laravel-soar",
-            "version": "3.9.1",
+            "version": "3.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-soar.git",
-                "reference": "4777a8e7d9fd6b674076b86776c7d36c97784695"
+                "reference": "c30e1ebe0a11c5e6f1fadc30199143c7c7a1ced3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/4777a8e7d9fd6b674076b86776c7d36c97784695",
-                "reference": "4777a8e7d9fd6b674076b86776c7d36c97784695",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/c30e1ebe0a11c5e6f1fadc30199143c7c7a1ced3",
+                "reference": "c30e1ebe0a11c5e6f1fadc30199143c7c7a1ced3",
                 "shasum": ""
             },
             "require": {
@@ -17443,7 +17443,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-01-04T03:22:33+00:00"
+            "time": "2024-01-06T16:55:13+00:00"
         },
         {
             "name": "guanguans/soar-php",
