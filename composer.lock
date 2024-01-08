@@ -12153,16 +12153,16 @@
         },
         {
             "name": "spatie/laravel-query-builder",
-            "version": "5.6.0",
+            "version": "5.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-query-builder.git",
-                "reference": "a91a348f2d205026ac726850c969e4da15061aa9"
+                "reference": "ff61a9ea32c5b55cbe63de8e3c6e35a201e6b746"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/a91a348f2d205026ac726850c969e4da15061aa9",
-                "reference": "a91a348f2d205026ac726850c969e4da15061aa9",
+                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/ff61a9ea32c5b55cbe63de8e3c6e35a201e6b746",
+                "reference": "ff61a9ea32c5b55cbe63de8e3c6e35a201e6b746",
                 "shasum": ""
             },
             "require": {
@@ -12223,7 +12223,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-10-05T10:21:47+00:00"
+            "time": "2024-01-08T09:57:13+00:00"
         },
         {
             "name": "spatie/laravel-responsecache",
