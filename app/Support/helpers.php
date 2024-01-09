@@ -99,7 +99,7 @@ if (! function_exists('get_throwables')) {
     function get_throwables(Throwable $throwable): array
     {
         $throwables = [];
-        while ($throwable instanceof \Throwable) {
+        while ($throwable instanceof Throwable) {
             $throwables[] = $throwable;
             $throwable = $throwable->getPrevious();
         }

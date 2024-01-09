@@ -8,7 +8,7 @@ use Appstract\Opcache\CreatesRequest;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
-use Illuminate\Support\Facades\Crypt as Crypt;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
 class OpcacheUrlCommand extends Command
