@@ -3227,16 +3227,16 @@
         },
         {
             "name": "elao/enum",
-            "version": "v2.3.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Elao/PhpEnums.git",
-                "reference": "a64a1fa1bdb09ffa68cb463452fd6a8d43067cda"
+                "reference": "bd65e9edc07d9a60c684369ee656df20b16ec594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/a64a1fa1bdb09ffa68cb463452fd6a8d43067cda",
-                "reference": "a64a1fa1bdb09ffa68cb463452fd6a8d43067cda",
+                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/bd65e9edc07d9a60c684369ee656df20b16ec594",
+                "reference": "bd65e9edc07d9a60c684369ee656df20b16ec594",
                 "shasum": ""
             },
             "require": {
@@ -3250,17 +3250,17 @@
                 "ext-pdo_sqlite": "*",
                 "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-symfony": "^1.2",
-                "symfony/browser-kit": "^5.4|^6.0",
-                "symfony/config": "^5.4|^6.0",
-                "symfony/dependency-injection": "^5.4.2|^6.0.1",
-                "symfony/filesystem": "^5.4|^6.0",
-                "symfony/form": "^5.4|^6.0",
-                "symfony/framework-bundle": "^5.4|^6.0",
-                "symfony/http-kernel": "^5.4.2|^6.0.1",
-                "symfony/phpunit-bridge": "^5.4|^6.0",
-                "symfony/translation": "^5.4|^6.0",
-                "symfony/var-dumper": "^5.4|^6.0",
-                "symfony/yaml": "^5.4|^6.0"
+                "symfony/browser-kit": "^5.4|^6.3|^7.0",
+                "symfony/config": "^5.4|^6.3|^7.0",
+                "symfony/dependency-injection": "^5.4.2|^6.3|^7.0",
+                "symfony/filesystem": "^5.4|^6.3|^7.0",
+                "symfony/form": "^5.4|^6.3|^7.0",
+                "symfony/framework-bundle": "^5.4|^6.3|^7.0",
+                "symfony/http-kernel": "^5.4.2|^6.3|^7.0",
+                "symfony/phpunit-bridge": "^5.4|^6.3|^7.0",
+                "symfony/translation": "^5.4|^6.3|^7.0",
+                "symfony/var-dumper": "^5.4|^6.3|^7.0",
+                "symfony/yaml": "^5.4|^6.3|^7.0"
             },
             "type": "library",
             "extra": {
@@ -3300,7 +3300,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Elao/PhpEnums/issues",
-                "source": "https://github.com/Elao/PhpEnums/tree/v2.3.0"
+                "source": "https://github.com/Elao/PhpEnums/tree/v2.4.0"
             },
             "funding": [
                 {
@@ -3308,7 +3308,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-03T14:13:19+00:00"
+            "time": "2024-01-08T09:49:50+00:00"
         },
         {
             "name": "emreyarligan/enum-concern",
