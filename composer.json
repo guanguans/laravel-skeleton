@@ -32,6 +32,7 @@
         "guanguans/laravel-dump-sql": "^2.3",
         "guanguans/laravel-exception-notify": "^3.5",
         "guzzlehttp/guzzle": "^7.8",
+        "hamidrezaniazi/pecs": "^1.0",
         "hammerstone/fast-paginate": "^1.0",
         "hammerstone/laravel-pseudo-daemon": "^1.1",
         "jasny/sso": "^0.5",
