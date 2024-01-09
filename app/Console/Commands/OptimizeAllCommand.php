@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Process;
 use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
-use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ExecutableFinder;
+use Symfony\Component\Process\PhpExecutableFinder;
 
 class OptimizeAllCommand extends Command
 {
@@ -42,16 +44,17 @@ class OptimizeAllCommand extends Command
             $this->output->error($directoryNotFoundException->getMessage());
         }
 
-        Process::fromShellCommandline(sprintf(
-            '%s dump-autoload --no-interaction --optimize --ansi -v',
-            match ($this->laravel->environment()) {
-                'local' => 'composer',
-                'testing' => '/usr/bin/php8.1 /usr/local/bin/composer2',
-                'production' => 'composer2',
-            }
-        ))->mustRun(function (string $type, string $line): void {
+        $command = sprintf(
+            '%s %s dump-autoload --no-interaction --optimize --ansi -v',
+            (new ExecutableFinder())->find('php8.1') ?: (new PhpExecutableFinder)->find(),
+            (new ExecutableFinder())->find('composer2') ?: (new ExecutableFinder())->find('composer'),
+        );
+
+        $this->output->info("Running [$command] ...");
+
+        Process::run($command, function (string $type, string $line): void {
             $this->output->write($line);
-        });
+        })->throw();
 
         $this->output->success('All optimized.');
     }
