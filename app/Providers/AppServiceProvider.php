@@ -42,6 +42,7 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
@@ -219,7 +220,6 @@ class AppServiceProvider extends ServiceProvider
             Model::shouldBeStrict(); // Eloquent 严格模式
             // Model::preventLazyLoading(); // 预防 N+1 查询问题
             // Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
-            // Model::preventsAccessingMissingAttributes(); // Triggers MissingAttributeException
             // Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
             // DB::handleExceedingCumulativeQueryDuration();
             // Model::unguard();
