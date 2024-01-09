@@ -411,12 +411,15 @@ class FluentAssert
      * @noinspection DebugFunctionUsageInspection
      * @noinspection PhpVoidFunctionResultUsedInspection
      */
-    final public static function dumpDocblock(): void
+    final public static function updateDocComment(): void
     {
         $methods = (new \ReflectionClass(Assert::class))->getMethods(\ReflectionMethod::IS_PUBLIC);
-        $methods = array_filter($methods, static fn (\ReflectionMethod $method): bool => $method->isStatic() && ! str_starts_with($method->getName(), '__'));
+        $methods = array_filter(
+            $methods,
+            static fn (\ReflectionMethod $method): bool => $method->isStatic() && ! str_starts_with($method->getName(), '__')
+        );
 
-        $docblock = array_map(static function (\ReflectionMethod $method): string {
+        $rawDocComment = array_map(static function (\ReflectionMethod $method): string {
             $parameters = $method->getParameters();
             unset($parameters[0]);
 
@@ -443,16 +446,25 @@ class FluentAssert
             return sprintf(' * @method self %s(%s)', $method->getName(), implode(', ', $arguments));
         }, $methods);
 
-        echo sprintf(
-            <<<'docblock'
+        $docComment = sprintf(
+            <<<'docComment'
                 /**
                 %s
                  *
                  * @mixin \Webmozart\Assert\Assert
                  */
-                docblock
+                docComment
             ,
-            implode(PHP_EOL, $docblock)
+            implode(PHP_EOL, $rawDocComment)
         );
+
+        file_put_contents(
+            __FILE__,
+            str_replace((new \ReflectionClass(static::class))->getDocComment(), $docComment, file_get_contents(__FILE__))
+        );
+
+        echo 'Done.';
+
+        exit(0);
     }
 }

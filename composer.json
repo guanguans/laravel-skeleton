@@ -267,6 +267,7 @@
         "test-coverage": "@pest-coverage",
         "test-migrate-configuration": "@pest-migrate-configuration",
         "tlint": "@php ./vendor/bin/tlint lint --diff --ansi -v",
-        "tlint-format": "@php ./vendor/bin/tlint format --diff --ansi -v"
+        "tlint-format": "@php ./vendor/bin/tlint format --diff --ansi -v",
+        "update-fluent-assert-doc-comment": "App\\Support\\FluentAssert::updateDocComment"
     }
 }
