@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4ef2e8743a19755e207db9212942036",
+    "content-hash": "953eaab642fc745eed3698ed1ca60883",
     "packages": [
         {
             "name": "amphp/amp",
@@ -8965,6 +8965,62 @@
                 "source": "https://github.com/paragonie/sodium_compat/tree/v1.20.0"
             },
             "time": "2023-04-30T00:54:53+00:00"
+        },
+        {
+            "name": "php-collective/decimal-object",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-collective/decimal-object.git",
+                "reference": "45892c18fd8ef158741c8ac32ab4118a48dc8b5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-collective/decimal-object/zipball/45892c18fd8ef158741c8ac32ab4118a48dc8b5e",
+                "reference": "45892c18fd8ef158741c8ac32ab4118a48dc8b5e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-json": "*",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "php-collective/code-sniffer": "^0.2.1",
+                "phpstan/phpstan": "^1.0.0",
+                "phpunit/phpunit": "^10.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpCollective\\DecimalObject\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "The PHP Collective",
+                    "homepage": "https://github.com/php-collective"
+                },
+                {
+                    "name": "Spryker Systems GmbH",
+                    "homepage": "https://spryker.com"
+                }
+            ],
+            "description": "PHP decimal handling as value object",
+            "support": {
+                "issues": "https://github.com/php-collective/decimal-object/issues",
+                "source": "https://github.com/php-collective/decimal-object/tree/1.2.1"
+            },
+            "time": "2023-12-07T13:56:17+00:00"
         },
         {
             "name": "php-http/discovery",

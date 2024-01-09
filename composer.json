@@ -52,6 +52,7 @@
         "nyholm/psr7": "^1.8",
         "opcodesio/log-viewer": "^3.1",
         "overtrue/laravel-query-logger": "^3.1",
+        "php-collective/decimal-object": "^1.2",
         "php-open-source-saver/jwt-auth": "^2.1",
         "phpyh/lru-memoizer": "^0.2",
         "predis/predis": "^2.2",
