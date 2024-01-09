@@ -48,6 +48,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
@@ -149,8 +150,7 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
-            $this->app->setLocale($locale = config('app.locale'));
-            Carbon::setLocale($locale);
+            $this->setLocales();
             Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
             // JsonResource::wrap('data');
             JsonResource::withoutWrapping();
@@ -194,8 +194,8 @@ class AppServiceProvider extends ServiceProvider
             });
         });
 
-        $this->whenever(request()?->user()?->locale, static function (self $serviceProvider, $locale): void {
-            $serviceProvider->app->setLocale($locale);
+        $this->whenever(request()?->user()?->locale, function (self $serviceProvider, $locale): void {
+            $this->setLocales($locale);
         });
 
         $this->whenever($this->app->isProduction(), static function (): void {
@@ -402,6 +402,13 @@ class AppServiceProvider extends ServiceProvider
         //             $event->connections
         //         ));
         // });
+    }
+
+    protected function setLocales(?string $locale = null): void
+    {
+        $locale and $this->app->setLocale($locale);
+        Number::useLocale($this->app->getLocale());
+        Carbon::setLocale($this->app->getLocale());
     }
 
     /**
