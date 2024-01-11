@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f2c67527d3f754ed4d5db5a82cfa300",
+    "content-hash": "4748b01404a9cfead52ac40547c4fbc4",
     "packages": [
         {
             "name": "amphp/amp",
@@ -19391,16 +19391,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "14.1.5",
+            "version": "14.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "422cab5cf4490a10cfa3ca2775d075feabfaa9e1"
+                "reference": "d9e7ec373c1c38c635602dffcdfc9dcdea8be7d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/422cab5cf4490a10cfa3ca2775d075feabfaa9e1",
-                "reference": "422cab5cf4490a10cfa3ca2775d075feabfaa9e1",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/d9e7ec373c1c38c635602dffcdfc9dcdea8be7d7",
+                "reference": "d9e7ec373c1c38c635602dffcdfc9dcdea8be7d7",
                 "shasum": ""
             },
             "require": {
@@ -19447,7 +19447,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-01-03T02:03:55+00:00"
+            "time": "2024-01-10T07:17:08+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -22011,12 +22011,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "b3fcb6d7942e8ad987f8cccc11bb2ba496789ce4"
+                "reference": "81ad497391b9fc55e18be0c94bf2a288f231630b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/b3fcb6d7942e8ad987f8cccc11bb2ba496789ce4",
-                "reference": "b3fcb6d7942e8ad987f8cccc11bb2ba496789ce4",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/81ad497391b9fc55e18be0c94bf2a288f231630b",
+                "reference": "81ad497391b9fc55e18be0c94bf2a288f231630b",
                 "shasum": ""
             },
             "conflict": {
@@ -22730,7 +22730,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-09T18:04:23+00:00"
+            "time": "2024-01-11T00:14:53+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
