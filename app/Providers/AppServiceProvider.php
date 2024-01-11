@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
+use App\Models\PersonalAccessToken;
 use App\Rules\Rule;
 use App\Support\Discover;
 use App\Support\Macros\BlueprintMacro;
@@ -57,6 +58,7 @@ use Illuminate\View\View;
 use KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider;
 use LaracraftTech\LaravelSchemaRules\LaravelSchemaRulesServiceProvider;
 use Laravel\Sail\SailServiceProvider;
+use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -160,6 +162,7 @@ class AppServiceProvider extends ServiceProvider
             // Paginator::defaultView('pagination::bulma');
             // Paginator::defaultSimpleView('pagination::simple-bulma');
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
+            // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
             $this->registerMacros();
             $this->extendValidator();
             $this->extendView();
