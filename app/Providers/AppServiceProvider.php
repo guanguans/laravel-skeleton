@@ -417,9 +417,11 @@ class AppServiceProvider extends ServiceProvider
     protected function getSharedLogContext(): array
     {
         return collect([
-            self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
+            'php-version' => PHP_VERSION,
+            'php-interface' => \PHP_SAPI,
+            'laravel-version' => $this->app->version(),
             'running-in-console' => $this->app->runningInConsole(),
-            'interface' => \PHP_SAPI,
+            self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
         ])->when(
             ! $this->app->runningInConsole(),
             static fn (Collection $context): Collection => $context->merge([
