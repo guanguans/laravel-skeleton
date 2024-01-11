@@ -105,7 +105,7 @@ abstract class FoundationSDK
      * ```php
      * protected function validateConfig(array $config): array
      * {
-     *     return $this->>validate($config, [
+     *     return $this->validate($config, [
      *         'http_options' => 'array',
      *     ]);
      * }
@@ -117,17 +117,6 @@ abstract class FoundationSDK
      */
     abstract protected function validateConfig(array $config): array;
 
-    /**
-     * ```php
-     * protected function buildPendingRequest(array $config): PendingRequest
-     * {
-     *     return Http::withOptions($config['http_options'])
-     *         ->baseUrl($config['baseUrl'])
-     *         ->asJson()
-     *         ->withMiddleware($this->buildLogMiddleware());
-     * }
-     * ```.
-     */
     protected function buildDefaultPendingRequest(array $config): PendingRequest
     {
         return $this
