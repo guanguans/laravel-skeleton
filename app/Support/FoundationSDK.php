@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -130,6 +132,12 @@ abstract class FoundationSDK
     {
         return $this
             ->http
+            ->withMiddleware(Middleware::mapRequest(
+                static fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString('m'))
+            ))
+            ->withMiddleware(Middleware::mapResponse(
+                static fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString('m'))
+            ))
             ->withHeader(AppServiceProvider::REQUEST_ID_NAME, app(AppServiceProvider::REQUEST_ID_NAME))
             ->withUserAgent(static::userAgent());
     }
