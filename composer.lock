@@ -6152,16 +6152,16 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.0.0-beta8",
+            "version": "v1.0.0-beta9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "32fb030ebf9679a30c373cada2905568d3cf818e"
+                "reference": "005e38e74ec776a5ced3dfeef0d7e708fb487ee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/32fb030ebf9679a30c373cada2905568d3cf818e",
-                "reference": "32fb030ebf9679a30c373cada2905568d3cf818e",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/005e38e74ec776a5ced3dfeef0d7e708fb487ee9",
+                "reference": "005e38e74ec776a5ced3dfeef0d7e708fb487ee9",
                 "shasum": ""
             },
             "require": {
@@ -6234,7 +6234,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2023-12-27T14:15:20+00:00"
+            "time": "2024-01-12T09:43:14+00:00"
         },
         {
             "name": "laravel/sanctum",
