@@ -72,7 +72,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
 
         // Convert the base_uri to a UriInterface
         if (isset($config['base_uri'])) {
-            $config['base_uri'] = \GuzzleHttp\Psr7\Utils::uriFor($config['base_uri']);
+            $config['base_uri'] = Psr7\Utils::uriFor($config['base_uri']);
         }
 
         $this->configureDefaults($config);
