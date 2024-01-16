@@ -6019,33 +6019,33 @@
         },
         {
             "name": "laravel/pennant",
-            "version": "v1.5.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pennant.git",
-                "reference": "6464d2aeb6cd8d1ad493b6cb101cdea552451f67"
+                "reference": "c1c49cbac1a50efe31484f504b7dbfefc502830a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pennant/zipball/6464d2aeb6cd8d1ad493b6cb101cdea552451f67",
-                "reference": "6464d2aeb6cd8d1ad493b6cb101cdea552451f67",
+                "url": "https://api.github.com/repos/laravel/pennant/zipball/c1c49cbac1a50efe31484f504b7dbfefc502830a",
+                "reference": "c1c49cbac1a50efe31484f504b7dbfefc502830a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^10.0",
-                "illuminate/container": "^10.0",
-                "illuminate/contracts": "^10.0",
-                "illuminate/database": "^10.0",
-                "illuminate/queue": "^10.0",
-                "illuminate/support": "^10.0",
+                "illuminate/console": "^10.0|^11.0",
+                "illuminate/container": "^10.0|^11.0",
+                "illuminate/contracts": "^10.0|^11.0",
+                "illuminate/database": "^10.0|^11.0",
+                "illuminate/queue": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
                 "php": "^8.1",
-                "symfony/finder": "^6.0"
+                "symfony/finder": "^6.0|^7.0"
             },
             "require-dev": {
-                "laravel/octane": "^1.4",
-                "orchestra/testbench": "^8.0",
+                "laravel/octane": "^1.4|^2.0",
+                "orchestra/testbench": "^8.0|^9.0",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.0"
+                "phpunit/phpunit": "^9.0|^10.4"
             },
             "type": "library",
             "extra": {
@@ -6091,7 +6091,7 @@
                 "issues": "https://github.com/laravel/pennant/issues",
                 "source": "https://github.com/laravel/pennant"
             },
-            "time": "2023-12-14T15:27:11+00:00"
+            "time": "2024-01-15T16:44:04+00:00"
         },
         {
             "name": "laravel/prompts",
