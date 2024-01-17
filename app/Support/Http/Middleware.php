@@ -57,7 +57,7 @@ final class Middleware
      * Middleware that throws exceptions for 4xx or 5xx responses when the
      * "http_errors" request option is set to true.
      *
-     * @param  null|BodySummarizerInterface  $bodySummarizer the body summarizer to use in exception messages
+     * @param  null|BodySummarizerInterface  $bodySummarizer  the body summarizer to use in exception messages
      * @return callable(callable): callable returns a function that accepts the next handler
      */
     public static function httpErrors(?BodySummarizerInterface $bodySummarizer = null): callable
@@ -83,7 +83,7 @@ final class Middleware
     /**
      * Middleware that pushes history data to an ArrayAccess container.
      *
-     * @param  array|\ArrayAccess<int, array>  $container container to hold the history (by reference)
+     * @param  array|\ArrayAccess<int, array>  $container  container to hold the history (by reference)
      * @return callable(callable): callable returns a function that accepts the next handler
      *
      * @throws \InvalidArgumentException if container is not an array or ArrayAccess
@@ -130,7 +130,7 @@ final class Middleware
      * before listener accepts a request and options array, and the after
      * listener accepts a request, options array, and response promise.
      *
-     * @param  callable  $before function to invoke before forwarding the request
+     * @param  callable  $before  function to invoke before forwarding the request
      * @param  callable  $after  function invoked after forwarding
      * @return callable returns a function that accepts the next handler
      */
@@ -168,11 +168,11 @@ final class Middleware
      * If no delay function is provided, a simple implementation of exponential
      * backoff will be utilized.
      *
-     * @param  callable  $decider function that accepts the number of retries,
-     *                          a request, [response], and [exception] and
-     *                          returns true if the request is to be retried
-     * @param  callable  $delay   function that accepts the number of retries and
-     *                          returns the number of milliseconds to delay
+     * @param  callable  $decider  function that accepts the number of retries,
+     *                             a request, [response], and [exception] and
+     *                             returns true if the request is to be retried
+     * @param  callable  $delay  function that accepts the number of retries and
+     *                           returns the number of milliseconds to delay
      * @return callable returns a function that accepts the next handler
      */
     public static function retry(callable $decider, ?callable $delay = null): callable
@@ -186,8 +186,8 @@ final class Middleware
      *
      * @phpstan-param \Psr\Log\LogLevel::* $logLevel  Level at which to log requests.
      *
-     * @param  LoggerInterface  $logger    logs messages
-     * @param  MessageFormatter|MessageFormatterInterface  $formatter formatter used to create message strings
+     * @param  LoggerInterface  $logger  logs messages
+     * @param  MessageFormatter|MessageFormatterInterface  $formatter  formatter used to create message strings
      * @param  string  $logLevel  level at which to log requests
      * @return callable returns a function that accepts the next handler
      */
@@ -232,8 +232,8 @@ final class Middleware
      * Middleware that applies a map function to the request before passing to
      * the next handler.
      *
-     * @param  callable  $fn function that accepts a RequestInterface and returns
-     *                     a RequestInterface
+     * @param  callable  $fn  function that accepts a RequestInterface and returns
+     *                        a RequestInterface
      */
     public static function mapRequest(callable $fn): callable
     {
@@ -244,8 +244,8 @@ final class Middleware
      * Middleware that applies a map function to the resolved promise's
      * response.
      *
-     * @param  callable  $fn function that accepts a ResponseInterface and
-     *                     returns a ResponseInterface
+     * @param  callable  $fn  function that accepts a ResponseInterface and
+     *                        returns a ResponseInterface
      */
     public static function mapResponse(callable $fn): callable
     {

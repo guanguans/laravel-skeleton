@@ -352,7 +352,7 @@ class System
      * There is also a ['total'] key that contains the total amount of download
      * and upload
      *
-     * @param  int  $duration The buffer duration to fetch the data points
+     * @param  int  $duration  The buffer duration to fetch the data points
      *
      * @throws \Exception
      *

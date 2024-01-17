@@ -34,7 +34,7 @@ trait IndexHintsable
 
     /**
      * @param  array<string>|string  $indexes
-     * @param  string  $for JOIN|ORDER BY|GROUP BY
+     * @param  string  $for  JOIN|ORDER BY|GROUP BY
      */
     public function scopeForceIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {

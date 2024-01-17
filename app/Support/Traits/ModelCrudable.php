@@ -195,11 +195,11 @@ trait ModelCrudable
     /**
      * Builds the main query based on a informed field
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query Query builder command
-     * @param  string  $field "The" field
-     * @param  string  $type Type of field (string, int, date, datetime...)
-     * @param  array  $data Data sent on $request
-     * @param  ?string  $aliasField Alias name for field (where inside a related table "table.column")
+     * @param  \Illuminate\Database\Eloquent\Builder  $query  Query builder command
+     * @param  string  $field  "The" field
+     * @param  string  $type  Type of field (string, int, date, datetime...)
+     * @param  array  $data  Data sent on $request
+     * @param  ?string  $aliasField  Alias name for field (where inside a related table "table.column")
      */
     private static function buildQuery(Builder $query, string $field, string $type, array $data, ?string $aliasField = null): void
     {

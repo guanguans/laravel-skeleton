@@ -24,9 +24,9 @@ class CallbackGetCast implements CastsAttributes
     protected $remainingCallbackArgs;
 
     /**
-     * @param  string  $callback The callback(function、class::method、class@method) to be used to cast the attribute.
-     * @param  int  $castingAttributeCallbackArgIndex The index of the argument that will be the attribute being casted.
-     * @param ...$remainingCallbackArgs These are the remaining callback arguments.
+     * @param  string  $callback  The callback(function、class::method、class@method) to be used to cast the attribute.
+     * @param  int  $castingAttributeCallbackArgIndex  The index of the argument that will be the attribute being casted.
+     * @param  ...$remainingCallbackArgs  These are the remaining callback arguments.
      */
     public function __construct(string $callback, int $castingAttributeCallbackArgIndex = 0, ...$remainingCallbackArgs)
     {
@@ -64,7 +64,7 @@ class CallbackGetCast implements CastsAttributes
     /**
      * It takes a string and returns a callable
      *
-     * @param  string  $callback The callback to be executed.
+     * @param  string  $callback  The callback to be executed.
      * @return callable A callable.
      *
      * @throws \InvalidArgumentException

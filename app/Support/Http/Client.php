@@ -58,7 +58,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      *   into relative URIs. Can be a string or instance of UriInterface.
      * - **: any request option
      *
-     * @param  array  $config client configuration settings
+     * @param  array  $config  client configuration settings
      *
      * @see \GuzzleHttp\RequestOptions for a list of available request options.
      */
@@ -93,8 +93,8 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
     /**
      * Asynchronously send an HTTP request.
      *
-     * @param  array  $options Request options to apply to the given
-     *                       request and to the transfer. See \GuzzleHttp\RequestOptions.
+     * @param  array  $options  Request options to apply to the given
+     *                          request and to the transfer. See \GuzzleHttp\RequestOptions.
      */
     public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
@@ -129,9 +129,9 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * contain the query string as well. Use an array to provide a URL
      * template and additional variables to use in the URL template expansion.
      *
-     * @param  string  $method HTTP method
-     * @param  string|UriInterface  $uri URI object or string
-     * @param  array  $options Request options to apply. See \GuzzleHttp\RequestOptions.
+     * @param  string  $method  HTTP method
+     * @param  string|UriInterface  $uri  URI object or string
+     * @param  array  $options  Request options to apply. See \GuzzleHttp\RequestOptions.
      */
     public function request(string $method, string|UriInterface $uri = '', array $options = []): ResponseInterface
     {
@@ -159,7 +159,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * (if utilized by the concrete client), and a "base_uri" if utilized by
      * the concrete client.
      *
-     * @param  null|string  $option the config option to retrieve
+     * @param  null|string  $option  the config option to retrieve
      *
      * @deprecated Client::getConfig will be removed in guzzlehttp/guzzle:8.0.
      */
@@ -239,7 +239,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
     /**
      * Merges default options into the array.
      *
-     * @param  array  $options Options to modify by reference
+     * @param  array  $options  Options to modify by reference
      */
     private function prepareDefaults(array $options): array
     {
@@ -282,7 +282,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * The URI of the request is not modified and the request options are used
      * as-is without merging in default options.
      *
-     * @param  array  $options see \GuzzleHttp\RequestOptions
+     * @param  array  $options  see \GuzzleHttp\RequestOptions
      */
     private function transfer(RequestInterface $request, array $options): ResponseInterface
     {

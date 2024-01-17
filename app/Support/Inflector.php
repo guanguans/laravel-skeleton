@@ -199,9 +199,9 @@ class Inflector
      * Inflector::rules('uninflected', ['dontinflectme']);
      * ```
      *
-     * @param  string  $type the type of inflection, either 'plural', 'singular',
-     *                     or 'uninflected'
-     * @param  array  $rules array of rules to be added
+     * @param  string  $type  the type of inflection, either 'plural', 'singular',
+     *                        or 'uninflected'
+     * @param  array  $rules  array of rules to be added
      */
     public static function rules(string $type, array $rules, bool $reset = false): void
     {
@@ -221,7 +221,7 @@ class Inflector
     /**
      * Return $word in plural form.
      *
-     * @param  string  $word Word in singular
+     * @param  string  $word  Word in singular
      * @return string Word in plural
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
@@ -274,7 +274,7 @@ class Inflector
     /**
      * Return $word in singular form.
      *
-     * @param  string  $word Word in plural
+     * @param  string  $word  Word in plural
      * @return string Word in singular
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
@@ -332,8 +332,8 @@ class Inflector
     /**
      * Returns the input lower_case_delimited_string as a CamelCasedString.
      *
-     * @param  string  $string String to camelize
-     * @param  string  $delimiter the delimiter in the input string
+     * @param  string  $string  String to camelize
+     * @param  string  $delimiter  the delimiter in the input string
      * @return string camelizedStringLikeThis
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
@@ -357,7 +357,7 @@ class Inflector
      *
      * Also replaces dashes with underscores
      *
-     * @param  string  $string CamelCasedString to be "underscorized"
+     * @param  string  $string  CamelCasedString to be "underscorized"
      * @return string underscore_version of the input string
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
@@ -372,7 +372,7 @@ class Inflector
      *
      * Also replaces underscores with dashes
      *
-     * @param  string  $string the string to dasherize
+     * @param  string  $string  the string to dasherize
      * @return string Dashed version of the input string
      */
     public static function dasherize(string $string): string
@@ -384,8 +384,8 @@ class Inflector
      * Returns the input lower_case_delimited_string as 'A Human Readable String'.
      * (Underscores are replaced by spaces and capitalized following words.)
      *
-     * @param  string  $string String to be humanized
-     * @param  string  $delimiter the character to replace with a space
+     * @param  string  $string  String to be humanized
+     * @param  string  $delimiter  the character to replace with a space
      * @return string Human-readable string
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-human-readable-forms
@@ -412,8 +412,8 @@ class Inflector
     /**
      * Expects a CamelCasedInputString, and produces a lower_case_delimited_string
      *
-     * @param  string  $string String to delimit
-     * @param  string  $delimiter the character to use as a delimiter
+     * @param  string  $string  String to delimit
+     * @param  string  $delimiter  the character to use as a delimiter
      * @return string delimited string
      */
     public static function delimit(string $string, string $delimiter = '_'): string
@@ -433,7 +433,7 @@ class Inflector
     /**
      * Returns corresponding table name for given model $className. ("people" for the model class "Person").
      *
-     * @param  string  $className Name of class to get database table name for
+     * @param  string  $className  Name of class to get database table name for
      * @return string Name of the database table for given class
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
@@ -453,7 +453,7 @@ class Inflector
     /**
      * Returns Cake model class name ("Person" for the database table "people".) for given database table.
      *
-     * @param  string  $tableName Name of database table to get class name for
+     * @param  string  $tableName  Name of database table to get class name for
      * @return string Class name
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
@@ -473,7 +473,7 @@ class Inflector
     /**
      * Returns camelBacked version of an underscored string.
      *
-     * @param  string  $string string to convert
+     * @param  string  $string  string to convert
      * @return string in variable form
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-variable-names
@@ -495,9 +495,9 @@ class Inflector
     /**
      * Cache inflected values, and return if already available
      *
-     * @param  string  $type Inflection type
-     * @param  string  $key Original value
-     * @param  false|string  $value Inflected value
+     * @param  string  $type  Inflection type
+     * @param  string  $key  Original value
+     * @param  false|string  $value  Inflected value
      * @return false|string inflected value on cache hit or false on cache miss
      */
     protected static function cache(string $type, string $key, bool|string $value = false): bool|string

@@ -22,9 +22,9 @@ interface ClientInterface
     /**
      * Send an HTTP request.
      *
-     * @param  RequestInterface  $request Request to send
-     * @param  array  $options request options to apply to the given
-     *                                  request and to the transfer
+     * @param  RequestInterface  $request  Request to send
+     * @param  array  $options  request options to apply to the given
+     *                          request and to the transfer
      *
      * @throws GuzzleException
      */
@@ -38,8 +38,8 @@ interface ClientInterface
      * contain the query string as well.
      *
      * @param  string  $method  HTTP method
-     * @param  string|UriInterface  $uri     URI object or string
-     * @param  array  $options request options to apply
+     * @param  string|UriInterface  $uri  URI object or string
+     * @param  array  $options  request options to apply
      *
      * @throws GuzzleException
      */
@@ -52,7 +52,7 @@ interface ClientInterface
      * (if utilized by the concrete client), and a "base_uri" if utilized by
      * the concrete client.
      *
-     * @param  null|string  $option the config option to retrieve
+     * @param  null|string  $option  the config option to retrieve
      *
      * @deprecated ClientInterface::getConfig will be removed in guzzlehttp/guzzle:8.0.
      */

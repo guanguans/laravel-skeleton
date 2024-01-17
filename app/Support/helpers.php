@@ -59,8 +59,8 @@ if (! function_exists('human_bytes')) {
     /**
      * Convert bytes to human readable format.
      *
-     * @param  int  $bytes the amount of bytes to convert to human readable format
-     * @param  int  $decimals the number of decimals to use in the resulting string
+     * @param  int  $bytes  the amount of bytes to convert to human readable format
+     * @param  int  $decimals  the number of decimals to use in the resulting string
      *
      * @see https://stackoverflow.com/a/23888858/1580028
      */
@@ -183,9 +183,9 @@ if (! function_exists('make')) {
 
 if (! function_exists('resolve_class_from')) {
     /**
-     * @param  string  $path 文件路径
-     * @param  null|string  $vendorPath 供应商路径
-     * @param  null|string  $vendorNamespace 供应商命名空间
+     * @param  string  $path  文件路径
+     * @param  null|string  $vendorPath  供应商路径
+     * @param  null|string  $vendorNamespace  供应商命名空间
      */
     function resolve_class_from(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
     {
@@ -422,7 +422,7 @@ if (! function_exists('is_json')) {
     /**
      * If the string is valid JSON, return true, otherwise return false
      *
-     * @param  string  $str the string to check
+     * @param  string  $str  the string to check
      * @return bool the function is_json() is returning a boolean value
      */
     function is_json(string $str): bool

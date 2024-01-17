@@ -16,7 +16,7 @@ class CurrencyCast implements CastsAttributes
     /**
      * Constructor
      *
-     * @param  int  $digits The amount of digits to handle.
+     * @param  int  $digits  The amount of digits to handle.
      * @return void
      *
      * @throws \InvalidArgumentException Thrown on invalid input.
@@ -33,10 +33,10 @@ class CurrencyCast implements CastsAttributes
     /**
      * Transform the attribute from the underlying model values.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model      The model object.
-     * @param  string  $key        The property name.
-     * @param  mixed  $value      The property value.
-     * @param  array  $attributes The model attributes array.
+     * @param  \Illuminate\Database\Eloquent\Model  $model  The model object.
+     * @param  string  $key  The property name.
+     * @param  mixed  $value  The property value.
+     * @param  array  $attributes  The model attributes array.
      * @return float
      */
     public function get($model, string $key, $value, array $attributes)
@@ -49,10 +49,10 @@ class CurrencyCast implements CastsAttributes
     /**
      * Transform the attribute to its underlying model values.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model      The model object.
-     * @param  string  $key        The property name.
-     * @param  mixed  $value      The property value.
-     * @param  array  $attributes The model attributes array.
+     * @param  \Illuminate\Database\Eloquent\Model  $model  The model object.
+     * @param  string  $key  The property name.
+     * @param  mixed  $value  The property value.
+     * @param  array  $attributes  The model attributes array.
      * @return int
      */
     public function set($model, string $key, $value, array $attributes)

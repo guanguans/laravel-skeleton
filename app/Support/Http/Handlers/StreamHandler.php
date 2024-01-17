@@ -32,8 +32,8 @@ class StreamHandler implements Handler
     /**
      * Sends an HTTP request.
      *
-     * @param  RequestInterface  $request request to send
-     * @param  array  $options request transfer options
+     * @param  RequestInterface  $request  request to send
+     * @param  array  $options  request transfer options
      *
      * @see \GuzzleHttp\HandlerStack::create
      * @see \GuzzleHttp\Utils::chooseHandler
@@ -202,8 +202,8 @@ class StreamHandler implements Handler
     /**
      * Drains the source stream into the "sink" client option.
      *
-     * @param  string  $contentLength header specifying the amount of
-     *                              data to read
+     * @param  string  $contentLength  header specifying the amount of
+     *                                 data to read
      *
      * @throws \RuntimeException when the sink option is invalid
      */
@@ -228,7 +228,7 @@ class StreamHandler implements Handler
     /**
      * Create a resource and check to ensure it was created successfully
      *
-     * @param  callable  $callback Callable that returns stream resource
+     * @param  callable  $callback  Callable that returns stream resource
      * @return resource
      *
      * @throws \RuntimeException on error
@@ -412,7 +412,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value as passed via Request transfer options
+     * @param  mixed  $value  as passed via Request transfer options
      */
     private function add_proxy(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -476,7 +476,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value as passed via Request transfer options
+     * @param  mixed  $value  as passed via Request transfer options
      */
     private function add_timeout(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -486,7 +486,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value as passed via Request transfer options
+     * @param  mixed  $value  as passed via Request transfer options
      */
     private function add_crypto_method(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -505,7 +505,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value as passed via Request transfer options
+     * @param  mixed  $value  as passed via Request transfer options
      */
     private function add_verify(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -531,7 +531,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value as passed via Request transfer options
+     * @param  mixed  $value  as passed via Request transfer options
      */
     private function add_cert(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -548,7 +548,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value as passed via Request transfer options
+     * @param  mixed  $value  as passed via Request transfer options
      */
     private function add_progress(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -567,7 +567,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value as passed via Request transfer options
+     * @param  mixed  $value  as passed via Request transfer options
      */
     private function add_debug(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
