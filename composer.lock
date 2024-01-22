@@ -12006,16 +12006,16 @@
         },
         {
             "name": "spatie/laravel-health",
-            "version": "1.23.9",
+            "version": "1.23.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-health.git",
-                "reference": "223e12d73b9b19ac89bcd58888a48855e3bfbb82"
+                "reference": "c1a2d013aaaede0e95a1dfd4cf89c2b7be04c506"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/223e12d73b9b19ac89bcd58888a48855e3bfbb82",
-                "reference": "223e12d73b9b19ac89bcd58888a48855e3bfbb82",
+                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/c1a2d013aaaede0e95a1dfd4cf89c2b7be04c506",
+                "reference": "c1a2d013aaaede0e95a1dfd4cf89c2b7be04c506",
                 "shasum": ""
             },
             "require": {
@@ -12026,7 +12026,7 @@
                 "illuminate/database": "^8.75|^9.0|^10.0",
                 "illuminate/notifications": "^8.75|^9.0|^10.0",
                 "illuminate/support": "^8.75|^9.0|^10.0",
-                "nunomaduro/termwind": "^1.14",
+                "nunomaduro/termwind": "^1.0|^2.0",
                 "php": "^8.0",
                 "spatie/enum": "^3.13",
                 "spatie/laravel-package-tools": "^1.12.1",
@@ -12086,7 +12086,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-health/tree/1.23.9"
+                "source": "https://github.com/spatie/laravel-health/tree/1.23.10"
             },
             "funding": [
                 {
@@ -12094,7 +12094,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-07T22:51:50+00:00"
+            "time": "2024-01-19T22:06:10+00:00"
         },
         {
             "name": "spatie/laravel-medialibrary",
