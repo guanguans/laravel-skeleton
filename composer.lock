@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63c806e9c60c52704cca84cf71ae9b84",
+    "content-hash": "f0cb0ee277ec4b237f42d7fc868cb4aa",
     "packages": [
         {
             "name": "amphp/amp",
@@ -16254,27 +16254,25 @@
         },
         {
             "name": "vectorface/whip",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Vectorface/whip.git",
-                "reference": "daa06bad325cff3fca5b870a5f167173ac88f4ad"
+                "reference": "0d0f4648cfb29777f0ae9f2dc6a3853e16674f78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Vectorface/whip/zipball/daa06bad325cff3fca5b870a5f167173ac88f4ad",
-                "reference": "daa06bad325cff3fca5b870a5f167173ac88f4ad",
+                "url": "https://api.github.com/repos/Vectorface/whip/zipball/0d0f4648cfb29777f0ae9f2dc6a3853e16674f78",
+                "reference": "0d0f4648cfb29777f0ae9f2dc6a3853e16674f78",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0",
-                "psr/http-message": "^1.0"
+                "php": ">=8.0",
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master",
-                "phpunit/phpunit": "^4.8",
-                "squizlabs/php_codesniffer": "~2.0",
-                "vectorface/dunit": "~2.0"
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "~2.0"
             },
             "type": "library",
             "autoload": {
@@ -16309,7 +16307,7 @@
                 "issues": "https://github.com/Vectorface/whip/issues",
                 "source": "https://github.com/Vectorface/whip"
             },
-            "time": "2020-08-25T13:45:06+00:00"
+            "time": "2024-01-22T01:03:59+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
