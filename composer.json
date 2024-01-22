@@ -82,7 +82,7 @@
         "timacdonald/has-parameters": "^1.4",
         "unicodeveloper/laravel-password": "^1.0",
         "valorin/pwned-validator": "^1.3",
-        "vectorface/whip": "^0.4",
+        "vectorface/whip": "^0.5",
         "watson/validating": "^8.1",
         "wendelladriel/laravel-validated-dto": "^3.3"
     },
