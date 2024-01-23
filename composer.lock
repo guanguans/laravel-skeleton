@@ -5726,16 +5726,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.41.0",
+            "version": "v10.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "da31969bd35e6ee0bbcd9e876f88952dc754b012"
+                "reference": "fef1aff874a6749c44f8e142e5764eab8cb96890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/da31969bd35e6ee0bbcd9e876f88952dc754b012",
-                "reference": "da31969bd35e6ee0bbcd9e876f88952dc754b012",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/fef1aff874a6749c44f8e142e5764eab8cb96890",
+                "reference": "fef1aff874a6749c44f8e142e5764eab8cb96890",
                 "shasum": ""
             },
             "require": {
@@ -5927,7 +5927,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-01-16T15:23:58+00:00"
+            "time": "2024-01-23T15:07:56+00:00"
         },
         {
             "name": "laravel/octane",
@@ -7772,16 +7772,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.72.1",
+            "version": "2.72.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "2b3b3db0a2d0556a177392ff1a3bf5608fa09f78"
+                "reference": "3e7edc41b58d65509baeb0d4a14c8fa41d627130"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/2b3b3db0a2d0556a177392ff1a3bf5608fa09f78",
-                "reference": "2b3b3db0a2d0556a177392ff1a3bf5608fa09f78",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/3e7edc41b58d65509baeb0d4a14c8fa41d627130",
+                "reference": "3e7edc41b58d65509baeb0d4a14c8fa41d627130",
                 "shasum": ""
             },
             "require": {
@@ -7875,7 +7875,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-08T23:47:49+00:00"
+            "time": "2024-01-19T00:21:53+00:00"
         },
         {
             "name": "nette/schema",
@@ -12006,16 +12006,16 @@
         },
         {
             "name": "spatie/laravel-health",
-            "version": "1.23.10",
+            "version": "1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-health.git",
-                "reference": "c1a2d013aaaede0e95a1dfd4cf89c2b7be04c506"
+                "reference": "e08f48b4f6485d947a8210a70c1bb994db6c3e3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/c1a2d013aaaede0e95a1dfd4cf89c2b7be04c506",
-                "reference": "c1a2d013aaaede0e95a1dfd4cf89c2b7be04c506",
+                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/e08f48b4f6485d947a8210a70c1bb994db6c3e3f",
+                "reference": "e08f48b4f6485d947a8210a70c1bb994db6c3e3f",
                 "shasum": ""
             },
             "require": {
@@ -12031,6 +12031,7 @@
                 "spatie/enum": "^3.13",
                 "spatie/laravel-package-tools": "^1.12.1",
                 "spatie/regex": "^3.1.1|^3.1",
+                "spatie/temporary-directory": "^2.2",
                 "symfony/process": "^5.4|^6.0"
             },
             "require-dev": {
@@ -12086,7 +12087,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-health/tree/1.23.10"
+                "source": "https://github.com/spatie/laravel-health/tree/1.24.0"
             },
             "funding": [
                 {
@@ -12094,7 +12095,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-19T22:06:10+00:00"
+            "time": "2024-01-23T13:05:21+00:00"
         },
         {
             "name": "spatie/laravel-medialibrary",
