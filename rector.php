@@ -158,7 +158,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->ruleWithConfiguration(RenameToPsrNameRector::class, [
-        // '*',
+        '_*',
     ]);
 
     // (function ($rectorConfig): void {
