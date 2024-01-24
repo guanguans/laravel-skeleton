@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly()->withoutOverlapping(60);
+        $schedule->command('inspire')->daily()->atRandom('07:15', '11:42')->withoutOverlapping(60);
         $schedule->command('backup:clean')->daily()->at('05:15')->withoutOverlapping();
         $schedule->command('backup:run')->daily()->at('05:30')->withoutOverlapping();
         $schedule->command('backup:monitor')->daily()->at('05:45')->withoutOverlapping();

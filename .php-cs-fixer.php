@@ -339,6 +339,11 @@ return (new Config())
             ],
         ],
 
+        'method_argument_space' => [
+            'keep_multiple_spaces_after_comma' => true,
+            'on_multiline' => 'ensure_fully_multiline',
+        ],
+
         // https://github.com/kubawerlos/php-cs-fixer-custom-fixers
         PhpCsFixerCustomFixers\Fixer\CommentSurroundedBySpacesFixer::name() => true,
         PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer::name() => [
