@@ -23,6 +23,8 @@ use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Guanguans\LaravelSoar\SoarServiceProvider;
+use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\Middleware;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -45,6 +47,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
@@ -171,6 +174,11 @@ class AppServiceProvider extends ServiceProvider
             LogHttp::skipWhen(fn (Request $request) => $this->app->runningUnitTests() || $request->isMethodSafe());
             LogViewer::auth(static fn (): bool => request()::isAdminDeveloper());
             class_exists(Telescope::class) and Telescope::auth(static fn (): bool => request()::isAdminDeveloper());
+            Http::globalOptions([
+                'timeout' => 30,
+                'connect_timeout' => 10,
+            ]);
+            Http::globalMiddleware(Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG)));
 
             // 自定义多态类型
             Relation::enforceMorphMap([
