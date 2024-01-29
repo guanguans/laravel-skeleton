@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
+use Symfony\Component\VarDumper\VarDumper;
 
 if (! function_exists('env_explode')) {
     /**
@@ -583,6 +584,32 @@ if (! function_exists('catch_query_log')) {
 
                 return DB::getQueryLog();
             });
+    }
+}
+
+if (! function_exists('dump_to_server')) {
+    /**
+     * ```
+     * ./vendor/bin/var-dump-server
+     * ```
+     *
+     * @noinspection GlobalVariableUsageInspection
+     * @noinspection PhpUndefinedClassInspection
+     * @noinspection ForgottenDebugOutputInspection
+     * @noinspection DebugFunctionUsageInspection
+     * @noinspection StaticClosureCanBeUsedInspection
+     * @noinspection AnonymousFunctionStaticInspection
+     */
+    function dump_to_server(mixed ...$vars): mixed
+    {
+        $_SERVER['VAR_DUMPER_FORMAT'] = 'server';
+        // $_SERVER['VAR_DUMPER_SERVER'] = '0.0.0.0:9912';
+
+        (function (): void {
+            self::$handler = null;
+        })->call(new VarDumper());
+
+        return dump(...$vars);
     }
 }
 

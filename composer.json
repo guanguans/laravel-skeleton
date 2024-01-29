@@ -71,7 +71,7 @@
         "spatie/laravel-medialibrary": "^10.15",
         "spatie/laravel-query-builder": "^5.7",
         "spatie/laravel-responsecache": "^7.4",
-        "spatie/laravel-schedule-monitor": "^3.4",
+        "spatie/laravel-schedule-monitor": "^3.5",
         "spatie/laravel-schemaless-attributes": "^2.4",
         "spatie/laravel-short-schedule": "^1.5",
         "spatie/php-structure-discoverer": "^2.0",
@@ -294,6 +294,7 @@
         "test-migrate-configuration": "@pest-migrate-configuration",
         "tlint": "@php ./vendor/bin/tlint lint --diff --ansi -v",
         "tlint-format": "@php ./vendor/bin/tlint format --diff --ansi -v",
-        "update-fluent-assert-doc-comment": "App\\Support\\FluentAssert::updateDocComment"
+        "update-fluent-assert-doc-comment": "App\\Support\\FluentAssert::updateDocComment",
+        "var-dump-server": "@php ./vendor/bin/var-dump-server"
     }
 }

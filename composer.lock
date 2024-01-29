@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd32d88be0583b2b9b24835b058d221b",
+    "content-hash": "6967a39defc66f5a858e621b8c71f191",
     "packages": [
         {
             "name": "amphp/amp",
@@ -3356,16 +3356,16 @@
         },
         {
             "name": "emreyarligan/enum-concern",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/emreyarligan/enum-concern.git",
-                "reference": "2a67fec4dc423fd0bb27def41c5d9cb06df1cdc9"
+                "reference": "665575c3289ddfdcd9b95efe115b0aad799641a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emreyarligan/enum-concern/zipball/2a67fec4dc423fd0bb27def41c5d9cb06df1cdc9",
-                "reference": "2a67fec4dc423fd0bb27def41c5d9cb06df1cdc9",
+                "url": "https://api.github.com/repos/emreyarligan/enum-concern/zipball/665575c3289ddfdcd9b95efe115b0aad799641a1",
+                "reference": "665575c3289ddfdcd9b95efe115b0aad799641a1",
                 "shasum": ""
             },
             "require": {
@@ -3400,9 +3400,9 @@
             ],
             "support": {
                 "issues": "https://github.com/emreyarligan/enum-concern/issues",
-                "source": "https://github.com/emreyarligan/enum-concern/tree/1.0.2"
+                "source": "https://github.com/emreyarligan/enum-concern/tree/1.0.3"
             },
-            "time": "2023-11-09T21:06:32+00:00"
+            "time": "2024-01-27T21:20:08+00:00"
         },
         {
             "name": "envant/fireable",
@@ -7091,16 +7091,16 @@
         },
         {
             "name": "league/mime-type-detection",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "b6a5854368533df0295c5761a0253656a2e52d9e"
+                "reference": "ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/b6a5854368533df0295c5761a0253656a2e52d9e",
-                "reference": "b6a5854368533df0295c5761a0253656a2e52d9e",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301",
+                "reference": "ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301",
                 "shasum": ""
             },
             "require": {
@@ -7131,7 +7131,7 @@
             "description": "Mime-type detection for Flysystem",
             "support": {
                 "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.14.0"
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.15.0"
             },
             "funding": [
                 {
@@ -7143,7 +7143,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-17T14:13:20+00:00"
+            "time": "2024-01-28T23:22:08+00:00"
         },
         {
             "name": "league/uri",
@@ -7321,16 +7321,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.4.1",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "fd74e6b31c96c40bb36c99e79d5c62460b31ec6b"
+                "reference": "c0489d4a76382f6dcf6e2702112f86aa089d0c8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/fd74e6b31c96c40bb36c99e79d5c62460b31ec6b",
-                "reference": "fd74e6b31c96c40bb36c99e79d5c62460b31ec6b",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/c0489d4a76382f6dcf6e2702112f86aa089d0c8d",
+                "reference": "c0489d4a76382f6dcf6e2702112f86aa089d0c8d",
                 "shasum": ""
             },
             "require": {
@@ -7384,7 +7384,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.4.1"
+                "source": "https://github.com/livewire/livewire/tree/v3.4.4"
             },
             "funding": [
                 {
@@ -7392,7 +7392,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-24T13:56:12+00:00"
+            "time": "2024-01-28T19:07:11+00:00"
         },
         {
             "name": "lorisleiva/cron-translator",
@@ -18062,12 +18062,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "8571b16b658ea5c21ce7bf82e8dcd244634ec2af"
+                "reference": "26fa61256d8e597ee7e9c89d096a7e9717a05d02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/8571b16b658ea5c21ce7bf82e8dcd244634ec2af",
-                "reference": "8571b16b658ea5c21ce7bf82e8dcd244634ec2af",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/26fa61256d8e597ee7e9c89d096a7e9717a05d02",
+                "reference": "26fa61256d8e597ee7e9c89d096a7e9717a05d02",
                 "shasum": ""
             },
             "require": {
@@ -18173,7 +18173,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-01-24T21:15:18+00:00"
+            "time": "2024-01-28T11:38:29+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
@@ -19222,16 +19222,16 @@
         },
         {
             "name": "laravel-lang/attributes",
-            "version": "2.9.3",
+            "version": "2.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/attributes.git",
-                "reference": "23dab894b9b6b5fe0d3eb47daf7d9335a9e82eb0"
+                "reference": "398008ea9df5f568a7195c47f9853d983161e478"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/23dab894b9b6b5fe0d3eb47daf7d9335a9e82eb0",
-                "reference": "23dab894b9b6b5fe0d3eb47daf7d9335a9e82eb0",
+                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/398008ea9df5f568a7195c47f9853d983161e478",
+                "reference": "398008ea9df5f568a7195c47f9853d983161e478",
                 "shasum": ""
             },
             "require": {
@@ -19285,9 +19285,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/attributes/issues",
-                "source": "https://github.com/Laravel-Lang/attributes/tree/2.9.3"
+                "source": "https://github.com/Laravel-Lang/attributes/tree/2.9.4"
             },
-            "time": "2024-01-23T11:18:46+00:00"
+            "time": "2024-01-25T00:41:17+00:00"
         },
         {
             "name": "laravel-lang/common",
@@ -19492,16 +19492,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "14.2.6",
+            "version": "14.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "8d2218b3bccca3208970eb335c7a962820822aa4"
+                "reference": "8bd1b6548cbd6234c6fa9e48f45d776db3e41101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/8d2218b3bccca3208970eb335c7a962820822aa4",
-                "reference": "8d2218b3bccca3208970eb335c7a962820822aa4",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/8bd1b6548cbd6234c6fa9e48f45d776db3e41101",
+                "reference": "8bd1b6548cbd6234c6fa9e48f45d776db3e41101",
                 "shasum": ""
             },
             "require": {
@@ -19548,7 +19548,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-01-23T17:39:47+00:00"
+            "time": "2024-01-26T02:14:21+00:00"
         },
         {
             "name": "laravel-lang/locale-list",

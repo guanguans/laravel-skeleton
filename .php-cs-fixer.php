@@ -186,7 +186,7 @@ return (new Config())
         ],
         'regular_callable_call' => true,
         'single_line_throw' => false,
-        'static_lambda' => true, // pest
+        'static_lambda' => false, // pest
 
         // import
         'group_import' => false,

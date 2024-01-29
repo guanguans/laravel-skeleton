@@ -21,7 +21,7 @@ trait Disenchant
     /**
      * @throws \Error
      */
-    final public function __get($_): void
+    final public function __get(mixed $_): void
     {
         throw new \Error('Cannot get dynamic properties from immutable class '.static::class);
     }
@@ -29,7 +29,7 @@ trait Disenchant
     /**
      * @throws \Error
      */
-    final public function __isset($_)
+    final public function __isset(mixed $_)
     {
         throw new \Error('Cannot check if dynamic properties are set on immutable class '.static::class);
     }
@@ -37,7 +37,7 @@ trait Disenchant
     /**
      * @throws \Error
      */
-    final public function __set($_, $__): void
+    final public function __set(mixed $_, mixed $__): void
     {
         throw new \Error('Cannot set dynamic properties on immutable class '.static::class);
     }
@@ -45,7 +45,7 @@ trait Disenchant
     /**
      * @throws \Error
      */
-    final public function __unset($_): void
+    final public function __unset(mixed $_): void
     {
         throw new \Error('Cannot remove dynamic properties from immutable class '.static::class);
     }

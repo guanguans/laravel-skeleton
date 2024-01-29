@@ -105,6 +105,7 @@ return static function (RectorConfig $rectorConfig): void {
             __DIR__.'/tests',
         ],
         StaticClosureRector::class => [
+            __DIR__.'/app/Support/helpers.php',
             __DIR__.'/app/Admin/Controllers',
             __DIR__.'/app/Admin/Forms',
             __DIR__.'/tests',
