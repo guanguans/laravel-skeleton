@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fe134c718b3c2709470a39e192a7951",
+    "content-hash": "69bd3022a76659342994a72be5a4206a",
     "packages": [
         {
             "name": "amphp/amp",
@@ -814,16 +814,16 @@
         },
         {
             "name": "amphp/windows-registry",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/windows-registry.git",
-                "reference": "8248247a41af7f97b88e4716c0f8de39696ef111"
+                "reference": "0d569e8f256cca974e3842b6e78b4e434bf98306"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/windows-registry/zipball/8248247a41af7f97b88e4716c0f8de39696ef111",
-                "reference": "8248247a41af7f97b88e4716c0f8de39696ef111",
+                "url": "https://api.github.com/repos/amphp/windows-registry/zipball/0d569e8f256cca974e3842b6e78b4e434bf98306",
+                "reference": "0d569e8f256cca974e3842b6e78b4e434bf98306",
                 "shasum": ""
             },
             "require": {
@@ -854,7 +854,7 @@
             "description": "Windows Registry Reader.",
             "support": {
                 "issues": "https://github.com/amphp/windows-registry/issues",
-                "source": "https://github.com/amphp/windows-registry/tree/v1.0.0"
+                "source": "https://github.com/amphp/windows-registry/tree/v1.0.1"
             },
             "funding": [
                 {
@@ -862,7 +862,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-09T22:29:20+00:00"
+            "time": "2024-01-30T23:01:51+00:00"
         },
         {
             "name": "anlutro/l4-settings",
@@ -6560,16 +6560,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v10.8.1",
+            "version": "v10.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "2f670f5b927b21c5f7e9d25f61a9bf727e16e9c0"
+                "reference": "4b5766ac110ef116c6571f4b3a29193bfd01c27c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/2f670f5b927b21c5f7e9d25f61a9bf727e16e9c0",
-                "reference": "2f670f5b927b21c5f7e9d25f61a9bf727e16e9c0",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/4b5766ac110ef116c6571f4b3a29193bfd01c27c",
+                "reference": "4b5766ac110ef116c6571f4b3a29193bfd01c27c",
                 "shasum": ""
             },
             "require": {
@@ -6633,7 +6633,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2024-01-23T16:27:01+00:00"
+            "time": "2024-01-30T18:52:49+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -13505,6 +13505,176 @@
             "time": "2023-12-25T11:46:58+00:00"
         },
         {
+            "name": "staudenmeir/eloquent-has-many-deep-contracts",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staudenmeir/eloquent-has-many-deep-contracts.git",
+                "reference": "c39317b839d6123be126b9980e4a3d38310f5939"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staudenmeir/eloquent-has-many-deep-contracts/zipball/c39317b839d6123be126b9980e4a3d38310f5939",
+                "reference": "c39317b839d6123be126b9980e4a3d38310f5939",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Staudenmeir\\EloquentHasManyDeepContracts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonas Staudenmeir",
+                    "email": "mail@jonas-staudenmeir.de"
+                }
+            ],
+            "description": "Contracts for staudenmeir/eloquent-has-many-deep",
+            "support": {
+                "issues": "https://github.com/staudenmeir/eloquent-has-many-deep-contracts/issues",
+                "source": "https://github.com/staudenmeir/eloquent-has-many-deep-contracts/tree/v1.1"
+            },
+            "time": "2023-01-18T12:43:26+00:00"
+        },
+        {
+            "name": "staudenmeir/laravel-adjacency-list",
+            "version": "v1.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staudenmeir/laravel-adjacency-list.git",
+                "reference": "f8a6778fb276e0d8eaa848d14cfe6823c15a7f5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/f8a6778fb276e0d8eaa848d14cfe6823c15a7f5c",
+                "reference": "f8a6778fb276e0d8eaa848d14cfe6823c15a7f5c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0",
+                "php": "^8.1",
+                "staudenmeir/eloquent-has-many-deep-contracts": "^1.1",
+                "staudenmeir/laravel-cte": "^1.8"
+            },
+            "require-dev": {
+                "barryvdh/laravel-ide-helper": "^2.13",
+                "doctrine/dbal": "^3.5.2",
+                "larastan/larastan": "^2.0",
+                "mockery/mockery": "^1.5.1",
+                "orchestra/testbench": "^8.15",
+                "phpunit/phpunit": "^10.1",
+                "singlestoredb/singlestoredb-laravel": "^1.5.1",
+                "staudenmeir/eloquent-has-many-deep": "^1.18.1"
+            },
+            "suggest": {
+                "barryvdh/laravel-ide-helper": "Provide type hints for attributes and relations."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Staudenmeir\\LaravelAdjacencyList\\IdeHelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Staudenmeir\\LaravelAdjacencyList\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonas Staudenmeir",
+                    "email": "mail@jonas-staudenmeir.de"
+                }
+            ],
+            "description": "Recursive Laravel Eloquent relationships with CTEs",
+            "support": {
+                "issues": "https://github.com/staudenmeir/laravel-adjacency-list/issues",
+                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.18"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/JonasStaudenmeir",
+                    "type": "custom"
+                }
+            ],
+            "time": "2024-01-30T15:50:51+00:00"
+        },
+        {
+            "name": "staudenmeir/laravel-cte",
+            "version": "v1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staudenmeir/laravel-cte.git",
+                "reference": "87f4447829a0f6a6268f52f875c468915cab4909"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-cte/zipball/87f4447829a0f6a6268f52f875c468915cab4909",
+                "reference": "87f4447829a0f6a6268f52f875c468915cab4909",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.1",
+                "singlestoredb/singlestoredb-laravel": "^1.5.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Staudenmeir\\LaravelCte\\DatabaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Staudenmeir\\LaravelCte\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonas Staudenmeir",
+                    "email": "mail@jonas-staudenmeir.de"
+                }
+            ],
+            "description": "Laravel queries with common table expressions",
+            "support": {
+                "issues": "https://github.com/staudenmeir/laravel-cte/issues",
+                "source": "https://github.com/staudenmeir/laravel-cte/tree/v1.9"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/JonasStaudenmeir",
+                    "type": "custom"
+                }
+            ],
+            "time": "2023-09-01T17:22:23+00:00"
+        },
+        {
             "name": "stillat/blade-directives",
             "version": "v1.2.1",
             "source": {
@@ -18588,12 +18758,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "2d0290dcb2d4a8746058f606ff7f92f45b95becf"
+                "reference": "97aaaf68942bd5f770fd6d3f882bc74217b83d37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/2d0290dcb2d4a8746058f606ff7f92f45b95becf",
-                "reference": "2d0290dcb2d4a8746058f606ff7f92f45b95becf",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/97aaaf68942bd5f770fd6d3f882bc74217b83d37",
+                "reference": "97aaaf68942bd5f770fd6d3f882bc74217b83d37",
                 "shasum": ""
             },
             "require": {
@@ -18699,7 +18869,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-01-29T21:28:00+00:00"
+            "time": "2024-01-30T21:48:58+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
@@ -20018,16 +20188,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "14.2.7",
+            "version": "14.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "8bd1b6548cbd6234c6fa9e48f45d776db3e41101"
+                "reference": "94068cd2fd4543c67834b4d71c5aea271783fd82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/8bd1b6548cbd6234c6fa9e48f45d776db3e41101",
-                "reference": "8bd1b6548cbd6234c6fa9e48f45d776db3e41101",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/94068cd2fd4543c67834b4d71c5aea271783fd82",
+                "reference": "94068cd2fd4543c67834b4d71c5aea271783fd82",
                 "shasum": ""
             },
             "require": {
@@ -20074,7 +20244,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-01-26T02:14:21+00:00"
+            "time": "2024-01-30T01:44:36+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -22481,12 +22651,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "44651302ebda9675677b114e39d7b9c94028a4ea"
+                "reference": "f2272bd24e2ac981383d1de0d374f14cc3f62f67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/44651302ebda9675677b114e39d7b9c94028a4ea",
-                "reference": "44651302ebda9675677b114e39d7b9c94028a4ea",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f2272bd24e2ac981383d1de0d374f14cc3f62f67",
+                "reference": "f2272bd24e2ac981383d1de0d374f14cc3f62f67",
                 "shasum": ""
             },
             "conflict": {
@@ -22578,7 +22748,7 @@
                 "contao/managed-edition": "<=1.5",
                 "corveda/phpsandbox": "<1.3.5",
                 "cosenary/instagram": "<=2.3",
-                "craftcms/cms": "<=4.5.10",
+                "craftcms/cms": "<4.6.2",
                 "croogo/croogo": "<4",
                 "cuyz/valinor": "<0.12",
                 "czproject/git-php": "<4.0.3",
@@ -22996,6 +23166,7 @@
                 "sukohi/surpass": "<1",
                 "sulu/sulu": "<1.6.44|>=2,<2.2.18|>=2.3,<2.3.8|==2.4.0.0-RC1|>=2.5,<2.5.10",
                 "sumocoders/framework-user-bundle": "<1.4",
+                "superbig/craft-audit": "<3.0.2",
                 "swag/paypal": "<5.4.4",
                 "swiftmailer/swiftmailer": ">=4,<5.4.5",
                 "swiftyedit/swiftyedit": "<1.2",
@@ -23204,7 +23375,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-30T01:24:32+00:00"
+            "time": "2024-01-30T22:04:19+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
