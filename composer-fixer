@@ -20,7 +20,8 @@ use Symfony\Component\Process\Process;
 
 require __DIR__.'/vendor/autoload.php';
 
-(new class() {
+(new class()
+{
     private string $composerJsonFile = __DIR__.'/composer.json';
 
     private SymfonyStyle $symfonyStyle;
@@ -117,7 +118,7 @@ require __DIR__.'/vendor/autoload.php';
     }
 
     /**
-     * @param null|array|string $message
+     * @param  null|array|string  $message
      */
     private function success($message = null): void
     {
@@ -140,30 +141,48 @@ require __DIR__.'/vendor/autoload.php';
         );
     }
 
-    private function updateComposerOutdatedPackage(string $composerOutdatedPackage, string $environment): void
-    {
+    private function updateComposerOutdatedPackage(
+        string $composerOutdatedPackage,
+        string $environment,
+        ?string $composerBinary = null
+    ): void {
         try {
+            $composerBinary ??= $this->findComposerBinary();
             $this->createAndMustRunProcess(sprintf(
-                "{$this->findComposerBinary()} require $composerOutdatedPackage %s --no-scripts -W --ansi -v",
+                "$composerBinary require $composerOutdatedPackage %s --no-scripts -W --ansi -v",
                 'require-dev' === $environment ? '--dev' : ''
             ));
-        } catch (ProcessFailedException $processFailedException) {
+        } catch (ProcessFailedException) {
             $this->symfonyStyle->error("Failed to update composer outdated [$composerOutdatedPackage] package version.");
         }
     }
 
-    private function findComposerBinary(): string
+    private function updateComposerOutdatedHighestPackage(string $composerOutdatedPackage, string $environment): void
+    {
+        $this->updateComposerOutdatedPackage(
+            $composerOutdatedPackage,
+            $environment,
+            $this->findComposerBinary($this->phpHighestBinary())
+        );
+    }
+
+    private function phpHighestBinary(): string
+    {
+        return '/opt/homebrew/opt/php@8.3/bin/php';
+    }
+
+    private function findComposerBinary(?string $phpBinary = null): string
     {
         return sprintf(
             '%s %s',
-            (new PhpExecutableFinder())->find(),
+            $phpBinary ?? (new PhpExecutableFinder())->find(),
             (new Symfony\Component\Process\ExecutableFinder())->find('composer')
         );
     }
 
     /**
-     * @param array|string $command
-     * @param mixed $input The input as stream resource, scalar or \Traversable, or null for no input
+     * @param  array|string  $command
+     * @param  mixed  $input  The input as stream resource, scalar or \Traversable, or null for no input
      */
     private function createAndMustRunProcess(
         $command,
