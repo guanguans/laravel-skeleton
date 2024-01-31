@@ -991,16 +991,16 @@
         },
         {
             "name": "aurorawebsoftware/asetting",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AuroraWebSoftware/ASetting.git",
-                "reference": "5d9f1e65ad188972d419a26664c56a29464533d9"
+                "reference": "2b003f1982649d2e304d389aac6caffe2775115b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AuroraWebSoftware/ASetting/zipball/5d9f1e65ad188972d419a26664c56a29464533d9",
-                "reference": "5d9f1e65ad188972d419a26664c56a29464533d9",
+                "url": "https://api.github.com/repos/AuroraWebSoftware/ASetting/zipball/2b003f1982649d2e304d389aac6caffe2775115b",
+                "reference": "2b003f1982649d2e304d389aac6caffe2775115b",
                 "shasum": ""
             },
             "require": {
@@ -1057,7 +1057,7 @@
             ],
             "support": {
                 "issues": "https://github.com/AuroraWebSoftware/ASetting/issues",
-                "source": "https://github.com/AuroraWebSoftware/ASetting/tree/1.0.0"
+                "source": "https://github.com/AuroraWebSoftware/ASetting/tree/1.0.2"
             },
             "funding": [
                 {
@@ -1065,7 +1065,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-29T18:32:10+00:00"
+            "time": "2024-01-31T17:52:50+00:00"
         },
         {
             "name": "awobaz/compoships",
