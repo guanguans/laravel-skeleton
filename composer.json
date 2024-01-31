@@ -64,6 +64,7 @@
         "predis/predis": "^2.2",
         "pusher/pusher-php-server": "^7.2",
         "rahul900day/laravel-console-spinner": "^1.1",
+        "rakutentech/laravel-request-docs": "^2.28",
         "rennokki/laravel-eloquent-query-cache": "^3.4",
         "richardstyles/eloquent-aes": "^2.3",
         "skywarth/chaotic-schedule": "^1.0",
