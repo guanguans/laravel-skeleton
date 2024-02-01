@@ -4292,32 +4292,32 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "3.5.2",
+            "version": "3.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "b30ac1107ec5a627b8ed7083105697e67a248e8d"
+                "reference": "bead5ef6c08c81a949071a0e62529ccc29e6e090"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/b30ac1107ec5a627b8ed7083105697e67a248e8d",
-                "reference": "b30ac1107ec5a627b8ed7083105697e67a248e8d",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/bead5ef6c08c81a949071a0e62529ccc29e6e090",
+                "reference": "bead5ef6c08c81a949071a0e62529ccc29e6e090",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guanguans/notify": "^1.27",
+                "guanguans/notify": "^1.28",
                 "illuminate/contracts": "^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "illuminate/support": "^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "php": ">=7.4"
             },
             "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "ergebnis/composer-normalize": "^2.28",
-                "friendsofphp/php-cs-fixer": "^3.46",
+                "brainmaestro/composer-git-hooks": "^2.8",
+                "ergebnis/composer-normalize": "^2.42",
+                "friendsofphp/php-cs-fixer": "^3.48",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.18",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.19",
                 "laravel/lumen-framework": "^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "mockery/mockery": "^1.6",
                 "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0",
@@ -4328,7 +4328,7 @@
                 "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-deprecation-rules": "^1.1",
                 "rector/rector": "^0.19",
-                "vimeo/psalm": "^5.19"
+                "vimeo/psalm": "^5.21"
             },
             "type": "library",
             "extra": {
@@ -4424,7 +4424,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-01-11T08:19:37+00:00"
+            "time": "2024-02-01T10:11:38+00:00"
         },
         {
             "name": "guanguans/notify",
