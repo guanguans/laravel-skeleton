@@ -11,6 +11,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
+use Composer\InstalledVersions;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -18,6 +19,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -86,6 +88,8 @@ $status = (new SingleCommandApplication)
                     ->updateComposerPackages()
                     ->updateOutdatedComposerPackages()
                     ->updateComposerPackages()
+                    ->updateOutdatedComposerPackages()
+                    ->updateComposerPackages()
                     ->normalizeComposerJson()
                     ->success();
             }
@@ -132,6 +136,7 @@ $status = (new SingleCommandApplication)
             {
                 $outdatedComposerPackages = $this->getOutdatedComposerPackages();
                 $decodedComposerJson = json_decode(file_get_contents($this->composerJsonPath), true);
+                (fn () => self::reload(null))->call(new InstalledVersions());
 
                 foreach ($decodedComposerJson as $name => &$value) {
                     if (! in_array($name, ['require', 'require-dev'], true)) {
@@ -146,17 +151,12 @@ $status = (new SingleCommandApplication)
                             continue;
                         }
 
-                        if (isset($outdatedComposerPackages[$package])) { // 多版本依赖
-                            $dependencyVersion = $outdatedComposerPackages[$package]['dependency_version'];
-                        } else { // 单版本依赖
-                            if (
-                                $this->strIs('*|*', $dependencyVersion)
-                                || ! ($version = Composer\InstalledVersions::getVersion($package))
-                            ) {
-                                continue;
-                            }
-
+                        if ($version = InstalledVersions::getVersion($package)) {
                             $dependencyVersion = $this->toDependencyVersion($version);
+                        }
+
+                        if (isset($outdatedComposerPackages[$package])) {
+                            $dependencyVersion = $outdatedComposerPackages[$package]['dependency_version'];
                         }
                     }
                 }
@@ -202,7 +202,7 @@ $status = (new SingleCommandApplication)
                 return sprintf(
                     '%s %s',
                     $phpBinary ?? (new PhpExecutableFinder)->find(),
-                    $composerBinary ?? (new Symfony\Component\Process\ExecutableFinder)->find('composer')
+                    $composerBinary ?? (new ExecutableFinder)->find('composer')
                 );
             }
 
