@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7288d70b2d7918943a0f6c566de1317b",
+    "content-hash": "f25e2c1ee9c2cdadc32e65ad287ee3ca",
     "packages": [
         {
             "name": "amphp/amp",
@@ -229,16 +229,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd"
+                "reference": "3e3f413fbbaacd9632b1612941b363fa26a72e52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/c3b518f321f26e786554480de580f06b9f34d1cd",
-                "reference": "c3b518f321f26e786554480de580f06b9f34d1cd",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/3e3f413fbbaacd9632b1612941b363fa26a72e52",
+                "reference": "3e3f413fbbaacd9632b1612941b363fa26a72e52",
                 "shasum": ""
             },
             "require": {
@@ -246,7 +246,7 @@
                 "amphp/byte-stream": "^2",
                 "amphp/cache": "^2",
                 "amphp/parser": "^1",
-                "amphp/windows-registry": "^1",
+                "amphp/windows-registry": "^1.0.1",
                 "daverandom/libdns": "^2.0.2",
                 "ext-filter": "*",
                 "php": ">=8.1",
@@ -256,7 +256,7 @@
                 "amphp/php-cs-fixer-config": "^2",
                 "amphp/phpunit-util": "^3",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4"
+                "psalm/phar": "5.20"
             },
             "type": "library",
             "autoload": {
@@ -305,7 +305,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/dns/issues",
-                "source": "https://github.com/amphp/dns/tree/v2.1.0"
+                "source": "https://github.com/amphp/dns/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -313,7 +313,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-18T15:49:57+00:00"
+            "time": "2024-01-30T23:25:30+00:00"
         },
         {
             "name": "amphp/parallel",
@@ -11621,6 +11621,47 @@
             "time": "2023-04-01T12:26:34+00:00"
         },
         {
+            "name": "revangelista/laravel-idempotency",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/renevangelista/laravel-idempotency.git",
+                "reference": "8e20234cabeba8eff9f528d0ac8baebea9832496"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/renevangelista/laravel-idempotency/zipball/8e20234cabeba8eff9f528d0ac8baebea9832496",
+                "reference": "8e20234cabeba8eff9f528d0ac8baebea9832496",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Idempotency\\IdempotencyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Idempotency\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel Idempotency Middleware",
+            "support": {
+                "issues": "https://github.com/renevangelista/laravel-idempotency/issues",
+                "source": "https://github.com/renevangelista/laravel-idempotency/tree/1.0.0"
+            },
+            "time": "2021-05-07T21:40:39+00:00"
+        },
+        {
             "name": "revolt/event-loop",
             "version": "v1.0.6",
             "source": {
@@ -13712,6 +13753,67 @@
                 }
             ],
             "time": "2023-12-25T11:46:58+00:00"
+        },
+        {
+            "name": "square1/laravel-idempotency",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/square1-io/laravel-idempotency.git",
+                "reference": "20630af3e2e2e4faecfc492f1ab0e715b1d01f35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/20630af3e2e2e4faecfc492f1ab0e715b1d01f35",
+                "reference": "20630af3e2e2e4faecfc492f1ab0e715b1d01f35",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9.0|^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/laravel": "^10.3",
+                "laravel/pint": "^1.13",
+                "orchestra/testbench": "^8.18",
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Square1\\LaravelIdempotency\\IdempotencyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Square1\\LaravelIdempotency\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Conroy",
+                    "email": "paul@square1.io"
+                }
+            ],
+            "description": "Add idempotency to Laravel-based APIs, preventing duplicate request processing.",
+            "homepage": "https://github.com/square1-io/laravel-idempotency",
+            "keywords": [
+                "api",
+                "idempotency",
+                "laravel-idempotency",
+                "square1"
+            ],
+            "support": {
+                "issues": "https://github.com/square1-io/laravel-idempotency/issues",
+                "source": "https://github.com/square1-io/laravel-idempotency/tree/1.0.0"
+            },
+            "time": "2023-12-31T18:14:44+00:00"
         },
         {
             "name": "staudenmeir/eloquent-has-many-deep-contracts",
@@ -18872,16 +18974,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.48.0",
+            "version": "v3.49.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "a92472c6fb66349de25211f31c77eceae3df024e"
+                "reference": "8742f7aa6f72a399688b65e4f58992c2d4681fc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/a92472c6fb66349de25211f31c77eceae3df024e",
-                "reference": "a92472c6fb66349de25211f31c77eceae3df024e",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/8742f7aa6f72a399688b65e4f58992c2d4681fc2",
+                "reference": "8742f7aa6f72a399688b65e4f58992c2d4681fc2",
                 "shasum": ""
             },
             "require": {
@@ -18951,7 +19053,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.48.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.49.0"
             },
             "funding": [
                 {
@@ -18959,7 +19061,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-19T21:44:39+00:00"
+            "time": "2024-02-02T00:41:40+00:00"
         },
         {
             "name": "guanguans/ai-commit",
@@ -18967,12 +19069,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "97aaaf68942bd5f770fd6d3f882bc74217b83d37"
+                "reference": "a08f8aba2f1e7b596bba2853ff98e00cf3548561"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/97aaaf68942bd5f770fd6d3f882bc74217b83d37",
-                "reference": "97aaaf68942bd5f770fd6d3f882bc74217b83d37",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/a08f8aba2f1e7b596bba2853ff98e00cf3548561",
+                "reference": "a08f8aba2f1e7b596bba2853ff98e00cf3548561",
                 "shasum": ""
             },
             "require": {
@@ -19078,7 +19180,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-01-30T21:48:58+00:00"
+            "time": "2024-02-01T22:02:41+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
@@ -22860,12 +22962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "e3b3cce1f2454ee4575500e084211b11efdaf64b"
+                "reference": "d02a0751a04e225f422fe3104ae2be3fb994b8c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/e3b3cce1f2454ee4575500e084211b11efdaf64b",
-                "reference": "e3b3cce1f2454ee4575500e084211b11efdaf64b",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d02a0751a04e225f422fe3104ae2be3fb994b8c3",
+                "reference": "d02a0751a04e225f422fe3104ae2be3fb994b8c3",
                 "shasum": ""
             },
             "conflict": {
@@ -22919,6 +23021,7 @@
                 "bolt/bolt": "<3.7.2",
                 "bolt/core": "<=4.2",
                 "bottelet/flarepoint": "<2.2.1",
+                "bref/bref": "<2.1.13",
                 "brightlocal/phpwhois": "<=4.2.5",
                 "brotkrueml/codehighlight": "<2.7",
                 "brotkrueml/schema": "<1.13.1|>=2,<2.5.1",
@@ -23149,7 +23252,7 @@
                 "liftkit/database": "<2.13.2",
                 "limesurvey/limesurvey": "<3.27.19",
                 "livehelperchat/livehelperchat": "<=3.91",
-                "livewire/livewire": ">2.2.4,<2.2.6",
+                "livewire/livewire": "<3.0.4",
                 "lms/routes": "<2.1.1",
                 "localizationteam/l10nmgr": "<7.4|>=8,<8.7|>=9,<9.2",
                 "luyadev/yii-helpers": "<1.2.1",
@@ -23165,7 +23268,7 @@
                 "marcwillmann/turn": "<0.3.3",
                 "matyhtf/framework": "<3.0.6",
                 "mautic/core": "<4.3",
-                "mediawiki/core": ">=1.27,<1.27.6|>=1.29,<1.29.3|>=1.30,<1.30.2|>=1.31,<1.31.9|>=1.32,<1.32.6|>=1.32.99,<1.33.3|>=1.33.99,<1.34.3|>=1.34.99,<1.35",
+                "mediawiki/core": "<1.36.2",
                 "mediawiki/matomo": "<2.4.3",
                 "mediawiki/semantic-media-wiki": "<4.0.2",
                 "melisplatform/melis-asset-manager": "<5.0.1",
@@ -23368,7 +23471,7 @@
                 "spoonity/tcpdf": "<6.2.22",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
                 "ssddanbrown/bookstack": "<22.02.3",
-                "statamic/cms": "<4.36",
+                "statamic/cms": "<4.46",
                 "stormpath/sdk": "<9.9.99",
                 "studio-42/elfinder": "<2.1.62",
                 "subhh/libconnect": "<7.0.8|>=8,<8.1",
@@ -23584,7 +23687,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-31T19:04:19+00:00"
+            "time": "2024-02-01T22:04:53+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
