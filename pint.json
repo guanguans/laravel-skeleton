@@ -67,6 +67,10 @@
                 "use",
                 "use_trait"
             ]
+        },
+        "class_definition": {
+            "inline_constructor_arguments": false,
+            "space_before_parenthesis": false
         }
     },
     "exclude": [

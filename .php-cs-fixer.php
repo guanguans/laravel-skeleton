@@ -40,6 +40,9 @@ $finder = Finder::create()
             __DIR__.'/server.php',
         ], true)
     ))
+    ->append([
+        __DIR__.'/composer-updater',
+    ])
     ->notPath([
         'bootstrap/*',
         'storage/*',
@@ -338,10 +341,13 @@ return (new Config())
                 // 'var',
             ],
         ],
-
         'method_argument_space' => [
             'keep_multiple_spaces_after_comma' => true,
             'on_multiline' => 'ensure_fully_multiline',
+        ],
+        'class_definition' => [
+            'inline_constructor_arguments' => false,
+            'space_before_parenthesis' => false,
         ],
 
         // https://github.com/kubawerlos/php-cs-fixer-custom-fixers
