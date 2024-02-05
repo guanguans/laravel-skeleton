@@ -24,14 +24,18 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         'static',
         'stdClass',
         'true',
+        'php_errormsg',
+        'http_response_header',
+        'GLOBALS',
         '_SERVER',
         '_GET',
         '_POST',
-        '_REQUEST',
-        '_SESSION',
-        '_COOKIE',
         '_FILES',
+        '_REQUEST',
+        '_COOKIE',
+        '_SESSION',
         '_ENV',
+        '_PHP_SELF',
     ];
 
     public function getRuleDefinition(): RuleDefinition
