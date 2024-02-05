@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Variable \\$file might not be defined\\.$#"
+			count: 1
+			path: app/Console/Commands/ParsePHPFileToASTCommand.php
+
+		-
 			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
 			count: 1
 			path: app/Support/Macros/BlueprintMacro.php
