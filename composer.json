@@ -125,7 +125,7 @@
         "laravel/sail": "^1.27",
         "laravel/telescope": "^4.17",
         "mockery/mockery": "^1.6",
-        "mortexa/laravel-arkitect": "^0.6",
+        "mortexa/laravel-arkitect": "^0.7",
         "nunomaduro/collision": "^7.10 || ^8.0",
         "orangehill/iseed": "^3.0",
         "phpstan/extension-installer": "^1.3",
