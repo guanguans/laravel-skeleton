@@ -251,7 +251,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         })($name));
 
         if ($node instanceof Node\Name) {
-            $node->parts[\count($node->parts) - 1] = $renamer($node->parts[\count($node->parts) - 1]);
+            $node->getParts()[\count($node->getParts()) - 1] = $renamer($node->getParts()[\count($node->getParts()) - 1]);
 
             return $node;
         }
