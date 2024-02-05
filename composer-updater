@@ -36,7 +36,7 @@ $status = (new SingleCommandApplication())
     ->setCode(function (InputInterface $input, OutputInterface $output): void {
         assert_options(ASSERT_BAIL, 1);
         assert($this instanceof SingleCommandApplication);
-        // assert((bool) $input->getOption('highest-php-binary'));
+        assert((bool) $input->getOption('highest-php-binary'));
 
         (new class(
             $input->getOption('composer-json-path') ?: __DIR__.'/composer.json',
@@ -220,7 +220,7 @@ $status = (new SingleCommandApplication())
                 ?string $cwd = null,
                 ?array $env = null,
                 mixed $input = null,
-                ?float $timeout = 60
+                ?float $timeout = 300
             ): Process {
                 $process = is_string($command)
                     ? Process::fromShellCommandline($command, $cwd, $env, $input, $timeout)
