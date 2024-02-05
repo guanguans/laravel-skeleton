@@ -1559,16 +1559,16 @@
         },
         {
             "name": "calebporzio/sushi",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/calebporzio/sushi.git",
-                "reference": "b0fb1e28509a103ada5c37d5f872ddd92dc20717"
+                "reference": "20aad4e9d9ea74df64a86f6d327e55bdfc92d204"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/calebporzio/sushi/zipball/b0fb1e28509a103ada5c37d5f872ddd92dc20717",
-                "reference": "b0fb1e28509a103ada5c37d5f872ddd92dc20717",
+                "url": "https://api.github.com/repos/calebporzio/sushi/zipball/20aad4e9d9ea74df64a86f6d327e55bdfc92d204",
+                "reference": "20aad4e9d9ea74df64a86f6d327e55bdfc92d204",
                 "shasum": ""
             },
             "require": {
@@ -1600,7 +1600,7 @@
             ],
             "description": "Eloquent's missing \"array\" driver.",
             "support": {
-                "source": "https://github.com/calebporzio/sushi/tree/v2.5.0"
+                "source": "https://github.com/calebporzio/sushi/tree/v2.5.1"
             },
             "funding": [
                 {
@@ -1608,7 +1608,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-04T14:21:59+00:00"
+            "time": "2024-02-05T14:40:50+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
