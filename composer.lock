@@ -23660,16 +23660,16 @@
         },
         {
             "name": "salahhusa9/laravel-updater",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/salahhusa9/laravel-updater.git",
-                "reference": "705485c97efaa161da81b3cc825e2b20c1f43d6f"
+                "reference": "73654062394e90cd1d846973e78fd50ee6ebe4ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/705485c97efaa161da81b3cc825e2b20c1f43d6f",
-                "reference": "705485c97efaa161da81b3cc825e2b20c1f43d6f",
+                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/73654062394e90cd1d846973e78fd50ee6ebe4ed",
+                "reference": "73654062394e90cd1d846973e78fd50ee6ebe4ed",
                 "shasum": ""
             },
             "require": {
@@ -23731,7 +23731,7 @@
             ],
             "support": {
                 "issues": "https://github.com/salahhusa9/laravel-updater/issues",
-                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.0.1"
+                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.0.2"
             },
             "funding": [
                 {
@@ -23739,7 +23739,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-03T15:11:37+00:00"
+            "time": "2024-02-10T11:20:04+00:00"
         },
         {
             "name": "sebastian/cli-parser",
