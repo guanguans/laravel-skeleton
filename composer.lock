@@ -655,16 +655,16 @@
         },
         {
             "name": "amphp/socket",
-            "version": "v2.2.2",
+            "version": "v2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/socket.git",
-                "reference": "eb6c5e6baae5aebd9a209f50e81bff38c7efef97"
+                "reference": "40c80bdc67a9f975ecb5f4083e3c84ef9f23eace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/socket/zipball/eb6c5e6baae5aebd9a209f50e81bff38c7efef97",
-                "reference": "eb6c5e6baae5aebd9a209f50e81bff38c7efef97",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/40c80bdc67a9f975ecb5f4083e3c84ef9f23eace",
+                "reference": "40c80bdc67a9f975ecb5f4083e3c84ef9f23eace",
                 "shasum": ""
             },
             "require": {
@@ -683,7 +683,7 @@
                 "amphp/phpunit-util": "^3",
                 "amphp/process": "^2",
                 "phpunit/phpunit": "^9",
-                "psalm/phar": "^5.4"
+                "psalm/phar": "5.20"
             },
             "type": "library",
             "autoload": {
@@ -727,7 +727,7 @@
             ],
             "support": {
                 "issues": "https://github.com/amphp/socket/issues",
-                "source": "https://github.com/amphp/socket/tree/v2.2.2"
+                "source": "https://github.com/amphp/socket/tree/v2.2.3"
             },
             "funding": [
                 {
@@ -735,7 +735,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-31T18:12:01+00:00"
+            "time": "2024-02-13T21:03:09+00:00"
         },
         {
             "name": "amphp/sync",
@@ -13554,38 +13554,38 @@
         },
         {
             "name": "spatie/php-structure-discoverer",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/php-structure-discoverer.git",
-                "reference": "d2e4e6cba962ce2a058ea415a123dd84b37765ac"
+                "reference": "f5b3c935dda89d6c382b27e3caf348fa80bcfa88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/php-structure-discoverer/zipball/d2e4e6cba962ce2a058ea415a123dd84b37765ac",
-                "reference": "d2e4e6cba962ce2a058ea415a123dd84b37765ac",
+                "url": "https://api.github.com/repos/spatie/php-structure-discoverer/zipball/f5b3c935dda89d6c382b27e3caf348fa80bcfa88",
+                "reference": "f5b3c935dda89d6c382b27e3caf348fa80bcfa88",
                 "shasum": ""
             },
             "require": {
                 "amphp/amp": "^v3.0",
                 "amphp/parallel": "^2.2",
-                "illuminate/collections": "^9.30|^10.0",
+                "illuminate/collections": "^10.0|^11.0",
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.4.3",
                 "symfony/finder": "^6.0|^7.0"
             },
             "require-dev": {
-                "illuminate/console": "^9.30|^10.0",
+                "illuminate/console": "^10.0|^11.0",
                 "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^6.0",
+                "nunomaduro/collision": "^7.0|^8.0",
                 "nunomaduro/larastan": "^2.0.1",
-                "orchestra/testbench": "^7.0|^8.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
+                "orchestra/testbench": "^7.0|^8.0|^9.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^9.5|^10.0",
                 "spatie/laravel-ray": "^1.26"
             },
             "type": "library",
@@ -13622,7 +13622,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/php-structure-discoverer/issues",
-                "source": "https://github.com/spatie/php-structure-discoverer/tree/2.0.1"
+                "source": "https://github.com/spatie/php-structure-discoverer/tree/2.1.0"
             },
             "funding": [
                 {
@@ -13630,7 +13630,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-08T21:01:26+00:00"
+            "time": "2024-02-16T12:42:24+00:00"
         },
         {
             "name": "spatie/regex",
