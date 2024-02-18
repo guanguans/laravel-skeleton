@@ -26,6 +26,11 @@ parameters:
 			path: app/Support/Macros/RequestMacro.php
 
 		-
+			message: "#^Access to an undefined property App\\\\Support\\\\Macros\\\\SchedulingEventMacro\\:\\:\\$channels\\.$#"
+			count: 1
+			path: app/Support/Macros/SchedulingEventMacro.php
+
+		-
 			message: "#^Class App\\\\Support\\\\FoundationSDK referenced with incorrect case\\: App\\\\Support\\\\FoundationSdk\\.$#"
 			count: 1
 			path: app/Support/PushDeer.php
