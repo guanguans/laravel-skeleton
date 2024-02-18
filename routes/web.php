@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Overtrue\LaravelUploader\LaravelUploader;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::get('/', static fn () => view('welcome'));
 Route::fallback(static function (): void {
     // redirect 404
 });
+
+LaravelUploader::routes();

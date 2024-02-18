@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use WendellAdriel\ValidatedDTO\ResourceDTO;
+
+class {{ class }} extends ResourceDTO
+{
+    protected function defaults(): array
+    {
+        return [];
+    }
+
+    protected function casts(): array
+    {
+        return [];
+    }
+}
