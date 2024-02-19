@@ -2639,16 +2639,16 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.0.9",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "2930cd5ef353871c821d5c43ed030d39ac8cfe65"
+                "reference": "5817d0659c5b50c9b950feb9af7b9668e2c436bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/2930cd5ef353871c821d5c43ed030d39ac8cfe65",
-                "reference": "2930cd5ef353871c821d5c43ed030d39ac8cfe65",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/5817d0659c5b50c9b950feb9af7b9668e2c436bc",
+                "reference": "5817d0659c5b50c9b950feb9af7b9668e2c436bc",
                 "shasum": ""
             },
             "require": {
@@ -2710,7 +2710,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.0.9"
+                "source": "https://github.com/doctrine/inflector/tree/2.0.10"
             },
             "funding": [
                 {
@@ -2726,7 +2726,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-15T18:05:13+00:00"
+            "time": "2024-02-18T20:23:39+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -5810,16 +5810,16 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "4.30.0",
+            "version": "4.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "a92f7fac2ed957e1cd660e477c7a0f650d507ad6"
+                "reference": "0900c0d44965b0a13c480a8ea6dbc27e4698bcd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/a92f7fac2ed957e1cd660e477c7a0f650d507ad6",
-                "reference": "a92f7fac2ed957e1cd660e477c7a0f650d507ad6",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/0900c0d44965b0a13c480a8ea6dbc27e4698bcd9",
+                "reference": "0900c0d44965b0a13c480a8ea6dbc27e4698bcd9",
                 "shasum": ""
             },
             "require": {
@@ -5838,7 +5838,7 @@
                 "php": ">=8.0",
                 "ramsey/uuid": "^4.2.2",
                 "shalvah/clara": "^3.1.0",
-                "shalvah/upgrader": "^0.3.0",
+                "shalvah/upgrader": "^0.4.0",
                 "spatie/data-transfer-object": "^2.6|^3.0",
                 "symfony/var-exporter": "^5.4|^6.0|^7.0",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
@@ -5893,7 +5893,7 @@
             ],
             "support": {
                 "issues": "https://github.com/knuckleswtf/scribe/issues",
-                "source": "https://github.com/knuckleswtf/scribe/tree/4.30.0"
+                "source": "https://github.com/knuckleswtf/scribe/tree/4.30.1"
             },
             "funding": [
                 {
@@ -5901,7 +5901,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-02-13T05:31:24+00:00"
+            "time": "2024-02-18T14:19:49+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -9714,16 +9714,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc"
+                "reference": "bc3dc91a5e9b14aa06d1d9e90647c5c5a2cc5353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/fad452781b3d774e3337b0c0b245dd8e5a4455fc",
-                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/bc3dc91a5e9b14aa06d1d9e90647c5c5a2cc5353",
+                "reference": "bc3dc91a5e9b14aa06d1d9e90647c5c5a2cc5353",
                 "shasum": ""
             },
             "require": {
@@ -9766,9 +9766,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.8.0"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.8.1"
             },
-            "time": "2024-01-11T11:49:22+00:00"
+            "time": "2024-01-18T19:15:27+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -11900,21 +11900,21 @@
         },
         {
             "name": "shalvah/upgrader",
-            "version": "0.3.1",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shalvah/upgrader.git",
-                "reference": "c7f1cca8be5cd0114cd816d8bfff9c80565f7390"
+                "reference": "b9c5dcccf226ff29b5e6f9a53dfe3b96a30acf7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shalvah/upgrader/zipball/c7f1cca8be5cd0114cd816d8bfff9c80565f7390",
-                "reference": "c7f1cca8be5cd0114cd816d8bfff9c80565f7390",
+                "url": "https://api.github.com/repos/shalvah/upgrader/zipball/b9c5dcccf226ff29b5e6f9a53dfe3b96a30acf7a",
+                "reference": "b9c5dcccf226ff29b5e6f9a53dfe3b96a30acf7a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^8.0|^9.0|^10.0",
-                "nikic/php-parser": "^4.13",
+                "illuminate/support": ">=8.0",
+                "nikic/php-parser": "^4.13|^5.0",
                 "php": ">=8.0"
             },
             "require-dev": {
@@ -11946,7 +11946,7 @@
             ],
             "support": {
                 "issues": "https://github.com/shalvah/upgrader/issues",
-                "source": "https://github.com/shalvah/upgrader/tree/0.3.1"
+                "source": "https://github.com/shalvah/upgrader/tree/0.4.0"
             },
             "funding": [
                 {
@@ -11954,7 +11954,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-02-06T01:20:37+00:00"
+            "time": "2024-02-14T23:57:54+00:00"
         },
         {
             "name": "skywarth/chaotic-schedule",
