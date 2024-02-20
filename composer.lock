@@ -5810,16 +5810,16 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "4.30.1",
+            "version": "4.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "0900c0d44965b0a13c480a8ea6dbc27e4698bcd9"
+                "reference": "528134062eebf4c2908e16544b8fb78d140036b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/0900c0d44965b0a13c480a8ea6dbc27e4698bcd9",
-                "reference": "0900c0d44965b0a13c480a8ea6dbc27e4698bcd9",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/528134062eebf4c2908e16544b8fb78d140036b4",
+                "reference": "528134062eebf4c2908e16544b8fb78d140036b4",
                 "shasum": ""
             },
             "require": {
@@ -5833,12 +5833,12 @@
                 "illuminate/support": "^8.0|^9.0|^10.0",
                 "league/flysystem": "^1.1.4|^2.1.1|^3.0",
                 "mpociot/reflection-docblock": "^1.0.1",
-                "nikic/php-parser": "^4.10|^5.0",
+                "nikic/php-parser": "^4.10",
                 "nunomaduro/collision": "^5.10|^6.0|^7.0|^8.0",
                 "php": ">=8.0",
                 "ramsey/uuid": "^4.2.2",
                 "shalvah/clara": "^3.1.0",
-                "shalvah/upgrader": "^0.4.0",
+                "shalvah/upgrader": "^0.3.0",
                 "spatie/data-transfer-object": "^2.6|^3.0",
                 "symfony/var-exporter": "^5.4|^6.0|^7.0",
                 "symfony/yaml": "^5.4|^6.0|^7.0"
@@ -5893,7 +5893,7 @@
             ],
             "support": {
                 "issues": "https://github.com/knuckleswtf/scribe/issues",
-                "source": "https://github.com/knuckleswtf/scribe/tree/4.30.1"
+                "source": "https://github.com/knuckleswtf/scribe/tree/4.31.0"
             },
             "funding": [
                 {
@@ -5901,7 +5901,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-02-18T14:19:49+00:00"
+            "time": "2024-02-20T12:00:08+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -6053,16 +6053,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.44.0",
+            "version": "v10.45.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6"
+                "reference": "8b08d8cd79f8093eb51a8c59e21647bedfbf05f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1199dbe361787bbe9648131a79f53921b4148cf6",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8b08d8cd79f8093eb51a8c59e21647bedfbf05f2",
+                "reference": "8b08d8cd79f8093eb51a8c59e21647bedfbf05f2",
                 "shasum": ""
             },
             "require": {
@@ -6255,7 +6255,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-02-13T16:01:16+00:00"
+            "time": "2024-02-20T15:32:48+00:00"
         },
         {
             "name": "laravel/octane",
@@ -11900,21 +11900,21 @@
         },
         {
             "name": "shalvah/upgrader",
-            "version": "0.4.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shalvah/upgrader.git",
-                "reference": "b9c5dcccf226ff29b5e6f9a53dfe3b96a30acf7a"
+                "reference": "c7f1cca8be5cd0114cd816d8bfff9c80565f7390"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shalvah/upgrader/zipball/b9c5dcccf226ff29b5e6f9a53dfe3b96a30acf7a",
-                "reference": "b9c5dcccf226ff29b5e6f9a53dfe3b96a30acf7a",
+                "url": "https://api.github.com/repos/shalvah/upgrader/zipball/c7f1cca8be5cd0114cd816d8bfff9c80565f7390",
+                "reference": "c7f1cca8be5cd0114cd816d8bfff9c80565f7390",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": ">=8.0",
-                "nikic/php-parser": "^4.13|^5.0",
+                "illuminate/support": "^8.0|^9.0|^10.0",
+                "nikic/php-parser": "^4.13",
                 "php": ">=8.0"
             },
             "require-dev": {
@@ -11946,7 +11946,7 @@
             ],
             "support": {
                 "issues": "https://github.com/shalvah/upgrader/issues",
-                "source": "https://github.com/shalvah/upgrader/tree/0.4.0"
+                "source": "https://github.com/shalvah/upgrader/tree/0.3.1"
             },
             "funding": [
                 {
@@ -11954,7 +11954,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-02-14T23:57:54+00:00"
+            "time": "2023-02-06T01:20:37+00:00"
         },
         {
             "name": "skywarth/chaotic-schedule",
