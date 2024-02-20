@@ -6053,16 +6053,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.44.0",
+            "version": "v10.45.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6"
+                "reference": "8b08d8cd79f8093eb51a8c59e21647bedfbf05f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1199dbe361787bbe9648131a79f53921b4148cf6",
-                "reference": "1199dbe361787bbe9648131a79f53921b4148cf6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8b08d8cd79f8093eb51a8c59e21647bedfbf05f2",
+                "reference": "8b08d8cd79f8093eb51a8c59e21647bedfbf05f2",
                 "shasum": ""
             },
             "require": {
@@ -6255,7 +6255,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-02-13T16:01:16+00:00"
+            "time": "2024-02-20T15:32:48+00:00"
         },
         {
             "name": "laravel/octane",
@@ -6480,16 +6480,16 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.0.0-beta12",
+            "version": "v1.0.0-beta13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "fa9aedb2de38360412b1f7843c33a8142ec9901c"
+                "reference": "e6d53d92e137be9cc3f001b88e31e722038594a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/fa9aedb2de38360412b1f7843c33a8142ec9901c",
-                "reference": "fa9aedb2de38360412b1f7843c33a8142ec9901c",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/e6d53d92e137be9cc3f001b88e31e722038594a6",
+                "reference": "e6d53d92e137be9cc3f001b88e31e722038594a6",
                 "shasum": ""
             },
             "require": {
@@ -6562,7 +6562,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2024-02-13T14:50:59+00:00"
+            "time": "2024-02-19T14:28:51+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -7606,16 +7606,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "266ee3dcaef540f666d4eee19a314025aba5c6e4"
+                "reference": "7e7d638183b34fb61621455891869f5abfd55a82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/266ee3dcaef540f666d4eee19a314025aba5c6e4",
-                "reference": "266ee3dcaef540f666d4eee19a314025aba5c6e4",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/7e7d638183b34fb61621455891869f5abfd55a82",
+                "reference": "7e7d638183b34fb61621455891869f5abfd55a82",
                 "shasum": ""
             },
             "require": {
@@ -7669,7 +7669,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.4.5"
+                "source": "https://github.com/livewire/livewire/tree/v3.4.6"
             },
             "funding": [
                 {
@@ -7677,7 +7677,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-19T14:52:03+00:00"
+            "time": "2024-02-20T14:04:25+00:00"
         },
         {
             "name": "lorisleiva/cron-translator",
