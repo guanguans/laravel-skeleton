@@ -39,6 +39,7 @@
         "hamidrezaniazi/pecs": "^1.0",
         "hammerstone/fast-paginate": "^1.0",
         "hammerstone/laravel-pseudo-daemon": "^1.1",
+        "hashids/hashids": "^5.0",
         "jasny/sso": "^0.5",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^5.2",
