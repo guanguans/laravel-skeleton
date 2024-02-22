@@ -13993,16 +13993,16 @@
         },
         {
             "name": "square1/laravel-idempotency",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/square1-io/laravel-idempotency.git",
-                "reference": "20630af3e2e2e4faecfc492f1ab0e715b1d01f35"
+                "reference": "e0f0f200ad2417aa5f2519781abc560345258188"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/20630af3e2e2e4faecfc492f1ab0e715b1d01f35",
-                "reference": "20630af3e2e2e4faecfc492f1ab0e715b1d01f35",
+                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/e0f0f200ad2417aa5f2519781abc560345258188",
+                "reference": "e0f0f200ad2417aa5f2519781abc560345258188",
                 "shasum": ""
             },
             "require": {
@@ -14048,9 +14048,9 @@
             ],
             "support": {
                 "issues": "https://github.com/square1-io/laravel-idempotency/issues",
-                "source": "https://github.com/square1-io/laravel-idempotency/tree/1.0.0"
+                "source": "https://github.com/square1-io/laravel-idempotency/tree/1.1.0"
             },
-            "time": "2023-12-31T18:14:44+00:00"
+            "time": "2024-02-22T18:39:14+00:00"
         },
         {
             "name": "staudenmeir/eloquent-has-many-deep-contracts",
