@@ -4,8 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd71e5da3c755678584f57af6d10d973",
+    "content-hash": "34a5f8ba68539c4b3ffb3b2a19ce5a02",
     "packages": [
+        {
+            "name": "alexandre-daubois/monolog-processor-collection",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexandre-daubois/monolog-processor-collection.git",
+                "reference": "8b902e274771482931bc1732144cbc017dc0c190"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexandre-daubois/monolog-processor-collection/zipball/8b902e274771482931bc1732144cbc017dc0c190",
+                "reference": "8b902e274771482931bc1732144cbc017dc0c190",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "^3",
+                "php": ">=8.1",
+                "symfony/uid": "^6.3|^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.37",
+                "phpunit/phpunit": "^10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MonologProcessorCollection\\": "src/",
+                    "MonologProcessorCollection\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Daubois",
+                    "email": "alex.daubois@gmail.com"
+                }
+            ],
+            "description": "A collection of Monolog processors",
+            "keywords": [
+                "PSR3",
+                "collection",
+                "log",
+                "logging",
+                "monolog",
+                "processor",
+                "psr-3",
+                "psr-3-logger",
+                "psr-3-logging",
+                "psr3-logger",
+                "psr3-logging"
+            ],
+            "support": {
+                "issues": "https://github.com/alexandre-daubois/monolog-processor-collection/issues",
+                "source": "https://github.com/alexandre-daubois/monolog-processor-collection/tree/1.3.2"
+            },
+            "time": "2023-12-23T17:55:38+00:00"
+        },
         {
             "name": "amphp/amp",
             "version": "v3.0.0",
@@ -19213,12 +19273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "dfa5c11e42a906660fb64211332f258ea47734ce"
+                "reference": "11fc5f82fd2e5dce546fa9abde064fb91685be94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/dfa5c11e42a906660fb64211332f258ea47734ce",
-                "reference": "dfa5c11e42a906660fb64211332f258ea47734ce",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/11fc5f82fd2e5dce546fa9abde064fb91685be94",
+                "reference": "11fc5f82fd2e5dce546fa9abde064fb91685be94",
                 "shasum": ""
             },
             "require": {
@@ -19324,7 +19384,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-02-20T21:42:39+00:00"
+            "time": "2024-02-21T21:29:45+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
@@ -20645,16 +20705,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "14.3.1",
+            "version": "14.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "2bd4241f94dd0c0d9dc998627d46802c7f85c055"
+                "reference": "ddb4f5e022b3e6cca7e6b33545e054df31149a33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/2bd4241f94dd0c0d9dc998627d46802c7f85c055",
-                "reference": "2bd4241f94dd0c0d9dc998627d46802c7f85c055",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/ddb4f5e022b3e6cca7e6b33545e054df31149a33",
+                "reference": "ddb4f5e022b3e6cca7e6b33545e054df31149a33",
                 "shasum": ""
             },
             "require": {
@@ -20701,7 +20761,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-02-19T22:57:28+00:00"
+            "time": "2024-02-21T16:35:40+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -21041,16 +21101,16 @@
         },
         {
             "name": "laravel-lang/publisher",
-            "version": "16.2.1",
+            "version": "16.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/publisher.git",
-                "reference": "c59f53ce0b9f50b7f18edb5758eebc9e7d1eabe8"
+                "reference": "35157978fba8c23b43190fbff0a555832ca60931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/publisher/zipball/c59f53ce0b9f50b7f18edb5758eebc9e7d1eabe8",
-                "reference": "c59f53ce0b9f50b7f18edb5758eebc9e7d1eabe8",
+                "url": "https://api.github.com/repos/Laravel-Lang/publisher/zipball/35157978fba8c23b43190fbff0a555832ca60931",
+                "reference": "35157978fba8c23b43190fbff0a555832ca60931",
                 "shasum": ""
             },
             "require": {
@@ -21134,7 +21194,7 @@
                 "issues": "https://github.com/Laravel-Lang/publisher/issues",
                 "source": "https://github.com/Laravel-Lang/publisher"
             },
-            "time": "2024-02-07T18:57:10+00:00"
+            "time": "2024-02-21T22:07:40+00:00"
         },
         {
             "name": "laravel-shift/factory-generator",
@@ -23105,12 +23165,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "d8ab7c4dd4b7172603942f188754ec46cc3327bb"
+                "reference": "1f77ae7f854c4163fc16d6500cea53e202e38f83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d8ab7c4dd4b7172603942f188754ec46cc3327bb",
-                "reference": "d8ab7c4dd4b7172603942f188754ec46cc3327bb",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/1f77ae7f854c4163fc16d6500cea53e202e38f83",
+                "reference": "1f77ae7f854c4163fc16d6500cea53e202e38f83",
                 "shasum": ""
             },
             "conflict": {
@@ -23492,7 +23552,7 @@
                 "pegasus/google-for-jobs": "<1.5.1|>=2,<2.1.1",
                 "personnummer/personnummer": "<3.0.2",
                 "phanan/koel": "<5.1.4",
-                "phenx/php-svg-lib": "<0.5.1",
+                "phenx/php-svg-lib": "<0.5.2",
                 "php-mod/curl": "<2.3.2",
                 "phpbb/phpbb": "<3.2.10|>=3.3,<3.3.1",
                 "phpems/phpems": ">=6,<=6.1.3",
@@ -23836,7 +23896,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-21T00:14:08+00:00"
+            "time": "2024-02-21T19:04:16+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
