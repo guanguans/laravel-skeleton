@@ -12785,27 +12785,27 @@
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
-            "version": "4.2.1",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-failed-job-monitor.git",
-                "reference": "b07a6d9736c49ba6519346a101bb98224d7b4608"
+                "reference": "f4722c5f26ba870c92790795900a2f22523d0466"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-failed-job-monitor/zipball/b07a6d9736c49ba6519346a101bb98224d7b4608",
-                "reference": "b07a6d9736c49ba6519346a101bb98224d7b4608",
+                "url": "https://api.github.com/repos/spatie/laravel-failed-job-monitor/zipball/f4722c5f26ba870c92790795900a2f22523d0466",
+                "reference": "f4722c5f26ba870c92790795900a2f22523d0466",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^7.0|^8.0|^9.0|^10.0",
+                "laravel/framework": "^7.0|^8.0|^9.0|^10.0|^11.0",
                 "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.6"
             },
             "require-dev": {
                 "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0",
-                "phpunit/phpunit": "^8.5|^9.5"
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.22|^2.34"
             },
             "suggest": {
                 "guzzlehttp/guzzle": "Allows notifications to be sent to Slack",
@@ -12848,7 +12848,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.2.1"
+                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.3.0"
             },
             "funding": [
                 {
@@ -12856,7 +12856,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-19T17:12:44+00:00"
+            "time": "2024-02-28T10:04:53+00:00"
         },
         {
             "name": "spatie/laravel-health",
