@@ -17460,21 +17460,21 @@
         },
         {
             "name": "valorin/pwned-validator",
-            "version": "1.3.6",
+            "version": "1.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/valorin/pwned-validator.git",
-                "reference": "bccaad25e80f30506f027e157158aa32ad962856"
+                "reference": "705e57319f483d1cd5ec68c460e647117a4699b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/valorin/pwned-validator/zipball/bccaad25e80f30506f027e157158aa32ad962856",
-                "reference": "bccaad25e80f30506f027e157158aa32ad962856",
+                "url": "https://api.github.com/repos/valorin/pwned-validator/zipball/705e57319f483d1cd5ec68c460e647117a4699b8",
+                "reference": "705e57319f483d1cd5ec68c460e647117a4699b8",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "illuminate/support": "^5.5||^6.0||^7.0||^8.0|^9.0|^10.0",
+                "illuminate/support": "^5.5||^6.0||^7.0||^8.0|^9.0|^10.0||^11.0",
                 "php": ">=7.2"
             },
             "type": "library",
@@ -17503,7 +17503,7 @@
             "description": "Super simple Laravel Validator for checking password via the Pwned Passwords service of Have I Been Pwned",
             "support": {
                 "issues": "https://github.com/valorin/pwned-validator/issues",
-                "source": "https://github.com/valorin/pwned-validator/tree/1.3.6"
+                "source": "https://github.com/valorin/pwned-validator/tree/1.3.7"
             },
             "funding": [
                 {
@@ -17511,7 +17511,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-08T00:05:17+00:00"
+            "time": "2024-02-28T07:44:52+00:00"
         },
         {
             "name": "vectorface/whip",
