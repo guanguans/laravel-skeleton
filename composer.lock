@@ -25408,23 +25408,23 @@
         },
         {
             "name": "thedoctor0/laravel-factory-generator",
-            "version": "1.3.2",
+            "version": "1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDoctor0/laravel-factory-generator.git",
-                "reference": "7ee56e4229b78d5f6274a4649819b2bca0bd56e3"
+                "reference": "65d1f1be729e706c264b20c3fa25615d0bf76890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDoctor0/laravel-factory-generator/zipball/7ee56e4229b78d5f6274a4649819b2bca0bd56e3",
-                "reference": "7ee56e4229b78d5f6274a4649819b2bca0bd56e3",
+                "url": "https://api.github.com/repos/TheDoctor0/laravel-factory-generator/zipball/65d1f1be729e706c264b20c3fa25615d0bf76890",
+                "reference": "65d1f1be729e706c264b20c3fa25615d0bf76890",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^2.9|^2.10|^3.0",
-                "illuminate/console": "^8.0|^9.0|^10.0",
-                "illuminate/filesystem": "^8.0|^9.0|^10.0",
-                "illuminate/support": "^8.0|^9.0|^10.0",
+                "illuminate/console": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/filesystem": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
                 "php": ">=7.4"
             },
             "type": "library",
@@ -25454,7 +25454,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TheDoctor0/laravel-factory-generator/issues",
-                "source": "https://github.com/TheDoctor0/laravel-factory-generator/tree/1.3.2"
+                "source": "https://github.com/TheDoctor0/laravel-factory-generator/tree/1.3.3"
             },
             "funding": [
                 {
@@ -25466,7 +25466,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-21T16:45:43+00:00"
+            "time": "2024-02-28T08:51:47+00:00"
         },
         {
             "name": "theseer/tokenizer",
