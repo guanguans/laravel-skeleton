@@ -1129,25 +1129,25 @@
         },
         {
             "name": "awobaz/compoships",
-            "version": "2.2.3",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/topclaudy/compoships.git",
-                "reference": "404901e2ebd6794f70d2710a56edd4b0c500ce1f"
+                "reference": "25a4ed2aeeb22033cd951e71e661eed235d58698"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/topclaudy/compoships/zipball/404901e2ebd6794f70d2710a56edd4b0c500ce1f",
-                "reference": "404901e2ebd6794f70d2710a56edd4b0c500ce1f",
+                "url": "https://api.github.com/repos/topclaudy/compoships/zipball/25a4ed2aeeb22033cd951e71e661eed235d58698",
+                "reference": "25a4ed2aeeb22033cd951e71e661eed235d58698",
                 "shasum": ""
             },
             "require": {
-                "fakerphp/faker": "^1.18",
-                "illuminate/database": ">=5.6 <11.0"
+                "illuminate/database": ">=5.6 <12.0"
             },
             "require-dev": {
                 "ext-sqlite3": "*",
-                "phpunit/phpunit": "^6.0|^8.0|^9.0"
+                "fakerphp/faker": "^1.18",
+                "phpunit/phpunit": "^6.0|^8.0|^9.0|^10.0"
             },
             "suggest": {
                 "awobaz/blade-active": "Blade directives for the Laravel 'Active' package",
@@ -1179,7 +1179,7 @@
             ],
             "support": {
                 "issues": "https://github.com/topclaudy/compoships/issues",
-                "source": "https://github.com/topclaudy/compoships/tree/2.2.3"
+                "source": "https://github.com/topclaudy/compoships/tree/2.3.0"
             },
             "funding": [
                 {
@@ -1187,7 +1187,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-02-22T16:52:55+00:00"
+            "time": "2024-02-28T22:21:15+00:00"
         },
         {
             "name": "balping/json-raw-encoder",
