@@ -10782,21 +10782,21 @@
         },
         {
             "name": "rahul900day/laravel-console-spinner",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RahulDey12/laravel-console-spinner.git",
-                "reference": "071bf58fb33582d457219fdaa06d3727d0946e33"
+                "reference": "2bf4dc7478175e7c0d5365b660ef4ca30f7c09f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RahulDey12/laravel-console-spinner/zipball/071bf58fb33582d457219fdaa06d3727d0946e33",
-                "reference": "071bf58fb33582d457219fdaa06d3727d0946e33",
+                "url": "https://api.github.com/repos/RahulDey12/laravel-console-spinner/zipball/2bf4dc7478175e7c0d5365b660ef4ca30f7c09f4",
+                "reference": "2bf4dc7478175e7c0d5365b660ef4ca30f7c09f4",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
                 "php": "^7.3|^8.0"
             },
             "type": "library",
@@ -10834,9 +10834,9 @@
             ],
             "support": {
                 "issues": "https://github.com/RahulDey12/laravel-console-spinner/issues",
-                "source": "https://github.com/RahulDey12/laravel-console-spinner/tree/1.1.1"
+                "source": "https://github.com/RahulDey12/laravel-console-spinner/tree/1.1.2"
             },
-            "time": "2023-02-20T04:52:54+00:00"
+            "time": "2024-02-29T08:20:52+00:00"
         },
         {
             "name": "rakutentech/laravel-request-docs",
