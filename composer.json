@@ -113,7 +113,7 @@
         "friendsofphp/php-cs-fixer": "^3.49",
         "guanguans/ai-commit": "dev-main",
         "guanguans/laravel-soar": "^3.11",
-        "kitloong/laravel-migrations-generator": "^6.11",
+        "kitloong/laravel-migrations-generator": "^7.0",
         "kubawerlos/php-cs-fixer-custom-fixers": "^3.20",
         "lanin/laravel-api-debugger": "^4.0",
         "laracademy/generators": "^3.7",
