@@ -20127,33 +20127,33 @@
         },
         {
             "name": "laradumps/laradumps",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "174521c6ae839c2b13c85ce4be8cae692ab21f26"
+                "reference": "ad6fc052630b18d12ea82cd841bcafa784ac57e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/174521c6ae839c2b13c85ce4be8cae692ab21f26",
-                "reference": "174521c6ae839c2b13c85ce4be8cae692ab21f26",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/ad6fc052630b18d12ea82cd841bcafa784ac57e8",
+                "reference": "ad6fc052630b18d12ea82cd841bcafa784ac57e8",
                 "shasum": ""
             },
             "require": {
-                "illuminate/mail": "^10.0|^11.0",
-                "illuminate/support": "^10.0|^11.0",
+                "illuminate/mail": "^9.0|^10.0|^11.0",
+                "illuminate/support": "^9.0|^10.0|^11.0",
                 "laradumps/laradumps-core": "^1.2",
                 "nunomaduro/termwind": "^1.15.1|^2.0.0",
                 "php": "^8.1"
             },
             "require-dev": {
                 "larastan/larastan": "^2.7",
-                "laravel/framework": "^10.0|^11.0",
+                "laravel/framework": "^11.0",
                 "laravel/pint": "^1.13.7",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench-core": "^8.0|^9.0",
-                "pestphp/pest": "^2.28.1",
-                "symfony/var-dumper": "^6.4.0|^7.0.3"
+                "orchestra/testbench-core": "^7.0",
+                "pestphp/pest": "^2.32",
+                "symfony/var-dumper": "^5.4.0|^6.4.0|^7.0.3"
             },
             "type": "library",
             "extra": {
@@ -20186,7 +20186,7 @@
             "homepage": "https://github.com/laradumps/laradumps",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v2.5.0"
+                "source": "https://github.com/laradumps/laradumps/tree/v2.5.1"
             },
             "funding": [
                 {
@@ -20194,32 +20194,32 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-24T13:39:44+00:00"
+            "time": "2024-03-05T13:01:59+00:00"
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v1.2.4",
+            "version": "v1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "96f4f0cfe75ff0293d4fbcc455d7695431b4fb69"
+                "reference": "fca5ee84431e60232407831890871d4294d248dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/96f4f0cfe75ff0293d4fbcc455d7695431b4fb69",
-                "reference": "96f4f0cfe75ff0293d4fbcc455d7695431b4fb69",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/fca5ee84431e60232407831890871d4294d248dc",
+                "reference": "fca5ee84431e60232407831890871d4294d248dc",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "nunomaduro/termwind": "^1.15|^2.0",
+                "nunomaduro/termwind": "^1.0|^2.0",
                 "php": "^8.1",
                 "ramsey/uuid": "^4.7.5",
-                "spatie/backtrace": "^1.5",
-                "symfony/console": "^5.4|^6.4|^7.0",
-                "symfony/finder": "^5.4|^6.4|^7.0",
-                "symfony/process": "^5.4|^6.4|^7.0",
-                "symfony/var-dumper": "^5.4|^6.4|^7.0",
+                "spatie/backtrace": "^1.0",
+                "symfony/console": "^5.0|^6.0|^7.0",
+                "symfony/finder": "^5.0|^6.0|^7.0",
+                "symfony/process": "^5.0|^6.0|^7.0",
+                "symfony/var-dumper": "^5.0|^6.0|^7.0",
                 "vlucas/phpdotenv": "^5.6"
             },
             "require-dev": {
@@ -20255,7 +20255,7 @@
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v1.2.4"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v1.2.5"
             },
             "funding": [
                 {
@@ -20263,7 +20263,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-25T17:46:35+00:00"
+            "time": "2024-03-05T12:20:51+00:00"
         },
         {
             "name": "larastan/larastan",
