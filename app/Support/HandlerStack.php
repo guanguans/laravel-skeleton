@@ -54,7 +54,7 @@ class HandlerStack implements \Stringable
     /** @var null|(callable(mixed): mixed) */
     private $handler;
 
-    /** @var array{(callable(callable(mixed): mixed): callable), (null|string)}[] */
+    /** @var array<array{(callable(callable(mixed): mixed): callable), (null|string)}> */
     private array $stack = [];
 
     /** @var null|(callable(mixed): mixed) */
