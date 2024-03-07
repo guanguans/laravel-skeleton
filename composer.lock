@@ -13642,28 +13642,28 @@
         },
         {
             "name": "spatie/laravel-short-schedule",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-short-schedule.git",
-                "reference": "af6308e88a40b48636a6195e9c53772b01d30093"
+                "reference": "337f1e17142b4dcb12932ceabfab7e6adc35f4ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-short-schedule/zipball/af6308e88a40b48636a6195e9c53772b01d30093",
-                "reference": "af6308e88a40b48636a6195e9c53772b01d30093",
+                "url": "https://api.github.com/repos/spatie/laravel-short-schedule/zipball/337f1e17142b4dcb12932ceabfab7e6adc35f4ea",
+                "reference": "337f1e17142b4dcb12932ceabfab7e6adc35f4ea",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "^8.71|^9.0|^10",
+                "illuminate/cache": "^8.71|^9.0|^10|^11.0",
                 "php": "^8.0",
                 "react/event-loop": "^1.1",
                 "spatie/temporary-directory": "^2.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.3.3",
-                "orchestra/testbench": "^6.23|^7.0|^8.0",
-                "phpunit/phpunit": "^9.4",
+                "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.4|^10.5",
                 "spatie/test-time": "^1.2"
             },
             "type": "library",
@@ -13699,7 +13699,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-short-schedule/issues",
-                "source": "https://github.com/spatie/laravel-short-schedule/tree/1.5.1"
+                "source": "https://github.com/spatie/laravel-short-schedule/tree/1.5.2"
             },
             "funding": [
                 {
@@ -13711,7 +13711,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-23T15:08:13+00:00"
+            "time": "2024-03-07T07:38:56+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",
