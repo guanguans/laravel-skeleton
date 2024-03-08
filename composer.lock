@@ -14216,27 +14216,28 @@
         },
         {
             "name": "staudenmeir/laravel-adjacency-list",
-            "version": "v1.19",
+            "version": "v1.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-adjacency-list.git",
-                "reference": "3ba43b7a0bc5224f8fc2ed00497dadaf4a0d6f12"
+                "reference": "1101205c6b822001f5b521d0664c32c8173f55bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/3ba43b7a0bc5224f8fc2ed00497dadaf4a0d6f12",
-                "reference": "3ba43b7a0bc5224f8fc2ed00497dadaf4a0d6f12",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/1101205c6b822001f5b521d0664c32c8173f55bf",
+                "reference": "1101205c6b822001f5b521d0664c32c8173f55bf",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": "^10.0",
                 "php": "^8.1",
                 "staudenmeir/eloquent-has-many-deep-contracts": "^1.1",
-                "staudenmeir/laravel-cte": "^1.8"
+                "staudenmeir/laravel-cte": "^1.10"
             },
             "require-dev": {
                 "barryvdh/laravel-ide-helper": "^2.13",
                 "doctrine/dbal": "^3.5.2",
+                "harrygulliford/laravel-firebird": "^3.2",
                 "larastan/larastan": "^2.0",
                 "mockery/mockery": "^1.5.1",
                 "orchestra/testbench": "^8.15",
@@ -14273,7 +14274,7 @@
             "description": "Recursive Laravel Eloquent relationships with CTEs",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-adjacency-list/issues",
-                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.19"
+                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.20"
             },
             "funding": [
                 {
@@ -14281,20 +14282,20 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-02-08T14:17:27+00:00"
+            "time": "2024-03-08T12:32:10+00:00"
         },
         {
             "name": "staudenmeir/laravel-cte",
-            "version": "v1.9",
+            "version": "v1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-cte.git",
-                "reference": "87f4447829a0f6a6268f52f875c468915cab4909"
+                "reference": "f308d38e3bd2ac3dd23b3ea73a5af5b8ace95f24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-cte/zipball/87f4447829a0f6a6268f52f875c468915cab4909",
-                "reference": "87f4447829a0f6a6268f52f875c468915cab4909",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-cte/zipball/f308d38e3bd2ac3dd23b3ea73a5af5b8ace95f24",
+                "reference": "f308d38e3bd2ac3dd23b3ea73a5af5b8ace95f24",
                 "shasum": ""
             },
             "require": {
@@ -14302,6 +14303,7 @@
                 "php": "^8.1"
             },
             "require-dev": {
+                "harrygulliford/laravel-firebird": "^3.2",
                 "orchestra/testbench": "^8.0",
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^10.1",
@@ -14333,7 +14335,7 @@
             "description": "Laravel queries with common table expressions",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-cte/issues",
-                "source": "https://github.com/staudenmeir/laravel-cte/tree/v1.9"
+                "source": "https://github.com/staudenmeir/laravel-cte/tree/v1.10"
             },
             "funding": [
                 {
@@ -14341,7 +14343,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-09-01T17:22:23+00:00"
+            "time": "2024-03-08T12:15:47+00:00"
         },
         {
             "name": "stillat/blade-directives",
