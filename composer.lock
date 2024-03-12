@@ -6510,16 +6510,16 @@
         },
         {
             "name": "laravel/octane",
-            "version": "v2.3.4",
+            "version": "v2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/octane.git",
-                "reference": "524a5821303a325cacea9593da056acdc31bf905"
+                "reference": "723574348341397cd0e5b59bd12e49de946c710e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/octane/zipball/524a5821303a325cacea9593da056acdc31bf905",
-                "reference": "524a5821303a325cacea9593da056acdc31bf905",
+                "url": "https://api.github.com/repos/laravel/octane/zipball/723574348341397cd0e5b59bd12e49de946c710e",
+                "reference": "723574348341397cd0e5b59bd12e49de946c710e",
                 "shasum": ""
             },
             "require": {
@@ -6594,7 +6594,7 @@
                 "issues": "https://github.com/laravel/octane/issues",
                 "source": "https://github.com/laravel/octane"
             },
-            "time": "2024-02-23T22:19:52+00:00"
+            "time": "2024-03-08T16:14:35+00:00"
         },
         {
             "name": "laravel/pennant",
