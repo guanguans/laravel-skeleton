@@ -4327,16 +4327,16 @@
         },
         {
             "name": "guanguans/laravel-dump-sql",
-            "version": "v2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-dump-sql.git",
-                "reference": "f9e7757c78af577f14b50a5f024c782d2f801cd2"
+                "reference": "19a40b02a03630d1ec6e64c08ce19c4523177c8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/f9e7757c78af577f14b50a5f024c782d2f801cd2",
-                "reference": "f9e7757c78af577f14b50a5f024c782d2f801cd2",
+                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/19a40b02a03630d1ec6e64c08ce19c4523177c8f",
+                "reference": "19a40b02a03630d1ec6e64c08ce19c4523177c8f",
                 "shasum": ""
             },
             "require": {
@@ -4345,16 +4345,21 @@
                 "illuminate/http": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "illuminate/log": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "illuminate/support": "^6.10 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
-                "php": ">=7.2",
-                "symfony/var-dumper": "^4.3 || ^5.0 || ^6.0"
+                "php": ">=7.3",
+                "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0"
             },
             "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.7",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "laravel/legacy-factories": "^1.0",
-                "mockery/mockery": "^1.2",
+                "brainmaestro/composer-git-hooks": "^2.8",
+                "ergebnis/composer-normalize": "^2.20",
+                "friendsofphp/php-cs-fixer": "^3.4",
+                "guanguans/ai-commit": "dev-main",
+                "guanguans/monorepo-builder-worker": "^1.4",
+                "laravel/legacy-factories": "^1.4",
+                "mockery/mockery": "^1.6",
                 "orchestra/testbench": "^3.3 || ^4.0 || ^5.0 || ^6.0",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0 || ^10.0"
+                "phpunit/phpunit": "^9.6 || ^10.0 || ^11.0",
+                "rector/rector": "^1.0",
+                "vimeo/psalm": "^4.30 || ^5.0"
             },
             "type": "laravel",
             "extra": {
@@ -4415,7 +4420,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-03-25T13:19:46+00:00"
+            "time": "2024-03-13T10:29:00+00:00"
         },
         {
             "name": "guanguans/laravel-exception-notify",
