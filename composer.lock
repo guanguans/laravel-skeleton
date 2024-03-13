@@ -9346,21 +9346,21 @@
         },
         {
             "name": "overtrue/laravel-uploader",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/laravel-uploader.git",
-                "reference": "184f537092acd2b6a6150aa08c879e839eaae1f9"
+                "reference": "d68e09acab68ed3dca2124cc136d4a3401f68dbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-uploader/zipball/184f537092acd2b6a6150aa08c879e839eaae1f9",
-                "reference": "184f537092acd2b6a6150aa08c879e839eaae1f9",
+                "url": "https://api.github.com/repos/overtrue/laravel-uploader/zipball/d68e09acab68ed3dca2124cc136d4a3401f68dbd",
+                "reference": "d68e09acab68ed3dca2124cc136d4a3401f68dbd",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laravel/framework": "^9.0|^10.0"
+                "laravel/framework": "^9.0|^10.0|^11.0"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "dev-master",
@@ -9407,7 +9407,7 @@
             "description": "An upload component for Laravel.",
             "support": {
                 "issues": "https://github.com/overtrue/laravel-uploader/issues",
-                "source": "https://github.com/overtrue/laravel-uploader/tree/3.1.0"
+                "source": "https://github.com/overtrue/laravel-uploader/tree/3.2.0"
             },
             "funding": [
                 {
@@ -9415,7 +9415,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-15T07:41:07+00:00"
+            "time": "2024-03-13T05:09:46+00:00"
         },
         {
             "name": "paragonie/certainty",
