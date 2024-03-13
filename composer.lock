@@ -18025,31 +18025,31 @@
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
-            "version": "v3.4.0",
+            "version": "v3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
-                "reference": "32d86fe743f1811544a5ebb85b3dc38eae22f38c"
+                "reference": "f19c131dc19c5ddbb16a3ebed843858fb8586981"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/32d86fe743f1811544a5ebb85b3dc38eae22f38c",
-                "reference": "32d86fe743f1811544a5ebb85b3dc38eae22f38c",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/f19c131dc19c5ddbb16a3ebed843858fb8586981",
+                "reference": "f19c131dc19c5ddbb16a3ebed843858fb8586981",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^9.0|^10.0",
-                "illuminate/database": "^9.0|^10.0",
-                "illuminate/http": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
-                "illuminate/validation": "^9.0|^10.0",
+                "illuminate/console": "^9.0|^10.0|^11.0",
+                "illuminate/database": "^9.0|^10.0|^11.0",
+                "illuminate/http": "^9.0|^10.0|^11.0",
+                "illuminate/support": "^9.0|^10.0|^11.0",
+                "illuminate/validation": "^9.0|^10.0|^11.0",
                 "php": "^8.1"
             },
             "require-dev": {
-                "laravel/pint": "^1.11",
-                "orchestra/testbench": "^7.20|^8.10",
-                "pestphp/pest": "v2.15",
-                "pestphp/pest-plugin-faker": "^2.0"
+                "laravel/pint": "^1.14",
+                "orchestra/testbench": "^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.20|^2.0",
+                "pestphp/pest-plugin-faker": "^1.0|^2.0"
             },
             "type": "library",
             "extra": {
@@ -18095,7 +18095,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-05T11:02:15+00:00"
+            "time": "2024-03-13T12:47:19+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",
