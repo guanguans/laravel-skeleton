@@ -17913,24 +17913,24 @@
         },
         {
             "name": "watson/validating",
-            "version": "8.1.0",
+            "version": "8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/validating.git",
-                "reference": "41f3ca6734bd5c6b3059142b2177b21600f4ad6c"
+                "reference": "7798363f63d05565ccae01ae95c2227519c1739f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/41f3ca6734bd5c6b3059142b2177b21600f4ad6c",
-                "reference": "41f3ca6734bd5c6b3059142b2177b21600f4ad6c",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/7798363f63d05565ccae01ae95c2227519c1739f",
+                "reference": "7798363f63d05565ccae01ae95c2227519c1739f",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "~9.0|~10.0",
-                "illuminate/database": "~9.0|~10.0",
-                "illuminate/events": "~9.0|~10.0",
-                "illuminate/support": "~9.0|~10.0",
-                "illuminate/validation": "~9.0|~10.0",
+                "illuminate/contracts": "~9.0|~10.0|~11.0",
+                "illuminate/database": "~9.0|~10.0|~11.0",
+                "illuminate/events": "~9.0|~10.0|~11.0",
+                "illuminate/support": "~9.0|~10.0|~11.0",
+                "illuminate/validation": "~9.0|~10.0|~11.0",
                 "php": "^8.1"
             },
             "require-dev": {
@@ -17961,9 +17961,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dwightwatson/validating/issues",
-                "source": "https://github.com/dwightwatson/validating/tree/8.1.0"
+                "source": "https://github.com/dwightwatson/validating/tree/8.2.0"
             },
-            "time": "2023-05-03T22:18:57+00:00"
+            "time": "2024-03-13T21:31:03+00:00"
         },
         {
             "name": "webmozart/assert",
