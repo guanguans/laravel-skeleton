@@ -3140,32 +3140,32 @@
         },
         {
             "name": "dragon-code/laravel-http-logger",
-            "version": "v1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/laravel-http-logger.git",
-                "reference": "0cc68c10841e4e7c9bdd7cbe2e8f2ce39b7db0f8"
+                "reference": "dfed4fd52ed4d244474769647abeb71523679357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-http-logger/zipball/0cc68c10841e4e7c9bdd7cbe2e8f2ce39b7db0f8",
-                "reference": "0cc68c10841e4e7c9bdd7cbe2e8f2ce39b7db0f8",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-http-logger/zipball/dfed4fd52ed4d244474769647abeb71523679357",
+                "reference": "dfed4fd52ed4d244474769647abeb71523679357",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^3.3",
                 "dragon-code/support": "^5.8 || ^6.0",
-                "illuminate/contracts": "^8.37 || ^9.0 || ^10.0",
-                "illuminate/database": "^8.37 || ^9.0 || ^10.0",
-                "illuminate/http": "^8.37 || ^9.0 || ^10.0",
-                "illuminate/routing": "^8.37 || ^9.0 || ^10.0",
-                "illuminate/support": "^8.37 || ^9.0 || ^10.0",
+                "illuminate/contracts": "^8.37 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/database": "^8.37 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/http": "^8.37 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/routing": "^8.37 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "^8.37 || ^9.0 || ^10.0 || ^11.0",
                 "php": "^8.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0",
-                "phpunit/phpunit": "^9.6"
+                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "phpunit/phpunit": "^9.6 || ^10.0"
             },
             "type": "library",
             "extra": {
@@ -3189,7 +3189,7 @@
                 {
                     "name": "Andrey Helldar",
                     "email": "helldar@dragon-code.pro",
-                    "homepage": "https://github.com/andrey-helldar"
+                    "homepage": "https://dragon-code.pro"
                 }
             ],
             "description": "Logging incoming HTTP requests",
@@ -3215,19 +3215,15 @@
                     "type": "boosty"
                 },
                 {
-                    "url": "https://github.com/sponsors/TheDragonCode",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/dragon-code",
-                    "type": "open_collective"
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
                 },
                 {
                     "url": "https://yoomoney.ru/to/410012608840929",
                     "type": "yoomoney"
                 }
             ],
-            "time": "2023-02-15T09:15:54+00:00"
+            "time": "2024-03-13T08:27:36+00:00"
         },
         {
             "name": "dragon-code/laravel-route-names",
