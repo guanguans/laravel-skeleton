@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "677066a510a4b037ed08d8b71bef1189",
+    "content-hash": "314e0d378e92c549b93b5f10b0a5c81e",
     "packages": [
         {
             "name": "alexandre-daubois/monolog-processor-collection",
@@ -5729,27 +5729,27 @@
         },
         {
             "name": "jiannei/laravel-response",
-            "version": "v5.2.0",
+            "version": "v6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jiannei/laravel-response.git",
-                "reference": "f995c3ed58904dd02bb6b0d939521be2fcc0b468"
+                "reference": "1df466afd068194c3d28974378fc0b3b726dbf57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jiannei/laravel-response/zipball/f995c3ed58904dd02bb6b0d939521be2fcc0b468",
-                "reference": "f995c3ed58904dd02bb6b0d939521be2fcc0b468",
+                "url": "https://api.github.com/repos/jiannei/laravel-response/zipball/1df466afd068194c3d28974378fc0b3b726dbf57",
+                "reference": "1df466afd068194c3d28974378fc0b3b726dbf57",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.2.5|^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
-                "jiannei/laravel-enum": "^3.0",
-                "league/fractal": "^0.20.1",
+                "jiannei/laravel-enum": "dev-main",
+                "laravel/pint": "^1.13",
                 "orchestra/testbench": "^8.0",
-                "phpunit/phpunit": "^10.0"
+                "pestphp/pest": "^2.23"
             },
             "type": "library",
             "extra": {
@@ -5780,9 +5780,9 @@
             "description": "Laravel api response data format.",
             "support": {
                 "issues": "https://github.com/jiannei/laravel-response/issues",
-                "source": "https://github.com/jiannei/laravel-response/tree/v5.2.0"
+                "source": "https://github.com/jiannei/laravel-response/tree/v6.0.0"
             },
-            "time": "2023-02-15T01:40:02+00:00"
+            "time": "2024-03-13T06:39:16+00:00"
         },
         {
             "name": "joetannenbaum/terminalia",

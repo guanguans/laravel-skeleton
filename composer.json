@@ -44,7 +44,7 @@
         "hashids/hashids": "^5.0",
         "jasny/sso": "^0.5",
         "jenssegers/agent": "^2.6",
-        "jiannei/laravel-response": "^5.2",
+        "jiannei/laravel-response": "^6.0",
         "joetannenbaum/terminalia": "^0.3",
         "kevinrob/guzzle-cache-middleware": "^5.1",
         "knuckleswtf/scribe": "^4.31",
