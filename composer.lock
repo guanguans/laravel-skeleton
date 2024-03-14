@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "314e0d378e92c549b93b5f10b0a5c81e",
+    "content-hash": "24b25863ed0b18e13bc6642374f68508",
     "packages": [
         {
             "name": "alexandre-daubois/monolog-processor-collection",
@@ -3053,27 +3053,27 @@
         },
         {
             "name": "dragon-code/extended-routes",
-            "version": "v3.2.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/extended-routes.git",
-                "reference": "ce76bd6618f4c47e6bdedd44e24ad2701c4ac51c"
+                "reference": "804db7be20e721120f568a892694468325ac890f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/extended-routes/zipball/ce76bd6618f4c47e6bdedd44e24ad2701c4ac51c",
-                "reference": "ce76bd6618f4c47e6bdedd44e24ad2701c4ac51c",
+                "url": "https://api.github.com/repos/TheDragonCode/extended-routes/zipball/804db7be20e721120f568a892694468325ac890f",
+                "reference": "804db7be20e721120f568a892694468325ac890f",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^7.0 || ^8.0 || ^9.0 || ^10.0",
-                "illuminate/routing": "^7.0 || ^8.0 || ^9.0 || ^10.0",
-                "illuminate/support": "^7.0 || ^8.0 || ^9.0 || ^10.0",
-                "php": "^7.3 || ^8.0"
+                "illuminate/database": "^10.0 || ^11.0",
+                "illuminate/routing": "^10.0 || ^11.0",
+                "illuminate/support": "^10.0 || ^11.0",
+                "php": "^8.1"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0",
-                "phpunit/phpunit": "^9.6"
+                "orchestra/testbench": "^8.0 || ^9.0",
+                "phpunit/phpunit": "^11.0"
             },
             "type": "library",
             "extra": {
@@ -3096,7 +3096,7 @@
                 {
                     "name": "Andrey Helldar",
                     "email": "helldar@dragon-code.pro",
-                    "homepage": "https://github.com/andrey-helldar"
+                    "homepage": "https://dragon-code.pro"
                 },
                 {
                     "name": "Maksim (Ellrion) Platonov",
@@ -3124,19 +3124,15 @@
                     "type": "boosty"
                 },
                 {
-                    "url": "https://github.com/sponsors/TheDragonCode",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/dragon-code",
-                    "type": "open_collective"
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
                 },
                 {
                     "url": "https://yoomoney.ru/to/410012608840929",
                     "type": "yoomoney"
                 }
             ],
-            "time": "2023-02-15T10:21:08+00:00"
+            "time": "2024-03-12T20:57:40+00:00"
         },
         {
             "name": "dragon-code/laravel-http-logger",

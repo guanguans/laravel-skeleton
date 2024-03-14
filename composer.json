@@ -26,7 +26,7 @@
         "calebporzio/sushi": "^2.5",
         "cerbero/command-validator": "^2.5",
         "divineomega/password_exposed": "^3.2",
-        "dragon-code/extended-routes": "^3.2",
+        "dragon-code/extended-routes": "^4.0",
         "dragon-code/laravel-http-logger": "^1.3",
         "dragon-code/laravel-route-names": "^1.4",
         "elao/enum": "^2.4",
