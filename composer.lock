@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "713a377b3e0999ba1497b1d0246de6fb",
+    "content-hash": "ce4e176fb062fdfbeaf725559ec55e03",
     "packages": [
         {
             "name": "alexandre-daubois/monolog-processor-collection",
@@ -1532,6 +1532,82 @@
                 "source": "https://github.com/biiiiiigmonster/hasin/tree/v3.0.2"
             },
             "time": "2023-05-15T08:42:27+00:00"
+        },
+        {
+            "name": "bilfeldt/laravel-http-client-logger",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bilfeldt/laravel-http-client-logger.git",
+                "reference": "a53b19ff6faa0b591d933aafc8ca382919bdae85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bilfeldt/laravel-http-client-logger/zipball/a53b19ff6faa0b591d933aafc8ca382919bdae85",
+                "reference": "a53b19ff6faa0b591d933aafc8ca382919bdae85",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.2",
+                "illuminate/http": "^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "^9.0 || ^10.0 || ^11.0",
+                "php": "~8.3.0 | ~8.2.0 | ~8.1.0",
+                "spatie/laravel-package-tools": "^1.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
+                "phpunit/phpunit": "^9.5.10 || ^10.0",
+                "spatie/laravel-ray": "^1.29",
+                "timacdonald/log-fake": "^2.0",
+                "vimeo/psalm": "^4.20"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bilfeldt\\LaravelHttpClientLogger\\LaravelHttpClientLoggerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bilfeldt\\LaravelHttpClientLogger\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anders Bilfeldt",
+                    "email": "abilfeldt@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A logger for the Laravel HTTP Client",
+            "homepage": "https://github.com/bilfeldt/laravel-http-client-logger",
+            "keywords": [
+                "Guzzle",
+                "PSR3",
+                "bilfeldt",
+                "laravel",
+                "laravel-http-client-logger",
+                "log",
+                "logging"
+            ],
+            "support": {
+                "issues": "https://github.com/bilfeldt/laravel-http-client-logger/issues",
+                "source": "https://github.com/bilfeldt/laravel-http-client-logger/tree/v2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/bilfeldt",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-28T09:35:00+00:00"
         },
         {
             "name": "bramus/ansi-php",
@@ -9073,6 +9149,87 @@
                 }
             ],
             "time": "2023-11-13T09:31:12+00:00"
+        },
+        {
+            "name": "onlime/laravel-http-client-global-logger",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/onlime/laravel-http-client-global-logger.git",
+                "reference": "52f27ed7df8aebdd14c69865be9855d9c96bd836"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/onlime/laravel-http-client-global-logger/zipball/52f27ed7df8aebdd14c69865be9855d9c96bd836",
+                "reference": "52f27ed7df8aebdd14c69865be9855d9c96bd836",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^10.32|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "monolog/monolog": "^3.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/framework": "^10.0|^11.0",
+                "laravel/pint": "^1.13",
+                "orchestra/testbench": "^8.8|^9.0",
+                "pestphp/pest": "^2.33",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "saloonphp/laravel-http-sender": "^2.0|^3.0",
+                "saloonphp/laravel-plugin": "^3.0",
+                "spatie/invade": "^2.0"
+            },
+            "suggest": {
+                "saloonphp/laravel-plugin": "To support logging of Saloon events (^3.0)"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Onlime\\LaravelHttpClientGlobalLogger\\Providers\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Onlime\\LaravelHttpClientGlobalLogger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philip Iezzi",
+                    "email": "philip@onlime.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Onlime GmbH",
+                    "homepage": "https://www.onlime.ch/"
+                }
+            ],
+            "description": "A global logger for the Laravel HTTP Client",
+            "homepage": "https://github.com/onlime/laravel-http-client-global-logger",
+            "keywords": [
+                "Guzzle",
+                "Onlime",
+                "PSR3",
+                "http-client",
+                "laravel",
+                "laravel-http-client-global-logger",
+                "log",
+                "logger",
+                "logging"
+            ],
+            "support": {
+                "issues": "https://github.com/onlime/laravel-http-client-global-logger/issues",
+                "source": "https://github.com/onlime/laravel-http-client-global-logger/tree/v1.1.3"
+            },
+            "time": "2024-03-14T15:50:24+00:00"
         },
         {
             "name": "opcodesio/log-viewer",
