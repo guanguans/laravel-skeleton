@@ -3130,16 +3130,16 @@
         },
         {
             "name": "dragon-code/extended-routes",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/extended-routes.git",
-                "reference": "804db7be20e721120f568a892694468325ac890f"
+                "reference": "330dcc44946da18fb7c1acfd02d66d2ef805a675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/extended-routes/zipball/804db7be20e721120f568a892694468325ac890f",
-                "reference": "804db7be20e721120f568a892694468325ac890f",
+                "url": "https://api.github.com/repos/TheDragonCode/extended-routes/zipball/330dcc44946da18fb7c1acfd02d66d2ef805a675",
+                "reference": "330dcc44946da18fb7c1acfd02d66d2ef805a675",
                 "shasum": ""
             },
             "require": {
@@ -3150,7 +3150,7 @@
             },
             "require-dev": {
                 "orchestra/testbench": "^8.0 || ^9.0",
-                "phpunit/phpunit": "^11.0"
+                "phpunit/phpunit": "^10.0"
             },
             "type": "library",
             "extra": {
@@ -3209,7 +3209,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-03-12T20:57:40+00:00"
+            "time": "2024-03-15T00:21:02+00:00"
         },
         {
             "name": "dragon-code/laravel-http-logger",
@@ -6373,16 +6373,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.48.2",
+            "version": "v10.48.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "32a8bb151d748b579c3794dea53b56bd40dfbbd3"
+                "reference": "5791c052b41c6b593556adc687076bfbdd13c501"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/32a8bb151d748b579c3794dea53b56bd40dfbbd3",
-                "reference": "32a8bb151d748b579c3794dea53b56bd40dfbbd3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5791c052b41c6b593556adc687076bfbdd13c501",
+                "reference": "5791c052b41c6b593556adc687076bfbdd13c501",
                 "shasum": ""
             },
             "require": {
@@ -6576,7 +6576,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-03-12T16:35:43+00:00"
+            "time": "2024-03-15T10:17:07+00:00"
         },
         {
             "name": "laravel/octane",
