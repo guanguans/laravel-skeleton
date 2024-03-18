@@ -10019,16 +10019,16 @@
         },
         {
             "name": "php-open-source-saver/jwt-auth",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
-                "reference": "f9151efd568307a38ad6b05d5f51347afc391b7c"
+                "reference": "41e6a7474d2e3c4ff32f0d53fc7d94a2a809d386"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/f9151efd568307a38ad6b05d5f51347afc391b7c",
-                "reference": "f9151efd568307a38ad6b05d5f51347afc391b7c",
+                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/41e6a7474d2e3c4ff32f0d53fc7d94a2a809d386",
+                "reference": "41e6a7474d2e3c4ff32f0d53fc7d94a2a809d386",
                 "shasum": ""
             },
             "require": {
@@ -10039,7 +10039,7 @@
                 "illuminate/support": "^6|^7|^8.67|^9|^10|^11",
                 "lcobucci/jwt": "^4.0",
                 "namshi/jose": "^7.0",
-                "nesbot/carbon": "^1.0|^2.0",
+                "nesbot/carbon": "^2.0|^3.0",
                 "php": "^7.4|^8.0"
             },
             "require-dev": {
@@ -10050,7 +10050,6 @@
                 "orchestra/testbench": "^4.18|^5.8|^6.3|^7|^8|^9|9.x-dev",
                 "phpstan/phpstan": "^1",
                 "phpunit/phpunit": "^8.5|^9.4|^10",
-                "rector/rector": "^0.12.4",
                 "vlucas/phpdotenv": "^5.2.0",
                 "yoast/phpunit-polyfills": "^2.0.0"
             },
@@ -10109,7 +10108,7 @@
                 "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
                 "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
             },
-            "time": "2024-03-12T16:28:30+00:00"
+            "time": "2024-03-17T21:22:04+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
