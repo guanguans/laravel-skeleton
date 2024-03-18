@@ -95,7 +95,7 @@
         "symfony/polyfill-php82": "^1.29",
         "symfony/polyfill-php83": "^1.29",
         "symfony/stopwatch": "^6.4 || ^7.0",
-        "teamtnt/laravel-scout-tntsearch-driver": "^13.2",
+        "teamtnt/laravel-scout-tntsearch-driver": "^14.0",
         "tenantcloud/laravel-mixins": "^3.0",
         "timacdonald/has-parameters": "^1.4",
         "unicodeveloper/laravel-password": "^1.0",
