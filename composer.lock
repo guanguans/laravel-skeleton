@@ -1475,16 +1475,16 @@
         },
         {
             "name": "biiiiiigmonster/hasin",
-            "version": "v3.0.2",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/biiiiiigmonster/hasin.git",
-                "reference": "8e2df117583a51f177e29e6f982da9e27db407cd"
+                "reference": "4ad4266ad9e045d8a9d9789472af2ebd27c46f4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/biiiiiigmonster/hasin/zipball/8e2df117583a51f177e29e6f982da9e27db407cd",
-                "reference": "8e2df117583a51f177e29e6f982da9e27db407cd",
+                "url": "https://api.github.com/repos/biiiiiigmonster/hasin/zipball/4ad4266ad9e045d8a9d9789472af2ebd27c46f4e",
+                "reference": "4ad4266ad9e045d8a9d9789472af2ebd27c46f4e",
                 "shasum": ""
             },
             "require": {
@@ -1529,9 +1529,9 @@
             ],
             "support": {
                 "issues": "https://github.com/biiiiiigmonster/hasin/issues",
-                "source": "https://github.com/biiiiiigmonster/hasin/tree/v3.0.2"
+                "source": "https://github.com/biiiiiigmonster/hasin/tree/v3.1.0"
             },
-            "time": "2023-05-15T08:42:27+00:00"
+            "time": "2024-03-16T14:39:59+00:00"
         },
         {
             "name": "bilfeldt/laravel-http-client-logger",
