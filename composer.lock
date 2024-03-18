@@ -7482,16 +7482,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.25.0",
+            "version": "3.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "4c44347133618cccd9b3df1729647a1577b4ad99"
+                "reference": "abbd664eb4381102c559d358420989f835208f18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4c44347133618cccd9b3df1729647a1577b4ad99",
-                "reference": "4c44347133618cccd9b3df1729647a1577b4ad99",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/abbd664eb4381102c559d358420989f835208f18",
+                "reference": "abbd664eb4381102c559d358420989f835208f18",
                 "shasum": ""
             },
             "require": {
@@ -7556,7 +7556,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.25.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.25.1"
             },
             "funding": [
                 {
@@ -7568,20 +7568,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-09T17:06:45+00:00"
+            "time": "2024-03-16T12:53:19+00:00"
         },
         {
             "name": "league/flysystem-local",
-            "version": "3.23.1",
+            "version": "3.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-local.git",
-                "reference": "b884d2bf9b53bb4804a56d2df4902bb51e253f00"
+                "reference": "61a6a90d6e999e4ddd9ce5adb356de0939060b92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/b884d2bf9b53bb4804a56d2df4902bb51e253f00",
-                "reference": "b884d2bf9b53bb4804a56d2df4902bb51e253f00",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/61a6a90d6e999e4ddd9ce5adb356de0939060b92",
+                "reference": "61a6a90d6e999e4ddd9ce5adb356de0939060b92",
                 "shasum": ""
             },
             "require": {
@@ -7615,8 +7615,7 @@
                 "local"
             ],
             "support": {
-                "issues": "https://github.com/thephpleague/flysystem-local/issues",
-                "source": "https://github.com/thephpleague/flysystem-local/tree/3.23.1"
+                "source": "https://github.com/thephpleague/flysystem-local/tree/3.25.1"
             },
             "funding": [
                 {
@@ -7628,7 +7627,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-26T18:25:23+00:00"
+            "time": "2024-03-15T19:58:44+00:00"
         },
         {
             "name": "league/glide",
@@ -18500,29 +18499,29 @@
         },
         {
             "name": "bennett-treptow/laravel-migration-generator",
-            "version": "4.3.2",
+            "version": "4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bennett-treptow/laravel-migration-generator.git",
-                "reference": "7a9144551a2074d0416a1abaa3e929e2991d41aa"
+                "reference": "eb120d331afd78103f9996f72cfb7061de982ffe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bennett-treptow/laravel-migration-generator/zipball/7a9144551a2074d0416a1abaa3e929e2991d41aa",
-                "reference": "7a9144551a2074d0416a1abaa3e929e2991d41aa",
+                "url": "https://api.github.com/repos/bennett-treptow/laravel-migration-generator/zipball/eb120d331afd78103f9996f72cfb7061de982ffe",
+                "reference": "eb120d331afd78103f9996f72cfb7061de982ffe",
                 "shasum": ""
             },
             "require": {
-                "illuminate/config": "^6.0|^7.0|^8.0|^9.0|^10.0",
-                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0",
-                "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/config": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
                 "marcj/topsort": "^2.0",
-                "php": "^7.4|^8.0"
+                "php": "^7.4|~8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16|^3.14",
-                "orchestra/testbench": "^6.17|^8.0"
+                "orchestra/testbench": "^6.17|^8.0|^9.0"
             },
             "type": "library",
             "extra": {
@@ -18550,7 +18549,7 @@
             "description": "Generate migrations from existing database structures",
             "support": {
                 "issues": "https://github.com/bennett-treptow/laravel-migration-generator/issues",
-                "source": "https://github.com/bennett-treptow/laravel-migration-generator/tree/4.3.2"
+                "source": "https://github.com/bennett-treptow/laravel-migration-generator/tree/4.4.0"
             },
             "funding": [
                 {
@@ -18562,7 +18561,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-06T17:40:28+00:00"
+            "time": "2024-03-17T17:32:39+00:00"
         },
         {
             "name": "brainmaestro/composer-git-hooks",
