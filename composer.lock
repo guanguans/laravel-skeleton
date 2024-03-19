@@ -10019,16 +10019,16 @@
         },
         {
             "name": "php-open-source-saver/jwt-auth",
-            "version": "2.2.1",
+            "version": "2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
-                "reference": "41e6a7474d2e3c4ff32f0d53fc7d94a2a809d386"
+                "reference": "195bd0c743daf5c6821cc3af73ee570b9c44c2c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/41e6a7474d2e3c4ff32f0d53fc7d94a2a809d386",
-                "reference": "41e6a7474d2e3c4ff32f0d53fc7d94a2a809d386",
+                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/195bd0c743daf5c6821cc3af73ee570b9c44c2c1",
+                "reference": "195bd0c743daf5c6821cc3af73ee570b9c44c2c1",
                 "shasum": ""
             },
             "require": {
@@ -10108,7 +10108,7 @@
                 "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
                 "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
             },
-            "time": "2024-03-17T21:22:04+00:00"
+            "time": "2024-03-19T21:38:46+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
