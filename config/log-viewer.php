@@ -11,6 +11,8 @@ return [
 
     'enabled' => env('LOG_VIEWER_ENABLED', true),
 
+    'require_auth_in_production' => true,
+
     /*
     |--------------------------------------------------------------------------
     | Log Viewer Domain

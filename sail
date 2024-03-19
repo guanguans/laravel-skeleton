@@ -128,8 +128,9 @@ else
 fi
 
 # Source the ".env" file so Laravel's environment variables are available...
-if [ ! -z "$APP_ENV" ] && [ -f ./.env.$APP_ENV ]; then
-  source ./.env.$APP_ENV;
+# shellcheck source=/dev/null
+if [ -n "$APP_ENV" ] && [ -f ./.env."$APP_ENV" ]; then
+  source ./.env."$APP_ENV";
 elif [ -f ./.env ]; then
   source ./.env;
 fi
@@ -159,8 +160,7 @@ function sail_is_not_running {
 }
 
 # Define Docker Compose command prefix...
-docker compose &> /dev/null
-if [ $? == 0 ]; then
+if docker compose &> /dev/null; then
     DOCKER_COMPOSE=(docker compose)
 else
     DOCKER_COMPOSE=(docker-compose)
@@ -270,7 +270,7 @@ elif [ "$1" == "debug" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail -e XDEBUG_SESSION=1)
+        ARGS+=(exec -u sail -e XDEBUG_TRIGGER=1)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php artisan "$@")
     else
@@ -425,7 +425,7 @@ elif [ "$1" == "pnpx" ]; then
         sail_is_not_running
     fi
 
-# Proxy YARN commands to the "yarn" binary on the application container...
+# Proxy Yarn commands to the "yarn" binary on the application container...
 elif [ "$1" == "yarn" ]; then
     shift 1
 
@@ -482,7 +482,7 @@ elif [ "$1" == "mariadb" ]; then
         ARGS+=(exec)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=(mariadb bash -c)
-        ARGS+=("MYSQL_PWD=\${MYSQL_PASSWORD} mysql -u \${MYSQL_USER} \${MYSQL_DATABASE}")
+        ARGS+=("MYSQL_PWD=\${MYSQL_PASSWORD} mariadb -u \${MYSQL_USER} \${MYSQL_DATABASE}")
     else
         sail_is_not_running
     fi
@@ -517,7 +517,7 @@ elif [ "$1" == "root-shell" ] || [ "$1" == "root-bash" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec)
+        ARGS+=(exec -u root)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" bash "$@")
     else
@@ -560,7 +560,14 @@ elif [ "$1" == "open" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        open $APP_URL
+
+        if [[ -n "$APP_PORT" && "$APP_PORT" != "80" ]]; then
+            FULL_URL="${APP_URL}:${APP_PORT}"
+        else
+            FULL_URL="$APP_URL"
+        fi
+
+        open "$FULL_URL"
 
         exit
     else

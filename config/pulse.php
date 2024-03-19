@@ -1,6 +1,7 @@
 <?php
 
 use Laravel\Pulse\Http\Middleware\Authorize;
+use Laravel\Pulse\Pulse;
 use Laravel\Pulse\Recorders;
 
 return [
@@ -77,7 +78,12 @@ return [
     'ingest' => [
         'driver' => env('PULSE_INGEST_DRIVER', 'storage'),
 
-        'trim_lottery' => [1, 1_000],
+        'buffer' => env('PULSE_INGEST_BUFFER', 5_000),
+
+        'trim' => [
+            'lottery' => [1, 1_000],
+            'keep' => '7 days',
+        ],
 
         'redis' => [
             'connection' => env('PULSE_REDIS_CONNECTION'),
@@ -130,12 +136,7 @@ return [
             'enabled' => env('PULSE_CACHE_INTERACTIONS_ENABLED', true),
             'sample_rate' => env('PULSE_CACHE_INTERACTIONS_SAMPLE_RATE', 1),
             'ignore' => [
-                '/^laravel:pulse:/', // Internal Pulse keys...
-                '/^illuminate:/', // Internal Laravel keys...
-                '/^telescope:/', // Internal Telescope keys...
-                '/^nova/', // Internal Nova keys...
-                '/^.+@.+\|(?:(?:\d+\.\d+\.\d+\.\d+)|[0-9a-fA-F:]+)(?::timer)?$/', // Breeze / Jetstream authentication rate limiting...
-                '/^[a-zA-Z0-9]{40}$/', // Session IDs...
+                ...Pulse::defaultVendorCacheKeys(),
             ],
             'groups' => [
                 '/^job-exceptions:.*/' => 'job-exceptions:*',
@@ -193,8 +194,11 @@ return [
             'sample_rate' => env('PULSE_SLOW_QUERIES_SAMPLE_RATE', 1),
             'threshold' => env('PULSE_SLOW_QUERIES_THRESHOLD', 1000),
             'location' => env('PULSE_SLOW_QUERIES_LOCATION', true),
+            'highlighting' => env('PULSE_SLOW_QUERIES_HIGHLIGHTING', true),
+            'max_query_length' => env('PULSE_SLOW_QUERIES_MAX_QUERY_LENGTH', null),
             'ignore' => [
                 '/(["`])pulse_[\w]+?\1/', // Pulse tables...
+                '/(["`])telescope_[\w]+?\1/', // Telescope tables...
             ],
         ],
 
@@ -204,6 +208,7 @@ return [
             'threshold' => env('PULSE_SLOW_REQUESTS_THRESHOLD', 1000),
             'ignore' => [
                 '#^/pulse$#', // Pulse dashboard...
+                '#^/telescope#', // Telescope dashboard...
             ],
         ],
 
@@ -220,6 +225,7 @@ return [
             'sample_rate' => env('PULSE_USER_REQUESTS_SAMPLE_RATE', 1),
             'ignore' => [
                 '#^/pulse$#', // Pulse dashboard...
+                '#^/telescope#', // Telescope dashboard...
             ],
         ],
     ],

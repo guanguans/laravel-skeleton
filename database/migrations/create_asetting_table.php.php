@@ -11,12 +11,13 @@ return new class extends Migration
         Schema::create('asettings', function (Blueprint $table) {
             $table->id();
 
-            $table->string('group')->default('general');
-            $table->enum('type', ['string', 'integer', 'boolean', 'json', 'array', 'date'])->default('string');
-            $table->string('key')->nullable(false);
+            $table->string('group')->default('general')->index();
+            $table->enum('type', ['string', 'integer', 'boolean', 'json', 'array', 'date'])->default('string')->index();
+            $table->string('key')->nullable(false)->index();
             $table->jsonb('value')->nullable(false);
             $table->string('title')->nullable(false);
             $table->boolean('is_visible')->default(true);
+            $table->unique(['group', 'key']); // Bu satır eklenmiştir.
 
             $table->timestamps();
         });

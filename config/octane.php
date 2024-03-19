@@ -15,6 +15,7 @@ use Laravel\Octane\Listeners\CollectGarbage;
 use Laravel\Octane\Listeners\DisconnectFromDatabases;
 use Laravel\Octane\Listeners\EnsureUploadedFilesAreValid;
 use Laravel\Octane\Listeners\EnsureUploadedFilesCanBeMoved;
+use Laravel\Octane\Listeners\FlushOnce;
 use Laravel\Octane\Listeners\FlushTemporaryContainerInstances;
 use Laravel\Octane\Listeners\FlushUploadedFiles;
 use Laravel\Octane\Listeners\ReportException;
@@ -31,7 +32,7 @@ return [
     | when starting, restarting, or stopping your server via the CLI. You
     | are free to change this to the supported server of your choosing.
     |
-    | Supported: "roadrunner", "swoole"
+    | Supported: "roadrunner", "swoole", "frankenphp"
     |
     */
 
@@ -100,6 +101,7 @@ return [
         ],
 
         OperationTerminated::class => [
+            FlushOnce::class,
             FlushTemporaryContainerInstances::class,
             // DisconnectFromDatabases::class,
             // CollectGarbage::class,
@@ -136,22 +138,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Octane Cache Table
-    |--------------------------------------------------------------------------
-    |
-    | While using Swoole, you may leverage the Octane cache, which is powered
-    | by a Swoole table. You may set the maximum number of rows as well as
-    | the number of bytes per row using the configuration options below.
-    |
-    */
-
-    'cache' => [
-        'rows' => 1000,
-        'bytes' => 10000,
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Octane Swoole Tables
     |--------------------------------------------------------------------------
     |
@@ -166,6 +152,22 @@ return [
             'name' => 'string:1000',
             'votes' => 'int',
         ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Octane Swoole Cache Table
+    |--------------------------------------------------------------------------
+    |
+    | While using Swoole, you may leverage the Octane cache, which is powered
+    | by a Swoole table. You may set the maximum number of rows as well as
+    | the number of bytes per row using the configuration options below.
+    |
+    */
+
+    'cache' => [
+        'rows' => 1000,
+        'bytes' => 10000,
     ],
 
     /*

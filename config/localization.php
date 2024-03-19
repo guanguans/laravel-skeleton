@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  *
  * @author Andrey Helldar <helldar@dragon-code.pro>
- * @copyright 2023 Laravel Lang Team
+ * @copyright 2024 Laravel Lang Team
  * @license MIT
  *
  * @see https://laravel-lang.com
@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-use LaravelLang\Locales\Enums\Locale;
+use LaravelLang\LocaleList\Locale;
 
 return [
     /*
@@ -32,7 +32,7 @@ return [
      * By default, `false`.
      */
 
-    'inline' => false,
+    'inline' => (bool) env('LANG_PUBLISHER_INLINE', false),
 
     /*
      * Do arrays need to be aligned by keys before processing arrays?
@@ -40,7 +40,7 @@ return [
      * By default, true
      */
 
-    'align' => true,
+    'align' => (bool) env('LANG_PUBLISHER_ALIGN', true),
 
     /*
      * This option determines the mechanism for converting translation
@@ -66,33 +66,33 @@ return [
         ],
 
         'locales' => [
-            // Locale::French->value => [
-            //     'double_quote_opener' => '«&nbsp;',
-            //     'double_quote_closer' => '&nbsp;»',
-            //     'single_quote_opener' => '‘',
-            //     'single_quote_closer' => '’',
-            // ],
-            //
-            // Locale::Russian->value => [
-            //     'double_quote_opener' => '«',
-            //     'double_quote_closer' => '»',
-            //     'single_quote_opener' => '‘',
-            //     'single_quote_closer' => '’',
-            // ],
-            //
-            // Locale::Ukrainian->value => [
-            //     'double_quote_opener' => '«',
-            //     'double_quote_closer' => '»',
-            //     'single_quote_opener' => '‘',
-            //     'single_quote_closer' => '’',
-            // ],
-            //
-            // Locale::Belarusian->value => [
-            //     'double_quote_opener' => '«',
-            //     'double_quote_closer' => '»',
-            //     'single_quote_opener' => '‘',
-            //     'single_quote_closer' => '’',
-            // ],
+            Locale::French->value => [
+                'double_quote_opener' => '«&nbsp;',
+                'double_quote_closer' => '&nbsp;»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+
+            Locale::Russian->value => [
+                'double_quote_opener' => '«',
+                'double_quote_closer' => '»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+
+            Locale::Ukrainian->value => [
+                'double_quote_opener' => '«',
+                'double_quote_closer' => '»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+
+            Locale::Belarusian->value => [
+                'double_quote_opener' => '«',
+                'double_quote_closer' => '»',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
         ],
     ],
 ];
