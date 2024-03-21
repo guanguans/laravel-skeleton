@@ -74,6 +74,7 @@
         "rennokki/laravel-eloquent-query-cache": "^3.4",
         "revangelista/laravel-idempotency": "^1.0",
         "richardstyles/eloquent-aes": "^2.3",
+        "sbamtr/laravel-query-enrich": "^1.2",
         "skywarth/chaotic-schedule": "^1.0",
         "spatie/fork": "^1.2",
         "spatie/laravel-activitylog": "^4.8",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10c8915e443189d4dec7ddc69e53f91c",
+    "content-hash": "f6a875594d03b601b4116457181b05ed",
     "packages": [
         {
             "name": "alexandre-daubois/monolog-processor-collection",
@@ -12301,6 +12301,62 @@
                 "source": "https://github.com/ringcentral/psr7/tree/master"
             },
             "time": "2018-05-29T20:21:04+00:00"
+        },
+        {
+            "name": "sbamtr/laravel-query-enrich",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SiavashBamshadnia/Laravel-Query-Enrich.git",
+                "reference": "bc7a8a3c8755336675f6e622be6335d8ca824d16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SiavashBamshadnia/Laravel-Query-Enrich/zipball/bc7a8a3c8755336675f6e622be6335d8ca824d16",
+                "reference": "bc7a8a3c8755336675f6e622be6335d8ca824d16",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.0|^9.0|^10|^11",
+                "illuminate/database": "^8.0|^9.0|^10|^11",
+                "illuminate/support": "^8.0|^9.0|^10|^11",
+                "nesbot/carbon": "^2|^3"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6|^7|^8|^9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "sbamtr\\LaravelQueryEnrich\\QueryEnrichServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "sbamtr\\LaravelQueryEnrich\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Siavash Bamshadnia",
+                    "email": "sbamtr@gmail.com"
+                }
+            ],
+            "description": "A helper for Laravel eloquent and query builder",
+            "support": {
+                "issues": "https://github.com/SiavashBamshadnia/Laravel-Query-Enrich/issues",
+                "source": "https://github.com/SiavashBamshadnia/Laravel-Query-Enrich/tree/1.2.0"
+            },
+            "time": "2024-03-17T18:44:08+00:00"
         },
         {
             "name": "shalvah/clara",
