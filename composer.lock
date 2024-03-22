@@ -11111,33 +11111,33 @@
         },
         {
             "name": "rakutentech/laravel-request-docs",
-            "version": "v2.33",
+            "version": "v2.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rakutentech/laravel-request-docs.git",
-                "reference": "3cf4d358d89a0589caf5bbacf652b61096be81de"
+                "reference": "464851a49aa908bcdcb5886e10077f7efeb006ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rakutentech/laravel-request-docs/zipball/3cf4d358d89a0589caf5bbacf652b61096be81de",
-                "reference": "3cf4d358d89a0589caf5bbacf652b61096be81de",
+                "url": "https://api.github.com/repos/rakutentech/laravel-request-docs/zipball/464851a49aa908bcdcb5886e10077f7efeb006ff",
+                "reference": "464851a49aa908bcdcb5886e10077f7efeb006ff",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/contracts": "^8.37|^9.0|^10.0",
+                "illuminate/contracts": "^8.37|^9.0|^10.0|^11.0",
                 "kitloong/laravel-app-logger": "^1.0",
                 "php": "^7.4|^8.0|^8.1|^8.2|^8.3",
                 "spatie/laravel-package-tools": "^1.4.3"
             },
             "require-dev": {
                 "barryvdh/laravel-ide-helper": "^2.12|dev-master",
-                "brianium/paratest": "^6.2",
+                "brianium/paratest": "^6.2|^7.4",
                 "friendsofphp/php-cs-fixer": "^3.5",
-                "nunomaduro/collision": "^5.3|^6.0",
+                "nunomaduro/collision": "^5.3|^6.0|^8.0",
                 "nunomaduro/larastan": "^1.0|^2.4",
-                "orchestra/testbench": "^6.15|^7.0|^8.0",
-                "phpunit/phpunit": "^9.3",
+                "orchestra/testbench": "^6.15|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.3|^10.5",
                 "spatie/laravel-ray": "^1.23",
                 "squizlabs/php_codesniffer": "^3.6",
                 "vimeo/psalm": "^4.8|^5.6"
@@ -11178,9 +11178,9 @@
             ],
             "support": {
                 "issues": "https://github.com/rakutentech/laravel-request-docs/issues",
-                "source": "https://github.com/rakutentech/laravel-request-docs/tree/v2.33"
+                "source": "https://github.com/rakutentech/laravel-request-docs/tree/v2.34"
             },
-            "time": "2024-03-12T07:50:49+00:00"
+            "time": "2024-03-22T00:38:52+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -13454,16 +13454,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.16.3",
+            "version": "1.16.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "59db18c2e20d49a0b6d447bb1c654f6c123beb9e"
+                "reference": "ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/59db18c2e20d49a0b6d447bb1c654f6c123beb9e",
-                "reference": "59db18c2e20d49a0b6d447bb1c654f6c123beb9e",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53",
+                "reference": "ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53",
                 "shasum": ""
             },
             "require": {
@@ -13502,7 +13502,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.3"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.4"
             },
             "funding": [
                 {
@@ -13510,7 +13510,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-07T07:35:57+00:00"
+            "time": "2024-03-20T07:29:11+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
