@@ -61,4 +61,28 @@ return [
         'key' => env('PUSHDEER_KEY'),
         'token' => env('PUSHDEER_TOKEN', 'token'),
     ],
+
+    'elasticsearch' => [
+        'default' => env('ELASTICSEARCH_DEFAULT', 'read'),
+        'quiet' => false,
+        'logger' => 'daily-elasticsearch',
+        // 'tracer' => 'daily-elasticsearch',
+        'connectionParams' => [
+            /** @see \GuzzleHttp\RequestOptions */
+            'client' => [
+            ],
+        ],
+        'connections' => [
+            'read' => [
+                'hosts' => [
+                    'local' => env('ELASTICSEARCH_READ_LOCAL_HOST', 'http://127.0.0.1:19200'),
+                    env('ELASTICSEARCH_READ_HOST', 'http://127.0.0.1:9200'),
+                ],
+                'basicAuthentication' => [
+                    env('ELASTICSEARCH_READ_USERNAME'),
+                    env('ELASTICSEARCH_READ_PASSWORD'),
+                ],
+            ],
+        ],
+    ],
 ];

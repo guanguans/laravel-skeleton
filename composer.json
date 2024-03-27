@@ -31,6 +31,7 @@
         "dragon-code/laravel-http-logger": "^1.4",
         "dragon-code/laravel-route-names": "^1.5",
         "elao/enum": "^2.4",
+        "elasticsearch/elasticsearch": "^8.12",
         "emreyarligan/enum-concern": "^1.0",
         "envant/fireable": "^1.0",
         "f9webltd/laravel-api-response-helpers": "^2.0",
@@ -277,7 +278,7 @@
         "envy-prune": "@php artisan envy:prune --ansi -v",
         "envy-sync": "@php artisan envy:sync --ansi -v",
         "facade-lint": "@facade-update --lint",
-        "facade-update": "@php -f ./facade.php -- App\\\\Support\\\\Facades\\\\OpenAI App\\\\Support\\\\Facades\\\\PushDeer",
+        "facade-update": "@php -f ./facade.php -- App\\\\Support\\\\Facades\\\\Elasticsearch App\\\\Support\\\\Facades\\\\OpenAI App\\\\Support\\\\Facades\\\\PushDeer",
         "ide-helper": [
             "@php artisan ide-helper:generate --ansi -v",
             "@php artisan ide-helper:models --nowrite --ansi -v",
