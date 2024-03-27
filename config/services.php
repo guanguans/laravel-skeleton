@@ -66,11 +66,8 @@ return [
         'default' => env('ELASTICSEARCH_DEFAULT', 'read'),
         'quiet' => false,
         'logger' => 'daily-elasticsearch',
-        // 'tracer' => 'daily-elasticsearch',
-        'connectionParams' => [
-            /** @see \GuzzleHttp\RequestOptions */
-            'client' => [
-            ],
+        /** @see \GuzzleHttp\RequestOptions */
+        'httpClientOptions' => [
         ],
         'connections' => [
             'read' => [

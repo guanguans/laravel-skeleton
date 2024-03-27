@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Exceptions\InvalidArgumentException;
-use Elasticsearch\Client;
-use Elasticsearch\ClientBuilder;
+use Elastic\Elasticsearch\Client;
+use Elastic\Elasticsearch\ClientBuilder;
+use Elastic\Elasticsearch\Exception\ConfigException;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +17,7 @@ use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
 
 /**
- * @mixin  \Elasticsearch\Client
+ * @mixin  \Elastic\Elasticsearch\Client
  */
 class ElasticsearchManager extends Manager
 {
@@ -35,8 +36,9 @@ class ElasticsearchManager extends Manager
 
     /**
      * @throws BindingResolutionException
+     * @throws ConfigException
      */
-    protected function createDriver($driver): Client
+    protected function createDriver(mixed $driver): Client
     {
         if (isset($this->customCreators[$driver])) {
             return $this->callCustomCreator($driver);
@@ -85,14 +87,10 @@ class ElasticsearchManager extends Manager
                 ->all();
         }
 
-        foreach (['logger', 'tracer'] as $key) {
-            if (! isset($config[$key])) {
-                continue;
-            }
+        if (isset($config['logger'])) {
+            $value = $config['logger'];
 
-            $value = $config[$key];
-
-            $config[$key] = $this->config->has("logging.channels.$value") ? Log::channel($value) : make($value);
+            $config['logger'] = $this->config->has("logging.channels.$value") ? Log::channel($value) : make($value);
         }
 
         return $config;
