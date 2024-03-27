@@ -31,6 +31,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Events\StatementPrepared;
@@ -136,6 +137,8 @@ class AppServiceProvider extends ServiceProvider
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws \ReflectionException
+     *
+     * @noinspection JsonEncodingApiUsageInspection
      */
     public function boot(): void
     {
@@ -171,6 +174,10 @@ class AppServiceProvider extends ServiceProvider
             $this->extendView();
             $this->listenEvents();
             ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
+            Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
+                $value,
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
+            ));
             LogHttp::skipWhen(fn (Request $request) => $this->app->runningUnitTests() || $request->isMethodSafe());
             LogViewer::auth(static fn (): bool => request()::isAdminDeveloper());
             class_exists(Telescope::class) and Telescope::auth(static fn (): bool => request()::isAdminDeveloper());
