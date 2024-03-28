@@ -90,7 +90,9 @@ class ElasticsearchManager extends Manager
         if (isset($config['logger'])) {
             $value = $config['logger'];
 
-            $config['logger'] = $this->config->has("logging.channels.$value") ? Log::channel($value) : make($value);
+            $config['logger'] = \is_string($value) && $this->config->has("logging.channels.$value")
+                ? Log::channel($value)
+                : make($value);
         }
 
         return $config;
