@@ -19,7 +19,12 @@ class CollectionMacro
      */
     public static function json(): callable
     {
-        return static fn (string $json, int $options = 0) => new static(json_decode($json, true, 512, $options));
+        return static fn (string $json, int $depth = 512, int $options = 0) => new static(json_decode(
+            $json,
+            true,
+            $depth,
+            $options
+        ));
     }
 
     public function pluckToArray(): callable
