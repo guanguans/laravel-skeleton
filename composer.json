@@ -125,7 +125,7 @@
         "laracademy/generators": "^3.7",
         "laracasts/generators": "^2.0",
         "laracraft-tech/laravel-schema-rules": "^1.3",
-        "laradumps/laradumps": "^2.5",
+        "laradumps/laradumps": "^3.0",
         "larastan/larastan": "^2.9",
         "laravel-lang/common": "^6.1",
         "laravel-shift/factory-generator": "dev-master",
