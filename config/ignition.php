@@ -22,6 +22,8 @@ use Spatie\LaravelIgnition\Solutions\SolutionProviders\RunningLaravelDuskInProdu
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\SailNetworkSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\TableNotFoundSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\UndefinedViewVariableSolutionProvider;
+use Spatie\LaravelIgnition\Solutions\SolutionProviders\UnknownMariadbCollationSolutionProvider;
+use Spatie\LaravelIgnition\Solutions\SolutionProviders\UnknownMysql8CollationSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\UnknownValidationSolutionProvider;
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\ViewNotFoundSolutionProvider;
 
@@ -117,6 +119,8 @@ return [
         GenericLaravelExceptionSolutionProvider::class,
         OpenAiSolutionProvider::class,
         SailNetworkSolutionProvider::class,
+        UnknownMysql8CollationSolutionProvider::class,
+        UnknownMariadbCollationSolutionProvider::class,
     ],
 
     /*

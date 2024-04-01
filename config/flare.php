@@ -4,6 +4,7 @@ use Spatie\FlareClient\FlareMiddleware\AddGitInformation;
 use Spatie\FlareClient\FlareMiddleware\CensorRequestBodyFields;
 use Spatie\FlareClient\FlareMiddleware\CensorRequestHeaders;
 use Spatie\FlareClient\FlareMiddleware\RemoveRequestIp;
+use Spatie\LaravelIgnition\FlareMiddleware\AddContext;
 use Spatie\LaravelIgnition\FlareMiddleware\AddDumps;
 use Spatie\LaravelIgnition\FlareMiddleware\AddEnvironmentInformation;
 use Spatie\LaravelIgnition\FlareMiddleware\AddExceptionInformation;
@@ -53,6 +54,7 @@ return [
         AddJobs::class => [
             'max_chained_job_reporting_depth' => 5,
         ],
+        AddContext::class,
         CensorRequestBodyFields::class => [
             'censor_fields' => [
                 'password',
