@@ -25,6 +25,7 @@ use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Guanguans\LaravelSoar\SoarServiceProvider;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -51,6 +52,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
@@ -183,6 +186,13 @@ class AppServiceProvider extends ServiceProvider
                     ->numbers()
                     ->symbols()
                     ->uncompromised()
+            );
+            // Route::middleware(['throttle:uploads']);
+            RateLimiter::for(
+                'uploads',
+                static fn (Request $request) => $request->user()->vipCustomer()
+                    ? Limit::none()
+                    : Limit::perMinute(100)->by($request->ip())
             );
             ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
             Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
