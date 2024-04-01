@@ -24404,16 +24404,16 @@
         },
         {
             "name": "salahhusa9/laravel-updater",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/salahhusa9/laravel-updater.git",
-                "reference": "b3b7fed9d8cbdc596704b52a80cf9db462a30586"
+                "reference": "3c4369e68f126b66ececd1b1aff5e5452befe32c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/b3b7fed9d8cbdc596704b52a80cf9db462a30586",
-                "reference": "b3b7fed9d8cbdc596704b52a80cf9db462a30586",
+                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/3c4369e68f126b66ececd1b1aff5e5452befe32c",
+                "reference": "3c4369e68f126b66ececd1b1aff5e5452befe32c",
                 "shasum": ""
             },
             "require": {
@@ -24427,7 +24427,7 @@
                 "laravel/pint": "^1.0",
                 "nunomaduro/collision": "^7.8",
                 "nunomaduro/larastan": "^2.0.1",
-                "orchestra/testbench": "^8.8",
+                "orchestra/testbench": "^9.0",
                 "pestphp/pest": "^2.20",
                 "pestphp/pest-plugin-arch": "^2.0",
                 "pestphp/pest-plugin-laravel": "^2.0"
@@ -24475,7 +24475,7 @@
             ],
             "support": {
                 "issues": "https://github.com/salahhusa9/laravel-updater/issues",
-                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.1.0"
+                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.2.0"
             },
             "funding": [
                 {
@@ -24483,7 +24483,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-11T15:44:05+00:00"
+            "time": "2024-04-01T08:54:50+00:00"
         },
         {
             "name": "sebastian/cli-parser",
