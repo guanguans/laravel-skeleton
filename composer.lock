@@ -4603,16 +4603,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "3.8.1",
+            "version": "3.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "c741ad8781e6b0291a12a429d983f68699f5a6dc"
+                "reference": "747a5a20a5e517c834c94ea5edab7069c1d37404"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/c741ad8781e6b0291a12a429d983f68699f5a6dc",
-                "reference": "c741ad8781e6b0291a12a429d983f68699f5a6dc",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/747a5a20a5e517c834c94ea5edab7069c1d37404",
+                "reference": "747a5a20a5e517c834c94ea5edab7069c1d37404",
                 "shasum": ""
             },
             "require": {
@@ -4733,7 +4733,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-03-31T14:24:18+00:00"
+            "time": "2024-04-01T06:24:57+00:00"
         },
         {
             "name": "guanguans/notify",
