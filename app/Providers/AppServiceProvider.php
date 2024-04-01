@@ -38,6 +38,7 @@ use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
@@ -58,6 +59,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 use KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider;
 use LaracraftTech\LaravelSchemaRules\LaravelSchemaRulesServiceProvider;
@@ -169,10 +171,19 @@ class AppServiceProvider extends ServiceProvider
             // Paginator::defaultSimpleView('pagination::simple-bulma');
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
             // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+            Builder::defaultMorphKeyType('uuid');
             $this->registerMacros();
             $this->extendValidator();
             $this->extendView();
             $this->listenEvents();
+            Password::defaults(
+                static fn (): Password => Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
+            );
             ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
             Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
                 $value,
@@ -185,7 +196,9 @@ class AppServiceProvider extends ServiceProvider
                 'timeout' => 30,
                 'connect_timeout' => 10,
             ]);
-            Http::globalMiddleware(Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG)));
+            Http::globalMiddleware(
+                Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG))
+            );
 
             // 自定义多态类型
             Relation::enforceMorphMap([
