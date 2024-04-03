@@ -33,7 +33,8 @@ parameters:
 #        switchConditionsMatchingType: false
 #        noVariableVariables: false
     ignoreErrors:
-        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
+#        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
+        - "#^Access to an undefined property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
         - "#^Method App\\\\Support\\\\Macros\\\\.*Macro\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
         - "#^Unsafe usage of new static\\(\\)\\.$#"
         - "#^Access to undefined constant Spatie\\\\Health\\\\Enums\\\\Status\\:\\:.*\\.$#"
