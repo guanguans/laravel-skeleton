@@ -11,6 +11,8 @@ composer composer-check-platform-reqs   # PHP cli 环境检查
 composer composer-normalize             # composer.json 文件修复
 composer composer-require-checker       # composer require 检查
 composer composer-unused-checker        # composer unused 检查
+composer composer-updater               # composer 更新依赖
+composer composer-updater-dry-run       # composer 尝试更新依赖
 composer composer-validate              # composer.json 文件验证
 composer docs-generate                  # API 文档生成
 composer envoy-testing                  # envoy 部署
@@ -27,23 +29,28 @@ composer rector                         # 代码重构(risky)
 composer rector-dry-run                 # 代码重构检查
 composer tlint                          # Laravel 代码风格修复
 composer tlint-format                   # Laravel 代码风格检查
+composer var-dump-server                # 启动变量打印服务
 ```
 
 ## 应用目录结构
 
 ```shell
+app
 ├── Casts
 │   ├── Base64Cast.php
 │   ├── CallbackGetCast.php
 │   ├── CallbackSetCast.php
 │   ├── CommaSeparatedToArrayCast.php
 │   ├── CommaSeparatedToIntegerArrayCast.php
-│   └── CurrencyCast.php
+│   ├── CurrencyCast.php
+│   └── DecimalCast.php
 ├── Console
 │   ├── Commands
 │   │   ├── ClearAllCommand.php
 │   │   ├── ClearLogsCommand.php
 │   │   ├── Command.php
+│   │   ├── Concerns
+│   │   │   └── PrettyCommandOutput.php
 │   │   ├── FindDumpStatementCommand.php
 │   │   ├── GenerateTestsCommand.php
 │   │   ├── HealthCheckCommand.php
@@ -51,7 +58,8 @@ composer tlint-format                   # Laravel 代码风格检查
 │   │   ├── ListSchedule.php
 │   │   ├── OpcacheUrlCommand.php
 │   │   ├── OpenAIHelpCommand.php
-│   │   └── OptimizeAllCommand.php
+│   │   ├── OptimizeAllCommand.php
+│   │   └── ParsePHPFileToASTCommand.php
 │   └── Kernel.php
 ├── Enums
 │   ├── BooleanEnum.php
@@ -82,6 +90,7 @@ composer tlint-format                   # Laravel 代码风格检查
 │   │   ├── CompressResponseContent.php
 │   │   ├── ETag.php
 │   │   ├── EncryptCookies.php
+│   │   ├── IsRouteIgnored.php
 │   │   ├── LogHttp.php
 │   │   ├── PreventRequestsDuringMaintenance.php
 │   │   ├── RedirectIfAuthenticated.php
@@ -90,6 +99,7 @@ composer tlint-format                   # Laravel 代码风格检查
 │   │   ├── TrimStrings.php
 │   │   ├── TrustHosts.php
 │   │   ├── TrustProxies.php
+│   │   ├── UserLocale.php
 │   │   ├── VerifyCommonParameters.php
 │   │   ├── VerifyCsrfToken.php
 │   │   ├── VerifyJsonContent.php
@@ -105,7 +115,8 @@ composer tlint-format                   # Laravel 代码风格检查
 │       └── UserResource.php
 ├── Jobs
 ├── Listeners
-│   └── CollectGarbageListener.php
+│   ├── CollectGarbageListener.php
+│   └── ShareLogContextSubscriber.php
 ├── Mail
 │   └── UserRegisteredMail.php
 ├── Models
@@ -118,14 +129,17 @@ composer tlint-format                   # Laravel 代码风格检查
 │   │   ├── HasPivot.php
 │   │   ├── HasWrapedApiTokens.php
 │   │   ├── IndexHintsable.php
+│   │   ├── Nullable.php
 │   │   ├── Observable.php
 │   │   ├── Pipeable.php
 │   │   ├── SerializeDate.php
+│   │   ├── SimpleNode.php
 │   │   ├── Sortable.php
 │   │   └── UsingUuidAsPrimaryKey.php
 │   ├── HttpLog.php
 │   ├── JWTUser.php
 │   ├── Model.php
+│   ├── PersonalAccessToken.php
 │   ├── Pivots
 │   │   ├── MorphPivotWithCreatorPivot.php
 │   │   └── PivotWithCreatorPivot.php
@@ -144,7 +158,8 @@ composer tlint-format                   # Laravel 代码风格检查
 │   ├── BroadcastServiceProvider.php
 │   ├── EventServiceProvider.php
 │   ├── ExtendServiceProvider.php
-│   └── RouteServiceProvider.php
+│   ├── RouteServiceProvider.php
+│   └── TelescopeServiceProvider.php
 ├── Rules
 │   ├── AddressIPV4Rule.php
 │   ├── AddressIPV6Rule.php
@@ -190,6 +205,7 @@ composer tlint-format                   # Laravel 代码风格检查
 │   ├── SemverRule.php
 │   ├── SlugRule.php
 │   ├── SnakeCaseRule.php
+│   ├── StrictIdCardRule.php
 │   ├── StrongPassword.php
 │   ├── TimezoneRule.php
 │   ├── UlidRule.php
@@ -199,13 +215,17 @@ composer tlint-format                   # Laravel 代码风格检查
 ├── Services
 ├── Support
 │   ├── AbstractRepository.php
+│   ├── Attributes
+│   │   └── Ignore.php
 │   ├── BitEncoder.php
 │   ├── ConsoleWriter.php
 │   ├── Contracts
 │   │   ├── BitEncoderContract.php
 │   │   └── SignerContract.php
 │   ├── Discover.php
+│   ├── ElasticsearchManager.php
 │   ├── Facades
+│   │   ├── Elasticsearch.php
 │   │   ├── OpenAI.php
 │   │   └── PushDeer.php
 │   ├── FluentAssert.php
@@ -238,6 +258,7 @@ composer tlint-format                   # Laravel 代码风格检查
 │   │       └── XML.php
 │   ├── HttpClient.php
 │   ├── HttpQuery.php
+│   ├── IdCard.php
 │   ├── Inflector.php
 │   ├── Macros
 │   │   ├── BlueprintMacro.php
@@ -257,11 +278,13 @@ composer tlint-format                   # Laravel 代码风格检查
 │   │   │   └── WhereStartsWithQueryBuilderMacro.php
 │   │   ├── RequestMacro.php
 │   │   ├── ResponseFactoryMacro.php
+│   │   ├── SchedulingEventMacro.php
 │   │   ├── StrMacro.php
 │   │   └── StringableMacro.php
 │   ├── Monolog
 │   │   ├── AnsiLineFormatter.php
-│   │   └── AppendExtraDataProcessor.php
+│   │   ├── AppendExtraDataProcessor.php
+│   │   └── EcsFormatterTapper.php
 │   ├── OS.php
 │   ├── OpenAI.php
 │   ├── PureModel.php
@@ -279,11 +302,16 @@ composer tlint-format                   # Laravel 代码风格检查
 │   │   ├── ControllerCrudable.php
 │   │   ├── Copyable.php
 │   │   ├── CreateStaticable.php
+│   │   ├── Disenchant.php
+│   │   ├── Immutable.php
 │   │   ├── ModelCrudable.php
 │   │   ├── Sanitizerable.php
 │   │   ├── Singletonable.php
+│   │   ├── Uncloneable.php
+│   │   ├── Unconstructable.php
 │   │   ├── ValidateStrictAll.php
-│   │   └── ValidatesData.php
+│   │   ├── ValidatesData.php
+│   │   └── Value.php
 │   └── helpers.php
 └── View
     ├── Components
@@ -297,5 +325,5 @@ composer tlint-format                   # Laravel 代码风格检查
     └── Creators
         └── RequestCreator.php
 
-50 directories, 215 files
+52 directories, 237 files
 ```
