@@ -11188,16 +11188,16 @@
         },
         {
             "name": "rakutentech/laravel-request-docs",
-            "version": "v2.34",
+            "version": "v2.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rakutentech/laravel-request-docs.git",
-                "reference": "464851a49aa908bcdcb5886e10077f7efeb006ff"
+                "reference": "dc003526eba0fe747197c309c2adbc6fd7308ed6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rakutentech/laravel-request-docs/zipball/464851a49aa908bcdcb5886e10077f7efeb006ff",
-                "reference": "464851a49aa908bcdcb5886e10077f7efeb006ff",
+                "url": "https://api.github.com/repos/rakutentech/laravel-request-docs/zipball/dc003526eba0fe747197c309c2adbc6fd7308ed6",
+                "reference": "dc003526eba0fe747197c309c2adbc6fd7308ed6",
                 "shasum": ""
             },
             "require": {
@@ -11255,9 +11255,9 @@
             ],
             "support": {
                 "issues": "https://github.com/rakutentech/laravel-request-docs/issues",
-                "source": "https://github.com/rakutentech/laravel-request-docs/tree/v2.34"
+                "source": "https://github.com/rakutentech/laravel-request-docs/tree/v2.35"
             },
-            "time": "2024-03-22T00:38:52+00:00"
+            "time": "2024-04-03T02:35:11+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
