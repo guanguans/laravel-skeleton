@@ -82,4 +82,8 @@ return [
             ],
         ],
     ],
+
+    'pushbullet' => [
+        'access_token' => env('PUSHBULLET_ACCESS_TOKEN'),
+    ],
 ];

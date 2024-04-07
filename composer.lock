@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1cb21dc3bd0b7ad61907cebb6d14939e",
+    "content-hash": "ef267a58478863da1e420ea262cbe2a1",
     "packages": [
         {
             "name": "alexandre-daubois/monolog-processor-collection",
@@ -6508,6 +6508,63 @@
                 }
             ],
             "time": "2024-02-16T16:06:16+00:00"
+        },
+        {
+            "name": "laravel-notification-channels/pushbullet",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-notification-channels/pushbullet.git",
+                "reference": "9d4078d584be76dbb1f6845bb53f50c9a9f48229"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-notification-channels/pushbullet/zipball/9d4078d584be76dbb1f6845bb53f50c9a9f48229",
+                "reference": "9d4078d584be76dbb1f6845bb53f50c9a9f48229",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2 || ^7.0",
+                "illuminate/notifications": "~5.5 || ~6.0 || ~7.0 || ~8.0 || ~9.0 || ~10.0",
+                "illuminate/support": "~5.5 || ~6.0 || ~7.0 || ~8.0 || ~9.0 || ~10.0",
+                "php": "^7.3 || ~8.0.0 || ~8.1.0 || ~8.2.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2.0",
+                "phpunit/phpunit": "^8.5.21 || ^9.0 || ^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NotificationChannels\\Pushbullet\\PushbulletServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\Pushbullet\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Plekhanov",
+                    "email": "alex@plekhanov.dev",
+                    "homepage": "https://alex.plekhanov.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5.3+ Notifications Pushbullet Driver",
+            "homepage": "https://github.com/laravel-notification-channels/pushbullet",
+            "support": {
+                "issues": "https://github.com/laravel-notification-channels/pushbullet/issues",
+                "source": "https://github.com/laravel-notification-channels/pushbullet/tree/1.5.0"
+            },
+            "time": "2023-04-17T19:55:15+00:00"
         },
         {
             "name": "laravel/framework",

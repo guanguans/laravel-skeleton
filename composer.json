@@ -51,6 +51,7 @@
         "joetannenbaum/terminalia": "^0.3",
         "kevinrob/guzzle-cache-middleware": "^5.1",
         "knuckleswtf/scribe": "^4.31",
+        "laravel-notification-channels/pushbullet": "^1.5",
         "laravel/framework": "^10.48 || ^11.0",
         "laravel/octane": "^2.3",
         "laravel/pennant": "^1.7",
