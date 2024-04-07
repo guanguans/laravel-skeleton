@@ -6,6 +6,7 @@ use App\Support\Rectors\RenameToPsrNameRector;
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
+use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\Expression\InlineIfToExplicitIfRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
@@ -75,6 +76,7 @@ return static function (RectorConfig $rectorConfig): void {
         DisallowedEmptyRuleFixerRector::class,
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
+        ExplicitReturnNullRector::class,
         InlineIfToExplicitIfRector::class,
         JsonThrowOnErrorRector::class,
         LogicalToBooleanRector::class,

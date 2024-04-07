@@ -26,5 +26,7 @@ class Policy
         if (optional($user)->is_admin) {
             return true;
         }
+
+        return null;
     }
 }

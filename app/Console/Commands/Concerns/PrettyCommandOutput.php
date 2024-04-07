@@ -157,6 +157,8 @@ trait PrettyCommandOutput
 
         $this->line(sprintf("  <fg=$foreground;bg=$background> %s </> $text", strtoupper($title)));
         $this->newLine();
+
+        return null;
     }
 
     /**
