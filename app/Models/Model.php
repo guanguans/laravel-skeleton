@@ -35,6 +35,8 @@ class Model extends \Illuminate\Database\Eloquent\Model
     use SerializeDate;
     use SoftDeletes;
 
+    // protected static $unguarded = true;
+
     public $casts = [
         'extra_attributes' => SchemalessAttributes::class,
     ];
