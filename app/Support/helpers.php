@@ -10,6 +10,26 @@ use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\VarDumper\VarDumper;
 
+if (! function_exists('defer')) {
+    /**
+     * @see https://github.com/php-defer/php-defer
+     */
+    function defer(?SplStack &$context, callable $callback): void
+    {
+        $context ??= new class() extends SplStack
+        {
+            public function __destruct()
+            {
+                while ($this->count() > 0) {
+                    call_user_func($this->pop());
+                }
+            }
+        };
+
+        $context->push($callback);
+    }
+}
+
 if (! function_exists('env_explode')) {
     /**
      * @noinspection LaravelFunctionsInspection
