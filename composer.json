@@ -45,6 +45,7 @@
         "hammerstone/laravel-pseudo-daemon": "^1.1",
         "hashids/hashids": "^5.0",
         "jasny/sso": "^0.5",
+        "jdavidbakr/laravel-cache-garbage-collector": "^2.2",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^6.0",
         "joetannenbaum/terminalia": "^0.3",

@@ -7,6 +7,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\File;
+use jdavidbakr\LaravelCacheGarbageCollector\LaravelCacheGarbageCollector;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Spatie\ShortSchedule\ShortSchedule;
@@ -20,7 +21,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        LaravelCacheGarbageCollector::class,
     ];
 
     /**
@@ -42,6 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('disposable:update')->weekly()->at('04:00');
         $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->everyMinute();
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();
+        $schedule->command(LaravelCacheGarbageCollector::class)->daily();
 
         // $schedule->job(function (ConsoleOutput $consoleOutput) {
         //     $consoleOutput->writeln(Inspiring::quote());

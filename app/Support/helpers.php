@@ -21,7 +21,7 @@ if (! function_exists('defer')) {
             public function __destruct()
             {
                 while ($this->count() > 0) {
-                    call_user_func($this->pop());
+                    ($this->pop())();
                 }
             }
         };
