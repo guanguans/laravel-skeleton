@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
 use App\Models\PersonalAccessToken;
+use App\Notifications\SlowQueryLoggedNotification;
 use App\Rules\Rule;
 use App\Support\Discover;
 use App\Support\Macros\BlueprintMacro;
@@ -31,10 +32,12 @@ use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
+use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
@@ -44,6 +47,7 @@ use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -52,6 +56,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -244,9 +249,16 @@ class AppServiceProvider extends ServiceProvider
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
 
-            // DB::whenQueryingForLongerThan(500, function (Connection $connection, QueryExecuted $event) {
-            //     // 通知开发团队...
-            // });
+            DB::whenQueryingForLongerThan(300000, static function (Connection $connection, QueryExecuted $event) {
+                Notification::send(
+                    new AnonymousNotifiable,
+                    new SlowQueryLoggedNotification(
+                        $event->sql,
+                        $event->time,
+                        Request::url(),
+                    ),
+                );
+            });
             // Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
             //     info(sprintf('Attempted to lazy load [%s] on model [%s].', $relation, get_class($model)));
             // });
