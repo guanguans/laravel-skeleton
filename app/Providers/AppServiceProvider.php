@@ -10,6 +10,7 @@ use App\Notifications\SlowQueryLoggedNotification;
 use App\Rules\Rule;
 use App\Support\Discover;
 use App\Support\Macros\BlueprintMacro;
+use App\Support\Macros\CarbonMacro;
 use App\Support\Macros\CollectionMacro;
 use App\Support\Macros\CommandMacro;
 use App\Support\Macros\GrammarMacro;
@@ -295,6 +296,7 @@ class AppServiceProvider extends ServiceProvider
     protected function registerMacros(): void
     {
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
+        Carbon::mixin($this->app->make(CarbonMacro::class));
         Collection::mixin($this->app->make(CollectionMacro::class));
         Command::mixin($this->app->make(CommandMacro::class));
         Event::mixin($this->app->make(SchedulingEventMacro::class));
