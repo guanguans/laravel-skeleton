@@ -37,8 +37,7 @@ class SlowQueryLoggedNotification extends Notification implements ShouldQueue
         $content = "*Slow query logged!*\n\n";
         $content .= "```{$this->query}```\n\n";
         $content .= "Duration: {$this->duration}ms\n";
-        $content .= "URL: {$this->url}";
 
-        return $content;
+        return $content."URL: {$this->url}";
     }
 }

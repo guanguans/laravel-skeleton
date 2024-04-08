@@ -256,7 +256,7 @@ class AppServiceProvider extends ServiceProvider
                     new SlowQueryLoggedNotification(
                         $event->sql,
                         $event->time,
-                        Request::url(),
+                        request()->url(),
                     ),
                 );
             });

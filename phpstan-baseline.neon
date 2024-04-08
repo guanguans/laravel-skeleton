@@ -6,6 +6,11 @@ parameters:
 			path: app/Console/Commands/ParsePHPFileToASTCommand.php
 
 		-
+			message: "#^Call to static method create\\(\\) on an unknown class NotificationChannels\\\\Telegram\\\\TelegramMessage\\.$#"
+			count: 1
+			path: app/Notifications/SlowQueryLoggedNotification.php
+
+		-
 			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
 			count: 1
 			path: app/Support/Macros/BlueprintMacro.php
