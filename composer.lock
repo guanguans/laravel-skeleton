@@ -13455,16 +13455,16 @@
         },
         {
             "name": "spatie/laravel-health",
-            "version": "1.27.1",
+            "version": "1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-health.git",
-                "reference": "587e45b8ed68fc01d54ac084d296d13886fca1b8"
+                "reference": "39871021e1857ae9621450e4c972507701ef1b2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/587e45b8ed68fc01d54ac084d296d13886fca1b8",
-                "reference": "587e45b8ed68fc01d54ac084d296d13886fca1b8",
+                "url": "https://api.github.com/repos/spatie/laravel-health/zipball/39871021e1857ae9621450e4c972507701ef1b2a",
+                "reference": "39871021e1857ae9621450e4c972507701ef1b2a",
                 "shasum": ""
             },
             "require": {
@@ -13536,7 +13536,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-health/tree/1.27.1"
+                "source": "https://github.com/spatie/laravel-health/tree/1.28.0"
             },
             "funding": [
                 {
@@ -13544,7 +13544,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-05T09:10:51+00:00"
+            "time": "2024-04-08T08:11:30+00:00"
         },
         {
             "name": "spatie/laravel-http-logger",
