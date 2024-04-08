@@ -3803,20 +3803,20 @@
         },
         {
             "name": "emreyarligan/enum-concern",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/emreyarligan/enum-concern.git",
-                "reference": "665575c3289ddfdcd9b95efe115b0aad799641a1"
+                "reference": "388d1865536adc2104dc80083289b82108c768fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emreyarligan/enum-concern/zipball/665575c3289ddfdcd9b95efe115b0aad799641a1",
-                "reference": "665575c3289ddfdcd9b95efe115b0aad799641a1",
+                "url": "https://api.github.com/repos/emreyarligan/enum-concern/zipball/388d1865536adc2104dc80083289b82108c768fc",
+                "reference": "388d1865536adc2104dc80083289b82108c768fc",
                 "shasum": ""
             },
             "require": {
-                "illuminate/collections": "^8.65 || ^9.0 || ^10.0",
+                "illuminate/collections": "^8.65 || ^9.0 || ^10.0 || ^11.0",
                 "php": ">=8.1"
             },
             "require-dev": {
@@ -3847,9 +3847,9 @@
             ],
             "support": {
                 "issues": "https://github.com/emreyarligan/enum-concern/issues",
-                "source": "https://github.com/emreyarligan/enum-concern/tree/1.0.3"
+                "source": "https://github.com/emreyarligan/enum-concern/tree/1.0.4"
             },
-            "time": "2024-01-27T21:20:08+00:00"
+            "time": "2024-04-06T00:19:16+00:00"
         },
         {
             "name": "envant/fireable",
@@ -7680,16 +7680,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.26.0",
+            "version": "3.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "072735c56cc0da00e10716dd90d5a7f7b40b36be"
+                "reference": "4729745b1ab737908c7d055148c9a6b3e959832f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/072735c56cc0da00e10716dd90d5a7f7b40b36be",
-                "reference": "072735c56cc0da00e10716dd90d5a7f7b40b36be",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4729745b1ab737908c7d055148c9a6b3e959832f",
+                "reference": "4729745b1ab737908c7d055148c9a6b3e959832f",
                 "shasum": ""
             },
             "require": {
@@ -7754,7 +7754,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.26.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.27.0"
             },
             "funding": [
                 {
@@ -7766,7 +7766,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-25T11:49:53+00:00"
+            "time": "2024-04-07T19:17:50+00:00"
         },
         {
             "name": "league/flysystem-local",
