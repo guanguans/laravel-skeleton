@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44ae6d3ceecbb446de5c5950812d2cc9",
+    "content-hash": "6ad4a4cddef99331e6b60c67b6a83f43",
     "packages": [
         {
             "name": "alexandre-daubois/monolog-processor-collection",
@@ -1115,6 +1115,67 @@
                 "source": "https://github.com/appstract/laravel-opcache/tree/4.0.2"
             },
             "time": "2020-12-01T16:12:14+00:00"
+        },
+        {
+            "name": "asvae/laravel-api-tester",
+            "version": "2.0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asvae/laravel-api-tester.git",
+                "reference": "54a8e2dd9de990b1725defc56ec30cc14f39b95a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asvae/laravel-api-tester/zipball/54a8e2dd9de990b1725defc56ec30cc14f39b95a",
+                "reference": "54a8e2dd9de990b1725defc56ec30cc14f39b95a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "laravel/framework": "5.2.*",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "firebase/token-generator": "Token generator for firebase",
+                "ktamas77/firebase-php": "Keep your requests stored in cloud"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Asvae\\ApiTester\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asvae\\ApiTester\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yauheni Prakopchyk",
+                    "email": "ontrew@gmail.com"
+                }
+            ],
+            "description": "Api tester for Laravel Framework",
+            "keywords": [
+                "api",
+                "debug",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/asvae/laravel-api-tester/issues",
+                "source": "https://github.com/asvae/laravel-api-tester/tree/2.0.11"
+            },
+            "time": "2020-09-19T16:01:57+00:00"
         },
         {
             "name": "aurorawebsoftware/asetting",
@@ -9589,6 +9650,177 @@
             "time": "2023-11-19T08:47:43+00:00"
         },
         {
+            "name": "orchid/blade-icons",
+            "version": "4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchidsoftware/blade-icons.git",
+                "reference": "b2fc5c8f86e3fd7f5c48f67305afd21dc3b65494"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchidsoftware/blade-icons/zipball/b2fc5c8f86e3fd7f5c48f67305afd21dc3b65494",
+                "reference": "b2fc5c8f86e3fd7f5c48f67305afd21dc3b65494",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "laravel/framework": "^10.0|^11.0"
+            },
+            "conflict": {
+                "laravel/framework": "<10.30"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Orchid\\Icons\\IconServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchid\\Icons\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "tabuna",
+                    "email": "bliz48rus@gmail.com"
+                }
+            ],
+            "description": "An easy way inline SVG images in your Blade templates.",
+            "support": {
+                "issues": "https://github.com/orchidsoftware/blade-icons/issues",
+                "source": "https://github.com/orchidsoftware/blade-icons/tree/4.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/orchidsoftware",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/orchid",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2024-03-30T23:56:41+00:00"
+        },
+        {
+            "name": "orchid/platform",
+            "version": "14.21.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchidsoftware/platform.git",
+                "reference": "b83f1c933d190198409e667f6b6644e0a009a217"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/b83f1c933d190198409e667f6b6644e0a009a217",
+                "reference": "b83f1c933d190198409e667f6b6644e0a009a217",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^10.0||^11.0",
+                "laravel/scout": "^9.0 || ^10.0",
+                "orchid/blade-icons": "^4.0",
+                "tabuna/breadcrumbs": "^4.0",
+                "twbs/bootstrap-icons": "^1.10",
+                "watson/active": "^7.0"
+            },
+            "conflict": {
+                "laravel/framework": "<10.2.0",
+                "nesbot/carbon": "<2.66.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^2.10 || ^3.0",
+                "fakerphp/faker": "^1.9.1",
+                "laravel/pint": "^1.14",
+                "orchestra/testbench-core": "^8.0 || ^9.0",
+                "orchestra/testbench-dusk": "^8.0 || ^9.0",
+                "phpunit/php-code-coverage": "^10.0 || ^11.0",
+                "phpunit/phpunit": "^10.0 || ^11.0",
+                "vimeo/psalm": "^5.0"
+            },
+            "suggest": {
+                "orchid/crud": "Automated CRUD based on your files resources.",
+                "orchid/fortify": "Orchid template for Laravel Fortify."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Orchid\\Platform\\Providers\\FoundationServiceProvider"
+                    ],
+                    "aliases": {
+                        "Alert": "Orchid\\Support\\Facades\\Alert",
+                        "Dashboard": "Orchid\\Support\\Facades\\Dashboard"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "Orchid\\Alert\\": "src/Alert/",
+                    "Orchid\\Access\\": "src/Access/",
+                    "Orchid\\Screen\\": "src/Screen/",
+                    "Orchid\\Filters\\": "src/Filters/",
+                    "Orchid\\Metrics\\": "src/Metrics/",
+                    "Orchid\\Support\\": "src/Support/",
+                    "Orchid\\Platform\\": "src/Platform/",
+                    "Orchid\\Attachment\\": "src/Attachment/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandr Chernyaev",
+                    "email": "bliz48rus@gmail.com",
+                    "homepage": "https://tabuna.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Platform for back-office applications, admin panel or CMS your Laravel app.",
+            "homepage": "https://orchid.software",
+            "keywords": [
+                "admin",
+                "cmf",
+                "cms",
+                "extranet",
+                "framework",
+                "laravel",
+                "orchid",
+                "platform",
+                "rad"
+            ],
+            "support": {
+                "docs": "https://orchid.software/en/docs",
+                "email": "bliz48rus@gmail.com",
+                "issues": "https://github.com/orchidsoftware/platform/issues",
+                "source": "https://github.com/orchidsoftware/platform"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/orchid",
+                    "type": "opencollective"
+                }
+            ],
+            "time": "2024-03-24T23:36:22+00:00"
+        },
+        {
             "name": "overtrue/http",
             "version": "1.2.3",
             "source": {
@@ -10776,6 +11008,60 @@
                 }
             ],
             "time": "2023-09-13T16:42:03+00:00"
+        },
+        {
+            "name": "protoqol/prequel",
+            "version": "v1.23.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Protoqol/Prequel.git",
+                "reference": "9b37d8ca1948dffa59dbdc67edc07d0af7864f3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Protoqol/Prequel/zipball/9b37d8ca1948dffa59dbdc67edc07d0af7864f3c",
+                "reference": "9b37d8ca1948dffa59dbdc67edc07d0af7864f3c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "laravel/framework": "^6.0|^7.0|^8.0|^9.0|^10",
+                "php": "^7.2.5|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.7",
+                "phpmd/phpmd": "^2.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Protoqol\\Prequel\\PrequelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Protoqol\\Prequel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quinten Justus",
+                    "email": "quinten@protoqol.nl"
+                }
+            ],
+            "description": "Clear and concise database management.",
+            "support": {
+                "issues": "https://github.com/Protoqol/Prequel/issues",
+                "source": "https://github.com/Protoqol/Prequel/tree/v1.23.13"
+            },
+            "time": "2024-03-13T11:12:51+00:00"
         },
         {
             "name": "psr/cache",
@@ -17664,6 +17950,72 @@
             "time": "2024-01-23T15:02:46+00:00"
         },
         {
+            "name": "tabuna/breadcrumbs",
+            "version": "4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tabuna/breadcrumbs.git",
+                "reference": "a8e615bbf8ff3b6c7e8aaffe4a4fb37d3eab8fe0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tabuna/breadcrumbs/zipball/a8e615bbf8ff3b6c7e8aaffe4a4fb37d3eab8fe0",
+                "reference": "a8e615bbf8ff3b6c7e8aaffe4a4fb37d3eab8fe0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^10.0|^11.0",
+                "laravel/serializable-closure": "^1.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0",
+                "phpunit/php-code-coverage": "^10.|^11.0",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tabuna\\Breadcrumbs\\BreadcrumbsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Breadcrumbs": "Tabuna\\Breadcrumbs\\Breadcrumbs"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tabuna\\Breadcrumbs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandr Chernyaev",
+                    "email": "bliz48rus@gmail.com"
+                },
+                {
+                    "name": "Dwight Watson",
+                    "email": "dwight@studentservices.com.au"
+                },
+                {
+                    "name": "Dave James Miller",
+                    "email": "dave@davejamesmiller.com"
+                }
+            ],
+            "description": "An easy way to add breadcrumbs to your Laravel app.",
+            "support": {
+                "issues": "https://github.com/tabuna/breadcrumbs/issues",
+                "source": "https://github.com/tabuna/breadcrumbs/tree/4.1.0"
+            },
+            "time": "2024-03-14T02:01:39+00:00"
+        },
+        {
             "name": "teamtnt/laravel-scout-tntsearch-driver",
             "version": "v14.0.0",
             "source": {
@@ -17982,6 +18334,45 @@
                 "source": "https://github.com/timacdonald/has-parameters/releases/latest"
             },
             "time": "2023-02-17T04:00:11+00:00"
+        },
+        {
+            "name": "twbs/bootstrap-icons",
+            "version": "v1.11.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/icons.git",
+                "reference": "8d88686c03c3768a2d82ba4f20c3c4e1b100fa29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/icons/zipball/8d88686c03c3768a2d82ba4f20c3c4e1b100fa29",
+                "reference": "8d88686c03c3768a2d82ba4f20c3c4e1b100fa29",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "Official open source SVG icon library for Bootstrap",
+            "homepage": "https://icons.getbootstrap.com/",
+            "keywords": [
+                "bootstrap",
+                "icon font",
+                "icons",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/icons/issues",
+                "source": "https://github.com/twbs/icons/tree/v1.11.3"
+            },
+            "time": "2024-01-03T15:44:45+00:00"
         },
         {
             "name": "unicodeveloper/laravel-password",
@@ -18316,6 +18707,72 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "watson/active",
+            "version": "7.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dwightwatson/active.git",
+                "reference": "861be09a8d2ce225701f442899812506cbe5674e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dwightwatson/active/zipball/861be09a8d2ce225701f442899812506cbe5674e",
+                "reference": "861be09a8d2ce225701f442899812506cbe5674e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^10.0|^11.0",
+                "illuminate/http": "^10.0|^11.0",
+                "illuminate/routing": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5.1",
+                "phpunit/phpunit": "^9.0|^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Watson\\Active\\ActiveServiceProvider"
+                    ],
+                    "aliases": {
+                        "Active": "Watson\\Watson\\Facades\\Active"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Watson\\Active\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dwight Watson",
+                    "email": "dwight@studiousapp.com"
+                }
+            ],
+            "description": "Laravel helper for recognising the current route, controller and action",
+            "keywords": [
+                "active",
+                "laravel",
+                "routing"
+            ],
+            "support": {
+                "issues": "https://github.com/dwightwatson/active/issues",
+                "source": "https://github.com/dwightwatson/active/tree/7.1.0"
+            },
+            "time": "2024-02-28T21:52:01+00:00"
         },
         {
             "name": "watson/validating",
