@@ -6629,16 +6629,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.48.5",
+            "version": "v10.48.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a8b682e1371338848637f638aedaef2f7607d36f"
+                "reference": "118c686992f4b90d4da6deaf0901315c337bbaf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a8b682e1371338848637f638aedaef2f7607d36f",
-                "reference": "a8b682e1371338848637f638aedaef2f7607d36f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/118c686992f4b90d4da6deaf0901315c337bbaf9",
+                "reference": "118c686992f4b90d4da6deaf0901315c337bbaf9",
                 "shasum": ""
             },
             "require": {
@@ -6832,7 +6832,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-04-09T14:48:50+00:00"
+            "time": "2024-04-10T14:57:20+00:00"
         },
         {
             "name": "laravel/octane",
