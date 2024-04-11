@@ -9203,25 +9203,25 @@
         },
         {
             "name": "nunomaduro/laravel-console-task",
-            "version": "v1.8.0",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/laravel-console-task.git",
-                "reference": "e49e7be261a7b7329c4538777489b355fb234bde"
+                "reference": "02b2a550318fda3355e45763885e30b4e650bc1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/laravel-console-task/zipball/e49e7be261a7b7329c4538777489b355fb234bde",
-                "reference": "e49e7be261a7b7329c4538777489b355fb234bde",
+                "url": "https://api.github.com/repos/nunomaduro/laravel-console-task/zipball/02b2a550318fda3355e45763885e30b4e650bc1b",
+                "reference": "02b2a550318fda3355e45763885e30b4e650bc1b",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^9.0|^10.0",
-                "illuminate/support": "^9.0|^10.0",
+                "illuminate/console": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
                 "php": "^8.1"
             },
             "require-dev": {
-                "pestphp/pest": "^1.22.3"
+                "pestphp/pest": "^2.34"
             },
             "type": "library",
             "extra": {
@@ -9261,7 +9261,7 @@
                 "issues": "https://github.com/nunomaduro/laravel-console-task/issues",
                 "source": "https://github.com/nunomaduro/laravel-console-task"
             },
-            "time": "2023-01-11T15:16:19+00:00"
+            "time": "2024-04-11T07:51:10+00:00"
         },
         {
             "name": "nunomaduro/termwind",
