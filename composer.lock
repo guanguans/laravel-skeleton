@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ad4a4cddef99331e6b60c67b6a83f43",
+    "content-hash": "ca753609793fe94bead813160edec60a",
     "packages": [
+        {
+            "name": "aeon-php/calendar",
+            "version": "1.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aeon-php/calendar.git",
+                "reference": "2cfc45a2cd28b78f1450d8155a1c62df2efe45de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aeon-php/calendar/zipball/2cfc45a2cd28b78f1450d8155a1c62df2efe45de",
+                "reference": "2cfc45a2cd28b78f1450d8155a1c62df2efe45de",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~8.1.10 || ~8.2"
+            },
+            "require-dev": {
+                "ext-bcmath": "*",
+                "ext-pcov": "*"
+            },
+            "suggest": {
+                "ext-bcmath": "Compare time units with high precision"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aeon\\": [
+                        "src/Aeon"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP type safe, immutable calendar library",
+            "keywords": [
+                "calendar",
+                "date",
+                "datetime",
+                "immutable",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/aeon-php/calendar/issues",
+                "source": "https://github.com/aeon-php/calendar/tree/1.0.9"
+            },
+            "time": "2023-08-29T09:47:37+00:00"
+        },
         {
             "name": "alexandre-daubois/monolog-processor-collection",
             "version": "1.3.2",
@@ -2072,6 +2122,64 @@
             "time": "2021-04-24T02:31:27+00:00"
         },
         {
+            "name": "coduo/php-humanizer",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coduo/php-humanizer.git",
+                "reference": "9d5058698294312d79f6def8613e8011466c4f84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coduo/php-humanizer/zipball/9d5058698294312d79f6def8613e8011466c4f84",
+                "reference": "9d5058698294312d79f6def8613e8011466c4f84",
+                "shasum": ""
+            },
+            "require": {
+                "aeon-php/calendar": "^1.0",
+                "php": "~8.1 || ~8.2 || ~8.3",
+                "symfony/translation": "~5.4||~6.4||~7",
+                "symfony/yaml": "~5.4||~6.4||~7"
+            },
+            "require-dev": {
+                "thunderer/shortcode": "^0.7"
+            },
+            "suggest": {
+                "ext-intl": "Required if you are going to use humanizer with locales different than en_EN"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Dąbrowski",
+                    "email": "dabrowski@brillante.pl"
+                },
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                }
+            ],
+            "description": "Humanize values that are readable only for developers",
+            "keywords": [
+                "humanize",
+                "humanizer",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/coduo/php-humanizer/issues",
+                "source": "https://github.com/coduo/php-humanizer/tree/5.0.0"
+            },
+            "time": "2024-04-11T10:30:46+00:00"
+        },
+        {
             "name": "composer/class-map-generator",
             "version": "1.1.1",
             "source": {
@@ -2995,27 +3103,28 @@
         },
         {
             "name": "doctrine/lexer",
-            "version": "3.0.1",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "31ad66abc0fc9e1a1f2d9bc6a42668d2fbbcd6dd"
+                "reference": "861c870e8b75f7c8f69c146c7f89cc1c0f1b49b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/31ad66abc0fc9e1a1f2d9bc6a42668d2fbbcd6dd",
-                "reference": "31ad66abc0fc9e1a1f2d9bc6a42668d2fbbcd6dd",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/861c870e8b75f7c8f69c146c7f89cc1c0f1b49b6",
+                "reference": "861c870e8b75f7c8f69c146c7f89cc1c0f1b49b6",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1"
+                "doctrine/deprecations": "^1.0",
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^12",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.5",
+                "doctrine/coding-standard": "^9 || ^12",
+                "phpstan/phpstan": "^1.3",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6",
                 "psalm/plugin-phpunit": "^0.18.3",
-                "vimeo/psalm": "^5.21"
+                "vimeo/psalm": "^4.11 || ^5.21"
             },
             "type": "library",
             "autoload": {
@@ -3052,7 +3161,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/lexer/issues",
-                "source": "https://github.com/doctrine/lexer/tree/3.0.1"
+                "source": "https://github.com/doctrine/lexer/tree/2.1.1"
             },
             "funding": [
                 {
@@ -3068,7 +3177,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-05T11:56:58+00:00"
+            "time": "2024-02-05T11:35:39+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -19399,6 +19508,127 @@
             "time": "2023-01-21T23:05:38+00:00"
         },
         {
+            "name": "coduo/php-matcher",
+            "version": "6.0.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coduo/php-matcher.git",
+                "reference": "d107768b2bcbd4413c9f04be60dca6bcd466f165"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/d107768b2bcbd4413c9f04be60dca6bcd466f165",
+                "reference": "d107768b2bcbd4413c9f04be60dca6bcd466f165",
+                "shasum": ""
+            },
+            "require": {
+                "aeon-php/calendar": "^1.0",
+                "coduo/php-to-string": "^3",
+                "doctrine/lexer": "^1.0||^2.0",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "ext-simplexml": "*",
+                "php": "~8.1 || ~8.2 || ~8.3"
+            },
+            "require-dev": {
+                "ext-pcov": "*",
+                "openlss/lib-array2xml": "^1.0",
+                "phpunit/phpunit": "^10.4",
+                "symfony/cache": "^2.3|^3.0|^4.0|^5.0|^6.0",
+                "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0|^6.0",
+                "symfony/var-exporter": "^2.3|^3.0|^4.0|^5.0|^6.0"
+            },
+            "suggest": {
+                "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
+                "symfony/expression-language": "In order to use Coduo\\PHPMatcher\\Matcher\\ExpressionMatcher"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Coduo\\PHPMatcher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Dąbrowski",
+                    "email": "dabrowski@brillante.pl"
+                },
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                }
+            ],
+            "description": "PHP Matcher enables you to match values with patterns",
+            "keywords": [
+                "Match",
+                "json",
+                "matcher",
+                "tests"
+            ],
+            "support": {
+                "issues": "https://github.com/coduo/php-matcher/issues",
+                "source": "https://github.com/coduo/php-matcher/tree/6.0.14"
+            },
+            "time": "2023-12-13T11:48:18+00:00"
+        },
+        {
+            "name": "coduo/php-to-string",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coduo/php-to-string.git",
+                "reference": "e467de70e5e7403d969a05e853c7f480cde9fda4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/e467de70e5e7403d969a05e853c7f480cde9fda4",
+                "reference": "e467de70e5e7403d969a05e853c7f480cde9fda4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "ext-intl": "Required if you are going to use humanizer with locales different than en_EN"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Coduo\\ToString\\": "src/Coduo/ToString"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Dąbrowski",
+                    "email": "dabrowski@brillante.pl"
+                },
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                }
+            ],
+            "description": "Simple library that converts PHP value into strings",
+            "keywords": [
+                "php",
+                "string",
+                "to",
+                "to string"
+            ],
+            "support": {
+                "issues": "https://github.com/coduo/php-to-string/issues",
+                "source": "https://github.com/coduo/php-to-string/tree/3.2.1"
+            },
+            "time": "2023-03-28T10:10:37+00:00"
+        },
+        {
             "name": "composer/semver",
             "version": "3.4.0",
             "source": {
@@ -20321,12 +20551,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "993284332da08cd0128d5d4480003f946c3436c7"
+                "reference": "84c46ff7c9d95ea4bd40b7f5b24c829a0d340fea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/993284332da08cd0128d5d4480003f946c3436c7",
-                "reference": "993284332da08cd0128d5d4480003f946c3436c7",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/84c46ff7c9d95ea4bd40b7f5b24c829a0d340fea",
+                "reference": "84c46ff7c9d95ea4bd40b7f5b24c829a0d340fea",
                 "shasum": ""
             },
             "require": {
@@ -20431,7 +20661,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-04-08T07:37:43+00:00"
+            "time": "2024-04-10T21:25:59+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
@@ -21191,16 +21421,16 @@
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "65869be98780cb0c2d0e4411f4abcdb3031173a7"
+                "reference": "10941c056b18274ea6c914f5b6341b2dc7ea9808"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/65869be98780cb0c2d0e4411f4abcdb3031173a7",
-                "reference": "65869be98780cb0c2d0e4411f4abcdb3031173a7",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/10941c056b18274ea6c914f5b6341b2dc7ea9808",
+                "reference": "10941c056b18274ea6c914f5b6341b2dc7ea9808",
                 "shasum": ""
             },
             "require": {
@@ -21248,7 +21478,7 @@
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v2.0.0"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v2.0.1"
             },
             "funding": [
                 {
@@ -21256,7 +21486,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-22T13:22:58+00:00"
+            "time": "2024-04-10T11:54:58+00:00"
         },
         {
             "name": "larastan/larastan",
@@ -21429,16 +21659,16 @@
         },
         {
             "name": "laravel-lang/attributes",
-            "version": "2.10.2",
+            "version": "2.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/attributes.git",
-                "reference": "61a10efa27dcbeeb5896e1119a64bb2279b29e95"
+                "reference": "835ed5cab496d6017bbdd93bfdba66dea19c640a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/61a10efa27dcbeeb5896e1119a64bb2279b29e95",
-                "reference": "61a10efa27dcbeeb5896e1119a64bb2279b29e95",
+                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/835ed5cab496d6017bbdd93bfdba66dea19c640a",
+                "reference": "835ed5cab496d6017bbdd93bfdba66dea19c640a",
                 "shasum": ""
             },
             "require": {
@@ -21492,9 +21722,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/attributes/issues",
-                "source": "https://github.com/Laravel-Lang/attributes/tree/2.10.2"
+                "source": "https://github.com/Laravel-Lang/attributes/tree/2.10.3"
             },
-            "time": "2024-04-01T18:57:54+00:00"
+            "time": "2024-04-10T17:56:08+00:00"
         },
         {
             "name": "laravel-lang/common",
@@ -24022,12 +24252,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "00077527dfa5415280a28a044eca385eb3feb7ee"
+                "reference": "2532eb94204b2928805d303aeb1d7baad3d59fb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/00077527dfa5415280a28a044eca385eb3feb7ee",
-                "reference": "00077527dfa5415280a28a044eca385eb3feb7ee",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2532eb94204b2928805d303aeb1d7baad3d59fb9",
+                "reference": "2532eb94204b2928805d303aeb1d7baad3d59fb9",
                 "shasum": ""
             },
             "conflict": {
@@ -24114,9 +24344,10 @@
                 "concrete5/concrete5": "<9.2.8",
                 "concrete5/core": "<8.5.8|>=9,<9.1",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
+                "contao/comments-bundle": ">=2,<4.13.40|>=5.0.0.0-RC1-dev,<5.3.4",
                 "contao/contao": ">=4,<4.4.56|>=4.5,<4.9.40|>=4.10,<4.11.7|>=4.13,<4.13.21|>=5.1,<5.1.4",
                 "contao/core": ">=2,<3.5.39",
-                "contao/core-bundle": ">=3,<3.5.35|>=4,<4.9.42|>=4.10,<4.13.28|>=5,<5.1.10",
+                "contao/core-bundle": "<4.13.40|>=5,<5.3.4",
                 "contao/listing-bundle": ">=4,<4.4.8",
                 "contao/managed-edition": "<=1.5",
                 "corveda/phpsandbox": "<1.3.5",
@@ -24332,7 +24563,7 @@
                 "mantisbt/mantisbt": "<2.26.1",
                 "marcwillmann/turn": "<0.3.3",
                 "matyhtf/framework": "<3.0.6",
-                "mautic/core": "<4.3",
+                "mautic/core": "<4.4.12",
                 "mediawiki/core": "<1.36.2",
                 "mediawiki/matomo": "<2.4.3",
                 "mediawiki/semantic-media-wiki": "<4.0.2",
@@ -24759,7 +24990,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-08T16:06:11+00:00"
+            "time": "2024-04-11T22:04:23+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
