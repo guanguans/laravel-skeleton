@@ -492,6 +492,9 @@ class AppServiceProvider extends ServiceProvider
         )->all();
     }
 
+    /**
+     * @noinspection PhpExpressionResultUnusedInspection
+     */
     protected function autoInjection(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app) {
@@ -499,28 +502,32 @@ class AppServiceProvider extends ServiceProvider
                 return;
             }
 
-            $reflectionObject = new \ReflectionObject($object);
-            foreach ($reflectionObject->getProperties() as $refProperty) {
-                if ($refProperty->isDefault() && ! $refProperty->isStatic()) {
+            collect((new \ReflectionObject($object))->getProperties())
+                ->filter(
+                    static fn (
+                        \ReflectionProperty $reflectionProperty
+                    ): bool => $reflectionProperty->isDefault() && ! $reflectionProperty->isStatic()
+                )
+                ->each(function (\ReflectionProperty $refProperty) use ($object, $app) {
                     $attributes = $refProperty->getAttributes(Inject::class);
-                    if (! empty($attributes)) {
-                        if (! empty($attributes[0]->getArguments()[0])) {
-                            $type = $attributes[0]->getArguments()[0];
-                        } elseif ($refProperty->getType() && ! $refProperty->getType()->isBuiltin()) {
-                            $type = $refProperty->getType()->getName();
-                        }
-
-                        if (isset($type)) {
-                            $value = $app->make($type);
-                            if (! $refProperty->isPublic()) {
-                                $refProperty->setAccessible(true);
-                            }
-
-                            $refProperty->setValue($object, $value);
-                        }
+                    if ($attributes === []) {
+                        return;
                     }
-                }
-            }
+
+                    $propertyType = $attributes[0]->getArguments()[0] ?? null;
+
+                    $reflectionType = $refProperty->getType();
+                    if ($reflectionType instanceof \ReflectionNamedType && ! $reflectionType->isBuiltin()) {
+                        $propertyType = $reflectionType->getName();
+                    }
+
+                    if (! isset($propertyType)) {
+                        return;
+                    }
+
+                    $refProperty->isPublic() or $refProperty->setAccessible(true);
+                    $refProperty->setValue($object, $app->make($propertyType));
+                });
         });
     }
 }
