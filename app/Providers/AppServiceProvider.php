@@ -8,6 +8,7 @@ use App\Http\Middleware\LogHttp;
 use App\Models\PersonalAccessToken;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Rules\Rule;
+use App\Support\Attributes\Inject;
 use App\Support\Discover;
 use App\Support\Macros\BlueprintMacro;
 use App\Support\Macros\CarbonMacro;
@@ -45,6 +46,7 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -154,6 +156,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->whenever(true, function (): void {
+            $this->autoInjection();
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             request()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
             Log::shareContext($this->getSharedLogContext());
@@ -487,5 +490,37 @@ class AppServiceProvider extends ServiceProvider
                 // 'action' => request()->route()?->getActionName(),
             ])
         )->all();
+    }
+
+    protected function autoInjection(): void
+    {
+        $this->app->resolving(static function (mixed $object, Application $app) {
+            if (! \is_object($object)) {
+                return;
+            }
+
+            $reflectionObject = new \ReflectionObject($object);
+            foreach ($reflectionObject->getProperties() as $refProperty) {
+                if ($refProperty->isDefault() && ! $refProperty->isStatic()) {
+                    $attributes = $refProperty->getAttributes(Inject::class);
+                    if (! empty($attributes)) {
+                        if (! empty($attributes[0]->getArguments()[0])) {
+                            $type = $attributes[0]->getArguments()[0];
+                        } elseif ($refProperty->getType() && ! $refProperty->getType()->isBuiltin()) {
+                            $type = $refProperty->getType()->getName();
+                        }
+
+                        if (isset($type)) {
+                            $value = $app->make($type);
+                            if (! $refProperty->isPublic()) {
+                                $refProperty->setAccessible(true);
+                            }
+
+                            $refProperty->setValue($object, $value);
+                        }
+                    }
+                }
+            }
+        });
     }
 }
