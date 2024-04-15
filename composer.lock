@@ -9824,16 +9824,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.21.1",
+            "version": "14.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "b83f1c933d190198409e667f6b6644e0a009a217"
+                "reference": "b96639798d36af8ab12cf8daa10dc21917060b69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/b83f1c933d190198409e667f6b6644e0a009a217",
-                "reference": "b83f1c933d190198409e667f6b6644e0a009a217",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/b96639798d36af8ab12cf8daa10dc21917060b69",
+                "reference": "b96639798d36af8ab12cf8daa10dc21917060b69",
                 "shasum": ""
             },
             "require": {
@@ -9927,7 +9927,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-03-24T23:36:22+00:00"
+            "time": "2024-04-14T02:06:20+00:00"
         },
         {
             "name": "overtrue/http",
