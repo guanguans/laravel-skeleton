@@ -494,6 +494,7 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * @noinspection PhpExpressionResultUnusedInspection
+     * @noinspection VirtualTypeCheckInspection
      */
     protected function dependencyInjection(): void
     {
@@ -506,39 +507,38 @@ class AppServiceProvider extends ServiceProvider
                 return;
             }
 
-            collect((new \ReflectionObject($object))->getProperties())->each(
-                static function (\ReflectionProperty $reflectionProperty) use ($object, $app) {
-                    if (! ($reflectionProperty->isDefault() && ! $reflectionProperty->isStatic())) {
-                        return;
-                    }
-
-                    $attributes = $reflectionProperty->getAttributes(DependencyInjection::class);
-                    if ($attributes === []) {
-                        return;
-                    }
-
-                    $propertyType = value(static function () use ($attributes, $reflectionProperty): ?string {
-                        $propertyType = $attributes[0]->getArguments()[0];
-                        if (isset($propertyType)) {
-                            return $propertyType;
-                        }
-
-                        $reflectionType = $reflectionProperty->getType();
-                        if ($reflectionType instanceof \ReflectionNamedType && ! $reflectionType->isBuiltin()) {
-                            return $reflectionType->getName();
-                        }
-
-                        return null;
-                    });
-
-                    if (! isset($propertyType)) {
-                        return;
-                    }
-
-                    $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
-                    $reflectionProperty->setValue($object, $app->make($propertyType));
+            foreach ((new \ReflectionObject($object))->getProperties() as $reflectionProperty) {
+                if (! $reflectionProperty->isDefault() || $reflectionProperty->isStatic()) {
+                    continue;
                 }
-            );
+
+                $attributes = $reflectionProperty->getAttributes(DependencyInjection::class);
+                if ($attributes === []) {
+                    continue;
+                }
+
+                $propertyType = value(static function () use ($attributes, $reflectionProperty): ?string {
+                    /** @var DependencyInjection $dependencyInjection */
+                    $dependencyInjection = $attributes[0]->newInstance();
+                    if ($dependencyInjection->propertyType) {
+                        return $dependencyInjection->propertyType;
+                    }
+
+                    $reflectionType = $reflectionProperty->getType();
+                    if ($reflectionType instanceof \ReflectionNamedType && ! $reflectionType->isBuiltin()) {
+                        return $reflectionType->getName();
+                    }
+
+                    return null;
+                });
+
+                if (! $propertyType) {
+                    continue;
+                }
+
+                $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
+                $reflectionProperty->setValue($object, $app->make($propertyType));
+            }
         });
     }
 }
