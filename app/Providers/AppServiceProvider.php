@@ -8,6 +8,8 @@ use App\Http\Middleware\LogHttp;
 use App\Models\PersonalAccessToken;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Rules\Rule;
+use App\Support\Attributes\After;
+use App\Support\Attributes\Before;
 use App\Support\Attributes\DependencyInjection;
 use App\Support\Discover;
 use App\Support\Macros\BlueprintMacro;
@@ -52,6 +54,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\ResponseFactory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
@@ -156,7 +159,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->whenever(true, function (): void {
-            $this->dependencyInjection();
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             request()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
             Log::shareContext($this->getSharedLogContext());
@@ -170,6 +172,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->whenever(true, function (): void {
+            $this->dependencyInjection();
+            $this->bootAspects();
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->setLocales();
@@ -562,5 +566,70 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
         });
+    }
+
+    protected function bootAspects(): void
+    {
+        $classes = \Spatie\StructureDiscoverer\Discover::in(app_path())
+            ->classes()
+            ->get();
+
+        collect($classes)
+            ->reject(static fn (string $class): bool => Str::endsWith($class, '('))
+            // ->filter(static fn (string $class): bool => $class === OpenAI::class)
+            ->each(function (string $class): void {
+                $reflectionClass = new \ReflectionClass($class);
+
+                $reflectionMethods = ($reflectionClass)->getMethods();
+
+                $condition = Arr::first(
+                    $reflectionMethods,
+                    static fn (
+                        \ReflectionMethod $reflection
+                    ): bool => $reflection->getAttributes(Before::class) || $reflection->getAttributes(After::class)
+                );
+
+                if ($condition) {
+                    $this->app->extend($class, static fn (object $object) => new class($object, $reflectionMethods)
+                    {
+                        public function __construct(
+                            private readonly object $object,
+                            private readonly array $reflectionMethods,
+                        ) {}
+
+                        /**
+                         * @noinspection MissingReturnTypeInspection
+                         */
+                        public function __call(string $name, array $arguments)
+                        {
+                            if (method_exists($this->object, $name)) {
+                                $this->callAttributes($name, Before::class, $arguments);
+
+                                $ret = $this->object->{$name}(...$arguments);
+
+                                $this->callAttributes($name, After::class, [$ret, ...$arguments]);
+
+                                return $ret;
+                            }
+
+                            throw new \BadMethodCallException(
+                                sprintf('The method [%s::%s()] does not exist.', $this->object::class, $name),
+                            );
+                        }
+
+                        private function callAttributes(string $name, string $attribute, array $arguments): void
+                        {
+                            $reflectionAttributes = Arr::first(
+                                $this->reflectionMethods,
+                                static fn (\ReflectionMethod $reflectionMethod): bool => $reflectionMethod->getName() === $name
+                            )->getAttributes($attribute);
+
+                            foreach ($reflectionAttributes as $reflectionAttribute) {
+                                app()->call($reflectionAttribute->newInstance()->callback, $arguments);
+                            }
+                        }
+                    });
+                }
+            });
     }
 }
