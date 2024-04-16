@@ -86,6 +86,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Reliese\Coders\CodersServiceProvider;
 use Spatie\LaravelIgnition\IgnitionServiceProvider;
+use Spatie\StructureDiscoverer\Data\DiscoveredClass;
 use Stillat\BladeDirectives\Support\Facades\Directive;
 use Worksome\Envy\EnvyServiceProvider;
 
@@ -572,11 +573,16 @@ class AppServiceProvider extends ServiceProvider
     {
         $classes = \Spatie\StructureDiscoverer\Discover::in(app_path())
             ->classes()
+            ->custom(
+                static fn (
+                    DiscoveredClass $discoveredClass
+                ) => ! $discoveredClass->isAbstract && ! Str::endsWith($discoveredClass->name, ['(', 'Controller'])
+            )
             ->get();
 
         collect($classes)
+            // ->dd()
             ->reject(static fn (string $class): bool => Str::endsWith($class, '('))
-            // ->filter(static fn (string $class): bool => $class === OpenAI::class)
             ->each(function (string $class): void {
                 $reflectionClass = new \ReflectionClass($class);
 
