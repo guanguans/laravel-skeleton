@@ -505,14 +505,8 @@ class AppServiceProvider extends ServiceProvider
 
             $class = str($object::class);
             if (
-                ! $class->is([
-                    'App\*',
-                    // 匹配 ...
-                ])
-                || $class->is([
-                    'App\Support\*',
-                    // 排除 ...
-                ])
+                ! $class->is(config('services.dependency_injection.only'))
+                || $class->is(config('services.dependency_injection.except'))
             ) {
                 return;
             }
@@ -536,15 +530,15 @@ class AppServiceProvider extends ServiceProvider
                         return $dependencyInjection->propertyType;
                     }
 
-                    $reflectionType = $reflectionProperty->getType();
-                    if ($reflectionType instanceof \ReflectionNamedType && ! $reflectionType->isBuiltin()) {
-                        return $reflectionType->getName();
+                    $reflectionPropertyType = $reflectionProperty->getType();
+                    if ($reflectionPropertyType instanceof \ReflectionNamedType && ! $reflectionPropertyType->isBuiltin()) {
+                        return $reflectionPropertyType->getName();
                     }
 
                     throw new \LogicException(sprintf(
-                        'Attribute [%s] of %s miss a argument, or %s must be a not built-in named type.',
+                        'Attribute [%s] of %s miss a argument, or %s must be a non-built-in named type.',
                         DependencyInjection::class,
-                        $property = "property [{$reflectionObject->getName()}::{$reflectionProperty->getName()}",
+                        $property = "property [{$reflectionObject->getName()}::\${$reflectionProperty->getName()}]",
                         $property,
                     ));
                 });
@@ -554,9 +548,9 @@ class AppServiceProvider extends ServiceProvider
                 try {
                     $reflectionProperty->setValue($object, $app->make($propertyType));
                 } catch (ContainerExceptionInterface $e) {
-                    throw new \RuntimeException(
+                    throw new \TypeError(
                         sprintf(
-                            'Type [%s] of property [%s::%s] resolve failed [%s].',
+                            'Type [%s] of property [%s::$%s] resolve failed [%s].',
                             $propertyType,
                             $reflectionObject->getName(),
                             $reflectionProperty->getName(),

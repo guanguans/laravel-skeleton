@@ -86,4 +86,13 @@ return [
     'pushbullet' => [
         'access_token' => env('PUSHBULLET_ACCESS_TOKEN'),
     ],
+
+    'dependency_injection' => [
+        'only' => [
+            'App\*',
+        ],
+        'except' => [
+            'App\Support\Macros\*',
+        ],
+    ],
 ];
