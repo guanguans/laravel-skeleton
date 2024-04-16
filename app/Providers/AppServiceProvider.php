@@ -503,7 +503,17 @@ class AppServiceProvider extends ServiceProvider
                 return;
             }
 
-            if (! str($object::class)->startsWith('App')) {
+            $class = str($object::class);
+            if (
+                ! $class->is([
+                    'App\*',
+                    // 匹配 ...
+                ])
+                || $class->is([
+                    'App\Support\*',
+                    // 排除 ...
+                ])
+            ) {
                 return;
             }
 
