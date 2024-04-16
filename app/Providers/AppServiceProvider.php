@@ -547,17 +547,17 @@ class AppServiceProvider extends ServiceProvider
 
                 try {
                     $reflectionProperty->setValue($object, $app->make($propertyType));
-                } catch (ContainerExceptionInterface $e) {
+                } catch (ContainerExceptionInterface $containerException) {
                     throw new \TypeError(
                         sprintf(
                             'Type [%s] of property [%s::$%s] resolve failed [%s].',
                             $propertyType,
                             $reflectionObject->getName(),
                             $reflectionProperty->getName(),
-                            $e->getMessage()
+                            $containerException->getMessage()
                         ),
-                        $e->getCode(),
-                        $e
+                        $containerException->getCode(),
+                        $containerException
                     );
                 }
             }
