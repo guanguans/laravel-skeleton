@@ -8,7 +8,7 @@ namespace App\Support\Attributes;
  * @see https://github.com/top-think/think-annotation
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-class Inject
+class DependencyInjection
 {
-    public function __construct(public ?string $abstract = null) {}
+    public function __construct(public ?string $propertyType = null) {}
 }

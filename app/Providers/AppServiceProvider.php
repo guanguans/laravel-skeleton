@@ -8,7 +8,7 @@ use App\Http\Middleware\LogHttp;
 use App\Models\PersonalAccessToken;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Rules\Rule;
-use App\Support\Attributes\Inject;
+use App\Support\Attributes\DependencyInjection;
 use App\Support\Discover;
 use App\Support\Macros\BlueprintMacro;
 use App\Support\Macros\CarbonMacro;
@@ -156,7 +156,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->whenever(true, function (): void {
-            $this->autoInjection();
+            $this->dependencyInjection();
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             request()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
             Log::shareContext($this->getSharedLogContext());
@@ -495,39 +495,50 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @noinspection PhpExpressionResultUnusedInspection
      */
-    protected function autoInjection(): void
+    protected function dependencyInjection(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app) {
             if (! \is_object($object)) {
                 return;
             }
 
-            collect((new \ReflectionObject($object))->getProperties())
-                ->filter(
-                    static fn (
-                        \ReflectionProperty $reflectionProperty
-                    ): bool => $reflectionProperty->isDefault() && ! $reflectionProperty->isStatic()
-                )
-                ->each(function (\ReflectionProperty $refProperty) use ($object, $app) {
-                    $attributes = $refProperty->getAttributes(Inject::class);
+            if (! str(\get_class($object))->startsWith('App')) {
+                return;
+            }
+
+            collect((new \ReflectionObject($object))->getProperties())->each(
+                static function (\ReflectionProperty $reflectionProperty) use ($object, $app) {
+                    if (! ($reflectionProperty->isDefault() && ! $reflectionProperty->isStatic())) {
+                        return;
+                    }
+
+                    $attributes = $reflectionProperty->getAttributes(DependencyInjection::class);
                     if ($attributes === []) {
                         return;
                     }
 
-                    $propertyType = $attributes[0]->getArguments()[0] ?? null;
+                    $propertyType = value(static function () use ($attributes, $reflectionProperty): ?string {
+                        $propertyType = $attributes[0]->getArguments()[0];
+                        if (isset($propertyType)) {
+                            return $propertyType;
+                        }
 
-                    $reflectionType = $refProperty->getType();
-                    if ($reflectionType instanceof \ReflectionNamedType && ! $reflectionType->isBuiltin()) {
-                        $propertyType = $reflectionType->getName();
-                    }
+                        $reflectionType = $reflectionProperty->getType();
+                        if ($reflectionType instanceof \ReflectionNamedType && ! $reflectionType->isBuiltin()) {
+                            return $reflectionType->getName();
+                        }
+
+                        return null;
+                    });
 
                     if (! isset($propertyType)) {
                         return;
                     }
 
-                    $refProperty->isPublic() or $refProperty->setAccessible(true);
-                    $refProperty->setValue($object, $app->make($propertyType));
-                });
+                    $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
+                    $reflectionProperty->setValue($object, $app->make($propertyType));
+                }
+            );
         });
     }
 }
