@@ -503,11 +503,13 @@ class AppServiceProvider extends ServiceProvider
                 return;
             }
 
-            if (! str(\get_class($object))->startsWith('App')) {
+            if (! str($object::class)->startsWith('App')) {
                 return;
             }
 
-            foreach ((new \ReflectionObject($object))->getProperties() as $reflectionProperty) {
+            $reflectionObject = new \ReflectionObject($object);
+
+            foreach ($reflectionObject->getProperties() as $reflectionProperty) {
                 if (! $reflectionProperty->isDefault() || $reflectionProperty->isStatic()) {
                     continue;
                 }
@@ -517,7 +519,7 @@ class AppServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                $propertyType = value(static function () use ($attributes, $reflectionProperty): ?string {
+                $propertyType = value(static function () use ($attributes, $reflectionProperty, $reflectionObject): string {
                     /** @var DependencyInjection $dependencyInjection */
                     $dependencyInjection = $attributes[0]->newInstance();
                     if ($dependencyInjection->propertyType) {
@@ -529,15 +531,31 @@ class AppServiceProvider extends ServiceProvider
                         return $reflectionType->getName();
                     }
 
-                    return null;
+                    throw new \LogicException(sprintf(
+                        'Attribute [%s] of %s miss a argument, or %s must be a not built-in named type.',
+                        DependencyInjection::class,
+                        $property = "property [{$reflectionObject->getName()}::{$reflectionProperty->getName()}",
+                        $property,
+                    ));
                 });
 
-                if (! $propertyType) {
-                    continue;
-                }
-
                 $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
-                $reflectionProperty->setValue($object, $app->make($propertyType));
+
+                try {
+                    $reflectionProperty->setValue($object, $app->make($propertyType));
+                } catch (ContainerExceptionInterface $e) {
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Type [%s] of property [%s::%s] resolve failed [%s].',
+                            $propertyType,
+                            $reflectionObject->getName(),
+                            $reflectionProperty->getName(),
+                            $e->getMessage()
+                        ),
+                        $e->getCode(),
+                        $e
+                    );
+                }
             }
         });
     }
