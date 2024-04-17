@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e39cc1b1eb766acd074ef0e1c6872f6",
+    "content-hash": "dda1d54803c2a3f78f735f1ee287339d",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -10777,6 +10777,61 @@
                 "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
             },
             "time": "2024-03-19T21:38:46+00:00"
+        },
+        {
+            "name": "php-static-analysis/attributes",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-static-analysis/attributes.git",
+                "reference": "43926939b5f294c9f2d685871056178f0c67ad86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-static-analysis/attributes/zipball/43926939b5f294c9f2d685871056178f0c67ad86",
+                "reference": "43926939b5f294c9f2d685871056178f0c67ad86",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "php-static-analysis/node-visitor": "dev-main",
+                "php-static-analysis/phpstan-extension": "dev-main",
+                "php-static-analysis/psalm-plugin": "dev-main",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpstan": "^1.8",
+                "phpunit/phpunit": "^9.0",
+                "symplify/easy-coding-standard": "^12.1",
+                "vimeo/psalm": "^5"
+            },
+            "suggest": {
+                "php-static-analysis/phpstan-extension": "PHPStan extension to read static analysis attributes",
+                "php-static-analysis/psalm-plugin": "Psalm plugin to read static analysis attributes",
+                "php-static-analysis/rector-rule": "RectorPHP rule to convert PHPDoc annotations to static analysis attributes"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpStaticAnalysis\\Attributes\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos Granados",
+                    "email": "carlos@fastdebug.io"
+                }
+            ],
+            "description": "Attributes used instead of PHPDocs for static analysis tools",
+            "support": {
+                "issues": "https://github.com/php-static-analysis/attributes/issues",
+                "source": "https://github.com/php-static-analysis/attributes/tree/0.2.2"
+            },
+            "time": "2024-03-05T11:44:26+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -23379,6 +23434,62 @@
                 "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
             "time": "2022-02-21T01:04:05+00:00"
+        },
+        {
+            "name": "php-static-analysis/rector-rule",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-static-analysis/rector-rule.git",
+                "reference": "a84ba9da2681d32be894e8f6a0bd7f9c06ab99ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-static-analysis/rector-rule/zipball/a84ba9da2681d32be894e8f6a0bd7f9c06ab99ad",
+                "reference": "a84ba9da2681d32be894e8f6a0bd7f9c06ab99ad",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "php-static-analysis/attributes": "^0.2.2 || dev-main",
+                "rector/rector": "^0.19 || ^1.0"
+            },
+            "require-dev": {
+                "php-static-analysis/phpstan-extension": "dev-main",
+                "php-static-analysis/psalm-plugin": "dev-main",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpstan": "^1.8",
+                "phpunit/phpunit": "^9.0",
+                "symplify/easy-coding-standard": "^12.1",
+                "vimeo/psalm": "^5",
+                "webmozart/assert": "^1.11"
+            },
+            "type": "rector-extension",
+            "autoload": {
+                "psr-4": {
+                    "PhpStaticAnalysis\\RectorRule\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos Granados",
+                    "email": "carlos@fastdebug.io"
+                }
+            ],
+            "description": "RectorPHP rule to convert PHPDoc annotations for static analysis to PHP attributes",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/php-static-analysis/rector-rule/issues",
+                "source": "https://github.com/php-static-analysis/rector-rule/tree/0.2.2"
+            },
+            "time": "2024-03-05T11:31:06+00:00"
         },
         {
             "name": "phparkitect/phparkitect",
