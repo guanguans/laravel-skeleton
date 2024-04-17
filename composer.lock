@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f35d99dbf701f1e5b18a6d889d5ea17b",
+    "content-hash": "88fd9d1014815262db3293cc680026e8",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -24438,6 +24438,48 @@
                 }
             ],
             "time": "2024-04-05T09:01:07+00:00"
+        },
+        {
+            "name": "rector/swiss-knife",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rectorphp/swiss-knife.git",
+                "reference": "125cecb26acb03b97862f1bb525194e69698d5ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/125cecb26acb03b97862f1bb525194e69698d5ef",
+                "reference": "125cecb26acb03b97862f1bb525194e69698d5ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "bin": [
+                "bin/swiss-knife"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Swiss knife in pocket of every upgrade architect",
+            "support": {
+                "issues": "https://github.com/rectorphp/swiss-knife/issues",
+                "source": "https://github.com/rectorphp/swiss-knife/tree/0.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-11T08:31:59+00:00"
         },
         {
             "name": "reliese/laravel",
