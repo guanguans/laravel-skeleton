@@ -25,20 +25,20 @@ class UserListLayout extends Table
     /**
      * @return TD[]
      */
-    public function columns(): array
+    protected function columns(): array
     {
         return [
             TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
-                ->render(fn (User $user) => new Persona($user->presenter())),
+                ->render(static fn (User $user) => new Persona($user->presenter())),
 
             TD::make('email', __('Email'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
-                ->render(fn (User $user) => ModalToggle::make($user->email)
+                ->render(static fn (User $user) => ModalToggle::make($user->email)
                     ->modal('asyncEditUserModal')
                     ->modalTitle($user->presenter()->title())
                     ->method('saveUser')
@@ -60,7 +60,7 @@ class UserListLayout extends Table
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
-                ->render(fn (User $user) => DropDown::make()
+                ->render(static fn (User $user) => DropDown::make()
                     ->icon('bs.three-dots-vertical')
                     ->list([
                         Link::make(__('Edit'))

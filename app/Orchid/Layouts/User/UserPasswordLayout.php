@@ -16,7 +16,7 @@ class UserPasswordLayout extends Rows
      *
      * @return Field[]
      */
-    public function fields(): array
+    protected function fields(): array
     {
         /** @var User $user */
         $user = $this->query->get('user');

@@ -15,7 +15,7 @@ class ProfilePasswordLayout extends Rows
      *
      * @return Field[]
      */
-    public function fields(): array
+    protected function fields(): array
     {
         return [
             Password::make('old_password')

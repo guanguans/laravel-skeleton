@@ -37,7 +37,7 @@ class UserPresenter extends Presenter implements Personable, Searchable
 
         return (string) Str::of($roles)
             ->limit(20)
-            ->whenEmpty(fn () => __('Regular User'));
+            ->whenEmpty(static fn () => __('Regular User'));
     }
 
     /**

@@ -26,7 +26,7 @@ class RolePermissionLayout extends Rows
      *
      * @throws Throwable
      */
-    public function fields(): array
+    protected function fields(): array
     {
         $this->user = $this->query->get('user');
 
@@ -48,11 +48,11 @@ class RolePermissionLayout extends Rows
         return $permissions
             ->map(fn (array $chunks) => $this->makeCheckBox(collect($chunks)))
             ->flatten()
-            ->map(fn (CheckBox $checkbox, $key) => $key === 0
+            ->map(static fn (CheckBox $checkbox, $key) => $key === 0
                 ? $checkbox->title($title)
                 : $checkbox)
             ->chunk(4)
-            ->map(fn (Collection $checkboxes) => Group::make($checkboxes->toArray())
+            ->map(static fn (Collection $checkboxes) => Group::make($checkboxes->toArray())
                 ->alignEnd()
                 ->autoWidth());
     }

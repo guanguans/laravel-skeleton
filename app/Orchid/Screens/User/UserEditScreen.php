@@ -100,7 +100,7 @@ class UserEditScreen extends Screen
         return [
             Layout::block(UserEditLayout::class)
                 ->title(__('Profile Information'))
-                ->description(__('Update your account\'s profile information and email address.'))
+                ->description(__("Update your account's profile information and email address."))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::BASIC)
@@ -157,11 +157,11 @@ class UserEditScreen extends Screen
         ]);
 
         $permissions = collect($request->get('permissions'))
-            ->map(fn ($value, $key) => [base64_decode($key) => $value])
+            ->map(static fn ($value, $key) => [base64_decode($key) => $value])
             ->collapse()
             ->toArray();
 
-        $user->when($request->filled('user.password'), function (Builder $builder) use ($request) {
+        $user->when($request->filled('user.password'), static function (Builder $builder) use ($request) {
             $builder->getModel()->password = Hash::make($request->input('user.password'));
         });
 

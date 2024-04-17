@@ -21,14 +21,14 @@ class RoleListLayout extends Table
     /**
      * @return TD[]
      */
-    public function columns(): array
+    protected function columns(): array
     {
         return [
             TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
-                ->render(fn (Role $role) => Link::make($role->name)
+                ->render(static fn (Role $role) => Link::make($role->name)
                     ->route('platform.systems.roles.edit', $role->id)),
 
             TD::make('slug', __('Slug'))

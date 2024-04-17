@@ -135,15 +135,14 @@ class ExampleScreen extends Screen
             Layout::table('table', [
                 TD::make('id', 'ID')
                     ->width('100')
-                    ->render(fn (Repository $model) => // Please use view('path')
-                    "<img src='https://loremflickr.com/500/300?random={$model->get('id')}'
+                    ->render(static fn (Repository $model) => "<img src='https://loremflickr.com/500/300?random={$model->get('id')}'
                               alt='sample'
                               class='mw-100 d-block img-fluid rounded-1 w-100'>
                             <span class='small text-muted mt-1 mb-0'># {$model->get('id')}</span>"),
 
                 TD::make('name', 'Name')
                     ->width('450')
-                    ->render(fn (Repository $model) => Str::limit($model->get('name'), 200)),
+                    ->render(static fn (Repository $model) => Str::limit($model->get('name'), 200)),
 
                 TD::make('price', 'Price')
                     ->width('100')
