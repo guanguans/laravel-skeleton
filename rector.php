@@ -2,7 +2,16 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 use App\Support\Rectors\RenameToPsrNameRector;
+use PhpStaticAnalysis\RectorRule\Set\PhpStaticAnalysisSetList;
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
@@ -152,6 +161,7 @@ return static function (RectorConfig $rectorConfig): void {
         // SetList::TYPE_DECLARATION,
         // SetList::EARLY_RETURN,
         SetList::INSTANCEOF,
+        // PhpStaticAnalysisSetList::ANNOTATIONS_TO_ATTRIBUTES,
     ]);
 
     $rectorConfig->rules([

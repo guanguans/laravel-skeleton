@@ -3,19 +3,11 @@
 declare(strict_types=1);
 
 /**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * This file is part of the guanguans/laravel-skeleton.
  *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
+ * (c) guanguans <ityaozm@gmail.com>
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * @see          https://cakephp.org CakePHP(tm) Project
- * @since         0.2.9
- *
- * @license       https://opensource.org/licenses/mit-license.php MIT License
+ * This source file is subject to the MIT license that is bundled.
  */
 
 namespace App\Support;

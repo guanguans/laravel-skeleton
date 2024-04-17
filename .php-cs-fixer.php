@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 $header = <<<'HEADER'
-    This file is part of the guanguans/laravel-soar.
+    This file is part of the guanguans/laravel-skeleton.
 
     (c) guanguans <ityaozm@gmail.com>
 
@@ -147,10 +155,10 @@ return (new Config())
 
         // comment
         'header_comment' => [
-            // 'header' => $header,
-            // 'comment_type' => 'PHPDoc',
-            // 'location' => 'after_declare_strict',
-            // 'separate' => 'both',
+            'header' => $header,
+            'comment_type' => 'PHPDoc',
+            'location' => 'after_declare_strict',
+            'separate' => 'both',
         ],
 
         // constant_notation
