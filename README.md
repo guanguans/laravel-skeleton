@@ -27,8 +27,12 @@ composer pint                           # 代码风格修复
 composer pint-test                      # 代码风格检查
 composer rector                         # 代码重构(risky)
 composer rector-dry-run                 # 代码重构检查
-composer tlint                          # Laravel 代码风格修复
-composer tlint-format                   # Laravel 代码风格检查
+composer sk-check-commented-code        # 注释检查
+composer sk-check-conflicts             # git 合并冲突检查
+composer sk-finalize-classes            # finalize 类
+composer sk-finalize-classes-dry-run    # finalize 类检查
+composer tlint                          # laravel 代码风格修复
+composer tlint-format                   # laravel 代码风格检查
 composer var-dump-server                # 启动变量打印服务
 ```
 
