@@ -11,6 +11,8 @@ return [
 
     'enabled' => env('LOG_VIEWER_ENABLED', true),
 
+    'api_only' => env('LOG_VIEWER_API_ONLY', false),
+
     'require_auth_in_production' => true,
 
     /*
@@ -86,6 +88,8 @@ return [
         \Opcodes\LogViewer\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         \Opcodes\LogViewer\Http\Middleware\AuthorizeLogViewer::class,
     ],
+
+    'api_stateful_domains' => env('LOG_VIEWER_API_STATEFUL_DOMAINS') ? explode(',', env('LOG_VIEWER_API_STATEFUL_DOMAINS')) : null,
 
     /*
     |--------------------------------------------------------------------------

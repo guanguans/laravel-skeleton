@@ -23,7 +23,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', config('app.locale')),
+    'locale' => env('APP_LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------
