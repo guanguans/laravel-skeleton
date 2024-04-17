@@ -264,7 +264,7 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    protected function registerGlobalFunctionsFrom(string $pattern, int $flags = 0): void
+    private function registerGlobalFunctionsFrom(string $pattern, int $flags = 0): void
     {
         foreach (glob($pattern, $flags | GLOB_BRACE) as $file) {
             require_once $file;
@@ -277,7 +277,7 @@ class AppServiceProvider extends ServiceProvider
      * @throws BindingResolutionException
      * @throws \ReflectionException
      */
-    protected function registerMacros(): void
+    private function registerMacros(): void
     {
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Carbon::mixin($this->app->make(CarbonMacro::class));
@@ -303,7 +303,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register rule.
      */
-    protected function extendValidator(): void
+    private function extendValidator(): void
     {
         Discover::in('Rules')
             ->instanceOf(Rule::class)
@@ -329,7 +329,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @throws BindingResolutionException
      */
-    protected function extendView(): void
+    private function extendView(): void
     {
         // 合成器
         $this->app->make('view')->composer('*', RequestComposer::class);
@@ -428,7 +428,7 @@ class AppServiceProvider extends ServiceProvider
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    protected function listenEvents(): void
+    private function listenEvents(): void
     {
         $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
             $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
@@ -443,7 +443,7 @@ class AppServiceProvider extends ServiceProvider
         // });
     }
 
-    protected function setLocales(?string $locale = null): void
+    private function setLocales(?string $locale = null): void
     {
         $locale and $this->app->setLocale($locale);
         Number::useLocale($this->app->getLocale());
@@ -453,7 +453,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @throws BindingResolutionException
      */
-    protected function getSharedLogContext(): array
+    private function getSharedLogContext(): array
     {
         return collect([
             'php-version' => PHP_VERSION,
@@ -477,7 +477,7 @@ class AppServiceProvider extends ServiceProvider
      * @noinspection PhpExpressionResultUnusedInspection
      * @noinspection VirtualTypeCheckInspection
      */
-    protected function dependencyInjection(): void
+    private function dependencyInjection(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app) {
             if (! \is_object($object)) {
@@ -545,7 +545,7 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    protected function bootAspects(): void
+    private function bootAspects(): void
     {
         $classes = \Spatie\StructureDiscoverer\Discover::in(app_path())
             ->classes()
@@ -556,62 +556,79 @@ class AppServiceProvider extends ServiceProvider
             )
             ->get();
 
-        collect($classes)
-            // ->dd()
-            ->reject(static fn (string $class): bool => Str::endsWith($class, '('))
-            ->each(function (string $class): void {
-                $reflectionClass = new \ReflectionClass($class);
+        collect($classes)->each(function (string $class): void {
+            $reflectionClass = new \ReflectionClass($class);
 
-                $reflectionMethods = ($reflectionClass)->getMethods();
+            $reflectionMethods = ($reflectionClass)->getMethods();
 
-                $condition = Arr::first(
-                    $reflectionMethods,
-                    static fn (
-                        \ReflectionMethod $reflection
-                    ): bool => $reflection->getAttributes(Before::class) || $reflection->getAttributes(After::class)
-                );
+            $condition = Arr::first(
+                $reflectionMethods,
+                static fn (
+                    \ReflectionMethod $reflection
+                ): bool => $reflection->getAttributes(Before::class) || $reflection->getAttributes(After::class)
+            );
 
-                if ($condition) {
-                    $this->app->extend($class, static fn (object $object) => new class($object, $reflectionMethods)
+            if ($condition) {
+                $this->app->extend($class, static fn (object $object) => new class($object, $reflectionMethods)
+                {
+                    public function __construct(
+                        private readonly object $object,
+                        private readonly array $reflectionMethods,
+                    ) {}
+
+                    /**
+                     * @noinspection MissingReturnTypeInspection
+                     */
+                    public function __call(string $name, array $arguments)
                     {
-                        public function __construct(
-                            private readonly object $object,
-                            private readonly array $reflectionMethods,
-                        ) {}
+                        if (method_exists($this->object, $name)) {
+                            $this->applyAttribute(Before::class, $name, $arguments);
 
-                        /**
-                         * @noinspection MissingReturnTypeInspection
-                         */
-                        public function __call(string $name, array $arguments)
-                        {
-                            if (method_exists($this->object, $name)) {
-                                $this->callAttributes($name, Before::class, $arguments);
+                            $ret = $this->object->{$name}(...$arguments);
 
-                                $ret = $this->object->{$name}(...$arguments);
+                            $this->applyAttribute(After::class, $name, [$ret, ...$arguments]);
 
-                                $this->callAttributes($name, After::class, [$ret, ...$arguments]);
-
-                                return $ret;
-                            }
-
-                            throw new \BadMethodCallException(
-                                sprintf('The method [%s::%s()] does not exist.', $this->object::class, $name),
-                            );
+                            return $ret;
                         }
 
-                        private function callAttributes(string $name, string $attribute, array $arguments): void
-                        {
-                            $reflectionAttributes = Arr::first(
-                                $this->reflectionMethods,
-                                static fn (\ReflectionMethod $reflectionMethod): bool => $reflectionMethod->getName() === $name
-                            )->getAttributes($attribute);
+                        throw new \BadMethodCallException(
+                            sprintf('The method [%s::%s()] does not exist.', $this->object::class, $name),
+                        );
+                    }
 
-                            foreach ($reflectionAttributes as $reflectionAttribute) {
-                                app()->call($reflectionAttribute->newInstance()->callback, $arguments);
-                            }
+                    public function __get(string $name): mixed
+                    {
+                        return $this->object->{$name};
+                    }
+
+                    public function __set(string $name, mixed $value): void
+                    {
+                        $this->object->{$name} = $value;
+                    }
+
+                    public function __isset(string $name): bool
+                    {
+                        return isset($this->object->{$name});
+                    }
+
+                    public function __unset(string $name): void
+                    {
+                        unset($this->object->{$name});
+                    }
+
+                    private function applyAttribute(string $attribute, string $name, array $arguments): void
+                    {
+                        $reflectionAttributes = Arr::first(
+                            $this->reflectionMethods,
+                            static fn (\ReflectionMethod $reflectionMethod): bool => $reflectionMethod->getName() === $name
+                        )->getAttributes($attribute);
+
+                        foreach ($reflectionAttributes as $reflectionAttribute) {
+                            app()->call($reflectionAttribute->newInstance()->callback, $arguments);
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
+        });
     }
 }
