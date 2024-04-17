@@ -26,8 +26,6 @@ use App\Support\Macros\StrMacro;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
-use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
-use Guanguans\LaravelSoar\SoarServiceProvider;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -75,20 +73,13 @@ use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
-use KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider;
-use LaracraftTech\LaravelSchemaRules\LaravelSchemaRulesServiceProvider;
-use Laravel\Sail\SailServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
-use NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider;
 use Opcodes\LogViewer\Facades\LogViewer;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Reliese\Coders\CodersServiceProvider;
-use Spatie\LaravelIgnition\IgnitionServiceProvider;
 use Spatie\StructureDiscoverer\Data\DiscoveredClass;
 use Stillat\BladeDirectives\Support\Facades\Directive;
-use Worksome\Envy\EnvyServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -124,26 +115,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->whenever($this->app->isLocal(), function (): void {
-            $this->app->register(SoarServiceProvider::class);
+            $this->app->register(LocalServiceProvider::class);
         });
 
         $this->unless($this->app->isProduction(), function (): void {
-            $this->app->register(\Lanin\Laravel\ApiDebugger\ServiceProvider::class);
-            $this->app->register(\LaravelLang\Attributes\ServiceProvider::class);
-            $this->app->register(\LaravelLang\HttpStatuses\ServiceProvider::class);
-            $this->app->register(\LaravelLang\Lang\ServiceProvider::class);
-            $this->app->register(\LaravelLang\Locales\ServiceProvider::class);
-            $this->app->register(\LaravelLang\Publisher\ServiceProvider::class);
-            $this->app->register(CodersServiceProvider::class);
-            $this->app->register(CollisionServiceProvider::class);
-            $this->app->register(EnvyServiceProvider::class);
-            $this->app->register(IdeHelperServiceProvider::class);
-            $this->app->register(IgnitionServiceProvider::class);
-            $this->app->register(LaravelSchemaRulesServiceProvider::class);
-            $this->app->register(MigrationsGeneratorServiceProvider::class);
-            $this->app->register(SailServiceProvider::class);
-            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
-            $this->app->register(TelescopeServiceProvider::class);
+            $this->app->register(DevelopServiceProvider::class);
         });
     }
 
