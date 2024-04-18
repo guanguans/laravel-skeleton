@@ -4773,16 +4773,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "3.8.2",
+            "version": "3.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "747a5a20a5e517c834c94ea5edab7069c1d37404"
+                "reference": "768c3865e5f92adf3eb4a92c3d0479a4dd6762cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/747a5a20a5e517c834c94ea5edab7069c1d37404",
-                "reference": "747a5a20a5e517c834c94ea5edab7069c1d37404",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/768c3865e5f92adf3eb4a92c3d0479a4dd6762cb",
+                "reference": "768c3865e5f92adf3eb4a92c3d0479a4dd6762cb",
                 "shasum": ""
             },
             "require": {
@@ -4794,7 +4794,7 @@
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.8",
                 "ergebnis/composer-normalize": "^2.42",
-                "friendsofphp/php-cs-fixer": "^3.52",
+                "friendsofphp/php-cs-fixer": "^3.54",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "kubawerlos/php-cs-fixer-custom-fixers": "^3.21",
@@ -4903,7 +4903,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-04-01T06:24:57+00:00"
+            "time": "2024-04-18T06:07:35+00:00"
         },
         {
             "name": "guanguans/notify",
