@@ -26968,21 +26968,21 @@
         },
         {
             "name": "worksome/envy",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/worksome/envy.git",
-                "reference": "24682196e1a6cea068ff2af3b247c542c83b35da"
+                "reference": "d9c97502c3d3aff2fea305d0f5fac0d598b89648"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/worksome/envy/zipball/24682196e1a6cea068ff2af3b247c542c83b35da",
-                "reference": "24682196e1a6cea068ff2af3b247c542c83b35da",
+                "url": "https://api.github.com/repos/worksome/envy/zipball/d9c97502c3d3aff2fea305d0f5fac0d598b89648",
+                "reference": "d9c97502c3d3aff2fea305d0f5fac0d598b89648",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "^10.0 || ^11.0",
-                "nikic/php-parser": "^4.15",
+                "nikic/php-parser": "^4.19.1 || ^5.0.2",
                 "nunomaduro/termwind": "^1.15 || ^2.0",
                 "php": "^8.2",
                 "spatie/laravel-package-tools": "^1.16",
@@ -27030,7 +27030,7 @@
             ],
             "support": {
                 "issues": "https://github.com/worksome/envy/issues",
-                "source": "https://github.com/worksome/envy/tree/v1.2.0"
+                "source": "https://github.com/worksome/envy/tree/v1.3.0"
             },
             "funding": [
                 {
@@ -27038,7 +27038,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-08T16:49:19+00:00"
+            "time": "2024-04-18T08:58:17+00:00"
         }
     ],
     "aliases": [],
