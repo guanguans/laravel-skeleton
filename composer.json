@@ -39,7 +39,8 @@
         "f9webltd/laravel-api-response-helpers": "^2.0",
         "gmponos/guzzle_logger": "^2.2",
         "guanguans/laravel-dump-sql": "^2.5",
-        "guanguans/laravel-exception-notify": "^3.8",
+        "guanguans/laravel-exception-notify": "dev-main",
+        "guanguans/notify": "^2.6",
         "guzzlehttp/guzzle": "^7.8",
         "hamidrezaniazi/pecs": "^1.0",
         "hammerstone/fast-paginate": "^1.0",
@@ -162,6 +163,10 @@
         "worksome/envy": "^1.2"
     },
     "repositories": {
+        "laravel-exception-notify": {
+            "type": "path",
+            "url": "./../../develop/laravel-exception-notify"
+        },
         "facade-documenter": {
             "type": "vcs",
             "url": "https://github.com/laravel/facade-documenter.git"
