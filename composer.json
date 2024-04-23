@@ -120,6 +120,7 @@
         "barryvdh/laravel-ide-helper": "^3.0",
         "bennett-treptow/laravel-migration-generator": "^4.4",
         "brainmaestro/composer-git-hooks": "^3.0@alpha",
+        "buggregator/trap": "^1.5",
         "coduo/php-matcher": "^6.0",
         "dedoc/scramble": "^0.8",
         "deployer/deployer": "^7.3",
@@ -331,7 +332,8 @@
         "test-migrate-configuration": "@pest-migrate-configuration",
         "tlint": "@php ./vendor/bin/tlint lint --diff --ansi -v",
         "tlint-format": "@php ./vendor/bin/tlint format --diff --ansi -v",
+        "trap": "@php ./vendor/bin/trap --ui --ansi -v",
         "update-fluent-assert-doc-comment": "App\\Support\\FluentAssert::updateDocComment",
-        "var-dump-server": "@php ./vendor/bin/var-dump-server"
+        "var-dump-server": "@php ./vendor/bin/var-dump-server --ansi -v"
     }
 }

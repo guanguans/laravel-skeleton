@@ -33,6 +33,7 @@ composer sk-finalize-classes            # finalize 类
 composer sk-finalize-classes-dry-run    # finalize 类检查
 composer tlint                          # laravel 代码风格修复
 composer tlint-format                   # laravel 代码风格检查
+composer trap                           # 启动 trap 调试服务
 composer var-dump-server                # 启动变量打印服务
 ```
 
