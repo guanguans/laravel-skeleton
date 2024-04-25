@@ -37,7 +37,7 @@ class ListSchedule extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         if (\count($this->schedule->events()) <= 0) {
             $this->info('No Scheduled Commands Found');

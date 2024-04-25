@@ -19,10 +19,8 @@ class RequestCreator
 
     /**
      * 绑定视图数据.
-     *
-     * @return void
      */
-    public function create(View $view)
+    public function create(View $view): void
     {
         $view->with('request', $this->request);
     }

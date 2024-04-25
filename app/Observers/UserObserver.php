@@ -8,50 +8,40 @@ class UserObserver
 {
     /**
      * Handle the User "created" event.
-     *
-     * @return void
      */
-    public function created(User $user)
+    public function created(User $user): void
     {
         //
     }
 
     /**
      * Handle the User "updated" event.
-     *
-     * @return void
      */
-    public function updated(User $user)
+    public function updated(User $user): void
     {
         //
     }
 
     /**
      * Handle the User "deleted" event.
-     *
-     * @return void
      */
-    public function deleted(User $user)
+    public function deleted(User $user): void
     {
         //
     }
 
     /**
      * Handle the User "restored" event.
-     *
-     * @return void
      */
-    public function restored(User $user)
+    public function restored(User $user): void
     {
         //
     }
 
     /**
      * Handle the User "force deleted" event.
-     *
-     * @return void
      */
-    public function forceDeleted(User $user)
+    public function forceDeleted(User $user): void
     {
         //
     }

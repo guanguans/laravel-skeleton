@@ -23,7 +23,7 @@ trait PrettyCommandOutput
      * @param  bool  $afterNotice  Information for the user after the command is run
      * @return mixed Command-line output
      */
-    public function executeProcess($command, $beforeNotice = false, $afterNotice = false)
+    public function executeProcess($command, $beforeNotice = false, $afterNotice = false): void
     {
         $this->echo('info', $beforeNotice ? ' '.$beforeNotice : implode(' ', $command));
 
@@ -62,7 +62,7 @@ trait PrettyCommandOutput
      * @param  bool  $afterNotice  Information for the user after the command is run
      * @return mixed Command-line output
      */
-    public function executeArtisanProcess($command, $arguments = [], $beforeNotice = false, $afterNotice = false)
+    public function executeArtisanProcess($command, $arguments = [], $beforeNotice = false, $afterNotice = false): void
     {
         $beforeNotice = $beforeNotice ? ' '.$beforeNotice : 'php artisan '.implode(' ', (array) $command).' '.implode(' ', $arguments);
 
@@ -89,7 +89,7 @@ trait PrettyCommandOutput
      * @param  string  $type  line, info, comment, question, error
      * @param  string  $content
      */
-    public function echo($type, $content)
+    public function echo($type, $content): void
     {
         if ($this->option('debug') == false) {
             return;
@@ -106,7 +106,7 @@ trait PrettyCommandOutput
      *
      * @param  string  $header
      */
-    public function box($header, $color = 'green')
+    public function box($header, $color = 'green'): void
     {
         $line = str_repeat('─', \strlen($header));
 
@@ -164,10 +164,8 @@ trait PrettyCommandOutput
     /**
      * Default error block element
      * Shortcute to info block with error message.
-     *
-     * @return void
      */
-    public function errorBlock(string $text)
+    public function errorBlock(string $text): void
     {
         $this->infoBlock($text, 'ERROR', 'red');
     }
@@ -175,20 +173,16 @@ trait PrettyCommandOutput
     /**
      * Note element, usually used after an info block
      * Prints an indented text with a lighter color.
-     *
-     * @return void
      */
-    public function note(string $text, string $color = 'gray', string $barColor = 'gray')
+    public function note(string $text, string $color = 'gray', string $barColor = 'gray'): void
     {
         $this->line("  <fg=$barColor>│</> $text", "fg=$color");
     }
 
     /**
      * Progress element generates a pending in progress line block.
-     *
-     * @return void
      */
-    public function progressBlock(string $text, string $progress = 'running', string $color = 'blue')
+    public function progressBlock(string $text, string $progress = 'running', string $color = 'blue'): void
     {
         $this->maxWidth ??= 128;
         $this->terminal ??= new Terminal();
@@ -210,10 +204,8 @@ trait PrettyCommandOutput
 
     /**
      * Closes a progress block after it has been started.
-     *
-     * @return void
      */
-    public function closeProgressBlock(string $progress = 'done', string $color = 'green')
+    public function closeProgressBlock(string $progress = 'done', string $color = 'green'): void
     {
         $deleteSize = max(\strlen($this->consoleProgress ?? ''), \strlen($progress)) + 1;
         $newDotSize = $deleteSize - \strlen($progress) - 1;
@@ -230,20 +222,16 @@ trait PrettyCommandOutput
 
     /**
      * Closes a progress block with an error.
-     *
-     * @return void
      */
-    public function errorProgressBlock(string $text = 'error')
+    public function errorProgressBlock(string $text = 'error'): void
     {
         $this->closeProgressBlock($text, 'red');
     }
 
     /**
      * Deletes one or multiple lines.
-     *
-     * @return void
      */
-    public function deleteLines(int $amount = 1)
+    public function deleteLines(int $amount = 1): void
     {
         $this->output->write(str_repeat("\033[A\33[2K\r", $amount));
     }
@@ -262,10 +250,8 @@ trait PrettyCommandOutput
 
     /**
      * Deletes one or multiple chars.
-     *
-     * @return void
      */
-    public function deleteChars(int $amount = 1)
+    public function deleteChars(int $amount = 1): void
     {
         $this->output->write(str_repeat(\chr(8), $amount));
     }

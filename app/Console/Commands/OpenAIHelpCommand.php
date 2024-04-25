@@ -14,7 +14,7 @@ class OpenAIHelpCommand extends Command
 
     protected $description = 'OpenAI help.';
 
-    public function handle(OpenAI $openAI)
+    public function handle(OpenAI $openAI): void
     {
         for (; ;) {
             $prompt = $this->ask('请输入提示信息');

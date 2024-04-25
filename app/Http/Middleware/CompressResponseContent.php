@@ -54,19 +54,16 @@ class CompressResponseContent
 
     /**
      * Register a callback that instructs the middleware to be skipped.
-     *
-     * @return void
      */
-    public static function skipWhen(Closure $callback)
+    public static function skipWhen(Closure $callback): void
     {
         static::$skipCallbacks[] = $callback;
     }
 
     /**
      * @param  array<string, string>  $replacementRules
-     * @return void
      */
-    public static function mergeReplacementRules(array $replacementRules)
+    public static function mergeReplacementRules(array $replacementRules): void
     {
         static::$replacementRules = [...static::$replacementRules, ...$replacementRules];
     }

@@ -19,10 +19,8 @@ class RequestComposer
 
     /**
      * 绑定视图数据.
-     *
-     * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $view->with('request', $this->request);
     }

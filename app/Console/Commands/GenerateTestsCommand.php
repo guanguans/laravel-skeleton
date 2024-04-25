@@ -299,7 +299,7 @@ class GenerateTestsCommand extends Command
                 $this->testClassAddedMethodNodes = $testClassAddedMethodNodes;
             }
 
-            public function leaveNode(Node $node)
+            public function leaveNode(Node $node): void
             {
                 if ($node instanceof Node\Stmt\Namespace_) {
                     $node->name = new Node\Name($this->testClassNamespace);

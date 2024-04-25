@@ -12,7 +12,7 @@ use Illuminate\Support\Traits\Conditionable;
 class ExtendServiceProvider extends ServiceProvider
 {
     use Conditionable {
-        when as whenever;
+        Conditionable::when as whenever;
     }
 
     /**
@@ -31,10 +31,8 @@ class ExtendServiceProvider extends ServiceProvider
 
     /**
      * Register services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerOpenAI();
         $this->registerPushDeer();
@@ -42,10 +40,8 @@ class ExtendServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
