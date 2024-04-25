@@ -238,6 +238,7 @@ class HandlerStack implements \Stringable
                 /** @var callable(mixed): mixed $prev */
                 $prev = $fn[0]($prev);
             }
+
             $this->cached = $prev;
         }
 

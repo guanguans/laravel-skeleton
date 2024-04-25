@@ -60,7 +60,7 @@ class WhereNotQueryBuilderMacro
             /** @var \Illuminate\Database\Eloquent\Builder $builder */
             $builder = $this;
 
-            return $builder->whereNotExists(static function ($query) use ($callable, $builder): void {
+            return $builder->whereNotExists(static function (\Illuminate\Contracts\Database\Query\Builder $query) use ($callable, $builder): void {
                 // Create a new Eloquent Query Builder with the given Query Builder and
                 // set the model from the original builder.
                 $query = new Builder($query);
@@ -88,7 +88,7 @@ class WhereNotQueryBuilderMacro
                     ->from($originalTable, $aliasedTable)
                     ->whereColumn($aliasedModel->getQualifiedKeyName(), $qualifiedKeyName)
                     ->limit(1)
-                    ->tap(static fn ($query) => $callable($query));
+                    ->tap(static fn (\Illuminate\Contracts\Database\Query\Builder $query) => $callable($query));
             });
         };
     }

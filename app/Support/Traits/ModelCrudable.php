@@ -71,7 +71,7 @@ trait ModelCrudable
         $query = self::query();
 
         $searchableFields = method_exists(self::class, 'searchable') ? self::searchable() : self::$searchable;
-        $query->where(static function ($where) use ($data, $searchableFields): void {
+        $query->where(static function (\Illuminate\Contracts\Database\Query\Builder $where) use ($data, $searchableFields): void {
             foreach ($searchableFields as $field => $type) {
                 if (str_contains($field, '.')) {
                     continue;
@@ -89,7 +89,7 @@ trait ModelCrudable
             $arr = explode('.', $field);
             $realField = $arr[1];
             $table = $arr[0];
-            $query->whereHas($table, static function ($where) use ($data, $realField, $definition): void {
+            $query->whereHas($table, static function (\Illuminate\Contracts\Database\Query\Builder $where) use ($data, $realField, $definition): void {
                 self::buildQuery($where, $realField, $definition['type'], $data, $definition['table'].'.'.$realField);
             });
         }
@@ -219,7 +219,7 @@ trait ModelCrudable
             $customMethod = 'search'.ucfirst($field);
             if (method_exists(self::class, $customMethod)) {
                 // If field has custom "search" method uses it
-                $query->where(static function ($query) use ($field, $data, $customMethod): void {
+                $query->where(static function (\Illuminate\Contracts\Database\Query\Builder $query) use ($field, $data, $customMethod): void {
                     self::$customMethod($query, $data[$field]);
                 });
             } elseif ('string_match' === $type || 'date' === $type || 'datetime' === $type || 'int' === $type) {
@@ -239,7 +239,7 @@ trait ModelCrudable
     private static function exactFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
         if (\is_array($data[$field])) {
-            $query->where(static function ($query) use ($field, $data, $aliasField): void {
+            $query->where(static function (\Illuminate\Contracts\Database\Query\Builder $query) use ($field, $data, $aliasField): void {
                 foreach ($data[$field] as $datum) {
                     $query->orWhere($aliasField, $datum);
                 }
@@ -254,7 +254,7 @@ trait ModelCrudable
     private static function likeFilter(Builder $query, string $field, array $data, string $aliasField): void
     {
         if (\is_array($data[$field])) {
-            $query->where(static function ($query) use ($field, $data, $aliasField): void {
+            $query->where(static function (\Illuminate\Contracts\Database\Query\Builder $query) use ($field, $data, $aliasField): void {
                 foreach ($data[$field] as $datum) {
                     $query->orWhere($aliasField, 'LIKE', '%'.$datum.'%');
                 }
