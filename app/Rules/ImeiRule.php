@@ -25,6 +25,6 @@ final class ImeiRule extends Rule
 
         $sum = array_sum($log) * 9; // Sum log & multiply by 9
 
-        return substr($sum, -1) === $imeiLast;
+        return \Illuminate\Support\Str::endsWith($sum, $imeiLast);
     }
 }
