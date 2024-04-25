@@ -21,7 +21,7 @@ abstract class AbortIf
 
     abstract protected function code(): int;
 
-    protected function message()
+    protected function message(): string
     {
         return '';
     }

@@ -30,24 +30,24 @@ final class IpRule extends Rule
 
     public function __construct(protected bool $isPublic = true) {}
 
-    public function isV4(string $ip)
+    public function isV4(string $ip): bool
     {
         return ! $this->isV6($ip);
     }
 
-    public function isV6(string $ip)
+    public function isV6(string $ip): bool
     {
         return substr_count($ip, ':') > 1;
     }
 
-    public function isPrivate(string $ip)
+    public function isPrivate(string $ip): bool
     {
         $ips = $this->isV4($ip) ? $this->v4 : $this->v6;
 
         return IpUtils::checkIp($ip, $ips);
     }
 
-    public function isPublic(string $ip)
+    public function isPublic(string $ip): bool
     {
         return ! $this->isPrivate($ip);
     }

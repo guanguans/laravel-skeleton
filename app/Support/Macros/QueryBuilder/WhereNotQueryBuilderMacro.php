@@ -70,7 +70,7 @@ class WhereNotQueryBuilderMacro
                 $originalTable = $model->getTable();
 
                 // Instantiate a new model that uses the aliased table.
-                $aliasedTable = transform($originalTable, static function ($table) {
+                $aliasedTable = transform($originalTable, static function ($table): string {
                     if (! \array_key_exists($table, static::$tableSubCount)) {
                         static::$tableSubCount[$table] = 0;
                     }

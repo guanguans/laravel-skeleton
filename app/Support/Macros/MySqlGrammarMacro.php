@@ -28,7 +28,7 @@ class MySqlGrammarMacro
          * @param  array  $where
          * @return string
          */
-        return function (Builder $query, $where) {
+        return function (Builder $query, $where): string {
             $columns = $this->columnize($where['columns']);
 
             $value = $this->parameter($where['value']);

@@ -21,7 +21,7 @@ class Policy
         return array_keys(Gate::abilities());
     }
 
-    public function before(JWTUser $user)
+    public function before(JWTUser $user): ?bool
     {
         if (optional($user)->is_admin) {
             return true;

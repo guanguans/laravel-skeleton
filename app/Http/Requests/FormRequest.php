@@ -79,7 +79,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     protected function call(string $method, array $args = [], $defaultReturn = null)
     {
-        $actionMethod = transform($method, function (string $method) {
+        $actionMethod = transform($method, function (string $method): string {
             if (! \in_array(
                 $method,
                 [

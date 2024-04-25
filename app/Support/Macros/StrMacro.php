@@ -75,7 +75,7 @@ class StrMacro
      */
     public static function acronym(): callable
     {
-        return static function ($string, $delimiter = '') {
+        return static function ($string, $delimiter = ''): string {
             if (empty($string)) {
                 return '';
             }

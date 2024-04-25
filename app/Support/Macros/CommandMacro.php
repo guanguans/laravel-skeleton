@@ -49,7 +49,7 @@ class CommandMacro
          *
          * @return bool With the result of the task.
          */
-        return function (string $title, $task = null, $loadingText = 'loading...') {
+        return function (string $title, $task = null, $loadingText = 'loading...'): bool {
             $this->output->write("$title: <comment>{$loadingText}</comment>");
 
             if (null === $task) {

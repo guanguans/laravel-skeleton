@@ -363,7 +363,7 @@ class AppServiceProvider extends ServiceProvider
          * @datetime($timestamp, $format)
          * ```
          */
-        Blade::directive('datetime', static function (string $expression) {
+        Blade::directive('datetime', static function (string $expression): string {
             // 通用解析表达式
             $parts = value(static function (string $expression): array {
                 // clean

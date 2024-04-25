@@ -87,7 +87,7 @@ trait SimpleNode
         return $this->hasMany(static::class, $this->getParentColumnName())->orderBy($orderBy);
     }
 
-    public function isAChild()
+    public function isAChild(): bool
     {
         return ! empty($this->{$this->getParentColumnName()});
     }
