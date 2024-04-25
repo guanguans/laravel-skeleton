@@ -25,7 +25,7 @@ class WhereInsQueryBuilderMacro
     public function whereIns(): callable
     {
         // @var Arrayable|array[] $values
-        return function (array $columns, $values, string $boolean = 'and', bool $not = false) {
+        return function (array $columns, $values, string $boolean = 'and', bool $not = false): \Illuminate\Database\Query\Builder {
             $operator = $not ? 'not in' : 'in';
 
             $sterilizedColumns = array_map(static function (string $column): string {

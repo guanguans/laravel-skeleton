@@ -21,7 +21,7 @@ class WhereEndsWithQueryBuilderMacro
 {
     public function whereEndsWith(): callable
     {
-        return function ($column, string $value, string $boolean = 'and', bool $not = false) {
+        return function ($column, string $value, string $boolean = 'and', bool $not = false): \Illuminate\Database\Eloquent\Builder {
             $operator = $not ? 'not like' : 'like';
 
             return $this->where($column, $operator, "%$value", $boolean);

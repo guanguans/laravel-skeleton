@@ -16,7 +16,7 @@ class CurdController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $models = $this->modelClass::query()
             ->paginate($request->get('per_page'));
@@ -29,7 +29,7 @@ class CurdController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $this->modelClass::query()->create($request->post());
 
@@ -42,7 +42,7 @@ class CurdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id)
+    public function show($id): \Illuminate\Http\JsonResponse
     {
         return $this->success($this->findModel($id));
     }
@@ -53,7 +53,7 @@ class CurdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
         $this->findModel($id)->updateOrFail($request->post());
 
@@ -66,7 +66,7 @@ class CurdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\JsonResponse
     {
         $this->findModel($id)->delete();
 

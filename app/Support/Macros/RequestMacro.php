@@ -96,7 +96,7 @@ class RequestMacro
 
     public function validateStrictAllWithBag(): callable
     {
-        return function (string $errorBag, array $rules, ...$params) {
+        return function (string $errorBag, array $rules, ...$params): callable {
             try {
                 return $this->validateStrictAll($rules, ...$params);
             } catch (ValidationException $validationException) {

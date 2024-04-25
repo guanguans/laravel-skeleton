@@ -28,7 +28,7 @@ class PingController extends Controller
      *     "error": {}
      * }
      */
-    public function ping(Request $request, $isBad = 0)
+    public function ping(Request $request, $isBad = 0): \Illuminate\Http\JsonResponse
     {
         $validatedParameters = $request->validateStrictAll([
             'is_bad' => 'integer',

@@ -25,7 +25,7 @@ class WhereFindInSetQueryBuilderMacro
     public function whereFindInSet(): callable
     {
         // @var string|Arrayable|string[] $values
-        return function (string $column, $values, string $boolean = 'and', bool $not = false) {
+        return function (string $column, $values, string $boolean = 'and', bool $not = false): \Illuminate\Database\Query\Builder {
             if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && ! str_starts_with($column, $tablePrefix)) {
                 $column = $tablePrefix.$column;
             }

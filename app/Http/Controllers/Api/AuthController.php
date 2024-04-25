@@ -89,7 +89,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function login(AuthRequest $request)
+    public function login(AuthRequest $request): \Illuminate\Http\JsonResponse
     {
         // $credentials = $request->validateStrictAll([
         //     'email' => 'required|email',
@@ -122,7 +122,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function me(Request $request)
+    public function me(Request $request): \Illuminate\Http\JsonResponse
     {
         return $this->success(UserResource::make($request->user()));
     }
@@ -161,7 +161,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function refresh(Request $request)
+    public function refresh(Request $request): \Illuminate\Http\JsonResponse
     {
         if ($request->user()->cant('update', $request->user())) {
             return $this->errorForbidden();
@@ -205,7 +205,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function index(AuthRequest $request)
+    public function index(AuthRequest $request): \Illuminate\Http\JsonResponse
     {
         $validatedParameters = $request->validated();
 

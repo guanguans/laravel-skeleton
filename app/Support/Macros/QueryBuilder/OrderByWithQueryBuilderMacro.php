@@ -21,7 +21,7 @@ class OrderByWithQueryBuilderMacro
 {
     public function orderByWith(): callable
     {
-        return function ($relation, $column, $direction = 'asc') {
+        return function ($relation, $column, $direction = 'asc'): \Illuminate\Database\Query\Builder {
             if (\is_string($relation)) {
                 $relation = $this->getRelationWithoutConstraints($relation);
             }

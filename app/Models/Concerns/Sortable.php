@@ -47,7 +47,7 @@ trait Sortable
         return (int) $this->buildSortQuery()->min($this->determineOrderColumnName());
     }
 
-    public function scopeOrdered(Builder $query, string $direction = 'asc')
+    public function scopeOrdered(Builder $query, string $direction = 'asc'): \Illuminate\Database\Query\Builder
     {
         return $query->orderBy($this->determineOrderColumnName(), $direction);
     }

@@ -111,7 +111,7 @@ class PushDeer extends FoundationSdk
                 'form_params' => $data,
                 'query' => $data,
             ])
-            ->withMiddleware(static fn (callable $handler): callable => static function (RequestInterface $request, array $options) use ($config, $handler) {
+            ->withMiddleware(static fn (callable $handler): callable => static function (RequestInterface $request, array $options) use ($config, $handler): \GuzzleHttp\Promise\PromiseInterface {
                 $options['laravel_data']['pushkey'] = $config['key'];
                 $request->withHeader('X-Timestamp', (string) microtime(true));
 
