@@ -2,20 +2,11 @@
 
 namespace App\View\Creators;
 
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class RequestCreator
 {
-    /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
+    public function __construct(protected \Illuminate\Http\Request $request) {}
 
     /**
      * 绑定视图数据.

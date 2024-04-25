@@ -14,11 +14,6 @@ class CallbackGetCast implements CastsAttributes
     protected $callback;
 
     /**
-     * @var int
-     */
-    protected $castingAttributeCallbackArgIndex;
-
-    /**
      * @var array
      */
     protected $remainingCallbackArgs;
@@ -28,10 +23,9 @@ class CallbackGetCast implements CastsAttributes
      * @param  int  $castingAttributeCallbackArgIndex  The index of the argument that will be the attribute being casted.
      * @param  ...$remainingCallbackArgs  These are the remaining callback arguments.
      */
-    public function __construct(string $callback, int $castingAttributeCallbackArgIndex = 0, ...$remainingCallbackArgs)
+    public function __construct(string $callback, protected int $castingAttributeCallbackArgIndex = 0, ...$remainingCallbackArgs)
     {
         $this->callback = $this->resolveCallback($callback);
-        $this->castingAttributeCallbackArgIndex = $castingAttributeCallbackArgIndex;
         $this->remainingCallbackArgs = $remainingCallbackArgs;
     }
 

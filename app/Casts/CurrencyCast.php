@@ -8,10 +8,8 @@ class CurrencyCast implements CastsAttributes
 {
     /**
      * The amount of digits.
-     *
-     * @var int
      */
-    protected $digits;
+    protected int $digits;
 
     /**
      * Constructor
