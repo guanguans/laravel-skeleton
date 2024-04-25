@@ -68,7 +68,7 @@ class QueryBuilderMacro
      */
     public function top(): callable
     {
-        return function ($column, ?int $limit = null, ?bool $null = false, ?int $min = null, ?string $distinct = null) {
+        return function ($column, ?int $limit = null, ?bool $null = false, ?int $min = null, ?string $distinct = null): array {
             if (null === $distinct) {
                 $op = 'count(*)';
             } else {

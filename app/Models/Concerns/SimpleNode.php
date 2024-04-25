@@ -184,7 +184,7 @@ trait SimpleNode
     public function scopeListsNested(mixed $query, string $column, ?string $key = null, string $indent = '&nbsp;&nbsp;&nbsp;'): array
     {
         // Recursive helper function
-        $buildCollection = static function ($items, $depth = 0) use (&$buildCollection, $column, $key, $indent) {
+        $buildCollection = static function ($items, $depth = 0) use (&$buildCollection, $column, $key, $indent): array {
             $result = [];
 
             $indentString = str_repeat($indent, $depth);
@@ -218,6 +218,7 @@ trait SimpleNode
      */
     public function getParentColumnName(): string
     {
+        /** @noinspection PhpUndefinedClassConstantInspection */
         return \defined('static::PARENT_ID') ? static::PARENT_ID : 'parent_id';
     }
 
