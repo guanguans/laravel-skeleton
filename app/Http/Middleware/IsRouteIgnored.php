@@ -26,9 +26,7 @@ class IsRouteIgnored
 
         $attributes = $reflection->getAttributes(Ignore::class);
 
-        if ($attributes !== [] && \in_array(config('app.env'), $attributes[0]->newInstance()->in)) {
-            abort(404);
-        }
+        abort_if($attributes !== [] && \in_array(config('app.env'), $attributes[0]->newInstance()->in), 404);
 
         return $next($request);
     }
