@@ -12,7 +12,7 @@ class UserPolicy extends Policy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(JWTUser $jWTUser)
+    public function viewAny(JWTUser $jWTUser): bool
     {
         return true;
     }
@@ -22,7 +22,7 @@ class UserPolicy extends Policy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(JWTUser $jWTUser, User $model)
+    public function view(JWTUser $jWTUser, User $model): bool
     {
         return true;
     }
@@ -42,7 +42,7 @@ class UserPolicy extends Policy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(JWTUser $jWTUser, User $model)
+    public function update(JWTUser $jWTUser, User $model): bool
     {
         return $jWTUser->id == $model->id || $jWTUser->can('update-user');
     }
@@ -52,7 +52,7 @@ class UserPolicy extends Policy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(JWTUser $jWTUser, User $model)
+    public function delete(JWTUser $jWTUser, User $model): bool
     {
         return $jWTUser->id == $model->id || $jWTUser->can('delete-user');
     }
@@ -62,7 +62,7 @@ class UserPolicy extends Policy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(JWTUser $jWTUser, User $model)
+    public function restore(JWTUser $jWTUser, User $model): bool
     {
         return $jWTUser->id == $model->id || $jWTUser->can('restore-user');
     }
@@ -72,7 +72,7 @@ class UserPolicy extends Policy
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(JWTUser $jWTUser, User $model)
+    public function forceDelete(JWTUser $jWTUser, User $model): bool
     {
         return $jWTUser->id == $model->id || $jWTUser->can('delete-user');
     }

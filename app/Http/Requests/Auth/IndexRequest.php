@@ -9,10 +9,8 @@ class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         // return optional($this->user())->can('viewAny', JWTUser::class);
         return true;

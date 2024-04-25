@@ -120,7 +120,7 @@ trait SimpleNode
         return $query->where($this->getParentColumnName(), 0);
     }
 
-    public function isRoot()
+    public function isRoot(): bool
     {
         return $this->{$this->getParentColumnName()} === 0;
     }
