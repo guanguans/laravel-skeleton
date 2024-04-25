@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Concerns;
 
-use Artisan;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Terminal;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -70,7 +70,7 @@ trait PrettyCommandOutput
 
         try {
             Artisan::call($command, $arguments);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             throw new ProcessFailedException($exception);
         }
 

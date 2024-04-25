@@ -11,10 +11,7 @@ declare(strict_types=1);
  */
 
 use App\Support\Rectors\RenameToPsrNameRector;
-use PhpStaticAnalysis\RectorRule\Set\PhpStaticAnalysisSetList;
-use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
-use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\Expression\InlineIfToExplicitIfRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
@@ -34,53 +31,71 @@ use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
-use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
-use Rector\Php80\ValueObject\AnnotationToAttribute;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
+use Rector\Renaming\Rector\Name\RenameClassRector;
+use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
+use Rector\Renaming\Rector\String_\RenameStringRector;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
-use Rector\ValueObject\PhpVersion;
+use RectorLaravel\Set\LaravelSetList;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->importNames(false, false);
-    $rectorConfig->importShortClasses(false);
-    // $rectorConfig->disableParallel();
-    $rectorConfig->parallel(300);
-    $rectorConfig->phpstanConfig(__DIR__.'/phpstan.neon');
-    $rectorConfig->phpVersion(PhpVersion::PHP_81);
-
-    // $rectorConfig->cacheClass(FileCacheStorage::class);
-    // $rectorConfig->cacheDirectory(__DIR__.'/build/rector');
-    // $rectorConfig->containerCacheDirectory(__DIR__.'/build/rector');
-    // $rectorConfig->disableParallel();
-    // $rectorConfig->fileExtensions(['php']);
-    // $rectorConfig->indent(' ', 4);
-    // $rectorConfig->memoryLimit('2G');
-    // $rectorConfig->noDiffs();
-    // $rectorConfig->removeUnusedImports();
-
-    $rectorConfig->bootstrapFiles([
-        // __DIR__.'/vendor/autoload.php',
-    ]);
-
-    $rectorConfig->autoloadPaths([
-        // __DIR__.'/vendor/autoload.php',
-    ]);
-
-    $rectorConfig->paths([
+return RectorConfig::configure()
+    ->withPaths([
+        __DIR__.'/*.php',
+        __DIR__.'/.*.php',
         __DIR__.'/app',
+        __DIR__.'/composer-updater',
         __DIR__.'/config',
         __DIR__.'/routes',
-        __DIR__.'/.*.php',
-        __DIR__.'/*.php',
-        __DIR__.'/composer-updater',
-    ]);
-
-    $rectorConfig->skip([
-        // rules
+    ])
+    ->withParallel()
+    // ->withoutParallel()
+    ->withImportNames(false)
+    // ->withAttributesSets()
+    // ->withDeadCodeLevel(42)
+    // ->withTypeCoverageLevel(37)
+    // ->withFluentCallNewLine()
+    ->withPhpSets(php81: true)
+    ->withPreparedSets(deadCode: true, codeQuality: true, codingStyle: true, instanceOf: true)
+    ->withSets([
+        DowngradeLevelSetList::DOWN_TO_PHP_81,
+        LaravelSetList::LARAVEL_100,
+        // LaravelSetList::LARAVEL_STATIC_TO_INJECTION,
+        LaravelSetList::LARAVEL_CODE_QUALITY,
+        LaravelSetList::LARAVEL_ARRAY_STR_FUNCTION_TO_STATIC_CALL,
+        LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
+        LaravelSetList::LARAVEL_FACADE_ALIASES_TO_FULL_NAMES,
+        // LaravelSetList::LARAVEL_ELOQUENT_MAGIC_METHOD_TO_QUERY_BUILDER,
+    ])
+    ->withRules([
+    ])
+    ->withConfiguredRule(RenameFunctionRector::class, [
+        'test' => 'it',
+    ])
+    ->withConfiguredRule(RenameToPsrNameRector::class, [
+        '_*',
+    ])
+    ->withConfiguredRule(RenameClassRector::class, [
+    ])
+    ->withConfiguredRule(RenameStaticMethodRector::class, [
+    ])
+    ->withConfiguredRule(RenameStringRector::class, [
+    ])
+    ->withSkip([
+        '**/__snapshots__/*',
+        '**/Fixtures/*',
+        __DIR__.'/.phpstorm.meta.php',
+        __DIR__.'/_ide_helper.php',
+        __DIR__.'/_ide_helper_models.php',
+        __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
+        __DIR__.'/app/Support/Http',
+        __DIR__.'/dcat_admin_ide_helper.php',
+        __DIR__.'/deploy.example.php',
+        __DIR__.'/deploy.php',
+        __FILE__,
+    ])
+    ->withSkip([
         CompleteDynamicPropertiesRector::class,
         DisallowedEmptyRuleFixerRector::class,
         EncapsedStringsToSprintfRector::class,
@@ -95,12 +110,13 @@ return static function (RectorConfig $rectorConfig): void {
         RemoveUnusedPrivateMethodRector::class,
         SplitDoubleAssignRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,
-
-        RemoveUnusedVariableInCatchRector::class => [
-            __DIR__.'/app/Support/Macros/CommandMacro.php',
-        ],
+    ])
+    ->withSkip([
         MakeInheritedMethodVisibilitySameAsParentRector::class => [
             __DIR__.'/app/Admin/Actions/Show',
+        ],
+        RemoveUnusedVariableInCatchRector::class => [
+            __DIR__.'/app/Support/Macros/CommandMacro.php',
         ],
         RemovePhpVersionIdCheckRector::class => [
             __DIR__.'/app/Console/Commands/HealthCheckCommand.php',
@@ -111,81 +127,11 @@ return static function (RectorConfig $rectorConfig): void {
         RemoveAlwaysTrueIfConditionRector::class => [
             __DIR__.'/app/Support/Discover.php',
         ],
-        StaticArrowFunctionRector::class => [
-            __DIR__.'/app/Admin/Controllers',
-            __DIR__.'/app/Admin/Forms',
-            __DIR__.'/tests',
-        ],
-        StaticClosureRector::class => [
+        StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
             __DIR__.'/app/Support/helpers.php',
             __DIR__.'/app/Admin/Controllers',
             __DIR__.'/app/Admin/Forms',
             __DIR__.'/tests',
         ],
-
-        // paths
-        __DIR__.'/.phpstorm.meta.php',
-        __DIR__.'/_ide_helper.php',
-        __DIR__.'/_ide_helper_models.php',
-        __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
-        __DIR__.'/app/Support/Http',
-        __DIR__.'/dcat_admin_ide_helper.php',
-        __DIR__.'/deploy.example.php',
-        __DIR__.'/deploy.php',
-        '**/Fixture*',
-        '**/Fixture/*',
-        '**/Fixtures*',
-        '**/Fixtures/*',
-        '**/Stub*',
-        '**/Stub/*',
-        '**/Stubs*',
-        '**/Stubs/*',
-        '**/Source*',
-        '**/Source/*',
-        '**/Expected/*',
-        '**/Expected*',
-        '**/__snapshots__/*',
-        '**/__snapshots__*',
+        StaticClosureRector::class => $staticClosureSkipPaths,
     ]);
-
-    $rectorConfig->sets([
-        DowngradeLevelSetList::DOWN_TO_PHP_81,
-        LevelSetList::UP_TO_PHP_81,
-        SetList::CODE_QUALITY,
-        SetList::CODING_STYLE,
-        SetList::DEAD_CODE,
-        // SetList::STRICT_BOOLEANS,
-        // SetList::GMAGICK_TO_IMAGICK,
-        // SetList::NAMING,
-        // SetList::PRIVATIZATION,
-        // SetList::TYPE_DECLARATION,
-        // SetList::EARLY_RETURN,
-        SetList::INSTANCEOF,
-        // PhpStaticAnalysisSetList::ANNOTATIONS_TO_ATTRIBUTES,
-    ]);
-
-    $rectorConfig->rules([
-        InlineConstructorDefaultToPropertyRector::class,
-    ]);
-
-    $rectorConfig->ruleWithConfiguration(RenameFunctionRector::class, [
-        'test' => 'it',
-    ]);
-
-    $rectorConfig->ruleWithConfiguration(RenameToPsrNameRector::class, [
-        '_*',
-    ]);
-
-    // (function ($rectorConfig): void {
-    //     $rectorConfig->ruleConfigurations[AnnotationToAttributeRector::class] = array_filter(
-    //         $rectorConfig->ruleConfigurations[AnnotationToAttributeRector::class],
-    //         static fn (AnnotationToAttribute $annotationToAttribute): bool => ! in_array(
-    //             $annotationToAttribute->getAttributeClass(),
-    //             [
-    //                 CodeCoverageIgnore::class,
-    //             ],
-    //             true
-    //         )
-    //     );
-    // })->call($rectorConfig, $rectorConfig);
-};

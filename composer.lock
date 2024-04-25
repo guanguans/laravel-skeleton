@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7eb8e266d611557525970bb670c56636",
+    "content-hash": "c186f03e03c091fd3807f513e596db36",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -4777,11 +4777,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../develop/laravel-exception-notify",
-                "reference": "b8cc395e9f93e6d5e72778bec6eeb3e60f5e32af"
+                "reference": "3c27a36f6e1b766bea2612a21760b7e413193ed7"
             },
             "require": {
                 "ext-json": "*",
-                "guanguans/notify": "^2.5",
+                "guanguans/notify": "^2.6",
                 "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0",
                 "php": ">=7.4"
             },
@@ -4794,7 +4794,6 @@
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "icanhazstring/composer-unused": "^0.8",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.21",
                 "maglnet/composer-require-checker": "^3.8 || ^4.0",
                 "mockery/mockery": "^1.6",
                 "orchestra/testbench": "^6.43 || ^7.0 || ^8.0 || ^9.0",
@@ -4804,8 +4803,7 @@
                 "phpstan/extension-installer": "^1.3",
                 "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-deprecation-rules": "^1.1",
-                "rector/rector": "^1.0",
-                "vimeo/psalm": "^5.23"
+                "rector/rector": "^1.0"
             },
             "type": "library",
             "extra": {
@@ -4870,7 +4868,7 @@
                     "@md-lint",
                     "@style-lint",
                     "@test",
-                    "@psalm",
+                    "@phpstan",
                     "@rector-dry-run"
                 ],
                 "composer-bin-all-update": [
@@ -4929,7 +4927,7 @@
                     "@php ./vendor/bin/pest --coverage"
                 ],
                 "pest-coverage": [
-                    "@pest --coverage-html=./build/phpunit/ --coverage-clover=./clover.xml --coverage"
+                    "@pest --coverage-html=./.build/phpunit/ --coverage-clover=./.build/phpunit/clover.xml --coverage"
                 ],
                 "pest-migrate-configuration": [
                     "@pest --migrate-configuration"
@@ -20522,6 +20520,41 @@
                 }
             ],
             "time": "2023-06-02T11:37:44+00:00"
+        },
+        {
+            "name": "driftingly/rector-laravel",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/driftingly/rector-laravel.git",
+                "reference": "47c7de91bb07c0a97df8dd1fe677c6c154608549"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/driftingly/rector-laravel/zipball/47c7de91bb07c0a97df8dd1fe677c6c154608549",
+                "reference": "47c7de91bb07c0a97df8dd1fe677c6c154608549",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "rector/rector": "^1.0"
+            },
+            "type": "rector-extension",
+            "autoload": {
+                "psr-4": {
+                    "RectorLaravel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Rector upgrades rules for Laravel Framework",
+            "support": {
+                "issues": "https://github.com/driftingly/rector-laravel/issues",
+                "source": "https://github.com/driftingly/rector-laravel/tree/1.1.0"
+            },
+            "time": "2024-03-27T16:18:46+00:00"
         },
         {
             "name": "ergebnis/composer-normalize",
