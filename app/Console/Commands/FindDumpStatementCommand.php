@@ -95,7 +95,7 @@ class FindDumpStatementCommand extends Command
     public function handle(Timer $timer)
     {
         $timer->start();
-        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd) {
+        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd): void {
             try {
                 $nodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $error) {
@@ -208,7 +208,7 @@ class FindDumpStatementCommand extends Command
 
     protected function initializeProperties()
     {
-        $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder) {
+        $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder): void {
             $methods = [
                 'in' => $this->option('dir') ?: [base_path()],
                 'path' => $this->option('path') ?: [],

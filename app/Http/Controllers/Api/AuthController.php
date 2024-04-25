@@ -63,7 +63,7 @@ class AuthController extends Controller
             return $this->fail('邮箱或者密码错误');
         }
 
-        return tap($this->success(JWTUser::wrapToken($token)), static function ($response) use ($user) {
+        return tap($this->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
             // Mail::to($user)->queue(new UserRegisteredMail());
             $user->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
         });
@@ -140,7 +140,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        return tap($this->ok('退出成功'), function ($response) {
+        return tap($this->ok('退出成功'), function ($response): void {
             $this->authorize('update', auth()->user());
             auth()->logout();
         });

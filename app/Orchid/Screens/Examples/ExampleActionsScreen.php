@@ -153,18 +153,18 @@ class ExampleActionsScreen extends Screen
     public function export()
     {
         return response()->streamDownload(static function () {
-            $csv = tap(fopen('php://output', 'wb'), static function ($csv) {
+            $csv = tap(fopen('php://output', 'wb'), static function ($csv): void {
                 fputcsv($csv, ['header:col1', 'header:col2', 'header:col3']);
             });
             collect([
                 ['row1:col1', 'row1:col2', 'row1:col3'],
                 ['row2:col1', 'row2:col2', 'row2:col3'],
                 ['row3:col1', 'row3:col2', 'row3:col3'],
-            ])->each(static function (array $row) use ($csv) {
+            ])->each(static function (array $row) use ($csv): void {
                 fputcsv($csv, $row);
             });
 
-            return tap($csv, static function ($csv) {
+            return tap($csv, static function ($csv): void {
                 fclose($csv);
             });
         }, 'File-name.csv');

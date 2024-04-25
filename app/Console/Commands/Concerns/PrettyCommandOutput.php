@@ -31,7 +31,7 @@ trait PrettyCommandOutput
         $command = \is_string($command) ? explode(' ', $command) : $command;
 
         $process = new Process($command, null, null, null, $this->option('timeout'));
-        $process->run(function ($type, $buffer) {
+        $process->run(function ($type, $buffer): void {
             if (Process::ERR === $type) {
                 $this->echo('comment', $buffer);
             } else {

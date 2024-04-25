@@ -161,7 +161,7 @@ class UserEditScreen extends Screen
             ->collapse()
             ->toArray();
 
-        $user->when($request->filled('user.password'), static function (Builder $builder) use ($request) {
+        $user->when($request->filled('user.password'), static function (Builder $builder) use ($request): void {
             $builder->getModel()->password = Hash::make($request->input('user.password'));
         });
 

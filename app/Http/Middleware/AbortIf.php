@@ -12,7 +12,7 @@ abstract class AbortIf
      */
     public function handle(Request $request, Closure $next)
     {
-        return tap($next($request), function () {
+        return tap($next($request), function (): void {
             abort_if($this->condition(), $this->code(), $this->message(), $this->headers());
         });
     }

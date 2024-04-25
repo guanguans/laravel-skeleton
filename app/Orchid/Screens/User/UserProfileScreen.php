@@ -123,7 +123,7 @@ class UserProfileScreen extends Screen
             'password' => 'required|confirmed|different:old_password',
         ]);
 
-        tap($request->user(), static function ($user) use ($request) {
+        tap($request->user(), static function ($user) use ($request): void {
             $user->password = Hash::make($request->get('password'));
         })->save();
 

@@ -85,7 +85,7 @@ class InflectorCommand extends Command
                         ]);
                     }, collect());
             })
-            ->tap(function (Collection $results) {
+            ->tap(function (Collection $results): void {
                 $this->table(
                     ['Type', 'Result'],
                     $results->toArray()

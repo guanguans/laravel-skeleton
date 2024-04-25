@@ -118,7 +118,7 @@ class GenerateTestsCommand extends Command
     public function handle(Timer $timer)
     {
         $timer->start();
-        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) {
+        $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo): void {
             try {
                 $originalNodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $error) {
@@ -252,7 +252,7 @@ class GenerateTestsCommand extends Command
 
     protected function initializeProperties()
     {
-        $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder) {
+        $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder): void {
             $methods = [
                 'in' => $this->option('dir') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
                 'path' => $this->option('path') ?: [],

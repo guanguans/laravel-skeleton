@@ -43,11 +43,11 @@ class OpenAIHelpCommand extends Command
                     // 'logit_bias' => null,
                     'user' => Str::uuid()->toString(),
                 ],
-                function (string $data) {
+                function (string $data): void {
                     str($data)
                         ->replaceFirst('data: ', '')
                         ->rtrim()
-                        ->tap(function (Stringable $stringable) {
+                        ->tap(function (Stringable $stringable): void {
                             if ($stringable->startsWith('[DONE]')) {
                                 return;
                             }

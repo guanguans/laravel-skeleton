@@ -84,7 +84,7 @@ use Stillat\BladeDirectives\Support\Facades\Directive;
 class AppServiceProvider extends ServiceProvider
 {
     use Conditionable {
-        when as whenever;
+        Conditionable::when as whenever;
     }
 
     final public const REQUEST_ID_NAME = 'X-Request-Id';
@@ -214,7 +214,7 @@ class AppServiceProvider extends ServiceProvider
             // });
 
             // Intercept any Gate and check if it's super admin, Or if you use some permissions package...
-            Gate::before(static function ($user, $ability) {
+            Gate::before(static function ($user, $ability): void {
                 // if ($user->is_super_admin == 1) {
                 //     return true;
                 // }
@@ -234,7 +234,7 @@ class AppServiceProvider extends ServiceProvider
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
 
-            DB::whenQueryingForLongerThan(300000, static function (Connection $connection, QueryExecuted $event) {
+            DB::whenQueryingForLongerThan(300000, static function (Connection $connection, QueryExecuted $event): void {
                 Notification::send(
                     new AnonymousNotifiable,
                     new SlowQueryLoggedNotification(
@@ -479,7 +479,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function dependencyInjection(): void
     {
-        $this->app->resolving(static function (mixed $object, Application $app) {
+        $this->app->resolving(static function (mixed $object, Application $app): void {
             if (! \is_object($object)) {
                 return;
             }
