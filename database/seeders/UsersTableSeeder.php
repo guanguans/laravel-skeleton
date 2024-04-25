@@ -8,14 +8,12 @@ class UsersTableSeeder extends Seeder
 {
     /**
      * Auto generated seed file
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        \DB::table('users')->delete();
+        \Illuminate\Support\Facades\DB::table('users')->delete();
 
-        \DB::table('users')->insert([
+        \Illuminate\Support\Facades\DB::table('users')->insert([
             [
                 'email' => 'admin@admin.com',
                 'email_verified_at' => '2021-11-18 18:10:18',

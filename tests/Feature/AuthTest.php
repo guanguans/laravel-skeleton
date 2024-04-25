@@ -8,7 +8,7 @@ class AuthTest extends TestCase
 {
     protected $accessToken;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class AuthTest extends TestCase
         $this->accessToken = $content['data']['access_token'];
     }
 
-    public function test_me()
+    public function test_me(): void
     {
         $response = $this->withToken($this->accessToken)->get('/api/v1/auth/me');
 
@@ -41,7 +41,7 @@ class AuthTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_logout()
+    public function test_logout(): void
     {
         $response = $this->withToken($this->accessToken)->post('/api/v1/auth/logout');
 
@@ -50,7 +50,7 @@ class AuthTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_refresh()
+    public function test_refresh(): void
     {
         $response = $this->withToken($this->accessToken)->post('/api/v1/auth/refresh');
 

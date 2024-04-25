@@ -4,16 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHttpLogTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('http_log', function (Blueprint $table) {
+        Schema::create('http_log', static function (Blueprint $table): void {
             $table->increments('id');
             $table->string('method', 10)->index('method');
             $table->string('path', 128)->index('path');
@@ -31,11 +29,9 @@ class CreateHttpLogTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('http_log');
     }
-}
+};

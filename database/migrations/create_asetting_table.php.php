@@ -6,19 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('asettings', function (Blueprint $table) {
+        Schema::create('asettings', static function (Blueprint $table): void {
             $table->id();
-
             $table->string('group')->default('general')->index();
             $table->enum('type', ['string', 'integer', 'boolean', 'json', 'array', 'date'])->default('string')->index();
             $table->string('key')->nullable(false)->index();
             $table->jsonb('value')->nullable(false);
             $table->string('title')->nullable(false);
             $table->boolean('is_visible')->default(true);
-            $table->unique(['group', 'key']); // Bu satır eklenmiştir.
-
+            $table->unique(['group', 'key']);
+            // Bu satır eklenmiştir.
             $table->timestamps();
         });
     }

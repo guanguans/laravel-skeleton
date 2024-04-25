@@ -47,7 +47,9 @@ return RectorConfig::configure()
         __DIR__.'/app',
         __DIR__.'/composer-updater',
         __DIR__.'/config',
+        __DIR__.'/database',
         __DIR__.'/routes',
+        __DIR__.'/tests',
     ])
     ->withParallel()
     // ->withoutParallel()
@@ -71,12 +73,12 @@ return RectorConfig::configure()
     ->withRules([
         // // RectorLaravel\Rector\Assign\CallOnAppArrayAccessToStandaloneAssignRector::class,
         // // RectorLaravel\Rector\Cast\DatabaseExpressionCastsToMethodCallRector::class,
-        // RectorLaravel\Rector\ClassMethod\AddParentBootToModelClassMethodRector::class,
-        // RectorLaravel\Rector\ClassMethod\AddParentRegisterToEventServiceProviderRector::class,
-        // RectorLaravel\Rector\ClassMethod\MigrateToSimplifiedAttributeRector::class,
-        // RectorLaravel\Rector\Class_\AddExtendsAnnotationToModelFactoriesRector::class,
-        // RectorLaravel\Rector\Class_\AddMockConsoleOutputFalseToConsoleTestsRector::class,
-        // RectorLaravel\Rector\Class_\AnonymousMigrationsRector::class,
+        RectorLaravel\Rector\ClassMethod\AddParentBootToModelClassMethodRector::class,
+        RectorLaravel\Rector\ClassMethod\AddParentRegisterToEventServiceProviderRector::class,
+        RectorLaravel\Rector\ClassMethod\MigrateToSimplifiedAttributeRector::class,
+        RectorLaravel\Rector\Class_\AddExtendsAnnotationToModelFactoriesRector::class,
+        RectorLaravel\Rector\Class_\AddMockConsoleOutputFalseToConsoleTestsRector::class,
+        RectorLaravel\Rector\Class_\AnonymousMigrationsRector::class,
         // RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector::class,
         // RectorLaravel\Rector\Class_\PropertyDeferToDeferrableProviderToRector::class,
         // RectorLaravel\Rector\Class_\RemoveModelPropertyFromFactoriesRector::class,
