@@ -115,7 +115,7 @@ class GenerateTestsCommand extends Command
         $this->initializeProperties();
     }
 
-    public function handle(Timer $timer)
+    public function handle(Timer $timer): int
     {
         $timer->start();
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo): void {

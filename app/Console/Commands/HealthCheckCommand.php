@@ -50,10 +50,8 @@ class HealthCheckCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         collect((new ReflectionObject($this))->getMethods(ReflectionMethod::IS_PROTECTED | ReflectionMethod::IS_PRIVATE))
             ->filter(static fn (ReflectionMethod $method) => Str::of($method->name)->startsWith('check'))
