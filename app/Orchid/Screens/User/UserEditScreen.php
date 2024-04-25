@@ -174,7 +174,7 @@ class UserEditScreen extends Screen
 
         Toast::info(__('User was saved.'));
 
-        return redirect()->route('platform.systems.users');
+        return to_route('platform.systems.users');
     }
 
     /**
@@ -188,7 +188,7 @@ class UserEditScreen extends Screen
 
         Toast::info(__('User was removed'));
 
-        return redirect()->route('platform.systems.users');
+        return to_route('platform.systems.users');
     }
 
     /**
@@ -200,6 +200,6 @@ class UserEditScreen extends Screen
 
         Toast::info(__('You are now impersonating this user'));
 
-        return redirect()->route(config('platform.index'));
+        return to_route(config('platform.index'));
     }
 }

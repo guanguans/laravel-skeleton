@@ -123,7 +123,7 @@ class RoleEditScreen extends Screen
 
         Toast::info(__('Role was saved'));
 
-        return redirect()->route('platform.systems.roles');
+        return to_route('platform.systems.roles');
     }
 
     /**
@@ -137,6 +137,6 @@ class RoleEditScreen extends Screen
 
         Toast::info(__('Role was removed'));
 
-        return redirect()->route('platform.systems.roles');
+        return to_route('platform.systems.roles');
     }
 }
