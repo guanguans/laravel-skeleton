@@ -113,7 +113,7 @@ return RectorConfig::configure()
         RectorLaravel\Rector\MethodCall\RedirectRouteToToRouteHelperRector::class,
         RectorLaravel\Rector\MethodCall\RefactorBlueprintGeometryColumnsRector::class,
         // // RectorLaravel\Rector\MethodCall\ReplaceWithoutJobsEventsAndNotificationsWithFacadeFakeRector::class,
-        // RectorLaravel\Rector\MethodCall\UseComponentPropertyWithinCommandsRector::class,
+        RectorLaravel\Rector\MethodCall\UseComponentPropertyWithinCommandsRector::class,
         // RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector::class,
         // // RectorLaravel\Rector\Namespace_\FactoryDefinitionRector::class,
         // RectorLaravel\Rector\New_\AddGuardToLoginEventRector::class,

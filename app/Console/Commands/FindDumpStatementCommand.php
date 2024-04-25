@@ -168,7 +168,7 @@ class FindDumpStatementCommand extends Command
 
         $this->table(array_map(static fn ($name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])), $findInfos);
 
-        $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
+        $this->components->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
         return self::SUCCESS;
     }
