@@ -70,7 +70,7 @@ class BitEncoder implements BitEncoderContract
             throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
         }
 
-        return array_reduce($set, function (int $value, $item) {
+        return array_reduce($set, function (int $value, $item): int {
             $index = array_search($item, $this->set, true);
             if (false !== $index) {
                 $value |= (1 << $index);
@@ -91,7 +91,7 @@ class BitEncoder implements BitEncoderContract
             throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
         }
 
-        return array_reduce($set, function (int $value, $item) {
+        return array_reduce($set, function (int $value, $item): int {
             $index = array_search($item, $this->set, true);
             if (false !== $index) {
                 $value &= (~(1 << $index));

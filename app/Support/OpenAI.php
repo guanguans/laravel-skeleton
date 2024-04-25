@@ -290,7 +290,7 @@ final class OpenAI extends FoundationSDK
             // CURLOPT_TCP_KEEPINTVL => 10, // 每隔10秒检测一次
         ];
 
-        $writer and $options[CURLOPT_WRITEFUNCTION] = static function (object $ch, string $data) use ($writer) {
+        $writer and $options[CURLOPT_WRITEFUNCTION] = static function (object $ch, string $data) use ($writer): int {
             $writer($data, $ch);
 
             return \strlen($data); // 必须返回接收到的数据的长度，否则会断开连接。
