@@ -132,9 +132,7 @@ class RequestMacro
     public function propertyAware(): callable
     {
         return function ($property, $value) {
-            if (! property_exists($this, $property)) {
-                throw new \InvalidArgumentException('The property not exists.');
-            }
+            throw_unless(property_exists($this, $property), \InvalidArgumentException::class, 'The property not exists.');
 
             app()->has('original_properties') or app()->instance('original_properties', []);
             app()->extend('original_properties', function ($properties) use ($property) {

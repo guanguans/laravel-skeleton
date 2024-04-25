@@ -247,9 +247,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     protected function rename(Node $node, callable $renamer): Node
     {
         $renamer = fn (string $name): string => $renamer((function (string $name): string {
-            if ($this->isMatches($name, $this->except)) {
-                throw new \RuntimeException("The name[$name] is skipped.");
-            }
+            throw_if($this->isMatches($name, $this->except), \RuntimeException::class, "The name[$name] is skipped.");
 
             if (ctype_upper(preg_replace('/[^a-zA-Z]/', '', $name))) {
                 return mb_strtolower($name, 'UTF-8');

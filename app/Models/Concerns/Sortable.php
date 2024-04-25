@@ -54,9 +54,7 @@ trait Sortable
 
     public static function setNewOrder($ids, int $startOrder = 1, ?string $primaryKeyColumn = null): void
     {
-        if (! \is_array($ids) && ! $ids instanceof \ArrayAccess) {
-            throw new \InvalidArgumentException('You must pass an array or ArrayAccess object to setNewOrder');
-        }
+        throw_if(! \is_array($ids) && ! $ids instanceof \ArrayAccess, \InvalidArgumentException::class, 'You must pass an array or ArrayAccess object to setNewOrder');
 
         $model = new static();
 

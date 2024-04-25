@@ -46,9 +46,7 @@ trait IndexHintsable
      */
     public function scopeForceIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
-        if (Str::contains($this->preparedIndexes, 'USE')) {
-            throw new \InvalidArgumentException('It is an error to mix USE INDEX and FORCE INDEX for the same table.');
-        }
+        throw_if(Str::contains($this->preparedIndexes, 'USE'), \InvalidArgumentException::class, 'It is an error to mix USE INDEX and FORCE INDEX for the same table.');
 
         if (! $this->tableIndexExists($indexes, 'force')) {
             return $query;
@@ -70,9 +68,7 @@ trait IndexHintsable
      */
     public function scopeUseIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
-        if (Str::contains($this->preparedIndexes, 'FORCE')) {
-            throw new \Exception('However, it is an error to mix USE INDEX and FORCE INDEX for the same table:');
-        }
+        throw_if(Str::contains($this->preparedIndexes, 'FORCE'), \Exception::class, 'However, it is an error to mix USE INDEX and FORCE INDEX for the same table:');
 
         if (! $this->tableIndexExists($indexes, 'use')) {
             return $query;

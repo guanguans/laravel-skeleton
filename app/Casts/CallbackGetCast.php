@@ -75,9 +75,7 @@ class CallbackGetCast implements CastsAttributes
             return $segments;
         }
 
-        if (\count($segments) !== 2 || ! method_exists($segments[0], $segments[1])) {
-            throw new InvalidArgumentException("Invalid callback: $callback");
-        }
+        throw_if(\count($segments) !== 2 || ! method_exists($segments[0], $segments[1]), InvalidArgumentException::class, "Invalid callback: $callback");
 
         try {
             return [resolve($segments[0]), $segments[1]];

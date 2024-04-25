@@ -54,9 +54,7 @@ class ElasticsearchManager extends Manager
 
         $driverKey = "services.elasticsearch.connections.$driver";
 
-        if (! $this->config->has($driverKey)) {
-            throw new InvalidArgumentException("Connection [$driver] not supported.");
-        }
+        throw_unless($this->config->has($driverKey), InvalidArgumentException::class, "Connection [$driver] not supported.");
 
         $config = $this->prepareConfig($this->config->get($driverKey));
 

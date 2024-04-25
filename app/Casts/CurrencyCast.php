@@ -21,9 +21,7 @@ class CurrencyCast implements CastsAttributes
      */
     public function __construct(int $digits = 2)
     {
-        if ($digits < 1) {
-            throw new \InvalidArgumentException('Digits should be a number larger than zero.');
-        }
+        throw_if($digits < 1, \InvalidArgumentException::class, 'Digits should be a number larger than zero.');
 
         $this->digits = $digits;
     }

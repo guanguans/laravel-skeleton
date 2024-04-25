@@ -44,17 +44,13 @@ class VerifySignature
 
         /** @var HmacSigner $signer */
         $signer = app(HmacSigner::class, ['secret' => $secret]);
-        if (! $signer->validate($request->header('signature'), $parameters)) {
-            throw new InvalidSignatureException();
-        }
+        throw_unless($signer->validate($request->header('signature'), $parameters), InvalidSignatureException::class);
     }
 
     protected function validateRepeatRequest(Request $request, int $effectiveTime)
     {
         $cacheSignature = Cache::get($signature = $request->header('signature'));
-        if ($cacheSignature) {
-            throw new InvalidRepeatRequestException();
-        }
+        throw_if($cacheSignature, InvalidRepeatRequestException::class);
 
         Cache::put($signature, spl_object_hash($request), $effectiveTime);
     }

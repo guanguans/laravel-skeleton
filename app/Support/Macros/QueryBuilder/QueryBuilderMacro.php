@@ -28,20 +28,14 @@ class QueryBuilderMacro
     {
         return fn (...$pipes) => tap($this, static function ($builder) use ($pipes): void {
             array_unshift($pipes, static function ($builder, $next): void {
-                if (
-                    ! ($piped = $next($builder)) instanceof EloquentBuilder
-                    && ! $piped instanceof QueryBuilder
-                    && ! $piped instanceof Relation
-                ) {
-                    throw new \InvalidArgumentException(
-                        sprintf(
-                            'Query builder pipeline must be return a %s or %s or %s instance.',
-                            EloquentBuilder::class,
-                            QueryBuilder::class,
-                            Relation::class,
-                        )
-                    );
-                }
+                throw_if(! ($piped = $next($builder)) instanceof EloquentBuilder
+                && ! $piped instanceof QueryBuilder
+                && ! $piped instanceof Relation, \InvalidArgumentException::class, sprintf(
+                    'Query builder pipeline must be return a %s or %s or %s instance.',
+                    EloquentBuilder::class,
+                    QueryBuilder::class,
+                    Relation::class,
+                ));
             });
 
             (new Pipeline(app()))

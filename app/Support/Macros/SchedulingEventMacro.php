@@ -88,12 +88,7 @@ class SchedulingEventMacro
                                 return $commands[array_search("'artisan'", $commands, true) + 1];
                             }
 
-                            /** @see \Illuminate\Console\Scheduling\CallbackEvent::withoutOverlapping */
-                            if (empty($this->description)) {
-                                throw new \LogicException(
-                                    "Please incoming the \$filename parameter, Or use the 'name' method before 'userAppendOutputTo'."
-                                );
-                            }
+                            throw_if(empty($this->description), \LogicException::class, "Please incoming the \$filename parameter, Or use the 'name' method before 'userAppendOutputTo'.");
 
                             // exec|call|job
                             return $this->description;

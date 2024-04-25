@@ -151,7 +151,7 @@ class ServerSentEvent implements \Stringable
                 }
 
                 // Sleep seconds before running the loop again.
-                sleep($this->sleep);
+                \Illuminate\Support\Sleep::sleep($this->sleep);
             }
         }
     }

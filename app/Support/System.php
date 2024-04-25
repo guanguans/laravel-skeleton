@@ -189,7 +189,7 @@ class System
         switch (self::getOS()) {
             case 'Linux':
                 $startCpu = self::getProcStatData()['total'];
-                sleep($duration);
+                \Illuminate\Support\Sleep::sleep($duration);
                 $endCpu = self::getProcStatData()['total'];
 
                 $prevIdle = $startCpu['idle'] + $startCpu['iowait'];
@@ -273,9 +273,7 @@ class System
     {
         $totalSpace = disk_total_space(__DIR__);
 
-        if (false === $totalSpace) {
-            throw new \Exception('Unable to get disk space');
-        }
+        throw_if(false === $totalSpace, \Exception::class, 'Unable to get disk space');
 
         return (int) ($totalSpace / 1024 / 1024);
     }
@@ -289,9 +287,7 @@ class System
     {
         $totalSpace = disk_free_space(__DIR__);
 
-        if (false === $totalSpace) {
-            throw new \Exception('Unable to get free disk space');
-        }
+        throw_if(false === $totalSpace, \Exception::class, 'Unable to get free disk space');
 
         return (int) ($totalSpace / 1024 / 1024);
     }
@@ -308,7 +304,7 @@ class System
     public static function getIOUsage(int $duration = 1): array
     {
         $diskStat = self::getDiskStats();
-        sleep($duration);
+        \Illuminate\Support\Sleep::sleep($duration);
         $diskStat2 = self::getDiskStats();
 
         // Remove invalid disks
@@ -388,7 +384,7 @@ class System
         foreach ($interfaces as $interface) {
             $tx1 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/tx_bytes');
             $rx1 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/rx_bytes');
-            sleep($duration);
+            \Illuminate\Support\Sleep::sleep($duration);
             $tx2 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/tx_bytes');
             $rx2 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/rx_bytes');
 

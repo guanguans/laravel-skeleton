@@ -183,11 +183,7 @@ if (! function_exists('make')) {
      */
     function make(mixed $abstract, array $parameters = []): mixed
     {
-        if (! in_array(gettype($abstract), ['string', 'array'], true)) {
-            throw new InvalidArgumentException(
-                sprintf('Invalid argument type(string/array): %s.', gettype($abstract))
-            );
-        }
+        throw_unless(in_array(gettype($abstract), ['string', 'array'], true), InvalidArgumentException::class, sprintf('Invalid argument type(string/array): %s.', gettype($abstract)));
 
         if (is_string($abstract)) {
             return app($abstract, $parameters);

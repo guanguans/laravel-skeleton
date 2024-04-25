@@ -30,9 +30,7 @@ Artisan::command('docs:generate-signed-url', function () {
  * @var \Illuminate\Foundation\Console\ClosureCommand $this
  */
 Artisan::command('deployer:notify {result}', function () {
-    if (! in_array($this->argument('result'), ['FAILURE', 'SUCCESS'])) {
-        throw new InvalidArgumentException('Invalid result parameters(FAILURE/SUCCESS).');
-    }
+    throw_unless(in_array($this->argument('result'), ['FAILURE', 'SUCCESS']), InvalidArgumentException::class, 'Invalid result parameters(FAILURE/SUCCESS).');
 
     exception_notify_report(str_replace('{result}', $this->argument('result'), $this->signature));
 

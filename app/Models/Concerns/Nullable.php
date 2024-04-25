@@ -28,12 +28,10 @@ trait Nullable
      */
     public function initializeNullable(): void
     {
-        if (! \is_array($this->nullable)) {
-            throw new \Exception(sprintf(
-                'The $nullable property in %s must be an array to use the Nullable trait.',
-                static::class
-            ));
-        }
+        throw_unless(\is_array($this->nullable), \Exception::class, sprintf(
+            'The $nullable property in %s must be an array to use the Nullable trait.',
+            static::class
+        ));
 
         $this->bindEvent('model.beforeSave', function (): void {
             $this->nullableBeforeSave();

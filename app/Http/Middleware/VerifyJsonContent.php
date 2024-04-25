@@ -16,9 +16,7 @@ class VerifyJsonContent
         $acceptHeader = $request->header('accept');
         $contentType = 'application/json';
 
-        if (! str_contains($acceptHeader, $contentType)) {
-            throw new BadRequestException('Your request must contain [Accept = application/json].');
-        }
+        throw_unless(str_contains($acceptHeader, $contentType), BadRequestException::class, 'Your request must contain [Accept = application/json].');
 
         $response = $next($request);
 

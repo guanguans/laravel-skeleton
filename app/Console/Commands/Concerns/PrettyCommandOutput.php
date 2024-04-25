@@ -39,10 +39,7 @@ trait PrettyCommandOutput
             }
         });
 
-        // executes after the command finishes
-        if (! $process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
+        throw_unless($process->isSuccessful(), ProcessFailedException::class, $process);
 
         if ($this->progressBar ?? null) {
             $this->progressBar->advance();

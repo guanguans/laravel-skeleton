@@ -526,9 +526,7 @@ abstract class AbstractRepository
      */
     public function makeModel(): Builder
     {
-        if (empty($this->model)) {
-            throw new \RuntimeException('The model class must be set on the repository.');
-        }
+        throw_if(empty($this->model), \RuntimeException::class, 'The model class must be set on the repository.');
 
         return $this->modelInstance = new $this->model();
     }

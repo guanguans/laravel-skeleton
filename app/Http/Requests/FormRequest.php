@@ -80,7 +80,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     protected function call(string $method, array $args = [], $defaultReturn = null)
     {
         $actionMethod = transform($method, function (string $method): string {
-            if (! \in_array(
+            throw_unless(\in_array(
                 $method,
                 [
                     'validationData',
@@ -95,9 +95,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
                     'after',
                 ],
                 true
-            )) {
-                throw new InvalidArgumentException("Can't call the method[$method].");
-            }
+            ), InvalidArgumentException::class, "Can't call the method[$method].");
 
             return $this->route()?->getActionMethod().ucfirst($method);
         });

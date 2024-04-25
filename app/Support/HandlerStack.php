@@ -233,15 +233,11 @@ class HandlerStack implements \Stringable
     public function resolve(): callable
     {
         if (null === $this->cached) {
-            if (($prev = $this->handler) === null) {
-                throw new \LogicException('No handler has been specified');
-            }
-
+            throw_if(($prev = $this->handler) === null, \LogicException::class, 'No handler has been specified');
             foreach (array_reverse($this->stack) as $fn) {
                 /** @var callable(mixed): mixed $prev */
                 $prev = $fn[0]($prev);
             }
-
             $this->cached = $prev;
         }
 

@@ -66,9 +66,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function attach(int $value, ...$set): int
     {
-        if ($value < 0) {
-            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
-        }
+        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         return array_reduce($set, function (int $value, $item): int {
             $index = array_search($item, $this->set, true);
@@ -87,9 +85,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function detach(int $value, ...$set): int
     {
-        if ($value < 0) {
-            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
-        }
+        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         return array_reduce($set, function (int $value, $item): int {
             $index = array_search($item, $this->set, true);
@@ -108,9 +104,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function has(int $value, mixed $item): bool
     {
-        if ($value < 0) {
-            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
-        }
+        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         $index = array_search($item, $this->set, true);
         if (false === $index) {
@@ -129,9 +123,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function lack(int $value, mixed $item): bool
     {
-        if ($value < 0) {
-            throw new \InvalidArgumentException("The value($value) is an invalid positive integer.");
-        }
+        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         $index = array_search($item, $this->set, true);
         if (false === $index) {
@@ -291,13 +283,9 @@ class BitEncoder implements BitEncoderContract
 
     public function setSet(array $set): void
     {
-        if (! array_is_list($set)) {
-            throw new \InvalidArgumentException('The set is not an array of lists.');
-        }
+        throw_unless(array_is_list($set), \InvalidArgumentException::class, 'The set is not an array of lists.');
 
-        if (array_filter(array_count_values($set), static fn (int $count): bool => $count > 1)) {
-            throw new \InvalidArgumentException('The set must be an array with no duplicate elements.');
-        }
+        throw_if(array_filter(array_count_values($set), static fn (int $count): bool => $count > 1), \InvalidArgumentException::class, 'The set must be an array with no duplicate elements.');
 
         if (($count = \count($set)) > ($maxCount = \PHP_INT_SIZE === 4 ? 31 : 63)) {
             throw new \LengthException("The number({$maxCount}) of elements is greater than the maximum length({$count}).");

@@ -76,9 +76,7 @@ class CommandMacro
                 "$title: ".($result ? '<info>✔</info>' : '<error>failed</error>')
             );
 
-            if (isset($taskException)) {
-                throw $taskException;
-            }
+            throw_if(isset($taskException), $taskException);
 
             return $result;
         };
