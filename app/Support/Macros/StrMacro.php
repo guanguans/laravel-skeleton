@@ -62,7 +62,7 @@ class StrMacro
     {
         // return fn($haystack, $needle, $encoding = null) => mb_substr_count($haystack, $needle, $encoding);
 
-        return static fn ($haystack, $needle, $encoding = null) => mb_substr_count($haystack, $needle, $encoding);
+        return static fn ($haystack, $needle, $encoding = null): int => mb_substr_count($haystack, $needle, $encoding);
     }
 
     public static function pipe(): callable

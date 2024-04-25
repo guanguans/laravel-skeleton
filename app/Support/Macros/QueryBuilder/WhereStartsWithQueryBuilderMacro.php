@@ -30,16 +30,16 @@ class WhereStartsWithQueryBuilderMacro
 
     public function whereNotStartsWith(): callable
     {
-        return fn ($column, string $value) => $this->whereStartsWith($column, $value, 'and', true);
+        return fn ($column, string $value): callable => $this->whereStartsWith($column, $value, 'and', true);
     }
 
     public function orWhereStartsWith(): callable
     {
-        return fn ($column, string $value) => $this->whereStartsWith($column, $value, 'or');
+        return fn ($column, string $value): callable => $this->whereStartsWith($column, $value, 'or');
     }
 
     public function orWhereNotStartsWith(): callable
     {
-        return fn ($column, string $value) => $this->whereStartsWith($column, $value, 'or', true);
+        return fn ($column, string $value): callable => $this->whereStartsWith($column, $value, 'or', true);
     }
 }

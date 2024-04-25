@@ -254,7 +254,7 @@ trait PrettyCommandOutput
     public function askHint(string $question, array $hints, string $default)
     {
         $hints = collect($hints)
-            ->map(static fn ($hint) => " <fg=gray>│ $hint</>")
+            ->map(static fn ($hint): string => " <fg=gray>│ $hint</>")
             ->join(PHP_EOL);
 
         return $this->ask($question.PHP_EOL.$hints, $default);

@@ -221,7 +221,7 @@ class HandlerStack implements \Stringable
         $idx = \is_callable($remove) ? 0 : 1;
         $this->stack = array_values(array_filter(
             $this->stack,
-            static fn ($tuple) => $tuple[$idx] !== $remove
+            static fn ($tuple): bool => $tuple[$idx] !== $remove
         ));
     }
 

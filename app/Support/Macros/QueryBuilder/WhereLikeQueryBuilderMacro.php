@@ -30,16 +30,16 @@ class WhereLikeQueryBuilderMacro
 
     public function whereNotLike(): callable
     {
-        return fn ($column, string $value) => $this->whereLike($column, $value, 'and', true);
+        return fn ($column, string $value): callable => $this->whereLike($column, $value, 'and', true);
     }
 
     public function orWhereLike(): callable
     {
-        return fn ($column, string $value) => $this->whereLike($column, $value, 'or');
+        return fn ($column, string $value): callable => $this->whereLike($column, $value, 'or');
     }
 
     public function orWhereNotLike(): callable
     {
-        return fn ($column, string $value) => $this->whereLike($column, $value, 'or', true);
+        return fn ($column, string $value): callable => $this->whereLike($column, $value, 'or', true);
     }
 }

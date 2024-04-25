@@ -128,7 +128,7 @@ trait ModelCrudable
     public static function searchOrder(Builder $query, array $data): void
     {
         if (isset($data['order'])) {
-            $sortFields = array_map(static fn ($item) => explode(',', $item), explode('|', $data['order']));
+            $sortFields = array_map(static fn ($item): array => explode(',', $item), explode('|', $data['order']));
             foreach ($sortFields as $sortField) {
                 $query->orderBy($sortField[0], $sortField[1] ?? 'ASC');
             }

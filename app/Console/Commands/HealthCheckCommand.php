@@ -77,7 +77,7 @@ class HealthCheckCommand extends Command
 
                 return collect($checks);
             })
-            ->filter(static fn ($check) => $check['state']->isNot(HealthCheckStateEnum::OK))
+            ->filter(static fn ($check): bool => $check['state']->isNot(HealthCheckStateEnum::OK))
             ->whenNotEmpty(function (Collection $notOkChecks) {
                 // event(new HealthCheckFailedEvent($notOkChecks));
                 $this->error('Health check failed.');
@@ -253,7 +253,7 @@ class HealthCheckCommand extends Command
 
     protected function checkMemoryLimit(int $limit = 128): HealthCheckStateEnum
     {
-        $inis = collect(ini_get_all())->filter(static fn ($value, $key) => str_contains($key, 'memory_limit'));
+        $inis = collect(ini_get_all())->filter(static fn ($value, $key): bool => str_contains($key, 'memory_limit'));
 
         if ($inis->isEmpty()) {
             return tap(HealthCheckStateEnum::FAILING(), static function (HealthCheckStateEnum $state): void {

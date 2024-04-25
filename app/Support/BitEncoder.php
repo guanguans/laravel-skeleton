@@ -56,7 +56,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function decode(int $value): array
     {
-        return array_filter($this->set, fn ($item) => $this->has($value, $item));
+        return array_filter($this->set, fn ($item): bool => $this->has($value, $item));
     }
 
     /**
@@ -146,7 +146,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getHasCombinationsValues(array $set, int $length = 1024): array
     {
-        return array_map(fn (array $set) => $this->encode($set), $this->getHasCombinations($set, $length));
+        return array_map(fn (array $set): int => $this->encode($set), $this->getHasCombinations($set, $length));
     }
 
     /**
@@ -154,7 +154,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getLackCombinationsValues(array $set, int $length = 1024): array
     {
-        return array_map(fn (array $set) => $this->encode($set), $this->getLackCombinations($set, $length));
+        return array_map(fn (array $set): int => $this->encode($set), $this->getLackCombinations($set, $length));
     }
 
     /**
@@ -295,7 +295,7 @@ class BitEncoder implements BitEncoderContract
             throw new \InvalidArgumentException('The set is not an array of lists.');
         }
 
-        if (array_filter(array_count_values($set), static fn (int $count) => $count > 1)) {
+        if (array_filter(array_count_values($set), static fn (int $count): bool => $count > 1)) {
             throw new \InvalidArgumentException('The set must be an array with no duplicate elements.');
         }
 

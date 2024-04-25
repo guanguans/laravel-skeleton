@@ -32,7 +32,7 @@ class UserListLayout extends Table
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
-                ->render(static fn (User $user) => new Persona($user->presenter())),
+                ->render(static fn (User $user): \Orchid\Screen\Layouts\Persona => new Persona($user->presenter())),
 
             TD::make('email', __('Email'))
                 ->sort()

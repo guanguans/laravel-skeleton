@@ -42,18 +42,18 @@ class WhereFindInSetQueryBuilderMacro
     public function whereNotFindInSet(): callable
     {
         // @var string|Arrayable|string[] $values
-        return fn (string $column, $values) => $this->whereFindInSet($column, $values, 'and', true);
+        return fn (string $column, $values): callable => $this->whereFindInSet($column, $values, 'and', true);
     }
 
     public function orWhereFindInSet(): callable
     {
         // @var string|Arrayable|string[] $values
-        return fn (string $column, $values) => $this->whereFindInSet($column, $values, 'or');
+        return fn (string $column, $values): callable => $this->whereFindInSet($column, $values, 'or');
     }
 
     public function orWhereNotFindInSet(): callable
     {
         // @var string|Arrayable|string[] $values
-        return fn (string $column, $values) => $this->whereFindInSet($column, $values, 'or', true);
+        return fn (string $column, $values): callable => $this->whereFindInSet($column, $values, 'or', true);
     }
 }

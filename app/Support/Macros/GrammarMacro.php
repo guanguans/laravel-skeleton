@@ -32,7 +32,7 @@ class GrammarMacro
          * @param  \Illuminate\Database\Connection  $connection
          * @return string
          */
-        return fn (Blueprint $blueprint, Fluent $command, Connection $connection) => match ($connection->getDriverName()) {
+        return fn (Blueprint $blueprint, Fluent $command, Connection $connection): string => match ($connection->getDriverName()) {
             'mysql' => sprintf(
                 'alter table %s comment = %s',
                 $this->wrapTable($blueprint),

@@ -29,7 +29,7 @@ class RequestMacro
 
     public function isAdmin(): callable
     {
-        return fn () => (bool) optional($this->user())->is_admin;
+        return fn (): bool => (bool) optional($this->user())->is_admin;
     }
 
     public static function isAdminDeveloper(): callable
@@ -39,7 +39,7 @@ class RequestMacro
 
     public function isWechat(): callable
     {
-        return fn () => str_contains($this->userAgent(), 'MicroMessenger');
+        return fn (): bool => str_contains($this->userAgent(), 'MicroMessenger');
     }
 
     public function headers(): callable

@@ -189,7 +189,7 @@ class AppServiceProvider extends ServiceProvider
                 $value,
                 JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
             ));
-            LogHttp::skipWhen(fn (Request $request) => $this->app->runningUnitTests() || $request->isMethodSafe());
+            LogHttp::skipWhen(fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe());
             LogViewer::auth(static fn (): bool => request()::isAdminDeveloper());
             class_exists(Telescope::class) and Telescope::auth(static fn (): bool => request()::isAdminDeveloper());
             Http::globalOptions([
@@ -369,7 +369,7 @@ class AppServiceProvider extends ServiceProvider
                 // clean
                 $parts = array_map(trim(...), explode(',', Blade::stripParentheses($expression)));
                 // filter
-                $parts = array_filter($parts, static fn (string $part) => '' !== $part);
+                $parts = array_filter($parts, static fn (string $part): bool => '' !== $part);
 
                 // default
                 return $parts + ['time()', "'Y m d H:i:s'"];
@@ -402,7 +402,7 @@ class AppServiceProvider extends ServiceProvider
          * @enddisk
          * ```
          */
-        Blade::if('disk', static fn ($value) => config('filesystems.default') === $value);
+        Blade::if('disk', static fn ($value): bool => config('filesystems.default') === $value);
 
         // 回显变量
         Blade::stringable(static fn (Request $request) => json_encode(
@@ -421,7 +421,7 @@ class AppServiceProvider extends ServiceProvider
             $separator = '-',
             $language = 'en',
             $dictionary = ['@' => 'at']
-        ) => '<?php echo '.\Illuminate\Support\Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
+        ): string => '<?php echo '.\Illuminate\Support\Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
     }
 
     /**
@@ -552,7 +552,7 @@ class AppServiceProvider extends ServiceProvider
             ->custom(
                 static fn (
                     DiscoveredClass $discoveredClass
-                ) => ! $discoveredClass->isAbstract && ! Str::endsWith($discoveredClass->name, ['(', 'Controller'])
+                ): bool => ! $discoveredClass->isAbstract && ! Str::endsWith($discoveredClass->name, ['(', 'Controller'])
             )
             ->get();
 
@@ -569,7 +569,7 @@ class AppServiceProvider extends ServiceProvider
             );
 
             if ($condition) {
-                $this->app->extend($class, static fn (object $object) => new class($object, $reflectionMethods)
+                $this->app->extend($class, static fn (object $object): object => new class($object, $reflectionMethods)
                 {
                     public function __construct(
                         private readonly object $object,

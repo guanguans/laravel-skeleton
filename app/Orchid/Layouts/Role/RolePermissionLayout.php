@@ -38,7 +38,7 @@ class RolePermissionLayout extends Rows
     private function generatedPermissionFields(Collection $permissionsRaw): array
     {
         return $permissionsRaw
-            ->map(fn (Collection $permissions, $title) => $this->makeCheckBoxGroup($permissions, $title))
+            ->map(fn (Collection $permissions, $title): \Illuminate\Support\Collection => $this->makeCheckBoxGroup($permissions, $title))
             ->flatten()
             ->toArray();
     }
@@ -46,7 +46,7 @@ class RolePermissionLayout extends Rows
     private function makeCheckBoxGroup(Collection $permissions, string $title): Collection
     {
         return $permissions
-            ->map(fn (array $chunks) => $this->makeCheckBox(collect($chunks)))
+            ->map(fn (array $chunks): \Orchid\Screen\Fields\CheckBox => $this->makeCheckBox(collect($chunks)))
             ->flatten()
             ->map(static fn (CheckBox $checkbox, $key) => $key === 0
                 ? $checkbox->title($title)

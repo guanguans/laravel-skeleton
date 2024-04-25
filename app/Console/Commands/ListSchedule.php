@@ -45,7 +45,7 @@ class ListSchedule extends Command
             return;
         }
 
-        $events = collect($this->schedule->events())->map(fn ($event) => [
+        $events = collect($this->schedule->events())->map(fn ($event): array => [
             'description' => $event->description ?: 'N/A',
             'command' => ltrim(strtok(Str::after($event->command, "'artisan'"), ' ')),
             'schedule' => $event->expression,

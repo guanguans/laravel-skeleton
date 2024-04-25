@@ -30,16 +30,16 @@ class WhereEndsWithQueryBuilderMacro
 
     public function whereNotEndsWith(): callable
     {
-        return fn ($column, string $value) => $this->whereEndsWith($column, $value, 'and', true);
+        return fn ($column, string $value): callable => $this->whereEndsWith($column, $value, 'and', true);
     }
 
     public function orWhereEndsWith(): callable
     {
-        return fn ($column, string $value) => $this->whereEndsWith($column, $value, 'or');
+        return fn ($column, string $value): callable => $this->whereEndsWith($column, $value, 'or');
     }
 
     public function orWhereNotEndsWith(): callable
     {
-        return fn ($column, string $value) => $this->whereEndsWith($column, $value, 'or', true);
+        return fn ($column, string $value): callable => $this->whereEndsWith($column, $value, 'or', true);
     }
 }

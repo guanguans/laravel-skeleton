@@ -64,16 +64,16 @@ class WhereInsQueryBuilderMacro
 
     public function whereNotIns(): callable
     {
-        return fn (array $columns, $values) => $this->whereIns($columns, $values, 'and', true);
+        return fn (array $columns, $values): callable => $this->whereIns($columns, $values, 'and', true);
     }
 
     public function orWhereIns(): callable
     {
-        return fn (array $columns, $values) => $this->whereIns($columns, $values, 'or');
+        return fn (array $columns, $values): callable => $this->whereIns($columns, $values, 'or');
     }
 
     public function orWhereNotIns(): callable
     {
-        return fn (array $columns, $values) => $this->whereIns($columns, $values, 'or', true);
+        return fn (array $columns, $values): callable => $this->whereIns($columns, $values, 'or', true);
     }
 }

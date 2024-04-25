@@ -38,7 +38,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Sample Screen')
                 ->icon('bs.collection')
                 ->route('platform.example')
-                ->badge(static fn () => 6),
+                ->badge(static fn (): int => 6),
 
             Menu::make('Form Elements')
                 ->icon('bs.card-list')
@@ -84,7 +84,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.box-arrow-up-right')
                 ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
                 ->target('_blank')
-                ->badge(static fn () => Dashboard::version(), Color::DARK),
+                ->badge(static fn (): string => Dashboard::version(), Color::DARK),
         ];
     }
 

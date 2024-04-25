@@ -147,7 +147,7 @@ if (! function_exists('matching')) {
      */
     function matching(mixed $value): bool
     {
-        $switch = (static fn ($value) => match (true) {
+        $switch = (static fn ($value): string => match (true) {
             'a' === $value, 'b' === $value => 'a or b',
             default => 'default',
         })($value);
@@ -384,7 +384,7 @@ if (! function_exists('curry')) {
      */
     function curry(callable $function): callable
     {
-        $accumulator = static fn ($arguments) => static function (...$args) use ($function, $arguments, &$accumulator) {
+        $accumulator = static fn ($arguments): \Closure => static function (...$args) use ($function, $arguments, &$accumulator) {
             $arguments = array_merge($arguments, $args);
             $reflection = new ReflectionFunction($function);
             $totalArguments = $reflection->getNumberOfRequiredParameters();
@@ -408,7 +408,7 @@ if (! function_exists('compose')) {
     {
         return array_reduce(
             $functions,
-            static fn (callable $carry, callable $function) => static fn ($x) => $function($carry($x)),
+            static fn (callable $carry, callable $function): \Closure => static fn ($x) => $function($carry($x)),
             static fn ($x) => $x
         );
     }

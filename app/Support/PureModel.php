@@ -189,7 +189,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     {
         $instance = new static();
 
-        return array_map(static fn ($item) => $instance->newInstance($item), $items);
+        return array_map(static fn ($item): static => $instance->newInstance($item), $items);
     }
 
     /**

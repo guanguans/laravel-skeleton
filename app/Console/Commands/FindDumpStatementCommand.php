@@ -129,13 +129,13 @@ class FindDumpStatementCommand extends Command
                     $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn (Stringable $name) => "<fg=red>$name</>");
+                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn (Stringable $name): string => "<fg=red>$name</>");
                     $type = '<fg=red>struct</>';
                 }
 
-                $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(static fn (Stringable $file) => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>");
-                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(static fn (Stringable $startLine) => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>");
-                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(static fn (Stringable $formattedCode) => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>");
+                $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>");
+                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(static fn (Stringable $startLine): string => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>");
+                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(static fn (Stringable $formattedCode): string => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>");
 
                 return [
                     'index' => null,

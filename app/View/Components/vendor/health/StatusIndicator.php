@@ -17,9 +17,9 @@ class StatusIndicator extends Component
     {
         return view('health::status-indicator', [
             'result' => $this->result,
-            'backgroundColor' => fn (string $status) => $this->getBackgroundColor($status),
-            'iconColor' => fn (string $status) => $this->getIconColor($status),
-            'icon' => fn (string $status) => $this->getIcon($status),
+            'backgroundColor' => fn (string $status): string => $this->getBackgroundColor($status),
+            'iconColor' => fn (string $status): string => $this->getIconColor($status),
+            'icon' => fn (string $status): string => $this->getIcon($status),
         ]);
     }
 

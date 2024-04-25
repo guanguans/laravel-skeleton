@@ -20,7 +20,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         $isLocal = $this->app->environment('local');
 
-        Telescope::filter(static fn (IncomingEntry $entry) => $isLocal ||
+        Telescope::filter(static fn (IncomingEntry $entry): bool => $isLocal ||
                $entry->isReportableException() ||
                $entry->isFailedRequest() ||
                $entry->isFailedJob() ||
@@ -53,7 +53,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function gate(): void
     {
-        Gate::define('viewTelescope', static fn ($user) => \in_array($user->email, [
+        Gate::define('viewTelescope', static fn ($user): bool => \in_array($user->email, [
             //
         ]));
     }

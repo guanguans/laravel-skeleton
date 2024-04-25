@@ -116,7 +116,7 @@ class ConsoleWriter extends OutputStyle
     public function listing(array $items): void
     {
         parent::newLine();
-        $text = collect($items)->map(static fn ($dependency) => '  - '.$dependency)->toArray();
+        $text = collect($items)->map(static fn ($dependency): string => '  - '.$dependency)->toArray();
         parent::text($text);
         parent::newLine();
     }

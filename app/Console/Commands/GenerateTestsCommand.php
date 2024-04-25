@@ -128,14 +128,14 @@ class GenerateTestsCommand extends Command
                 return;
             }
 
-            $originalNamespaceNodes = $this->nodeFinder->find($originalNodes, static fn (Node $node) => $node instanceof Node\Stmt\Namespace_ && $node->name);
+            $originalNamespaceNodes = $this->nodeFinder->find($originalNodes, static fn (Node $node): bool => $node instanceof Node\Stmt\Namespace_ && $node->name);
 
             /** @var Node\Stmt\Namespace_ $originalNamespaceNode */
             foreach ($originalNamespaceNodes as $originalNamespaceNode) {
                 $originalClassNamespace = $originalNamespaceNode->name->toString();
 
                 /** @var Class_[]|Trait_[] $originalClassNodes */
-                $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, static fn (Node $node) => ($node instanceof Class_ || $node instanceof Trait_) && $node->name);
+                $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, static fn (Node $node): bool => ($node instanceof Class_ || $node instanceof Trait_) && $node->name);
                 self::$statistics['scanned_classes'] += \count($originalClassNodes);
                 foreach ($originalClassNodes as $originalClassNode) {
                     // 准备基本信息
@@ -151,11 +151,11 @@ class GenerateTestsCommand extends Command
                             ->method(Str::{$this->option('method-format')}('test_'.Str::snake($node->name->name)))
                             ->makePublic()
                             ->getNode()
-                    )->setAttribute('isAdded', true), array_filter($originalClassNode->getMethods(), static fn (ClassMethod $node) => $node->isPublic() && ! $node->isAbstract() && $node->name->toString() !== '__construct'));
+                    )->setAttribute('isAdded', true), array_filter($originalClassNode->getMethods(), static fn (ClassMethod $node): bool => $node->isPublic() && ! $node->isAbstract() && $node->name->toString() !== '__construct'));
                     if ($isExistsTestClassFile = file_exists($testClassFile)) {
                         $originalTestClassMethodNames = array_filter(array_map(fn (ReflectionMethod $method) => Str::{$this->option('method-format')}($method->getName()), (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), static fn ($name) => Str::startsWith($name, 'test'));
 
-                        $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, static fn (ClassMethod $node) => ! \in_array($node->name->name, $originalTestClassMethodNames, true));
+                        $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, static fn (ClassMethod $node): bool => ! \in_array($node->name->name, $originalTestClassMethodNames, true));
                         if ($testClassAddedMethodNodes === []) {
                             continue;
                         }
