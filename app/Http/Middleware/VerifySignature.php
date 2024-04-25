@@ -29,8 +29,8 @@ class VerifySignature
     protected function validateParameters(Request $request, int $effectiveTime)
     {
         Validator::make($request->headers(), [
-            'signature' => 'required|string',
-            'nonce' => 'required|string|size:16',
+            'signature' => ['required', 'string'],
+            'nonce' => ['required', 'string', 'size:16'],
             'timestamp' => sprintf('required|int|max:%s|min:%s', $time = time() + 1, $time - $effectiveTime),
         ])->validate();
     }
