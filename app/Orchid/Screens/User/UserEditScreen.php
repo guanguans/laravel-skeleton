@@ -157,7 +157,7 @@ class UserEditScreen extends Screen
         ]);
 
         $permissions = collect($request->get('permissions'))
-            ->map(static fn ($value, $key) => [base64_decode($key) => $value])
+            ->map(static fn ($value, $key): array => [base64_decode($key) => $value])
             ->collapse()
             ->toArray();
 
