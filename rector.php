@@ -136,8 +136,8 @@ return RectorConfig::configure()
     ])
     ->withConfiguredRule(RectorLaravel\Rector\PropertyFetch\OptionalToNullsafeOperatorRector::class, [
     ])
-    // ->withConfiguredRule(RectorLaravel\Rector\StaticCall\RouteActionCallableRector::class, [
-    // ])
+    ->withConfiguredRule(RectorLaravel\Rector\StaticCall\RouteActionCallableRector::class, [
+    ])
     ->withConfiguredRule(RenameFunctionRector::class, [
         'test' => 'it',
     ])
