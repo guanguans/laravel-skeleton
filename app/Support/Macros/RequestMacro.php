@@ -24,12 +24,12 @@ class RequestMacro
 {
     public function userId(): callable
     {
-        return fn () => optional($this->user())->id;
+        return fn () => $this->user()?->id;
     }
 
     public function isAdmin(): callable
     {
-        return fn (): bool => (bool) optional($this->user())->is_admin;
+        return fn (): bool => (bool) $this->user()?->is_admin;
     }
 
     public static function isAdminDeveloper(): callable

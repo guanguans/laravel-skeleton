@@ -71,6 +71,6 @@ class RolePermissionLayout extends Rows
 
     private function getIndeterminateStatus($slug, $value): bool
     {
-        return optional($this->user)->hasAccess($slug) === true && $value === false;
+        return $this->user?->hasAccess($slug) === true && $value === false;
     }
 }

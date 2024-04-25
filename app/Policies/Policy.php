@@ -21,7 +21,7 @@ class Policy
 
     public function before(JWTUser $user): ?bool
     {
-        if (optional($user)->is_admin) {
+        if ($user?->is_admin) {
             return true;
         }
 
