@@ -16,6 +16,7 @@
         "alexandre-daubois/monolog-processor-collection": "^1.3",
         "anlutro/l4-settings": "^1.4",
         "appstract/laravel-opcache": "^4.0",
+        "arifhp86/laravel-clear-expired-cache-file": "^1.0",
         "asvae/laravel-api-tester": "^2.0",
         "aurorawebsoftware/asetting": "^1.0",
         "awobaz/compoships": "^2.3",

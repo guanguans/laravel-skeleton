@@ -16,6 +16,11 @@ parameters:
 			path: app/Support/Macros/BlueprintMacro.php
 
 		-
+			message: "#^Variable \\$taskException might not be defined\\.$#"
+			count: 1
+			path: app/Support/Macros/CommandMacro.php
+
+		-
 			message: "#^Call to protected method getRelationWithoutConstraints\\(\\) of class Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\.$#"
 			count: 1
 			path: app/Support/Macros/QueryBuilder/OrderByWithQueryBuilderMacro.php

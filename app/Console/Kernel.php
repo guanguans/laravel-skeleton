@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\ClearLogsCommand;
+use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Inspiring;
@@ -40,6 +41,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('model:prune', ['--model' => MonitoredScheduledTaskLogItem::class])->daily()->withoutOverlapping();
         $schedule->command('telescope:prune')->daily()->skip($this->app->isProduction())->withoutOverlapping();
         $schedule->command(ClearLogsCommand::class)->daily()->appendOutputTo($this->toOutputPath(ClearLogsCommand::class))->withoutOverlapping();
+        $schedule->command(ClearExpiredCommand::class)->daily()->appendOutputTo($this->toOutputPath(ClearExpiredCommand::class))->withoutOverlapping();
         $schedule->command('disposable:update')->weekly()->at('04:00');
         $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->everyMinute();
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();

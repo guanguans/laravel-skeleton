@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c186f03e03c091fd3807f513e596db36",
+    "content-hash": "06521318daa1e66f08f8460c5e07ef1e",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -1165,6 +1165,61 @@
                 "source": "https://github.com/appstract/laravel-opcache/tree/4.0.2"
             },
             "time": "2020-12-01T16:12:14+00:00"
+        },
+        {
+            "name": "arifhp86/laravel-clear-expired-cache-file",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arifhp86/laravel-clear-expired-cache-file.git",
+                "reference": "e7c67a00035c3664c519b0d3d0328cbc96d72bee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arifhp86/laravel-clear-expired-cache-file/zipball/e7c67a00035c3664c519b0d3d0328cbc96d72bee",
+                "reference": "e7c67a00035c3664c519b0d3d0328cbc96d72bee",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.5",
+                "php": "^7.0|^8.0",
+                "wilderborn/partyline": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Arifhp86\\ClearExpiredCacheFile\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Arifhp86\\ClearExpiredCacheFile\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arifur Rahman",
+                    "email": "arifhp86@gmail.com"
+                }
+            ],
+            "description": "Remove laravel expired cache file/folder",
+            "keywords": [
+                "cache",
+                "clear",
+                "expired",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/arifhp86/laravel-clear-expired-cache-file/issues",
+                "source": "https://github.com/arifhp86/laravel-clear-expired-cache-file/tree/v1.0.1"
+            },
+            "time": "2024-04-20T15:14:20+00:00"
         },
         {
             "name": "asvae/laravel-api-tester",
@@ -19440,6 +19495,53 @@
                 "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v2.1.0"
             },
             "time": "2023-04-15T19:07:00+00:00"
+        },
+        {
+            "name": "wilderborn/partyline",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wilderborn/partyline.git",
+                "reference": "74dcc591b5581c24e8be848e45ef5f59d8376c86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wilderborn/partyline/zipball/74dcc591b5581c24e8be848e45ef5f59d8376c86",
+                "reference": "74dcc591b5581c24e8be848e45ef5f59d8376c86",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wilderborn\\Partyline\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Partyline": "Wilderborn\\Partyline\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wilderborn\\Partyline\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jason Varga",
+                    "email": "jason@wilderborn.com"
+                }
+            ],
+            "description": "A Laravel 5 package to output to the console from outside of command classes",
+            "support": {
+                "issues": "https://github.com/wilderborn/partyline/issues",
+                "source": "https://github.com/wilderborn/partyline/tree/1.0.2"
+            },
+            "time": "2022-12-14T18:38:34+00:00"
         }
     ],
     "packages-dev": [
