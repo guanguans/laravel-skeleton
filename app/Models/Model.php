@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Traits\Macroable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 use Sushi\Sushi;
@@ -31,6 +32,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     // use Sushi;
 
     use FireableAttributes;
+    use Macroable;
     use Pipeable;
     use SerializeDate;
     use SoftDeletes;

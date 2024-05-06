@@ -17,6 +17,7 @@ use App\Support\Macros\CarbonMacro;
 use App\Support\Macros\CollectionMacro;
 use App\Support\Macros\CommandMacro;
 use App\Support\Macros\GrammarMacro;
+use App\Support\Macros\ModelMacro;
 use App\Support\Macros\MySqlGrammarMacro;
 use App\Support\Macros\RequestMacro;
 use App\Support\Macros\ResponseFactoryMacro;
@@ -285,6 +286,7 @@ class AppServiceProvider extends ServiceProvider
         Command::mixin($this->app->make(CommandMacro::class));
         Event::mixin($this->app->make(SchedulingEventMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
+        \App\Models\Model::mixin($this->app->make(ModelMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
         Request::mixin($this->app->make(RequestMacro::class));
         ResponseFactory::mixin($this->app->make(ResponseFactoryMacro::class));
