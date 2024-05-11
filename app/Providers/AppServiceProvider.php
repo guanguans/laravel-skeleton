@@ -165,6 +165,7 @@ class AppServiceProvider extends ServiceProvider
             // Paginator::defaultSimpleView('pagination::simple-bulma');
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
             // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+            // Sanctum::ignoreMigrations();
             Builder::defaultMorphKeyType('uuid');
             $this->registerMacros();
             $this->extendValidator();
