@@ -354,7 +354,7 @@ if (! function_exists('format_bytes')) {
 }
 
 if (! function_exists('bytes_to_bits')) {
-    function bytes_to_bits(int $bytes)
+    function bytes_to_bits(int $bytes): int
     {
         if ($bytes > 0) {
             return $bytes * 8;

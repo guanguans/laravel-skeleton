@@ -22,7 +22,7 @@ class ExampleCardsScreen extends Screen
     public function query(): iterable
     {
         return [
-            'user' => User::query()->firstOrFail(),
+            'user' => \Orchid\Platform\Models\User::query()->firstOrFail(),
         ];
     }
 

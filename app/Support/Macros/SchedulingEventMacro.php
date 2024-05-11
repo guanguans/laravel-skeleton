@@ -83,7 +83,7 @@ class SchedulingEventMacro
 
                             // artisan
                             if (str($this->command)->contains("'artisan'")) {
-                                $commands = (array) explode(' ', $this->command);
+                                $commands = explode(' ', $this->command);
 
                                 return $commands[array_search("'artisan'", $commands, true) + 1];
                             }
