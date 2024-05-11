@@ -414,7 +414,7 @@ class System
         $cpus = explode("\n", $cpustats);
 
         // Remove non-CPU lines
-        $cpus = array_filter($cpus, static fn ($cpu): int|false => preg_match('/^cpu[0-999]/', $cpu));
+        $cpus = array_filter($cpus, static fn ($cpu): false|int => preg_match('/^cpu[0-999]/', $cpu));
 
         foreach ($cpus as $cpu) {
             $cpu = explode(' ', $cpu);
@@ -484,7 +484,7 @@ class System
         $diskstats = explode("\n", $diskstats);
 
         // Remove excess spaces
-        $diskstats = array_map(static fn ($data): string|array|null => preg_replace('/\t+/', ' ', trim($data)), $diskstats);
+        $diskstats = array_map(static fn ($data): null|array|string => preg_replace('/\t+/', ' ', trim($data)), $diskstats);
 
         // Remove empty lines
         $diskstats = array_filter($diskstats, static fn ($data): bool => ! empty($data));

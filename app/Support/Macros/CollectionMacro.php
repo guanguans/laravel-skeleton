@@ -106,7 +106,7 @@ class CollectionMacro
 
     public function paginate(): callable
     {
-        return function ($perPage = 15, $pageName = 'page', $page = null, $total = null, $options = []): \Illuminate\Pagination\LengthAwarePaginator {
+        return function ($perPage = 15, $pageName = 'page', $page = null, $total = null, $options = []): LengthAwarePaginator {
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
 
             $items = $this->forPage($page, $perPage)->values();
@@ -124,7 +124,7 @@ class CollectionMacro
 
     public function simplePaginate(): callable
     {
-        return function ($perPage = 15, $pageName = 'page', $page = null, $options = []): \Illuminate\Pagination\Paginator {
+        return function ($perPage = 15, $pageName = 'page', $page = null, $options = []): Paginator {
             $page = $page ?: Paginator::resolveCurrentPage($pageName);
 
             $items = $this->slice(($page - 1) * $perPage)->take($perPage + 1);
