@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee8b17f2b22b4a80e628fe9b5ea72c38",
+    "content-hash": "287aa3ac950957215b12783bc3923906",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -23460,16 +23460,16 @@
         },
         {
             "name": "mortexa/laravel-arkitect",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smortexa/laravel-arkitect.git",
-                "reference": "0b8669e3441a53dbf2c018c6d4f67ee97331e55a"
+                "reference": "b9c598c96bc52853667839e35575a06bf2ff4c57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smortexa/laravel-arkitect/zipball/0b8669e3441a53dbf2c018c6d4f67ee97331e55a",
-                "reference": "0b8669e3441a53dbf2c018c6d4f67ee97331e55a",
+                "url": "https://api.github.com/repos/smortexa/laravel-arkitect/zipball/b9c598c96bc52853667839e35575a06bf2ff4c57",
+                "reference": "b9c598c96bc52853667839e35575a06bf2ff4c57",
                 "shasum": ""
             },
             "require": {
@@ -23509,9 +23509,9 @@
             "description": "Test and enforce architectural rules in your Laravel applications",
             "support": {
                 "issues": "https://github.com/smortexa/laravel-arkitect/issues",
-                "source": "https://github.com/smortexa/laravel-arkitect/tree/v0.7.0"
+                "source": "https://github.com/smortexa/laravel-arkitect/tree/v0.8.0"
             },
-            "time": "2023-09-27T06:08:33+00:00"
+            "time": "2024-04-25T18:49:07+00:00"
         },
         {
             "name": "myclabs/deep-copy",

@@ -148,7 +148,7 @@
         "laravel/sail": "^1.29",
         "laravel/telescope": "^5.0",
         "mockery/mockery": "^1.6",
-        "mortexa/laravel-arkitect": "^0.7",
+        "mortexa/laravel-arkitect": "^0.8",
         "nunomaduro/collision": "^7.10 || ^8.0",
         "orangehill/iseed": "^3.0",
         "php-static-analysis/rector-rule": "^0.2",
