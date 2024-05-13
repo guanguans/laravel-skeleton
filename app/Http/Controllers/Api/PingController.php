@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 class PingController extends Controller
 {
     /**
+     * @see \Illuminate\Routing\Controllers\HasMiddleware
+     */
+    public function middleware($middleware, array $options = [])
+    {
+        return parent::middleware($middleware, $options);
+    }
+
+    /**
      * ping - 示例接口
      *
      * @unauthenticated

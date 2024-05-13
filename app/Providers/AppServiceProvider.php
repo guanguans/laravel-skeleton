@@ -6,7 +6,9 @@ namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
 use App\Models\PersonalAccessToken;
+use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
+use App\Policies\UserPolicy;
 use App\Rules\Rule;
 use App\Support\Attributes\After;
 use App\Support\Attributes\Before;
@@ -166,6 +168,7 @@ class AppServiceProvider extends ServiceProvider
             // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
             // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
             // Sanctum::ignoreMigrations();
+            // Gate::policy(User::class, UserPolicy::class);
             Builder::defaultMorphKeyType('uuid');
             $this->registerMacros();
             $this->extendValidator();
