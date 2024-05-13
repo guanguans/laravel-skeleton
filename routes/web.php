@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @routeNamespace("App\Http\Controllers")
+ *
+ * @routePrefix("")
+ */
+
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
