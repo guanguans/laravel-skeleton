@@ -26,7 +26,7 @@ class DevelopServiceProvider extends AggregateServiceProvider
         EnvyServiceProvider::class,
         IdeHelperServiceProvider::class,
         IgnitionServiceProvider::class,
-        LaravelSchemaRulesServiceProvider::class,
+        // LaravelSchemaRulesServiceProvider::class,
         MigrationsGeneratorServiceProvider::class,
         SailServiceProvider::class,
         \Laravel\Telescope\TelescopeServiceProvider::class,

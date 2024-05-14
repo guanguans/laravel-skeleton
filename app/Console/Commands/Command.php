@@ -8,5 +8,5 @@ use Cerbero\CommandValidator\ValidatesInput;
 
 abstract class Command extends \Illuminate\Console\Command
 {
-    use ValidatesInput;
+    // use ValidatesInput;
 }

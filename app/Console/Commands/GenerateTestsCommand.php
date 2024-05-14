@@ -103,7 +103,7 @@ class GenerateTestsCommand extends Command
 
     private $classUpdatingVisitor;
 
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return ! $this->laravel->isProduction();
     }

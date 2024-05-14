@@ -80,7 +80,7 @@ class FindDumpStatementCommand extends Command
     /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
     private $resourceUsageFormatter;
 
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return ! $this->laravel->isProduction();
     }

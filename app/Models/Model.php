@@ -31,7 +31,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     // use QueryCacheable;
     // use Sushi;
 
-    use FireableAttributes;
+    // use FireableAttributes;
     use Macroable;
     use Pipeable;
     use SerializeDate;

@@ -42,7 +42,7 @@ class ParsePHPFileToASTCommand extends Command
     /** @var \PhpParser\PrettyPrinter\Standard */
     private $prettyPrinter;
 
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return ! $this->laravel->isProduction();
     }
