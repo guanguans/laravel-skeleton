@@ -11,20 +11,23 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Sleep;
-use Illuminate\Support\Str;
 use Spatie\Packagist\PackagistClient;
 use Spatie\Packagist\PackagistUrlGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ShowRequiresCommand extends Command
+class ShowUnsupportedRequiresCommand extends Command
 {
-    protected $signature = 'show:requires';
+    protected $signature = 'show-unsupported-requires';
 
-    protected $description = 'Command description';
+    protected $description = 'Show unsupported requires.';
 
     private PackagistClient $packagist;
 
+    /**
+     * @noinspection ForgottenDebugOutputInspection
+     * @noinspection DebugFunctionUsageInspection
+     */
     public function handle(): void
     {
         $jsonTree = Process::run('composer show --format=json --installed --tree')
@@ -32,15 +35,12 @@ class ShowRequiresCommand extends Command
             ->output();
 
         collect(Collection::json($jsonTree)->get('installed'))
-            ->reject(static fn (array $package) => Str::is(
-                [
-                    // ...
-                ],
-                $package['name']
-            ))
+            ->reject(static fn (array $package) => str($package['name'])->is([
+                // ...
+            ]))
             ->filter(
                 fn (array $package): bool => collect($package['requires'] ?? [])
-                    ->filter(fn ($package): bool => $this->is($package['name'], $package['version']))
+                    ->filter(fn ($package): bool => $this->isUnsupported($package['name'], $package['version']))
                     ->isNotEmpty()
             )
             ->pluck('name')
@@ -58,9 +58,11 @@ class ShowRequiresCommand extends Command
                     );
 
                     return collect($latestVersion['require'])
-                        ->filter(fn (string $version, string $name): bool => $this->is($name, $version))
+                        ->filter(fn (string $version, string $name): bool => $this->isUnsupported($name, $version))
                         ->isNotEmpty();
                 } catch (\Throwable) {
+                    dump($name);
+
                     return true;
                 }
             })
@@ -79,9 +81,9 @@ class ShowRequiresCommand extends Command
         );
     }
 
-    private function is(string $name, string $version): bool
+    private function isUnsupported(string $name, string $version): bool
     {
-        if (! Str::is(['laravel/framework', 'illuminate/*'], $name)) {
+        if (! str($name)->is(['laravel/framework', 'illuminate/*'])) {
             return false;
         }
 
@@ -90,8 +92,11 @@ class ShowRequiresCommand extends Command
             return false;
         }
 
-        $maxVersion = $version->explode('|')->filter()->map(static fn (string $version): string => trim($version, " \n\r\t\v\0<=>^~v!"))->max();
+        $maxVersion = $version->explode('|')
+            ->filter()
+            ->map(static fn (string $version): string => trim($version, " \n\r\t\v\0<=>^~v!"))
+            ->max();
 
-        return Comparator::lessThan($maxVersion, '11');
+        return Comparator::lessThan($maxVersion, '11.0');
     }
 }
