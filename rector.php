@@ -38,6 +38,7 @@ use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
 use Rector\Renaming\Rector\String_\RenameStringRector;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
+use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
@@ -196,6 +197,9 @@ return RectorConfig::configure()
         ],
         RemoveAlwaysTrueIfConditionRector::class => [
             __DIR__.'/app/Support/Discover.php',
+        ],
+        RemoveDumpDataDeadCodeRector::class => [
+            __DIR__.'/app/Console/Commands/ShowUnsupportedRequiresCommand.php',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
             __DIR__.'/app/Support/helpers.php',

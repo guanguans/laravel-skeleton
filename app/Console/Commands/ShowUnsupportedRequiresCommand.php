@@ -8,7 +8,9 @@ use Composer\Semver\Comparator;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Sleep;
 use Spatie\Packagist\PackagistClient;
@@ -27,12 +29,16 @@ class ShowUnsupportedRequiresCommand extends Command
     /**
      * @noinspection ForgottenDebugOutputInspection
      * @noinspection DebugFunctionUsageInspection
+     *
+     * @throws FileNotFoundException
      */
     public function handle(): void
     {
         $jsonTree = Process::run('composer show --format=json --installed --tree')
             ->throw()
             ->output();
+
+        $requires = collect(File::json(base_path('composer.json')));
 
         collect(Collection::json($jsonTree)->get('installed'))
             ->reject(static fn (array $package) => str($package['name'])->is([
@@ -53,7 +59,7 @@ class ShowUnsupportedRequiresCommand extends Command
                     $package = $this->packagist->getPackage($name);
 
                     $latestVersion = collect($package['package']['versions'])->first(
-                        static fn ($package): bool => ! str($package['version'])->contains('dev'),
+                        static fn (array $package): bool => ! str($package['version'])->contains('dev'),
                         []
                     );
 
@@ -67,7 +73,19 @@ class ShowUnsupportedRequiresCommand extends Command
                 }
             })
             ->dump()
-            ->tap(static fn (Collection $packages) => str($packages->implode(' '))->dump());
+            ->tap(static fn (Collection $packages) => str($packages->implode(' '))->dump())
+            ->groupBy(static function (string $name) use ($requires): string {
+                if (\array_key_exists($name, $requires->get('require'))) {
+                    return 'require';
+                }
+
+                if (\array_key_exists($name, $requires->get('require-dev'))) {
+                    return 'require-dev';
+                }
+
+                return 'indirect';
+            })
+            ->each(static fn (Collection $packages) => str($packages->dump()->implode(' '))->dump());
     }
 
     /**
@@ -94,9 +112,14 @@ class ShowUnsupportedRequiresCommand extends Command
 
         $maxVersion = $version->explode('|')
             ->filter()
-            ->map(static fn (string $version): string => trim($version, " \n\r\t\v\0<=>^~v!"))
+            ->map(
+                static fn (string $version): ?string => str($version)
+                    ->trim(" \n\r\t\v\0<=>^~v!.*")
+                    ->explode('.')
+                    ->first()
+            )
             ->max();
 
-        return Comparator::lessThan($maxVersion, '11.0');
+        return Comparator::lessThan($maxVersion, '11');
     }
 }
