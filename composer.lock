@@ -22094,16 +22094,16 @@
         },
         {
             "name": "laravel-lang/actions",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/actions.git",
-                "reference": "363e07c87d9d78470e27534c4b7593f41388f711"
+                "reference": "aed921f3991d2c84f9e575ed80534c068db9602b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/363e07c87d9d78470e27534c4b7593f41388f711",
-                "reference": "363e07c87d9d78470e27534c4b7593f41388f711",
+                "url": "https://api.github.com/repos/Laravel-Lang/actions/zipball/aed921f3991d2c84f9e575ed80534c068db9602b",
+                "reference": "aed921f3991d2c84f9e575ed80534c068db9602b",
                 "shasum": ""
             },
             "require": {
@@ -22155,22 +22155,22 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/actions/issues",
-                "source": "https://github.com/Laravel-Lang/actions/tree/1.8.1"
+                "source": "https://github.com/Laravel-Lang/actions/tree/1.8.2"
             },
-            "time": "2024-05-06T08:48:33+00:00"
+            "time": "2024-05-14T06:56:27+00:00"
         },
         {
             "name": "laravel-lang/attributes",
-            "version": "2.10.4",
+            "version": "2.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/attributes.git",
-                "reference": "e008f24e75fd52f2e4748ebb16c184bd40eb19e9"
+                "reference": "01d92b752802062c533efc2e49d608702a8644f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/e008f24e75fd52f2e4748ebb16c184bd40eb19e9",
-                "reference": "e008f24e75fd52f2e4748ebb16c184bd40eb19e9",
+                "url": "https://api.github.com/repos/Laravel-Lang/attributes/zipball/01d92b752802062c533efc2e49d608702a8644f4",
+                "reference": "01d92b752802062c533efc2e49d608702a8644f4",
                 "shasum": ""
             },
             "require": {
@@ -22224,9 +22224,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/attributes/issues",
-                "source": "https://github.com/Laravel-Lang/attributes/tree/2.10.4"
+                "source": "https://github.com/Laravel-Lang/attributes/tree/2.10.5"
             },
-            "time": "2024-05-06T07:00:28+00:00"
+            "time": "2024-05-13T15:52:47+00:00"
         },
         {
             "name": "laravel-lang/common",
@@ -22313,16 +22313,16 @@
         },
         {
             "name": "laravel-lang/http-statuses",
-            "version": "3.8.2",
+            "version": "3.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/http-statuses.git",
-                "reference": "b408ea74292df2e4fbec2be93858a3e697189b29"
+                "reference": "2f19b67fcdb2134804b0b8ee399f5abab4720d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/http-statuses/zipball/b408ea74292df2e4fbec2be93858a3e697189b29",
-                "reference": "b408ea74292df2e4fbec2be93858a3e697189b29",
+                "url": "https://api.github.com/repos/Laravel-Lang/http-statuses/zipball/2f19b67fcdb2134804b0b8ee399f5abab4720d9a",
+                "reference": "2f19b67fcdb2134804b0b8ee399f5abab4720d9a",
                 "shasum": ""
             },
             "require": {
@@ -22374,9 +22374,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/http-statuses/issues",
-                "source": "https://github.com/Laravel-Lang/http-statuses/tree/3.8.2"
+                "source": "https://github.com/Laravel-Lang/http-statuses/tree/3.8.3"
             },
-            "time": "2024-03-11T01:33:17+00:00"
+            "time": "2024-04-22T14:47:25+00:00"
         },
         {
             "name": "laravel-lang/json-fallback",
@@ -24917,12 +24917,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "6bdc6b064ecc2d47fd9aad5f3dce20f2a7dfcd64"
+                "reference": "9e4c9c09230934de3ccbff68623cab7de1b0e80b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6bdc6b064ecc2d47fd9aad5f3dce20f2a7dfcd64",
-                "reference": "6bdc6b064ecc2d47fd9aad5f3dce20f2a7dfcd64",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9e4c9c09230934de3ccbff68623cab7de1b0e80b",
+                "reference": "9e4c9c09230934de3ccbff68623cab7de1b0e80b",
                 "shasum": ""
             },
             "conflict": {
@@ -25245,7 +25245,7 @@
                 "magneto/core": "<1.9.4.4-dev",
                 "maikuolan/phpmussel": ">=1,<1.6",
                 "mainwp/mainwp": "<=4.4.3.3",
-                "mantisbt/mantisbt": "<2.26.1",
+                "mantisbt/mantisbt": "<2.26.2",
                 "marcwillmann/turn": "<0.3.3",
                 "matyhtf/framework": "<3.0.6",
                 "mautic/core": "<4.4.12|>=5.0.0.0-alpha,<5.0.4",
@@ -25466,6 +25466,7 @@
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
                 "spatie/browsershot": "<3.57.4",
+                "spatie/image-optimizer": "<1.7.3",
                 "spipu/html2pdf": "<5.2.8",
                 "spoon/library": "<1.4.1",
                 "spoonity/tcpdf": "<6.2.22",
@@ -25543,7 +25544,7 @@
                 "tinymighty/wiki-seo": "<1.2.2",
                 "titon/framework": "<9.9.99",
                 "tobiasbg/tablepress": "<=2.0.0.0-RC1",
-                "topthink/framework": "<6.0.14",
+                "topthink/framework": "<6.0.17|>=6.1,<6.1.5|>=8,<8.0.4",
                 "topthink/think": "<=6.1.1",
                 "topthink/thinkphp": "<=3.2.3",
                 "torrentpier/torrentpier": "<=2.4.1",
@@ -25702,7 +25703,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-10T22:04:19+00:00"
+            "time": "2024-05-13T21:04:21+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
@@ -27215,16 +27216,16 @@
         },
         {
             "name": "thedoctor0/laravel-factory-generator",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDoctor0/laravel-factory-generator.git",
-                "reference": "4281cc073161b01874be3a825233580382cbba45"
+                "reference": "fed9260ab27522e3630bc379a14786b1880fa76d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDoctor0/laravel-factory-generator/zipball/4281cc073161b01874be3a825233580382cbba45",
-                "reference": "4281cc073161b01874be3a825233580382cbba45",
+                "url": "https://api.github.com/repos/TheDoctor0/laravel-factory-generator/zipball/fed9260ab27522e3630bc379a14786b1880fa76d",
+                "reference": "fed9260ab27522e3630bc379a14786b1880fa76d",
                 "shasum": ""
             },
             "require": {
@@ -27260,7 +27261,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TheDoctor0/laravel-factory-generator/issues",
-                "source": "https://github.com/TheDoctor0/laravel-factory-generator/tree/1.4.2"
+                "source": "https://github.com/TheDoctor0/laravel-factory-generator/tree/1.4.3"
             },
             "funding": [
                 {
@@ -27272,7 +27273,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-30T10:30:29+00:00"
+            "time": "2024-05-14T06:51:07+00:00"
         },
         {
             "name": "theseer/tokenizer",
