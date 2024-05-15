@@ -109,6 +109,7 @@
         "bennett-treptow/laravel-migration-generator": "^4.4",
         "buggregator/trap": "^1.6",
         "captainhook/captainhook": "^5.23",
+        "captainhook/hook-installer": "^1.0",
         "coduo/php-matcher": "^6.0",
         "deployer/deployer": "^7.4",
         "dragon-code/benchmark": "^3.0",
@@ -172,6 +173,7 @@
     },
     "config": {
         "allow-plugins": {
+            "captainhook/hook-installer": true,
             "ergebnis/composer-normalize": true,
             "pestphp/pest-plugin": true,
             "php-http/discovery": true,
@@ -221,15 +223,11 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "@cghooks add --ignore-lock",
-            "@cghooks update"
-        ],
+        "post-install-cmd": [],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
             "@php artisan ide-helper:generate --ansi -v",
-            "@php artisan ide-helper:meta --ansi -v",
-            "@cghooks update"
+            "@php artisan ide-helper:meta --ansi -v"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

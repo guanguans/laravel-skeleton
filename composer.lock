@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05b48517ca7db22c3dcc5abd90be12f1",
+    "content-hash": "0ed0716e60d2c219d33c68c50d4db0b2",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -17797,6 +17797,53 @@
                 }
             ],
             "time": "2024-04-12T10:39:21+00:00"
+        },
+        {
+            "name": "captainhook/hook-installer",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/captainhookphp/hook-installer.git",
+                "reference": "3308a9152727af4e3d1c7b63ca219d6938b702b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/captainhookphp/hook-installer/zipball/3308a9152727af4e3d1c7b63ca219d6938b702b8",
+                "reference": "3308a9152727af4e3d1c7b63ca219d6938b702b8",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1|^2.0",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "composer/composer": "*"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "CaptainHook\\HookInstaller\\ComposerPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "CaptainHook\\HookInstaller\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Feldmann",
+                    "email": "sf@sebastian-feldmann.info"
+                }
+            ],
+            "description": "Composer Plugin that makes everyone activate the CaptainHook git hooks locally",
+            "support": {
+                "issues": "https://github.com/captainhookphp/hook-installer/issues",
+                "source": "https://github.com/captainhookphp/hook-installer/tree/1.0.3"
+            },
+            "time": "2024-03-21T13:39:59+00:00"
         },
         {
             "name": "captainhook/secrets",
