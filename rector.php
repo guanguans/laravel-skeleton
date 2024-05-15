@@ -59,11 +59,11 @@ return RectorConfig::configure()
     // ->withDeadCodeLevel(42)
     ->withTypeCoverageLevel(23)
     // ->withFluentCallNewLine()
-    ->withPhpSets(php81: true)
+    ->withPhpSets(php82: true)
     ->withPreparedSets(deadCode: true, codeQuality: true, codingStyle: true, instanceOf: true)
     ->withSets([
-        DowngradeLevelSetList::DOWN_TO_PHP_81,
-        LaravelSetList::LARAVEL_100,
+        DowngradeLevelSetList::DOWN_TO_PHP_82,
+        LaravelSetList::LARAVEL_110,
         // LaravelSetList::LARAVEL_STATIC_TO_INJECTION,
         LaravelSetList::LARAVEL_CODE_QUALITY,
         LaravelSetList::LARAVEL_ARRAY_STR_FUNCTION_TO_STATIC_CALL,
@@ -80,7 +80,7 @@ return RectorConfig::configure()
         RectorLaravel\Rector\Class_\AddExtendsAnnotationToModelFactoriesRector::class,
         RectorLaravel\Rector\Class_\AddMockConsoleOutputFalseToConsoleTestsRector::class,
         RectorLaravel\Rector\Class_\AnonymousMigrationsRector::class,
-        // RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector::class,
+        RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector::class,
         RectorLaravel\Rector\Class_\PropertyDeferToDeferrableProviderToRector::class,
         RectorLaravel\Rector\Class_\RemoveModelPropertyFromFactoriesRector::class,
         // // RectorLaravel\Rector\Class_\ReplaceExpectsMethodsInTestsRector::class,
