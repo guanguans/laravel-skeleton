@@ -38,15 +38,8 @@
         "actions": []
     },
     "post-merge": {
-        "enabled": true,
-        "actions": [
-            {
-                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
-            },
-            {
-                "action": "composer checks"
-            }
-        ]
+        "enabled": false,
+        "actions": []
     },
     "post-checkout": {
         "enabled": false,
@@ -57,7 +50,14 @@
         "actions": []
     },
     "post-change": {
-        "enabled": false,
-        "actions": []
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
+            },
+            {
+                "action": "composer checks"
+            }
+        ]
     }
 }
