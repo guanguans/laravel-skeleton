@@ -108,6 +108,7 @@
         "barryvdh/laravel-ide-helper": "^3.0",
         "bennett-treptow/laravel-migration-generator": "^4.4",
         "buggregator/trap": "^1.6",
+        "captainhook/captainhook": "^5.23",
         "coduo/php-matcher": "^6.0",
         "deployer/deployer": "^7.4",
         "dragon-code/benchmark": "^3.0",
@@ -243,6 +244,9 @@
         "ai-commit": "@php ./vendor/bin/ai-commit commit --generator=bito_cli --ansi",
         "ai-commit-no-verify": "@ai-commit --commit-options=--no-verify",
         "arkitect": "@php artisan test:arkitect --ansi -v",
+        "captainhook": "@php ./vendor/bin/captainhook --ansi -v",
+        "captainhook-configure": "@captainhook configure",
+        "captainhook-install": "@captainhook install",
         "cghooks": "@php ./vendor/bin/cghooks --ansi -v",
         "cghooks-ignore": "[ ! -f \"./vendor/bin/cghooks\" ] && exit 0 || php ./vendor/bin/cghooks --ansi -v",
         "checks": [

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phive xmlns="https://phar.io/phive">
+  <phar name="captainhook" version="^5.23.0" installed="5.23.0" location="./tools/captainhook" copy="false"/>
+</phive>
