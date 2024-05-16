@@ -12885,16 +12885,16 @@
         },
         {
             "name": "spatie/laravel-short-schedule",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-short-schedule.git",
-                "reference": "625de61561d910d113a374a595ade24684f9d5a0"
+                "reference": "5d18a8d006a3c3083f3db7c2babeb64a2b58ccad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-short-schedule/zipball/625de61561d910d113a374a595ade24684f9d5a0",
-                "reference": "625de61561d910d113a374a595ade24684f9d5a0",
+                "url": "https://api.github.com/repos/spatie/laravel-short-schedule/zipball/5d18a8d006a3c3083f3db7c2babeb64a2b58ccad",
+                "reference": "5d18a8d006a3c3083f3db7c2babeb64a2b58ccad",
                 "shasum": ""
             },
             "require": {
@@ -12946,7 +12946,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-short-schedule/issues",
-                "source": "https://github.com/spatie/laravel-short-schedule/tree/1.6.0"
+                "source": "https://github.com/spatie/laravel-short-schedule/tree/1.6.1"
             },
             "funding": [
                 {
@@ -12958,7 +12958,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-27T15:55:08+00:00"
+            "time": "2024-05-16T11:06:04+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",
