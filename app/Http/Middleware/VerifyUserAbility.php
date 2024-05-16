@@ -22,9 +22,11 @@ class VerifyUserAbility
      */
     public function handle(Request $request, Closure $next, string $ability, string $message = '')
     {
-        if ($this->auth->guest() || ! $this->auth->user()?->ability($ability)) {
-            abort(403, $message ?: '你没有权限执行该操作');
-        }
+        abort_if(
+            $this->auth->guest() || ! $this->auth->user()?->ability($ability),
+            403,
+            $message ?: '你没有权限执行该操作'
+        );
 
         return $next($request);
     }

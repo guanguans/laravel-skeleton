@@ -88,7 +88,7 @@ class ElasticsearchManager extends Manager
                     \is_string($index) and $environment = $index;
                     \is_array($host) and isset($host['env']) and $environment = $host['env'];
 
-                    return isset($environment) && $environment !== $this->config->get('app.env');
+                    return isset($environment) && ! $this->container->environment($environment);
                 })
                 ->all();
         }
