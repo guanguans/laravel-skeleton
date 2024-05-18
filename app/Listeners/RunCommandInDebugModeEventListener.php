@@ -23,9 +23,7 @@ class RunCommandInDebugModeEventListener
     {
         $command = $event->getCommand();
 
-        if (false === $command instanceof Command) {
-            throw new \RuntimeException('The command must be an instance of '.Command::class);
-        }
+        throw_if(false === $command instanceof Command, \RuntimeException::class, 'The command must be an instance of '.Command::class);
 
         if ($command instanceof HelpCommand) {
             $command = $this->getActualCommandFromHelpCommand($command);
@@ -71,9 +69,7 @@ class RunCommandInDebugModeEventListener
         $property = $reflection->getProperty('command');
         $actualCommand = $property->getValue($command);
 
-        if (false === $actualCommand instanceof Command) {
-            throw new \RuntimeException('The command must be an instance of '.Command::class);
-        }
+        throw_if(false === $actualCommand instanceof Command, \RuntimeException::class, 'The command must be an instance of '.Command::class);
 
         return $actualCommand;
     }
@@ -100,9 +96,7 @@ class RunCommandInDebugModeEventListener
         $tokensProperty = $reflection->getProperty('tokens');
         $tokens = $tokensProperty->getValue($input);
 
-        if (false === \is_array($tokens)) {
-            throw new \RuntimeException('Impossible to get the arguments and options from the command.');
-        }
+        throw_if(false === \is_array($tokens), \RuntimeException::class, 'Impossible to get the arguments and options from the command.');
 
         return $tokens;
     }
@@ -110,14 +104,10 @@ class RunCommandInDebugModeEventListener
     private function buildCommandWithXDebugActivated(): string
     {
         $serverArgv = $_SERVER['argv'] ?? null;
-        if (null === $serverArgv) {
-            throw new \RuntimeException('Impossible to get the arguments and options from the command: the command cannot be relaunched with xDebug.');
-        }
+        throw_if(null === $serverArgv, \RuntimeException::class, 'Impossible to get the arguments and options from the command: the command cannot be relaunched with xDebug.');
 
         $script = $_SERVER['SCRIPT_NAME'] ?? null;
-        if (null === $script) {
-            throw new \RuntimeException('Impossible to get the name of the command: the command cannot be relaunched with xDebug.');
-        }
+        throw_if(null === $script, \RuntimeException::class, 'Impossible to get the name of the command: the command cannot be relaunched with xDebug.');
 
         $phpBinary = PHP_BINARY;
         $args = implode(' ', \array_slice($serverArgv, 1));

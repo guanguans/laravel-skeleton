@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
+use App\Listeners\RunCommandInDebugModeEventListener;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
@@ -34,6 +35,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Event;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
@@ -83,7 +85,13 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Spatie\StructureDiscoverer\Data\DiscoveredClass;
 use Stillat\BladeDirectives\Support\Facades\Directive;
+use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * @property EventDispatcherInterface $symfonyDispatcher
+ */
 class AppServiceProvider extends ServiceProvider
 {
     use Conditionable {
@@ -227,6 +235,17 @@ class AppServiceProvider extends ServiceProvider
                 // if ($user->hasPermission('root')) {
                 //     return true;
                 // }
+            });
+
+            $this->app->booted(function (): void {
+                (function (): void {
+                    $this->symfonyDispatcher->addListener(
+                        ConsoleEvents::COMMAND,
+                        static function (ConsoleCommandEvent $event): void {
+                            (new RunCommandInDebugModeEventListener)->configure($event);
+                        }
+                    );
+                })->call($this->app->make(Kernel::class));
             });
         });
 
