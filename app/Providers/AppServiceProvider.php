@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
-use App\Listeners\RunCommandInDebugModeEventListener;
+use App\Listeners\RunCommandInDebugListener;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
@@ -86,7 +86,6 @@ use Psr\Container\NotFoundExceptionInterface;
 use Spatie\StructureDiscoverer\Data\DiscoveredClass;
 use Stillat\BladeDirectives\Support\Facades\Directive;
 use Symfony\Component\Console\ConsoleEvents;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -239,12 +238,7 @@ class AppServiceProvider extends ServiceProvider
 
             $this->app->booted(function (): void {
                 (function (): void {
-                    $this->symfonyDispatcher->addListener(
-                        ConsoleEvents::COMMAND,
-                        static function (ConsoleCommandEvent $event): void {
-                            (new RunCommandInDebugModeEventListener)->configure($event);
-                        }
-                    );
+                    $this->symfonyDispatcher->addListener(ConsoleEvents::COMMAND, new RunCommandInDebugListener);
                 })->call($this->app->make(Kernel::class));
             });
         });

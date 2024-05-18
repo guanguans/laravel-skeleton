@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
+use Illuminate\Support\Facades\Process;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\HelpCommand;
 use Symfony\Component\Console\ConsoleEvents;
@@ -16,10 +17,13 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
  * @see https://dev.to/serendipityhq/how-to-debug-any-symfony-command-simply-passing-x-214o
  * @see https://symfony.com/doc/current/components/console/events.html
  */
-#[AsEventListener(ConsoleEvents::COMMAND, 'configure')]
-class RunCommandInDebugModeEventListener
+#[AsEventListener(ConsoleEvents::COMMAND, '__invoke')]
+class RunCommandInDebugListener
 {
-    public function configure(ConsoleCommandEvent $event): void
+    /**
+     * @throws \Throwable
+     */
+    public function __invoke(ConsoleCommandEvent $event): void
     {
         $command = $event->getCommand();
 
@@ -41,28 +45,28 @@ class RunCommandInDebugModeEventListener
         }
 
         $input = $event->getInput();
-        if (false === $input instanceof ArgvInput) {
-            return;
-        }
-
-        if (false === $this->isInDebugMode($input)) {
-            return;
-        }
-
-        if ('1' === getenv('XDEBUG_SESSION')) {
+        if (
+            false === $input instanceof ArgvInput
+            || false === $this->isInDebugMode($input)
+            || '1' === getenv('XDEBUG_SESSION')
+        ) {
             return;
         }
 
         $output = $event->getOutput();
         $output->writeln('<comment>Relaunching the command with xDebug...</comment>');
 
-        $cmd = $this->buildCommandWithXDebugActivated();
+        $processResult = Process::forever()->run(
+            $this->buildCommandWithXDebugActivated(),
+            static fn (string $type, string $buffer) => $output->write($buffer)
+        );
 
-        passthru($cmd);
-
-        exit;
+        exit($processResult->exitCode());
     }
 
+    /**
+     * @throws \Throwable
+     */
     private function getActualCommandFromHelpCommand(HelpCommand $command): Command
     {
         $reflection = new \ReflectionClass($command);
@@ -74,6 +78,9 @@ class RunCommandInDebugModeEventListener
         return $actualCommand;
     }
 
+    /**
+     * @throws \Throwable
+     */
     private function isInDebugMode(ArgvInput $input): bool
     {
         $tokens = $this->getTokensFromArgvInput($input);
@@ -89,6 +96,8 @@ class RunCommandInDebugModeEventListener
 
     /**
      * @return array<string>
+     *
+     * @throws \Throwable
      */
     private function getTokensFromArgvInput(ArgvInput $input): array
     {
@@ -101,6 +110,9 @@ class RunCommandInDebugModeEventListener
         return $tokens;
     }
 
+    /**
+     * @noinspection GlobalVariableUsageInspection
+     */
     private function buildCommandWithXDebugActivated(): string
     {
         $serverArgv = $_SERVER['argv'] ?? null;
@@ -112,6 +124,6 @@ class RunCommandInDebugModeEventListener
         $phpBinary = PHP_BINARY;
         $args = implode(' ', \array_slice($serverArgv, 1));
 
-        return "XDEBUG_SESSION=1 XDEBUG_MODE=debug XDEBUG_ACTIVATED=1 {$phpBinary} {$script} {$args}";
+        return "XDEBUG_SESSION=1 XDEBUG_MODE=debug XDEBUG_ACTIVATED=1 $phpBinary $script $args --ansi";
     }
 }
