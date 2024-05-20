@@ -45,6 +45,7 @@ class RunCommandInDebugModeListener
         if (
             $command instanceof HelpCommand
             || ! $input instanceof ArgvInput
+            || ! config('app.debug')
             || ! $this->isInDebugMode($input)
             || '1' === getenv('XDEBUG_SESSION')
         ) {
