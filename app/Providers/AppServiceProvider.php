@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
-use App\Listeners\RunCommandInDebugListener;
+use App\Listeners\RunCommandInDebugModeListener;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
@@ -237,9 +237,10 @@ class AppServiceProvider extends ServiceProvider
             });
 
             $this->app->booted(function (): void {
-                (function (): void {
-                    $this->symfonyDispatcher->addListener(ConsoleEvents::COMMAND, new RunCommandInDebugListener);
-                })->call($this->app->make(Kernel::class));
+                (fn () => $this->symfonyDispatcher->addListener(
+                    ConsoleEvents::COMMAND,
+                    new RunCommandInDebugModeListener
+                ))->call($this->app->make(Kernel::class));
             });
         });
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
-use Illuminate\Support\Facades\Process;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\HelpCommand;
 use Symfony\Component\Console\ConsoleEvents;
@@ -12,22 +11,23 @@ use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+use Symfony\Component\Process\PhpExecutableFinder;
+use Symfony\Component\Process\Process;
 
 /**
  * @see https://dev.to/serendipityhq/how-to-debug-any-symfony-command-simply-passing-x-214o
  * @see https://symfony.com/doc/current/components/console/events.html
  */
-#[AsEventListener(ConsoleEvents::COMMAND, '__invoke')]
-class RunCommandInDebugListener
+#[AsEventListener(ConsoleEvents::COMMAND, 'configure')]
+class RunCommandInDebugModeListener
 {
-    /**
-     * @throws \Throwable
-     */
     public function __invoke(ConsoleCommandEvent $event): void
     {
         $command = $event->getCommand();
 
-        throw_if(false === $command instanceof Command, \RuntimeException::class, 'The command must be an instance of '.Command::class);
+        if (! $command instanceof Command) {
+            throw new \RuntimeException(sprintf('The command must be an instance of %s', Command::class));
+        }
 
         if ($command instanceof HelpCommand) {
             $command = $this->getActualCommandFromHelpCommand($command);
@@ -40,14 +40,12 @@ class RunCommandInDebugListener
             description: 'If passed, the command is re-run setting env variables required by xDebug.',
         );
 
-        if ($command instanceof HelpCommand) {
-            return;
-        }
-
         $input = $event->getInput();
+
         if (
-            false === $input instanceof ArgvInput
-            || false === $this->isInDebugMode($input)
+            $command instanceof HelpCommand
+            || ! $input instanceof ArgvInput
+            || ! $this->isInDebugMode($input)
             || '1' === getenv('XDEBUG_SESSION')
         ) {
             return;
@@ -56,31 +54,31 @@ class RunCommandInDebugListener
         $output = $event->getOutput();
         $output->writeln('<comment>Relaunching the command with xDebug...</comment>');
 
-        $processResult = Process::forever()->run(
-            $this->buildCommandWithXDebugActivated(),
-            static fn (string $type, string $buffer) => $output->write($buffer)
-        );
+        $exitCode = (new Process($this->buildCommandWithXDebugActivated()))
+            ->setEnv([
+                'XDEBUG_SESSION' => '1',
+                'XDEBUG_MODE' => 'debug',
+                'XDEBUG_ACTIVATED' => '1',
+            ])
+            ->setTimeout(null)
+            ->run(static fn (string $type, string $buffer) => $output->write($buffer));
 
-        exit($processResult->exitCode());
+        exit($exitCode);
     }
 
-    /**
-     * @throws \Throwable
-     */
     private function getActualCommandFromHelpCommand(HelpCommand $command): Command
     {
         $reflection = new \ReflectionClass($command);
         $property = $reflection->getProperty('command');
         $actualCommand = $property->getValue($command);
 
-        throw_if(false === $actualCommand instanceof Command, \RuntimeException::class, 'The command must be an instance of '.Command::class);
+        if (! $actualCommand instanceof Command) {
+            throw new \RuntimeException(sprintf('The command must be an instance of %s', Command::class));
+        }
 
         return $actualCommand;
     }
 
-    /**
-     * @throws \Throwable
-     */
     private function isInDebugMode(ArgvInput $input): bool
     {
         $tokens = $this->getTokensFromArgvInput($input);
@@ -96,8 +94,6 @@ class RunCommandInDebugListener
 
     /**
      * @return array<string>
-     *
-     * @throws \Throwable
      */
     private function getTokensFromArgvInput(ArgvInput $input): array
     {
@@ -105,7 +101,9 @@ class RunCommandInDebugListener
         $tokensProperty = $reflection->getProperty('tokens');
         $tokens = $tokensProperty->getValue($input);
 
-        throw_if(false === \is_array($tokens), \RuntimeException::class, 'Impossible to get the arguments and options from the command.');
+        if (! \is_array($tokens)) {
+            throw new \RuntimeException('Impossible to get the arguments and options from the command.');
+        }
 
         return $tokens;
     }
@@ -113,17 +111,25 @@ class RunCommandInDebugListener
     /**
      * @noinspection GlobalVariableUsageInspection
      */
-    private function buildCommandWithXDebugActivated(): string
+    private function buildCommandWithXDebugActivated(): array
     {
         $serverArgv = $_SERVER['argv'] ?? null;
-        throw_if(null === $serverArgv, \RuntimeException::class, 'Impossible to get the arguments and options from the command: the command cannot be relaunched with xDebug.');
+        if (null === $serverArgv) {
+            throw new \RuntimeException('Impossible to get the arguments and options from the command: the command cannot be relaunched with xDebug.');
+        }
+
+        if (! \in_array($ansi = '--ansi', $serverArgv, true)) {
+            $serverArgv[] = $ansi;
+        }
 
         $script = $_SERVER['SCRIPT_NAME'] ?? null;
-        throw_if(null === $script, \RuntimeException::class, 'Impossible to get the name of the command: the command cannot be relaunched with xDebug.');
+        if (null === $script) {
+            throw new \RuntimeException('Impossible to get the name of the command: the command cannot be relaunched with xDebug.');
+        }
 
-        $phpBinary = PHP_BINARY;
-        $args = implode(' ', \array_slice($serverArgv, 1));
+        $phpBinary = (new PhpExecutableFinder())->find() ?: PHP_BINARY;
+        $serverArgv = \array_slice($serverArgv, 1);
 
-        return "XDEBUG_SESSION=1 XDEBUG_MODE=debug XDEBUG_ACTIVATED=1 $phpBinary $script $args --ansi";
+        return [$phpBinary, $script, ...$serverArgv];
     }
 }
