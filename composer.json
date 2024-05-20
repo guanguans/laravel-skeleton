@@ -326,5 +326,10 @@
         "trap": "@php ./vendor/bin/trap --ui --ansi -v",
         "update-fluent-assert-doc-comment": "App\\Support\\FluentAssert::updateDocComment",
         "var-dump-server": "@php ./vendor/bin/var-dump-server --ansi -v"
+    },
+    "scripts-aliases": {
+        "artisan": [
+            "art"
+        ]
     }
 }
