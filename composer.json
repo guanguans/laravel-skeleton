@@ -243,6 +243,11 @@
         "ai-commit": "@php ./vendor/bin/ai-commit commit --generator=bito_cli --ansi",
         "ai-commit-no-verify": "@ai-commit --commit-options=--no-verify",
         "arkitect": "@php artisan test:arkitect --ansi -v",
+        "artisan": [
+            "@putenv XDEBUG_MODE=coverage,debug",
+            "@putenv XDEBUG_SESSION=1",
+            "@php artisan --ansi"
+        ],
         "captainhook": "@php ./vendor/bin/captainhook --ansi -v",
         "captainhook-configure": "@captainhook configure",
         "captainhook-install": "@captainhook install",
