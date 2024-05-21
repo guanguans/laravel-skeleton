@@ -56,6 +56,7 @@ $finder = Finder::create()
         'storage/*',
         'resources/view/mail/*',
         'vendor/*',
+        'helpers.php',
     ])
     ->name('*.php')
     ->notName([
