@@ -271,6 +271,8 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever($this->app->environment('testing'), static function (): void {
             // Http::preventStrayRequests(); // Preventing Stray Requests
             // Mail::alwaysTo('taylor@example.com');
+            // Carbon::setTestNow('2031-04-05');
+            // Carbon::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
         });
 
         $this->unless($this->app->isProduction(), static function (): void {
