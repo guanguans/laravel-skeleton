@@ -176,6 +176,7 @@ class AppServiceProvider extends ServiceProvider
             // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
             // Sanctum::ignoreMigrations();
             // Gate::policy(User::class, UserPolicy::class);
+            // Passport::enablePasswordGrant();
             Builder::defaultMorphKeyType('uuid');
             $this->registerMacros();
             $this->extendValidator();
