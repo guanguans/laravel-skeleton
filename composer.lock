@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae37b580ca114663662d59a39db7f3cf",
+    "content-hash": "572ec7ec4b3b3dcb1fcdbc34df0f12e9",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -3237,6 +3237,100 @@
             "time": "2024-03-15T00:21:02+00:00"
         },
         {
+            "name": "dragon-code/laravel-actions",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheDragonCode/laravel-actions.git",
+                "reference": "40f05392712ce59edab2e48d8568e2d706b855bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-actions/zipball/40f05392712ce59edab2e48d8568e2d706b855bb",
+                "reference": "40f05392712ce59edab2e48d8568e2d706b855bb",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2.2",
+                "dragon-code/simple-dto": "^2.5.1",
+                "dragon-code/support": "^6.6",
+                "illuminate/console": "^10.0 || ^11.0",
+                "illuminate/container": "^10.0 || ^11.0",
+                "illuminate/database": "^10.0 || ^11.0",
+                "illuminate/support": "^10.0 || ^11.0",
+                "php": "^8.2",
+                "symfony/console": "^6.0 || ^7.0"
+            },
+            "conflict": {
+                "andrey-helldar/laravel-actions": "*",
+                "dragon-code/laravel-migration-actions": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.1",
+                "nesbot/carbon": "^2.62.1 || ^3.0",
+                "orchestra/testbench": "^8.0 || ^9.0",
+                "phpunit/phpunit": "^10.0",
+                "ramsey/uuid": "^4.0"
+            },
+            "suggest": {
+                "doctrine/dbal": "This package must be installed if you are using Laravel 10."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DragonCode\\LaravelActions\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DragonCode\\LaravelActions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro"
+                }
+            ],
+            "description": "Performing any actions during the deployment process",
+            "keywords": [
+                "action",
+                "actions",
+                "andrey-helldar",
+                "dragon",
+                "dragon-code",
+                "laravel",
+                "migration",
+                "migrations"
+            ],
+            "support": {
+                "issues": "https://github.com/TheDragonCode/laravel-actions/issues",
+                "source": "https://github.com/TheDragonCode/laravel-actions"
+            },
+            "funding": [
+                {
+                    "url": "https://boosty.to/dragon-code",
+                    "type": "boosty"
+                },
+                {
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410012608840929",
+                    "type": "yoomoney"
+                }
+            ],
+            "time": "2024-05-13T20:20:27+00:00"
+        },
+        {
             "name": "dragon-code/laravel-http-logger",
             "version": "1.4.0",
             "source": {
@@ -3399,6 +3493,79 @@
                 }
             ],
             "time": "2024-03-13T07:58:11+00:00"
+        },
+        {
+            "name": "dragon-code/simple-dto",
+            "version": "2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheDragonCode/simple-data-transfer-object.git",
+                "reference": "772c96285710c0effc7d38ca2b6c395d53431a69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheDragonCode/simple-data-transfer-object/zipball/772c96285710c0effc7d38ca2b6c395d53431a69",
+                "reference": "772c96285710c0effc7d38ca2b6c395d53431a69",
+                "shasum": ""
+            },
+            "require": {
+                "dragon-code/contracts": "^2.17",
+                "dragon-code/support": "^5.0 || ^6.0",
+                "ext-json": "*",
+                "php": "^7.3 || ^8.0",
+                "symfony/http-foundation": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "conflict": {
+                "andrey-helldar/simple-data-transfer-object": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6",
+                "symfony/var-dumper": "^4.3 || ^5.4 || ^6.0 || ^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DragonCode\\SimpleDataTransferObject\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro"
+                }
+            ],
+            "description": "Simple Data Transfer Objects",
+            "keywords": [
+                "andrey-helldar",
+                "data-transfer-object",
+                "dragon",
+                "dragon-code",
+                "dto"
+            ],
+            "support": {
+                "issues": "https://github.com/TheDragonCode/simple-data-transfer-object/issues",
+                "source": "https://github.com/TheDragonCode/simple-data-transfer-object"
+            },
+            "funding": [
+                {
+                    "url": "https://boosty.to/dragon-code",
+                    "type": "boosty"
+                },
+                {
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410012608840929",
+                    "type": "yoomoney"
+                }
+            ],
+            "time": "2024-03-06T17:31:20+00:00"
         },
         {
             "name": "dragon-code/support",

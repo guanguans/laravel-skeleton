@@ -29,6 +29,7 @@
         "coduo/php-humanizer": "^5.0",
         "divineomega/password_exposed": "^3.2",
         "dragon-code/extended-routes": "^4.0",
+        "dragon-code/laravel-actions": "^5.0",
         "dragon-code/laravel-http-logger": "^1.4",
         "dragon-code/laravel-route-names": "^1.5",
         "elao/enum": "^2.4",
