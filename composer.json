@@ -115,6 +115,7 @@
         "coduo/php-matcher": "^6.0",
         "deployer/deployer": "^7.4",
         "dragon-code/benchmark": "^3.0",
+        "dragon-code/pretty-routes": "^3.4",
         "driftingly/rector-laravel": "^1.2",
         "ergebnis/composer-normalize": "^2.42",
         "fakerphp/faker": "^1.23",

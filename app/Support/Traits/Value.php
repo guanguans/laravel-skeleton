@@ -80,8 +80,6 @@ final class Value
      * not be possible that this happens and a bug should be filed against PHP
      * if this is encountered.
      *
-     * @param  mixed  $value
-     *                        Value to inspect
      * @return string
      *                Human-readable name for the type of the given value
      *

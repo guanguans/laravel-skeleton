@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "572ec7ec4b3b3dcb1fcdbc34df0f12e9",
+    "content-hash": "7c1c6d87161d35e283802a916c9ca458",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -18578,6 +18578,165 @@
             "time": "2024-03-23T00:45:19+00:00"
         },
         {
+            "name": "dragon-code/laravel-routes-core",
+            "version": "5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheDragonCode/laravel-routes-core.git",
+                "reference": "4f486d42387e39dc4a222b436df6afa3ab6d7ea1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-routes-core/zipball/4f486d42387e39dc4a222b436df6afa3ab6d7ea1",
+                "reference": "4f486d42387e39dc4a222b436df6afa3ab6d7ea1",
+                "shasum": ""
+            },
+            "require": {
+                "dragon-code/contracts": "^2.6",
+                "dragon-code/support": "^6.1",
+                "illuminate/routing": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "php": "^8.0",
+                "phpdocumentor/reflection-docblock": "^5.0"
+            },
+            "conflict": {
+                "andrey-helldar/laravel-routes-core": "*",
+                "laravel/lumen-framework": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "phpunit/phpunit": "^9.6 || ^10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DragonCode\\LaravelRoutesCore\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro"
+                }
+            ],
+            "description": "The core of applications for working with routes",
+            "keywords": [
+                "laravel",
+                "pretty",
+                "pretty-routes",
+                "route",
+                "routes",
+                "routing"
+            ],
+            "support": {
+                "issues": "https://github.com/TheDragonCode/laravel-routes-core/issues",
+                "source": "https://github.com/TheDragonCode/laravel-routes-core"
+            },
+            "funding": [
+                {
+                    "url": "https://boosty.to/dragon-code",
+                    "type": "boosty"
+                },
+                {
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410012608840929",
+                    "type": "yoomoney"
+                }
+            ],
+            "time": "2024-03-13T07:49:59+00:00"
+        },
+        {
+            "name": "dragon-code/laravel-support",
+            "version": "3.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheDragonCode/laravel-support.git",
+                "reference": "06484f1002c0b776c39764015ced4951067ec2f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-support/zipball/06484f1002c0b776c39764015ced4951067ec2f6",
+                "reference": "06484f1002c0b776c39764015ced4951067ec2f6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": ">=6.0 <12.0",
+                "illuminate/database": ">=6.0 <12.0",
+                "illuminate/http": ">=6.0 <12.0",
+                "illuminate/support": ">=6.0 <12.0",
+                "php": "^7.2 || ^8.0",
+                "ramsey/uuid": "^3.7 || ^4.0",
+                "symfony/var-dumper": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "conflict": {
+                "andrey-helldar/laravel-support": "*"
+            },
+            "require-dev": {
+                "laravel/framework": ">=6.0 <12.0"
+            },
+            "suggest": {
+                "symfony/thanks": "Give thanks (in the form of a GitHub) to your fellow PHP package maintainers"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "helpers/dumper.php"
+                ],
+                "psr-4": {
+                    "DragonCode\\LaravelSupport\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro"
+                }
+            ],
+            "description": "Various helper files for the Laravel and Lumen frameworks",
+            "keywords": [
+                "andrey-helldar",
+                "dragon",
+                "dragon-code",
+                "framework",
+                "laravel",
+                "lumen",
+                "support"
+            ],
+            "support": {
+                "issues": "https://github.com/TheDragonCode/laravel-support/issues",
+                "source": "https://github.com/TheDragonCode/laravel-support"
+            },
+            "funding": [
+                {
+                    "url": "https://boosty.to/dragon-code",
+                    "type": "boosty"
+                },
+                {
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410012608840929",
+                    "type": "yoomoney"
+                }
+            ],
+            "time": "2024-03-12T21:33:28+00:00"
+        },
+        {
             "name": "dragon-code/pretty-array",
             "version": "v4.1.0",
             "source": {
@@ -18653,6 +18812,109 @@
                 }
             ],
             "time": "2023-06-02T11:37:44+00:00"
+        },
+        {
+            "name": "dragon-code/pretty-routes",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheDragonCode/pretty-routes.git",
+                "reference": "c0c055599d40d952aa287f5019df8c6c60ef4f7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheDragonCode/pretty-routes/zipball/c0c055599d40d952aa287f5019df8c6c60ef4f7c",
+                "reference": "c0c055599d40d952aa287f5019df8c6c60ef4f7c",
+                "shasum": ""
+            },
+            "require": {
+                "dragon-code/contracts": "^2.6",
+                "dragon-code/laravel-routes-core": "^4.1 || ^5.0",
+                "dragon-code/laravel-support": "^3.3",
+                "dragon-code/support": "^5.6 || ^6.1",
+                "ext-json": "*",
+                "illuminate/contracts": ">=6.0 <12.0",
+                "illuminate/http": ">=6.0 <12.0",
+                "illuminate/routing": ">=6.0 <12.0",
+                "illuminate/support": ">=6.0 <12.0",
+                "illuminate/view": ">=6.0 <12.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "conflict": {
+                "garygreen/pretty-routes": "*"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": ">=4.0 <10.0",
+                "phpunit/phpunit": "^8.0 || ^9.6 || ^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PrettyRoutes\\ServiceProvider"
+                    ]
+                },
+                "thanks": [
+                    {
+                        "name": "dragon-code/laravel-routes-core",
+                        "url": "https://github.com/TheDragonCode/laravel-routes-core"
+                    },
+                    {
+                        "name": "dragon-code/support",
+                        "url": "https://github.com/TheDragonCode/support"
+                    }
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "PrettyRoutes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro"
+                },
+                {
+                    "name": "Gary Green",
+                    "email": "holegary@gmail.com"
+                }
+            ],
+            "description": "Pretty Routes for Laravel",
+            "keywords": [
+                "andrey-helldar",
+                "dragon",
+                "dragon-code",
+                "laravel",
+                "pretty",
+                "pretty-routes",
+                "routes"
+            ],
+            "support": {
+                "issues": "https://github.com/TheDragonCode/pretty-routes/issues",
+                "source": "https://github.com/TheDragonCode/pretty-routes"
+            },
+            "funding": [
+                {
+                    "url": "https://boosty.to/dragon-code",
+                    "type": "boosty"
+                },
+                {
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410012608840929",
+                    "type": "yoomoney"
+                }
+            ],
+            "time": "2024-03-13T08:56:19+00:00"
         },
         {
             "name": "driftingly/rector-laravel",
@@ -22351,6 +22613,70 @@
                 }
             ],
             "time": "2024-05-16T19:15:43+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "5.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "9d07b3f7fdcf5efec5d1609cba3c19c5ea2bdc9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9d07b3f7fdcf5efec5d1609cba3c19c5ea2bdc9c",
+                "reference": "9d07b3f7fdcf5efec5d1609cba3c19c5ea2bdc9c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/deprecations": "^1.1",
+                "ext-filter": "*",
+                "php": "^7.4 || ^8.0",
+                "phpdocumentor/reflection-common": "^2.2",
+                "phpdocumentor/type-resolver": "^1.7",
+                "phpstan/phpdoc-parser": "^1.7",
+                "webmozart/assert": "^1.9.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.3.5",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^1.8",
+                "phpstan/phpstan-mockery": "^1.1",
+                "phpstan/phpstan-webmozart-assert": "^1.2",
+                "phpunit/phpunit": "^9.5",
+                "vimeo/psalm": "^5.13"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                },
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.4.1"
+            },
+            "time": "2024-05-21T05:55:05+00:00"
         },
         {
             "name": "phpmyadmin/sql-parser",
