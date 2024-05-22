@@ -4,8 +4,84 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4830aafad7339df602f1ac66f85fd00a",
+    "content-hash": "ae23093bda3c17c77ab66c9b3f671344",
     "packages": [
+        {
+            "name": "ackintosh/ganesha",
+            "version": "3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ackintosh/ganesha.git",
+                "reference": "bc52a767ecdd630882262f0e383ef79c5436ce27"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ackintosh/ganesha/zipball/bc52a767ecdd630882262f0e383ef79c5436ce27",
+                "reference": "bc52a767ecdd630882262f0e383ef79c5436ce27",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "psr/http-message": "^1.0|^2.0"
+            },
+            "require-dev": {
+                "ext-memcached": "~3.1",
+                "ext-mongodb": "~1.6",
+                "ext-redis": "~5.1",
+                "friendsofphp/php-cs-fixer": "^v3.1.0",
+                "guzzlehttp/guzzle": "^7.4.5",
+                "php-coveralls/php-coveralls": "~2.5",
+                "php-vcr/php-vcr": "^1.4.5",
+                "php-vcr/phpunit-testlistener-vcr": "dev-php8 as 3.2.2",
+                "phpunit/phpunit": "^9.5.10",
+                "predis/predis": "^1.1",
+                "symfony/http-client": "^5.3|^6.0",
+                "symfony/yaml": "^3.0|^4.0|^5.0|^6.0",
+                "vimeo/psalm": "*"
+            },
+            "suggest": {
+                "ext-memcached": "Allows the usage of MemcachedAdapter",
+                "ext-mongodb": "Allows the usage of MongoDBAdapter",
+                "ext-redis": "Allows the usage of RedisAdapter with Redis, RedisArray and RedisCluster",
+                "guzzlehttp/guzzle": "Allows the usage of the Guzzle Middleware",
+                "symfony/http-client": "Allows the usage of the Ganesha HttpClient"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ackintosh\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "akihito.nakano",
+                    "email": "sora.akatsuki@gmail.com"
+                }
+            ],
+            "description": "PHP implementation of Circuit Breaker pattern",
+            "keywords": [
+                "circuit breaker",
+                "error handling",
+                "fault tolerance",
+                "guzzle middleware",
+                "microservices"
+            ],
+            "support": {
+                "issues": "https://github.com/ackintosh/ganesha/issues",
+                "source": "https://github.com/ackintosh/ganesha/tree/3.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ackintosh",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-08-21T23:46:04+00:00"
+        },
         {
             "name": "aeon-php/calendar",
             "version": "1.0.9",
