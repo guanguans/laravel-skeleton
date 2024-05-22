@@ -54,6 +54,7 @@
         "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "leventcz/laravel-top": "^1.0",
         "neutrino_api/neutrino_api_client": "^4.6",
         "not-empty/jwt-manager-php-lib": "^6.0 || ^7.0",
         "nunomaduro/laravel-console-task": "^1.9",

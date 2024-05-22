@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c1c6d87161d35e283802a916c9ca458",
+    "content-hash": "4830aafad7339df602f1ac66f85fd00a",
     "packages": [
         {
             "name": "aeon-php/calendar",
@@ -7576,6 +7576,74 @@
                 }
             ],
             "time": "2024-03-23T07:42:40+00:00"
+        },
+        {
+            "name": "leventcz/laravel-top",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leventcz/laravel-top.git",
+                "reference": "c35580164bbb34da613d3789ad4e2071cc27a4c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leventcz/laravel-top/zipball/c35580164bbb34da613d3789ad4e2071cc27a4c0",
+                "reference": "c35580164bbb34da613d3789ad4e2071cc27a4c0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "laravel/framework": "^10.0|^11.0",
+                "php": "^8.2.0",
+                "react/event-loop": "^1.5"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.15",
+                "pestphp/pest": "^2.34",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Leventcz\\Top\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Top": "Leventcz\\Top\\Facades\\Top"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Leventcz\\Top\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Levent Corapsiz",
+                    "email": "l.corapsiz@gmail.com"
+                }
+            ],
+            "description": "Real-time monitoring straight from the command line for Laravel applications.",
+            "homepage": "https://github.com/leventcz/laravel-top",
+            "keywords": [
+                "Metrics",
+                "apm",
+                "cli",
+                "command-line-tool",
+                "laravel",
+                "php",
+                "realtime-monitoring"
+            ],
+            "support": {
+                "issues": "https://github.com/leventcz/laravel-top/issues",
+                "source": "https://github.com/leventcz/laravel-top/tree/v1.0.1"
+            },
+            "time": "2024-05-16T10:45:46+00:00"
         },
         {
             "name": "livewire/livewire",
@@ -26669,6 +26737,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
