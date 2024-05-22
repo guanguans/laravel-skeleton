@@ -23,9 +23,20 @@ return [
     'enabled' => (bool) env('EXCEPTION_NOTIFY_ENABLED', true),
 
     /**
+     * The list of environments that should be reported.
+     */
+    'envs' => env_explode('EXCEPTION_NOTIFY_ENVS', [
+        // 'production',
+        // 'local',
+        // 'testing',
+        '*',
+    ]),
+
+    /**
      * The rate limit of same exception.
      */
     'rate_limit' => [
+        'cache_store' => env('EXCEPTION_NOTIFY_RATE_LIMIT_CACHE_STORE', config('cache.default')),
         'key_prefix' => env('EXCEPTION_NOTIFY_RATE_LIMIT_KEY_PREFIX', 'exception_notify_'),
         'max_attempts' => (int) env('EXCEPTION_NOTIFY_RATE_LIMIT_MAX_ATTEMPTS', config('app.debug') ? 50 : 1),
         'decay_seconds' => (int) env('EXCEPTION_NOTIFY_RATE_LIMIT_DECAY_SECONDS', 300),
@@ -35,7 +46,7 @@ return [
      * The options of report exception job.
      */
     'job' => [
-        'connection' => env('EXCEPTION_NOTIFY_JOB_CONNECTION', config('queue.default', 'sync')),
+        'connection' => env('EXCEPTION_NOTIFY_JOB_CONNECTION', config('queue.default')),
         'queue' => env('EXCEPTION_NOTIFY_JOB_QUEUE'),
     ],
 
@@ -49,7 +60,7 @@ return [
      */
     'collectors' => [
         Guanguans\LaravelExceptionNotify\Collectors\ApplicationCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
+        // Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
         Guanguans\LaravelExceptionNotify\Collectors\ChoreCollector::class,
         Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector::class,
         Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector::class,
@@ -101,7 +112,7 @@ return [
             'driver' => 'mail',
             'mailer' => null,
             'to' => [
-                'users' => env_explode('EXCEPTION_NOTIFY_MAIL_TO', [
+                'users' => env_explode('EXCEPTION_NOTIFY_MAIL_TO_USERS', [
                     'your@example.mail',
                 ]),
             ],
