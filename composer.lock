@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae23093bda3c17c77ab66c9b3f671344",
+    "content-hash": "b140d8d4d642a084bad962dcb628b53c",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -3314,16 +3314,16 @@
         },
         {
             "name": "dragon-code/laravel-actions",
-            "version": "5.0.0",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/TheDragonCode/laravel-actions.git",
-                "reference": "40f05392712ce59edab2e48d8568e2d706b855bb"
+                "url": "https://github.com/TheDragonCode/laravel-deploy-operations.git",
+                "reference": "82f245855432467611f9611a9aedace6bdf48036"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-actions/zipball/40f05392712ce59edab2e48d8568e2d706b855bb",
-                "reference": "40f05392712ce59edab2e48d8568e2d706b855bb",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-deploy-operations/zipball/82f245855432467611f9611a9aedace6bdf48036",
+                "reference": "82f245855432467611f9611a9aedace6bdf48036",
                 "shasum": ""
             },
             "require": {
@@ -3349,19 +3349,20 @@
                 "ramsey/uuid": "^4.0"
             },
             "suggest": {
-                "doctrine/dbal": "This package must be installed if you are using Laravel 10."
+                "doctrine/dbal": "This package must be installed if you are using Laravel 10.",
+                "dragon-code/laravel-data-dumper": "Required if you want to save the execution state using the `schema:dump` console command"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "DragonCode\\LaravelActions\\ServiceProvider"
+                        "DragonCode\\LaravelDeployOperations\\ServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "DragonCode\\LaravelActions\\": "src/"
+                    "DragonCode\\LaravelDeployOperations\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3380,11 +3381,14 @@
                 "action",
                 "actions",
                 "andrey-helldar",
+                "deploy",
+                "deployment",
                 "dragon",
                 "dragon-code",
                 "laravel",
                 "migration",
-                "migrations"
+                "migrations",
+                "operations"
             ],
             "support": {
                 "issues": "https://github.com/TheDragonCode/laravel-actions/issues",
@@ -3404,7 +3408,8 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-05-13T20:20:27+00:00"
+            "abandoned": "dragon-code/laravel-deploy-operations",
+            "time": "2024-05-21T18:45:44+00:00"
         },
         {
             "name": "dragon-code/laravel-http-logger",
