@@ -25,13 +25,6 @@ class CircuitBreakerGuzzleMiddleware
         ];
 
         $ganesha = collect($configuration)
-            ->map(static function (mixed $parameter, string $method) {
-                if ($method === 'adapter' && ! $parameter instanceof Redis) {
-                    return new Redis($parameter);
-                }
-
-                return $parameter;
-            })
             ->reduce(
                 static fn (
                     Builder $builder,
