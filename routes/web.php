@@ -8,7 +8,10 @@
 
 declare(strict_types=1);
 
+use Illuminate\Foundation\Events\DiagnosingHealth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Overtrue\LaravelUploader\LaravelUploader;
 
 /*
@@ -34,3 +37,9 @@ Route::fallback(static function (): void {
 });
 
 LaravelUploader::routes();
+
+Route::middleware('web')->get('up', static function () {
+    Event::dispatch(new DiagnosingHealth);
+
+    return View::file(base_path('vendor/laravel/framework/src/Illuminate/Foundation/resources/health-up.blade.php'));
+});
