@@ -269,6 +269,7 @@ class AppServiceProvider extends ServiceProvider
             // });
         });
 
+        /** @see \Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle */
         $this->whenever($this->app->environment('testing'), static function (): void {
             // Http::preventStrayRequests(); // Preventing Stray Requests
             // Mail::alwaysTo('taylor@example.com');
