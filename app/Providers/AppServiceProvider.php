@@ -78,6 +78,8 @@ use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
+use Imanghafoori\Decorator\Decorators\DecoratorFactory;
+use Imanghafoori\Decorator\Facade\Decorator;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -161,6 +163,7 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             $this->dependencyInjection();
             $this->bootAspects();
+            $this->bootDecorator();
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->setLocales();
@@ -654,5 +657,13 @@ class AppServiceProvider extends ServiceProvider
                 });
             }
         });
+    }
+
+    private function bootDecorator(): void
+    {
+        Decorator::decorate(
+            'UserRepository@find',
+            DecoratorFactory::cache(static fn ($madId): string => 'mad_user_key_'.$madId, 10)
+        );
     }
 }
