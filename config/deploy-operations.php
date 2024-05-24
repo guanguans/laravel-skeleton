@@ -3,11 +3,11 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Actions Repository Connection
+    | Operations Repository Connection
     |--------------------------------------------------------------------------
     |
     | This option controls the database connection used to store the table
-    | of executed actions.
+    | of executed operations.
     |
     */
 
@@ -15,27 +15,46 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Actions Repository Table
+    | Operations Repository Table
     |--------------------------------------------------------------------------
     |
-    | This table keeps track of all the actions that have already run for
+    | This table keeps track of all the operations that have already run for
     | your application. Using this information, we can determine which of
-    | the actions on disk haven't actually been run in the database.
+    | the operations on disk haven't actually been run in the database.
     |
     */
 
-    'table' => 'actions',
+    'table' => 'operations',
 
     /*
     |--------------------------------------------------------------------------
-    | Actions Path
+    | Database Transations
     |--------------------------------------------------------------------------
     |
-    | This option defines the path to the action directory.
+    | This setting defines the rules for working with database transactions.
+    | This specifies a common value for all operations, but you can override this
+    | value directly in the class of the operation itself.
+    */
+
+    'transactions' => [
+        // | Determines whether the use of database transactions is enabled.
+
+        'enabled' => false,
+
+        // | The number of attempts to execute a request within a transaction before throwing an error.
+        'attempts' => 1,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Operations Path
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the path to the operation directory.
     |
     */
 
-    'path' => base_path('actions'),
+    'path' => base_path('operations'),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,11 +79,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Asynchronous settings
+    |--------------------------------------------------------------------------
+    |
+    | Defines whether the operation will run synchronously or asynchronously.
+    |
+    | When this option is activated, each operation will be performed through jobs.
+    */
+
+    'async' => false,
+
+    /*
+    |--------------------------------------------------------------------------
     | Queue
     |--------------------------------------------------------------------------
     |
     | This option specifies the queue settings that will process
-    | asynchronous actions.
+    | asynchronous operations.
     |
     */
 
@@ -78,7 +109,7 @@ return [
         |
         */
 
-        'connection' => env('ACTIONS_QUEUE_CONNECTION', env('QUEUE_CONNECTION', 'sync')),
+        'connection' => env('DEPLOY_OPERATIONS_QUEUE_CONNECTION', env('QUEUE_CONNECTION', 'sync')),
 
         /*
         |--------------------------------------------------------------------------
@@ -90,6 +121,6 @@ return [
         |
         */
 
-        'name' => env('ACTIONS_QUEUE_NAME'),
+        'name' => env('DEPLOY_OPERATIONS_QUEUE_NAME'),
     ],
 ];
