@@ -579,7 +579,7 @@ class AppServiceProvider extends ServiceProvider
             ->custom(
                 static fn (
                     DiscoveredClass $discoveredClass
-                ): bool => ! $discoveredClass->isAbstract && ! Str::endsWith($discoveredClass->name, ['(', 'Controller'])
+                ): bool => ! $discoveredClass->isAbstract && ! Str::endsWith($discoveredClass->name, ['(', '{', 'Controller'])
             )
             ->get();
 
