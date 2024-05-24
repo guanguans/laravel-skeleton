@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Support\OpenAI;
 use App\Support\PushDeer;
+use Faker\Factory;
+use Faker\Generator;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -36,6 +38,7 @@ class ExtendServiceProvider extends ServiceProvider
     {
         $this->registerOpenAI();
         $this->registerPushDeer();
+        $this->registerFaker();
     }
 
     /**
@@ -51,7 +54,7 @@ class ExtendServiceProvider extends ServiceProvider
      *
      * @return string[]
      */
-    public function when()
+    public function when(): array
     {
         return [];
     }
@@ -61,7 +64,7 @@ class ExtendServiceProvider extends ServiceProvider
      *
      * @return string[]
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             OpenAI::class, 'openai',
@@ -69,15 +72,50 @@ class ExtendServiceProvider extends ServiceProvider
         ];
     }
 
-    protected function registerOpenAI(): void
+    private function registerOpenAI(): void
     {
-        $this->app->singleton(OpenAI::class, static fn (Application $application): \App\Support\OpenAI => new OpenAI($application['config']['services.openai']));
+        $this->app->singleton(
+            OpenAI::class,
+            static fn (Application $application): OpenAI => new OpenAI($application['config']['services.openai'])
+        );
         $this->app->alias(OpenAI::class, 'openai');
     }
 
-    protected function registerPushDeer(): void
+    private function registerPushDeer(): void
     {
-        $this->app->singleton(PushDeer::class, static fn (Application $application): \App\Support\PushDeer => new PushDeer($application['config']['services.pushdeer']));
+        $this->app->singleton(
+            PushDeer::class,
+            static fn (Application $application): PushDeer => new PushDeer($application['config']['services.pushdeer'])
+        );
         $this->app->alias(PushDeer::class, 'pushdeer');
+    }
+
+    private function registerFaker(): void
+    {
+        $this->app->singleton(Generator::class, static function () {
+            $faker = Factory::create();
+
+            $faker->addProvider(
+                new class
+                {
+                    public function imageUrl(int $width = 640, int $height = 480): string
+                    {
+                        return sprintf('https://placekitten.com/%d/%d', $width, $height);
+                    }
+
+                    /**
+                     * @param  string  $format  raw|full|small|thumb|regular|small_s3
+                     */
+                    public function imageRandomUrl(string $format = 'small'): string
+                    {
+                        return sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
+                    }
+                }
+            );
+
+            return $faker;
+        });
+
+        $this->app->alias(Generator::class, 'faker');
     }
 }
