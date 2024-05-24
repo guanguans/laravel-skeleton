@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff071a00d739f137af4f9fa7be4ca725",
+    "content-hash": "6f3f9fc98a81f1237c614855b3c30208",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1896,6 +1896,66 @@
                 "source": "https://github.com/hammerstonedev/laravel-pseudo-daemon/tree/v1.1.0"
             },
             "time": "2023-04-13T14:08:33+00:00"
+        },
+        {
+            "name": "imanghafoori/laravel-middlewarize",
+            "version": "v1.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/imanghafoori1/laravel-middlewarize.git",
+                "reference": "d4e28d5d50509db0531096fc8803eb8cc77cac1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/imanghafoori1/laravel-middlewarize/zipball/d4e28d5d50509db0531096fc8803eb8cc77cac1a",
+                "reference": "d4e28d5d50509db0531096fc8803eb8cc77cac1a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "~5.1|6.*|7.*|8.*|9.*|10.*",
+                "illuminate/pipeline": "~5.1|6.*|7.*|8.*|9.*|10.*",
+                "php": "7.3.*|7.4.*|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7.0"
+            },
+            "suggest": {
+                "imanghafoori/laravel-anypass": " Allows you login with any password in local environment.",
+                "imanghafoori/laravel-decorator": "Allows you to easily apply the decorator pattern.",
+                "imanghafoori/laravel-heyman": "It allows to write expressive code to authorize, validate and authenticate.",
+                "imanghafoori/laravel-masterpass": "You can easily set a master password without code change."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Imanghafoori\\Middlewarize\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Iman Ghafoori",
+                    "email": "imanghafoori1@gmail.com"
+                }
+            ],
+            "description": "Use laravel middlewares on any method calls in your app",
+            "homepage": "https://github.com/imanghafoori1/laravel-middlewarize",
+            "keywords": [
+                "laravel",
+                "laravel-middlewares",
+                "laravel5",
+                "laravel5-package",
+                "php",
+                "pipeline"
+            ],
+            "support": {
+                "issues": "https://github.com/imanghafoori1/laravel-middlewarize/issues",
+                "source": "https://github.com/imanghafoori1/laravel-middlewarize/tree/v1.1.10"
+            },
+            "time": "2023-02-15T23:41:15+00:00"
         },
         {
             "name": "joetannenbaum/terminalia",

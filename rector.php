@@ -93,7 +93,7 @@ return RectorConfig::configure()
         // RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector::class,
         RectorLaravel\Rector\FuncCall\NotFilledBlankFuncCallToBlankFilledFuncCallRector::class,
         RectorLaravel\Rector\FuncCall\NowFuncWithStartOfDayMethodCallToTodayFuncRector::class,
-        RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector::class,
+        RemoveDumpDataDeadCodeRector::class,
         RectorLaravel\Rector\FuncCall\RemoveRedundantValueCallsRector::class,
         RectorLaravel\Rector\FuncCall\RemoveRedundantWithCallsRector::class,
         RectorLaravel\Rector\FuncCall\SleepFuncToSleepStaticCallRector::class,
