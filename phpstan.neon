@@ -36,6 +36,5 @@ parameters:
 #        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
         - "#^Access to an undefined property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
         - "#^Access to undefined constant Spatie\\\\Health\\\\Enums\\\\Status\\:\\:.*\\.$#"
-        - "#^Call to an undefined static method Orchid\\\\Support\\\\Color\\:\\:BASIC\\(\\)\\.$#"
         - "#^Method App\\\\Support\\\\Macros\\\\.*Macro\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
         - "#^Unsafe usage of new static\\(\\)\\.$#"

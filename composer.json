@@ -64,7 +64,6 @@
         "nyholm/psr7": "^1.8",
         "onlime/laravel-http-client-global-logger": "^1.1",
         "opcodesio/log-viewer": "^3.10",
-        "orchid/platform": "^14.24",
         "overtrue/laravel-query-logger": "^3.2",
         "overtrue/laravel-uploader": "^3.2",
         "php-collective/decimal-object": "^1.2",

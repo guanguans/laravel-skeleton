@@ -26,7 +26,7 @@ Route::middleware([
     'api',
     // sprintf('verify.signature:%s', config('services.signer.default.secret')),
     'log.http',
-])->prefix('v1')->namespace('App\Http\Controllers\Api')->group(static function (Router $router): void {
+])->scopeBindings()->prefix('v1')->namespace('App\Http\Controllers\Api')->group(static function (Router $router): void {
     Route::middleware([])->group(static function (Router $router): void {
         Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping');
     });
