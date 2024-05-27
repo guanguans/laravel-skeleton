@@ -7712,16 +7712,16 @@
         },
         {
             "name": "leventcz/laravel-top",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leventcz/laravel-top.git",
-                "reference": "0c3562bd0ac7eb9866b126a0385dbd4564a2481d"
+                "reference": "63733427a478fdfaa32c1959487932e39c069e5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leventcz/laravel-top/zipball/0c3562bd0ac7eb9866b126a0385dbd4564a2481d",
-                "reference": "0c3562bd0ac7eb9866b126a0385dbd4564a2481d",
+                "url": "https://api.github.com/repos/leventcz/laravel-top/zipball/63733427a478fdfaa32c1959487932e39c069e5f",
+                "reference": "63733427a478fdfaa32c1959487932e39c069e5f",
                 "shasum": ""
             },
             "require": {
@@ -7775,9 +7775,9 @@
             ],
             "support": {
                 "issues": "https://github.com/leventcz/laravel-top/issues",
-                "source": "https://github.com/leventcz/laravel-top/tree/v1.0.2"
+                "source": "https://github.com/leventcz/laravel-top/tree/v1.1.0"
             },
-            "time": "2024-05-23T23:32:21+00:00"
+            "time": "2024-05-27T03:17:13+00:00"
         },
         {
             "name": "livewire/livewire",
