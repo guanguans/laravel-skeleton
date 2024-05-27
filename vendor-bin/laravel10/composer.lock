@@ -1899,29 +1899,28 @@
         },
         {
             "name": "imanghafoori/laravel-middlewarize",
-            "version": "v1.1.10",
+            "version": "v1.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imanghafoori1/laravel-middlewarize.git",
-                "reference": "d4e28d5d50509db0531096fc8803eb8cc77cac1a"
+                "reference": "5312f1842593e9ca37bae9a1cb0a9070191a0198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imanghafoori1/laravel-middlewarize/zipball/d4e28d5d50509db0531096fc8803eb8cc77cac1a",
-                "reference": "d4e28d5d50509db0531096fc8803eb8cc77cac1a",
+                "url": "https://api.github.com/repos/imanghafoori1/laravel-middlewarize/zipball/5312f1842593e9ca37bae9a1cb0a9070191a0198",
+                "reference": "5312f1842593e9ca37bae9a1cb0a9070191a0198",
                 "shasum": ""
             },
             "require": {
-                "illuminate/container": "~5.1|6.*|7.*|8.*|9.*|10.*",
-                "illuminate/pipeline": "~5.1|6.*|7.*|8.*|9.*|10.*",
+                "illuminate/container": "~5.1|6.*|7.*|8.*|9.*|10.*|11.*|12.*",
+                "illuminate/pipeline": "~5.1|6.*|7.*|8.*|9.*|10.*|11.*|12.*",
                 "php": "7.3.*|7.4.*|^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "~7.0"
+                "orchestra/testbench": "~7.0|~8.0"
             },
             "suggest": {
                 "imanghafoori/laravel-anypass": " Allows you login with any password in local environment.",
-                "imanghafoori/laravel-decorator": "Allows you to easily apply the decorator pattern.",
                 "imanghafoori/laravel-heyman": "It allows to write expressive code to authorize, validate and authenticate.",
                 "imanghafoori/laravel-masterpass": "You can easily set a master password without code change."
             },
@@ -1946,16 +1945,15 @@
             "keywords": [
                 "laravel",
                 "laravel-middlewares",
-                "laravel5",
-                "laravel5-package",
+                "laravel-package",
                 "php",
                 "pipeline"
             ],
             "support": {
                 "issues": "https://github.com/imanghafoori1/laravel-middlewarize/issues",
-                "source": "https://github.com/imanghafoori1/laravel-middlewarize/tree/v1.1.10"
+                "source": "https://github.com/imanghafoori1/laravel-middlewarize/tree/v1.1.11"
             },
-            "time": "2023-02-15T23:41:15+00:00"
+            "time": "2024-05-24T09:04:56+00:00"
         },
         {
             "name": "joetannenbaum/terminalia",
@@ -4848,16 +4846,16 @@
         },
         {
             "name": "react/promise",
-            "version": "v3.1.0",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "e563d55d1641de1dea9f5e84f3cccc66d2bfe02c"
+                "reference": "8a164643313c71354582dc850b42b33fa12a4b63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/e563d55d1641de1dea9f5e84f3cccc66d2bfe02c",
-                "reference": "e563d55d1641de1dea9f5e84f3cccc66d2bfe02c",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/8a164643313c71354582dc850b42b33fa12a4b63",
+                "reference": "8a164643313c71354582dc850b42b33fa12a4b63",
                 "shasum": ""
             },
             "require": {
@@ -4909,7 +4907,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/promise/issues",
-                "source": "https://github.com/reactphp/promise/tree/v3.1.0"
+                "source": "https://github.com/reactphp/promise/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -4917,7 +4915,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-11-16T16:21:57+00:00"
+            "time": "2024-05-24T10:39:05+00:00"
         },
         {
             "name": "react/socket",

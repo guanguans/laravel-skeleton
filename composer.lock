@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ac9ee5d51b8108fcbee16f2e75a8a95",
+    "content-hash": "db8c5eb2bf3a81a641681f050351185e",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -9229,16 +9229,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.23.1",
+            "version": "14.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "44772b1d6d0d1cf55b80a743b44090582d82281d"
+                "reference": "b0b34d2832a5d981c64ccbf5e42af9c95997a50c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/44772b1d6d0d1cf55b80a743b44090582d82281d",
-                "reference": "44772b1d6d0d1cf55b80a743b44090582d82281d",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/b0b34d2832a5d981c64ccbf5e42af9c95997a50c",
+                "reference": "b0b34d2832a5d981c64ccbf5e42af9c95997a50c",
                 "shasum": ""
             },
             "require": {
@@ -9332,7 +9332,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-05-04T00:08:24+00:00"
+            "time": "2024-05-26T22:35:39+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
@@ -11718,16 +11718,16 @@
         },
         {
             "name": "skywarth/chaotic-schedule",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/skywarth/chaotic-schedule.git",
-                "reference": "fb55a98fd0ee00b67c956f2f2c52ec317151718f"
+                "reference": "008c786548d6f1a74b4c178612ce5e040c5a7a50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/skywarth/chaotic-schedule/zipball/fb55a98fd0ee00b67c956f2f2c52ec317151718f",
-                "reference": "fb55a98fd0ee00b67c956f2f2c52ec317151718f",
+                "url": "https://api.github.com/repos/skywarth/chaotic-schedule/zipball/008c786548d6f1a74b4c178612ce5e040c5a7a50",
+                "reference": "008c786548d6f1a74b4c178612ce5e040c5a7a50",
                 "shasum": ""
             },
             "require": {
@@ -11738,7 +11738,7 @@
                 "orchestra/testbench": "^6.28",
                 "phpunit/phpunit": "^9.6"
             },
-            "type": "laravel-package",
+            "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
@@ -11777,9 +11777,9 @@
             ],
             "support": {
                 "issues": "https://github.com/skywarth/chaotic-schedule/issues",
-                "source": "https://github.com/skywarth/chaotic-schedule/tree/v1.0.2"
+                "source": "https://github.com/skywarth/chaotic-schedule/tree/v1.1.0"
             },
-            "time": "2023-12-26T23:17:49+00:00"
+            "time": "2024-05-25T22:22:48+00:00"
         },
         {
             "name": "spatie/db-dumper",
@@ -11987,16 +11987,16 @@
         },
         {
             "name": "spatie/image",
-            "version": "3.6.2",
+            "version": "3.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/image.git",
-                "reference": "dca161094b69d2a903ad143f1f0886852ebfcc06"
+                "reference": "1d4e9c536f1bf7b88e55555d0a1ae9eee6b76a99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/image/zipball/dca161094b69d2a903ad143f1f0886852ebfcc06",
-                "reference": "dca161094b69d2a903ad143f1f0886852ebfcc06",
+                "url": "https://api.github.com/repos/spatie/image/zipball/1d4e9c536f1bf7b88e55555d0a1ae9eee6b76a99",
+                "reference": "1d4e9c536f1bf7b88e55555d0a1ae9eee6b76a99",
                 "shasum": ""
             },
             "require": {
@@ -12043,7 +12043,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/image/tree/3.6.2"
+                "source": "https://github.com/spatie/image/tree/3.6.3"
             },
             "funding": [
                 {
@@ -12055,7 +12055,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-23T12:38:15+00:00"
+            "time": "2024-05-24T14:08:59+00:00"
         },
         {
             "name": "spatie/image-optimizer",
@@ -23024,16 +23024,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.1",
+            "version": "1.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e524358f930e41a2b4cca1320e3b04fc26b39e0b"
+                "reference": "0d5d4294a70deb7547db655c47685d680e39cfec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e524358f930e41a2b4cca1320e3b04fc26b39e0b",
-                "reference": "e524358f930e41a2b4cca1320e3b04fc26b39e0b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0d5d4294a70deb7547db655c47685d680e39cfec",
+                "reference": "0d5d4294a70deb7547db655c47685d680e39cfec",
                 "shasum": ""
             },
             "require": {
@@ -23078,7 +23078,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-15T08:00:59+00:00"
+            "time": "2024-05-24T13:23:04+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -23776,16 +23776,16 @@
         },
         {
             "name": "react/promise",
-            "version": "v3.1.0",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "e563d55d1641de1dea9f5e84f3cccc66d2bfe02c"
+                "reference": "8a164643313c71354582dc850b42b33fa12a4b63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/e563d55d1641de1dea9f5e84f3cccc66d2bfe02c",
-                "reference": "e563d55d1641de1dea9f5e84f3cccc66d2bfe02c",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/8a164643313c71354582dc850b42b33fa12a4b63",
+                "reference": "8a164643313c71354582dc850b42b33fa12a4b63",
                 "shasum": ""
             },
             "require": {
@@ -23837,7 +23837,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/promise/issues",
-                "source": "https://github.com/reactphp/promise/tree/v3.1.0"
+                "source": "https://github.com/reactphp/promise/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -23845,7 +23845,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-11-16T16:21:57+00:00"
+            "time": "2024-05-24T10:39:05+00:00"
         },
         {
             "name": "react/socket",
@@ -24066,16 +24066,16 @@
         },
         {
             "name": "rector/swiss-knife",
-            "version": "0.2.3",
+            "version": "0.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/swiss-knife.git",
-                "reference": "618ffe570d2a5316adf9cdab092e789c7f7b0bce"
+                "reference": "aa076d88df0020266502d014f8b414e43b4b5da4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/618ffe570d2a5316adf9cdab092e789c7f7b0bce",
-                "reference": "618ffe570d2a5316adf9cdab092e789c7f7b0bce",
+                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/aa076d88df0020266502d014f8b414e43b4b5da4",
+                "reference": "aa076d88df0020266502d014f8b414e43b4b5da4",
                 "shasum": ""
             },
             "require": {
@@ -24092,7 +24092,7 @@
             "description": "Swiss knife in pocket of every upgrade architect",
             "support": {
                 "issues": "https://github.com/rectorphp/swiss-knife/issues",
-                "source": "https://github.com/rectorphp/swiss-knife/tree/0.2.3"
+                "source": "https://github.com/rectorphp/swiss-knife/tree/0.2.6"
             },
             "funding": [
                 {
@@ -24104,7 +24104,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-10T07:38:18+00:00"
+            "time": "2024-05-26T02:44:18+00:00"
         },
         {
             "name": "reliese/laravel",
