@@ -66,6 +66,7 @@
         "opcodesio/log-viewer": "^3.10",
         "overtrue/laravel-query-logger": "^3.2",
         "overtrue/laravel-uploader": "^3.2",
+        "perryvandermeer/laravel-console-validator": "^1.0",
         "php-collective/decimal-object": "^1.2",
         "php-open-source-saver/jwt-auth": "^2.3",
         "php-static-analysis/attributes": "^0.2",
@@ -106,7 +107,8 @@
         "watson/validating": "^8.2",
         "wendelladriel/laravel-lift": "^0.14",
         "wendelladriel/laravel-validated-dto": "^3.5",
-        "wikimedia/composer-merge-plugin": "^2.1"
+        "wikimedia/composer-merge-plugin": "^2.1",
+        "zircote/swagger-php": "^4.9"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",
