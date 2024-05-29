@@ -97,6 +97,7 @@
         "sqids/sqids": "^0.4",
         "square1/laravel-idempotency": "^2.0",
         "staudenmeir/laravel-adjacency-list": "^1.22",
+        "stevebauman/location": "^7.2",
         "stillat/blade-directives": "^1.2",
         "symfony/polyfill-php83": "^1.29",
         "symfony/stopwatch": "^7.0",

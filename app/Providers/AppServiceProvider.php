@@ -52,6 +52,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -248,6 +249,15 @@ class AppServiceProvider extends ServiceProvider
             });
         });
 
+        $this->whenever($this->app->runningInConsole(), static function (): void {
+            AboutCommand::add('Application', [
+                'Name' => 'laravel-skeleton',
+                'author' => 'guanguans',
+                'github' => 'https://github.com/guanguans/laravel-skeleton',
+                'license' => 'MIT License',
+            ]);
+        });
+
         $this->whenever(request()?->user()?->locale, function (self $serviceProvider, $locale): void {
             $this->setLocales($locale);
         });
@@ -287,6 +297,9 @@ class AppServiceProvider extends ServiceProvider
             // Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
             // DB::handleExceedingCumulativeQueryDuration();
             // Model::unguard();
+            // DB::listen(static function ($query) {
+            //     logger(Str::replaceArray('?', $query->bindings, $query->sql));
+            // });
         });
     }
 
