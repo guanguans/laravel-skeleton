@@ -18182,16 +18182,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "v1.7.5",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "78873fb316b564ed430d55363f98bc5880e18b5c"
+                "reference": "3ec674ad19ce2ee55ec4c972aafb71180621df12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/78873fb316b564ed430d55363f98bc5880e18b5c",
-                "reference": "78873fb316b564ed430d55363f98bc5880e18b5c",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/3ec674ad19ce2ee55ec4c972aafb71180621df12",
+                "reference": "3ec674ad19ce2ee55ec4c972aafb71180621df12",
                 "shasum": ""
             },
             "require": {
@@ -18271,7 +18271,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/v1.7.5"
+                "source": "https://github.com/buggregator/trap/tree/v1.8.0"
             },
             "funding": [
                 {
@@ -18287,7 +18287,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-05-24T15:42:08+00:00"
+            "time": "2024-05-29T18:07:38+00:00"
         },
         {
             "name": "captainhook/captainhook",
@@ -27003,6 +27003,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
