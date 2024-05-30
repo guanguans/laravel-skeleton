@@ -470,9 +470,9 @@ class AppServiceProvider extends ServiceProvider
      */
     private function listenEvents(): void
     {
-        $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
-            $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
-        });
+        // $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
+        //     $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
+        // });
 
         // $this->app->get('events')->listen(DatabaseBusy::class, static function (DatabaseBusy $event) {
         //     Notification::route('mail', 'dev@example.com')
