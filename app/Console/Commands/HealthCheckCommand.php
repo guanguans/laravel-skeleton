@@ -195,7 +195,7 @@ class HealthCheckCommand extends Command
     private function checkPing(?string $url = null): HealthCheckStateEnum
     {
         $response = Http::get($url ?: config('app.url'));
-        if ($response->failed()) {
+        if ($response->serverError()) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
                 static function (HealthCheckStateEnum $state) use ($response): void {
@@ -230,7 +230,6 @@ class HealthCheckCommand extends Command
             'pdo_mysql',
             'xml',
             'zip',
-            'swoole',
         ])->reduce(
             static fn (Collection $missingExtensions, $extension) => $missingExtensions->when(
                 ! \extension_loaded($extension),
@@ -279,7 +278,7 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
-    private function checkMemoryLimit(int $limit = 128): HealthCheckStateEnum
+    private function checkMemoryLimit(int $limit = 256): HealthCheckStateEnum
     {
         $inis = collect(ini_get_all())->filter(static fn ($value, $key): bool => str_contains($key, 'memory_limit'));
         if ($inis->isEmpty()) {
@@ -289,7 +288,7 @@ class HealthCheckCommand extends Command
         }
 
         $localValue = $inis->first()['local_value'];
-        if ($localValue < $limit) {
+        if ($localValue > 0 && $localValue < $limit) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
                 static function (HealthCheckStateEnum $state) use ($limit, $localValue): void {
