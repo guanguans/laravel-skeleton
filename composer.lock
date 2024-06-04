@@ -16321,16 +16321,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v7.1.0",
+            "version": "v7.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "13c750a45ac43c45f45d944d22499768aa1b72d8"
+                "reference": "5b75bb1ac2ba1b9d05c47fc4b3046a625377d23d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/13c750a45ac43c45f45d944d22499768aa1b72d8",
-                "reference": "13c750a45ac43c45f45d944d22499768aa1b72d8",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/5b75bb1ac2ba1b9d05c47fc4b3046a625377d23d",
+                "reference": "5b75bb1ac2ba1b9d05c47fc4b3046a625377d23d",
                 "shasum": ""
             },
             "require": {
@@ -16363,7 +16363,7 @@
             "description": "Provides a way to profile code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/stopwatch/tree/v7.1.0"
+                "source": "https://github.com/symfony/stopwatch/tree/v7.1.1"
             },
             "funding": [
                 {
@@ -16379,7 +16379,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2024-05-31T14:57:53+00:00"
         },
         {
             "name": "symfony/string",
