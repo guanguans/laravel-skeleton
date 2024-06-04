@@ -53,6 +53,7 @@ use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -90,6 +91,7 @@ use Spatie\StructureDiscoverer\Data\DiscoveredClass;
 use Stillat\BladeDirectives\Support\Facades\Directive;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @property EventDispatcherInterface $symfonyDispatcher
@@ -159,6 +161,7 @@ class AppServiceProvider extends ServiceProvider
             // if (($logger = \Illuminate\Support\Facades\Log::getLogger()) instanceof \Monolog\Logger) {
             //     $logger->pushProcessor(new AppendExtraDataProcessor(\request()->headers()));
             // }
+            $this->preProcessRequest();
         });
 
         $this->whenever(true, function (): void {
@@ -465,6 +468,20 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function preProcessRequest(): void
+    {
+        $request = $this->app->make(Request::class);
+
+        $request->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
+
+        if ($request->is('api/v1/*')) {
+            $request->headers->set('Accept', 'application/json');
+        }
+    }
+
+    /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -481,6 +498,12 @@ class AppServiceProvider extends ServiceProvider
         //             $event->connections
         //         ));
         // });
+
+        $this->app->get('events')->listen(RequestHandled::class, static function (RequestHandled $event): void {
+            if ($event->response instanceof JsonResponse) {
+                $event->response->setEncodingOptions($event->response->getEncodingOptions() | JSON_UNESCAPED_UNICODE);
+            }
+        });
     }
 
     private function setLocales(?string $locale = null): void
