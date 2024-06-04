@@ -6,32 +6,36 @@ use App\Models\HttpLog;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Symfony\Component\HttpFoundation\Response;
 
 class LogHttp
 {
-    protected $exceptMethods = [];
+    private array $exceptMethods = [];
 
-    protected $exceptPaths = [];
+    private array $exceptPaths = [];
 
-    protected $removedHeaders = [
+    private array $removedHeaders = [
         'Authorization',
+        'Cookie',
     ];
 
-    protected $removedInputs = [
+    private array $removedInputs = [
         'password',
         'password_confirmation',
         'new_password',
         'old_password',
+        'password',
+        '*password',
+        'password*',
+        '*password*',
     ];
 
-    protected static $skipCallbacks = [];
+    private static array $skipCallbacks = [];
 
     /**
      * Handle an incoming request.
-     *
-     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         // $this->logHttp($request, $next($request));
 
@@ -73,7 +77,7 @@ class LogHttp
         }
 
         foreach ($this->exceptPaths as $exceptPath) {
-            $exceptPath === '/' or $exceptPath = trim($exceptPath, '/');
+            $exceptPath === '/' or $exceptPath = trim((string) $exceptPath, '/');
             if ($request->fullUrlIs($exceptPath) || $request->is($exceptPath)) {
                 return true;
             }
@@ -93,6 +97,7 @@ class LogHttp
         return false;
     }
 
+    /** @noinspection PhpUnused */
     protected function shouldntSkip(Request $request): bool
     {
         return ! $this->shouldSkip($request);
@@ -103,19 +108,22 @@ class LogHttp
      */
     protected function collectData(Request $request, $response): array
     {
-        // MySQL mediumtext 类型最大 16MB (15 * 1024 * 1024)
-        $maxLengthOfMediumtext = 15 * 1024 * 1024;
-
         return [
             'method' => substr($request->method(), 0, 10),
             'path' => substr($request->path(), 0, 128),
-            'request_header' => substr($this->extractHeader($request), 0, $maxLengthOfMediumtext),
-            'input' => substr($this->extractInput($request), 0, $maxLengthOfMediumtext),
-            'response_header' => substr($this->extractHeader($response), 0, $maxLengthOfMediumtext),
-            'response' => substr((string) $response->getContent(), 0, $maxLengthOfMediumtext),
+            'request_header' => $this->getMaxLengthFor($this->extractHeader($request)),
+            'input' => $this->getMaxLengthFor($this->extractInput($request)),
+            'response_header' => $this->getMaxLengthFor($this->extractHeader($response)),
+            'response' => $this->getMaxLengthFor((string) ($response->getContent())),
             'ip' => substr((string) $request->getClientIp(), 0, 16),
             'duration' => substr($this->calculateDuration(), 0, 10),
         ];
+    }
+
+    protected function getMaxLengthFor(string $content): string
+    {
+        // MySQL text 类型最大 64KB (65535)
+        return substr($content, 0, 60 * 1024);
     }
 
     /**
@@ -129,11 +137,13 @@ class LogHttp
             array_map('strtolower', $this->removedHeaders)
         );
 
+        /** @noinspection JsonEncodingApiUsageInspection */
         return (string) json_encode($header);
     }
 
     protected function extractInput(Request $request): string
     {
+        /** @noinspection JsonEncodingApiUsageInspection */
         return (string) json_encode($request->except($this->removedInputs));
     }
 
