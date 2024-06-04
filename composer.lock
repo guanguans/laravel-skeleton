@@ -6579,16 +6579,16 @@
         },
         {
             "name": "laravel/octane",
-            "version": "v2.3.12",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/octane.git",
-                "reference": "e0ab5c8d151e49487a4d92599d7b83abd35490bc"
+                "reference": "2c818d7d213de793b180fc2a079f71c951d494c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/octane/zipball/e0ab5c8d151e49487a4d92599d7b83abd35490bc",
-                "reference": "e0ab5c8d151e49487a4d92599d7b83abd35490bc",
+                "url": "https://api.github.com/repos/laravel/octane/zipball/2c818d7d213de793b180fc2a079f71c951d494c7",
+                "reference": "2c818d7d213de793b180fc2a079f71c951d494c7",
                 "shasum": ""
             },
             "require": {
@@ -6664,7 +6664,7 @@
                 "issues": "https://github.com/laravel/octane/issues",
                 "source": "https://github.com/laravel/octane"
             },
-            "time": "2024-05-24T14:26:00+00:00"
+            "time": "2024-05-31T19:17:54+00:00"
         },
         {
             "name": "laravel/pennant",
@@ -16074,16 +16074,16 @@
         },
         {
             "name": "symfony/psr-http-message-bridge",
-            "version": "v7.0.7",
+            "version": "v7.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/psr-http-message-bridge.git",
-                "reference": "727befd41438a8feb64066871d3656d8cbdcdbe2"
+                "reference": "9a5dbb606da711f5d40a7596ad577856f9402140"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/727befd41438a8feb64066871d3656d8cbdcdbe2",
-                "reference": "727befd41438a8feb64066871d3656d8cbdcdbe2",
+                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/9a5dbb606da711f5d40a7596ad577856f9402140",
+                "reference": "9a5dbb606da711f5d40a7596ad577856f9402140",
                 "shasum": ""
             },
             "require": {
@@ -16137,7 +16137,7 @@
                 "psr-7"
             ],
             "support": {
-                "source": "https://github.com/symfony/psr-http-message-bridge/tree/v7.0.7"
+                "source": "https://github.com/symfony/psr-http-message-bridge/tree/v7.1.1"
             },
             "funding": [
                 {
@@ -16153,7 +16153,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:29:19+00:00"
+            "time": "2024-05-31T14:57:53+00:00"
         },
         {
             "name": "symfony/routing",
