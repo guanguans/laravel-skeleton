@@ -21032,33 +21032,33 @@
         },
         {
             "name": "laravel-lang/common",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/common.git",
-                "reference": "6dd7ec4beae3c9fa046ced5cef020d2f8a353ea5"
+                "reference": "ca96d7f06e231d9c519a3fc22789b3a534e19b17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/common/zipball/6dd7ec4beae3c9fa046ced5cef020d2f8a353ea5",
-                "reference": "6dd7ec4beae3c9fa046ced5cef020d2f8a353ea5",
+                "url": "https://api.github.com/repos/Laravel-Lang/common/zipball/ca96d7f06e231d9c519a3fc22789b3a534e19b17",
+                "reference": "ca96d7f06e231d9c519a3fc22789b3a534e19b17",
                 "shasum": ""
             },
             "require": {
-                "laravel-lang/actions": "^1.1",
-                "laravel-lang/attributes": "^2.7",
-                "laravel-lang/http-statuses": "^3.7",
-                "laravel-lang/json-fallback": "^2.0",
-                "laravel-lang/lang": "^13.12 || ^14.0 || ^15.0",
-                "laravel-lang/locales": "^2.3",
-                "laravel-lang/publisher": "^16.0",
+                "laravel-lang/actions": "^1.8.3",
+                "laravel-lang/attributes": "^2.10.7",
+                "laravel-lang/http-statuses": "^3.8.3",
+                "laravel-lang/json-fallback": "^2.1",
+                "laravel-lang/lang": "^13.12 || ^14.0 || ^15.5.1",
+                "laravel-lang/locales": "^2.8",
+                "laravel-lang/publisher": "^16.4",
                 "php": "^8.1"
             },
             "require-dev": {
-                "dragon-code/support": "^6.12",
-                "orchestra/testbench": "^8.17 || ^9.0",
-                "phpunit/phpunit": "^10.5.3",
-                "symfony/var-dumper": "^6.4 || ^7.0"
+                "dragon-code/support": "^6.13",
+                "orchestra/testbench": "^8.17 || ^9.1.2",
+                "phpunit/phpunit": "^10.5.20",
+                "symfony/var-dumper": "^6.4 || ^7.1.1"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -21111,7 +21111,7 @@
                 "issues": "https://github.com/Laravel-Lang/common/issues",
                 "source": "https://github.com/Laravel-Lang/common"
             },
-            "time": "2024-03-22T18:25:34+00:00"
+            "time": "2024-06-05T19:18:26+00:00"
         },
         {
             "name": "laravel-lang/config",
