@@ -278,6 +278,7 @@
         "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.3/bin/php --ansi",
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
+        "differ": "@composer diff --with-platform --ansi -v",
         "docs-generate": "@php artisan scribe:generate --ansi -v",
         "envoy": "@php ./vendor/bin/envoy --ansi -v",
         "envoy-local": "@envoy run local",
