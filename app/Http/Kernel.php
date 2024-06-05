@@ -67,10 +67,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
+        'abort.if.production' => \App\Http\Middleware\AbortIfProduction::class,
         'set.accept.header' => \App\Http\Middleware\SetAcceptHeader::class,
         'verify.signature' => \App\Http\Middleware\VerifySignature::class,
         'verify.common.parameters' => \App\Http\Middleware\VerifyCommonParameters::class,
-        'verify.production.environment' => \App\Http\Middleware\VerifyProductionEnvironment::class,
         'log.http' => \App\Http\Middleware\LogHttp::class,
     ];
 }

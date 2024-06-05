@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\App;
 
-class VerifyProductionEnvironment extends AbortIf
+class AbortIfProduction extends AbortIf
 {
     protected function condition(): bool
     {
