@@ -20143,24 +20143,24 @@
         },
         {
             "name": "guanguans/laravel-soar",
-            "version": "3.14.1",
+            "version": "3.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-soar.git",
-                "reference": "b209007cf0ee9fb8c9e17356d34c93dc2a61c19f"
+                "reference": "bd32330d96b22d1656096d45b568a3495f2043e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/b209007cf0ee9fb8c9e17356d34c93dc2a61c19f",
-                "reference": "b209007cf0ee9fb8c9e17356d34c93dc2a61c19f",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/bd32330d96b22d1656096d45b568a3495f2043e7",
+                "reference": "bd32330d96b22d1656096d45b568a3495f2043e7",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-pdo": "*",
-                "guanguans/soar-php": "^4.1",
+                "guanguans/soar-php": "^4.2",
                 "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "maximebf/debugbar": "^1.21",
+                "maximebf/debugbar": "^1.22",
                 "php": ">=7.4"
             },
             "require-dev": {
@@ -20168,24 +20168,24 @@
                 "barryvdh/laravel-debugbar": "^3.7",
                 "brainmaestro/composer-git-hooks": "^2.8",
                 "ergebnis/composer-normalize": "^2.42",
-                "friendsofphp/php-cs-fixer": "^3.52",
+                "friendsofphp/php-cs-fixer": "^3.58",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "itsgoingd/clockwork": "^5.2",
                 "kubawerlos/php-cs-fixer-custom-fixers": "^3.21",
                 "laravel/legacy-factories": "^1.4",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^6.43 || ^7.0 || ^8.0 || ^9.0",
+                "orchestra/testbench": "^6.44 || ^7.0 || ^8.0 || ^9.0",
                 "pestphp/pest": "^1.23 || ^2.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0",
                 "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
                 "php-mock/php-mock-phpunit": "^2.10",
                 "phpstan/extension-installer": "^1.3",
-                "phpstan/phpstan-deprecation-rules": "^1.1",
-                "rector/rector": "^1.0",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "rector/rector": "^1.1",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
                 "spatie/ray": "^1.41",
-                "vimeo/psalm": "^5.23"
+                "vimeo/psalm": "^5.24"
             },
             "suggest": {
                 "barryvdh/laravel-debugbar": "Output SQL scores to Laravel DebugBar.",
@@ -20274,7 +20274,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-04-01T08:34:40+00:00"
+            "time": "2024-06-06T08:21:54+00:00"
         },
         {
             "name": "guanguans/soar-php",
