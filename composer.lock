@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a07d9ee5ffad6463fde1ad057d96c37",
+    "content-hash": "1724534b5c449def288d4dfd8d6555ad",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -5654,6 +5654,58 @@
                 "source": "https://github.com/imanghafoori1/laravel-decorator/tree/v1.1.0"
             },
             "time": "2024-05-06T16:47:40+00:00"
+        },
+        {
+            "name": "izniburak/bit-permission",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/izniburak/bit-permission.git",
+                "reference": "42a15a3b76ac313320a57c8aa952a3b2550be9ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/izniburak/bit-permission/zipball/42a15a3b76ac313320a57c8aa952a3b2550be9ce",
+                "reference": "42a15a3b76ac313320a57c8aa952a3b2550be9ce",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.21"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Buki\\BitPermission\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "İzni Burak Demirtaş",
+                    "email": "info@burakdemirtas.org",
+                    "homepage": "https://buki.dev"
+                }
+            ],
+            "description": "simple PHP bitwise control to check somethings like Permissions, Roles, etc.",
+            "homepage": "https://github.com/izniburak/bit-permission",
+            "keywords": [
+                "bitwise",
+                "check",
+                "control",
+                "permission",
+                "role"
+            ],
+            "support": {
+                "issues": "https://github.com/izniburak/bit-permission/issues",
+                "source": "https://github.com/izniburak/bit-permission/tree/v1.0.0"
+            },
+            "time": "2024-06-04T22:19:44+00:00"
         },
         {
             "name": "jasny/immutable",

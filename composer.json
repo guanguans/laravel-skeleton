@@ -45,6 +45,7 @@
         "hamidrezaniazi/pecs": "^1.0",
         "hashids/hashids": "^5.0",
         "imanghafoori/laravel-decorator": "^1.1",
+        "izniburak/bit-permission": "^1.0",
         "jasny/sso": "^0.5",
         "jdavidbakr/laravel-cache-garbage-collector": "^2.2",
         "jenssegers/agent": "^2.6",
