@@ -3953,16 +3953,16 @@
         },
         {
             "name": "elao/enum",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Elao/PhpEnums.git",
-                "reference": "bd65e9edc07d9a60c684369ee656df20b16ec594"
+                "reference": "503a7fbe4e2ec3da23b83a4e2fbc45f373677919"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/bd65e9edc07d9a60c684369ee656df20b16ec594",
-                "reference": "bd65e9edc07d9a60c684369ee656df20b16ec594",
+                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/503a7fbe4e2ec3da23b83a4e2fbc45f373677919",
+                "reference": "503a7fbe4e2ec3da23b83a4e2fbc45f373677919",
                 "shasum": ""
             },
             "require": {
@@ -3970,23 +3970,23 @@
             },
             "require-dev": {
                 "composer/semver": "^3.2",
-                "doctrine/dbal": "^3.2",
-                "doctrine/doctrine-bundle": "^2.5",
-                "doctrine/orm": "^2.10",
+                "doctrine/dbal": "^3.8|^4.0",
+                "doctrine/doctrine-bundle": "^2.11",
+                "doctrine/orm": "^2.20|^3.0",
                 "ext-pdo_sqlite": "*",
                 "phpstan/phpstan": "^1.10",
                 "phpstan/phpstan-symfony": "^1.2",
-                "symfony/browser-kit": "^5.4|^6.3|^7.0",
-                "symfony/config": "^5.4|^6.3|^7.0",
-                "symfony/dependency-injection": "^5.4.2|^6.3|^7.0",
-                "symfony/filesystem": "^5.4|^6.3|^7.0",
-                "symfony/form": "^5.4|^6.3|^7.0",
-                "symfony/framework-bundle": "^5.4|^6.3|^7.0",
-                "symfony/http-kernel": "^5.4.2|^6.3|^7.0",
-                "symfony/phpunit-bridge": "^5.4|^6.3|^7.0",
-                "symfony/translation": "^5.4|^6.3|^7.0",
-                "symfony/var-dumper": "^5.4|^6.3|^7.0",
-                "symfony/yaml": "^5.4|^6.3|^7.0"
+                "symfony/browser-kit": "^5.4.40|^6.4|^7.0",
+                "symfony/config": "^5.4.40|^6.4|^7.0",
+                "symfony/dependency-injection": "^5.4.40|^6.4|^7.0",
+                "symfony/filesystem": "^5.4.40|^6.4|^7.0",
+                "symfony/form": "^5.4.40|^6.4|^7.0",
+                "symfony/framework-bundle": "^5.4.40|^6.4|^7.0",
+                "symfony/http-kernel": "^5.4.40|^6.4|^7.0",
+                "symfony/phpunit-bridge": "^5.4.40|^6.4|^7.0",
+                "symfony/translation": "^5.4.40|^6.4|^7.0",
+                "symfony/var-dumper": "^5.4.40|^6.4|^7.0",
+                "symfony/yaml": "^5.4.40|^6.4|^7.0"
             },
             "type": "library",
             "extra": {
@@ -4026,7 +4026,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Elao/PhpEnums/issues",
-                "source": "https://github.com/Elao/PhpEnums/tree/v2.4.0"
+                "source": "https://github.com/Elao/PhpEnums/tree/v2.5.0"
             },
             "funding": [
                 {
@@ -4034,7 +4034,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-08T09:49:50+00:00"
+            "time": "2024-06-07T13:59:15+00:00"
         },
         {
             "name": "elastic/transport",
