@@ -18171,16 +18171,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "v1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "3ec674ad19ce2ee55ec4c972aafb71180621df12"
+                "reference": "84544aad2a7bc14c179e00213dad56848b1830e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/3ec674ad19ce2ee55ec4c972aafb71180621df12",
-                "reference": "3ec674ad19ce2ee55ec4c972aafb71180621df12",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/84544aad2a7bc14c179e00213dad56848b1830e3",
+                "reference": "84544aad2a7bc14c179e00213dad56848b1830e3",
                 "shasum": ""
             },
             "require": {
@@ -18260,7 +18260,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/v1.8.0"
+                "source": "https://github.com/buggregator/trap/tree/1.9.0"
             },
             "funding": [
                 {
@@ -18276,7 +18276,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-05-29T18:07:38+00:00"
+            "time": "2024-06-07T07:50:52+00:00"
         },
         {
             "name": "captainhook/captainhook",
