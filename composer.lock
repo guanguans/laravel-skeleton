@@ -4835,16 +4835,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.8.0",
+            "version": "2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "9f0ec594fa423277fc7be43b97c438dc0115f818"
+                "reference": "ea00174f97c77d557f5de56d663ffdb2ca31723f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/9f0ec594fa423277fc7be43b97c438dc0115f818",
-                "reference": "9f0ec594fa423277fc7be43b97c438dc0115f818",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/ea00174f97c77d557f5de56d663ffdb2ca31723f",
+                "reference": "ea00174f97c77d557f5de56d663ffdb2ca31723f",
                 "shasum": ""
             },
             "require": {
@@ -4863,7 +4863,7 @@
                 "ergebnis/license": "^2.4",
                 "ergebnis/php-cs-fixer-config": "dev-main",
                 "ergebnis/rector-rules": "^1.0",
-                "friendsofphp/php-cs-fixer": "^3.56",
+                "friendsofphp/php-cs-fixer": "^3.58",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "icanhazstring/composer-unused": "^0.8",
@@ -4875,10 +4875,10 @@
                 "pestphp/pest": "^1.23 || ^2.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0",
                 "php-mock/php-mock-phpunit": "^2.10",
-                "phpstan/extension-installer": "^1.3",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-deprecation-rules": "^1.1",
-                "rector/rector": "^1.0",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "rector/rector": "^1.1",
                 "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
                 "vimeo/psalm": "^5.24"
             },
@@ -4990,7 +4990,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-05-10T10:29:30+00:00"
+            "time": "2024-06-13T02:29:35+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
