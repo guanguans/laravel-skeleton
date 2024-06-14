@@ -1053,16 +1053,16 @@
         },
         {
             "name": "anlutro/l4-settings",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/anlutro/laravel-settings.git",
-                "reference": "379ab5d5a3c7a1e4ac0cf04884b4e7a1a095461d"
+                "reference": "8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/379ab5d5a3c7a1e4ac0cf04884b4e7a1a095461d",
-                "reference": "379ab5d5a3c7a1e4ac0cf04884b4e7a1a095461d",
+                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc",
+                "reference": "8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc",
                 "shasum": ""
             },
             "require": {
@@ -1110,9 +1110,9 @@
             "description": "Persistent settings in Laravel.",
             "support": {
                 "issues": "https://github.com/anlutro/laravel-settings/issues",
-                "source": "https://github.com/anlutro/laravel-settings/tree/v1.4.0"
+                "source": "https://github.com/anlutro/laravel-settings/tree/v1.4.1"
             },
-            "time": "2024-03-13T08:59:39+00:00"
+            "time": "2024-06-14T10:45:27+00:00"
         },
         {
             "name": "appstract/laravel-opcache",
