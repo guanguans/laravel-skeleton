@@ -8907,20 +8907,20 @@
         },
         {
             "name": "not-empty/jwt-manager-php-lib",
-            "version": "6.0.0",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/not-empty/jwt-manager-php-lib.git",
-                "reference": "32f0a0c26453237add5e456074d2ec80d487ab5c"
+                "reference": "f1c08fdd5acf94e8789a555382070f538b3e04af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/not-empty/jwt-manager-php-lib/zipball/32f0a0c26453237add5e456074d2ec80d487ab5c",
-                "reference": "32f0a0c26453237add5e456074d2ec80d487ab5c",
+                "url": "https://api.github.com/repos/not-empty/jwt-manager-php-lib/zipball/f1c08fdd5acf94e8789a555382070f538b3e04af",
+                "reference": "f1c08fdd5acf94e8789a555382070f538b3e04af",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.2"
+                "php": "^8.3"
             },
             "require-dev": {
                 "mockery/mockery": "^1.6",
@@ -8947,9 +8947,9 @@
             "description": "PHP library to manage JWT authentication",
             "support": {
                 "issues": "https://github.com/not-empty/jwt-manager-php-lib/issues",
-                "source": "https://github.com/not-empty/jwt-manager-php-lib/tree/6.0.0"
+                "source": "https://github.com/not-empty/jwt-manager-php-lib/tree/7.0.0"
             },
-            "time": "2023-11-03T16:12:30+00:00"
+            "time": "2023-11-27T11:11:42+00:00"
         },
         {
             "name": "nunomaduro/laravel-console-task",
