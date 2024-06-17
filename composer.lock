@@ -20230,16 +20230,16 @@
         },
         {
             "name": "guanguans/laravel-soar",
-            "version": "3.16.1",
+            "version": "3.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-soar.git",
-                "reference": "f097dc5e460df867d5ac27d5b5e1ac48a3bf6f07"
+                "reference": "9a3b0f89cbac3fa99cb9d7d94518688ca6b3ee9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/f097dc5e460df867d5ac27d5b5e1ac48a3bf6f07",
-                "reference": "f097dc5e460df867d5ac27d5b5e1ac48a3bf6f07",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/9a3b0f89cbac3fa99cb9d7d94518688ca6b3ee9e",
+                "reference": "9a3b0f89cbac3fa99cb9d7d94518688ca6b3ee9e",
                 "shasum": ""
             },
             "require": {
@@ -20254,8 +20254,8 @@
                 "bamarni/composer-bin-plugin": "^1.8",
                 "barryvdh/laravel-debugbar": "^3.7",
                 "brainmaestro/composer-git-hooks": "^2.8",
-                "ergebnis/composer-normalize": "^2.42",
-                "friendsofphp/php-cs-fixer": "^3.58",
+                "ergebnis/composer-normalize": "^2.43",
+                "friendsofphp/php-cs-fixer": "^3.59",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "itsgoingd/clockwork": "^5.2",
@@ -20361,7 +20361,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-06-11T08:10:02+00:00"
+            "time": "2024-06-17T06:06:24+00:00"
         },
         {
             "name": "guanguans/soar-php",
