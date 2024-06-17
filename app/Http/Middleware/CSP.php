@@ -41,7 +41,7 @@ class CSP
 
         $policy = collect($csp['policy'])
             ->filter()
-            ->map(fn ($value, $key) => "{$key} ".collect($value)->filter()->implode(' '))
+            ->map(static fn ($value, $key): string => "{$key} ".collect($value)->filter()->implode(' '))
             ->implode(' ; ');
 
         $header = $csp['report_only'] ? 'Content-Security-Policy-Report-Only' : 'Content-Security-Policy';

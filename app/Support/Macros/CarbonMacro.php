@@ -30,4 +30,12 @@ class CarbonMacro
             auth($guard)->user()?->timezone ?? config('app.timezone')
         );
     }
+
+    /**
+     * @noinspection PhpIncompatibleReturnTypeInspection
+     */
+    public function toFormattedDateTimeString(): \Closure
+    {
+        return static fn (): Carbon => static::this()->format('Y-m-d H:i:s');
+    }
 }

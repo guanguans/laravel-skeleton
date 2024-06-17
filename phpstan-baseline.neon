@@ -21,6 +21,11 @@ parameters:
 			path: app/Support/Macros/BlueprintMacro.php
 
 		-
+			message: "#^Call to protected static method this\\(\\) of class Carbon\\\\Carbon\\.$#"
+			count: 1
+			path: app/Support/Macros/CarbonMacro.php
+
+		-
 			message: "#^Variable \\$taskException might not be defined\\.$#"
 			count: 1
 			path: app/Support/Macros/CommandMacro.php
