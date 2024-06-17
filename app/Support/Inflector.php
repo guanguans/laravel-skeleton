@@ -57,7 +57,7 @@ class Inflector
     protected static array $singular = [
         '/(s)tatuses$/i' => '\1\2tatus',
         '/^(.*)(menu)s$/i' => '\1\2',
-        '/(quiz)zes$/i' => '\\1',
+        '/(quiz)zes$/i' => '\1',
         '/(matr)ices$/i' => '\1ix',
         '/(vert|ind)ices$/i' => '\1ex',
         '/^(ox)en/i' => '\1',
@@ -87,7 +87,7 @@ class Inflector
         '/(c)hildren$/i' => '\1\2hild',
         '/(n)ews$/i' => '\1\2ews',
         '/eaus$/' => 'eau',
-        '/^(.*us)$/' => '\\1',
+        '/^(.*us)$/' => '\1',
         '/s$/i' => '',
     ];
 
@@ -226,10 +226,10 @@ class Inflector
 
         if (! isset(static::$cache['irregular']['pluralize'])) {
             $words = array_keys(static::$irregular);
-            static::$cache['irregular']['pluralize'] = '/(.*?(?:\\b|_))('.implode('|', $words).')$/i';
+            static::$cache['irregular']['pluralize'] = '/(.*?(?:\b|_))('.implode('|', $words).')$/i';
 
             $upperWords = array_map('ucfirst', $words);
-            static::$cache['irregular']['upperPluralize'] = '/(.*?(?:\\b|[a-z]))('.implode('|', $upperWords).')$/';
+            static::$cache['irregular']['upperPluralize'] = '/(.*?(?:\b|[a-z]))('.implode('|', $upperWords).')$/';
         }
 
         if (
@@ -279,10 +279,10 @@ class Inflector
 
         if (! isset(static::$cache['irregular']['singular'])) {
             $wordList = array_values(static::$irregular);
-            static::$cache['irregular']['singular'] = '/(.*?(?:\\b|_))('.implode('|', $wordList).')$/i';
+            static::$cache['irregular']['singular'] = '/(.*?(?:\b|_))('.implode('|', $wordList).')$/i';
 
             $upperWordList = array_map('ucfirst', $wordList);
-            static::$cache['irregular']['singularUpper'] = '/(.*?(?:\\b|[a-z]))('.
+            static::$cache['irregular']['singularUpper'] = '/(.*?(?:\b|[a-z]))('.
                                                            implode('|', $upperWordList).
                                                            ')$/';
         }
@@ -415,7 +415,7 @@ class Inflector
         $result = static::cache($cacheKey, $string);
 
         if (false === $result) {
-            $result = mb_strtolower(preg_replace('/(?<=\\w)([A-Z])/', $delimiter.'\\1', $string));
+            $result = mb_strtolower(preg_replace('/(?<=\w)([A-Z])/', $delimiter.'\1', $string));
             static::cache($cacheKey, $string, $result);
         }
 
