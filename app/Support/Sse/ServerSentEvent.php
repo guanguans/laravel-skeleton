@@ -86,6 +86,10 @@ class ServerSentEvent implements \Stringable
 
     private bool $headersSent = false;
 
+    private array $beforeCallbacks = [];
+
+    private array $afterCallbacks = [];
+
     public function __construct(
         ?callable $tapper = null,
         private null|string|\Stringable $event = null,
@@ -133,8 +137,8 @@ class ServerSentEvent implements \Stringable
                 // Echo server sent event.
                 $this->send();
             } catch (CloseServerSentEventException $e) {
-                // $e->serverSentEvent?->send();
-                $e->serverSentEvent?->sendContent();
+                // $e->serverSentEvent?->sendContent();
+                $e->serverSentEvent?->send();
 
                 return;
             } finally {
@@ -169,6 +173,16 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    public function isHeadersSent(): bool
+    {
+        return $this->headersSent;
+    }
+
+    public function getEvent(): \Stringable|string|null
+    {
+        return $this->event;
+    }
+
     public function setEvent(null|string|\Stringable $event): self
     {
         $this->event = $event;
@@ -176,7 +190,12 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
-    public function setData(null|array|string|\Stringable $data, $options = JSON_THROW_ON_ERROR): self
+    public function getData(): \Stringable|array|string|null
+    {
+        return $this->data;
+    }
+
+    public function setData(null|array|string|\Stringable $data, int $options = JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE): self
     {
         if (\is_array($data)) {
             $data = json_encode($data, $options);
@@ -187,11 +206,21 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    public function getId(): \Stringable|string|null
+    {
+        return $this->id;
+    }
+
     public function setId(null|string|\Stringable $id): self
     {
         $this->id = $id;
 
         return $this;
+    }
+
+    public function getComment(): \Stringable|string|null
+    {
+        return $this->comment;
     }
 
     public function setComment(null|string|\Stringable $comment): self
@@ -201,6 +230,11 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    public function getRetry(): ?int
+    {
+        return $this->retry;
+    }
+
     public function setRetry(?int $retry): self
     {
         $this->retry = $retry;
@@ -208,9 +242,43 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    public function getSleep(): int
+    {
+        return $this->sleep;
+    }
+
     public function setSleep(int $sleep): self
     {
         $this->sleep = $sleep;
+
+        return $this;
+    }
+
+    public function before(\Closure $callback): self
+    {
+        $this->beforeCallbacks[] = $callback;
+
+        return $this;
+    }
+
+    public function after(\Closure $callback): self
+    {
+        return $this->then($callback);
+    }
+
+    public function then(\Closure $callback): self
+    {
+        $this->afterCallbacks[] = $callback;
+
+        return $this;
+    }
+
+    public function send(): self
+    {
+        $this->callBeforeCallbacks();
+        $this->sendHeaders();
+        $this->sendContent();
+        $this->callAfterCallbacks();
 
         return $this;
     }
@@ -239,11 +307,17 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
-    public function send(): self
+    public function callBeforeCallbacks(): void
     {
-        $this->sendHeaders();
-        $this->sendContent();
+        foreach ($this->beforeCallbacks as $callback) {
+            $callback($this);
+        }
+    }
 
-        return $this;
+    public function callAfterCallbacks(): void
+    {
+        foreach ($this->afterCallbacks as $callback) {
+            $callback($this);
+        }
     }
 }
