@@ -14182,16 +14182,16 @@
         },
         {
             "name": "stevebauman/location",
-            "version": "v7.3.0",
+            "version": "v7.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stevebauman/location.git",
-                "reference": "3033fc692b8e6938879244f667ff1236bddbf153"
+                "reference": "f565e2badaa764f90fd5b9199ca152eb7b76ff2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stevebauman/location/zipball/3033fc692b8e6938879244f667ff1236bddbf153",
-                "reference": "3033fc692b8e6938879244f667ff1236bddbf153",
+                "url": "https://api.github.com/repos/stevebauman/location/zipball/f565e2badaa764f90fd5b9199ca152eb7b76ff2a",
+                "reference": "f565e2badaa764f90fd5b9199ca152eb7b76ff2a",
                 "shasum": ""
             },
             "require": {
@@ -14245,9 +14245,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stevebauman/location/issues",
-                "source": "https://github.com/stevebauman/location/tree/v7.3.0"
+                "source": "https://github.com/stevebauman/location/tree/v7.3.1"
             },
-            "time": "2024-06-13T13:43:33+00:00"
+            "time": "2024-06-20T13:59:02+00:00"
         },
         {
             "name": "stillat/blade-directives",
