@@ -15765,16 +15765,16 @@
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.29.0",
+            "version": "v1.30.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "861391a8da9a04cbad2d232ddd9e4893220d6e25"
+                "reference": "10112722600777e02d2745716b70c5db4ca70442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/861391a8da9a04cbad2d232ddd9e4893220d6e25",
-                "reference": "861391a8da9a04cbad2d232ddd9e4893220d6e25",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/10112722600777e02d2745716b70c5db4ca70442",
+                "reference": "10112722600777e02d2745716b70c5db4ca70442",
                 "shasum": ""
             },
             "require": {
@@ -15818,7 +15818,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php72/tree/v1.29.0"
+                "source": "https://github.com/symfony/polyfill-php72/tree/v1.30.0"
             },
             "funding": [
                 {
@@ -15834,7 +15834,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-29T20:11:03+00:00"
+            "time": "2024-06-19T12:30:46+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -18331,16 +18331,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.9.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "84544aad2a7bc14c179e00213dad56848b1830e3"
+                "reference": "03c9ea0f4ef9d99ee5b8601564127ddd7257c812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/84544aad2a7bc14c179e00213dad56848b1830e3",
-                "reference": "84544aad2a7bc14c179e00213dad56848b1830e3",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/03c9ea0f4ef9d99ee5b8601564127ddd7257c812",
+                "reference": "03c9ea0f4ef9d99ee5b8601564127ddd7257c812",
                 "shasum": ""
             },
             "require": {
@@ -18420,7 +18420,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.9.0"
+                "source": "https://github.com/buggregator/trap/tree/1.10.0"
             },
             "funding": [
                 {
@@ -18436,7 +18436,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-06-07T07:50:52+00:00"
+            "time": "2024-06-20T18:57:46+00:00"
         },
         {
             "name": "captainhook/captainhook",
