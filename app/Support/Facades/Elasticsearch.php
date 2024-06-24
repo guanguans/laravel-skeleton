@@ -86,7 +86,6 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Elastic\Elasticsearch\Endpoints\Ccr ccr()
  * @method static \Elastic\Elasticsearch\Endpoints\Cluster cluster()
  * @method static \Elastic\Elasticsearch\Endpoints\Connector connector()
- * @method static \Elastic\Elasticsearch\Endpoints\ConnectorSyncJob connectorSyncJob()
  * @method static \Elastic\Elasticsearch\Endpoints\DanglingIndices danglingIndices()
  * @method static \Elastic\Elasticsearch\Endpoints\Enrich enrich()
  * @method static \Elastic\Elasticsearch\Endpoints\Eql eql()

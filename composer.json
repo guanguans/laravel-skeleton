@@ -290,7 +290,7 @@
         "envy-prune": "@php artisan envy:prune --ansi -v",
         "envy-sync": "@php artisan envy:sync --ansi -v",
         "facade-lint": "@facade-update --lint",
-        "facade-update": "@php -f ./facade.php -- App\\\\Support\\\\Facades\\\\Elasticsearch App\\\\Support\\\\Facades\\\\OpenAI App\\\\Support\\\\Facades\\\\PushDeer",
+        "facade-update": "@php -f ./facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facades/*.php'\\'')));')",
         "ide-helper": [
             "@php artisan ide-helper:generate --ansi -v",
             "@php artisan ide-helper:models --nowrite --ansi -v",
