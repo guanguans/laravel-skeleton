@@ -20,7 +20,7 @@ class EloquentLogHttpModelFormatter extends NormalizerFormatter
         return collect($context)
             ->only(['method', 'path', 'request_header', 'input', 'response_header', 'response', 'ip', 'duration'])
             ->map(fn (mixed $value): string => \is_string($value) ? $value : $this->strFor($value))
-            ->pipe(fn (Collection $context) => [
+            ->pipe(fn (Collection $context): array => [
                 'method' => substr($context['method'], 0, 10),
                 'path' => substr($context['path'], 0, 128),
                 'request_header' => $this->textFor($context['request_header']),

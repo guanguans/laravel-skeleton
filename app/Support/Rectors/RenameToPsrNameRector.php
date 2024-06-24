@@ -2,20 +2,14 @@
 
 declare(strict_types=1);
 
-/**
- * This file is part of the guanguans/laravel-skeleton.
- *
- * (c) guanguans <ityaozm@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled.
- */
-
 namespace App\Support\Rectors;
 
 use Illuminate\Support\Str;
 use PhpParser\Node;
 use Rector\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Rector\AbstractRector;
+use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
+use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
@@ -32,20 +26,30 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         'static',
         'stdClass',
         'true',
-        'php_errormsg',
-        'http_response_header',
         'GLOBALS',
-        '_SERVER',
-        '_GET',
-        '_POST',
-        '_FILES',
-        '_REQUEST',
         '_COOKIE',
-        '_SESSION',
         '_ENV',
-        '_PHP_SELF',
+        'HTTP_ENV_VARS',
+        '_FILES',
+        'HTTP_POST_FILES',
+        '_GET',
+        'HTTP_GET_VARS',
+        '_POST',
+        'HTTP_POST_VARS',
+        '_REQUEST',
+        '_SERVER',
+        'HTTP_SERVER_VARS',
+        '_SESSION',
+        'HTTP_SESSION_VARS',
+        'HTTP_RAW_POST_DATA',
+        'http_response_header',
+        'php_errormsg',
     ];
 
+    /**
+     * @throws PoorDocumentationException
+     * @throws ShouldNotHappenException
+     */
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
@@ -57,7 +61,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
                         function functionName(){}
                         functionName();
                         call_user_func('functionName');
-                        call_user_func_array('functionName');
+                        call_user_func_array('functionName', []);
                         function_exists('functionName');
 
                         // ucfirst camel
@@ -227,7 +231,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
 
             $pattern = preg_quote($pattern, '#');
             $pattern = str_replace('\*', '.*', $pattern);
-            if (1 === preg_match('#^'.$pattern.'\z#u', $value)) {
+            if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
                 return true;
             }
         }
@@ -247,7 +251,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     protected function rename(Node $node, callable $renamer): Node
     {
         $renamer = fn (string $name): string => $renamer((function (string $name): string {
-            throw_if($this->isMatches($name, $this->except), \RuntimeException::class, "The name[$name] is skipped.");
+            throw_if($this->isMatches($name, $this->except), new \RuntimeException("The name[$name] is skipped."));
 
             if (ctype_upper(preg_replace('/[^a-zA-Z]/', '', $name))) {
                 return mb_strtolower($name, 'UTF-8');
@@ -564,7 +568,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     protected function hasFuncCallIndexStringArg(Node\Expr\FuncCall $funcCall, int $index): bool
     {
         return isset($funcCall->args[$index])
-            && null === $funcCall->args[$index]->name
+            && $funcCall->args[$index]->name === null
             && $funcCall->args[$index]->value instanceof Node\Scalar\String_;
     }
 
