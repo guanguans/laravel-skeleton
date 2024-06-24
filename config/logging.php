@@ -1,6 +1,6 @@
 <?php
 
-use App\Support\Monolog\AnsiLineFormatter;
+use App\Support\Monolog\Formatter\AnsiLineFormatter;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;

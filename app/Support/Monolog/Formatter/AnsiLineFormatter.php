@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Monolog;
+namespace App\Support\Monolog\Formatter;
 
 use Monolog\Formatter\LineFormatter;
 use Monolog\Level;

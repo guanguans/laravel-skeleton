@@ -2,91 +2,96 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\HttpLog;
 use Closure;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class LogHttp
 {
-    private array $exceptMethods = [];
-
-    private array $exceptPaths = [];
-
-    private array $removedHeaders = [
-        'Authorization',
-        'Cookie',
-    ];
-
-    private array $removedInputs = [
-        'password',
-        'password_confirmation',
-        'new_password',
-        'old_password',
-        'password',
-        '*password',
-        'password*',
-        '*password*',
-    ];
-
+    /**
+     * @var array<\Closure>
+     */
     private static array $skipCallbacks = [];
 
-    /**
-     * Handle an incoming request.
-     */
-    public function handle(Request $request, Closure $next): Response
-    {
-        // $this->logHttp($request, $next($request));
+    private static Logger $logger;
 
-        return $next($request);
-    }
+    private static string $level;
 
     /**
-     * @param  \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse  $response
+     * @var array<string>
      */
-    public function terminate(Request $request, $response): void
-    {
-        $this->logHttp($request, $response);
-    }
+    private array $headerHidden = [
+        'api-key',
+        'authorization',
+        'cookie',
+        'token',
+    ];
 
+    /**
+     * @var array<string>
+     */
+    private array $inputHidden = [
+        '*password',
+        '*password*',
+        'password',
+        'password*',
+    ];
+
+    /**
+     * @see \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::skipWhen()
+     */
     public static function skipWhen(Closure $callback): void
     {
         static::$skipCallbacks[] = $callback;
     }
 
-    /**
-     * @param  \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse  $response
-     */
-    protected function logHttp(Request $request, $response): void
+    public static function setLogger(string|LoggerInterface $logger): void
     {
-        if ($this->shouldLogHttp($request)) {
-            HttpLog::query()->create($this->collectData($request, $response));
-        }
-    }
-
-    protected function shouldLogHttp(Request $request): bool
-    {
-        return ! $this->shouldntLogHttp($request);
-    }
-
-    protected function shouldntLogHttp(Request $request): bool
-    {
-        if (\in_array($request->method(), array_map('strtoupper', $this->exceptMethods), true)) {
-            return true;
+        if (\is_string($logger)) {
+            $logger = Log::channel($logger);
         }
 
-        foreach ($this->exceptPaths as $exceptPath) {
-            $exceptPath === '/' or $exceptPath = trim((string) $exceptPath, '/');
-            if ($request->fullUrlIs($exceptPath) || $request->is($exceptPath)) {
-                return true;
-            }
+        if (! $logger instanceof Logger) {
+            $logger = new Logger($logger, app(Dispatcher::class));
         }
 
-        return $this->shouldSkip($request);
+        static::$logger = $logger;
     }
 
-    protected function shouldSkip(Request $request): bool
+    public static function setLevel(string $level): void
+    {
+        static::$level = $level;
+    }
+
+    public function handle(Request $request, Closure $next, string|LoggerInterface $logger, string $level = 'info'): Response
+    {
+        static::setLogger($logger);
+        static::setLevel($level);
+        // $this->terminate($request, $next($request));
+
+        return $next($request);
+    }
+
+    public function terminate(Request $request, Response $response): void
+    {
+        if ($this->shouldSkip($request)) {
+            return;
+        }
+
+        static::$logger->log(
+            static::$level,
+            $this->messageFor($request, $response),
+            $this->contextFor($request, $response)
+        );
+    }
+
+    private function shouldSkip(Request $request): bool
     {
         foreach (static::$skipCallbacks as $callback) {
             if ($callback($request)) {
@@ -97,57 +102,74 @@ class LogHttp
         return false;
     }
 
-    /** @noinspection PhpUnused */
-    protected function shouldntSkip(Request $request): bool
+    /**
+     * @see \Symfony\Component\HttpFoundation\Request::__toString()
+     * @see \Symfony\Component\HttpFoundation\Response::__toString()
+     */
+    private function messageFor(Request $request, Response $response): string
     {
-        return ! $this->shouldSkip($request);
+        return sprintf(
+            '%s %s %s -> HTTP/%s %s %s',
+            $request->method(),
+            $request->path(),
+            $request->getProtocolVersion(),
+            $response->getProtocolVersion(),
+            $response->getStatusCode(),
+            $this->statusTextFor($response)
+        );
     }
 
     /**
-     * @param  \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse  $response
+     * @noinspection GlobalVariableUsageInspection
      */
-    protected function collectData(Request $request, $response): array
+    private function contextFor(Request $request, Response $response): array
     {
         return [
-            'method' => substr($request->method(), 0, 10),
-            'path' => substr($request->path(), 0, 128),
-            'request_header' => $this->getMaxLengthFor($this->extractHeader($request)),
-            'input' => $this->getMaxLengthFor($this->extractInput($request)),
-            'response_header' => $this->getMaxLengthFor($this->extractHeader($response)),
-            'response' => $this->getMaxLengthFor((string) ($response->getContent())),
-            'ip' => substr((string) $request->getClientIp(), 0, 16),
-            'duration' => substr($this->calculateDuration(), 0, 10),
+            'method' => $request->method(),
+            'path' => $request->path(),
+            'request_header' => $this->headerFor($request),
+            // 'files' => $request->allFiles(),
+            'files' => $_FILES,
+            'post' => $this->inputFor($request->post()),
+            'query' => $request->query(),
+            'input' => $this->inputFor($request->input()),
+            'status_code' => $response->getStatusCode(),
+            'status_text' => $this->statusTextFor($response),
+            'response_header' => $this->headerFor($response),
+            'response' => $this->responseFor($response),
+            'ip' => $request->getClientIp(),
+            'duration' => $this->duration(),
         ];
     }
 
-    protected function getMaxLengthFor(string $content): string
+    private function headerFor(Response|Request $requestOrResponse): array
     {
-        // MySQL text 类型最大 64KB (65535)
-        return substr($content, 0, 60 * 1024);
+        return collect($requestOrResponse->headers->all())
+            ->map(fn (array $header, string $key): string => Str::is($this->headerHidden, $key) ? '***' : $header[0])
+            ->all();
+    }
+
+    private function inputFor(array $input): array
+    {
+        return collect($input)
+            ->map(fn (mixed $value, string $key): mixed => Str::is($this->inputHidden, $key) ? '***' : $value)
+            ->all();
     }
 
     /**
-     * @param  \Illuminate\Http\Request|\Illuminate\Http\Response  $requestOrResponse
-     * @param  \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse  $requestOrResponse
+     * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      */
-    protected function extractHeader($requestOrResponse): string
+    private function statusTextFor(Response $response): string
     {
-        $header = Arr::except(
-            $requestOrResponse->headers->all(),
-            array_map('strtolower', $this->removedHeaders)
-        );
-
-        /** @noinspection JsonEncodingApiUsageInspection */
-        return (string) json_encode($header);
+        return Response::$statusTexts[$response->getStatusCode()] ?? 'unknown status';
     }
 
-    protected function extractInput(Request $request): string
+    private function responseFor(Response $response): mixed
     {
-        /** @noinspection JsonEncodingApiUsageInspection */
-        return (string) json_encode($request->except($this->removedInputs));
+        return $response instanceof JsonResponse ? $response->getData(true) : $response->getContent();
     }
 
-    protected function calculateDuration(): string
+    private function duration(): string
     {
         return number_format(microtime(true) - LARAVEL_START, 3);
     }
