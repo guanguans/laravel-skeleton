@@ -270,8 +270,10 @@
             "@phpstan",
             "@rector-dry-run"
         ],
+        "composer-audit": "@composer audit --ansi -v",
         "composer-bin-all-update": "@composer bin all update --ansi -v",
         "composer-check-platform-reqs": "@composer check-platform-reqs --ansi -v",
+        "composer-diff": "@composer diff --with-platform --ansi -v",
         "composer-normalize": "@composer normalize --dry-run --diff --ansi -v",
         "composer-parallel": "@composer parallel --ansi -v",
         "composer-parallel-checks": "@composer-parallel composer-validate md-lint lint style-lint test psalm",
@@ -281,7 +283,6 @@
         "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.3/bin/php --ansi",
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
-        "differ": "@composer diff --with-platform --ansi -v",
         "docs-generate": "@php artisan scribe:generate --ansi -v",
         "envoy": "@php ./vendor/bin/envoy --ansi -v",
         "envoy-local": "@envoy run local",
