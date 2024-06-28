@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Listeners\MaintenanceModeDisabledNotificationListener;
+use App\Listeners\MaintenanceModeEnabledNotificationListener;
 use App\Listeners\ShareLogContextSubscriber;
 use App\Observers\UserObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +34,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         \Illuminate\Auth\Events\PasswordReset::class => [
             \App\Listeners\LogActivity::class.'@passwordReset',
+        ],
+        \Illuminate\Foundation\Events\MaintenanceModeEnabled::class => [
+            MaintenanceModeEnabledNotificationListener::class,
+        ],
+        \Illuminate\Foundation\Events\MaintenanceModeDisabled::class => [
+            MaintenanceModeDisabledNotificationListener::class,
         ],
     ];
 
