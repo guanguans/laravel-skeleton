@@ -24893,16 +24893,16 @@
         },
         {
             "name": "rector/swiss-knife",
-            "version": "0.2.16",
+            "version": "0.2.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/swiss-knife.git",
-                "reference": "abcb520551ecf233a827263563a0c5817f35cc42"
+                "reference": "f072ed1bcf93813e131284c28ee4f4a92862afdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/abcb520551ecf233a827263563a0c5817f35cc42",
-                "reference": "abcb520551ecf233a827263563a0c5817f35cc42",
+                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/f072ed1bcf93813e131284c28ee4f4a92862afdb",
+                "reference": "f072ed1bcf93813e131284c28ee4f4a92862afdb",
                 "shasum": ""
             },
             "require": {
@@ -24919,7 +24919,7 @@
             "description": "Swiss knife in pocket of every upgrade architect",
             "support": {
                 "issues": "https://github.com/rectorphp/swiss-knife/issues",
-                "source": "https://github.com/rectorphp/swiss-knife/tree/0.2.16"
+                "source": "https://github.com/rectorphp/swiss-knife/tree/0.2.17"
             },
             "funding": [
                 {
@@ -24931,7 +24931,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-31T08:55:34+00:00"
+            "time": "2024-07-02T08:41:42+00:00"
         },
         {
             "name": "reliese/laravel",
