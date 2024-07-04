@@ -82,7 +82,7 @@
         "skywarth/chaotic-schedule": "^1.1",
         "spatie/fork": "^1.2",
         "spatie/laravel-activitylog": "^4.8",
-        "spatie/laravel-backup": "^8.8",
+        "spatie/laravel-backup": "^9.0",
         "spatie/laravel-csp": "^2.10",
         "spatie/laravel-failed-job-monitor": "^4.3",
         "spatie/laravel-health": "^1.29",
