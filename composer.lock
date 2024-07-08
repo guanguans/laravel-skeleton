@@ -4836,16 +4836,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.8.4",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "2586a7793fe5d9a13fab5093d94d6ad5021ed8ca"
+                "reference": "c6671e7cc9f7fb1a7b75081eeaf2ddf2dbb3b8aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/2586a7793fe5d9a13fab5093d94d6ad5021ed8ca",
-                "reference": "2586a7793fe5d9a13fab5093d94d6ad5021ed8ca",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/c6671e7cc9f7fb1a7b75081eeaf2ddf2dbb3b8aa",
+                "reference": "c6671e7cc9f7fb1a7b75081eeaf2ddf2dbb3b8aa",
                 "shasum": ""
             },
             "require": {
@@ -4859,12 +4859,11 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8",
-                "brainmaestro/composer-git-hooks": "^2.8",
-                "ergebnis/composer-normalize": "^2.42",
+                "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
+                "ergebnis/composer-normalize": "^2.43",
                 "ergebnis/license": "^2.4",
                 "ergebnis/php-cs-fixer-config": "dev-main",
                 "ergebnis/rector-rules": "^1.0",
-                "friendsofphp/php-cs-fixer": "^3.58",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "icanhazstring/composer-unused": "^0.8",
@@ -4879,9 +4878,9 @@
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan": "^1.11",
                 "phpstan/phpstan-deprecation-rules": "^1.2",
-                "rector/rector": "^1.1",
+                "rector/rector": "^1.2",
                 "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
-                "vimeo/psalm": "^5.24"
+                "vimeo/psalm": "^5.25"
             },
             "suggest": {
                 "illuminate/collections": "Required to use the method [Response::collect()].",
@@ -4991,7 +4990,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-06-14T06:26:25+00:00"
+            "time": "2024-07-08T03:14:28+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
