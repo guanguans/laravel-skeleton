@@ -2373,16 +2373,16 @@
         },
         {
             "name": "dflydev/dot-access-data",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dflydev/dflydev-dot-access-data.git",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549"
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/f41715465d65213d644d3141a6a93081be5d3549",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549",
+                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/a23a2bf4f31d3518f3ecb38660c95715dfead60f",
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f",
                 "shasum": ""
             },
             "require": {
@@ -2442,9 +2442,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dflydev/dflydev-dot-access-data/issues",
-                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
+                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
-            "time": "2022-10-27T11:44:00+00:00"
+            "time": "2024-07-08T12:26:09+00:00"
         },
         {
             "name": "divineomega/do-file-cache",
@@ -21647,16 +21647,16 @@
         },
         {
             "name": "laravel-lang/common",
-            "version": "6.3.0",
+            "version": "6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/common.git",
-                "reference": "934371d4c775647ce30361d5aef661d4e1622613"
+                "reference": "36c0270180f71420c1166c26f38dc25e1c8b7f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/common/zipball/934371d4c775647ce30361d5aef661d4e1622613",
-                "reference": "934371d4c775647ce30361d5aef661d4e1622613",
+                "url": "https://api.github.com/repos/Laravel-Lang/common/zipball/36c0270180f71420c1166c26f38dc25e1c8b7f64",
+                "reference": "36c0270180f71420c1166c26f38dc25e1c8b7f64",
                 "shasum": ""
             },
             "require": {
@@ -21666,6 +21666,7 @@
                 "laravel-lang/json-fallback": "^2.1",
                 "laravel-lang/lang": "^13.12 || ^14.0 || ^15.5.1",
                 "laravel-lang/locales": "^2.8",
+                "laravel-lang/models": "^1.0",
                 "laravel-lang/publisher": "^16.4",
                 "laravel-lang/routes": "^1.0",
                 "php": "^8.1"
@@ -21727,20 +21728,20 @@
                 "issues": "https://github.com/Laravel-Lang/common/issues",
                 "source": "https://github.com/Laravel-Lang/common"
             },
-            "time": "2024-06-09T19:31:17+00:00"
+            "time": "2024-07-06T16:48:35+00:00"
         },
         {
             "name": "laravel-lang/config",
-            "version": "1.7.0",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/config.git",
-                "reference": "65d5b15c09258d9c86cbe40f8a4c74148256cafd"
+                "reference": "a880dacde45c0af808b300b4415cf834b0767c10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/config/zipball/65d5b15c09258d9c86cbe40f8a4c74148256cafd",
-                "reference": "65d5b15c09258d9c86cbe40f8a4c74148256cafd",
+                "url": "https://api.github.com/repos/Laravel-Lang/config/zipball/a880dacde45c0af808b300b4415cf834b0767c10",
+                "reference": "a880dacde45c0af808b300b4415cf834b0767c10",
                 "shasum": ""
             },
             "require": {
@@ -21799,9 +21800,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/config/issues",
-                "source": "https://github.com/Laravel-Lang/config/tree/1.7.0"
+                "source": "https://github.com/Laravel-Lang/config/tree/1.8.2"
             },
-            "time": "2024-06-27T20:42:54+00:00"
+            "time": "2024-06-28T21:29:11+00:00"
         },
         {
             "name": "laravel-lang/http-statuses",
@@ -21923,16 +21924,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.5.3",
+            "version": "15.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "7d61df5af0387b3b3d6085e4fbe0f9be4ed57fae"
+                "reference": "f5c815cf24eb8c88c87f98eb0d48aee5ca392c2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/7d61df5af0387b3b3d6085e4fbe0f9be4ed57fae",
-                "reference": "7d61df5af0387b3b3d6085e4fbe0f9be4ed57fae",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/f5c815cf24eb8c88c87f98eb0d48aee5ca392c2b",
+                "reference": "f5c815cf24eb8c88c87f98eb0d48aee5ca392c2b",
                 "shasum": ""
             },
             "require": {
@@ -21982,7 +21983,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-06-26T10:15:40+00:00"
+            "time": "2024-06-30T16:21:42+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -22113,6 +22114,89 @@
                 "source": "https://github.com/Laravel-Lang/locales"
             },
             "time": "2024-06-24T09:56:41+00:00"
+        },
+        {
+            "name": "laravel-lang/models",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravel-Lang/models.git",
+                "reference": "f689e3bf60ff4e70b4a12aa7130c87d9727b5b83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravel-Lang/models/zipball/f689e3bf60ff4e70b4a12aa7130c87d9727b5b83",
+                "reference": "f689e3bf60ff4e70b4a12aa7130c87d9727b5b83",
+                "shasum": ""
+            },
+            "require": {
+                "composer/class-map-generator": "^1.3",
+                "dragon-code/support": "^6.13",
+                "illuminate/database": "^10.0 || ^11.0",
+                "illuminate/support": "^10.0 || ^11.0",
+                "laravel-lang/config": "^1.6",
+                "laravel-lang/locales": "^2.9.2",
+                "laravel/prompts": "^0.1.24",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0 || ^9.0",
+                "pestphp/pest": "^2.34",
+                "pestphp/pest-plugin-laravel": "^2.4",
+                "symfony/var-dumper": "^6.0 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelLang\\Models\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelLang\\Models\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Andrey Sokolov",
+                    "email": "walfireru@gmail.com",
+                    "homepage": "https://github.com/Quiss",
+                    "role": "Usability consultant"
+                },
+                {
+                    "name": "Laravel-Lang Team",
+                    "homepage": "https://github.com/Laravel-Lang"
+                }
+            ],
+            "description": "Easy and fast way to localize models",
+            "keywords": [
+                "database",
+                "l18n",
+                "languages",
+                "laravel",
+                "locales",
+                "localization",
+                "models",
+                "translate",
+                "translations"
+            ],
+            "support": {
+                "issues": "https://github.com/Laravel-Lang/models/issues",
+                "source": "https://github.com/Laravel-Lang/models"
+            },
+            "time": "2024-07-08T12:53:25+00:00"
         },
         {
             "name": "laravel-lang/native-country-names",
@@ -22421,16 +22505,16 @@
         },
         {
             "name": "laravel-lang/routes",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/routes.git",
-                "reference": "cab7708c9f202457c607f539c70ab06de76ff10f"
+                "reference": "d7fcbe8a718043f35a5bf5887d66f2658aaebdc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/routes/zipball/cab7708c9f202457c607f539c70ab06de76ff10f",
-                "reference": "cab7708c9f202457c607f539c70ab06de76ff10f",
+                "url": "https://api.github.com/repos/Laravel-Lang/routes/zipball/d7fcbe8a718043f35a5bf5887d66f2658aaebdc7",
+                "reference": "d7fcbe8a718043f35a5bf5887d66f2658aaebdc7",
                 "shasum": ""
             },
             "require": {
@@ -22491,7 +22575,7 @@
                 "issues": "https://github.com/Laravel-Lang/routes/issues",
                 "source": "https://github.com/Laravel-Lang/routes"
             },
-            "time": "2024-06-20T15:45:57+00:00"
+            "time": "2024-07-06T23:52:35+00:00"
         },
         {
             "name": "laravel/envoy",
