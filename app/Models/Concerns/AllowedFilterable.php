@@ -61,12 +61,12 @@ trait AllowedFilterable
             $sql = "LOWER({$wrappedProperty}) LIKE ?";
 
             if (\is_array($value)) {
-                if ([] === array_filter($value, 'strlen')) {
+                if ([] === array_filter($value, strlen(...))) {
                     return $query;
                 }
 
                 $query->where(static function (Builder $query) use ($value, $sql): void {
-                    foreach (array_filter($value, 'strlen') as $partialValue) {
+                    foreach (array_filter($value, strlen(...)) as $partialValue) {
                         $partialValue = mb_strtolower($partialValue, 'UTF8');
 
                         $query->orWhereRaw($sql, ["%{$partialValue}%"]);

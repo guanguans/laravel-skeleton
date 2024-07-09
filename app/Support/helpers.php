@@ -662,7 +662,6 @@ if (! function_exists('dd_to_array')) {
 
 if (! function_exists('array_reduce_with_keys')) {
     /**
-     * @param  null  $carry
      * @return null|mixed
      */
     function array_reduce_with_keys(array $array, callable $callback, $carry = null): mixed

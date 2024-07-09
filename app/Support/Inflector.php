@@ -228,7 +228,7 @@ class Inflector
             $words = array_keys(static::$irregular);
             static::$cache['irregular']['pluralize'] = '/(.*?(?:\b|_))('.implode('|', $words).')$/i';
 
-            $upperWords = array_map('ucfirst', $words);
+            $upperWords = array_map(ucfirst(...), $words);
             static::$cache['irregular']['upperPluralize'] = '/(.*?(?:\b|[a-z]))('.implode('|', $upperWords).')$/';
         }
 
@@ -281,7 +281,7 @@ class Inflector
             $wordList = array_values(static::$irregular);
             static::$cache['irregular']['singular'] = '/(.*?(?:\b|_))('.implode('|', $wordList).')$/i';
 
-            $upperWordList = array_map('ucfirst', $wordList);
+            $upperWordList = array_map(ucfirst(...), $wordList);
             static::$cache['irregular']['singularUpper'] = '/(.*?(?:\b|[a-z]))('.
                                                            implode('|', $upperWordList).
                                                            ')$/';

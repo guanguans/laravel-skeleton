@@ -54,7 +54,7 @@ return RectorConfig::configure()
     ])
     ->withParallel()
     // ->withoutParallel()
-    ->withImportNames(false)
+    ->withImportNames(importNames: false, importDocBlockNames: false)
     // ->withAttributesSets()
     // ->withDeadCodeLevel(42)
     ->withTypeCoverageLevel(23)
@@ -70,6 +70,10 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
         LaravelSetList::LARAVEL_FACADE_ALIASES_TO_FULL_NAMES,
         LaravelSetList::LARAVEL_ELOQUENT_MAGIC_METHOD_TO_QUERY_BUILDER,
+    ])
+    ->withRules([
+        StaticArrowFunctionRector::class,
+        StaticClosureRector::class,
     ])
     ->withRules([
         // // RectorLaravel\Rector\Assign\CallOnAppArrayAccessToStandaloneAssignRector::class,
@@ -173,10 +177,10 @@ return RectorConfig::configure()
         ExplicitBoolCompareRector::class,
         ExplicitReturnNullRector::class,
         InlineIfToExplicitIfRector::class,
-        JsonThrowOnErrorRector::class,
+        // JsonThrowOnErrorRector::class,
         LogicalToBooleanRector::class,
         NullToStrictStringFuncCallArgRector::class,
-        PostIncDecToPreIncDecRector::class,
+        // PostIncDecToPreIncDecRector::class,
         RemoveExtraParametersRector::class,
         RemoveUnusedPrivateMethodRector::class,
         SplitDoubleAssignRector::class,

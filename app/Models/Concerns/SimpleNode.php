@@ -125,9 +125,6 @@ trait SimpleNode
         return $this->{$this->getParentColumnName()} === 0;
     }
 
-    /**
-     * @param  null  $status
-     */
     public function getAllChildren($status = null): Collection
     {
         $result = [];
@@ -146,9 +143,6 @@ trait SimpleNode
         return new Collection($result);
     }
 
-    /**
-     * @param  null  $status
-     */
     public function getChildren($status = null): mixed
     {
         if ($status) {
@@ -158,9 +152,6 @@ trait SimpleNode
         return $this->children;
     }
 
-    /**
-     * @param  null  $status
-     */
     public function hasChildren($status = null): bool
     {
         return \count($this->getAllChildren($status)) > 0;

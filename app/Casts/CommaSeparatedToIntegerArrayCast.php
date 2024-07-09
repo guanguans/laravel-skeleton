@@ -8,6 +8,6 @@ class CommaSeparatedToIntegerArrayCast extends CommaSeparatedToArrayCast
 {
     public function get($model, $key, $value, $attributes): array
     {
-        return array_map('\intval', parent::get($model, $key, $value, $attributes));
+        return array_map(\intval(...), parent::get($model, $key, $value, $attributes));
     }
 }

@@ -629,7 +629,7 @@ class SqlFormatter
         }
 
         // Sort reserved word list from longest word to shortest, 3x faster than usort
-        $reservedMap = array_combine(self::$reserved, array_map('strlen', self::$reserved));
+        $reservedMap = array_combine(self::$reserved, array_map(strlen(...), self::$reserved));
         arsort($reservedMap);
         self::$reserved = array_keys($reservedMap);
         // Set up regular expressions
