@@ -12508,20 +12508,19 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "9.0.2",
+            "version": "9.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "83ad4a47ea292afbdc41484d6572c5504d247883"
+                "reference": "4927c2bfbccfde2be788cf0ab27499626460ef43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/83ad4a47ea292afbdc41484d6572c5504d247883",
-                "reference": "83ad4a47ea292afbdc41484d6572c5504d247883",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/4927c2bfbccfde2be788cf0ab27499626460ef43",
+                "reference": "4927c2bfbccfde2be788cf0ab27499626460ef43",
                 "shasum": ""
             },
             "require": {
-                "ext-pcntl": "*",
                 "ext-zip": "^1.14.0",
                 "illuminate/console": "^10.10.0|^11.0",
                 "illuminate/contracts": "^10.10.0|^11.0",
@@ -12540,6 +12539,7 @@
             },
             "require-dev": {
                 "composer-runtime-api": "^2.0",
+                "ext-pcntl": "*",
                 "larastan/larastan": "^2.7.0",
                 "laravel/slack-notification-channel": "^2.5|^3.0",
                 "league/flysystem-aws-s3-v3": "^2.0|^3.0",
@@ -12592,7 +12592,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/9.0.2"
+                "source": "https://github.com/spatie/laravel-backup/tree/9.0.3"
             },
             "funding": [
                 {
@@ -12604,7 +12604,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-07-04T07:07:36+00:00"
+            "time": "2024-07-09T09:56:32+00:00"
         },
         {
             "name": "spatie/laravel-csp",
