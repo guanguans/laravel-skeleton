@@ -43,3 +43,14 @@ Route::middleware('web')->get('up', static function () {
 
     return View::file(base_path('vendor/laravel/framework/src/Illuminate/Foundation/resources/health-up.blade.php'));
 });
+
+/**
+ * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet
+ */
+Route::get('acting-as/{id}', static function ($id) {
+    abort_unless(app()->isLocal() && app()->hasDebugModeEnabled(), 404);
+
+    \Illuminate\Support\Facades\Auth::loginUsingId($id);
+
+    return redirect('dashboard');
+});
