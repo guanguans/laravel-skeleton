@@ -220,6 +220,9 @@ class AppServiceProvider extends ServiceProvider
                 Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG))
             );
 
+            // Builder::morphUsingUlids();
+            // Builder::morphUsingUuids();
+
             // 自定义多态类型
             Relation::enforceMorphMap([
                 'post' => 'App\Models\Post',
