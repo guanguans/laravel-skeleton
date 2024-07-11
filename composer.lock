@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84b6516bd443ab5fa0935cade29689d6",
+    "content-hash": "5760c6f88625a7b323794f2b619ce406",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -8849,6 +8849,60 @@
                 "source": "https://github.com/NeutrinoAPI/neutrino-api-client-libcurl/tree/v4.6.13"
             },
             "time": "2024-01-29T22:34:33+00:00"
+        },
+        {
+            "name": "nextbuild/database-viewer",
+            "version": "v0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/next-build/database-viewer.git",
+                "reference": "c7b48b3257ce1a44068dd53c7209ef2704d34a72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/next-build/database-viewer/zipball/c7b48b3257ce1a44068dd53c7209ef2704d34a72",
+                "reference": "c7b48b3257ce1a44068dd53c7209ef2704d34a72",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NextBuild\\DatabaseViewer\\DatabaseViewerServiceProvider"
+                    ],
+                    "aliases": {
+                        "DatabaseViewer": "NextBuild\\DatabaseViewer\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NextBuild\\DatabaseViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Saptarshi Dey",
+                    "email": "saptarshi7047@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package for viewing databases",
+            "homepage": "https://github.com/Next-Build/database-viewer",
+            "keywords": [
+                "database-manager",
+                "database-viewer",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/next-build/database-viewer/issues",
+                "source": "https://github.com/next-build/database-viewer/tree/v0.7.0"
+            },
+            "time": "2024-07-11T05:48:18+00:00"
         },
         {
             "name": "nikic/php-parser",
