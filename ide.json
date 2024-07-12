@@ -1,0 +1,441 @@
+{
+    "$schema": "https://laravel-ide.com/schema/laravel-ide-v2.json",
+    "completions": [
+        {
+            "complete": "validationRules",
+            "condition": [
+                {
+                    "classParentFqn": [
+                        "\\Dcat\\Admin\\Form\\Field"
+                    ],
+                    "methodNames": [
+                        "rules"
+                    ],
+                    "parameters": [
+                        1
+                    ],
+                    "place": "parameter"
+                },
+                {
+                    "classParentFqn": [
+                        "\\Dcat\\Admin\\Form\\Field"
+                    ],
+                    "methodNames": [
+                        "rules"
+                    ],
+                    "parameters": [
+                        1
+                    ],
+                    "place": "arrayValue"
+                },
+                {
+                    "classParentFqn": [
+                        "App\\Support\\FoundationSDK"
+                    ],
+                    "methodNames": [
+                        "validate"
+                    ],
+                    "parameters": [
+                        2
+                    ],
+                    "place": "arrayValueWithKey"
+                }
+            ]
+        },
+        {
+            "complete": "staticStrings",
+            "condition": [
+                {
+                    "classParentFqn": [
+                        "\\Dcat\\Admin\\Form\\Field"
+                    ],
+                    "methodNames": [
+                        "rules"
+                    ],
+                    "parameters": [
+                        1
+                    ],
+                    "place": "parameter"
+                },
+                {
+                    "classParentFqn": [
+                        "\\Dcat\\Admin\\Form\\Field"
+                    ],
+                    "methodNames": [
+                        "rules"
+                    ],
+                    "parameters": [
+                        1
+                    ],
+                    "place": "arrayValue"
+                },
+                {
+                    "classParentFqn": [
+                        "App\\Support\\FoundationSDK"
+                    ],
+                    "methodNames": [
+                        "validate"
+                    ],
+                    "parameters": [
+                        2
+                    ],
+                    "place": "arrayValueWithKey"
+                }
+            ],
+            "options": {
+                "strings": [
+                    "address_i_p_v4",
+                    "address_i_p_v6",
+                    "bank_card",
+                    "base64",
+                    "between_words",
+                    "bitcoin_address",
+                    "camel_case",
+                    "capital_char_with_number",
+                    "car_number",
+                    "chinese_name",
+                    "current_user_password",
+                    "default",
+                    "domain",
+                    "duplicate",
+                    "email",
+                    "even_number",
+                    "hex",
+                    "hex_color",
+                    "html_tag",
+                    "htmlclean",
+                    "id_card",
+                    "imei",
+                    "instanceof",
+                    "integer_boolean",
+                    "ip",
+                    "jwt",
+                    "kebab_case",
+                    "location_coordinates",
+                    "mac_address",
+                    "mime_type",
+                    "odd_number",
+                    "phone",
+                    "phone_cis",
+                    "phone_world",
+                    "port",
+                    "postal_code",
+                    "semver",
+                    "slug",
+                    "snake_case",
+                    "strict_id_card",
+                    "strong_password",
+                    "timezone",
+                    "ulid",
+                    "url",
+                    "uuid",
+                    "without_whitespace"
+                ]
+            }
+        },
+        {
+            "complete": "staticStrings",
+            "condition": [
+                {
+                    "functionNames": [
+                        "admin_url",
+                        "url"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ],
+            "options": {
+                "strings": [
+                    "/",
+                    "_ignition/execute-solution",
+                    "_ignition/health-check",
+                    "_ignition/update-config",
+                    "acting-as/{id}",
+                    "admin",
+                    "admin/api/notifications",
+                    "admin/async/{screen}/{method?}/{template?}",
+                    "admin/listener/{screen}/{layout}",
+                    "admin/lock",
+                    "admin/login",
+                    "admin/logout",
+                    "admin/notifications/{id?}/{method?}",
+                    "admin/search/{query}/{method?}",
+                    "admin/switch-logout",
+                    "admin/systems/files",
+                    "admin/systems/files/post/{id}",
+                    "admin/systems/files/sort",
+                    "admin/systems/files/{id}",
+                    "admin/systems/media",
+                    "admin/systems/relation",
+                    "admin/systems/sorting",
+                    "admin/{fallbackPlaceholder}",
+                    "api-tester",
+                    "api-tester/* routes should not be cached",
+                    "api-tester/assets/fonts/{_file}",
+                    "api-tester/assets/img/{_file}",
+                    "api-tester/assets/{_file}",
+                    "api-tester/requests/destroy",
+                    "api-tester/requests/index",
+                    "api-tester/requests/store",
+                    "api-tester/requests/update",
+                    "api-tester/routes/index",
+                    "api/any",
+                    "api/user",
+                    "api/v1/auth/index",
+                    "api/v1/auth/login",
+                    "api/v1/auth/logout",
+                    "api/v1/auth/me",
+                    "api/v1/auth/refresh",
+                    "api/v1/auth/register",
+                    "api/v1/ping/{is_bad?}",
+                    "database-viewer",
+                    "database-viewer/api/databases",
+                    "database-viewer/api/{database}/tables",
+                    "database-viewer/api/{database}/{table}",
+                    "files/upload",
+                    "livewire/livewire.js",
+                    "livewire/livewire.min.js.map",
+                    "livewire/preview-file/{filename}",
+                    "livewire/update",
+                    "livewire/upload-file",
+                    "log-viewer/api/clear-cache-all",
+                    "log-viewer/api/delete-multiple-files",
+                    "log-viewer/api/files",
+                    "log-viewer/api/files/{fileIdentifier}",
+                    "log-viewer/api/files/{fileIdentifier}/clear-cache",
+                    "log-viewer/api/files/{fileIdentifier}/download",
+                    "log-viewer/api/files/{fileIdentifier}/download/request",
+                    "log-viewer/api/folders",
+                    "log-viewer/api/folders/{folderIdentifier}",
+                    "log-viewer/api/folders/{folderIdentifier}/clear-cache",
+                    "log-viewer/api/folders/{folderIdentifier}/download",
+                    "log-viewer/api/folders/{folderIdentifier}/download/request",
+                    "log-viewer/api/hosts",
+                    "log-viewer/api/logs",
+                    "log-viewer/{view?}",
+                    "opcache-api/clear",
+                    "opcache-api/compile",
+                    "opcache-api/config",
+                    "opcache-api/status",
+                    "pulse",
+                    "request-docs",
+                    "request-docs/_astro/{slug}",
+                    "request-docs/api",
+                    "request-docs/config",
+                    "routes",
+                    "routes/clear",
+                    "routes/json",
+                    "sanctum/csrf-cookie",
+                    "soar-bar/assets/javascript",
+                    "soar-bar/assets/stylesheets",
+                    "soar-bar/fonts/FontAwesome.otf",
+                    "soar-bar/fonts/fontawesome-webfont.{suffix}",
+                    "telescope/telescope-api/batches",
+                    "telescope/telescope-api/batches/{telescopeEntryId}",
+                    "telescope/telescope-api/cache",
+                    "telescope/telescope-api/cache/{telescopeEntryId}",
+                    "telescope/telescope-api/client-requests",
+                    "telescope/telescope-api/client-requests/{telescopeEntryId}",
+                    "telescope/telescope-api/commands",
+                    "telescope/telescope-api/commands/{telescopeEntryId}",
+                    "telescope/telescope-api/dumps",
+                    "telescope/telescope-api/entries",
+                    "telescope/telescope-api/events",
+                    "telescope/telescope-api/events/{telescopeEntryId}",
+                    "telescope/telescope-api/exceptions",
+                    "telescope/telescope-api/exceptions/{telescopeEntryId}",
+                    "telescope/telescope-api/gates",
+                    "telescope/telescope-api/gates/{telescopeEntryId}",
+                    "telescope/telescope-api/jobs",
+                    "telescope/telescope-api/jobs/{telescopeEntryId}",
+                    "telescope/telescope-api/logs",
+                    "telescope/telescope-api/logs/{telescopeEntryId}",
+                    "telescope/telescope-api/mail",
+                    "telescope/telescope-api/mail/{telescopeEntryId}",
+                    "telescope/telescope-api/mail/{telescopeEntryId}/download",
+                    "telescope/telescope-api/mail/{telescopeEntryId}/preview",
+                    "telescope/telescope-api/models",
+                    "telescope/telescope-api/models/{telescopeEntryId}",
+                    "telescope/telescope-api/monitored-tags",
+                    "telescope/telescope-api/monitored-tags/delete",
+                    "telescope/telescope-api/notifications",
+                    "telescope/telescope-api/notifications/{telescopeEntryId}",
+                    "telescope/telescope-api/queries",
+                    "telescope/telescope-api/queries/{telescopeEntryId}",
+                    "telescope/telescope-api/redis",
+                    "telescope/telescope-api/redis/{telescopeEntryId}",
+                    "telescope/telescope-api/requests",
+                    "telescope/telescope-api/requests/{telescopeEntryId}",
+                    "telescope/telescope-api/schedule",
+                    "telescope/telescope-api/schedule/{telescopeEntryId}",
+                    "telescope/telescope-api/toggle-recording",
+                    "telescope/telescope-api/views",
+                    "telescope/telescope-api/views/{telescopeEntryId}",
+                    "telescope/{view?}",
+                    "up",
+                    "{fallbackPlaceholder}"
+                ]
+            }
+        },
+        {
+            "complete": "routeName",
+            "condition": [
+                {
+                    "functionNames": [
+                        "admin_route",
+                        "admin_route_name",
+                        "admin_api_route_name"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "complete": "viewName",
+            "condition": [
+                {
+                    "functionNames": [
+                        "admin_view"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "complete": "translationKey",
+            "condition": [
+                {
+                    "functionNames": [
+                        "admin_trans",
+                        "admin_trans_field",
+                        "admin_trans_label",
+                        "admin_trans_option"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "complete": "gate",
+            "condition": [
+                {
+                    "classParentFqn": [
+                        "\\Dcat\\Admin\\Traits\\HasPermissions"
+                    ],
+                    "methodNames": [
+                        "can"
+                    ],
+                    "parameters": [
+                        1
+                    ],
+                    "place": "parameter"
+                }
+            ]
+        },
+        {
+            "complete": "assetPath",
+            "condition": [
+                {
+                    "functionNames": [
+                        "admin_asset",
+                        "admin_require_assets"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "complete": "directoryFiles",
+            "condition": [
+                {
+                    "functionNames": [
+                        "admin_path"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ],
+            "options": {
+                "directory": "/app/Admin"
+            }
+        },
+        {
+            "complete": "directoryFiles",
+            "condition": [
+                {
+                    "functionNames": [
+                        "admin_extension_path"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ],
+            "options": {
+                "directory": "/dcat-admin-extensions"
+            }
+        },
+        {
+            "complete": "environmentVariable",
+            "condition": [
+                {
+                    "functionNames": [
+                        "env_explode",
+                        "env_json_decode"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "complete": "classFields",
+            "condition": [
+                {
+                    "classFqn": [
+                        "\\Dcat\\Admin\\Grid"
+                    ],
+                    "methodNames": [
+                        "column"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                },
+                {
+                    "classFqn": [
+                        "\\Dcat\\Admin\\Show"
+                    ],
+                    "methodNames": [
+                        "field"
+                    ],
+                    "parameters": [
+                        1
+                    ]
+                }
+            ],
+            "options": {
+                "fieldsFilter": {
+                    "fetch": "own",
+                    "modifier": [
+                        "public",
+                        "protected",
+                        "private"
+                    ]
+                }
+            }
+        }
+    ]
+}

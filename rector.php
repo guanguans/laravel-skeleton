@@ -161,6 +161,7 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         __DIR__.'/.phpstorm.meta.php',
+        __DIR__.'/_ide_helper*.php',
         __DIR__.'/_ide_helper.php',
         __DIR__.'/_ide_helper_models.php',
         __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
