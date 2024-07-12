@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7446219bc22ccce435773b6542044952",
+    "content-hash": "ac6734f6f927e86d890500e47164fb21",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5076,6 +5076,68 @@
             "time": "2024-06-11T12:45:25+00:00"
         },
         {
+            "name": "renatomarinho/laravel-page-speed",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/renatomarinho/laravel-page-speed.git",
+                "reference": "b16c0185ae6816b47c8534b4ecfbce73e6c11cf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/renatomarinho/laravel-page-speed/zipball/b16c0185ae6816b47c8534b4ecfbce73e6c11cf8",
+                "reference": "b16c0185ae6816b47c8534b4ecfbce73e6c11cf8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^4.0 || ^5.0 || ^6.0 || ^7.0",
+                "phpunit/phpunit": "^8.5 || ^9.0",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RenatoMarinho\\LaravelPageSpeed\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RenatoMarinho\\LaravelPageSpeed\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Renato Marinho",
+                    "email": "renato.marinho@s2move.com"
+                }
+            ],
+            "description": "Laravel Page Speed",
+            "keywords": [
+                "html",
+                "laravel",
+                "minify",
+                "optimize",
+                "page speed"
+            ],
+            "support": {
+                "issues": "https://github.com/renatomarinho/laravel-page-speed/issues",
+                "source": "https://github.com/renatomarinho/laravel-page-speed/tree/master"
+            },
+            "time": "2023-03-16T08:07:24+00:00"
+        },
+        {
             "name": "rennokki/laravel-eloquent-query-cache",
             "version": "3.4.0",
             "source": {
@@ -9195,6 +9257,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "renatomarinho/laravel-page-speed": 20,
         "brainmaestro/composer-git-hooks": 20,
         "laravel-shift/factory-generator": 20
     },

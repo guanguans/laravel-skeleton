@@ -11,6 +11,7 @@
         "knuckleswtf/scribe": "^4.31",
         "laravel-notification-channels/pushbullet": "^1.5",
         "protoqol/prequel": "^1.23",
+        "renatomarinho/laravel-page-speed": "dev-master",
         "rennokki/laravel-eloquent-query-cache": "^3.4",
         "richardstyles/eloquent-aes": "^2.3",
         "tenantcloud/laravel-mixins": "^3.1"
