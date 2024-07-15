@@ -18,6 +18,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class IdeHelperChoresCommand extends Command
 {
+    private const SUFFIX = 'Chore';
+
     protected $signature = 'ide-helper:chores
         {--only=* : Only output chores with the given name}
         {--except=* : Do not output chores with the given name}
@@ -26,36 +28,43 @@ final class IdeHelperChoresCommand extends Command
 
     protected $description = 'Generate chores for the Laravel-Idea-JSON file.';
 
-    private array $only = [];
-
-    private array $except = [];
-
     public function isEnabled(): bool
     {
         return $this->laravel->isLocal();
     }
 
-    /** @noinspection PhpMemberCanBePulledUpInspection */
+    /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     *
+     * @throws \ReflectionException
+     */
     public function handle(): void
     {
-        collect((new ReflectionObject($this))->getMethods(ReflectionMethod::IS_PRIVATE))
-            ->filter(static fn (ReflectionMethod $method) => str($method->name)->endsWith('Chore'))
-            ->when($this->only, fn (Collection $methods) => $methods->filter(
-                fn (ReflectionMethod $method) => str($method->name)->is($this->only)
-            ))
-            ->when($this->except, fn (Collection $methods) => $methods->reject(
-                fn (ReflectionMethod $method) => str($method->name)->is($this->except)
-            ))
-            ->sortBy(static fn (ReflectionMethod $method) => $method->name)
-            ->each(fn (ReflectionMethod $method) => $this->{$method->name}())
-            ->tap(fn (Collection $methods) => $this->output->success("Generated {$methods->count()} chores."));
+        collect((new ReflectionObject($this))->getMethods())
+            ->filter(static fn (ReflectionMethod $method): bool => str($method->name)->endsWith(self::SUFFIX))
+            ->when(
+                $this->option('only'),
+                static fn (Collection $methods, array $only): Collection => $methods->filter(
+                    static fn (ReflectionMethod $method): bool => str($method->name)->is($only)
+                )
+            )
+            ->when(
+                $this->option('except'),
+                static fn (Collection $methods, array $except): Collection => $methods->reject(
+                    static fn (ReflectionMethod $method): bool => str($method->name)->is($except)
+                )
+            )
+            ->sortBy(static fn (ReflectionMethod $method): string => $method->name)
+            ->each(
+                fn (ReflectionMethod $method): mixed => $method->isPublic()
+                    ? $this->laravel->call([$this, $method->name])
+                    : $method->invoke($this)
+            )
+            ->whenEmpty(fn (Collection $methods) => $this->output->warning('No chores found.'))
+            ->whenNotEmpty(fn (Collection $methods) => $this->output->success("Generated {$methods->count()} chores."));
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->only = array_merge($this->only, $this->option('only'));
-        $this->except = array_merge($this->except, $this->option('except'));
-    }
+    protected function initialize(InputInterface $input, OutputInterface $output): void {}
 
     protected function rules(): array
     {
@@ -68,17 +77,14 @@ final class IdeHelperChoresCommand extends Command
         ];
     }
 
-    private function routeUriChore(): void
+    public function routeUriChore(Router $router): void
     {
-        collect(app(Router::class)->getRoutes())
+        collect($router->getRoutes())
             ->map(static fn (Route $route): string => $route->uri())
             ->unique()
             ->sort()
             ->values()
-            ->tap(function (Collection $routeUris): void {
-                $this->output->warning("Found {$routeUris->count()} route URIs.");
-                $this->output($routeUris);
-            });
+            ->tap(fn (Collection $routeUris) => $this->output($routeUris));
     }
 
     /**
@@ -92,16 +98,37 @@ final class IdeHelperChoresCommand extends Command
             ->map(static fn (\ReflectionClass $ruleReflectionClass, $ruleClass): string => $ruleClass::name())
             ->sort()
             ->values()
-            ->tap(function (Collection $rules): void {
-                $this->output->warning("Found {$rules->count()} rules.");
-                $this->output($rules);
-            });
+            ->tap(fn (Collection $rules) => $this->output($rules));
     }
 
-    private function output(Collection $collection): void
+    /**
+     * @noinspection DebugFunctionUsageInspection
+     */
+    private function output(Collection $chore): void
     {
+        $trace = collect(debug_backtrace())->first(
+            static function (array $trace): bool {
+                $trace += [
+                    'class' => null,
+                    'type' => null,
+                    'function' => null,
+                ];
+
+                return $trace['class'] === self::class
+                    && $trace['type'] === '->'
+                    && str($trace['function'])->endsWith(self::SUFFIX);
+            },
+            ['function' => null]
+        );
+
+        $this->output->warning(sprintf(
+            'Found %s %s:',
+            $chore->count(),
+            str($trace['function'])->remove(self::SUFFIX)->plural()->snake(' ')
+        ));
+
         $this->option('json')
-            ? $this->line($collection->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS))
-            : $this->output->listing($collection->all());
+            ? $this->line($chore->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS))
+            : $this->output->listing($chore->all());
     }
 }

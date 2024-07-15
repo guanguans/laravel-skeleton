@@ -138,6 +138,8 @@
             "condition": [
                 {
                     "functionNames": [
+                        "admin_base_path",
+                        "admin_redirect",
                         "admin_url",
                         "url"
                     ],
