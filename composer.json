@@ -82,6 +82,7 @@
         "sbamtr/laravel-query-enrich": "^1.2",
         "skywarth/chaotic-schedule": "^1.1",
         "spatie/fork": "^1.2",
+        "spatie/invade": "^2.1",
         "spatie/laravel-activitylog": "^4.8",
         "spatie/laravel-backup": "^9.0",
         "spatie/laravel-csp": "^2.10",
