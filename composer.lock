@@ -13364,16 +13364,16 @@
         },
         {
             "name": "spatie/laravel-route-attributes",
-            "version": "1.22.1",
+            "version": "1.22.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-route-attributes.git",
-                "reference": "f20135518fae984edeed8fac0db53e61adff4ae6"
+                "reference": "a80b34029da1bfd2ba6c34ca69184a76020bf53a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/f20135518fae984edeed8fac0db53e61adff4ae6",
-                "reference": "f20135518fae984edeed8fac0db53e61adff4ae6",
+                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/a80b34029da1bfd2ba6c34ca69184a76020bf53a",
+                "reference": "a80b34029da1bfd2ba6c34ca69184a76020bf53a",
                 "shasum": ""
             },
             "require": {
@@ -13419,7 +13419,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-route-attributes/issues",
-                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.22.1"
+                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.22.2"
             },
             "funding": [
                 {
@@ -13431,7 +13431,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-04-24T13:59:30+00:00"
+            "time": "2024-07-15T14:24:39+00:00"
         },
         {
             "name": "spatie/laravel-route-discovery",
