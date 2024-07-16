@@ -6426,16 +6426,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.15.0",
+            "version": "v11.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ba85f1c019bed59b3c736c9c4502805efd0ba84b"
+                "reference": "bd4808aaf103ccb5cb4b00bcee46140c070c0ec4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ba85f1c019bed59b3c736c9c4502805efd0ba84b",
-                "reference": "ba85f1c019bed59b3c736c9c4502805efd0ba84b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/bd4808aaf103ccb5cb4b00bcee46140c070c0ec4",
+                "reference": "bd4808aaf103ccb5cb4b00bcee46140c070c0ec4",
                 "shasum": ""
             },
             "require": {
@@ -6628,7 +6628,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-07-09T15:38:12+00:00"
+            "time": "2024-07-16T14:33:07+00:00"
         },
         {
             "name": "laravel/octane",
@@ -12803,16 +12803,16 @@
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
-            "version": "4.3.1",
+            "version": "4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-failed-job-monitor.git",
-                "reference": "ff7f0906a200768c23207bbd38e264f7fb52c6ef"
+                "reference": "1b4c4d3f051a1033ce6ead5433bea850bbf20878"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-failed-job-monitor/zipball/ff7f0906a200768c23207bbd38e264f7fb52c6ef",
-                "reference": "ff7f0906a200768c23207bbd38e264f7fb52c6ef",
+                "url": "https://api.github.com/repos/spatie/laravel-failed-job-monitor/zipball/1b4c4d3f051a1033ce6ead5433bea850bbf20878",
+                "reference": "1b4c4d3f051a1033ce6ead5433bea850bbf20878",
                 "shasum": ""
             },
             "require": {
@@ -12866,7 +12866,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.3.1"
+                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.3.2"
             },
             "funding": [
                 {
@@ -12874,7 +12874,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-02T10:07:57+00:00"
+            "time": "2024-07-16T07:57:24+00:00"
         },
         {
             "name": "spatie/laravel-health",
