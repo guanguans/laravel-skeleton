@@ -4836,16 +4836,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.11.4",
+            "version": "2.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "928d8d12480625f3a03879f1a2876f88b5cf6ce1"
+                "reference": "04d0380a003afbd670b9f1f50c70109c8bd9c6c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/928d8d12480625f3a03879f1a2876f88b5cf6ce1",
-                "reference": "928d8d12480625f3a03879f1a2876f88b5cf6ce1",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/04d0380a003afbd670b9f1f50c70109c8bd9c6c3",
+                "reference": "04d0380a003afbd670b9f1f50c70109c8bd9c6c3",
                 "shasum": ""
             },
             "require": {
@@ -4875,6 +4875,7 @@
                 "pestphp/pest": "^1.23 || ^2.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0",
                 "php-mock/php-mock-phpunit": "^2.10",
+                "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan": "^1.11",
                 "phpstan/phpstan-deprecation-rules": "^1.2",
@@ -4990,7 +4991,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-07-10T02:50:49+00:00"
+            "time": "2024-07-16T09:47:40+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
