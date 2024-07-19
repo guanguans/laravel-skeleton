@@ -20,12 +20,12 @@ class Cors
      */
     public function handle(Request $request, Closure $next, $allowedOriginPatterns = '*'): Response
     {
-        return tap($next($request), static function () use ($allowedOriginPatterns) {
+        return tap($next($request), static function () use ($allowedOriginPatterns): void {
             if (class_exists(RequestHandled::class) && app()->bound('events')) {
                 app()->make('events')->listen(RequestHandled::class,
-                    function (RequestHandled $event) use ($allowedOriginPatterns) {
+                    static function (RequestHandled $event) use ($allowedOriginPatterns): void {
                         /** 仅设置 `Access-Control-Allow-Origin`, 其他由 @see \Fruitcake\Cors\HandleCors 处理. */
-                        Str::is((array) explode('|', $allowedOriginPatterns),
+                        Str::is(explode('|', $allowedOriginPatterns),
                             $origin = $event->request->server('HTTP_ORIGIN', '')) // 跨域访问的时候才会存在 `HTTP_ORIGIN` 字段
                             ? $event->response->headers->set('Access-Control-Allow-Origin', $origin)
                             : $event->response->headers->remove('Access-Control-Allow-Origin');

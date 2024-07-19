@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support\Monolog\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
@@ -15,7 +23,7 @@ class EloquentHandler extends AbstractProcessingHandler
      */
     public function __construct(
         private readonly string $modelClass,
-        int|string|Level $level = Level::Debug,
+        int|Level|string $level = Level::Debug,
         bool $bubble = true
     ) {
         parent::__construct($level, $bubble);

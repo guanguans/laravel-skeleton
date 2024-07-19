@@ -178,7 +178,7 @@ class ServerSentEvent implements \Stringable
         return $this->headersSent;
     }
 
-    public function getEvent(): \Stringable|string|null
+    public function getEvent(): null|string|\Stringable
     {
         return $this->event;
     }
@@ -190,7 +190,7 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
-    public function getData(): \Stringable|array|string|null
+    public function getData(): null|array|string|\Stringable
     {
         return $this->data;
     }
@@ -206,7 +206,7 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
-    public function getId(): \Stringable|string|null
+    public function getId(): null|string|\Stringable
     {
         return $this->id;
     }
@@ -218,7 +218,7 @@ class ServerSentEvent implements \Stringable
         return $this;
     }
 
-    public function getComment(): \Stringable|string|null
+    public function getComment(): null|string|\Stringable
     {
         return $this->comment;
     }

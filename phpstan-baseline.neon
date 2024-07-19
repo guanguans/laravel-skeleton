@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Parameter \\$permissions of anonymous function has invalid type Dcat\\\\Admin\\\\Models\\\\Permission\\.$#"
+			count: 1
+			path: app/Console/Commands/IdeHelperGatesCommand.php
+
+		-
 			message: "#^Variable \\$file might not be defined\\.$#"
 			count: 1
 			path: app/Console/Commands/ParsePHPFileToASTCommand.php
