@@ -18250,16 +18250,16 @@
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
-            "version": "v3.7.0",
+            "version": "v3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
-                "reference": "102c311a46c6693ed0d8febb93c53758d750603d"
+                "reference": "eceb7b72733b7f3d1da078778f412d8a3323582d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/102c311a46c6693ed0d8febb93c53758d750603d",
-                "reference": "102c311a46c6693ed0d8febb93c53758d750603d",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/eceb7b72733b7f3d1da078778f412d8a3323582d",
+                "reference": "eceb7b72733b7f3d1da078778f412d8a3323582d",
                 "shasum": ""
             },
             "require": {
@@ -18320,7 +18320,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-19T11:53:02+00:00"
+            "time": "2024-07-22T09:45:30+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",
