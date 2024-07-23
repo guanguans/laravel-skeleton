@@ -146,6 +146,8 @@ class AppServiceProvider extends ServiceProvider
      * @throws NotFoundExceptionInterface
      * @throws \ReflectionException
      *
+     * @see https://github.com/cachethq/cachet
+     *
      * @noinspection JsonEncodingApiUsageInspection
      */
     public function boot(): void
