@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13b0dd95026ad171eea4f8b645e254e4",
+    "content-hash": "8ec7a4b0345da9cad6f0e5d92439c171",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -13905,6 +13905,82 @@
                 }
             ],
             "time": "2024-02-05T13:37:25+00:00"
+        },
+        {
+            "name": "spatie/laravel-webhook-client",
+            "version": "3.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-webhook-client.git",
+                "reference": "b9fce0dbcbb9fb3de191b6c94553e5c77ce81a05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-webhook-client/zipball/b9fce0dbcbb9fb3de191b6c94553e5c77ce81a05",
+                "reference": "b9fce0dbcbb9fb3de191b6c94553e5c77ce81a05",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^9.0 || ^10.0 || ^11.0",
+                "illuminate/database": "^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "^9.0 || ^10.0 || ^11.0",
+                "php": "^8.1 || ^8.2",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "larastan/larastan": "^1.0.4 || ^2.2",
+                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.3 || ^10.5",
+                "spatie/laravel-ray": "^1.24"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "11.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Spatie\\WebhookClient\\WebhookClientServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\WebhookClient\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Receive webhooks in Laravel apps",
+            "homepage": "https://github.com/spatie/laravel-webhook-client",
+            "keywords": [
+                "laravel-webhook-client",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-webhook-client/issues",
+                "source": "https://github.com/spatie/laravel-webhook-client/tree/3.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2024-06-24T07:36:09+00:00"
         },
         {
             "name": "spatie/packagist-api",
