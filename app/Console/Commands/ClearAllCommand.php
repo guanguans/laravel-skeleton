@@ -38,5 +38,10 @@ class ClearAllCommand extends Command
         $this->call('clear-compiled', $arguments);
 
         $this->output->success('All cleared.');
+        // $this->output->info('ℹ️ All cleared.');
+        // $this->output->info('⏳ Please wait...');
+        // $this->output->warning('⚠️ All cleared.');
+        // $this->output->error('❌  All cleared.');
+        // $this->output->success('✅  All cleared.');
     }
 }
