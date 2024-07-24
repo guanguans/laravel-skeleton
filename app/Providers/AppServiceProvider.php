@@ -624,7 +624,7 @@ class AppServiceProvider extends ServiceProvider
             )
             ->get();
 
-        collect($classes)->each(function (string $class): void {
+        collect($classes)->filter(class_exists(...))->each(function (string $class): void {
             $reflectionClass = new \ReflectionClass($class);
 
             $reflectionMethods = ($reflectionClass)->getMethods();
