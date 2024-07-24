@@ -95,7 +95,7 @@ class ShowUnsupportedRequiresCommand extends Command
     {
         $this->packagist = new PackagistClient(
             new Client([RequestOptions::VERIFY => false]),
-            new PackagistUrlGenerator()
+            new PackagistUrlGenerator
         );
     }
 

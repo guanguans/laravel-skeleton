@@ -20,7 +20,7 @@ class PsrClient implements ClientInterface
      */
     public function __construct(private array $options = [], null|callable|Handler $handler = null)
     {
-        $this->handler = $handler ?? new StreamHandler();
+        $this->handler = $handler ?? new StreamHandler;
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface

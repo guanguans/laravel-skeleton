@@ -65,7 +65,7 @@ class AuthController extends Controller
 
         return tap($this->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
             // Mail::to($user)->queue(new UserRegisteredMail());
-            $user->notify((new WelcomeNotification())->delay(now()->addSeconds(60)));
+            $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
         });
     }
 

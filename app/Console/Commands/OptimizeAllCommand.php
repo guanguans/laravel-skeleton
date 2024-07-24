@@ -46,8 +46,8 @@ class OptimizeAllCommand extends Command
 
         $command = sprintf(
             '%s %s dump-autoload --no-interaction --optimize --ansi -v',
-            (new ExecutableFinder())->find('php8.1') ?: (new PhpExecutableFinder)->find(),
-            (new ExecutableFinder())->find('composer2') ?: (new ExecutableFinder())->find('composer'),
+            (new ExecutableFinder)->find('php8.1') ?: (new PhpExecutableFinder)->find(),
+            (new ExecutableFinder)->find('composer2') ?: (new ExecutableFinder)->find('composer'),
         );
 
         $this->output->info("Running [$command] ...");

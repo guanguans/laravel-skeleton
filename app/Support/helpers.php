@@ -25,7 +25,7 @@ if (! function_exists('defer')) {
      */
     function defer(?SplStack &$context, callable $callback): void
     {
-        $context ??= new class() extends SplStack
+        $context ??= new class extends SplStack
         {
             public function __destruct()
             {
@@ -580,12 +580,12 @@ if (! function_exists('call')) {
 if (! function_exists('catch_resource_usage')) {
     function catch_resource_usage(callable|string $callback, ...$parameter): string
     {
-        $timer = new Timer();
+        $timer = new Timer;
         $timer->start();
 
         app()->call($callback, $parameter);
 
-        return (new ResourceUsageFormatter())->resourceUsage($timer->stop());
+        return (new ResourceUsageFormatter)->resourceUsage($timer->stop());
     }
 }
 
@@ -632,7 +632,7 @@ if (! function_exists('dump_to_server')) {
 
         (function (): void {
             self::$handler = null;
-        })->call(new VarDumper());
+        })->call(new VarDumper);
 
         return dump(...$vars);
     }

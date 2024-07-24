@@ -128,7 +128,7 @@ class RunCommandInDebugModeListener
             throw new \RuntimeException('Impossible to get the name of the command: the command cannot be relaunched with xDebug.');
         }
 
-        $phpBinary = (new PhpExecutableFinder())->find() ?: PHP_BINARY;
+        $phpBinary = (new PhpExecutableFinder)->find() ?: PHP_BINARY;
         $serverArgv = \array_slice($serverArgv, 1);
 
         return [$phpBinary, $script, ...$serverArgv];

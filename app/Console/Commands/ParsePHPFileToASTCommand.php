@@ -98,8 +98,8 @@ class ParsePHPFileToASTCommand extends Command
 
     protected function initializeProperties()
     {
-        $this->parser = (new ParserFactory())->create((int) $this->option('parse-mode'));
-        $this->nodeFinder = new NodeFinder();
-        $this->prettyPrinter = new Standard();
+        $this->parser = (new ParserFactory)->create((int) $this->option('parse-mode'));
+        $this->nodeFinder = new NodeFinder;
+        $this->prettyPrinter = new Standard;
     }
 }

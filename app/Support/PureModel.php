@@ -121,7 +121,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     public static function __callStatic(string $method, array $parameters): mixed
     {
-        $instance = new static();
+        $instance = new static;
 
         return \call_user_func_array([$instance, $method], $parameters);
     }
@@ -187,7 +187,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     public static function hydrate(array $items): array
     {
-        $instance = new static();
+        $instance = new static;
 
         return array_map(static fn ($item): static => $instance->newInstance($item), $items);
     }
@@ -535,7 +535,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
 
         $attributes = array_diff_key($this->attributes, array_flip($except));
 
-        return (new static())->fill($attributes);
+        return (new static)->fill($attributes);
     }
 
     /**

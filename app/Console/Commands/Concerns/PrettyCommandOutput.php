@@ -182,7 +182,7 @@ trait PrettyCommandOutput
     public function progressBlock(string $text, string $progress = 'running', string $color = 'blue'): void
     {
         $this->maxWidth ??= 128;
-        $this->terminal ??= new Terminal();
+        $this->terminal ??= new Terminal;
         $width = min($this->terminal->getWidth(), $this->maxWidth);
         $dotLength = $width - 5 - \strlen(strip_tags($text.$progress));
 

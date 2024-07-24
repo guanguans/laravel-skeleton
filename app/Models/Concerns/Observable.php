@@ -19,7 +19,7 @@ trait Observable
 {
     public static function bootObservable(): void
     {
-        $events = (new static())->getObservableEvents();
+        $events = (new static)->getObservableEvents();
 
         $traitEvents = self::collectEventsRegisteredByTraits();
 

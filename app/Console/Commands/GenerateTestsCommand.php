@@ -267,18 +267,18 @@ class GenerateTestsCommand extends Command
             self::$statistics['scanned_files'] = $finder->count();
         });
 
-        $this->resourceUsageFormatter = new ResourceUsageFormatter();
+        $this->resourceUsageFormatter = new ResourceUsageFormatter;
         $this->lexer = new Emulative(['usedAttributes' => ['comments', 'startLine', 'endLine', 'startTokenPos', 'endTokenPos']]);
-        $this->parser = (new ParserFactory())->create((int) $this->option('parse-mode'), $this->lexer);
-        $this->errorHandler = new Collecting();
-        $this->builderFactory = new BuilderFactory();
-        $this->nodeFinder = new NodeFinder();
+        $this->parser = (new ParserFactory)->create((int) $this->option('parse-mode'), $this->lexer);
+        $this->errorHandler = new Collecting;
+        $this->builderFactory = new BuilderFactory;
+        $this->nodeFinder = new NodeFinder;
         // $this->nodeDumper = new NodeDumper();
         // $this->jsonDecoder = new JsonDecoder();
-        $this->nodeTraverser = new NodeTraverser();
+        $this->nodeTraverser = new NodeTraverser;
         // $this->parentConnectingVisitor = new ParentConnectingVisitor();
         // $this->nodeConnectingVisitor = new NodeConnectingVisitor();
-        $this->cloningVisitor = new CloningVisitor();
+        $this->cloningVisitor = new CloningVisitor;
         $this->nodeTraverser->addVisitor($this->cloningVisitor);
 
         $this->classUpdatingVisitor = new class('', '', []) extends NodeVisitorAbstract
@@ -312,7 +312,7 @@ class GenerateTestsCommand extends Command
             }
         };
 
-        $this->prettyPrinter = new class() extends Standard
+        $this->prettyPrinter = new class extends Standard
         {
             protected function pStmt_ClassMethod(ClassMethod $node)
             {

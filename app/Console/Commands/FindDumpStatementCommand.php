@@ -221,9 +221,9 @@ class FindDumpStatementCommand extends Command
             }
         });
 
-        $this->parser = (new ParserFactory())->create((int) $this->option('parse-mode'));
-        $this->nodeFinder = new NodeFinder();
-        $this->prettyPrinter = new Standard();
-        $this->resourceUsageFormatter = new ResourceUsageFormatter();
+        $this->parser = (new ParserFactory)->create((int) $this->option('parse-mode'));
+        $this->nodeFinder = new NodeFinder;
+        $this->prettyPrinter = new Standard;
+        $this->resourceUsageFormatter = new ResourceUsageFormatter;
     }
 }
