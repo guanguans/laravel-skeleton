@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ec7a4b0345da9cad6f0e5d92439c171",
+    "content-hash": "8720bcb0601674b4efdc39b246e7e6af",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -9234,6 +9234,53 @@
                 }
             ],
             "time": "2023-11-13T09:31:12+00:00"
+        },
+        {
+            "name": "olinox14/path-php",
+            "version": "0.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/olinox14/path-php.git",
+                "reference": "cbc29f6f8e344d3a0c1b6fd343e26f2919b939fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/olinox14/path-php/zipball/cbc29f6f8e344d3a0c1b6fd343e26f2919b939fc",
+                "reference": "cbc29f6f8e344d3a0c1b6fd343e26f2919b939fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "ext-posix": "*",
+                "friendsofphp/php-cs-fixer": "^3.52",
+                "php-coveralls/php-coveralls": "^2.7",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Path\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Massot",
+                    "email": "olinox14@tuta.io"
+                }
+            ],
+            "description": "Object-oriented file and path operations, inspired by the path.py python library",
+            "support": {
+                "issues": "https://github.com/olinox14/path-php/issues",
+                "source": "https://github.com/olinox14/path-php/tree/0.1.8"
+            },
+            "time": "2024-04-25T20:56:34+00:00"
         },
         {
             "name": "onlime/laravel-http-client-global-logger",

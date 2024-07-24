@@ -64,6 +64,7 @@
         "nunomaduro/laravel-console-task": "^1.9",
         "nunomaduro/termwind": "^2.0",
         "nyholm/psr7": "^1.8",
+        "olinox14/path-php": "^0.1.8",
         "onlime/laravel-http-client-global-logger": "^1.1",
         "opcodesio/log-viewer": "^3.10",
         "orchid/platform": "^14.26",
