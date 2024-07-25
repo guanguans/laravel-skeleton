@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bdb9d9863f654a2fd42344e86cd6639",
+    "content-hash": "2d0dc966e404f75d7cd80b8c7bfa14d2",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -5519,6 +5519,60 @@
             "time": "2023-07-17T10:05:56+00:00"
         },
         {
+            "name": "hammerstone/fast-paginate",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hammerstonedev/fast-paginate.git",
+                "reference": "6a1fb26c860d04176d00761ae8a93f04da14c81c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hammerstonedev/fast-paginate/zipball/6a1fb26c860d04176d00761ae8a93f04da14c81c",
+                "reference": "6a1fb26c860d04176d00761ae8a93f04da14c81c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.37|^9.0|^10.0|^11.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "laravel/scout": "^9.4|^10.8",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^6|^7|^8.0|^9.0",
+                "phpunit/phpunit": ">=8.5.23|^9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hammerstone\\FastPaginate\\FastPaginateProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hammerstone\\FastPaginate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Francis",
+                    "email": "aaron@hammerstone.dev"
+                }
+            ],
+            "description": "Fast paginate for Laravel",
+            "support": {
+                "issues": "https://github.com/hammerstonedev/fast-paginate/issues",
+                "source": "https://github.com/hammerstonedev/fast-paginate/tree/v1.1.1"
+            },
+            "time": "2024-05-16T15:45:29+00:00"
+        },
+        {
             "name": "hashids/hashids",
             "version": "5.0.2",
             "source": {
@@ -5655,6 +5709,64 @@
                 "source": "https://github.com/imanghafoori1/laravel-decorator/tree/v1.1.0"
             },
             "time": "2024-05-06T16:47:40+00:00"
+        },
+        {
+            "name": "imanghafoori/laravel-middlewarize",
+            "version": "v1.1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/imanghafoori1/laravel-middlewarize.git",
+                "reference": "5312f1842593e9ca37bae9a1cb0a9070191a0198"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/imanghafoori1/laravel-middlewarize/zipball/5312f1842593e9ca37bae9a1cb0a9070191a0198",
+                "reference": "5312f1842593e9ca37bae9a1cb0a9070191a0198",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "~5.1|6.*|7.*|8.*|9.*|10.*|11.*|12.*",
+                "illuminate/pipeline": "~5.1|6.*|7.*|8.*|9.*|10.*|11.*|12.*",
+                "php": "7.3.*|7.4.*|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7.0|~8.0"
+            },
+            "suggest": {
+                "imanghafoori/laravel-anypass": " Allows you login with any password in local environment.",
+                "imanghafoori/laravel-heyman": "It allows to write expressive code to authorize, validate and authenticate.",
+                "imanghafoori/laravel-masterpass": "You can easily set a master password without code change."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Imanghafoori\\Middlewarize\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Iman Ghafoori",
+                    "email": "imanghafoori1@gmail.com"
+                }
+            ],
+            "description": "Use laravel middlewares on any method calls in your app",
+            "homepage": "https://github.com/imanghafoori1/laravel-middlewarize",
+            "keywords": [
+                "laravel",
+                "laravel-middlewares",
+                "laravel-package",
+                "php",
+                "pipeline"
+            ],
+            "support": {
+                "issues": "https://github.com/imanghafoori1/laravel-middlewarize/issues",
+                "source": "https://github.com/imanghafoori1/laravel-middlewarize/tree/v1.1.11"
+            },
+            "time": "2024-05-24T09:04:56+00:00"
         },
         {
             "name": "izniburak/bit-permission",
@@ -6063,6 +6175,56 @@
                 "source": "https://github.com/jiannei/laravel-response/tree/v6.0.0"
             },
             "time": "2024-03-13T06:39:16+00:00"
+        },
+        {
+            "name": "joetannenbaum/terminalia",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joetannenbaum/terminalia.git",
+                "reference": "501f7abf668b48bc576932bf89627972f4d83858"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joetannenbaum/terminalia/zipball/501f7abf668b48bc576932bf89627972f4d83858",
+                "reference": "501f7abf668b48bc576932bf89627972f4d83858",
+                "shasum": ""
+            },
+            "require": {
+                "spatie/fork": "^1.1"
+            },
+            "require-dev": {
+                "tightenco/duster": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Terminalia\\Providers\\TerminaliaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Terminalia\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Tannenbaum",
+                    "email": "joe@joe.codes"
+                }
+            ],
+            "description": "Beautiful command line output for Laravel.",
+            "support": {
+                "issues": "https://github.com/joetannenbaum/terminalia/issues",
+                "source": "https://github.com/joetannenbaum/terminalia/tree/0.2.2"
+            },
+            "time": "2023-05-08T14:42:27+00:00"
         },
         {
             "name": "kelunik/certificate",
@@ -10921,6 +11083,58 @@
                 }
             ],
             "time": "2023-09-13T16:42:03+00:00"
+        },
+        {
+            "name": "protoqol/prequel",
+            "version": "v1.22.61",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Protoqol/Prequel.git",
+                "reference": "358d80ae67488b59af6495c9e9a5a53fb5dabd37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Protoqol/Prequel/zipball/358d80ae67488b59af6495c9e9a5a53fb5dabd37",
+                "reference": "358d80ae67488b59af6495c9e9a5a53fb5dabd37",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.6",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.7",
+                "phpmd/phpmd": "^2.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Protoqol\\Prequel\\PrequelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Protoqol\\Prequel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quinten Schorsij",
+                    "email": "quinten@protoqol.xyz"
+                }
+            ],
+            "description": "Clear and concise database management.",
+            "support": {
+                "issues": "https://github.com/Protoqol/Prequel/issues",
+                "source": "https://github.com/Protoqol/Prequel/tree/v1.22.61"
+            },
+            "time": "2021-10-01T20:48:03+00:00"
         },
         {
             "name": "psr/cache",
@@ -18968,6 +19182,128 @@
             "time": "2024-04-30T22:54:29+00:00"
         },
         {
+            "name": "brainmaestro/composer-git-hooks",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BrainMaestro/composer-git-hooks.git",
+                "reference": "684dc85f480268baf5e13f39a3cc494eeb2536e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BrainMaestro/composer-git-hooks/zipball/684dc85f480268baf5e13f39a3cc494eeb2536e8",
+                "reference": "684dc85f480268baf5e13f39a3cc494eeb2536e8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "symfony/console": "^5.0|^6.0|^7.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "phpunit/phpunit": "^9|^10|^11"
+            },
+            "bin": [
+                "cghooks"
+            ],
+            "type": "library",
+            "extra": {
+                "hooks": {
+                    "pre-commit": "composer check-style",
+                    "pre-push": [
+                        "composer test",
+                        "appver=$(grep -o -E '[0-9]+\\.[0-9]+\\.[0-9]+(-alpha\\.[0-9]+)?' cghooks)",
+                        "tag=$(git tag | tail -n 1)",
+                        "tag=${tag#v}",
+                        "if [ \"$tag\" != \"$appver\" ]; then",
+                        "echo \"The most recent tag $tag does not match the application version $appver\\n\"",
+                        "sed -i -E \"s/$appver/$tag/\" cghooks",
+                        "exit 1",
+                        "fi"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "BrainMaestro\\GitHooks\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ezinwa Okpoechi",
+                    "email": "brainmaestro@outlook.com"
+                }
+            ],
+            "description": "Easily manage git hooks in your composer config",
+            "keywords": [
+                "HOOK",
+                "composer",
+                "git"
+            ],
+            "support": {
+                "issues": "https://github.com/BrainMaestro/composer-git-hooks/issues",
+                "source": "https://github.com/BrainMaestro/composer-git-hooks/tree/v3.0.0"
+            },
+            "time": "2024-06-22T09:17:59+00:00"
+        },
+        {
+            "name": "brick/varexporter",
+            "version": "0.3.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brick/varexporter.git",
+                "reference": "b5853edea6204ff8fa10633c3a4cccc4058410ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brick/varexporter/zipball/b5853edea6204ff8fa10633c3a4cccc4058410ed",
+                "reference": "b5853edea6204ff8fa10633c3a4cccc4058410ed",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.0",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^8.5 || ^9.0",
+                "vimeo/psalm": "4.23.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brick\\VarExporter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A powerful alternative to var_export(), which can export closures and objects without __set_state()",
+            "keywords": [
+                "var_export"
+            ],
+            "support": {
+                "issues": "https://github.com/brick/varexporter/issues",
+                "source": "https://github.com/brick/varexporter/tree/0.3.8"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/BenMorel",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-01-21T23:05:38+00:00"
+        },
+        {
             "name": "buggregator/trap",
             "version": "1.10.1",
             "source": {
@@ -21500,6 +21836,75 @@
             "time": "2023-10-21T03:09:07+00:00"
         },
         {
+            "name": "laracraft-tech/laravel-schema-rules",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracraft-tech/laravel-schema-rules.git",
+                "reference": "e9cca4af5d627cf1bc67365977fcaa825534f2f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracraft-tech/laravel-schema-rules/zipball/e9cca4af5d627cf1bc67365977fcaa825534f2f6",
+                "reference": "e9cca4af5d627cf1bc67365977fcaa825534f2f6",
+                "shasum": ""
+            },
+            "require": {
+                "brick/varexporter": "^0.3.8 || ^0.5.0",
+                "doctrine/dbal": "^3.6 || ^4.0.2",
+                "illuminate/contracts": "^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/database": "^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/testing": "^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "php": "^7.4 || ^8.0 || ^8.1",
+                "spatie/laravel-package-tools": "^1.12 || ^1.14"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.13",
+                "nunomaduro/larastan": "^1.0 || ^2.5",
+                "orchestra/testbench": "^6.27 || ^7.0  || ^8.0 || ^9.0 ",
+                "pestphp/pest": "^1.22 || ^2.0",
+                "pestphp/pest-plugin-laravel": "^1.22 || ^2.0",
+                "spatie/laravel-ray": "^1.32"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaracraftTech\\LaravelSchemaRules\\LaravelSchemaRulesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaracraftTech\\LaravelSchemaRules\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zacharias Creutznacher",
+                    "email": "zacharias@laracraft.tech",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Automatically generate Laravel validation rules based on your database table schema!",
+            "homepage": "https://github.com/laracraft-tech/laravel-schema-rules",
+            "keywords": [
+                "laracraft-tech",
+                "laravel",
+                "laravel-schema-rules"
+            ],
+            "support": {
+                "issues": "https://github.com/laracraft-tech/laravel-schema-rules/issues",
+                "source": "https://github.com/laracraft-tech/laravel-schema-rules/tree/v1.4.0"
+            },
+            "time": "2024-06-10T13:27:41+00:00"
+        },
+        {
             "name": "laradumps/laradumps",
             "version": "3.1.3",
             "source": {
@@ -22812,6 +23217,59 @@
                 "source": "https://github.com/Laravel-Lang/routes"
             },
             "time": "2024-07-10T10:28:26+00:00"
+        },
+        {
+            "name": "laravel-shift/factory-generator",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-shift/factory-generator.git",
+                "reference": "90eae4d474d91abf2a0367f26322c5756af3ebff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-shift/factory-generator/zipball/90eae4d474d91abf2a0367f26322c5756af3ebff",
+                "reference": "90eae4d474d91abf2a0367f26322c5756af3ebff",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.9.1",
+                "illuminate/support": "^10.0|^11.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0",
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Shift\\FactoryGenerator\\FactoryGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Shift\\FactoryGenerator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate factories from existing models",
+            "keywords": [
+                "factory",
+                "laravel",
+                "model",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-shift/factory-generator/issues",
+                "source": "https://github.com/laravel-shift/factory-generator/tree/v2.0"
+            },
+            "time": "2024-06-18T16:27:21+00:00"
         },
         {
             "name": "laravel/envoy",
@@ -26127,6 +26585,89 @@
                 }
             ],
             "time": "2024-07-24T15:05:25+00:00"
+        },
+        {
+            "name": "salahhusa9/laravel-updater",
+            "version": "v1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/salahhusa9/laravel-updater.git",
+                "reference": "ea44706f358a426faba1207f85ac7aa240c9a09e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/ea44706f358a426faba1207f85ac7aa240c9a09e",
+                "reference": "ea44706f358a426faba1207f85ac7aa240c9a09e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.8",
+                "illuminate/contracts": "^10.0|^11.0",
+                "php": "^8.1|^8.2",
+                "spatie/laravel-package-tools": "^1.0",
+                "symfony/process": "^6.3|^7.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.8|^8.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^2.20",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Salahhusa9\\Updater\\UpdaterServiceProvider"
+                    ],
+                    "aliases": {
+                        "Updater": "Salahhusa9\\Updater\\Facades\\Updater"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Salahhusa9\\Updater\\": "src/",
+                    "Salahhusa9\\Updater\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "salahhusa9",
+                    "email": "salahhusa9@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Updater is a simple yet powerful package for updater your Laravel applications. It makes it easy to upgrade your application to the latest version with just one command.",
+            "homepage": "https://github.com/salahhusa9/laravel-updater",
+            "keywords": [
+                "laravel",
+                "laravel package",
+                "laravel package self updater",
+                "laravel package update",
+                "laravel package update itself",
+                "laravel package updater",
+                "laravel self updater",
+                "laravel-updater",
+                "salahhusa9"
+            ],
+            "support": {
+                "issues": "https://github.com/salahhusa9/laravel-updater/issues",
+                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/salahhusa9",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-07-17T20:24:58+00:00"
         },
         {
             "name": "sebastian/cli-parser",

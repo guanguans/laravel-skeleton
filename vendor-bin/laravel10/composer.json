@@ -3,10 +3,8 @@
         "aurorawebsoftware/asetting": "^1.0",
         "beyondcode/laravel-websockets": "^1.14",
         "envant/fireable": "^1.0",
-        "hammerstone/fast-paginate": "^1.0",
         "hammerstone/flaky": "^0.1.5",
         "hammerstone/laravel-pseudo-daemon": "^1.1",
-        "imanghafoori/laravel-middlewarize": "^1.1",
         "joetannenbaum/terminalia": "^0.3.3",
         "knuckleswtf/scribe": "^4.31",
         "laravel-notification-channels/pushbullet": "^1.5",
@@ -17,12 +15,8 @@
         "tenantcloud/laravel-mixins": "^3.1"
     },
     "require-dev": {
-        "brainmaestro/composer-git-hooks": "dev-master",
         "dedoc/scramble": "^0.8.6",
-        "laracasts/generators": "^2.0",
-        "laracraft-tech/laravel-schema-rules": "^1.3",
-        "laravel-shift/factory-generator": "dev-master",
-        "salahhusa9/laravel-updater": "^1.2"
+        "laracasts/generators": "^2.0"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
