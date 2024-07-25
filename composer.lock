@@ -10600,16 +10600,16 @@
         },
         {
             "name": "php-open-source-saver/jwt-auth",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
-                "reference": "b163d51d8feb10e918ab820ba0df6301609b75b3"
+                "reference": "c2b0aa7968918c19c2d3d6bacf404bfd78cb178f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/b163d51d8feb10e918ab820ba0df6301609b75b3",
-                "reference": "b163d51d8feb10e918ab820ba0df6301609b75b3",
+                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/c2b0aa7968918c19c2d3d6bacf404bfd78cb178f",
+                "reference": "c2b0aa7968918c19c2d3d6bacf404bfd78cb178f",
                 "shasum": ""
             },
             "require": {
@@ -10687,7 +10687,7 @@
                 "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
                 "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
             },
-            "time": "2024-07-24T12:21:17+00:00"
+            "time": "2024-07-25T06:42:08+00:00"
         },
         {
             "name": "php-static-analysis/attributes",
