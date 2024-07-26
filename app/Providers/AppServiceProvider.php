@@ -30,6 +30,7 @@ use App\Support\Macros\StrMacro;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
+use Carbon\CarbonImmutable;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -296,6 +297,8 @@ class AppServiceProvider extends ServiceProvider
             // Mail::alwaysTo('taylor@example.com');
             // Carbon::setTestNow('2031-04-05');
             // Carbon::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
+            // CarbonImmutable::setTestNow();
+            // CarbonImmutable::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
         });
 
         $this->unless($this->app->isProduction(), static function (): void {
