@@ -47,6 +47,7 @@
         "hashids/hashids": "^5.0",
         "imanghafoori/laravel-decorator": "^1.1",
         "imanghafoori/laravel-middlewarize": "^1.1",
+        "inspector-apm/inspector-laravel": "^4.9",
         "izniburak/bit-permission": "^1.0",
         "jasny/sso": "^0.5",
         "jdavidbakr/laravel-cache-garbage-collector": "^2.2",
