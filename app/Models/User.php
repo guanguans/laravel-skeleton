@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,5 +57,19 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
         ];
+    }
+
+    protected function createdAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value, $attributes) => $attributes['created_at']->format('Y-m-d H:i:s'),
+        );
+    }
+
+    protected function updatedAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: static fn ($value, $attributes) => $attributes['updated_at']->format('Y-m-d H:i:s'),
+        );
     }
 }
