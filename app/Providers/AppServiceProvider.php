@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
+use App\Http\Middleware\TrimStrings;
 use App\Listeners\RunCommandInDebugModeListener;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
@@ -208,6 +209,7 @@ class AppServiceProvider extends ServiceProvider
                     : Limit::perMinute(100)->by($request->ip())
             );
             ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
+            // TrimStrings::skipWhen(static fn (Request $request): bool => $request->is('admin/*'));
             Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
                 $value,
                 JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
@@ -222,6 +224,11 @@ class AppServiceProvider extends ServiceProvider
             Http::globalMiddleware(
                 Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG))
             );
+
+            // Route::resourceVerbs([
+            //     'create' => 'crear',
+            //     'edit' => 'editar',
+            // ]);
 
             // Builder::morphUsingUlids();
             // Builder::morphUsingUuids();
@@ -492,6 +499,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
+     *
+     * @noinspection ForgottenDebugOutputInspection
      */
     private function listenEvents(): void
     {
@@ -512,6 +521,13 @@ class AppServiceProvider extends ServiceProvider
                 $event->response->setEncodingOptions($event->response->getEncodingOptions() | JSON_UNESCAPED_UNICODE);
             }
         });
+
+        // \Illuminate\Support\Facades\Event::listen('*', static function (string $event, array $data): void {
+        //     // Log the event class
+        //     error_log($event);
+        //     // Log the event data delegated to listener parameters
+        //     error_log(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS));
+        // });
     }
 
     private function setLocales(?string $locale = null): void
