@@ -32,7 +32,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     // use Sushi;
 
     // use FireableAttributes;
-    use Macroable;
+    // use Macroable;
     use Pipeable;
     use SerializeDate;
     use SoftDeletes;

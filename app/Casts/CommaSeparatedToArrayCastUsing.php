@@ -14,12 +14,12 @@ class CommaSeparatedToArrayCastUsing implements Castable
     /**
      * Get the name of the caster class to use when casting from / to this cast target.
      *
-     * @param  array<non-empty-string, mixed>  $arguments
+     * @param  array<int, mixed>  $arguments
      * @return class-string<CastsAttributes|CastsInboundAttributes>|CastsAttributes|CastsInboundAttributes
      */
     public static function castUsing(array $arguments): CastsAttributes
     {
-        return new class implements CastsAttributes
+        return new class(...$arguments) implements CastsAttributes
         {
             public bool $withoutObjectCaching = true;
 
