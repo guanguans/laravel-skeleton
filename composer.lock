@@ -6711,16 +6711,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.18.1",
+            "version": "v11.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b19ba518c56852567e99fbae9321bc436c2cc5a8"
+                "reference": "5e103d499e9ee5bcfc184412d034c4e516b87085"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b19ba518c56852567e99fbae9321bc436c2cc5a8",
-                "reference": "b19ba518c56852567e99fbae9321bc436c2cc5a8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5e103d499e9ee5bcfc184412d034c4e516b87085",
+                "reference": "5e103d499e9ee5bcfc184412d034c4e516b87085",
                 "shasum": ""
             },
             "require": {
@@ -6913,7 +6913,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-07-26T10:39:29+00:00"
+            "time": "2024-07-30T15:22:41+00:00"
         },
         {
             "name": "laravel/octane",
@@ -7293,16 +7293,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v10.10.2",
+            "version": "v10.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "4fe117e1e3d689ebb2fc66f12d200ed924848cf1"
+                "reference": "42482b9fb8d3f82bdb52307a990107231c50b882"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/4fe117e1e3d689ebb2fc66f12d200ed924848cf1",
-                "reference": "4fe117e1e3d689ebb2fc66f12d200ed924848cf1",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/42482b9fb8d3f82bdb52307a990107231c50b882",
+                "reference": "42482b9fb8d3f82bdb52307a990107231c50b882",
                 "shasum": ""
             },
             "require": {
@@ -7367,7 +7367,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2024-07-23T16:44:07+00:00"
+            "time": "2024-07-30T15:28:14+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -9854,16 +9854,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.27.1",
+            "version": "14.27.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "e5ac3b61a4e2104ac48b417991af37c6712b6ce5"
+                "reference": "f3d0ce04af8f8016bbd3f90452304e7aced6cf86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/e5ac3b61a4e2104ac48b417991af37c6712b6ce5",
-                "reference": "e5ac3b61a4e2104ac48b417991af37c6712b6ce5",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/f3d0ce04af8f8016bbd3f90452304e7aced6cf86",
+                "reference": "f3d0ce04af8f8016bbd3f90452304e7aced6cf86",
                 "shasum": ""
             },
             "require": {
@@ -9957,7 +9957,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-07-23T13:18:01+00:00"
+            "time": "2024-07-30T11:20:09+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
