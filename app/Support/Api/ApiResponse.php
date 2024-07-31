@@ -23,31 +23,52 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ApiResponse
 {
-    public static function renderUsing(): \Closure
+    use ConcreteJsonResponseMethods;
+
+    /**
+     * @var callable
+     */
+    private $tapper;
+
+    public function __construct(?callable $tapper = null)
     {
-        return static function (\Throwable $throwable, Request $request) {
+        $this->tapper = $tapper ?? static function (JsonResponse $jsonResponse): void {};
+    }
+
+    public static function make(?callable $tapper = null): self
+    {
+        return new self($tapper);
+    }
+
+    public static function renderUsing(?callable $tapper = null): \Closure
+    {
+        return static function (\Throwable $throwable, Request $request) use ($tapper) {
             if ($request->is('api/*')) {
-                return (new self)->exception($throwable);
+                return self::make($tapper)->exception($throwable);
             }
         };
     }
 
-    public function success(mixed $data = [], string $message = '', int $code = 200): JsonResponse
+    public function success(mixed $data = null, string $message = '', int $code = 200): JsonResponse
     {
         return $this->json($data, $message, $code);
     }
 
-    public function fail(string $message = '', int $code = 500, ?array $errors = null): JsonResponse
+    public function fail(string $message = '', int $code = 500, ?array $error = null): JsonResponse
     {
-        return $this->json(message: $message, code: $code, error: $errors);
+        return $this->json(message: $message, code: $code, error: $error);
     }
 
+    /**
+     * @see \Illuminate\Foundation\Exceptions\Handler::render()
+     * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
+     */
     public function exception(\Throwable $throwable): JsonResponse
     {
-        $message = $throwable->getMessage() ?: 'Server Error';
+        $message = $throwable->getMessage();
         $code = $throwable->getCode() ?: 500;
         $headers = [];
-        $errors = $this->convertExceptionToArray($throwable);
+        $error = $this->convertExceptionToArray($throwable);
 
         if ($throwable instanceof HttpExceptionInterface) {
             $code = $throwable->getStatusCode();
@@ -56,25 +77,30 @@ class ApiResponse
 
         if ($throwable instanceof ValidationException) {
             $code = $throwable->status;
-            config('app.debug') and $errors = $throwable->errors();
+            config('app.debug') and $error = $throwable->errors();
         }
 
         if ($throwable instanceof AuthenticationException) {
             $code = 401;
         }
 
-        return $this->fail($message, $code, $errors)->withHeaders($headers);
+        $message = $this->messageFor($message, $code) ?: 'Server Error';
+
+        return $this->fail($message, $code, $error)->withHeaders($headers);
     }
 
+    /**
+     * @param  int<100, 599>|int<10000, 59999>  $code
+     */
     public function json(
         mixed $data = null,
         string $message = '',
         int $code = 200,
         ?array $error = null,
-        array $headers = [],
+        #[\SensitiveParameter] array $headers = [],
         int $options = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
     ): JsonResponse {
-        return new JsonResponse(
+        return tap(new JsonResponse(
             data: [
                 'status' => $this->statusFor($this->statusCodeFor($code)),
                 'code' => $code,
@@ -84,7 +110,7 @@ class ApiResponse
             ],
             headers: $headers,
             options: $options
-        );
+        ), $this->tapper);
     }
 
     private function statusFor(int $statusCode): string
@@ -127,16 +153,19 @@ class ApiResponse
         return $error ?: (object) [];
     }
 
+    /**
+     * @see \Illuminate\Routing\Router::toResponse()
+     */
     private function dataFor(mixed $data): array|object
     {
         return match (true) {
             $data instanceof ResourceCollection => $this->resourceCollection($data),
             $data instanceof JsonResource => $this->jsonResource($data),
             $data instanceof AbstractPaginator, $data instanceof AbstractCursorPaginator => $this->paginator($data),
-            $data instanceof Arrayable, (\is_object($data) && method_exists($data, 'toArray')) => $data->toArray(),
+            $data instanceof Arrayable => $data->toArray(),
             $data instanceof \JsonSerializable => $data->jsonSerialize(),
-            empty($data) => (object) $data,
-            default => Arr::wrap($data)
+            ! \is_object($data) => (object) $data,
+            // default => Arr::wrap($data)
         };
     }
 
@@ -172,6 +201,8 @@ class ApiResponse
      */
     private function paginator(AbstractPaginator|AbstractCursorPaginator $paginator): array
     {
+        /** @var \Illuminate\Pagination\Paginator $paginator */
+
         return [
             'data' => $paginator->toArray()['data'],
             'meta' => $this->metaFor($paginator),
@@ -199,7 +230,7 @@ class ApiResponse
                     'current_page' => $paginator->currentPage(),
                     'total' => $paginator->total(),
                     'total_pages' => $paginator->lastPage(),
-                    'links' => array_filter([
+                    'links' => ([
                         'previous' => $paginator->previousPageUrl(),
                         'next' => $paginator->nextPageUrl(),
                     ]),
@@ -210,7 +241,7 @@ class ApiResponse
                     'count' => $paginator->lastItem(),
                     'per_page' => $paginator->perPage(),
                     'current_page' => $paginator->currentPage(),
-                    'links' => array_filter([
+                    'links' => ([
                         'previous' => $paginator->previousPageUrl(),
                         'next' => $paginator->nextPageUrl(),
                     ]),
@@ -228,7 +259,7 @@ class ApiResponse
         return config('app.debug')
             ? [
                 'message' => $throwable->getMessage(),
-                'exception' => \get_class($throwable),
+                'exception' => $throwable::class,
                 'file' => $throwable->getFile(),
                 'line' => $throwable->getLine(),
                 'trace' => collect($throwable->getTrace())->map(static fn ($trace) => Arr::except($trace, ['args']))->all(),
