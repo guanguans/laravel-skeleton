@@ -16,22 +16,29 @@ use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
-class Responder
+class ApiResponse
 {
-    public function success(mixed $data = [], string $message = '', int $code = 200): JsonResponse
+    public function success(mixed $data = [], ?string $message = null, int $code = 200): JsonResponse
     {
         return $this->json($data, $message, $code);
     }
 
-    public function fail(string $message = '', int $code = 500, ?array $errors = null): JsonResponse
+    public function fail(?string $message = null, int $code = 500, ?array $errors = null): JsonResponse
     {
         return $this->json(message: $message, code: $code, error: $errors);
     }
 
-    public function exception(\Exception $throwable, int $code = 200): JsonResponse
+    public function exception(\Throwable $throwable): JsonResponse
     {
-        return $this->fail($throwable->getMessage(), $code);
+        $isHttpException = $this->isHttpException($throwable);
+
+        $message = $isHttpException ? $throwable->getMessage() : 'Server Error';
+        $code = $isHttpException ? $throwable->getStatusCode() : 500;
+        $headers = $isHttpException ? $throwable->getHeaders() : [];
+
+        return $this->fail($message, $code, $this->convertExceptionToArray($throwable))->withHeaders($headers);
     }
 
     public function json(mixed $data = null, ?string $message = null, int $code = 200, ?array $error = null): JsonResponse
@@ -39,7 +46,7 @@ class Responder
         /** @see \Symfony\Component\HttpFoundation\Response::setStatusCode() */
         $statusCode = $this->statusCodeFor($code);
         if ($this->isInvalidFor($statusCode)) {
-            throw new \InvalidArgumentException(sprintf('The HTTP status code "%s" is not valid.', $statusCode));
+            throw new \InvalidArgumentException("The HTTP status code \"$statusCode\" is not valid.");
         }
 
         return new JsonResponse([
@@ -190,5 +197,25 @@ class Responder
             ],
             default => [],
         };
+    }
+
+    private function convertExceptionToArray(\Throwable $throwable): array
+    {
+        return config('app.debug')
+            ? [
+                'message' => $throwable->getMessage(),
+                'exception' => \get_class($throwable),
+                'file' => $throwable->getFile(),
+                'line' => $throwable->getLine(),
+                'trace' => collect($throwable->getTrace())->map(static fn ($trace) => Arr::except($trace, ['args']))->all(),
+            ]
+            : [
+                'message' => $this->isHttpException($throwable) ? $throwable->getMessage() : 'Server Error',
+            ];
+    }
+
+    private function isHttpException(\Throwable $throwable): bool
+    {
+        return $throwable instanceof HttpExceptionInterface;
     }
 }
