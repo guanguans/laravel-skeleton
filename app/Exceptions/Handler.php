@@ -2,13 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Support\Api\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Jiannei\Response\Laravel\Support\Traits\ExceptionTrait;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    use ExceptionTrait;
+    // use ExceptionTrait;
 
     /**
      * {@inheritdoc}
@@ -32,6 +33,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(static function (Throwable $e): void {});
+        $this->renderable(ApiResponse::renderUsing());
     }
 
     public function report(Throwable $e): void

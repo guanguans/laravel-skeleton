@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Support\Api;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractCursorPaginator;
@@ -15,54 +17,81 @@ use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ApiResponse
 {
-    public function success(mixed $data = [], ?string $message = null, int $code = 200): JsonResponse
+    public static function renderUsing(): \Closure
+    {
+        return static function (\Throwable $throwable, Request $request) {
+            if ($request->is('api/*')) {
+                return (new self)->exception($throwable);
+            }
+        };
+    }
+
+    public function success(mixed $data = [], string $message = '', int $code = 200): JsonResponse
     {
         return $this->json($data, $message, $code);
     }
 
-    public function fail(?string $message = null, int $code = 500, ?array $errors = null): JsonResponse
+    public function fail(string $message = '', int $code = 500, ?array $errors = null): JsonResponse
     {
         return $this->json(message: $message, code: $code, error: $errors);
     }
 
     public function exception(\Throwable $throwable): JsonResponse
     {
-        $isHttpException = $this->isHttpException($throwable);
+        $message = $throwable->getMessage() ?: 'Server Error';
+        $code = $throwable->getCode() ?: 500;
+        $headers = [];
+        $errors = $this->convertExceptionToArray($throwable);
 
-        $message = $isHttpException ? $throwable->getMessage() : 'Server Error';
-        $code = $isHttpException ? $throwable->getStatusCode() : 500;
-        $headers = $isHttpException ? $throwable->getHeaders() : [];
-
-        return $this->fail($message, $code, $this->convertExceptionToArray($throwable))->withHeaders($headers);
-    }
-
-    public function json(mixed $data = null, ?string $message = null, int $code = 200, ?array $error = null): JsonResponse
-    {
-        /** @see \Symfony\Component\HttpFoundation\Response::setStatusCode() */
-        $statusCode = $this->statusCodeFor($code);
-        if ($this->isInvalidFor($statusCode)) {
-            throw new \InvalidArgumentException("The HTTP status code \"$statusCode\" is not valid.");
+        if ($throwable instanceof HttpExceptionInterface) {
+            $code = $throwable->getStatusCode();
+            $headers = $throwable->getHeaders();
         }
 
-        return new JsonResponse([
-            'status' => $this->statusFor($statusCode),
-            'code' => $code,
-            'message' => $this->messageFor($message, $code),
-            'data' => $this->dataFor($data),
-            'error' => $this->errorFor($error),
-        ]);
+        if ($throwable instanceof ValidationException) {
+            $code = $throwable->status;
+            config('app.debug') and $errors = $throwable->errors();
+        }
+
+        if ($throwable instanceof AuthenticationException) {
+            $code = 401;
+        }
+
+        return $this->fail($message, $code, $errors)->withHeaders($headers);
+    }
+
+    public function json(
+        mixed $data = null,
+        string $message = '',
+        int $code = 200,
+        ?array $error = null,
+        array $headers = [],
+        int $options = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
+    ): JsonResponse {
+        return new JsonResponse(
+            data: [
+                'status' => $this->statusFor($this->statusCodeFor($code)),
+                'code' => $code,
+                'message' => $this->messageFor($message, $code),
+                'data' => $this->dataFor($data),
+                'error' => $this->errorFor($error),
+            ],
+            headers: $headers,
+            options: $options
+        );
     }
 
     private function statusFor(int $statusCode): string
     {
         return match (true) {
-            ($statusCode >= 400 && $statusCode < 500) => 'error', // client error
-            ($statusCode >= 500 && $statusCode < 600) => 'fail', // service error
+            $statusCode >= 400 && $statusCode < 500 => 'error', // client error
+            $statusCode >= 500 && $statusCode < 600 => 'fail', // service error
             default => 'success'
         };
     }
@@ -75,7 +104,7 @@ class ApiResponse
     /**
      * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      */
-    private function messageFor(?string $message, int $code): string
+    private function messageFor(string $message, int $code): string
     {
         if ($message) {
             return $message;
@@ -96,14 +125,6 @@ class ApiResponse
     private function errorFor(?array $error): object|array
     {
         return $error ?: (object) [];
-    }
-
-    /**
-     * @see \Symfony\Component\HttpFoundation\Response::isInvalid()
-     */
-    private function isInvalidFor(int $statusCode): bool
-    {
-        return $statusCode < 100 || $statusCode >= 600;
     }
 
     private function dataFor(mixed $data): array|object
@@ -199,6 +220,9 @@ class ApiResponse
         };
     }
 
+    /**
+     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
+     */
     private function convertExceptionToArray(\Throwable $throwable): array
     {
         return config('app.debug')
@@ -210,12 +234,7 @@ class ApiResponse
                 'trace' => collect($throwable->getTrace())->map(static fn ($trace) => Arr::except($trace, ['args']))->all(),
             ]
             : [
-                'message' => $this->isHttpException($throwable) ? $throwable->getMessage() : 'Server Error',
+                'message' => $throwable instanceof HttpExceptionInterface ? $throwable->getMessage() : 'Server Error',
             ];
-    }
-
-    private function isHttpException(\Throwable $throwable): bool
-    {
-        return $throwable instanceof HttpExceptionInterface;
     }
 }
