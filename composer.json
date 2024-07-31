@@ -231,6 +231,7 @@
             "dont-discover": [
                 "barryvdh/laravel-ide-helper",
                 "lanin/laravel-api-debugger",
+                "jiannei/laravel-response",
                 "nunomaduro/collision"
             ]
         },

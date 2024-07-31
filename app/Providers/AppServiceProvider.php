@@ -84,6 +84,7 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 use Imanghafoori\Decorator\Facade\Decorator;
+use Jiannei\Response\Laravel\Providers\LaravelServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -129,6 +130,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->whenever(true, function (): void {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
+            // $this->app->register(LaravelServiceProvider::class);
         });
 
         $this->whenever($this->app->isLocal(), function (): void {
