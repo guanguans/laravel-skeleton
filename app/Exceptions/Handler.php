@@ -2,9 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Support\Api\ApiResponse;
+use App\Support\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Jiannei\Response\Laravel\Support\Traits\ExceptionTrait;
 use Throwable;
 
 class Handler extends ExceptionHandler

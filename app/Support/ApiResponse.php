@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api;
+namespace App\Support;
 
-use App\Support\PrivateCaller;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -17,7 +16,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractCursorPaginator;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
@@ -25,16 +23,22 @@ use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
+/**
+ * @see https://github.com/jiannei/laravel-response
+ * @see https://github.com/f9webltd/laravel-api-response-helpers
+ *
+ * @method array convertExceptionToArray(\Throwable $throwable)
+ */
 class ApiResponse
 {
-    use ConcreteJsonResponseMethods;
     use Conditionable;
     use Tappable;
 
-    /**
-     * @var callable(\Illuminate\Http\JsonResponse): void
-     */
-    private $tapper;
+    private bool $restful = false;
+
+    private array $headers = [];
+
+    private int $encodingOptions = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS;
 
     /**
      * @var array<class-string<\Throwable>, array{message: string, code: int}>
@@ -45,16 +49,35 @@ class ApiResponse
         ],
     ];
 
+    /**
+     * @var callable(\Illuminate\Http\JsonResponse): void
+     */
+    private $tapper;
+
     public function __construct(?callable $tapper = null)
     {
-        $this->tapper = $tapper ?? static function (JsonResponse $jsonResponse): void {
-            $jsonResponse->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS);
-        };
+        $this->tapper = $tapper ?? static function (JsonResponse $jsonResponse): void {};
     }
 
     public static function make(?callable $tapper = null): self
     {
         return new self($tapper);
+    }
+
+    /**
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     */
+    public static function registerDefaultRenderUsing(?callable $tapper): void
+    {
+        app(ExceptionHandler::class)->renderable(self::defaultRenderUsing($tapper));
+    }
+
+    /**
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     */
+    public static function registerRenderUsing(?callable $tapper, \Closure $condition): void
+    {
+        app(ExceptionHandler::class)->renderable(self::renderUsing($tapper, $condition));
     }
 
     public static function defaultRenderUsing(?callable $tapper = null): \Closure
@@ -71,14 +94,123 @@ class ApiResponse
      * @see \Illuminate\Foundation\Exceptions\Handler::renderable()
      * @see \Illuminate\Foundation\Exceptions\Handler::renderViaCallbacks()
      */
-    public static function renderUsing(?callable $tapper, mixed $condition): \Closure
+    public static function renderUsing(?callable $tapper, \Closure $condition): \Closure
     {
         return static function (\Throwable $throwable, Request $request) use ($condition, $tapper) {
             if (value($condition, $request, $throwable)) {
-                return self::make($tapper)->exception($throwable);
+                return self::make($tapper)->throw($throwable);
             }
         };
     }
+
+    public function setRestful(bool $restful): self
+    {
+        $this->restful = $restful;
+
+        return $this;
+    }
+
+    public function setHeaders(#[\SensitiveParameter] array $headers): self
+    {
+        $this->headers = $headers;
+
+        return $this;
+    }
+
+    public function setEncodingOptions(int $encodingOptions): self
+    {
+        $this->encodingOptions = $encodingOptions;
+
+        return $this;
+    }
+
+    public function setTapper(callable $tapper): self
+    {
+        $this->tapper = $tapper;
+
+        return $this;
+    }
+
+    public function setExceptions(array $exceptions): self
+    {
+        $this->exceptions = $exceptions;
+
+        return $this;
+    }
+
+    /**
+     * @param  class-string<\Throwable>  $exception
+     * @param  array{message: string, code: int}  $properties
+     */
+    public function exception(string $exception, array $properties): self
+    {
+        $this->exceptions[$exception] = $properties;
+
+        return $this;
+    }
+
+    /****************************************** start *****************************************/
+    public function localize(int $code = 200): JsonResponse
+    {
+        return $this->ok(code: $code);
+    }
+
+    public function ok(string $message = '', int $code = 200): JsonResponse
+    {
+        return $this->success(message: $message, code: $code);
+    }
+
+    public function created(mixed $data = null, string $message = '', string $location = ''): JsonResponse
+    {
+        return tap(
+            $this->success($data, $message, 201),
+            static function (JsonResponse $response) use ($location): void {
+                $location and $response->header('Location', $location);
+            }
+        );
+    }
+
+    public function accepted(mixed $data = null, string $message = '', string $location = ''): JsonResponse
+    {
+        return tap(
+            $this->success($data, $message, 202),
+            static function (JsonResponse $response) use ($location): void {
+                $location and $response->header('Location', $location);
+            }
+        );
+    }
+
+    public function noContent(string $message = ''): JsonResponse
+    {
+        return $this->success(message: $message, code: 204);
+    }
+
+    public function errorBadRequest(string $message = ''): JsonResponse
+    {
+        return $this->fail($message, 400);
+    }
+
+    public function errorUnauthorized(string $message = ''): JsonResponse
+    {
+        return $this->fail($message, 401);
+    }
+
+    public function errorForbidden(string $message = ''): JsonResponse
+    {
+        return $this->fail($message, 403);
+    }
+
+    public function errorNotFound(string $message = ''): JsonResponse
+    {
+        return $this->fail($message, 404);
+    }
+
+    public function errorMethodNotAllowed(string $message = ''): JsonResponse
+    {
+        return $this->fail($message, 405);
+    }
+
+    /****************************************** end *****************************************/
 
     public function success(mixed $data = null, string $message = '', int $code = 200): JsonResponse
     {
@@ -94,11 +226,11 @@ class ApiResponse
      * @see \Illuminate\Foundation\Exceptions\Handler::render()
      * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
      */
-    public function exception(\Throwable $throwable): JsonResponse
+    public function throw(\Throwable $throwable): JsonResponse
     {
         $message = $throwable->getMessage();
         $code = $throwable->getCode() ?: 500;
-        $error = PrivateCaller::call(app(ExceptionHandler::class), 'convertExceptionToArray', [$throwable]);
+        $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
 
         if ($throwable instanceof HttpExceptionInterface) {
@@ -126,13 +258,18 @@ class ApiResponse
         int $code = 200,
         ?array $error = null,
     ): JsonResponse {
-        return tap(new JsonResponse([
-            'status' => $this->statusFor($code),
-            'code' => $code,
-            'message' => $message ?: $this->messageFor($code),
-            'data' => $this->dataFor($data),
-            'error' => $this->errorFor($error),
-        ]), $this->tapper);
+        return tap(new JsonResponse(
+            data: [
+                'status' => $this->statusFor($code),
+                'code' => $code,
+                'message' => $message ?: $this->messageFor($code),
+                'data' => $this->dataFor($data),
+                'error' => $this->errorFor($error),
+            ],
+            status: $this->restful ? $this->statusCodeFor($code) : 200,
+            headers: $this->headers,
+            options: $this->encodingOptions,
+        ), $this->tapper);
     }
 
     private function statusFor(int $code): string
@@ -181,20 +318,20 @@ class ApiResponse
     private function dataFor(mixed $data): array|object
     {
         return match (true) {
-            $data instanceof ResourceCollection => $this->resourceCollection($data),
-            $data instanceof JsonResource => $this->jsonResource($data),
-            $data instanceof AbstractPaginator, $data instanceof AbstractCursorPaginator => $this->paginator($data),
+            $data instanceof ResourceCollection => $this->resourceCollectionFor($data),
+            $data instanceof JsonResource => $this->jsonResourceFor($data),
+            $data instanceof AbstractPaginator, $data instanceof AbstractCursorPaginator => $this->paginatorFor($data),
             $data instanceof Arrayable => $data->toArray(),
             $data instanceof \JsonSerializable => $data->jsonSerialize(),
-            ! \is_object($data) => (object) $data,
-            // default => Arr::wrap($data)
+            ! \is_array($data) && ! \is_object($data) => (object) $data,
+            default => $data
         };
     }
 
     /**
      * @@see \Illuminate\Http\Resources\Json\ResourceCollection::toResponse()
      */
-    private function resourceCollection(ResourceCollection $resourceCollection): array
+    private function resourceCollectionFor(ResourceCollection $resourceCollection): array
     {
         return [
             'data' => $resourceCollection->resolve(),
@@ -209,7 +346,7 @@ class ApiResponse
     /**
      * @@see \Illuminate\Http\Resources\Json\ResourceResponse::toResponse()
      */
-    private function jsonResource(JsonResource $jsonResource): array
+    private function jsonResourceFor(JsonResource $jsonResource): array
     {
         return array_merge_recursive(
             $jsonResource->resolve(),
@@ -221,7 +358,7 @@ class ApiResponse
     /**
      * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
      */
-    private function paginator(AbstractPaginator|AbstractCursorPaginator $paginator): array
+    private function paginatorFor(AbstractPaginator|AbstractCursorPaginator $paginator): array
     {
         /** @var \Illuminate\Pagination\Paginator $paginator */
 
@@ -269,7 +406,7 @@ class ApiResponse
                     ]),
                 ],
             ],
-            default => [],
+            default => (object) [],
         };
     }
 }
