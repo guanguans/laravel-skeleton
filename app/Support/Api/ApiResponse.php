@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support\Api;
 
+use App\Support\PrivateCaller;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -16,7 +17,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractCursorPaginator;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,7 +69,7 @@ class ApiResponse
         $message = $throwable->getMessage();
         $code = $throwable->getCode() ?: 500;
         $headers = [];
-        $error = $this->call(app(ExceptionHandler::class), 'convertExceptionToArray', [$throwable]);
+        $error = PrivateCaller::call(app(ExceptionHandler::class), 'convertExceptionToArray', [$throwable]);
 
         if ($throwable instanceof HttpExceptionInterface) {
             $code = $throwable->getStatusCode();
@@ -250,10 +250,5 @@ class ApiResponse
             ],
             default => [],
         };
-    }
-
-    private function call(object $object, string $method, array $params = []): mixed
-    {
-        return (fn (): mixed => $this->{$method}(...$params))->call($object);
     }
 }
