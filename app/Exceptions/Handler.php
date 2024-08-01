@@ -33,7 +33,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(static function (Throwable $e): void {});
-        $this->renderable(ApiResponse::renderUsing());
+        $this->renderable(ApiResponse::defaultRenderUsing());
     }
 
     public function report(Throwable $e): void

@@ -17,6 +17,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractCursorPaginator;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
@@ -31,13 +32,24 @@ class ApiResponse
     use Tappable;
 
     /**
-     * @var callable
+     * @var callable(\Illuminate\Http\JsonResponse): void
      */
     private $tapper;
 
+    /**
+     * @var array<class-string<\Throwable>, array{message: string, code: int}>
+     */
+    private array $exceptions = [
+        AuthenticationException::class => [
+            'code' => 401,
+        ],
+    ];
+
     public function __construct(?callable $tapper = null)
     {
-        $this->tapper = $tapper ?? static function (JsonResponse $jsonResponse): void {};
+        $this->tapper = $tapper ?? static function (JsonResponse $jsonResponse): void {
+            $jsonResponse->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS);
+        };
     }
 
     public static function make(?callable $tapper = null): self
@@ -45,10 +57,24 @@ class ApiResponse
         return new self($tapper);
     }
 
-    public static function renderUsing(?callable $tapper = null): \Closure
+    public static function defaultRenderUsing(?callable $tapper = null): \Closure
     {
-        return static function (\Throwable $throwable, Request $request) use ($tapper) {
-            if ($request->is('api/*')) {
+        return self::renderUsing(
+            $tapper,
+            static fn (Request $request): bool => $request->is('api/*')
+        );
+    }
+
+    /**
+     * @noinspection PhpInconsistentReturnPointsInspection
+     *
+     * @see \Illuminate\Foundation\Exceptions\Handler::renderable()
+     * @see \Illuminate\Foundation\Exceptions\Handler::renderViaCallbacks()
+     */
+    public static function renderUsing(?callable $tapper, mixed $condition): \Closure
+    {
+        return static function (\Throwable $throwable, Request $request) use ($condition, $tapper) {
+            if (value($condition, $request, $throwable)) {
                 return self::make($tapper)->exception($throwable);
             }
         };
@@ -85,11 +111,8 @@ class ApiResponse
             config('app.debug') and $error = $throwable->errors();
         }
 
-        if ($throwable instanceof AuthenticationException) {
-            $code = 401;
-        }
-
-        $message = $message ?: $this->messageFor($code) ?: 'Server Error';
+        $message = $this->exceptions[$class = $throwable::class]['message'] ?? $message;
+        $code = $this->exceptions[$class]['code'] ?? $code;
 
         return $this->fail($message, $code, $error)->withHeaders($headers);
     }
@@ -102,20 +125,14 @@ class ApiResponse
         string $message = '',
         int $code = 200,
         ?array $error = null,
-        #[\SensitiveParameter] array $headers = [],
-        int $options = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
     ): JsonResponse {
-        return tap(new JsonResponse(
-            data: [
-                'status' => $this->statusFor($code),
-                'code' => $code,
-                'message' => $message ?: $this->messageFor($code),
-                'data' => $this->dataFor($data),
-                'error' => $this->errorFor($error),
-            ],
-            headers: $headers,
-            options: $options
-        ), $this->tapper);
+        return tap(new JsonResponse([
+            'status' => $this->statusFor($code),
+            'code' => $code,
+            'message' => $message ?: $this->messageFor($code),
+            'data' => $this->dataFor($data),
+            'error' => $this->errorFor($error),
+        ]), $this->tapper);
     }
 
     private function statusFor(int $code): string
@@ -149,7 +166,7 @@ class ApiResponse
             return __($key);
         }
 
-        // return Response::$statusTexts[$statusCode] ?? 'Unknown Status';
+        // ['Server Error', 'Unknown Status'];
         return Response::$statusTexts[$statusCode] ?? 'Whoops, looks like something went wrong.';
     }
 
