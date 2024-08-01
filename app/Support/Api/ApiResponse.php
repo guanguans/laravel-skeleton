@@ -18,6 +18,8 @@ use Illuminate\Pagination\AbstractCursorPaginator;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Traits\Conditionable;
+use Illuminate\Support\Traits\Tappable;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -25,6 +27,8 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 class ApiResponse
 {
     use ConcreteJsonResponseMethods;
+    use Conditionable;
+    use Tappable;
 
     /**
      * @var callable
@@ -68,8 +72,8 @@ class ApiResponse
     {
         $message = $throwable->getMessage();
         $code = $throwable->getCode() ?: 500;
-        $headers = [];
         $error = PrivateCaller::call(app(ExceptionHandler::class), 'convertExceptionToArray', [$throwable]);
+        $headers = [];
 
         if ($throwable instanceof HttpExceptionInterface) {
             $code = $throwable->getStatusCode();
@@ -85,7 +89,7 @@ class ApiResponse
             $code = 401;
         }
 
-        $message = $this->messageFor($message, $code) ?: 'Server Error';
+        $message = $message ?: $this->messageFor($code) ?: 'Server Error';
 
         return $this->fail($message, $code, $error)->withHeaders($headers);
     }
@@ -103,9 +107,9 @@ class ApiResponse
     ): JsonResponse {
         return tap(new JsonResponse(
             data: [
-                'status' => $this->statusFor($this->statusCodeFor($code)),
+                'status' => $this->statusFor($code),
                 'code' => $code,
-                'message' => $this->messageFor($message, $code),
+                'message' => $message ?: $this->messageFor($code),
                 'data' => $this->dataFor($data),
                 'error' => $this->errorFor($error),
             ],
@@ -114,8 +118,10 @@ class ApiResponse
         ), $this->tapper);
     }
 
-    private function statusFor(int $statusCode): string
+    private function statusFor(int $code): string
     {
+        $statusCode = $this->statusCodeFor($code);
+
         return match (true) {
             $statusCode >= 400 && $statusCode < 500 => 'error', // client error
             $statusCode >= 500 && $statusCode < 600 => 'fail', // service error
@@ -130,13 +136,10 @@ class ApiResponse
 
     /**
      * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
+     * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
      */
-    private function messageFor(string $message, int $code): string
+    private function messageFor(int $code): string
     {
-        if ($message) {
-            return $message;
-        }
-
         if (Lang::has($key = "http-business.$code")) {
             return __($key);
         }
@@ -146,7 +149,8 @@ class ApiResponse
             return __($key);
         }
 
-        return Response::$statusTexts[$statusCode] ?? 'Unknown Status';
+        // return Response::$statusTexts[$statusCode] ?? 'Unknown Status';
+        return Response::$statusTexts[$statusCode] ?? 'Whoops, looks like something went wrong.';
     }
 
     private function errorFor(?array $error): object|array
