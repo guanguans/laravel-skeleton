@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support\Api;
 
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\Support\Arrayable;
@@ -68,7 +69,7 @@ class ApiResponse
         $message = $throwable->getMessage();
         $code = $throwable->getCode() ?: 500;
         $headers = [];
-        $error = $this->convertExceptionToArray($throwable);
+        $error = $this->call(app(ExceptionHandler::class), 'convertExceptionToArray', [$throwable]);
 
         if ($throwable instanceof HttpExceptionInterface) {
             $code = $throwable->getStatusCode();
@@ -251,21 +252,8 @@ class ApiResponse
         };
     }
 
-    /**
-     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
-     */
-    private function convertExceptionToArray(\Throwable $throwable): array
+    private function call(object $object, string $method, array $params = []): mixed
     {
-        return config('app.debug')
-            ? [
-                'message' => $throwable->getMessage(),
-                'exception' => $throwable::class,
-                'file' => $throwable->getFile(),
-                'line' => $throwable->getLine(),
-                'trace' => collect($throwable->getTrace())->map(static fn ($trace) => Arr::except($trace, ['args']))->all(),
-            ]
-            : [
-                'message' => $throwable instanceof HttpExceptionInterface ? $throwable->getMessage() : 'Server Error',
-            ];
+        return (fn (): mixed => $this->{$method}(...$params))->call($object);
     }
 }
