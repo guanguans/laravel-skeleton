@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Support\ApiResponse;
+use App\Support\Api\ApiResponse;
 use App\Support\Attributes\DependencyInjection;
 use F9Web\ApiResponseHelpers;
 use Jiannei\Response\Laravel\Response;
