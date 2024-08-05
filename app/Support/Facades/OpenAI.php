@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
  * @method static void flushMacros()
- * @method static \App\Support\OpenAI|\Illuminate\Support\HigherOrderTapProxy tap(callable|null $callback = null)
+ * @method static void tap(callable|null $callback = null)
  *
  * @see \App\Support\OpenAI
  */
