@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api\Concerns;
+namespace App\Support\ApiResponse\Concerns;
 
 /**
- * @mixin \App\Support\Api\ApiResponse
+ * @mixin \App\Support\ApiResponse\ApiResponse
  */
 trait HasExceptionMap
 {

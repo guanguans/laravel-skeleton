@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api\Pipes;
+namespace App\Support\ApiResponse\Pipes;
 
-use App\Support\Api\Support\Utils;
+use App\Support\ApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Lang;
 use Symfony\Component\HttpFoundation\Response;

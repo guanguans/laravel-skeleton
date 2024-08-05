@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Support\Api\Register;
+use App\Support\ApiResponse\Register;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 

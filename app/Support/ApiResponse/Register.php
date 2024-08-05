@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api;
+namespace App\Support\ApiResponse;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Request;

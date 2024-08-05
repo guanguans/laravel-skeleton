@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api\Pipes;
+namespace App\Support\ApiResponse\Pipes;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;

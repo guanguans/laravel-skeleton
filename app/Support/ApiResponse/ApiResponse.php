@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api;
+namespace App\Support\ApiResponse;
 
-use App\Support\Api\Concerns\ConcreteStatus;
-use App\Support\Api\Concerns\HasPipes;
-use App\Support\Api\Pipes\DataPipe;
-use App\Support\Api\Pipes\ErrorPipe;
-use App\Support\Api\Pipes\MessagePipe;
-use App\Support\Api\Pipes\SetStatusCodePipe;
+use App\Support\ApiResponse\Concerns\ConcreteStatus;
+use App\Support\ApiResponse\Concerns\HasPipes;
+use App\Support\ApiResponse\Pipes\DataPipe;
+use App\Support\ApiResponse\Pipes\ErrorPipe;
+use App\Support\ApiResponse\Pipes\MessagePipe;
+use App\Support\ApiResponse\Pipes\SetStatusCodePipe;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;

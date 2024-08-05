@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api\Pipes\Concerns;
+namespace App\Support\ApiResponse\Pipes\Concerns;
 
 trait WithArgs
 {

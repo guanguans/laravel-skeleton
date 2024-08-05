@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api\Concerns;
+namespace App\Support\ApiResponse\Concerns;
 
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @mixin \App\Support\Api\ApiResponse
+ * @mixin \App\Support\ApiResponse\ApiResponse
  */
 trait ConcreteStatus
 {

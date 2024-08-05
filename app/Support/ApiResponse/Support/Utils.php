@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Support\Api\Support;
+namespace App\Support\ApiResponse\Support;
 
 class Utils
 {
