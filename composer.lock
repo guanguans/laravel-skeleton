@@ -13665,16 +13665,16 @@
         },
         {
             "name": "spatie/laravel-responsecache",
-            "version": "7.5.2",
+            "version": "7.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-responsecache.git",
-                "reference": "e69b3f3abc302a255e5b32c68303d41f09d38bd3"
+                "reference": "ccaf6fd941e86ea08197b787864bec4a01f658e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-responsecache/zipball/e69b3f3abc302a255e5b32c68303d41f09d38bd3",
-                "reference": "e69b3f3abc302a255e5b32c68303d41f09d38bd3",
+                "url": "https://api.github.com/repos/spatie/laravel-responsecache/zipball/ccaf6fd941e86ea08197b787864bec4a01f658e0",
+                "reference": "ccaf6fd941e86ea08197b787864bec4a01f658e0",
                 "shasum": ""
             },
             "require": {
@@ -13732,7 +13732,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-responsecache/tree/7.5.2"
+                "source": "https://github.com/spatie/laravel-responsecache/tree/7.6.0"
             },
             "funding": [
                 {
@@ -13744,7 +13744,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-03T09:44:10+00:00"
+            "time": "2024-08-05T09:57:46+00:00"
         },
         {
             "name": "spatie/laravel-route-attributes",
