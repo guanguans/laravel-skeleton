@@ -98,7 +98,7 @@ class AuthController extends Controller
         $credentials = $request->validated();
 
         if (! $token = auth()->attempt($credentials)) {
-            return $this->apiResponse->fail('邮箱或者密码错误');
+            return $this->apiResponse->badRequest('邮箱或者密码错误');
         }
 
         return $this->apiResponse->success(JWTUser::wrapToken($token));

@@ -41,7 +41,7 @@ trait HasPipes
         return $this;
     }
 
-    public function pipes(): array
+    private function pipes(): array
     {
         return $this->pipes->all();
     }

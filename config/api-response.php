@@ -14,16 +14,19 @@ return [
      */
     'render_using' => App\Support\ApiResponse\RenderUsing::class,
 
-    'exceptions' => [
+    'exception_map' => [
         Illuminate\Auth\AuthenticationException::class => [
             'code' => Response::HTTP_UNAUTHORIZED,
         ],
     ],
 
     'pipes' => [
+        App\Support\ApiResponse\Pipes\ResourceCollectionDataPipe::class,
+        App\Support\ApiResponse\Pipes\JsonResourceDataPipe::class,
+        App\Support\ApiResponse\Pipes\PaginatorDataPipe::class,
+        App\Support\ApiResponse\Pipes\DefaultDataPipe::class,
         App\Support\ApiResponse\Pipes\MessagePipe::class,
-        App\Support\ApiResponse\Pipes\DataPipe::class,
         App\Support\ApiResponse\Pipes\ErrorPipe::class,
-        App\Support\ApiResponse\Pipes\SetStatusCodePipe::class,
+        App\Support\ApiResponse\Pipes\SetStatusCodePipe::with(200),
     ],
 ];

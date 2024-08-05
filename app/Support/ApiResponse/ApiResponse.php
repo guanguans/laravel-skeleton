@@ -31,7 +31,7 @@ class ApiResponse
     use HasPipes;
     use Tappable;
 
-    public function __construct(Collection $pipes, array $exceptionMap = [])
+    public function __construct(Collection $pipes, Collection $exceptionMap)
     {
         $this->pipes = $pipes;
         $this->exceptionMap = $exceptionMap;
@@ -59,7 +59,13 @@ class ApiResponse
     public function throw(\Throwable $throwable): JsonResponse
     {
         $message = $throwable->getMessage();
-        $code = $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
+
+        /**
+         * @see \Illuminate\Database\QueryException
+         *
+         * @noinspection PhpCastIsUnnecessaryInspection
+         */
+        $code = (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
         $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
 
@@ -73,9 +79,11 @@ class ApiResponse
             config('app.debug') and $error = $throwable->errors();
         }
 
-        if ($map = $this->resolveExceptionMap($throwable)) {
-            $message = $map['message'] ?? $message;
-            $code = $map['code'] ?? $code;
+        if ($map = $this->parseExceptionMap($throwable)) {
+            $message = $map['message'] ?? null ?: $message;
+            $code = $map['code'] ?? null ?: $code;
+            $error = $map['error'] ?? null ?: $error;
+            $headers = $map['headers'] ?? null ?: $headers;
         }
 
         return $this->fail($message, $code, $error)->withHeaders($headers);
