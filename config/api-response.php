@@ -7,13 +7,20 @@ declare(strict_types=1);
 use Symfony\Component\HttpFoundation\Response;
 
 return [
-    'enabled' => env('API_RESPONSE_ENABLED', true),
+    /**
+     * @see \App\Support\ApiResponse\ApiResponseServiceProvider::packageBooted()
+     */
+    'register_render_using' => env('API_RESPONSE_REGISTER_RENDER_USING', true),
 
     /**
      * @var callable(\Throwable $throwable, \Illuminate\Http\Request $request): ?\Illuminate\Http\JsonResponse $renderUsing
      */
     'render_using' => App\Support\ApiResponse\RenderUsing::class,
 
+    /**
+     * @see \App\Support\ApiResponse\ApiResponse::prependExceptionMap()
+     * @see \App\Support\ApiResponse\ApiResponse::parseExceptionMap()
+     */
     'exception_map' => [
         Illuminate\Auth\AuthenticationException::class => [
             'code' => Response::HTTP_UNAUTHORIZED,

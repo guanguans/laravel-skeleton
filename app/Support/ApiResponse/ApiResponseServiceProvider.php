@@ -23,7 +23,7 @@ class ApiResponseServiceProvider extends PackageServiceProvider
      */
     public function packageBooted(): void
     {
-        if (config('api-response.enabled')) {
+        if (config('api-response.register_render_using')) {
             $renderUsing = config('api-response.render_using');
             if (\is_string($renderUsing) && class_exists($renderUsing)) {
                 $renderUsing = $this->app->make($renderUsing);
