@@ -13,7 +13,7 @@ trait HasPipes
 {
     private Collection $pipes;
 
-    public function prependPipes(...$pipes): self
+    public function unshiftPipes(...$pipes): self
     {
         return $this->tapPipes(static function (Collection $originalPipes) use ($pipes): void {
             $originalPipes->unshift(...$pipes);

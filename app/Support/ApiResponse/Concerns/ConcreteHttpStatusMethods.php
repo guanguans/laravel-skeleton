@@ -10,32 +10,32 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @mixin \App\Support\ApiResponse\ApiResponse
  */
-trait ConcreteStatus
+trait ConcreteHttpStatusMethods
 {
-    public function localize(int $code = 200): JsonResponse
+    public function localize(int $code = Response::HTTP_OK): JsonResponse
     {
         return $this->ok(code: $code);
     }
 
-    public function ok(string $message = '', int $code = 200): JsonResponse
+    public function ok(string $message = '', int $code = Response::HTTP_OK): JsonResponse
     {
         return $this->success(message: $message, code: $code);
     }
 
-    public function created(mixed $data = null, string $message = '', string $location = ''): JsonResponse
+    public function created(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
     {
         return tap(
-            $this->success($data, $message, 201),
+            $this->success($data, $message, Response::HTTP_CREATED),
             static function (JsonResponse $response) use ($location): void {
                 $location and $response->header('Location', $location);
             }
         );
     }
 
-    public function accepted(mixed $data = null, string $message = '', string $location = ''): JsonResponse
+    public function accepted(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
     {
         return tap(
-            $this->success($data, $message, 202),
+            $this->success($data, $message, Response::HTTP_ACCEPTED),
             static function (JsonResponse $response) use ($location): void {
                 $location and $response->header('Location', $location);
             }
@@ -44,17 +44,17 @@ trait ConcreteStatus
 
     public function noContent(string $message = ''): JsonResponse
     {
-        return $this->success(message: $message, code: 204);
+        return $this->success(message: $message, code: Response::HTTP_NO_CONTENT);
     }
 
     public function badRequest(string $message = ''): JsonResponse
     {
-        return $this->error($message, 400);
+        return $this->error($message);
     }
 
     public function unauthorized(string $message = ''): JsonResponse
     {
-        return $this->error($message, 401);
+        return $this->error($message, Response::HTTP_UNAUTHORIZED);
     }
 
     public function forbidden(string $message = ''): JsonResponse

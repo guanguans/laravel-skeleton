@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace App\Support\ApiResponse;
 
-use App\Support\ApiResponse\Concerns\ConcreteStatus;
+use App\Support\ApiResponse\Concerns\ConcreteHttpStatusMethods;
+use App\Support\ApiResponse\Concerns\HasExceptionMap;
 use App\Support\ApiResponse\Concerns\HasPipes;
-use App\Support\ApiResponse\Pipes\DataPipe;
-use App\Support\ApiResponse\Pipes\ErrorPipe;
-use App\Support\ApiResponse\Pipes\MessagePipe;
-use App\Support\ApiResponse\Pipes\SetStatusCodePipe;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
 use Illuminate\Validation\ValidationException;
@@ -28,14 +25,16 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  */
 class ApiResponse
 {
-    use ConcreteStatus;
+    use ConcreteHttpStatusMethods;
     use Conditionable;
+    use HasExceptionMap;
     use HasPipes;
     use Tappable;
 
-    public function __construct(array $pipes = [])
+    public function __construct(Collection $pipes, array $exceptionMap = [])
     {
-        $this->pipes = collect($pipes ?: $this->defaultPipes());
+        $this->pipes = $pipes;
+        $this->exceptionMap = $exceptionMap;
     }
 
     public function success(mixed $data = null, string $message = '', int $code = Response::HTTP_OK): JsonResponse
@@ -74,15 +73,17 @@ class ApiResponse
             config('app.debug') and $error = $throwable->errors();
         }
 
-        $exceptions = $this->exceptions();
-        $message = $exceptions[$class = $throwable::class]['message'] ?? $message;
-        $code = $exceptions[$class]['code'] ?? $code;
+        if ($map = $this->resolveExceptionMap($throwable)) {
+            $message = $map['message'] ?? $message;
+            $code = $map['code'] ?? $code;
+        }
 
         return $this->fail($message, $code, $error)->withHeaders($headers);
     }
 
     /**
      * @param  int<100, 599>|int<10000, 59999>  $code
+     * @param  array<string, mixed>|null  $error
      */
     public function json(
         string $status,
@@ -93,32 +94,10 @@ class ApiResponse
     ): JsonResponse {
         return (new Pipeline(app()))
             ->send(['status' => $status, 'code' => $code, 'message' => $message, 'data' => $data, 'error' => $error])
-            ->through($this->pipes->all())
+            ->through($this->pipes())
             ->then(static fn (array $data): JsonResponse => new JsonResponse(
                 data: $data,
                 options: JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
             ));
-    }
-
-    private function defaultPipes(): array
-    {
-        return [
-            MessagePipe::class,
-            DataPipe::class,
-            ErrorPipe::class,
-            SetStatusCodePipe::class,
-        ];
-    }
-
-    /**
-     * @todo from config
-     */
-    private function exceptions(): array
-    {
-        return [
-            AuthenticationException::class => [
-                'code' => Response::HTTP_UNAUTHORIZED,
-            ],
-        ];
     }
 }

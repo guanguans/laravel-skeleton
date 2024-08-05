@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Policies\UserPolicy;
 use App\Rules\Rule;
+use App\Support\ApiResponse\ApiResponseServiceProvider;
 use App\Support\Attributes\After;
 use App\Support\Attributes\Before;
 use App\Support\Attributes\DependencyInjection;
@@ -131,6 +132,7 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
             // $this->app->register(LaravelServiceProvider::class);
+            $this->app->register(ApiResponseServiceProvider::class);
         });
 
         $this->whenever($this->app->isLocal(), function (): void {

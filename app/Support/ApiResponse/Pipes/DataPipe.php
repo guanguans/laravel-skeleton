@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support\ApiResponse\Pipes;
 
+use App\Support\ApiResponse\Pipes\Concerns\WithArgs;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Contracts\Support\Arrayable;
@@ -14,9 +15,18 @@ use Illuminate\Pagination\AbstractCursorPaginator;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\CursorPaginator;
 
-class DataPipe extends Pipe
+class DataPipe
 {
+    use WithArgs;
+
     /**
+     * @param array{
+     *  status: string,
+     *  code: int,
+     *  message: string,
+     *  data: mixed,
+     *  error: ?array,
+     * } $data
      * @param  \Closure(array): \Illuminate\Http\JsonResponse  $next
      */
     public function handle(array $data, \Closure $next): JsonResponse

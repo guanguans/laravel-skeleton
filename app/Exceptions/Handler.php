@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use App\Support\ApiResponse\Register;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -32,7 +31,6 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(static function (Throwable $e): void {});
-        $this->renderable(Register::defaultRenderUsing());
     }
 
     public function report(Throwable $e): void
