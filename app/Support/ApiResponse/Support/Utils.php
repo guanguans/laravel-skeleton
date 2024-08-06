@@ -6,7 +6,8 @@ namespace App\Support\ApiResponse\Support;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
-use Illuminate\Pagination\CursorPaginator;
+use Illuminate\Pagination\AbstractCursorPaginator;
+use Illuminate\Support\Arr;
 
 class Utils
 {
@@ -17,42 +18,16 @@ class Utils
 
     /**
      * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
+     * @see \Illuminate\Pagination\CursorPaginator::toArray()
+     * @see \Illuminate\Pagination\LengthAwarePaginator::toArray()
+     * @see \Illuminate\Pagination\Paginator::toArray()
      */
     public static function metaFor(object $paginator): array
     {
         return match (true) {
-            $paginator instanceof CursorPaginator => [
-                'cursor' => [
-                    'current' => $paginator->cursor()?->encode(),
-                    'prev' => $paginator->previousCursor()?->encode(),
-                    'next' => $paginator->nextCursor()?->encode(),
-                    'count' => \count($paginator->items()),
-                ],
-            ],
-            $paginator instanceof LengthAwarePaginator => [
-                'pagination' => [
-                    'count' => $paginator->lastItem(),
-                    'per_page' => $paginator->perPage(),
-                    'current_page' => $paginator->currentPage(),
-                    'total' => $paginator->total(),
-                    'total_pages' => $paginator->lastPage(),
-                    'links' => ([
-                        'previous' => $paginator->previousPageUrl(),
-                        'next' => $paginator->nextPageUrl(),
-                    ]),
-                ],
-            ],
-            $paginator instanceof Paginator => [
-                'pagination' => [
-                    'count' => $paginator->lastItem(),
-                    'per_page' => $paginator->perPage(),
-                    'current_page' => $paginator->currentPage(),
-                    'links' => ([
-                        'previous' => $paginator->previousPageUrl(),
-                        'next' => $paginator->nextPageUrl(),
-                    ]),
-                ],
-            ],
+            $paginator instanceof AbstractCursorPaginator,
+            $paginator instanceof LengthAwarePaginator,
+            $paginator instanceof Paginator => Arr::except($paginator->toArray(), 'data'),
             default => (object) [],
         };
     }

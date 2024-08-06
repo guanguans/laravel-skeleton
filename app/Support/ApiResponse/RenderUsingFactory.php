@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
  *
  * @mixin \Illuminate\Foundation\Exceptions\Handler
  */
-class RenderUsingCreator
+class RenderUsingFactory
 {
     /**
      * @psalm-suppress UndefinedThisPropertyFetch

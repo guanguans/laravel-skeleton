@@ -58,7 +58,7 @@ trait HasExceptionMap
             []
         );
 
-        return \is_callable($mapper) || ! (\is_array($mapper) || $mapper instanceof \Throwable)
+        return \is_callable($mapper) || (! \is_array($mapper) && ! $mapper instanceof \Throwable)
             ? app()->call($mapper, ['throwable' => $throwable])
             : $mapper;
     }

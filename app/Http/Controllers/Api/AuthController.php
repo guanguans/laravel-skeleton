@@ -55,15 +55,15 @@ class AuthController extends Controller
         unset($validated['password_confirmation']);
         $user = JWTUser::query()->create($validated);
         if (! $user instanceof JWTUser) {
-            return $this->fail('创建用户失败');
+            return $this->apiResponse->fail('创建用户失败');
         }
 
         $validated['password'] = $request->post('password_confirmation');
         if (! $token = auth()->attempt($validated)) {
-            return $this->fail('邮箱或者密码错误');
+            return $this->apiResponse->fail('邮箱或者密码错误');
         }
 
-        return tap($this->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
+        return tap($this->apiResponse->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
             // Mail::to($user)->queue(new UserRegisteredMail());
             $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
         });
@@ -124,7 +124,7 @@ class AuthController extends Controller
      */
     public function me(Request $request): \Illuminate\Http\JsonResponse
     {
-        return $this->success(UserResource::make($request->user()));
+        return $this->apiResponse->success(UserResource::make($request->user()));
     }
 
     /**
@@ -211,6 +211,6 @@ class AuthController extends Controller
 
         $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null);
 
-        return $this->success(UserCollection::make($users));
+        return $this->apiResponse->success(UserCollection::make($users));
     }
 }

@@ -33,7 +33,8 @@ class ResourceCollectionDataPipe
     }
 
     /**
-     * @@see \Illuminate\Http\Resources\Json\ResourceCollection::toResponse()
+     * @see \Illuminate\Http\Resources\Json\ResourceCollection::toResponse()
+     * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
      */
     private function resourceCollectionFor(ResourceCollection $resourceCollection): array
     {

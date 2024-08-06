@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Support\ApiResponse\Pipes;
 
 use App\Support\ApiResponse\Pipes\Concerns\WithArgs;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\JsonResponse;
 
 class DefaultDataPipe
@@ -35,7 +36,9 @@ class DefaultDataPipe
     private function dataFor(mixed $data): array|object
     {
         return match (true) {
-            ! (\is_array($data) || \is_object($data)) => (object) $data,
+            $data instanceof \JsonSerializable => $data->jsonSerialize(),
+            $data instanceof Arrayable => $data->toArray(),
+            ! \is_array($data) && ! \is_object($data) => (object) $data,
             default => $data
         };
     }

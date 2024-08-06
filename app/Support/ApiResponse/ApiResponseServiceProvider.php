@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Support\ApiResponse;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\LaravelPackageTools\Package;
@@ -40,24 +39,26 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
     /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     private function registerRenderUsing(): void
     {
         if (
-            ($renderUsingCreator = config('api-response.render_using_creator'))
+            ($renderUsingFactory = config('api-response.render_using_factory'))
+            && ! $this->app->runningInConsole()
             && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
         ) {
-            if (\is_string($renderUsingCreator) && class_exists($renderUsingCreator)) {
-                $renderUsingCreator = $this->app->make($renderUsingCreator);
+            if (\is_string($renderUsingFactory) && class_exists($renderUsingFactory)) {
+                $renderUsingFactory = $this->app->make($renderUsingFactory);
             }
 
             /** @var callable(\Throwable, Request): ?JsonResponse $renderUsing */
-            $renderUsing = $renderUsingCreator($exceptionHandler);
+            $renderUsing = $renderUsingFactory($exceptionHandler);
             if ($renderUsing instanceof \Closure) {
                 $renderUsing = $renderUsing->bindTo($exceptionHandler, $exceptionHandler);
             }
 
-            /** @var Handler $exceptionHandler */
             $exceptionHandler->renderable($renderUsing);
         }
     }

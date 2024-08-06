@@ -14,6 +14,7 @@ use App\Support\Rectors\RenameToPsrNameRector;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\Expression\InlineIfToExplicitIfRector;
+use Rector\CodeQuality\Rector\FuncCall\CompactToVariablesRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
@@ -188,6 +189,9 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        CompactToVariablesRector::class => [
+            __DIR__.'/app/Support/ApiResponse',
+        ],
         MakeInheritedMethodVisibilitySameAsParentRector::class => [
             __DIR__.'/app/Admin/Actions/Show',
         ],

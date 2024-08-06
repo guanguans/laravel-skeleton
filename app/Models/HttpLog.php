@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class HttpLog extends Model
 {
     use SerializeDate;
-    use SoftDeletes;
+    // use SoftDeletes;
 
-    protected $table = 'http_log';
+    protected $table = 'http_logs';
 
     protected $guarded = [];
 }

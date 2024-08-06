@@ -7,7 +7,11 @@ namespace App\Support\ApiResponse\Pipes;
 use App\Support\ApiResponse\Pipes\Concerns\WithArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceResponse;
 
+/**
+ * @method array wrap(\Illuminate\Support\Collection|array $data, array $with = [], array $additional = [])
+ */
 class JsonResourceDataPipe
 {
     use WithArgs;
@@ -32,14 +36,17 @@ class JsonResourceDataPipe
     }
 
     /**
-     * @@see \Illuminate\Http\Resources\Json\ResourceResponse::toResponse()
+     * @see \Illuminate\Http\Resources\Json\JsonResource::toResponse()
+     * @see \Illuminate\Http\Resources\Json\ResourceResponse::toResponse()
+     * @see \Illuminate\Http\Resources\Json\ResourceResponse::wrap()
      */
     private function jsonResourceFor(JsonResource $jsonResource): array
     {
-        return array_merge_recursive(
-            $jsonResource->resolve(),
-            $jsonResource->with(request()),
-            $jsonResource->additional
-        );
+        // return (fn (): array => $this->wrap(
+        //     $jsonResource->resolve(),
+        //     $jsonResource->with(request()),
+        //     $jsonResource->additional
+        // ))->call(new ResourceResponse($jsonResource));
+        return $jsonResource->response()->getData(true);
     }
 }

@@ -18,8 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
- * @see https://github.com/jiannei/laravel-response
+ * @see https://github.com/dingo/api
  * @see https://github.com/f9webltd/laravel-api-response-helpers
+ * @see https://github.com/jiannei/laravel-response
  *
  * @method array convertExceptionToArray(\Throwable $throwable)
  */
@@ -39,44 +40,53 @@ class ApiResponse
 
     public function success(mixed $data = null, string $message = '', int $code = Response::HTTP_OK): JsonResponse
     {
-        return $this->json(status: __FUNCTION__, code: $code, message: $message, data: $data);
+        return $this->json(__FUNCTION__, $code, $message, $data);
     }
 
     public function error(string $message = '', int $code = Response::HTTP_BAD_REQUEST, ?array $error = null): JsonResponse
     {
-        return $this->json(status: __FUNCTION__, code: $code, message: $message, error: $error);
+        return $this->json(__FUNCTION__, $code, $message, error: $error);
     }
 
     public function fail(string $message = '', int $code = Response::HTTP_INTERNAL_SERVER_ERROR, ?array $error = null): JsonResponse
     {
-        return $this->json(status: __FUNCTION__, code: $code, message: $message, error: $error);
+        return $this->json(__FUNCTION__, $code, $message, error: $error);
     }
 
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::render()
      * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
+     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
      * @see \Illuminate\Database\QueryException
-     *
-     * @noinspection PhpCastIsUnnecessaryInspection
      */
     public function throw(\Throwable $throwable): JsonResponse
     {
         $newThrowable = $this->mapException($throwable);
         $newThrowable instanceof \Throwable and $throwable = $newThrowable;
 
-        $message = $throwable->getMessage();
-        $code = (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
+        $message = config('app.debug') ? $throwable->getMessage() : '';
+        $code = transform($throwable, static function (\Throwable $throwable): int {
+            $code = $throwable->getCode();
+            if (\is_string($code)) {
+                preg_match_all('/\d+/', $code, $matches);
+                $code = implode('', $matches[0] ?? []);
+            }
+
+            return (int) $code ?: Response::HTTP_INTERNAL_SERVER_ERROR;
+        });
         $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
 
         if ($throwable instanceof HttpExceptionInterface) {
+            $message = $throwable->getMessage();
             $code = $throwable->getStatusCode();
             $headers = $throwable->getHeaders();
         }
 
         if ($throwable instanceof ValidationException) {
+            $message = $throwable->getMessage();
             $code = $throwable->status;
-            config('app.debug') and $error = $throwable->errors();
+            $error = $throwable->errors();
         }
 
         if (\is_array($newThrowable) && $newThrowable) {
@@ -101,7 +111,7 @@ class ApiResponse
         ?array $error = null,
     ): JsonResponse {
         return (new Pipeline(app()))
-            ->send(['status' => $status, 'code' => $code, 'message' => $message, 'data' => $data, 'error' => $error])
+            ->send(compact('status', 'code', 'message', 'data', 'error'))
             ->through($this->pipes())
             ->then(static fn (array $data): JsonResponse => new JsonResponse(
                 data: $data,

@@ -35,7 +35,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     // use Macroable;
     use Pipeable;
     use SerializeDate;
-    use SoftDeletes;
+    // use SoftDeletes;
 
     // protected static $unguarded = true;
 

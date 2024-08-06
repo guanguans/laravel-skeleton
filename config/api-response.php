@@ -10,7 +10,7 @@ return [
     /**
      * @see \App\Support\ApiResponse\ApiResponseServiceProvider::registerRenderUsing()
      */
-    'render_using_creator' => App\Support\ApiResponse\RenderUsingCreator::class,
+    'render_using_factory' => App\Support\ApiResponse\RenderUsingFactory::class,
 
     /**
      * @see \App\Support\ApiResponse\ApiResponse::mapException()
@@ -19,6 +19,19 @@ return [
         Illuminate\Auth\AuthenticationException::class => [
             'code' => Response::HTTP_UNAUTHORIZED,
         ],
+        // Illuminate\Database\QueryException::class => [
+        //     'message' => '',
+        //     'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+        // ],
+        // Illuminate\Validation\ValidationException::class => [
+        //     'code' => Response::HTTP_UNPROCESSABLE_ENTITY,
+        // ],
+        // Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class => [
+        //     'message' => '',
+        // ],
+        // Illuminate\Database\Eloquent\ModelNotFoundException::class => [
+        //     'message' => '',
+        // ],
     ],
 
     'pipes' => [
