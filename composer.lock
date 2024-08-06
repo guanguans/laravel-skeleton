@@ -21784,16 +21784,16 @@
         },
         {
             "name": "kitloong/laravel-migrations-generator",
-            "version": "v7.0.4",
+            "version": "v7.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kitloong/laravel-migrations-generator.git",
-                "reference": "f6900e8de33c88e8acca07bdc7b2cf7759a5269c"
+                "reference": "8b3575285bc3d65a084085fb20d7c1ba5f903c4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/f6900e8de33c88e8acca07bdc7b2cf7759a5269c",
-                "reference": "f6900e8de33c88e8acca07bdc7b2cf7759a5269c",
+                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/8b3575285bc3d65a084085fb20d7c1ba5f903c4e",
+                "reference": "8b3575285bc3d65a084085fb20d7c1ba5f903c4e",
                 "shasum": ""
             },
             "require": {
@@ -21845,7 +21845,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kitloong/laravel-migrations-generator/issues",
-                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.0.4"
+                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.0.5"
             },
             "funding": [
                 {
@@ -21857,7 +21857,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-04T12:18:10+00:00"
+            "time": "2024-08-06T13:18:32+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
