@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Support\ApiResponse\Pipes;
 
 use App\Support\ApiResponse\Pipes\Concerns\WithArgs;
-use App\Support\ApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -36,15 +35,8 @@ class ResourceCollectionDataPipe
      * @see \Illuminate\Http\Resources\Json\ResourceCollection::toResponse()
      * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
      */
-    private function resourceCollectionFor(ResourceCollection $resourceCollection): array
+    private function resourceCollectionFor(ResourceCollection $resourceCollection): \stdClass
     {
-        return [
-            'data' => $resourceCollection->resolve(),
-            'meta' => array_merge_recursive(
-                Utils::metaFor($resourceCollection->resource),
-                $resourceCollection->with(request()),
-                $resourceCollection->additional
-            ),
-        ];
+        return $resourceCollection->response()->getData();
     }
 }
