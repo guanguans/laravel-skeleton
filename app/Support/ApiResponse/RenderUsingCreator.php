@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Support\ApiResponse;
+
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Http\Request;
+
+/**
+ * @property \Illuminate\Contracts\Container\Container $container
+ *
+ * @method shouldReturnJson(\Illuminate\Http\Request $request, \Throwable $throwable)
+ *
+ * @mixin \Illuminate\Foundation\Exceptions\Handler
+ */
+class RenderUsingCreator
+{
+    /**
+     * @psalm-suppress UndefinedThisPropertyFetch
+     * @psalm-suppress InaccessibleProperty
+     *
+     * @noinspection StaticClosureCanBeUsedInspection
+     * @noinspection AnonymousFunctionStaticInspection
+     * @noinspection PhpInconsistentReturnPointsInspection
+     *
+     * @see \App\Support\ApiResponse\ApiResponseServiceProvider::registerRenderUsing()
+     */
+    public function __invoke(ExceptionHandler $exceptionHandler): \Closure
+    {
+        /**
+         * @return \Illuminate\Http\JsonResponse|void
+         */
+        return function (\Throwable $throwable, Request $request) {
+            try {
+                if ($this->shouldReturnJson($request, $throwable)) {
+                    return $this->container->make(ApiResponse::class)->throw($throwable);
+                }
+            } catch (\Throwable) {
+                // If catch an exception, to let the default exception handler handle it.
+            }
+        };
+    }
+}

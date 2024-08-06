@@ -55,16 +55,16 @@ class ApiResponse
     /**
      * @see \Illuminate\Foundation\Exceptions\Handler::render()
      * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
+     * @see \Illuminate\Database\QueryException
+     *
+     * @noinspection PhpCastIsUnnecessaryInspection
      */
     public function throw(\Throwable $throwable): JsonResponse
     {
-        $message = $throwable->getMessage();
+        $newThrowable = $this->mapException($throwable);
+        $newThrowable instanceof \Throwable and $throwable = $newThrowable;
 
-        /**
-         * @see \Illuminate\Database\QueryException
-         *
-         * @noinspection PhpCastIsUnnecessaryInspection
-         */
+        $message = $throwable->getMessage();
         $code = (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
         $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
@@ -79,11 +79,11 @@ class ApiResponse
             config('app.debug') and $error = $throwable->errors();
         }
 
-        if ($map = $this->parseExceptionMap($throwable)) {
-            $message = $map['message'] ?? null ?: $message;
-            $code = $map['code'] ?? null ?: $code;
-            $error = $map['error'] ?? null ?: $error;
-            $headers = $map['headers'] ?? null ?: $headers;
+        if (\is_array($newThrowable) && $newThrowable) {
+            $message = $newThrowable['message'] ?? null ?: $message;
+            $code = $newThrowable['code'] ?? null ?: $code;
+            $error = $newThrowable['error'] ?? null ?: $error;
+            $headers = $newThrowable['headers'] ?? null ?: $headers;
         }
 
         return $this->fail($message, $code, $error)->withHeaders($headers);

@@ -13,45 +13,17 @@ trait HasExceptionMap
 {
     private Collection $exceptionMap;
 
-    /**
-     * @param  class-string|class-string<\Throwable>  $exception
-     * @param  callable(\Throwable): array{
-     *     message: string,
-     *     code: int,
-     *     error: ?array,
-     *     headers: array,
-     * }|array{
-     *     message: string,
-     *     code: int,
-     *     error: ?array,
-     *     headers: array,
-     *  }  $map
-     */
-    public function prependExceptionMap(string $exception, mixed $map): self
+    public function prependExceptionMap(string $exception, mixed $mapper): self
     {
-        return $this->tapExceptionMap(static function (Collection $exceptionMap) use ($map, $exception): void {
-            $exceptionMap->prepend($map, $exception);
+        return $this->tapExceptionMap(static function (Collection $exceptionMap) use ($mapper, $exception): void {
+            $exceptionMap->prepend($mapper, $exception);
         });
     }
 
-    /**
-     * @param  class-string|class-string<\Throwable>  $exception
-     * @param  callable(\Throwable): array{
-     *     message: string,
-     *     code: int,
-     *     error: ?array,
-     *     headers: array,
-     * }|array{
-     *     message: string,
-     *     code: int,
-     *     error: ?array,
-     *     headers: array,
-     *  }  $map
-     */
-    public function putExceptionMap(string $exception, mixed $map): self
+    public function putExceptionMap(string $exception, mixed $mapper): self
     {
-        return $this->tapExceptionMap(static function (Collection $exceptionMap) use ($exception, $map): void {
-            $exceptionMap->put($exception, $map);
+        return $this->tapExceptionMap(static function (Collection $exceptionMap) use ($exception, $mapper): void {
+            $exceptionMap->put($exception, $mapper);
         });
     }
 
@@ -70,20 +42,24 @@ trait HasExceptionMap
     }
 
     /**
-     * @return array{
+     * @see \Illuminate\Foundation\Exceptions\Handler::mapException()
+     *
+     * @return \Throwable|array{
      *     message: string,
      *     code: int,
      *     error: ?array,
      *     headers: array,
      * }
      */
-    private function parseExceptionMap(\Throwable $throwable): array
+    private function mapException(\Throwable $throwable): array|\Throwable
     {
-        $map = $this->exceptionMap->first(
-            static fn (mixed $map, string $exception): bool => $throwable instanceof $exception,
+        $mapper = $this->exceptionMap->first(
+            static fn (mixed $mapper, string $exception): bool => $throwable instanceof $exception,
             []
         );
 
-        return \is_callable($map) || ! \is_array($map) ? app()->call($map, ['throwable' => $throwable]) : $map;
+        return \is_callable($mapper) || ! (\is_array($mapper) || $mapper instanceof \Throwable)
+            ? app()->call($mapper, ['throwable' => $throwable])
+            : $mapper;
     }
 }

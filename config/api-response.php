@@ -8,18 +8,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 return [
     /**
-     * @see \App\Support\ApiResponse\ApiResponseServiceProvider::packageBooted()
+     * @see \App\Support\ApiResponse\ApiResponseServiceProvider::registerRenderUsing()
      */
-    'register_render_using' => env('API_RESPONSE_REGISTER_RENDER_USING', true),
+    'render_using_creator' => App\Support\ApiResponse\RenderUsingCreator::class,
 
     /**
-     * @var callable(\Throwable $throwable, \Illuminate\Http\Request $request): ?\Illuminate\Http\JsonResponse $renderUsing
-     */
-    'render_using' => App\Support\ApiResponse\RenderUsing::class,
-
-    /**
-     * @see \App\Support\ApiResponse\ApiResponse::prependExceptionMap()
-     * @see \App\Support\ApiResponse\ApiResponse::parseExceptionMap()
+     * @see \App\Support\ApiResponse\ApiResponse::mapException()
      */
     'exception_map' => [
         Illuminate\Auth\AuthenticationException::class => [
@@ -34,6 +28,6 @@ return [
         App\Support\ApiResponse\Pipes\DefaultDataPipe::class,
         App\Support\ApiResponse\Pipes\MessagePipe::class,
         App\Support\ApiResponse\Pipes\ErrorPipe::class,
-        App\Support\ApiResponse\Pipes\SetStatusCodePipe::with(200),
+        // App\Support\ApiResponse\Pipes\SetStatusCodePipe::class,
     ],
 ];

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Support\ApiResponse;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -18,19 +21,10 @@ class ApiResponseServiceProvider extends PackageServiceProvider
 
     /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     *
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function packageBooted(): void
     {
-        if (config('api-response.register_render_using')) {
-            $renderUsing = config('api-response.render_using');
-            if (\is_string($renderUsing) && class_exists($renderUsing)) {
-                $renderUsing = $this->app->make($renderUsing);
-            }
-
-            $this->app->make(ExceptionHandler::class)->renderable($renderUsing);
-        }
+        $this->registerRenderUsing();
     }
 
     public function packageRegistered(): void
@@ -42,5 +36,29 @@ class ApiResponseServiceProvider extends PackageServiceProvider
                 collect(config('api-response.exception_map'))
             )
         );
+    }
+
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function registerRenderUsing(): void
+    {
+        if (
+            ($renderUsingCreator = config('api-response.render_using_creator'))
+            && method_exists($exceptionHandler = $this->app->make(ExceptionHandler::class), 'renderable')
+        ) {
+            if (\is_string($renderUsingCreator) && class_exists($renderUsingCreator)) {
+                $renderUsingCreator = $this->app->make($renderUsingCreator);
+            }
+
+            /** @var callable(\Throwable, Request): ?JsonResponse $renderUsing */
+            $renderUsing = $renderUsingCreator($exceptionHandler);
+            if ($renderUsing instanceof \Closure) {
+                $renderUsing = $renderUsing->bindTo($exceptionHandler, $exceptionHandler);
+            }
+
+            /** @var Handler $exceptionHandler */
+            $exceptionHandler->renderable($renderUsing);
+        }
     }
 }

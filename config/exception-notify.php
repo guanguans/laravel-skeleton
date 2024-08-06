@@ -11,10 +11,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-exception-notify
  */
 
-use Guanguans\LaravelExceptionNotify\Pipes\AddKeywordChorePipe;
-use Guanguans\LaravelExceptionNotify\Pipes\LimitLengthPipe;
-use Guanguans\LaravelExceptionNotify\Pipes\SprintfHtmlPipe;
-use Guanguans\LaravelExceptionNotify\Pipes\SprintfMarkdownPipe;
+use App\Support\ApiResponse\Pipes\AddKeywordChorePipe;
+use App\Support\ApiResponse\Pipes\LimitLengthPipe;
+use App\Support\ApiResponse\Pipes\SprintfHtmlPipe;
+use App\Support\ApiResponse\Pipes\SprintfMarkdownPipe;
 
 return [
     /**
@@ -59,13 +59,13 @@ return [
      * The list of collector.
      */
     'collectors' => [
-        Guanguans\LaravelExceptionNotify\Collectors\ApplicationCollector::class,
+        App\Support\ApiResponse\Collectors\ApplicationCollector::class,
         // Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ChoreCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ExceptionContextCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ExceptionTraceCollector::class,
+        App\Support\ApiResponse\Collectors\ChoreCollector::class,
+        App\Support\ApiResponse\Collectors\RequestBasicCollector::class,
+        App\Support\ApiResponse\Collectors\ExceptionBasicCollector::class,
+        App\Support\ApiResponse\Collectors\ExceptionContextCollector::class,
+        App\Support\ApiResponse\Collectors\ExceptionTraceCollector::class,
 
         // Guanguans\LaravelExceptionNotify\Collectors\RequestCookieCollector::class,
         // Guanguans\LaravelExceptionNotify\Collectors\RequestSessionCollector::class,
