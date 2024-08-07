@@ -9001,20 +9001,20 @@
         },
         {
             "name": "nette/utils",
-            "version": "v4.0.4",
+            "version": "v4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "d3ad0aa3b9f934602cb3e3902ebccf10be34d218"
+                "reference": "736c567e257dbe0fcf6ce81b4d6dbe05c6899f96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/d3ad0aa3b9f934602cb3e3902ebccf10be34d218",
-                "reference": "d3ad0aa3b9f934602cb3e3902ebccf10be34d218",
+                "url": "https://api.github.com/repos/nette/utils/zipball/736c567e257dbe0fcf6ce81b4d6dbe05c6899f96",
+                "reference": "736c567e257dbe0fcf6ce81b4d6dbe05c6899f96",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0 <8.4"
+                "php": "8.0 - 8.4"
             },
             "conflict": {
                 "nette/finder": "<3",
@@ -9081,9 +9081,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v4.0.4"
+                "source": "https://github.com/nette/utils/tree/v4.0.5"
             },
-            "time": "2024-01-17T16:50:36+00:00"
+            "time": "2024-08-07T15:39:19+00:00"
         },
         {
             "name": "neutrino_api/neutrino_api_client",
@@ -14292,16 +14292,16 @@
         },
         {
             "name": "spatie/laravel-webhook-client",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-webhook-client.git",
-                "reference": "b9fce0dbcbb9fb3de191b6c94553e5c77ce81a05"
+                "reference": "e71006ab5c25916903a685ae601fb45ed92a0941"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-webhook-client/zipball/b9fce0dbcbb9fb3de191b6c94553e5c77ce81a05",
-                "reference": "b9fce0dbcbb9fb3de191b6c94553e5c77ce81a05",
+                "url": "https://api.github.com/repos/spatie/laravel-webhook-client/zipball/e71006ab5c25916903a685ae601fb45ed92a0941",
+                "reference": "e71006ab5c25916903a685ae601fb45ed92a0941",
                 "shasum": ""
             },
             "require": {
@@ -14356,7 +14356,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-webhook-client/issues",
-                "source": "https://github.com/spatie/laravel-webhook-client/tree/3.4.1"
+                "source": "https://github.com/spatie/laravel-webhook-client/tree/3.4.2"
             },
             "funding": [
                 {
@@ -14364,7 +14364,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-06-24T07:36:09+00:00"
+            "time": "2024-08-07T07:31:15+00:00"
         },
         {
             "name": "spatie/packagist-api",
