@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Support\ApiResponse\Pipes;
 
 use App\Support\ApiResponse\Pipes\Concerns\WithArgs;
-use App\Support\ApiResponse\Support\Utils;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\AbstractCursorPaginator;
 use Illuminate\Pagination\AbstractPaginator;
 
@@ -34,15 +34,13 @@ class PaginatorDataPipe
     }
 
     /**
+     * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
      * @see \Illuminate\Pagination\Paginator::toArray()
      * @see \Illuminate\Pagination\LengthAwarePaginator::toArray()
      * @see \Illuminate\Pagination\CursorPaginator::toArray()
      */
-    private function paginatorFor(AbstractPaginator|AbstractCursorPaginator $paginator): array
+    private function paginatorFor(AbstractPaginator|AbstractCursorPaginator $paginator): \stdClass
     {
-        return [
-            'data' => $paginator->toArray()['data'],
-            'meta' => Utils::metaFor($paginator),
-        ];
+        return ResourceCollection::make($paginator)->toResponse(request())->getData();
     }
 }

@@ -35,8 +35,6 @@ return [
     ],
 
     'pipes' => [
-        App\Support\ApiResponse\Pipes\ResourceCollectionDataPipe::class,
-        App\Support\ApiResponse\Pipes\JsonResourceDataPipe::class,
         App\Support\ApiResponse\Pipes\PaginatorDataPipe::class,
         App\Support\ApiResponse\Pipes\DefaultDataPipe::class,
         App\Support\ApiResponse\Pipes\MessagePipe::class,
