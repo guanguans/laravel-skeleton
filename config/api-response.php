@@ -35,8 +35,7 @@ return [
     ],
 
     'pipes' => [
-        App\Support\ApiResponse\Pipes\PaginatorDataPipe::class,
-        App\Support\ApiResponse\Pipes\DefaultDataPipe::class,
+        App\Support\ApiResponse\Pipes\DataPipe::class,
         App\Support\ApiResponse\Pipes\MessagePipe::class,
         App\Support\ApiResponse\Pipes\ErrorPipe::class,
         // App\Support\ApiResponse\Pipes\SetStatusCodePipe::class,

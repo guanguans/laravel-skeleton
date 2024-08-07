@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Support\ApiResponse\Pipes;
 
 use App\Support\ApiResponse\Pipes\Concerns\WithArgs;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Pagination\AbstractCursorPaginator;
+use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Routing\Router;
 
-class DefaultDataPipe
+class DataPipe
 {
     use WithArgs;
 
@@ -31,18 +33,24 @@ class DefaultDataPipe
     }
 
     /**
+     * @see \Illuminate\Foundation\Exceptions\Handler::render()
      * @see \Illuminate\Routing\Router::toResponse()
      * @see \Illuminate\Http\Resources\Json\ResourceCollection::toResponse()
-     * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
      * @see \Illuminate\Http\Resources\Json\JsonResource::toResponse()
      * @see \Illuminate\Http\Resources\Json\ResourceResponse::toResponse()
+     * @see \Illuminate\Http\Resources\Json\PaginatedResourceResponse::toResponse()
+     * @see \Illuminate\Pagination\Paginator::toArray()
+     * @see \Illuminate\Pagination\LengthAwarePaginator::toArray()
+     * @see \Illuminate\Pagination\CursorPaginator::toArray()
      * @see \Illuminate\Http\JsonResponse::setData()
+     *
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     private function dataFor(mixed $data): mixed
     {
         return match (true) {
-            // $data instanceof \JsonSerializable => $data->jsonSerialize(),
-            // $data instanceof Arrayable => $data->toArray(),
+            $data instanceof AbstractPaginator,
+            $data instanceof AbstractCursorPaginator => ResourceCollection::make($data)->toResponse(request())->getData(),
             ($response = Router::toResponse(request(), $data)) instanceof JsonResponse => $response->getData(),
             // ! \is_array($data) && ! \is_object($data) => (object) $data,
             default => $data
