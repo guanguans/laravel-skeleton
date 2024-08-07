@@ -29,7 +29,7 @@ class MessagePipe
         string $mainKey = 'http-statuses',
         string $default = 'Whoops, looks like something went wrong.',
     ): JsonResponse {
-        $data['message'] = $data['message'] ?: $this->messageFor($data['code'], $mainKey, $default);
+        $data['message'] = __($data['message'] ?: $this->keyFor($data['code'], $mainKey, $default));
 
         return $next($data);
     }
@@ -38,18 +38,18 @@ class MessagePipe
      * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
      */
-    private function messageFor(int $code, string $mainKey, string $default): string
+    private function keyFor(int $code, string $mainKey, string $default): string
     {
         /** @var \Illuminate\Translation\Translator $translator */
         $translator = app('translator');
 
         if ($translator->has($key = "$mainKey.$code")) {
-            return __($key);
+            return $key;
         }
 
         $statusCode = Utils::statusCodeFor($code);
         if ($translator->has($key = "$mainKey.$statusCode")) {
-            return __($key);
+            return $key;
         }
 
         return Response::$statusTexts[$statusCode] ?? $default; // ['Server Error', 'Unknown Status']
