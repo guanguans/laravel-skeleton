@@ -52,6 +52,7 @@ class VerifySignature
         $cacheSignature = Cache::get($signature = $request->header('signature'));
         throw_if($cacheSignature, InvalidRepeatRequestException::class);
 
+        // Cache::put($signature, $request->fingerprint(), $effectiveTime);
         Cache::put($signature, spl_object_hash($request), $effectiveTime);
     }
 }
