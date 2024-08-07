@@ -36,8 +36,10 @@ class RenderUsingFactory
                 if ($this->shouldReturnJson($request, $throwable)) {
                     return $this->container->make(ApiResponse::class)->throw($throwable);
                 }
-            } catch (\Throwable) {
-                // If catch an exception, to let the default exception handler handle it.
+            } catch (\Throwable $throwable) {
+                // If catch an exception, only report it,
+                // and to let the default exception handler handle original exception.
+                report($throwable);
             }
         };
     }
