@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
+use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,7 @@ class ApiResponse
     use Conditionable;
     use HasExceptionMap;
     use HasPipes;
+    use Macroable;
     use Tappable;
 
     public function __construct(?Collection $pipes = null, ?Collection $exceptionMap = null)
@@ -110,11 +112,9 @@ class ApiResponse
         return (new Pipeline(app()))
             ->send(compact('status', 'code', 'message', 'data', 'error'))
             ->through($this->pipes())
-            ->then(static function (array $data): JsonResponse {
-                return new JsonResponse(
-                    data: $data,
-                    options: JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
-                );
-            });
+            ->then(static fn (array $data): JsonResponse => new JsonResponse(
+                data: $data,
+                options: JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
+            ));
     }
 }

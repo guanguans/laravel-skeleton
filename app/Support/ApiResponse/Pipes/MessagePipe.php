@@ -41,7 +41,7 @@ class MessagePipe
     private function keyFor(int $code, string $mainKey, string $default): string
     {
         /** @var \Illuminate\Translation\Translator $translator */
-        $translator = app('translator');
+        $translator = trans();
 
         if ($translator->has($key = "$mainKey.$code")) {
             return $key;

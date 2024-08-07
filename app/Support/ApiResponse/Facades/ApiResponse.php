@@ -38,6 +38,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static \App\Support\ApiResponse\ApiResponse pushPipes(void ...$pipes)
  * @method static \App\Support\ApiResponse\ApiResponse extendPipes(callable $callback)
  * @method static \App\Support\ApiResponse\ApiResponse tapPipes(callable $callback)
+ * @method static void macro(string $name, object|callable $macro, object|callable $macro = null)
+ * @method static void mixin(object $mixin, bool $replace = true)
+ * @method static bool hasMacro(string $name)
+ * @method static void flushMacros()
  * @method static void tap(callable|null $callback = null)
  * @method static array convertExceptionToArray(\Throwable $throwable)
  *

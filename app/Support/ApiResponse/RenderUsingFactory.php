@@ -34,7 +34,7 @@ class RenderUsingFactory
         return function (\Throwable $throwable, Request $request) {
             try {
                 if ($this->shouldReturnJson($request, $throwable)) {
-                    return $this->container->make(ApiResponse::class)->throw($throwable);
+                    return app(ApiResponse::class)->throw($throwable);
                 }
             } catch (\Throwable $throwable) {
                 // If catch an exception, only report it,
