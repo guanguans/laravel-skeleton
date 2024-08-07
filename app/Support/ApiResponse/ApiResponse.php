@@ -66,15 +66,7 @@ class ApiResponse
         $newThrowable instanceof \Throwable and $throwable = $newThrowable;
 
         $message = config('app.debug') ? $throwable->getMessage() : '';
-        $code = transform($throwable, static function (\Throwable $throwable): int {
-            $code = $throwable->getCode();
-            if (\is_string($code)) {
-                preg_match_all('/\d+/', $code, $matches);
-                $code = implode('', $matches[0] ?? []);
-            }
-
-            return (int) $code ?: Response::HTTP_INTERNAL_SERVER_ERROR;
-        });
+        $code = $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
         $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
 
