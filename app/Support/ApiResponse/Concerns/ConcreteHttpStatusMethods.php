@@ -8,6 +8,8 @@ use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * @see \Illuminate\Http\Client\Concerns\DeterminesStatusCode
+ *
  * @mixin \App\Support\ApiResponse\ApiResponse
  */
 trait ConcreteHttpStatusMethods
@@ -52,6 +54,11 @@ trait ConcreteHttpStatusMethods
         return $this->error($message, Response::HTTP_UNAUTHORIZED);
     }
 
+    public function paymentRequired(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_PAYMENT_REQUIRED);
+    }
+
     public function forbidden(string $message = ''): JsonResponse
     {
         return $this->error($message, Response::HTTP_FORBIDDEN);
@@ -65,5 +72,30 @@ trait ConcreteHttpStatusMethods
     public function methodNotAllowed(string $message = ''): JsonResponse
     {
         return $this->error($message, Response::HTTP_METHOD_NOT_ALLOWED);
+    }
+
+    public function requestTimeout(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_REQUEST_TIMEOUT);
+    }
+
+    public function conflict(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_CONFLICT);
+    }
+
+    public function teapot(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_I_AM_A_TEAPOT);
+    }
+
+    public function unprocessableEntity(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function tooManyRequests(string $message = ''): JsonResponse
+    {
+        return $this->error($message, Response::HTTP_TOO_MANY_REQUESTS);
     }
 }

@@ -7,6 +7,7 @@ namespace App\Support\ApiResponse;
 use App\Support\ApiResponse\Concerns\ConcreteHttpStatusMethods;
 use App\Support\ApiResponse\Concerns\HasExceptionMap;
 use App\Support\ApiResponse\Concerns\HasPipes;
+use App\Support\ApiResponse\Support\Utils;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pipeline\Pipeline;
@@ -96,7 +97,11 @@ class ApiResponse
             $headers = $newThrowable['headers'] ?? null ?: $headers;
         }
 
-        return $this->fail($message, $code, $error)->withHeaders($headers);
+        $statusCode = Utils::statusCodeFor($code);
+
+        return $this
+            ->{$statusCode >= 400 && $statusCode < 500 ? 'error' : 'fail'}($message, $code, $error)
+            ->withHeaders($headers);
     }
 
     /**
