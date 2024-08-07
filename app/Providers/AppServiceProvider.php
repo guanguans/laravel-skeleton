@@ -180,7 +180,7 @@ class AppServiceProvider extends ServiceProvider
             Schema::defaultStringLength(191);
             $this->setLocales();
             Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
-            // JsonResource::wrap('data');
+            // JsonResource::wrap('list');
             JsonResource::withoutWrapping();
             // Paginator::useBootstrap();
             // Paginator::useBootstrapFour();
