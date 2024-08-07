@@ -35,9 +35,16 @@ return [
     ],
 
     'pipes' => [
+        /*
+         * Before...
+         */
         App\Support\ApiResponse\Pipes\DataPipe::class,
-        App\Support\ApiResponse\Pipes\MessagePipe::class,
-        App\Support\ApiResponse\Pipes\ErrorPipe::class,
-        // App\Support\ApiResponse\Pipes\SetStatusCodePipe::class,
+        App\Support\ApiResponse\Pipes\MessagePipe::with(),
+        App\Support\ApiResponse\Pipes\ErrorPipe::with(/*! app()->hasDebugModeEnabled()*/),
+
+        /*
+         * After...
+         */
+        // App\Support\ApiResponse\Pipes\SetStatusCodePipe::with(),
     ],
 ];

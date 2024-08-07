@@ -13,13 +13,13 @@ class SetStatusCodePipe
     use WithArgs;
 
     /**
-     * @param array{
+     * @param  array{
      *  status: string,
      *  code: int,
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * } $data
+     * }  $data
      * @param  \Closure(array): \Illuminate\Http\JsonResponse  $next
      */
     public function handle(array $data, \Closure $next, ?int $statusCode = null): JsonResponse

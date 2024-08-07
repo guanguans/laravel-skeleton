@@ -49,7 +49,7 @@ class AuthRequest extends FormRequest
             })
             ->whenRouteIs('auth.index', static function () use (&$rules): void {
                 $rules = [
-                    'per_page' => 'integer|min:5|max:50',
+                    'per_page' => 'integer|min:2|max:50',
                     'page' => 'integer|min:1',
                 ];
             });

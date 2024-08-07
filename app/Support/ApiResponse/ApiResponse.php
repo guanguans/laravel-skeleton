@@ -22,7 +22,9 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 /**
  * @see https://github.com/dingo/api
  * @see https://github.com/f9webltd/laravel-api-response-helpers
+ * @see https://github.com/flugg/laravel-responder
  * @see https://github.com/jiannei/laravel-response
+ * @see https://github.com/MarcinOrlowski/laravel-api-response-builder
  *
  * @method array convertExceptionToArray(\Throwable $throwable)
  */
@@ -67,8 +69,9 @@ class ApiResponse
         $newThrowable = $this->mapException($throwable);
         $newThrowable instanceof \Throwable and $throwable = $newThrowable;
 
-        $message = config('app.debug') ? $throwable->getMessage() : '';
-        $code = $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
+        /** @noinspection PhpCastIsUnnecessaryInspection */
+        $code = (int) $throwable->getCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
+        $message = app()->hasDebugModeEnabled() ? $throwable->getMessage() : '';
         $error = (fn (): array => $this->convertExceptionToArray($throwable))->call(app(ExceptionHandler::class));
         $headers = [];
 
@@ -115,6 +118,7 @@ class ApiResponse
             ->then(static fn (array $data): JsonResponse => new JsonResponse(
                 data: $data,
                 options: JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
+                | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT
             ));
     }
 }

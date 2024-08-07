@@ -14,14 +14,15 @@ class MessagePipe
     use WithArgs;
 
     /**
-     * @param array{
+     * @param  array{
      *  status: string,
      *  code: int,
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * } $data
+     * }  $data
      * @param  \Closure(array): \Illuminate\Http\JsonResponse  $next
+     * @param  string  $default  // ['Whoops, looks like something went wrong.', 'Server Error', 'Unknown Status']
      */
     public function handle(
         array $data,
@@ -35,8 +36,9 @@ class MessagePipe
     }
 
     /**
-     * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      * @see \Illuminate\Foundation\Exceptions\Handler::prepareException()
+     * @see \Illuminate\Foundation\Exceptions\Handler::convertExceptionToArray()
+     * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      */
     private function keyFor(int $code, string $mainKey, string $default): string
     {
@@ -52,6 +54,6 @@ class MessagePipe
             return $key;
         }
 
-        return Response::$statusTexts[$statusCode] ?? $default; // ['Server Error', 'Unknown Status']
+        return Response::$statusTexts[$statusCode] ?? $default;
     }
 }

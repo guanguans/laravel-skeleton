@@ -12,18 +12,22 @@ class ErrorPipe
     use WithArgs;
 
     /**
-     * @param array{
+     * @param  array{
      *  status: string,
      *  code: int,
      *  message: string,
      *  data: mixed,
      *  error: ?array,
-     * } $data
+     * }  $data
      * @param  \Closure(array): \Illuminate\Http\JsonResponse  $next
      */
-    public function handle(array $data, \Closure $next): JsonResponse
+    public function handle(array $data, \Closure $next, bool $hidden = false): JsonResponse
     {
-        $data['error'] = $data['error'] ?: (object) [];
+        if ($hidden) {
+            unset($data['error']);
+        } else {
+            $data['error'] = $data['error'] ?: (object) [];
+        }
 
         return $next($data);
     }

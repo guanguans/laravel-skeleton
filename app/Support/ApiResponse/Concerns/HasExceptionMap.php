@@ -13,6 +13,10 @@ trait HasExceptionMap
 {
     private Collection $exceptionMap;
 
+    /**
+     * @param  class-string|class-string<\Throwable>  $exception
+     * @param  \Throwable|array|(callable(\Throwable): \Throwable|array)  $mapper
+     */
     public function prependExceptionMap(string $exception, mixed $mapper): self
     {
         return $this->tapExceptionMap(static function (Collection $exceptionMap) use ($mapper, $exception): void {
@@ -20,6 +24,10 @@ trait HasExceptionMap
         });
     }
 
+    /**
+     * @param  class-string|class-string<\Throwable>  $exception
+     * @param  \Throwable|array|(callable(\Throwable): \Throwable|array)  $mapper
+     */
     public function putExceptionMap(string $exception, mixed $mapper): self
     {
         return $this->tapExceptionMap(static function (Collection $exceptionMap) use ($exception, $mapper): void {
@@ -51,7 +59,7 @@ trait HasExceptionMap
      *     headers: array,
      * }
      */
-    private function mapException(\Throwable $throwable): array|\Throwable
+    private function mapException(\Throwable $throwable): \Throwable|array
     {
         $mapper = $this->exceptionMap->first(
             static fn (mixed $mapper, string $exception): bool => $throwable instanceof $exception,
