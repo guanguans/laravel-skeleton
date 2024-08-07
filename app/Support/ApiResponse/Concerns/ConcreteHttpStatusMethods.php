@@ -12,11 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 trait ConcreteHttpStatusMethods
 {
-    public function localize(int $code = Response::HTTP_OK): JsonResponse
-    {
-        return $this->ok(code: $code);
-    }
-
     public function ok(string $message = '', int $code = Response::HTTP_OK): JsonResponse
     {
         return $this->success(message: $message, code: $code);
@@ -24,18 +19,18 @@ trait ConcreteHttpStatusMethods
 
     public function created(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
     {
-        return tap(
-            $this->success($data, $message, Response::HTTP_CREATED),
-            static function (JsonResponse $response) use ($location): void {
-                $location and $response->header('Location', $location);
-            }
-        );
+        return $this->localize($data, $message, Response::HTTP_CREATED, $location);
     }
 
     public function accepted(mixed $data = null, string $message = '', ?string $location = null): JsonResponse
     {
+        return $this->localize($data, $message, Response::HTTP_ACCEPTED, $location);
+    }
+
+    public function localize(mixed $data = null, string $message = '', int $code = Response::HTTP_OK, ?string $location = null): JsonResponse
+    {
         return tap(
-            $this->success($data, $message, Response::HTTP_ACCEPTED),
+            $this->success($data, $message, $code),
             static function (JsonResponse $response) use ($location): void {
                 $location and $response->header('Location', $location);
             }
