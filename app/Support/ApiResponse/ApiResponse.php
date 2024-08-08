@@ -7,12 +7,12 @@ namespace App\Support\ApiResponse;
 use App\Support\ApiResponse\Concerns\ConcreteHttpStatusMethods;
 use App\Support\ApiResponse\Concerns\HasExceptionMap;
 use App\Support\ApiResponse\Concerns\HasPipes;
-use App\Support\ApiResponse\Support\Utils;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
+use Illuminate\Support\Traits\Dumpable;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Traits\Tappable;
 use Illuminate\Validation\ValidationException;
@@ -32,6 +32,7 @@ class ApiResponse
 {
     use ConcreteHttpStatusMethods;
     use Conditionable;
+    use Dumpable;
     use HasExceptionMap;
     use HasPipes;
     use Macroable;
@@ -45,17 +46,12 @@ class ApiResponse
 
     public function success(mixed $data = null, string $message = '', int $code = Response::HTTP_OK): JsonResponse
     {
-        return $this->json(__FUNCTION__, $code, $message, $data);
+        return $this->json(true, $code, $message, $data);
     }
 
     public function error(string $message = '', int $code = Response::HTTP_BAD_REQUEST, ?array $error = null): JsonResponse
     {
-        return $this->json(__FUNCTION__, $code, $message, error: $error);
-    }
-
-    public function fail(string $message = '', int $code = Response::HTTP_INTERNAL_SERVER_ERROR, ?array $error = null): JsonResponse
-    {
-        return $this->json(__FUNCTION__, $code, $message, error: $error);
+        return $this->json(false, $code, $message, error: $error);
     }
 
     /**
@@ -94,11 +90,7 @@ class ApiResponse
             $headers = $newThrowable['headers'] ?? null ?: $headers;
         }
 
-        $statusCode = Utils::statusCodeFor($code);
-
-        return $this
-            ->{$statusCode >= 400 && $statusCode < 500 ? 'error' : 'fail'}($message, $code, $error)
-            ->withHeaders($headers);
+        return $this->error($message, $code, $error)->withHeaders($headers);
     }
 
     /**
@@ -106,7 +98,7 @@ class ApiResponse
      * @param  array<string, mixed>|null  $error
      */
     public function json(
-        string $status,
+        bool $status,
         int $code,
         string $message = '',
         mixed $data = null,

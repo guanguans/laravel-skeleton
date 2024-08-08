@@ -55,12 +55,12 @@ class AuthController extends Controller
         unset($validated['password_confirmation']);
         $user = JWTUser::query()->create($validated);
         if (! $user instanceof JWTUser) {
-            return $this->apiResponse->fail('创建用户失败');
+            return $this->apiResponse->error('创建用户失败');
         }
 
         $validated['password'] = $request->post('password_confirmation');
         if (! $token = auth()->attempt($validated)) {
-            return $this->apiResponse->fail('邮箱或者密码错误');
+            return $this->apiResponse->error('邮箱或者密码错误');
         }
 
         return tap($this->apiResponse->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
