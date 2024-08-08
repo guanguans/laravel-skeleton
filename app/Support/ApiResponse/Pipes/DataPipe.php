@@ -49,8 +49,8 @@ class DataPipe
     private function dataFor(mixed $data): mixed
     {
         return match (true) {
-            $data instanceof AbstractPaginator,
-            $data instanceof AbstractCursorPaginator => ResourceCollection::make($data)->toResponse(request())->getData(),
+            $data instanceof AbstractCursorPaginator,
+            $data instanceof AbstractPaginator => ResourceCollection::make($data)->toResponse(request())->getData(),
             ($response = Router::toResponse(request(), $data)) instanceof JsonResponse => $response->getData(),
             // ! \is_array($data) && ! \is_object($data) => (object) $data,
             default => $data
