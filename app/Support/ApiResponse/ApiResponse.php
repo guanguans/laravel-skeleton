@@ -28,7 +28,7 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  *
  * @method array convertExceptionToArray(\Throwable $throwable)
  */
-class ApiResponse
+class ApiResponse implements Contracts\ApiResponse
 {
     use ConcreteHttpStatusMethods;
     use Conditionable;
