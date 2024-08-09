@@ -11,10 +11,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-exception-notify
  */
 
-use App\Support\ApiResponse\Pipes\AddKeywordChorePipe;
-use App\Support\ApiResponse\Pipes\LimitLengthPipe;
-use App\Support\ApiResponse\Pipes\SprintfHtmlPipe;
-use App\Support\ApiResponse\Pipes\SprintfMarkdownPipe;
+use Guanguans\LaravelExceptionNotify\Pipes\AddKeywordChorePipe;
+use Guanguans\LaravelExceptionNotify\Pipes\LimitLengthPipe;
+use Guanguans\LaravelExceptionNotify\Pipes\SprintfHtmlPipe;
+use Guanguans\LaravelExceptionNotify\Pipes\SprintfMarkdownPipe;
 
 return [
     /**
@@ -59,13 +59,13 @@ return [
      * The list of collector.
      */
     'collectors' => [
-        App\Support\ApiResponse\Collectors\ApplicationCollector::class,
+        Guanguans\LaravelExceptionNotify\Collectors\ApplicationCollector::class,
         // Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
-        App\Support\ApiResponse\Collectors\ChoreCollector::class,
-        App\Support\ApiResponse\Collectors\RequestBasicCollector::class,
-        App\Support\ApiResponse\Collectors\ExceptionBasicCollector::class,
-        App\Support\ApiResponse\Collectors\ExceptionContextCollector::class,
-        App\Support\ApiResponse\Collectors\ExceptionTraceCollector::class,
+        Guanguans\LaravelExceptionNotify\Collectors\ChoreCollector::class,
+        Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector::class,
+        Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector::class,
+        Guanguans\LaravelExceptionNotify\Collectors\ExceptionContextCollector::class,
+        Guanguans\LaravelExceptionNotify\Collectors\ExceptionTraceCollector::class,
 
         // Guanguans\LaravelExceptionNotify\Collectors\RequestCookieCollector::class,
         // Guanguans\LaravelExceptionNotify\Collectors\RequestSessionCollector::class,
@@ -348,6 +348,26 @@ return [
             'pipes' => [
                 SprintfMarkdownPipe::class,
                 hydrate_pipe(LimitLengthPipe::class, 4096),
+            ],
+        ],
+
+        'xiZhi' => [
+            'driver' => 'notify',
+            'authenticator' => [
+                'class' => \Guanguans\Notify\XiZhi\Authenticator::class,
+                'token' => env('EXCEPTION_NOTIFY_XIZHI_TOKEN'),
+            ],
+            'client' => [
+                'class' => \Guanguans\Notify\XiZhi\Client::class,
+            ],
+            'message' => [
+                'class' => \Guanguans\Notify\XiZhi\Messages\SingleMessage::class,
+                // 'class' => \Guanguans\Notify\XiZhi\Messages\ChannelMessage::class,
+                'title' => '{title}',
+                'content' => '{report}',
+            ],
+            'pipes' => [
+                SprintfMarkdownPipe::class,
             ],
         ],
     ],
