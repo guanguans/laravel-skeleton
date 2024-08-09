@@ -14,13 +14,13 @@ namespace App\Support;
 
 use App\Support\Contracts\SignerContract;
 
-class HmacSigner implements SignerContract
+readonly class HmacSigner implements SignerContract
 {
-    public function __construct(private readonly string $secret = '', private readonly string $algo = 'sha256') {}
+    public function __construct(#[\SensitiveParameter] private string $secret = '', private string $algo = 'sha256') {}
 
     public function sign(array $payload): string
     {
-        return hash_hmac($this->algo, $this->toPreEncryptedData($payload), $this->secret);
+        return hash_hmac($this->algo, $this->hashingDataFor($payload), $this->secret);
     }
 
     public function validate(string $signature, array $payload): bool
@@ -39,7 +39,7 @@ class HmacSigner implements SignerContract
         return $payload;
     }
 
-    protected function toPreEncryptedData(array $payload): string
+    protected function hashingDataFor(array $payload): string
     {
         return urldecode(http_build_query($this->sort($payload)));
     }
