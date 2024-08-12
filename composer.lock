@@ -22098,16 +22098,16 @@
         },
         {
             "name": "laradumps/laradumps",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "4be2aeab76e31ca9ffcf8af9b6c9211462e9300e"
+                "reference": "18e3e9d840721f8028e0854568ceeefc50ea50b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/4be2aeab76e31ca9ffcf8af9b6c9211462e9300e",
-                "reference": "4be2aeab76e31ca9ffcf8af9b6c9211462e9300e",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/18e3e9d840721f8028e0854568ceeefc50ea50b3",
+                "reference": "18e3e9d840721f8028e0854568ceeefc50ea50b3",
                 "shasum": ""
             },
             "require": {
@@ -22158,7 +22158,7 @@
             "homepage": "https://github.com/laradumps/laradumps",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v3.1.4"
+                "source": "https://github.com/laradumps/laradumps/tree/v3.1.5"
             },
             "funding": [
                 {
@@ -22166,20 +22166,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-01T11:57:55+00:00"
+            "time": "2024-08-12T18:22:31+00:00"
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "69fe22dd92b4747ab267ac351249785eb8c2b643"
+                "reference": "f14e2ed43cf412390005589201f224d34921233d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/69fe22dd92b4747ab267ac351249785eb8c2b643",
-                "reference": "69fe22dd92b4747ab267ac351249785eb8c2b643",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/f14e2ed43cf412390005589201f224d34921233d",
+                "reference": "f14e2ed43cf412390005589201f224d34921233d",
                 "shasum": ""
             },
             "require": {
@@ -22227,7 +22227,7 @@
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v2.1.0"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -22235,7 +22235,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-20T19:44:46+00:00"
+            "time": "2024-08-07T23:45:46+00:00"
         },
         {
             "name": "larastan/larastan",
