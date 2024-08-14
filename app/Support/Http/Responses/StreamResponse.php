@@ -28,7 +28,7 @@ class StreamResponse extends Response
         }
 
         if (! is_writable($directory)) {
-            throw new \InvalidArgumentException(sprintf("'%s' is not writable.", $directory));
+            throw new \InvalidArgumentException(\sprintf("'%s' is not writable.", $directory));
         }
 
         $contents = $this->getBody()->getContents();

@@ -100,7 +100,7 @@ class FindDumpStatementCommand extends Command
                 $nodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $error) {
                 $this->newLine();
-                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $error->getMessage()));
+                $this->error(\sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $error->getMessage()));
 
                 return;
             }

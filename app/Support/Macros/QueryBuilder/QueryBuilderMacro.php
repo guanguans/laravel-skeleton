@@ -30,7 +30,7 @@ class QueryBuilderMacro
             array_unshift($pipes, static function ($builder, $next): void {
                 throw_if(! ($piped = $next($builder)) instanceof EloquentBuilder
                 && ! $piped instanceof QueryBuilder
-                && ! $piped instanceof Relation, \InvalidArgumentException::class, sprintf(
+                && ! $piped instanceof Relation, \InvalidArgumentException::class, \sprintf(
                     'Query builder pipeline must be return a %s or %s or %s instance.',
                     EloquentBuilder::class,
                     QueryBuilder::class,

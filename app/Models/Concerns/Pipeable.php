@@ -49,7 +49,7 @@ trait Pipeable
     public function scopePipe(Builder $builder, ...$pipes): Builder
     {
         array_unshift($pipes, static function (Builder $builder, $next): void {
-            throw_unless($next($builder) instanceof Builder, \InvalidArgumentException::class, sprintf('Query builder pipeline must be return a %s instance.', Builder::class));
+            throw_unless($next($builder) instanceof Builder, \InvalidArgumentException::class, \sprintf('Query builder pipeline must be return a %s instance.', Builder::class));
         });
 
         return (new Pipeline(app()))

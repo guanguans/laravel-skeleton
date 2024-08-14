@@ -33,7 +33,7 @@ trait Fireworks
 
         foreach ($beforeEvents as $event) {
             static::{$event}(static function (Model $model) use ($self, $event): void {
-                $method = sprintf('onModel%s', Str::studly($event));
+                $method = \sprintf('onModel%s', Str::studly($event));
                 $self->callBeforeEvent($model, $event);
                 if (method_exists($model, $method)) {
                     \call_user_func_array([$model, $method], [$model]);
@@ -43,7 +43,7 @@ trait Fireworks
 
         foreach ($afterEvents as $event) {
             static::{$event}(static function (Model $model) use ($self, $event): void {
-                $method = sprintf('onModel%s', Str::studly($event));
+                $method = \sprintf('onModel%s', Str::studly($event));
                 if (method_exists($model, $method)) {
                     \call_user_func_array([$model, $method], [$model]);
                 }
@@ -66,7 +66,7 @@ trait Fireworks
     private function callColumnsEvent(Model $model, string $methodConvention): void
     {
         foreach ($model->getDirty() ?? [] as $column => $newValue) {
-            $method = sprintf($methodConvention, Str::studly($column));
+            $method = \sprintf($methodConvention, Str::studly($column));
             if (method_exists($model, $method)) {
                 \call_user_func_array([$model, $method], [$model, $model->getOriginal($column), $newValue]);
             }

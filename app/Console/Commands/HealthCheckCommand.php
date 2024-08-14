@@ -255,7 +255,7 @@ class HealthCheckCommand extends Command
     private function checkDiskSpace(): HealthCheckStateEnum
     {
         $freeSpace = disk_free_space(base_path());
-        $diskSpace = sprintf('%.1f', $freeSpace / (1024 * 1024));
+        $diskSpace = \sprintf('%.1f', $freeSpace / (1024 * 1024));
         if ($diskSpace < 100) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
@@ -265,7 +265,7 @@ class HealthCheckCommand extends Command
             );
         }
 
-        $diskSpace = sprintf('%.1f', $freeSpace / (1024 * 1024 * 1024));
+        $diskSpace = \sprintf('%.1f', $freeSpace / (1024 * 1024 * 1024));
         if ($diskSpace < 1) {
             return tap(
                 HealthCheckStateEnum::WARNING(),

@@ -40,7 +40,7 @@ class AnsiLineFormatter extends LineFormatter
             Level::Emergency->value => '<div class="text-white bg-red">%s</div>',
         };
 
-        render(sprintf($html, parent::format($record)));
+        render(\sprintf($html, parent::format($record)));
 
         return '';
     }

@@ -31,7 +31,7 @@ final class IdeHelperGatesCommand extends Command
             })
             ->reduce(
                 static fn (Stringable $code, Permission $permissions): Stringable => $code->append(
-                    sprintf("\%s::define('%s', 'callback');", Gate::class, $permissions['slug']),
+                    \sprintf("\%s::define('%s', 'callback');", Gate::class, $permissions['slug']),
                     PHP_EOL
                 ),
                 str(

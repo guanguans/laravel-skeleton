@@ -61,7 +61,7 @@ class ParsePHPFileToASTCommand extends Command
             $nodes = $this->parser->parse($contents);
             dump($nodes);
         } catch (Error $e) {
-            $this->output->error(sprintf('The file of %s parse error: %s.', $file, $e->getMessage()));
+            $this->output->error(\sprintf('The file of %s parse error: %s.', $file, $e->getMessage()));
 
             return self::FAILURE;
         }
@@ -72,7 +72,7 @@ class ParsePHPFileToASTCommand extends Command
     protected function checkOptions()
     {
         if (! file_exists(base_path($this->argument('file')))) {
-            throw new \InvalidArgumentException(sprintf('The file of %s does not exist.', $this->argument('file')));
+            throw new \InvalidArgumentException(\sprintf('The file of %s does not exist.', $this->argument('file')));
         }
 
         if (! \in_array($this->option('parse-mode'), [

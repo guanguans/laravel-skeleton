@@ -58,7 +58,7 @@ class ElasticsearchManager extends Manager
 
         $config = $this->prepareConfig($this->config->get($driverKey));
 
-        $method = sprintf('create%sDriver', Str::studly($driver));
+        $method = \sprintf('create%sDriver', Str::studly($driver));
 
         if (method_exists($this, $method)) {
             return $this->{$method}($config);

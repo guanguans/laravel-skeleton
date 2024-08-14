@@ -101,7 +101,7 @@ class AuthController extends Controller
         // $token = auth()->attempt($credentials);
 
         /** @see https://securinglaravel.com/security-tip-timebox-for-timing-attacks */
-        $token = (new Timebox())->call(function (Timebox $timebox) use ($credentials) {
+        $token = (new Timebox)->call(function (Timebox $timebox) use ($credentials) {
             $token = auth()->attempt($credentials);
             if ($token) {
                 $timebox->returnEarly();
@@ -110,7 +110,7 @@ class AuthController extends Controller
             return $token;
         }, 100 * 1000);
 
-        if (!$token) {
+        if (! $token) {
             return $this->apiResponse->badRequest('邮箱或者密码错误');
         }
 

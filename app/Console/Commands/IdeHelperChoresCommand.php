@@ -121,7 +121,7 @@ final class IdeHelperChoresCommand extends Command
             ['function' => null]
         );
 
-        $this->output->warning(sprintf(
+        $this->output->warning(\sprintf(
             'Found %s %s:',
             $chore->count(),
             str($trace['function'])->remove(self::SUFFIX)->plural()->snake(' ')

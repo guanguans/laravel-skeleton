@@ -108,7 +108,7 @@ class LogHttp
      */
     private function messageFor(Request $request, Response $response): string
     {
-        return sprintf(
+        return \sprintf(
             '%s %s %s -> HTTP/%s %s %s',
             $request->method(),
             $request->path(),

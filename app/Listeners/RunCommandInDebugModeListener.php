@@ -26,7 +26,7 @@ class RunCommandInDebugModeListener
         $command = $event->getCommand();
 
         if (! $command instanceof Command) {
-            throw new \RuntimeException(sprintf('The command must be an instance of %s', Command::class));
+            throw new \RuntimeException(\sprintf('The command must be an instance of %s', Command::class));
         }
 
         if ($command instanceof HelpCommand) {
@@ -74,7 +74,7 @@ class RunCommandInDebugModeListener
         $actualCommand = $property->getValue($command);
 
         if (! $actualCommand instanceof Command) {
-            throw new \RuntimeException(sprintf('The command must be an instance of %s', Command::class));
+            throw new \RuntimeException(\sprintf('The command must be an instance of %s', Command::class));
         }
 
         return $actualCommand;

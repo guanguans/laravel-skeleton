@@ -101,7 +101,7 @@ class CompressResponseContent
 
         $compressingFormtedContentSize = $this->formatBytes($compressingContentSize);
         $compressedFormtedContentSize = $this->formatBytes($compressedContentSize);
-        $percentReduction = sprintf('%.02F%%', (1 - $compressedContentSize / $compressingContentSize) * 100);
+        $percentReduction = \sprintf('%.02F%%', (1 - $compressedContentSize / $compressingContentSize) * 100);
 
         return /** @lang HTML */ <<<HTML
             <br>
@@ -224,7 +224,7 @@ class CompressResponseContent
 
             $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.$sizes[$i];
+            return \sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.$sizes[$i];
         }
 
         return '0';

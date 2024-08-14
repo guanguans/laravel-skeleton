@@ -100,7 +100,7 @@ class ExtendServiceProvider extends ServiceProvider
                 {
                     public function imageUrl(int $width = 640, int $height = 480): string
                     {
-                        return sprintf('https://placekitten.com/%d/%d', $width, $height);
+                        return \sprintf('https://placekitten.com/%d/%d', $width, $height);
                     }
 
                     /**
@@ -108,7 +108,7 @@ class ExtendServiceProvider extends ServiceProvider
                      */
                     public function imageRandomUrl(string $format = 'small'): string
                     {
-                        return sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
+                        return \sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
                     }
                 }
             );

@@ -28,7 +28,7 @@ trait Nullable
      */
     public function initializeNullable(): void
     {
-        throw_unless(\is_array($this->nullable), \Exception::class, sprintf(
+        throw_unless(\is_array($this->nullable), \Exception::class, \sprintf(
             'The $nullable property in %s must be an array to use the Nullable trait.',
             static::class
         ));

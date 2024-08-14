@@ -47,7 +47,7 @@ class XML
 
     public static function cdata($string): string
     {
-        return sprintf('<![CDATA[%s]]>', $string);
+        return \sprintf('<![CDATA[%s]]>', $string);
     }
 
     public static function sanitize($xml): null|array|string

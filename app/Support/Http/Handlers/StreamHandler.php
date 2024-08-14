@@ -285,7 +285,7 @@ class StreamHandler implements Handler
         }
 
         if (! \in_array($request->getUri()->getScheme(), ['http', 'https'], true)) {
-            throw new RequestException(sprintf("The scheme '%s' is not supported.", $request->getUri()->getScheme()), $request);
+            throw new RequestException(\sprintf("The scheme '%s' is not supported.", $request->getUri()->getScheme()), $request);
         }
 
         // HTTP/1.1 streams using the PHP stream wrapper require a
@@ -341,7 +341,7 @@ class StreamHandler implements Handler
                 $this->lastHeaders = $http_response_header ?? [];
 
                 if (false === $resource) {
-                    throw new ConnectException(sprintf('Connection refused for URI %s', $uri), $request, null, $context);
+                    throw new ConnectException(\sprintf('Connection refused for URI %s', $uri), $request, null, $context);
                 }
 
                 if (isset($options['read_timeout'])) {
@@ -364,7 +364,7 @@ class StreamHandler implements Handler
             if ('v4' === $options['force_ip_resolve']) {
                 $records = dns_get_record($uri->getHost(), DNS_A);
                 if (false === $records || ! isset($records[0]['ip'])) {
-                    throw new ConnectException(sprintf("Could not resolve IPv4 address for host '%s'", $uri->getHost()), $request);
+                    throw new ConnectException(\sprintf("Could not resolve IPv4 address for host '%s'", $uri->getHost()), $request);
                 }
 
                 return $uri->withHost($records[0]['ip']);
@@ -372,7 +372,7 @@ class StreamHandler implements Handler
             if ('v6' === $options['force_ip_resolve']) {
                 $records = dns_get_record($uri->getHost(), DNS_AAAA);
                 if (false === $records || ! isset($records[0]['ipv6'])) {
-                    throw new ConnectException(sprintf("Could not resolve IPv6 address for host '%s'", $uri->getHost()), $request);
+                    throw new ConnectException(\sprintf("Could not resolve IPv6 address for host '%s'", $uri->getHost()), $request);
                 }
 
                 return $uri->withHost('['.$records[0]['ipv6'].']');

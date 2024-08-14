@@ -84,7 +84,7 @@ trait Cacheable
         // Create hash from arguments and query
         $args = serialize($args).serialize($this->getScopeQuery());
 
-        return sprintf(
+        return \sprintf(
             '%s-%s@%s-%s',
             config('app.locale'),
             $tag,

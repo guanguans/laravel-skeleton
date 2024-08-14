@@ -123,7 +123,7 @@ class GenerateTestsCommand extends Command
                 $originalNodes = $this->parser->parse($fileInfo->getContents());
             } catch (Error $error) {
                 $this->newLine();
-                $this->error(sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $error->getMessage()));
+                $this->error(\sprintf('The file of %s parse error: %s.', $fileInfo->getRealPath(), $error->getMessage()));
 
                 return;
             }
@@ -182,7 +182,7 @@ class GenerateTestsCommand extends Command
 
                     // 打印输出语法树
                     if (! file_exists($testClassDir = \dirname($testClassFile)) && ! mkdir($testClassDir, 0755, true) && ! is_dir($testClassDir)) {
-                        throw new RuntimeException(sprintf('Directory "%s" was not created', $testClassDir));
+                        throw new RuntimeException(\sprintf('Directory "%s" was not created', $testClassDir));
                     }
 
                     file_put_contents($testClassFile, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));

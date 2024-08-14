@@ -203,7 +203,7 @@ final class Middleware
     {
         // To be compatible with Guzzle 7.1.x we need to allow users to pass a MessageFormatter
         if (! $formatter instanceof MessageFormatter && ! $formatter instanceof MessageFormatterInterface) {
-            throw new \LogicException(sprintf('Argument 2 to %s::log() must be of type %s', self::class, MessageFormatterInterface::class));
+            throw new \LogicException(\sprintf('Argument 2 to %s::log() must be of type %s', self::class, MessageFormatterInterface::class));
         }
 
         return static function (callable $handler) use ($logger, $formatter, $logLevel): callable {

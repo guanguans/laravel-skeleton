@@ -83,12 +83,13 @@
         "node_modules"
     ],
     "notName": [
-        "_ide_helper_actions.php",
-        "_ide_helper_models.php",
+        "*.blade.php",
+        ".phpstorm.meta.php",
         "_ide_helper*.php",
         "_ide_helper.php",
-        ".phpstorm.meta.php",
-        "*.blade.php"
+        "_ide_helper_actions.php",
+        "_ide_helper_models.php",
+        "PrettyCommandOutput.php"
     ],
     "notPath": [
         "xxx.php"

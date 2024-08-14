@@ -12,7 +12,7 @@ trait Outputifier
 {
     protected function information(string $message): void
     {
-        render(sprintf(
+        render(\sprintf(
             <<<'html'
                 <div class="font-bold">
                     <span class="bg-blue-400 px-2 text-white mr-1">
@@ -27,7 +27,7 @@ trait Outputifier
 
     protected function fail(string $message): void
     {
-        render(sprintf(
+        render(\sprintf(
             <<<'html'
                 <div class="font-bold">
                     <span class="bg-red-400 px-2 text-white mr-1">
@@ -42,7 +42,7 @@ trait Outputifier
 
     protected function warning(string $message): void
     {
-        render(sprintf(
+        render(\sprintf(
             <<<'html'
                 <div class="font-bold">
                     <span class="bg-orange-400 px-2 text-white mr-1">
@@ -57,7 +57,7 @@ trait Outputifier
 
     protected function success(string $message): void
     {
-        render(sprintf(
+        render(\sprintf(
             <<<'html'
                 <div class="font-bold">
                     <span class="bg-green-400 px-2 text-white mr-1">

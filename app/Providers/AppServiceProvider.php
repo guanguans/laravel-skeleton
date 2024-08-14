@@ -607,7 +607,7 @@ class AppServiceProvider extends ServiceProvider
                         return $reflectionPropertyType->getName();
                     }
 
-                    throw new \LogicException(sprintf(
+                    throw new \LogicException(\sprintf(
                         'Attribute [%s] of %s miss a argument, or %s must be a non-built-in named type.',
                         DependencyInjection::class,
                         $property = "property [{$reflectionObject->getName()}::\${$reflectionProperty->getName()}]",
@@ -621,7 +621,7 @@ class AppServiceProvider extends ServiceProvider
                     $reflectionProperty->setValue($object, $app->make($propertyType));
                 } catch (ContainerExceptionInterface $containerException) {
                     throw new \TypeError(
-                        sprintf(
+                        \sprintf(
                             'Type [%s] of property [%s::$%s] resolve failed [%s].',
                             $propertyType,
                             $reflectionObject->getName(),
@@ -683,7 +683,7 @@ class AppServiceProvider extends ServiceProvider
                         }
 
                         throw new \BadMethodCallException(
-                            sprintf('The method [%s::%s()] does not exist.', $this->object::class, $name),
+                            \sprintf('The method [%s::%s()] does not exist.', $this->object::class, $name),
                         );
                     }
 

@@ -44,7 +44,7 @@ class OptimizeAllCommand extends Command
             $this->output->error($directoryNotFoundException->getMessage());
         }
 
-        $command = sprintf(
+        $command = \sprintf(
             '%s %s dump-autoload --no-interaction --optimize --ansi -v',
             (new ExecutableFinder)->find('php8.1') ?: (new PhpExecutableFinder)->find(),
             (new ExecutableFinder)->find('composer2') ?: (new ExecutableFinder)->find('composer'),

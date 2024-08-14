@@ -36,7 +36,7 @@ abstract class Rule implements ValidationRule
 
     public static function message(): string
     {
-        $transMessage = __($transKey = sprintf('validation.%s', static::name()));
+        $transMessage = __($transKey = \sprintf('validation.%s', static::name()));
 
         return $transMessage === $transKey ? static::fallbackMessage() : $transMessage;
     }
@@ -63,7 +63,7 @@ abstract class Rule implements ValidationRule
                 : 'The :attribute [:input] must be a valid :Name.',
             [
                 'name' => value(static function () {
-                    $name = __($key = sprintf('validation.attributes.%s', static::name()));
+                    $name = __($key = \sprintf('validation.attributes.%s', static::name()));
 
                     return $name === $key ? str(static::name())->replace('_', ' ') : $name;
                 }),

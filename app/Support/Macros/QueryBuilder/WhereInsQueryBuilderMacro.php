@@ -45,7 +45,7 @@ class WhereInsQueryBuilderMacro
 
                 return array_reduce($columns, static function ($sortedValue, $column) use ($value) {
                     $sortedValue[$column] = $value[$column] ?? trigger_error(
-                        sprintf('The value of the column is not found in the array.: %s', $column),
+                        \sprintf('The value of the column is not found in the array.: %s', $column),
                         E_USER_ERROR
                     );
 
@@ -53,7 +53,7 @@ class WhereInsQueryBuilderMacro
                 }, []);
             }, $values);
 
-            $rawValue = sprintf('(%s)', implode(',', array_fill(0, \count($columns), '?')));
+            $rawValue = \sprintf('(%s)', implode(',', array_fill(0, \count($columns), '?')));
             $rawValues = implode(',', array_fill(0, \count($values), $rawValue));
 
             $raw = "($rawColumns) $operator ($rawValues)";

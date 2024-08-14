@@ -83,7 +83,7 @@ trait ConcreteEasyHttpRequestMethods
         }
 
         foreach ($contents as $key => $value) {
-            $key = sprintf('%s[%s]', $name, $key);
+            $key = \sprintf('%s[%s]', $name, $key);
 
             /** @noinspection SlowArrayOperationsInLoopInspection */
             $field = array_merge(

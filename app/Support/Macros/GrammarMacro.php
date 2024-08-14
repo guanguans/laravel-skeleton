@@ -33,12 +33,12 @@ class GrammarMacro
          * @return string
          */
         return fn (Blueprint $blueprint, Fluent $command, Connection $connection): string => match ($connection->getDriverName()) {
-            'mysql' => sprintf(
+            'mysql' => \sprintf(
                 'alter table %s comment = %s',
                 $this->wrapTable($blueprint),
                 "'".str_replace("'", "''", $command->comment)."'"
             ),
-            'pgsql' => sprintf(
+            'pgsql' => \sprintf(
                 'comment on table %s is %s',
                 $this->wrapTable($blueprint),
                 "'".str_replace("'", "''", $command->comment)."'"

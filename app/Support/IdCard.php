@@ -107,7 +107,7 @@ class IdCard
         $rule = '';
 
         foreach (['areacode', 'years', 'months', 'days', 'randoms', 'checkcode'] as $method) {
-            $method = sprintf('resolveMatchRuleFor%s', ucfirst($method));
+            $method = \sprintf('resolveMatchRuleFor%s', ucfirst($method));
             $rule .= self::$method();
         }
 

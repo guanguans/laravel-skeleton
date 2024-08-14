@@ -35,7 +35,7 @@ class StrMacro
 
             // see https://www.php.net/manual/en/function.json-decode.php
             if ($depth > ($jsonMaxDepth = 0x7FFFFFFF)) {
-                throw new \ValueError(sprintf('json_validate(): Argument #2 ($depth) must be less than %d', $jsonMaxDepth));
+                throw new \ValueError(\sprintf('json_validate(): Argument #2 ($depth) must be less than %d', $jsonMaxDepth));
             }
 
             json_decode($json, null, $depth, $flags);

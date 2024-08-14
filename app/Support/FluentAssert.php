@@ -447,14 +447,14 @@ class FluentAssert
                 };
 
                 return $parameter->isDefaultValueAvailable()
-                    ? sprintf('%s$%s = %s', $type, $parameter->getName(), $defaultValue($parameter->getDefaultValue()))
-                    : sprintf('%s$%s', $type, $parameter->getName());
+                    ? \sprintf('%s$%s = %s', $type, $parameter->getName(), $defaultValue($parameter->getDefaultValue()))
+                    : \sprintf('%s$%s', $type, $parameter->getName());
             }, $parameters);
 
-            return sprintf(' * @method self %s(%s)', $method->getName(), implode(', ', $arguments));
+            return \sprintf(' * @method self %s(%s)', $method->getName(), implode(', ', $arguments));
         }, $methods);
 
-        $docComment = sprintf(
+        $docComment = \sprintf(
             <<<'docComment'
                 /**
                 %s
