@@ -10,8 +10,10 @@ use App\Models\JWTUser;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Faker\Generator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Timebox;
 
 /**
  * @group Auth - 认证接口管理
@@ -89,15 +91,26 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function login(AuthRequest $request): \Illuminate\Http\JsonResponse
+    public function login(AuthRequest $request): JsonResponse
     {
         // $credentials = $request->validateStrictAll([
         //     'email' => 'required|email',
         //     'password' => 'required|string',
         // ]);
         $credentials = $request->validated();
+        // $token = auth()->attempt($credentials);
 
-        if (! $token = auth()->attempt($credentials)) {
+        /** @see https://securinglaravel.com/security-tip-timebox-for-timing-attacks */
+        $token = (new Timebox())->call(function (Timebox $timebox) use ($credentials) {
+            $token = auth()->attempt($credentials);
+            if ($token) {
+                $timebox->returnEarly();
+            }
+
+            return $token;
+        }, 100 * 1000);
+
+        if (!$token) {
             return $this->apiResponse->badRequest('邮箱或者密码错误');
         }
 
@@ -122,7 +135,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function me(Request $request): \Illuminate\Http\JsonResponse
+    public function me(Request $request): JsonResponse
     {
         return $this->apiResponse->success(UserResource::make($request->user()));
     }
@@ -161,7 +174,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function refresh(Request $request): \Illuminate\Http\JsonResponse
+    public function refresh(Request $request): JsonResponse
     {
         if ($request->user()->cant('update', $request->user())) {
             return $this->errorForbidden();
@@ -205,7 +218,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function index(AuthRequest $request): \Illuminate\Http\JsonResponse
+    public function index(AuthRequest $request): JsonResponse
     {
         $validatedParameters = $request->validated();
 
