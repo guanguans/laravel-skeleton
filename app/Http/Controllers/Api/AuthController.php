@@ -101,7 +101,7 @@ class AuthController extends Controller
         // $token = auth()->attempt($credentials);
 
         /** @see https://securinglaravel.com/security-tip-timebox-for-timing-attacks */
-        $token = (new Timebox)->call(function (Timebox $timebox) use ($credentials) {
+        $token = (new Timebox)->call(static function (Timebox $timebox) use ($credentials) {
             $token = auth()->attempt($credentials);
             if ($token) {
                 $timebox->returnEarly();
