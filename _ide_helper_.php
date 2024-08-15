@@ -22,3 +22,21 @@ namespace Illuminate\Support\Facades {
 
 namespace App\Support\Facades {
 }
+
+
+
+namespace Illuminate\Support {
+    /**
+     * @method $this inAppTimezone()
+     * @method $this inUserTimezone(?string $guard = null)
+     */
+    class Carbon {}
+}
+
+namespace Illuminate\Contracts\Routing {
+    /**
+     * @mixin  \Illuminate\Routing\UrlGenerator
+     */
+    class UrlGenerator {}
+}
+
