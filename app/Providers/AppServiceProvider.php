@@ -33,6 +33,7 @@ use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -183,7 +184,7 @@ class AppServiceProvider extends ServiceProvider
             $this->setLocales();
             Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
             DateFactory::useCallable(
-                static fn (mixed $result): mixed => $result instanceof \DateTime || $result instanceof \DateTimeImmutable
+                static fn (mixed $result): mixed => $result instanceof CarbonInterface
                     ? $result->setTimezone(config('app.timezone'))
                     : $result
             );
