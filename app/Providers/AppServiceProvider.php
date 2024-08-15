@@ -65,6 +65,7 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -181,6 +182,11 @@ class AppServiceProvider extends ServiceProvider
             Schema::defaultStringLength(191);
             $this->setLocales();
             Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
+            DateFactory::useCallable(
+                static fn (mixed $result): mixed => $result instanceof \DateTime || $result instanceof \DateTimeImmutable
+                    ? $result->setTimezone(config('app.timezone'))
+                    : $result
+            );
             // JsonResource::wrap('list');
             JsonResource::withoutWrapping();
             // Paginator::useBootstrap();
