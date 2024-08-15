@@ -173,6 +173,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->whenever(true, function (): void {
+            // ini_set('json.exceptions', '1'); // PHP 8.3
             $this->dependencyInjection();
             $this->bootAspects();
             $this->bootDecorator();
