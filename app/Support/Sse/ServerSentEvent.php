@@ -131,6 +131,16 @@ class ServerSentEvent implements \Stringable
 
     public function __invoke(): void
     {
+        // register_tick_function(function () {
+        //     if (connection_aborted()) {
+        //         throw new CloseServerSentEventException;
+        //     }
+        // });
+        //
+        // declare(ticks=1) {
+        //     // Event loop code.
+        // }
+
         // Event loop.
         for (;;) {
             try {
