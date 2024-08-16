@@ -22061,26 +22061,26 @@
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
-            "version": "v3.21.0",
+            "version": "v3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers.git",
-                "reference": "3d1bb75be0df6c6fba4487c75b9e425a2c1d27c9"
+                "reference": "8701394f0c7cd450ac4fa577d24589122c1d5d5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/3d1bb75be0df6c6fba4487c75b9e425a2c1d27c9",
-                "reference": "3d1bb75be0df6c6fba4487c75b9e425a2c1d27c9",
+                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/8701394f0c7cd450ac4fa577d24589122c1d5d5e",
+                "reference": "8701394f0c7cd450ac4fa577d24589122c1d5d5e",
                 "shasum": ""
             },
             "require": {
                 "ext-filter": "*",
                 "ext-tokenizer": "*",
-                "friendsofphp/php-cs-fixer": "^3.50",
+                "friendsofphp/php-cs-fixer": "^3.61.1",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.6.4 || ^10.0.14"
+                "phpunit/phpunit": "^9.6.4 || ^10.5.29"
             },
             "type": "library",
             "autoload": {
@@ -22101,9 +22101,9 @@
             "description": "A set of custom fixers for PHP CS Fixer",
             "support": {
                 "issues": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/issues",
-                "source": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/tree/v3.21.0"
+                "source": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/tree/v3.22.0"
             },
-            "time": "2024-02-24T08:53:34+00:00"
+            "time": "2024-08-16T20:44:35+00:00"
         },
         {
             "name": "lanin/laravel-api-debugger",
