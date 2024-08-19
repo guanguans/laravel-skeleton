@@ -55,6 +55,7 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Database\SQLiteConnection;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Foundation\Http\Events\RequestHandled;
@@ -236,6 +237,10 @@ class AppServiceProvider extends ServiceProvider
             Http::globalMiddleware(
                 Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG))
             );
+            if (DB::connection() instanceof SQLiteConnection) {
+                // Enable on delete cascade for sqlite connections
+                DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
+            }
 
             // Route::resourceVerbs([
             //     'create' => 'crear',
