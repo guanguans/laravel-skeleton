@@ -77,6 +77,16 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         );
     }
 
+    protected function prepareForValidation()
+    {
+        return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
+    }
+
+    protected function passedValidation()
+    {
+        return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
+    }
+
     protected function call(string $method, array $args = [], $defaultReturn = null)
     {
         $actionMethod = transform($method, function (string $method): string {
@@ -93,6 +103,8 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
                     'validator',
                     'withValidator',
                     'after',
+                    'prepareForValidation',
+                    'passedValidation',
                 ],
                 true
             ), InvalidArgumentException::class, "Can't call the method[$method].");
