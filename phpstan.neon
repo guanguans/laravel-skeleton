@@ -6,6 +6,10 @@ includes:
 #    - vendor/ergebnis/phpstan-rules/rules.neon
 #    - vendor/ekino/phpstan-banned-code/extension.neon
 #    - vendor/spaze/phpstan-disallowed-calls/extension.neon
+    - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon
+#    - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
+#    - vendor/spaze/phpstan-disallowed-calls/disallowed-insecure-calls.neon
+#    - vendor/spaze/phpstan-disallowed-calls/disallowed-loose-calls.neon
 
 parameters:
     level: 1
@@ -33,6 +37,16 @@ parameters:
 #        strictCalls: false
 #        switchConditionsMatchingType: false
 #        noVariableVariables: false
+    disallowedFunctionCalls:
+        -
+            function: 'env()'
+            message: 'use config() instead'
+        -
+            function: 'env_explode()'
+            message: 'use config() instead'
+        -
+            function: 'env_getcsv()'
+            message: 'use config() instead'
     ignoreErrors:
 #        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
         - "#^Access to an undefined property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
@@ -40,3 +54,6 @@ parameters:
         - "#^Method App\\\\Support\\\\Macros\\\\.*Macro\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
         - "#^Unsafe usage of new static\\(\\)\\.$#"
         - "#^Cannot access constant .* on Spatie\\\\Health\\\\Enums\\\\Status\\.$#"
+        -
+            message: "#^Calling env\\(\\) is forbidden, use config\\(\\) instead\\.$#"
+            path: app/Support/helpers.php
