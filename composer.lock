@@ -24041,16 +24041,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "dd3f5e205dea0cb58f89a79470a38e0dc9732876"
+                "reference": "c3a794ae6e011c8410e4de7c49ddab079ab846b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/dd3f5e205dea0cb58f89a79470a38e0dc9732876",
-                "reference": "dd3f5e205dea0cb58f89a79470a38e0dc9732876",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/c3a794ae6e011c8410e4de7c49ddab079ab846b0",
+                "reference": "c3a794ae6e011c8410e4de7c49ddab079ab846b0",
                 "shasum": ""
             },
             "require": {
@@ -24104,9 +24104,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/telescope/issues",
-                "source": "https://github.com/laravel/telescope/tree/v5.2.0"
+                "source": "https://github.com/laravel/telescope/tree/v5.2.1"
             },
-            "time": "2024-08-02T07:49:39+00:00"
+            "time": "2024-08-20T14:54:41+00:00"
         },
         {
             "name": "localheinz/diff",
