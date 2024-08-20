@@ -162,6 +162,7 @@
         "mortexa/laravel-arkitect": "^0.8",
         "nunomaduro/collision": "^8.4",
         "orangehill/iseed": "^3.0",
+        "pestphp/pest": "^2.35",
         "php-static-analysis/rector-rule": "^0.2",
         "phpstan/extension-installer": "^1.4",
         "phpunit/phpunit": "^10.5 || ^11.0",

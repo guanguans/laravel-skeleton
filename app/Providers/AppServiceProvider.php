@@ -276,12 +276,12 @@ class AppServiceProvider extends ServiceProvider
                 // }
             });
 
-            $this->app->booted(function (): void {
-                (fn () => $this->symfonyDispatcher->addListener(
-                    ConsoleEvents::COMMAND,
-                    new RunCommandInDebugModeListener
-                ))->call($this->app->make(Kernel::class));
-            });
+            // $this->app->booted(function (): void {
+            //     (fn () => $this->symfonyDispatcher->addListener(
+            //         ConsoleEvents::COMMAND,
+            //         new RunCommandInDebugModeListener
+            //     ))->call($this->app->make(Kernel::class));
+            // });
         });
 
         $this->whenever($this->app->runningInConsole(), static function (): void {
