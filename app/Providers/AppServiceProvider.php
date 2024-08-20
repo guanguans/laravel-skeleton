@@ -29,6 +29,7 @@ use App\Support\Macros\ResponseFactoryMacro;
 use App\Support\Macros\SchedulingEventMacro;
 use App\Support\Macros\StringableMacro;
 use App\Support\Macros\StrMacro;
+use App\Support\Macros\UploadedFileMacro;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -62,6 +63,7 @@ use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Arr;
@@ -353,18 +355,19 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerMacros(): void
     {
+        \App\Models\Model::mixin($this->app->make(ModelMacro::class));
         Blueprint::mixin($this->app->make(BlueprintMacro::class));
         Carbon::mixin($this->app->make(CarbonMacro::class));
         Collection::mixin($this->app->make(CollectionMacro::class));
         Command::mixin($this->app->make(CommandMacro::class));
         Event::mixin($this->app->make(SchedulingEventMacro::class));
         Grammar::mixin($this->app->make(GrammarMacro::class));
-        \App\Models\Model::mixin($this->app->make(ModelMacro::class));
         MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
         Request::mixin($this->app->make(RequestMacro::class));
         ResponseFactory::mixin($this->app->make(ResponseFactoryMacro::class));
         Str::mixin($this->app->make(StrMacro::class));
         Stringable::mixin($this->app->make(StringableMacro::class));
+        UploadedFile::mixin($this->app->make(UploadedFileMacro::class));
 
         collect(glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php')))
             ->each(function ($file): void {
