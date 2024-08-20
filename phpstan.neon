@@ -5,6 +5,7 @@ includes:
 #    - vendor/phpstan/phpstan-strict-rules/rules.neon
 #    - vendor/ergebnis/phpstan-rules/rules.neon
 #    - vendor/ekino/phpstan-banned-code/extension.neon
+#    - vendor/spaze/phpstan-disallowed-calls/extension.neon
 
 parameters:
     level: 1
@@ -38,3 +39,4 @@ parameters:
         - "#^Access to undefined constant Spatie\\\\Health\\\\Enums\\\\Status\\:\\:.*\\.$#"
         - "#^Method App\\\\Support\\\\Macros\\\\.*Macro\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
         - "#^Unsafe usage of new static\\(\\)\\.$#"
+        - "#^Cannot access constant .* on Spatie\\\\Health\\\\Enums\\\\Status\\.$#"
