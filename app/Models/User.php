@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
     }
+
+    public function isAdmin(): bool
+    {
+        return false; // todo implement
+    }
 }
