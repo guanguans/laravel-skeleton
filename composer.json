@@ -79,6 +79,7 @@
         "php-open-source-saver/jwt-auth": "^2.7",
         "php-static-analysis/attributes": "^0.2",
         "phpyh/lru-memoizer": "^0.2",
+        "pion/laravel-chunk-upload": "^1.5",
         "predis/predis": "^2.2",
         "protoqol/prequel": "^1.22",
         "pusher/pusher-php-server": "^7.2",
