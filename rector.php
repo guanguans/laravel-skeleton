@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 
 use App\Support\Rectors\RenameToPsrNameRector;
+use App\Support\Traits\Cacheable;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\Expression\InlineIfToExplicitIfRector;
@@ -39,6 +40,9 @@ use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
 use Rector\Renaming\Rector\String_\RenameStringRector;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
+use Rector\ValueObject\Visibility;
+use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
+use Rector\Visibility\ValueObject\ChangeMethodVisibility;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Set\LaravelSetList;
 
@@ -157,6 +161,9 @@ return RectorConfig::configure()
     ->withConfiguredRule(RenameStaticMethodRector::class, [
     ])
     ->withConfiguredRule(RenameStringRector::class, [
+    ])
+    ->withConfiguredRule(ChangeMethodVisibilityRector::class, [
+        new ChangeMethodVisibility(Cacheable::class, 'getCacheExpiresTime', Visibility::PRIVATE),
     ])
     ->withSkip([
         '**/__snapshots__/*',
