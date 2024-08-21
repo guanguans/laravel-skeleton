@@ -151,6 +151,7 @@ return [
     */
 
     'ignored_models' => [
+        \App\Models\Model::class,
     ],
 
     /*
