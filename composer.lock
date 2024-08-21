@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6779d79a1f134d8755edbc7ee3611b0c",
+    "content-hash": "a2ba48322960e0adaf5e40c6cedca56c",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -6300,56 +6300,6 @@
                 "source": "https://github.com/jiannei/laravel-response/tree/v6.0.0"
             },
             "time": "2024-03-13T06:39:16+00:00"
-        },
-        {
-            "name": "joetannenbaum/terminalia",
-            "version": "0.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joetannenbaum/terminalia.git",
-                "reference": "501f7abf668b48bc576932bf89627972f4d83858"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joetannenbaum/terminalia/zipball/501f7abf668b48bc576932bf89627972f4d83858",
-                "reference": "501f7abf668b48bc576932bf89627972f4d83858",
-                "shasum": ""
-            },
-            "require": {
-                "spatie/fork": "^1.1"
-            },
-            "require-dev": {
-                "tightenco/duster": "^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Terminalia\\Providers\\TerminaliaServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Terminalia\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Joe Tannenbaum",
-                    "email": "joe@joe.codes"
-                }
-            ],
-            "description": "Beautiful command line output for Laravel.",
-            "support": {
-                "issues": "https://github.com/joetannenbaum/terminalia/issues",
-                "source": "https://github.com/joetannenbaum/terminalia/tree/0.2.2"
-            },
-            "time": "2023-05-08T14:42:27+00:00"
         },
         {
             "name": "kelunik/certificate",
