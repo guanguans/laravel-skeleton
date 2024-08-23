@@ -10497,16 +10497,16 @@
         },
         {
             "name": "perryvandermeer/laravel-console-validator",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PerryvanderMeer/laravel-console-validator.git",
-                "reference": "274564cbce2fe197235762afd2b7a331d2c8102d"
+                "reference": "69125aaf5b89ff2f31e3b5592f7a52be43f3fd00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PerryvanderMeer/laravel-console-validator/zipball/274564cbce2fe197235762afd2b7a331d2c8102d",
-                "reference": "274564cbce2fe197235762afd2b7a331d2c8102d",
+                "url": "https://api.github.com/repos/PerryvanderMeer/laravel-console-validator/zipball/69125aaf5b89ff2f31e3b5592f7a52be43f3fd00",
+                "reference": "69125aaf5b89ff2f31e3b5592f7a52be43f3fd00",
                 "shasum": ""
             },
             "require": {
@@ -10522,6 +10522,13 @@
                 "pestphp/pest-plugin-type-coverage": "^2.8.2"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PerryvanderMeer\\LaravelConsoleValidator\\LaravelConsoleValidatorServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "PerryvanderMeer\\LaravelConsoleValidator\\": "src/"
@@ -10548,7 +10555,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PerryvanderMeer/laravel-console-validator/issues",
-                "source": "https://github.com/PerryvanderMeer/laravel-console-validator/tree/1.0.0"
+                "source": "https://github.com/PerryvanderMeer/laravel-console-validator/tree/1.1.0"
             },
             "funding": [
                 {
@@ -10556,7 +10563,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-25T11:14:12+00:00"
+            "time": "2024-08-07T12:48:12+00:00"
         },
         {
             "name": "php-collective/decimal-object",
