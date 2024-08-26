@@ -19,6 +19,6 @@ class ModelMacro
 {
     public static function getTableName(): \Closure
     {
-        return static fn (): string => (new static)->getTable();
+        return static fn (): string => (new static())->getTable();
     }
 }

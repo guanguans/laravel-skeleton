@@ -55,7 +55,7 @@ class BlueprintMacro
                 return $this->dropIndex($index);
             }
 
-            return new Fluent;
+            return new Fluent();
         };
     }
 }

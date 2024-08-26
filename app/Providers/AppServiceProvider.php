@@ -81,6 +81,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -204,6 +205,10 @@ class AppServiceProvider extends ServiceProvider
             // Gate::policy(User::class, UserPolicy::class);
             // Passport::enablePasswordGrant();
             Builder::defaultMorphKeyType('uuid');
+            // Vite::useWaterfallPrefetching(concurrency: 10);
+            // Vite::useAggressivePrefetching();
+            // Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
+            // Vite::useBuildDirectory('.build');
             $this->registerMacros();
             $this->extendValidator();
             $this->extendView();

@@ -15,7 +15,7 @@ require __DIR__.'/vendor/autoload.php';
 $argv = array_merge(
     $argv,
     array_map(
-        static fn ($f): string|array => str_replace(['app', '/', '.php'], ['App', '\\', ''], $f),
+        static fn ($f): array|string => str_replace(['app', '/', '.php'], ['App', '\\', ''], $f),
         glob('app/{,Support/ApiResponse}/Facades/*.php', GLOB_BRACE)
     )
 );

@@ -85,7 +85,7 @@ trait ControllerCrudable
             $this->validate($request, $this->modelClass::validateOn());
         }
 
-        $model = new $this->modelClass;
+        $model = new $this->modelClass();
         $model->fill($request->only($model->getFillable()));
         $model->save();
 

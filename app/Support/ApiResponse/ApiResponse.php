@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support\ApiResponse;
 
 use App\Support\ApiResponse\Concerns\ConcreteHttpStatusMethods;
@@ -95,7 +103,7 @@ class ApiResponse implements Contracts\ApiResponse
 
     /**
      * @param  int<100, 599>|int<10000, 59999>  $code
-     * @param  array<string, mixed>|null  $error
+     * @param  null|array<string, mixed>  $error
      */
     public function json(
         bool $status,

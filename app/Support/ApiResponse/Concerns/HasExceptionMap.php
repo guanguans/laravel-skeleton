@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support\ApiResponse\Concerns;
 
 use Illuminate\Support\Collection;
@@ -15,7 +23,7 @@ trait HasExceptionMap
 
     /**
      * @param  class-string|class-string<\Throwable>  $exception
-     * @param  \Throwable|array|(callable(\Throwable): \Throwable|array)  $mapper
+     * @param  array|(array|callable(\Throwable): \Throwable)|\Throwable  $mapper
      */
     public function prependExceptionMap(string $exception, mixed $mapper): self
     {
@@ -26,7 +34,7 @@ trait HasExceptionMap
 
     /**
      * @param  class-string|class-string<\Throwable>  $exception
-     * @param  \Throwable|array|(callable(\Throwable): \Throwable|array)  $mapper
+     * @param  array|(array|callable(\Throwable): \Throwable)|\Throwable  $mapper
      */
     public function putExceptionMap(string $exception, mixed $mapper): self
     {
@@ -59,7 +67,7 @@ trait HasExceptionMap
      *     headers: array,
      * }
      */
-    private function mapException(\Throwable $throwable): \Throwable|array
+    private function mapException(\Throwable $throwable): array|\Throwable
     {
         $mapper = $this->exceptionMap->first(
             static fn (mixed $mapper, string $exception): bool => $throwable instanceof $exception,

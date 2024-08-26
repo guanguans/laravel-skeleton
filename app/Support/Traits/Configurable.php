@@ -27,7 +27,7 @@ trait Configurable
 
     public function configureOptions(array $options, \Closure $closure): array
     {
-        $resolver = new OptionsResolver;
+        $resolver = new OptionsResolver();
 
         $closure($resolver);
 

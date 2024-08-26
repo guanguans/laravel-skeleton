@@ -43,7 +43,7 @@ class ResponseFactoryMacro
             int $chunk = 2048,
             ?Client $client = null
         ): StreamedResponse {
-            $client ??= new Client;
+            $client ??= new Client();
 
             return $this->streamDownload(static function () use ($client, $url, $chunk): void {
                 $body = $client->get($url, ['stream' => true])->getBody();

@@ -41,7 +41,7 @@ class HttpClient
 
     public static function get(string $url): static
     {
-        $http = new static;
+        $http = new static();
         $http->method = 'GET';
         $http->url = $url;
 
@@ -50,7 +50,7 @@ class HttpClient
 
     public static function post(string $url): static
     {
-        $http = new static;
+        $http = new static();
         $http->method = 'POST';
         $http->url = $url;
 
@@ -59,7 +59,7 @@ class HttpClient
 
     public static function patch(string $url): static
     {
-        $http = new static;
+        $http = new static();
         $http->method = 'PATCH';
         $http->url = $url;
 

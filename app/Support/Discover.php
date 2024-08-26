@@ -226,7 +226,7 @@ class Discover
      */
     public function all(): Collection
     {
-        $classes = new Collection;
+        $classes = new Collection();
 
         $filters = array_filter($this->filters);
 

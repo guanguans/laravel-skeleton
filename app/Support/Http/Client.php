@@ -227,7 +227,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         $this->config = $config + $defaults;
 
         if (! empty($config['cookies']) && true === $config['cookies']) {
-            $this->config['cookies'] = new CookieJar;
+            $this->config['cookies'] = new CookieJar();
         }
 
         // Add the default user-agent header.
@@ -461,7 +461,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
     {
         $handlerStack = new HandlerStack(static function (RequestInterface $request, array $options): ResponseInterface {
             try {
-                return (new StreamHandler)($request, $options);
+                return (new StreamHandler())($request, $options);
             } catch (\Throwable $e) {
                 throw new RequestException('An error was encountered while creating the response', $request, null, $e);
             }

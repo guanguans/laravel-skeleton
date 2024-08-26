@@ -23,8 +23,6 @@ namespace Illuminate\Support\Facades {
 namespace App\Support\Facades {
 }
 
-
-
 namespace Illuminate\Support {
     /**
      * @method $this inAppTimezone()
@@ -39,4 +37,3 @@ namespace Illuminate\Contracts\Routing {
      */
     class UrlGenerator {}
 }
-
