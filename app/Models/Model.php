@@ -7,6 +7,7 @@ use App\Models\Concerns\SerializeDate;
 use Awobaz\Compoships\Compoships;
 use Envant\Fireable\FireableAttributes;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\MassPrunable;
@@ -51,5 +52,37 @@ class Model extends \Illuminate\Database\Eloquent\Model
     public function toDotArray(): array
     {
         return Arr::dot($this->toArray());
+    }
+
+    /**
+     * @noinspection PhpRedundantMethodOverrideInspection
+     */
+    public function newCollection(array $models = []): Collection
+    {
+        return parent::newCollection($models);
+    }
+
+    /**
+     * @noinspection PhpRedundantMethodOverrideInspection
+     */
+    public function getRouteKeyName(): string
+    {
+        return parent::getRouteKeyName();
+    }
+
+    /**
+     * @noinspection PhpRedundantMethodOverrideInspection
+     */
+    public function is($model): bool
+    {
+        return parent::is($model);
+    }
+
+    /**
+     * @noinspection PhpRedundantMethodOverrideInspection
+     */
+    public function isNot($model): bool
+    {
+        return parent::isNot($model);
     }
 }
