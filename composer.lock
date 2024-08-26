@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2ba48322960e0adaf5e40c6cedca56c",
+    "content-hash": "960cacca86c58c76ffd71a229cfbf6fb",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -9040,16 +9040,16 @@
         },
         {
             "name": "neutrino_api/neutrino_api_client",
-            "version": "4.6.15",
+            "version": "4.6.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NeutrinoAPI/neutrino-api-client-libcurl.git",
-                "reference": "6beb187d4ccfeea9c4f90748b75d2ed89a0e4a4b"
+                "reference": "01dd43d503390d36596d8d9cdccd843f41a84684"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NeutrinoAPI/neutrino-api-client-libcurl/zipball/6beb187d4ccfeea9c4f90748b75d2ed89a0e4a4b",
-                "reference": "6beb187d4ccfeea9c4f90748b75d2ed89a0e4a4b",
+                "url": "https://api.github.com/repos/NeutrinoAPI/neutrino-api-client-libcurl/zipball/01dd43d503390d36596d8d9cdccd843f41a84684",
+                "reference": "01dd43d503390d36596d8d9cdccd843f41a84684",
                 "shasum": ""
             },
             "require": {
@@ -9085,9 +9085,9 @@
                 "telephony"
             ],
             "support": {
-                "source": "https://github.com/NeutrinoAPI/neutrino-api-client-libcurl/tree/v4.6.15"
+                "source": "https://github.com/NeutrinoAPI/neutrino-api-client-libcurl/tree/v4.6.16"
             },
-            "time": "2024-08-20T23:50:54+00:00"
+            "time": "2024-08-25T22:33:11+00:00"
         },
         {
             "name": "nextbuild/database-viewer",
@@ -23130,16 +23130,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.7.0",
+            "version": "15.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "7c3b4fa92e52ec066990cdc97924a744011a12aa"
+                "reference": "8988498af2e3fcf797ae4e2770ae2e9127abb83f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/7c3b4fa92e52ec066990cdc97924a744011a12aa",
-                "reference": "7c3b4fa92e52ec066990cdc97924a744011a12aa",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/8988498af2e3fcf797ae4e2770ae2e9127abb83f",
+                "reference": "8988498af2e3fcf797ae4e2770ae2e9127abb83f",
                 "shasum": ""
             },
             "require": {
@@ -23189,7 +23189,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2024-08-19T15:52:18+00:00"
+            "time": "2024-08-23T11:13:58+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -25504,32 +25504,32 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.15",
+            "version": "10.1.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "5da8b1728acd1e6ffdf2ff32ffbdfd04307f26ae"
+                "reference": "7e308268858ed6baedc8704a304727d20bc07c77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5da8b1728acd1e6ffdf2ff32ffbdfd04307f26ae",
-                "reference": "5da8b1728acd1e6ffdf2ff32ffbdfd04307f26ae",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/7e308268858ed6baedc8704a304727d20bc07c77",
+                "reference": "7e308268858ed6baedc8704a304727d20bc07c77",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "ext-xmlwriter": "*",
-                "nikic/php-parser": "^4.18 || ^5.0",
+                "nikic/php-parser": "^4.19.1 || ^5.1.0",
                 "php": ">=8.1",
-                "phpunit/php-file-iterator": "^4.0",
-                "phpunit/php-text-template": "^3.0",
-                "sebastian/code-unit-reverse-lookup": "^3.0",
-                "sebastian/complexity": "^3.0",
-                "sebastian/environment": "^6.0",
-                "sebastian/lines-of-code": "^2.0",
-                "sebastian/version": "^4.0",
-                "theseer/tokenizer": "^1.2.0"
+                "phpunit/php-file-iterator": "^4.1.0",
+                "phpunit/php-text-template": "^3.0.1",
+                "sebastian/code-unit-reverse-lookup": "^3.0.0",
+                "sebastian/complexity": "^3.2.0",
+                "sebastian/environment": "^6.1.0",
+                "sebastian/lines-of-code": "^2.0.2",
+                "sebastian/version": "^4.0.1",
+                "theseer/tokenizer": "^1.2.3"
             },
             "require-dev": {
                 "phpunit/phpunit": "^10.1"
@@ -25541,7 +25541,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "10.1-dev"
+                    "dev-main": "10.1.x-dev"
                 }
             },
             "autoload": {
@@ -25570,7 +25570,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.15"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.16"
             },
             "funding": [
                 {
@@ -25578,7 +25578,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-29T08:25:15+00:00"
+            "time": "2024-08-22T04:31:57+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -26597,12 +26597,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "8938260885863ec2dd9f2aaf9a79ba14e58a92f6"
+                "reference": "f8de2a81061775002d96aea80b12f2ab3c5eeb8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/8938260885863ec2dd9f2aaf9a79ba14e58a92f6",
-                "reference": "8938260885863ec2dd9f2aaf9a79ba14e58a92f6",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/f8de2a81061775002d96aea80b12f2ab3c5eeb8d",
+                "reference": "f8de2a81061775002d96aea80b12f2ab3c5eeb8d",
                 "shasum": ""
             },
             "conflict": {
@@ -26813,7 +26813,7 @@
                 "friendsoftypo3/mediace": ">=7.6.2,<7.6.5",
                 "friendsoftypo3/openid": ">=4.5,<4.5.31|>=4.7,<4.7.16|>=6,<6.0.11|>=6.1,<6.1.6",
                 "froala/wysiwyg-editor": "<3.2.7|>=4.0.1,<=4.1.3",
-                "froxlor/froxlor": "<2.1.9",
+                "froxlor/froxlor": "<=2.2.0.0-RC3",
                 "frozennode/administrator": "<=5.0.12",
                 "fuel/core": "<1.8.1",
                 "funadmin/funadmin": "<=3.2|>=3.3.2,<=3.3.3",
@@ -27406,7 +27406,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-08-19T21:04:39+00:00"
+            "time": "2024-08-23T19:04:38+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
