@@ -172,6 +172,7 @@
         "reliese/laravel": "^1.3",
         "roave/security-advisories": "dev-latest",
         "salahhusa9/laravel-updater": "^1.2",
+        "spatie/laravel-error-solutions": "^1.0",
         "spatie/laravel-ignition": "^2.8",
         "spaze/phpstan-disallowed-calls": "^3.4",
         "thedoctor0/laravel-factory-generator": "^1.4",

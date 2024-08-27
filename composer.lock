@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "960cacca86c58c76ffd71a229cfbf6fb",
+    "content-hash": "af9fa9145b57fa92190c1473c1e2452f",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -28875,6 +28875,87 @@
                 }
             ],
             "time": "2024-06-12T14:55:22+00:00"
+        },
+        {
+            "name": "spatie/laravel-error-solutions",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-error-solutions.git",
+                "reference": "63d9a82399e0966433fe58e4548e899f2189ea01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-error-solutions/zipball/63d9a82399e0966433fe58e4548e899f2189ea01",
+                "reference": "63d9a82399e0966433fe58e4548e899f2189ea01",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^11.13.0",
+                "php": "^8.2",
+                "spatie/error-solutions": "^1.0.4",
+                "spatie/laravel-package-tools": "^1.16.4"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9.7",
+                "laravel/pint": "^1.16.1",
+                "nunomaduro/collision": "^8.1.1",
+                "orchestra/testbench": "^9.1.2",
+                "pestphp/pest": "^2.34.8",
+                "pestphp/pest-plugin-arch": "^2.7",
+                "pestphp/pest-plugin-laravel": "^2.4",
+                "phpstan/extension-installer": "^1.4.1",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.4",
+                "spatie/laravel-ray": "^1.36.2",
+                "spatie/pest-plugin-snapshots": "^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelErrorSolutions\\LaravelErrorSolutionsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelErrorSolutions\\": "src/",
+                    "Spatie\\LaravelErrorSolutions\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Display solutions on the Laravel error page",
+            "homepage": "https://github.com/spatie/laravel-error-solutions",
+            "keywords": [
+                "dev",
+                "errors",
+                "flare",
+                "laravel",
+                "laravel-error-solutions",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-error-solutions/issues",
+                "source": "https://github.com/spatie/laravel-error-solutions/tree/1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-07-01T09:22:37+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
