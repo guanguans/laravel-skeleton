@@ -210,8 +210,8 @@ class AppServiceProvider extends ServiceProvider
             // Vite::useAggressivePrefetching();
             // Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
             // Vite::useBuildDirectory('.build');
-            TrimStrings::except(['secret']);
-            RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
+            // TrimStrings::except(['secret']);
+            // RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
             $this->registerMacros();
             $this->extendValidator();
             $this->extendView();

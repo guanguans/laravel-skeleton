@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\URL;
 
 /*
@@ -36,3 +37,5 @@ Artisan::command('deployer:notify {result}', function () {
 
     return $this::SUCCESS;
 })->purpose('Deployer notify report.');
+
+Schedule::command('model:prune')->daily()->withoutOverlapping();

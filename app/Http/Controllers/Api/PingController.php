@@ -46,6 +46,6 @@ class PingController extends Controller
             $this->errorBadRequest('This is a bad example.');
         }
 
-        return $this->ok('This is a successful example.');
+        return $this->apiResponse->ok('This is a successful example.');
     }
 }
