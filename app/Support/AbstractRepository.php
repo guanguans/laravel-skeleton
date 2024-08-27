@@ -136,7 +136,7 @@ abstract class AbstractRepository
      */
     public function getNew(array $attributes = []): Model
     {
-        $this->errors = new MessageBag();
+        $this->errors = new MessageBag;
 
         return $this->modelInstance->newInstance($attributes);
     }
@@ -189,7 +189,7 @@ abstract class AbstractRepository
             return $result;
         }
 
-        throw (new ModelNotFoundException())->setModel($this->model);
+        throw (new ModelNotFoundException)->setModel($this->model);
     }
 
     /**
@@ -528,7 +528,7 @@ abstract class AbstractRepository
     {
         throw_if(empty($this->model), \RuntimeException::class, 'The model class must be set on the repository.');
 
-        return $this->modelInstance = new $this->model();
+        return $this->modelInstance = new $this->model;
     }
 
     /**
@@ -588,7 +588,7 @@ abstract class AbstractRepository
     public function getErrors(): MessageBag
     {
         if (! $this->errors instanceof MessageBag) {
-            $this->errors = new MessageBag();
+            $this->errors = new MessageBag;
         }
 
         return $this->errors;

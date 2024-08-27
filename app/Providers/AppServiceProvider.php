@@ -37,6 +37,7 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Event;
@@ -209,6 +210,8 @@ class AppServiceProvider extends ServiceProvider
             // Vite::useAggressivePrefetching();
             // Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
             // Vite::useBuildDirectory('.build');
+            TrimStrings::except(['secret']);
+            RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
             $this->registerMacros();
             $this->extendValidator();
             $this->extendView();

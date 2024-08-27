@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace App\Support\Macros\QueryBuilder;
 
+use Illuminate\Database\Eloquent\Builder;
+
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Illuminate\Database\Query\Builder
@@ -21,7 +23,7 @@ class WhereStartsWithQueryBuilderMacro
 {
     public function whereStartsWith(): callable
     {
-        return function ($column, string $value, string $boolean = 'and', bool $not = false): \Illuminate\Database\Eloquent\Builder {
+        return function ($column, string $value, string $boolean = 'and', bool $not = false): Builder {
             $operator = $not ? 'not like' : 'like';
 
             return $this->where($column, $operator, "$value%", $boolean);

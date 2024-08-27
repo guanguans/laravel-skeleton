@@ -22,7 +22,7 @@ trait Resumeable
 {
     public static function __set_state(array $properties): static
     {
-        $object = new static();
+        $object = new static;
 
         foreach ($properties as $property => $value) {
             if (! property_exists($object, $property)) {

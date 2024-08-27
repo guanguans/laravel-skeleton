@@ -41,7 +41,7 @@ class GuzzlyClient extends Client
     {
         $handlerStack = new HandlerStack(static function (RequestInterface $request, array $options): PromiseInterface {
             try {
-                return new FulfilledPromise((new StreamHandler())($request, $options));
+                return new FulfilledPromise((new StreamHandler)($request, $options));
             } catch (\Throwable $e) {
                 return P\Create::rejectionFor(
                     new RequestException('An error was encountered while creating the response', $request, null, $e)
