@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a46d073a1aec5c6a6ed87464fc074c8c",
+    "content-hash": "1160d03d4ef487473b6c4679b1617af5",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -9091,16 +9091,16 @@
         },
         {
             "name": "nextbuild/database-viewer",
-            "version": "v0.9.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/next-build/database-viewer.git",
-                "reference": "4d866120a83fb1c104f0394e8a2ab2b03d65d666"
+                "reference": "4a5881bc0375e5234d3d962e345f196284e3fa2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/next-build/database-viewer/zipball/4d866120a83fb1c104f0394e8a2ab2b03d65d666",
-                "reference": "4d866120a83fb1c104f0394e8a2ab2b03d65d666",
+                "url": "https://api.github.com/repos/next-build/database-viewer/zipball/4a5881bc0375e5234d3d962e345f196284e3fa2f",
+                "reference": "4a5881bc0375e5234d3d962e345f196284e3fa2f",
                 "shasum": ""
             },
             "type": "library",
@@ -9139,9 +9139,9 @@
             ],
             "support": {
                 "issues": "https://github.com/next-build/database-viewer/issues",
-                "source": "https://github.com/next-build/database-viewer/tree/v0.9.0"
+                "source": "https://github.com/next-build/database-viewer/tree/v1.0.0"
             },
-            "time": "2024-08-27T17:58:36+00:00"
+            "time": "2024-08-28T09:49:14+00:00"
         },
         {
             "name": "nikic/php-parser",
