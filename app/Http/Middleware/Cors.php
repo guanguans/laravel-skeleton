@@ -11,25 +11,26 @@ use Symfony\Component\HttpFoundation\Response;
 class Cors
 {
     /**
-     * Handle an incoming request.
-     *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     * @param  array<string>|string  $allowedOriginPatterns
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function handle(Request $request, Closure $next, $allowedOriginPatterns = '*'): Response
+    public function handle(Request $request, Closure $next, string $allowedOriginPatterns = '*'): Response
     {
         return tap($next($request), static function () use ($allowedOriginPatterns): void {
             if (class_exists(RequestHandled::class) && app()->bound('events')) {
-                app()->make('events')->listen(RequestHandled::class,
+                app()->make('events')->listen(
+                    RequestHandled::class,
                     static function (RequestHandled $event) use ($allowedOriginPatterns): void {
-                        /** 仅设置 `Access-Control-Allow-Origin`, 其他由 @see \Fruitcake\Cors\HandleCors 处理. */
-                        Str::is(explode('|', $allowedOriginPatterns),
-                            $origin = $event->request->server('HTTP_ORIGIN', '')) // 跨域访问的时候才会存在 `HTTP_ORIGIN` 字段
+                        /**
+                         * 仅设置 `Access-Control-Allow-Origin`， 其他由 @see \Fruitcake\Cors\HandleCors 处理。
+                         * 跨域访问的时候才会存在 `HTTP_ORIGIN` 字段。
+                         */
+                        Str::is(explode('|', $allowedOriginPatterns), $origin = $event->request->server('HTTP_ORIGIN', ''))
                             ? $event->response->headers->set('Access-Control-Allow-Origin', $origin)
                             : $event->response->headers->remove('Access-Control-Allow-Origin');
-                    });
+                    }
+                );
             }
         });
     }
