@@ -62,7 +62,7 @@
         "laravel/tinker": "^2.9",
         "leventcz/laravel-top": "^1.1",
         "neutrino_api/neutrino_api_client": "^4.6",
-        "nextbuild/database-viewer": "^0.7",
+        "nextbuild/database-viewer": "^0.9",
         "not-empty/jwt-manager-php-lib": "^6.0 || ^7.0",
         "nunomaduro/laravel-console-task": "^1.9",
         "nunomaduro/termwind": "^2.0",
