@@ -5781,16 +5781,16 @@
         },
         {
             "name": "inspector-apm/inspector-laravel",
-            "version": "4.9.8",
+            "version": "4.9.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-laravel.git",
-                "reference": "a4bc030e63bee6f6fb4361b2e96fb1471b9989e2"
+                "reference": "34dc8ce9167bf77f3f7f0410bf566971d42355c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/a4bc030e63bee6f6fb4361b2e96fb1471b9989e2",
-                "reference": "a4bc030e63bee6f6fb4361b2e96fb1471b9989e2",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/34dc8ce9167bf77f3f7f0410bf566971d42355c1",
+                "reference": "34dc8ce9167bf77f3f7f0410bf566971d42355c1",
                 "shasum": ""
             },
             "require": {
@@ -5841,9 +5841,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-laravel/issues",
-                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.9.8"
+                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.9.9"
             },
-            "time": "2024-07-30T10:03:41+00:00"
+            "time": "2024-08-29T16:40:34+00:00"
         },
         {
             "name": "inspector-apm/inspector-php",
