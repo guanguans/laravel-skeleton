@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Support\ApiResponse\ApiResponse;
-use App\Support\Attributes\DependencyInjection;
+use App\Support\Attributes\Injection;
 use F9Web\ApiResponseHelpers;
 use Jiannei\Response\Laravel\Response;
 
@@ -15,7 +15,7 @@ class Controller extends \App\Http\Controllers\Controller
     // use JsonResponseTrait;
     use ApiResponseHelpers;
 
-    #[DependencyInjection(ApiResponse::class)]
+    #[Injection(ApiResponse::class)]
     protected ApiResponse $apiResponse;
 
     public function __call($name, $arguments)

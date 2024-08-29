@@ -98,7 +98,7 @@ return [
         'access_token' => env('PUSHBULLET_ACCESS_TOKEN'),
     ],
 
-    'dependency_injection' => [
+    'injection' => [
         'only' => [
             'App\*',
         ],

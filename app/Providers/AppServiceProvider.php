@@ -15,7 +15,7 @@ use App\Rules\Rule;
 use App\Support\ApiResponse\ApiResponseServiceProvider;
 use App\Support\Attributes\After;
 use App\Support\Attributes\Before;
-use App\Support\Attributes\DependencyInjection;
+use App\Support\Attributes\Injection;
 use App\Support\Discover;
 use App\Support\Macros\BlueprintMacro;
 use App\Support\Macros\CarbonMacro;
@@ -181,7 +181,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->whenever(true, function (): void {
             // ini_set('json.exceptions', '1'); // PHP 8.3
-            $this->dependencyInjection();
+            $this->injection();
             $this->bootAspects();
             $this->bootDecorator();
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
@@ -592,7 +592,7 @@ class AppServiceProvider extends ServiceProvider
      * @noinspection PhpExpressionResultUnusedInspection
      * @noinspection VirtualTypeCheckInspection
      */
-    private function dependencyInjection(): void
+    private function injection(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app): void {
             if (! \is_object($object)) {
@@ -601,8 +601,8 @@ class AppServiceProvider extends ServiceProvider
 
             $class = str($object::class);
             if (
-                ! $class->is(config('services.dependency_injection.only'))
-                || $class->is(config('services.dependency_injection.except'))
+                ! $class->is(config('services.injection.only'))
+                || $class->is(config('services.injection.except'))
             ) {
                 return;
             }
@@ -614,16 +614,16 @@ class AppServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                $attributes = $reflectionProperty->getAttributes(DependencyInjection::class);
+                $attributes = $reflectionProperty->getAttributes(Injection::class);
                 if ($attributes === []) {
                     continue;
                 }
 
                 $propertyType = value(static function () use ($attributes, $reflectionProperty, $reflectionObject): string {
-                    /** @var DependencyInjection $dependencyInjection */
-                    $dependencyInjection = $attributes[0]->newInstance();
-                    if ($dependencyInjection->propertyType) {
-                        return $dependencyInjection->propertyType;
+                    /** @var Injection $injection */
+                    $injection = $attributes[0]->newInstance();
+                    if ($injection->propertyType) {
+                        return $injection->propertyType;
                     }
 
                     $reflectionPropertyType = $reflectionProperty->getType();
@@ -633,7 +633,7 @@ class AppServiceProvider extends ServiceProvider
 
                     throw new \LogicException(\sprintf(
                         'Attribute [%s] of %s miss a argument, or %s must be a non-built-in named type.',
-                        DependencyInjection::class,
+                        Injection::class,
                         $property = "property [{$reflectionObject->getName()}::\${$reflectionProperty->getName()}]",
                         $property,
                     ));
