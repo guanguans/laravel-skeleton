@@ -70,13 +70,13 @@ $finder = Finder::create()
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
-return (new Config())
+return (new Config)
     ->setFinder($finder)
     ->setRiskyAllowed(true)
     ->setUsingCache(true)
     ->setCacheFile(__DIR__.'/.php-cs-fixer.cache')
     ->setParallelConfig(ParallelConfigFactory::detect())
-    ->registerCustomFixers(new PhpCsFixerCustomFixers\Fixers())
+    ->registerCustomFixers(new PhpCsFixerCustomFixers\Fixers)
     // ->registerCustomFixers(new PedroTroller\CS\Fixer\Fixers())
     ->setRules([
         '@PHP70Migration' => true,
@@ -358,6 +358,10 @@ return (new Config())
         'class_definition' => [
             'inline_constructor_arguments' => false,
             'space_before_parenthesis' => false,
+        ],
+        'new_with_parentheses' => [
+            'anonymous_class' => false,
+            'named_class' => false,
         ],
 
         // https://github.com/kubawerlos/php-cs-fixer-custom-fixers

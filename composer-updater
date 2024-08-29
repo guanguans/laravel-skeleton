@@ -28,7 +28,7 @@ use Symfony\Component\Process\Process;
 require __DIR__.'/vendor/autoload.php';
 
 /** @noinspection PhpUnhandledExceptionInspection */
-$status = (new SingleCommandApplication())
+$status = (new SingleCommandApplication)
     ->setName('Composer Updater')
     ->addOption('composer-json-path', null, InputOption::VALUE_OPTIONAL)
     ->addOption('highest-php-binary', null, InputOption::VALUE_REQUIRED)
@@ -88,7 +88,7 @@ $status = (new SingleCommandApplication())
                     '*@*',
                     // '*|*',
                 ], $exceptDependencyVersions);
-                $this->symfonyStyle = $symfonyStyle ?? new SymfonyStyle(new ArgvInput(), new ConsoleOutput());
+                $this->symfonyStyle = $symfonyStyle ?? new SymfonyStyle(new ArgvInput, new ConsoleOutput);
                 $this->differ = $differ ?? new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true));
             }
 
@@ -156,7 +156,7 @@ $status = (new SingleCommandApplication())
             {
                 $outdatedComposerPackages = $this->getOutdatedComposerPackages();
                 $decodedComposerJson = json_decode(file_get_contents($this->composerJsonPath), true);
-                (fn () => self::reload(null))->call(new InstalledVersions());
+                (fn () => self::reload(null))->call(new InstalledVersions);
 
                 foreach ($decodedComposerJson as $name => &$value) {
                     if (! in_array($name, ['require', 'require-dev'], true)) {
@@ -221,8 +221,8 @@ $status = (new SingleCommandApplication())
             {
                 return sprintf(
                     '%s %s',
-                    $phpBinary ?? (new PhpExecutableFinder())->find(),
-                    $composerBinary ?? (new ExecutableFinder())->find('composer')
+                    $phpBinary ?? (new PhpExecutableFinder)->find(),
+                    $composerBinary ?? (new ExecutableFinder)->find('composer')
                 );
             }
 
