@@ -9936,16 +9936,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.31.2",
+            "version": "14.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "7e63b9c68af945c09f1dbb50896ad9f135a0e324"
+                "reference": "355c1f62c06cf0d1c5edaaecd478baaf923267bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/7e63b9c68af945c09f1dbb50896ad9f135a0e324",
-                "reference": "7e63b9c68af945c09f1dbb50896ad9f135a0e324",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/355c1f62c06cf0d1c5edaaecd478baaf923267bb",
+                "reference": "355c1f62c06cf0d1c5edaaecd478baaf923267bb",
                 "shasum": ""
             },
             "require": {
@@ -10039,7 +10039,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-08-29T23:44:18+00:00"
+            "time": "2024-09-02T08:56:23+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
