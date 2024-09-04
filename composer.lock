@@ -7246,16 +7246,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v10.11.1",
+            "version": "v10.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "b31056d49ae0540a475947391d7ea8617d779aee"
+                "reference": "74f007d0f5b78f589014899094f7ddb4855b771d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/b31056d49ae0540a475947391d7ea8617d779aee",
-                "reference": "b31056d49ae0540a475947391d7ea8617d779aee",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/74f007d0f5b78f589014899094f7ddb4855b771d",
+                "reference": "74f007d0f5b78f589014899094f7ddb4855b771d",
                 "shasum": ""
             },
             "require": {
@@ -7320,7 +7320,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2024-08-06T15:13:57+00:00"
+            "time": "2024-09-03T15:30:25+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -9936,16 +9936,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.33.0",
+            "version": "14.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "355c1f62c06cf0d1c5edaaecd478baaf923267bb"
+                "reference": "3ccd82ffc1ad872c7b819579c047710c2e9b3e7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/355c1f62c06cf0d1c5edaaecd478baaf923267bb",
-                "reference": "355c1f62c06cf0d1c5edaaecd478baaf923267bb",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/3ccd82ffc1ad872c7b819579c047710c2e9b3e7f",
+                "reference": "3ccd82ffc1ad872c7b819579c047710c2e9b3e7f",
                 "shasum": ""
             },
             "require": {
@@ -10039,7 +10039,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-09-02T08:56:23+00:00"
+            "time": "2024-09-04T12:04:02+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
@@ -29694,6 +29694,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
