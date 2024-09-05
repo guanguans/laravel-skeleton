@@ -37,6 +37,8 @@ class ClearAllCommand extends Command
         $this->call('optimize:clear', $arguments);
         $this->call('clear-compiled', $arguments);
 
+        // \function_exists('opcache_invalidate') and opcache_invalidate(app()->getCachedConfigPath());
+
         $this->output->success('All cleared.');
         // $this->output->info('ℹ️ All cleared.');
         // $this->output->info('⏳ Please wait...');
