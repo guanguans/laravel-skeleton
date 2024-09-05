@@ -222,7 +222,7 @@ class AuthController extends Controller
     {
         $validatedParameters = $request->validated();
 
-        $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null);
+        $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null)->withQueryString();
 
         return $this->apiResponse->success(UserCollection::make($users));
     }
