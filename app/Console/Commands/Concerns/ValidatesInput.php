@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection MethodVisibilityInspection */
+
 namespace App\Console\Commands\Concerns;
 
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
@@ -11,86 +13,56 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * The trait to validate console commands input.
  *
+ * @see https://github.com/cerbero90/command-validator/blob/develop/src/ValidatesInput.php
+ *
  * @mixin \Illuminate\Console\Command
  */
 trait ValidatesInput
 {
-    /**
-     * The command input validator.
-     *
-     * @var \Illuminate\Contracts\Validation\Validator
-     */
-    protected $validator;
+    protected ValidatorContract $validator;
 
-    /**
-     * Retrieve the rules to validate data against
-     */
     abstract protected function rules(): array;
 
     /**
-     * Execute the console command.
-     *
-     * @return mixed
-     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($this->validator()->fails()) {
-            throw new InvalidArgumentException($this->formatErrors());
+            throw new InvalidArgumentException($this->errors());
         }
 
         return parent::execute($input, $output);
     }
 
-    /**
-     * Retrieve the command input validator
-     */
     protected function validator(): ValidatorContract
     {
-        if (isset($this->validator)) {
-            return $this->validator;
-        }
-
-        return $this->validator = Validator::make(
-            $this->getDataToValidate(),
+        return $this->validator ?? $this->validator = Validator::make(
+            $this->input(),
             $this->rules(),
             $this->messages(),
             $this->attributes()
         );
     }
 
-    /**
-     * Retrieve the data to validate
-     */
-    protected function getDataToValidate(): array
-    {
-        $data = array_merge($this->argument(), $this->option());
-
-        return array_filter($data, function ($value) {
-            return $value !== null;
-        });
-    }
-
-    /**
-     * Format the validation errors
-     */
-    protected function formatErrors(): string
+    protected function errors(): string
     {
         return implode(PHP_EOL, $this->validator()->errors()->all());
     }
 
-    /**
-     * Retrieve the custom error messages
-     */
+    protected function input(): array
+    {
+        return array_filter(
+            array_merge($this->argument(), $this->option()),
+            static fn ($value): bool => $value !== null
+        );
+    }
+
     protected function messages(): array
     {
         return [];
     }
 
-    /**
-     * Retrieve the custom attribute names for error messages
-     */
     protected function attributes(): array
     {
         return [];
