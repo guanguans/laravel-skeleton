@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a84dffe916e4f2c9052c94fbf43db008",
+    "content-hash": "2c70b8795b2eb80964ae038480744954",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -11233,6 +11233,79 @@
                 "source": "https://github.com/phpyh/lru-memoizer/tree/0.2.0"
             },
             "time": "2023-02-25T04:45:09+00:00"
+        },
+        {
+            "name": "pinkary-project/type-guard",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pinkary-project/type-guard.git",
+                "reference": "b5511bd8d5567fba9dffca49d9da2c6c00c39434"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pinkary-project/type-guard/zipball/b5511bd8d5567fba9dffca49d9da2c6c00c39434",
+                "reference": "b5511bd8d5567fba9dffca49d9da2c6c00c39434",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.15.2",
+                "pestphp/pest": "^3.0.0",
+                "pestphp/pest-plugin-type-coverage": "3.x-dev",
+                "phpstan/phpstan": "^1.10.67",
+                "rector/rector": "^1.0.4",
+                "symfony/var-dumper": "^6.4.0|^7.0.6"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Functions.php"
+                ],
+                "psr-4": {
+                    "PinkaryProject\\TypeGuard\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "Type Guard module is part of the Gloss PHP, and allows you to narrow down the type of an variable to a more specific type.",
+            "keywords": [
+                "assert",
+                "narrow",
+                "php",
+                "pinkary-project",
+                "type",
+                "type-guard"
+            ],
+            "support": {
+                "issues": "https://github.com/pinkary-project/type-guard/issues",
+                "source": "https://github.com/pinkary-project/type-guard/tree/v0.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/paypalme/enunomaduro",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/nunomaduro",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-04-28T10:20:25+00:00"
         },
         {
             "name": "pion/laravel-chunk-upload",
