@@ -74,6 +74,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
@@ -190,11 +191,13 @@ class AppServiceProvider extends ServiceProvider
             Schema::defaultStringLength(191);
             $this->setLocales();
             Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
+            Date::use(CarbonImmutable::class);
             DateFactory::useCallable(
                 static fn (mixed $result): mixed => $result instanceof CarbonInterface
                     ? $result->setTimezone(config('app.timezone'))
                     : $result
             );
+            Date::use(CarbonImmutable::class);
             // JsonResource::wrap('list');
             JsonResource::withoutWrapping();
             // Paginator::useBootstrap();
@@ -325,6 +328,8 @@ class AppServiceProvider extends ServiceProvider
             // Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
             //     info(sprintf('Attempted to lazy load [%s] on model [%s].', $relation, get_class($model)));
             // });
+
+            DB::prohibitDestructiveCommands();
         });
 
         /** @see \Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle */
