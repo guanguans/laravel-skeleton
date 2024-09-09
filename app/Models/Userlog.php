@@ -40,6 +40,8 @@ class Userlog extends Model
     /* -------------------------------------------------------------------------------------------- */
     public function user(): BelongsTo
     {
+        // return $this->hasMany(User::class)->inverse()->chaperone('post');
+
         return $this->belongsTo(User::class)->withTrashed();
     }
 }

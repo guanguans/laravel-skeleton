@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Concerns;
 
-use function Termwind\{render};
+use function Termwind\render;
 
 trait Outputifier
 {
