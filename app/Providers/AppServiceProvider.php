@@ -171,7 +171,7 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             request()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
-            Log::shareContext($this->getSharedLogContext());
+            Log::shareContext($this->sharedLogContext());
 
             // // With context for current channel and stack.
             // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
@@ -576,7 +576,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * @throws BindingResolutionException
      */
-    private function getSharedLogContext(): array
+    private function sharedLogContext(): array
     {
         return collect([
             'php-version' => PHP_VERSION,
@@ -584,8 +584,8 @@ class AppServiceProvider extends ServiceProvider
             'laravel-version' => $this->app->version(),
             'running-in-console' => $this->app->runningInConsole(),
             self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
-        ])->when(
-            ! $this->app->runningInConsole(),
+        ])->unless(
+            $this->app->runningInConsole(),
             static fn (Collection $context): Collection => $context->merge([
                 'user-id' => request()->user()?->id,
                 'url' => request()->url(),

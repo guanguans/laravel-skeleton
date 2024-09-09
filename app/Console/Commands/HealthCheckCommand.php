@@ -231,8 +231,8 @@ class HealthCheckCommand extends Command
             'xml',
             'zip',
         ])->reduce(
-            static fn (Collection $missingExtensions, $extension) => $missingExtensions->when(
-                ! \extension_loaded($extension),
+            static fn (Collection $missingExtensions, $extension) => $missingExtensions->unless(
+                \extension_loaded($extension),
                 static fn (Collection $missingExtensions) => $missingExtensions->add($extension)
             ),
             collect()
