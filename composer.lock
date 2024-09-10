@@ -4847,16 +4847,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.11.10",
+            "version": "2.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "62eca7a6e57dc6bebc146b857567c54af5b75256"
+                "reference": "6493bbad34ce315bbfd4116e3c8c4e3963f4b14e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/62eca7a6e57dc6bebc146b857567c54af5b75256",
-                "reference": "62eca7a6e57dc6bebc146b857567c54af5b75256",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/6493bbad34ce315bbfd4116e3c8c4e3963f4b14e",
+                "reference": "6493bbad34ce315bbfd4116e3c8c4e3963f4b14e",
                 "shasum": ""
             },
             "require": {
@@ -4884,15 +4884,15 @@
                 "maglnet/composer-require-checker": "^3.8 || ^4.0",
                 "mockery/mockery": "^1.6",
                 "pestphp/pest": "^1.23 || ^2.0",
-                "pestphp/pest-plugin-faker": "^1.0 || ^2.0",
+                "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "php-mock/php-mock-phpunit": "^2.10",
                 "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan": "^1.12",
                 "phpstan/phpstan-deprecation-rules": "^1.2",
                 "rector/rector": "^1.2",
                 "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
-                "vimeo/psalm": "^5.25"
+                "vimeo/psalm": "^5.26"
             },
             "suggest": {
                 "illuminate/collections": "Required to use the method [Response::collect()].",
@@ -5002,7 +5002,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-08-21T06:19:39+00:00"
+            "time": "2024-09-09T08:12:01+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -16871,20 +16871,20 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "type": "library",
             "extra": {
@@ -16931,7 +16931,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -16947,7 +16947,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-php81",
