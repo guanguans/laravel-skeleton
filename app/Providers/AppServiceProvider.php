@@ -66,6 +66,7 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\ResponseFactory;
@@ -200,6 +201,7 @@ class AppServiceProvider extends ServiceProvider
             Date::use(CarbonImmutable::class);
             // JsonResource::wrap('list');
             JsonResource::withoutWrapping();
+            ResourceCollection::withoutWrapping();
             // Paginator::useBootstrap();
             // Paginator::useBootstrapFour();
             // Paginator::useBootstrapFive();
