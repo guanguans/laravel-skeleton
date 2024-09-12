@@ -26589,16 +26589,16 @@
         },
         {
             "name": "reliese/laravel",
-            "version": "v1.3.3",
+            "version": "v1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reliese/laravel.git",
-                "reference": "0ea3640794d2563d4b37971db6f936b0cbad1487"
+                "reference": "75111e5d78cbe5380eec07f43b173b3729ae1a8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reliese/laravel/zipball/0ea3640794d2563d4b37971db6f936b0cbad1487",
-                "reference": "0ea3640794d2563d4b37971db6f936b0cbad1487",
+                "url": "https://api.github.com/repos/reliese/laravel/zipball/75111e5d78cbe5380eec07f43b173b3729ae1a8a",
+                "reference": "75111e5d78cbe5380eec07f43b173b3729ae1a8a",
                 "shasum": ""
             },
             "require": {
@@ -26648,7 +26648,7 @@
                 "issues": "https://github.com/reliese/laravel/issues",
                 "source": "https://github.com/reliese/laravel"
             },
-            "time": "2024-08-15T09:32:48+00:00"
+            "time": "2024-09-12T16:35:57+00:00"
         },
         {
             "name": "roave/security-advisories",
