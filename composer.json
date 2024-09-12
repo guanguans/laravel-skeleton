@@ -26,7 +26,7 @@
         "bilfeldt/laravel-http-client-logger": "^2.2",
         "bramus/monolog-colored-line-formatter": "^3.1",
         "calebporzio/sushi": "^2.5",
-        "cerbero/command-validator": "^2.5",
+        "cerbero/command-validator": "^3.0",
         "coduo/php-humanizer": "^5.0",
         "divineomega/password_exposed": "^3.2",
         "dragon-code/extended-routes": "^4.0",

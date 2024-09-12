@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c70b8795b2eb80964ae038480744954",
+    "content-hash": "02c73063924a89698a22815fc2f2ee75",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -1906,28 +1906,30 @@
         },
         {
             "name": "cerbero/command-validator",
-            "version": "2.5.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cerbero90/command-validator.git",
-                "reference": "ff64e574d907e7f938267c20f6bcd9d176a4a7c0"
+                "reference": "677686480f3ed4789f7fe0489c0bcc79d8a1ef1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cerbero90/command-validator/zipball/ff64e574d907e7f938267c20f6bcd9d176a4a7c0",
-                "reference": "ff64e574d907e7f938267c20f6bcd9d176a4a7c0",
+                "url": "https://api.github.com/repos/cerbero90/command-validator/zipball/677686480f3ed4789f7fe0489c0bcc79d8a1ef1b",
+                "reference": "677686480f3ed4789f7fe0489c0bcc79d8a1ef1b",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": ">=5.5",
-                "illuminate/support": ">=5.5",
-                "php": "^7.0||^8.0",
-                "symfony/console": ">=3.3.7"
+                "illuminate/contracts": ">=11.0",
+                "php": "^8.2",
+                "symfony/console": "^7.0"
             },
             "require-dev": {
-                "orchestra/testbench": ">=3.5",
-                "phpunit/phpunit": ">=6.0",
-                "squizlabs/php_codesniffer": "^3.0"
+                "orchestra/testbench": ">=9.0",
+                "pestphp/pest": "^3.0",
+                "phpstan/phpstan": "^1.9",
+                "squizlabs/php_codesniffer": "^3.0",
+                "tightenco/duster": "^2.0",
+                "uma/ocular": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -1952,21 +1954,29 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Validate Laravel console commands input.",
+            "description": "Laravel package to validate the input of console commands.",
             "homepage": "https://github.com/cerbero90/command-validator",
             "keywords": [
-                "cerbero",
-                "command-validator",
-                "commands",
+                "command-line",
                 "console",
-                "validation",
-                "validator"
+                "laravel",
+                "validation"
             ],
             "support": {
                 "issues": "https://github.com/cerbero90/command-validator/issues",
-                "source": "https://github.com/cerbero90/command-validator/tree/2.5.0"
+                "source": "https://github.com/cerbero90/command-validator/tree/3.0.0"
             },
-            "time": "2021-04-24T02:31:27+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/cerbero90",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/cerbero90",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2024-09-12T17:49:42+00:00"
         },
         {
             "name": "coduo/php-humanizer",
@@ -6664,16 +6674,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.23.0",
+            "version": "v11.23.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "576f6f5d63f68afb36dc062e728e717ddeb1a4aa"
+                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/576f6f5d63f68afb36dc062e728e717ddeb1a4aa",
-                "reference": "576f6f5d63f68afb36dc062e728e717ddeb1a4aa",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/08b46ae7be52f71688196f98556d21cb2ec799b6",
+                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6",
                 "shasum": ""
             },
             "require": {
@@ -6868,7 +6878,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-09-11T21:21:26+00:00"
+            "time": "2024-09-12T14:57:48+00:00"
         },
         {
             "name": "laravel/octane",
