@@ -6664,16 +6664,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.23.0",
+            "version": "v11.23.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "576f6f5d63f68afb36dc062e728e717ddeb1a4aa"
+                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/576f6f5d63f68afb36dc062e728e717ddeb1a4aa",
-                "reference": "576f6f5d63f68afb36dc062e728e717ddeb1a4aa",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/08b46ae7be52f71688196f98556d21cb2ec799b6",
+                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6",
                 "shasum": ""
             },
             "require": {
@@ -6868,7 +6868,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-09-11T21:21:26+00:00"
+            "time": "2024-09-12T14:57:48+00:00"
         },
         {
             "name": "laravel/octane",
@@ -26589,16 +26589,16 @@
         },
         {
             "name": "reliese/laravel",
-            "version": "v1.3.3",
+            "version": "v1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reliese/laravel.git",
-                "reference": "0ea3640794d2563d4b37971db6f936b0cbad1487"
+                "reference": "75111e5d78cbe5380eec07f43b173b3729ae1a8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reliese/laravel/zipball/0ea3640794d2563d4b37971db6f936b0cbad1487",
-                "reference": "0ea3640794d2563d4b37971db6f936b0cbad1487",
+                "url": "https://api.github.com/repos/reliese/laravel/zipball/75111e5d78cbe5380eec07f43b173b3729ae1a8a",
+                "reference": "75111e5d78cbe5380eec07f43b173b3729ae1a8a",
                 "shasum": ""
             },
             "require": {
@@ -26648,7 +26648,7 @@
                 "issues": "https://github.com/reliese/laravel/issues",
                 "source": "https://github.com/reliese/laravel"
             },
-            "time": "2024-08-15T09:32:48+00:00"
+            "time": "2024-09-12T16:35:57+00:00"
         },
         {
             "name": "roave/security-advisories",
