@@ -6674,16 +6674,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.23.4",
+            "version": "v11.23.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6"
+                "reference": "16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/08b46ae7be52f71688196f98556d21cb2ec799b6",
-                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453",
+                "reference": "16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453",
                 "shasum": ""
             },
             "require": {
@@ -6878,7 +6878,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-09-12T14:57:48+00:00"
+            "time": "2024-09-13T13:36:30+00:00"
         },
         {
             "name": "laravel/octane",
@@ -18373,16 +18373,16 @@
         },
         {
             "name": "tpetry/laravel-mysql-explain",
-            "version": "1.3.1",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tpetry/laravel-mysql-explain.git",
-                "reference": "45fda00b5fb1ec6f65531cf44f15072fb17fc85a"
+                "reference": "1a00db4ca8e42ef24775ae87e718ac257733497c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tpetry/laravel-mysql-explain/zipball/45fda00b5fb1ec6f65531cf44f15072fb17fc85a",
-                "reference": "45fda00b5fb1ec6f65531cf44f15072fb17fc85a",
+                "url": "https://api.github.com/repos/tpetry/laravel-mysql-explain/zipball/1a00db4ca8e42ef24775ae87e718ac257733497c",
+                "reference": "1a00db4ca8e42ef24775ae87e718ac257733497c",
                 "shasum": ""
             },
             "require": {
@@ -18436,9 +18436,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tpetry/laravel-mysql-explain/issues",
-                "source": "https://github.com/tpetry/laravel-mysql-explain/tree/1.3.1"
+                "source": "https://github.com/tpetry/laravel-mysql-explain/tree/1.3.2"
             },
-            "time": "2024-07-13T10:09:23+00:00"
+            "time": "2024-09-13T11:00:20+00:00"
         },
         {
             "name": "twbs/bootstrap-icons",
