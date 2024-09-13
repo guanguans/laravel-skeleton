@@ -54,3 +54,10 @@ Route::get('acting-as/{id}', static function ($id) {
 
     return redirect('dashboard');
 });
+
+/**
+ * @see https://www.harrisrafto.eu/enhancing-concurrency-control-with-laravels-session-blocking
+ */
+Route::post('/order', static function (): void {
+    // Order processing logic
+})->block($lockSeconds = 5, $waitSeconds = 10);
