@@ -6674,16 +6674,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.23.4",
+            "version": "v11.23.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6"
+                "reference": "16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/08b46ae7be52f71688196f98556d21cb2ec799b6",
-                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453",
+                "reference": "16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453",
                 "shasum": ""
             },
             "require": {
@@ -6878,7 +6878,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-09-12T14:57:48+00:00"
+            "time": "2024-09-13T13:36:30+00:00"
         },
         {
             "name": "laravel/octane",
@@ -18993,16 +18993,16 @@
         },
         {
             "name": "wendelladriel/laravel-lift",
-            "version": "v0.14.1",
+            "version": "v0.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-lift.git",
-                "reference": "1c3b292d88640f57a57ae221557fe271b7a059c1"
+                "reference": "508158cab93c6cb38a690b88fbe52caefd472f94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/1c3b292d88640f57a57ae221557fe271b7a059c1",
-                "reference": "1c3b292d88640f57a57ae221557fe271b7a059c1",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/508158cab93c6cb38a690b88fbe52caefd472f94",
+                "reference": "508158cab93c6cb38a690b88fbe52caefd472f94",
                 "shasum": ""
             },
             "require": {
@@ -19065,7 +19065,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-28T16:16:12+00:00"
+            "time": "2024-09-13T11:58:28+00:00"
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
