@@ -17,11 +17,11 @@ class MigrateFromMysqlToSqlite extends Command
 
     public function handle(): void
     {
-        $this->info('Migrating from Mysql to SQLite...');
+        $this->components->info('Migrating from Mysql to SQLite...');
 
-        File::exists(storage_path('database.sqlite'))
-            ? File::delete(storage_path('database.sqlite'))
-            : null;
+        if (File::exists(storage_path('database.sqlite'))) {
+            File::delete(storage_path('database.sqlite'));
+        }
 
         File::put(storage_path('database.sqlite'), '');
 
@@ -37,7 +37,7 @@ class MigrateFromMysqlToSqlite extends Command
         $env = str_replace(['DB_CONNECTION=mysql', 'DB_DATABASE=vito'], ['DB_CONNECTION=sqlite', ''], $env);
         File::put(base_path('.env'), $env);
 
-        $this->info('Migrated from Mysql to SQLite');
+        $this->components->info('Migrated from Mysql to SQLite');
     }
 
     /**
@@ -45,7 +45,7 @@ class MigrateFromMysqlToSqlite extends Command
      */
     private function migrateModel(string $model): void
     {
-        $this->info("Migrating model: {$model}");
+        $this->components->info("Migrating model: {$model}");
 
         config(['database.default' => 'mysql']);
 
@@ -55,6 +55,6 @@ class MigrateFromMysqlToSqlite extends Command
             DB::connection('sqlite')->table($row->getTable())->insert($row->getAttributes());
         }
 
-        $this->info("Migrated model: {$model}");
+        $this->components->info("Migrated model: {$model}");
     }
 }
