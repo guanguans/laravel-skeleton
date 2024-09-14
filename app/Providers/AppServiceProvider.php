@@ -36,6 +36,7 @@ use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use Carbon\CarbonInterval;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
@@ -87,6 +88,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\Lottery;
 use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -327,6 +329,17 @@ class AppServiceProvider extends ServiceProvider
                     ),
                 );
             });
+
+            /**
+             * 此设置将仅报告 1% 的耗时超过 2 秒的查询，从而帮助您监控性能而不会使日志记录系统不堪重负。
+             *
+             * @see https://www.harrisrafto.eu/harnessing-controlled-randomness-with-laravels-lottery/
+             */
+            // DB::whenQueryingForLongerThan(
+            //     CarbonInterval::seconds(2),
+            //     Lottery::odds(1, 100)->winner(static fn () => report('Querying > 2 seconds.')),
+            // );
+
             // Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
             //     info(sprintf('Attempted to lazy load [%s] on model [%s].', $relation, get_class($model)));
             // });
