@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use Illuminate\Support\Sleep;
 use Psr\Http\Message\RequestInterface;
@@ -22,20 +23,21 @@ class TencentAdsRateLimiterMiddleware
 
     private readonly int $deferMicroseconds;
 
-    public function __construct(int $deferMilliseconds = 1000)
+    public function __construct(int $deferMilliseconds = 3000)
     {
         $this->deferMicroseconds = $deferMilliseconds * 1000;
     }
 
-    public static function apply(TencentAds $tencentAds, int $deferMilliseconds = 1000): TencentAds
+    public static function apply(TencentAds $tencentAds, int $deferMilliseconds = 3000): TencentAds
     {
         $httpOptions = $tencentAds->getHttpOptions();
         $handlerStack = $httpOptions['handler'] ?? HandlerStack::create();
+        $handlerStack->setHandler(new CurlHandler);
 
         try {
-            (fn (string $name) => $this->findByName($name))->call($handlerStack, $name = self::name());
+            (fn (string $name) => $this->findByName($name))->call($handlerStack, self::name());
         } catch (\InvalidArgumentException) {
-            $handlerStack->push(new self($deferMilliseconds), $name);
+            $handlerStack->push(new self($deferMilliseconds), self::name());
             $httpOptions = ['handler' => $handlerStack] + $httpOptions;
         }
 
@@ -60,15 +62,7 @@ class TencentAdsRateLimiterMiddleware
                 static function (ResponseInterface $response) use ($fingerprint): ResponseInterface {
                     if ($response->hasHeader($name = 'X-RateLimit-Remaining')) {
                         [, $remain] = explode(',', $response->getHeaderLine($name), 2);
-
-                        if (! isset(self::$remains[$fingerprint])) {
-                            self::$remains[$fingerprint] = (int) $remain;
-                        }
-
-                        if (self::$remains[$fingerprint] > (int) $remain) {
-                            self::$remains[$fingerprint] = (int) $remain;
-                        }
-
+                        self::$remains[$fingerprint] = (int) $remain;
                         // dump(self::$remains);
                     }
 

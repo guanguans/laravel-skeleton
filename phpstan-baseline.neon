@@ -61,6 +61,16 @@ parameters:
 			path: app/Support/PushDeer.php
 
 		-
+			message: "#^Method App\\\\Support\\\\TencentAdsRateLimiterMiddleware\\:\\:apply\\(\\) has invalid return type TencentAds\\\\V3\\\\TencentAds\\.$#"
+			count: 1
+			path: app/Support/TencentAdsRateLimiterMiddleware.php
+
+		-
+			message: "#^Parameter \\$tencentAds of method App\\\\Support\\\\TencentAdsRateLimiterMiddleware\\:\\:apply\\(\\) has invalid type TencentAds\\\\V3\\\\TencentAds\\.$#"
+			count: 1
+			path: app/Support/TencentAdsRateLimiterMiddleware.php
+
+		-
 			message: "#^Accessing self\\:\\:\\$handler outside of class scope\\.$#"
 			count: 2
 			path: app/Support/helpers.php
