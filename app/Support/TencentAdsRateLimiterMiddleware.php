@@ -27,7 +27,7 @@ class TencentAdsRateLimiterMiddleware
         $this->deferMicroseconds = $deferMilliseconds * 1000;
     }
 
-    public static function applyToTencentAds(TencentAds $tencentAds, int $deferMilliseconds = 1000): TencentAds
+    public static function apply(TencentAds $tencentAds, int $deferMilliseconds = 1000): TencentAds
     {
         $httpOptions = $tencentAds->getHttpOptions();
         $handlerStack = $httpOptions['handler'] ?? HandlerStack::create();
@@ -50,7 +50,7 @@ class TencentAdsRateLimiterMiddleware
     public function __invoke(callable $handler): \Closure
     {
         return function (RequestInterface $request, array $options) use ($handler) {
-            $fingerprint = $this->fingerprintFor($request);
+            $fingerprint = rtrim("{$request->getMethod()}|{$request->getUri()->getPath()}", '/');
 
             if (isset(self::$remains[$fingerprint]) && self::$remains[$fingerprint] <= 0) {
                 Sleep::usleep($this->deferMicroseconds);
@@ -61,7 +61,14 @@ class TencentAdsRateLimiterMiddleware
                     if ($response->hasHeader($name = 'X-RateLimit-Remaining')) {
                         [, $remain] = explode(',', $response->getHeaderLine($name), 2);
 
-                        self::$remains[$fingerprint] = (int) $remain;
+                        if (! isset(self::$remains[$fingerprint])) {
+                            self::$remains[$fingerprint] = (int) $remain;
+                        }
+
+                        if (self::$remains[$fingerprint] > (int) $remain) {
+                            self::$remains[$fingerprint] = (int) $remain;
+                        }
+
                         // dump(self::$remains);
                     }
 
@@ -69,10 +76,5 @@ class TencentAdsRateLimiterMiddleware
                 }
             );
         };
-    }
-
-    private function fingerprintFor(RequestInterface $request): string
-    {
-        return rtrim("{$request->getMethod()}|{$request->getUri()->getPath()}", '/');
     }
 }
