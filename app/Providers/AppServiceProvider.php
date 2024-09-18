@@ -77,6 +77,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -101,6 +102,7 @@ use Illuminate\View\View;
 use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 use Imanghafoori\Decorator\Facade\Decorator;
 use Jiannei\Response\Laravel\Providers\LaravelServiceProvider;
+use Laravel\Octane\Events\RequestReceived;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -372,6 +374,20 @@ class AppServiceProvider extends ServiceProvider
             // DB::listen(static function ($query) {
             //     logger(Str::replaceArray('?', $query->bindings, $query->sql));
             // });
+        });
+
+        $this->when($this->isOctaneHttpServer(), function (): void {
+            $this->app->get('events')->listen(RequestReceived::class, static function (): void {
+                $uuid = Str::uuid()->toString();
+
+                if (config('octane.server') === 'roadrunner') {
+                    Cache::put($uuid, microtime(true));
+
+                    return;
+                }
+
+                Cache::store('octane')->put($uuid, microtime(true));
+            });
         });
     }
 
@@ -781,5 +797,15 @@ class AppServiceProvider extends ServiceProvider
             'UserRepository@find',
             DecoratorFactory::cache(static fn ($madId): string => 'mad_user_key_'.$madId, 10)
         );
+    }
+
+    /**
+     * Determine if server is running Octane
+     *
+     * @noinspection GlobalVariableUsageInspection
+     */
+    private function isOctaneHttpServer(): bool
+    {
+        return isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
     }
 }
