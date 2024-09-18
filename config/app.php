@@ -163,6 +163,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Illuminate\Concurrency\ConcurrencyServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -357,7 +357,7 @@ class AppServiceProvider extends ServiceProvider
             // Carbon::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
             // CarbonImmutable::setTestNow();
             // CarbonImmutable::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
-            // ParallelTesting::setUpTestDatabase(function (string $database, int $token) {
+            // ParallelTesting::setUpTestDatabase(static function (string $database, int $token) {
             //     Artisan::call('db:seed');
             // });
         });
