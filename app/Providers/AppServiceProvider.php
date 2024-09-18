@@ -75,6 +75,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -82,6 +83,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\ParallelTesting;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -355,6 +357,9 @@ class AppServiceProvider extends ServiceProvider
             // Carbon::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
             // CarbonImmutable::setTestNow();
             // CarbonImmutable::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
+            // ParallelTesting::setUpTestDatabase(function (string $database, int $token) {
+            //     Artisan::call('db:seed');
+            // });
         });
 
         $this->unless($this->app->isProduction(), static function (): void {
