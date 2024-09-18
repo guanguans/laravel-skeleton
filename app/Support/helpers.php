@@ -19,11 +19,11 @@ use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\VarDumper\VarDumper;
 
-if (! function_exists('defer')) {
+if (! function_exists('defers')) {
     /**
      * @see https://github.com/php-defer/php-defer
      */
-    function defer(?SplStack &$context, callable $callback): void
+    function defers(?SplStack &$context, callable $callback): void
     {
         $context ??= new class extends SplStack
         {
