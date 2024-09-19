@@ -103,6 +103,7 @@ use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 use Imanghafoori\Decorator\Facade\Decorator;
 use Jiannei\Response\Laravel\Providers\LaravelServiceProvider;
 use Laravel\Octane\Events\RequestReceived;
+use Laravel\Octane\Events\RequestTerminated;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -388,6 +389,8 @@ class AppServiceProvider extends ServiceProvider
 
                 Cache::store('octane')->put($uuid, microtime(true));
             });
+
+            $this->app->get('events')->listen(RequestTerminated::class, static function (): void {});
         });
     }
 
@@ -806,6 +809,6 @@ class AppServiceProvider extends ServiceProvider
      */
     private function isOctaneHttpServer(): bool
     {
-        return isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
+        return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
     }
 }
