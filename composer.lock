@@ -13470,16 +13470,16 @@
         },
         {
             "name": "spatie/laravel-csp",
-            "version": "2.10.0",
+            "version": "2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-csp.git",
-                "reference": "116caa57ece29969aebb5fd64e6f5500169218c6"
+                "reference": "ea7d2859a2617954df869e816b0f740400184ae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-csp/zipball/116caa57ece29969aebb5fd64e6f5500169218c6",
-                "reference": "116caa57ece29969aebb5fd64e6f5500169218c6",
+                "url": "https://api.github.com/repos/spatie/laravel-csp/zipball/ea7d2859a2617954df869e816b0f740400184ae0",
+                "reference": "ea7d2859a2617954df869e816b0f740400184ae0",
                 "shasum": ""
             },
             "require": {
@@ -13540,7 +13540,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-csp/tree/2.10.0"
+                "source": "https://github.com/spatie/laravel-csp/tree/2.10.1"
             },
             "funding": [
                 {
@@ -13548,7 +13548,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-06-04T11:27:13+00:00"
+            "time": "2024-09-20T13:39:37+00:00"
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
