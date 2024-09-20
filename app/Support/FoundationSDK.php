@@ -39,7 +39,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
- * @property $stubCallbacks
+ * @property \Illuminate\Support\Collection $stubCallbacks
  */
 abstract class FoundationSDK
 {
@@ -48,14 +48,17 @@ abstract class FoundationSDK
     use Macroable;
     use Tappable;
 
-    protected static ?string $userAgent = null;
-
     protected array $config;
 
     protected Factory $http;
 
     protected PendingRequest $pendingRequest;
 
+    protected ?string $userAgent = null;
+
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     public function __construct(array $config)
     {
         $this->config = array_replace_recursive($this->defaultConfig(), $this->validateConfig($config));
@@ -94,31 +97,8 @@ abstract class FoundationSDK
     {
         return tap(clone $this->pendingRequest, function (PendingRequest $request): void {
             /** @phpstan-ignore-next-line  */
-            $request->stub(fn (): Collection => $this->stubCallbacks->call($this->http));
+            $request->stub((fn (): Collection => $this->stubCallbacks)->call($this->http));
         });
-    }
-
-    /**
-     * ```php
-     * protected function validateConfig(array $config): array
-     * {
-     *     return $this->validate($config, [
-     *         'http_options' => 'array',
-     *     ]);
-     * }
-     * ```
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    abstract protected function validateConfig(array $config): array;
-
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws BindingResolutionException
-     */
-    protected function validate(array $data, array $rules, array $messages = [], array $customAttributes = []): array
-    {
-        return app(\Illuminate\Validation\Factory::class)->make($data, $rules, $messages, $customAttributes)->validate();
     }
 
     protected function buildPendingRequest(array $config): PendingRequest
@@ -135,12 +115,67 @@ abstract class FoundationSDK
                 $config['retry']['throw']
             )
             ->withOptions($config['http_options'])
+            ->withMiddleware($this->buildLoggerMiddleware($config['logger']))
             ->withMiddleware(Middleware::mapRequest(
                 static fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString('m'))
             ))
             ->withMiddleware(Middleware::mapResponse(
                 static fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString('m'))
             ));
+    }
+
+    protected function defaultConfig(): array
+    {
+        return [
+            'base_url' => '',
+            'logger' => null,
+            'http_options' => [
+                // RequestOptions::CONNECT_TIMEOUT => 10,
+                // RequestOptions::TIMEOUT => 30,
+            ],
+            'retry' => [
+                'times' => 1,
+                'sleep' => 1000,
+                'when' => static fn (\Throwable $e): bool => $e instanceof ConnectException,
+                'throw' => true,
+            ],
+        ];
+    }
+
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function validateConfig(array $config): array
+    {
+        return $this->validate($config, $this->rules(), $this->messages(), $this->attributes());
+    }
+
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws BindingResolutionException
+     */
+    protected function validate(array $data, array $rules, array $messages = [], array $customAttributes = []): array
+    {
+        return app(\Illuminate\Validation\Factory::class)->make($data, $rules, $messages, $customAttributes)->validate();
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'http_options' => 'array',
+            'retry' => 'array',
+            'base_url' => 'string',
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [];
+    }
+
+    protected function attributes(): array
+    {
+        return [];
     }
 
     protected function buildLoggerMiddleware(
@@ -163,29 +198,12 @@ abstract class FoundationSDK
 
     protected function userAgent(): string
     {
-        return static::$userAgent ?? static::$userAgent = implode(' ', [
+        return $this->userAgent ?? $this->userAgent = implode(' ', [
             str(config('app.name'))->append('/'.config('app.version'))->rtrim('/'),
-            \sprintf('guzzle/%s', InstalledVersions::getPrettyVersion('guzzlehttp/guzzle')),
-            \sprintf('curl/%s', curl_version()['version']),
-            \sprintf('PHP/%s', PHP_VERSION),
-            \sprintf('%s/%s', PHP_OS, php_uname('r')),
+            // \sprintf('guzzle/%s', InstalledVersions::getPrettyVersion('guzzlehttp/guzzle')),
+            // \sprintf('curl/%s', curl_version()['version']),
+            // \sprintf('PHP/%s', PHP_VERSION),
+            // \sprintf('%s/%s', PHP_OS, php_uname('r')),
         ]);
-    }
-
-    protected function defaultConfig(): array
-    {
-        return [
-            'http_options' => [
-                // RequestOptions::CONNECT_TIMEOUT => 10,
-                // RequestOptions::TIMEOUT => 30,
-            ],
-            'retry' => [
-                'times' => 1,
-                'sleep' => 1000,
-                'when' => static fn (\Throwable $e): bool => $e instanceof ConnectException,
-                'throw' => true,
-            ],
-            'base_url' => '',
-        ];
     }
 }
