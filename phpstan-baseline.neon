@@ -16,6 +16,11 @@ parameters:
 			path: app/Notifications/SlowQueryLoggedNotification.php
 
 		-
+			message: "#^Call to an undefined static method Orchid\\\\Support\\\\Color\\:\\:BASIC\\(\\)\\.$#"
+			count: 2
+			path: app/Orchid/Screens/User/UserProfileScreen.php
+
+		-
 			message: "#^Static call to instance method Imanghafoori\\\\Decorator\\\\Facade\\\\Decorator\\:\\:decorate\\(\\)\\.$#"
 			count: 1
 			path: app/Providers/AppServiceProvider.php

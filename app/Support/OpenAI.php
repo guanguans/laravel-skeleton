@@ -242,7 +242,7 @@ final class OpenAI extends FoundationSDK
      */
     public function models(): Response
     {
-        return $this->cloneDefaultPendingRequest()->get('models')->throw();
+        return $this->clonePendingRequest()->get('models')->throw();
     }
 
     public function completionsByCurl(array $data, ?callable $writer = null): Collection
@@ -336,9 +336,9 @@ final class OpenAI extends FoundationSDK
         );
     }
 
-    protected function buildDefaultPendingRequest(array $config): PendingRequest
+    protected function buildPendingRequest(array $config): PendingRequest
     {
-        return parent::buildDefaultPendingRequest($config)
+        return parent::buildPendingRequest($config)
             ->baseUrl($config['base_url'])
             ->asJson()
             ->withToken($config['api_key'])
@@ -360,7 +360,7 @@ final class OpenAI extends FoundationSDK
     private function completion(string $url, array $parameters, array $rules, ?callable $writer = null, array $messages = [], array $customAttributes = []): Response
     {
         $response = $this
-            ->cloneDefaultPendingRequest()
+            ->clonePendingRequest()
             ->when(
                 ($parameters['stream'] ?? false) && \is_callable($writer),
                 static function (PendingRequest $pendingRequest) use ($writer, &$rowData): PendingRequest {
