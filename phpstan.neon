@@ -11,6 +11,15 @@ includes:
 #    - vendor/spaze/phpstan-disallowed-calls/disallowed-insecure-calls.neon
 #    - vendor/spaze/phpstan-disallowed-calls/disallowed-loose-calls.neon
 
+#    - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
+#    - vendor/symplify/phpstan-rules/config/naming-rules.neon
+#    - vendor/symplify/phpstan-rules/config/regex-rules.neon
+#    - vendor/symplify/phpstan-rules/config/static-rules.neon
+#    - vendor/symplify/phpstan-rules/config/rector-rules.neon
+#    - vendor/symplify/phpstan-rules/config/configurable-rules.neon
+
+#    - vendor/yamadashy/phpstan-friendly-formatter/extension.neon
+
 parameters:
     level: 1
     paths:
@@ -19,6 +28,7 @@ parameters:
         - ./*/*/FileToBeExcluded.php
         - app/Support/Http/
     tmpDir: build/phpstan
+    errorFormat: friendly
 #    checkOctaneCompatibility: true
 #    checkModelProperties: true
 #    checkMissingIterableValueType: true
