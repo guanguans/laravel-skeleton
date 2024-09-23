@@ -96,7 +96,6 @@ abstract class FoundationSDK
     public function clonePendingRequest(): PendingRequest
     {
         return tap(clone $this->pendingRequest, function (PendingRequest $request): void {
-            /** @phpstan-ignore-next-line  */
             $request->stub((fn (): Collection => $this->stubCallbacks)->call($this->http));
         });
     }
