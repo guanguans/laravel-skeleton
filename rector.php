@@ -12,6 +12,10 @@ declare(strict_types=1);
 
 use App\Support\Rectors\RenameToPsrNameRector;
 use App\Support\Traits\Cacheable;
+use Rector\Carbon\Rector\FuncCall\DateFuncCallToCarbonRector;
+use Rector\Carbon\Rector\FuncCall\TimeFuncCallToCarbonRector;
+use Rector\Carbon\Rector\MethodCall\DateTimeMethodCallToCarbonRector;
+use Rector\Carbon\Rector\New_\DateTimeInstanceToCarbonRector;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodeQuality\Rector\Expression\InlineIfToExplicitIfRector;
@@ -79,6 +83,10 @@ return RectorConfig::configure()
     ->withRules([
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
+        DateFuncCallToCarbonRector::class,
+        DateTimeInstanceToCarbonRector::class,
+        DateTimeMethodCallToCarbonRector::class,
+        TimeFuncCallToCarbonRector::class,
     ])
     ->withRules([
         // // RectorLaravel\Rector\Assign\CallOnAppArrayAccessToStandaloneAssignRector::class,

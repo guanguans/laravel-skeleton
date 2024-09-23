@@ -31,7 +31,7 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('daily-%s', date('Y-m-d')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('daily-%s', \Carbon\Carbon::now()->format('Y-m-d')), $dirname);
     }
 
     public function userAppendOutputToWeekly(): callable
@@ -39,7 +39,7 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('weekly-%s', date('Y-W')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('weekly-%s', \Carbon\Carbon::now()->format('Y-W')), $dirname);
     }
 
     public function userAppendOutputToMonthly(): callable
@@ -47,7 +47,7 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('monthly-%s', date('Y-m')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('monthly-%s', \Carbon\Carbon::now()->format('Y-m')), $dirname);
     }
 
     public function userAppendOutputToQuarterly(): callable
@@ -57,7 +57,7 @@ class SchedulingEventMacro
             ?string $dirname = null
         ): Event => $this->userAppendOutputTo(
             $filename,
-            \sprintf('quarterly-%s-%s', date('Y'), now()->quarter),
+            \sprintf('quarterly-%s-%s', \Carbon\Carbon::now()->format('Y'), now()->quarter),
             $dirname
         );
     }
@@ -67,7 +67,7 @@ class SchedulingEventMacro
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('yearly-%s', date('Y')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('yearly-%s', \Carbon\Carbon::now()->format('Y')), $dirname);
     }
 
     public function userAppendOutputTo(): callable

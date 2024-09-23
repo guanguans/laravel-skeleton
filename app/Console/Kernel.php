@@ -82,7 +82,7 @@ class Kernel extends ConsoleKernel
             ->classBasename()
             ->snake('-')
             ->replaceLast('-command', '')
-            ->finish(date('-Y-m-d'))
+            ->finish(\Carbon\Carbon::now()->format('-Y-m-d'))
             ->append('.log')
             ->prepend(storage_path('logs/commands/'))
             ->toString();
