@@ -38,12 +38,16 @@ use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
 use Rector\Renaming\Rector\String_\RenameStringRector;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
+use Rector\Transform\Rector\ClassMethod\ReturnTypeWillChangeRector;
+use Rector\Transform\Rector\FileWithoutNamespace\RectorConfigBuilderRector;
+use Rector\Transform\ValueObject\ClassMethodReference;
 use Rector\ValueObject\Visibility;
 use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
 use Rector\Visibility\ValueObject\ChangeMethodVisibility;
@@ -81,8 +85,11 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_ELOQUENT_MAGIC_METHOD_TO_QUERY_BUILDER,
     ])
     ->withRules([
+        AddOverrideAttributeToOverriddenMethodsRector::class,
+        RectorConfigBuilderRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
+
         DateFuncCallToCarbonRector::class,
         DateTimeInstanceToCarbonRector::class,
         DateTimeMethodCallToCarbonRector::class,
@@ -140,6 +147,9 @@ return RectorConfig::configure()
         // RectorLaravel\Rector\StaticCall\MinutesToSecondsInCacheRector::class,
         RectorLaravel\Rector\StaticCall\Redirect301ToPermanentRedirectRector::class,
         // // RectorLaravel\Rector\StaticCall\ReplaceAssertTimesSendWithAssertSentTimesRector::class,
+    ])
+    ->withConfiguredRule(ReturnTypeWillChangeRector::class, [
+        new ClassMethodReference(ArrayAccess::class, 'offsetGet'),
     ])
     ->withRules([
         // // RectorLaravel\Rector\ClassMethod\AddArgumentDefaultValueRector::class,
