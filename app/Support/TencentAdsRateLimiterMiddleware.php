@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support;
 
 use GuzzleHttp\Handler\CurlHandler;
@@ -16,9 +24,7 @@ use TencentAds\V3\TencentAds;
  */
 class TencentAdsRateLimiterMiddleware
 {
-    /**
-     * @var array<string, int>
-     */
+    /** @var array<string, int> */
     private static array $remains = [];
 
     private readonly int $deferMicroseconds;
@@ -26,27 +32,6 @@ class TencentAdsRateLimiterMiddleware
     public function __construct(int $deferMilliseconds = 3000)
     {
         $this->deferMicroseconds = $deferMilliseconds * 1000;
-    }
-
-    public static function apply(TencentAds $tencentAds, int $deferMilliseconds = 3000): TencentAds
-    {
-        $httpOptions = $tencentAds->getHttpOptions();
-        $handlerStack = $httpOptions['handler'] ?? HandlerStack::create();
-        $handlerStack->setHandler(new CurlHandler);
-
-        try {
-            (fn (string $name) => $this->findByName($name))->call($handlerStack, self::name());
-        } catch (\InvalidArgumentException) {
-            $handlerStack->push(new self($deferMilliseconds), self::name());
-            $httpOptions = ['handler' => $handlerStack] + $httpOptions;
-        }
-
-        return $tencentAds->setHttpOptions($httpOptions);
-    }
-
-    public static function name(): string
-    {
-        return self::class;
     }
 
     public function __invoke(callable $handler): \Closure
@@ -70,5 +55,26 @@ class TencentAdsRateLimiterMiddleware
                 }
             );
         };
+    }
+
+    public static function apply(TencentAds $tencentAds, int $deferMilliseconds = 3000): TencentAds
+    {
+        $httpOptions = $tencentAds->getHttpOptions();
+        $handlerStack = $httpOptions['handler'] ?? HandlerStack::create();
+        $handlerStack->setHandler(new CurlHandler);
+
+        try {
+            (fn (string $name) => $this->findByName($name))->call($handlerStack, self::name());
+        } catch (\InvalidArgumentException) {
+            $handlerStack->push(new self($deferMilliseconds), self::name());
+            $httpOptions = ['handler' => $handlerStack] + $httpOptions;
+        }
+
+        return $tencentAds->setHttpOptions($httpOptions);
+    }
+
+    public static function name(): string
+    {
+        return self::class;
     }
 }

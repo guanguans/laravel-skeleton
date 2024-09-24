@@ -30,7 +30,7 @@ class PendingRequestMacro
     public function withLogger(): \Closure
     {
         return function (
-            LoggerInterface|string|null $logger = null,
+            null|LoggerInterface|string $logger = null,
             ?MessageFormatter $formatter = null,
             string $logLevel = 'info'
         ): PendingRequest {
