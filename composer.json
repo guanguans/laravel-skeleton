@@ -142,6 +142,7 @@
         "dragon-code/benchmark": "^3.0",
         "dragon-code/pretty-routes": "^3.4",
         "driftingly/rector-laravel": "^1.2",
+        "enlightn/enlightn": "^2.10",
         "ergebnis/composer-normalize": "^2.43",
         "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.64",
