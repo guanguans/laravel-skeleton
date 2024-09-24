@@ -19951,16 +19951,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.10.1",
+            "version": "1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "156ac1e0386a40454e71f1282f3b10bed6e34a12"
+                "reference": "827614c5674ed4b11b5109cf64240764d5edb8b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/156ac1e0386a40454e71f1282f3b10bed6e34a12",
-                "reference": "156ac1e0386a40454e71f1282f3b10bed6e34a12",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/827614c5674ed4b11b5109cf64240764d5edb8b4",
+                "reference": "827614c5674ed4b11b5109cf64240764d5edb8b4",
                 "shasum": ""
             },
             "require": {
@@ -19989,6 +19989,7 @@
                 "phpstan/phpstan-phpunit": "^1.3",
                 "phpstan/phpstan-strict-rules": "^1.5",
                 "phpunit/phpunit": "^10.5",
+                "rector/rector": "^1.1",
                 "roxblnfk/unpoly": "^1.8.1",
                 "vimeo/psalm": "^5.11",
                 "wayofdev/cs-fixer-config": "^1.4"
@@ -20040,7 +20041,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.10.1"
+                "source": "https://github.com/buggregator/trap/tree/1.10.2"
             },
             "funding": [
                 {
@@ -20056,7 +20057,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-06-23T14:24:42+00:00"
+            "time": "2024-09-24T17:20:17+00:00"
         },
         {
             "name": "captainhook/captainhook",
