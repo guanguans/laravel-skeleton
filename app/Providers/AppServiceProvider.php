@@ -464,6 +464,13 @@ class AppServiceProvider extends ServiceProvider
      */
     private function extendView(): void
     {
+        /** @see https://www.harrisrafto.eu/simplifying-view-logic-with-laravel-blades-service-injection */
+        // resources/views/dashboard.blade.php
+        // @inject('metrics', 'App\Services\DashboardMetricsService');
+
+        /** @see https://www.harrisrafto.eu/enhancing-frontend-interactivity-with-laravel-blade-fragments */
+        // return view('dashboard', ['users' => $users])->fragment('user-list');
+
         // 合成器
         $this->app->make('view')->composer('*', RequestComposer::class);
         $this->app->make('view')->composer('*', function (View $view): void {
