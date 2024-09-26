@@ -607,7 +607,7 @@ if (! function_exists('catch_query_log')) {
             ->then(static function ($callback) use ($parameter) {
                 app()->call($callback, $parameter);
 
-                return DB::getQueryLog();
+                return DB::getRawQueryLog();
             });
     }
 }
