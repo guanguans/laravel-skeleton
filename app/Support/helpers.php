@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,19 @@ use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\VarDumper\VarDumper;
+
+if (! function_exists('raw_sql_for')) {
+    /**
+     * @see \Illuminate\Database\Connection::getRawQueryLog()
+     */
+    function raw_sql_for(QueryExecuted $queryExecuted): string
+    {
+        return $queryExecuted->connection->getQueryGrammar()->substituteBindingsIntoRawSql(
+            $queryExecuted->sql,
+            $queryExecuted->connection->prepareBindings($queryExecuted->bindings)
+        );
+    }
+}
 
 if (! function_exists('defers')) {
     /**
