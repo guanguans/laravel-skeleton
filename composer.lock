@@ -10128,16 +10128,16 @@
         },
         {
             "name": "overtrue/laravel-query-logger",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/laravel-query-logger.git",
-                "reference": "b9fb545cf2a47c96a16f666f7ab519d128b3496f"
+                "reference": "5fdcbf00a0463341e56839c58d67ce142315c07f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-query-logger/zipball/b9fb545cf2a47c96a16f666f7ab519d128b3496f",
-                "reference": "b9fb545cf2a47c96a16f666f7ab519d128b3496f",
+                "url": "https://api.github.com/repos/overtrue/laravel-query-logger/zipball/5fdcbf00a0463341e56839c58d67ce142315c07f",
+                "reference": "5fdcbf00a0463341e56839c58d67ce142315c07f",
                 "shasum": ""
             },
             "require": {
@@ -10181,7 +10181,7 @@
             "description": "A dev tool to log all queries for laravel application.",
             "support": {
                 "issues": "https://github.com/overtrue/laravel-query-logger/issues",
-                "source": "https://github.com/overtrue/laravel-query-logger/tree/3.2.0"
+                "source": "https://github.com/overtrue/laravel-query-logger/tree/3.3.0"
             },
             "funding": [
                 {
@@ -10189,7 +10189,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-23T20:09:45+00:00"
+            "time": "2024-09-26T08:29:21+00:00"
         },
         {
             "name": "overtrue/laravel-uploader",
