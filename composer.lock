@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a4da5b7d519a21afeca386c633fe883",
+    "content-hash": "9a571d4e2943709cae6f2c7243dba40f",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -20246,6 +20246,82 @@
                 }
             ],
             "time": "2023-11-30T18:10:18+00:00"
+        },
+        {
+            "name": "chrisdicarlo/laravel-config-checker",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chrisdicarlo/laravel-config-checker.git",
+                "reference": "06295204a66c3f36f6a145221e265ab16dc7c43d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chrisdicarlo/laravel-config-checker/zipball/06295204a66c3f36f6a145221e265ab16dc7c43d",
+                "reference": "06295204a66c3f36f6a145221e265ab16dc7c43d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0||^11.0",
+                "php": "^8.1||^8.2||^8.3",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.14",
+                "nunomaduro/collision": "^8.1.1||^7.10.0",
+                "orchestra/testbench": "^9.0.0||^8.22.0",
+                "pestphp/pest": "^2.34",
+                "pestphp/pest-plugin-arch": "^2.7",
+                "pestphp/pest-plugin-laravel": "^2.3",
+                "spatie/laravel-ray": "^1.35"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ChrisDiCarlo\\LaravelConfigChecker\\LaravelConfigCheckerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ChrisDiCarlo\\LaravelConfigChecker\\": "src/",
+                    "ChrisDiCarlo\\LaravelConfigChecker\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Di Carlo",
+                    "email": "chris@dicarlosystems.ca",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package to check that configuration key references actually exist in your config files.",
+            "homepage": "https://github.com/chrisdicarlo/laravel-config-checker",
+            "keywords": [
+                "Chris Di Carlo",
+                "laravel",
+                "laravel-config-checker"
+            ],
+            "support": {
+                "issues": "https://github.com/chrisdicarlo/laravel-config-checker/issues",
+                "source": "https://github.com/chrisdicarlo/laravel-config-checker/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/chrisdicarlo",
+                    "type": "buy_me_a_coffee"
+                },
+                {
+                    "url": "https://github.com/Chris Di Carlo",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-19T05:25:55+00:00"
         },
         {
             "name": "clue/ndjson-react",

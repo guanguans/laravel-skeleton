@@ -137,6 +137,7 @@
         "buggregator/trap": "^1.10",
         "captainhook/captainhook": "^5.23",
         "captainhook/hook-installer": "^1.0",
+        "chrisdicarlo/laravel-config-checker": "^1.0",
         "coduo/php-matcher": "^6.0",
         "deployer/deployer": "^7.4",
         "dragon-code/benchmark": "^3.0",
