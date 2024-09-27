@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a571d4e2943709cae6f2c7243dba40f",
+    "content-hash": "0587e0c756a1d623108597d1882a0e60",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -18446,23 +18446,24 @@
         },
         {
             "name": "tpetry/laravel-mysql-explain",
-            "version": "1.3.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tpetry/laravel-mysql-explain.git",
-                "reference": "1a00db4ca8e42ef24775ae87e718ac257733497c"
+                "reference": "c61074d3ddc212395c8354e51448f848cb6ae9a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tpetry/laravel-mysql-explain/zipball/1a00db4ca8e42ef24775ae87e718ac257733497c",
-                "reference": "1a00db4ca8e42ef24775ae87e718ac257733497c",
+                "url": "https://api.github.com/repos/tpetry/laravel-mysql-explain/zipball/c61074d3ddc212395c8354e51448f848cb6ae9a7",
+                "reference": "c61074d3ddc212395c8354e51448f848cb6ae9a7",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo": "*",
-                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "guzzlehttp/guzzle": "^7.0",
                 "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "php": "^8.0"
+                "php": "^8.0",
+                "tpetry/php-mysql-explain": "^1.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.6",
@@ -18477,16 +18478,16 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Tpetry\\MysqlExplain\\MysqlExplainServiceProvider"
+                        "Tpetry\\LaravelMysqlExplain\\MysqlExplainServiceProvider"
                     ],
                     "aliases": {
-                        "MysqlExplain": "Tpetry\\MysqlExplain\\Facades\\MysqlExplain"
+                        "MysqlExplain": "Tpetry\\LaravelMysqlExplain\\Facades\\MysqlExplain"
                     }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Tpetry\\MysqlExplain\\": "src/"
+                    "Tpetry\\LaravelMysqlExplain\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -18509,9 +18510,68 @@
             ],
             "support": {
                 "issues": "https://github.com/tpetry/laravel-mysql-explain/issues",
-                "source": "https://github.com/tpetry/laravel-mysql-explain/tree/1.3.2"
+                "source": "https://github.com/tpetry/laravel-mysql-explain/tree/2.0.0"
             },
-            "time": "2024-09-13T11:00:20+00:00"
+            "time": "2024-09-27T14:40:43+00:00"
+        },
+        {
+            "name": "tpetry/php-mysql-explain",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tpetry/php-mysql-explain.git",
+                "reference": "954a6ad75cb3764b9d6c20f27c482950500af17f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tpetry/php-mysql-explain/zipball/954a6ad75cb3764b9d6c20f27c482950500af17f",
+                "reference": "954a6ad75cb3764b9d6c20f27c482950500af17f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "nyholm/psr7": "^1.6.0",
+                "php": ">=7.4",
+                "psr/http-client": "^1.0",
+                "symfony/polyfill-php81": "^1.22"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.64.0",
+                "mockery/mockery": "^1.6.12",
+                "pestphp/pest": "^1.23.1|^2.0|^3.0",
+                "php-http/mock-client": "^1.6",
+                "phpstan/phpstan": "^1.12.4",
+                "spatie/ray": "^1.41",
+                "vlucas/phpdotenv": "^5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tpetry\\PhpMysqlExplain\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "tpetry",
+                    "email": "github@tpetry.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Visual MySQL EXPLAIN plans for PHP",
+            "homepage": "https://github.com/tpetry/php-mysql-explain",
+            "keywords": [
+                "explain",
+                "mysql"
+            ],
+            "support": {
+                "issues": "https://github.com/tpetry/php-mysql-explain/issues",
+                "source": "https://github.com/tpetry/php-mysql-explain/tree/1.0.0"
+            },
+            "time": "2024-09-26T11:17:02+00:00"
         },
         {
             "name": "twbs/bootstrap-icons",

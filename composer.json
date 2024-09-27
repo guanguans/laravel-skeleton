@@ -119,7 +119,7 @@
         "tabuna/breadcrumbs": "^4.1",
         "teamtnt/laravel-scout-tntsearch-driver": "^14.0",
         "timacdonald/has-parameters": "^1.5",
-        "tpetry/laravel-mysql-explain": "^1.3",
+        "tpetry/laravel-mysql-explain": "^2.0",
         "unicodeveloper/laravel-password": "^1.0",
         "valorin/pwned-validator": "^1.3",
         "vectorface/whip": "^0.5",
