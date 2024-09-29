@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Support\Facades\Validator as ValidatorFactory;
+use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Validator;
 
 abstract class AggregateRule extends Rule
@@ -16,18 +17,10 @@ abstract class AggregateRule extends Rule
 
     public function passes(string $attribute, mixed $value): bool
     {
-        return $this->validator($attribute, $value)->passes();
+        return $this->makeAggregateValidator($attribute, $value)->passes();
     }
 
-    /** @noinspection MissingParentCallInspection */
-    public function validate(string $attribute, mixed $value, \Closure $fail): void
-    {
-        if (! $this->passes($attribute, $value)) {
-            $fail($this->validator($attribute, $value)->errors()->first($attribute))->translate();
-        }
-    }
-
-    protected function validator(string $attribute, mixed $value): Validator
+    protected function makeAggregateValidator(string $attribute, mixed $value): Validator
     {
         return $this->aggregateValidator ??= ValidatorFactory::make(
             [$attribute => $value],
@@ -45,5 +38,10 @@ abstract class AggregateRule extends Rule
     protected function attributes(): array
     {
         return [];
+    }
+
+    protected function failedPotentiallyTranslatedString(string $attribute, mixed $value, \Closure $fail): PotentiallyTranslatedString
+    {
+        return $fail($this->makeAggregateValidator($attribute, $value)->errors()->first($attribute));
     }
 }

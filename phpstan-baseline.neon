@@ -1,9 +1,25 @@
 parameters:
 	ignoreErrors:
 		-
+			message: """
+				#^Access to deprecated property \\$parts of class PhpParser\\\\Node\\\\Name\\:
+				Use getParts\\(\\) instead$#
+			"""
+			count: 1
+			path: app/Console/Commands/FindDumpStatementCommand.php
+
+		-
 			message: "#^Parameter \\$permissions of anonymous function has invalid type Dcat\\\\Admin\\\\Models\\\\Permission\\.$#"
 			count: 1
 			path: app/Console/Commands/IdeHelperGatesCommand.php
+
+		-
+			message: """
+				#^Call to deprecated method factory\\(\\) of class Cron\\\\CronExpression\\:
+				since version 3\\.0\\.2, use __construct instead\\.$#
+			"""
+			count: 1
+			path: app/Console/Commands/ListSchedule.php
 
 		-
 			message: "#^Variable \\$file might not be defined\\.$#"
@@ -19,6 +35,15 @@ parameters:
 			message: "#^Call to an undefined static method Orchid\\\\Support\\\\Color\\:\\:BASIC\\(\\)\\.$#"
 			count: 2
 			path: app/Orchid/Screens/User/UserProfileScreen.php
+
+		-
+			message: """
+				#^Call to deprecated method serializeUsing\\(\\) of class Carbon\\\\Carbon\\:
+				To avoid conflict between different third\\-party libraries, static setters should not be used\\.
+				            You should rather transform Carbon object before the serialization\\.$#
+			"""
+			count: 1
+			path: app/Providers/AppServiceProvider.php
 
 		-
 			message: "#^Static call to instance method Imanghafoori\\\\Decorator\\\\Facade\\\\Decorator\\:\\:decorate\\(\\)\\.$#"

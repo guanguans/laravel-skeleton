@@ -5,6 +5,7 @@ namespace App\Rules;
 use App\Support\Traits\CreateStaticable;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Str;
+use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
 
 abstract class Rule implements ValidationRule
@@ -20,12 +21,12 @@ abstract class Rule implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (! $this->passes($attribute, $value)) {
-            $fail(static::message())->translate();
+            $this->failedPotentiallyTranslatedString($attribute, $value, $fail)->translate($this->replace());
         }
     }
 
@@ -69,5 +70,18 @@ abstract class Rule implements ValidationRule
                 }),
             ]
         );
+    }
+
+    protected function failedPotentiallyTranslatedString(
+        string $attribute,
+        mixed $value,
+        \Closure $fail
+    ): PotentiallyTranslatedString {
+        return $fail(static::message());
+    }
+
+    protected function replace(): array
+    {
+        return [];
     }
 }
