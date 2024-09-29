@@ -10,6 +10,9 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Cron\CronExpression;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Pipeline\Pipeline;
@@ -19,6 +22,38 @@ use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\VarDumper\VarDumper;
+
+if (! function_exists('get_mysql_timezone_offset')) {
+    /**
+     * Gets the time offset from the provided timezone relative to UTC as a number. This
+     * is used in the database configuration since we can't always rely on there being support
+     * for named timezones in MySQL.
+     *
+     * Returns the timezone as a string like +08:00 or -05:00 depending on the app timezone.
+     *
+     * @see https://github.com/pelican-dev/panel/blob/main/app/Helpers/Time.php
+     */
+    function get_mysql_timezone_offset(?string $timezone = null): string
+    {
+        return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
+    }
+}
+
+if (! function_exists('get_mysql_timezone_offset')) {
+    /**
+     * Converts schedule cron data into a carbon object.
+     *
+     * @throws \Exception
+     *
+     * @see https://github.com/pelican-dev/panel/blob/main/app/Helpers/Time.php
+     */
+    function get_schedule_next_run_date(string $minute, string $hour, string $dayOfMonth, string $month, string $dayOfWeek): Carbon
+    {
+        return Carbon::instance(
+            (new CronExpression(sprintf('%s %s %s %s %s', $minute, $hour, $dayOfMonth, $month, $dayOfWeek)))->getNextRunDate()
+        );
+    }
+}
 
 if (! function_exists('raw_sql_for')) {
     /**
