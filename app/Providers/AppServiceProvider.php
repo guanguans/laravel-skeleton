@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Http\Middleware\LogHttp;
 use App\Http\Middleware\TrimStrings;
 use App\Listeners\RunCommandInDebugModeListener;
+use App\Listeners\SetRequestIdListener;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
@@ -144,6 +145,8 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      *
      * @noinspection PhpMissingParentCallCommonInspection
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function register(): void
     {
@@ -151,6 +154,9 @@ class AppServiceProvider extends ServiceProvider
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
             // $this->app->register(LaravelServiceProvider::class);
             $this->app->register(ApiResponseServiceProvider::class);
+
+            // \Closure::fromCallable([$this->app->make(SetRequestIdListener::class), 'handle']);
+            // $this->booting($this->app->make(SetRequestIdListener::class)->handle(...));
         });
 
         $this->whenever($this->app->isLocal(), function (): void {
