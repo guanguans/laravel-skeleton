@@ -356,6 +356,27 @@ class AppServiceProvider extends ServiceProvider
             // });
 
             DB::prohibitDestructiveCommands();
+
+            // -----------------------------------------------------------------------
+            // LOG-VIEWER : log all queries (not in production)
+            // -----------------------------------------------------------------------
+            // if (! app()->isProduction()) {
+            //     DB::listen(fn ($query) => Log::debug($query->toRawSQL()));
+            // }
+
+            // -----------------------------------------------------------------------
+            // LOG-VIEWER : log all SLOW queries (not in production)
+            // -----------------------------------------------------------------------
+            if (! app()->isProduction()) {
+                DB::listen(static function (QueryExecuted $query) {
+                    if ($query->time > 250) {
+                        Log::warning('An individual database query exceeded 250 ms.', [
+                            'sql' => $query->sql,
+                            'raw' => $query->toRawSQL(),
+                        ]);
+                    }
+                });
+            }
         });
 
         /** @see \Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle */
