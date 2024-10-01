@@ -7195,16 +7195,16 @@
         },
         {
             "name": "laravel/sanctum",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "9cfc0ce80cabad5334efff73ec856339e8ec1ac1"
+                "reference": "54aea9d13743ae8a6cdd3c28dbef128a17adecab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/9cfc0ce80cabad5334efff73ec856339e8ec1ac1",
-                "reference": "9cfc0ce80cabad5334efff73ec856339e8ec1ac1",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/54aea9d13743ae8a6cdd3c28dbef128a17adecab",
+                "reference": "54aea9d13743ae8a6cdd3c28dbef128a17adecab",
                 "shasum": ""
             },
             "require": {
@@ -7255,7 +7255,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2024-04-10T19:39:58+00:00"
+            "time": "2024-09-27T14:55:41+00:00"
         },
         {
             "name": "laravel/scout",
