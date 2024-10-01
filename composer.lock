@@ -4857,16 +4857,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.12.1",
+            "version": "2.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "6493bbad34ce315bbfd4116e3c8c4e3963f4b14e"
+                "reference": "d4c0dfc456616f575895a9c3ed77297fbff9adca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/6493bbad34ce315bbfd4116e3c8c4e3963f4b14e",
-                "reference": "6493bbad34ce315bbfd4116e3c8c4e3963f4b14e",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/d4c0dfc456616f575895a9c3ed77297fbff9adca",
+                "reference": "d4c0dfc456616f575895a9c3ed77297fbff9adca",
                 "shasum": ""
             },
             "require": {
@@ -4881,10 +4881,10 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8",
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "ergebnis/composer-normalize": "^2.43",
-                "ergebnis/license": "^2.4",
+                "ergebnis/composer-normalize": "^2.44",
+                "ergebnis/license": "^2.5",
                 "ergebnis/php-cs-fixer-config": "dev-main",
-                "ergebnis/rector-rules": "^1.0",
+                "ergebnis/rector-rules": "^1.1",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "icanhazstring/composer-unused": "^0.8",
@@ -4893,7 +4893,7 @@
                 "infection/infection": "^0.26",
                 "maglnet/composer-require-checker": "^3.8 || ^4.0",
                 "mockery/mockery": "^1.6",
-                "pestphp/pest": "^1.23 || ^2.0",
+                "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "php-mock/php-mock-phpunit": "^2.10",
                 "phpbench/phpbench": "^1.2",
@@ -5012,7 +5012,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-09-09T08:12:01+00:00"
+            "time": "2024-10-01T09:42:32+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
