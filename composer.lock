@@ -3408,16 +3408,16 @@
         },
         {
             "name": "dragon-code/laravel-deploy-operations",
-            "version": "6.3.1",
+            "version": "6.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/laravel-deploy-operations.git",
-                "reference": "4d355babbe63e979d17d9ea5ae19025a86a84d57"
+                "reference": "6a23bab2c4b1b6bcbd4c109bb9424a73c2ad33b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-deploy-operations/zipball/4d355babbe63e979d17d9ea5ae19025a86a84d57",
-                "reference": "4d355babbe63e979d17d9ea5ae19025a86a84d57",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-deploy-operations/zipball/6a23bab2c4b1b6bcbd4c109bb9424a73c2ad33b2",
+                "reference": "6a23bab2c4b1b6bcbd4c109bb9424a73c2ad33b2",
                 "shasum": ""
             },
             "require": {
@@ -3504,7 +3504,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-09-27T21:06:44+00:00"
+            "time": "2024-10-03T12:59:20+00:00"
         },
         {
             "name": "dragon-code/laravel-http-logger",
