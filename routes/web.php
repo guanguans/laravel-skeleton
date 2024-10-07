@@ -9,7 +9,11 @@
 declare(strict_types=1);
 
 use Illuminate\Foundation\Events\DiagnosingHealth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Overtrue\LaravelUploader\LaravelUploader;
@@ -61,3 +65,45 @@ Route::get('acting-as/{id}', static function ($id) {
 Route::post('/order', static function (): void {
     // Order processing logic
 })->block($lockSeconds = 5, $waitSeconds = 10);
+
+Route::post('/update-password', static function (Request $request) {
+    // Validate the new password
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
+
+    // Check the current password
+    if (! Hash::check($request->current_password, Auth::user()->password)) {
+        return back()->withErrors(['current_password' => 'The provided password does not match our records.']);
+    }
+
+    // Log out other devices
+    Auth::logoutOtherDevices($request->current_password);
+
+    // Update the password
+    Auth::user()?->update([
+        'password' => Hash::make($request->new_password),
+    ]);
+
+    return redirect('/dashboard')->with('status', 'Password updated and other devices logged out.');
+});
+
+Route::post('/confirm-password', static function (Request $request) {
+    if (! Hash::check($request->password, $request->user()->password)) {
+        return back()->withErrors([
+            'password' => ['The provided password does not match our records.'],
+        ]);
+    }
+
+    $request->session()->passwordConfirmed();
+
+    return redirect()->intended();
+})->middleware(['auth', 'throttle:6,1']);
+
+Route::delete('/account', static function (Request $request) {
+    $request->user()->delete();
+    Auth::logout();
+
+    return redirect('/')->with('status', 'Your account has been deleted.');
+})->middleware(['auth', 'password.confirm']);
