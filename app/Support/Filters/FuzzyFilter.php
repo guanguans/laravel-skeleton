@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -17,9 +25,7 @@ use Spatie\QueryBuilder\Filters\Filter;
  */
 class FuzzyFilter implements Filter
 {
-    /**
-     * @var string[]
-     */
+    /** @var array<string> */
     private readonly array $fields;
 
     public function __construct(string ...$fields)

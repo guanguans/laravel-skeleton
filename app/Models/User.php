@@ -69,14 +69,14 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get: static fn ($value, $attributes) => $attributes['created_at']->format('Y-m-d H:i:s'),
-        );
+        )->shouldCache();
     }
 
     protected function updatedAtFormatted(): Attribute
     {
         return Attribute::make(
             get: static fn ($value, $attributes) => $attributes['updated_at']->format('Y-m-d H:i:s'),
-        );
+        )->withoutObjectCaching();
     }
 
     public function notifications(): MorphMany
