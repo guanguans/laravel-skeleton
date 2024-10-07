@@ -20309,16 +20309,16 @@
         },
         {
             "name": "chrisdicarlo/laravel-config-checker",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chrisdicarlo/laravel-config-checker.git",
-                "reference": "88388d60506e50f46d71b1456fb5d4fab1865cfb"
+                "reference": "04158227648f526f6a94d8eafec8da72e82c0a2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chrisdicarlo/laravel-config-checker/zipball/88388d60506e50f46d71b1456fb5d4fab1865cfb",
-                "reference": "88388d60506e50f46d71b1456fb5d4fab1865cfb",
+                "url": "https://api.github.com/repos/chrisdicarlo/laravel-config-checker/zipball/04158227648f526f6a94d8eafec8da72e82c0a2f",
+                "reference": "04158227648f526f6a94d8eafec8da72e82c0a2f",
                 "shasum": ""
             },
             "require": {
@@ -20369,7 +20369,7 @@
             ],
             "support": {
                 "issues": "https://github.com/chrisdicarlo/laravel-config-checker/issues",
-                "source": "https://github.com/chrisdicarlo/laravel-config-checker/tree/v1.1.0"
+                "source": "https://github.com/chrisdicarlo/laravel-config-checker/tree/v1.2.0"
             },
             "funding": [
                 {
@@ -20381,7 +20381,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-04T16:47:26+00:00"
+            "time": "2024-10-07T17:51:50+00:00"
         },
         {
             "name": "clue/ndjson-react",
