@@ -4,6 +4,7 @@ use App\Support\Monolog\Formatter\AnsiLineFormatter;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
+use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
     /*
@@ -95,7 +96,7 @@ return [
             ],
         ],
 
-        'stderr' => [
+        'original-stderr' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
@@ -122,6 +123,31 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        /**
+         * @see https://laravel-news.com/split-log-levels-between-stdout-and-stderr-with-laravel
+         */
+        'stdout' => [
+            'driver' => 'monolog',
+            'handler' => \Monolog\Handler\FilterHandler::class,
+            'formatter' => env('LOG_STDOUT_FORMATTER'),
+            'with' => [
+                'handler' => static fn (): \Monolog\Handler\StreamHandler => new StreamHandler('php://stdout'),
+                'minLevelOrList' => [Monolog\Level::Debug, Monolog\Level::Info],
+            ],
+            'processors' => [PsrLogMessageProcessor::class],
+        ],
+
+        'stderr' => [
+            'driver' => 'monolog',
+            'handler' => StreamHandler::class,
+            'formatter' => env('LOG_STDERR_FORMATTER'),
+            'with' => [
+                'stream' => 'php://stderr',
+            ],
+            'level' => 'notice',
+            'processors' => [PsrLogMessageProcessor::class],
         ],
     ],
 

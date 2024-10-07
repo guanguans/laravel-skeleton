@@ -368,7 +368,7 @@ class AppServiceProvider extends ServiceProvider
             // LOG-VIEWER : log all SLOW queries (not in production)
             // -----------------------------------------------------------------------
             if (! app()->isProduction()) {
-                DB::listen(static function (QueryExecuted $query) {
+                DB::listen(static function (QueryExecuted $query): void {
                     if ($query->time > 250) {
                         Log::warning('An individual database query exceeded 250 ms.', [
                             'sql' => $query->sql,
