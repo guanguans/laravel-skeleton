@@ -34,5 +34,5 @@ openai.gif
 /build
 /dcat_admin_ide_helper.php
 Envoy.blade.php
-.user.ini
+#.user.ini
 /app/Orchid/
