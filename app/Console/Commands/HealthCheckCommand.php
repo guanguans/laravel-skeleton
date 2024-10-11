@@ -92,6 +92,46 @@ class HealthCheckCommand extends Command
         $this->except = array_merge($this->except, $this->option('except'));
     }
 
+    private function checkServiceProvider(array $except = []): HealthCheckStateEnum
+    {
+        $composer = json_decode(file_get_contents(base_path('composer.json')), true);
+        $devPackages = array_keys($composer['require-dev'] ?? []);
+        $dontDiscoverPackages = $composer['extra']['laravel']['dont-discover'] ?? [];
+        $shouldntDiscoverPackages = collect(require base_path('bootstrap/cache/packages.php'))
+            ->reject(static fn (array $map, string $package): bool => \in_array($package, $except, true))
+            ->filter(static fn (
+                array $map,
+                string $package
+            ): bool => \in_array($package, $devPackages, true) && ! \in_array($package, $dontDiscoverPackages, true));
+
+        if ($shouldntDiscoverPackages->isNotEmpty()) {
+            return tap(
+                HealthCheckStateEnum::FAILING(),
+                static function (HealthCheckStateEnum $state) use ($shouldntDiscoverPackages): void {
+                    $state->description = \sprintf(
+                        <<<'DESCRIPTION'
+                            The dev packages shouldn't be automatically discovered: [%s],
+                            should be added to `extra.laravel.dont-discover` in `composer.json`,
+                            and manual register following service providers: [%s].
+                            DESCRIPTION
+                        ,
+                        $shouldntDiscoverPackages
+                            ->keys()
+                            ->map(static fn (string $package): string => \sprintf('"%s"', $package))
+                            ->implode(', '),
+                        $shouldntDiscoverPackages
+                            ->pluck('providers')
+                            ->flatten()
+                            ->map(static fn (string $serviceProvider): string => "'$serviceProvider'")
+                            ->implode('、')
+                    );
+                }
+            );
+        }
+
+        return HealthCheckStateEnum::OK();
+    }
+
     private function checkDatabase(?string $connection = null): HealthCheckStateEnum
     {
         try {
@@ -194,13 +234,22 @@ class HealthCheckCommand extends Command
 
     private function checkPing(?string $url = null): HealthCheckStateEnum
     {
-        $response = Http::get($url ?: config('app.url'));
-        if ($response->serverError()) {
+        try {
+            $response = Http::get($url ?: config('app.url'));
+            if ($response->serverError()) {
+                return tap(
+                    HealthCheckStateEnum::FAILING(),
+                    static function (HealthCheckStateEnum $state) use ($response): void {
+                        // $state->description = "Could not connect to the application: `{$response->body()}`";
+                        $state->description = "Could not connect to the application: `{$response->reason()}`";
+                    }
+                );
+            }
+        } catch (\Throwable $throwable) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
-                static function (HealthCheckStateEnum $state) use ($response): void {
-                    // $state->description = "Could not connect to the application: `{$response->body()}`";
-                    $state->description = "Could not connect to the application: `{$response->reason()}`";
+                static function (HealthCheckStateEnum $state) use ($throwable): void {
+                    $state->description = "Could not connect to the application: `{$throwable->getMessage()}`";
                 }
             );
         }
