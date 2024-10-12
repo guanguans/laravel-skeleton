@@ -8,6 +8,7 @@ use App\Enums\HealthCheckStateEnum;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Console\Command;
+use Illuminate\Console\Events\CommandFinished;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -92,9 +93,13 @@ class HealthCheckCommand extends Command
         $this->except = array_merge($this->except, $this->option('except'));
     }
 
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \JsonException
+     */
     private function checkServiceProvider(array $except = []): HealthCheckStateEnum
     {
-        $composer = json_decode(file_get_contents(base_path('composer.json')), true);
+        $composer = json_decode(file_get_contents(base_path('composer.json')), true, 512, JSON_THROW_ON_ERROR);
         $devPackages = array_keys($composer['require-dev'] ?? []);
         $dontDiscoverPackages = $composer['extra']['laravel']['dont-discover'] ?? [];
         $shouldntDiscoverPackages = collect(require base_path('bootstrap/cache/packages.php'))
@@ -107,23 +112,30 @@ class HealthCheckCommand extends Command
         if ($shouldntDiscoverPackages->isNotEmpty()) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
-                static function (HealthCheckStateEnum $state) use ($shouldntDiscoverPackages): void {
-                    $state->description = \sprintf(
-                        <<<'DESCRIPTION'
-                            The dev packages shouldn't be automatically discovered: [%s],
-                            should be added to `extra.laravel.dont-discover` in `composer.json`,
-                            and manual register following service providers: [%s].
-                            DESCRIPTION
-                        ,
-                        $shouldntDiscoverPackages
-                            ->keys()
-                            ->map(static fn (string $package): string => \sprintf('"%s"', $package))
-                            ->implode(', '),
-                        $shouldntDiscoverPackages
-                            ->pluck('providers')
-                            ->flatten()
-                            ->map(static fn (string $serviceProvider): string => "'$serviceProvider'")
-                            ->implode('、')
+                function (HealthCheckStateEnum $state) use ($shouldntDiscoverPackages): void {
+                    $state->description = "The dev packages shouldn't be automatically discovered.";
+
+                    $this->laravel->make('events')->listen(
+                        CommandFinished::class,
+                        function (CommandFinished $event) use ($shouldntDiscoverPackages): void {
+                            if ($event->command === $this->getName()) {
+                                $this->warn(\sprintf(<<<'WARN'
+                                    The dev packages should be added to `extra.laravel.dont-discover` in `composer.json`:
+                                    %s
+
+                                    The dev service providers should be manually registered to dev environment:
+                                    %s
+                                    WARN,
+                                    $shouldntDiscoverPackages
+                                        ->keys()
+                                        ->toJson($options = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+                                    $shouldntDiscoverPackages
+                                        ->pluck('providers')
+                                        ->flatten()
+                                        ->toJson($options),
+                                ));
+                            }
+                        }
                     );
                 }
             );
