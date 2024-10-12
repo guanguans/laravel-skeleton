@@ -160,11 +160,15 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->whenever($this->app->isLocal(), function (): void {
-            $this->app->register(LocalServiceProvider::class);
+            $this->app->register(WhenLocalServiceProvider::class);
+        });
+
+        $this->whenever($this->app->runningUnitTests(), function (): void {
+            $this->app->register(WhenTestingServiceProvider::class);
         });
 
         $this->unless($this->app->isProduction(), function (): void {
-            $this->app->register(DevelopServiceProvider::class);
+            $this->app->register(UnlessProductionServiceProvider::class);
         });
     }
 
