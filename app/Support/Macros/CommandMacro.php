@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace App\Support\Macros;
 
+use Symfony\Component\Console\Logger\ConsoleLogger;
+use Symfony\Component\Console\Output\OutputInterface;
+
 /**
  * @mixin \Illuminate\Console\Command
  *
@@ -79,6 +82,17 @@ class CommandMacro
             throw_if(isset($taskException), $taskException);
 
             return $result;
+        };
+    }
+
+    public function consoleLogger(): \Closure
+    {
+        return function (
+            ?OutputInterface $output = null,
+            array $verbosityLevelMap = [],
+            array $formatLevelMap = [],
+        ): ConsoleLogger {
+            return new ConsoleLogger($output ?? $this->output, $verbosityLevelMap, $formatLevelMap);
         };
     }
 }
