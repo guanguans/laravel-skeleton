@@ -12,12 +12,15 @@ declare(strict_types=1);
 
 namespace App\Support\Macros;
 
+use Illuminate\Process\PendingProcess;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 /**
  * @mixin \Illuminate\Console\Command
+ * @mixin \Illuminate\Process\PendingProcess
  *
  * @see https://github.com/nunomaduro/laravel-console-task
  */
@@ -95,15 +98,42 @@ class CommandMacro
         ): ConsoleLogger => new ConsoleLogger($output ?? $this->output, $verbosityLevelMap, $formatLevelMap);
     }
 
-    public function processHelperRun(): \Closure
+    public function processHelperMustRun(): \Closure
     {
         return function (
-            array|Process $cmd,
+            array|PendingProcess|Process|string $cmd,
             ?string $error = null,
             ?callable $callback = null,
             int $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE,
             ?OutputInterface $output = null,
         ): Process {
+            /** @var Process $process */
+            $process = $this->processHelperRun(...\func_get_args());
+            if (! $process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
+
+            return $process;
+        };
+    }
+
+    public function processHelperRun(): \Closure
+    {
+        return function (
+            array|PendingProcess|Process|string $cmd,
+            ?string $error = null,
+            ?callable $callback = null,
+            int $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE,
+            ?OutputInterface $output = null,
+        ): Process {
+            if (\is_string($cmd)) {
+                $cmd = Process::fromShellCommandline($cmd);
+            }
+
+            if ($cmd instanceof PendingProcess) {
+                $cmd = (fn (): Process => $this->toSymfonyProcess(null))->call($cmd);
+            }
+
             /** @var \Symfony\Component\Console\Helper\ProcessHelper $helper */
             $helper = $this->getHelper('process');
 
