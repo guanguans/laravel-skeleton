@@ -242,10 +242,32 @@
         },
         "laravel": {
             "dont-discover": [
+                "andreaselia/laravel-api-to-postman",
                 "barryvdh/laravel-ide-helper",
+                "bennett-treptow/laravel-migration-generator",
+                "chrisdicarlo/laravel-config-checker",
+                "dragon-code/pretty-routes",
+                "enlightn/enlightn",
+                "guanguans/laravel-soar",
+                "kitloong/laravel-migrations-generator",
                 "lanin/laravel-api-debugger",
-                "jiannei/laravel-response",
-                "nunomaduro/collision"
+                "laracademy/generators",
+                "laracraft-tech/laravel-schema-rules",
+                "laradumps/laradumps",
+                "laravel-shift/factory-generator",
+                "laravel/sail",
+                "laravel/telescope",
+                "mortexa/laravel-arkitect",
+                "msamgan/laravel-env-keys-checker",
+                "nunomaduro/collision",
+                "orangehill/iseed",
+                "reliese/laravel",
+                "salahhusa9/laravel-updater",
+                "spatie/laravel-error-solutions",
+                "spatie/laravel-ignition",
+                "thedoctor0/laravel-factory-generator",
+                "worksome/envy"
+
             ]
         },
         "merge-plugin": {
