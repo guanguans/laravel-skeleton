@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Application;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Process;
-use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
+use Illuminate\Support\Composer;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\ExecutableFinder;
-use Symfony\Component\Process\PhpExecutableFinder;
 
 class OptimizeAllCommand extends Command
 {
@@ -27,35 +27,45 @@ class OptimizeAllCommand extends Command
     public function handle(): void
     {
         if (! $this->option('force') && $this->getLaravel()->isProduction()) {
-            $this->output->warning('Please use --force option in production.');
+            $this->components->warn('Please use --force option in production.');
 
             return;
         }
 
-        $this->output->info('Optimizing all...');
+        $this->components->info('Optimizing all...');
 
-        $this->call('config:cache', $arguments = ['--ansi' => true, '-v' => true]);
-        $this->call('event:cache', $arguments);
-        $this->call('route:cache', $arguments);
-
-        try {
-            $this->call('view:cache', $arguments);
-        } catch (DirectoryNotFoundException $directoryNotFoundException) {
-            $this->output->error($directoryNotFoundException->getMessage());
+        $arguments = ['--ansi' => true, '-v' => true];
+        foreach ([
+            'config:cache',
+            'event:cache',
+            'route:cache',
+            'view:cache',
+        ] as $command) {
+            try {
+                $this->components->task($command, fn () => $this->call($command, $arguments));
+            } catch (\Throwable $throwable) {
+                // $this->consoleLogger()->error($throwable->getMessage());
+                $this->components->error($throwable->getMessage());
+            }
         }
 
-        $command = \sprintf(
-            '%s %s dump-autoload --no-interaction --optimize --ansi -v',
-            (new ExecutableFinder)->find('php8.1') ?: (new PhpExecutableFinder)->find(),
-            (new ExecutableFinder)->find('composer2') ?: (new ExecutableFinder)->find('composer'),
-        );
+        try {
+            $command = \sprintf(
+                '%s %s dump-autoload --no-interaction --optimize --ansi -v',
+                (new ExecutableFinder)->find('php8.1') ?: Application::phpBinary(),
+                (new ExecutableFinder)->find('composer2')
+                    ?: (new ExecutableFinder)->find('composer')
+                    ?: implode(' ', resolve(Composer::class)->findComposer()),
+            );
 
-        $this->output->info("Running [$command] ...");
+            $this->components->task($command, fn () => $this->processHelperMustRun(
+                cmd: $command,
+                // verbosity: OutputInterface::VERBOSITY_NORMAL
+            ));
+        } catch (\Throwable $throwable) {
+            $this->components->error($throwable->getMessage());
+        }
 
-        Process::run($command, function (string $type, string $line): void {
-            $this->output->write($line);
-        })->throw();
-
-        $this->output->success('All optimized.');
+        $this->components->success('All optimized.');
     }
 }
