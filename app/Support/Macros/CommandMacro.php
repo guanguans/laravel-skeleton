@@ -14,6 +14,7 @@ namespace App\Support\Macros;
 
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 
 /**
  * @mixin \Illuminate\Console\Command
@@ -87,12 +88,26 @@ class CommandMacro
 
     public function consoleLogger(): \Closure
     {
-        return function (
-            ?OutputInterface $output = null,
+        return fn (
             array $verbosityLevelMap = [],
             array $formatLevelMap = [],
-        ): ConsoleLogger {
-            return new ConsoleLogger($output ?? $this->output, $verbosityLevelMap, $formatLevelMap);
+            ?OutputInterface $output = null,
+        ): ConsoleLogger => new ConsoleLogger($output ?? $this->output, $verbosityLevelMap, $formatLevelMap);
+    }
+
+    public function processHelperRun(): \Closure
+    {
+        return function (
+            array|Process $cmd,
+            ?string $error = null,
+            ?callable $callback = null,
+            int $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE,
+            ?OutputInterface $output = null,
+        ): Process {
+            /** @var \Symfony\Component\Console\Helper\ProcessHelper $helper */
+            $helper = $this->getHelper('process');
+
+            return $helper->run($output ?? $this->output, $cmd, $error, $callback, $verbosity);
         };
     }
 }
