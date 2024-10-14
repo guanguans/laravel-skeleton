@@ -24876,16 +24876,16 @@
         },
         {
             "name": "msamgan/laravel-env-keys-checker",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msamgan/laravel-env-keys-checker.git",
-                "reference": "5e42d1f561deba0c8d4a267973171c9bb377836d"
+                "reference": "d7fe88e0d218346c153ad05544324e1020893763"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msamgan/laravel-env-keys-checker/zipball/5e42d1f561deba0c8d4a267973171c9bb377836d",
-                "reference": "5e42d1f561deba0c8d4a267973171c9bb377836d",
+                "url": "https://api.github.com/repos/msamgan/laravel-env-keys-checker/zipball/d7fe88e0d218346c153ad05544324e1020893763",
+                "reference": "d7fe88e0d218346c153ad05544324e1020893763",
                 "shasum": ""
             },
             "require": {
@@ -24942,7 +24942,7 @@
             ],
             "support": {
                 "issues": "https://github.com/msamgan/laravel-env-keys-checker/issues",
-                "source": "https://github.com/msamgan/laravel-env-keys-checker/tree/v1.4.0"
+                "source": "https://github.com/msamgan/laravel-env-keys-checker/tree/v1.4.1"
             },
             "funding": [
                 {
@@ -24950,7 +24950,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-08T15:25:28+00:00"
+            "time": "2024-10-13T18:30:41+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -30547,9 +30547,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -30561,6 +30561,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
