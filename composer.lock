@@ -10087,16 +10087,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.36.2",
+            "version": "14.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "5ec303863a1b9d8458ba139c4c297b7ba07cd14f"
+                "reference": "98889b0dce751a6a178a230bed2535e6bab020e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/5ec303863a1b9d8458ba139c4c297b7ba07cd14f",
-                "reference": "5ec303863a1b9d8458ba139c4c297b7ba07cd14f",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/98889b0dce751a6a178a230bed2535e6bab020e0",
+                "reference": "98889b0dce751a6a178a230bed2535e6bab020e0",
                 "shasum": ""
             },
             "require": {
@@ -10189,7 +10189,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-10-11T13:12:28+00:00"
+            "time": "2024-10-12T21:10:43+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
@@ -30547,9 +30547,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -30561,6 +30561,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
