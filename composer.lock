@@ -9676,31 +9676,31 @@
         },
         {
             "name": "onlime/laravel-http-client-global-logger",
-            "version": "v1.1.3",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/onlime/laravel-http-client-global-logger.git",
-                "reference": "52f27ed7df8aebdd14c69865be9855d9c96bd836"
+                "reference": "12954441e6474f29f3726bc6ee3077e92115b721"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/onlime/laravel-http-client-global-logger/zipball/52f27ed7df8aebdd14c69865be9855d9c96bd836",
-                "reference": "52f27ed7df8aebdd14c69865be9855d9c96bd836",
+                "url": "https://api.github.com/repos/onlime/laravel-http-client-global-logger/zipball/12954441e6474f29f3726bc6ee3077e92115b721",
+                "reference": "12954441e6474f29f3726bc6ee3077e92115b721",
                 "shasum": ""
             },
             "require": {
                 "illuminate/http": "^10.32|^11.0",
                 "illuminate/support": "^10.0|^11.0",
                 "monolog/monolog": "^3.0",
-                "php": "^8.1"
+                "php": "^8.2"
             },
             "require-dev": {
                 "laravel/framework": "^10.0|^11.0",
-                "laravel/pint": "^1.13",
+                "laravel/pint": "^1.18",
                 "orchestra/testbench": "^8.8|^9.0",
-                "pestphp/pest": "^2.33",
-                "pestphp/pest-plugin-arch": "^2.0",
-                "pestphp/pest-plugin-laravel": "^2.0",
+                "pestphp/pest": "^3.0",
+                "pestphp/pest-plugin-arch": "^3.0",
+                "pestphp/pest-plugin-laravel": "^3.0",
                 "saloonphp/laravel-http-sender": "^2.0|^3.0",
                 "saloonphp/laravel-plugin": "^3.0",
                 "spatie/invade": "^2.0"
@@ -9751,9 +9751,9 @@
             ],
             "support": {
                 "issues": "https://github.com/onlime/laravel-http-client-global-logger/issues",
-                "source": "https://github.com/onlime/laravel-http-client-global-logger/tree/v1.1.3"
+                "source": "https://github.com/onlime/laravel-http-client-global-logger/tree/v1.2.0"
             },
-            "time": "2024-03-14T15:50:24+00:00"
+            "time": "2024-10-15T15:50:37+00:00"
         },
         {
             "name": "opcodesio/log-viewer",
