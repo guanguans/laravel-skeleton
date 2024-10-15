@@ -165,6 +165,7 @@
         "laravel/pint": "^1.18",
         "laravel/sail": "^1.35",
         "laravel/telescope": "^5.2",
+        "maestroerror/html-strings-affixer": "^1.2",
         "mockery/mockery": "^1.6",
         "mortexa/laravel-arkitect": "^0.8",
         "msamgan/laravel-env-keys-checker": "^1.4",
@@ -267,7 +268,6 @@
                 "spatie/laravel-ignition",
                 "thedoctor0/laravel-factory-generator",
                 "worksome/envy"
-
             ]
         },
         "merge-plugin": {
@@ -345,6 +345,9 @@
         "envy-sync": "@php artisan envy:sync --ansi -v",
         "facade-lint": "@facade-update --lint",
         "facade-update": "@php -f ./facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facades/*.php'\\'')));')",
+        "hsamac": "./vendor/bin/hsamac",
+        "hsamac-check": "@hsamac check",
+        "hsamac-replace": "@hsamac replace",
         "ide-helper": [
             "@php artisan ide-helper:eloquent --ansi -v",
             "@php artisan ide-helper:generate --ansi -v",

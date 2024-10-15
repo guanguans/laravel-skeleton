@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85a2dee7a7c91be90e26f54f610b5276",
+    "content-hash": "56753abe10d08e5170be253e7381b3af",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -24690,6 +24690,44 @@
             "time": "2020-07-06T04:49:32+00:00"
         },
         {
+            "name": "maestroerror/html-strings-affixer",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MaestroError/html-strings-affixer.git",
+                "reference": "8be6ef4dc4d0328686e9f214d7f6d14d7c2252ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MaestroError/html-strings-affixer/zipball/8be6ef4dc4d0328686e9f214d7f6d14d7c2252ba",
+                "reference": "8be6ef4dc4d0328686e9f214d7f6d14d7c2252ba",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/composer-adapter/hsawin",
+                "bin/hsa",
+                "bin/hsamac",
+                "bin/hsamacm1"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "maestroerror",
+                    "email": "revaz.gh@gmail.com"
+                }
+            ],
+            "description": "Finds texts in HTML and replaces it with suffixed and prefixed string",
+            "support": {
+                "issues": "https://github.com/MaestroError/html-strings-affixer/issues",
+                "source": "https://github.com/MaestroError/html-strings-affixer/tree/1.2.2"
+            },
+            "time": "2023-09-20T21:19:24+00:00"
+        },
+        {
             "name": "marcj/topsort",
             "version": "2.0.0",
             "source": {
@@ -30547,9 +30585,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -30561,6 +30599,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

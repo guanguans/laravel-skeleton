@@ -1,0 +1,28 @@
+{
+    "folder": "resources/views",
+    "file_types": [
+        "blade.php",
+        ".jsx",
+        ".vue"
+    ],
+    "ignore_names": [
+        "someFolderNameToIgnore",
+        "images"
+    ],
+    "ignore": ["#", "_", ">", "^", "*", "=", "@"],
+    "warnings": ["%", "{", "(", "}", ")", "$", "'"],
+    "methods": [
+        "text",
+        "placeholder",
+        "alt",
+        "title",
+        "hashtag"
+    ],
+    "prefix": "{{ __('",
+    "suffix": "') }}",
+    "detailed": false,
+    "warn_as_Table": false,
+    "force": false,
+    "report": false,
+    "log_folder": "storage/logs/hsa"
+}
