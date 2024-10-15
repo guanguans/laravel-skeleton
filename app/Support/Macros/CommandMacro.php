@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMethodParametersCountMismatchInspection */
+
 declare(strict_types=1);
 
 /**
@@ -12,6 +14,8 @@ declare(strict_types=1);
 
 namespace App\Support\Macros;
 
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Log\Logger;
 use Illuminate\Process\PendingProcess;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -95,7 +99,10 @@ class CommandMacro
             array $verbosityLevelMap = [],
             array $formatLevelMap = [],
             ?OutputInterface $output = null,
-        ): ConsoleLogger => new ConsoleLogger($output ?? $this->output, $verbosityLevelMap, $formatLevelMap);
+        ): Logger => new Logger(
+            new ConsoleLogger($output ?? $this->output, $verbosityLevelMap, $formatLevelMap),
+            app(Dispatcher::class)
+        );
     }
 
     public function processHelperMustRun(): \Closure
@@ -108,7 +115,7 @@ class CommandMacro
             ?OutputInterface $output = null,
         ): Process {
             /** @var Process $process */
-            $process = $this->processHelperRun(...\func_get_args());
+            $process = $this->processHelperRun($cmd, $error, $callback, $verbosity, $output);
             if (! $process->isSuccessful()) {
                 throw new ProcessFailedException($process);
             }
