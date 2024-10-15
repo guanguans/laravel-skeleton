@@ -54,6 +54,10 @@ return [
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                PDO::MYSQL_ATTR_INIT_COMMAND => sprintf(
+                    "SET time_zone = '%s'",
+                    (new DateTime)->setTimezone(new DateTimeZone(config('app.timezone')))->format('P')
+                ),
             ]) : [],
         ],
 

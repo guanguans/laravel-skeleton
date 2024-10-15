@@ -19,11 +19,9 @@ enum Configuration: string
     use ExtrasTrait;
     use ReadableEnumTrait;
 
-
     case DAILY = 'daily';
     case WEEKLY = 'weekly';
     case MONTHLY = 'monthly';
-
 
     /**
      * @param  value-of<self>  $value

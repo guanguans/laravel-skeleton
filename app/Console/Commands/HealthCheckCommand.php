@@ -106,6 +106,23 @@ class HealthCheckCommand extends Command
             'nunomaduro/termwind',
             'spatie/eloquent-sortable',
             'spatie/laravel-signal-aware-command',
+            'kitloong/laravel-app-logger',
+            'laravel-lang/actions',
+            'laravel-lang/attributes',
+            'laravel-lang/config',
+            'laravel-lang/http-statuses',
+            'laravel-lang/lang',
+            'laravel-lang/locales',
+            'laravel-lang/models',
+            'laravel-lang/publisher',
+            'laravel-lang/routes',
+            'laravel/scout',
+            'livewire/livewire',
+            'orchid/blade-icons',
+            'spatie/laravel-http-logger',
+            'staudenmeir/laravel-cte',
+            'watson/active',
+            'wilderborn/partyline',
         ]
     ): HealthCheckStateEnum {
         $this->callSilently('package:discover');
@@ -256,8 +273,8 @@ class HealthCheckCommand extends Command
             $dbTimeZone = DB::select("SHOW VARIABLES LIKE 'system_time_zone' ")[0]->Value;
         }
 
-        $dbDateTime = (new DateTime('now', new DateTimeZone($dbTimeZone)))->format('YmdH');
-        $appDateTime = (new DateTime('now', new DateTimeZone($appTimezone = config('app.timezone'))))->format('YmdH');
+        $dbDateTime = (new DateTime)->setTimezone(new DateTimeZone($dbTimeZone))->format('YmdH');
+        $appDateTime = (new DateTime)->setTimezone(new DateTimeZone($appTimezone = config('app.timezone')))->format('YmdH');
         if ($dbDateTime !== $appDateTime) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
