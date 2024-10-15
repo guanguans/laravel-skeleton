@@ -5,8 +5,6 @@
 namespace App\Console\Commands;
 
 use App\Enums\HealthCheckStateEnum;
-use DateTime;
-use DateTimeZone;
 use Illuminate\Console\Command;
 use Illuminate\Console\Events\CommandFinished;
 use Illuminate\Support\Collection;
@@ -268,17 +266,19 @@ class HealthCheckCommand extends Command
             });
         }
 
-        $dbTimeZone = DB::select("SHOW VARIABLES LIKE 'time_zone' ")[0]->Value;
-        if (str($dbTimeZone)->lower()->is('system')) {
-            $dbTimeZone = DB::select("SHOW VARIABLES LIKE 'system_time_zone' ")[0]->Value;
-        }
-
-        $dbDateTime = (new DateTime)->setTimezone(new DateTimeZone($dbTimeZone))->format('YmdH');
-        $appDateTime = (new DateTime)->setTimezone(new DateTimeZone($appTimezone = config('app.timezone')))->format('YmdH');
+        $dbDateTime = DB::scalar("SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H')");
+        $appDateTime = now()->format('Y-m-d H');
         if ($dbDateTime !== $appDateTime) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
-                static function (HealthCheckStateEnum $state) use ($dbTimeZone, $appTimezone): void {
+                static function (HealthCheckStateEnum $state): void {
+                    $dbTimeZone = DB::selectOne("SHOW VARIABLES LIKE 'time_zone'")->Value;
+                    if (str($dbTimeZone)->lower()->is('system')) {
+                        $dbTimeZone = DB::selectOne("SHOW VARIABLES LIKE 'system_time_zone'")->Value;
+                    }
+
+                    $appTimezone = now()->getTimezone()->getName();
+
                     $state->description = "The database timezone(`$dbTimeZone`) is not equal to app timezone(`$appTimezone`).";
                 }
             );
