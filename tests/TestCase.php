@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     // use DatabaseMigrations;
     // use DatabaseTruncation;
-    use FastRefreshDatabase;
+    // use FastRefreshDatabase;
     // use RefreshDatabase;
 
     /**
