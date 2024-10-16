@@ -4042,24 +4042,27 @@
         },
         {
             "name": "elao/enum",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Elao/PhpEnums.git",
-                "reference": "503a7fbe4e2ec3da23b83a4e2fbc45f373677919"
+                "reference": "25382e9a114872148f34f549d028378bc357ffac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/503a7fbe4e2ec3da23b83a4e2fbc45f373677919",
-                "reference": "503a7fbe4e2ec3da23b83a4e2fbc45f373677919",
+                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/25382e9a114872148f34f549d028378bc357ffac",
+                "reference": "25382e9a114872148f34f549d028378bc357ffac",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1"
             },
+            "conflict": {
+                "doctrine/dbal": ">=4.0,<4.2"
+            },
             "require-dev": {
                 "composer/semver": "^3.2",
-                "doctrine/dbal": "^3.8|^4.0",
+                "doctrine/dbal": "^3.8|^4.2",
                 "doctrine/doctrine-bundle": "^2.11",
                 "doctrine/orm": "^2.20|^3.0",
                 "ext-pdo_sqlite": "*",
@@ -4075,6 +4078,7 @@
                 "symfony/phpunit-bridge": "^5.4.40|^6.4|^7.0",
                 "symfony/translation": "^5.4.40|^6.4|^7.0",
                 "symfony/var-dumper": "^5.4.40|^6.4|^7.0",
+                "symfony/var-exporter": "^5.4.40|^6.4|^7.0",
                 "symfony/yaml": "^5.4.40|^6.4|^7.0"
             },
             "type": "library",
@@ -4115,7 +4119,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Elao/PhpEnums/issues",
-                "source": "https://github.com/Elao/PhpEnums/tree/v2.5.0"
+                "source": "https://github.com/Elao/PhpEnums/tree/v2.5.1"
             },
             "funding": [
                 {
@@ -4123,7 +4127,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-07T13:59:15+00:00"
+            "time": "2024-10-16T19:13:47+00:00"
         },
         {
             "name": "elastic/transport",
