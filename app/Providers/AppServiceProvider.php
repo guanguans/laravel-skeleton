@@ -704,9 +704,10 @@ class AppServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                $propertyType = value(static function () use ($attributes, $reflectionProperty, $reflectionObject): string {
-                    /** @var Injection $injection */
-                    $injection = $attributes[0]->newInstance();
+                /** @var Injection $injection */
+                $injection = $attributes[0]->newInstance();
+
+                $propertyType = value(static function () use ($injection, $reflectionProperty, $reflectionObject): string {
                     if ($injection->propertyType) {
                         return $injection->propertyType;
                     }
@@ -727,7 +728,7 @@ class AppServiceProvider extends ServiceProvider
                 $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
 
                 try {
-                    $reflectionProperty->setValue($object, $app->make($propertyType));
+                    $reflectionProperty->setValue($object, $app->make($propertyType, $injection->parameters));
                 } catch (ContainerExceptionInterface $containerException) {
                     throw new \TypeError(
                         \sprintf(

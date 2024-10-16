@@ -16,7 +16,11 @@ use App\Support\Contracts\SignerContract;
 
 readonly class HmacSigner implements SignerContract
 {
-    public function __construct(#[\SensitiveParameter] private string $secret = '', private string $algo = 'sha256') {}
+    public function __construct(
+        #[\SensitiveParameter]
+        private string $secret,
+        private string $algo = 'sha256'
+    ) {}
 
     public function sign(array $payload): string
     {
@@ -28,7 +32,12 @@ readonly class HmacSigner implements SignerContract
         return hash_equals($signature, $this->sign($payload));
     }
 
-    protected function sort(array $payload): array
+    private function hashingDataFor(array $payload): string
+    {
+        return urldecode(http_build_query($this->sort($payload)));
+    }
+
+    private function sort(array $payload): array
     {
         ksort($payload);
 
@@ -37,10 +46,5 @@ readonly class HmacSigner implements SignerContract
         }
 
         return $payload;
-    }
-
-    protected function hashingDataFor(array $payload): string
-    {
-        return urldecode(http_build_query($this->sort($payload)));
     }
 }

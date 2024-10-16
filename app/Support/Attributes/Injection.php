@@ -16,7 +16,10 @@ namespace App\Support\Attributes;
  * @see https://github.com/top-think/think-annotation
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-class Injection
+readonly class Injection
 {
-    public function __construct(public ?string $propertyType = null) {}
+    public function __construct(
+        public ?string $propertyType = null,
+        public array $parameters = []
+    ) {}
 }
