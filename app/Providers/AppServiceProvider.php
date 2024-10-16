@@ -695,12 +695,11 @@ class AppServiceProvider extends ServiceProvider
             $reflectionObject = new \ReflectionObject($object);
 
             foreach ($reflectionObject->getProperties() as $reflectionProperty) {
-                if (! $reflectionProperty->isDefault() || $reflectionProperty->isStatic()) {
-                    continue;
-                }
-
-                $attributes = $reflectionProperty->getAttributes(Injection::class);
-                if ($attributes === []) {
+                if (
+                    ! $reflectionProperty->isDefault()
+                    || $reflectionProperty->isStatic()
+                    || [] === ($attributes = $reflectionProperty->getAttributes(Injection::class))
+                ) {
                     continue;
                 }
 
