@@ -31,6 +31,7 @@ use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
 use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
 use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
@@ -219,6 +220,9 @@ return RectorConfig::configure()
         ],
         MakeInheritedMethodVisibilitySameAsParentRector::class => [
             __DIR__.'/app/Admin/Actions/Show',
+        ],
+        RemoveUnusedPublicMethodParameterRector::class => [
+            __DIR__.'/app/Support/GuzzleStreamWrapper.php',
         ],
         RemoveUnusedVariableInCatchRector::class => [
             __DIR__.'/app/Support/Macros/CommandMacro.php',

@@ -26,7 +26,7 @@ class VariableStreamWrapper
     /** @var resource */
     public $context;
 
-    public function stream_open($path, $mode, $options, &$openedPath): bool
+    public function stream_open($path, $mode, $options, &$opened_path): bool
     {
         $url = parse_url($path);
         $this->varname = $url['host'];
