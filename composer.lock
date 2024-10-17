@@ -1491,16 +1491,16 @@
         },
         {
             "name": "biiiiiigmonster/hasin",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/biiiiiigmonster/hasin.git",
-                "reference": "29e0ce0d1291f96e803754292be2061cdfb5edab"
+                "reference": "678301f10f7f42aef73b82b469840ded609868ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/biiiiiigmonster/hasin/zipball/29e0ce0d1291f96e803754292be2061cdfb5edab",
-                "reference": "29e0ce0d1291f96e803754292be2061cdfb5edab",
+                "url": "https://api.github.com/repos/biiiiiigmonster/hasin/zipball/678301f10f7f42aef73b82b469840ded609868ae",
+                "reference": "678301f10f7f42aef73b82b469840ded609868ae",
                 "shasum": ""
             },
             "require": {
@@ -1545,9 +1545,9 @@
             ],
             "support": {
                 "issues": "https://github.com/biiiiiigmonster/hasin/issues",
-                "source": "https://github.com/biiiiiigmonster/hasin/tree/v4.0.0"
+                "source": "https://github.com/biiiiiigmonster/hasin/tree/v4.0.1"
             },
-            "time": "2024-03-17T07:27:58+00:00"
+            "time": "2024-10-17T13:18:26+00:00"
         },
         {
             "name": "bilfeldt/laravel-http-client-logger",
@@ -5216,16 +5216,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8"
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
-                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
                 "shasum": ""
             },
             "require": {
@@ -5279,7 +5279,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.3"
+                "source": "https://github.com/guzzle/promises/tree/2.0.4"
             },
             "funding": [
                 {
@@ -5295,7 +5295,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-18T10:29:17+00:00"
+            "time": "2024-10-17T10:06:22+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -30599,9 +30599,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -30613,6 +30613,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
