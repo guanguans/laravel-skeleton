@@ -20,6 +20,7 @@ use Psr\Container\ContainerInterface;
 /**
  * @see https://www.php.net/manual/zh/class.streamwrapper.php
  * @see https://www.php.net/manual/zh/stream.streamwrapper.example-1.php
+ * @see https://www.php.net/manual/zh/wrappers.php
  * @see \GuzzleHttp\Psr7\StreamWrapper
  */
 final class ContainerStreamWrapper
