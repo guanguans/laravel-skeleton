@@ -702,7 +702,9 @@ class AppServiceProvider extends ServiceProvider
                 /** @var Injection $injection */
                 $injection = $attributes[0]->newInstance();
 
-                $propertyType = value(static function () use ($injection, $reflectionProperty, $reflectionObject): string {
+                $property = "{$reflectionObject->getName()}::\${$reflectionProperty->getName()}";
+
+                $propertyType = value(static function () use ($injection, $reflectionProperty, $property): string {
                     if ($injection->propertyType) {
                         return $injection->propertyType;
                     }
@@ -713,28 +715,19 @@ class AppServiceProvider extends ServiceProvider
                     }
 
                     throw new \LogicException(\sprintf(
-                        'Attribute [%s] of %s miss a argument, or %s must be a non-built-in named type.',
+                        "Attribute [%s] of property [$property] miss a argument [propertyType], or property [$property] mustn't be a built-in named type.",
                         Injection::class,
-                        $property = "property [{$reflectionObject->getName()}::\${$reflectionProperty->getName()}]",
-                        $property,
                     ));
                 });
 
-                $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
-
                 try {
+                    $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
                     $reflectionProperty->setValue($object, $app->make($propertyType, $injection->parameters));
-                } catch (ContainerExceptionInterface $containerException) {
+                } catch (\Throwable $throwable) {
                     throw new \TypeError(
-                        \sprintf(
-                            'Type [%s] of property [%s::$%s] resolve failed [%s].',
-                            $propertyType,
-                            $reflectionObject->getName(),
-                            $reflectionProperty->getName(),
-                            $containerException->getMessage()
-                        ),
-                        $containerException->getCode(),
-                        $containerException
+                        "Type [$propertyType] of property [$property] resolve failed [{$throwable->getMessage()}].",
+                        $throwable->getCode(),
+                        $throwable
                     );
                 }
             }
