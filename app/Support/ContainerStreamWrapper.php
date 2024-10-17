@@ -29,6 +29,10 @@ final class ContainerStreamWrapper
 
     private ContainerInterface $container;
 
+    private string $path;
+
+    private $id;
+
     /** @var string r, r+, or w */
     private string $mode;
 
@@ -39,11 +43,20 @@ final class ContainerStreamWrapper
      *
      * @throws \InvalidArgumentException if stream is not readable or writable
      */
-    public static function getResource(ContainerInterface $container)
+    public static function getResource(string $abstract, ?ContainerInterface $container = null)
     {
         self::register();
+        $container ??= app();
 
-        return fopen('guzzle://stream', 'rb', false, self::createStreamContext($container));
+        $mode = 'w';
+        if (
+            $container->has($abstract)
+            && (\is_string($var = $container->get($abstract)) || $var instanceof \Stringable)
+        ) {
+            $mode = 'r+';
+        }
+
+        return fopen("container://$abstract", $mode, false, self::createStreamContext($container));
     }
 
     /**
@@ -54,7 +67,7 @@ final class ContainerStreamWrapper
     public static function createStreamContext(ContainerInterface $container)
     {
         return stream_context_create([
-            'guzzle' => ['container' => $container],
+            'container' => ['container' => $container],
         ]);
     }
 
@@ -63,8 +76,8 @@ final class ContainerStreamWrapper
      */
     public static function register(): void
     {
-        if (! \in_array('guzzle', stream_get_wrappers(), true)) {
-            stream_wrapper_register('guzzle', self::class);
+        if (! \in_array('container', stream_get_wrappers(), true)) {
+            stream_wrapper_register('container', self::class);
         }
     }
 
@@ -73,41 +86,43 @@ final class ContainerStreamWrapper
         /** @noinspection SuspiciousAssignmentsInspection */
         $options = stream_context_get_options($this->context);
 
-        if (! isset($options['guzzle']['container'])) {
+        if (! isset($options['container']['container'])) {
             return false;
         }
 
+        $this->path = $path;
+        $this->id = sscanf($path, 'container://%s')[0];
         $this->mode = $mode;
-        $this->container = $options['guzzle']['container'];
+        $this->container = $options['container']['container'];
 
         return true;
     }
 
     public function stream_read(int $count): string
     {
-        return $this->container->read($count);
+        return $this->container->get($this->id);
     }
 
     public function stream_write(string $data): int
     {
-        return $this->container->write($data);
+        $this->container[$this->id] = $data;
+
+        return \strlen($data);
     }
 
     public function stream_tell(): int
     {
-        return $this->container->tell();
+        return \strlen($this->container->get($this->id));
     }
 
     public function stream_eof(): bool
     {
-        return $this->container->eof();
+        return $this->container->has($this->id);
     }
 
     public function stream_seek(int $offset, int $whence): bool
     {
-        $this->container->seek($offset, $whence);
-
-        return true;
+        return $this->container->has($this->id);
     }
 
     /**
@@ -115,11 +130,7 @@ final class ContainerStreamWrapper
      */
     public function stream_cast(int $cast_as)
     {
-        $container = clone $this->container;
-        $resource = $container->detach();
-
-        /** @noinspection ProperNullCoalescingOperatorUsageInspection */
-        return $resource ?? false;
+        return self::getResource($this->path, $this->container) ?? false;
     }
 
     /**
@@ -141,7 +152,7 @@ final class ContainerStreamWrapper
      */
     public function stream_stat(): array|false
     {
-        if ($this->container->getSize() === null) {
+        if (! $this->container->has($this->id)) {
             return false;
         }
 
@@ -161,7 +172,7 @@ final class ContainerStreamWrapper
             'uid' => 0,
             'gid' => 0,
             'rdev' => 0,
-            'size' => $this->container->getSize() ?: 0,
+            'size' => \strlen($this->container->get($this->id)) ?: 0,
             'atime' => 0,
             'mtime' => 0,
             'ctime' => 0,
