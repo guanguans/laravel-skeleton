@@ -34,6 +34,10 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         'static',
         'stdClass',
         'true',
+
+        /**
+         * @see https://www.php.net/manual/zh/reserved.variables.php
+         */
         'GLOBALS',
         '_COOKIE',
         '_ENV',
@@ -52,6 +56,35 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         'HTTP_RAW_POST_DATA',
         'http_response_header',
         'php_errormsg',
+
+        /**
+         * @see https://www.php.net/streamwrapper
+         */
+        'dir_closedir',
+        'dir_opendir',
+        'dir_readdir',
+        'dir_rewinddir',
+        'stream_cast',
+        'stream_close',
+        'stream_eof',
+        'stream_flush',
+        'stream_lock',
+        'stream_metadata',
+        'stream_open',
+        'stream_read',
+        'stream_seek',
+        'stream_set_option',
+        'stream_stat',
+        'stream_tell',
+        'stream_truncate',
+        'stream_write',
+        'unlink',
+        'url_stat',
+
+        /**
+         * @see https://www.php.net/manual/zh/class.php-user-filter.php
+         */
+        'php_user_filter',
     ];
 
     /**
