@@ -680,14 +680,10 @@ class AppServiceProvider extends ServiceProvider
     private function injection(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app): void {
-            if (! \is_object($object)) {
-                return;
-            }
-
-            $class = str($object::class);
             if (
-                ! $class->is(config('services.injection.only'))
-                || $class->is(config('services.injection.except'))
+                ! \is_object($object)
+                || ! str($object::class)->is(config('services.injection.only'))
+                || str($object::class)->is(config('services.injection.except'))
             ) {
                 return;
             }
