@@ -20,7 +20,7 @@ trait CanSeedOncePerDatabase
     {
         if ($this->seederHasAlreadyBeenCalled($class)) {
             if ($silent === false && isset($this->command)) {
-                with(new TwoColumnDetail($this->command->getOutput()))->render(
+                (new TwoColumnDetail($this->command->getOutput()))->render(
                     $class,
                     '<fg=gray>Seeder had already run on this database</> <fg=yellow;options=bold>SKIPPING</>'
                 );
@@ -62,7 +62,7 @@ trait CanSeedOncePerDatabase
         $schema = DB::connection()->getSchemaBuilder();
 
         if (! $schema->hasTable($this->seedersTable)) {
-            $schema->create($this->seedersTable, static function ($table) {
+            $schema->create($this->seedersTable, static function ($table): void {
                 $table->string('seeder')->unique();
             });
         }

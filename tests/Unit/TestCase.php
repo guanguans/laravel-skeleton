@@ -16,7 +16,7 @@ class TestCase extends \Tests\TestCase
 
     private function alertUnwantedDBAccess(): void
     {
-        DB::listen(static function ($query) {
+        DB::listen(static function ($query): void {
             throw new \RuntimeException("Database access detected: $query->sql");
         });
     }
