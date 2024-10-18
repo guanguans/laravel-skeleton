@@ -27,13 +27,23 @@ abstract class StreamWrapper
 
     /**
      * Constructs a new stream wrapper
+     *
+     * @see \opendir()
+     * @see \fopen()
+     * @see static::dir_opendir()
+     * @see static::stream_open()
      */
-    public function __construct() {}
+    // public function __construct() {}
 
     /**
      * Destructs an existing stream wrapper
+     *
+     * @see \closedir()
+     * @see \fclose()
+     * @see static::dir_closedir()
+     * @see static::stream_close()
      */
-    public function __destruct() {}
+    // public function __destruct() {}
 
     abstract public static function name(): string;
 
@@ -81,7 +91,7 @@ abstract class StreamWrapper
      *
      * @see \readdir()
      */
-    public function dir_readdir(): string|false
+    public function dir_readdir(): false|string
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
@@ -130,6 +140,8 @@ abstract class StreamWrapper
      * Retrieve the underlaying resource
      *
      * @return resource
+     *
+     * @todo
      */
     public function stream_cast(int $castAs): mixed
     {
@@ -140,6 +152,8 @@ abstract class StreamWrapper
      * Close a resource
      *
      * @see \fclose()
+     *
+     * @todo
      */
     public function stream_close(): void {}
 
@@ -175,6 +189,8 @@ abstract class StreamWrapper
 
     /**
      * Change stream metadata
+     *
+     * @todo
      */
     public function stream_metadata(string $path, int $option, mixed $value): bool
     {
@@ -213,6 +229,8 @@ abstract class StreamWrapper
 
     /**
      * Change stream options
+     *
+     * @todo
      */
     public function stream_set_option(int $option, int $arg1, int $arg2): bool
     {

@@ -54,7 +54,7 @@ class UserFileStreamWrapper extends StreamWrapper
         return true;
     }
 
-    public function dir_readdir(): string|false
+    public function dir_readdir(): false|string
     {
         return readdir($this->resource);
     }
