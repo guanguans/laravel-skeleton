@@ -4,6 +4,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support\StreamWrappers;
 
 /**
@@ -16,6 +24,16 @@ abstract class StreamWrapper
 {
     /** @var resource */
     public $context;
+
+    /**
+     * Constructs a new stream wrapper
+     */
+    public function __construct() {}
+
+    /**
+     * Destructs an existing stream wrapper
+     */
+    public function __destruct() {}
 
     abstract public static function name(): string;
 
@@ -37,16 +55,6 @@ abstract class StreamWrapper
     {
         return \in_array(static::name(), stream_get_wrappers(), true);
     }
-
-    /**
-     * Constructs a new stream wrapper
-     */
-    public function __construct() {}
-
-    /**
-     * Destructs an existing stream wrapper
-     */
-    public function __destruct() {}
 
     /**
      * Close directory handle
@@ -73,7 +81,7 @@ abstract class StreamWrapper
      *
      * @see \readdir()
      */
-    public function dir_readdir(): string
+    public function dir_readdir(): string|false
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
@@ -103,7 +111,7 @@ abstract class StreamWrapper
      *
      * @see \rename()
      */
-    public function rename(string $path_from, string $path_to): bool
+    public function rename(string $pathFrom, string $pathTo): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
@@ -123,7 +131,7 @@ abstract class StreamWrapper
      *
      * @return resource
      */
-    public function stream_cast(int $cast_as): mixed
+    public function stream_cast(int $castAs): mixed
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
@@ -178,7 +186,7 @@ abstract class StreamWrapper
      *
      * @see \fopen()
      */
-    public function stream_open(string $path, string $mode, int $options, ?string &$opened_path): bool
+    public function stream_open(string $path, string $mode, int $options, ?string &$openedPath): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
@@ -188,7 +196,7 @@ abstract class StreamWrapper
      *
      * @see \fread()
      */
-    public function stream_read(int $count): string|false
+    public function stream_read(int $count): false|string
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
@@ -236,7 +244,7 @@ abstract class StreamWrapper
      *
      * @see \ftruncate()
      */
-    public function stream_truncate(int $new_size): bool
+    public function stream_truncate(int $newSize): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }

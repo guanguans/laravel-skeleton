@@ -60,8 +60,8 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         /**
          * @see https://www.php.net/streamwrapper
          */
-        'opened_path',
-        'cast_as',
+        // 'opened_path',
+        // 'cast_as',
         'dir_closedir',
         'dir_opendir',
         'dir_readdir',

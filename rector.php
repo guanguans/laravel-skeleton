@@ -30,11 +30,12 @@ use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
+use Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
 use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
 use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
+use Rector\DeadCode\Rector\Property\RemoveUnusedPrivatePropertyRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
@@ -221,12 +222,16 @@ return RectorConfig::configure()
         MakeInheritedMethodVisibilitySameAsParentRector::class => [
             __DIR__.'/app/Admin/Actions/Show',
         ],
-        RemoveUnusedPublicMethodParameterRector::class => [
-            __DIR__.'/app/Support/GuzzleStreamWrapper.php',
+        RemoveEmptyClassMethodRector::class => [
+            __DIR__.'/app/Support/StreamWrappers',
+        ],
+        RemoveUnusedPrivatePropertyRector::class => [
+            __DIR__.'/app/Support/StreamWrappers',
         ],
         RemoveUnusedVariableInCatchRector::class => [
             __DIR__.'/app/Support/Macros/CommandMacro.php',
         ],
+
         RemovePhpVersionIdCheckRector::class => [
             __DIR__.'/app/Console/Commands/HealthCheckCommand.php',
         ],
@@ -238,6 +243,7 @@ return RectorConfig::configure()
         ],
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/app/Console/Commands/ShowUnsupportedRequiresCommand.php',
+            __DIR__.'/tests.php',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
             __DIR__.'/app/Support/helpers.php',

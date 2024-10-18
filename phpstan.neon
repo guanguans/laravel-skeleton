@@ -27,6 +27,7 @@ parameters:
     excludePaths:
         - ./*/*/FileToBeExcluded.php
         - app/Support/Http/
+        - app/Support/StreamWrappers/
     tmpDir: build/phpstan
     errorFormat: friendly
 #    checkOctaneCompatibility: true

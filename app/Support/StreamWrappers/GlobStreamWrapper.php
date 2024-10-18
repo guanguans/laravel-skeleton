@@ -29,7 +29,7 @@ class GlobStreamWrapper
 
     private int $options;
 
-    private ?string $openedPath;
+    private ?string $openedPath = null;
 
     private array $files;
 
@@ -68,7 +68,7 @@ class GlobStreamWrapper
         ]);
     }
 
-    public function stream_open($path, $mode, $options, &$opened_path): bool
+    public function stream_open($path, $mode, $options, &$openedPath): bool
     {
         $contextOptions = stream_context_get_options($this->context);
 
@@ -81,7 +81,7 @@ class GlobStreamWrapper
         $this->path = $path;
         $this->mode = $mode;
         $this->options = $options;
-        $this->openedPath = $opened_path = $pattern;
+        $this->openedPath = $openedPath = $pattern;
         $this->files = $files;
         $this->position = 0;
 
@@ -105,7 +105,7 @@ class GlobStreamWrapper
         return $this->position >= \count($this->files);
     }
 
-    public function stream_stat(): false|array
+    public function stream_stat(): array|false
     {
         static $modeMap = [
             'r' => 33060,
@@ -134,9 +134,9 @@ class GlobStreamWrapper
 
     public function dir_opendir(string $path, int $options): bool
     {
-        \is_resource($this->context)
-            ? $contextOptions = stream_context_get_options($this->context)
-            : $contextOptions = [];
+        $contextOptions = \is_resource($this->context)
+            ? stream_context_get_options($this->context)
+            : [];
 
         $flags = $contextOptions[self::name()]['flags'] ?? 0;
 
