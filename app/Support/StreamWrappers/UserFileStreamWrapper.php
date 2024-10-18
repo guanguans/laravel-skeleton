@@ -14,6 +14,12 @@ declare(strict_types=1);
 
 namespace App\Support\StreamWrappers;
 
+/**
+ * ```php
+ * $resource = fopen('user-file://file.txt', 'rb+');
+ * $resource = opendir('user-file://dir');
+ * ```
+ */
 class UserFileStreamWrapper extends StreamWrapper
 {
     /** @var resource */
