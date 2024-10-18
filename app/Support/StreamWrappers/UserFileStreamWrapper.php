@@ -11,6 +11,11 @@ class UserFileStreamWrapper extends StreamWrapper
     /**
      * @var resource
      */
+    private $dirResource;
+
+    /**
+     * @var resource
+     */
     private $fileResource;
 
     public static function name(): string
@@ -21,7 +26,7 @@ class UserFileStreamWrapper extends StreamWrapper
     public function stream_open(string $path, string $mode, int $options, ?string &$opened_path): bool
     {
         sscanf($path, 'user-file://%s', $newPath);
-        if ($newPath == null) {
+        if ($newPath === null) {
             return false;
         }
 
@@ -78,5 +83,41 @@ class UserFileStreamWrapper extends StreamWrapper
     public function stream_stat(): array|false
     {
         return fstat($this->fileResource);
+    }
+
+    public function dir_opendir(string $path, int $options): bool
+    {
+        sscanf($path, 'user-file://%s', $newPath);
+        if ($newPath === null) {
+            return false;
+        }
+
+        $resource = opendir($newPath);
+        if (! \is_resource($resource)) {
+            return false;
+        }
+
+        $this->dirResource = $resource;
+
+        return true;
+    }
+
+    public function dir_closedir(): bool
+    {
+        closedir($this->dirResource);
+
+        return true;
+    }
+
+    public function dir_readdir(): string
+    {
+        return readdir($this->dirResource);
+    }
+
+    public function dir_rewinddir(): bool
+    {
+        rewinddir($this->dirResource);
+
+        return true;
     }
 }

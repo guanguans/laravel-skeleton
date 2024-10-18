@@ -50,6 +50,8 @@ abstract class StreamWrapper
 
     /**
      * Close directory handle
+     *
+     * @see \closedir()
      */
     public function dir_closedir(): bool
     {
@@ -58,6 +60,8 @@ abstract class StreamWrapper
 
     /**
      * Open directory handle
+     *
+     * @see \opendir()
      */
     public function dir_opendir(string $path, int $options): bool
     {
@@ -66,6 +70,8 @@ abstract class StreamWrapper
 
     /**
      * Read entry from directory handle
+     *
+     * @see \readdir()
      */
     public function dir_readdir(): string
     {
@@ -74,6 +80,8 @@ abstract class StreamWrapper
 
     /**
      * Rewind directory handle
+     *
+     * @see \rewinddir()
      */
     public function dir_rewinddir(): bool
     {
