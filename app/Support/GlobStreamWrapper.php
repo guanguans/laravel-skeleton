@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support;
 
 /**
@@ -8,9 +18,9 @@ namespace App\Support;
  * @see https://www.php.net/manual/zh/wrappers.php
  * @see \GuzzleHttp\Psr7\StreamWrapper
  */
-class UserGlobStreamWrapper
+class GlobStreamWrapper
 {
-    public const NAME = 'user-glob';
+    public const NAME = 'glob';
 
     /** @var resource */
     public $context;
@@ -28,7 +38,7 @@ class UserGlobStreamWrapper
     private int $position;
 
     /**
-     * @param  resource|null  $context
+     * @param  null|resource  $context
      * @return false|resource
      */
     public static function resourceFor(
@@ -55,9 +65,9 @@ class UserGlobStreamWrapper
         ]);
     }
 
-    public static function register()
+    public static function register(): void
     {
-        if (! \in_array(self::NAME, stream_get_wrappers())) {
+        if (! \in_array(self::NAME, stream_get_wrappers(), true)) {
             stream_wrapper_register(self::NAME, self::class);
         }
     }
@@ -68,14 +78,14 @@ class UserGlobStreamWrapper
 
         $flags = $contextOptions[self::NAME]['flags'] ?? 0;
 
-        if (! sscanf($path, 'user-glob://%s', $pattern) || ($files = glob($pattern, $flags)) === false) {
+        if (! sscanf($path, 'glob://%s', $pattern) || ($files = glob($pattern, $flags)) === false) {
             return false;
         }
 
         $this->path = $path;
         $this->mode = $mode;
         $this->options = $options;
-        $this->openedPath = $opened_path;
+        $this->openedPath = $opened_path = $pattern;
         $this->files = $files;
         $this->position = 0;
 
@@ -124,5 +134,48 @@ class UserGlobStreamWrapper
             'blksize' => 0,
             'blocks' => 0,
         ];
+    }
+
+    public function dir_opendir(string $path, int $options)
+    {
+        \is_resource($this->context)
+            ? $contextOptions = stream_context_get_options($this->context)
+            : $contextOptions = [];
+
+        $flags = $contextOptions[self::NAME]['flags'] ?? 0;
+
+        if (! sscanf($path, 'glob://%s', $pattern) || ($files = glob($pattern, $flags)) === false) {
+            return false;
+        }
+
+        array_unshift($files, $files[0]);
+
+        $this->path = $path;
+        // $this->mode = $mode;
+        $this->options = $options;
+        // $this->openedPath = $opened_path = $pattern;
+        $this->files = $files;
+        $this->position = 0;
+
+        return true;
+    }
+
+    public function dir_readdir()
+    {
+        if (isset($this->files[$this->position])) {
+            $file = $this->files[$this->position];
+            ++$this->position;
+
+            return $file;
+        }
+
+        return false;
+    }
+
+    public function url_stat(string $path, int $flags): array
+    {
+        sscanf($path, 'glob://*.php/%s', $file);
+
+        return stat($file);
     }
 }
