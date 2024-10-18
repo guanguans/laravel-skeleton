@@ -85,6 +85,26 @@ class UserFileStreamWrapper extends StreamWrapper
         return fstat($this->fileResource);
     }
 
+    public function unlink(string $path): bool
+    {
+        sscanf($path, 'user-file://%s', $newPath);
+        if ($newPath === null) {
+            return false;
+        }
+
+        return unlink($newPath);
+    }
+
+    public function url_stat(string $path, int $flags): array|false
+    {
+        sscanf($path, 'user-file://%s', $newPath);
+        if ($newPath === null) {
+            return false;
+        }
+
+        return stat($newPath);
+    }
+
     public function dir_opendir(string $path, int $options): bool
     {
         sscanf($path, 'user-file://%s', $newPath);
@@ -119,5 +139,40 @@ class UserFileStreamWrapper extends StreamWrapper
         rewinddir($this->dirResource);
 
         return true;
+    }
+
+    public function mkdir(string $path, int $mode, int $options): bool
+    {
+        sscanf($path, 'user-file://%s', $newPath);
+        if ($newPath === null) {
+            return false;
+        }
+
+        return mkdir($newPath, $mode);
+    }
+
+    public function rename(string $path_from, string $path_to): bool
+    {
+        sscanf($path_from, 'user-file://%s', $newPathFrom);
+        if ($newPathFrom === null) {
+            return false;
+        }
+
+        sscanf($path_to, 'user-file://%s', $newPathTo);
+        if ($newPathTo === null) {
+            return false;
+        }
+
+        return rename($newPathFrom, $newPathTo);
+    }
+
+    public function rmdir(string $path, int $options): bool
+    {
+        sscanf($path, 'user-file://%s', $newPath);
+        if ($newPath === null) {
+            return false;
+        }
+
+        return rmdir($newPath);
     }
 }

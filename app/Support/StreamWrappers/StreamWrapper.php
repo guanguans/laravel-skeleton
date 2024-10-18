@@ -90,6 +90,8 @@ abstract class StreamWrapper
 
     /**
      * Create a directory
+     *
+     * @see \mkdir()
      */
     public function mkdir(string $path, int $mode, int $options): bool
     {
@@ -98,6 +100,8 @@ abstract class StreamWrapper
 
     /**
      * Renames a file or directory
+     *
+     * @see \rename()
      */
     public function rename(string $path_from, string $path_to): bool
     {
@@ -106,6 +110,8 @@ abstract class StreamWrapper
 
     /**
      * Removes a directory
+     *
+     * @see \rmdir()
      */
     public function rmdir(string $path, int $options): bool
     {
@@ -247,6 +253,8 @@ abstract class StreamWrapper
 
     /**
      * Delete a file
+     *
+     * @see \unlink()
      */
     public function unlink(string $path): bool
     {
@@ -255,6 +263,8 @@ abstract class StreamWrapper
 
     /**
      * Retrieve information about a file
+     *
+     * @see \stat()
      */
     public function url_stat(string $path, int $flags): array|false
     {
