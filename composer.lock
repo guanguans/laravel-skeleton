@@ -14578,16 +14578,16 @@
         },
         {
             "name": "spatie/laravel-short-schedule",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-short-schedule.git",
-                "reference": "5d18a8d006a3c3083f3db7c2babeb64a2b58ccad"
+                "reference": "c0017e33b4139ad12ee7048fe4fd7a55cdd8f442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-short-schedule/zipball/5d18a8d006a3c3083f3db7c2babeb64a2b58ccad",
-                "reference": "5d18a8d006a3c3083f3db7c2babeb64a2b58ccad",
+                "url": "https://api.github.com/repos/spatie/laravel-short-schedule/zipball/c0017e33b4139ad12ee7048fe4fd7a55cdd8f442",
+                "reference": "c0017e33b4139ad12ee7048fe4fd7a55cdd8f442",
                 "shasum": ""
             },
             "require": {
@@ -14639,7 +14639,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-short-schedule/issues",
-                "source": "https://github.com/spatie/laravel-short-schedule/tree/1.6.1"
+                "source": "https://github.com/spatie/laravel-short-schedule/tree/1.6.2"
             },
             "funding": [
                 {
@@ -14651,7 +14651,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-16T11:06:04+00:00"
+            "abandoned": "Laravel's Scheduler now supports sub-minute scheduled tasks",
+            "time": "2024-10-18T13:13:01+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",
