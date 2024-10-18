@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support;
+namespace App\Support\StreamWrappers;
 
 /**
  * @see https://www.php.net/manual/zh/class.streamwrapper.php
@@ -18,7 +18,7 @@ namespace App\Support;
  * @see https://www.php.net/manual/zh/wrappers.php
  * @see \GuzzleHttp\Psr7\StreamWrapper
  */
-class GlobStreamWrapper
+class GlobStreamWrapper extends StreamWrapper
 {
     public const NAME = 'glob';
 
@@ -36,6 +36,11 @@ class GlobStreamWrapper
     private array $files;
 
     private int $position;
+
+    public static function name(): string
+    {
+        return self::NAME;
+    }
 
     /**
      * @param  null|resource  $context
@@ -63,13 +68,6 @@ class GlobStreamWrapper
                 'flags' => $flags,
             ],
         ]);
-    }
-
-    public static function register(): void
-    {
-        if (! \in_array(self::NAME, stream_get_wrappers(), true)) {
-            stream_wrapper_register(self::NAME, self::class);
-        }
     }
 
     public function stream_open($path, $mode, $options, &$opened_path)
