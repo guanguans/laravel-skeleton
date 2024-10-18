@@ -20,8 +20,6 @@ namespace App\Support\StreamWrappers;
  */
 class GlobStreamWrapper extends StreamWrapper
 {
-    public const NAME = 'glob';
-
     /** @var resource */
     public $context;
 
@@ -37,9 +35,9 @@ class GlobStreamWrapper extends StreamWrapper
 
     private int $position;
 
-    public static function name(): string
+    final public static function name(): string
     {
-        return self::NAME;
+        return 'glob';
     }
 
     /**
@@ -64,17 +62,17 @@ class GlobStreamWrapper extends StreamWrapper
     public static function createStreamContext(int $flags = 0)
     {
         return stream_context_create([
-            self::NAME => [
+            self::name() => [
                 'flags' => $flags,
             ],
         ]);
     }
 
-    public function stream_open($path, $mode, $options, &$opened_path)
+    public function stream_open($path, $mode, $options, &$opened_path): bool
     {
         $contextOptions = stream_context_get_options($this->context);
 
-        $flags = $contextOptions[self::NAME]['flags'] ?? 0;
+        $flags = $contextOptions[self::name()]['flags'] ?? 0;
 
         if (! sscanf($path, 'glob://%s', $pattern) || ($files = glob($pattern, $flags)) === false) {
             return false;
@@ -90,7 +88,7 @@ class GlobStreamWrapper extends StreamWrapper
         return true;
     }
 
-    public function stream_read($count)
+    public function stream_read($count): false|string
     {
         if (isset($this->files[$count])) {
             $file = $this->files[$count];
@@ -102,12 +100,12 @@ class GlobStreamWrapper extends StreamWrapper
         return false;
     }
 
-    public function stream_eof()
+    public function stream_eof(): bool
     {
         return $this->position >= \count($this->files);
     }
 
-    public function stream_stat()
+    public function stream_stat(): false|array
     {
         static $modeMap = [
             'r' => 33060,
@@ -134,13 +132,13 @@ class GlobStreamWrapper extends StreamWrapper
         ];
     }
 
-    public function dir_opendir(string $path, int $options)
+    public function dir_opendir(string $path, int $options): bool
     {
         \is_resource($this->context)
             ? $contextOptions = stream_context_get_options($this->context)
             : $contextOptions = [];
 
-        $flags = $contextOptions[self::NAME]['flags'] ?? 0;
+        $flags = $contextOptions[self::name()]['flags'] ?? 0;
 
         if (! sscanf($path, 'glob://%s', $pattern) || ($files = glob($pattern, $flags)) === false) {
             return false;
@@ -158,7 +156,7 @@ class GlobStreamWrapper extends StreamWrapper
         return true;
     }
 
-    public function dir_readdir()
+    public function dir_readdir(): string
     {
         if (isset($this->files[$this->position])) {
             $file = $this->files[$this->position];
