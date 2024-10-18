@@ -38,10 +38,7 @@ abstract class StreamWrapper
         return \in_array(static::name(), stream_get_wrappers(), true);
     }
 
-    public function __construct()
-    {
-        $this->throwMethodNotImplemented(__FUNCTION__);
-    }
+    public function __construct() {}
 
     public function dir_closedir(): bool
     {
@@ -81,16 +78,16 @@ abstract class StreamWrapper
     /**
      * @return resource
      */
-    public function stream_cast(int $cast_as)
+    public function stream_cast(int $cast_as): mixed
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
-    public function stream_close(): void
-    {
-        $this->throwMethodNotImplemented(__FUNCTION__);
-    }
+    public function stream_close(): void {}
 
+    /**
+     * @see \feof()
+     */
     public function stream_eof(): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
@@ -111,15 +108,17 @@ abstract class StreamWrapper
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
-    public function stream_open(
-        string $path,
-        string $mode,
-        int $options,
-        ?string &$opened_path
-    ): bool {
+    /**
+     * @see \fopen()
+     */
+    public function stream_open(string $path, string $mode, int $options, ?string &$opened_path): bool
+    {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \fread()
+     */
     public function stream_read(int $count): string|false
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
@@ -165,10 +164,7 @@ abstract class StreamWrapper
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
-    public function __destruct()
-    {
-        $this->throwMethodNotImplemented(__FUNCTION__);
-    }
+    public function __destruct() {}
 
     /**
      * @throws \BadMethodCallException
