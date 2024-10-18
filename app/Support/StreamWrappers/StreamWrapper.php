@@ -83,6 +83,9 @@ abstract class StreamWrapper
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \fclose()
+     */
     public function stream_close(): void {}
 
     /**
@@ -93,11 +96,17 @@ abstract class StreamWrapper
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \fflush()
+     */
     public function stream_flush(): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \flock()
+     */
     public function stream_lock(int $operation): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
@@ -124,6 +133,9 @@ abstract class StreamWrapper
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \fseek()
+     */
     public function stream_seek(int $offset, int $whence = SEEK_SET): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
@@ -134,21 +146,33 @@ abstract class StreamWrapper
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \fstat()
+     */
     public function stream_stat(): array|false
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \ftell()
+     */
     public function stream_tell(): int
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \ftruncate()
+     */
     public function stream_truncate(int $new_size): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
+    /**
+     * @see \fwrite()
+     */
     public function stream_write(string $data): int
     {
         $this->throwMethodNotImplemented(__FUNCTION__);

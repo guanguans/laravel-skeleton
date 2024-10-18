@@ -18,7 +18,7 @@ namespace App\Support\StreamWrappers;
  * @see https://www.php.net/manual/zh/wrappers.php
  * @see \GuzzleHttp\Psr7\StreamWrapper
  */
-class GlobStreamWrapper extends StreamWrapper
+class GlobStreamWrapper
 {
     /** @var resource */
     public $context;
