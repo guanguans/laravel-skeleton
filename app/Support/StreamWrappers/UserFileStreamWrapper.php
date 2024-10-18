@@ -33,7 +33,7 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function dir_opendir(string $path, int $options): bool
     {
-        sscanf($path, 'user-file://%s', $newPath);
+        $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
@@ -62,7 +62,7 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function mkdir(string $path, int $mode, int $options): bool
     {
-        sscanf($path, 'user-file://%s', $newPath);
+        $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
@@ -72,12 +72,12 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function rename(string $pathFrom, string $pathTo): bool
     {
-        sscanf($pathFrom, 'user-file://%s', $newPathFrom);
+        $newPathFrom = $this->scanPath($pathFrom);
         if ($newPathFrom === null) {
             return false;
         }
 
-        sscanf($pathTo, 'user-file://%s', $newPathTo);
+        $newPathTo = $this->scanPath($pathTo);
         if ($newPathTo === null) {
             return false;
         }
@@ -87,7 +87,7 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function rmdir(string $path, int $options): bool
     {
-        sscanf($path, 'user-file://%s', $newPath);
+        $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
@@ -112,12 +112,12 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function stream_open(string $path, string $mode, int $options, ?string &$openedPath): bool
     {
-        sscanf($path, 'user-file://%s', $newPath);
+        $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
 
-        $resource = fopen("file://$newPath", $mode);
+        $resource = fopen($newPath, $mode);
         if (! \is_resource($resource)) {
             return false;
         }
@@ -159,7 +159,7 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function unlink(string $path): bool
     {
-        sscanf($path, 'user-file://%s', $newPath);
+        $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
@@ -169,11 +169,23 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function url_stat(string $path, int $flags): array|false
     {
-        sscanf($path, 'user-file://%s', $newPath);
+        $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
 
         return stat($newPath);
+    }
+
+    private function scanPath(string $path): ?string
+    {
+        sscanf($path, 'user-file://%s', $newPath);
+        if ($newPath === null) {
+            return null;
+        }
+
+        sscanf($path, 'user-%s', $newPath);
+
+        return $newPath;
     }
 }
