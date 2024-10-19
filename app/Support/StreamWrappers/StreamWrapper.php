@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace App\Support\StreamWrappers;
 
+use App\Support\StreamWrappers\Concerns\HasContext;
+
 /**
  * @see https://www.php.net/manual/zh/class.streamwrapper.php
  * @see https://www.php.net/manual/zh/stream.streamwrapper.example-1.php
@@ -22,8 +24,7 @@ namespace App\Support\StreamWrappers;
  */
 abstract class StreamWrapper
 {
-    /** @var null|resource */
-    public $context;
+    use HasContext;
 
     /**
      * Constructs a new stream wrapper

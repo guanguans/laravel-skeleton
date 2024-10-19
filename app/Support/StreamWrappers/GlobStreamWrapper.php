@@ -4,6 +4,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Support\StreamWrappers;
 
 /**
@@ -21,10 +29,7 @@ class GlobStreamWrapper extends StreamWrapper
      */
     public function __construct()
     {
-        $this->setContextOptions(array_replace_recursive(
-            [self::name() => ['flags' => GLOB_BRACE | GLOB_NOSORT]],
-            $this->getContextOptions()
-        ));
+        $this->addContextOption('flags', GLOB_BRACE | GLOB_NOSORT);
     }
 
     final public static function name(): string
@@ -53,12 +58,12 @@ class GlobStreamWrapper extends StreamWrapper
             return false;
         }
 
-        $files = glob($pattern, $this->getContextOptions()[self::name()]['flags'] ?? 0);
+        $files = glob($pattern, $this->getContextOption('flags', 0));
         if ($files === false) {
             return false;
         }
 
-        $this->mergeContextOptions([self::name() => ['pattern' => $pattern]]);
+        $this->setContextOption('pattern', $pattern);
         $this->files = $files;
         $this->position = 0;
 
@@ -83,9 +88,7 @@ class GlobStreamWrapper extends StreamWrapper
 
     public function url_stat(string $path, int $flags): array|false
     {
-        $pattern = $this->getContextOptions()[self::name()]['pattern'];
-
-        sscanf($path, "glob://$pattern/%s", $newPath);
+        sscanf($path, "glob://{$this->getContextOption('pattern')}/%s", $newPath);
 
         return stat($newPath);
     }
@@ -95,33 +98,5 @@ class GlobStreamWrapper extends StreamWrapper
         sscanf($path, 'glob://%s', $pattern);
 
         return $pattern;
-    }
-
-    private function getContextOptions(): array
-    {
-        return stream_context_get_options($this->getContext());
-    }
-
-    private function setContextOptions(array $contextOptions): void
-    {
-        stream_context_set_options($this->getContext(), $contextOptions);
-    }
-
-    private function mergeContextOptions(array $contextOptions): void
-    {
-        $this->setContextOptions(array_merge_recursive($this->getContextOptions(), $contextOptions));
-    }
-
-    private function replaceContextOptions(array $contextOptions): void
-    {
-        $this->setContextOptions(array_replace_recursive($this->getContextOptions(), $contextOptions));
-    }
-
-    /**
-     * @return resource|null
-     */
-    private function getContext()
-    {
-        return $this->context ?? stream_context_get_default();
     }
 }
