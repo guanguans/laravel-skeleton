@@ -46,7 +46,7 @@ class UserFileStreamWrapper extends StreamWrapper
             return false;
         }
 
-        $resource = opendir($newPath);
+        $resource = opendir($newPath, $this->context());
         if (! \is_resource($resource)) {
             return false;
         }
@@ -103,9 +103,6 @@ class UserFileStreamWrapper extends StreamWrapper
         return rmdir($newPath);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function stream_cast(int $castAs): mixed
     {
         switch ($castAs) {
@@ -172,23 +169,19 @@ class UserFileStreamWrapper extends StreamWrapper
             });
         }
 
-        $contextOptions = stream_context_get_options($this->context);
-        $contextOptions['file'] = array_replace_recursive($contextOptions['file'] ?? [], $contextOptions[self::name()] ?? []);
-        $this->context = stream_context_create($contextOptions);
-
         $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
 
-        $resource = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->context);
+        $resource = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->context());
         if (! \is_resource($resource)) {
             return false;
         }
 
         if ($useIncludePath) {
             sscanf($newPath, 'file://%s', $purePath);
-            foreach (explode(':', get_include_path()) as $includePath) {
+            foreach (array_map(trim(...), explode(':', get_include_path())) as $includePath) {
                 // $fullPath = $includePath.DIRECTORY_SEPARATOR.$purePath;
                 $fullPath = join_paths($includePath, $purePath);
                 if (file_exists($fullPath)) {
@@ -279,5 +272,19 @@ class UserFileStreamWrapper extends StreamWrapper
         sscanf($path, 'user-%s', $newPath);
 
         return $newPath;
+    }
+
+    /**
+     * @return resource
+     */
+    private function context(): mixed
+    {
+        $contextOptions = stream_context_get_options($this->context);
+        $contextOptions['file'] = array_replace_recursive(
+            $contextOptions['file'] ?? [],
+            $contextOptions[self::name()] ?? []
+        );
+
+        return $this->context = stream_context_create($contextOptions);
     }
 }
