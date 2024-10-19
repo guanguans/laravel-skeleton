@@ -140,10 +140,8 @@ abstract class StreamWrapper
      * @see \stream_select()
      *
      * @return resource
-     *
-     * @noinspection MissingReturnTypeInspection
      */
-    public function stream_cast(int $castAs)
+    public function stream_cast(int $castAs): mixed
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
@@ -212,6 +210,7 @@ abstract class StreamWrapper
      * Read from stream
      *
      * @see \fread()
+     * @see \fgets()
      */
     public function stream_read(int $count): false|string
     {
@@ -294,7 +293,44 @@ abstract class StreamWrapper
     /**
      * Retrieve information about a file
      *
+     * This method is called in response to all stat() related functions, such as:
+     *
      * @see \stat()
+     * @see \copy()
+     * @see \fileperms()
+     * @see \fileinode()
+     * @see \filesize()
+     * @see \fileowner()
+     * @see \filegroup()
+     * @see \fileatime()
+     * @see \filemtime()
+     * @see \filectime()
+     * @see \filetype()
+     * @see \is_writable()
+     * @see \is_readable()
+     * @see \is_executable()
+     * @see \is_file()
+     * @see \is_dir()
+     * @see \is_link()
+     * @see \file_exists()
+     * @see \lstat()
+     * @see \stat()
+     * @see \SplFileInfo::getPerms()
+     * @see \SplFileInfo::getInode()
+     * @see \SplFileInfo::getSize()
+     * @see \SplFileInfo::getOwner()
+     * @see \SplFileInfo::getGroup()
+     * @see \SplFileInfo::getATime()
+     * @see \SplFileInfo::getMTime()
+     * @see \SplFileInfo::getCTime()
+     * @see \SplFileInfo::getType()
+     * @see \SplFileInfo::isWritable()
+     * @see \SplFileInfo::isReadable()
+     * @see \SplFileInfo::isExecutable()
+     * @see \SplFileInfo::isFile()
+     * @see \SplFileInfo::isDir()
+     * @see \SplFileInfo::isLink()
+     * @see \RecursiveDirectoryIterator::hasChildren()
      */
     public function url_stat(string $path, int $flags): array|false
     {

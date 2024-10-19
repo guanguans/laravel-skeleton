@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace App\Support\StreamWrappers;
 
+use function Illuminate\Filesystem\join_paths;
+
 /**
  * ```php
  * $resource = fopen('user-file://file.txt', 'rb+');
@@ -103,10 +105,8 @@ class UserFileStreamWrapper extends StreamWrapper
 
     /**
      * {@inheritdoc}
-     *
-     * @noinspection MissingReturnTypeInspection
      */
-    public function stream_cast(int $castAs)
+    public function stream_cast(int $castAs): mixed
     {
         switch ($castAs) {
             case STREAM_CAST_AS_STREAM:
@@ -166,17 +166,44 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function stream_open(string $path, string $mode, int $options, ?string &$openedPath): bool
     {
+        if ($useTriggerError = ($options & STREAM_REPORT_ERRORS)) {
+            set_error_handler(static function (int $errno, string $errstr): void {
+                trigger_error($errstr, $errno);
+            });
+        }
+
+        $contextOptions = stream_context_get_options($this->context);
+        $contextOptions['file'] = array_replace_recursive($contextOptions['file'] ?? [], $contextOptions[self::name()] ?? []);
+        $this->context = stream_context_create($contextOptions);
+
         $newPath = $this->scanPath($path);
         if ($newPath === null) {
             return false;
         }
 
-        $resource = fopen($newPath, $mode);
+        $resource = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->context);
         if (! \is_resource($resource)) {
             return false;
         }
 
+        if ($useIncludePath) {
+            sscanf($newPath, 'file://%s', $purePath);
+            foreach (explode(':', get_include_path()) as $includePath) {
+                // $fullPath = $includePath.DIRECTORY_SEPARATOR.$purePath;
+                $fullPath = join_paths($includePath, $purePath);
+                if (file_exists($fullPath)) {
+                    $openedPath = $fullPath;
+
+                    break;
+                }
+            }
+        }
+
         $this->resource = $resource;
+
+        if ($useTriggerError) {
+            restore_error_handler();
+        }
 
         return true;
     }
