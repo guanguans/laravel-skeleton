@@ -121,6 +121,9 @@ class UserFileStreamWrapper extends StreamWrapper
         return flock($this->resource, $operation);
     }
 
+    /**
+     * @noinspection PotentialMalwareInspection
+     */
     public function stream_metadata(string $path, int $option, mixed $value): bool
     {
         $newPath = $this->scanPath($path);
@@ -128,29 +131,13 @@ class UserFileStreamWrapper extends StreamWrapper
             return false;
         }
 
-        switch ($option) {
-            case STREAM_META_TOUCH:
-                /** @noinspection PotentialMalwareInspection */
-                return touch(
-                    $newPath,
-                    $mtime = $value[0] ?? time(),
-                    $value[1] ?? $mtime
-                );
-
-            case STREAM_META_OWNER_NAME:
-            case STREAM_META_OWNER:
-                return chown($newPath, $value);
-
-            case STREAM_META_GROUP_NAME:
-            case STREAM_META_GROUP:
-                return chgrp($newPath, $value);
-
-            case STREAM_META_ACCESS:
-                return chmod($newPath, $value);
-
-            default:
-                return false;
-        }
+        return match ($option) {
+            STREAM_META_TOUCH => touch($newPath, $mtime = $value[0] ?? time(), $value[1] ?? $mtime),
+            STREAM_META_OWNER_NAME, STREAM_META_OWNER => chown($newPath, $value),
+            STREAM_META_GROUP_NAME, STREAM_META_GROUP => chgrp($newPath, $value),
+            STREAM_META_ACCESS => chmod($newPath, $value),
+            default => false,
+        };
     }
 
     public function stream_open(string $path, string $mode, int $options, ?string &$openedPath): bool
