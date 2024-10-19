@@ -22,7 +22,7 @@ namespace App\Support\StreamWrappers;
  */
 class UserFileStreamWrapper extends StreamWrapper
 {
-    /** @var resource */
+    /** @var null|resource */
     private $resource;
 
     final public static function name(): string
@@ -99,6 +99,11 @@ class UserFileStreamWrapper extends StreamWrapper
         }
 
         return rmdir($newPath);
+    }
+
+    public function stream_close(): void
+    {
+        fclose($this->resource);
     }
 
     public function stream_eof(): bool

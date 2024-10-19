@@ -22,7 +22,7 @@ namespace App\Support\StreamWrappers;
  */
 abstract class StreamWrapper
 {
-    /** @var resource */
+    /** @var null|resource */
     public $context;
 
     /**
@@ -33,7 +33,7 @@ abstract class StreamWrapper
      * @see static::dir_opendir()
      * @see static::stream_open()
      */
-    // public function __construct() {}
+    public function __construct() {}
 
     /**
      * Destructs an existing stream wrapper
@@ -43,7 +43,7 @@ abstract class StreamWrapper
      * @see static::dir_closedir()
      * @see static::stream_close()
      */
-    // public function __destruct() {}
+    public function __destruct() {}
 
     abstract public static function name(): string;
 
@@ -152,8 +152,6 @@ abstract class StreamWrapper
      * Close a resource
      *
      * @see \fclose()
-     *
-     * @todo
      */
     public function stream_close(): void {}
 
