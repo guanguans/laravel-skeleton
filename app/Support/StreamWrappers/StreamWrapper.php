@@ -231,7 +231,10 @@ abstract class StreamWrapper
     /**
      * Change stream options
      *
-     * @todo
+     * @see \stream_set_blocking()
+     * @see \stream_set_read_buffer()
+     * @see \stream_set_write_buffer()
+     * @see \stream_set_timeout()
      */
     public function stream_set_option(int $option, int $arg1, int $arg2): bool
     {

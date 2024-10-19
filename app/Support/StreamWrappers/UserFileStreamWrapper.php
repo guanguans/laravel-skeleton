@@ -167,6 +167,17 @@ class UserFileStreamWrapper extends StreamWrapper
         return fseek($this->resource, $offset, $whence) === 0;
     }
 
+    public function stream_set_option(int $option, int $arg1, ?int $arg2): bool
+    {
+        return match ($option) {
+            STREAM_OPTION_BLOCKING => stream_set_blocking($this->resource, (bool) $arg1),
+            STREAM_OPTION_READ_BUFFER => stream_set_read_buffer($this->resource, $arg2) === 0,
+            STREAM_OPTION_WRITE_BUFFER => stream_set_write_buffer($this->resource, $arg2) === 0,
+            STREAM_OPTION_READ_TIMEOUT => stream_set_timeout($this->resource, $arg1),
+            default => false,
+        };
+    }
+
     public function stream_stat(): array|false
     {
         return fstat($this->resource);
