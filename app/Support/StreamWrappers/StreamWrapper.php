@@ -188,7 +188,10 @@ abstract class StreamWrapper
     /**
      * Change stream metadata
      *
-     * @todo
+     * @see \touch()
+     * @see \chown()
+     * @see \chgrp()
+     * @see \chmod()
      */
     public function stream_metadata(string $path, int $option, mixed $value): bool
     {

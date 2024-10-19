@@ -228,6 +228,9 @@ return RectorConfig::configure()
         RemoveUnusedPrivatePropertyRector::class => [
             __DIR__.'/app/Support/StreamWrappers',
         ],
+        TimeFuncCallToCarbonRector::class => [
+            __DIR__.'/app/Support/StreamWrappers',
+        ],
         RemoveUnusedVariableInCatchRector::class => [
             __DIR__.'/app/Support/Macros/CommandMacro.php',
         ],
