@@ -101,6 +101,30 @@ class UserFileStreamWrapper extends StreamWrapper
         return rmdir($newPath);
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @noinspection MissingReturnTypeInspection
+     */
+    public function stream_cast(int $castAs)
+    {
+        switch ($castAs) {
+            case STREAM_CAST_AS_STREAM:
+            case STREAM_CAST_FOR_SELECT:
+                if (! \is_resource($this->resource)) {
+                    throw new \RuntimeException("Can't cast resource");
+                }
+
+                // @todo cast resource
+                // $this->stream_write('casted resource');
+
+                return $this->resource;
+
+            default:
+                return throw new \InvalidArgumentException('Invalid cast type');
+        }
+    }
+
     public function stream_close(): void
     {
         fclose($this->resource);

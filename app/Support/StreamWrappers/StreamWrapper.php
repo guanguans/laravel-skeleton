@@ -28,9 +28,8 @@ abstract class StreamWrapper
     /**
      * Constructs a new stream wrapper
      *
-     * @see \opendir()
-     * @see \fopen()
-     * @see static::dir_opendir()
+     * Called when opening the stream wrapper, right before streamWrapper::stream_open().
+     *
      * @see static::stream_open()
      */
     public function __construct() {}
@@ -38,10 +37,9 @@ abstract class StreamWrapper
     /**
      * Destructs an existing stream wrapper
      *
-     * @see \closedir()
-     * @see \fclose()
-     * @see static::dir_closedir()
-     * @see static::stream_close()
+     * Called when closing the stream wrapper, right before streamWrapper::stream_flush().
+     *
+     * @see static::stream_flush()
      */
     public function __destruct() {}
 
@@ -139,11 +137,13 @@ abstract class StreamWrapper
     /**
      * Retrieve the underlaying resource
      *
+     * @see \stream_select()
+     *
      * @return resource
      *
-     * @todo
+     * @noinspection MissingReturnTypeInspection
      */
-    public function stream_cast(int $castAs): mixed
+    public function stream_cast(int $castAs)
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
