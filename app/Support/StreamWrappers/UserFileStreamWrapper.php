@@ -279,12 +279,8 @@ class UserFileStreamWrapper extends StreamWrapper
      */
     private function context(): mixed
     {
-        $contextOptions = stream_context_get_options($this->context);
-        $contextOptions['file'] = array_replace_recursive(
-            $contextOptions['file'] ?? [],
-            $contextOptions[self::name()] ?? []
-        );
+        $this->replaceGlobalContextOption('file', $this->getContextOptions());
 
-        return $this->context = stream_context_create($contextOptions);
+        return $this->context;
     }
 }
