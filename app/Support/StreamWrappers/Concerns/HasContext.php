@@ -34,10 +34,10 @@ trait HasContext
      */
     protected function getContext(): mixed
     {
-        $this->context ??= stream_context_get_default() ?? stream_context_create();
-        $options = stream_context_get_options($this->context) and stream_context_set_default($options);
-
-        return $this->context;
+        return $this->context = stream_context_set_default(array_replace_recursive(
+            stream_context_get_options(stream_context_get_default()),
+            $this->context ? stream_context_get_options($this->context) : [],
+        ));
     }
 
     protected function getContextOption(string $key, mixed $default = null): mixed
