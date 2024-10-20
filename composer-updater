@@ -239,9 +239,18 @@ $status = (new SingleCommandApplication)
                 mixed $input = null,
                 ?float $timeout = 300
             ): Process {
+                $additionalOptions = [
+                    '--no-interaction',
+                    // '--no-plugins',
+                    '--no-progress',
+                    '--no-scripts',
+                    '--no-suggest',
+                    '--ansi',
+                ];
+
                 $process = is_string($command)
-                    ? Process::fromShellCommandline($command, $cwd, $env, $input, $timeout)
-                    : new Process($command, $cwd, $env, $input, $timeout);
+                    ? Process::fromShellCommandline(sprintf("$command %s", implode(' ', $additionalOptions)), $cwd, $env, $input, $timeout)
+                    : new Process($command + $additionalOptions, $cwd, $env, $input, $timeout);
 
                 $this->symfonyStyle->warning($process->getCommandLine());
 
