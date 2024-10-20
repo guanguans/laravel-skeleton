@@ -23,10 +23,6 @@ class GlobStreamWrapper extends StreamWrapper
 
     private int $position = 0;
 
-    /**
-     * @noinspection MagicMethodsValidityInspection
-     * @noinspection PhpMissingParentConstructorInspection
-     */
     public function __construct()
     {
         $this->addContextOption('flags', GLOB_BRACE | GLOB_NOSORT);

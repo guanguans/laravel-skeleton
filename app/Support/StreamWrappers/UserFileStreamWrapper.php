@@ -27,6 +27,11 @@ class UserFileStreamWrapper extends StreamWrapper
     /** @var null|resource */
     private $resource;
 
+    public function __construct()
+    {
+        $this->replaceGlobalContextOption('file', $this->getContextOptions());
+    }
+
     final public static function name(): string
     {
         return 'user-file';
@@ -46,7 +51,7 @@ class UserFileStreamWrapper extends StreamWrapper
             return false;
         }
 
-        $resource = opendir($newPath, $this->context());
+        $resource = opendir($newPath, $this->getContext());
         if (! \is_resource($resource)) {
             return false;
         }
@@ -103,6 +108,9 @@ class UserFileStreamWrapper extends StreamWrapper
         return rmdir($newPath);
     }
 
+    /**
+     * @return resource
+     */
     public function stream_cast(int $castAs): mixed
     {
         switch ($castAs) {
@@ -174,7 +182,7 @@ class UserFileStreamWrapper extends StreamWrapper
             return false;
         }
 
-        $resource = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->context());
+        $resource = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->getContext());
         if (! \is_resource($resource)) {
             return false;
         }
@@ -272,15 +280,5 @@ class UserFileStreamWrapper extends StreamWrapper
         sscanf($path, 'user-%s', $newPath);
 
         return $newPath;
-    }
-
-    /**
-     * @return resource
-     */
-    private function context(): mixed
-    {
-        $this->replaceGlobalContextOption('file', $this->getContextOptions());
-
-        return $this->context;
     }
 }

@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 namespace App\Support\StreamWrappers\Concerns;
 
+/**
+ * @mixin \App\Support\StreamWrappers\StreamWrapper
+ */
 trait HasContext
 {
     /** @var null|resource */
     public $context;
 
     /**
-     * @return null|resource
-     *
-     * @noinspection MethodShouldBeFinalInspection
-     * @noinspection MissingReturnTypeInspection
+     * @return resource
      */
-    protected function getContext()
+    protected function getContext(): mixed
     {
         return $this->context ??= stream_context_get_default() ?? stream_context_create();
     }
@@ -59,8 +59,22 @@ trait HasContext
 
     protected function setContextOptions(array $contextOptions): static
     {
-        return $this->setGlobalContextOption(static::name(), $contextOptions);
+        foreach ($contextOptions as $key => $value) {
+            $this->setContextOption($key, $value);
+        }
+
+        return $this;
     }
+
+    // protected function setContextOption(string $key, mixed $value): static
+    // {
+    //     return $this->setContextOptions([$key => $value]);
+    // }
+
+    // protected function setContextOptions(array $contextOptions): static
+    // {
+    //     return $this->setGlobalContextOption(static::name(), $contextOptions);
+    // }
 
     protected function setGlobalContextOption(string $wrapper, array $contextOptions): static
     {
