@@ -23,11 +23,21 @@ trait HasContext
     public $context;
 
     /**
+     * 必须在 `__construct`、`dir_opendir`、`stream_open` 方法中提前调用该方法，
+     * 才能在之后无上下文的方法(如 mkdir、url_stat...)中调用该方法获取到上下文。
+     *
+     * @see static::__construct()
+     * @see static::dir_opendir()
+     * @see static::stream_open()
+     *
      * @return resource
      */
     protected function getContext(): mixed
     {
-        return $this->context ??= stream_context_get_default() ?? stream_context_create();
+        $this->context ??= stream_context_get_default() ?? stream_context_create();
+        $options = stream_context_get_options($this->context) and stream_context_set_default($options);
+
+        return $this->context;
     }
 
     protected function getContextOption(string $key, mixed $default = null): mixed
