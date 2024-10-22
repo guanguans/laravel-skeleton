@@ -21,6 +21,7 @@ use App\Support\StreamWrappers\Concerns\HasContext;
  * @see https://www.php.net/manual/zh/stream.streamwrapper.example-1.php
  * @see https://www.php.net/manual/zh/wrappers.php
  * @see \GuzzleHttp\Psr7\StreamWrapper
+ * @see \Composer\BinProxyWrapper
  */
 abstract class StreamWrapper
 {

@@ -25,7 +25,7 @@ use function Illuminate\Filesystem\join_paths;
 class UserFileStreamWrapper extends StreamWrapper
 {
     /** @var null|resource */
-    private $resource;
+    private $handle;
 
     public function __construct()
     {
@@ -39,7 +39,7 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function dir_closedir(): bool
     {
-        closedir($this->resource);
+        closedir($this->handle);
 
         return true;
     }
@@ -51,24 +51,24 @@ class UserFileStreamWrapper extends StreamWrapper
             return false;
         }
 
-        $resource = opendir($newPath, $this->getContext());
-        if (! \is_resource($resource)) {
+        $handle = opendir($newPath, $this->getContext());
+        if (! \is_resource($handle)) {
             return false;
         }
 
-        $this->resource = $resource;
+        $this->handle = $handle;
 
         return true;
     }
 
     public function dir_readdir(): false|string
     {
-        return readdir($this->resource);
+        return readdir($this->handle);
     }
 
     public function dir_rewinddir(): bool
     {
-        rewinddir($this->resource);
+        rewinddir($this->handle);
 
         return true;
     }
@@ -116,14 +116,14 @@ class UserFileStreamWrapper extends StreamWrapper
         switch ($castAs) {
             case STREAM_CAST_AS_STREAM:
             case STREAM_CAST_FOR_SELECT:
-                if (! \is_resource($this->resource)) {
+                if (! \is_resource($this->handle)) {
                     throw new \RuntimeException("Can't cast resource");
                 }
 
                 // @todo cast resource
                 // $this->stream_write('casted resource');
 
-                return $this->resource;
+                return $this->handle;
 
             default:
                 return throw new \InvalidArgumentException('Invalid cast type');
@@ -132,22 +132,22 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function stream_close(): void
     {
-        fclose($this->resource);
+        fclose($this->handle);
     }
 
     public function stream_eof(): bool
     {
-        return feof($this->resource);
+        return feof($this->handle);
     }
 
     public function stream_flush(): bool
     {
-        return fflush($this->resource);
+        return fflush($this->handle);
     }
 
     public function stream_lock(int $operation): bool
     {
-        return flock($this->resource, $operation);
+        return flock($this->handle, $operation);
     }
 
     /**
@@ -182,8 +182,8 @@ class UserFileStreamWrapper extends StreamWrapper
             return false;
         }
 
-        $resource = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->getContext());
-        if (! \is_resource($resource)) {
+        $handle = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->getContext());
+        if (! \is_resource($handle)) {
             return false;
         }
 
@@ -200,7 +200,9 @@ class UserFileStreamWrapper extends StreamWrapper
             }
         }
 
-        $this->resource = $resource;
+        /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+        $openedPath = realpath($newPath) ?: $newPath;
+        $this->handle = $handle;
 
         if ($useTriggerError) {
             restore_error_handler();
@@ -211,43 +213,43 @@ class UserFileStreamWrapper extends StreamWrapper
 
     public function stream_read(int $count): string
     {
-        return fread($this->resource, $count);
+        return fread($this->handle, $count);
     }
 
     public function stream_seek(int $offset, int $whence = SEEK_SET): bool
     {
-        return fseek($this->resource, $offset, $whence) === 0;
+        return fseek($this->handle, $offset, $whence) === 0;
     }
 
     public function stream_set_option(int $option, int $arg1, ?int $arg2): bool
     {
         return match ($option) {
-            STREAM_OPTION_BLOCKING => stream_set_blocking($this->resource, (bool) $arg1),
-            STREAM_OPTION_READ_BUFFER => stream_set_read_buffer($this->resource, $arg2) === 0,
-            STREAM_OPTION_WRITE_BUFFER => stream_set_write_buffer($this->resource, $arg2) === 0,
-            STREAM_OPTION_READ_TIMEOUT => stream_set_timeout($this->resource, $arg1),
+            STREAM_OPTION_BLOCKING => stream_set_blocking($this->handle, (bool) $arg1),
+            STREAM_OPTION_READ_BUFFER => stream_set_read_buffer($this->handle, $arg2) === 0,
+            STREAM_OPTION_WRITE_BUFFER => stream_set_write_buffer($this->handle, $arg2) === 0,
+            STREAM_OPTION_READ_TIMEOUT => stream_set_timeout($this->handle, $arg1),
             default => false,
         };
     }
 
     public function stream_stat(): array|false
     {
-        return fstat($this->resource);
+        return fstat($this->handle);
     }
 
     public function stream_tell(): int
     {
-        return ftell($this->resource);
+        return ftell($this->handle);
     }
 
     public function stream_truncate(int $newSize): bool
     {
-        return ftruncate($this->resource, $newSize);
+        return ftruncate($this->handle, $newSize);
     }
 
     public function stream_write(string $data): int
     {
-        return fwrite($this->resource, $data);
+        return fwrite($this->handle, $data);
     }
 
     public function unlink(string $path): bool
