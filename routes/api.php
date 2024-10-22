@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\HttpLog;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,10 @@ Route::middleware([
         });
     });
 });
+
+/**
+ * @see https://www.harrisrafto.eu/streaming-large-json-datasets-in-laravel-with-streamjson/
+ */
+Route::get('/users.json', static fn () => response()->streamJson([
+    'users' => HttpLog::query()->cursor(),
+]));

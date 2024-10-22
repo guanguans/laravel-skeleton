@@ -18,14 +18,12 @@ return Application::configure(basePath: dirname(__DIR__))
         //     ConvertEmptyStringsToNull::class,
         //     TrimStrings::class,
         // ]);
-
-        $middleware->convertEmptyStringsToNull(except: [
-            static fn (Request $request): bool => $request->is('api/*'),
-        ]);
-
-        $middleware->trimStrings(except: [
-            static fn (Request $request): bool => $request->is('api/*'),
-        ]);
+        // $middleware->convertEmptyStringsToNull(except: [
+        //     static fn (Request $request): bool => $request->is('api/*'),
+        // ]);
+        // $middleware->trimStrings(except: [
+        //     static fn (Request $request): bool => $request->is('api/*'),
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         // $exceptions->dontFlash([]);
