@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\TrimStrings;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,10 +14,22 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // $middleware->statefulApi();
+        // $middleware->remove([
+        //     ConvertEmptyStringsToNull::class,
+        //     TrimStrings::class,
+        // ]);
+
+        $middleware->convertEmptyStringsToNull(except: [
+            static fn (Request $request): bool => $request->is('api/*'),
+        ]);
+
+        $middleware->trimStrings(except: [
+            static fn (Request $request): bool => $request->is('api/*'),
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         // $exceptions->dontFlash([]);
-        $exceptions->shouldRenderJsonWhen(function (Request $request, Throwable $e) {
+        $exceptions->shouldRenderJsonWhen(static function (Request $request, Throwable $e): bool {
             if ($request->is('api/*')) {
                 return true;
             }
