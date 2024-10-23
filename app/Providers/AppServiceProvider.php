@@ -46,6 +46,7 @@ use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Connection;
@@ -63,6 +64,7 @@ use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Client\PendingRequest;
@@ -264,6 +266,13 @@ class AppServiceProvider extends ServiceProvider
             LogHttp::skipWhen(fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe());
             LogViewer::auth(static fn (): bool => request()::isAdminDeveloper());
             class_exists(Telescope::class) and Telescope::auth(static fn (): bool => request()::isAdminDeveloper());
+            $this->app->extend(ExceptionHandler::class, static function (Handler $handler, Application $app) {
+                if (! $handler instanceof \App\Exceptions\Handler) {
+                    // $handler = $app->make(\App\Exceptions\Handler::class);
+                }
+
+                return $handler;
+            });
             Http::globalOptions([
                 'timeout' => 30,
                 'connect_timeout' => 10,
