@@ -43,6 +43,17 @@ class LogHttp
         'password*',
     ];
 
+    public function __construct()
+    {
+        /**
+         * 默认情况下，Laravel 会为 terminate 方法解析中间件的新实例。
+         * 需要保持 handle 和 terminate 之间的状态。
+         *
+         * @see https://www.harrisrafto.eu/mastering-laravels-terminable-middleware-post-response-magic/
+         */
+        app()->instance(static::class, $this);
+    }
+
     /**
      * @see \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::skipWhen()
      */
