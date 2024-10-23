@@ -5,6 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
+// 可以为 API 定义单独的回退路由
+Route::fallback(static function (): void {
+    // redirect 404
+    abort(404, 'API page not found.');
+});
+
 Route::any('/any', static function (Request $request) {
     $request->validate([
         'file_name' => 'file',

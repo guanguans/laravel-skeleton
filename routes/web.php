@@ -37,7 +37,7 @@ Route::get('/', static fn () => view('welcome'));
 // fallback 路由应该始终是应用程序注册的最后一个路由
 Route::fallback(static function (): void {
     // redirect 404
-    abort(404);
+    abort(404, 'Web page not found.');
 });
 
 LaravelUploader::routes();

@@ -16,15 +16,41 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // $middleware->statefulApi();
+
         // $middleware->remove([
         //     ConvertEmptyStringsToNull::class,
         //     TrimStrings::class,
         // ]);
+
         // $middleware->convertEmptyStringsToNull(except: [
         //     static fn (Request $request): bool => $request->is('api/*'),
         // ]);
         // $middleware->trimStrings(except: [
         //     static fn (Request $request): bool => $request->is('api/*'),
+        // ]);
+
+        // $middleware->priority([
+        //     Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
+        //     Illuminate\Cookie\Middleware\EncryptCookies::class,
+        //     Illuminate\Session\Middleware\StartSession::class,
+        //     Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        //     Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
+        //     Illuminate\Routing\Middleware\SubstituteBindings::class,
+        //     Illuminate\Auth\Middleware\Authorize::class,
+        // ]);
+
+        // $middleware->alias([
+        //     'auth' => App\Http\Middleware\Authenticate::class,
+        //     'auth.basic' => Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        // ]);
+
+        // $middleware->prependToGroup('web', [
+        //     App\Http\Middleware\EncryptCookies::class,
+        //     Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        // ]);
+        // $middleware->appendToGroup('api', [
+        //     Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+        //     Illuminate\Routing\Middleware\SubstituteBindings::class,
         // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
