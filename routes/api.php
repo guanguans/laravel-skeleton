@@ -43,7 +43,12 @@ Route::middleware([
             Route::post('login', 'AuthController@login')->name('login')->withoutMiddleware(['auth:api']);
             Route::post('logout', 'AuthController@logout')->name('logout');
             Route::post('refresh', 'AuthController@refresh')->name('refresh');
-            Route::get('me', 'AuthController@me')->name('me');
+            Route::get('me', 'AuthController@me')
+                ->name('me')
+                ->missing(static function (Request $request) {
+                    /** @see https://www.harrisrafto.eu/laravels-missing-link-customizing-404-responses-for-model-binding/ */
+                    return Redirect::route('index');
+                });
             Route::get('index', 'AuthController@index')->name('index')->withoutMiddleware(['auth:api']);
         });
     });
