@@ -154,7 +154,6 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
             // $this->app->register(LaravelServiceProvider::class);
-            $this->app->register(ApiResponseServiceProvider::class);
 
             // \Closure::fromCallable([$this->app->make(SetRequestIdListener::class), 'handle']);
             // $this->booting($this->app->make(SetRequestIdListener::class)->handle(...));

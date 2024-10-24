@@ -42,6 +42,7 @@
         "emreyarligan/enum-concern": "^1.0",
         "f9webltd/laravel-api-response-helpers": "^2.0",
         "gmponos/guzzle_logger": "^2.2",
+        "guanguans/laravel-api-response": "dev-main",
         "guanguans/laravel-dump-sql": "^2.5",
         "guanguans/laravel-exception-notify": "^4.6",
         "guanguans/notify": "^2.12",
@@ -202,6 +203,10 @@
         "yamadashy/phpstan-friendly-formatter": "^1.1"
     },
     "repositories": {
+        "laravel-api-response": {
+            "type": "path",
+            "url": "./../../develop/laravel-api-response"
+        },
         "facade-documenter": {
             "type": "vcs",
             "url": "https://github.com/laravel/facade-documenter.git"

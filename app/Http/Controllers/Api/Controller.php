@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Support\ApiResponse\ApiResponse;
 use App\Support\Attributes\Injection;
 use F9Web\ApiResponseHelpers;
+use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
+use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 use Jiannei\Response\Laravel\Response;
 
 /**
@@ -13,10 +14,14 @@ use Jiannei\Response\Laravel\Response;
 class Controller extends \App\Http\Controllers\Controller
 {
     // use JsonResponseTrait;
-    use ApiResponseHelpers;
+    // use ApiResponseHelpers;
+    use ApiResponseFactory;
 
-    #[Injection(ApiResponse::class)]
-    protected ApiResponse $apiResponse;
+    /**
+     * @var \Guanguans\LaravelApiResponse\ApiResponse
+     */
+    #[Injection(ApiResponseContract::class)]
+    protected ApiResponseContract $apiResponse;
 
     public function __call($name, $arguments)
     {
