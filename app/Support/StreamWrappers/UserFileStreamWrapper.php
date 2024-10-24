@@ -27,10 +27,15 @@ class UserFileStreamWrapper extends StreamWrapper
     /** @var null|resource */
     private $handle;
 
-    public function __construct()
+    private function __construct()
     {
         $this->replaceGlobalContextOption('file', $this->getContextOptions());
     }
+
+    /**
+     * @noinspection PhpUnusedPrivateMethodInspection
+     */
+    private function __destruct() {}
 
     final public static function name(): string
     {

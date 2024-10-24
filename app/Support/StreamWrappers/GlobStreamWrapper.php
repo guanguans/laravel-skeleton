@@ -23,10 +23,15 @@ class GlobStreamWrapper extends StreamWrapper
 
     private int $position = 0;
 
-    public function __construct()
+    private function __construct()
     {
         $this->addContextOption('flags', GLOB_BRACE | GLOB_NOSORT);
     }
+
+    /**
+     * @noinspection PhpUnusedPrivateMethodInspection
+     */
+    private function __destruct() {}
 
     final public static function name(): string
     {

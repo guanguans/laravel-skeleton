@@ -36,7 +36,7 @@ abstract class StreamWrapper
      *
      * @see static::stream_open()
      */
-    // public function __construct() {}
+    // private function __construct() {}
 
     /**
      * Destructs an existing stream wrapper
@@ -45,7 +45,7 @@ abstract class StreamWrapper
      *
      * @see static::stream_flush()
      */
-    // public function __destruct() {}
+    // private function __destruct() {}
 
     abstract public static function name(): string;
 
