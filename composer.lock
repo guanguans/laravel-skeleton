@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a2f2d5b5cedbc034aa0da9164bb9b91",
+    "content-hash": "9697bae5e1eb5b5081d0089efcf3e66d",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -1232,6 +1232,99 @@
             "time": "2024-04-20T15:14:20+00:00"
         },
         {
+            "name": "astrotomic/laravel-translatable",
+            "version": "v11.15.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Astrotomic/laravel-translatable.git",
+                "reference": "0d065da7fb06b4b957afce79fdda159764561345"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Astrotomic/laravel-translatable/zipball/0d065da7fb06b4b957afce79fdda159764561345",
+                "reference": "0d065da7fb06b4b957afce79fdda159764561345",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0 || ^10.0 || ^11.0",
+                "illuminate/database": "^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "^9.0 || ^10.0 || ^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.0",
+                "laravel/legacy-factories": "^1.0.4",
+                "laravel/pint": "^1.0",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Astrotomic\\Translatable\\TranslatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Astrotomic\\Translatable\\": "src/Translatable/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Witkowski",
+                    "email": "gummibeer@astrotomic.info",
+                    "homepage": "https://gummibeer.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Dimitrios Savvopoulos",
+                    "email": "ds@dimsav.com",
+                    "homepage": "http://dimsav.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package for multilingual models",
+            "homepage": "https://astrotomic.info",
+            "keywords": [
+                "database",
+                "language",
+                "laravel",
+                "translation"
+            ],
+            "support": {
+                "docs": "https://docs.astrotomic.info/laravel-translatable",
+                "email": "dev@astrotomic.info",
+                "issues": "https://github.com/Astrotomic/laravel-translatable/issues",
+                "source": "https://github.com/Astrotomic/laravel-translatable"
+            },
+            "funding": [
+                {
+                    "url": "https://forest.astrotomic.info",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Gummibeer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/SarahSibert",
+                    "type": "github"
+                },
+                {
+                    "url": "https://issuehunt.io/r/astrotomic",
+                    "type": "issuehunt"
+                }
+            ],
+            "time": "2024-08-28T09:20:26+00:00"
+        },
+        {
             "name": "asvae/laravel-api-tester",
             "version": "2.0.11",
             "source": {
@@ -1353,6 +1446,60 @@
                 }
             ],
             "time": "2024-02-28T22:21:15+00:00"
+        },
+        {
+            "name": "bacon/bacon-qr-code",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "f9cc1f52b5a463062251d666761178dbdb6b544f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/f9cc1f52b5a463062251d666761178dbdb6b544f",
+                "reference": "f9cc1f52b5a463062251d666761178dbdb6b544f",
+                "shasum": ""
+            },
+            "require": {
+                "dasprid/enum": "^1.0.3",
+                "ext-iconv": "*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phly/keep-a-changelog": "^2.12",
+                "phpunit/phpunit": "^10.5.11 || 11.0.4",
+                "spatie/phpunit-snapshot-assertions": "^5.1.5",
+                "squizlabs/php_codesniffer": "^3.9"
+            },
+            "suggest": {
+                "ext-imagick": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BaconQrCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "support": {
+                "issues": "https://github.com/Bacon/BaconQrCode/issues",
+                "source": "https://github.com/Bacon/BaconQrCode/tree/v3.0.1"
+            },
+            "time": "2024-10-01T13:55:55+00:00"
         },
         {
             "name": "balping/json-raw-encoder",
@@ -2468,6 +2615,56 @@
             "time": "2023-04-12T21:31:58+00:00"
         },
         {
+            "name": "dasprid/enum",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DASPRiD/Enum.git",
+                "reference": "8dfd07c6d2cf31c8da90c53b83c026c7696dda90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/8dfd07c6d2cf31c8da90c53b83c026c7696dda90",
+                "reference": "8dfd07c6d2cf31c8da90c53b83c026c7696dda90",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1 <9.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7 || ^8 || ^9 || ^10 || ^11",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DASPRiD\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP 7.1 enum implementation",
+            "keywords": [
+                "enum",
+                "map"
+            ],
+            "support": {
+                "issues": "https://github.com/DASPRiD/Enum/issues",
+                "source": "https://github.com/DASPRiD/Enum/tree/1.0.6"
+            },
+            "time": "2024-08-09T14:30:48+00:00"
+        },
+        {
             "name": "daverandom/libdns",
             "version": "v2.1.0",
             "source": {
@@ -3324,16 +3521,16 @@
         },
         {
             "name": "doctrine/sql-formatter",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "16ca9e39877369d664f06dacde468548298bdc40"
+                "reference": "b784cbde727cf806721451dde40eff4fec3bbe86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/16ca9e39877369d664f06dacde468548298bdc40",
-                "reference": "16ca9e39877369d664f06dacde468548298bdc40",
+                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/b784cbde727cf806721451dde40eff4fec3bbe86",
+                "reference": "b784cbde727cf806721451dde40eff4fec3bbe86",
                 "shasum": ""
             },
             "require": {
@@ -3374,9 +3571,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/sql-formatter/issues",
-                "source": "https://github.com/doctrine/sql-formatter/tree/1.5.0"
+                "source": "https://github.com/doctrine/sql-formatter/tree/1.5.1"
             },
-            "time": "2024-09-11T07:29:40+00:00"
+            "time": "2024-10-21T18:21:57+00:00"
         },
         {
             "name": "dragon-code/contracts",
@@ -3792,6 +3989,88 @@
                 }
             ],
             "time": "2024-03-13T07:58:11+00:00"
+        },
+        {
+            "name": "dragon-code/laravel-support",
+            "version": "3.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheDragonCode/laravel-support.git",
+                "reference": "06484f1002c0b776c39764015ced4951067ec2f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-support/zipball/06484f1002c0b776c39764015ced4951067ec2f6",
+                "reference": "06484f1002c0b776c39764015ced4951067ec2f6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": ">=6.0 <12.0",
+                "illuminate/database": ">=6.0 <12.0",
+                "illuminate/http": ">=6.0 <12.0",
+                "illuminate/support": ">=6.0 <12.0",
+                "php": "^7.2 || ^8.0",
+                "ramsey/uuid": "^3.7 || ^4.0",
+                "symfony/var-dumper": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "conflict": {
+                "andrey-helldar/laravel-support": "*"
+            },
+            "require-dev": {
+                "laravel/framework": ">=6.0 <12.0"
+            },
+            "suggest": {
+                "symfony/thanks": "Give thanks (in the form of a GitHub) to your fellow PHP package maintainers"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "helpers/dumper.php"
+                ],
+                "psr-4": {
+                    "DragonCode\\LaravelSupport\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro"
+                }
+            ],
+            "description": "Various helper files for the Laravel and Lumen frameworks",
+            "keywords": [
+                "andrey-helldar",
+                "dragon",
+                "dragon-code",
+                "framework",
+                "laravel",
+                "lumen",
+                "support"
+            ],
+            "support": {
+                "issues": "https://github.com/TheDragonCode/laravel-support/issues",
+                "source": "https://github.com/TheDragonCode/laravel-support"
+            },
+            "funding": [
+                {
+                    "url": "https://boosty.to/dragon-code",
+                    "type": "boosty"
+                },
+                {
+                    "url": "https://www.donationalerts.com/r/dragon_code",
+                    "type": "donationalerts"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410012608840929",
+                    "type": "yoomoney"
+                }
+            ],
+            "time": "2024-03-12T21:33:28+00:00"
         },
         {
             "name": "dragon-code/simple-dto",
@@ -6807,6 +7086,511 @@
             "time": "2024-10-14T11:59:49+00:00"
         },
         {
+            "name": "laragear/cache-query",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/CacheQuery.git",
+                "reference": "377a8706c8433f171fb2883a644efb01470ae7fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/377a8706c8433f171fb2883a644efb01470ae7fa",
+                "reference": "377a8706c8433f171fb2883a644efb01470ae7fa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "10.*|11.*",
+                "illuminate/config": "10.*|11.*",
+                "illuminate/container": "10.*|11.*",
+                "illuminate/contracts": "10.*|11.*",
+                "illuminate/database": "10.*|11.*",
+                "illuminate/support": "10.*|11.*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "8.*|9.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\CacheQuery\\CacheQueryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\CacheQuery\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Baeza C.",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter"
+                }
+            ],
+            "description": "Remember your query results using only one method. Yes, only one.",
+            "support": {
+                "issues": "https://github.com/laragear/cache-query/issues",
+                "source": "https://github.com/laragear/cache-query"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2024-03-04T04:27:23+00:00"
+        },
+        {
+            "name": "laragear/discover",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/Discover.git",
+                "reference": "122017bdbe84762cae67a11a1c0c907eb380e92c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/Discover/zipball/122017bdbe84762cae67a11a1c0c907eb380e92c",
+                "reference": "122017bdbe84762cae67a11a1c0c907eb380e92c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "10.*|11.*",
+                "php": "^8.1",
+                "symfony/finder": "6.*|7.*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "8.*|9.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\Discover\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "darkghosthunter@gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter"
+                }
+            ],
+            "description": "Discover and filter PHP Classes within a directory",
+            "keywords": [
+                "class",
+                "classes",
+                "discover",
+                "finder",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/Discover/issues",
+                "source": "https://github.com/Laragear/Discover"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2024-03-03T22:51:11+00:00"
+        },
+        {
+            "name": "laragear/meta",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/Meta.git",
+                "reference": "f25485c4db5d9e3e47424d2757e08a816dfd9f39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/Meta/zipball/f25485c4db5d9e3e47424d2757e08a816dfd9f39",
+                "reference": "f25485c4db5d9e3e47424d2757e08a816dfd9f39",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laragear/meta-testing": "2.*",
+                "laravel/breeze": "1.*|2.*",
+                "orchestra/testbench": "8.*|9.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\Meta\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter"
+                }
+            ],
+            "description": "A Laravel Package helper for Laravel Packages",
+            "keywords": [
+                "laravel",
+                "package"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/Meta/issues",
+                "source": "https://github.com/Laragear/Meta"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2024-07-23T00:24:19+00:00"
+        },
+        {
+            "name": "laragear/meta-model",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/MetaModel.git",
+                "reference": "86aa8bbd0e1b9d03467a0257f0cd5815b6836a34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/MetaModel/zipball/86aa8bbd0e1b9d03467a0257f0cd5815b6836a34",
+                "reference": "86aa8bbd0e1b9d03467a0257f0cd5815b6836a34",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "10.*|11.*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "phpunit/phpunit": "^10.5|11.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\MetaModel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Let other developers customize your package model and migrations",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "model"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/MetaModel/issues",
+                "source": "https://github.com/Laragear/MetaModel"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2024-03-15T23:27:56+00:00"
+        },
+        {
+            "name": "laragear/preload",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/Preload.git",
+                "reference": "7fb08a4f3db7c77c8af2c5588f1d61bc9d1b79e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/Preload/zipball/7fb08a4f3db7c77c8af2c5588f1d61bc9d1b79e7",
+                "reference": "7fb08a4f3db7c77c8af2c5588f1d61bc9d1b79e7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/config": "10.*|11.*",
+                "illuminate/console": "10.*|11.*",
+                "illuminate/contracts": "10.*|11.*",
+                "illuminate/events": "10.*|11.*",
+                "illuminate/http": "10.*|11.*",
+                "illuminate/pipeline": "10.*|11.*",
+                "illuminate/queue": "10.*|11.*",
+                "illuminate/support": "10.*|11.*",
+                "php": "^8.1",
+                "symfony/finder": "6.*|7.*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "8.*|9.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\Preload\\PreloadServiceProvider"
+                    ],
+                    "aliases": {
+                        "Preload": "Laragear\\Preload\\Facades\\Preload"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\Preload\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "darkghosthunter@gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter"
+                }
+            ],
+            "description": "Effortlessly make a Preload script for your Laravel application.",
+            "keywords": [
+                "Opcache",
+                "laragear",
+                "laravel",
+                "php",
+                "preload",
+                "preloader"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/Preload/issues",
+                "source": "https://github.com/Laragear/Preload/tree/v2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2024-03-06T20:44:20+00:00"
+        },
+        {
+            "name": "laragear/two-factor",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/TwoFactor.git",
+                "reference": "32b83989e930b17c9c14ed216d4ce55f3a523745"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/TwoFactor/zipball/32b83989e930b17c9c14ed216d4ce55f3a523745",
+                "reference": "32b83989e930b17c9c14ed216d4ce55f3a523745",
+                "shasum": ""
+            },
+            "require": {
+                "bacon/bacon-qr-code": "2.*|3.*",
+                "ext-json": "*",
+                "illuminate/auth": "10.*|11.*",
+                "illuminate/config": "10.*|11.*",
+                "illuminate/database": "10.*|11.*",
+                "illuminate/http": "10.*|11.*",
+                "illuminate/support": "10.*|11.*",
+                "illuminate/validation": "10.*|11.*",
+                "laragear/meta": "3.*",
+                "laragear/meta-model": "^1.1",
+                "paragonie/constant_time_encoding": "^2.6 || ^3.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laragear/meta-testing": "2.*",
+                "orchestra/testbench": "8.*|9.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\TwoFactor\\TwoFactorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\TwoFactor\\": "src",
+                    "Database\\Factories\\Laragear\\TwoFactor\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "darkghosthunter@gmail.com",
+                    "homepage": "https://patreon.com/packagesforlaravel"
+                }
+            ],
+            "description": "On-premises 2FA Authentication for out-of-the-box.",
+            "keywords": [
+                "2fa",
+                "Authentication",
+                "laravel",
+                "two-factor"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/TwoFactor/issues",
+                "source": "https://github.com/Laragear/TwoFactor"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2024-07-23T00:53:49+00:00"
+        },
+        {
+            "name": "laragear/webauthn",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/WebAuthn.git",
+                "reference": "5136b8fee90abb5c0b50b644594fb3142191f3b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/WebAuthn/zipball/5136b8fee90abb5c0b50b644594fb3142191f3b9",
+                "reference": "5136b8fee90abb5c0b50b644594fb3142191f3b9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "illuminate/auth": "10.*|11.*",
+                "illuminate/config": "10.*|11.*",
+                "illuminate/database": "10.*|11.*",
+                "illuminate/encryption": "10.*|11.*",
+                "illuminate/http": "10.*|11.*",
+                "illuminate/session": "10.*|11.*",
+                "illuminate/support": "10.*|11.*",
+                "laragear/meta-model": "^1.1",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "ext-sodium": "*",
+                "orchestra/testbench": "8.*|9.*"
+            },
+            "suggest": {
+                "paragonie/sodium_compat": "To enable EdDSA 25519 keys from authenticators, if `ext-sodium` is unavailable."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\WebAuthn\\WebAuthnServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\WebAuthn\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukas Buchs",
+                    "role": "Original developer"
+                },
+                {
+                    "name": "Italo Israel Baeza Cabrera",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/sponsors/DarkGhostHunter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Authenticate users with Passkeys: fingerprints, patterns and biometric data.",
+            "homepage": "https://github.com/laragear/webauthn",
+            "keywords": [
+                "Authentication",
+                "faceid",
+                "laravel",
+                "passkeys",
+                "touchid",
+                "webauthn",
+                "windows hello"
+            ],
+            "support": {
+                "issues": "https://github.com/Laragear/WebAuthn/issues",
+                "source": "https://github.com/Laragear/WebAuthn"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2024-08-15T07:50:06+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v11.29.0",
             "source": {
@@ -7184,21 +7968,21 @@
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.1.25",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "7b4029a84c37cb2725fc7f011586e2997040bc95"
+                "reference": "0f3848a445562dac376b27968f753c65e7e1036e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/7b4029a84c37cb2725fc7f011586e2997040bc95",
-                "reference": "7b4029a84c37cb2725fc7f011586e2997040bc95",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/0f3848a445562dac376b27968f753c65e7e1036e",
+                "reference": "0f3848a445562dac376b27968f753c65e7e1036e",
                 "shasum": ""
             },
             "require": {
+                "composer-runtime-api": "^2.2",
                 "ext-mbstring": "*",
-                "illuminate/collections": "^10.0|^11.0",
                 "php": "^8.1",
                 "symfony/console": "^6.2|^7.0"
             },
@@ -7207,6 +7991,7 @@
                 "laravel/framework": ">=10.17.0 <10.25.0"
             },
             "require-dev": {
+                "illuminate/collections": "^10.0|^11.0",
                 "mockery/mockery": "^1.5",
                 "pestphp/pest": "^2.3",
                 "phpstan/phpstan": "^1.11",
@@ -7218,7 +8003,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.1.x-dev"
+                    "dev-main": "0.3.x-dev"
                 }
             },
             "autoload": {
@@ -7236,9 +8021,9 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.1.25"
+                "source": "https://github.com/laravel/prompts/tree/v0.3.1"
             },
-            "time": "2024-08-12T22:06:33+00:00"
+            "time": "2024-10-09T19:42:26+00:00"
         },
         {
             "name": "laravel/pulse",
@@ -19914,16 +20699,16 @@
         },
         {
             "name": "barryvdh/reflection-docblock",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/ReflectionDocBlock.git",
-                "reference": "bba116ba9d5794fbf12e03ed40f10804e51acf76"
+                "reference": "c6fad15f7c878be21650c51e1f841bca7e49752e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/ReflectionDocBlock/zipball/bba116ba9d5794fbf12e03ed40f10804e51acf76",
-                "reference": "bba116ba9d5794fbf12e03ed40f10804e51acf76",
+                "url": "https://api.github.com/repos/barryvdh/ReflectionDocBlock/zipball/c6fad15f7c878be21650c51e1f841bca7e49752e",
+                "reference": "c6fad15f7c878be21650c51e1f841bca7e49752e",
                 "shasum": ""
             },
             "require": {
@@ -19960,9 +20745,9 @@
                 }
             ],
             "support": {
-                "source": "https://github.com/barryvdh/ReflectionDocBlock/tree/v2.1.2"
+                "source": "https://github.com/barryvdh/ReflectionDocBlock/tree/v2.1.3"
             },
-            "time": "2024-10-16T11:06:28+00:00"
+            "time": "2024-10-23T11:41:03+00:00"
         },
         {
             "name": "bennett-treptow/laravel-migration-generator",
@@ -21140,88 +21925,6 @@
             "time": "2024-03-13T07:49:59+00:00"
         },
         {
-            "name": "dragon-code/laravel-support",
-            "version": "3.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/TheDragonCode/laravel-support.git",
-                "reference": "06484f1002c0b776c39764015ced4951067ec2f6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-support/zipball/06484f1002c0b776c39764015ced4951067ec2f6",
-                "reference": "06484f1002c0b776c39764015ced4951067ec2f6",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/container": ">=6.0 <12.0",
-                "illuminate/database": ">=6.0 <12.0",
-                "illuminate/http": ">=6.0 <12.0",
-                "illuminate/support": ">=6.0 <12.0",
-                "php": "^7.2 || ^8.0",
-                "ramsey/uuid": "^3.7 || ^4.0",
-                "symfony/var-dumper": "^4.0 || ^5.0 || ^6.0 || ^7.0"
-            },
-            "conflict": {
-                "andrey-helldar/laravel-support": "*"
-            },
-            "require-dev": {
-                "laravel/framework": ">=6.0 <12.0"
-            },
-            "suggest": {
-                "symfony/thanks": "Give thanks (in the form of a GitHub) to your fellow PHP package maintainers"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "helpers/dumper.php"
-                ],
-                "psr-4": {
-                    "DragonCode\\LaravelSupport\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrey Helldar",
-                    "email": "helldar@dragon-code.pro",
-                    "homepage": "https://dragon-code.pro"
-                }
-            ],
-            "description": "Various helper files for the Laravel and Lumen frameworks",
-            "keywords": [
-                "andrey-helldar",
-                "dragon",
-                "dragon-code",
-                "framework",
-                "laravel",
-                "lumen",
-                "support"
-            ],
-            "support": {
-                "issues": "https://github.com/TheDragonCode/laravel-support/issues",
-                "source": "https://github.com/TheDragonCode/laravel-support"
-            },
-            "funding": [
-                {
-                    "url": "https://boosty.to/dragon-code",
-                    "type": "boosty"
-                },
-                {
-                    "url": "https://www.donationalerts.com/r/dragon_code",
-                    "type": "donationalerts"
-                },
-                {
-                    "url": "https://yoomoney.ru/to/410012608840929",
-                    "type": "yoomoney"
-                }
-            ],
-            "time": "2024-03-12T21:33:28+00:00"
-        },
-        {
             "name": "dragon-code/pretty-array",
             "version": "v4.1.0",
             "source": {
@@ -22353,12 +23056,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "705b0d9c4d6cad91eca1f70efd2080cb916c0d1a"
+                "reference": "20ddb5084fe4eaf8f8b9fea92d56eb7d462f5139"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/705b0d9c4d6cad91eca1f70efd2080cb916c0d1a",
-                "reference": "705b0d9c4d6cad91eca1f70efd2080cb916c0d1a",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/20ddb5084fe4eaf8f8b9fea92d56eb7d462f5139",
+                "reference": "20ddb5084fe4eaf8f8b9fea92d56eb7d462f5139",
                 "shasum": ""
             },
             "require": {
@@ -22469,7 +23172,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-10-18T21:24:58+00:00"
+            "time": "2024-10-23T21:48:08+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
@@ -23230,16 +23933,16 @@
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v2.3.0",
+            "version": "v2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "e6743a9c5df8effd5e722863292d5d153341b779"
+                "reference": "71895cad1a8d54502b71308c829f5265a662bf3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/e6743a9c5df8effd5e722863292d5d153341b779",
-                "reference": "e6743a9c5df8effd5e722863292d5d153341b779",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/71895cad1a8d54502b71308c829f5265a662bf3b",
+                "reference": "71895cad1a8d54502b71308c829f5265a662bf3b",
                 "shasum": ""
             },
             "require": {
@@ -23287,7 +23990,7 @@
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v2.3.0"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v2.3.1"
             },
             "funding": [
                 {
@@ -23295,7 +23998,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-20T16:37:56+00:00"
+            "time": "2024-10-16T20:33:49+00:00"
         },
         {
             "name": "larastan/larastan",
@@ -24008,16 +24711,16 @@
         },
         {
             "name": "laravel-lang/models",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/models.git",
-                "reference": "7dd4578c45fe88e56a723bcb5ad045232c0a86b7"
+                "reference": "f4591707626e7f3bd7e2d653970a43ced644671e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/models/zipball/7dd4578c45fe88e56a723bcb5ad045232c0a86b7",
-                "reference": "7dd4578c45fe88e56a723bcb5ad045232c0a86b7",
+                "url": "https://api.github.com/repos/Laravel-Lang/models/zipball/f4591707626e7f3bd7e2d653970a43ced644671e",
+                "reference": "f4591707626e7f3bd7e2d653970a43ced644671e",
                 "shasum": ""
             },
             "require": {
@@ -24027,7 +24730,7 @@
                 "illuminate/support": "^10.0 || ^11.0",
                 "laravel-lang/config": "^1.9",
                 "laravel-lang/locales": "^2.9.2",
-                "laravel/prompts": "^0.1.24",
+                "laravel/prompts": "^0.1.24|^0.2|^0.3",
                 "php": "^8.1"
             },
             "require-dev": {
@@ -24087,7 +24790,7 @@
                 "issues": "https://github.com/Laravel-Lang/models/issues",
                 "source": "https://github.com/Laravel-Lang/models"
             },
-            "time": "2024-09-27T12:25:25+00:00"
+            "time": "2024-10-21T23:14:18+00:00"
         },
         {
             "name": "laravel-lang/native-country-names",
@@ -27551,12 +28254,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "2db4b93f047a03be06ec0a890d252e1c8c635f74"
+                "reference": "51e3fa290bca57eca7ba6c261b8a1278eb13a98a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2db4b93f047a03be06ec0a890d252e1c8c635f74",
-                "reference": "2db4b93f047a03be06ec0a890d252e1c8c635f74",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/51e3fa290bca57eca7ba6c261b8a1278eb13a98a",
+                "reference": "51e3fa290bca57eca7ba6c261b8a1278eb13a98a",
                 "shasum": ""
             },
             "conflict": {
@@ -27776,7 +28479,7 @@
                 "froxlor/froxlor": "<=2.2.0.0-RC3",
                 "frozennode/administrator": "<=5.0.12",
                 "fuel/core": "<1.8.1",
-                "funadmin/funadmin": "<=3.2|>=3.3.2,<=3.3.3",
+                "funadmin/funadmin": "<=5.0.2",
                 "gaoming13/wechat-php-sdk": "<=1.10.2",
                 "genix/cms": "<=1.1.11",
                 "getformwork/formwork": "<1.13.1|==2.0.0.0-beta1",
@@ -28375,7 +29078,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-18T15:05:15+00:00"
+            "time": "2024-10-21T20:05:20+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
@@ -28459,6 +29162,75 @@
                 }
             ],
             "time": "2024-07-17T20:24:58+00:00"
+        },
+        {
+            "name": "scalar/laravel",
+            "version": "0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/scalar/laravel.git",
+                "reference": "0d6d80e9da68d7df27ec8b29f2dbf5bfac881d0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/scalar/laravel/zipball/0d6d80e9da68d7df27ec8b29f2dbf5bfac881d0e",
+                "reference": "0d6d80e9da68d7df27ec8b29f2dbf5bfac881d0e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0||^11.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.14",
+                "nunomaduro/collision": "^8.1.1||^7.10.0",
+                "orchestra/testbench": "^9.0.0||^8.22.0",
+                "pestphp/pest": "^2.34",
+                "pestphp/pest-plugin-arch": "^2.7",
+                "pestphp/pest-plugin-laravel": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Scalar\\ScalarServiceProvider"
+                    ],
+                    "aliases": {
+                        "Scalar": "Scalar\\Facades\\Scalar"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Scalar\\": "src/",
+                    "Scalar\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hans Pagel",
+                    "email": "mail@hanspagel.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Render your OpenAPI-based API reference",
+            "homepage": "https://github.com/scalar/laravel",
+            "keywords": [
+                "laravel",
+                "openapi",
+                "scalar",
+                "swagger"
+            ],
+            "support": {
+                "issues": "https://github.com/scalar/laravel/issues",
+                "source": "https://github.com/scalar/laravel/tree/0.1.3"
+            },
+            "time": "2024-10-16T13:14:59+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -30773,9 +31545,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -30787,6 +31559,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

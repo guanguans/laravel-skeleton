@@ -20,6 +20,8 @@ use App\Support\StreamWrappers\Concerns\HasContext;
  * @see https://www.php.net/manual/zh/class.streamwrapper.php
  * @see https://www.php.net/manual/zh/stream.streamwrapper.example-1.php
  * @see https://www.php.net/manual/zh/wrappers.php
+ * @see https://github.com/symfony/symfony/blob/7.2/src/Symfony/Component/HttpClient/Response/StreamWrapper.php
+ * @see \Symfony\Component\HttpClient\Response\StreamWrapper
  * @see \GuzzleHttp\Psr7\StreamWrapper
  * @see \Composer\BinProxyWrapper
  */
