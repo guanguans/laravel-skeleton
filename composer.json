@@ -66,6 +66,7 @@
         "laragear/webauthn": "^3.1",
         "laravel/framework": "^11.29",
         "laravel/octane": "^2.5",
+        "laravel/pail": "^1.2",
         "laravel/pennant": "^1.12",
         "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^4.0",
