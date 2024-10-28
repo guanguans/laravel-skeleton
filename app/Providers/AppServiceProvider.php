@@ -13,7 +13,6 @@ use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Policies\UserPolicy;
 use App\Rules\Rule;
-use App\Support\ApiResponse\ApiResponseServiceProvider;
 use App\Support\Attributes\After;
 use App\Support\Attributes\Before;
 use App\Support\Attributes\Injection;
@@ -208,6 +207,9 @@ class AppServiceProvider extends ServiceProvider
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->setLocales();
+            // @see https://www.php.net/manual/zh/numberformatter.parsecurrency.php
+            // @see https://zh.wikipedia.org/wiki/ISO_4217
+            Number::useCurrency('CNY');
             Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
             Date::use(CarbonImmutable::class);
             DateFactory::useCallable(
@@ -215,7 +217,6 @@ class AppServiceProvider extends ServiceProvider
                     ? $result->setTimezone(config('app.timezone'))
                     : $result
             );
-            Date::use(CarbonImmutable::class);
             // JsonResource::wrap('list');
             JsonResource::withoutWrapping();
             ResourceCollection::withoutWrapping();
