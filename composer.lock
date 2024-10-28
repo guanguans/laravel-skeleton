@@ -5009,7 +5009,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../develop/laravel-api-response",
-                "reference": "63c02b7125c99d692f4fb3591b31d0ed3e817bb9"
+                "reference": "0e778799a0a749f722edaf38d99ec51607df72e8"
             },
             "require": {
                 "ext-json": "*",
@@ -5038,6 +5038,7 @@
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan": "^1.12",
                 "phpstan/phpstan-deprecation-rules": "^1.2",
+                "povils/phpmnd": "^3.5",
                 "rector/rector": "^1.2",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
                 "spaze/phpstan-disallowed-calls": "^3.5"
@@ -5127,6 +5128,7 @@
                     "@composer-unused",
                     "@md-lint",
                     "@style-lint",
+                    "@phpmnd",
                     "@test",
                     "@phpstan",
                     "@rector-dry-run"
@@ -5196,6 +5198,9 @@
                 ],
                 "pest-update-snapshots": [
                     "@pest -d --update-snapshots"
+                ],
+                "phpmnd": [
+                    "@php ./vendor/bin/phpmnd src --exclude-path=Pipes/StatusCodePipe.php --hint --progress --ansi -v"
                 ],
                 "phpstan": [
                     "@php ./vendor/bin/phpstan analyse --ansi -v"
