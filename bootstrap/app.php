@@ -8,13 +8,16 @@ use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
+    ->booting(static function (Application $app): void {
+        // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
+    })
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(static function (Middleware $middleware) {
         // $middleware->statefulApi();
 
         // $middleware->remove([
