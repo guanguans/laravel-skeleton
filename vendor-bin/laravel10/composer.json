@@ -12,6 +12,7 @@
         "renatomarinho/laravel-page-speed": "dev-master",
         "rennokki/laravel-eloquent-query-cache": "^3.4",
         "richardstyles/eloquent-aes": "^2.3",
+        "stechstudio/laravel-zipstream": "^4.14",
         "tenantcloud/laravel-mixins": "^3.1"
     },
     "require-dev": {

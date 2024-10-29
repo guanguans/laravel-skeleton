@@ -55,6 +55,13 @@ return Application::configure(basePath: dirname(__DIR__))
         //     Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
         //     Illuminate\Routing\Middleware\SubstituteBindings::class,
         // ]);
+
+        $middleware->redirectGuestsTo('/account/login');
+        $middleware->redirectUsersTo(
+            fn (Request $request): string => $request->user()->isAdmin()
+                ? route('admin.dashboard')
+                : route('account.dashboard')
+        );
     })
     ->withExceptions(function (Exceptions $exceptions) {
         // $exceptions->dontFlash([]);
