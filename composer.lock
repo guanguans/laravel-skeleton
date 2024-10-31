@@ -6932,16 +6932,16 @@
         },
         {
             "name": "jiannei/laravel-response",
-            "version": "v6.0.0",
+            "version": "v6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jiannei/laravel-response.git",
-                "reference": "1df466afd068194c3d28974378fc0b3b726dbf57"
+                "reference": "f2e925d596cffca575ce1ed84fe2fedb1396d582"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jiannei/laravel-response/zipball/1df466afd068194c3d28974378fc0b3b726dbf57",
-                "reference": "1df466afd068194c3d28974378fc0b3b726dbf57",
+                "url": "https://api.github.com/repos/jiannei/laravel-response/zipball/f2e925d596cffca575ce1ed84fe2fedb1396d582",
+                "reference": "f2e925d596cffca575ce1ed84fe2fedb1396d582",
                 "shasum": ""
             },
             "require": {
@@ -6950,9 +6950,9 @@
             },
             "require-dev": {
                 "jiannei/laravel-enum": "dev-main",
-                "laravel/pint": "^1.13",
-                "orchestra/testbench": "^8.0",
-                "pestphp/pest": "^2.23"
+                "laravel/pint": "^1.18.1",
+                "orchestra/testbench": "^9.5.2",
+                "pestphp/pest": "^3.5"
             },
             "type": "library",
             "extra": {
@@ -6983,9 +6983,9 @@
             "description": "Laravel api response data format.",
             "support": {
                 "issues": "https://github.com/jiannei/laravel-response/issues",
-                "source": "https://github.com/jiannei/laravel-response/tree/v6.0.0"
+                "source": "https://github.com/jiannei/laravel-response/tree/v6.0.1"
             },
-            "time": "2024-03-13T06:39:16+00:00"
+            "time": "2024-10-30T10:07:57+00:00"
         },
         {
             "name": "kelunik/certificate",
