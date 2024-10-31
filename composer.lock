@@ -21484,16 +21484,16 @@
         },
         {
             "name": "captainhook/captainhook",
-            "version": "5.23.5",
+            "version": "5.23.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhookphp/captainhook.git",
-                "reference": "8b39418081b0db0c8a2996f8740ea44345af6888"
+                "reference": "6c9a60f5771581f3788f98d7b4aa9a61156cfebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/8b39418081b0db0c8a2996f8740ea44345af6888",
-                "reference": "8b39418081b0db0c8a2996f8740ea44345af6888",
+                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/6c9a60f5771581f3788f98d7b4aa9a61156cfebb",
+                "reference": "6c9a60f5771581f3788f98d7b4aa9a61156cfebb",
                 "shasum": ""
             },
             "require": {
@@ -21556,7 +21556,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhookphp/captainhook/tree/5.23.5"
+                "source": "https://github.com/captainhookphp/captainhook/tree/5.23.6"
             },
             "funding": [
                 {
@@ -21564,7 +21564,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-05T15:44:55+00:00"
+            "time": "2024-10-30T14:15:58+00:00"
         },
         {
             "name": "captainhook/hook-installer",
@@ -31889,10 +31889,10 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guanguans/ai-commit": 20,
         "guanguans/laravel-api-response": 20,
-        "laravel/facade-documenter": 20,
         "laravel/pulse": 10,
+        "guanguans/ai-commit": 20,
+        "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -31904,6 +31904,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
