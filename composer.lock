@@ -2266,16 +2266,16 @@
         },
         {
             "name": "cerbero/enum",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cerbero90/enum.git",
-                "reference": "44846f26a111a45f88dfdcae235b1bd5f40665b7"
+                "reference": "2a05cbc635e3c44e539c8aef346dd379113d6ec0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cerbero90/enum/zipball/44846f26a111a45f88dfdcae235b1bd5f40665b7",
-                "reference": "44846f26a111a45f88dfdcae235b1bd5f40665b7",
+                "url": "https://api.github.com/repos/cerbero90/enum/zipball/2a05cbc635e3c44e539c8aef346dd379113d6ec0",
+                "reference": "2a05cbc635e3c44e539c8aef346dd379113d6ec0",
                 "shasum": ""
             },
             "require": {
@@ -2319,7 +2319,7 @@
             ],
             "support": {
                 "issues": "https://github.com/cerbero90/enum/issues",
-                "source": "https://github.com/cerbero90/enum/tree/2.0.0"
+                "source": "https://github.com/cerbero90/enum/tree/2.1.0"
             },
             "funding": [
                 {
@@ -2327,7 +2327,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-05T18:57:31+00:00"
+            "time": "2024-10-30T22:10:28+00:00"
         },
         {
             "name": "coduo/php-humanizer",
@@ -31889,10 +31889,10 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guanguans/ai-commit": 20,
         "guanguans/laravel-api-response": 20,
-        "laravel/facade-documenter": 20,
         "laravel/pulse": 10,
+        "guanguans/ai-commit": 20,
+        "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -31904,6 +31904,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
