@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70740c5fe31d175b16a21b0427d083ba",
+    "content-hash": "a10ad2dce6956924f11fc5bb2a10c1c8",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -5145,10 +5145,16 @@
         {
             "name": "guanguans/laravel-api-response",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guanguans/laravel-api-response.git",
+                "reference": "4a87d1a2d8a8fd57063460ff5ba72b2dbf9aafd6"
+            },
             "dist": {
-                "type": "path",
-                "url": "./../../develop/laravel-api-response",
-                "reference": "03f1eb2c121a5e74154341e785114700ca1c3bc2"
+                "type": "zip",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/4a87d1a2d8a8fd57063460ff5ba72b2dbf9aafd6",
+                "reference": "4a87d1a2d8a8fd57063460ff5ba72b2dbf9aafd6",
+                "shasum": ""
             },
             "require": {
                 "ext-json": "*",
@@ -5185,6 +5191,7 @@
             "suggest": {
                 "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -5217,218 +5224,14 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Guanguans\\LaravelApiResponse\\": "src"
-                },
                 "files": [
                     "src/Support/helpers.php"
-                ]
-            },
-            "autoload-dev": {
+                ],
                 "psr-4": {
-                    "Guanguans\\LaravelApiResponse\\Tests\\": "tests"
+                    "Guanguans\\LaravelApiResponse\\": "src"
                 }
             },
-            "scripts": {
-                "post-install-cmd": [
-                    "@cghooks add --ignore-lock",
-                    "@cghooks update"
-                ],
-                "post-update-cmd": [
-                    "@cghooks update"
-                ],
-                "ai-commit": [
-                    "@php ./vendor/bin/ai-commit commit --ansi"
-                ],
-                "ai-commit-bito": [
-                    "@ai-commit --generator=bito_cli"
-                ],
-                "ai-commit-bito-no-verify": [
-                    "@ai-commit-bito --no-verify"
-                ],
-                "ai-commit-github-copilot": [
-                    "@ai-commit --generator=github_copilot_cli"
-                ],
-                "ai-commit-github-copilot-no-verify": [
-                    "@ai-commit-github-copilot --no-verify"
-                ],
-                "ai-commit-no-verify": [
-                    "@ai-commit --no-verify"
-                ],
-                "benchmark": [
-                    "@php ./vendor/bin/phpbench run --warmup=1 --retry-threshold=1 --iterations=3 --revs=5 --ansi -v"
-                ],
-                "cghooks": [
-                    "@php ./vendor/bin/cghooks --ansi -v"
-                ],
-                "checks": [
-                    "@composer-normalize",
-                    "@composer-validate",
-                    "@composer-require-checker",
-                    "@composer-unused",
-                    "@md-lint",
-                    "@style-lint",
-                    "@phpmnd",
-                    "@test",
-                    "@phpstan",
-                    "@rector-dry-run"
-                ],
-                "composer-bin-all-update": [
-                    "@composer bin all update --ansi -v"
-                ],
-                "composer-check-platform-reqs": [
-                    "@composer check-platform-reqs --lock --ansi -v"
-                ],
-                "composer-normalize": [
-                    "@composer normalize --dry-run --diff --ansi -v"
-                ],
-                "composer-require-checker": [
-                    "@php ./vendor/bin/composer-require-checker check --config-file=composer-require-checker.json composer.json --ansi -v"
-                ],
-                "composer-require-checker-json": [
-                    "@php ./vendor/bin/composer-require-checker check --config-file=composer-require-checker.json composer.json --ansi -v --output=json | jq"
-                ],
-                "composer-unused": [
-                    "@php ./vendor/bin/composer-unused --ansi -v"
-                ],
-                "composer-updater": [
-                    "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.3/bin/php --except-packages=pestphp/pest-plugin-laravel --ansi"
-                ],
-                "composer-updater-dry-run": [
-                    "@composer-updater --dry-run"
-                ],
-                "composer-validate": [
-                    "@composer validate --check-lock --strict --ansi -v"
-                ],
-                "facade-lint": [
-                    "@facade-update --lint"
-                ],
-                "facade-update": [
-                    "@putenvs",
-                    "$PHP81 -f ./facade.php -- Guanguans\\\\LaravelApiResponse\\\\Facades\\\\ApiResponseFacade"
-                ],
-                "lint": [
-                    "@putenvs",
-                    "for DIR in .; do find $DIR -maxdepth 1 -type f -name '*.php' -type f ! -name 'xxx.php' -exec $PHP74 -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done",
-                    "for DIR in ./config ./src ./tests; do find $DIR -type f -name '*.php' -type f ! -name 'xxx.php' -exec $PHP74 -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done"
-                ],
-                "mark-finish": [
-                    "printf '\\n!\\n!\\t\\033[0;32m%s\\033[0m\\n!\\n\\n' \"Finished\""
-                ],
-                "mark-separate": [
-                    "printf '\\n!\\n!\\t\\033[0;33m%s\\033[0m\\n!\\n\\n' \"----------------\""
-                ],
-                "mark-start": [
-                    "printf '\\n!\\n!\\t\\033[0;36m%s\\033[0m\\n!\\n\\n' \"Started\""
-                ],
-                "md-fix": [
-                    "@md-lint --fix"
-                ],
-                "md-lint": [
-                    "lint-md --config .lintmdrc ./*.md ./.github/ ./docs/"
-                ],
-                "pest": [
-                    "@php ./vendor/bin/pest --coverage"
-                ],
-                "pest-coverage": [
-                    "@pest --coverage-html=./.build/phpunit/ --coverage-clover=./.build/phpunit/clover.xml --coverage"
-                ],
-                "pest-migrate-configuration": [
-                    "@pest --migrate-configuration"
-                ],
-                "pest-update-snapshots": [
-                    "@pest -d --update-snapshots"
-                ],
-                "phpmnd": [
-                    "@php ./vendor/bin/phpmnd src --exclude-path=Pipes/StatusCodePipe.php --hint --progress --ansi -v"
-                ],
-                "phpstan": [
-                    "@php ./vendor/bin/phpstan analyse --ansi -v"
-                ],
-                "phpstan-baseline": [
-                    "@phpstan --generate-baseline --allow-empty-baseline"
-                ],
-                "post-merge": [
-                    "composer install --ansi -v"
-                ],
-                "psalm": [
-                    "@php ./vendor/bin/psalm"
-                ],
-                "psalm-baseline": [
-                    "@psalm --update-baseline"
-                ],
-                "putenvs": [
-                    "@putenv PHP73=/opt/homebrew/opt/php@7.3/bin/php",
-                    "@putenv PHP74=/opt/homebrew/opt/php@7.4/bin/php",
-                    "@putenv PHP80=/opt/homebrew/opt/php@8.0/bin/php",
-                    "@putenv PHP81=/opt/homebrew/opt/php@8.1/bin/php",
-                    "@putenv PHP82=/opt/homebrew/opt/php@8.2/bin/php",
-                    "@putenv PHP83=/opt/homebrew/opt/php@8.3/bin/php"
-                ],
-                "rector": [
-                    "@php ./vendor/bin/rector --ansi -v"
-                ],
-                "rector-custom-rule": [
-                    "@rector custom-rule"
-                ],
-                "rector-detect-node": [
-                    "@rector detect-node --loop"
-                ],
-                "rector-dry-run": [
-                    "@rector --dry-run"
-                ],
-                "rector-list-rules": [
-                    "@rector list-rules"
-                ],
-                "rector-setup-ci": [
-                    "@rector setup-ci"
-                ],
-                "release": [
-                    "@php ./vendor/bin/monorepo-builder release --ansi -v"
-                ],
-                "release-1.0.0-BETA1": [
-                    "@release 1.0.0-BETA1"
-                ],
-                "release-1.0.0-BETA1-dry-run": [
-                    "@release-1.0.0-BETA1 --dry-run"
-                ],
-                "release-major": [
-                    "@release major"
-                ],
-                "release-major-dry-run": [
-                    "@release-major --dry-run"
-                ],
-                "release-minor": [
-                    "@release minor"
-                ],
-                "release-minor-dry-run": [
-                    "@release-minor --dry-run"
-                ],
-                "release-patch": [
-                    "@release patch"
-                ],
-                "release-patch-dry-run": [
-                    "@release-patch --dry-run"
-                ],
-                "style-fix": [
-                    "@php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --show-progress=dots --diff --ansi -v"
-                ],
-                "style-lint": [
-                    "@style-fix --diff --dry-run"
-                ],
-                "test": [
-                    "@pest"
-                ],
-                "test-coverage": [
-                    "@pest-coverage"
-                ],
-                "test-migrate-configuration": [
-                    "@pest-migrate-configuration"
-                ],
-                "test-update-snapshots": [
-                    "@pest-update-snapshots"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -5460,13 +5263,11 @@
             },
             "funding": [
                 {
-                    "type": "wechat",
-                    "url": "https://www.guanguans.cn/images/wechat.jpeg"
+                    "url": "https://www.guanguans.cn/images/wechat.jpeg",
+                    "type": "wechat"
                 }
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2024-10-30T10:29:27+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",

@@ -205,10 +205,6 @@
         "yamadashy/phpstan-friendly-formatter": "^1.1"
     },
     "repositories": {
-        "laravel-api-response": {
-            "type": "path",
-            "url": "./../../develop/laravel-api-response"
-        },
         "facade-documenter": {
             "type": "vcs",
             "url": "https://github.com/laravel/facade-documenter.git"
