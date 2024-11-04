@@ -1,9 +1,11 @@
 <?php
 
 use App\Support\Monolog\Formatter\AnsiLineFormatter;
+use Monolog\Handler\FilterHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
+use Monolog\Level;
 use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
@@ -130,11 +132,11 @@ return [
          */
         'stdout' => [
             'driver' => 'monolog',
-            'handler' => \Monolog\Handler\FilterHandler::class,
+            'handler' => FilterHandler::class,
             'formatter' => env('LOG_STDOUT_FORMATTER'),
             'with' => [
-                'handler' => static fn (): \Monolog\Handler\StreamHandler => new StreamHandler('php://stdout'),
-                'minLevelOrList' => [Monolog\Level::Debug, Monolog\Level::Info],
+                'handler' => static fn (): StreamHandler => new StreamHandler('php://stdout'),
+                'minLevelOrList' => [Level::Debug, Level::Info],
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],

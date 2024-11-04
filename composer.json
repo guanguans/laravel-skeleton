@@ -317,8 +317,14 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi -v"
         ],
-        "ai-commit": "@php ./vendor/bin/ai-commit commit --generator=github_copilot_cli --ansi",
-        "ai-commit-no-verify": "@ai-commit --commit-options=--no-verify",
+        "ai-commit": "@php ./vendor/bin/ai-commit commit --ansi",
+        "ai-commit-bito": "@ai-commit --generator=bito_cli",
+        "ai-commit-bito-no-verify": "@ai-commit-bito --no-verify",
+        "ai-commit-github-copilot": "@ai-commit --generator=github_copilot_cli",
+        "ai-commit-github-copilot-no-verify": "@ai-commit-github-copilot --no-verify",
+        "ai-commit-github-models": "@ai-commit --generator=github_models_cli",
+        "ai-commit-github-models-no-verify": "@ai-commit-github-models --no-verify",
+        "ai-commit-no-verify": "@ai-commit --no-verify",
         "arkitect": "@php artisan test:arkitect --ansi -v",
         "artisan": [
             "@putenv XDEBUG_MODE=coverage,debug",
