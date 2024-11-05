@@ -139,7 +139,7 @@
         "valorin/pwned-validator": "^1.3",
         "vectorface/whip": "^0.5",
         "watson/validating": "^8.2",
-        "wendelladriel/laravel-lift": "^0.14",
+        "wendelladriel/laravel-lift": "^0.15",
         "wendelladriel/laravel-validated-dto": "^3.8",
         "wikimedia/composer-merge-plugin": "^2.1",
         "zircote/swagger-php": "^4.11"
