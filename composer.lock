@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2541d6fb79fa1186df051631792a68f",
+    "content-hash": "1d1903bb9220895a4920284a573d4e07",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -20489,16 +20489,16 @@
         },
         {
             "name": "wendelladriel/laravel-lift",
-            "version": "v0.14.2",
+            "version": "v0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-lift.git",
-                "reference": "508158cab93c6cb38a690b88fbe52caefd472f94"
+                "reference": "b600d95db4910abc84e81e484fdcba1fe8655c52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/508158cab93c6cb38a690b88fbe52caefd472f94",
-                "reference": "508158cab93c6cb38a690b88fbe52caefd472f94",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/b600d95db4910abc84e81e484fdcba1fe8655c52",
+                "reference": "b600d95db4910abc84e81e484fdcba1fe8655c52",
                 "shasum": ""
             },
             "require": {
@@ -20561,7 +20561,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-13T11:58:28+00:00"
+            "time": "2024-11-05T10:56:27+00:00"
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
