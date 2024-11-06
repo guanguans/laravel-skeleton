@@ -323,6 +323,24 @@ class AppServiceProvider extends ServiceProvider
             //         new RunCommandInDebugModeListener
             //     ))->call($this->app->make(Kernel::class));
             // });
+
+            // $kernel = $this->app->make(\Illuminate\Contracts\Http\Kernel::class);
+            // // Add our custom logging middleware after authentication
+            // $kernel->addToMiddlewarePriorityAfter(
+            //     \Illuminate\Auth\Middleware\Authenticate::class,
+            //     [
+            //         App\Http\Middleware\LogUserActions::class,
+            //         App\Http\Middleware\TrackUserSession::class,
+            //     ]
+            // );
+            // // Add our security checks before any route handling
+            // $kernel->addToMiddlewarePriorityBefore(
+            //     \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            //     [
+            //         \App\Http\Middleware\ValidateSecurityHeaders::class,
+            //         \App\Http\Middleware\CheckMaintenanceBypass::class,
+            //     ]
+            // );
         });
 
         $this->whenever($this->app->runningInConsole(), static function (): void {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d1903bb9220895a4920284a573d4e07",
+    "content-hash": "3b2abe70f018c621c8cb1333592ef51e",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -26227,6 +26227,75 @@
             "time": "2024-10-18T22:10:19+00:00"
         },
         {
+            "name": "muhammadhuzaifa/telescope-guzzle-watcher",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/huzaifaarain/telescope-guzzle-watcher.git",
+                "reference": "03bf02a496d35747884134a7ecdfe27a9572c297"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/huzaifaarain/telescope-guzzle-watcher/zipball/03bf02a496d35747884134a7ecdfe27a9572c297",
+                "reference": "03bf02a496d35747884134a7ecdfe27a9572c297",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "illuminate/contracts": "^11.0|^10.0|^9.0",
+                "laravel/telescope": "^5.0",
+                "php": "^8.0.2|^8.1|^8.2",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^8.0|^7.9|^6.0",
+                "orchestra/testbench": "^9.0|^8.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MuhammadHuzaifa\\TelescopeGuzzleWatcher\\TelescopeGuzzleWatcherServiceProvider"
+                    ],
+                    "aliases": {
+                        "TelescopeGuzzleWatcher": "MuhammadHuzaifa\\TelescopeGuzzleWatcher\\Facades\\TelescopeGuzzleWatcher"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MuhammadHuzaifa\\TelescopeGuzzleWatcher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Huzaifa",
+                    "email": "huzaifa.itgroup@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Telescope Guzzle Watcher provide a custom watcher for intercepting http requests made via guzzlehttp/guzzle php library. The package uses the on_stats request option for extracting the request/response data. The watcher intercept and log the request into the Laravel Telescope HTTP Client Watcher.",
+            "homepage": "https://github.com/muhammadhuzaifa/telescope-guzzle-watcher",
+            "keywords": [
+                "Muhammad Huzaifa",
+                "custom http client watcher",
+                "guzzle telescope watcher",
+                "guzzlehttp telescope watcher",
+                "laravel",
+                "telescope"
+            ],
+            "support": {
+                "issues": "https://github.com/huzaifaarain/telescope-guzzle-watcher/issues",
+                "source": "https://github.com/huzaifaarain/telescope-guzzle-watcher/tree/v3.2.0"
+            },
+            "time": "2024-10-26T17:12:55+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.12.0",
             "source": {
@@ -31894,10 +31963,10 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guanguans/laravel-api-response": 20,
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
+        "guanguans/laravel-api-response": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -31909,6 +31978,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

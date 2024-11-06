@@ -182,6 +182,7 @@
         "mockery/mockery": "^1.6",
         "mortexa/laravel-arkitect": "^0.8",
         "msamgan/laravel-env-keys-checker": "^1.5",
+        "muhammadhuzaifa/telescope-guzzle-watcher": "^3.2",
         "nunomaduro/collision": "^8.5",
         "orangehill/iseed": "^3.0",
         "pestphp/pest": "^2.36 || ^3.0",
