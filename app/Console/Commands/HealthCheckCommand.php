@@ -10,6 +10,7 @@ use Illuminate\Console\Events\CommandFinished;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Queue;
 use ReflectionMethod;
 use ReflectionObject;
@@ -349,6 +350,21 @@ class HealthCheckCommand extends Command
                 HealthCheckStateEnum::FAILING(),
                 static function (HealthCheckStateEnum $state) use ($missingExtensions): void {
                     $state->description = "The following PHP extensions are missing: `{$missingExtensions->implode('、')}`.";
+                }
+            );
+        }
+
+        $processResult = Process::run([
+            ...app('composer')->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
+        ])->throw();
+        $errorExtensions = collect(json_decode($processResult->output(), true))->filter(
+            static fn (array $item): bool => $item['status'] !== 'success'
+        );
+        if ($errorExtensions->isNotEmpty()) {
+            return tap(
+                HealthCheckStateEnum::FAILING(),
+                static function (HealthCheckStateEnum $state) use ($errorExtensions): void {
+                    $state->description = "The following PHP extensions have errors: `{$errorExtensions->pluck('name')->implode('、')}`.";
                 }
             );
         }

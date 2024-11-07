@@ -14,6 +14,16 @@ parameters:
 			path: app/Console/Commands/IdeHelperGatesCommand.php
 
 		-
+			message: "#^Access to constant ADMIN on an unknown class App\\\\Models\\\\Role\\.$#"
+			count: 1
+			path: app/Console/Commands/InitCommand.php
+
+		-
+			message: "#^Cannot access constant ADMIN on App\\\\Models\\\\Role\\.$#"
+			count: 2
+			path: app/Console/Commands/InitCommand.php
+
+		-
 			message: """
 				#^Call to deprecated method factory\\(\\) of class Cron\\\\CronExpression\\:
 				since version 3\\.0\\.2, use __construct instead\\.$#
