@@ -31033,21 +31033,22 @@
         },
         {
             "name": "spatie/laravel-error-solutions",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-error-solutions.git",
-                "reference": "63d9a82399e0966433fe58e4548e899f2189ea01"
+                "reference": "305296bc4019372a5821a379ce11a9d51819bfe1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-error-solutions/zipball/63d9a82399e0966433fe58e4548e899f2189ea01",
-                "reference": "63d9a82399e0966433fe58e4548e899f2189ea01",
+                "url": "https://api.github.com/repos/spatie/laravel-error-solutions/zipball/305296bc4019372a5821a379ce11a9d51819bfe1",
+                "reference": "305296bc4019372a5821a379ce11a9d51819bfe1",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "^11.13.0",
                 "php": "^8.2",
+                "spatie/backtrace": "^1.6",
                 "spatie/error-solutions": "^1.0.4",
                 "spatie/laravel-package-tools": "^1.16.4"
             },
@@ -31102,7 +31103,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-error-solutions/issues",
-                "source": "https://github.com/spatie/laravel-error-solutions/tree/1.0.0"
+                "source": "https://github.com/spatie/laravel-error-solutions/tree/1.0.1"
             },
             "funding": [
                 {
@@ -31110,7 +31111,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-01T09:22:37+00:00"
+            "time": "2024-11-07T13:41:28+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -31963,10 +31964,10 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guanguans/ai-commit": 20,
         "guanguans/laravel-api-response": 20,
-        "laravel/facade-documenter": 20,
         "laravel/pulse": 10,
+        "guanguans/ai-commit": 20,
+        "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -31978,6 +31979,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
