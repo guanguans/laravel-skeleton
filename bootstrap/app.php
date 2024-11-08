@@ -56,6 +56,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //     Illuminate\Routing\Middleware\SubstituteBindings::class,
         // ]);
 
+        $middleware->web(append: [
+            Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+        ]);
+
         $middleware->redirectGuestsTo('/account/login');
         $middleware->redirectUsersTo(
             fn (Request $request): string => $request->user()->isAdmin()
