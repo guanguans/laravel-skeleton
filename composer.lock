@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3c4837c661b2635c593dc37d4ddd794",
+    "content-hash": "fffc37febd75253364b6aba75ff978c9",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -5144,16 +5144,16 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "dev-main",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "da2089ab8f2b428b1b80a53ebcd0c6a4bd98c5b1"
+                "reference": "9047230c8842cbfbab171536088e39140000ac28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/da2089ab8f2b428b1b80a53ebcd0c6a4bd98c5b1",
-                "reference": "da2089ab8f2b428b1b80a53ebcd0c6a4bd98c5b1",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/9047230c8842cbfbab171536088e39140000ac28",
+                "reference": "9047230c8842cbfbab171536088e39140000ac28",
                 "shasum": ""
             },
             "require": {
@@ -5191,7 +5191,6 @@
             "suggest": {
                 "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -5229,7 +5228,10 @@
                 ],
                 "psr-4": {
                     "Guanguans\\LaravelApiResponse\\": "src"
-                }
+                },
+                "classmap": [
+                    "src/Support/Polyfills/Dumpable.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -5267,7 +5269,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-11-03T12:03:45+00:00"
+            "time": "2024-11-05T07:33:53+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
@@ -32197,7 +32199,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "guanguans/ai-commit": 20,
-        "guanguans/laravel-api-response": 20,
         "laravel/facade-documenter": 20,
         "laravel/pulse": 10,
         "roave/security-advisories": 20

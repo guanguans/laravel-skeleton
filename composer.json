@@ -43,7 +43,7 @@
         "emreyarligan/enum-concern": "^1.0",
         "f9webltd/laravel-api-response-helpers": "^2.0",
         "gmponos/guzzle_logger": "^2.2",
-        "guanguans/laravel-api-response": "dev-main",
+        "guanguans/laravel-api-response": "^1.0",
         "guanguans/laravel-dump-sql": "^2.5",
         "guanguans/laravel-exception-notify": "^4.6",
         "guanguans/notify": "^2.12",
