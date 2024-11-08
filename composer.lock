@@ -5144,16 +5144,16 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "9047230c8842cbfbab171536088e39140000ac28"
+                "reference": "7535d008c5507ac440154d9e46782eb21d7ddfa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/9047230c8842cbfbab171536088e39140000ac28",
-                "reference": "9047230c8842cbfbab171536088e39140000ac28",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/7535d008c5507ac440154d9e46782eb21d7ddfa7",
+                "reference": "7535d008c5507ac440154d9e46782eb21d7ddfa7",
                 "shasum": ""
             },
             "require": {
@@ -5230,7 +5230,7 @@
                     "Guanguans\\LaravelApiResponse\\": "src"
                 },
                 "classmap": [
-                    "src/Support/Polyfills/Dumpable.php"
+                    "src/Support/Traits/Dumpable.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5269,7 +5269,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-11-05T07:33:53+00:00"
+            "time": "2024-11-08T13:15:23+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
