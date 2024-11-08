@@ -25,7 +25,8 @@ class SetRequestIdListener
         // $this['events']->dispatch('bootstrapping: '.BootProviders::class, [$this]);
         // $this['events']->dispatch('bootstrapped: '.BootProviders::class, [$this]);
 
-        $bootstrapEvent->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
+        \define('REQUEST_ID', $requestId = (string) Str::uuid());
+        $bootstrapEvent->instance(self::REQUEST_ID_NAME, $requestId);
         request()->headers->set(self::REQUEST_ID_NAME, $bootstrapEvent->make(self::REQUEST_ID_NAME));
     }
 }
