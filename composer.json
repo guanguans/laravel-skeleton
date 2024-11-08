@@ -145,6 +145,7 @@
         "zircote/swagger-php": "^4.11"
     },
     "require-dev": {
+        "aaronfrancis/solo": "^0.1.0",
         "andreaselia/laravel-api-to-postman": "^2.0",
         "barryvdh/laravel-ide-helper": "^3.2",
         "bennett-treptow/laravel-migration-generator": "^4.4",
