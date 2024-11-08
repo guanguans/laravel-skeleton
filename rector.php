@@ -232,7 +232,7 @@ return RectorConfig::configure()
             __DIR__.'/app/Support/StreamWrappers',
         ],
         RemoveUnusedVariableInCatchRector::class => [
-            __DIR__.'/app/Support/Macros/CommandMacro.php',
+            __DIR__.'/app/Support/Mixins/CommandMixin.php',
         ],
 
         RemovePhpVersionIdCheckRector::class => [

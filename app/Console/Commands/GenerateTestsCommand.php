@@ -256,7 +256,7 @@ class GenerateTestsCommand extends Command
             $methods = [
                 'in' => $this->option('dir') ?: [app_path('Services'), app_path('Support'), app_path('Traits')],
                 'path' => $this->option('path') ?: [],
-                'notPath' => $this->option('not-path') ?: ['tests', 'Tests', 'test', 'Test', 'Macros', 'Facades'],
+                'notPath' => $this->option('not-path') ?: ['tests', 'Tests', 'test', 'Test', 'Mixins', 'Facades'],
                 'name' => $this->option('name') ?: ['*.php'],
                 'notName' => $this->option('not-name') ?: ['*Test.php', '*TestCase.php', '*.blade.php'],
             ];

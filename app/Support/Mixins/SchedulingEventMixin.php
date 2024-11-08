@@ -13,7 +13,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Support\Facades\Log;
@@ -24,7 +24,7 @@ use Illuminate\Support\Stringable;
  *
  * @property $channels
  */
-class SchedulingEventMacro
+class SchedulingEventMixin
 {
     public function userAppendOutputToDaily(): callable
     {

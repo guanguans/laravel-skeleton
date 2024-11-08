@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros\QueryBuilder;
+namespace App\Support\Mixins\QueryBuilder;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\DB;
  *
  * @see https://github.com/protonemedia/laravel-eloquent-where-not
  */
-class WhereNotQueryBuilderMacro
+class WhereNotQueryBuilderMixin
 {
     /**
      * The count for each table.

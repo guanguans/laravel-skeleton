@@ -10,12 +10,12 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 /**
  * @mixin \App\Models\Model
  */
-class ModelMacro
+class ModelMixin
 {
     public static function getTableName(): \Closure
     {

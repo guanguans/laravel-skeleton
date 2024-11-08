@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros\QueryBuilder;
+namespace App\Support\Mixins\QueryBuilder;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
  * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  */
-class WhereInsQueryBuilderMacro
+class WhereInsQueryBuilderMixin
 {
     public function whereIns(): callable
     {

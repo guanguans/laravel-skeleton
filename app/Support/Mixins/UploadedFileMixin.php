@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
  *
  * @mixin \Illuminate\Http\UploadedFile
  */
-class UploadedFileMacro
+class UploadedFileMixin
 {
     public static function makeFromUrl(): \Closure
     {

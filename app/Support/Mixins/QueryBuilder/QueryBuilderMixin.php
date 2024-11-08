@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros\QueryBuilder;
+namespace App\Support\Mixins\QueryBuilder;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -22,7 +22,7 @@ use Illuminate\Pipeline\Pipeline;
  * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  */
-class QueryBuilderMacro
+class QueryBuilderMixin
 {
     public function pipe(): callable
     {

@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
@@ -18,7 +18,7 @@ use Illuminate\Support\Stringable;
 /**
  * @mixin \Illuminate\Support\Stringable
  */
-class StringableMacro
+class StringableMixin
 {
     /**
      * @psalm-suppress InaccessibleProperty

@@ -63,32 +63,32 @@ parameters:
 		-
 			message: "#^Call to protected method addCommand\\(\\) of class Illuminate\\\\Database\\\\Schema\\\\Blueprint\\.$#"
 			count: 1
-			path: app/Support/Macros/BlueprintMacro.php
+			path: app/Support/Mixins/BlueprintMixin.php
 
 		-
 			message: "#^Call to protected static method this\\(\\) of class Carbon\\\\Carbon\\.$#"
 			count: 1
-			path: app/Support/Macros/CarbonMacro.php
+			path: app/Support/Mixins/CarbonMixin.php
 
 		-
 			message: "#^Variable \\$taskException might not be defined\\.$#"
 			count: 1
-			path: app/Support/Macros/CommandMacro.php
+			path: app/Support/Mixins/CommandMixin.php
 
 		-
 			message: "#^Call to protected method getRelationWithoutConstraints\\(\\) of class Illuminate\\\\Database\\\\Eloquent\\\\Builder\\<Illuminate\\\\Database\\\\Eloquent\\\\Model\\>\\.$#"
 			count: 1
-			path: app/Support/Macros/QueryBuilder/OrderByWithQueryBuilderMacro.php
+			path: app/Support/Mixins/QueryBuilder/OrderByWithQueryBuilderMixin.php
 
 		-
 			message: "#^Undefined variable\\: \\$this$#"
 			count: 1
-			path: app/Support/Macros/QueryBuilder/WhereNotQueryBuilderMacro.php
+			path: app/Support/Mixins/QueryBuilder/WhereNotQueryBuilderMixin.php
 
 		-
 			message: "#^Call to protected method getInputSource\\(\\) of class Illuminate\\\\Http\\\\Request\\.$#"
 			count: 1
-			path: app/Support/Macros/RequestMacro.php
+			path: app/Support/Mixins/RequestMixin.php
 
 		-
 			message: "#^Class App\\\\Support\\\\FoundationSDK referenced with incorrect case\\: App\\\\Support\\\\FoundationSdk\\.$#"

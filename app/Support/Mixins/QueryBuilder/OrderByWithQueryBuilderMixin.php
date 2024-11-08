@@ -10,14 +10,14 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros\QueryBuilder;
+namespace App\Support\Mixins\QueryBuilder;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  */
-class OrderByWithQueryBuilderMacro
+class OrderByWithQueryBuilderMixin
 {
     public function orderByWith(): callable
     {

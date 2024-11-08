@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
@@ -20,7 +20,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * @mixin \Illuminate\Http\Request
  */
-class RequestMacro
+class RequestMixin
 {
     public function userId(): callable
     {

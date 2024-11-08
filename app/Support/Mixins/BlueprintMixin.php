@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Fluent;
@@ -18,7 +18,7 @@ use Illuminate\Support\Fluent;
 /**
  * @mixin \Illuminate\Database\Schema\Blueprint
  */
-class BlueprintMacro
+class BlueprintMixin
 {
     /**
      * Add a comment to the table.

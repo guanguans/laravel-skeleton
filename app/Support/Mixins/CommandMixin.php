@@ -12,7 +12,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Log\Logger;
@@ -28,7 +28,7 @@ use Symfony\Component\Process\Process;
  *
  * @see https://github.com/nunomaduro/laravel-console-task
  */
-class CommandMacro
+class CommandMixin
 {
     /**
      * ```php

@@ -59,10 +59,10 @@ parameters:
             function: 'env_getcsv()'
             message: 'use config() instead'
     ignoreErrors:
-#        - "#^Access to protected property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
-        - "#^Access to an undefined property App\\\\Support\\\\Macros\\\\.*Macro\\:\\:\\$.*\\.$#"
+#        - "#^Access to protected property App\\\\Support\\\\Mixins\\\\.*Mixin\\:\\:\\$.*\\.$#"
+        - "#^Access to an undefined property App\\\\Support\\\\Mixins\\\\.*Mixin\\:\\:\\$.*\\.$#"
         - "#^Access to undefined constant Spatie\\\\Health\\\\Enums\\\\Status\\:\\:.*\\.$#"
-        - "#^Method App\\\\Support\\\\Macros\\\\.*Macro\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
+        - "#^Method App\\\\Support\\\\Mixins\\\\.*Mixin\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
         - "#^Unsafe usage of new static\\(\\)\\.$#"
         - "#^Cannot access constant .* on Spatie\\\\Health\\\\Enums\\\\Status\\.$#"
         -

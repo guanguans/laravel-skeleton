@@ -17,20 +17,20 @@ use App\Support\Attributes\After;
 use App\Support\Attributes\Before;
 use App\Support\Attributes\Injection;
 use App\Support\Discover;
-use App\Support\Macros\BlueprintMacro;
-use App\Support\Macros\CarbonMacro;
-use App\Support\Macros\CollectionMacro;
-use App\Support\Macros\CommandMacro;
-use App\Support\Macros\GrammarMacro;
-use App\Support\Macros\ModelMacro;
-use App\Support\Macros\MySqlGrammarMacro;
-use App\Support\Macros\PendingRequestMacro;
-use App\Support\Macros\RequestMacro;
-use App\Support\Macros\ResponseFactoryMacro;
-use App\Support\Macros\SchedulingEventMacro;
-use App\Support\Macros\StringableMacro;
-use App\Support\Macros\StrMacro;
-use App\Support\Macros\UploadedFileMacro;
+use App\Support\Mixins\BlueprintMixin;
+use App\Support\Mixins\CarbonMixin;
+use App\Support\Mixins\CollectionMixin;
+use App\Support\Mixins\CommandMixin;
+use App\Support\Mixins\GrammarMixin;
+use App\Support\Mixins\ModelMixin;
+use App\Support\Mixins\MySqlGrammarMixin;
+use App\Support\Mixins\PendingRequestMixin;
+use App\Support\Mixins\RequestMixin;
+use App\Support\Mixins\ResponseFactoryMixin;
+use App\Support\Mixins\SchedulingEventMixin;
+use App\Support\Mixins\StringableMixin;
+use App\Support\Mixins\StrMixin;
+use App\Support\Mixins\UploadedFileMixin;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -467,22 +467,22 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerMacros(): void
     {
-        \App\Models\Model::mixin($this->app->make(ModelMacro::class));
-        Blueprint::mixin($this->app->make(BlueprintMacro::class));
-        Carbon::mixin($this->app->make(CarbonMacro::class));
-        Collection::mixin($this->app->make(CollectionMacro::class));
-        Command::mixin($this->app->make(CommandMacro::class));
-        Event::mixin($this->app->make(SchedulingEventMacro::class));
-        Grammar::mixin($this->app->make(GrammarMacro::class));
-        MySqlGrammar::mixin($this->app->make(MySqlGrammarMacro::class));
-        PendingRequest::mixin($this->app->make(PendingRequestMacro::class));
-        Request::mixin($this->app->make(RequestMacro::class));
-        ResponseFactory::mixin($this->app->make(ResponseFactoryMacro::class));
-        Str::mixin($this->app->make(StrMacro::class));
-        Stringable::mixin($this->app->make(StringableMacro::class));
-        UploadedFile::mixin($this->app->make(UploadedFileMacro::class));
+        \App\Models\Model::mixin($this->app->make(ModelMixin::class));
+        Blueprint::mixin($this->app->make(BlueprintMixin::class));
+        Carbon::mixin($this->app->make(CarbonMixin::class));
+        Collection::mixin($this->app->make(CollectionMixin::class));
+        Command::mixin($this->app->make(CommandMixin::class));
+        Event::mixin($this->app->make(SchedulingEventMixin::class));
+        Grammar::mixin($this->app->make(GrammarMixin::class));
+        MySqlGrammar::mixin($this->app->make(MySqlGrammarMixin::class));
+        PendingRequest::mixin($this->app->make(PendingRequestMixin::class));
+        Request::mixin($this->app->make(RequestMixin::class));
+        ResponseFactory::mixin($this->app->make(ResponseFactoryMixin::class));
+        Str::mixin($this->app->make(StrMixin::class));
+        Stringable::mixin($this->app->make(StringableMixin::class));
+        UploadedFile::mixin($this->app->make(UploadedFileMixin::class));
 
-        collect(glob($this->app->path('Macros/QueryBuilder/*QueryBuilderMacro.php')))
+        collect(glob($this->app->path('Mixins/QueryBuilder/*QueryBuilderMixin.php')))
             ->each(function ($file): void {
                 $queryBuilderMacro = $this->app->make(resolve_class_from($file));
                 QueryBuilder::mixin($queryBuilderMacro);

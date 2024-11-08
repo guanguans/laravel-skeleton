@@ -10,7 +10,7 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  *
  * @mixin \Illuminate\Routing\ResponseFactory
  */
-class ResponseFactoryMacro
+class ResponseFactoryMixin
 {
     /**
      * ```

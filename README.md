@@ -265,27 +265,27 @@ app
 │   ├── HttpQuery.php
 │   ├── IdCard.php
 │   ├── Inflector.php
-│   ├── Macros
-│   │   ├── BlueprintMacro.php
-│   │   ├── CollectionMacro.php
-│   │   ├── CommandMacro.php
-│   │   ├── GrammarMacro.php
-│   │   ├── MySqlGrammarMacro.php
+│   ├── Mixins
+│   │   ├── BlueprintMixin.php
+│   │   ├── CollectionMixin.php
+│   │   ├── CommandMixin.php
+│   │   ├── GrammarMixin.php
+│   │   ├── MySqlGrammarMixin.php
 │   │   ├── QueryBuilder
-│   │   │   ├── OrderByWithQueryBuilderMacro.php
-│   │   │   ├── QueryBuilderMacro.php
-│   │   │   ├── WhereEndsWithQueryBuilderMacro.php
-│   │   │   ├── WhereFindInSetQueryBuilderMacro.php
-│   │   │   ├── WhereFullTextQueryBuilderMacro.php
-│   │   │   ├── WhereInsQueryBuilderMacro.php
-│   │   │   ├── WhereLikeQueryBuilderMacro.php
-│   │   │   ├── WhereNotQueryBuilderMacro.php
-│   │   │   └── WhereStartsWithQueryBuilderMacro.php
-│   │   ├── RequestMacro.php
-│   │   ├── ResponseFactoryMacro.php
-│   │   ├── SchedulingEventMacro.php
-│   │   ├── StrMacro.php
-│   │   └── StringableMacro.php
+│   │   │   ├── OrderByWithQueryBuilderMixin.php
+│   │   │   ├── QueryBuilderMixin.php
+│   │   │   ├── WhereEndsWithQueryBuilderMixin.php
+│   │   │   ├── WhereFindInSetQueryBuilderMixin.php
+│   │   │   ├── WhereFullTextQueryBuilderMixin.php
+│   │   │   ├── WhereInsQueryBuilderMixin.php
+│   │   │   ├── WhereLikeQueryBuilderMixin.php
+│   │   │   ├── WhereNotQueryBuilderMixin.php
+│   │   │   └── WhereStartsWithQueryBuilderMixin.php
+│   │   ├── RequestMixin.php
+│   │   ├── ResponseFactoryMixin.php
+│   │   ├── SchedulingEventMixin.php
+│   │   ├── StrMixin.php
+│   │   └── StringableMixin.php
 │   ├── Monolog
 │   │   ├── AnsiLineFormatter.php
 │   │   ├── AppendExtraDataProcessor.php

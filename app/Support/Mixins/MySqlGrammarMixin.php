@@ -10,14 +10,14 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled.
  */
 
-namespace App\Support\Macros;
+namespace App\Support\Mixins;
 
 use Illuminate\Database\Query\Builder;
 
 /**
  * @mixin \Illuminate\Database\Query\Grammars\MySqlGrammar
  */
-class MySqlGrammarMacro
+class MySqlGrammarMixin
 {
     public function whereFulltext(): callable
     {
