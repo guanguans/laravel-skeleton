@@ -18,6 +18,17 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 
+/**
+ * @see https://github.com/ans-group/laravel-health-check
+ * @see https://github.com/antonioribeiro/health
+ * @see https://github.com/enlightn/enlightn
+ * @see https://github.com/enlightn/laravel-security-checker
+ * @see https://github.com/Hi-Folks/lara-lens
+ * @see https://github.com/imanghafoori1/laravel-microscope
+ * @see https://github.com/Jorijn/laravel-security-checker
+ * @see https://github.com/laminas/laminas-diagnostics
+ * @see https://github.com/spatie/laravel-health
+ */
 class HealthCheckCommand extends Command
 {
     /**

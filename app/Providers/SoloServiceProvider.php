@@ -8,7 +8,7 @@ use AaronFrancis\Solo\Providers\SoloApplicationServiceProvider;
 
 class SoloServiceProvider extends SoloApplicationServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         Solo::useTheme('dark')
             // FQCNs of trusted classes that can add commands.
@@ -30,7 +30,7 @@ class SoloServiceProvider extends SoloApplicationServiceProvider
             ]);
     }
 
-    public function boot()
+    public function boot(): void
     {
         //
     }

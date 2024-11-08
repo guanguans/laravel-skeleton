@@ -60,6 +60,7 @@
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^6.0",
         "kevinrob/guzzle-cache-middleware": "^5.1",
+        "laminas/laminas-diagnostics": "^1.0",
         "laragear/cache-query": "^4.0",
         "laragear/discover": "^1.0",
         "laragear/preload": "^2.0",
