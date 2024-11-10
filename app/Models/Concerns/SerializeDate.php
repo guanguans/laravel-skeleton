@@ -21,6 +21,8 @@ trait SerializeDate
 {
     /**
      * 为数组 / JSON 序列化准备日期。(Laravel 7).
+     *
+     * @param  \DateTimeInterface|\Illuminate\Support\Carbon  $date
      */
     protected function serializeDate(\DateTimeInterface $date): string
     {
@@ -28,6 +30,6 @@ trait SerializeDate
         // return $date->format('Y-m-d H:i:s.vP');
         // return $date->format('Y-m-d H:i:sP');
 
-        return $date->format($this->getDateFormat());
+        return $date->inAppTimezone()->format($this->getDateFormat());
     }
 }
