@@ -360,6 +360,7 @@ class AppServiceProvider extends ServiceProvider
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
+            // config()->set('session.secure', true);
 
             DB::whenQueryingForLongerThan(300000, static function (Connection $connection, QueryExecuted $event): void {
                 Notification::send(
