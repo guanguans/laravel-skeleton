@@ -32,6 +32,7 @@ use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
 use Rector\DeadCode\Rector\If_\RemoveAlwaysTrueIfConditionRector;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
@@ -247,6 +248,9 @@ return RectorConfig::configure()
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/app/Console/Commands/ShowUnsupportedRequiresCommand.php',
             __DIR__.'/tests.php',
+        ],
+        RemoveUselessParamTagRector::class => [
+            __DIR__.'/app/Models/Concerns/SerializeDate.php',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
             __DIR__.'/app/Support/helpers.php',
