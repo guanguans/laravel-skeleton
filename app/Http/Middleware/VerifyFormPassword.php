@@ -11,7 +11,7 @@ class VerifyFormPassword
 {
     public function handle(Request $request, Closure $next, string $name = 'password'): Response
     {
-        $request->whenFilled('password', static function () use ($request, $name): void {
+        $request->whenFilled($name, static function () use ($request, $name): void {
             $request->validate([
                 $name => Password::min(8)
                     ->letters()
