@@ -5210,16 +5210,16 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "7535d008c5507ac440154d9e46782eb21d7ddfa7"
+                "reference": "06df101225dc6d55d880c710197094328acc8ee5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/7535d008c5507ac440154d9e46782eb21d7ddfa7",
-                "reference": "7535d008c5507ac440154d9e46782eb21d7ddfa7",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/06df101225dc6d55d880c710197094328acc8ee5",
+                "reference": "06df101225dc6d55d880c710197094328acc8ee5",
                 "shasum": ""
             },
             "require": {
@@ -5335,7 +5335,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-11-08T13:15:23+00:00"
+            "time": "2024-11-11T08:48:34+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
@@ -32153,9 +32153,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -32167,6 +32167,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
