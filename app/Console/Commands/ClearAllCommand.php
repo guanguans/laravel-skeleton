@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Console\Isolatable;
+use Illuminate\Contracts\Console\PromptsForMissingInput;
 
-class ClearAllCommand extends Command
+class ClearAllCommand extends Command implements Isolatable, PromptsForMissingInput
 {
     /**
      * The name and signature of the console command.
@@ -45,5 +47,24 @@ class ClearAllCommand extends Command
         // $this->output->warning('⚠️ All cleared.');
         // $this->output->error('❌  All cleared.');
         // $this->output->success('✅  All cleared.');
+
+        // $this->fail('Something went wrong.');
+
+        // $this->trap([SIGTERM, SIGQUIT], function (int $signal) {
+        //     $this->shouldKeepRunning = false;
+        //     dump($signal); // SIGTERM / SIGQUIT
+        // });
+    }
+
+    /**
+     * Prompt for missing input arguments using the returned questions.
+     *
+     * @return array<string, string>
+     */
+    protected function promptForMissingArgumentsUsing(): array
+    {
+        return [
+            'user' => 'Which user ID should receive the mail?',
+        ];
     }
 }

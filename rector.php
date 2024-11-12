@@ -247,15 +247,17 @@ return RectorConfig::configure()
         ],
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/app/Console/Commands/ShowUnsupportedRequiresCommand.php',
+            __DIR__.'/routes/console.php',
             __DIR__.'/tests.php',
         ],
         RemoveUselessParamTagRector::class => [
             __DIR__.'/app/Models/Concerns/SerializeDate.php',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
-            __DIR__.'/app/Support/helpers.php',
             __DIR__.'/app/Admin/Controllers',
             __DIR__.'/app/Admin/Forms',
+            __DIR__.'/app/Support/helpers.php',
+            __DIR__.'/routes/console.php',
             __DIR__.'/tests',
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,

@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection StaticClosureCanBeUsedInspection */
+
+use Guanguans\LaravelExceptionNotify\Facades\ExceptionNotify;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
@@ -27,13 +30,23 @@ Artisan::command('docs:generate-signed-url', function () {
     return $this::SUCCESS;
 })->purpose('生成接口文档签名地址');
 
+Artisan::command('mail:send {user}', function (string $user): void {
+    /** @noinspection ForgottenDebugOutputInspection */
+    /** @noinspection DebugFunctionUsageInspection */
+    dd($user);
+});
+
 /**
  * @var \Illuminate\Foundation\Console\ClosureCommand $this
  */
 Artisan::command('deployer:notify {result}', function () {
-    throw_unless(in_array($this->argument('result'), ['FAILURE', 'SUCCESS']), InvalidArgumentException::class, 'Invalid result parameters(FAILURE/SUCCESS).');
+    // throw_unless(
+    //     in_array($this->argument('result'), ['FAILURE', 'SUCCESS']),
+    //     InvalidArgumentException::class,
+    //     'Invalid result parameters(FAILURE/SUCCESS).'
+    // );
 
-    exception_notify_report(str_replace('{result}', $this->argument('result'), $this->signature));
+    ExceptionNotify::report(str_replace('{result}', $this->argument('result'), $this->signature));
 
     return $this::SUCCESS;
 })->purpose('Deployer notify report.');
