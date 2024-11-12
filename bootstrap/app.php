@@ -58,6 +58,24 @@ return Application::configure(basePath: dirname(__DIR__))
         //     Illuminate\Routing\Middleware\SubstituteBindings::class,
         // ]);
 
+        // $middleware->append(App\Http\Middleware\Localization::class);
+        //
+        // $middleware->validateSignatures(except: [
+        //     'api/*',
+        // ]);
+
+        $middleware->validateCsrfTokens(except: [
+            'livewire/*',
+        ]);
+
+        // $middleware->alias([
+        //     'auth' => App\Http\Middleware\Authenticate::class,
+        //     'guest' => App\Http\Middleware\RedirectIfAuthenticated::class,
+        //     'role' => Spatie\Permission\Middleware\RoleMiddleware::class,
+        //     'permission' => Spatie\Permission\Middleware\PermissionMiddleware::class,
+        //     'role_or_permission' => Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+        // ]);
+
         $middleware->web(append: [
             Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
