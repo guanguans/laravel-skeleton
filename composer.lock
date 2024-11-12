@@ -201,16 +201,16 @@
         },
         {
             "name": "aldemeery/sieve",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aldemeery/sieve.git",
-                "reference": "b226462171597d936b19646a725d9f49dc50af58"
+                "reference": "c0d125375b8efcc85b72bd376fd28119f9d8032c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aldemeery/sieve/zipball/b226462171597d936b19646a725d9f49dc50af58",
-                "reference": "b226462171597d936b19646a725d9f49dc50af58",
+                "url": "https://api.github.com/repos/aldemeery/sieve/zipball/c0d125375b8efcc85b72bd376fd28119f9d8032c",
+                "reference": "c0d125375b8efcc85b72bd376fd28119f9d8032c",
                 "shasum": ""
             },
             "require": {
@@ -267,9 +267,9 @@
             ],
             "support": {
                 "issues": "https://github.com/aldemeery/sieve/issues",
-                "source": "https://github.com/aldemeery/sieve/tree/v3.0.0"
+                "source": "https://github.com/aldemeery/sieve/tree/v3.0.1"
             },
-            "time": "2024-10-26T00:04:11+00:00"
+            "time": "2024-11-11T23:39:37+00:00"
         },
         {
             "name": "alexandre-daubois/monolog-processor-collection",
