@@ -32215,27 +32215,26 @@
         },
         {
             "name": "yamadashy/phpstan-friendly-formatter",
-            "version": "v1.1.2",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yamadashy/phpstan-friendly-formatter.git",
-                "reference": "da0cdb8eeb83433358a41a7f7b41f6e04a31d969"
+                "reference": "3385bd3455c7ea806efe06f30d9478d485d1ac9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yamadashy/phpstan-friendly-formatter/zipball/da0cdb8eeb83433358a41a7f7b41f6e04a31d969",
-                "reference": "da0cdb8eeb83433358a41a7f7b41f6e04a31d969",
+                "url": "https://api.github.com/repos/yamadashy/phpstan-friendly-formatter/zipball/3385bd3455c7ea806efe06f30d9478d485d1ac9b",
+                "reference": "3385bd3455c7ea806efe06f30d9478d485d1ac9b",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
+                "php": "^7.4 || ^8.0",
                 "php-parallel-lint/php-console-highlighter": "^0.3 || ^0.4 || ^0.5 || ^1.0",
-                "phpstan/phpstan": "^0.12 || ^1.0"
+                "phpstan/phpstan": "^0.12 || ^1.0 || ^2.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.4.0",
-                "grifart/phpstan-oneline": "^0.4.2",
-                "phpstan/phpstan-phpunit": "^0.12.22 || ^1.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^8.5.26 || ^10.0.0"
             },
             "type": "phpstan-extension",
@@ -32270,9 +32269,9 @@
             ],
             "support": {
                 "issues": "https://github.com/yamadashy/phpstan-friendly-formatter/issues",
-                "source": "https://github.com/yamadashy/phpstan-friendly-formatter/tree/v1.1.2"
+                "source": "https://github.com/yamadashy/phpstan-friendly-formatter/tree/v1.2.0"
             },
-            "time": "2024-09-22T06:15:47+00:00"
+            "time": "2024-11-13T14:43:14+00:00"
         },
         {
             "name": "yiisoft/injector",
@@ -32348,9 +32347,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -32362,6 +32361,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
