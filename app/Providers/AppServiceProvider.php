@@ -238,6 +238,8 @@ class AppServiceProvider extends ServiceProvider
             // Vite::prefetch(4);
             // TrimStrings::except(['secret']);
             // RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
+            // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
+            // View::prependLocation($path);
             $this->registerMacros();
             $this->extendValidator();
             $this->extendView();

@@ -169,6 +169,7 @@
         "guanguans/laravel-soar": "^3.16",
         "kitloong/laravel-migrations-generator": "^7.0",
         "kubawerlos/php-cs-fixer-custom-fixers": "^3.22",
+        "ladumor/laravel-pwa": "^0.0.4",
         "lanin/laravel-api-debugger": "^4.0",
         "laracademy/generators": "^3.7",
         "laracraft-tech/laravel-schema-rules": "^1.4",
