@@ -54,6 +54,7 @@ return [
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                // PDO::ATTR_CASE => PDO::CASE_LOWER, // @see https://www.yiichina.com/tutorial/65543
                 PDO::MYSQL_ATTR_INIT_COMMAND => sprintf(
                     "SET time_zone = '%s';",
                     (\Carbon\Carbon::now())->setTimezone(new DateTimeZone(config('app.timezone')))->format('P')
