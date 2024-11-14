@@ -202,7 +202,7 @@
         "scalar/laravel": "^0.1",
         "spatie/laravel-error-solutions": "^1.0",
         "spatie/laravel-ignition": "^2.8",
-        "spaze/phpstan-disallowed-calls": "^3.5",
+        "spaze/phpstan-disallowed-calls": "^4.0",
         "symplify/phpstan-rules": "^13.0",
         "thedoctor0/laravel-factory-generator": "^1.4",
         "tightenco/tlint": "^9.3",
