@@ -76,6 +76,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Cache;
@@ -217,6 +218,9 @@ class AppServiceProvider extends ServiceProvider
                     ? $result->setTimezone(config('app.timezone'))
                     : $result
             );
+            // @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly
+            // env('DB_HOST', fn () => throw new \Exception('DB_HOST is missing'));
+            // Env::getOrFail('DB_HOST');
             // JsonResource::wrap('list');
             JsonResource::withoutWrapping();
             ResourceCollection::withoutWrapping();
