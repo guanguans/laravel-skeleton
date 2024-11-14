@@ -5601,16 +5601,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.12.2",
+            "version": "2.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "d4c0dfc456616f575895a9c3ed77297fbff9adca"
+                "reference": "54e80bceef8963f9be11199041d25613556bb994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/d4c0dfc456616f575895a9c3ed77297fbff9adca",
-                "reference": "d4c0dfc456616f575895a9c3ed77297fbff9adca",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/54e80bceef8963f9be11199041d25613556bb994",
+                "reference": "54e80bceef8963f9be11199041d25613556bb994",
                 "shasum": ""
             },
             "require": {
@@ -5642,8 +5642,8 @@
                 "php-mock/php-mock-phpunit": "^2.10",
                 "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.12",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan": "^1.12 || ^2.0",
+                "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
                 "rector/rector": "^1.2",
                 "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
                 "vimeo/psalm": "^5.26"
@@ -5756,7 +5756,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-10-01T09:42:32+00:00"
+            "time": "2024-11-14T07:08:05+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
