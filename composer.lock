@@ -5599,16 +5599,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.12.3",
+            "version": "2.12.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "54e80bceef8963f9be11199041d25613556bb994"
+                "reference": "82055edc5985bbf6b0fe2c2b93c0a216b75e5c14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/54e80bceef8963f9be11199041d25613556bb994",
-                "reference": "54e80bceef8963f9be11199041d25613556bb994",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/82055edc5985bbf6b0fe2c2b93c0a216b75e5c14",
+                "reference": "82055edc5985bbf6b0fe2c2b93c0a216b75e5c14",
                 "shasum": ""
             },
             "require": {
@@ -5754,7 +5754,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-11-14T07:08:05+00:00"
+            "time": "2024-11-15T03:42:21+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -32345,9 +32345,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -32359,6 +32359,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
