@@ -363,6 +363,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->whenever($this->app->isProduction(), static function (): void {
+            // URL::forceHttps();
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);

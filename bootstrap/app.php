@@ -43,6 +43,20 @@ return Application::configure(basePath: dirname(__DIR__))
         //     Illuminate\Routing\Middleware\SubstituteBindings::class,
         //     Illuminate\Auth\Middleware\Authorize::class,
         // ]);
+        // $middleware->appendToPriorityList(
+        //     [
+        //         Illuminate\Cookie\Middleware\EncryptCookies::class,
+        //         Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
+        //     ],
+        //     Illuminate\Routing\Middleware\ValidateSignature::class
+        // );
+        // $middleware->prependToPriorityList(
+        //     [
+        //         Illuminate\Cookie\Middleware\EncryptCookies::class,
+        //         Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
+        //     ],
+        //     Illuminate\Routing\Middleware\ValidateSignature::class
+        // );
 
         // $middleware->alias([
         //     'auth' => App\Http\Middleware\Authenticate::class,
