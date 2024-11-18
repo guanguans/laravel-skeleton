@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c0607979a69ce9c84309075fe00ce31",
+    "content-hash": "b20290253658d8bd6b2151107cb4ed18",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -5210,16 +5210,16 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "1.0.3",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "b4dbe322eb58fddf23653eb27565757781c8cae1"
+                "reference": "8bcb94cf8278267b32dbd39493a9789b05a019d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/b4dbe322eb58fddf23653eb27565757781c8cae1",
-                "reference": "b4dbe322eb58fddf23653eb27565757781c8cae1",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/8bcb94cf8278267b32dbd39493a9789b05a019d7",
+                "reference": "8bcb94cf8278267b32dbd39493a9789b05a019d7",
                 "shasum": ""
             },
             "require": {
@@ -5247,13 +5247,12 @@
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.12",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan": "^1.12 || ^2.0",
+                "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
                 "povils/phpmnd": "^3.5",
                 "rector/rector": "^1.2",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-                "spaze/phpstan-disallowed-calls": "^3.5",
-                "symfony/psr-http-message-bridge": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
+                "spaze/phpstan-disallowed-calls": "^3.5 || ^4.0"
             },
             "suggest": {
                 "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
@@ -5295,7 +5294,10 @@
                 ],
                 "psr-4": {
                     "Guanguans\\LaravelApiResponse\\": "src"
-                }
+                },
+                "classmap": [
+                    "src/Support/Traits/Dumpable.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -5333,7 +5335,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-11-02T15:29:14+00:00"
+            "time": "2024-11-12T08:14:39+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
@@ -15431,16 +15433,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.16.5",
+            "version": "1.16.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "c7413972cf22ffdff97b68499c22baa04eddb6a2"
+                "reference": "1f26942dc1e5c49eacfced34fdbc29ed234bd7b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/c7413972cf22ffdff97b68499c22baa04eddb6a2",
-                "reference": "c7413972cf22ffdff97b68499c22baa04eddb6a2",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/1f26942dc1e5c49eacfced34fdbc29ed234bd7b3",
+                "reference": "1f26942dc1e5c49eacfced34fdbc29ed234bd7b3",
                 "shasum": ""
             },
             "require": {
@@ -15479,7 +15481,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.5"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.6"
             },
             "funding": [
                 {
@@ -15487,7 +15489,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-27T18:56:10+00:00"
+            "time": "2024-11-18T15:02:02+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
@@ -31126,16 +31128,16 @@
         },
         {
             "name": "spatie/backtrace",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/backtrace.git",
-                "reference": "1a9a145b044677ae3424693f7b06479fc8c137a9"
+                "reference": "7c18db2bc667ac84e5d7c18e33f16c38ff2d8838"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/backtrace/zipball/1a9a145b044677ae3424693f7b06479fc8c137a9",
-                "reference": "1a9a145b044677ae3424693f7b06479fc8c137a9",
+                "url": "https://api.github.com/repos/spatie/backtrace/zipball/7c18db2bc667ac84e5d7c18e33f16c38ff2d8838",
+                "reference": "7c18db2bc667ac84e5d7c18e33f16c38ff2d8838",
                 "shasum": ""
             },
             "require": {
@@ -31173,7 +31175,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/backtrace/tree/1.6.2"
+                "source": "https://github.com/spatie/backtrace/tree/1.6.3"
             },
             "funding": [
                 {
@@ -31185,7 +31187,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-07-22T08:21:24+00:00"
+            "time": "2024-11-18T14:58:58+00:00"
         },
         {
             "name": "spatie/error-solutions",
