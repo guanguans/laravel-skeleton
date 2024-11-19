@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b20290253658d8bd6b2151107cb4ed18",
+    "content-hash": "8dd9df5c73277c83ea2aba3e7f4fc1f9",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -21032,6 +21032,61 @@
             "time": "2022-12-14T18:38:34+00:00"
         },
         {
+            "name": "zenstruck/stream",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenstruck/stream.git",
+                "reference": "7252e6d96db0b16b34f8b6d69eb5643dcca72510"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenstruck/stream/zipball/7252e6d96db0b16b34f8b6d69eb5643dcca72510",
+                "reference": "7252e6d96db0b16b34f8b6d69eb5643dcca72510",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^9.5.0",
+                "symfony/phpunit-bridge": "^6.1",
+                "symfony/var-dumper": "^5.4|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zenstruck\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Bond",
+                    "email": "kevinbond@gmail.com"
+                }
+            ],
+            "description": "Object wrapper for PHP resources.",
+            "homepage": "https://github.com/zenstruck/stream",
+            "support": {
+                "issues": "https://github.com/zenstruck/stream/issues",
+                "source": "https://github.com/zenstruck/stream/tree/v1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-15T16:25:58+00:00"
+        },
+        {
             "name": "zircote/swagger-php",
             "version": "4.11.1",
             "source": {
@@ -32347,9 +32402,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -32361,6 +32416,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
