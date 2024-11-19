@@ -2266,16 +2266,16 @@
         },
         {
             "name": "cerbero/enum",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cerbero90/enum.git",
-                "reference": "2a05cbc635e3c44e539c8aef346dd379113d6ec0"
+                "reference": "3d19256caaf19b1a78ca662105021a04f8bcc450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cerbero90/enum/zipball/2a05cbc635e3c44e539c8aef346dd379113d6ec0",
-                "reference": "2a05cbc635e3c44e539c8aef346dd379113d6ec0",
+                "url": "https://api.github.com/repos/cerbero90/enum/zipball/3d19256caaf19b1a78ca662105021a04f8bcc450",
+                "reference": "3d19256caaf19b1a78ca662105021a04f8bcc450",
                 "shasum": ""
             },
             "require": {
@@ -2283,7 +2283,7 @@
             },
             "require-dev": {
                 "pestphp/pest": "^2.0",
-                "phpstan/phpstan": "^1.9",
+                "phpstan/phpstan": "^2.0",
                 "scrutinizer/ocular": "^1.9",
                 "squizlabs/php_codesniffer": "^3.0",
                 "tightenco/duster": "^2.0"
@@ -2311,7 +2311,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "PHP library to extend enum functionalities.",
+            "description": "Zero-dependencies package to supercharge enum functionalities.",
             "homepage": "https://github.com/cerbero90/enum",
             "keywords": [
                 "enum",
@@ -2319,7 +2319,7 @@
             ],
             "support": {
                 "issues": "https://github.com/cerbero90/enum/issues",
-                "source": "https://github.com/cerbero90/enum/tree/2.1.0"
+                "source": "https://github.com/cerbero90/enum/tree/2.2.0"
             },
             "funding": [
                 {
@@ -2327,7 +2327,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-30T22:10:28+00:00"
+            "time": "2024-11-19T10:34:29+00:00"
         },
         {
             "name": "coduo/php-humanizer",
