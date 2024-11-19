@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Support\Attributes\Injection;
+use App\Support\Attributes\Autowired;
 use F9Web\ApiResponseHelpers;
 use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
@@ -20,7 +20,7 @@ class Controller extends \App\Http\Controllers\Controller
     /**
      * @var \Guanguans\LaravelApiResponse\ApiResponse
      */
-    #[Injection(ApiResponseContract::class)]
+    #[Autowired(ApiResponseContract::class)]
     protected ApiResponseContract $apiResponse;
 
     public function __call($name, $arguments)

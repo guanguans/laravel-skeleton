@@ -14,8 +14,8 @@ use App\Notifications\SlowQueryLoggedNotification;
 use App\Policies\UserPolicy;
 use App\Rules\Rule;
 use App\Support\Attributes\After;
+use App\Support\Attributes\Autowired;
 use App\Support\Attributes\Before;
-use App\Support\Attributes\Injection;
 use App\Support\Discover;
 use App\Support\Mixins\BlueprintMixin;
 use App\Support\Mixins\CarbonMixin;
@@ -202,7 +202,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->whenever(true, function (): void {
             // ini_set('json.exceptions', '1'); // PHP 8.3
-            $this->injection();
+            $this->bootAutowired();
             $this->bootAspects();
             $this->bootDecorator();
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
@@ -712,13 +712,13 @@ class AppServiceProvider extends ServiceProvider
      * @noinspection PhpExpressionResultUnusedInspection
      * @noinspection VirtualTypeCheckInspection
      */
-    private function injection(): void
+    private function bootAutowired(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app): void {
             if (
                 ! \is_object($object)
-                || ! str($object::class)->is(config('services.injection.only'))
-                || str($object::class)->is(config('services.injection.except'))
+                || ! str($object::class)->is(config('services.autowired.only'))
+                || str($object::class)->is(config('services.autowired.except'))
             ) {
                 return;
             }
@@ -729,19 +729,17 @@ class AppServiceProvider extends ServiceProvider
                 if (
                     ! $reflectionProperty->isDefault()
                     || $reflectionProperty->isStatic()
-                    || [] === ($attributes = $reflectionProperty->getAttributes(Injection::class))
+                    || [] === ($attributes = $reflectionProperty->getAttributes(Autowired::class))
                 ) {
                     continue;
                 }
 
-                /** @var Injection $injection */
-                $injection = $attributes[0]->newInstance();
-
+                /** @var Autowired $autowired */
+                $autowired = $attributes[0]->newInstance();
                 $property = "{$reflectionObject->getName()}::\${$reflectionProperty->getName()}";
-
-                $propertyType = value(static function () use ($injection, $reflectionProperty, $property): string {
-                    if ($injection->propertyType) {
-                        return $injection->propertyType;
+                $propertyType = value(static function () use ($autowired, $reflectionProperty, $property): string {
+                    if ($autowired->propertyType) {
+                        return $autowired->propertyType;
                     }
 
                     $reflectionPropertyType = $reflectionProperty->getType();
@@ -751,13 +749,13 @@ class AppServiceProvider extends ServiceProvider
 
                     throw new \LogicException(\sprintf(
                         "Attribute [%s] of property [$property] miss a argument [propertyType], or property [$property] mustn't be a built-in named type.",
-                        Injection::class,
+                        Autowired::class,
                     ));
                 });
 
                 try {
                     $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
-                    $reflectionProperty->setValue($object, $app->make($propertyType, $injection->parameters));
+                    $reflectionProperty->setValue($object, $app->make($propertyType, $autowired->parameters));
                 } catch (\Throwable $throwable) {
                     throw new \TypeError(
                         "Type [$propertyType] of property [$property] resolve failed [{$throwable->getMessage()}].",

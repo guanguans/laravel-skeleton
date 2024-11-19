@@ -16,7 +16,7 @@ namespace App\Support\Attributes;
  * @see https://github.com/top-think/think-annotation
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-readonly class Injection
+readonly class Autowired
 {
     public function __construct(
         public ?string $propertyType = null,
