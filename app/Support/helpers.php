@@ -23,6 +23,16 @@ use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\VarDumper\VarDumper;
 
+if (! function_exists('str_random')) {
+    /**
+     * @throws \Random\RandomException
+     */
+    function str_random(int $length = 16): string
+    {
+        return substr(bin2hex(random_bytes((int) ceil($length / 2))), 0, $length);
+    }
+}
+
 if (! function_exists('get_mysql_timezone_offset')) {
     /**
      * Gets the time offset from the provided timezone relative to UTC as a number. This
