@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use AaronFrancis\Solo\Commands\EnhancedTailCommand;
 use AaronFrancis\Solo\Facades\Solo;
-use AaronFrancis\Solo\Providers\SoloApplicationServiceProvider;
+use AaronFrancis\Solo\Providers\SoloServiceProvider as SoloApplicationServiceProvider;
 
 class SoloServiceProvider extends SoloApplicationServiceProvider
 {
