@@ -2266,16 +2266,16 @@
         },
         {
             "name": "cerbero/enum",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cerbero90/enum.git",
-                "reference": "3d19256caaf19b1a78ca662105021a04f8bcc450"
+                "reference": "8ca4377a59b107af09efe263f5260732122d50bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cerbero90/enum/zipball/3d19256caaf19b1a78ca662105021a04f8bcc450",
-                "reference": "3d19256caaf19b1a78ca662105021a04f8bcc450",
+                "url": "https://api.github.com/repos/cerbero90/enum/zipball/8ca4377a59b107af09efe263f5260732122d50bf",
+                "reference": "8ca4377a59b107af09efe263f5260732122d50bf",
                 "shasum": ""
             },
             "require": {
@@ -2319,7 +2319,7 @@
             ],
             "support": {
                 "issues": "https://github.com/cerbero90/enum/issues",
-                "source": "https://github.com/cerbero90/enum/tree/2.2.0"
+                "source": "https://github.com/cerbero90/enum/tree/2.2.1"
             },
             "funding": [
                 {
@@ -2327,7 +2327,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-19T10:34:29+00:00"
+            "time": "2024-11-22T16:43:49+00:00"
         },
         {
             "name": "coduo/php-humanizer",
