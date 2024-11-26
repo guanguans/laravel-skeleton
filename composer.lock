@@ -21890,16 +21890,16 @@
         },
         {
             "name": "captainhook/captainhook",
-            "version": "5.24.0",
+            "version": "5.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhookphp/captainhook.git",
-                "reference": "fd2c03c96b9f56441aa05fb781328eb1163a0343"
+                "reference": "1e56452fd7a7e486e5955ab72dc9ea34bb52a184"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/fd2c03c96b9f56441aa05fb781328eb1163a0343",
-                "reference": "fd2c03c96b9f56441aa05fb781328eb1163a0343",
+                "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/1e56452fd7a7e486e5955ab72dc9ea34bb52a184",
+                "reference": "1e56452fd7a7e486e5955ab72dc9ea34bb52a184",
                 "shasum": ""
             },
             "require": {
@@ -21962,7 +21962,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhookphp/captainhook/tree/5.24.0"
+                "source": "https://github.com/captainhookphp/captainhook/tree/5.24.1"
             },
             "funding": [
                 {
@@ -21970,7 +21970,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-23T20:36:15+00:00"
+            "time": "2024-11-26T18:42:37+00:00"
         },
         {
             "name": "captainhook/hook-installer",
@@ -22021,16 +22021,16 @@
         },
         {
             "name": "captainhook/secrets",
-            "version": "0.9.5",
+            "version": "0.9.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhookphp/secrets.git",
-                "reference": "8aa90d5b9b7892abd11b9da2fc172a7b32b90cbe"
+                "reference": "0232c67019e11c4bee4ee9bfec9575b67e0854e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/secrets/zipball/8aa90d5b9b7892abd11b9da2fc172a7b32b90cbe",
-                "reference": "8aa90d5b9b7892abd11b9da2fc172a7b32b90cbe",
+                "url": "https://api.github.com/repos/captainhookphp/secrets/zipball/0232c67019e11c4bee4ee9bfec9575b67e0854e5",
+                "reference": "0232c67019e11c4bee4ee9bfec9575b67e0854e5",
                 "shasum": ""
             },
             "require": {
@@ -22065,7 +22065,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhookphp/secrets/issues",
-                "source": "https://github.com/captainhookphp/secrets/tree/0.9.5"
+                "source": "https://github.com/captainhookphp/secrets/tree/0.9.6"
             },
             "funding": [
                 {
@@ -22073,7 +22073,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-30T18:10:18+00:00"
+            "time": "2024-11-26T09:24:19+00:00"
         },
         {
             "name": "chrisdicarlo/laravel-config-checker",
@@ -31096,16 +31096,16 @@
         },
         {
             "name": "sebastianfeldmann/cli",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianfeldmann/cli.git",
-                "reference": "8a932e99e9455981fb32fa6c085492462fe8f8cf"
+                "reference": "6fa122afd528dae7d7ec988a604aa6c600f5d9b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianfeldmann/cli/zipball/8a932e99e9455981fb32fa6c085492462fe8f8cf",
-                "reference": "8a932e99e9455981fb32fa6c085492462fe8f8cf",
+                "url": "https://api.github.com/repos/sebastianfeldmann/cli/zipball/6fa122afd528dae7d7ec988a604aa6c600f5d9b5",
+                "reference": "6fa122afd528dae7d7ec988a604aa6c600f5d9b5",
                 "shasum": ""
             },
             "require": {
@@ -31142,7 +31142,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianfeldmann/cli/issues",
-                "source": "https://github.com/sebastianfeldmann/cli/tree/3.4.1"
+                "source": "https://github.com/sebastianfeldmann/cli/tree/3.4.2"
             },
             "funding": [
                 {
@@ -31150,20 +31150,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-20T14:59:49+00:00"
+            "time": "2024-11-26T10:19:01+00:00"
         },
         {
             "name": "sebastianfeldmann/git",
-            "version": "3.11.0",
+            "version": "3.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianfeldmann/git.git",
-                "reference": "5cb1ea94f65c7420419abe8f12c45cc7eb094790"
+                "reference": "96b9f384d45106f757df98a74c11b42b393ff18f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianfeldmann/git/zipball/5cb1ea94f65c7420419abe8f12c45cc7eb094790",
-                "reference": "5cb1ea94f65c7420419abe8f12c45cc7eb094790",
+                "url": "https://api.github.com/repos/sebastianfeldmann/git/zipball/96b9f384d45106f757df98a74c11b42b393ff18f",
+                "reference": "96b9f384d45106f757df98a74c11b42b393ff18f",
                 "shasum": ""
             },
             "require": {
@@ -31204,7 +31204,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianfeldmann/git/issues",
-                "source": "https://github.com/sebastianfeldmann/git/tree/3.11.0"
+                "source": "https://github.com/sebastianfeldmann/git/tree/3.11.1"
             },
             "funding": [
                 {
@@ -31212,7 +31212,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-23T09:11:14+00:00"
+            "time": "2024-11-26T18:37:20+00:00"
         },
         {
             "name": "spatie/backtrace",
