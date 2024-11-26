@@ -8531,16 +8531,16 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.2.6",
+            "version": "v1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "6bde670e71155c969d7a9f42ba0e6465291faa0d"
+                "reference": "225c02a4f7e9a6a99b48138305f9749a39443672"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/6bde670e71155c969d7a9f42ba0e6465291faa0d",
-                "reference": "6bde670e71155c969d7a9f42ba0e6465291faa0d",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/225c02a4f7e9a6a99b48138305f9749a39443672",
+                "reference": "225c02a4f7e9a6a99b48138305f9749a39443672",
                 "shasum": ""
             },
             "require": {
@@ -8614,7 +8614,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2024-11-12T14:57:16+00:00"
+            "time": "2024-11-25T23:03:41+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -32440,7 +32440,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
