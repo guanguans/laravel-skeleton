@@ -8682,16 +8682,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v10.11.7",
+            "version": "v10.11.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "d4c0bbc41f52b4bf315914cfc7046fd485e8d92d"
+                "reference": "2effc8c8df14c718de51ceaf0911cefcdb96883b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/d4c0bbc41f52b4bf315914cfc7046fd485e8d92d",
-                "reference": "d4c0bbc41f52b4bf315914cfc7046fd485e8d92d",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/2effc8c8df14c718de51ceaf0911cefcdb96883b",
+                "reference": "2effc8c8df14c718de51ceaf0911cefcdb96883b",
                 "shasum": ""
             },
             "require": {
@@ -8759,7 +8759,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2024-11-13T09:41:16+00:00"
+            "time": "2024-11-26T15:30:32+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -11443,20 +11443,21 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.44.0",
+            "version": "14.44.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "94045233cfe355e9c6e97ecd6048c838ab6e8e33"
+                "reference": "130e1aea00bc08f44715b6f08065e591ead9eed4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/94045233cfe355e9c6e97ecd6048c838ab6e8e33",
-                "reference": "94045233cfe355e9c6e97ecd6048c838ab6e8e33",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/130e1aea00bc08f44715b6f08065e591ead9eed4",
+                "reference": "130e1aea00bc08f44715b6f08065e591ead9eed4",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
+                "composer/semver": "^3.0",
                 "laravel/framework": "^10.0 || ^11.0",
                 "laravel/scout": "^9.0 || ^10.0",
                 "orchid/blade-icons": "^4.0",
@@ -11545,7 +11546,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-11-23T02:32:30+00:00"
+            "time": "2024-11-26T14:45:49+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
@@ -19787,22 +19788,22 @@
         },
         {
             "name": "tabuna/breadcrumbs",
-            "version": "4.1.0",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tabuna/breadcrumbs.git",
-                "reference": "a8e615bbf8ff3b6c7e8aaffe4a4fb37d3eab8fe0"
+                "reference": "291550037a2484813145c11a87250b41be4fb099"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tabuna/breadcrumbs/zipball/a8e615bbf8ff3b6c7e8aaffe4a4fb37d3eab8fe0",
-                "reference": "a8e615bbf8ff3b6c7e8aaffe4a4fb37d3eab8fe0",
+                "url": "https://api.github.com/repos/tabuna/breadcrumbs/zipball/291550037a2484813145c11a87250b41be4fb099",
+                "reference": "291550037a2484813145c11a87250b41be4fb099",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "laravel/framework": "^10.0|^11.0",
-                "laravel/serializable-closure": "^1.0",
+                "laravel/serializable-closure": "^1.0|^2.0",
                 "php": "^8.1"
             },
             "require-dev": {
@@ -19847,9 +19848,9 @@
             "description": "An easy way to add breadcrumbs to your Laravel app.",
             "support": {
                 "issues": "https://github.com/tabuna/breadcrumbs/issues",
-                "source": "https://github.com/tabuna/breadcrumbs/tree/4.1.0"
+                "source": "https://github.com/tabuna/breadcrumbs/tree/4.2.0"
             },
-            "time": "2024-03-14T02:01:39+00:00"
+            "time": "2024-11-26T09:29:18+00:00"
         },
         {
             "name": "teamtnt/laravel-scout-tntsearch-driver",
