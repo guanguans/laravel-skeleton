@@ -7,9 +7,11 @@ use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Plannr\Laravel\FastRefreshDatabase\Traits\FastRefreshDatabase;
+use Tests\Concerns\Bootloadable;
 
 abstract class TestCase extends BaseTestCase
 {
+    // use Bootloadable;
     use CreatesApplication;
     // use DatabaseMigrations;
     // use DatabaseTruncation;
@@ -29,4 +31,10 @@ abstract class TestCase extends BaseTestCase
      * @var bool
      */
     protected $seed = false;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutVite();
+    }
 }
