@@ -29,10 +29,8 @@ trait Bootloadable
             $this->init();
         }
 
-        if (! self::$count) {
-            if (method_exists(self::class, 'initialize')) {
-                $this->initialize(self::$current);
-            }
+        if (! self::$count && method_exists(self::class, 'initialize')) {
+            $this->initialize(self::$current);
         }
 
         ++self::$count;
