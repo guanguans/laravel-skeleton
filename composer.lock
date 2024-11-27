@@ -19789,16 +19789,16 @@
         },
         {
             "name": "tabuna/breadcrumbs",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tabuna/breadcrumbs.git",
-                "reference": "291550037a2484813145c11a87250b41be4fb099"
+                "reference": "1d9047306f67e7fcc86fc7e608f1432f247636da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tabuna/breadcrumbs/zipball/291550037a2484813145c11a87250b41be4fb099",
-                "reference": "291550037a2484813145c11a87250b41be4fb099",
+                "url": "https://api.github.com/repos/tabuna/breadcrumbs/zipball/1d9047306f67e7fcc86fc7e608f1432f247636da",
+                "reference": "1d9047306f67e7fcc86fc7e608f1432f247636da",
                 "shasum": ""
             },
             "require": {
@@ -19849,9 +19849,9 @@
             "description": "An easy way to add breadcrumbs to your Laravel app.",
             "support": {
                 "issues": "https://github.com/tabuna/breadcrumbs/issues",
-                "source": "https://github.com/tabuna/breadcrumbs/tree/4.2.0"
+                "source": "https://github.com/tabuna/breadcrumbs/tree/4.2.1"
             },
-            "time": "2024-11-26T09:29:18+00:00"
+            "time": "2024-11-26T12:21:27+00:00"
         },
         {
             "name": "teamtnt/laravel-scout-tntsearch-driver",
