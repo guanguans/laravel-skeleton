@@ -22475,16 +22475,16 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v7.5.6",
+            "version": "v7.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "4f43595502870cd499a839c4ec676f58e70143c4"
+                "reference": "4900fe799ce5566d54a14103cdfd6e865b7c5d72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/4f43595502870cd499a839c4ec676f58e70143c4",
-                "reference": "4f43595502870cd499a839c4ec676f58e70143c4",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/4900fe799ce5566d54a14103cdfd6e865b7c5d72",
+                "reference": "4900fe799ce5566d54a14103cdfd6e865b7c5d72",
                 "shasum": ""
             },
             "require": {
@@ -22525,7 +22525,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-26T15:31:46+00:00"
+            "time": "2024-11-27T21:35:20+00:00"
         },
         {
             "name": "dragon-code/benchmark",
@@ -32440,6 +32440,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
