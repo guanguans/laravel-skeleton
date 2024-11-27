@@ -5210,16 +5210,16 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "8bcb94cf8278267b32dbd39493a9789b05a019d7"
+                "reference": "45ec4c4ae0528c7bfbe0ee4893b0e00310ba2656"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/8bcb94cf8278267b32dbd39493a9789b05a019d7",
-                "reference": "8bcb94cf8278267b32dbd39493a9789b05a019d7",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/45ec4c4ae0528c7bfbe0ee4893b0e00310ba2656",
+                "reference": "45ec4c4ae0528c7bfbe0ee4893b0e00310ba2656",
                 "shasum": ""
             },
             "require": {
@@ -5232,11 +5232,12 @@
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
                 "driftingly/rector-laravel": "^1.2",
                 "ergebnis/composer-normalize": "^2.44",
-                "ergebnis/license": "^2.5",
+                "ergebnis/license": "^2.6",
                 "ergebnis/php-cs-fixer-config": "dev-main",
-                "ergebnis/rector-rules": "^1.1",
+                "ergebnis/rector-rules": "^1.2",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
+                "guzzlehttp/psr7": "^2.7",
                 "hyperf/composer-plugin": "^1.0",
                 "icanhazstring/composer-unused": "^0.8",
                 "laravel-lang/http-statuses": "^3.2",
@@ -5252,7 +5253,7 @@
                 "povils/phpmnd": "^3.5",
                 "rector/rector": "^1.2",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-                "spaze/phpstan-disallowed-calls": "^3.5 || ^4.0"
+                "spaze/phpstan-disallowed-calls": "^4.0"
             },
             "suggest": {
                 "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
@@ -5335,7 +5336,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-11-12T08:14:39+00:00"
+            "time": "2024-11-27T07:14:42+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
