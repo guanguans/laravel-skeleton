@@ -59,7 +59,7 @@
         "jdavidbakr/laravel-cache-garbage-collector": "^2.2",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^6.0",
-        "kevinrob/guzzle-cache-middleware": "^5.1",
+        "kevinrob/guzzle-cache-middleware": "^6.0",
         "laminas/laminas-diagnostics": "^1.26",
         "laragear/cache-query": "^4.0",
         "laragear/discover": "^1.0",
