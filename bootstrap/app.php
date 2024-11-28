@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
+use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -100,6 +101,20 @@ return Application::configure(basePath: dirname(__DIR__))
                 ? route('admin.dashboard')
                 : route('account.dashboard')
         );
+
+        $middleware
+            ->throttleApi(redis: true)
+            ->trustProxies(at: [
+                '127.0.0.1',
+            ])
+            ->api(prepend: [
+                SetCacheHeaders::using('no_store'),
+            ])
+            ->append(SetCacheHeaders::using([
+                'etag',
+                'max_age' => 24 * 60 * 60,
+                'private',
+            ]));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         // $exceptions->dontFlash([]);

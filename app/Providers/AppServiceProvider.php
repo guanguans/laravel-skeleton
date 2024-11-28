@@ -41,6 +41,8 @@ use Carbon\CarbonInterval;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Event;
@@ -247,15 +249,22 @@ class AppServiceProvider extends ServiceProvider
             // View::prependLocation($path);
             $this->registerMixins();
             $this->extendValidator();
+            $this->createUrls();
             $this->extendView();
             $this->listenEvents();
             Password::defaults(
-                static fn (): Password => Password::min(8)
-                    ->letters()
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-                    ->uncompromised()
+                function (): Password {
+                    $password = Password::min(8)->max(255);
+
+                    return $this->app->isProduction()
+                        ? $password
+                            ->letters()
+                            ->mixedCase()
+                            ->numbers()
+                            ->symbols()
+                            ->uncompromised()
+                        : $password;
+                }
             );
             // Route::middleware(['throttle:uploads']);
             RateLimiter::for(
@@ -535,6 +544,29 @@ class AppServiceProvider extends ServiceProvider
                     $ruleClass::message()
                 );
             });
+    }
+
+    /**
+     * @see https://github.com/nandi95/laravel-starter/blob/main/app/Providers/AppServiceProvider.php
+     */
+    private function createUrls(): void
+    {
+        ResetPassword::createUrlUsing(
+            static fn (object $notifiable, string $token): string => config('app.frontend_url')."/auth/reset/{$token}?email={$notifiable->getEmailForPasswordReset()}"
+        );
+
+        VerifyEmail::createUrlUsing(static function (object $notifiable): string {
+            $url = url()->temporarySignedRoute(
+                'email.verify',
+                now()->addMinutes(config('auth.verification.expire', 60)),
+                [
+                    'user' => $notifiable->ulid,
+                ],
+                false
+            );
+
+            return config('app.frontend_url').'/auth/verify?verify_url='.urlencode($url);
+        });
     }
 
     /**

@@ -12,11 +12,14 @@ use App\Notifications\WelcomeNotification;
 use Faker\Generator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Timebox;
 
 /**
  * @group Auth - 认证接口管理
+ *
+ * @see https://github.com/nandi95/laravel-starter/blob/main/app/Http/Controllers/Authentication/
  */
 class AuthController extends Controller
 {
@@ -90,6 +93,9 @@ class AuthController extends Controller
      *     },
      *     "error": {}
      * }
+     *
+     * @throws \Illuminate\Auth\AuthenticationException
+     * @throws \Throwable
      */
     public function login(AuthRequest $request): JsonResponse
     {
@@ -113,6 +119,8 @@ class AuthController extends Controller
         if (! $token) {
             return $this->apiResponse->badRequest('邮箱或者密码错误');
         }
+
+        auth()->logoutOtherDevices(auth()->user()->password);
 
         return $this->apiResponse->success(JWTUser::wrapToken($token));
     }
@@ -155,6 +163,7 @@ class AuthController extends Controller
     {
         return tap($this->ok('退出成功'), function ($response): void {
             $this->authorize('update', auth()->user());
+            // request()->user()->currentAccessToken()->delete();
             auth()->logout();
         });
     }
