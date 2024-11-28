@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -25,6 +26,7 @@ use Psr\Log\LoggerInterface;
  *
  * @see https://github.com/TheDragonCode/laravel-http-macros
  */
+#[Mixin(PendingRequest::class)]
 class PendingRequestMixin
 {
     public function withLogger(): \Closure

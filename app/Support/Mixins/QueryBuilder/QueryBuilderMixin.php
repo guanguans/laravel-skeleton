@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins\QueryBuilder;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -22,6 +23,9 @@ use Illuminate\Pipeline\Pipeline;
  * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  */
+#[Mixin(\Illuminate\Database\Eloquent\Builder::class)]
+#[Mixin(\Illuminate\Database\Query\Builder::class)]
+#[Mixin(\Illuminate\Database\Eloquent\Relations\Relation::class)]
 class QueryBuilderMixin
 {
     public function pipe(): callable

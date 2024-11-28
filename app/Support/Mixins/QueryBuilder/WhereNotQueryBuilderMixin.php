@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins\QueryBuilder;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,9 @@ use Illuminate\Support\Facades\DB;
  *
  * @see https://github.com/protonemedia/laravel-eloquent-where-not
  */
+#[Mixin(\Illuminate\Database\Eloquent\Builder::class)]
+#[Mixin(\Illuminate\Database\Query\Builder::class)]
+#[Mixin(\Illuminate\Database\Eloquent\Relations\Relation::class)]
 class WhereNotQueryBuilderMixin
 {
     /**
@@ -32,7 +36,7 @@ class WhereNotQueryBuilderMixin
 
     public static function whereNot(): callable
     {
-        return function ($withQuery): Builder {
+        return function ($withQuery) {
             $callable = \is_callable($withQuery)
                 ? $withQuery
                 : transform($withQuery, static function ($value): callable {

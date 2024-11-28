@@ -16,6 +16,7 @@ use App\Rules\Rule;
 use App\Support\Attributes\After;
 use App\Support\Attributes\Autowired;
 use App\Support\Attributes\Before;
+use App\Support\Attributes\Mixin;
 use App\Support\Discover;
 use App\Support\Mixins\BlueprintMixin;
 use App\Support\Mixins\CarbonMixin;
@@ -244,7 +245,7 @@ class AppServiceProvider extends ServiceProvider
             // RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
             // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
             // View::prependLocation($path);
-            $this->registerMacros();
+            $this->registerMixins();
             $this->extendValidator();
             $this->extendView();
             $this->listenEvents();
@@ -473,29 +474,40 @@ class AppServiceProvider extends ServiceProvider
      * @throws BindingResolutionException
      * @throws \ReflectionException
      */
-    private function registerMacros(): void
+    private function registerMixins(): void
     {
-        \App\Models\Model::mixin($this->app->make(ModelMixin::class));
-        Blueprint::mixin($this->app->make(BlueprintMixin::class));
-        Carbon::mixin($this->app->make(CarbonMixin::class));
-        Collection::mixin($this->app->make(CollectionMixin::class));
-        Command::mixin($this->app->make(CommandMixin::class));
-        Event::mixin($this->app->make(SchedulingEventMixin::class));
-        Grammar::mixin($this->app->make(GrammarMixin::class));
-        MySqlGrammar::mixin($this->app->make(MySqlGrammarMixin::class));
-        PendingRequest::mixin($this->app->make(PendingRequestMixin::class));
-        Request::mixin($this->app->make(RequestMixin::class));
-        ResponseFactory::mixin($this->app->make(ResponseFactoryMixin::class));
-        Str::mixin($this->app->make(StrMixin::class));
-        Stringable::mixin($this->app->make(StringableMixin::class));
-        UploadedFile::mixin($this->app->make(UploadedFileMixin::class));
+        // \App\Models\Model::mixin($this->app->make(ModelMixin::class));
+        // Blueprint::mixin($this->app->make(BlueprintMixin::class));
+        // Carbon::mixin($this->app->make(CarbonMixin::class));
+        // Collection::mixin($this->app->make(CollectionMixin::class));
+        // Command::mixin($this->app->make(CommandMixin::class));
+        // Event::mixin($this->app->make(SchedulingEventMixin::class));
+        // Grammar::mixin($this->app->make(GrammarMixin::class));
+        // MySqlGrammar::mixin($this->app->make(MySqlGrammarMixin::class));
+        // PendingRequest::mixin($this->app->make(PendingRequestMixin::class));
+        // Request::mixin($this->app->make(RequestMixin::class));
+        // ResponseFactory::mixin($this->app->make(ResponseFactoryMixin::class));
+        // Str::mixin($this->app->make(StrMixin::class));
+        // Stringable::mixin($this->app->make(StringableMixin::class));
+        // UploadedFile::mixin($this->app->make(UploadedFileMixin::class));
+        //
+        // collect(glob($this->app->path('Support/Mixins/QueryBuilder/*QueryBuilderMixin.php')))
+        //     ->each(function ($file): void {
+        //         $queryBuilderMacro = $this->app->make(resolve_class_from($file));
+        //         QueryBuilder::mixin($queryBuilderMacro);
+        //         EloquentBuilder::mixin($queryBuilderMacro);
+        //         Relation::mixin($queryBuilderMacro);
+        //     });
 
-        collect(glob($this->app->path('Mixins/QueryBuilder/*QueryBuilderMixin.php')))
-            ->each(function ($file): void {
-                $queryBuilderMacro = $this->app->make(resolve_class_from($file));
-                QueryBuilder::mixin($queryBuilderMacro);
-                EloquentBuilder::mixin($queryBuilderMacro);
-                Relation::mixin($queryBuilderMacro);
+        Discover::in('Support/Mixins')
+            ->recursively()
+            ->all()
+            ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
+                foreach ($mixinReflectionClass->getAttributes(Mixin::class) as $mixinReflectionAttribute) {
+                    /** @var \App\Support\Attributes\Mixin $mixinAttribute */
+                    $mixinAttribute = $mixinReflectionAttribute->newInstance();
+                    $mixinAttribute->class::mixin(app($mixinClass), $mixinAttribute->replace);
+                }
             });
     }
 

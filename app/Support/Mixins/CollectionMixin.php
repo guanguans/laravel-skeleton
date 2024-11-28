@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -19,6 +20,7 @@ use Illuminate\Support\Collection;
 /**
  * @mixin \Illuminate\Support\Collection
  */
+#[Mixin(Collection::class)]
 class CollectionMixin
 {
     /**

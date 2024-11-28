@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
@@ -20,6 +22,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * @mixin \Illuminate\Http\Request
  */
+#[Mixin(Request::class)]
 class RequestMixin
 {
     public function userId(): callable

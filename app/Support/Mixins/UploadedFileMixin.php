@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
@@ -20,6 +21,7 @@ use Illuminate\Support\Str;
  *
  * @mixin \Illuminate\Http\UploadedFile
  */
+#[Mixin(UploadedFile::class)]
 class UploadedFileMixin
 {
     public static function makeFromUrl(): \Closure

@@ -12,9 +12,13 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Models\Model;
+use App\Support\Attributes\Mixin;
+
 /**
  * @mixin \App\Models\Model
  */
+#[Mixin(Model::class)]
 class ModelMixin
 {
     public static function getTableName(): \Closure

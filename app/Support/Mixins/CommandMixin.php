@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
+use Illuminate\Console\Command;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Log\Logger;
 use Illuminate\Process\PendingProcess;
@@ -24,10 +26,10 @@ use Symfony\Component\Process\Process;
 
 /**
  * @mixin \Illuminate\Console\Command
- * @mixin \Illuminate\Process\PendingProcess
  *
  * @see https://github.com/nunomaduro/laravel-console-task
  */
+#[Mixin(Command::class)]
 class CommandMixin
 {
     /**

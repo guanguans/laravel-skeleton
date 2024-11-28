@@ -15,15 +15,17 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
 
 /**
- * @mixin Event
+ * @mixin \Illuminate\Console\Scheduling\Event
  *
  * @property $channels
  */
+#[Mixin(Event::class)]
 class SchedulingEventMixin
 {
     public function userAppendOutputToDaily(): callable

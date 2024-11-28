@@ -12,11 +12,13 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Support\Str;
 
 /**
  * @mixin \Illuminate\Support\Str
  */
+#[Mixin(Str::class)]
 class StrMixin
 {
     /**

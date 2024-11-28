@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\ColumnDefinition;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Fluent;
@@ -19,6 +21,7 @@ use Illuminate\Support\Fluent;
 /**
  * @mixin \Illuminate\Database\Schema\Blueprint
  */
+#[Mixin(Blueprint::class)]
 class BlueprintMixin
 {
     /**

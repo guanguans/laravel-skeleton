@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins\QueryBuilder;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Facades\DB;
 
@@ -20,12 +21,15 @@ use Illuminate\Support\Facades\DB;
  * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  */
+#[Mixin(\Illuminate\Database\Eloquent\Builder::class)]
+#[Mixin(\Illuminate\Database\Query\Builder::class)]
+#[Mixin(\Illuminate\Database\Eloquent\Relations\Relation::class)]
 class WhereFindInSetQueryBuilderMixin
 {
     public function whereFindInSet(): callable
     {
         // @var string|Arrayable|string[] $values
-        return function (string $column, $values, string $boolean = 'and', bool $not = false): \Illuminate\Database\Query\Builder {
+        return function (string $column, $values, string $boolean = 'and', bool $not = false) {
             if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && ! str_starts_with($column, $tablePrefix)) {
                 $column = $tablePrefix.$column;
             }

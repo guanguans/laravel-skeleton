@@ -12,11 +12,13 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Support\Carbon;
 
 /**
  * @mixin \Illuminate\Support\Carbon
  */
+#[Mixin(Carbon::class)]
 class CarbonMixin
 {
     public function inAppTimezone(): \Closure

@@ -12,16 +12,21 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins\QueryBuilder;
 
+use App\Support\Attributes\Mixin;
+
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  */
+#[Mixin(\Illuminate\Database\Eloquent\Builder::class)]
+#[Mixin(\Illuminate\Database\Query\Builder::class)]
+#[Mixin(\Illuminate\Database\Eloquent\Relations\Relation::class)]
 class OrderByWithQueryBuilderMixin
 {
     public function orderByWith(): callable
     {
-        return function ($relation, $column, $direction = 'asc'): \Illuminate\Database\Query\Builder {
+        return function ($relation, $column, $direction = 'asc') {
             if (\is_string($relation)) {
                 $relation = $this->getRelationWithoutConstraints($relation);
             }

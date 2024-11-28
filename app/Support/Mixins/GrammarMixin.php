@@ -12,13 +12,16 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Support\Fluent;
 
 /**
  * @mixin \Illuminate\Database\Schema\Grammars\Grammar
  */
+#[Mixin(Grammar::class)]
 class GrammarMixin
 {
     /**

@@ -12,7 +12,9 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use GuzzleHttp\Client;
+use Illuminate\Routing\ResponseFactory;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -20,6 +22,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  *
  * @mixin \Illuminate\Routing\ResponseFactory
  */
+#[Mixin(ResponseFactory::class)]
 class ResponseFactoryMixin
 {
     /**

@@ -12,12 +12,14 @@ declare(strict_types=1);
 
 namespace App\Support\Mixins;
 
+use App\Support\Attributes\Mixin;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 
 /**
  * @mixin \Illuminate\Support\Stringable
  */
+#[Mixin(Stringable::class)]
 class StringableMixin
 {
     /**
