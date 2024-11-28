@@ -164,6 +164,7 @@ class AuthController extends Controller
         return tap($this->ok('退出成功'), function ($response): void {
             $this->authorize('update', auth()->user());
             // request()->user()->currentAccessToken()->delete();
+            // auth()->logoutCurrentDevice();
             auth()->logout();
         });
     }

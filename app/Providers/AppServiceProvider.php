@@ -218,7 +218,7 @@ class AppServiceProvider extends ServiceProvider
             Date::use(CarbonImmutable::class);
             DateFactory::useCallable(
                 static fn (mixed $result): mixed => $result instanceof CarbonInterface
-                    ? $result->setTimezone(config('app.timezone'))
+                    ? $result->setTimezone(config()->string('app.timezone'))
                     : $result
             );
             // @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly

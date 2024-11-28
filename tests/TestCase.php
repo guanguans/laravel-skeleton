@@ -36,5 +36,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->withoutVite();
+
+        /** @see https://github.com/OussamaMater/Laravel-Tips#tip-167--time-travel-in-your-tests */
+        // $this->travel(5)->years();
     }
 }
