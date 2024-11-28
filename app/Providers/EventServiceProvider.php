@@ -37,6 +37,13 @@ class EventServiceProvider extends ServiceProvider
         \Illuminate\Auth\Events\PasswordReset::class => [
             \App\Listeners\LogActivity::class.'@passwordReset',
         ],
+        \Illuminate\Auth\Events\Attempting::class => [],
+        \Illuminate\Auth\Events\Authenticated::class => [],
+        \Illuminate\Auth\Events\Validated::class => [],
+        \Illuminate\Auth\Events\Verified::class => [],
+        \Illuminate\Auth\Events\CurrentDeviceLogout::class => [],
+        \Illuminate\Auth\Events\OtherDeviceLogout::class => [],
+        \Illuminate\Auth\Events\Lockout::class => [],
         \Illuminate\Foundation\Events\MaintenanceModeEnabled::class => [
             MaintenanceModeEnabledNotificationListener::class,
         ],

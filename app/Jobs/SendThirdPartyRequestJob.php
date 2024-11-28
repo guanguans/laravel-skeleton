@@ -26,6 +26,11 @@ class SendThirdPartyRequestJob implements ShouldQueue
 
     public int $tires = 3;
 
+    /**
+     * Delete the job if its models no longer exist.
+     */
+    public bool $deleteWhenMissingModels = true;
+
     public function handle(): void
     {
         Http::acceptJson()->timeout(10)->get('https://...');
