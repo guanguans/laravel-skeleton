@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Concerns\SerializeDate;
 use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -40,6 +41,19 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function newEloquentBuilder($query): Builder
+    {
+        return new Builder($query);
+    }
+
+    public static function query(): Builder
+    {
+        return parent::query();
+    }
 
     /**
      * Retrieve the model for a bound value.
