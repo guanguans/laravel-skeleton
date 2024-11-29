@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Console\Commands\ClearAllCommand;
 use App\Http\Middleware\LogHttp;
 use App\Http\Middleware\TrimStrings;
 use App\Listeners\RunCommandInDebugModeListener;
@@ -300,6 +301,17 @@ class AppServiceProvider extends ServiceProvider
                 // Enable on delete cascade for sqlite connections
                 DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
             }
+
+            ClearAllCommand::prohibit(app()->isProduction());
+            // Prevents 'migrate:fresh', 'migrate:refresh', 'migrate:reset', and 'db:wipe'
+            DB::prohibitDestructiveCommands($this->app->isProduction());
+
+            /** @see https://github.com/OussamaMater/Laravel-Tips#tip-266--the-new-optimizes-method */
+            $this->optimizes(
+                optimize: 'filament:optimize',
+                // Defaults to the service provider name without "ServiceProvider" suffix
+                key: 'filament'
+            );
 
             // Route::resourceVerbs([
             //     'create' => 'crear',

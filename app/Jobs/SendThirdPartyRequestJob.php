@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\Client\HttpClientException;
+use Illuminate\Queue\Attributes\WithoutRelations;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\Middleware\Skip;
+use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\Middleware\ThrottlesExceptions;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
@@ -31,6 +35,11 @@ class SendThirdPartyRequestJob implements ShouldQueue
      */
     public bool $deleteWhenMissingModels = true;
 
+    public function __construct(
+        #[WithoutRelations]
+        private readonly User $user
+    ) {}
+
     public function handle(): void
     {
         Http::acceptJson()->timeout(10)->get('https://...');
@@ -41,6 +50,9 @@ class SendThirdPartyRequestJob implements ShouldQueue
     public function middleware(): array
     {
         return [
+            // Skip::when(true),
+            // Skip::unless(false),
+            new SkipIfBatchCancelled,
             // Circuit Breaker Pattern - 断路器模式中间件
             (new ThrottlesExceptions(maxAttempts: 3, decaySeconds: 300))
                 ->by(self::class)

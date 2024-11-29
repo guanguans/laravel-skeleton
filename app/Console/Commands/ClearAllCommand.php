@@ -3,17 +3,22 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\Prohibitable;
 use Illuminate\Contracts\Console\Isolatable;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 
 class ClearAllCommand extends Command implements Isolatable, PromptsForMissingInput
 {
+    use Prohibitable;
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
     protected $signature = 'clear:all {--f|force : Force clear optimized.}';
+
+    protected $aliases = ['ca'];
 
     /**
      * The console command description.

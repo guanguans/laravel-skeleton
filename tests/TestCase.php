@@ -17,6 +17,7 @@ abstract class TestCase extends BaseTestCase
     // use DatabaseTruncation;
     // use FastRefreshDatabase;
     // use RefreshDatabase;
+    // use LazilyRefreshDatabase;
 
     /**
      * 在测试前指定要运行的 seeder
