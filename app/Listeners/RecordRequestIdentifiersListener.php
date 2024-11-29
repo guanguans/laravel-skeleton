@@ -30,6 +30,7 @@ class RecordRequestIdentifiersListener
 
             // https://github.com/stevebauman/location/blob/master/src/Drivers/Cloudflare.php#L17
             /** @var LocationManager $location */
+            /** @phpstan-ignore-next-line */
             $location = Location::setDriver(new Cloudflare);
             // https://developers.cloudflare.com/rules/transform/managed-transforms/reference/#add-visitor-location-headers
             $ipLocation = $location->get($request->ip());
