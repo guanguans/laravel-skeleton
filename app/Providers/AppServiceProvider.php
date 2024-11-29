@@ -73,6 +73,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\ResponseFactory;
@@ -110,6 +111,7 @@ use Imanghafoori\Decorator\Facade\Decorator;
 use Jiannei\Response\Laravel\Providers\LaravelServiceProvider;
 use Laravel\Octane\Events\RequestReceived;
 use Laravel\Octane\Events\RequestTerminated;
+use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
@@ -302,6 +304,8 @@ class AppServiceProvider extends ServiceProvider
                 DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
             }
 
+            /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
+            EnsureFeaturesAreActive::whenInactive(static fn (Request $request, array $features) => new Response(status: 403));
             ClearAllCommand::prohibit(app()->isProduction());
             // Prevents 'migrate:fresh', 'migrate:refresh', 'migrate:reset', and 'db:wipe'
             DB::prohibitDestructiveCommands($this->app->isProduction());
