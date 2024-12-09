@@ -18100,8 +18100,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -18176,8 +18176,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -18337,8 +18337,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -18563,8 +18563,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -21788,16 +21788,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "df2ccbb8327749cd891b5227ba0b5ee794001a7e"
+                "reference": "f59e224e23300a369b0be1f1eae73c31abea58a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/df2ccbb8327749cd891b5227ba0b5ee794001a7e",
-                "reference": "df2ccbb8327749cd891b5227ba0b5ee794001a7e",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/f59e224e23300a369b0be1f1eae73c31abea58a3",
+                "reference": "f59e224e23300a369b0be1f1eae73c31abea58a3",
                 "shasum": ""
             },
             "require": {
@@ -21817,7 +21817,6 @@
             "require-dev": {
                 "dereuromark/composer-prefer-lowest": "^0.1.10",
                 "ergebnis/phpunit-slow-test-detector": "^2.14",
-                "friendsofphp/php-cs-fixer": "^3.54",
                 "google/protobuf": "^3.23",
                 "pestphp/pest": "^2.34",
                 "phpstan/extension-installer": "^1.3",
@@ -21828,8 +21827,8 @@
                 "phpunit/phpunit": "^10.5",
                 "rector/rector": "^1.1",
                 "roxblnfk/unpoly": "^1.8.1",
-                "vimeo/psalm": "^5.11",
-                "wayofdev/cs-fixer-config": "^1.4"
+                "spiral/code-style": "*",
+                "vimeo/psalm": "^5.11"
             },
             "suggest": {
                 "ext-simplexml": "To load trap.xml",
@@ -21878,7 +21877,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.11.0"
+                "source": "https://github.com/buggregator/trap/tree/1.11.1"
             },
             "funding": [
                 {
@@ -21894,7 +21893,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-09-25T11:27:16+00:00"
+            "time": "2024-12-07T21:20:29+00:00"
         },
         {
             "name": "captainhook/captainhook",
