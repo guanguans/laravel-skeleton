@@ -21182,16 +21182,16 @@
     "packages-dev": [
         {
             "name": "aaronfrancis/solo",
-            "version": "v0.2.1",
+            "version": "v0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aarondfrancis/solo.git",
-                "reference": "868a06292324424f36f1fab2954f70f9c1a5cd25"
+                "reference": "2e0ee477aa181753858b70d184132e4b196105e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aarondfrancis/solo/zipball/868a06292324424f36f1fab2954f70f9c1a5cd25",
-                "reference": "868a06292324424f36f1fab2954f70f9c1a5cd25",
+                "url": "https://api.github.com/repos/aarondfrancis/solo/zipball/2e0ee477aa181753858b70d184132e4b196105e2",
+                "reference": "2e0ee477aa181753858b70d184132e4b196105e2",
                 "shasum": ""
             },
             "require": {
@@ -21234,9 +21234,9 @@
             "description": "A Laravel package to run multiple commands at once, to aid in local development.",
             "support": {
                 "issues": "https://github.com/aarondfrancis/solo/issues",
-                "source": "https://github.com/aarondfrancis/solo/tree/v0.2.1"
+                "source": "https://github.com/aarondfrancis/solo/tree/v0.2.2"
             },
-            "time": "2024-11-21T16:52:06+00:00"
+            "time": "2024-12-11T19:36:14+00:00"
         },
         {
             "name": "andreaselia/laravel-api-to-postman",
@@ -24326,16 +24326,16 @@
         },
         {
             "name": "joetannenbaum/chewie",
-            "version": "0.1.9",
+            "version": "0.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joetannenbaum/chewie.git",
-                "reference": "84ebd41ccc708651634e125a404e866cc996b991"
+                "reference": "7040f1c157e6756f45f49f4a821303cae3cfe424"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joetannenbaum/chewie/zipball/84ebd41ccc708651634e125a404e866cc996b991",
-                "reference": "84ebd41ccc708651634e125a404e866cc996b991",
+                "url": "https://api.github.com/repos/joetannenbaum/chewie/zipball/7040f1c157e6756f45f49f4a821303cae3cfe424",
+                "reference": "7040f1c157e6756f45f49f4a821303cae3cfe424",
                 "shasum": ""
             },
             "require": {
@@ -24357,9 +24357,9 @@
             "notification-url": "https://packagist.org/downloads/",
             "support": {
                 "issues": "https://github.com/joetannenbaum/chewie/issues",
-                "source": "https://github.com/joetannenbaum/chewie/tree/0.1.9"
+                "source": "https://github.com/joetannenbaum/chewie/tree/0.1.11"
             },
-            "time": "2024-11-12T14:35:49+00:00"
+            "time": "2024-12-07T01:53:54+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
