@@ -305,7 +305,7 @@ class AppServiceProvider extends ServiceProvider
             }
 
             /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
-            EnsureFeaturesAreActive::whenInactive(static fn (Request $request, array $features) => new Response(status: 403));
+            EnsureFeaturesAreActive::whenInactive(static fn (Request $request, array $features): Response => new Response(status: 403));
             ClearAllCommand::prohibit(app()->isProduction());
             // Prevents 'migrate:fresh', 'migrate:refresh', 'migrate:reset', and 'db:wipe'
             DB::prohibitDestructiveCommands($this->app->isProduction());
