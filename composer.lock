@@ -7508,16 +7508,16 @@
         },
         {
             "name": "laragear/cache-query",
-            "version": "v4.0.0",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/CacheQuery.git",
-                "reference": "377a8706c8433f171fb2883a644efb01470ae7fa"
+                "reference": "49495f6e7686e3f284f64c338f748fddcafe7767"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/377a8706c8433f171fb2883a644efb01470ae7fa",
-                "reference": "377a8706c8433f171fb2883a644efb01470ae7fa",
+                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/49495f6e7686e3f284f64c338f748fddcafe7767",
+                "reference": "49495f6e7686e3f284f64c338f748fddcafe7767",
                 "shasum": ""
             },
             "require": {
@@ -7571,7 +7571,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2024-03-04T04:27:23+00:00"
+            "time": "2024-12-15T12:07:00+00:00"
         },
         {
             "name": "laragear/discover",
@@ -32637,9 +32637,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -32651,6 +32651,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
