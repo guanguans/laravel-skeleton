@@ -6534,16 +6534,16 @@
         },
         {
             "name": "inspector-apm/inspector-laravel",
-            "version": "4.9.16",
+            "version": "4.9.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-laravel.git",
-                "reference": "4cadf92cdcccb29fca72a67ae521a9ac0f026170"
+                "reference": "41d3bc443e2c06e5901870adba9243076f720e83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/4cadf92cdcccb29fca72a67ae521a9ac0f026170",
-                "reference": "4cadf92cdcccb29fca72a67ae521a9ac0f026170",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/41d3bc443e2c06e5901870adba9243076f720e83",
+                "reference": "41d3bc443e2c06e5901870adba9243076f720e83",
                 "shasum": ""
             },
             "require": {
@@ -6559,12 +6559,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Inspector\\Laravel\\InspectorServiceProvider"
-                    ],
                     "aliases": {
                         "Inspector": "Inspector\\Laravel\\Facades\\Inspector"
-                    }
+                    },
+                    "providers": [
+                        "Inspector\\Laravel\\InspectorServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -6594,22 +6594,22 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-laravel/issues",
-                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.9.16"
+                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.9.17"
             },
-            "time": "2024-10-24T10:37:42+00:00"
+            "time": "2024-12-20T16:14:24+00:00"
         },
         {
             "name": "inspector-apm/inspector-php",
-            "version": "3.8.9",
+            "version": "3.8.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-php.git",
-                "reference": "47bec5972e6dc9a1036d391e90d8e838f7fdc9c5"
+                "reference": "bb6b490c5b3d6d1a24a897c3fd02b62715c9f1eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-php/zipball/47bec5972e6dc9a1036d391e90d8e838f7fdc9c5",
-                "reference": "47bec5972e6dc9a1036d391e90d8e838f7fdc9c5",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-php/zipball/bb6b490c5b3d6d1a24a897c3fd02b62715c9f1eb",
+                "reference": "bb6b490c5b3d6d1a24a897c3fd02b62715c9f1eb",
                 "shasum": ""
             },
             "require": {
@@ -6642,9 +6642,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-php/issues",
-                "source": "https://github.com/inspector-apm/inspector-php/tree/3.8.9"
+                "source": "https://github.com/inspector-apm/inspector-php/tree/3.8.10"
             },
-            "time": "2024-12-10T09:50:56+00:00"
+            "time": "2024-12-20T16:13:31+00:00"
         },
         {
             "name": "izniburak/bit-permission",
@@ -10337,10 +10337,6 @@
             ],
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev",
-                    "dev-2.x": "2.x-dev"
-                },
                 "laravel": {
                     "providers": [
                         "Carbon\\Laravel\\ServiceProvider"
@@ -10350,6 +10346,10 @@
                     "includes": [
                         "extension.neon"
                     ]
+                },
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev",
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
