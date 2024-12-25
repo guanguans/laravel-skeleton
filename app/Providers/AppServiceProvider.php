@@ -85,6 +85,7 @@ use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -196,6 +197,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             request()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
             Log::shareContext($this->sharedLogContext());
+            Context::add('request_id', $this->app->make(self::REQUEST_ID_NAME));
 
             // // With context for current channel and stack.
             // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
