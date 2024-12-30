@@ -15731,16 +15731,16 @@
         },
         {
             "name": "spatie/laravel-route-discovery",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-route-discovery.git",
-                "reference": "4ac33f4e28ae392ed34a8efdef24947df4d73dde"
+                "reference": "cb490f106c42bfaca7671de12b3e6d396ffdc4ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-route-discovery/zipball/4ac33f4e28ae392ed34a8efdef24947df4d73dde",
-                "reference": "4ac33f4e28ae392ed34a8efdef24947df4d73dde",
+                "url": "https://api.github.com/repos/spatie/laravel-route-discovery/zipball/cb490f106c42bfaca7671de12b3e6d396ffdc4ca",
+                "reference": "cb490f106c42bfaca7671de12b3e6d396ffdc4ca",
                 "shasum": ""
             },
             "require": {
@@ -15793,7 +15793,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-route-discovery/issues",
-                "source": "https://github.com/spatie/laravel-route-discovery/tree/1.1.0"
+                "source": "https://github.com/spatie/laravel-route-discovery/tree/1.1.1"
             },
             "funding": [
                 {
@@ -15805,7 +15805,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-12-23T15:16:11+00:00"
+            "time": "2024-12-30T10:14:16+00:00"
         },
         {
             "name": "spatie/laravel-schedule-monitor",
