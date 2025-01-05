@@ -21,10 +21,10 @@ return [
      * the "posts" attribute and the "Post::class", since the relation can get resolved in multiple ways.
      */
     'except' => [
-        //Author::class => [
+        // Author::class => [
         //    Post::class,
         //    'posts',
-        //]
+        // ]
     ],
 
     /*

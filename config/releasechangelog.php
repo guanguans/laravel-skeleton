@@ -11,7 +11,7 @@ return [
     /**
      * Type of version mode change
      */
-    //'version_mode' => 'increment', # or 'increment',
+    // 'version_mode' => 'increment', # or 'increment',
 
     /**
      * Version default format

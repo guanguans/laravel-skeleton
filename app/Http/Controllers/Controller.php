@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
-class Controller extends BaseController /*implements HasMiddleware*/
+class Controller extends BaseController /* implements HasMiddleware */
 {
     use AuthorizesRequests;
     use DispatchesJobs;
