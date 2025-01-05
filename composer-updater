@@ -308,19 +308,17 @@ $status = (new SingleCommandApplication)
                     $diff,
                 );
 
-                $formatted = array_map(static function (string $line): string {
-                    return preg_replace(
-                        [
-                            '/^(\+.*)$/',
-                            '/^(-.*)$/',
-                        ],
-                        [
-                            '<fg=green>$1</>',
-                            '<fg=red>$1</>',
-                        ],
-                        $line,
-                    );
-                }, $lines);
+                $formatted = array_map(static fn (string $line): string => preg_replace(
+                    [
+                        '/^(\+.*)$/',
+                        '/^(-.*)$/',
+                    ],
+                    [
+                        '<fg=green>$1</>',
+                        '<fg=red>$1</>',
+                    ],
+                    $line,
+                ), $lines);
 
                 return implode(
                     "\n",

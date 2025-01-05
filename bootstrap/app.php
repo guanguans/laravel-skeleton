@@ -117,6 +117,9 @@ return Application::configure(basePath: dirname(__DIR__))
             ]));
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        // $exceptions->truncateRequestExceptionsAt(256);
+        // $exceptions->dontTruncateRequestExceptions();
+
         // $exceptions->dontFlash([]);
         $exceptions->shouldRenderJsonWhen(static function (Request $request, Throwable $e): bool {
             if ($request->is('api/*')) {

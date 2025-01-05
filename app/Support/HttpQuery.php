@@ -737,13 +737,11 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
     {
         return preg_replace_callback(
             '/(?:^|&)([^=&\[]+)(?:[=&\[]|$)/',
-            function ($match) {
-                return str_replace(
-                    ['.', ' ', $this->spaceCharacter()],
-                    [self::TEMP_DOT_REPLACEMENT, self::TEMP_SPACE_REPLACEMENT, self::TEMP_SPACE_REPLACEMENT],
-                    $match[0]
-                );
-            },
+            fn ($match) => str_replace(
+                ['.', ' ', $this->spaceCharacter()],
+                [self::TEMP_DOT_REPLACEMENT, self::TEMP_SPACE_REPLACEMENT, self::TEMP_SPACE_REPLACEMENT],
+                $match[0]
+            ),
             $queryString
         ) ?? $queryString;
     }
