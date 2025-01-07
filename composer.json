@@ -126,7 +126,7 @@
         "spatie/packagist-api": "^2.1",
         "spatie/php-structure-discoverer": "^2.2",
         "spatie/query-string": "^1.0",
-        "sqids/sqids": "^0.4",
+        "sqids/sqids": "^0.5",
         "square1/laravel-idempotency": "^2.0",
         "staudenmeir/laravel-adjacency-list": "^1.23",
         "stevebauman/location": "^7.4",
