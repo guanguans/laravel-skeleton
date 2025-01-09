@@ -5600,16 +5600,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.12.4",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "82055edc5985bbf6b0fe2c2b93c0a216b75e5c14"
+                "reference": "67e71b27eab52e008a9322bc36cf7dd7fddf8a24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/82055edc5985bbf6b0fe2c2b93c0a216b75e5c14",
-                "reference": "82055edc5985bbf6b0fe2c2b93c0a216b75e5c14",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/67e71b27eab52e008a9322bc36cf7dd7fddf8a24",
+                "reference": "67e71b27eab52e008a9322bc36cf7dd7fddf8a24",
                 "shasum": ""
             },
             "require": {
@@ -5624,14 +5624,15 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8",
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "ergebnis/composer-normalize": "^2.44",
-                "ergebnis/license": "^2.5",
+                "ergebnis/composer-normalize": "^2.45",
+                "ergebnis/license": "^2.6",
                 "ergebnis/php-cs-fixer-config": "dev-main",
-                "ergebnis/rector-rules": "^1.1",
+                "ergebnis/rector-rules": "^1.3",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "icanhazstring/composer-unused": "^0.8",
                 "illuminate/collections": "^8.83 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "^8.83 || ^9.0 || ^10.0 || ^11.0",
                 "infection/extension-installer": "^0.1",
                 "infection/infection": "^0.26",
                 "maglnet/composer-require-checker": "^3.8 || ^4.0",
@@ -5641,14 +5642,15 @@
                 "php-mock/php-mock-phpunit": "^2.10",
                 "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.12 || ^2.0",
-                "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
-                "rector/rector": "^1.2",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "rector/rector": "^2.0",
                 "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
-                "vimeo/psalm": "^5.26"
+                "vimeo/psalm": "^5.26 || ^6.0"
             },
             "suggest": {
                 "illuminate/collections": "Required to use the method [Response::collect()].",
+                "illuminate/support": "Required to use the method [Response::fluent()].",
                 "symfony/var-dumper": "Required to use the the trait [WithDumpable]."
             },
             "type": "library",
@@ -5755,7 +5757,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-11-15T03:42:21+00:00"
+            "time": "2025-01-09T13:11:48+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
