@@ -21512,16 +21512,16 @@
         },
         {
             "name": "bennett-treptow/laravel-migration-generator",
-            "version": "4.4.1",
+            "version": "4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bennett-treptow/laravel-migration-generator.git",
-                "reference": "00b2a98727dde53464d13b8437011810c83f05a1"
+                "reference": "5c5f3b07a40f258abc36d8541e24d3de361e539b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bennett-treptow/laravel-migration-generator/zipball/00b2a98727dde53464d13b8437011810c83f05a1",
-                "reference": "00b2a98727dde53464d13b8437011810c83f05a1",
+                "url": "https://api.github.com/repos/bennett-treptow/laravel-migration-generator/zipball/5c5f3b07a40f258abc36d8541e24d3de361e539b",
+                "reference": "5c5f3b07a40f258abc36d8541e24d3de361e539b",
                 "shasum": ""
             },
             "require": {
@@ -21562,7 +21562,7 @@
             "description": "Generate migrations from existing database structures",
             "support": {
                 "issues": "https://github.com/bennett-treptow/laravel-migration-generator/issues",
-                "source": "https://github.com/bennett-treptow/laravel-migration-generator/tree/4.4.1"
+                "source": "https://github.com/bennett-treptow/laravel-migration-generator/tree/4.4.2"
             },
             "funding": [
                 {
@@ -21574,7 +21574,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-30T22:54:29+00:00"
+            "time": "2025-01-10T01:31:55+00:00"
         },
         {
             "name": "brainmaestro/composer-git-hooks",
