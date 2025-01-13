@@ -2215,16 +2215,16 @@
         },
         {
             "name": "cerbero/enum",
-            "version": "2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cerbero90/enum.git",
-                "reference": "8ca4377a59b107af09efe263f5260732122d50bf"
+                "reference": "0ae4b74cb0377856a8bd73dffe6fea16ee3929dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cerbero90/enum/zipball/8ca4377a59b107af09efe263f5260732122d50bf",
-                "reference": "8ca4377a59b107af09efe263f5260732122d50bf",
+                "url": "https://api.github.com/repos/cerbero90/enum/zipball/0ae4b74cb0377856a8bd73dffe6fea16ee3929dd",
+                "reference": "0ae4b74cb0377856a8bd73dffe6fea16ee3929dd",
                 "shasum": ""
             },
             "require": {
@@ -2237,6 +2237,9 @@
                 "squizlabs/php_codesniffer": "^3.0",
                 "tightenco/duster": "^2.0"
             },
+            "bin": [
+                "bin/enum"
+            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2244,6 +2247,10 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "helpers/core.php",
+                    "helpers/cli.php"
+                ],
                 "psr-4": {
                     "Cerbero\\Enum\\": "src"
                 }
@@ -2268,7 +2275,7 @@
             ],
             "support": {
                 "issues": "https://github.com/cerbero90/enum/issues",
-                "source": "https://github.com/cerbero90/enum/tree/2.2.1"
+                "source": "https://github.com/cerbero90/enum/tree/2.3.0"
             },
             "funding": [
                 {
@@ -2276,7 +2283,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-22T16:43:49+00:00"
+            "time": "2025-01-12T19:55:23+00:00"
         },
         {
             "name": "coduo/php-humanizer",
