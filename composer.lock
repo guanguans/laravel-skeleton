@@ -14875,16 +14875,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "9.2.0",
+            "version": "9.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "2ba1da56fdc608c82a9cc79c9132d9c1284aea6c"
+                "reference": "234dc8a1143d31c2037c0228b38b28a9f2c8f340"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/2ba1da56fdc608c82a9cc79c9132d9c1284aea6c",
-                "reference": "2ba1da56fdc608c82a9cc79c9132d9c1284aea6c",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/234dc8a1143d31c2037c0228b38b28a9f2c8f340",
+                "reference": "234dc8a1143d31c2037c0228b38b28a9f2c8f340",
                 "shasum": ""
             },
             "require": {
@@ -14959,7 +14959,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/9.2.0"
+                "source": "https://github.com/spatie/laravel-backup/tree/9.2.1"
             },
             "funding": [
                 {
@@ -14971,7 +14971,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-01-06T09:19:23+00:00"
+            "time": "2025-01-13T11:44:58+00:00"
         },
         {
             "name": "spatie/laravel-csp",
