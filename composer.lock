@@ -5600,16 +5600,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "2.13.0",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "67e71b27eab52e008a9322bc36cf7dd7fddf8a24"
+                "reference": "0c14d8bd62dbc66b0c0ae8ab8f086095dc779e80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/67e71b27eab52e008a9322bc36cf7dd7fddf8a24",
-                "reference": "67e71b27eab52e008a9322bc36cf7dd7fddf8a24",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/0c14d8bd62dbc66b0c0ae8ab8f086095dc779e80",
+                "reference": "0c14d8bd62dbc66b0c0ae8ab8f086095dc779e80",
                 "shasum": ""
             },
             "require": {
@@ -5696,7 +5696,7 @@
                     "role": "developer"
                 }
             ],
-            "description": "Push notification SDK(AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).",
+            "description": "Push notification SDK(AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).",
             "homepage": "https://github.com/guanguans/notify",
             "keywords": [
                 "AnPush",
@@ -5706,6 +5706,7 @@
                 "NowPush",
                 "Ntfy",
                 "PushDeer",
+                "PushMe",
                 "QQ 频道机器人",
                 "Server酱",
                 "ShowdocPush",
@@ -5757,7 +5758,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-01-09T13:11:48+00:00"
+            "time": "2025-01-13T11:57:12+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -32662,5 +32663,5 @@
         "ext-simplexml": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
