@@ -26130,16 +26130,16 @@
         },
         {
             "name": "laravel/envoy",
-            "version": "v2.10.0",
+            "version": "v2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/envoy.git",
-                "reference": "5b8f6fa8b1aae5214d3187bfc55f79b080b89bdc"
+                "reference": "af8e29e4da6e33172b6ca582b151f4e035485643"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/envoy/zipball/5b8f6fa8b1aae5214d3187bfc55f79b080b89bdc",
-                "reference": "5b8f6fa8b1aae5214d3187bfc55f79b080b89bdc",
+                "url": "https://api.github.com/repos/laravel/envoy/zipball/af8e29e4da6e33172b6ca582b151f4e035485643",
+                "reference": "af8e29e4da6e33172b6ca582b151f4e035485643",
                 "shasum": ""
             },
             "require": {
@@ -26187,9 +26187,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/envoy/issues",
-                "source": "https://github.com/laravel/envoy/tree/v2.10.0"
+                "source": "https://github.com/laravel/envoy/tree/v2.10.1"
             },
-            "time": "2024-11-19T20:44:06+00:00"
+            "time": "2025-01-14T15:46:48+00:00"
         },
         {
             "name": "laravel/facade-documenter",
