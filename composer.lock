@@ -6493,16 +6493,16 @@
         },
         {
             "name": "inspector-apm/inspector-laravel",
-            "version": "4.9.18",
+            "version": "4.9.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-laravel.git",
-                "reference": "98dac82eb0cb2214f1e5e0a622d1e750e810c1fb"
+                "reference": "e19ffcae669afe73f1f2fbeb6be59ceb7da49d26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/98dac82eb0cb2214f1e5e0a622d1e750e810c1fb",
-                "reference": "98dac82eb0cb2214f1e5e0a622d1e750e810c1fb",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/e19ffcae669afe73f1f2fbeb6be59ceb7da49d26",
+                "reference": "e19ffcae669afe73f1f2fbeb6be59ceb7da49d26",
                 "shasum": ""
             },
             "require": {
@@ -6553,9 +6553,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-laravel/issues",
-                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.9.18"
+                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.9.20"
             },
-            "time": "2024-12-29T11:09:52+00:00"
+            "time": "2025-01-14T17:55:10+00:00"
         },
         {
             "name": "inspector-apm/inspector-php",
@@ -7973,16 +7973,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.37.0",
+            "version": "v11.38.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "6cb103d2024b087eae207654b3f4b26646119ba5"
+                "reference": "297652d91811fda163cc1929716117dccae2adbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/6cb103d2024b087eae207654b3f4b26646119ba5",
-                "reference": "6cb103d2024b087eae207654b3f4b26646119ba5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/297652d91811fda163cc1929716117dccae2adbd",
+                "reference": "297652d91811fda163cc1929716117dccae2adbd",
                 "shasum": ""
             },
             "require": {
@@ -8183,7 +8183,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-01-02T20:10:21+00:00"
+            "time": "2025-01-14T18:11:19+00:00"
         },
         {
             "name": "laravel/octane",
@@ -8432,16 +8432,16 @@
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.3.2",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "0e0535747c6b8d6d10adca8b68293cf4517abb0f"
+                "reference": "749395fcd5f8f7530fe1f00dfa84eb22c83d94ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/0e0535747c6b8d6d10adca8b68293cf4517abb0f",
-                "reference": "0e0535747c6b8d6d10adca8b68293cf4517abb0f",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/749395fcd5f8f7530fe1f00dfa84eb22c83d94ea",
+                "reference": "749395fcd5f8f7530fe1f00dfa84eb22c83d94ea",
                 "shasum": ""
             },
             "require": {
@@ -8485,9 +8485,9 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.3.2"
+                "source": "https://github.com/laravel/prompts/tree/v0.3.3"
             },
-            "time": "2024-11-12T14:59:47+00:00"
+            "time": "2024-12-30T15:53:31+00:00"
         },
         {
             "name": "laravel/pulse",
