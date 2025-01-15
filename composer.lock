@@ -2215,16 +2215,16 @@
         },
         {
             "name": "cerbero/enum",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cerbero90/enum.git",
-                "reference": "0ae4b74cb0377856a8bd73dffe6fea16ee3929dd"
+                "reference": "06fa86d7c3b43f1dbce103eaa639ba231d956cc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cerbero90/enum/zipball/0ae4b74cb0377856a8bd73dffe6fea16ee3929dd",
-                "reference": "0ae4b74cb0377856a8bd73dffe6fea16ee3929dd",
+                "url": "https://api.github.com/repos/cerbero90/enum/zipball/06fa86d7c3b43f1dbce103eaa639ba231d956cc5",
+                "reference": "06fa86d7c3b43f1dbce103eaa639ba231d956cc5",
                 "shasum": ""
             },
             "require": {
@@ -2275,7 +2275,7 @@
             ],
             "support": {
                 "issues": "https://github.com/cerbero90/enum/issues",
-                "source": "https://github.com/cerbero90/enum/tree/2.3.0"
+                "source": "https://github.com/cerbero90/enum/tree/2.3.1"
             },
             "funding": [
                 {
@@ -2283,7 +2283,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-12T19:55:23+00:00"
+            "time": "2025-01-14T23:23:54+00:00"
         },
         {
             "name": "coduo/php-humanizer",
@@ -32604,6 +32604,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
