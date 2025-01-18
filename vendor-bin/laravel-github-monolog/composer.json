@@ -1,0 +1,5 @@
+{
+    "require": {
+        "naoray/laravel-github-monolog": "^2.1"
+    }
+}
