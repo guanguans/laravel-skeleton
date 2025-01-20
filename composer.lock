@@ -15401,16 +15401,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.18.0",
+            "version": "1.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "8332205b90d17164913244f4a8e13ab7e6761d29"
+                "reference": "d41c44a7eab604c3eb0cad93210612d4c1429c20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/8332205b90d17164913244f4a8e13ab7e6761d29",
-                "reference": "8332205b90d17164913244f4a8e13ab7e6761d29",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/d41c44a7eab604c3eb0cad93210612d4c1429c20",
+                "reference": "d41c44a7eab604c3eb0cad93210612d4c1429c20",
                 "shasum": ""
             },
             "require": {
@@ -15449,7 +15449,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.18.0"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.18.2"
             },
             "funding": [
                 {
@@ -15457,7 +15457,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-30T13:13:39+00:00"
+            "time": "2025-01-20T14:14:17+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
@@ -15767,16 +15767,16 @@
         },
         {
             "name": "spatie/laravel-schedule-monitor",
-            "version": "3.9.0",
+            "version": "3.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-schedule-monitor.git",
-                "reference": "08433a04f17d14d1d0a2c6c0ab03110a4b4805c9"
+                "reference": "9af9b59b419e16f2466c851623efe8f84a9535cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/08433a04f17d14d1d0a2c6c0ab03110a4b4805c9",
-                "reference": "08433a04f17d14d1d0a2c6c0ab03110a4b4805c9",
+                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/9af9b59b419e16f2466c851623efe8f84a9535cf",
+                "reference": "9af9b59b419e16f2466c851623efe8f84a9535cf",
                 "shasum": ""
             },
             "require": {
@@ -15834,7 +15834,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-schedule-monitor/issues",
-                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.9.0"
+                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.9.2"
             },
             "funding": [
                 {
@@ -15842,7 +15842,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-06T15:14:46+00:00"
+            "time": "2025-01-17T09:27:05+00:00"
         },
         {
             "name": "spatie/laravel-schemaless-attributes",
