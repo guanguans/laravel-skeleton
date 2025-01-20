@@ -23871,49 +23871,49 @@
         },
         {
             "name": "guanguans/laravel-soar",
-            "version": "3.16.3",
+            "version": "3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-soar.git",
-                "reference": "592a0c488571d1e2bb495c11e9a6d07aa41968b1"
+                "reference": "f4d05d3d8a11ce79ef250d1f7391c0f8bd5f999f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/592a0c488571d1e2bb495c11e9a6d07aa41968b1",
-                "reference": "592a0c488571d1e2bb495c11e9a6d07aa41968b1",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/f4d05d3d8a11ce79ef250d1f7391c0f8bd5f999f",
+                "reference": "f4d05d3d8a11ce79ef250d1f7391c0f8bd5f999f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-pdo": "*",
-                "guanguans/soar-php": "^4.2",
+                "guanguans/soar-php": "^5.0",
                 "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "maximebf/debugbar": "^1.22",
+                "maximebf/debugbar": "^1.23",
                 "php": ">=7.4"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8",
                 "barryvdh/laravel-debugbar": "^3.7",
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "ergebnis/composer-normalize": "^2.43",
-                "friendsofphp/php-cs-fixer": "^3.62",
+                "ergebnis/composer-normalize": "^2.45",
+                "friendsofphp/php-cs-fixer": "^3.68",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
-                "itsgoingd/clockwork": "^5.2",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.21",
+                "itsgoingd/clockwork": "^5.3",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.22",
                 "laravel/legacy-factories": "^1.4",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^6.45 || ^7.0 || ^8.0 || ^9.0",
-                "pestphp/pest": "^1.23 || ^2.0",
-                "pestphp/pest-plugin-faker": "^1.0 || ^2.0",
+                "orchestra/testbench": "^6.47 || ^7.0 || ^8.0 || ^9.0",
+                "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
+                "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
                 "php-mock/php-mock-phpunit": "^2.10",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
-                "rector/rector": "^1.2",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "rector/rector": "^2.0",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
                 "spatie/ray": "^1.41",
-                "vimeo/psalm": "^5.25"
+                "vimeo/psalm": "^4.0 || ^5.0 || ^6.0"
             },
             "suggest": {
                 "barryvdh/laravel-debugbar": "Output SQL scores to Laravel DebugBar.",
@@ -23923,14 +23923,6 @@
             },
             "type": "laravel",
             "extra": {
-                "bamarni-bin": {
-                    "bin-links": false,
-                    "forward-command": true,
-                    "target-directory": "vendor-bin"
-                },
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                },
                 "hooks": {
                     "post-merge": [
                         "composer checks"
@@ -23949,6 +23941,14 @@
                 },
                 "phpstan": {
                     "includes": []
+                },
+                "bamarni-bin": {
+                    "bin-links": false,
+                    "forward-command": true,
+                    "target-directory": "vendor-bin"
+                },
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
@@ -24002,49 +24002,56 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-08-16T08:40:12+00:00"
+            "time": "2025-01-17T07:31:58+00:00"
         },
         {
             "name": "guanguans/soar-php",
-            "version": "4.2.5",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/soar-php.git",
-                "reference": "32804882f2fef92516bcabd5c0893a7b72205ad7"
+                "reference": "4d2a7cadb1ba39f34b72c89edd0d1b03a4c4bc91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/soar-php/zipball/32804882f2fef92516bcabd5c0893a7b72205ad7",
-                "reference": "32804882f2fef92516bcabd5c0893a7b72205ad7",
+                "url": "https://api.github.com/repos/guanguans/soar-php/zipball/4d2a7cadb1ba39f34b72c89edd0d1b03a4c4bc91",
+                "reference": "4d2a7cadb1ba39f34b72c89edd0d1b03a4c4bc91",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": ">=7.3",
+                "php": ">=7.4",
                 "symfony/process": "^5.4 || ^6.0 || ^7.0"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
                 "composer/composer": "^2.8",
-                "ergebnis/composer-normalize": "^2.20",
-                "friendsofphp/php-cs-fixer": "^3.4",
+                "ergebnis/composer-normalize": "^2.45",
+                "ergebnis/license": "^2.6",
+                "ergebnis/php-cs-fixer-config": "dev-main",
+                "ergebnis/rector-rules": "^1.3",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
-                "jetbrains/phpstorm-attributes": "^1.1",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.7",
+                "icanhazstring/composer-unused": "^0.8",
+                "maglnet/composer-require-checker": "^3.8 || ^4.0",
                 "mockery/mockery": "^1.6",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "php-mock/php-mock-phpunit": "^2.10",
                 "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.12",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
-                "rector/rector": "^1.2",
-                "spatie/phpunit-snapshot-assertions": "^4.2 || ^5.0",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "povils/phpmnd": "^3.5",
+                "rector/rector": "^2.0",
+                "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
+                "spaze/phpstan-disallowed-calls": "^4.1",
                 "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
-                "vimeo/psalm": "^4.30 || ^5.0"
+                "vimeo/psalm": "^4.0 || ^5.0 || ^6.0"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Required to use the the trait [WithDumpable]."
             },
             "bin": [
                 "bin/soar.darwin-amd64",
@@ -24055,14 +24062,6 @@
             ],
             "type": "library",
             "extra": {
-                "bamarni-bin": {
-                    "bin-links": true,
-                    "forward-command": true,
-                    "target-directory": "vendor-bin"
-                },
-                "branch-alias": {
-                    "dev-master": "4.x-dev"
-                },
                 "hooks": {
                     "post-merge": [
                         "composer checks"
@@ -24073,6 +24072,14 @@
                 },
                 "phpstan": {
                     "includes": []
+                },
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": true,
+                    "target-directory": "vendor-bin"
+                },
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
                 }
             },
             "autoload": {
@@ -24114,7 +24121,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-10-11T06:06:52+00:00"
+            "time": "2025-01-16T10:38:47+00:00"
         },
         {
             "name": "icecave/parity",
@@ -26650,16 +26657,16 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.23.4",
+            "version": "v1.23.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "0815f47bdd867b816b4bf2ca1c7bd7f89e1527ca"
+                "url": "https://github.com/php-debugbar/php-debugbar.git",
+                "reference": "eeabd61a1f19ba5dcd5ac4585a477130ee03ce25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/0815f47bdd867b816b4bf2ca1c7bd7f89e1527ca",
-                "reference": "0815f47bdd867b816b4bf2ca1c7bd7f89e1527ca",
+                "url": "https://api.github.com/repos/php-debugbar/php-debugbar/zipball/eeabd61a1f19ba5dcd5ac4585a477130ee03ce25",
+                "reference": "eeabd61a1f19ba5dcd5ac4585a477130ee03ce25",
                 "shasum": ""
             },
             "require": {
@@ -26711,10 +26718,10 @@
                 "debugbar"
             ],
             "support": {
-                "issues": "https://github.com/maximebf/php-debugbar/issues",
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.23.4"
+                "issues": "https://github.com/php-debugbar/php-debugbar/issues",
+                "source": "https://github.com/php-debugbar/php-debugbar/tree/v1.23.5"
             },
-            "time": "2024-12-05T10:36:51+00:00"
+            "time": "2024-12-15T19:20:42+00:00"
         },
         {
             "name": "mortexa/laravel-arkitect",
