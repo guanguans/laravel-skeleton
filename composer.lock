@@ -21826,16 +21826,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.13.1",
+            "version": "1.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "2ae227457719039383b04e79556d09203ba2786f"
+                "reference": "500e7ac1313d35bf0a00540f230f134a8fd0ec91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/2ae227457719039383b04e79556d09203ba2786f",
-                "reference": "2ae227457719039383b04e79556d09203ba2786f",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/500e7ac1313d35bf0a00540f230f134a8fd0ec91",
+                "reference": "500e7ac1313d35bf0a00540f230f134a8fd0ec91",
                 "shasum": ""
             },
             "require": {
@@ -21901,6 +21901,7 @@
             "description": "A simple and powerful tool for debugging PHP applications.",
             "homepage": "https://buggregator.dev/",
             "keywords": [
+                "Fibers",
                 "WebSockets",
                 "binary dump",
                 "cli",
@@ -21908,6 +21909,7 @@
                 "debug",
                 "dev",
                 "dump",
+                "dumper",
                 "helper",
                 "sentry",
                 "server",
@@ -21915,23 +21917,19 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.13.1"
+                "source": "https://github.com/buggregator/trap/tree/1.13.3"
             },
             "funding": [
                 {
-                    "url": "https://github.com/sponsors/buggregator",
-                    "type": "github"
-                },
-                {
-                    "url": "https://patreon.com/butschster",
-                    "type": "patreon"
+                    "url": "https://boosty.to/roxblnfk",
+                    "type": "boosty"
                 },
                 {
                     "url": "https://patreon.com/roxblnfk",
                     "type": "patreon"
                 }
             ],
-            "time": "2025-01-19T19:22:54+00:00"
+            "time": "2025-01-23T20:32:15+00:00"
         },
         {
             "name": "captainhook/captainhook",
@@ -32700,9 +32698,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -32714,6 +32712,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
