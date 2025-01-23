@@ -251,7 +251,7 @@ class AppServiceProvider extends ServiceProvider
             // TrimStrings::except(['secret']);
             // RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
             // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
-            // View::prependLocation($path);
+            // View::prependLocation(resource_path('custom-views'));
             $this->registerMixins();
             $this->extendValidator();
             $this->createUrls();
