@@ -219,7 +219,7 @@ class AppServiceProvider extends ServiceProvider
             // @see https://www.php.net/manual/zh/numberformatter.parsecurrency.php
             // @see https://zh.wikipedia.org/wiki/ISO_4217
             Number::useCurrency('CNY');
-            Carbon::serializeUsing(static fn (Carbon $timestamp) => $timestamp->format('Y-m-d H:i:s'));
+            Carbon::serializeUsing(static fn (Carbon $timestamp): string => $timestamp->format('Y-m-d H:i:s'));
             Date::use(CarbonImmutable::class);
             DateFactory::useCallable(
                 static fn (mixed $result): mixed => $result instanceof CarbonInterface

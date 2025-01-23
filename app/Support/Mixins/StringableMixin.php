@@ -32,21 +32,21 @@ class StringableMixin
 
     public function appendIf(): callable
     {
-        return fn ($suffix): \Illuminate\Support\Stringable => new Stringable(
+        return fn ($suffix): Stringable => new Stringable(
             Str::appendIf($this->__toString(), $suffix)
         );
     }
 
     public function prependIf(): callable
     {
-        return fn ($prefix): \Illuminate\Support\Stringable => new Stringable(
+        return fn ($prefix): Stringable => new Stringable(
             Str::prependIf($this->__toString(), $prefix)
         );
     }
 
     public function mbSubstrCount(): callable
     {
-        return fn ($needle, $encoding = null): \Illuminate\Support\Stringable => new Stringable(
+        return fn ($needle, $encoding = null): Stringable => new Stringable(
             Str::mbSubstrCount($this->__toString(), $needle, $encoding)
         );
     }
@@ -61,7 +61,7 @@ class StringableMixin
      */
     public function acronym(): callable
     {
-        return fn (string $delimiter = ''): \Illuminate\Support\Stringable => new Stringable(
+        return fn (string $delimiter = ''): Stringable => new Stringable(
             Str::acronym($this->value, $delimiter)
         );
     }

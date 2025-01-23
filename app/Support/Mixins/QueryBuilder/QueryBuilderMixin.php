@@ -23,9 +23,9 @@ use Illuminate\Pipeline\Pipeline;
  * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  */
-#[Mixin(\Illuminate\Database\Eloquent\Builder::class)]
-#[Mixin(\Illuminate\Database\Query\Builder::class)]
-#[Mixin(\Illuminate\Database\Eloquent\Relations\Relation::class)]
+#[Mixin(EloquentBuilder::class)]
+#[Mixin(QueryBuilder::class)]
+#[Mixin(Relation::class)]
 class QueryBuilderMixin
 {
     public function pipe(): callable

@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\DB;
  *
  * @see https://github.com/protonemedia/laravel-eloquent-where-not
  */
-#[Mixin(\Illuminate\Database\Eloquent\Builder::class)]
+#[Mixin(Builder::class)]
 #[Mixin(\Illuminate\Database\Query\Builder::class)]
 #[Mixin(\Illuminate\Database\Eloquent\Relations\Relation::class)]
 class WhereNotQueryBuilderMixin
