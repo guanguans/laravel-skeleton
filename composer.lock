@@ -31941,16 +31941,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "676796f9a9bb31861e11e7a9a20d9a671fe43743"
+                "reference": "eb3841ed93768e5754970e6da03d93d3a06c1e6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/676796f9a9bb31861e11e7a9a20d9a671fe43743",
-                "reference": "676796f9a9bb31861e11e7a9a20d9a671fe43743",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/eb3841ed93768e5754970e6da03d93d3a06c1e6a",
+                "reference": "eb3841ed93768e5754970e6da03d93d3a06c1e6a",
                 "shasum": ""
             },
             "require": {
@@ -31996,7 +31996,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.2.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.2.1"
             },
             "funding": [
                 {
@@ -32004,7 +32004,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-22T16:21:14+00:00"
+            "time": "2025-01-23T17:42:09+00:00"
         },
         {
             "name": "symfony/filesystem",
