@@ -1266,16 +1266,16 @@
         },
         {
             "name": "arifhp86/laravel-clear-expired-cache-file",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arifhp86/laravel-clear-expired-cache-file.git",
-                "reference": "1b4107598249114363d24eb738059965afd8ced3"
+                "reference": "fa64e537f3b1f12f41a65ca0fa9d7443b7237681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arifhp86/laravel-clear-expired-cache-file/zipball/1b4107598249114363d24eb738059965afd8ced3",
-                "reference": "1b4107598249114363d24eb738059965afd8ced3",
+                "url": "https://api.github.com/repos/arifhp86/laravel-clear-expired-cache-file/zipball/fa64e537f3b1f12f41a65ca0fa9d7443b7237681",
+                "reference": "fa64e537f3b1f12f41a65ca0fa9d7443b7237681",
                 "shasum": ""
             },
             "require": {
@@ -1315,9 +1315,9 @@
             ],
             "support": {
                 "issues": "https://github.com/arifhp86/laravel-clear-expired-cache-file/issues",
-                "source": "https://github.com/arifhp86/laravel-clear-expired-cache-file/tree/v1.0.3"
+                "source": "https://github.com/arifhp86/laravel-clear-expired-cache-file/tree/v1.0.4"
             },
-            "time": "2024-12-12T11:07:34+00:00"
+            "time": "2025-01-26T17:31:29+00:00"
         },
         {
             "name": "astrotomic/laravel-translatable",
