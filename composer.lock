@@ -1786,16 +1786,16 @@
         },
         {
             "name": "bilfeldt/laravel-http-client-logger",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bilfeldt/laravel-http-client-logger.git",
-                "reference": "a53b19ff6faa0b591d933aafc8ca382919bdae85"
+                "reference": "6c942bb431d4b34cfe7945157878836bbdab7a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bilfeldt/laravel-http-client-logger/zipball/a53b19ff6faa0b591d933aafc8ca382919bdae85",
-                "reference": "a53b19ff6faa0b591d933aafc8ca382919bdae85",
+                "url": "https://api.github.com/repos/bilfeldt/laravel-http-client-logger/zipball/6c942bb431d4b34cfe7945157878836bbdab7a36",
+                "reference": "6c942bb431d4b34cfe7945157878836bbdab7a36",
                 "shasum": ""
             },
             "require": {
@@ -1803,15 +1803,13 @@
                 "guzzlehttp/guzzle": "^7.2",
                 "illuminate/http": "^9.0 || ^10.0 || ^11.0",
                 "illuminate/support": "^9.0 || ^10.0 || ^11.0",
-                "php": "~8.3.0 | ~8.2.0 | ~8.1.0",
+                "php": "~8.4.0 | ~8.3.0 | ~8.2.0 | ~8.1.0",
                 "spatie/laravel-package-tools": "^1.1"
             },
             "require-dev": {
                 "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
                 "phpunit/phpunit": "^9.5.10 || ^10.0",
-                "spatie/laravel-ray": "^1.29",
-                "timacdonald/log-fake": "^2.0",
-                "vimeo/psalm": "^4.20"
+                "timacdonald/log-fake": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -1850,7 +1848,7 @@
             ],
             "support": {
                 "issues": "https://github.com/bilfeldt/laravel-http-client-logger/issues",
-                "source": "https://github.com/bilfeldt/laravel-http-client-logger/tree/v2.2.0"
+                "source": "https://github.com/bilfeldt/laravel-http-client-logger/tree/v2.3.0"
             },
             "funding": [
                 {
@@ -1858,7 +1856,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-28T09:35:00+00:00"
+            "time": "2024-12-25T23:09:38+00:00"
         },
         {
             "name": "bramus/ansi-php",
