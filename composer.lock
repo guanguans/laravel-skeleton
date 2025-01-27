@@ -16747,16 +16747,16 @@
         },
         {
             "name": "staudenmeir/laravel-adjacency-list",
-            "version": "v1.23.1",
+            "version": "v1.23.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-adjacency-list.git",
-                "reference": "3c4c0d964e8e4f2669d0917917c87ad61d2f0017"
+                "reference": "3518f87e840fcdcbd2d958eb9c0f402f003bd7cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/3c4c0d964e8e4f2669d0917917c87ad61d2f0017",
-                "reference": "3c4c0d964e8e4f2669d0917917c87ad61d2f0017",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/3518f87e840fcdcbd2d958eb9c0f402f003bd7cd",
+                "reference": "3518f87e840fcdcbd2d958eb9c0f402f003bd7cd",
                 "shasum": ""
             },
             "require": {
@@ -16768,9 +16768,10 @@
             "require-dev": {
                 "barryvdh/laravel-ide-helper": "^3.0",
                 "harrygulliford/laravel-firebird": "^3.3",
-                "larastan/larastan": "2.9.8",
+                "larastan/larastan": "^3.0",
+                "laravel/framework": "^11.0",
                 "mockery/mockery": "^1.5.1",
-                "orchestra/testbench": "^9.0",
+                "orchestra/testbench-core": "^9.5",
                 "phpunit/phpunit": "^11.0",
                 "singlestoredb/singlestoredb-laravel": "^1.5.4",
                 "staudenmeir/eloquent-has-many-deep": "^1.20"
@@ -16804,7 +16805,7 @@
             "description": "Recursive Laravel Eloquent relationships with CTEs",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-adjacency-list/issues",
-                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.23.1"
+                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.23.2"
             },
             "funding": [
                 {
@@ -16812,7 +16813,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-11-03T10:47:29+00:00"
+            "time": "2025-01-25T13:09:10+00:00"
         },
         {
             "name": "staudenmeir/laravel-cte",
