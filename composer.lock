@@ -30243,16 +30243,16 @@
         },
         {
             "name": "salahhusa9/laravel-updater",
-            "version": "v1.2.3",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/salahhusa9/laravel-updater.git",
-                "reference": "ea44706f358a426faba1207f85ac7aa240c9a09e"
+                "reference": "d1d1c775d2a4569a2f4d4d3aadba2cc3b55e8d5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/ea44706f358a426faba1207f85ac7aa240c9a09e",
-                "reference": "ea44706f358a426faba1207f85ac7aa240c9a09e",
+                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/d1d1c775d2a4569a2f4d4d3aadba2cc3b55e8d5b",
+                "reference": "d1d1c775d2a4569a2f4d4d3aadba2cc3b55e8d5b",
                 "shasum": ""
             },
             "require": {
@@ -30314,7 +30314,7 @@
             ],
             "support": {
                 "issues": "https://github.com/salahhusa9/laravel-updater/issues",
-                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.2.3"
+                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.2.4"
             },
             "funding": [
                 {
@@ -30322,7 +30322,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-17T20:24:58+00:00"
+            "time": "2025-01-27T12:21:55+00:00"
         },
         {
             "name": "scalar/laravel",
