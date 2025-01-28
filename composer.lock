@@ -7489,16 +7489,16 @@
         },
         {
             "name": "laragear/discover",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/Discover.git",
-                "reference": "122017bdbe84762cae67a11a1c0c907eb380e92c"
+                "reference": "21d08b9e44be67547b62952ce67813dbdaeaa9d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/Discover/zipball/122017bdbe84762cae67a11a1c0c907eb380e92c",
-                "reference": "122017bdbe84762cae67a11a1c0c907eb380e92c",
+                "url": "https://api.github.com/repos/Laragear/Discover/zipball/21d08b9e44be67547b62952ce67813dbdaeaa9d8",
+                "reference": "21d08b9e44be67547b62952ce67813dbdaeaa9d8",
                 "shasum": ""
             },
             "require": {
@@ -7548,7 +7548,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2024-03-03T22:51:11+00:00"
+            "time": "2025-01-28T20:30:51+00:00"
         },
         {
             "name": "laragear/meta",
