@@ -26214,21 +26214,21 @@
         },
         {
             "name": "laravel/envoy",
-            "version": "v2.10.1",
+            "version": "v2.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/envoy.git",
-                "reference": "af8e29e4da6e33172b6ca582b151f4e035485643"
+                "reference": "819a519e3d86b056c7aa3bd5d0801952a6fc14fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/envoy/zipball/af8e29e4da6e33172b6ca582b151f4e035485643",
-                "reference": "af8e29e4da6e33172b6ca582b151f4e035485643",
+                "url": "https://api.github.com/repos/laravel/envoy/zipball/819a519e3d86b056c7aa3bd5d0801952a6fc14fd",
+                "reference": "819a519e3d86b056c7aa3bd5d0801952a6fc14fd",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.0|^7.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
                 "php": "^7.2|^8.0",
                 "symfony/console": "^4.3|^5.0|^6.0|^7.0",
                 "symfony/process": "^4.3|^5.0|^6.0|^7.0"
@@ -26271,9 +26271,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/envoy/issues",
-                "source": "https://github.com/laravel/envoy/tree/v2.10.1"
+                "source": "https://github.com/laravel/envoy/tree/v2.10.2"
             },
-            "time": "2025-01-14T15:46:48+00:00"
+            "time": "2025-01-28T15:47:18+00:00"
         },
         {
             "name": "laravel/facade-documenter",
