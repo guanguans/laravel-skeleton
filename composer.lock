@@ -7422,16 +7422,16 @@
         },
         {
             "name": "laragear/cache-query",
-            "version": "v4.2.0",
+            "version": "v4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/CacheQuery.git",
-                "reference": "eee9f8e22a9e1130739c6b3370176f51c396515d"
+                "reference": "8e0afa9cc3960526b24537a9c9c905ba2a4dfb06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/eee9f8e22a9e1130739c6b3370176f51c396515d",
-                "reference": "eee9f8e22a9e1130739c6b3370176f51c396515d",
+                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/8e0afa9cc3960526b24537a9c9c905ba2a4dfb06",
+                "reference": "8e0afa9cc3960526b24537a9c9c905ba2a4dfb06",
                 "shasum": ""
             },
             "require": {
@@ -7485,7 +7485,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2025-01-28T20:17:12+00:00"
+            "time": "2025-01-29T04:11:59+00:00"
         },
         {
             "name": "laragear/discover",
