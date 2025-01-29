@@ -7837,16 +7837,16 @@
         },
         {
             "name": "laragear/webauthn",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/WebAuthn.git",
-                "reference": "5136b8fee90abb5c0b50b644594fb3142191f3b9"
+                "reference": "d0f127f3347066bb040fd32730037024a87dbc04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/WebAuthn/zipball/5136b8fee90abb5c0b50b644594fb3142191f3b9",
-                "reference": "5136b8fee90abb5c0b50b644594fb3142191f3b9",
+                "url": "https://api.github.com/repos/Laragear/WebAuthn/zipball/d0f127f3347066bb040fd32730037024a87dbc04",
+                "reference": "d0f127f3347066bb040fd32730037024a87dbc04",
                 "shasum": ""
             },
             "require": {
@@ -7864,6 +7864,7 @@
             },
             "require-dev": {
                 "ext-sodium": "*",
+                "livewire/livewire": "3.*",
                 "orchestra/testbench": "8.*|9.*"
             },
             "suggest": {
@@ -7923,7 +7924,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2024-08-15T07:50:06+00:00"
+            "time": "2025-01-29T19:35:44+00:00"
         },
         {
             "name": "laravel/framework",
