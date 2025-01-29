@@ -7675,16 +7675,16 @@
         },
         {
             "name": "laragear/preload",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/Preload.git",
-                "reference": "7fb08a4f3db7c77c8af2c5588f1d61bc9d1b79e7"
+                "reference": "b7012524d74304ae9e8b6d89492837f63959f21e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/Preload/zipball/7fb08a4f3db7c77c8af2c5588f1d61bc9d1b79e7",
-                "reference": "7fb08a4f3db7c77c8af2c5588f1d61bc9d1b79e7",
+                "url": "https://api.github.com/repos/Laragear/Preload/zipball/b7012524d74304ae9e8b6d89492837f63959f21e",
+                "reference": "b7012524d74304ae9e8b6d89492837f63959f21e",
                 "shasum": ""
             },
             "require": {
@@ -7741,7 +7741,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Laragear/Preload/issues",
-                "source": "https://github.com/Laragear/Preload/tree/v2.0.0"
+                "source": "https://github.com/Laragear/Preload/tree/v2.0.1"
             },
             "funding": [
                 {
@@ -7753,7 +7753,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2024-03-06T20:44:20+00:00"
+            "time": "2025-01-29T05:19:51+00:00"
         },
         {
             "name": "laragear/two-factor",
