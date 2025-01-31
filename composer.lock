@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "284067f5e778aa4c882ec35fb568a9e0",
+    "content-hash": "4db882b15ad7d1a27ae4742c80a0d775",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -21178,20 +21178,21 @@
     "packages-dev": [
         {
             "name": "aaronfrancis/solo",
-            "version": "v0.2.2",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/aarondfrancis/solo.git",
-                "reference": "2e0ee477aa181753858b70d184132e4b196105e2"
+                "url": "https://github.com/soloterm/solo.git",
+                "reference": "8482a69a773c0d52774f72fda84c45df85a50553"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aarondfrancis/solo/zipball/2e0ee477aa181753858b70d184132e4b196105e2",
-                "reference": "2e0ee477aa181753858b70d184132e4b196105e2",
+                "url": "https://api.github.com/repos/soloterm/solo/zipball/8482a69a773c0d52774f72fda84c45df85a50553",
+                "reference": "8482a69a773c0d52774f72fda84c45df85a50553",
                 "shasum": ""
             },
             "require": {
                 "ext-pcntl": "*",
+                "ext-posix": "*",
                 "illuminate/console": "^10|^11",
                 "illuminate/process": "^10|^11",
                 "illuminate/support": "^10|^11",
@@ -21201,20 +21202,21 @@
             },
             "require-dev": {
                 "illuminate/database": "^10|^11",
-                "orchestra/testbench": "^8|^9",
+                "laravel/serializable-closure": "^1.3",
+                "orchestra/testbench": "^8.29|^9.5",
                 "phpunit/phpunit": "^10.5|^11"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AaronFrancis\\Solo\\Providers\\SoloServiceProvider"
+                        "SoloTerm\\Solo\\Providers\\SoloServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "AaronFrancis\\Solo\\": "src/"
+                    "SoloTerm\\Solo\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -21229,10 +21231,11 @@
             ],
             "description": "A Laravel package to run multiple commands at once, to aid in local development.",
             "support": {
-                "issues": "https://github.com/aarondfrancis/solo/issues",
-                "source": "https://github.com/aarondfrancis/solo/tree/v0.2.2"
+                "issues": "https://github.com/soloterm/solo/issues",
+                "source": "https://github.com/soloterm/solo/tree/v0.3.1"
             },
-            "time": "2024-12-11T19:36:14+00:00"
+            "abandoned": "soloterm/solo",
+            "time": "2025-01-31T04:14:07+00:00"
         },
         {
             "name": "aeon-php/calendar",
