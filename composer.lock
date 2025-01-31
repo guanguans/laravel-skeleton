@@ -15877,16 +15877,16 @@
         },
         {
             "name": "spatie/laravel-settings",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-settings.git",
-                "reference": "2da8cb5b051678725476b299ef8e13b2e5015260"
+                "reference": "a596c671b5e059b0e3cd7e52c9f576b1d3e06154"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/2da8cb5b051678725476b299ef8e13b2e5015260",
-                "reference": "2da8cb5b051678725476b299ef8e13b2e5015260",
+                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/a596c671b5e059b0e3cd7e52c9f576b1d3e06154",
+                "reference": "a596c671b5e059b0e3cd7e52c9f576b1d3e06154",
                 "shasum": ""
             },
             "require": {
@@ -15948,7 +15948,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-settings/issues",
-                "source": "https://github.com/spatie/laravel-settings/tree/3.4.0"
+                "source": "https://github.com/spatie/laravel-settings/tree/3.4.1"
             },
             "funding": [
                 {
@@ -15960,7 +15960,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-20T13:48:17+00:00"
+            "time": "2025-01-31T14:51:02+00:00"
         },
         {
             "name": "spatie/laravel-short-schedule",
