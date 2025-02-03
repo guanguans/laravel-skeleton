@@ -5997,16 +5997,16 @@
         },
         {
             "name": "guzzlehttp/uri-template",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "ecea8feef63bd4fef1f037ecb288386999ecc11c"
+                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/ecea8feef63bd4fef1f037ecb288386999ecc11c",
-                "reference": "ecea8feef63bd4fef1f037ecb288386999ecc11c",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/30e286560c137526eccd4ce21b2de477ab0676d2",
+                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2",
                 "shasum": ""
             },
             "require": {
@@ -6063,7 +6063,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
-                "source": "https://github.com/guzzle/uri-template/tree/v1.0.3"
+                "source": "https://github.com/guzzle/uri-template/tree/v1.0.4"
             },
             "funding": [
                 {
@@ -6079,7 +6079,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T19:50:20+00:00"
+            "time": "2025-02-03T10:55:03+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -6447,16 +6447,16 @@
         },
         {
             "name": "inspector-apm/inspector-laravel",
-            "version": "4.10.2",
+            "version": "4.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-laravel.git",
-                "reference": "e1a463b2285bc4bfa5405b2b3e19cda7ea7c0c74"
+                "reference": "9b866deb18c454ca93792d997632efbcb1d4ff47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/e1a463b2285bc4bfa5405b2b3e19cda7ea7c0c74",
-                "reference": "e1a463b2285bc4bfa5405b2b3e19cda7ea7c0c74",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/9b866deb18c454ca93792d997632efbcb1d4ff47",
+                "reference": "9b866deb18c454ca93792d997632efbcb1d4ff47",
                 "shasum": ""
             },
             "require": {
@@ -6507,9 +6507,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-laravel/issues",
-                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.10.2"
+                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.10.4"
             },
-            "time": "2025-01-20T13:30:06+00:00"
+            "time": "2025-02-03T14:24:05+00:00"
         },
         {
             "name": "inspector-apm/inspector-php",
@@ -32722,9 +32722,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -32736,6 +32736,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
