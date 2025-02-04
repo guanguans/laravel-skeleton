@@ -11360,16 +11360,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.44.1",
+            "version": "14.45.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "130e1aea00bc08f44715b6f08065e591ead9eed4"
+                "reference": "1d4f01525b13401ffb68c56a8f30da91b7239917"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/130e1aea00bc08f44715b6f08065e591ead9eed4",
-                "reference": "130e1aea00bc08f44715b6f08065e591ead9eed4",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/1d4f01525b13401ffb68c56a8f30da91b7239917",
+                "reference": "1d4f01525b13401ffb68c56a8f30da91b7239917",
                 "shasum": ""
             },
             "require": {
@@ -11383,7 +11383,7 @@
                 "watson/active": "^7.0"
             },
             "conflict": {
-                "laravel/framework": "<10.48.8",
+                "laravel/framework": "<=10.48.25, <=11.34.0",
                 "nesbot/carbon": "<2.66.0",
                 "orchestra/testbench-core": "<8.23.9"
             },
@@ -11463,7 +11463,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-11-26T14:45:49+00:00"
+            "time": "2025-02-04T19:43:08+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
