@@ -31,7 +31,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
-            'throw' => false,
+            'throw' => false, // Suppress exceptions
+            'report' => true, // Enable error logging
         ],
 
         'public' => [
