@@ -152,7 +152,7 @@
     },
     "require-dev": {
         "andreaselia/laravel-api-to-postman": "^2.0",
-        "aniftyco/skeletor": "^0.1 || ^1.0",
+        "aniftyco/skeletor": "^0.1",
         "barryvdh/laravel-ide-helper": "^3.5",
         "bennett-treptow/laravel-migration-generator": "^4.4",
         "brainmaestro/composer-git-hooks": "^3.0",
@@ -213,7 +213,7 @@
         "tightenco/tlint": "^9.3",
         "worksome/envy": "^1.3",
         "yamadashy/phpstan-friendly-formatter": "^1.2",
-        "yoast/phpunit-polyfills": "^2.0"
+        "yoast/phpunit-polyfills": "^2.0 || ^3.0"
     },
     "repositories": {
         "facade-documenter": {
@@ -355,7 +355,6 @@
             "@phpstan",
             "@rector-dry-run"
         ],
-
         "skeletor": [
             "@putenv NO_SKELETOR_CLEANUP=true",
             "NiftyCo\\Skeletor\\Runner::execute"
