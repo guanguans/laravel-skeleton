@@ -91,6 +91,7 @@
         "overtrue/laravel-uploader": "^3.2",
         "perryvandermeer/laravel-console-validator": "^1.1",
         "php-collective/decimal-object": "^1.2",
+        "php-ds/php-ds": "^1.5",
         "php-open-source-saver/jwt-auth": "^2.7",
         "php-static-analysis/attributes": "^0.2",
         "phpyh/lru-memoizer": "^0.2",
@@ -211,7 +212,8 @@
         "thedoctor0/laravel-factory-generator": "^1.4",
         "tightenco/tlint": "^9.3",
         "worksome/envy": "^1.3",
-        "yamadashy/phpstan-friendly-formatter": "^1.2"
+        "yamadashy/phpstan-friendly-formatter": "^1.2",
+        "yoast/phpunit-polyfills": "^2.0"
     },
     "repositories": {
         "facade-documenter": {
