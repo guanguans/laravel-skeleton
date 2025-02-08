@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a635f59a6d05eb16c75546ce8924f8e",
+    "content-hash": "b1e4a0480c85cd75aa153f61ad790755",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -24954,16 +24954,16 @@
         },
         {
             "name": "larastan/larastan",
-            "version": "v2.9.13",
+            "version": "v2.9.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/larastan/larastan.git",
-                "reference": "b43bb4b446c65e0bf30d3887f49a1bc8047edc45"
+                "reference": "78f7f8da613e54edb2ab4afa5bede045228fb843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/larastan/larastan/zipball/b43bb4b446c65e0bf30d3887f49a1bc8047edc45",
-                "reference": "b43bb4b446c65e0bf30d3887f49a1bc8047edc45",
+                "url": "https://api.github.com/repos/larastan/larastan/zipball/78f7f8da613e54edb2ab4afa5bede045228fb843",
+                "reference": "78f7f8da613e54edb2ab4afa5bede045228fb843",
                 "shasum": ""
             },
             "require": {
@@ -24977,7 +24977,7 @@
                 "illuminate/support": "^9.52.16 || ^10.28.0 || ^11.16",
                 "php": "^8.0.2",
                 "phpmyadmin/sql-parser": "^5.9.0",
-                "phpstan/phpstan": "^1.12.11"
+                "phpstan/phpstan": "^1.12.17"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^12.0",
@@ -25035,7 +25035,7 @@
             ],
             "support": {
                 "issues": "https://github.com/larastan/larastan/issues",
-                "source": "https://github.com/larastan/larastan/tree/v2.9.13"
+                "source": "https://github.com/larastan/larastan/tree/v2.9.14"
             },
             "funding": [
                 {
@@ -25043,7 +25043,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-04T16:25:56+00:00"
+            "time": "2025-02-06T21:03:14+00:00"
         },
         {
             "name": "laravel-lang/actions",
@@ -28135,16 +28135,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.16",
+            "version": "1.12.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9"
+                "reference": "7027b3b0270bf392de0cfba12825979768d728bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e0bb5cb78545aae631220735aa706eac633a6be9",
-                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7027b3b0270bf392de0cfba12825979768d728bf",
+                "reference": "7027b3b0270bf392de0cfba12825979768d728bf",
                 "shasum": ""
             },
             "require": {
@@ -28189,7 +28189,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-21T14:50:05+00:00"
+            "time": "2025-02-07T15:01:57+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -29334,12 +29334,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "fea491c34509d40dc45b48b9d1e18a5559eee9a6"
+                "reference": "24296413a9838930e7c039f5eaf985ccec766103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/fea491c34509d40dc45b48b9d1e18a5559eee9a6",
-                "reference": "fea491c34509d40dc45b48b9d1e18a5559eee9a6",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/24296413a9838930e7c039f5eaf985ccec766103",
+                "reference": "24296413a9838930e7c039f5eaf985ccec766103",
                 "shasum": ""
             },
             "conflict": {
@@ -29740,6 +29740,7 @@
                 "munkireport/reportdata": "<3.5",
                 "munkireport/softwareupdate": "<1.6",
                 "mustache/mustache": ">=2,<2.14.1",
+                "mwdelaney/wp-enable-svg": "<=0.2",
                 "namshi/jose": "<2.2",
                 "nategood/httpful": "<1",
                 "neoan3-apps/template": "<1.1.1",
@@ -29777,7 +29778,7 @@
                 "openid/php-openid": "<2.3",
                 "openmage/magento-lts": "<20.10.1",
                 "opensolutions/vimbadmin": "<=3.0.15",
-                "opensource-workshop/connect-cms": "<1.7.2|>=2,<2.3.2",
+                "opensource-workshop/connect-cms": "<1.8.7|>=2,<2.4.7",
                 "orchid/platform": ">=8,<14.43",
                 "oro/calendar-bundle": ">=4.2,<=4.2.6|>=5,<=5.0.6|>=5.1,<5.1.1",
                 "oro/commerce": ">=4.1,<5.0.11|>=5.1,<5.1.1",
@@ -29827,7 +29828,7 @@
                 "phpxmlrpc/extras": "<0.6.1",
                 "phpxmlrpc/phpxmlrpc": "<4.9.2",
                 "pi/pi": "<=2.5",
-                "pimcore/admin-ui-classic-bundle": "<1.5.4",
+                "pimcore/admin-ui-classic-bundle": "<1.7.4",
                 "pimcore/customer-management-framework-bundle": "<4.2.1",
                 "pimcore/data-hub": "<1.2.4",
                 "pimcore/data-importer": "<1.8.9|>=1.9,<1.9.3",
@@ -29965,7 +29966,7 @@
                 "sylius/grid-bundle": "<1.10.1",
                 "sylius/paypal-plugin": ">=1,<1.2.4|>=1.3,<1.3.1",
                 "sylius/resource-bundle": ">=1,<1.3.14|>=1.4,<1.4.7|>=1.5,<1.5.2|>=1.6,<1.6.4",
-                "sylius/sylius": "<=2.0.2",
+                "sylius/sylius": "<1.12.19|>=1.13.0.0-alpha1,<1.13.4",
                 "symbiote/silverstripe-multivaluefield": ">=3,<3.1",
                 "symbiote/silverstripe-queuedjobs": ">=3,<3.0.2|>=3.1,<3.1.4|>=4,<4.0.7|>=4.1,<4.1.2|>=4.2,<4.2.4|>=4.3,<4.3.3|>=4.4,<4.4.3|>=4.5,<4.5.1|>=4.6,<4.6.4",
                 "symbiote/silverstripe-seed": "<6.0.3",
@@ -30199,7 +30200,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-06T19:04:33+00:00"
+            "time": "2025-02-07T21:04:27+00:00"
         },
         {
             "name": "salahhusa9/laravel-updater",
@@ -31969,16 +31970,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v4.2.1",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "eb3841ed93768e5754970e6da03d93d3a06c1e6a"
+                "reference": "ea3d1ea0c675d5ae2c245ea8ee88c06b9d52f516"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/eb3841ed93768e5754970e6da03d93d3a06c1e6a",
-                "reference": "eb3841ed93768e5754970e6da03d93d3a06c1e6a",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/ea3d1ea0c675d5ae2c245ea8ee88c06b9d52f516",
+                "reference": "ea3d1ea0c675d5ae2c245ea8ee88c06b9d52f516",
                 "shasum": ""
             },
             "require": {
@@ -32024,7 +32025,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.2.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.3.0"
             },
             "funding": [
                 {
@@ -32032,7 +32033,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-23T17:42:09+00:00"
+            "time": "2025-02-07T15:36:32+00:00"
         },
         {
             "name": "symfony/filesystem",
