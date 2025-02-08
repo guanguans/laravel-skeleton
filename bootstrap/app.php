@@ -19,6 +19,12 @@ return Application::configure(basePath: dirname(__DIR__))
         channels: __DIR__.'/../routes/channels.php',
         health: '/up',
         apiPrefix: 'api/v1',
+        then: function (): void {
+            /** @see https://github.com/packistry/packistry/blob/main/bootstrap/app.php */
+            Route::middleware('web')->get('{any?}', fn () => response()
+                ->file(public_path('index.html')))
+                ->where('any', '.*');
+        },
     )
     ->withMiddleware(static function (Middleware $middleware) {
         // $middleware->statefulApi();
