@@ -57,6 +57,7 @@ use Rector\Visibility\ValueObject\ChangeMethodVisibility;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Set\LaravelSetList;
 
+/** @noinspection PhpUnhandledExceptionInspection */
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/*.php',

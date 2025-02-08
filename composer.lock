@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1e4a0480c85cd75aa153f61ad790755",
+    "content-hash": "8916d6497a7022e1dff26debf1a555cf",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -1422,6 +1422,84 @@
                 "source": "https://github.com/asvae/laravel-api-tester/tree/2.0.11"
             },
             "time": "2020-09-19T16:01:57+00:00"
+        },
+        {
+            "name": "aurorawebsoftware/asetting",
+            "version": "11.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AuroraWebSoftware/ASetting.git",
+                "reference": "f85a330b83da63be2d90723c6db260da3181f8b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AuroraWebSoftware/ASetting/zipball/f85a330b83da63be2d90723c6db260da3181f8b9",
+                "reference": "f85a330b83da63be2d90723c6db260da3181f8b9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0",
+                "php": "^8.2|^8.3",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3",
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^8.0",
+                "orchestra/testbench": "^9",
+                "pestphp/pest": "^3",
+                "pestphp/pest-plugin-arch": "^3",
+                "pestphp/pest-plugin-laravel": "^3",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "ASetting": "AuroraWebSoftware\\ASetting\\Facades\\ASetting"
+                    },
+                    "providers": [
+                        "AuroraWebSoftware\\ASetting\\ASettingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AuroraWebSoftware\\ASetting\\": "src/",
+                    "AuroraWebSoftware\\ASetting\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AuroraWebSoftwareTeam",
+                    "email": "websoftwareteam@aurorabilisim.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ASetting is a Laravel package that allows you to dynamically define your config definitions.",
+            "homepage": "https://github.com/aurorawebsoftware/asetting",
+            "keywords": [
+                "AuroraWebSoftware",
+                "asetting",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/AuroraWebSoftware/ASetting/issues",
+                "source": "https://github.com/AuroraWebSoftware/ASetting/tree/11.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/AuroraWebSoftware",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-12-11T13:38:32+00:00"
         },
         {
             "name": "awobaz/compoships",
@@ -13989,6 +14067,72 @@
                 "source": "https://github.com/reinink/remember-query-strings/tree/v0.1.2"
             },
             "time": "2022-09-20T18:44:08+00:00"
+        },
+        {
+            "name": "rennokki/laravel-eloquent-query-cache",
+            "version": "3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/renoki-co/laravel-eloquent-query-cache.git",
+                "reference": "094d1d165d219a1c0bcdc9cf966a72d78f63c46e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/renoki-co/laravel-eloquent-query-cache/zipball/094d1d165d219a1c0bcdc9cf966a72d78f63c46e",
+                "reference": "094d1d165d219a1c0bcdc9cf966a72d78f63c46e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.5|^11.33",
+                "illuminate/support": "^10.5|^11.33"
+            },
+            "require-dev": {
+                "chelout/laravel-relationship-events": "^1.5|^2.0|^3.0",
+                "laravel/legacy-factories": "^1.4",
+                "livewire/livewire": "dev-main",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^8.1.1|^9",
+                "phpunit/phpunit": "^9.5.25|^10|^11"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rennokki\\QueryCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Renoki",
+                    "email": "alex@renoki.org",
+                    "homepage": "https://github.com/rennokki",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Adding cache on your Laravel Eloquent queries' results is now a breeze.",
+            "homepage": "https://github.com/renoki-co/laravel-eloquent-query-cache",
+            "keywords": [
+                "caching",
+                "eloquent",
+                "laravel",
+                "query",
+                "remember",
+                "sql"
+            ],
+            "support": {
+                "issues": "https://github.com/renoki-co/laravel-eloquent-query-cache/issues",
+                "source": "https://github.com/renoki-co/laravel-eloquent-query-cache/tree/3.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/rennokki",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-11-30T17:53:54+00:00"
         },
         {
             "name": "revangelista/laravel-idempotency",
