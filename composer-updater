@@ -52,23 +52,29 @@ $status = (new SingleCommandApplication)
             new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true)),
         ) {
             private string $composerJsonContents;
+
             private string $highestComposerBinary;
+
             private string $composerBinary;
+
             private array $exceptPackages;
+
             private array $exceptDependencyVersions;
+
             private SymfonyStyle $symfonyStyle;
+
             private Differ $differ;
 
             /**
              * @noinspection ParameterDefaultsNullInspection
              */
             public function __construct(
-                private string $composerJsonPath,
+                private readonly string $composerJsonPath,
                 ?string $highestPhpBinary = null,
                 ?string $composerBinary = null,
                 array $exceptPackages = [],
                 array $exceptDependencyVersions = [],
-                private bool $dryRun = false,
+                private readonly bool $dryRun = false,
                 ?SymfonyStyle $symfonyStyle = null,
                 ?Differ $differ = null
             ) {
@@ -92,6 +98,9 @@ $status = (new SingleCommandApplication)
                 $this->differ = $differ ?? new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true));
             }
 
+            /**
+             * @noinspection NullPointerExceptionInspection
+             */
             public function __invoke(): void
             {
                 $this
@@ -112,8 +121,6 @@ $status = (new SingleCommandApplication)
             }
 
             /**
-             * @noinspection JsonEncodingApiUsageInspection
-             *
              * @return $this|never-return
              */
             private function updateOutdatedComposerPackages(): self
@@ -149,14 +156,11 @@ $status = (new SingleCommandApplication)
                 $this->symfonyStyle->success('Composer packages updated successfully!');
             }
 
-            /**
-             * @noinspection JsonEncodingApiUsageInspection
-             */
             private function getOutdatedDecodedComposerJson(): array
             {
                 $outdatedComposerPackages = $this->getOutdatedComposerPackages();
                 $decodedComposerJson = json_decode(file_get_contents($this->composerJsonPath), true);
-                (fn () => self::reload(null))->call(new InstalledVersions);
+                InstalledVersions::reload([]);
 
                 foreach ($decodedComposerJson as $name => &$value) {
                     if (! in_array($name, ['require', 'require-dev'], true)) {
@@ -184,9 +188,6 @@ $status = (new SingleCommandApplication)
                 return $decodedComposerJson;
             }
 
-            /**
-             * @noinspection JsonEncodingApiUsageInspection
-             */
             private function getOutdatedComposerPackages(): array
             {
                 return array_reduce(
@@ -230,9 +231,8 @@ $status = (new SingleCommandApplication)
             }
 
             /**
-             * @param mixed $input The input as stream resource, scalar or \Traversable, or null for no input
+             * @param  mixed  $input  The input as stream resource, scalar or \Traversable, or null for no input
              *
-             * @noinspection MissingParameterTypeDeclarationInspection
              * @noinspection PhpSameParameterValueInspection
              */
             private function mustRunCommand(
@@ -244,7 +244,7 @@ $status = (new SingleCommandApplication)
             ): Process {
                 $additionalOptions = [
                     '--no-interaction',
-                    // '--no-plugins',
+                    '--no-plugins',
                     '--no-scripts',
                     '--ansi',
                 ];
@@ -276,7 +276,6 @@ $status = (new SingleCommandApplication)
             /**
              * @noinspection SuspiciousLoopInspection
              * @noinspection ComparisonScalarOrderInspection
-             * @noinspection MissingParameterTypeDeclarationInspection
              */
             private function strIs(array|string $pattern, string $value): bool
             {
