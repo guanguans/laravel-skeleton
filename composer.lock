@@ -12373,35 +12373,35 @@
         },
         {
             "name": "php-open-source-saver/jwt-auth",
-            "version": "2.7.3",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
-                "reference": "5dec649af5f5d666d686df084b9e8bdd27102f0b"
+                "reference": "1365f0cb902411ffdb34afbc858ea45bae0b9afc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/5dec649af5f5d666d686df084b9e8bdd27102f0b",
-                "reference": "5dec649af5f5d666d686df084b9e8bdd27102f0b",
+                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/1365f0cb902411ffdb34afbc858ea45bae0b9afc",
+                "reference": "1365f0cb902411ffdb34afbc858ea45bae0b9afc",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/auth": "^10|^11",
-                "illuminate/contracts": "^10|^11",
-                "illuminate/http": "^10|^11",
-                "illuminate/support": "^10|^11",
+                "illuminate/auth": "^10|^11|^12",
+                "illuminate/contracts": "^10|^11|^12",
+                "illuminate/http": "^10|^11|^12",
+                "illuminate/support": "^10|^11|^12",
                 "lcobucci/jwt": "^5.0",
                 "namshi/jose": "^7.0",
                 "nesbot/carbon": "^2.0|^3.0",
-                "php": "^8.1"
+                "php": "^8.2"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3",
-                "illuminate/console": "^10|^11",
-                "illuminate/routing": "^10|^11",
-                "mockery/mockery": "^1.4.4",
-                "orchestra/testbench": "^8|^9",
+                "illuminate/console": "^10|^11|^12",
+                "illuminate/routing": "^10|^11|^12",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^8|^9|^10",
                 "phpstan/phpstan": "^2",
                 "phpunit/phpunit": "^10.5|^11"
             },
@@ -12445,6 +12445,11 @@
                     "name": "Fabio William Conceição",
                     "email": "messhias@gmail.com",
                     "role": "Developer"
+                },
+                {
+                    "name": "Max Snow",
+                    "email": "contact@maxsnow.me",
+                    "role": "Developer"
                 }
             ],
             "description": "JSON Web Token Authentication for Laravel and Lumen",
@@ -12460,7 +12465,7 @@
                 "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
                 "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
             },
-            "time": "2024-12-30T17:41:54+00:00"
+            "time": "2025-02-10T21:11:16+00:00"
         },
         {
             "name": "php-static-analysis/attributes",
