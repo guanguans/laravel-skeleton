@@ -409,7 +409,7 @@ class AppServiceProvider extends ServiceProvider
                 );
             });
 
-            \Illuminate\Support\Facades\Event::listen(static function (DatabaseBusy $event) {
+            \Illuminate\Support\Facades\Event::listen(static function (DatabaseBusy $event): void {
                 // todo notify
             });
 
