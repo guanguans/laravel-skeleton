@@ -22732,16 +22732,16 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v7.5.8",
+            "version": "v7.5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "4900fe799ce5566d54a14103cdfd6e865b7c5d72"
+                "reference": "448761221383877d61bed6700805001f872c0ad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/4900fe799ce5566d54a14103cdfd6e865b7c5d72",
-                "reference": "4900fe799ce5566d54a14103cdfd6e865b7c5d72",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/448761221383877d61bed6700805001f872c0ad3",
+                "reference": "448761221383877d61bed6700805001f872c0ad3",
                 "shasum": ""
             },
             "require": {
@@ -22782,7 +22782,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-27T21:35:20+00:00"
+            "time": "2025-02-10T14:27:00+00:00"
         },
         {
             "name": "dragon-code/benchmark",
@@ -33047,9 +33047,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33061,6 +33061,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
