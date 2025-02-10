@@ -46,6 +46,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->everyMinute();
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();
         $schedule->command(LaravelCacheGarbageCollector::class)->daily();
+        $schedule->command('db:monitor --database=mysql,pgsql --max=100')->everyMinute()->userAppendOutputToDaily()->withoutOverlapping();
 
         // $schedule->job(function (ConsoleOutput $consoleOutput) {
         //     $consoleOutput->writeln(Inspiring::quote());

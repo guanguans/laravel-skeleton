@@ -57,6 +57,7 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Events\DatabaseBusy;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -406,6 +407,10 @@ class AppServiceProvider extends ServiceProvider
                         request()->url(),
                     ),
                 );
+            });
+
+            \Illuminate\Support\Facades\Event::listen(static function (DatabaseBusy $event) {
+                // todo notify
             });
 
             /**
