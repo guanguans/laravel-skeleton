@@ -8389,16 +8389,16 @@
         },
         {
             "name": "laravel/pennant",
-            "version": "v1.15.1",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pennant.git",
-                "reference": "489afeaafc260cf94331b55bc324cf139930a19b"
+                "reference": "e32e4ec40b016472c1df25f548b8a6a4610ca4b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pennant/zipball/489afeaafc260cf94331b55bc324cf139930a19b",
-                "reference": "489afeaafc260cf94331b55bc324cf139930a19b",
+                "url": "https://api.github.com/repos/laravel/pennant/zipball/e32e4ec40b016472c1df25f548b8a6a4610ca4b5",
+                "reference": "e32e4ec40b016472c1df25f548b8a6a4610ca4b5",
                 "shasum": ""
             },
             "require": {
@@ -8462,7 +8462,7 @@
                 "issues": "https://github.com/laravel/pennant/issues",
                 "source": "https://github.com/laravel/pennant"
             },
-            "time": "2025-01-28T15:14:34+00:00"
+            "time": "2025-02-11T17:16:04+00:00"
         },
         {
             "name": "laravel/prompts",
