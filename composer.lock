@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ackintosh/ganesha",
-            "version": "3.1.2",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ackintosh/ganesha.git",
-                "reference": "bc52a767ecdd630882262f0e383ef79c5436ce27"
+                "reference": "b491dcff39e951e29cb7a81b6c69009153e9aaa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ackintosh/ganesha/zipball/bc52a767ecdd630882262f0e383ef79c5436ce27",
-                "reference": "bc52a767ecdd630882262f0e383ef79c5436ce27",
+                "url": "https://api.github.com/repos/ackintosh/ganesha/zipball/b491dcff39e951e29cb7a81b6c69009153e9aaa3",
+                "reference": "b491dcff39e951e29cb7a81b6c69009153e9aaa3",
                 "shasum": ""
             },
             "require": {
@@ -35,7 +35,7 @@
                 "php-vcr/phpunit-testlistener-vcr": "dev-php8 as 3.2.2",
                 "phpunit/phpunit": "^9.5.10",
                 "predis/predis": "^1.1",
-                "symfony/http-client": "^5.3|^6.0",
+                "symfony/http-client": "^5.3.12|^6.0",
                 "symfony/yaml": "^3.0|^4.0|^5.0|^6.0",
                 "vimeo/psalm": "*"
             },
@@ -72,7 +72,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ackintosh/ganesha/issues",
-                "source": "https://github.com/ackintosh/ganesha/tree/3.1.2"
+                "source": "https://github.com/ackintosh/ganesha/tree/3.2.0"
             },
             "funding": [
                 {
@@ -80,7 +80,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-21T23:46:04+00:00"
+            "time": "2025-02-08T13:51:31+00:00"
         },
         {
             "name": "aldemeery/onion",
