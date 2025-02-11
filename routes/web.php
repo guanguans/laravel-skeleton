@@ -40,6 +40,10 @@ Route::fallback(static function (): void {
     abort(404, 'Web page not found.');
 });
 
+Route::fallback(static fn (Request $request) => $request->expectsJson()
+    ? response()->json(['error' => 'Not Found'], 404)
+    : view('errors.404', ['path' => $request->path()]));
+
 LaravelUploader::routes();
 
 Route::middleware('web')->get('up', static function () {
