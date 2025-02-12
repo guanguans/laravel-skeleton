@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "feee6b7644ad227ab4929b7ef6f3d778",
+    "content-hash": "6f5e12d5feec9c740f1c0d037ae40103",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -6212,16 +6212,16 @@
         },
         {
             "name": "hamidrezaniazi/pecs",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hamidrezaniazi/pecs.git",
-                "reference": "263f3458d7072b60842a2d03c2f63923fa815c06"
+                "reference": "f80810cb08ccbdc5c867455762f8e043ad157120"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hamidrezaniazi/pecs/zipball/263f3458d7072b60842a2d03c2f63923fa815c06",
-                "reference": "263f3458d7072b60842a2d03c2f63923fa815c06",
+                "url": "https://api.github.com/repos/hamidrezaniazi/pecs/zipball/f80810cb08ccbdc5c867455762f8e043ad157120",
+                "reference": "f80810cb08ccbdc5c867455762f8e043ad157120",
                 "shasum": ""
             },
             "require": {
@@ -6269,9 +6269,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hamidrezaniazi/pecs/issues",
-                "source": "https://github.com/hamidrezaniazi/pecs/tree/1.1.0"
+                "source": "https://github.com/hamidrezaniazi/pecs/tree/2.0.0"
             },
-            "time": "2025-01-20T17:47:46+00:00"
+            "time": "2025-02-12T12:02:45+00:00"
         },
         {
             "name": "hammerstone/fast-paginate",
@@ -8006,16 +8006,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.42.0",
+            "version": "v11.42.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "006375ba67e830e87daa7b52ab65163ba3508d26"
+                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/006375ba67e830e87daa7b52ab65163ba3508d26",
-                "reference": "006375ba67e830e87daa7b52ab65163ba3508d26",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ff392f42f6c55cc774ce75553a11c6b031da67f8",
+                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8",
                 "shasum": ""
             },
             "require": {
@@ -8217,7 +8217,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-11T17:17:56+00:00"
+            "time": "2025-02-12T20:58:18+00:00"
         },
         {
             "name": "laravel/octane",
@@ -33052,6 +33052,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20

@@ -49,7 +49,7 @@
         "guanguans/laravel-exception-notify": "^4.6",
         "guanguans/notify": "^2.14",
         "guzzlehttp/guzzle": "^7.9",
-        "hamidrezaniazi/pecs": "^1.1",
+        "hamidrezaniazi/pecs": "^2.0",
         "hammerstone/fast-paginate": "^1.1",
         "hashids/hashids": "^5.0",
         "imanghafoori/laravel-decorator": "^1.1",
