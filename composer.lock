@@ -8006,16 +8006,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.42.0",
+            "version": "v11.42.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "006375ba67e830e87daa7b52ab65163ba3508d26"
+                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/006375ba67e830e87daa7b52ab65163ba3508d26",
-                "reference": "006375ba67e830e87daa7b52ab65163ba3508d26",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ff392f42f6c55cc774ce75553a11c6b031da67f8",
+                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8",
                 "shasum": ""
             },
             "require": {
@@ -8217,7 +8217,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-11T17:17:56+00:00"
+            "time": "2025-02-12T20:58:18+00:00"
         },
         {
             "name": "laravel/octane",
@@ -26380,16 +26380,16 @@
         },
         {
             "name": "laravel-shift/factory-generator",
-            "version": "v2.0",
+            "version": "v2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-shift/factory-generator.git",
-                "reference": "90eae4d474d91abf2a0367f26322c5756af3ebff"
+                "reference": "901d609e4de1c19641e5c043398e611a58e4ad3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-shift/factory-generator/zipball/90eae4d474d91abf2a0367f26322c5756af3ebff",
-                "reference": "90eae4d474d91abf2a0367f26322c5756af3ebff",
+                "url": "https://api.github.com/repos/laravel-shift/factory-generator/zipball/901d609e4de1c19641e5c043398e611a58e4ad3b",
+                "reference": "901d609e4de1c19641e5c043398e611a58e4ad3b",
                 "shasum": ""
             },
             "require": {
@@ -26427,9 +26427,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel-shift/factory-generator/issues",
-                "source": "https://github.com/laravel-shift/factory-generator/tree/v2.0"
+                "source": "https://github.com/laravel-shift/factory-generator/tree/v2.1"
             },
-            "time": "2024-06-18T16:27:21+00:00"
+            "time": "2025-02-11T17:56:23+00:00"
         },
         {
             "name": "laravel/envoy",
@@ -33052,6 +33052,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
         "roave/security-advisories": 20
