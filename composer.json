@@ -62,7 +62,7 @@
         "jiannei/laravel-response": "^6.0",
         "kevinrob/guzzle-cache-middleware": "^6.0",
         "laminas/laminas-diagnostics": "^1.27",
-        "laragear/cache-query": "^4.2",
+        "laragear/cache-query": "^5.0",
         "laragear/discover": "^1.0",
         "laragear/preload": "^2.0",
         "laragear/two-factor": "^2.1",
