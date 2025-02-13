@@ -27458,16 +27458,16 @@
         },
         {
             "name": "orangehill/iseed",
-            "version": "v3.0.4",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orangehill/iseed.git",
-                "reference": "403ea734f16da238bda7fcc10b8dc549751fa035"
+                "reference": "8f1970930e6ec3c7a1c8cd001adf88f58e904525"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orangehill/iseed/zipball/403ea734f16da238bda7fcc10b8dc549751fa035",
-                "reference": "403ea734f16da238bda7fcc10b8dc549751fa035",
+                "url": "https://api.github.com/repos/orangehill/iseed/zipball/8f1970930e6ec3c7a1c8cd001adf88f58e904525",
+                "reference": "8f1970930e6ec3c7a1c8cd001adf88f58e904525",
                 "shasum": ""
             },
             "require": {
@@ -27515,9 +27515,9 @@
             ],
             "support": {
                 "issues": "https://github.com/orangehill/iseed/issues",
-                "source": "https://github.com/orangehill/iseed/tree/v3.0.4"
+                "source": "https://github.com/orangehill/iseed/tree/v3.1.0"
             },
-            "time": "2024-03-27T08:01:21+00:00"
+            "time": "2025-02-13T10:49:30+00:00"
         },
         {
             "name": "pestphp/pest",
