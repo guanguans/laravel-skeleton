@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f5e12d5feec9c740f1c0d037ae40103",
+    "content-hash": "febbaf2683b84efd78647143b8ba4827",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -7500,29 +7500,29 @@
         },
         {
             "name": "laragear/cache-query",
-            "version": "v4.2.2",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/CacheQuery.git",
-                "reference": "8e0afa9cc3960526b24537a9c9c905ba2a4dfb06"
+                "reference": "fbb38101c36abbaeb921a84efcb4a9752999ad6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/8e0afa9cc3960526b24537a9c9c905ba2a4dfb06",
-                "reference": "8e0afa9cc3960526b24537a9c9c905ba2a4dfb06",
+                "url": "https://api.github.com/repos/Laragear/CacheQuery/zipball/fbb38101c36abbaeb921a84efcb4a9752999ad6c",
+                "reference": "fbb38101c36abbaeb921a84efcb4a9752999ad6c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "10.*|11.*",
-                "illuminate/config": "10.*|11.*",
-                "illuminate/container": "10.*|11.*",
-                "illuminate/contracts": "10.*|11.*",
-                "illuminate/database": "10.*|11.*",
-                "illuminate/support": "10.*|11.*",
-                "php": "^8.1"
+                "illuminate/cache": "11.*|12.*",
+                "illuminate/config": "11.*|12.*",
+                "illuminate/container": "11.*|12.*",
+                "illuminate/contracts": "11.*|12.*",
+                "illuminate/database": "11.*|12.*",
+                "illuminate/support": "11.*|12.*",
+                "php": "^8.2"
             },
             "require-dev": {
-                "orchestra/testbench": "8.*|9.*"
+                "orchestra/testbench": "9.*|10.*"
             },
             "type": "library",
             "extra": {
@@ -7563,7 +7563,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2025-01-29T04:11:59+00:00"
+            "time": "2025-02-12T21:14:54+00:00"
         },
         {
             "name": "laragear/discover",
