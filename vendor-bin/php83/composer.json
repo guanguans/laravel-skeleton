@@ -1,0 +1,14 @@
+{
+    "require": {
+        "naoray/laravel-github-monolog": "^2.1",
+        "christophrumpel/artisan-benchmark": "^0.0.1"
+    },
+    "require-dev": {
+        "bottelet/translation-checker": "^1.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
