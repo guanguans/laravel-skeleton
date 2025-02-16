@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Models\Concerns\SerializeDate;
 use App\Observers\UserObserver;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+#[UseFactory(UserFactory::class)]
 #[ObservedBy(UserObserver::class)]
 class User extends Authenticatable
 {
