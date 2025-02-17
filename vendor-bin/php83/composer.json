@@ -1,7 +1,8 @@
 {
     "require": {
         "naoray/laravel-github-monolog": "^2.1",
-        "christophrumpel/artisan-benchmark": "^0.0.1"
+        "christophrumpel/artisan-benchmark": "^0.0.1",
+        "echolabsdev/prism": "^0.37.0"
     },
     "require-dev": {
         "bottelet/translation-checker": "^1.1"
