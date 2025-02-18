@@ -6,6 +6,7 @@
 namespace App\Console\Commands\Concerns;
 
 use Illuminate\Support\Collection;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,16 +17,16 @@ use Webmozart\Assert\Assert;
  */
 trait Configureable
 {
-    public function __construct()
+    public function getDefinition(): InputDefinition
     {
-        parent::__construct();
-
-        $this->getDefinition()->addOption(new InputOption(
-            'config',
-            'c',
-            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-            'Configure able (e.g. `--config=app.name=guanguans` or `--config app.name=guanguans` or `-c app.name=guanguans`)',
-        ));
+        return tap(parent::getDefinition(), function (InputDefinition $definition) {
+            $definition->addOption(new InputOption(
+                'config',
+                'c',
+                InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+                'Configure able (e.g. `--config=app.name=guanguans` or `--config app.name=guanguans` or `-c app.name=guanguans`)',
+            ));
+        });
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
