@@ -8003,16 +8003,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.0",
+            "version": "v11.43.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "70760d976486310b11d8e487e873077db069e77a"
+                "reference": "053f26afb699c845945e7380b407dd019a0a2c74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/70760d976486310b11d8e487e873077db069e77a",
-                "reference": "70760d976486310b11d8e487e873077db069e77a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/053f26afb699c845945e7380b407dd019a0a2c74",
+                "reference": "053f26afb699c845945e7380b407dd019a0a2c74",
                 "shasum": ""
             },
             "require": {
@@ -8214,7 +8214,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-18T15:37:56+00:00"
+            "time": "2025-02-19T16:06:03+00:00"
         },
         {
             "name": "laravel/octane",
@@ -15268,27 +15268,27 @@
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
-            "version": "4.3.2",
+            "version": "4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-failed-job-monitor.git",
-                "reference": "1b4c4d3f051a1033ce6ead5433bea850bbf20878"
+                "reference": "932bd9d01f9971a4d154bd508266efd33f637e92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-failed-job-monitor/zipball/1b4c4d3f051a1033ce6ead5433bea850bbf20878",
-                "reference": "1b4c4d3f051a1033ce6ead5433bea850bbf20878",
+                "url": "https://api.github.com/repos/spatie/laravel-failed-job-monitor/zipball/932bd9d01f9971a4d154bd508266efd33f637e92",
+                "reference": "932bd9d01f9971a4d154bd508266efd33f637e92",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "laravel/framework": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
                 "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.6"
             },
             "require-dev": {
                 "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0|^9.0",
-                "pestphp/pest": "^1.22|^2.34"
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.22|^2.34|^3.7"
             },
             "suggest": {
                 "guzzlehttp/guzzle": "Allows notifications to be sent to Slack",
@@ -15331,7 +15331,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.3.2"
+                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.3.3"
             },
             "funding": [
                 {
@@ -15339,7 +15339,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-16T07:57:24+00:00"
+            "time": "2025-02-19T07:00:54+00:00"
         },
         {
             "name": "spatie/laravel-health",
@@ -33170,9 +33170,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33184,6 +33184,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
