@@ -19,7 +19,7 @@ trait Configureable
 {
     public function getDefinition(): InputDefinition
     {
-        return tap(parent::getDefinition(), function (InputDefinition $definition) {
+        return tap(parent::getDefinition(), static function (InputDefinition $definition) : void {
             $definition->addOption(new InputOption(
                 'config',
                 'c',
