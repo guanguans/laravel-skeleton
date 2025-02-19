@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17aebe398a33713162be72c54402f202",
+    "content-hash": "f7149a298bbdadd9c6a5bfe573d122a8",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -8003,16 +8003,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.0",
+            "version": "v11.43.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "70760d976486310b11d8e487e873077db069e77a"
+                "reference": "053f26afb699c845945e7380b407dd019a0a2c74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/70760d976486310b11d8e487e873077db069e77a",
-                "reference": "70760d976486310b11d8e487e873077db069e77a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/053f26afb699c845945e7380b407dd019a0a2c74",
+                "reference": "053f26afb699c845945e7380b407dd019a0a2c74",
                 "shasum": ""
             },
             "require": {
@@ -8214,7 +8214,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-18T15:37:56+00:00"
+            "time": "2025-02-19T16:06:03+00:00"
         },
         {
             "name": "laravel/octane",
@@ -31828,32 +31828,32 @@
         },
         {
             "name": "soloterm/solo",
-            "version": "v0.3.1",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/soloterm/solo.git",
-                "reference": "8482a69a773c0d52774f72fda84c45df85a50553"
+                "reference": "80778094596b1489d3fbf22e3db990c2d752d8fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/soloterm/solo/zipball/8482a69a773c0d52774f72fda84c45df85a50553",
-                "reference": "8482a69a773c0d52774f72fda84c45df85a50553",
+                "url": "https://api.github.com/repos/soloterm/solo/zipball/80778094596b1489d3fbf22e3db990c2d752d8fe",
+                "reference": "80778094596b1489d3fbf22e3db990c2d752d8fe",
                 "shasum": ""
             },
             "require": {
                 "ext-pcntl": "*",
                 "ext-posix": "*",
-                "illuminate/console": "^10|^11",
-                "illuminate/process": "^10|^11",
-                "illuminate/support": "^10|^11",
+                "illuminate/console": "^10|^11|^12",
+                "illuminate/process": "^10|^11|^12",
+                "illuminate/support": "^10|^11|^12",
                 "joetannenbaum/chewie": "^0.1",
                 "laravel/prompts": "^0.1.21|^0.2|^0.3",
                 "php": "^8.2"
             },
             "require-dev": {
-                "illuminate/database": "^10|^11",
+                "illuminate/database": "^10|^11|^12",
                 "laravel/serializable-closure": "^1.3",
-                "orchestra/testbench": "^8.29|^9.5",
+                "orchestra/testbench": "^8.29|^9.5|^10",
                 "phpunit/phpunit": "^10.5|^11"
             },
             "type": "library",
@@ -31882,9 +31882,19 @@
             "description": "A Laravel package to run multiple commands at once, to aid in local development.",
             "support": {
                 "issues": "https://github.com/soloterm/solo/issues",
-                "source": "https://github.com/soloterm/solo/tree/v0.3.1"
+                "source": "https://github.com/soloterm/solo/tree/v0.4.0"
             },
-            "time": "2025-01-31T04:14:07+00:00"
+            "funding": [
+                {
+                    "url": "https://aaronfrancis.com/backstage",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/aarondfrancis",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-19T19:10:50+00:00"
         },
         {
             "name": "spatie/backtrace",
@@ -33170,9 +33180,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33184,6 +33194,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }

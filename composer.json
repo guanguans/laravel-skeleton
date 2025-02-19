@@ -205,7 +205,7 @@
         "roave/security-advisories": "dev-latest",
         "salahhusa9/laravel-updater": "^1.2",
         "scalar/laravel": "^0.1",
-        "soloterm/solo": "^0.3",
+        "soloterm/solo": "^0.4",
         "spatie/laravel-error-solutions": "^1.0",
         "spatie/laravel-ignition": "^2.9",
         "spaze/phpstan-disallowed-calls": "^4.3",
