@@ -12071,16 +12071,16 @@
         },
         {
             "name": "phiki/phiki",
-            "version": "v1.1.2",
+            "version": "v1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phikiphp/phiki.git",
-                "reference": "e1a31d31d83de4ebd4125af3b3b9d5c7ae01896f"
+                "reference": "7ed92842c231b42b8d2427e76c42062f24feadd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phikiphp/phiki/zipball/e1a31d31d83de4ebd4125af3b3b9d5c7ae01896f",
-                "reference": "e1a31d31d83de4ebd4125af3b3b9d5c7ae01896f",
+                "url": "https://api.github.com/repos/phikiphp/phiki/zipball/7ed92842c231b42b8d2427e76c42062f24feadd7",
+                "reference": "7ed92842c231b42b8d2427e76c42062f24feadd7",
                 "shasum": ""
             },
             "require": {
@@ -12119,9 +12119,9 @@
             "description": "Syntax highlighting using TextMate grammars in PHP.",
             "support": {
                 "issues": "https://github.com/phikiphp/phiki/issues",
-                "source": "https://github.com/phikiphp/phiki/tree/v1.1.2"
+                "source": "https://github.com/phikiphp/phiki/tree/v1.1.3"
             },
-            "time": "2025-02-05T16:00:26+00:00"
+            "time": "2025-02-19T19:56:19+00:00"
         },
         {
             "name": "php-collective/decimal-object",
