@@ -8003,16 +8003,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.0",
+            "version": "v11.43.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "70760d976486310b11d8e487e873077db069e77a"
+                "reference": "053f26afb699c845945e7380b407dd019a0a2c74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/70760d976486310b11d8e487e873077db069e77a",
-                "reference": "70760d976486310b11d8e487e873077db069e77a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/053f26afb699c845945e7380b407dd019a0a2c74",
+                "reference": "053f26afb699c845945e7380b407dd019a0a2c74",
                 "shasum": ""
             },
             "require": {
@@ -8214,7 +8214,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-18T15:37:56+00:00"
+            "time": "2025-02-19T16:06:03+00:00"
         },
         {
             "name": "laravel/octane",
@@ -33170,9 +33170,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33184,6 +33184,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
