@@ -11542,20 +11542,20 @@
         },
         {
             "name": "overtrue/laravel-query-logger",
-            "version": "3.3.0",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/laravel-query-logger.git",
-                "reference": "5fdcbf00a0463341e56839c58d67ce142315c07f"
+                "reference": "667565274041f4d6f2c6da6dc433bac2f9a7233e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-query-logger/zipball/5fdcbf00a0463341e56839c58d67ce142315c07f",
-                "reference": "5fdcbf00a0463341e56839c58d67ce142315c07f",
+                "url": "https://api.github.com/repos/overtrue/laravel-query-logger/zipball/667565274041f4d6f2c6da6dc433bac2f9a7233e",
+                "reference": "667565274041f4d6f2c6da6dc433bac2f9a7233e",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^9.0|^10.0|^11.0"
+                "laravel/framework": "^9.0|^10.0|^11.0|^12.0"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "dev-master",
@@ -11595,7 +11595,7 @@
             "description": "A dev tool to log all queries for laravel application.",
             "support": {
                 "issues": "https://github.com/overtrue/laravel-query-logger/issues",
-                "source": "https://github.com/overtrue/laravel-query-logger/tree/3.3.0"
+                "source": "https://github.com/overtrue/laravel-query-logger/tree/3.4.0"
             },
             "funding": [
                 {
@@ -11603,7 +11603,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-26T08:29:21+00:00"
+            "time": "2025-02-20T15:32:02+00:00"
         },
         {
             "name": "overtrue/laravel-uploader",
