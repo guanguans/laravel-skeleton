@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7149a298bbdadd9c6a5bfe573d122a8",
+    "content-hash": "68214b949c1bf1335dd8643117f49b9a",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -6393,6 +6393,82 @@
             "time": "2023-02-23T15:00:54+00:00"
         },
         {
+            "name": "huangdijia/laravel-horizon-restart",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/huangdijia/laravel-horizon-restart.git",
+                "reference": "1734c38bb0ab1358cd807e182f4700152d87354a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/huangdijia/laravel-horizon-restart/zipball/1734c38bb0ab1358cd807e182f4700152d87354a",
+                "reference": "1734c38bb0ab1358cd807e182f4700152d87354a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^10.0|^11.0",
+                "illuminate/console": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "laravel/horizon": "^5.0|^6.0",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "huangdijia/php-coding-standard": "^1.2",
+                "laravel/framework": "^10.0|^11.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/phpstan": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Huangdijia\\Horizon\\RestartServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Huangdijia\\Horizon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "huangdijia",
+                    "email": "huangdijia@gmail.com"
+                }
+            ],
+            "description": "Horizon Restart for Laravel.",
+            "homepage": "https://github.com/huangdijia/laravel-horizon-restart",
+            "keywords": [
+                "horizon",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/huangdijia/laravel-horizon-restart/issues",
+                "source": "https://github.com/huangdijia/laravel-horizon-restart/tree/v3.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://hdj.me/sponsors/",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/huangdijia",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-08T16:24:43+00:00"
+        },
+        {
             "name": "imanghafoori/laravel-decorator",
             "version": "v1.1.0",
             "source": {
@@ -8215,6 +8291,86 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2025-02-19T21:53:48+00:00"
+        },
+        {
+            "name": "laravel/horizon",
+            "version": "v5.30.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/horizon.git",
+                "reference": "7b9ee870bf0e425b956fd0433f616f98fe951f72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/horizon/zipball/7b9ee870bf0e425b956fd0433f616f98fe951f72",
+                "reference": "7b9ee870bf0e425b956fd0433f616f98fe951f72",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pcntl": "*",
+                "ext-posix": "*",
+                "illuminate/contracts": "^9.21|^10.0|^11.0|^12.0",
+                "illuminate/queue": "^9.21|^10.0|^11.0|^12.0",
+                "illuminate/support": "^9.21|^10.0|^11.0|^12.0",
+                "nesbot/carbon": "^2.17|^3.0",
+                "php": "^8.0",
+                "ramsey/uuid": "^4.0",
+                "symfony/console": "^6.0|^7.0",
+                "symfony/error-handler": "^6.0|^7.0",
+                "symfony/polyfill-php83": "^1.28",
+                "symfony/process": "^6.0|^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.0|^10.4|^11.5",
+                "predis/predis": "^1.1|^2.0"
+            },
+            "suggest": {
+                "ext-redis": "Required to use the Redis PHP driver.",
+                "predis/predis": "Required when not using the Redis PHP driver (^1.1|^2.0)."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Horizon": "Laravel\\Horizon\\Horizon"
+                    },
+                    "providers": [
+                        "Laravel\\Horizon\\HorizonServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Horizon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Dashboard and code-driven configuration for Laravel queues.",
+            "keywords": [
+                "laravel",
+                "queue"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/horizon/issues",
+                "source": "https://github.com/laravel/horizon/tree/v5.30.3"
+            },
+            "time": "2025-02-11T13:52:50+00:00"
         },
         {
             "name": "laravel/octane",
@@ -33180,9 +33336,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33194,6 +33350,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

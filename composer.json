@@ -52,6 +52,7 @@
         "hamidrezaniazi/pecs": "^2.0",
         "hammerstone/fast-paginate": "^1.1",
         "hashids/hashids": "^5.0",
+        "huangdijia/laravel-horizon-restart": "^3.0",
         "imanghafoori/laravel-decorator": "^1.1",
         "imanghafoori/laravel-middlewarize": "^1.1",
         "inspector-apm/inspector-laravel": "^4.10",
