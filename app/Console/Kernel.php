@@ -43,11 +43,9 @@ class Kernel extends ConsoleKernel
         $schedule->command(ClearLogsCommand::class)->daily()->appendOutputTo($this->toOutputPath(ClearLogsCommand::class))->withoutOverlapping();
         $schedule->command(ClearExpiredCommand::class)->daily()->appendOutputTo($this->toOutputPath(ClearExpiredCommand::class))->withoutOverlapping();
         $schedule->command('disposable:update')->weekly()->at('04:00');
-        $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->everyMinute();
+        $schedule->command('db:monitor', ['--databases' => 'mysql,pgsql', '--max' => 100])->userAppendOutputToDaily()->everyMinute();
         $schedule->command(RunHealthChecksCommand::class)->everyMinute();
         $schedule->command(LaravelCacheGarbageCollector::class)->daily();
-        $schedule->command('db:monitor --database=mysql,pgsql --max=100')->everyMinute()->userAppendOutputToDaily()->withoutOverlapping();
-
         // $schedule->job(function (ConsoleOutput $consoleOutput) {
         //     $consoleOutput->writeln(Inspiring::quote());
         // })->everyMinute();
