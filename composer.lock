@@ -16135,20 +16135,20 @@
         },
         {
             "name": "spatie/laravel-schedule-monitor",
-            "version": "3.10.0",
+            "version": "3.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-schedule-monitor.git",
-                "reference": "36855a55de727acf51918c1e66be2296449047da"
+                "reference": "8731755b91d5d724a5bd2c7028e3d0c8c930e8a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/36855a55de727acf51918c1e66be2296449047da",
-                "reference": "36855a55de727acf51918c1e66be2296449047da",
+                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/8731755b91d5d724a5bd2c7028e3d0c8c930e8a1",
+                "reference": "8731755b91d5d724a5bd2c7028e3d0c8c930e8a1",
                 "shasum": ""
             },
             "require": {
-                "illuminate/bus": "^9.0|^10.0|^11.0",
+                "illuminate/bus": "^9.0|^10.0|^11.0|^12.0",
                 "lorisleiva/cron-translator": "^0.3.0|^0.4.0",
                 "nesbot/carbon": "^2.63|^3.0",
                 "nunomaduro/termwind": "^1.10.1|^2.0",
@@ -16158,9 +16158,9 @@
             "require-dev": {
                 "mockery/mockery": "^1.4",
                 "ohdearapp/ohdear-php-sdk": "^3.0",
-                "orchestra/testbench": "^7.0|^8.0|^9.0",
-                "pestphp/pest": "^1.20|^2.34",
-                "pestphp/pest-plugin-laravel": "^1.2|^2.3",
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.20|^2.34|^3.7",
+                "pestphp/pest-plugin-laravel": "^1.2|^2.3|^3.1",
                 "spatie/pest-plugin-snapshots": "^1.1|^2.1",
                 "spatie/phpunit-snapshot-assertions": "^4.2|^5.1",
                 "spatie/test-time": "^1.2"
@@ -16202,7 +16202,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-schedule-monitor/issues",
-                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.10.0"
+                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.10.3"
             },
             "funding": [
                 {
@@ -16210,7 +16210,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-05T08:20:03+00:00"
+            "time": "2025-02-21T19:56:48+00:00"
         },
         {
             "name": "spatie/laravel-schemaless-attributes",
@@ -33403,9 +33403,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33417,6 +33417,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
