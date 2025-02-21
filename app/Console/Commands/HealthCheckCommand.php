@@ -112,10 +112,6 @@ class HealthCheckCommand extends Command
     private function checkServiceProvider(
         array $except = [
             'intervention/image',
-            'nesbot/carbon',
-            'nunomaduro/termwind',
-            'spatie/eloquent-sortable',
-            'spatie/laravel-signal-aware-command',
             'kitloong/laravel-app-logger',
             'laravel-lang/actions',
             'laravel-lang/attributes',
@@ -124,14 +120,21 @@ class HealthCheckCommand extends Command
             'laravel-lang/lang',
             'laravel-lang/locales',
             'laravel-lang/models',
+            'laravel-lang/moonshine',
             'laravel-lang/publisher',
             'laravel-lang/routes',
+            'laravel/horizon',
             'laravel/scout',
             'livewire/livewire',
+            'nesbot/carbon',
+            'nunomaduro/termwind',
             'orchid/blade-icons',
+            'spatie/eloquent-sortable',
             'spatie/laravel-http-logger',
+            'spatie/laravel-signal-aware-command',
             'staudenmeir/laravel-cte',
             'watson/active',
+            'whitecube/laravel-timezones',
             'wilderborn/partyline',
         ]
     ): HealthCheckStateEnum {
