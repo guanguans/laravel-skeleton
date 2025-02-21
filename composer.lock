@@ -15987,26 +15987,26 @@
         },
         {
             "name": "spatie/laravel-route-attributes",
-            "version": "1.25.0",
+            "version": "1.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-route-attributes.git",
-                "reference": "a3edbea15e157fbcd86eb332d38715d9250a0900"
+                "reference": "739d353605c5bca476fa5cc4f21967aec12a9688"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/a3edbea15e157fbcd86eb332d38715d9250a0900",
-                "reference": "a3edbea15e157fbcd86eb332d38715d9250a0900",
+                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/739d353605c5bca476fa5cc4f21967aec12a9688",
+                "reference": "739d353605c5bca476fa5cc4f21967aec12a9688",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^10.0|^11.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
                 "nesbot/carbon": "^2.63|^3.0",
                 "php": "^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^8.0|^9.0",
-                "phpunit/phpunit": "^9.5.10|^10.5"
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.5.10|^10.5|^11.5.3"
             },
             "type": "library",
             "extra": {
@@ -16042,7 +16042,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-route-attributes/issues",
-                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.25.0"
+                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.25.1"
             },
             "funding": [
                 {
@@ -16054,7 +16054,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-12-09T14:10:00+00:00"
+            "time": "2025-02-21T13:09:36+00:00"
         },
         {
             "name": "spatie/laravel-route-discovery",
@@ -33403,9 +33403,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33417,6 +33417,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
