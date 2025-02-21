@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68214b949c1bf1335dd8643117f49b9a",
+    "content-hash": "8142a6f10814424430d81134875d3104",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -3849,6 +3849,7 @@
                     "type": "yoomoney"
                 }
             ],
+            "abandoned": true,
             "time": "2024-03-15T00:21:02+00:00"
         },
         {
@@ -4268,6 +4269,7 @@
                     "type": "yoomoney"
                 }
             ],
+            "abandoned": "spatie/laravel-data",
             "time": "2024-03-06T17:31:20+00:00"
         },
         {
@@ -24243,12 +24245,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "034668ded829f52ed943968f7f897de7c788cecf"
+                "reference": "ec8b30eb383f0e14e7cf9d3a07bc8c9038cc1d84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/034668ded829f52ed943968f7f897de7c788cecf",
-                "reference": "034668ded829f52ed943968f7f897de7c788cecf",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/ec8b30eb383f0e14e7cf9d3a07bc8c9038cc1d84",
+                "reference": "ec8b30eb383f0e14e7cf9d3a07bc8c9038cc1d84",
                 "shasum": ""
             },
             "require": {
@@ -24363,7 +24365,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-02-14T21:32:09+00:00"
+            "time": "2025-02-20T21:56:03+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
@@ -25927,16 +25929,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.15.0",
+            "version": "15.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "f17718e233d3f97adac597a3d3e426f77b4dac36"
+                "reference": "7b237b051e0130a8fa555f1aa2280086bbdba707"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/f17718e233d3f97adac597a3d3e426f77b4dac36",
-                "reference": "f17718e233d3f97adac597a3d3e426f77b4dac36",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/7b237b051e0130a8fa555f1aa2280086bbdba707",
+                "reference": "7b237b051e0130a8fa555f1aa2280086bbdba707",
                 "shasum": ""
             },
             "require": {
@@ -25986,7 +25988,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2025-02-18T07:29:32+00:00"
+            "time": "2025-02-20T07:25:51+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -28670,16 +28672,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.18",
+            "version": "1.12.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "fef9f07814a573399229304bb0046affdf558812"
+                "reference": "c42ba9bab7a940ed00092ecb1c77bad98896d789"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fef9f07814a573399229304bb0046affdf558812",
-                "reference": "fef9f07814a573399229304bb0046affdf558812",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c42ba9bab7a940ed00092ecb1c77bad98896d789",
+                "reference": "c42ba9bab7a940ed00092ecb1c77bad98896d789",
                 "shasum": ""
             },
             "require": {
@@ -28724,7 +28726,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-13T12:44:44+00:00"
+            "time": "2025-02-19T15:42:21+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -32513,6 +32515,71 @@
                 }
             ],
             "time": "2025-02-20T13:13:55+00:00"
+        },
+        {
+            "name": "spatie/laravel-stubs",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-stubs.git",
+                "reference": "dc56f829229ae7e5fefbc6415faef682486a6083"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-stubs/zipball/dc56f829229ae7e5fefbc6415faef682486a6083",
+                "reference": "dc56f829229ae7e5fefbc6415faef682486a6083",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^9.0|^10.0",
+                "pestphp/pest": "^2.0|^3.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Stubs\\StubsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Stubs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Opinionated Laravel stubs",
+            "homepage": "https://github.com/spatie/laravel-stubs",
+            "keywords": [
+                "laravel-stubs",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/laravel-stubs/tree/3.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2025-02-20T11:04:25+00:00"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
