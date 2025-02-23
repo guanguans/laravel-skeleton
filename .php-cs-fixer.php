@@ -24,6 +24,9 @@ $header = <<<'HEADER'
 
 $finder = Finder::create()
     ->in([
+        __DIR__.'/app/Bootstrappers',
+        __DIR__.'/app/Casts',
+
         __DIR__.'/app/Models/Concerns',
         __DIR__.'/app/Support',
         // __DIR__.'/app',
@@ -363,6 +366,13 @@ return (new Config)
             'anonymous_class' => false,
             'named_class' => false,
         ],
+
+        // 'blank_line_between_import_groups' => true,
+        // 'global_namespace_import' => [
+        //     'import_classes' => false,
+        //     'import_constants' => false,
+        //     'import_functions' => false,
+        // ],
 
         // https://github.com/kubawerlos/php-cs-fixer-custom-fixers
         PhpCsFixerCustomFixers\Fixer\CommentSurroundedBySpacesFixer::name() => true,
