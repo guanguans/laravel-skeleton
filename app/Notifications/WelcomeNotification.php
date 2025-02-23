@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -16,10 +26,7 @@ class WelcomeNotification extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct() {}
 
     /**
      * Get the notification's delivery channels.
@@ -31,10 +38,8 @@ class WelcomeNotification extends Notification implements ShouldQueue
 
     /**
      * Get the mail representation of the notification.
-     *
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail(mixed $notifiable)
+    public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
             ->line('The introduction to the notification.')
@@ -48,7 +53,6 @@ class WelcomeNotification extends Notification implements ShouldQueue
     public function toArray(mixed $notifiable): array
     {
         return [
-            //
         ];
     }
 }

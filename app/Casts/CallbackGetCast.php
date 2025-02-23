@@ -1,26 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use InvalidArgumentException;
-use Throwable;
+use Illuminate\Database\Eloquent\Model;
 
 class CallbackGetCast implements CastsAttributes
 {
-    /**
-     * @var callable
-     */
+    /** @var callable */
     protected $callback;
 
-    /**
-     * @var array
-     */
-    protected $remainingCallbackArgs;
+    protected array $remainingCallbackArgs;
 
     /**
-     * @param  string  $callback  The callback(function、class::method、class@method) to be used to cast the attribute.
-     * @param  int  $castingAttributeCallbackArgIndex  The index of the argument that will be the attribute being casted.
+     * @param  string  $callback  the callback(function、class::method、class@method) to be used to cast the attribute
+     * @param  int  $castingAttributeCallbackArgIndex  the index of the argument that will be the attribute being casted
      * @param  ...$remainingCallbackArgs  These are the remaining callback arguments.
      */
     public function __construct(string $callback, protected int $castingAttributeCallbackArgIndex = 0, ...$remainingCallbackArgs)
@@ -31,24 +35,16 @@ class CallbackGetCast implements CastsAttributes
 
     /**
      * Prepare the given value for storage.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  mixed  $value
-     * @return mixed
      */
-    public function set($model, string $key, $value, array $attributes)
+    public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $value;
     }
 
     /**
      * Transform the attribute to its underlying model values.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  mixed  $value
-     * @return mixed
      */
-    public function get($model, string $key, $value, array $attributes)
+    public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         array_splice($this->remainingCallbackArgs, $this->castingAttributeCallbackArgIndex, 0, $value);
 
@@ -58,8 +54,8 @@ class CallbackGetCast implements CastsAttributes
     /**
      * It takes a string and returns a callable
      *
-     * @param  string  $callback  The callback to be executed.
-     * @return callable A callable.
+     * @param  string  $callback  the callback to be executed
+     * @return callable a callable
      *
      * @throws \InvalidArgumentException
      */
@@ -75,12 +71,12 @@ class CallbackGetCast implements CastsAttributes
             return $segments;
         }
 
-        throw_if(\count($segments) !== 2 || ! method_exists($segments[0], $segments[1]), InvalidArgumentException::class, "Invalid callback: $callback");
+        throw_if(\count($segments) !== 2 || ! method_exists($segments[0], $segments[1]), \InvalidArgumentException::class, "Invalid callback: $callback");
 
         try {
             return [resolve($segments[0]), $segments[1]];
-        } catch (Throwable $throwable) {
-            throw new InvalidArgumentException("Invalid callback: $callback({$throwable->getMessage()})", $throwable->getCode(), $throwable);
+        } catch (\Throwable $throwable) {
+            throw new \InvalidArgumentException("Invalid callback: $callback({$throwable->getMessage()})", $throwable->getCode(), $throwable);
         }
     }
 }

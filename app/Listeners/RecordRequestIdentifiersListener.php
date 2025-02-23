@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Listeners;
 
 use Illuminate\Http\Request;
@@ -20,10 +28,10 @@ class RecordRequestIdentifiersListener
      */
     public function handle(TokenAuthenticated $event): void
     {
-        /** @var Request|null $request */
+        /** @var null|Request $request */
         $request = request();
 
-        if (! \is_null($request) && ($event->token->ip !== $request->ip() || \is_null($event->token->location))) {
+        if (null !== $request && ($event->token->ip !== $request->ip() || null === $event->token->location)) {
             $attributes = [
                 'ip' => $request->ip(),
             ];

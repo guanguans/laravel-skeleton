@@ -1,16 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CurdController extends Controller
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Model|string
-     */
-    protected $modelClass;
+    protected Model|string $modelClass;
 
     /**
      * Display a listing of the resource.
@@ -40,10 +48,9 @@ class CurdController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         return $this->success($this->findModel($id));
     }
@@ -51,10 +58,9 @@ class CurdController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update(Request $request, $id): JsonResponse
+    public function update(Request $request, int $id): JsonResponse
     {
         $this->findModel($id)->updateOrFail($request->post());
 
@@ -64,10 +70,9 @@ class CurdController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         $this->findModel($id)->delete();
 
@@ -76,12 +81,8 @@ class CurdController extends Controller
 
     /**
      * Find model.
-     *
-     * @param  int  $id
-     * @param  array  $columns
-     * @return \Illuminate\Database\Eloquent\Model
      */
-    protected function findModel($id, $columns = ['*'])
+    protected function findModel(int $id, array $columns = ['*']): Model
     {
         return $this->modelClass::query()->findOrFail($id, $columns);
     }

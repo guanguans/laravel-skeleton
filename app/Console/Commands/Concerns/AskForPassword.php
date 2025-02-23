@@ -1,8 +1,16 @@
 <?php
 
-namespace App\Console\Commands\Concerns;
+declare(strict_types=1);
 
-use SensitiveParameter;
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
+namespace App\Console\Commands\Concerns;
 
 /**
  * @see https://github.com/koel/koel/blob/master/app/Console/Commands/Concerns/AskForPassword.php
@@ -28,7 +36,7 @@ trait AskForPassword
         return $password;
     }
 
-    private function comparePasswords(#[SensitiveParameter] ?string $password, #[SensitiveParameter] ?string $confirmedPassword): bool
+    private function comparePasswords(#[\SensitiveParameter] ?string $password, #[\SensitiveParameter] ?string $confirmedPassword): bool
     {
         if (! $password || ! $confirmedPassword) {
             return false;

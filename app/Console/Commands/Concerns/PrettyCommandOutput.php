@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Console\Commands\Concerns;
 
 use Illuminate\Console\Command;
@@ -23,7 +31,7 @@ trait PrettyCommandOutput
      * @param  bool  $afterNotice  Information for the user after the command is run
      * @return mixed Command-line output
      */
-    public function executeProcess($command, $beforeNotice = false, $afterNotice = false): void
+    public function executeProcess(string $command, bool $beforeNotice = false, bool $afterNotice = false): void
     {
         $this->echo('info', $beforeNotice ? ' '.$beforeNotice : implode(' ', $command));
 
@@ -46,7 +54,7 @@ trait PrettyCommandOutput
         }
 
         if ($afterNotice) {
-            $this->echo('info', $afterNotice);
+            $this->echo('info', (string) $afterNotice);
         }
     }
 
@@ -59,7 +67,7 @@ trait PrettyCommandOutput
      * @param  bool  $afterNotice  Information for the user after the command is run
      * @return mixed Command-line output
      */
-    public function executeArtisanProcess($command, $arguments = [], $beforeNotice = false, $afterNotice = false): void
+    public function executeArtisanProcess(string $command, array $arguments = [], bool $beforeNotice = false, bool $afterNotice = false): void
     {
         $beforeNotice = $beforeNotice ? ' '.$beforeNotice : 'php artisan '.implode(' ', (array) $command).' '.implode(' ', $arguments);
 
@@ -76,7 +84,7 @@ trait PrettyCommandOutput
         }
 
         if ($afterNotice) {
-            $this->echo('info', $afterNotice);
+            $this->echo('info', (string) $afterNotice);
         }
     }
 
@@ -84,11 +92,10 @@ trait PrettyCommandOutput
      * Write text to the screen for the user to see.
      *
      * @param  string  $type  line, info, comment, question, error
-     * @param  string  $content
      */
-    public function echo($type, $content): void
+    public function echo(string $type, string $content): void
     {
-        if ($this->option('debug') == false) {
+        if ($this->option('debug') === false) {
             return;
         }
 
@@ -100,10 +107,8 @@ trait PrettyCommandOutput
 
     /**
      * Write a title inside a box.
-     *
-     * @param  string  $header
      */
-    public function box($header, $color = 'green'): void
+    public function box(string $header, mixed $color = 'green'): void
     {
         $line = str_repeat('─', \strlen($header));
 
@@ -115,10 +120,8 @@ trait PrettyCommandOutput
 
     /**
      * List choice element.
-     *
-     * @return void
      */
-    public function listChoice(string $question, array $options, string $default = 'no', ?string $hint = null)
+    public function listChoice(string $question, array $options, string $default = 'no', ?string $hint = null): mixed
     {
         foreach ($options as $key => $option) {
             $value = $key + 1;
@@ -136,10 +139,8 @@ trait PrettyCommandOutput
 
     /**
      * Default info block element.
-     *
-     * @return void
      */
-    public function infoBlock(string $text, string $title = 'info', string $background = 'blue', string $foreground = 'white')
+    public function infoBlock(string $text, string $title = 'info', string $background = 'blue', string $foreground = 'white'): void
     {
         $this->newLine();
 
@@ -149,13 +150,13 @@ trait PrettyCommandOutput
                 $text = "$text <fg=gray>[<fg=$background>$title</>]</>";
             }
 
-            return $this->line("  $text");
+            $this->line("  $text");
+
+            return;
         }
 
-        $this->line(sprintf("  <fg=$foreground;bg=$background> %s </> $text", strtoupper($title)));
+        $this->line(\sprintf("  <fg=$foreground;bg=$background> %s </> $text", strtoupper($title)));
         $this->newLine();
-
-        return null;
     }
 
     /**
@@ -192,7 +193,7 @@ trait PrettyCommandOutput
 
         $this->consoleProgress = $progress;
 
-        $this->output->write(sprintf(
+        $this->output->write(\sprintf(
             "  $text <fg=gray>%s</> <fg=$color>%s</>",
             str_repeat('.', max(1, $dotLength)),
             strtoupper($progress)
@@ -209,7 +210,7 @@ trait PrettyCommandOutput
 
         $this->deleteChars($deleteSize);
 
-        $this->output->write(sprintf(
+        $this->output->write(\sprintf(
             "<fg=gray>%s</> <fg=$color>%s</>",
             $newDotSize > 0 ? str_repeat('.', $newDotSize) : '',
             strtoupper($progress),
@@ -233,16 +234,13 @@ trait PrettyCommandOutput
         $this->output->write(str_repeat("\033[A\33[2K\r", $amount));
     }
 
-    /**
-     * @return void
-     */
-    public function askHint(string $question, array $hints, string $default)
+    public function askHint(string $question, array $hints, string $default): void
     {
         $hints = collect($hints)
             ->map(static fn ($hint): string => " <fg=gray>│ $hint</>")
             ->join(PHP_EOL);
 
-        return $this->ask($question.PHP_EOL.$hints, $default);
+        $this->ask($question.PHP_EOL.$hints, $default);
     }
 
     /**

@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -23,7 +33,7 @@ class SlowQueryLoggedNotification extends Notification implements ShouldQueue
 
     public function toTelegram($notifiable)
     {
-        if (\is_null(config('services.telegram-bot-api.channel'))) {
+        if (null === config('services.telegram-bot-api.channel')) {
             return;
         }
 

@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Rules;
 
 use Illuminate\Support\Str;
@@ -8,7 +18,7 @@ final class ImeiRule extends Rule
 {
     public function passes(string $attribute, mixed $value): bool
     {
-        if (\strlen($value) != 15 || ! ctype_digit($value)) {
+        if (\strlen($value) !== 15 || ! ctype_digit($value)) {
             return false;
         }
 

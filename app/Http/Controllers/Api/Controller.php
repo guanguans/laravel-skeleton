@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Http\Controllers\Api;
 
 use App\Support\Attributes\Autowired;
@@ -17,9 +27,6 @@ class Controller extends \App\Http\Controllers\Controller
     // use ApiResponseHelpers;
     use ApiResponseFactory;
 
-    /**
-     * @var \Guanguans\LaravelApiResponse\ApiResponse
-     */
     #[Autowired(ApiResponseContract::class)]
     protected ApiResponseContract $apiResponse;
 

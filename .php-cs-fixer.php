@@ -26,9 +26,26 @@ $finder = Finder::create()
     ->in([
         __DIR__.'/app/Bootstrappers',
         __DIR__.'/app/Casts',
-
+        // __DIR__.'/app/Console',
+        __DIR__.'/app/Console/Commands/Concerns',
+        __DIR__.'/app/Enums',
+        __DIR__.'/app/Events',
+        // __DIR__.'/app/Exceptions',
+        // __DIR__.'/app/Http',
+        __DIR__.'/app/Http/Controllers',
+        __DIR__.'/app/Jobs',
+        __DIR__.'/app/Listeners',
+        __DIR__.'/app/Mail',
+        // __DIR__.'/app/Models',
         __DIR__.'/app/Models/Concerns',
+        __DIR__.'/app/Notifications',
+        __DIR__.'/app/Observers',
+        __DIR__.'/app/Policies',
+        // __DIR__.'/app/Providers',
+        __DIR__.'/app/Rules',
+        __DIR__.'/app/Services',
         __DIR__.'/app/Support',
+        // __DIR__.'/app/View',
         // __DIR__.'/app',
         // __DIR__.'/config',
         // __DIR__.'/database',
@@ -73,6 +90,7 @@ $finder = Finder::create()
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
+/** @see https://github.com/laravel/pint/blob/main/resources/presets */
 return (new Config)
     ->setFinder($finder)
     ->setRiskyAllowed(true)
@@ -108,14 +126,23 @@ return (new Config)
         // array_notation
 
         // basic
+        // 'braces_position' => [
+        //     'allow_single_line_anonymous_functions' => true,
+        //     'allow_single_line_empty_anonymous_classes' => true,
+        //     'anonymous_classes_opening_brace' => 'same_line',
+        //     'anonymous_functions_opening_brace' => 'same_line',
+        //     'classes_opening_brace' => 'next_line_unless_newline_at_signature_end',
+        //     'control_structures_opening_brace' => 'same_line',
+        //     'functions_opening_brace' => 'next_line_unless_newline_at_signature_end',
+        // ],
         'braces_position' => [
-            'control_structures_opening_brace' => 'same_line',
-            'functions_opening_brace' => 'next_line_unless_newline_at_signature_end',
+            'allow_single_line_anonymous_functions' => false,
+            'allow_single_line_empty_anonymous_classes' => false,
+            'anonymous_classes_opening_brace' => 'next_line_unless_newline_at_signature_end',
             'anonymous_functions_opening_brace' => 'same_line',
             'classes_opening_brace' => 'next_line_unless_newline_at_signature_end',
-            'anonymous_classes_opening_brace' => 'same_line',
-            'allow_single_line_empty_anonymous_classes' => true,
-            'allow_single_line_anonymous_functions' => true,
+            'control_structures_opening_brace' => 'same_line',
+            'functions_opening_brace' => 'next_line_unless_newline_at_signature_end',
         ],
         'no_multiple_statements_per_line' => true,
 
@@ -367,12 +394,13 @@ return (new Config)
             'named_class' => false,
         ],
 
-        // 'blank_line_between_import_groups' => true,
-        // 'global_namespace_import' => [
-        //     'import_classes' => false,
-        //     'import_constants' => false,
-        //     'import_functions' => false,
-        // ],
+        'blank_line_between_import_groups' => true,
+        'no_leading_import_slash' => true,
+        'global_namespace_import' => [
+            'import_classes' => false,
+            'import_constants' => false,
+            'import_functions' => false,
+        ],
 
         // https://github.com/kubawerlos/php-cs-fixer-custom-fixers
         PhpCsFixerCustomFixers\Fixer\CommentSurroundedBySpacesFixer::name() => true,

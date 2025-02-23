@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Rules;
 
 use App\Support\Traits\CreateStaticable;
@@ -32,7 +42,7 @@ abstract class Rule implements ValidationRule
 
     public static function name(): string
     {
-        return Str::of(class_basename(static::class))->replaceLast('Rule', '')->snake();
+        return Str::of(class_basename(static::class))->replaceLast('Rule', '')->snake()->toString();
     }
 
     public static function message(): string

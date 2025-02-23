@@ -1,8 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Database\Eloquent\Model;
 
 class Base64Cast implements CastsAttributes
 {
@@ -13,25 +24,17 @@ class Base64Cast implements CastsAttributes
 
     /**
      * Cast the given value.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  mixed  $value
-     * @return mixed
      */
-    public function get($model, string $key, $value, array $attributes)
+    public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $this->isCastGet ? base64_encode($value) : $value;
     }
 
     /**
      * Prepare the given value for storage.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  mixed  $value
-     * @return mixed
      */
-    public function set($model, string $key, $value, array $attributes)
+    public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $this->isCastSet ? base64_decode($value) : $value;
+        return $this->isCastSet ? base64_decode($value, true) : $value;
     }
 }

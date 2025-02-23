@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\Castable;
@@ -15,7 +23,7 @@ class CommaSeparatedToArrayCastUsing implements Castable
      * Get the name of the caster class to use when casting from / to this cast target.
      *
      * @param  array<int, mixed>  $arguments
-     * @return class-string<CastsAttributes|CastsInboundAttributes>|CastsAttributes|CastsInboundAttributes
+     * @return CastsAttributes|CastsInboundAttributes|class-string<CastsAttributes|CastsInboundAttributes>
      */
     public static function castUsing(array $arguments): CastsAttributes
     {

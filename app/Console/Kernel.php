@@ -2,9 +2,9 @@
 
 namespace App\Console;
 
-use Carbon\Carbon;
 use App\Console\Commands\ClearLogsCommand;
 use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Inspiring;

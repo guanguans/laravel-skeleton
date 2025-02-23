@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * This file is part of the guanguans/laravel-skeleton.
+ *
+ * (c) guanguans <ityaozm@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled.
+ */
+
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
@@ -13,7 +23,7 @@ class PingController extends Controller
     /**
      * @see \Illuminate\Routing\Controllers\HasMiddleware
      */
-    public function middleware($middleware, array $options = [])
+    public function middleware(mixed $middleware, array $options = [])
     {
         return parent::middleware($middleware, $options);
     }
@@ -37,7 +47,7 @@ class PingController extends Controller
      *     "error": {}
      * }
      */
-    public function ping(Request $request, $isBad = 0): JsonResponse
+    public function ping(Request $request, mixed $isBad = 0): JsonResponse
     {
         $validatedParameters = $request->validateStrictAll([
             'is_bad' => 'integer',
