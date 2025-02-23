@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace App\Support\Sse;
 
+use Illuminate\Support\Sleep;
+
 /**
  * ```php
  * Route::get('stream', static function (): Symfony\Component\HttpFoundation\StreamedResponse {
@@ -165,7 +167,7 @@ class ServerSentEvent implements \Stringable
                 }
 
                 // Sleep seconds before running the loop again.
-                \Illuminate\Support\Sleep::sleep($this->sleep);
+                Sleep::sleep($this->sleep);
             }
         }
     }

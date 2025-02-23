@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -11,9 +12,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        \Illuminate\Support\Facades\DB::table('users')->delete();
+        DB::table('users')->delete();
 
-        \Illuminate\Support\Facades\DB::table('users')->insert([
+        DB::table('users')->insert([
             [
                 'email' => 'admin@admin.com',
                 'email_verified_at' => '2021-11-18 18:10:18',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\LogHttp;
 use App\Models\HttpLog;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
@@ -32,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', static fn (Request $request) => 
 Route::middleware([
     'api',
     // sprintf('verify.signature:%s', config('services.signer.default.secret')),
-    \App\Http\Middleware\LogHttp::class.':daily',
+    LogHttp::class.':daily',
 ])->scopeBindings()->prefix('v1')->namespace('App\Http\Controllers\Api')->group(static function (Router $router): void {
     Route::middleware([])->group(static function (Router $router): void {
         Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping');

@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Support\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -25,7 +26,7 @@ trait ValidatesData
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateDataWith(array|\Illuminate\Contracts\Validation\Validator $validator, array $data): array
+    public function validateDataWith(array|Validator $validator, array $data): array
     {
         if (\is_array($validator)) {
             $validator = $this->getValidationDataFactory()->make($data, $validator);

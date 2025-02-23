@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Config;
@@ -18,7 +19,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        \Illuminate\Support\Facades\Schema::create($this->tablename, function (Blueprint $table): void {
+        Schema::create($this->tablename, function (Blueprint $table): void {
             $table->increments('id');
             $table->string($this->keyColumn)->index();
             $table->text($this->valueColumn);
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        \Illuminate\Support\Facades\Schema::drop($this->tablename);
+        Schema::drop($this->tablename);
     }
 };

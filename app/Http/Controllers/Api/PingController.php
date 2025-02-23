@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -36,7 +37,7 @@ class PingController extends Controller
      *     "error": {}
      * }
      */
-    public function ping(Request $request, $isBad = 0): \Illuminate\Http\JsonResponse
+    public function ping(Request $request, $isBad = 0): JsonResponse
     {
         $validatedParameters = $request->validateStrictAll([
             'is_bad' => 'integer',

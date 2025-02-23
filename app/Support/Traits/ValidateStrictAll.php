@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Support\Traits;
 
 use Illuminate\Contracts\Validation\Factory;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -26,7 +27,7 @@ trait ValidateStrictAll
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function validateStrictAllWith(array|\Illuminate\Contracts\Validation\Validator $validator, ?Request $request = null): array
+    public function validateStrictAllWith(array|Validator $validator, ?Request $request = null): array
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
         $request = $request ?: request();

@@ -58,7 +58,7 @@ Route::middleware('web')->get('up', static function () {
 Route::get('acting-as/{id}', static function ($id) {
     abort_unless(app()->isLocal() && app()->hasDebugModeEnabled(), 404);
 
-    \Illuminate\Support\Facades\Auth::loginUsingId($id);
+    Auth::loginUsingId($id);
 
     return redirect('dashboard');
 });

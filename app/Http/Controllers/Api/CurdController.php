@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CurdController extends Controller
@@ -16,7 +17,7 @@ class CurdController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index(Request $request): \Illuminate\Http\JsonResponse
+    public function index(Request $request): JsonResponse
     {
         $models = $this->modelClass::query()
             ->paginate($request->get('per_page'));
@@ -29,7 +30,7 @@ class CurdController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $this->modelClass::query()->create($request->post());
 
@@ -42,7 +43,7 @@ class CurdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id): \Illuminate\Http\JsonResponse
+    public function show($id): JsonResponse
     {
         return $this->success($this->findModel($id));
     }
@@ -53,7 +54,7 @@ class CurdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update(Request $request, $id): \Illuminate\Http\JsonResponse
+    public function update(Request $request, $id): JsonResponse
     {
         $this->findModel($id)->updateOrFail($request->post());
 
@@ -66,7 +67,7 @@ class CurdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id): \Illuminate\Http\JsonResponse
+    public function destroy($id): JsonResponse
     {
         $this->findModel($id)->delete();
 

@@ -2,6 +2,8 @@
 
 namespace App\Rules;
 
+use Illuminate\Support\Str;
+
 final class ImeiRule extends Rule
 {
     public function passes(string $attribute, mixed $value): bool
@@ -25,6 +27,6 @@ final class ImeiRule extends Rule
 
         $sum = array_sum($log) * 9; // Sum log & multiply by 9
 
-        return \Illuminate\Support\Str::endsWith($sum, $imeiLast);
+        return Str::endsWith($sum, $imeiLast);
     }
 }

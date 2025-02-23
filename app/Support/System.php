@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use Illuminate\Support\Sleep;
+
 /**
  * @see https://github.com/utopia-php/system/blob/main/src/System/System.php
  */
@@ -189,7 +191,7 @@ class System
         switch (self::getOS()) {
             case 'Linux':
                 $startCpu = self::getProcStatData()['total'];
-                \Illuminate\Support\Sleep::sleep($duration);
+                Sleep::sleep($duration);
                 $endCpu = self::getProcStatData()['total'];
 
                 $prevIdle = $startCpu['idle'] + $startCpu['iowait'];
@@ -304,7 +306,7 @@ class System
     public static function getIOUsage(int $duration = 1): array
     {
         $diskStat = self::getDiskStats();
-        \Illuminate\Support\Sleep::sleep($duration);
+        Sleep::sleep($duration);
         $diskStat2 = self::getDiskStats();
 
         // Remove invalid disks
@@ -384,7 +386,7 @@ class System
         foreach ($interfaces as $interface) {
             $tx1 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/tx_bytes');
             $rx1 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/rx_bytes');
-            \Illuminate\Support\Sleep::sleep($duration);
+            Sleep::sleep($duration);
             $tx2 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/tx_bytes');
             $rx2 = (int) file_get_contents('/sys/class/net/'.$interface.'/statistics/rx_bytes');
 

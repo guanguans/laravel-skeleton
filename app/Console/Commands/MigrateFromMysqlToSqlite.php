@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -31,7 +32,7 @@ class MigrateFromMysqlToSqlite extends Command
 
         // $this->migrateModel(\App\Models\Server::class);
         // $this->migrateModel(\App\Models\ServerLog::class);
-        $this->migrateModel(\App\Models\User::class);
+        $this->migrateModel(User::class);
 
         $env = File::get(base_path('.env'));
         $env = str_replace(['DB_CONNECTION=mysql', 'DB_DATABASE=vito'], ['DB_CONNECTION=sqlite', ''], $env);

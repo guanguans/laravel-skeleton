@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
 use App\Console\Commands\ClearLogsCommand;
 use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -81,7 +82,7 @@ class Kernel extends ConsoleKernel
             ->classBasename()
             ->snake('-')
             ->replaceLast('-command', '')
-            ->finish(\Carbon\Carbon::now()->format('-Y-m-d'))
+            ->finish(Carbon::now()->format('-Y-m-d'))
             ->append('.log')
             ->prepend(storage_path('logs/commands/'))
             ->toString();

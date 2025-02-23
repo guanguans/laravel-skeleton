@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\Userlog;
 use Illuminate\Auth\Events\Login;
 use Stevebauman\Location\Facades\Location;
 
@@ -42,7 +43,7 @@ class UserLoginListener
                 $countryCode = null;
             }
 
-            \App\Models\Userlog::query()->create([
+            Userlog::query()->create([
                 'user_id' => $event->user->id,
                 'country_name' => $countryName,
                 'country_code' => $countryCode,
