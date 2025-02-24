@@ -23333,16 +23333,16 @@
         },
         {
             "name": "dragon-code/benchmark",
-            "version": "3.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/benchmark.git",
-                "reference": "d975dc471ca687138062049a899d7dfcecbcd342"
+                "reference": "eb844f8dc94b0440d27b28d6b4b390363a4f8db0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/benchmark/zipball/d975dc471ca687138062049a899d7dfcecbcd342",
-                "reference": "d975dc471ca687138062049a899d7dfcecbcd342",
+                "url": "https://api.github.com/repos/TheDragonCode/benchmark/zipball/eb844f8dc94b0440d27b28d6b4b390363a4f8db0",
+                "reference": "eb844f8dc94b0440d27b28d6b4b390363a4f8db0",
                 "shasum": ""
             },
             "require": {
@@ -23351,7 +23351,7 @@
                 "symfony/console": "^6.0 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^11.0",
+                "phpunit/phpunit": "^11.0 || ^12.0",
                 "symfony/var-dumper": "^6.0 || ^7.0"
             },
             "type": "library",
@@ -23394,15 +23394,11 @@
                     "type": "boosty"
                 },
                 {
-                    "url": "https://www.donationalerts.com/r/dragon_code",
-                    "type": "donationalerts"
-                },
-                {
                     "url": "https://yoomoney.ru/to/410012608840929",
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-03-23T00:45:19+00:00"
+            "time": "2025-02-24T14:12:22+00:00"
         },
         {
             "name": "dragon-code/laravel-routes-core",
