@@ -1091,21 +1091,21 @@
         },
         {
             "name": "anlutro/l4-settings",
-            "version": "v1.4.1",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/anlutro/laravel-settings.git",
-                "reference": "8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc"
+                "reference": "2728c55b74e56c2bee4c015145eb795f2682ddfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc",
-                "reference": "8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc",
+                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/2728c55b74e56c2bee4c015145eb795f2682ddfd",
+                "reference": "2728c55b74e56c2bee4c015145eb795f2682ddfd",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "^4.2|^5|^6|^7|^8|^9|^10|^11",
-                "illuminate/support": "^4.2|^5|^6|^7|^8|^9|^10|^11"
+                "illuminate/cache": "^4.2|^5|^6|^7|^8|^9|^10|^11|^12",
+                "illuminate/support": "^4.2|^5|^6|^7|^8|^9|^10|^11|^12"
             },
             "require-dev": {
                 "laravel/framework": ">=5.7",
@@ -1148,9 +1148,9 @@
             "description": "Persistent settings in Laravel.",
             "support": {
                 "issues": "https://github.com/anlutro/laravel-settings/issues",
-                "source": "https://github.com/anlutro/laravel-settings/tree/v1.4.1"
+                "source": "https://github.com/anlutro/laravel-settings/tree/v1.4.2"
             },
-            "time": "2024-06-14T10:45:27+00:00"
+            "time": "2025-02-24T16:37:26+00:00"
         },
         {
             "name": "appstract/laravel-opcache",
@@ -8253,16 +8253,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.2",
+            "version": "v11.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21"
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/99d1573698abc42222f04d25fcd5b213d0eedf21",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
                 "shasum": ""
             },
             "require": {
@@ -8464,7 +8464,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-19T21:53:48+00:00"
+            "time": "2025-02-24T13:08:54+00:00"
         },
         {
             "name": "laravel/horizon",
@@ -33685,9 +33685,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33699,6 +33699,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
