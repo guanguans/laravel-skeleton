@@ -1091,21 +1091,21 @@
         },
         {
             "name": "anlutro/l4-settings",
-            "version": "v1.4.1",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/anlutro/laravel-settings.git",
-                "reference": "8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc"
+                "reference": "2728c55b74e56c2bee4c015145eb795f2682ddfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc",
-                "reference": "8e44bf723a2aa79fd6ea3e005cc2ccc2fb4631dc",
+                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/2728c55b74e56c2bee4c015145eb795f2682ddfd",
+                "reference": "2728c55b74e56c2bee4c015145eb795f2682ddfd",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "^4.2|^5|^6|^7|^8|^9|^10|^11",
-                "illuminate/support": "^4.2|^5|^6|^7|^8|^9|^10|^11"
+                "illuminate/cache": "^4.2|^5|^6|^7|^8|^9|^10|^11|^12",
+                "illuminate/support": "^4.2|^5|^6|^7|^8|^9|^10|^11|^12"
             },
             "require-dev": {
                 "laravel/framework": ">=5.7",
@@ -1148,9 +1148,9 @@
             "description": "Persistent settings in Laravel.",
             "support": {
                 "issues": "https://github.com/anlutro/laravel-settings/issues",
-                "source": "https://github.com/anlutro/laravel-settings/tree/v1.4.1"
+                "source": "https://github.com/anlutro/laravel-settings/tree/v1.4.2"
             },
-            "time": "2024-06-14T10:45:27+00:00"
+            "time": "2025-02-24T16:37:26+00:00"
         },
         {
             "name": "appstract/laravel-opcache",
