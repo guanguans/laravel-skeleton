@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e835e990be353a5252d2d0350cd8184",
+    "content-hash": "7672a88d790cf61c564cbcec8875838b",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -8253,16 +8253,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.2",
+            "version": "v11.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21"
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/99d1573698abc42222f04d25fcd5b213d0eedf21",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
                 "shasum": ""
             },
             "require": {
@@ -8464,7 +8464,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-19T21:53:48+00:00"
+            "time": "2025-02-24T13:08:54+00:00"
         },
         {
             "name": "laravel/horizon",
@@ -17274,27 +17274,27 @@
         },
         {
             "name": "square1/laravel-idempotency",
-            "version": "2.0.0",
+            "version": "12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/square1-io/laravel-idempotency.git",
-                "reference": "8cb514ba0cfd2d65a7c4f119331a681b542025e4"
+                "reference": "feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/8cb514ba0cfd2d65a7c4f119331a681b542025e4",
-                "reference": "8cb514ba0cfd2d65a7c4f119331a681b542025e4",
+                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844",
+                "reference": "feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^9.0|^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
                 "php": "^8.2"
             },
             "require-dev": {
-                "laravel/framework": "^11.0",
+                "laravel/framework": "^11.0|^12.0",
                 "laravel/pint": "^1.14",
-                "orchestra/testbench": "^9.0",
-                "phpunit/phpunit": "^11.0"
+                "orchestra/testbench": "^9.0|^10.0",
+                "phpunit/phpunit": "^10.0|^11.0"
             },
             "type": "library",
             "extra": {
@@ -17329,9 +17329,9 @@
             ],
             "support": {
                 "issues": "https://github.com/square1-io/laravel-idempotency/issues",
-                "source": "https://github.com/square1-io/laravel-idempotency/tree/2.0.0"
+                "source": "https://github.com/square1-io/laravel-idempotency/tree/12.0.0"
             },
-            "time": "2024-03-21T09:49:16+00:00"
+            "time": "2025-02-24T16:44:24+00:00"
         },
         {
             "name": "staudenmeir/eloquent-has-many-deep-contracts",
@@ -33685,9 +33685,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33699,6 +33699,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
