@@ -6707,27 +6707,27 @@
         },
         {
             "name": "inspector-apm/inspector-laravel",
-            "version": "4.10.5",
+            "version": "4.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-laravel.git",
-                "reference": "9b9f6fd68390bec91abdca2a98282490dec9da8c"
+                "reference": "6a9eaa46bc09e13d71cff0460060b75b9f42a458"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/9b9f6fd68390bec91abdca2a98282490dec9da8c",
-                "reference": "9b9f6fd68390bec91abdca2a98282490dec9da8c",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/6a9eaa46bc09e13d71cff0460060b75b9f42a458",
+                "reference": "6a9eaa46bc09e13d71cff0460060b75b9f42a458",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "illuminate/contracts": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/console": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
                 "inspector-apm/inspector-php": "^3.8.0",
                 "php": ">=7.2 <9"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.25.1|^7.22|^8.0|^9.0"
+                "orchestra/testbench": "^6.25.1|^7.22|^8.0|^9.0|^10.0"
             },
             "type": "library",
             "extra": {
@@ -6767,9 +6767,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-laravel/issues",
-                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.10.5"
+                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.11.1"
             },
-            "time": "2025-02-19T13:41:22+00:00"
+            "time": "2025-02-24T18:04:25+00:00"
         },
         {
             "name": "inspector-apm/inspector-php",
@@ -8253,16 +8253,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.2",
+            "version": "v11.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21"
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/99d1573698abc42222f04d25fcd5b213d0eedf21",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
                 "shasum": ""
             },
             "require": {
@@ -8464,7 +8464,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-19T21:53:48+00:00"
+            "time": "2025-02-24T13:08:54+00:00"
         },
         {
             "name": "laravel/horizon",
@@ -33685,9 +33685,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33699,6 +33699,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
