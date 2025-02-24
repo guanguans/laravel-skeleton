@@ -3850,26 +3850,26 @@
         },
         {
             "name": "dragon-code/laravel-deploy-operations",
-            "version": "6.3.2",
+            "version": "6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/laravel-deploy-operations.git",
-                "reference": "6a23bab2c4b1b6bcbd4c109bb9424a73c2ad33b2"
+                "reference": "3692afbc0a11e91641c6e36c5b4350e2e96236e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-deploy-operations/zipball/6a23bab2c4b1b6bcbd4c109bb9424a73c2ad33b2",
-                "reference": "6a23bab2c4b1b6bcbd4c109bb9424a73c2ad33b2",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-deploy-operations/zipball/3692afbc0a11e91641c6e36c5b4350e2e96236e7",
+                "reference": "3692afbc0a11e91641c6e36c5b4350e2e96236e7",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
                 "dragon-code/simple-dto": "^2.5.1",
                 "dragon-code/support": "^6.6",
-                "illuminate/console": "^10.0 || ^11.0",
-                "illuminate/container": "^10.0 || ^11.0",
-                "illuminate/database": "^10.0 || ^11.0",
-                "illuminate/support": "^10.0 || ^11.0",
+                "illuminate/console": "^10.0 || ^11.0 || ^12.0",
+                "illuminate/container": "^10.0 || ^11.0 || ^12.0",
+                "illuminate/database": "^10.0 || ^11.0 || ^12.0",
+                "illuminate/support": "^10.0 || ^11.0 || ^12.0",
                 "laravel/prompts": ">=0.1",
                 "php": "^8.2",
                 "symfony/console": "^6.0 || ^7.0"
@@ -3882,8 +3882,8 @@
             "require-dev": {
                 "mockery/mockery": "^1.3.1",
                 "nesbot/carbon": "^2.62.1 || ^3.0",
-                "orchestra/testbench": "^8.0 || ^9.0",
-                "phpunit/phpunit": "^10.0",
+                "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0",
                 "ramsey/uuid": "^4.0"
             },
             "suggest": {
@@ -3938,15 +3938,11 @@
                     "type": "boosty"
                 },
                 {
-                    "url": "https://www.donationalerts.com/r/dragon_code",
-                    "type": "donationalerts"
-                },
-                {
                     "url": "https://yoomoney.ru/to/410012608840929",
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-10-03T12:59:20+00:00"
+            "time": "2025-02-24T15:39:03+00:00"
         },
         {
             "name": "dragon-code/laravel-http-logger",
@@ -4252,7 +4248,6 @@
                     "type": "yoomoney"
                 }
             ],
-            "abandoned": "spatie/laravel-data",
             "time": "2024-03-06T17:31:20+00:00"
         },
         {
