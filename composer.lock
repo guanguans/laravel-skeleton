@@ -8253,16 +8253,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.2",
+            "version": "v11.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21"
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/99d1573698abc42222f04d25fcd5b213d0eedf21",
-                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
+                "reference": "e9a33da34815ac1ed46c7e4c477a775f4592f0a7",
                 "shasum": ""
             },
             "require": {
@@ -8464,7 +8464,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-19T21:53:48+00:00"
+            "time": "2025-02-24T13:08:54+00:00"
         },
         {
             "name": "laravel/horizon",
@@ -33250,22 +33250,22 @@
         },
         {
             "name": "thedoctor0/laravel-factory-generator",
-            "version": "1.4.3",
+            "version": "1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDoctor0/laravel-factory-generator.git",
-                "reference": "fed9260ab27522e3630bc379a14786b1880fa76d"
+                "reference": "adfff0e5444d3113e9c7b376fa32d3e589cc0ec9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDoctor0/laravel-factory-generator/zipball/fed9260ab27522e3630bc379a14786b1880fa76d",
-                "reference": "fed9260ab27522e3630bc379a14786b1880fa76d",
+                "url": "https://api.github.com/repos/TheDoctor0/laravel-factory-generator/zipball/adfff0e5444d3113e9c7b376fa32d3e589cc0ec9",
+                "reference": "adfff0e5444d3113e9c7b376fa32d3e589cc0ec9",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^10.0|^11.0",
-                "illuminate/filesystem": "^10.0|^11.0",
-                "illuminate/support": "^10.0|^11.0",
+                "illuminate/console": "^10.0|^11.0|^12.0",
+                "illuminate/filesystem": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
                 "php": "^8.1"
             },
             "type": "library",
@@ -33295,7 +33295,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TheDoctor0/laravel-factory-generator/issues",
-                "source": "https://github.com/TheDoctor0/laravel-factory-generator/tree/1.4.3"
+                "source": "https://github.com/TheDoctor0/laravel-factory-generator/tree/1.4.4"
             },
             "funding": [
                 {
@@ -33307,7 +33307,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-14T06:51:07+00:00"
+            "time": "2025-02-22T18:52:08+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -33685,9 +33685,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33699,6 +33699,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
