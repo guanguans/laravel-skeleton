@@ -25246,30 +25246,31 @@
         },
         {
             "name": "kitloong/laravel-migrations-generator",
-            "version": "v7.0.7",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kitloong/laravel-migrations-generator.git",
-                "reference": "c0ec3ec0beb18f5a1f516b6cf214879133bcd37e"
+                "reference": "542c416b2c8742c4d1940dc09b4d42365f2e0fdf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/c0ec3ec0beb18f5a1f516b6cf214879133bcd37e",
-                "reference": "c0ec3ec0beb18f5a1f516b6cf214879133bcd37e",
+                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/542c416b2c8742c4d1940dc09b4d42365f2e0fdf",
+                "reference": "542c416b2c8742c4d1940dc09b4d42365f2e0fdf",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo": "*",
-                "illuminate/support": "^10.43|^11.0",
-                "php": "^8.1"
+                "illuminate/support": "^11.0|^12.0",
+                "php": "^8.2"
             },
             "require-dev": {
-                "barryvdh/laravel-ide-helper": "^2.0|^3.0",
+                "barryvdh/laravel-ide-helper": "^3.0",
                 "friendsofphp/php-cs-fixer": "^3.1",
-                "larastan/larastan": "^1.0|^2.0",
+                "larastan/larastan": "^2.0|^3.0",
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^8.0|^9.0",
+                "orchestra/testbench": "^9.0|^10.0",
                 "phpmd/phpmd": "^2.10",
+                "phpstan/phpstan-mockery": "^2.0",
                 "slevomat/coding-standard": "^8.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -25307,7 +25308,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kitloong/laravel-migrations-generator/issues",
-                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.0.7"
+                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.1.0"
             },
             "funding": [
                 {
@@ -25319,7 +25320,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-09T13:04:06+00:00"
+            "time": "2025-02-23T08:39:37+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
