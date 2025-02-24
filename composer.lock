@@ -27698,16 +27698,16 @@
         },
         {
             "name": "msamgan/laravel-env-keys-checker",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msamgan/laravel-env-keys-checker.git",
-                "reference": "2ba7fa8c5918048989303311de0354f910f283ed"
+                "reference": "13fa762c45c0bc08ec66c068a6bbf01a19c21291"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msamgan/laravel-env-keys-checker/zipball/2ba7fa8c5918048989303311de0354f910f283ed",
-                "reference": "2ba7fa8c5918048989303311de0354f910f283ed",
+                "url": "https://api.github.com/repos/msamgan/laravel-env-keys-checker/zipball/13fa762c45c0bc08ec66c068a6bbf01a19c21291",
+                "reference": "13fa762c45c0bc08ec66c068a6bbf01a19c21291",
                 "shasum": ""
             },
             "require": {
@@ -27764,7 +27764,7 @@
             ],
             "support": {
                 "issues": "https://github.com/msamgan/laravel-env-keys-checker/issues",
-                "source": "https://github.com/msamgan/laravel-env-keys-checker/tree/v1.5.0"
+                "source": "https://github.com/msamgan/laravel-env-keys-checker/tree/v1.6.0"
             },
             "funding": [
                 {
@@ -27772,7 +27772,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-18T22:10:19+00:00"
+            "time": "2025-02-24T16:09:16+00:00"
         },
         {
             "name": "muhammadhuzaifa/telescope-guzzle-watcher",
