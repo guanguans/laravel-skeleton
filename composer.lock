@@ -4033,27 +4033,26 @@
         },
         {
             "name": "dragon-code/laravel-route-names",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/laravel-route-names.git",
-                "reference": "b505794381c29957163bc74bca8de1e76300ac5f"
+                "reference": "d488062abcbbc6603f55ca76047e6b4c078cd875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-route-names/zipball/b505794381c29957163bc74bca8de1e76300ac5f",
-                "reference": "b505794381c29957163bc74bca8de1e76300ac5f",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-route-names/zipball/d488062abcbbc6603f55ca76047e6b4c078cd875",
+                "reference": "d488062abcbbc6603f55ca76047e6b4c078cd875",
                 "shasum": ""
             },
             "require": {
                 "fig/http-message-util": "^1.1",
-                "illuminate/routing": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/routing": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "dragon-code/extended-routes": "^3.2 || ^4.0",
-                "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "phpunit/phpunit": "^9.6 || ^10.0"
+                "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
+                "phpunit/phpunit": "^9.6 || ^10.0 || ^11.0 || ^12.0"
             },
             "type": "library",
             "extra": {
@@ -4098,15 +4097,11 @@
                     "type": "boosty"
                 },
                 {
-                    "url": "https://www.donationalerts.com/r/dragon_code",
-                    "type": "donationalerts"
-                },
-                {
                     "url": "https://yoomoney.ru/to/410012608840929",
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-03-13T07:58:11+00:00"
+            "time": "2025-02-24T17:35:38+00:00"
         },
         {
             "name": "dragon-code/laravel-support",
