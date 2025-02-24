@@ -4118,23 +4118,23 @@
         },
         {
             "name": "dragon-code/laravel-support",
-            "version": "3.7.0",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/laravel-support.git",
-                "reference": "06484f1002c0b776c39764015ced4951067ec2f6"
+                "reference": "720c14be9c26f6a034d22a57ff7d43c2c0b483e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-support/zipball/06484f1002c0b776c39764015ced4951067ec2f6",
-                "reference": "06484f1002c0b776c39764015ced4951067ec2f6",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-support/zipball/720c14be9c26f6a034d22a57ff7d43c2c0b483e2",
+                "reference": "720c14be9c26f6a034d22a57ff7d43c2c0b483e2",
                 "shasum": ""
             },
             "require": {
-                "illuminate/container": ">=6.0 <12.0",
-                "illuminate/database": ">=6.0 <12.0",
-                "illuminate/http": ">=6.0 <12.0",
-                "illuminate/support": ">=6.0 <12.0",
+                "illuminate/container": ">=6.0 <13.0",
+                "illuminate/database": ">=6.0 <13.0",
+                "illuminate/http": ">=6.0 <13.0",
+                "illuminate/support": ">=6.0 <13.0",
                 "php": "^7.2 || ^8.0",
                 "ramsey/uuid": "^3.7 || ^4.0",
                 "symfony/var-dumper": "^4.0 || ^5.0 || ^6.0 || ^7.0"
@@ -4143,7 +4143,7 @@
                 "andrey-helldar/laravel-support": "*"
             },
             "require-dev": {
-                "laravel/framework": ">=6.0 <12.0"
+                "laravel/framework": ">=6.0 <13.0"
             },
             "suggest": {
                 "symfony/thanks": "Give thanks (in the form of a GitHub) to your fellow PHP package maintainers"
@@ -4188,15 +4188,11 @@
                     "type": "boosty"
                 },
                 {
-                    "url": "https://www.donationalerts.com/r/dragon_code",
-                    "type": "donationalerts"
-                },
-                {
                     "url": "https://yoomoney.ru/to/410012608840929",
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-03-12T21:33:28+00:00"
+            "time": "2025-02-23T23:20:10+00:00"
         },
         {
             "name": "dragon-code/simple-dto",
