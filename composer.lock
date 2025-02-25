@@ -32979,16 +32979,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v4.3.1",
+            "version": "v4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "50cedf9c10df5fd61b804ab3e0dc5ebe7420df3c"
+                "reference": "d146959a0f44ab84bcd213e5c85d5e9640432efb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/50cedf9c10df5fd61b804ab3e0dc5ebe7420df3c",
-                "reference": "50cedf9c10df5fd61b804ab3e0dc5ebe7420df3c",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/d146959a0f44ab84bcd213e5c85d5e9640432efb",
+                "reference": "d146959a0f44ab84bcd213e5c85d5e9640432efb",
                 "shasum": ""
             },
             "require": {
@@ -33001,7 +33001,7 @@
                 "php-parallel-lint/php-console-highlighter": "^1.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
-                "phpunit/phpunit": "^8.5.14 || ^10.1 || ^11.0",
+                "phpunit/phpunit": "^8.5.14 || ^10.1 || ^11.0 || ^12.0",
                 "spaze/coding-standard": "^1.7"
             },
             "type": "phpstan-extension",
@@ -33034,7 +33034,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.3.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.4.0"
             },
             "funding": [
                 {
@@ -33042,7 +33042,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-12T01:51:55+00:00"
+            "time": "2025-02-22T03:49:57+00:00"
         },
         {
             "name": "symfony/filesystem",
