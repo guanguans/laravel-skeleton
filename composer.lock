@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf5e1d0ab8641ca6f5f598ddf1658c50",
+    "content-hash": "0aaade02a0bbf7e249797ab0949ec5dd",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -1268,6 +1268,81 @@
                 "source": "https://github.com/arifhp86/laravel-clear-expired-cache-file/tree/v1.0.4"
             },
             "time": "2025-01-26T17:31:29+00:00"
+        },
+        {
+            "name": "ashallendesign/laravel-config-validator",
+            "version": "v2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ash-jc-allen/laravel-config-validator.git",
+                "reference": "8704ddcab0131df44b877dfba19cb73affa95462"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ash-jc-allen/laravel-config-validator/zipball/8704ddcab0131df44b877dfba19cb73affa95462",
+                "reference": "8704ddcab0131df44b877dfba19cb73affa95462",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^10.0|^11.0|^12.0",
+                "illuminate/container": "^10.0|^11.0|^12.0",
+                "illuminate/validation": "^10.0|^11.0|^12.0",
+                "illuminate/view": "^10.0|^11.0|^12.0",
+                "nunomaduro/termwind": "^1.6|^2.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "larastan/larastan": "^1.0|^2.0|^3.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.0|^10.5|^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "ConfigValidator": "AshAllenDesign\\ConfigValidator\\Facades\\ConfigValidator"
+                    },
+                    "providers": [
+                        "AshAllenDesign\\ConfigValidator\\Providers\\ConfigValidatorProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AshAllenDesign\\ConfigValidator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ash Allen",
+                    "email": "mail@ashallendesign.co.uk"
+                }
+            ],
+            "description": "A package for validating your Laravel app's config.",
+            "homepage": "https://github.com/ash-jc-allen/laravel-config-validator",
+            "keywords": [
+                "ashallendesign",
+                "config",
+                "laravel",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/ash-jc-allen/laravel-config-validator/issues",
+                "source": "https://github.com/ash-jc-allen/laravel-config-validator/tree/v2.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ash-jc-allen",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-24T20:37:20+00:00"
         },
         {
             "name": "astrotomic/laravel-translatable",
@@ -2839,6 +2914,128 @@
             "time": "2024-04-12T12:12:48+00:00"
         },
         {
+            "name": "dcblogdev/laravel-db-sync",
+            "version": "v1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dcblogdev/laravel-db-sync.git",
+                "reference": "a8b5138b041f13e844d45576a941ef20f3df1bd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dcblogdev/laravel-db-sync/zipball/a8b5138b041f13e844d45576a941ef20f3df1bd5",
+                "reference": "a8b5138b041f13e844d45576a941ef20f3df1bd5",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.9",
+                "orchestra/testbench": "^5.0|^6.23|^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.21|^2.0",
+                "pestphp/pest-plugin-laravel": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dcblogdev\\DbSync\\DbSyncServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dcblogdev\\DbSync\\": "src/",
+                    "Dcblogdev\\DbSync\\Tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "David Carr",
+                    "email": "dave@dcblog.dev"
+                }
+            ],
+            "description": "Sync database down.",
+            "support": {
+                "issues": "https://github.com/dcblogdev/laravel-db-sync/issues",
+                "source": "https://github.com/dcblogdev/laravel-db-sync/tree/v1.1.7"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/dcblogdev",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-08-10T18:02:58+00:00"
+        },
+        {
+            "name": "dcblogdev/laravel-sent-emails",
+            "version": "v2.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dcblogdev/laravel-sent-emails.git",
+                "reference": "223e6bd1c3ce58a2e9cd281eedf8aed3ed3dfa61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dcblogdev/laravel-sent-emails/zipball/223e6bd1c3ce58a2e9cd281eedf8aed3ed3dfa61",
+                "reference": "223e6bd1c3ce58a2e9cd281eedf8aed3ed3dfa61",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^3.8|^4.2",
+                "ext-zlib": "*",
+                "illuminate/support": "9.x|10.x|11.x|^12.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.15",
+                "orchestra/testbench": "^8.22|^10.0",
+                "pestphp/pest": "^2.0|^3.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dcblogdev\\LaravelSentEmails\\SentEmailsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dcblogdev\\LaravelSentEmails\\": "src",
+                    "Dcblogdev\\LaravelSentEmails\\Tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Carr",
+                    "email": "dave@dcblog.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Store outgoing emails in Laravel",
+            "homepage": "https://github.com/dcblogdev/laravel-sent-emails",
+            "keywords": [
+                "dcblogdev",
+                "laravel",
+                "sent-emails"
+            ],
+            "support": {
+                "issues": "https://github.com/dcblogdev/laravel-sent-emails/issues",
+                "source": "https://github.com/dcblogdev/laravel-sent-emails/tree/v2.0.8"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/dcblogdev",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-24T22:11:03+00:00"
+        },
+        {
             "name": "dflydev/dot-access-data",
             "version": "v3.0.3",
             "source": {
@@ -3847,6 +4044,87 @@
             ],
             "abandoned": true,
             "time": "2024-03-15T00:21:02+00:00"
+        },
+        {
+            "name": "dragon-code/laravel-data-dumper",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheDragonCode/laravel-data-dumper.git",
+                "reference": "7f78f6fbb8d758b73224897f50232f9b8bfdc991"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-data-dumper/zipball/7f78f6fbb8d758b73224897f50232f9b8bfdc991",
+                "reference": "7f78f6fbb8d758b73224897f50232f9b8bfdc991",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2.2",
+                "dragon-code/support": "^6.13",
+                "illuminate/config": "^10.0 || ^11.0 || ^12.0",
+                "illuminate/database": "^10.0 || ^11.0 || ^12.0",
+                "illuminate/support": "^10.0 || ^11.0 || ^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "ext-pdo": "*",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
+                "pestphp/pest": "^2.34 || ^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DragonCode\\LaravelDataDumper\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DragonCode\\LaravelDataDumper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Helldar",
+                    "email": "helldar@dragon-code.pro",
+                    "homepage": "https://dragon-code.pro"
+                }
+            ],
+            "description": "Adding data from certain tables when executing the `php artisan schema:dump` console command",
+            "keywords": [
+                "andrey-helldar",
+                "database",
+                "dragon-code",
+                "dump",
+                "dumper",
+                "laravel",
+                "migration",
+                "migrations",
+                "schema",
+                "squash"
+            ],
+            "support": {
+                "issues": "https://github.com/TheDragonCode/laravel-data-dumper/issues",
+                "source": "https://github.com/TheDragonCode/laravel-data-dumper"
+            },
+            "funding": [
+                {
+                    "url": "https://boosty.to/dragon-code",
+                    "type": "boosty"
+                },
+                {
+                    "url": "https://yoomoney.ru/to/410012608840929",
+                    "type": "yoomoney"
+                }
+            ],
+            "time": "2025-02-24T22:24:01+00:00"
         },
         {
             "name": "dragon-code/laravel-deploy-operations",
@@ -5238,34 +5516,33 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "1.1.0",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "db1b7150d4da2a5c26e99d2a34877d92001d31e9"
+                "reference": "0a116ccece4369ba27f0c6fa7a0cf4648e11d2ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/db1b7150d4da2a5c26e99d2a34877d92001d31e9",
-                "reference": "db1b7150d4da2a5c26e99d2a34877d92001d31e9",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/0a116ccece4369ba27f0c6fa7a0cf4648e11d2ef",
+                "reference": "0a116ccece4369ba27f0c6fa7a0cf4648e11d2ef",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laravel/framework": "^8.83 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "laravel/framework": "^8.83 || ^9.0 || ^10.0 || ^11.0",
                 "php": ">=7.4",
                 "spatie/laravel-package-tools": "^1.12"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "driftingly/rector-laravel": "^2.0",
-                "ergebnis/composer-normalize": "^2.45",
-                "ergebnis/license": "^2.6",
+                "driftingly/rector-laravel": "^1.2",
+                "ergebnis/composer-normalize": "^2.44",
+                "ergebnis/license": "^2.5",
                 "ergebnis/php-cs-fixer-config": "dev-main",
-                "ergebnis/rector-rules": "^1.3",
+                "ergebnis/rector-rules": "^1.1",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
-                "guzzlehttp/psr7": "^2.7",
                 "hyperf/composer-plugin": "^1.0",
                 "icanhazstring/composer-unused": "^0.8",
                 "laravel-lang/http-statuses": "^3.2",
@@ -5276,12 +5553,12 @@
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^2.1",
-                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan": "^1.12",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
                 "povils/phpmnd": "^3.5",
-                "rector/rector": "^2.0",
+                "rector/rector": "^1.2",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-                "spaze/phpstan-disallowed-calls": "^4.3"
+                "spaze/phpstan-disallowed-calls": "^3.5"
             },
             "suggest": {
                 "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
@@ -5323,10 +5600,7 @@
                 ],
                 "psr-4": {
                     "Guanguans\\LaravelApiResponse\\": "src"
-                },
-                "classmap": [
-                    "src/Support/Traits/Dumpable.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -5364,7 +5638,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-02-21T10:28:30+00:00"
+            "time": "2024-11-04T10:26:07+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
@@ -22118,6 +22392,60 @@
             "time": "2024-11-17T19:50:00+00:00"
         },
         {
+            "name": "aphisitworachorch/kacher",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aphisitworachorch/kacher.git",
+                "reference": "7f1389841cfa0f82b452d3b3bae9e29ba2531d95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aphisitworachorch/kacher/zipball/7f1389841cfa0f82b452d3b3bae9e29ba2531d95",
+                "reference": "7f1389841cfa0f82b452d3b3bae9e29ba2531d95",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.37|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0|^10.0"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Aphisitworachorch\\Kacher\\KacherServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aphisitworachorch\\Kacher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arsanandha Aphisitworachorch",
+                    "email": "arsanandha.ap@gmail.com"
+                }
+            ],
+            "description": "Kacher is Laravel DB to DBML (dbdiagram.io/dbdocs.io)",
+            "keywords": [
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/aphisitworachorch/kacher/issues",
+                "source": "https://github.com/aphisitworachorch/kacher/tree/v1.3"
+            },
+            "time": "2025-02-25T02:35:43+00:00"
+        },
+        {
             "name": "archtechx/enums",
             "version": "v1.1.1",
             "source": {
@@ -25165,6 +25493,84 @@
             "time": "2024-12-07T01:53:54+00:00"
         },
         {
+            "name": "josezenem/laravel-make-migration-pivot",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/josezenem/laravel-make-migration-pivot.git",
+                "reference": "eea6f6d9e59f115658aa4177608b548a9798abf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/josezenem/laravel-make-migration-pivot/zipball/eea6f6d9e59f115658aa4177608b548a9798abf5",
+                "reference": "eea6f6d9e59f115658aa4177608b548a9798abf5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0|^10.0|^11.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^6.0",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.21|^2.34",
+                "pestphp/pest-plugin-laravel": "^1.1|^2.3",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "LaravelMakeMigrationPivot": "Josezenem\\LaravelMakeMigrationPivot\\Facades\\LaravelMakeMigrationPivot"
+                    },
+                    "providers": [
+                        "Josezenem\\LaravelMakeMigrationPivot\\LaravelMakeMigrationPivotServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Josezenem\\LaravelMakeMigrationPivot\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jose Jimenez",
+                    "email": "jose@jimenez.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Make Laravel pivot tables using the new Laravel 9 closure migrations.",
+            "homepage": "https://github.com/josezenem/laravel-make-migration-pivot",
+            "keywords": [
+                "josezenem",
+                "laravel",
+                "laravel migrations",
+                "laravel-make-pivot",
+                "migration pivot"
+            ],
+            "support": {
+                "issues": "https://github.com/josezenem/laravel-make-migration-pivot/issues",
+                "source": "https://github.com/josezenem/laravel-make-migration-pivot/tree/1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/josezenem",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-12T21:06:26+00:00"
+        },
+        {
             "name": "justinrainbow/json-schema",
             "version": "6.1.0",
             "source": {
@@ -27684,6 +28090,59 @@
             "time": "2024-04-25T18:49:07+00:00"
         },
         {
+            "name": "mpociot/reflection-docblock",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpociot/reflection-docblock.git",
+                "reference": "c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpociot/reflection-docblock/zipball/c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587",
+                "reference": "c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mpociot": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/mpociot/reflection-docblock/issues",
+                "source": "https://github.com/mpociot/reflection-docblock/tree/master"
+            },
+            "time": "2016-06-20T20:53:12+00:00"
+        },
+        {
             "name": "msamgan/laravel-env-keys-checker",
             "version": "v1.6.0",
             "source": {
@@ -28127,6 +28586,75 @@
                 "source": "https://github.com/orangehill/iseed/tree/v3.1.0"
             },
             "time": "2025-02-13T10:49:30+00:00"
+        },
+        {
+            "name": "ovac/idoc",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ovac/idoc.git",
+                "reference": "9c90f8b0f2a703de8f39ec9e728ef298d06fe72b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ovac/idoc/zipball/9c90f8b0f2a703de8f39ec9e728ef298d06fe72b",
+                "reference": "9c90f8b0f2a703de8f39ec9e728ef298d06fe72b",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.12",
+                "illuminate/console": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/routing": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/support": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "mpociot/reflection-docblock": "^1.0.1",
+                "php": ">=7.0.0",
+                "ramsey/uuid": "^3.8 || ^4.0"
+            },
+            "require-dev": {
+                "dingo/api": "2.0.0-alpha1",
+                "league/fractal": "^0.17.0 || ^0.20",
+                "mockery/mockery": "^1.2.0",
+                "orchestra/testbench": "3.5.* || 3.6.* || 3.7.* || 5.1.* || ^6.0 || ^9.0",
+                "phpunit/phpunit": "^6.0.0 || ^7.4.0 || ^9.0 || ^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OVAC\\IDoc\\IDocServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "OVAC\\IDoc\\": "src/idoc"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Victor Ariama (ovac4u)",
+                    "email": "iamovac@gmail.com"
+                }
+            ],
+            "description": "Generate beautiful API documentation from your Laravel application",
+            "homepage": "http://github.com/ovac/idoc",
+            "keywords": [
+                "api",
+                "documentation",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/ovac/idoc/issues",
+                "source": "https://github.com/ovac/idoc/tree/v1.7.0"
+            },
+            "time": "2024-07-24T20:33:41+00:00"
         },
         {
             "name": "pestphp/pest",
@@ -33045,6 +33573,83 @@
             "time": "2025-02-22T03:49:57+00:00"
         },
         {
+            "name": "sti3bas/laravel-scout-array-driver",
+            "version": "v4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sti3bas/laravel-scout-array-driver.git",
+                "reference": "45066b393369ce02f7e515c40e676705463cfb9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sti3bas/laravel-scout-array-driver/zipball/45066b393369ce02f7e515c40e676705463cfb9a",
+                "reference": "45066b393369ce02f7e515c40e676705463cfb9a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/contracts": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/database": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/http": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/pagination": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/queue": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "laravel/scout": "^10.0",
+                "php": "^8.0 || ^8.1 || ^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "mockery/mockery": "^1.5.1",
+                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0 || ^10.0",
+                "phpunit/phpunit": "^9.0 || ^10.5 || ^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sti3bas\\ScoutArray\\ScoutArrayEngineServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "11.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sti3bas\\ScoutArray\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Laurynas Geigalas",
+                    "email": "sti3bas@gmail.com"
+                }
+            ],
+            "description": "Array driver for Laravel Scout",
+            "keywords": [
+                "array",
+                "driver",
+                "laravel",
+                "scout",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/Sti3bas/laravel-scout-array-driver/issues",
+                "source": "https://github.com/Sti3bas/laravel-scout-array-driver/tree/v4.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sti3bas",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-24T20:28:31+00:00"
+        },
+        {
             "name": "symfony/filesystem",
             "version": "v7.2.0",
             "source": {
@@ -33660,9 +34265,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -33674,6 +34279,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

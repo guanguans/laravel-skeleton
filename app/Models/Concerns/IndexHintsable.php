@@ -123,9 +123,8 @@ trait IndexHintsable
         foreach (Arr::wrap($indexes) as $index) {
             $index = strtolower($index);
 
-            Schema::table(self::getTable(), fn (Blueprint $table) =>
-                /** @noinspection PhpVoidFuqnctionResultUsedInspection */
-                $this->fillIndexes($table, $index, $type));
+            /** @noinspection PhpVoidFuqnctionResultUsedInspection */
+            Schema::table(self::getTable(), fn (Blueprint $table) => $this->fillIndexes($table, $index, $type));
         }
 
         return ! empty($this->forceIndexes) || ! empty($this->ignoreIndexes) || ! empty($this->useIndexes);

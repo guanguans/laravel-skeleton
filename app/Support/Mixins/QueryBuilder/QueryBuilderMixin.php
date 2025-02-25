@@ -56,9 +56,8 @@ class QueryBuilderMixin
 
     public function firstToArray(): callable
     {
-        return fn ($columns = ['*']): ?array =>
-            // return optional($this->first($columns))->toArray();
-            ($model = $this->first($columns)) ? $model->toArray() : (array) $model;
+        // return optional($this->first($columns))->toArray();
+        return fn ($columns = ['*']): ?array => ($model = $this->first($columns)) ? $model->toArray() : (array) $model;
     }
 
     /**

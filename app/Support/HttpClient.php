@@ -33,8 +33,8 @@ class HttpClient
     {
         if (! \extension_loaded('curl')) {
             throw new \RuntimeException(
-                "Please, install curl extension.\n".
-                'https://goo.gl/yTAeZh'
+                "Please, install curl extension.\n"
+                .'https://goo.gl/yTAeZh'
             );
         }
     }

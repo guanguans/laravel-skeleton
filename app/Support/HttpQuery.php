@@ -798,9 +798,9 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
             }
             if ('&' !== $this->separator) {
                 throw new \Exception(
-                    'Converting a query string to array with custom separator isn\'t implemented, because PHP\'s '.
-                    'parse_str() function doesn\'t have that functionality. If you\'d need this, reach out to crwlr '.
-                    'on github or twitter.'
+                    'Converting a query string to array with custom separator isn\'t implemented, because PHP\'s '
+                    .'parse_str() function doesn\'t have that functionality. If you\'d need this, reach out to crwlr '
+                    .'on github or twitter.'
                 );
             }
 
