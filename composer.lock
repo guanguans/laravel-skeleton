@@ -23875,16 +23875,16 @@
         },
         {
             "name": "dragon-code/pretty-routes",
-            "version": "3.5.0",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/pretty-routes.git",
-                "reference": "8fb3d18640720968403b0a8b79e5e4a74f9cd8d9"
+                "reference": "1cd34077216d95b91292e55a855f57230edd8862"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/pretty-routes/zipball/8fb3d18640720968403b0a8b79e5e4a74f9cd8d9",
-                "reference": "8fb3d18640720968403b0a8b79e5e4a74f9cd8d9",
+                "url": "https://api.github.com/repos/TheDragonCode/pretty-routes/zipball/1cd34077216d95b91292e55a855f57230edd8862",
+                "reference": "1cd34077216d95b91292e55a855f57230edd8862",
                 "shasum": ""
             },
             "require": {
@@ -23893,11 +23893,11 @@
                 "dragon-code/laravel-support": "^3.3",
                 "dragon-code/support": "^5.6 || ^6.1",
                 "ext-json": "*",
-                "illuminate/contracts": ">=6.0 <12.0",
-                "illuminate/http": ">=6.0 <12.0",
-                "illuminate/routing": ">=6.0 <12.0",
-                "illuminate/support": ">=6.0 <12.0",
-                "illuminate/view": ">=6.0 <12.0",
+                "illuminate/contracts": ">=6.0 <13.0",
+                "illuminate/http": ">=6.0 <13.0",
+                "illuminate/routing": ">=6.0 <13.0",
+                "illuminate/support": ">=6.0 <13.0",
+                "illuminate/view": ">=6.0 <13.0",
                 "php": "^7.3 || ^8.0"
             },
             "conflict": {
@@ -23905,8 +23905,8 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": ">=4.0 <10.0",
-                "phpunit/phpunit": "^8.0 || ^9.6 || ^10.0"
+                "orchestra/testbench": ">=4.0 <11.0",
+                "phpunit/phpunit": "^8.0 || ^9.6 || ^10.0 || ^11.0 || ^12.0"
             },
             "type": "library",
             "extra": {
@@ -23966,15 +23966,11 @@
                     "type": "boosty"
                 },
                 {
-                    "url": "https://www.donationalerts.com/r/dragon_code",
-                    "type": "donationalerts"
-                },
-                {
                     "url": "https://yoomoney.ru/to/410012608840929",
                     "type": "yoomoney"
                 }
             ],
-            "time": "2024-12-11T18:10:03+00:00"
+            "time": "2025-02-25T12:23:18+00:00"
         },
         {
             "name": "driftingly/rector-laravel",
@@ -34260,9 +34256,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -34274,6 +34270,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
