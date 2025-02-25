@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e835e990be353a5252d2d0350cd8184",
+    "content-hash": "7672a88d790cf61c564cbcec8875838b",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -17252,27 +17252,27 @@
         },
         {
             "name": "square1/laravel-idempotency",
-            "version": "2.0.0",
+            "version": "12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/square1-io/laravel-idempotency.git",
-                "reference": "8cb514ba0cfd2d65a7c4f119331a681b542025e4"
+                "reference": "feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/8cb514ba0cfd2d65a7c4f119331a681b542025e4",
-                "reference": "8cb514ba0cfd2d65a7c4f119331a681b542025e4",
+                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844",
+                "reference": "feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^9.0|^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
                 "php": "^8.2"
             },
             "require-dev": {
-                "laravel/framework": "^11.0",
+                "laravel/framework": "^11.0|^12.0",
                 "laravel/pint": "^1.14",
-                "orchestra/testbench": "^9.0",
-                "phpunit/phpunit": "^11.0"
+                "orchestra/testbench": "^9.0|^10.0",
+                "phpunit/phpunit": "^10.0|^11.0"
             },
             "type": "library",
             "extra": {
@@ -17307,9 +17307,9 @@
             ],
             "support": {
                 "issues": "https://github.com/square1-io/laravel-idempotency/issues",
-                "source": "https://github.com/square1-io/laravel-idempotency/tree/2.0.0"
+                "source": "https://github.com/square1-io/laravel-idempotency/tree/12.0.0"
             },
-            "time": "2024-03-21T09:49:16+00:00"
+            "time": "2025-02-24T16:44:24+00:00"
         },
         {
             "name": "staudenmeir/eloquent-has-many-deep-contracts",

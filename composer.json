@@ -136,7 +136,7 @@
         "spatie/php-structure-discoverer": "^2.3",
         "spatie/query-string": "^1.0",
         "sqids/sqids": "^0.5",
-        "square1/laravel-idempotency": "^2.0",
+        "square1/laravel-idempotency": "^12.0",
         "staudenmeir/laravel-adjacency-list": "^1.23",
         "stevebauman/location": "^7.5",
         "stillat/blade-directives": "^1.2",
