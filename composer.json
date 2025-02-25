@@ -13,7 +13,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
-        "ackintosh/ganesha": "^3.2",
+        "ackintosh/ganesha": "^4.0",
         "aldemeery/sieve": "^3.0",
         "alexandre-daubois/monolog-processor-collection": "^1.3",
         "anlutro/l4-settings": "^1.4",
