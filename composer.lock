@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "767f70afe93a09fea89b66a065c6c692",
+    "content-hash": "5946ee3fc2a4fbcf2dd5afd5cdbc19cc",
     "packages": [
         {
             "name": "ackintosh/ganesha",
@@ -6594,39 +6594,39 @@
         },
         {
             "name": "hammerstone/fast-paginate",
-            "version": "v1.1.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hammerstonedev/fast-paginate.git",
-                "reference": "6a1fb26c860d04176d00761ae8a93f04da14c81c"
+                "url": "https://github.com/aarondfrancis/fast-paginate.git",
+                "reference": "a13cc25477c7327acb711767b18198722d6e2594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hammerstonedev/fast-paginate/zipball/6a1fb26c860d04176d00761ae8a93f04da14c81c",
-                "reference": "6a1fb26c860d04176d00761ae8a93f04da14c81c",
+                "url": "https://api.github.com/repos/aarondfrancis/fast-paginate/zipball/a13cc25477c7327acb711767b18198722d6e2594",
+                "reference": "a13cc25477c7327acb711767b18198722d6e2594",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^8.37|^9.0|^10.0|^11.0",
-                "php": "^7.4|^8.0"
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
             },
             "require-dev": {
                 "laravel/scout": "^9.4|^10.8",
                 "mockery/mockery": "^1.3.3",
-                "orchestra/testbench": "^6|^7|^8.0|^9.0",
-                "phpunit/phpunit": ">=8.5.23|^9"
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": ">=8.5.23|^9|^10"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Hammerstone\\FastPaginate\\FastPaginateProvider"
+                        "AaronFrancis\\FastPaginate\\FastPaginateProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Hammerstone\\FastPaginate\\": "src/"
+                    "AaronFrancis\\FastPaginate\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6636,15 +6636,26 @@
             "authors": [
                 {
                     "name": "Aaron Francis",
-                    "email": "aaron@hammerstone.dev"
+                    "email": "aaron@tryhardstudios.com"
                 }
             ],
             "description": "Fast paginate for Laravel",
             "support": {
-                "issues": "https://github.com/hammerstonedev/fast-paginate/issues",
-                "source": "https://github.com/hammerstonedev/fast-paginate/tree/v1.1.1"
+                "issues": "https://github.com/aarondfrancis/fast-paginate/issues",
+                "source": "https://github.com/aarondfrancis/fast-paginate/tree/v2.0.0"
             },
-            "time": "2024-05-16T15:45:29+00:00"
+            "funding": [
+                {
+                    "url": "https://aaronfrancis.com/backstage",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/aarondfrancis",
+                    "type": "github"
+                }
+            ],
+            "abandoned": "aaronfrancis/fast-paginate",
+            "time": "2025-02-25T18:44:20+00:00"
         },
         {
             "name": "hashids/hashids",

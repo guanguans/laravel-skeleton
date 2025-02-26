@@ -55,7 +55,7 @@
         "guanguans/notify": "^2.14 || ^3.0",
         "guzzlehttp/guzzle": "^7.9",
         "hamidrezaniazi/pecs": "^2.0",
-        "hammerstone/fast-paginate": "^1.1",
+        "hammerstone/fast-paginate": "^2.0",
         "hashids/hashids": "^5.0",
         "haydenpierce/class-finder": "^0.5",
         "huangdijia/laravel-horizon-restart": "^3.0",
