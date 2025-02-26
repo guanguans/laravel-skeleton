@@ -12978,29 +12978,29 @@
         },
         {
             "name": "perryvandermeer/laravel-console-validator",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PerryvanderMeer/laravel-console-validator.git",
-                "reference": "69125aaf5b89ff2f31e3b5592f7a52be43f3fd00"
+                "reference": "70bb51685cbdd2bd945f0c4b8e3cac0adfb8d48a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PerryvanderMeer/laravel-console-validator/zipball/69125aaf5b89ff2f31e3b5592f7a52be43f3fd00",
-                "reference": "69125aaf5b89ff2f31e3b5592f7a52be43f3fd00",
+                "url": "https://api.github.com/repos/PerryvanderMeer/laravel-console-validator/zipball/70bb51685cbdd2bd945f0c4b8e3cac0adfb8d48a",
+                "reference": "70bb51685cbdd2bd945f0c4b8e3cac0adfb8d48a",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^10.0||^11.0",
+                "laravel/framework": "^10.0||^11.0||^12.0",
                 "php": "^8.1"
             },
             "require-dev": {
-                "larastan/larastan": "^2.9.6",
+                "larastan/larastan": "^2.9.6||^3.0.0",
                 "laravel/pint": "^1.16",
-                "orchestra/testbench": "^9.0.0||^8.22.0",
-                "pestphp/pest": "^2.34.7",
-                "pestphp/pest-plugin-laravel": "^2.4",
-                "pestphp/pest-plugin-type-coverage": "^2.8.2"
+                "orchestra/testbench": "^8.22.0||^9.0.0||^10.0.0",
+                "pestphp/pest": "^2.34.7||^3.0.0",
+                "pestphp/pest-plugin-laravel": "^2.4||^3.0.0",
+                "pestphp/pest-plugin-type-coverage": "^2.8.2||^3.0.0"
             },
             "type": "library",
             "extra": {
@@ -13036,7 +13036,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PerryvanderMeer/laravel-console-validator/issues",
-                "source": "https://github.com/PerryvanderMeer/laravel-console-validator/tree/1.1.0"
+                "source": "https://github.com/PerryvanderMeer/laravel-console-validator/tree/1.2.0"
             },
             "funding": [
                 {
@@ -13044,7 +13044,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-07T12:48:12+00:00"
+            "time": "2025-02-26T16:34:43+00:00"
         },
         {
             "name": "phiki/phiki",
