@@ -26436,33 +26436,32 @@
         },
         {
             "name": "laradumps/laradumps",
-            "version": "v3.5.1",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "956917e0a30b04935c3655597012c8d0181a281f"
+                "reference": "2aa47ef6be7becf8583234b82161e2dced689e2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/956917e0a30b04935c3655597012c8d0181a281f",
-                "reference": "956917e0a30b04935c3655597012c8d0181a281f",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/2aa47ef6be7becf8583234b82161e2dced689e2d",
+                "reference": "2aa47ef6be7becf8583234b82161e2dced689e2d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/mail": "^10.0|^11.0",
-                "illuminate/support": "^10.0|^11.0",
-                "laradumps/laradumps-core": "^2.4",
+                "illuminate/mail": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "laradumps/laradumps-core": ">2.4 | <3.0",
                 "nunomaduro/termwind": "^1.15.1|^2.0.1",
                 "php": "^8.1"
             },
             "require-dev": {
-                "larastan/larastan": "^2.9.8|^3.0",
-                "laravel/framework": "^10.0|^11.21",
+                "laravel/framework": "^12.0",
                 "laravel/pint": "^1.17.2",
                 "livewire/livewire": "^3.5.6",
                 "mockery/mockery": "^1.6.12",
-                "orchestra/testbench-core": "^8.0|^9.4",
-                "pestphp/pest": "^2.35.1",
+                "orchestra/testbench-core": "10.0",
+                "pestphp/pest": "^2.35.1|^3.0",
                 "symfony/var-dumper": "^6.4.0|^7.1.3"
             },
             "type": "library",
@@ -26496,7 +26495,7 @@
             "homepage": "https://github.com/laradumps/laradumps",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v3.5.1"
+                "source": "https://github.com/laradumps/laradumps/tree/v3.5.2"
             },
             "funding": [
                 {
@@ -26504,7 +26503,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-16T16:46:35+00:00"
+            "time": "2025-02-26T12:00:14+00:00"
         },
         {
             "name": "laradumps/laradumps-core",
