@@ -4,8 +4,127 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5946ee3fc2a4fbcf2dd5afd5cdbc19cc",
+    "content-hash": "8d25452b5f37be890ed35c9d1db57ba2",
     "packages": [
+        {
+            "name": "aaronfrancis/fast-paginate",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aarondfrancis/fast-paginate.git",
+                "reference": "a13cc25477c7327acb711767b18198722d6e2594"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aarondfrancis/fast-paginate/zipball/a13cc25477c7327acb711767b18198722d6e2594",
+                "reference": "a13cc25477c7327acb711767b18198722d6e2594",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/scout": "^9.4|^10.8",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": ">=8.5.23|^9|^10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AaronFrancis\\FastPaginate\\FastPaginateProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AaronFrancis\\FastPaginate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Francis",
+                    "email": "aaron@tryhardstudios.com"
+                }
+            ],
+            "description": "Fast paginate for Laravel",
+            "support": {
+                "issues": "https://github.com/aarondfrancis/fast-paginate/issues",
+                "source": "https://github.com/aarondfrancis/fast-paginate/tree/v2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://aaronfrancis.com/backstage",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/aarondfrancis",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-25T18:44:20+00:00"
+        },
+        {
+            "name": "aaronfrancis/flaky",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aarondfrancis/flaky.git",
+                "reference": "4f7dee2608eae70d03e67fdb79fc6f6e8bc6d485"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aarondfrancis/flaky/zipball/4f7dee2608eae70d03e67fdb79fc6f6e8bc6d485",
+                "reference": "4f7dee2608eae70d03e67fdb79fc6f6e8bc6d485",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "^10|^11.0|^12.0",
+                "illuminate/console": "^10|^11.|^12.00",
+                "illuminate/support": "^10|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": ">=8.5.23|^9|^10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AaronFrancis\\Flaky\\Providers\\FlakyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AaronFrancis\\Flaky\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Francis",
+                    "email": "aaron@tryhardstudios.com"
+                }
+            ],
+            "description": "A Laravel package to elegantly handle flaky operations.",
+            "support": {
+                "issues": "https://github.com/aarondfrancis/flaky/issues",
+                "source": "https://github.com/aarondfrancis/flaky/tree/v1.0.0"
+            },
+            "time": "2025-02-25T19:41:30+00:00"
+        },
         {
             "name": "ackintosh/ganesha",
             "version": "4.0.0",
@@ -1639,6 +1758,72 @@
             "time": "2025-02-24T15:12:08+00:00"
         },
         {
+            "name": "axlon/laravel-postal-code-validation",
+            "version": "v3.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/axlon/laravel-postal-code-validation.git",
+                "reference": "96eec473af620e38f673bfaae687d2109588906b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/axlon/laravel-postal-code-validation/zipball/96eec473af620e38f673bfaae687d2109588906b",
+                "reference": "96eec473af620e38f673bfaae687d2109588906b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/validation": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.8",
+                "phpunit/phpunit": "^8.5 || ^9.6 || ^10.5",
+                "symfony/var-exporter": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "PostalCodes": "\\Axlon\\PostalCodeValidation\\Support\\Facades\\PostalCodes"
+                    },
+                    "providers": [
+                        "\\Axlon\\PostalCodeValidation\\ValidationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Axlon\\PostalCodeValidation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Choraimy Kroonstuiver",
+                    "homepage": "https://github.com/axlon"
+                }
+            ],
+            "description": "Worldwide postal code validation for Laravel and Lumen",
+            "keywords": [
+                "laravel",
+                "lumen",
+                "post code",
+                "postal code",
+                "validation",
+                "zip code"
+            ],
+            "support": {
+                "issues": "https://github.com/axlon/laravel-postal-code-validation/issues",
+                "source": "https://github.com/axlon/laravel-postal-code-validation/tree/v3.8.0"
+            },
+            "time": "2025-02-25T18:12:41+00:00"
+        },
+        {
             "name": "bacon/bacon-qr-code",
             "version": "v3.0.1",
             "source": {
@@ -2761,6 +2946,83 @@
                 }
             ],
             "time": "2024-09-19T14:15:21+00:00"
+        },
+        {
+            "name": "creagia/laravel-web-mailer",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creagia/laravel-web-mailer.git",
+                "reference": "950b3a5c60de8985ca4f611cfbc17a210bbdfc0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/creagia/laravel-web-mailer/zipball/950b3a5c60de8985ca4f611cfbc17a210bbdfc0e",
+                "reference": "950b3a5c60de8985ca4f611cfbc17a210bbdfc0e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.9.2",
+                "symfony/mime": "^6.1|^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "nunomaduro/collision": "^6.0|^8.0",
+                "nunomaduro/larastan": "^2.0.1|^3.0",
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.21|^2.34|^3.7",
+                "pestphp/pest-plugin-laravel": "^1.1|^2.3|^3.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0|^2.0",
+                "phpstan/phpstan-phpunit": "^1.0|^2.0",
+                "phpunit/phpunit": "^9.5|^10.5|^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Creagia\\LaravelWebMailer\\LaravelWebMailerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Creagia\\LaravelWebMailer\\": "src",
+                    "Creagia\\LaravelWebMailer\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Xavier Muntané",
+                    "email": "xavier@creagia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Web Mailer",
+            "homepage": "https://github.com/creagia/laravel-web-mailer",
+            "keywords": [
+                "creagia",
+                "laravel",
+                "laravel-web-mailer",
+                "mail"
+            ],
+            "support": {
+                "issues": "https://github.com/creagia/laravel-web-mailer/issues",
+                "source": "https://github.com/creagia/laravel-web-mailer/tree/1.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/creagia",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-25T10:51:54+00:00"
         },
         {
             "name": "crwlr/query-string",
@@ -6594,39 +6856,39 @@
         },
         {
             "name": "hammerstone/fast-paginate",
-            "version": "v2.0.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/aarondfrancis/fast-paginate.git",
-                "reference": "a13cc25477c7327acb711767b18198722d6e2594"
+                "url": "https://github.com/hammerstonedev/fast-paginate.git",
+                "reference": "6a1fb26c860d04176d00761ae8a93f04da14c81c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aarondfrancis/fast-paginate/zipball/a13cc25477c7327acb711767b18198722d6e2594",
-                "reference": "a13cc25477c7327acb711767b18198722d6e2594",
+                "url": "https://api.github.com/repos/hammerstonedev/fast-paginate/zipball/6a1fb26c860d04176d00761ae8a93f04da14c81c",
+                "reference": "6a1fb26c860d04176d00761ae8a93f04da14c81c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^10.0|^11.0|^12.0",
-                "php": "^8.1"
+                "illuminate/database": "^8.37|^9.0|^10.0|^11.0",
+                "php": "^7.4|^8.0"
             },
             "require-dev": {
                 "laravel/scout": "^9.4|^10.8",
                 "mockery/mockery": "^1.3.3",
-                "orchestra/testbench": "^8.0|^9.0|^10.0",
-                "phpunit/phpunit": ">=8.5.23|^9|^10"
+                "orchestra/testbench": "^6|^7|^8.0|^9.0",
+                "phpunit/phpunit": ">=8.5.23|^9"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AaronFrancis\\FastPaginate\\FastPaginateProvider"
+                        "Hammerstone\\FastPaginate\\FastPaginateProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "AaronFrancis\\FastPaginate\\": "src/"
+                    "Hammerstone\\FastPaginate\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6636,26 +6898,15 @@
             "authors": [
                 {
                     "name": "Aaron Francis",
-                    "email": "aaron@tryhardstudios.com"
+                    "email": "aaron@hammerstone.dev"
                 }
             ],
             "description": "Fast paginate for Laravel",
             "support": {
-                "issues": "https://github.com/aarondfrancis/fast-paginate/issues",
-                "source": "https://github.com/aarondfrancis/fast-paginate/tree/v2.0.0"
+                "issues": "https://github.com/hammerstonedev/fast-paginate/issues",
+                "source": "https://github.com/hammerstonedev/fast-paginate/tree/v1.1.1"
             },
-            "funding": [
-                {
-                    "url": "https://aaronfrancis.com/backstage",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/aarondfrancis",
-                    "type": "github"
-                }
-            ],
-            "abandoned": "aaronfrancis/fast-paginate",
-            "time": "2025-02-25T18:44:20+00:00"
+            "time": "2024-05-16T15:45:29+00:00"
         },
         {
             "name": "hashids/hashids",
@@ -8518,6 +8769,77 @@
             "time": "2025-02-16T06:40:11+00:00"
         },
         {
+            "name": "laravel-frontend-presets/tall",
+            "version": "v8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-frontend-presets/tall.git",
+                "reference": "d79213d3a5c8a732ab54fe191b596b868d0edb20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-frontend-presets/tall/zipball/d79213d3a5c8a732ab54fe191b596b868d0edb20",
+                "reference": "d79213d3a5c8a732ab54fe191b596b868d0edb20",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^11.0",
+                "laravel/ui": "^4.5",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelFrontendPresets\\Tall\\TallServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelFrontendPresets\\Tall\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Harrin",
+                    "email": "Dan@DanHarrin.com"
+                },
+                {
+                    "name": "Liam Hammett",
+                    "email": "liam@liamhammett.com"
+                },
+                {
+                    "name": "Ryan Chandler",
+                    "email": "support@ryangjchandler.co.uk"
+                }
+            ],
+            "description": "TALL preset for Laravel.",
+            "keywords": [
+                "alpine",
+                "alpinejs",
+                "laravel",
+                "livewire",
+                "preset",
+                "tailwind",
+                "tailwindcss",
+                "tailwindui",
+                "tall"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-frontend-presets/tall/issues",
+                "source": "https://github.com/laravel-frontend-presets/tall"
+            },
+            "time": "2024-03-28T20:14:59+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v11.44.0",
             "source": {
@@ -9474,6 +9796,69 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.10.1"
             },
             "time": "2025-01-27T14:24:01+00:00"
+        },
+        {
+            "name": "laravel/ui",
+            "version": "v4.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "7d6ffa38d79f19c9b3e70a751a9af845e8f41d88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/7d6ffa38d79f19c9b3e70a751a9af845e8f41d88",
+                "reference": "7d6ffa38d79f19c9b3e70a751a9af845e8f41d88",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^9.21|^10.0|^11.0|^12.0",
+                "illuminate/filesystem": "^9.21|^10.0|^11.0|^12.0",
+                "illuminate/support": "^9.21|^10.0|^11.0|^12.0",
+                "illuminate/validation": "^9.21|^10.0|^11.0|^12.0",
+                "php": "^8.0",
+                "symfony/console": "^6.0|^7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.35|^8.15|^9.0|^10.0",
+                "phpunit/phpunit": "^9.3|^10.4|^11.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/",
+                    "Illuminate\\Foundation\\Auth\\": "auth-backend/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "support": {
+                "source": "https://github.com/laravel/ui/tree/v4.6.1"
+            },
+            "time": "2025-01-28T15:15:29+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -13697,6 +14082,91 @@
                 }
             ],
             "time": "2024-11-21T20:00:02+00:00"
+        },
+        {
+            "name": "proengsoft/laravel-jsvalidation",
+            "version": "v4.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/proengsoft/laravel-jsvalidation.git",
+                "reference": "4a8b34ed87bad89e252f1d53eafb978fe6ff1164"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/proengsoft/laravel-jsvalidation/zipball/4a8b34ed87bad89e252f1d53eafb978fe6ff1164",
+                "reference": "4a8b34ed87bad89e252f1d53eafb978fe6ff1164",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "illuminate/http": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "illuminate/translation": "^10.0|^11.0|^12.0",
+                "illuminate/validation": "^10.0|^11.0|^12.0",
+                "illuminate/view": "^10.0|^11.0|^12.0",
+                "php": "^8.1",
+                "symfony/http-foundation": "^6.0|^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.5|^10.0|^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "JsValidator": "Proengsoft\\JsValidation\\Facades\\JsValidatorFacade"
+                    },
+                    "providers": [
+                        "Proengsoft\\JsValidation\\JsValidationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Proengsoft\\JsValidation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Albert Moreno",
+                    "email": "albert@memorylimit.net",
+                    "homepage": "https://github.com/torrentalle"
+                },
+                {
+                    "name": "Kieran Brahney",
+                    "email": "kieran@supportpal.com",
+                    "homepage": "https://github.com/bytestream"
+                }
+            ],
+            "description": "Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest",
+            "homepage": "https://github.com/proengsoft/laravel-jsvalidation",
+            "keywords": [
+                "form",
+                "javascript",
+                "jquery",
+                "laravel",
+                "proengsoft",
+                "validation",
+                "validator"
+            ],
+            "support": {
+                "issues": "https://github.com/proengsoft/laravel-jsvalidation/issues",
+                "source": "https://github.com/proengsoft/laravel-jsvalidation/tree/v4.10.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/bytestream",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-25T13:32:36+00:00"
         },
         {
             "name": "protoqol/prequel",
@@ -34269,9 +34739,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -34283,6 +34753,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
