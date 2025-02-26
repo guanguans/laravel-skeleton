@@ -11997,34 +11997,34 @@
         },
         {
             "name": "onlime/laravel-http-client-global-logger",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/onlime/laravel-http-client-global-logger.git",
-                "reference": "12954441e6474f29f3726bc6ee3077e92115b721"
+                "reference": "6b7829ea88f38a75bcd6d7f7cb14c08e803e2e4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/onlime/laravel-http-client-global-logger/zipball/12954441e6474f29f3726bc6ee3077e92115b721",
-                "reference": "12954441e6474f29f3726bc6ee3077e92115b721",
+                "url": "https://api.github.com/repos/onlime/laravel-http-client-global-logger/zipball/6b7829ea88f38a75bcd6d7f7cb14c08e803e2e4c",
+                "reference": "6b7829ea88f38a75bcd6d7f7cb14c08e803e2e4c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/http": "^10.32|^11.0",
-                "illuminate/support": "^10.0|^11.0",
+                "illuminate/http": "^11.0||^12.0",
+                "illuminate/support": "^11.0||^12.0",
                 "monolog/monolog": "^3.0",
                 "php": "^8.2"
             },
             "require-dev": {
-                "laravel/framework": "^10.0|^11.0",
-                "laravel/pint": "^1.18",
-                "orchestra/testbench": "^8.8|^9.0",
-                "pestphp/pest": "^3.0",
+                "laravel/framework": "^11.0||^12.0",
+                "laravel/pint": "^1.21",
+                "orchestra/testbench": "^9.0||^10.0",
+                "pestphp/pest": "^3.7",
                 "pestphp/pest-plugin-arch": "^3.0",
-                "pestphp/pest-plugin-laravel": "^3.0",
-                "saloonphp/laravel-http-sender": "^2.0|^3.0",
-                "saloonphp/laravel-plugin": "^3.0",
-                "spatie/invade": "^2.0"
+                "pestphp/pest-plugin-laravel": "^3.1",
+                "saloonphp/laravel-http-sender": "^3.1",
+                "saloonphp/laravel-plugin": "^3.5.1",
+                "spatie/invade": "^2.1"
             },
             "suggest": {
                 "saloonphp/laravel-plugin": "To support logging of Saloon events (^3.0)"
@@ -12072,9 +12072,9 @@
             ],
             "support": {
                 "issues": "https://github.com/onlime/laravel-http-client-global-logger/issues",
-                "source": "https://github.com/onlime/laravel-http-client-global-logger/tree/v1.2.0"
+                "source": "https://github.com/onlime/laravel-http-client-global-logger/tree/v1.2.1"
             },
-            "time": "2024-10-15T15:50:37+00:00"
+            "time": "2025-02-26T20:56:24+00:00"
         },
         {
             "name": "opcodesio/log-viewer",
