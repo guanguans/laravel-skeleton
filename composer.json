@@ -160,7 +160,7 @@
         "vectorface/whip": "^0.5",
         "watson/validating": "^8.2",
         "wendelladriel/laravel-lift": "^0.15",
-        "wendelladriel/laravel-validated-dto": "^3.10",
+        "wendelladriel/laravel-validated-dto": "^4.0",
         "wikimedia/composer-merge-plugin": "^2.1",
         "zenstruck/stream": "^1.2",
         "zircote/swagger-php": "^5.0"
