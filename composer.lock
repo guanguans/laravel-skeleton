@@ -26064,16 +26064,16 @@
         },
         {
             "name": "kitloong/laravel-migrations-generator",
-            "version": "v7.1.1",
+            "version": "v7.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kitloong/laravel-migrations-generator.git",
-                "reference": "d04d666b10d9a413323831772e702f30b362ec19"
+                "reference": "e46bdbe9308c211fd896cdc834b28d6b9f0dce3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/d04d666b10d9a413323831772e702f30b362ec19",
-                "reference": "d04d666b10d9a413323831772e702f30b362ec19",
+                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/e46bdbe9308c211fd896cdc834b28d6b9f0dce3f",
+                "reference": "e46bdbe9308c211fd896cdc834b28d6b9f0dce3f",
                 "shasum": ""
             },
             "require": {
@@ -26088,7 +26088,7 @@
                 "mockery/mockery": "^1.0",
                 "orchestra/testbench": "^9.0|^10.0",
                 "phpmd/phpmd": "^2.10",
-                "phpstan/phpstan-mockery": "^2.0",
+                "phpstan/phpstan-mockery": "^1.0|^2.0",
                 "slevomat/coding-standard": "^8.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -26126,7 +26126,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kitloong/laravel-migrations-generator/issues",
-                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.1.1"
+                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.1.2"
             },
             "funding": [
                 {
@@ -26138,7 +26138,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-26T14:16:29+00:00"
+            "time": "2025-02-27T12:06:46+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
