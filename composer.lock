@@ -26245,16 +26245,16 @@
         },
         {
             "name": "lanin/laravel-api-debugger",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mlanin/laravel-api-debugger.git",
-                "reference": "eed485a7cfd01fe9248403af75a4ada950b7cde9"
+                "reference": "ebfe152ecd1b3e40394a03ab3aeadac09a3cd10a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mlanin/laravel-api-debugger/zipball/eed485a7cfd01fe9248403af75a4ada950b7cde9",
-                "reference": "eed485a7cfd01fe9248403af75a4ada950b7cde9",
+                "url": "https://api.github.com/repos/mlanin/laravel-api-debugger/zipball/ebfe152ecd1b3e40394a03ab3aeadac09a3cd10a",
+                "reference": "ebfe152ecd1b3e40394a03ab3aeadac09a3cd10a",
                 "shasum": ""
             },
             "require": {
@@ -26310,9 +26310,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mlanin/laravel-api-debugger/issues",
-                "source": "https://github.com/mlanin/laravel-api-debugger/tree/4.0.0"
+                "source": "https://github.com/mlanin/laravel-api-debugger/tree/4.0.1"
             },
-            "time": "2020-07-09T10:34:16+00:00"
+            "time": "2025-02-27T12:32:07+00:00"
         },
         {
             "name": "laracademy/generators",
