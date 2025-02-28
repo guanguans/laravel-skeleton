@@ -13401,16 +13401,16 @@
         },
         {
             "name": "php-open-source-saver/jwt-auth",
-            "version": "2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
-                "reference": "1365f0cb902411ffdb34afbc858ea45bae0b9afc"
+                "reference": "cd55a88bc98635983c7f8d6fa915d81eaadeb6e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/1365f0cb902411ffdb34afbc858ea45bae0b9afc",
-                "reference": "1365f0cb902411ffdb34afbc858ea45bae0b9afc",
+                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/cd55a88bc98635983c7f8d6fa915d81eaadeb6e1",
+                "reference": "cd55a88bc98635983c7f8d6fa915d81eaadeb6e1",
                 "shasum": ""
             },
             "require": {
@@ -13419,7 +13419,7 @@
                 "illuminate/contracts": "^10|^11|^12",
                 "illuminate/http": "^10|^11|^12",
                 "illuminate/support": "^10|^11|^12",
-                "lcobucci/jwt": "^5.0",
+                "lcobucci/jwt": "^5.4",
                 "namshi/jose": "^7.0",
                 "nesbot/carbon": "^2.0|^3.0",
                 "php": "^8.2"
@@ -13493,7 +13493,7 @@
                 "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
                 "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
             },
-            "time": "2025-02-10T21:11:16+00:00"
+            "time": "2025-02-28T05:02:47+00:00"
         },
         {
             "name": "php-static-analysis/attributes",
