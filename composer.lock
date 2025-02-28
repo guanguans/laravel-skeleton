@@ -2244,16 +2244,16 @@
         },
         {
             "name": "brick/math",
-            "version": "0.12.2",
+            "version": "0.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "901eddb1e45a8e0f689302e40af871c181ecbe40"
+                "reference": "866551da34e9a618e64a819ee1e01c20d8a588ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/901eddb1e45a8e0f689302e40af871c181ecbe40",
-                "reference": "901eddb1e45a8e0f689302e40af871c181ecbe40",
+                "url": "https://api.github.com/repos/brick/math/zipball/866551da34e9a618e64a819ee1e01c20d8a588ba",
+                "reference": "866551da34e9a618e64a819ee1e01c20d8a588ba",
                 "shasum": ""
             },
             "require": {
@@ -2292,7 +2292,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.12.2"
+                "source": "https://github.com/brick/math/tree/0.12.3"
             },
             "funding": [
                 {
@@ -2300,7 +2300,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-26T10:21:45+00:00"
+            "time": "2025-02-28T13:11:00+00:00"
         },
         {
             "name": "calebporzio/sushi",
@@ -12412,22 +12412,22 @@
         },
         {
             "name": "orchid/platform",
-            "version": "14.45.2",
+            "version": "14.46.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "b7c46bbc38f10ba59c27c1555856b347f80b374c"
+                "reference": "c79de2acf2c5f35626686ffbb5130d84ea6fe212"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/b7c46bbc38f10ba59c27c1555856b347f80b374c",
-                "reference": "b7c46bbc38f10ba59c27c1555856b347f80b374c",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/c79de2acf2c5f35626686ffbb5130d84ea6fe212",
+                "reference": "c79de2acf2c5f35626686ffbb5130d84ea6fe212",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
                 "composer/semver": "^3.0",
-                "laravel/framework": "^10.0 || ^11.0",
+                "laravel/framework": "^10.0 || ^11.0 || ^12.0",
                 "laravel/scout": "^9.0 || ^10.0",
                 "orchid/blade-icons": "^4.0",
                 "tabuna/breadcrumbs": "^4.0",
@@ -12442,10 +12442,10 @@
             "require-dev": {
                 "fakerphp/faker": "^1.9.1",
                 "laravel/pint": "^1.14",
-                "orchestra/testbench": "^8.0 || ^9.0",
-                "orchestra/testbench-core": "^8.0 || ^9.0",
-                "orchestra/testbench-dusk": "^8.0 || ^9.0",
-                "phpunit/phpunit": "^10.0 || ^11.0"
+                "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
+                "orchestra/testbench-core": "^8.0 || ^9.0 || ^10.0",
+                "orchestra/testbench-dusk": "^8.0 || ^9.0 || ^10.0",
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0"
             },
             "suggest": {
                 "orchid/crud": "Automated CRUD based on your files resources.",
@@ -12515,7 +12515,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2025-02-05T14:12:30+00:00"
+            "time": "2025-02-28T21:13:23+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
