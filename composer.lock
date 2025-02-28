@@ -25910,33 +25910,33 @@
         },
         {
             "name": "josezenem/laravel-make-migration-pivot",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/josezenem/laravel-make-migration-pivot.git",
-                "reference": "eea6f6d9e59f115658aa4177608b548a9798abf5"
+                "reference": "e8b8c1d172159c40645a35908eb720a1fe9cc678"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/josezenem/laravel-make-migration-pivot/zipball/eea6f6d9e59f115658aa4177608b548a9798abf5",
-                "reference": "eea6f6d9e59f115658aa4177608b548a9798abf5",
+                "url": "https://api.github.com/repos/josezenem/laravel-make-migration-pivot/zipball/e8b8c1d172159c40645a35908eb720a1fe9cc678",
+                "reference": "e8b8c1d172159c40645a35908eb720a1fe9cc678",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^9.0|^10.0|^11.0",
+                "illuminate/contracts": "^9.0|^10.0|^11.0|^12.0",
                 "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.9.2"
             },
             "require-dev": {
                 "nunomaduro/collision": "^6.0",
                 "nunomaduro/larastan": "^2.0.1",
-                "orchestra/testbench": "^7.0|^8.0|^9.0",
-                "pestphp/pest": "^1.21|^2.34",
-                "pestphp/pest-plugin-laravel": "^1.1|^2.3",
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.21|^2.34|^3.7",
+                "pestphp/pest-plugin-laravel": "^1.1|^2.3|^3.1",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.5"
+                "phpstan/phpstan-deprecation-rules": "^1.0|^2.0",
+                "phpstan/phpstan-phpunit": "^1.0|^2.0",
+                "phpunit/phpunit": "^9.5|^11.5.3"
             },
             "type": "library",
             "extra": {
@@ -25976,7 +25976,7 @@
             ],
             "support": {
                 "issues": "https://github.com/josezenem/laravel-make-migration-pivot/issues",
-                "source": "https://github.com/josezenem/laravel-make-migration-pivot/tree/1.2.0"
+                "source": "https://github.com/josezenem/laravel-make-migration-pivot/tree/1.3.0"
             },
             "funding": [
                 {
@@ -25984,7 +25984,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-12T21:06:26+00:00"
+            "time": "2025-02-24T23:14:56+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
