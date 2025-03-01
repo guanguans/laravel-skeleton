@@ -110,12 +110,11 @@ return (new Config)
         '@PHP80Migration' => true,
         '@PHP80Migration:risky' => true,
         '@PHP81Migration' => true,
-        // '@PHP82Migration' => true,
-
+        '@PHP82Migration' => true,
+        '@PHP83Migration' => true,
         // '@PHPUnit75Migration:risky' => true,
         // '@PHPUnit84Migration:risky' => true,
-        // '@PHPUnit100Migration:risky' => true,
-
+        '@PHPUnit100Migration:risky' => true,
         // '@DoctrineAnnotation' => true,
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
