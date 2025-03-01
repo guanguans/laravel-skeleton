@@ -47,7 +47,7 @@ class WhereInsQueryBuilderMixin
                     return $value;
                 }
 
-                return array_reduce($columns, static function ($sortedValue, $column) use ($value) {
+                return array_reduce($columns, static function (array $sortedValue, $column) use ($value) {
                     $sortedValue[$column] = $value[$column] ?? trigger_error(
                         \sprintf('The value of the column is not found in the array.: %s', $column),
                         E_USER_ERROR

@@ -73,7 +73,7 @@ class StrMixin
      */
     public static function acronym(): callable
     {
-        return static function ($string, $delimiter = ''): string {
+        return static function ($string, string $delimiter = ''): string {
             if (empty($string)) {
                 return '';
             }

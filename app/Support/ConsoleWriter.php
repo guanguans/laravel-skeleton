@@ -75,7 +75,7 @@ class ConsoleWriter extends OutputStyle
         $this->labeledLine($label, $message, 'fg=black;bg=yellow');
     }
 
-    public function warn($message, $label = 'WARN'): void
+    public function warn($message, string $label = 'WARN'): void
     {
         $this->labeledLine($label, "<fg=red;bg=default>{$message}</>", 'fg=black;bg=red');
     }

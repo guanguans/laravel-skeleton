@@ -47,7 +47,7 @@ class FindDumpStatementCommand extends Command
     protected $description = 'Find dump statements in PHP files.';
 
     /** @var \string[][] */
-    private $statements = [
+    private array $statements = [
         'struct' => [
             'echo',
             'print',
@@ -68,17 +68,13 @@ class FindDumpStatementCommand extends Command
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
 
-    /** @var \PhpParser\Parser */
-    private $parser;
+    private ?\PhpParser\Parser $parser = null;
 
-    /** @var \PhpParser\NodeFinder */
-    private $nodeFinder;
+    private ?\PhpParser\NodeFinder $nodeFinder = null;
 
-    /** @var \PhpParser\PrettyPrinter\Standard */
-    private $prettyPrinter;
+    private ?\PhpParser\PrettyPrinter\Standard $prettyPrinter = null;
 
-    /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
-    private $resourceUsageFormatter;
+    private ?\SebastianBergmann\Timer\ResourceUsageFormatter $resourceUsageFormatter = null;
 
     public function isEnabled(): bool
     {
@@ -120,7 +116,7 @@ class FindDumpStatementCommand extends Command
                     ->replaceLast('_', '')
                     ->is($this->statements['struct']);
             });
-            if (empty($dumpNodes)) {
+            if ($dumpNodes === []) {
                 return;
             }
 
@@ -129,7 +125,7 @@ class FindDumpStatementCommand extends Command
                     $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn(Stringable $name): string => "<fg=red>$name</>");
+                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn (Stringable $name): string => "<fg=red>$name</>");
                     $type = '<fg=red>struct</>';
                 }
 
@@ -159,7 +155,7 @@ class FindDumpStatementCommand extends Command
             return static::INVALID;
         }
 
-        $findInfos = array_map(static function ($info, $index): array {
+        $findInfos = array_map(static function (array $info, $index): array {
             ++$index;
             $info['index'] = "<fg=yellow>$index</>";
 

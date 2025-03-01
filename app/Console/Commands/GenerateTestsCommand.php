@@ -63,8 +63,7 @@ class GenerateTestsCommand extends Command
     /** @var string */
     protected $description = 'Generate tests for the given files';
 
-    /** @var array */
-    private static $statistics = [
+    private static array $statistics = [
         'scanned_files' => 0,
         'scanned_classes' => 0,
         'related_classes' => 0,
@@ -74,34 +73,25 @@ class GenerateTestsCommand extends Command
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
 
-    /** @var \SebastianBergmann\Timer\ResourceUsageFormatter */
-    private $resourceUsageFormatter;
+    private ?\SebastianBergmann\Timer\ResourceUsageFormatter $resourceUsageFormatter = null;
 
-    /** @var \PhpParser\Lexer\Emulative */
-    private $lexer;
+    private ?\PhpParser\Lexer\Emulative $lexer = null;
 
-    /** @var \PhpParser\Parser */
-    private $parser;
+    private ?\PhpParser\Parser $parser = null;
 
-    /** @var \PhpParser\ErrorHandler\Collecting */
-    private $errorHandler;
+    private ?\PhpParser\ErrorHandler\Collecting $errorHandler = null;
 
-    /** @var \PhpParser\BuilderFactory */
-    private $builderFactory;
+    private ?\PhpParser\BuilderFactory $builderFactory = null;
 
-    /** @var \PhpParser\NodeFinder */
-    private $nodeFinder;
+    private ?\PhpParser\NodeFinder $nodeFinder = null;
 
-    /** @var \PhpParser\PrettyPrinter\Standard */
-    private $prettyPrinter;
+    private ?\PhpParser\PrettyPrinter\Standard $prettyPrinter = null;
 
-    /** @var \PhpParser\NodeTraverser */
-    private $nodeTraverser;
+    private ?\PhpParser\NodeTraverser $nodeTraverser = null;
 
-    /** @var \PhpParser\NodeVisitor\CloningVisitor */
-    private $cloningVisitor;
+    private ?\PhpParser\NodeVisitor\CloningVisitor $cloningVisitor = null;
 
-    private $classUpdatingVisitor;
+    private ?\PhpParser\NodeVisitorAbstract $classUpdatingVisitor = null;
 
     public function isEnabled(): bool
     {

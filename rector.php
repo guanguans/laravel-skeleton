@@ -67,6 +67,7 @@ return RectorConfig::configure()
         __DIR__.'/_ide_helper*.php',
         __DIR__.'/_ide_helper.php',
         __DIR__.'/_ide_helper_models.php',
+        __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
         __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
         __DIR__.'/app/Support/Http',
         __DIR__.'/dcat_admin_ide_helper.php',
@@ -87,12 +88,11 @@ return RectorConfig::configure()
     ->withSets([
         PHPUnitSetList::PHPUNIT_100,
     ])
-    ->withTypeCoverageLevel(36)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
         codingStyle: true,
-        // typeDeclarations: true,
+        typeDeclarations: true,
         privatization: true,
         // naming: true,
         instanceOf: true,

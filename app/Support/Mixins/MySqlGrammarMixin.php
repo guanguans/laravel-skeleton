@@ -31,7 +31,7 @@ class MySqlGrammarMixin
          * @param  array  $where
          * @return string
          */
-        return function (Builder $query, $where): string {
+        return function (Builder $query, array $where): string {
             $columns = $this->columnize($where['columns']);
 
             $value = $this->parameter($where['value']);
