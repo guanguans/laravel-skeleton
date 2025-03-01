@@ -41,7 +41,7 @@ trait ModelCrudable
      */
     public static function validations(?int $id = null): array
     {
-        return array_map(static function (array $rules) use ($id) {
+        return array_map(static function (array $rules) use ($id): array {
             foreach ($rules as $scenario => $rule) {
                 $rules[$scenario] = Str::replace('$id', $id, $rule);
             }

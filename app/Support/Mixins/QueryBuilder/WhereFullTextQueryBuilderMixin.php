@@ -34,7 +34,7 @@ class WhereFullTextQueryBuilderMixin
          * @param  string  $boolean
          * @return $this
          */
-        return function ($columns, $value, array $options = [], $boolean = 'and') {
+        return function ($columns, $value, array $options = [], $boolean = 'and'): static {
             $type = 'Fulltext';
 
             $columns = (array) $columns;

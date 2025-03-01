@@ -159,7 +159,7 @@ class FindDumpStatementCommand extends Command
             return static::INVALID;
         }
 
-        $findInfos = array_map(static function ($info, $index) {
+        $findInfos = array_map(static function ($info, $index): array {
             ++$index;
             $info['index'] = "<fg=yellow>$index</>";
 

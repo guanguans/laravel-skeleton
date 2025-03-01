@@ -87,7 +87,7 @@ return RectorConfig::configure()
     ->withSets([
         PHPUnitSetList::PHPUNIT_100,
     ])
-    ->withTypeCoverageLevel(33)
+    ->withTypeCoverageLevel(36)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,

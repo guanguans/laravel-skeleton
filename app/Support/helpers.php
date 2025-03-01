@@ -379,7 +379,7 @@ if (! function_exists('environment')) {
 }
 
 if (! function_exists('format_bits')) {
-    function format_bits(int $bits, $precision = 2, $suffix = true)
+    function format_bits(int $bits, $precision = 2, $suffix = true): float|string|int
     {
         if ($bits > 0) {
             $i = floor(log($bits) / log(1000));
@@ -398,7 +398,7 @@ if (! function_exists('format_bits')) {
 }
 
 if (! function_exists('format_bytes')) {
-    function format_bytes(int $bytes, $precision = 2)
+    function format_bytes(int $bytes, $precision = 2): string|int
     {
         if ($bytes > 0) {
             $i = floor(log($bytes) / log(1024));
@@ -472,7 +472,7 @@ if (! function_exists('compose')) {
 if (! function_exists('memoize')) {
     function memoize(callable $function): callable
     {
-        return static function (...$args) use ($function) {
+        return static function (...$args) use ($function): array {
             static $cache = [];
             $key = serialize($args);
             $cached = true;
