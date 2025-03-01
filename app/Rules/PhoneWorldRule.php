@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class PhoneWorldRule extends RegexRule
 {
+    #[\Override]
     protected function pattern(): string
     {
         return /** @lang PhpRegExp */ '/^\+?([87](?!95[5-79]|99[08]|907|94[^0]|336)([348]\d|9[0-6789]|7[01247])\d{8}|[1246]\d{9,13}|68\d{7}|'

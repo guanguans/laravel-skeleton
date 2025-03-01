@@ -48,11 +48,13 @@ class User extends Authenticatable
     /**
      * {@inheritdoc}
      */
+    #[\Override]
     public function newEloquentBuilder($query): Builder
     {
         return new Builder($query);
     }
 
+    #[\Override]
     public static function query(): Builder
     {
         return parent::query();
@@ -65,6 +67,7 @@ class User extends Authenticatable
      * @param  string|null  $field
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+    #[\Override]
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->where('id', $value)->firstOrFail();
@@ -75,6 +78,7 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    #[\Override]
     protected function casts(): array
     {
         return [

@@ -30,6 +30,7 @@ class Controller extends \App\Http\Controllers\Controller
     #[Autowired(ApiResponseContract::class)]
     protected ApiResponseContract $apiResponse;
 
+    #[\Override]
     public function __call($name, $arguments)
     {
         if (method_exists(Response::class, $name)) {

@@ -36,11 +36,13 @@ class Movie extends Model
         return true;
     }
 
+    #[\Override]
     public function getKeyName(): string
     {
         return 'name';
     }
 
+    #[\Override]
     public function getIncrementing(): bool
     {
         return false;

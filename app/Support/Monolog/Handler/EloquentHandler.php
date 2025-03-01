@@ -29,6 +29,7 @@ class EloquentHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
     }
 
+    #[\Override]
     protected function write(LogRecord $record): void
     {
         $this->modelClass::query()->create($record->formatted);

@@ -21,6 +21,7 @@ class JWTUser extends User implements JWTSubject
      *
      * @return mixed
      */
+    #[\Override]
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -31,6 +32,7 @@ class JWTUser extends User implements JWTSubject
      *
      * @return array
      */
+    #[\Override]
     public function getJWTCustomClaims()
     {
         return [];

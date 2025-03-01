@@ -62,6 +62,7 @@ class AuthRequest extends FormRequest
         return true;
     }
 
+    #[\Override]
     public function messages()
     {
         return [

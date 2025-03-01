@@ -33,6 +33,7 @@ final class NotDisposableEmailRule extends Rule
         self::$vendorCache = [];
     }
 
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         try {

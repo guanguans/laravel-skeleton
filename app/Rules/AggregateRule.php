@@ -20,6 +20,7 @@ abstract class AggregateRule extends Rule
 {
     protected Validator $aggregateValidator;
 
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         return $this->makeAggregateValidator($attribute, $value)->passes();
@@ -50,6 +51,7 @@ abstract class AggregateRule extends Rule
         return [];
     }
 
+    #[\Override]
     protected function failedPotentiallyTranslatedString(string $attribute, mixed $value, \Closure $fail): PotentiallyTranslatedString
     {
         return $fail($this->makeAggregateValidator($attribute, $value)->errors()->first($attribute));

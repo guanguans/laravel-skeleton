@@ -60,6 +60,7 @@ class ConsoleWriter extends OutputStyle
         $this->labeledLine('EXEC', $command, 'bg=blue;fg=black');
     }
 
+    #[\Override]
     public function success($message, $label = 'PASS'): void
     {
         $this->labeledLine($label, $message, 'fg=black;bg=green');
@@ -70,6 +71,7 @@ class ConsoleWriter extends OutputStyle
         $this->success($message, ' OK ');
     }
 
+    #[\Override]
     public function note($message, $label = 'NOTE'): void
     {
         $this->labeledLine($label, $message, 'fg=black;bg=yellow');
@@ -108,11 +110,13 @@ class ConsoleWriter extends OutputStyle
         parent::block($message, null, 'fg=black;bg=red', ' ', true, false);
     }
 
+    #[\Override]
     public function text(array|string $message): void
     {
         parent::text($message);
     }
 
+    #[\Override]
     public function listing(array $items): void
     {
         parent::newLine();
@@ -121,6 +125,7 @@ class ConsoleWriter extends OutputStyle
         parent::newLine();
     }
 
+    #[\Override]
     public function table(array $columnHeadings, array $rowData): void
     {
         parent::table($columnHeadings, $rowData);

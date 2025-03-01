@@ -93,11 +93,13 @@ class GenerateTestsCommand extends Command
 
     private ?\PhpParser\NodeVisitorAbstract $classUpdatingVisitor = null;
 
+    #[\Override]
     public function isEnabled(): bool
     {
         return ! $this->laravel->isProduction();
     }
 
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->checkOptions();

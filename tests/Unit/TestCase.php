@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class TestCase extends \Tests\TestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

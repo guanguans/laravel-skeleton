@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class LocationCoordinatesRule extends RegexRule
 {
+    #[\Override]
     protected function pattern(): string
     {
         /** @lang PhpRegExp */

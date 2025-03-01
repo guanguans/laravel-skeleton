@@ -27,6 +27,7 @@ use function Termwind\render;
  */
 class AnsiLineFormatter extends LineFormatter
 {
+    #[\Override]
     public function format(LogRecord $record): string
     {
         $html = match ($record->level->value) {

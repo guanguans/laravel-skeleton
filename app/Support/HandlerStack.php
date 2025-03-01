@@ -89,6 +89,7 @@ class HandlerStack implements \Stringable
     /**
      * Dumps a string representation of the stack.
      */
+    #[\Override]
     public function __toString(): string
     {
         $depth = 0;

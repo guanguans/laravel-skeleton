@@ -14,6 +14,7 @@ namespace App\Rules;
 
 class CamelCaseRule extends RegexRule
 {
+    #[\Override]
     protected function pattern(): string
     {
         /** @lang PhpRegExp */

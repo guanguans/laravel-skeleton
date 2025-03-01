@@ -31,6 +31,7 @@ final class DefaultRule extends Rule implements ValidatorAwareRule
     /**
      * Determine if the validation rule passes.
      */
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         if ($value === null) {

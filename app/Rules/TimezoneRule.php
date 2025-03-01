@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class TimezoneRule extends Rule
 {
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         return \in_array($value, \DateTimeZone::listIdentifiers(), true);

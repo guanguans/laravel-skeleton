@@ -16,6 +16,7 @@ final class IdeHelperGatesCommand extends Command
 
     protected $description = 'Generate IDE helper file for gates.';
 
+    #[\Override]
     public function isEnabled(): bool
     {
         return $this->laravel->isLocal();
@@ -53,6 +54,7 @@ final class IdeHelperGatesCommand extends Command
             });
     }
 
+    #[\Override]
     protected function rules(): array
     {
         return [

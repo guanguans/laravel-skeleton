@@ -13,6 +13,7 @@ class StatusIndicator extends Component
     {
     }
 
+    #[\Override]
     public function render(): View
     {
         return view('health::status-indicator', [

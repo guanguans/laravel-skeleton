@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class HtmlcleanRule extends Rule
 {
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         return strip_tags($value) === $value;

@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class OpenAI extends Facade
 {
+    #[\Override]
     protected static function getFacadeAccessor()
     {
         return \App\Support\OpenAI::class;

@@ -33,17 +33,20 @@ class GlobStreamWrapper extends StreamWrapper
      */
     private function __destruct() {}
 
+    #[\Override]
     final public static function name(): string
     {
         return 'glob';
     }
 
+    #[\Override]
     public static function register(): void
     {
         parent::unregister();
         parent::register();
     }
 
+    #[\Override]
     public function dir_closedir(): bool
     {
         $this->files = [];
@@ -52,6 +55,7 @@ class GlobStreamWrapper extends StreamWrapper
         return true;
     }
 
+    #[\Override]
     public function dir_opendir(string $path, int $options): bool
     {
         $pattern = $this->scanPattern($path);
@@ -71,6 +75,7 @@ class GlobStreamWrapper extends StreamWrapper
         return true;
     }
 
+    #[\Override]
     public function dir_readdir(): false|string
     {
         if (! isset($this->files[$this->position])) {
@@ -80,6 +85,7 @@ class GlobStreamWrapper extends StreamWrapper
         return $this->files[$this->position++];
     }
 
+    #[\Override]
     public function dir_rewinddir(): bool
     {
         $this->position = 0;
@@ -87,6 +93,7 @@ class GlobStreamWrapper extends StreamWrapper
         return true;
     }
 
+    #[\Override]
     public function url_stat(string $path, int $flags): array|false
     {
         sscanf($path, "glob://{$this->getContextOption('pattern')}/%s", $newPath);

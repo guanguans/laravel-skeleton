@@ -57,6 +57,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     /**
      * @noinspection PhpRedundantMethodOverrideInspection
      */
+    #[\Override]
     public function newCollection(array $models = []): Collection
     {
         return parent::newCollection($models);
@@ -65,6 +66,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     /**
      * @noinspection PhpRedundantMethodOverrideInspection
      */
+    #[\Override]
     public function getRouteKeyName(): string
     {
         return parent::getRouteKeyName();
@@ -73,6 +75,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     /**
      * @noinspection PhpRedundantMethodOverrideInspection
      */
+    #[\Override]
     public function is($model): bool
     {
         return parent::is($model);
@@ -81,6 +84,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     /**
      * @noinspection PhpRedundantMethodOverrideInspection
      */
+    #[\Override]
     public function isNot($model): bool
     {
         return parent::isNot($model);

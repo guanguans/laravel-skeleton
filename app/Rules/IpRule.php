@@ -58,6 +58,7 @@ final class IpRule extends Rule
         return ! $this->isPrivate($ip);
     }
 
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         return $this->isPublic ? $this->isPublic($value) : $this->isPrivate($value);

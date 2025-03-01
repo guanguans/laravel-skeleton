@@ -16,6 +16,7 @@ final class InstanceofRule extends Rule
 {
     public function __construct(private readonly string $class) {}
 
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         return $value instanceof $this->class;

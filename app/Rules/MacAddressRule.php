@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class MacAddressRule extends Rule
 {
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         $value = preg_replace('/[\. :-]/i', '', $value);

@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class PhoneRule extends RegexRule
 {
+    #[\Override]
     protected function pattern(): string
     {
         /** @lang PhpRegExp */

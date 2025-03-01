@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Validator;
  */
 final class MaxUploadSizeRule extends Rule
 {
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         if (($maxUploadSizeInBytes = $this->maxUploadSize()) < 0) {

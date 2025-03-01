@@ -305,6 +305,7 @@ final class OpenAI extends FoundationSDK
         return collect($response);
     }
 
+    #[\Override]
     protected function validateConfig(array $config): array
     {
         return array_replace_recursive(
@@ -336,6 +337,7 @@ final class OpenAI extends FoundationSDK
         );
     }
 
+    #[\Override]
     protected function buildPendingRequest(array $config): PendingRequest
     {
         return parent::buildPendingRequest($config)

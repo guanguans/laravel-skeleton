@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 class ExampleTest extends TestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         $this->markTestSkipped('Not implemented');

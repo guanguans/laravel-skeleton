@@ -12,6 +12,7 @@ class UserResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+    #[\Override]
     public function toArray($request)
     {
         /** @var \App\Models\User $this */

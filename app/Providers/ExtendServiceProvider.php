@@ -34,6 +34,7 @@ class ExtendServiceProvider extends ServiceProvider
     /**
      * Register services.
      */
+    #[\Override]
     public function register(): void
     {
         $this->registerOpenAI();
@@ -54,6 +55,7 @@ class ExtendServiceProvider extends ServiceProvider
      *
      * @return string[]
      */
+    #[\Override]
     public function when(): array
     {
         return [];
@@ -64,6 +66,7 @@ class ExtendServiceProvider extends ServiceProvider
      *
      * @return string[]
      */
+    #[\Override]
     public function provides(): array
     {
         return [

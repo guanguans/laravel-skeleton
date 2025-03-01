@@ -105,6 +105,7 @@ class ServerSentEvent implements \Stringable
         $this->setData($data);
     }
 
+    #[\Override]
     public function __toString(): string
     {
         $event = [];

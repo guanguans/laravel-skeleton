@@ -19,11 +19,13 @@ class CommaSeparatedToArrayCast implements CastsAttributes
 {
     public bool $withoutObjectCaching = true;
 
+    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
         return $value ? explode(',', $value) : [];
     }
 
+    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $value;

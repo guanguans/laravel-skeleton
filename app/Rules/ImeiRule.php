@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 
 final class ImeiRule extends Rule
 {
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         if (\strlen($value) !== 15 || ! ctype_digit($value)) {

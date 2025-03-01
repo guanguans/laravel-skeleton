@@ -25,6 +25,7 @@ class Base64Cast implements CastsAttributes
     /**
      * Cast the given value.
      */
+    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $this->isCastGet ? base64_encode($value) : $value;
@@ -33,6 +34,7 @@ class Base64Cast implements CastsAttributes
     /**
      * Prepare the given value for storage.
      */
+    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $this->isCastSet ? base64_decode($value, true) : $value;

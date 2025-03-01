@@ -32,6 +32,7 @@ class ElasticsearchManager extends Manager
     use Conditionable;
     use Tappable;
 
+    #[\Override]
     public function getDefaultDriver(): string
     {
         return $this->config->get('services.elasticsearch.default');
@@ -46,6 +47,7 @@ class ElasticsearchManager extends Manager
      * @throws BindingResolutionException
      * @throws ConfigException
      */
+    #[\Override]
     protected function createDriver(mixed $driver): Client
     {
         if (isset($this->customCreators[$driver])) {

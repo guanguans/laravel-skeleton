@@ -11,6 +11,7 @@ class UserCollection extends ResourceCollection
      *
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+    #[\Override]
     public function toArray(\Illuminate\Http\Request $request)
     {
         return parent::toArray($request);

@@ -97,6 +97,7 @@ class HealthCheckCommand extends Command
             });
     }
 
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->only = array_merge($this->only, $this->option('only'));

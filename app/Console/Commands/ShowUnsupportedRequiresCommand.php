@@ -91,6 +91,7 @@ class ShowUnsupportedRequiresCommand extends Command
     /**
      * @noinspection MethodVisibilityInspection
      */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->packagist = new PackagistClient(

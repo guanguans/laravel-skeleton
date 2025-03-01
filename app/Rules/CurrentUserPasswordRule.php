@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 
 final class CurrentUserPasswordRule extends Rule
 {
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         return Hash::check($value, auth()->user()?->getAuthPassword());

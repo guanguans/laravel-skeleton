@@ -42,6 +42,7 @@ class OpcacheUrlCommand extends Command
             );
     }
 
+    #[\Override]
     protected function rules(): array
     {
         return [

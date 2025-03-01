@@ -157,6 +157,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
+    #[\Override]
     public function register(): void
     {
         $this->whenever(true, function (): void {

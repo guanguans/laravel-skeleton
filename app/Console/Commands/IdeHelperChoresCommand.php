@@ -28,6 +28,7 @@ final class IdeHelperChoresCommand extends Command
 
     protected $description = 'Generate chores for the Laravel-Idea-JSON file.';
 
+    #[\Override]
     public function isEnabled(): bool
     {
         return $this->laravel->isLocal();
@@ -64,8 +65,10 @@ final class IdeHelperChoresCommand extends Command
             ->whenNotEmpty(fn (Collection $methods) => $this->output->success("Generated {$methods->count()} chores."));
     }
 
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void {}
 
+    #[\Override]
     protected function rules(): array
     {
         return [

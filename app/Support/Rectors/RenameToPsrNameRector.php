@@ -91,6 +91,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
      * @throws PoorDocumentationException
      * @throws ShouldNotHappenException
      */
+    #[\Override]
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
@@ -219,6 +220,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         );
     }
 
+    #[\Override]
     public function getNodeTypes(): array
     {
         return [
@@ -232,6 +234,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
      */
+    #[\Override]
     public function refactor(Node $node)
     {
         try {
@@ -280,6 +283,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         return false;
     }
 
+    #[\Override]
     public function configure(array $configuration): void
     {
         Assert::allStringNotEmpty($configuration);

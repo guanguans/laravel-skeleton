@@ -14,6 +14,7 @@ namespace App\Rules;
 
 abstract class RegexRule extends Rule
 {
+    #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
         return (bool) preg_match($this->pattern(), $value);

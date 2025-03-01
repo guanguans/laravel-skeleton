@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class PhoneCisRule extends RegexRule
 {
+    #[\Override]
     protected function pattern(): string
     {
         return /** @lang PhpRegExp */ '/^((\+?7|8)(?!95[4-79]|99[08]|907|94[^0]|336)([348]\d|9[0-6789]|7[0247])\d{8}|\+?(99[^4568]\d{7,11}|'

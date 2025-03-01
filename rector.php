@@ -82,8 +82,8 @@ return RectorConfig::configure()
     ->withFluentCallNewLine()
     ->withAttributesSets(phpunit: true)
     // ->withComposerBased(phpunit: true)
-    ->withPhpVersion(PhpVersion::PHP_82)
-    ->withDowngradeSets(php82: true)
+    ->withPhpVersion(PhpVersion::PHP_83)
+    // ->withDowngradeSets(php83: true)
     ->withPhpSets(php82: true)
     ->withSets([
         PHPUnitSetList::PHPUNIT_100,

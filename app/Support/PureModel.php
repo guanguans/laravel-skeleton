@@ -129,6 +129,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Convert the model to its string representation.
      */
+    #[\Override]
     public function __toString(): string
     {
         return $this->toJson();
@@ -400,6 +401,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Convert the model instance to JSON.
      */
+    #[\Override]
     public function toJson(mixed $options = 0): string
     {
         return json_encode($this->jsonSerialize(), $options);
@@ -408,6 +410,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Convert the object into something JSON serializable.
      */
+    #[\Override]
     public function jsonSerialize(): array
     {
         return $this->toArray();
@@ -416,6 +419,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Convert the model instance to an array.
      */
+    #[\Override]
     public function toArray(): array
     {
         return $this->attributesToArray();
@@ -587,6 +591,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Determine if the given attribute exists.
      */
+    #[\Override]
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->{$offset});
@@ -595,6 +600,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Get the value for a given offset.
      */
+    #[\Override]
     public function offsetGet(mixed $offset): mixed
     {
         return $this->{$offset};
@@ -603,6 +609,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Set the value for a given offset.
      */
+    #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->{$offset} = $value;
@@ -611,6 +618,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Unset the value for a given offset.
      */
+    #[\Override]
     public function offsetUnset(mixed $offset): void
     {
         unset($this->{$offset});

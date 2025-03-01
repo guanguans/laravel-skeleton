@@ -37,11 +37,13 @@ class UserFileStreamWrapper extends StreamWrapper
      */
     private function __destruct() {}
 
+    #[\Override]
     final public static function name(): string
     {
         return 'user-file';
     }
 
+    #[\Override]
     public function dir_closedir(): bool
     {
         closedir($this->handle);
@@ -49,6 +51,7 @@ class UserFileStreamWrapper extends StreamWrapper
         return true;
     }
 
+    #[\Override]
     public function dir_opendir(string $path, int $options): bool
     {
         $newPath = $this->scanPath($path);
@@ -66,11 +69,13 @@ class UserFileStreamWrapper extends StreamWrapper
         return true;
     }
 
+    #[\Override]
     public function dir_readdir(): false|string
     {
         return readdir($this->handle);
     }
 
+    #[\Override]
     public function dir_rewinddir(): bool
     {
         rewinddir($this->handle);
@@ -78,6 +83,7 @@ class UserFileStreamWrapper extends StreamWrapper
         return true;
     }
 
+    #[\Override]
     public function mkdir(string $path, int $mode, int $options): bool
     {
         $newPath = $this->scanPath($path);
@@ -88,6 +94,7 @@ class UserFileStreamWrapper extends StreamWrapper
         return mkdir($newPath, $mode);
     }
 
+    #[\Override]
     public function rename(string $pathFrom, string $pathTo): bool
     {
         $newPathFrom = $this->scanPath($pathFrom);
@@ -103,6 +110,7 @@ class UserFileStreamWrapper extends StreamWrapper
         return rename($newPathFrom, $newPathTo);
     }
 
+    #[\Override]
     public function rmdir(string $path, int $options): bool
     {
         $newPath = $this->scanPath($path);
@@ -116,6 +124,7 @@ class UserFileStreamWrapper extends StreamWrapper
     /**
      * @return resource
      */
+    #[\Override]
     public function stream_cast(int $castAs): mixed
     {
         switch ($castAs) {
@@ -135,21 +144,25 @@ class UserFileStreamWrapper extends StreamWrapper
         }
     }
 
+    #[\Override]
     public function stream_close(): void
     {
         fclose($this->handle);
     }
 
+    #[\Override]
     public function stream_eof(): bool
     {
         return feof($this->handle);
     }
 
+    #[\Override]
     public function stream_flush(): bool
     {
         return fflush($this->handle);
     }
 
+    #[\Override]
     public function stream_lock(int $operation): bool
     {
         return flock($this->handle, $operation);
@@ -158,6 +171,7 @@ class UserFileStreamWrapper extends StreamWrapper
     /**
      * @noinspection PotentialMalwareInspection
      */
+    #[\Override]
     public function stream_metadata(string $path, int $option, mixed $value): bool
     {
         $newPath = $this->scanPath($path);
@@ -174,6 +188,7 @@ class UserFileStreamWrapper extends StreamWrapper
         };
     }
 
+    #[\Override]
     public function stream_open(string $path, string $mode, int $options, ?string &$openedPath): bool
     {
         if ($useTriggerError = ($options & STREAM_REPORT_ERRORS)) {
@@ -216,16 +231,19 @@ class UserFileStreamWrapper extends StreamWrapper
         return true;
     }
 
+    #[\Override]
     public function stream_read(int $count): string
     {
         return fread($this->handle, $count);
     }
 
+    #[\Override]
     public function stream_seek(int $offset, int $whence = SEEK_SET): bool
     {
         return fseek($this->handle, $offset, $whence) === 0;
     }
 
+    #[\Override]
     public function stream_set_option(int $option, int $arg1, ?int $arg2): bool
     {
         return match ($option) {
@@ -237,26 +255,31 @@ class UserFileStreamWrapper extends StreamWrapper
         };
     }
 
+    #[\Override]
     public function stream_stat(): array|false
     {
         return fstat($this->handle);
     }
 
+    #[\Override]
     public function stream_tell(): int
     {
         return ftell($this->handle);
     }
 
+    #[\Override]
     public function stream_truncate(int $newSize): bool
     {
         return ftruncate($this->handle, $newSize);
     }
 
+    #[\Override]
     public function stream_write(string $data): int
     {
         return fwrite($this->handle, $data);
     }
 
+    #[\Override]
     public function unlink(string $path): bool
     {
         $newPath = $this->scanPath($path);
@@ -267,6 +290,7 @@ class UserFileStreamWrapper extends StreamWrapper
         return unlink($newPath);
     }
 
+    #[\Override]
     public function url_stat(string $path, int $flags): array|false
     {
         $newPath = $this->scanPath($path);

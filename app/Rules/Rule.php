@@ -33,6 +33,7 @@ abstract class Rule implements ValidationRule
      *
      * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
+    #[\Override]
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (! $this->passes($attribute, $value)) {

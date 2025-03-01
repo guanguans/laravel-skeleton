@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class PushDeer extends Facade
 {
+    #[\Override]
     protected static function getFacadeAccessor()
     {
         return \App\Support\PushDeer::class;

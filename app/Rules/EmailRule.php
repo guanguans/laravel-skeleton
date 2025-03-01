@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class EmailRule extends RegexRule
 {
+    #[\Override]
     protected function pattern(): string
     {
         /** @lang PhpRegExp */

@@ -15,6 +15,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
      */
     protected $stopOnFirstFailure = true;
 
+    #[\Override]
     public function validationData()
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
@@ -30,21 +31,25 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         return $this->call(__FUNCTION__, \func_get_args(), []);
     }
 
+    #[\Override]
     public function messages(): array
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
+    #[\Override]
     public function attributes(): array
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
+    #[\Override]
     protected function failedValidation(Validator $validator)
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
+    #[\Override]
     protected function failedAuthorization()
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
@@ -77,11 +82,13 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         );
     }
 
+    #[\Override]
     protected function prepareForValidation()
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
+    #[\Override]
     protected function passedValidation()
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));

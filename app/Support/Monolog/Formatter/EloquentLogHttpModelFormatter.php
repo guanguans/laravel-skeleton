@@ -18,6 +18,7 @@ use Monolog\LogRecord;
 
 class EloquentLogHttpModelFormatter extends NormalizerFormatter
 {
+    #[\Override]
     public function format(LogRecord $record): array
     {
         return $this->sanitizeContext(parent::format($record)['context']);

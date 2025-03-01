@@ -33,6 +33,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected $seed = false;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

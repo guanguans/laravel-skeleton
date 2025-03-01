@@ -66,6 +66,7 @@ class ClearAllCommand extends Command implements Isolatable, PromptsForMissingIn
      *
      * @return array<string, string>
      */
+    #[\Override]
     protected function promptForMissingArgumentsUsing(): array
     {
         return [

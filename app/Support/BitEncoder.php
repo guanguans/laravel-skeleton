@@ -44,6 +44,7 @@ class BitEncoder implements BitEncoderContract
      *
      * @throws \InvalidArgumentException
      */
+    #[\Override]
     public function encode(array $set): int
     {
         return $this->attach(0, ...$set);
@@ -54,6 +55,7 @@ class BitEncoder implements BitEncoderContract
      *
      * @throws \InvalidArgumentException
      */
+    #[\Override]
     public function decode(int $value): array
     {
         return array_filter($this->set, fn ($item): bool => $this->has($value, $item));

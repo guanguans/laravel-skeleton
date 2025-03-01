@@ -22,11 +22,13 @@ readonly class HmacSigner implements SignerContract
         private string $algo = 'sha256'
     ) {}
 
+    #[\Override]
     public function sign(array $payload): string
     {
         return hash_hmac($this->algo, $this->hashingDataFor($payload), $this->secret);
     }
 
+    #[\Override]
     public function validate(string $signature, array $payload): bool
     {
         return hash_equals($signature, $this->sign($payload));

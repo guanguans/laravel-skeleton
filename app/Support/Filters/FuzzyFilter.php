@@ -37,6 +37,7 @@ class FuzzyFilter implements Filter
      * @param  Builder<TModelClass>  $query
      * @return Builder<TModelClass>
      */
+    #[\Override]
     public function __invoke(Builder $query, mixed $value, string $property): Builder
     {
         $query->where(function (Builder $query) use ($value): void {

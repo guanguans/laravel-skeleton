@@ -23,6 +23,7 @@ class PingController extends Controller
     /**
      * @see \Illuminate\Routing\Controllers\HasMiddleware
      */
+    #[\Override]
     public function middleware(mixed $middleware, array $options = [])
     {
         return parent::middleware($middleware, $options);

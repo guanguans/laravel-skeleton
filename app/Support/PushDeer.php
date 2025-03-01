@@ -56,6 +56,7 @@ class PushDeer extends FoundationSdk
         );
     }
 
+    #[\Override]
     protected function validateConfig(array $config): array
     {
         return [
@@ -96,6 +97,7 @@ class PushDeer extends FoundationSdk
         ];
     }
 
+    #[\Override]
     protected function buildPendingRequest(array $config): PendingRequest
     {
         return parent::buildPendingRequest($config)

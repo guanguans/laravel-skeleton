@@ -19,6 +19,7 @@ class CallbackSetCast extends CallbackGetCast
     /**
      * Prepare the given value for storage.
      */
+    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return parent::get($model, $key, $value, $attributes);
@@ -27,6 +28,7 @@ class CallbackSetCast extends CallbackGetCast
     /**
      * Transform the attribute to its underlying model values.
      */
+    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $value;

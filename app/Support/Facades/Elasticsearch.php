@@ -126,6 +126,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class Elasticsearch extends Facade
 {
+    #[\Override]
     protected static function getFacadeAccessor(): string
     {
         return ElasticsearchManager::class;

@@ -37,6 +37,7 @@ class UserLoggedInEvent implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
+    #[\Override]
     public function broadcastOn(): array
     {
         return [

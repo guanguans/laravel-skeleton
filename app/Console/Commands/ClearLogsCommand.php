@@ -38,6 +38,7 @@ class ClearLogsCommand extends Command
         File::delete($files);
     }
 
+    #[\Override]
     protected function rules(): array
     {
         return [

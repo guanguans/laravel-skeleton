@@ -14,6 +14,7 @@ namespace App\Rules;
 
 final class ChineseNameRule extends RegexRule
 {
+    #[\Override]
     protected function pattern(): string
     {
         /** @lang PhpRegExp */

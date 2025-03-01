@@ -11,6 +11,7 @@ class TrustHosts extends Middleware
      *
      * @return array
      */
+    #[\Override]
     public function hosts()
     {
         return [

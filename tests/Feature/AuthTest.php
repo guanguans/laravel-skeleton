@@ -6,6 +6,7 @@ class AuthTest extends TestCase
 {
     protected $accessToken;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->markTestSkipped('Not implemented');

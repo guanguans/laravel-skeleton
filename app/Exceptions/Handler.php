@@ -28,16 +28,19 @@ class Handler extends ExceptionHandler
     /**
      * Register the exception handling callbacks for the application.
      */
+    #[\Override]
     public function register(): void
     {
         $this->reportable(static function (Throwable $e): void {});
     }
 
+    #[\Override]
     public function report(Throwable $e): void
     {
         parent::report($e);
     }
 
+    #[\Override]
     public function render($request, Throwable $e)
     {
         return parent::render($request, $e);
