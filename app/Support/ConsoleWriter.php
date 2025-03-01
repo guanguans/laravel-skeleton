@@ -108,7 +108,7 @@ class ConsoleWriter extends OutputStyle
         parent::block($message, null, 'fg=black;bg=red', ' ', true, false);
     }
 
-    public function text($message): void
+    public function text(array|string $message): void
     {
         parent::text($message);
     }

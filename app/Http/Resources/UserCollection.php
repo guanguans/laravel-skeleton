@@ -9,10 +9,9 @@ class UserCollection extends ResourceCollection
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request)
+    public function toArray(\Illuminate\Http\Request $request)
     {
         return parent::toArray($request);
     }

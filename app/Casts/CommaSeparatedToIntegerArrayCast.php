@@ -14,7 +14,7 @@ namespace App\Casts;
 
 class CommaSeparatedToIntegerArrayCast extends CommaSeparatedToArrayCast
 {
-    public function get($model, $key, $value, $attributes): array
+    public function get(\Illuminate\Database\Eloquent\Model $model, string $key, mixed $value, array $attributes): array
     {
         return array_map(\intval(...), parent::get($model, $key, $value, $attributes));
     }
