@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a228223f2cfa2491dad014bbf92a6805",
+    "content-hash": "2b7588286656f0da9b6f958b0fd46a20",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -2572,6 +2572,65 @@
             "time": "2025-01-30T14:58:56+00:00"
         },
         {
+            "name": "christophrumpel/artisan-benchmark",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/christophrumpel/artisan-benchmark.git",
+                "reference": "2458217611849d11d48dcaa663167e1f639234ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/christophrumpel/artisan-benchmark/zipball/2458217611849d11d48dcaa663167e1f639234ce",
+                "reference": "2458217611849d11d48dcaa663167e1f639234ce",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.18.1",
+                "orchestra/testbench": "^9.9",
+                "pestphp/pest": "^3.7",
+                "symfony/var-dumper": "^7.1.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ChristophRumpel\\ArtisanBenchmark\\ArtisanBenchmarkServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ChristophRumpel\\ArtisanBenchmark\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Rumpel",
+                    "email": "christoph@christoph-rumpel.com"
+                }
+            ],
+            "description": "Benchmark Artisan Commands",
+            "keywords": [
+                "artisan",
+                "benchmark",
+                "laravel",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/christophrumpel/artisan-benchmark/issues",
+                "source": "https://github.com/christophrumpel/artisan-benchmark/tree/v0.0.3"
+            },
+            "time": "2025-02-19T08:11:23+00:00"
+        },
+        {
             "name": "coduo/php-humanizer",
             "version": "5.0.2",
             "source": {
@@ -4949,6 +5008,80 @@
                 }
             ],
             "time": "2024-10-09T13:47:03+00:00"
+        },
+        {
+            "name": "echolabsdev/prism",
+            "version": "v0.42.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/echolabsdev/prism.git",
+                "reference": "e12d70b43dbf98f02f49aee907f06fe0e32e49d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/echolabsdev/prism/zipball/e12d70b43dbf98f02f49aee907f06fe0e32e49d0",
+                "reference": "e12d70b43dbf98f02f49aee907f06fe0e32e49d0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11.0|^12.0",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.14",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^9.4",
+                "peckphp/peck": "^0.1.1",
+                "pestphp/pest": "^3.0",
+                "pestphp/pest-plugin-arch": "^3.0",
+                "pestphp/pest-plugin-laravel": "^3.0",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpdoc-parser": "^1.24",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "projektgopher/whisky": "^0.7.0",
+                "rector/rector": "^1.1",
+                "spatie/laravel-ray": "^1.39",
+                "symplify/rule-doc-generator-contracts": "^11.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "PrismServer": "EchoLabs\\Prism\\Facades\\PrismServer"
+                    },
+                    "providers": [
+                        "EchoLabs\\Prism\\PrismServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EchoLabs\\Prism\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "TJ Miller",
+                    "email": "hello@echolabs.dev"
+                }
+            ],
+            "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
+            "support": {
+                "issues": "https://github.com/echolabsdev/prism/issues",
+                "source": "https://github.com/echolabsdev/prism/tree/v0.42.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sixlive",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-28T20:53:00+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -11685,6 +11818,86 @@
             "time": "2016-12-05T07:27:31+00:00"
         },
         {
+            "name": "naoray/laravel-github-monolog",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Naoray/laravel-github-monolog.git",
+                "reference": "500d38feb3242a3b9dd7297b3f44fbf0b95ab82c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Naoray/laravel-github-monolog/zipball/500d38feb3242a3b9dd7297b3f44fbf0b95ab82c",
+                "reference": "500d38feb3242a3b9dd7297b3f44fbf0b95ab82c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "^11.0||^12.0",
+                "illuminate/contracts": "^11.0||^12.0",
+                "illuminate/filesystem": "^11.0||^12.0",
+                "illuminate/http": "^11.0||^12.0",
+                "illuminate/support": "^11.0||^12.0",
+                "monolog/monolog": "^3.6",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.1",
+                "laravel/pint": "^1.14",
+                "nunomaduro/collision": "^8.1.1",
+                "orchestra/testbench": "^10.0||^9.0.0",
+                "pestphp/pest": "^3.0",
+                "pestphp/pest-plugin-arch": "^3.0",
+                "pestphp/pest-plugin-laravel": "^3.0",
+                "phpstan/extension-installer": "^1.3",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Naoray\\LaravelGithubMonolog\\GithubMonologServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Naoray\\LaravelGithubMonolog\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Krishan Koenig",
+                    "email": "krishan.koenig@googlemail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Log driver to store logs as github issues",
+            "homepage": "https://github.com/naoray/laravel-github-monolog",
+            "keywords": [
+                "Krishan Koenig",
+                "github",
+                "laravel",
+                "logging",
+                "monolog"
+            ],
+            "support": {
+                "issues": "https://github.com/Naoray/laravel-github-monolog/issues",
+                "source": "https://github.com/Naoray/laravel-github-monolog/tree/v3.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/naoray",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-28T11:26:12+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "3.8.6",
             "source": {
@@ -12101,20 +12314,20 @@
         },
         {
             "name": "not-empty/jwt-manager-php-lib",
-            "version": "6.0.0",
+            "version": "7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/not-empty/jwt-manager-php-lib.git",
-                "reference": "32f0a0c26453237add5e456074d2ec80d487ab5c"
+                "reference": "6fac367a4995865e8cbd3dcb2195eb4f1ac5f89d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/not-empty/jwt-manager-php-lib/zipball/32f0a0c26453237add5e456074d2ec80d487ab5c",
-                "reference": "32f0a0c26453237add5e456074d2ec80d487ab5c",
+                "url": "https://api.github.com/repos/not-empty/jwt-manager-php-lib/zipball/6fac367a4995865e8cbd3dcb2195eb4f1ac5f89d",
+                "reference": "6fac367a4995865e8cbd3dcb2195eb4f1ac5f89d",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.2"
+                "php": "^8.3"
             },
             "require-dev": {
                 "mockery/mockery": "^1.6",
@@ -12141,9 +12354,9 @@
             "description": "PHP library to manage JWT authentication",
             "support": {
                 "issues": "https://github.com/not-empty/jwt-manager-php-lib/issues",
-                "source": "https://github.com/not-empty/jwt-manager-php-lib/tree/6.0.0"
+                "source": "https://github.com/not-empty/jwt-manager-php-lib/tree/7.0.1"
             },
-            "time": "2023-11-03T16:12:30+00:00"
+            "time": "2025-01-29T20:49:41+00:00"
         },
         {
             "name": "nunomaduro/laravel-console-task",
@@ -35116,7 +35329,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-pdo": "*",

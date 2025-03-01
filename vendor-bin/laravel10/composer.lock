@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38290b1480fac71c9bcd8b1d3cdd7f15",
+    "content-hash": "f71ae6d1b919e4e17b0e86b345061710",
     "packages": [
+        {
+            "name": "aaronfrancis/flaky",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aarondfrancis/flaky.git",
+                "reference": "4f7dee2608eae70d03e67fdb79fc6f6e8bc6d485"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aarondfrancis/flaky/zipball/4f7dee2608eae70d03e67fdb79fc6f6e8bc6d485",
+                "reference": "4f7dee2608eae70d03e67fdb79fc6f6e8bc6d485",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "^10|^11.0|^12.0",
+                "illuminate/console": "^10|^11.|^12.00",
+                "illuminate/support": "^10|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": ">=8.5.23|^9|^10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AaronFrancis\\Flaky\\Providers\\FlakyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AaronFrancis\\Flaky\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Francis",
+                    "email": "aaron@tryhardstudios.com"
+                }
+            ],
+            "description": "A Laravel package to elegantly handle flaky operations.",
+            "support": {
+                "issues": "https://github.com/aarondfrancis/flaky/issues",
+                "source": "https://github.com/aarondfrancis/flaky/tree/v1.0.0"
+            },
+            "time": "2025-02-25T19:41:30+00:00"
+        },
         {
             "name": "anourvalar/eloquent-serialize",
             "version": "1.2.28",
