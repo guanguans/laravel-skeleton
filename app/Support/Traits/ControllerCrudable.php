@@ -77,9 +77,7 @@ trait ControllerCrudable
         if ($request->ajax() || $request->wantsJson()) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
             if ($validation->fails()) {
-                return response()->json([
-                    'error' => true, 'errors' => $validation->errors()->messages(),
-                ], Response::HTTP_UNPROCESSABLE_ENTITY);
+                return response()->json(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         } else {
             $this->validate($request, $this->modelClass::validateOn());
@@ -136,9 +134,7 @@ trait ControllerCrudable
         if ($this->isAjax($request)) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn('update', $id));
             if ($validation->fails()) {
-                return response()->json([
-                    'error' => true, 'errors' => $validation->errors()->messages(),
-                ], Response::HTTP_UNPROCESSABLE_ENTITY);
+                return response()->json(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         } else {
             $this->validate($request, $this->modelClass::validateOn('update', $id));

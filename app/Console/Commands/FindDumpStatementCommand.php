@@ -129,7 +129,7 @@ class FindDumpStatementCommand extends Command
                     $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn (Stringable $name): string => "<fg=red>$name</>");
+                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn(Stringable $name): string => "<fg=red>$name</>");
                     $type = '<fg=red>struct</>';
                 }
 

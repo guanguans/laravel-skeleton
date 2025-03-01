@@ -425,7 +425,7 @@
         "md-fix": "@md-lint --fix",
         "md-lint": "lint-md --config .lintmdrc ./*.md ./.github/",
         "pest": "@php ./vendor/bin/pest --coverage",
-        "pest-coverage": "@pest --coverage-html=./build/phpunit/ --coverage-clover=./clover.xml --coverage",
+        "pest-coverage": "@pest --coverage-html=./.build/phpunit/ --coverage-clover=./clover.xml --coverage",
         "pest-migrate-configuration": "@pest --migrate-configuration",
         "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --ansi -v",
         "phpstan-baseline": "@phpstan --generate-baseline=phpstan-baseline.neon",

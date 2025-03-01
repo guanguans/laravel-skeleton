@@ -25,7 +25,7 @@ class AuthTest extends TestCase
         ]);
 
         $content = json_decode($response->content(), true);
-        $this->assertEquals('success', $content['status']);
+        $this->assertSame('success', $content['status']);
         $response->assertOk();
 
         $this->accessToken = $content['data']['access_token'];
@@ -36,7 +36,7 @@ class AuthTest extends TestCase
         $response = $this->withToken($this->accessToken)->get('/api/v1/auth/me');
 
         $content = json_decode($response->content(), true);
-        $this->assertEquals('success', $content['status']);
+        $this->assertSame('success', $content['status']);
         $response->assertOk();
     }
 
@@ -45,7 +45,7 @@ class AuthTest extends TestCase
         $response = $this->withToken($this->accessToken)->post('/api/v1/auth/logout');
 
         $content = json_decode($response->content(), true);
-        $this->assertEquals('success', $content['status']);
+        $this->assertSame('success', $content['status']);
         $response->assertOk();
     }
 
@@ -54,7 +54,7 @@ class AuthTest extends TestCase
         $response = $this->withToken($this->accessToken)->post('/api/v1/auth/refresh');
 
         $content = json_decode($response->content(), true);
-        $this->assertEquals('success', $content['status']);
+        $this->assertSame('success', $content['status']);
         $response->assertOk();
     }
 }
