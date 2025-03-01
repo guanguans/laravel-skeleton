@@ -134,7 +134,7 @@ class AppServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
-    final public const REQUEST_ID_NAME = 'X-Request-Id';
+    final public const string REQUEST_ID_NAME = 'X-Request-Id';
 
     /**
      * All of the container bindings that should be registered.

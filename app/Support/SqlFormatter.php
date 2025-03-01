@@ -21,36 +21,36 @@ namespace App\Support;
 class SqlFormatter
 {
     // Constants for token types
-    final public const TOKEN_TYPE_WHITESPACE = 0;
+    final public const int TOKEN_TYPE_WHITESPACE = 0;
 
-    final public const TOKEN_TYPE_WORD = 1;
+    final public const int TOKEN_TYPE_WORD = 1;
 
-    final public const TOKEN_TYPE_QUOTE = 2;
+    final public const int TOKEN_TYPE_QUOTE = 2;
 
-    final public const TOKEN_TYPE_BACKTICK_QUOTE = 3;
+    final public const int TOKEN_TYPE_BACKTICK_QUOTE = 3;
 
-    final public const TOKEN_TYPE_RESERVED = 4;
+    final public const int TOKEN_TYPE_RESERVED = 4;
 
-    final public const TOKEN_TYPE_RESERVED_TOPLEVEL = 5;
+    final public const int TOKEN_TYPE_RESERVED_TOPLEVEL = 5;
 
-    final public const TOKEN_TYPE_RESERVED_NEWLINE = 6;
+    final public const int TOKEN_TYPE_RESERVED_NEWLINE = 6;
 
-    final public const TOKEN_TYPE_BOUNDARY = 7;
+    final public const int TOKEN_TYPE_BOUNDARY = 7;
 
-    final public const TOKEN_TYPE_COMMENT = 8;
+    final public const int TOKEN_TYPE_COMMENT = 8;
 
-    final public const TOKEN_TYPE_BLOCK_COMMENT = 9;
+    final public const int TOKEN_TYPE_BLOCK_COMMENT = 9;
 
-    final public const TOKEN_TYPE_NUMBER = 10;
+    final public const int TOKEN_TYPE_NUMBER = 10;
 
-    final public const TOKEN_TYPE_ERROR = 11;
+    final public const int TOKEN_TYPE_ERROR = 11;
 
-    final public const TOKEN_TYPE_VARIABLE = 12;
+    final public const int TOKEN_TYPE_VARIABLE = 12;
 
     // Constants for different components of a token
-    final public const TOKEN_TYPE = 0;
+    final public const int TOKEN_TYPE = 0;
 
-    final public const TOKEN_VALUE = 1;
+    final public const int TOKEN_VALUE = 1;
 
     // For HTML syntax highlighting
     // Styles applied to different token types

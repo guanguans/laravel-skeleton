@@ -20,7 +20,7 @@ use BenSampo\Enum\Enum;
  */
 final class BooleanEnum extends Enum
 {
-    public const False = false;
+    public const bool False = false;
 
-    public const True = true;
+    public const bool True = true;
 }

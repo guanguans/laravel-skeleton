@@ -23,7 +23,7 @@ use Illuminate\Support\Str;
  */
 class SetRequestIdListener
 {
-    final public const REQUEST_ID_NAME = 'X-Request-Id';
+    final public const string REQUEST_ID_NAME = 'X-Request-Id';
 
     /**
      * Handle the event.

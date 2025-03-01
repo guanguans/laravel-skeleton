@@ -76,7 +76,7 @@ use Illuminate\Support\Sleep;
  */
 class ServerSentEvent implements \Stringable
 {
-    final public const HEADERS = [
+    final public const array HEADERS = [
         'Content-Type' => 'text/event-stream',
         'Connection' => 'keep-alive',
         'Cache-Control' => 'no-cache, no-store, must-revalidate, pre-check=0, post-check=0',

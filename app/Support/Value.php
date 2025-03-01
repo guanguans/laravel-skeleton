@@ -20,37 +20,37 @@ namespace App\Support;
 final class Value
 {
     /** @see https://php.net/types.array */
-    public const TYPE_ARRAY = 'array';
+    public const string TYPE_ARRAY = 'array';
 
     /** @see https://php.net/types.boolean */
-    public const TYPE_BOOL = 'boolean';
+    public const string TYPE_BOOL = 'boolean';
 
     /** @see https://php.net/types.callable */
-    public const TYPE_CALLABLE = 'callable';
+    public const string TYPE_CALLABLE = 'callable';
 
     /** @see https://php.net/types.resource */
-    public const TYPE_CLOSED_RESOURCE = 'closed resource';
+    public const string TYPE_CLOSED_RESOURCE = 'closed resource';
 
     /** @see https://php.net/types.float */
-    public const TYPE_FLOAT = 'float';
+    public const string TYPE_FLOAT = 'float';
 
     /** @see https://php.net/types.integer */
-    public const TYPE_INT = 'integer';
+    public const string TYPE_INT = 'integer';
 
     /** @see https://php.net/types.iterable */
-    public const TYPE_ITERABLE = 'iterable';
+    public const string TYPE_ITERABLE = 'iterable';
 
     /** @see https://php.net/types.null */
-    public const TYPE_NULL = 'null';
+    public const string TYPE_NULL = 'null';
 
     /** @see https://php.net/types.object */
-    public const TYPE_OBJECT = 'object';
+    public const string TYPE_OBJECT = 'object';
 
     /** @see https://php.net/types.resource */
-    public const TYPE_RESOURCE = 'resource';
+    public const string TYPE_RESOURCE = 'resource';
 
     /** @see https://php.net/types.string */
-    public const TYPE_STRING = 'string';
+    public const string TYPE_STRING = 'string';
 
     /**
      * Final abstract class.

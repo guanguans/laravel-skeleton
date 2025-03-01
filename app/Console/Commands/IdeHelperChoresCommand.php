@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class IdeHelperChoresCommand extends Command
 {
-    private const SUFFIX = 'Chore';
+    private const string SUFFIX = 'Chore';
 
     protected $signature = 'ide-helper:chores
         {--only=* : Only output chores with the given name}

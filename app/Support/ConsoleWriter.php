@@ -23,13 +23,13 @@ use Symfony\Component\Process\Process;
  */
 class ConsoleWriter extends OutputStyle
 {
-    final public const BLUE = 'fg=blue';
+    final public const string BLUE = 'fg=blue';
 
-    final public const GREEN = 'fg=green';
+    final public const string GREEN = 'fg=green';
 
-    final public const RED = 'fg=red';
+    final public const string RED = 'fg=red';
 
-    final public const MAGENTA = 'fg=magenta';
+    final public const string MAGENTA = 'fg=magenta';
 
     public static function formatString(string $string, string $format): string
     {

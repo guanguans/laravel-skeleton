@@ -21,9 +21,9 @@ use BenSampo\Enum\Enum;
  */
 final class HealthCheckStateEnum extends Enum
 {
-    public const OK = '<info>ok</info>';
+    public const string OK = '<info>ok</info>';
 
-    public const WARNING = '<comment>warning</comment>';
+    public const string WARNING = '<comment>warning</comment>';
 
-    public const FAILING = '<error>failing</error>';
+    public const string FAILING = '<error>failing</error>';
 }

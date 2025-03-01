@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class SetRequestId
 {
-    private const X_REQUEST_ID_NAME = 'X-Request-Id';
+    private const string X_REQUEST_ID_NAME = 'X-Request-Id';
 
     /**
      * Bootstrap the given application.

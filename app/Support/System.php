@@ -19,17 +19,17 @@ use Illuminate\Support\Sleep;
  */
 class System
 {
-    final public const X86 = 'x86';
+    final public const string X86 = 'x86';
 
-    final public const PPC = 'ppc';
+    final public const string PPC = 'ppc';
 
-    final public const ARM = 'arm';
+    final public const string ARM = 'arm';
 
-    private const RegExX86 = '/(x86*|i386|i686)/';
+    private const string RegExX86 = '/(x86*|i386|i686)/';
 
-    private const RegExARM = '/(aarch*|arm*)/';
+    private const string RegExARM = '/(aarch*|arm*)/';
 
-    private const RegExPPC = '/(ppc*)/';
+    private const string RegExPPC = '/(ppc*)/';
 
     /**
      * A list of Linux Disks that are not considered valid
@@ -42,7 +42,7 @@ class System
      * Loop - https://man7.org/linux/man-pages/man4/loop.4.html
      * Ram - https://man7.org/linux/man-pages/man4/ram.4.html
      */
-    private const INVALIDDISKS = [
+    private const array INVALIDDISKS = [
         'loop',
         'ram',
     ];
@@ -62,7 +62,7 @@ class System
      * vboxnet - Virtual Machine Networking Interface, https://www.virtualbox.org/manual/ch06.html
      * bonding_masters - https://www.kernel.org/doc/Documentation/networking/bonding.txt
      */
-    private const INVALIDNETINTERFACES = [
+    private const array INVALIDNETINTERFACES = [
         'veth',
         'docker',
         'lo',
