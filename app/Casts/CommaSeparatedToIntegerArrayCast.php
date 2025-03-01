@@ -12,10 +12,12 @@ declare(strict_types=1);
 
 namespace App\Casts;
 
+use Illuminate\Database\Eloquent\Model;
+
 class CommaSeparatedToIntegerArrayCast extends CommaSeparatedToArrayCast
 {
     #[\Override]
-    public function get(\Illuminate\Database\Eloquent\Model $model, string $key, mixed $value, array $attributes): array
+    public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
         return array_map(\intval(...), parent::get($model, $key, $value, $attributes));
     }
