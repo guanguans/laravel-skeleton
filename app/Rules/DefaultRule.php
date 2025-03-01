@@ -26,7 +26,7 @@ final class DefaultRule extends Rule implements ValidatorAwareRule
      */
     public bool $implicit = true;
 
-    public function __construct(protected mixed $default) {}
+    public function __construct(private mixed $default) {}
 
     /**
      * Determine if the validation rule passes.

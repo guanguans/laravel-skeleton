@@ -14,7 +14,7 @@ namespace App\Rules;
 
 final class HexRule extends RegexRule
 {
-    public function __construct(protected bool $forceFull = false, protected bool $allowAlpha = false) {}
+    public function __construct(private readonly bool $forceFull = false, private readonly bool $allowAlpha = false) {}
 
     protected function pattern(): string
     {

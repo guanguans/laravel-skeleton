@@ -37,7 +37,6 @@ use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
 use Rector\Renaming\Rector\String_\RenameStringRector;
-use Rector\Set\ValueObject\DowngradeLevelSetList;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\ClassMethod\ReturnTypeWillChangeRector;
 use Rector\Transform\Rector\FileWithoutNamespace\RectorConfigBuilderRector;
@@ -88,21 +87,19 @@ return RectorConfig::configure()
     ->withSets([
         PHPUnitSetList::PHPUNIT_100,
     ])
-    // ->withDeadCodeLevel(42)
     ->withTypeCoverageLevel(23)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
         codingStyle: true,
         // typeDeclarations: true,
-        // privatization: true,
+        privatization: true,
         // naming: true,
         instanceOf: true,
         // earlyReturn: true,
         phpunitCodeQuality: true,
     )
     ->withSets([
-        DowngradeLevelSetList::DOWN_TO_PHP_82,
         LaravelSetList::LARAVEL_110,
         // LaravelSetList::LARAVEL_STATIC_TO_INJECTION,
         LaravelSetList::LARAVEL_CODE_QUALITY,

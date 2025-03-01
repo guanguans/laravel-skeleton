@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\IpUtils;
 final class IpRule extends Rule
 {
     /** @var array<string> */
-    protected array $v4 = [
+    private array $v4 = [
         '0.0.0.0/8',
         '10.0.0.0/8',
         '127.0.0.0/8',
@@ -27,14 +27,14 @@ final class IpRule extends Rule
     ];
 
     /** @var array<string> */
-    protected array $v6 = [
+    private array $v6 = [
         '::1/128',
         'fc00::/7',
         'fd00::/8',
         'fe80::/10',
     ];
 
-    public function __construct(protected bool $isPublic = true) {}
+    public function __construct(private readonly bool $isPublic = true) {}
 
     public function isV4(string $ip): bool
     {
