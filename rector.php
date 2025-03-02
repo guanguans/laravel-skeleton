@@ -70,6 +70,7 @@ return RectorConfig::configure()
         __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
         __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
         __DIR__.'/app/Support/Http',
+        __DIR__.'/database/migrations/2025_03_02_213337_create_settings_table.php',
         __DIR__.'/dcat_admin_ide_helper.php',
         __DIR__.'/deploy.example.php',
         __DIR__.'/deploy.php',

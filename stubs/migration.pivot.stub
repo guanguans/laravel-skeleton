@@ -1,0 +1,28 @@
+<?php
+
+{{ uses }}
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('{{ table }}', static function (Blueprint $table): void {
+            $table->foreignIdFor({{ first_model_name }}::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor({{ second_model_name }}::class)->constrained()->cascadeOnDelete();
+            $table->primary(['{{ first_table_foreign_id }}', '{{ second_table_foreign_id }}']);
+
+            $table->index('{{ first_table_foreign_id }}');
+            $table->index('{{ second_table_foreign_id }}');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('{{ table }}');
+    }
+};
