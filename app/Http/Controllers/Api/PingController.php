@@ -48,16 +48,16 @@ class PingController extends Controller
      *     "error": {}
      * }
      */
-    public function ping(Request $request, mixed $isBad = 0): JsonResponse
+    public function ping(Request $request, int $isBad = 0): JsonResponse
     {
         $validatedParameters = $request->validateStrictAll([
             'is_bad' => 'integer',
         ]);
 
         if (($validatedParameters['is_bad'] ?? 0) || $isBad) {
-            $this->errorBadRequest('This is a bad example.');
+            return $this->apiResponse()->badRequest('This is a bad example.');
         }
 
-        return $this->apiResponse->ok('This is a successful example.');
+        return $this->apiResponse()->ok('This is a successful example.');
     }
 }
