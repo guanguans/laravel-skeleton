@@ -73,6 +73,7 @@
         "jdavidbakr/laravel-cache-garbage-collector": "^2.3",
         "jenssegers/agent": "^2.6",
         "jiannei/laravel-response": "^6.0",
+        "juliomotol/laravel-auth-timeout": "^4.2",
         "kcs/class-finder": "^0.6",
         "kevinrob/guzzle-cache-middleware": "^6.0",
         "kirkbushell/eloquence": "^12.0",
