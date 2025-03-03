@@ -22964,24 +22964,24 @@
         },
         {
             "name": "watson/validating",
-            "version": "8.2.0",
+            "version": "8.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/validating.git",
-                "reference": "7798363f63d05565ccae01ae95c2227519c1739f"
+                "reference": "5f24d15727e69857c723aa7bb4c9399931f37827"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/7798363f63d05565ccae01ae95c2227519c1739f",
-                "reference": "7798363f63d05565ccae01ae95c2227519c1739f",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/5f24d15727e69857c723aa7bb4c9399931f37827",
+                "reference": "5f24d15727e69857c723aa7bb4c9399931f37827",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "~9.0|~10.0|~11.0",
-                "illuminate/database": "~9.0|~10.0|~11.0",
-                "illuminate/events": "~9.0|~10.0|~11.0",
-                "illuminate/support": "~9.0|~10.0|~11.0",
-                "illuminate/validation": "~9.0|~10.0|~11.0",
+                "illuminate/contracts": "~9.0|~10.0|~11.0|~12.0",
+                "illuminate/database": "~9.0|~10.0|~11.0|~12.0",
+                "illuminate/events": "~9.0|~10.0|~11.0|~12.0",
+                "illuminate/support": "~9.0|~10.0|~11.0|~12.0",
+                "illuminate/validation": "~9.0|~10.0|~11.0|~12.0",
                 "php": "^8.1"
             },
             "require-dev": {
@@ -23012,9 +23012,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dwightwatson/validating/issues",
-                "source": "https://github.com/dwightwatson/validating/tree/8.2.0"
+                "source": "https://github.com/dwightwatson/validating/tree/8.3.0"
             },
-            "time": "2024-03-13T21:31:03+00:00"
+            "time": "2025-03-03T21:50:02+00:00"
         },
         {
             "name": "webmozart/assert",
