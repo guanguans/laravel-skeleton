@@ -6204,44 +6204,43 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "4.6.0",
+            "version": "4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "f6fa1eb3761881d6aacffef443c5fe0d9086c291"
+                "reference": "7ca18c099f25caabe575df943c8e9eea76bcb190"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/f6fa1eb3761881d6aacffef443c5fe0d9086c291",
-                "reference": "f6fa1eb3761881d6aacffef443c5fe0d9086c291",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/7ca18c099f25caabe575df943c8e9eea76bcb190",
+                "reference": "7ca18c099f25caabe575df943c8e9eea76bcb190",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guanguans/notify": "^2.11",
-                "illuminate/support": "^8.23 || ^9.0 || ^10.0 || ^11.0",
+                "guanguans/notify": "^2.14 || ^3.0",
+                "laravel/framework": "^8.83 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
                 "php": ">=7.4"
             },
             "require-dev": {
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "driftingly/rector-laravel": "^1.2",
-                "ergebnis/composer-normalize": "^2.43",
-                "ergebnis/license": "^2.4",
+                "driftingly/rector-laravel": "^2.0",
+                "ergebnis/composer-normalize": "^2.45",
+                "ergebnis/license": "^2.6",
                 "ergebnis/php-cs-fixer-config": "dev-main",
-                "ergebnis/rector-rules": "^1.0",
+                "ergebnis/rector-rules": "^1.3",
                 "guanguans/monorepo-builder-worker": "^1.4",
                 "hyperf/composer-plugin": "^1.0",
-                "icanhazstring/composer-unused": "^0.8",
                 "maglnet/composer-require-checker": "^3.8 || ^4.0",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^6.45 || ^7.0 || ^8.0 || ^9.0",
-                "pestphp/pest": "^1.23 || ^2.0",
-                "pestphp/pest-plugin-faker": "^1.0 || ^2.0",
-                "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
+                "orchestra/testbench": "^6.47 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
+                "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
+                "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
+                "pestphp/pest-plugin-laravel": "^1.2 || ^2.0 || ^3.1",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.11",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
-                "rector/rector": "^1.2"
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -6365,20 +6364,20 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-08-16T08:02:33+00:00"
+            "time": "2025-03-01T12:32:52+00:00"
         },
         {
             "name": "guanguans/notify",
-            "version": "2.14.1",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "7c74ba34cb60a1027cc1d88149c09ac10a055bb6"
+                "reference": "9901302e6dd96d186cc142427cff38c766651b5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/7c74ba34cb60a1027cc1d88149c09ac10a055bb6",
-                "reference": "7c74ba34cb60a1027cc1d88149c09ac10a055bb6",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/9901302e6dd96d186cc142427cff38c766651b5b",
+                "reference": "9901302e6dd96d186cc142427cff38c766651b5b",
                 "shasum": ""
             },
             "require": {
@@ -6387,24 +6386,20 @@
                 "ext-simplexml": "*",
                 "guzzlehttp/guzzle": "^7.9",
                 "guzzlehttp/uri-template": "^1.0",
-                "php": ">=7.4",
-                "symfony/options-resolver": "^5.4 || ^6.0 || ^7.0"
+                "php": ">=8.0",
+                "symfony/options-resolver": "^6.0 || ^7.0"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8",
-                "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
+                "brainmaestro/composer-git-hooks": "^3.0",
                 "ergebnis/composer-normalize": "^2.45",
-                "ergebnis/license": "^2.6",
-                "ergebnis/php-cs-fixer-config": "dev-main",
                 "ergebnis/rector-rules": "^1.3",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
-                "icanhazstring/composer-unused": "^0.8",
-                "illuminate/collections": "^8.83 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/support": "^8.83 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/collections": "^9.52 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/support": "^9.52 || ^10.0 || ^11.0 || ^12.0",
                 "infection/extension-installer": "^0.1",
-                "infection/infection": "^0.26",
-                "maglnet/composer-require-checker": "^3.8 || ^4.0",
+                "maglnet/composer-require-checker": "^4.4",
                 "mockery/mockery": "^1.6",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
@@ -6413,9 +6408,15 @@
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan": "^2.1",
                 "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-webmozart-assert": "^2.0",
                 "rector/rector": "^2.0",
-                "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
-                "vimeo/psalm": "^5.26 || ^6.0"
+                "shipmonk/phpstan-baseline-per-identifier": "^2.1",
+                "spaze/phpstan-disallowed-calls": "^4.4",
+                "symfony/var-dumper": "^6.0 || ^7.0",
+                "symfony/yaml": "^6.0 || ^7.0",
+                "symplify/phpstan-extensions": "^12.0",
+                "symplify/phpstan-rules": "^14.3",
+                "tomasvotruba/type-coverage": "^2.0"
             },
             "suggest": {
                 "illuminate/collections": "Required to use the method [Response::collect()].",
@@ -6438,7 +6439,7 @@
                     "target-directory": "vendor-bin"
                 },
                 "branch-alias": {
-                    "dev-main": "2.x-dev"
+                    "dev-main": "3.x-dev"
                 },
                 "composer-normalize": {
                     "indent-size": 4,
@@ -6527,7 +6528,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-02-22T10:57:48+00:00"
+            "time": "2025-02-25T09:23:17+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -15724,16 +15725,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5"
+                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5",
-                "reference": "a4b48764bfbb8f3a6a4d1aeb1a35bb5e9ecac4a5",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
+                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
                 "shasum": ""
             },
             "require": {
@@ -15741,25 +15742,22 @@
             },
             "require-dev": {
                 "captainhook/plugin-composer": "^5.3",
-                "ergebnis/composer-normalize": "^2.28.3",
-                "fakerphp/faker": "^1.21",
+                "ergebnis/composer-normalize": "^2.45",
+                "fakerphp/faker": "^1.24",
                 "hamcrest/hamcrest-php": "^2.0",
-                "jangregor/phpstan-prophecy": "^1.0",
-                "mockery/mockery": "^1.5",
+                "jangregor/phpstan-prophecy": "^2.1",
+                "mockery/mockery": "^1.6",
                 "php-parallel-lint/php-console-highlighter": "^1.0",
-                "php-parallel-lint/php-parallel-lint": "^1.3",
-                "phpcsstandards/phpcsutils": "^1.0.0-rc1",
-                "phpspec/prophecy-phpunit": "^2.0",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.9",
-                "phpstan/phpstan-mockery": "^1.1",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^9.5",
-                "psalm/plugin-mockery": "^1.1",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "ramsey/coding-standard": "^2.0.3",
-                "ramsey/conventional-commits": "^1.3",
-                "vimeo/psalm": "^5.4"
+                "php-parallel-lint/php-parallel-lint": "^1.4",
+                "phpspec/prophecy-phpunit": "^2.3",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-mockery": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^10.5",
+                "ramsey/coding-standard": "^2.3",
+                "ramsey/conventional-commits": "^1.6",
+                "roave/security-advisories": "dev-latest"
             },
             "type": "library",
             "extra": {
@@ -15797,19 +15795,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/2.0.0"
+                "source": "https://github.com/ramsey/collection/tree/2.1.0"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/ramsey",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/ramsey/collection",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2022-12-31T21:50:55+00:00"
+            "time": "2025-03-02T04:48:29+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -35537,9 +35525,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -35551,6 +35539,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
