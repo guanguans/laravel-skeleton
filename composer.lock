@@ -34779,16 +34779,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "d146959a0f44ab84bcd213e5c85d5e9640432efb"
+                "reference": "b24661b61262abdac1b35d8f4f88d7e3ffb38d1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/d146959a0f44ab84bcd213e5c85d5e9640432efb",
-                "reference": "d146959a0f44ab84bcd213e5c85d5e9640432efb",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/b24661b61262abdac1b35d8f4f88d7e3ffb38d1e",
+                "reference": "b24661b61262abdac1b35d8f4f88d7e3ffb38d1e",
                 "shasum": ""
             },
             "require": {
@@ -34797,12 +34797,12 @@
             },
             "require-dev": {
                 "nette/neon": "^3.3.1",
-                "nikic/php-parser": "^4.13 || ^5.0",
+                "nikic/php-parser": "^4.13.2 || ^5.0",
                 "php-parallel-lint/php-console-highlighter": "^1.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
                 "phpunit/phpunit": "^8.5.14 || ^10.1 || ^11.0 || ^12.0",
-                "spaze/coding-standard": "^1.7"
+                "spaze/coding-standard": "^1.8"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -34834,7 +34834,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.4.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.4.1"
             },
             "funding": [
                 {
@@ -34842,7 +34842,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-22T03:49:57+00:00"
+            "time": "2025-03-03T21:14:21+00:00"
         },
         {
             "name": "sti3bas/laravel-scout-array-driver",
@@ -35537,9 +35537,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -35551,6 +35551,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
