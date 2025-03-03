@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e7facd0fc520ed486194e35cf9b43d6",
+    "content-hash": "df1d24fdc040a9646d23b10a598d8d26",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -5011,16 +5011,16 @@
         },
         {
             "name": "echolabsdev/prism",
-            "version": "v0.42.0",
+            "version": "v0.45.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/echolabsdev/prism.git",
-                "reference": "e12d70b43dbf98f02f49aee907f06fe0e32e49d0"
+                "reference": "90196d9ec18947953090759cd132dc707674b080"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/echolabsdev/prism/zipball/e12d70b43dbf98f02f49aee907f06fe0e32e49d0",
-                "reference": "e12d70b43dbf98f02f49aee907f06fe0e32e49d0",
+                "url": "https://api.github.com/repos/echolabsdev/prism/zipball/90196d9ec18947953090759cd132dc707674b080",
+                "reference": "90196d9ec18947953090759cd132dc707674b080",
                 "shasum": ""
             },
             "require": {
@@ -5073,7 +5073,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/echolabsdev/prism/issues",
-                "source": "https://github.com/echolabsdev/prism/tree/v0.42.0"
+                "source": "https://github.com/echolabsdev/prism/tree/v0.45.0"
             },
             "funding": [
                 {
@@ -5081,7 +5081,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-28T20:53:00+00:00"
+            "time": "2025-03-03T15:11:36+00:00"
         },
         {
             "name": "egulias/email-validator",
