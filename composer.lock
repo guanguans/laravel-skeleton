@@ -16263,24 +16263,24 @@
         },
         {
             "name": "ryangjchandler/orbit",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ryangjchandler/orbit.git",
-                "reference": "279f07cecc9edce4caf7d6d0edea034dadb217d2"
+                "reference": "54f2c888eaced47bb0ba7f03e9accbf8fe2b6b02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ryangjchandler/orbit/zipball/279f07cecc9edce4caf7d6d0edea034dadb217d2",
-                "reference": "279f07cecc9edce4caf7d6d0edea034dadb217d2",
+                "url": "https://api.github.com/repos/ryangjchandler/orbit/zipball/54f2c888eaced47bb0ba7f03e9accbf8fe2b6b02",
+                "reference": "54f2c888eaced47bb0ba7f03e9accbf8fe2b6b02",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/console": "^9.0 | ^10.0 | ^11.0",
-                "illuminate/database": "^9.0 | ^10.0 | ^11.0",
-                "illuminate/events": "^9.0 | ^10.0 | ^11.0",
-                "illuminate/support": "^9.0 | ^10.0 | ^11.0",
+                "illuminate/console": "^11.0 | ^12.0",
+                "illuminate/database": "^11.0 | ^12.0",
+                "illuminate/events": "^11.0 | ^12.0",
+                "illuminate/support": "^11.0 | ^12.0",
                 "php": "^8.0",
                 "spatie/yaml-front-matter": "^2.0",
                 "symfony/yaml": "^6.0 | ^7.0"
@@ -16288,11 +16288,11 @@
             "require-dev": {
                 "laravel/scout": "^9.4 | ^10.0",
                 "nunomaduro/larastan": "^2.0",
-                "orchestra/testbench": "^7.0 | ^8.0 | ^9.0",
+                "orchestra/testbench": "^9.0 | ^10.0",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.0 | ^10.0"
+                "phpstan/phpstan-deprecation-rules": "^1.0 | ^2.0",
+                "phpstan/phpstan-phpunit": "^1.0 | ^2.0",
+                "phpunit/phpunit": "^10.0 | ^11.5.3"
             },
             "type": "library",
             "extra": {
@@ -16322,7 +16322,7 @@
             "description": "A flat-file database driver for Eloquent.",
             "support": {
                 "issues": "https://github.com/ryangjchandler/orbit/issues",
-                "source": "https://github.com/ryangjchandler/orbit/tree/v1.3.0"
+                "source": "https://github.com/ryangjchandler/orbit/tree/v1.4.0"
             },
             "funding": [
                 {
@@ -16330,7 +16330,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-12T23:58:53+00:00"
+            "time": "2025-03-02T23:11:23+00:00"
         },
         {
             "name": "sbamtr/laravel-query-enrich",
