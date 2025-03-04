@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df1d24fdc040a9646d23b10a598d8d26",
+    "content-hash": "683e7a4f7e7ddbba4135bf4ce3356171",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -5981,49 +5981,54 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "1.0.1",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "06d45eec4189806d9387dc802680eebb3dfd585a"
+                "reference": "a46e6d1b70af13fa283392d3e004f0b07ed64d04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/06d45eec4189806d9387dc802680eebb3dfd585a",
-                "reference": "06d45eec4189806d9387dc802680eebb3dfd585a",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/a46e6d1b70af13fa283392d3e004f0b07ed64d04",
+                "reference": "a46e6d1b70af13fa283392d3e004f0b07ed64d04",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laravel/framework": "^8.83 || ^9.0 || ^10.0 || ^11.0",
-                "php": ">=7.4",
-                "spatie/laravel-package-tools": "^1.12"
+                "laravel/framework": "^9.52 || ^10.0 || ^11.0 || ^12.0",
+                "php": ">=8.0",
+                "spatie/laravel-package-tools": "^1.19"
             },
             "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "driftingly/rector-laravel": "^1.2",
-                "ergebnis/composer-normalize": "^2.44",
-                "ergebnis/license": "^2.5",
-                "ergebnis/php-cs-fixer-config": "dev-main",
-                "ergebnis/rector-rules": "^1.1",
+                "bamarni/composer-bin-plugin": "^1.8",
+                "brainmaestro/composer-git-hooks": "^3.0",
+                "composer/semver": "^3.4",
+                "driftingly/rector-laravel": "^2.0",
+                "ergebnis/composer-normalize": "^2.45",
+                "ergebnis/rector-rules": "^1.3",
                 "guanguans/ai-commit": "dev-main",
                 "guanguans/monorepo-builder-worker": "^1.4",
-                "hyperf/composer-plugin": "^1.0",
-                "icanhazstring/composer-unused": "^0.8",
+                "guzzlehttp/psr7": "^2.7",
                 "laravel-lang/http-statuses": "^3.2",
-                "maglnet/composer-require-checker": "^3.8 || ^4.0",
+                "laravel/facade-documenter": "dev-main",
+                "maglnet/composer-require-checker": "^4.4",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^6.47 || ^7.0 || ^8.0 || ^9.0",
+                "orchestra/testbench": "^7.52 || ^8.0 || ^9.0 || ^10.0",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
-                "pestphp/pest-plugin-laravel": "^1.2 || ^2.0",
+                "pestphp/pest-plugin-laravel": "^1.4 || ^2.0 || ^3.0",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^1.12",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-webmozart-assert": "^2.0",
                 "povils/phpmnd": "^3.5",
-                "rector/rector": "^1.2",
+                "rector/rector": "^2.0",
+                "shipmonk/phpstan-baseline-per-identifier": "^2.1",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-                "spaze/phpstan-disallowed-calls": "^3.5"
+                "spaze/phpstan-disallowed-calls": "^4.4",
+                "symplify/phpstan-extensions": "^12.0",
+                "symplify/phpstan-rules": "^14.3",
+                "tomasvotruba/type-coverage": "^2.0"
             },
             "suggest": {
                 "laravel-lang/http-statuses": "Provide localized message for HTTP status code."
@@ -6065,7 +6070,10 @@
                 ],
                 "psr-4": {
                     "Guanguans\\LaravelApiResponse\\": "src"
-                }
+                },
+                "classmap": [
+                    "src/Support/Traits/Dumpable.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -6103,7 +6111,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2024-10-30T10:27:11+00:00"
+            "time": "2025-03-03T13:25:00+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
