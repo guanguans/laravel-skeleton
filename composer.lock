@@ -23209,16 +23209,16 @@
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
-            "version": "v4.0.0",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
-                "reference": "3e622708da69c315d3282b39b832a0a3cd64698d"
+                "reference": "d086aa4750ab3780e4fb16616aecde78af1205cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/3e622708da69c315d3282b39b832a0a3cd64698d",
-                "reference": "3e622708da69c315d3282b39b832a0a3cd64698d",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/d086aa4750ab3780e4fb16616aecde78af1205cf",
+                "reference": "d086aa4750ab3780e4fb16616aecde78af1205cf",
                 "shasum": ""
             },
             "require": {
@@ -23233,7 +23233,8 @@
                 "laravel/pint": "^1.21",
                 "orchestra/testbench": "^9.0|^10.0",
                 "pestphp/pest": "^2.0|^3.0",
-                "pestphp/pest-plugin-faker": "^2.0|^3.0"
+                "pestphp/pest-plugin-faker": "^2.0|^3.0",
+                "spatie/typescript-transformer": "^2.4"
             },
             "type": "library",
             "extra": {
@@ -23279,7 +23280,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-26T14:50:21+00:00"
+            "time": "2025-03-04T13:31:46+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",
@@ -35586,9 +35587,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -35600,6 +35601,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
