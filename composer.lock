@@ -11882,16 +11882,16 @@
         },
         {
             "name": "mpyw/laravel-cached-database-stickiness",
-            "version": "v2.1.1",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpyw/laravel-cached-database-stickiness.git",
-                "reference": "c041a2c7bb56451d1c54e0bafae479b0d1cd1cca"
+                "reference": "d9fdbe6b08637869d4d3f4282ffc6ed3f6835c20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpyw/laravel-cached-database-stickiness/zipball/c041a2c7bb56451d1c54e0bafae479b0d1cd1cca",
-                "reference": "c041a2c7bb56451d1c54e0bafae479b0d1cd1cca",
+                "url": "https://api.github.com/repos/mpyw/laravel-cached-database-stickiness/zipball/d9fdbe6b08637869d4d3f4282ffc6ed3f6835c20",
+                "reference": "d9fdbe6b08637869d4d3f4282ffc6ed3f6835c20",
                 "shasum": ""
             },
             "require": {
@@ -11945,9 +11945,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mpyw/laravel-cached-database-stickiness/issues",
-                "source": "https://github.com/mpyw/laravel-cached-database-stickiness/tree/v2.1.1"
+                "source": "https://github.com/mpyw/laravel-cached-database-stickiness/tree/v2.2.0"
             },
-            "time": "2025-03-03T02:05:05+00:00"
+            "time": "2025-03-04T01:54:58+00:00"
         },
         {
             "name": "namshi/jose",
