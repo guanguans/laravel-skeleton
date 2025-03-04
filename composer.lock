@@ -7477,16 +7477,16 @@
         },
         {
             "name": "inspector-apm/inspector-laravel",
-            "version": "4.11.1",
+            "version": "4.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-laravel.git",
-                "reference": "6a9eaa46bc09e13d71cff0460060b75b9f42a458"
+                "reference": "099f41f2dde8fad771731ca1f894123b48fef210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/6a9eaa46bc09e13d71cff0460060b75b9f42a458",
-                "reference": "6a9eaa46bc09e13d71cff0460060b75b9f42a458",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-laravel/zipball/099f41f2dde8fad771731ca1f894123b48fef210",
+                "reference": "099f41f2dde8fad771731ca1f894123b48fef210",
                 "shasum": ""
             },
             "require": {
@@ -7537,28 +7537,29 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-laravel/issues",
-                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.11.1"
+                "source": "https://github.com/inspector-apm/inspector-laravel/tree/4.11.2"
             },
-            "time": "2025-02-24T18:04:25+00:00"
+            "time": "2025-03-04T10:58:13+00:00"
         },
         {
             "name": "inspector-apm/inspector-php",
-            "version": "3.9.2",
+            "version": "3.11.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-php.git",
-                "reference": "9be4e71a95945cddbe00fcc91e71092125b60a02"
+                "reference": "e5e65c43b5c055ab951d4ff9fab26149aebba17f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-php/zipball/9be4e71a95945cddbe00fcc91e71092125b60a02",
-                "reference": "9be4e71a95945cddbe00fcc91e71092125b60a02",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-php/zipball/e5e65c43b5c055ab951d4ff9fab26149aebba17f",
+                "reference": "e5e65c43b5c055ab951d4ff9fab26149aebba17f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
             "require-dev": {
+                "inspector-apm/neuron-ai": "^1.2.18",
                 "phpunit/phpunit": "^9.0"
             },
             "type": "library",
@@ -7585,9 +7586,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-php/issues",
-                "source": "https://github.com/inspector-apm/inspector-php/tree/3.9.2"
+                "source": "https://github.com/inspector-apm/inspector-php/tree/3.11.10"
             },
-            "time": "2025-02-28T11:19:56+00:00"
+            "time": "2025-03-04T16:39:30+00:00"
         },
         {
             "name": "intervention/gif",
