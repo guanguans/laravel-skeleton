@@ -6425,16 +6425,16 @@
         },
         {
             "name": "guanguans/notify",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/notify.git",
-                "reference": "9901302e6dd96d186cc142427cff38c766651b5b"
+                "reference": "e20db3a35a26f0cd6bcbd4131a1dd5d9d2e1b2b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/notify/zipball/9901302e6dd96d186cc142427cff38c766651b5b",
-                "reference": "9901302e6dd96d186cc142427cff38c766651b5b",
+                "url": "https://api.github.com/repos/guanguans/notify/zipball/e20db3a35a26f0cd6bcbd4131a1dd5d9d2e1b2b6",
+                "reference": "e20db3a35a26f0cd6bcbd4131a1dd5d9d2e1b2b6",
                 "shasum": ""
             },
             "require": {
@@ -6585,7 +6585,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-02-25T09:23:17+00:00"
+            "time": "2025-03-04T06:35:42+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
