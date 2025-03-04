@@ -48,7 +48,7 @@
         "dragon-code/laravel-http-logger": "^1.5",
         "dragon-code/laravel-route-names": "^1.6",
         "dragon-code/laravel-support": "^3.8",
-        "echolabsdev/prism": "^0.45",
+        "echolabsdev/prism": "^0.46",
         "elao/enum": "^2.5",
         "elasticsearch/elasticsearch": "^8.17",
         "emreyarligan/enum-concern": "^1.0",
