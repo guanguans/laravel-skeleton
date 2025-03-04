@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "683e7a4f7e7ddbba4135bf4ce3356171",
+    "content-hash": "2c9d640ae3dbaf4483cae143f7ed405d",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -5980,17 +5980,66 @@
             "time": "2024-07-20T21:45:45+00:00"
         },
         {
-            "name": "guanguans/laravel-api-response",
-            "version": "2.0.1",
+            "name": "grosv/laravel-passwordless-login",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "a46e6d1b70af13fa283392d3e004f0b07ed64d04"
+                "url": "https://github.com/grosv/laravel-passwordless-login.git",
+                "reference": "45344708ddccc49dfd8c935202356b3d5765406a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/a46e6d1b70af13fa283392d3e004f0b07ed64d04",
-                "reference": "a46e6d1b70af13fa283392d3e004f0b07ed64d04",
+                "url": "https://api.github.com/repos/grosv/laravel-passwordless-login/zipball/45344708ddccc49dfd8c935202356b3d5765406a",
+                "reference": "45344708ddccc49dfd8c935202356b3d5765406a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": "Grosv\\LaravelPasswordlessLogin\\LaravelPasswordlessLoginProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Grosv\\LaravelPasswordlessLogin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ed Grosvenor",
+                    "email": "ed.grosvenor@wickedviral.com"
+                }
+            ],
+            "description": "Passwordless login using temporary signed URL",
+            "support": {
+                "issues": "https://github.com/grosv/laravel-passwordless-login/issues",
+                "source": "https://github.com/grosv/laravel-passwordless-login/tree/1.10.0"
+            },
+            "time": "2024-05-16T19:06:09+00:00"
+        },
+        {
+            "name": "guanguans/laravel-api-response",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guanguans/laravel-api-response.git",
+                "reference": "48ac78f405c7f69fefd15b3d8d2e33a408f3d8fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/48ac78f405c7f69fefd15b3d8d2e33a408f3d8fd",
+                "reference": "48ac78f405c7f69fefd15b3d8d2e33a408f3d8fd",
                 "shasum": ""
             },
             "require": {
@@ -6111,7 +6160,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-03-03T13:25:00+00:00"
+            "time": "2025-03-04T04:42:26+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
@@ -35537,9 +35586,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/pulse": 10,
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
+        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
@@ -35551,6 +35600,6 @@
         "ext-pdo": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
