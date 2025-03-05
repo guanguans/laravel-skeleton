@@ -27,6 +27,7 @@
         "aurorawebsoftware/asetting": "^11.0",
         "awobaz/compoships": "^2.4",
         "axlon/laravel-postal-code-validation": "^3.8",
+        "azjezz/psl": "^3.2",
         "balping/json-raw-encoder": "^1.0",
         "bensampo/laravel-enum": "^6.12",
         "biiiiiigmonster/hasin": "^4.0",
@@ -185,6 +186,7 @@
         "buggregator/trap": "^1.13",
         "captainhook/captainhook": "^5.25",
         "captainhook/hook-installer": "^1.0",
+        "carthage-software/mago": "^0.16.0",
         "chrisdicarlo/laravel-config-checker": "^1.2",
         "coduo/php-matcher": "^6.0",
         "deployer/deployer": "^7.5",
@@ -272,6 +274,7 @@
     "config": {
         "allow-plugins": {
             "captainhook/hook-installer": true,
+            "carthage-software/mago": true,
             "ergebnis/composer-normalize": true,
             "pestphp/pest-plugin": true,
             "php-http/discovery": true,
