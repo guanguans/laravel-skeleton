@@ -30,6 +30,7 @@
         "azjezz/psl": "^3.2",
         "balping/json-raw-encoder": "^1.0",
         "bensampo/laravel-enum": "^6.12",
+        "beyondcode/laravel-mailbox": "^5.0",
         "biiiiiigmonster/hasin": "^4.0",
         "bilfeldt/laravel-http-client-logger": "^2.4",
         "bramus/monolog-colored-line-formatter": "^3.1",
