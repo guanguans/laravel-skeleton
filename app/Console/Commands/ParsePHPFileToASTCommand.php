@@ -57,7 +57,7 @@ class ParsePHPFileToASTCommand extends Command
             $nodes = $this->parser->parse($contents);
             dump($nodes);
         } catch (Error $e) {
-            $this->output->error(\sprintf('The file of %s parse error: %s.', $file, $e->getMessage()));
+            $this->output->error(\sprintf('The file of %s parse error: %s.', $file ?? 'unknown', $e->getMessage()));
 
             return self::FAILURE;
         }

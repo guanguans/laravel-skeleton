@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\Http\Support;
 
-use JetBrains\PhpStorm\Pure;
-
 class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonSerializable, \Stringable
 {
     protected array $items = [];
@@ -199,7 +197,6 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
         }
     }
 
-    #[Pure]
     public function toArray(): array
     {
         return $this->all();

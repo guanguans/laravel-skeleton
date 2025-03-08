@@ -1,53 +1,60 @@
 includes:
+#    - baselines/loader.neon
     - phpstan-baseline.neon
-#    - vendor/larastan/larastan/extension.neon
-#    - vendor/roave/no-floaters/rules.neon
-#    - vendor/phpstan/phpstan-strict-rules/rules.neon
-#    - vendor/ergebnis/phpstan-rules/rules.neon
-#    - vendor/ekino/phpstan-banned-code/extension.neon
-#    - vendor/spaze/phpstan-disallowed-calls/extension.neon
+
     - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon
 #    - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
 #    - vendor/spaze/phpstan-disallowed-calls/disallowed-insecure-calls.neon
 #    - vendor/spaze/phpstan-disallowed-calls/disallowed-loose-calls.neon
+#    - vendor/spaze/phpstan-disallowed-calls/extension.neon
+
+#    - vendor-bin/larastan/vendor/larastan/larastan/extension.neon
+#    - vendor/ekino/phpstan-banned-code/extension.neon
+#    - vendor/ergebnis/phpstan-rules/rules.neon
+#    - vendor/phpstan/phpstan-strict-rules/rules.neon
+#    - vendor/roave/no-floaters/rules.neon
 
 #    - vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
-#    - vendor/symplify/phpstan-rules/config/naming-rules.neon
-#    - vendor/symplify/phpstan-rules/config/regex-rules.neon
-#    - vendor/symplify/phpstan-rules/config/static-rules.neon
-#    - vendor/symplify/phpstan-rules/config/rector-rules.neon
 #    - vendor/symplify/phpstan-rules/config/configurable-rules.neon
+#    - vendor/symplify/phpstan-rules/config/naming-rules.neon
+#    - vendor/symplify/phpstan-rules/config/static-rules.neon
+#    - vendor/symplify/phpstan-rules/config/symplify-rules.neon
 
-#    - vendor/yamadashy/phpstan-friendly-formatter/extension.neon
+#    - vendor/symplify/phpstan-rules/config/doctrine-rules.neon
+#    - vendor/symplify/phpstan-rules/config/phpunit-rules.neon
+#    - vendor/symplify/phpstan-rules/config/rector-rules.neon
+#    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
 
 parameters:
-    level: 1
     paths:
         - app/
     excludePaths:
-        - ./*/*/FileToBeExcluded.php
+        - app/Orchid/
         - app/Support/Http/
+        - app/Support/Mixins/
         - app/Support/StreamWrappers/
+        - app/View/Components/vendor/
+        - app/Console/Commands/IdeHelperGatesCommand.php
+        - app/Console/Commands/InitCommand.php
+        - app/Notifications/SlowQueryLoggedNotification.php
+        - app/Support/helpers.php
+        - app/Support/Http/Handlers/StreamHandler.php
+        - app/Support/TencentAdsRateLimiterMiddleware.php
+#    level: max
+    level: 1
     tmpDir: .build/phpstan
+#    errorFormat: symplify
     errorFormat: friendly
-#    checkOctaneCompatibility: true
-#    checkModelProperties: true
-#    checkMissingIterableValueType: true
-#    disallowFloatsEverywhere: true
-
-#    strictRules:
-#        allRules: false
-#        booleansInConditions: false
-#        uselessCast: false
-#        requireParentConstructorCall: false
-#        disallowedConstructs: false
-#        overwriteVariablesWithLoop: false
-#        closureUsesThis: false
-#        matchingInheritedMethodNames: false
-#        numericOperandsInArithmeticOperators: false
-#        strictCalls: false
-#        switchConditionsMatchingType: false
-#        noVariableVariables: false
+    friendly:
+        lineBefore: 3
+        lineAfter: 3
+        editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+#    type_coverage:
+#        declare: 100
+#        return_type: 100
+#        param_type: 100
+#        property_type: 100
+#        constant_type: 100
     disallowedFunctionCalls:
         -
             function: 'env()'
@@ -59,12 +66,26 @@ parameters:
             function: 'env_getcsv()'
             message: 'use config() instead'
     ignoreErrors:
-#        - "#^Access to protected property App\\\\Support\\\\Mixins\\\\.*Mixin\\:\\:\\$.*\\.$#"
-        - "#^Access to an undefined property App\\\\Support\\\\Mixins\\\\.*Mixin\\:\\:\\$.*\\.$#"
-        - "#^Access to undefined constant Spatie\\\\Health\\\\Enums\\\\Status\\:\\:.*\\.$#"
-        - "#^Method App\\\\Support\\\\Mixins\\\\.*Mixin\\:\\:.*\\(\\) invoked with \\d parameters, 0 required\\.$#"
-        - "#^Unsafe usage of new static\\(\\)\\.$#"
-        - "#^Cannot access constant .* on Spatie\\\\Health\\\\Enums\\\\Status\\.$#"
+#        - '#^Cannot call method .*\(\) on mixed\.$#'
+#        - '#^Cannot cast mixed to .*\.$#'
+#        - '#^Cannot use array destructuring on mixed\.$#'
+#        - '#Property .* does not accept mixed#'
+#        -
+#            identifier: argument.templateType
+#        -
+#            identifier: argument.type
+#        -
+#            identifier: missingType.generics
+#        -
+#            identifier: missingType.iterableValue
+#        -
+#            identifier: return.type
+#        -
+#            identifier: encapsedStringPart.nonString
+#        -
+#            identifier: logicalOr.resultUnused
         -
-            message: "#^Calling env\\(\\) is forbidden, use config\\(\\) instead\\.$#"
-            path: app/Support/helpers.php
+            identifier: new.static
+        -
+            message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
+            path: ./app/Support/helpers.php

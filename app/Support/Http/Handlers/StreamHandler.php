@@ -349,7 +349,7 @@ class StreamHandler implements Handler
         return $this->createResource(
             function () use ($uri, &$http_response_header, $contextResource, $context, $options, $request) {
                 $resource = fopen((string) $uri, 'rb', false, $contextResource);
-                $this->lastHeaders = $http_response_header ?? [];
+                $this->lastHeaders = $http_response_header ?: [];
 
                 if (false === $resource) {
                     throw new ConnectException(\sprintf('Connection refused for URI %s', $uri), $request, null, $context);

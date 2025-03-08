@@ -116,7 +116,7 @@ class FindDumpStatementCommand extends Command
 
             $findInfos[] = array_map(function (Node $dumpNode) use ($fileInfo, $odd): array {
                 if ($dumpNode instanceof Node\Stmt\Expression && $dumpNode->expr instanceof Node\Expr\FuncCall) {
-                    $name = "<fg=cyan>{$dumpNode->expr->name->parts[0]}</>";
+                    $name = "<fg=cyan>{$dumpNode->expr->name->getFirst()}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
                     $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn (Stringable $name): string => "<fg=red>$name</>");

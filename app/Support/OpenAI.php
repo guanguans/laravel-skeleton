@@ -24,7 +24,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @see https://beta.openai.com/docs/api-reference/introduction
  */
-final class OpenAI extends FoundationSDK
+final class OpenAI extends FoundationSdk
 {
     public static function hydrateData(string $data): string
     {

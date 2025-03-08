@@ -77,7 +77,7 @@ class ListSchedule extends Command
      *
      * @throws \Exception
      */
-    protected function upcoming(mixed $event): bool
+    protected function upcoming(mixed $event): string
     {
         $date = Carbon::now();
 
@@ -85,6 +85,6 @@ class ListSchedule extends Command
             $date->setTimezone($event->timezone);
         }
 
-        return CronExpression::factory($event->expression)->getNextRunDate($date->toDateTimeString())->format('Y-m-d H:i:s');
+        return (new CronExpression($event->expression))->getNextRunDate($date->toDateTimeString())->format('Y-m-d H:i:s');
     }
 }

@@ -42,7 +42,7 @@ use Symfony\Component\VarDumper\VarDumper;
 /**
  * @property \Illuminate\Support\Collection $stubCallbacks
  */
-abstract class FoundationSDK
+abstract class FoundationSdk
 {
     use Conditionable;
     use Dumpable;
