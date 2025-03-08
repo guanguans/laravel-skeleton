@@ -12,12 +12,12 @@ Route::fallback(static function (): void {
     abort(404, 'API page not found.');
 });
 
-Route::any('/any', static function (Request $request) {
+Route::any('/any', static function (Request $request): \Illuminate\Http\JsonResponse {
     $request->validate([
         'file_name' => 'file',
     ]);
 
-    return response()->json([
+    return new \Illuminate\Http\JsonResponse([
         'method' => $request->method(),
         'headers' => $request->header(),
         'query' => $request->query(),

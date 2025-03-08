@@ -55,7 +55,7 @@ trait ControllerCrudable
                 return $items;
             }
 
-            return response()->json($items);
+            return new JsonResponse($items);
         }
 
         return view($this->getViewPath().'.index', ['items' => $items]);
@@ -77,7 +77,7 @@ trait ControllerCrudable
         if ($request->ajax() || $request->wantsJson()) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
             if ($validation->fails()) {
-                return response()->json(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
+                return new JsonResponse(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         } else {
             $this->validate($request, $this->modelClass::validateOn());
@@ -134,7 +134,7 @@ trait ControllerCrudable
         if ($this->isAjax($request)) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn('update', $id));
             if ($validation->fails()) {
-                return response()->json(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
+                return new JsonResponse(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
         } else {
             $this->validate($request, $this->modelClass::validateOn('update', $id));
@@ -169,7 +169,7 @@ trait ControllerCrudable
         $message = $success ? __('crud.deleted') : __('No records were deleted');
 
         return $this->isAjax($request)
-            ? response()->json(['success' => $success, 'error' => $error, 'message' => $message])
+            ? new JsonResponse(['success' => $success, 'error' => $error, 'message' => $message])
             : redirect($url)->with('flash_message', $message);
     }
 
@@ -203,6 +203,6 @@ trait ControllerCrudable
             ? new $this->modelClass::$resourceForSearch($model)
             : $model;
 
-        return response()->json($output);
+        return new JsonResponse($output);
     }
 }

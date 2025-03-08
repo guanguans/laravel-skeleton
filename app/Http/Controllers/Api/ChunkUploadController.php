@@ -41,6 +41,6 @@ class ChunkUploadController extends Controller
 
         $handler = $save->handler();
 
-        return response()->json(['progress' => $handler->getPercentageDone()]);
+        return new JsonResponse(['progress' => $handler->getPercentageDone()]);
     }
 }

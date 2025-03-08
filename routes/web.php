@@ -41,7 +41,7 @@ Route::fallback(static function (): void {
 });
 
 Route::fallback(static fn (Request $request) => $request->expectsJson()
-    ? response()->json(['error' => 'Not Found'], 404)
+    ? new \Illuminate\Http\JsonResponse(['error' => 'Not Found'], 404)
     : view('errors.404', ['path' => $request->path()]));
 
 LaravelUploader::routes();

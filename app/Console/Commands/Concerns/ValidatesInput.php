@@ -36,7 +36,7 @@ trait ValidatesInput
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        throw_if($this->validator()->fails(), new InvalidArgumentException($this->errors()));
+        throw_if($this->validator()->fails(), InvalidArgumentException::class, $this->errors());
 
         return parent::execute($input, $output);
     }

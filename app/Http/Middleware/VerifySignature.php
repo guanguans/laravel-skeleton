@@ -54,6 +54,6 @@ class VerifySignature
         throw_if($cacheSignature, InvalidRepeatRequestException::class);
 
         // Cache::put($signature, $request->fingerprint(), $effectiveTime);
-        Cache::put($signature, spl_object_hash($request), $effectiveTime);
+        Cache::put($signature, spl_object_hash($request), $effectiveTime * 60);
     }
 }
