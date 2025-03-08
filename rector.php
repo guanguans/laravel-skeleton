@@ -27,6 +27,7 @@ use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
 use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
+use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
@@ -35,6 +36,7 @@ use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
@@ -84,6 +86,7 @@ return RectorConfig::configure()
         __DIR__.'/dcat_admin_ide_helper.php',
         __DIR__.'/deploy.example.php',
         __DIR__.'/deploy.php',
+        __DIR__.'/tests/Feature/AuthTest.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()
@@ -175,7 +178,9 @@ return RectorConfig::configure()
         ExplicitBoolCompareRector::class,
         ExplicitReturnNullRector::class,
         LogicalToBooleanRector::class,
+        NewlineAfterStatementRector::class,
         NullToStrictStringFuncCallArgRector::class,
+        PreferPHPUnitThisCallRector::class,
         RemoveExtraParametersRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])

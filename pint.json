@@ -1,76 +1,106 @@
 {
     "preset": "laravel",
     "rules": {
-        "blank_line_before_statement": {
-            "statements": [
-                "break",
-                "case",
-                "continue",
-                "declare",
-                "default",
-                "exit",
-                "goto",
-                "include",
-                "include_once",
-                "phpdoc",
-                "require",
-                "require_once",
+        "braces_position": {
+            "allow_single_line_anonymous_functions": false,
+            "allow_single_line_empty_anonymous_classes": false,
+            "anonymous_classes_opening_brace": "same_line",
+            "anonymous_functions_opening_brace": "same_line",
+            "classes_opening_brace": "next_line_unless_newline_at_signature_end",
+            "control_structures_opening_brace": "same_line",
+            "functions_opening_brace": "next_line_unless_newline_at_signature_end"
+        },
+        "not_operator_with_successor_space": false,
+        "yoda_style": {
+            "always_move_variable": true,
+            "equal": true,
+            "identical": true,
+            "less_and_greater": true
+        },
+        "class_attributes_separation": {
+            "elements": {
+                "case": "only_if_meta",
+                "const": "only_if_meta",
+                "method": "one",
+                "property": "only_if_meta",
+                "trait_import": "none"
+            }
+        },
+        "header_comment": {
+            "comment_type": "PHPDoc",
+            "header": "Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>\n\nFor the full copyright and license information, please view\nthe LICENSE file that was distributed with this source code.\n\n@see https://github.com/guanguans/laravel-skeleton",
+            "location": "after_declare_strict",
+            "separate": "both"
+        },
+        "phpdoc_align": {
+            "align": "left",
+            "spacing": 1,
+            "tags": [
+                "method",
+                "param",
+                "property",
+                "property-read",
+                "property-write",
                 "return",
-                "switch",
-                "throw",
-                "try",
-                "yield",
-                "yield_from"
+                "throws",
+                "type",
+                "var"
             ]
         },
-        "comment_to_phpdoc": {
-            "ignored_tags": []
+        "phpdoc_order": {
+            "order": [
+                "noinspection",
+                "phan-suppress",
+                "phpcsSuppress",
+                "phpstan-ignore",
+                "psalm-suppress",
+                "deprecated",
+                "internal",
+                "covers",
+                "uses",
+                "dataProvider",
+                "param",
+                "throws",
+                "return"
+            ]
+        },
+        "phpdoc_separation": {
+            "groups": [
+                [
+                    "deprecated"
+                ],
+                [
+                    "link",
+                    "see",
+                    "since"
+                ],
+                [
+                    "author",
+                    "copyright",
+                    "license"
+                ],
+                [
+                    "category",
+                    "package",
+                    "subpackage"
+                ],
+                [
+                    "property",
+                    "property-read",
+                    "property-write"
+                ]
+            ],
+            "skip_unlisted_annotations": false
         },
         "increment_style": {
             "style": "pre"
         },
-        "nullable_type_declaration_for_default_null_value": {
-            "use_nullable_type_declaration": true
+        "blank_line_between_import_groups": false,
+        "ordered_traits": {
+            "case_sensitive": true
         },
-        "yoda_style": false,
-        "space_after_semicolon": false,
-        "no_spaces_after_function_name": false,
-        "single_line_empty_body": true,
-        "heredoc_indentation": {
-            "indentation": "start_plus_one"
-        },
-        "native_function_invocation": {
-            "include": [
-                "@compiler_optimized",
-                "is_scalar"
-            ],
-            "exclude": [
-                "auth"
-            ],
-            "scope": "namespaced",
-            "strict": true
-        },
-        "no_extra_blank_lines": {
-            "tokens": [
-                "attribute",
-                "break",
-                "case",
-                "continue",
-                "curly_brace_block",
-                "default",
-                "extra",
-                "parenthesis_brace_block",
-                "return",
-                "square_brace_block",
-                "switch",
-                "throw",
-                "use",
-                "use_trait"
-            ]
-        },
-        "class_definition": {
-            "inline_constructor_arguments": false,
-            "space_before_parenthesis": false
+        "php_unit_method_casing": {
+            "case": "camel_case"
         }
     },
     "exclude": [
@@ -80,6 +110,7 @@
         "public",
         "storage",
         "vendor",
+        "vendor-bin",
         "node_modules"
     ],
     "notName": [
@@ -88,8 +119,7 @@
         "_ide_helper*.php",
         "_ide_helper.php",
         "_ide_helper_actions.php",
-        "_ide_helper_models.php",
-        "PrettyCommandOutput.php"
+        "_ide_helper_models.php"
     ],
     "notPath": [
         "xxx.php"

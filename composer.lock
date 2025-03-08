@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc7cdb591cef12486cabd9b60849a0a4",
+    "content-hash": "54a61b8fc24d0ca045f1b8a224e87763",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -6176,16 +6176,16 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "37fe3ec2bfe308a660da5e7eb2c451b6dc3e0a78"
+                "reference": "b9b4e2c0d868635491118a351fa1f1f78d52845d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/37fe3ec2bfe308a660da5e7eb2c451b6dc3e0a78",
-                "reference": "37fe3ec2bfe308a660da5e7eb2c451b6dc3e0a78",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/b9b4e2c0d868635491118a351fa1f1f78d52845d",
+                "reference": "b9b4e2c0d868635491118a351fa1f1f78d52845d",
                 "shasum": ""
             },
             "require": {
@@ -6208,7 +6208,7 @@
                 "laravel/facade-documenter": "dev-main",
                 "maglnet/composer-require-checker": "^4.4",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^7.52 || ^8.0 || ^9.0 || ^10.0",
+                "orchestra/testbench": "^7.53 || ^8.0 || ^9.0 || ^10.0",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-laravel": "^1.4 || ^2.0 || ^3.0",
@@ -6307,7 +6307,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-03-06T10:24:06+00:00"
+            "time": "2025-03-08T09:46:53+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
