@@ -89,10 +89,10 @@ class StreamHandler implements Handler
             $message = $e->getMessage();
 
             // This list can probably get more comprehensive.
-            if (false !== strpos($message, 'getaddrinfo') // DNS lookup failed
-                || false !== strpos($message, 'Connection refused')
-                || false !== strpos($message, "couldn't connect to host") // error on HHVM
-                || false !== strpos($message, 'connection attempt failed')
+            if (str_contains($message, 'getaddrinfo') // DNS lookup failed
+                || str_contains($message, 'Connection refused')
+                || str_contains($message, "couldn't connect to host") // error on HHVM
+                || str_contains($message, 'connection attempt failed')
             ) {
                 $e = new ConnectException($e->getMessage(), $request, $e);
             } else {

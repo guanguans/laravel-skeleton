@@ -28,7 +28,10 @@ final readonly class AutoWire
      *
      * @param array<string, mixed> $parameters
      */
-    public function __construct(private string $abstract, private array $parameters = []) {}
+    public function __construct(
+        private string $abstract,
+        private array $parameters = []
+    ) {}
 
     /**
      * Magic method for var_export().

@@ -369,7 +369,7 @@ if (!\function_exists('environment')) {
             return 'cli';
         }
 
-        if (false !== stripos(\PHP_SAPI, 'cgi') && getenv('TERM')) {
+        if (str_contains(strtolower(\PHP_SAPI), strtolower('cgi')) && getenv('TERM')) {
             return 'cli';
         }
 

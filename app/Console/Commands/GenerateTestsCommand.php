@@ -157,7 +157,7 @@ class GenerateTestsCommand extends Command
                     $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
 
                     // 打印输出语法树
-                    if (!file_exists($testClassDir = \dirname($testClassFile)) && !mkdir($testClassDir, 0755, true) && !is_dir($testClassDir)) {
+                    if (!file_exists($testClassDir = \dirname($testClassFile)) && !mkdir($testClassDir, 0o755, true) && !is_dir($testClassDir)) {
                         throw new \RuntimeException(\sprintf('Directory "%s" was not created', $testClassDir));
                     }
 

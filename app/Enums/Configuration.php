@@ -27,6 +27,9 @@ enum Configuration: string
     use Enumerates;
     use ExtrasTrait;
     use ReadableEnumTrait;
+    case DAILY = 'daily';
+    case WEEKLY = 'weekly';
+    case MONTHLY = 'monthly';
 
     /**
      * @param value-of<self> $value
@@ -41,8 +44,4 @@ enum Configuration: string
 
         return null;
     }
-
-    case DAILY = 'daily';
-    case WEEKLY = 'weekly';
-    case MONTHLY = 'monthly';
 }

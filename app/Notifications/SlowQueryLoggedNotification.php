@@ -25,7 +25,11 @@ class SlowQueryLoggedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(private string $query, private ?float $duration, private string $url) {}
+    public function __construct(
+        private string $query,
+        private ?float $duration,
+        private string $url
+    ) {}
 
     public function via($notifiable): array
     {

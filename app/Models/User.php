@@ -26,8 +26,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-#[UseFactory(UserFactory::class)]
 #[ObservedBy(UserObserver::class)]
+#[UseFactory(UserFactory::class)]
 class User extends Authenticatable
 {
     use HasApiTokens;

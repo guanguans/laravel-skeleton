@@ -54,7 +54,7 @@ class Response extends GuzzleResponse implements \Stringable
     {
         $content = $this->getBodyContents();
 
-        if (false !== stripos($this->getHeaderLine('Content-Type'), 'xml') || 0 === stripos($content, '<xml')) {
+        if (str_contains(strtolower($this->getHeaderLine('Content-Type')), strtolower('xml')) || str_starts_with(strtolower($content), strtolower('<xml'))) {
             return XML::parse($content);
         }
 

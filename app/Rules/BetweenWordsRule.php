@@ -15,7 +15,10 @@ namespace App\Rules;
 
 final class BetweenWordsRule extends Rule
 {
-    public function __construct(private readonly int $min, private readonly int $max) {}
+    public function __construct(
+        private readonly int $min,
+        private readonly int $max
+    ) {}
 
     #[\Override]
     public function passes(string $attribute, mixed $value): bool

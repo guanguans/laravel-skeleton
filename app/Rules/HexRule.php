@@ -15,7 +15,10 @@ namespace App\Rules;
 
 final class HexRule extends RegexRule
 {
-    public function __construct(private readonly bool $forceFull = false, private readonly bool $allowAlpha = false) {}
+    public function __construct(
+        private readonly bool $forceFull = false,
+        private readonly bool $allowAlpha = false
+    ) {}
 
     #[\Override]
     protected function pattern(): string
