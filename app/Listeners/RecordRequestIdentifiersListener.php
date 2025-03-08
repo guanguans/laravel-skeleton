@@ -29,7 +29,7 @@ class RecordRequestIdentifiersListener
     public function handle(TokenAuthenticated $event): void
     {
         /** @var null|Request $request */
-        $request = request();
+        $request = \Illuminate\Support\Facades\Request::getFacadeRoot();
 
         if (null !== $request && ($event->token->ip !== $request->ip() || null === $event->token->location)) {
             $attributes = [

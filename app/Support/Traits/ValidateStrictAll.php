@@ -30,7 +30,7 @@ trait ValidateStrictAll
     public function validateStrictAllWith(array|Validator $validator, ?Request $request = null): array
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-        $request = $request ?: request();
+        $request = $request ?: \Illuminate\Support\Facades\Request::getFacadeRoot();
 
         if (\is_array($validator)) {
             $validator = $this->getValidationStrictAllFactory()->make($request->strictAll(), $validator);

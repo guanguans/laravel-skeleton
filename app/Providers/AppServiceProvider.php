@@ -197,15 +197,15 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->whenever(true, function (): void {
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
-            request()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
+            \Illuminate\Support\Facades\Request::getFacadeRoot()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
             Log::shareContext($this->sharedLogContext());
             Context::add('request_id', $this->app->make(self::REQUEST_ID_NAME));
 
             // // With context for current channel and stack.
-            // \Illuminate\Support\Facades\Log::withContext(\request()->headers());
+            // \Illuminate\Support\Facades\Log::withContext(\\Illuminate\Support\Facades\Request::getFacadeRoot()->headers());
 
             // if (($logger = \Illuminate\Support\Facades\Log::getLogger()) instanceof \Monolog\Logger) {
-            //     $logger->pushProcessor(new AppendExtraDataProcessor(\request()->headers()));
+            //     $logger->pushProcessor(new AppendExtraDataProcessor(\\Illuminate\Support\Facades\Request::getFacadeRoot()->headers()));
             // }
             $this->preProcessRequest();
         });
@@ -287,8 +287,8 @@ class AppServiceProvider extends ServiceProvider
                 JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
             ));
             LogHttp::skipWhen(fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe());
-            LogViewer::auth(static fn (): bool => request()::isAdminDeveloper());
-            class_exists(Telescope::class) and Telescope::auth(static fn (): bool => request()::isAdminDeveloper());
+            LogViewer::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
+            class_exists(Telescope::class) and Telescope::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
             // $this->app->extend(ExceptionHandler::class, static function (ExceptionHandler $handler, Application $app) {
             //     if (! $handler instanceof \App\Exceptions\Handler) {
             //         // $handler = $app->make(\App\Exceptions\Handler::class);
@@ -388,7 +388,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
-        $this->whenever(request()?->user()?->locale, function (self $serviceProvider, $locale): void {
+        $this->whenever(\Illuminate\Support\Facades\Request::getFacadeRoot()?->user()?->locale, function (self $serviceProvider, $locale): void {
             $this->setLocales($locale);
         });
 
@@ -405,7 +405,7 @@ class AppServiceProvider extends ServiceProvider
                     new SlowQueryLoggedNotification(
                         $event->sql,
                         $event->time,
-                        request()->url(),
+                        \Illuminate\Support\Facades\Request::getFacadeRoot()->url(),
                     ),
                 );
             });
@@ -767,11 +767,11 @@ class AppServiceProvider extends ServiceProvider
         ])->unless(
             $this->app->runningInConsole(),
             static fn (Collection $context): Collection => $context->merge([
-                'user-id' => request()->user()?->id,
-                'url' => request()->url(),
-                'ip' => request()->ip(),
-                'method' => request()->method(),
-                // 'action' => request()->route()?->getActionName(),
+                'user-id' => \Illuminate\Support\Facades\Request::getFacadeRoot()->user()?->id,
+                'url' => \Illuminate\Support\Facades\Request::getFacadeRoot()->url(),
+                'ip' => \Illuminate\Support\Facades\Request::getFacadeRoot()->ip(),
+                'method' => \Illuminate\Support\Facades\Request::getFacadeRoot()->method(),
+                // 'action' => \Illuminate\Support\Facades\Request::getFacadeRoot()->route()?->getActionName(),
             ])
         )->all();
     }
@@ -937,6 +937,6 @@ class AppServiceProvider extends ServiceProvider
      */
     private function isOctaneHttpServer(): bool
     {
-        return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
+        return isset($_SERVER['LARAVEL_OCTANE']) || isset(\Illuminate\Support\Env::get('OCTANE_DATABASE_SESSION_TTL'));
     }
 }

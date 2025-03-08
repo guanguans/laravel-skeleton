@@ -37,7 +37,7 @@ class RequestMixin
 
     public static function isAdminDeveloper(): callable
     {
-        return static fn (): bool => str(request()->user()?->username)->is(config('services.develop.fingerprints'));
+        return static fn (): bool => str(\Illuminate\Support\Facades\Request::getFacadeRoot()->user()?->username)->is(config('services.develop.fingerprints'));
     }
 
     public function isWechat(): callable

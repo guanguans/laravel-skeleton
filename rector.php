@@ -41,7 +41,9 @@ use Rector\Renaming\Rector\String_\RenameStringRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\ClassMethod\ReturnTypeWillChangeRector;
 use Rector\Transform\Rector\FileWithoutNamespace\RectorConfigBuilderRector;
+use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\ValueObject\ClassMethodReference;
+use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\ValueObject\PhpVersion;
 use Rector\ValueObject\Visibility;
 use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
@@ -140,6 +142,9 @@ return RectorConfig::configure()
             // ->dd()
             ->all(),
     ])
+    // ->withConfiguredRule(FuncCallToStaticCallRector::class, [
+    //     new FuncCallToStaticCall('request', Illuminate\Support\Facades\Request::class, 'getFacadeRoot'),
+    // ])
     ->withConfiguredRule(ReturnTypeWillChangeRector::class, [
         new ClassMethodReference(ArrayAccess::class, 'offsetGet'),
     ])

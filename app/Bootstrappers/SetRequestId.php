@@ -32,7 +32,7 @@ class SetRequestId
     public function bootstrap(Application $app): void
     {
         \define('REQUEST_ID', (string) Str::uuid());
-        request()->headers->set(self::X_REQUEST_ID_NAME, REQUEST_ID);
+        \Illuminate\Support\Facades\Request::getFacadeRoot()->headers->set(self::X_REQUEST_ID_NAME, REQUEST_ID);
         Http::globalOptions([
             'headers' => [
                 self::X_REQUEST_ID_NAME => REQUEST_ID,

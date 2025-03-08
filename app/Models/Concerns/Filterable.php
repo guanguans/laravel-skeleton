@@ -28,7 +28,7 @@ trait Filterable
     public function scopeFilter(Builder $query, ?array $input = null): void
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-        $input = $input ?: request()->query();
+        $input = $input ?: \Illuminate\Support\Facades\Request::getFacadeRoot()->query();
 
         foreach ($input as $key => $value) {
             if ($value === ($this->ignoreFilterValue ?? 'all')) {

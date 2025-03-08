@@ -29,11 +29,11 @@ trait Trashed
      */
     public function scopeTrashed(Builder $query): Builder
     {
-        if (! empty(request()->get('trashed')) && request()->get('trashed') === 'with') {
+        if (! empty(\Illuminate\Support\Facades\Request::getFacadeRoot()->get('trashed')) && \Illuminate\Support\Facades\Request::getFacadeRoot()->get('trashed') === 'with') {
             return $query->withTrashed();
         }
 
-        if (! empty(request()->get('trashed')) && request()->get('trashed') === 'only') {
+        if (! empty(\Illuminate\Support\Facades\Request::getFacadeRoot()->get('trashed')) && \Illuminate\Support\Facades\Request::getFacadeRoot()->get('trashed') === 'only') {
             return $query->onlyTrashed();
         }
 

@@ -38,6 +38,6 @@ class SetRequestIdListener
         \define('REQUEST_ID', $requestId = (string) Str::uuid());
         \define('TRACKER_ID', REQUEST_ID);
         $bootstrapEvent->instance(self::REQUEST_ID_NAME, $requestId);
-        request()->headers->set(self::REQUEST_ID_NAME, $bootstrapEvent->make(self::REQUEST_ID_NAME));
+        \Illuminate\Support\Facades\Request::getFacadeRoot()->headers->set(self::REQUEST_ID_NAME, $bootstrapEvent->make(self::REQUEST_ID_NAME));
     }
 }
