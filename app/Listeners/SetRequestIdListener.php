@@ -14,6 +14,7 @@ namespace App\Listeners;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Bootstrap\BootProviders;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
 /**
@@ -38,6 +39,6 @@ class SetRequestIdListener
         \define('REQUEST_ID', $requestId = (string) Str::uuid());
         \define('TRACKER_ID', REQUEST_ID);
         $bootstrapEvent->instance(self::REQUEST_ID_NAME, $requestId);
-        \Illuminate\Support\Facades\Request::getFacadeRoot()->headers->set(self::REQUEST_ID_NAME, $bootstrapEvent->make(self::REQUEST_ID_NAME));
+        Request::getFacadeRoot()->headers->set(self::REQUEST_ID_NAME, $bootstrapEvent->make(self::REQUEST_ID_NAME));
     }
 }

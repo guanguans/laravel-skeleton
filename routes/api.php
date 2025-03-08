@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\LogHttp;
 use App\Models\HttpLog;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -12,12 +13,12 @@ Route::fallback(static function (): void {
     abort(404, 'API page not found.');
 });
 
-Route::any('/any', static function (Request $request): \Illuminate\Http\JsonResponse {
+Route::any('/any', static function (Request $request): JsonResponse {
     $request->validate([
         'file_name' => 'file',
     ]);
 
-    return new \Illuminate\Http\JsonResponse([
+    return new JsonResponse([
         'method' => $request->method(),
         'headers' => $request->header(),
         'query' => $request->query(),

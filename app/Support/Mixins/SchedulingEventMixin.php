@@ -20,6 +20,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
+use Psr\Log\LoggerInterface;
 
 /**
  * @mixin \Illuminate\Console\Scheduling\Event
@@ -137,12 +138,12 @@ class SchedulingEventMixin
                     };
 
                     config()->set('logging.channels.single.path', $outputPath);
-                    $unsetSingleChannelHandler->call(app(\Psr\Log\LoggerInterface::class));
+                    $unsetSingleChannelHandler->call(app(LoggerInterface::class));
 
                     Log::channel('single')->info('>>>>>>>>');
 
                     config()->set('logging.channels.single.path', $singleLogPath);
-                    $unsetSingleChannelHandler->call(app(\Psr\Log\LoggerInterface::class));
+                    $unsetSingleChannelHandler->call(app(LoggerInterface::class));
                 })
                 ->appendOutputTo($outputPath);
         };

@@ -7,6 +7,7 @@ use App\Support\PushDeer;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
@@ -79,7 +80,7 @@ class ExtendServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             OpenAI::class,
-            static fn (Application $application): OpenAI => new OpenAI($application->make(\Illuminate\Contracts\Config\Repository::class)
+            static fn (Application $application): OpenAI => new OpenAI($application->make(Repository::class)
                 ->make('services.openai'))
         );
         $this->app->alias(OpenAI::class, 'openai');
@@ -89,7 +90,7 @@ class ExtendServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             PushDeer::class,
-            static fn (Application $application): PushDeer => new PushDeer($application->make(\Illuminate\Contracts\Config\Repository::class)
+            static fn (Application $application): PushDeer => new PushDeer($application->make(Repository::class)
                 ->make('services.pushdeer'))
         );
         $this->app->alias(PushDeer::class, 'pushdeer');

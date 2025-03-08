@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Support;
 
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
@@ -277,8 +278,8 @@ class Discover
     {
         return new Collection(
             $this->recursive
-                ? $this->app->make(\Illuminate\Filesystem\Filesystem::class)->allFiles($this->buildPath())
-                : $this->app->make(\Illuminate\Filesystem\Filesystem::class)->files($this->buildPath())
+                ? $this->app->make(Filesystem::class)->allFiles($this->buildPath())
+                : $this->app->make(Filesystem::class)->files($this->buildPath())
         );
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -19,7 +20,7 @@ class Cors
     {
         return tap($next($request), static function () use ($allowedOriginPatterns): void {
             if (class_exists(RequestHandled::class) && app()->bound('events')) {
-                app()->make(\Illuminate\Contracts\Events\Dispatcher::class)->listen(
+                app()->make(Dispatcher::class)->listen(
                     RequestHandled::class,
                     static function (RequestHandled $event) use ($allowedOriginPatterns): void {
                         /**

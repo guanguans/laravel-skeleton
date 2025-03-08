@@ -14,6 +14,7 @@ namespace App\Support\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Cache\CacheManager;
+use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -52,7 +53,7 @@ trait Cacheable
     public static function getCacheInstance(): CacheManager
     {
         if (! self::$cache instanceof CacheManager) {
-            self::$cache = app(\Illuminate\Contracts\Cache\Factory::class);
+            self::$cache = app(Factory::class);
         }
 
         return self::$cache;

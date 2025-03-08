@@ -13,6 +13,36 @@ declare(strict_types=1);
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+use PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer;
+use PhpCsFixerCustomFixers\Fixer\CommentSurroundedBySpacesFixer;
+use PhpCsFixerCustomFixers\Fixer\MultilineCommentOpeningClosingAloneFixer;
+use PhpCsFixerCustomFixers\Fixer\NoDoctrineMigrationsGeneratedCommentFixer;
+use PhpCsFixerCustomFixers\Fixer\NoDuplicatedArrayKeyFixer;
+use PhpCsFixerCustomFixers\Fixer\NoDuplicatedImportsFixer;
+use PhpCsFixerCustomFixers\Fixer\NoImportFromGlobalNamespaceFixer;
+use PhpCsFixerCustomFixers\Fixer\NoLeadingSlashInGlobalNamespaceFixer;
+use PhpCsFixerCustomFixers\Fixer\NoPhpStormGeneratedCommentFixer;
+use PhpCsFixerCustomFixers\Fixer\NoSuperfluousConcatenationFixer;
+use PhpCsFixerCustomFixers\Fixer\NoTrailingCommaInSinglelineFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessDirnameCallFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessDoctrineRepositoryCommentFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessParenthesisFixer;
+use PhpCsFixerCustomFixers\Fixer\NoUselessStrlenFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocNoIncorrectVarAnnotationFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocNoSuperfluousParamFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocParamTypeFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocSelfAccessorFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocSingleLineVarFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpdocTypesTrimFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpUnitAssertArgumentsOrderFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpUnitDedicatedAssertFixer;
+use PhpCsFixerCustomFixers\Fixer\PhpUnitNoUselessReturnFixer;
+use PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer;
+use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
+use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
+use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
+use PhpCsFixerCustomFixers\Fixers;
 
 $header = <<<'HEADER'
     This file is part of the guanguans/laravel-skeleton.
@@ -97,7 +127,7 @@ return (new Config)
     ->setUsingCache(true)
     ->setCacheFile(__DIR__.'/.php-cs-fixer.cache')
     ->setParallelConfig(ParallelConfigFactory::detect())
-    ->registerCustomFixers(new PhpCsFixerCustomFixers\Fixers)
+    ->registerCustomFixers(new Fixers)
     // ->registerCustomFixers(new PedroTroller\CS\Fixer\Fixers())
     ->setRules([
         '@PHP70Migration' => true,
@@ -402,8 +432,8 @@ return (new Config)
         ],
 
         // https://github.com/kubawerlos/php-cs-fixer-custom-fixers
-        PhpCsFixerCustomFixers\Fixer\CommentSurroundedBySpacesFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\CommentedOutFunctionFixer::name() => [
+        CommentSurroundedBySpacesFixer::name() => true,
+        CommentedOutFunctionFixer::name() => [
             'functions' => ['print_r', 'var_dump', 'var_export'],
         ],
         // PhpCsFixerCustomFixers\Fixer\ConstructorEmptyBracesFixer::name() => true,
@@ -412,33 +442,33 @@ return (new Config)
         // PhpCsFixerCustomFixers\Fixer\DeclareAfterOpeningTagFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\EmptyFunctionBodyFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\IssetToArrayKeyExistsFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\MultilineCommentOpeningClosingAloneFixer::name() => true,
+        MultilineCommentOpeningClosingAloneFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\MultilinePromotedPropertiesFixer::name() => [
         //     'minimum_number_of_parameters' => 5,
         //     'keep_blank_lines' => false,
         // ],
         // PhpCsFixerCustomFixers\Fixer\NoCommentedOutCodeFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoDoctrineMigrationsGeneratedCommentFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoDuplicatedArrayKeyFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoDuplicatedImportsFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoImportFromGlobalNamespaceFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoLeadingSlashInGlobalNamespaceFixer::name() => true,
+        NoDoctrineMigrationsGeneratedCommentFixer::name() => true,
+        NoDuplicatedArrayKeyFixer::name() => true,
+        NoDuplicatedImportsFixer::name() => true,
+        NoImportFromGlobalNamespaceFixer::name() => true,
+        NoLeadingSlashInGlobalNamespaceFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\NoNullableBooleanTypeFixer::name() => false,
-        PhpCsFixerCustomFixers\Fixer\NoPhpStormGeneratedCommentFixer::name() => true,
+        NoPhpStormGeneratedCommentFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\NoReferenceInFunctionDefinitionFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoSuperfluousConcatenationFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoTrailingCommaInSinglelineFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoUselessCommentFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoUselessDirnameCallFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoUselessDoctrineRepositoryCommentFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoUselessParenthesisFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\NoUselessStrlenFixer::name() => true,
+        NoSuperfluousConcatenationFixer::name() => true,
+        NoTrailingCommaInSinglelineFixer::name() => true,
+        NoUselessCommentFixer::name() => true,
+        NoUselessDirnameCallFixer::name() => true,
+        NoUselessDoctrineRepositoryCommentFixer::name() => true,
+        NoUselessParenthesisFixer::name() => true,
+        NoUselessStrlenFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\NumericLiteralSeparatorFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpUnitAssertArgumentsOrderFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpUnitDedicatedAssertFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpUnitNoUselessReturnFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpdocNoIncorrectVarAnnotationFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpdocNoSuperfluousParamFixer::name() => true,
+        PhpUnitAssertArgumentsOrderFixer::name() => true,
+        PhpUnitDedicatedAssertFixer::name() => true,
+        PhpUnitNoUselessReturnFixer::name() => true,
+        PhpdocNoIncorrectVarAnnotationFixer::name() => true,
+        PhpdocNoSuperfluousParamFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\PhpdocOnlyAllowedAnnotationsFixer::name() => [
         //     'elements' => [
         //         'covers',
@@ -459,21 +489,21 @@ return (new Config)
         //     ],
         // ],
         // PhpCsFixerCustomFixers\Fixer\PhpdocParamOrderFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpdocParamTypeFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpdocSelfAccessorFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpdocSingleLineVarFixer::name() => true,
+        PhpdocParamTypeFixer::name() => true,
+        PhpdocSelfAccessorFixer::name() => true,
+        PhpdocSingleLineVarFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\PhpdocTypesCommaSpacesFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PhpdocTypesTrimFixer::name() => true,
+        PhpdocTypesTrimFixer::name() => true,
         // PhpCsFixerCustomFixers\Fixer\PhpdocVarAnnotationToAssertFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\PromotedConstructorPropertyFixer::name() => [
+        PromotedConstructorPropertyFixer::name() => [
             'promote_only_existing_properties' => false,
         ],
         // PhpCsFixerCustomFixers\Fixer\ReadonlyPromotedPropertiesFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer::name() => [
+        SingleSpaceAfterStatementFixer::name() => [
             'allow_linebreak' => false,
         ],
-        PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer::name() => true,
-        PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer::name() => true,
+        SingleSpaceBeforeStatementFixer::name() => true,
+        StringableInterfaceFixer::name() => true,
 
         // // https://github.com/PedroTroller/PhpCSFixer-Custom-Fixers
         // // 'PedroTroller/order_behat_steps' => ['instanceof' => ['Behat\Behat\Context\Context']],

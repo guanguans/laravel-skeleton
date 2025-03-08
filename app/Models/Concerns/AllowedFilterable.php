@@ -14,6 +14,7 @@ namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
 /**
@@ -37,8 +38,8 @@ trait AllowedFilterable
     public function scopeAllowedExactFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
-            (\Illuminate\Support\Facades\Request::getFacadeRoot()->has($name) || null !== $default)
-            && ! \in_array($value = \Illuminate\Support\Facades\Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
+            (Request::getFacadeRoot()->has($name) || null !== $default)
+            && ! \in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             if (\is_array($value)) {
                 return $query->whereIn($query->qualifyColumn($internalName ?: $name), $value);
@@ -53,8 +54,8 @@ trait AllowedFilterable
     public function scopeAllowedPartialFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
-            (\Illuminate\Support\Facades\Request::getFacadeRoot()->has($name) || null !== $default)
-            && ! \in_array($value = \Illuminate\Support\Facades\Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
+            (Request::getFacadeRoot()->has($name) || null !== $default)
+            && ! \in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             $wrappedProperty = $query->getQuery()->getGrammar()->wrap($query->qualifyColumn($internalName ?: $name));
 
@@ -87,8 +88,8 @@ trait AllowedFilterable
     public function scopeAllowedScopeFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
     {
         if (
-            (\Illuminate\Support\Facades\Request::getFacadeRoot()->has($name) || null !== $default)
-            && ! \in_array($value = \Illuminate\Support\Facades\Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
+            (Request::getFacadeRoot()->has($name) || null !== $default)
+            && ! \in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             $nameParts = collect(explode('.', $internalName ?: $name));
 
@@ -108,8 +109,8 @@ trait AllowedFilterable
 
     public function scopeAllowedCallbackFilter(Builder $query, string $name, callable $callback): Builder
     {
-        if (\Illuminate\Support\Facades\Request::getFacadeRoot()->has($name)) {
-            return $callback($query, \Illuminate\Support\Facades\Request::getFacadeRoot()->input($name), $name);
+        if (Request::getFacadeRoot()->has($name)) {
+            return $callback($query, Request::getFacadeRoot()->input($name), $name);
         }
 
         return $query;
@@ -117,8 +118,8 @@ trait AllowedFilterable
 
     public function scopeAllowedTrashedFilter(Builder $query, string $name = 'trashed'): Builder
     {
-        if (\Illuminate\Support\Facades\Request::getFacadeRoot()->has($name)) {
-            if (($value = \Illuminate\Support\Facades\Request::getFacadeRoot()->input($name)) === 'with') {
+        if (Request::getFacadeRoot()->has($name)) {
+            if (($value = Request::getFacadeRoot()->input($name)) === 'with') {
                 return $query->withTrashed();
             }
 
@@ -143,7 +144,7 @@ trait AllowedFilterable
      */
     public function scopeAllowedSorts(Builder $query, array $allowedSorts, array $default = [], string $name = 'sorts'): Builder
     {
-        $sorts = \Illuminate\Support\Facades\Request::getFacadeRoot()->input($name, $default);
+        $sorts = Request::getFacadeRoot()->input($name, $default);
 
         foreach ($sorts as $direction => $column) {
             if (\is_int($column)) {
@@ -164,11 +165,11 @@ trait AllowedFilterable
 
     public function scopeAllowedSort(Builder $query, string $name, $default = null, ?string $internalName = null): Builder
     {
-        if (\Illuminate\Support\Facades\Request::getFacadeRoot()->hasAny([$name, '-'.$name]) || null !== $default) {
+        if (Request::getFacadeRoot()->hasAny([$name, '-'.$name]) || null !== $default) {
             $column = $internalName ?: $name;
-            if (\Illuminate\Support\Facades\Request::getFacadeRoot()->has('-'.$name)) {
+            if (Request::getFacadeRoot()->has('-'.$name)) {
                 $direction = 'desc';
-            } elseif (\Illuminate\Support\Facades\Request::getFacadeRoot()->has($name)) {
+            } elseif (Request::getFacadeRoot()->has($name)) {
                 $direction = 'asc';
             } else {
                 $direction = $default;

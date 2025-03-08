@@ -7,7 +7,9 @@ namespace App\Console\Commands;
 use App\Enums\HealthCheckStateEnum;
 use Illuminate\Console\Command;
 use Illuminate\Console\Events\CommandFinished;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
@@ -165,7 +167,7 @@ class HealthCheckCommand extends Command
                         ? "The dev packages shouldn't be automatically discovered."
                         : 'The indirect discovered packages should be manually handled.';
 
-                    $this->laravel->make(\Illuminate\Contracts\Events\Dispatcher::class)->listen(
+                    $this->laravel->make(Dispatcher::class)->listen(
                         CommandFinished::class,
                         function () use ($shouldntDiscoverPackages, $indirectDiscoveredPackages): void {
                             $this->warn(\sprintf(
@@ -370,7 +372,7 @@ class HealthCheckCommand extends Command
         }
 
         $processResult = Process::run([
-            ...app(\Illuminate\Support\Composer::class)->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
+            ...app(Composer::class)->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
         ])->throw();
         $errorExtensions = collect(json_decode($processResult->output(), true))->filter(
             static fn (array $item): bool => $item['status'] !== 'success'

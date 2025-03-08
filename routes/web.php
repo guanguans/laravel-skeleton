@@ -9,6 +9,7 @@
 declare(strict_types=1);
 
 use Illuminate\Foundation\Events\DiagnosingHealth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -41,7 +42,7 @@ Route::fallback(static function (): void {
 });
 
 Route::fallback(static fn (Request $request) => $request->expectsJson()
-    ? new \Illuminate\Http\JsonResponse(['error' => 'Not Found'], 404)
+    ? new JsonResponse(['error' => 'Not Found'], 404)
     : view('errors.404', ['path' => $request->path()]));
 
 LaravelUploader::routes();

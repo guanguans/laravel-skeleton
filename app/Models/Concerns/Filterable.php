@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
 /**
@@ -28,7 +29,7 @@ trait Filterable
     public function scopeFilter(Builder $query, ?array $input = null): void
     {
         /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-        $input = $input ?: \Illuminate\Support\Facades\Request::getFacadeRoot()->query();
+        $input = $input ?: Request::getFacadeRoot()->query();
 
         foreach ($input as $key => $value) {
             if ($value === ($this->ignoreFilterValue ?? 'all')) {
