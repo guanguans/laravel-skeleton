@@ -106,8 +106,8 @@ $ruleSet = Php73::create()
         // ],
         'explicit_string_variable' => false,
         'final_class' => false,
-        // 'final_internal_class' => false,
-        // 'final_public_method_for_abstract_class' => false,
+        'final_internal_class' => false,
+        'final_public_method_for_abstract_class' => false,
         'fully_qualified_strict_types' => [
             'import_symbols' => false,
             'leading_backslash_in_global_namespace' => false,
@@ -197,6 +197,25 @@ $ruleSet = Php73::create()
                 'return',
             ],
         ],
+        'phpdoc_order_by_value' => [
+            'annotations' => [
+                'author',
+                'covers',
+                'coversNothing',
+                'dataProvider',
+                'depends',
+                'group',
+                'internal',
+                // 'method',
+                'mixin',
+                'property',
+                'property-read',
+                'property-write',
+                'requires',
+                'throws',
+                'uses',
+            ],
+        ],
         'phpdoc_to_param_type' => [
             'scalar_types' => true,
             'types_map' => [],
@@ -230,8 +249,7 @@ return Factory::fromRuleSet($ruleSet)
         Finder::create()
             ->in([
                 __DIR__.'/actions',
-                // __DIR__.'/app',
-                __DIR__.'/app/Bootstrappers',
+                __DIR__.'/app',
                 __DIR__.'/bootstrap',
                 __DIR__.'/config',
                 __DIR__.'/config-validation',

@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -22,9 +23,7 @@ namespace App\Support;
  */
 class Inflector
 {
-    /**
-     * Plural inflector rules
-     */
+    /** Plural inflector rules */
     protected static array $plural = [
         '/(s)tatus$/i' => '\1tatuses',
         '/(quiz)$/i' => '\1zes',
@@ -51,9 +50,7 @@ class Inflector
         '/$/' => 's',
     ];
 
-    /**
-     * Singular inflector rules
-     */
+    /** Singular inflector rules */
     protected static array $singular = [
         '/(s)tatuses$/i' => '\1\2tatus',
         '/^(.*)(menu)s$/i' => '\1\2',
@@ -91,9 +88,7 @@ class Inflector
         '/s$/i' => '',
     ];
 
-    /**
-     * Irregular rules
-     */
+    /** Irregular rules */
     protected static array $irregular = [
         'atlas' => 'atlases',
         'beef' => 'beefs',
@@ -139,9 +134,7 @@ class Inflector
         'cache' => 'caches',
     ];
 
-    /**
-     * Words that should not be inflected
-     */
+    /** Words that should not be inflected */
     protected static array $uninflected = [
         '.*[nrlm]ese', '.*data', '.*deer', '.*fish', '.*measles', '.*ois',
         '.*pox', '.*sheep', 'people', 'feedback', 'stadia', '.*?media',
@@ -150,14 +143,10 @@ class Inflector
         'pokemon', 'proceedings', 'research', 'sea[- ]bass', 'series', 'species', 'weather',
     ];
 
-    /**
-     * Method cache array.
-     */
+    /** Method cache array. */
     protected static array $cache = [];
 
-    /**
-     * The initial state of Inflector so reset() works.
-     */
+    /** The initial state of Inflector so reset() works. */
     protected static array $initialState = [];
 
     /**
@@ -166,7 +155,7 @@ class Inflector
      */
     public static function reset(): void
     {
-        if (static::$initialState === []) {
+        if ([] === static::$initialState) {
             static::$initialState = get_class_vars(self::class);
 
             return;
@@ -191,9 +180,9 @@ class Inflector
      * Inflector::rules('uninflected', ['dontinflectme']);
      * ```
      *
-     * @param  string  $type  the type of inflection, either 'plural', 'singular',
-     *                        or 'uninflected'
-     * @param  array  $rules  array of rules to be added
+     * @param string $type the type of inflection, either 'plural', 'singular',
+     *                     or 'uninflected'
+     * @param array $rules array of rules to be added
      */
     public static function rules(string $type, array $rules, bool $reset = false): void
     {
@@ -213,7 +202,8 @@ class Inflector
     /**
      * Return $word in plural form.
      *
-     * @param  string  $word  Word in singular
+     * @param string $word Word in singular
+     *
      * @return string Word in plural
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
@@ -224,7 +214,7 @@ class Inflector
             return static::$cache['pluralize'][$word];
         }
 
-        if (! isset(static::$cache['irregular']['pluralize'])) {
+        if (!isset(static::$cache['irregular']['pluralize'])) {
             $words = array_keys(static::$irregular);
             static::$cache['irregular']['pluralize'] = '/(.*?(?:\b|_))('.implode('|', $words).')$/i';
 
@@ -242,7 +232,7 @@ class Inflector
             return static::$cache['pluralize'][$word];
         }
 
-        if (! isset(static::$cache['uninflected'])) {
+        if (!isset(static::$cache['uninflected'])) {
             static::$cache['uninflected'] = '/^('.implode('|', static::$uninflected).')$/i';
         }
 
@@ -266,7 +256,8 @@ class Inflector
     /**
      * Return $word in singular form.
      *
-     * @param  string  $word  Word in plural
+     * @param string $word Word in plural
+     *
      * @return string Word in singular
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
@@ -277,7 +268,7 @@ class Inflector
             return static::$cache['singularize'][$word];
         }
 
-        if (! isset(static::$cache['irregular']['singular'])) {
+        if (!isset(static::$cache['irregular']['singular'])) {
             $wordList = array_values(static::$irregular);
             static::$cache['irregular']['singular'] = '/(.*?(?:\b|_))('.implode('|', $wordList).')$/i';
 
@@ -298,7 +289,7 @@ class Inflector
             return static::$cache['singularize'][$word];
         }
 
-        if (! isset(static::$cache['uninflected'])) {
+        if (!isset(static::$cache['uninflected'])) {
             static::$cache['uninflected'] = '/^('.implode('|', static::$uninflected).')$/i';
         }
 
@@ -324,8 +315,9 @@ class Inflector
     /**
      * Returns the input lower_case_delimited_string as a CamelCasedString.
      *
-     * @param  string  $string  String to camelize
-     * @param  string  $delimiter  the delimiter in the input string
+     * @param string $string String to camelize
+     * @param string $delimiter the delimiter in the input string
+     *
      * @return string camelizedStringLikeThis
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
@@ -349,7 +341,8 @@ class Inflector
      *
      * Also replaces dashes with underscores
      *
-     * @param  string  $string  CamelCasedString to be "underscorized"
+     * @param string $string CamelCasedString to be "underscorized"
+     *
      * @return string underscore_version of the input string
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
@@ -364,7 +357,8 @@ class Inflector
      *
      * Also replaces underscores with dashes
      *
-     * @param  string  $string  the string to dasherize
+     * @param string $string the string to dasherize
+     *
      * @return string Dashed version of the input string
      */
     public static function dasherize(string $string): string
@@ -374,10 +368,11 @@ class Inflector
 
     /**
      * Returns the input lower_case_delimited_string as 'A Human Readable String'.
-     * (Underscores are replaced by spaces and capitalized following words.)
+     * (Underscores are replaced by spaces and capitalized following words.).
      *
-     * @param  string  $string  String to be humanized
-     * @param  string  $delimiter  the character to replace with a space
+     * @param string $string String to be humanized
+     * @param string $delimiter the character to replace with a space
+     *
      * @return string Human-readable string
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-human-readable-forms
@@ -390,6 +385,7 @@ class Inflector
 
         if (false === $result) {
             $result = explode(' ', str_replace($delimiter, ' ', $string));
+
             foreach ($result as &$word) {
                 $word = mb_strtoupper(mb_substr($word, 0, 1)).mb_substr($word, 1);
             }
@@ -402,10 +398,11 @@ class Inflector
     }
 
     /**
-     * Expects a CamelCasedInputString, and produces a lower_case_delimited_string
+     * Expects a CamelCasedInputString, and produces a lower_case_delimited_string.
      *
-     * @param  string  $string  String to delimit
-     * @param  string  $delimiter  the character to use as a delimiter
+     * @param string $string String to delimit
+     * @param string $delimiter the character to use as a delimiter
+     *
      * @return string delimited string
      */
     public static function delimit(string $string, string $delimiter = '_'): string
@@ -425,7 +422,8 @@ class Inflector
     /**
      * Returns corresponding table name for given model $className. ("people" for the model class "Person").
      *
-     * @param  string  $className  Name of class to get database table name for
+     * @param string $className Name of class to get database table name for
+     *
      * @return string Name of the database table for given class
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
@@ -445,7 +443,8 @@ class Inflector
     /**
      * Returns Cake model class name ("Person" for the database table "people".) for given database table.
      *
-     * @param  string  $tableName  Name of database table to get class name for
+     * @param string $tableName Name of database table to get class name for
+     *
      * @return string Class name
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
@@ -465,7 +464,8 @@ class Inflector
     /**
      * Returns camelBacked version of an underscored string.
      *
-     * @param  string  $string  string to convert
+     * @param string $string string to convert
+     *
      * @return string in variable form
      *
      * @see https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-variable-names
@@ -485,24 +485,26 @@ class Inflector
     }
 
     /**
-     * Cache inflected values, and return if already available
+     * Cache inflected values, and return if already available.
      *
-     * @param  string  $type  Inflection type
-     * @param  string  $key  Original value
-     * @param  false|string  $value  Inflected value
+     * @param string $type Inflection type
+     * @param string $key Original value
+     * @param false|string $value Inflected value
+     *
      * @return false|string inflected value on cache hit or false on cache miss
      */
     protected static function cache(string $type, string $key, bool|string $value = false): bool|string
     {
         $key = '_'.$key;
         $type = '_'.$type;
+
         if (false !== $value) {
             static::$cache[$type][$key] = $value;
 
             return $value;
         }
 
-        if (! isset(static::$cache[$type][$key])) {
+        if (!isset(static::$cache[$type][$key])) {
             return false;
         }
 

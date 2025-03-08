@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Http\Responses;
@@ -23,11 +24,11 @@ class StreamResponse extends Response
 
         $directory = rtrim($directory, '/');
 
-        if (! is_dir($directory)) {
+        if (!is_dir($directory)) {
             mkdir($directory, 0o755, true); // @codeCoverageIgnore
         }
 
-        if (! is_writable($directory)) {
+        if (!is_writable($directory)) {
             throw new \InvalidArgumentException(\sprintf("'%s' is not writable.", $directory));
         }
 
@@ -41,7 +42,7 @@ class StreamResponse extends Response
             }
         }
 
-        if (empty(pathinfo($filename, PATHINFO_EXTENSION))) {
+        if (empty(pathinfo($filename, \PATHINFO_EXTENSION))) {
             // $filename .= File::getStreamExt($contents);
             $filename .= $this->getStreamExt();
         }

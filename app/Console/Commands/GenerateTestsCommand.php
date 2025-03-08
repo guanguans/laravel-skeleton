@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
@@ -33,9 +34,6 @@ use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use PhpParser\NodeVisitorAbstract;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
-use ReflectionClass;
-use ReflectionMethod;
-use RuntimeException;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\Console\Input\InputInterface;
@@ -46,23 +44,24 @@ use Symfony\Component\Finder\SplFileInfo;
 class GenerateTestsCommand extends Command
 {
     /** @var string */
-    protected $signature = '
-        generate:tests
-        {--dir=* : The directories to search for files}
-        {--path=* : The paths to search for files}
-        {--name=* : The names to search for files}
-        {--not-path=* : The paths to exclude from the search}
-        {--not-name=* : The names to exclude from the search}
-        {--base-namespace=Tests\Unit : The base namespace for the generated tests}
-        {--base-dir=./tests/Unit/ : The base directory for the generated tests}
-        {--t|template-file=./tests/Unit/ExampleTest.php : The template file to use for the generated tests}
-        {--f|method-format=snake : The format(snake/camel) to use for the method names}
-        {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
-        {--M|memory-limit= : The memory limit to use for the PHP parser}';
+    protected $signature = <<<'EOD'
+
+                generate:tests
+                {--dir=* : The directories to search for files}
+                {--path=* : The paths to search for files}
+                {--name=* : The names to search for files}
+                {--not-path=* : The paths to exclude from the search}
+                {--not-name=* : The names to exclude from the search}
+                {--base-namespace=Tests\Unit : The base namespace for the generated tests}
+                {--base-dir=./tests/Unit/ : The base directory for the generated tests}
+                {--t|template-file=./tests/Unit/ExampleTest.php : The template file to use for the generated tests}
+                {--f|method-format=snake : The format(snake/camel) to use for the method names}
+                {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
+                {--M|memory-limit= : The memory limit to use for the PHP parser}
+        EOD;
 
     /** @var string */
     protected $description = 'Generate tests for the given files';
-
     private static array $statistics = [
         'scanned_files' => 0,
         'scanned_classes' => 0,
@@ -72,39 +71,21 @@ class GenerateTestsCommand extends Command
 
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
-
-    private ?\SebastianBergmann\Timer\ResourceUsageFormatter $resourceUsageFormatter = null;
-
-    private ?\PhpParser\Lexer\Emulative $lexer = null;
-
+    private ?ResourceUsageFormatter $resourceUsageFormatter = null;
+    private ?Emulative $lexer = null;
     private ?\PhpParser\Parser $parser = null;
-
-    private ?\PhpParser\ErrorHandler\Collecting $errorHandler = null;
-
-    private ?\PhpParser\BuilderFactory $builderFactory = null;
-
-    private ?\PhpParser\NodeFinder $nodeFinder = null;
-
-    private ?\PhpParser\PrettyPrinter\Standard $prettyPrinter = null;
-
-    private ?\PhpParser\NodeTraverser $nodeTraverser = null;
-
-    private ?\PhpParser\NodeVisitor\CloningVisitor $cloningVisitor = null;
-
-    private ?\PhpParser\NodeVisitorAbstract $classUpdatingVisitor = null;
+    private ?Collecting $errorHandler = null;
+    private ?BuilderFactory $builderFactory = null;
+    private ?NodeFinder $nodeFinder = null;
+    private ?Standard $prettyPrinter = null;
+    private ?NodeTraverser $nodeTraverser = null;
+    private ?CloningVisitor $cloningVisitor = null;
+    private ?NodeVisitorAbstract $classUpdatingVisitor = null;
 
     #[\Override]
     public function isEnabled(): bool
     {
-        return ! $this->laravel->isProduction();
-    }
-
-    #[\Override]
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        $this->checkOptions();
-        $this->initializeEnvs();
-        $this->initializeProperties();
+        return !$this->laravel->isProduction();
     }
 
     public function handle(Timer $timer): int
@@ -126,16 +107,17 @@ class GenerateTestsCommand extends Command
             foreach ($originalNamespaceNodes as $originalNamespaceNode) {
                 $originalClassNamespace = $originalNamespaceNode->name->toString();
 
-                /** @var Class_[]|Trait_[] $originalClassNodes */
+                /** @var list<Class_>|list<Trait_> $originalClassNodes */
                 $originalClassNodes = $this->nodeFinder->find($originalNamespaceNode, static fn (Node $node): bool => ($node instanceof Class_ || $node instanceof Trait_) && $node->name);
                 self::$statistics['scanned_classes'] += \count($originalClassNodes);
+
                 foreach ($originalClassNodes as $originalClassNode) {
                     // 准备基本信息
                     $testClassNamespace = Str::finish($this->option('base-namespace'), '\\').$originalClassNamespace;
                     $testClassName = "{$originalClassNode->name->name}Test";
                     $testClassFullName = $testClassNamespace.'\\'.$testClassName;
-                    $testClassBaseName = str_replace('\\', DIRECTORY_SEPARATOR, $originalClassNamespace);
-                    $testClassFile = Str::finish($this->option('base-dir'), DIRECTORY_SEPARATOR).$testClassBaseName.DIRECTORY_SEPARATOR."$testClassName.php";
+                    $testClassBaseName = str_replace('\\', \DIRECTORY_SEPARATOR, $originalClassNamespace);
+                    $testClassFile = Str::finish($this->option('base-dir'), \DIRECTORY_SEPARATOR).$testClassBaseName.\DIRECTORY_SEPARATOR."$testClassName.php";
 
                     // 获取需要生成的测试方法节点
                     $testClassAddedMethodNodes = array_map(fn (ClassMethod $node) => tap(
@@ -143,12 +125,14 @@ class GenerateTestsCommand extends Command
                             ->method(Str::{$this->option('method-format')}('test_'.Str::snake($node->name->name)))
                             ->makePublic()
                             ->getNode()
-                    )->setAttribute('isAdded', true), array_filter($originalClassNode->getMethods(), static fn (ClassMethod $node): bool => $node->isPublic() && ! $node->isAbstract() && $node->name->toString() !== '__construct'));
-                    if ($isExistsTestClassFile = file_exists($testClassFile)) {
-                        $originalTestClassMethodNames = array_filter(array_map(fn (ReflectionMethod $method) => Str::{$this->option('method-format')}($method->getName()), (new ReflectionClass($testClassFullName))->getMethods(ReflectionMethod::IS_PUBLIC)), static fn ($name) => Str::startsWith($name, 'test'));
+                    )->setAttribute('isAdded', true), array_filter($originalClassNode->getMethods(), static fn (ClassMethod $node): bool => $node->isPublic() && !$node->isAbstract() && $node->name->toString() !== '__construct'));
 
-                        $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, static fn (ClassMethod $node): bool => ! \in_array($node->name->name, $originalTestClassMethodNames, true));
-                        if ($testClassAddedMethodNodes === []) {
+                    if ($isExistsTestClassFile = file_exists($testClassFile)) {
+                        $originalTestClassMethodNames = array_filter(array_map(fn (\ReflectionMethod $method) => Str::{$this->option('method-format')}($method->getName()), (new \ReflectionClass($testClassFullName))->getMethods(\ReflectionMethod::IS_PUBLIC)), static fn ($name) => Str::startsWith($name, 'test'));
+
+                        $testClassAddedMethodNodes = array_filter($testClassAddedMethodNodes, static fn (ClassMethod $node): bool => !\in_array($node->name->name, $originalTestClassMethodNames, true));
+
+                        if ([] === $testClassAddedMethodNodes) {
                             continue;
                         }
                     }
@@ -173,8 +157,8 @@ class GenerateTestsCommand extends Command
                     $testClassNodes = $nodeTraverser->traverse($originalTestClassNodes);
 
                     // 打印输出语法树
-                    if (! file_exists($testClassDir = \dirname($testClassFile)) && ! mkdir($testClassDir, 0755, true) && ! is_dir($testClassDir)) {
-                        throw new RuntimeException(\sprintf('Directory "%s" was not created', $testClassDir));
+                    if (!file_exists($testClassDir = \dirname($testClassFile)) && !mkdir($testClassDir, 0755, true) && !is_dir($testClassDir)) {
+                        throw new \RuntimeException(\sprintf('Directory "%s" was not created', $testClassDir));
                     }
 
                     file_put_contents($testClassFile, $this->prettyPrinter->printFormatPreserving($testClassNodes, $originalTestClassNodes, $this->lexer->getTokens()));
@@ -193,45 +177,53 @@ class GenerateTestsCommand extends Command
         return self::SUCCESS;
     }
 
-    protected function checkOptions()
+    #[\Override]
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        if (! \in_array($this->option('parse-mode'), [
+        $this->checkOptions();
+        $this->initializeEnvs();
+        $this->initializeProperties();
+    }
+
+    protected function checkOptions(): void
+    {
+        if (!\in_array($this->option('parse-mode'), [
             ParserFactory::PREFER_PHP7,
             ParserFactory::PREFER_PHP5,
             ParserFactory::ONLY_PHP7,
-            ParserFactory::ONLY_PHP5, ])
+            ParserFactory::ONLY_PHP5, ], true)
         ) {
             $this->error('The parse-mode option is not valid(1,2,3,4).');
 
             exit(1);
         }
 
-        if (! \in_array($this->option('method-format'), ['snake', 'camel'])) {
+        if (!\in_array($this->option('method-format'), ['snake', 'camel'], true)) {
             $this->error('The method-format option is not valid(snake/camel).');
 
             exit(1);
         }
 
-        if (! $this->option('base-namespace')) {
+        if (!$this->option('base-namespace')) {
             $this->error('The base-namespace option is required.');
 
             exit(1);
         }
 
-        if (! $this->option('base-dir') || ! file_exists($this->option('base-dir')) || ! is_dir($this->option('base-dir'))) {
+        if (!$this->option('base-dir') || !file_exists($this->option('base-dir')) || !is_dir($this->option('base-dir'))) {
             $this->error('The base-dir option is not a valid directory.');
 
             exit(1);
         }
 
-        if (! $this->option('template-file') || ! file_exists($this->option('template-file')) || ! is_file($this->option('template-file'))) {
+        if (!$this->option('template-file') || !file_exists($this->option('template-file')) || !is_file($this->option('template-file'))) {
             $this->error('The template-file option is not a valid file.');
 
             exit(1);
         }
     }
 
-    protected function initializeEnvs()
+    protected function initializeEnvs(): void
     {
         $xdebug = new XdebugHandler(self::class);
         $xdebug->check();
@@ -242,7 +234,7 @@ class GenerateTestsCommand extends Command
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
 
-    protected function initializeProperties()
+    protected function initializeProperties(): void
     {
         $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder): void {
             $methods = [
@@ -252,6 +244,7 @@ class GenerateTestsCommand extends Command
                 'name' => $this->option('name') ?: ['*.php'],
                 'notName' => $this->option('not-name') ?: ['*Test.php', '*TestCase.php', '*.blade.php'],
             ];
+
             foreach ($methods as $method => $parameters) {
                 $finder->{$method}($parameters);
             }
@@ -273,15 +266,14 @@ class GenerateTestsCommand extends Command
         $this->cloningVisitor = new CloningVisitor;
         $this->nodeTraverser->addVisitor($this->cloningVisitor);
 
-        $this->classUpdatingVisitor = new class('', '', []) extends NodeVisitorAbstract
-        {
+        $this->classUpdatingVisitor = new class('', '', []) extends NodeVisitorAbstract {
             /** @var string */
             public $testClassNamespace;
 
             /** @var string */
             public $testClassName;
 
-            /** @var \PhpParser\Node\Stmt\ClassMethod[] */
+            /** @var list<\PhpParser\Node\Stmt\ClassMethod> */
             public $testClassAddedMethodNodes = [];
 
             public function __construct(string $testClassNamespace, string $testClassName, array $testClassAddedMethodNodes)
@@ -297,15 +289,14 @@ class GenerateTestsCommand extends Command
                     $node->name = new Node\Name($this->testClassNamespace);
                 }
 
-                if ($node instanceof Node\Stmt\Class_) {
+                if ($node instanceof Class_) {
                     $node->name->name = $this->testClassName;
                     $node->stmts = array_merge($node->stmts, $this->testClassAddedMethodNodes);
                 }
             }
         };
 
-        $this->prettyPrinter = new class extends Standard
-        {
+        $this->prettyPrinter = new class extends Standard {
             protected function pStmt_ClassMethod(ClassMethod $node)
             {
                 return ($node->getAttribute('isAdded') ? $this->nl : '').parent::pStmt_ClassMethod($node);

@@ -1,11 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Http\Middleware;
 
 use App\Exceptions\InvalidRepeatRequestException;
 use App\Support\HmacSigner;
 use Carbon\Carbon;
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Facades\Cache;
@@ -13,10 +23,7 @@ use Illuminate\Support\Facades\Validator;
 
 class VerifySignature
 {
-    /**
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true)
+    public function handle(Request $request, \Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true): mixed
     {
         $this->validateParameters($request, $effectiveTime);
 
@@ -27,7 +34,7 @@ class VerifySignature
         return $next($request);
     }
 
-    protected function validateParameters(Request $request, int $effectiveTime)
+    protected function validateParameters(Request $request, int $effectiveTime): void
     {
         Validator::make($request->headers(), [
             'signature' => ['required', 'string'],
@@ -36,7 +43,7 @@ class VerifySignature
         ])->validate();
     }
 
-    protected function validateSignature(Request $request, string $secret)
+    protected function validateSignature(Request $request, string $secret): void
     {
         $parameters = array_merge($request->input(), [
             'timestamp' => $request->header('timestamp'),
@@ -48,7 +55,7 @@ class VerifySignature
         throw_unless($signer->validate($request->header('signature'), $parameters), InvalidSignatureException::class);
     }
 
-    protected function validateRepeatRequest(Request $request, int $effectiveTime)
+    protected function validateRepeatRequest(Request $request, int $effectiveTime): void
     {
         $cacheSignature = Cache::get($signature = $request->header('signature'));
         throw_if($cacheSignature, InvalidRepeatRequestException::class);

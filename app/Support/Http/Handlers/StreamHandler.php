@@ -6,11 +6,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Http\Handlers;
@@ -40,8 +41,8 @@ class StreamHandler implements Handler
     /**
      * Sends an HTTP request.
      *
-     * @param  RequestInterface  $request  request to send
-     * @param  array  $options  request transfer options
+     * @param RequestInterface $request request to send
+     * @param array $options request transfer options
      *
      * @see \GuzzleHttp\HandlerStack::create
      * @see \GuzzleHttp\Utils::chooseHandler
@@ -54,7 +55,7 @@ class StreamHandler implements Handler
      */
     public function __invoke(RequestInterface $request, array $options): ResponseInterface
     {
-        if (! \ini_get('allow_url_fopen')) {
+        if (!\ini_get('allow_url_fopen')) {
             throw new \RuntimeException('StreamPsrClient require `allow_url_fopen` to be enabled in php.ini');
         }
 
@@ -86,6 +87,7 @@ class StreamHandler implements Handler
         } catch (\Exception $e) {
             // Determine if the error was a networking error.
             $message = $e->getMessage();
+
             // This list can probably get more comprehensive.
             if (false !== strpos($message, 'getaddrinfo') // DNS lookup failed
                 || false !== strpos($message, 'Connection refused')
@@ -96,6 +98,7 @@ class StreamHandler implements Handler
             } else {
                 $e = RequestException::wrapException($request, $e);
             }
+
             $this->invokeStats($options, $request, $startTime, null, $e);
 
             throw $e;
@@ -116,7 +119,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  resource  $stream
+     * @param resource $stream
      */
     private function createResponse(RequestInterface $request, array $options, $stream, ?float $startTime): ResponseInterface
     {
@@ -164,7 +167,7 @@ class StreamHandler implements Handler
 
     private function createSink(StreamInterface $stream, array $options): StreamInterface
     {
-        if (! empty($options['stream'])) {
+        if (!empty($options['stream'])) {
             return $stream;
         }
 
@@ -174,15 +177,17 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  resource  $stream
+     * @param resource $stream
      */
     private function checkDecode(array $options, array $headers, $stream): array
     {
         // Automatically decode responses when instructed.
-        if (! empty($options['decode_content'])) {
+        if (!empty($options['decode_content'])) {
             $normalizedKeys = Utils::normalizeHeaderKeys($headers);
+
             if (isset($normalizedKeys['content-encoding'])) {
                 $encoding = $headers[$normalizedKeys['content-encoding']];
+
                 if ('gzip' === $encoding[0] || 'deflate' === $encoding[0]) {
                     $stream = new InflateStream(Psr7\Utils::streamFor($stream));
                     $headers['x-encoded-content-encoding'] = $headers[$normalizedKeys['content-encoding']];
@@ -194,6 +199,7 @@ class StreamHandler implements Handler
                     if (isset($normalizedKeys['content-length'])) {
                         $headers['x-encoded-content-length'] = $headers[$normalizedKeys['content-length']];
                         $length = (int) $stream->getSize();
+
                         if (0 === $length) {
                             unset($headers[$normalizedKeys['content-length']]);
                         } else {
@@ -210,8 +216,8 @@ class StreamHandler implements Handler
     /**
      * Drains the source stream into the "sink" client option.
      *
-     * @param  string  $contentLength  header specifying the amount of
-     *                                 data to read
+     * @param string $contentLength header specifying the amount of
+     *                              data to read
      *
      * @throws \RuntimeException when the sink option is invalid
      */
@@ -234,12 +240,13 @@ class StreamHandler implements Handler
     }
 
     /**
-     * Create a resource and check to ensure it was created successfully
+     * Create a resource and check to ensure it was created successfully.
      *
-     * @param  callable  $callback  Callable that returns stream resource
-     * @return resource
+     * @param callable $callback Callable that returns stream resource
      *
      * @throws \RuntimeException on error
+     *
+     * @return resource
      */
     private function createResource(callable $callback)
     {
@@ -260,11 +267,12 @@ class StreamHandler implements Handler
             restore_error_handler();
         }
 
-        if (! $resource) {
+        if (!$resource) {
             $message = 'Error creating resource: ';
+
             foreach ($errors as $err) {
                 foreach ($err as $key => $value) {
-                    $message .= "[$key] $value".PHP_EOL;
+                    $message .= "[$key] $value".\PHP_EOL;
                 }
             }
 
@@ -280,37 +288,39 @@ class StreamHandler implements Handler
     private function createStream(RequestInterface $request, array $options)
     {
         static $methods;
-        if (! $methods) {
+
+        if (!$methods) {
             $methods = array_flip(get_class_methods(__CLASS__));
         }
 
-        if (! \in_array($request->getUri()->getScheme(), ['http', 'https'], true)) {
+        if (!\in_array($request->getUri()->getScheme(), ['http', 'https'], true)) {
             throw new RequestException(\sprintf("The scheme '%s' is not supported.", $request->getUri()->getScheme()), $request);
         }
 
         // HTTP/1.1 streams using the PHP stream wrapper require a
         // Connection: close header
         if ('1.1' === $request->getProtocolVersion()
-            && ! $request->hasHeader('Connection')
+            && !$request->hasHeader('Connection')
         ) {
             $request = $request->withHeader('Connection', 'close');
         }
 
         // Ensure SSL is verified by default
-        if (! isset($options['verify'])) {
+        if (!isset($options['verify'])) {
             $options['verify'] = true;
         }
 
         $params = [];
         $context = $this->getDefaultContext($request);
 
-        if (isset($options['on_headers']) && ! \is_callable($options['on_headers'])) {
+        if (isset($options['on_headers']) && !\is_callable($options['on_headers'])) {
             throw new \InvalidArgumentException('on_headers must be callable');
         }
 
-        if (! empty($options)) {
+        if (!empty($options)) {
             foreach ($options as $key => $value) {
                 $method = "add_{$key}";
+
                 if (isset($methods[$method])) {
                     $this->{$method}($request, $context, $value, $params);
                 }
@@ -318,9 +328,10 @@ class StreamHandler implements Handler
         }
 
         if (isset($options['stream_context'])) {
-            if (! \is_array($options['stream_context'])) {
+            if (!\is_array($options['stream_context'])) {
                 throw new \InvalidArgumentException('stream_context must be an array');
             }
+
             $context = array_replace_recursive($context, $options['stream_context']);
         }
 
@@ -337,7 +348,7 @@ class StreamHandler implements Handler
 
         return $this->createResource(
             function () use ($uri, &$http_response_header, $contextResource, $context, $options, $request) {
-                $resource = @fopen((string) $uri, 'r', false, $contextResource);
+                $resource = fopen((string) $uri, 'rb', false, $contextResource);
                 $this->lastHeaders = $http_response_header ?? [];
 
                 if (false === $resource) {
@@ -360,18 +371,21 @@ class StreamHandler implements Handler
     {
         $uri = $request->getUri();
 
-        if (isset($options['force_ip_resolve']) && ! filter_var($uri->getHost(), FILTER_VALIDATE_IP)) {
+        if (isset($options['force_ip_resolve']) && !filter_var($uri->getHost(), \FILTER_VALIDATE_IP)) {
             if ('v4' === $options['force_ip_resolve']) {
-                $records = dns_get_record($uri->getHost(), DNS_A);
-                if (false === $records || ! isset($records[0]['ip'])) {
+                $records = dns_get_record($uri->getHost(), \DNS_A);
+
+                if (false === $records || !isset($records[0]['ip'])) {
                     throw new ConnectException(\sprintf("Could not resolve IPv4 address for host '%s'", $uri->getHost()), $request);
                 }
 
                 return $uri->withHost($records[0]['ip']);
             }
+
             if ('v6' === $options['force_ip_resolve']) {
-                $records = dns_get_record($uri->getHost(), DNS_AAAA);
-                if (false === $records || ! isset($records[0]['ipv6'])) {
+                $records = dns_get_record($uri->getHost(), \DNS_AAAA);
+
+                if (false === $records || !isset($records[0]['ipv6'])) {
                     throw new ConnectException(\sprintf("Could not resolve IPv6 address for host '%s'", $uri->getHost()), $request);
                 }
 
@@ -385,6 +399,7 @@ class StreamHandler implements Handler
     private function getDefaultContext(RequestInterface $request): array
     {
         $headers = '';
+
         foreach ($request->getHeaders() as $name => $value) {
             foreach ($value as $val) {
                 $headers .= "$name: $val\r\n";
@@ -408,8 +423,9 @@ class StreamHandler implements Handler
 
         if ('' !== $body) {
             $context['http']['content'] = $body;
+
             // Prevent the HTTP handler from adding a Content-Type header.
-            if (! $request->hasHeader('Content-Type')) {
+            if (!$request->hasHeader('Content-Type')) {
                 $context['http']['header'] .= "Content-Type:\r\n";
             }
         }
@@ -420,24 +436,25 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value  as passed via Request transfer options
+     * @param mixed $value as passed via Request transfer options
      */
     private function add_proxy(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         $uri = null;
 
-        if (! \is_array($value)) {
+        if (!\is_array($value)) {
             $uri = $value;
         } else {
             $scheme = $request->getUri()->getScheme();
+
             if (isset($value[$scheme])) {
-                if (! isset($value['no']) || ! Utils::isHostInNoProxy($request->getUri()->getHost(), $value['no'])) {
+                if (!isset($value['no']) || !Utils::isHostInNoProxy($request->getUri()->getHost(), $value['no'])) {
                     $uri = $value[$scheme];
                 }
             }
         }
 
-        if (! $uri) {
+        if (!$uri) {
             return;
         }
 
@@ -445,9 +462,10 @@ class StreamHandler implements Handler
         $options['http']['proxy'] = $parsed['proxy'];
 
         if ($parsed['auth']) {
-            if (! isset($options['http']['header'])) {
+            if (!isset($options['http']['header'])) {
                 $options['http']['header'] = [];
             }
+
             $options['http']['header'] .= "\r\nProxy-Authorization: {$parsed['auth']}";
         }
     }
@@ -465,6 +483,7 @@ class StreamHandler implements Handler
         if (false !== $parsed && isset($parsed['scheme']) && 'http' === $parsed['scheme']) {
             if (isset($parsed['host'], $parsed['port'])) {
                 $auth = null;
+
                 if (isset($parsed['user'], $parsed['pass'])) {
                     $auth = base64_encode("{$parsed['user']}:{$parsed['pass']}");
                 }
@@ -484,25 +503,25 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value  as passed via Request transfer options
+     * @param mixed $value as passed via Request transfer options
      */
     private function add_timeout(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
-        if ($value > 0) {
+        if (0 < $value) {
             $options['http']['timeout'] = $value;
         }
     }
 
     /**
-     * @param  mixed  $value  as passed via Request transfer options
+     * @param mixed $value as passed via Request transfer options
      */
     private function add_crypto_method(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         if (
-            STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT === $value
-            || STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT === $value
-            || STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT === $value
-            || (\defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT') && STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT === $value)
+            \STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT === $value
+            || \STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT === $value
+            || \STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT === $value
+            || (\defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT') && \STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT === $value)
         ) {
             $options['http']['crypto_method'] = $value;
 
@@ -513,7 +532,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value  as passed via Request transfer options
+     * @param mixed $value as passed via Request transfer options
      */
     private function add_verify(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -526,7 +545,8 @@ class StreamHandler implements Handler
 
         if (\is_string($value)) {
             $options['ssl']['cafile'] = $value;
-            if (! file_exists($value)) {
+
+            if (!file_exists($value)) {
                 throw new \RuntimeException("SSL CA bundle not found: $value");
             }
         } elseif (true !== $value) {
@@ -539,7 +559,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value  as passed via Request transfer options
+     * @param mixed $value as passed via Request transfer options
      */
     private function add_cert(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -548,7 +568,7 @@ class StreamHandler implements Handler
             $value = $value[0];
         }
 
-        if (! file_exists($value)) {
+        if (!file_exists($value)) {
             throw new \RuntimeException("SSL certificate not found: {$value}");
         }
 
@@ -556,14 +576,14 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value  as passed via Request transfer options
+     * @param mixed $value as passed via Request transfer options
      */
     private function add_progress(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
         self::addNotification(
             $params,
             static function ($code, $a, $b, $c, $transferred, $total) use ($value): void {
-                if (STREAM_NOTIFY_PROGRESS === $code) {
+                if (\STREAM_NOTIFY_PROGRESS === $code) {
                     // // https://www.php.net/manual/zh/function.stream-notification-callback.php#121236
                     // $transferred > 0 and $transferred += 8192;
                     // The upload progress cannot be determined. Use 0 for cURL compatibility:
@@ -575,7 +595,7 @@ class StreamHandler implements Handler
     }
 
     /**
-     * @param  mixed  $value  as passed via Request transfer options
+     * @param mixed $value as passed via Request transfer options
      */
     private function add_debug(RequestInterface $request, array &$options, mixed $value, array &$params): void
     {
@@ -584,16 +604,16 @@ class StreamHandler implements Handler
         }
 
         static $map = [
-            STREAM_NOTIFY_CONNECT => 'CONNECT',
-            STREAM_NOTIFY_AUTH_REQUIRED => 'AUTH_REQUIRED',
-            STREAM_NOTIFY_AUTH_RESULT => 'AUTH_RESULT',
-            STREAM_NOTIFY_MIME_TYPE_IS => 'MIME_TYPE_IS',
-            STREAM_NOTIFY_FILE_SIZE_IS => 'FILE_SIZE_IS',
-            STREAM_NOTIFY_REDIRECTED => 'REDIRECTED',
-            STREAM_NOTIFY_PROGRESS => 'PROGRESS',
-            STREAM_NOTIFY_FAILURE => 'FAILURE',
-            STREAM_NOTIFY_COMPLETED => 'COMPLETED',
-            STREAM_NOTIFY_RESOLVE => 'RESOLVE',
+            \STREAM_NOTIFY_CONNECT => 'CONNECT',
+            \STREAM_NOTIFY_AUTH_REQUIRED => 'AUTH_REQUIRED',
+            \STREAM_NOTIFY_AUTH_RESULT => 'AUTH_RESULT',
+            \STREAM_NOTIFY_MIME_TYPE_IS => 'MIME_TYPE_IS',
+            \STREAM_NOTIFY_FILE_SIZE_IS => 'FILE_SIZE_IS',
+            \STREAM_NOTIFY_REDIRECTED => 'REDIRECTED',
+            \STREAM_NOTIFY_PROGRESS => 'PROGRESS',
+            \STREAM_NOTIFY_FAILURE => 'FAILURE',
+            \STREAM_NOTIFY_COMPLETED => 'COMPLETED',
+            \STREAM_NOTIFY_RESOLVE => 'RESOLVE',
         ];
         static $args = ['severity', 'message', 'message_code', 'bytes_transferred', 'bytes_max'];
 
@@ -603,9 +623,11 @@ class StreamHandler implements Handler
             $params,
             static function (int $code, ...$passed) use ($ident, $value, $map, $args): void {
                 fprintf($value, '<%s> [%s] ', $ident, $map[$code]);
+
                 foreach (array_filter($passed) as $i => $v) {
                     fwrite($value, $args[$i].': "'.$v.'" ');
                 }
+
                 fwrite($value, "\n");
             }
         );
@@ -614,7 +636,7 @@ class StreamHandler implements Handler
     private static function addNotification(array &$params, callable $notify): void
     {
         // Wrap the existing function if needed.
-        if (! isset($params['notification'])) {
+        if (!isset($params['notification'])) {
             $params['notification'] = $notify;
         } else {
             $params['notification'] = self::callArray([

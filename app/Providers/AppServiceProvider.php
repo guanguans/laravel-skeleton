@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Providers;
 
 use App\Console\Commands\ClearAllCommand;
@@ -136,7 +145,6 @@ class AppServiceProvider extends ServiceProvider
     use Conditionable {
         Conditionable::when as whenever;
     }
-
     final public const string REQUEST_ID_NAME = 'X-Request-Id';
 
     /**
@@ -187,14 +195,14 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
-     * @throws BindingResolutionException
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     * @throws \ReflectionException
-     *
      * @see https://github.com/cachethq/cachet
      *
      * @noinspection JsonEncodingApiUsageInspection
+     *
+     * @throws \ReflectionException
+     * @throws BindingResolutionException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function boot(): void
     {
@@ -287,7 +295,7 @@ class AppServiceProvider extends ServiceProvider
             // TrimStrings::skipWhen(static fn (Request $request): bool => $request->is('admin/*'));
             Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
                 $value,
-                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS
+                \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
             ));
             LogHttp::skipWhen(fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe());
             LogViewer::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
@@ -306,6 +314,7 @@ class AppServiceProvider extends ServiceProvider
             Http::globalMiddleware(
                 Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG))
             );
+
             if (DB::connection() instanceof SQLiteConnection) {
                 // Enable on delete cascade for sqlite connections
                 DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
@@ -443,9 +452,9 @@ class AppServiceProvider extends ServiceProvider
             // -----------------------------------------------------------------------
             // LOG-VIEWER : log all SLOW queries (not in production)
             // -----------------------------------------------------------------------
-            if (! app()->isProduction()) {
+            if (!app()->isProduction()) {
                 DB::listen(static function (QueryExecuted $query): void {
-                    if ($query->time > 250) {
+                    if (250 < $query->time) {
                         Log::warning('An individual database query exceeded 250 ms.', [
                             'sql' => $query->sql,
                             'raw' => $query->toRawSQL(),
@@ -499,7 +508,7 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerGlobalFunctionsFrom(string $pattern, int $flags = 0): void
     {
-        foreach (glob($pattern, $flags | GLOB_BRACE) as $file) {
+        foreach (glob($pattern, $flags | \GLOB_BRACE) as $file) {
             require_once $file;
         }
     }
@@ -507,8 +516,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register macros.
      *
-     * @throws BindingResolutionException
      * @throws \ReflectionException
+     * @throws BindingResolutionException
      */
     private function registerMixins(): void
     {
@@ -556,7 +565,7 @@ class AppServiceProvider extends ServiceProvider
             ->instanceOf(Rule::class)
             ->all()
             ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
-                /** @var Rule&class-string $ruleClass */
+                /** @var class-string&Rule $ruleClass */
                 Validator::{$ruleClass::extendMethod()}(
                     $ruleClass::name(),
                     static fn (
@@ -684,7 +693,7 @@ class AppServiceProvider extends ServiceProvider
         // 回显变量
         Blade::stringable(static fn (Request $request) => json_encode(
             $request->all(),
-            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
+            \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT
         ));
 
         Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
@@ -716,10 +725,10 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
+     * @noinspection ForgottenDebugOutputInspection
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
-     *
-     * @noinspection ForgottenDebugOutputInspection
      */
     private function listenEvents(): void
     {
@@ -737,7 +746,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->get(Dispatcher::class)->listen(RequestHandled::class, static function (RequestHandled $event): void {
             if ($event->response instanceof JsonResponse) {
-                $event->response->setEncodingOptions($event->response->getEncodingOptions() | JSON_UNESCAPED_UNICODE);
+                $event->response->setEncodingOptions($event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE);
             }
         });
 
@@ -762,7 +771,7 @@ class AppServiceProvider extends ServiceProvider
     private function sharedLogContext(): array
     {
         return collect([
-            'php-version' => PHP_VERSION,
+            'php-version' => \PHP_VERSION,
             'php-interface' => \PHP_SAPI,
             'laravel-version' => $this->app->version(),
             'running-in-console' => $this->app->runningInConsole(),
@@ -787,8 +796,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->resolving(static function (mixed $object, Application $app): void {
             if (
-                ! \is_object($object)
-                || ! str($object::class)->is(config('services.autowired.only'))
+                !\is_object($object)
+                || !str($object::class)->is(config('services.autowired.only'))
                 || str($object::class)->is(config('services.autowired.except'))
             ) {
                 return;
@@ -798,7 +807,7 @@ class AppServiceProvider extends ServiceProvider
 
             foreach ($reflectionObject->getProperties() as $reflectionProperty) {
                 if (
-                    ! $reflectionProperty->isDefault()
+                    !$reflectionProperty->isDefault()
                     || $reflectionProperty->isStatic()
                     || [] === ($attributes = $reflectionProperty->getAttributes(Autowired::class))
                 ) {
@@ -814,7 +823,8 @@ class AppServiceProvider extends ServiceProvider
                     }
 
                     $reflectionPropertyType = $reflectionProperty->getType();
-                    if ($reflectionPropertyType instanceof \ReflectionNamedType && ! $reflectionPropertyType->isBuiltin()) {
+
+                    if ($reflectionPropertyType instanceof \ReflectionNamedType && !$reflectionPropertyType->isBuiltin()) {
                         return $reflectionPropertyType->getName();
                     }
 
@@ -845,14 +855,14 @@ class AppServiceProvider extends ServiceProvider
             ->custom(
                 static fn (
                     DiscoveredClass $discoveredClass
-                ): bool => ! $discoveredClass->isAbstract && ! Str::endsWith($discoveredClass->name, ['(', '{', 'Controller'])
+                ): bool => !$discoveredClass->isAbstract && !Str::endsWith($discoveredClass->name, ['(', '{', 'Controller'])
             )
             ->get();
 
         collect($classes)->filter(class_exists(...))->each(function (string $class): void {
             $reflectionClass = new \ReflectionClass($class);
 
-            $reflectionMethods = ($reflectionClass)->getMethods();
+            $reflectionMethods = $reflectionClass->getMethods();
 
             $condition = Arr::first(
                 $reflectionMethods,
@@ -862,8 +872,7 @@ class AppServiceProvider extends ServiceProvider
             );
 
             if ($condition) {
-                $this->app->extend($class, static fn (object $object): object => new class($object, $reflectionMethods)
-                {
+                $this->app->extend($class, static fn (object $object): object => new class($object, $reflectionMethods) {
                     public function __construct(
                         private readonly object $object,
                         private readonly array $reflectionMethods,
@@ -934,7 +943,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Determine if server is running Octane
+     * Determine if server is running Octane.
      *
      * @noinspection GlobalVariableUsageInspection
      */

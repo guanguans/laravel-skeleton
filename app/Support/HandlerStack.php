@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -62,14 +63,14 @@ class HandlerStack implements \Stringable
     /** @var null|(callable(mixed): mixed) */
     private $handler;
 
-    /** @var array<array{(callable(callable(mixed): mixed): callable), (null|string)}> */
+    /** @var list<array{(callable(callable(mixed): mixed): callable), (null|string)}> */
     private array $stack = [];
 
     /** @var null|(callable(mixed): mixed) */
     private $cached;
 
     /**
-     * @param  null|(callable(mixed): mixed)  $handler  underlying HTTP handler
+     * @param null|(callable(mixed): mixed) $handler underlying HTTP handler
      */
     public function __construct(?callable $handler = null)
     {
@@ -100,6 +101,7 @@ class HandlerStack implements \Stringable
         }
 
         $result = '';
+
         foreach (array_reverse($this->stack) as $tuple) {
             ++$depth;
             $str = "{$depth}) Name: '{$tuple[1]}', ";
@@ -143,7 +145,7 @@ class HandlerStack implements \Stringable
     /**
      * Set the HTTP handler that actually returns a promise.
      *
-     * @param  callable(mixed): mixed  $handler  accepts a request and array of options and returns a Promise
+     * @param callable(mixed): mixed $handler accepts a request and array of options and returns a Promise
      */
     public function setHandler(callable $handler): void
     {
@@ -162,8 +164,8 @@ class HandlerStack implements \Stringable
     /**
      * Unshift a middleware to the bottom of the stack.
      *
-     * @param  callable(callable): callable  $middleware  Middleware function
-     * @param  string  $name  name to register for this middleware
+     * @param callable(callable): callable $middleware Middleware function
+     * @param string $name name to register for this middleware
      */
     public function unshift(callable $middleware, ?string $name = null): void
     {
@@ -174,8 +176,8 @@ class HandlerStack implements \Stringable
     /**
      * Push a middleware to the top of the stack.
      *
-     * @param  callable(callable): callable  $middleware  Middleware function
-     * @param  string  $name  name to register for this middleware
+     * @param callable(callable): callable $middleware Middleware function
+     * @param string $name name to register for this middleware
      */
     public function push(callable $middleware, string $name = ''): void
     {
@@ -186,9 +188,9 @@ class HandlerStack implements \Stringable
     /**
      * Add a middleware before another middleware by name.
      *
-     * @param  string  $findName  Middleware to find
-     * @param  callable(callable): callable  $middleware  Middleware function
-     * @param  string  $withName  name to register for this middleware
+     * @param string $findName Middleware to find
+     * @param callable(callable): callable $middleware Middleware function
+     * @param string $withName name to register for this middleware
      */
     public function before(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -198,9 +200,9 @@ class HandlerStack implements \Stringable
     /**
      * Add a middleware after another middleware by name.
      *
-     * @param  string  $findName  Middleware to find
-     * @param  callable(callable): callable  $middleware  Middleware function
-     * @param  string  $withName  name to register for this middleware
+     * @param string $findName Middleware to find
+     * @param callable(callable): callable $middleware Middleware function
+     * @param string $withName name to register for this middleware
      */
     public function after(string $findName, callable $middleware, string $withName = ''): void
     {
@@ -210,11 +212,11 @@ class HandlerStack implements \Stringable
     /**
      * Remove a middleware by instance or name from the stack.
      *
-     * @param  callable|string  $remove  middleware to remove by instance or name
+     * @param callable|string $remove middleware to remove by instance or name
      */
     public function remove(callable|string $remove): void
     {
-        if (! \is_string($remove) && ! \is_callable($remove)) {
+        if (!\is_string($remove) && !\is_callable($remove)) {
             trigger_deprecation('guzzlehttp/guzzle', '7.4', 'Not passing a callable or string to %s::%s() is deprecated and will cause an error in 8.0.', self::class, __FUNCTION__);
         }
 
@@ -234,7 +236,8 @@ class HandlerStack implements \Stringable
     public function resolve(): callable
     {
         if (null === $this->cached) {
-            throw_if(($prev = $this->handler) === null, \LogicException::class, 'No handler has been specified');
+            throw_if(null === ($prev = $this->handler), \LogicException::class, 'No handler has been specified');
+
             foreach (array_reverse($this->stack) as $fn) {
                 /** @var callable(mixed): mixed $prev */
                 $prev = $fn[0]($prev);
@@ -273,7 +276,7 @@ class HandlerStack implements \Stringable
                 $replacement = [$tuple, $this->stack[$idx]];
                 array_splice($this->stack, $idx, 1, $replacement);
             }
-        } elseif ($idx === \count($this->stack) - 1) {
+        } elseif (\count($this->stack) - 1 === $idx) {
             $this->stack[] = $tuple;
         } else {
             $replacement = [$this->stack[$idx], $tuple];
@@ -284,7 +287,7 @@ class HandlerStack implements \Stringable
     /**
      * Provides a debug string for a given callable.
      *
-     * @param  callable|string  $fn  function to write as a string
+     * @param callable|string $fn function to write as a string
      */
     private function debugCallable(callable|string $fn): string
     {

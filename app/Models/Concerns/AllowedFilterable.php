@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Models\Concerns;
@@ -39,7 +40,7 @@ trait AllowedFilterable
     {
         if (
             (Request::getFacadeRoot()->has($name) || null !== $default)
-            && ! \in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
+            && !\in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             if (\is_array($value)) {
                 return $query->whereIn($query->qualifyColumn($internalName ?: $name), $value);
@@ -55,7 +56,7 @@ trait AllowedFilterable
     {
         if (
             (Request::getFacadeRoot()->has($name) || null !== $default)
-            && ! \in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
+            && !\in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             $wrappedProperty = $query->getQuery()->getGrammar()->wrap($query->qualifyColumn($internalName ?: $name));
 
@@ -89,7 +90,7 @@ trait AllowedFilterable
     {
         if (
             (Request::getFacadeRoot()->has($name) || null !== $default)
-            && ! \in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
+            && !\in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             $nameParts = collect(explode('.', $internalName ?: $name));
 
@@ -119,7 +120,7 @@ trait AllowedFilterable
     public function scopeAllowedTrashedFilter(Builder $query, string $name = 'trashed'): Builder
     {
         if (Request::getFacadeRoot()->has($name)) {
-            if (($value = Request::getFacadeRoot()->input($name)) === 'with') {
+            if ('with' === ($value = Request::getFacadeRoot()->input($name))) {
                 return $query->withTrashed();
             }
 
@@ -153,7 +154,7 @@ trait AllowedFilterable
                 : ($column = $direction and $direction = 'asc');
             }
 
-            if (! \in_array($column, $allowedSorts, true)) {
+            if (!\in_array($column, $allowedSorts, true)) {
                 continue;
             }
 
@@ -167,6 +168,7 @@ trait AllowedFilterable
     {
         if (Request::getFacadeRoot()->hasAny([$name, '-'.$name]) || null !== $default) {
             $column = $internalName ?: $name;
+
             if (Request::getFacadeRoot()->has('-'.$name)) {
                 $direction = 'desc';
             } elseif (Request::getFacadeRoot()->has($name)) {

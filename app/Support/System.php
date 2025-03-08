@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -20,15 +21,10 @@ use Illuminate\Support\Sleep;
 class System
 {
     final public const string X86 = 'x86';
-
     final public const string PPC = 'ppc';
-
     final public const string ARM = 'arm';
-
     private const string RegExX86 = '/(x86*|i386|i686)/';
-
     private const string RegExARM = '/(aarch*|arm*)/';
-
     private const string RegExPPC = '/(ppc*)/';
 
     /**
@@ -49,7 +45,7 @@ class System
 
     /**
      * A list of Linux Network Interfaces that are not considered valid
-     * These are usually virtual interfaces created by tools such as Docker or VirtualBox
+     * These are usually virtual interfaces created by tools such as Docker or VirtualBox.
      *
      * This list is ran through a contains, meaning for example if 'vboxnet' was in the list,
      * A 'vboxnet0' interface would be considered invalid and not computed.
@@ -166,13 +162,10 @@ class System
                 preg_match_all('/^processor/m', $cpuinfo, $matches);
 
                 return \count($matches[0]);
-
             case 'Darwin':
                 return (int) shell_exec('sysctl -n hw.ncpu');
-
             case 'Windows':
                 return (int) shell_exec('wmic cpu get NumberOfCores');
-
             default:
                 throw new \Exception(self::getOS().' not supported.');
         }
@@ -180,11 +173,11 @@ class System
 
     /**
      * Get percentage CPU usage (between 0 and 100)
-     * Reference for formula: https://stackoverflow.com/a/23376195/17300412
-     *
-     * @throws \Exception
+     * Reference for formula: https://stackoverflow.com/a/23376195/17300412.
      *
      * @noinspection OffsetOperationsInspection
+     *
+     * @throws \Exception
      */
     public static function getCPUUsage(int $duration = 1): float
     {
@@ -209,7 +202,6 @@ class System
                 $percentage = ($totalDiff - $idleDiff) / $totalDiff;
 
                 return $percentage * 100;
-
             default:
                 throw new \Exception(self::getOS().' not supported.');
         }
@@ -232,10 +224,8 @@ class System
                 }
 
                 throw new \Exception('Could not find MemTotal in /proc/meminfo.');
-
             case 'Darwin':
                 return (int) ((int) shell_exec('sysctl -n hw.memsize') / 1024 / 1024);
-
             default:
                 throw new \Exception(self::getOS().' not supported.');
         }
@@ -252,15 +242,14 @@ class System
             case 'Linux':
                 $meminfo = file_get_contents('/proc/meminfo');
                 preg_match('/MemFree:\s+(\d+)/', $meminfo, $matches);
+
                 if (isset($matches[1])) {
                     return (int) ((int) $matches[1] / 1024);
                 }
 
                 throw new \Exception('Could not find MemFree in /proc/meminfo.');
-
             case 'Darwin':
                 return (int) ((int) shell_exec('sysctl -n vm.page_free_count') / 1024 / 1024);
-
             default:
                 throw new \Exception(self::getOS().' not supported.');
         }
@@ -299,9 +288,9 @@ class System
      * the current read and write usage in Megabytes.
      * There is also a ['total'] key that contains the total amount of read and write usage.
      *
-     * @throws \Exception
-     *
      * @noinspection OffsetOperationsInspection
+     *
+     * @throws \Exception
      */
     public static function getIOUsage(int $duration = 1): array
     {
@@ -312,7 +301,7 @@ class System
         // Remove invalid disks
         $diskStat = array_filter($diskStat, static function ($disk): bool {
             foreach (self::INVALIDDISKS as $filter) {
-                if (! isset($disk[2])) {
+                if (!isset($disk[2])) {
                     return false;
                 }
 
@@ -326,7 +315,7 @@ class System
 
         $diskStat2 = array_filter($diskStat2, static function ($disk): bool {
             foreach (self::INVALIDDISKS as $filter) {
-                if (! isset($disk[2])) {
+                if (!isset($disk[2])) {
                     return false;
                 }
 
@@ -356,18 +345,18 @@ class System
      * Returns an array of all the available network interfaces on the system
      * containing the current download and upload usage in Megabytes.
      * There is also a ['total'] key that contains the total amount of download
-     * and upload
-     *
-     * @param  int  $duration  The buffer duration to fetch the data points
-     *
-     * @throws \Exception
+     * and upload.
      *
      * @noinspection OffsetOperationsInspection
+     *
+     * @param int $duration The buffer duration to fetch the data points
+     *
+     * @throws \Exception
      */
     public static function getNetworkUsage(int $duration = 1): array
     {
         // Create a list of interfaces
-        $interfaces = scandir('/sys/class/net', SCANDIR_SORT_NONE);
+        $interfaces = scandir('/sys/class/net', \SCANDIR_SORT_NONE);
 
         // Remove all unwanted interfaces
         $interfaces = array_filter($interfaces, static function ($interface): bool {
@@ -442,7 +431,7 @@ class System
             $data[$cpuNumber]['guest'] = $cpu[9] ?? 0;
         }
 
-        if (! $totalCPUExists) {
+        if (!$totalCPUExists) {
             // Combine all values
             $data['total'] = [
                 'user' => 0,
@@ -489,9 +478,10 @@ class System
         $diskstats = array_map(static fn ($data): null|array|string => preg_replace('/\t+/', ' ', trim($data)), $diskstats);
 
         // Remove empty lines
-        $diskstats = array_filter($diskstats, static fn ($data): bool => ! empty($data));
+        $diskstats = array_filter($diskstats, static fn ($data): bool => !empty($data));
 
         $data = [];
+
         foreach ($diskstats as $disk) {
             // Breakdown the data
             $disk = explode(' ', $disk);

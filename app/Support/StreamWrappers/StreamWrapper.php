@@ -5,11 +5,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\StreamWrappers;
@@ -30,7 +31,7 @@ abstract class StreamWrapper
     use HasContext;
 
     /**
-     * Constructs a new stream wrapper
+     * Constructs a new stream wrapper.
      *
      * Called when opening the stream wrapper, right before streamWrapper::stream_open().
      *
@@ -39,7 +40,7 @@ abstract class StreamWrapper
     // private function __construct() {}
 
     /**
-     * Destructs an existing stream wrapper
+     * Destructs an existing stream wrapper.
      *
      * Called when closing the stream wrapper, right before streamWrapper::stream_flush().
      *
@@ -51,7 +52,7 @@ abstract class StreamWrapper
 
     public static function register(): void
     {
-        if (! static::isRegistered()) {
+        if (!static::isRegistered()) {
             stream_wrapper_register(static::name(), static::class);
         }
     }
@@ -69,7 +70,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Close directory handle
+     * Close directory handle.
      *
      * @see \closedir()
      */
@@ -79,7 +80,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Open directory handle
+     * Open directory handle.
      *
      * @see \opendir()
      */
@@ -89,7 +90,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Read entry from directory handle
+     * Read entry from directory handle.
      *
      * @see \readdir()
      */
@@ -99,7 +100,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Rewind directory handle
+     * Rewind directory handle.
      *
      * @see \rewinddir()
      */
@@ -109,7 +110,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Create a directory
+     * Create a directory.
      *
      * @see \mkdir()
      */
@@ -119,7 +120,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Renames a file or directory
+     * Renames a file or directory.
      *
      * @see \rename()
      */
@@ -129,7 +130,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Removes a directory
+     * Removes a directory.
      *
      * @see \rmdir()
      */
@@ -139,7 +140,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Retrieve the underlaying resource
+     * Retrieve the underlaying resource.
      *
      * @see \stream_select()
      *
@@ -151,14 +152,14 @@ abstract class StreamWrapper
     }
 
     /**
-     * Close a resource
+     * Close a resource.
      *
      * @see \fclose()
      */
     public function stream_close(): void {}
 
     /**
-     * Tests for end-of-file on a file pointer
+     * Tests for end-of-file on a file pointer.
      *
      * @see \feof()
      */
@@ -168,7 +169,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Flushes the output
+     * Flushes the output.
      *
      * @see \fflush()
      */
@@ -178,7 +179,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Advisory file locking
+     * Advisory file locking.
      *
      * @see \flock()
      */
@@ -188,7 +189,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Change stream metadata
+     * Change stream metadata.
      *
      * @see \touch()
      * @see \chown()
@@ -201,7 +202,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Opens file or URL
+     * Opens file or URL.
      *
      * @see \fopen()
      */
@@ -211,7 +212,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Read from stream
+     * Read from stream.
      *
      * @see \fread()
      * @see \fgets()
@@ -222,17 +223,17 @@ abstract class StreamWrapper
     }
 
     /**
-     * Seeks to specific location in a stream
+     * Seeks to specific location in a stream.
      *
      * @see \fseek()
      */
-    public function stream_seek(int $offset, int $whence = SEEK_SET): bool
+    public function stream_seek(int $offset, int $whence = \SEEK_SET): bool
     {
         $this->throwMethodNotImplemented(__FUNCTION__);
     }
 
     /**
-     * Change stream options
+     * Change stream options.
      *
      * @see \stream_set_blocking()
      * @see \stream_set_read_buffer()
@@ -245,7 +246,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Retrieve information about a file resource
+     * Retrieve information about a file resource.
      *
      * @see \fstat()
      */
@@ -255,7 +256,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Retrieve the current position of a stream
+     * Retrieve the current position of a stream.
      *
      * @see \ftell()
      */
@@ -265,7 +266,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Truncate stream
+     * Truncate stream.
      *
      * @see \ftruncate()
      */
@@ -275,7 +276,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Write to stream
+     * Write to stream.
      *
      * @see \fwrite()
      */
@@ -285,7 +286,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Delete a file
+     * Delete a file.
      *
      * @see \unlink()
      */
@@ -295,7 +296,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Retrieve information about a file
+     * Retrieve information about a file.
      *
      * This method is called in response to all stat() related functions, such as:
      *

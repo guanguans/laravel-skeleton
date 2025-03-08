@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -17,7 +28,6 @@ class ClearAllCommand extends Command implements Isolatable, PromptsForMissingIn
      * @var string
      */
     protected $signature = 'clear:all {--f|force : Force clear optimized.}';
-
     protected $aliases = ['ca'];
 
     /**
@@ -29,7 +39,7 @@ class ClearAllCommand extends Command implements Isolatable, PromptsForMissingIn
 
     public function handle(): void
     {
-        if (! $this->option('force') && $this->getLaravel()->isProduction()) {
+        if (!$this->option('force') && $this->getLaravel()->isProduction()) {
             $this->output->warning('Please use --force option in production.');
 
             return;

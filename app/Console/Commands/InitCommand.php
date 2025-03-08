@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use App\Models\Role;
@@ -14,14 +25,10 @@ use Illuminate\Support\Str;
  */
 class InitCommand extends Command implements Isolatable
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public const TEMPLATES_PATH = '.templates';
 
-    /**
-     * @var array<string,string>
-     */
+    /** @var array<string, string> */
     public const RESOURCES_ITEMS = [
         'issue_tracker' => 'Issue Tracker',
         'figma' => 'Figma',
@@ -32,42 +39,29 @@ class InitCommand extends Command implements Isolatable
         'nova' => 'Laravel Nova',
     ];
 
-    /**
-     * @var array<string,string>
-     */
+    /** @var array<string, string> */
     public const CONTACTS_ITEMS = [
         'manager' => 'Manager',
         'team_lead' => 'Code Owner/Team Lead',
     ];
 
-    /**
-     * @var array<string,string>
-     */
+    /** @var array<string, string> */
     public const CREDENTIALS_ITEMS = [
         'telescope' => 'Laravel Telescope',
         'nova' => 'Laravel Nova',
     ];
 
-    /**
-     * @var array<string>
-     */
+    /** @var list<string> */
     public const DEFAULT_URLS = [
         'telescope',
         'nova',
     ];
-
     protected $signature = 'init {application-name : The application name }';
-
     protected $description = 'Initialize required project parameters to run DEV environment';
-
     protected array $resources = [];
-
     protected array $adminCredentials = [];
-
     protected string $appUrl;
-
     protected array $emptyValuesList = [];
-
     protected string $readmeContent = '';
 
     /**
@@ -184,7 +178,7 @@ class InitCommand extends Command implements Isolatable
         $laterText = '(will be added later)';
 
         foreach (self::RESOURCES_ITEMS as $key => $title) {
-            $defaultAnswer = (\in_array($key, self::DEFAULT_URLS)) ? $this->appUrl."/$key" : 'later';
+            $defaultAnswer = (\in_array($key, self::DEFAULT_URLS, true)) ? $this->appUrl."/$key" : 'later';
             $text = "Are you going to use $title? "
                 .'Please enter a link or select `later` to do it later, otherwise select `no`.';
 
@@ -194,18 +188,18 @@ class InitCommand extends Command implements Isolatable
                 $defaultAnswer
             );
 
-            if ($link === 'later') {
+            if ('later' === $link) {
                 $this->emptyValuesList[] = "$title link";
                 $this->setReadmeValue($filePart, "{$key}_link");
                 $this->setReadmeValue($filePart, "{$key}_later", $laterText);
-            } elseif ($link !== 'no') {
+            } elseif ('no' !== $link) {
                 $this->setReadmeValue($filePart, "{$key}_link", $link);
                 $this->setReadmeValue($filePart, "{$key}_later");
             }
 
-            $this->resources[$key] = ($link !== 'no');
+            $this->resources[$key] = ('no' !== $link);
 
-            $this->removeTag($filePart, $key, $link === 'no');
+            $this->removeTag($filePart, $key, 'no' === $link);
         }
 
         $this->setReadmeValue($filePart, 'api_link', $this->appUrl);
@@ -265,10 +259,10 @@ class InitCommand extends Command implements Isolatable
             $this->setReadmeValue($filePart, 'admin_password', $this->adminCredentials['password']);
         }
 
-        $this->removeTag($filePart, 'admin_credentials', ! $this->adminCredentials);
+        $this->removeTag($filePart, 'admin_credentials', !$this->adminCredentials);
 
         foreach (self::CREDENTIALS_ITEMS as $key => $title) {
-            if (! Arr::get($this->resources, $key)) {
+            if (!Arr::get($this->resources, $key)) {
                 $this->removeTag($filePart, "{$key}_credentials", true);
 
                 continue;
@@ -333,7 +327,7 @@ class InitCommand extends Command implements Isolatable
 
     private function loadReadmePart(string $fileName): string
     {
-        return file_get_contents(self::TEMPLATES_PATH.DIRECTORY_SEPARATOR.$fileName);
+        return file_get_contents(self::TEMPLATES_PATH.\DIRECTORY_SEPARATOR.$fileName);
     }
 
     private function updateReadmeFile(string $filePart): void
@@ -346,7 +340,7 @@ class InitCommand extends Command implements Isolatable
     private function removeTag(string &$text, string $tag, bool $removeWholeString = false): void
     {
         $regex = ($removeWholeString)
-            ? "#({{$tag}})(.|\s)*?({/$tag})#"
+            ? "#({{$tag}})(.|\\s)*?({/$tag})#"
             : "# {0,1}{(/*)$tag}#";
 
         $text = preg_replace($regex, '', $text);

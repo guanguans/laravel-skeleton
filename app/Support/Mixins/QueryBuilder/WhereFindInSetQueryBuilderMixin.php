@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Mixins\QueryBuilder;
@@ -18,8 +19,8 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
- * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
+ * @mixin \Illuminate\Database\Query\Builder
  */
 #[Mixin(\Illuminate\Database\Eloquent\Builder::class)]
 #[Mixin(\Illuminate\Database\Query\Builder::class)]
@@ -30,7 +31,7 @@ class WhereFindInSetQueryBuilderMixin
     {
         // @var string|Arrayable|string[] $values
         return function (string $column, $values, string $boolean = 'and', bool $not = false) {
-            if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && ! str_starts_with($column, $tablePrefix)) {
+            if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && !str_starts_with($column, $tablePrefix)) {
                 $column = $tablePrefix.$column;
             }
 

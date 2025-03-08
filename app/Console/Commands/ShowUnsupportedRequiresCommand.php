@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use Composer\Semver\Comparator;
@@ -21,9 +30,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ShowUnsupportedRequiresCommand extends Command
 {
     protected $signature = 'show-unsupported-requires';
-
     protected $description = 'Show unsupported requires.';
-
     private PackagistClient $packagist;
 
     /**
@@ -59,7 +66,7 @@ class ShowUnsupportedRequiresCommand extends Command
                     $package = $this->packagist->getPackage($name);
 
                     $latestVersion = collect($package['package']['versions'])->first(
-                        static fn (array $package): bool => ! str($package['version'])->contains('dev'),
+                        static fn (array $package): bool => !str($package['version'])->contains('dev'),
                         []
                     );
 
@@ -102,11 +109,12 @@ class ShowUnsupportedRequiresCommand extends Command
 
     private function isUnsupported(string $name, string $version): bool
     {
-        if (! str($name)->is(['laravel/framework', 'illuminate/*'])) {
+        if (!str($name)->is(['laravel/framework', 'illuminate/*'])) {
             return false;
         }
 
         $version = str($version);
+
         if ($version->trim()->startsWith(['>', '*'])) {
             return false;
         }

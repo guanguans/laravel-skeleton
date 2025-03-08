@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use App\Models\User;
@@ -13,7 +24,6 @@ use Illuminate\Support\Facades\File;
 class MigrateFromMysqlToSqlite extends Command
 {
     protected $signature = 'migrate-from-mysql-to-sqlite';
-
     protected $description = 'Migrate from Mysql to SQLite';
 
     public function handle(): void
@@ -42,7 +52,7 @@ class MigrateFromMysqlToSqlite extends Command
     }
 
     /**
-     * @param  class-string<\Illuminate\Database\Eloquent\Model>  $model
+     * @param class-string<\Illuminate\Database\Eloquent\Model> $model
      */
     private function migrateModel(string $model): void
     {

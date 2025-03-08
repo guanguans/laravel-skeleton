@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use App\Support\Inflector;
@@ -26,8 +37,6 @@ class InflectorCommand extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -41,8 +50,9 @@ class InflectorCommand extends Command
     {
         collect()
             ->pipe(function (Collection $collection) {
-                for (; ;) {
+                while (true) {
                     $phrase = $this->ask('Please enter a phrase to inflect.');
+
                     if (filled($phrase)) {
                         break;
                     }
@@ -72,7 +82,7 @@ class InflectorCommand extends Command
                     'CakePHP' => Inflector::class,
                 ];
 
-                return collect($type === 'all' ? \array_slice($types, 1) : [$type])
+                return collect('all' === $type ? \array_slice($types, 1) : [$type])
                     ->reduce(static function (Collection $results, string $type) use ($phrase, $classPluck) {
                         $result = Str::of($type)->explode(':')
                             ->pipe(static fn (Collection $parts) => $classPluck[$parts->first()]::{$parts->last()}($phrase));

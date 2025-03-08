@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Http\Handlers;
@@ -21,6 +22,14 @@ use Psr\Http\Message\ResponseInterface;
 class FgcHandler implements Handler
 {
     /**
+     * @see https://www.php.net/manual/zh/function.file-get-contents
+     * @see https://www.php.net/manual/zh/function.stream-context-create.php
+     * @see https://www.php.net/manual/zh/context.http.php
+     * @see https://www.php.net/manual/zh/function.stream-context-set-params.php
+     * @see https://www.php.net/manual/zh/function.stream-notification-callback.php
+     *
+     * @noinspection PhpExpressionResultUnusedInspection
+     *
      * @param array{
      *     method: string,
      *     header: array|string,
@@ -36,18 +45,10 @@ class FgcHandler implements Handler
      *     notification: null|callable(int, int, string, int, int, int): void,
      *     progress: null|callable(int, int): void,
      * } $options
-     *
-     * @see https://www.php.net/manual/zh/function.file-get-contents
-     * @see https://www.php.net/manual/zh/function.stream-context-create.php
-     * @see https://www.php.net/manual/zh/context.http.php
-     * @see https://www.php.net/manual/zh/function.stream-context-set-params.php
-     * @see https://www.php.net/manual/zh/function.stream-notification-callback.php
-     *
-     * @noinspection PhpExpressionResultUnusedInspection
      */
     public function __invoke(RequestInterface $request, array $options): ResponseInterface
     {
-        if (! \ini_get('allow_url_fopen')) {
+        if (!\ini_get('allow_url_fopen')) {
             throw new \RuntimeException('StreamPsrClient require `allow_url_fopen` to be enabled in php.ini');
         }
 
@@ -79,9 +80,9 @@ class FgcHandler implements Handler
             int $bytesTransferred,
             int $bytesMax
         ) use ($process): void {
-            if (STREAM_NOTIFY_PROGRESS === $notificationCode) {
+            if (\STREAM_NOTIFY_PROGRESS === $notificationCode) {
                 // https://www.php.net/manual/zh/function.stream-notification-callback.php#121236
-                $bytesTransferred > 0 and $bytesTransferred += 8192;
+                0 < $bytesTransferred and $bytesTransferred += 8192;
                 $process($bytesMax, $bytesTransferred);
             }
         };

@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Casts;
@@ -19,13 +20,12 @@ class CallbackGetCast implements CastsAttributes
 {
     /** @var callable */
     protected $callback;
-
     protected array $remainingCallbackArgs;
 
     /**
-     * @param  string  $callback  the callback(function、class::method、class@method) to be used to cast the attribute
-     * @param  int  $castingAttributeCallbackArgIndex  the index of the argument that will be the attribute being casted
-     * @param  ...$remainingCallbackArgs  These are the remaining callback arguments.
+     * @param string $callback the callback(function、class::method、class@method) to be used to cast the attribute
+     * @param int $castingAttributeCallbackArgIndex the index of the argument that will be the attribute being casted
+     * @param ...$remainingCallbackArgs These are the remaining callback arguments.
      */
     public function __construct(string $callback, protected int $castingAttributeCallbackArgIndex = 0, ...$remainingCallbackArgs)
     {
@@ -54,12 +54,13 @@ class CallbackGetCast implements CastsAttributes
     }
 
     /**
-     * It takes a string and returns a callable
+     * It takes a string and returns a callable.
      *
-     * @param  string  $callback  the callback to be executed
-     * @return callable a callable
+     * @param string $callback the callback to be executed
      *
      * @throws \InvalidArgumentException
+     *
+     * @return callable a callable
      */
     protected function resolveCallback(string $callback): callable
     {
@@ -69,11 +70,12 @@ class CallbackGetCast implements CastsAttributes
 
         /** @var array $segments */
         $segments = explode('@', $callback, 2);
+
         if (\is_callable($segments)) {
             return $segments;
         }
 
-        throw_if(\count($segments) !== 2 || ! method_exists($segments[0], $segments[1]), \InvalidArgumentException::class, "Invalid callback: $callback");
+        throw_if(\count($segments) !== 2 || !method_exists($segments[0], $segments[1]), \InvalidArgumentException::class, "Invalid callback: $callback");
 
         try {
             return [resolve($segments[0]), $segments[1]];

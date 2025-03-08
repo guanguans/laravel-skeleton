@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Http;
@@ -66,15 +67,15 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      *   into relative URIs. Can be a string or instance of UriInterface.
      * - **: any request option
      *
-     * @param  array  $config  client configuration settings
+     * @param array $config client configuration settings
      *
      * @see \GuzzleHttp\RequestOptions for a list of available request options.
      */
     public function __construct(private array $config = [])
     {
-        if (! isset($config['handler'])) {
+        if (!isset($config['handler'])) {
             $config['handler'] = $this->getDefaultHandlerStack();
-        } elseif (! \is_callable($config['handler'])) {
+        } elseif (!\is_callable($config['handler'])) {
             throw new \InvalidArgumentException('handler must be a callable');
         }
 
@@ -101,8 +102,8 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
     /**
      * Asynchronously send an HTTP request.
      *
-     * @param  array  $options  Request options to apply to the given
-     *                          request and to the transfer. See \GuzzleHttp\RequestOptions.
+     * @param array $options Request options to apply to the given
+     *                       request and to the transfer. See \GuzzleHttp\RequestOptions.
      */
     public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
@@ -137,9 +138,9 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * contain the query string as well. Use an array to provide a URL
      * template and additional variables to use in the URL template expansion.
      *
-     * @param  string  $method  HTTP method
-     * @param  string|UriInterface  $uri  URI object or string
-     * @param  array  $options  Request options to apply. See \GuzzleHttp\RequestOptions.
+     * @param string $method HTTP method
+     * @param string|UriInterface $uri URI object or string
+     * @param array $options Request options to apply. See \GuzzleHttp\RequestOptions.
      */
     public function request(string $method, string|UriInterface $uri = '', array $options = []): ResponseInterface
     {
@@ -150,9 +151,11 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         $version = $options['version'] ?? '1.1';
         // Merge the URI into the base URI.
         $uri = $this->buildUri(Psr7\Utils::uriFor($uri), $options);
+
         if (\is_array($body)) {
             throw $this->invalidBody();
         }
+
         $request = new Psr7\Request($method, $uri, $headers, $body, $version);
         // Remove the option so that they are not doubly-applied.
         unset($options['headers'], $options['body'], $options['version']);
@@ -167,9 +170,9 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * (if utilized by the concrete client), and a "base_uri" if utilized by
      * the concrete client.
      *
-     * @param  null|string  $option  the config option to retrieve
-     *
      * @deprecated Client::getConfig will be removed in guzzlehttp/guzzle:8.0.
+     *
+     * @param null|string $option the config option to retrieve
      */
     public function getConfig(?string $option = null): mixed
     {
@@ -185,7 +188,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         }
 
         if (isset($config['idn_conversion']) && (false !== $config['idn_conversion'])) {
-            $idnOptions = (true === $config['idn_conversion']) ? IDNA_DEFAULT : $config['idn_conversion'];
+            $idnOptions = (true === $config['idn_conversion']) ? \IDNA_DEFAULT : $config['idn_conversion'];
             $uri = Utils::idnUriConvert($uri, $idnOptions);
         }
 
@@ -226,12 +229,12 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
 
         $this->config = $config + $defaults;
 
-        if (! empty($config['cookies']) && true === $config['cookies']) {
+        if (!empty($config['cookies']) && true === $config['cookies']) {
             $this->config['cookies'] = new CookieJar;
         }
 
         // Add the default user-agent header.
-        if (! isset($this->config['headers'])) {
+        if (!isset($this->config['headers'])) {
             $this->config['headers'] = ['User-Agent' => Utils::defaultUserAgent()];
         } else {
             // Add the User-Agent header if one was not already set.
@@ -240,6 +243,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
                     return;
                 }
             }
+
             $this->config['headers']['User-Agent'] = Utils::defaultUserAgent();
         }
     }
@@ -247,13 +251,13 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
     /**
      * Merges default options into the array.
      *
-     * @param  array  $options  Options to modify by reference
+     * @param array $options Options to modify by reference
      */
     private function prepareDefaults(array $options): array
     {
         $defaults = $this->config;
 
-        if (! empty($defaults['headers'])) {
+        if (!empty($defaults['headers'])) {
             // Default headers are only added if they are not present.
             $defaults['_conditional'] = $defaults['headers'];
             unset($defaults['headers']);
@@ -266,7 +270,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
             if (null === $options['headers']) {
                 $defaults['_conditional'] = [];
                 unset($options['headers']);
-            } elseif (! \is_array($options['headers'])) {
+            } elseif (!\is_array($options['headers'])) {
                 throw new InvalidArgumentException('headers must be an array');
             }
         }
@@ -290,7 +294,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
      * The URI of the request is not modified and the request options are used
      * as-is without merging in default options.
      *
-     * @param  array  $options  see \GuzzleHttp\RequestOptions
+     * @param array $options see \GuzzleHttp\RequestOptions
      */
     private function transfer(RequestInterface $request, array $options): ResponseInterface
     {
@@ -315,6 +319,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
             if (array_keys($options['headers']) === range(0, \count($options['headers']) - 1)) {
                 throw new InvalidArgumentException('The headers array must have header name as keys.');
             }
+
             $modify['set_headers'] = $options['headers'];
             unset($options['headers']);
         }
@@ -327,6 +332,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
                     .'x-www-form-urlencoded requests, and the multipart '
                     .'option to send multipart/form-data requests.');
             }
+
             $options['body'] = http_build_query($options['form_params'], '', '&');
             unset($options['form_params']);
             // Ensure that we don't have the header in different case and set the new value.
@@ -347,7 +353,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
             $options['_conditional']['Content-Type'] = 'application/json';
         }
 
-        if (! empty($options['decode_content'])
+        if (!empty($options['decode_content'])
             && true !== $options['decode_content']
         ) {
             // Ensure that we don't have the header in different case and set the new value.
@@ -359,11 +365,12 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
             if (\is_array($options['body'])) {
                 throw $this->invalidBody();
             }
+
             $modify['body'] = Psr7\Utils::streamFor($options['body']);
             unset($options['body']);
         }
 
-        if (! empty($options['auth']) && \is_array($options['auth'])) {
+        if (!empty($options['auth']) && \is_array($options['auth'])) {
             $value = $options['auth'];
             $type = isset($value[2]) ? strtolower($value[2]) : 'basic';
 
@@ -375,17 +382,15 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
                         .base64_encode("$value[0]:$value[1]");
 
                     break;
-
                 case 'digest':
                     // @todo: Do not rely on curl
-                    $options['curl'][CURLOPT_HTTPAUTH] = CURLAUTH_DIGEST;
-                    $options['curl'][CURLOPT_USERPWD] = "$value[0]:$value[1]";
+                    $options['curl'][\CURLOPT_HTTPAUTH] = \CURLAUTH_DIGEST;
+                    $options['curl'][\CURLOPT_USERPWD] = "$value[0]:$value[1]";
 
                     break;
-
                 case 'ntlm':
-                    $options['curl'][CURLOPT_HTTPAUTH] = CURLAUTH_NTLM;
-                    $options['curl'][CURLOPT_USERPWD] = "$value[0]:$value[1]";
+                    $options['curl'][\CURLOPT_HTTPAUTH] = \CURLAUTH_NTLM;
+                    $options['curl'][\CURLOPT_USERPWD] = "$value[0]:$value[1]";
 
                     break;
             }
@@ -393,12 +398,15 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
 
         if (isset($options['query'])) {
             $value = $options['query'];
+
             if (\is_array($value)) {
-                $value = http_build_query($value, '', '&', PHP_QUERY_RFC3986);
+                $value = http_build_query($value, '', '&', \PHP_QUERY_RFC3986);
             }
-            if (! \is_string($value)) {
+
+            if (!\is_string($value)) {
                 throw new InvalidArgumentException('query must be a string or array');
             }
+
             $modify['query'] = $value;
             unset($options['query']);
         }
@@ -416,6 +424,7 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         }
 
         $request = Psr7\Utils::modifyRequest($request, $modify);
+
         if ($request->getBody() instanceof Psr7\MultipartStream) {
             // Use a multipart/form-data POST if a Content-Type is not set.
             // Ensure that we don't have the header in different case and set the new value.
@@ -428,11 +437,13 @@ class Client implements \Psr\Http\Client\ClientInterface, ClientInterface
         if (isset($options['_conditional'])) {
             // Build up the changes so it's in a single clone of the message.
             $modify = [];
+
             foreach ($options['_conditional'] as $k => $v) {
-                if (! $request->hasHeader($k)) {
+                if (!$request->hasHeader($k)) {
                     $modify['set_headers'][$k] = $v;
                 }
             }
+
             $request = Psr7\Utils::modifyRequest($request, $modify);
             // Don't pass this internal value along to middleware/handlers.
             unset($options['_conditional']);

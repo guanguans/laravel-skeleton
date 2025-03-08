@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use Dcat\Admin\Models\Permission;
@@ -13,7 +22,6 @@ use Illuminate\Support\Stringable;
 final class IdeHelperGatesCommand extends Command
 {
     protected $signature = 'ide-helper:gates {--p|path=_ide_helper_gates.php : The path to the IDE helper file}';
-
     protected $description = 'Generate IDE helper file for gates.';
 
     #[\Override]
@@ -22,7 +30,9 @@ final class IdeHelperGatesCommand extends Command
         return $this->laravel->isLocal();
     }
 
-    /** @noinspection PhpMemberCanBePulledUpInspection */
+    /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     */
     public function handle(): void
     {
         (new (config('admin.database.permissions_model'))())
@@ -32,8 +42,8 @@ final class IdeHelperGatesCommand extends Command
             })
             ->reduce(
                 static fn (Stringable $code, Permission $permissions): Stringable => $code->append(
-                    \sprintf("\%s::define('%s', 'callback');", Gate::class, $permissions['slug']),
-                    PHP_EOL
+                    \sprintf("\\%s::define('%s', 'callback');", Gate::class, $permissions['slug']),
+                    \PHP_EOL
                 ),
                 str(
                     <<<'PHP'

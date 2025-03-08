@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
@@ -31,22 +32,24 @@ use Symfony\Component\Finder\SplFileInfo;
 class FindDumpStatementCommand extends Command
 {
     /** @var string */
-    protected $signature = '
-        find:dump-statement
-        {--dir=* : The directories to search for files}
-        {--path=* : The paths to search for files}
-        {--name=* : The names to search for files}
-        {--not-path=* : The paths to exclude from the search}
-        {--not-name=* : The names to exclude from the search}
-        {--s|struct=* : The structs to search}
-        {--f|func=* : The functions to search}
-        {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
-        {--M|memory-limit= : The memory limit to use for the PHP parser}';
+    protected $signature = <<<'EOD'
+
+                find:dump-statement
+                {--dir=* : The directories to search for files}
+                {--path=* : The paths to search for files}
+                {--name=* : The names to search for files}
+                {--not-path=* : The paths to exclude from the search}
+                {--not-name=* : The names to exclude from the search}
+                {--s|struct=* : The structs to search}
+                {--f|func=* : The functions to search}
+                {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
+                {--M|memory-limit= : The memory limit to use for the PHP parser}
+        EOD;
 
     /** @var string */
     protected $description = 'Find dump statements in PHP files.';
 
-    /** @var \string[][] */
+    /** @var list<list<\string>> */
     private array $statements = [
         'struct' => [
             'echo',
@@ -67,27 +70,15 @@ class FindDumpStatementCommand extends Command
 
     /** @var \Symfony\Component\Finder\Finder */
     private $fileFinder;
-
     private ?\PhpParser\Parser $parser = null;
-
-    private ?\PhpParser\NodeFinder $nodeFinder = null;
-
-    private ?\PhpParser\PrettyPrinter\Standard $prettyPrinter = null;
-
-    private ?\SebastianBergmann\Timer\ResourceUsageFormatter $resourceUsageFormatter = null;
+    private ?NodeFinder $nodeFinder = null;
+    private ?Standard $prettyPrinter = null;
+    private ?ResourceUsageFormatter $resourceUsageFormatter = null;
 
     #[\Override]
     public function isEnabled(): bool
     {
-        return ! $this->laravel->isProduction();
-    }
-
-    #[\Override]
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        $this->checkOptions();
-        $this->initializeEnvs();
-        $this->initializeProperties();
+        return !$this->laravel->isProduction();
     }
 
     public function handle(Timer $timer)
@@ -108,7 +99,7 @@ class FindDumpStatementCommand extends Command
                     $node instanceof Node\Stmt\Expression
                     && $node->expr instanceof Node\Expr\FuncCall
                     && $node->expr->name instanceof Node\Name
-                    && \in_array($node->expr->name->toString(), $this->statements['func'])
+                    && \in_array($node->expr->name->toString(), $this->statements['func'], true)
                 ) {
                     return true;
                 }
@@ -118,7 +109,8 @@ class FindDumpStatementCommand extends Command
                     ->replaceLast('_', '')
                     ->is($this->statements['struct']);
             });
-            if ($dumpNodes === []) {
+
+            if ([] === $dumpNodes) {
                 return;
             }
 
@@ -131,7 +123,7 @@ class FindDumpStatementCommand extends Command
                     $type = '<fg=red>struct</>';
                 }
 
-                $file = Str::of($fileInfo->getRealPath())->replace(base_path().DIRECTORY_SEPARATOR, '')->pipe(static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>");
+                $file = Str::of($fileInfo->getRealPath())->replace(base_path().\DIRECTORY_SEPARATOR, '')->pipe(static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>");
                 $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(static fn (Stringable $startLine): string => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>");
                 $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(static fn (Stringable $formattedCode): string => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>");
 
@@ -145,7 +137,7 @@ class FindDumpStatementCommand extends Command
                 ];
             }, $dumpNodes);
 
-            $odd = ! $odd;
+            $odd = !$odd;
         });
 
         $this->newLine();
@@ -171,13 +163,21 @@ class FindDumpStatementCommand extends Command
         return self::SUCCESS;
     }
 
-    protected function checkOptions()
+    #[\Override]
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        if (! \in_array($this->option('parse-mode'), [
+        $this->checkOptions();
+        $this->initializeEnvs();
+        $this->initializeProperties();
+    }
+
+    protected function checkOptions(): void
+    {
+        if (!\in_array($this->option('parse-mode'), [
             ParserFactory::PREFER_PHP7,
             ParserFactory::PREFER_PHP5,
             ParserFactory::ONLY_PHP7,
-            ParserFactory::ONLY_PHP5, ])
+            ParserFactory::ONLY_PHP5, ], true)
         ) {
             $this->error('The parse-mode option is not valid(1,2,3,4).');
 
@@ -193,7 +193,7 @@ class FindDumpStatementCommand extends Command
         }
     }
 
-    protected function initializeEnvs()
+    protected function initializeEnvs(): void
     {
         $xdebug = new XdebugHandler(self::class);
         $xdebug->check();
@@ -204,7 +204,7 @@ class FindDumpStatementCommand extends Command
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
 
-    protected function initializeProperties()
+    protected function initializeProperties(): void
     {
         $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder): void {
             $methods = [
@@ -214,6 +214,7 @@ class FindDumpStatementCommand extends Command
                 'name' => $this->option('name') ?: ['*.php'],
                 'notName' => $this->option('not-name') ?: [],
             ];
+
             foreach ($methods as $method => $parameters) {
                 $finder->{$method}($parameters);
             }

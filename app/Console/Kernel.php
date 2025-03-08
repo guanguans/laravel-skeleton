@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console;
 
 use App\Console\Commands\ClearLogsCommand;
@@ -29,12 +40,10 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @return void
-     *
      * @noinspection PhpParamsInspection
      */
     #[\Override]
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command('inspire')->daily()->atRandom('07:15', '11:42')->withoutOverlapping(60);
         $schedule->command('backup:clean')->daily()->at('05:15')->withoutOverlapping();
@@ -59,7 +68,7 @@ class Kernel extends ConsoleKernel
         // $schedule->exec('php', ['-v'])->everyMinute();
     }
 
-    protected function shortSchedule(ShortSchedule $shortSchedule)
+    protected function shortSchedule(ShortSchedule $shortSchedule): void
     {
         // this artisan command will run every second
         $shortSchedule->command('inspire')->everySecond();
@@ -67,11 +76,9 @@ class Kernel extends ConsoleKernel
 
     /**
      * Register the commands for the application.
-     *
-     * @return void
      */
     #[\Override]
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 

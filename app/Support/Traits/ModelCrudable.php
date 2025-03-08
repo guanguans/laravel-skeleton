@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Traits;
@@ -51,13 +52,14 @@ trait ModelCrudable
     }
 
     /**
-     * Return the validations for the given scenario
+     * Return the validations for the given scenario.
      *
      * @see ModelCrudable::$validations
      */
     public static function validateOn(string $scenario = 'create', ?int $id = null): array
     {
         $validations = self::validations($id);
+
         if ('update' === $scenario && empty($validations['update'])) {
             $scenario = 'create';
         }
@@ -82,7 +84,7 @@ trait ModelCrudable
         });
 
         foreach ($searchableFields as $field => $definition) {
-            if (! str_contains($field, '.')) {
+            if (!str_contains($field, '.')) {
                 continue;
             }
 
@@ -114,8 +116,9 @@ trait ModelCrudable
             self::applyWithTrashed($query, $data);
         }
 
-        $result = ! empty($data['no_pagination']) && ! isset(self::$noPaginationForbidden) ? $query->get() : self::setSearchPagination($query);
-        if (! empty(self::$resourceForSearch)) {
+        $result = !empty($data['no_pagination']) && !isset(self::$noPaginationForbidden) ? $query->get() : self::setSearchPagination($query);
+
+        if (!empty(self::$resourceForSearch)) {
             return self::$resourceForSearch::collection($result);
         }
 
@@ -129,6 +132,7 @@ trait ModelCrudable
     {
         if (isset($data['order'])) {
             $sortFields = array_map(static fn ($item): array => explode(',', $item), explode('|', $data['order']));
+
             foreach ($sortFields as $sortField) {
                 $query->orderBy($sortField[0], $sortField[1] ?? 'ASC');
             }
@@ -140,7 +144,7 @@ trait ModelCrudable
     }
 
     /**
-     * Attaches related records to every result on the search query
+     * Attaches related records to every result on the search query.
      *
      * @see ModelCrudable::$searchCount
      */
@@ -180,7 +184,7 @@ trait ModelCrudable
      */
     public static function applyWithTrashed(Builder $query, array $data): void
     {
-        if (! self::$withTrashedForbidden && $data['with_trashed']) {
+        if (!self::$withTrashedForbidden && $data['with_trashed']) {
             $query->withTrashed();
         }
     }
@@ -190,7 +194,7 @@ trait ModelCrudable
      */
     public static function applyOnlyTrashed(Builder $query, array $data): void
     {
-        if (! self::$onlyTrashedForbidden && $data['only_trashed']) {
+        if (!self::$onlyTrashedForbidden && $data['only_trashed']) {
             $query->onlyTrashed();
         }
     }
@@ -201,22 +205,23 @@ trait ModelCrudable
     }
 
     /**
-     * Builds the main query based on a informed field
+     * Builds the main query based on a informed field.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query  Query builder command
-     * @param  string  $field  "The" field
-     * @param  string  $type  Type of field (string, int, date, datetime...)
-     * @param  array  $data  Data sent on $request
-     * @param  ?string  $aliasField  Alias name for field (where inside a related table "table.column")
+     * @param \Illuminate\Database\Eloquent\Builder $query Query builder command
+     * @param string $field "The" field
+     * @param string $type Type of field (string, int, date, datetime...)
+     * @param array $data Data sent on $request
+     * @param ?string $aliasField Alias name for field (where inside a related table "table.column")
      */
     private static function buildQuery(Builder $query, string $field, string $type, array $data, ?string $aliasField = null): void
     {
-        if (! $aliasField) {
+        if (!$aliasField) {
             $aliasField = $field;
         }
 
         if (isset($data[$field]) && null !== $data[$field]) {
             $customMethod = 'search'.ucfirst($field);
+
             if (method_exists(self::class, $customMethod)) {
                 // If field has custom "search" method uses it
                 $query->where(static function (\Illuminate\Contracts\Database\Query\Builder $query) use ($field, $data, $customMethod): void {
@@ -266,8 +271,9 @@ trait ModelCrudable
 
     private static function rangeFilter(Builder $query, string $field, array $data, string $aliasField, string $type): void
     {
-        if (! empty($data[$field.'_from'])) {
+        if (!empty($data[$field.'_from'])) {
             $value = $data[$field.'_from'];
+
             if ('datetime' === $type && \strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 00:00:00';
             }
@@ -275,8 +281,9 @@ trait ModelCrudable
             $query->where($field, '>=', $value);
         }
 
-        if (! empty($data[$field.'_to'])) {
+        if (!empty($data[$field.'_to'])) {
             $value = $data[$field.'_to'];
+
             if ('datetime' === $type && \strlen($value) < 16) { // If datetime was informed only by its date (Y-m-d instead of Y-m-d H:i:s)
                 $value .= ' 23:59:59';
             }

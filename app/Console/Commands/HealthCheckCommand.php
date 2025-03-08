@@ -1,6 +1,15 @@
 <?php
 
-/** @noinspection PhpUnusedPrivateMethodInspection */
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
 
 namespace App\Console\Commands;
 
@@ -14,11 +23,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Queue;
-use ReflectionMethod;
-use ReflectionObject;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Throwable;
 
 /**
  * @see https://github.com/ans-group/laravel-health-check
@@ -38,10 +44,12 @@ class HealthCheckCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'health:check
-        {--only=* : Only check methods with the given name}
-        {--except=* : Do not check methods with the given name}
-    ';
+    protected $signature = <<<'EOD'
+        health:check
+                {--only=* : Only check methods with the given name}
+                {--except=* : Do not check methods with the given name}
+
+        EOD;
 
     /**
      * The console command description.
@@ -49,9 +57,7 @@ class HealthCheckCommand extends Command
      * @var string
      */
     protected $description = 'Health check.';
-
     private array $only = [];
-
     private array $except = [];
 
     /**
@@ -59,15 +65,15 @@ class HealthCheckCommand extends Command
      */
     public function handle(): void
     {
-        collect((new ReflectionObject($this))->getMethods(ReflectionMethod::IS_PRIVATE))
-            ->filter(static fn (ReflectionMethod $method) => str($method->name)->startsWith('check'))
+        collect((new \ReflectionObject($this))->getMethods(\ReflectionMethod::IS_PRIVATE))
+            ->filter(static fn (\ReflectionMethod $method) => str($method->name)->startsWith('check'))
             ->when($this->only, fn (Collection $methods) => $methods->filter(
-                fn (ReflectionMethod $method) => str($method->name)->is($this->only)
+                fn (\ReflectionMethod $method) => str($method->name)->is($this->only)
             ))
             ->when($this->except, fn (Collection $methods) => $methods->reject(
-                fn (ReflectionMethod $method) => str($method->name)->is($this->except)
+                fn (\ReflectionMethod $method) => str($method->name)->is($this->except)
             ))
-            ->sortBy(static fn (ReflectionMethod $method) => $method->name)
+            ->sortBy(static fn (\ReflectionMethod $method) => $method->name)
             ->pipe(function (Collection $methods) {
                 $this
                     ->setProcessTitle('Health checking...')
@@ -107,10 +113,10 @@ class HealthCheckCommand extends Command
     }
 
     /**
+     * @noinspection PhpSameParameterValueInspection
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \JsonException
-     *
-     * @noinspection PhpSameParameterValueInspection
      */
     private function checkServiceProvider(
         array $except = [
@@ -143,7 +149,7 @@ class HealthCheckCommand extends Command
     ): HealthCheckStateEnum {
         $this->callSilently('package:discover');
 
-        $composer = json_decode(file_get_contents(base_path('composer.json')), true, 512, JSON_THROW_ON_ERROR);
+        $composer = json_decode(file_get_contents(base_path('composer.json')), true, 512, \JSON_THROW_ON_ERROR);
         $prodPackages = array_keys($composer['require'] ?? []);
         $devPackages = array_keys($composer['require-dev'] ?? []);
         $dontDiscoverPackages = $composer['extra']['laravel']['dont-discover'] ?? [];
@@ -153,11 +159,11 @@ class HealthCheckCommand extends Command
         $shouldntDiscoverPackages = $discoveredPackages->filter(static fn (
             array $map,
             string $package
-        ): bool => \in_array($package, $devPackages, true) && ! \in_array($package, $dontDiscoverPackages, true));
+        ): bool => \in_array($package, $devPackages, true) && !\in_array($package, $dontDiscoverPackages, true));
         $indirectDiscoveredPackages = $discoveredPackages->filter(static fn (
             array $map,
             string $package
-        ): bool => ! \in_array($package, $prodPackages, true) && ! \in_array($package, $devPackages, true));
+        ): bool => !\in_array($package, $prodPackages, true) && !\in_array($package, $devPackages, true));
 
         if ($shouldntDiscoverPackages->isNotEmpty() || $indirectDiscoveredPackages->isNotEmpty()) {
             return tap(
@@ -187,7 +193,7 @@ class HealthCheckCommand extends Command
                                     $piper = static fn (Collection $collection) => $collection
                                         ->sort()
                                         ->values()
-                                        ->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+                                        ->toJson(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES)
                                 ),
                                 $shouldntDiscoverPackages->pluck('providers')->flatten()->pipe($piper),
                                 $indirectDiscoveredPackages->pipe($piper),
@@ -207,7 +213,7 @@ class HealthCheckCommand extends Command
     {
         try {
             DB::connection($connection ?: config('database.default'))->getPdo();
-        } catch (Throwable $throwable) {
+        } catch (\Throwable $throwable) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
                 static function (HealthCheckStateEnum $state) use ($throwable): void {
@@ -228,7 +234,8 @@ class HealthCheckCommand extends Command
         }
 
         $sqlSafeUpdates = DB::select("SHOW VARIABLES LIKE 'sql_safe_updates' ")[0];
-        if (! str($sqlSafeUpdates->Value)->lower()->is('on')) {
+
+        if (!str($sqlSafeUpdates->Value)->lower()->is('on')) {
             return tap(HealthCheckStateEnum::FAILING(), static function (HealthCheckStateEnum $state): void {
                 $state->description = '`sql_safe_updates` is disabled. Please enable it.';
             });
@@ -238,7 +245,7 @@ class HealthCheckCommand extends Command
     }
 
     /**
-     * @param  array<string>|string  $checkedSqlModes
+     * @param list<string>|string $checkedSqlModes
      */
     private function checkSqlMode(array|string $checkedSqlModes = 'strict_all_tables'): HealthCheckStateEnum
     {
@@ -286,11 +293,13 @@ class HealthCheckCommand extends Command
 
         $dbDateTime = DB::scalar("SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H')");
         $appDateTime = now()->format('Y-m-d H');
+
         if ($dbDateTime !== $appDateTime) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
                 static function (HealthCheckStateEnum $state): void {
                     $dbTimeZone = DB::selectOne("SHOW VARIABLES LIKE 'time_zone'")->Value;
+
                     if (str($dbTimeZone)->lower()->is('system')) {
                         $dbTimeZone = DB::selectOne("SHOW VARIABLES LIKE 'system_time_zone'")->Value;
                     }
@@ -309,6 +318,7 @@ class HealthCheckCommand extends Command
     {
         try {
             $response = Http::get($url ?: config('app.url'));
+
             if ($response->serverError()) {
                 return tap(
                     HealthCheckStateEnum::FAILING(),
@@ -332,7 +342,7 @@ class HealthCheckCommand extends Command
 
     private function checkPhpVersion(): HealthCheckStateEnum
     {
-        if (PHP_VERSION_ID < 80100) {
+        if (\PHP_VERSION_ID < 80100) {
             return tap(HealthCheckStateEnum::FAILING(), static function (HealthCheckStateEnum $state): void {
                 $state->description = 'PHP version is less than 8.1.0.';
             });
@@ -375,8 +385,9 @@ class HealthCheckCommand extends Command
             ...app(Composer::class)->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
         ])->throw();
         $errorExtensions = collect(json_decode($processResult->output(), true))->filter(
-            static fn (array $item): bool => $item['status'] !== 'success'
+            static fn (array $item): bool => 'success' !== $item['status']
         );
+
         if ($errorExtensions->isNotEmpty()) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
@@ -393,7 +404,8 @@ class HealthCheckCommand extends Command
     {
         $freeSpace = disk_free_space(base_path());
         $diskSpace = \sprintf('%.1f', $freeSpace / (1024 * 1024));
-        if ($diskSpace < 100) {
+
+        if (100 > $diskSpace) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
                 static function (HealthCheckStateEnum $state) use ($diskSpace): void {
@@ -403,7 +415,8 @@ class HealthCheckCommand extends Command
         }
 
         $diskSpace = \sprintf('%.1f', $freeSpace / (1024 * 1024 * 1024));
-        if ($diskSpace < 1) {
+
+        if (1 > $diskSpace) {
             return tap(
                 HealthCheckStateEnum::WARNING(),
                 static function (HealthCheckStateEnum $state) use ($diskSpace): void {
@@ -418,6 +431,7 @@ class HealthCheckCommand extends Command
     private function checkMemoryLimit(int $limit = 256): HealthCheckStateEnum
     {
         $inis = collect(ini_get_all())->filter(static fn ($value, $key): bool => str_contains($key, 'memory_limit'));
+
         if ($inis->isEmpty()) {
             return tap(HealthCheckStateEnum::FAILING(), static function (HealthCheckStateEnum $state): void {
                 $state->description = 'The memory limit is not set.';
@@ -425,7 +439,8 @@ class HealthCheckCommand extends Command
         }
 
         $localValue = $inis->first()['local_value'];
-        if ($localValue > 0 && $localValue < $limit) {
+
+        if (0 < $localValue && $localValue < $limit) {
             return tap(
                 HealthCheckStateEnum::FAILING(),
                 static function (HealthCheckStateEnum $state) use ($limit, $localValue): void {
@@ -439,7 +454,7 @@ class HealthCheckCommand extends Command
 
     private function checkQueue(): HealthCheckStateEnum
     {
-        if (! Queue::connected()) {
+        if (!Queue::connected()) {
             return tap(HealthCheckStateEnum::FAILING(), static function (HealthCheckStateEnum $state): void {
                 $state->description = 'The queue is not connected.';
             });

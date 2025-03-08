@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Mixins;
@@ -22,18 +23,18 @@ use Illuminate\Support\Str;
 class StrMixin
 {
     /**
-     * @psalm-suppress UnusedFunctionCall
-     *
      * @noinspection BadExceptionsProcessingInspection
+     *
+     * @psalm-suppress UnusedFunctionCall
      *
      * @see https://github.com/symfony/polyfill-php83
      */
     public static function jsonValidate(): \Closure
     {
         return static function (string $json, int $depth = 512, int $flags = 0): bool {
-            throw_if(0 !== $flags && \defined('JSON_INVALID_UTF8_IGNORE') && JSON_INVALID_UTF8_IGNORE !== $flags, \ValueError::class, 'json_validate(): Argument #3 ($flags) must be a valid flag (allowed flags: JSON_INVALID_UTF8_IGNORE)');
+            throw_if(0 !== $flags && \defined('JSON_INVALID_UTF8_IGNORE') && \JSON_INVALID_UTF8_IGNORE !== $flags, \ValueError::class, 'json_validate(): Argument #3 ($flags) must be a valid flag (allowed flags: JSON_INVALID_UTF8_IGNORE)');
 
-            throw_if($depth <= 0, \ValueError::class, 'json_validate(): Argument #2 ($depth) must be greater than 0');
+            throw_if(0 >= $depth, \ValueError::class, 'json_validate(): Argument #2 ($depth) must be greater than 0');
 
             // see https://www.php.net/manual/en/function.json-decode.php
             if ($depth > ($jsonMaxDepth = 0x7FFFFFFF)) {
@@ -42,7 +43,7 @@ class StrMixin
 
             json_decode($json, null, $depth, $flags);
 
-            return JSON_ERROR_NONE === json_last_error();
+            return \JSON_ERROR_NONE === json_last_error();
         };
     }
 
@@ -79,8 +80,9 @@ class StrMixin
             }
 
             $acronym = '';
+
             foreach (preg_split('/[^\p{L}]+/u', $string) as $word) {
-                if (! empty($word)) {
+                if (!empty($word)) {
                     $firstLetter = mb_substr($word, 0, 1);
                     $acronym .= $firstLetter.$delimiter;
                 }

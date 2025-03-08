@@ -5,11 +5,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\StreamWrappers;
@@ -20,7 +21,7 @@ use function Illuminate\Filesystem\join_paths;
  * ```php
  * $resource = fopen('user-file://file.txt', 'rb+');
  * $resource = opendir('user-file://dir');
- * ```
+ * ```.
  */
 class UserFileStreamWrapper extends StreamWrapper
 {
@@ -55,12 +56,14 @@ class UserFileStreamWrapper extends StreamWrapper
     public function dir_opendir(string $path, int $options): bool
     {
         $newPath = $this->scanPath($path);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return false;
         }
 
         $handle = opendir($newPath, $this->getContext());
-        if (! \is_resource($handle)) {
+
+        if (!\is_resource($handle)) {
             return false;
         }
 
@@ -87,7 +90,8 @@ class UserFileStreamWrapper extends StreamWrapper
     public function mkdir(string $path, int $mode, int $options): bool
     {
         $newPath = $this->scanPath($path);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return false;
         }
 
@@ -98,12 +102,14 @@ class UserFileStreamWrapper extends StreamWrapper
     public function rename(string $pathFrom, string $pathTo): bool
     {
         $newPathFrom = $this->scanPath($pathFrom);
-        if ($newPathFrom === null) {
+
+        if (null === $newPathFrom) {
             return false;
         }
 
         $newPathTo = $this->scanPath($pathTo);
-        if ($newPathTo === null) {
+
+        if (null === $newPathTo) {
             return false;
         }
 
@@ -114,7 +120,8 @@ class UserFileStreamWrapper extends StreamWrapper
     public function rmdir(string $path, int $options): bool
     {
         $newPath = $this->scanPath($path);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return false;
         }
 
@@ -128,15 +135,14 @@ class UserFileStreamWrapper extends StreamWrapper
     public function stream_cast(int $castAs): mixed
     {
         switch ($castAs) {
-            case STREAM_CAST_AS_STREAM:
-            case STREAM_CAST_FOR_SELECT:
+            case \STREAM_CAST_AS_STREAM:
+            case \STREAM_CAST_FOR_SELECT:
                 throw_unless(\is_resource($this->handle), \RuntimeException::class, "Can't cast resource");
 
                 // @todo cast resource
                 // $this->stream_write('casted resource');
 
                 return $this->handle;
-
             default:
                 return throw new \InvalidArgumentException('Invalid cast type');
         }
@@ -173,15 +179,16 @@ class UserFileStreamWrapper extends StreamWrapper
     public function stream_metadata(string $path, int $option, mixed $value): bool
     {
         $newPath = $this->scanPath($path);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return false;
         }
 
         return match ($option) {
-            STREAM_META_TOUCH => touch($newPath, $mtime = $value[0] ?? time(), $value[1] ?? $mtime),
-            STREAM_META_OWNER_NAME, STREAM_META_OWNER => chown($newPath, $value),
-            STREAM_META_GROUP_NAME, STREAM_META_GROUP => chgrp($newPath, $value),
-            STREAM_META_ACCESS => chmod($newPath, $value),
+            \STREAM_META_TOUCH => touch($newPath, $mtime = $value[0] ?? time(), $value[1] ?? $mtime),
+            \STREAM_META_OWNER_NAME, \STREAM_META_OWNER => chown($newPath, $value),
+            \STREAM_META_GROUP_NAME, \STREAM_META_GROUP => chgrp($newPath, $value),
+            \STREAM_META_ACCESS => chmod($newPath, $value),
             default => false,
         };
     }
@@ -189,27 +196,31 @@ class UserFileStreamWrapper extends StreamWrapper
     #[\Override]
     public function stream_open(string $path, string $mode, int $options, ?string &$openedPath): bool
     {
-        if ($useTriggerError = ($options & STREAM_REPORT_ERRORS)) {
+        if ($useTriggerError = ($options & \STREAM_REPORT_ERRORS)) {
             set_error_handler(static function (int $errno, string $errstr): void {
                 trigger_error($errstr, $errno);
             });
         }
 
         $newPath = $this->scanPath($path);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return false;
         }
 
-        $handle = fopen($newPath, $mode, $useIncludePath = (bool) ($options & STREAM_USE_PATH), $this->getContext());
-        if (! \is_resource($handle)) {
+        $handle = fopen($newPath, $mode, $useIncludePath = (bool) ($options & \STREAM_USE_PATH), $this->getContext());
+
+        if (!\is_resource($handle)) {
             return false;
         }
 
         if ($useIncludePath) {
             sscanf($newPath, 'file://%s', $purePath);
+
             foreach (array_map(trim(...), explode(':', get_include_path())) as $includePath) {
                 // $fullPath = $includePath.DIRECTORY_SEPARATOR.$purePath;
                 $fullPath = join_paths($includePath, $purePath);
+
                 if (file_exists($fullPath)) {
                     $openedPath = $fullPath;
 
@@ -236,7 +247,7 @@ class UserFileStreamWrapper extends StreamWrapper
     }
 
     #[\Override]
-    public function stream_seek(int $offset, int $whence = SEEK_SET): bool
+    public function stream_seek(int $offset, int $whence = \SEEK_SET): bool
     {
         return fseek($this->handle, $offset, $whence) === 0;
     }
@@ -245,10 +256,10 @@ class UserFileStreamWrapper extends StreamWrapper
     public function stream_set_option(int $option, int $arg1, ?int $arg2): bool
     {
         return match ($option) {
-            STREAM_OPTION_BLOCKING => stream_set_blocking($this->handle, (bool) $arg1),
-            STREAM_OPTION_READ_BUFFER => stream_set_read_buffer($this->handle, $arg2) === 0,
-            STREAM_OPTION_WRITE_BUFFER => stream_set_write_buffer($this->handle, $arg2) === 0,
-            STREAM_OPTION_READ_TIMEOUT => stream_set_timeout($this->handle, $arg1),
+            \STREAM_OPTION_BLOCKING => stream_set_blocking($this->handle, (bool) $arg1),
+            \STREAM_OPTION_READ_BUFFER => stream_set_read_buffer($this->handle, $arg2) === 0,
+            \STREAM_OPTION_WRITE_BUFFER => stream_set_write_buffer($this->handle, $arg2) === 0,
+            \STREAM_OPTION_READ_TIMEOUT => stream_set_timeout($this->handle, $arg1),
             default => false,
         };
     }
@@ -281,7 +292,8 @@ class UserFileStreamWrapper extends StreamWrapper
     public function unlink(string $path): bool
     {
         $newPath = $this->scanPath($path);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return false;
         }
 
@@ -292,7 +304,8 @@ class UserFileStreamWrapper extends StreamWrapper
     public function url_stat(string $path, int $flags): array|false
     {
         $newPath = $this->scanPath($path);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return false;
         }
 
@@ -302,7 +315,8 @@ class UserFileStreamWrapper extends StreamWrapper
     private function scanPath(string $path): ?string
     {
         sscanf($path, 'user-file://%s', $newPath);
-        if ($newPath === null) {
+
+        if (null === $newPath) {
             return null;
         }
 

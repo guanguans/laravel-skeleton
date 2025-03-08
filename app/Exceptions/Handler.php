@@ -1,24 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
     // use ExceptionTrait;
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritDoc} */
     protected $dontReport = [
-        //
     ];
 
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritDoc} */
     protected $dontFlash = [
         'current_password',
         'password',
@@ -31,17 +36,17 @@ class Handler extends ExceptionHandler
     #[\Override]
     public function register(): void
     {
-        $this->reportable(static function (Throwable $e): void {});
+        $this->reportable(static function (\Throwable $e): void {});
     }
 
     #[\Override]
-    public function report(Throwable $e): void
+    public function report(\Throwable $e): void
     {
         parent::report($e);
     }
 
     #[\Override]
-    public function render($request, Throwable $e)
+    public function render($request, \Throwable $e)
     {
         return parent::render($request, $e);
     }

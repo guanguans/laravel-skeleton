@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -30,7 +31,7 @@ class BitEncoder implements BitEncoderContract
     /**
      * 无重复元素的数组.
      *
-     * @var array<mixed>
+     * @var list<mixed>
      */
     protected array $set;
 
@@ -68,10 +69,11 @@ class BitEncoder implements BitEncoderContract
      */
     public function attach(int $value, ...$set): int
     {
-        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         return array_reduce($set, function (int $value, $item): int {
             $index = array_search($item, $this->set, true);
+
             if (false !== $index) {
                 $value |= (1 << $index);
             }
@@ -87,10 +89,11 @@ class BitEncoder implements BitEncoderContract
      */
     public function detach(int $value, ...$set): int
     {
-        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         return array_reduce($set, function (int $value, $item): int {
             $index = array_search($item, $this->set, true);
+
             if (false !== $index) {
                 $value &= (~(1 << $index));
             }
@@ -106,9 +109,10 @@ class BitEncoder implements BitEncoderContract
      */
     public function has(int $value, mixed $item): bool
     {
-        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         $index = array_search($item, $this->set, true);
+
         if (false === $index) {
             return false;
         }
@@ -125,14 +129,15 @@ class BitEncoder implements BitEncoderContract
      */
     public function lack(int $value, mixed $item): bool
     {
-        throw_if($value < 0, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
 
         $index = array_search($item, $this->set, true);
+
         if (false === $index) {
             return true;
         }
 
-        return ($value & (1 << $index)) === 0;
+        return 0 === ($value & (1 << $index));
     }
 
     /**
@@ -157,13 +162,15 @@ class BitEncoder implements BitEncoderContract
     public function getHasCombinations(array $set, int $length = 1024): array
     {
         $combinationsCount = $this->getHasCombinationsCount($set);
+
         if ($combinationsCount > $length) {
             trigger_error('Did not get all has combinations.');
         }
 
         $combinations = [];
+
         foreach ($this->getHasCombinationsGenerator($set) as $index => $combination) {
-            if ($length >= 0 && $index >= $length) {
+            if (0 <= $length && $index >= $length) {
                 break;
             }
 
@@ -179,13 +186,15 @@ class BitEncoder implements BitEncoderContract
     public function getLackCombinations(array $set, int $length = 1024): array
     {
         $combinationsCount = $this->getLackCombinationsCount($set);
+
         if ($combinationsCount > $length) {
             trigger_error('Did not get all lack combinations.');
         }
 
         $combinations = [];
+
         foreach ($this->getLackCombinationsGenerator($set) as $index => $combination) {
-            if ($length >= 0 && $index >= $length) {
+            if (0 <= $length && $index >= $length) {
                 break;
             }
 
@@ -201,12 +210,14 @@ class BitEncoder implements BitEncoderContract
     public function getHasCombinationsGenerator(array $set): \Generator
     {
         $set = array_intersect($this->set, $set);
-        if ($set === []) {
+
+        if ([] === $set) {
             return; // 中断
         }
 
         $subSetCount = \count($set);
         $setCount = \count($this->set);
+
         for ($i = $subSetCount; $i <= $setCount; ++$i) {
             foreach ($this->combinationGenerator($this->set, $i) as $combination) {
                 if (array_values(array_intersect($combination, $set)) === array_values($set)) {
@@ -222,12 +233,14 @@ class BitEncoder implements BitEncoderContract
     public function getLackCombinationsGenerator(array $set): \Generator
     {
         $set = array_intersect($this->set, $set);
-        if ($set === []) {
+
+        if ([] === $set) {
             return; // 中断
         }
 
         $subSetCount = \count($set);
         $setCount = \count($this->set);
+
         for ($i = 1; $i <= $setCount; ++$i) {
             foreach ($this->combinationGenerator($this->set, $i) as $combination) {
                 if ($i < $subSetCount) {
@@ -248,7 +261,7 @@ class BitEncoder implements BitEncoderContract
      */
     public function getHasCombinationsCount(array $set): int
     {
-        if (($subSetCount = \count(array_intersect($this->set, $set))) === 0) {
+        if (0 === ($subSetCount = \count(array_intersect($this->set, $set)))) {
             return 0;
         }
 
@@ -287,7 +300,7 @@ class BitEncoder implements BitEncoderContract
     {
         throw_unless(array_is_list($set), \InvalidArgumentException::class, 'The set is not an array of lists.');
 
-        throw_if(array_filter(array_count_values($set), static fn (int $count): bool => $count > 1), \InvalidArgumentException::class, 'The set must be an array with no duplicate elements.');
+        throw_if(array_filter(array_count_values($set), static fn (int $count): bool => 1 < $count), \InvalidArgumentException::class, 'The set must be an array with no duplicate elements.');
 
         if (($count = \count($set)) > ($maxCount = \PHP_INT_SIZE === 4 ? 31 : 63)) {
             throw new \LengthException("The number({$maxCount}) of elements is greater than the maximum length({$count}).");

@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Traits;
@@ -24,19 +25,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 trait Cacheable
 {
-    /**
-     * Cache instance
-     */
+    /** Cache instance */
     protected static CacheManager $cache;
 
-    /**
-     * Flush the cache after create/update/delete events.
-     */
+    /** Flush the cache after create/update/delete events. */
     protected bool $eventFlushCache = false;
 
-    /**
-     * Global lifetime of the cache.
-     */
+    /** Global lifetime of the cache. */
     protected int $cacheMinutes = 60;
 
     /**
@@ -52,7 +47,7 @@ trait Cacheable
      */
     public static function getCacheInstance(): CacheManager
     {
-        if (! self::$cache instanceof CacheManager) {
+        if (!self::$cache instanceof CacheManager) {
             self::$cache = app(Factory::class);
         }
 
@@ -60,7 +55,7 @@ trait Cacheable
     }
 
     /**
-     * Determine if the cache will be skipped
+     * Determine if the cache will be skipped.
      */
     public function skippedCache(): bool
     {
@@ -69,7 +64,7 @@ trait Cacheable
     }
 
     /**
-     * Get Cache key for the method
+     * Get Cache key for the method.
      */
     public function getCacheKey(string $method, ?array $args = null, string $tag = ''): string
     {

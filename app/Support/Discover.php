@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -24,25 +25,19 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class Discover
 {
-    /**
-     * Project path where all discoveries will be done.
-     */
+    /** Project path where all discoveries will be done. */
     protected string $projectPath;
 
-    /**
-     * If the discovery should be recursive.
-     */
+    /** If the discovery should be recursive. */
     protected bool $recursive = false;
 
-    /**
-     * If the method filtering should also take into account invokable classes.
-     */
+    /** If the method filtering should also take into account invokable classes. */
     protected bool $invokable = false;
 
     /**
      * List of filters to iterate on each discovered class.
      *
-     * @var array|array<null>
+     * @var array|list<null>
      */
     protected array $filters = ['class' => null, 'method' => null, 'property' => null, 'using' => null];
 
@@ -57,11 +52,11 @@ class Discover
     ) {
         $this->projectPath = $this->app->basePath();
 
-        if (! $this->baseNamespace) {
+        if (!$this->baseNamespace) {
             $this->baseNamespace = $this->app->getNamespace();
         }
 
-        if (! $this->basePath) {
+        if (!$this->basePath) {
             $this->basePath = (string) Str::of($this->app->path())->after($this->projectPath)->trim(\DIRECTORY_SEPARATOR);
         }
     }
@@ -100,7 +95,7 @@ class Discover
     {
         $this->filters['class'] = static function (\ReflectionClass $class) use ($classes): bool {
             foreach ($classes as $comparable) {
-                if (! $class->isSubclassOf($comparable)) {
+                if (!$class->isSubclassOf($comparable)) {
                     return false;
                 }
             }
@@ -119,7 +114,7 @@ class Discover
     public function withMethod(string ...$methods): static
     {
         $this->filters['method'] = function (\ReflectionClass $class) use ($methods): bool {
-            if ($this->invokable && ! \in_array('__invoke', $methods, true)) {
+            if ($this->invokable && !\in_array('__invoke', $methods, true)) {
                 $methods[] = '__invoke';
             }
 
@@ -138,7 +133,8 @@ class Discover
     /**
      * Filter classes implementing the given method using a callback for the \ReflectionMethod object.
      *
-     * @param  \Closure(\ReflectionMethod):bool  $callback
+     * @param \Closure(\ReflectionMethod):bool $callback
+     *
      * @return $this
      */
     public function withMethodReflection(string $method, \Closure $callback): static
@@ -240,7 +236,7 @@ class Discover
             }
 
             // If the class cannot be instantiated (like abstract, traits or interfaces), continue.
-            if (! $reflection->isInstantiable()) {
+            if (!$reflection->isInstantiable()) {
                 continue;
             }
 
@@ -248,7 +244,7 @@ class Discover
             $passes = true;
 
             foreach ($filters as $callback) {
-                if (! $passes = $callback($reflection)) {
+                if (!$passes = $callback($reflection)) {
                     break;
                 }
             }

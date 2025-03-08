@@ -1,18 +1,24 @@
 <?php
 
-namespace App\Http\Middleware;
+declare(strict_types=1);
 
-use Closure;
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
+namespace App\Http\Middleware;
 
 class UserLocale
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function handle($request, Closure $next, ?string $guard = null)
+    public function handle(\Illuminate\Http\Request $request, \Closure $next, ?string $guard = null): \Illuminate\Http\Response
     {
         $locale = auth($guard)->user()?->locale and app()->setLocale($locale);
 

@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Providers;
 
 use App\Listeners\MaintenanceModeDisabledNotificationListener;
@@ -57,14 +68,11 @@ class EventServiceProvider extends ServiceProvider
         //     SetRequestIdListener::class,
         // ],
     ];
-
     protected $subscribe = [
         ShareLogContextSubscriber::class,
     ];
 
-    /**
-     * @var string[]
-     */
+    /** @var list<string> */
     protected $observers = [
         \App\Models\User::class => UserObserver::class,
     ];
@@ -73,10 +81,7 @@ class EventServiceProvider extends ServiceProvider
      * Register any events for your application.
      */
     #[\Override]
-    public function boot(): void
-    {
-        //
-    }
+    public function boot(): void {}
 
     /**
      * Determine if events and listeners should be automatically discovered.

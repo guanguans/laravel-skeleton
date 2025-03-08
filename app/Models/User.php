@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Models;
 
 use App\Models\Concerns\SerializeDate;
@@ -27,7 +38,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -46,7 +57,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     #[\Override]
     public function newEloquentBuilder($query): Builder
@@ -63,14 +74,25 @@ class User extends Authenticatable
     /**
      * Retrieve the model for a bound value.
      *
-     * @param  mixed  $value
-     * @param  string|null  $field
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @param mixed $value
+     * @param null|string $field
+     *
+     * @return null|\Illuminate\Database\Eloquent\Model
      */
     #[\Override]
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->where('id', $value)->firstOrFail();
+    }
+
+    public function notifications(): MorphMany
+    {
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
+    }
+
+    public function isAdmin(): bool
+    {
+        return false; // todo implement
     }
 
     /**
@@ -98,15 +120,5 @@ class User extends Authenticatable
         return Attribute::make(
             get: static fn ($value, $attributes) => $attributes['updated_at']->format('Y-m-d H:i:s'),
         )->withoutObjectCaching();
-    }
-
-    public function notifications(): MorphMany
-    {
-        return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
-    }
-
-    public function isAdmin(): bool
-    {
-        return false; // todo implement
     }
 }

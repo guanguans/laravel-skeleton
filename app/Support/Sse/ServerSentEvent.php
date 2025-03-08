@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Sse;
@@ -22,7 +23,7 @@ use Illuminate\Support\Sleep;
  *             $serverSentEvent
  *                 ->setEvent($event = (static function (): string {
  *                     $events = ['', 'message', 'notice'];
- *                     $index = array_rand($events, 1);
+ *                     $index = array_rand($events, 1);.
  *
  *                     return $events[$index];
  *                 })())
@@ -85,11 +86,8 @@ class ServerSentEvent implements \Stringable
 
     /** @var null|callable */
     private $tapper;
-
     private bool $headersSent = false;
-
     private array $beforeCallbacks = [];
-
     private array $afterCallbacks = [];
 
     public function __construct(
@@ -109,6 +107,7 @@ class ServerSentEvent implements \Stringable
     public function __toString(): string
     {
         $event = [];
+
         if (null !== $this->event) {
             $event[] = "event: $this->event";
         }
@@ -129,7 +128,7 @@ class ServerSentEvent implements \Stringable
             $event[] = "retry: $this->retry";
         }
 
-        return implode(PHP_EOL, $event).PHP_EOL.PHP_EOL;
+        return implode(\PHP_EOL, $event).\PHP_EOL.\PHP_EOL;
     }
 
     public function __invoke(): void
@@ -145,7 +144,7 @@ class ServerSentEvent implements \Stringable
         // }
 
         // Event loop.
-        for (;;) {
+        while (true) {
             try {
                 // Echo server sent event.
                 $this->send();
@@ -208,7 +207,7 @@ class ServerSentEvent implements \Stringable
         return $this->data;
     }
 
-    public function setData(null|array|string|\Stringable $data, int $options = JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE): self
+    public function setData(null|array|string|\Stringable $data, int $options = \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE): self
     {
         if (\is_array($data)) {
             $data = json_encode($data, $options);

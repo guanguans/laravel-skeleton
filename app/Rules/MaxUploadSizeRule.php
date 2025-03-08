@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Rules;
@@ -23,7 +24,7 @@ final class MaxUploadSizeRule extends Rule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        if (($maxUploadSizeInBytes = $this->maxUploadSize()) < 0) {
+        if (0 > ($maxUploadSizeInBytes = $this->maxUploadSize())) {
             return true;
         }
 
@@ -39,14 +40,16 @@ final class MaxUploadSizeRule extends Rule
         // than `post_max_size`. So in case there is a limit set
         // we should use this because it can't be higher than `post_max_size`
         $uploadMaxSize = ini_parse_quantity(\ini_get('upload_max_filesize'));
-        if ($uploadMaxSize > 0) {
+
+        if (0 < $uploadMaxSize) {
             return $uploadMaxSize;
         }
 
         // In case `upload_max_filesize` is 0 or lower, it means, that
         // the limit is disabled. In that case, check for the value of `post_max_size`
         $postMaxSize = ini_parse_quantity(\ini_get('post_max_size'));
-        if ($postMaxSize > 0) {
+
+        if (0 < $postMaxSize) {
             return $postMaxSize;
         }
 

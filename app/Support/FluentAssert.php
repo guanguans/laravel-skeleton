@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -412,19 +413,19 @@ class FluentAssert
     }
 
     /**
+     * @noinspection DebugFunctionUsageInspection
+     * @noinspection PhpVoidFunctionResultUsedInspection
+     *
      * @internal this method is not part of this class and should not be used directly
      *
      * @throws \ReflectionException
-     *
-     * @noinspection DebugFunctionUsageInspection
-     * @noinspection PhpVoidFunctionResultUsedInspection
      */
     final public static function updateDocComment(): void
     {
         $methods = (new \ReflectionClass(Assert::class))->getMethods(\ReflectionMethod::IS_PUBLIC);
         $methods = array_filter(
             $methods,
-            static fn (\ReflectionMethod $method): bool => $method->isStatic() && ! str_starts_with($method->getName(), '__')
+            static fn (\ReflectionMethod $method): bool => $method->isStatic() && !str_starts_with($method->getName(), '__')
         );
 
         $rawDocComment = array_map(static function (\ReflectionMethod $method): string {
@@ -461,9 +462,8 @@ class FluentAssert
                  *
                  * @mixin \Webmozart\Assert\Assert
                  */
-                docComment
-            ,
-            implode(PHP_EOL, $rawDocComment)
+                docComment,
+            implode(\PHP_EOL, $rawDocComment)
         );
 
         file_put_contents(

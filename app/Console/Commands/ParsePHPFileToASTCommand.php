@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
@@ -24,11 +25,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ParsePHPFileToASTCommand extends Command
 {
     /** @var string */
-    protected $signature = '
-        parse-php-file
-        {file : The parsed file}
-        {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
-        {--M|memory-limit= : The memory limit to use for the PHP parser}';
+    protected $signature = <<<'EOD'
+
+                parse-php-file
+                {file : The parsed file}
+                {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
+                {--M|memory-limit= : The memory limit to use for the PHP parser}
+        EOD;
 
     /** @var string */
     protected $description = 'Parse a PHP file to AST.';
@@ -44,14 +47,7 @@ class ParsePHPFileToASTCommand extends Command
 
     public function isEnabled(): bool
     {
-        return ! $this->laravel->isProduction();
-    }
-
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        $this->checkOptions();
-        $this->initializeEnvs();
-        $this->initializeProperties();
+        return !$this->laravel->isProduction();
     }
 
     public function handle()
@@ -69,23 +65,30 @@ class ParsePHPFileToASTCommand extends Command
         return self::SUCCESS;
     }
 
-    protected function checkOptions()
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        if (! file_exists(base_path($this->argument('file')))) {
+        $this->checkOptions();
+        $this->initializeEnvs();
+        $this->initializeProperties();
+    }
+
+    protected function checkOptions(): void
+    {
+        if (!file_exists(base_path($this->argument('file')))) {
             throw new \InvalidArgumentException(\sprintf('The file of %s does not exist.', $this->argument('file')));
         }
 
-        if (! \in_array($this->option('parse-mode'), [
+        if (!\in_array($this->option('parse-mode'), [
             ParserFactory::PREFER_PHP7,
             ParserFactory::PREFER_PHP5,
             ParserFactory::ONLY_PHP7,
-            ParserFactory::ONLY_PHP5, ])
+            ParserFactory::ONLY_PHP5, ], true)
         ) {
             throw new \InvalidArgumentException('The parse-mode option is not valid(1,2,3,4).');
         }
     }
 
-    protected function initializeEnvs()
+    protected function initializeEnvs(): void
     {
         $xdebug = new XdebugHandler(__CLASS__);
         $xdebug->check();
@@ -96,7 +99,7 @@ class ParsePHPFileToASTCommand extends Command
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
 
-    protected function initializeProperties()
+    protected function initializeProperties(): void
     {
         $this->parser = (new ParserFactory)->create((int) $this->option('parse-mode'));
         $this->nodeFinder = new NodeFinder;

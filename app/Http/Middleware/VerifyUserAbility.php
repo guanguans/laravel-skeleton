@@ -2,9 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
@@ -20,10 +28,10 @@ class VerifyUserAbility
      *
      * @author Seven Du <shiweidu@outlook.com>
      */
-    public function handle(Request $request, Closure $next, string $ability, string $message = '')
+    public function handle(Request $request, \Closure $next, string $ability, string $message = '')
     {
         abort_if(
-            $this->auth->guest() || ! $this->auth->user()?->ability($ability),
+            $this->auth->guest() || !$this->auth->user()?->ability($ability),
             403,
             $message ?: '你没有权限执行该操作'
         );

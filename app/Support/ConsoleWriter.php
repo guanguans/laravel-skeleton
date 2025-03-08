@@ -6,11 +6,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -24,11 +25,8 @@ use Symfony\Component\Process\Process;
 class ConsoleWriter extends OutputStyle
 {
     final public const string BLUE = 'fg=blue';
-
     final public const string GREEN = 'fg=green';
-
     final public const string RED = 'fg=red';
-
     final public const string MAGENTA = 'fg=magenta';
 
     public static function formatString(string $string, string $format): string
@@ -91,7 +89,7 @@ class ConsoleWriter extends OutputStyle
     {
         parent::text([
             '<fg=red;bg=default>--------------------------------------------------------------------------------',
-            str_replace(PHP_EOL, PHP_EOL.' ', trim($errors)),
+            str_replace(\PHP_EOL, \PHP_EOL.' ', trim($errors)),
             '--------------------------------------------------------------------------------</>',
         ]);
     }
@@ -100,7 +98,7 @@ class ConsoleWriter extends OutputStyle
     {
         parent::text([
             '--------------------------------------------------------------------------------',
-            str_replace(PHP_EOL, PHP_EOL.' ', trim($errors)),
+            str_replace(\PHP_EOL, \PHP_EOL.' ', trim($errors)),
             '--------------------------------------------------------------------------------',
         ]);
     }

@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 use Carbon\Carbon;
@@ -23,7 +24,7 @@ use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\VarDumper\VarDumper;
 
-if (! function_exists('str_random')) {
+if (!\function_exists('str_random')) {
     /**
      * @throws \Random\RandomException
      */
@@ -33,7 +34,7 @@ if (! function_exists('str_random')) {
     }
 }
 
-if (! function_exists('get_mysql_timezone_offset')) {
+if (!\function_exists('get_mysql_timezone_offset')) {
     /**
      * Gets the time offset from the provided timezone relative to UTC as a number. This
      * is used in the database configuration since we can't always rely on there being support
@@ -49,7 +50,7 @@ if (! function_exists('get_mysql_timezone_offset')) {
     }
 }
 
-if (! function_exists('get_mysql_timezone_offset')) {
+if (!\function_exists('get_mysql_timezone_offset')) {
     /**
      * Converts schedule cron data into a carbon object.
      *
@@ -60,12 +61,12 @@ if (! function_exists('get_mysql_timezone_offset')) {
     function get_schedule_next_run_date(string $minute, string $hour, string $dayOfMonth, string $month, string $dayOfWeek): Carbon
     {
         return Carbon::instance(
-            (new CronExpression(sprintf('%s %s %s %s %s', $minute, $hour, $dayOfMonth, $month, $dayOfWeek)))->getNextRunDate()
+            (new CronExpression(\sprintf('%s %s %s %s %s', $minute, $hour, $dayOfMonth, $month, $dayOfWeek)))->getNextRunDate()
         );
     }
 }
 
-if (! function_exists('raw_sql_for')) {
+if (!\function_exists('raw_sql_for')) {
     /**
      * @see \Illuminate\Database\Connection::getRawQueryLog()
      */
@@ -78,14 +79,13 @@ if (! function_exists('raw_sql_for')) {
     }
 }
 
-if (! function_exists('defers')) {
+if (!\function_exists('defers')) {
     /**
      * @see https://github.com/php-defer/php-defer
      */
     function defers(?SplStack &$context, callable $callback): void
     {
-        $context ??= new class extends SplStack
-        {
+        $context ??= new class extends SplStack {
             public function __destruct()
             {
                 while ($this->count() > 0) {
@@ -98,19 +98,19 @@ if (! function_exists('defers')) {
     }
 }
 
-if (! function_exists('env_explode')) {
+if (!\function_exists('env_explode')) {
     /**
      * @noinspection LaravelFunctionsInspection
      */
-    function env_explode(string $key, mixed $default = null, string $delimiter = ',', int $limit = PHP_INT_MAX): mixed
+    function env_explode(string $key, mixed $default = null, string $delimiter = ',', int $limit = \PHP_INT_MAX): mixed
     {
         $env = env($key, $default);
 
-        return is_string($env) ? explode($delimiter, $env, $limit) : $env;
+        return \is_string($env) ? explode($delimiter, $env, $limit) : $env;
     }
 }
 
-if (! function_exists('env_getcsv')) {
+if (!\function_exists('env_getcsv')) {
     /**
      * @noinspection LaravelFunctionsInspection
      */
@@ -123,11 +123,11 @@ if (! function_exists('env_getcsv')) {
     ): mixed {
         $env = env($key, $default);
 
-        return is_string($env) ? str_getcsv($env, $delimiter, $enclosure, $escape) : $env;
+        return \is_string($env) ? str_getcsv($env, $delimiter, $enclosure, $escape) : $env;
     }
 }
 
-if (! function_exists('env_json_decode')) {
+if (!\function_exists('env_json_decode')) {
     /**
      * @noinspection LaravelFunctionsInspection
      */
@@ -136,58 +136,59 @@ if (! function_exists('env_json_decode')) {
         mixed $default,
         bool $assoc = true,
         int $depth = 512,
-        int $options = JSON_THROW_ON_ERROR
+        int $options = \JSON_THROW_ON_ERROR
     ): mixed {
         $env = env($key, $default);
 
-        return is_string($env) ? json_decode($env, $assoc, $depth, $options) : $env;
+        return \is_string($env) ? json_decode($env, $assoc, $depth, $options) : $env;
     }
 }
 
-if (! function_exists('human_bytes')) {
+if (!\function_exists('human_bytes')) {
     /**
      * Convert bytes to human readable format.
      *
-     * @param  int  $bytes  the amount of bytes to convert to human readable format
-     * @param  int  $decimals  the number of decimals to use in the resulting string
+     * @param int $bytes the amount of bytes to convert to human readable format
+     * @param int $decimals the number of decimals to use in the resulting string
      *
      * @see https://stackoverflow.com/a/23888858/1580028
      */
     function human_bytes(int $bytes, int $decimals = 2): string
     {
         $size = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        $factor = (int) floor((strlen((string) $bytes) - 1) / 3);
+        $factor = (int) floor((\strlen((string) $bytes) - 1) / 3);
 
         if (0 === $factor) {
             $decimals = 0;
         }
 
-        return sprintf("%.{$decimals}f%s", $bytes / (1024 ** $factor), $size[$factor]);
+        return \sprintf("%.{$decimals}f%s", $bytes / (1024 ** $factor), $size[$factor]);
     }
 }
 
-if (! function_exists('human_milliseconds')) {
+if (!\function_exists('human_milliseconds')) {
     function human_milliseconds(float $milliseconds, int $precision = 2): string
     {
-        if ($milliseconds < 1) {
-            return sprintf('%sμs', round($milliseconds * 1000, $precision));
+        if (1 > $milliseconds) {
+            return \sprintf('%sμs', round($milliseconds * 1000, $precision));
         }
 
-        if ($milliseconds < 1000) {
-            return sprintf('%sms', round($milliseconds, $precision));
+        if (1000 > $milliseconds) {
+            return \sprintf('%sms', round($milliseconds, $precision));
         }
 
-        return sprintf('%ss', round($milliseconds / 1000, $precision));
+        return \sprintf('%ss', round($milliseconds / 1000, $precision));
     }
 }
 
-if (! function_exists('get_throwables')) {
+if (!\function_exists('get_throwables')) {
     /**
-     * @return array<\Throwable>
+     * @return list<\Throwable>
      */
     function get_throwables(Throwable $throwable): array
     {
         $throwables = [];
+
         while ($throwable instanceof Throwable) {
             $throwables[] = $throwable;
             $throwable = $throwable->getPrevious();
@@ -197,7 +198,7 @@ if (! function_exists('get_throwables')) {
     }
 }
 
-if (! function_exists('matching')) {
+if (!\function_exists('matching')) {
     /**
      * This function is used to simulate the `match` expression of PHP 8.0.
      * This is just an example, don't call it in your code.
@@ -220,37 +221,38 @@ if (! function_exists('matching')) {
     }
 }
 
-if (! function_exists('home_dir')) {
+if (!\function_exists('home_dir')) {
     /**
      * @noinspection PhpComposerExtensionStubsInspection
      * @noinspection OffsetOperationsInspection
      */
     function home_dir(): string
     {
-        return function_exists('posix_getuid')
+        return \function_exists('posix_getuid')
             ? posix_getpwuid(posix_getuid())['dir'] // Mac or Linux
             : exec('echo %USERPROFILE%'); // Windows
     }
 }
 
-if (! function_exists('make')) {
+if (!\function_exists('make')) {
     /**
      * @psalm-param string|array<string, mixed> $abstract
      *
-     * @throws \InvalidArgumentException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \InvalidArgumentException
      */
     function make(mixed $abstract, array $parameters = []): mixed
     {
-        throw_unless(in_array(gettype($abstract), ['string', 'array'], true), InvalidArgumentException::class, sprintf('Invalid argument type(string/array): %s.', gettype($abstract)));
+        throw_unless(\in_array(\gettype($abstract), ['string', 'array'], true), InvalidArgumentException::class, \sprintf('Invalid argument type(string/array): %s.', \gettype($abstract)));
 
-        if (is_string($abstract)) {
+        if (\is_string($abstract)) {
             return app($abstract, $parameters);
         }
 
         $classes = ['__class', '_class', 'class'];
+
         foreach ($classes as $class) {
-            if (! isset($abstract[$class])) {
+            if (!isset($abstract[$class])) {
                 continue;
             }
 
@@ -261,16 +263,16 @@ if (! function_exists('make')) {
         }
 
         throw new InvalidArgumentException(
-            sprintf('The argument of abstract must be an array containing a `%s` element.', implode('` or `', $classes))
+            \sprintf('The argument of abstract must be an array containing a `%s` element.', implode('` or `', $classes))
         );
     }
 }
 
-if (! function_exists('resolve_class_from')) {
+if (!\function_exists('resolve_class_from')) {
     /**
-     * @param  string  $path  文件路径
-     * @param  null|string  $vendorPath  供应商路径
-     * @param  null|string  $vendorNamespace  供应商命名空间
+     * @param string $path 文件路径
+     * @param null|string $vendorPath 供应商路径
+     * @param null|string $vendorNamespace 供应商命名空间
      */
     function resolve_class_from(string $path, ?string $vendorPath = null, ?string $vendorNamespace = null): string
     {
@@ -281,14 +283,14 @@ if (! function_exists('resolve_class_from')) {
         return str(realpath($path))
             ->replaceFirst($vendorPath, $vendorNamespace)
             ->replaceLast('.php', '')
-            ->replace(DIRECTORY_SEPARATOR, '\\')
+            ->replace(\DIRECTORY_SEPARATOR, '\\')
             ->replace('\\\\', '\\')
             ->start('\\')
             ->toString();
     }
 }
 
-if (! function_exists('resolve_facade_docblock')) {
+if (!\function_exists('resolve_facade_docblock')) {
     /**
      * @noinspection DebugFunctionUsageInspection
      * @noinspection PhpUndefinedMethodInspection
@@ -312,12 +314,13 @@ if (! function_exists('resolve_facade_docblock')) {
                             }
 
                             $varExport = var_export($value, true);
-                            if (is_scalar($value)) {
+
+                            if (\is_scalar($value)) {
                                 return $varExport;
                             }
 
                             return str($varExport)
-                                ->remove(PHP_EOL)
+                                ->remove(\PHP_EOL)
                                 ->replace('array (  ', '[')
                                 ->replace(',)', ']')
                                 ->replace(',  ', ', ')
@@ -330,8 +333,8 @@ if (! function_exists('resolve_facade_docblock')) {
                             ->whenNotEmpty(static fn (Stringable $stringable): Stringable => $stringable->append(' '));
 
                         return $parameter->isDefaultValueAvailable()
-                            ? sprintf('%s$%s = %s', $type, $parameter->getName(), $defaultValue($parameter->getDefaultValue()))
-                            : sprintf('%s$%s', $type, $parameter->getName());
+                            ? \sprintf('%s$%s = %s', $type, $parameter->getName(), $defaultValue($parameter->getDefaultValue()))
+                            : \sprintf('%s$%s', $type, $parameter->getName());
                     })
                     ->join(', ');
 
@@ -343,7 +346,7 @@ if (! function_exists('resolve_facade_docblock')) {
 
                 return $docblock
                     ->newLine()
-                    ->append(sprintf(' * @method static %s %s(%s)', $returnType, $method->getName(), $parameters));
+                    ->append(\sprintf(' * @method static %s %s(%s)', $returnType, $method->getName(), $parameters));
             }, str(''))
             ->prepend('/**')
             ->append(<<<docblock
@@ -355,22 +358,22 @@ if (! function_exists('resolve_facade_docblock')) {
     }
 }
 
-if (! function_exists('environment')) {
+if (!\function_exists('environment')) {
     function environment(): string
     {
-        if (defined('STDIN')) {
+        if (\defined('STDIN')) {
             return 'cli';
         }
 
-        if ('cli' === PHP_SAPI) {
+        if ('cli' === \PHP_SAPI) {
             return 'cli';
         }
 
-        if (false !== stripos(PHP_SAPI, 'cgi') && getenv('TERM')) {
+        if (false !== stripos(\PHP_SAPI, 'cgi') && getenv('TERM')) {
             return 'cli';
         }
 
-        if (empty($_SERVER['REMOTE_ADDR']) && ! isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0) {
+        if (empty($_SERVER['REMOTE_ADDR']) && !isset($_SERVER['HTTP_USER_AGENT']) && \count($_SERVER['argv']) > 0) {
             return 'cli';
         }
 
@@ -378,44 +381,44 @@ if (! function_exists('environment')) {
     }
 }
 
-if (! function_exists('format_bits')) {
-    function format_bits(int $bits, $precision = 2, $suffix = true): float|string|int
+if (!\function_exists('format_bits')) {
+    function format_bits(int $bits, $precision = 2, $suffix = true): float|int|string
     {
-        if ($bits > 0) {
+        if (0 < $bits) {
             $i = floor(log($bits) / log(1000));
 
-            if (! $suffix) {
+            if (!$suffix) {
                 return round($bits / (1000 ** $i), $precision);
             }
 
             $sizes = ['B', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'];
 
-            return sprintf('%.02F', round($bits / (1000 ** $i), $precision)) * 1 .' '.@$sizes[$i];
+            return \sprintf('%.02F', round($bits / (1000 ** $i), $precision)) * 1 .' '.$sizes[$i];
         }
 
         return 0;
     }
 }
 
-if (! function_exists('format_bytes')) {
-    function format_bytes(int $bytes, $precision = 2): string|int
+if (!\function_exists('format_bytes')) {
+    function format_bytes(int $bytes, $precision = 2): int|string
     {
-        if ($bytes > 0) {
+        if (0 < $bytes) {
             $i = floor(log($bytes) / log(1024));
 
             $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-            return sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.@$sizes[$i];
+            return \sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.$sizes[$i];
         }
 
         return 0;
     }
 }
 
-if (! function_exists('bytes_to_bits')) {
+if (!\function_exists('bytes_to_bits')) {
     function bytes_to_bits(int $bytes): int
     {
-        if ($bytes > 0) {
+        if (0 < $bytes) {
             return $bytes * 8;
         }
 
@@ -423,9 +426,9 @@ if (! function_exists('bytes_to_bits')) {
     }
 }
 
-if (! function_exists('partical')) {
+if (!\function_exists('partical')) {
     /**
-     * 偏函数
+     * 偏函数.
      */
     function partical(callable $function, ...$args): callable
     {
@@ -433,9 +436,9 @@ if (! function_exists('partical')) {
     }
 }
 
-if (! function_exists('curry')) {
+if (!\function_exists('curry')) {
     /**
-     * 柯里化函数
+     * 柯里化函数.
      */
     function curry(callable $function): callable
     {
@@ -444,7 +447,7 @@ if (! function_exists('curry')) {
             $reflection = new ReflectionFunction($function);
             $totalArguments = $reflection->getNumberOfRequiredParameters();
 
-            if ($totalArguments <= count($arguments)) {
+            if (\count($arguments) >= $totalArguments) {
                 return $function(...$arguments);
             }
 
@@ -455,9 +458,9 @@ if (! function_exists('curry')) {
     }
 }
 
-if (! function_exists('compose')) {
+if (!\function_exists('compose')) {
     /**
-     * 合成函数
+     * 合成函数.
      */
     function compose(callable ...$functions): callable
     {
@@ -469,7 +472,7 @@ if (! function_exists('compose')) {
     }
 }
 
-if (! function_exists('memoize')) {
+if (!\function_exists('memoize')) {
     function memoize(callable $function): callable
     {
         return static function (...$args) use ($function): array {
@@ -477,7 +480,7 @@ if (! function_exists('memoize')) {
             $key = serialize($args);
             $cached = true;
 
-            if (! isset($cache[$key])) {
+            if (!isset($cache[$key])) {
                 $cache[$key] = $function(...$args);
                 $cached = false;
             }
@@ -487,11 +490,12 @@ if (! function_exists('memoize')) {
     }
 }
 
-if (! function_exists('once')) {
+if (!\function_exists('once')) {
     function once(callable $function): callable
     {
         return static function (...$args) use ($function) {
             static $called = false;
+
             if ($called) {
                 return;
             }
@@ -503,22 +507,23 @@ if (! function_exists('once')) {
     }
 }
 
-if (! function_exists('is_json')) {
+if (!\function_exists('is_json')) {
     /**
-     * If the string is valid JSON, return true, otherwise return false
+     * If the string is valid JSON, return true, otherwise return false.
      *
-     * @param  string  $str  the string to check
+     * @param string $str the string to check
+     *
      * @return bool the function is_json() is returning a boolean value
      */
     function is_json(string $str): bool
     {
         json_decode($str);
 
-        return JSON_ERROR_NONE === json_last_error();
+        return \JSON_ERROR_NONE === json_last_error();
     }
 }
 
-if (! function_exists('user_http_build_query')) {
+if (!\function_exists('user_http_build_query')) {
     /**
      * http_build_query 的实现。
      *
@@ -551,19 +556,21 @@ if (! function_exists('user_http_build_query')) {
      * ];
      * ```
      */
-    function user_http_build_query(array $queryPayload, string $numericPrefix = '', string $argSeparator = '&', int $encType = PHP_QUERY_RFC1738): string
+    function user_http_build_query(array $queryPayload, string $numericPrefix = '', string $argSeparator = '&', int $encType = \PHP_QUERY_RFC1738): string
     {
         /**
-         * 转换值是非标量的情况
+         * 转换值是非标量的情况.
          *
-         * @param  string  $key
-         * @param  array|object  $value
-         * @param  string  $argSeparator
-         * @param  int  $encType
+         * @param string $key
+         * @param array|object $value
+         * @param string $argSeparator
+         * @param int $encType
+         *
          * @return string
          */
         $toQueryStr = static function (string $key, $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
             $queryStr = '';
+
             foreach ($value as $k => $v) {
                 // 特殊值处理
                 if (null === $v) {
@@ -575,8 +582,8 @@ if (! function_exists('user_http_build_query')) {
                 }
 
                 $fullKey = "{$key}[{$k}]";
-                $queryStr .= is_scalar($v)
-                    ? sprintf("%s=%s$argSeparator", PHP_QUERY_RFC3986 === $encType ? rawurlencode($fullKey) : urlencode($fullKey), PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
+                $queryStr .= \is_scalar($v)
+                    ? \sprintf("%s=%s$argSeparator", \PHP_QUERY_RFC3986 === $encType ? rawurlencode($fullKey) : urlencode($fullKey), \PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
                     : $toQueryStr($fullKey, $v, $argSeparator, $encType); // 递归调用
             }
 
@@ -585,6 +592,7 @@ if (! function_exists('user_http_build_query')) {
 
         reset($queryPayload);
         $queryStr = '';
+
         foreach ($queryPayload as $k => $v) {
             // 特殊值处理
             if (null === $v) {
@@ -596,20 +604,20 @@ if (! function_exists('user_http_build_query')) {
             }
 
             // 为了对数据进行解码时获取合法的变量名
-            if (is_numeric($k) && ! is_string($k)) {
+            if (is_numeric($k) && !\is_string($k)) {
                 $k = $numericPrefix.$k;
             }
 
-            $queryStr .= is_scalar($v)
-                ? sprintf("%s=%s$argSeparator", PHP_QUERY_RFC3986 === $encType ? rawurlencode($k) : urlencode($k), PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
+            $queryStr .= \is_scalar($v)
+                ? \sprintf("%s=%s$argSeparator", \PHP_QUERY_RFC3986 === $encType ? rawurlencode($k) : urlencode($k), \PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
                 : $toQueryStr($k, $v, $argSeparator, $encType);
         }
 
-        return substr($queryStr, 0, -strlen($argSeparator));
+        return substr($queryStr, 0, -\strlen($argSeparator));
     }
 }
 
-if (! function_exists('validate')) {
+if (!\function_exists('validate')) {
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -619,14 +627,14 @@ if (! function_exists('validate')) {
     }
 }
 
-if (! function_exists('array_filter_filled')) {
+if (!\function_exists('array_filter_filled')) {
     function array_filter_filled(array $array): array
     {
         return array_filter($array, static fn ($item) => filled($item));
     }
 }
 
-if (! function_exists('call')) {
+if (!\function_exists('call')) {
     /**
      * Call the given Closure / class@method and inject its dependencies.
      */
@@ -636,7 +644,7 @@ if (! function_exists('call')) {
     }
 }
 
-if (! function_exists('catch_resource_usage')) {
+if (!\function_exists('catch_resource_usage')) {
     function catch_resource_usage(callable|string $callback, ...$parameter): string
     {
         $timer = new Timer;
@@ -648,7 +656,7 @@ if (! function_exists('catch_resource_usage')) {
     }
 }
 
-if (! function_exists('catch_query_log')) {
+if (!\function_exists('catch_query_log')) {
     function catch_query_log(callable|string $callback, ...$parameter): array
     {
         return (new Pipeline(app()))
@@ -671,11 +679,11 @@ if (! function_exists('catch_query_log')) {
     }
 }
 
-if (! function_exists('dump_to_server')) {
+if (!\function_exists('dump_to_server')) {
     /**
      * ```
      * ./vendor/bin/var-dump-server
-     * ```
+     * ```.
      *
      * @noinspection GlobalVariableUsageInspection
      * @noinspection PhpUndefinedClassInspection
@@ -697,7 +705,7 @@ if (! function_exists('dump_to_server')) {
     }
 }
 
-if (! function_exists('dump_to_array')) {
+if (!\function_exists('dump_to_array')) {
     /**
      * @noinspection ForgottenDebugOutputInspection
      * @noinspection DebugFunctionUsageInspection
@@ -710,7 +718,7 @@ if (! function_exists('dump_to_array')) {
     }
 }
 
-if (! function_exists('dd_to_array')) {
+if (!\function_exists('dd_to_array')) {
     function dd_to_array(...$vars): never
     {
         dump_to_array(...$vars);
@@ -719,11 +727,11 @@ if (! function_exists('dd_to_array')) {
     }
 }
 
-if (! function_exists('array_reduce_with_keys')) {
+if (!\function_exists('array_reduce_with_keys')) {
     /**
      * @return null|mixed
      */
-    function array_reduce_with_keys(array $array, callable $callback, $carry = null): mixed
+    function array_reduce_with_keys(array $array, callable $callback, mixed $carry = null): mixed
     {
         foreach ($array as $key => $value) {
             $carry = $callback($carry, $value, $key);
@@ -733,7 +741,7 @@ if (! function_exists('array_reduce_with_keys')) {
     }
 }
 
-if (! function_exists('array_map_with_keys')) {
+if (!\function_exists('array_map_with_keys')) {
     function array_map_with_keys(callable $callback, array $array): array
     {
         $result = [];
@@ -750,7 +758,7 @@ if (! function_exists('array_map_with_keys')) {
     }
 }
 
-if (! function_exists('pd')) {
+if (!\function_exists('pd')) {
     function pd(...$vars): never
     {
         pp(...$vars);
@@ -759,12 +767,12 @@ if (! function_exists('pd')) {
     }
 }
 
-if (! function_exists('pp')) {
+if (!\function_exists('pp')) {
     function pp(...$vars): void
     {
         foreach ($vars as $var) {
             /** @noinspection DebugFunctionUsageInspection */
-            highlight_string(sprintf("\n<?php\n\$var = %s;\n?>\n", var_export($var, true)));
+            highlight_string(\sprintf("\n<?php\n\$var = %s;\n?>\n", var_export($var, true)));
         }
     }
 }

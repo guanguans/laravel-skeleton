@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -248,11 +249,11 @@ final class OpenAI extends FoundationSDK
     public function completionsByCurl(array $data, ?callable $writer = null): Collection
     {
         $options = [
-            CURLOPT_URL => "{$this->config['base_url']}/completions",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode(
+            \CURLOPT_URL => "{$this->config['base_url']}/completions",
+            \CURLOPT_RETURNTRANSFER => true,
+            \CURLOPT_HTTP_VERSION => \CURL_HTTP_VERSION_1_1,
+            \CURLOPT_CUSTOMREQUEST => 'POST',
+            \CURLOPT_POSTFIELDS => json_encode(
                 $this->validate(
                     $data,
                     [
@@ -281,7 +282,7 @@ final class OpenAI extends FoundationSDK
                     ]
                 )
             ),
-            CURLOPT_HTTPHEADER => [
+            \CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
                 "Authorization: Bearer {$this->config['api_key']}",
             ],
@@ -290,7 +291,7 @@ final class OpenAI extends FoundationSDK
             // CURLOPT_TCP_KEEPINTVL => 10, // 每隔10秒检测一次
         ];
 
-        $writer and $options[CURLOPT_WRITEFUNCTION] = static function (object $ch, string $data) use ($writer): int {
+        $writer and $options[\CURLOPT_WRITEFUNCTION] = static function (object $ch, string $data) use ($writer): int {
             $writer($data, $ch);
 
             return \strlen($data); // 必须返回接收到的数据的长度，否则会断开连接。
@@ -368,8 +369,8 @@ final class OpenAI extends FoundationSDK
                 static function (PendingRequest $pendingRequest) use ($writer, &$rowData): PendingRequest {
                     return $pendingRequest->withOptions([
                         'curl' => [
-                            CURLOPT_WRITEFUNCTION => static function ($ch, string $data) use ($writer, &$rowData): int {
-                                if (! str($data)->startsWith('data: [DONE]')) {
+                            \CURLOPT_WRITEFUNCTION => static function ($ch, string $data) use ($writer, &$rowData): int {
+                                if (!str($data)->startsWith('data: [DONE]')) {
                                     $rowData = $data;
                                 }
 

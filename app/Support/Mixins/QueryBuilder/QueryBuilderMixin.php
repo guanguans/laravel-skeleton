@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Mixins\QueryBuilder;
@@ -20,8 +21,8 @@ use Illuminate\Pipeline\Pipeline;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
- * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
+ * @mixin \Illuminate\Database\Query\Builder
  */
 #[Mixin(EloquentBuilder::class)]
 #[Mixin(QueryBuilder::class)]
@@ -32,9 +33,9 @@ class QueryBuilderMixin
     {
         return fn (...$pipes) => tap($this, static function ($builder) use ($pipes): void {
             array_unshift($pipes, static function ($builder, $next): void {
-                throw_if(! ($piped = $next($builder)) instanceof EloquentBuilder
-                && ! $piped instanceof QueryBuilder
-                && ! $piped instanceof Relation, \InvalidArgumentException::class, \sprintf(
+                throw_if(!($piped = $next($builder)) instanceof EloquentBuilder
+                && !$piped instanceof QueryBuilder
+                && !$piped instanceof Relation, \InvalidArgumentException::class, \sprintf(
                     'Query builder pipeline must be return a %s or %s or %s instance.',
                     EloquentBuilder::class,
                     QueryBuilder::class,
@@ -79,7 +80,7 @@ class QueryBuilderMixin
                 $relation = $relation->limit($limit);
             }
 
-            if (! $null) {
+            if (!$null) {
                 $relation = $relation->whereNotNull($column);
             }
 
@@ -90,6 +91,7 @@ class QueryBuilderMixin
             // can't use pluck with expressions in Postgres without an alias
             $rows = $relation->get()->toArray();
             $result = [];
+
             foreach ($rows as $row) {
                 $values = array_values($row);
 

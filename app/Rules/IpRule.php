@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Rules;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\IpUtils;
 
 final class IpRule extends Rule
 {
-    /** @var array<string> */
+    /** @var list<string> */
     private array $v4 = [
         '0.0.0.0/8',
         '10.0.0.0/8',
@@ -26,7 +27,7 @@ final class IpRule extends Rule
         '169.254.0.0/16',
     ];
 
-    /** @var array<string> */
+    /** @var list<string> */
     private array $v6 = [
         '::1/128',
         'fc00::/7',
@@ -38,7 +39,7 @@ final class IpRule extends Rule
 
     public function isV4(string $ip): bool
     {
-        return ! $this->isV6($ip);
+        return !$this->isV6($ip);
     }
 
     public function isV6(string $ip): bool
@@ -55,7 +56,7 @@ final class IpRule extends Rule
 
     public function isPublic(string $ip): bool
     {
-        return ! $this->isPrivate($ip);
+        return !$this->isPrivate($ip);
     }
 
     #[\Override]

@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -13,14 +24,13 @@ class ETag
     /**
      * Implement Etag support.
      *
-     * @param  \Illuminate\Http\Request  $request  The HTTP request.
-     * @param  \Closure  $next  Closure for the response.
-     * @return mixed
+     * @param \Illuminate\Http\Request $request the HTTP request
+     * @param \Closure $next closure for the response
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, \Closure $next): mixed
     {
         // If this was not a get or head request, just return
-        if (! $request->isMethod('get') && ! $request->isMethod('head')) {
+        if (!$request->isMethod('get') && !$request->isMethod('head')) {
             return $next($request);
         }
 
@@ -40,7 +50,7 @@ class ETag
         $requestEtag = str_replace('"', '', $request->getETags());
 
         // Check to see if Etag has changed
-        if ($requestEtag && $requestEtag[0] == $etag) {
+        if ($requestEtag && $requestEtag[0] === $etag) {
             $response->setNotModified();
         }
 

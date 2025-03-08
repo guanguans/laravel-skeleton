@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Casts;
@@ -18,8 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 class CurrencyCast implements CastsAttributes
 {
     /**
-     * @param  int  $digits  the amount of digits to handle
-     * @return void
+     * @param int $digits the amount of digits to handle
      *
      * @throws \InvalidArgumentException thrown on invalid input
      */
@@ -28,21 +28,21 @@ class CurrencyCast implements CastsAttributes
      */
         protected int $digits = 2
     ) {
-        throw_if($digits < 1, \InvalidArgumentException::class, 'Digits should be a number larger than zero.');
+        throw_if(1 > $digits, \InvalidArgumentException::class, 'Digits should be a number larger than zero.');
     }
 
     /**
      * Transform the attribute from the underlying model values.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model  the model object
-     * @param  string  $key  the property name
-     * @param  mixed  $value  the property value
-     * @param  array  $attributes  the model attributes array
+     * @param \Illuminate\Database\Eloquent\Model $model the model object
+     * @param string $key the property name
+     * @param mixed $value the property value
+     * @param array $attributes the model attributes array
      */
     #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): float
     {
-        return $value !== null
+        return null !== $value
             ? round($value / (10 ** $this->digits), $this->digits)
             : null;
     }
@@ -50,10 +50,10 @@ class CurrencyCast implements CastsAttributes
     /**
      * Transform the attribute to its underlying model values.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model  the model object
-     * @param  string  $key  the property name
-     * @param  mixed  $value  the property value
-     * @param  array  $attributes  the model attributes array
+     * @param \Illuminate\Database\Eloquent\Model $model the model object
+     * @param string $key the property name
+     * @param mixed $value the property value
+     * @param array $attributes the model attributes array
      */
     #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): int

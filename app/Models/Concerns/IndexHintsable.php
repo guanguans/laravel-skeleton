@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Models\Concerns;
@@ -33,22 +34,19 @@ use Illuminate\Support\Str;
 trait IndexHintsable
 {
     protected $forceIndexes = [];
-
     protected $useIndexes = [];
-
     protected $ignoreIndexes = [];
-
     protected $preparedIndexes = '';
 
     /**
-     * @param  array<string>|string  $indexes
-     * @param  string  $for  JOIN|ORDER BY|GROUP BY
+     * @param list<string>|string $indexes
+     * @param string $for JOIN|ORDER BY|GROUP BY
      */
     public function scopeForceIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
         throw_if(Str::contains($this->preparedIndexes, 'USE'), \InvalidArgumentException::class, 'It is an error to mix USE INDEX and FORCE INDEX for the same table.');
 
-        if (! $this->tableIndexExists($indexes, 'force')) {
+        if (!$this->tableIndexExists($indexes, 'force')) {
             return $query;
         }
 
@@ -64,13 +62,13 @@ trait IndexHintsable
     }
 
     /**
-     * @param  array<string>|string  $indexes
+     * @param list<string>|string $indexes
      */
     public function scopeUseIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
         throw_if(Str::contains($this->preparedIndexes, 'FORCE'), \Exception::class, 'However, it is an error to mix USE INDEX and FORCE INDEX for the same table:');
 
-        if (! $this->tableIndexExists($indexes, 'use')) {
+        if (!$this->tableIndexExists($indexes, 'use')) {
             return $query;
         }
 
@@ -86,11 +84,11 @@ trait IndexHintsable
     }
 
     /**
-     * @param  array<string>|string  $indexes
+     * @param list<string>|string $indexes
      */
     public function scopeIgnoreIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
-        if (! $this->tableIndexExists($indexes, 'ignore')) {
+        if (!$this->tableIndexExists($indexes, 'ignore')) {
             return $query;
         }
 
@@ -107,7 +105,7 @@ trait IndexHintsable
 
     protected function setTableNameAndAlias(string $as = ''): void
     {
-        if (! empty($this->preparedIndexes)) {
+        if (!empty($this->preparedIndexes)) {
             return;
         }
 
@@ -116,7 +114,7 @@ trait IndexHintsable
     }
 
     /**
-     * @param  array<string>|string  $indexes
+     * @param list<string>|string $indexes
      */
     protected function tableIndexExists(array|string $indexes, string $type): bool
     {
@@ -127,12 +125,12 @@ trait IndexHintsable
             Schema::table(self::getTable(), fn (Blueprint $table) => $this->fillIndexes($table, $index, $type));
         }
 
-        return ! empty($this->forceIndexes) || ! empty($this->ignoreIndexes) || ! empty($this->useIndexes);
+        return !empty($this->forceIndexes) || !empty($this->ignoreIndexes) || !empty($this->useIndexes);
     }
 
     protected function fillIndexes(Blueprint $table, string $index, string $type): void
     {
-        if (! $table->hasIndex($index)) {
+        if (!$table->hasIndex($index)) {
             return;
         }
 
@@ -141,12 +139,10 @@ trait IndexHintsable
                 $this->forceIndexes[] = $index;
 
                 break;
-
             case 'ignore':
                 $this->ignoreIndexes[] = $index;
 
                 break;
-
             case 'use':
                 $this->useIndexes[] = $index;
 

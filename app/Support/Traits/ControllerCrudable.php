@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Traits;
@@ -35,6 +36,7 @@ trait ControllerCrudable
     {
         $nsPrefix = '';
         $nsPrefixes = explode('\\', (new \ReflectionObject($this))->getNamespaceName());
+
         if ('Controllers' !== end($nsPrefixes)) {
             $nsPrefix = strtolower(end($nsPrefixes)).($forRedirect ? '/' : '.');
         }
@@ -50,6 +52,7 @@ trait ControllerCrudable
     public function index(Request $request): JsonResponse|View
     {
         $items = $this->modelClass::search($request->all());
+
         if ($request->ajax() || $request->wantsJson()) {
             if (property_exists($this->modelClass, 'resourceForSearch')) {
                 return $items;
@@ -76,6 +79,7 @@ trait ControllerCrudable
     {
         if ($request->ajax() || $request->wantsJson()) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn());
+
             if ($validation->fails()) {
                 return new JsonResponse(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
@@ -88,6 +92,7 @@ trait ControllerCrudable
         $model->save();
 
         $this->handleFileUploads($request, $model);
+
         if ($request->ajax() || $request->wantsJson()) {
             return $this->jsonModel($model);
         }
@@ -133,6 +138,7 @@ trait ControllerCrudable
         /** @var \App\Http\Controllers\Controller $this */
         if ($this->isAjax($request)) {
             $validation = Validator::make($request->all(), $this->modelClass::validateOn('update', $id));
+
             if ($validation->fails()) {
                 return new JsonResponse(['error' => true, 'errors' => $validation->errors()->messages()], Response::HTTP_UNPROCESSABLE_ENTITY);
             }
@@ -164,8 +170,8 @@ trait ControllerCrudable
         }
 
         $url = $request->input('url_return') ?: $this->getViewPath(true);
-        $success = $count > 0;
-        $error = ! $success;
+        $success = 0 < $count;
+        $error = !$success;
         $message = $success ? __('crud.deleted') : __('No records were deleted');
 
         return $this->isAjax($request)
@@ -176,6 +182,7 @@ trait ControllerCrudable
     public function handleFileUploads(Request $request, ?Model $model = null): void
     {
         $fileUploads = $this->modelClass::fileUploads($model);
+
         foreach ($fileUploads as $fileUpload => $fileData) {
             if ($request->hasFile($fileUpload)) {
                 $file = $request->file($fileUpload);

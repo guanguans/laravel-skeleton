@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -25,14 +26,14 @@ final readonly class AutoWire
     /**
      * Create a new AutoWire instance.
      *
-     * @param  array<string, mixed>  $parameters
+     * @param array<string, mixed> $parameters
      */
     public function __construct(private string $abstract, private array $parameters = []) {}
 
     /**
      * Magic method for var_export().
      *
-     * @param  array{abstract: string, parameters: array<string, mixed>}  $properties
+     * @param array{abstract: string, parameters: array<string, mixed>} $properties
      */
     public static function __set_state(array $properties): self
     {

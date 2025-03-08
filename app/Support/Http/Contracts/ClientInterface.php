@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Http\Contracts;
@@ -22,17 +23,15 @@ use Psr\Http\Message\UriInterface;
  */
 interface ClientInterface
 {
-    /**
-     * The Guzzle major version.
-     */
+    /** The Guzzle major version. */
     public const MAJOR_VERSION = 1;
 
     /**
      * Send an HTTP request.
      *
-     * @param  RequestInterface  $request  Request to send
-     * @param  array  $options  request options to apply to the given
-     *                          request and to the transfer
+     * @param RequestInterface $request Request to send
+     * @param array $options request options to apply to the given
+     *                       request and to the transfer
      *
      * @throws GuzzleException
      */
@@ -45,9 +44,9 @@ interface ClientInterface
      * relative path to append to the base path of the client. The URL can
      * contain the query string as well.
      *
-     * @param  string  $method  HTTP method
-     * @param  string|UriInterface  $uri  URI object or string
-     * @param  array  $options  request options to apply
+     * @param string $method HTTP method
+     * @param string|UriInterface $uri URI object or string
+     * @param array $options request options to apply
      *
      * @throws GuzzleException
      */
@@ -60,9 +59,9 @@ interface ClientInterface
      * (if utilized by the concrete client), and a "base_uri" if utilized by
      * the concrete client.
      *
-     * @param  null|string  $option  the config option to retrieve
-     *
      * @deprecated ClientInterface::getConfig will be removed in guzzlehttp/guzzle:8.0.
+     *
+     * @param null|string $option the config option to retrieve
      */
     public function getConfig(?string $option = null): mixed;
 }

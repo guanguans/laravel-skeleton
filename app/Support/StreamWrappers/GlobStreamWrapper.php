@@ -5,11 +5,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\StreamWrappers;
@@ -20,12 +21,11 @@ namespace App\Support\StreamWrappers;
 class GlobStreamWrapper extends StreamWrapper
 {
     private array $files = [];
-
     private int $position = 0;
 
     private function __construct()
     {
-        $this->addContextOption('flags', GLOB_BRACE | GLOB_NOSORT);
+        $this->addContextOption('flags', \GLOB_BRACE | \GLOB_NOSORT);
     }
 
     /**
@@ -59,12 +59,14 @@ class GlobStreamWrapper extends StreamWrapper
     public function dir_opendir(string $path, int $options): bool
     {
         $pattern = $this->scanPattern($path);
-        if ($pattern === null) {
+
+        if (null === $pattern) {
             return false;
         }
 
         $files = glob($pattern, $this->getContextOption('flags', 0));
-        if ($files === false) {
+
+        if (false === $files) {
             return false;
         }
 
@@ -78,7 +80,7 @@ class GlobStreamWrapper extends StreamWrapper
     #[\Override]
     public function dir_readdir(): false|string
     {
-        if (! isset($this->files[$this->position])) {
+        if (!isset($this->files[$this->position])) {
             return false;
         }
 

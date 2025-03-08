@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Models\Concerns;
@@ -35,6 +36,7 @@ trait Fireworks
             static::{$event}(static function (Model $model) use ($self, $event): void {
                 $method = \sprintf('onModel%s', Str::studly($event));
                 $self->callBeforeEvent($model, $event);
+
                 if (method_exists($model, $method)) {
                     \call_user_func_array([$model, $method], [$model]);
                 }
@@ -44,6 +46,7 @@ trait Fireworks
         foreach ($afterEvents as $event) {
             static::{$event}(static function (Model $model) use ($self, $event): void {
                 $method = \sprintf('onModel%s', Str::studly($event));
+
                 if (method_exists($model, $method)) {
                     \call_user_func_array([$model, $method], [$model]);
                 }
@@ -67,6 +70,7 @@ trait Fireworks
     {
         foreach ($model->getDirty() ?? [] as $column => $newValue) {
             $method = \sprintf($methodConvention, Str::studly($column));
+
             if (method_exists($model, $method)) {
                 \call_user_func_array([$model, $method], [$model, $model->getOriginal($column), $newValue]);
             }

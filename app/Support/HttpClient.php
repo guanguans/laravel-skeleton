@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -18,20 +19,15 @@ namespace App\Support;
 class HttpClient
 {
     private string $method = 'GET';
-
     private string $url = '';
-
     private array $headers = [];
-
     private string $body = '';
-
     private array $curlopts = [];
-
     private bool $nothrow = false;
 
     public function __construct()
     {
-        if (! \extension_loaded('curl')) {
+        if (!\extension_loaded('curl')) {
             throw new \RuntimeException(
                 "Please, install curl extension.\n"
                 .'https://goo.gl/yTAeZh'
@@ -97,7 +93,7 @@ class HttpClient
     public function jsonBody(array $data): static
     {
         $http = clone $this;
-        $http->body = json_encode($data, JSON_PRETTY_PRINT);
+        $http->body = json_encode($data, \JSON_PRETTY_PRINT);
         $http->headers = array_merge($http->headers, [
             'Content-Type' => 'application/json',
             'Content-Length' => \strlen($http->body),
@@ -139,26 +135,27 @@ class HttpClient
         $ch = curl_init($this->url);
 
         $headers = [];
+
         foreach ($this->headers as $key => $value) {
             $headers[] = "$key: $value";
         }
 
         curl_setopt_array($ch, $this->curlopts + [
-            CURLOPT_HTTPHEADER => $headers,
-            CURLOPT_USERAGENT => 'Laravel '.app()->version(),
-            CURLOPT_CUSTOMREQUEST => $this->method,
-            CURLOPT_POSTFIELDS => $this->body,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_CONNECTTIMEOUT => 5,
-            CURLOPT_TIMEOUT => 5,
+            \CURLOPT_HTTPHEADER => $headers,
+            \CURLOPT_USERAGENT => 'Laravel '.app()->version(),
+            \CURLOPT_CUSTOMREQUEST => $this->method,
+            \CURLOPT_POSTFIELDS => $this->body,
+            \CURLOPT_RETURNTRANSFER => true,
+            \CURLOPT_FOLLOWLOCATION => true,
+            \CURLOPT_MAXREDIRS => 10,
+            \CURLOPT_CONNECTTIMEOUT => 5,
+            \CURLOPT_TIMEOUT => 5,
         ]);
 
         $result = curl_exec($ch);
         $info = curl_getinfo($ch);
 
-        if (false === $result && ! $this->nothrow) {
+        if (false === $result && !$this->nothrow) {
             $error = curl_error($ch);
             $errno = curl_errno($ch);
             curl_close($ch);
@@ -174,7 +171,8 @@ class HttpClient
     public function getJson(): array
     {
         $response = json_decode($this->send(), true);
-        if (JSON_ERROR_NONE !== json_last_error()) {
+
+        if (\JSON_ERROR_NONE !== json_last_error()) {
             throw new \RuntimeException('JSON Error: '.json_last_error_msg());
         }
 

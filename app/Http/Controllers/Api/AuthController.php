@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Http\Controllers\Api;
@@ -36,7 +37,7 @@ class AuthController extends Controller
     public function __construct() {}
 
     /**
-     * register - 注册
+     * register - 注册.
      *
      * @unauthenticated
      *
@@ -69,12 +70,14 @@ class AuthController extends Controller
         $validated['password'] = Hash::make($validated['password']);
         unset($validated['password_confirmation']);
         $user = JWTUser::query()->create($validated);
-        if (! $user instanceof JWTUser) {
+
+        if (!$user instanceof JWTUser) {
             return $this->apiResponse->error('创建用户失败');
         }
 
         $validated['password'] = $request->post('password_confirmation');
-        if (! $token = auth()->attempt($validated)) {
+
+        if (!$token = auth()->attempt($validated)) {
             return $this->apiResponse->error('邮箱或者密码错误');
         }
 
@@ -85,7 +88,7 @@ class AuthController extends Controller
     }
 
     /**
-     * login - 登录
+     * login - 登录.
      *
      * @unauthenticated
      *
@@ -119,6 +122,7 @@ class AuthController extends Controller
         /** @see https://securinglaravel.com/security-tip-timebox-for-timing-attacks */
         $token = (new Timebox)->call(static function (Timebox $timebox) use ($credentials) {
             $token = auth()->attempt($credentials);
+
             if ($token) {
                 $timebox->returnEarly();
             }
@@ -126,7 +130,7 @@ class AuthController extends Controller
             return $token;
         }, 100 * 1000);
 
-        if (! $token) {
+        if (!$token) {
             return $this->apiResponse->badRequest('邮箱或者密码错误');
         }
 
@@ -136,7 +140,7 @@ class AuthController extends Controller
     }
 
     /**
-     * me - 用户信息
+     * me - 用户信息.
      *
      * @response {
      *     "status": "success",
@@ -159,7 +163,7 @@ class AuthController extends Controller
     }
 
     /**
-     * logout - 退出
+     * logout - 退出.
      *
      * @response {
      *     "status": "success",
@@ -180,7 +184,7 @@ class AuthController extends Controller
     }
 
     /**
-     * refresh - 重刷 token
+     * refresh - 重刷 token.
      *
      * @response {
      *     "status": "success",
@@ -204,7 +208,7 @@ class AuthController extends Controller
     }
 
     /**
-     * index - 用户列表
+     * index - 用户列表.
      *
      * @unauthenticated
      *

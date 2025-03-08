@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Models\Concerns;
@@ -24,7 +25,7 @@ namespace App\Models\Concerns;
 trait Nullable
 {
     /**
-     * initializeNullable trait for a model
+     * initializeNullable trait for a model.
      */
     public function initializeNullable(): void
     {
@@ -39,7 +40,7 @@ trait Nullable
     }
 
     /**
-     * addNullable attribute to the nullable attributes list
+     * addNullable attribute to the nullable attributes list.
      */
     public function addNullable(null|array|string $attributes = null): void
     {
@@ -51,11 +52,11 @@ trait Nullable
     /**
      * checkNullableValue checks if the supplied value is empty, excluding zero.
      *
-     * @param  string  $value  Value to check
+     * @param string $value Value to check
      */
     public function checkNullableValue(string $value): bool
     {
-        if ($value === 0 || $value === '0' || $value === 0.0 || $value === false) {
+        if (0 === $value || '0' === $value || 0.0 === $value || false === $value) {
             return false;
         }
 

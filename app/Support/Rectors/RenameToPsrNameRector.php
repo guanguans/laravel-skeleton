@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Rectors;
@@ -24,7 +25,7 @@ use Webmozart\Assert\Assert;
 
 class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    /** @var array<string> */
+    /** @var list<string> */
     protected array $except = [
         '*::*',
         'class',
@@ -154,8 +155,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
                         Foo::method_name();
                         method_exists($object, 'method_name');
                         property_exists($object, 'property_name');
-                        CODE_SAMPLE
-                    ,
+                        CODE_SAMPLE,
                     <<<'CODE_SAMPLE'
                         // lower snake
                         function function_name(){}
@@ -212,8 +212,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
                         call_user_method_array('methodName', $object);
                         method_exists($object, 'methodName');
                         property_exists($object, 'propertyName');
-                        CODE_SAMPLE
-                    ,
+                        CODE_SAMPLE,
                     ['exceptName']
                 ),
             ]
@@ -232,7 +231,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
+     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     #[\Override]
     public function refactor(Node $node)
@@ -259,22 +258,24 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param  iterable<string>|string  $patterns
+     * @param iterable<string>|string $patterns
      */
     public function isMatches(string $value, iterable|string $patterns): bool
     {
-        if (! is_iterable($patterns)) {
+        if (!is_iterable($patterns)) {
             $patterns = [$patterns];
         }
 
         foreach ($patterns as $pattern) {
             $pattern = (string) $pattern;
+
             if ($pattern === $value) {
                 return true;
             }
 
             $pattern = preg_quote($pattern, '#');
             $pattern = str_replace('\*', '.*', $pattern);
+
             if (preg_match('#^'.$pattern.'\z#u', $value) === 1) {
                 return true;
             }
@@ -291,7 +292,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
+     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     protected function rename(Node $node, callable $renamer): Node
     {
@@ -368,7 +369,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
+     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     protected function shouldLowerSnakeName(Node $node): bool
     {
@@ -397,7 +398,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
+     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     protected function shouldUcfirstCamelName(Node $node): bool
     {
@@ -423,7 +424,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
 
         if (
             $node instanceof Node\Name
-            && ! $this->isName($node, 'stdClass')
+            && !$this->isName($node, 'stdClass')
             && $this->isSubclasses($parent, [
                 // class Foo extends ClassName implements InterfaceName{}
                 Node\Stmt\Class_::class,
@@ -494,7 +495,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
-     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
+     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     protected function shouldUpperSnakeName(Node $node): bool
     {
@@ -502,7 +503,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
 
         if (
             $node instanceof Node\Identifier
-            && ! $this->isName($node, 'class')
+            && !$this->isName($node, 'class')
             && $this->isSubclasses($parent, [
                 // class Foo{public const CONST_NAME = 'const';}
                 Node\Const_::class,
@@ -530,12 +531,12 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
 
         // CONST_NAME;
         return $node instanceof Node\Name
-        && ! $this->isNames($node, ['null', 'true', 'false'])
+        && !$this->isNames($node, ['null', 'true', 'false'])
         && $parent instanceof Node\Expr\ConstFetch;
     }
 
     /**
-     * @param  Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name  $node
+     * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     protected function shouldLcfirstCamelName(Node $node): bool
     {
@@ -597,7 +598,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
 
     protected function isSubclasses($object, array $classes): bool
     {
-        if (! \is_object($object)) {
+        if (!\is_object($object)) {
             return false;
         }
 
@@ -613,7 +614,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     protected function hasFuncCallIndexStringArg(Node\Expr\FuncCall $funcCall, int $index): bool
     {
         return isset($funcCall->args[$index])
-            && $funcCall->args[$index]->name === null
+            && null === $funcCall->args[$index]->name
             && $funcCall->args[$index]->value instanceof Node\Scalar\String_;
     }
 

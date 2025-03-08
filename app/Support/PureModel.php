@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -17,66 +18,44 @@ use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Str;
 
 /**
- * This is modified from https://github.com/jenssegers/model
+ * This is modified from https://github.com/jenssegers/model.
  *
  * @see https://github.com/swisnl/json-api-client/blob/master/src/Item.php
  */
 abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable, Arrayable, Jsonable
 {
-    /**
-     * Indicates whether attributes are snake cased on arrays.
-     */
+    /** Indicates whether attributes are snake cased on arrays. */
     public static bool $snakeAttributes = true;
 
-    /**
-     * The model's attributes.
-     */
+    /** The model's attributes. */
     protected array $attributes = [];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     */
+    /** The attributes that should be hidden for arrays. */
     protected array $hidden = [];
 
-    /**
-     * The attributes that should be visible in arrays.
-     */
+    /** The attributes that should be visible in arrays. */
     protected array $visible = [];
 
-    /**
-     * The accessors to append to the model's array form.
-     */
+    /** The accessors to append to the model's array form. */
     protected array $appends = [];
 
-    /**
-     * The attributes that are mass assignable.
-     */
+    /** The attributes that are mass assignable. */
     protected array $fillable = [];
 
-    /**
-     * The attributes that aren't mass assignable.
-     */
+    /** The attributes that aren't mass assignable. */
     protected array $guarded = [];
 
-    /**
-     * The attributes that should be casted to native types.
-     */
+    /** The attributes that should be casted to native types. */
     protected array $casts = [];
 
-    /**
-     * Indicates if all mass assignment is enabled.
-     */
+    /** Indicates if all mass assignment is enabled. */
     protected static bool $unguarded = false;
 
-    /**
-     * The cache of the mutated attributes for each class.
-     */
+    /** The cache of the mutated attributes for each class. */
     protected static array $mutatorCache = [];
 
     /**
      * Create a new Eloquent model instance.
-     *
-     * @return void
      */
     public function __construct(array $attributes = [])
     {
@@ -138,9 +117,9 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
     /**
      * Fill the model with an array of attributes.
      *
-     * @return $this
-     *
      * @throws \RuntimeException
+     *
+     * @return $this
      */
     public function fill(array $attributes)
     {
@@ -379,7 +358,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
             return false;
         }
 
-        return $this->fillable === [];
+        return [] === $this->fillable;
     }
 
     /**
@@ -438,7 +417,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
         // the mutator for the attribute. We cache off every mutated attributes so
         // we don't have to constantly check on attributes that actually change.
         foreach ($mutatedAttributes as $key) {
-            if (! \array_key_exists($key, $attributes)) {
+            if (!\array_key_exists($key, $attributes)) {
                 continue;
             }
 
@@ -452,7 +431,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
         // the values to their appropriate type. If the attribute has a mutator we
         // will not perform the cast on those attributes to avoid any confusion.
         foreach (array_keys($this->casts) as $key) {
-            if (! \array_key_exists($key, $attributes)
+            if (!\array_key_exists($key, $attributes)
                 || \in_array($key, $mutatedAttributes, true)) {
                 continue;
             }
@@ -527,7 +506,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     public function fromJson(string $value, bool $asObject = false): mixed
     {
-        return json_decode($value, ! $asObject);
+        return json_decode($value, !$asObject);
     }
 
     /**
@@ -558,7 +537,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
         /** @var string $class */
         $class = static::class;
 
-        if (! isset(static::$mutatorCache[$class])) {
+        if (!isset(static::$mutatorCache[$class])) {
             static::cacheMutatedAttributes($class);
         }
 
@@ -629,7 +608,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     protected function fillableFromArray(array $attributes): array
     {
-        if ($this->fillable !== [] && ! static::$unguarded) {
+        if ([] !== $this->fillable && !static::$unguarded) {
             return array_intersect_key($attributes, array_flip($this->fillable));
         }
 
@@ -649,7 +628,7 @@ abstract class PureModel implements \ArrayAccess, \JsonSerializable, \Stringable
      */
     protected function getArrayableAppends(): array
     {
-        if ($this->appends === []) {
+        if ([] === $this->appends) {
             return [];
         }
 

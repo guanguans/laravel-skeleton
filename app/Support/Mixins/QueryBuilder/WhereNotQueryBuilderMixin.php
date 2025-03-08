@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Mixins\QueryBuilder;
@@ -19,8 +20,8 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
- * @mixin \Illuminate\Database\Query\Builder
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
+ * @mixin \Illuminate\Database\Query\Builder
  *
  * @see https://github.com/protonemedia/laravel-eloquent-where-not
  */
@@ -29,9 +30,7 @@ use Illuminate\Support\Facades\DB;
 #[Mixin(\Illuminate\Database\Eloquent\Relations\Relation::class)]
 class WhereNotQueryBuilderMixin
 {
-    /**
-     * The count for each table.
-     */
+    /** The count for each table. */
     protected static array $tableSubCount = [];
 
     public static function whereNot(): callable
@@ -75,7 +74,7 @@ class WhereNotQueryBuilderMixin
 
                 // Instantiate a new model that uses the aliased table.
                 $aliasedTable = transform($originalTable, static function ($table): string {
-                    if (! \array_key_exists($table, static::$tableSubCount)) {
+                    if (!\array_key_exists($table, static::$tableSubCount)) {
                         static::$tableSubCount[$table] = 0;
                     }
 

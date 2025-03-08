@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Traits;
@@ -23,10 +24,11 @@ trait Sanitizerable
      * Sanitizes the data of a request. This is a superior version of php built-in array_filter() as it preserves
      * FALSE and NULL values as well.
      *
-     * @param  array  $fields  a list of fields to be checked in the Dot-Notation (e.g., ['data.name', 'data.description'])
-     * @return array an array containing the values if the field was present in the request and the intersection array
+     * @param array $fields a list of fields to be checked in the Dot-Notation (e.g., ['data.name', 'data.description'])
      *
      * @throws \Exception
+     *
+     * @return array an array containing the values if the field was present in the request and the intersection array
      */
     public function sanitizeInput(array $fields): array
     {
@@ -61,8 +63,9 @@ trait Sanitizerable
     /**
      * Recursively intersects 2 arrays based on their keys.
      *
-     * @param  array  $a  first array (that keeps the values)
-     * @param  array  $b  second array to be compared with
+     * @param array $a first array (that keeps the values)
+     * @param array $b second array to be compared with
+     *
      * @return array an array containing all keys that are present in $a and $b. Only values from $a are returned
      */
     private function recursiveArrayIntersectKey(array $a, array $b): array

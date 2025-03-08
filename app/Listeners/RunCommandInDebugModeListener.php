@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Listeners;
@@ -50,9 +51,9 @@ class RunCommandInDebugModeListener
 
         if (
             $command instanceof HelpCommand
-            || ! $input instanceof ArgvInput
-            || ! config('app.debug')
-            || ! $this->isInDebugMode($input)
+            || !$input instanceof ArgvInput
+            || !config('app.debug')
+            || !$this->isInDebugMode($input)
             || '1' === getenv('XDEBUG_SESSION')
         ) {
             return;
@@ -98,7 +99,7 @@ class RunCommandInDebugModeListener
     }
 
     /**
-     * @return array<string>
+     * @return list<string>
      */
     private function getTokensFromArgvInput(ArgvInput $input): array
     {
@@ -119,14 +120,14 @@ class RunCommandInDebugModeListener
         $serverArgv = $_SERVER['argv'] ?? null;
         throw_if(null === $serverArgv, \RuntimeException::class, 'Impossible to get the arguments and options from the command: the command cannot be relaunched with xDebug.');
 
-        if (! \in_array($ansi = '--ansi', $serverArgv, true)) {
+        if (!\in_array($ansi = '--ansi', $serverArgv, true)) {
             $serverArgv[] = $ansi;
         }
 
         $script = $_SERVER['SCRIPT_NAME'] ?? null;
         throw_if(null === $script, \RuntimeException::class, 'Impossible to get the name of the command: the command cannot be relaunched with xDebug.');
 
-        $phpBinary = (new PhpExecutableFinder)->find() ?: PHP_BINARY;
+        $phpBinary = (new PhpExecutableFinder)->find() ?: \PHP_BINARY;
         $serverArgv = \array_slice($serverArgv, 1);
 
         return [$phpBinary, $script, ...$serverArgv];

@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Http\Support;
@@ -135,6 +136,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
         if (\array_key_exists($key, $array)) {
             return $array[$key];
         }
+
         foreach (explode('.', $key) as $segment) {
             if (\array_key_exists($segment, $array)) {
                 $array = $array[$segment];
@@ -147,13 +149,17 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
     public function dotSet(array &$array, string $key, mixed $value): array
     {
         $keys = explode('.', $key);
+
         while (\count($keys) > 1) {
             $key = array_shift($keys);
-            if (! isset($array[$key]) || ! \is_array($array[$key])) {
+
+            if (!isset($array[$key]) || !\is_array($array[$key])) {
                 $array[$key] = [];
             }
+
             $array = &$array[$key];
         }
+
         $array[array_shift($keys)] = $value;
 
         return $array;
@@ -163,6 +169,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
     {
         $original = &$array;
         $keys = (array) $keys;
+
         if (0 === \count($keys)) {
             return;
         }
@@ -173,18 +180,21 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
 
                 continue;
             }
+
             $parts = explode('.', $key);
 
             $array = &$original;
 
             while (\count($parts) > 1) {
                 $part = array_shift($parts);
+
                 if (isset($array[$part]) && \is_array($array[$part])) {
                     $array = &$array[$part];
                 } else {
                     continue 2;
                 }
             }
+
             unset($array[array_shift($parts)]);
         }
     }
@@ -195,7 +205,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
         return $this->all();
     }
 
-    public function toJson(int $option = JSON_UNESCAPED_UNICODE): string
+    public function toJson(int $option = \JSON_UNESCAPED_UNICODE): string
     {
         return json_encode($this->all(), $option);
     }

@@ -1,10 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Contracts\Validation\Validator;
-use InvalidArgumentException;
 
 class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 {
@@ -43,6 +53,11 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
+    public function validator(ValidationFactory $factory): Validator
+    {
+        return $this->call(__FUNCTION__, \func_get_args(), $this->createDefaultValidator($factory));
+    }
+
     #[\Override]
     protected function failedValidation(Validator $validator)
     {
@@ -55,28 +70,20 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
-    public function validator(ValidationFactory $factory): Validator
-    {
-        return $this->call(__FUNCTION__, \func_get_args(), $this->createDefaultValidator($factory));
-    }
-
     protected function withValidator(Validator $validator): Validator
     {
         return $this->call(__FUNCTION__, \func_get_args(), $validator);
     }
 
-    /**
-     * @return callable|string
-     */
-    protected function after()
+    protected function after(): callable|string
     {
         return $this->call(
             __FUNCTION__,
             \func_get_args(),
             /**
-             * @return mixed
-             *
              * @throws \Throwable
+             *
+             * @return mixed
              */
             static fn (Validator $validator): Validator => $validator
         );
@@ -114,13 +121,13 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
                     'passedValidation',
                 ],
                 true
-            ), InvalidArgumentException::class, "Can't call the method[$method].");
+            ), \InvalidArgumentException::class, "Can't call the method[$method].");
 
             return $this->route()?->getActionMethod().ucfirst($method);
         });
 
         if (method_exists($this, $actionMethod)) {
-            return $this->$actionMethod(...$args);
+            return $this->{$actionMethod}(...$args);
         }
 
         if (method_exists(parent::class, $method)) {

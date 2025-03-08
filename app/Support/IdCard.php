@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -17,9 +18,7 @@ namespace App\Support;
  */
 class IdCard
 {
-    /**
-     * 允许的地区码
-     */
+    /** 允许的地区码 */
     private static array $areaCodes = [
         11 => '北京',
         12 => '天津',
@@ -57,9 +56,7 @@ class IdCard
         83 => '台湾',
     ];
 
-    /**
-     * 安全码
-     */
+    /** 安全码 */
     private static array $securityCodes = [
         1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2,
     ];
@@ -69,12 +66,13 @@ class IdCard
      */
     public static function passes(mixed $idcard): bool
     {
-        if (! preg_match('/^'.self::resolveMatchRule().'$/', $idcard)) {
+        if (!preg_match('/^'.self::resolveMatchRule().'$/', $idcard)) {
             return false;
         }
 
         $areaCode = substr($idcard, 0, 2);
-        if (! isset(self::$areaCodes[$areaCode])) {
+
+        if (!isset(self::$areaCodes[$areaCode])) {
             return false;
         }
 
@@ -82,13 +80,13 @@ class IdCard
         $day = (int) substr($idcard, 12, 2);
         $year = (int) substr($idcard, 6, 4);
 
-        if (! checkdate($month, $day, $year)) {
+        if (!checkdate($month, $day, $year)) {
             return false;
         }
 
         $sum = 0;
 
-        for ($i = 17; $i > 0; --$i) {
+        for ($i = 17; 0 < $i; --$i) {
             $s = 2 ** $i % 11;
 
             $sum += $s * $idcard[17 - $i];

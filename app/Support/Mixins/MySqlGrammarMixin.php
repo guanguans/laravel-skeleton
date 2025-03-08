@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support\Mixins;
@@ -36,11 +37,11 @@ class MySqlGrammarMixin
 
             $value = $this->parameter($where['value']);
 
-            $mode = ($where['options']['mode'] ?? []) === 'boolean'
+            $mode = 'boolean' === ($where['options']['mode'] ?? [])
             ? ' in boolean mode'
             : ' in natural language mode';
 
-            $expanded = ($where['options']['expanded'] ?? []) && ($where['options']['mode'] ?? []) !== 'boolean'
+            $expanded = ($where['options']['expanded'] ?? []) && 'boolean' !== ($where['options']['mode'] ?? [])
             ? ' with query expansion'
             : '';
 

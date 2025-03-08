@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Support;
@@ -29,9 +30,7 @@ abstract class AbstractRepository
 {
     use Cacheable;
 
-    /**
-     * Cache expires constants
-     */
+    /** Cache expires constants */
     final public const EXPIRES_END_OF_DAY = 'eod';
 
     /**
@@ -41,22 +40,16 @@ abstract class AbstractRepository
      * different database driver.
      */
     public static string $searchOperator = 'LIKE';
-
     protected string $model;
-
     protected Model $modelInstance;
 
-    /**
-     * The errors message bag instance
-     */
+    /** The errors message bag instance */
     protected MessageBag $errors;
 
     /** @var|\Illuminate\Database\Eloquent\Builder */
     protected $query;
 
-    /**
-     * Global query scope.
-     */
+    /** Global query scope. */
     protected array $scopeQuery = [];
 
     /**
@@ -67,15 +60,13 @@ abstract class AbstractRepository
     protected $orderable = [];
 
     /**
-     * Valid searchable columns
+     * Valid searchable columns.
      *
      * @return array
      */
     protected $searchable = [];
 
-    /**
-     * Default order by column and direction pairs.
-     */
+    /** Default order by column and direction pairs. */
     protected array $orderBy = [];
 
     /**
@@ -84,16 +75,14 @@ abstract class AbstractRepository
      */
     protected bool $skipOrderingOnce = false;
 
-    /**
-     * A set of keys used to perform range queries.
-     */
+    /** A set of keys used to perform range queries. */
     protected array $range_keys = [
         'lt', 'gt',
         'bt', 'ne',
     ];
 
     /**
-     * Create a new Repository instance
+     * Create a new Repository instance.
      *
      * @throws \RuntimeException
      */
@@ -132,7 +121,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Get a new entity instance
+     * Get a new entity instance.
      */
     public function getNew(array $attributes = []): Model
     {
@@ -193,7 +182,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Find data by field and value
+     * Find data by field and value.
      */
     public function findBy(string $field, string $value, array $columns = ['*']): Collection|Model
     {
@@ -203,7 +192,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Find data by field
+     * Find data by field.
      */
     public function findAllBy(string $attribute, mixed $value, array $columns = ['*']): mixed
     {
@@ -218,7 +207,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Find data by multiple fields
+     * Find data by multiple fields.
      */
     public function findWhere(array $where, array $columns = ['*']): mixed
     {
@@ -347,8 +336,9 @@ abstract class AbstractRepository
 
                 // Loop though the columns and look for relationships
                 foreach ($columns as $key => $column) {
-                    @[$joiningTable, $options] = explode(':', $column);
-                    @[$column, $foreignKey, $relatedKey, $alias] = explode(',', $options);
+                    [$joiningTable, $options] = explode(':', $column);
+                    [$column, $foreignKey, $relatedKey, $alias] = explode(',', $options);
+
                     // Join the table if it hasn't already been joined
                     if (false === isset($joined[$joiningTable])) {
                         $joined[$joiningTable] = $this->addSearchJoin(
@@ -399,7 +389,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Retrieve all data of repository
+     * Retrieve all data of repository.
      */
     public function all(array $columns = ['*']): Collection
     {
@@ -435,7 +425,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Retrieve all data of repository, paginated
+     * Retrieve all data of repository, paginated.
      */
     public function paginate(?int $perPage = null, array $columns = ['*'], string $pageName = 'page', ?int $page = null): LengthAwarePaginator
     {
@@ -457,7 +447,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Retrieve all data of repository, paginated
+     * Retrieve all data of repository, paginated.
      */
     public function simplePaginate(?int $perPage = null, array $columns = ['*'], string $pageName = 'page', ?int $page = null): Paginator
     {
@@ -470,7 +460,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Save a new entity in repository
+     * Save a new entity in repository.
      */
     public function create(array $attributes): bool|Model
     {
@@ -486,7 +476,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Update an entity with the given attributes and persist it
+     * Update an entity with the given attributes and persist it.
      */
     public function update(Model $entity, array $attributes): bool
     {
@@ -500,13 +490,13 @@ abstract class AbstractRepository
     }
 
     /**
-     * Delete a entity in repository
+     * Delete a entity in repository.
      *
      * @throws \Exception
      */
     public function delete(mixed $entity): ?bool
     {
-        if (($entity instanceof Model) === false) {
+        if (false === ($entity instanceof Model)) {
             $entity = $this->find($entity);
         }
 
@@ -543,7 +533,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Get the raw SQL statements for the request
+     * Get the raw SQL statements for the request.
      */
     public function toSql(): string
     {
@@ -587,7 +577,7 @@ abstract class AbstractRepository
      */
     public function getErrors(): MessageBag
     {
-        if (! $this->errors instanceof MessageBag) {
+        if (!$this->errors instanceof MessageBag) {
             $this->errors = new MessageBag;
         }
 
@@ -603,7 +593,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Reset internal Query
+     * Reset internal Query.
      *
      * @return $this
      */
@@ -617,7 +607,7 @@ abstract class AbstractRepository
     }
 
     /**
-     * Apply scope in current Query
+     * Apply scope in current Query.
      *
      * @return $this
      */
@@ -641,7 +631,7 @@ abstract class AbstractRepository
     protected function appendTableName(string $column): string
     {
         // If missing prepend the table name
-        if (! str_contains($column, '.')) {
+        if (!str_contains($column, '.')) {
             return $this->modelInstance->getTable().'.'.$column;
         }
 
@@ -711,17 +701,14 @@ abstract class AbstractRepository
                     $query->where($this->appendTableName($columns[0]), '>', $value, 'and');
 
                     break;
-
                 case 'lt':
                     $query->where($this->appendTableName($columns[0]), '<', $value, 'and');
 
                     break;
-
                 case 'ne':
                     $query->where($this->appendTableName($columns[0]), '<>', $value, 'and');
 
                     break;
-
                 case 'bt':
                     // Because this can only have two values
                     if (2 === \count($values = explode(',', $value))) {

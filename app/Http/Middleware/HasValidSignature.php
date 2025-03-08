@@ -2,9 +2,17 @@
 
 declare(strict_types=1);
 
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,19 +30,19 @@ class HasValidSignature
     /**
      * Handle an incoming request.
      *
-     * @param  Closure(Request): (Response)  $next
+     * @param \Closure(Request): (Response) $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, \Closure $next): Response
     {
         $givenSignature = $request->header('x-signature');
 
         // abort if the signature is not present
-        abort_if(! \is_string($givenSignature), Response::HTTP_UNAUTHORIZED, 'Invalid signature');
+        abort_if(!\is_string($givenSignature), Response::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         $decoded = base64_decode($givenSignature, true);
 
         // abort if the signature is not valid base64
-        abort_if($decoded === false, Response::HTTP_UNAUTHORIZED, 'Invalid signature');
+        abort_if(false === $decoded, Response::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         $explodedDecoded = explode('$', $decoded);
 
@@ -46,7 +54,7 @@ class HasValidSignature
 
         // abort if the timestamp is invalid or older than a minute
         abort_if(
-            ! $timestamp->isValid() || $timestamp->isBefore(now()->subMinute()),
+            !$timestamp->isValid() || $timestamp->isBefore(now()->subMinute()),
             Response::HTTP_UNAUTHORIZED,
             'Invalid signature'
         );
@@ -57,7 +65,7 @@ class HasValidSignature
         );
 
         // abort if the signature is invalid
-        abort_if(! $validSignature, Response::HTTP_UNAUTHORIZED, 'Invalid signature');
+        abort_if(!$validSignature, Response::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         return $next($request);
     }

@@ -1,8 +1,17 @@
 <?php
 
-namespace App\Http\Middleware;
+declare(strict_types=1);
 
-use Closure;
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
+namespace App\Http\Middleware;
 
 /**
  * @see https://github.com/vrkansagara/LaraOutPress
@@ -12,25 +21,21 @@ class CompressResponseContent
     /**
      * All of the registered skip callbacks.
      *
-     * @var Closure[]
+     * @var list<\Closure>
      */
     protected static $skipCallbacks = [];
 
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     protected static $replacementRules = [];
 
     /**
      * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function handle($request, Closure $next, bool $debug = false)
+    public function handle(\Illuminate\Http\Request $request, \Closure $next, bool $debug = false): \Illuminate\Http\Response
     {
         /** @var \Illuminate\Http\Response $response */
         $response = $next($request);
+
         if ($this->shouldntCompress($request)) {
             return $response;
         }
@@ -55,31 +60,25 @@ class CompressResponseContent
     /**
      * Register a callback that instructs the middleware to be skipped.
      */
-    public static function skipWhen(Closure $callback): void
+    public static function skipWhen(\Closure $callback): void
     {
         static::$skipCallbacks[] = $callback;
     }
 
     /**
-     * @param  array<string, string>  $replacementRules
+     * @param array<string, string> $replacementRules
      */
     public static function mergeReplacementRules(array $replacementRules): void
     {
         static::$replacementRules = [...static::$replacementRules, ...$replacementRules];
     }
 
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     */
-    protected function shouldCompress($request): bool
+    protected function shouldCompress(\Illuminate\Http\Request $request): bool
     {
-        return ! $this->shouldntCompress($request);
+        return !$this->shouldntCompress($request);
     }
 
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     */
-    protected function shouldntCompress($request): bool
+    protected function shouldntCompress(\Illuminate\Http\Request $request): bool
     {
         if ($request->expectsJson()) {
             return true;
@@ -131,7 +130,7 @@ class CompressResponseContent
     {
         // JavaScript compressor by John Elliot <jj5@jj5.net>
         $replaceRules = [
-            '#\'([^\n\']*?)/\*([^\n\']*)\'#' => "'\1/'+\'\'+'*\2'",
+            '#\'([^\n\']*?)/\*([^\n\']*)\'#' => "'\1/'+\\'\\'+'*\2'",
             // remove comments from ' strings
             '#\"([^\n\"]*?)/\*([^\n\"]*)\"#' => '"\1/"+\'\'+"*\2"',
             // remove comments from " strings
@@ -182,7 +181,7 @@ class CompressResponseContent
         $whiteSpaceRules = [
             '/(\s)+/s' => '\\1', // shorten multiple whitespace sequences
             '#>\s+<#' => ">\n<", // Strip excess whitespace using new line
-            "#\n\s+<#" => "\n<", // strip excess whitespace using new line
+            "#\n\\s+<#" => "\n<", // strip excess whitespace using new line
             '/\>[^\S ]+/s' => '>',
             // Strip all whitespaces after tags, except space
             '/[^\S ]+\</s' => '<', // strip whitespaces before tags, except space
@@ -192,7 +191,7 @@ class CompressResponseContent
          * [^<>]*   # any characters except angle brackets
          * >        # followed by a closing bracket.
          * )        # End of lookahead
-         * /x',
+         * /x',.
          */
 
             // Remove all whitespaces except content between html tags.
@@ -219,7 +218,7 @@ class CompressResponseContent
 
     protected function formatBytes(int $bytes, $precision = 2): string
     {
-        if ($bytes > 0) {
+        if (0 < $bytes) {
             $i = (int) floor(log($bytes) / log(1024));
 
             $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -232,7 +231,6 @@ class CompressResponseContent
 
     /**
      * This method will no longer support.
-     *
      *
      * @deprecated
      */
@@ -262,12 +260,13 @@ class CompressResponseContent
          * | \z        # or end of file.
          * )           # End alternation group.
          * )           # If we made it here, we are not in a blacklist tag.
-         * %ix
+         * %ix.
          */
         $regexOfRemoveWhiteSpace = '%(?>[^\S ]\s*| \s{2,})(?=(?:(?:[^<]++| <(?!/?(?:textarea|pre)\b))*+)(?:<(?>textarea|pre)\b|\z))%ix';
         $compressedContent = preg_replace($regexOfRemoveWhiteSpace, '', $content);
+
         // We are going to check if processing has working
-        if ($compressedContent === null) {
+        if (null === $compressedContent) {
             $compressedContent = $content;
         }
 

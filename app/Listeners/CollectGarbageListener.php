@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Listeners;
@@ -20,13 +21,14 @@ class CollectGarbageListener
     /**
      * Handle the event.
      *
-     * @param  null|CommandFinished|mixed|RequestHandled  $event
+     * @param null|CommandFinished|mixed|RequestHandled $event
      */
     public function handle(mixed $event): void
     {
         // mega bytes
         $garbage = (int) config('app.garbage', 50);
-        if ($garbage > 0 && (memory_get_usage() / 1024 / 1024) > $garbage) {
+
+        if (0 < $garbage && (memory_get_usage() / 1024 / 1024) > $garbage) {
             gc_collect_cycles();
             // gc_mem_caches();
         }

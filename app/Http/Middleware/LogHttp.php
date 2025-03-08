@@ -1,8 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,18 +24,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LogHttp
 {
-    /**
-     * @var array<\Closure>
-     */
+    /** @var list<\Closure> */
     private static array $skipCallbacks = [];
-
     private static Logger $logger;
-
     private static string $level;
 
-    /**
-     * @var array<string>
-     */
+    /** @var list<string> */
     private array $headerHidden = [
         'api-key',
         'authorization',
@@ -33,9 +37,7 @@ class LogHttp
         'token',
     ];
 
-    /**
-     * @var array<string>
-     */
+    /** @var list<string> */
     private array $inputHidden = [
         '*password',
         '*password*',
@@ -57,18 +59,18 @@ class LogHttp
     /**
      * @see \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::skipWhen()
      */
-    public static function skipWhen(Closure $callback): void
+    public static function skipWhen(\Closure $callback): void
     {
         static::$skipCallbacks[] = $callback;
     }
 
-    public static function setLogger(string|LoggerInterface $logger): void
+    public static function setLogger(LoggerInterface|string $logger): void
     {
         if (\is_string($logger)) {
             $logger = Log::channel($logger);
         }
 
-        if (! $logger instanceof Logger) {
+        if (!$logger instanceof Logger) {
             $logger = new Logger($logger, app(Dispatcher::class));
         }
 
@@ -80,7 +82,7 @@ class LogHttp
         static::$level = $level;
     }
 
-    public function handle(Request $request, Closure $next, string|LoggerInterface $logger, string $level = 'info'): Response
+    public function handle(Request $request, \Closure $next, LoggerInterface|string $logger, string $level = 'info'): Response
     {
         static::setLogger($logger);
         static::setLevel($level);
@@ -153,7 +155,7 @@ class LogHttp
         ];
     }
 
-    private function headerFor(Response|Request $requestOrResponse): array
+    private function headerFor(Request|Response $requestOrResponse): array
     {
         return collect($requestOrResponse->headers->all())
             ->map(fn (array $header, string $key): string => Str::is($this->headerHidden, $key) ? '***' : $header[0])

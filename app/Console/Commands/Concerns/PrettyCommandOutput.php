@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Console\Commands\Concerns;
@@ -26,9 +27,10 @@ trait PrettyCommandOutput
     /**
      * Run a SSH command.
      *
-     * @param  string  $command  The SSH command that needs to be run
-     * @param  bool  $beforeNotice  Information for the user before the command is run
-     * @param  bool  $afterNotice  Information for the user after the command is run
+     * @param string $command The SSH command that needs to be run
+     * @param bool $beforeNotice Information for the user before the command is run
+     * @param bool $afterNotice Information for the user after the command is run
+     *
      * @return mixed Command-line output
      */
     public function executeProcess(string $command, bool $beforeNotice = false, bool $afterNotice = false): void
@@ -61,10 +63,11 @@ trait PrettyCommandOutput
     /**
      * Run an artisan command.
      *
-     * @param  string  $command  the artisan command to be run
-     * @param  array  $arguments  key-value array of arguments to the artisan command
-     * @param  bool  $beforeNotice  Information for the user before the command is run
-     * @param  bool  $afterNotice  Information for the user after the command is run
+     * @param string $command the artisan command to be run
+     * @param array $arguments key-value array of arguments to the artisan command
+     * @param bool $beforeNotice Information for the user before the command is run
+     * @param bool $afterNotice Information for the user after the command is run
+     *
      * @return mixed Command-line output
      */
     public function executeArtisanProcess(string $command, array $arguments = [], bool $beforeNotice = false, bool $afterNotice = false): void
@@ -91,7 +94,7 @@ trait PrettyCommandOutput
     /**
      * Write text to the screen for the user to see.
      *
-     * @param  string  $type  line, info, comment, question, error
+     * @param string $type line, info, comment, question, error
      */
     public function echo(string $type, string $content): void
     {
@@ -127,6 +130,7 @@ trait PrettyCommandOutput
             $value = $key + 1;
             $this->progressBlock("<fg=yellow>$value</> {$option->name}");
             $this->closeProgressBlock($option->status, $option->statusColor ?? '');
+
             foreach ($option->description ?? [] as $line) {
                 $this->line("    <fg=gray>{$line}</>");
             }
@@ -146,7 +150,7 @@ trait PrettyCommandOutput
 
         // low verbose level (-v) will display a note instead of info block
         if ($this->output->isVerbose()) {
-            if ($title !== 'info') {
+            if ('info' !== $title) {
                 $text = "$text <fg=gray>[<fg=$background>$title</>]</>";
             }
 
@@ -212,7 +216,7 @@ trait PrettyCommandOutput
 
         $this->output->write(\sprintf(
             "<fg=gray>%s</> <fg=$color>%s</>",
-            $newDotSize > 0 ? str_repeat('.', $newDotSize) : '',
+            0 < $newDotSize ? str_repeat('.', $newDotSize) : '',
             strtoupper($progress),
         ));
         $this->newLine();
@@ -238,9 +242,9 @@ trait PrettyCommandOutput
     {
         $hints = collect($hints)
             ->map(static fn ($hint): string => " <fg=gray>│ $hint</>")
-            ->join(PHP_EOL);
+            ->join(\PHP_EOL);
 
-        $this->ask($question.PHP_EOL.$hints, $default);
+        $this->ask($question.\PHP_EOL.$hints, $default);
     }
 
     /**

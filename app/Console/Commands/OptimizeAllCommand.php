@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Application;
@@ -26,7 +37,7 @@ class OptimizeAllCommand extends Command
 
     public function handle(): void
     {
-        if (! $this->option('force') && $this->getLaravel()->isProduction()) {
+        if (!$this->option('force') && $this->getLaravel()->isProduction()) {
             $this->components->warn('Please use --force option in production.');
 
             return;
@@ -35,6 +46,7 @@ class OptimizeAllCommand extends Command
         $this->components->info('Optimizing all...');
 
         $arguments = ['--ansi' => true, '-v' => true];
+
         foreach ([
             'config:cache',
             'event:cache',

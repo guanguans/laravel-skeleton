@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Models\Concerns;
@@ -89,7 +90,7 @@ trait SimpleNode
 
     public function isAChild(): bool
     {
-        return ! empty($this->{$this->getParentColumnName()});
+        return !empty($this->{$this->getParentColumnName()});
     }
 
     /**
@@ -122,7 +123,7 @@ trait SimpleNode
 
     public function isRoot(): bool
     {
-        return $this->{$this->getParentColumnName()} === 0;
+        return 0 === $this->{$this->getParentColumnName()};
     }
 
     public function getAllChildren($status = null): Collection
@@ -168,9 +169,9 @@ trait SimpleNode
     /**
      * Gets an array with values of a given column. Values are indented according to their depth.
      *
-     * @param  string  $column  Array values
-     * @param  string  $key  Array keys
-     * @param  string  $indent  Character to indent depth
+     * @param string $column Array values
+     * @param string $key Array keys
+     * @param string $indent Character to indent depth
      */
     public function scopeListsNested(mixed $query, string $column, ?string $key = null, string $indent = '&nbsp;&nbsp;&nbsp;'): array
     {
@@ -181,7 +182,7 @@ trait SimpleNode
             $indentString = str_repeat($indent, $depth);
 
             foreach ($items as $item) {
-                if ($key !== null) {
+                if (null !== $key) {
                     $result[$item->{$key}] = $indentString.$item->{$column};
                 } else {
                     $result[] = $indentString.$item->{$column};

@@ -1,9 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace App\Http\Middleware;
 
 use Carbon\Carbon;
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +26,9 @@ class LogAllRequests
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, \Closure $next): Response
     {
         $response = $next($request);
 
@@ -61,17 +71,17 @@ class LogAllRequests
         }
 
         // to log the message from the response
-        if (! empty($contents['message'])) {
+        if (!empty($contents['message'])) {
             $data['response']['message'] = $contents['message'];
         }
 
         // to log the errors from the response in case validation fails or other errors get thrown
-        if (! empty($contents['errors'])) {
+        if (!empty($contents['errors'])) {
             $data['response']['errors'] = $contents['errors'];
         }
 
         // to log the data from the response, change the RESULT to your API key that holds data
-        if (! empty($contents['result'])) {
+        if (!empty($contents['result'])) {
             $data['response']['result'] = $contents['result'];
         }
 
