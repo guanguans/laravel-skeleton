@@ -1,6 +1,15 @@
 <?php
 
-/** @noinspection MethodVisibilityInspection */
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
 
 namespace Database\Seeders\Concerns;
 
@@ -13,13 +22,12 @@ use Illuminate\Support\Facades\DB;
 trait CanSeedOncePerDatabase
 {
     protected string $seedersTable = 'seeders';
-
     protected bool $seedersTableExists = false;
 
     public function callOncePerDatabase($class, $silent = false, array $parameters = []): void
     {
         if ($this->seederHasAlreadyBeenCalled($class)) {
-            if ($silent === false && isset($this->command)) {
+            if (false === $silent && isset($this->command)) {
                 (new TwoColumnDetail($this->command->getOutput()))->render(
                     $class,
                     '<fg=gray>Seeder had already run on this database</> <fg=yellow;options=bold>SKIPPING</>'
@@ -61,7 +69,7 @@ trait CanSeedOncePerDatabase
 
         $schema = DB::connection()->getSchemaBuilder();
 
-        if (! $schema->hasTable($this->seedersTable)) {
+        if (!$schema->hasTable($this->seedersTable)) {
             $schema->create($this->seedersTable, static function ($table): void {
                 $table->string('seeder')->unique();
             });

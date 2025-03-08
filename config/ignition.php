@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 use Spatie\Ignition\Solutions\SolutionProviders\BadMethodCallSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\MergeConflictSolutionProvider;
 use Spatie\Ignition\Solutions\SolutionProviders\UndefinedPropertySolutionProvider;
@@ -267,16 +278,16 @@ return [
     */
 
     'argument_reducers' => [
-        \Spatie\Backtrace\Arguments\Reducers\BaseTypeArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\ArrayArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\StdClassArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\EnumArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\ClosureArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\DateTimeArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\DateTimeZoneArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\SymphonyRequestArgumentReducer::class,
-        \Spatie\LaravelIgnition\ArgumentReducers\ModelArgumentReducer::class,
-        \Spatie\LaravelIgnition\ArgumentReducers\CollectionArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\StringableArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\BaseTypeArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\ArrayArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\StdClassArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\EnumArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\ClosureArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\DateTimeArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\DateTimeZoneArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\SymphonyRequestArgumentReducer::class,
+        Spatie\LaravelIgnition\ArgumentReducers\ModelArgumentReducer::class,
+        Spatie\LaravelIgnition\ArgumentReducers\CollectionArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\StringableArgumentReducer::class,
     ],
 ];

@@ -1,7 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-defined('LARAVEL_START') or define('LARAVEL_START', microtime(true));
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
+\defined('LARAVEL_START') or \define('LARAVEL_START', microtime(true));
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +26,13 @@ defined('LARAVEL_START') or define('LARAVEL_START', microtime(true));
 |
 */
 
-require_once __DIR__ . '/vendor/autoload_runtime.php';
+require_once __DIR__.'/vendor/autoload_runtime.php';
 
-return static function (): Illuminate\Contracts\Console\Kernel{
+return static function (): Illuminate\Contracts\Console\Kernel {
     static $app;
 
     if (null === $app) {
-        $app = require __DIR__ . '/bootstrap/app.php';
+        $app = require __DIR__.'/bootstrap/app.php';
     }
 
     return $app->make(Illuminate\Contracts\Console\Kernel::class);

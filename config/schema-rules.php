@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 return [
     /**
      * In MySQL for instance there is no nativ boolean data type.
@@ -16,7 +27,7 @@ return [
     'string_min_length' => env('SCHEMA_RULES_STRING_MIN_LENGTH', 1),
 
     /**
-     * Always skip this columns
+     * Always skip this columns.
      */
     'skip_columns' => ['created_at', 'updated_at', 'deleted_at'],
 ];

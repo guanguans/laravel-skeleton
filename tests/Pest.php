@@ -7,6 +7,15 @@
 
 declare(strict_types=1);
 
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 use Tests\TestCase;
 
 uses(TestCase::class)
@@ -43,13 +52,11 @@ expect()->extend('toBetween', fn (int $min, int $max): Expectation => expect($th
  */
 
 /**
- * @param  object|string  $class
- *
  * @throws ReflectionException
  */
-function class_namespace($class): string
+function class_namespace(object|string $class): string
 {
-    $class = is_object($class) ? $class::class : $class;
+    $class = \is_object($class) ? $class::class : $class;
 
     return (new ReflectionClass($class))->getNamespaceName();
 }

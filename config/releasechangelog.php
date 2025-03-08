@@ -1,20 +1,30 @@
 <?php
 
-// config for Lightszentip/LaravelReleaseChangelogGenerator
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 return [
     /**
-     * Path where the changelog file exists or should create
+     * Path where the changelog file exists or should create.
      */
     'path' => resource_path(),
     'version_path' => resource_path(),
 
     /**
-     * Type of version mode change
+     * Type of version mode change.
      */
     // 'version_mode' => 'increment', # or 'increment',
 
     /**
-     * Version default format
+     * Version default format.
      */
     'version_format_default' => 'version {major}.{minor}.{patch}.{prerelease}{prereleasenumber} [{buildmetadata}] (timestamp {timestamp})',
 
@@ -32,7 +42,7 @@ return [
     ],
 
     /**
-     * Is prerelease active
+     * Is prerelease active.
      */
     'prerelease' => true,
 
@@ -40,5 +50,5 @@ return [
 
     'markdown-path' => base_path(),
 
-    'markdown-view-path' => '.'.DIRECTORY_SEPARATOR,
+    'markdown-view-path' => '.'.\DIRECTORY_SEPARATOR,
 ];

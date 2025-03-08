@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 namespace Tests\Concerns;
 
 use Illuminate\Support\Str;
@@ -14,22 +25,20 @@ use Pest\TestSuite;
 trait Bootloadable
 {
     private static int $count = 0;
-
     private static array $tests;
-
     private static string $current;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        self::$current = array_reverse(explode('\\', debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['class']))[0];
+        self::$current = array_reverse(explode('\\', debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['class']))[0];
 
-        if (! isset(self::$tests)) {
+        if (!isset(self::$tests)) {
             $this->init();
         }
 
-        if (! self::$count && method_exists(self::class, 'initialize')) {
+        if (!self::$count && method_exists(self::class, 'initialize')) {
             $this->initialize(self::$current);
         }
 
@@ -38,7 +47,7 @@ trait Bootloadable
 
     protected function tearDown(): void
     {
-        if (self::$tests[self::$current] == self::$count) {
+        if (self::$tests[self::$current] === self::$count) {
             if (method_exists(self::class, 'finalize')) {
                 $this->finalize(self::$current);
             }
@@ -60,7 +69,7 @@ trait Bootloadable
 
             $filename = Str::of($file)->basename()->explode('.')->first();
 
-            if ($factory->class === self::class) {
+            if (self::class === $factory->class) {
                 $data = [...$data, ...[$filename => \count($factory->methods)]];
             }
         }

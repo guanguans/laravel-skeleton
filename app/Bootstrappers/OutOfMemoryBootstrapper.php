@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 namespace App\Bootstrappers;
@@ -27,9 +28,7 @@ class OutOfMemoryBootstrapper
      */
     protected ?string $reservedMemory = null;
 
-    /**
-     * A regex that matches PHP OOM errors.
-     */
+    /** A regex that matches PHP OOM errors. */
     private string $oomRegex = '/^Allowed memory size of (\d+) bytes exhausted \(tried to allocate \d+ bytes\)/';
 
     /**
@@ -46,13 +45,13 @@ class OutOfMemoryBootstrapper
 
             $lastError = error_get_last();
 
-            if (! $lastError) {
+            if (!$lastError) {
                 return;
             }
 
             $isOom = preg_match($this->oomRegex, $lastError['message'], $matches) === 1;
 
-            if (! $isOom) {
+            if (!$isOom) {
                 return;
             }
 

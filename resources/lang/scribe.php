@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 return [
     'labels' => [
         'search' => 'Search',
@@ -22,8 +33,8 @@ return [
                 To authenticate requests, include an **`Authorization`** header with the value **`"Bearer :placeholder"`**.
                 TEXT,
             'basic' => <<<'TEXT'
-                To authenticate requests, include an **`Authorization`** header in the form **`"Basic {credentials}"`**. 
-                The value of `{credentials}` should be your username/id and your password, joined with a colon (:), 
+                To authenticate requests, include an **`Authorization`** header in the form **`"Basic {credentials}"`**.
+                The value of `{credentials}` should be your username/id and your password, joined with a colon (:),
                 and then base64-encoded.
                 TEXT,
             'header' => <<<'TEXT'

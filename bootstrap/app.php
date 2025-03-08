@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -8,7 +19,7 @@ use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 
-return Application::configure(basePath: dirname(__DIR__))
+return Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {
         // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
         $app->singleton(Illuminate\Contracts\Http\Kernel::class, App\Http\Kernel::class);
@@ -29,7 +40,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //         ->where('any', '.*');
         // },
     )
-    ->withMiddleware(static function (Middleware $middleware) {
+    ->withMiddleware(static function (Middleware $middleware): void {
         // $middleware->statefulApi();
 
         // $middleware->remove([
@@ -125,7 +136,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 'private',
             ]));
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         // $exceptions->truncateRequestExceptionsAt(256);
         // $exceptions->dontTruncateRequestExceptions();
 

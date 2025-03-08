@@ -8,6 +8,15 @@
 
 declare(strict_types=1);
 
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 use Illuminate\Foundation\Events\DiagnosingHealth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -79,7 +88,7 @@ Route::post('/update-password', static function (Request $request) {
     ]);
 
     // Check the current password
-    if (! Hash::check($request->current_password, Auth::user()->password)) {
+    if (!Hash::check($request->current_password, Auth::user()->password)) {
         return back()->withErrors(['current_password' => 'The provided password does not match our records.']);
     }
 
@@ -95,7 +104,7 @@ Route::post('/update-password', static function (Request $request) {
 });
 
 Route::post('/confirm-password', static function (Request $request) {
-    if (! Hash::check($request->password, $request->user()->password)) {
+    if (!Hash::check($request->password, $request->user()->password)) {
         return back()->withErrors([
             'password' => ['The provided password does not match our records.'],
         ]);

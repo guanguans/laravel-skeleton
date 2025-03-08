@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -151,7 +162,7 @@ return [
     */
 
     'ignored_models' => [
-        \App\Models\Model::class,
+        App\Models\Model::class,
     ],
 
     /*
@@ -179,8 +190,8 @@ return [
     */
 
     'extra' => [
-        'Eloquent' => [\Illuminate\Database\Eloquent\Builder::class, \Illuminate\Database\Query\Builder::class],
-        'Session' => [\Illuminate\Session\Store::class],
+        'Eloquent' => [Illuminate\Database\Eloquent\Builder::class, Illuminate\Database\Query\Builder::class],
+        'Session' => [Illuminate\Session\Store::class],
     ],
 
     'magic' => [],

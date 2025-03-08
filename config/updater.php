@@ -1,10 +1,20 @@
 <?php
 
-// config for Salahhusa9/Updater
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
 return [
     'git_path' => null,
 
-    'repository_source' => \Salahhusa9\Updater\RepositorySource\GithubRepository::class,
+    'repository_source' => Salahhusa9\Updater\RepositorySource\GithubRepository::class,
     'github_token' => env('GITHUB_TOKEN'),
     'github_username' => env('GITHUB_USERNAME'),
     'github_repository' => env('GITHUB_REPOSITORY'),

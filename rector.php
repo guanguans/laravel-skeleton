@@ -5,11 +5,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 use App\Support\Rectors\RenameToPsrNameRector;
@@ -116,7 +117,7 @@ return RectorConfig::configure()
                 static fn (
                     string $constant,
                     string $name
-                ): bool => in_array($name, ['LARAVEL_STATIC_TO_INJECTION', 'LARAVEL_'], true)
+                ): bool => \in_array($name, ['LARAVEL_STATIC_TO_INJECTION', 'LARAVEL_'], true)
                     || preg_match('/^LARAVEL_\d{2,3}$/', $name)
             )
             // ->dd()
@@ -133,7 +134,7 @@ return RectorConfig::configure()
             ->pipe(static fn (Collection $splAutoloadFunctions): Collection => collect(
                 $splAutoloadFunctions
                     ->firstOrFail(
-                        static fn (mixed $loader): bool => is_array($loader) && $loader[0] instanceof ClassLoader
+                        static fn (mixed $loader): bool => \is_array($loader) && $loader[0] instanceof ClassLoader
                     )[0]
                     ->getClassMap()
             ))

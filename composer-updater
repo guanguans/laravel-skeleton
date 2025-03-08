@@ -4,11 +4,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the guanguans/laravel-skeleton.
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
- * (c) guanguans <ityaozm@gmail.com>
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
  *
- * This source file is subject to the MIT license that is bundled.
+ * @see https://github.com/guanguans/laravel-skeleton
  */
 
 use Composer\InstalledVersions;
@@ -38,8 +39,8 @@ $status = (new SingleCommandApplication)
     ->addOption('dry-run', null, InputOption::VALUE_NONE)
     ->setCode(function (InputInterface $input, OutputInterface $output): void {
         // assert_options(ASSERT_BAIL, 1);
-        assert($this instanceof SingleCommandApplication);
-        assert((bool) $input->getOption('highest-php-binary'));
+        \assert($this instanceof SingleCommandApplication);
+        \assert((bool) $input->getOption('highest-php-binary'));
 
         (new class(
             $input->getOption('composer-json-path') ?: __DIR__.'/composer.json',
@@ -52,17 +53,11 @@ $status = (new SingleCommandApplication)
             new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true)),
         ) {
             private string $composerJsonContents;
-
             private string $highestComposerBinary;
-
             private string $composerBinary;
-
             private array $exceptPackages;
-
             private array $exceptDependencyVersions;
-
             private SymfonyStyle $symfonyStyle;
-
             private Differ $differ;
 
             /**
@@ -79,7 +74,7 @@ $status = (new SingleCommandApplication)
                 ?Differ $differ = null
             ) {
                 // assert_options(ASSERT_BAIL, 1);
-                assert((bool) $composerJsonPath);
+                \assert((bool) $composerJsonPath);
 
                 $this->composerJsonContents = file_get_contents($composerJsonPath);
                 $this->highestComposerBinary = $this->getComposerBinary($composerBinary, $highestPhpBinary);
@@ -127,8 +122,8 @@ $status = (new SingleCommandApplication)
             {
                 $outdatedComposerJsonContents = json_encode(
                     $this->getOutdatedDecodedComposerJson(),
-                    JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-                ).PHP_EOL;
+                    \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES
+                ).\PHP_EOL;
 
                 if ($this->dryRun) {
                     $this->symfonyStyle->writeln($this->formatDiff($this->differ->diff(
@@ -163,7 +158,7 @@ $status = (new SingleCommandApplication)
                 InstalledVersions::reload([]);
 
                 foreach ($decodedComposerJson as $name => &$value) {
-                    if (! in_array($name, ['require', 'require-dev'], true)) {
+                    if (!\in_array($name, ['require', 'require-dev'], true)) {
                         continue;
                     }
 
@@ -223,7 +218,7 @@ $status = (new SingleCommandApplication)
 
             private function getComposerBinary(?string $composerBinary = null, ?string $phpBinary = null): string
             {
-                return sprintf(
+                return \sprintf(
                     '%s %s',
                     $phpBinary ?? (new PhpExecutableFinder)->find(),
                     $composerBinary ?? (new ExecutableFinder)->find('composer')
@@ -231,9 +226,9 @@ $status = (new SingleCommandApplication)
             }
 
             /**
-             * @param  mixed  $input  The input as stream resource, scalar or \Traversable, or null for no input
-             *
              * @noinspection PhpSameParameterValueInspection
+             *
+             * @param mixed $input The input as stream resource, scalar or \Traversable, or null for no input
              */
             private function mustRunCommand(
                 array|string $command,
@@ -249,14 +244,14 @@ $status = (new SingleCommandApplication)
                     '--ansi',
                 ];
 
-                $process = is_string($command)
-                    ? Process::fromShellCommandline(sprintf("$command %s", implode(' ', $additionalOptions)), $cwd, $env, $input, $timeout)
+                $process = \is_string($command)
+                    ? Process::fromShellCommandline(\sprintf("$command %s", implode(' ', $additionalOptions)), $cwd, $env, $input, $timeout)
                     : new Process($command + $additionalOptions, $cwd, $env, $input, $timeout);
 
                 $this->symfonyStyle->warning($process->getCommandLine());
 
                 return $process
-                    ->setWorkingDirectory(dirname($this->composerJsonPath))
+                    ->setWorkingDirectory(\dirname($this->composerJsonPath))
                     ->setEnv(['COMPOSER_MEMORY_LIMIT' => -1])
                     ->mustRun(function (string $type, string $buffer): void {
                         $this->symfonyStyle->isVerbose() and $this->symfonyStyle->write($buffer);
@@ -265,7 +260,7 @@ $status = (new SingleCommandApplication)
 
             private function toDependencyVersion(string $version): string
             {
-                return '^'.implode('.', array_slice($this->toArrayVersion($version), 0, 2));
+                return '^'.implode('.', \array_slice($this->toArrayVersion($version), 0, 2));
             }
 
             private function toArrayVersion(string $version): array
@@ -280,18 +275,21 @@ $status = (new SingleCommandApplication)
             private function strIs(array|string $pattern, string $value): bool
             {
                 $patterns = (array) $pattern;
+
                 if (empty($patterns)) {
                     return false;
                 }
 
                 foreach ($patterns as $pattern) {
                     $pattern = (string) $pattern;
+
                     if ($pattern === $value) {
                         return true;
                     }
 
                     $pattern = preg_quote($pattern, '#');
                     $pattern = str_replace('\*', '.*', $pattern);
+
                     if (1 === preg_match('#^'.$pattern.'\z#u', $value)) {
                         return true;
                     }
