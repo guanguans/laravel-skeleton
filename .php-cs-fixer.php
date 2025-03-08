@@ -177,8 +177,8 @@ return (new Config)
             'sort_algorithm' => 'none',
         ],
         'ordered_interfaces' => [
-            'order' => 'alpha',
             'direction' => 'ascend',
+            'order' => 'alpha',
         ],
         'self_static_accessor' => true,
 
@@ -187,8 +187,8 @@ return (new Config)
 
         // comment
         'header_comment' => [
-            'header' => $header,
             'comment_type' => 'PHPDoc',
+            'header' => $header,
             'location' => 'after_declare_strict',
             'separate' => 'both',
         ],
@@ -210,8 +210,8 @@ return (new Config)
         // function_notation
         'date_time_create_from_format_call' => true,
         'native_function_invocation' => [
-            'include' => ['@compiler_optimized', 'is_scalar'],
             'exclude' => [],
+            'include' => ['@compiler_optimized', 'is_scalar'],
             'scope' => 'namespaced',
             'strict' => true,
         ],
@@ -286,8 +286,8 @@ return (new Config)
         'phpdoc_param_order' => true,
         'phpdoc_line_span' => [
             'const' => null,
-            'property' => null,
             'method' => 'multi',
+            'property' => null,
         ],
         'phpdoc_no_empty_return' => false,
         'phpdoc_summary' => false,

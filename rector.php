@@ -15,6 +15,7 @@ declare(strict_types=1);
 use App\Support\Rectors\RenameToPsrNameRector;
 use App\Support\Traits\Cacheable;
 use Composer\Autoload\ClassLoader;
+use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
 use Illuminate\Support\Collection;
 use Rector\Carbon\Rector\FuncCall\TimeFuncCallToCarbonRector;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
@@ -48,6 +49,7 @@ use Rector\ValueObject\PhpVersion;
 use Rector\ValueObject\Visibility;
 use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
 use Rector\Visibility\ValueObject\ChangeMethodVisibility;
+use RectorLaravel\Rector\ArrayDimFetch\EnvVariableToEnvHelperRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
@@ -64,6 +66,8 @@ return RectorConfig::configure()
         __DIR__.'/database',
         __DIR__.'/routes',
         __DIR__.'/tests',
+        ...glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
+        __DIR__.'/composer-updater',
     ])
     ->withRootFiles()
     // ->withSkipPath(__DIR__.'/tests.php')
@@ -124,6 +128,7 @@ return RectorConfig::configure()
     ->withRules([
         AddOverrideAttributeToOverriddenMethodsRector::class,
         RectorConfigBuilderRector::class,
+        SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
         ...collect(spl_autoload_functions())
@@ -182,6 +187,9 @@ return RectorConfig::configure()
         TypeHintTappableCallRector::class,
     ])
     ->withSkip([
+        EnvVariableToEnvHelperRector::class => [
+            __DIR__.'/app/Providers/AppServiceProvider.php',
+        ],
         TimeFuncCallToCarbonRector::class => [
             __DIR__.'/app/Support/StreamWrappers',
         ],
@@ -210,4 +218,12 @@ return RectorConfig::configure()
             __DIR__.'/tests',
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,
+        SortAssociativeArrayByKeyRector::class => [
+            __DIR__.'/app',
+            __DIR__.'/composer-updater',
+            __DIR__.'/config',
+            __DIR__.'/database',
+            __DIR__.'/routes',
+            __DIR__.'/tests',
+        ],
     ]);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "223a0b3e46a37d09837955f8a81d5fdf",
+    "content-hash": "7f9e7a7db5d77a2a9d1e51b97cd3ed2d",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -26537,6 +26537,71 @@
                 "source": "https://github.com/ergebnis/json-schema-validator"
             },
             "time": "2024-11-18T06:32:28+00:00"
+        },
+        {
+            "name": "ergebnis/rector-rules",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/rector-rules.git",
+                "reference": "c59abaceef82ec1954de4ac0ed31d874768c5da1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/rector-rules/zipball/c59abaceef82ec1954de4ac0ed31d874768c5da1",
+                "reference": "c59abaceef82ec1954de4ac0ed31d874768c5da1",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.17.1 || ^5.0.0",
+                "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+                "phpstan/phpstan": "^1.10.36",
+                "rector/rector": "^1.0.4"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.44.0",
+                "ergebnis/data-provider": "^3.4.0",
+                "ergebnis/license": "^2.6.0",
+                "ergebnis/php-cs-fixer-config": "^6.37.0",
+                "ergebnis/phpunit-slow-test-detector": "^2.16.1",
+                "infection/infection": "~0.26.6",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan-deprecation-rules": "^1.2.1",
+                "phpstan/phpstan-phpunit": "^1.4.0",
+                "phpstan/phpstan-strict-rules": "^1.6.1",
+                "phpunit/phpunit": "^9.6.20"
+            },
+            "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 2,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Rector\\Rules\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com",
+                    "homepage": "https://localheinz.com"
+                }
+            ],
+            "description": "Provides rules for rector/rector.",
+            "homepage": "https://github.com/ergebnis/rector-rules",
+            "support": {
+                "issues": "https://github.com/ergebnis/rector-rules/issues",
+                "security": "https://github.com/ergebnis/rector-rules/blob/main/.github/SECURITY.md",
+                "source": "https://github.com/ergebnis/rector-rules"
+            },
+            "time": "2024-11-23T23:18:08+00:00"
         },
         {
             "name": "evenement/evenement",

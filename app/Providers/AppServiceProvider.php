@@ -937,6 +937,6 @@ class AppServiceProvider extends ServiceProvider
      */
     private function isOctaneHttpServer(): bool
     {
-        return isset($_SERVER['LARAVEL_OCTANE']) || isset(\Illuminate\Support\Env::get('OCTANE_DATABASE_SESSION_TTL'));
+        return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
     }
 }

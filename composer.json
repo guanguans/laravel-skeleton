@@ -196,6 +196,7 @@
         "driftingly/rector-laravel": "^1.2 || ^2.0",
         "enlightn/enlightn": "^2.10",
         "ergebnis/composer-normalize": "^2.45",
+        "ergebnis/rector-rules": "^1.2",
         "fakerphp/faker": "^1.24",
         "friendsofphp/php-cs-fixer": "^3.70",
         "guanguans/ai-commit": "dev-main",
