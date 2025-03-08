@@ -118,9 +118,7 @@ class CommandMixin
         ): Process {
             /** @var Process $process */
             $process = $this->processHelperRun($cmd, $error, $callback, $verbosity, $output);
-            if (! $process->isSuccessful()) {
-                throw new ProcessFailedException($process);
-            }
+            throw_unless($process->isSuccessful(), new ProcessFailedException($process));
 
             return $process;
         };

@@ -165,7 +165,7 @@ class HealthCheckCommand extends Command
                         ? "The dev packages shouldn't be automatically discovered."
                         : 'The indirect discovered packages should be manually handled.';
 
-                    $this->laravel->make('events')->listen(
+                    $this->laravel->make(\Illuminate\Contracts\Events\Dispatcher::class)->listen(
                         CommandFinished::class,
                         function () use ($shouldntDiscoverPackages, $indirectDiscoveredPackages): void {
                             $this->warn(\sprintf(
@@ -370,7 +370,7 @@ class HealthCheckCommand extends Command
         }
 
         $processResult = Process::run([
-            ...app('composer')->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
+            ...app(\Illuminate\Support\Composer::class)->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
         ])->throw();
         $errorExtensions = collect(json_decode($processResult->output(), true))->filter(
             static fn (array $item): bool => $item['status'] !== 'success'

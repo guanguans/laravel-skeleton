@@ -19,11 +19,9 @@ class RequiresJson
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->wantsJson()) {
-            throw new NotAcceptableHttpException(
-                'Please request with HTTP header: Accept: application/json'
-            );
-        }
+        throw_unless($request->wantsJson(), new NotAcceptableHttpException(
+            'Please request with HTTP header: Accept: application/json'
+        ));
 
         return $next($request);
     }

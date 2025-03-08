@@ -478,7 +478,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->when($this->isOctaneHttpServer(), function (): void {
-            $this->app->get('events')->listen(RequestReceived::class, static function (): void {
+            $this->app->get(\Illuminate\Contracts\Events\Dispatcher::class)->listen(RequestReceived::class, static function (): void {
                 $uuid = Str::uuid()->toString();
 
                 if (config('octane.server') === 'roadrunner') {
@@ -490,7 +490,7 @@ class AppServiceProvider extends ServiceProvider
                 Cache::store('octane')->put($uuid, microtime(true));
             });
 
-            $this->app->get('events')->listen(RequestTerminated::class, static function (): void {});
+            $this->app->get(\Illuminate\Contracts\Events\Dispatcher::class)->listen(RequestTerminated::class, static function (): void {});
         });
     }
 
@@ -606,25 +606,25 @@ class AppServiceProvider extends ServiceProvider
         // return view('dashboard', ['users' => $users])->fragment('user-list');
 
         // 合成器
-        $this->app->make('view')->composer('*', RequestComposer::class);
-        $this->app->make('view')->composer('*', function (View $view): void {
+        $this->app->make(\Illuminate\Contracts\View\Factory::class)->composer('*', RequestComposer::class);
+        $this->app->make(\Illuminate\Contracts\View\Factory::class)->composer('*', function (View $view): void {
             $view->with('request', $this->app->make(Request::class))
-                ->with('user', $this->app->make('auth')->user())
-                ->with('config', $this->app->make('config'));
+                ->with('user', $this->app->make(\Illuminate\Contracts\Auth\Factory::class)->user())
+                ->with('config', $this->app->make(\Illuminate\Contracts\Config\Repository::class));
         });
 
         // 构造器
-        $this->app->make('view')->creator('*', RequestCreator::class);
-        $this->app->make('view')->creator('*', function (View $view): void {
+        $this->app->make(\Illuminate\Contracts\View\Factory::class)->creator('*', RequestCreator::class);
+        $this->app->make(\Illuminate\Contracts\View\Factory::class)->creator('*', function (View $view): void {
             $view->with('request', $this->app->make(Request::class))
-                ->with('user', $this->app->make('auth')->user())
-                ->with('config', $this->app->make('config'));
+                ->with('user', $this->app->make(\Illuminate\Contracts\Auth\Factory::class)->user())
+                ->with('config', $this->app->make(\Illuminate\Contracts\Config\Repository::class));
         });
 
         // 共享数据
-        $this->app->make('view')->share('request', $this->app->make(Request::class));
-        $this->app->make('view')->share('user', $this->app->make('auth')->user());
-        $this->app->make('view')->share('config', $this->app->make('config'));
+        $this->app->make(\Illuminate\Contracts\View\Factory::class)->share('request', $this->app->make(Request::class));
+        $this->app->make(\Illuminate\Contracts\View\Factory::class)->share('user', $this->app->make(\Illuminate\Contracts\Auth\Factory::class)->user());
+        $this->app->make(\Illuminate\Contracts\View\Factory::class)->share('config', $this->app->make(\Illuminate\Contracts\Config\Repository::class));
 
         // 注册组件
         Blade::component('alert', AlertComponent::class);
@@ -732,7 +732,7 @@ class AppServiceProvider extends ServiceProvider
         //         ));
         // });
 
-        $this->app->get('events')->listen(RequestHandled::class, static function (RequestHandled $event): void {
+        $this->app->get(\Illuminate\Contracts\Events\Dispatcher::class)->listen(RequestHandled::class, static function (RequestHandled $event): void {
             if ($event->response instanceof JsonResponse) {
                 $event->response->setEncodingOptions($event->response->getEncodingOptions() | JSON_UNESCAPED_UNICODE);
             }

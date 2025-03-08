@@ -277,8 +277,8 @@ class Discover
     {
         return new Collection(
             $this->recursive
-                ? $this->app->make('files')->allFiles($this->buildPath())
-                : $this->app->make('files')->files($this->buildPath())
+                ? $this->app->make(\Illuminate\Filesystem\Filesystem::class)->allFiles($this->buildPath())
+                : $this->app->make(\Illuminate\Filesystem\Filesystem::class)->files($this->buildPath())
         );
     }
 

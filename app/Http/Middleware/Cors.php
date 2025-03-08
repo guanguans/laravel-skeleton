@@ -19,7 +19,7 @@ class Cors
     {
         return tap($next($request), static function () use ($allowedOriginPatterns): void {
             if (class_exists(RequestHandled::class) && app()->bound('events')) {
-                app()->make('events')->listen(
+                app()->make(\Illuminate\Contracts\Events\Dispatcher::class)->listen(
                     RequestHandled::class,
                     static function (RequestHandled $event) use ($allowedOriginPatterns): void {
                         /**

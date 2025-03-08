@@ -137,12 +137,12 @@ class SchedulingEventMixin
                     };
 
                     config()->set('logging.channels.single.path', $outputPath);
-                    $unsetSingleChannelHandler->call(app('log'));
+                    $unsetSingleChannelHandler->call(app(\Psr\Log\LoggerInterface::class));
 
                     Log::channel('single')->info('>>>>>>>>');
 
                     config()->set('logging.channels.single.path', $singleLogPath);
-                    $unsetSingleChannelHandler->call(app('log'));
+                    $unsetSingleChannelHandler->call(app(\Psr\Log\LoggerInterface::class));
                 })
                 ->appendOutputTo($outputPath);
         };

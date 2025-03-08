@@ -79,7 +79,8 @@ class ExtendServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             OpenAI::class,
-            static fn (Application $application): OpenAI => new OpenAI($application['config']['services.openai'])
+            static fn (Application $application): OpenAI => new OpenAI($application->make(\Illuminate\Contracts\Config\Repository::class)
+                ->make('services.openai'))
         );
         $this->app->alias(OpenAI::class, 'openai');
     }
@@ -88,7 +89,8 @@ class ExtendServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             PushDeer::class,
-            static fn (Application $application): PushDeer => new PushDeer($application['config']['services.pushdeer'])
+            static fn (Application $application): PushDeer => new PushDeer($application->make(\Illuminate\Contracts\Config\Repository::class)
+                ->make('services.pushdeer'))
         );
         $this->app->alias(PushDeer::class, 'pushdeer');
     }

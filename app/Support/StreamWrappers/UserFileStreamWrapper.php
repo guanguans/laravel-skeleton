@@ -130,9 +130,7 @@ class UserFileStreamWrapper extends StreamWrapper
         switch ($castAs) {
             case STREAM_CAST_AS_STREAM:
             case STREAM_CAST_FOR_SELECT:
-                if (! \is_resource($this->handle)) {
-                    throw new \RuntimeException("Can't cast resource");
-                }
+                throw_unless(\is_resource($this->handle), new \RuntimeException("Can't cast resource"));
 
                 // @todo cast resource
                 // $this->stream_write('casted resource');

@@ -52,7 +52,7 @@ trait Cacheable
     public static function getCacheInstance(): CacheManager
     {
         if (! self::$cache instanceof CacheManager) {
-            self::$cache = app('cache');
+            self::$cache = app(\Illuminate\Contracts\Cache\Factory::class);
         }
 
         return self::$cache;
