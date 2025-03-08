@@ -1,6 +1,7 @@
 {
     "preset": "laravel",
     "rules": {
+        "blank_line_between_import_groups": false,
         "braces_position": {
             "allow_single_line_anonymous_functions": false,
             "allow_single_line_empty_anonymous_classes": false,
@@ -9,13 +10,6 @@
             "classes_opening_brace": "next_line_unless_newline_at_signature_end",
             "control_structures_opening_brace": "same_line",
             "functions_opening_brace": "next_line_unless_newline_at_signature_end"
-        },
-        "not_operator_with_successor_space": false,
-        "yoda_style": {
-            "always_move_variable": true,
-            "equal": true,
-            "identical": true,
-            "less_and_greater": true
         },
         "class_attributes_separation": {
             "elements": {
@@ -31,6 +25,16 @@
             "header": "Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>\n\nFor the full copyright and license information, please view\nthe LICENSE file that was distributed with this source code.\n\n@see https://github.com/guanguans/laravel-skeleton",
             "location": "after_declare_strict",
             "separate": "both"
+        },
+        "increment_style": {
+            "style": "pre"
+        },
+        "not_operator_with_successor_space": false,
+        "ordered_traits": {
+            "case_sensitive": true
+        },
+        "php_unit_method_casing": {
+            "case": "camel_case"
         },
         "phpdoc_align": {
             "align": "left",
@@ -92,31 +96,30 @@
             ],
             "skip_unlisted_annotations": false
         },
-        "increment_style": {
-            "style": "pre"
-        },
-        "blank_line_between_import_groups": false,
-        "ordered_traits": {
-            "case_sensitive": true
-        },
-        "php_unit_method_casing": {
-            "case": "camel_case"
+        "yoda_style": {
+            "always_move_variable": true,
+            "equal": true,
+            "identical": true,
+            "less_and_greater": true
         }
     },
     "exclude": [
+        ".build",
         ".github",
-        ".scribe",
+        ".phive",
+        ".stubs",
+        "docker",
         "docs",
-        "public",
+        "node_modules",
         "storage",
+        "stubs",
+        "tools",
         "vendor",
-        "vendor-bin",
-        "node_modules"
+        "vendor-bin"
     ],
     "notName": [
         "*.blade.php",
         ".phpstorm.meta.php",
-        "_ide_helper*.php",
         "_ide_helper.php",
         "_ide_helper_actions.php",
         "_ide_helper_models.php"

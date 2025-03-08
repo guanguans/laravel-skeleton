@@ -117,7 +117,7 @@ return Application::configure(basePath: \dirname(__DIR__))
 
         $middleware->redirectGuestsTo('/account/login');
         $middleware->redirectUsersTo(
-            fn (Request $request): string => $request->user()->isAdmin()
+            static fn (Request $request): string => $request->user()->isAdmin()
                 ? route('admin.dashboard')
                 : route('account.dashboard')
         );
@@ -136,10 +136,9 @@ return Application::configure(basePath: \dirname(__DIR__))
                 'private',
             ]));
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
+    ->withExceptions(static function (Exceptions $exceptions): void {
         // $exceptions->truncateRequestExceptionsAt(256);
         // $exceptions->dontTruncateRequestExceptions();
-
         // $exceptions->dontFlash([]);
         $exceptions->shouldRenderJsonWhen(static function (Request $request, Throwable $e): bool {
             if ($request->is('api/*')) {

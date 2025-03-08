@@ -62,13 +62,19 @@ use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__.'/app',
-        __DIR__.'/composer-updater',
-        __DIR__.'/config',
-        __DIR__.'/database',
-        __DIR__.'/routes',
-        __DIR__.'/tests',
+        __DIR__.'/actions/',
+        __DIR__.'/app/',
+        __DIR__.'/bootstrap/',
+        __DIR__.'/config/',
+        __DIR__.'/config-validation/',
+        __DIR__.'/database/',
+        __DIR__.'/public/',
+        __DIR__.'/resources/',
+        __DIR__.'/routes/',
+        __DIR__.'/tests/',
         ...glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
+        __DIR__.'/artisan',
+        __DIR__.'/artisan-runtime',
         __DIR__.'/composer-updater',
     ])
     ->withRootFiles()
@@ -81,11 +87,13 @@ return RectorConfig::configure()
         __DIR__.'/_ide_helper_models.php',
         __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
         __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
-        __DIR__.'/app/Support/Http',
+        __DIR__.'/app/Support/Http/',
+        __DIR__.'/bootstrap/cache/',
         __DIR__.'/database/migrations/2025_03_02_213337_create_settings_table.php',
         __DIR__.'/dcat_admin_ide_helper.php',
         __DIR__.'/deploy.example.php',
         __DIR__.'/deploy.php',
+        __DIR__.'/resources/lang/',
         __DIR__.'/tests/Feature/AuthTest.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
@@ -195,10 +203,10 @@ return RectorConfig::configure()
             __DIR__.'/app/Providers/AppServiceProvider.php',
         ],
         TimeFuncCallToCarbonRector::class => [
-            __DIR__.'/app/Support/StreamWrappers',
+            __DIR__.'/app/Support/StreamWrappers/',
         ],
         RemoveEmptyClassMethodRector::class => [
-            __DIR__.'/app/Support/StreamWrappers',
+            __DIR__.'/app/Support/StreamWrappers/',
         ],
         RemoveUnusedVariableInCatchRector::class => [
             __DIR__.'/app/Support/Mixins/CommandMixin.php',
@@ -215,19 +223,23 @@ return RectorConfig::configure()
             __DIR__.'/tests.php',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
-            __DIR__.'/app/Admin/Controllers',
-            __DIR__.'/app/Admin/Forms',
+            __DIR__.'/app/Admin/Controllers/',
+            __DIR__.'/app/Admin/Forms/',
             __DIR__.'/app/Support/helpers.php',
             __DIR__.'/routes/console.php',
-            __DIR__.'/tests',
+            __DIR__.'/tests/',
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,
         SortAssociativeArrayByKeyRector::class => [
-            __DIR__.'/app',
-            __DIR__.'/composer-updater',
-            __DIR__.'/config',
-            __DIR__.'/database',
-            __DIR__.'/routes',
-            __DIR__.'/tests',
+            __DIR__.'/actions/',
+            __DIR__.'/app/',
+            __DIR__.'/bootstrap/',
+            __DIR__.'/config/',
+            __DIR__.'/config-validation/',
+            __DIR__.'/database/',
+            __DIR__.'/public/',
+            __DIR__.'/resources/',
+            __DIR__.'/routes/',
+            __DIR__.'/tests/',
         ],
     ]);
