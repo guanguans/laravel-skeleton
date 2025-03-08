@@ -57,7 +57,6 @@ use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
 
-/** @noinspection PhpUnhandledExceptionInspection */
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/app',
@@ -75,7 +74,6 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         __DIR__.'/.phpstorm.meta.php',
-        __DIR__.'/_ide_helper*.php',
         __DIR__.'/_ide_helper.php',
         __DIR__.'/_ide_helper_models.php',
         __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',

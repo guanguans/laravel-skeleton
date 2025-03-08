@@ -76,11 +76,13 @@ class FindDumpStatementCommand extends Command
 
     private ?\SebastianBergmann\Timer\ResourceUsageFormatter $resourceUsageFormatter = null;
 
+    #[\Override]
     public function isEnabled(): bool
     {
         return ! $this->laravel->isProduction();
     }
 
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->checkOptions();
