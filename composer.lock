@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39180b33301d43c20134399cb1449cc4",
+    "content-hash": "f6671f454d22d56df35db7c42095a091",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -5160,12 +5160,12 @@
             "version": "v0.46.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/echolabsdev/prism.git",
+                "url": "https://github.com/prism-php/prism.git",
                 "reference": "87880f4f3db2b18847eb0982af893541600289d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/echolabsdev/prism/zipball/87880f4f3db2b18847eb0982af893541600289d7",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/87880f4f3db2b18847eb0982af893541600289d7",
                 "reference": "87880f4f3db2b18847eb0982af893541600289d7",
                 "shasum": ""
             },
@@ -5684,6 +5684,76 @@
             "time": "2025-01-07T10:31:33+00:00"
         },
         {
+            "name": "essa/api-tool-kit",
+            "version": "2.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ahmedesa/laravel-api-tool-kit.git",
+                "reference": "4b0c20efa47f7e67a38d4516dfdb819d8420c642"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ahmedesa/laravel-api-tool-kit/zipball/4b0c20efa47f7e67a38d4516dfdb819d8420c642",
+                "reference": "4b0c20efa47f7e67a38d4516dfdb819d8420c642",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/container": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/database": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/http": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "php": "^8.0|^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.6|^11.0",
+                "tightenco/duster": "^1.2||^2.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Essa\\APIToolKit\\APIToolKitServiceProvider",
+                        "Essa\\APIToolKit\\MacroServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Essa\\APIToolKit\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ahmed Esa",
+                    "email": "ahmedesa6120@gmail.com"
+                }
+            ],
+            "description": "set of tools to build an api with laravel",
+            "homepage": "https://github.com/ahmedesa/laravel-api-tool-kit",
+            "keywords": [
+                "api",
+                "api-generator",
+                "dynamic-pagination",
+                "filters",
+                "laravel",
+                "tools"
+            ],
+            "support": {
+                "issues": "https://github.com/ahmedesa/laravel-api-tool-kit/issues",
+                "source": "https://github.com/ahmedesa/laravel-api-tool-kit/tree/2.1.6"
+            },
+            "time": "2024-06-24T19:49:24+00:00"
+        },
+        {
             "name": "f9webltd/laravel-api-response-helpers",
             "version": "2.1.0",
             "source": {
@@ -6176,16 +6246,16 @@
         },
         {
             "name": "guanguans/laravel-api-response",
-            "version": "2.0.5",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-api-response.git",
-                "reference": "b9b4e2c0d868635491118a351fa1f1f78d52845d"
+                "reference": "3a57093a34608af4b605e63e7b797958d2497706"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/b9b4e2c0d868635491118a351fa1f1f78d52845d",
-                "reference": "b9b4e2c0d868635491118a351fa1f1f78d52845d",
+                "url": "https://api.github.com/repos/guanguans/laravel-api-response/zipball/3a57093a34608af4b605e63e7b797958d2497706",
+                "reference": "3a57093a34608af4b605e63e7b797958d2497706",
                 "shasum": ""
             },
             "require": {
@@ -6208,7 +6278,7 @@
                 "laravel/facade-documenter": "dev-main",
                 "maglnet/composer-require-checker": "^4.4",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^7.53 || ^8.0 || ^9.0 || ^10.0",
+                "orchestra/testbench": "^7.52 || ^8.0 || ^9.0 || ^10.0",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-laravel": "^1.4 || ^2.0 || ^3.0",
@@ -6218,7 +6288,6 @@
                 "phpstan/phpstan-webmozart-assert": "^2.0",
                 "povils/phpmnd": "^3.5",
                 "rector/rector": "^2.0",
-                "shipmonk/composer-dependency-analyser": "^1.8",
                 "shipmonk/phpstan-baseline-per-identifier": "^2.1",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
                 "spaze/phpstan-disallowed-calls": "^4.4",
@@ -6239,6 +6308,13 @@
                         "composer checks"
                     ]
                 },
+                "hyperf": {
+                    "plugin": {
+                        "sort-autoload": {
+                            "guanguans/ai-commit": -1
+                        }
+                    }
+                },
                 "laravel": {
                     "aliases": {
                         "ApiResponseFacade": "Guanguans\\LaravelApiResponse\\Facades\\ApiResponseFacade"
@@ -6251,13 +6327,6 @@
                     "bin-links": true,
                     "forward-command": true,
                     "target-directory": "vendor-bin"
-                },
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
-                },
-                "composer-normalize": {
-                    "indent-size": 4,
-                    "indent-style": "space"
                 }
             },
             "autoload": {
@@ -6307,7 +6376,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-03-08T09:46:53+00:00"
+            "time": "2025-03-03T12:10:41+00:00"
         },
         {
             "name": "guanguans/laravel-dump-sql",
@@ -30474,6 +30543,72 @@
             "time": "2016-06-20T20:53:12+00:00"
         },
         {
+            "name": "mrmarchone/laravel-auto-crud",
+            "version": "v1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mrmarchone/laravel-auto-crud.git",
+                "reference": "128d3f87d63eb1c8dc59400048d4d5515b97c6cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mrmarchone/laravel-auto-crud/zipball/128d3f87d63eb1c8dc59400048d4d5515b97c6cb",
+                "reference": "128d3f87d63eb1c8dc59400048d4d5515b97c6cb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "laravel/prompts": "*",
+                "php": ">=8.1",
+                "spatie/laravel-data": "*"
+            },
+            "require-dev": {
+                "laravel/pint": "*",
+                "mockery/mockery": "*",
+                "orchestra/testbench": "^9.9",
+                "pestphp/pest": "^3.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mrmarchone\\LaravelAutoCrud\\LaravelAutoCrudServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mrmarchone\\LaravelAutoCrud\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abdelrahman Muhammed",
+                    "email": "mrmarchone@gmail.com"
+                }
+            ],
+            "description": "Laravel Auto CRUD helps you streamline development and save time.",
+            "support": {
+                "issues": "https://github.com/mrmarchone/laravel-auto-crud/issues",
+                "source": "https://github.com/mrmarchone/laravel-auto-crud/tree/v1.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/mrmarchone",
+                    "type": "buy_me_a_coffee"
+                },
+                {
+                    "url": "https://github.com/mrmarchone",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-06T22:23:29+00:00"
+        },
+        {
             "name": "msamgan/laravel-env-keys-checker",
             "version": "v1.6.0",
             "source": {
@@ -31663,6 +31798,73 @@
                 }
             ],
             "time": "2024-05-28T05:56:58+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection",
+            "version": "6.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/Reflection.git",
+                "reference": "bb4dea805a645553d6d989b23dad9f8041f39502"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/Reflection/zipball/bb4dea805a645553d6d989b23dad9f8041f39502",
+                "reference": "bb4dea805a645553d6d989b23dad9f8041f39502",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "~4.18 || ^5.0",
+                "php": "8.1.*|8.2.*|8.3.*|8.4.*",
+                "phpdocumentor/reflection-common": "^2.1",
+                "phpdocumentor/reflection-docblock": "^5",
+                "phpdocumentor/type-resolver": "^1.2",
+                "symfony/polyfill-php80": "^1.28",
+                "webmozart/assert": "^1.7"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "doctrine/coding-standard": "^12.0",
+                "mikey179/vfsstream": "~1.2",
+                "mockery/mockery": "~1.6.0",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^1.8",
+                "phpstan/phpstan-webmozart-assert": "^1.2",
+                "phpunit/phpunit": "^10.0",
+                "psalm/phar": "^5.24",
+                "rector/rector": "^1.0.0",
+                "squizlabs/php_codesniffer": "^3.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-5.x": "5.3.x-dev",
+                    "dev-6.x": "6.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\": "src/phpDocumentor"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Reflection library to do Static Analysis for PHP Projects",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/phpDocumentor/Reflection/issues",
+                "source": "https://github.com/phpDocumentor/Reflection/tree/6.1.0"
+            },
+            "time": "2024-11-22T15:11:54+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -35601,6 +35803,88 @@
                 }
             ],
             "time": "2025-02-21T14:31:39+00:00"
+        },
+        {
+            "name": "spatie/laravel-data",
+            "version": "4.13.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-data.git",
+                "reference": "bd060f6d47ad4a3fac1f92162d76bfd9975b10ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/bd060f6d47ad4a3fac1f92162d76bfd9975b10ca",
+                "reference": "bd060f6d47ad4a3fac1f92162d76bfd9975b10ca",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "php": "^8.1",
+                "phpdocumentor/reflection": "^6.0",
+                "spatie/laravel-package-tools": "^1.9.0",
+                "spatie/php-structure-discoverer": "^2.0"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.14",
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "livewire/livewire": "^3.0",
+                "mockery/mockery": "^1.6",
+                "nesbot/carbon": "^2.63|^3.0",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "pestphp/pest": "^2.31|^3.0",
+                "pestphp/pest-plugin-laravel": "^2.0|^3.0",
+                "pestphp/pest-plugin-livewire": "^2.1|^3.0",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/extension-installer": "^1.1",
+                "phpunit/phpunit": "^10.0|^11.0|^12.0",
+                "spatie/invade": "^1.0",
+                "spatie/laravel-typescript-transformer": "^2.5",
+                "spatie/pest-plugin-snapshots": "^2.1",
+                "spatie/test-time": "^1.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelData\\LaravelDataServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelData\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben Van Assche",
+                    "email": "ruben@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create unified resources and data transfer objects",
+            "homepage": "https://github.com/spatie/laravel-data",
+            "keywords": [
+                "laravel",
+                "laravel-data",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-data/issues",
+                "source": "https://github.com/spatie/laravel-data/tree/4.13.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-03T09:59:10+00:00"
         },
         {
             "name": "spatie/laravel-error-solutions",
