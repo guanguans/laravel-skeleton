@@ -57,6 +57,7 @@
         "ergebnis/classy": "^1.7",
         "essa/api-tool-kit": "^2.1",
         "f9webltd/laravel-api-response-helpers": "^2.1",
+        "genealabs/laravel-caffeine": "^12.0",
         "glorand/laravel-model-settings": "^8.0",
         "gmponos/guzzle_logger": "^2.2",
         "grosv/laravel-passwordless-login": "^1.10",

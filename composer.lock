@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6671f454d22d56df35db7c42095a091",
+    "content-hash": "ec773f5cfcbb98e68a2252e2c03f5c8c",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -5934,6 +5934,68 @@
             "time": "2023-10-12T05:21:21+00:00"
         },
         {
+            "name": "genealabs/laravel-caffeine",
+            "version": "12.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikebronner/laravel-caffeine.git",
+                "reference": "e654eaf072e2ee0097d642d0ce50d7be6e45d92f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikebronner/laravel-caffeine/zipball/e654eaf072e2ee0097d642d0ce50d7be6e45d92f",
+                "reference": "e654eaf072e2ee0097d642d0ce50d7be6e45d92f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "jenssegers/model": "^1.5"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "orchestra/testbench-browser-kit": "^8.0|^9.1",
+                "orchestra/testbench-dusk": "^8.0|^9.12",
+                "phpmd/phpmd": "^2.13",
+                "phpunit/phpunit": "^10.0|^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "GeneaLabs\\LaravelCaffeine\\Providers\\Service"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GeneaLabs\\LaravelCaffeine\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bronner",
+                    "email": "hello@genealabs.com"
+                }
+            ],
+            "description": "Keeping Your Laravel Forms Awake",
+            "support": {
+                "issues": "https://github.com/mikebronner/laravel-caffeine/issues",
+                "source": "https://github.com/mikebronner/laravel-caffeine/tree/12.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mikebronner",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-12T00:03:30+00:00"
+        },
+        {
             "name": "geoip2/geoip2",
             "version": "v3.1.0",
             "source": {
@@ -8300,6 +8362,57 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
+        },
+        {
+            "name": "jenssegers/model",
+            "version": "v1.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/model.git",
+                "reference": "8a81b2e6fdd49fa0372fb56c62e23de13bf0d623"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/model/zipball/8a81b2e6fdd49fa0372fb56c62e23de13bf0d623",
+                "reference": "8a81b2e6fdd49fa0372fb56c62e23de13bf0d623",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Model\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "An Laravel eloquent-like model class, for Laravel and other frameworks",
+            "homepage": "https://github.com/jenssegers/model",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "model"
+            ],
+            "support": {
+                "issues": "https://github.com/jenssegers/model/issues",
+                "source": "https://github.com/jenssegers/model/tree/v1.5.3"
+            },
+            "time": "2024-07-25T12:44:26+00:00"
         },
         {
             "name": "jiannei/laravel-response",
