@@ -11,6 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -137,10 +138,13 @@ return Application::configure(basePath: \dirname(__DIR__))
             ]));
     })
     ->withExceptions(static function (Exceptions $exceptions): void {
+        $exceptions->report(static function (QueryException $queryException): void {
+            // dump($queryException->getRawSql());
+        });
         // $exceptions->truncateRequestExceptionsAt(256);
         // $exceptions->dontTruncateRequestExceptions();
         // $exceptions->dontFlash([]);
-        $exceptions->shouldRenderJsonWhen(static function (Request $request, Throwable $e): bool {
+        $exceptions->shouldRenderJsonWhen(static function (Request $request, Throwable $throwable): bool {
             if ($request->is('api/*')) {
                 return true;
             }
