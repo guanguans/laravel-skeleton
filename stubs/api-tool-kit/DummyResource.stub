@@ -1,0 +1,18 @@
+<?php
+
+namespace {{DummyResourceNameSpace}};
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class {{DummyResource}} extends JsonResource
+{
+    public function toArray($request): array
+    {
+        return [
+            'id' => $this->id,
+            {{resourceContent}}
+            'created_at' => dateTimeFormat($this->created_at),
+            'updated_at' => dateTimeFormat($this->updated_at),
+        ];
+    }
+}

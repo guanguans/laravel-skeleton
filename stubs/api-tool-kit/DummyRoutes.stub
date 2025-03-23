@@ -1,0 +1,14 @@
+
+/*===========================
+=           {{dummies}}           =
+=============================*/
+
+Route::apiResource('/{{dummies}}', \{{DummyControllerWithNameSpace}}::class);
+@if('soft-delete')
+Route::group([
+   'prefix' => '{{dummies}}',
+], function() {
+    Route::get('{id}/restore', [\{{DummyControllerWithNameSpace}}::class, 'restore']);
+    Route::delete('{id}/permanent-delete', [\{{DummyControllerWithNameSpace}}::class, 'permanentDelete']);
+});@endif('soft-delete')
+/*=====  End of {{dummies}}   ======*/

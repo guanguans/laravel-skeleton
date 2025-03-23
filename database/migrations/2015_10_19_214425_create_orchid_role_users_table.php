@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -21,7 +19,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('role_users', static function (Blueprint $table): void {
+        Schema::create('role_users', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedInteger('role_id');
             $table->primary(['user_id', 'role_id']);

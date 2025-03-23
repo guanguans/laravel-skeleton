@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,6 +10,7 @@ declare(strict_types=1);
  */
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Image Driver
@@ -27,7 +26,7 @@ return [
     'driver' => env('IMAGE_DRIVER', 'gd'),
 
     // Initial generator class
-    'generator' => Laravolt\Avatar\Generator\DefaultGenerator::class,
+    'generator' => \Laravolt\Avatar\Generator\DefaultGenerator::class,
 
     // Whether all characters supplied must be replaced with their closest ASCII counterparts
     'ascii' => false,

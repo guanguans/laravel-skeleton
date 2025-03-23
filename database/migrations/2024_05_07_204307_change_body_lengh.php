@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -21,7 +19,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('sent_emails', static function (Blueprint $table): void {
+        Schema::table('sent_emails', function (Blueprint $table) {
             $table->longText('body')->change();
         });
     }
@@ -31,7 +29,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('sent_emails', static function (Blueprint $table): void {
+        Schema::table('sent_emails', function (Blueprint $table) {
             $table->text('body')->change();
         });
     }

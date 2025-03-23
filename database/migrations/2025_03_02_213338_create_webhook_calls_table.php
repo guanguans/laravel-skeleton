@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -16,15 +14,17 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up(): void
+    public function up()
     {
-        Schema::create('webhook_calls', static function (Blueprint $table): void {
+        Schema::create('webhook_calls', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->string('name');
             $table->string('url');
             $table->json('headers')->nullable();
             $table->json('payload')->nullable();
             $table->text('exception')->nullable();
+
             $table->timestamps();
         });
     }

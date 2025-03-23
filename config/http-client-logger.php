@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -22,7 +20,7 @@ return [
     | but remember that it must implement the HttpLoggingFilterInterface.
     |
     */
-    'filter' => Bilfeldt\LaravelHttpClientLogger\HttpLoggingFilter::class,
+    'filter' => \Bilfeldt\LaravelHttpClientLogger\HttpLoggingFilter::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +65,7 @@ return [
     | but remember that it must implement the HttpLoggerInterface.
     |
     */
-    'logger' => Bilfeldt\LaravelHttpClientLogger\HttpLogger::class,
+    'logger' => \Bilfeldt\LaravelHttpClientLogger\HttpLogger::class,
 
     /*
     |--------------------------------------------------------------------------

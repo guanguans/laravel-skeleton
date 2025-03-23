@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -15,6 +13,7 @@ use Laravel\Telescope\Http\Middleware\Authorize;
 use Laravel\Telescope\Watchers;
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Telescope Master Switch
@@ -88,6 +87,7 @@ return [
     'queue' => [
         'connection' => env('TELESCOPE_QUEUE_CONNECTION', null),
         'queue' => env('TELESCOPE_QUEUE', null),
+        'delay' => env('TELESCOPE_QUEUE_DELAY', 10),
     ],
 
     /*
@@ -128,6 +128,7 @@ return [
     ],
 
     'ignore_commands' => [
+        //
     ],
 
     /*

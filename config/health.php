@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -117,6 +115,24 @@ return [
     ],
 
     /*
+     * You can specify a heartbeat URL for the Horizon check.
+     * This URL will be pinged if the Horizon check is successful.
+     * This way you can get notified if Horizon goes down.
+     */
+    'horizon' => [
+        'heartbeat_url' => env('HORIZON_HEARTBEAT_URL', null),
+    ],
+
+    /*
+     * You can specify a heartbeat URL for the Schedule check.
+     * This URL will be pinged if the Schedule check is successful.
+     * This way you can get notified if the schedule fails to run.
+     */
+    'schedule' => [
+        'heartbeat_url' => env('SCHEDULE_HEARTBEAT_URL', null),
+    ],
+
+    /*
      * You can set a theme for the local results page
      *
      * - light: light mode
@@ -129,4 +145,10 @@ return [
      * in Horizon's silenced jobs screen.
      */
     'silence_health_queue_job' => true,
+
+    /*
+     * The response code to use for HealthCheckJsonResultsController when a health
+     * check has failed
+     */
+    'json_results_failure_status' => 200,
 ];

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -22,7 +20,6 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
     /**
      * Bootstrap any application services.
      */
-    #[\Override]
     public function boot(): void
     {
         parent::boot();
@@ -37,10 +34,12 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
      *
      * This gate determines who can access Horizon in non-local environments.
      */
-    #[\Override]
     protected function gate(): void
     {
-        Gate::define('viewHorizon', static fn ($user): bool => \in_array($user->email, [
-        ], true));
+        Gate::define('viewHorizon', function ($user) {
+            return in_array($user->email, [
+                //
+            ]);
+        });
     }
 }

@@ -1,0 +1,15 @@
+<?php
+
+namespace {{DummyCreateRequestNameSpace}};
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class {{DummyCreateRequest}} extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            {{createValidationRules}}
+        ];
+    }
+}

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -18,13 +16,14 @@ use Spatie\Health\Models\HealthCheckResultHistoryItem;
 use Spatie\Health\ResultStores\EloquentHealthResultStore;
 
 return new class extends Migration {
-    public function up(): void
+    public function up()
     {
         $connection = (new HealthCheckResultHistoryItem)->getConnectionName();
         $tableName = EloquentHealthResultStore::getHistoryItemInstance()->getTable();
 
-        Schema::connection($connection)->create($tableName, static function (Blueprint $table): void {
+        Schema::connection($connection)->create($tableName, function (Blueprint $table) {
             $table->id();
+
             $table->string('check_name');
             $table->string('check_label');
             $table->string('status');
@@ -33,10 +32,11 @@ return new class extends Migration {
             $table->json('meta');
             $table->timestamp('ended_at');
             $table->uuid('batch');
+
             $table->timestamps();
         });
 
-        Schema::connection($connection)->table($tableName, static function (Blueprint $table): void {
+        Schema::connection($connection)->table($tableName, function (Blueprint $table) {
             $table->index('created_at');
             $table->index('batch');
         });

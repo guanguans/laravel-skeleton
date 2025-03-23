@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,17 +10,23 @@ declare(strict_types=1);
  */
 
 return [
+
+    /*
+     * Determine if the http-logger middleware should be enabled.
+     */
+    'enabled' => env('HTTP_LOGGER_ENABLED', true),
+
     /*
      * The log profile which determines whether a request should be logged.
      * It should implement `LogProfile`.
      */
-    'log_profile' => Spatie\HttpLogger\LogNonGetRequests::class,
+    'log_profile' => \Spatie\HttpLogger\LogNonGetRequests::class,
 
     /*
      * The log writer used to write the request to a log.
      * It should implement `LogWriter`.
      */
-    'log_writer' => Spatie\HttpLogger\DefaultLogWriter::class,
+    'log_writer' => \Spatie\HttpLogger\DefaultLogWriter::class,
 
     /*
      * The log channel used to write the request.

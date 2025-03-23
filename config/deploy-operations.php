@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -39,7 +37,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Database Transations
+    | Database Transactions
     |--------------------------------------------------------------------------
     |
     | This setting defines the rules for working with database transactions.
@@ -133,5 +131,28 @@ return [
         */
 
         'name' => env('DEPLOY_OPERATIONS_QUEUE_NAME'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Show
+    |--------------------------------------------------------------------------
+    |
+    | This option determines the display settings for various information messages.
+    |
+    */
+
+    'show' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Full Path
+        |--------------------------------------------------------------------------
+        |
+        | This parameter determines how exactly the link to the created file should
+        | be displayed - the full path to the file or a relative one.
+        |
+        */
+
+        'full_path' => env('DEPLOY_OPERATIONS_SHOW_FULL_PATH', false),
     ],
 ];

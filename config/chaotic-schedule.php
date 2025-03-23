@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,7 +10,9 @@ declare(strict_types=1);
  */
 
 return [
+
     'rng_engine' => [
         'active_engine_slug' => 'seed-spring',
     ],
+
 ];

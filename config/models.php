@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,6 +10,7 @@ declare(strict_types=1);
  */
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Default Configurations
@@ -23,6 +22,7 @@ return [
     */
 
     '*' => [
+
         /*
         |--------------------------------------------------------------------------
         | Model Files Location
@@ -351,6 +351,7 @@ return [
         */
 
         'model_names' => [
+
         ],
 
         /*
@@ -404,6 +405,19 @@ return [
         'with_property_constants' => false,
 
         /*
+         |--------------------------------------------------------------------------
+         | Optionally includes a full list of columns in the base generated models,
+         | which can be used to avoid making calls like
+         |
+         | ...
+         | \Illuminate\Support\Facades\Schema::getColumnListing
+         | ...
+         |
+         | which can be slow, especially for large tables.
+         */
+        'with_column_list' => false,
+
+        /*
         |--------------------------------------------------------------------------
         | Disable Pluralization Name
         |--------------------------------------------------------------------------
@@ -422,6 +436,7 @@ return [
         |
         */
         'override_pluralize_for' => [
+
         ],
 
         /*

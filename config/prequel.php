@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,6 +10,7 @@ declare(strict_types=1);
  */
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Prequel Master Switch : boolean
@@ -47,18 +46,6 @@ return [
     */
 
     'path' => 'prequel',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Prequel base url
-    |--------------------------------------------------------------------------
-    |
-    | When present, this URL will be used instead of the default url.
-    | This should be a complete url excluding tailing slash.
-    | Example: 'https://protoqol.nl'
-    |
-    */
-    'baseUrl' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +96,6 @@ return [
         'database' => env('DB_DATABASE', 'homestead'),
         'username' => env('DB_USERNAME', 'homestead'),
         'password' => env('DB_PASSWORD', 'secret'),
-        'socket' => env('DB_SOCKET', ''),
     ],
 
     /*

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,6 +10,7 @@ declare(strict_types=1);
  */
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Enable logging
@@ -90,12 +89,10 @@ return [
     |
     */
     'format' => [
-        'request' => env(
-            'HTTP_CLIENT_GLOBAL_LOGGER_REQUEST_FORMAT',
+        'request' => env('HTTP_CLIENT_GLOBAL_LOGGER_REQUEST_FORMAT',
             "REQUEST: {method} {uri}\r\n{req_headers}\r\n{req_body}"
         ),
-        'response' => env(
-            'HTTP_CLIENT_GLOBAL_LOGGER_RESPONSE_FORMAT',
+        'response' => env('HTTP_CLIENT_GLOBAL_LOGGER_RESPONSE_FORMAT',
             "RESPONSE: HTTP/{version} {code} {phrase}\r\n{res_headers}\r\n{res_body}\r\n"
         ),
     ],
@@ -130,6 +127,9 @@ return [
     |
     | NOTE the leading comma in trim_response_body.content_type_whitelist default value:
     | it's there to whitelist empty content types (e.g. when no Content-Type header is set).
+    |
+    | The content type whitelisting can be ignored by setting the following header in the
+    | request: X-Global-Logger-Trim-Always (set it to any value, e.g. 'true').
     */
     'trim_response_body' => [
         'enabled' => env('HTTP_CLIENT_GLOBAL_LOGGER_TRIM_RESPONSE_BODY_ENABLED', false),

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -13,7 +11,7 @@ declare(strict_types=1);
 
 return [
     /**
-     * In MySQL for instance there is no nativ boolean data type.
+     * In MySQL for instance there is no native boolean data type.
      * Laravel creates a tinyint(1) if you migrate a boolean.
      * Switch this off if you want an actual tinyint
      * validation rule to be generated...
@@ -27,7 +25,8 @@ return [
     'string_min_length' => env('SCHEMA_RULES_STRING_MIN_LENGTH', 1),
 
     /**
-     * Always skip this columns.
+     * Always skip these columns
      */
     'skip_columns' => ['created_at', 'updated_at', 'deleted_at'],
+
 ];

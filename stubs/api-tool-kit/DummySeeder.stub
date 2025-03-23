@@ -1,0 +1,19 @@
+<?php
+
+namespace {{DummySeederNameSpace}};
+
+use {{DummyModelWithNameSpace}};
+use Illuminate\Database\Seeder;
+
+class {{DummySeeder}} extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run(): void
+    {
+        {{DummyModel}}::factory(10)->create();
+    }
+}

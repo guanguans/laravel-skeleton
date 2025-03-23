@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,6 +10,7 @@ declare(strict_types=1);
  */
 
 return [
+
     /*
      |--------------------------------------------------------------------------
      | Sub-Domain Routing
@@ -21,12 +20,12 @@ return [
      | can be utilized to prevent dashboard internal routes from being registered
      | on subdomains that do not require access to your admin application.
      |
-     | For instance, you can use the admin dashboard on a separate subdomain like
+     | For instance, you can use the 'admin' on a separate subdomain like
      | 'admin.example.com'.
      |
      */
 
-    'domain' => env('DASHBOARD_DOMAIN', null),
+    'domain' => env('PLATFORM_DOMAIN'),
 
     /*
      |--------------------------------------------------------------------------
@@ -39,7 +38,7 @@ return [
      |
      */
 
-    'prefix' => env('DASHBOARD_PREFIX', '/admin'),
+    'prefix' => env('PLATFORM_PREFIX', '/admin'),
 
     /*
      |--------------------------------------------------------------------------
@@ -195,8 +194,8 @@ return [
      */
 
     'attachment' => [
-        'disk' => env('DASHBOARD_FILESYSTEM_DISK', 'public'),
-        'generator' => Orchid\Attachment\Engines\Generator::class,
+        'disk' => env('PLATFORM_FILESYSTEM_DISK', 'public'),
+        'generator' => \Orchid\Attachment\Engines\Generator::class,
     ],
 
     /*
@@ -213,7 +212,7 @@ return [
      */
 
     'icons' => [
-        'bs' => Orchid\Support\BootstrapIconsPath::getFolder(),
+        'bs' => \Orchid\Support\BootstrapIconsPath::getFolder(),
     ],
 
     /*
@@ -271,6 +270,9 @@ return [
 
     'turbo' => [
         'cache' => true,
+        'prefetch' => true,
+        'refresh-method' => 'replace',
+        'refresh-scroll' => 'reset',
     ],
 
     /*
@@ -326,5 +328,6 @@ return [
      |
      */
 
-    'provider' => App\Orchid\PlatformProvider::class,
+    'provider' => \App\Orchid\PlatformProvider::class,
+
 ];

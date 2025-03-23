@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -11,108 +13,136 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use Guanguans\LaravelExceptionNotify\Collectors\ApplicationCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\ChoreCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\ExceptionContextCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\ExceptionTraceCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\RequestFileCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\RequestHeaderCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\RequestPostCollector;
+use Guanguans\LaravelExceptionNotify\Collectors\RequestQueryCollector;
 use Guanguans\LaravelExceptionNotify\Pipes\AddKeywordChorePipe;
 use Guanguans\LaravelExceptionNotify\Pipes\LimitLengthPipe;
 use Guanguans\LaravelExceptionNotify\Pipes\SprintfHtmlPipe;
 use Guanguans\LaravelExceptionNotify\Pipes\SprintfMarkdownPipe;
+use Guanguans\LaravelExceptionNotify\Template;
+use function Guanguans\LaravelExceptionNotify\Support\env_explode;
 
 return [
     /**
-     * Enable or disable exception notify.
+     * The switch of auto report exception.
      */
     'enabled' => (bool) env('EXCEPTION_NOTIFY_ENABLED', true),
 
     /**
-     * The list of environments that should be reported.
+     * The list of environment that report exception.
      */
-    'envs' => env_explode('EXCEPTION_NOTIFY_ENVS', [
-        // 'production',
+    'environments' => env_explode('EXCEPTION_NOTIFY_ENVIRONMENTS', [
         // 'local',
+        // 'production',
         // 'testing',
         '*',
     ]),
 
     /**
-     * The rate limit of same exception.
+     * The rate limiter of report same exception.
      */
-    'rate_limit' => [
-        'cache_store' => env('EXCEPTION_NOTIFY_RATE_LIMIT_CACHE_STORE', config('cache.default')),
-        'key_prefix' => env('EXCEPTION_NOTIFY_RATE_LIMIT_KEY_PREFIX', 'exception_notify_'),
-        'max_attempts' => (int) env('EXCEPTION_NOTIFY_RATE_LIMIT_MAX_ATTEMPTS', config('app.debug') ? 50 : 1),
-        'decay_seconds' => (int) env('EXCEPTION_NOTIFY_RATE_LIMIT_DECAY_SECONDS', 300),
+    'rate_limiter' => [
+        'cache_store' => env('EXCEPTION_NOTIFY_RATE_LIMITER_CACHE_STORE'),
+        'key_prefix' => env('EXCEPTION_NOTIFY_RATE_LIMITER_KEY_PREFIX', 'exception-notify:rate-limiter:'),
+        'max_attempts' => (int) env('EXCEPTION_NOTIFY_RATE_LIMITER_MAX_ATTEMPTS', config('app.debug') ? \PHP_INT_MAX : 1),
+        'decay_seconds' => (int) env('EXCEPTION_NOTIFY_RATE_LIMITER_DECAY_SECONDS', 300),
     ],
 
     /**
-     * The options of report exception job.
+     * The job of report exception.
      */
     'job' => [
-        'connection' => env('EXCEPTION_NOTIFY_JOB_CONNECTION', config('queue.default')),
+        'connection' => env('EXCEPTION_NOTIFY_JOB_CONNECTION'),
         'queue' => env('EXCEPTION_NOTIFY_JOB_QUEUE'),
     ],
 
     /**
-     * The title of exception notification report.
+     * The list of collector that report exception.
+     */
+    'collectors' => [
+        ApplicationCollector::class,
+        ChoreCollector::class,
+        RequestBasicCollector::class,
+        ExceptionBasicCollector::class,
+        ExceptionContextCollector::class,
+        ExceptionTraceCollector::class,
+        // RequestHeaderCollector::class,
+        // RequestQueryCollector::class,
+        // RequestPostCollector::class,
+        // RequestFileCollector::class,
+    ],
+
+    /**
+     * The title of report exception.
      */
     'title' => env('EXCEPTION_NOTIFY_TITLE', \sprintf('The %s application exception report', config('app.name'))),
 
     /**
-     * The list of collector.
+     * The default channel of report exception.
      */
-    'collectors' => [
-        Guanguans\LaravelExceptionNotify\Collectors\ApplicationCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\PhpInfoCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ChoreCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ExceptionBasicCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ExceptionContextCollector::class,
-        Guanguans\LaravelExceptionNotify\Collectors\ExceptionTraceCollector::class,
-
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestCookieCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestSessionCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestMiddlewareCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestServerCollector::class,
-
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestHeaderCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestQueryCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestPostCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestFileCollector::class,
-        // Guanguans\LaravelExceptionNotify\Collectors\RequestRawFileCollector::class,
-    ],
+    'default' => env('EXCEPTION_NOTIFY_CHANNEL', 'stack'),
 
     /**
-     * The default reported channels.
-     */
-    'defaults' => env_explode('EXCEPTION_NOTIFY_DEFAULTS', [
-        'log',
-    ]),
-
-    /**
-     * The list of channels.
+     * The list of channel that report exception.
      */
     'channels' => [
         /**
-         * @see \Symfony\Component\VarDumper\VarDumper::dump()
+         * @see \Guanguans\LaravelExceptionNotify\Channels\StackChannel
+         */
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => env_explode('EXCEPTION_NOTIFY_STACK_CHANNELS', [
+                // 'dump',
+                'log',
+                // 'mail',
+                // 'bark',
+                // 'chanify',
+                // 'dingTalk',
+                // 'discord',
+                // 'lark',
+                // 'ntfy',
+                // 'pushDeer',
+                // 'slack',
+                // 'telegram',
+                // 'weWork',
+            ]),
+        ],
+
+        /**
+         * @see \Guanguans\LaravelExceptionNotify\Channels\DumpChannel
          */
         'dump' => [
             'driver' => 'dump',
+            'exit' => env('EXCEPTION_NOTIFY_DUMP_EXIT', false),
         ],
 
         /**
-         * @see \Illuminate\Log\LogManager
+         * @see \Guanguans\LaravelExceptionNotify\Channels\LogChannel
          */
         'log' => [
             'driver' => 'log',
-            'channel' => null,
+            'channel' => env('EXCEPTION_NOTIFY_LOG_CHANNEL'),
+            'level' => env('EXCEPTION_NOTIFY_LOG_LEVEL', 'error'),
         ],
 
         /**
-         * @see \Illuminate\Mail\MailManager
+         * @see \Guanguans\LaravelExceptionNotify\Channels\MailChannel
          */
         'mail' => [
             'driver' => 'mail',
-            'mailer' => null,
+            'mailer' => env('EXCEPTION_NOTIFY_MAIL_MAILER'),
+            'title' => Template::TITLE,
+            'content' => Template::CONTENT,
             'to' => [
-                'users' => env_explode('EXCEPTION_NOTIFY_MAIL_TO_USERS', [
+                'address' => env_explode('EXCEPTION_NOTIFY_MAIL_TO_ADDRESS', [
                     'your@example.mail',
                 ]),
             ],
@@ -121,18 +151,19 @@ return [
             ],
         ],
 
-        // /**
-        //  * @see https://github.com/guanguans/notify#platform-support
-        //  */
+        /**
+         * @see \Guanguans\LaravelExceptionNotify\Channels\NotifyChannel
+         * @see https://github.com/guanguans/notify
+         */
         // 'foo' => [
         //     'driver' => 'notify',
         //     'authenticator' => [
-        //         'class' => \Guanguans\Notify\Foo\Authenticator::class,
+        //         'class' => Guanguans\Notify\Foo\Authenticator::class,
         //         'parameter1' => '...',
         //         // ...
         //     ],
         //     'client' => [
-        //         'class' => \Guanguans\Notify\Foo\Client::class,
+        //         'class' => Guanguans\Notify\Foo\Client::class,
         //         'http_options' => [],
         //         'extender' => static fn (Guanguans\Notify\Foundation\Client $client) => $client->push(
         //             GuzzleHttp\Middleware::log(
@@ -143,12 +174,14 @@ return [
         //         ),
         //     ],
         //     'message' => [
-        //         'class' => \Guanguans\Notify\Foo\Messages\Message::class,
-        //         'title' => '{report}',
-        //         'content' => '{report}',
+        //         'class' => Guanguans\Notify\Foo\Messages\Message::class,
+        //         'options' => [
+        //             'title' => Template::CONTENT,
+        //             'content' => Template::CONTENT,
+        //         ],
         //     ],
         //     'pipes' => [
-        //         hydrate_pipe(LimitLengthPipe::class, 1024),
+        //         LimitLengthPipe::with(1024),
         //     ],
         // ],
 
@@ -163,11 +196,13 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\Bark\Messages\Message::class,
-                'title' => '{title}',
-                'body' => '{report}',
+                'options' => [
+                    'title' => Template::TITLE,
+                    'body' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
-                hydrate_pipe(LimitLengthPipe::class, 4096),
+                LimitLengthPipe::with(4096),
             ],
         ],
 
@@ -182,11 +217,13 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\Chanify\Messages\TextMessage::class,
-                'title' => '{title}',
-                'text' => '{report}',
+                'options' => [
+                    'title' => Template::TITLE,
+                    'text' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
-                hydrate_pipe(LimitLengthPipe::class, 1024),
+                LimitLengthPipe::with(1024),
             ],
         ],
 
@@ -202,13 +239,15 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\DingTalk\Messages\MarkdownMessage::class,
-                'title' => '{title}',
-                'text' => '{report}',
+                'options' => [
+                    'title' => Template::TITLE,
+                    'text' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
-                hydrate_pipe(AddKeywordChorePipe::class, env('EXCEPTION_NOTIFY_DINGTALK_KEYWORD')),
+                AddKeywordChorePipe::with(env('EXCEPTION_NOTIFY_DINGTALK_KEYWORD')),
                 SprintfMarkdownPipe::class,
-                hydrate_pipe(LimitLengthPipe::class, 20000),
+                LimitLengthPipe::with(20000),
             ],
         ],
 
@@ -223,10 +262,12 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\Discord\Messages\Message::class,
-                'content' => '{report}',
+                'options' => [
+                    'content' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
-                hydrate_pipe(LimitLengthPipe::class, 2000),
+                LimitLengthPipe::with(2000),
             ],
         ],
 
@@ -242,33 +283,36 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\Lark\Messages\TextMessage::class,
-                'text' => '{report}',
+                'options' => [
+                    'text' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
-                hydrate_pipe(AddKeywordChorePipe::class, env('EXCEPTION_NOTIFY_LARK_KEYWORD')),
-                hydrate_pipe(LimitLengthPipe::class, 30720),
+                AddKeywordChorePipe::with(env('EXCEPTION_NOTIFY_LARK_KEYWORD')),
+                LimitLengthPipe::with(30720),
             ],
         ],
 
         'ntfy' => [
             'driver' => 'notify',
             'authenticator' => [
-                'class' => Guanguans\Notify\Foundation\Authenticators\NullAuthenticator::class,
-                // 'class' => \Guanguans\Notify\Ntfy\Authenticator::class,
-                // 'usernameOrToken' => env('EXCEPTION_NOTIFY_NTFY_USERNAMEORTOKEN', ''),
-                // 'password' => env('EXCEPTION_NOTIFY_NTFY_PASSWORD', ''),
+                'class' => Guanguans\Notify\Ntfy\Authenticator::class,
+                'usernameOrToken' => env('EXCEPTION_NOTIFY_NTFY_USERNAMEORTOKEN'),
+                'password' => env('EXCEPTION_NOTIFY_NTFY_PASSWORD'),
             ],
             'client' => [
                 'class' => Guanguans\Notify\Ntfy\Client::class,
             ],
             'message' => [
                 'class' => Guanguans\Notify\Ntfy\Messages\Message::class,
-                'topic' => env('EXCEPTION_NOTIFY_NTFY_TOPIC', 'laravel-exception-notify'),
-                'title' => '{title}',
-                'message' => '{report}',
+                'options' => [
+                    'topic' => env('EXCEPTION_NOTIFY_NTFY_TOPIC', 'laravel-exception-notify'),
+                    'title' => Template::TITLE,
+                    'message' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
-                hydrate_pipe(LimitLengthPipe::class, 4096),
+                LimitLengthPipe::with(4096),
             ],
         ],
 
@@ -283,13 +327,15 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\PushDeer\Messages\Message::class,
-                'type' => 'markdown',
-                'text' => '{title}',
-                'desp' => '{report}',
+                'options' => [
+                    'type' => 'markdown',
+                    'text' => Template::TITLE,
+                    'desp' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
                 SprintfMarkdownPipe::class,
-                // hydrate_pipe(LimitLengthPipe::class, 4096),
+                // LimitLengthPipe::with(4096),
             ],
         ],
 
@@ -304,12 +350,14 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\Slack\Messages\Message::class,
-                'mrkdwn' => true,
-                'text' => '{report}',
+                'options' => [
+                    'mrkdwn' => true,
+                    'text' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
                 SprintfMarkdownPipe::class,
-                // hydrate_pipe(LimitLengthPipe::class, 10240),
+                // LimitLengthPipe::with(10240),
             ],
         ],
 
@@ -324,11 +372,13 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\Telegram\Messages\TextMessage::class,
-                'chat_id' => env('EXCEPTION_NOTIFY_TELEGRAM_CHAT_ID'),
-                'text' => '{report}',
+                'options' => [
+                    'chat_id' => env('EXCEPTION_NOTIFY_TELEGRAM_CHAT_ID'),
+                    'text' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
-                hydrate_pipe(LimitLengthPipe::class, 4096),
+                LimitLengthPipe::with(4096),
             ],
         ],
 
@@ -343,31 +393,13 @@ return [
             ],
             'message' => [
                 'class' => Guanguans\Notify\WeWork\Messages\MarkdownMessage::class,
-                'content' => '{report}',
+                'options' => [
+                    'content' => Template::CONTENT,
+                ],
             ],
             'pipes' => [
                 SprintfMarkdownPipe::class,
-                hydrate_pipe(LimitLengthPipe::class, 4096),
-            ],
-        ],
-
-        'xiZhi' => [
-            'driver' => 'notify',
-            'authenticator' => [
-                'class' => Guanguans\Notify\XiZhi\Authenticator::class,
-                'token' => env('EXCEPTION_NOTIFY_XIZHI_TOKEN'),
-            ],
-            'client' => [
-                'class' => Guanguans\Notify\XiZhi\Client::class,
-            ],
-            'message' => [
-                'class' => Guanguans\Notify\XiZhi\Messages\SingleMessage::class,
-                // 'class' => \Guanguans\Notify\XiZhi\Messages\ChannelMessage::class,
-                'title' => '{title}',
-                'content' => '{report}',
-            ],
-            'pipes' => [
-                SprintfMarkdownPipe::class,
+                LimitLengthPipe::with(4096),
             ],
         ],
     ],

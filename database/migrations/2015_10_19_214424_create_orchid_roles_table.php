@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -21,7 +19,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('roles', static function (Blueprint $table): void {
+        Schema::create('roles', function (Blueprint $table): void {
             $table->increments('id');
             $table->string('slug')->unique();
             $table->string('name');

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,6 +10,7 @@ declare(strict_types=1);
  */
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Scalar Domain
@@ -108,15 +107,15 @@ return [
          */
         'hideModels' => false,
         /**
-         * Whether to show the “Download OpenAPI Document” button.
+         * Whether to show the “Download OpenAPI Document” button
          */
         'hideDownloadButton' => false,
         /**
-         * Whether to show the “Test Request” button.
+         * Whether to show the “Test Request” button
          */
         'hideTestRequestButton' => false,
         /**
-         * Whether to show the sidebar search bar.
+         * Whether to show the sidebar search bar
          */
         'hideSearch' => false,
         /** Whether dark mode is on or off initially (light mode) */
@@ -128,7 +127,7 @@ return [
         /** Key used with CTRL/CMD to open the search modal (defaults to 'k' e.g. CMD+k) */
         'searchHotKey' => 'k',
         /**
-         * If used, passed data will be added to the HTML header.
+         * If used, passed data will be added to the HTML header
          *
          * @see https://unhead.unjs.io/usage/composables/use-seo-meta
          */
@@ -136,16 +135,17 @@ return [
             'title' => config('app.name').' API Reference',
         ],
         /**
-         * Path to a favicon image.
+         * Path to a favicon image
          *
          * @example '/favicon.svg'
          */
         'favicon' => '',
         /**
          * List of httpsnippet clients to hide from the clients menu
-         * By default hides Unirest, pass `[]` to show all clients.
+         * By default hides Unirest, pass `[]` to show all clients
          */
         'hiddenClients' => [
+
         ],
         /** Determine the HTTP client that’s selected by default */
         'defaultHttpClient' => [
@@ -165,7 +165,7 @@ return [
          */
         'baseServerURL' => '',
         /**
-         * List of servers to override the openapi spec servers.
+         * List of servers to override the openapi spec servers
          */
         'servers' => null,
         // 'servers' => [
@@ -179,8 +179,9 @@ return [
          */
         'withDefaultFonts' => true,
         /**
-         * By default we only open the relevant tag based on the url, however if you want all the tags open by default then set this configuration option :).
+         * By default we only open the relevant tag based on the url, however if you want all the tags open by default then set this configuration option :)
          */
         'defaultOpenAllTags' => false,
     ],
+
 ];

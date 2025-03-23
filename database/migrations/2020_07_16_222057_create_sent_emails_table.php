@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -23,7 +21,7 @@ return new class extends Migration {
             return;
         }
 
-        Schema::create('sent_emails', static function (Blueprint $table): void {
+        Schema::create('sent_emails', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date')->nullable();
             $table->string('from')->nullable();

@@ -1,0 +1,11 @@
+<?php
+
+namespace {{DummyActionNamespace}};
+
+class {{DummyAction}}
+{
+    public function execute(array $data)
+    {
+
+    }
+}

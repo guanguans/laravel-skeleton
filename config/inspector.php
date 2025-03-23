@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -73,7 +71,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Proxy
+    | Custom transport options
     |--------------------------------------------------------------------------
     |
     | This is where you can set the transport option settings you'd like us to use when
@@ -83,7 +81,7 @@ return [
 
     'options' => [
         // 'proxy' => 'https://55.88.22.11:3128',
-        // 'curlPath' => '/usr/bin/curl',
+        // 'curlPath' => '/opt/bin/curl',
     ],
 
     /*
@@ -158,11 +156,13 @@ return [
     | Job
     |--------------------------------------------------------------------------
     |
-    | Enable this if you'd like us to monitor background job processing.
+    | Enable this if you'd like us to monitor background job processing with data field into the payload.
     |
     */
 
     'job' => env('INSPECTOR_JOB', true),
+
+    'job_data' => env('INSPECTOR_JOB_DATA', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -223,40 +223,25 @@ return [
     */
 
     'ignore_commands' => [
-        'storage:link',
-        'optimize',
-        'optimize:clear',
-        'schedule:run',
-        'schedule:finish',
-        'package:discover',
-        'vendor:publish',
+        'serve',
+        'horizon*',
+        'queue*',
+        'make*',
+        'db*',
+        'migrate*',
+        'cache*',
+        'optimize*',
+        'vendor*',
+        'storage*',
+        'schedule*',
+        'package*',
         'list',
         'test',
-        'migrate',
-        'migrate:rollback',
-        'migrate:refresh',
-        'migrate:fresh',
-        'migrate:reset',
-        'migrate:install',
-        'db:seed',
-        'cache:clear',
-        'config:cache',
-        'config:clear',
-        'route:cache',
-        'route:clear',
-        'view:cache',
-        'view:clear',
-        'queue:listen',
-        'queue:work',
-        'queue:restart',
-        'vapor:work',
-        'vapor:health-check',
-        'horizon',
-        'horizon:work',
-        'horizon:supervisor',
-        'horizon:terminate',
-        'horizon:snapshot',
-        'nova:publish',
+        'config*',
+        'route*',
+        'view*',
+        'vapor*',
+        'nova*',
     ],
 
     /*

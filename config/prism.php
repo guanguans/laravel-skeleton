@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -27,6 +25,9 @@ return [
         'anthropic' => [
             'api_key' => env('ANTHROPIC_API_KEY', ''),
             'version' => env('ANTHROPIC_API_VERSION', '2023-06-01'),
+            'default_thinking_budget' => env('ANTHROPIC_DEFAULT_THINKING_BUDGET', 1024),
+            // Include beta strings as a comma separated list.
+            'anthropic_beta' => env('ANTHROPIC_BETA', null),
         ],
         'ollama' => [
             'url' => env('OLLAMA_URL', 'http://localhost:11434'),
@@ -49,6 +50,10 @@ return [
         ],
         'deepseek' => [
             'api_key' => env('DEEPSEEK_API_KEY', ''),
+        ],
+        'voyageai' => [
+            'api_key' => env('VOYAGEAI_API_KEY', ''),
+            'url' => env('VOYAGEAI_URL', 'https://api.voyageai.com/v1'),
         ],
     ],
 ];

@@ -1,0 +1,12 @@
+<?php
+
+namespace {{DummyEnumNameSpace}};
+
+use Essa\APIToolKit\Enum\Enum;
+
+class {{DummyEnum}} extends Enum
+{
+    /**
+     * EXAMPLE public const FOO = 'foo';
+     */
+}

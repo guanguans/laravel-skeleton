@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -12,19 +10,20 @@ declare(strict_types=1);
  */
 
 return [
+
     /**
-     * Path where the changelog file exists or should create.
+     * Path where the changelog file exists or should create
      */
     'path' => resource_path(),
     'version_path' => resource_path(),
 
     /**
-     * Type of version mode change.
+     * Type of version mode change
      */
     // 'version_mode' => 'increment', # or 'increment',
 
     /**
-     * Version default format.
+     * Version default format
      */
     'version_format_default' => 'version {major}.{minor}.{patch}.{prerelease}{prereleasenumber} [{buildmetadata}] (timestamp {timestamp})',
 
@@ -42,7 +41,7 @@ return [
     ],
 
     /**
-     * Is prerelease active.
+     * Is prerelease active
      */
     'prerelease' => true,
 
@@ -50,5 +49,6 @@ return [
 
     'markdown-path' => base_path(),
 
-    'markdown-view-path' => '.'.\DIRECTORY_SEPARATOR,
+    'markdown-view-path' => '.'.DIRECTORY_SEPARATOR,
+
 ];

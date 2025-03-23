@@ -1,0 +1,12 @@
+<?php
+
+namespace {{DummyFilterNameSpace}};
+
+use Essa\APIToolKit\Filters\QueryFilters;
+
+class {{DummyFilter}} extends QueryFilters
+{
+    protected array $allowedFilters = [];
+
+    protected array $columnSearch = [];
+}

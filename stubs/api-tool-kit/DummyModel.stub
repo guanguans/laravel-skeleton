@@ -1,0 +1,27 @@
+<?php
+
+namespace {{DummyModelNameSpace}};
+
+@if('filter')use {{DummyFilterWithNameSpace}};
+use Essa\APIToolKit\Filters\Filterable;@endif('filter')
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+@if('soft-delete')use Illuminate\Database\Eloquent\SoftDeletes;@endif('soft-delete')
+
+class {{DummyModel}} extends Model
+{
+    use HasFactory@if('filter'), Filterable@endif('filter')@if('soft-delete'), SoftDeletes@endif('soft-delete');
+
+    @if('filter')protected string $default_filters = {{DummyFilter}}::class;@endif('filter')
+
+    /**
+     * Mass-assignable attributes.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        {{fillableColumns}}
+    ];
+
+{{modelRelations}}
+}
