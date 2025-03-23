@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -15,7 +17,7 @@ return [
      * is an array, it will try to convert from the first format that works,
      * and will serialize dates using the first format from the array.
      */
-    'date_format' => DATE_ATOM,
+    'date_format' => \DATE_ATOM,
 
     /*
      * When transforming or casting dates, the following timezone will be used to
@@ -45,8 +47,8 @@ return [
      * types.
      */
     'transformers' => [
-        DateTimeInterface::class => \Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer::class,
-        \Illuminate\Contracts\Support\Arrayable::class => \Spatie\LaravelData\Transformers\ArrayableTransformer::class,
+        DateTimeInterface::class => Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer::class,
+        Illuminate\Contracts\Support\Arrayable::class => Spatie\LaravelData\Transformers\ArrayableTransformer::class,
         BackedEnum::class => Spatie\LaravelData\Transformers\EnumTransformer::class,
     ],
 
@@ -133,7 +135,7 @@ return [
      * method. By default, only when a request is passed the data is being validated. This
      * behaviour can be changed to always validate or to completely disable validation.
      */
-    'validation_strategy' => \Spatie\LaravelData\Support\Creation\ValidationStrategy::OnlyRequests->value,
+    'validation_strategy' => Spatie\LaravelData\Support\Creation\ValidationStrategy::OnlyRequests->value,
 
     /*
      * A data object can map the names of its properties when transforming (output) or when
@@ -171,14 +173,12 @@ return [
      * the data classes. You can override these settings by passing options to the command.
      */
     'commands' => [
-
         /*
          * Provides default configuration for the `make:data` command. These settings can be overridden with options
          * passed directly to the `make:data` command for generating single Data classes, or if not set they will
          * automatically fall back to these defaults. See `php artisan make:data --help` for more information
          */
         'make' => [
-
             /*
              * The default namespace for generated Data classes. This exists under the application's root namespace,
              * so the default 'Data` will end up as '\App\Data', and generated Data classes will be placed in the

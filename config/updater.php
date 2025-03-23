@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,10 +12,9 @@
  */
 
 return [
-
     'git_path' => 'git',
 
-    'repository_source' => \Salahhusa9\Updater\RepositorySource\GithubRepository::class,
+    'repository_source' => Salahhusa9\Updater\RepositorySource\GithubRepository::class,
     'github_token' => env('GITHUB_TOKEN'),
     'github_username' => env('GITHUB_USERNAME'),
     'github_repository' => env('GITHUB_REPOSITORY'),
@@ -53,5 +54,4 @@ return [
     'after_update_pipelines' => [
         // you can add your own pipelines here
     ],
-
 ];

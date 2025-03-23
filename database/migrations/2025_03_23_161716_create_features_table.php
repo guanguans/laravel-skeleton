@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -16,12 +18,10 @@ use Laravel\Pennant\Migrations\PennantMigration;
 return new class extends PennantMigration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('features', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->string('scope');
@@ -34,10 +34,8 @@ return new class extends PennantMigration {
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('features');
     }

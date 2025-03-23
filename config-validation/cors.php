@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -25,5 +27,4 @@ return [
     Rule::make('max_age')->rules(['integer']),
 
     Rule::make('supports_credentials')->rules(['bool']),
-
 ];

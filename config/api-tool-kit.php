@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -99,7 +101,7 @@ return [
             GeneratorFilesType::RESOURCE => [
                 'folder_path' => app_path('Http/Resources/{ModelName}'),
                 'file_name' => '{ModelName}Resource.php',
-                'namespace' => "App\Http\Resources\{ModelName}",
+                'namespace' => 'App\\Http\\Resources\\{ModelName}',
             ],
             GeneratorFilesType::TEST => [
                 'folder_path' => base_path('tests/Feature'),
@@ -109,12 +111,12 @@ return [
             GeneratorFilesType::CREATE_REQUEST => [
                 'folder_path' => app_path('Http/Requests/{ModelName}'),
                 'file_name' => 'Create{ModelName}Request.php',
-                'namespace' => "App\Http\Requests\{ModelName}",
+                'namespace' => 'App\\Http\\Requests\\{ModelName}',
             ],
             GeneratorFilesType::UPDATE_REQUEST => [
                 'folder_path' => app_path('Http/Requests/{ModelName}'),
                 'file_name' => 'Update{ModelName}Request.php',
-                'namespace' => "App\Http\Requests\{ModelName}",
+                'namespace' => 'App\\Http\\Requests\\{ModelName}',
             ],
             GeneratorFilesType::FILTER => [
                 'folder_path' => app_path('Filters'),

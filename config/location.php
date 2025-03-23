@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Driver
@@ -113,7 +114,7 @@ return [
         'local' => [
             'type' => 'city',
             'path' => database_path('maxmind/GeoLite2-City.mmdb'),
-            'url' => sprintf('https://download.maxmind.com/app/geoip_download_by_token?edition_id=GeoLite2-City&license_key=%s&suffix=tar.gz', env('MAXMIND_LICENSE_KEY')),
+            'url' => \sprintf('https://download.maxmind.com/app/geoip_download_by_token?edition_id=GeoLite2-City&license_key=%s&suffix=tar.gz', env('MAXMIND_LICENSE_KEY')),
         ],
     ],
 
@@ -143,9 +144,6 @@ return [
     */
 
     'kloudend' => [
-
         'token' => env('KLOUDEND_TOKEN'),
-
     ],
-
 ];

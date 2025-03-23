@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -29,14 +31,12 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         $isLocal = $this->app->environment('local');
 
-        Telescope::filter(function (IncomingEntry $entry) use ($isLocal) {
-            return $isLocal ||
-                   $entry->isReportableException() ||
-                   $entry->isFailedRequest() ||
-                   $entry->isFailedJob() ||
-                   $entry->isScheduledTask() ||
-                   $entry->hasMonitoredTag();
-        });
+        Telescope::filter(fn (IncomingEntry $entry) => $isLocal
+                   || $entry->isReportableException()
+                   || $entry->isFailedRequest()
+                   || $entry->isFailedJob()
+                   || $entry->isScheduledTask()
+                   || $entry->hasMonitoredTag());
     }
 
     /**
@@ -64,10 +64,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function gate(): void
     {
-        Gate::define('viewTelescope', function ($user) {
-            return in_array($user->email, [
-                //
-            ]);
-        });
+        Gate::define('viewTelescope', fn ($user) => \in_array($user->email, [
+        ], true));
     }
 }

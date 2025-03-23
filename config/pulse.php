@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -14,7 +16,6 @@ use Laravel\Pulse\Pulse;
 use Laravel\Pulse\Recorders;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Pulse Domain

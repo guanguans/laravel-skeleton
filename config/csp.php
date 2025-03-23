@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
      * Presets will determine which CSP headers will be set. A valid CSP preset is
      * any class that extends `Spatie\Csp\Preset`
@@ -31,7 +32,6 @@ return [
      * a new policy or changes to existing CSP policy without breaking anything.
      */
     'report_only_presets' => [
-        //
     ],
 
     /**

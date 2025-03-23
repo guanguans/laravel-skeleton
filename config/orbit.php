@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,18 +12,16 @@
  */
 
 return [
-
     'default' => env('ORBIT_DEFAULT_DRIVER', 'md'),
 
     'drivers' => [
-        'md' => \Orbit\Drivers\Markdown::class,
-        'json' => \Orbit\Drivers\Json::class,
-        'yaml' => \Orbit\Drivers\Yaml::class,
+        'md' => Orbit\Drivers\Markdown::class,
+        'json' => Orbit\Drivers\Json::class,
+        'yaml' => Orbit\Drivers\Yaml::class,
     ],
 
     'paths' => [
         'content' => base_path('content'),
         'cache' => storage_path('framework/cache/orbit'),
     ],
-
 ];

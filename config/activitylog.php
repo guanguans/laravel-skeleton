@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
      * If set to false, no activities will be saved to the database.
      */
@@ -44,7 +45,7 @@ return [
      * It should implement the Spatie\Activitylog\Contracts\Activity interface
      * and extend Illuminate\Database\Eloquent\Model.
      */
-    'activity_model' => \Spatie\Activitylog\Models\Activity::class,
+    'activity_model' => Spatie\Activitylog\Models\Activity::class,
 
     /*
      * This is the name of the table that will be created by the migration and

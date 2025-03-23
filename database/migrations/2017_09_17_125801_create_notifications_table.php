@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -20,7 +22,7 @@ return new class extends Migration {
     public function up(): void
     {
         if (!Schema::hasTable('notifications')) {
-            Schema::create('notifications', function (Blueprint $table) {
+            Schema::create('notifications', function (Blueprint $table): void {
                 $table->uuid('id')->primary();
                 $table->string('type');
                 $table->morphs('notifiable');

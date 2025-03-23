@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -13,7 +15,6 @@ use Laravel\Telescope\Http\Middleware\Authorize;
 use Laravel\Telescope\Watchers;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Telescope Master Switch
@@ -128,7 +129,6 @@ return [
     ],
 
     'ignore_commands' => [
-        //
     ],
 
     /*

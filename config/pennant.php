@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Pennant Store
@@ -38,7 +39,6 @@ return [
     */
 
     'stores' => [
-
         'array' => [
             'driver' => 'array',
         ],
@@ -48,6 +48,5 @@ return [
             'connection' => null,
             'table' => 'features',
         ],
-
     ],
 ];

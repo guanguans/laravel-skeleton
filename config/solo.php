@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -19,7 +21,6 @@ use SoloTerm\Solo\Themes;
 // check here first to see if it's installed.
 if (!class_exists('\SoloTerm\Solo\Manager')) {
     return [
-        //
     ];
 }
 

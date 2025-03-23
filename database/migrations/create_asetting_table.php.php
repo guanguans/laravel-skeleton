@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -14,9 +16,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up()
+    public function up(): void
     {
-        Schema::create('asettings', function (Blueprint $table) {
+        Schema::create('asettings', function (Blueprint $table): void {
             $table->id();
 
             $table->string('group')->default('general')->index();
@@ -29,6 +31,5 @@ return new class extends Migration {
 
             $table->timestamps();
         });
-
     }
 };

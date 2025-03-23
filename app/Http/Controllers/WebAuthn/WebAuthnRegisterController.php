@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -15,7 +17,6 @@ use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Response;
 use Laragear\WebAuthn\Http\Requests\AttestationRequest;
 use Laragear\WebAuthn\Http\Requests\AttestedRequest;
-use function response;
 
 class WebAuthnRegisterController
 {
@@ -38,6 +39,6 @@ class WebAuthnRegisterController
     {
         $request->save();
 
-        return response()->noContent();
+        return \response()->noContent();
     }
 }

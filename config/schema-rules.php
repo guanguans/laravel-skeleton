@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -25,8 +27,7 @@ return [
     'string_min_length' => env('SCHEMA_RULES_STRING_MIN_LENGTH', 1),
 
     /**
-     * Always skip these columns
+     * Always skip these columns.
      */
     'skip_columns' => ['created_at', 'updated_at', 'deleted_at'],
-
 ];

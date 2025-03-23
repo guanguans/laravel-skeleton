@@ -12,7 +12,6 @@ declare(strict_types=1);
  */
 
 return [
-
     /*
      * Here, you should include any environment files that you want to keep
      * in sync. For most projects, the `.env.example` file will suffice.

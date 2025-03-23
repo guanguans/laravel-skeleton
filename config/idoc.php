@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -241,7 +243,6 @@ return [
              * A route must fulfill ALL conditions to pass.
              */
             'match' => [
-
                 /*
                  * Match only routes whose domains match this pattern (use * as a wildcard to match any characters).
                  */

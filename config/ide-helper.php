@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Filename
@@ -357,5 +358,4 @@ return [
         Filament\Support\Concerns\Macroable::class,
         Spatie\Macroable\Macroable::class,
     ],
-
 ];

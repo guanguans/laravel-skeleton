@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -18,9 +20,9 @@ class CreateMailboxInboundEmailsTable extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('mailbox_inbound_emails', function (Blueprint $table) {
+        Schema::create('mailbox_inbound_emails', function (Blueprint $table): void {
             $table->bigIncrements('id');
             $table->string('message_id');
             $table->longText('message');
@@ -31,7 +33,7 @@ class CreateMailboxInboundEmailsTable extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('mailbox_inbound_emails');
     }

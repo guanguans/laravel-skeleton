@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
      * The driver to use when listening for incoming emails.
      * It defaults to the mail driver that you are using.
@@ -23,7 +24,7 @@ return [
      * The model class to use when converting an incoming email to a message.
      * It must extend the default model class
      */
-    'model' => \BeyondCode\Mailbox\InboundEmail::class,
+    'model' => BeyondCode\Mailbox\InboundEmail::class,
 
     /*
      * The path for driver specific routes. This is where
@@ -67,11 +68,8 @@ return [
      * Third party service configuration.
      */
     'services' => [
-
         'mailgun' => [
             'key' => env('MAILBOX_MAILGUN_KEY'),
         ],
-
     ],
-
 ];

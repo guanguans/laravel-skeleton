@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -31,12 +33,10 @@ class CreateSettingsTable extends Migration
 
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create($this->tablename, function (Blueprint $table) {
+        Schema::create($this->tablename, function (Blueprint $table): void {
             $table->increments('id');
             $table->string($this->keyColumn)->index();
             $table->text($this->valueColumn);
@@ -45,10 +45,8 @@ class CreateSettingsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::drop($this->tablename);
     }

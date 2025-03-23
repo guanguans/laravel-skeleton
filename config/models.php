@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Configurations
@@ -22,7 +23,6 @@ return [
     */
 
     '*' => [
-
         /*
         |--------------------------------------------------------------------------
         | Model Files Location
@@ -351,7 +351,6 @@ return [
         */
 
         'model_names' => [
-
         ],
 
         /*
@@ -436,7 +435,6 @@ return [
         |
         */
         'override_pluralize_for' => [
-
         ],
 
         /*

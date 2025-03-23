@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -81,5 +83,4 @@ return [
     |
     */
     'use-route-middleware' => false,
-
 ];

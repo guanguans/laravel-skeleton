@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
      |--------------------------------------------------------------------------
      | Sub-Domain Routing
@@ -195,7 +196,7 @@ return [
 
     'attachment' => [
         'disk' => env('PLATFORM_FILESYSTEM_DISK', 'public'),
-        'generator' => \Orchid\Attachment\Engines\Generator::class,
+        'generator' => Orchid\Attachment\Engines\Generator::class,
     ],
 
     /*
@@ -212,7 +213,7 @@ return [
      */
 
     'icons' => [
-        'bs' => \Orchid\Support\BootstrapIconsPath::getFolder(),
+        'bs' => Orchid\Support\BootstrapIconsPath::getFolder(),
     ],
 
     /*
@@ -328,6 +329,5 @@ return [
      |
      */
 
-    'provider' => \App\Orchid\PlatformProvider::class,
-
+    'provider' => App\Orchid\PlatformProvider::class,
 ];

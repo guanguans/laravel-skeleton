@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Database Viewer Route
@@ -31,7 +32,7 @@ return [
 
     'middleware' => [
         'web',
-        \NextBuild\DatabaseViewer\Http\Middleware\AuthorizeDatabaseViewer::class,
+        NextBuild\DatabaseViewer\Http\Middleware\AuthorizeDatabaseViewer::class,
     ],
 
     /*
@@ -44,8 +45,7 @@ return [
     */
 
     'api_middleware' => [
-        \NextBuild\DatabaseViewer\Http\Middleware\AuthorizeDatabaseViewer::class,
-        \NextBuild\DatabaseViewer\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        NextBuild\DatabaseViewer\Http\Middleware\AuthorizeDatabaseViewer::class,
+        NextBuild\DatabaseViewer\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
     ],
-
 ];

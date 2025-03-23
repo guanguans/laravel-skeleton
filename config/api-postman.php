@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Base URL
@@ -192,5 +193,4 @@ return [
     'protocol_profile_behavior' => [
         'disable_body_pruning' => false,  // Control request body pruning for following methods: GET, COPY, HEAD, PURGE, UNLOCK
     ],
-
 ];

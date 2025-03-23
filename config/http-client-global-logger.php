@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -10,7 +12,6 @@
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Enable logging
@@ -89,10 +90,12 @@ return [
     |
     */
     'format' => [
-        'request' => env('HTTP_CLIENT_GLOBAL_LOGGER_REQUEST_FORMAT',
+        'request' => env(
+            'HTTP_CLIENT_GLOBAL_LOGGER_REQUEST_FORMAT',
             "REQUEST: {method} {uri}\r\n{req_headers}\r\n{req_body}"
         ),
-        'response' => env('HTTP_CLIENT_GLOBAL_LOGGER_RESPONSE_FORMAT',
+        'response' => env(
+            'HTTP_CLIENT_GLOBAL_LOGGER_RESPONSE_FORMAT',
             "RESPONSE: HTTP/{version} {code} {phrase}\r\n{res_headers}\r\n{res_body}\r\n"
         ),
     ],

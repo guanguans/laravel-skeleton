@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -33,7 +35,6 @@ use Laravel\Octane\Listeners\StopWorkerIfNecessary;
 use Laravel\Octane\Octane;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Octane Server
@@ -82,11 +83,9 @@ return [
         RequestReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
             ...Octane::prepareApplicationForNextRequest(),
-            //
         ],
 
         RequestHandled::class => [
-            //
         ],
 
         RequestTerminated::class => [
@@ -95,20 +94,16 @@ return [
 
         TaskReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
-            //
         ],
 
         TaskTerminated::class => [
-            //
         ],
 
         TickReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
-            //
         ],
 
         TickTerminated::class => [
-            //
         ],
 
         OperationTerminated::class => [
@@ -144,7 +139,6 @@ return [
     ],
 
     'flush' => [
-        //
     ],
 
     /*
@@ -229,5 +223,4 @@ return [
     */
 
     'max_execution_time' => 30,
-
 ];

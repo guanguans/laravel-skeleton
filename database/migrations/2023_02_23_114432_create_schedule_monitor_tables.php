@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -15,9 +17,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateScheduleMonitorTables extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('monitored_scheduled_tasks', function (Blueprint $table) {
+        Schema::create('monitored_scheduled_tasks', function (Blueprint $table): void {
             $table->bigIncrements('id');
 
             $table->string('name');
@@ -38,7 +40,7 @@ class CreateScheduleMonitorTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('monitored_scheduled_task_log_items', function (Blueprint $table) {
+        Schema::create('monitored_scheduled_task_log_items', function (Blueprint $table): void {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('monitored_scheduled_task_id');

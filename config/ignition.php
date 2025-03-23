@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -37,7 +39,6 @@ use Spatie\LaravelIgnition\Solutions\SolutionProviders\UnknownValidationSolution
 use Spatie\LaravelIgnition\Solutions\SolutionProviders\ViewNotFoundSolutionProvider;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Editor
@@ -145,7 +146,6 @@ return [
     */
 
     'ignored_solution_providers' => [
-
     ],
 
     /*
@@ -278,17 +278,16 @@ return [
     */
 
     'argument_reducers' => [
-        \Spatie\Backtrace\Arguments\Reducers\BaseTypeArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\ArrayArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\StdClassArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\EnumArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\ClosureArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\DateTimeArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\DateTimeZoneArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\SymphonyRequestArgumentReducer::class,
-        \Spatie\LaravelIgnition\ArgumentReducers\ModelArgumentReducer::class,
-        \Spatie\LaravelIgnition\ArgumentReducers\CollectionArgumentReducer::class,
-        \Spatie\Backtrace\Arguments\Reducers\StringableArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\BaseTypeArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\ArrayArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\StdClassArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\EnumArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\ClosureArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\DateTimeArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\DateTimeZoneArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\SymphonyRequestArgumentReducer::class,
+        Spatie\LaravelIgnition\ArgumentReducers\ModelArgumentReducer::class,
+        Spatie\LaravelIgnition\ArgumentReducers\CollectionArgumentReducer::class,
+        Spatie\Backtrace\Arguments\Reducers\StringableArgumentReducer::class,
     ],
-
 ];

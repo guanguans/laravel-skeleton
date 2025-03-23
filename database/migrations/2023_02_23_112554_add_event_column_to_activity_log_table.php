@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
  *
@@ -15,16 +17,16 @@ use Illuminate\Support\Facades\Schema;
 
 class AddEventColumnToActivityLogTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::connection(config('activitylog.database_connection'))->table(config('activitylog.table_name'), function (Blueprint $table) {
+        Schema::connection(config('activitylog.database_connection'))->table(config('activitylog.table_name'), function (Blueprint $table): void {
             $table->string('event')->nullable()->after('subject_type');
         });
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::connection(config('activitylog.database_connection'))->table(config('activitylog.table_name'), function (Blueprint $table) {
+        Schema::connection(config('activitylog.database_connection'))->table(config('activitylog.table_name'), function (Blueprint $table): void {
             $table->dropColumn('event');
         });
     }
