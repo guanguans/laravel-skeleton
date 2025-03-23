@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4237b6f272aa84b63bffadc53530b68",
+    "content-hash": "302c0f94acf3344c564a1f988cc74478",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -6541,16 +6541,16 @@
         },
         {
             "name": "guanguans/laravel-exception-notify",
-            "version": "5.1.4",
+            "version": "5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-exception-notify.git",
-                "reference": "d61d03e2678e50707b28a372384b853d62481801"
+                "reference": "425887ddc1de7af2be699cd5c7733ba8b11054e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/d61d03e2678e50707b28a372384b853d62481801",
-                "reference": "d61d03e2678e50707b28a372384b853d62481801",
+                "url": "https://api.github.com/repos/guanguans/laravel-exception-notify/zipball/425887ddc1de7af2be699cd5c7733ba8b11054e2",
+                "reference": "425887ddc1de7af2be699cd5c7733ba8b11054e2",
                 "shasum": ""
             },
             "require": {
@@ -6720,7 +6720,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-03-23T06:29:05+00:00"
+            "time": "2025-03-23T12:39:57+00:00"
         },
         {
             "name": "guanguans/notify",
