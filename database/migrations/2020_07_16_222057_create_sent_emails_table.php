@@ -23,7 +23,7 @@ return new class extends Migration {
             return;
         }
 
-        Schema::create('sent_emails', function (Blueprint $table): void {
+        Schema::create('sent_emails', static function (Blueprint $table): void {
             $table->increments('id');
             $table->date('date')->nullable();
             $table->string('from')->nullable();

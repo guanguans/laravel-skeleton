@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('bearer_tokens', function (Blueprint $table): void {
+        Schema::create('bearer_tokens', static function (Blueprint $table): void {
             $table->id();
             $table->string('token')->unique();
             $table->string('description')->nullable();

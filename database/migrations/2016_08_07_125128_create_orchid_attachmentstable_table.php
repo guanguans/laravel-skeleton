@@ -21,7 +21,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('attachments', function (Blueprint $table): void {
+        Schema::create('attachments', static function (Blueprint $table): void {
             $table->increments('id');
             $table->text('name');
             $table->text('original_name');
@@ -39,14 +39,12 @@ return new class extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('attachmentable', function (Blueprint $table): void {
+        Schema::create('attachmentable', static function (Blueprint $table): void {
             $table->increments('id');
             $table->string('attachmentable_type');
             $table->unsignedInteger('attachmentable_id');
             $table->unsignedInteger('attachment_id');
-
             $table->index(['attachmentable_type', 'attachmentable_id']);
-
             $table->foreign('attachment_id')
                 ->references('id')
                 ->on('attachments')

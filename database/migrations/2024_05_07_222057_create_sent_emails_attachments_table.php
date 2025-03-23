@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('sent_emails_attachments', function (Blueprint $table): void {
+        Schema::create('sent_emails_attachments', static function (Blueprint $table): void {
             $table->increments('id');
             $table->foreignIdFor(SentEmail::class)->nullable();
             $table->string('filename')->nullable();

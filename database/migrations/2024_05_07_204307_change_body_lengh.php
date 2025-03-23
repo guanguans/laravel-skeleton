@@ -21,7 +21,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('sent_emails', function (Blueprint $table): void {
+        Schema::table('sent_emails', static function (Blueprint $table): void {
             $table->longText('body')->change();
         });
     }
@@ -31,7 +31,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('sent_emails', function (Blueprint $table): void {
+        Schema::table('sent_emails', static function (Blueprint $table): void {
             $table->text('body')->change();
         });
     }
