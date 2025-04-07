@@ -72,6 +72,7 @@
         "huangdijia/laravel-horizon-restart": "^3.1",
         "imanghafoori/laravel-decorator": "^1.1",
         "imanghafoori/laravel-middlewarize": "^1.1",
+        "inertiajs/inertia-laravel": "^2.0",
         "inspector-apm/inspector-laravel": "^4.11",
         "izniburak/bit-permission": "^1.0",
         "jasny/sso": "^0.5",
@@ -89,13 +90,16 @@
         "laragear/two-factor": "^3.0",
         "laragear/webauthn": "^4.0",
         "laravel-frontend-presets/tall": "^8.0 || ^9.0",
+        "laravel/folio": "^1.1",
         "laravel/framework": "^11.44 || ^12.0",
         "laravel/octane": "^2.8",
         "laravel/pail": "^1.2",
         "laravel/pennant": "^1.16",
         "laravel/pulse": "^1.0@beta",
+        "laravel/reverb": "^1.5",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10",
+        "laravel/wayfinder": "^0.1.4",
         "laravolt/avatar": "^6.1",
         "league/construct-finder": "^1.5",
         "leventcz/laravel-top": "^1.2",
@@ -167,6 +171,7 @@
         "symfony/stopwatch": "^7.2",
         "tabuna/breadcrumbs": "^4.3",
         "teamtnt/laravel-scout-tntsearch-driver": "^15.0",
+        "tightenco/ziggy": "^2.5",
         "timacdonald/has-parameters": "^1.5",
         "tpetry/laravel-mysql-explain": "^2.1",
         "unicodeveloper/laravel-password": "^1.0",
@@ -361,9 +366,7 @@
         "post-install-cmd": [],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
-            "@php artisan spatie-stub:publish --force --ansi -v",
-            "@php artisan ide-helper:generate --ansi -v",
-            "@php artisan ide-helper:meta --ansi -v"
+            "@php artisan spatie-stub:publish --force --ansi -v"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

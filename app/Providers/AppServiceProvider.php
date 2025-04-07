@@ -232,6 +232,7 @@ class AppServiceProvider extends ServiceProvider
             // @see https://www.php.net/manual/zh/numberformatter.parsecurrency.php
             // @see https://zh.wikipedia.org/wiki/ISO_4217
             Number::useCurrency('CNY');
+            // @see \Carbon\Laravel\ServiceProvider
             // Carbon::serializeUsing(static fn (Carbon $timestamp): string => $timestamp->format('Y-m-d H:i:s'));
             Date::use(CarbonImmutable::class);
             DateFactory::useCallable(
