@@ -19,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Lottery;
 
 return Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {
@@ -138,6 +139,7 @@ return Application::configure(basePath: \dirname(__DIR__))
             ]));
     })
     ->withExceptions(static function (Exceptions $exceptions): void {
+        $exceptions->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 1000));
         $exceptions->report(static function (QueryException $queryException): void {
             // dump($queryException->getRawSql());
         });
