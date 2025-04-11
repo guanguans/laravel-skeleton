@@ -109,7 +109,11 @@ class ShowUnsupportedRequiresCommand extends Command
 
     private function isUnsupported(string $name, string $version): bool
     {
-        if (!str($name)->is(['laravel/framework', 'illuminate/*'])) {
+        // if (!str($name)->is(['laravel/framework', 'illuminate/*'])) {
+        //     return false;
+        // }
+
+        if (!str($name)->is(['nikic/php-parser'])) {
             return false;
         }
 

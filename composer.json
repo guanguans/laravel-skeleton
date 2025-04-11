@@ -150,7 +150,6 @@
         "square1/laravel-idempotency": "^12.0",
         "staudenmeir/laravel-adjacency-list": "^1.23",
         "stevebauman/location": "^7.5",
-        "stillat/blade-directives": "^1.2",
         "symfony/polyfill-php83": "^1.31",
         "symfony/stopwatch": "^7.2",
         "tabuna/breadcrumbs": "^4.3",

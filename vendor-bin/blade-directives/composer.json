@@ -1,0 +1,5 @@
+{
+    "require": {
+        "stillat/blade-directives": "^1.2"
+    }
+}

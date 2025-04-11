@@ -697,18 +697,18 @@ class AppServiceProvider extends ServiceProvider
             \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT
         ));
 
-        Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
-            $value,
-            $limit,
-            $end
-        ));
-
-        Directive::compile('slugify', static fn (
-            $title,
-            $separator = '-',
-            $language = 'en',
-            $dictionary = ['@' => 'at']
-        ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
+        // Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
+        //     $value,
+        //     $limit,
+        //     $end
+        // ));
+        //
+        // Directive::compile('slugify', static fn (
+        //     $title,
+        //     $separator = '-',
+        //     $language = 'en',
+        //     $dictionary = ['@' => 'at']
+        /*): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>');*/
     }
 
     /**
