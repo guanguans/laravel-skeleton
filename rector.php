@@ -124,7 +124,6 @@ return RectorConfig::configure()
         // earlyReturn: true,
         carbon: true,
         phpunitCodeQuality: true,
-        phpunit: true,
     )
     ->withSets([
         PHPUnitSetList::PHPUNIT_100,
