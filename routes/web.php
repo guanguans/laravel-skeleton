@@ -54,7 +54,7 @@ Route::fallback(static fn (Request $request) => $request->expectsJson()
     ? new JsonResponse(['error' => 'Not Found'], 404)
     : view('errors.404', ['path' => $request->path()]));
 
-LaravelUploader::routes();
+// LaravelUploader::routes();
 
 Route::middleware('web')->get('up', static function () {
     Event::dispatch(new DiagnosingHealth);

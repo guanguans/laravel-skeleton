@@ -1,0 +1,13 @@
+{
+    "require": {
+        "overtrue/laravel-uploader": "^3.2",
+        "timacdonald/has-parameters": "^1.5",
+        "wendelladriel/laravel-lift": "^0.15.0"
+    },
+    "require-dev": {
+        "bennett-treptow/laravel-migration-generator": "^4.4",
+        "chrisdicarlo/laravel-config-checker": "^1.2",
+        "enlightn/enlightn": "^2.10",
+        "ovac/idoc": "^1.7"
+    }
+}

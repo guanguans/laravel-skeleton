@@ -129,6 +129,6 @@ class ShowUnsupportedRequiresCommand extends Command
             )
             ->max();
 
-        return Comparator::lessThan($maxVersion, '11');
+        return Comparator::lessThan($maxVersion, '12');
     }
 }

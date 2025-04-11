@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f12c51eb7d63d75c84a4a7f2e528beaa",
+    "content-hash": "81aa0048c94ee18a43e40399e3a2ad87",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -5874,103 +5874,6 @@
                 }
             ],
             "time": "2025-03-19T06:00:49+00:00"
-        },
-        {
-            "name": "guanguans/laravel-dump-sql",
-            "version": "2.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guanguans/laravel-dump-sql.git",
-                "reference": "c972eb6e970b909cddee21ae0b809c0c31e068c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-dump-sql/zipball/c972eb6e970b909cddee21ae0b809c0c31e068c4",
-                "reference": "c972eb6e970b909cddee21ae0b809c0c31e068c4",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/database": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/http": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/log": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/support": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "php": ">=7.3",
-                "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0"
-            },
-            "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.8",
-                "ergebnis/composer-normalize": "^2.20",
-                "friendsofphp/php-cs-fixer": "^3.4",
-                "guanguans/ai-commit": "dev-main",
-                "guanguans/monorepo-builder-worker": "^1.4",
-                "laravel/legacy-factories": "^1.4",
-                "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
-                "phpunit/phpunit": "^9.6 || ^10.0 || ^11.0",
-                "rector/rector": "^1.0",
-                "vimeo/psalm": "^4.30 || ^5.0"
-            },
-            "type": "laravel",
-            "extra": {
-                "hooks": {
-                    "pre-push": [
-                        "composer test",
-                        "composer style-lint"
-                    ],
-                    "pre-commit": [
-                        "composer test",
-                        "composer style-lint"
-                    ]
-                },
-                "laravel": {
-                    "providers": [
-                        "Guanguans\\LaravelDumpSql\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Guanguans\\LaravelDumpSql\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "guanguans",
-                    "email": "ityaozm@gmail.com"
-                }
-            ],
-            "description": "laravel 中轻松容易的输出完整的 SQL 语句。 - Easy output of complete SQL statements for laravel framework.",
-            "keywords": [
-                "dd",
-                "debug",
-                "dump",
-                "laravel",
-                "mysql",
-                "sql"
-            ],
-            "support": {
-                "issues": "https://github.com/guanguans/laravel-dump-sql/issues",
-                "source": "https://github.com/guanguans/laravel-dump-sql"
-            },
-            "funding": [
-                {
-                    "url": "https://www.guanguans.cn/images/wechat.jpeg",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/guanguans",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2024-03-14T06:39:02+00:00"
         },
         {
             "name": "guanguans/laravel-exception-notify",
@@ -13442,79 +13345,6 @@
                 }
             ],
             "time": "2025-02-20T15:32:02+00:00"
-        },
-        {
-            "name": "overtrue/laravel-uploader",
-            "version": "3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overtrue/laravel-uploader.git",
-                "reference": "d68e09acab68ed3dca2124cc136d4a3401f68dbd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-uploader/zipball/d68e09acab68ed3dca2124cc136d4a3401f68dbd",
-                "reference": "d68e09acab68ed3dca2124cc136d4a3401f68dbd",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "^9.0|^10.0|^11.0"
-            },
-            "require-dev": {
-                "brainmaestro/composer-git-hooks": "dev-master",
-                "laravel/pint": "^1.5",
-                "mockery/mockery": "^1.5",
-                "phpunit/phpunit": "^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "hooks": {
-                    "pre-push": [
-                        "composer test",
-                        "composer fix-style"
-                    ],
-                    "pre-commit": [
-                        "composer test",
-                        "composer check-style"
-                    ]
-                },
-                "laravel": {
-                    "aliases": {
-                        "LaravelUploader": "\\Overtrue\\LaravelUploader\\LaravelUploader"
-                    },
-                    "providers": [
-                        "\\Overtrue\\LaravelUploader\\UploadServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Overtrue\\LaravelUploader\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "overtrue",
-                    "email": "i@overtrue.me"
-                }
-            ],
-            "description": "An upload component for Laravel.",
-            "support": {
-                "issues": "https://github.com/overtrue/laravel-uploader/issues",
-                "source": "https://github.com/overtrue/laravel-uploader/tree/3.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/overtrue",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-03-13T05:09:46+00:00"
         },
         {
             "name": "paragonie/certainty",
@@ -23306,59 +23136,6 @@
             "time": "2024-12-21T16:25:41+00:00"
         },
         {
-            "name": "timacdonald/has-parameters",
-            "version": "v1.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/timacdonald/has-parameters.git",
-                "reference": "6acbccb2ae3e1a2d37978943e37bb223bf55abfb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/timacdonald/has-parameters/zipball/6acbccb2ae3e1a2d37978943e37bb223bf55abfb",
-                "reference": "6acbccb2ae3e1a2d37978943e37bb223bf55abfb",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/http": "^10.0 || ^11.0",
-                "illuminate/support": "^10.0 || ^11.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0 || ^9.0",
-                "phpunit/phpunit": "^10.0 || ^11.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TiMacDonald\\Middleware\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim MacDonald",
-                    "email": "hello@timacdonald.me",
-                    "homepage": "https://timacdonald.me"
-                }
-            ],
-            "description": "A trait that allows you to pass arguments to Laravel middleware in a more PHP'ish way.",
-            "keywords": [
-                "arguments",
-                "laravel",
-                "middleware",
-                "parameters"
-            ],
-            "support": {
-                "issues": "https://github.com/timacdonald/has-parameters/issues",
-                "source": "https://github.com/timacdonald/has-parameters/tree/v1.5.1"
-            },
-            "time": "2024-05-18T07:27:20+00:00"
-        },
-        {
             "name": "tpetry/laravel-mysql-explain",
             "version": "2.1.0",
             "source": {
@@ -24037,82 +23814,6 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
-        },
-        {
-            "name": "wendelladriel/laravel-lift",
-            "version": "v0.15.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WendellAdriel/laravel-lift.git",
-                "reference": "b600d95db4910abc84e81e484fdcba1fe8655c52"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/b600d95db4910abc84e81e484fdcba1fe8655c52",
-                "reference": "b600d95db4910abc84e81e484fdcba1fe8655c52",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^10.0|^11.0",
-                "illuminate/support": "^10.0|^11.0",
-                "illuminate/validation": "^10.0|^11.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "larastan/larastan": "^2.0",
-                "laravel/pint": "^1.14",
-                "orchestra/testbench": "^8.0|^9.0",
-                "pestphp/pest": "^2.0",
-                "pestphp/pest-plugin-faker": "^2.0",
-                "phpstan/phpstan": "^1.10"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "WendellAdriel\\Lift\\Providers\\LiftServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "WendellAdriel\\Lift\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Wendell Adriel",
-                    "email": "wendelladriel.ti@gmail.com"
-                }
-            ],
-            "description": "Take your Eloquent Models to the next level",
-            "keywords": [
-                "attributes",
-                "casts",
-                "eloquent",
-                "laravel",
-                "model",
-                "validation"
-            ],
-            "support": {
-                "issues": "https://github.com/WendellAdriel/laravel-lift/issues",
-                "source": "https://github.com/WendellAdriel/laravel-lift"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/wendelladriel",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/WendellAdriel",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-11-05T10:56:27+00:00"
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
@@ -25136,72 +24837,6 @@
             "time": "2025-01-18T19:26:32+00:00"
         },
         {
-            "name": "bennett-treptow/laravel-migration-generator",
-            "version": "4.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bennett-treptow/laravel-migration-generator.git",
-                "reference": "5c5f3b07a40f258abc36d8541e24d3de361e539b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bennett-treptow/laravel-migration-generator/zipball/5c5f3b07a40f258abc36d8541e24d3de361e539b",
-                "reference": "5c5f3b07a40f258abc36d8541e24d3de361e539b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/config": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "marcj/topsort": "^2.0",
-                "php": "^7.4|~8.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.15",
-                "orchestra/testbench": "^6.17|^8.0|^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LaravelMigrationGenerator\\LaravelMigrationGeneratorProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LaravelMigrationGenerator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bennett Treptow",
-                    "email": "me@btreptow.com"
-                }
-            ],
-            "description": "Generate migrations from existing database structures",
-            "support": {
-                "issues": "https://github.com/bennett-treptow/laravel-migration-generator/issues",
-                "source": "https://github.com/bennett-treptow/laravel-migration-generator/tree/4.4.2"
-            },
-            "funding": [
-                {
-                    "url": "https://buymeacoffee.com/btreptow",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/bennett-treptow",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-01-10T01:31:55+00:00"
-        },
-        {
             "name": "brainmaestro/composer-git-hooks",
             "version": "v3.0.0",
             "source": {
@@ -25757,82 +25392,6 @@
                 }
             ],
             "time": "2025-03-04T09:06:18+00:00"
-        },
-        {
-            "name": "chrisdicarlo/laravel-config-checker",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chrisdicarlo/laravel-config-checker.git",
-                "reference": "04158227648f526f6a94d8eafec8da72e82c0a2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chrisdicarlo/laravel-config-checker/zipball/04158227648f526f6a94d8eafec8da72e82c0a2f",
-                "reference": "04158227648f526f6a94d8eafec8da72e82c0a2f",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^10.0||^11.0",
-                "php": "^8.1||^8.2||^8.3",
-                "spatie/laravel-package-tools": "^1.16"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.14",
-                "nunomaduro/collision": "^8.1.1||^7.10.0",
-                "orchestra/testbench": "^9.0.0||^8.22.0",
-                "pestphp/pest": "^2.34",
-                "pestphp/pest-plugin-arch": "^2.7",
-                "pestphp/pest-plugin-laravel": "^2.3",
-                "spatie/laravel-ray": "^1.35"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "ChrisDiCarlo\\LaravelConfigChecker\\LaravelConfigCheckerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ChrisDiCarlo\\LaravelConfigChecker\\": "src/",
-                    "ChrisDiCarlo\\LaravelConfigChecker\\Database\\Factories\\": "database/factories/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Di Carlo",
-                    "email": "chris@dicarlosystems.ca",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Package to check that configuration key references actually exist in your config files.",
-            "homepage": "https://github.com/chrisdicarlo/laravel-config-checker",
-            "keywords": [
-                "Chris Di Carlo",
-                "laravel",
-                "laravel-config-checker"
-            ],
-            "support": {
-                "issues": "https://github.com/chrisdicarlo/laravel-config-checker/issues",
-                "source": "https://github.com/chrisdicarlo/laravel-config-checker/tree/v1.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.buymeacoffee.com/chrisdicarlo",
-                    "type": "buy_me_a_coffee"
-                },
-                {
-                    "url": "https://github.com/Chris Di Carlo",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-10-07T17:51:50+00:00"
         },
         {
             "name": "clue/ndjson-react",
@@ -26549,93 +26108,6 @@
                 "source": "https://github.com/driftingly/rector-laravel/tree/1.2.6"
             },
             "time": "2024-12-05T17:29:03+00:00"
-        },
-        {
-            "name": "enlightn/enlightn",
-            "version": "v2.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/enlightn/enlightn.git",
-                "reference": "983ce84674609be77a1723475f8d2bd205575af2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/enlightn/enlightn/zipball/983ce84674609be77a1723475f8d2bd205575af2",
-                "reference": "983ce84674609be77a1723475f8d2bd205575af2",
-                "shasum": ""
-            },
-            "require": {
-                "enlightn/security-checker": "^1.1|^2.0",
-                "ext-json": "*",
-                "guzzlehttp/guzzle": "^7.0",
-                "larastan/larastan": "^2.0",
-                "laravel/framework": "^9.0|^10.0|^11.0",
-                "nikic/php-parser": "^4.0|^5.0",
-                "php": "^8.0",
-                "phpstan/phpstan": ">=1.10.48",
-                "phpstan/phpstan-deprecation-rules": "^1.1",
-                "symfony/finder": "^4.0|^5.0|^6.0|^7.0"
-            },
-            "require-dev": {
-                "barryvdh/laravel-ide-helper": "^2.8|^3.0",
-                "brianium/paratest": "^6.1|^7.0",
-                "friendsofphp/php-cs-fixer": "^2.18|^3.0",
-                "mockery/mockery": "^1.3",
-                "orchestra/testbench": "^7.0|^8.0|^9.0",
-                "phpunit/phpunit": "^9.0|^10.0",
-                "predis/predis": "*"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Enlightn\\Enlightn\\EnlightnServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Enlightn\\Enlightn\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Paras Malhotra",
-                    "email": "paras@laravel-enlightn.com"
-                },
-                {
-                    "name": "Miguel Piedrafita",
-                    "email": "soy@miguelpiedrafita.com"
-                },
-                {
-                    "name": "Lars Klopstra",
-                    "email": "lars@flowframe.nl"
-                }
-            ],
-            "description": "Enlightn - Your performance & security consultant, an artisan command away.",
-            "homepage": "https://www.laravel-enlightn.com/",
-            "keywords": [
-                "Audit",
-                "analysis tool",
-                "dynamic analysis",
-                "dynamic analyzer",
-                "laravel",
-                "package",
-                "performance",
-                "security",
-                "static analysis",
-                "static analyzer"
-            ],
-            "support": {
-                "docs": "https://www.laravel-enlightn.com/docs/",
-                "issues": "https://github.com/enlightn/enlightn/issues",
-                "source": "https://github.com/enlightn/enlightn/tree/v2.10.0"
-            },
-            "time": "2024-04-05T10:49:23+00:00"
         },
         {
             "name": "ergebnis/composer-normalize",
@@ -29165,16 +28637,16 @@
         },
         {
             "name": "laravel-lang/config",
-            "version": "1.13.1",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/config.git",
-                "reference": "6efe13fdf4c0a137a559a0067851d8f425be9ac6"
+                "reference": "0f6a41a1d5f4bde6ff59fbfd9e349ac64b737c69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/config/zipball/6efe13fdf4c0a137a559a0067851d8f425be9ac6",
-                "reference": "6efe13fdf4c0a137a559a0067851d8f425be9ac6",
+                "url": "https://api.github.com/repos/Laravel-Lang/config/zipball/0f6a41a1d5f4bde6ff59fbfd9e349ac64b737c69",
+                "reference": "0f6a41a1d5f4bde6ff59fbfd9e349ac64b737c69",
                 "shasum": ""
             },
             "require": {
@@ -29233,9 +28705,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/config/issues",
-                "source": "https://github.com/Laravel-Lang/config/tree/1.13.1"
+                "source": "https://github.com/Laravel-Lang/config/tree/1.14.0"
             },
-            "time": "2025-03-25T09:40:25+00:00"
+            "time": "2025-04-11T07:31:54+00:00"
         },
         {
             "name": "laravel-lang/http-statuses",
@@ -30661,68 +30133,6 @@
             "time": "2024-11-28T04:54:44+00:00"
         },
         {
-            "name": "marcj/topsort",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/marcj/topsort.php.git",
-                "reference": "972f58e42b5f110a0a1d8433247f65248abcfd5c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/marcj/topsort.php/zipball/972f58e42b5f110a0a1d8433247f65248abcfd5c",
-                "reference": "972f58e42b5f110a0a1d8433247f65248abcfd5c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.3"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master",
-                "phpunit/phpunit": "^9",
-                "symfony/console": "~2.5 || ~3.0 || ~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MJS\\TopSort\\": "src/",
-                    "MJS\\TopSort\\Tests\\": "tests/Tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marc J. Schmidt",
-                    "email": "marc@marcjschmidt.de"
-                }
-            ],
-            "description": "High-Performance TopSort/Dependency resolving algorithm",
-            "keywords": [
-                "dependency resolving",
-                "topological sort",
-                "topsort"
-            ],
-            "support": {
-                "issues": "https://github.com/marcj/topsort.php/issues",
-                "source": "https://github.com/marcj/topsort.php/tree/2.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/marcj",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-09-24T12:39:55+00:00"
-        },
-        {
             "name": "maximebf/debugbar",
             "version": "v2.1.6",
             "source": {
@@ -30847,59 +30257,6 @@
                 "source": "https://github.com/smortexa/laravel-arkitect/tree/v0.8.0"
             },
             "time": "2024-04-25T18:49:07+00:00"
-        },
-        {
-            "name": "mpociot/reflection-docblock",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mpociot/reflection-docblock.git",
-                "reference": "c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mpociot/reflection-docblock/zipball/c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587",
-                "reference": "c8b2e2b1f5cebbb06e2b5ccbf2958f2198867587",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Mpociot": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/mpociot/reflection-docblock/issues",
-                "source": "https://github.com/mpociot/reflection-docblock/tree/master"
-            },
-            "time": "2016-06-20T20:53:12+00:00"
         },
         {
             "name": "mrmarchone/laravel-auto-crud",
@@ -31411,75 +30768,6 @@
                 "source": "https://github.com/orangehill/iseed/tree/v3.1.1"
             },
             "time": "2025-03-04T07:56:48+00:00"
-        },
-        {
-            "name": "ovac/idoc",
-            "version": "v1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ovac/idoc.git",
-                "reference": "9c90f8b0f2a703de8f39ec9e728ef298d06fe72b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ovac/idoc/zipball/9c90f8b0f2a703de8f39ec9e728ef298d06fe72b",
-                "reference": "9c90f8b0f2a703de8f39ec9e728ef298d06fe72b",
-                "shasum": ""
-            },
-            "require": {
-                "fakerphp/faker": "^1.12",
-                "illuminate/console": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/routing": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/support": "5.5.* || 5.6.* || 5.7.* || 5.8.* || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
-                "mpociot/reflection-docblock": "^1.0.1",
-                "php": ">=7.0.0",
-                "ramsey/uuid": "^3.8 || ^4.0"
-            },
-            "require-dev": {
-                "dingo/api": "2.0.0-alpha1",
-                "league/fractal": "^0.17.0 || ^0.20",
-                "mockery/mockery": "^1.2.0",
-                "orchestra/testbench": "3.5.* || 3.6.* || 3.7.* || 5.1.* || ^6.0 || ^9.0",
-                "phpunit/phpunit": "^6.0.0 || ^7.4.0 || ^9.0 || ^10.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "OVAC\\IDoc\\IDocServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "helpers/helpers.php"
-                ],
-                "psr-4": {
-                    "OVAC\\IDoc\\": "src/idoc"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Victor Ariama (ovac4u)",
-                    "email": "iamovac@gmail.com"
-                }
-            ],
-            "description": "Generate beautiful API documentation from your Laravel application",
-            "homepage": "http://github.com/ovac/idoc",
-            "keywords": [
-                "api",
-                "documentation",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/ovac/idoc/issues",
-                "source": "https://github.com/ovac/idoc/tree/v1.7.0"
-            },
-            "time": "2024-07-24T20:33:41+00:00"
         },
         {
             "name": "pestphp/pest",
@@ -32263,53 +31551,6 @@
                 }
             ],
             "time": "2025-03-23T14:57:32+00:00"
-        },
-        {
-            "name": "phpstan/phpstan-deprecation-rules",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan-deprecation-rules.git",
-                "reference": "f94d246cc143ec5a23da868f8f7e1393b50eaa82"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/f94d246cc143ec5a23da868f8f7e1393b50eaa82",
-                "reference": "f94d246cc143ec5a23da868f8f7e1393b50eaa82",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.12"
-            },
-            "require-dev": {
-                "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "phpstan-extension",
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "rules.neon"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PHPStan\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.",
-            "support": {
-                "issues": "https://github.com/phpstan/phpstan-deprecation-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/1.2.1"
-            },
-            "time": "2024-09-11T15:52:35+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -36592,7 +35833,6 @@
     "stability-flags": {
         "guanguans/ai-commit": 20,
         "laravel/facade-documenter": 20,
-        "laravel/pulse": 10,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
