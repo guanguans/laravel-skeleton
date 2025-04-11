@@ -92,7 +92,6 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
      * @throws PoorDocumentationException
      * @throws ShouldNotHappenException
      */
-    #[\Override]
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(

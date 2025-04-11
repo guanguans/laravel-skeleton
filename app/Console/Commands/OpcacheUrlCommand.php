@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Http;
 
 class OpcacheUrlCommand extends Command
 {
-    use CreatesRequest;
+    // use CreatesRequest;
     protected $signature = 'opcache:url {route=compile} {--force}';
     protected $description = 'Show OPCache URL';
 
