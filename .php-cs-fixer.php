@@ -251,7 +251,6 @@ return Factory::fromRuleSet($ruleSet)
                 __DIR__.'/app',
                 __DIR__.'/bootstrap',
                 __DIR__.'/config',
-                __DIR__.'/config-validation',
                 __DIR__.'/database',
                 __DIR__.'/public',
                 __DIR__.'/resources',
