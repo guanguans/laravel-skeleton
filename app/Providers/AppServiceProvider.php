@@ -708,7 +708,7 @@ class AppServiceProvider extends ServiceProvider
         //     $separator = '-',
         //     $language = 'en',
         //     $dictionary = ['@' => 'at']
-        /*): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>');*/
+        /* ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>'); */
     }
 
     /**

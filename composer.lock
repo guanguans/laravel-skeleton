@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87c99c01617792ecac3c3693071cb9fd",
+    "content-hash": "7c2b15c222c4c4b2cd6bfcaf0b0fa9ec",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -18264,16 +18264,16 @@
         },
         {
             "name": "spatie/laravel-settings",
-            "version": "3.4.2",
+            "version": "3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-settings.git",
-                "reference": "f817f2eaf48fda76dcdecf4e7a1ab6ebc98984be"
+                "reference": "bc137476b2d0072c118634905a9068c1fdab88ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/f817f2eaf48fda76dcdecf4e7a1ab6ebc98984be",
-                "reference": "f817f2eaf48fda76dcdecf4e7a1ab6ebc98984be",
+                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/bc137476b2d0072c118634905a9068c1fdab88ca",
+                "reference": "bc137476b2d0072c118634905a9068c1fdab88ca",
                 "shasum": ""
             },
             "require": {
@@ -18333,7 +18333,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-settings/issues",
-                "source": "https://github.com/spatie/laravel-settings/tree/3.4.2"
+                "source": "https://github.com/spatie/laravel-settings/tree/3.4.3"
             },
             "funding": [
                 {
@@ -18345,7 +18345,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-14T14:40:11+00:00"
+            "time": "2025-04-11T09:35:44+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",

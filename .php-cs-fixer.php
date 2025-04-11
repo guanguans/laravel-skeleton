@@ -248,7 +248,6 @@ return Factory::fromRuleSet($ruleSet)
     ->setFinder(
         Finder::create()
             ->in([
-                __DIR__.'/actions',
                 __DIR__.'/app',
                 __DIR__.'/bootstrap',
                 __DIR__.'/config',

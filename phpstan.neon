@@ -29,7 +29,7 @@ parameters:
     paths:
         - app/
     excludePaths:
-        - app/Orchid/
+#        - app/Orchid/
         - app/Support/Http/
         - app/Support/Mixins/
         - app/Support/StreamWrappers/
