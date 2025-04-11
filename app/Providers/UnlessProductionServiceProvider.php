@@ -46,7 +46,7 @@ class UnlessProductionServiceProvider extends AggregateServiceProvider
         \SoloTerm\Solo\Providers\SoloServiceProvider::class,
         \Spatie\LaravelErrorSolutions\LaravelErrorSolutionsServiceProvider::class,
         \Spatie\LaravelIgnition\IgnitionServiceProvider::class,
-        // \Spatie\Stubs\StubsServiceProvider::class,
+        \Spatie\Stubs\StubsServiceProvider::class,
         \TheDoctor0\LaravelFactoryGenerator\FactoryGeneratorServiceProvider::class,
         \Worksome\Envy\EnvyServiceProvider::class,
     ];

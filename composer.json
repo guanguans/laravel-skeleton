@@ -305,7 +305,8 @@
     "scripts": {
         "post-install-cmd": [],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v"
+            "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
+            "@php artisan spatie-stub:publish --force --ansi -v"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
