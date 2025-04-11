@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "661035e6fbeff731abbab2f715266e3c",
+    "content-hash": "cf7839cba508a932f6c646bfb9500b82",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -6764,6 +6764,69 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "hamidrezaniazi/pecs",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hamidrezaniazi/pecs.git",
+                "reference": "f80810cb08ccbdc5c867455762f8e043ad157120"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hamidrezaniazi/pecs/zipball/f80810cb08ccbdc5c867455762f8e043ad157120",
+                "reference": "f80810cb08ccbdc5c867455762f8e043ad157120",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/collections": ">=8",
+                "monolog/monolog": "^3.0",
+                "nesbot/carbon": "^2.0|^3.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.0",
+                "friendsofphp/php-cs-fixer": "^3.16",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hamidrezaniazi\\Pecs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hamidreza Niazi",
+                    "email": "hamidrezaniazi@yahoo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP ECS (Elastic Common Schema): Simplify logging with the power of elastic common schema.",
+            "homepage": "https://github.com/hamidrezaniazi/pecs",
+            "keywords": [
+                "ECS",
+                "Elastic Common Schema",
+                "elastic",
+                "filebeat",
+                "hamidrezaniazi",
+                "log",
+                "logging",
+                "pecs",
+                "php ecs",
+                "php elastic common schema"
+            ],
+            "support": {
+                "issues": "https://github.com/hamidrezaniazi/pecs/issues",
+                "source": "https://github.com/hamidrezaniazi/pecs/tree/2.0.0"
+            },
+            "time": "2025-02-12T12:02:45+00:00"
         },
         {
             "name": "hanneskod/classtools",

@@ -106,14 +106,9 @@
     "exclude": [
         ".build",
         ".github",
-        ".phive",
-        ".stubs",
-        "docker",
-        "docs",
         "node_modules",
         "storage",
         "stubs",
-        "tools",
         "vendor",
         "vendor-bin"
     ],

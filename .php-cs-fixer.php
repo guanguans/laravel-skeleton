@@ -248,20 +248,18 @@ return Factory::fromRuleSet($ruleSet)
     ->setFinder(
         Finder::create()
             ->in([
-                __DIR__.'/app',
-                __DIR__.'/bootstrap',
-                __DIR__.'/config',
-                __DIR__.'/database',
-                __DIR__.'/public',
-                __DIR__.'/resources',
-                __DIR__.'/routes',
-                __DIR__.'/tests',
+                __DIR__.'/app/',
+                __DIR__.'/bootstrap/',
+                __DIR__.'/config/',
+                __DIR__.'/database/',
+                __DIR__.'/public/',
+                __DIR__.'/resources/',
+                __DIR__.'/routes/',
+                __DIR__.'/tests/',
             ])
             ->exclude([
-                '__snapshots__',
                 'cache',
                 'Fixtures',
-                'stubs',
             ])
             ->notName([
                 '*.blade.php',
@@ -276,7 +274,6 @@ return Factory::fromRuleSet($ruleSet)
                     ], true)
                 ),
                 __DIR__.'/artisan',
-                __DIR__.'/artisan-runtime',
                 __DIR__.'/composer-updater',
             ])
     )

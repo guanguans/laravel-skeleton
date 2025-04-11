@@ -54,6 +54,7 @@
         "guanguans/laravel-exception-notify": "^5.1",
         "guanguans/notify": "^3.2",
         "guzzlehttp/guzzle": "^7.9",
+        "hamidrezaniazi/pecs": "^2.0",
         "hashids/hashids": "^5.0",
         "haydenpierce/class-finder": "^0.5",
         "huangdijia/laravel-horizon-restart": "^3.1",
