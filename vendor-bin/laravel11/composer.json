@@ -1,21 +1,16 @@
 {
     "require": {
+        "appstract/laravel-opcache": "^4.0",
         "overtrue/laravel-uploader": "^3.2",
         "timacdonald/has-parameters": "^1.5",
-        "wendelladriel/laravel-lift": "^0.15.0",
-        "appstract/laravel-opcache": "^4.0",
-        "laragear/discover": "^2.0",
-        "larastan/larastan": "^2.10",
-        "php-static-analysis/rector-rule": "^0.3.1",
-        "spatie/laravel-failed-job-monitor": "^4.3"
+        "wendelladriel/laravel-lift": "^0.15"
     },
     "require-dev": {
-        "bennett-treptow/laravel-migration-generator": "^4.4",
+        "php-static-analysis/rector-rule": "^0.3",
         "chrisdicarlo/laravel-config-checker": "^1.2",
-        "enlightn/enlightn": "^2.10",
-        "ovac/idoc": "^1.7",
-        "roave/security-advisories": "dev-latest",
-        "scalar/laravel": "^0.2.0",
-        "spatie/laravel-stubs": "^3.1"
+        "enlightn/enlightn": "^2.10"
+    },
+    "config": {
+        "sort-packages": true
     }
 }
