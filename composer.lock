@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ec05d2da0617584989a971e77089b1a",
+    "content-hash": "39d7fe8a1ccf55171b20ed80e54eebe9",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -24093,66 +24093,6 @@
     ],
     "packages-dev": [
         {
-            "name": "aeon-php/calendar",
-            "version": "1.0.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aeon-php/calendar.git",
-                "reference": "41f4b0ff07247c36b232ddfbcddc62af738be6fe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aeon-php/calendar/zipball/41f4b0ff07247c36b232ddfbcddc62af738be6fe",
-                "reference": "41f4b0ff07247c36b232ddfbcddc62af738be6fe",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~8.2.0 || ~8.3.0 || ~8.4.0"
-            },
-            "require-dev": {
-                "ext-bcmath": "*",
-                "ext-pcov": "*"
-            },
-            "suggest": {
-                "ext-bcmath": "Compare time units with high precision"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Aeon\\": [
-                        "src/Aeon"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHP type safe, immutable calendar library",
-            "keywords": [
-                "calendar",
-                "date",
-                "datetime",
-                "immutable",
-                "time"
-            ],
-            "support": {
-                "issues": "https://github.com/aeon-php/calendar/issues",
-                "source": "https://github.com/aeon-php/calendar/tree/1.0.11"
-            },
-            "funding": [
-                {
-                    "url": "https://flow-php.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/norberttech",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-01-24T04:47:09+00:00"
-        },
-        {
             "name": "andreaselia/laravel-api-to-postman",
             "version": "v2.1.0",
             "source": {
@@ -24227,118 +24167,6 @@
                 }
             ],
             "time": "2025-02-26T20:52:44+00:00"
-        },
-        {
-            "name": "aniftyco/skeletor",
-            "version": "v0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aniftyco/skeletor.git",
-                "reference": "767528d6e979b34d1f4b96347681b544a031ac40"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aniftyco/skeletor/zipball/767528d6e979b34d1f4b96347681b544a031ac40",
-                "reference": "767528d6e979b34d1f4b96347681b544a031ac40",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/prompts": "^0.3.1",
-                "php": "^8.1",
-                "symfony/process": "^7.1"
-            },
-            "require-dev": {
-                "composer/composer": "^2.8",
-                "illuminate/collections": "^11.30",
-                "laravel/pint": "^1.18",
-                "pestphp/pest": "^3.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "NiftyCo\\Skeletor\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "NiftyCo, LLC",
-                    "homepage": "https://aniftyco.com"
-                },
-                {
-                    "name": "Josh Manders",
-                    "homepage": "https://x.com/joshmanders"
-                }
-            ],
-            "description": "Summon Skeletor's minion: a Composer companion to unleash extra functionality with every `create-project` command.",
-            "homepage": "https://github.com/aniftyco/skeletor",
-            "keywords": [
-                "Skeleton",
-                "composer",
-                "create-project"
-            ],
-            "support": {
-                "issues": "https://github.com/aniftyco/skeletor/issues",
-                "source": "https://github.com/aniftyco/skeletor/tree/v0.1.1"
-            },
-            "time": "2025-02-11T06:56:53+00:00"
-        },
-        {
-            "name": "aphisitworachorch/kacher",
-            "version": "v1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aphisitworachorch/kacher.git",
-                "reference": "7f1389841cfa0f82b452d3b3bae9e29ba2531d95"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aphisitworachorch/kacher/zipball/7f1389841cfa0f82b452d3b3bae9e29ba2531d95",
-                "reference": "7f1389841cfa0f82b452d3b3bae9e29ba2531d95",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^10.37|^11.0|^12.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0|^9.0|^10.0"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Aphisitworachorch\\Kacher\\KacherServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aphisitworachorch\\Kacher\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Arsanandha Aphisitworachorch",
-                    "email": "arsanandha.ap@gmail.com"
-                }
-            ],
-            "description": "Kacher is Laravel DB to DBML (dbdiagram.io/dbdocs.io)",
-            "keywords": [
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/aphisitworachorch/kacher/issues",
-                "source": "https://github.com/aphisitworachorch/kacher/tree/v1.3"
-            },
-            "time": "2025-02-25T02:35:43+00:00"
         },
         {
             "name": "archtechx/enums",
@@ -24850,193 +24678,6 @@
             "time": "2025-04-03T01:29:54+00:00"
         },
         {
-            "name": "captainhook/captainhook",
-            "version": "5.25.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/captainhook-git/captainhook.git",
-                "reference": "e096240c130557be6d2059881341db7ebd84f653"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/e096240c130557be6d2059881341db7ebd84f653",
-                "reference": "e096240c130557be6d2059881341db7ebd84f653",
-                "shasum": ""
-            },
-            "require": {
-                "captainhook/secrets": "^0.9.4",
-                "ext-json": "*",
-                "ext-spl": "*",
-                "ext-xml": "*",
-                "php": ">=8.0",
-                "sebastianfeldmann/camino": "^0.9.2",
-                "sebastianfeldmann/cli": "^3.3",
-                "sebastianfeldmann/git": "^3.14",
-                "symfony/console": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/filesystem": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/process": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
-            },
-            "replace": {
-                "sebastianfeldmann/captainhook": "*"
-            },
-            "require-dev": {
-                "composer/composer": "~1 || ^2.0",
-                "mikey179/vfsstream": "~1"
-            },
-            "bin": [
-                "bin/captainhook"
-            ],
-            "type": "library",
-            "extra": {
-                "captainhook": {
-                    "config": "captainhook.json"
-                },
-                "branch-alias": {
-                    "dev-main": "6.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "CaptainHook\\App\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Feldmann",
-                    "email": "sf@sebastian-feldmann.info"
-                }
-            ],
-            "description": "PHP git hook manager",
-            "homepage": "http://php.captainhook.info/",
-            "keywords": [
-                "commit-msg",
-                "git",
-                "hooks",
-                "post-merge",
-                "pre-commit",
-                "pre-push",
-                "prepare-commit-msg"
-            ],
-            "support": {
-                "issues": "https://github.com/captainhookphp/captainhook/issues",
-                "source": "https://github.com/captainhook-git/captainhook/tree/5.25.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/sebastianfeldmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-30T17:23:19+00:00"
-        },
-        {
-            "name": "captainhook/hook-installer",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/captainhook-git/hook-installer.git",
-                "reference": "fb3c45f6204b08baba999f4ffc4ae707bf684e8b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/captainhook-git/hook-installer/zipball/fb3c45f6204b08baba999f4ffc4ae707bf684e8b",
-                "reference": "fb3c45f6204b08baba999f4ffc4ae707bf684e8b",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.1|^2.0",
-                "php": ">=8.0"
-            },
-            "require-dev": {
-                "composer/composer": "*"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "CaptainHook\\HookInstaller\\ComposerPlugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "CaptainHook\\HookInstaller\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Feldmann",
-                    "email": "sf@sebastian-feldmann.info"
-                }
-            ],
-            "description": "Composer Plugin that makes everyone activate the CaptainHook git hooks locally",
-            "support": {
-                "issues": "https://github.com/captainhook-git/hook-installer/issues",
-                "source": "https://github.com/captainhook-git/hook-installer/tree/1.0.4"
-            },
-            "time": "2025-04-08T07:12:26+00:00"
-        },
-        {
-            "name": "captainhook/secrets",
-            "version": "0.9.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/captainhook-git/secrets.git",
-                "reference": "d62c97f75f81ac98e22f1c282482bd35fa82f631"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/captainhook-git/secrets/zipball/d62c97f75f81ac98e22f1c282482bd35fa82f631",
-                "reference": "d62c97f75f81ac98e22f1c282482bd35fa82f631",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "CaptainHook\\Secrets\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Feldmann",
-                    "email": "sf@sebastian-feldmann.info"
-                }
-            ],
-            "description": "Utility classes to detect secrets",
-            "keywords": [
-                "commit-msg",
-                "keys",
-                "passwords",
-                "post-merge",
-                "prepare-commit-msg",
-                "secrets",
-                "tokens"
-            ],
-            "support": {
-                "issues": "https://github.com/captainhook-git/secrets/issues",
-                "source": "https://github.com/captainhook-git/secrets/tree/0.9.7"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/sebastianfeldmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-04-08T07:10:48+00:00"
-        },
-        {
             "name": "carthage-software/mago",
             "version": "0.16.0",
             "source": {
@@ -25218,127 +24859,6 @@
                 }
             ],
             "time": "2023-12-20T15:40:13+00:00"
-        },
-        {
-            "name": "coduo/php-matcher",
-            "version": "6.0.17",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/coduo/php-matcher.git",
-                "reference": "ec521bba7757d98fc601a80f063de1c4cbc2f92b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/ec521bba7757d98fc601a80f063de1c4cbc2f92b",
-                "reference": "ec521bba7757d98fc601a80f063de1c4cbc2f92b",
-                "shasum": ""
-            },
-            "require": {
-                "aeon-php/calendar": "^1.0.6",
-                "coduo/php-to-string": "^3",
-                "doctrine/lexer": "^3.0",
-                "ext-filter": "*",
-                "ext-json": "*",
-                "ext-simplexml": "*",
-                "php": "~8.1 || ~8.2 || ~8.3 || ~8.4"
-            },
-            "require-dev": {
-                "nikic/php-parser": "^4.0",
-                "openlss/lib-array2xml": "^1.0",
-                "phpunit/phpunit": "^10.4",
-                "symfony/cache": "^5.4|^6.4",
-                "symfony/expression-language": "^5.4|^6.4|^7.0",
-                "symfony/var-exporter": "^5.4|^6.4|^7.0"
-            },
-            "suggest": {
-                "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
-                "symfony/expression-language": "In order to use Coduo\\PHPMatcher\\Matcher\\ExpressionMatcher"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Coduo\\PHPMatcher\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michał Dąbrowski",
-                    "email": "dabrowski@brillante.pl"
-                },
-                {
-                    "name": "Norbert Orzechowicz",
-                    "email": "norbert@orzechowicz.pl"
-                }
-            ],
-            "description": "PHP Matcher enables you to match values with patterns",
-            "keywords": [
-                "Match",
-                "json",
-                "matcher",
-                "tests"
-            ],
-            "support": {
-                "issues": "https://github.com/coduo/php-matcher/issues",
-                "source": "https://github.com/coduo/php-matcher/tree/6.0.17"
-            },
-            "time": "2024-12-20T03:49:15+00:00"
-        },
-        {
-            "name": "coduo/php-to-string",
-            "version": "3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/coduo/php-to-string.git",
-                "reference": "e467de70e5e7403d969a05e853c7f480cde9fda4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/e467de70e5e7403d969a05e853c7f480cde9fda4",
-                "reference": "e467de70e5e7403d969a05e853c7f480cde9fda4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
-            },
-            "suggest": {
-                "ext-intl": "Required if you are going to use humanizer with locales different than en_EN"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Coduo\\ToString\\": "src/Coduo/ToString"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michał Dąbrowski",
-                    "email": "dabrowski@brillante.pl"
-                },
-                {
-                    "name": "Norbert Orzechowicz",
-                    "email": "norbert@orzechowicz.pl"
-                }
-            ],
-            "description": "Simple library that converts PHP value into strings",
-            "keywords": [
-                "php",
-                "string",
-                "to",
-                "to string"
-            ],
-            "support": {
-                "issues": "https://github.com/coduo/php-to-string/issues",
-                "source": "https://github.com/coduo/php-to-string/tree/3.2.1"
-            },
-            "time": "2023-03-28T10:10:37+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -27586,134 +27106,6 @@
             "time": "2025-03-22T16:51:39+00:00"
         },
         {
-            "name": "ladumor/laravel-pwa",
-            "version": "v0.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/shailesh-ladumor/laravel-pwa.git",
-                "reference": "1867899d6916803aef7ea02f489597555cc4ab02"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/shailesh-ladumor/laravel-pwa/zipball/1867899d6916803aef7ea02f489597555cc4ab02",
-                "reference": "1867899d6916803aef7ea02f489597555cc4ab02",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": ">=5.4",
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "LaravelPwa": "Ladumor\\LaravelPwa\\LaravelPwa"
-                    },
-                    "providers": [
-                        "\\Ladumor\\LaravelPwa\\PWAServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ladumor\\LaravelPwa\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Shailesh Ladumor",
-                    "email": "shaileshmladumor@gmail.com"
-                }
-            ],
-            "description": "this package used for the make pwa website.",
-            "keywords": [
-                "laravel",
-                "laravel-pwa",
-                "php",
-                "pwa-laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/shailesh-ladumor/laravel-pwa/issues",
-                "source": "https://github.com/shailesh-ladumor/laravel-pwa/tree/v0.0.4"
-            },
-            "time": "2023-09-02T13:09:30+00:00"
-        },
-        {
-            "name": "lanin/laravel-api-debugger",
-            "version": "4.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mlanin/laravel-api-debugger.git",
-                "reference": "ebfe152ecd1b3e40394a03ab3aeadac09a3cd10a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mlanin/laravel-api-debugger/zipball/ebfe152ecd1b3e40394a03ab3aeadac09a3cd10a",
-                "reference": "ebfe152ecd1b3e40394a03ab3aeadac09a3cd10a",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": ">=5.4.0",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3.1",
-                "orchestra/testbench": ">=3.4.0",
-                "phpunit/phpunit": "^7"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Debugger": "Lanin\\Laravel\\ApiDebugger\\Support\\Facade"
-                    },
-                    "providers": [
-                        "Lanin\\Laravel\\ApiDebugger\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Support/helpers.php"
-                ],
-                "psr-4": {
-                    "Lanin\\Laravel\\ApiDebugger\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maxim Lanin",
-                    "email": "max@lanin.me",
-                    "homepage": "http://lanin.me"
-                }
-            ],
-            "description": "Easily debug your JSON API.",
-            "keywords": [
-                "api",
-                "debug",
-                "debugger",
-                "dump",
-                "framework",
-                "json",
-                "laravel",
-                "log",
-                "queries"
-            ],
-            "support": {
-                "issues": "https://github.com/mlanin/laravel-api-debugger/issues",
-                "source": "https://github.com/mlanin/laravel-api-debugger/tree/4.0.1"
-            },
-            "time": "2025-02-27T12:32:07+00:00"
-        },
-        {
             "name": "laracademy/generators",
             "version": "3.7",
             "source": {
@@ -27832,146 +27224,6 @@
                 "source": "https://github.com/laracraft-tech/laravel-schema-rules/tree/v1.5.0"
             },
             "time": "2025-02-23T14:03:20+00:00"
-        },
-        {
-            "name": "laradumps/laradumps",
-            "version": "v4.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "84954edaed1c652ee5a5df86a907124742ef88e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/84954edaed1c652ee5a5df86a907124742ef88e4",
-                "reference": "84954edaed1c652ee5a5df86a907124742ef88e4",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/mail": "^10.0|^11.0|^12.0",
-                "illuminate/support": "^10.0|^11.0|^12.0",
-                "laradumps/laradumps-core": "^3.0",
-                "nunomaduro/termwind": "^1.15.1|^2.0.1",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "laravel/framework": "^10.0|^11.0|^12.0",
-                "laravel/pint": "^1.17.2",
-                "livewire/livewire": "^3.5.6",
-                "mockery/mockery": "^1.6.12",
-                "orchestra/testbench-core": "^8.0|^9.4|^10.0",
-                "pestphp/pest": "^2.35.1|^3.7.0",
-                "symfony/var-dumper": "^6.4.0|^7.1.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LaraDumps\\LaraDumps\\LaraDumpsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
-                "psr-4": {
-                    "LaraDumps\\LaraDumps\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Luan Freitas",
-                    "email": "luanfreitas10@protonmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "LaraDumps is a friendly app designed to boost your Laravel PHP coding and debugging experience.",
-            "homepage": "https://github.com/laradumps/laradumps",
-            "support": {
-                "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v4.0.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/luanfreitasdev",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-30T17:24:18+00:00"
-        },
-        {
-            "name": "laradumps/laradumps-core",
-            "version": "v3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "fa1adfa2b5b0f915dfe688ca155135869025ecec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/fa1adfa2b5b0f915dfe688ca155135869025ecec",
-                "reference": "fa1adfa2b5b0f915dfe688ca155135869025ecec",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "nunomaduro/termwind": "^1.15|^2.0",
-                "php": "^8.1",
-                "ramsey/uuid": "^4.7.5",
-                "spatie/backtrace": "^1.5",
-                "symfony/console": "^5.4|^6.4|^7.0",
-                "symfony/finder": "^5.4|^6.4|^7.0",
-                "symfony/process": "^5.4|^6.4|^7.0",
-                "symfony/var-dumper": "^5.4|^6.4|^7.0",
-                "symfony/yaml": "^5.4|^6.4|^7.0"
-            },
-            "require-dev": {
-                "illuminate/support": "^10.46",
-                "laravel/pint": "^1.13.7",
-                "pestphp/pest": "^2.0|^3.0",
-                "phpstan/phpstan": "^1.10.50"
-            },
-            "bin": [
-                "bin/laradumps"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
-                "psr-4": {
-                    "LaraDumps\\LaraDumpsCore\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Luan Freitas",
-                    "email": "luanfreitas10@protonmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "LaraDumps is a friendly app designed to boost your Laravel / PHP coding and debugging experience.",
-            "homepage": "https://github.com/laradumps/laradumps-core",
-            "support": {
-                "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v3.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/luanfreitasdev",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-04-08T21:08:40+00:00"
         },
         {
             "name": "laravel-lang/actions",
@@ -29584,44 +28836,6 @@
             "time": "2024-12-04T14:16:01+00:00"
         },
         {
-            "name": "maestroerror/html-strings-affixer",
-            "version": "1.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MaestroError/html-strings-affixer.git",
-                "reference": "8be6ef4dc4d0328686e9f214d7f6d14d7c2252ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MaestroError/html-strings-affixer/zipball/8be6ef4dc4d0328686e9f214d7f6d14d7c2252ba",
-                "reference": "8be6ef4dc4d0328686e9f214d7f6d14d7c2252ba",
-                "shasum": ""
-            },
-            "bin": [
-                "bin/composer-adapter/hsawin",
-                "bin/hsa",
-                "bin/hsamac",
-                "bin/hsamacm1"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "maestroerror",
-                    "email": "revaz.gh@gmail.com"
-                }
-            ],
-            "description": "Finds texts in HTML and replaces it with suffixed and prefixed string",
-            "support": {
-                "issues": "https://github.com/MaestroError/html-strings-affixer/issues",
-                "source": "https://github.com/MaestroError/html-strings-affixer/tree/1.2.2"
-            },
-            "time": "2023-09-20T21:19:24+00:00"
-        },
-        {
             "name": "marc-mabe/php-enum",
             "version": "v4.7.1",
             "source": {
@@ -29764,72 +28978,6 @@
             },
             "abandoned": "php-debugbar/php-debugbar",
             "time": "2025-02-21T17:47:03+00:00"
-        },
-        {
-            "name": "mrmarchone/laravel-auto-crud",
-            "version": "v1.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mrmarchone/laravel-auto-crud.git",
-                "reference": "cacb5e15bbb6f188f342c7e26eecc3c1377e5cd3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mrmarchone/laravel-auto-crud/zipball/cacb5e15bbb6f188f342c7e26eecc3c1377e5cd3",
-                "reference": "cacb5e15bbb6f188f342c7e26eecc3c1377e5cd3",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^10.0|^11.0|^12.0",
-                "laravel/prompts": "*",
-                "php": ">=8.1",
-                "spatie/laravel-data": "*"
-            },
-            "require-dev": {
-                "laravel/pint": "*",
-                "mockery/mockery": "*",
-                "orchestra/testbench": "^9.9",
-                "pestphp/pest": "^3.7"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Mrmarchone\\LaravelAutoCrud\\LaravelAutoCrudServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Mrmarchone\\LaravelAutoCrud\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Abdelrahman Muhammed",
-                    "email": "mrmarchone@gmail.com"
-                }
-            ],
-            "description": "Laravel Auto CRUD helps you streamline development and save time.",
-            "support": {
-                "issues": "https://github.com/mrmarchone/laravel-auto-crud/issues",
-                "source": "https://github.com/mrmarchone/laravel-auto-crud/tree/v1.6.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.buymeacoffee.com/mrmarchone",
-                    "type": "buy_me_a_coffee"
-                },
-                {
-                    "url": "https://github.com/mrmarchone",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-13T01:47:56+00:00"
         },
         {
             "name": "msamgan/laravel-env-keys-checker",
@@ -31343,51 +30491,6 @@
             "time": "2025-03-23T16:02:11+00:00"
         },
         {
-            "name": "plannr/laravel-fast-refresh-database",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PlannrCrm/laravel-fast-refresh-database.git",
-                "reference": "b462772b0c87d683dd3f67706e174082ebea180c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PlannrCrm/laravel-fast-refresh-database/zipball/b462772b0c87d683dd3f67706e174082ebea180c",
-                "reference": "b462772b0c87d683dd3f67706e174082ebea180c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1",
-                "symfony/process": "^6.0 || ^7.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.13",
-                "orchestra/testbench": "^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Plannr\\Laravel\\FastRefreshDatabase\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sam Carré",
-                    "email": "29132017+Sammyjo20@users.noreply.github.com"
-                }
-            ],
-            "description": "Refresh your database faster than you've ever seen before 🚀",
-            "support": {
-                "issues": "https://github.com/PlannrCrm/laravel-fast-refresh-database/issues",
-                "source": "https://github.com/PlannrCrm/laravel-fast-refresh-database/tree/v1.2.0"
-            },
-            "time": "2024-04-08T11:29:20+00:00"
-        },
-        {
             "name": "react/child-process",
             "version": "v0.6.6",
             "source": {
@@ -31630,150 +30733,6 @@
                 "source": "https://github.com/reliese/laravel"
             },
             "time": "2025-03-20T16:16:48+00:00"
-        },
-        {
-            "name": "robiningelbrecht/phpunit-pretty-print",
-            "version": "v1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/robiningelbrecht/phpunit-pretty-print.git",
-                "reference": "e32ca0f1ec7a95b41d65d42cce7767d4c4e2ac02"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/robiningelbrecht/phpunit-pretty-print/zipball/e32ca0f1ec7a95b41d65d42cce7767d4c4e2ac02",
-                "reference": "e32ca0f1ec7a95b41d65d42cce7767d4c4e2ac02",
-                "shasum": ""
-            },
-            "require": {
-                "nunomaduro/collision": "^7.8|^8.0",
-                "php": "^8.1",
-                "phpunit/phpunit": "^10.3|^11.0|^12.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.9",
-                "phpstan/phpstan": "^1.10",
-                "spatie/phpunit-snapshot-assertions": "^5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RobinIngelbrecht\\PHPUnitPrettyPrint\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Robin Ingelbrecht",
-                    "email": "ingelbrecht_robin@hotmail.com"
-                }
-            ],
-            "description": "Prettify PHPUnit output",
-            "keywords": [
-                "php",
-                "phpunit",
-                "testing"
-            ],
-            "support": {
-                "issues": "https://github.com/robiningelbrecht/phpunit-pretty-print/issues",
-                "source": "https://github.com/robiningelbrecht/phpunit-pretty-print/tree/v1.4.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.buymeacoffee.com/ingelbrecht",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/robiningelbrecht",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-15T09:55:17+00:00"
-        },
-        {
-            "name": "salahhusa9/laravel-updater",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/salahhusa9/laravel-updater.git",
-                "reference": "88d5257c34ddd71fdb53fe2ef964f24239004aa4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/salahhusa9/laravel-updater/zipball/88d5257c34ddd71fdb53fe2ef964f24239004aa4",
-                "reference": "88d5257c34ddd71fdb53fe2ef964f24239004aa4",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.8",
-                "illuminate/contracts": "^10.0|^11.0|^12.0",
-                "php": "^8.1|^8.2",
-                "spatie/laravel-package-tools": "^1.0",
-                "symfony/process": "^6.3|^7.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^7.8|^8.0",
-                "orchestra/testbench": "10.1.0",
-                "pestphp/pest": "^2.20|^3.0",
-                "pestphp/pest-plugin-arch": "^2.0|^3.0",
-                "pestphp/pest-plugin-laravel": "^2.0|^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Updater": "Salahhusa9\\Updater\\Facades\\Updater"
-                    },
-                    "providers": [
-                        "Salahhusa9\\Updater\\UpdaterServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Salahhusa9\\Updater\\": "src/",
-                    "Salahhusa9\\Updater\\Database\\Factories\\": "database/factories/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "salahhusa9",
-                    "email": "salahhusa9@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Updater is a simple yet powerful package for updater your Laravel applications. It makes it easy to upgrade your application to the latest version with just one command.",
-            "homepage": "https://github.com/salahhusa9/laravel-updater",
-            "keywords": [
-                "laravel",
-                "laravel package",
-                "laravel package self updater",
-                "laravel package update",
-                "laravel package update itself",
-                "laravel package updater",
-                "laravel self updater",
-                "laravel-updater",
-                "salahhusa9"
-            ],
-            "support": {
-                "issues": "https://github.com/salahhusa9/laravel-updater/issues",
-                "source": "https://github.com/salahhusa9/laravel-updater/tree/v1.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/salahhusa9",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-04-01T16:43:47+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -32702,90 +31661,40 @@
             "time": "2024-10-09T05:16:32+00:00"
         },
         {
-            "name": "sebastianfeldmann/camino",
-            "version": "0.9.5",
+            "name": "soloterm/dumps",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sebastianfeldmann/camino.git",
-                "reference": "bf2e4c8b2a029e9eade43666132b61331e3e8184"
+                "url": "https://github.com/soloterm/dumps.git",
+                "reference": "a1946b0a9b8038a1d4ef4da5a4f0d25604f68d1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianfeldmann/camino/zipball/bf2e4c8b2a029e9eade43666132b61331e3e8184",
-                "reference": "bf2e4c8b2a029e9eade43666132b61331e3e8184",
+                "url": "https://api.github.com/repos/soloterm/dumps/zipball/a1946b0a9b8038a1d4ef4da5a4f0d25604f68d1b",
+                "reference": "a1946b0a9b8038a1d4ef4da5a4f0d25604f68d1b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SebastianFeldmann\\Camino\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Feldmann",
-                    "email": "sf@sebastian-feldmann.info"
-                }
-            ],
-            "description": "Path management the OO way",
-            "homepage": "https://github.com/sebastianfeldmann/camino",
-            "keywords": [
-                "file system",
-                "path"
-            ],
-            "support": {
-                "issues": "https://github.com/sebastianfeldmann/camino/issues",
-                "source": "https://github.com/sebastianfeldmann/camino/tree/0.9.5"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianfeldmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-01-03T13:15:10+00:00"
-        },
-        {
-            "name": "sebastianfeldmann/cli",
-            "version": "3.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianfeldmann/cli.git",
-                "reference": "6fa122afd528dae7d7ec988a604aa6c600f5d9b5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianfeldmann/cli/zipball/6fa122afd528dae7d7ec988a604aa6c600f5d9b5",
-                "reference": "6fa122afd528dae7d7ec988a604aa6c600f5d9b5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
+                "illuminate/console": "^10|^11|^12",
+                "illuminate/support": "^10|^11|^12",
+                "php": "^8.1"
             },
             "require-dev": {
-                "symfony/process": "^4.3 | ^5.0"
+                "illuminate/process": "^10|^11|^12",
+                "orchestra/testbench": "^8.29|^9.5|^10",
+                "phpunit/phpunit": "^10.5|^11"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4.x-dev"
+                "laravel": {
+                    "providers": [
+                        "SoloTerm\\Dumps\\Providers\\DumpServiceProvider"
+                    ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "SebastianFeldmann\\Cli\\": "src/"
+                    "SoloTerm\\Dumps\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -32794,88 +31703,26 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastian Feldmann",
-                    "email": "sf@sebastian-feldmann.info"
+                    "name": "Aaron Francis",
+                    "email": "aarondfrancis@gmail.com"
                 }
             ],
-            "description": "PHP cli helper classes",
-            "homepage": "https://github.com/sebastianfeldmann/cli",
-            "keywords": [
-                "cli"
-            ],
+            "description": "A Laravel command to intercept dumps from your Laravel application.",
             "support": {
-                "issues": "https://github.com/sebastianfeldmann/cli/issues",
-                "source": "https://github.com/sebastianfeldmann/cli/tree/3.4.2"
+                "issues": "https://github.com/soloterm/dumps/issues",
+                "source": "https://github.com/soloterm/dumps/tree/v1.0.1"
             },
             "funding": [
                 {
-                    "url": "https://github.com/sebastianfeldmann",
+                    "url": "https://aaronfrancis.com/backstage",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/aarondfrancis",
                     "type": "github"
                 }
             ],
-            "time": "2024-11-26T10:19:01+00:00"
-        },
-        {
-            "name": "sebastianfeldmann/git",
-            "version": "3.14.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianfeldmann/git.git",
-                "reference": "bc13c3bab8f67dee26352c94e23a4ee775d9d05b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianfeldmann/git/zipball/bc13c3bab8f67dee26352c94e23a4ee775d9d05b",
-                "reference": "bc13c3bab8f67dee26352c94e23a4ee775d9d05b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-libxml": "*",
-                "ext-simplexml": "*",
-                "php": ">=8.0",
-                "sebastianfeldmann/cli": "^3.0"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SebastianFeldmann\\Git\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sebastian Feldmann",
-                    "email": "sf@sebastian-feldmann.info"
-                }
-            ],
-            "description": "PHP git wrapper",
-            "homepage": "https://github.com/sebastianfeldmann/git",
-            "keywords": [
-                "git"
-            ],
-            "support": {
-                "issues": "https://github.com/sebastianfeldmann/git/issues",
-                "source": "https://github.com/sebastianfeldmann/git/tree/3.14.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianfeldmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-28T19:09:31+00:00"
+            "time": "2025-03-20T17:41:33+00:00"
         },
         {
             "name": "soloterm/solo",
@@ -33672,63 +32519,6 @@
             "time": "2024-10-25T15:15:23+00:00"
         },
         {
-            "name": "symplify/phpstan-rules",
-            "version": "14.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "0739d34b5e275df765813054b9503daa841e1594"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/0739d34b5e275df765813054b9503daa841e1594",
-                "reference": "0739d34b5e275df765813054b9503daa841e1594",
-                "shasum": ""
-            },
-            "require": {
-                "nette/utils": "^3.2|^4.0",
-                "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.8",
-                "webmozart/assert": "^1.11"
-            },
-            "type": "phpstan-extension",
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "config/services/services.neon"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions/fast-functions.php"
-                ],
-                "psr-4": {
-                    "Symplify\\PHPStanRules\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Set of Symplify rules for PHPStan",
-            "support": {
-                "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.2"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/rectorphp",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/tomasvotruba",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-04-11T08:11:16+00:00"
-        },
-        {
             "name": "ta-tikoma/phpunit-architecture-test",
             "version": "0.8.4",
             "source": {
@@ -33897,61 +32687,6 @@
                 }
             ],
             "time": "2024-03-03T12:36:25+00:00"
-        },
-        {
-            "name": "tightenco/tlint",
-            "version": "v9.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tighten/tlint.git",
-                "reference": "8f2d8eee3a9db9924c75f484aa9c7e3dbfac2090"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tighten/tlint/zipball/8f2d8eee3a9db9924c75f484aa9c7e3dbfac2090",
-                "reference": "8f2d8eee3a9db9924c75f484aa9c7e3dbfac2090",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/view": "*",
-                "nikic/php-parser": "^5.0",
-                "php": ">=8.1",
-                "symfony/console": "^6.1||^7.0",
-                "symfony/process": "^6.1||^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.6",
-                "spatie/ray": "^1.37",
-                "symfony/var-dumper": "^6.1",
-                "tightenco/duster": "^3.0"
-            },
-            "bin": [
-                "bin/tlint"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tighten\\TLint\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Logan Henson",
-                    "email": "logan@loganhenson.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Tighten linter for Laravel conventions",
-            "homepage": "https://github.com/tighten/tlint",
-            "support": {
-                "issues": "https://github.com/tighten/tlint/issues",
-                "source": "https://github.com/tighten/tlint/tree/v9.5.0"
-            },
-            "time": "2025-03-21T18:26:57+00:00"
         },
         {
             "name": "worksome/envy",
@@ -34156,69 +32891,6 @@
                 }
             ],
             "time": "2023-12-20T09:39:03+00:00"
-        },
-        {
-            "name": "yoast/phpunit-polyfills",
-            "version": "4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Yoast/PHPUnit-Polyfills.git",
-                "reference": "134921bfca9b02d8f374c48381451da1d98402f9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Yoast/PHPUnit-Polyfills/zipball/134921bfca9b02d8f374c48381451da1d98402f9",
-                "reference": "134921bfca9b02d8f374c48381451da1d98402f9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "phpunit/phpunit": "^7.5 || ^8.0 || ^9.0 || ^11.0 || ^12.0"
-            },
-            "require-dev": {
-                "php-parallel-lint/php-console-highlighter": "^1.0.0",
-                "php-parallel-lint/php-parallel-lint": "^1.4.0",
-                "yoast/yoastcs": "^3.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "4.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "phpunitpolyfills-autoload.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Team Yoast",
-                    "email": "support@yoast.com",
-                    "homepage": "https://yoast.com"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/Yoast/PHPUnit-Polyfills/graphs/contributors"
-                }
-            ],
-            "description": "Set of polyfills for changed PHPUnit functionality to allow for creating PHPUnit cross-version compatible tests",
-            "homepage": "https://github.com/Yoast/PHPUnit-Polyfills",
-            "keywords": [
-                "phpunit",
-                "polyfill",
-                "testing"
-            ],
-            "support": {
-                "issues": "https://github.com/Yoast/PHPUnit-Polyfills/issues",
-                "security": "https://github.com/Yoast/PHPUnit-Polyfills/security/policy",
-                "source": "https://github.com/Yoast/PHPUnit-Polyfills"
-            },
-            "time": "2025-02-09T18:58:54+00:00"
         }
     ],
     "aliases": [],
