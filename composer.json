@@ -1,11 +1,11 @@
 {
     "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "description": "The skeleton application for the Laravel framework.",
     "license": "MIT",
     "type": "project",
     "keywords": [
-        "framework",
-        "laravel"
+        "laravel",
+        "framework"
     ],
     "require": {
         "php": "^8.3",
@@ -79,7 +79,6 @@
         "laravel/folio": "^1.1",
         "laravel/framework": "^12.8",
         "laravel/octane": "^2.9",
-        "laravel/pail": "^1.2",
         "laravel/pennant": "^1.16",
         "laravel/pulse": "^1.4",
         "laravel/reverb": "^1.5",
@@ -177,6 +176,7 @@
         "laravel-shift/factory-generator": "^2.2",
         "laravel/envoy": "^2.10",
         "laravel/facade-documenter": "dev-main",
+        "laravel/pail": "^1.2",
         "laravel/pint": "^1.22",
         "laravel/sail": "^1.41",
         "laravel/telescope": "^5.7",
@@ -287,21 +287,6 @@
                 "thedoctor0/laravel-factory-generator",
                 "worksome/envy"
             ]
-        },
-        "merge-plugin": {
-            "ignore-duplicates": false,
-            "include": [
-                "composer.local.json",
-                "modules/*/composer.json"
-            ],
-            "merge-dev": true,
-            "merge-extra": false,
-            "merge-extra-deep": false,
-            "merge-replace": true,
-            "merge-scripts": false,
-            "recurse": true,
-            "replace": false,
-            "require": []
         }
     },
     "scripts": {
@@ -329,15 +314,11 @@
         "ai-commit-github-models": "@ai-commit --generator=github_models_cli",
         "ai-commit-github-models-no-verify": "@ai-commit-github-models --no-verify",
         "ai-commit-no-verify": "@ai-commit --no-verify",
-        "arkitect": "@php artisan test:arkitect --ansi -v",
         "artisan": [
             "@putenv XDEBUG_MODE=coverage,debug",
             "@putenv XDEBUG_SESSION=1",
             "@php artisan --ansi"
         ],
-        "captainhook": "@php ./vendor/bin/captainhook --ansi -v",
-        "captainhook-configure": "@captainhook configure",
-        "captainhook-install": "@captainhook install",
         "cghooks": "@php ./vendor/bin/cghooks --ansi -v",
         "cghooks-ignore": "[ ! -f \"./vendor/bin/cghooks\" ] && exit 0 || php ./vendor/bin/cghooks --ansi -v",
         "checks": [
@@ -349,16 +330,10 @@
             "@phpstan",
             "@rector-dry-run"
         ],
-        "composer-audit": "@composer audit --ansi -v",
         "composer-bin-all-update": "@composer bin all update --ansi -v",
         "composer-check-platform-reqs": "@composer check-platform-reqs --ansi -v",
         "composer-diff": "@composer diff --with-platform --ansi -v",
         "composer-normalize": "@composer normalize --dry-run --diff --ansi -v",
-        "composer-parallel": "@composer parallel --ansi -v",
-        "composer-parallel-checks": "@composer-parallel composer-validate md-lint lint style-lint test psalm",
-        "composer-require-checker": "@php ./vendor/bin/composer-require-checker check --config-file=composer-require-checker.json composer.json --ansi -v",
-        "composer-unused": "@php ./vendor/bin/composer-unused --ansi -v",
-        "composer-unused-checker": "@php ./vendor/bin/composer-unused --ansi -v",
         "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.4/bin/php --ansi",
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-updater-laravel10": "@composer-updater --composer-json-path=vendor-bin/laravel10/composer.json",
@@ -367,7 +342,6 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
         ],
-        "docs-generate": "@php artisan scribe:generate --ansi -v",
         "envoy": "@php ./vendor/bin/envoy --ansi -v",
         "envoy-local": "@envoy run local",
         "envoy-ssh-testing": "@envoy ssh testing",
@@ -418,10 +392,6 @@
         "sk-finalize-classes-dry-run": "@sk-finalize-classes --dry-run",
         "sk-find-multi-classes": "@sk find-multi-classes ./app ./routes",
         "sk-namespace-to-psr-4": "@sk namespace-to-psr-4 ./app --namespace-root=App\\",
-        "skeletor": [
-            "@putenv NO_SKELETOR_CLEANUP=true",
-            "NiftyCo\\Skeletor\\Runner::execute"
-        ],
         "style-fix": "@php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --show-progress=dots --diff --ansi -v",
         "style-fix-dist": "@php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer-dist.php --show-progress=dots --diff --ansi -v",
         "style-lint": "@style-fix --dry-run",
@@ -429,8 +399,6 @@
         "test": "@pest",
         "test-coverage": "@pest-coverage",
         "test-migrate-configuration": "@pest-migrate-configuration",
-        "tlint": "@php ./vendor/bin/tlint lint --diff --ansi -v",
-        "tlint-format": "@php ./vendor/bin/tlint format --diff --ansi -v",
         "trap": "@php ./vendor/bin/trap --ui --ansi -v",
         "update-fluent-assert-doc-comment": "App\\Support\\FluentAssert::updateDocComment",
         "var-dump-server": "@php ./vendor/bin/var-dump-server --ansi -v"
@@ -439,5 +407,6 @@
         "artisan": [
             "art"
         ]
-    }
+    },
+    "$schema": "https://getcomposer.org/schema.json"
 }

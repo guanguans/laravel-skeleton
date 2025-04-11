@@ -28,3 +28,4 @@ yarn-error.log
 deploy.php
 /public/xhgui
 /vendor-bin/**/vendor/
+/tests.*
