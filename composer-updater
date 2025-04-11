@@ -15,6 +15,7 @@ declare(strict_types=1);
 use Composer\InstalledVersions;
 use Illuminate\Support\Str;
 use SebastianBergmann\Diff\Differ;
+use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -38,7 +39,7 @@ $status = (new SingleCommandApplication)
     ->addOption('except-dependency-versions', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL)
     ->addOption('dry-run', null, InputOption::VALUE_NONE)
     ->setCode(function (InputInterface $input, OutputInterface $output): void {
-        assert_options(\ASSERT_BAIL, 1);
+        // assert_options(\ASSERT_BAIL, 1);
         \assert($this instanceof SingleCommandApplication);
         \assert((bool) $input->getOption('highest-php-binary'));
 
@@ -50,7 +51,7 @@ $status = (new SingleCommandApplication)
             $input->getOption('except-dependency-versions'),
             $input->getOption('dry-run'),
             new SymfonyStyle($input, $output),
-            new Differ,
+            new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true)),
         ) {
             private string $composerJsonPath;
             private string $composerJsonContents;
@@ -76,7 +77,7 @@ $status = (new SingleCommandApplication)
                 ?Differ $differ = null
             ) {
                 error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_WARNING);
-                assert_options(\ASSERT_BAIL, 1);
+                // assert_options(\ASSERT_BAIL, 1);
                 \assert((bool) $composerJsonPath);
 
                 $this->composerJsonPath = $composerJsonPath;
@@ -95,7 +96,7 @@ $status = (new SingleCommandApplication)
                 ], $exceptDependencyVersions);
                 $this->dryRun = $dryRun;
                 $this->symfonyStyle = $symfonyStyle ?? new SymfonyStyle(new ArgvInput, new ConsoleOutput);
-                $this->differ = $differ ?? new Differ;
+                $this->differ = $differ ?? new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true));
             }
 
             /**

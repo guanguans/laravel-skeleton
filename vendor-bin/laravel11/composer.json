@@ -1,7 +1,6 @@
 {
     "require": {
         "appstract/laravel-opcache": "^4.0",
-        "overtrue/laravel-uploader": "^3.2",
         "timacdonald/has-parameters": "^1.5",
         "wendelladriel/laravel-lift": "^0.15"
     },

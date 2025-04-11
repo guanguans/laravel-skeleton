@@ -96,6 +96,7 @@
         "onlime/laravel-http-client-global-logger": "^1.2",
         "opcodesio/log-viewer": "^3.15",
         "overtrue/laravel-query-logger": "^3.4",
+        "overtrue/laravel-uploader": "^3.3",
         "perryvandermeer/laravel-console-validator": "^1.2",
         "phiki/phiki": "^1.1",
         "php-ds/php-ds": "^1.5",
@@ -303,7 +304,6 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
             "@php artisan spatie-stub:publish --force --ansi -v"
@@ -316,7 +316,9 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi -v"
+            "@php artisan key:generate --ansi -v",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi -v"
         ],
         "ai-commit": "@php ./vendor/bin/ai-commit commit --ansi",
         "ai-commit-bito": "@ai-commit --generator=bito_cli",
@@ -360,6 +362,10 @@
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-updater-laravel10": "@composer-updater --composer-json-path=vendor-bin/laravel10/composer.json",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        ],
         "docs-generate": "@php artisan scribe:generate --ansi -v",
         "envoy": "@php ./vendor/bin/envoy --ansi -v",
         "envoy-local": "@envoy run local",

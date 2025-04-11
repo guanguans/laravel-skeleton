@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73944cf381201db37802f8aed78cc331",
+    "content-hash": "661035e6fbeff731abbab2f715266e3c",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -12991,6 +12991,79 @@
             "time": "2025-02-20T15:32:02+00:00"
         },
         {
+            "name": "overtrue/laravel-uploader",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-uploader.git",
+                "reference": "680f594750e05295dfeabaf901644a223d9f8045"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-uploader/zipball/680f594750e05295dfeabaf901644a223d9f8045",
+                "reference": "680f594750e05295dfeabaf901644a223d9f8045",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^9.0|^10.0|^11.0|^12.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "dev-master",
+                "laravel/pint": "^1.5",
+                "mockery/mockery": "^1.5",
+                "phpunit/phpunit": "^11.2"
+            },
+            "type": "library",
+            "extra": {
+                "hooks": {
+                    "pre-push": [
+                        "composer test",
+                        "composer fix-style"
+                    ],
+                    "pre-commit": [
+                        "composer test",
+                        "composer check-style"
+                    ]
+                },
+                "laravel": {
+                    "aliases": {
+                        "LaravelUploader": "\\Overtrue\\LaravelUploader\\LaravelUploader"
+                    },
+                    "providers": [
+                        "\\Overtrue\\LaravelUploader\\UploadServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelUploader\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "i@overtrue.me"
+                }
+            ],
+            "description": "An upload component for Laravel.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-uploader/issues",
+                "source": "https://github.com/overtrue/laravel-uploader/tree/3.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/overtrue",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-11T12:21:17+00:00"
+        },
+        {
             "name": "paragonie/certainty",
             "version": "v2.9.0",
             "source": {
@@ -18340,16 +18413,16 @@
         },
         {
             "name": "spatie/laravel-settings",
-            "version": "3.4.3",
+            "version": "3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-settings.git",
-                "reference": "bc137476b2d0072c118634905a9068c1fdab88ca"
+                "reference": "fd0eb5a832131b56cd98834b93be3425ee28e333"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/bc137476b2d0072c118634905a9068c1fdab88ca",
-                "reference": "bc137476b2d0072c118634905a9068c1fdab88ca",
+                "url": "https://api.github.com/repos/spatie/laravel-settings/zipball/fd0eb5a832131b56cd98834b93be3425ee28e333",
+                "reference": "fd0eb5a832131b56cd98834b93be3425ee28e333",
                 "shasum": ""
             },
             "require": {
@@ -18409,7 +18482,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-settings/issues",
-                "source": "https://github.com/spatie/laravel-settings/tree/3.4.3"
+                "source": "https://github.com/spatie/laravel-settings/tree/3.4.4"
             },
             "funding": [
                 {
@@ -18421,7 +18494,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-11T09:35:44+00:00"
+            "time": "2025-04-11T11:35:56+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",
