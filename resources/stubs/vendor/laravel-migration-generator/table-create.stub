@@ -1,3 +1,0 @@
-Schema::create('[TableName]', function (Blueprint $table) {
-    [Schema]
-});
