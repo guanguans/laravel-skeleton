@@ -225,7 +225,7 @@ class AppServiceProvider extends ServiceProvider
             // ini_set('json.exceptions', '1'); // PHP 8.3
             $this->bootAutowired();
             $this->bootAspects();
-            $this->bootDecorator();
+            // $this->bootDecorator();
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->setLocales();
@@ -935,13 +935,13 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    private function bootDecorator(): void
-    {
-        Decorator::decorate(
-            'UserRepository@find',
-            DecoratorFactory::cache(static fn ($madId): string => 'mad_user_key_'.$madId, 10)
-        );
-    }
+    // private function bootDecorator(): void
+    // {
+    //     Decorator::decorate(
+    //         'UserRepository@find',
+    //         DecoratorFactory::cache(static fn ($madId): string => 'mad_user_key_'.$madId, 10)
+    //     );
+    // }
 
     /**
      * Determine if server is running Octane.

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39d7fe8a1ccf55171b20ed80e54eebe9",
+    "content-hash": "af6504c67c8269a9dd3cf0fb92526abc",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -2484,73 +2484,6 @@
             "time": "2025-01-03T16:18:33+00:00"
         },
         {
-            "name": "coduo/php-humanizer",
-            "version": "5.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/coduo/php-humanizer.git",
-                "reference": "8873082ace4660527641d6306513315e45087270"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-humanizer/zipball/8873082ace4660527641d6306513315e45087270",
-                "reference": "8873082ace4660527641d6306513315e45087270",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~8.2 || ~8.3 || ~8.4",
-                "symfony/translation": "~5.4||~6.4||~7"
-            },
-            "require-dev": {
-                "aeon-php/calendar": "^1.0",
-                "thunderer/shortcode": "^0.7"
-            },
-            "suggest": {
-                "ext-intl": "Required if you are going to use humanizer with locales different than en_EN"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michał Dąbrowski",
-                    "email": "dabrowski@brillante.pl"
-                },
-                {
-                    "name": "Norbert Orzechowicz",
-                    "email": "norbert@orzechowicz.pl"
-                }
-            ],
-            "description": "Humanize values that are readable only for developers",
-            "keywords": [
-                "humanize",
-                "humanizer",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/coduo/php-humanizer/issues",
-                "source": "https://github.com/coduo/php-humanizer/tree/5.0.2"
-            },
-            "funding": [
-                {
-                    "url": "https://flow-php.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/norberttech",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-02-06T15:51:17+00:00"
-        },
-        {
             "name": "composer/ca-bundle",
             "version": "1.5.6",
             "source": {
@@ -2935,63 +2868,6 @@
                 }
             ],
             "time": "2025-02-25T10:51:54+00:00"
-        },
-        {
-            "name": "crwlr/query-string",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/crwlrsoft/query-string.git",
-                "reference": "4e71cae0c942fe1ce2ae22506bd46ecdfa5b4f0e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/crwlrsoft/query-string/zipball/4e71cae0c942fe1ce2ae22506bd46ecdfa5b4f0e",
-                "reference": "4e71cae0c942fe1ce2ae22506bd46ecdfa5b4f0e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.8",
-                "pestphp/pest": "^1.21",
-                "phpstan/phpstan": "^1.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Crwlr\\QueryString\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christian Olear",
-                    "homepage": "https://www.otsch.codes",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A library for convenient handling of query strings used in HTTP requests.",
-            "homepage": "https://www.crwlr.software/packages/query-string",
-            "keywords": [
-                "crwlr",
-                "http",
-                "query",
-                "query string",
-                "query-string",
-                "request",
-                "string"
-            ],
-            "support": {
-                "docs": "https://www.crwlr.software/packages/query-string",
-                "issues": "https://github.com/crwlrsoft/query-string/issues",
-                "source": "https://github.com/crwlrsoft/query-string"
-            },
-            "time": "2023-04-12T21:31:58+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -6630,69 +6506,6 @@
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
-            "name": "hamidrezaniazi/pecs",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hamidrezaniazi/pecs.git",
-                "reference": "f80810cb08ccbdc5c867455762f8e043ad157120"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hamidrezaniazi/pecs/zipball/f80810cb08ccbdc5c867455762f8e043ad157120",
-                "reference": "f80810cb08ccbdc5c867455762f8e043ad157120",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/collections": ">=8",
-                "monolog/monolog": "^3.0",
-                "nesbot/carbon": "^2.0|^3.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "fakerphp/faker": "^1.0",
-                "friendsofphp/php-cs-fixer": "^3.16",
-                "phpstan/phpstan": "^1.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Hamidrezaniazi\\Pecs\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Hamidreza Niazi",
-                    "email": "hamidrezaniazi@yahoo.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP ECS (Elastic Common Schema): Simplify logging with the power of elastic common schema.",
-            "homepage": "https://github.com/hamidrezaniazi/pecs",
-            "keywords": [
-                "ECS",
-                "Elastic Common Schema",
-                "elastic",
-                "filebeat",
-                "hamidrezaniazi",
-                "log",
-                "logging",
-                "pecs",
-                "php ecs",
-                "php elastic common schema"
-            ],
-            "support": {
-                "issues": "https://github.com/hamidrezaniazi/pecs/issues",
-                "source": "https://github.com/hamidrezaniazi/pecs/tree/2.0.0"
-            },
-            "time": "2025-02-12T12:02:45+00:00"
-        },
-        {
             "name": "hanneskod/classtools",
             "version": "0.1.0",
             "source": {
@@ -6927,133 +6740,6 @@
                 }
             ],
             "time": "2025-02-26T06:41:22+00:00"
-        },
-        {
-            "name": "imanghafoori/laravel-decorator",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/imanghafoori1/laravel-decorator.git",
-                "reference": "7ea6a61cca83364cc0b7d7ed1ff9b4ea4790d435"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/imanghafoori1/laravel-decorator/zipball/7ea6a61cca83364cc0b7d7ed1ff9b4ea4790d435",
-                "reference": "7ea6a61cca83364cc0b7d7ed1ff9b4ea4790d435",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/container": "~5.5|6.*|7.*|8.*|9.*|10.*|^11.0|^12.0",
-                "illuminate/support": "~5.5|6.*|7.*|8.*|9.*|10.*|^11.0|^12.0",
-                "php": "7.4.*|8.0.*|8.1.*|8.2.*|8.3.*|8.4.*"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~6.0|^9.0",
-                "squizlabs/php_codesniffer": "3.*"
-            },
-            "suggest": {
-                "imanghafoori/laravel-anypass": " Allows you login with any password in local environment.",
-                "imanghafoori/laravel-heyman": "It allows to write expressive code to authorize, validate and authenticate.",
-                "imanghafoori/laravel-masterpass": "You can set a master password for your accounts.",
-                "imanghafoori/laravel-widgetize": "Gives you a better structure and caching opportunity for your laravel apps."
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Decorator": "Imanghafoori\\Decorator\\Facade"
-                    },
-                    "providers": [
-                        "Imanghafoori\\Decorator\\DecoratorServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Imanghafoori\\Decorator\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Iman Ghafoori",
-                    "email": "imanghafoori1@gmail.com"
-                }
-            ],
-            "description": "A package to easily decorate your function calls.",
-            "homepage": "https://github.com/imanghafoori1/laravel-decorator",
-            "keywords": [
-                "decorator pattern",
-                "design patterns",
-                "laravel",
-                "php decorator pattern"
-            ],
-            "support": {
-                "issues": "https://github.com/imanghafoori1/laravel-decorator/issues",
-                "source": "https://github.com/imanghafoori1/laravel-decorator/tree/v1.1.0"
-            },
-            "time": "2024-05-06T16:47:40+00:00"
-        },
-        {
-            "name": "imanghafoori/laravel-middlewarize",
-            "version": "v1.1.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/imanghafoori1/laravel-middlewarize.git",
-                "reference": "5312f1842593e9ca37bae9a1cb0a9070191a0198"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/imanghafoori1/laravel-middlewarize/zipball/5312f1842593e9ca37bae9a1cb0a9070191a0198",
-                "reference": "5312f1842593e9ca37bae9a1cb0a9070191a0198",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/container": "~5.1|6.*|7.*|8.*|9.*|10.*|11.*|12.*",
-                "illuminate/pipeline": "~5.1|6.*|7.*|8.*|9.*|10.*|11.*|12.*",
-                "php": "7.3.*|7.4.*|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~7.0|~8.0"
-            },
-            "suggest": {
-                "imanghafoori/laravel-anypass": " Allows you login with any password in local environment.",
-                "imanghafoori/laravel-heyman": "It allows to write expressive code to authorize, validate and authenticate.",
-                "imanghafoori/laravel-masterpass": "You can easily set a master password without code change."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Imanghafoori\\Middlewarize\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Iman Ghafoori",
-                    "email": "imanghafoori1@gmail.com"
-                }
-            ],
-            "description": "Use laravel middlewares on any method calls in your app",
-            "homepage": "https://github.com/imanghafoori1/laravel-middlewarize",
-            "keywords": [
-                "laravel",
-                "laravel-middlewares",
-                "laravel-package",
-                "php",
-                "pipeline"
-            ],
-            "support": {
-                "issues": "https://github.com/imanghafoori1/laravel-middlewarize/issues",
-                "source": "https://github.com/imanghafoori1/laravel-middlewarize/tree/v1.1.11"
-            },
-            "time": "2024-05-24T09:04:56+00:00"
         },
         {
             "name": "inertiajs/inertia-laravel",
@@ -7732,63 +7418,6 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
-        },
-        {
-            "name": "jiannei/laravel-response",
-            "version": "v6.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jiannei/laravel-response.git",
-                "reference": "f2e925d596cffca575ce1ed84fe2fedb1396d582"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jiannei/laravel-response/zipball/f2e925d596cffca575ce1ed84fe2fedb1396d582",
-                "reference": "f2e925d596cffca575ce1ed84fe2fedb1396d582",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "jiannei/laravel-enum": "dev-main",
-                "laravel/pint": "^1.18.1",
-                "orchestra/testbench": "^9.5.2",
-                "pestphp/pest": "^3.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Response": "Jiannei\\Response\\Laravel\\Support\\Facades\\Response"
-                    },
-                    "providers": [
-                        "Jiannei\\Response\\Laravel\\Providers\\LaravelServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jiannei\\Response\\Laravel\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "jiannei",
-                    "email": "longjian.huang@foxmail.com"
-                }
-            ],
-            "description": "Laravel api response data format.",
-            "support": {
-                "issues": "https://github.com/jiannei/laravel-response/issues",
-                "source": "https://github.com/jiannei/laravel-response/tree/v6.0.1"
-            },
-            "time": "2024-10-30T10:07:57+00:00"
         },
         {
             "name": "juliomotol/laravel-auth-timeout",
@@ -10559,56 +10188,6 @@
             "time": "2022-12-11T20:36:23+00:00"
         },
         {
-            "name": "league/construct-finder",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/construct-finder.git",
-                "reference": "4202ee5985c0a08cf492ea19a02becea0ad56523"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/construct-finder/zipball/4202ee5985c0a08cf492ea19a02becea0ad56523",
-                "reference": "4202ee5985c0a08cf492ea19a02becea0ad56523",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~7.4.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^1.3",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "League\\ConstructFinder\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Frank de Jonge",
-                    "email": "info@frankdejonge.nl"
-                }
-            ],
-            "description": "Finds classes, interfaces, traits, and enums.",
-            "support": {
-                "issues": "https://github.com/thephpleague/construct-finder/issues",
-                "source": "https://github.com/thephpleague/construct-finder/tree/1.5.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/frankdejonge",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-11-24T10:08:12+00:00"
-        },
-        {
             "name": "league/flysystem",
             "version": "3.29.1",
             "source": {
@@ -11038,78 +10617,6 @@
                 "source": "https://github.com/leventcz/laravel-top/tree/v1.2.0"
             },
             "time": "2025-03-02T22:07:29+00:00"
-        },
-        {
-            "name": "lightszentip/laravel-release-changelog-generator",
-            "version": "0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lightszentip/laravel-release-changelog-generator.git",
-                "reference": "ea48abd4c66cba22c7aa3248930ffe865dedd433"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lightszentip/laravel-release-changelog-generator/zipball/ea48abd4c66cba22c7aa3248930ffe865dedd433",
-                "reference": "ea48abd4c66cba22c7aa3248930ffe865dedd433",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2|^8.3",
-                "symfony/yaml": "^v7.1.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^v3.58.1",
-                "orchestra/testbench": "^v9.1.1",
-                "pestphp/pest": "^v2.34.7",
-                "pestphp/pest-plugin-laravel": "^v2.4.0",
-                "phpcheckstyle/phpcheckstyle": "^V0.14.8",
-                "phpstan/extension-installer": "^1.3.1",
-                "phpstan/phpstan-deprecation-rules": "^1.2.0",
-                "phpstan/phpstan-phpunit": "^1.4.0",
-                "psalm/plugin-laravel": "^v2.11.0",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "roave/security-advisories": "dev-latest",
-                "vimeo/psalm": "^5.24.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "LaravelReleaseChangelogGenerator": "Lightszentip\\LaravelReleaseChangelogGenerator\\Facades\\LaravelReleaseChangelogGenerator"
-                    },
-                    "providers": [
-                        "Lightszentip\\LaravelReleaseChangelogGenerator\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lightszentip\\LaravelReleaseChangelogGenerator\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lightszentip",
-                    "email": "lightszentip@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Package to create releases and changelogs in laravel",
-            "homepage": "https://github.com/lightszentip/laravel-release-changelog-generator",
-            "keywords": [
-                "laravel",
-                "laravel-release-changelog-generator",
-                "lightszentip"
-            ],
-            "support": {
-                "issues": "https://github.com/lightszentip/laravel-release-changelog-generator/issues",
-                "source": "https://github.com/lightszentip/laravel-release-changelog-generator/tree/0.4.0"
-            },
-            "time": "2024-06-01T16:34:13+00:00"
         },
         {
             "name": "livewire/livewire",
@@ -12154,111 +11661,6 @@
             "time": "2025-03-30T21:06:30+00:00"
         },
         {
-            "name": "neutrino_api/neutrino_api_client",
-            "version": "4.6.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/NeutrinoAPI/neutrino-api-client-libcurl.git",
-                "reference": "01dd43d503390d36596d8d9cdccd843f41a84684"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/NeutrinoAPI/neutrino-api-client-libcurl/zipball/01dd43d503390d36596d8d9cdccd843f41a84684",
-                "reference": "01dd43d503390d36596d8d9cdccd843f41a84684",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "NeutrinoAPI\\": "src/client"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Neutrino API",
-                    "email": "ops@neutrinoapi.com"
-                }
-            ],
-            "description": "Neutrino API PHP client using the libcURL extension",
-            "homepage": "https://www.neutrinoapi.com/",
-            "keywords": [
-                "Rendering",
-                "api",
-                "data",
-                "e-commerce",
-                "geolocation",
-                "neutrino-api",
-                "security",
-                "telephony"
-            ],
-            "support": {
-                "source": "https://github.com/NeutrinoAPI/neutrino-api-client-libcurl/tree/v4.6.16"
-            },
-            "time": "2024-08-25T22:33:11+00:00"
-        },
-        {
-            "name": "nextbuild/database-viewer",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/next-build/database-viewer.git",
-                "reference": "4a5881bc0375e5234d3d962e345f196284e3fa2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/next-build/database-viewer/zipball/4a5881bc0375e5234d3d962e345f196284e3fa2f",
-                "reference": "4a5881bc0375e5234d3d962e345f196284e3fa2f",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "DatabaseViewer": "NextBuild\\DatabaseViewer\\Facade"
-                    },
-                    "providers": [
-                        "NextBuild\\DatabaseViewer\\DatabaseViewerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NextBuild\\DatabaseViewer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Saptarshi Dey",
-                    "email": "saptarshi7047@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A Laravel package for viewing databases",
-            "homepage": "https://github.com/Next-Build/database-viewer",
-            "keywords": [
-                "database-manager",
-                "database-viewer",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/next-build/database-viewer/issues",
-                "source": "https://github.com/next-build/database-viewer/tree/v1.0.0"
-            },
-            "time": "2024-08-28T09:49:14+00:00"
-        },
-        {
             "name": "nikic/php-parser",
             "version": "v5.4.0",
             "source": {
@@ -12315,52 +11717,6 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
             },
             "time": "2024-12-30T11:07:19+00:00"
-        },
-        {
-            "name": "not-empty/jwt-manager-php-lib",
-            "version": "7.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/not-empty/jwt-manager-php-lib.git",
-                "reference": "6fac367a4995865e8cbd3dcb2195eb4f1ac5f89d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/not-empty/jwt-manager-php-lib/zipball/6fac367a4995865e8cbd3dcb2195eb4f1ac5f89d",
-                "reference": "6fac367a4995865e8cbd3dcb2195eb4f1ac5f89d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.3"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.6",
-                "phpmd/phpmd": "^2.14",
-                "phpunit/phpunit": "^9.6",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "JwtManager\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Not Empty Foundation",
-                    "email": "dev@not-empty.com"
-                }
-            ],
-            "description": "PHP library to manage JWT authentication",
-            "support": {
-                "issues": "https://github.com/not-empty/jwt-manager-php-lib/issues",
-                "source": "https://github.com/not-empty/jwt-manager-php-lib/tree/7.0.1"
-            },
-            "time": "2025-01-29T20:49:41+00:00"
         },
         {
             "name": "nunomaduro/laravel-console-task",
@@ -12588,53 +11944,6 @@
                 }
             ],
             "time": "2024-09-09T07:06:30+00:00"
-        },
-        {
-            "name": "olinox14/path-php",
-            "version": "0.1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/olinox14/path-php.git",
-                "reference": "cbc29f6f8e344d3a0c1b6fd343e26f2919b939fc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/olinox14/path-php/zipball/cbc29f6f8e344d3a0c1b6fd343e26f2919b939fc",
-                "reference": "cbc29f6f8e344d3a0c1b6fd343e26f2919b939fc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0"
-            },
-            "require-dev": {
-                "ext-posix": "*",
-                "friendsofphp/php-cs-fixer": "^3.52",
-                "php-coveralls/php-coveralls": "^2.7",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Path\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Olivier Massot",
-                    "email": "olinox14@tuta.io"
-                }
-            ],
-            "description": "Object-oriented file and path operations, inspired by the path.py python library",
-            "support": {
-                "issues": "https://github.com/olinox14/path-php/issues",
-                "source": "https://github.com/olinox14/path-php/tree/0.1.8"
-            },
-            "time": "2024-04-25T20:56:34+00:00"
         },
         {
             "name": "onlime/laravel-http-client-global-logger",
@@ -12986,177 +12295,6 @@
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
             "time": "2024-08-21T00:29:20+00:00"
-        },
-        {
-            "name": "orchid/blade-icons",
-            "version": "4.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchidsoftware/blade-icons.git",
-                "reference": "e06525bd52750e6ecdd27bd3160dcf86e8677153"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/blade-icons/zipball/e06525bd52750e6ecdd27bd3160dcf86e8677153",
-                "reference": "e06525bd52750e6ecdd27bd3160dcf86e8677153",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "laravel/framework": "^10.0|^11.0|^12.0"
-            },
-            "conflict": {
-                "laravel/framework": "<10.30"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0|^9.0|^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Orchid\\Icons\\IconServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchid\\Icons\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "tabuna",
-                    "email": "bliz48rus@gmail.com"
-                }
-            ],
-            "description": "An easy way inline SVG images in your Blade templates.",
-            "support": {
-                "issues": "https://github.com/orchidsoftware/blade-icons/issues",
-                "source": "https://github.com/orchidsoftware/blade-icons/tree/4.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/orchidsoftware",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/orchid",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2025-02-25T18:35:59+00:00"
-        },
-        {
-            "name": "orchid/platform",
-            "version": "14.50.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "513485c1d8f454a2ce97d1f2fe2a5af164b6e875"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/513485c1d8f454a2ce97d1f2fe2a5af164b6e875",
-                "reference": "513485c1d8f454a2ce97d1f2fe2a5af164b6e875",
-                "shasum": ""
-            },
-            "require": {
-                "composer-runtime-api": "^2.2",
-                "composer/semver": "^3.0",
-                "laravel/framework": "^10.0 || ^11.0 || ^12.0",
-                "laravel/scout": "^9.0 || ^10.0",
-                "orchid/blade-icons": "^4.0",
-                "tabuna/breadcrumbs": "^4.0",
-                "twbs/bootstrap-icons": "^1.10",
-                "watson/active": "^7.0"
-            },
-            "conflict": {
-                "laravel/framework": "<=10.48.25, <=11.34.0",
-                "nesbot/carbon": "<2.66.0",
-                "orchestra/testbench-core": "<8.23.9"
-            },
-            "require-dev": {
-                "fakerphp/faker": "^1.9.1",
-                "laravel/pint": "^1.14",
-                "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
-                "orchestra/testbench-core": "^8.0 || ^9.0 || ^10.0",
-                "orchestra/testbench-dusk": "^8.0 || ^9.0 || ^10.0",
-                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0"
-            },
-            "suggest": {
-                "orchid/crud": "Automated CRUD based on your files resources.",
-                "orchid/fortify": "Orchid template for Laravel Fortify."
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Alert": "Orchid\\Support\\Facades\\Alert",
-                        "Dashboard": "Orchid\\Support\\Facades\\Dashboard"
-                    },
-                    "providers": [
-                        "Orchid\\Platform\\Providers\\FoundationServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Support/helpers.php"
-                ],
-                "psr-4": {
-                    "Orchid\\Alert\\": "src/Alert/",
-                    "Orchid\\Access\\": "src/Access/",
-                    "Orchid\\Screen\\": "src/Screen/",
-                    "Orchid\\Filters\\": "src/Filters/",
-                    "Orchid\\Metrics\\": "src/Metrics/",
-                    "Orchid\\Support\\": "src/Support/",
-                    "Orchid\\Platform\\": "src/Platform/",
-                    "Orchid\\Attachment\\": "src/Attachment/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandr Chernyaev",
-                    "email": "bliz48rus@gmail.com",
-                    "homepage": "https://tabuna.github.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Platform for back-office applications, admin panel or CMS your Laravel app.",
-            "homepage": "https://orchid.software",
-            "keywords": [
-                "admin",
-                "cmf",
-                "cms",
-                "extranet",
-                "framework",
-                "laravel",
-                "orchid",
-                "platform",
-                "rad"
-            ],
-            "support": {
-                "docs": "https://orchid.software/en/docs",
-                "email": "bliz48rus@gmail.com",
-                "issues": "https://github.com/orchidsoftware/platform/issues",
-                "source": "https://github.com/orchidsoftware/platform"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/orchid",
-                    "type": "opencollective"
-                }
-            ],
-            "time": "2025-04-02T20:25:43+00:00"
         },
         {
             "name": "overtrue/laravel-query-logger",
@@ -13667,62 +12805,6 @@
                 "source": "https://github.com/phikiphp/phiki/tree/v1.1.5"
             },
             "time": "2025-04-06T23:40:06+00:00"
-        },
-        {
-            "name": "php-collective/decimal-object",
-            "version": "1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-collective/decimal-object.git",
-                "reference": "2b26490b7c047d136f302fee59d187e097a81ece"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-collective/decimal-object/zipball/2b26490b7c047d136f302fee59d187e097a81ece",
-                "reference": "2b26490b7c047d136f302fee59d187e097a81ece",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "ext-json": "*",
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "php-collective/code-sniffer": "^0.2.1",
-                "phpstan/phpstan": "^2.0.0",
-                "phpunit/phpunit": "^10.5.45 || ^11.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpCollective\\DecimalObject\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "The PHP Collective",
-                    "homepage": "https://github.com/php-collective"
-                },
-                {
-                    "name": "Spryker Systems GmbH",
-                    "homepage": "https://spryker.com"
-                }
-            ],
-            "description": "PHP decimal handling as value object",
-            "support": {
-                "issues": "https://github.com/php-collective/decimal-object/issues",
-                "source": "https://github.com/php-collective/decimal-object/tree/1.3.1"
-            },
-            "time": "2025-04-03T22:28:46+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -14657,79 +13739,6 @@
             "time": "2023-02-25T04:45:09+00:00"
         },
         {
-            "name": "pinkary-project/type-guard",
-            "version": "v0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pinkary-project/type-guard.git",
-                "reference": "b5511bd8d5567fba9dffca49d9da2c6c00c39434"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pinkary-project/type-guard/zipball/b5511bd8d5567fba9dffca49d9da2c6c00c39434",
-                "reference": "b5511bd8d5567fba9dffca49d9da2c6c00c39434",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.2.0"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.15.2",
-                "pestphp/pest": "^3.0.0",
-                "pestphp/pest-plugin-type-coverage": "3.x-dev",
-                "phpstan/phpstan": "^1.10.67",
-                "rector/rector": "^1.0.4",
-                "symfony/var-dumper": "^6.4.0|^7.0.6"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Functions.php"
-                ],
-                "psr-4": {
-                    "PinkaryProject\\TypeGuard\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nuno Maduro",
-                    "email": "enunomaduro@gmail.com"
-                }
-            ],
-            "description": "Type Guard module is part of the Gloss PHP, and allows you to narrow down the type of an variable to a more specific type.",
-            "keywords": [
-                "assert",
-                "narrow",
-                "php",
-                "pinkary-project",
-                "type",
-                "type-guard"
-            ],
-            "support": {
-                "issues": "https://github.com/pinkary-project/type-guard/issues",
-                "source": "https://github.com/pinkary-project/type-guard/tree/v0.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/paypalme/enunomaduro",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2024-04-28T10:20:25+00:00"
-        },
-        {
             "name": "pion/laravel-chunk-upload",
             "version": "v1.5.6",
             "source": {
@@ -15541,64 +14550,6 @@
                 "source": "https://github.com/pusher/pusher-http-php/tree/7.2.7"
             },
             "time": "2025-01-06T10:56:20+00:00"
-        },
-        {
-            "name": "rahul900day/laravel-console-spinner",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RahulDey12/laravel-console-spinner.git",
-                "reference": "e8248ff9688efcee3115a0895aa72b863835afd6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RahulDey12/laravel-console-spinner/zipball/e8248ff9688efcee3115a0895aa72b863835afd6",
-                "reference": "e8248ff9688efcee3115a0895aa72b863835afd6",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
-                "php": "^7.3|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Rahul900Day\\LaravelConsoleSpinner\\LaravelConsoleSpinnerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Rahul900Day\\LaravelConsoleSpinner\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rahul Dey",
-                    "email": "rahul900day@gmail.com"
-                }
-            ],
-            "description": "Laravel Console Spinner is a spinner output for Laravel command line.",
-            "keywords": [
-                "artisan",
-                "cli",
-                "command-line",
-                "console",
-                "laravel",
-                "php",
-                "symfony"
-            ],
-            "support": {
-                "issues": "https://github.com/RahulDey12/laravel-console-spinner/issues",
-                "source": "https://github.com/RahulDey12/laravel-console-spinner/tree/1.2.0"
-            },
-            "time": "2025-03-18T12:12:55+00:00"
         },
         {
             "name": "rakutentech/laravel-request-docs",
@@ -16586,47 +15537,6 @@
             "time": "2025-03-18T07:43:34+00:00"
         },
         {
-            "name": "revangelista/laravel-idempotency",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/renevangelista/laravel-idempotency.git",
-                "reference": "8e20234cabeba8eff9f528d0ac8baebea9832496"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/renevangelista/laravel-idempotency/zipball/8e20234cabeba8eff9f528d0ac8baebea9832496",
-                "reference": "8e20234cabeba8eff9f528d0ac8baebea9832496",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Idempotency\\IdempotencyServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Idempotency\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Laravel Idempotency Middleware",
-            "support": {
-                "issues": "https://github.com/renevangelista/laravel-idempotency/issues",
-                "source": "https://github.com/renevangelista/laravel-idempotency/tree/1.0.0"
-            },
-            "time": "2021-05-07T21:40:39+00:00"
-        },
-        {
             "name": "revolt/event-loop",
             "version": "v1.0.7",
             "source": {
@@ -16697,81 +15607,6 @@
                 "source": "https://github.com/revoltphp/event-loop/tree/v1.0.7"
             },
             "time": "2025-01-25T19:27:39+00:00"
-        },
-        {
-            "name": "ryangjchandler/bearer",
-            "version": "v2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ryangjchandler/bearer.git",
-                "reference": "9c6038b03a829345e061c29582761dbc5a158296"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ryangjchandler/bearer/zipball/9c6038b03a829345e061c29582761dbc5a158296",
-                "reference": "9c6038b03a829345e061c29582761dbc5a158296",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^11.0|^12.0",
-                "illuminate/database": "^11.0|^12.0",
-                "illuminate/http": "^11.0|^12.0",
-                "php": "^8.2",
-                "spatie/laravel-package-tools": "^1.16"
-            },
-            "require-dev": {
-                "brianium/paratest": "^7.4",
-                "nunomaduro/collision": "^8.0",
-                "orchestra/testbench": "^9.0|^10.0",
-                "phpunit/phpunit": "^10.5|^11.5.3",
-                "spatie/laravel-ray": "^1.32"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Bearer": "RyanChandler\\Bearer\\BearerFacade"
-                    },
-                    "providers": [
-                        "RyanChandler\\Bearer\\BearerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RyanChandler\\Bearer\\": "src",
-                    "RyanChandler\\Bearer\\Database\\Factories\\": "database/factories"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ryan Chandler",
-                    "email": "support@ryangjchandler.co.uk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Minimalistic token-based authentication for Laravel API endpoints.",
-            "homepage": "https://github.com/ryangjchandler/bearer",
-            "keywords": [
-                "Bearer",
-                "laravel",
-                "ryangjchandler"
-            ],
-            "support": {
-                "issues": "https://github.com/ryangjchandler/bearer/issues",
-                "source": "https://github.com/ryangjchandler/bearer/tree/v2.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/ryangjchandler",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-02T22:57:21+00:00"
         },
         {
             "name": "ryangjchandler/orbit",
@@ -21416,6 +20251,82 @@
             "time": "2024-09-09T11:45:10+00:00"
         },
         {
+            "name": "symfony/polyfill-php84",
+            "version": "v1.31.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php84.git",
+                "reference": "e5493eb51311ab0b1cc2243416613f06ed8f18bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php84/zipball/e5493eb51311ab0b1cc2243416613f06ed8f18bd",
+                "reference": "e5493eb51311ab0b1cc2243416613f06ed8f18bd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php84\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php84/tree/v1.31.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-09-09T12:04:04+00:00"
+        },
+        {
             "name": "symfony/polyfill-uuid",
             "version": "v1.31.0",
             "source": {
@@ -21801,68 +20712,6 @@
                 }
             ],
             "time": "2024-09-25T14:20:29+00:00"
-        },
-        {
-            "name": "symfony/stopwatch",
-            "version": "v7.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "5a49289e2b308214c8b9c2fda4ea454d8b8ad7cd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/5a49289e2b308214c8b9c2fda4ea454d8b8ad7cd",
-                "reference": "5a49289e2b308214c8b9c2fda4ea454d8b8ad7cd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/service-contracts": "^2.5|^3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Stopwatch\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Provides a way to profile code",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/stopwatch/tree/v7.2.4"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2025-02-24T10:49:57+00:00"
         },
         {
             "name": "symfony/string",
@@ -22352,74 +21201,6 @@
                 }
             ],
             "time": "2025-03-03T07:12:39+00:00"
-        },
-        {
-            "name": "tabuna/breadcrumbs",
-            "version": "4.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tabuna/breadcrumbs.git",
-                "reference": "d3b21ea43c7c157fd279d684b1f591df9d25a78b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tabuna/breadcrumbs/zipball/d3b21ea43c7c157fd279d684b1f591df9d25a78b",
-                "reference": "d3b21ea43c7c157fd279d684b1f591df9d25a78b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "^10.0|^11.0|^12.0",
-                "laravel/serializable-closure": "^1.0|^2.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.0",
-                "orchestra/testbench": "^8.0|^9.0|^10.0",
-                "phpunit/php-code-coverage": "^10.|^11.0|^12.0",
-                "phpunit/phpunit": "^10.5|^11.0|^12.0",
-                "vimeo/psalm": "^5.0|^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Breadcrumbs": "Tabuna\\Breadcrumbs\\Breadcrumbs"
-                    },
-                    "providers": [
-                        "Tabuna\\Breadcrumbs\\BreadcrumbsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tabuna\\Breadcrumbs\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandr Chernyaev",
-                    "email": "bliz48rus@gmail.com"
-                },
-                {
-                    "name": "Dwight Watson",
-                    "email": "dwight@studentservices.com.au"
-                },
-                {
-                    "name": "Dave James Miller",
-                    "email": "dave@davejamesmiller.com"
-                }
-            ],
-            "description": "An easy way to add breadcrumbs to your Laravel app.",
-            "support": {
-                "issues": "https://github.com/tabuna/breadcrumbs/issues",
-                "source": "https://github.com/tabuna/breadcrumbs/tree/4.3.0"
-            },
-            "time": "2025-02-25T08:18:04+00:00"
         },
         {
             "name": "teamtnt/laravel-scout-tntsearch-driver",
@@ -22961,45 +21742,6 @@
             "time": "2024-09-26T11:17:02+00:00"
         },
         {
-            "name": "twbs/bootstrap-icons",
-            "version": "v1.11.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/icons.git",
-                "reference": "8d88686c03c3768a2d82ba4f20c3c4e1b100fa29"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/icons/zipball/8d88686c03c3768a2d82ba4f20c3c4e1b100fa29",
-                "reference": "8d88686c03c3768a2d82ba4f20c3c4e1b100fa29",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "Official open source SVG icon library for Bootstrap",
-            "homepage": "https://icons.getbootstrap.com/",
-            "keywords": [
-                "bootstrap",
-                "icon font",
-                "icons",
-                "svg"
-            ],
-            "support": {
-                "issues": "https://github.com/twbs/icons/issues",
-                "source": "https://github.com/twbs/icons/tree/v1.11.3"
-            },
-            "time": "2024-01-03T15:44:45+00:00"
-        },
-        {
             "name": "unicodeveloper/laravel-password",
             "version": "1.0.4",
             "source": {
@@ -23332,72 +22074,6 @@
                 }
             ],
             "time": "2024-11-21T01:49:47+00:00"
-        },
-        {
-            "name": "watson/active",
-            "version": "7.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dwightwatson/active.git",
-                "reference": "02cdd392dbb56a181348ca9a078963d6b9d60ab9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/active/zipball/02cdd392dbb56a181348ca9a078963d6b9d60ab9",
-                "reference": "02cdd392dbb56a181348ca9a078963d6b9d60ab9",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/config": "^10.0|^11.0||^12.0",
-                "illuminate/http": "^10.0|^11.0||^12.0",
-                "illuminate/routing": "^10.0|^11.0||^12.0",
-                "illuminate/support": "^10.0|^11.0||^12.0",
-                "php": "^8.2"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5.1",
-                "phpunit/phpunit": "^9.0|^10.5|^11.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Active": "Watson\\Watson\\Facades\\Active"
-                    },
-                    "providers": [
-                        "Watson\\Active\\ActiveServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Watson\\Active\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dwight Watson",
-                    "email": "dwight@studiousapp.com"
-                }
-            ],
-            "description": "Laravel helper for recognising the current route, controller and action",
-            "keywords": [
-                "active",
-                "laravel",
-                "routing"
-            ],
-            "support": {
-                "issues": "https://github.com/dwightwatson/active/issues",
-                "source": "https://github.com/dwightwatson/active/tree/7.2.0"
-            },
-            "time": "2025-02-25T23:22:01+00:00"
         },
         {
             "name": "watson/validating",
@@ -24003,92 +22679,6 @@
                 }
             ],
             "time": "2023-02-15T16:25:58+00:00"
-        },
-        {
-            "name": "zircote/swagger-php",
-            "version": "5.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zircote/swagger-php.git",
-                "reference": "18457fa71f753cfd4a2b21916baf329864fdfaa6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/18457fa71f753cfd4a2b21916baf329864fdfaa6",
-                "reference": "18457fa71f753cfd4a2b21916baf329864fdfaa6",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "nikic/php-parser": "^4.19 || ^5.0",
-                "php": ">=7.4",
-                "psr/log": "^1.1 || ^2.0 || ^3.0",
-                "symfony/deprecation-contracts": "^2 || ^3",
-                "symfony/finder": "^5.0 || ^6.0 || ^7.0",
-                "symfony/yaml": "^5.0 || ^6.0 || ^7.0"
-            },
-            "conflict": {
-                "symfony/process": ">=6, <6.4.14"
-            },
-            "require-dev": {
-                "composer/package-versions-deprecated": "^1.11",
-                "doctrine/annotations": "^2.0",
-                "friendsofphp/php-cs-fixer": "^3.62.0",
-                "phpstan/phpstan": "^1.6 || ^2.0",
-                "phpunit/phpunit": "^9.0",
-                "rector/rector": "^1.0 || ^2.0",
-                "vimeo/psalm": "^4.30 || ^5.0"
-            },
-            "suggest": {
-                "doctrine/annotations": "^2.0"
-            },
-            "bin": [
-                "bin/openapi"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "OpenApi\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Allen",
-                    "email": "zircote@gmail.com"
-                },
-                {
-                    "name": "Bob Fanger",
-                    "email": "bfanger@gmail.com",
-                    "homepage": "https://bfanger.nl"
-                },
-                {
-                    "name": "Martin Rademacher",
-                    "email": "mano@radebatz.net",
-                    "homepage": "https://radebatz.net"
-                }
-            ],
-            "description": "swagger-php - Generate interactive documentation for your RESTful API using phpdoc annotations",
-            "homepage": "https://github.com/zircote/swagger-php/",
-            "keywords": [
-                "api",
-                "json",
-                "rest",
-                "service discovery"
-            ],
-            "support": {
-                "issues": "https://github.com/zircote/swagger-php/issues",
-                "source": "https://github.com/zircote/swagger-php/tree/5.0.7"
-            },
-            "time": "2025-03-19T03:31:11+00:00"
         }
     ],
     "packages-dev": [
@@ -32517,6 +31107,68 @@
                 }
             ],
             "time": "2024-10-25T15:15:23+00:00"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "v7.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/stopwatch.git",
+                "reference": "5a49289e2b308214c8b9c2fda4ea454d8b8ad7cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/5a49289e2b308214c8b9c2fda4ea454d8b8ad7cd",
+                "reference": "5a49289e2b308214c8b9c2fda4ea454d8b8ad7cd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/service-contracts": "^2.5|^3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides a way to profile code",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/stopwatch/tree/v7.2.4"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-02-24T10:49:57+00:00"
         },
         {
             "name": "ta-tikoma/phpunit-architecture-test",
