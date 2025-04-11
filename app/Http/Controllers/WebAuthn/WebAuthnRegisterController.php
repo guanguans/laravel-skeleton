@@ -39,6 +39,6 @@ class WebAuthnRegisterController
     {
         $request->save();
 
-        return \response()->noContent();
+        return response()->noContent();
     }
 }
