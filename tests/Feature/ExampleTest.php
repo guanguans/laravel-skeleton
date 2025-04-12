@@ -15,20 +15,13 @@ namespace Tests\Feature;
 
 class ExampleTest extends TestCase
 {
-    #[\Override]
-    protected function setUp(): void
+    public function testHttp(): void
     {
-        self::markTestSkipped('Not implemented');
-        parent::setUp();
+        $this->get('/')->assertOk();
     }
 
-    /**
-     * A basic test example.
-     */
-    public function testExample(): void
+    public function testConsole(): void
     {
-        $response = $this->get('/');
-
-        $response->assertOk();
+        $this->artisan('about')->assertOk();
     }
 }

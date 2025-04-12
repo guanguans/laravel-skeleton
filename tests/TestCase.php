@@ -23,12 +23,11 @@ use Tests\Concerns\Bootloadable;
 abstract class TestCase extends BaseTestCase
 {
     // use Bootloadable;
-    use CreatesApplication;
     // use DatabaseMigrations;
     // use DatabaseTruncation;
     // use FastRefreshDatabase;
-    // use RefreshDatabase;
     // use LazilyRefreshDatabase;
+    // use RefreshDatabase;
 
     /**
      * 在测试前指定要运行的 seeder.

@@ -62,45 +62,36 @@ use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__.'/actions/',
-        __DIR__.'/app/',
+        // __DIR__.'/app/',
         __DIR__.'/bootstrap/',
         __DIR__.'/config/',
-        __DIR__.'/config-validation/',
-        __DIR__.'/database/',
+        // __DIR__.'/database/',
         __DIR__.'/public/',
         __DIR__.'/resources/',
         __DIR__.'/routes/',
         __DIR__.'/tests/',
-        ...glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
+        ...array_filter(
+            glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
+            static fn (string $filename): bool => !\in_array($filename, [
+                __DIR__.'/.phpstorm.meta.php',
+                __DIR__.'/_ide_helper.php',
+                __DIR__.'/_ide_helper_models.php',
+            ], true)
+        ),
         __DIR__.'/artisan',
-        __DIR__.'/artisan-runtime',
         __DIR__.'/composer-updater',
     ])
     ->withRootFiles()
     // ->withSkipPath(__DIR__.'/tests.php')
     ->withSkip([
+        '**/vendor/*',
         '**/__snapshots__/*',
         '**/Fixtures/*',
-        __DIR__.'/.phpstorm.meta.php',
-        __DIR__.'/_ide_helper.php',
-        __DIR__.'/_ide_helper_models.php',
         __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
         __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
         __DIR__.'/app/Support/Http/',
         __DIR__.'/bootstrap/cache/',
-        __DIR__.'/database/migrations/2023_02_23_112553_create_activity_log_table.php',
-        __DIR__.'/database/migrations/2023_02_23_112554_add_event_column_to_activity_log_table.php',
-        __DIR__.'/database/migrations/2023_02_23_112555_add_batch_uuid_column_to_activity_log_table.php',
-        __DIR__.'/database/migrations/2023_02_23_114432_create_schedule_monitor_tables.php',
-        __DIR__.'/database/migrations/2025_03_02_213337_create_settings_table.php',
-        __DIR__.'/database/migrations/2025_03_23_161712_create_mailbox_inbound_emails_table.php',
-        __DIR__.'/database/migrations/2025_03_23_161713_create_settings_table.php',
-        __DIR__.'/dcat_admin_ide_helper.php',
-        __DIR__.'/deploy.example.php',
-        __DIR__.'/deploy.php',
         __DIR__.'/resources/lang/',
-        __DIR__.'/tests/Feature/AuthTest.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()
@@ -171,9 +162,9 @@ return RectorConfig::configure()
     ->withConfiguredRule(RenameFunctionRector::class, [
         'test' => 'it',
     ])
-    ->withConfiguredRule(RenameToPsrNameRector::class, [
-        '_*',
-    ])
+    // ->withConfiguredRule(RenameToPsrNameRector::class, [
+    //     '_*',
+    // ])
     ->withConfiguredRule(RenameClassRector::class, [
     ])
     ->withConfiguredRule(RenameStaticMethodRector::class, [

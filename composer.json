@@ -123,7 +123,6 @@
         "spatie/laravel-failed-job-monitor": "^4.3",
         "spatie/laravel-health": "^1.34",
         "spatie/laravel-medialibrary": "^11.12",
-        "spatie/laravel-morph-map-generator": "^1.3",
         "spatie/laravel-query-builder": "^6.3",
         "spatie/laravel-responsecache": "^7.6",
         "spatie/laravel-route-attributes": "^1.25",
@@ -360,7 +359,7 @@
             "@style-lint",
             "@pint-bail",
             "@facade-lint",
-            "@test",
+            "@pest-bail",
             "@rector-dry-run",
             "@phpstan",
             "@composer-dependency-analyser",
@@ -402,8 +401,10 @@
         "peck": "@php ./vendor/bin/peck check --path=app/ --config=peck.json --ansi -v",
         "peck-init": "@peck --init",
         "pest": "@php ./vendor/bin/pest --coverage",
+        "pest-bail": "@pest --bail",
         "pest-coverage": "@pest --coverage-html=./.build/phpunit/ --coverage-clover=./.build/phpunit/clover.xml",
         "pest-migrate-configuration": "@pest --migrate-configuration",
+        "pest-parallel": "@pest --parallel",
         "pest-profile": "@pest --profile",
         "pest-type-coverage": "@pest --type-coverage",
         "pest-update-snapshots": "@pest -d --update-snapshots",
@@ -503,11 +504,17 @@
         "pest": [
             "test"
         ],
+        "pest-bail": [
+            "test-bail"
+        ],
         "pest-coverage": [
             "test-coverage"
         ],
         "pest-migrate-configuration": [
             "test-migrate-configuration"
+        ],
+        "pest-parallel": [
+            "test-parallel"
         ],
         "pest-profile": [
             "test-profile"

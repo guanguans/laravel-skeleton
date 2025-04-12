@@ -1,6 +1,7 @@
 {
     "require": {
         "appstract/laravel-opcache": "^4.0",
+        "spatie/laravel-morph-map-generator": "^1.3",
         "timacdonald/has-parameters": "^1.5",
         "wendelladriel/laravel-lift": "^0.15"
     },

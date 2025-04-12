@@ -1,10 +1,15 @@
 <?php
 
-/** @noinspection PhpUnused */
-/** @noinspection PhpUndefinedClassInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
-
+/** @noinspection PhpInconsistentReturnPointsInspection */
+/** @noinspection PhpInternalEntityUsedInspection */
+/** @noinspection PhpUnused */
+/** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 
 /**
@@ -16,6 +21,8 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use Faker\Factory;
+use Pest\Expectation;
 use Tests\TestCase;
 
 uses(TestCase::class)
@@ -23,8 +30,13 @@ uses(TestCase::class)
     ->beforeEach(function (): void {})
     ->afterEach(function (): void {})
     ->afterAll(function (): void {})
-    ->in(__DIR__);
-
+    ->in(
+        // __DIR__,
+        __DIR__.'/Arch',
+        __DIR__.'/Feature',
+        __DIR__.'/Integration',
+        __DIR__.'/Unit'
+    );
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -35,6 +47,12 @@ uses(TestCase::class)
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
  */
+
+expect()->extend('toAssert', function (Closure $assertions): Expectation {
+    $assertions($this->value);
+
+    return $this;
+});
 
 expect()->extend('toBetween', fn (int $min, int $max): Expectation => expect($this->value)
     ->toBeGreaterThanOrEqual($min)
@@ -63,5 +81,15 @@ function class_namespace(object|string $class): string
 
 function fixtures_path(string $path = ''): string
 {
-    return __DIR__.\DIRECTORY_SEPARATOR.'fixtures'.($path ? \DIRECTORY_SEPARATOR.$path : $path);
+    return __DIR__.\DIRECTORY_SEPARATOR.'Fixtures'.($path ? \DIRECTORY_SEPARATOR.$path : $path);
+}
+
+function faker(string $locale = Factory::DEFAULT_LOCALE): Generator
+{
+    return fake($locale);
+}
+
+function running_in_github_action(): bool
+{
+    return 'true' === getenv('GITHUB_ACTIONS');
 }

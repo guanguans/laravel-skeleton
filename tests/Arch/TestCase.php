@@ -11,12 +11,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace Tests\Unit;
+namespace Tests\Arch;
 
-class ExampleTest extends TestCase
-{
-    public function testExample(): void
-    {
-        self::assertTrue(true);
-    }
-}
+class TestCase extends \Tests\Feature\TestCase {}
