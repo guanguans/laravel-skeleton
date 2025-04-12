@@ -692,7 +692,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('disk', static fn ($value): bool => config('filesystems.default') === $value);
 
         // 回显变量
-        Blade::stringable(static fn (Request $request) => json_encode(
+        Blade::stringable(static fn (Request $request): string => json_encode(
             $request->all(),
             \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT
         ));

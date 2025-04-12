@@ -27,7 +27,9 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
 {
     /** @var list<string> */
     protected array $except = [
-        '*::*',
+        '_*',
+        '*_',
+
         'class',
         'false',
         'null',
@@ -293,7 +295,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
-    protected function rename(Node $node, callable $renamer): Node
+    protected function rename(Node $node, callable $renamer): ?Node
     {
         $renamer = fn (string $name): string => $renamer((function (string $name): string {
             throw_if($this->isMatches($name, $this->except), \RuntimeException::class, "The name[$name] is skipped.");
@@ -317,9 +319,15 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
                 Node\Identifier::class,
             ])
         ) {
-            $node->name = $renamer($node->name);
+            $caseName = $renamer($node->name);
 
-            return $node;
+            if ($caseName === $node->name) {
+                // return $node; // It's magical.
+                return null;
+            }
+
+            $node->name = $caseName;
+            // $node->setAttribute('scope', ScopeFetcher::fetch($node));
         }
 
         if ($node instanceof Node\Expr\FuncCall) {

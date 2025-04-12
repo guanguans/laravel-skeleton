@@ -261,11 +261,11 @@ trait ModelCrudable
         if (\is_array($data[$field])) {
             $query->where(static function (\Illuminate\Contracts\Database\Query\Builder $query) use ($field, $data, $aliasField): void {
                 foreach ($data[$field] as $datum) {
-                    $query->orWhere($aliasField, 'LIKE', '%'.$datum.'%');
+                    $query->orWhereLike($aliasField, '%'.$datum.'%');
                 }
             });
         } else {
-            $query->where($field, 'LIKE', '%'.$data[$field].'%');
+            $query->whereLike($field, '%'.$data[$field].'%');
         }
     }
 

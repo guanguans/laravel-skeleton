@@ -85,6 +85,9 @@ class User extends Authenticatable
         return $this->where('id', $value)->firstOrFail();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<\App\Models\DatabaseNotification, $this>
+     */
     public function notifications(): MorphMany
     {
         return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();

@@ -18,6 +18,7 @@ use App\Support\Traits\Cacheable;
 use Composer\Autoload\ClassLoader;
 use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
 use Illuminate\Support\Collection;
+use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\Carbon\Rector\FuncCall\TimeFuncCallToCarbonRector;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
@@ -32,6 +33,7 @@ use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ConstFetch\RemovePhpVersionIdCheckRector;
+use Rector\NodeTypeResolver\PHPStan\Scope\Contract\NodeVisitor\ScopeResolverNodeVisitorInterface;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
@@ -53,6 +55,7 @@ use Rector\ValueObject\Visibility;
 use Rector\Visibility\Rector\ClassMethod\ChangeMethodVisibilityRector;
 use Rector\Visibility\ValueObject\ChangeMethodVisibility;
 use RectorLaravel\Rector\ArrayDimFetch\EnvVariableToEnvHelperRector;
+use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
@@ -62,10 +65,10 @@ use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        // __DIR__.'/app/',
+        __DIR__.'/app/',
         __DIR__.'/bootstrap/',
         __DIR__.'/config/',
-        // __DIR__.'/database/',
+        __DIR__.'/database/',
         __DIR__.'/public/',
         __DIR__.'/resources/',
         __DIR__.'/routes/',
@@ -88,6 +91,7 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
+        __DIR__.'/app/Console/Commands/GenerateTestsCommand.php',
         __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
         __DIR__.'/app/Support/Http/',
         __DIR__.'/bootstrap/cache/',
@@ -117,8 +121,8 @@ return RectorConfig::configure()
         phpunitCodeQuality: true,
     )
     ->withSets([
-        PHPUnitSetList::PHPUNIT_100,
-        LaravelSetList::LARAVEL_110,
+        PHPUnitSetList::PHPUNIT_110,
+        LaravelSetList::LARAVEL_120,
         ...collect((new ReflectionClass(LaravelSetList::class))->getConstants(ReflectionClassConstant::IS_PUBLIC))
             ->reject(
                 static fn (
@@ -162,8 +166,13 @@ return RectorConfig::configure()
     ->withConfiguredRule(RenameFunctionRector::class, [
         'test' => 'it',
     ])
-    // ->withConfiguredRule(RenameToPsrNameRector::class, [
-    //     '_*',
+    ->withConfiguredRule(RenameToPsrNameRector::class, [
+        // '*',
+        'static::PARENT_ID',
+    ])
+    // ->registerService(className: ParentConnectingVisitor::class, tag: ScopeResolverNodeVisitorInterface::class)
+    // ->withConfiguredRule(Guanguans\MonorepoBuilderWorker\Support\Rectors\RenameToPsrNameRector::class, [
+    //     // '*',
     // ])
     ->withConfiguredRule(RenameClassRector::class, [
     ])
@@ -192,6 +201,7 @@ return RectorConfig::configure()
         DispatchToHelperFunctionsRector::class,
         EmptyToBlankAndFilledFuncRector::class,
         HelperFuncCallToFacadeClassRector::class,
+        ServerVariableToRequestFacadeRector::class,
         TypeHintTappableCallRector::class,
     ])
     ->withSkip([
@@ -227,11 +237,9 @@ return RectorConfig::configure()
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,
         SortAssociativeArrayByKeyRector::class => [
-            __DIR__.'/actions/',
             __DIR__.'/app/',
             __DIR__.'/bootstrap/',
             __DIR__.'/config/',
-            __DIR__.'/config-validation/',
             __DIR__.'/database/',
             __DIR__.'/public/',
             __DIR__.'/resources/',

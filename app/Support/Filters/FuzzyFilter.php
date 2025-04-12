@@ -47,7 +47,7 @@ class FuzzyFilter implements Filter
                 $values = (array) $value;
 
                 foreach ($values as $item) {
-                    $query->orWhere($field, 'LIKE', "%$item%");
+                    $query->orWhereLike($field, "%$item%");
                 }
             }
         });

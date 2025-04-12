@@ -74,7 +74,7 @@ class QueryBuilderMixin
                 $op = "count(distinct $quotedDistinct)";
             }
 
-            $relation = $this->select($column)->selectRaw($op)->groupBy($column)->orderByRaw('1 desc')->orderBy($column);
+            $relation = $this->select($column)->selectRaw($op)->groupBy($column)->orderByRaw('1 desc')->oldest($column);
 
             if (null !== $limit) {
                 $relation = $relation->limit($limit);

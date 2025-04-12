@@ -55,7 +55,8 @@ class Model extends \Illuminate\Database\Eloquent\Model
         'extra_attributes' => SchemalessAttributes::class,
     ];
 
-    public function scopeWithExtraAttributes(): Builder
+    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    public function withExtraAttributes(): Builder
     {
         return $this->extra_attributes->modelScope();
     }

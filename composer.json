@@ -169,7 +169,7 @@
         "fakerphp/faker": "^1.24",
         "guanguans/ai-commit": "dev-main",
         "guanguans/laravel-soar": "^3.18",
-        "guanguans/monorepo-builder-worker": "^2.0",
+        "guanguans/monorepo-builder-worker": "dev-main",
         "ion-bazan/composer-diff": "^1.11",
         "josezenem/laravel-make-migration-pivot": "^1.3",
         "kitloong/laravel-migrations-generator": "^7.1",

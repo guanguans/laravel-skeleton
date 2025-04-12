@@ -45,7 +45,7 @@ class EloquentLogHttpModelFormatter extends NormalizerFormatter
     private function strFor(mixed $value, int $options = 0, int $depth = 512): string
     {
         try {
-            return (string) json_encode(
+            return json_encode(
                 $value,
                 $options | \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
                 $depth

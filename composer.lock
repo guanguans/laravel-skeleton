@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b74603fce38c68657ce37657429b53b4",
+    "content-hash": "9791e93b90698540a6504d0216bd75f4",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -26505,16 +26505,16 @@
         },
         {
             "name": "guanguans/monorepo-builder-worker",
-            "version": "2.0.3",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/monorepo-builder-worker.git",
-                "reference": "4d1f1c51bc6d24ba6c04c2676183438cb1e719de"
+                "reference": "9605494b733b7ce1d841c9abb89669926c0def5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/monorepo-builder-worker/zipball/4d1f1c51bc6d24ba6c04c2676183438cb1e719de",
-                "reference": "4d1f1c51bc6d24ba6c04c2676183438cb1e719de",
+                "url": "https://api.github.com/repos/guanguans/monorepo-builder-worker/zipball/9605494b733b7ce1d841c9abb89669926c0def5d",
+                "reference": "9605494b733b7ce1d841c9abb89669926c0def5d",
                 "shasum": ""
             },
             "require": {
@@ -26532,6 +26532,7 @@
                 "ergebnis/rector-rules": "^1.3",
                 "guanguans/ai-commit": "dev-main",
                 "illuminate/support": "^9.52 || ^10.0 || ^11.0 || ^12.0",
+                "jawira/case-converter": "^3.5",
                 "marcocesarato/php-conventional-changelog": "^1.17",
                 "mockery/mockery": "^1.6",
                 "nette/utils": "^4.0",
@@ -26562,6 +26563,7 @@
             "suggest": {
                 "marcocesarato/php-conventional-changelog": "Required to use the class [UpdateChangelogViaPhpReleaseWorker]."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "hooks": {
@@ -26590,7 +26592,7 @@
                     "src/Support/helpers.php"
                 ],
                 "psr-4": {
-                    "Guanguans\\MonorepoBuilderWorker\\": "src"
+                    "Guanguans\\MonorepoBuilderWorker\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -26632,7 +26634,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-04-09T15:29:02+00:00"
+            "time": "2025-04-10T16:32:27+00:00"
         },
         {
             "name": "guanguans/soar-php",
@@ -34075,6 +34077,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "guanguans/ai-commit": 20,
+        "guanguans/monorepo-builder-worker": 20,
         "laravel/facade-documenter": 20
     },
     "prefer-stable": true,

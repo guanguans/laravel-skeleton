@@ -48,6 +48,9 @@ class UserLog extends Model
     /* -------------------------------------------------------------------------------------------- */
     // Relationships
     /* -------------------------------------------------------------------------------------------- */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     */
     public function user(): BelongsTo
     {
         // return $this->hasMany(User::class)->inverse()->chaperone('post');

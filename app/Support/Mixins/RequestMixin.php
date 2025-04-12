@@ -76,7 +76,7 @@ class RequestMixin
 
     public function strictAll(): callable
     {
-        return function ($keys = null) {
+        return function ($keys = null): array {
             $input = array_replace_recursive($this->strictInput(), $this->allFiles());
 
             if (!$keys) {

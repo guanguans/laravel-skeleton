@@ -106,7 +106,7 @@ class ExtendServiceProvider extends ServiceProvider
 
     private function registerFaker(): void
     {
-        $this->app->singleton(Generator::class, static function () {
+        $this->app->singleton(static function (): Generator {
             $faker = Factory::create();
 
             $faker->addProvider(
