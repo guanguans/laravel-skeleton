@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "498e75132b9fdf161e5588656d44e9a6",
+    "content-hash": "41e931277aab1d268e3be5b766cd60a5",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2323,6 +2323,62 @@
             "time": "2025-03-30T21:06:30+00:00"
         },
         {
+            "name": "nikic/php-parser",
+            "version": "v4.19.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "715f4d25e225bc47b293a8b997fe6ce99bf987d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/715f4d25e225bc47b293a8b997fe6ce99bf987d2",
+                "reference": "715f4d25e225bc47b293a8b997fe6ce99bf987d2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "ircmaxell/php-yacc": "^0.0.7",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+            },
+            "bin": [
+                "bin/php-parse"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpParser\\": "lib/PhpParser"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.19.4"
+            },
+            "time": "2024-09-29T15:01:53+00:00"
+        },
+        {
             "name": "nunomaduro/termwind",
             "version": "v1.17.0",
             "source": {
@@ -3229,6 +3285,108 @@
                 "source": "https://github.com/stechstudio/laravel-zipstream/tree/4.14"
             },
             "time": "2024-03-12T23:21:07+00:00"
+        },
+        {
+            "name": "stillat/blade-directives",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stillat/blade-directives.git",
+                "reference": "c12c6c89b119b45127b707bcbd313195dcac2569"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stillat/blade-directives/zipball/c12c6c89b119b45127b707bcbd313195dcac2569",
+                "reference": "c12c6c89b119b45127b707bcbd313195dcac2569",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "illuminate/view": "*",
+                "stillat/primitives": "^1.4.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.22",
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stillat\\BladeDirectives\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Koster",
+                    "email": "john@stillat.com"
+                }
+            ],
+            "description": "Provides utilities to help write Laravel Blade directives.",
+            "support": {
+                "issues": "https://github.com/Stillat/blade-directives/issues",
+                "source": "https://github.com/Stillat/blade-directives/tree/v1.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/JohnathonKoster",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-01T14:42:51+00:00"
+        },
+        {
+            "name": "stillat/primitives",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stillat/primitives.git",
+                "reference": "116f1a05b619a2c9c403051ee37981c541de2535"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stillat/primitives/zipball/116f1a05b619a2c9c403051ee37981c541de2535",
+                "reference": "116f1a05b619a2c9c403051ee37981c541de2535",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "nikic/php-parser": "^4.10.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stillat\\Primitives\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Koster",
+                    "email": "john@stillat.com"
+                }
+            ],
+            "description": "Parses strings of primitive values into a PHP array.",
+            "support": {
+                "issues": "https://github.com/Stillat/primitives/issues",
+                "source": "https://github.com/Stillat/primitives/tree/v1.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/JohnathonKoster",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-10-24T00:24:10+00:00"
         },
         {
             "name": "symfony/console",

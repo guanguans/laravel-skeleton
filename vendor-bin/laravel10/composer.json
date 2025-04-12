@@ -2,10 +2,14 @@
     "require": {
         "renatomarinho/laravel-page-speed": "dev-master",
         "stechstudio/laravel-zipstream": "^4.14",
+        "stillat/blade-directives": "^1.2",
         "tenantcloud/laravel-mixins": "^3.1"
     },
     "require-dev": {
         "laracasts/generators": "^2.0"
+    },
+    "suggest": {
+        "appstract/laravel-opcache": "Required to use the package [stillat/blade-directives]."
     },
     "config": {
         "sort-packages": true

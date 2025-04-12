@@ -2447,79 +2447,6 @@
             "time": "2024-11-21T10:39:51+00:00"
         },
         {
-            "name": "overtrue/laravel-uploader",
-            "version": "3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overtrue/laravel-uploader.git",
-                "reference": "d68e09acab68ed3dca2124cc136d4a3401f68dbd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-uploader/zipball/d68e09acab68ed3dca2124cc136d4a3401f68dbd",
-                "reference": "d68e09acab68ed3dca2124cc136d4a3401f68dbd",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "^9.0|^10.0|^11.0"
-            },
-            "require-dev": {
-                "brainmaestro/composer-git-hooks": "dev-master",
-                "laravel/pint": "^1.5",
-                "mockery/mockery": "^1.5",
-                "phpunit/phpunit": "^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "hooks": {
-                    "pre-push": [
-                        "composer test",
-                        "composer fix-style"
-                    ],
-                    "pre-commit": [
-                        "composer test",
-                        "composer check-style"
-                    ]
-                },
-                "laravel": {
-                    "aliases": {
-                        "LaravelUploader": "\\Overtrue\\LaravelUploader\\LaravelUploader"
-                    },
-                    "providers": [
-                        "\\Overtrue\\LaravelUploader\\UploadServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Overtrue\\LaravelUploader\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "overtrue",
-                    "email": "i@overtrue.me"
-                }
-            ],
-            "description": "An upload component for Laravel.",
-            "support": {
-                "issues": "https://github.com/overtrue/laravel-uploader/issues",
-                "source": "https://github.com/overtrue/laravel-uploader/tree/3.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/overtrue",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-03-13T05:09:46+00:00"
-        },
-        {
             "name": "phpoption/phpoption",
             "version": "1.9.3",
             "source": {
@@ -6621,16 +6548,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.92.3",
+            "version": "1.92.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "45001525ccbb3804edb46a3410157f40de2ddd89"
+                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/45001525ccbb3804edb46a3410157f40de2ddd89",
-                "reference": "45001525ccbb3804edb46a3410157f40de2ddd89",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/d20b1969f836d210459b78683d85c9cd5c5f508c",
+                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c",
                 "shasum": ""
             },
             "require": {
@@ -6641,6 +6568,7 @@
                 "mockery/mockery": "^1.5",
                 "orchestra/testbench": "^7.7|^8.0|^9.0|^10.0",
                 "pestphp/pest": "^1.23|^2.1|^3.1",
+                "phpunit/php-code-coverage": "^9.0|^10.0|^11.0",
                 "phpunit/phpunit": "^9.5.24|^10.5|^11.5",
                 "spatie/pest-plugin-test-time": "^1.1|^2.2"
             },
@@ -6669,7 +6597,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.92.3"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.92.4"
             },
             "funding": [
                 {
@@ -6677,7 +6605,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-10T21:50:03+00:00"
+            "time": "2025-04-11T15:27:14+00:00"
         },
         {
             "name": "symfony/yaml",

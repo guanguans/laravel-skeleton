@@ -9,6 +9,9 @@
         "chrisdicarlo/laravel-config-checker": "^1.2",
         "enlightn/enlightn": "^2.10"
     },
+    "suggest": {
+        "appstract/laravel-opcache": "Required to use the package [appstract/laravel-opcache]."
+    },
     "config": {
         "sort-packages": true
     }

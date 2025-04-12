@@ -18,18 +18,19 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static \Illuminate\Http\Client\Response messagePush(string $text, string $desp = '', string $type = 'markdown')
  * @method static \Illuminate\Http\Client\Response messageList(int $limit = 10)
- * @method static \App\Support\PushDeer ddRequestData()
- * @method static \App\Support\PushDeer dumpRequestData()
- * @method static callable buildLogMiddleware(\Psr\Log\LoggerInterface|null $logger = null, \GuzzleHttp\MessageFormatter|null $formatter = null, string $logLevel = 'info')
- * @method static \App\Support\PushDeer tapDefaultPendingRequest(callable $callback)
- * @method static \Illuminate\Http\Client\PendingRequest cloneDefaultPendingRequest()
+ * @method static \App\Support\PushDeer ddLaravelData()
+ * @method static \App\Support\PushDeer dumpLaravelData()
+ * @method static \App\Support\PushDeer tapPendingRequest(callable $callback)
+ * @method static \Illuminate\Http\Client\PendingRequest clonePendingRequest()
  * @method static \App\Support\PushDeer|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \App\Support\PushDeer|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static void macro(string $name, object|callable $macro, object|callable $macro = null)
+ * @method static void dd(mixed ...$args)
+ * @method static \App\Support\FoundationSdk dump(mixed ...$args)
+ * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)
  * @method static void flushMacros()
- * @method static void tap(callable|null $callback = null)
+ * @method static \Illuminate\Support\HigherOrderTapProxy|\App\Support\PushDeer tap(callable|null $callback = null)
  *
  * @see \App\Support\PushDeer
  */

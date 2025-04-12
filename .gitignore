@@ -22,10 +22,13 @@ yarn-error.log
 /.vscode
 /.zed
 
-.DS_Store
 /.build/
-/cghooks.lock
-deploy.php
-/public/xhgui
 /vendor-bin/**/vendor/
+.DS_Store
+/.phpstorm.meta.php
+/_ide_helper.php
+/_ide_helper_models.php
+/cghooks.lock
+/deploy.php
+/public/xhgui
 /tests.*
