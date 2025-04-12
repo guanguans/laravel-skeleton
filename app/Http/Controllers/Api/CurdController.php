@@ -31,7 +31,7 @@ class CurdController extends Controller
         $models = $this->modelClass::query()
             ->paginate($request->get('per_page'));
 
-        return $this->success($models);
+        return $this->apiResponse()->success($models);
     }
 
     /**
@@ -43,7 +43,7 @@ class CurdController extends Controller
     {
         $this->modelClass::query()->create($request->post());
 
-        return $this->ok();
+        return $this->apiResponse()->ok();
     }
 
     /**
@@ -53,7 +53,7 @@ class CurdController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        return $this->success($this->findModel($id));
+        return $this->apiResponse()->success($this->findModel($id));
     }
 
     /**
@@ -65,7 +65,7 @@ class CurdController extends Controller
     {
         $this->findModel($id)->updateOrFail($request->post());
 
-        return $this->ok();
+        return $this->apiResponse()->ok();
     }
 
     /**
@@ -77,7 +77,7 @@ class CurdController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->ok();
+        return $this->apiResponse()->ok();
     }
 
     /**

@@ -16,6 +16,7 @@ namespace App\Http\Middleware;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 /**
  * @see https://github.com/pinkary-project/pinkary.com
@@ -33,7 +34,8 @@ final readonly class EnsureVerifiedEmailsForSignInUsers
             return $next($request);
         }
 
-        $user = type($request->user())->as(User::class);
+        // $user = type($request->user())->as(User::class);
+        Assert::isInstanceOf($user = $request->user(), User::class);
 
         if ($user->hasVerifiedEmail()) {
             return $next($request);

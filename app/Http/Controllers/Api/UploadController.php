@@ -24,6 +24,6 @@ class UploadController extends Controller
         $response = StrategyResolver::resolveFromRequest($request, $strategy)->upload()->toArray();
         // unset($response['url'], $response['disk'], $response['location']);
 
-        return $this->apiResponse->success($response);
+        return $this->apiResponse()->success($response);
     }
 }

@@ -1,6 +1,2 @@
 parameters:
-	ignoreErrors:
-		-
-			message: "#^Static call to instance method Imanghafoori\\\\Decorator\\\\Facade\\\\Decorator\\:\\:decorate\\(\\)\\.$#"
-			count: 1
-			path: app/Providers/AppServiceProvider.php
+	ignoreErrors: []

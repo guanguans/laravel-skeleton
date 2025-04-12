@@ -33,7 +33,10 @@ parameters:
         - app/Support/Http/
         - app/Support/Mixins/
         - app/Support/StreamWrappers/
-        - app/View/Components/vendor/
+#        - app/View/Components/vendor/
+        - app/Console/Commands/FindDumpStatementCommand.php
+        - app/Console/Commands/GenerateTestsCommand.php
+        - app/Console/Commands/ParsePHPFileToASTCommand.php
         - app/Console/Commands/IdeHelperGatesCommand.php
         - app/Console/Commands/InitCommand.php
         - app/Notifications/SlowQueryLoggedNotification.php

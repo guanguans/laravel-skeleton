@@ -236,6 +236,7 @@ final class HttpQuery implements \ArrayAccess, \Iterator, \Stringable
         $this->initArray();
 
         if (isset($this->array[$key])) {
+            /** @phpstan-ignore-next-line */
             unset($this->array[$key]);
 
             $this->setDirty();

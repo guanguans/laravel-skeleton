@@ -72,16 +72,16 @@ class AuthController extends Controller
         $user = JWTUser::query()->create($validated);
 
         if (!$user instanceof JWTUser) {
-            return $this->apiResponse->error('创建用户失败');
+            return $this->apiResponse()->error('创建用户失败');
         }
 
         $validated['password'] = $request->post('password_confirmation');
 
         if (!$token = auth()->attempt($validated)) {
-            return $this->apiResponse->error('邮箱或者密码错误');
+            return $this->apiResponse()->error('邮箱或者密码错误');
         }
 
-        return tap($this->apiResponse->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
+        return tap($this->apiResponse()->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
             // Mail::to($user)->queue(new UserRegisteredMail());
             $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
         });
@@ -131,12 +131,12 @@ class AuthController extends Controller
         }, 100 * 1000);
 
         if (!$token) {
-            return $this->apiResponse->badRequest('邮箱或者密码错误');
+            return $this->apiResponse()->badRequest('邮箱或者密码错误');
         }
 
         auth()->logoutOtherDevices(auth()->user()->password);
 
-        return $this->apiResponse->success(JWTUser::wrapToken($token));
+        return $this->apiResponse()->success(JWTUser::wrapToken($token));
     }
 
     /**
@@ -159,7 +159,7 @@ class AuthController extends Controller
      */
     public function me(Request $request): JsonResponse
     {
-        return $this->apiResponse->success(UserResource::make($request->user()));
+        return $this->apiResponse()->success(UserResource::make($request->user()));
     }
 
     /**
@@ -175,7 +175,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        return tap($this->ok('退出成功'), function ($response): void {
+        return tap($this->apiResponse()->ok('退出成功'), function ($response): void {
             $this->authorize('update', auth()->user());
             // \Illuminate\Support\Facades\Request::getFacadeRoot()->user()->currentAccessToken()->delete();
             // auth()->logoutCurrentDevice();
@@ -201,10 +201,10 @@ class AuthController extends Controller
     public function refresh(Request $request): JsonResponse
     {
         if ($request->user()->cant('update', $request->user())) {
-            return $this->errorForbidden();
+            return $this->apiResponse()->forbidden();
         }
 
-        return $this->success(JWTUser::wrapToken(auth()->refresh()));
+        return $this->apiResponse()->success(JWTUser::wrapToken(auth()->refresh()));
     }
 
     /**
@@ -248,6 +248,6 @@ class AuthController extends Controller
 
         $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null)->withQueryString();
 
-        return $this->apiResponse->success(UserCollection::make($users));
+        return $this->apiResponse()->success(UserCollection::make($users));
     }
 }

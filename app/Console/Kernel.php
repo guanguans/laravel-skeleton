@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\File;
 use jdavidbakr\LaravelCacheGarbageCollector\LaravelCacheGarbageCollector;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
-use Spatie\ShortSchedule\ShortSchedule;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class Kernel extends ConsoleKernel
@@ -66,12 +65,6 @@ class Kernel extends ConsoleKernel
         // })->everyMinute();
 
         // $schedule->exec('php', ['-v'])->everyMinute();
-    }
-
-    protected function shortSchedule(ShortSchedule $shortSchedule): void
-    {
-        // this artisan command will run every second
-        $shortSchedule->command('inspire')->everySecond();
     }
 
     /**
