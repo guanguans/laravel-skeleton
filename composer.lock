@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "781b0ee1805fb407eaf32c2368ee8d7a",
+    "content-hash": "89859ae066ae1cdac23c695cea02a073",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -8499,6 +8499,56 @@
             "time": "2024-12-17T16:35:50+00:00"
         },
         {
+            "name": "laracasts/presenter",
+            "version": "0.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/Presenter.git",
+                "reference": "2f5e6f844a67f2285b59ef96a1a9ce4b2cb1adff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/Presenter/zipball/2f5e6f844a67f2285b59ef96a1a9ce4b2cb1adff",
+                "reference": "2f5e6f844a67f2285b59ef96a1a9ce4b2cb1adff",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0|~6.0|~7.0|~8.0|^9.0|^10.0|^11.0|^12.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9|^1.6",
+                "phpspec/phpspec": "~2.0|^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Laracasts\\Presenter": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Simple view presenters",
+            "keywords": [
+                "laravel",
+                "presenter",
+                "view"
+            ],
+            "support": {
+                "issues": "https://github.com/laracasts/Presenter/issues",
+                "source": "https://github.com/laracasts/Presenter/tree/0.2.8"
+            },
+            "time": "2025-04-07T17:59:15+00:00"
+        },
+        {
             "name": "laragear/cache-query",
             "version": "v5.0.1",
             "source": {
@@ -16294,6 +16344,63 @@
                 "source": "https://github.com/revoltphp/event-loop/tree/v1.0.7"
             },
             "time": "2025-01-25T19:27:39+00:00"
+        },
+        {
+            "name": "robclancy/presenter",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robclancy/presenter.git",
+                "reference": "9eae87c0ff075673d358fdc4f44a845f66e65db5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robclancy/presenter/zipball/9eae87c0ff075673d358fdc4f44a845f66e65db5",
+                "reference": "9eae87c0ff075673d358fdc4f44a845f66e65db5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "illuminate/view": ">=9.0",
+                "mockery/mockery": "~1.3.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Robbo\\Presenter\\PresenterServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Robbo\\Presenter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robbo",
+                    "email": "robbo.clancy@gmail.com"
+                }
+            ],
+            "description": "Decorate your objects using presenters. Primarily to keep presentation logic out of your models.",
+            "keywords": [
+                "decorator",
+                "laravel",
+                "presenter"
+            ],
+            "support": {
+                "issues": "https://github.com/robclancy/presenter/issues",
+                "source": "https://github.com/robclancy/presenter/tree/3.0.0"
+            },
+            "time": "2024-02-21T15:46:11+00:00"
         },
         {
             "name": "ryangjchandler/orbit",
