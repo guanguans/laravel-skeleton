@@ -26,9 +26,17 @@ return (new Configuration)
         // __DIR__.'/app/Support/ComposerScripts.php',
         __DIR__.'/tests/',
     ])
-    ->ignoreErrorsOnPackages(
+    ->ignoreErrors([
+        ErrorType::UNUSED_DEPENDENCY,
+        ErrorType::SHADOW_DEPENDENCY,
+    ])
+    ->ignoreErrorsOnPaths(
         [
-            'phar-io/version',
+            __DIR__.'/app/Providers/UnlessProductionServiceProvider.php',
+            __DIR__.'/app/Providers/TelescopeServiceProvider.php',
+            __DIR__.'/app/Providers/WhenLocalServiceProvider.php',
         ],
-        [ErrorType::SHADOW_DEPENDENCY],
+        [
+            ErrorType::DEV_DEPENDENCY_IN_PROD,
+        ]
     );
