@@ -39,7 +39,6 @@ class CallbackGetCast implements CastsAttributes
     /**
      * Prepare the given value for storage.
      */
-    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $value;
@@ -48,7 +47,6 @@ class CallbackGetCast implements CastsAttributes
     /**
      * Transform the attribute to its underlying model values.
      */
-    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         array_splice($this->remainingCallbackArgs, $this->castingAttributeCallbackArgIndex, 0, $value);

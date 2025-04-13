@@ -39,8 +39,7 @@ class CurrencyCast implements CastsAttributes
      * @param mixed $value the property value
      * @param array $attributes the model attributes array
      */
-    #[\Override]
-    public function get(Model $model, string $key, mixed $value, array $attributes): float
+    public function get(Model $model, string $key, mixed $value, array $attributes): ?float
     {
         return null !== $value
             ? round($value / (10 ** $this->digits), $this->digits)
@@ -55,7 +54,6 @@ class CurrencyCast implements CastsAttributes
      * @param mixed $value the property value
      * @param array $attributes the model attributes array
      */
-    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): int
     {
         return $value * (10 ** $this->digits);

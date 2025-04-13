@@ -27,7 +27,6 @@ class CommaSeparatedToArrayCastUsing implements Castable
      *
      * @return CastsAttributes|CastsInboundAttributes|class-string<CastsAttributes|CastsInboundAttributes>
      */
-    #[\Override]
     public static function castUsing(array $arguments): CastsAttributes
     {
         return new class(...$arguments) implements CastsAttributes {

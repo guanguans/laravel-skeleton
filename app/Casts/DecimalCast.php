@@ -19,14 +19,12 @@ use PhpCollective\DecimalObject\Decimal;
 
 class DecimalCast implements CastsAttributes
 {
-    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): ?Decimal
     {
         // Convert the database value to your application value
         return null !== $value ? Decimal::create($value) : null;
     }
 
-    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): ?string
     {
         // Convert your application value to the database value

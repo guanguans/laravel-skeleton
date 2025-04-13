@@ -29,11 +29,9 @@ parameters:
     paths:
         - app/
     excludePaths:
-#        - app/Orchid/
         - app/Support/Http/
         - app/Support/Mixins/
         - app/Support/StreamWrappers/
-#        - app/View/Components/vendor/
         - app/Console/Commands/FindDumpStatementCommand.php
         - app/Console/Commands/GenerateTestsCommand.php
         - app/Console/Commands/ParsePHPFileToASTCommand.php
@@ -41,7 +39,6 @@ parameters:
         - app/Console/Commands/InitCommand.php
         - app/Notifications/SlowQueryLoggedNotification.php
         - app/Support/helpers.php
-        - app/Support/Http/Handlers/StreamHandler.php
         - app/Support/TencentAdsRateLimiterMiddleware.php
 #    level: max
     level: 1
