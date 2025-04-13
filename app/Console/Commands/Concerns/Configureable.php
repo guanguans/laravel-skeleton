@@ -15,8 +15,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Concerns;
 
+use Composer\XdebugHandler\XdebugHandler;
 use Illuminate\Support\Collection;
-use RectorPrefix202503\Composer\XdebugHandler\XdebugHandler;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
