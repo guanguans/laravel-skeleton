@@ -13,12 +13,15 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class UserLocale
 {
     /**
      * Handle an incoming request.
      */
-    public function handle(\Illuminate\Http\Request $request, \Closure $next, ?string $guard = null): \Illuminate\Http\Response
+    public function handle(Request $request, \Closure $next, ?string $guard = null): Response
     {
         $locale = auth($guard)->user()?->locale and app()->setLocale($locale);
 

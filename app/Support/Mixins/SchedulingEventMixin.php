@@ -18,6 +18,7 @@ namespace App\Support\Mixins;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Console\Scheduling\Event;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
 use Psr\Log\LoggerInterface;
@@ -35,7 +36,7 @@ class SchedulingEventMixin
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('daily-%s', \Illuminate\Support\Carbon::now()->format('Y-m-d')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('daily-%s', Carbon::now()->format('Y-m-d')), $dirname);
     }
 
     public function userAppendOutputToWeekly(): callable
@@ -43,7 +44,7 @@ class SchedulingEventMixin
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('weekly-%s', \Illuminate\Support\Carbon::now()->format('Y-W')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('weekly-%s', Carbon::now()->format('Y-W')), $dirname);
     }
 
     public function userAppendOutputToMonthly(): callable
@@ -51,7 +52,7 @@ class SchedulingEventMixin
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('monthly-%s', \Illuminate\Support\Carbon::now()->format('Y-m')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('monthly-%s', Carbon::now()->format('Y-m')), $dirname);
     }
 
     public function userAppendOutputToQuarterly(): callable
@@ -61,7 +62,7 @@ class SchedulingEventMixin
             ?string $dirname = null
         ): Event => $this->userAppendOutputTo(
             $filename,
-            \sprintf('quarterly-%s-%s', \Illuminate\Support\Carbon::now()->format('Y'), now()->quarter),
+            \sprintf('quarterly-%s-%s', Carbon::now()->format('Y'), now()->quarter),
             $dirname
         );
     }
@@ -71,7 +72,7 @@ class SchedulingEventMixin
         return fn (
             ?string $filename = null,
             ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('yearly-%s', \Illuminate\Support\Carbon::now()->format('Y')), $dirname);
+        ): Event => $this->userAppendOutputTo($filename, \sprintf('yearly-%s', Carbon::now()->format('Y')), $dirname);
     }
 
     public function userAppendOutputTo(): callable

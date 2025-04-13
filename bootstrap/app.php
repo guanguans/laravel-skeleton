@@ -11,12 +11,16 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Exceptions\Handler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
+use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Lottery;
@@ -24,9 +28,9 @@ use Illuminate\Support\Lottery;
 return Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {
         // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
-        $app->singleton(Illuminate\Contracts\Http\Kernel::class, App\Http\Kernel::class);
+        $app->singleton(Kernel::class, App\Http\Kernel::class);
         $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
-        $app->singleton(Illuminate\Contracts\Debug\ExceptionHandler::class, App\Exceptions\Handler::class);
+        $app->singleton(ExceptionHandler::class, Handler::class);
     })
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -114,7 +118,7 @@ return Application::configure(basePath: \dirname(__DIR__))
         // ]);
 
         $middleware->web(append: [
-            Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            AddLinkHeadersForPreloadedAssets::class,
         ]);
 
         $middleware->redirectGuestsTo('/account/login');

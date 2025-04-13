@@ -16,6 +16,7 @@ namespace App\Support\Traits;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * @mixin \App\Support\AbstractRepository
@@ -130,8 +131,8 @@ trait Cacheable
     protected function getCacheExpiresTime(null|int|string $time = null): int
     {
         if (self::EXPIRES_END_OF_DAY === $time) {
-            return class_exists(\Illuminate\Support\Carbon::class)
-                ? round(\Illuminate\Support\Carbon::now()->secondsUntilEndOfDay() / 60)
+            return class_exists(Carbon::class)
+                ? round(Carbon::now()->secondsUntilEndOfDay() / 60)
                 : $this->cacheMinutes;
         }
 

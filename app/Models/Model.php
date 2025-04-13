@@ -17,6 +17,7 @@ use App\Models\Concerns\Pipeable;
 use App\Models\Concerns\SerializeDate;
 use Awobaz\Compoships\Compoships;
 use Envant\Fireable\FireableAttributes;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -55,7 +56,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
         'extra_attributes' => SchemalessAttributes::class,
     ];
 
-    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    #[Scope]
     public function withExtraAttributes(): Builder
     {
         return $this->extra_attributes->modelScope();

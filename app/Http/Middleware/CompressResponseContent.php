@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 /**
  * @see https://github.com/vrkansagara/LaraOutPress
  */
@@ -31,7 +34,7 @@ class CompressResponseContent
     /**
      * Handle an incoming request.
      */
-    public function handle(\Illuminate\Http\Request $request, \Closure $next, bool $debug = false): \Illuminate\Http\Response
+    public function handle(Request $request, \Closure $next, bool $debug = false): Response
     {
         /** @var \Illuminate\Http\Response $response */
         $response = $next($request);
@@ -73,12 +76,12 @@ class CompressResponseContent
         static::$replacementRules = [...static::$replacementRules, ...$replacementRules];
     }
 
-    protected function shouldCompress(\Illuminate\Http\Request $request): bool
+    protected function shouldCompress(Request $request): bool
     {
         return !$this->shouldntCompress($request);
     }
 
-    protected function shouldntCompress(\Illuminate\Http\Request $request): bool
+    protected function shouldntCompress(Request $request): bool
     {
         if ($request->expectsJson()) {
             return true;

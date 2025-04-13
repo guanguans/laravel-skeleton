@@ -18,6 +18,7 @@ use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
 use jdavidbakr\LaravelCacheGarbageCollector\LaravelCacheGarbageCollector;
 use Spatie\Health\Commands\RunHealthChecksCommand;
@@ -83,7 +84,7 @@ class Kernel extends ConsoleKernel
             ->classBasename()
             ->snake('-')
             ->replaceLast('-command', '')
-            ->finish(\Illuminate\Support\Carbon::now()->format('-Y-m-d'))
+            ->finish(Carbon::now()->format('-Y-m-d'))
             ->append('.log')
             ->prepend(storage_path('logs/commands/'))
             ->toString();

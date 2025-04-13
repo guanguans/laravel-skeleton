@@ -15,6 +15,29 @@ namespace App\Support\Rectors;
 
 use Illuminate\Support\Str;
 use PhpParser\Node;
+use PhpParser\Node\Const_;
+use PhpParser\Node\Expr\ClassConstFetch;
+use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\PropertyFetch;
+use PhpParser\Node\Expr\StaticCall;
+use PhpParser\Node\Expr\StaticPropertyFetch;
+use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\Name;
+use PhpParser\Node\Scalar\String_;
+use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Enum_;
+use PhpParser\Node\Stmt\EnumCase;
+use PhpParser\Node\Stmt\Function_;
+use PhpParser\Node\Stmt\Interface_;
+use PhpParser\Node\Stmt\Property;
+use PhpParser\Node\Stmt\PropertyProperty;
+use PhpParser\Node\Stmt\Trait_;
+use PhpParser\Node\Stmt\TraitUse;
+use PhpParser\Node\Stmt\UseUse;
 use Rector\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
@@ -224,10 +247,10 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     public function getNodeTypes(): array
     {
         return [
-            Node\Expr\FuncCall::class,
-            Node\Expr\Variable::class,
-            Node\Identifier::class,
-            Node\Name::class,
+            FuncCall::class,
+            Variable::class,
+            Identifier::class,
+            Name::class,
         ];
     }
 
@@ -309,7 +332,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
             return $name;
         })($name));
 
-        if ($node instanceof Node\Name) {
+        if ($node instanceof Name) {
             $node->getParts()[\count($node->getParts()) - 1] = $renamer($node->getParts()[\count($node->getParts()) - 1]);
 
             return $node;
@@ -317,8 +340,8 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
 
         if (
             $this->isSubclasses($node, [
-                Node\Expr\Variable::class,
-                Node\Identifier::class,
+                Variable::class,
+                Identifier::class,
             ])
         ) {
             $caseName = $renamer($node->name);
@@ -332,7 +355,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
             // $node->setAttribute('scope', ScopeFetcher::fetch($node));
         }
 
-        if ($node instanceof Node\Expr\FuncCall) {
+        if ($node instanceof FuncCall) {
             if (
                 $this->isNames($node, [
                     'call_user_func',
@@ -385,16 +408,16 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         $parent = $node->getAttribute('parent');
 
         // function function_name(){}
-        if ($node instanceof Node\Identifier && $parent instanceof Node\Stmt\Function_) {
+        if ($node instanceof Identifier && $parent instanceof Function_) {
             return true;
         }
 
         // function_name();
-        if ($node instanceof Node\Name && $parent instanceof Node\Expr\FuncCall) {
+        if ($node instanceof Name && $parent instanceof FuncCall) {
             return true;
         }
 
-        return $node instanceof Node\Expr\FuncCall
+        return $node instanceof FuncCall
         && $this->isNames($node, [
             // call_user_func('function_name');
             'call_user_func',
@@ -414,47 +437,47 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         $parent = $node->getAttribute('parent');
 
         if (
-            $node instanceof Node\Identifier
+            $node instanceof Identifier
             && $this->isSubclasses($parent, [
                 // interface InterfaceName{}
-                Node\Stmt\Interface_::class,
+                Interface_::class,
                 // class ClassName{}
-                Node\Stmt\Class_::class,
+                Class_::class,
                 // trait TraitName{}
-                Node\Stmt\Trait_::class,
+                Trait_::class,
                 // enum EnumName{}
-                Node\Stmt\Enum_::class,
+                Enum_::class,
                 // enum Enum{case CaseName;}
-                Node\Stmt\EnumCase::class,
+                EnumCase::class,
             ])
         ) {
             return true;
         }
 
         if (
-            $node instanceof Node\Name
+            $node instanceof Name
             && !$this->isName($node, 'stdClass')
             && $this->isSubclasses($parent, [
                 // class Foo extends ClassName implements InterfaceName{}
-                Node\Stmt\Class_::class,
+                Class_::class,
                 // enum Enum implements InterfaceName{}
-                Node\Stmt\Enum_::class,
+                Enum_::class,
                 // use ClassName;
-                Node\Stmt\UseUse::class,
+                UseUse::class,
                 // use TraitName;
-                Node\Stmt\TraitUse::class,
+                TraitUse::class,
                 // ClassName::CONST;
-                Node\Expr\ClassConstFetch::class,
+                ClassConstFetch::class,
                 // ClassName::$property;
-                Node\Expr\StaticPropertyFetch::class,
+                StaticPropertyFetch::class,
                 // ClassName::method();
-                Node\Expr\StaticCall::class,
+                StaticCall::class,
             ])
         ) {
             return true;
         }
 
-        if ($node instanceof Node\Expr\FuncCall) {
+        if ($node instanceof FuncCall) {
             if (
                 $this->isNames($node, [
                     // class_alias('ClassName', 'AliasClassName');
@@ -511,20 +534,20 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         $parent = $node->getAttribute('parent');
 
         if (
-            $node instanceof Node\Identifier
+            $node instanceof Identifier
             && !$this->isName($node, 'class')
             && $this->isSubclasses($parent, [
                 // class Foo{public const CONST_NAME = 'const';}
-                Node\Const_::class,
+                Const_::class,
                 // Foo::CONST_NAME;
-                Node\Expr\ClassConstFetch::class,
+                ClassConstFetch::class,
             ])
         ) {
             return true;
         }
 
         if (
-            $node instanceof Node\Expr\FuncCall
+            $node instanceof FuncCall
             && $this->isNames($node, [
                 // define('CONST_NAME', 'const');
                 'define',
@@ -539,9 +562,9 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         }
 
         // CONST_NAME;
-        return $node instanceof Node\Name
+        return $node instanceof Name
         && !$this->isNames($node, ['null', 'true', 'false'])
-        && $parent instanceof Node\Expr\ConstFetch;
+        && $parent instanceof ConstFetch;
     }
 
     /**
@@ -550,33 +573,33 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     protected function shouldLcfirstCamelName(Node $node): bool
     {
         // $varName;
-        if ($node instanceof Node\Expr\Variable && \is_string($node->name)) {
+        if ($node instanceof Variable && \is_string($node->name)) {
             return true;
         }
 
         if (
-            $node instanceof Node\Identifier
+            $node instanceof Identifier
             && $this->isSubclasses($node->getAttribute('parent'), [
                 // class Foo{public $propertyName;}
-                Node\Stmt\Property::class,
+                Property::class,
                 // class Foo{public int $propertyName;}
-                Node\Stmt\PropertyProperty::class,
+                PropertyProperty::class,
                 // class Foo{public function methodName(){}}
-                Node\Stmt\ClassMethod::class,
+                ClassMethod::class,
                 // $object->propertyName;
-                Node\Expr\PropertyFetch::class,
+                PropertyFetch::class,
                 // Foo::$propertyName;
-                Node\Expr\StaticPropertyFetch::class,
+                StaticPropertyFetch::class,
                 // $object->methodName();
-                Node\Expr\MethodCall::class,
+                MethodCall::class,
                 // Foo::methodName();
-                Node\Expr\StaticCall::class,
+                StaticCall::class,
             ])
         ) {
             return true;
         }
 
-        if ($node instanceof Node\Expr\FuncCall) {
+        if ($node instanceof FuncCall) {
             if (
                 $this->isNames($node, [
                     // call_user_method('methodName', $object);
@@ -620,20 +643,20 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         return false;
     }
 
-    protected function hasFuncCallIndexStringArg(Node\Expr\FuncCall $funcCall, int $index): bool
+    protected function hasFuncCallIndexStringArg(FuncCall $funcCall, int $index): bool
     {
         return isset($funcCall->args[$index])
             && null === $funcCall->args[$index]->name
-            && $funcCall->args[$index]->value instanceof Node\Scalar\String_;
+            && $funcCall->args[$index]->value instanceof String_;
     }
 
-    protected function hasFuncCallNameStringArg(Node\Expr\FuncCall $funcCall, string $name): bool
+    protected function hasFuncCallNameStringArg(FuncCall $funcCall, string $name): bool
     {
         foreach ($funcCall->args as $arg) {
             if (
-                $arg->name instanceof Node\Identifier
+                $arg->name instanceof Identifier
                 && $arg->name->name === $name
-                && $arg->value instanceof Node\Scalar\String_
+                && $arg->value instanceof String_
             ) {
                 return true;
             }

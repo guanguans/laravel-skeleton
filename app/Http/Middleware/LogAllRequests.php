@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,7 +39,7 @@ class LogAllRequests
 
         $headers = $request->header();
 
-        $dt = new \Illuminate\Support\Carbon;
+        $dt = new Carbon;
         $data = [
             'path' => $request->getPathInfo(),
             'method' => $request->getMethod(),

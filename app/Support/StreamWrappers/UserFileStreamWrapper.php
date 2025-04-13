@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace App\Support\StreamWrappers;
 
+use Illuminate\Support\Carbon;
 use function Illuminate\Filesystem\join_paths;
 
 /**
@@ -188,7 +189,7 @@ class UserFileStreamWrapper extends StreamWrapper
         }
 
         return match ($option) {
-            \STREAM_META_TOUCH => touch($newPath, $mtime = $value[0] ?? \Illuminate\Support\Carbon::now()
+            \STREAM_META_TOUCH => touch($newPath, $mtime = $value[0] ?? Carbon::now()
                 ->getTimestamp(), $value[1] ?? $mtime),
             \STREAM_META_OWNER_NAME, \STREAM_META_OWNER => chown($newPath, $value),
             \STREAM_META_GROUP_NAME, \STREAM_META_GROUP => chgrp($newPath, $value),
