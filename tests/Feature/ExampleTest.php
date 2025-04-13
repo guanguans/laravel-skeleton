@@ -1,5 +1,11 @@
 <?php
 
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
 declare(strict_types=1);
 
 /**
@@ -11,17 +17,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace Tests\Feature;
+it('is http', function (): void {
+    $this->get('/')->assertOk();
+})->group(__DIR__, __FILE__);
 
-class ExampleTest extends TestCase
-{
-    public function testHttp(): void
-    {
-        $this->get('/')->assertOk();
-    }
-
-    public function testConsole(): void
-    {
-        $this->artisan('about')->assertOk();
-    }
-}
+it('is console', function (): void {
+    $this->artisan('about')->assertOk();
+})->group(__DIR__, __FILE__);
