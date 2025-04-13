@@ -25,8 +25,6 @@ class StrMixin
     /**
      * @noinspection BadExceptionsProcessingInspection
      *
-     * @psalm-suppress UnusedFunctionCall
-     *
      * @see https://github.com/symfony/polyfill-php83
      */
     public static function jsonValidate(): \Closure

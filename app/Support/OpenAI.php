@@ -356,10 +356,6 @@ final class OpenAI extends FoundationSdk
             ->withOptions($config['http_options']);
     }
 
-    /**
-     * @psalm-suppress UnusedVariable
-     * @psalm-suppress UnevaluatedCode
-     */
     private function completion(string $url, array $parameters, array $rules, ?callable $writer = null, array $messages = [], array $customAttributes = []): Response
     {
         $response = $this

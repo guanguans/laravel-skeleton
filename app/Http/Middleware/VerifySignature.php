@@ -15,7 +15,6 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\InvalidRepeatRequestException;
 use App\Support\HmacSigner;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Facades\Cache;
@@ -39,7 +38,7 @@ class VerifySignature
         Validator::make($request->headers(), [
             'signature' => ['required', 'string'],
             'nonce' => ['required', 'string', 'size:16'],
-            'timestamp' => \sprintf('required|int|max:%s|min:%s', $time = Carbon::now()->timestamp + 1, $time - $effectiveTime),
+            'timestamp' => \sprintf('required|int|max:%s|min:%s', $time = \Illuminate\Support\Carbon::now()->timestamp + 1, $time - $effectiveTime),
         ])->validate();
     }
 

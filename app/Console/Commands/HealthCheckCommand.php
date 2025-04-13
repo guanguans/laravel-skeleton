@@ -342,11 +342,11 @@ class HealthCheckCommand extends Command
 
     private function checkPhpVersion(): HealthCheckStateEnum
     {
-        if (\PHP_VERSION_ID < 80100) {
-            return tap(HealthCheckStateEnum::FAILING(), static function (HealthCheckStateEnum $state): void {
-                $state->description = 'PHP version is less than 8.1.0.';
-            });
-        }
+        // if (\PHP_VERSION_ID < 80300) {
+        //     return tap(HealthCheckStateEnum::FAILING(), static function (HealthCheckStateEnum $state): void {
+        //         $state->description = 'PHP version is less than 8.3.0.';
+        //     });
+        // }
 
         return HealthCheckStateEnum::OK();
     }

@@ -71,7 +71,7 @@ return [
                 // PDO::ATTR_CASE => PDO::CASE_LOWER, // @see https://www.yiichina.com/tutorial/65543
                 PDO::MYSQL_ATTR_INIT_COMMAND => \sprintf(
                     "SET time_zone = '%s';",
-                    Carbon\Carbon::now()->setTimezone(new DateTimeZone(config('app.timezone')))->format('P')
+                    Illuminate\Support\Carbon::now()->setTimezone(new DateTimeZone(config('app.timezone')))->format('P')
                 ),
             ]) : [],
         ],

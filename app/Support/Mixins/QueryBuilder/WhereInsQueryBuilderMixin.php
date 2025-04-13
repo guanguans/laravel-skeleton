@@ -35,7 +35,7 @@ class WhereInsQueryBuilderMixin
 
             $sterilizedColumns = array_map(static function (string $column): string {
                 if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && !str_starts_with($column, $tablePrefix)) {
-                    $column = $tablePrefix.$column;
+                    return $tablePrefix.$column;
                 }
 
                 return $column;

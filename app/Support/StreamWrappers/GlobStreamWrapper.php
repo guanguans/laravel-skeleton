@@ -31,7 +31,10 @@ class GlobStreamWrapper extends StreamWrapper
     /**
      * @noinspection PhpUnusedPrivateMethodInspection
      */
-    private function __destruct() {}
+    private function __destruct()
+    {
+        /** @todo */
+    }
 
     #[\Override]
     final public static function name(): string

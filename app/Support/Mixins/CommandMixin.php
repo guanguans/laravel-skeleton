@@ -71,7 +71,7 @@ class CommandMixin
             } else {
                 try {
                     $result = false !== $task();
-                } catch (\Throwable $taskException) {
+                } catch (\Throwable) {
                     $result = false;
                 }
             }

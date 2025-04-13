@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-class AuthTest extends TestCase
+final class AuthTest extends TestCase
 {
-    protected $accessToken;
+    private mixed $accessToken;
 
     #[\Override]
     protected function setUp(): void

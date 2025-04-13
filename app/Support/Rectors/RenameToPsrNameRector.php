@@ -235,7 +235,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     #[\Override]
-    public function refactor(Node $node)
+    public function refactor(Node $node): ?Node
     {
         try {
             if ($this->shouldLowerSnakeName($node)) {
@@ -256,6 +256,8 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         } catch (\RuntimeException) {
             // skip
         }
+
+        return null;
     }
 
     /**

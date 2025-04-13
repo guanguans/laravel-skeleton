@@ -17,8 +17,11 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
+use Guanguans\MonorepoBuilderWorker\Support\Rectors\RenameToPsrNameRector;
 use Illuminate\Support\Carbon as IlluminateCarbon;
 use Illuminate\Support\Str;
+use PhpParser\NodeVisitor\ParentConnectingVisitor;
+use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
@@ -29,28 +32,43 @@ use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
-use Rector\DowngradePhp81\Rector\Array_\DowngradeArraySpreadStringKeyRector;
+use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Naming\Rector\Assign\RenameVariableToMatchMethodCallReturnTypeRector;
+use Rector\Naming\Rector\Class_\RenamePropertyToMatchTypeRector;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
+use Rector\Naming\Rector\ClassMethod\RenameVariableToMatchNewTypeRector;
+use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchExprVariableRector;
+use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchMethodCallReturnTypeRector;
+use Rector\NodeTypeResolver\PHPStan\Scope\Contract\NodeVisitor\ScopeResolverNodeVisitorInterface;
+use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
+use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
+use Rector\Transform\Rector\ClassMethod\ReturnTypeWillChangeRector;
+use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\Rector\StaticCall\StaticCallToFuncCallRector;
+use Rector\Transform\ValueObject\ClassMethodReference;
+use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\StaticCallToFuncCall;
 use Rector\ValueObject\PhpVersion;
+use RectorLaravel\Rector\ArrayDimFetch\EnvVariableToEnvHelperRector;
+use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
-use RectorLaravel\Rector\Coalesce\ApplyDefaultInsteadOfNullCoalesceRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
+use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        // __DIR__.'/app/',
+        __DIR__.'/app/',
         __DIR__.'/bootstrap/',
         __DIR__.'/config/',
         __DIR__.'/database/',
@@ -72,10 +90,10 @@ return RectorConfig::configure()
     ->withRootFiles()
     // ->withSkipPath(__DIR__.'/tests.php')
     ->withSkip([
-        '**/vendor/*',
+        '**.blade.php',
         '**/__snapshots__/*',
         '**/Fixtures/*',
-        '*.blade.php',
+        '**/vendor/*',
         __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
         __DIR__.'/app/Console/Commands/GenerateTestsCommand.php',
         __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
@@ -93,8 +111,8 @@ return RectorConfig::configure()
     ->withAttributesSets(phpunit: true, all: true)
     ->withComposerBased(phpunit: true)
     ->withPhpVersion(PhpVersion::PHP_83)
-    ->withDowngradeSets(php80: true)
-    ->withPhpSets(php80: true)
+    // ->withDowngradeSets(php83: true)
+    ->withPhpSets(php83: true)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -124,6 +142,7 @@ return RectorConfig::configure()
             ->all(),
     ])
     ->withRules([
+        // AddOverrideAttributeToOverriddenMethodsRector::class,
         ArraySpreadInsteadOfArrayMergeRector::class,
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
@@ -131,8 +150,8 @@ return RectorConfig::configure()
         ...classes()
             ->filter(static fn (string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
             ->filter(static fn (string $class): bool => (new ReflectionClass($class))->isInstantiable())
-            ->values()
             // ->dd()
+            ->values()
             ->all(),
     ])
     ->withConfiguredRule(RemoveAnnotationRector::class, [
@@ -141,9 +160,57 @@ return RectorConfig::configure()
         'phpstan-ignore-next-line',
         'psalm-suppress',
     ])
+    ->withConfiguredRule(ReturnTypeWillChangeRector::class, [
+        new ClassMethodReference(ArrayAccess::class, 'offsetGet'),
+    ])
+    ->registerService(className: ParentConnectingVisitor::class, tag: ScopeResolverNodeVisitorInterface::class)
+    ->withConfiguredRule(RenameToPsrNameRector::class, [
+        // '*',
+        'static::PARENT_ID',
+        'parent',
+        'DB',
+        'URL',
+        'Debug',
+        'Info',
+        'Notice',
+        'Warning',
+        'Error',
+        'Critical',
+        'Alert',
+        'Emergency',
+        'PDO',
+        'OK',
+        'FAILING',
+        'WARNING',
+        'Value',
+        'MIT',
+        'new_password',
+        'current_password',
+        'OS',
+        'deleted_at',
+        'False',
+        'True',
+        'DAILY',
+        'WEEKLY',
+        'MONTHLY',
+        'string',
+        'range_keys',
+        'extra_attributes',
+        'creator_id',
+        'seen_at',
+        'CSP',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'is_developer',
+    ])
     ->withConfiguredRule(RenameClassRector::class, [
         Carbon::class => IlluminateCarbon::class,
     ])
+    // ->withConfiguredRule(FuncCallToStaticCallRector::class, [
+    //     new FuncCallToStaticCall('request', Illuminate\Support\Facades\Request::class, 'getFacadeRoot'),
+    //     new FuncCallToStaticCall('str', Str::class, 'of'),
+    // ])
     // ->withConfiguredRule(StaticCallToFuncCallRector::class, [
     //     new StaticCallToFuncCall(Str::class, 'of', 'str'),
     // ])
@@ -172,11 +239,17 @@ return RectorConfig::configure()
     //     )
     // )
     ->withSkip([
+        ChangeOrIfContinueToMultiContinueRector::class,
+        DisallowedEmptyRuleFixerRector::class,
+        NullToStrictStringFuncCallArgRector::class,
         PreferPHPUnitThisCallRector::class,
-        RenameVariableToMatchMethodCallReturnTypeRector::class,
+        RenameForeachValueVariableToMatchExprVariableRector::class,
+        RenameForeachValueVariableToMatchMethodCallReturnTypeRector::class,
         RenameParamToMatchTypeRector::class,
+        RenamePropertyToMatchTypeRector::class,
+        RenameVariableToMatchMethodCallReturnTypeRector::class,
+        RenameVariableToMatchNewTypeRector::class,
 
-        DowngradeArraySpreadStringKeyRector::class,
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
         LogicalToBooleanRector::class,
@@ -185,6 +258,9 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        EnvVariableToEnvHelperRector::class,
+        ServerVariableToRequestFacadeRector::class,
+
         DispatchToHelperFunctionsRector::class,
         EmptyToBlankAndFilledFuncRector::class,
         HelperFuncCallToFacadeClassRector::class,
@@ -192,11 +268,17 @@ return RectorConfig::configure()
         TypeHintTappableCallRector::class,
     ])
     ->withSkip([
-        ApplyDefaultInsteadOfNullCoalesceRector::class => [
-            __DIR__.'/src/Channels/AbstractChannel.php',
+        RemoveDumpDataDeadCodeRector::class => [
+            __DIR__.'/app/Console/Commands/ShowUnsupportedRequiresCommand.php',
         ],
+        CompleteDynamicPropertiesRector::class => $mixinsPath = [
+            __DIR__.'/app/Support/Mixins/',
+        ],
+        RemoveExtraParametersRector::class => $mixinsPath,
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
-            __DIR__.'/tests',
+            __DIR__.'/app/Support/helpers.php',
+            // __DIR__.'/routes/console.php',
+            __DIR__.'/tests/',
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,
         SortAssociativeArrayByKeyRector::class => [

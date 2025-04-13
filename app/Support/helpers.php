@@ -93,9 +93,9 @@ if (!\function_exists('get_mysql_timezone_offset')) {
      *
      * @see https://github.com/pelican-dev/panel/blob/main/app/Helpers/Time.php
      */
-    function get_schedule_next_run_date(string $minute, string $hour, string $dayOfMonth, string $month, string $dayOfWeek): Carbon
+    function get_schedule_next_run_date(string $minute, string $hour, string $dayOfMonth, string $month, string $dayOfWeek): Illuminate\Support\Carbon
     {
-        return Carbon::instance(
+        return Illuminate\Support\Carbon::instance(
             (new CronExpression(\sprintf('%s %s %s %s %s', $minute, $hour, $dayOfMonth, $month, $dayOfWeek)))->getNextRunDate()
         );
     }

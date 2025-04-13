@@ -23,9 +23,6 @@ use Illuminate\Support\Stringable;
 #[Mixin(Stringable::class)]
 class StringableMixin
 {
-    /**
-     * @psalm-suppress InaccessibleProperty
-     */
     public function jsonValidate(): \Closure
     {
         return fn (int $depth = 512, int $flags = 0): bool => Str::jsonValidate($this->value, $depth, $flags);
