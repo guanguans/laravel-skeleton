@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace App\Console\Commands\Concerns;
 
 use Illuminate\Support\Collection;
+use RectorPrefix202503\Composer\XdebugHandler\XdebugHandler;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -36,11 +37,30 @@ trait Configureable
                 InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
                 'Configure able (e.g. `--config=app.name=guanguans` or `--config app.name=guanguans` or `-c app.name=guanguans`)',
             ));
+
+            $definition->addOption(new InputOption(
+                'xdebug',
+                null,
+                InputOption::VALUE_NONE,
+                'Display xdebug output.'
+            ));
         });
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
+        /**
+         * @see \Rector\Console\ConsoleApplication::doRun()
+         */
+        $isXdebugAllowed = $input->hasParameterOption('--xdebug');
+
+        if (!$isXdebugAllowed) {
+            $xdebugHandler = new XdebugHandler('rector');
+            $xdebugHandler->setPersistent();
+            $xdebugHandler->check();
+            unset($xdebugHandler);
+        }
+
         parent::initialize($input, $output);
 
         collect($this->option('config'))
