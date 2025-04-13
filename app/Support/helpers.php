@@ -13,16 +13,51 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Composer\Autoload\ClassLoader;
 use Cron\CronExpression;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Stringable;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 use SebastianBergmann\Timer\Timer;
 use Symfony\Component\VarDumper\VarDumper;
+
+if (!\function_exists('classes')) {
+    /**
+     * @see \get_declared_classes()
+     * @see \get_declared_interfaces()
+     * @see \get_declared_traits()
+     * @see \DG\BypassFinals::enable()
+     */
+    function classes(): Collection
+    {
+        /** @var list<list<string>> $classes */
+        static $classes = [];
+
+        if ($classes) {
+            return collect($classes);
+        }
+
+        foreach (spl_autoload_functions() as $loader) {
+            if (\is_array($loader) && $loader[0] instanceof ClassLoader) {
+                $classes[] = array_keys($loader[0]->getClassMap());
+            }
+        }
+
+        $classes = array_unique(array_merge(
+            // get_declared_classes(),
+            // get_declared_interfaces(),
+            // get_declared_traits(),
+            ...$classes
+        ));
+
+        return collect($classes);
+    }
+}
 
 if (!\function_exists('str_random')) {
     /**
