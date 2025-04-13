@@ -317,13 +317,11 @@ class StreamHandler implements Handler
             throw new \InvalidArgumentException('on_headers must be callable');
         }
 
-        if (!empty($options)) {
-            foreach ($options as $key => $value) {
-                $method = "add_{$key}";
+        foreach ($options as $key => $value) {
+            $method = "add_{$key}";
 
-                if (isset($methods[$method])) {
-                    $this->{$method}($request, $context, $value, $params);
-                }
+            if (isset($methods[$method])) {
+                $this->{$method}($request, $context, $value, $params);
             }
         }
 

@@ -25,11 +25,13 @@ includes:
 #    - vendor/symplify/phpstan-rules/config/rector-rules.neon
 #    - vendor/symplify/phpstan-rules/config/symfony-rules.neon
 
+rules:
+#    - App\Support\PHPStan\ForbiddenGlobalFunctionsRule
+
 parameters:
     paths:
         - app/
     excludePaths:
-        - app/Support/Http/
         - app/Support/Mixins/
         - app/Support/StreamWrappers/
         - app/Console/Commands/FindDumpStatementCommand.php
