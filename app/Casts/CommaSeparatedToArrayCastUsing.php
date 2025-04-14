@@ -15,17 +15,12 @@ namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Illuminate\Contracts\Database\Eloquent\CastsInboundAttributes;
 use Illuminate\Database\Eloquent\Model;
 
 class CommaSeparatedToArrayCastUsing implements Castable
 {
     /**
-     * Get the name of the caster class to use when casting from / to this cast target.
-     *
-     * @param array<int, mixed> $arguments
-     *
-     * @return CastsAttributes|CastsInboundAttributes|class-string<CastsAttributes|CastsInboundAttributes>
+     * @param list<mixed> $arguments
      */
     public static function castUsing(array $arguments): CastsAttributes
     {

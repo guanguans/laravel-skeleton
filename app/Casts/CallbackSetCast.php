@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 class CallbackSetCast extends CallbackGetCast
 {
     /**
-     * Prepare the given value for storage.
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
@@ -27,11 +27,12 @@ class CallbackSetCast extends CallbackGetCast
     }
 
     /**
-     * Transform the attribute to its underlying model values.
+     * @noinspection PhpMissingParentCallCommonInspection
+     * @noinspection MissingParentCallInspection
      */
     #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value;
+        return parent::set($model, $key, $value, $attributes);
     }
 }

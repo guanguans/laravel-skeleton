@@ -16,24 +16,18 @@ namespace App\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
-class Base64Cast implements CastsAttributes
+readonly class Base64Cast implements CastsAttributes
 {
     public function __construct(
-        private readonly bool $isCastGet = true,
-        private readonly bool $isCastSet = false
+        private bool $isCastGet = true,
+        private bool $isCastSet = false
     ) {}
 
-    /**
-     * Cast the given value.
-     */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $this->isCastGet ? base64_encode($value) : $value;
     }
 
-    /**
-     * Prepare the given value for storage.
-     */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $this->isCastSet ? base64_decode($value, true) : $value;
