@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Bootstrappers;
+namespace App\Support\Bootstrappers;
 
 /**
  * @see https://github.com/inspector-apm/inspector-laravel/blob/master/src/OutOfMemoryBootstrapper.php
