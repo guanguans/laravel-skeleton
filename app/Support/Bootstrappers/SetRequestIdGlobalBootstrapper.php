@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @see \Illuminate\Foundation\Bootstrap\SetRequestForConsole
  */
-class SetRequestId
+class SetRequestIdGlobalBootstrapper
 {
     private const string X_REQUEST_ID_NAME = 'X-Request-Id';
 
