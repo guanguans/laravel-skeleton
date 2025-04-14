@@ -23,6 +23,9 @@ class ClearLogsCommand extends Command
     protected $signature = 'clear:logs {days=30 : The number of days to keep}';
     protected $description = 'Clear logs';
 
+    /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     */
     public function handle(): void
     {
         $files = array_keys(iterator_to_array(

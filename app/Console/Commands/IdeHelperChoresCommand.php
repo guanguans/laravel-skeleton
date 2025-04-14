@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedPrivateMethodInspection */
-
 declare(strict_types=1);
 
 /**
@@ -20,8 +18,6 @@ use App\Support\Discover;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 final class IdeHelperChoresCommand extends Command
 {
@@ -35,6 +31,9 @@ final class IdeHelperChoresCommand extends Command
         EOD;
     protected $description = 'Generate chores for the Laravel-Idea-JSON file.';
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
     public function isEnabled(): bool
     {
@@ -43,8 +42,6 @@ final class IdeHelperChoresCommand extends Command
 
     /**
      * @noinspection PhpMemberCanBePulledUpInspection
-     *
-     * @throws \ReflectionException
      */
     public function handle(): void
     {
@@ -81,9 +78,6 @@ final class IdeHelperChoresCommand extends Command
             ->values()
             ->tap(fn (Collection $routeUris) => $this->output($routeUris));
     }
-
-    #[\Override]
-    protected function initialize(InputInterface $input, OutputInterface $output): void {}
 
     #[\Override]
     protected function rules(): array

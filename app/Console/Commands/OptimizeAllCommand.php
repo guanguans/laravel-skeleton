@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -21,20 +23,12 @@ use Symfony\Component\Process\ExecutableFinder;
 
 class OptimizeAllCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'optimize:all {--f|force : Force optimize.}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Optimize all.';
 
+    /**
+     * @noinspection PhpStaticAsDynamicMethodCallInspection
+     */
     public function handle(): void
     {
         if (!$this->option('force') && $this->getLaravel()->isProduction()) {
@@ -45,16 +39,16 @@ class OptimizeAllCommand extends Command
 
         $this->components->info('Optimizing all...');
 
-        $arguments = ['--ansi' => true, '-v' => true];
-
-        foreach ([
-            'config:cache',
-            'event:cache',
-            'route:cache',
-            'view:cache',
-        ] as $command) {
+        foreach (
+            [
+                'config:cache',
+                'event:cache',
+                'route:cache',
+                'view:cache',
+            ] as $command
+        ) {
             try {
-                $this->components->task($command, fn () => $this->call($command, $arguments));
+                $this->components->task($command, fn () => $this->call($command, ['--ansi' => true, '-v' => true]));
             } catch (\Throwable $throwable) {
                 // $this->consoleLogger()->error($throwable->getMessage());
                 $this->components->error($throwable->getMessage());

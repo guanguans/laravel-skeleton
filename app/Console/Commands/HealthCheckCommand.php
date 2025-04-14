@@ -39,30 +39,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class HealthCheckCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = <<<'EOD'
         health:check
                 {--only=* : Only check methods with the given name}
                 {--except=* : Do not check methods with the given name}
 
         EOD;
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Health check.';
     private array $only = [];
     private array $except = [];
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         collect((new \ReflectionObject($this))->getMethods(\ReflectionMethod::IS_PRIVATE))
@@ -105,9 +91,9 @@ class HealthCheckCommand extends Command
             });
     }
 
-    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
+        parent::initialize($input, $output);
         $this->only = array_merge($this->only, $this->option('only'));
         $this->except = array_merge($this->except, $this->option('except'));
     }
@@ -153,6 +139,8 @@ class HealthCheckCommand extends Command
         $prodPackages = array_keys($composer['require'] ?? []);
         $devPackages = array_keys($composer['require-dev'] ?? []);
         $dontDiscoverPackages = $composer['extra']['laravel']['dont-discover'] ?? [];
+
+        /** @noinspection UsingInclusionReturnValueInspection */
         $discoveredPackages = collect(require base_path('bootstrap/cache/packages.php'))->reject(
             static fn (array $map, string $package): bool => str($package)->is($except)
         );
@@ -209,6 +197,9 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
+    /**
+     * @noinspection PhpSameParameterValueInspection
+     */
     private function checkDatabase(?string $connection = null): HealthCheckStateEnum
     {
         try {
@@ -245,6 +236,8 @@ class HealthCheckCommand extends Command
     }
 
     /**
+     * @noinspection PhpSameParameterValueInspection
+     *
      * @param list<string>|string $checkedSqlModes
      */
     private function checkSqlMode(array|string $checkedSqlModes = 'strict_all_tables'): HealthCheckStateEnum
@@ -314,6 +307,9 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
+    /**
+     * @noinspection PhpSameParameterValueInspection
+     */
     private function checkPing(?string $url = null): HealthCheckStateEnum
     {
         try {
@@ -351,6 +347,9 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
+    /**
+     * @throws \JsonException
+     */
     private function checkPhpExtensions(): HealthCheckStateEnum
     {
         $missingExtensions = collect([
@@ -384,7 +383,7 @@ class HealthCheckCommand extends Command
         $processResult = Process::run([
             ...app(Composer::class)->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
         ])->throw();
-        $errorExtensions = collect(json_decode($processResult->output(), true))->filter(
+        $errorExtensions = collect(json_decode($processResult->output(), true, 512, \JSON_THROW_ON_ERROR))->filter(
             static fn (array $item): bool => 'success' !== $item['status']
         );
 
@@ -428,6 +427,9 @@ class HealthCheckCommand extends Command
         return HealthCheckStateEnum::OK();
     }
 
+    /**
+     * @noinspection PhpSameParameterValueInspection
+     */
     private function checkMemoryLimit(int $limit = 256): HealthCheckStateEnum
     {
         $inis = collect(ini_get_all())->filter(static fn ($value, $key): bool => str_contains($key, 'memory_limit'));

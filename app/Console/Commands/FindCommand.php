@@ -18,22 +18,11 @@ use function Laravel\Prompts\suggest;
 use function Laravel\Prompts\text;
 
 /**
- * @see https://github.com/binafy/artisan-finder/blob/1.x/src/Commands/FindCommand.php
+ * @see https://github.com/binafy/artisan-finder
  */
 class FindCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'find:art {args?}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Find artisan command with given name';
 
     /**
@@ -41,7 +30,7 @@ class FindCommand extends Command
      */
     public function handle(): int
     {
-        $commands = collect(array_keys($this->getApplication()->all()))
+        $commands = collect(array_keys($this->getApplication()?->all()))
             ->filter(fn (string $command): bool => $command !== $this->signature)
             ->values();
 
@@ -63,6 +52,8 @@ class FindCommand extends Command
             $args = explode(' ', $args);
         }
 
-        return $this->call($command, $args);
+        $this->call($command, $args);
+
+        return 0;
     }
 }

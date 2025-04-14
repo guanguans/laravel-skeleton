@@ -17,10 +17,16 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Console\Commands\ClearAllCommand;
+use App\Console\Commands\ClearLogsCommand;
+use Illuminate\Foundation\Console\AboutCommand;
+
 it('is http', function (): void {
     $this->get('/')->assertOk();
 })->group(__DIR__, __FILE__);
 
 it('is console', function (): void {
-    $this->artisan('about')->assertOk();
+    $this->artisan(AboutCommand::class)->assertOk();
+    $this->artisan(ClearAllCommand::class)->assertOk();
+    $this->artisan(ClearLogsCommand::class)->assertOk();
 })->group(__DIR__, __FILE__);

@@ -21,23 +21,9 @@ use Illuminate\Support\Facades\File;
  */
 final class PerformDatabaseBackupCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'perform:database-backup';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Perform a database backup.';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $filename = 'backup-'.now()->timestamp.'.sql';
@@ -46,8 +32,8 @@ final class PerformDatabaseBackupCommand extends Command
 
         $glob = File::glob(database_path('backups/*.sql'));
 
-        collect($glob)->sort()->reverse()->slice(20)->each(
-            static fn (string $backup): bool => File::delete($backup),
-        );
+        collect($glob)->sort()->reverse()->slice(4)->filter(
+            static fn (mixed $backup): bool => \is_string($backup),
+        )->each(static fn (string $backup): bool => File::delete($backup));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -29,11 +31,17 @@ class OpcacheUrlCommand extends Command
     /**
      * @noinspection PhpMemberCanBePulledUpInspection
      */
+    /**
+     * @throws \Illuminate\Http\Client\ConnectionException
+     */
     public function handle(): void
     {
         $this->sendRequest($this->argument('route'), ['force' => $this->option('force') ?? false]);
     }
 
+    /**
+     * @throws \Illuminate\Http\Client\ConnectionException
+     */
     public function sendRequest(string $url, array $parameters = []): PromiseInterface|Response
     {
         return Http::withHeaders(config('opcache.headers'))

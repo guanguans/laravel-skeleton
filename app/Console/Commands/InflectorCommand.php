@@ -21,35 +21,16 @@ use Illuminate\Support\Str;
 
 class InflectorCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'inflector';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Inflector pluralizes and singularizes English nouns.';
 
     /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
+     * @noinspection PhpUndefinedMethodInspection
      */
     public function handle(): int
     {
         collect()
-            ->pipe(function (Collection $collection) {
+            ->pipe(function () {
                 while (true) {
                     $phrase = $this->ask('Please enter a phrase to inflect.');
 
@@ -77,14 +58,15 @@ class InflectorCommand extends Command
                     'all'
                 );
 
-                $classPluck = [
-                    'Laravel' => Pluralizer::class,
-                    'CakePHP' => Inflector::class,
-                ];
-
                 return collect('all' === $type ? \array_slice($types, 1) : [$type])
-                    ->reduce(static function (Collection $results, string $type) use ($phrase, $classPluck) {
-                        $result = Str::of($type)->explode(':')
+                    ->reduce(static function (Collection $results, string $type) use ($phrase) {
+                        $classPluck = [
+                            'Laravel' => Pluralizer::class,
+                            'CakePHP' => Inflector::class,
+                        ];
+
+                        $result = Str::of($type)
+                            ->explode(':')
                             ->pipe(static fn (Collection $parts) => $classPluck[$parts->first()]::{$parts->last()}($phrase));
 
                         return $results->add([

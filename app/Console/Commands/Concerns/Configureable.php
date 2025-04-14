@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpMemberCanBePulledUpInspection */
+
 declare(strict_types=1);
 
 /**
@@ -10,8 +13,6 @@ declare(strict_types=1);
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
-
-/** @noinspection MethodVisibilityInspection */
 
 namespace App\Console\Commands\Concerns;
 

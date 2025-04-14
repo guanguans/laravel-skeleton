@@ -29,14 +29,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ShowUnsupportedRequiresCommand extends Command
 {
-    protected $signature = 'show-unsupported-requires';
+    protected $signature = <<<'EOF'
+        show-unsupported-requires
+        {--package=* : The name of package.}
+        {--major-version=12 : The minimum major version of the package is required.}
+        EOF;
     protected $description = 'Show unsupported requires.';
     private PackagistClient $packagist;
 
     /**
-     * @noinspection ForgottenDebugOutputInspection
-     * @noinspection DebugFunctionUsageInspection
-     *
      * @throws FileNotFoundException
      */
     public function handle(): void
@@ -60,24 +61,24 @@ class ShowUnsupportedRequiresCommand extends Command
             ->dump()
             ->tap(static fn (Collection $packages) => str($packages->implode(' '))->dump())
             ->filter(function (string $name) {
+                Sleep::usleep(100);
+
                 try {
-                    Sleep::usleep(100);
-
                     $package = $this->packagist->getPackage($name);
-
-                    $latestVersion = collect($package['package']['versions'])->first(
-                        static fn (array $package): bool => !str($package['version'])->contains('dev'),
-                        []
-                    );
-
-                    return collect($latestVersion['require'])
-                        ->filter(fn (string $version, string $name): bool => $this->isUnsupported($name, $version))
-                        ->isNotEmpty();
-                } catch (\Throwable) {
-                    dump($name);
+                } catch (\Throwable $throwable) {
+                    $this->components->warn("$name [{$throwable->getMessage()}]");
 
                     return true;
                 }
+
+                $latestVersion = collect($package['package']['versions'])->first(
+                    static fn (array $package): bool => !str($package['version'])->contains('dev'),
+                    []
+                );
+
+                return collect($latestVersion['require'])
+                    ->filter(fn (string $version, string $name): bool => $this->isUnsupported($name, $version))
+                    ->isNotEmpty();
             })
             ->dump()
             ->tap(static fn (Collection $packages) => str($packages->implode(' '))->dump())
@@ -98,9 +99,9 @@ class ShowUnsupportedRequiresCommand extends Command
     /**
      * @noinspection MethodVisibilityInspection
      */
-    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
+        parent::initialize($input, $output);
         $this->packagist = new PackagistClient(
             new Client([RequestOptions::VERIFY => false]),
             new PackagistUrlGenerator
@@ -109,11 +110,7 @@ class ShowUnsupportedRequiresCommand extends Command
 
     private function isUnsupported(string $name, string $version): bool
     {
-        // if (!str($name)->is(['laravel/framework', 'illuminate/*'])) {
-        //     return false;
-        // }
-
-        if (!str($name)->is(['nikic/php-parser'])) {
+        if (!str($name)->is($this->option('package') ?: ['laravel/framework', 'illuminate/*'])) {
             return false;
         }
 
@@ -123,7 +120,7 @@ class ShowUnsupportedRequiresCommand extends Command
             return false;
         }
 
-        $maxVersion = $version->explode('|')
+        $majorVersion = $version->explode('|')
             ->filter()
             ->map(
                 static fn (string $version): ?string => str($version)
@@ -133,6 +130,6 @@ class ShowUnsupportedRequiresCommand extends Command
             )
             ->max();
 
-        return Comparator::lessThan($maxVersion, '12');
+        return Comparator::lessThan($majorVersion, $this->option('major-version'));
     }
 }

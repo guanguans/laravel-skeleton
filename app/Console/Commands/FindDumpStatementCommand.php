@@ -13,13 +13,16 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Composer\XdebugHandler\XdebugHandler;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use PhpParser\Error;
 use PhpParser\Node;
+use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Name;
+use PhpParser\Node\Stmt\Expression;
 use PhpParser\NodeFinder;
+use PhpParser\Parser;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
@@ -31,22 +34,17 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class FindDumpStatementCommand extends Command
 {
-    /** @var string */
     protected $signature = <<<'EOD'
-
-                find:dump-statement
-                {--dir=* : The directories to search for files}
-                {--path=* : The paths to search for files}
-                {--name=* : The names to search for files}
-                {--not-path=* : The paths to exclude from the search}
-                {--not-name=* : The names to exclude from the search}
-                {--s|struct=* : The structs to search}
-                {--f|func=* : The functions to search}
-                {--m|parse-mode=1 : The mode(1,2,3,4) to use for the PHP parser}
-                {--M|memory-limit= : The memory limit to use for the PHP parser}
+        find:dump-statement
+        {--dir=* : The directories to search for files}
+        {--path=* : The paths to search for files}
+        {--name=* : The names to search for files}
+        {--not-path=* : The paths to exclude from the search}
+        {--not-name=* : The names to exclude from the search}
+        {--s|struct=* : The structs to search}
+        {--f|func=* : The functions to search}
+        {--M|memory-limit= : The memory limit to use for the PHP parser}
         EOD;
-
-    /** @var string */
     protected $description = 'Find dump statements in PHP files.';
 
     /** @var list<list<\string>> */
@@ -67,21 +65,24 @@ class FindDumpStatementCommand extends Command
             'var_export',
         ],
     ];
-
-    /** @var \Symfony\Component\Finder\Finder */
-    private $fileFinder;
-    private ?\PhpParser\Parser $parser = null;
+    private ?Finder $fileFinder = null;
+    private ?Parser $parser = null;
     private ?NodeFinder $nodeFinder = null;
     private ?Standard $prettyPrinter = null;
     private ?ResourceUsageFormatter $resourceUsageFormatter = null;
 
-    #[\Override]
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     public function isEnabled(): bool
     {
         return !$this->laravel->isProduction();
     }
 
-    public function handle(Timer $timer)
+    /**
+     * @noinspection SensitiveParameterInspection
+     */
+    public function handle(Timer $timer): int
     {
         $timer->start();
         $this->withProgressBar($this->fileFinder, function (SplFileInfo $fileInfo) use (&$findInfos, &$odd): void {
@@ -96,9 +97,9 @@ class FindDumpStatementCommand extends Command
 
             $dumpNodes = $this->nodeFinder->find($nodes, function (Node $node) {
                 if (
-                    $node instanceof Node\Stmt\Expression
-                    && $node->expr instanceof Node\Expr\FuncCall
-                    && $node->expr->name instanceof Node\Name
+                    $node instanceof Expression
+                    && $node->expr instanceof FuncCall
+                    && $node->expr->name instanceof Name
                     && \in_array($node->expr->name->toString(), $this->statements['func'], true)
                 ) {
                     return true;
@@ -115,17 +116,25 @@ class FindDumpStatementCommand extends Command
             }
 
             $findInfos[] = array_map(function (Node $dumpNode) use ($fileInfo, $odd): array {
-                if ($dumpNode instanceof Node\Stmt\Expression && $dumpNode->expr instanceof Node\Expr\FuncCall) {
+                if ($dumpNode instanceof Expression && $dumpNode->expr instanceof FuncCall) {
                     $name = "<fg=cyan>{$dumpNode->expr->name->getFirst()}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(static fn (Stringable $name): string => "<fg=red>$name</>");
+                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(
+                        static fn (Stringable $name): string => "<fg=red>$name</>"
+                    );
                     $type = '<fg=red>struct</>';
                 }
 
-                $file = Str::of($fileInfo->getRealPath())->replace(base_path().\DIRECTORY_SEPARATOR, '')->pipe(static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>");
-                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(static fn (Stringable $startLine): string => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>");
-                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(static fn (Stringable $formattedCode): string => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>");
+                $file = Str::of($fileInfo->getRealPath())->replace(base_path().\DIRECTORY_SEPARATOR, '')->pipe(
+                    static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>"
+                );
+                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(
+                    static fn (Stringable $startLine): string => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>"
+                );
+                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(
+                    static fn (Stringable $formattedCode): string => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>"
+                );
 
                 return [
                     'index' => null,
@@ -156,16 +165,19 @@ class FindDumpStatementCommand extends Command
             return $info;
         }, $findInfos = array_merge([], ...$findInfos), array_keys($findInfos));
 
-        $this->table(array_map(static fn ($name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])), $findInfos);
+        $this->table(
+            array_map(static fn ($name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])),
+            $findInfos
+        );
 
         $this->components->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
         return self::SUCCESS;
     }
 
-    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
+        parent::initialize($input, $output);
         $this->checkOptions();
         $this->initializeEnvs();
         $this->initializeProperties();
@@ -173,17 +185,6 @@ class FindDumpStatementCommand extends Command
 
     protected function checkOptions(): void
     {
-        if (!\in_array($this->option('parse-mode'), [
-            ParserFactory::PREFER_PHP7,
-            ParserFactory::PREFER_PHP5,
-            ParserFactory::ONLY_PHP7,
-            ParserFactory::ONLY_PHP5, ], true)
-        ) {
-            $this->error('The parse-mode option is not valid(1,2,3,4).');
-
-            exit(1);
-        }
-
         if ($this->option('struct')) {
             $this->statements['struct'] = array_intersect($this->statements['struct'], $this->option('struct'));
         }
@@ -195,32 +196,29 @@ class FindDumpStatementCommand extends Command
 
     protected function initializeEnvs(): void
     {
-        $xdebug = new XdebugHandler(self::class);
-        $xdebug->check();
-        unset($xdebug);
-
-        \extension_loaded('xdebug') and ini_set('xdebug.max_nesting_level', 2048);
-        ini_set('zend.assertions', 0);
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
 
     protected function initializeProperties(): void
     {
-        $this->fileFinder = tap(Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true), function (Finder $finder): void {
-            $methods = [
-                'in' => $this->option('dir') ?: [base_path()],
-                'path' => $this->option('path') ?: [],
-                'notPath' => $this->option('not-path') ?: ['vendor', 'storage'],
-                'name' => $this->option('name') ?: ['*.php'],
-                'notName' => $this->option('not-name') ?: [],
-            ];
+        $this->fileFinder = tap(
+            Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true),
+            function (Finder $finder): void {
+                $methods = [
+                    'in' => $this->option('dir') ?: [base_path()],
+                    'path' => $this->option('path') ?: [],
+                    'notPath' => $this->option('not-path') ?: ['vendor', 'storage'],
+                    'name' => $this->option('name') ?: ['*.php'],
+                    'notName' => $this->option('not-name') ?: [],
+                ];
 
-            foreach ($methods as $method => $parameters) {
-                $finder->{$method}($parameters);
+                foreach ($methods as $method => $parameters) {
+                    $finder->{$method}($parameters);
+                }
             }
-        });
+        );
 
-        $this->parser = (new ParserFactory)->create((int) $this->option('parse-mode'));
+        $this->parser = (new ParserFactory)->createForHostVersion();
         $this->nodeFinder = new NodeFinder;
         $this->prettyPrinter = new Standard;
         $this->resourceUsageFormatter = new ResourceUsageFormatter;

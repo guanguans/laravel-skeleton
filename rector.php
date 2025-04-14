@@ -42,6 +42,7 @@ use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchExprVariableR
 use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchMethodCallReturnTypeRector;
 use Rector\NodeTypeResolver\PHPStan\Scope\Contract\NodeVisitor\ScopeResolverNodeVisitorInterface;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
+use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
@@ -61,21 +62,21 @@ use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
-use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__.'/app/',
-        __DIR__.'/bootstrap/',
-        __DIR__.'/config/',
-        __DIR__.'/database/',
-        __DIR__.'/public/',
-        __DIR__.'/resources/',
-        __DIR__.'/routes/',
-        __DIR__.'/tests/',
+        __DIR__.'/app/Console/',
+        // __DIR__.'/app/',
+        // __DIR__.'/bootstrap/',
+        // __DIR__.'/config/',
+        // __DIR__.'/database/',
+        // __DIR__.'/public/',
+        // __DIR__.'/resources/',
+        // __DIR__.'/routes/',
+        // __DIR__.'/tests/',
         ...array_filter(
             glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
             static fn (string $filename): bool => !\in_array($filename, [
@@ -94,9 +95,6 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         '**/vendor/*',
-        __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
-        __DIR__.'/app/Console/Commands/GenerateTestsCommand.php',
-        __DIR__.'/app/Console/Commands/ParsePHPFileToASTCommand.php',
         __DIR__.'/app/Support/Http/',
         __DIR__.'/bootstrap/cache/',
         __DIR__.'/resources/lang/',
@@ -105,8 +103,8 @@ return RectorConfig::configure()
     ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()
     // ->withoutParallel()
-    ->withImportNames(importNames: false)
-    // ->withImportNames(importDocBlockNames: false, importShortClasses: false)
+    // ->withImportNames(importNames: false)
+    ->withImportNames(importDocBlockNames: false, importShortClasses: false)
     ->withFluentCallNewLine()
     ->withAttributesSets(phpunit: true, all: true)
     ->withComposerBased(phpunit: true)
@@ -144,6 +142,7 @@ return RectorConfig::configure()
     ->withRules([
         // AddOverrideAttributeToOverriddenMethodsRector::class,
         ArraySpreadInsteadOfArrayMergeRector::class,
+        JsonThrowOnErrorRector::class,
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
@@ -203,6 +202,7 @@ return RectorConfig::configure()
         'created_at',
         'updated_at',
         'is_developer',
+        'pStmt_ClassMethod',
     ])
     ->withConfiguredRule(RenameClassRector::class, [
         Carbon::class => IlluminateCarbon::class,
@@ -239,6 +239,7 @@ return RectorConfig::configure()
     //     )
     // )
     ->withSkip([
+        AddOverrideAttributeToOverriddenMethodsRector::class,
         ChangeOrIfContinueToMultiContinueRector::class,
         DisallowedEmptyRuleFixerRector::class,
         NullToStrictStringFuncCallArgRector::class,
@@ -268,9 +269,6 @@ return RectorConfig::configure()
         TypeHintTappableCallRector::class,
     ])
     ->withSkip([
-        RemoveDumpDataDeadCodeRector::class => [
-            __DIR__.'/app/Console/Commands/ShowUnsupportedRequiresCommand.php',
-        ],
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
             __DIR__.'/app/Support/Mixins/',
         ],

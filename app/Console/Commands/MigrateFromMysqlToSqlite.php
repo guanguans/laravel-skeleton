@@ -13,19 +13,23 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\HttpLog;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 /**
- * @see https://github.com/vitodeploy/vito/blob/1.x/app/Console/Commands/MigrateFromMysqlToSqlite.php
+ * @see https://github.com/vitodeploy/vito/blob/2.x/app/Console/Commands/MigrateFromMysqlToSqlite.php
  */
 class MigrateFromMysqlToSqlite extends Command
 {
     protected $signature = 'migrate-from-mysql-to-sqlite';
     protected $description = 'Migrate from Mysql to SQLite';
 
+    /**
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
     public function handle(): void
     {
         $this->components->info('Migrating from Mysql to SQLite...');
@@ -40,8 +44,7 @@ class MigrateFromMysqlToSqlite extends Command
 
         $this->call('migrate', ['--force' => true]);
 
-        // $this->migrateModel(\App\Models\Server::class);
-        // $this->migrateModel(\App\Models\ServerLog::class);
+        $this->migrateModel(HttpLog::class);
         $this->migrateModel(User::class);
 
         $env = File::get(base_path('.env'));
@@ -52,20 +55,20 @@ class MigrateFromMysqlToSqlite extends Command
     }
 
     /**
-     * @param class-string<\Illuminate\Database\Eloquent\Model> $model
+     * @param class-string<\Eloquence\Database\Model> $model
      */
     private function migrateModel(string $model): void
     {
-        $this->components->info("Migrating model: {$model}");
+        $this->components->info("Migrating model: $model");
 
         config(['database.default' => 'mysql']);
 
-        $rows = $model::where('id', '>', 0)->get();
+        $rows = $model::query()->where('id', '>', 0)->get();
 
         foreach ($rows as $row) {
             DB::connection('sqlite')->table($row->getTable())->insert($row->getAttributes());
         }
 
-        $this->components->info("Migrated model: {$model}");
+        $this->components->info("Migrated model: $model");
     }
 }

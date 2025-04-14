@@ -37,8 +37,12 @@ trait AskForPassword
         return $password;
     }
 
-    private function comparePasswords(#[\SensitiveParameter] ?string $password, #[\SensitiveParameter] ?string $confirmedPassword): bool
-    {
+    private function comparePasswords(
+        #[\SensitiveParameter]
+        ?string $password,
+        #[\SensitiveParameter]
+        ?string $confirmedPassword
+    ): bool {
         if (!$password || !$confirmedPassword) {
             return false;
         }
