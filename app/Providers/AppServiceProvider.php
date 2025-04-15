@@ -18,6 +18,7 @@ use App\Http\Middleware\LogHttp;
 use App\Http\Middleware\TrimStrings;
 use App\Listeners\RunCommandInDebugModeListener;
 use App\Listeners\SetRequestIdListener;
+use App\Models\JWTUser;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
@@ -206,6 +207,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->configureRoute();
+
         $this->whenever(true, function (): void {
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             \Illuminate\Support\Facades\Request::getFacadeRoot()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
@@ -953,5 +956,44 @@ class AppServiceProvider extends ServiceProvider
     private function isOctaneHttpServer(): bool
     {
         return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
+    }
+
+    private function configureRoute(): void
+    {
+        $this->configureRateLimiting();
+        Route::pattern('id', '[0-9]+');
+        $this->bindRouteModels();
+    }
+
+    private function configureRateLimiting(): void
+    {
+        RateLimiter::for(
+            'api',
+            static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
+        );
+
+        RateLimiter::for('login', static fn (Request $request): array => [
+            Limit::perMinute(500),
+            Limit::perMinute(5)->by($request->ip()),
+            Limit::perMinute(5)->by($request->input('email')),
+        ]);
+    }
+
+    private function bindRouteModels(): void
+    {
+        Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
+
+        foreach (
+            [
+                JWTUser::class,
+                'user' => User::class,
+            ] as $name => $model
+        ) {
+            if (\is_int($name)) {
+                $name = str(class_basename($model))->snake('-')->toString();
+            }
+
+            Route::model($name, $model);
+        }
     }
 }

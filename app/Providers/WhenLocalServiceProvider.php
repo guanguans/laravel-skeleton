@@ -19,6 +19,6 @@ class WhenLocalServiceProvider extends AggregateServiceProvider
 {
     /** @noinspection PhpFullyQualifiedNameUsageInspection */
     protected $providers = [
-        \Guanguans\LaravelSoar\SoarServiceProvider::class,
+        // \Guanguans\LaravelSoar\SoarServiceProvider::class,
     ];
 }

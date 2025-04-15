@@ -46,7 +46,7 @@ return Application::configure(basePath: \dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         channels: __DIR__.'/../routes/channels.php',
         health: '/up',
-        apiPrefix: 'api/v1',
+        // apiPrefix: 'api/v1',
         // then: function (): void {
         //     /** @see https://github.com/packistry/packistry/blob/main/bootstrap/app.php */
         //     Route::middleware('web')->get('{any?}', fn () => response()

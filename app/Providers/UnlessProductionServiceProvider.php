@@ -23,7 +23,7 @@ class UnlessProductionServiceProvider extends AggregateServiceProvider
         \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         // \ChrisDiCarlo\LaravelConfigChecker\LaravelConfigCheckerServiceProvider::class,
         // \Enlightn\Enlightn\EnlightnServiceProvider::class,
-        \Guanguans\LaravelSoar\SoarServiceProvider::class,
+        // \Guanguans\LaravelSoar\SoarServiceProvider::class,
         \KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
         // \Ladumor\LaravelPwa\PWAServiceProvider::class,
         // \Lanin\Laravel\ApiDebugger\ServiceProvider::class,
