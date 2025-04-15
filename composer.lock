@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0777f4b4e2e4d67233331a31e85fc307",
+    "content-hash": "813adfbeb7f8756f25017301db6da33b",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -15012,6 +15012,111 @@
                 }
             ],
             "time": "2024-11-21T20:00:02+00:00"
+        },
+        {
+            "name": "prinsfrank/enums",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PrinsFrank/enums.git",
+                "reference": "3acfedf3fca35d6c6c134b45de489edff6306a2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PrinsFrank/enums/zipball/3acfedf3fca35d6c6c134b45de489edff6306a2b",
+                "reference": "3acfedf3fca35d6c6c134b45de489edff6306a2b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1 || ^8.2 || ^8.3 || ^8.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.43",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-strict-rules": "^1.5",
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PrinsFrank\\Enums\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Adds missing strictly typed methods to work with enums",
+            "support": {
+                "issues": "https://github.com/PrinsFrank/enums/issues",
+                "source": "https://github.com/PrinsFrank/enums/tree/v1.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/PrinsFrank",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-12-29T14:11:26+00:00"
+        },
+        {
+            "name": "prinsfrank/standards",
+            "version": "v3.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PrinsFrank/standards.git",
+                "reference": "26a8eedbfa3492086937c8009ce6b832d6df2a1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PrinsFrank/standards/zipball/26a8eedbfa3492086937c8009ce6b832d6df2a1f",
+                "reference": "26a8eedbfa3492086937c8009ce6b832d6df2a1f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+                "prinsfrank/enums": "^1.4"
+            },
+            "require-dev": {
+                "composer/composer": "^2.3",
+                "dbrekelmans/bdi": "^1.0",
+                "ext-dom": "*",
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "phpstan/phpstan": "^2",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpunit/phpunit": "^11.2.6",
+                "prinsfrank/transliteration": "^1.0",
+                "symfony/panther": "dev-main"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PrinsFrank\\Standards\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A collection of standards as PHP Enums: ISO3166, ISO4217, ISO639...",
+            "support": {
+                "issues": "https://github.com/PrinsFrank/standards/issues",
+                "source": "https://github.com/PrinsFrank/standards/tree/v3.12.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/PrinsFrank",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-31T18:45:12+00:00"
         },
         {
             "name": "proengsoft/laravel-jsvalidation",

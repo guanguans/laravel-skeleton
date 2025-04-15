@@ -108,6 +108,7 @@
         "php-static-analysis/attributes": "^0.2",
         "phpyh/lru-memoizer": "^0.2",
         "pion/laravel-chunk-upload": "^1.5",
+        "prinsfrank/standards": "^3.12",
         "proengsoft/laravel-jsvalidation": "^4.10",
         "pusher/pusher-php-server": "^7.2",
         "rakutentech/laravel-request-docs": "^2.42",

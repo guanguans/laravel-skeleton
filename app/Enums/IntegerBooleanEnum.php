@@ -13,14 +13,8 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use BenSampo\Enum\Enum;
-
-/**
- * @method static static False()
- * @method static static True()
- */
-final class IntegerBooleanEnum extends Enum
+enum IntegerBooleanEnum: int
 {
-    public const int False = 0;
-    public const int True = 1;
+    case False = 0;
+    case True = 1;
 }

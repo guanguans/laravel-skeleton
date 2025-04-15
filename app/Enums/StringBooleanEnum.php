@@ -13,13 +13,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use BenSampo\Enum\Enum;
-
-/**
- * @method static static False()
- * @method static static True()
- */
-final class StringBooleanEnum extends Enum
+enum StringBooleanEnum: string
 {
     public const string False = '0';
     public const string True = '1';
