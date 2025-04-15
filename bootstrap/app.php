@@ -11,7 +11,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Console\Commands\ClearLogsCommand;
 use App\Exceptions\Handler;
+use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\QueryException;
@@ -20,16 +23,21 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
+use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Lottery;
+use jdavidbakr\LaravelCacheGarbageCollector\LaravelCacheGarbageCollector;
+use Spatie\Health\Commands\RunHealthChecksCommand;
+use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 return Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {
         // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
         $app->singleton(Kernel::class, App\Http\Kernel::class);
-        $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
+        // $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
         $app->singleton(ExceptionHandler::class, Handler::class);
     })
     ->withRouting(
@@ -141,6 +149,28 @@ return Application::configure(basePath: \dirname(__DIR__))
                 'max_age' => 24 * 60 * 60,
                 'private',
             ]));
+    })
+    ->withSchedule(static function (Schedule $schedule): void {
+        $schedule->command('inspire')->everyMinute()->withoutOverlapping(60);
+        // $schedule->command('inspire')->daily()->atRandom('07:15', '11:42')->withoutOverlapping(60);
+        // $schedule->command('backup:clean')->daily()->at('05:15')->withoutOverlapping();
+        // $schedule->command('backup:run')->daily()->at('05:30')->withoutOverlapping();
+        // $schedule->command('backup:monitor')->daily()->at('05:45')->withoutOverlapping();
+        // $schedule->command('model:prune', ['--model' => MonitoredScheduledTaskLogItem::class])->daily()->withoutOverlapping();
+        // $schedule->command('telescope:prune')->daily()->skip(app()->isProduction())->withoutOverlapping();
+        // $schedule->command(ClearLogsCommand::class)->daily()->withoutOverlapping();
+        // $schedule->command(ClearExpiredCommand::class)->daily()->withoutOverlapping();
+        // $schedule->command('disposable:update')->weekly()->at('04:00');
+        // $schedule->command('db:monitor', ['--databases' => 'mysql', '--max' => 100])->userAppendOutputToDaily()->everyMinute();
+        // $schedule->command(RunHealthChecksCommand::class)->everyMinute();
+        // $schedule->command(LaravelCacheGarbageCollector::class)->daily();
+        // $schedule->job(function (ConsoleOutput $consoleOutput): void {
+        //     $consoleOutput->writeln(Inspiring::quote());
+        // })->everyMinute();
+        // $schedule->call(function (ConsoleOutput $consoleOutput): void {
+        //     $consoleOutput->writeln(Inspiring::quote());
+        // })->everyMinute();
+        // $schedule->exec('php', ['-v'])->everyMinute();
     })
     ->withExceptions(static function (Exceptions $exceptions): void {
         $exceptions->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 1000));
