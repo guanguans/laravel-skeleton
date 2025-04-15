@@ -17,62 +17,43 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CurdController extends Controller
+abstract class CurdController extends Controller
 {
+    /**
+     * @var class-string<Model>|Model
+     */
     protected Model|string $modelClass;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
-     */
     public function index(Request $request): JsonResponse
     {
-        $models = $this->modelClass::query()
-            ->paginate($request->get('per_page'));
-
-        return $this->apiResponse()->success($models);
+        return $this->apiResponse()->success(
+            $this->modelClass::query()->simplePaginate($request->get('per_page'))
+        );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
-     */
     public function store(Request $request): JsonResponse
     {
-        $this->modelClass::query()->create($request->post());
-
-        return $this->apiResponse()->ok();
+        return $this->apiResponse()->success(
+            $this->modelClass::query()->create($request->post())
+        );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
-     */
     public function show(int $id): JsonResponse
     {
         return $this->apiResponse()->success($this->findModel($id));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     * @throws \Throwable
      */
     public function update(Request $request, int $id): JsonResponse
     {
-        $this->findModel($id)->updateOrFail($request->post());
+        $model = $this->findModel($id);
+        $model->updateOrFail($request->post());
 
-        return $this->apiResponse()->ok();
+        return $this->apiResponse()->success($model);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
-     */
     public function destroy(int $id): JsonResponse
     {
         $this->findModel($id)->delete();
@@ -80,9 +61,6 @@ class CurdController extends Controller
         return $this->apiResponse()->ok();
     }
 
-    /**
-     * Find model.
-     */
     protected function findModel(int $id, array $columns = ['*']): Model
     {
         return $this->modelClass::query()->findOrFail($id, $columns);

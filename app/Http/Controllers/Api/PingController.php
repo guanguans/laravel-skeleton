@@ -16,49 +16,20 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-/**
- * @group Ping - 示例接口管理
- */
 class PingController extends Controller
 {
-    /**
-     * @see \Illuminate\Routing\Controllers\HasMiddleware
-     */
-    #[\Override]
-    public function middleware(mixed $middleware, array $options = [])
-    {
-        return parent::middleware($middleware, $options);
-    }
-
-    /**
-     * ping - 示例接口.
-     *
-     * @unauthenticated
-     *
-     * @urlParam is_bad integer 错误请求示例. 默认值 0.
-     *
-     * @queryParam is_bad integer 错误请求示例. 默认值 0.
-     *
-     * @bodyParam is_bad integer 错误请求示例. 默认值 0.
-     *
-     * @response {
-     *     "status": "success",
-     *     "code": 200,
-     *     "message": "This is a successful example.",
-     *     "data": {},
-     *     "error": {}
-     * }
-     */
     public function ping(Request $request, int $isBad = 0): JsonResponse
     {
-        $validatedParameters = $request->validateStrictAll([
+        $validatedParameters = $request->validate([
             'is_bad' => 'integer',
-        ]);
+        ]) + [
+            'is_bad' => $isBad,
+        ];
 
-        if (($validatedParameters['is_bad'] ?? 0) || $isBad) {
-            return $this->apiResponse()->badRequest('This is a bad example.');
+        if ($validatedParameters['is_bad']) {
+            return $this->apiResponse()->badRequest();
         }
 
-        return $this->apiResponse()->ok('This is a successful example.');
+        return $this->apiResponse()->ok();
     }
 }

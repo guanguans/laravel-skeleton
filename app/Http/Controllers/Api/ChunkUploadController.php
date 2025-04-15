@@ -25,6 +25,7 @@ class ChunkUploadController extends Controller
      * @see https://www.youtube.com/watch?v=Me3-o57Cprc
      *
      * @noinspection NativeMemberUsageInspection
+     * @noinspection PhpRedundantVariableDocTypeInspection
      *
      * @throws \Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException
      */

@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -14,7 +16,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Support\Traits\ValidatesData;
-use App\Support\Traits\ValidateStrictAll;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -26,7 +27,6 @@ class Controller extends BaseController // implements HasMiddleware
 {
     use AuthorizesRequests;
     use DispatchesJobs;
-    use ValidateStrictAll;
     use ValidatesData;
     use ValidatesRequests;
 
