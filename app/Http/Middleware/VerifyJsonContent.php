@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\BadRequestException;
+use App\Exceptions\BadRequestHttpException;
 use Illuminate\Http\Request;
 
 class VerifyJsonContent
 {
     /**
-     * @throws BadRequestException
+     * @throws BadRequestHttpException
      */
     public function handle(Request $request, \Closure $next)
     {
         $acceptHeader = $request->header('accept');
         $contentType = 'application/json';
 
-        throw_unless(str_contains($acceptHeader, $contentType), BadRequestException::class, 'Your request must contain [Accept = application/json].');
+        throw_unless(str_contains($acceptHeader, $contentType), BadRequestHttpException::class, 'Your request must contain [Accept = application/json].');
 
         $response = $next($request);
 

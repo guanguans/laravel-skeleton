@@ -38,7 +38,7 @@ return Application::configure(basePath: \dirname(__DIR__))
         // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
         $app->singleton(Kernel::class, App\Http\Kernel::class);
         // $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
-        $app->singleton(ExceptionHandler::class, Handler::class);
+        // $app->singleton(ExceptionHandler::class, Handler::class);
     })
     ->withRouting(
         web: __DIR__.'/../routes/web.php',

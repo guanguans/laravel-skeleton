@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpFoundation\Response;
 
-class InvalidRepeatRequestException extends AccessDeniedHttpException
+class BadRequestHttpException extends \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
 {
     /**
      * @see self::fromStatusCode()
@@ -25,7 +25,7 @@ class InvalidRepeatRequestException extends AccessDeniedHttpException
     public function __construct(string $message = '', ?\Throwable $previous = null, int $code = 0, array $headers = [])
     {
         parent::__construct(
-            $message ?: 'Invalid Repeat Request',
+            $message ?: Response::$statusTexts[Response::HTTP_BAD_REQUEST],
             $previous,
             $code,
             $headers
