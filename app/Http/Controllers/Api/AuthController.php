@@ -77,6 +77,7 @@ class AuthController extends Controller
 
         $validated['password'] = $request->post('password_confirmation');
 
+        /** @var string $token */
         if (!$token = auth()->attempt($validated)) {
             return $this->apiResponse()->error('邮箱或者密码错误');
         }

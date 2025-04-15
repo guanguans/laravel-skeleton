@@ -52,7 +52,7 @@ return [
         ],
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'jwtusers',
+            'provider' => 'jwtUsers',
         ],
     ],
 
@@ -79,7 +79,7 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        'jwtusers' => [
+        'jwtUsers' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\JWTUser::class),
         ],
@@ -117,7 +117,7 @@ return [
             'throttle' => 60,
         ],
 
-        'jwtusers' => [
+        'jwtUsers' => [
             'provider' => 'users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,

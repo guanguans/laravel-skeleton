@@ -45,7 +45,7 @@ Route::any('/any', static function (Request $request): JsonResponse {
 Route::middleware([
     'api',
     // sprintf('verify.signature:%s', config('services.signer.default.secret')),
-    LogHttp::class.':daily',
+    // LogHttp::class.':daily',
 ])->scopeBindings()->prefix('v1')->namespace('App\Http\Controllers\Api')->group(static function (Router $router): void {
     Route::middleware([])->group(static function (Router $router): void {
         Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping');
