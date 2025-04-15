@@ -15,6 +15,7 @@ namespace App\Support\Mixins;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Support\Str;
+use Mtownsend\ReadTime\ReadTime;
 
 /**
  * @mixin \Illuminate\Support\Str
@@ -88,5 +89,23 @@ class StrMixin
 
             return $acronym;
         };
+    }
+
+    /**
+     * @see https://github.com/dasundev/dasun.dev
+     * @see https://github.com/mtownsend5512/read-time
+     * @see https://github.com/vdhicts/read-time
+     */
+    public static function readTime(): callable
+    {
+        /**
+         * @param list<string>|string $content
+         */
+        return static fn (
+            array|string $content,
+            bool $omitSeconds = true,
+            bool $abbreviated = false,
+            int $wordsPerMinute = 230
+        ): string => (new ReadTime($content, $omitSeconds, $abbreviated, $wordsPerMinute))->get();
     }
 }

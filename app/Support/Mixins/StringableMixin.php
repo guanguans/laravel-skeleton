@@ -54,13 +54,21 @@ class StringableMixin
         return fn () => $this->__toString();
     }
 
-    /**
-     * @see https://github.com/koenhendriks/laravel-str-acronym
-     */
     public function acronym(): callable
     {
         return fn (string $delimiter = ''): Stringable => new Stringable(
             Str::acronym($this->value, $delimiter)
+        );
+    }
+
+    public function readTime(): callable
+    {
+        return fn (
+            bool $omitSeconds = true,
+            bool $abbreviated = false,
+            int $wordsPerMinute = 230
+        ): Stringable => new Stringable(
+            Str::readTime($this->value, $omitSeconds, $abbreviated, $wordsPerMinute)
         );
     }
 }

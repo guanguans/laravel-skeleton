@@ -480,11 +480,13 @@ class AppServiceProvider extends ServiceProvider
 
         $this->unless($this->app->isProduction(), static function (): void {
             Model::shouldBeStrict(); // Eloquent 严格模式
+            Model::automaticallyEagerLoadRelationships(); // 避免 N+1 查询问题
             // Model::preventLazyLoading(); // 预防 N+1 查询问题
             // Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
             // Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
             // DB::handleExceedingCumulativeQueryDuration();
             // Model::unguard();
+            // Model::withoutEvents();
             // DB::listen(static function ($query) {
             //     logger(Str::replaceArray('?', $query->bindings, $query->sql));
             // });
