@@ -36,7 +36,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 return Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {
         // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
-        $app->singleton(Kernel::class, App\Http\Kernel::class);
+        // $app->singleton(Kernel::class, App\Http\Kernel::class);
         // $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
         // $app->singleton(ExceptionHandler::class, Handler::class);
     })

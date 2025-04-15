@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/user', static fn (Request $request) => $request->user())->middleware('auth:sanctum');
+
 // 可以为 API 定义单独的回退路由
 Route::fallback(static function (): void {
     // redirect 404
@@ -39,8 +41,6 @@ Route::any('/any', static function (Request $request): JsonResponse {
         'cookie' => $request->cookie(),
     ]);
 });
-
-Route::middleware('auth:sanctum')->get('/user', static fn (Request $request) => $request->user());
 
 Route::middleware([
     'api',
