@@ -17,7 +17,6 @@ class Enum extends \BenSampo\Enum\Enum
 {
     /**
      * @noinspection PhpUnused
-     * @noinspection UnknownInspectionInspection
      */
     public static function asKeysSelectArray(): array
     {
@@ -26,7 +25,6 @@ class Enum extends \BenSampo\Enum\Enum
 
     /**
      * @noinspection PhpUnused
-     * @noinspection UnknownInspectionInspection
      */
     public static function asValuesSelectArray(): array
     {

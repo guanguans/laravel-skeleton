@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use App\Enums\HttpStatusCodeEnum;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class InvalidRequestParameterException extends HttpException
 {
     public function __construct(string $message = 'Invalid request parameters.')
     {
-        parent::__construct(HttpStatusCodeEnum::HTTP_BAD_REQUEST, $message);
+        parent::__construct(Response::HTTP_BAD_REQUEST, $message);
     }
 }

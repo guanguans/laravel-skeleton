@@ -68,7 +68,7 @@ use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__.'/app/Console/',
+        __DIR__.'/app/Enums/',
         // __DIR__.'/app/',
         // __DIR__.'/bootstrap/',
         // __DIR__.'/config/',

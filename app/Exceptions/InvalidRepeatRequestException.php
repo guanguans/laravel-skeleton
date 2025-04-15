@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use App\Enums\HttpStatusCodeEnum;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class InvalidRepeatRequestException extends HttpException
 {
     public function __construct()
     {
-        parent::__construct(HttpStatusCodeEnum::HTTP_FORBIDDEN, 'Invalid repeat request.');
+        parent::__construct(Response::HTTP_FORBIDDEN, 'Invalid repeat request.');
     }
 }
