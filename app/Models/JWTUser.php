@@ -30,17 +30,20 @@ class JWTUser extends User implements JWTSubject
         return $this->getKey();
     }
 
+    /**
+     * @see \PHPOpenSourceSaver\JWTAuth\JWTGuard::payload()
+     */
     public function getJWTCustomClaims(): array
     {
-        return [];
+        return $this->only(['id', 'name']);
     }
 
     public static function wrapToken(#[\SensitiveParameter] string $token): array
     {
+        /** @noinspection PhpParamsInspection */
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            /** @var \Illuminate\Auth\AuthManager|\PHPOpenSourceSaver\JWTAuth\JWT|\PHPOpenSourceSaver\JWTAuth\JWTGuard */
             'expires_in' => auth()->factory()->getTTL() * 60,
         ];
     }

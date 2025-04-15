@@ -1,5 +1,11 @@
 <?php
 
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
 declare(strict_types=1);
 
 /**
@@ -11,62 +17,122 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace Tests\Feature;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-final class AuthTest extends TestCase
-{
-    private mixed $accessToken;
+uses(RefreshDatabase::class);
 
-    #[\Override]
-    protected function setUp(): void
-    {
-        self::markTestSkipped('Not implemented');
-        parent::setUp();
-
-        $response = $this->post('/api/v1/auth/register', [
+beforeEach(function (): void {
+    $this->response = $this
+        ->postJson('/api/v1/auth/register', $this->credentials = [
             'email' => 'example@example.com',
             'password' => '12345678',
             'password_confirmation' => '12345678',
+        ])
+        // ->ddJson()
+        // ->ddBody()
+        ->assertOk()
+        ->assertJsonStructure($this->structure = [
+            'status',
+            'code',
+            'message',
+            'data' => [
+                'access_token',
+                'token_type',
+                'expires_in',
+            ],
+            'error',
         ]);
 
-        $response->assertOk();
+    $this->accessToken = $this->response->json('data.access_token');
+});
 
-        $response = $this->post('/api/v1/auth/login', [
-            'email' => 'example@example.com',
-            'password' => '12345678',
+it('can login', function (): void {
+    $this
+        ->postJson('/api/v1/auth/login', $this->credentials)
+        // ->ddJson()
+        // ->ddBody()
+        ->assertOk()
+        ->assertJsonStructure($this->structure);
+})->group(__DIR__, __FILE__);
+
+it('can get me', function (): void {
+    $this
+        ->withToken($this->accessToken)
+        ->getJson('/api/v1/auth/me')
+        // ->ddJson()
+        // ->ddBody()
+        ->assertOk()
+        ->assertJsonStructure(
+            [
+                'data' => [
+                    'id',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'created_at',
+                    'updated_at',
+                ],
+            ] + $this->structure,
+        );
+})->group(__DIR__, __FILE__);
+
+it('can logout', function (): void {
+    $this
+        ->withToken($this->accessToken)
+        ->postJson('/api/v1/auth/logout')
+        // ->ddJson()
+        // ->ddBody()
+        ->assertOk()
+        ->assertJsonStructure([
+            'status',
+            'code',
+            'message',
+            'data',
+            'error',
         ]);
+})->group(__DIR__, __FILE__);
 
-        $content = json_decode($response->content(), true);
-        self::assertSame('success', $content['status']);
-        $response->assertOk();
+it('can refresh', function (): void {
+    $this
+        ->withToken($this->accessToken)
+        ->postJson('/api/v1/auth/refresh')
+        // ->ddJson()
+        // ->ddBody()
+        ->assertOk()
+        ->assertJsonStructure($this->structure);
+})->group(__DIR__, __FILE__);
 
-        $this->accessToken = $content['data']['access_token'];
-    }
-
-    public function testMe(): void
-    {
-        $response = $this->withToken($this->accessToken)->get('/api/v1/auth/me');
-
-        $content = json_decode($response->content(), true);
-        self::assertSame('success', $content['status']);
-        $response->assertOk();
-    }
-
-    public function testLogout(): void
-    {
-        $response = $this->withToken($this->accessToken)->post('/api/v1/auth/logout');
-
-        $content = json_decode($response->content(), true);
-        self::assertSame('success', $content['status']);
-        $response->assertOk();
-    }
-
-    public function testRefresh(): void
-    {
-        $response = $this->withToken($this->accessToken)->post('/api/v1/auth/refresh');
-
-        $content = json_decode($response->content(), true);
-        self::assertSame('success', $content['status']);
-        $response->assertOk();
-    }
-}
+it('can get index', function (): void {
+    $this
+        ->getJson('/api/v1/auth/index')
+        // ->ddJson()
+        // ->ddBody()
+        ->assertOk()
+        ->assertJsonStructure([
+            'data' => [
+                'data' => [
+                    [
+                        'id',
+                        'name',
+                        'email',
+                        'email_verified_at',
+                        'created_at',
+                        'updated_at',
+                    ],
+                ],
+                'links' => [
+                    'first',
+                    'last',
+                    'prev',
+                    'next',
+                ],
+                'meta' => [
+                    'current_page',
+                    'from',
+                    'path',
+                    'per_page',
+                    'to',
+                ],
+            ],
+        ] + $this->structure);
+})->group(__DIR__, __FILE__);

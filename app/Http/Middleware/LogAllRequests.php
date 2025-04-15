@@ -35,7 +35,7 @@ class LogAllRequests
         // -----------------------------------------------------------------------
         // LOG-VIEWER : log all requests
         // -----------------------------------------------------------------------
-        $contents = json_decode($response->getContent(), true, 512);
+        $contents = json_decode($response->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
         $headers = $request->header();
 

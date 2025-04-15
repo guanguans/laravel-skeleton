@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -30,6 +32,7 @@ use Illuminate\Support\Timebox;
 /**
  * @group Auth - 认证接口管理
  *
+ * @see https://laravel-jwt-auth.readthedocs.io/en/latest/quick-start/
  * @see https://github.com/nandi95/laravel-starter/blob/main/app/Http/Controllers/Authentication/
  */
 class AuthController extends Controller
@@ -57,7 +60,7 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function register(AuthRequest $request)
+    public function register(AuthRequest $request): JsonResponse
     {
         // $validated = $request->validateStrictAll([
         //     'email' => 'required|email|unique:App\Models\JWTUser,email',
@@ -82,7 +85,7 @@ class AuthController extends Controller
             return $this->apiResponse()->error('邮箱或者密码错误');
         }
 
-        return tap($this->apiResponse()->success(JWTUser::wrapToken($token)), static function ($response) use ($user): void {
+        return tap($this->apiResponse()->success(JWTUser::wrapToken($token)), static function () use ($user): void {
             // Mail::to($user)->queue(new UserRegisteredMail());
             $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
         });
@@ -135,7 +138,7 @@ class AuthController extends Controller
             return $this->apiResponse()->badRequest('邮箱或者密码错误');
         }
 
-        auth()->logoutOtherDevices(auth()->user()->password);
+        // auth()->logoutOtherDevices(auth()->user()->password);
 
         return $this->apiResponse()->success(JWTUser::wrapToken($token));
     }
@@ -174,9 +177,9 @@ class AuthController extends Controller
      *     "error": {}
      * }
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
-        return tap($this->apiResponse()->ok('退出成功'), function ($response): void {
+        return tap($this->apiResponse()->ok('退出成功'), function (): void {
             $this->authorize('update', auth()->user());
             // \Illuminate\Support\Facades\Request::getFacadeRoot()->user()->currentAccessToken()->delete();
             // auth()->logoutCurrentDevice();
@@ -205,6 +208,7 @@ class AuthController extends Controller
             return $this->apiResponse()->forbidden();
         }
 
+        /** @noinspection PhpParamsInspection */
         return $this->apiResponse()->success(JWTUser::wrapToken(auth()->refresh()));
     }
 
