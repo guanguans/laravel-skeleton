@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -18,18 +20,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class IndexRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        // return optional($this->user())->can('viewAny', JWTUser::class);
+        // return $this->user()->can('viewAny', JWTUser::class);
+
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     */
     public function rules(): array
     {
         return [
@@ -38,8 +35,11 @@ class IndexRequest extends FormRequest
         ];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
-    public function messages()
+    public function messages(): array
     {
         return [
             'per_page.integer' => ':attribute :input 不可用。',

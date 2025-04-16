@@ -41,6 +41,9 @@
 
         <env name="APP_BASE_PATH" value="./"/>
         <env name="AUTH_GUARD" value="api"/>
+        <env name="AUTH_PASSWORD_BROKER" value="jwtUsers"/>
+        <env name="JWT_PRIVATE_KEY" value="file://storage/certs/jwt-rsa-4096-private.pem"/>
+        <env name="JWT_PUBLIC_KEY" value="file://storage/certs/jwt-rsa-4096-public.pem"/>
         <!--<env name="HTTP_LOG_ENABLED" value="false"/>-->
         <env name="SOAR_SCORE_ENABLED" value="false"/>
     </php>

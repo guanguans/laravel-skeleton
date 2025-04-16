@@ -49,6 +49,9 @@ use App\View\Creators\RequestCreator;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
+use Dedoc\Scramble\Scramble;
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
@@ -166,12 +169,17 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      *
      * @noinspection PhpMissingParentCallCommonInspection
+     * @noinspection SensitiveParameterInspection
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     #[\Override]
     public function register(): void
     {
+        Scramble::configure()->withDocumentTransformers(function (OpenApi $openApi): void {
+            $openApi->secure(SecurityScheme::http('bearer'));
+        });
+
         $this->whenever(true, function (): void {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
             // $this->app->register(LaravelServiceProvider::class);

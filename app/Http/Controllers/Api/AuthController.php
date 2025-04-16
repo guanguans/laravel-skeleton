@@ -15,193 +15,107 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Auth\AuthRequest;
+use App\Http\Requests\Auth\IndexRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Mail\UserRegisteredMail;
 use App\Models\JWTUser;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
-use Faker\Generator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Timebox;
+use function Illuminate\Support\defer;
 
 /**
- * @group Auth - 认证接口管理
- *
  * @see https://laravel-jwt-auth.readthedocs.io/en/latest/quick-start/
  * @see https://github.com/nandi95/laravel-starter/blob/main/app/Http/Controllers/Authentication/
  */
 class AuthController extends Controller
 {
-    public function __construct() {}
-
-    /**
-     * register - 注册.
-     *
-     * @unauthenticated
-     *
-     * @bodyParam email string 邮箱。
-     * @bodyParam password string 密码。
-     * @bodyParam password_confirmation string 重复密码。
-     *
-     * @response {
-     *     "status": "success",
-     *     "code": 200,
-     *     "message": "Http ok",
-     *     "data": {
-     *         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-     *         "token_type": "bearer",
-     *         "expires_in": 3600
-     *     },
-     *     "error": {}
-     * }
-     */
-    public function register(AuthRequest $request): JsonResponse
+    public function index(IndexRequest $request): JsonResponse
     {
-        // $validated = $request->validateStrictAll([
-        //     'email' => 'required|email|unique:App\Models\JWTUser,email',
-        //     'password' => 'required|string|min:8|confirmed',
-        //     'password_confirmation' => 'required|same:password',
-        // ]);
         $validated = $request->validated();
 
-        $validated['name'] = app(Generator::class)->name;
-        $validated['password'] = Hash::make($validated['password']);
-        unset($validated['password_confirmation']);
-        $user = JWTUser::query()->create($validated);
+        $users = User::query()->simplePaginate($validated['per_page'] ?? null)->withQueryString();
 
-        if (!$user instanceof JWTUser) {
-            return $this->apiResponse()->error('创建用户失败');
-        }
+        return $this->apiResponse()->success(UserCollection::make($users));
+    }
 
-        $validated['password'] = $request->post('password_confirmation');
+    public function register(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            // 'name' => \sprintf('nullable|string|between:2,16|default:%s', fake()->name()),
+            'email' => 'required|email|unique:App\Models\JWTUser,email',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|same:password',
+        ]);
+
+        $validated['name'] = fake()->name();
+
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        $user = JWTUser::query()->create(Arr::except($validated, 'password_confirmation'));
 
         /** @var string $token */
-        if (!$token = auth()->attempt($validated)) {
-            return $this->apiResponse()->error('邮箱或者密码错误');
-        }
+        $token = auth()->attempt($validated);
 
-        return tap($this->apiResponse()->success(JWTUser::wrapToken($token)), static function () use ($user): void {
-            // Mail::to($user)->queue(new UserRegisteredMail());
-            $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
-        });
+        return tap(
+            $this->apiResponse()->success(JWTUser::wrapToken($token)),
+            static function (): void {
+                defer(static function (): void {
+                    // Mail::to($user)->queue(new UserRegisteredMail);
+                    // $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
+                });
+            }
+        );
     }
 
     /**
-     * login - 登录.
-     *
-     * @unauthenticated
-     *
-     * @bodyParam email string 邮箱。
-     * @bodyParam password string 密码。
-     *
-     * @response {
-     *     "status": "success",
-     *     "code": 200,
-     *     "message": "Http ok",
-     *     "data": {
-     *         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-     *         "token_type": "bearer",
-     *         "expires_in": 3600
-     *     },
-     *     "error": {}
-     * }
-     *
-     * @throws \Illuminate\Auth\AuthenticationException
      * @throws \Throwable
      */
-    public function login(AuthRequest $request): JsonResponse
+    public function login(Request $request): JsonResponse
     {
-        // $credentials = $request->validateStrictAll([
-        //     'email' => 'required|email',
-        //     'password' => 'required|string',
-        // ]);
-        $credentials = $request->validated();
-        // $token = auth()->attempt($credentials);
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
 
-        /** @see https://securinglaravel.com/security-tip-timebox-for-timing-attacks */
-        $token = (new Timebox)->call(static function (Timebox $timebox) use ($credentials) {
-            $token = auth()->attempt($credentials);
+        /**
+         * @see https://securinglaravel.com/security-tip-timebox-for-timing-attacks
+         */
+        $token = (new Timebox)->call(
+            static function (Timebox $timebox) use ($credentials) {
+                $token = auth()->attempt($credentials);
 
-            if ($token) {
-                $timebox->returnEarly();
-            }
+                if ($token) {
+                    $timebox->returnEarly();
+                }
 
-            return $token;
-        }, 100 * 1000);
+                return $token;
+            },
+            100 * 1000
+        );
 
         if (!$token) {
             return $this->apiResponse()->badRequest('邮箱或者密码错误');
         }
 
-        // auth()->logoutOtherDevices(auth()->user()->password);
-
-        return $this->apiResponse()->success(JWTUser::wrapToken($token));
+        return tap(
+            $this->apiResponse()->success(JWTUser::wrapToken($token)),
+            static function (): void {
+                // auth('web')->logoutOtherDevices(auth()->user()->password);
+            }
+        );
     }
 
-    /**
-     * me - 用户信息.
-     *
-     * @response {
-     *     "status": "success",
-     *     "code": 200,
-     *     "message": "Http ok",
-     *     "data": {
-     *         "id": 1,
-     *         "name": "admin",
-     *         "email": "admin@admin.com",
-     *         "email_verified_at": "2021-11-10T07:56:41.000000Z",
-     *         "created_at": "2021-11-10T07:56:41.000000Z",
-     *         "updated_at": "2021-11-10T07:56:41.000000Z"
-     *     },
-     *     "error": {}
-     * }
-     */
     public function me(Request $request): JsonResponse
     {
         return $this->apiResponse()->success(UserResource::make($request->user()));
     }
 
-    /**
-     * logout - 退出.
-     *
-     * @response {
-     *     "status": "success",
-     *     "code": 200,
-     *     "message": "退出成功",
-     *     "data": {},
-     *     "error": {}
-     * }
-     */
-    public function logout(): JsonResponse
-    {
-        return tap($this->apiResponse()->ok('退出成功'), function (): void {
-            $this->authorize('update', auth()->user());
-            // \Illuminate\Support\Facades\Request::getFacadeRoot()->user()->currentAccessToken()->delete();
-            // auth()->logoutCurrentDevice();
-            auth()->logout();
-        });
-    }
-
-    /**
-     * refresh - 重刷 token.
-     *
-     * @response {
-     *     "status": "success",
-     *     "code": 200,
-     *     "message": "Http ok",
-     *     "data": {
-     *         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-     *         "token_type": "bearer",
-     *         "expires_in": 3600
-     *     },
-     *     "error": {}
-     * }
-     */
     public function refresh(Request $request): JsonResponse
     {
         if ($request->user()->cant('update', $request->user())) {
@@ -212,47 +126,13 @@ class AuthController extends Controller
         return $this->apiResponse()->success(JWTUser::wrapToken(auth()->refresh()));
     }
 
-    /**
-     * index - 用户列表.
-     *
-     * @unauthenticated
-     *
-     * @queryParam per_page integer 分页大小. 默认值 15.
-     * @queryParam page integer 第几页. 默认值 1.
-     *
-     * @response {
-     *     "status": "success",
-     *     "code": 200,
-     *     "message": "Http ok",
-     *     "data": {
-     *         "data": [
-     *             {
-     *                 "id": 2,
-     *                 "name": "Kenyatta Roberts",
-     *                 "email": "wintheiser.laron@example.com",
-     *                 "created_at": "2021-11-10T07:56:41.000000Z",
-     *                 "updated_at": "2021-11-10T07:56:41.000000Z"
-     *             }
-     *         ],
-     *         "meta": {
-     *             "pagination": {
-     *                 "total": 0,
-     *                 "count": 2,
-     *                 "per_page": "1",
-     *                 "current_page": 2,
-     *                 "total_pages": 0
-     *             }
-     *         }
-     *     },
-     *     "error": {}
-     * }
-     */
-    public function index(AuthRequest $request): JsonResponse
+    public function logout(): JsonResponse
     {
-        $validatedParameters = $request->validated();
-
-        $users = User::query()->simplePaginate($validatedParameters['per_page'] ?? null)->withQueryString();
-
-        return $this->apiResponse()->success(UserCollection::make($users));
+        return tap($this->apiResponse()->ok('退出成功'), function (): void {
+            $this->authorize('update', auth()->user());
+            // auth()->user()->currentAccessToken()->delete();
+            // auth()->logoutCurrentDevice();
+            auth()->logout();
+        });
     }
 }

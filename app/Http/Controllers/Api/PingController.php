@@ -20,13 +20,9 @@ class PingController extends Controller
 {
     public function ping(Request $request, int $isBad = 0): JsonResponse
     {
-        $validatedParameters = $request->validate([
-            'is_bad' => 'integer',
-        ]) + [
-            'is_bad' => $isBad,
-        ];
+        $validated = $request->validate(['is_bad' => 'integer']) + ['is_bad' => $isBad];
 
-        if ($validatedParameters['is_bad']) {
+        if ($validated['is_bad']) {
             return $this->apiResponse()->badRequest();
         }
 
