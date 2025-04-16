@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class MustBeAdmin
 {
@@ -22,7 +23,7 @@ class MustBeAdmin
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
-    public function handle(Request $request, \Closure $next)
+    public function handle(Request $request, \Closure $next): Response
     {
         abort_if(auth()->guest() || !$request->user()->isAdmin(), 403, '非法访问！');
 

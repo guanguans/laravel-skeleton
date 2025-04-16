@@ -30,7 +30,7 @@ class LogHttp
     private static string $level;
 
     /** @var list<string> */
-    private array $headerHidden = [
+    private static array $headerHidden = [
         'api-key',
         'authorization',
         'cookie',
@@ -38,7 +38,7 @@ class LogHttp
     ];
 
     /** @var list<string> */
-    private array $inputHidden = [
+    private static array $inputHidden = [
         '*password',
         '*password*',
         'password',
@@ -160,17 +160,20 @@ class LogHttp
         ];
     }
 
+    /**
+     * @noinspection SensitiveParameterInspection
+     */
     private function headerFor(Request|Response $requestOrResponse): array
     {
         return collect($requestOrResponse->headers->all())
-            ->map(fn (array $header, string $key): string => Str::is($this->headerHidden, $key) ? '***' : $header[0])
+            ->map(static fn (array $header, string $key): string => Str::is(self::$headerHidden, $key) ? '***' : $header[0])
             ->all();
     }
 
     private function inputFor(array $input): array
     {
         return collect($input)
-            ->map(fn (mixed $value, string $key): mixed => Str::is($this->inputHidden, $key) ? '***' : $value)
+            ->map(static fn (mixed $value, string $key): mixed => Str::is(self::$inputHidden, $key) ? '***' : $value)
             ->all();
     }
 

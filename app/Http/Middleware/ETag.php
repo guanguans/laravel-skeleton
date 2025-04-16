@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * ETag middleware.
@@ -27,7 +28,7 @@ class ETag
      *
      * @throws \JsonException
      */
-    public function handle(Request $request, \Closure $next): mixed
+    public function handle(Request $request, \Closure $next): Response
     {
         // If this was not a get or head request, just return
         if (!$request->isMethod('get') && !$request->isMethod('head')) {

@@ -15,11 +15,12 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class VerifyCommonParameters
 {
     /** @var list<string> */
-    protected $rules = [
+    private static array $rules = [
         'signature' => 'required|string',
         'timestamp' => 'required|int',
         'nonce' => 'required|string|size:16',
@@ -30,9 +31,10 @@ class VerifyCommonParameters
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
-    public function handle(Request $request, \Closure $next): mixed
+    public function handle(Request $request, \Closure $next): Response
     {
-        Validator::make($request->headers(), $this->rules)->validate();
+        /** @noinspection PhpUndefinedMethodInspection */
+        Validator::make($request->headers(), self::$rules)->validate();
 
         return $next($request);
     }

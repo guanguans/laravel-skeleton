@@ -41,6 +41,12 @@ class User extends Authenticatable
     use Notifiable;
     use SerializeDate;
 
+    /** The model's default values for attributes. */
+    protected $attributes = [
+        // 'options' => '[]',
+        // 'delayed' => false,
+    ];
+
     /** @var list<string> */
     protected $fillable = [
         'name',
@@ -97,6 +103,22 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return false;
+    }
+
+    /**
+     * @todo implement
+     */
+    public function isDeveloper(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @todo implement
+     */
+    public function locale(): string
+    {
+        return $this->locale ?? app()->currentLocale();
     }
 
     /**

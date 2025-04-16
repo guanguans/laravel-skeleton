@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\App;
 class AbortIfProduction extends AbortIf
 {
     #[\Override]
-    protected function condition(): bool
+    protected function when(): bool
     {
         return App::isProduction();
     }

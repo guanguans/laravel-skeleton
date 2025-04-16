@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserLocale
 {
@@ -25,7 +25,7 @@ class UserLocale
      */
     public function handle(Request $request, \Closure $next, ?string $guard = null): Response
     {
-        $locale = auth($guard)->user()?->locale and app()->setLocale($locale);
+        $locale = auth($guard)->user()?->locale() and app()->setLocale($locale);
 
         return $next($request);
     }

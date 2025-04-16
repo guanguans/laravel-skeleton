@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SetAcceptHeader
 {
@@ -22,7 +23,7 @@ class SetAcceptHeader
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
-    public function handle(Request $request, \Closure $next, string $type = 'json'): mixed
+    public function handle(Request $request, \Closure $next, string $type = 'json'): Response
     {
         $request->headers->set('Accept', "application/$type");
 

@@ -56,8 +56,7 @@ class AuthController extends Controller
 
         $validated['name'] = fake()->name();
 
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        $user = JWTUser::query()->create(Arr::except($validated, 'password_confirmation'));
+        JWTUser::query()->create(Arr::except($validated, 'password_confirmation'));
 
         /** @var string $token */
         $token = auth()->attempt($validated);

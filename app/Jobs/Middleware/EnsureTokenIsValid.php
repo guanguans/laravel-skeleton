@@ -13,17 +13,14 @@ declare(strict_types=1);
 
 namespace App\Jobs\Middleware;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
+
 /**
  * @see https://www.daveyshafik.com/archives/70916-laravel-pipelines-and-composable-job-middleware.html
  */
 class EnsureTokenIsValid
 {
-    /**
-     * Process the queued job.
-     *
-     * @param \Closure(object): void $next
-     */
-    public function handle(object $job, \Closure $next): void
+    public function handle(ShouldQueue $job, \Closure $next): void
     {
         $next($job);
     }

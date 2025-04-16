@@ -19,6 +19,7 @@ namespace App\Support\Mixins;
 use App\Support\Attributes\Mixin;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
 use Psr\Log\LoggerInterface;
@@ -138,12 +139,12 @@ class SchedulingEventMixin
                         unset($this->channels['single']);
                     };
 
-                    config()->set('logging.channels.single.path', $outputPath);
+                    Config::set('logging.channels.single.path', $outputPath);
                     $unsetSingleChannelHandler->call(app(LoggerInterface::class));
 
                     Log::channel('single')->info('>>>>>>>>');
 
-                    config()->set('logging.channels.single.path', $singleLogPath);
+                    Config::set('logging.channels.single.path', $singleLogPath);
                     $unsetSingleChannelHandler->call(app(LoggerInterface::class));
                 })
                 ->appendOutputTo($outputPath);

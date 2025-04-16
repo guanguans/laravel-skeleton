@@ -34,7 +34,7 @@ class AddContentLength
             $response->headers->set(
                 'Content-Length',
                 // ensure that we get byte count by using 8bit encoding
-                mb_strlen($response->getContent(), '8bit')
+                (string) mb_strlen($response->getContent(), '8bit')
             );
         }
 

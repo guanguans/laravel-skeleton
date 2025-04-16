@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Simple Content Security Policy middleware.
@@ -37,7 +39,7 @@ class CSP
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
-    public function handle(mixed $request, \Closure $next)
+    public function handle(Request $request, \Closure $next): Response
     {
         Vite::useCspNonce();
 
@@ -56,7 +58,7 @@ class CSP
 
         $policy = collect($csp['policy'])
             ->filter()
-            ->map(static fn ($value, $key): string => "{$key} ".collect($value)->filter()->implode(' '))
+            ->map(static fn ($value, $key): string => "$key ".collect($value)->filter()->implode(' '))
             ->implode(' ; ');
 
         $header = $csp['report_only'] ? 'Content-Security-Policy-Report-Only' : 'Content-Security-Policy';

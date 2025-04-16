@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class BasicAuthentication
 {
@@ -28,14 +28,14 @@ class BasicAuthentication
         if (!$request->hasHeader('Authorization')) {
             // Display login prompt
             header('WWW-Authenticate: Basic realm="Unauthorized"');
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_UNAUTHORIZED);
+            abort(Response::HTTP_UNAUTHORIZED);
         }
 
         // Provided username or password does not match, throw an exception
         // Alternatively, the login prompt can be displayed once more
         abort_unless(
             $this->validateCredentials(explode(':', base64_decode(substr($request->header('Authorization'), 6), true))),
-            \Symfony\Component\HttpFoundation\Response::HTTP_UNAUTHORIZED
+            Response::HTTP_UNAUTHORIZED
         );
 
         return $next($request);

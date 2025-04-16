@@ -102,6 +102,7 @@ use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -248,7 +249,7 @@ class AppServiceProvider extends ServiceProvider
             Date::use(CarbonImmutable::class);
             DateFactory::useCallable(
                 static fn (mixed $result): mixed => $result instanceof CarbonInterface
-                    ? $result->setTimezone(config()->string('app.timezone'))
+                    ? $result->setTimezone(Config::string('app.timezone'))
                     : $result
             );
             // @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly
@@ -421,7 +422,7 @@ class AppServiceProvider extends ServiceProvider
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
-            // config()->set('session.secure', true);
+            // Config::set('session.secure', true);
 
             DB::whenQueryingForLongerThan(300000, static function (Connection $connection, QueryExecuted $event): void {
                 Notification::send(

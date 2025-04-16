@@ -15,6 +15,7 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\BadRequestHttpException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class VerifyJsonContent
 {
@@ -25,7 +26,7 @@ class VerifyJsonContent
      *
      * @throws \Throwable
      */
-    public function handle(Request $request, \Closure $next)
+    public function handle(Request $request, \Closure $next): Response
     {
         $acceptHeader = $request->header('accept');
         $contentType = 'application/json';

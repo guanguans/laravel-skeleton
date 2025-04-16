@@ -15,6 +15,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,7 +28,7 @@ class SetLocales
      */
     public function handle(Request $request, \Closure $next, string $locale): Response
     {
-        config()->set('app.locale', $locale);
+        Config::set('app.locale', $locale);
         app()->setLocale($locale);
         Carbon::setLocale($locale);
         Date::setLocale($locale);

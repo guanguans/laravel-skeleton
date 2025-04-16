@@ -15,23 +15,27 @@ namespace App\Http\Middleware;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @see https://github.com/slimkit/plus/blob/2.4/app/Http/Middleware/UserAbility.php
  */
-class VerifyUserAbility
+readonly class VerifyUserAbility
 {
-    public function __construct(private readonly Guard $auth) {}
+    /**
+     * @noinspection SensitiveParameterInspection
+     */
+    public function __construct(private Guard $auth) {}
 
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
-    public function handle(Request $request, \Closure $next, string $ability, string $message = '')
+    public function handle(Request $request, \Closure $next, string $ability, string $message = ''): Response
     {
         abort_if(
-            $this->auth->guest() || !$this->auth->user()?->ability($ability),
+            $this->auth->guest() || !$this->auth->user()?->can($ability),
             403,
             $message ?: '你没有权限执行该操作'
         );

@@ -46,7 +46,7 @@ class LogAllRequests
             'path' => $request->getPathInfo(),
             'method' => $request->getMethod(),
             'ip' => $request->ip(),
-            'http_version' => $_SERVER['SERVER_PROTOCOL'] ?? null,
+            'http_version' => $request->server('SERVER_PROTOCOL'),
             'timestamp' => $dt->toDateTimeString(),
             'headers' => [
                 // get all the required headers to log
@@ -56,7 +56,7 @@ class LogAllRequests
             ],
         ];
 
-        // if request if authenticated
+        // if request is authenticated
         if ($request->user()) {
             $data['user'] = [
                 'id' => $request->user()->id,

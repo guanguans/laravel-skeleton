@@ -11,9 +11,13 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Http\Middleware;
+namespace App\Jobs\Middleware;
 
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Redis;
 
 /**
@@ -22,9 +26,9 @@ use Illuminate\Support\Facades\Redis;
 class RateLimitedForJob
 {
     /**
-     * Handle an incoming job.
+     * @noinspection PhpDocSignatureInspection
      *
-     * @param \Illuminate\Bus\Queueable|\Illuminate\Contracts\Queue\ShouldQueue|\Illuminate\Queue\InteractsWithQueue $job
+     * @param Dispatchable|InteractsWithQueue|Queueable|SerializesModels|ShouldQueue $job
      *
      * @throws \Illuminate\Contracts\Redis\LimiterTimeoutException
      */

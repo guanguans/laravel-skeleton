@@ -20,6 +20,7 @@ use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class VerifySignature
 {
@@ -27,10 +28,18 @@ class VerifySignature
      * @noinspection RedundantDocCommentTagInspection
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     *
+     * @throws \Throwable
      */
-    public function handle(Request $request, \Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true): mixed
-    {
-        $this->validateParameters($request, $effectiveTime);
+    public function handle(
+        Request $request,
+        \Closure $next,
+        #[\SensitiveParameter]
+        string $secret = '',
+        int $effectiveTime = 60,
+        bool $checkRepeatRequest = true
+    ): Response {
+        $this->validateCommonParameters($request, $effectiveTime);
 
         $this->validateSignature($request, $secret);
 
@@ -39,31 +48,46 @@ class VerifySignature
         return $next($request);
     }
 
-    protected function validateParameters(Request $request, int $effectiveTime): void
+    private function validateCommonParameters(Request $request, int $effectiveTime): void
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         Validator::make($request->headers(), [
             'signature' => ['required', 'string'],
             'nonce' => ['required', 'string', 'size:16'],
-            'timestamp' => \sprintf('required|int|max:%s|min:%s', $time = Carbon::now()->timestamp + 1, $time - $effectiveTime),
+            'timestamp' => \sprintf(
+                'required|int|max:%s|min:%s',
+                $time = Carbon::now()->timestamp + 1,
+                $time - $effectiveTime
+            ),
         ])->validate();
     }
 
-    protected function validateSignature(Request $request, string $secret): void
+    /**
+     * @throws \Throwable
+     */
+    private function validateSignature(Request $request, #[\SensitiveParameter] string $secret): void
     {
-        $parameters = array_merge($request->input(), [
-            'timestamp' => $request->header('timestamp'),
-            'nonce' => $request->header('nonce'),
-        ]);
-
-        /** @var HmacSigner $signer */
-        $signer = app(HmacSigner::class, ['secret' => $secret]);
-        throw_unless($signer->validate($request->header('signature'), $parameters), InvalidSignatureException::class);
+        throw_unless(
+            (new HmacSigner(secret: $secret))->validate(
+                $request->header('signature'),
+                array_merge($request->input(), [
+                    'timestamp' => $request->header('timestamp'),
+                    'nonce' => $request->header('nonce'),
+                ])
+            ),
+            InvalidSignatureException::class
+        );
     }
 
-    protected function validateRepeatRequest(Request $request, int $effectiveTime): void
+    /**
+     * @throws \Throwable
+     */
+    private function validateRepeatRequest(Request $request, int $effectiveTime): void
     {
-        $cacheSignature = Cache::get($signature = $request->header('signature'));
-        throw_if($cacheSignature, InvalidRepeatRequestException::class);
+        throw_if(
+            Cache::get($signature = $request->header('signature')),
+            InvalidRepeatRequestException::class
+        );
 
         // Cache::put($signature, $request->fingerprint(), $effectiveTime);
         Cache::put($signature, spl_object_hash($request), $effectiveTime * 60);

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetTimezone
@@ -25,7 +26,7 @@ class SetTimezone
      */
     public function handle(Request $request, \Closure $next, string $timezone): Response
     {
-        config()->set('app.timezone', $timezone);
+        Config::set('app.timezone', $timezone);
 
         return $next($request);
     }

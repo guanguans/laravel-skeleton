@@ -30,7 +30,22 @@ class Policy
         return array_keys(Gate::abilities());
     }
 
+    /**
+     * @see https://laravel.com/docs/12.x/authorization#policy-filters
+     */
     public function before(JWTUser $user): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return null;
+    }
+
+    /**
+     * @see https://laravel.com/docs/12.x/authorization#intercepting-gate-checks
+     */
+    public function after(JWTUser $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;

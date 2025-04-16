@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbortIf
 {
@@ -22,16 +24,16 @@ abstract class AbortIf
      *
      * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
-    public function handle(Request $request, \Closure $next): mixed
+    public function handle(Request $request, \Closure $next): Response
     {
         return tap($next($request), function (): void {
-            abort_if($this->condition(), $this->code(), $this->message(), $this->headers());
+            abort_if($this->when(), $this->code(), $this->message(), $this->headers());
         });
     }
 
-    abstract protected function condition(): bool;
+    abstract protected function when(): bool;
 
-    abstract protected function code(): int;
+    abstract protected function code(): int|Responsable|Response;
 
     protected function message(): string
     {

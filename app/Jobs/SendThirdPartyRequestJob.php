@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -46,6 +48,9 @@ class SendThirdPartyRequestJob implements ShouldQueue
         private readonly User $user
     ) {}
 
+    /**
+     * @throws \Illuminate\Http\Client\ConnectionException
+     */
     public function handle(): void
     {
         Http::acceptJson()->timeout(10)->get('https://...');

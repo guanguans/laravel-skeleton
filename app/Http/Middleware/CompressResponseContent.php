@@ -14,22 +14,18 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @see https://github.com/vrkansagara/LaraOutPress
  */
 class CompressResponseContent
 {
-    /**
-     * All of the registered skip callbacks.
-     *
-     * @var list<\Closure>
-     */
-    protected static $skipCallbacks = [];
+    /** @var list<\Closure> */
+    private static array $skipCallbacks = [];
 
     /** @var array<string, string> */
-    protected static $replacementRules = [];
+    private static array $replacementRules = [];
 
     /**
      * @noinspection RedundantDocCommentTagInspection
@@ -103,8 +99,8 @@ class CompressResponseContent
         $compressingContentSize = \strlen($content);
         $compressedContentSize = \strlen($compressedContent);
 
-        $compressingFormtedContentSize = $this->formatBytes($compressingContentSize);
-        $compressedFormtedContentSize = $this->formatBytes($compressedContentSize);
+        $compressingFormattedContentSize = $this->formatBytes($compressingContentSize);
+        $compressedFormattedContentSize = $this->formatBytes($compressedContentSize);
         $percentReduction = \sprintf('%.02F%%', (1 - $compressedContentSize / $compressingContentSize) * 100);
 
         return /** @lang HTML */ <<<HTML
@@ -116,8 +112,8 @@ class CompressResponseContent
                     <th>Percent reduction</th>
                 </tr>
                 <tr>
-                    <td>$compressingFormtedContentSize</td>
-                    <td>$compressedFormtedContentSize</td>
+                    <td>$compressingFormattedContentSize</td>
+                    <td>$compressedFormattedContentSize</td>
                     <td>$percentReduction</td>
                 </tr>
             </table>
@@ -126,12 +122,12 @@ class CompressResponseContent
 
     protected function compress(string $content): string
     {
-        $compressedContent = $this->compressJavacript($content);
+        $compressedContent = $this->compressJavascript($content);
 
         return $this->compressHtml($compressedContent);
     }
 
-    protected function compressJavacript(string $content): string
+    protected function compressJavascript(string $content): string
     {
         // JavaScript compressor by John Elliot <jj5@jj5.net>
         $replaceRules = [
@@ -221,14 +217,14 @@ class CompressResponseContent
         return trim($compressedContent);
     }
 
-    protected function formatBytes(int $bytes, $precision = 2): string
+    protected function formatBytes(int $bytes, int $precision = 2): string
     {
         if (0 < $bytes) {
-            $i = (int) floor(log($bytes) / log(1024));
+            $index = (int) floor(log($bytes) / log(1024));
 
             $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-            return \sprintf('%.02F', round($bytes / (1024 ** $i), $precision)) * 1 .' '.$sizes[$i];
+            return \sprintf('%.02F', round($bytes / (1024 ** $index), $precision)) * 1 .' '.$sizes[$index];
         }
 
         return '0';
@@ -267,7 +263,7 @@ class CompressResponseContent
          * )           # If we made it here, we are not in a blacklist tag.
          * %ix.
          */
-        $regexOfRemoveWhiteSpace = '%(?>[^\S ]\s*| \s{2,})(?=(?:(?:[^<]++| <(?!/?(?:textarea|pre)\b))*+)(?:<(?>textarea|pre)\b|\z))%ix';
+        $regexOfRemoveWhiteSpace = '%(?>[^\S ]\s*| \s{2,})(?=(?:[^<]++| <(?!/?(?:textarea|pre)\b))*+(?:<(?>textarea|pre)\b|\z))%ix';
         $compressedContent = preg_replace($regexOfRemoveWhiteSpace, '', $content);
 
         // We are going to check if processing has working

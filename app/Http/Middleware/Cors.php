@@ -36,7 +36,7 @@ class Cors
                     RequestHandled::class,
                     static function (RequestHandled $event) use ($allowedOriginPatterns): void {
                         /**
-                         * 仅设置 `Access-Control-Allow-Origin`， 其他由 @see \Fruitcake\Cors\HandleCors 处理。
+                         * 仅设置 `Access-Control-Allow-Origin`， 其他由 @see \Illuminate\Http\Middleware\HandleCors 处理。
                          * 跨域访问的时候才会存在 `HTTP_ORIGIN` 字段。
                          */
                         Str::is(explode('|', $allowedOriginPatterns), $origin = $event->request->server('HTTP_ORIGIN', ''))

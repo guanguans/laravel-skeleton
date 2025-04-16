@@ -15,6 +15,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Support\Rectors\ClassHandleMethodRector;
 use Carbon\Carbon;
 use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
 use Guanguans\MonorepoBuilderWorker\Support\Rectors\RenameToPsrNameRector;
@@ -102,7 +103,7 @@ return RectorConfig::configure()
     ])
     ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()
-    // ->withoutParallel()
+    ->withoutParallel()
     // ->withImportNames(importNames: false)
     ->withImportNames(importDocBlockNames: false, importShortClasses: false)
     ->withFluentCallNewLine()
@@ -142,6 +143,7 @@ return RectorConfig::configure()
     ->withRules([
         // AddOverrideAttributeToOverriddenMethodsRector::class,
         ArraySpreadInsteadOfArrayMergeRector::class,
+        ClassHandleMethodRector::class,
         JsonThrowOnErrorRector::class,
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
