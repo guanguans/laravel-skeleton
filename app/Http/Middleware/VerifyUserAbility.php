@@ -24,9 +24,9 @@ class VerifyUserAbility
     public function __construct(private readonly Guard $auth) {}
 
     /**
-     * Handle an incoming request.
+     * @noinspection RedundantDocCommentTagInspection
      *
-     * @author Seven Du <shiweidu@outlook.com>
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
     public function handle(Request $request, \Closure $next, string $ability, string $message = '')
     {

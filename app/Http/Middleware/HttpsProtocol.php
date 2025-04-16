@@ -22,7 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
 class HttpsProtocol
 {
     /**
-     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
     public function handle(Request $request, \Closure $next): Response
     {

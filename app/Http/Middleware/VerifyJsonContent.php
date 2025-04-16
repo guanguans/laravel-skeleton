@@ -19,7 +19,11 @@ use Illuminate\Http\Request;
 class VerifyJsonContent
 {
     /**
-     * @throws BadRequestHttpException
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     *
+     * @throws \Throwable
      */
     public function handle(Request $request, \Closure $next)
     {

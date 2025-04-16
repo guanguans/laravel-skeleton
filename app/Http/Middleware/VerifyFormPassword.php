@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VerifyFormPassword
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next, string $name = 'password'): Response
     {
         $request->whenFilled($name, static function () use ($request, $name): void {

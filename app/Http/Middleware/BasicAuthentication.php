@@ -18,6 +18,11 @@ use Illuminate\Http\Response;
 
 class BasicAuthentication
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next): Response
     {
         if (!$request->hasHeader('Authorization')) {

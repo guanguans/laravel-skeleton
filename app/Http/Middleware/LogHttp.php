@@ -82,6 +82,11 @@ class LogHttp
         static::$level = $level;
     }
 
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next, LoggerInterface|string $logger, string $level = 'info'): Response
     {
         static::setLogger($logger);

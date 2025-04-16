@@ -18,7 +18,9 @@ use Illuminate\Http\Request;
 class SetAcceptHeader
 {
     /**
-     * Handle an incoming request.
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
     public function handle(Request $request, \Closure $next, string $type = 'json'): mixed
     {

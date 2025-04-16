@@ -23,6 +23,11 @@ use Illuminate\Support\Facades\Validator;
 
 class VerifySignature
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next, string $secret = '', int $effectiveTime = 60, bool $checkRepeatRequest = true): mixed
     {
         $this->validateParameters($request, $effectiveTime);

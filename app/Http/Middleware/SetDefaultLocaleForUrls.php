@@ -22,6 +22,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class SetDefaultLocaleForUrls
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next): Response
     {
         URL::defaults(['locale' => $request->user()->locale ?? config('app.locale')]);

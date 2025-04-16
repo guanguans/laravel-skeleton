@@ -24,9 +24,9 @@ use Webmozart\Assert\Assert;
 final readonly class EnsureVerifiedEmailsForSignInUsers
 {
     /**
-     * Handle an incoming request.
+     * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
     public function handle(Request $request, \Closure $next): Response
     {

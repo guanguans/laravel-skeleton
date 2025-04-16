@@ -25,6 +25,11 @@ class VerifyCommonParameters
         'nonce' => 'required|string|size:16',
     ];
 
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next): mixed
     {
         Validator::make($request->headers(), $this->rules)->validate();

@@ -17,6 +17,11 @@ use Illuminate\Http\Request;
 
 class MustBeAdmin
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next)
     {
         abort_if(auth()->guest() || !$request->user()->isAdmin(), 403, '非法访问！');

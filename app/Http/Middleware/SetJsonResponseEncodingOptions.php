@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SetJsonResponseEncodingOptions
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next, int $encodingOptions = \JSON_UNESCAPED_UNICODE): Response
     {
         $response = $next($request);

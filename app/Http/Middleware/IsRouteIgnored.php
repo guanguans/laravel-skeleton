@@ -23,6 +23,13 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class IsRouteIgnored
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     *
+     * @throws \ReflectionException
+     */
     public function handle(Request $request, \Closure $next): Response
     {
         $route = $request->route();

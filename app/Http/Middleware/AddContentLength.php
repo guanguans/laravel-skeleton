@@ -22,10 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
 class AddContentLength
 {
     /**
-     * Add content-length header to responses before being sent.
-     * This only happens if it hasn't been already set.
+     * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
     public function handle(Request $request, \Closure $next): Response
     {

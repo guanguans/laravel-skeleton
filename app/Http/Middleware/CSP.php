@@ -32,7 +32,12 @@ use Illuminate\Support\Str;
  */
 class CSP
 {
-    public function handle($request, \Closure $next)
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
+    public function handle(mixed $request, \Closure $next)
     {
         Vite::useCspNonce();
 

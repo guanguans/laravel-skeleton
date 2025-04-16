@@ -23,9 +23,11 @@ use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 class RequiresJson
 {
     /**
-     * Handle an incoming request.
+     * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     *
+     * @throws \Throwable
      */
     public function handle(Request $request, \Closure $next): Response
     {

@@ -22,7 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
 class Cors
 {
     /**
-     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */

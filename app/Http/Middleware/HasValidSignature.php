@@ -28,9 +28,9 @@ use Symfony\Component\HttpFoundation\Response;
 class HasValidSignature
 {
     /**
-     * Handle an incoming request.
+     * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(Request): (Response) $next
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
      */
     public function handle(Request $request, \Closure $next): Response
     {

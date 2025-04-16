@@ -17,6 +17,11 @@ use Illuminate\Http\Request;
 
 abstract class AbortIf
 {
+    /**
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     */
     public function handle(Request $request, \Closure $next): mixed
     {
         return tap($next($request), function (): void {

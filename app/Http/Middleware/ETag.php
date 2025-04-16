@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
 
 /**
@@ -22,10 +21,11 @@ use Illuminate\Http\Request;
 class ETag
 {
     /**
-     * Implement Etag support.
+     * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Illuminate\Http\Request $request the HTTP request
-     * @param \Closure $next closure for the response
+     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     *
+     * @throws \JsonException
      */
     public function handle(Request $request, \Closure $next): mixed
     {
