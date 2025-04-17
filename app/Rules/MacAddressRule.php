@@ -18,7 +18,7 @@ final class MacAddressRule extends Rule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        $value = preg_replace('/[\. :-]/i', '', $value);
+        $value = preg_replace('/[. :-]/', '', $value);
 
         return (bool) preg_match('/^[0-9a-f]{12}$/i', $value);
     }

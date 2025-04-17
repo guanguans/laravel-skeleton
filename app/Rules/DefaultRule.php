@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -16,16 +18,21 @@ namespace App\Rules;
 use App\Rules\Concerns\DataAware;
 use App\Rules\Concerns\ValidatorAware;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
+use Illuminate\Support\Arr;
 
 final class DefaultRule extends Rule implements ValidatorAwareRule
 {
     // use DataAware;
     use ValidatorAware;
 
-    /** Indicates whether the rule should be implicit. */
+    /**
+     * Indicates whether the rule should be implicit.
+     *
+     * @noinspection ClassOverridesFieldOfSuperClassInspection
+     */
     public bool $implicit = true;
 
-    public function __construct(private mixed $default) {}
+    public function __construct(private readonly mixed $default) {}
 
     /**
      * Determine if the validation rule passes.
@@ -35,7 +42,8 @@ final class DefaultRule extends Rule implements ValidatorAwareRule
     {
         if (null === $value) {
             $data = $this->validator->getData();
-            $data[$attribute] = $this->default;
+            // $data[$attribute] = $this->default;
+            Arr::set($data, $attribute, $this->default);
             $this->validator->setData($data);
         }
 

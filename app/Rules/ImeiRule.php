@@ -28,13 +28,13 @@ final class ImeiRule extends Rule
         $imeiLast = array_pop($digits); // Remove last digit, and store it
         $log = [];
 
-        foreach ($digits as $key => $n) {
+        foreach ($digits as $key => $digit) {
             if ($key & 1) {
-                $double = str_split($n * 2); // Get double digits
-                $n = array_sum($double); // Sum double digits
+                $double = str_split((string) ($digit * 2)); // Get double digits
+                $digit = array_sum($double); // Sum double digits
             }
 
-            $log[] = $n; // Append log
+            $log[] = $digit; // Append log
         }
 
         $sum = array_sum($log) * 9; // Sum log & multiply by 9

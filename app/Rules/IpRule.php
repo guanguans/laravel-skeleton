@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\IpUtils;
 final class IpRule extends Rule
 {
     /** @var list<string> */
-    private array $v4 = [
+    private static array $v4 = [
         '0.0.0.0/8',
         '10.0.0.0/8',
         '127.0.0.0/8',
@@ -28,7 +28,7 @@ final class IpRule extends Rule
     ];
 
     /** @var list<string> */
-    private array $v6 = [
+    private static array $v6 = [
         '::1/128',
         'fc00::/7',
         'fd00::/8',
@@ -49,7 +49,7 @@ final class IpRule extends Rule
 
     public function isPrivate(string $ip): bool
     {
-        $ips = $this->isV4($ip) ? $this->v4 : $this->v6;
+        $ips = $this->isV4($ip) ? self::$v4 : self::$v6;
 
         return IpUtils::checkIp($ip, $ips);
     }

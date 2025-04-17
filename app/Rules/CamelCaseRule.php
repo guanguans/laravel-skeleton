@@ -19,6 +19,6 @@ class CamelCaseRule extends RegexRule
     protected function pattern(): string
     {
         /** @lang PhpRegExp */
-        return '/^(?:\p{Lu}?\p{Ll}+)(?:\p{Lu}\p{Ll}+)*$/u';
+        return '/^\p{Lu}?\p{Ll}+(?:\p{Lu}\p{Ll}+)*$/u';
     }
 }

@@ -52,9 +52,15 @@ abstract class AggregateRule extends Rule
         return [];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
-    protected function failedPotentiallyTranslatedString(string $attribute, mixed $value, \Closure $fail): PotentiallyTranslatedString
-    {
+    protected function failedPotentiallyTranslatedString(
+        string $attribute,
+        mixed $value,
+        \Closure $fail
+    ): PotentiallyTranslatedString {
         return $fail($this->makeAggregateValidator($attribute, $value)->errors()->first($attribute));
     }
 }

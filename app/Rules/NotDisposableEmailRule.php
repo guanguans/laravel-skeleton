@@ -45,8 +45,16 @@ final class NotDisposableEmailRule extends Rule
         }
     }
 
+    /**
+     * @throws \JsonException
+     */
     private function isNotDisposable(string $vendor): bool
     {
-        return !json_decode(file_get_contents("https://open.kickbox.com/v1/disposable/$vendor"), true)['disposable'];
+        return !json_decode(
+            file_get_contents("https://open.kickbox.com/v1/disposable/$vendor"),
+            true,
+            512,
+            \JSON_THROW_ON_ERROR
+        )['disposable'];
     }
 }

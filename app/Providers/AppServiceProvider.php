@@ -581,7 +581,7 @@ class AppServiceProvider extends ServiceProvider
             ->all()
             ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
                 /** @var class-string&Rule $ruleClass */
-                Validator::{$ruleClass::extendMethod()}(
+                Validator::{$ruleClass::extendType()}(
                     $ruleClass::name(),
                     static fn (
                         string $attribute,

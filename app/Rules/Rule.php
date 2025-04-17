@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -24,17 +26,18 @@ abstract class Rule implements ValidationRule
     use CreateStaticable;
     // use ValidatesAttributes;
 
+    public bool $implicit = false;
+
     /**
      * Determine if the validation rule passes.
      */
     abstract public function passes(string $attribute, mixed $value): bool;
 
     /**
-     * Run the validation rule.
+     * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString $fail
+     * @param \Closure(string, null|string): \Illuminate\Translation\PotentiallyTranslatedString $fail
      */
-    #[\Override]
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (!$this->passes($attribute, $value)) {
@@ -54,17 +57,21 @@ abstract class Rule implements ValidationRule
         return $transMessage === $transKey ? static::fallbackMessage() : $transMessage;
     }
 
-    public static function extendMethod(): string
+    /**
+     * @see \Illuminate\Support\Facades\Validator
+     * @see \\Illuminate\Validation\Factory
+     *
+     * @todo extendDependent、replacer
+     */
+    public static function extendType(): string
     {
         $ruleReflectionClass = new \ReflectionClass(static::class);
 
-        $isImplicit = $ruleReflectionClass->getDefaultProperties()['implicit'] ?? false;
+        $implicit = $ruleReflectionClass->getDefaultProperties()['implicit'] ?? false;
 
-        if ($isImplicit) {
+        if ($implicit) {
             return 'extendImplicit';
         }
-
-        // extendDependent todo
 
         return 'extend';
     }
@@ -90,7 +97,7 @@ abstract class Rule implements ValidationRule
         mixed $value,
         \Closure $fail
     ): PotentiallyTranslatedString {
-        return $fail(static::message());
+        return $fail($attribute, static::message());
     }
 
     protected function replace(): array
