@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -28,8 +30,6 @@ class SetRequestIdListener
     final public const string REQUEST_ID_NAME = 'X-Request-Id';
 
     /**
-     * Handle the event.
-     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function handle(Application $bootstrapEvent): void

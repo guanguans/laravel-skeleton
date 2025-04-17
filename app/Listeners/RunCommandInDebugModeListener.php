@@ -20,8 +20,8 @@ use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
+use function Illuminate\Support\php_binary;
 
 /**
  * @see https://dev.to/serendipityhq/how-to-debug-any-symfony-command-simply-passing-x-214o
@@ -30,11 +30,18 @@ use Symfony\Component\Process\Process;
 #[AsEventListener(ConsoleEvents::COMMAND, 'configure')]
 class RunCommandInDebugModeListener
 {
+    /**
+     * @throws \Throwable
+     */
     public function __invoke(ConsoleCommandEvent $event): void
     {
         $command = $event->getCommand();
 
-        throw_unless($command instanceof Command, \RuntimeException::class, \sprintf('The command must be an instance of %s', Command::class));
+        throw_unless(
+            $command instanceof Command,
+            \RuntimeException::class,
+            \sprintf('The command must be an instance of %s', Command::class)
+        );
 
         if ($command instanceof HelpCommand) {
             $command = $this->getActualCommandFromHelpCommand($command);
@@ -80,11 +87,21 @@ class RunCommandInDebugModeListener
         $property = $reflection->getProperty('command');
         $actualCommand = $property->getValue($command);
 
-        throw_unless($actualCommand instanceof Command, \RuntimeException::class, \sprintf('The command must be an instance of %s', Command::class));
+        try {
+            throw_unless(
+                $actualCommand instanceof Command,
+                \RuntimeException::class,
+                \sprintf('The command must be an instance of %s', Command::class)
+            );
+        } catch (\Throwable) {
+        }
 
         return $actualCommand;
     }
 
+    /**
+     * @throws \Throwable
+     */
     private function isInDebugMode(ArgvInput $input): bool
     {
         $tokens = $this->getTokensFromArgvInput($input);
@@ -99,6 +116,8 @@ class RunCommandInDebugModeListener
     }
 
     /**
+     * @throws \Throwable
+     *
      * @return list<string>
      */
     private function getTokensFromArgvInput(ArgvInput $input): array
@@ -107,7 +126,11 @@ class RunCommandInDebugModeListener
         $tokensProperty = $reflection->getProperty('tokens');
         $tokens = $tokensProperty->getValue($input);
 
-        throw_unless(\is_array($tokens), \RuntimeException::class, 'Impossible to get the arguments and options from the command.');
+        throw_unless(
+            \is_array($tokens),
+            \RuntimeException::class,
+            'Impossible to get the arguments and options from the command.'
+        );
 
         return $tokens;
     }
@@ -115,21 +138,29 @@ class RunCommandInDebugModeListener
     /**
      * @noinspection GlobalVariableUsageInspection
      */
+    /**
+     * @throws \Throwable
+     */
     private function buildCommandWithXDebugActivated(): array
     {
         $serverArgv = $_SERVER['argv'] ?? null;
-        throw_if(null === $serverArgv, \RuntimeException::class, 'Impossible to get the arguments and options from the command: the command cannot be relaunched with xDebug.');
+        throw_if(
+            null === $serverArgv,
+            \RuntimeException::class,
+            'Impossible to get the arguments and options from the command: the command cannot be relaunched with xDebug.'
+        );
 
         if (!\in_array($ansi = '--ansi', $serverArgv, true)) {
             $serverArgv[] = $ansi;
         }
 
         $script = $_SERVER['SCRIPT_NAME'] ?? null;
-        throw_if(null === $script, \RuntimeException::class, 'Impossible to get the name of the command: the command cannot be relaunched with xDebug.');
+        throw_if(
+            null === $script,
+            \RuntimeException::class,
+            'Impossible to get the name of the command: the command cannot be relaunched with xDebug.'
+        );
 
-        $phpBinary = (new PhpExecutableFinder)->find() ?: \PHP_BINARY;
-        $serverArgv = \array_slice($serverArgv, 1);
-
-        return [$phpBinary, $script, ...$serverArgv];
+        return [php_binary(), $script, ...\array_slice($serverArgv, 1)];
     }
 }

@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
-use Illuminate\Console\Events\CommandFinished;
-use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Support\Facades\Config;
 
 class CollectGarbageListener
 {
     /**
-     * Handle the event.
+     * @noinspection PhpUnusedParameterInspection
      *
-     * @param null|CommandFinished|mixed|RequestHandled $event
+     * @see \Illuminate\Console\Events\CommandFinished
+     * @see \Illuminate\Foundation\Http\Events\RequestHandled
      */
-    public function handle(mixed $event): void
+    public function handle(object $event): void
     {
         // mega bytes
-        $garbage = (int) config('app.garbage', 50);
+        $garbage = Config::integer('app.garbage', 50);
 
         if (0 < $garbage && (memory_get_usage() / 1024 / 1024) > $garbage) {
             gc_collect_cycles();

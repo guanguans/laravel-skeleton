@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Log;
 class MaintenanceModeEnabledNotificationListener
 {
     /**
-     * Handle the event.
+     * @noinspection PhpUnusedParameterInspection
      */
     public function handle(MaintenanceModeEnabled $event): void
     {

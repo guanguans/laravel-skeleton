@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Log;
 
 class MaintenanceModeDisabledNotificationListener
 {
+    /**
+     * @noinspection PhpUnusedParameterInspection
+     */
     public function handle(MaintenanceModeDisabled $event): void
     {
         Log::info('Maintenance mode disabled!');

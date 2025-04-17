@@ -24,6 +24,9 @@ use Illuminate\Support\Number;
 
 class ShareLogContextSubscriber
 {
+    /**
+     * @noinspection PhpUnusedParameterInspection
+     */
     public function subscribe(Dispatcher $dispatcher): array
     {
         return [
@@ -41,7 +44,7 @@ class ShareLogContextSubscriber
             },
             ScheduledTaskStarting::class => static function (ScheduledTaskStarting $event): void {
                 Log::shareContext([
-                    'command' => ($event->task->command ?: $event->task->description) ?: 'Closure',
+                    'command' => $event->task->command ?: $event->task->description ?: 'Closure',
                     'memory_peak_usage' => Number::fileSize(memory_get_peak_usage(), 2),
                 ]);
             },

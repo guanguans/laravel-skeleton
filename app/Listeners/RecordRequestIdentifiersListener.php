@@ -17,34 +17,31 @@ use Illuminate\Http\Request;
 use Laravel\Sanctum\Events\TokenAuthenticated;
 use Stevebauman\Location\Drivers\Cloudflare;
 use Stevebauman\Location\Facades\Location;
-use Stevebauman\Location\LocationManager;
+use Stevebauman\Location\Position;
 
 /**
  * @see https://github.com/nandi95/laravel-starter/blob/main/app/Listeners/RecordRequestIdentifiers.php
  */
 class RecordRequestIdentifiersListener
 {
-    /**
-     * Handle the event.
-     */
     public function handle(TokenAuthenticated $event): void
     {
-        /** @var null|Request $request */
+        /** @var Request $request */
         $request = \Illuminate\Support\Facades\Request::getFacadeRoot();
 
-        if (null !== $request && ($request->ip() !== $event->token->ip || null === $event->token->location)) {
+        /** @noinspection PhpUndefinedFieldInspection */
+        if (null === $event->token->location || $request->ip() !== $event->token->ip) {
             $attributes = [
                 'ip' => $request->ip(),
             ];
 
             // https://github.com/stevebauman/location/blob/master/src/Drivers/Cloudflare.php#L17
-            /** @var LocationManager $location */
-            /** @phpstan-ignore-next-line */
             $location = Location::setDriver(new Cloudflare);
+
             // https://developers.cloudflare.com/rules/transform/managed-transforms/reference/#add-visitor-location-headers
             $ipLocation = $location->get($request->ip());
 
-            if ($ipLocation) {
+            if ($ipLocation instanceof Position) {
                 $attributes['location'] = $ipLocation->cityName;
             }
 

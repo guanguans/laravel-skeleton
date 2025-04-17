@@ -23,20 +23,11 @@ class UserRegisteredMail extends Mailable implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct() {}
-
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+    public function build(): self
     {
         return $this
             ->subject('您已成功注册账号')
-            ->markdown('emails.users.registered');
+            // ->markdown('emails.users.registered')
+            ->html('<div>您已成功注册账号</div>');
     }
 }
