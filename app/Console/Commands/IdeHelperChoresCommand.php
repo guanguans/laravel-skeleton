@@ -14,21 +14,24 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Rules\Rule;
-use App\Support\Discover;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
+use Laragear\Discover\Facades\Discover;
 
 final class IdeHelperChoresCommand extends Command
 {
     private const string SUFFIX = 'Chore';
+
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     protected $signature = <<<'EOD'
         ide-helper:chores
-                {--only=* : Only output chores with the given name}
-                {--except=* : Do not output chores with the given name}
-                {--json : Output as JSON.}
-
+        {--only=* : Only output chores with the given name}
+        {--except=* : Do not output chores with the given name}
+        {--json : Output as JSON.}
         EOD;
+
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     protected $description = 'Generate chores for the Laravel-Idea-JSON file.';
 
     /**
@@ -97,8 +100,8 @@ final class IdeHelperChoresCommand extends Command
     private function ruleChore(): void
     {
         Discover::in('Rules')
-            ->instanceOf(Rule::class)
-            ->all()
+            ->instancesOf(Rule::class)
+            ->allClasses()
             ->map(static fn (\ReflectionClass $ruleReflectionClass, $ruleClass): string => $ruleClass::name())
             ->sort()
             ->values()

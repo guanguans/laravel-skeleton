@@ -30,6 +30,7 @@
         "biiiiiigmonster/hasin": "^5.0",
         "bilfeldt/laravel-http-client-logger": "^2.4",
         "bramus/monolog-colored-line-formatter": "^3.1",
+        "cakephp/utility": "^5.2",
         "calebporzio/sushi": "^2.5",
         "cerbero/command-validator": "^3.0",
         "cerbero/enum": "^2.3",

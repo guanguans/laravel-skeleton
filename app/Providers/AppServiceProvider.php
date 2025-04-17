@@ -28,7 +28,6 @@ use App\Support\Attributes\After;
 use App\Support\Attributes\Autowired;
 use App\Support\Attributes\Before;
 use App\Support\Attributes\Mixin;
-use App\Support\Discover;
 use App\Support\Mixins\BlueprintMixin;
 use App\Support\Mixins\CarbonMixin;
 use App\Support\Mixins\CollectionMixin;
@@ -128,6 +127,7 @@ use Illuminate\View\View;
 use Imanghafoori\Decorator\Decorators\DecoratorFactory;
 use Imanghafoori\Decorator\Facade\Decorator;
 use Jiannei\Response\Laravel\Providers\LaravelServiceProvider;
+use Laragear\Discover\Facades\Discover;
 use Laravel\Octane\Events\RequestReceived;
 use Laravel\Octane\Events\RequestTerminated;
 use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
@@ -560,8 +560,7 @@ class AppServiceProvider extends ServiceProvider
         //     });
 
         Discover::in('Support/Mixins')
-            ->recursively()
-            ->all()
+            ->allClasses()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
                 foreach ($mixinReflectionClass->getAttributes(Mixin::class) as $mixinReflectionAttribute) {
                     /** @var \App\Support\Attributes\Mixin $mixinAttribute */
@@ -577,8 +576,8 @@ class AppServiceProvider extends ServiceProvider
     private function extendValidator(): void
     {
         Discover::in('Rules')
-            ->instanceOf(Rule::class)
-            ->all()
+            ->instancesOf(Rule::class)
+            ->classes()
             ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
                 /** @var class-string&Rule $ruleClass */
                 Validator::{$ruleClass::extendType()}(

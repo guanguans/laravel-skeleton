@@ -24,8 +24,6 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 final readonly class AutoWire
 {
     /**
-     * Create a new AutoWire instance.
-     *
      * @param array<string, mixed> $parameters
      */
     public function __construct(

@@ -13,21 +13,21 @@ declare(strict_types=1);
 
 namespace App\Support\Facades;
 
-use App\Support\ElasticsearchManager;
+use App\Support\Managers\ElasticsearchManager;
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static string getDefaultDriver()
  * @method static \Elastic\Elasticsearch\Client connection(string|null $connection = null)
  * @method static mixed driver(string|null $driver = null)
- * @method static \App\Support\ElasticsearchManager extend(string $driver, \Closure $callback)
+ * @method static \App\Support\Managers\ElasticsearchManager extend(string $driver, \Closure $callback)
  * @method static array getDrivers()
  * @method static \Illuminate\Contracts\Container\Container getContainer()
- * @method static \App\Support\ElasticsearchManager setContainer(\Illuminate\Contracts\Container\Container $container)
- * @method static \App\Support\ElasticsearchManager forgetDrivers()
- * @method static \App\Support\ElasticsearchManager|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static \App\Support\ElasticsearchManager|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static \Illuminate\Support\HigherOrderTapProxy|\App\Support\ElasticsearchManager tap(callable|null $callback = null)
+ * @method static \App\Support\Managers\ElasticsearchManager setContainer(\Illuminate\Contracts\Container\Container $container)
+ * @method static \App\Support\Managers\ElasticsearchManager forgetDrivers()
+ * @method static \App\Support\Managers\ElasticsearchManager|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+ * @method static \App\Support\Managers\ElasticsearchManager|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+ * @method static \Illuminate\Support\HigherOrderTapProxy|\App\Support\Managers\ElasticsearchManager tap(callable|null $callback = null)
  * @method static \Elastic\Transport\Transport getTransport()
  * @method static \Psr\Log\LoggerInterface getLogger()
  * @method static \Elastic\Elasticsearch\Client setAsync(bool $async)
@@ -123,7 +123,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Elastic\Elasticsearch\Endpoints\Watcher watcher()
  * @method static \Elastic\Elasticsearch\Endpoints\Xpack xpack()
  *
- * @see \App\Support\ElasticsearchManager
+ * @see \App\Support\Managers\ElasticsearchManager
  */
 class Elasticsearch extends Facade
 {

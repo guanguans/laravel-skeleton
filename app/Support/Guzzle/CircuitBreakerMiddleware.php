@@ -22,7 +22,7 @@ use Ackintosh\Ganesha\Strategy\Rate\Builder;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
 
-class CircuitBreakerGuzzleMiddleware
+class CircuitBreakerMiddleware
 {
     use Conditionable;
     use Tappable;

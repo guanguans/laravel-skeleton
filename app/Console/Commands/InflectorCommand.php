@@ -13,28 +13,24 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Support\Inflector;
+use Cake\Utility\Inflector;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Pluralizer;
 use Illuminate\Support\Str;
+use Symfony\Component\String\Inflector\EnglishInflector;
 
 class InflectorCommand extends Command
 {
     protected $signature = 'inflector';
     protected $description = 'Inflector pluralizes and singularizes English nouns.';
 
-    /**
-     * @noinspection PhpUndefinedMethodInspection
-     */
-    public function handle(): int
+    public function handle(): void
     {
         collect()
             ->pipe(function () {
                 while (true) {
-                    $phrase = $this->ask('Please enter a phrase to inflect.');
-
-                    if (filled($phrase)) {
+                    if (filled($phrase = $this->ask('Please enter a phrase to inflect.'))) {
                         break;
                     }
                 }
@@ -45,6 +41,8 @@ class InflectorCommand extends Command
                         'all',
                         'Laravel:plural',
                         'Laravel:singular',
+                        'Symfony:pluralize',
+                        'Symfony:singularize',
                         'CakePHP:pluralize',
                         'CakePHP:singularize',
                         'CakePHP:camelize',
@@ -59,29 +57,34 @@ class InflectorCommand extends Command
                 );
 
                 return collect('all' === $type ? \array_slice($types, 1) : [$type])
-                    ->reduce(static function (Collection $results, string $type) use ($phrase) {
-                        $classPluck = [
-                            'Laravel' => Pluralizer::class,
-                            'CakePHP' => Inflector::class,
-                        ];
-
-                        $result = Str::of($type)
-                            ->explode(':')
-                            ->pipe(static fn (Collection $parts) => $classPluck[$parts->first()]::{$parts->last()}($phrase));
-
-                        return $results->add([
+                    ->reduce(
+                        static fn (Collection $results, string $type) => $results->add([
                             'type' => $type,
-                            'result' => $result,
-                        ]);
-                    }, collect());
+                            'result' => Str::of($type)
+                                ->explode(':', 2)
+                                ->pipe(
+                                    static fn (Collection $parts) => \is_array($result = \call_user_func(
+                                        [
+                                            app(
+                                                [
+                                                    'Laravel' => Pluralizer::class,
+                                                    'Symfony' => EnglishInflector::class,
+                                                    'CakePHP' => Inflector::class,
+                                                ][$parts->first()]
+                                            ),
+                                            $parts->last(),
+                                        ],
+                                        $phrase
+                                    ))
+                                        ? implode('、', $result)
+                                        : $result
+                                ),
+                        ]),
+                        collect()
+                    );
             })
             ->tap(function (Collection $results): void {
-                $this->table(
-                    ['Type', 'Result'],
-                    $results->toArray()
-                );
+                $this->table(['Type', 'Result'], $results->toArray());
             });
-
-        return self::SUCCESS;
     }
 }
