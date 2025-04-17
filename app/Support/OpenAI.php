@@ -280,7 +280,8 @@ final class OpenAI extends FoundationSdk
                         'logit_bias' => 'array', // map
                         'user' => 'string|uuid',
                     ]
-                )
+                ),
+                \JSON_THROW_ON_ERROR
             ),
             \CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',

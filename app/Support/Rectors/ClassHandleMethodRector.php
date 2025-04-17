@@ -15,6 +15,8 @@ namespace App\Support\Rectors;
 
 use Illuminate\Http\Request;
 use PhpParser\Node;
+use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
@@ -86,7 +88,7 @@ class ClassHandleMethodRector extends AbstractRector
     final public function getNodeTypes(): array
     {
         return [
-            Node\Stmt\ClassMethod::class,
+            ClassMethod::class,
         ];
     }
 
@@ -110,7 +112,7 @@ class ClassHandleMethodRector extends AbstractRector
             $this->updateDocBlock($node);
 
             if (null === $node->returnType || $this->getName($node->returnType) !== Response::class) {
-                $node->returnType = new Node\Name\FullyQualified(Response::class);
+                $node->returnType = new FullyQualified(Response::class);
 
                 return $node;
             }
@@ -127,7 +129,7 @@ class ClassHandleMethodRector extends AbstractRector
 
         if (
             collect($phpDocInfo->getTagsByName($noinspectionTag))
-                ->filter(fn (PhpDocTagNode $phpDocTagNode) => str($phpDocTagNode)->endsWith($noinspectionTagValue))
+                ->filter(static fn (PhpDocTagNode $phpDocTagNode) => str($phpDocTagNode)->endsWith($noinspectionTagValue))
                 ->isEmpty()
         ) {
             $this->addEmptyPhpDocTagNodeFor($phpDocInfo);
@@ -139,7 +141,7 @@ class ClassHandleMethodRector extends AbstractRector
 
         if (
             collect($phpDocInfo->getParamTagValueNodes())
-                ->filter(fn (ParamTagValueNode $paramTagValueNode) => str($paramTagValueNode)->is(
+                ->filter(static fn (ParamTagValueNode $paramTagValueNode) => str($paramTagValueNode)->is(
                     '\Closure(\Illuminate\Http\Request):\Symfony\Component\HttpFoundation\Response $next'
                 ))
                 ->isEmpty()

@@ -15,7 +15,7 @@ namespace App\Support\Mixins\QueryBuilder;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pipeline\Pipeline;
 
@@ -26,7 +26,7 @@ use Illuminate\Pipeline\Pipeline;
  */
 #[Mixin(EloquentBuilder::class)]
 #[Mixin(QueryBuilder::class)]
-#[Mixin(Relation::class)]
+#[Mixin(RelationBuilder::class)]
 class QueryBuilderMixin
 {
     public function pipe(): callable
@@ -35,11 +35,11 @@ class QueryBuilderMixin
             array_unshift($pipes, static function ($builder, $next): void {
                 throw_if(!($piped = $next($builder)) instanceof EloquentBuilder
                 && !$piped instanceof QueryBuilder
-                && !$piped instanceof Relation, \InvalidArgumentException::class, \sprintf(
+                && !$piped instanceof RelationBuilder, \InvalidArgumentException::class, \sprintf(
                     'Query builder pipeline must be return a %s or %s or %s instance.',
                     EloquentBuilder::class,
                     QueryBuilder::class,
-                    Relation::class,
+                    RelationBuilder::class,
                 ));
             });
 
