@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedParameterInspection */
+
 declare(strict_types=1);
 
 /**
@@ -21,8 +23,6 @@ class UserPolicy extends Policy
 {
     /**
      * Determine whether the user can view any models.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
     public function viewAny(JWTUser $jWTUser): bool
     {
@@ -31,8 +31,6 @@ class UserPolicy extends Policy
 
     /**
      * Determine whether the user can view the model.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
     public function view(JWTUser $jWTUser, User $model): bool
     {
@@ -49,8 +47,6 @@ class UserPolicy extends Policy
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
     public function update(JWTUser $jWTUser, User $model): bool
     {
@@ -59,8 +55,6 @@ class UserPolicy extends Policy
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
     public function delete(JWTUser $jWTUser, User $model): bool
     {
@@ -69,8 +63,6 @@ class UserPolicy extends Policy
 
     /**
      * Determine whether the user can restore the model.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
     public function restore(JWTUser $jWTUser, User $model): bool
     {
@@ -79,8 +71,6 @@ class UserPolicy extends Policy
 
     /**
      * Determine whether the user can permanently delete the model.
-     *
-     * @return bool|\Illuminate\Auth\Access\Response
      */
     public function forceDelete(JWTUser $jWTUser, User $model): bool
     {
