@@ -32,9 +32,14 @@ class BitEncoder implements BitEncoderContract
      * 无重复元素的数组.
      *
      * @var list<mixed>
+     *
+     * @noinspection PropertyAnnotationInspection
      */
-    protected array $set;
+    private array $set;
 
+    /**
+     * @throws \Throwable
+     */
     public function __construct(array $set)
     {
         $this->setSet($set);
@@ -44,8 +49,8 @@ class BitEncoder implements BitEncoderContract
      * 编码.
      *
      * @throws \InvalidArgumentException
+     * @throws \Throwable
      */
-    #[\Override]
     public function encode(array $set): int
     {
         return $this->attach(0, ...$set);
@@ -55,8 +60,8 @@ class BitEncoder implements BitEncoderContract
      * 解码.
      *
      * @throws \InvalidArgumentException
+     * @throws \Throwable
      */
-    #[\Override]
     public function decode(int $value): array
     {
         return array_filter($this->set, fn ($item): bool => $this->has($value, $item));
@@ -66,50 +71,61 @@ class BitEncoder implements BitEncoderContract
      * 附加.
      *
      * @throws \InvalidArgumentException
+     * @throws \Throwable
      */
     public function attach(int $value, ...$set): int
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
 
-        return array_reduce($set, function (int $value, $item): int {
-            $index = array_search($item, $this->set, true);
+        return array_reduce(
+            $set,
+            function (int $value, $item): int {
+                $index = array_search($item, $this->set, true);
 
-            if (false !== $index) {
-                $value |= (1 << $index);
-            }
+                if (false !== $index) {
+                    $value |= (1 << $index);
+                }
 
-            return $value;
-        }, $value);
+                return $value;
+            },
+            $value
+        );
     }
 
     /**
      * 移除.
      *
      * @throws \InvalidArgumentException
+     * @throws \Throwable
      */
     public function detach(int $value, ...$set): int
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
 
-        return array_reduce($set, function (int $value, $item): int {
-            $index = array_search($item, $this->set, true);
+        return array_reduce(
+            $set,
+            function (int $value, $item): int {
+                $index = array_search($item, $this->set, true);
 
-            if (false !== $index) {
-                $value &= (~(1 << $index));
-            }
+                if (false !== $index) {
+                    $value &= (~(1 << $index));
+                }
 
-            return $value;
-        }, $value);
+                return $value;
+            },
+            $value
+        );
     }
 
     /**
      * 包含.
      *
      * @throws \InvalidArgumentException
+     * @throws \Throwable
      */
     public function has(int $value, mixed $item): bool
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
 
         $index = array_search($item, $this->set, true);
 
@@ -126,10 +142,11 @@ class BitEncoder implements BitEncoderContract
      * 缺少.
      *
      * @throws \InvalidArgumentException
+     * @throws \Throwable
      */
     public function lack(int $value, mixed $item): bool
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value($value) is an invalid positive integer.");
+        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
 
         $index = array_search($item, $this->set, true);
 
@@ -142,6 +159,8 @@ class BitEncoder implements BitEncoderContract
 
     /**
      * 获取包含该集合的所有组合的编码值.
+     *
+     * @throws \Throwable
      */
     public function getHasCombinationsValues(array $set, int $length = 1024): array
     {
@@ -150,6 +169,8 @@ class BitEncoder implements BitEncoderContract
 
     /**
      * 获取缺少该集合的所有组合的编码值.
+     *
+     * @throws \Throwable
      */
     public function getLackCombinationsValues(array $set, int $length = 1024): array
     {
@@ -218,8 +239,8 @@ class BitEncoder implements BitEncoderContract
         $subSetCount = \count($set);
         $setCount = \count($this->set);
 
-        for ($i = $subSetCount; $i <= $setCount; ++$i) {
-            foreach ($this->combinationGenerator($this->set, $i) as $combination) {
+        for ($length = $subSetCount; $length <= $setCount; ++$length) {
+            foreach ($this->combinationGenerator($this->set, $length) as $combination) {
                 if (array_values(array_intersect($combination, $set)) === array_values($set)) {
                     yield $combination;
                 }
@@ -241,9 +262,9 @@ class BitEncoder implements BitEncoderContract
         $subSetCount = \count($set);
         $setCount = \count($this->set);
 
-        for ($i = 1; $i <= $setCount; ++$i) {
-            foreach ($this->combinationGenerator($this->set, $i) as $combination) {
-                if ($i < $subSetCount) {
+        for ($length = 1; $length <= $setCount; ++$length) {
+            foreach ($this->combinationGenerator($this->set, $length) as $combination) {
+                if ($length < $subSetCount) {
                     yield $combination;
 
                     continue;
@@ -296,14 +317,21 @@ class BitEncoder implements BitEncoderContract
         return $this->set;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function setSet(array $set): void
     {
         throw_unless(array_is_list($set), \InvalidArgumentException::class, 'The set is not an array of lists.');
 
-        throw_if(array_filter(array_count_values($set), static fn (int $count): bool => 1 < $count), \InvalidArgumentException::class, 'The set must be an array with no duplicate elements.');
+        throw_if(
+            array_filter(array_count_values($set), static fn (int $count): bool => 1 < $count),
+            \InvalidArgumentException::class,
+            'The set must be an array with no duplicate elements.'
+        );
 
         if (($count = \count($set)) > ($maxCount = \PHP_INT_SIZE === 4 ? 31 : 63)) {
-            throw new \LengthException("The number({$maxCount}) of elements is greater than the maximum length({$count}).");
+            throw new \LengthException("The number [$maxCount] of elements is greater than the maximum length [$count].");
         }
 
         $this->set = $set;
@@ -317,13 +345,13 @@ class BitEncoder implements BitEncoderContract
         $originalLength = \count($set);
         $remainingLength = $originalLength - $length + 1;
 
-        for ($i = 0; $i < $remainingLength; ++$i) {
-            $current = $set[$i];
+        for ($index = 0; $index < $remainingLength; ++$index) {
+            $current = $set[$index];
 
             if (1 === $length) {
                 yield [$current];
             } else {
-                $remaining = \array_slice($set, $i + 1);
+                $remaining = \array_slice($set, $index + 1);
 
                 foreach ($this->combinationGenerator($remaining, $length - 1) as $permutation) {
                     array_unshift($permutation, $current);
