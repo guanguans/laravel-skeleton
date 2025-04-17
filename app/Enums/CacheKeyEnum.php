@@ -13,8 +13,13 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum StringBooleanEnum: string
+/**
+ * @see https://github.com/anisAronno/laravel-starter/blob/develop/app/Helpers/CacheKey.php
+ */
+enum CacheKeyEnum: string
 {
-    case FALSE = '0';
-    case TRUE = '1';
+    case ROLE = 'role_';
+    case USER = 'user_';
+    case PRODUCT = 'product_';
+    case CATEGORY = 'category_';
 }

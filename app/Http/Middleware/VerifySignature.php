@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Exceptions\InvalidRepeatRequestException;
-use App\Support\HmacSigner;
+use App\Support\Signers\HmacSigner;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Carbon;

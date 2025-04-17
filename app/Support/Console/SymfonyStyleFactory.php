@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support;
+namespace App\Support\Console;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;

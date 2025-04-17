@@ -15,6 +15,6 @@ namespace App\Enums;
 
 enum IntegerBooleanEnum: int
 {
-    case False = 0;
-    case True = 1;
+    case FALSE = 0;
+    case TRUE = 1;
 }

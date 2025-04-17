@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\OpenAI;
-use App\Support\PushDeer;
+use App\Support\Clients\OpenAI;
+use App\Support\Clients\PushDeer;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Container\Container;
