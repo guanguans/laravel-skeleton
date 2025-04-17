@@ -1,2 +1,3 @@
-# total 0 errors
-includes: []
+# total 2 errors
+includes:
+    - outOfClass.self.neon

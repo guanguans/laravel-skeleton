@@ -1,0 +1,8 @@
+# total 2 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Accessing self\:\:\$handler outside of class scope\.$#'
+            count: 2
+            path: ../app/Support/helpers.php

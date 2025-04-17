@@ -33,10 +33,9 @@ parameters:
         - app/
     excludePaths:
         - app/Support/StreamWrappers/
-        - app/Support/helpers.php
 #    level: max
     level: 1
-    tmpDir: .build/phpstan
+    tmpDir: .build/phpstan/
 #    errorFormat: symplify
     errorFormat: friendly
     friendly:
@@ -59,6 +58,9 @@ parameters:
         -
             function: 'env_getcsv()'
             message: 'use config() instead'
+        -
+            function: 'env_json_decode()'
+            message: 'use config() instead'
     ignoreErrors:
 #        - '#^Cannot call method .*\(\) on mixed\.$#'
 #        - '#^Cannot cast mixed to .*\.$#'
@@ -78,6 +80,9 @@ parameters:
 #        - identifier: typePerfect.noMixedMethodCaller
         - identifier: new.static
         -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: ./app/Support/helpers.php
+        -
             message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
             path: ./app/Support/helpers.php
         -
@@ -90,4 +95,7 @@ parameters:
             path: app/Support/Mixins/
 #        -
 #            identifier: return.missing
+#            path: app/Support/StreamWrappers/
+#        -
+#            message: '#^Method App\\Support\\StreamWrappers\\StreamWrapper\:\:.*\(\) should return .* but return statement is missing\.$#'
 #            path: app/Support/StreamWrappers/
