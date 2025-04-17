@@ -19,25 +19,36 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
 /**
- * @method static \Illuminate\Database\Eloquent\Builder allowedFilter(string $name, $default = null, ?string $internalName = null, $ignore = [])
- * @method static \Illuminate\Database\Eloquent\Builder allowedExactFilter(string $name, $default = null, ?string $internalName = null, $ignore = [])
- * @method static \Illuminate\Database\Eloquent\Builder allowedPartialFilter(string $name, $default = null, ?string $internalName = null, $ignore = [])
- * @method static \Illuminate\Database\Eloquent\Builder allowedScopeFilter(string $name, $default = null, ?string $internalName = null, $ignore = [])
- * @method static \Illuminate\Database\Eloquent\Builder allowedCallbackFilter(string $name, callable $callback)
- * @method static \Illuminate\Database\Eloquent\Builder allowedTrashedFilter(string $name = 'trashed')
- * @method static \Illuminate\Database\Eloquent\Builder allowedSorts(array $allowedSorts, array $default = [], string $name = 'sorts')
+ * @method static Builder allowedFilter(string $name, mixed $default = null, ?string $internalName = null, mixed $ignore = null)
+ * @method static Builder allowedExactFilter(string $name, mixed $default = null, ?string $internalName = null, mixed $ignore = null)
+ * @method static Builder allowedPartialFilter(string $name, mixed $default = null, ?string $internalName = null, mixed $ignore = null)
+ * @method static Builder allowedScopeFilter(string $name, mixed $default = null, ?string $internalName = null, mixed $ignore = null)
+ * @method static Builder allowedCallbackFilter(string $name, callable $callback)
+ * @method static Builder allowedTrashedFilter(string $name = 'trashed')
+ * @method static Builder allowedSorts(array $allowedSorts, array $default = [], string $name = 'sorts')
+ * @method static Builder allowedSort(string $name, mixed $default = null, ?string $internalName = null)
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  */
 trait AllowedFilterable
 {
-    public function scopeAllowedFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
-    {
-        return $this->scopeExactFilter($query, $name, $default, $internalName, $ignore);
+    public function scopeAllowedFilter(
+        Builder $query,
+        string $name,
+        mixed $default = null,
+        ?string $internalName = null,
+        mixed $ignore = null
+    ): Builder {
+        return $this->scopeAllowedExactFilter($query, $name, $default, $internalName, $ignore);
     }
 
-    public function scopeAllowedExactFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
-    {
+    public function scopeAllowedExactFilter(
+        Builder $query,
+        string $name,
+        mixed $default = null,
+        ?string $internalName = null,
+        mixed $ignore = null
+    ): Builder {
         if (
             (Request::getFacadeRoot()->has($name) || null !== $default)
             && !\in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
@@ -52,15 +63,20 @@ trait AllowedFilterable
         return $query;
     }
 
-    public function scopeAllowedPartialFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
-    {
+    public function scopeAllowedPartialFilter(
+        Builder $query,
+        string $name,
+        mixed $default = null,
+        ?string $internalName = null,
+        mixed $ignore = null
+    ): Builder {
         if (
             (Request::getFacadeRoot()->has($name) || null !== $default)
             && !\in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
         ) {
             $wrappedProperty = $query->getQuery()->getGrammar()->wrap($query->qualifyColumn($internalName ?: $name));
 
-            $sql = "LOWER({$wrappedProperty}) LIKE ?";
+            $sql = "LOWER($wrappedProperty) LIKE ?";
 
             if (\is_array($value)) {
                 if ([] === array_filter($value, strlen(...))) {
@@ -71,7 +87,7 @@ trait AllowedFilterable
                     foreach (array_filter($value, strlen(...)) as $partialValue) {
                         $partialValue = mb_strtolower($partialValue, 'UTF8');
 
-                        $query->orWhereRaw($sql, ["%{$partialValue}%"]);
+                        $query->orWhereRaw($sql, ["%$partialValue%"]);
                     }
                 });
 
@@ -80,14 +96,19 @@ trait AllowedFilterable
 
             $value = mb_strtolower($value, 'UTF8');
 
-            $query->whereRaw($sql, ["%{$value}%"]);
+            $query->whereRaw($sql, ["%$value%"]);
         }
 
         return $query;
     }
 
-    public function scopeAllowedScopeFilter(Builder $query, string $name, $default = null, ?string $internalName = null, $ignore = []): Builder
-    {
+    public function scopeAllowedScopeFilter(
+        Builder $query,
+        string $name,
+        mixed $default = null,
+        ?string $internalName = null,
+        mixed $ignore = null
+    ): Builder {
         if (
             (Request::getFacadeRoot()->has($name) || null !== $default)
             && !\in_array($value = Request::getFacadeRoot()->input($name, $default), Arr::wrap($ignore), true)
@@ -117,6 +138,9 @@ trait AllowedFilterable
         return $query;
     }
 
+    /**
+     * @noinspection PhpStaticAsDynamicMethodCallInspection
+     */
     public function scopeAllowedTrashedFilter(Builder $query, string $name = 'trashed'): Builder
     {
         if (Request::getFacadeRoot()->has($name)) {
@@ -164,9 +188,9 @@ trait AllowedFilterable
         return $query;
     }
 
-    public function scopeAllowedSort(Builder $query, string $name, $default = null, ?string $internalName = null): Builder
+    public function scopeAllowedSort(Builder $query, string $name, mixed $default = null, ?string $internalName = null): Builder
     {
-        if (Request::getFacadeRoot()->hasAny([$name, '-'.$name]) || null !== $default) {
+        if (null !== $default || Request::getFacadeRoot()->hasAny([$name, '-'.$name])) {
             $column = $internalName ?: $name;
 
             if (Request::getFacadeRoot()->has('-'.$name)) {
