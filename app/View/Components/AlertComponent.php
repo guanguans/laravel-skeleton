@@ -17,39 +17,25 @@ use Illuminate\View\Component;
 
 class AlertComponent extends Component
 {
-    /**
-     * alert 类型。
-     *
-     * @var string
-     */
-    public $type;
-
-    /**
-     * alert 消息。
-     *
-     * @var string
-     */
-    public $message;
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     protected $except = [
         'type',
     ];
 
-    /**
-     * Create a new component instance.
-     */
-    public function __construct(string $type, string $message)
-    {
-        $this->type = $type;
-        $this->message = $message;
-    }
+    public function __construct(
+        /** alert 类型。 */
+        public string $type,
+        /** alert 消息。 */
+        public string $message
+    ) {}
 
     /**
-     * Get the view / contents that represent the component.
+     * {@inheritDoc}
      *
-     * @return \Closure|\Illuminate\Contracts\View\View|string
+     * @noinspection LaravelUnknownViewInspection
      */
     #[\Override]
-    public function render()
+    public function render(): mixed
     {
         return view('components.alert');
     }

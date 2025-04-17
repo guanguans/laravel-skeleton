@@ -16,9 +16,9 @@ namespace App\View\Composers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class RequestComposer
+readonly class RequestComposer
 {
-    public function __construct(protected Request $request) {}
+    public function __construct(private Request $request) {}
 
     /**
      * 绑定视图数据.
