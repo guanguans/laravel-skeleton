@@ -1,6 +1,6 @@
 includes:
-#    - baselines/loader.neon
-    - phpstan-baseline.neon
+    - baselines/loader.neon
+#    - phpstan-baseline.neon
 
     - vendor/spaze/phpstan-disallowed-calls/disallowed-dangerous-calls.neon
 #    - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
@@ -32,10 +32,8 @@ parameters:
     paths:
         - app/
     excludePaths:
-        - app/Support/Mixins/
         - app/Support/StreamWrappers/
         - app/Support/helpers.php
-        - app/Support/TencentAdsRateLimiterMiddleware.php
 #    level: max
     level: 1
     tmpDir: .build/phpstan
@@ -66,22 +64,30 @@ parameters:
 #        - '#^Cannot cast mixed to .*\.$#'
 #        - '#^Cannot use array destructuring on mixed\.$#'
 #        - '#Property .* does not accept mixed#'
-#        -
-#            identifier: argument.templateType
-#        -
-#            identifier: argument.type
-#        -
-#            identifier: missingType.generics
-#        -
-#            identifier: missingType.iterableValue
-#        -
-#            identifier: return.type
-#        -
-#            identifier: encapsedStringPart.nonString
-#        -
-#            identifier: logicalOr.resultUnused
-        -
-            identifier: new.static
+#        - identifier: argument.templateType
+#        - identifier: argument.type
+#        - identifier: binaryOp.invalid
+#        - identifier: cast.string
+#        - identifier: encapsedStringPart.nonString
+#        - identifier: method.nonObject
+#        - identifier: missingType.generics
+#        - identifier: missingType.iterableValue
+#        - identifier: return.type
+#        - identifier: return.void
+#        - identifier: symplify.noDynamicName
+#        - identifier: typePerfect.noMixedMethodCaller
+        - identifier: new.static
         -
             message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
             path: ./app/Support/helpers.php
+        -
+            messages:
+                - '#^Access to an undefined property App\\Support\\Mixins\\.*Mixin\:\:\$.*\.$#'
+                - '#^Call to protected method .*\(\) of class Illuminate\\.*\.$#'
+                - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
+                - '#^Method App\\Support\\Mixins\\.*Mixin\:\:.*\(\) invoked with \d parameters, 0 required\.$#'
+                - '#^Undefined variable\: \$this$#'
+            path: app/Support/Mixins/
+#        -
+#            identifier: return.missing
+#            path: app/Support/StreamWrappers/
