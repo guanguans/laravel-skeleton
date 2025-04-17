@@ -29,6 +29,8 @@ class WelcomeNotification extends Notification implements ShouldQueue
 
     /**
      * Get the notification's delivery channels.
+     *
+     * @noinspection PhpUnusedParameterInspection
      */
     public function via(mixed $notifiable): array
     {
@@ -37,6 +39,8 @@ class WelcomeNotification extends Notification implements ShouldQueue
 
     /**
      * Get the mail representation of the notification.
+     *
+     * @noinspection PhpUnusedParameterInspection
      */
     public function toMail(mixed $notifiable): MailMessage
     {
@@ -48,6 +52,8 @@ class WelcomeNotification extends Notification implements ShouldQueue
 
     /**
      * Get the array representation of the notification.
+     *
+     * @noinspection PhpUnusedParameterInspection
      */
     public function toArray(mixed $notifiable): array
     {

@@ -15,8 +15,8 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\Telegram\TelegramMessage;
 
 /**
  * @see https://github.com/laravelio/laravel.io/blob/main/app/Notifications/SlowQueryLogged.php
@@ -26,33 +26,36 @@ class SlowQueryLoggedNotification extends Notification implements ShouldQueue
     use Queueable;
 
     public function __construct(
-        private string $query,
-        private ?float $duration,
-        private string $url
+        private readonly string $query,
+        private readonly ?float $duration,
+        private readonly string $url
     ) {}
 
-    public function via($notifiable): array
+    /**
+     * @noinspection PhpUnusedParameterInspection
+     */
+    public function via(mixed $notifiable): array
     {
-        return ['telegram'];
+        return ['mail'];
     }
 
-    public function toTelegram($notifiable): ?TelegramMessage
+    /**
+     * @noinspection PhpUnusedParameterInspection
+     */
+    public function toMail(mixed $notifiable): MailMessage
     {
-        if (null === config('services.telegram-bot-api.channel')) {
-            return null;
-        }
-
-        return TelegramMessage::create()
-            ->to(config('services.telegram-bot-api.channel'))
-            ->content($this->content());
+        return (new MailMessage)
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line($this->content());
     }
 
     private function content(): string
     {
         $content = "*Slow query logged!*\n\n";
-        $content .= "```{$this->query}```\n\n";
+        $content .= "```$this->query```\n\n";
         $content .= "Duration: {$this->duration}ms\n";
 
-        return $content."URL: {$this->url}";
+        return $content."URL: $this->url";
     }
 }

@@ -34,7 +34,6 @@ parameters:
     excludePaths:
         - app/Support/Mixins/
         - app/Support/StreamWrappers/
-        - app/Notifications/SlowQueryLoggedNotification.php
         - app/Support/helpers.php
         - app/Support/TencentAdsRateLimiterMiddleware.php
 #    level: max
