@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection ClassOverridesFieldOfSuperClassInspection */
+
 declare(strict_types=1);
 
 /**
@@ -43,12 +45,18 @@ class Movie extends Model
         return true;
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
     public function getKeyName(): string
     {
         return 'name';
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
     public function getIncrementing(): bool
     {

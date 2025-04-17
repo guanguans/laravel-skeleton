@@ -18,14 +18,24 @@ namespace App\Models\Concerns;
  *
  * @author Alexey Bobkov, Samuel Georges
  *
- * @see https://github.com/octobercms/library/blob/3.x/src/Database/Traits/Nullable.php
+ * @see https://github.com/octobercms/library/blob/4.x/src/Database/Traits/Nullable.php
+ *
+ * @property list<string> $nullable
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  */
 trait Nullable
 {
     /**
+     * Nullable attribute names which should be set to null when empty.
+     *
+     * protected array $nullable = [];
+     */
+
+    /**
      * initializeNullable trait for a model.
+     *
+     * @throws \Throwable
      */
     public function initializeNullable(): void
     {
@@ -34,15 +44,14 @@ trait Nullable
             static::class
         ));
 
-        $this->bindEvent('model.beforeSave', function (): void {
-            $this->nullableBeforeSave();
-        });
+        // $this->bindEvent('model.beforeSaveDone', [$this, 'nullableBeforeSave']);
+        self::saving([$this, 'nullableBeforeSave']);
     }
 
     /**
      * addNullable attribute to the nullable attributes list.
      */
-    public function addNullable(null|array|string $attributes = null): void
+    public function addNullable(mixed $attributes = null): void
     {
         $attributes = \is_array($attributes) ? $attributes : \func_get_args();
 
@@ -51,10 +60,8 @@ trait Nullable
 
     /**
      * checkNullableValue checks if the supplied value is empty, excluding zero.
-     *
-     * @param string $value Value to check
      */
-    public function checkNullableValue(string $value): bool
+    public function checkNullableValue(mixed $value): bool
     {
         if (0 === $value || '0' === $value || 0.0 === $value || false === $value) {
             return false;

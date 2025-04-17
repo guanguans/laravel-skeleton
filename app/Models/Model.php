@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection ClassOverridesFieldOfSuperClassInspection */
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -16,7 +19,6 @@ namespace App\Models;
 use App\Models\Concerns\Pipeable;
 use App\Models\Concerns\SerializeDate;
 use Awobaz\Compoships\Compoships;
-use Envant\Fireable\FireableAttributes;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -44,7 +46,6 @@ class Model extends \Illuminate\Database\Eloquent\Model
     // use QueryCacheable;
     // use Sushi;
 
-    // use FireableAttributes;
     // use Macroable;
     use Pipeable;
     use SerializeDate;
@@ -67,18 +68,12 @@ class Model extends \Illuminate\Database\Eloquent\Model
         return Arr::dot($this->toArray());
     }
 
-    /**
-     * @noinspection PhpRedundantMethodOverrideInspection
-     */
     #[\Override]
     public function newCollection(array $models = []): Collection
     {
         return parent::newCollection($models);
     }
 
-    /**
-     * @noinspection PhpRedundantMethodOverrideInspection
-     */
     #[\Override]
     public function getRouteKeyName(): string
     {
@@ -86,7 +81,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @noinspection PhpRedundantMethodOverrideInspection
+     * {@inheritDoc}
      */
     #[\Override]
     public function is($model): bool
@@ -95,7 +90,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * @noinspection PhpRedundantMethodOverrideInspection
+     * {@inheritDoc}
      */
     #[\Override]
     public function isNot($model): bool

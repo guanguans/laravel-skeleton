@@ -25,7 +25,8 @@ use Illuminate\Support\Facades\DB;
  */
 trait ForceUseIndexable
 {
-    protected $from = [];
+    /** @var list<string> */
+    protected array $from = [];
 
     /**
      * @param list<string>|string $index

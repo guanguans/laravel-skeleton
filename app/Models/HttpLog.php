@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection ClassOverridesFieldOfSuperClassInspection */
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -21,6 +24,6 @@ class HttpLog extends Model
     use SerializeDate;
     // use SoftDeletes;
 
-    protected $table = 'http_logs';
+    protected $table = 'http_log';
     protected $guarded = [];
 }

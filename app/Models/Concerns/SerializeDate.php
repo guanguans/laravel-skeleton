@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -13,7 +15,7 @@ declare(strict_types=1);
 
 namespace App\Models\Concerns;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Model
@@ -29,6 +31,7 @@ trait SerializeDate
         // return $date->format('Y-m-d H:i:s.vP');
         // return $date->format('Y-m-d H:i:sP');
 
+        /** @var \Illuminate\Support\Carbon $date */
         return $date->inAppTimezone()->format($this->getDateFormat());
     }
 }

@@ -22,29 +22,34 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 /**
+ * @see https://dev.mysql.com/doc/refman/5.7/en/index-hints.html
+ *
  * @method static Builder|Model forceIndex(array|string[] $indexes, string $for = '', string $as = '')
  * @method static Builder|Model useIndex(string|string[] $indexes, string $for = '', string $as = '')
  * @method static Builder|Model ignoreIndex(array|string[] $indexes, string $for = '', string $as = '')
- * @method static Builder|Model getTable()
  *
  * @mixin \Illuminate\Database\Eloquent\Model
- *
- * @see https://dev.mysql.com/doc/refman/5.7/en/index-hints.html
  */
 trait IndexHintsable
 {
-    protected $forceIndexes = [];
-    protected $useIndexes = [];
-    protected $ignoreIndexes = [];
-    protected $preparedIndexes = '';
+    protected array $forceIndexes = [];
+    protected array $useIndexes = [];
+    protected array $ignoreIndexes = [];
+    protected string $preparedIndexes = '';
 
     /**
      * @param list<string>|string $indexes
      * @param string $for JOIN|ORDER BY|GROUP BY
+     *
+     * @throws \Throwable
      */
     public function scopeForceIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
-        throw_if(Str::contains($this->preparedIndexes, 'USE'), \InvalidArgumentException::class, 'It is an error to mix USE INDEX and FORCE INDEX for the same table.');
+        throw_if(
+            Str::contains($this->preparedIndexes, 'USE'),
+            \InvalidArgumentException::class,
+            'It is an error to mix USE INDEX and FORCE INDEX for the same table.'
+        );
 
         if (!$this->tableIndexExists($indexes, 'force')) {
             return $query;
@@ -63,10 +68,16 @@ trait IndexHintsable
 
     /**
      * @param list<string>|string $indexes
+     *
+     * @throws \Throwable
      */
     public function scopeUseIndex(Builder $query, array|string $indexes, string $for = '', string $as = ''): Builder
     {
-        throw_if(Str::contains($this->preparedIndexes, 'FORCE'), \Exception::class, 'However, it is an error to mix USE INDEX and FORCE INDEX for the same table:');
+        throw_if(
+            Str::contains($this->preparedIndexes, 'FORCE'),
+            \Exception::class,
+            'However, it is an error to mix USE INDEX and FORCE INDEX for the same table:'
+        );
 
         if (!$this->tableIndexExists($indexes, 'use')) {
             return $query;
@@ -109,8 +120,8 @@ trait IndexHintsable
             return;
         }
 
-        $this->preparedIndexes = self::getTable();
-        $this->preparedIndexes .= empty($as) ? '' : " {$as}";
+        $this->preparedIndexes = $this->getTable();
+        $this->preparedIndexes .= empty($as) ? '' : " $as";
     }
 
     /**
@@ -121,8 +132,7 @@ trait IndexHintsable
         foreach (Arr::wrap($indexes) as $index) {
             $index = strtolower($index);
 
-            /** @noinspection PhpVoidFuqnctionResultUsedInspection */
-            Schema::table(self::getTable(), fn (Blueprint $table) => $this->fillIndexes($table, $index, $type));
+            Schema::table($this->getTable(), fn (Blueprint $table) => $this->fillIndexes($table, $index, $type));
         }
 
         return !empty($this->forceIndexes) || !empty($this->ignoreIndexes) || !empty($this->useIndexes);
@@ -130,6 +140,11 @@ trait IndexHintsable
 
     protected function fillIndexes(Blueprint $table, string $index, string $type): void
     {
+        /**
+         * @see \App\Support\Mixins\BlueprintMixin::hasIndex
+         *
+         * @noinspection PhpUndefinedMethodInspection
+         */
         if (!$table->hasIndex($index)) {
             return;
         }

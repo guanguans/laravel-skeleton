@@ -26,6 +26,8 @@ trait Trashed
     /**
      * Scope a query to get with transed or only transhed resource.
      *
+     * @noinspection PhpStaticAsDynamicMethodCallInspection
+     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */

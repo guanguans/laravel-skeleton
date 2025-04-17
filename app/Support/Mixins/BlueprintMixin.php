@@ -74,7 +74,7 @@ class BlueprintMixin
         return function (string $index): bool {
             $schemaManager = Schema::getConnection()->getDoctrineSchemaManager();
 
-            return $schemaManager->listTableDetails($this->getTable())->hasIndex($index);
+            return $schemaManager->introspectTable($this->getTable())->hasIndex($index);
         };
     }
 

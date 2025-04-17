@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection ClassOverridesFieldOfSuperClassInspection */
+
 declare(strict_types=1);
 
 /**
@@ -38,6 +40,9 @@ class JWTUser extends User implements JWTSubject
         return $this->only(['id', 'name']);
     }
 
+    /**
+     * @see https://laravel-jwt-auth.readthedocs.io/en/latest/quick-start/
+     */
     public static function wrapToken(#[\SensitiveParameter] string $token): array
     {
         /** @noinspection PhpParamsInspection */

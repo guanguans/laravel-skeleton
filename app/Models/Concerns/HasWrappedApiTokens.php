@@ -17,11 +17,12 @@ use Jenssegers\Agent\Facades\Agent;
 use Laravel\Sanctum\NewAccessToken;
 
 /**
- * @mixin \App\Models\User
+ * @mixin \Illuminate\Database\Eloquent\Model
+ * @mixin \Laravel\Sanctum\HasApiTokens
  */
-trait HasWrapedApiTokens
+trait HasWrappedApiTokens
 {
-    public static function wrapToken(string $token): array
+    public static function wrapToken(#[\SensitiveParameter] string $token): array
     {
         return [
             'access_token' => $token,

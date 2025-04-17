@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection ClassOverridesFieldOfSuperClassInspection */
+/** @noinspection EmptyClassInspection */
+
 declare(strict_types=1);
 
 /**

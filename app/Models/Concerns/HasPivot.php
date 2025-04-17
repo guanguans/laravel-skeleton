@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @see https://gist.github.com/bolechen/0c634a18d46a2aedbeb518a8176f8473
+ *
+ * @mixin \Illuminate\Database\Eloquent\Model
  */
 trait HasPivot
 {

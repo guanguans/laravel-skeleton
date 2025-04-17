@@ -17,8 +17,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PivotWithCreatorPivot extends Pivot
 {
-    #[\Override]
-    public function fill(array $attributes)
+    public function fill(array $attributes): self
     {
         return parent::fill([...$attributes, 'creator_id' => $attributes['creator_id'] ?? auth()->id()]);
     }

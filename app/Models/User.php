@@ -41,7 +41,11 @@ class User extends Authenticatable
     use Notifiable;
     use SerializeDate;
 
-    /** The model's default values for attributes. */
+    /**
+     * The model's default values for attributes.
+     *
+     * @noinspection PropertyInitializationFlawsInspection
+     */
     protected $attributes = [
         // 'options' => '[]',
         // 'delayed' => false,
@@ -62,6 +66,8 @@ class User extends Authenticatable
 
     /**
      * {@inheritDoc}
+     *
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     public function newEloquentBuilder($query): Builder
@@ -76,15 +82,12 @@ class User extends Authenticatable
     }
 
     /**
-     * Retrieve the model for a bound value.
+     * {@inheritDoc}
      *
-     * @param mixed $value
-     * @param null|string $field
-     *
-     * @return null|\Illuminate\Database\Eloquent\Model
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    public function resolveRouteBinding($value, $field = null)
+    public function resolveRouteBinding($value, $field = null): self
     {
         return $this->where('id', $value)->firstOrFail();
     }
@@ -122,10 +125,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * @noinspection PhpMissingParentCallCommonInspection
      */
+    #[\Override]
     protected function casts(): array
     {
         return [
