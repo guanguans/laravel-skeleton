@@ -21,7 +21,6 @@ use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Config\Repository;
-use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Log\Logger;
@@ -52,39 +51,33 @@ abstract class AbstractClient
     use Tappable;
     protected Repository $configRepository;
     private ?string $userAgent = null;
-    private Factory $httpFactory;
     private PendingRequest $pendingRequest;
 
     public function __construct(array $config)
     {
         $this->configRepository = new Repository($this->validateConfig($config));
-        $this->httpFactory = Http::getFacadeRoot();
         $this->pendingRequest = $this->buildPendingRequest($this->defaultPendingRequest());
     }
 
     /**
+     * @see \Illuminate\Http\Client\Factory::__call()
      * @see \Spatie\QueryBuilder\QueryBuilder::__call()
-     *
-     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      *
      * @return mixed|PendingRequest|Response|static
      */
     public function __call(string $name, array $arguments): mixed
     {
-        $result = $this->forwardCallTo($this->pendingRequest, $name, $arguments);
-
-        if ($result === $this->pendingRequest) {
-            return $this;
-        }
-
-        return $result;
+        return $this->forwardCallTo($this->pendingRequest(), $name, $arguments);
     }
 
     public function pendingRequest(?callable $callback = null): PendingRequest
     {
         return tap(
             tap(clone $this->pendingRequest, function (PendingRequest $pendingRequest): void {
-                $pendingRequest->stub((fn (): Collection => $this->stubCallbacks)->call($this->httpFactory));
+                /** @see \Illuminate\Http\Client\Factory::createPendingRequest() */
+                $pendingRequest
+                    ->stub((fn (): Collection => $this->stubCallbacks)->call(Http::getFacadeRoot()))
+                    ->preventStrayRequests(Http::preventingStrayRequests());
             }),
             $callback ?? static fn (): null => null
         );
@@ -125,9 +118,7 @@ abstract class AbstractClient
 
     private function defaultPendingRequest(): PendingRequest
     {
-        return $this
-            ->httpFactory
-            ->baseUrl($this->configRepository->get('base_url'))
+        return Http::baseUrl($this->configRepository->get('base_url'))
             ->acceptJson()
             ->when(
                 \defined('REQUEST_ID'),
@@ -223,7 +214,7 @@ abstract class AbstractClient
         }
 
         if (!$logger instanceof Logger) {
-            $logger = new Logger($logger, Event::getFacadeRoot());
+            $logger = new Logger($logger, Event::getFacadeRoot()); // @codeCoverageIgnore
         }
 
         return Middleware::log(

@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \Illuminate\Http\Client\Response messagePush(string $text, string $desp = '', string $type = 'markdown')
- * @method static \Illuminate\Http\Client\Response messageList(int $limit = 10)
  * @method static \Illuminate\Http\Client\PendingRequest pendingRequest(callable|null $callback = null)
  * @method static \App\Support\Clients\PushDeer|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \App\Support\Clients\PushDeer|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)

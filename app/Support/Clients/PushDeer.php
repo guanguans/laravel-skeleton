@@ -27,31 +27,13 @@ class PushDeer extends AbstractClient
      */
     public function messagePush(string $text, string $desp = '', string $type = 'markdown'): Response
     {
-        return $this->pendingRequest()->post(
-            'message/push',
-            $this->validate(
-                [
-                    'text' => $text,
-                    'desp' => $desp,
-                    'type' => $type,
-                ],
-                [
-                    'text' => 'required|string',
-                    'desp' => 'string',
-                    'type' => 'in:markdown,text,image',
-                ]
-            )
-        );
-    }
-
-    /**
-     * @throws \Illuminate\Http\Client\ConnectionException
-     */
-    public function messageList(int $limit = 10): Response
-    {
-        return $this->pendingRequest()->post('message/list', $this->validate(
-            ['limit' => $limit],
-            ['limit' => 'int']
+        return $this->pendingRequest()->post('message/push', $this->validate(
+            ['text' => $text, 'desp' => $desp, 'type' => $type],
+            [
+                'text' => 'required|string',
+                'desp' => 'string',
+                'type' => 'in:markdown,text,image',
+            ]
         ));
     }
 
