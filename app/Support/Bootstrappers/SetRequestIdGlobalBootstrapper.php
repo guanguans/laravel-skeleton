@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -29,6 +31,8 @@ class SetRequestIdGlobalBootstrapper
 
     /**
      * Bootstrap the given application.
+     *
+     * @noinspection PhpUnusedParameterInspection
      */
     public function bootstrap(Application $app): void
     {

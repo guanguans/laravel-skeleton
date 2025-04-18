@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \App\Support\Clients\PushDeer|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \App\Support\Clients\PushDeer|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static void dd(mixed ...$args)
- * @method static \App\Support\Clients\FoundationSdk dump(mixed ...$args)
+ * @method static \App\Support\Clients\Client dump(mixed ...$args)
  * @method static void macro(string $name, object|callable $macro)
  * @method static void mixin(object $mixin, bool $replace = true)
  * @method static bool hasMacro(string $name)

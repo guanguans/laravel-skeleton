@@ -26,16 +26,12 @@ class OutOfMemoryBootstrapper
      * because this would have a big overhead on every request, instead of just
      * on shutdown in requests with errors.
      *
-     * @var null|string
+     * @noinspection PropertyCanBePrivateInspection
      */
-    protected $reservedMemory;
+    protected ?string $reservedMemory = null;
 
-    /**
-     * A regex that matches PHP OOM errors.
-     *
-     * @var string
-     */
-    protected $oomRegex = '/^Allowed memory size of (\d+) bytes exhausted \(tried to allocate \d+ bytes\)/';
+    /** A regex that matches PHP OOM errors. */
+    private string $oomRegex = '/^Allowed memory size of (\d+) bytes exhausted \(tried to allocate \d+ bytes\)/';
 
     /**
      * Allow Bugsnag to handle OOMs by registering a shutdown function that

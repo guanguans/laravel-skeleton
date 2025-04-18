@@ -25,7 +25,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @see http://www.pushdeer.com/dev.html
  */
-class PushDeer extends FoundationSdk
+class PushDeer extends Client
 {
     public function messagePush(string $text, string $desp = '', string $type = 'markdown'): Response
     {
