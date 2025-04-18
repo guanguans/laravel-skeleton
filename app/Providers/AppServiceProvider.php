@@ -24,9 +24,7 @@ use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Policies\UserPolicy;
 use App\Rules\Rule;
-use App\Support\Attributes\After;
 use App\Support\Attributes\Autowired;
-use App\Support\Attributes\Before;
 use App\Support\Attributes\Mixin;
 use App\Support\Mixins\BlueprintMixin;
 use App\Support\Mixins\CarbonMixin;
@@ -93,7 +91,6 @@ use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\ResponseFactory;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
@@ -136,7 +133,6 @@ use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Spatie\StructureDiscoverer\Data\DiscoveredClass;
 use Stillat\BladeDirectives\Support\Facades\Directive;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -858,92 +854,6 @@ class AppServiceProvider extends ServiceProvider
                         $throwable
                     );
                 }
-            }
-        });
-    }
-
-    private function bootAspects(): void
-    {
-        $classes = \Spatie\StructureDiscoverer\Discover::in(app_path())
-            ->classes()
-            ->custom(
-                static fn (
-                    DiscoveredClass $discoveredClass
-                ): bool => !$discoveredClass->isAbstract && !Str::endsWith($discoveredClass->name, ['(', '{', 'Controller'])
-            )
-            ->get();
-
-        collect($classes)->filter(class_exists(...))->each(function (string $class): void {
-            $reflectionClass = new \ReflectionClass($class);
-
-            $reflectionMethods = $reflectionClass->getMethods();
-
-            $condition = Arr::first(
-                $reflectionMethods,
-                static fn (
-                    \ReflectionMethod $reflection
-                ): bool => $reflection->getAttributes(Before::class) || $reflection->getAttributes(After::class)
-            );
-
-            if ($condition) {
-                $this->app->extend($class, static fn (object $object): object => new class($object, $reflectionMethods) {
-                    public function __construct(
-                        private readonly object $object,
-                        private readonly array $reflectionMethods,
-                    ) {}
-
-                    /**
-                     * @noinspection MissingReturnTypeInspection
-                     */
-                    public function __call(string $name, array $arguments)
-                    {
-                        if (method_exists($this->object, $name)) {
-                            $this->applyAttribute(Before::class, $name, $arguments);
-
-                            $ret = $this->object->{$name}(...$arguments);
-
-                            $this->applyAttribute(After::class, $name, [$ret, ...$arguments]);
-
-                            return $ret;
-                        }
-
-                        throw new \BadMethodCallException(
-                            \sprintf('The method [%s::%s()] does not exist.', $this->object::class, $name),
-                        );
-                    }
-
-                    public function __get(string $name): mixed
-                    {
-                        return $this->object->{$name};
-                    }
-
-                    public function __set(string $name, mixed $value): void
-                    {
-                        $this->object->{$name} = $value;
-                    }
-
-                    public function __isset(string $name): bool
-                    {
-                        return isset($this->object->{$name});
-                    }
-
-                    public function __unset(string $name): void
-                    {
-                        unset($this->object->{$name});
-                    }
-
-                    private function applyAttribute(string $attribute, string $name, array $arguments): void
-                    {
-                        $reflectionAttributes = Arr::first(
-                            $this->reflectionMethods,
-                            static fn (\ReflectionMethod $reflectionMethod): bool => $reflectionMethod->getName() === $name
-                        )->getAttributes($attribute);
-
-                        foreach ($reflectionAttributes as $reflectionAttribute) {
-                            app()->call($reflectionAttribute->newInstance()->callback, $arguments);
-                        }
-                    }
-                });
             }
         });
     }

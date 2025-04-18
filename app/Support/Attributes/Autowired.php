@@ -17,6 +17,7 @@ namespace App\Support\Attributes;
  * @see https://github.com/top-think/think-annotation
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
+// #️⃣[\Attribute(\Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
 readonly class Autowired
 {
     public function __construct(
