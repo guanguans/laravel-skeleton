@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Clients\OpenAI;
 use App\Support\Clients\PushDeer;
 use Faker\Factory;
 use Faker\Generator;
@@ -49,7 +48,6 @@ class ExtendServiceProvider extends ServiceProvider
     #[\Override]
     public function register(): void
     {
-        $this->registerOpenAI();
         $this->registerPushDeer();
         $this->registerFaker();
     }
@@ -79,27 +77,15 @@ class ExtendServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            OpenAI::class, 'openai',
             PushDeer::class, 'pushdeer',
         ];
-    }
-
-    private function registerOpenAI(): void
-    {
-        $this->app->singleton(
-            OpenAI::class,
-            static fn (Application $application): OpenAI => new OpenAI($application->make(Repository::class)
-                ->make('services.openai'))
-        );
-        $this->app->alias(OpenAI::class, 'openai');
     }
 
     private function registerPushDeer(): void
     {
         $this->app->singleton(
             PushDeer::class,
-            static fn (Application $application): PushDeer => new PushDeer($application->make(Repository::class)
-                ->make('services.pushdeer'))
+            static fn (Application $application): PushDeer => new PushDeer($application->make(Repository::class)->get('services.pushdeer'))
         );
         $this->app->alias(PushDeer::class, 'pushdeer');
     }

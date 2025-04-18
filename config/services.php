@@ -52,32 +52,6 @@ return [
         ],
     ],
 
-    'chatgpt' => [
-        'http_options' => [
-            'connect_timeout' => 3,
-            'timeout' => 60,
-        ],
-        'session_token' => env('CHATGPT_SESSION_TOKEN', ''),
-    ],
-
-    'openai' => [
-        'http_options' => [
-            'connect_timeout' => 3,
-            'timeout' => 60,
-        ],
-        'api_key' => env('OPENAI_API_KEY', ''),
-    ],
-
-    'pushdeer' => [
-        'http_options' => [
-            'connect_timeout' => 3,
-            'timeout' => 30,
-        ],
-        'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com'),
-        'key' => env('PUSHDEER_KEY'),
-        'token' => env('PUSHDEER_TOKEN', 'token'),
-    ],
-
     'elasticsearch' => [
         'default' => env('ELASTICSEARCH_DEFAULT', 'read'),
         'quiet' => false,
@@ -99,8 +73,13 @@ return [
         ],
     ],
 
-    'pushbullet' => [
-        'access_token' => env('PUSHBULLET_ACCESS_TOKEN'),
+    'pushdeer' => [
+        'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com'),
+        'key' => env('PUSHDEER_KEY'),
+        'http_options' => [
+            // RequestOptions::CONNECT_TIMEOUT => 10,
+            // RequestOptions::TIMEOUT => 30,
+        ],
     ],
 
     'autowired' => [
