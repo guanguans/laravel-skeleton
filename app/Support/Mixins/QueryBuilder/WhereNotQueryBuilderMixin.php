@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Support\Mixins\QueryBuilder;
 
 use App\Support\Attributes\Mixin;
+use Illuminate\Contracts\Database\Query\Builder as ContractBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
@@ -34,7 +35,7 @@ use Illuminate\Support\Facades\DB;
 class WhereNotQueryBuilderMixin
 {
     /** The count for each table. */
-    protected static array $tableSubCount = [];
+    private static array $tableSubCount = [];
 
     public static function whereNot(): callable
     {
@@ -66,9 +67,10 @@ class WhereNotQueryBuilderMixin
             /** @var \Illuminate\Database\Eloquent\Builder $builder */
             $builder = $this;
 
-            return $builder->whereNotExists(static function (\Illuminate\Contracts\Database\Query\Builder $query) use ($callable, $builder): void {
+            return $builder->whereNotExists(static function (ContractBuilder $query) use ($builder, $callable): void {
                 // Create a new Eloquent Query Builder with the given Query Builder and
                 // set the model from the original builder.
+                /** @noinspection PhpParamsInspection */
                 $query = new Builder($query);
                 $query->setModel($model = $builder->getModel());
 
@@ -83,7 +85,7 @@ class WhereNotQueryBuilderMixin
 
                     $count = static::$tableSubCount[$table]++;
 
-                    return "where_not_{$count}_{$table}";
+                    return "where_not_{$count}_$table";
                 });
                 $aliasedModel = $query->newModelInstance()->setTable($aliasedTable);
 
@@ -94,7 +96,7 @@ class WhereNotQueryBuilderMixin
                     ->from($originalTable, $aliasedTable)
                     ->whereColumn($aliasedModel->getQualifiedKeyName(), $qualifiedKeyName)
                     ->limit(1)
-                    ->tap(static fn (\Illuminate\Contracts\Database\Query\Builder $query) => $callable($query));
+                    ->tap(static fn (ContractBuilder $query) => $callable($query));
             });
         };
     }

@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMethodParametersCountMismatchInspection */
+
 declare(strict_types=1);
 
 /**
@@ -54,12 +56,12 @@ class WhereFullTextQueryBuilderMixin
     public function orWhereFullText(): callable
     {
         /*
-         * Add a "or where fulltext" clause to the query.
+         * Add an "or where fulltext" clause to the query.
          *
          * @param  string|string[]  $columns
          * @param  string  $value
          * @return $this|callable
          */
-        return fn ($columns, $value, array $options = []): callable => $this->whereFulltext($columns, $value, $options, 'or');
+        return fn ($columns, $value, array $options = []): callable => $this->whereFullText($columns, $value, $options, 'or');
     }
 }

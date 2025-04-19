@@ -95,7 +95,6 @@ class QueryBuilderMixin
             foreach ($rows as $row) {
                 $values = array_values($row);
 
-                /** @noinspection OffsetOperationsInspection */
                 $result[$values[0]] = $values[1];
             }
 

@@ -36,6 +36,9 @@ class ResponseFactoryMixin
      *     1024
      * );
      * ```.
+     *
+     * @noinspection SensitiveParameterInspection
+     * @noinspection PhpTooManyParametersInspection
      */
     public function streamRemoteDownload(): \Closure
     {

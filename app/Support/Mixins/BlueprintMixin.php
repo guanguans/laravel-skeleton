@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMethodParametersCountMismatchInspection */
+
 declare(strict_types=1);
 
 /**
@@ -81,7 +83,6 @@ class BlueprintMixin
     public function dropIndexIfExists(): \Closure
     {
         return function (string $index): Fluent {
-            /** @var \Illuminate\Database\Schema\Blueprint $this */
             if ($this->hasIndex($index)) {
                 return $this->dropIndex($index);
             }

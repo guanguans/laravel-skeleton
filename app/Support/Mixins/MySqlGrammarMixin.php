@@ -23,7 +23,7 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 #[Mixin(MySqlGrammar::class)]
 class MySqlGrammarMixin
 {
-    public function whereFulltext(): callable
+    public function whereFullText(): callable
     {
         /*
          * Compile a "where fulltext" clause.
@@ -45,7 +45,7 @@ class MySqlGrammarMixin
             ? ' with query expansion'
             : '';
 
-            return "match ({$columns}) against (".$value."{$mode}{$expanded})";
+            return "match ($columns) against (".$value."$mode$expanded)";
         };
     }
 }

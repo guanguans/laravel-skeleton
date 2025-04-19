@@ -1,5 +1,9 @@
 <?php
 
+/** @noinspection PhpUndefinedMethodInspection */
+
+/** @noinspection PhpMethodParametersCountMismatchInspection */
+
 declare(strict_types=1);
 
 /**
@@ -31,27 +35,27 @@ class StringableMixin
     public function appendIf(): callable
     {
         return fn ($suffix): Stringable => new Stringable(
-            Str::appendIf($this->__toString(), $suffix)
+            Str::appendIf((string) $this, $suffix)
         );
     }
 
     public function prependIf(): callable
     {
         return fn ($prefix): Stringable => new Stringable(
-            Str::prependIf($this->__toString(), $prefix)
+            Str::prependIf((string) $this, $prefix)
         );
     }
 
     public function mbSubstrCount(): callable
     {
         return fn ($needle, $encoding = null): Stringable => new Stringable(
-            Str::mbSubstrCount($this->__toString(), $needle, $encoding)
+            Str::mbSubstrCount((string) $this, $needle, $encoding)
         );
     }
 
     public function get(): callable
     {
-        return fn () => $this->__toString();
+        return fn () => (string) $this;
     }
 
     public function acronym(): callable

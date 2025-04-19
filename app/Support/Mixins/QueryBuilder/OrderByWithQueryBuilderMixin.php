@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMethodParametersCountMismatchInspection */
+
 declare(strict_types=1);
 
 /**
@@ -28,6 +30,11 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 #[Mixin(RelationBuilder::class)]
 class OrderByWithQueryBuilderMixin
 {
+    public function orderByWithDesc(): callable
+    {
+        return fn ($relation, $column): callable => $this->orderByWith($relation, $column, 'desc');
+    }
+
     public function orderByWith(): callable
     {
         return function ($relation, $column, $direction = 'asc') {
@@ -35,7 +42,6 @@ class OrderByWithQueryBuilderMixin
                 $relation = $this->getRelationWithoutConstraints($relation);
             }
 
-            /** @noinspection PhpParamsInspection */
             return $this->orderBy(
                 $relation->getRelationExistenceQuery(
                     $relation->getRelated()->newQueryWithoutRelationships(),
@@ -45,10 +51,5 @@ class OrderByWithQueryBuilderMixin
                 $direction
             );
         };
-    }
-
-    public function orderByWithDesc(): callable
-    {
-        return fn ($relation, $column): callable => $this->orderByWith($relation, $column, 'desc');
     }
 }

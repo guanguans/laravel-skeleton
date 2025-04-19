@@ -40,12 +40,12 @@ class GrammarMixin
             'mysql' => \sprintf(
                 'alter table %s comment = %s',
                 $this->wrapTable($blueprint),
-                "'".str_replace("'", "''", $command->comment)."'"
+                "'".str_replace("'", "''", $command->get('comment'))."'"
             ),
             'pgsql' => \sprintf(
                 'comment on table %s is %s',
                 $this->wrapTable($blueprint),
-                "'".str_replace("'", "''", $command->comment)."'"
+                "'".str_replace("'", "''", $command->get('comment'))."'"
             ),
             default => throw new \RuntimeException('The database driver in use does not support table comment.'),
         };

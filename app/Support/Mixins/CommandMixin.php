@@ -29,6 +29,8 @@ use Symfony\Component\Process\Process;
  * @mixin \Illuminate\Console\Command
  *
  * @see https://github.com/nunomaduro/laravel-console-task
+ *
+ * @method toSymfonyProcess(null|array|string $command)
  */
 #[Mixin(Command::class)]
 class CommandMixin
