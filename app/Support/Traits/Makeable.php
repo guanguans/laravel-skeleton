@@ -13,22 +13,15 @@ declare(strict_types=1);
 
 namespace App\Support\Traits;
 
-trait CreateStaticable
+/**
+ * @see \DragonCode\Support\Concerns\Makeable
+ */
+trait Makeable
 {
-    public static function create(...$parameters): static
-    {
-        return static::new(...$parameters);
-    }
-
-    public static function make(...$parameters): static
-    {
-        return static::new(...$parameters);
-    }
-
     /**
      * @noinspection PhpMethodParametersCountMismatchInspection
      */
-    public static function new(...$parameters): static
+    public static function make(...$parameters): static
     {
         return new static(...$parameters);
     }

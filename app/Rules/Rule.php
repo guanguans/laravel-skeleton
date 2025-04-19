@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-use App\Support\Traits\CreateStaticable;
+use App\Support\Traits\Makeable;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Str;
 use Illuminate\Translation\PotentiallyTranslatedString;
@@ -23,7 +23,7 @@ use Illuminate\Validation\Concerns\ValidatesAttributes;
 
 abstract class Rule implements ValidationRule
 {
-    use CreateStaticable;
+    use Makeable;
     // use ValidatesAttributes;
 
     public bool $implicit = false;

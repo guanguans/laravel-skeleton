@@ -17,12 +17,12 @@ use function DeepCopy\deep_copy;
 
 trait Copyable
 {
-    public function copy()
+    public function copy(): static
     {
         return clone $this;
     }
 
-    public function deepCopy()
+    public function deepCopy(): static
     {
         // return unserialize(serialize($this), [get_class($this)]);
         return deep_copy($this);
