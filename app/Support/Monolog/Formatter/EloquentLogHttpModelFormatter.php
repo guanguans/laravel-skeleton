@@ -42,6 +42,9 @@ class EloquentLogHttpModelFormatter extends NormalizerFormatter
             ]);
     }
 
+    /**
+     * @noinspection PhpSameParameterValueInspection
+     */
     private function strFor(mixed $value, int $options = 0, int $depth = 512): string
     {
         try {

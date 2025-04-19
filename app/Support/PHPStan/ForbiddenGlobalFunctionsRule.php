@@ -26,13 +26,19 @@ use PHPStan\Rules\RuleErrorBuilder;
 class ForbiddenGlobalFunctionsRule implements Rule
 {
     /** @var list<string> */
-    public const FORBIDDEN_FUNCTIONS = ['app', 'resolve'];
+    public const array FORBIDDEN_FUNCTIONS = [
+        'app',
+        'resolve',
+    ];
 
     public function getNodeType(): string
     {
         return FuncCall::class;
     }
 
+    /**
+     * @throws \PHPStan\ShouldNotHappenException
+     */
     public function processNode(Node $node, Scope $scope): array
     {
         /** @var FuncCall $node */

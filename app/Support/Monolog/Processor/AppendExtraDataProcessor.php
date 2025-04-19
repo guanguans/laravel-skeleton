@@ -24,12 +24,11 @@ use Monolog\Processor\ProcessorInterface;
  * @see https://github.com/creitive/monolog-extra-data-processor
  * @see https://github.com/WyriHaximus/php-monolog-processors
  */
-class AppendExtraDataProcessor implements ProcessorInterface
+readonly class AppendExtraDataProcessor implements ProcessorInterface
 {
-    public function __construct(private readonly array $extraData) {}
+    public function __construct(private array $extraData) {}
 
-    #[\Override]
-    public function __invoke(LogRecord $record)
+    public function __invoke(LogRecord $record): LogRecord
     {
         $record['extra'] += $this->extraData;
 
