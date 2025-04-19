@@ -23,7 +23,7 @@ namespace App\Support;
  * @see https://github.com/cycle/database/tree/2.x/src/Config
  * @see \Guanguans\LaravelApiResponse\Support\Traits\SetStateable
  */
-final readonly class AutoWire
+final readonly class Autowire
 {
     /**
      * @param array<string, mixed> $parameters
