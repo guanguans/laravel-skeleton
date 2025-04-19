@@ -274,6 +274,7 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
+            __DIR__.'/app/Support/Clients/AbstractClient.php',
             __DIR__.'/app/Support/Mixins/',
         ],
         RemoveExtraParametersRector::class => $mixinsPath,

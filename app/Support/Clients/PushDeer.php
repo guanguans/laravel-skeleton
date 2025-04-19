@@ -27,7 +27,7 @@ class PushDeer extends AbstractClient
      */
     public function messagePush(string $text, string $desp = '', string $type = 'markdown'): Response
     {
-        return $this->pendingRequest()->post('message/push', $this->validate(
+        return $this->clonePendingRequest()->post('message/push', $this->validate(
             ['text' => $text, 'desp' => $desp, 'type' => $type],
             [
                 'text' => 'required|string',
@@ -37,26 +37,19 @@ class PushDeer extends AbstractClient
         ));
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
-    protected function rules(): array
+    protected function configRules(): array
     {
         return [
             'key' => 'required|string',
         ];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
-    protected function buildPendingRequest(PendingRequest $pendingRequest): PendingRequest
+    protected function extendPendingRequest(PendingRequest $pendingRequest): PendingRequest
     {
         return $pendingRequest
             ->throw()
-            ->asJson()
             ->withOptions([
                 RequestOptions::JSON => [
                     'pushkey' => $this->configRepository->get('key'),

@@ -22,10 +22,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Config\Repository;
 use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Http\Client\Response;
-use Illuminate\Log\Logger;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Traits\Conditionable;
@@ -35,7 +32,6 @@ use Illuminate\Support\Traits\Localizable;
 use Illuminate\Support\Traits\Tappable;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * @property \Illuminate\Support\Collection $stubCallbacks
@@ -44,8 +40,8 @@ use Psr\Log\LoggerInterface;
  */
 abstract class AbstractClient
 {
-    // use Dumpable;
     use Conditionable;
+    use Dumpable;
     use ForwardsCalls;
     use Localizable;
     use Tappable;
@@ -56,34 +52,66 @@ abstract class AbstractClient
     public function __construct(array $config)
     {
         $this->configRepository = new Repository($this->validateConfig($config));
-        $this->pendingRequest = $this->buildPendingRequest($this->defaultPendingRequest());
+        $this->pendingRequest = $this->extendPendingRequest($this->defaultPendingRequest());
     }
 
     /**
      * @see \Illuminate\Http\Client\Factory::__call()
      * @see \Spatie\QueryBuilder\QueryBuilder::__call()
      *
-     * @return mixed|PendingRequest|Response|static
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
+     *
+     * @return mixed|PendingRequest|static
      */
     public function __call(string $name, array $arguments): mixed
     {
-        return $this->forwardCallTo($this->pendingRequest(), $name, $arguments);
+        $result = $this->forwardCallTo($this->pendingRequest(), $name, $arguments);
+
+        if ($result === $this->pendingRequest) {
+            return $this;
+        }
+
+        return $result;
     }
 
-    public function pendingRequest(?callable $callback = null): PendingRequest
+    public function ddPendingRequest(mixed ...$args): static
+    {
+        $this->pendingRequest()->dd(...$args);
+
+        return $this;
+    }
+
+    public function dumpPendingRequest(mixed ...$args): static
+    {
+        $this->pendingRequest()->dump(...$args);
+
+        return $this;
+    }
+
+    public function clonePendingRequest(?callable $callback = null): PendingRequest
+    {
+        return $this->pendingRequest($callback, true);
+    }
+
+    public function pendingRequest(?callable $callback = null, bool $clone = false): PendingRequest
     {
         return tap(
-            tap(clone $this->pendingRequest, function (PendingRequest $pendingRequest): void {
-                /** @see \Illuminate\Http\Client\Factory::createPendingRequest() */
-                $pendingRequest
-                    ->stub((fn (): Collection => $this->stubCallbacks)->call(Http::getFacadeRoot()))
-                    ->preventStrayRequests(Http::preventingStrayRequests());
-            }),
+            tap(
+                $clone ? clone $this->pendingRequest : $this->pendingRequest,
+                function (PendingRequest $pendingRequest): void {
+                    /** @see \Illuminate\Http\Client\Factory::createPendingRequest() */
+                    $pendingRequest
+                        ->stub((fn (): Collection => $this->stubCallbacks)->call(Http::getFacadeRoot()))
+                        ->preventStrayRequests(Http::preventingStrayRequests());
+                }
+            ),
             $callback ?? static fn (): null => null
         );
     }
 
-    abstract protected function buildPendingRequest(PendingRequest $pendingRequest): PendingRequest;
+    abstract protected function configRules(): array;
+
+    abstract protected function extendPendingRequest(PendingRequest $pendingRequest): PendingRequest;
 
     /**
      * @throws \Illuminate\Validation\ValidationException
@@ -93,25 +121,33 @@ abstract class AbstractClient
         return validator($data, $rules, $messages, $customAttributes)->validate();
     }
 
+    protected function requestId(): ?string
+    {
+        return \defined('REQUEST_ID') ? REQUEST_ID : null;
+    }
+
     /**
+     * @noinspection OffsetOperationsInspection
+     *
      * @return array<string, scalar>
      */
-    protected function userAgent(): array
+    protected function userAgentItems(): array
+    {
+        return [
+            'laravel' => InstalledVersions::getPrettyVersion('laravel/framework'),
+            'guzzle' => InstalledVersions::getPrettyVersion('guzzlehttp/guzzle'),
+            'curl' => (curl_version() ?: ['version' => 'unknown'])['version'],
+            'PHP' => \PHP_VERSION,
+            \PHP_OS => php_uname('r'),
+        ];
+    }
+
+    protected function configMessages(): array
     {
         return [];
     }
 
-    protected function rules(): array
-    {
-        return [];
-    }
-
-    protected function messages(): array
-    {
-        return [];
-    }
-
-    protected function attributes(): array
+    protected function configAttributes(): array
     {
         return [];
     }
@@ -119,15 +155,19 @@ abstract class AbstractClient
     private function defaultPendingRequest(): PendingRequest
     {
         return Http::baseUrl($this->configRepository->get('base_url'))
-            ->acceptJson()
             ->when(
-                \defined('REQUEST_ID'),
-                /** @phpstan-ignore-next-line */
-                static fn (PendingRequest $pendingRequest) => $pendingRequest->withHeader('X-Request-Id', REQUEST_ID)
+                $this->requestId(),
+                static fn (
+                    PendingRequest $pendingRequest,
+                    string $requestId
+                ) => $pendingRequest->withHeader('X-Request-Id', $requestId)
             )
             ->when(
                 $this->getUserAgent(),
-                static fn (PendingRequest $pendingRequest, string $userAgent) => $pendingRequest->withUserAgent($userAgent)
+                static fn (
+                    PendingRequest $pendingRequest,
+                    string $userAgent
+                ) => $pendingRequest->withUserAgent($userAgent)
             )
             ->withOptions($this->configRepository->get('http_options'))
             ->retry(
@@ -149,31 +189,36 @@ abstract class AbstractClient
     {
         return $this->validate(
             array_replace_recursive($this->defaultConfig(), $config),
-            $this->rules() + $this->defaultRules(),
-            $this->messages(),
-            $this->attributes()
+            $this->configRules() + $this->defaultConfigRules(),
+            $this->configMessages(),
+            $this->configAttributes()
         );
     }
 
     private function defaultConfig(): array
     {
         return [
-            'base_url' => null,
-            'logger' => null,
+            // 'base_url' => null,
+            'logger' => 'null',
             'http_options' => [
                 // RequestOptions::CONNECT_TIMEOUT => 10,
                 // RequestOptions::TIMEOUT => 30,
             ],
+            /**
+             * @see PendingRequest::retry()
+             * @see PendingRequest::$tries
+             */
             'retry' => [
                 'times' => 1,
-                'sleep' => 1000,
-                'when' => static fn (\Throwable $throwable): bool => $throwable instanceof ConnectException,
+                'sleep' => 100,
+                // 'when' => static fn (\Throwable $throwable): bool => $throwable instanceof ConnectException,
+                'when' => null,
                 'throw' => true,
             ],
         ];
     }
 
-    private function defaultRules(): array
+    private function defaultConfigRules(): array
     {
         return [
             'base_url' => 'required|string',
@@ -185,42 +230,13 @@ abstract class AbstractClient
 
     private function getUserAgent(): string
     {
-        return $this->userAgent ??= collect($this->userAgent() + $this->defaultUserAgent())
-            ->reject(static fn (mixed $value): bool => null === $value)
+        return $this->userAgent ??= collect($this->userAgentItems())
             ->map(static fn (mixed $value, string $name): string => "$name/$value")
             ->implode(' ');
     }
 
-    /**
-     * @noinspection OffsetOperationsInspection
-     */
-    private function defaultUserAgent(): array
+    private function makeLoggerMiddleware(?string $logger = null): callable
     {
-        return [
-            'guzzle' => InstalledVersions::getPrettyVersion('guzzlehttp/guzzle'),
-            'curl' => (curl_version() ?: ['version' => 'unknown'])['version'],
-            'PHP' => \PHP_VERSION,
-            \PHP_OS => php_uname('r'),
-        ];
-    }
-
-    private function makeLoggerMiddleware(
-        null|LoggerInterface|string $logger = null,
-        ?MessageFormatter $formatter = null,
-        string $logLevel = 'info'
-    ): callable {
-        if (!$logger instanceof LoggerInterface) {
-            $logger = Log::channel($logger);
-        }
-
-        if (!$logger instanceof Logger) {
-            $logger = new Logger($logger, Event::getFacadeRoot()); // @codeCoverageIgnore
-        }
-
-        return Middleware::log(
-            $logger,
-            $formatter ?? new MessageFormatter(MessageFormatter::DEBUG),
-            $logLevel
-        );
+        return Middleware::log(Log::channel($logger), new MessageFormatter(MessageFormatter::DEBUG));
     }
 }

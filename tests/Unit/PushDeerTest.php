@@ -55,7 +55,7 @@ it('can push message', function (): void {
     Http::fake([
         '*://api2.pushdeer.com/message/no-content' => Http::response(status: 204),
     ]);
-    PushDeer::get('message/no-content');
+    PushDeer::asJson()->get('message/no-content');
     Http::assertSentCount(1);
     Http::assertSent(
         fn (Request $request, Response $response): bool => $request->isJson()
