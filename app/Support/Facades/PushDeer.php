@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpFullyQualifiedNameUsageInspection */
+
 declare(strict_types=1);
 
 /**
@@ -32,8 +34,11 @@ use Illuminate\Support\Facades\Facade;
  */
 class PushDeer extends Facade
 {
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return \App\Support\Clients\PushDeer::class;
     }

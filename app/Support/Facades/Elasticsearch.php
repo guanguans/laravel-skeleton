@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpFullyQualifiedNameUsageInspection */
+
 declare(strict_types=1);
 
 /**
@@ -127,6 +129,9 @@ use Illuminate\Support\Facades\Facade;
  */
 class Elasticsearch extends Facade
 {
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
     protected static function getFacadeAccessor(): string
     {

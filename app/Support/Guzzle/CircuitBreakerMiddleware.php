@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support;
+namespace App\Support\Guzzle;
 
 use Ackintosh\Ganesha;
 use Ackintosh\Ganesha\GuzzleMiddleware;

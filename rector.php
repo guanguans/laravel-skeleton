@@ -97,7 +97,6 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         '**/vendor/*',
-        __DIR__.'/app/Support/Http/',
         __DIR__.'/bootstrap/cache/',
         __DIR__.'/resources/lang/',
         __FILE__,

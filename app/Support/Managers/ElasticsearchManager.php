@@ -45,6 +45,10 @@ class ElasticsearchManager extends Manager
     }
 
     /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     * @noinspection MissingParentCallInspection
+     *
+     * @throws \Throwable
      * @throws BindingResolutionException
      * @throws ConfigException
      */
@@ -57,7 +61,11 @@ class ElasticsearchManager extends Manager
 
         $driverKey = "services.elasticsearch.connections.$driver";
 
-        throw_unless($this->config->has($driverKey), InvalidArgumentException::class, "Connection [$driver] not supported.");
+        throw_unless(
+            $this->config->has($driverKey),
+            InvalidArgumentException::class,
+            "Connection [$driver] not supported."
+        );
 
         $config = $this->prepareConfig($this->config->get($driverKey));
 
@@ -91,6 +99,7 @@ class ElasticsearchManager extends Manager
                     \is_string($index) and $environment = $index;
                     \is_array($host) and isset($host['env']) and $environment = $host['env'];
 
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     return isset($environment) && !$this->container->environment($environment);
                 })
                 ->all();
