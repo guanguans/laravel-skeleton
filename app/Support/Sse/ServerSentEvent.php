@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpLackOfCohesionInspection */
+
 declare(strict_types=1);
 
 /**
@@ -103,7 +105,6 @@ class ServerSentEvent implements \Stringable
         $this->setData($data);
     }
 
-    #[\Override]
     public function __toString(): string
     {
         $event = [];
@@ -148,9 +149,9 @@ class ServerSentEvent implements \Stringable
             try {
                 // Echo server sent event.
                 $this->send();
-            } catch (CloseServerSentEventException $e) {
-                // $e->serverSentEvent?->sendContent();
-                $e->serverSentEvent?->send();
+            } catch (CloseServerSentEventException $closeServerSentEventException) {
+                // $closeServerSentEventException->serverSentEvent?->sendContent();
+                $closeServerSentEventException->serverSentEvent?->send();
 
                 return;
             } finally {

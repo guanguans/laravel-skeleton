@@ -1,5 +1,10 @@
 <?php
 
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpDocSignatureInspection */
+/** @noinspection EfferentObjectCouplingInspection */
+/** @noinspection MultipleReturnStatementsInspection */
+
 declare(strict_types=1);
 
 /**
@@ -48,7 +53,12 @@ use Webmozart\Assert\Assert;
 
 class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
 {
-    /** @var list<string> */
+    /**
+     * @var list<string>
+     *
+     * @noinspection PropertyCanBeStaticInspection
+     * @noinspection RedundantSuppression
+     */
     protected array $except = [
         '_*',
         '*_',
@@ -117,6 +127,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
      * @throws PoorDocumentationException
      * @throws ShouldNotHappenException
      */
+    #[\Override]
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
@@ -255,6 +266,9 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     }
 
     /**
+     * @noinspection MultipleReturnStatementsInspection
+     * @noinspection BadExceptionsProcessingInspection
+     *
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
     #[\Override]
@@ -310,7 +324,6 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         return false;
     }
 
-    #[\Override]
     public function configure(array $configuration): void
     {
         Assert::allStringNotEmpty($configuration);
@@ -333,7 +346,9 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         })($name));
 
         if ($node instanceof Name) {
-            $node->getParts()[\count($node->getParts()) - 1] = $renamer($node->getParts()[\count($node->getParts()) - 1]);
+            // $node->getParts()[\count($node->getParts()) - 1] = $renamer($node->getParts()[\count($node->getParts()) - 1]);
+            // return Name::concat($node->slice(0, -1), $renamer($node->getLast()));
+            $node->name = Name::concat($node->slice(0, -1), $renamer($node->getLast()))->name;
 
             return $node;
         }
@@ -628,7 +643,10 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         return false;
     }
 
-    protected function isSubclasses($object, array $classes): bool
+    /**
+     * @param class-string|object $object
+     */
+    protected function isSubclasses(object|string $object, array $classes): bool
     {
         if (!\is_object($object)) {
             return false;

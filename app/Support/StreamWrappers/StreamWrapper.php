@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMethodNamingConventionInspection */
+
 /** @noinspection PhpUnusedParameterInspection */
 
 declare(strict_types=1);
@@ -25,6 +27,8 @@ use App\Support\StreamWrappers\Concerns\HasContext;
  * @see \Symfony\Component\HttpClient\Response\StreamWrapper
  * @see \GuzzleHttp\Psr7\StreamWrapper
  * @see \Composer\BinProxyWrapper
+ *
+ * @noinspection PhpUndefinedNamespaceInspection
  */
 abstract class StreamWrapper
 {

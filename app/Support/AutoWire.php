@@ -20,6 +20,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  * @see https://github.com/lotyp
  * @see https://github.com/wayofdev
  * @see https://x.com/wlotyp
+ * @see \Guanguans\LaravelApiResponse\Support\Traits\SetStateable
  */
 final readonly class AutoWire
 {

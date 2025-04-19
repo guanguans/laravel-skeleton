@@ -41,6 +41,7 @@ class ClassHandleMethodRector extends AbstractRector
      * @throws PoorDocumentationException
      * @throws ShouldNotHappenException
      */
+    #[\Override]
     final public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
@@ -139,6 +140,8 @@ class ClassHandleMethodRector extends AbstractRector
             ));
         }
 
+        /** @noinspection PhpStatementHasEmptyBodyInspection */
+        /** @noinspection MissingOrEmptyGroupStatementInspection */
         if (
             collect($phpDocInfo->getParamTagValueNodes())
                 ->filter(static fn (ParamTagValueNode $paramTagValueNode) => str($paramTagValueNode)->is(

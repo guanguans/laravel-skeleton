@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection PhpMethodNamingConventionInspection */
+/** @noinspection PhpMissingParentCallCommonInspection */
+
 /** @noinspection MissingParentCallInspection */
 
 declare(strict_types=1);

@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection PhpMissingParentCallCommonInspection */
+/** @noinspection PhpMethodNamingConventionInspection */
+
 /** @noinspection MissingParentCallInspection */
 
 declare(strict_types=1);
@@ -133,6 +136,10 @@ class UserFileStreamWrapper extends StreamWrapper
     }
 
     /**
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
+     *
+     * @throws \Throwable
+     *
      * @return resource
      */
     #[\Override]
