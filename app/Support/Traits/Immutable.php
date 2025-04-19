@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Support\Traits;
 
 /**
+ * @see https://github.com/coralsio/laraship/blob/main/Corals/core/Foundation/Formatter/Immutable.php
+ *
  * The **immutable** trait is a combination of the {@see Disenchant},
  * {@see Uncloneable}, and {@see Unconstructable} traits. It is the perfect
  * foundation for immutable objects and disables all functionality that could

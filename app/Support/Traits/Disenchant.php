@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Support\Traits;
 
 /**
+ * @see https://github.com/coralsio/laraship/blob/main/Corals/core/Foundation/Formatter/Disenchant.php
+ *
  * The **disenchant** trait can be used to disable dynamic property interactions
  * of objects.
  *
@@ -38,7 +40,7 @@ trait Disenchant
     /**
      * @throws \Error
      */
-    final public function __isset(mixed $_)
+    final public function __isset(mixed $_): bool
     {
         throw new \Error('Cannot check if dynamic properties are set on immutable class '.static::class);
     }

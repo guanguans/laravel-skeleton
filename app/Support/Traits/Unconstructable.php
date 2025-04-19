@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Support\Traits;
 
 /**
+ * @see https://github.com/coralsio/laraship/blob/main/Corals/core/Foundation/Formatter/Unconstructable.php
+ *
  * The **unconstructable** trait can be used to disable the ability to construct
  * an instance with the `new` keyword. It is specifically useful to create
  * final abstract classes and thus avoiding problems with non-final classes in

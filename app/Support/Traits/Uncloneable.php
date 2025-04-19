@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Support\Traits;
 
 /**
+ * @see https://github.com/coralsio/laraship/blob/main/Corals/core/Foundation/Formatter/Uncloneable.php
+ *
  * The **uncloneable** trait can be used to disable the ability of cloning of
  * objects with the `clone` keyword. It is specifically useful to create
  * immutable classes where cloning makes no sense.
