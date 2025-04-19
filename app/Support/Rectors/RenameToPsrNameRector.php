@@ -124,10 +124,11 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     ];
 
     /**
+     * @noinspection OverrideMissingInspection
+     *
      * @throws PoorDocumentationException
      * @throws ShouldNotHappenException
      */
-    #[\Override]
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(

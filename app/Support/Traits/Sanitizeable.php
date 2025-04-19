@@ -16,9 +16,12 @@ namespace App\Support\Traits;
 use Illuminate\Support\Arr;
 
 /**
+ * @see https://github.com/apiato/core/blob/8.x/src/Traits/SanitizerTrait.php
+ *
  * @mixin \Illuminate\Http\Request
+ * @mixin \Illuminate\Foundation\Http\FormRequest
  */
-trait Sanitizerable
+trait Sanitizeable
 {
     /**
      * Sanitizes the data of a request. This is a superior version of php built-in array_filter() as it preserves
@@ -62,6 +65,8 @@ trait Sanitizerable
 
     /**
      * Recursively intersects 2 arrays based on their keys.
+     *
+     * @noinspection PhpVariableNamingConventionInspection
      *
      * @param array $a first array (that keeps the values)
      * @param array $b second array to be compared with

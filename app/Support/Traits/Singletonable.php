@@ -21,7 +21,7 @@ trait Singletonable
 
     final public function __wakeup(): void {}
 
-    public static function instance(...$parameters)
+    public static function instance(mixed ...$parameters): object
     {
         app()->singletonIf(static::class, static fn (): static => new static(...$parameters));
 

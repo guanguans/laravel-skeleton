@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace App\Support\Traits;
 
+/**
+ * @see \Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs
+ * @see \Guanguans\LaravelExceptionNotify\Support\Traits\WithPipeArgs
+ * @see \TiMacDonald\Middleware\HasParameters
+ */
 trait WithMiddlewareArgs
 {
-    public static function with(...$args): string
+    public static function with(mixed ...$args): string
     {
-        if ([] === $args) {
-            return static::class;
-        }
-
-        return static::class.':'.implode(',', $args);
+        return [] === $args ? static::class : static::class.':'.implode(',', $args);
     }
 }

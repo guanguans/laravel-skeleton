@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-
 /**
  * @see https://dev.to/lotyp/laravel-config-problem-is-it-time-for-a-revolution-159f
  * @see https://github.com/lotyp
  * @see https://github.com/wayofdev
  * @see https://x.com/wlotyp
+ * @see https://github.com/wayofdev/laravel-cycle-orm-adapter/blob/master/config/cycle.php
+ * @see https://github.com/cycle/database/blob/2.x/src/Config/RestoreStateTrait.php
+ * @see https://github.com/cycle/database/tree/2.x/src/Config
  * @see \Guanguans\LaravelApiResponse\Support\Traits\SetStateable
  */
 final readonly class AutoWire
@@ -44,11 +45,9 @@ final readonly class AutoWire
 
     /**
      * Resolve the AutoWire instance using the container.
-     *
-     * @throws BindingResolutionException
      */
     public function resolve(): mixed
     {
-        return app()->make($this->abstract, $this->parameters);
+        return resolve($this->abstract, $this->parameters);
     }
 }

@@ -38,10 +38,11 @@ class ClassHandleMethodRector extends AbstractRector
     ) {}
 
     /**
+     * @noinspection OverrideMissingInspection
+     *
      * @throws PoorDocumentationException
      * @throws ShouldNotHappenException
      */
-    #[\Override]
     final public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(

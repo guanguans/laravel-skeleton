@@ -22,7 +22,7 @@ class OutOfMemoryBootstrapper
      * A bit of reserved memory to ensure we are able to increase the memory
      * limit on an OOM.
      *
-     * We can't reserve all of the memory that we need to send OOM reports
+     * We can't reserve all the memory that we need to send OOM reports
      * because this would have a big overhead on every request, instead of just
      * on shutdown in requests with errors.
      *
@@ -36,7 +36,7 @@ class OutOfMemoryBootstrapper
     /**
      * Allow Bugsnag to handle OOMs by registering a shutdown function that
      * increases the memory limit. This must happen before Laravel's shutdown
-     * function is registered or it will have no effect.
+     * function is registered, or it will have no effect.
      */
     public function bootstrap(): void
     {

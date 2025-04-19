@@ -30,11 +30,19 @@ return (new Configuration)
         ErrorType::UNUSED_DEPENDENCY,
         ErrorType::SHADOW_DEPENDENCY,
     ])
+    ->ignoreErrorsOnPackages(
+        [
+            'fakerphp/faker',
+            'guanguans/ai-commit',
+            'laravel/telescope',
+        ],
+        [ErrorType::DEV_DEPENDENCY_IN_PROD]
+    )
     ->ignoreErrorsOnPaths(
         [
             __DIR__.'/app/Providers/UnlessProductionServiceProvider.php',
             __DIR__.'/app/Providers/TelescopeServiceProvider.php',
-            __DIR__.'/app/Providers/WhenLocalServiceProvider.php',
+            // __DIR__.'/app/Providers/WhenLocalServiceProvider.php',
         ],
         [
             ErrorType::DEV_DEPENDENCY_IN_PROD,

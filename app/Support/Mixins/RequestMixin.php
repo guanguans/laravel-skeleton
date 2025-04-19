@@ -15,6 +15,7 @@ namespace App\Support\Mixins;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
@@ -124,6 +125,28 @@ class RequestMixin
             [$fallbacks, $routes] = collect($routes)->partition(static fn ($route) => $route->isFallback);
 
             return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
+        };
+    }
+
+    /**
+     * @see https://github.com/MrPunyapal/basic-crud/blob/main/app/Traits/HasFileFromUrl.php
+     * @see https://github.com/MrPunyapal/basic-crud/blob/main/app/Http/Requests/
+     * @see \App\Support\Mixins\UploadedFileMixin::makeFromUrl()
+     *
+     * @noinspection PhpUndefinedMethodInspection
+     */
+    public function resolveFileFromUrl(): callable
+    {
+        return function (string $field): void {
+            if (!$this->hasFile($field) && filter_var($this->get($field), \FILTER_VALIDATE_URL)) {
+                $file = UploadedFile::makeFromUrl((string) $this->string($field));
+
+                if ($file instanceof UploadedFile) {
+                    $this->merge([
+                        $field => $file,
+                    ]);
+                }
+            }
         };
     }
 }

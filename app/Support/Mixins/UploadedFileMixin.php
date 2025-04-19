@@ -15,37 +15,37 @@ namespace App\Support\Mixins;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 /**
- * @see https://github.com/MrPunyapal/basic-crud/blob/main/app/Providers/AppServiceProvider.php
- *
  * @mixin \Illuminate\Http\UploadedFile
  */
 #[Mixin(UploadedFile::class)]
 class UploadedFileMixin
 {
+    /**
+     * @see https://github.com/MrPunyapal/basic-crud/blob/main/app/Support/FileUploaderFromUrl.php
+     * @see https://github.com/MrPunyapal/basic-crud/blob/main/app/Http/Requests
+     */
     public static function makeFromUrl(): \Closure
     {
         return static function (string $url): ?UploadedFile {
-            $tempFile = tempnam(sys_get_temp_dir(), Str::random(32));
+            $response = Http::get($url);
 
-            if (false === $tempFile) {
+            if ($response->failed()) {
                 return null;
             }
 
-            $file = file_get_contents($url);
+            $tempFile = sys_get_temp_dir().\DIRECTORY_SEPARATOR.Str::uuid()->toString();
 
-            if (false === $file) {
-                return null;
-            }
-
-            file_put_contents($tempFile, $file);
+            File::put($tempFile, $response->body());
 
             return new UploadedFile(
                 $tempFile,
-                basename($url),
-                mime_content_type($tempFile) ?: null,
+                File::basename($url),
+                $response->header('Content-Type') ?: null,
                 null,
                 true
             );
