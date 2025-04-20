@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -13,12 +15,18 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Support\AggregateServiceProvider;
 
-class WhenLocalServiceProvider extends AggregateServiceProvider
+class WhenLocalServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
 {
     /** @noinspection PhpFullyQualifiedNameUsageInspection */
     protected $providers = [
         // \Guanguans\LaravelSoar\SoarServiceProvider::class,
     ];
+
+    public function shouldRegister(): bool
+    {
+        return !$this->app->isLocal();
+    }
 }

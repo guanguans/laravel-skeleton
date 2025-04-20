@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -26,6 +28,7 @@ use App\Policies\UserPolicy;
 use App\Rules\Rule;
 use App\Support\Attributes\Autowired;
 use App\Support\Attributes\Mixin;
+use App\Support\Contracts\ShouldRegisterContract;
 use App\Support\Mixins\BlueprintMixin;
 use App\Support\Mixins\CarbonMixin;
 use App\Support\Mixins\CollectionMixin;
@@ -136,6 +139,7 @@ use Psr\Container\NotFoundExceptionInterface;
 use Stillat\BladeDirectives\Support\Facades\Directive;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -180,22 +184,29 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
             // $this->app->register(LaravelServiceProvider::class);
-
             // \Closure::fromCallable([$this->app->make(SetRequestIdListener::class), 'handle']);
             // $this->booting($this->app->make(SetRequestIdListener::class)->handle(...));
         });
 
-        $this->whenever($this->app->isLocal(), function (): void {
-            $this->app->register(WhenLocalServiceProvider::class);
-        });
+        foreach (
+            Finder::create()
+                ->in(__DIR__)
+                ->name('*ServiceProvider.php')
+                ->files() as $file
+        ) {
+            $class = __NAMESPACE__.'\\'.$file->getBasename('.php');
 
-        $this->whenever($this->app->runningUnitTests(), function (): void {
-            $this->app->register(WhenTestingServiceProvider::class);
-        });
+            if (
+                !is_subclass_of($class, ShouldRegisterContract::class)
+                || !is_subclass_of($class, ServiceProvider::class)
+                || AbstractServiceProvider::class === $class
+            ) {
+                continue;
+            }
 
-        $this->unless($this->app->isProduction(), function (): void {
-            $this->app->register(UnlessProductionServiceProvider::class);
-        });
+            $provider = new $class($this->app);
+            $provider->shouldRegister() and $this->app->register($provider);
+        }
     }
 
     /**

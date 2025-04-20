@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -12,11 +14,8 @@ declare(strict_types=1);
  */
 
 use App\Console\Commands\ClearLogsCommand;
-use App\Exceptions\Handler;
 use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -36,9 +35,6 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 return Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {
         // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
-        // $app->singleton(Kernel::class, App\Http\Kernel::class);
-        // $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::class);
-        // $app->singleton(ExceptionHandler::class, Handler::class);
     })
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -47,12 +43,12 @@ return Application::configure(basePath: \dirname(__DIR__))
         channels: __DIR__.'/../routes/channels.php',
         health: '/up',
         // apiPrefix: 'api/v1',
-        // then: function (): void {
-        //     /** @see https://github.com/packistry/packistry/blob/main/bootstrap/app.php */
-        //     Route::middleware('web')->get('{any?}', fn () => response()
-        //         ->file(public_path('index.html')))
-        //         ->where('any', '.*');
-        // },
+        then: static function (): void {
+            // /** @see https://github.com/packistry/packistry/blob/main/bootstrap/app.php */
+            // Route::middleware('web')->get('{any?}', fn () => response()
+            //     ->file(public_path('index.html')))
+            //     ->where('any', '.*');
+        },
     )
     ->withMiddleware(static function (Middleware $middleware): void {
         // $middleware->statefulApi();
@@ -180,7 +176,7 @@ return Application::configure(basePath: \dirname(__DIR__))
         // $exceptions->truncateRequestExceptionsAt(256);
         // $exceptions->dontTruncateRequestExceptions();
         // $exceptions->dontFlash([]);
-        $exceptions->shouldRenderJsonWhen(static function (Request $request, Throwable $throwable): bool {
+        $exceptions->shouldRenderJsonWhen(static function (Request $request/* , Throwable $throwable */): bool {
             if ($request->is('api/*')) {
                 return true;
             }

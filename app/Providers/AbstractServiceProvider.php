@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-abstract class AbstractServiceProvider extends ServiceProvider
+abstract class AbstractServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
     use Conditionable {
         Conditionable::when as whenever;

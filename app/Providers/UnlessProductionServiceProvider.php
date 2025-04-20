@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -13,9 +15,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Support\AggregateServiceProvider;
 
-class UnlessProductionServiceProvider extends AggregateServiceProvider
+class UnlessProductionServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
 {
     /** @noinspection PhpFullyQualifiedNameUsageInspection */
     protected $providers = [
@@ -50,4 +53,9 @@ class UnlessProductionServiceProvider extends AggregateServiceProvider
         \TheDoctor0\LaravelFactoryGenerator\FactoryGeneratorServiceProvider::class,
         \Worksome\Envy\EnvyServiceProvider::class,
     ];
+
+    public function shouldRegister(): bool
+    {
+        return !$this->app->isProduction();
+    }
 }
