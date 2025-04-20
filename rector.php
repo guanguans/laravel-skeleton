@@ -84,6 +84,7 @@ return RectorConfig::configure()
             static fn (string $filename): bool => !\in_array($filename, [
                 __DIR__.'/.phpstorm.meta.php',
                 __DIR__.'/_ide_helper.php',
+                __DIR__.'/_ide_helper_actions.php',
                 __DIR__.'/_ide_helper_models.php',
             ], true)
         ),

@@ -11,6 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Support\PhpCsFixer\PrettierPHPFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -24,32 +25,56 @@ use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
 use PhpCsFixerCustomFixers\Fixer\AbstractFixer;
 
-$license = MIT::text(
-    __DIR__.'/LICENSE',
-    Range::since(
-        Year::fromString('2021'),
-        new DateTimeZone('Asia/Shanghai'),
-    ),
-    Holder::fromString('guanguans<ityaozm@gmail.com>'),
-    Url::fromString('https://github.com/guanguans/laravel-skeleton'),
-);
+return Factory::fromRuleSet(Php83::create()
+    ->withHeader(
+        (static function (): string {
+            $license = MIT::text(
+                __DIR__.'/LICENSE',
+                Range::since(
+                    Year::fromString('2021'),
+                    new DateTimeZone('Asia/Shanghai'),
+                ),
+                Holder::fromString('guanguans<ityaozm@gmail.com>'),
+                Url::fromString('https://github.com/guanguans/laravel-skeleton'),
+            );
 
-$license->save();
+            $license->save();
 
-$ruleSet = Php83::create()
-    ->withHeader($license->header())
+            return $license->header();
+        })()
+    )
+    ->withCustomFixers(Fixers::fromFixers(...$phpCsFixerCustomFixers = array_filter(
+        iterator_to_array(new PhpCsFixerCustomFixers\Fixers),
+        static fn (AbstractFixer $fixer): bool => !$fixer instanceof DeprecatedFixerInterface
+            && !\array_key_exists($fixer->getName(), Php83::create()->rules()->toArray())
+    )))
+    // ->withRules(Rules::fromArray(array_reduce(
+    //     $phpCsFixerCustomFixers,
+    //     static function (array $rules, AbstractFixer $fixer): array {
+    //         $rules[$fixer->getName()] = true;
+    //
+    //         return $rules;
+    //     },
+    //     []
+    // )))
+    ->withCustomFixers(Fixers::fromFixers(
+        new PrettierPHPFixer
+    ))
     ->withRules(Rules::fromArray([
-        '@PHP70Migration' => true,
-        '@PHP70Migration:risky' => true,
-        '@PHP71Migration' => true,
-        '@PHP71Migration:risky' => true,
-        '@PHP73Migration' => true,
-        '@PHP74Migration' => true,
-        '@PHP74Migration:risky' => true,
-        '@PHP80Migration' => true,
-        '@PHP80Migration:risky' => true,
-        '@PHP81Migration' => true,
-        '@PHP82Migration' => true,
+        'Prettier/php' => false,
+    ]))
+    ->withRules(Rules::fromArray([
+        // '@PHP70Migration' => true,
+        // '@PHP70Migration:risky' => true,
+        // '@PHP71Migration' => true,
+        // '@PHP71Migration:risky' => true,
+        // '@PHP73Migration' => true,
+        // '@PHP74Migration' => true,
+        // '@PHP74Migration:risky' => true,
+        // '@PHP80Migration' => true,
+        // '@PHP80Migration:risky' => true,
+        // '@PHP81Migration' => true,
+        // '@PHP82Migration' => true,
         '@PHP83Migration' => true,
         // '@PHP84Migration' => true,
         // '@PHPUnit75Migration:risky' => true,
@@ -58,6 +83,8 @@ $ruleSet = Php83::create()
         // '@DoctrineAnnotation' => true,
         // '@PhpCsFixer' => true,
         // '@PhpCsFixer:risky' => true,
+    ]))
+    ->withRules(Rules::fromArray([
         'align_multiline_comment' => [
             'comment_type' => 'phpdocs_only',
         ],
@@ -234,23 +261,15 @@ $ruleSet = Php83::create()
             'stick_comment_to_next_continuous_control_statement' => true,
         ],
         'static_lambda' => false, // pest
-    ]));
-
-$ruleSet->withCustomFixers(Fixers::fromFixers(
-    ...array_filter(
-        iterator_to_array(new PhpCsFixerCustomFixers\Fixers),
-        static fn (AbstractFixer $fixer): bool => !$fixer instanceof DeprecatedFixerInterface
-            && !\array_key_exists($fixer->getName(), $ruleSet->rules()->toArray())
-    )
-));
-
-/**
- * @see https://github.com/laravel/pint/blob/main/app/Commands/DefaultCommand.php
- * @see https://github.com/laravel/pint/blob/main/app/Factories/ConfigurationFactory.php
- * @see https://github.com/laravel/pint/blob/main/app/Repositories/ConfigurationJsonRepository.php
- */
-return Factory::fromRuleSet($ruleSet)
+    ])))
+    ->setUsingCache(true)
+    ->setCacheFile(__DIR__.'/.build/php-cs-fixer/.php-cs-fixer.cache')
     ->setFinder(
+        /**
+         * @see https://github.com/laravel/pint/blob/main/app/Commands/DefaultCommand.php
+         * @see https://github.com/laravel/pint/blob/main/app/Factories/ConfigurationFactory.php
+         * @see https://github.com/laravel/pint/blob/main/app/Repositories/ConfigurationJsonRepository.php
+         */
         Finder::create()
             ->in([
                 __DIR__.'/app/',
@@ -282,7 +301,4 @@ return Factory::fromRuleSet($ruleSet)
                 __DIR__.'/artisan',
                 __DIR__.'/composer-updater',
             ])
-    )
-    ->setRiskyAllowed(true)
-    ->setUsingCache(true)
-    ->setCacheFile(__DIR__.'/.build/php-cs-fixer/.php-cs-fixer.cache');
+    );
