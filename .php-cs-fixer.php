@@ -51,6 +51,24 @@ return Factory::fromRuleSet(Php83::create()
     // ->withRules(Rules::fromArray(array_reduce(
     //     $phpCsFixerCustomFixers,
     //     static function (array $rules, AbstractFixer $fixer): array {
+    //         if (
+    //             \in_array(
+    //                 $fixer->getName(),
+    //                 [
+    //                     'PhpCsFixerCustomFixers/comment_surrounded_by_spaces',
+    //                     'PhpCsFixerCustomFixers/declare_after_opening_tag',
+    //                     'PhpCsFixerCustomFixers/isset_to_array_key_exists',
+    //                     'PhpCsFixerCustomFixers/no_commented_out_code',
+    //                     'PhpCsFixerCustomFixers/phpdoc_only_allowed_annotations',
+    //                     'PhpCsFixerCustomFixers/phpdoc_var_annotation_to_assert',
+    //                 ],
+    //                 true
+    //             )
+    //         ) {
+    //             return $rules;
+    //
+    //         }
+    //
     //         $rules[$fixer->getName()] = true;
     //
     //         return $rules;
@@ -61,7 +79,7 @@ return Factory::fromRuleSet(Php83::create()
         new PintFixer
     ))
     ->withRules(Rules::fromArray([
-        PintFixer::name() => true,
+        // PintFixer::name() => true,
     ]))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,
