@@ -103,14 +103,19 @@
             "less_and_greater": true
         }
     },
+    "cache-file": ".build/pint/.pint.cache",
     "exclude": [
-        ".build",
-        ".github",
-        "node_modules",
-        "storage",
-        "stubs",
-        "vendor",
-        "vendor-bin"
+        ".build/",
+        ".github/",
+        "baselines/",
+        "node_modules/",
+        "storage/",
+        "stubs/",
+        "vendor/",
+        "vendor-bin/"
+    ],
+    "notPath": [
+        "foo/bar.php"
     ],
     "notName": [
         "*.blade.php",
@@ -118,8 +123,5 @@
         "_ide_helper.php",
         "_ide_helper_actions.php",
         "_ide_helper_models.php"
-    ],
-    "notPath": [
-        "xxx.php"
     ]
 }

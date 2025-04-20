@@ -244,6 +244,11 @@ $ruleSet->withCustomFixers(Fixers::fromFixers(
     )
 ));
 
+/**
+ * @see https://github.com/laravel/pint/blob/main/app/Commands/DefaultCommand.php
+ * @see https://github.com/laravel/pint/blob/main/app/Factories/ConfigurationFactory.php
+ * @see https://github.com/laravel/pint/blob/main/app/Repositories/ConfigurationJsonRepository.php
+ */
 return Factory::fromRuleSet($ruleSet)
     ->setFinder(
         Finder::create()
@@ -258,8 +263,8 @@ return Factory::fromRuleSet($ruleSet)
                 __DIR__.'/tests/',
             ])
             ->exclude([
-                'cache',
-                'Fixtures',
+                'cache/',
+                'Fixtures/',
             ])
             ->notName([
                 '*.blade.php',
@@ -270,6 +275,7 @@ return Factory::fromRuleSet($ruleSet)
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',
+                        __DIR__.'/_ide_helper_actions.php',
                         __DIR__.'/_ide_helper_models.php',
                     ], true)
                 ),
