@@ -20,6 +20,13 @@
                 "trait_import": "none"
             }
         },
+        "class_definition": {
+            "inline_constructor_arguments": false,
+            "multi_line_extends_each_single_line": false,
+            "single_item_single_line": false,
+            "single_line": false,
+            "space_before_parenthesis": false
+        },
         "header_comment": {
             "comment_type": "PHPDoc",
             "header": "Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>\n\nFor the full copyright and license information, please view\nthe LICENSE file that was distributed with this source code.\n\n@see https://github.com/guanguans/laravel-skeleton",

@@ -45,9 +45,9 @@ abstract class AbstractClient
     use ForwardsCalls;
     use Localizable;
     use Tappable;
-    protected Repository $configRepository;
+    protected readonly Repository $configRepository;
     private ?string $userAgent = null;
-    private PendingRequest $pendingRequest;
+    private readonly PendingRequest $pendingRequest;
 
     public function __construct(array $config)
     {

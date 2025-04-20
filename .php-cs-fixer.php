@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Support\PhpCsFixer\PrettierPHPFixer;
+use App\Support\PhpCsFixer\PintFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -58,10 +58,10 @@ return Factory::fromRuleSet(Php83::create()
     //     []
     // )))
     ->withCustomFixers(Fixers::fromFixers(
-        new PrettierPHPFixer
+        new PintFixer
     ))
     ->withRules(Rules::fromArray([
-        'Prettier/php' => false,
+        PintFixer::name() => true,
     ]))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,

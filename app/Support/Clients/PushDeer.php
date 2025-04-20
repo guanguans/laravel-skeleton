@@ -27,7 +27,7 @@ class PushDeer extends AbstractClient
      */
     public function messagePush(string $text, string $desp = '', string $type = 'markdown'): Response
     {
-        return $this->clonePendingRequest()->post('message/push', $this->validate(
+        return $this->post('message/push', $this->validate(
             ['text' => $text, 'desp' => $desp, 'type' => $type],
             [
                 'text' => 'required|string',
