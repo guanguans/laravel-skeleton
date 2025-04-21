@@ -63,7 +63,7 @@ class InflectorCommand extends Command
                             'result' => Str::of($type)
                                 ->explode(':', 2)
                                 ->pipe(
-                                    static fn (Collection $parts) => \is_array($result = \call_user_func(
+                                    static fn (Collection $parts): mixed => \is_array($result = \call_user_func(
                                         [
                                             app(
                                                 [

@@ -177,7 +177,7 @@ class AppServiceProvider extends ServiceProvider
     #[\Override]
     public function register(): void
     {
-        Scramble::configure()->withDocumentTransformers(function (OpenApi $openApi): void {
+        Scramble::configure()->withDocumentTransformers(static function (OpenApi $openApi): void {
             $openApi->secure(SecurityScheme::http('bearer'));
         });
 
@@ -188,25 +188,40 @@ class AppServiceProvider extends ServiceProvider
             // $this->booting($this->app->make(SetRequestIdListener::class)->handle(...));
         });
 
-        foreach (
-            Finder::create()
-                ->in(__DIR__)
-                ->name('*ServiceProvider.php')
-                ->files() as $file
-        ) {
-            $class = __NAMESPACE__.'\\'.$file->getBasename('.php');
+        // foreach (
+        //     Finder::create()
+        //         ->in(__DIR__)
+        //         ->name('*ServiceProvider.php')
+        //         ->files() as $file
+        // ) {
+        //     $class = __NAMESPACE__.'\\'.$file->getBasename('.php');
+        //
+        //     if (
+        //         !is_subclass_of($class, ShouldRegisterContract::class)
+        //         || !is_subclass_of($class, ServiceProvider::class)
+        //         || AbstractServiceProvider::class === $class
+        //     ) {
+        //         continue;
+        //     }
+        //
+        //     $provider = new $class($this->app);
+        //     $provider->shouldRegister() and $this->app->register($provider);
+        // }
 
-            if (
-                !is_subclass_of($class, ShouldRegisterContract::class)
-                || !is_subclass_of($class, ServiceProvider::class)
-                || AbstractServiceProvider::class === $class
-            ) {
-                continue;
-            }
+        $this->booting(function (): void {
+            $this->registerMixins();
 
-            $provider = new $class($this->app);
-            $provider->shouldRegister() and $this->app->register($provider);
-        }
+            Discover::in('Providers')
+                ->instancesOf(ServiceProvider::class)
+                ->instancesOf(ShouldRegisterContract::class)
+                ->classes()
+                ->keys()
+                ->each(function (string $class): void {
+                    /** @var class-string<ServiceProvider&ShouldRegisterContract> $class */
+                    $provider = new $class($this->app);
+                    $provider->shouldRegister() and $this->app->register($provider);
+                });
+        });
     }
 
     /**
@@ -223,7 +238,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->configureRoute();
+        // $this->configureRoute();
 
         $this->whenever(true, function (): void {
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
@@ -888,42 +903,42 @@ class AppServiceProvider extends ServiceProvider
         return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
     }
 
-    private function configureRoute(): void
-    {
-        $this->configureRateLimiting();
-        Route::pattern('id', '[0-9]+');
-        $this->bindRouteModels();
-    }
-
-    private function configureRateLimiting(): void
-    {
-        RateLimiter::for(
-            'api',
-            static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
-        );
-
-        RateLimiter::for('login', static fn (Request $request): array => [
-            Limit::perMinute(500),
-            Limit::perMinute(5)->by($request->ip()),
-            Limit::perMinute(5)->by($request->input('email')),
-        ]);
-    }
-
-    private function bindRouteModels(): void
-    {
-        Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
-
-        foreach (
-            [
-                JWTUser::class,
-                'user' => User::class,
-            ] as $name => $model
-        ) {
-            if (\is_int($name)) {
-                $name = str(class_basename($model))->snake('-')->toString();
-            }
-
-            Route::model($name, $model);
-        }
-    }
+    // private function configureRoute(): void
+    // {
+    //     $this->configureRateLimiting();
+    //     Route::pattern('id', '[0-9]+');
+    //     $this->bindRouteModels();
+    // }
+    //
+    // private function configureRateLimiting(): void
+    // {
+    //     RateLimiter::for(
+    //         'api',
+    //         static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
+    //     );
+    //
+    //     RateLimiter::for('login', static fn (Request $request): array => [
+    //         Limit::perMinute(500),
+    //         Limit::perMinute(5)->by($request->ip()),
+    //         Limit::perMinute(5)->by($request->input('email')),
+    //     ]);
+    // }
+    //
+    // private function bindRouteModels(): void
+    // {
+    //     Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
+    //
+    //     foreach (
+    //         [
+    //             JWTUser::class,
+    //             'user' => User::class,
+    //         ] as $name => $model
+    //     ) {
+    //         if (\is_int($name)) {
+    //             $name = str(class_basename($model))->snake('-')->toString();
+    //         }
+    //
+    //         Route::model($name, $model);
+    //     }
+    // }
 }

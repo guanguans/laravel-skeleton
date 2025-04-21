@@ -14,36 +14,20 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Support\Clients\PushDeer;
+use App\Support\Contracts\ShouldRegisterContract;
 use Faker\Factory;
 use Faker\Generator;
-use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Traits\Conditionable;
 
-class ExtendServiceProvider extends ServiceProvider
+class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
-    use Conditionable {
-        Conditionable::when as whenever;
-    }
-
-    /**
-     * All of the container bindings that should be registered.
-     *
-     * @var array<string, string>
-     */
     public array $bindings = [];
-
-    /**
-     * All of the container singletons that should be registered.
-     *
-     * @var array<array-key, string>
-     */
     public array $singletons = [];
 
     /**
-     * Register services.
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     public function register(): void
@@ -52,15 +36,11 @@ class ExtendServiceProvider extends ServiceProvider
         $this->registerFaker();
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void {}
 
     /**
-     * Get the events that trigger this service provider to register.
-     *
-     * @return list<string>
+     * @noinspection SenselessMethodDuplicationInspection
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     public function when(): array
@@ -69,9 +49,7 @@ class ExtendServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get the services provided by the provider.
-     *
-     * @return list<string>
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     public function provides(): array
@@ -79,6 +57,11 @@ class ExtendServiceProvider extends ServiceProvider
         return [
             PushDeer::class, 'pushdeer',
         ];
+    }
+
+    public function shouldRegister(): bool
+    {
+        return true;
     }
 
     private function registerPushDeer(): void

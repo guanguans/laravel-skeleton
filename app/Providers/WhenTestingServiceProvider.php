@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -20,13 +18,15 @@ use Illuminate\Support\AggregateServiceProvider;
 
 class WhenTestingServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
 {
-    /** @noinspection PhpFullyQualifiedNameUsageInspection */
+    /**
+     * @noinspection ClassOverridesFieldOfSuperClassInspection
+     * @noinspection PropertyInitializationFlawsInspection
+     */
     protected $providers = [
-        // \Guanguans\LaravelSoar\SoarServiceProvider::class,
     ];
 
     public function shouldRegister(): bool
     {
-        return !$this->app->runningUnitTests();
+        return $this->app->runningUnitTests();
     }
 }

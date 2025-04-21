@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -20,7 +18,12 @@ use Illuminate\Support\AggregateServiceProvider;
 
 class UnlessProductionServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
 {
-    /** @noinspection PhpFullyQualifiedNameUsageInspection */
+    /**
+     * @noinspection ClassOverridesFieldOfSuperClassInspection
+     * @noinspection PhpFullyQualifiedNameUsageInspection
+     * @noinspection PhpInternalEntityUsedInspection
+     * @noinspection SpellCheckingInspection
+     */
     protected $providers = [
         \AndreasElia\PostmanGenerator\PostmanGeneratorServiceProvider::class,
         \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,

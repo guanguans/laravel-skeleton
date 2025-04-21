@@ -70,15 +70,14 @@ use RectorLaravel\Set\LaravelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__.'/app/Support/',
-        // __DIR__.'/app/',
-        // __DIR__.'/bootstrap/',
+        __DIR__.'/app/',
+        __DIR__.'/bootstrap/',
         // __DIR__.'/config/',
-        // __DIR__.'/database/',
-        // __DIR__.'/public/',
-        // __DIR__.'/resources/',
-        // __DIR__.'/routes/',
-        // __DIR__.'/tests/',
+        __DIR__.'/database/',
+        __DIR__.'/public/',
+        __DIR__.'/resources/',
+        __DIR__.'/routes/',
+        __DIR__.'/tests/',
         ...array_filter(
             glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
             static fn (string $filename): bool => !\in_array($filename, [
@@ -98,13 +97,18 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         '**/vendor/*',
+        __DIR__.'/app/Providers/EventServiceProvider.php',
+        __DIR__.'/app/Providers/UnlessProductionServiceProvider.php',
         __DIR__.'/bootstrap/cache/',
+        __DIR__.'/bootstrap/providers.php',
         __DIR__.'/resources/lang/',
         __FILE__,
+        __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
+        __DIR__.'/app/Enums/IntegerBooleanEnum.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()
-    ->withoutParallel()
+    // ->withoutParallel()
     // ->withImportNames(importNames: false)
     ->withImportNames(importDocBlockNames: false, importShortClasses: false)
     ->withFluentCallNewLine()
@@ -206,6 +210,14 @@ return RectorConfig::configure()
         'updated_at',
         'is_developer',
         'pStmt_ClassMethod',
+        'FALSE',
+        'TRUE',
+        'ROLE',
+        'USER',
+        'PRODUCT',
+        'CATEGORY',
+        'beforeEach',
+        'IntegerBooleanEnum',
     ])
     ->withConfiguredRule(RenameClassRector::class, [
         Carbon::class => IlluminateCarbon::class,

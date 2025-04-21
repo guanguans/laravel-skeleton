@@ -20,21 +20,19 @@ use App\Listeners\MaintenanceModeEnabledNotificationListener;
 use App\Listeners\SetRequestIdListener;
 use App\Listeners\ShareLogContextSubscriber;
 use App\Observers\UserObserver;
+use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Foundation\Bootstrap\BootProviders;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
-class EventServiceProvider extends ServiceProvider
+class EventServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
     /**
-     * The event listener mappings for the application.
+     * {@inheritDoc}
      *
-     * @var array<string, array<int, string>>
+     * @noinspection PhpFullyQualifiedNameUsageInspection
      */
     protected $listen = [
         \Illuminate\Auth\Events\Login::class => [
-            // \App\Listeners\AdoptPurchase::class,
-            // \App\Listeners\RegisterForProduct::class,
             \App\Listeners\LogActivity::class.'@login',
         ],
         \Illuminate\Auth\Events\Logout::class => [
@@ -70,27 +68,38 @@ class EventServiceProvider extends ServiceProvider
         //     SetRequestIdListener::class,
         // ],
     ];
+
+    /** {@inheritDoc} */
     protected $subscribe = [
         ShareLogContextSubscriber::class,
     ];
 
-    /** @var list<string> */
+    /**
+     * {@inheritDoc}
+     *
+     * @noinspection PhpFullyQualifiedNameUsageInspection
+     */
     protected $observers = [
         \App\Models\User::class => UserObserver::class,
     ];
 
     /**
-     * Register any events for your application.
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     public function boot(): void {}
 
     /**
-     * Determine if events and listeners should be automatically discovered.
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     public function shouldDiscoverEvents(): bool
     {
         return false;
+    }
+
+    public function shouldRegister(): bool
+    {
+        return true;
     }
 }
