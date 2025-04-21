@@ -23,23 +23,8 @@ use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Policies\UserPolicy;
-use App\Rules\Rule;
 use App\Support\Attributes\Mixin;
 use App\Support\Contracts\ShouldRegisterContract;
-use App\Support\Mixins\BlueprintMixin;
-use App\Support\Mixins\CarbonMixin;
-use App\Support\Mixins\CollectionMixin;
-use App\Support\Mixins\CommandMixin;
-use App\Support\Mixins\GrammarMixin;
-use App\Support\Mixins\ModelMixin;
-use App\Support\Mixins\MySqlGrammarMixin;
-use App\Support\Mixins\PendingRequestMixin;
-use App\Support\Mixins\RequestMixin;
-use App\Support\Mixins\ResponseFactoryMixin;
-use App\Support\Mixins\SchedulingEventMixin;
-use App\Support\Mixins\StringableMixin;
-use App\Support\Mixins\StrMixin;
-use App\Support\Mixins\UploadedFileMixin;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\CarbonInterval;
@@ -53,40 +38,28 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Command;
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Contracts\Validation\DataAwareRule;
-use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Database\Connection;
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Events\DatabaseBusy;
 use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Database\Query\Builder as QueryBuilder;
-use Illuminate\Database\Query\Grammars\MySqlGrammar;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
-use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
-use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\AnonymousNotifiable;
-use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Artisan;
@@ -105,13 +78,11 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Lottery;
 use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
@@ -270,7 +241,6 @@ class AppServiceProvider extends ServiceProvider
             // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
             // View::prependLocation(resource_path('custom-views'));
             $this->registerMixins();
-            $this->extendValidator();
             $this->createUrls();
             Password::defaults(
                 function (): Password {
@@ -522,29 +492,6 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerMixins(): void
     {
-        // \App\Models\Model::mixin($this->app->make(ModelMixin::class));
-        // Blueprint::mixin($this->app->make(BlueprintMixin::class));
-        // Carbon::mixin($this->app->make(CarbonMixin::class));
-        // Collection::mixin($this->app->make(CollectionMixin::class));
-        // Command::mixin($this->app->make(CommandMixin::class));
-        // Event::mixin($this->app->make(SchedulingEventMixin::class));
-        // Grammar::mixin($this->app->make(GrammarMixin::class));
-        // MySqlGrammar::mixin($this->app->make(MySqlGrammarMixin::class));
-        // PendingRequest::mixin($this->app->make(PendingRequestMixin::class));
-        // Request::mixin($this->app->make(RequestMixin::class));
-        // ResponseFactory::mixin($this->app->make(ResponseFactoryMixin::class));
-        // Str::mixin($this->app->make(StrMixin::class));
-        // Stringable::mixin($this->app->make(StringableMixin::class));
-        // UploadedFile::mixin($this->app->make(UploadedFileMixin::class));
-        //
-        // collect(glob($this->app->path('Support/Mixins/QueryBuilder/*QueryBuilderMixin.php')))
-        //     ->each(function ($file): void {
-        //         $queryBuilderMacro = $this->app->make(resolve_class_from($file));
-        //         QueryBuilder::mixin($queryBuilderMacro);
-        //         EloquentBuilder::mixin($queryBuilderMacro);
-        //         Relation::mixin($queryBuilderMacro);
-        //     });
-
         Discover::in('Support/Mixins')
             ->allClasses()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
@@ -553,32 +500,6 @@ class AppServiceProvider extends ServiceProvider
                     $mixinAttribute = $mixinReflectionAttribute->newInstance();
                     $mixinAttribute->class::mixin(app($mixinClass), $mixinAttribute->replace);
                 }
-            });
-    }
-
-    /**
-     * Register rule.
-     */
-    private function extendValidator(): void
-    {
-        Discover::in('Rules')
-            ->instancesOf(Rule::class)
-            ->classes()
-            ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
-                /** @var class-string&Rule $ruleClass */
-                Validator::{$ruleClass::extendType()}(
-                    $ruleClass::name(),
-                    static fn (
-                        string $attribute,
-                        mixed $value,
-                        array $parameters,
-                        \Illuminate\Validation\Validator $validator
-                    ): bool => tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {
-                        $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
-                        $rule instanceof DataAwareRule and $rule->setData($validator->getData());
-                    })->passes($attribute, $value),
-                    $ruleClass::message()
-                );
             });
     }
 
