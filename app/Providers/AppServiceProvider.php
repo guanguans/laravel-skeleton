@@ -17,7 +17,6 @@ namespace App\Providers;
 
 use App\Console\Commands\ClearAllCommand;
 use App\Http\Middleware\LogHttp;
-use App\Http\Middleware\TrimStrings;
 use App\Listeners\RunCommandInDebugModeListener;
 use App\Listeners\SetRequestIdListener;
 use App\Models\JWTUser;
@@ -86,6 +85,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -124,9 +124,6 @@ use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
-use Imanghafoori\Decorator\Decorators\DecoratorFactory;
-use Imanghafoori\Decorator\Facade\Decorator;
-use Jiannei\Response\Laravel\Providers\LaravelServiceProvider;
 use Laragear\Discover\Facades\Discover;
 use Laravel\Octane\Events\RequestReceived;
 use Laravel\Octane\Events\RequestTerminated;
@@ -151,19 +148,7 @@ class AppServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
     final public const string REQUEST_ID_NAME = 'X-Request-Id';
-
-    /**
-     * All of the container bindings that should be registered.
-     *
-     * @var array<string, string>
-     */
     public array $bindings = [];
-
-    /**
-     * All of the container singletons that should be registered.
-     *
-     * @var array<array-key, string>
-     */
     public array $singletons = [];
 
     /**
@@ -183,7 +168,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->whenever(true, function (): void {
             $this->registerGlobalFunctionsFrom($this->app->path('Support/*helpers.php'));
-            // $this->app->register(LaravelServiceProvider::class);
             // \Closure::fromCallable([$this->app->make(SetRequestIdListener::class), 'handle']);
             // $this->booting($this->app->make(SetRequestIdListener::class)->handle(...));
         });
@@ -258,7 +242,6 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             // ini_set('json.exceptions', '1'); // PHP 8.3
             $this->bootAutowired();
-            // $this->bootDecorator();
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->setLocales();
@@ -381,7 +364,7 @@ class AppServiceProvider extends ServiceProvider
                 'video' => 'App\Models\Video',
             ]);
 
-            /** @var \App\Models\Post $post */
+            /** @var Model $post */
             // $alias = $post->getMorphClass();
             // $class = Relation::getMorphedModel($alias);
             // Order::resolveRelationUsing('customer', function (Order $order) {
@@ -491,7 +474,7 @@ class AppServiceProvider extends ServiceProvider
                     if (250 < $query->time) {
                         Log::warning('An individual database query exceeded 250 ms.', [
                             'sql' => $query->sql,
-                            'raw' => $query->toRawSQL(),
+                            'raw' => $query->toRawSql(),
                         ]);
                     }
                 });
@@ -551,9 +534,6 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Register macros.
-     *
-     * @throws \ReflectionException
-     * @throws BindingResolutionException
      */
     private function registerMixins(): void
     {
@@ -623,7 +603,7 @@ class AppServiceProvider extends ServiceProvider
     private function createUrls(): void
     {
         ResetPassword::createUrlUsing(
-            static fn (object $notifiable, string $token): string => config('app.frontend_url')."/auth/reset/{$token}?email={$notifiable->getEmailForPasswordReset()}"
+            static fn (object $notifiable, #[\SensitiveParameter] string $token): string => config('app.frontend_url')."/auth/reset/$token?email={$notifiable->getEmailForPasswordReset()}"
         );
 
         VerifyEmail::createUrlUsing(static function (object $notifiable): string {
@@ -760,8 +740,6 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * @noinspection ForgottenDebugOutputInspection
-     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -884,14 +862,6 @@ class AppServiceProvider extends ServiceProvider
             }
         });
     }
-
-    // private function bootDecorator(): void
-    // {
-    //     Decorator::decorate(
-    //         'UserRepository@find',
-    //         DecoratorFactory::cache(static fn ($madId): string => 'mad_user_key_'.$madId, 10)
-    //     );
-    // }
 
     /**
      * Determine if server is running Octane.

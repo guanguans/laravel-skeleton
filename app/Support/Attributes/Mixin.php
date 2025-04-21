@@ -19,10 +19,10 @@ namespace App\Support\Attributes;
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
 readonly class Mixin
 {
-    /**
-     * @param class-string<\Illuminate\Support\Traits\Macroable> $class
-     */
     public function __construct(
+        /**
+         * @var class-string<\Illuminate\Support\Traits\Macroable>
+         */
         public string $class,
         public bool $replace = true
     ) {}
