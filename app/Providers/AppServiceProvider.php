@@ -225,7 +225,6 @@ class AppServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             \Illuminate\Support\Facades\Request::getFacadeRoot()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
-            Log::shareContext($this->sharedLogContext());
             Context::add('request_id', $this->app->make(self::REQUEST_ID_NAME));
 
             // // With context for current channel and stack.
@@ -773,29 +772,6 @@ class AppServiceProvider extends ServiceProvider
         $locale and $this->app->setLocale($locale);
         Number::useLocale($this->app->getLocale());
         Carbon::setLocale($this->app->getLocale());
-    }
-
-    /**
-     * @throws BindingResolutionException
-     */
-    private function sharedLogContext(): array
-    {
-        return collect([
-            'php-version' => \PHP_VERSION,
-            'php-interface' => \PHP_SAPI,
-            'laravel-version' => $this->app->version(),
-            'running-in-console' => $this->app->runningInConsole(),
-            self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
-        ])->unless(
-            $this->app->runningInConsole(),
-            static fn (Collection $context): Collection => $context->merge([
-                'user-id' => \Illuminate\Support\Facades\Request::getFacadeRoot()->user()?->id,
-                'url' => \Illuminate\Support\Facades\Request::getFacadeRoot()->url(),
-                'ip' => \Illuminate\Support\Facades\Request::getFacadeRoot()->ip(),
-                'method' => \Illuminate\Support\Facades\Request::getFacadeRoot()->method(),
-                // 'action' => \Illuminate\Support\Facades\Request::getFacadeRoot()->route()?->getActionName(),
-            ])
-        )->all();
     }
 
     /**
