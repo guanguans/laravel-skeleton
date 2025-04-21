@@ -38,8 +38,6 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -58,7 +56,6 @@ use Illuminate\Support\DateFactory;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Date;
@@ -78,8 +75,6 @@ use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 use Laragear\Discover\Facades\Discover;
-use Laravel\Octane\Events\RequestReceived;
-use Laravel\Octane\Events\RequestTerminated;
 use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
@@ -88,7 +83,6 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Finder\Finder;
 
 /**
  * @property EventDispatcherInterface $symfonyDispatcher
@@ -123,26 +117,6 @@ class AppServiceProvider extends ServiceProvider
             // $this->booting($this->app->make(SetRequestIdListener::class)->handle(...));
         });
 
-        // foreach (
-        //     Finder::create()
-        //         ->in(__DIR__)
-        //         ->name('*ServiceProvider.php')
-        //         ->files() as $file
-        // ) {
-        //     $class = __NAMESPACE__.'\\'.$file->getBasename('.php');
-        //
-        //     if (
-        //         !is_subclass_of($class, ShouldRegisterContract::class)
-        //         || !is_subclass_of($class, ServiceProvider::class)
-        //         || AbstractServiceProvider::class === $class
-        //     ) {
-        //         continue;
-        //     }
-        //
-        //     $provider = new $class($this->app);
-        //     $provider->shouldRegister() and $this->app->register($provider);
-        // }
-
         $this->booting(function (): void {
             $this->registerMixins();
 
@@ -173,8 +147,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->configureRoute();
-
         $this->whenever(true, function (): void {
             $this->app->instance(self::REQUEST_ID_NAME, (string) Str::uuid());
             \Illuminate\Support\Facades\Request::getFacadeRoot()->headers->set(self::REQUEST_ID_NAME, $this->app->make(self::REQUEST_ID_NAME));
@@ -263,13 +235,6 @@ class AppServiceProvider extends ServiceProvider
             LogHttp::skipWhen(fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe());
             LogViewer::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
             class_exists(Telescope::class) and Telescope::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
-            // $this->app->extend(ExceptionHandler::class, static function (ExceptionHandler $handler, Application $app) {
-            //     if (! $handler instanceof \App\Exceptions\Handler) {
-            //         // $handler = $app->make(\App\Exceptions\Handler::class);
-            //     }
-            //
-            //     return $handler;
-            // });
             Http::globalOptions([
                 'timeout' => 30,
                 'connect_timeout' => 10,
@@ -334,24 +299,6 @@ class AppServiceProvider extends ServiceProvider
             //         new RunCommandInDebugModeListener
             //     ))->call($this->app->make(Kernel::class));
             // });
-
-            // $kernel = $this->app->make(\Illuminate\Contracts\Http\Kernel::class);
-            // // Add our custom logging middleware after authentication
-            // $kernel->addToMiddlewarePriorityAfter(
-            //     \Illuminate\Auth\Middleware\Authenticate::class,
-            //     [
-            //         App\Http\Middleware\LogUserActions::class,
-            //         App\Http\Middleware\TrackUserSession::class,
-            //     ]
-            // );
-            // // Add our security checks before any route handling
-            // $kernel->addToMiddlewarePriorityBefore(
-            //     \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            //     [
-            //         \App\Http\Middleware\ValidateSecurityHeaders::class,
-            //         \App\Http\Middleware\CheckMaintenanceBypass::class,
-            //     ]
-            // );
         });
 
         $this->whenever($this->app->runningInConsole(), static function (): void {
@@ -378,22 +325,6 @@ class AppServiceProvider extends ServiceProvider
             // ParallelTesting::setUpTestDatabase(static function (string $database, int $token) {
             //     Artisan::call('db:seed');
             // });
-        });
-
-        $this->when($this->isOctaneHttpServer(), function (): void {
-            $this->app->get(Dispatcher::class)->listen(RequestReceived::class, static function (): void {
-                $uuid = Str::uuid()->toString();
-
-                if (config('octane.server') === 'roadrunner') {
-                    Cache::put($uuid, microtime(true));
-
-                    return;
-                }
-
-                Cache::store('octane')->put($uuid, microtime(true));
-            });
-
-            $this->app->get(Dispatcher::class)->listen(RequestTerminated::class, static function (): void {});
         });
     }
 
@@ -462,15 +393,5 @@ class AppServiceProvider extends ServiceProvider
         $locale and $this->app->setLocale($locale);
         Number::useLocale($this->app->getLocale());
         Carbon::setLocale($this->app->getLocale());
-    }
-
-    /**
-     * Determine if server is running Octane.
-     *
-     * @noinspection GlobalVariableUsageInspection
-     */
-    private function isOctaneHttpServer(): bool
-    {
-        return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
     }
 }
