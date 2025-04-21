@@ -19,13 +19,11 @@ use App\Console\Commands\ClearAllCommand;
 use App\Http\Middleware\LogHttp;
 use App\Listeners\RunCommandInDebugModeListener;
 use App\Listeners\SetRequestIdListener;
-use App\Models\JWTUser;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Policies\UserPolicy;
 use App\Rules\Rule;
-use App\Support\Attributes\Autowired;
 use App\Support\Attributes\Mixin;
 use App\Support\Contracts\ShouldRegisterContract;
 use App\Support\Mixins\BlueprintMixin;
@@ -241,7 +239,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->whenever(true, function (): void {
             // ini_set('json.exceptions', '1'); // PHP 8.3
-            $this->bootAutowired();
             // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
             Schema::defaultStringLength(191);
             $this->setLocales();
@@ -802,68 +799,6 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * @see https://github.com/spring-projects/spring-framework/blob/main/spring-beans/src/main/java/org/springframework/beans/factory/annotation/Autowired.java
-     *
-     * @noinspection PhpExpressionResultUnusedInspection
-     * @noinspection VirtualTypeCheckInspection
-     */
-    private function bootAutowired(): void
-    {
-        $this->app->resolving(static function (mixed $object, Application $app): void {
-            if (
-                !\is_object($object)
-                || !str($object::class)->is(config('services.autowired.only'))
-                || str($object::class)->is(config('services.autowired.except'))
-            ) {
-                return;
-            }
-
-            $reflectionObject = new \ReflectionObject($object);
-
-            foreach ($reflectionObject->getProperties() as $reflectionProperty) {
-                if (
-                    !$reflectionProperty->isDefault()
-                    || $reflectionProperty->isStatic()
-                    || [] === ($attributes = $reflectionProperty->getAttributes(Autowired::class))
-                ) {
-                    continue;
-                }
-
-                /** @var Autowired $autowired */
-                $autowired = $attributes[0]->newInstance();
-                $property = "{$reflectionObject->getName()}::\${$reflectionProperty->getName()}";
-                $propertyType = value(static function () use ($autowired, $reflectionProperty, $property): string {
-                    if ($autowired->propertyType) {
-                        return $autowired->propertyType;
-                    }
-
-                    $reflectionPropertyType = $reflectionProperty->getType();
-
-                    if ($reflectionPropertyType instanceof \ReflectionNamedType && !$reflectionPropertyType->isBuiltin()) {
-                        return $reflectionPropertyType->getName();
-                    }
-
-                    throw new \LogicException(\sprintf(
-                        "Attribute [%s] of property [$property] miss a argument [propertyType], or property [$property] mustn't be a built-in named type.",
-                        Autowired::class,
-                    ));
-                });
-
-                try {
-                    $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
-                    $reflectionProperty->setValue($object, $app->make($propertyType, $autowired->parameters));
-                } catch (\Throwable $throwable) {
-                    throw new \TypeError(
-                        "Type [$propertyType] of property [$property] resolve failed [{$throwable->getMessage()}].",
-                        $throwable->getCode(),
-                        $throwable
-                    );
-                }
-            }
-        });
-    }
-
-    /**
      * Determine if server is running Octane.
      *
      * @noinspection GlobalVariableUsageInspection
@@ -872,43 +807,4 @@ class AppServiceProvider extends ServiceProvider
     {
         return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
     }
-
-    // private function configureRoute(): void
-    // {
-    //     $this->configureRateLimiting();
-    //     Route::pattern('id', '[0-9]+');
-    //     $this->bindRouteModels();
-    // }
-    //
-    // private function configureRateLimiting(): void
-    // {
-    //     RateLimiter::for(
-    //         'api',
-    //         static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
-    //     );
-    //
-    //     RateLimiter::for('login', static fn (Request $request): array => [
-    //         Limit::perMinute(500),
-    //         Limit::perMinute(5)->by($request->ip()),
-    //         Limit::perMinute(5)->by($request->input('email')),
-    //     ]);
-    // }
-    //
-    // private function bindRouteModels(): void
-    // {
-    //     Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
-    //
-    //     foreach (
-    //         [
-    //             JWTUser::class,
-    //             'user' => User::class,
-    //         ] as $name => $model
-    //     ) {
-    //         if (\is_int($name)) {
-    //             $name = str(class_basename($model))->snake('-')->toString();
-    //         }
-    //
-    //         Route::model($name, $model);
-    //     }
-    // }
 }
