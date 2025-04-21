@@ -48,6 +48,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Queue\Events\Looping;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Env;
@@ -59,6 +60,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -327,5 +329,20 @@ class AppServiceProvider extends ServiceProvider
         $locale and $this->app->setLocale($locale);
         Number::useLocale($this->app->getLocale());
         Carbon::setLocale($this->app->getLocale());
+    }
+
+    /**
+     * @see https://github.com/laravel/octane/issues/990
+     * @see https://medium.com/@raymondlor/migrating-to-laravel-octane-almost-cost-me-a-client-forever-59b0162e74e2
+     * @see https://learnku.com/laravel/t/89636
+     */
+    private function queue(): void
+    {
+        Queue::looping(static function (Looping $looping): void {
+            while (DB::transactionLevel() > 0) {
+                DB::rollBack();
+                Log::error('Transaction have not been committed or rolled back.', (array) $looping);
+            }
+        });
     }
 }
