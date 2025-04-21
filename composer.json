@@ -55,6 +55,7 @@
         "genealabs/laravel-caffeine": "^12.0",
         "glorand/laravel-model-settings": "^8.0",
         "gmponos/guzzle_logger": "^2.2",
+        "graham-campbell/result-type": "^1.1",
         "guanguans/laravel-api-response": "^2.0",
         "guanguans/laravel-exception-notify": "^5.1",
         "guanguans/notify": "^3.2",
