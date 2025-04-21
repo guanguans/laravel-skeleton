@@ -41,7 +41,6 @@ return (new Configuration)
     ->ignoreErrorsOnPaths(
         [
             __DIR__.'/app/Providers/UnlessProductionServiceProvider.php',
-            __DIR__.'/app/Providers/TelescopeServiceProvider.php',
             // __DIR__.'/app/Providers/WhenLocalServiceProvider.php',
         ],
         [

@@ -21,8 +21,10 @@ use Illuminate\Database\Events\DatabaseBusy;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
@@ -47,12 +49,12 @@ class DatabaseServiceProvider extends ServiceProvider implements ShouldRegisterC
                     new SlowQueryLoggedNotification(
                         $event->sql,
                         $event->time,
-                        \Illuminate\Support\Facades\Request::getFacadeRoot()->url(),
+                        Request::getFacadeRoot()->url(),
                     ),
                 );
             });
 
-            \Illuminate\Support\Facades\Event::listen(static function (DatabaseBusy $event): void {
+            Event::listen(static function (DatabaseBusy $event): void {
                 // todo notify
             });
 

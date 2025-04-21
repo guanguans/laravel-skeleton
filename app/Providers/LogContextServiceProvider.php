@@ -17,6 +17,7 @@ use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
 class LogContextServiceProvider extends ServiceProvider implements ShouldRegisterContract
@@ -48,10 +49,10 @@ class LogContextServiceProvider extends ServiceProvider implements ShouldRegiste
         ])->unless(
             $this->app->runningInConsole(),
             static fn (Collection $context): Collection => $context->merge([
-                'user-id' => \Illuminate\Support\Facades\Request::getFacadeRoot()->user()?->id,
-                'url' => \Illuminate\Support\Facades\Request::getFacadeRoot()->url(),
-                'ip' => \Illuminate\Support\Facades\Request::getFacadeRoot()->ip(),
-                'method' => \Illuminate\Support\Facades\Request::getFacadeRoot()->method(),
+                'user-id' => Request::getFacadeRoot()->user()?->id,
+                'url' => Request::getFacadeRoot()->url(),
+                'ip' => Request::getFacadeRoot()->ip(),
+                'method' => Request::getFacadeRoot()->method(),
                 // 'action' => \Illuminate\Support\Facades\Request::getFacadeRoot()->route()?->getActionName(),
             ])
         )->all();

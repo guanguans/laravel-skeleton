@@ -32,8 +32,6 @@ use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
@@ -44,7 +42,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Http\Request;
@@ -70,7 +67,6 @@ use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 use Laragear\Discover\Facades\Discover;
 use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
@@ -202,21 +198,6 @@ class AppServiceProvider extends ServiceProvider
             // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
             // View::prependLocation(resource_path('custom-views'));
             $this->registerMixins();
-            $this->createUrls();
-            Password::defaults(
-                function (): Password {
-                    $password = Password::min(8)->max(255);
-
-                    return $this->app->isProduction()
-                        ? $password
-                            ->letters()
-                            ->mixedCase()
-                            ->numbers()
-                            ->symbols()
-                            ->uncompromised()
-                        : $password;
-                }
-            );
             // Route::middleware(['throttle:uploads']);
             RateLimiter::for(
                 'uploads',
@@ -299,15 +280,6 @@ class AppServiceProvider extends ServiceProvider
             // });
         });
 
-        $this->whenever($this->app->runningInConsole(), static function (): void {
-            AboutCommand::add('Application', [
-                'Name' => 'laravel-skeleton',
-                'author' => 'guanguans',
-                'github' => 'https://github.com/guanguans/laravel-skeleton',
-                'license' => 'MIT License',
-            ]);
-        });
-
         $this->whenever(\Illuminate\Support\Facades\Request::getFacadeRoot()?->user()?->locale, function (self $serviceProvider, $locale): void {
             $this->setLocales($locale);
         });
@@ -334,29 +306,6 @@ class AppServiceProvider extends ServiceProvider
                     $mixinAttribute->class::mixin(app($mixinClass), $mixinAttribute->replace);
                 }
             });
-    }
-
-    /**
-     * @see https://github.com/nandi95/laravel-starter/blob/main/app/Providers/AppServiceProvider.php
-     */
-    private function createUrls(): void
-    {
-        ResetPassword::createUrlUsing(
-            static fn (object $notifiable, #[\SensitiveParameter] string $token): string => config('app.frontend_url')."/auth/reset/$token?email={$notifiable->getEmailForPasswordReset()}"
-        );
-
-        VerifyEmail::createUrlUsing(static function (object $notifiable): string {
-            $url = url()->temporarySignedRoute(
-                'email.verify',
-                now()->addMinutes(config('auth.verification.expire', 60)),
-                [
-                    'user' => $notifiable->ulid,
-                ],
-                false
-            );
-
-            return config('app.frontend_url').'/auth/verify?verify_url='.urlencode($url);
-        });
     }
 
     /**

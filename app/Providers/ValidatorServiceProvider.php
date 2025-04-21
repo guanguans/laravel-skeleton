@@ -19,12 +19,27 @@ use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use Laragear\Discover\Facades\Discover;
 
 class ValidatorServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
     public function boot(): void
     {
+        Password::defaults(
+            function (): Password {
+                $password = Password::min(8)->max(255);
+
+                return $this->app->isProduction()
+                    ? $password
+                        ->letters()
+                        ->mixedCase()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised()
+                    : $password;
+            }
+        );
         $this->extendValidator();
     }
 

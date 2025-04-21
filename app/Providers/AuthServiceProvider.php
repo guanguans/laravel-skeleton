@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Policies\UserPolicy;
 use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -40,10 +41,35 @@ class AuthServiceProvider extends ServiceProvider implements ShouldRegisterContr
 
             return url("/#/reset-password/$payload");
         });
+
+        $this->createUrls();
     }
 
     public function shouldRegister(): bool
     {
         return true;
+    }
+
+    /**
+     * @see https://github.com/nandi95/laravel-starter/blob/main/app/Providers/AppServiceProvider.php
+     */
+    private function createUrls(): void
+    {
+        ResetPassword::createUrlUsing(
+            static fn (object $notifiable, #[\SensitiveParameter] string $token): string => config('app.frontend_url')."/auth/reset/$token?email={$notifiable->getEmailForPasswordReset()}"
+        );
+
+        VerifyEmail::createUrlUsing(static function (object $notifiable): string {
+            $url = url()->temporarySignedRoute(
+                'email.verify',
+                now()->addMinutes(config('auth.verification.expire', 60)),
+                [
+                    'user' => $notifiable->ulid,
+                ],
+                false
+            );
+
+            return config('app.frontend_url').'/auth/verify?verify_url='.urlencode($url);
+        });
     }
 }
