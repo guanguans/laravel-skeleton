@@ -54,7 +54,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Env;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Context;
@@ -63,7 +62,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\ParallelTesting;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -312,19 +310,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->whenever(\Illuminate\Support\Facades\Request::getFacadeRoot()?->user()?->locale, function (self $serviceProvider, $locale): void {
             $this->setLocales($locale);
-        });
-
-        /** @see \Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle */
-        $this->whenever($this->app->environment('testing'), static function (): void {
-            // Http::preventStrayRequests(); // Preventing Stray Requests
-            // Mail::alwaysTo('taylor@example.com');
-            // Carbon::setTestNow('2031-04-05');
-            // Carbon::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
-            // CarbonImmutable::setTestNow();
-            // CarbonImmutable::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
-            // ParallelTesting::setUpTestDatabase(static function (string $database, int $token) {
-            //     Artisan::call('db:seed');
-            // });
         });
     }
 
