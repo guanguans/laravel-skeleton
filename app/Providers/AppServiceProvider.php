@@ -21,13 +21,11 @@ use App\Listeners\RunCommandInDebugModeListener;
 use App\Listeners\SetRequestIdListener;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
-use App\Notifications\SlowQueryLoggedNotification;
 use App\Policies\UserPolicy;
 use App\Support\Attributes\Mixin;
 use App\Support\Contracts\ShouldRegisterContract;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Carbon\CarbonInterval;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
@@ -42,12 +40,9 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Events\DatabaseBusy;
-use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Foundation\Application;
@@ -58,7 +53,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\DateFactory;
 use Illuminate\Support\Env;
@@ -72,14 +66,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\ParallelTesting;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
-use Illuminate\Support\Lottery;
 use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -376,66 +367,6 @@ class AppServiceProvider extends ServiceProvider
             $this->setLocales($locale);
         });
 
-        $this->whenever($this->app->isProduction(), static function (): void {
-            // URL::forceHttps();
-            // URL::forceScheme('https');
-            // $this->app->make(Request::class)->server->set('HTTPS', 'on');
-            // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
-            // Config::set('session.secure', true);
-
-            DB::whenQueryingForLongerThan(300000, static function (Connection $connection, QueryExecuted $event): void {
-                Notification::send(
-                    new AnonymousNotifiable,
-                    new SlowQueryLoggedNotification(
-                        $event->sql,
-                        $event->time,
-                        \Illuminate\Support\Facades\Request::getFacadeRoot()->url(),
-                    ),
-                );
-            });
-
-            \Illuminate\Support\Facades\Event::listen(static function (DatabaseBusy $event): void {
-                // todo notify
-            });
-
-            /**
-             * 此设置将仅报告 1% 的耗时超过 2 秒的查询，从而帮助您监控性能而不会使日志记录系统不堪重负。
-             *
-             * @see https://www.harrisrafto.eu/harnessing-controlled-randomness-with-laravels-lottery/
-             */
-            // DB::whenQueryingForLongerThan(
-            //     CarbonInterval::seconds(2),
-            //     Lottery::odds(1, 100)->winner(static fn () => report('Querying > 2 seconds.')),
-            // );
-
-            // Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
-            //     info(sprintf('Attempted to lazy load [%s] on model [%s].', $relation, get_class($model)));
-            // });
-
-            DB::prohibitDestructiveCommands();
-
-            // -----------------------------------------------------------------------
-            // LOG-VIEWER : log all queries (not in production)
-            // -----------------------------------------------------------------------
-            // if (! app()->isProduction()) {
-            //     DB::listen(fn ($query) => Log::debug($query->toRawSQL()));
-            // }
-
-            // -----------------------------------------------------------------------
-            // LOG-VIEWER : log all SLOW queries (not in production)
-            // -----------------------------------------------------------------------
-            if (!app()->isProduction()) {
-                DB::listen(static function (QueryExecuted $query): void {
-                    if (250 < $query->time) {
-                        Log::warning('An individual database query exceeded 250 ms.', [
-                            'sql' => $query->sql,
-                            'raw' => $query->toRawSql(),
-                        ]);
-                    }
-                });
-            }
-        });
-
         /** @see \Illuminate\Foundation\Testing\Concerns\InteractsWithTestCaseLifecycle */
         $this->whenever($this->app->environment('testing'), static function (): void {
             // Http::preventStrayRequests(); // Preventing Stray Requests
@@ -446,20 +377,6 @@ class AppServiceProvider extends ServiceProvider
             // CarbonImmutable::setTestNowAndTimezone('2031-04-05', 'Asia/Shanghai');
             // ParallelTesting::setUpTestDatabase(static function (string $database, int $token) {
             //     Artisan::call('db:seed');
-            // });
-        });
-
-        $this->unless($this->app->isProduction(), static function (): void {
-            Model::shouldBeStrict(); // Eloquent 严格模式
-            Model::automaticallyEagerLoadRelationships(); // 避免 N+1 查询问题
-            // Model::preventLazyLoading(); // 预防 N+1 查询问题
-            // Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
-            // Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
-            // DB::handleExceedingCumulativeQueryDuration();
-            // Model::unguard();
-            // Model::withoutEvents();
-            // DB::listen(static function ($query) {
-            //     logger(Str::replaceArray('?', $query->bindings, $query->sql));
             // });
         });
 
