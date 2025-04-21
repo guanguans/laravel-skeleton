@@ -72,7 +72,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Events\DatabaseBusy;
 use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\Schema\Blueprint;
@@ -81,7 +80,6 @@ use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
-use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Http\Client\PendingRequest;
@@ -135,7 +133,6 @@ use Stillat\BladeDirectives\Support\Facades\Directive;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @property EventDispatcherInterface $symfonyDispatcher
@@ -282,7 +279,6 @@ class AppServiceProvider extends ServiceProvider
             $this->extendValidator();
             $this->createUrls();
             $this->extendView();
-            $this->listenEvents();
             Password::defaults(
                 function (): Password {
                     $password = Password::min(8)->max(255);
@@ -733,38 +729,6 @@ class AppServiceProvider extends ServiceProvider
         if ($request->is('api/v1/*')) {
             $request->headers->set('Accept', 'application/json');
         }
-    }
-
-    /**
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
-    private function listenEvents(): void
-    {
-        // $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
-        //     $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
-        // });
-
-        // $this->app->get('events')->listen(DatabaseBusy::class, static function (DatabaseBusy $event) {
-        //     Notification::route('mail', 'dev@example.com')
-        //         ->notify(new DatabaseApproachingMaxConnections(
-        //             $event->connectionName,
-        //             $event->connections
-        //         ));
-        // });
-
-        $this->app->get(Dispatcher::class)->listen(RequestHandled::class, static function (RequestHandled $event): void {
-            if ($event->response instanceof JsonResponse) {
-                $event->response->setEncodingOptions($event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE);
-            }
-        });
-
-        // \Illuminate\Support\Facades\Event::listen('*', static function (string $event, array $data): void {
-        //     // Log the event class
-        //     error_log($event);
-        //     // Log the event data delegated to listener parameters
-        //     error_log(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS));
-        // });
     }
 
     private function setLocales(?string $locale = null): void

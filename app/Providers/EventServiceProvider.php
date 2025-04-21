@@ -21,8 +21,13 @@ use App\Listeners\SetRequestIdListener;
 use App\Listeners\ShareLogContextSubscriber;
 use App\Observers\UserObserver;
 use App\Support\Contracts\ShouldRegisterContract;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bootstrap\BootProviders;
+use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EventServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
@@ -87,7 +92,10 @@ class EventServiceProvider extends ServiceProvider implements ShouldRegisterCont
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    public function boot(): void {}
+    public function boot(): void
+    {
+        $this->listenEvents();
+    }
 
     /**
      * @noinspection PhpMissingParentCallCommonInspection
@@ -101,5 +109,37 @@ class EventServiceProvider extends ServiceProvider implements ShouldRegisterCont
     public function shouldRegister(): bool
     {
         return true;
+    }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    private function listenEvents(): void
+    {
+        // $this->app->get('events')->listen(StatementPrepared::class, static function (StatementPrepared $event): void {
+        //     $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
+        // });
+
+        // $this->app->get('events')->listen(DatabaseBusy::class, static function (DatabaseBusy $event) {
+        //     Notification::route('mail', 'dev@example.com')
+        //         ->notify(new DatabaseApproachingMaxConnections(
+        //             $event->connectionName,
+        //             $event->connections
+        //         ));
+        // });
+
+        $this->app->get(Dispatcher::class)->listen(RequestHandled::class, static function (RequestHandled $event): void {
+            if ($event->response instanceof JsonResponse) {
+                $event->response->setEncodingOptions($event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE);
+            }
+        });
+
+        // \Illuminate\Support\Facades\Event::listen('*', static function (string $event, array $data): void {
+        //     // Log the event class
+        //     error_log($event);
+        //     // Log the event data delegated to listener parameters
+        //     error_log(json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS));
+        // });
     }
 }
