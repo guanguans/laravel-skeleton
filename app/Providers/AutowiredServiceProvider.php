@@ -27,7 +27,7 @@ class AutowiredServiceProvider extends ServiceProvider implements ShouldRegister
 
     public function boot(): void
     {
-        $this->bootAutowired();
+        $this->autowired();
     }
 
     public function shouldRegister(): bool
@@ -40,7 +40,7 @@ class AutowiredServiceProvider extends ServiceProvider implements ShouldRegister
      *
      * @noinspection PhpExpressionResultUnusedInspection
      */
-    private function bootAutowired(): void
+    private function autowired(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app): void {
             if (

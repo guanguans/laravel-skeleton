@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\PersonalAccessToken;
 use App\Support\Clients\PushDeer;
 use App\Support\Contracts\ShouldRegisterContract;
 use Dedoc\Scramble\Scramble;
@@ -27,6 +28,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
+use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
 
@@ -50,6 +52,8 @@ class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterCon
 
     public function boot(): void
     {
+        // Passport::enablePasswordGrant();
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         Scramble::configure()->withDocumentTransformers(static function (OpenApi $openApi): void {
             $openApi->secure(SecurityScheme::http('bearer'));
         });
