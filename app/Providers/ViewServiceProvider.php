@@ -13,21 +13,21 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Contracts\ShouldRegisterContract;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Request as RequestFacade;
+use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\View\View;
+use Stillat\BladeDirectives\Support\Facades\Directive;
 
-class ViewServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class ViewServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -35,33 +35,21 @@ class ViewServiceProvider extends ServiceProvider implements ShouldRegisterContr
 
     public function boot(): void
     {
-        // Paginator::useBootstrap();
-        // Paginator::useBootstrapFour();
-        // Paginator::useBootstrapFive();
-        // Paginator::defaultView('pagination::bulma');
-        // Paginator::defaultSimpleView('pagination::simple-bulma');
-        // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
-
         // Vite::useWaterfallPrefetching(concurrency: 10);
         // Vite::useAggressivePrefetching();
         // Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
         // Vite::useBuildDirectory('.build');
         // Vite::prefetch(4);
 
+        // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
+
         // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
         // View::prependLocation(resource_path('custom-views'));
 
         $this->extendView();
+        $this->extendBlade();
     }
 
-    public function shouldRegister(): bool
-    {
-        return true;
-    }
-
-    /**
-     * @throws BindingResolutionException
-     */
     private function extendView(): void
     {
         /** @see https://www.harrisrafto.eu/simplifying-view-logic-with-laravel-blades-service-injection */
@@ -72,31 +60,34 @@ class ViewServiceProvider extends ServiceProvider implements ShouldRegisterContr
         // return view('dashboard', ['users' => $users])->fragment('user-list');
 
         // 合成器
-        $this->app->make(Factory::class)->composer('*', RequestComposer::class);
-        $this->app->make(Factory::class)->composer('*', function (View $view): void {
-            $view->with('request', $this->app->make(Request::class))
-                ->with('user', $this->app->make(\Illuminate\Contracts\Auth\Factory::class)->user())
-                ->with('config', $this->app->make(Repository::class));
+        ViewFacade::composer('*', RequestComposer::class);
+        ViewFacade::composer('*', static function (View $view): void {
+            $view->with('request', RequestFacade::getFacadeRoot())
+                ->with('user', auth()->user())
+                ->with('config', config());
         });
 
         // 构造器
-        $this->app->make(Factory::class)->creator('*', RequestCreator::class);
-        $this->app->make(Factory::class)->creator('*', function (View $view): void {
-            $view->with('request', $this->app->make(Request::class))
-                ->with('user', $this->app->make(\Illuminate\Contracts\Auth\Factory::class)->user())
-                ->with('config', $this->app->make(Repository::class));
+        ViewFacade::creator('*', RequestCreator::class);
+        ViewFacade::creator('*', static function (View $view): void {
+            $view->with('request', RequestFacade::getFacadeRoot())
+                ->with('user', auth()->user())
+                ->with('config', config());
         });
 
         // 共享数据
-        $this->app->make(Factory::class)->share('request', $this->app->make(Request::class));
-        $this->app->make(Factory::class)->share('user', $this->app->make(\Illuminate\Contracts\Auth\Factory::class)->user());
-        $this->app->make(Factory::class)->share('config', $this->app->make(Repository::class));
+        ViewFacade::share('request', RequestFacade::getFacadeRoot());
+        ViewFacade::share('user', auth()->user());
+        ViewFacade::share('config', config());
+    }
 
+    private function extendBlade(): void
+    {
         // 注册组件
         Blade::component('alert', AlertComponent::class);
 
-        /*
-         * 扩展 Blade
+        /**
+         * 扩展 Blade.
          *
          * ```blade
          *
@@ -120,8 +111,8 @@ class ViewServiceProvider extends ServiceProvider implements ShouldRegisterContr
             return "<?php echo date($newExpression);?>";
         });
 
-        /*
-         * 自定义 if 声明
+        /**
+         * 自定义 if 声明.
          *
          * ```blade
          *

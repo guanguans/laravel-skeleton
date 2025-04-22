@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Notifications\SlowQueryLoggedNotification;
-use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Events\DatabaseBusy;
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Notifications\AnonymousNotifiable;
@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class DatabaseServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class DatabaseServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -41,42 +41,34 @@ class DatabaseServiceProvider extends ServiceProvider implements ShouldRegisterC
 
     public function boot(): void
     {
-        // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
-        Schema::defaultStringLength(191);
-        Builder::defaultMorphKeyType('uuid');
-        Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
-            $value,
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
-        ));
+        $this->forever();
+        $this->whenProduction();
+        $this->whenSQLiteConnection();
+        $this->unlessProduction();
+    }
 
-        if (DB::connection() instanceof SQLiteConnection) {
-            // Enable on delete cascade for sqlite connections
-            DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
-        }
-
-        // Prevents 'migrate:fresh', 'migrate:refresh', 'migrate:reset', and 'db:wipe'
-        DB::prohibitDestructiveCommands($this->app->isProduction());
-        // Builder::morphUsingUlids();
-        // Builder::morphUsingUuids();
-        // 自定义多态类型
-        Relation::enforceMorphMap([
-            'post' => 'App\Models\Post',
-            'video' => 'App\Models\Video',
-        ]);
-
-        /** @var Model $post */
-        // $alias = $post->getMorphClass();
-        // $class = Relation::getMorphedModel($alias);
-        // Order::resolveRelationUsing('customer', function (Order $order) {
-        //     return $order->belongsTo(Customer::class, 'customer_id');
-        // });
-
+    private function whenProduction(): void
+    {
         $this->whenever($this->app->isProduction(), static function (): void {
             // URL::forceHttps();
             // URL::forceScheme('https');
             // $this->app->make(Request::class)->server->set('HTTPS', 'on');
             // $this->app->make(Request::class)->server->set('SERVER_PORT', 443);
             // Config::set('session.secure', true);
+            // Prevents 'migrate:fresh', 'migrate:refresh', 'migrate:reset', and 'db:wipe'
+            DB::prohibitDestructiveCommands();
+
+            // Event::listen(StatementPrepared::class, static function (StatementPrepared $event): void {
+            //     $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
+            // });
+
+            // Event::listen(DatabaseBusy::class, static function (DatabaseBusy $event): void {
+            //     Notification::route('mail', 'dev@example.com')
+            //         ->notify(new DatabaseApproachingMaxConnections(
+            //             $event->connectionName,
+            //             $event->connections
+            //         ));
+            // });
 
             DB::whenQueryingForLongerThan(300000, static function (Connection $connection, QueryExecuted $event): void {
                 Notification::send(
@@ -130,7 +122,10 @@ class DatabaseServiceProvider extends ServiceProvider implements ShouldRegisterC
                 });
             }
         });
+    }
 
+    private function unlessProduction(): void
+    {
         $this->unless($this->app->isProduction(), static function (): void {
             Model::shouldBeStrict(); // Eloquent 严格模式
             Model::automaticallyEagerLoadRelationships(); // 避免 N+1 查询问题
@@ -146,8 +141,36 @@ class DatabaseServiceProvider extends ServiceProvider implements ShouldRegisterC
         });
     }
 
-    public function shouldRegister(): bool
+    private function whenSQLiteConnection(): void
     {
-        return true;
+        if (DB::connection() instanceof SQLiteConnection) {
+            // Enable on delete cascade for sqlite connections
+            DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
+        }
+    }
+
+    private function forever(): void
+    {
+        // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
+        Schema::defaultStringLength(191);
+        Builder::defaultMorphKeyType('uuid');
+        // Builder::morphUsingUlids();
+        // Builder::morphUsingUuids();
+
+        /** @var Model $post */
+        // $alias = $post->getMorphClass();
+        // $class = Relation::getMorphedModel($alias);
+        // Order::resolveRelationUsing('customer', function (Order $order) {
+        //     return $order->belongsTo(Customer::class, 'customer_id');
+        // });
+        Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
+            $value,
+            \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
+        ));
+        // 自定义多态类型
+        Relation::enforceMorphMap([
+            'post' => 'App\Models\Post',
+            'video' => 'App\Models\Video',
+        ]);
     }
 }

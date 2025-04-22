@@ -14,12 +14,11 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Support\Attributes\Autowired;
-use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class AutowiredServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class AutowiredServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -27,12 +26,7 @@ class AutowiredServiceProvider extends ServiceProvider implements ShouldRegister
 
     public function boot(): void
     {
-        $this->autowired();
-    }
-
-    public function shouldRegister(): bool
-    {
-        return true;
+        $this->forever();
     }
 
     /**
@@ -40,7 +34,7 @@ class AutowiredServiceProvider extends ServiceProvider implements ShouldRegister
      *
      * @noinspection PhpExpressionResultUnusedInspection
      */
-    private function autowired(): void
+    private function forever(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app): void {
             if (

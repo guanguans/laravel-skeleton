@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Rules\Rule;
-use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Validator;
 use Laragear\Discover\Facades\Discover;
 
-class ValidatorServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class ValidatorServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -31,49 +31,37 @@ class ValidatorServiceProvider extends ServiceProvider implements ShouldRegister
 
     public function boot(): void
     {
-        Password::defaults(
-            function (): Password {
-                $password = Password::min(8)->max(255);
+        Password::defaults(fn (): Password => Password::min(8)
+            ->max(255)
+            ->when(
+                $this->app->isProduction(),
+                static fn (#[\SensitiveParameter] Password $password) => $password
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
+            ));
 
-                return $this->app->isProduction()
-                    ? $password
-                        ->letters()
-                        ->mixedCase()
-                        ->numbers()
-                        ->symbols()
-                        ->uncompromised()
-                    : $password;
-            }
-        );
         $this->extendValidator();
     }
 
-    public function shouldRegister(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Register rule.
-     */
     private function extendValidator(): void
     {
         Discover::in('Rules')
             ->instancesOf(Rule::class)
             ->classes()
             ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
-                /** @var class-string&Rule $ruleClass */
-                Validator::{$ruleClass::extendType()}(
+                /** @var class-string<Rule> $ruleClass */
+                ValidatorFacade::{$ruleClass::extendType()}(
                     $ruleClass::name(),
-                    static fn (
-                        string $attribute,
-                        mixed $value,
-                        array $parameters,
-                        \Illuminate\Validation\Validator $validator
-                    ): bool => tap(new $ruleClass(...$parameters), static function (Rule $rule) use ($validator): void {
-                        $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
-                        $rule instanceof DataAwareRule and $rule->setData($validator->getData());
-                    })->passes($attribute, $value),
+                    static fn (string $attribute, mixed $value, array $parameters, Validator $validator): bool => tap(
+                        new $ruleClass(...$parameters),
+                        static function (Rule $rule) use ($validator): void {
+                            $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
+                            $rule instanceof DataAwareRule and $rule->setData($validator->getData());
+                        }
+                    )->passes($attribute, $value),
                     $ruleClass::message()
                 );
             });

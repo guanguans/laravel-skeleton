@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class UnlessProductionServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
+class UnlessProductionAggregateServiceProvider extends AggregateServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -62,8 +61,10 @@ class UnlessProductionServiceProvider extends AggregateServiceProvider implement
         \Worksome\Envy\EnvyServiceProvider::class,
     ];
 
-    public function shouldRegister(): bool
+    public function register(): void
     {
-        return !$this->app->isProduction();
+        if (!$this->app->isProduction()) {
+            parent::register();
+        }
     }
 }

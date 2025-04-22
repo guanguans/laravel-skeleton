@@ -16,7 +16,6 @@ namespace App\Providers;
 use App\Models\JWTUser;
 use App\Models\User;
 use App\Policies\UserPolicy;
-use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -24,7 +23,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Traits\Conditionable;
 
-class AuthServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class AuthServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -42,11 +41,6 @@ class AuthServiceProvider extends ServiceProvider implements ShouldRegisterContr
         Gate::guessPolicyNamesUsing(static fn (string $modelClass): string => 'App\\Policies\\'.class_basename($modelClass).'Policy');
         Gate::policy(User::class, UserPolicy::class);
         RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
-    }
-
-    public function shouldRegister(): bool
-    {
-        return true;
     }
 
     /**

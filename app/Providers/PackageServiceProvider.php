@@ -15,24 +15,27 @@ namespace App\Providers;
 
 use App\Models\PersonalAccessToken;
 use App\Support\Clients\PushDeer;
-use App\Support\Contracts\ShouldRegisterContract;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
+use Laravel\Octane\Events\RequestReceived;
 use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
 
-class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class PackageServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -62,6 +65,19 @@ class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterCon
 
         /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
         EnsureFeaturesAreActive::whenInactive(static fn (Request $request, array $features): Response => new Response(status: 403));
+        $this->whenever($this->isOctaneHttpServer(), function (): void {
+            $this->app->get(Dispatcher::class)->listen(RequestReceived::class, static function (): void {
+                $uuid = Str::uuid()->toString();
+
+                if (config('octane.server') === 'roadrunner') {
+                    Cache::put($uuid, microtime(true));
+
+                    return;
+                }
+
+                Cache::store('octane')->put($uuid, microtime(true));
+            });
+        });
     }
 
     /**
@@ -85,9 +101,14 @@ class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterCon
         ];
     }
 
-    public function shouldRegister(): bool
+    /**
+     * Determine if server is running Octane.
+     *
+     * @noinspection GlobalVariableUsageInspection
+     */
+    private function isOctaneHttpServer(): bool
     {
-        return true;
+        return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
     }
 
     private function registerPushDeer(): void
@@ -96,7 +117,6 @@ class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterCon
             PushDeer::class,
             static fn (Application $application): PushDeer => new PushDeer($application->make(Repository::class)->get('services.pushdeer'))
         );
-        $this->app->alias(PushDeer::class, 'pushdeer');
     }
 
     private function registerFaker(): void
@@ -123,7 +143,5 @@ class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterCon
 
             return $faker;
         });
-
-        $this->app->alias(Generator::class, 'faker');
     }
 }

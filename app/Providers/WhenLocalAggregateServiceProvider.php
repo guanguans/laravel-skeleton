@@ -15,27 +15,25 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Contracts\ShouldRegisterContract;
 use Guanguans\LaravelSoar\SoarServiceProvider;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class WhenLocalServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
+class WhenLocalAggregateServiceProvider extends AggregateServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
     }
 
-    /**
-     * @noinspection ClassOverridesFieldOfSuperClassInspection
-     * @noinspection PropertyInitializationFlawsInspection
-     */
+    /** {@inheritDoc} */
     protected $providers = [
-        // SoarServiceProvider::class,
+        SoarServiceProvider::class,
     ];
 
-    public function shouldRegister(): bool
+    public function register(): void
     {
-        return $this->app->isLocal();
+        if ($this->app->isLocal()) {
+            parent::register();
+        }
     }
 }

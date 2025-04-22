@@ -14,48 +14,37 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Console\Commands\ClearAllCommand;
-use App\Support\Contracts\ShouldRegisterContract;
+use App\Listeners\RunCommandInDebugModeListener;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Console\AboutCommand;
-use Illuminate\Support\AggregateServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @property EventDispatcherInterface $symfonyDispatcher
  */
-class WhenRunningInConsoleServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
+class ConsoleServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
     }
 
-    /**
-     * @noinspection ClassOverridesFieldOfSuperClassInspection
-     * @noinspection PropertyInitializationFlawsInspection
-     */
-    protected $providers = [
-    ];
-
-    public function shouldRegister(): bool
-    {
-        return $this->app->runningInConsole();
-    }
-
-    /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
     public function boot(): void
     {
-        $this->whenever($this->app->runningInConsole(), static function (): void {
-            AboutCommand::add('Application', [
-                'Name' => 'laravel-skeleton',
-                'author' => 'guanguans',
-                'github' => 'https://github.com/guanguans/laravel-skeleton',
-                'license' => 'MIT License',
-            ]);
-        });
+        $this->forever();
+        $this->whenProduction();
+    }
 
-        ClearAllCommand::prohibit(app()->isProduction());
+    private function forever(): void
+    {
+        AboutCommand::add('Application', [
+            'name' => 'laravel-skeleton',
+            'author' => 'guanguans',
+            'github' => 'https://github.com/guanguans/laravel-skeleton',
+            'license' => 'MIT License',
+        ]);
 
         /** @see https://github.com/OussamaMater/Laravel-Tips#tip-266--the-new-optimizes-method */
         $this->optimizes(
@@ -70,5 +59,12 @@ class WhenRunningInConsoleServiceProvider extends AggregateServiceProvider imple
         //         new RunCommandInDebugModeListener
         //     ))->call($this->app->make(Kernel::class));
         // });
+    }
+
+    private function whenProduction(): void
+    {
+        $this->when($this->app->isProduction(), static function (): void {
+            ClearAllCommand::prohibit();
+        });
     }
 }

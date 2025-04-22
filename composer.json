@@ -374,8 +374,7 @@
             "@env-put-xdebug-off",
             "@rector-dry-run",
             "@phpstan",
-            "@composer-dependency-analyser",
-            "@peck"
+            "@composer-dependency-analyser"
         ],
         "class-leak": "@php ./vendor/bin/class-leak --ansi -v",
         "class-leak-check": "@class-leak check ./config ./src --skip-suffix=Pipe --skip-path=Support/Traits --skip-path=Channels --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Channel --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Collector --skip-type=Rector\\Rector\\AbstractRector",

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Support\Attributes\Mixin;
-use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Laragear\Discover\Facades\Discover;
@@ -58,13 +57,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Discover::in('Providers')
             ->instancesOf(ServiceProvider::class)
-            ->instancesOf(ShouldRegisterContract::class)
             ->classes()
             ->keys()
-            ->each(function (string $class): void {
-                /** @var class-string<ServiceProvider&ShouldRegisterContract> $class */
-                $provider = new $class($this->app);
-                $provider->shouldRegister() and $this->app->register($provider);
-            });
+            // ->dd()
+            ->each(fn (string $class): ServiceProvider => $this->app->register($class));
     }
 }

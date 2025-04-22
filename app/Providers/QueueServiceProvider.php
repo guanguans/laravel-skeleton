@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Queue\Events\Looping;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -21,7 +20,7 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class QueueServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class QueueServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -30,11 +29,6 @@ class QueueServiceProvider extends ServiceProvider implements ShouldRegisterCont
     public function boot(): void
     {
         $this->queue();
-    }
-
-    public function shouldRegister(): bool
-    {
-        return true;
     }
 
     /**

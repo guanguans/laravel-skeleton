@@ -14,15 +14,11 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\User;
-use App\Support\Contracts\ShouldRegisterContract;
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Traits\Conditionable;
 
-class RouteServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class RouteServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
@@ -37,42 +33,12 @@ class RouteServiceProvider extends ServiceProvider implements ShouldRegisterCont
     #[\Override]
     public function boot(): void
     {
-        // Route::middleware(['throttle:uploads']);
-        RateLimiter::for(
-            'uploads',
-            static fn (Request $request) => $request->user()->vipCustomer()
-                ? Limit::none()
-                : Limit::perMinute(100)->by($request->ip())
-        );
-        $this->configureRateLimiting();
         Route::pattern('id', '[0-9]+');
         $this->bindRouteModels();
         // Route::resourceVerbs([
         //     'create' => 'crear',
         //     'edit' => 'editar',
         // ]);
-    }
-
-    public function shouldRegister(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Configure the rate limiters for the application.
-     */
-    protected function configureRateLimiting(): void
-    {
-        RateLimiter::for(
-            'api',
-            static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
-        );
-
-        RateLimiter::for('login', static fn (Request $request): array => [
-            Limit::perMinute(500),
-            Limit::perMinute(5)->by($request->ip()),
-            Limit::perMinute(5)->by($request->input('email')),
-        ]);
     }
 
     protected function bindRouteModels(): void

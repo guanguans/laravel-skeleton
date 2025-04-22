@@ -40,8 +40,9 @@ return (new Configuration)
     )
     ->ignoreErrorsOnPaths(
         [
-            __DIR__.'/app/Providers/UnlessProductionServiceProvider.php',
-            // __DIR__.'/app/Providers/WhenLocalServiceProvider.php',
+            __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
+            __DIR__.'/app/Providers/WhenLocalAggregateServiceProvider.php',
+            // __DIR__.'/app/Providers/WhenTestingAggregateServiceProvider.php',
         ],
         [
             ErrorType::DEV_DEPENDENCY_IN_PROD,

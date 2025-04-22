@@ -13,38 +13,47 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Contracts\ShouldRegisterContract;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
+use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-class HttpServiceProvider extends ServiceProvider implements ShouldRegisterContract
+class HttpServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
     }
 
-    public function boot(): void
+    public function boot(Request $request): void
     {
         // JsonResource::wrap('list');
         JsonResource::withoutWrapping();
         ResourceCollection::withoutWrapping();
+
         Http::globalOptions([
-            'timeout' => 30,
             'connect_timeout' => 10,
+            'timeout' => 30,
         ]);
         Http::globalMiddleware(
-            Middleware::log(Log::channel('single'), new MessageFormatter(MessageFormatter::DEBUG))
+            Middleware::log(Log::channel(), new MessageFormatter(MessageFormatter::DEBUG))
         );
-    }
 
-    public function shouldRegister(): bool
-    {
-        return true;
+        Event::listen(RequestHandled::class, static function (RequestHandled $event): void {
+            if ($event->response instanceof JsonResponse) {
+                $event->response->setEncodingOptions($event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE);
+            }
+        });
+
+        if ($request->is('api/*')) {
+            $request->headers->set('Accept', 'application/json');
+        }
     }
 }

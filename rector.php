@@ -98,7 +98,7 @@ return RectorConfig::configure()
         '**/Fixtures/*',
         '**/vendor/*',
         __DIR__.'/app/Providers/EventServiceProvider.php',
-        __DIR__.'/app/Providers/UnlessProductionServiceProvider.php',
+        __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
         __DIR__.'/bootstrap/cache/',
         __DIR__.'/bootstrap/providers.php',
         __DIR__.'/resources/lang/',
