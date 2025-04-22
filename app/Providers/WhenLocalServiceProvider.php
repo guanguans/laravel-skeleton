@@ -18,9 +18,14 @@ namespace App\Providers;
 use App\Support\Contracts\ShouldRegisterContract;
 use Guanguans\LaravelSoar\SoarServiceProvider;
 use Illuminate\Support\AggregateServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
 
 class WhenLocalServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
+
     /**
      * @noinspection ClassOverridesFieldOfSuperClassInspection
      * @noinspection PropertyInitializationFlawsInspection

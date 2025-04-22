@@ -17,9 +17,14 @@ use App\Support\Attributes\Autowired;
 use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
 
 class AutowiredServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
+
     public function boot(): void
     {
         $this->bootAutowired();

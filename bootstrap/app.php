@@ -51,6 +51,10 @@ return Application::configure(basePath: \dirname(__DIR__))
         },
     )
     ->withMiddleware(static function (Middleware $middleware): void {
+        ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
+        // TrimStrings::skipWhen(static fn (Request $request): bool => $request->is('admin/*'));
+        // TrimStrings::except(['secret']);
+
         // $middleware->statefulApi();
 
         // $middleware->remove([

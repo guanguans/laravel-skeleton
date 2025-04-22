@@ -19,11 +19,16 @@ use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
 use Laragear\Discover\Facades\Discover;
 
 class ValidatorServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
+
     public function boot(): void
     {
         Password::defaults(

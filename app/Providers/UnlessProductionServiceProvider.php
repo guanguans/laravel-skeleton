@@ -15,9 +15,14 @@ namespace App\Providers;
 
 use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Support\AggregateServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
 
 class UnlessProductionServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
+
     /**
      * @noinspection ClassOverridesFieldOfSuperClassInspection
      * @noinspection PhpFullyQualifiedNameUsageInspection

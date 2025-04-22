@@ -25,12 +25,17 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bootstrap\BootProviders;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EventServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
+
     /**
      * {@inheritDoc}
      *

@@ -22,13 +22,35 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
 use Illuminate\View\View;
 
 class ViewServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
+
     public function boot(): void
     {
+        // Paginator::useBootstrap();
+        // Paginator::useBootstrapFour();
+        // Paginator::useBootstrapFive();
+        // Paginator::defaultView('pagination::bulma');
+        // Paginator::defaultSimpleView('pagination::simple-bulma');
+        // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
+
+        // Vite::useWaterfallPrefetching(concurrency: 10);
+        // Vite::useAggressivePrefetching();
+        // Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
+        // Vite::useBuildDirectory('.build');
+        // Vite::prefetch(4);
+
+        // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
+        // View::prependLocation(resource_path('custom-views'));
+
         $this->extendView();
     }
 

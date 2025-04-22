@@ -13,11 +13,16 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Console\Commands\ClearAllCommand;
 use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * @property EventDispatcherInterface $symfonyDispatcher
+ */
 class WhenRunningInConsoleServiceProvider extends AggregateServiceProvider implements ShouldRegisterContract
 {
     use Conditionable {
@@ -49,5 +54,21 @@ class WhenRunningInConsoleServiceProvider extends AggregateServiceProvider imple
                 'license' => 'MIT License',
             ]);
         });
+
+        ClearAllCommand::prohibit(app()->isProduction());
+
+        /** @see https://github.com/OussamaMater/Laravel-Tips#tip-266--the-new-optimizes-method */
+        $this->optimizes(
+            optimize: 'filament:optimize',
+            // Defaults to the service provider name without "ServiceProvider" suffix
+            key: 'filament'
+        );
+
+        // $this->app->booted(function (): void {
+        //     (fn () => $this->symfonyDispatcher->addListener(
+        //         ConsoleEvents::COMMAND,
+        //         new RunCommandInDebugModeListener
+        //     ))->call($this->app->make(Kernel::class));
+        // });
     }
 }

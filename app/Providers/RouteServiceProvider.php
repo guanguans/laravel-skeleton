@@ -20,9 +20,13 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Traits\Conditionable;
 
 class RouteServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
     protected array $routeModels = [
         'user' => User::class,
     ];
@@ -33,9 +37,20 @@ class RouteServiceProvider extends ServiceProvider implements ShouldRegisterCont
     #[\Override]
     public function boot(): void
     {
+        // Route::middleware(['throttle:uploads']);
+        RateLimiter::for(
+            'uploads',
+            static fn (Request $request) => $request->user()->vipCustomer()
+                ? Limit::none()
+                : Limit::perMinute(100)->by($request->ip())
+        );
         $this->configureRateLimiting();
         Route::pattern('id', '[0-9]+');
         $this->bindRouteModels();
+        // Route::resourceVerbs([
+        //     'create' => 'crear',
+        //     'edit' => 'editar',
+        // ]);
     }
 
     public function shouldRegister(): bool

@@ -14,16 +14,24 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\JWTUser;
+use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Policies\UserPolicy;
 use App\Support\Contracts\ShouldRegisterContract;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Traits\Conditionable;
+use Laravel\Sanctum\Sanctum;
 
 class AuthServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
+
     /** {@inheritDoc} */
     protected $policies = [
         JWTUser::class => UserPolicy::class,
@@ -31,6 +39,17 @@ class AuthServiceProvider extends ServiceProvider implements ShouldRegisterContr
 
     public function boot(): void
     {
+        // Intercept any Gate and check if it's super admin, Or if you use some permissions package...
+        Gate::before(static function ($user, $ability): void {
+            // if ($user->is_super_admin == 1) {
+            //     return true;
+            // }
+            //
+            // if ($user->hasPermission('root')) {
+            //     return true;
+            // }
+        });
+
         Gate::guessPolicyNamesUsing(
             static fn (string $modelClass): string => 'App\\Policies\\'.class_basename($modelClass).'Policy'
         );
@@ -43,6 +62,12 @@ class AuthServiceProvider extends ServiceProvider implements ShouldRegisterContr
         });
 
         $this->createUrls();
+
+        // Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        // Sanctum::ignoreMigrations();
+        // Gate::policy(User::class, UserPolicy::class);
+        // Passport::enablePasswordGrant();
+        // RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
     }
 
     public function shouldRegister(): bool

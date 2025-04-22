@@ -15,14 +15,26 @@ namespace App\Providers;
 
 use App\Support\Clients\PushDeer;
 use App\Support\Contracts\ShouldRegisterContract;
+use Dedoc\Scramble\Scramble;
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Traits\Conditionable;
+use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
+use Laravel\Telescope\Telescope;
+use Opcodes\LogViewer\Facades\LogViewer;
 
 class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterContract
 {
+    use Conditionable {
+        Conditionable::when as whenever;
+    }
     public array $bindings = [];
     public array $singletons = [];
 
@@ -36,7 +48,17 @@ class ExtendServiceProvider extends ServiceProvider implements ShouldRegisterCon
         $this->registerFaker();
     }
 
-    public function boot(): void {}
+    public function boot(): void
+    {
+        Scramble::configure()->withDocumentTransformers(static function (OpenApi $openApi): void {
+            $openApi->secure(SecurityScheme::http('bearer'));
+        });
+        LogViewer::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
+        class_exists(Telescope::class) and Telescope::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
+
+        /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
+        EnsureFeaturesAreActive::whenInactive(static fn (Request $request, array $features): Response => new Response(status: 403));
+    }
 
     /**
      * @noinspection SenselessMethodDuplicationInspection

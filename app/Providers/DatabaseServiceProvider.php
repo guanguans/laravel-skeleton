@@ -16,15 +16,20 @@ namespace App\Providers;
 use App\Notifications\SlowQueryLoggedNotification;
 use App\Support\Contracts\ShouldRegisterContract;
 use Illuminate\Database\Connection;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Events\DatabaseBusy;
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Database\Schema\Builder;
+use Illuminate\Database\SQLiteConnection;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
@@ -36,6 +41,36 @@ class DatabaseServiceProvider extends ServiceProvider implements ShouldRegisterC
 
     public function boot(): void
     {
+        // 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
+        Schema::defaultStringLength(191);
+        Builder::defaultMorphKeyType('uuid');
+        Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
+            $value,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
+        ));
+
+        if (DB::connection() instanceof SQLiteConnection) {
+            // Enable on delete cascade for sqlite connections
+            DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
+        }
+
+        // Prevents 'migrate:fresh', 'migrate:refresh', 'migrate:reset', and 'db:wipe'
+        DB::prohibitDestructiveCommands($this->app->isProduction());
+        // Builder::morphUsingUlids();
+        // Builder::morphUsingUuids();
+        // 自定义多态类型
+        Relation::enforceMorphMap([
+            'post' => 'App\Models\Post',
+            'video' => 'App\Models\Video',
+        ]);
+
+        /** @var Model $post */
+        // $alias = $post->getMorphClass();
+        // $class = Relation::getMorphedModel($alias);
+        // Order::resolveRelationUsing('customer', function (Order $order) {
+        //     return $order->belongsTo(Customer::class, 'customer_id');
+        // });
+
         $this->whenever($this->app->isProduction(), static function (): void {
             // URL::forceHttps();
             // URL::forceScheme('https');
