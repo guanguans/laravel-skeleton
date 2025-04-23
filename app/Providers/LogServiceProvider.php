@@ -38,6 +38,9 @@ class LogServiceProvider extends ServiceProvider
     private function ever(): void
     {
         $this->whenever(true, function (): void {
+            /**
+             * @see \Illuminate\Log\Context\ContextServiceProvider::boot()
+             */
             Context::add([
                 'php-version' => \PHP_VERSION,
                 'php-interface' => \PHP_SAPI,

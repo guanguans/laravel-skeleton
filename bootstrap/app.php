@@ -14,14 +14,14 @@ declare(strict_types=1);
  */
 
 use App\Console\Commands\ClearLogsCommand;
+use App\Http\Middleware\Localization;
+use App\Http\Middleware\SetJsonResponseEncodingOptions;
 use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
-use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\SetCacheHeaders;
@@ -51,104 +51,53 @@ return Application::configure(basePath: \dirname(__DIR__))
         },
     )
     ->withMiddleware(static function (Middleware $middleware): void {
-        ConvertEmptyStringsToNull::skipWhen(static fn (Request $request) => $request->is('api/*'));
-        // TrimStrings::skipWhen(static fn (Request $request): bool => $request->is('admin/*'));
-        // TrimStrings::except(['secret']);
-
-        // $middleware->statefulApi();
-
-        // $middleware->remove([
-        //     ConvertEmptyStringsToNull::class,
-        //     TrimStrings::class,
-        // ]);
-
-        // $middleware->convertEmptyStringsToNull(except: [
-        //     static fn (Request $request): bool => $request->is('api/*'),
-        // ]);
-        // $middleware->trimStrings(except: [
-        //     static fn (Request $request): bool => $request->is('api/*'),
-        // ]);
-
-        // $middleware->priority([
-        //     Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
-        //     Illuminate\Cookie\Middleware\EncryptCookies::class,
-        //     Illuminate\Session\Middleware\StartSession::class,
-        //     Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        //     Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
-        //     Illuminate\Routing\Middleware\SubstituteBindings::class,
-        //     Illuminate\Auth\Middleware\Authorize::class,
-        // ]);
-        // $middleware->appendToPriorityList(
-        //     [
-        //         Illuminate\Cookie\Middleware\EncryptCookies::class,
-        //         Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
-        //     ],
-        //     Illuminate\Routing\Middleware\ValidateSignature::class
-        // );
-        // $middleware->prependToPriorityList(
-        //     [
-        //         Illuminate\Cookie\Middleware\EncryptCookies::class,
-        //         Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
-        //     ],
-        //     Illuminate\Routing\Middleware\ValidateSignature::class
-        // );
-
-        // $middleware->alias([
-        //     'auth' => App\Http\Middleware\Authenticate::class,
-        //     'auth.basic' => Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        // ]);
-
-        // $middleware->prependToGroup('web', [
-        //     App\Http\Middleware\EncryptCookies::class,
-        //     Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        // ]);
-        // $middleware->appendToGroup('api', [
-        //     Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
-        //     Illuminate\Routing\Middleware\SubstituteBindings::class,
-        // ]);
-
-        // $middleware->append(App\Http\Middleware\Localization::class);
-        //
-        // $middleware->validateSignatures(except: [
-        //     'api/*',
-        // ]);
-
-        $middleware->validateCsrfTokens(except: [
-            'livewire/*',
-        ]);
-
-        // $middleware->alias([
-        //     'auth' => App\Http\Middleware\Authenticate::class,
-        //     'guest' => App\Http\Middleware\RedirectIfAuthenticated::class,
-        //     'role' => Spatie\Permission\Middleware\RoleMiddleware::class,
-        //     'permission' => Spatie\Permission\Middleware\PermissionMiddleware::class,
-        //     'role_or_permission' => Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
-        // ]);
-
-        $middleware->web(append: [
-            AddLinkHeadersForPreloadedAssets::class,
-        ]);
-
-        $middleware->redirectGuestsTo('/account/login');
-        $middleware->redirectUsersTo(
-            static fn (Request $request): string => $request->user()->isAdmin()
+        $middleware
+            ->convertEmptyStringsToNull(except: [
+                static fn (Request $request): bool => $request->is('api/*'),
+            ])
+            ->trimStrings(except: [
+                static fn (Request $request): bool => $request->is('api/*'),
+                'secret',
+                'token',
+            ])
+            ->validateCsrfTokens(except: [
+                'livewire/*',
+            ])
+            ->validateSignatures(except: [
+                'livewire/*',
+            ])
+            ->api(
+                append: [
+                    SetJsonResponseEncodingOptions::class,
+                ],
+                prepend: [
+                    SetCacheHeaders::using('no_store'),
+                ]
+            )
+            ->web(
+                append: [
+                    AddLinkHeadersForPreloadedAssets::class,
+                ],
+            )
+            ->append([
+                Localization::class,
+                SetCacheHeaders::using([
+                    'etag',
+                    'max_age' => 24 * 60 * 60,
+                    'private',
+                ]),
+            ])
+            ->redirectGuestsTo('/account/login')
+            ->redirectUsersTo(
+                static fn (Request $request): string => $request->user()->isAdmin()
                 ? route('admin.dashboard')
                 : route('account.dashboard')
-        );
-
-        $middleware
+            )
+            ->statefulApi()
             ->throttleApi(redis: true)
             ->trustProxies(at: [
                 '127.0.0.1',
-            ])
-            ->api(prepend: [
-                SetCacheHeaders::using('no_store'),
-            ])
-            ->append(SetCacheHeaders::using([
-                'etag',
-                'max_age' => 24 * 60 * 60,
-                'private',
-            ]));
+            ]);
     })
     ->withSchedule(static function (Schedule $schedule): void {
         $schedule->command('inspire')->everyMinute()->withoutOverlapping(60);
@@ -173,18 +122,23 @@ return Application::configure(basePath: \dirname(__DIR__))
         // $schedule->exec('php', ['-v'])->everyMinute();
     })
     ->withExceptions(static function (Exceptions $exceptions): void {
-        $exceptions->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 1000));
-        $exceptions->report(static function (QueryException $queryException): void {
-            // dump($queryException->getRawSql());
-        });
-        // $exceptions->truncateRequestExceptionsAt(256);
-        // $exceptions->dontTruncateRequestExceptions();
-        // $exceptions->dontFlash([]);
-        $exceptions->shouldRenderJsonWhen(static function (Request $request/* , Throwable $throwable */): bool {
-            if ($request->is('api/*')) {
-                return true;
-            }
+        $exceptions
+            ->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 1000))
+            ->truncateRequestExceptionsAt(256)
+            ->dontTruncateRequestExceptions()
+            ->dontReport([
+            ])
+            ->dontFlash([
+            ])
+            ->shouldRenderJsonWhen(static function (Request $request): bool {
+                if ($request->is('api/*')) {
+                    return true;
+                }
 
-            return $request->expectsJson();
-        });
-    })->create();
+                return $request->expectsJson();
+            });
+
+        $exceptions->reportable(static function (QueryException $queryException): void {});
+        $exceptions->renderable(static function (QueryException $queryException): void {});
+    })
+    ->create();

@@ -99,15 +99,6 @@ class EventServiceProvider extends ServiceProvider
         $this->never();
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    public function shouldDiscoverEvents(): bool
-    {
-        return false;
-    }
-
     private function ever(): void
     {
         $this->whenever(true, static function (): void {});

@@ -23,7 +23,6 @@ return (new Configuration)
     )
     ->addPathsToExclude([
         __DIR__.'/app/Support/Rectors/',
-        // __DIR__.'/app/Support/ComposerScripts.php',
         __DIR__.'/tests/',
     ])
     ->ignoreErrors([
@@ -32,17 +31,16 @@ return (new Configuration)
     ])
     ->ignoreErrorsOnPackages(
         [
-            'fakerphp/faker',
             'guanguans/ai-commit',
-            'laravel/telescope',
         ],
         [ErrorType::DEV_DEPENDENCY_IN_PROD]
     )
     ->ignoreErrorsOnPaths(
         [
+            __DIR__.'/app/Providers/PackageServiceProvider.php',
             __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
             __DIR__.'/app/Providers/WhenLocalAggregateServiceProvider.php',
-            // __DIR__.'/app/Providers/WhenTestingAggregateServiceProvider.php',
+            __DIR__.'/app/Providers/WhenTestingAggregateServiceProvider.php',
         ],
         [
             ErrorType::DEV_DEPENDENCY_IN_PROD,

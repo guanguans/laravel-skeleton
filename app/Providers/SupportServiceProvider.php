@@ -56,9 +56,6 @@ class SupportServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * @noinspection LaravelFunctionsInspection
-     */
     private function never(): void
     {
         $this->whenever(false, function (): void {
