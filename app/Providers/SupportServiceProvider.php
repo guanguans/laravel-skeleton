@@ -17,6 +17,7 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\DateFactory;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Number;
@@ -31,27 +32,50 @@ class SupportServiceProvider extends ServiceProvider
 
     /**
      * @see https://github.com/cachethq/cachet
+     *
+     * @throws \Exception
      */
     public function boot(): void
     {
+        $this->forever();
+        $this->never();
+    }
+
+    private function forever(): void
+    {
         $this->whenever(true, static function (): void {
-            // ini_set('json.exceptions', '1'); // PHP 8.3
+            ini_set('json.exceptions', '1'); // PHP 8.3
+
             // @see https://www.php.net/manual/zh/numberformatter.parsecurrency.php
             // @see https://zh.wikipedia.org/wiki/ISO_4217
             Number::useCurrency('CNY');
+        });
+    }
+
+    /**
+     * @noinspection LaravelFunctionsInspection
+     * @noinspection PhpDeprecationInspection
+     *
+     * @throws \Exception
+     */
+    private function never(): void
+    {
+        $this->when(false, function (): void {
             // @see \Carbon\Laravel\ServiceProvider
-            // Carbon::serializeUsing(static fn (Carbon $timestamp): string => $timestamp->format('Y-m-d H:i:s'));
             Date::use(CarbonImmutable::class);
+            Carbon::serializeUsing(static fn (Carbon $timestamp): string => $timestamp->format('Y-m-d H:i:s'));
             DateFactory::useCallable(
                 static fn (mixed $result): mixed => $result instanceof CarbonInterface
                     ? $result->setTimezone(Config::string('app.timezone'))
                     : $result
             );
+
             // @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly
-            // env('DB_HOST', fn () => throw new \Exception('DB_HOST is missing'));
-            // Env::getOrFail('DB_HOST');
-            // Number::useLocale($this->app->getLocale());
-            // Carbon::setLocale($this->app->getLocale());
+            env('DB_HOST', static fn () => throw new \Exception('DB_HOST is missing'));
+            Env::getOrFail('DB_HOST');
+
+            Number::useLocale($this->app->getLocale());
+            Carbon::setLocale($this->app->getLocale());
         });
     }
 }

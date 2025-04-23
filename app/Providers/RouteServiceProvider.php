@@ -33,15 +33,27 @@ class RouteServiceProvider extends ServiceProvider
     #[\Override]
     public function boot(): void
     {
-        Route::pattern('id', '[0-9]+');
-        $this->bindRouteModels();
-        // Route::resourceVerbs([
-        //     'create' => 'crear',
-        //     'edit' => 'editar',
-        // ]);
+        $this->forever();
+        $this->never();
     }
 
-    protected function bindRouteModels(): void
+    private function forever(): void
+    {
+        Route::pattern('id', '[0-9]+');
+        $this->bindRouteModels();
+    }
+
+    private function never(): void
+    {
+        $this->when(false, function (): void {
+            Route::resourceVerbs([
+                'create' => 'crear',
+                'edit' => 'editar',
+            ]);
+        });
+    }
+
+    private function bindRouteModels(): void
     {
         Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
 

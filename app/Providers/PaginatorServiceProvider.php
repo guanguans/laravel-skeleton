@@ -25,10 +25,17 @@ class PaginatorServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Paginator::useBootstrap();
-        // Paginator::useBootstrapFour();
-        // Paginator::useBootstrapFive();
-        // Paginator::defaultView('pagination::bulma');
-        // Paginator::defaultSimpleView('pagination::simple-bulma');
+        $this->never();
+    }
+
+    private function never(): void
+    {
+        $this->when(false, static function (): void {
+            Paginator::useBootstrap();
+            Paginator::useBootstrapFour();
+            Paginator::useBootstrapFive();
+            Paginator::defaultView('pagination::bulma');
+            Paginator::defaultSimpleView('pagination::simple-bulma');
+        });
     }
 }

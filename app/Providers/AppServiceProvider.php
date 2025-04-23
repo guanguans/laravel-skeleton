@@ -42,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Discover::in('Support/Mixins')
             ->allClasses()
+            // ->dd()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
                 foreach ($mixinReflectionClass->getAttributes(Mixin::class) as $mixinReflectionAttribute) {
                     /** @var \App\Support\Attributes\Mixin $mixinAttribute */

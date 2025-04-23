@@ -35,19 +35,16 @@ class ViewServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Vite::useWaterfallPrefetching(concurrency: 10);
-        // Vite::useAggressivePrefetching();
-        // Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
-        // Vite::useBuildDirectory('.build');
-        // Vite::prefetch(4);
+        $this->never();
+        $this->forever();
+    }
 
-        // Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
-
-        // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
-        // View::prependLocation(resource_path('custom-views'));
-
-        $this->extendView();
-        $this->extendBlade();
+    private function forever(): void
+    {
+        $this->when(true, function (): void {
+            $this->extendView();
+            $this->extendBlade();
+        });
     }
 
     private function extendView(): void
@@ -140,18 +137,34 @@ class ViewServiceProvider extends ServiceProvider
             $request->all(),
             \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT
         ));
+    }
 
-        // Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
-        //     $value,
-        //     $limit,
-        //     $end
-        // ));
-        //
-        // Directive::compile('slugify', static fn (
-        //     $title,
-        //     $separator = '-',
-        //     $language = 'en',
-        //     $dictionary = ['@' => 'at']
-        /* ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>'); */
+    private function never(): void
+    {
+        $this->when(false, function (): void {
+            Vite::useWaterfallPrefetching(concurrency: 10);
+            Vite::useAggressivePrefetching();
+            Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
+            Vite::useBuildDirectory('.build');
+            Vite::prefetch(4);
+
+            Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
+
+            // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
+            ViewFacade::prependLocation(resource_path('custom-views'));
+
+            Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
+                $value,
+                $limit,
+                $end
+            ));
+
+            Directive::compile('slugify', static fn (
+                $title,
+                $separator = '-',
+                $language = 'en',
+                $dictionary = ['@' => 'at']
+            ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
+        });
     }
 }

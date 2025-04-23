@@ -18,14 +18,13 @@ use App\Support\Clients\PushDeer;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
-use Faker\Factory;
-use Faker\Generator;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
@@ -50,34 +49,11 @@ class PackageServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->registerPushDeer();
-        $this->registerFaker();
     }
 
     public function boot(): void
     {
-        // Passport::enablePasswordGrant();
-        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
-        Scramble::configure()->withDocumentTransformers(static function (OpenApi $openApi): void {
-            $openApi->secure(SecurityScheme::http('bearer'));
-        });
-        LogViewer::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
-        class_exists(Telescope::class) and Telescope::auth(static fn (): bool => \Illuminate\Support\Facades\Request::getFacadeRoot()::isAdminDeveloper());
-
-        /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
-        EnsureFeaturesAreActive::whenInactive(static fn (Request $request, array $features): Response => new Response(status: 403));
-        $this->whenever($this->isOctaneHttpServer(), function (): void {
-            $this->app->get(Dispatcher::class)->listen(RequestReceived::class, static function (): void {
-                $uuid = Str::uuid()->toString();
-
-                if (config('octane.server') === 'roadrunner') {
-                    Cache::put($uuid, microtime(true));
-
-                    return;
-                }
-
-                Cache::store('octane')->put($uuid, microtime(true));
-            });
-        });
+        $this->never();
     }
 
     /**
@@ -119,29 +95,45 @@ class PackageServiceProvider extends ServiceProvider
         );
     }
 
-    private function registerFaker(): void
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    private function never(): void
     {
-        $this->app->singleton(static function (): Generator {
-            $faker = Factory::create();
+        // Passport::enablePasswordGrant();
 
-            $faker->addProvider(
-                new class {
-                    public function imageUrl(int $width = 640, int $height = 480): string
-                    {
-                        return \sprintf('https://placekitten.com/%d/%d', $width, $height);
-                    }
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
-                    /**
-                     * @param string $format raw|full|small|thumb|regular|small_s3
-                     */
-                    public function imageRandomUrl(string $format = 'small'): string
-                    {
-                        return \sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
-                    }
+        Scramble::configure()->withDocumentTransformers(
+            static function (#[\SensitiveParameter] OpenApi $openApi): void {
+                $openApi->secure(SecurityScheme::http('bearer'));
+            }
+        );
+
+        LogViewer::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+
+        if (class_exists(Telescope::class)) {
+            Telescope::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+        }
+
+        /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
+        EnsureFeaturesAreActive::whenInactive(
+            static fn (Request $request, array $features): Response => new Response(status: 403)
+        );
+
+        $this->whenever($this->isOctaneHttpServer(), function (): void {
+            $this->app->get(Dispatcher::class)->listen(RequestReceived::class, static function (): void {
+                $uuid = Str::uuid()->toString();
+
+                if (config('octane.server') === 'roadrunner') {
+                    Cache::put($uuid, microtime(true));
+
+                    return;
                 }
-            );
 
-            return $faker;
+                Cache::store('octane')->put($uuid, microtime(true));
+            });
         });
     }
 }

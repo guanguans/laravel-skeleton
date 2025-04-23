@@ -60,20 +60,20 @@ class AuthServiceProvider extends ServiceProvider
                 User $user,
                 #[\SensitiveParameter]
                 string $token
-            ): string => config('app.frontend_url')."/auth/reset/$token?email={$user->getEmailForPasswordReset()}"
+            ): string => url("/#/auth/reset/$token?email={$user->getEmailForPasswordReset()}")
         );
 
-        VerifyEmail::createUrlUsing(static function (object $notifiable): string {
+        VerifyEmail::createUrlUsing(static function (User $user): string {
             $url = url()->temporarySignedRoute(
                 'email.verify',
                 now()->addMinutes(config('auth.verification.expire', 60)),
                 [
-                    'user' => $notifiable->ulid,
+                    'user' => $user->id,
                 ],
                 false
             );
 
-            return config('app.frontend_url').'/auth/verify?verify_url='.urlencode($url);
+            return url('/#/auth/verify?verify_url='.urlencode($url));
         });
     }
 

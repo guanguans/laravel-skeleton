@@ -16,6 +16,7 @@ namespace App\Providers;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
@@ -27,7 +28,7 @@ class CacheServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Route::middleware(['throttle:upload);
+        // Route::middleware(['throttle:upload']);
         RateLimiter::for(
             'upload',
             static fn (Request $request) => $request->user()->vipCustomer()
@@ -40,10 +41,13 @@ class CacheServiceProvider extends ServiceProvider
             static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
         );
 
-        RateLimiter::for('login', static fn (Request $request): array => [
-            Limit::perMinute(500),
-            Limit::perMinute(5)->by($request->ip()),
-            Limit::perMinute(5)->by($request->input('email')),
-        ]);
+        RateLimiter::for(
+            'login',
+            static fn (Request $request): array => [
+                Limit::perMinute(500),
+                Limit::perMinute(5)->by($request->ip()),
+                Limit::perMinute(5)->by($request->input('email')),
+            ]
+        );
     }
 }

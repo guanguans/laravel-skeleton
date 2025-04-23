@@ -26,17 +26,12 @@ class QueueServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
-    public function boot(): void
-    {
-        $this->queue();
-    }
-
     /**
      * @see https://github.com/laravel/octane/issues/990
      * @see https://medium.com/@raymondlor/migrating-to-laravel-octane-almost-cost-me-a-client-forever-59b0162e74e2
      * @see https://learnku.com/laravel/t/89636
      */
-    private function queue(): void
+    public function boot(): void
     {
         Queue::looping(static function (Looping $looping): void {
             while (DB::transactionLevel() > 0) {

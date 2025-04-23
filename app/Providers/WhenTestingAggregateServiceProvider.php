@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Carbon\CarbonImmutable;
+use Faker\Generator;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -40,6 +41,12 @@ class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
      */
     public function boot(): void
     {
+        $this->forever();
+        $this->never();
+    }
+
+    private function never(): void
+    {
         Carbon::setTestNow();
         Carbon::setTestNowAndTimezone();
         CarbonImmutable::setTestNow();
@@ -48,6 +55,30 @@ class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
         Mail::alwaysTo('example@example.com');
         ParallelTesting::setUpTestDatabase(static function (): void {
             Artisan::call('db:seed');
+        });
+    }
+
+    private function forever(): void
+    {
+        $this->app->resolving(function (mixed $object): void {
+            if ($object instanceof Generator) {
+                $object->addProvider(
+                    new class {
+                        public function imageUrl(int $width = 640, int $height = 480): string
+                        {
+                            return \sprintf('https://placekitten.com/%d/%d', $width, $height);
+                        }
+
+                        /**
+                         * @param string $format raw|full|small|thumb|regular|small_s3
+                         */
+                        public function imageRandomUrl(string $format = 'small'): string
+                        {
+                            return \sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
+                        }
+                    }
+                );
+            }
         });
     }
 }
