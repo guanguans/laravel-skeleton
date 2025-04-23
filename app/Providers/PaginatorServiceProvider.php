@@ -37,11 +37,11 @@ class PaginatorServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, static function (): void {
-            Paginator::useBootstrap();
-            Paginator::useBootstrapFour();
-            Paginator::useBootstrapFive();
-            Paginator::defaultView('pagination::bulma');
             Paginator::defaultSimpleView('pagination::simple-bulma');
+            Paginator::defaultView('pagination::bulma');
+            Paginator::useBootstrap();
+            Paginator::useBootstrapFive();
+            Paginator::useBootstrapFour();
         });
     }
 }

@@ -16,6 +16,7 @@ namespace App\Providers;
 use App\Models\JWTUser;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -56,22 +57,22 @@ class RouteServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, static function (): void {
+            URL::forceHttps();
+            URL::forceScheme('https');
+            app(Request::class)->server->set('HTTPS', 'on');
+            app(Request::class)->server->set('SERVER_PORT', 443);
+            Config::set('session.secure', true);
+
             Route::resourceVerbs([
                 'create' => 'creator',
                 'edit' => 'editor',
             ]);
-
-            URL::forceHttps();
-            URL::forceScheme('https');
-            request()->server->set('HTTPS', 'on');
-            request()->server->set('SERVER_PORT', 443);
-            Config::set('session.secure', true);
         });
     }
 
     private function bindRouteModels(): void
     {
-        Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
+        Route::bind('user', static fn (mixed $value) => User::query()->where('id', $value)->firstOrFail());
 
         foreach ($this->routeModels as $name => $model) {
             if (\is_int($name)) {

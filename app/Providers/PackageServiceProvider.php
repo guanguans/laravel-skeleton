@@ -18,8 +18,6 @@ use App\Support\Clients\PushDeer;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
@@ -39,7 +37,11 @@ class PackageServiceProvider extends ServiceProvider
     use Conditionable {
         Conditionable::when as whenever;
     }
+
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     public array $bindings = [];
+
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     public array $singletons = [];
 
     /**
@@ -51,6 +53,10 @@ class PackageServiceProvider extends ServiceProvider
         $this->registerPushDeer();
     }
 
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
     public function boot(): void
     {
         $this->ever();
@@ -74,17 +80,43 @@ class PackageServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            PushDeer::class, 'pushdeer',
+            PushDeer::class,
         ];
     }
 
     private function ever(): void
     {
-        $this->whenever(true, function (): void {
+        $this->whenever(true, static function (): void {
             Scramble::configure()->withDocumentTransformers(
                 static function (#[\SensitiveParameter] OpenApi $openApi): void {
                     $openApi->secure(SecurityScheme::http('bearer'));
                 }
+            );
+        });
+    }
+
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    private function never(): void
+    {
+        $this->whenever(false, function (): void {
+            // Passport::enablePasswordGrant();
+
+            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+
+            LogViewer::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+
+            if (class_exists(Telescope::class)) {
+                Telescope::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+            }
+
+            /**
+             * @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php
+             */
+            EnsureFeaturesAreActive::whenInactive(
+                static fn (Request $request, array $features): Response => new Response(status: 403)
             );
 
             $this->whenever($this->isOctaneHttpServer(), static function (): void {
@@ -104,30 +136,6 @@ class PackageServiceProvider extends ServiceProvider
     }
 
     /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    private function never(): void
-    {
-        $this->whenever(false, static function (): void {
-            // Passport::enablePasswordGrant();
-
-            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
-
-            LogViewer::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
-
-            if (class_exists(Telescope::class)) {
-                Telescope::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
-            }
-
-            /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
-            EnsureFeaturesAreActive::whenInactive(
-                static fn (Request $request, array $features): Response => new Response(status: 403)
-            );
-        });
-    }
-
-    /**
      * @noinspection GlobalVariableUsageInspection
      */
     private function isOctaneHttpServer(): bool
@@ -137,9 +145,6 @@ class PackageServiceProvider extends ServiceProvider
 
     private function registerPushDeer(): void
     {
-        $this->app->singleton(
-            PushDeer::class,
-            static fn (Application $application): PushDeer => new PushDeer($application->make(Repository::class)->get('services.pushdeer'))
-        );
+        $this->app->singleton(PushDeer::class, static fn (): PushDeer => new PushDeer(config('services.pushdeer')));
     }
 }

@@ -33,6 +33,8 @@ parameters:
         - app/
     excludePaths:
         - app/Support/StreamWrappers/
+#    scanDirectories:
+#      - vendor-bin/laravel10/vendor/stillat/blade-directives/
 #    level: max
     level: 1
     tmpDir: .build/phpstan/

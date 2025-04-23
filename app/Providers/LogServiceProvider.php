@@ -29,9 +29,6 @@ class LogServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
-    /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
     public function boot(): void
     {
         $this->ever();

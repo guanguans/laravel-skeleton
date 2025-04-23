@@ -16,7 +16,6 @@ namespace App\Providers;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\DateFactory;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
@@ -59,9 +58,6 @@ class SupportServiceProvider extends ServiceProvider
 
     /**
      * @noinspection LaravelFunctionsInspection
-     * @noinspection PhpDeprecationInspection
-     *
-     * @throws \Exception
      */
     private function never(): void
     {
@@ -70,8 +66,7 @@ class SupportServiceProvider extends ServiceProvider
              * @see \Carbon\Laravel\ServiceProvider
              */
             Date::use(CarbonImmutable::class);
-            Carbon::serializeUsing(static fn (Carbon $timestamp): string => $timestamp->format('Y-m-d H:i:s'));
-            DateFactory::useCallable(
+            Date::useCallable(
                 static fn (mixed $result): mixed => $result instanceof CarbonInterface
                     ? $result->setTimezone(Config::string('app.timezone'))
                     : $result
@@ -80,7 +75,10 @@ class SupportServiceProvider extends ServiceProvider
             /**
              * @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly
              */
-            env('DB_HOST', static fn () => throw new \Exception('DB_HOST is missing'));
+            // env(
+            //     'DB_HOST',
+            //     static fn () => throw new \RuntimeException('The environment variable [DB_HOST] has no value.')
+            // );
             Env::getOrFail('DB_HOST');
 
             Number::useLocale($this->app->getLocale());

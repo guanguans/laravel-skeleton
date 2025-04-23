@@ -16,6 +16,7 @@ namespace App\Providers;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Event;
@@ -38,7 +39,7 @@ class HttpServiceProvider extends ServiceProvider
         $this->never();
     }
 
-    private function ever(\Illuminate\Http\Request $request): void
+    private function ever(): void
     {
         $this->whenever(true, static function (): void {
             JsonResource::withoutWrapping();
@@ -61,7 +62,7 @@ class HttpServiceProvider extends ServiceProvider
             });
 
             if (RequestFacade::is('api/*')) {
-                $request->headers->set('Accept', 'application/json');
+                app(Request::class)->headers->set('Accept', 'application/json');
             }
         });
     }

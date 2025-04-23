@@ -44,10 +44,9 @@ class ConsoleServiceProvider extends ServiceProvider
     {
         $this->whenever(true, function (): void {
             AboutCommand::add('Application', [
-                'name' => 'laravel-skeleton',
                 'author' => 'guanguans',
-                'github' => 'https://github.com/guanguans/laravel-skeleton',
-                'license' => 'MIT License',
+                'homepage' => 'https://github.com/guanguans/laravel-skeleton',
+                'name' => 'laravel-skeleton',
             ]);
 
             /**

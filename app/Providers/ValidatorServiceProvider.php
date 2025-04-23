@@ -69,14 +69,14 @@ class ValidatorServiceProvider extends ServiceProvider
             ->instancesOf(Rule::class)
             ->classes()
             ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
-                /** @var class-string<Rule> $ruleClass */
+                /** @var class-string<\App\Rules\Rule> $ruleClass */
                 ValidatorFacade::{$ruleClass::extendType()}(
                     $ruleClass::name(),
                     static fn (string $attribute, mixed $value, array $parameters, Validator $validator): bool => tap(
                         new $ruleClass(...$parameters),
                         static function (Rule $rule) use ($validator): void {
-                            $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
                             $rule instanceof DataAwareRule and $rule->setData($validator->getData());
+                            $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
                         }
                     )->passes($attribute, $value),
                     $ruleClass::message()

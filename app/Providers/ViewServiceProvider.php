@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
@@ -50,35 +51,44 @@ class ViewServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, static function (): void {
-            Vite::useWaterfallPrefetching(concurrency: 10);
-            Vite::useAggressivePrefetching();
-            Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
-            Vite::useBuildDirectory('.build');
             Vite::prefetch(4);
+            Vite::useAggressivePrefetching();
+            Vite::useBuildDirectory('.build');
+            Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
+            Vite::useWaterfallPrefetching(concurrency: 10);
 
             Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
 
-            // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
+            /**
+             * @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
+             */
             ViewFacade::prependLocation(resource_path('custom-views'));
 
-            Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
-                $value,
-                $limit,
-                $end
-            ));
+            /**
+             * @see https://www.harrisrafto.eu/enhancing-frontend-interactivity-with-laravel-blade-fragments
+             */
+            view('welcome', ['users' => User::query()->get()])->fragment('user-list');
 
-            Directive::compile('slugify', static fn (
-                $title,
-                $separator = '-',
-                $language = 'en',
-                $dictionary = ['@' => 'at']
-            ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
+            // Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
+            //     $value,
+            //     $limit,
+            //     $end
+            // ));
+            //
+            // Directive::compile('slugify', static fn (
+            //     $title,
+            //     $separator = '-',
+            //     $language = 'en',
+            //     $dictionary = ['@' => 'at']
+            /* ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>'); */
         });
     }
 
     private function extendBlade(): void
     {
-        // 注册组件
+        /**
+         * 注册组件.
+         */
         Blade::component('alert', AlertComponent::class);
 
         /**
@@ -90,16 +100,22 @@ class ViewServiceProvider extends ServiceProvider
          * ```
          */
         Blade::directive('datetime', static function (string $expression): string {
-            // 通用解析表达式
-            $parts = value(static function (string $expression): array {
-                // clean
-                $parts = array_map(trim(...), explode(',', Blade::stripParentheses($expression)));
-                // filter
-                $parts = array_filter($parts, static fn (string $part): bool => '' !== $part);
+            /**
+             * 通用解析表达式.
+             */
+            $parts = value(
+                static function (string $expression): array {
+                    // clean
+                    $parts = array_map(trim(...), explode(',', Blade::stripParentheses($expression)));
 
-                // default
-                return $parts + ['time()', "'Y m d H:i:s'"];
-            }, $expression);
+                    // filter
+                    $parts = array_filter($parts, static fn (string $part): bool => '' !== $part);
+
+                    // default
+                    return $parts + ['time()', "'Y m d H:i:s'"];
+                },
+                $expression
+            );
 
             $newExpression = implode(', ', array_reverse($parts));
 
@@ -108,45 +124,26 @@ class ViewServiceProvider extends ServiceProvider
 
         /**
          * 自定义 if 声明.
-         *
-         * ```blade
-         *
-         * @disk('local')
-         *     <! --应用正在使用 local 存储...-->
-         *
-         * @elsedisk('s3')
-         *     <! --应用正在使用 s3 存储...-->
-         *
-         * @else
-         *     <! --应用正在使用其他存储...-->
-         *
-         * @enddisk
-         *
-         * @unlessdisk('local')
-         *     < ! --应用当前没有使用 local 存储...-->
-         *
-         * @enddisk
-         * ```
          */
         Blade::if('disk', static fn ($value): bool => config('filesystems.default') === $value);
 
-        // 回显变量
+        /**
+         * 回显变量.
+         */
         Blade::stringable(static fn (Request $request): string => json_encode(
             $request->all(),
             \JSON_THROW_ON_ERROR | \JSON_PRETTY_PRINT
         ));
     }
 
+    /**
+     * @see https://www.harrisrafto.eu/simplifying-view-logic-with-laravel-blades-service-injection
+     */
     private function extendView(): void
     {
-        /** @see https://www.harrisrafto.eu/simplifying-view-logic-with-laravel-blades-service-injection */
-        // resources/views/dashboard.blade.php
-        // @inject('metrics', 'App\Services\DashboardMetricsService');
-
-        /** @see https://www.harrisrafto.eu/enhancing-frontend-interactivity-with-laravel-blade-fragments */
-        // return view('dashboard', ['users' => $users])->fragment('user-list');
-
-        // 合成器
+        /**
+         * 合成器.
+         */
         ViewFacade::composer('*', RequestComposer::class);
         ViewFacade::composer('*', static function (View $view): void {
             $view->with('request', RequestFacade::getFacadeRoot())
@@ -154,7 +151,9 @@ class ViewServiceProvider extends ServiceProvider
                 ->with('config', config());
         });
 
-        // 构造器
+        /**
+         * 构造器.
+         */
         ViewFacade::creator('*', RequestCreator::class);
         ViewFacade::creator('*', static function (View $view): void {
             $view->with('request', RequestFacade::getFacadeRoot())
@@ -162,7 +161,9 @@ class ViewServiceProvider extends ServiceProvider
                 ->with('config', config());
         });
 
-        // 共享数据
+        /**
+         * 共享数据.
+         */
         ViewFacade::share('request', RequestFacade::getFacadeRoot());
         ViewFacade::share('user', auth()->user());
         ViewFacade::share('config', config());

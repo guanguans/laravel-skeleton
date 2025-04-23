@@ -54,7 +54,7 @@ class CacheServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, static function (): void {
-            Route::middleware(['throttle:upload']);
+            Route::middleware('throttle:upload');
             RateLimiter::for(
                 'upload',
                 static fn (Request $request) => $request->user()->vipCustomer()

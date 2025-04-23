@@ -59,19 +59,13 @@ class DatabaseServiceProvider extends ServiceProvider
     {
         $this->whenever(true, function (): void {
             $this->whenProduction();
+            $this->whenSQLiteConnection();
             $this->unlessProduction();
 
             Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
                 $value,
                 \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
             ));
-
-            $this->whenever(DB::connection() instanceof SQLiteConnection, function (): void {
-                /**
-                 * Enable on delete cascade for sqlite connections.
-                 */
-                DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
-            });
         });
     }
 
@@ -89,6 +83,10 @@ class DatabaseServiceProvider extends ServiceProvider
             Model::unguard();
             Model::withoutEvents(static function (): void {});
 
+            Model::handleLazyLoadingViolationUsing(static function (Model $model, string $relation): void {
+                info(\sprintf('Attempted to lazy load [%s] on model [%s].', $relation, $model::class));
+            });
+
             /**
              * 自定义多态类型.
              */
@@ -103,13 +101,10 @@ class DatabaseServiceProvider extends ServiceProvider
             // $alias = $post->getMorphClass();
             // $class = Relation::getMorphedModel($alias);
 
-            User::resolveRelationUsing('province', static function (User $user) {
-                return $user->belongsTo(Province::class, 'province_id');
-            });
-
-            Model::handleLazyLoadingViolationUsing(static function (Model $model, string $relation): void {
-                info(\sprintf('Attempted to lazy load [%s] on model [%s].', $relation, $model::class));
-            });
+            User::resolveRelationUsing(
+                'province',
+                static fn (User $user) => $user->belongsTo(Province::class, 'province_id')
+            );
 
             Event::listen(StatementPrepared::class, static function (StatementPrepared $event): void {
                 $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
@@ -153,16 +148,26 @@ class DatabaseServiceProvider extends ServiceProvider
     private function unlessProduction(): void
     {
         $this->unless($this->app->isProduction(), static function (): void {
-            Model::shouldBeStrict(); // Eloquent 严格模式
             Model::automaticallyEagerLoadRelationships(); // 避免 N+1 查询问题
+            Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
             Model::preventLazyLoading(); // 预防 N+1 查询问题
             Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
-            Model::preventAccessingMissingAttributes(); // Trigger MissingAttributeException
+            Model::shouldBeStrict(); // Eloquent 严格模式
 
             DB::listen(static fn (QueryExecuted $queryExecuted) => Log::debug(
                 $queryExecuted->toRawSql(),
                 (array) $queryExecuted
             ));
+        });
+    }
+
+    private function whenSQLiteConnection(): void
+    {
+        $this->whenever(DB::connection() instanceof SQLiteConnection, static function (): void {
+            /**
+             * Enable on delete cascade for sqlite connections.
+             */
+            DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
         });
     }
 }
