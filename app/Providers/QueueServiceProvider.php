@@ -27,17 +27,36 @@ class QueueServiceProvider extends ServiceProvider
     }
 
     /**
-     * @see https://github.com/laravel/octane/issues/990
-     * @see https://medium.com/@raymondlor/migrating-to-laravel-octane-almost-cost-me-a-client-forever-59b0162e74e2
-     * @see https://learnku.com/laravel/t/89636
+     * @throws \Throwable
      */
     public function boot(): void
     {
-        Queue::looping(static function (Looping $looping): void {
-            while (DB::transactionLevel() > 0) {
-                DB::rollBack();
-                Log::error('Transaction have not been committed or rolled back.', (array) $looping);
-            }
+        $this->ever();
+        $this->never();
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    private function ever(): void
+    {
+        $this->whenever(true, static function (): void {
+            /**
+             * @see https://github.com/laravel/octane/issues/990
+             * @see https://medium.com/@raymondlor/migrating-to-laravel-octane-almost-cost-me-a-client-forever-59b0162e74e2
+             * @see https://learnku.com/laravel/t/89636
+             */
+            Queue::looping(static function (Looping $looping): void {
+                while (DB::transactionLevel() > 0) {
+                    DB::rollBack();
+                    Log::error('Transaction have not been committed or rolled back.', (array) $looping);
+                }
+            });
         });
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {});
     }
 }

@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\JWTUser;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Traits\Conditionable;
 
 class RouteServiceProvider extends ServiceProvider
@@ -25,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
     }
     protected array $routeModels = [
         'user' => User::class,
+        JWTUser::class,
     ];
 
     /**
@@ -33,23 +37,35 @@ class RouteServiceProvider extends ServiceProvider
     #[\Override]
     public function boot(): void
     {
-        $this->forever();
+        $this->ever();
         $this->never();
     }
 
-    private function forever(): void
+    private function ever(): void
     {
-        Route::pattern('id', '[0-9]+');
-        $this->bindRouteModels();
+        $this->whenever(true, function (): void {
+            Route::pattern('id', '[0-9]+');
+            Route::patterns([
+                'id' => '[0-9]+',
+            ]);
+
+            $this->bindRouteModels();
+        });
     }
 
     private function never(): void
     {
-        $this->when(false, function (): void {
+        $this->whenever(false, static function (): void {
             Route::resourceVerbs([
-                'create' => 'crear',
-                'edit' => 'editar',
+                'create' => 'creator',
+                'edit' => 'editor',
             ]);
+
+            URL::forceHttps();
+            URL::forceScheme('https');
+            request()->server->set('HTTPS', 'on');
+            request()->server->set('SERVER_PORT', 443);
+            Config::set('session.secure', true);
         });
     }
 
@@ -58,7 +74,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('user', static fn ($value) => User::query()->where('id', $value)->firstOrFail());
 
         foreach ($this->routeModels as $name => $model) {
-            /** @noinspection UselessIsComparisonInspection */
             if (\is_int($name)) {
                 $name = str(class_basename($model))->snake('-')->toString();
             }

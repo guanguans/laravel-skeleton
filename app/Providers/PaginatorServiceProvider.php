@@ -25,12 +25,18 @@ class PaginatorServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->ever();
         $this->never();
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, static function (): void {});
     }
 
     private function never(): void
     {
-        $this->when(false, static function (): void {
+        $this->whenever(false, static function (): void {
             Paginator::useBootstrap();
             Paginator::useBootstrapFour();
             Paginator::useBootstrapFive();

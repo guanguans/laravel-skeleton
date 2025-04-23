@@ -31,39 +31,55 @@ class ConsoleServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     public function boot(): void
     {
-        $this->forever();
-        $this->whenProduction();
+        $this->ever();
+        $this->never();
     }
 
-    private function forever(): void
+    private function ever(): void
     {
-        AboutCommand::add('Application', [
-            'name' => 'laravel-skeleton',
-            'author' => 'guanguans',
-            'github' => 'https://github.com/guanguans/laravel-skeleton',
-            'license' => 'MIT License',
-        ]);
+        $this->whenever(true, function (): void {
+            AboutCommand::add('Application', [
+                'name' => 'laravel-skeleton',
+                'author' => 'guanguans',
+                'github' => 'https://github.com/guanguans/laravel-skeleton',
+                'license' => 'MIT License',
+            ]);
 
-        /** @see https://github.com/OussamaMater/Laravel-Tips#tip-266--the-new-optimizes-method */
-        $this->optimizes(
-            optimize: 'filament:optimize',
-            // Defaults to the service provider name without "ServiceProvider" suffix
-            key: 'filament'
-        );
+            /**
+             * @see https://github.com/OussamaMater/Laravel-Tips#tip-266--the-new-optimizes-method
+             */
+            $this->optimizes(
+                optimize: 'filament:optimize',
+                key: 'filament'
+            );
 
-        // $this->app->booted(function (): void {
-        //     (fn () => $this->symfonyDispatcher->addListener(
-        //         ConsoleEvents::COMMAND,
-        //         new RunCommandInDebugModeListener
-        //     ))->call($this->app->make(Kernel::class));
-        // });
+            $this->whenProduction();
+        });
+    }
+
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    private function never(): void
+    {
+        $this->whenever(false, function (): void {
+            $this->app->booted(function (): void {
+                (fn () => $this->symfonyDispatcher->addListener(
+                    ConsoleEvents::COMMAND,
+                    new RunCommandInDebugModeListener
+                ))->call($this->app->make(Kernel::class));
+            });
+        });
     }
 
     private function whenProduction(): void
     {
-        $this->when($this->app->isProduction(), static function (): void {
+        $this->whenever($this->app->isProduction(), static function (): void {
             ClearAllCommand::prohibit();
         });
     }

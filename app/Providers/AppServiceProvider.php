@@ -36,12 +36,11 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    public function boot(): void {}
-
     private function registerMixins(): void
     {
         Discover::in('Support/Mixins')
             ->allClasses()
+            // ->keys()
             // ->dd()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
                 foreach ($mixinReflectionClass->getAttributes(Mixin::class) as $mixinReflectionAttribute) {

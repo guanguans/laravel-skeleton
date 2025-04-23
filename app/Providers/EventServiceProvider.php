@@ -95,9 +95,8 @@ class EventServiceProvider extends ServiceProvider
     #[\Override]
     public function boot(): void
     {
-        // Event::listen('*', static function (string $event, array $data): void {
-        //     Log::info($event, $data);
-        // });
+        $this->ever();
+        $this->never();
     }
 
     /**
@@ -107,5 +106,19 @@ class EventServiceProvider extends ServiceProvider
     public function shouldDiscoverEvents(): bool
     {
         return false;
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, static function (): void {});
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {
+            Event::listen('*', static function (string $event, array $data): void {
+                Log::info($event, $data);
+            });
+        });
     }
 }

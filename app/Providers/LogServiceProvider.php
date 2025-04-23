@@ -34,9 +34,41 @@ class LogServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->forever();
+        $this->ever();
         $this->never();
-        $this->unlessConsole();
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, function (): void {
+            Context::add([
+                'php-version' => \PHP_VERSION,
+                'php-interface' => \PHP_SAPI,
+                'laravel-version' => $this->app->version(),
+                'running-in-console' => $this->app->runningInConsole(),
+                // self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
+            ]);
+
+            LogHttp::skipWhen(
+                fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe()
+            );
+
+            $this->unlessConsole();
+        });
+    }
+
+    /**
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     */
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {
+            Log::withContext(RequestFacade::header());
+
+            if (($logger = Log::getLogger()) instanceof MonologLogger) {
+                $logger->pushProcessor(new AppendExtraDataProcessor(RequestFacade::header()));
+            }
+        });
     }
 
     private function unlessConsole(): void
@@ -49,31 +81,6 @@ class LogServiceProvider extends ServiceProvider
                 'method' => RequestFacade::method(),
                 'action' => RequestFacade::route()?->getActionName(),
             ]);
-        });
-    }
-
-    private function forever(): void
-    {
-        Context::add([
-            'php-version' => \PHP_VERSION,
-            'php-interface' => \PHP_SAPI,
-            'laravel-version' => $this->app->version(),
-            'running-in-console' => $this->app->runningInConsole(),
-            // self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
-        ]);
-
-        LogHttp::skipWhen(fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe());
-    }
-
-    private function never(): void
-    {
-        $this->whenever(false, function (): void {
-            // With context for current channel and stack.
-            Log::withContext(RequestFacade::header());
-
-            if (($logger = Log::getLogger()) instanceof MonologLogger) {
-                $logger->pushProcessor(new AppendExtraDataProcessor(RequestFacade::header()));
-            }
         });
     }
 }

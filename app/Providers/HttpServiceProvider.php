@@ -16,12 +16,12 @@ namespace App\Providers;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Http\Events\RequestHandled;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,28 +32,44 @@ class HttpServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
-    public function boot(Request $request): void
+    public function boot(): void
     {
-        // JsonResource::wrap('list');
-        JsonResource::withoutWrapping();
-        ResourceCollection::withoutWrapping();
+        $this->ever();
+        $this->never();
+    }
 
-        Http::globalOptions([
-            'connect_timeout' => 10,
-            'timeout' => 30,
-        ]);
-        Http::globalMiddleware(
-            Middleware::log(Log::channel(), new MessageFormatter(MessageFormatter::DEBUG))
-        );
+    private function ever(\Illuminate\Http\Request $request): void
+    {
+        $this->whenever(true, static function (): void {
+            JsonResource::withoutWrapping();
+            ResourceCollection::withoutWrapping();
 
-        Event::listen(RequestHandled::class, static function (RequestHandled $event): void {
-            if ($event->response instanceof JsonResponse) {
-                $event->response->setEncodingOptions($event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE);
+            Http::globalOptions([
+                'connect_timeout' => 10,
+                'timeout' => 30,
+            ]);
+            Http::globalMiddleware(
+                Middleware::log(Log::channel(), new MessageFormatter(MessageFormatter::DEBUG))
+            );
+
+            Event::listen(RequestHandled::class, static function (RequestHandled $event): void {
+                if ($event->response instanceof JsonResponse) {
+                    $event->response->setEncodingOptions(
+                        $event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE
+                    );
+                }
+            });
+
+            if (RequestFacade::is('api/*')) {
+                $request->headers->set('Accept', 'application/json');
             }
         });
+    }
 
-        if ($request->is('api/*')) {
-            $request->headers->set('Accept', 'application/json');
-        }
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {
+            JsonResource::wrap('list');
+        });
     }
 }

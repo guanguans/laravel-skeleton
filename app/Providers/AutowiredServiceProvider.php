@@ -24,12 +24,30 @@ class AutowiredServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
+    public function boot(): void
+    {
+        $this->ever();
+        $this->never();
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, function (): void {
+            $this->autowire();
+        });
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {});
+    }
+
     /**
      * @see https://github.com/spring-projects/spring-framework/blob/main/spring-beans/src/main/java/org/springframework/beans/factory/annotation/Autowired.java
      *
      * @noinspection PhpExpressionResultUnusedInspection
      */
-    public function boot(): void
+    private function autowire(): void
     {
         $this->app->resolving(static function (mixed $object, Application $app): void {
             if (

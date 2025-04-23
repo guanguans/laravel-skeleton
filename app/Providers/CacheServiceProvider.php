@@ -28,26 +28,39 @@ class CacheServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Route::middleware(['throttle:upload']);
-        RateLimiter::for(
-            'upload',
-            static fn (Request $request) => $request->user()->vipCustomer()
-                ? Limit::none()
-                : Limit::perMinute(100)->by($request->ip())
-        );
+        $this->ever();
+        $this->never();
+    }
 
-        RateLimiter::for(
-            'api',
-            static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
-        );
+    private function ever(): void
+    {
+        $this->whenever(true, static function (): void {
+            RateLimiter::for(
+                'api',
+                static fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip())
+            );
 
-        RateLimiter::for(
-            'login',
-            static fn (Request $request): array => [
-                Limit::perMinute(500),
-                Limit::perMinute(5)->by($request->ip()),
-                Limit::perMinute(5)->by($request->input('email')),
-            ]
-        );
+            RateLimiter::for(
+                'login',
+                static fn (Request $request): array => [
+                    Limit::perMinute(500),
+                    Limit::perMinute(5)->by($request->ip()),
+                    Limit::perMinute(5)->by($request->input('email')),
+                ]
+            );
+        });
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {
+            Route::middleware(['throttle:upload']);
+            RateLimiter::for(
+                'upload',
+                static fn (Request $request) => $request->user()->vipCustomer()
+                    ? Limit::none()
+                    : Limit::perMinute(100)->by($request->ip())
+            );
+        });
     }
 }

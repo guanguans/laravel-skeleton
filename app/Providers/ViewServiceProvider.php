@@ -35,47 +35,45 @@ class ViewServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->ever();
         $this->never();
-        $this->forever();
     }
 
-    private function forever(): void
+    private function ever(): void
     {
-        $this->when(true, function (): void {
-            $this->extendView();
+        $this->whenever(true, function (): void {
             $this->extendBlade();
+            $this->extendView();
         });
     }
 
-    private function extendView(): void
+    private function never(): void
     {
-        /** @see https://www.harrisrafto.eu/simplifying-view-logic-with-laravel-blades-service-injection */
-        // resources/views/dashboard.blade.php
-        // @inject('metrics', 'App\Services\DashboardMetricsService');
+        $this->whenever(false, static function (): void {
+            Vite::useWaterfallPrefetching(concurrency: 10);
+            Vite::useAggressivePrefetching();
+            Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
+            Vite::useBuildDirectory('.build');
+            Vite::prefetch(4);
 
-        /** @see https://www.harrisrafto.eu/enhancing-frontend-interactivity-with-laravel-blade-fragments */
-        // return view('dashboard', ['users' => $users])->fragment('user-list');
+            Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
 
-        // 合成器
-        ViewFacade::composer('*', RequestComposer::class);
-        ViewFacade::composer('*', static function (View $view): void {
-            $view->with('request', RequestFacade::getFacadeRoot())
-                ->with('user', auth()->user())
-                ->with('config', config());
+            // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
+            ViewFacade::prependLocation(resource_path('custom-views'));
+
+            Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
+                $value,
+                $limit,
+                $end
+            ));
+
+            Directive::compile('slugify', static fn (
+                $title,
+                $separator = '-',
+                $language = 'en',
+                $dictionary = ['@' => 'at']
+            ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
         });
-
-        // 构造器
-        ViewFacade::creator('*', RequestCreator::class);
-        ViewFacade::creator('*', static function (View $view): void {
-            $view->with('request', RequestFacade::getFacadeRoot())
-                ->with('user', auth()->user())
-                ->with('config', config());
-        });
-
-        // 共享数据
-        ViewFacade::share('request', RequestFacade::getFacadeRoot());
-        ViewFacade::share('user', auth()->user());
-        ViewFacade::share('config', config());
     }
 
     private function extendBlade(): void
@@ -139,32 +137,34 @@ class ViewServiceProvider extends ServiceProvider
         ));
     }
 
-    private function never(): void
+    private function extendView(): void
     {
-        $this->when(false, function (): void {
-            Vite::useWaterfallPrefetching(concurrency: 10);
-            Vite::useAggressivePrefetching();
-            Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
-            Vite::useBuildDirectory('.build');
-            Vite::prefetch(4);
+        /** @see https://www.harrisrafto.eu/simplifying-view-logic-with-laravel-blades-service-injection */
+        // resources/views/dashboard.blade.php
+        // @inject('metrics', 'App\Services\DashboardMetricsService');
 
-            Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
+        /** @see https://www.harrisrafto.eu/enhancing-frontend-interactivity-with-laravel-blade-fragments */
+        // return view('dashboard', ['users' => $users])->fragment('user-list');
 
-            // @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/
-            ViewFacade::prependLocation(resource_path('custom-views'));
-
-            Directive::callback('limit', static fn ($value, $limit = 100, $end = '...') => Str::limit(
-                $value,
-                $limit,
-                $end
-            ));
-
-            Directive::compile('slugify', static fn (
-                $title,
-                $separator = '-',
-                $language = 'en',
-                $dictionary = ['@' => 'at']
-            ): string => '<?php echo '.Str::class.'::slug($title, $separator, $language, $dictionary); ?>');
+        // 合成器
+        ViewFacade::composer('*', RequestComposer::class);
+        ViewFacade::composer('*', static function (View $view): void {
+            $view->with('request', RequestFacade::getFacadeRoot())
+                ->with('user', auth()->user())
+                ->with('config', config());
         });
+
+        // 构造器
+        ViewFacade::creator('*', RequestCreator::class);
+        ViewFacade::creator('*', static function (View $view): void {
+            $view->with('request', RequestFacade::getFacadeRoot())
+                ->with('user', auth()->user())
+                ->with('config', config());
+        });
+
+        // 共享数据
+        ViewFacade::share('request', RequestFacade::getFacadeRoot());
+        ViewFacade::share('user', auth()->user());
+        ViewFacade::share('config', config());
     }
 }

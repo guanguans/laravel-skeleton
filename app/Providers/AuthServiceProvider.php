@@ -36,11 +36,24 @@ class AuthServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->createUrlUsings();
-        $this->gateBefore();
-        Gate::guessPolicyNamesUsing(static fn (string $modelClass): string => 'App\\Policies\\'.class_basename($modelClass).'Policy');
-        Gate::policy(User::class, UserPolicy::class);
-        RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
+        $this->ever();
+        $this->never();
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, function (): void {
+            $this->createUrlUsings();
+            $this->gateBefore();
+            Gate::guessPolicyNamesUsing(static fn (string $modelClass): string => 'App\\Policies\\'.class_basename($modelClass).'Policy');
+            Gate::policy(User::class, UserPolicy::class);
+            RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
+        });
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {});
     }
 
     /**

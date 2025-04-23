@@ -41,26 +41,34 @@ class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
      */
     public function boot(): void
     {
-        $this->forever();
+        $this->ever();
         $this->never();
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, function (): void {
+            Carbon::setTestNow();
+            Carbon::setTestNowAndTimezone();
+            CarbonImmutable::setTestNow();
+            CarbonImmutable::setTestNowAndTimezone();
+            Http::preventStrayRequests();
+            Mail::alwaysTo('example@example.com');
+            ParallelTesting::setUpTestDatabase(static function (): void {
+                Artisan::call('db:seed');
+            });
+            $this->extendFaker();
+        });
     }
 
     private function never(): void
     {
-        Carbon::setTestNow();
-        Carbon::setTestNowAndTimezone();
-        CarbonImmutable::setTestNow();
-        CarbonImmutable::setTestNowAndTimezone();
-        Http::preventStrayRequests();
-        Mail::alwaysTo('example@example.com');
-        ParallelTesting::setUpTestDatabase(static function (): void {
-            Artisan::call('db:seed');
-        });
+        $this->whenever(false, static function (): void {});
     }
 
-    private function forever(): void
+    private function extendFaker(): void
     {
-        $this->app->resolving(function (mixed $object): void {
+        $this->app->resolving(static function (mixed $object): void {
             if ($object instanceof Generator) {
                 $object->addProvider(
                     new class {

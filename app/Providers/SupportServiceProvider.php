@@ -37,17 +37,22 @@ class SupportServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->forever();
+        $this->ever();
         $this->never();
     }
 
-    private function forever(): void
+    private function ever(): void
     {
         $this->whenever(true, static function (): void {
-            ini_set('json.exceptions', '1'); // PHP 8.3
+            /**
+             * PHP 8.3.
+             */
+            ini_set('json.exceptions', '1');
 
-            // @see https://www.php.net/manual/zh/numberformatter.parsecurrency.php
-            // @see https://zh.wikipedia.org/wiki/ISO_4217
+            /**
+             * @see https://www.php.net/manual/zh/numberformatter.parsecurrency.php
+             * @see https://zh.wikipedia.org/wiki/ISO_4217
+             */
             Number::useCurrency('CNY');
         });
     }
@@ -60,8 +65,10 @@ class SupportServiceProvider extends ServiceProvider
      */
     private function never(): void
     {
-        $this->when(false, function (): void {
-            // @see \Carbon\Laravel\ServiceProvider
+        $this->whenever(false, function (): void {
+            /**
+             * @see \Carbon\Laravel\ServiceProvider
+             */
             Date::use(CarbonImmutable::class);
             Carbon::serializeUsing(static fn (Carbon $timestamp): string => $timestamp->format('Y-m-d H:i:s'));
             DateFactory::useCallable(
@@ -70,7 +77,9 @@ class SupportServiceProvider extends ServiceProvider
                     : $result
             );
 
-            // @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly
+            /**
+             * @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly
+             */
             env('DB_HOST', static fn () => throw new \Exception('DB_HOST is missing'));
             Env::getOrFail('DB_HOST');
 

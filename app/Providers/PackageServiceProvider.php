@@ -19,11 +19,11 @@ use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -53,6 +53,7 @@ class PackageServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->ever();
         $this->never();
     }
 
@@ -77,9 +78,56 @@ class PackageServiceProvider extends ServiceProvider
         ];
     }
 
+    private function ever(): void
+    {
+        $this->whenever(true, function (): void {
+            Scramble::configure()->withDocumentTransformers(
+                static function (#[\SensitiveParameter] OpenApi $openApi): void {
+                    $openApi->secure(SecurityScheme::http('bearer'));
+                }
+            );
+
+            $this->whenever($this->isOctaneHttpServer(), static function (): void {
+                Event::listen(RequestReceived::class, static function (): void {
+                    $uuid = Str::uuid()->toString();
+
+                    if (config('octane.server') === 'roadrunner') {
+                        Cache::put($uuid, microtime(true));
+
+                        return;
+                    }
+
+                    Cache::store('octane')->put($uuid, microtime(true));
+                });
+            });
+        });
+    }
+
     /**
-     * Determine if server is running Octane.
-     *
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {
+            // Passport::enablePasswordGrant();
+
+            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+
+            LogViewer::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+
+            if (class_exists(Telescope::class)) {
+                Telescope::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+            }
+
+            /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
+            EnsureFeaturesAreActive::whenInactive(
+                static fn (Request $request, array $features): Response => new Response(status: 403)
+            );
+        });
+    }
+
+    /**
      * @noinspection GlobalVariableUsageInspection
      */
     private function isOctaneHttpServer(): bool
@@ -93,47 +141,5 @@ class PackageServiceProvider extends ServiceProvider
             PushDeer::class,
             static fn (Application $application): PushDeer => new PushDeer($application->make(Repository::class)->get('services.pushdeer'))
         );
-    }
-
-    /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    private function never(): void
-    {
-        // Passport::enablePasswordGrant();
-
-        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
-
-        Scramble::configure()->withDocumentTransformers(
-            static function (#[\SensitiveParameter] OpenApi $openApi): void {
-                $openApi->secure(SecurityScheme::http('bearer'));
-            }
-        );
-
-        LogViewer::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
-
-        if (class_exists(Telescope::class)) {
-            Telescope::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
-        }
-
-        /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
-        EnsureFeaturesAreActive::whenInactive(
-            static fn (Request $request, array $features): Response => new Response(status: 403)
-        );
-
-        $this->whenever($this->isOctaneHttpServer(), function (): void {
-            $this->app->get(Dispatcher::class)->listen(RequestReceived::class, static function (): void {
-                $uuid = Str::uuid()->toString();
-
-                if (config('octane.server') === 'roadrunner') {
-                    Cache::put($uuid, microtime(true));
-
-                    return;
-                }
-
-                Cache::store('octane')->put($uuid, microtime(true));
-            });
-        });
     }
 }

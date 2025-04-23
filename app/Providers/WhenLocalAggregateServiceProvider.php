@@ -36,4 +36,20 @@ class WhenLocalAggregateServiceProvider extends AggregateServiceProvider
             parent::register();
         }
     }
+
+    public function boot(): void
+    {
+        $this->ever();
+        $this->never();
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, static function (): void {});
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {});
+    }
 }

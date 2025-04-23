@@ -31,6 +31,25 @@ class ValidatorServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->ever();
+        $this->never();
+    }
+
+    private function ever(): void
+    {
+        $this->whenever(true, function (): void {
+            $this->defaultPassword();
+            $this->extendValidator();
+        });
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {});
+    }
+
+    private function defaultPassword(): void
+    {
         Password::defaults(fn (): Password => Password::min(8)
             ->max(255)
             ->when(
@@ -42,8 +61,6 @@ class ValidatorServiceProvider extends ServiceProvider
                     ->symbols()
                     ->uncompromised()
             ));
-
-        $this->extendValidator();
     }
 
     private function extendValidator(): void
