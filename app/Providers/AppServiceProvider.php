@@ -15,10 +15,7 @@ namespace App\Providers;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
-use Laragear\Discover\Facades\Discover as LaragearDiscover;
-use Spatie\StructureDiscoverer\Discover as SpatieDiscover;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
     #[\Override]
     public function register(): void
     {
+        // $this->registerMixins();
+        // $this->registerProviders();
         $this->booting(function (): void {
             $this->registerMixins();
             $this->registerProviders();
@@ -40,15 +39,12 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerMixins(): void
     {
-        // classes(static fn (string $file, string $class): bool => str($class)->is('App\\Support\\Mixins\\*'))
-        // LaragearDiscover::in('Support/Mixins')
-        collect(
-            SpatieDiscover::in(__DIR__.'/../Support/Mixins/')
-                // ->parallel()
-                // ->useReflection(__DIR__.'/../Support/Mixins/', 'App\\Support\\Mixins')
-                ->classes()
-                ->get()
-        )->mapWithKeys(static fn (string $class): array => [$class => new \ReflectionClass($class)])
+        classes(
+            static fn (
+                string $file,
+                string $class
+            ): bool => str($file)->is('*/../../app/Support/Mixins/*') && str($class)->is('App\\Support\\Mixins\\*')
+        )
             // ->keys()
             // ->dd()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
@@ -64,11 +60,18 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerProviders(): void
     {
-        LaragearDiscover::in('Providers')
-            ->instancesOf(ServiceProvider::class)
-            ->classes()
-            ->keys()
+        classes(
+            static fn (
+                string $file,
+                string $class
+            ): bool => str($file)->is('*/../../app/Providers/*') && str($class)->is('App\\Providers\\*')
+        )
+            // ->keys()
             // ->dd()
-            ->each(fn (string $class): ServiceProvider => $this->app->register($class));
+            ->each(
+                fn (\ReflectionClass $reflectionClass): ServiceProvider => $this->app->register(
+                    $reflectionClass->getName()
+                )
+            );
     }
 }

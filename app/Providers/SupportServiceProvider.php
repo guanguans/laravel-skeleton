@@ -21,11 +21,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
-use Illuminate\Support\Traits\Macroable;
 
 class SupportServiceProvider extends ServiceProvider
 {
@@ -83,51 +81,9 @@ class SupportServiceProvider extends ServiceProvider
         ];
     }
 
-    private function findStaticMethods(): void
-    {
-        classes(
-            static fn (string $file, string $class): bool => str($class)->is([
-                'Illuminate\\*',
-            ]) && !str($class)->is([
-                // Str::class,
-                // Arr::class,
-                // Carbon::class,
-                // Number::class,
-                // Enumerable::class,
-                // EnumeratesValues::class,
-            ])
-        )
-            ->map(
-                static fn (\ReflectionClass $reflectionClass) => collect($reflectionClass->getMethods(\ReflectionMethod::IS_STATIC))
-                    ->filter(
-                        static fn (\ReflectionMethod $reflectionMethod): bool => $reflectionMethod->isPublic()
-                            && !str($reflectionMethod->getName())->is([
-                                '__callStatic',
-                                ...collect([
-                                    Facade::class,
-                                    Macroable::class,
-                                ])->map(static fn (string $exceptClass) => collect(
-                                    (new \ReflectionClass($exceptClass))->getMethods(\ReflectionMethod::IS_STATIC)
-                                )->map(static fn (\ReflectionMethod $reflectionMethod): string => $reflectionMethod->getName()))->flatten()->all(),
-                            ])
-                    )
-                    ->map(
-                        static fn (
-                            \ReflectionMethod $reflectionMethod
-                        ): string => "{$reflectionClass->getName()}::{$reflectionMethod->getName()}"
-                    )
-                    ->all(),
-            )
-            ->filter()
-            // ->dd()
-            ->tap(static function (): void {});
-    }
-
     private function ever(): void
     {
-        $this->whenever(true, function (): void {
-            $this->findStaticMethods();
-
+        $this->whenever(true, static function (): void {
             /**
              * PHP 8.3.
              */
