@@ -117,8 +117,7 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerMixins(): void
     {
-        Discover::in('Support/Mixins')
-            ->allClasses()
+        classes(static fn (string $file, string $class): bool => str($class)->is('App\\Support\\Mixins\\*'))
             // ->keys()
             // ->dd()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {

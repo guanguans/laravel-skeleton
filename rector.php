@@ -68,6 +68,7 @@ use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
 
+/** @noinspection PhpUndefinedMethodInspection */
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/app/',
@@ -153,11 +154,8 @@ return RectorConfig::configure()
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
-        ...classes()
-            ->filter(static fn (string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
-            ->filter(static fn (string $class): bool => (new ReflectionClass($class))->isInstantiable())
-            // ->dd()
-            ->values()
+        ...classes(static fn (string $file, string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
+            ->keys()
             ->all(),
     ])
     ->withConfiguredRule(RemoveAnnotationRector::class, [
