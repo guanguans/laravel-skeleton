@@ -27,15 +27,14 @@ use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Lottery;
+use Illuminate\Support\Str;
 use jdavidbakr\LaravelCacheGarbageCollector\LaravelCacheGarbageCollector;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-return Application::configure(basePath: \dirname(__DIR__))
-    ->booting(static function (Application $app): void {
-        // $app->loadEnvironmentFrom(base_path('.env.').config('app.env'));
-    })
+$app = Application::configure(basePath: \dirname(__DIR__))
+    ->booting(static function (Application $app): void {})
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
@@ -90,11 +89,11 @@ return Application::configure(basePath: \dirname(__DIR__))
             ->redirectGuestsTo('/account/login')
             ->redirectUsersTo(
                 static fn (Request $request): string => $request->user()->isAdmin()
-                ? route('admin.dashboard')
-                : route('account.dashboard')
+                    ? route('admin.dashboard')
+                    : route('account.dashboard')
             )
             ->statefulApi()
-            ->throttleApi(redis: true)
+            ->throttleApi(/* redis: true */)
             ->trustProxies(at: [
                 '127.0.0.1',
             ]);
@@ -142,3 +141,9 @@ return Application::configure(basePath: \dirname(__DIR__))
         $exceptions->renderable(static function (QueryException $queryException): void {});
     })
     ->create();
+
+$app->afterLoadingEnvironment(static function (): void {
+    \defined('TRACE_ID') or \define('TRACE_ID', Str::uuid());
+});
+
+return $app;
