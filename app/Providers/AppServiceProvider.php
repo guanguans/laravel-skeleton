@@ -14,18 +14,9 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Support\Attributes\Mixin;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Enumerable;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
-use Illuminate\Support\Traits\EnumeratesValues;
-use Illuminate\Support\Traits\Macroable;
 use Laragear\Discover\Facades\Discover as LaragearDiscover;
 use Spatie\StructureDiscoverer\Discover as SpatieDiscover;
 
@@ -45,74 +36,6 @@ class AppServiceProvider extends ServiceProvider
             $this->registerMixins();
             $this->registerProviders();
         });
-    }
-
-    public function boot(): void
-    {
-        // Discover::at(
-        //     'vendor/laravel/framework/src/Illuminate/Support/Facades/',
-        //     'Illuminate\\Support\\Facades'
-        // )
-        //     ->classes()
-        //     ->dd();
-
-        classes(function (string $file, string $class) {
-            return str($class)->is([
-                Model::class,
-                'Illuminate\\Support\\*',
-            ]) && !str($class)->is([
-                Str::class,
-                Arr::class,
-                Carbon::class,
-                Number::class,
-                Enumerable::class,
-                EnumeratesValues::class,
-            ]);
-        })
-            // ->map(static function (string $class) {
-            //     if (is_subclass_of($class, Facade::class)) {
-            //         $prefix = ' * @see \\';
-            //
-            //         $seeClass = str((new \ReflectionClass($class))->getDocComment())
-            //             ->explode(\PHP_EOL)
-            //             ->filter(fn (string $line) => str($line)->startsWith($prefix))
-            //             ->pipe(fn (Collection $collection): string => Str::remove($prefix, $collection->firstOrFail()));
-            //
-            //         return [
-            //             new \ReflectionClass($class),
-            //             new \ReflectionClass($seeClass),
-            //         ];
-            //     }
-            //
-            //     return new \ReflectionClass($class);
-            // })
-            // ->flatten()
-            ->mapWithKeys(fn (\ReflectionClass $reflectionClass) => [
-                $reflectionClass->getName() => collect($reflectionClass->getMethods(\ReflectionMethod::IS_STATIC))
-                    ->filter(
-                        fn (\ReflectionMethod $reflectionMethod): bool => $reflectionMethod->isPublic()
-                            && !str($reflectionMethod->getName())->is([
-                                '__callStatic',
-                                ...collect([
-                                    Facade::class,
-                                    Macroable::class,
-                                ])->map(function (string $exceptClass) {
-                                    return collect(
-                                        (new \ReflectionClass($exceptClass))->getMethods(\ReflectionMethod::IS_STATIC)
-                                    )->map->getName();
-                                })->flatten()->all(),
-                            ])
-                    )
-                    ->map(
-                        static fn (
-                            \ReflectionMethod $reflectionMethod
-                        ) => "{$reflectionClass->getName()}::{$reflectionMethod->getName()}"
-                    )
-                    ->all(),
-            ])
-            ->filter()
-            // ->dd()
-            ->tap(function (): void {});
     }
 
     private function registerMixins(): void
