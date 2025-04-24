@@ -46,70 +46,86 @@ app
 │   ├── CallbackGetCast.php
 │   ├── CallbackSetCast.php
 │   ├── CommaSeparatedToArrayCast.php
+│   ├── CommaSeparatedToArrayCastUsing.php
 │   ├── CommaSeparatedToIntegerArrayCast.php
-│   ├── CurrencyCast.php
-│   └── DecimalCast.php
+│   └── CurrencyCast.php
 ├── Console
-│   ├── Commands
-│   │   ├── ClearAllCommand.php
-│   │   ├── ClearLogsCommand.php
-│   │   ├── Command.php
-│   │   ├── Concerns
-│   │   │   └── PrettyCommandOutput.php
-│   │   ├── FindDumpStatementCommand.php
-│   │   ├── GenerateTestsCommand.php
-│   │   ├── HealthCheckCommand.php
-│   │   ├── InflectorCommand.php
-│   │   ├── ListSchedule.php
-│   │   ├── OpcacheUrlCommand.php
-│   │   ├── OpenAIHelpCommand.php
-│   │   ├── OptimizeAllCommand.php
-│   │   └── ParsePHPFileToASTCommand.php
-│   └── Kernel.php
+│   └── Commands
+│       ├── ClearAllCommand.php
+│       ├── ClearLogsCommand.php
+│       ├── Command.php
+│       ├── Concerns
+│       │   ├── AskForPassword.php
+│       │   ├── Configureable.php
+│       │   └── Rescuer.php
+│       ├── FindCommand.php
+│       ├── FindDumpStatementCommand.php
+│       ├── FindStaticMethodsCommand.php
+│       ├── GenerateSitemapCommand.php
+│       ├── GenerateTestsCommand.php
+│       ├── HealthCheckCommand.php
+│       ├── IdeHelperChoresCommand.php
+│       ├── InflectorCommand.php
+│       ├── InitCommand.php
+│       ├── MigrateFromMysqlToSqlite.php
+│       ├── OpcacheUrlCommand.php
+│       ├── OptimizeAllCommand.php
+│       ├── PerformDatabaseBackupCommand.php
+│       └── ShowUnsupportedRequiresCommand.php
 ├── Enums
-│   ├── BooleanEnum.php
-│   ├── Enum.php
-│   ├── HealthCheckStateEnum.php
-│   ├── HttpStatusCodeEnum.php
+│   ├── CacheKeyEnum.php
+│   ├── Configuration.php
+│   ├── HealthCheckStatusEnum.php
 │   ├── IntegerBooleanEnum.php
 │   └── StringBooleanEnum.php
-├── Events
-│   └── UserLoggedInEvent.php
 ├── Exceptions
-│   ├── BadRequestException.php
-│   ├── Handler.php
+│   ├── BadRequestHttpException.php
 │   ├── InvalidRepeatRequestException.php
-│   └── InvalidRequestParameterException.php
+│   └── VerifyEmailException.php
 ├── Http
 │   ├── Controllers
 │   │   ├── Api
 │   │   │   ├── AuthController.php
+│   │   │   ├── ChunkUploadController.php
 │   │   │   ├── Controller.php
 │   │   │   ├── CurdController.php
-│   │   │   └── PingController.php
+│   │   │   ├── PingController.php
+│   │   │   └── UploadController.php
 │   │   └── Controller.php
-│   ├── Kernel.php
 │   ├── Middleware
 │   │   ├── AbortIf.php
-│   │   ├── Authenticate.php
+│   │   ├── AbortIfProduction.php
+│   │   ├── AddContentLength.php
+│   │   ├── BasicAuthentication.php
+│   │   ├── CSP.php
 │   │   ├── CompressResponseContent.php
+│   │   ├── Cors.php
+│   │   ├── DisableFloc.php
 │   │   ├── ETag.php
-│   │   ├── EncryptCookies.php
+│   │   ├── EnsureVerifiedEmailsForSignInUsers.php
+│   │   ├── HasValidSignature.php
+│   │   ├── HttpsProtocol.php
+│   │   ├── IsDeveloper.php
 │   │   ├── IsRouteIgnored.php
+│   │   ├── Localization.php
+│   │   ├── LogAllRequests.php
 │   │   ├── LogHttp.php
-│   │   ├── PreventRequestsDuringMaintenance.php
-│   │   ├── RedirectIfAuthenticated.php
+│   │   ├── MustBeAdmin.php
+│   │   ├── RedirectUppercase.php
+│   │   ├── RequiresJson.php
 │   │   ├── SetAcceptHeader.php
+│   │   ├── SetDefaultLocaleForUrls.php
 │   │   ├── SetJsonResponseEncodingOptions.php
-│   │   ├── TrimStrings.php
-│   │   ├── TrustHosts.php
-│   │   ├── TrustProxies.php
+│   │   ├── SetLocale.php
+│   │   ├── SetLocales.php
+│   │   ├── SetTimezone.php
 │   │   ├── UserLocale.php
 │   │   ├── VerifyCommonParameters.php
-│   │   ├── VerifyCsrfToken.php
+│   │   ├── VerifyFormPaginate.php
+│   │   ├── VerifyFormPassword.php
 │   │   ├── VerifyJsonContent.php
-│   │   ├── VerifyProductionEnvironment.php
-│   │   └── VerifySignature.php
+│   │   ├── VerifySignature.php
+│   │   └── VerifyUserAbility.php
 │   ├── Requests
 │   │   ├── Auth
 │   │   │   ├── AuthRequest.php
@@ -119,8 +135,19 @@ app
 │       ├── UserCollection.php
 │       └── UserResource.php
 ├── Jobs
+│   ├── Middleware
+│   │   ├── EnsureTokenIsValid.php
+│   │   └── RateLimitedForJob.php
+│   └── SendThirdPartyRequestJob.php
 ├── Listeners
 │   ├── CollectGarbageListener.php
+│   ├── LogActivity.php
+│   ├── LogMailListener.php
+│   ├── MaintenanceModeDisabledNotificationListener.php
+│   ├── MaintenanceModeEnabledNotificationListener.php
+│   ├── RecordRequestIdentifiersListener.php
+│   ├── RunCommandInDebugModeListener.php
+│   ├── SetRequestIdListener.php
 │   └── ShareLogContextSubscriber.php
 ├── Mail
 │   └── UserRegisteredMail.php
@@ -128,29 +155,31 @@ app
 │   ├── Concerns
 │   │   ├── AllowedFilterable.php
 │   │   ├── BelongsToCreator.php
-│   │   ├── Filterable.php
-│   │   ├── Fireworks.php
+│   │   ├── CacheCleaner.php
 │   │   ├── ForceUseIndexable.php
+│   │   ├── GetModelByUuid.php
 │   │   ├── HasPivot.php
-│   │   ├── HasWrapedApiTokens.php
+│   │   ├── HasWrappedApiTokens.php
 │   │   ├── IndexHintsable.php
 │   │   ├── Nullable.php
 │   │   ├── Observable.php
 │   │   ├── Pipeable.php
 │   │   ├── SerializeDate.php
-│   │   ├── SimpleNode.php
-│   │   ├── Sortable.php
-│   │   └── UsingUuidAsPrimaryKey.php
+│   │   ├── Trashed.php
+│   │   └── UuidGenerator.php
+│   ├── DatabaseNotification.php
 │   ├── HttpLog.php
 │   ├── JWTUser.php
 │   ├── Model.php
+│   ├── Movie.php
 │   ├── PersonalAccessToken.php
 │   ├── Pivots
 │   │   ├── MorphPivotWithCreatorPivot.php
 │   │   └── PivotWithCreatorPivot.php
-│   ├── Scopes
+│   ├── Province.php
 │   └── User.php
 ├── Notifications
+│   ├── SlowQueryLoggedNotification.php
 │   └── WelcomeNotification.php
 ├── Observers
 │   └── UserObserver.php
@@ -160,14 +189,27 @@ app
 ├── Providers
 │   ├── AppServiceProvider.php
 │   ├── AuthServiceProvider.php
-│   ├── BroadcastServiceProvider.php
+│   ├── AutowiredServiceProvider.php
+│   ├── CacheServiceProvider.php
+│   ├── ConsoleServiceProvider.php
+│   ├── DatabaseServiceProvider.php
 │   ├── EventServiceProvider.php
-│   ├── ExtendServiceProvider.php
+│   ├── HttpServiceProvider.php
+│   ├── LogServiceProvider.php
+│   ├── PackageServiceProvider.php
+│   ├── PaginatorServiceProvider.php
+│   ├── QueueServiceProvider.php
 │   ├── RouteServiceProvider.php
-│   └── TelescopeServiceProvider.php
+│   ├── SupportServiceProvider.php
+│   ├── UnlessProductionAggregateServiceProvider.php
+│   ├── ValidatorServiceProvider.php
+│   ├── ViewServiceProvider.php
+│   ├── WhenLocalAggregateServiceProvider.php
+│   └── WhenTestingAggregateServiceProvider.php
 ├── Rules
 │   ├── AddressIPV4Rule.php
 │   ├── AddressIPV6Rule.php
+│   ├── AggregateRule.php
 │   ├── BankCardRule.php
 │   ├── Base64Rule.php
 │   ├── BetweenWordsRule.php
@@ -196,9 +238,12 @@ app
 │   ├── IpRule.php
 │   ├── JwtRule.php
 │   ├── KebabCaseRule.php
+│   ├── LenientPortRule.php
 │   ├── LocationCoordinatesRule.php
 │   ├── MacAddressRule.php
+│   ├── MaxUploadSizeRule.php
 │   ├── MimeTypeRule.php
+│   ├── NotDisposableEmailRule.php
 │   ├── OddNumberRule.php
 │   ├── PhoneCisRule.php
 │   ├── PhoneRule.php
@@ -210,67 +255,48 @@ app
 │   ├── SemverRule.php
 │   ├── SlugRule.php
 │   ├── SnakeCaseRule.php
-│   ├── StrictIdCardRule.php
 │   ├── StrongPassword.php
 │   ├── TimezoneRule.php
 │   ├── UlidRule.php
 │   ├── UrlRule.php
 │   ├── UuidRule.php
 │   └── WithoutWhitespaceRule.php
-├── Services
 ├── Support
-│   ├── AbstractRepository.php
 │   ├── Attributes
-│   │   └── Ignore.php
+│   │   ├── Autowired.php
+│   │   ├── Ignore.php
+│   │   └── Mixin.php
+│   ├── Autowire.php
 │   ├── BitEncoder.php
-│   ├── ConsoleWriter.php
+│   ├── Bootstrappers
+│   │   ├── OutOfMemoryBootstrapper.php
+│   │   └── SetRequestIdGlobalBootstrapper.php
+│   ├── Clients
+│   │   ├── AbstractClient.php
+│   │   └── PushDeer.php
+│   ├── Console
+│   │   ├── ProgressBarFactory.php
+│   │   └── SymfonyStyleFactory.php
 │   ├── Contracts
 │   │   ├── BitEncoderContract.php
 │   │   └── SignerContract.php
-│   ├── Discover.php
-│   ├── ElasticsearchManager.php
+│   ├── Curl.php
 │   ├── Facades
 │   │   ├── Elasticsearch.php
-│   │   ├── OpenAI.php
 │   │   └── PushDeer.php
-│   ├── FluentAssert.php
-│   ├── FoundationSDK.php
-│   ├── HandlerStack.php
-│   ├── HmacSigner.php
-│   ├── Http
-│   │   ├── Client.php
-│   │   ├── Concerns
-│   │   │   ├── ConcreteConfigMethods.php
-│   │   │   ├── ConcreteEasyHttpRequestMethods.php
-│   │   │   └── ConcreteHttpRequestMethods.php
-│   │   ├── Contracts
-│   │   │   ├── ClientInterface.php
-│   │   │   ├── Handler.php
-│   │   │   └── Throwable.php
-│   │   ├── Exceptions
-│   │   │   └── RuntimeException.php
-│   │   ├── GuzzlyClient.php
-│   │   ├── Handlers
-│   │   │   ├── FgcHandler.php
-│   │   │   └── StreamHandler.php
-│   │   ├── Middleware.php
-│   │   ├── PsrClient.php
-│   │   ├── Responses
-│   │   │   ├── Response.php
-│   │   │   └── StreamResponse.php
-│   │   └── Support
-│   │       ├── Collection.php
-│   │       └── XML.php
-│   ├── HttpClient.php
-│   ├── HttpQuery.php
-│   ├── IdCard.php
-│   ├── Inflector.php
+│   ├── Guzzle
+│   │   └── CircuitBreakerMiddleware.php
+│   ├── Managers
+│   │   └── ElasticsearchManager.php
 │   ├── Mixins
 │   │   ├── BlueprintMixin.php
+│   │   ├── CarbonMixin.php
 │   │   ├── CollectionMixin.php
 │   │   ├── CommandMixin.php
 │   │   ├── GrammarMixin.php
+│   │   ├── ModelMixin.php
 │   │   ├── MySqlGrammarMixin.php
+│   │   ├── PendingRequestMixin.php
 │   │   ├── QueryBuilder
 │   │   │   ├── OrderByWithQueryBuilderMixin.php
 │   │   │   ├── QueryBuilderMixin.php
@@ -285,50 +311,59 @@ app
 │   │   ├── ResponseFactoryMixin.php
 │   │   ├── SchedulingEventMixin.php
 │   │   ├── StrMixin.php
-│   │   └── StringableMixin.php
+│   │   ├── StringableMixin.php
+│   │   ├── UploadedFileMixin.php
+│   │   └── ViteMixin.php
 │   ├── Monolog
-│   │   ├── AnsiLineFormatter.php
-│   │   ├── AppendExtraDataProcessor.php
-│   │   └── EcsFormatterTapper.php
-│   ├── OS.php
-│   ├── OpenAI.php
-│   ├── PureModel.php
-│   ├── PushDeer.php
+│   │   ├── EcsFormatterTapper.php
+│   │   ├── Formatter
+│   │   │   └── EloquentLogHttpModelFormatter.php
+│   │   ├── Handler
+│   │   │   └── EloquentHandler.php
+│   │   └── Processor
+│   │       ├── AppendExtraDataProcessor.php
+│   │       └── EloquentLogHttpModelProcessor.php
+│   ├── PHPStan
+│   │   └── ForbiddenGlobalFunctionsRule.php
+│   ├── PhpCsFixer
+│   │   └── PintFixer.php
+│   ├── PhpUserFilters
+│   │   └── CallbackFilter.php
 │   ├── Rectors
+│   │   ├── ClassHandleMethodRector.php
 │   │   └── RenameToPsrNameRector.php
-│   ├── SqlFormatter.php
+│   ├── Signers
+│   │   └── HmacSigner.php
 │   ├── Sse
 │   │   ├── CloseServerSentEventException.php
 │   │   └── ServerSentEvent.php
-│   ├── System.php
+│   ├── StreamWrappers
+│   │   ├── Concerns
+│   │   │   ├── HasContext.php
+│   │   │   └── Nameable.php
+│   │   ├── GlobStreamWrapper.php
+│   │   ├── StreamWrapper.php
+│   │   └── UserFileStreamWrapper.php
 │   ├── Traits
-│   │   ├── Cacheable.php
-│   │   ├── Castable.php
-│   │   ├── ControllerCrudable.php
+│   │   ├── Configurable.php
 │   │   ├── Copyable.php
-│   │   ├── CreateStaticable.php
 │   │   ├── Disenchant.php
 │   │   ├── Immutable.php
-│   │   ├── ModelCrudable.php
-│   │   ├── Sanitizerable.php
+│   │   ├── Makeable.php
+│   │   ├── Sanitizeable.php
 │   │   ├── Singletonable.php
 │   │   ├── Uncloneable.php
 │   │   ├── Unconstructable.php
-│   │   ├── ValidateStrictAll.php
-│   │   ├── ValidatesData.php
-│   │   └── Value.php
+│   │   └── WithMiddlewareArgs.php
 │   └── helpers.php
 └── View
     ├── Components
-    │   ├── AlertComponent.php
-    │   └── vendor
-    │       └── health
-    │           ├── Logo.php
-    │           └── StatusIndicator.php
+    │   └── AlertComponent.php
     ├── Composers
     │   └── RequestComposer.php
     └── Creators
         └── RequestCreator.php
 
-52 directories, 237 files
+55 directories, 268 files
+
 ```

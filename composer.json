@@ -388,6 +388,9 @@
         "composer-updater-laravel10": "@composer-updater --composer-json-path=vendor-bin/laravel10/composer.json",
         "composer-updater-laravel11": "@composer-updater --composer-json-path=vendor-bin/laravel11/composer.json",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
+        "create-project-cmd": [
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\""
+        ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
