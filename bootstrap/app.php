@@ -143,7 +143,7 @@ $app = Application::configure(basePath: \dirname(__DIR__))
     ->create();
 
 $app->afterLoadingEnvironment(static function (): void {
-    \defined('TRACE_ID') or \define('TRACE_ID', Str::uuid());
+    \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
 });
 
 return $app;

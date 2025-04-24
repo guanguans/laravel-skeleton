@@ -123,7 +123,7 @@ abstract class AbstractClient
 
     protected function requestId(): ?string
     {
-        return \defined('REQUEST_ID') ? REQUEST_ID : null;
+        return \defined('TRACE_ID') ? TRACE_ID : null;
     }
 
     /**

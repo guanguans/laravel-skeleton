@@ -76,6 +76,7 @@ return [
     'pushdeer' => [
         'base_url' => env('PUSHDEER_BASE_URL', 'https://api2.pushdeer.com'),
         'key' => env('PUSHDEER_KEY'),
+        'logger' => env('PUSHDEER_LOGGER'),
         'http_options' => [
             // RequestOptions::CONNECT_TIMEOUT => 10,
             // RequestOptions::TIMEOUT => 30,
