@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\PersonalAccessToken;
-use App\Support\Clients\PushDeer;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
@@ -37,17 +36,6 @@ class PackageServiceProvider extends ServiceProvider
     use Conditionable {
         Conditionable::when as whenever;
     }
-    public array $bindings = [];
-    public array $singletons = [];
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    public function register(): void
-    {
-        $this->registerPushDeer();
-    }
 
     /**
      * @throws \Psr\Container\ContainerExceptionInterface
@@ -57,27 +45,6 @@ class PackageServiceProvider extends ServiceProvider
     {
         $this->ever();
         $this->never();
-    }
-
-    /**
-     * @noinspection SenselessMethodDuplicationInspection
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    public function when(): array
-    {
-        return [];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    public function provides(): array
-    {
-        return [
-            PushDeer::class,
-        ];
     }
 
     private function ever(): void
@@ -137,10 +104,5 @@ class PackageServiceProvider extends ServiceProvider
     private function isOctaneHttpServer(): bool
     {
         return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
-    }
-
-    private function registerPushDeer(): void
-    {
-        $this->app->singleton(PushDeer::class, static fn (): PushDeer => new PushDeer(config('services.pushdeer')));
     }
 }

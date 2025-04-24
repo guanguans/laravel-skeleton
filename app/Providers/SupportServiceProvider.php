@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Support\Clients\PushDeer;
+use App\Support\Managers\ElasticsearchManager;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Carbon;
@@ -29,6 +31,23 @@ class SupportServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
+    public array $bindings = [];
+
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
+    public array $singletons = [
+        ElasticsearchManager::class,
+    ];
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    public function register(): void
+    {
+        $this->registerPushDeer();
+    }
+
     /**
      * @see https://github.com/cachethq/cachet
      *
@@ -38,6 +57,28 @@ class SupportServiceProvider extends ServiceProvider
     {
         $this->ever();
         $this->never();
+    }
+
+    /**
+     * @noinspection SenselessMethodDuplicationInspection
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    public function when(): array
+    {
+        return [];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    public function provides(): array
+    {
+        return [
+            PushDeer::class,
+            ElasticsearchManager::class,
+        ];
     }
 
     private function ever(): void
@@ -81,5 +122,10 @@ class SupportServiceProvider extends ServiceProvider
             Number::useLocale($this->app->getLocale());
             Carbon::setLocale($this->app->getLocale());
         });
+    }
+
+    private function registerPushDeer(): void
+    {
+        $this->app->singleton(PushDeer::class, static fn (): PushDeer => new PushDeer(config('services.pushdeer')));
     }
 }
