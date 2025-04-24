@@ -322,6 +322,10 @@
             "@cghooks update",
             "@composer-diff"
         ],
+        "pre-autoload-dump": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\""
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi -v"
@@ -388,9 +392,6 @@
         "composer-updater-laravel10": "@composer-updater --composer-json-path=vendor-bin/laravel10/composer.json",
         "composer-updater-laravel11": "@composer-updater --composer-json-path=vendor-bin/laravel11/composer.json",
         "composer-validate": "@composer validate --check-lock --strict --ansi -v",
-        "create-project-cmd": [
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\""
-        ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
@@ -416,6 +417,10 @@
         "envoy-testing": "@envoy run testing",
         "facade-lint": "@facade-update --lint",
         "facade-update": "@php -f ./facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facades/*.php'\\'')));')",
+        "install-project": [
+            "@post-create-project-cmd",
+            "@artisan jwt:secret --force"
+        ],
         "json-lint": "@php ./vendor/bin/jsonlint *.json .*rc",
         "lint": [
             "@env-put-php",

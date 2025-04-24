@@ -37,8 +37,8 @@ jobs:
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --ansi -v
 
-      - name: Check and fix namespace prefix
-        run: composer check-and-fix-namespace-prefix
+      - name: Run install project
+        run: composer install-project
 
       - name: Execute tests
         run: composer test-coverage

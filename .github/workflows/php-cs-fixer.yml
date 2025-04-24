@@ -24,9 +24,6 @@ jobs:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
 
-      - name: Run create project cmd
-        run: composer create-project-cmd
-
       - name: Run composer install
         run: composer install --no-interaction --prefer-dist --ansi -v
 
