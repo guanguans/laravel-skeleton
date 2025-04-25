@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
  * ETag middleware.
@@ -24,11 +27,11 @@ class ETag
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \JsonException
      */
-    public function handle(Request $request, \Closure $next): Response
+    public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         // If this was not a get or head request, just return
         if (!$request->isMethod('get') && !$request->isMethod('head')) {

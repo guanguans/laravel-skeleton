@@ -57,7 +57,7 @@ class CacheServiceProvider extends ServiceProvider
             Route::middleware('throttle:upload');
             RateLimiter::for(
                 'upload',
-                static fn (Request $request) => $request->user()->vipCustomer()
+                static fn (Request $request) => $request->user()->isAdmin()
                     ? Limit::none()
                     : Limit::perMinute(100)->by($request->ip())
             );

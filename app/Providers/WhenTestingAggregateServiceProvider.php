@@ -85,7 +85,7 @@ class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
                         }
 
                         /**
-                         * @param string<'raw', 'full', 'small', 'thumb', 'regular', 'small_s3'> $format
+                         * @param string $format string<'raw', 'full', 'small', 'thumb', 'regular', 'small_s3'>
                          */
                         public function imageRandomUrl(string $format = 'small'): string
                         {

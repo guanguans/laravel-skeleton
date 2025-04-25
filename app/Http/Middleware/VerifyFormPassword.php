@@ -13,18 +13,21 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rules\Password;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class VerifyFormPassword
 {
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next, string $name = 'password'): Response
+    public function handle(Request $request, \Closure $next, string $name = 'password'): SymfonyResponse
     {
         $request->whenFilled($name, static function () use ($request, $name): void {
             $request->validate([

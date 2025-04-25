@@ -73,6 +73,10 @@ class BlueprintMixin
 
     public function hasIndex(): \Closure
     {
+        /**
+         * @see https://github.com/laravel/framework/commit/9ccf0031d1cb8669752bc95e85cdccad20706461
+         * @see https://github.com/laravel/framework/blob/10.x/src/Illuminate/Database/Connection.php
+         */
         return function (string $index): bool {
             $schemaManager = Schema::getConnection()->getDoctrineSchemaManager();
 

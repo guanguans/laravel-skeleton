@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\URL;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
  * @see https://www.harrisrafto.eu/simplifying-route-parameters-with-laravels-url-defaults/
@@ -25,9 +28,9 @@ class SetDefaultLocaleForUrls
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next): Response
+    public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         URL::defaults(['locale' => $request->user()->locale ?? config('app.locale')]);
 

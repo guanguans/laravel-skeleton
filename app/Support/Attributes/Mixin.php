@@ -21,7 +21,7 @@ readonly class Mixin
 {
     public function __construct(
         /**
-         * @var class-string<\Illuminate\Support\Traits\Macroable>
+         * @var class-string<\Illuminate\Config\Repository>
          */
         public string $class,
         public bool $replace = true

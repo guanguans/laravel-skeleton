@@ -14,9 +14,12 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Support\Attributes\Ignore;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
  * @see https://blog.oussama-mater.tech/php-attributes/
@@ -26,11 +29,11 @@ class IsRouteIgnored
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \ReflectionException
      */
-    public function handle(Request $request, \Closure $next): Response
+    public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         $route = $request->route();
 

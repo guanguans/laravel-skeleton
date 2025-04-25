@@ -15,20 +15,23 @@ namespace App\Http\Middleware;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class Cors
 {
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function handle(Request $request, \Closure $next, string $allowedOriginPatterns = '*'): Response
+    public function handle(Request $request, \Closure $next, string $allowedOriginPatterns = '*'): SymfonyResponse
     {
         return tap($next($request), static function () use ($allowedOriginPatterns): void {
             if (class_exists(RequestHandled::class) && app()->bound('events')) {

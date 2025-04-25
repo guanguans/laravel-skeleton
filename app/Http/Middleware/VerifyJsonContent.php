@@ -14,19 +14,22 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Exceptions\BadRequestHttpException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class VerifyJsonContent
 {
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \Throwable
      */
-    public function handle(Request $request, \Closure $next): Response
+    public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         $acceptHeader = $request->header('accept');
         $contentType = 'application/json';

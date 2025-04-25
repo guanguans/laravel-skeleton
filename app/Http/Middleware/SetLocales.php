@@ -13,20 +13,23 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class SetLocales
 {
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next, string $locale): Response
+    public function handle(Request $request, \Closure $next, string $locale): SymfonyResponse
     {
         Config::set('app.locale', $locale);
         app()->setLocale($locale);

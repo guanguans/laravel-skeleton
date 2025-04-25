@@ -270,6 +270,7 @@ if (!\function_exists('curry')) {
                 return $function(...$arguments);
             }
 
+            /** @var callable $accumulator */
             return $accumulator($arguments);
         };
 
@@ -323,18 +324,15 @@ if (!\function_exists('dump_to_server')) {
      * ```.
      *
      * @noinspection GlobalVariableUsageInspection
-     * @noinspection PhpUndefinedClassInspection
      * @noinspection ForgottenDebugOutputInspection
      * @noinspection DebugFunctionUsageInspection
-     * @noinspection StaticClosureCanBeUsedInspection
-     * @noinspection AnonymousFunctionStaticInspection
      */
     function dump_to_server(mixed ...$vars): mixed
     {
+        $_SERVER['VAR_DUMPER_FORMAT'] = null;
+        VarDumper::setHandler(null);
         $_SERVER['VAR_DUMPER_FORMAT'] = 'server';
         // $_SERVER['VAR_DUMPER_SERVER'] = '0.0.0.0:9912';
-
-        (fn (): null => self::$handler = null)->call(new VarDumper);
 
         return dump(...$vars);
     }

@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
  * @see https://github.com/slimkit/plus/blob/2.4/app/Http/Middleware/UserAbility.php
@@ -30,9 +33,9 @@ readonly class VerifyUserAbility
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next, string $ability, string $message = ''): Response
+    public function handle(Request $request, \Closure $next, string $ability, string $message = ''): SymfonyResponse
     {
         abort_if(
             $this->auth->guest() || !$this->auth->user()?->can($ability),

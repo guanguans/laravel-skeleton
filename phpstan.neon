@@ -36,10 +36,12 @@ parameters:
         - bootstrap/app.php
 #    scanDirectories:
 #      - vendor-bin/laravel10/vendor/stillat/blade-directives/
+    scanFiles:
+        - vendor-bin/laravel10/vendor/laravel/framework/src/Illuminate/Database/Connection.php
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 1
+    level: 2
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify
@@ -89,10 +91,10 @@ parameters:
 #        - '#Property .* does not accept mixed#'
 #        - identifier: argument.templateType
 #        - identifier: argument.type
-#        - identifier: binaryOp.invalid
-#        - identifier: cast.string
+        - identifier: binaryOp.invalid
+        - identifier: cast.string
 #        - identifier: encapsedStringPart.nonString
-#        - identifier: method.nonObject
+        - identifier: method.nonObject
 #        - identifier: missingType.generics
 #        - identifier: missingType.iterableValue
 #        - identifier: return.type
@@ -100,12 +102,20 @@ parameters:
 #        - identifier: symplify.noDynamicName
 #        - identifier: typePerfect.noMixedMethodCaller
 #        - identifier: new.static
+        - identifier: staticClassAccess.privateProperty
+        - '#^Call to an undefined method Guanguans\\LaravelApiResponse\\Contracts\\ApiResponseContract\:\:.*\(\)\.$#'
         -
             identifier: larastan.noEnvCallsOutsideOfConfig
-            path: ./app/Support/helpers.php
+            path: app/Support/helpers.php
+        -
+            identifier: new.static
+            paths:
+                - app/Rules/Rule.php
+                - app/Support/Mixins/CollectionMixin.php
+                - app/Support/Mixins/ModelMixin.php
         -
             message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
-            path: ./app/Support/helpers.php
+            path: app/Support/helpers.php
         -
             messages:
                 - '#^Access to an undefined property App\\Support\\Mixins\\.*Mixin\:\:\$.*\.$#'
@@ -113,7 +123,20 @@ parameters:
                 - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
                 - '#^Method App\\Support\\Mixins\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
                 - '#^Undefined variable\: \$this$#'
+                - '#^PHPDoc tag @var with type .* is not subtype of native type .*\.$#'
             path: app/Support/Mixins/
+        -
+            message: '#^Access to an undefined property PhpParser\\Node\\Expr\:\:\$value\.$#'
+            count: 4
+            path: app/Support/Rectors/RenameToPsrNameRector.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable\:\:\$email\.$#'
+            count: 4
+            path: app/Listeners/LogActivity.php
+        -
+            message: '#^Access to an undefined property PhpParser\\NodeVisitorAbstract\:\:\$testClass.*\.$#'
+            count: 3
+            path: app/Console/Commands/GenerateTestsCommand.php
 #        -
 #            identifier: return.missing
 #            path: app/Support/StreamWrappers/

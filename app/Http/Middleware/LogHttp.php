@@ -15,12 +15,14 @@ namespace App\Http\Middleware;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class LogHttp
 {
@@ -85,9 +87,9 @@ class LogHttp
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next, LoggerInterface|string $logger, string $level = 'info'): Response
+    public function handle(Request $request, \Closure $next, LoggerInterface|string $logger, string $level = 'info'): SymfonyResponse
     {
         static::setLogger($logger);
         static::setLevel($level);

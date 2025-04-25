@@ -48,7 +48,7 @@ class ShowUnsupportedRequiresCommand extends Command
 
         $requires = collect(File::json(base_path('composer.json')));
 
-        collect(Collection::json($jsonTree)->get('installed'))
+        collect(Collection::fromJson($jsonTree)->get('installed'))
             ->reject(static fn (array $package) => str($package['name'])->is([
                 // ...
             ]))

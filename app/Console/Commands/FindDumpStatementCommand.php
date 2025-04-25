@@ -47,7 +47,7 @@ class FindDumpStatementCommand extends Command
         EOD;
     protected $description = 'Find dump statements in PHP files.';
 
-    /** @var list<list<\string>> */
+    /** @var array<string, list<string>> */
     private array $statements = [
         'struct' => [
             'echo',

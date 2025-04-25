@@ -13,17 +13,20 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class UserLocale
 {
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next, ?string $guard = null): Response
+    public function handle(Request $request, \Closure $next, ?string $guard = null): SymfonyResponse
     {
         $locale = auth($guard)->user()?->locale() and app()->setLocale($locale);
 

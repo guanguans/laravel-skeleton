@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class VerifyCommonParameters
 {
@@ -29,9 +32,9 @@ class VerifyCommonParameters
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next): Response
+    public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         /** @noinspection PhpUndefinedMethodInspection */
         Validator::make($request->headers(), self::$rules)->validate();

@@ -1,5 +1,5 @@
 # total 6 errors
 includes:
     - disallowed.function.neon
-    - new.static.neon
-    - outOfClass.self.neon
+    - method.notFound.neon
+    - property.notFound.neon

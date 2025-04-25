@@ -15,19 +15,22 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\InvalidRepeatRequestException;
 use App\Support\Signers\HmacSigner;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class VerifySignature
 {
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
-     * @param \Closure(\Illuminate\Http\Request): \Symfony\Component\HttpFoundation\Response $next
+     * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \Throwable
      */
@@ -38,7 +41,7 @@ class VerifySignature
         string $secret = '',
         int $effectiveTime = 60,
         bool $checkRepeatRequest = true
-    ): Response {
+    ): SymfonyResponse {
         $this->validateCommonParameters($request, $effectiveTime);
 
         $this->validateSignature($request, $secret);
