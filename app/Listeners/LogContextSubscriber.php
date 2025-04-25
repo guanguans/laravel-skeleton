@@ -17,25 +17,25 @@ use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Console\Events\ScheduledTaskStarting;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Routing\Events\RouteMatched;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Context;
 
-class ShareLogContextSubscriber
+class LogContextSubscriber
 {
     public function subscribe(Dispatcher $dispatcher): array
     {
         return [
             RouteMatched::class => static function (RouteMatched $event): void {
-                Log::shareContext([
+                Context::add([
                     'action' => $event->route?->getActionName(),
                 ]);
             },
             CommandStarting::class => static function (CommandStarting $event): void {
-                Log::shareContext([
+                Context::add([
                     'command' => $event->command ?? $event->input->getArguments()['command'] ?? 'default',
                 ]);
             },
             ScheduledTaskStarting::class => static function (ScheduledTaskStarting $event): void {
-                Log::shareContext([
+                Context::add([
                     'command' => ($event->task->command ?: $event->task->description) ?: 'Closure',
                 ]);
             },

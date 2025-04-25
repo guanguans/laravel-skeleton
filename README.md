@@ -156,7 +156,7 @@ app
 │   ├── RecordRequestIdentifiersListener.php
 │   ├── RunCommandInDebugModeListener.php
 │   ├── SetRequestIdListener.php
-│   └── ShareLogContextSubscriber.php
+│   └── LogContextSubscriber.php
 ├── Mail
 │   └── UserRegisteredMail.php
 ├── Models

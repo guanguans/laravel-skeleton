@@ -15,10 +15,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Listeners\LogContextSubscriber;
 use App\Listeners\MaintenanceModeDisabledNotificationListener;
 use App\Listeners\MaintenanceModeEnabledNotificationListener;
 use App\Listeners\SetRequestIdListener;
-use App\Listeners\ShareLogContextSubscriber;
 use App\Observers\UserObserver;
 use Illuminate\Foundation\Bootstrap\BootProviders;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -77,7 +77,7 @@ class EventServiceProvider extends ServiceProvider
 
     /** {@inheritDoc} */
     protected $subscribe = [
-        ShareLogContextSubscriber::class,
+        LogContextSubscriber::class,
     ];
 
     /**
