@@ -1,0 +1,18 @@
+# total 3 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            count: 1
+            path: ../app/Rules/Rule.php
+
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            count: 1
+            path: ../app/Support/Mixins/CollectionMixin.php
+
+        -
+            message: '#^Unsafe usage of new static\(\)\.$#'
+            count: 1
+            path: ../app/Support/Mixins/ModelMixin.php

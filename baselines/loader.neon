@@ -1,3 +1,5 @@
-# total 2 errors
+# total 6 errors
 includes:
+    - disallowed.function.neon
+    - new.static.neon
     - outOfClass.self.neon
