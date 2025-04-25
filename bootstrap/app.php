@@ -16,6 +16,7 @@ declare(strict_types=1);
 use App\Console\Commands\ClearLogsCommand;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\SetJsonResponseEncodingOptions;
+use App\Listeners\PrepareRequestListener;
 use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
@@ -145,15 +146,7 @@ $app = Application::configure(basePath: \dirname(__DIR__))
     })
     ->create();
 
-$app->afterLoadingEnvironment(static function (Application $app): void {
-    \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
-
-    $app['request']->headers->set('X-Request-Id', TRACE_ID);
-
-    if ($app['request']->is('api/*')) {
-        $app['request']->headers->set('Accept', 'application/json');
-    }
-});
+$app->afterLoadingEnvironment((new PrepareRequestListener)(...));
 
 // /**
 //  * @noinspection PhpUnhandledExceptionInspection

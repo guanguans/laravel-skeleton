@@ -18,9 +18,7 @@ namespace App\Providers;
 use App\Listeners\LogContextSubscriber;
 use App\Listeners\MaintenanceModeDisabledNotificationListener;
 use App\Listeners\MaintenanceModeEnabledNotificationListener;
-use App\Listeners\SetRequestIdListener;
 use App\Observers\UserObserver;
-use Illuminate\Foundation\Bootstrap\BootProviders;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\Event;
@@ -68,12 +66,6 @@ class EventServiceProvider extends ServiceProvider
         \Illuminate\Foundation\Events\MaintenanceModeDisabled::class => [
             MaintenanceModeDisabledNotificationListener::class,
         ],
-        // 'bootstrapping: '.BootProviders::class => [
-        //     SetRequestIdListener::class,
-        // ],
-        // 'bootstrapped: '.BootProviders::class => [
-        //     SetRequestIdListener::class,
-        // ],
     ];
 
     /** {@inheritDoc} */
