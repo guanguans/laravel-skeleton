@@ -177,9 +177,9 @@ class DatabaseServiceProvider extends ServiceProvider
         }
 
         $requestHasTrigger = static fn (string $trigger): bool => false !== getenv($trigger)
-            || request()->hasHeader($trigger)
-            || request()->has($trigger)
-            || request()->hasCookie($trigger);
+            || Request::hasHeader($trigger)
+            || Request::has($trigger)
+            || Request::hasCookie($trigger);
 
         if (!empty($trigger = Config::get('logging.query.trigger')) && !$requestHasTrigger($trigger)) {
             return;

@@ -36,7 +36,7 @@ class TraceEventListener
          */
         $trace = collect(debug_backtrace())
             ->filter(
-                static fn (array $trace) => isset($trace['file'], $trace['line'])
+                static fn (array $trace): bool => isset($trace['file'], $trace['line'])
                     && collect($trace['args'] ?? [])->first(
                         static fn (mixed $arg): bool => $arg === $event
                     )
