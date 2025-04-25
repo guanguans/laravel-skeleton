@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Listeners\PrepareRequestListener;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Http\Events\RequestHandled;
@@ -49,7 +50,7 @@ class HttpServiceProvider extends ServiceProvider
                 'connect_timeout' => 10,
                 'timeout' => 30,
                 'headers' => [
-                    'X-Request-Id' => TRACE_ID,
+                    PrepareRequestListener::X_REQUEST_ID => TRACE_ID,
                 ],
             ]);
             // Http::globalMiddleware(

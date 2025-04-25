@@ -27,12 +27,15 @@ class PrepareRequestListener
 {
     final public const string X_REQUEST_ID = 'X-Request-Id';
 
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     public function __invoke(Application $app): void
     {
         \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
 
         if (!$app->runningInConsole()) {
-            $app->make('request')->headers->set('X-Request-Id', TRACE_ID);
+            $app->make('request')->headers->set(self::X_REQUEST_ID, TRACE_ID);
 
             if ($app->make('request')->is('api/*')) {
                 $app->make('request')->headers->set('Accept', 'application/json');

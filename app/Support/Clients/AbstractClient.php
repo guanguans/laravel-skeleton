@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace App\Support\Clients;
 
+use App\Listeners\PrepareRequestListener;
 use Composer\InstalledVersions;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\MessageFormatter;
@@ -174,7 +175,7 @@ abstract class AbstractClient
                 static fn (
                     PendingRequest $pendingRequest,
                     string $requestId
-                ) => $pendingRequest->withHeader('X-Request-Id', $requestId)
+                ) => $pendingRequest->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
             )
             ->withMiddleware(Middleware::mapRequest(
                 static fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString('m'))
@@ -187,7 +188,7 @@ abstract class AbstractClient
                 $this->requestId(),
                 static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest
                     ->withMiddleware(Middleware::mapResponse(
-                        static fn (ResponseInterface $response) => $response->withHeader('X-Request-Id', $requestId)
+                        static fn (ResponseInterface $response) => $response->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
                     ))
             );
     }

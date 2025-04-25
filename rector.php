@@ -15,6 +15,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Listeners\PrepareRequestListener;
 use App\Support\Rectors\ClassHandleMethodRector;
 use Carbon\Carbon;
 use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
@@ -55,9 +56,11 @@ use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\ClassMethod\ReturnTypeWillChangeRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
 use Rector\Transform\Rector\StaticCall\StaticCallToFuncCallRector;
+use Rector\Transform\Rector\String_\StringToClassConstantRector;
 use Rector\Transform\ValueObject\ClassMethodReference;
 use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\StaticCallToFuncCall;
+use Rector\Transform\ValueObject\StringToClassConstant;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\ArrayDimFetch\EnvVariableToEnvHelperRector;
 use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
@@ -219,6 +222,9 @@ return RectorConfig::configure()
     ])
     ->withConfiguredRule(RenameClassRector::class, [
         Carbon::class => IlluminateCarbon::class,
+    ])
+    ->withConfiguredRule(StringToClassConstantRector::class, [
+        new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),
     ])
     // ->withConfiguredRule(FuncCallToStaticCallRector::class, [
     //     new FuncCallToStaticCall('request', Illuminate\Support\Facades\Request::class, 'getFacadeRoot'),
