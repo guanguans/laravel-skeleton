@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "042b082c0d4d031caabc1d3177c73e92",
+    "content-hash": "a6d83613e09cdd7d1c155a31fa9081c4",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -1770,80 +1770,6 @@
                 "source": "https://github.com/biiiiiigmonster/hasin/tree/v5.0.0"
             },
             "time": "2025-03-04T03:46:09+00:00"
-        },
-        {
-            "name": "bilfeldt/laravel-http-client-logger",
-            "version": "v2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bilfeldt/laravel-http-client-logger.git",
-                "reference": "c8a70e2d8bd57b11ebd42ab5ec22e674f555d38f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bilfeldt/laravel-http-client-logger/zipball/c8a70e2d8bd57b11ebd42ab5ec22e674f555d38f",
-                "reference": "c8a70e2d8bd57b11ebd42ab5ec22e674f555d38f",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "guzzlehttp/guzzle": "^7.2",
-                "illuminate/http": "^9.0 || ^10.0 || ^11.0 || ^12.0",
-                "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0",
-                "php": "~8.1.0 | ~8.2.0 | ~8.3.0 | ~8.4.0",
-                "spatie/laravel-package-tools": "^1.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0 || ^10.0",
-                "phpunit/phpunit": "^9.5.10 || ^10.0 || ^11.0",
-                "timacdonald/log-fake": "^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Bilfeldt\\LaravelHttpClientLogger\\LaravelHttpClientLoggerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bilfeldt\\LaravelHttpClientLogger\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anders Bilfeldt",
-                    "email": "abilfeldt@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A logger for the Laravel HTTP Client",
-            "homepage": "https://github.com/bilfeldt/laravel-http-client-logger",
-            "keywords": [
-                "Guzzle",
-                "PSR3",
-                "bilfeldt",
-                "laravel",
-                "laravel-http-client-logger",
-                "log",
-                "logging"
-            ],
-            "support": {
-                "issues": "https://github.com/bilfeldt/laravel-http-client-logger/issues",
-                "source": "https://github.com/bilfeldt/laravel-http-client-logger/tree/v2.4.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/bilfeldt",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-02-17T11:06:08+00:00"
         },
         {
             "name": "bramus/ansi-php",
@@ -5251,6 +5177,68 @@
             "time": "2023-08-08T05:53:35+00:00"
         },
         {
+            "name": "exolnet/laravel-sqlite-fluent-drop-foreign",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eXolnet/laravel-sqlite-fluent-drop-foreign.git",
+                "reference": "e85ed90d62cf2d70e60ed603f0f962ad7dbe7974"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eXolnet/laravel-sqlite-fluent-drop-foreign/zipball/e85ed90d62cf2d70e60ed603f0f962ad7dbe7974",
+                "reference": "e85ed90d62cf2d70e60ed603f0f962ad7dbe7974",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^11.0|^12.0",
+                "illuminate/support": "^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "exolnet/phpcs-config": "^1.0",
+                "orchestra/testbench": "^9.0|^10.0",
+                "phpunit/phpunit": "^11.5.3",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Exolnet\\SQLiteFluentDropForeign\\SQLiteFluentDropForeignServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Exolnet\\SQLiteFluentDropForeign\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Gaudreau",
+                    "homepage": "https://www.exolnet.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add a fluent dropForeign when using sqlite database",
+            "homepage": "https://github.com/eXolnet/laravel-sqlite-fluent-drop-foreign",
+            "keywords": [
+                "exolnet",
+                "laravel",
+                "laravel-sqlite-fluent-drop-foreign"
+            ],
+            "support": {
+                "issues": "https://github.com/eXolnet/laravel-sqlite-fluent-drop-foreign/issues",
+                "source": "https://github.com/eXolnet/laravel-sqlite-fluent-drop-foreign/tree/v1.9.0"
+            },
+            "time": "2025-02-26T21:14:05+00:00"
+        },
+        {
             "name": "fakerphp/faker",
             "version": "v1.24.1",
             "source": {
@@ -5699,78 +5687,6 @@
                 "source": "https://github.com/glorand/laravel-model-settings/tree/8.0.1"
             },
             "time": "2025-03-15T20:14:59+00:00"
-        },
-        {
-            "name": "gmponos/guzzle_logger",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gmponos/guzzle-log-middleware.git",
-                "reference": "8784459b18f332beb49363a4d71399e784d8c298"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gmponos/guzzle-log-middleware/zipball/8784459b18f332beb49363a4d71399e784d8c298",
-                "reference": "8784459b18f332beb49363a4d71399e784d8c298",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "guzzlehttp/guzzle": "^6.1 || ^7.0.1",
-                "guzzlehttp/psr7": "^1.7 || ^2.0",
-                "php": "^7.2 || ^8.0",
-                "psr/log": "^1.1 || ^2.0 || ^3.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "~0.12.32",
-                "phpstan/phpstan-phpunit": "^0.12.11",
-                "phpstan/phpstan-strict-rules": "^0.12.2",
-                "phpunit/phpunit": "^8.5.8 || ^9.2.5",
-                "squizlabs/php_codesniffer": "^3.5.5"
-            },
-            "suggest": {
-                "monolog/monolog": "A PSR-3 logger to send your logs to files, sockets and various web services"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleLogMiddleware\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "George Mponos",
-                    "email": "gmponos@gmail.com"
-                }
-            ],
-            "description": "A Guzzle middleware to log request and responses automatically",
-            "homepage": "https://github.com/gmponos/guzzle-log-middleware",
-            "keywords": [
-                "Guzzle",
-                "PSR3",
-                "log",
-                "logging"
-            ],
-            "support": {
-                "issues": "https://github.com/gmponos/guzzle-log-middleware/issues",
-                "source": "https://github.com/gmponos/guzzle-log-middleware/tree/v2.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/gmponos",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-04-04T08:50:42+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -12911,6 +12827,80 @@
             "time": "2025-02-19T11:02:37+00:00"
         },
         {
+            "name": "nunomaduro/laravel-optimize-database",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nunomaduro/laravel-optimize-database.git",
+                "reference": "8a1231aac811387dc202502b9617a5ec28948e1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nunomaduro/laravel-optimize-database/zipball/8a1231aac811387dc202502b9617a5ec28948e1c",
+                "reference": "8a1231aac811387dc202502b9617a5ec28948e1c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^11.18.1",
+                "laravel/pint": "^1.17.0",
+                "phpstan/phpstan": "^1.11.8",
+                "rector/rector": "^1.2.2",
+                "symfony/var-dumper": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NunoMaduro\\LaravelOptimizeDatabase\\LaravelOptimizeDatabaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NunoMaduro\\LaravelOptimizeDatabase\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "Publishes migrations that make your database production ready.",
+            "keywords": [
+                "database",
+                "laravel",
+                "migrations",
+                "optimization"
+            ],
+            "support": {
+                "issues": "https://github.com/nunomaduro/laravel-optimize-database/issues",
+                "source": "https://github.com/nunomaduro/laravel-optimize-database/tree/v1.0.5"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/paypalme/enunomaduro",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/nunomaduro",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-07-26T23:50:46+00:00"
+        },
+        {
             "name": "nunomaduro/termwind",
             "version": "v2.3.0",
             "source": {
@@ -13074,87 +13064,6 @@
                 }
             ],
             "time": "2024-09-09T07:06:30+00:00"
-        },
-        {
-            "name": "onlime/laravel-http-client-global-logger",
-            "version": "v1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/onlime/laravel-http-client-global-logger.git",
-                "reference": "6b7829ea88f38a75bcd6d7f7cb14c08e803e2e4c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/onlime/laravel-http-client-global-logger/zipball/6b7829ea88f38a75bcd6d7f7cb14c08e803e2e4c",
-                "reference": "6b7829ea88f38a75bcd6d7f7cb14c08e803e2e4c",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/http": "^11.0||^12.0",
-                "illuminate/support": "^11.0||^12.0",
-                "monolog/monolog": "^3.0",
-                "php": "^8.2"
-            },
-            "require-dev": {
-                "laravel/framework": "^11.0||^12.0",
-                "laravel/pint": "^1.21",
-                "orchestra/testbench": "^9.0||^10.0",
-                "pestphp/pest": "^3.7",
-                "pestphp/pest-plugin-arch": "^3.0",
-                "pestphp/pest-plugin-laravel": "^3.1",
-                "saloonphp/laravel-http-sender": "^3.1",
-                "saloonphp/laravel-plugin": "^3.5.1",
-                "spatie/invade": "^2.1"
-            },
-            "suggest": {
-                "saloonphp/laravel-plugin": "To support logging of Saloon events (^3.0)"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Onlime\\LaravelHttpClientGlobalLogger\\Providers\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Onlime\\LaravelHttpClientGlobalLogger\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Philip Iezzi",
-                    "email": "philip@onlime.ch",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Onlime GmbH",
-                    "homepage": "https://www.onlime.ch/"
-                }
-            ],
-            "description": "A global logger for the Laravel HTTP Client",
-            "homepage": "https://github.com/onlime/laravel-http-client-global-logger",
-            "keywords": [
-                "Guzzle",
-                "Onlime",
-                "PSR3",
-                "http-client",
-                "laravel",
-                "laravel-http-client-global-logger",
-                "log",
-                "logger",
-                "logging"
-            ],
-            "support": {
-                "issues": "https://github.com/onlime/laravel-http-client-global-logger/issues",
-                "source": "https://github.com/onlime/laravel-http-client-global-logger/tree/v1.2.1"
-            },
-            "time": "2025-02-26T20:56:24+00:00"
         },
         {
             "name": "opcodesio/log-viewer",
@@ -20254,6 +20163,67 @@
                 "source": "https://github.com/stevebauman/location/tree/v7.5.0"
             },
             "time": "2025-02-19T04:59:26+00:00"
+        },
+        {
+            "name": "swiss-devjoy/laravel-optimize-sqlite",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Swiss-Devjoy/laravel-optimize-sqlite",
+                "reference": "5277625889c735b79a11456e6b64d78c0a962b01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Swiss-Devjoy/laravel-optimize-sqlite/zipball/5277625889c735b79a11456e6b64d78c0a962b01",
+                "reference": "5277625889c735b79a11456e6b64d78c0a962b01",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0||^11.0||^12.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9||^3.0",
+                "laravel/pint": "^1.14",
+                "nunomaduro/collision": "^8.1.1||^7.10.0",
+                "spatie/laravel-ray": "^1.35"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "LaravelOptimizeSqlite": "SwissDevjoy\\LaravelOptimizeSqlite\\Facades\\LaravelOptimizeSqlite"
+                    },
+                    "providers": [
+                        "SwissDevjoy\\LaravelOptimizeSqlite\\LaravelOptimizeSqliteServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SwissDevjoy\\LaravelOptimizeSqlite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dimitri König",
+                    "email": "dimitri@devjoy.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optimize your SQLite database for production in Laravel",
+            "homepage": "https://github.com/swiss-devjoy/laravel-optimize-sqlite",
+            "keywords": [
+                "Swiss Devjoy",
+                "laravel",
+                "laravel-optimize-sqlite"
+            ],
+            "time": "2025-04-14T13:53:06+00:00"
         },
         {
             "name": "symfony/clock",
@@ -35319,6 +35289,78 @@
                 }
             ],
             "time": "2025-04-14T20:38:46+00:00"
+        },
+        {
+            "name": "vcian/laravel-db-auditor",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vcian/laravel-db-auditor.git",
+                "reference": "f63f045cbad8908e78e1571045a679cf19d7db72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vcian/laravel-db-auditor/zipball/f63f045cbad8908e78e1571045a679cf19d7db72",
+                "reference": "f63f045cbad8908e78e1571045a679cf19d7db72",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Vcian\\LaravelDBAuditor\\Providers\\DBAuditorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Vcian\\LaravelDBAuditor\\": "src/",
+                    "Vcian\\LaravelDBAuditor\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vcian - ViitorCloud",
+                    "homepage": "https://github.com/vcian"
+                }
+            ],
+            "description": "Database DB Auditor provide leverage to audit your MySql,sqlite, PostgreSQL database standards and also provide options to add constraints in table.",
+            "keywords": [
+                "DB Audit",
+                "DB Constraints",
+                "DB Standards",
+                "database",
+                "laravel",
+                "mysql",
+                "pgsql",
+                "php",
+                "postgresql",
+                "sqlite"
+            ],
+            "support": {
+                "issues": "https://github.com/vcian/laravel-db-auditor/issues",
+                "source": "https://github.com/vcian/laravel-db-auditor/tree/v2.2.1"
+            },
+            "time": "2024-08-09T11:38:38+00:00"
         },
         {
             "name": "worksome/envy",

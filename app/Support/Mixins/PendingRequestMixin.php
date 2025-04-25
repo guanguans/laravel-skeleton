@@ -16,9 +16,9 @@ namespace App\Support\Mixins;
 use App\Support\Attributes\Mixin;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Psr\Log\LoggerInterface;
 
@@ -42,7 +42,7 @@ class PendingRequestMixin
             }
 
             if (!$logger instanceof Logger) {
-                $logger = new Logger($logger, app(Dispatcher::class));
+                $logger = new Logger($logger, Event::getFacadeRoot());
             }
 
             return $this->withMiddleware(

@@ -48,6 +48,18 @@ class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
     private function ever(): void
     {
         $this->whenever(true, function (): void {
+            $this->whenTesting();
+        });
+    }
+
+    private function never(): void
+    {
+        $this->whenever(false, static function (): void {});
+    }
+
+    private function whenTesting(): void
+    {
+        $this->whenever($this->app->runningUnitTests(), function (): void {
             Carbon::setTestNow();
             Carbon::setTestNowAndTimezone();
             CarbonImmutable::setTestNow();
@@ -59,11 +71,6 @@ class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
             });
             $this->extendFaker();
         });
-    }
-
-    private function never(): void
-    {
-        $this->whenever(false, static function (): void {});
     }
 
     private function extendFaker(): void
