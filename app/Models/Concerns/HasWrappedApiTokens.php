@@ -41,7 +41,7 @@ trait HasWrappedApiTokens
         return $this->createToken(self::getDevice(), $abilities);
     }
 
-    public function createWrapedPlainTextTokenWithoutName(array $abilities = ['*']): array
+    public function createWrappedPlainTextTokenWithoutName(array $abilities = ['*']): array
     {
         return self::wrapToken($this->createTokenWithoutName($abilities)->plainTextToken);
     }

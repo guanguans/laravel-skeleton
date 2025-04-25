@@ -26,9 +26,6 @@ class OptimizeAllCommand extends Command
     protected $signature = 'optimize:all {--f|force : Force optimize.}';
     protected $description = 'Optimize all.';
 
-    /**
-     * @noinspection PhpStaticAsDynamicMethodCallInspection
-     */
     public function handle(): void
     {
         if (!$this->option('force') && $this->getLaravel()->isProduction()) {

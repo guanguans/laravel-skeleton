@@ -96,9 +96,12 @@ class HealthCheckCommand extends Command
             });
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        parent::initialize($input, $output);
         $this->only = array_merge($this->only, $this->option('only'));
         $this->except = array_merge($this->except, $this->option('except'));
     }

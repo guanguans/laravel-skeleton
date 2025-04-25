@@ -289,6 +289,9 @@ return RectorConfig::configure()
         TypeHintTappableCallRector::class,
     ])
     ->withSkip([
+        StringToClassConstantRector::class => [
+            __DIR__.'/app/Listeners/PrepareRequestListener.php',
+        ],
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
             __DIR__.'/app/Support/Clients/AbstractClient.php',
             __DIR__.'/app/Support/Mixins/',

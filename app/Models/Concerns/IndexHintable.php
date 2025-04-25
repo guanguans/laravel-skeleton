@@ -30,7 +30,7 @@ use Illuminate\Support\Str;
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  */
-trait IndexHintsable
+trait IndexHintable
 {
     protected array $forceIndexes = [];
     protected array $useIndexes = [];

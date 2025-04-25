@@ -57,7 +57,7 @@ final readonly class SymfonyStyleFactory
     }
 
     /**
-     * Never ever used static methods if not neccesary, this is just handy for tests + src to prevent duplication.
+     * Never ever used static methods if not necessary, this is just handy for tests + src to prevent duplication.
      */
     private static function isPHPUnitRun(): bool
     {

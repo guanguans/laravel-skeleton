@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection ClassOverridesFieldOfSuperClassInspection */
 /** @noinspection PhpUnusedAliasInspection */
 
 declare(strict_types=1);

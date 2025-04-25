@@ -3,6 +3,7 @@
 > 本项目收集了最常用 Laravel 扩展包、以及一些功能特性的使用范例供日常开发参考使用。
 
 [![tests](https://github.com/guanguans/laravel-skeleton/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions)
+[![phpstan](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml)
 [![check & fix styling](https://github.com/guanguans/laravel-skeleton/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions)
 [![codecov](https://codecov.io/gh/guanguans/laravel-skeleton/branch/main/graph/badge.svg?token=URGFAWS6S4)](https://codecov.io/gh/guanguans/laravel-skeleton)
 [![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-skeleton/v)](https://packagist.org/packages/guanguans/laravel-skeleton)
@@ -238,7 +239,7 @@ app
 │   ├── HexColorRule.php
 │   ├── HexRule.php
 │   ├── HtmlTagRule.php
-│   ├── HtmlcleanRule.php
+│   ├── HtmlCleanRule.php
 │   ├── IdCardRule.php
 │   ├── ImeiRule.php
 │   ├── InstanceofRule.php

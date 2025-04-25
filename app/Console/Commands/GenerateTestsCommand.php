@@ -81,6 +81,7 @@ class GenerateTestsCommand extends Command
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
+    #[\Override]
     public function isEnabled(): bool
     {
         return !$this->laravel->isProduction();
@@ -227,9 +228,12 @@ class GenerateTestsCommand extends Command
         return self::SUCCESS;
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        parent::initialize($input, $output);
         $this->checkOptions();
         $this->initializeEnvs();
         $this->initializeProperties();

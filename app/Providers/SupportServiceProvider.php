@@ -30,11 +30,7 @@ class SupportServiceProvider extends ServiceProvider
     use Conditionable {
         Conditionable::when as whenever;
     }
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     public array $bindings = [];
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     public array $singletons = [
         ElasticsearchManager::class,
     ];

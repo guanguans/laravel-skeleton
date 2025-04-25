@@ -68,6 +68,7 @@ class User extends Authenticatable
      * {@inheritDoc}
      *
      * @noinspection PhpMissingParentCallCommonInspection
+     * @noinspection PhpMethodParametersCountMismatchInspection
      */
     #[\Override]
     public function newEloquentBuilder($query): Builder

@@ -70,7 +70,7 @@ class WhereNotQueryBuilderMixin
             return $builder->whereNotExists(static function (ContractBuilder $query) use ($builder, $callable): void {
                 // Create a new Eloquent Query Builder with the given Query Builder and
                 // set the model from the original builder.
-                /** @noinspection PhpParamsInspection */
+                /** @noinspection PhpMethodParametersCountMismatchInspection */
                 $query = new Builder($query);
                 $query->setModel($model = $builder->getModel());
 

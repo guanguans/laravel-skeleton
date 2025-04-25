@@ -15,13 +15,12 @@ namespace App\Listeners;
 
 use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Console\Events\ScheduledTaskStarting;
-use Illuminate\Events\Dispatcher;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Context;
 
 class LogContextSubscriber
 {
-    public function subscribe(Dispatcher $dispatcher): array
+    public function subscribe(): array
     {
         return [
             RouteMatched::class => static function (RouteMatched $event): void {
@@ -35,6 +34,7 @@ class LogContextSubscriber
                 ]);
             },
             ScheduledTaskStarting::class => static function (ScheduledTaskStarting $event): void {
+                /** @noinspection NestedTernaryOperatorInspection */
                 Context::add([
                     'command' => ($event->task->command ?: $event->task->description) ?: 'Closure',
                 ]);

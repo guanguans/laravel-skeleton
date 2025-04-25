@@ -98,10 +98,11 @@ class ShowUnsupportedRequiresCommand extends Command
 
     /**
      * @noinspection MethodVisibilityInspection
+     * @noinspection PhpMissingParentCallCommonInspection
      */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        parent::initialize($input, $output);
         $this->packagist = new PackagistClient(
             new Client([RequestOptions::VERIFY => false]),
             new PackagistUrlGenerator
