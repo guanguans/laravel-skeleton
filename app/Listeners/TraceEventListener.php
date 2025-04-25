@@ -24,7 +24,7 @@ class TraceEventListener
     {
         static $clear = false;
 
-        $file = __DIR__.'/../storage/logs/events.log';
+        $file = __DIR__.'/../../storage/logs/events.log';
 
         if (!$clear && is_file($file)) {
             unlink($file);
@@ -35,9 +35,12 @@ class TraceEventListener
          * @noinspection DebugFunctionUsageInspection
          */
         $trace = collect(debug_backtrace())
-            ->filter(static fn (array $trace) => collect($trace['args'] ?? [])->first(
-                static fn (mixed $arg): bool => $arg === $event
-            ))
+            ->filter(
+                static fn (array $trace) => isset($trace['file'], $trace['line'])
+                    && collect($trace['args'] ?? [])->first(
+                        static fn (mixed $arg): bool => $arg === $event
+                    )
+            )
             ->map(static fn (array $trace) => Arr::except($trace, ['args', 'object']))
             // ->dd()
             ->firstOrFail(static fn (array $trace): bool => !str($trace['file'])->startsWith(
@@ -49,7 +52,7 @@ class TraceEventListener
             \sprintf(
                 '%s [%s:%s]%s',
                 $event,
-                str($trace['file'])->remove(\dirname(__DIR__))->ltrim('/'),
+                str($trace['file'])->remove(\dirname(__DIR__, 2))->ltrim('/'),
                 $trace['line'],
                 \PHP_EOL
             ),

@@ -31,10 +31,12 @@ class PrepareRequestListener
     {
         \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
 
-        $app['request']->headers->set('X-Request-Id', TRACE_ID);
+        if (!$app->runningInConsole()) {
+            $app['request']->headers->set('X-Request-Id', TRACE_ID);
 
-        if ($app['request']->is('api/*')) {
-            $app['request']->headers->set('Accept', 'application/json');
+            if ($app['request']->is('api/*')) {
+                $app['request']->headers->set('Accept', 'application/json');
+            }
         }
     }
 }
