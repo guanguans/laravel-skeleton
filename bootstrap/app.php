@@ -145,8 +145,14 @@ $app = Application::configure(basePath: \dirname(__DIR__))
     })
     ->create();
 
-$app->afterLoadingEnvironment(static function (): void {
+$app->afterLoadingEnvironment(static function (Application $app): void {
     \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
+
+    $app['request']->headers->set('X-Request-Id', TRACE_ID);
+
+    if ($app['request']->is('api/*')) {
+        $app['request']->headers->set('Accept', 'application/json');
+    }
 });
 
 // /**
