@@ -18,7 +18,9 @@ use App\Http\Middleware\Localization;
 use App\Http\Middleware\SetJsonResponseEncodingOptions;
 use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Database\QueryException;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -26,6 +28,7 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Lottery;
 use Illuminate\Support\Str;
 use jdavidbakr\LaravelCacheGarbageCollector\LaravelCacheGarbageCollector;
@@ -145,5 +148,44 @@ $app = Application::configure(basePath: \dirname(__DIR__))
 $app->afterLoadingEnvironment(static function (): void {
     \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
 });
+
+// /**
+//  * @noinspection PhpUnhandledExceptionInspection
+//  */
+// $app->make(DispatcherContract::class)->listen('*', static function (string $event): void {
+//     static $clear = false;
+//
+//     $file = __DIR__.'/../storage/logs/events.log';
+//
+//     if (!$clear && is_file($file)) {
+//         unlink($file);
+//         $clear = true;
+//     }
+//
+//     /**
+//      * @noinspection DebugFunctionUsageInspection
+//      */
+//     $trace = collect(debug_backtrace())
+//         ->filter(static fn (array $trace) => collect($trace['args'] ?? [])->first(
+//             static fn (mixed $arg): bool => $arg === $event
+//         ))
+//         ->map(static fn (array $trace) => Arr::except($trace, ['args', 'object']))
+//         // ->dd()
+//         ->firstOrFail(static fn (array $trace): bool => !str($trace['file'])->startsWith(
+//             \dirname((new ReflectionClass(Dispatcher::class))->getFileName())
+//         ));
+//
+//     file_put_contents(
+//         $file,
+//         \sprintf(
+//             '%s [%s:%s]%s',
+//             $event,
+//             str($trace['file'])->remove(\dirname(__DIR__))->ltrim('/'),
+//             $trace['line'],
+//             \PHP_EOL
+//         ),
+//         \FILE_APPEND
+//     );
+// });
 
 return $app;

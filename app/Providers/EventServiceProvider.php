@@ -22,6 +22,7 @@ use App\Listeners\SetRequestIdListener;
 use App\Observers\UserObserver;
 use Illuminate\Foundation\Bootstrap\BootProviders;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Traits\Conditionable;
@@ -108,7 +109,11 @@ class EventServiceProvider extends ServiceProvider
     {
         $this->whenever(false, static function (): void {
             Event::listen('*', static function (string $event, array $data): void {
-                Log::info($event, $data);
+                if (MessageLogged::class === $event) {
+                    return;
+                }
+
+                Log::channel('daily-deprecations')->info($event, $data);
             });
         });
     }
