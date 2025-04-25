@@ -48,6 +48,9 @@ class HttpServiceProvider extends ServiceProvider
             Http::globalOptions([
                 'connect_timeout' => 10,
                 'timeout' => 30,
+                'headers' => [
+                    'X-Request-Id' => TRACE_ID,
+                ],
             ]);
             // Http::globalMiddleware(
             //     Middleware::log(Log::channel(), new MessageFormatter(MessageFormatter::DEBUG))
