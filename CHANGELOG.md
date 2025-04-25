@@ -1,0 +1,1865 @@
+<!--- BEGIN HEADER -->
+# Changelog
+
+All notable changes to this project will be documented in this file.
+<!--- END HEADER -->
+
+<a name="unreleased"></a>
+## [Unreleased]
+
+
+<a name="12.0.0"></a>
+## [12.0.0] - 2025-04-25
+### ✨ Features
+- **AutowiredServiceProvider:** Add AutowiredServiceProvider for dependency injection ([498d5d67](https://github.com/guanguans/laravel-skeleton/commit/498d5d67))
+- **PhpCsFixer:** Replace PrettierPHPFixer with PintFixer ([3e15b8b7](https://github.com/guanguans/laravel-skeleton/commit/3e15b8b7))
+- **app:** refactor and introduce global trace ID setup ([86b87e7f](https://github.com/guanguans/laravel-skeleton/commit/86b87e7f))
+- **app:** enhance facade discovery in AppServiceProvider ([cbee6a44](https://github.com/guanguans/laravel-skeleton/commit/cbee6a44))
+- **application:** enhance request header handling ([7f00cc1b](https://github.com/guanguans/laravel-skeleton/commit/7f00cc1b))
+- **auth:** Refactor AuthServiceProvider for improved gate management ([601fb8e6](https://github.com/guanguans/laravel-skeleton/commit/601fb8e6))
+- **commands:** add xdebug option to configureable concerns ([92254a89](https://github.com/guanguans/laravel-skeleton/commit/92254a89))
+- **commands:** Refactor unsupported requirements logic ([fda6711e](https://github.com/guanguans/laravel-skeleton/commit/fda6711e))
+- **config:** Update project configuration and dependencies ([746745e6](https://github.com/guanguans/laravel-skeleton/commit/746745e6))
+- **console:** replace Composer's XdebugHandler alias and add SymfonyStyleFactory ([6cada707](https://github.com/guanguans/laravel-skeleton/commit/6cada707))
+- **core:** add support for sitemap generation and content utilities ([3cfb0215](https://github.com/guanguans/laravel-skeleton/commit/3cfb0215))
+- **database:** Add DatabaseServiceProvider for query logging ([a920df63](https://github.com/guanguans/laravel-skeleton/commit/a920df63))
+- **dependencies:** Add laracasts/presenter and robclancy/presenter ([e759cb13](https://github.com/guanguans/laravel-skeleton/commit/e759cb13))
+- **dependencies:** Add hamidrezaniazi/pecs package ([f5821577](https://github.com/guanguans/laravel-skeleton/commit/f5821577))
+- **event:** Refactor event handling by moving logic to EventServiceProvider ([38241bac](https://github.com/guanguans/laravel-skeleton/commit/38241bac))
+- **facades:** Add inspection annotations to PushDeer and Elasticsearch classes ([ed3657ff](https://github.com/guanguans/laravel-skeleton/commit/ed3657ff))
+- **http:** implement custom cURL-based PSR-18 HTTP client ([629413b7](https://github.com/guanguans/laravel-skeleton/commit/629413b7))
+- **logging:** enhance event logging with daily-deprecations channel ([70e93841](https://github.com/guanguans/laravel-skeleton/commit/70e93841))
+- **logging:** Add LogContextServiceProvider to enhance logging context ([051ed1d5](https://github.com/guanguans/laravel-skeleton/commit/051ed1d5))
+- **migrations:** Remove obsolete migration files and add new ones ([716eced4](https://github.com/guanguans/laravel-skeleton/commit/716eced4))
+- **mixins:** Remove EnumToArray and HasFileFromUrl traits ([07971ce5](https://github.com/guanguans/laravel-skeleton/commit/07971ce5))
+- **octane:** Add OctaneServiceProvider for handling Octane events ([de7239b4](https://github.com/guanguans/laravel-skeleton/commit/de7239b4))
+- **phpcsfixer:** add PrettierPHPFixer integration ([a238a844](https://github.com/guanguans/laravel-skeleton/commit/a238a844))
+- **phpstan:** add rule to enforce forbidden global functions ([207616de](https://github.com/guanguans/laravel-skeleton/commit/207616de))
+- **provider:** Add AbstractServiceProvider class ([1add8408](https://github.com/guanguans/laravel-skeleton/commit/1add8408))
+- **queue:** add queue looping error handling in AppServiceProvider ([812d86cc](https://github.com/guanguans/laravel-skeleton/commit/812d86cc))
+- **services:** Remove BroadcastServiceProvider and implement ShouldRegisterContract ([5cf7d09f](https://github.com/guanguans/laravel-skeleton/commit/5cf7d09f))
+- **traits:** Add references to external documentation for traits ([c8d0cc7c](https://github.com/guanguans/laravel-skeleton/commit/c8d0cc7c))
+- **traits:** Remove Castable trait and rename CreateStaticable to Makeable ([e180cd99](https://github.com/guanguans/laravel-skeleton/commit/e180cd99))
+- **validation:** Move validator extension logic to ValidatorServiceProvider ([59721bbe](https://github.com/guanguans/laravel-skeleton/commit/59721bbe))
+- **view:** Add ViewServiceProvider for view extensions ([9658ceb9](https://github.com/guanguans/laravel-skeleton/commit/9658ceb9))
+
+### 🐞 Bug Fixes
+- **app-service-provider:** refine class filtering logic ([6a3c6bd3](https://github.com/guanguans/laravel-skeleton/commit/6a3c6bd3))
+- **client:** simplify logger configuration and remove unused imports ([08c61936](https://github.com/guanguans/laravel-skeleton/commit/08c61936))
+- **listeners:** refactor code to improve request handling and traceability ([4cfb0178](https://github.com/guanguans/laravel-skeleton/commit/4cfb0178))
+- **logging:** handle invalid JSON in response context ([57ecde62](https://github.com/guanguans/laravel-skeleton/commit/57ecde62))
+- **logging:** enhance trace ID handling and configuration ([f5764c25](https://github.com/guanguans/laravel-skeleton/commit/f5764c25))
+- **logging:** rename ShareLogContextSubscriber to LogContextSubscriber and update context handling ([00660c11](https://github.com/guanguans/laravel-skeleton/commit/00660c11))
+- **provider:** refactor and add missing methods for testing in WhenTestingAggregateServiceProvider ([4fe5f596](https://github.com/guanguans/laravel-skeleton/commit/4fe5f596))
+- **provider:** prevent non-test environments from setting test time ([571dfc94](https://github.com/guanguans/laravel-skeleton/commit/571dfc94))
+- **query-builder:** Add parameter inspection suppression for methods ([9d0a41c8](https://github.com/guanguans/laravel-skeleton/commit/9d0a41c8))
+- **request:** replace SetRequestIdListener with PrepareRequestListener ([a749b903](https://github.com/guanguans/laravel-skeleton/commit/a749b903))
+- **request-header:** unify X-Request-Id header management ([fdfcba53](https://github.com/guanguans/laravel-skeleton/commit/fdfcba53))
+- **sse:** Improve exception handling and add PHPDoc annotations ([7a4f5a2e](https://github.com/guanguans/laravel-skeleton/commit/7a4f5a2e))
+- **workflows:** add missing 'create project cmd' step ([2f72cbe6](https://github.com/guanguans/laravel-skeleton/commit/2f72cbe6))
+
+### 🎨 Styles
+- **codebase:** remove fully-qualified class names in favor of imports ([2d15421f](https://github.com/guanguans/laravel-skeleton/commit/2d15421f))
+
+### 💅 Code Refactorings
+- apply phpstan ([577f5a30](https://github.com/guanguans/laravel-skeleton/commit/577f5a30))
+- apply rector ([afb041f3](https://github.com/guanguans/laravel-skeleton/commit/afb041f3))
+- apply rector ([21a3884c](https://github.com/guanguans/laravel-skeleton/commit/21a3884c))
+- **AppServiceProvider:** Remove unused imports and comments ([2cb11c8f](https://github.com/guanguans/laravel-skeleton/commit/2cb11c8f))
+- **Client:** improve configuration handling and method definitions ([53598ced](https://github.com/guanguans/laravel-skeleton/commit/53598ced))
+- **OutOfMemoryBootstrapper:** improve property type annotations ([58d21fd4](https://github.com/guanguans/laravel-skeleton/commit/58d21fd4))
+- **WhenTestingAggregateServiceProvider:** simplify testing sequence and rename methods ([60447cad](https://github.com/guanguans/laravel-skeleton/commit/60447cad))
+- **allowed-filterable:** improve method signatures and readability ([b810a8d9](https://github.com/guanguans/laravel-skeleton/commit/b810a8d9))
+- **app:** remove unused attribute classes and methods ([ca0e9f10](https://github.com/guanguans/laravel-skeleton/commit/ca0e9f10))
+- **app:** enhance routing configuration and cleanup providers ([599ddf18](https://github.com/guanguans/laravel-skeleton/commit/599ddf18))
+- **app-providers:** reorganize Scramble configuration and enhance structure ([31f88952](https://github.com/guanguans/laravel-skeleton/commit/31f88952))
+- **app-support:** remove unused middleware and simplify mixin ([c2c473c4](https://github.com/guanguans/laravel-skeleton/commit/c2c473c4))
+- **appserviceprovider:** streamline service provider discovery ([24d03ce5](https://github.com/guanguans/laravel-skeleton/commit/24d03ce5))
+- **auth:** Improve configuration flexibility with env vars ([930cbe1a](https://github.com/guanguans/laravel-skeleton/commit/930cbe1a))
+- **auth:** standardize JWT integration and add configuration support ([13c9fe01](https://github.com/guanguans/laravel-skeleton/commit/13c9fe01))
+- **auth:** streamline controllers and requests ([55eff948](https://github.com/guanguans/laravel-skeleton/commit/55eff948))
+- **bit-encoder:** improve code readability and robustness ([15c08b44](https://github.com/guanguans/laravel-skeleton/commit/15c08b44))
+- **bootstrappers:** Move bootstrappers to Support directory ([d5dc67da](https://github.com/guanguans/laravel-skeleton/commit/d5dc67da))
+- **casting:** clean up casts by removing #[Override] attributes and refine type hints ([d3bbd3fd](https://github.com/guanguans/laravel-skeleton/commit/d3bbd3fd))
+- **casts:** enhance casts implementation for readability and functionality ([f99de200](https://github.com/guanguans/laravel-skeleton/commit/f99de200))
+- **clients:** standardize client structure and cleanup ([88e9de63](https://github.com/guanguans/laravel-skeleton/commit/88e9de63))
+- **codebase:** improve type hints and static analysis compliance ([580a6abc](https://github.com/guanguans/laravel-skeleton/commit/580a6abc))
+- **commands:** extract FindStaticMethodsCommand to its own file ([61231e9f](https://github.com/guanguans/laravel-skeleton/commit/61231e9f))
+- **composer:** Enhance scripts for better management ([ae44997f](https://github.com/guanguans/laravel-skeleton/commit/ae44997f))
+- **config:** Improve app.php documentation and structure ([832fdd0c](https://github.com/guanguans/laravel-skeleton/commit/832fdd0c))
+- **config:** Remove deprecated configuration files ([5a2785df](https://github.com/guanguans/laravel-skeleton/commit/5a2785df))
+- **config:** remove obsolete configuration files ([e7a4131f](https://github.com/guanguans/laravel-skeleton/commit/e7a4131f))
+- **config:** remove broadcasting configuration file ([a14534c8](https://github.com/guanguans/laravel-skeleton/commit/a14534c8))
+- **config:** remove CORS configuration and update database options ([d920ef3e](https://github.com/guanguans/laravel-skeleton/commit/d920ef3e))
+- **console:** improve code clarity and maintainability ([d42a6b93](https://github.com/guanguans/laravel-skeleton/commit/d42a6b93))
+- **contracts:** Remove ShouldRegisterContract interface ([869e5f8a](https://github.com/guanguans/laravel-skeleton/commit/869e5f8a))
+- **controllers:** streamline API controller methods and remove redundant code ([9bfb9405](https://github.com/guanguans/laravel-skeleton/commit/9bfb9405))
+- **core:** improve code structure and remove unused classes ([570faf13](https://github.com/guanguans/laravel-skeleton/commit/570faf13))
+- **database:** extract SQLite connection logic into separate method ([1e077e98](https://github.com/guanguans/laravel-skeleton/commit/1e077e98))
+- **database:** improve query logging functionality ([508b6885](https://github.com/guanguans/laravel-skeleton/commit/508b6885))
+- **enums:** remove HealthCheckStateEnum and related dependency ([32fb4740](https://github.com/guanguans/laravel-skeleton/commit/32fb4740))
+- **enums:** Remove BooleanEnum class ([ae5d93e9](https://github.com/guanguans/laravel-skeleton/commit/ae5d93e9))
+- **enums:** migrate to native PHP enums and update dependencies ([db87d1a1](https://github.com/guanguans/laravel-skeleton/commit/db87d1a1))
+- **exceptions:** streamline exception handling and cleanup ([64214fe3](https://github.com/guanguans/laravel-skeleton/commit/64214fe3))
+- **health-check:** enhance health check handling with Result type ([f3889a2d](https://github.com/guanguans/laravel-skeleton/commit/f3889a2d))
+- **helpers:** remove unused functions and dependencies ([b79d1c67](https://github.com/guanguans/laravel-skeleton/commit/b79d1c67))
+- **helpers:** Improve classes function with nullable filter parameter ([9d810b86](https://github.com/guanguans/laravel-skeleton/commit/9d810b86))
+- **http:** centralize X-Request-Id header configuration ([0cef7cd1](https://github.com/guanguans/laravel-skeleton/commit/0cef7cd1))
+- **listeners:** improve code quality and readability across listeners ([c07027ee](https://github.com/guanguans/laravel-skeleton/commit/c07027ee))
+- **listeners:** adjust request handling and trace event logic ([a6801c18](https://github.com/guanguans/laravel-skeleton/commit/a6801c18))
+- **logging:** Modernize logging configuration and handlers ([23308b2f](https://github.com/guanguans/laravel-skeleton/commit/23308b2f))
+- **logging:** simplify log context sharing and memory usage logic ([93adf917](https://github.com/guanguans/laravel-skeleton/commit/93adf917))
+- **logging:** implement TraceEventListener for event tracing ([0db36a1c](https://github.com/guanguans/laravel-skeleton/commit/0db36a1c))
+- **middleware:** streamline middleware configuration ([a7cea1d5](https://github.com/guanguans/laravel-skeleton/commit/a7cea1d5))
+- **middleware:** enhance readability and improve PHPDoc annotations ([ab073922](https://github.com/guanguans/laravel-skeleton/commit/ab073922))
+- **models:** remove unused traits and improve type safety ([fe4cf087](https://github.com/guanguans/laravel-skeleton/commit/fe4cf087))
+- **monolog:** Remove AnsiLineFormatter and refactor related classes ([ebfe579c](https://github.com/guanguans/laravel-skeleton/commit/ebfe579c))
+- **namespaces:** reorganize support classes under Clients namespace ([af6b7e57](https://github.com/guanguans/laravel-skeleton/commit/af6b7e57))
+- **notifications:** update notification handling and dependencies ([38420408](https://github.com/guanguans/laravel-skeleton/commit/38420408))
+- **policies:** clean up annotations and adjust Rector configuration ([019c67e0](https://github.com/guanguans/laravel-skeleton/commit/019c67e0))
+- **provider:** Uncomment StubsServiceProvider and update scripts ([086ecfb6](https://github.com/guanguans/laravel-skeleton/commit/086ecfb6))
+- **provider:** Remove AboutCommand integration ([f7649fd7](https://github.com/guanguans/laravel-skeleton/commit/f7649fd7))
+- **providers:** Remove unused service provider files ([e0cf3d75](https://github.com/guanguans/laravel-skeleton/commit/e0cf3d75))
+- **providers:** simplify and refactor method discovery logic ([e05ef176](https://github.com/guanguans/laravel-skeleton/commit/e05ef176))
+- **rules:** improve code clarity and enforce readonly property ([be02b0be](https://github.com/guanguans/laravel-skeleton/commit/be02b0be))
+- **sanctum:** integrate Sanctum for API authentication ([e1ec676e](https://github.com/guanguans/laravel-skeleton/commit/e1ec676e))
+- **scheduling:** remove custom console kernel in favor of application-driven scheduling ([1f52ca73](https://github.com/guanguans/laravel-skeleton/commit/1f52ca73))
+- **testing:** Remove unused testing code from service providers ([edf4bfce](https://github.com/guanguans/laravel-skeleton/commit/edf4bfce))
+- **view:** improve property handling and visibility in components ([a8ec89a1](https://github.com/guanguans/laravel-skeleton/commit/a8ec89a1))
+
+### ✅ Tests
+- **auth:** update and improve authentication tests ([ea3a1608](https://github.com/guanguans/laravel-skeleton/commit/ea3a1608))
+- **core:** remove CreatesApplication trait and enhance test utilities ([c0c77a9a](https://github.com/guanguans/laravel-skeleton/commit/c0c77a9a))
+- **pushdeer:** add unit test for message push functionality ([9ebca1db](https://github.com/guanguans/laravel-skeleton/commit/9ebca1db))
+- **refactor:** replace class-based tests with closure-based syntax ([b690255b](https://github.com/guanguans/laravel-skeleton/commit/b690255b))
+
+### 📦 Builds
+- **composer:** Update project description and dependencies ([68ea06ba](https://github.com/guanguans/laravel-skeleton/commit/68ea06ba))
+- **dependencies:** Add and remove Composer packages ([e9899b86](https://github.com/guanguans/laravel-skeleton/commit/e9899b86))
+- **dependencies:** Update package versions in composer.json ([82fdd448](https://github.com/guanguans/laravel-skeleton/commit/82fdd448))
+- **dependencies:** Remove unused packages from composer.json ([2be96272](https://github.com/guanguans/laravel-skeleton/commit/2be96272))
+- **dependencies:** Update version requirements and cleanup ([5d32b9b0](https://github.com/guanguans/laravel-skeleton/commit/5d32b9b0))
+- **dependencies:** Remove unused packages from composer.json ([795c8d16](https://github.com/guanguans/laravel-skeleton/commit/795c8d16))
+- **dependencies:** Update package versions in composer.json ([190d93fa](https://github.com/guanguans/laravel-skeleton/commit/190d93fa))
+- **platform:** Remove unused decorator functionality ([8d5d6582](https://github.com/guanguans/laravel-skeleton/commit/8d5d6582))
+
+### 🤖 Continuous Integrations
+- **cache:** Remove cache-query stub and update dependencies ([26edc895](https://github.com/guanguans/laravel-skeleton/commit/26edc895))
+- **config:** add new configurations and dependencies for project setup ([f64f1141](https://github.com/guanguans/laravel-skeleton/commit/f64f1141))
+- **dependency-analyser:** update error handling configurations ([1e9b1898](https://github.com/guanguans/laravel-skeleton/commit/1e9b1898))
+- **formatting:** improve configuration for code style and linting ([54eec164](https://github.com/guanguans/laravel-skeleton/commit/54eec164))
+- **helpers:** add classes function and enhance rector configuration ([96416937](https://github.com/guanguans/laravel-skeleton/commit/96416937))
+- **php-cs-fixer:** refactor ruleset and header declaration ([efaf289b](https://github.com/guanguans/laravel-skeleton/commit/efaf289b))
+
+
+<a name="11.0.0"></a>
+## 11.0.0 - 2025-04-08
+### ✨ Features
+- 添加 Env 类使用及 DB_HOST 环境变量校验 ([9f1c6391](https://github.com/guanguans/laravel-skeleton/commit/9f1c6391))
+- add laravel-console-task ([90021b8d](https://github.com/guanguans/laravel-skeleton/commit/90021b8d))
+- Add AutoCommitCommand to generate ([c15c1fcd](https://github.com/guanguans/laravel-skeleton/commit/c15c1fcd))
+- 更新Symfony和相关依赖到最新版本 ([18c72c44](https://github.com/guanguans/laravel-skeleton/commit/18c72c44))
+- 更新了 guanguans/laravel-soar 和 guanguans/soar-php 的依赖版本 ([5fc9b862](https://github.com/guanguans/laravel-skeleton/commit/5fc9b862))
+- 添加并发服务提供者到应用 ([a3d5e532](https://github.com/guanguans/laravel-skeleton/commit/a3d5e532))
+- 重构API响应处理流程，优化数据处理逻辑 ([e1a07eb5](https://github.com/guanguans/laravel-skeleton/commit/e1a07eb5))
+- 更新正则表达式以支持不同的字符串格式 ([378bef53](https://github.com/guanguans/laravel-skeleton/commit/378bef53))
+- 更新了 facade.php 文件，修改了 app/Support/Facades/PushDeer.php 和 app/Support/Facades/OpenAI.php 中的 macro 方法，移除了 app/Support/Facades/Elasticsearch.php 中的 connectorSyncJob 方法。 ([4e5798bf](https://github.com/guanguans/laravel-skeleton/commit/4e5798bf))
+- 增加异常捕获报告功能 ([436cea26](https://github.com/guanguans/laravel-skeleton/commit/436cea26))
+- 添加Builder多态类型使用Ulids和Uuids ([df58c862](https://github.com/guanguans/laravel-skeleton/commit/df58c862))
+- add database backup command and email verification middleware ([fb4de29d](https://github.com/guanguans/laravel-skeleton/commit/fb4de29d))
+- 添加数据库查看器路由配置 ([e86f47a3](https://github.com/guanguans/laravel-skeleton/commit/e86f47a3))
+- 添加Laravel Page Speed库 ([9c8004fb](https://github.com/guanguans/laravel-skeleton/commit/9c8004fb))
+- 优化了Laravel-Idea-JSON文件的生成逻辑 ([379adb14](https://github.com/guanguans/laravel-skeleton/commit/379adb14))
+- 添加spatie/invade包 ([09504c02](https://github.com/guanguans/laravel-skeleton/commit/09504c02))
+- 新增Cors、SetTimezone和SetLocales中间件 ([f1c5df0d](https://github.com/guanguans/laravel-skeleton/commit/f1c5df0d))
+- add timezone methods to Carbon and UrlGenerator mixin ([22919503](https://github.com/guanguans/laravel-skeleton/commit/22919503))
+- 更新了多个文件的头部注释信息，增加了文件所属项目的声明和版权信息。 ([f0e8dbfb](https://github.com/guanguans/laravel-skeleton/commit/f0e8dbfb))
+- 安装 spatie/laravel-webhook-client 包以接收 Laravel 应用中的 webhook ([4ecdf9c3](https://github.com/guanguans/laravel-skeleton/commit/4ecdf9c3))
+- 更新依赖包到最新版本以提高性能和安全性 ([09cca084](https://github.com/guanguans/laravel-skeleton/commit/09cca084))
+- 添加 Province 模型及初始数据 ([ed65116e](https://github.com/guanguans/laravel-skeleton/commit/ed65116e))
+- 添加 TRACKER_ID 常量以跟踪请求 ([2fe3c8cc](https://github.com/guanguans/laravel-skeleton/commit/2fe3c8cc))
+- **Api:** 添加文件分片上传功能 ([2faeaedb](https://github.com/guanguans/laravel-skeleton/commit/2faeaedb))
+- **Api:** Add ConcreteJsonResponseMethods trait ([aee8753a](https://github.com/guanguans/laravel-skeleton/commit/aee8753a))
+- **ApiResponse:** Add ApiResponse class for handling API responses ([fa984bec](https://github.com/guanguans/laravel-skeleton/commit/fa984bec))
+- **ApiResponse:** Add ApiResponse class for handling API responses ([ef4685cf](https://github.com/guanguans/laravel-skeleton/commit/ef4685cf))
+- **ApiResponse:** support Arrayable and JsonSerializable types ([f5703c9d](https://github.com/guanguans/laravel-skeleton/commit/f5703c9d))
+- **ApiResponse:** support Arrayable and JsonSerializable types ([62dec623](https://github.com/guanguans/laravel-skeleton/commit/62dec623))
+- **ApiResponse:** 优化异常处理逻辑，增加自定义错误码和错误信息 ([437275f4](https://github.com/guanguans/laravel-skeleton/commit/437275f4))
+- **ApiResponse:** Add additional HTTP status methods ([139e4958](https://github.com/guanguans/laravel-skeleton/commit/139e4958))
+- **ApiResponse:** add Macroable trait and optimize response handling ([597cadc7](https://github.com/guanguans/laravel-skeleton/commit/597cadc7))
+- **AppServiceProvider:** Add preProcessRequest method and handle JSON response encoding ([90e2000e](https://github.com/guanguans/laravel-skeleton/commit/90e2000e))
+- **AppServiceProvider:** 添加查询性能监控设置 ([5458d466](https://github.com/guanguans/laravel-skeleton/commit/5458d466))
+- **AppServiceProvider:** add CarbonImmutable usage for testing ([51d01bd4](https://github.com/guanguans/laravel-skeleton/commit/51d01bd4))
+- **AppServiceProvider:** 添加特性标志中间件 ([f36e129e](https://github.com/guanguans/laravel-skeleton/commit/f36e129e))
+- **AppServiceProvider:** Add request_id to logging context ([3f229806](https://github.com/guanguans/laravel-skeleton/commit/3f229806))
+- **AppServiceProvider:** add log context sharing ([c8d96217](https://github.com/guanguans/laravel-skeleton/commit/c8d96217))
+- **BlueprintMixin:** Add money column definition method ([746042b3](https://github.com/guanguans/laravel-skeleton/commit/746042b3))
+- **CSP:** Improve CSP middleware map function ([40e99e92](https://github.com/guanguans/laravel-skeleton/commit/40e99e92))
+- **Casts:** Add CommaSeparatedToArrayCastUsing caster ([e6a9e286](https://github.com/guanguans/laravel-skeleton/commit/e6a9e286))
+- **ClearAllCommand:** add PromptsForMissingInput interface and prompt logic ([513cc08d](https://github.com/guanguans/laravel-skeleton/commit/513cc08d))
+- **Client:** add EasyHttpRequestMethods trait ([dc1157f6](https://github.com/guanguans/laravel-skeleton/commit/dc1157f6))
+- **CollectionMacro:** Add json method ([16bff480](https://github.com/guanguans/laravel-skeleton/commit/16bff480))
+- **CollectionMacro:** Add json method ([bd35527f](https://github.com/guanguans/laravel-skeleton/commit/bd35527f))
+- **CommandMacro:** Add processHelperMustRun method ([8600e110](https://github.com/guanguans/laravel-skeleton/commit/8600e110))
+- **CommandMacro:** Add process helper for command execution ([0e9f8b8b](https://github.com/guanguans/laravel-skeleton/commit/0e9f8b8b))
+- **Composer:** Add Laravel Cache Garbage Collector package ([ded2e1b9](https://github.com/guanguans/laravel-skeleton/commit/ded2e1b9))
+- **ConsoleWriter:** add new class for console writing ([76bd69df](https://github.com/guanguans/laravel-skeleton/commit/76bd69df))
+- **ExtendServiceProvider:** Add Faker service registration ([97c7d4eb](https://github.com/guanguans/laravel-skeleton/commit/97c7d4eb))
+- **HealthCheck:** Add service provider check and improve error handling ([44ed1249](https://github.com/guanguans/laravel-skeleton/commit/44ed1249))
+- **Http:** Add PsrClient class ([8e59f20a](https://github.com/guanguans/laravel-skeleton/commit/8e59f20a))
+- **HttpClient:** refactor HttpClient and add new features ([32a469f7](https://github.com/guanguans/laravel-skeleton/commit/32a469f7))
+- **HttpClient:** remove HttpClient class ([8e895273](https://github.com/guanguans/laravel-skeleton/commit/8e895273))
+- **ListSchedule:** Add ListSchedule command ([d8124b86](https://github.com/guanguans/laravel-skeleton/commit/d8124b86))
+- **Macros:** Add console logger macro ([9f4c2398](https://github.com/guanguans/laravel-skeleton/commit/9f4c2398))
+- **MaxUploadSizeRule:** Add MaxUploadSizeRule for handling max upload size validation ([e8eae62a](https://github.com/guanguans/laravel-skeleton/commit/e8eae62a))
+- **MessagePipe:** 修改MessagePipe类中的方法名和调用方式 ([1f08690a](https://github.com/guanguans/laravel-skeleton/commit/1f08690a))
+- **Model:** add toDotArray() method ([516b9c49](https://github.com/guanguans/laravel-skeleton/commit/516b9c49))
+- **Outputifier:** Add Outputifier trait for console commands ([daa34088](https://github.com/guanguans/laravel-skeleton/commit/daa34088))
+- **ParsePHPFileToASTCommand:** add command to parse PHP file to AST ([2224dd2b](https://github.com/guanguans/laravel-skeleton/commit/2224dd2b))
+- **PhpUserFilters:** Add CallbackFilter class ([2f061378](https://github.com/guanguans/laravel-skeleton/commit/2f061378))
+- **Providers:** Add global options and middleware to Http ([cc2abfe8](https://github.com/guanguans/laravel-skeleton/commit/cc2abfe8))
+- **Providers:** Add DevelopServiceProvider and LocalServiceProvider ([b6b08d5c](https://github.com/guanguans/laravel-skeleton/commit/b6b08d5c))
+- **Refactor:** Use arrow functions for cleaner syntax ([7ed795cb](https://github.com/guanguans/laravel-skeleton/commit/7ed795cb))
+- **RequestMacro:** add isWechat method ([771d4d49](https://github.com/guanguans/laravel-skeleton/commit/771d4d49))
+- **Resumeable:** Add Resumeable trait with __set_state method ([92123a28](https://github.com/guanguans/laravel-skeleton/commit/92123a28))
+- **Rules:** add SnakeCaseRule ([a2a904d7](https://github.com/guanguans/laravel-skeleton/commit/a2a904d7))
+- **ShareLogContextSubscriber:** Add memory peak usage to log context ([8a6037fb](https://github.com/guanguans/laravel-skeleton/commit/8a6037fb))
+- **ShowRequiresCommand:** Add command to show required packages ([55d39971](https://github.com/guanguans/laravel-skeleton/commit/55d39971))
+- **ShowRequiresCommand:** Add command to show required packages ([706c1157](https://github.com/guanguans/laravel-skeleton/commit/706c1157))
+- **ShowUnsupportedRequiresCommand:** add FileNotFoundException handling and require-dev check ([c7d7c32f](https://github.com/guanguans/laravel-skeleton/commit/c7d7c32f))
+- **SimpleHttpClient:** Add new class SimpleHttpClient ([60112300](https://github.com/guanguans/laravel-skeleton/commit/60112300))
+- **StreamWrapper:** Add stream_set_option method implementation ([cc6f31fd](https://github.com/guanguans/laravel-skeleton/commit/cc6f31fd))
+- **StreamWrapper:** Improve stream_cast method documentation ([595cef8f](https://github.com/guanguans/laravel-skeleton/commit/595cef8f))
+- **StreamWrapper:** Implement UserFileStreamWrapper ([55adecf8](https://github.com/guanguans/laravel-skeleton/commit/55adecf8))
+- **StreamWrapper:** Add directory handle methods ([aa67a2ab](https://github.com/guanguans/laravel-skeleton/commit/aa67a2ab))
+- **StreamWrappers:** update UserFileStreamWrapper ([b1ed2a3a](https://github.com/guanguans/laravel-skeleton/commit/b1ed2a3a))
+- **Support:** 添加TencentAds速率限制中间件 ([f33a6d18](https://github.com/guanguans/laravel-skeleton/commit/f33a6d18))
+- **Support:** Add AutoWire class for dependency injection ([a5d0576e](https://github.com/guanguans/laravel-skeleton/commit/a5d0576e))
+- **TraceProcessor:** Add new TraceProcessor class ([e18f214d](https://github.com/guanguans/laravel-skeleton/commit/e18f214d))
+- **Validation:** Add StrictIdCardRule and IdCard class ([641f68f8](https://github.com/guanguans/laravel-skeleton/commit/641f68f8))
+- **VariableStream:** add VariableStream class ([543fb49d](https://github.com/guanguans/laravel-skeleton/commit/543fb49d))
+- **WithMiddlewareArgs:** Add WithMiddlewareArgs trait ([03ad4014](https://github.com/guanguans/laravel-skeleton/commit/03ad4014))
+- **_ide_helper_.php:** add Redis facade ([f494e66b](https://github.com/guanguans/laravel-skeleton/commit/f494e66b))
+- **actions:** Add dragon-code/laravel-actions package ([74f7bc82](https://github.com/guanguans/laravel-skeleton/commit/74f7bc82))
+- **api:** Add Responder class for API responses ([0a843721](https://github.com/guanguans/laravel-skeleton/commit/0a843721))
+- **api:** 重构API响应处理机制 ([36212255](https://github.com/guanguans/laravel-skeleton/commit/36212255))
+- **api-response:** implement ApiResponse contract ([263067a9](https://github.com/guanguans/laravel-skeleton/commit/263067a9))
+- **api-response:** add guanguans/laravel-api-response as a development dependency ([9c740e0f](https://github.com/guanguans/laravel-skeleton/commit/9c740e0f))
+- **app:** Add channels and API prefix to routing configuration ([6ff01feb](https://github.com/guanguans/laravel-skeleton/commit/6ff01feb))
+- **app:** Add custom logging and security middleware ([b79c7c76](https://github.com/guanguans/laravel-skeleton/commit/b79c7c76))
+- **app:** add auto injection support ([f11bc020](https://github.com/guanguans/laravel-skeleton/commit/f11bc020))
+- **app:** add middleware for empty string conversion and string trimming ([383e763e](https://github.com/guanguans/laravel-skeleton/commit/383e763e))
+- **app:** Add HasNoRules trait for empty rules array ([249c39d5](https://github.com/guanguans/laravel-skeleton/commit/249c39d5))
+- **app:** Update middleware in bootstrap/app.php ([f02ed48e](https://github.com/guanguans/laravel-skeleton/commit/f02ed48e))
+- **app:** Add support for booting aspects ([2872799f](https://github.com/guanguans/laravel-skeleton/commit/2872799f))
+- **app:** add JSON rendering for API requests ([4127e0fd](https://github.com/guanguans/laravel-skeleton/commit/4127e0fd))
+- **app:** Add Composer support class ([6f08d325](https://github.com/guanguans/laravel-skeleton/commit/6f08d325))
+- **app:** Add middleware to redirect guests and users ([fd8eb91c](https://github.com/guanguans/laravel-skeleton/commit/fd8eb91c))
+- **app:** add Json casting for Eloquent models ([ff1a5356](https://github.com/guanguans/laravel-skeleton/commit/ff1a5356))
+- **app:** Comment out middleware and HTTPS configurations ([3a70d009](https://github.com/guanguans/laravel-skeleton/commit/3a70d009))
+- **app:** add Octane HTTP server request handling ([0b6bb684](https://github.com/guanguans/laravel-skeleton/commit/0b6bb684))
+- **app:** 优化队列任务和事件处理 ([37214f3c](https://github.com/guanguans/laravel-skeleton/commit/37214f3c))
+- **app:** 添加 str_random 函数 ([36ae4cb3](https://github.com/guanguans/laravel-skeleton/commit/36ae4cb3))
+- **app:** add Jiannei Laravel Response package ([57fba29f](https://github.com/guanguans/laravel-skeleton/commit/57fba29f))
+- **app:** Add REQUEST_ID_NAME constant ([46167ea1](https://github.com/guanguans/laravel-skeleton/commit/46167ea1))
+- **app:** Add RunCommandInDebugModeEventListener ([ca606f1e](https://github.com/guanguans/laravel-skeleton/commit/ca606f1e))
+- **app:** Add Decorator boot method ([af5445a9](https://github.com/guanguans/laravel-skeleton/commit/af5445a9))
+- **app:** Add DisposableEmailRule class ([a4c103dd](https://github.com/guanguans/laravel-skeleton/commit/a4c103dd))
+- **app:** add rate limiting for uploads ([fb04d635](https://github.com/guanguans/laravel-skeleton/commit/fb04d635))
+- **auth:** add password update functionality ([e50694fd](https://github.com/guanguans/laravel-skeleton/commit/e50694fd))
+- **bootstrapper:** Implement OutOfMemoryBootstrapper class ([fcb26bbf](https://github.com/guanguans/laravel-skeleton/commit/fcb26bbf))
+- **bootstrappers:** Add SetRequestId class for request tracking ([c9882bda](https://github.com/guanguans/laravel-skeleton/commit/c9882bda))
+- **cache:** add CacheKey class for cache key management ([136e35f2](https://github.com/guanguans/laravel-skeleton/commit/136e35f2))
+- **cache-cleaner:** Add header comments to PHP files ([40c47fe0](https://github.com/guanguans/laravel-skeleton/commit/40c47fe0))
+- **captainhook:** Add CaptainHook configuration files and tools ([bf6b2175](https://github.com/guanguans/laravel-skeleton/commit/bf6b2175))
+- **captainhook:** enable linting and composer checks in post-merge hook ([9784b2e6](https://github.com/guanguans/laravel-skeleton/commit/9784b2e6))
+- **casts:** add CommaSeparatedToIntegerArrayCast ([282ee1f9](https://github.com/guanguans/laravel-skeleton/commit/282ee1f9))
+- **circuit-breaker:** Implement CircuitBreakerGuzzleMiddleware using Ackintosh Ganesha for rate-based failure handling ([0ba97416](https://github.com/guanguans/laravel-skeleton/commit/0ba97416))
+- **commands:** add find artisan command ([fce92f77](https://github.com/guanguans/laravel-skeleton/commit/fce92f77))
+- **commands:** Add ClearAllCommand ([dd46cc54](https://github.com/guanguans/laravel-skeleton/commit/dd46cc54))
+- **commit:** Add SchedulingEventMacro class ([f2a3e4c6](https://github.com/guanguans/laravel-skeleton/commit/f2a3e4c6))
+- **commit:** Add Envoy.blade.example.php ([051c157c](https://github.com/guanguans/laravel-skeleton/commit/051c157c))
+- **composer:** add composer-fixer command ([013b2a1d](https://github.com/guanguans/laravel-skeleton/commit/013b2a1d))
+- **composer:** add composer-diff and remove duplicated differ script ([492e6347](https://github.com/guanguans/laravel-skeleton/commit/492e6347))
+- **composer:** Add new dependencies ([ee61be81](https://github.com/guanguans/laravel-skeleton/commit/ee61be81))
+- **composer:** Update dependencies ([5156e60e](https://github.com/guanguans/laravel-skeleton/commit/5156e60e))
+- **composer.json:** add huangdijia/laravel-redis-ide-helper ([42ea801a](https://github.com/guanguans/laravel-skeleton/commit/42ea801a))
+- **composer.json:** Add differ script ([be33a586](https://github.com/guanguans/laravel-skeleton/commit/be33a586))
+- **concerns:** Add traits for cache management and UUID handling ([0e17a389](https://github.com/guanguans/laravel-skeleton/commit/0e17a389))
+- **config:** Add affixer configuration file and update composer ([a16df47c](https://github.com/guanguans/laravel-skeleton/commit/a16df47c))
+- **config:** Enable error reporting in filesystems config ([74bd465b](https://github.com/guanguans/laravel-skeleton/commit/74bd465b))
+- **config:** Integrate dragon-code/pretty-routes and update API tester settings ([c36292ae](https://github.com/guanguans/laravel-skeleton/commit/c36292ae))
+- **config:** add new configuration files for various features ([54e236dc](https://github.com/guanguans/laravel-skeleton/commit/54e236dc))
+- **config:** add .user.ini for post_max_size settings ([1c0ed1ef](https://github.com/guanguans/laravel-skeleton/commit/1c0ed1ef))
+- **config:** 添加了Redis连接配置和记录模式设置 ([e801a3af](https://github.com/guanguans/laravel-skeleton/commit/e801a3af))
+- **config:** add laravel-schema-rules package ([d49f378b](https://github.com/guanguans/laravel-skeleton/commit/d49f378b))
+- **config:** add default concurrency configuration ([da673c5e](https://github.com/guanguans/laravel-skeleton/commit/da673c5e))
+- **console:** Add configurability to commands with a new trait. ([6556b638](https://github.com/guanguans/laravel-skeleton/commit/6556b638))
+- **console:** add AskForPassword trait for secure password input ([8a63629f](https://github.com/guanguans/laravel-skeleton/commit/8a63629f))
+- **console:** Add InitCommand for project initialization ([616ae794](https://github.com/guanguans/laravel-skeleton/commit/616ae794))
+- **console:** add input validation trait for commands ([1b0ee025](https://github.com/guanguans/laravel-skeleton/commit/1b0ee025))
+- **console:** add Rescuer trait for error handling ([e2d21832](https://github.com/guanguans/laravel-skeleton/commit/e2d21832))
+- **container:** add ContainerStreamWrapper class ([1b5d679b](https://github.com/guanguans/laravel-skeleton/commit/1b5d679b))
+- **csp:** Add Content Security Policy middleware ([d3380ff3](https://github.com/guanguans/laravel-skeleton/commit/d3380ff3))
+- **database:** Add default morph key type configuration ([6ba50d14](https://github.com/guanguans/laravel-skeleton/commit/6ba50d14))
+- **database:** set timezone for MySQL connection ([40a140ab](https://github.com/guanguans/laravel-skeleton/commit/40a140ab))
+- **dependencies:** update Scout, Livewire, Psysh, Attributes and SecurityAdvisories ([2fe00ea6](https://github.com/guanguans/laravel-skeleton/commit/2fe00ea6))
+- **dependencies:** add guzzle-rate-limiter-middleware package ([9faefafc](https://github.com/guanguans/laravel-skeleton/commit/9faefafc))
+- **dependencies:** add enlightn/enlightn package ([adb2d100](https://github.com/guanguans/laravel-skeleton/commit/adb2d100))
+- **dependencies:** add spaze/phpstan-disallowed-calls package ([cf9700bc](https://github.com/guanguans/laravel-skeleton/commit/cf9700bc))
+- **dependencies:** add teamtnt/laravel-scout-tntsearch-driver ([3af73010](https://github.com/guanguans/laravel-skeleton/commit/3af73010))
+- **dependencies:** Update PHP version and add new packages ([05f77311](https://github.com/guanguans/laravel-skeleton/commit/05f77311))
+- **dependencies:** Add laravel-caffeine package ([d767d9e7](https://github.com/guanguans/laravel-skeleton/commit/d767d9e7))
+- **dependencies:** update laravel framework and octane to latest versions ([44c09b68](https://github.com/guanguans/laravel-skeleton/commit/44c09b68))
+- **deps:** Add new Laravel packages to composer.json ([fa6bbb30](https://github.com/guanguans/laravel-skeleton/commit/fa6bbb30))
+- **deps:** Add inspector-apm/inspector-laravel dependency ([99e3c8f3](https://github.com/guanguans/laravel-skeleton/commit/99e3c8f3))
+- **deps:** add imanghafoori/laravel-decorator package to enhance service layer with decorator pattern ([0691aaf0](https://github.com/guanguans/laravel-skeleton/commit/0691aaf0))
+- **deps:** Add tpentry/laravel-mysql-explain dependency ([2b520eee](https://github.com/guanguans/laravel-skeleton/commit/2b520eee))
+- **deps:** add elao/enum dependency ([0d9293e1](https://github.com/guanguans/laravel-skeleton/commit/0d9293e1))
+- **deps:** Add laravel-notification-channels/pushbullet dependency ([117172ea](https://github.com/guanguans/laravel-skeleton/commit/117172ea))
+- **deps:** add jasny/sso package ([f3023c44](https://github.com/guanguans/laravel-skeleton/commit/f3023c44))
+- **deps:** Add laravel-http-client-logger and laravel-http-client-global-logger dependencies ([7a0013b4](https://github.com/guanguans/laravel-skeleton/commit/7a0013b4))
+- **deps:** add richardstyles/eloquent-aes dependency ([70a4076a](https://github.com/guanguans/laravel-skeleton/commit/70a4076a))
+- **deps:** add rector/swiss-knife to composer.json ([9b17e82e](https://github.com/guanguans/laravel-skeleton/commit/9b17e82e))
+- **deps:** add trap package and update var-dump-server command ([7236844d](https://github.com/guanguans/laravel-skeleton/commit/7236844d))
+- **deps:** Add laradumps package ([10cd51b2](https://github.com/guanguans/laravel-skeleton/commit/10cd51b2))
+- **deps:** Add laravel-idempotency and square1/laravel-idempotency ([719d62a8](https://github.com/guanguans/laravel-skeleton/commit/719d62a8))
+- **deps:** Add skywarth/chaotic-schedule dependency ([7aab7d5e](https://github.com/guanguans/laravel-skeleton/commit/7aab7d5e))
+- **deps:** Add izniburak/bit-permission dependency ([fa909501](https://github.com/guanguans/laravel-skeleton/commit/fa909501))
+- **deps:** Add olinox14/path-php dependency ([aa4ca7a9](https://github.com/guanguans/laravel-skeleton/commit/aa4ca7a9))
+- **deps:** Add spatie/laravel-route-attributes and spatie/laravel-route-discovery dependencies ([cd93cc46](https://github.com/guanguans/laravel-skeleton/commit/cd93cc46))
+- **enums:** add Configuration enum for scheduling options ([1d2b97ec](https://github.com/guanguans/laravel-skeleton/commit/1d2b97ec))
+- **enums:** Add Enum class ([a43f58af](https://github.com/guanguans/laravel-skeleton/commit/a43f58af))
+- **event:** add SetRequestIdListener and SetRequestId bootstrapper ([fe780edf](https://github.com/guanguans/laravel-skeleton/commit/fe780edf))
+- **exceptions:** Enhance exception handling for query errors ([ae8add4c](https://github.com/guanguans/laravel-skeleton/commit/ae8add4c))
+- **exceptions:** Implement throttling for exceptions using Lottery ([de7e81d8](https://github.com/guanguans/laravel-skeleton/commit/de7e81d8))
+- **filters:** add FuzzyFilter class for flexible querying ([4262c98e](https://github.com/guanguans/laravel-skeleton/commit/4262c98e))
+- **git-commit:** Add changes to GlobStreamWrapper and StreamWrapper ([3795ddb2](https://github.com/guanguans/laravel-skeleton/commit/3795ddb2))
+- **health-check:** Add diagnostics libraries and type hints ([d08d037d](https://github.com/guanguans/laravel-skeleton/commit/d08d037d))
+- **helper:** Add get_throwables helper function ([e0f6be37](https://github.com/guanguans/laravel-skeleton/commit/e0f6be37))
+- **helper:** Add matching function ([db26511b](https://github.com/guanguans/laravel-skeleton/commit/db26511b))
+- **helpers:** add raw_sql_for function to log raw SQL queries ([5a5ce504](https://github.com/guanguans/laravel-skeleton/commit/5a5ce504))
+- **helpers:** Add defer function for deferred execution ([4aadb505](https://github.com/guanguans/laravel-skeleton/commit/4aadb505))
+- **helpers:** Add env_explode function ([c00ed60b](https://github.com/guanguans/laravel-skeleton/commit/c00ed60b))
+- **helpers:** add timezone and cron helper functions ([8f53ca34](https://github.com/guanguans/laravel-skeleton/commit/8f53ca34))
+- **http:** Add PsrClient class ([98b0bffa](https://github.com/guanguans/laravel-skeleton/commit/98b0bffa))
+- **http:** Add ClientTrait with request methods ([8fbbce3d](https://github.com/guanguans/laravel-skeleton/commit/8fbbce3d))
+- **http:** add HttpMacro with logging capability ([dc480284](https://github.com/guanguans/laravel-skeleton/commit/dc480284))
+- **http:** Add ClientInterface ([68d37486](https://github.com/guanguans/laravel-skeleton/commit/68d37486))
+- **ide-helper:** generate helper files for IDE assistance ([f290bd0e](https://github.com/guanguans/laravel-skeleton/commit/f290bd0e))
+- **jobs:** Add SendThirdPartyRequestJob for handling third-party API requests with retry logic ([3f46efc7](https://github.com/guanguans/laravel-skeleton/commit/3f46efc7))
+- **laravel:** Integrate leventcz/laravel-top package and add configuration for Redis connection ([1bde733d](https://github.com/guanguans/laravel-skeleton/commit/1bde733d))
+- **laravel-error-solutions:** integrate spatie package for error page solutions ([6cfb3425](https://github.com/guanguans/laravel-skeleton/commit/6cfb3425))
+- **listener:** Define REQUEST_ID and set in bootstrap event ([5608a3f3](https://github.com/guanguans/laravel-skeleton/commit/5608a3f3))
+- **listeners:** Add logging context for RequestHandled and CommandFinished events ([23c28c7f](https://github.com/guanguans/laravel-skeleton/commit/23c28c7f))
+- **listeners:** Add LogActivity listener for login, logout, registered, failed, and password reset events ([8694b09f](https://github.com/guanguans/laravel-skeleton/commit/8694b09f))
+- **listeners:** add maintenance mode event listeners ([0e580a1d](https://github.com/guanguans/laravel-skeleton/commit/0e580a1d))
+- **listeners:** Add LogMailListener for logging sent emails ([4b02d523](https://github.com/guanguans/laravel-skeleton/commit/4b02d523))
+- **logging:** Add ECS formatter for logging ([b0e6664b](https://github.com/guanguans/laravel-skeleton/commit/b0e6664b))
+- **logging:** improve logging configuration and query monitoring ([7f51a738](https://github.com/guanguans/laravel-skeleton/commit/7f51a738))
+- **machinet.conf:** add machinet.conf file ([b7585da8](https://github.com/guanguans/laravel-skeleton/commit/b7585da8))
+- **macro:** Add CarbonMacro for Carbon support ([357ebe2a](https://github.com/guanguans/laravel-skeleton/commit/357ebe2a))
+- **middleware:** Add AddLinkHeadersForPreloadedAssets middleware ([80d18187](https://github.com/guanguans/laravel-skeleton/commit/80d18187))
+- **middleware:** Add VerifyUserAbility middleware ([32f4fe4d](https://github.com/guanguans/laravel-skeleton/commit/32f4fe4d))
+- **middleware:** add HttpsProtocol middleware ([5749676e](https://github.com/guanguans/laravel-skeleton/commit/5749676e))
+- **middleware:** Add Date facade locale setting ([cb0f0bfe](https://github.com/guanguans/laravel-skeleton/commit/cb0f0bfe))
+- **middleware:** add ApiOutputTokenIsValid middleware ([5f869a7e](https://github.com/guanguans/laravel-skeleton/commit/5f869a7e))
+- **middleware:** add AddContentLength middleware ([22e599b0](https://github.com/guanguans/laravel-skeleton/commit/22e599b0))
+- **middleware:** Add RateLimitedForJob middleware for job throttling ([69c8d1ad](https://github.com/guanguans/laravel-skeleton/commit/69c8d1ad))
+- **middleware:** Add VerifyFormPaginate middleware for pagination ([363ce4df](https://github.com/guanguans/laravel-skeleton/commit/363ce4df))
+- **middleware:** Add EnsureTokenIsValid job middleware ([9a0cdbf5](https://github.com/guanguans/laravel-skeleton/commit/9a0cdbf5))
+- **middleware:** Add UserLocale middleware ([202c3fa4](https://github.com/guanguans/laravel-skeleton/commit/202c3fa4))
+- **middleware:** Add RedirectUppercase middleware ([d8e39103](https://github.com/guanguans/laravel-skeleton/commit/d8e39103))
+- **middleware:** Add RequiredJson middleware ([52af0bdf](https://github.com/guanguans/laravel-skeleton/commit/52af0bdf))
+- **middleware:** add DisableFloc middleware ([eecaf6dd](https://github.com/guanguans/laravel-skeleton/commit/eecaf6dd))
+- **middleware:** add MustBeAdmin middleware and isAdmin method ([bee626d0](https://github.com/guanguans/laravel-skeleton/commit/bee626d0))
+- **middleware:** Add BasicAuthentication middleware for handling basic authentication ([abcf6747](https://github.com/guanguans/laravel-skeleton/commit/abcf6747))
+- **middleware:** add SetDefaultLocaleForUrls middleware ([d6a109bd](https://github.com/guanguans/laravel-skeleton/commit/d6a109bd))
+- **migration:** add command to migrate from MySQL to SQLite ([91f0fd87](https://github.com/guanguans/laravel-skeleton/commit/91f0fd87))
+- **models:** Add DatabaseNotification model and notifications method to User model ([f37c5b73](https://github.com/guanguans/laravel-skeleton/commit/f37c5b73))
+- **models:** Add formatted date attributes for created_at and updated_at ([4ed10c9d](https://github.com/guanguans/laravel-skeleton/commit/4ed10c9d))
+- **models:** add HasPivot trait ([2f1e18c2](https://github.com/guanguans/laravel-skeleton/commit/2f1e18c2))
+- **models:** Enhance User model with custom query builder methods ([25c5c064](https://github.com/guanguans/laravel-skeleton/commit/25c5c064))
+- **models:** Add Nullable and SimpleNode traits ([ef63c197](https://github.com/guanguans/laravel-skeleton/commit/ef63c197))
+- **models:** add factory support to User model ([5e8c89d3](https://github.com/guanguans/laravel-skeleton/commit/5e8c89d3))
+- **models:** add caching behavior to formatted timestamps ([160af240](https://github.com/guanguans/laravel-skeleton/commit/160af240))
+- **models:** Add Movie model with orbit capabilities ([0dffb4b0](https://github.com/guanguans/laravel-skeleton/commit/0dffb4b0))
+- **models:** add new collection and route key methods ([daebce34](https://github.com/guanguans/laravel-skeleton/commit/daebce34))
+- **monolog:** add NasiLineFormatter ([16738b88](https://github.com/guanguans/laravel-skeleton/commit/16738b88))
+- **notifications:** Add SlowQueryLoggedNotification ([cd1a1807](https://github.com/guanguans/laravel-skeleton/commit/cd1a1807))
+- **provider:** Implement dynamic mixin registration using attributes ([c6754969](https://github.com/guanguans/laravel-skeleton/commit/c6754969))
+- **provider:** Add SoloServiceProvider for command enhancements ([00b55b0d](https://github.com/guanguans/laravel-skeleton/commit/00b55b0d))
+- **provider:** use DateFactory for timezone handling ([e0648a13](https://github.com/guanguans/laravel-skeleton/commit/e0648a13))
+- **provider:** use CarbonImmutable for date handling ([14930748](https://github.com/guanguans/laravel-skeleton/commit/14930748))
+- **provider:** refactor service providers for better organization ([d818cd14](https://github.com/guanguans/laravel-skeleton/commit/d818cd14))
+- **public:** add xhgui header for performance profiling ([744dcdd6](https://github.com/guanguans/laravel-skeleton/commit/744dcdd6))
+- **pulse:** add pulse.php configuration file ([d0d47873](https://github.com/guanguans/laravel-skeleton/commit/d0d47873))
+- **rector:** add ChangeMethodVisibilityRector configuration ([77eb2439](https://github.com/guanguans/laravel-skeleton/commit/77eb2439))
+- **repo:** Add new files and classes ([bb344ce2](https://github.com/guanguans/laravel-skeleton/commit/bb344ce2))
+- **request:** add hooks for validation preparation and passing ([1088c460](https://github.com/guanguans/laravel-skeleton/commit/1088c460))
+- **route:** add rate limiter for login requests ([4a71e38a](https://github.com/guanguans/laravel-skeleton/commit/4a71e38a))
+- **routes:** Add catch-all route for web middleware ([585aa95a](https://github.com/guanguans/laravel-skeleton/commit/585aa95a))
+- **routes:** add 'acting-as' route for local debugging ([c2cdad71](https://github.com/guanguans/laravel-skeleton/commit/c2cdad71))
+- **rules:** add StrictPortRule for port validation ([f53bc84a](https://github.com/guanguans/laravel-skeleton/commit/f53bc84a))
+- **scheduling:** Enhance console scheduling with new commands and random sleep functionality ([3c827e17](https://github.com/guanguans/laravel-skeleton/commit/3c827e17))
+- **scheduling:** Add php-ds and yoast polyfills for enhanced testing ([8489cb3d](https://github.com/guanguans/laravel-skeleton/commit/8489cb3d))
+- **scheduling:** Add SchedulingEventMacro mixin ([3dd0ab47](https://github.com/guanguans/laravel-skeleton/commit/3dd0ab47))
+- **scheduling:** Add fallback route for handling 404 errors gracefully ([033f2a58](https://github.com/guanguans/laravel-skeleton/commit/033f2a58))
+- **security:** 添加请求签名验证和用户身份记录功能 ([d5ca9e04](https://github.com/guanguans/laravel-skeleton/commit/d5ca9e04))
+- **security:** Add middleware method to PingController ([dee4119a](https://github.com/guanguans/laravel-skeleton/commit/dee4119a))
+- **stream-psr-client:** add StreamPsrClient class ([58d8dc19](https://github.com/guanguans/laravel-skeleton/commit/58d8dc19))
+- **stream-wrapper:** add GlobStreamWrapper for glob pattern support ([14de9b60](https://github.com/guanguans/laravel-skeleton/commit/14de9b60))
+- **stream-wrappers:** Add HasContext trait for context management ([ba8884fa](https://github.com/guanguans/laravel-skeleton/commit/ba8884fa))
+- **stream-wrappers:** Add Nameable trait ([3f1e483f](https://github.com/guanguans/laravel-skeleton/commit/3f1e483f))
+- **stream-wrappers:** Implement stream_metadata method ([293cc182](https://github.com/guanguans/laravel-skeleton/commit/293cc182))
+- **streamwrappers:** add StreamWrapper abstract class ([e3574d0e](https://github.com/guanguans/laravel-skeleton/commit/e3574d0e))
+- **subscriber:** add ShareLogContextSubscriber ([4c87276c](https://github.com/guanguans/laravel-skeleton/commit/4c87276c))
+- **support:** Add ElasticsearchManager and Elasticsearch Facade ([0a6c202a](https://github.com/guanguans/laravel-skeleton/commit/0a6c202a))
+- **support:** add ContainerStreamWrapper class ([665216fa](https://github.com/guanguans/laravel-skeleton/commit/665216fa))
+- **tests:** add Pest testing framework and update test cases ([43c7ffbb](https://github.com/guanguans/laravel-skeleton/commit/43c7ffbb))
+- **trait:** add EnumToArray trait for enum handling ([66a7a9b0](https://github.com/guanguans/laravel-skeleton/commit/66a7a9b0))
+- **trait:** add Configurable trait for option management ([00d949d9](https://github.com/guanguans/laravel-skeleton/commit/00d949d9))
+- **translation-checker:** add composer.json for vendor-bin/translation-checker ([b950b667](https://github.com/guanguans/laravel-skeleton/commit/b950b667))
+- **updater:** add laravel-updater package ([9baff4a0](https://github.com/guanguans/laravel-skeleton/commit/9baff4a0))
+- **upload:** add ChunkUploadController for file uploads ([c9ade8f4](https://github.com/guanguans/laravel-skeleton/commit/c9ade8f4))
+- **uploaded-file:** add macros and traits for file handling from URLs ([61c51d4a](https://github.com/guanguans/laravel-skeleton/commit/61c51d4a))
+- **vendor-bin:** Add composer.json for laravel-github-monolog ([d504e1e7](https://github.com/guanguans/laravel-skeleton/commit/d504e1e7))
+- **view:** simplify view logic with service injection ([ce4bae92](https://github.com/guanguans/laravel-skeleton/commit/ce4bae92))
+- **web.php:** add health check route ([45e19587](https://github.com/guanguans/laravel-skeleton/commit/45e19587))
+- **workflow:** Add security-checker workflow ([ee0250a9](https://github.com/guanguans/laravel-skeleton/commit/ee0250a9))
+
+### 🐞 Bug Fixes
+- Remove SoloServiceProvider and update dependencies ([d43daa04](https://github.com/guanguans/laravel-skeleton/commit/d43daa04))
+- Update instantiation of classes to use parentheses ([ddf846e2](https://github.com/guanguans/laravel-skeleton/commit/ddf846e2))
+- **ApiResponse:** reorder conditions in dataFor method ([2b419ab1](https://github.com/guanguans/laravel-skeleton/commit/2b419ab1))
+- **ApiResponse:** simplify error code retrieval ([42bb8c4d](https://github.com/guanguans/laravel-skeleton/commit/42bb8c4d))
+- **ApiResponse:** update constructor to handle null collections ([d9eaf3e3](https://github.com/guanguans/laravel-skeleton/commit/d9eaf3e3))
+- **AppServiceProvider:** add listener for RequestTerminated event ([2dbb5f15](https://github.com/guanguans/laravel-skeleton/commit/2dbb5f15))
+- **AppServiceProvider:** Set session to secure mode ([5642096d](https://github.com/guanguans/laravel-skeleton/commit/5642096d))
+- **AppServiceProvider:** comment out ini_set for JSON exceptions ([3190ef49](https://github.com/guanguans/laravel-skeleton/commit/3190ef49))
+- **AuthController:** use static function for timebox callback ([3239ad61](https://github.com/guanguans/laravel-skeleton/commit/3239ad61))
+- **CommandMacro:** Update process helper call to use explicit parameters ([58f086c4](https://github.com/guanguans/laravel-skeleton/commit/58f086c4))
+- **FgcClient:** Fix default protocol version ([10cd01b9](https://github.com/guanguans/laravel-skeleton/commit/10cd01b9))
+- **FluentAssert:** Return self in create method ([c81c6146](https://github.com/guanguans/laravel-skeleton/commit/c81c6146))
+- **HasContext:** fix stream context initialization ([0a4aa6b4](https://github.com/guanguans/laravel-skeleton/commit/0a4aa6b4))
+- **HealthCheckCommand:** Add platform requirement checks ([66f94fc3](https://github.com/guanguans/laravel-skeleton/commit/66f94fc3))
+- **HmacSigner:** rename method to improve clarity ([90f19651](https://github.com/guanguans/laravel-skeleton/commit/90f19651))
+- **Monolog:** Change public array to private in AppendExtraDataProcessor ([11cbbf61](https://github.com/guanguans/laravel-skeleton/commit/11cbbf61))
+- **Outputifier:** correct function import syntax ([810511e9](https://github.com/guanguans/laravel-skeleton/commit/810511e9))
+- **SerializeDate:** Adjust date serialization to use app timezone ([e2fcf798](https://github.com/guanguans/laravel-skeleton/commit/e2fcf798))
+- **SimpleHttpClient:** fix response creation ([570be8b4](https://github.com/guanguans/laravel-skeleton/commit/570be8b4))
+- **Sse:** remove commented out tick function code ([72d09b2b](https://github.com/guanguans/laravel-skeleton/commit/72d09b2b))
+- **StreamHandler:** change return type of __invoke method ([96f02047](https://github.com/guanguans/laravel-skeleton/commit/96f02047))
+- **StreamPsrClient:** Add check for allow_url_fopen ([dd81eaad](https://github.com/guanguans/laravel-skeleton/commit/dd81eaad))
+- **StreamWrapper:** Implement constructor and destructor methods ([3f14b350](https://github.com/guanguans/laravel-skeleton/commit/3f14b350))
+- **TencentAdsRateLimiterMiddleware:** increase defer time and improve handler setup ([ef26ccb9](https://github.com/guanguans/laravel-skeleton/commit/ef26ccb9))
+- **_ide_helper_:** remove unnecessary lines ([33e0f5c5](https://github.com/guanguans/laravel-skeleton/commit/33e0f5c5))
+- **api:** 改进错误响应处理 ([6c69b149](https://github.com/guanguans/laravel-skeleton/commit/6c69b149))
+- **api-response:** update configuration for rendering ([7f44aa55](https://github.com/guanguans/laravel-skeleton/commit/7f44aa55))
+- **app:** Fix resource context in UserFileStreamWrapper ([713ad932](https://github.com/guanguans/laravel-skeleton/commit/713ad932))
+- **app:** Fix naming convention in RenameToPsrNameRector ([0ede967c](https://github.com/guanguans/laravel-skeleton/commit/0ede967c))
+- **app:** change JsonResource wrapping from 'data' to 'list' ([7e2421f9](https://github.com/guanguans/laravel-skeleton/commit/7e2421f9))
+- **app:** fix exception handler extension ([b40a5fc2](https://github.com/guanguans/laravel-skeleton/commit/b40a5fc2))
+- **app:** Fix AppServiceProvider ([f3bc784c](https://github.com/guanguans/laravel-skeleton/commit/f3bc784c))
+- **app:** Remove obsolete route handling logic ([e8682a01](https://github.com/guanguans/laravel-skeleton/commit/e8682a01))
+- **auth:** enable foreign key constraints for SQLite ([e7b05e4a](https://github.com/guanguans/laravel-skeleton/commit/e7b05e4a))
+- **auth:** improve login method security with timebox ([7b62523e](https://github.com/guanguans/laravel-skeleton/commit/7b62523e))
+- **auth:** update per_page validation and improve error handling ([feaba239](https://github.com/guanguans/laravel-skeleton/commit/feaba239))
+- **client:** Fix sendAsync method ([81b71fab](https://github.com/guanguans/laravel-skeleton/commit/81b71fab))
+- **command:** use 'unless' for extension loading checks ([bfc9c32f](https://github.com/guanguans/laravel-skeleton/commit/bfc9c32f))
+- **composer:** Fix ai-commit command options ([b98b1b5d](https://github.com/guanguans/laravel-skeleton/commit/b98b1b5d))
+- **config:** Add deprecations log channel configuration ([8343d0e8](https://github.com/guanguans/laravel-skeleton/commit/8343d0e8))
+- **config:** update exception notify pipe and collector namespaces ([cf6d94b8](https://github.com/guanguans/laravel-skeleton/commit/cf6d94b8))
+- **console:** add opcache invalidation in ClearAllCommand ([c06b06b3](https://github.com/guanguans/laravel-skeleton/commit/c06b06b3))
+- **dependency injection:** improve error messages and property naming ([f7f43f02](https://github.com/guanguans/laravel-skeleton/commit/f7f43f02))
+- **hashing:** 增加 bcrypt 加密轮数至 12 ([dab708e5](https://github.com/guanguans/laravel-skeleton/commit/dab708e5))
+- **health-check:** Improve database datetime retrieval ([71655ed2](https://github.com/guanguans/laravel-skeleton/commit/71655ed2))
+- **healthcheck:** Adjust memory limit check ([4f5b8495](https://github.com/guanguans/laravel-skeleton/commit/4f5b8495))
+- **helpers:** rename defer function to defers ([7a613602](https://github.com/guanguans/laravel-skeleton/commit/7a613602))
+- **helpers:** change getQueryLog to getRawQueryLog ([1bbe1a4c](https://github.com/guanguans/laravel-skeleton/commit/1bbe1a4c))
+- **http:** Fix warning message in PsrClient ([6b9d597d](https://github.com/guanguans/laravel-skeleton/commit/6b9d597d))
+- **http:** handle errors in getDefaultHandlerStack ([e420e940](https://github.com/guanguans/laravel-skeleton/commit/e420e940))
+- **middleware:** Fix timestamp validation in VerifySignature middleware ([f61f0bea](https://github.com/guanguans/laravel-skeleton/commit/f61f0bea))
+- **middleware:** update cache signature handling ([9e679bcd](https://github.com/guanguans/laravel-skeleton/commit/9e679bcd))
+- **middleware:** use dynamic field name for password validation ([447ff471](https://github.com/guanguans/laravel-skeleton/commit/447ff471))
+- **middleware:** Fix Laravel middleware to preserve state between handle and terminate ([bdebd5b0](https://github.com/guanguans/laravel-skeleton/commit/bdebd5b0))
+- **provider:** update date handling to use CarbonInterface ([234907c3](https://github.com/guanguans/laravel-skeleton/commit/234907c3))
+- **psrclient:** fix bytesTransferred calculation ([5bf122a3](https://github.com/guanguans/laravel-skeleton/commit/5bf122a3))
+- **psrclient:** handle file_get_contents error ([485e5038](https://github.com/guanguans/laravel-skeleton/commit/485e5038))
+- **sdk:** improve config validation method ([d473a93b](https://github.com/guanguans/laravel-skeleton/commit/d473a93b))
+- **stream:** Add TODO comments in StreamWrapper methods ([b7388f11](https://github.com/guanguans/laravel-skeleton/commit/b7388f11))
+- **streamwrappers:** Fix context options in stream wrappers ([9056129e](https://github.com/guanguans/laravel-skeleton/commit/9056129e))
+- **tests:** update class retrieval in class_namespace function ([a03578ae](https://github.com/guanguans/laravel-skeleton/commit/a03578ae))
+
+### 📖 Documents
+- **AppServiceProvider:** Add link to Cachet repository ([68cda2b8](https://github.com/guanguans/laravel-skeleton/commit/68cda2b8))
+- **FgcClient:** add class description ([04da5484](https://github.com/guanguans/laravel-skeleton/commit/04da5484))
+- **FgcPsrClient:** Add documentation reference ([d0c067f7](https://github.com/guanguans/laravel-skeleton/commit/d0c067f7))
+- **StreamHandler:** add documentation links ([0425caf5](https://github.com/guanguans/laravel-skeleton/commit/0425caf5))
+- **app:** add reference to InteractsWithTestCaseLifecycle in AppServiceProvider ([dcb21350](https://github.com/guanguans/laravel-skeleton/commit/dcb21350))
+- **http:** Add PHP documentation links ([30556e06](https://github.com/guanguans/laravel-skeleton/commit/30556e06))
+- **job:** add references to blog posts ([05b5c09d](https://github.com/guanguans/laravel-skeleton/commit/05b5c09d))
+- **stream-wrappers:** Update StreamWrapper and GlobStreamWrapper classes ([a3b44340](https://github.com/guanguans/laravel-skeleton/commit/a3b44340))
+- **streamwrapper:** Add documentation for stream wrapper methods ([2719d8fb](https://github.com/guanguans/laravel-skeleton/commit/2719d8fb))
+
+### 🎨 Styles
+- add declare(strict_types=1) and update method signatures ([a9e9dc3a](https://github.com/guanguans/laravel-skeleton/commit/a9e9dc3a))
+- apply consistent new object instantiation syntax ([216ae972](https://github.com/guanguans/laravel-skeleton/commit/216ae972))
+- Update formatting for improved readability ([e8aae925](https://github.com/guanguans/laravel-skeleton/commit/e8aae925))
+- **AppServiceProvider:** Refactor injection method logic ([4ee00ee3](https://github.com/guanguans/laravel-skeleton/commit/4ee00ee3))
+- **app:** Fix return type declaration in GlobStreamWrapper ([6c282395](https://github.com/guanguans/laravel-skeleton/commit/6c282395))
+- **casts:** Improve type declarations and code clarity ([02f0981c](https://github.com/guanguans/laravel-skeleton/commit/02f0981c))
+- **composer-updater:** Comment out assert_options for improved readability ([acbc5de0](https://github.com/guanguans/laravel-skeleton/commit/acbc5de0))
+- **config:** Adjust comment formatting for consistency ([ac275445](https://github.com/guanguans/laravel-skeleton/commit/ac275445))
+- **config:** Refactor instantiation to remove parentheses ([211958da](https://github.com/guanguans/laravel-skeleton/commit/211958da))
+- **config:** Add strict types and license headers ([806584a3](https://github.com/guanguans/laravel-skeleton/commit/806584a3))
+- **config:** Enable PHP 82 and PHP 83 migrations ([0d6a6e96](https://github.com/guanguans/laravel-skeleton/commit/0d6a6e96))
+- **migrate:** Refactor info output to use components ([b919c3c1](https://github.com/guanguans/laravel-skeleton/commit/b919c3c1))
+- **mixins:** Simplify mixin annotations for better clarity ([10e381f5](https://github.com/guanguans/laravel-skeleton/commit/10e381f5))
+
+### 💅 Code Refactorings
+- optimize Laravel Rector rules ([4dc419e1](https://github.com/guanguans/laravel-skeleton/commit/4dc419e1))
+- replace fully qualified class names with aliases ([a288b122](https://github.com/guanguans/laravel-skeleton/commit/a288b122))
+- update routing and middleware setup in Laravel ([8d02d276](https://github.com/guanguans/laravel-skeleton/commit/8d02d276))
+- 修改 SoloServiceProvider 引用 ([a3e73382](https://github.com/guanguans/laravel-skeleton/commit/a3e73382))
+- Update return types in CollectionMacro and ModelMacro classes ([a3fa47ff](https://github.com/guanguans/laravel-skeleton/commit/a3fa47ff))
+- optimize Laravel rector rules ([faa3f9cd](https://github.com/guanguans/laravel-skeleton/commit/faa3f9cd))
+- **AppServiceProvider:** improve property type resolution logic ([fa5e9b21](https://github.com/guanguans/laravel-skeleton/commit/fa5e9b21))
+- **AppServiceProvider:** improve autoInjection method ([7a17fffe](https://github.com/guanguans/laravel-skeleton/commit/7a17fffe))
+- **AppServiceProvider:** update registerGlobalFunctionsFrom method ([e5a87e6f](https://github.com/guanguans/laravel-skeleton/commit/e5a87e6f))
+- **AppServiceProvider:** remove commented code and add TrimStrings middleware ([e2a01672](https://github.com/guanguans/laravel-skeleton/commit/e2a01672))
+- **AppServiceProvider:** Improve property attribute checks ([23ef12f1](https://github.com/guanguans/laravel-skeleton/commit/23ef12f1))
+- **AppServiceProvider:** improve class filtering ([11dcb0f4](https://github.com/guanguans/laravel-skeleton/commit/11dcb0f4))
+- **CollectionMacro:** rename reduces() to reduceWithKeys() ([caf34afd](https://github.com/guanguans/laravel-skeleton/commit/caf34afd))
+- **Console:** refactor toOutputPath method ([97996d8b](https://github.com/guanguans/laravel-skeleton/commit/97996d8b))
+- **ConsoleKernel:** optimize schedule commands ([0b7d2e5a](https://github.com/guanguans/laravel-skeleton/commit/0b7d2e5a))
+- **FgcClient:** Replace error handling in transfer method ([a550e6c6](https://github.com/guanguans/laravel-skeleton/commit/a550e6c6))
+- **HealthCheckCommand:** Refactor handle method for improved readability and maintainability ([5542d6a0](https://github.com/guanguans/laravel-skeleton/commit/5542d6a0))
+- **Http:** Simplify the FgcClient class ([879123b6](https://github.com/guanguans/laravel-skeleton/commit/879123b6))
+- **Http:** Remove EasyClient class ([b6ca14fb](https://github.com/guanguans/laravel-skeleton/commit/b6ca14fb))
+- **Http:** Reorder methods in FgcClient ([5517786b](https://github.com/guanguans/laravel-skeleton/commit/5517786b))
+- **Listeners:** update ShareLogContextSubscriber ([c1c9e1d9](https://github.com/guanguans/laravel-skeleton/commit/c1c9e1d9))
+- **MaxUploadSizeRule:** remove macro usage and improve logic ([df3e3ec1](https://github.com/guanguans/laravel-skeleton/commit/df3e3ec1))
+- **Providers:** update AppServiceProvider ([aede3b9c](https://github.com/guanguans/laravel-skeleton/commit/aede3b9c))
+- **PsrClient:** improve sendRequest method ([d4785b6d](https://github.com/guanguans/laravel-skeleton/commit/d4785b6d))
+- **PsrClient:** Rename options property and method to config ([b5c7e3c3](https://github.com/guanguans/laravel-skeleton/commit/b5c7e3c3))
+- **RouteServiceProvider:** update boot method ([389ce11d](https://github.com/guanguans/laravel-skeleton/commit/389ce11d))
+- **Rule:** Add CreateStaticable trait ([e3297b4d](https://github.com/guanguans/laravel-skeleton/commit/e3297b4d))
+- **StreamHandler:** refactor stream handling ([e967df94](https://github.com/guanguans/laravel-skeleton/commit/e967df94))
+- **StreamResponse:** improve getStreamExt method ([20687126](https://github.com/guanguans/laravel-skeleton/commit/20687126))
+- **StreamWrapper:** Simplify context method ([436feaab](https://github.com/guanguans/laravel-skeleton/commit/436feaab))
+- **Support:** update FluentAssert doc comment ([af6d202f](https://github.com/guanguans/laravel-skeleton/commit/af6d202f))
+- **Support:** Rename Macros to Mixins and update references ([a211cef9](https://github.com/guanguans/laravel-skeleton/commit/a211cef9))
+- **Validator:** refactor extend method ([e500a17b](https://github.com/guanguans/laravel-skeleton/commit/e500a17b))
+- **api:** update log middleware to use LogHttp class ([5d1e5a3c](https://github.com/guanguans/laravel-skeleton/commit/5d1e5a3c))
+- **api:** streamline localization of HTTP responses ([7950d532](https://github.com/guanguans/laravel-skeleton/commit/7950d532))
+- **api:** Improve type declaration in PingController ([2562afb4](https://github.com/guanguans/laravel-skeleton/commit/2562afb4))
+- **api:** rename DependencyInjection to Injection ([b6851c0a](https://github.com/guanguans/laravel-skeleton/commit/b6851c0a))
+- **api:** Introduce Invoker class for method invocation ([3dddc9f6](https://github.com/guanguans/laravel-skeleton/commit/3dddc9f6))
+- **api:** Improve data handling and response structure ([5dac396d](https://github.com/guanguans/laravel-skeleton/commit/5dac396d))
+- **api:** rename DefaultDataPipe to DataPipe and remove PaginatorDataPipe ([276f574f](https://github.com/guanguans/laravel-skeleton/commit/276f574f))
+- **api:** Improve parameter handling in Responder methods ([74105d29](https://github.com/guanguans/laravel-skeleton/commit/74105d29))
+- **api:** Add Conditionable and Tappable traits ([e2cb8b83](https://github.com/guanguans/laravel-skeleton/commit/e2cb8b83))
+- **api:** change visibility of methods in HasExceptionMap and HasPipes ([e06b748b](https://github.com/guanguans/laravel-skeleton/commit/e06b748b))
+- **api:** Improve error handling in ApiResponse ([f46de419](https://github.com/guanguans/laravel-skeleton/commit/f46de419))
+- **api:** update ApiResponse handling in controllers ([63914272](https://github.com/guanguans/laravel-skeleton/commit/63914272))
+- **api:** Improve JSON response encoding options ([1e919b30](https://github.com/guanguans/laravel-skeleton/commit/1e919b30))
+- **api-response:** simplify error handling registration ([f9379b5a](https://github.com/guanguans/laravel-skeleton/commit/f9379b5a))
+- **app:** update service providers registration ([e1c55609](https://github.com/guanguans/laravel-skeleton/commit/e1c55609))
+- **app:** Improve error handling in AppServiceProvider ([f9568b5a](https://github.com/guanguans/laravel-skeleton/commit/f9568b5a))
+- **app:** Update custom view path in AppServiceProvider ([a1e4dd73](https://github.com/guanguans/laravel-skeleton/commit/a1e4dd73))
+- **app:** Remove unused imports and update Validator::extend ([eaadab0e](https://github.com/guanguans/laravel-skeleton/commit/eaadab0e))
+- **app:** 优化命令行工具和队列处理 ([cae47523](https://github.com/guanguans/laravel-skeleton/commit/cae47523))
+- **app:** update database monitoring command and remove duplicate ([c034e5c8](https://github.com/guanguans/laravel-skeleton/commit/c034e5c8))
+- **app:** update database monitoring configuration ([4ce908d4](https://github.com/guanguans/laravel-skeleton/commit/4ce908d4))
+- **app:** replace shorthand type references with fully qualified ones ([18089d2c](https://github.com/guanguans/laravel-skeleton/commit/18089d2c))
+- **app:** rename FoundationSdk to FoundationSDK ([e6bfb140](https://github.com/guanguans/laravel-skeleton/commit/e6bfb140))
+- **app:** Add Gate::before hook ([98318b83](https://github.com/guanguans/laravel-skeleton/commit/98318b83))
+- **app:** replace constructor with getDefinition for Configureable trait ([3f99c011](https://github.com/guanguans/laravel-skeleton/commit/3f99c011))
+- **app:** improve class filtering logic in AppServiceProvider ([1bd63c7a](https://github.com/guanguans/laravel-skeleton/commit/1bd63c7a))
+- **app:** update type hints and imports ([4a8e5928](https://github.com/guanguans/laravel-skeleton/commit/4a8e5928))
+- **app:** Remove unnecessary code in listenEvents method ([a61abdf7](https://github.com/guanguans/laravel-skeleton/commit/a61abdf7))
+- **auth:** 优化登出功能并改进时间处理 ([a179cdbf](https://github.com/guanguans/laravel-skeleton/commit/a179cdbf))
+- **bootstrap:** register core kernel classes ([97315e86](https://github.com/guanguans/laravel-skeleton/commit/97315e86))
+- **casting:** improve arguments handling in CommaSeparatedToArrayCastUsing ([ce849e0c](https://github.com/guanguans/laravel-skeleton/commit/ce849e0c))
+- **circuit-breaker:** improve Redis adapter instantiation logic ([cac85bc9](https://github.com/guanguans/laravel-skeleton/commit/cac85bc9))
+- **client:** update Client constructor parameters ([498a3b6f](https://github.com/guanguans/laravel-skeleton/commit/498a3b6f))
+- **client:** refactor constructor ([540c3c96](https://github.com/guanguans/laravel-skeleton/commit/540c3c96))
+- **command:** Improve OptimizeAllCommand structure ([8ce33441](https://github.com/guanguans/laravel-skeleton/commit/8ce33441))
+- **command:** remove TailCommand.php ([8e43c512](https://github.com/guanguans/laravel-skeleton/commit/8e43c512))
+- **command:** rename ShowRequiresCommand to ShowUnsupportedRequiresCommand ([b7b4b1e7](https://github.com/guanguans/laravel-skeleton/commit/b7b4b1e7))
+- **commands:** Add attributes for method overrides ([35c7df5b](https://github.com/guanguans/laravel-skeleton/commit/35c7df5b))
+- **composer:** remove unused packages ([e1eece9b](https://github.com/guanguans/laravel-skeleton/commit/e1eece9b))
+- **composer:** Remove symfony/polyfill-php82 dependency ([83e2f82d](https://github.com/guanguans/laravel-skeleton/commit/83e2f82d))
+- **composer-fixer:** Improve code readability and maintainability ([940517df](https://github.com/guanguans/laravel-skeleton/commit/940517df))
+- **composer-updater:** Add dry-run option and diff output formatting ([20fb2170](https://github.com/guanguans/laravel-skeleton/commit/20fb2170))
+- **composer-updater:** optimize composer package update ([42d10f8e](https://github.com/guanguans/laravel-skeleton/commit/42d10f8e))
+- **config:** rename lang-publisher.php to localization.php ([67a713ac](https://github.com/guanguans/laravel-skeleton/commit/67a713ac))
+- **config:** update exception notification configuration ([2deade3f](https://github.com/guanguans/laravel-skeleton/commit/2deade3f))
+- **config:** Update PHP CS Fixer and Rector rules ([8a73be2b](https://github.com/guanguans/laravel-skeleton/commit/8a73be2b))
+- **constants:** Update constant declarations to use type hints ([6d65a3e5](https://github.com/guanguans/laravel-skeleton/commit/6d65a3e5))
+- **core:** Change access modifier for global functions and macros ([dc639fd3](https://github.com/guanguans/laravel-skeleton/commit/dc639fd3))
+- **database:** remove PDO attribute for case sensitivity ([aa91de22](https://github.com/guanguans/laravel-skeleton/commit/aa91de22))
+- **database:** Update database.php and CanSeedOncePerDatabase.php ([68692f9f](https://github.com/guanguans/laravel-skeleton/commit/68692f9f))
+- **datetime:** replace date functions with Carbon ([46991b9d](https://github.com/guanguans/laravel-skeleton/commit/46991b9d))
+- **dependency injection:** Refactor autoInjection to dependencyInjection ([1942c069](https://github.com/guanguans/laravel-skeleton/commit/1942c069))
+- **dependency-injection:** Improve dependency injection logic ([9e09d112](https://github.com/guanguans/laravel-skeleton/commit/9e09d112))
+- **dependency_injection:** improve class filtering logic ([97cd1102](https://github.com/guanguans/laravel-skeleton/commit/97cd1102))
+- **elastic:** Update Elasticsearch namespaces and remove unused code ([03cae50c](https://github.com/guanguans/laravel-skeleton/commit/03cae50c))
+- **exceptions:** remove ExceptionNotifier reportIf method call ([4e0865d0](https://github.com/guanguans/laravel-skeleton/commit/4e0865d0))
+- **facades:** simplify tap method signatures ([000e5096](https://github.com/guanguans/laravel-skeleton/commit/000e5096))
+- **guzzle:** Improve CircuitBreakerGuzzleMiddleware constructor ([89a87dc7](https://github.com/guanguans/laravel-skeleton/commit/89a87dc7))
+- **health-check:** Improve service provider check and event handling ([ec53644e](https://github.com/guanguans/laravel-skeleton/commit/ec53644e))
+- **helpers:** refactor matching function ([2de4d08e](https://github.com/guanguans/laravel-skeleton/commit/2de4d08e))
+- **http:** Rename Client to SyncClient ([f8030e59](https://github.com/guanguans/laravel-skeleton/commit/f8030e59))
+- **http:** rename FgcClientTrait to ConcreteHttpRequestMethods ([b36bb9e4](https://github.com/guanguans/laravel-skeleton/commit/b36bb9e4))
+- **http:** update PsrClient configuration ([699bbd24](https://github.com/guanguans/laravel-skeleton/commit/699bbd24))
+- **http:** Rename SyncClient to FgcClient ([4fa0c053](https://github.com/guanguans/laravel-skeleton/commit/4fa0c053))
+- **http-client:** update SimpleHttpClient constructor ([2b192617](https://github.com/guanguans/laravel-skeleton/commit/2b192617))
+- **http-client:** Update default handler stack ([1af7acb3](https://github.com/guanguans/laravel-skeleton/commit/1af7acb3))
+- **http-log:** update logging mechanism and improve formatting ([b8011bf8](https://github.com/guanguans/laravel-skeleton/commit/b8011bf8))
+- **listener:** rename RunCommandInDebugListener to RunCommandInDebugModeListener ([4f31cc5b](https://github.com/guanguans/laravel-skeleton/commit/4f31cc5b))
+- **listener:** Improve exception handling in RunCommandInDebugModeEventListener ([1fe6b5e8](https://github.com/guanguans/laravel-skeleton/commit/1fe6b5e8))
+- **listener:** Improve debug mode check logic ([0c060c44](https://github.com/guanguans/laravel-skeleton/commit/0c060c44))
+- **listener:** rename RunCommandInDebugModeEventListener to RunCommandInDebugListener ([1357151d](https://github.com/guanguans/laravel-skeleton/commit/1357151d))
+- **middleware:** improve type hinting and code clarity ([a23b6932](https://github.com/guanguans/laravel-skeleton/commit/a23b6932))
+- **middleware:** Improve handling of user abilities check ([c33a61b3](https://github.com/guanguans/laravel-skeleton/commit/c33a61b3))
+- **middleware:** Rename VerifyProductionEnvironment to AbortIfProduction ([b87fc33b](https://github.com/guanguans/laravel-skeleton/commit/b87fc33b))
+- **middleware:** Improve data collection and handling ([fac77644](https://github.com/guanguans/laravel-skeleton/commit/fac77644))
+- **models:** Update date serialization format ([eb0f7c95](https://github.com/guanguans/laravel-skeleton/commit/eb0f7c95))
+- **models:** Update casts method in User model ([2768c9ec](https://github.com/guanguans/laravel-skeleton/commit/2768c9ec))
+- **php-cs-fixer:** simplify file append logic ([320decb0](https://github.com/guanguans/laravel-skeleton/commit/320decb0))
+- **psrclient:** update PsrClient class ([82594bf2](https://github.com/guanguans/laravel-skeleton/commit/82594bf2))
+- **rector:** Update Rector namespaces ([9c4cb18d](https://github.com/guanguans/laravel-skeleton/commit/9c4cb18d))
+- **rector:** add new Rector rules and configurations ([f6bb2738](https://github.com/guanguans/laravel-skeleton/commit/f6bb2738))
+- **rename:** Update RenameToPsrNameRector.php ([097a1ffc](https://github.com/guanguans/laravel-skeleton/commit/097a1ffc))
+- **request:** Replace request() with Request facade ([7fb328f5](https://github.com/guanguans/laravel-skeleton/commit/7fb328f5))
+- **response:** improve namespace imports ([5d79f8e3](https://github.com/guanguans/laravel-skeleton/commit/5d79f8e3))
+- **rules:** simplify validation failure handling ([eb5145c4](https://github.com/guanguans/laravel-skeleton/commit/eb5145c4))
+- **rules:** Simplify constructor visibility in rules classes ([79038a16](https://github.com/guanguans/laravel-skeleton/commit/79038a16))
+- **scheduling:** update userAppendOutputTo method ([21a74383](https://github.com/guanguans/laravel-skeleton/commit/21a74383))
+- **sdk:** rename default pending request methods ([97d1401f](https://github.com/guanguans/laravel-skeleton/commit/97d1401f))
+- **service:** improve class discovery logic ([a5e59b4e](https://github.com/guanguans/laravel-skeleton/commit/a5e59b4e))
+- **service providers:** Add #[\Override] attribute to service provider methods ([7c8ac50d](https://github.com/guanguans/laravel-skeleton/commit/7c8ac50d))
+- **serviceprovider:** Update shared log context ([d37a6f9d](https://github.com/guanguans/laravel-skeleton/commit/d37a6f9d))
+- **stream:** remove GlobStreamWrapper class ([eebbbb97](https://github.com/guanguans/laravel-skeleton/commit/eebbbb97))
+- **stream:** Simplify stream_metadata method using match expression ([d31309ba](https://github.com/guanguans/laravel-skeleton/commit/d31309ba))
+- **stream-wrappers:** refactor StreamWrapper and UserFileStreamWrapper classes ([876b6e9a](https://github.com/guanguans/laravel-skeleton/commit/876b6e9a))
+- **streamwrapper:** update mkdir, rename, and rmdir methods ([a6cb4544](https://github.com/guanguans/laravel-skeleton/commit/a6cb4544))
+- **streamwrappers:** Refactor stream wrapper constructors and destructors ([2667dfcf](https://github.com/guanguans/laravel-skeleton/commit/2667dfcf))
+- **syncclient:** remove unused code ([680398a5](https://github.com/guanguans/laravel-skeleton/commit/680398a5))
+- **syncclient:** remove unused code ([a24dc348](https://github.com/guanguans/laravel-skeleton/commit/a24dc348))
+- **type:** Add return types to functions for clarity ([c63c5597](https://github.com/guanguans/laravel-skeleton/commit/c63c5597))
+- **validates-input:** improve validator handling and code clarity ([0cfaf0d9](https://github.com/guanguans/laravel-skeleton/commit/0cfaf0d9))
+
+### 🏎 Performance Improvements
+- **rateLimiter:** Refactor apply method and fingerprint generation ([1f4eaa7d](https://github.com/guanguans/laravel-skeleton/commit/1f4eaa7d))
+
+### ✅ Tests
+- 添加 Bootloadable 特性并更新测试用例 ([e2229d2a](https://github.com/guanguans/laravel-skeleton/commit/e2229d2a))
+- **AppServiceProvider:** set up test database with seeding ([ef8ae2a7](https://github.com/guanguans/laravel-skeleton/commit/ef8ae2a7))
+- **ArchTest:** add initial test for debugging function usage ([24fdd2c1](https://github.com/guanguans/laravel-skeleton/commit/24fdd2c1))
+- **auth:** Refactor test cases and add custom TestCase ([91c69b3f](https://github.com/guanguans/laravel-skeleton/commit/91c69b3f))
+- **seeder:** Add CanSeedOncePerDatabase trait for idempotent seeding ([c47aaba9](https://github.com/guanguans/laravel-skeleton/commit/c47aaba9))
+
+### 📦 Builds
+- integrate Spatie Laravel stubs ([e5cc4733](https://github.com/guanguans/laravel-skeleton/commit/e5cc4733))
+- **composer:** Update package versions in composer.json ([ccab2b30](https://github.com/guanguans/laravel-skeleton/commit/ccab2b30))
+- **composer:** update package versions ([371e1692](https://github.com/guanguans/laravel-skeleton/commit/371e1692))
+- **composer:** update dependencies versions ([d740f3f8](https://github.com/guanguans/laravel-skeleton/commit/d740f3f8))
+- **composer:** Add new dependencies for project ([b4520c89](https://github.com/guanguans/laravel-skeleton/commit/b4520c89))
+- **dependencies:** Update package versions in composer.json ([0229d9be](https://github.com/guanguans/laravel-skeleton/commit/0229d9be))
+- **dependencies:** Add Inertia and related packages ([60e9a3b4](https://github.com/guanguans/laravel-skeleton/commit/60e9a3b4))
+- **dependencies:** Upgrade various package versions ([0064aa8d](https://github.com/guanguans/laravel-skeleton/commit/0064aa8d))
+- **dependencies:** Update and add new package versions ([225be32e](https://github.com/guanguans/laravel-skeleton/commit/225be32e))
+- **dependencies:** Update package versions in composer.json ([9ba38e7b](https://github.com/guanguans/laravel-skeleton/commit/9ba38e7b))
+- **dependencies:** Add new packages to composer.json ([c9338856](https://github.com/guanguans/laravel-skeleton/commit/c9338856))
+- **dependencies:** Update composer dependencies to latest versions ([9b636769](https://github.com/guanguans/laravel-skeleton/commit/9b636769))
+- **dependencies:** Add beyondcode/laravel-mailbox package ([4581a0b5](https://github.com/guanguans/laravel-skeleton/commit/4581a0b5))
+- **dependencies:** Upgrade composer dependencies ([f17e57ee](https://github.com/guanguans/laravel-skeleton/commit/f17e57ee))
+- **dependencies:** Update package versions in composer.json ([087fb0c5](https://github.com/guanguans/laravel-skeleton/commit/087fb0c5))
+- **dependencies:** Update API response package version ([6ccaae2c](https://github.com/guanguans/laravel-skeleton/commit/6ccaae2c))
+- **dependencies:** Update package versions in composer.json ([a0a856dd](https://github.com/guanguans/laravel-skeleton/commit/a0a856dd))
+- **dependencies:** Update guanguans/laravel-api-response version ([ae54dde1](https://github.com/guanguans/laravel-skeleton/commit/ae54dde1))
+- **dependencies:** update composer dependencies ([f150f4f9](https://github.com/guanguans/laravel-skeleton/commit/f150f4f9))
+- **dependencies:** update package versions in composer.json ([c1df6708](https://github.com/guanguans/laravel-skeleton/commit/c1df6708))
+- **dependencies:** Add new packages and update versions ([e9ebf6cf](https://github.com/guanguans/laravel-skeleton/commit/e9ebf6cf))
+- **dependencies:** Update Skeletor version to match compatibility range ([186b89e4](https://github.com/guanguans/laravel-skeleton/commit/186b89e4))
+- **deps:** 更新 laravel-migrations-generator 到 v7.0.7 ([8b0ab8ff](https://github.com/guanguans/laravel-skeleton/commit/8b0ab8ff))
+- **deps:** update composer dependencies ([463ed23e](https://github.com/guanguans/laravel-skeleton/commit/463ed23e))
+- **deps:** add laravel-horizon-restart package ([edc07b89](https://github.com/guanguans/laravel-skeleton/commit/edc07b89))
+- **deps:** update service providers and add new dependencies ([388409f6](https://github.com/guanguans/laravel-skeleton/commit/388409f6))
+- **deps:** 更新依赖并添加新包 ([3eacd594](https://github.com/guanguans/laravel-skeleton/commit/3eacd594))
+- **deps:** update composer dependencies- Add new packages: laravel-config-validator, laravel-db-sync, laravel-sent-emails, laravel-data-dumper, kacher, laravel-make-migration-pivot, idoc, laravel-scout-array-driver ([09b8d3f3](https://github.com/guanguans/laravel-skeleton/commit/09b8d3f3))
+- **deps:** update composer dependencies- Add new packages: fast-paginate, flaky, laravel-postal-code-validation, laravel-web-mailer, laravel-frontend-presets/tall, laravel/ui, proengsoft/laravel-jsvalidation ([b4b64b72](https://github.com/guanguans/laravel-skeleton/commit/b4b64b72))
+- **deps:** Add spatie/laravel-csp dependency ([7283d7d6](https://github.com/guanguans/laravel-skeleton/commit/7283d7d6))
+- **deps:** add laravel-auth-timeout package ([08dc5973](https://github.com/guanguans/laravel-skeleton/commit/08dc5973))
+- **vendor:** remove laravel-github-monolog and rename translation-checker ([0e84a1d2](https://github.com/guanguans/laravel-skeleton/commit/0e84a1d2))
+
+### 🤖 Continuous Integrations
+- apply php-cs-fixer ([bb5e7620](https://github.com/guanguans/laravel-skeleton/commit/bb5e7620))
+- apply php-cs-fixer ([4f7c9598](https://github.com/guanguans/laravel-skeleton/commit/4f7c9598))
+- **dependencies:** Update laravel-api-response version and scripts ([13c76a60](https://github.com/guanguans/laravel-skeleton/commit/13c76a60))
+- **skeletor:** Add Skeletor integration for command checks ([8b517738](https://github.com/guanguans/laravel-skeleton/commit/8b517738))
+
+### Pull Requests
+- Merge pull request [#1154](https://github.com/guanguans/laravel-skeleton/issues/1154) from guanguans/dependabot/composer/laravel-lang/common-6.7.0
+- Merge pull request [#1153](https://github.com/guanguans/laravel-skeleton/issues/1153) from guanguans/dependabot/composer/echolabsdev/prism-0.46.0
+- Merge pull request [#1152](https://github.com/guanguans/laravel-skeleton/issues/1152) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.11.2
+- Merge pull request [#1151](https://github.com/guanguans/laravel-skeleton/issues/1151) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-4.1.0
+- Merge pull request [#1150](https://github.com/guanguans/laravel-skeleton/issues/1150) from guanguans/dependabot/composer/orangehill/iseed-3.1.1
+- Merge pull request [#1149](https://github.com/guanguans/laravel-skeleton/issues/1149) from guanguans/dependabot/composer/guanguans/notify-3.1.1
+- Merge pull request [#1148](https://github.com/guanguans/laravel-skeleton/issues/1148) from guanguans/dependabot/composer/mpyw/laravel-cached-database-stickiness-2.2.0
+- Merge pull request [#1147](https://github.com/guanguans/laravel-skeleton/issues/1147) from guanguans/dependabot/composer/worksome/envy-1.4.0
+- Merge pull request [#1136](https://github.com/guanguans/laravel-skeleton/issues/1136) from guanguans/dependabot/composer/guanguans/laravel-api-response-2.0.1
+- Merge pull request [#1146](https://github.com/guanguans/laravel-skeleton/issues/1146) from guanguans/dependabot/composer/echolabsdev/prism-0.45.0
+- Merge pull request [#1145](https://github.com/guanguans/laravel-skeleton/issues/1145) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.4.1
+- Merge pull request [#1144](https://github.com/guanguans/laravel-skeleton/issues/1144) from guanguans/dependabot/composer/watson/validating-8.3.0
+- Merge pull request [#1143](https://github.com/guanguans/laravel-skeleton/issues/1143) from guanguans/dependabot/composer/leventcz/laravel-top-1.2.0
+- Merge pull request [#1142](https://github.com/guanguans/laravel-skeleton/issues/1142) from guanguans/dependabot/composer/spatie/laravel-health-1.32.4
+- Merge pull request [#1141](https://github.com/guanguans/laravel-skeleton/issues/1141) from guanguans/dependabot/composer/ryangjchandler/orbit-1.4.0
+- Merge pull request [#1140](https://github.com/guanguans/laravel-skeleton/issues/1140) from guanguans/dependabot/composer/spatie/laravel-backup-9.2.9
+- Merge pull request [#1139](https://github.com/guanguans/laravel-skeleton/issues/1139) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.70.2
+- Merge pull request [#1138](https://github.com/guanguans/laravel-skeleton/issues/1138) from guanguans/dependabot/composer/guanguans/laravel-soar-3.18.0
+- Merge pull request [#1137](https://github.com/guanguans/laravel-skeleton/issues/1137) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-4.7.0
+- Merge pull request [#1135](https://github.com/guanguans/laravel-skeleton/issues/1135) from guanguans/dependabot/composer/josezenem/laravel-make-migration-pivot-1.3.0
+- Merge pull request [#1134](https://github.com/guanguans/laravel-skeleton/issues/1134) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.8.1
+- Merge pull request [#1133](https://github.com/guanguans/laravel-skeleton/issues/1133) from guanguans/dependabot/composer/orchid/platform-14.46.0
+- Merge pull request [#1132](https://github.com/guanguans/laravel-skeleton/issues/1132) from guanguans/dependabot/composer/lanin/laravel-api-debugger-4.0.1
+- Merge pull request [#1131](https://github.com/guanguans/laravel-skeleton/issues/1131) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.1.2
+- Merge pull request [#1130](https://github.com/guanguans/laravel-skeleton/issues/1130) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-4.0.0
+- Merge pull request [#1129](https://github.com/guanguans/laravel-skeleton/issues/1129) from guanguans/dependabot/composer/onlime/laravel-http-client-global-logger-1.2.1
+- Merge pull request [#1128](https://github.com/guanguans/laravel-skeleton/issues/1128) from guanguans/dependabot/composer/laradumps/laradumps-3.5.2
+- Merge pull request [#1127](https://github.com/guanguans/laravel-skeleton/issues/1127) from guanguans/dependabot/composer/perryvandermeer/laravel-console-validator-1.2.0
+- Merge pull request [#1126](https://github.com/guanguans/laravel-skeleton/issues/1126) from guanguans/dependabot/composer/andreaselia/laravel-api-to-postman-2.1.0
+- Merge pull request [#1125](https://github.com/guanguans/laravel-skeleton/issues/1125) from guanguans/dependabot/composer/symfony/stopwatch-7.2.4
+- Merge pull request [#1124](https://github.com/guanguans/laravel-skeleton/issues/1124) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.1.1
+- Merge pull request [#1123](https://github.com/guanguans/laravel-skeleton/issues/1123) from guanguans/dependabot/composer/hammerstone/fast-paginate-2.0.0
+- Merge pull request [#1122](https://github.com/guanguans/laravel-skeleton/issues/1122) from guanguans/dependabot/composer/tabuna/breadcrumbs-4.3.0
+- Merge pull request [#1121](https://github.com/guanguans/laravel-skeleton/issues/1121) from guanguans/dependabot/composer/bensampo/laravel-enum-6.12.0
+- Merge pull request [#1120](https://github.com/guanguans/laravel-skeleton/issues/1120) from guanguans/dependabot/composer/spatie/laravel-responsecache-7.6.4
+- Merge pull request [#1119](https://github.com/guanguans/laravel-skeleton/issues/1119) from guanguans/dependabot/composer/dragon-code/pretty-routes-3.6.0
+- Merge pull request [#1098](https://github.com/guanguans/laravel-skeleton/issues/1098) from guanguans/dependabot/composer/ackintosh/ganesha-4.0.0
+- Merge pull request [#1106](https://github.com/guanguans/laravel-skeleton/issues/1106) from guanguans/dependabot/composer/square1/laravel-idempotency-12.0.0
+- Merge pull request [#1115](https://github.com/guanguans/laravel-skeleton/issues/1115) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.4.0
+- Merge pull request [#1118](https://github.com/guanguans/laravel-skeleton/issues/1118) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.10.3
+- Merge pull request [#1117](https://github.com/guanguans/laravel-skeleton/issues/1117) from guanguans/dependabot/composer/awobaz/compoships-2.4.1
+- Merge pull request [#1116](https://github.com/guanguans/laravel-skeleton/issues/1116) from guanguans/dependabot/composer/dragon-code/benchmark-3.1.0
+- Merge pull request [#1114](https://github.com/guanguans/laravel-skeleton/issues/1114) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.1.0
+- Merge pull request [#1113](https://github.com/guanguans/laravel-skeleton/issues/1113) from guanguans/dependabot/composer/dragon-code/laravel-deploy-operations-6.4.0
+- Merge pull request [#1112](https://github.com/guanguans/laravel-skeleton/issues/1112) from guanguans/dependabot/composer/dragon-code/laravel-route-names-1.6.0
+- Merge pull request [#1111](https://github.com/guanguans/laravel-skeleton/issues/1111) from guanguans/dependabot/composer/thedoctor0/laravel-factory-generator-1.4.4
+- Merge pull request [#1110](https://github.com/guanguans/laravel-skeleton/issues/1110) from guanguans/dependabot/composer/zircote/swagger-php-5.0.5
+- Merge pull request [#1109](https://github.com/guanguans/laravel-skeleton/issues/1109) from guanguans/dependabot/composer/spatie/laravel-health-1.32.3
+- Merge pull request [#1108](https://github.com/guanguans/laravel-skeleton/issues/1108) from guanguans/dependabot/composer/msamgan/laravel-env-keys-checker-1.6.0
+- Merge pull request [#1107](https://github.com/guanguans/laravel-skeleton/issues/1107) from guanguans/dependabot/composer/dragon-code/laravel-http-logger-1.5.0
+- Merge pull request [#1105](https://github.com/guanguans/laravel-skeleton/issues/1105) from guanguans/dependabot/composer/dragon-code/laravel-support-3.8.0
+- Merge pull request [#1104](https://github.com/guanguans/laravel-skeleton/issues/1104) from guanguans/dependabot/composer/anlutro/l4-settings-1.4.2
+- Merge pull request [#1103](https://github.com/guanguans/laravel-skeleton/issues/1103) from guanguans/dependabot/composer/laracraft-tech/laravel-schema-rules-1.5.0
+- Merge pull request [#1102](https://github.com/guanguans/laravel-skeleton/issues/1102) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.70.0
+- Merge pull request [#1101](https://github.com/guanguans/laravel-skeleton/issues/1101) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.12.7
+- Merge pull request [#1100](https://github.com/guanguans/laravel-skeleton/issues/1100) from guanguans/dependabot/composer/laravel/octane-2.8.1
+- Merge pull request [#1099](https://github.com/guanguans/laravel-skeleton/issues/1099) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.11.1
+- Merge pull request [#1097](https://github.com/guanguans/laravel-skeleton/issues/1097) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.10.3
+- Merge pull request [#1096](https://github.com/guanguans/laravel-skeleton/issues/1096) from guanguans/dependabot/composer/spatie/laravel-health-1.32.2
+- Merge pull request [#1095](https://github.com/guanguans/laravel-skeleton/issues/1095) from guanguans/dependabot/composer/guanguans/laravel-api-response-1.1.0
+- Merge pull request [#1094](https://github.com/guanguans/laravel-skeleton/issues/1094) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.5.5
+- Merge pull request [#1093](https://github.com/guanguans/laravel-skeleton/issues/1093) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.3.1
+- Merge pull request [#1092](https://github.com/guanguans/laravel-skeleton/issues/1092) from guanguans/dependabot/composer/spatie/laravel-route-attributes-1.25.1
+- Merge pull request [#1091](https://github.com/guanguans/laravel-skeleton/issues/1091) from guanguans/dependabot/composer/overtrue/laravel-query-logger-3.4.0
+- Merge pull request [#1090](https://github.com/guanguans/laravel-skeleton/issues/1090) from guanguans/dependabot/composer/stevebauman/location-7.5.0
+- Merge pull request [#1089](https://github.com/guanguans/laravel-skeleton/issues/1089) from guanguans/dependabot/composer/opcodesio/log-viewer-3.15.0
+- Merge pull request [#1088](https://github.com/guanguans/laravel-skeleton/issues/1088) from guanguans/dependabot/composer/spatie/laravel-ignition-2.9.1
+- Merge pull request [#1087](https://github.com/guanguans/laravel-skeleton/issues/1087) from guanguans/dependabot/composer/laravel/framework-11.43.2
+- Merge pull request [#1084](https://github.com/guanguans/laravel-skeleton/issues/1084) from guanguans/dependabot/composer/phiki/phiki-1.1.3
+- Merge pull request [#1083](https://github.com/guanguans/laravel-skeleton/issues/1083) from guanguans/dependabot/composer/laravel/framework-11.43.1
+- Merge pull request [#1082](https://github.com/guanguans/laravel-skeleton/issues/1082) from guanguans/dependabot/composer/rector/swiss-knife-2.1.15
+- Merge pull request [#1081](https://github.com/guanguans/laravel-skeleton/issues/1081) from guanguans/dependabot/composer/nunomaduro/laravel-console-task-1.10.0
+- Merge pull request [#1080](https://github.com/guanguans/laravel-skeleton/issues/1080) from guanguans/dependabot/composer/worksome/envy-1.3.1
+- Merge pull request [#1079](https://github.com/guanguans/laravel-skeleton/issues/1079) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.10.5
+- Merge pull request [#1078](https://github.com/guanguans/laravel-skeleton/issues/1078) from guanguans/dependabot/composer/soloterm/solo-0.4.0
+- Merge pull request [#1077](https://github.com/guanguans/laravel-skeleton/issues/1077) from guanguans/dependabot/composer/deployer/deployer-7.5.12
+- Merge pull request [#1076](https://github.com/guanguans/laravel-skeleton/issues/1076) from guanguans/dependabot/composer/spatie/laravel-failed-job-monitor-4.3.3
+- Merge pull request [#1075](https://github.com/guanguans/laravel-skeleton/issues/1075) from guanguans/dependabot/composer/rector/swiss-knife-2.1.12
+- Merge pull request [#1074](https://github.com/guanguans/laravel-skeleton/issues/1074) from guanguans/dependabot/composer/spatie/laravel-route-discovery-1.3.2
+- Merge pull request [#1073](https://github.com/guanguans/laravel-skeleton/issues/1073) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.12.6
+- Merge pull request [#1072](https://github.com/guanguans/laravel-skeleton/issues/1072) from guanguans/dependabot/composer/bilfeldt/laravel-http-client-logger-2.4.0
+- Merge pull request [#1071](https://github.com/guanguans/laravel-skeleton/issues/1071) from guanguans/dependabot/composer/laravel-lang/common-6.5.0
+- Merge pull request [#1068](https://github.com/guanguans/laravel-skeleton/issues/1068) from guanguans/dependabot/composer/laragear/cache-query-5.0.0
+- Merge pull request [#1070](https://github.com/guanguans/laravel-skeleton/issues/1070) from guanguans/dependabot/composer/orangehill/iseed-3.1.0
+- Merge pull request [#1069](https://github.com/guanguans/laravel-skeleton/issues/1069) from guanguans/dependabot/composer/calebporzio/sushi-2.5.3
+- Merge pull request [#1065](https://github.com/guanguans/laravel-skeleton/issues/1065) from guanguans/dependabot/composer/hamidrezaniazi/pecs-2.0.0
+- Merge pull request [#1067](https://github.com/guanguans/laravel-skeleton/issues/1067) from guanguans/dependabot/composer/laravel/framework-11.42.1
+- Merge pull request [#1066](https://github.com/guanguans/laravel-skeleton/issues/1066) from guanguans/dependabot/composer/laravel-shift/factory-generator-2.1
+- Merge pull request [#1064](https://github.com/guanguans/laravel-skeleton/issues/1064) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.3.1
+- Merge pull request [#1059](https://github.com/guanguans/laravel-skeleton/issues/1059) from guanguans/dependabot/composer/rector/swiss-knife-2.1.10
+- Merge pull request [#1063](https://github.com/guanguans/laravel-skeleton/issues/1063) from guanguans/dependabot/composer/laravel/octane-2.7.0
+- Merge pull request [#1062](https://github.com/guanguans/laravel-skeleton/issues/1062) from guanguans/dependabot/composer/captainhook/captainhook-5.25.0
+- Merge pull request [#1061](https://github.com/guanguans/laravel-skeleton/issues/1061) from guanguans/dependabot/composer/laravel/pennant-1.16.0
+- Merge pull request [#1060](https://github.com/guanguans/laravel-skeleton/issues/1060) from guanguans/dependabot/composer/ackintosh/ganesha-3.2.0
+- Merge pull request [#1058](https://github.com/guanguans/laravel-skeleton/issues/1058) from guanguans/dependabot/composer/laravel/pulse-1.4.0
+- Merge pull request [#1057](https://github.com/guanguans/laravel-skeleton/issues/1057) from guanguans/dependabot/composer/laravel/telescope-5.5.0
+- Merge pull request [#1056](https://github.com/guanguans/laravel-skeleton/issues/1056) from guanguans/dependabot/composer/laravel/framework-11.42.0
+- Merge pull request [#1055](https://github.com/guanguans/laravel-skeleton/issues/1055) from guanguans/dependabot/composer/spatie/laravel-schemaless-attributes-2.5.1
+- Merge pull request [#1054](https://github.com/guanguans/laravel-skeleton/issues/1054) from guanguans/dependabot/composer/spatie/laravel-activitylog-4.10.1
+- Merge pull request [#1053](https://github.com/guanguans/laravel-skeleton/issues/1053) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.12.4
+- Merge pull request [#1052](https://github.com/guanguans/laravel-skeleton/issues/1052) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.8.0
+- Merge pull request [#1051](https://github.com/guanguans/laravel-skeleton/issues/1051) from guanguans/dependabot/composer/deployer/deployer-7.5.11
+- Merge pull request [#1050](https://github.com/guanguans/laravel-skeleton/issues/1050) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.12.3
+- Merge pull request [#1049](https://github.com/guanguans/laravel-skeleton/issues/1049) from guanguans/dependabot/composer/coduo/php-humanizer-5.0.2
+- Merge pull request [#1048](https://github.com/guanguans/laravel-skeleton/issues/1048) from guanguans/dependabot/composer/spatie/laravel-route-discovery-1.3.1
+- Merge pull request [#1047](https://github.com/guanguans/laravel-skeleton/issues/1047) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.10.0
+- Merge pull request [#1046](https://github.com/guanguans/laravel-skeleton/issues/1046) from guanguans/dependabot/composer/orchid/platform-14.45.2
+- Merge pull request [#1045](https://github.com/guanguans/laravel-skeleton/issues/1045) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.12.2
+- Merge pull request [#1044](https://github.com/guanguans/laravel-skeleton/issues/1044) from guanguans/dependabot/composer/rector/swiss-knife-2.1.9
+- Merge pull request [#1043](https://github.com/guanguans/laravel-skeleton/issues/1043) from guanguans/dependabot/composer/orchid/platform-14.45.1
+- Merge pull request [#1042](https://github.com/guanguans/laravel-skeleton/issues/1042) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.10.4
+- Merge pull request [#1041](https://github.com/guanguans/laravel-skeleton/issues/1041) from guanguans/dependabot/composer/staudenmeir/laravel-adjacency-list-1.23.3
+- Merge pull request [#1040](https://github.com/guanguans/laravel-skeleton/issues/1040) from guanguans/dependabot/composer/aaronfrancis/solo-0.3.1
+- Merge pull request [#1039](https://github.com/guanguans/laravel-skeleton/issues/1039) from guanguans/dependabot/composer/spatie/laravel-backup-9.2.5
+- Merge pull request [#1038](https://github.com/guanguans/laravel-skeleton/issues/1038) from guanguans/dependabot/composer/spatie/laravel-settings-3.4.1
+- Merge pull request [#1037](https://github.com/guanguans/laravel-skeleton/issues/1037) from guanguans/dependabot/composer/laravel/framework-11.41.3
+- Merge pull request [#1036](https://github.com/guanguans/laravel-skeleton/issues/1036) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.68.5
+- Merge pull request [#1035](https://github.com/guanguans/laravel-skeleton/issues/1035) from guanguans/dependabot/composer/cerbero/enum-2.3.2
+- Merge pull request [#1034](https://github.com/guanguans/laravel-skeleton/issues/1034) from guanguans/dependabot/composer/rector/swiss-knife-2.1.7
+- Merge pull request [#1033](https://github.com/guanguans/laravel-skeleton/issues/1033) from guanguans/dependabot/composer/laragear/webauthn-3.1.1
+- Merge pull request [#1032](https://github.com/guanguans/laravel-skeleton/issues/1032) from guanguans/dependabot/composer/laragear/preload-2.0.1
+- Merge pull request [#1031](https://github.com/guanguans/laravel-skeleton/issues/1031) from guanguans/dependabot/composer/laragear/cache-query-4.2.2
+- Merge pull request [#1030](https://github.com/guanguans/laravel-skeleton/issues/1030) from guanguans/dependabot/composer/laragear/two-factor-2.1.1
+- Merge pull request [#1029](https://github.com/guanguans/laravel-skeleton/issues/1029) from guanguans/dependabot/composer/laravel/pennant-1.15.1
+- Merge pull request [#1028](https://github.com/guanguans/laravel-skeleton/issues/1028) from guanguans/dependabot/composer/laragear/discover-1.0.2
+- Merge pull request [#1027](https://github.com/guanguans/laravel-skeleton/issues/1027) from guanguans/dependabot/composer/laravel/sanctum-4.0.8
+- Merge pull request [#1026](https://github.com/guanguans/laravel-skeleton/issues/1026) from guanguans/dependabot/composer/laragear/cache-query-4.2.0
+- Merge pull request [#1025](https://github.com/guanguans/laravel-skeleton/issues/1025) from guanguans/dependabot/composer/laravel/envoy-2.10.2
+- Merge pull request [#1024](https://github.com/guanguans/laravel-skeleton/issues/1024) from guanguans/dependabot/composer/laravel/framework-11.41.0
+- Merge pull request [#1023](https://github.com/guanguans/laravel-skeleton/issues/1023) from guanguans/dependabot/composer/laravel/pail-1.2.2
+- Merge pull request [#1022](https://github.com/guanguans/laravel-skeleton/issues/1022) from guanguans/dependabot/composer/laravel/sail-1.41.0
+- Merge pull request [#1021](https://github.com/guanguans/laravel-skeleton/issues/1021) from guanguans/dependabot/composer/laravel/telescope-5.4.0
+- Merge pull request [#1020](https://github.com/guanguans/laravel-skeleton/issues/1020) from guanguans/dependabot/composer/laravel/pulse-1.3.4
+- Merge pull request [#1019](https://github.com/guanguans/laravel-skeleton/issues/1019) from guanguans/dependabot/composer/laravel/tinker-2.10.1
+- Merge pull request [#1018](https://github.com/guanguans/laravel-skeleton/issues/1018) from guanguans/dependabot/composer/laravel/octane-2.6.1
+- Merge pull request [#1017](https://github.com/guanguans/laravel-skeleton/issues/1017) from guanguans/dependabot/composer/arifhp86/laravel-clear-expired-cache-file-1.0.4
+- Merge pull request [#1016](https://github.com/guanguans/laravel-skeleton/issues/1016) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.68.3
+- Merge pull request [#1015](https://github.com/guanguans/laravel-skeleton/issues/1015) from guanguans/dependabot/composer/staudenmeir/laravel-adjacency-list-1.23.2
+- Merge pull request [#1014](https://github.com/guanguans/laravel-skeleton/issues/1014) from guanguans/dependabot/composer/salahhusa9/laravel-updater-1.2.4
+- Merge pull request [#1013](https://github.com/guanguans/laravel-skeleton/issues/1013) from guanguans/dependabot/composer/spatie/fork-1.2.4
+- Merge pull request [#1012](https://github.com/guanguans/laravel-skeleton/issues/1012) from guanguans/dependabot/composer/spatie/laravel-route-discovery-1.3.0
+- Merge pull request [#1011](https://github.com/guanguans/laravel-skeleton/issues/1011) from guanguans/dependabot/composer/coduo/php-humanizer-5.0.1
+- Merge pull request [#1010](https://github.com/guanguans/laravel-skeleton/issues/1010) from guanguans/dependabot/composer/bilfeldt/laravel-http-client-logger-2.3.0
+- Merge pull request [#1009](https://github.com/guanguans/laravel-skeleton/issues/1009) from guanguans/dependabot/composer/spatie/laravel-backup-9.2.4
+- Merge pull request [#1008](https://github.com/guanguans/laravel-skeleton/issues/1008) from guanguans/dependabot/composer/laravel/framework-11.40.0
+- Merge pull request [#1007](https://github.com/guanguans/laravel-skeleton/issues/1007) from guanguans/dependabot/github_actions/dependabot/fetch-metadata-2.3.0
+- Merge pull request [#1006](https://github.com/guanguans/laravel-skeleton/issues/1006) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.2.1
+- Merge pull request [#1005](https://github.com/guanguans/laravel-skeleton/issues/1005) from guanguans/dependabot/composer/buggregator/trap-1.13.3
+- Merge pull request [#1004](https://github.com/guanguans/laravel-skeleton/issues/1004) from guanguans/dependabot/composer/spatie/laravel-backup-9.2.3
+- Merge pull request [#1003](https://github.com/guanguans/laravel-skeleton/issues/1003) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.2.0
+- Merge pull request [#1002](https://github.com/guanguans/laravel-skeleton/issues/1002) from guanguans/dependabot/composer/laravel/framework-11.39.1
+- Merge pull request [#1001](https://github.com/guanguans/laravel-skeleton/issues/1001) from guanguans/dependabot/composer/laravel/framework-11.39.0
+- Merge pull request [#995](https://github.com/guanguans/laravel-skeleton/issues/995) from guanguans/dependabot/composer/elao/enum-2.5.2
+- Merge pull request [#1000](https://github.com/guanguans/laravel-skeleton/issues/1000) from guanguans/dependabot/composer/buggregator/trap-1.13.1
+- Merge pull request [#999](https://github.com/guanguans/laravel-skeleton/issues/999) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.10.2
+- Merge pull request [#998](https://github.com/guanguans/laravel-skeleton/issues/998) from guanguans/dependabot/composer/stevebauman/location-7.4.1
+- Merge pull request [#997](https://github.com/guanguans/laravel-skeleton/issues/997) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.68.1
+- Merge pull request [#996](https://github.com/guanguans/laravel-skeleton/issues/996) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.9.2
+- Merge pull request [#994](https://github.com/guanguans/laravel-skeleton/issues/994) from guanguans/dependabot/composer/guanguans/laravel-soar-3.17.0
+- Merge pull request [#993](https://github.com/guanguans/laravel-skeleton/issues/993) from guanguans/dependabot/composer/hamidrezaniazi/pecs-1.1.0
+- Merge pull request [#992](https://github.com/guanguans/laravel-skeleton/issues/992) from guanguans/dependabot/composer/spatie/laravel-backup-9.2.2
+- Merge pull request [#991](https://github.com/guanguans/laravel-skeleton/issues/991) from guanguans/dependabot/composer/rector/swiss-knife-2.1.6
+- Merge pull request [#990](https://github.com/guanguans/laravel-skeleton/issues/990) from guanguans/dependabot/composer/laradumps/laradumps-3.5.1
+- Merge pull request [#989](https://github.com/guanguans/laravel-skeleton/issues/989) from guanguans/dependabot/composer/captainhook/captainhook-5.24.3
+- Merge pull request [#988](https://github.com/guanguans/laravel-skeleton/issues/988) from guanguans/dependabot/composer/cerbero/enum-2.3.1
+- Merge pull request [#987](https://github.com/guanguans/laravel-skeleton/issues/987) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.21
+- Merge pull request [#986](https://github.com/guanguans/laravel-skeleton/issues/986) from guanguans/dependabot/composer/buggregator/trap-1.12.0
+- Merge pull request [#985](https://github.com/guanguans/laravel-skeleton/issues/985) from guanguans/dependabot/composer/laravel/framework-11.38.2
+- Merge pull request [#984](https://github.com/guanguans/laravel-skeleton/issues/984) from guanguans/dependabot/composer/zircote/swagger-php-5.0.3
+- Merge pull request [#983](https://github.com/guanguans/laravel-skeleton/issues/983) from guanguans/dependabot/composer/laravel/pennant-1.15.0
+- Merge pull request [#982](https://github.com/guanguans/laravel-skeleton/issues/982) from guanguans/dependabot/composer/laravel/framework-11.38.1
+- Merge pull request [#981](https://github.com/guanguans/laravel-skeleton/issues/981) from guanguans/dependabot/composer/laravel/envoy-2.10.1
+- Merge pull request [#980](https://github.com/guanguans/laravel-skeleton/issues/980) from guanguans/dependabot/composer/laravel/pint-1.20.0
+- Merge pull request [#979](https://github.com/guanguans/laravel-skeleton/issues/979) from guanguans/dependabot/composer/laravel/pulse-1.3.3
+- Merge pull request [#978](https://github.com/guanguans/laravel-skeleton/issues/978) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.20
+- Merge pull request [#977](https://github.com/guanguans/laravel-skeleton/issues/977) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.5.4
+- Merge pull request [#976](https://github.com/guanguans/laravel-skeleton/issues/976) from guanguans/dependabot/composer/laravel/sail-1.40.0
+- Merge pull request [#975](https://github.com/guanguans/laravel-skeleton/issues/975) from guanguans/dependabot/composer/laravel/telescope-5.3.0
+- Merge pull request [#974](https://github.com/guanguans/laravel-skeleton/issues/974) from guanguans/dependabot/composer/spatie/laravel-backup-9.2.1
+- Merge pull request [#973](https://github.com/guanguans/laravel-skeleton/issues/973) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.12.1
+- Merge pull request [#972](https://github.com/guanguans/laravel-skeleton/issues/972) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.68.0
+- Merge pull request [#971](https://github.com/guanguans/laravel-skeleton/issues/971) from guanguans/dependabot/composer/rector/swiss-knife-2.1.5
+- Merge pull request [#970](https://github.com/guanguans/laravel-skeleton/issues/970) from guanguans/dependabot/composer/spatie/laravel-route-discovery-1.2.0
+- Merge pull request [#969](https://github.com/guanguans/laravel-skeleton/issues/969) from guanguans/dependabot/composer/spatie/laravel-health-1.32.0
+- Merge pull request [#968](https://github.com/guanguans/laravel-skeleton/issues/968) from guanguans/dependabot/composer/cerbero/enum-2.3.0
+- Merge pull request [#967](https://github.com/guanguans/laravel-skeleton/issues/967) from guanguans/dependabot/composer/guanguans/notify-2.14.0
+- Merge pull request [#966](https://github.com/guanguans/laravel-skeleton/issues/966) from guanguans/dependabot/composer/captainhook/captainhook-5.24.2
+- Merge pull request [#965](https://github.com/guanguans/laravel-skeleton/issues/965) from guanguans/dependabot/composer/spatie/php-structure-discoverer-2.3.0
+- Merge pull request [#962](https://github.com/guanguans/laravel-skeleton/issues/962) from guanguans/dependabot/composer/zircote/swagger-php-5.0.2
+- Merge pull request [#964](https://github.com/guanguans/laravel-skeleton/issues/964) from guanguans/dependabot/composer/bennett-treptow/laravel-migration-generator-4.4.2
+- Merge pull request [#963](https://github.com/guanguans/laravel-skeleton/issues/963) from guanguans/dependabot/composer/opcodesio/log-viewer-3.14.0
+- Merge pull request [#961](https://github.com/guanguans/laravel-skeleton/issues/961) from guanguans/dependabot/composer/awobaz/compoships-2.4.0
+- Merge pull request [#960](https://github.com/guanguans/laravel-skeleton/issues/960) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.1.1
+- Merge pull request [#959](https://github.com/guanguans/laravel-skeleton/issues/959) from guanguans/dependabot/composer/guanguans/notify-2.13.0
+- Merge pull request [#958](https://github.com/guanguans/laravel-skeleton/issues/958) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.5.3
+- Merge pull request [#956](https://github.com/guanguans/laravel-skeleton/issues/956) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.67.0
+- Merge pull request [#955](https://github.com/guanguans/laravel-skeleton/issues/955) from guanguans/dependabot/composer/rector/swiss-knife-2.1.1
+- Merge pull request [#954](https://github.com/guanguans/laravel-skeleton/issues/954) from guanguans/dependabot/composer/sqids/sqids-0.5.0
+- Merge pull request [#953](https://github.com/guanguans/laravel-skeleton/issues/953) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.66.2
+- Merge pull request [#952](https://github.com/guanguans/laravel-skeleton/issues/952) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.5.2
+- Merge pull request [#951](https://github.com/guanguans/laravel-skeleton/issues/951) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.9.0
+- Merge pull request [#950](https://github.com/guanguans/laravel-skeleton/issues/950) from guanguans/dependabot/composer/pusher/pusher-php-server-7.2.7
+- Merge pull request [#949](https://github.com/guanguans/laravel-skeleton/issues/949) from guanguans/dependabot/composer/spatie/laravel-backup-9.2.0
+- Merge pull request [#948](https://github.com/guanguans/laravel-skeleton/issues/948) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.66.1
+- Merge pull request [#938](https://github.com/guanguans/laravel-skeleton/issues/938) from guanguans/dependabot/composer/laravel/pint-1.19.0
+- Merge pull request [#947](https://github.com/guanguans/laravel-skeleton/issues/947) from guanguans/dependabot/composer/rector/swiss-knife-2.1.0
+- Merge pull request [#946](https://github.com/guanguans/laravel-skeleton/issues/946) from guanguans/dependabot/composer/laravel/framework-11.37.0
+- Merge pull request [#945](https://github.com/guanguans/laravel-skeleton/issues/945) from guanguans/dependabot/composer/rector/swiss-knife-2.0.8
+- Merge pull request [#944](https://github.com/guanguans/laravel-skeleton/issues/944) from guanguans/dependabot/composer/symfony/stopwatch-7.2.2
+- Merge pull request [#943](https://github.com/guanguans/laravel-skeleton/issues/943) from guanguans/dependabot/composer/spatie/laravel-route-discovery-1.1.1
+- Merge pull request [#942](https://github.com/guanguans/laravel-skeleton/issues/942) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.11.1
+- Merge pull request [#941](https://github.com/guanguans/laravel-skeleton/issues/941) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.4.0
+- Merge pull request [#940](https://github.com/guanguans/laravel-skeleton/issues/940) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.66.0
+- Merge pull request [#939](https://github.com/guanguans/laravel-skeleton/issues/939) from guanguans/dependabot/composer/spatie/laravel-csp-2.10.2
+- Merge pull request [#937](https://github.com/guanguans/laravel-skeleton/issues/937) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.18
+- Merge pull request [#936](https://github.com/guanguans/laravel-skeleton/issues/936) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.7.3
+- Merge pull request [#935](https://github.com/guanguans/laravel-skeleton/issues/935) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.3.0
+- Merge pull request [#934](https://github.com/guanguans/laravel-skeleton/issues/934) from guanguans/dependabot/composer/spatie/laravel-route-discovery-1.1.0
+- Merge pull request [#933](https://github.com/guanguans/laravel-skeleton/issues/933) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.2.3
+- Merge pull request [#932](https://github.com/guanguans/laravel-skeleton/issues/932) from guanguans/dependabot/composer/coduo/php-matcher-6.0.17
+- Merge pull request [#931](https://github.com/guanguans/laravel-skeleton/issues/931) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.17
+- Merge pull request [#930](https://github.com/guanguans/laravel-skeleton/issues/930) from guanguans/dependabot/composer/elasticsearch/elasticsearch-8.17.0
+- Merge pull request [#929](https://github.com/guanguans/laravel-skeleton/issues/929) from guanguans/dependabot/composer/laravel/framework-11.36.1
+- Merge pull request [#928](https://github.com/guanguans/laravel-skeleton/issues/928) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.3.0
+- Merge pull request [#927](https://github.com/guanguans/laravel-skeleton/issues/927) from guanguans/dependabot/composer/laminas/laminas-diagnostics-1.27.0
+- Merge pull request [#926](https://github.com/guanguans/laravel-skeleton/issues/926) from guanguans/dependabot/composer/laravel/sanctum-4.0.7
+- Merge pull request [#925](https://github.com/guanguans/laravel-skeleton/issues/925) from guanguans/dependabot/composer/laravel/pulse-1.3.2
+- Merge pull request [#924](https://github.com/guanguans/laravel-skeleton/issues/924) from guanguans/dependabot/composer/laravel/pennant-1.14.0
+- Merge pull request [#923](https://github.com/guanguans/laravel-skeleton/issues/923) from guanguans/dependabot/composer/laravel/framework-11.36.0
+- Merge pull request [#922](https://github.com/guanguans/laravel-skeleton/issues/922) from guanguans/dependabot/composer/spatie/php-structure-discoverer-2.2.1
+- Merge pull request [#921](https://github.com/guanguans/laravel-skeleton/issues/921) from guanguans/dependabot/composer/rector/swiss-knife-2.0.3
+- Merge pull request [#920](https://github.com/guanguans/laravel-skeleton/issues/920) from guanguans/dependabot/composer/laradumps/laradumps-3.5.0
+- Merge pull request [#919](https://github.com/guanguans/laravel-skeleton/issues/919) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.8.2
+- Merge pull request [#918](https://github.com/guanguans/laravel-skeleton/issues/918) from guanguans/dependabot/composer/laragear/cache-query-4.1.0
+- Merge pull request [#916](https://github.com/guanguans/laravel-skeleton/issues/916) from guanguans/dependabot/composer/rector/swiss-knife-2.0.2
+- Merge pull request [#917](https://github.com/guanguans/laravel-skeleton/issues/917) from guanguans/dependabot/composer/laravel/pulse-1.3.1
+- Merge pull request [#915](https://github.com/guanguans/laravel-skeleton/issues/915) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.10.2
+- Merge pull request [#914](https://github.com/guanguans/laravel-skeleton/issues/914) from guanguans/dependabot/composer/arifhp86/laravel-clear-expired-cache-file-1.0.3
+- Merge pull request [#913](https://github.com/guanguans/laravel-skeleton/issues/913) from guanguans/dependabot/composer/laravel/framework-11.35.1
+- Merge pull request [#912](https://github.com/guanguans/laravel-skeleton/issues/912) from guanguans/dependabot/composer/spatie/fork-1.2.3
+- Merge pull request [#911](https://github.com/guanguans/laravel-skeleton/issues/911) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.2.2
+- Merge pull request [#910](https://github.com/guanguans/laravel-skeleton/issues/910) from guanguans/dependabot/composer/aaronfrancis/solo-0.2.2
+- Merge pull request [#909](https://github.com/guanguans/laravel-skeleton/issues/909) from guanguans/dependabot/composer/spatie/laravel-responsecache-7.6.3
+- Merge pull request [#908](https://github.com/guanguans/laravel-skeleton/issues/908) from guanguans/dependabot/composer/spatie/laravel-route-discovery-1.0.5
+- Merge pull request [#907](https://github.com/guanguans/laravel-skeleton/issues/907) from guanguans/dependabot/composer/dragon-code/pretty-routes-3.5.0
+- Merge pull request [#906](https://github.com/guanguans/laravel-skeleton/issues/906) from guanguans/dependabot/composer/laravel/pulse-1.3.0
+- Merge pull request [#905](https://github.com/guanguans/laravel-skeleton/issues/905) from guanguans/dependabot/composer/laravel/framework-11.35.0
+- Merge pull request [#904](https://github.com/guanguans/laravel-skeleton/issues/904) from guanguans/dependabot/composer/laravel/sanctum-4.0.6
+- Merge pull request [#900](https://github.com/guanguans/laravel-skeleton/issues/900) from guanguans/dependabot/composer/buggregator/trap-1.11.1
+- Merge pull request [#902](https://github.com/guanguans/laravel-skeleton/issues/902) from guanguans/dependabot/composer/spatie/laravel-health-1.31.0
+- Merge pull request [#903](https://github.com/guanguans/laravel-skeleton/issues/903) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.11.0
+- Merge pull request [#901](https://github.com/guanguans/laravel-skeleton/issues/901) from guanguans/dependabot/composer/spatie/laravel-responsecache-7.6.2
+- Merge pull request [#899](https://github.com/guanguans/laravel-skeleton/issues/899) from guanguans/dependabot/composer/spatie/laravel-route-attributes-1.25.0
+- Merge pull request [#898](https://github.com/guanguans/laravel-skeleton/issues/898) from guanguans/dependabot/composer/driftingly/rector-laravel-1.2.6
+- Merge pull request [#897](https://github.com/guanguans/laravel-skeleton/issues/897) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.45.0
+- Merge pull request [#896](https://github.com/guanguans/laravel-skeleton/issues/896) from guanguans/dependabot/composer/spatie/laravel-ignition-2.9.0
+- Merge pull request [#895](https://github.com/guanguans/laravel-skeleton/issues/895) from guanguans/dependabot/composer/spatie/guzzle-rate-limiter-middleware-2.1.0
+- Merge pull request [#894](https://github.com/guanguans/laravel-skeleton/issues/894) from guanguans/dependabot/composer/laradumps/laradumps-3.4.0
+- Merge pull request [#893](https://github.com/guanguans/laravel-skeleton/issues/893) from guanguans/dependabot/composer/laradumps/laradumps-3.3.2
+- Merge pull request [#892](https://github.com/guanguans/laravel-skeleton/issues/892) from guanguans/dependabot/composer/symfony/stopwatch-7.2.0
+- Merge pull request [#891](https://github.com/guanguans/laravel-skeleton/issues/891) from guanguans/dependabot/composer/kevinrob/guzzle-cache-middleware-6.0.0
+- Merge pull request [#890](https://github.com/guanguans/laravel-skeleton/issues/890) from guanguans/dependabot/composer/tabuna/breadcrumbs-4.2.1
+- Merge pull request [#889](https://github.com/guanguans/laravel-skeleton/issues/889) from guanguans/dependabot/composer/guanguans/laravel-api-response-1.0.10
+- Merge pull request [#888](https://github.com/guanguans/laravel-skeleton/issues/888) from guanguans/dependabot/composer/laravel/framework-11.34.2
+- Merge pull request [#887](https://github.com/guanguans/laravel-skeleton/issues/887) from guanguans/dependabot/composer/laravel/sail-1.39.1
+- Merge pull request [#886](https://github.com/guanguans/laravel-skeleton/issues/886) from guanguans/dependabot/composer/deployer/deployer-7.5.8
+- Merge pull request [#882](https://github.com/guanguans/laravel-skeleton/issues/882) from guanguans/dependabot/composer/deployer/deployer-7.5.6
+- Merge pull request [#885](https://github.com/guanguans/laravel-skeleton/issues/885) from guanguans/dependabot/composer/laravel/sail-1.39.0
+- Merge pull request [#884](https://github.com/guanguans/laravel-skeleton/issues/884) from guanguans/dependabot/composer/captainhook/captainhook-5.24.1
+- Merge pull request [#883](https://github.com/guanguans/laravel-skeleton/issues/883) from guanguans/dependabot/composer/tabuna/breadcrumbs-4.2.0
+- Merge pull request [#881](https://github.com/guanguans/laravel-skeleton/issues/881) from guanguans/dependabot/composer/laravel/sanctum-4.0.5
+- Merge pull request [#880](https://github.com/guanguans/laravel-skeleton/issues/880) from guanguans/dependabot/composer/laravel/framework-11.34.1
+- Merge pull request [#879](https://github.com/guanguans/laravel-skeleton/issues/879) from guanguans/dependabot/composer/laravel/pulse-1.2.7
+- Merge pull request [#878](https://github.com/guanguans/laravel-skeleton/issues/878) from guanguans/dependabot/composer/laravel/pint-1.18.3
+- Merge pull request [#877](https://github.com/guanguans/laravel-skeleton/issues/877) from guanguans/dependabot/composer/orchid/platform-14.44.1
+- Merge pull request [#876](https://github.com/guanguans/laravel-skeleton/issues/876) from guanguans/dependabot/composer/laravel/octane-2.6.0
+- Merge pull request [#875](https://github.com/guanguans/laravel-skeleton/issues/875) from guanguans/dependabot/composer/laravel/telescope-5.2.6
+- Merge pull request [#874](https://github.com/guanguans/laravel-skeleton/issues/874) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.65.0
+- Merge pull request [#873](https://github.com/guanguans/laravel-skeleton/issues/873) from guanguans/dependabot/composer/captainhook/captainhook-5.24.0
+- Merge pull request [#872](https://github.com/guanguans/laravel-skeleton/issues/872) from guanguans/dependabot/composer/orchid/platform-14.44.0
+- Merge pull request [#871](https://github.com/guanguans/laravel-skeleton/issues/871) from guanguans/dependabot/composer/cerbero/enum-2.2.1
+- Merge pull request [#868](https://github.com/guanguans/laravel-skeleton/issues/868) from guanguans/dependabot/composer/predis/predis-2.3.0
+- Merge pull request [#870](https://github.com/guanguans/laravel-skeleton/issues/870) from guanguans/dependabot/composer/fakerphp/faker-1.24.1
+- Merge pull request [#869](https://github.com/guanguans/laravel-skeleton/issues/869) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.10.1
+- Merge pull request [#867](https://github.com/guanguans/laravel-skeleton/issues/867) from guanguans/dependabot/composer/nunomaduro/termwind-2.3.0
+- Merge pull request [#866](https://github.com/guanguans/laravel-skeleton/issues/866) from guanguans/dependabot/composer/laradumps/laradumps-3.3.1
+- Merge pull request [#865](https://github.com/guanguans/laravel-skeleton/issues/865) from guanguans/dependabot/composer/aaronfrancis/solo-0.2.1
+- Merge pull request [#864](https://github.com/guanguans/laravel-skeleton/issues/864) from guanguans/dependabot/composer/laravel/framework-11.33.2
+- Merge pull request [#863](https://github.com/guanguans/laravel-skeleton/issues/863) from guanguans/dependabot/composer/laravel/pint-1.18.2
+- Merge pull request [#862](https://github.com/guanguans/laravel-skeleton/issues/862) from guanguans/dependabot/composer/laminas/laminas-diagnostics-1.26.0
+- Merge pull request [#861](https://github.com/guanguans/laravel-skeleton/issues/861) from guanguans/dependabot/composer/laravel/framework-11.33.1
+- Merge pull request [#860](https://github.com/guanguans/laravel-skeleton/issues/860) from guanguans/dependabot/composer/cerbero/enum-2.2.0
+- Merge pull request [#859](https://github.com/guanguans/laravel-skeleton/issues/859) from guanguans/dependabot/composer/laravel/envoy-2.10.0
+- Merge pull request [#858](https://github.com/guanguans/laravel-skeleton/issues/858) from guanguans/dependabot/composer/laravel/sanctum-4.0.4
+- Merge pull request [#857](https://github.com/guanguans/laravel-skeleton/issues/857) from guanguans/dependabot/composer/spatie/laravel-responsecache-7.6.1
+- Merge pull request [#856](https://github.com/guanguans/laravel-skeleton/issues/856) from guanguans/dependabot/composer/laradumps/laradumps-3.3.0
+- Merge pull request [#855](https://github.com/guanguans/laravel-skeleton/issues/855) from guanguans/dependabot/composer/spatie/laravel-activitylog-4.9.1
+- Merge pull request [#854](https://github.com/guanguans/laravel-skeleton/issues/854) from guanguans/dependabot/composer/guanguans/laravel-api-response-1.0.9
+- Merge pull request [#853](https://github.com/guanguans/laravel-skeleton/issues/853) from guanguans/dependabot/composer/guanguans/notify-2.12.4
+- Merge pull request [#852](https://github.com/guanguans/laravel-skeleton/issues/852) from guanguans/dependabot/composer/elasticsearch/elasticsearch-8.16.0
+- Merge pull request [#851](https://github.com/guanguans/laravel-skeleton/issues/851) from guanguans/dependabot/composer/laravel/framework-11.32.0
+- Merge pull request [#850](https://github.com/guanguans/laravel-skeleton/issues/850) from guanguans/dependabot/composer/muhammadhuzaifa/telescope-guzzle-watcher-3.2.1
+- Merge pull request [#849](https://github.com/guanguans/laravel-skeleton/issues/849) from guanguans/dependabot/composer/guanguans/notify-2.12.3
+- Merge pull request [#848](https://github.com/guanguans/laravel-skeleton/issues/848) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.0.1
+- Merge pull request [#847](https://github.com/guanguans/laravel-skeleton/issues/847) from guanguans/dependabot/composer/yamadashy/phpstan-friendly-formatter-1.2.0
+- Merge pull request [#846](https://github.com/guanguans/laravel-skeleton/issues/846) from guanguans/dependabot/composer/aldemeery/sieve-3.0.1
+- Merge pull request [#845](https://github.com/guanguans/laravel-skeleton/issues/845) from guanguans/dependabot/composer/laravel/pennant-1.13.0
+- Merge pull request [#844](https://github.com/guanguans/laravel-skeleton/issues/844) from guanguans/dependabot/composer/laravel/framework-11.31.0
+- Merge pull request [#843](https://github.com/guanguans/laravel-skeleton/issues/843) from guanguans/dependabot/composer/laravel/pail-1.2.1
+- Merge pull request [#842](https://github.com/guanguans/laravel-skeleton/issues/842) from guanguans/dependabot/composer/guanguans/laravel-api-response-1.0.9
+- Merge pull request [#841](https://github.com/guanguans/laravel-skeleton/issues/841) from guanguans/dependabot/composer/laravel/sail-1.38.0
+- Merge pull request [#840](https://github.com/guanguans/laravel-skeleton/issues/840) from guanguans/dependabot/composer/larastan/larastan-2.9.11
+- Merge pull request [#839](https://github.com/guanguans/laravel-skeleton/issues/839) from guanguans/dependabot/composer/laravel/telescope-5.2.5
+- Merge pull request [#838](https://github.com/guanguans/laravel-skeleton/issues/838) from guanguans/dependabot/composer/laravel/pulse-1.2.6
+- Merge pull request [#837](https://github.com/guanguans/laravel-skeleton/issues/837) from guanguans/dependabot/composer/opcodesio/log-viewer-3.12.0
+- Merge pull request [#836](https://github.com/guanguans/laravel-skeleton/issues/836) from guanguans/dependabot/composer/guanguans/laravel-api-response-1.0.8
+- Merge pull request [#835](https://github.com/guanguans/laravel-skeleton/issues/835) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.10.1
+- Merge pull request [#834](https://github.com/guanguans/laravel-skeleton/issues/834) from guanguans/dependabot/composer/deployer/deployer-7.5.5
+- Merge pull request [#833](https://github.com/guanguans/laravel-skeleton/issues/833) from guanguans/dependabot/composer/laminas/laminas-diagnostics-1.25.0
+- Merge pull request [#832](https://github.com/guanguans/laravel-skeleton/issues/832) from guanguans/dependabot/composer/laradumps/laradumps-3.2.1
+- Merge pull request [#831](https://github.com/guanguans/laravel-skeleton/issues/831) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.10.0
+- Merge pull request [#830](https://github.com/guanguans/laravel-skeleton/issues/830) from guanguans/dependabot/composer/aaronfrancis/solo-0.1.2
+- Merge pull request [#829](https://github.com/guanguans/laravel-skeleton/issues/829) from guanguans/dependabot/composer/guanguans/laravel-api-response-1.0.7
+- Merge pull request [#828](https://github.com/guanguans/laravel-skeleton/issues/828) from guanguans/dependabot/composer/rector/rector-1.2.10
+- Merge pull request [#827](https://github.com/guanguans/laravel-skeleton/issues/827) from guanguans/dependabot/composer/spatie/laravel-error-solutions-1.0.1
+- Merge pull request [#826](https://github.com/guanguans/laravel-skeleton/issues/826) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.10.0
+- Merge pull request [#825](https://github.com/guanguans/laravel-skeleton/issues/825) from guanguans/dependabot/composer/orchid/platform-14.43.0
+- Merge pull request [#824](https://github.com/guanguans/laravel-skeleton/issues/824) from guanguans/dependabot/composer/wendelladriel/laravel-lift-0.15.0
+- Merge pull request [#823](https://github.com/guanguans/laravel-skeleton/issues/823) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.9.0
+- Merge pull request [#822](https://github.com/guanguans/laravel-skeleton/issues/822) from guanguans/dependabot/composer/rector/rector-1.2.9
+- Merge pull request [#821](https://github.com/guanguans/laravel-skeleton/issues/821) from guanguans/dependabot/composer/driftingly/rector-laravel-1.2.5
+- Merge pull request [#820](https://github.com/guanguans/laravel-skeleton/issues/820) from guanguans/dependabot/composer/orchid/platform-14.42.0
+- Merge pull request [#819](https://github.com/guanguans/laravel-skeleton/issues/819) from guanguans/dependabot/composer/captainhook/captainhook-5.23.6
+- Merge pull request [#818](https://github.com/guanguans/laravel-skeleton/issues/818) from guanguans/dependabot/composer/orchid/platform-14.41.0
+- Merge pull request [#817](https://github.com/guanguans/laravel-skeleton/issues/817) from guanguans/dependabot/composer/laravel/telescope-5.2.4
+- Merge pull request [#816](https://github.com/guanguans/laravel-skeleton/issues/816) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.2.2
+- Merge pull request [#815](https://github.com/guanguans/laravel-skeleton/issues/815) from guanguans/dependabot/composer/cerbero/enum-2.1.0
+- Merge pull request [#814](https://github.com/guanguans/laravel-skeleton/issues/814) from guanguans/dependabot/composer/laravel/sail-1.37.1
+- Merge pull request [#813](https://github.com/guanguans/laravel-skeleton/issues/813) from guanguans/dependabot/composer/jiannei/laravel-response-6.0.1
+- Merge pull request [#812](https://github.com/guanguans/laravel-skeleton/issues/812) from guanguans/dependabot/composer/laravel/framework-11.30.0
+- Merge pull request [#811](https://github.com/guanguans/laravel-skeleton/issues/811) from guanguans/dependabot/composer/deployer/deployer-7.5.4
+- Merge pull request [#810](https://github.com/guanguans/laravel-skeleton/issues/810) from guanguans/dependabot/composer/orchid/platform-14.38.0
+- Merge pull request [#809](https://github.com/guanguans/laravel-skeleton/issues/809) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.15
+- Merge pull request [#808](https://github.com/guanguans/laravel-skeleton/issues/808) from guanguans/dependabot/composer/laravel/framework-11.29.0
+- Merge pull request [#807](https://github.com/guanguans/laravel-skeleton/issues/807) from guanguans/dependabot/composer/laravel/sail-1.37.0
+- Merge pull request [#806](https://github.com/guanguans/laravel-skeleton/issues/806) from guanguans/dependabot/composer/deployer/deployer-7.5.3
+- Merge pull request [#805](https://github.com/guanguans/laravel-skeleton/issues/805) from guanguans/dependabot/composer/zircote/swagger-php-4.11.1
+- Merge pull request [#804](https://github.com/guanguans/laravel-skeleton/issues/804) from guanguans/dependabot/composer/spatie/laravel-backup-9.1.3
+- Merge pull request [#803](https://github.com/guanguans/laravel-skeleton/issues/803) from guanguans/dependabot/composer/rector/rector-1.2.8
+- Merge pull request [#802](https://github.com/guanguans/laravel-skeleton/issues/802) from guanguans/dependabot/composer/spatie/laravel-route-attributes-1.24.0
+- Merge pull request [#801](https://github.com/guanguans/laravel-skeleton/issues/801) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.2.0
+- Merge pull request [#800](https://github.com/guanguans/laravel-skeleton/issues/800) from guanguans/dependabot/composer/pusher/pusher-php-server-7.2.6
+- Merge pull request [#799](https://github.com/guanguans/laravel-skeleton/issues/799) from guanguans/dependabot/composer/spatie/laravel-activitylog-4.9.0
+- Merge pull request [#798](https://github.com/guanguans/laravel-skeleton/issues/798) from guanguans/dependabot/composer/spatie/laravel-short-schedule-1.6.2
+- Merge pull request [#797](https://github.com/guanguans/laravel-skeleton/issues/797) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.9.2
+- Merge pull request [#796](https://github.com/guanguans/laravel-skeleton/issues/796) from guanguans/dependabot/composer/biiiiiigmonster/hasin-4.0.1
+- Merge pull request [#795](https://github.com/guanguans/laravel-skeleton/issues/795) from guanguans/dependabot/composer/laravel/framework-11.28.1
+- Merge pull request [#794](https://github.com/guanguans/laravel-skeleton/issues/794) from guanguans/dependabot/composer/larastan/larastan-2.9.9
+- Merge pull request [#793](https://github.com/guanguans/laravel-skeleton/issues/793) from guanguans/dependabot/composer/elao/enum-2.5.1
+- Merge pull request [#792](https://github.com/guanguans/laravel-skeleton/issues/792) from guanguans/dependabot/composer/laravel/framework-11.28.0
+- Merge pull request [#791](https://github.com/guanguans/laravel-skeleton/issues/791) from guanguans/dependabot/composer/nunomaduro/collision-8.5.0
+- Merge pull request [#790](https://github.com/guanguans/laravel-skeleton/issues/790) from guanguans/dependabot/composer/nunomaduro/termwind-2.2.0
+- Merge pull request [#789](https://github.com/guanguans/laravel-skeleton/issues/789) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.14
+- Merge pull request [#788](https://github.com/guanguans/laravel-skeleton/issues/788) from guanguans/dependabot/composer/laravel/telescope-5.2.3
+- Merge pull request [#787](https://github.com/guanguans/laravel-skeleton/issues/787) from guanguans/dependabot/composer/onlime/laravel-http-client-global-logger-1.2.0
+- Merge pull request [#786](https://github.com/guanguans/laravel-skeleton/issues/786) from guanguans/dependabot/composer/laravel/sail-1.36.0
+- Merge pull request [#785](https://github.com/guanguans/laravel-skeleton/issues/785) from guanguans/dependabot/composer/msamgan/laravel-env-keys-checker-1.4.1
+- Merge pull request [#784](https://github.com/guanguans/laravel-skeleton/issues/784) from guanguans/dependabot/composer/deployer/deployer-7.4.1
+- Merge pull request [#783](https://github.com/guanguans/laravel-skeleton/issues/783) from guanguans/dependabot/composer/rector/rector-1.2.7
+- Merge pull request [#782](https://github.com/guanguans/laravel-skeleton/issues/782) from guanguans/dependabot/composer/orchid/platform-14.37.0
+- Merge pull request [#781](https://github.com/guanguans/laravel-skeleton/issues/781) from guanguans/dependabot/composer/orchid/platform-14.36.2
+- Merge pull request [#780](https://github.com/guanguans/laravel-skeleton/issues/780) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.13
+- Merge pull request [#779](https://github.com/guanguans/laravel-skeleton/issues/779) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-3.5.0
+- Merge pull request [#778](https://github.com/guanguans/laravel-skeleton/issues/778) from guanguans/dependabot/composer/laravel/framework-11.27.2
+- Merge pull request [#777](https://github.com/guanguans/laravel-skeleton/issues/777) from guanguans/dependabot/composer/zircote/swagger-php-4.11.0
+- Merge pull request [#776](https://github.com/guanguans/laravel-skeleton/issues/776) from guanguans/dependabot/composer/spatie/laravel-backup-9.1.2
+- Merge pull request [#775](https://github.com/guanguans/laravel-skeleton/issues/775) from guanguans/dependabot/composer/laravel/sail-1.35.0
+- Merge pull request [#774](https://github.com/guanguans/laravel-skeleton/issues/774) from guanguans/dependabot/composer/laravel/octane-2.5.9
+- Merge pull request [#760](https://github.com/guanguans/laravel-skeleton/issues/760) from guanguans/dependabot/composer/rector/swiss-knife-1.0.0
+- Merge pull request [#773](https://github.com/guanguans/laravel-skeleton/issues/773) from guanguans/dependabot/composer/chrisdicarlo/laravel-config-checker-1.2.0
+- Merge pull request [#772](https://github.com/guanguans/laravel-skeleton/issues/772) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.12
+- Merge pull request [#771](https://github.com/guanguans/laravel-skeleton/issues/771) from guanguans/dependabot/composer/coduo/php-matcher-6.0.16
+- Merge pull request [#770](https://github.com/guanguans/laravel-skeleton/issues/770) from guanguans/dependabot/composer/chrisdicarlo/laravel-config-checker-1.1.0
+- Merge pull request [#769](https://github.com/guanguans/laravel-skeleton/issues/769) from guanguans/dependabot/composer/opcodesio/log-viewer-3.11.2
+- Merge pull request [#768](https://github.com/guanguans/laravel-skeleton/issues/768) from guanguans/dependabot/composer/dragon-code/laravel-deploy-operations-6.3.2
+- Merge pull request [#767](https://github.com/guanguans/laravel-skeleton/issues/767) from guanguans/dependabot/composer/rector/rector-1.2.6
+- Merge pull request [#766](https://github.com/guanguans/laravel-skeleton/issues/766) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.2.1
+- Merge pull request [#765](https://github.com/guanguans/laravel-skeleton/issues/765) from guanguans/dependabot/composer/zircote/swagger-php-4.10.7
+- Merge pull request [#764](https://github.com/guanguans/laravel-skeleton/issues/764) from guanguans/dependabot/composer/laravel/sanctum-4.0.3
+- Merge pull request [#763](https://github.com/guanguans/laravel-skeleton/issues/763) from guanguans/dependabot/composer/laravel/framework-11.26.0
+- Merge pull request [#762](https://github.com/guanguans/laravel-skeleton/issues/762) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.44.0
+- Merge pull request [#761](https://github.com/guanguans/laravel-skeleton/issues/761) from guanguans/dependabot/composer/guanguans/notify-2.12.2
+- Merge pull request [#759](https://github.com/guanguans/laravel-skeleton/issues/759) from guanguans/dependabot/composer/laravel/sail-1.34.0
+- Merge pull request [#758](https://github.com/guanguans/laravel-skeleton/issues/758) from guanguans/dependabot/composer/laravel/pennant-1.12.0
+- Merge pull request [#757](https://github.com/guanguans/laravel-skeleton/issues/757) from guanguans/dependabot/composer/laravel/octane-2.5.8
+- Merge pull request [#751](https://github.com/guanguans/laravel-skeleton/issues/751) from guanguans/dependabot/composer/tpetry/laravel-mysql-explain-2.0.0
+- Merge pull request [#756](https://github.com/guanguans/laravel-skeleton/issues/756) from guanguans/dependabot/composer/dragon-code/laravel-deploy-operations-6.3.1
+- Merge pull request [#755](https://github.com/guanguans/laravel-skeleton/issues/755) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.7.2
+- Merge pull request [#754](https://github.com/guanguans/laravel-skeleton/issues/754) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.2.0
+- Merge pull request [#753](https://github.com/guanguans/laravel-skeleton/issues/753) from guanguans/dependabot/composer/chrisdicarlo/laravel-config-checker-1.0.2
+- Merge pull request [#752](https://github.com/guanguans/laravel-skeleton/issues/752) from guanguans/dependabot/composer/orchid/platform-14.36.0
+- Merge pull request [#750](https://github.com/guanguans/laravel-skeleton/issues/750) from guanguans/dependabot/composer/overtrue/laravel-query-logger-3.3.0
+- Merge pull request [#749](https://github.com/guanguans/laravel-skeleton/issues/749) from guanguans/dependabot/composer/laravel/framework-11.25.0
+- Merge pull request [#748](https://github.com/guanguans/laravel-skeleton/issues/748) from guanguans/dependabot/composer/reliese/laravel-1.3.5
+- Merge pull request [#747](https://github.com/guanguans/laravel-skeleton/issues/747) from guanguans/dependabot/composer/laravel/framework-11.24.1
+- Merge pull request [#746](https://github.com/guanguans/laravel-skeleton/issues/746) from guanguans/dependabot/composer/buggregator/trap-1.11.0
+- Merge pull request [#745](https://github.com/guanguans/laravel-skeleton/issues/745) from guanguans/dependabot/composer/laravel/sail-1.33.0
+- Merge pull request [#744](https://github.com/guanguans/laravel-skeleton/issues/744) from guanguans/dependabot/composer/laravel/framework-11.24.0
+- Merge pull request [#743](https://github.com/guanguans/laravel-skeleton/issues/743) from guanguans/dependabot/composer/laravel/tinker-2.10.0
+- Merge pull request [#742](https://github.com/guanguans/laravel-skeleton/issues/742) from guanguans/dependabot/composer/laravel/octane-2.5.6
+- Merge pull request [#740](https://github.com/guanguans/laravel-skeleton/issues/740) from guanguans/dependabot/composer/laravel/pint-1.18.1
+- Merge pull request [#739](https://github.com/guanguans/laravel-skeleton/issues/739) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.1.0
+- Merge pull request [#738](https://github.com/guanguans/laravel-skeleton/issues/738) from guanguans/dependabot/composer/spatie/laravel-backup-9.1.1
+- Merge pull request [#737](https://github.com/guanguans/laravel-skeleton/issues/737) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.8.1
+- Merge pull request [#736](https://github.com/guanguans/laravel-skeleton/issues/736) from guanguans/dependabot/composer/spatie/laravel-settings-3.4.0
+- Merge pull request [#735](https://github.com/guanguans/laravel-skeleton/issues/735) from guanguans/dependabot/composer/spatie/laravel-csp-2.10.1
+- Merge pull request [#734](https://github.com/guanguans/laravel-skeleton/issues/734) from guanguans/dependabot/composer/wendelladriel/laravel-lift-0.14.2
+- Merge pull request [#733](https://github.com/guanguans/laravel-skeleton/issues/733) from guanguans/dependabot/composer/rector/swiss-knife-0.2.35
+- Merge pull request [#732](https://github.com/guanguans/laravel-skeleton/issues/732) from guanguans/dependabot/composer/tpetry/laravel-mysql-explain-1.3.2
+- Merge pull request [#731](https://github.com/guanguans/laravel-skeleton/issues/731) from guanguans/dependabot/composer/laravel/framework-11.23.5
+- Merge pull request [#730](https://github.com/guanguans/laravel-skeleton/issues/730) from guanguans/dependabot/composer/reliese/laravel-1.3.4
+- Merge pull request [#728](https://github.com/guanguans/laravel-skeleton/issues/728) from guanguans/dependabot/composer/laravel/framework-11.23.4
+- Merge pull request [#727](https://github.com/guanguans/laravel-skeleton/issues/727) from guanguans/dependabot/composer/driftingly/rector-laravel-1.2.4
+- Merge pull request [#726](https://github.com/guanguans/laravel-skeleton/issues/726) from guanguans/dependabot/composer/laravel/sail-1.32.0
+- Merge pull request [#725](https://github.com/guanguans/laravel-skeleton/issues/725) from guanguans/dependabot/composer/laravel/framework-11.23.0
+- Merge pull request [#724](https://github.com/guanguans/laravel-skeleton/issues/724) from guanguans/dependabot/composer/laravel/octane-2.5.5
+- Merge pull request [#723](https://github.com/guanguans/laravel-skeleton/issues/723) from guanguans/dependabot/composer/orchid/platform-14.35.1
+- Merge pull request [#722](https://github.com/guanguans/laravel-skeleton/issues/722) from guanguans/dependabot/composer/driftingly/rector-laravel-1.2.3
+- Merge pull request [#720](https://github.com/guanguans/laravel-skeleton/issues/720) from guanguans/dependabot/composer/guanguans/notify-2.12.1
+- Merge pull request [#721](https://github.com/guanguans/laravel-skeleton/issues/721) from guanguans/dependabot/composer/rector/rector-1.2.5
+- Merge pull request [#719](https://github.com/guanguans/laravel-skeleton/issues/719) from guanguans/dependabot/composer/symfony/polyfill-php83-1.31.0
+- Merge pull request [#718](https://github.com/guanguans/laravel-skeleton/issues/718) from guanguans/dependabot/composer/nyholm/psr7-1.8.2
+- Merge pull request [#717](https://github.com/guanguans/laravel-skeleton/issues/717) from guanguans/dependabot/composer/dragon-code/laravel-deploy-operations-6.2.2
+- Merge pull request [#716](https://github.com/guanguans/laravel-skeleton/issues/716) from guanguans/dependabot/composer/rector/swiss-knife-0.2.30
+- Merge pull request [#715](https://github.com/guanguans/laravel-skeleton/issues/715) from guanguans/dependabot/composer/captainhook/captainhook-5.23.5
+- Merge pull request [#714](https://github.com/guanguans/laravel-skeleton/issues/714) from guanguans/dependabot/composer/nunomaduro/termwind-2.1.0
+- Merge pull request [#713](https://github.com/guanguans/laravel-skeleton/issues/713) from guanguans/dependabot/composer/orchid/platform-14.34.0
+- Merge pull request [#712](https://github.com/guanguans/laravel-skeleton/issues/712) from guanguans/dependabot/composer/phpstan/extension-installer-1.4.3
+- Merge pull request [#711](https://github.com/guanguans/laravel-skeleton/issues/711) from guanguans/dependabot/composer/laravel/sail-1.31.3
+- Merge pull request [#710](https://github.com/guanguans/laravel-skeleton/issues/710) from guanguans/dependabot/composer/laravel/framework-11.22.0
+- Merge pull request [#709](https://github.com/guanguans/laravel-skeleton/issues/709) from guanguans/dependabot/composer/laravel/sail-1.31.2
+- Merge pull request [#708](https://github.com/guanguans/laravel-skeleton/issues/708) from guanguans/dependabot/composer/laravel/pulse-1.2.5
+- Merge pull request [#707](https://github.com/guanguans/laravel-skeleton/issues/707) from guanguans/dependabot/composer/laravel/pint-1.17.3
+- Merge pull request [#706](https://github.com/guanguans/laravel-skeleton/issues/706) from guanguans/dependabot/composer/driftingly/rector-laravel-1.2.2
+- Merge pull request [#705](https://github.com/guanguans/laravel-skeleton/issues/705) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.64.0
+- Merge pull request [#704](https://github.com/guanguans/laravel-skeleton/issues/704) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.9.1
+- Merge pull request [#703](https://github.com/guanguans/laravel-skeleton/issues/703) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.11
+- Merge pull request [#702](https://github.com/guanguans/laravel-skeleton/issues/702) from guanguans/dependabot/composer/orchid/platform-14.33.0
+- Merge pull request [#701](https://github.com/guanguans/laravel-skeleton/issues/701) from guanguans/dependabot/composer/orchid/platform-14.31.2
+- Merge pull request [#700](https://github.com/guanguans/laravel-skeleton/issues/700) from guanguans/dependabot/composer/laradumps/laradumps-3.2.0
+- Merge pull request [#699](https://github.com/guanguans/laravel-skeleton/issues/699) from guanguans/dependabot/composer/staudenmeir/laravel-adjacency-list-1.22.2
+- Merge pull request [#698](https://github.com/guanguans/laravel-skeleton/issues/698) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.9
+- Merge pull request [#697](https://github.com/guanguans/laravel-skeleton/issues/697) from guanguans/dependabot/composer/spatie/php-structure-discoverer-2.2.0
+- Merge pull request [#695](https://github.com/guanguans/laravel-skeleton/issues/695) from guanguans/dependabot/composer/nextbuild/database-viewer-1.0.0
+- Merge pull request [#696](https://github.com/guanguans/laravel-skeleton/issues/696) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.40
+- Merge pull request [#694](https://github.com/guanguans/laravel-skeleton/issues/694) from guanguans/dependabot/composer/staudenmeir/laravel-adjacency-list-1.22.1
+- Merge pull request [#693](https://github.com/guanguans/laravel-skeleton/issues/693) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.63.2
+- Merge pull request [#691](https://github.com/guanguans/laravel-skeleton/issues/691) from guanguans/dependabot/composer/nextbuild/database-viewer-0.9.0
+- Merge pull request [#692](https://github.com/guanguans/laravel-skeleton/issues/692) from guanguans/dependabot/composer/orchid/platform-14.31.0
+- Merge pull request [#690](https://github.com/guanguans/laravel-skeleton/issues/690) from guanguans/dependabot/composer/spatie/laravel-route-attributes-1.23.0
+- Merge pull request [#689](https://github.com/guanguans/laravel-skeleton/issues/689) from guanguans/dependabot/composer/laravel/telescope-5.2.2
+- Merge pull request [#688](https://github.com/guanguans/laravel-skeleton/issues/688) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.63.1
+- Merge pull request [#687](https://github.com/guanguans/laravel-skeleton/issues/687) from guanguans/dependabot/composer/phpstan/extension-installer-1.4.2
+- Merge pull request [#686](https://github.com/guanguans/laravel-skeleton/issues/686) from guanguans/dependabot/composer/orchid/platform-14.30.2
+- Merge pull request [#685](https://github.com/guanguans/laravel-skeleton/issues/685) from guanguans/dependabot/composer/rector/rector-1.2.4
+- Merge pull request [#684](https://github.com/guanguans/laravel-skeleton/issues/684) from guanguans/dependabot/composer/perryvandermeer/laravel-console-validator-1.1.0
+- Merge pull request [#683](https://github.com/guanguans/laravel-skeleton/issues/683) from guanguans/dependabot/composer/opcodesio/log-viewer-3.11.1
+- Merge pull request [#682](https://github.com/guanguans/laravel-skeleton/issues/682) from guanguans/dependabot/composer/orchid/platform-14.30.1
+- Merge pull request [#681](https://github.com/guanguans/laravel-skeleton/issues/681) from guanguans/dependabot/composer/captainhook/captainhook-5.23.4
+- Merge pull request [#680](https://github.com/guanguans/laravel-skeleton/issues/680) from guanguans/dependabot/composer/dragon-code/laravel-deploy-operations-6.2.1
+- Merge pull request [#679](https://github.com/guanguans/laravel-skeleton/issues/679) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.9.0
+- Merge pull request [#678](https://github.com/guanguans/laravel-skeleton/issues/678) from guanguans/dependabot/composer/bensampo/laravel-enum-6.11.1
+- Merge pull request [#677](https://github.com/guanguans/laravel-skeleton/issues/677) from guanguans/dependabot/composer/laravel/framework-11.21.0
+- Merge pull request [#676](https://github.com/guanguans/laravel-skeleton/issues/676) from guanguans/dependabot/composer/laravel/telescope-5.2.1
+- Merge pull request [#675](https://github.com/guanguans/laravel-skeleton/issues/675) from guanguans/dependabot/composer/laravel/pennant-1.11.0
+- Merge pull request [#674](https://github.com/guanguans/laravel-skeleton/issues/674) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.8.3
+- Merge pull request [#673](https://github.com/guanguans/laravel-skeleton/issues/673) from guanguans/dependabot/composer/laravel/octane-2.5.4
+- Merge pull request [#672](https://github.com/guanguans/laravel-skeleton/issues/672) from guanguans/dependabot/composer/pestphp/pest-2.35.1
+- Merge pull request [#671](https://github.com/guanguans/laravel-skeleton/issues/671) from guanguans/dependabot/composer/orchid/platform-14.28.2
+- Merge pull request [#670](https://github.com/guanguans/laravel-skeleton/issues/670) from guanguans/dependabot/composer/rector/swiss-knife-0.2.18
+- Merge pull request [#669](https://github.com/guanguans/laravel-skeleton/issues/669) from guanguans/dependabot/composer/guanguans/laravel-soar-3.16.3
+- Merge pull request [#668](https://github.com/guanguans/laravel-skeleton/issues/668) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-4.6.0
+- Merge pull request [#667](https://github.com/guanguans/laravel-skeleton/issues/667) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.22.0
+- Merge pull request [#666](https://github.com/guanguans/laravel-skeleton/issues/666) from guanguans/dependabot/composer/guanguans/notify-2.11.9
+- Merge pull request [#665](https://github.com/guanguans/laravel-skeleton/issues/665) from guanguans/dependabot/composer/reliese/laravel-1.3.3
+- Merge pull request [#664](https://github.com/guanguans/laravel-skeleton/issues/664) from guanguans/dependabot/composer/elasticsearch/elasticsearch-8.15.0
+- Merge pull request [#663](https://github.com/guanguans/laravel-skeleton/issues/663) from guanguans/dependabot/composer/laracraft-tech/laravel-schema-rules-1.4.1
+- Merge pull request [#662](https://github.com/guanguans/laravel-skeleton/issues/662) from guanguans/dependabot/composer/orchid/platform-14.28.1
+- Merge pull request [#661](https://github.com/guanguans/laravel-skeleton/issues/661) from guanguans/dependabot/composer/spatie/php-structure-discoverer-2.1.2
+- Merge pull request [#660](https://github.com/guanguans/laravel-skeleton/issues/660) from guanguans/dependabot/composer/spatie/laravel-settings-3.3.3
+- Merge pull request [#659](https://github.com/guanguans/laravel-skeleton/issues/659) from guanguans/dependabot/composer/rector/rector-1.2.3
+- Merge pull request [#658](https://github.com/guanguans/laravel-skeleton/issues/658) from guanguans/dependabot/composer/laradumps/laradumps-3.1.5
+- Merge pull request [#657](https://github.com/guanguans/laravel-skeleton/issues/657) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.8.2
+- Merge pull request [#656](https://github.com/guanguans/laravel-skeleton/issues/656) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.62.0
+- Merge pull request [#655](https://github.com/guanguans/laravel-skeleton/issues/655) from guanguans/dependabot/composer/spatie/laravel-webhook-client-3.4.2
+- Merge pull request [#654](https://github.com/guanguans/laravel-skeleton/issues/654) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.0.5
+- Merge pull request [#653](https://github.com/guanguans/laravel-skeleton/issues/653) from guanguans/dependabot/composer/laravel/framework-11.20.0
+- Merge pull request [#652](https://github.com/guanguans/laravel-skeleton/issues/652) from guanguans/dependabot/composer/laravel/telescope-5.2.0
+- Merge pull request [#651](https://github.com/guanguans/laravel-skeleton/issues/651) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.39
+- Merge pull request [#650](https://github.com/guanguans/laravel-skeleton/issues/650) from guanguans/dependabot/composer/laravel/octane-2.5.3
+- Merge pull request [#649](https://github.com/guanguans/laravel-skeleton/issues/649) from guanguans/dependabot/composer/laravel/pint-1.17.2
+- Merge pull request [#648](https://github.com/guanguans/laravel-skeleton/issues/648) from guanguans/dependabot/composer/laravel/sail-1.31.1
+- Merge pull request [#647](https://github.com/guanguans/laravel-skeleton/issues/647) from guanguans/dependabot/composer/spatie/laravel-responsecache-7.6.0
+- Merge pull request [#646](https://github.com/guanguans/laravel-skeleton/issues/646) from guanguans/dependabot/composer/opcodesio/log-viewer-3.10.2
+- Merge pull request [#645](https://github.com/guanguans/laravel-skeleton/issues/645) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.0.4
+- Merge pull request [#644](https://github.com/guanguans/laravel-skeleton/issues/644) from guanguans/dependabot/composer/nunomaduro/collision-8.4.0
+- Merge pull request [#643](https://github.com/guanguans/laravel-skeleton/issues/643) from guanguans/dependabot/composer/laradumps/laradumps-3.1.4
+- Merge pull request [#642](https://github.com/guanguans/laravel-skeleton/issues/642) from guanguans/dependabot/composer/spatie/laravel-health-1.30.1
+- Merge pull request [#641](https://github.com/guanguans/laravel-skeleton/issues/641) from guanguans/dependabot/composer/laravel/pint-1.17.1
+- Merge pull request [#640](https://github.com/guanguans/laravel-skeleton/issues/640) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.61.1
+- Merge pull request [#639](https://github.com/guanguans/laravel-skeleton/issues/639) from guanguans/dependabot/composer/driftingly/rector-laravel-1.2.1
+- Merge pull request [#638](https://github.com/guanguans/laravel-skeleton/issues/638) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.9.8
+- Merge pull request [#637](https://github.com/guanguans/laravel-skeleton/issues/637) from guanguans/dependabot/composer/laravel/framework-11.19.0
+- Merge pull request [#636](https://github.com/guanguans/laravel-skeleton/issues/636) from guanguans/dependabot/composer/orchid/platform-14.27.2
+- Merge pull request [#635](https://github.com/guanguans/laravel-skeleton/issues/635) from guanguans/dependabot/composer/zircote/swagger-php-4.10.6
+- Merge pull request [#634](https://github.com/guanguans/laravel-skeleton/issues/634) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.8.1
+- Merge pull request [#633](https://github.com/guanguans/laravel-skeleton/issues/633) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.8.1
+- Merge pull request [#632](https://github.com/guanguans/laravel-skeleton/issues/632) from guanguans/dependabot/composer/laravel/framework-11.18.1
+- Merge pull request [#631](https://github.com/guanguans/laravel-skeleton/issues/631) from guanguans/dependabot/composer/spatie/laravel-health-1.30.0
+- Merge pull request [#630](https://github.com/guanguans/laravel-skeleton/issues/630) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.7.1
+- Merge pull request [#629](https://github.com/guanguans/laravel-skeleton/issues/629) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.60.0
+- Merge pull request [#628](https://github.com/guanguans/laravel-skeleton/issues/628) from guanguans/dependabot/composer/guzzlehttp/guzzle-7.9.2
+- Merge pull request [#627](https://github.com/guanguans/laravel-skeleton/issues/627) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.7.0
+- Merge pull request [#626](https://github.com/guanguans/laravel-skeleton/issues/626) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.8.0
+- Merge pull request [#625](https://github.com/guanguans/laravel-skeleton/issues/625) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.8.0
+- Merge pull request [#624](https://github.com/guanguans/laravel-skeleton/issues/624) from guanguans/dependabot/composer/laravel/pint-1.17.0
+- Merge pull request [#623](https://github.com/guanguans/laravel-skeleton/issues/623) from guanguans/dependabot/composer/orchid/platform-14.27.1
+- Merge pull request [#622](https://github.com/guanguans/laravel-skeleton/issues/622) from guanguans/dependabot/composer/laravel/sail-1.31.0
+- Merge pull request [#621](https://github.com/guanguans/laravel-skeleton/issues/621) from guanguans/dependabot/composer/laravel/pennant-1.10.0
+- Merge pull request [#620](https://github.com/guanguans/laravel-skeleton/issues/620) from guanguans/dependabot/composer/laravel/framework-11.17.0
+- Merge pull request [#619](https://github.com/guanguans/laravel-skeleton/issues/619) from guanguans/dependabot/composer/andreaselia/laravel-api-to-postman-2.0.6
+- Merge pull request [#618](https://github.com/guanguans/laravel-skeleton/issues/618) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.7.1
+- Merge pull request [#617](https://github.com/guanguans/laravel-skeleton/issues/617) from guanguans/dependabot/composer/guanguans/notify-2.11.8
+- Merge pull request [#616](https://github.com/guanguans/laravel-skeleton/issues/616) from guanguans/dependabot/composer/spatie/laravel-health-1.29.4
+- Merge pull request [#615](https://github.com/guanguans/laravel-skeleton/issues/615) from guanguans/dependabot/composer/guzzlehttp/guzzle-7.9.1
+- Merge pull request [#614](https://github.com/guanguans/laravel-skeleton/issues/614) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.7.0
+- Merge pull request [#613](https://github.com/guanguans/laravel-skeleton/issues/613) from guanguans/dependabot/composer/guanguans/notify-2.11.7
+- Merge pull request [#612](https://github.com/guanguans/laravel-skeleton/issues/612) from guanguans/dependabot/composer/guzzlehttp/guzzle-7.9.0
+- Merge pull request [#611](https://github.com/guanguans/laravel-skeleton/issues/611) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.7.6
+- Merge pull request [#610](https://github.com/guanguans/laravel-skeleton/issues/610) from guanguans/dependabot/composer/nunomaduro/collision-8.3.0
+- Merge pull request [#609](https://github.com/guanguans/laravel-skeleton/issues/609) from guanguans/dependabot/composer/laravel/framework-11.16.0
+- Merge pull request [#608](https://github.com/guanguans/laravel-skeleton/issues/608) from guanguans/dependabot/composer/guanguans/notify-2.11.6
+- Merge pull request [#607](https://github.com/guanguans/laravel-skeleton/issues/607) from guanguans/dependabot/composer/rector/rector-1.2.1
+- Merge pull request [#606](https://github.com/guanguans/laravel-skeleton/issues/606) from guanguans/dependabot/composer/spatie/laravel-failed-job-monitor-4.3.2
+- Merge pull request [#605](https://github.com/guanguans/laravel-skeleton/issues/605) from guanguans/dependabot/composer/zircote/swagger-php-4.10.5
+- Merge pull request [#604](https://github.com/guanguans/laravel-skeleton/issues/604) from guanguans/dependabot/composer/spatie/laravel-backup-9.0.4
+- Merge pull request [#603](https://github.com/guanguans/laravel-skeleton/issues/603) from guanguans/dependabot/composer/spatie/laravel-route-attributes-1.22.2
+- Merge pull request [#602](https://github.com/guanguans/laravel-skeleton/issues/602) from guanguans/dependabot/composer/spatie/laravel-health-1.29.3
+- Merge pull request [#601](https://github.com/guanguans/laravel-skeleton/issues/601) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.6.1
+- Merge pull request [#600](https://github.com/guanguans/laravel-skeleton/issues/600) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.7.5
+- Merge pull request [#599](https://github.com/guanguans/laravel-skeleton/issues/599) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.6.0
+- Merge pull request [#598](https://github.com/guanguans/laravel-skeleton/issues/598) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.1.0
+- Merge pull request [#597](https://github.com/guanguans/laravel-skeleton/issues/597) from guanguans/dependabot/composer/zircote/swagger-php-4.10.4
+- Merge pull request [#596](https://github.com/guanguans/laravel-skeleton/issues/596) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.6.0
+- Merge pull request [#595](https://github.com/guanguans/laravel-skeleton/issues/595) from guanguans/dependabot/composer/guanguans/notify-2.11.4
+- Merge pull request [#594](https://github.com/guanguans/laravel-skeleton/issues/594) from guanguans/dependabot/composer/laravel/sail-1.30.2
+- Merge pull request [#593](https://github.com/guanguans/laravel-skeleton/issues/593) from guanguans/dependabot/composer/laravel/framework-11.15.0
+- Merge pull request [#592](https://github.com/guanguans/laravel-skeleton/issues/592) from guanguans/dependabot/composer/spatie/laravel-backup-9.0.3
+- Merge pull request [#591](https://github.com/guanguans/laravel-skeleton/issues/591) from guanguans/dependabot/composer/guanguans/notify-2.11.3
+- Merge pull request [#590](https://github.com/guanguans/laravel-skeleton/issues/590) from guanguans/dependabot/composer/laravel/octane-2.5.2
+- Merge pull request [#589](https://github.com/guanguans/laravel-skeleton/issues/589) from guanguans/dependabot/composer/laravel/pulse-1.2.4
+- Merge pull request [#588](https://github.com/guanguans/laravel-skeleton/issues/588) from guanguans/dependabot/composer/laravel/pint-1.16.2
+- Merge pull request [#587](https://github.com/guanguans/laravel-skeleton/issues/587) from guanguans/dependabot/composer/laravel/pennant-1.9.0
+- Merge pull request [#585](https://github.com/guanguans/laravel-skeleton/issues/585) from guanguans/dependabot/composer/guanguans/notify-2.9.0
+- Merge pull request [#584](https://github.com/guanguans/laravel-skeleton/issues/584) from guanguans/dependabot/composer/phpunit/phpunit-10.5.26
+- Merge pull request [#583](https://github.com/guanguans/laravel-skeleton/issues/583) from guanguans/dependabot/composer/captainhook/captainhook-5.23.3
+- Merge pull request [#582](https://github.com/guanguans/laravel-skeleton/issues/582) from guanguans/dependabot/composer/laravel-lang/common-6.4.0
+- Merge pull request [#581](https://github.com/guanguans/laravel-skeleton/issues/581) from guanguans/dependabot/composer/larastan/larastan-2.9.8
+- Merge pull request [#580](https://github.com/guanguans/laravel-skeleton/issues/580) from guanguans/dependabot/github_actions/dependabot/fetch-metadata-2.2.0
+- Merge pull request [#579](https://github.com/guanguans/laravel-skeleton/issues/579) from guanguans/dependabot/composer/zircote/swagger-php-4.10.3
+- Merge pull request [#578](https://github.com/guanguans/laravel-skeleton/issues/578) from guanguans/dependabot/composer/spatie/laravel-backup-9.0.2
+- Merge pull request [#577](https://github.com/guanguans/laravel-skeleton/issues/577) from guanguans/dependabot/composer/spatie/laravel-backup-9.0.1
+- Merge pull request [#576](https://github.com/guanguans/laravel-skeleton/issues/576) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.5.0
+- Merge pull request [#575](https://github.com/guanguans/laravel-skeleton/issues/575) from guanguans/dependabot/composer/phpunit/phpunit-10.5.25
+- Merge pull request [#574](https://github.com/guanguans/laravel-skeleton/issues/574) from guanguans/dependabot/composer/zircote/swagger-php-4.10.2
+- Merge pull request [#573](https://github.com/guanguans/laravel-skeleton/issues/573) from guanguans/dependabot/composer/laravel/pennant-1.8.3
+- Merge pull request [#572](https://github.com/guanguans/laravel-skeleton/issues/572) from guanguans/dependabot/composer/laravel/framework-11.14.0
+- Merge pull request [#571](https://github.com/guanguans/laravel-skeleton/issues/571) from guanguans/dependabot/composer/laravel/sail-1.30.1
+- Merge pull request [#570](https://github.com/guanguans/laravel-skeleton/issues/570) from guanguans/dependabot/composer/zircote/swagger-php-4.10.1
+- Merge pull request [#569](https://github.com/guanguans/laravel-skeleton/issues/569) from guanguans/dependabot/composer/rector/swiss-knife-0.2.17
+- Merge pull request [#567](https://github.com/guanguans/laravel-skeleton/issues/567) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.7.3
+- Merge pull request [#566](https://github.com/guanguans/laravel-skeleton/issues/566) from guanguans/dependabot/composer/laravel/octane-2.5.1
+- Merge pull request [#565](https://github.com/guanguans/laravel-skeleton/issues/565) from guanguans/dependabot/composer/rector/rector-1.2.0
+- Merge pull request [#564](https://github.com/guanguans/laravel-skeleton/issues/564) from guanguans/dependabot/composer/orchid/platform-14.26.1
+- Merge pull request [#563](https://github.com/guanguans/laravel-skeleton/issues/563) from guanguans/dependabot/composer/stevebauman/location-7.3.2
+- Merge pull request [#562](https://github.com/guanguans/laravel-skeleton/issues/562) from guanguans/dependabot/composer/laravel/telescope-5.1.1
+- Merge pull request [#561](https://github.com/guanguans/laravel-skeleton/issues/561) from guanguans/dependabot/composer/spatie/laravel-health-1.29.1
+- Merge pull request [#560](https://github.com/guanguans/laravel-skeleton/issues/560) from guanguans/dependabot/composer/laravel/framework-11.13.0
+- Merge pull request [#559](https://github.com/guanguans/laravel-skeleton/issues/559) from guanguans/dependabot/composer/laravel/sail-1.30.0
+- Merge pull request [#558](https://github.com/guanguans/laravel-skeleton/issues/558) from guanguans/dependabot/composer/laravel/octane-2.5.0
+- Merge pull request [#557](https://github.com/guanguans/laravel-skeleton/issues/557) from guanguans/dependabot/composer/laravel/framework-11.12.0
+- Merge pull request [#556](https://github.com/guanguans/laravel-skeleton/issues/556) from guanguans/dependabot/composer/laravel/pennant-1.8.2
+- Merge pull request [#555](https://github.com/guanguans/laravel-skeleton/issues/555) from guanguans/dependabot/composer/not-empty/jwt-manager-php-lib-7.0.0
+- Merge pull request [#554](https://github.com/guanguans/laravel-skeleton/issues/554) from guanguans/dependabot/composer/rector/rector-1.1.1
+- Merge pull request [#553](https://github.com/guanguans/laravel-skeleton/issues/553) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.7.2
+- Merge pull request [#552](https://github.com/guanguans/laravel-skeleton/issues/552) from guanguans/dependabot/composer/stevebauman/location-7.3.1
+- Merge pull request [#551](https://github.com/guanguans/laravel-skeleton/issues/551) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.7.1
+- Merge pull request [#550](https://github.com/guanguans/laravel-skeleton/issues/550) from guanguans/dependabot/composer/laravel/framework-11.11.1
+- Merge pull request [#549](https://github.com/guanguans/laravel-skeleton/issues/549) from guanguans/dependabot/composer/buggregator/trap-1.10.0
+- Merge pull request [#548](https://github.com/guanguans/laravel-skeleton/issues/548) from guanguans/dependabot/composer/captainhook/captainhook-5.23.1
+- Merge pull request [#547](https://github.com/guanguans/laravel-skeleton/issues/547) from guanguans/dependabot/composer/symfony/polyfill-php83-1.30.0
+- Merge pull request [#546](https://github.com/guanguans/laravel-skeleton/issues/546) from guanguans/dependabot/composer/laravel/sail-1.29.3
+- Merge pull request [#545](https://github.com/guanguans/laravel-skeleton/issues/545) from guanguans/dependabot/composer/laravel/pint-1.16.1
+- Merge pull request [#544](https://github.com/guanguans/laravel-skeleton/issues/544) from guanguans/dependabot/composer/laravel/framework-11.11.0
+- Merge pull request [#543](https://github.com/guanguans/laravel-skeleton/issues/543) from guanguans/dependabot/composer/laravel/telescope-5.1.0
+- Merge pull request [#541](https://github.com/guanguans/laravel-skeleton/issues/541) from guanguans/dependabot/composer/not-empty/jwt-manager-php-lib-7.0.0
+- Merge pull request [#542](https://github.com/guanguans/laravel-skeleton/issues/542) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.7.0
+- Merge pull request [#540](https://github.com/guanguans/laravel-skeleton/issues/540) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.8.0
+- Merge pull request [#539](https://github.com/guanguans/laravel-skeleton/issues/539) from guanguans/dependabot/composer/guanguans/notify-2.8.4
+- Merge pull request [#538](https://github.com/guanguans/laravel-skeleton/issues/538) from guanguans/dependabot/composer/anlutro/l4-settings-1.4.1
+- Merge pull request [#537](https://github.com/guanguans/laravel-skeleton/issues/537) from guanguans/dependabot/composer/elasticsearch/elasticsearch-8.14.0
+- Merge pull request [#536](https://github.com/guanguans/laravel-skeleton/issues/536) from guanguans/dependabot/composer/dragon-code/laravel-deploy-operations-6.2.0
+- Merge pull request [#535](https://github.com/guanguans/laravel-skeleton/issues/535) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.37
+- Merge pull request [#534](https://github.com/guanguans/laravel-skeleton/issues/534) from guanguans/dependabot/composer/stevebauman/location-7.3.0
+- Merge pull request [#533](https://github.com/guanguans/laravel-skeleton/issues/533) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.6.0
+- Merge pull request [#532](https://github.com/guanguans/laravel-skeleton/issues/532) from guanguans/dependabot/composer/guanguans/notify-2.8.2
+- Merge pull request [#531](https://github.com/guanguans/laravel-skeleton/issues/531) from guanguans/dependabot/composer/spatie/laravel-ignition-2.8.0
+- Merge pull request [#530](https://github.com/guanguans/laravel-skeleton/issues/530) from guanguans/dependabot/composer/guanguans/laravel-soar-3.16.1
+- Merge pull request [#529](https://github.com/guanguans/laravel-skeleton/issues/529) from guanguans/dependabot/composer/phpstan/extension-installer-1.4.1
+- Merge pull request [#528](https://github.com/guanguans/laravel-skeleton/issues/528) from guanguans/dependabot/composer/laravel-lang/common-6.3.0
+- Merge pull request [#527](https://github.com/guanguans/laravel-skeleton/issues/527) from guanguans/dependabot/composer/buggregator/trap-1.9.0
+- Merge pull request [#526](https://github.com/guanguans/laravel-skeleton/issues/526) from guanguans/dependabot/composer/zircote/swagger-php-4.10.0
+- Merge pull request [#525](https://github.com/guanguans/laravel-skeleton/issues/525) from guanguans/dependabot/composer/elao/enum-2.5.0
+- Merge pull request [#524](https://github.com/guanguans/laravel-skeleton/issues/524) from guanguans/dependabot/composer/guanguans/laravel-soar-3.16.0
+- Merge pull request [#523](https://github.com/guanguans/laravel-skeleton/issues/523) from guanguans/dependabot/composer/guanguans/laravel-soar-3.15.0
+- Merge pull request [#522](https://github.com/guanguans/laravel-skeleton/issues/522) from guanguans/dependabot/composer/zircote/swagger-php-4.9.3
+- Merge pull request [#521](https://github.com/guanguans/laravel-skeleton/issues/521) from guanguans/dependabot/composer/phpstan/extension-installer-1.4.0
+- Merge pull request [#520](https://github.com/guanguans/laravel-skeleton/issues/520) from guanguans/dependabot/composer/reliese/laravel-1.3.2
+- Merge pull request [#519](https://github.com/guanguans/laravel-skeleton/issues/519) from guanguans/dependabot/composer/laravel-lang/common-6.2.1
+- Merge pull request [#518](https://github.com/guanguans/laravel-skeleton/issues/518) from guanguans/dependabot/composer/spatie/laravel-backup-8.8.1
+- Merge pull request [#517](https://github.com/guanguans/laravel-skeleton/issues/517) from guanguans/dependabot/composer/laravel/framework-11.10.0
+- Merge pull request [#516](https://github.com/guanguans/laravel-skeleton/issues/516) from guanguans/dependabot/composer/laravel/octane-2.4.0
+- Merge pull request [#515](https://github.com/guanguans/laravel-skeleton/issues/515) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.5.4
+- Merge pull request [#514](https://github.com/guanguans/laravel-skeleton/issues/514) from guanguans/dependabot/composer/laravel/pulse-1.2.3
+- Merge pull request [#513](https://github.com/guanguans/laravel-skeleton/issues/513) from guanguans/dependabot/composer/laravel/pennant-1.8.1
+- Merge pull request [#512](https://github.com/guanguans/laravel-skeleton/issues/512) from guanguans/dependabot/composer/symfony/stopwatch-7.1.1
+- Merge pull request [#511](https://github.com/guanguans/laravel-skeleton/issues/511) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.0.3
+- Merge pull request [#510](https://github.com/guanguans/laravel-skeleton/issues/510) from guanguans/dependabot/composer/rector/swiss-knife-0.2.16
+- Merge pull request [#509](https://github.com/guanguans/laravel-skeleton/issues/509) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.4.0
+- Merge pull request [#508](https://github.com/guanguans/laravel-skeleton/issues/508) from guanguans/dependabot/composer/symfony/stopwatch-7.1.0
+- Merge pull request [#507](https://github.com/guanguans/laravel-skeleton/issues/507) from guanguans/dependabot/composer/rector/swiss-knife-0.2.13
+- Merge pull request [#506](https://github.com/guanguans/laravel-skeleton/issues/506) from guanguans/dependabot/composer/laravel/framework-11.9.2
+- Merge pull request [#505](https://github.com/guanguans/laravel-skeleton/issues/505) from guanguans/dependabot/composer/buggregator/trap-1.8.0
+- Merge pull request [#504](https://github.com/guanguans/laravel-skeleton/issues/504) from guanguans/dependabot/composer/rector/swiss-knife-0.2.7
+- Merge pull request [#503](https://github.com/guanguans/laravel-skeleton/issues/503) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.58.1
+- Merge pull request [#502](https://github.com/guanguans/laravel-skeleton/issues/502) from guanguans/dependabot/composer/laravel/pulse-1.2.2
+- Merge pull request [#501](https://github.com/guanguans/laravel-skeleton/issues/501) from guanguans/dependabot/composer/wendelladriel/laravel-lift-0.14.1
+- Merge pull request [#500](https://github.com/guanguans/laravel-skeleton/issues/500) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.58.0
+- Merge pull request [#499](https://github.com/guanguans/laravel-skeleton/issues/499) from guanguans/dependabot/composer/larastan/larastan-2.9.7
+- Merge pull request [#498](https://github.com/guanguans/laravel-skeleton/issues/498) from guanguans/dependabot/composer/laravel/octane-2.3.12
+- Merge pull request [#497](https://github.com/guanguans/laravel-skeleton/issues/497) from guanguans/dependabot/composer/laravel/framework-11.9.1
+- Merge pull request [#496](https://github.com/guanguans/laravel-skeleton/issues/496) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.5.2
+- Merge pull request [#494](https://github.com/guanguans/laravel-skeleton/issues/494) from guanguans/dependabot/composer/leventcz/laravel-top-1.1.0
+- Merge pull request [#495](https://github.com/guanguans/laravel-skeleton/issues/495) from guanguans/dependabot/composer/laradumps/laradumps-3.1.3
+- Merge pull request [#493](https://github.com/guanguans/laravel-skeleton/issues/493) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.5.2
+- Merge pull request [#492](https://github.com/guanguans/laravel-skeleton/issues/492) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.36
+- Merge pull request [#491](https://github.com/guanguans/laravel-skeleton/issues/491) from guanguans/dependabot/composer/buggregator/trap-1.7.5
+- Merge pull request [#490](https://github.com/guanguans/laravel-skeleton/issues/490) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.5.1
+- Merge pull request [#489](https://github.com/guanguans/laravel-skeleton/issues/489) from guanguans/dependabot/composer/laravel/pulse-1.2.1
+- Merge pull request [#488](https://github.com/guanguans/laravel-skeleton/issues/488) from guanguans/dependabot/composer/dragon-code/laravel-actions-6.1.0
+- Merge pull request [#484](https://github.com/guanguans/laravel-skeleton/issues/484) from guanguans/dependabot/composer/dragon-code/laravel-actions-6.0.0
+- Merge pull request [#487](https://github.com/guanguans/laravel-skeleton/issues/487) from guanguans/dependabot/composer/laravel/pint-1.16.0
+- Merge pull request [#486](https://github.com/guanguans/laravel-skeleton/issues/486) from guanguans/dependabot/composer/laravel/pulse-1.2.0
+- Merge pull request [#485](https://github.com/guanguans/laravel-skeleton/issues/485) from guanguans/dependabot/composer/laravel/framework-11.8.0
+- Merge pull request [#483](https://github.com/guanguans/laravel-skeleton/issues/483) from guanguans/dependabot/composer/laravel/pennant-1.8.0
+- Merge pull request [#482](https://github.com/guanguans/laravel-skeleton/issues/482) from guanguans/dependabot/composer/laravel/sail-1.29.2
+- Merge pull request [#481](https://github.com/guanguans/laravel-skeleton/issues/481) from guanguans/dependabot/composer/spatie/laravel-query-builder-6.0.1
+- Merge pull request [#480](https://github.com/guanguans/laravel-skeleton/issues/480) from guanguans/dependabot/composer/laravel/octane-2.3.11
+- Merge pull request [#479](https://github.com/guanguans/laravel-skeleton/issues/479) from guanguans/dependabot/composer/laravel/telescope-5.0.5
+- Merge pull request [#478](https://github.com/guanguans/laravel-skeleton/issues/478) from guanguans/dependabot/composer/rector/rector-1.1.0
+- Merge pull request [#477](https://github.com/guanguans/laravel-skeleton/issues/477) from guanguans/dependabot/composer/opcodesio/log-viewer-3.10.1
+- Merge pull request [#476](https://github.com/guanguans/laravel-skeleton/issues/476) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.57.2
+- Merge pull request [#475](https://github.com/guanguans/laravel-skeleton/issues/475) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-4.5.1
+- Merge pull request [#474](https://github.com/guanguans/laravel-skeleton/issues/474) from guanguans/dependabot/composer/laradumps/laradumps-3.1.2
+- Merge pull request [#473](https://github.com/guanguans/laravel-skeleton/issues/473) from guanguans/dependabot/composer/opcodesio/log-viewer-3.10.0
+- Merge pull request [#472](https://github.com/guanguans/laravel-skeleton/issues/472) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.57.1
+- Merge pull request [#471](https://github.com/guanguans/laravel-skeleton/issues/471) from guanguans/dependabot/composer/spatie/laravel-short-schedule-1.6.1
+- Merge pull request [#470](https://github.com/guanguans/laravel-skeleton/issues/470) from guanguans/dependabot/composer/spatie/laravel-medialibrary-11.5.0
+- Merge pull request [#469](https://github.com/guanguans/laravel-skeleton/issues/469) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.57.0
+- Merge pull request [#468](https://github.com/guanguans/laravel-skeleton/issues/468) from guanguans/dependabot/composer/laradumps/laradumps-3.1.1
+- Merge pull request [#467](https://github.com/guanguans/laravel-skeleton/issues/467) from guanguans/dependabot/composer/mortexa/laravel-arkitect-0.8.0
+- Merge pull request [#466](https://github.com/guanguans/laravel-skeleton/issues/466) from guanguans/dependabot/github_actions/dependabot/fetch-metadata-2.1.0
+- Merge pull request [#465](https://github.com/guanguans/laravel-skeleton/issues/465) from guanguans/dependabot/composer/spatie/laravel-health-1.28.1
+- Merge pull request [#464](https://github.com/guanguans/laravel-skeleton/issues/464) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.8.3
+- Merge pull request [#463](https://github.com/guanguans/laravel-skeleton/issues/463) from guanguans/dependabot/composer/worksome/envy-1.3.0
+- Merge pull request [#462](https://github.com/guanguans/laravel-skeleton/issues/462) from guanguans/dependabot/composer/phpunit/phpunit-10.5.19
+- Merge pull request [#461](https://github.com/guanguans/laravel-skeleton/issues/461) from guanguans/dependabot/composer/laravel/telescope-5.0.3
+- Merge pull request [#460](https://github.com/guanguans/laravel-skeleton/issues/460) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.54.0
+- Merge pull request [#459](https://github.com/guanguans/laravel-skeleton/issues/459) from guanguans/dependabot/composer/deployer/deployer-7.4.0
+- Merge pull request [#458](https://github.com/guanguans/laravel-skeleton/issues/458) from guanguans/dependabot/composer/spatie/laravel-ignition-2.5.2
+- Merge pull request [#457](https://github.com/guanguans/laravel-skeleton/issues/457) from guanguans/dependabot/composer/laravel/telescope-5.0.2
+- Merge pull request [#456](https://github.com/guanguans/laravel-skeleton/issues/456) from guanguans/dependabot/composer/larastan/larastan-2.9.5
+- Merge pull request [#455](https://github.com/guanguans/laravel-skeleton/issues/455) from guanguans/dependabot/composer/laravel/framework-10.48.8
+- Merge pull request [#454](https://github.com/guanguans/laravel-skeleton/issues/454) from guanguans/dependabot/composer/orchid/platform-14.22.0
+- Merge pull request [#453](https://github.com/guanguans/laravel-skeleton/issues/453) from guanguans/dependabot/composer/larastan/larastan-2.9.4
+- Merge pull request [#452](https://github.com/guanguans/laravel-skeleton/issues/452) from guanguans/dependabot/composer/phpunit/phpunit-10.5.18
+- Merge pull request [#451](https://github.com/guanguans/laravel-skeleton/issues/451) from guanguans/dependabot/composer/reliese/laravel-1.3.0
+- Merge pull request [#450](https://github.com/guanguans/laravel-skeleton/issues/450) from guanguans/dependabot/composer/nunomaduro/laravel-console-task-1.9.0
+- Merge pull request [#449](https://github.com/guanguans/laravel-skeleton/issues/449) from guanguans/dependabot/composer/opcodesio/log-viewer-3.8.0
+- Merge pull request [#448](https://github.com/guanguans/laravel-skeleton/issues/448) from guanguans/dependabot/composer/laravel/framework-10.48.7
+- Merge pull request [#447](https://github.com/guanguans/laravel-skeleton/issues/447) from guanguans/dependabot/composer/laravel/framework-10.48.5
+- Merge pull request [#446](https://github.com/guanguans/laravel-skeleton/issues/446) from guanguans/dependabot/composer/opcodesio/log-viewer-3.7.1
+- Merge pull request [#445](https://github.com/guanguans/laravel-skeleton/issues/445) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.5.1
+- Merge pull request [#444](https://github.com/guanguans/laravel-skeleton/issues/444) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.53.0
+- Merge pull request [#443](https://github.com/guanguans/laravel-skeleton/issues/443) from guanguans/dependabot/composer/spatie/laravel-health-1.28.0
+- Merge pull request [#442](https://github.com/guanguans/laravel-skeleton/issues/442) from guanguans/dependabot/composer/opcodesio/log-viewer-3.7.0
+- Merge pull request [#441](https://github.com/guanguans/laravel-skeleton/issues/441) from guanguans/dependabot/composer/emreyarligan/enum-concern-1.0.4
+- Merge pull request [#440](https://github.com/guanguans/laravel-skeleton/issues/440) from guanguans/dependabot/composer/plannr/laravel-fast-refresh-database-1.2.0
+- Merge pull request [#439](https://github.com/guanguans/laravel-skeleton/issues/439) from guanguans/dependabot/composer/rector/rector-1.04
+- Merge pull request [#438](https://github.com/guanguans/laravel-skeleton/issues/438) from guanguans/dependabot/composer/spatie/laravel-health-1.27.1
+- Merge pull request [#437](https://github.com/guanguans/laravel-skeleton/issues/437) from guanguans/dependabot/composer/phpunit/phpunit-10.5.17
+- Merge pull request [#436](https://github.com/guanguans/laravel-skeleton/issues/436) from guanguans/dependabot/composer/laradumps/laradumps-3.0.1
+- Merge pull request [#435](https://github.com/guanguans/laravel-skeleton/issues/435) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.35
+- Merge pull request [#434](https://github.com/guanguans/laravel-skeleton/issues/434) from guanguans/dependabot/composer/spatie/laravel-responsecache-7.5.2
+- Merge pull request [#433](https://github.com/guanguans/laravel-skeleton/issues/433) from guanguans/dependabot/composer/laravel/octane-2.3.7
+- Merge pull request [#432](https://github.com/guanguans/laravel-skeleton/issues/432) from guanguans/dependabot/composer/spatie/laravel-ignition-2.5.1
+- Merge pull request [#431](https://github.com/guanguans/laravel-skeleton/issues/431) from guanguans/dependabot/composer/laravel/pint-1.15.1
+- Merge pull request [#430](https://github.com/guanguans/laravel-skeleton/issues/430) from guanguans/dependabot/composer/salahhusa9/laravel-updater-1.2.0
+- Merge pull request [#429](https://github.com/guanguans/laravel-skeleton/issues/429) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.8.2
+- Merge pull request [#428](https://github.com/guanguans/laravel-skeleton/issues/428) from guanguans/dependabot/composer/guanguans/laravel-soar-3.14.1
+- Merge pull request [#426](https://github.com/guanguans/laravel-skeleton/issues/426) from guanguans/dependabot/composer/laradumps/laradumps-3.0.0
+- Merge pull request [#427](https://github.com/guanguans/laravel-skeleton/issues/427) from guanguans/dependabot/composer/spatie/laravel-ignition-2.5.0
+- Merge pull request [#425](https://github.com/guanguans/laravel-skeleton/issues/425) from guanguans/dependabot/composer/phpunit/phpunit-10.5.16
+- Merge pull request [#424](https://github.com/guanguans/laravel-skeleton/issues/424) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.7.1
+- Merge pull request [#423](https://github.com/guanguans/laravel-skeleton/issues/423) from guanguans/dependabot/composer/orangehill/iseed-3.0.4
+- Merge pull request [#422](https://github.com/guanguans/laravel-skeleton/issues/422) from guanguans/dependabot/composer/elasticsearch/elasticsearch-8.13.0
+- Merge pull request [#421](https://github.com/guanguans/laravel-skeleton/issues/421) from guanguans/dependabot/composer/laravel/octane-2.3.6
+- Merge pull request [#420](https://github.com/guanguans/laravel-skeleton/issues/420) from guanguans/dependabot/composer/laravel/telescope-5.0.1
+- Merge pull request [#419](https://github.com/guanguans/laravel-skeleton/issues/419) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta16
+- Merge pull request [#418](https://github.com/guanguans/laravel-skeleton/issues/418) from guanguans/dependabot/composer/laravel/pint-1.15.0
+- Merge pull request [#417](https://github.com/guanguans/laravel-skeleton/issues/417) from guanguans/dependabot/composer/tenantcloud/laravel-mixins-3.0.1
+- Merge pull request [#416](https://github.com/guanguans/laravel-skeleton/issues/416) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.34
+- Merge pull request [#415](https://github.com/guanguans/laravel-skeleton/issues/415) from guanguans/dependabot/composer/laravel-lang/common-6.2.0
+- Merge pull request [#414](https://github.com/guanguans/laravel-skeleton/issues/414) from guanguans/dependabot/composer/phpunit/phpunit-10.5.15
+- Merge pull request [#413](https://github.com/guanguans/laravel-skeleton/issues/413) from guanguans/dependabot/composer/spatie/laravel-settings-3.3.2
+- Merge pull request [#412](https://github.com/guanguans/laravel-skeleton/issues/412) from guanguans/dependabot/github_actions/dependabot/fetch-metadata-2.0.0
+- Merge pull request [#411](https://github.com/guanguans/laravel-skeleton/issues/411) from guanguans/dependabot/composer/mockery/mockery-1.6.11
+- Merge pull request [#410](https://github.com/guanguans/laravel-skeleton/issues/410) from guanguans/dependabot/composer/laravel/sail-1.29.1
+- Merge pull request [#409](https://github.com/guanguans/laravel-skeleton/issues/409) from guanguans/dependabot/composer/laravel/framework-10.48.4
+- Merge pull request [#408](https://github.com/guanguans/laravel-skeleton/issues/408) from guanguans/dependabot/composer/phpunit/phpunit-10.5.14
+- Merge pull request [#407](https://github.com/guanguans/laravel-skeleton/issues/407) from guanguans/dependabot/composer/mockery/mockery-1.6.10
+- Merge pull request [#406](https://github.com/guanguans/laravel-skeleton/issues/406) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.52.1
+- Merge pull request [#405](https://github.com/guanguans/laravel-skeleton/issues/405) from guanguans/dependabot/composer/bensampo/laravel-enum-6.11.0
+- Merge pull request [#404](https://github.com/guanguans/laravel-skeleton/issues/404) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.2.2
+- Merge pull request [#403](https://github.com/guanguans/laravel-skeleton/issues/403) from guanguans/dependabot/composer/teamtnt/laravel-scout-tntsearch-driver-14.0.0
+- Merge pull request [#402](https://github.com/guanguans/laravel-skeleton/issues/402) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.2.1
+- Merge pull request [#401](https://github.com/guanguans/laravel-skeleton/issues/401) from guanguans/dependabot/composer/biiiiiigmonster/hasin-3.1.0
+- Merge pull request [#400](https://github.com/guanguans/laravel-skeleton/issues/400) from guanguans/dependabot/composer/bennett-treptow/laravel-migration-generator-4.4.0
+- Merge pull request [#399](https://github.com/guanguans/laravel-skeleton/issues/399) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.52.0
+- Merge pull request [#398](https://github.com/guanguans/laravel-skeleton/issues/398) from guanguans/dependabot/composer/laravel/framework-10.48.3
+- Merge pull request [#397](https://github.com/guanguans/laravel-skeleton/issues/397) from guanguans/dependabot/composer/opcodesio/log-viewer-3.6.0
+- Merge pull request [#396](https://github.com/guanguans/laravel-skeleton/issues/396) from guanguans/dependabot/composer/dragon-code/extended-routes-4.0.1
+- Merge pull request [#395](https://github.com/guanguans/laravel-skeleton/issues/395) from guanguans/dependabot/composer/rector/rector-1.0.3
+- Merge pull request [#389](https://github.com/guanguans/laravel-skeleton/issues/389) from guanguans/dependabot/composer/jiannei/laravel-response-6.0.0
+- Merge pull request [#394](https://github.com/guanguans/laravel-skeleton/issues/394) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.5.0
+- Merge pull request [#393](https://github.com/guanguans/laravel-skeleton/issues/393) from guanguans/dependabot/composer/dragon-code/laravel-http-logger-1.4.0
+- Merge pull request [#392](https://github.com/guanguans/laravel-skeleton/issues/392) from guanguans/dependabot/composer/dragon-code/laravel-route-names-1.5.0
+- Merge pull request [#391](https://github.com/guanguans/laravel-skeleton/issues/391) from guanguans/dependabot/composer/guanguans/laravel-dump-sql-2.4.0
+- Merge pull request [#390](https://github.com/guanguans/laravel-skeleton/issues/390) from guanguans/dependabot/composer/guanguans/laravel-soar-3.12.0
+- Merge pull request [#388](https://github.com/guanguans/laravel-skeleton/issues/388) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.6.0
+- Merge pull request [#387](https://github.com/guanguans/laravel-skeleton/issues/387) from guanguans/dependabot/composer/overtrue/laravel-uploader-3.2.0
+- Merge pull request [#386](https://github.com/guanguans/laravel-skeleton/issues/386) from guanguans/dependabot/composer/watson/validating-8.2.0
+- Merge pull request [#385](https://github.com/guanguans/laravel-skeleton/issues/385) from guanguans/dependabot/composer/anlutro/l4-settings-1.4.0
+- Merge pull request [#384](https://github.com/guanguans/laravel-skeleton/issues/384) from guanguans/dependabot/composer/spatie/laravel-settings-3.3.1
+- Merge pull request [#383](https://github.com/guanguans/laravel-skeleton/issues/383) from guanguans/dependabot/composer/laravel-lang/common-6.1.1
+- Merge pull request [#382](https://github.com/guanguans/laravel-skeleton/issues/382) from guanguans/dependabot/composer/overtrue/laravel-query-logger-3.2.0
+- Merge pull request [#381](https://github.com/guanguans/laravel-skeleton/issues/381) from guanguans/dependabot/composer/spatie/php-structure-discoverer-2.1.1
+- Merge pull request [#371](https://github.com/guanguans/laravel-skeleton/issues/371) from guanguans/dependabot/composer/laravel/telescope-5.0.0
+- Merge pull request [#376](https://github.com/guanguans/laravel-skeleton/issues/376) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.33
+- Merge pull request [#380](https://github.com/guanguans/laravel-skeleton/issues/380) from guanguans/dependabot/composer/laravel/octane-2.3.5
+- Merge pull request [#379](https://github.com/guanguans/laravel-skeleton/issues/379) from guanguans/dependabot/composer/php-open-source-saver/jwt-auth-2.2.0
+- Merge pull request [#378](https://github.com/guanguans/laravel-skeleton/issues/378) from guanguans/dependabot/composer/phpunit/phpunit-10.5.13
+- Merge pull request [#377](https://github.com/guanguans/laravel-skeleton/issues/377) from guanguans/dependabot/composer/mockery/mockery-1.6.9
+- Merge pull request [#375](https://github.com/guanguans/laravel-skeleton/issues/375) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta15
+- Merge pull request [#374](https://github.com/guanguans/laravel-skeleton/issues/374) from guanguans/dependabot/composer/tightenco/tlint-9.3.0
+- Merge pull request [#373](https://github.com/guanguans/laravel-skeleton/issues/373) from guanguans/dependabot/composer/laravel/sail-1.29.0
+- Merge pull request [#372](https://github.com/guanguans/laravel-skeleton/issues/372) from guanguans/dependabot/composer/laravel/framework-10.48.2
+- Merge pull request [#370](https://github.com/guanguans/laravel-skeleton/issues/370) from guanguans/dependabot/composer/salahhusa9/laravel-updater-1.1.0
+- Merge pull request [#368](https://github.com/guanguans/laravel-skeleton/issues/368) from guanguans/dependabot/composer/phpunit/phpunit-10.5.12
+- Merge pull request [#367](https://github.com/guanguans/laravel-skeleton/issues/367) from guanguans/dependabot/composer/spatie/laravel-activitylog-4.8.0
+- Merge pull request [#366](https://github.com/guanguans/laravel-skeleton/issues/366) from guanguans/dependabot/composer/f9webltd/laravel-api-response-helpers-2.0.1
+- Merge pull request [#365](https://github.com/guanguans/laravel-skeleton/issues/365) from guanguans/dependabot/composer/staudenmeir/laravel-adjacency-list-1.20
+- Merge pull request [#364](https://github.com/guanguans/laravel-skeleton/issues/364) from guanguans/dependabot/composer/spatie/laravel-health-1.27.0
+- Merge pull request [#363](https://github.com/guanguans/laravel-skeleton/issues/363) from guanguans/dependabot/composer/spatie/laravel-short-schedule-1.5.2
+- Merge pull request [#362](https://github.com/guanguans/laravel-skeleton/issues/362) from guanguans/dependabot/composer/laravel/framework-10.47.0
+- Merge pull request [#361](https://github.com/guanguans/laravel-skeleton/issues/361) from guanguans/dependabot/composer/laradumps/laradumps-2.5.1
+- Merge pull request [#360](https://github.com/guanguans/laravel-skeleton/issues/360) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.0.1
+- Merge pull request [#359](https://github.com/guanguans/laravel-skeleton/issues/359) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta14
+- Merge pull request [#358](https://github.com/guanguans/laravel-skeleton/issues/358) from guanguans/dependabot/composer/laravel/sail-1.28.2
+- Merge pull request [#357](https://github.com/guanguans/laravel-skeleton/issues/357) from guanguans/dependabot/composer/laravel/pennant-1.7.0
+- Merge pull request [#353](https://github.com/guanguans/laravel-skeleton/issues/353) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-7.0.0
+- Merge pull request [#356](https://github.com/guanguans/laravel-skeleton/issues/356) from guanguans/dependabot/composer/rector/rector-1.0.2
+- Merge pull request [#355](https://github.com/guanguans/laravel-skeleton/issues/355) from guanguans/dependabot/composer/dedoc/scramble-0.8.6
+- Merge pull request [#354](https://github.com/guanguans/laravel-skeleton/issues/354) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.7.0
+- Merge pull request [#350](https://github.com/guanguans/laravel-skeleton/issues/350) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-3.0.0
+- Merge pull request [#352](https://github.com/guanguans/laravel-skeleton/issues/352) from guanguans/dependabot/composer/opcodesio/log-viewer-3.5.0
+- Merge pull request [#351](https://github.com/guanguans/laravel-skeleton/issues/351) from guanguans/dependabot/composer/rahul900day/laravel-console-spinner-1.1.2
+- Merge pull request [#349](https://github.com/guanguans/laravel-skeleton/issues/349) from guanguans/dependabot/composer/larastan/larastan-2.9.2
+- Merge pull request [#348](https://github.com/guanguans/laravel-skeleton/issues/348) from guanguans/dependabot/composer/spatie/laravel-schemaless-attributes-2.5.0
+- Merge pull request [#347](https://github.com/guanguans/laravel-skeleton/issues/347) from guanguans/dependabot/composer/awobaz/compoships-2.3.0
+- Merge pull request [#346](https://github.com/guanguans/laravel-skeleton/issues/346) from guanguans/dependabot/composer/valorin/pwned-validator-1.3.7
+- Merge pull request [#345](https://github.com/guanguans/laravel-skeleton/issues/345) from guanguans/dependabot/composer/spatie/laravel-failed-job-monitor-4.3.0
+- Merge pull request [#344](https://github.com/guanguans/laravel-skeleton/issues/344) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.51.0
+- Merge pull request [#343](https://github.com/guanguans/laravel-skeleton/issues/343) from guanguans/dependabot/composer/thedoctor0/laravel-factory-generator-1.3.3
+- Merge pull request [#342](https://github.com/guanguans/laravel-skeleton/issues/342) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.6.0
+- Merge pull request [#341](https://github.com/guanguans/laravel-skeleton/issues/341) from guanguans/dependabot/composer/laravel/octane-2.3.4
+- Merge pull request [#340](https://github.com/guanguans/laravel-skeleton/issues/340) from guanguans/dependabot/composer/laravel/sail-1.28.1
+- Merge pull request [#339](https://github.com/guanguans/laravel-skeleton/issues/339) from guanguans/dependabot/composer/laravel/framework-10.46.0
+- Merge pull request [#338](https://github.com/guanguans/laravel-skeleton/issues/338) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.21.0
+- Merge pull request [#337](https://github.com/guanguans/laravel-skeleton/issues/337) from guanguans/dependabot/composer/larastan/larastan-2.9.1
+- Merge pull request [#336](https://github.com/guanguans/laravel-skeleton/issues/336) from guanguans/dependabot/composer/laradumps/laradumps-2.5.0
+- Merge pull request [#335](https://github.com/guanguans/laravel-skeleton/issues/335) from guanguans/dependabot/composer/phpunit/phpunit-10.5.11
+- Merge pull request [#334](https://github.com/guanguans/laravel-skeleton/issues/334) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.50.0
+- Merge pull request [#333](https://github.com/guanguans/laravel-skeleton/issues/333) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.32
+- Merge pull request [#332](https://github.com/guanguans/laravel-skeleton/issues/332) from guanguans/dependabot/composer/square1/laravel-idempotency-1.1.0
+- Merge pull request [#331](https://github.com/guanguans/laravel-skeleton/issues/331) from guanguans/dependabot/composer/laravel/framework-10.45.1
+- Merge pull request [#330](https://github.com/guanguans/laravel-skeleton/issues/330) from guanguans/dependabot/composer/laravel/framework-10.45.0
+- Merge pull request [#329](https://github.com/guanguans/laravel-skeleton/issues/329) from guanguans/dependabot/composer/laravel/pint-1.14.0
+- Merge pull request [#328](https://github.com/guanguans/laravel-skeleton/issues/328) from guanguans/dependabot/composer/knuckleswtf/scribe-4.31.0
+- Merge pull request [#327](https://github.com/guanguans/laravel-skeleton/issues/327) from guanguans/dependabot/composer/laravel/sail-1.28.0
+- Merge pull request [#326](https://github.com/guanguans/laravel-skeleton/issues/326) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta13
+- Merge pull request [#325](https://github.com/guanguans/laravel-skeleton/issues/325) from guanguans/dependabot/github_actions/actions/cache-4
+- Merge pull request [#324](https://github.com/guanguans/laravel-skeleton/issues/324) from guanguans/dependabot/composer/spatie/laravel-settings-3.3.0
+- Merge pull request [#323](https://github.com/guanguans/laravel-skeleton/issues/323) from guanguans/dependabot/composer/knuckleswtf/scribe-4.30.1
+- Merge pull request [#322](https://github.com/guanguans/laravel-skeleton/issues/322) from guanguans/dependabot/composer/rector/rector-1.0.1
+- Merge pull request [#321](https://github.com/guanguans/laravel-skeleton/issues/321) from guanguans/dependabot/composer/spatie/php-structure-discoverer-2.1.0
+- Merge pull request [#320](https://github.com/guanguans/laravel-skeleton/issues/320) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-2.15.1
+- Merge pull request [#319](https://github.com/guanguans/laravel-skeleton/issues/319) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-2.15.0
+- Merge pull request [#318](https://github.com/guanguans/laravel-skeleton/issues/318) from guanguans/dependabot/composer/bensampo/laravel-enum-6.10.0
+- Merge pull request [#317](https://github.com/guanguans/laravel-skeleton/issues/317) from guanguans/dependabot/composer/opcodesio/log-viewer-3.4.0
+- Merge pull request [#316](https://github.com/guanguans/laravel-skeleton/issues/316) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta12
+- Merge pull request [#315](https://github.com/guanguans/laravel-skeleton/issues/315) from guanguans/dependabot/composer/knuckleswtf/scribe-4.30.0
+- Merge pull request [#314](https://github.com/guanguans/laravel-skeleton/issues/314) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.31
+- Merge pull request [#313](https://github.com/guanguans/laravel-skeleton/issues/313) from guanguans/dependabot/composer/laravel/telescope-4.17.6
+- Merge pull request [#312](https://github.com/guanguans/laravel-skeleton/issues/312) from guanguans/dependabot/composer/laravel/octane-2.3.3
+- Merge pull request [#311](https://github.com/guanguans/laravel-skeleton/issues/311) from guanguans/dependabot/composer/laravel/sail-1.27.4
+- Merge pull request [#310](https://github.com/guanguans/laravel-skeleton/issues/310) from guanguans/dependabot/composer/opcodesio/log-viewer-3.2.0
+- Merge pull request [#309](https://github.com/guanguans/laravel-skeleton/issues/309) from guanguans/dependabot/composer/laravel/framework-10.44.0
+- Merge pull request [#308](https://github.com/guanguans/laravel-skeleton/issues/308) from guanguans/dependabot/composer/bensampo/laravel-enum-6.9.1
+- Merge pull request [#307](https://github.com/guanguans/laravel-skeleton/issues/307) from guanguans/dependabot/composer/laravel/pint-1.13.11
+- Merge pull request [#306](https://github.com/guanguans/laravel-skeleton/issues/306) from guanguans/dependabot/composer/larastan/larastan-2.9.0
+- Merge pull request [#305](https://github.com/guanguans/laravel-skeleton/issues/305) from guanguans/dependabot/composer/spatie/laravel-health-1.26.1
+- Merge pull request [#304](https://github.com/guanguans/laravel-skeleton/issues/304) from guanguans/dependabot/composer/salahhusa9/laravel-updater-1.0.2
+- Merge pull request [#303](https://github.com/guanguans/laravel-skeleton/issues/303) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.12
+- Merge pull request [#302](https://github.com/guanguans/laravel-skeleton/issues/302) from guanguans/dependabot/composer/spatie/laravel-ignition-2.4.2
+- Merge pull request [#301](https://github.com/guanguans/laravel-skeleton/issues/301) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.30
+- Merge pull request [#300](https://github.com/guanguans/laravel-skeleton/issues/300) from guanguans/dependabot/composer/staudenmeir/laravel-adjacency-list-1.19
+- Merge pull request [#297](https://github.com/guanguans/laravel-skeleton/issues/297) from guanguans/dependabot/composer/rector/rector-1.0.0
+- Merge pull request [#299](https://github.com/guanguans/laravel-skeleton/issues/299) from guanguans/dependabot/composer/spatie/laravel-backup-8.6.0
+- Merge pull request [#298](https://github.com/guanguans/laravel-skeleton/issues/298) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.4.0
+- Merge pull request [#296](https://github.com/guanguans/laravel-skeleton/issues/296) from guanguans/dependabot/composer/symfony/polyfill-php82-1.29.0
+- Merge pull request [#295](https://github.com/guanguans/laravel-skeleton/issues/295) from guanguans/dependabot/composer/barryvdh/laravel-ide-helper-2.14.0
+- Merge pull request [#294](https://github.com/guanguans/laravel-skeleton/issues/294) from guanguans/dependabot/composer/rector/rector-0.19.8
+- Merge pull request [#293](https://github.com/guanguans/laravel-skeleton/issues/293) from guanguans/dependabot/composer/calebporzio/sushi-2.5.1
+- Merge pull request [#292](https://github.com/guanguans/laravel-skeleton/issues/292) from guanguans/dependabot/composer/symfony/polyfill-php83-1.29.0
+- Merge pull request [#291](https://github.com/guanguans/laravel-skeleton/issues/291) from guanguans/dependabot/composer/spatie/laravel-health-1.26.0
+- Merge pull request [#290](https://github.com/guanguans/laravel-skeleton/issues/290) from guanguans/dependabot/composer/mortexa/laravel-arkitect-0.7.0
+- Merge pull request [#289](https://github.com/guanguans/laravel-skeleton/issues/289) from guanguans/dependabot/composer/rakutentech/laravel-request-docs-2.29
+- Merge pull request [#288](https://github.com/guanguans/laravel-skeleton/issues/288) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.5.3
+- Merge pull request [#287](https://github.com/guanguans/laravel-skeleton/issues/287) from guanguans/dependabot/composer/aurorawebsoftware/asetting-1.0.2
+- Merge pull request [#286](https://github.com/guanguans/laravel-skeleton/issues/286) from guanguans/dependabot/composer/symfony/stopwatch-6.4.3
+- Merge pull request [#285](https://github.com/guanguans/laravel-skeleton/issues/285) from guanguans/dependabot/composer/spatie/laravel-health-1.24.1
+- Merge pull request [#284](https://github.com/guanguans/laravel-skeleton/issues/284) from guanguans/dependabot/composer/laravel/sail-1.27.3
+- Merge pull request [#283](https://github.com/guanguans/laravel-skeleton/issues/283) from guanguans/dependabot/composer/laravel/framework-10.43.0
+- Merge pull request [#282](https://github.com/guanguans/laravel-skeleton/issues/282) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.42.0
+- Merge pull request [#281](https://github.com/guanguans/laravel-skeleton/issues/281) from guanguans/dependabot/composer/laravel/octane-2.3.2
+- Merge pull request [#280](https://github.com/guanguans/laravel-skeleton/issues/280) from guanguans/dependabot/composer/laravel/telescope-4.17.5
+- Merge pull request [#279](https://github.com/guanguans/laravel-skeleton/issues/279) from guanguans/dependabot/composer/rector/rector-0.19.4
+- Merge pull request [#278](https://github.com/guanguans/laravel-skeleton/issues/278) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.5.0
+- Merge pull request [#277](https://github.com/guanguans/laravel-skeleton/issues/277) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.19.2
+- Merge pull request [#276](https://github.com/guanguans/laravel-skeleton/issues/276) from guanguans/dependabot/composer/laravel/framework-10.42.0
+- Merge pull request [#275](https://github.com/guanguans/laravel-skeleton/issues/275) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.19.1
+- Merge pull request [#274](https://github.com/guanguans/laravel-skeleton/issues/274) from guanguans/dependabot/composer/laravel/octane-2.3.1
+- Merge pull request [#273](https://github.com/guanguans/laravel-skeleton/issues/273) from guanguans/dependabot/composer/spatie/laravel-backup-8.5.1
+- Merge pull request [#272](https://github.com/guanguans/laravel-skeleton/issues/272) from guanguans/dependabot/composer/spatie/laravel-health-1.24.0
+- Merge pull request [#271](https://github.com/guanguans/laravel-skeleton/issues/271) from guanguans/dependabot/composer/laravel/sail-1.27.2
+- Merge pull request [#270](https://github.com/guanguans/laravel-skeleton/issues/270) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta11
+- Merge pull request [#269](https://github.com/guanguans/laravel-skeleton/issues/269) from guanguans/dependabot/composer/laravel/telescope-4.17.4
+- Merge pull request [#268](https://github.com/guanguans/laravel-skeleton/issues/268) from guanguans/dependabot/composer/vectorface/whip-0.5.0
+- Merge pull request [#267](https://github.com/guanguans/laravel-skeleton/issues/267) from guanguans/dependabot/composer/spatie/laravel-health-1.23.10
+- Merge pull request [#266](https://github.com/guanguans/laravel-skeleton/issues/266) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.48.0
+- Merge pull request [#265](https://github.com/guanguans/laravel-skeleton/issues/265) from guanguans/dependabot/composer/phpunit/phpunit-10.5.9
+- Merge pull request [#264](https://github.com/guanguans/laravel-skeleton/issues/264) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.4.3
+- Merge pull request [#263](https://github.com/guanguans/laravel-skeleton/issues/263) from guanguans/dependabot/composer/laravel/pint-1.13.10
+- Merge pull request [#262](https://github.com/guanguans/laravel-skeleton/issues/262) from guanguans/dependabot/composer/phpunit/phpunit-10.5.8
+- Merge pull request [#261](https://github.com/guanguans/laravel-skeleton/issues/261) from guanguans/dependabot/composer/rector/rector-0.19.2
+- Merge pull request [#260](https://github.com/guanguans/laravel-skeleton/issues/260) from guanguans/dependabot/composer/laravel/envoy-2.9.0
+- Merge pull request [#259](https://github.com/guanguans/laravel-skeleton/issues/259) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.47.1
+- Merge pull request [#258](https://github.com/guanguans/laravel-skeleton/issues/258) from guanguans/dependabot/composer/laravel/octane-2.3.0
+- Merge pull request [#257](https://github.com/guanguans/laravel-skeleton/issues/257) from guanguans/dependabot/composer/laravel/pennant-1.6.0
+- Merge pull request [#256](https://github.com/guanguans/laravel-skeleton/issues/256) from guanguans/dependabot/composer/laravel/sail-1.27.1
+- Merge pull request [#255](https://github.com/guanguans/laravel-skeleton/issues/255) from guanguans/dependabot/composer/laravel/framework-10.41.0
+- Merge pull request [#254](https://github.com/guanguans/laravel-skeleton/issues/254) from guanguans/dependabot/composer/laravel/pint-1.13.9
+- Merge pull request [#253](https://github.com/guanguans/laravel-skeleton/issues/253) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.19.0
+- Merge pull request [#252](https://github.com/guanguans/laravel-skeleton/issues/252) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.47.0
+- Merge pull request [#251](https://github.com/guanguans/laravel-skeleton/issues/251) from guanguans/dependabot/composer/rector/rector-0.19.1
+- Merge pull request [#250](https://github.com/guanguans/laravel-skeleton/issues/250) from guanguans/dependabot/composer/phpunit/phpunit-10.5.7
+- Merge pull request [#249](https://github.com/guanguans/laravel-skeleton/issues/249) from guanguans/dependabot/composer/spatie/laravel-ignition-2.4.1
+- Merge pull request [#248](https://github.com/guanguans/laravel-skeleton/issues/248) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta9
+- Merge pull request [#247](https://github.com/guanguans/laravel-skeleton/issues/247) from guanguans/dependabot/composer/bensampo/laravel-enum-6.8.0
+- Merge pull request [#246](https://github.com/guanguans/laravel-skeleton/issues/246) from guanguans/dependabot/composer/spatie/laravel-backup-8.5.0
+- Merge pull request [#245](https://github.com/guanguans/laravel-skeleton/issues/245) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.5.2
+- Merge pull request [#244](https://github.com/guanguans/laravel-skeleton/issues/244) from guanguans/dependabot/composer/elao/enum-2.4.0
+- Merge pull request [#243](https://github.com/guanguans/laravel-skeleton/issues/243) from guanguans/dependabot/composer/laravel/octane-2.2.7
+- Merge pull request [#242](https://github.com/guanguans/laravel-skeleton/issues/242) from guanguans/dependabot/composer/laravel/framework-10.40.0
+- Merge pull request [#241](https://github.com/guanguans/laravel-skeleton/issues/241) from guanguans/dependabot/composer/laravel/sail-1.27.0
+- Merge pull request [#240](https://github.com/guanguans/laravel-skeleton/issues/240) from guanguans/dependabot/composer/laravel/tinker-2.9.0
+- Merge pull request [#239](https://github.com/guanguans/laravel-skeleton/issues/239) from guanguans/dependabot/composer/laravel/envoy-2.8.7
+- Merge pull request [#238](https://github.com/guanguans/laravel-skeleton/issues/238) from guanguans/dependabot/composer/laravel/pint-1.13.8
+- Merge pull request [#237](https://github.com/guanguans/laravel-skeleton/issues/237) from guanguans/dependabot/composer/spatie/laravel-query-builder-5.7.0
+- Merge pull request [#236](https://github.com/guanguans/laravel-skeleton/issues/236) from guanguans/dependabot/composer/spatie/php-structure-discoverer-2.0.1
+- Merge pull request [#235](https://github.com/guanguans/laravel-skeleton/issues/235) from guanguans/dependabot/composer/spatie/laravel-health-1.23.9
+- Merge pull request [#234](https://github.com/guanguans/laravel-skeleton/issues/234) from guanguans/dependabot/composer/bennett-treptow/laravel-migration-generator-4.3.2
+- Merge pull request [#233](https://github.com/guanguans/laravel-skeleton/issues/233) from guanguans/dependabot/composer/guanguans/laravel-soar-3.10.1
+- Merge pull request [#232](https://github.com/guanguans/laravel-skeleton/issues/232) from guanguans/dependabot/composer/tightenco/tlint-9.2.0
+- Merge pull request [#231](https://github.com/guanguans/laravel-skeleton/issues/231) from guanguans/dependabot/composer/guanguans/laravel-soar-3.9.1
+- Merge pull request [#230](https://github.com/guanguans/laravel-skeleton/issues/230) from guanguans/dependabot/composer/spatie/laravel-ignition-2.4.0
+- Merge pull request [#229](https://github.com/guanguans/laravel-skeleton/issues/229) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.46.0
+- Merge pull request [#228](https://github.com/guanguans/laravel-skeleton/issues/228) from guanguans/dependabot/composer/elao/enum-2.3.0
+- Merge pull request [#227](https://github.com/guanguans/laravel-skeleton/issues/227) from guanguans/dependabot/composer/guanguans/ai-commit-1.9.4
+- Merge pull request [#226](https://github.com/guanguans/laravel-skeleton/issues/226) from guanguans/dependabot/composer/larastan/larastan-2.8.0
+- Merge pull request [#225](https://github.com/guanguans/laravel-skeleton/issues/225) from guanguans/dependabot/composer/guanguans/ai-commit-1.9.1
+- Merge pull request [#224](https://github.com/guanguans/laravel-skeleton/issues/224) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.18.0
+- Merge pull request [#223](https://github.com/guanguans/laravel-skeleton/issues/223) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.11
+- Merge pull request [#222](https://github.com/guanguans/laravel-skeleton/issues/222) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.45.0
+- Merge pull request [#221](https://github.com/guanguans/laravel-skeleton/issues/221) from guanguans/dependabot/composer/laradumps/laradumps-2.3.1
+- Merge pull request [#220](https://github.com/guanguans/laravel-skeleton/issues/220) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.44.0
+- Merge pull request [#219](https://github.com/guanguans/laravel-skeleton/issues/219) from guanguans/dependabot/composer/knuckleswtf/scribe-4.29.0
+- Merge pull request [#218](https://github.com/guanguans/laravel-skeleton/issues/218) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta8
+- Merge pull request [#217](https://github.com/guanguans/laravel-skeleton/issues/217) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.43.0
+- Merge pull request [#216](https://github.com/guanguans/laravel-skeleton/issues/216) from guanguans/dependabot/composer/laravel/framework-10.39.0
+- Merge pull request [#215](https://github.com/guanguans/laravel-skeleton/issues/215) from guanguans/dependabot/composer/phpunit/phpunit-10.5.5
+- Merge pull request [#214](https://github.com/guanguans/laravel-skeleton/issues/214) from guanguans/dependabot/composer/laravel/sanctum-3.3.3
+- Merge pull request [#213](https://github.com/guanguans/laravel-skeleton/issues/213) from guanguans/dependabot/composer/laravel/octane-2.2.6
+- Merge pull request [#212](https://github.com/guanguans/laravel-skeleton/issues/212) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.17.1
+- Merge pull request [#211](https://github.com/guanguans/laravel-skeleton/issues/211) from guanguans/dependabot/composer/knuckleswtf/scribe-4.28.0
+- Merge pull request [#210](https://github.com/guanguans/laravel-skeleton/issues/210) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.42.0
+- Merge pull request [#209](https://github.com/guanguans/laravel-skeleton/issues/209) from guanguans/dependabot/composer/laravel/framework-10.38.2
+- Merge pull request [#208](https://github.com/guanguans/laravel-skeleton/issues/208) from guanguans/dependabot/composer/laravel/octane-2.2.5
+- Merge pull request [#204](https://github.com/guanguans/laravel-skeleton/issues/204) from guanguans/dependabot/composer/laravel-lang/common-6.1.0
+- Merge pull request [#207](https://github.com/guanguans/laravel-skeleton/issues/207) from guanguans/dependabot/composer/knuckleswtf/scribe-4.27.0
+- Merge pull request [#206](https://github.com/guanguans/laravel-skeleton/issues/206) from guanguans/dependabot/composer/laravel/octane-2.2.4
+- Merge pull request [#205](https://github.com/guanguans/laravel-skeleton/issues/205) from guanguans/dependabot/composer/spatie/laravel-ignition-2.3.3
+- Merge pull request [#203](https://github.com/guanguans/laravel-skeleton/issues/203) from guanguans/dependabot/composer/laravel/framework-10.38.1
+- Merge pull request [#202](https://github.com/guanguans/laravel-skeleton/issues/202) from guanguans/dependabot/composer/laravel/octane-2.2.3
+- Merge pull request [#201](https://github.com/guanguans/laravel-skeleton/issues/201) from guanguans/dependabot/composer/laravel/framework-10.38.0
+- Merge pull request [#200](https://github.com/guanguans/laravel-skeleton/issues/200) from guanguans/dependabot/composer/laravel/octane-2.2.1
+- Merge pull request [#199](https://github.com/guanguans/laravel-skeleton/issues/199) from guanguans/dependabot/composer/bramus/monolog-colored-line-formatter-3.1.2
+- Merge pull request [#197](https://github.com/guanguans/laravel-skeleton/issues/197) from guanguans/dependabot/composer/laradumps/laradumps-2.3.0
+- Merge pull request [#196](https://github.com/guanguans/laravel-skeleton/issues/196) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.4.2
+- Merge pull request [#195](https://github.com/guanguans/laravel-skeleton/issues/195) from guanguans/dependabot/composer/pusher/pusher-php-server-7.2.4
+- Merge pull request [#194](https://github.com/guanguans/laravel-skeleton/issues/194) from guanguans/dependabot/composer/laravel-lang/common-5.4.0
+- Merge pull request [#193](https://github.com/guanguans/laravel-skeleton/issues/193) from guanguans/dependabot/composer/spatie/laravel-ignition-2.3.2
+- Merge pull request [#192](https://github.com/guanguans/laravel-skeleton/issues/192) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.41.1
+- Merge pull request [#191](https://github.com/guanguans/laravel-skeleton/issues/191) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.10
+- Merge pull request [#190](https://github.com/guanguans/laravel-skeleton/issues/190) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.41.0
+- Merge pull request [#189](https://github.com/guanguans/laravel-skeleton/issues/189) from guanguans/dependabot/composer/phpunit/phpunit-10.5.3
+- Merge pull request [#188](https://github.com/guanguans/laravel-skeleton/issues/188) from guanguans/dependabot/composer/laravel/framework-10.37.3
+- Merge pull request [#187](https://github.com/guanguans/laravel-skeleton/issues/187) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta7
+- Merge pull request [#186](https://github.com/guanguans/laravel-skeleton/issues/186) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta6
+- Merge pull request [#185](https://github.com/guanguans/laravel-skeleton/issues/185) from guanguans/dependabot/composer/laravel/framework-10.37.1
+- Merge pull request [#184](https://github.com/guanguans/laravel-skeleton/issues/184) from guanguans/dependabot/composer/dragon-code/benchmark-2.6.0
+- Merge pull request [#183](https://github.com/guanguans/laravel-skeleton/issues/183) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.41.1
+- Merge pull request [#182](https://github.com/guanguans/laravel-skeleton/issues/182) from guanguans/dependabot/composer/mockery/mockery-1.6.7
+- Merge pull request [#180](https://github.com/guanguans/laravel-skeleton/issues/180) from guanguans/dependabot/github_actions/actions/stale-9
+- Merge pull request [#181](https://github.com/guanguans/laravel-skeleton/issues/181) from guanguans/dependabot/composer/spatie/fork-1.2.2
+- Merge pull request [#179](https://github.com/guanguans/laravel-skeleton/issues/179) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta5
+- Merge pull request [#178](https://github.com/guanguans/laravel-skeleton/issues/178) from guanguans/dependabot/composer/laracraft-tech/laravel-schema-rules-1.3.6
+- Merge pull request [#177](https://github.com/guanguans/laravel-skeleton/issues/177) from guanguans/dependabot/composer/laravel/framework-10.35.0
+- Merge pull request [#176](https://github.com/guanguans/laravel-skeleton/issues/176) from guanguans/dependabot/composer/laravel/sail-1.26.3
+- Merge pull request [#175](https://github.com/guanguans/laravel-skeleton/issues/175) from guanguans/dependabot/composer/laravel/pint-1.13.7
+- Merge pull request [#174](https://github.com/guanguans/laravel-skeleton/issues/174) from guanguans/dependabot/composer/phpunit/phpunit-10.5.2
+- Merge pull request [#173](https://github.com/guanguans/laravel-skeleton/issues/173) from guanguans/dependabot/composer/spatie/laravel-health-1.23.8
+- Merge pull request [#172](https://github.com/guanguans/laravel-skeleton/issues/172) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.40.0
+- Merge pull request [#171](https://github.com/guanguans/laravel-skeleton/issues/171) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta4
+- Merge pull request [#170](https://github.com/guanguans/laravel-skeleton/issues/170) from guanguans/dependabot/composer/laravel/pulse-1.0.0-beta3
+- Merge pull request [#169](https://github.com/guanguans/laravel-skeleton/issues/169) from guanguans/dependabot/composer/nunomaduro/larastan-2.7.0
+- Merge pull request [#168](https://github.com/guanguans/laravel-skeleton/issues/168) from guanguans/dependabot/composer/reliese/laravel-1.2.4
+- Merge pull request [#167](https://github.com/guanguans/laravel-skeleton/issues/167) from guanguans/dependabot/composer/phpunit/phpunit-10.5.1
+- Merge pull request [#166](https://github.com/guanguans/laravel-skeleton/issues/166) from guanguans/dependabot/composer/tightenco/tlint-9.1.1
+- Merge pull request [#165](https://github.com/guanguans/laravel-skeleton/issues/165) from guanguans/dependabot/composer/spatie/laravel-schedule-monitor-3.4.1
+- Merge pull request [#164](https://github.com/guanguans/laravel-skeleton/issues/164) from guanguans/dependabot/composer/laracraft-tech/laravel-schema-rules-1.3.5
+- Merge pull request [#163](https://github.com/guanguans/laravel-skeleton/issues/163) from guanguans/dependabot/composer/symfony/stopwatch-6.4.0
+- Merge pull request [#162](https://github.com/guanguans/laravel-skeleton/issues/162) from guanguans/dependabot/composer/laravel/sail-1.26.2
+- Merge pull request [#161](https://github.com/guanguans/laravel-skeleton/issues/161) from guanguans/dependabot/composer/laravel/framework-10.34.2
+- Merge pull request [#160](https://github.com/guanguans/laravel-skeleton/issues/160) from guanguans/dependabot/composer/laravel/octane-2.1.2
+- Merge pull request [#159](https://github.com/guanguans/laravel-skeleton/issues/159) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.40.0
+- Merge pull request [#158](https://github.com/guanguans/laravel-skeleton/issues/158) from guanguans/dependabot/composer/spatie/laravel-health-1.23.7
+- Merge pull request [#157](https://github.com/guanguans/laravel-skeleton/issues/157) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.9
+- Merge pull request [#156](https://github.com/guanguans/laravel-skeleton/issues/156) from guanguans/dependabot/composer/spatie/fork-1.2.1
+- Merge pull request [#153](https://github.com/guanguans/laravel-skeleton/issues/153) from guanguans/dependabot/composer/salahhusa9/laravel-updater-1.0.0
+- Merge pull request [#155](https://github.com/guanguans/laravel-skeleton/issues/155) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.39.0
+- Merge pull request [#154](https://github.com/guanguans/laravel-skeleton/issues/154) from guanguans/dependabot/composer/laravel/sail-1.26.1
+- Merge pull request [#152](https://github.com/guanguans/laravel-skeleton/issues/152) from guanguans/dependabot/composer/laravel/framework-10.33.0
+- Merge pull request [#151](https://github.com/guanguans/laravel-skeleton/issues/151) from guanguans/dependabot/composer/knuckleswtf/scribe-4.26.0
+- Merge pull request [#150](https://github.com/guanguans/laravel-skeleton/issues/150) from guanguans/dependabot/composer/spatie/laravel-backup-8.4.1
+- Merge pull request [#149](https://github.com/guanguans/laravel-skeleton/issues/149) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.8
+- Merge pull request [#148](https://github.com/guanguans/laravel-skeleton/issues/148) from guanguans/dependabot/composer/kubawerlos/php-cs-fixer-custom-fixers-3.17.0
+- Merge pull request [#147](https://github.com/guanguans/laravel-skeleton/issues/147) from guanguans/dependabot/composer/guanguans/ai-commit-1.8.6
+- Merge pull request [#146](https://github.com/guanguans/laravel-skeleton/issues/146) from guanguans/dependabot/composer/bensampo/laravel-enum-6.7.0
+- Merge pull request [#145](https://github.com/guanguans/laravel-skeleton/issues/145) from guanguans/dependabot/composer/laravel/framework-10.32.1
+- Merge pull request [#144](https://github.com/guanguans/laravel-skeleton/issues/144) from guanguans/dependabot/composer/laradumps/laradumps-2.2.1
+- Merge pull request [#143](https://github.com/guanguans/laravel-skeleton/issues/143) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.38.2
+- Merge pull request [#142](https://github.com/guanguans/laravel-skeleton/issues/142) from guanguans/dependabot/composer/laravel/framework-10.32.0
+- Merge pull request [#141](https://github.com/guanguans/laravel-skeleton/issues/141) from guanguans/dependabot/composer/nyholm/psr7-1.8.1
+- Merge pull request [#140](https://github.com/guanguans/laravel-skeleton/issues/140) from guanguans/dependabot/composer/guanguans/ai-commit-1.8.5
+- Merge pull request [#139](https://github.com/guanguans/laravel-skeleton/issues/139) from guanguans/dependabot/composer/laravel-lang/common-5.2.0
+- Merge pull request [#138](https://github.com/guanguans/laravel-skeleton/issues/138) from guanguans/dependabot/composer/guanguans/ai-commit-1.8.4
+- Merge pull request [#137](https://github.com/guanguans/laravel-skeleton/issues/137) from guanguans/dependabot/composer/emreyarligan/enum-concern-1.0.2
+- Merge pull request [#136](https://github.com/guanguans/laravel-skeleton/issues/136) from guanguans/dependabot/composer/spatie/laravel-health-1.23.6
+- Merge pull request [#135](https://github.com/guanguans/laravel-skeleton/issues/135) from guanguans/dependabot/composer/laravel/framework-10.31.0
+- Merge pull request [#134](https://github.com/guanguans/laravel-skeleton/issues/134) from guanguans/dependabot/composer/deployer/deployer-7.3.3
+- Merge pull request [#133](https://github.com/guanguans/laravel-skeleton/issues/133) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.38.0
+- Merge pull request [#132](https://github.com/guanguans/laravel-skeleton/issues/132) from guanguans/dependabot/composer/laravel/pint-1.13.6
+- Merge pull request [#131](https://github.com/guanguans/laravel-skeleton/issues/131) from guanguans/dependabot/composer/laravel/sanctum-3.3.2
+- Merge pull request [#130](https://github.com/guanguans/laravel-skeleton/issues/130) from guanguans/dependabot/composer/laravel-lang/common-5.1.0
+- Merge pull request [#129](https://github.com/guanguans/laravel-skeleton/issues/129) from guanguans/dependabot/composer/spatie/laravel-health-1.23.5
+- Merge pull request [#128](https://github.com/guanguans/laravel-skeleton/issues/128) from guanguans/dependabot/composer/laravel/framework-10.30.1
+- Merge pull request [#127](https://github.com/guanguans/laravel-skeleton/issues/127) from guanguans/dependabot/composer/guanguans/ai-commit-1.8.3
+- Merge pull request [#126](https://github.com/guanguans/laravel-skeleton/issues/126) from guanguans/dependabot/composer/laravel/framework-10.30.0
+- Merge pull request [#124](https://github.com/guanguans/laravel-skeleton/issues/124) from guanguans/dependabot/composer/laravel-lang/common-5.0.0
+- Merge pull request [#125](https://github.com/guanguans/laravel-skeleton/issues/125) from guanguans/dependabot/composer/deployer/deployer-7.3.2
+- Merge pull request [#123](https://github.com/guanguans/laravel-skeleton/issues/123) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.37.1
+- Merge pull request [#122](https://github.com/guanguans/laravel-skeleton/issues/122) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.36.0
+- Merge pull request [#121](https://github.com/guanguans/laravel-skeleton/issues/121) from guanguans/dependabot/composer/phpunit/phpunit-10.4.2
+- Merge pull request [#120](https://github.com/guanguans/laravel-skeleton/issues/120) from guanguans/dependabot/composer/laravel/pint-1.13.5
+- Merge pull request [#119](https://github.com/guanguans/laravel-skeleton/issues/119) from guanguans/dependabot/composer/laracraft-tech/laravel-schema-rules-1.3.4
+- Merge pull request [#118](https://github.com/guanguans/laravel-skeleton/issues/118) from guanguans/dependabot/composer/laravel/octane-2.1.1
+- Merge pull request [#117](https://github.com/guanguans/laravel-skeleton/issues/117) from guanguans/dependabot/composer/laravel/framework-10.29.0
+- Merge pull request [#116](https://github.com/guanguans/laravel-skeleton/issues/116) from guanguans/dependabot/composer/laravel/pint-1.13.4
+- Merge pull request [#115](https://github.com/guanguans/laravel-skeleton/issues/115) from guanguans/dependabot/composer/laravel/sail-1.26.0
+- Merge pull request [#114](https://github.com/guanguans/laravel-skeleton/issues/114) from guanguans/dependabot/composer/laracraft-tech/laravel-schema-rules-1.3.3
+- Merge pull request [#113](https://github.com/guanguans/laravel-skeleton/issues/113) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.5.0
+- Merge pull request [#112](https://github.com/guanguans/laravel-skeleton/issues/112) from guanguans/dependabot/composer/spatie/laravel-backup-8.4.0
+- Merge pull request [#110](https://github.com/guanguans/laravel-skeleton/issues/110) from guanguans/dependabot/composer/f9webltd/laravel-api-response-helpers-2.0.0
+- Merge pull request [#111](https://github.com/guanguans/laravel-skeleton/issues/111) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.3.0
+- Merge pull request [#109](https://github.com/guanguans/laravel-skeleton/issues/109) from guanguans/dependabot/composer/emreyarligan/enum-concern-1.0.1
+- Merge pull request [#108](https://github.com/guanguans/laravel-skeleton/issues/108) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.35.1
+- Merge pull request [#107](https://github.com/guanguans/laravel-skeleton/issues/107) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.2.0
+- Merge pull request [#106](https://github.com/guanguans/laravel-skeleton/issues/106) from guanguans/dependabot/composer/laravel/pint-1.13.3
+- Merge pull request [#105](https://github.com/guanguans/laravel-skeleton/issues/105) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.5
+- Merge pull request [#104](https://github.com/guanguans/laravel-skeleton/issues/104) from guanguans/dependabot/composer/laravel/framework-10.28.0
+- Merge pull request [#103](https://github.com/guanguans/laravel-skeleton/issues/103) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.39.0
+- Merge pull request [#102](https://github.com/guanguans/laravel-skeleton/issues/102) from guanguans/dependabot/composer/kitloong/laravel-migrations-generator-6.11.0
+- Merge pull request [#101](https://github.com/guanguans/laravel-skeleton/issues/101) from guanguans/dependabot/composer/laravel/framework-10.27.0
+- Merge pull request [#100](https://github.com/guanguans/laravel-skeleton/issues/100) from guanguans/dependabot/composer/spatie/laravel-ignition-2.3.1
+- Merge pull request [#99](https://github.com/guanguans/laravel-skeleton/issues/99) from guanguans/dependabot/composer/phpunit/phpunit-10.4.1
+- Merge pull request [#98](https://github.com/guanguans/laravel-skeleton/issues/98) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.38.0
+- Merge pull request [#97](https://github.com/guanguans/laravel-skeleton/issues/97) from guanguans/dependabot/composer/phpunit/phpunit-10.4.0
+- Merge pull request [#96](https://github.com/guanguans/laravel-skeleton/issues/96) from guanguans/dependabot/composer/laravel/octane-2.1.0
+- Merge pull request [#95](https://github.com/guanguans/laravel-skeleton/issues/95) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.1.2
+- Merge pull request [#94](https://github.com/guanguans/laravel-skeleton/issues/94) from guanguans/dependabot/composer/spatie/laravel-query-builder-5.6.0
+- Merge pull request [#93](https://github.com/guanguans/laravel-skeleton/issues/93) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.1.0
+- Merge pull request [#92](https://github.com/guanguans/laravel-skeleton/issues/92) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.34.1
+- Merge pull request [#91](https://github.com/guanguans/laravel-skeleton/issues/91) from guanguans/dependabot/composer/laravel/framework-10.26.2
+- Merge pull request [#90](https://github.com/guanguans/laravel-skeleton/issues/90) from guanguans/dependabot/composer/f9webltd/laravel-api-response-helpers-1.5.3
+- Merge pull request [#89](https://github.com/guanguans/laravel-skeleton/issues/89) from guanguans/dependabot/composer/knuckleswtf/scribe-4.25.0
+- Merge pull request [#88](https://github.com/guanguans/laravel-skeleton/issues/88) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.34.0
+- Merge pull request [#87](https://github.com/guanguans/laravel-skeleton/issues/87) from guanguans/dependabot/composer/laravel/framework-10.25.2
+- Merge pull request [#86](https://github.com/guanguans/laravel-skeleton/issues/86) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.30.0
+- Merge pull request [#85](https://github.com/guanguans/laravel-skeleton/issues/85) from guanguans/dependabot/composer/laravel/framework-10.25.1
+- Merge pull request [#84](https://github.com/guanguans/laravel-skeleton/issues/84) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.29.0
+- Merge pull request [#83](https://github.com/guanguans/laravel-skeleton/issues/83) from guanguans/dependabot/composer/laravel/framework-10.25.0
+- Merge pull request [#82](https://github.com/guanguans/laravel-skeleton/issues/82) from guanguans/dependabot/composer/bensampo/laravel-enum-6.6.4
+- Merge pull request [#81](https://github.com/guanguans/laravel-skeleton/issues/81) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.4
+- Merge pull request [#80](https://github.com/guanguans/laravel-skeleton/issues/80) from guanguans/dependabot/composer/dedoc/scramble-0.8.4
+- Merge pull request [#79](https://github.com/guanguans/laravel-skeleton/issues/79) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.28.0
+- Merge pull request [#78](https://github.com/guanguans/laravel-skeleton/issues/78) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.3
+- Merge pull request [#77](https://github.com/guanguans/laravel-skeleton/issues/77) from guanguans/dependabot/composer/plannr/laravel-fast-refresh-database-1.1.1
+- Merge pull request [#76](https://github.com/guanguans/laravel-skeleton/issues/76) from guanguans/dependabot/composer/phpunit/phpunit-10.3.5
+- Merge pull request [#75](https://github.com/guanguans/laravel-skeleton/issues/75) from guanguans/dependabot/composer/laravel/pint-1.13.2
+- Merge pull request [#74](https://github.com/guanguans/laravel-skeleton/issues/74) from guanguans/dependabot/composer/laravel/framework-10.24.0
+- Merge pull request [#73](https://github.com/guanguans/laravel-skeleton/issues/73) from guanguans/dependabot/composer/spatie/laravel-backup-8.3.4
+- Merge pull request [#72](https://github.com/guanguans/laravel-skeleton/issues/72) from guanguans/dependabot/composer/knuckleswtf/scribe-4.24.0
+- Merge pull request [#71](https://github.com/guanguans/laravel-skeleton/issues/71) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.0.1
+- Merge pull request [#70](https://github.com/guanguans/laravel-skeleton/issues/70) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.27.0
+- Merge pull request [#69](https://github.com/guanguans/laravel-skeleton/issues/69) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.37.0
+- Merge pull request [#68](https://github.com/guanguans/laravel-skeleton/issues/68) from guanguans/dependabot/composer/spatie/laravel-health-1.23.4
+- Merge pull request [#67](https://github.com/guanguans/laravel-skeleton/issues/67) from guanguans/dependabot/composer/laravel/framework-10.23.1
+- Merge pull request [#66](https://github.com/guanguans/laravel-skeleton/issues/66) from guanguans/dependabot/composer/predis/predis-2.2.2
+- Merge pull request [#65](https://github.com/guanguans/laravel-skeleton/issues/65) from guanguans/dependabot/composer/spatie/laravel-query-builder-5.5.0
+- Merge pull request [#64](https://github.com/guanguans/laravel-skeleton/issues/64) from guanguans/dependabot/composer/laravel/framework-10.23.0
+- Merge pull request [#63](https://github.com/guanguans/laravel-skeleton/issues/63) from guanguans/dependabot/composer/phpunit/phpunit-10.3.4
+- Merge pull request [#62](https://github.com/guanguans/laravel-skeleton/issues/62) from guanguans/dependabot/composer/laravel/sail-1.25.0
+- Merge pull request [#61](https://github.com/guanguans/laravel-skeleton/issues/61) from guanguans/dependabot/composer/laravel/sanctum-3.3.1
+- Merge pull request [#60](https://github.com/guanguans/laravel-skeleton/issues/60) from guanguans/dependabot/composer/spatie/laravel-health-1.23.2
+- Merge pull request [#59](https://github.com/guanguans/laravel-skeleton/issues/59) from guanguans/dependabot/composer/spatie/laravel-query-builder-5.4.0
+- Merge pull request [#58](https://github.com/guanguans/laravel-skeleton/issues/58) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.26.1
+- Merge pull request [#56](https://github.com/guanguans/laravel-skeleton/issues/56) from guanguans/dependabot/composer/wendelladriel/laravel-validated-dto-3.0.0
+- Merge pull request [#57](https://github.com/guanguans/laravel-skeleton/issues/57) from guanguans/dependabot/composer/laravel/pint-1.13.1
+- Merge pull request [#54](https://github.com/guanguans/laravel-skeleton/issues/54) from guanguans/dependabot/composer/laravel/pint-1.13.0
+- Merge pull request [#55](https://github.com/guanguans/laravel-skeleton/issues/55) from guanguans/dependabot/composer/phpunit/phpunit-10.3.3
+- Merge pull request [#53](https://github.com/guanguans/laravel-skeleton/issues/53) from guanguans/dependabot/composer/laravel/framework-10.22.0
+- Merge pull request [#52](https://github.com/guanguans/laravel-skeleton/issues/52) from guanguans/dependabot/composer/laravel/sail-1.24.1
+- Merge pull request [#51](https://github.com/guanguans/laravel-skeleton/issues/51) from guanguans/dependabot/composer/spatie/laravel-health-1.23.1
+- Merge pull request [#50](https://github.com/guanguans/laravel-skeleton/issues/50) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.2
+- Merge pull request [#49](https://github.com/guanguans/laravel-skeleton/issues/49) from guanguans/dependabot/composer/laravel/framework-10.21.1
+- Merge pull request [#48](https://github.com/guanguans/laravel-skeleton/issues/48) from guanguans/dependabot/composer/spatie/laravel-backup-8.3.3
+- Merge pull request [#47](https://github.com/guanguans/laravel-skeleton/issues/47) from guanguans/dependabot/composer/jasny/sso-0.5.1
+- Merge pull request [#46](https://github.com/guanguans/laravel-skeleton/issues/46) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.36.0
+- Merge pull request [#45](https://github.com/guanguans/laravel-skeleton/issues/45) from guanguans/dependabot/composer/laravel/sanctum-3.3.0
+- Merge pull request [#44](https://github.com/guanguans/laravel-skeleton/issues/44) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.25.1
+- Merge pull request [#43](https://github.com/guanguans/laravel-skeleton/issues/43) from guanguans/dependabot/composer/tightenco/tlint-9.1.0
+- Merge pull request [#42](https://github.com/guanguans/laravel-skeleton/issues/42) from guanguans/dependabot/composer/bensampo/laravel-enum-6.6.3
+- Merge pull request [#41](https://github.com/guanguans/laravel-skeleton/issues/41) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.25.0
+- Merge pull request [#40](https://github.com/guanguans/laravel-skeleton/issues/40) from guanguans/dependabot/composer/spatie/laravel-backup-8.3.2
+- Merge pull request [#39](https://github.com/guanguans/laravel-skeleton/issues/39) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.4.2
+- Merge pull request [#38](https://github.com/guanguans/laravel-skeleton/issues/38) from guanguans/dependabot/composer/laravel/octane-2.0.6
+- Merge pull request [#37](https://github.com/guanguans/laravel-skeleton/issues/37) from guanguans/dependabot/composer/laravel/tinker-2.8.2
+- Merge pull request [#36](https://github.com/guanguans/laravel-skeleton/issues/36) from guanguans/dependabot/composer/laravel/sail-1.24.0
+- Merge pull request [#35](https://github.com/guanguans/laravel-skeleton/issues/35) from guanguans/dependabot/composer/laravel/framework-10.21.0
+- Merge pull request [#34](https://github.com/guanguans/laravel-skeleton/issues/34) from guanguans/dependabot/composer/guzzlehttp/guzzle-7.8.0
+- Merge pull request [#33](https://github.com/guanguans/laravel-skeleton/issues/33) from guanguans/dependabot/composer/opcodesio/log-viewer-3.1.1
+- Merge pull request [#32](https://github.com/guanguans/laravel-skeleton/issues/32) from guanguans/dependabot/composer/knuckleswtf/scribe-4.23.1
+- Merge pull request [#31](https://github.com/guanguans/laravel-skeleton/issues/31) from guanguans/dependabot/composer/knuckleswtf/scribe-4.23.0
+- Merge pull request [#30](https://github.com/guanguans/laravel-skeleton/issues/30) from guanguans/dependabot/composer/spatie/laravel-ignition-2.3.0
+- Merge pull request [#29](https://github.com/guanguans/laravel-skeleton/issues/29) from guanguans/dependabot/composer/laravel/sanctum-3.2.6
+- Merge pull request [#28](https://github.com/guanguans/laravel-skeleton/issues/28) from guanguans/dependabot/composer/laravel/framework-10.20.0
+- Merge pull request [#27](https://github.com/guanguans/laravel-skeleton/issues/27) from guanguans/dependabot/composer/opcodesio/log-viewer-3.0.4
+- Merge pull request [#26](https://github.com/guanguans/laravel-skeleton/issues/26) from guanguans/dependabot/composer/spatie/laravel-query-builder-5.3.0
+- Merge pull request [#25](https://github.com/guanguans/laravel-skeleton/issues/25) from guanguans/dependabot/composer/opcodesio/log-viewer-3.0.3
+- Merge pull request [#24](https://github.com/guanguans/laravel-skeleton/issues/24) from guanguans/dependabot/composer/guanguans/ai-commit-1.8.2
+- Merge pull request [#18](https://github.com/guanguans/laravel-skeleton/issues/18) from guanguans/dependabot/composer/predis/predis-2.2.1
+- Merge pull request [#23](https://github.com/guanguans/laravel-skeleton/issues/23) from guanguans/dependabot/composer/reliese/laravel-1.2.3
+- Merge pull request [#22](https://github.com/guanguans/laravel-skeleton/issues/22) from guanguans/dependabot/composer/guanguans/laravel-exception-notify-3.3.2
+- Merge pull request [#21](https://github.com/guanguans/laravel-skeleton/issues/21) from guanguans/dependabot/composer/laravel/sail-1.23.4
+- Merge pull request [#20](https://github.com/guanguans/laravel-skeleton/issues/20) from guanguans/dependabot/composer/guanguans/ai-commit-1.8.0
+- Merge pull request [#19](https://github.com/guanguans/laravel-skeleton/issues/19) from guanguans/dependabot/composer/opcodesio/log-viewer-3.0.2
+- Merge pull request [#17](https://github.com/guanguans/laravel-skeleton/issues/17) from guanguans/dependabot/composer/dedoc/scramble-0.8.3
+- Merge pull request [#15](https://github.com/guanguans/laravel-skeleton/issues/15) from guanguans/dependabot/composer/phpunit/phpunit-10.3.2
+- Merge pull request [#16](https://github.com/guanguans/laravel-skeleton/issues/16) from guanguans/dependabot/composer/laradumps/laradumps-2.2.0
+- Merge pull request [#14](https://github.com/guanguans/laravel-skeleton/issues/14) from guanguans/dependabot/composer/laravel/sail-1.23.3
+- Merge pull request [#13](https://github.com/guanguans/laravel-skeleton/issues/13) from guanguans/dependabot/composer/laravel/pint-1.11.0
+- Merge pull request [#12](https://github.com/guanguans/laravel-skeleton/issues/12) from guanguans/dependabot/composer/laravel/framework-10.19.0
+- Merge pull request [#11](https://github.com/guanguans/laravel-skeleton/issues/11) from guanguans/dependabot/composer/friendsofphp/php-cs-fixer-3.23.0
+- Merge pull request [#10](https://github.com/guanguans/laravel-skeleton/issues/10) from guanguans/dependabot/composer/opcodesio/log-viewer-3.0.1
+- Merge pull request [#9](https://github.com/guanguans/laravel-skeleton/issues/9) from guanguans/dependabot/composer/opcodesio/log-viewer-3.0.0
+- Merge pull request [#4](https://github.com/guanguans/laravel-skeleton/issues/4) from guanguans/dependabot/composer/tightenco/tlint-9.0.0
+- Merge pull request [#6](https://github.com/guanguans/laravel-skeleton/issues/6) from guanguans/dependabot/composer/laravel-lang/common-4.0.0
+- Merge pull request [#3](https://github.com/guanguans/laravel-skeleton/issues/3) from guanguans/dependabot/composer/teamtnt/laravel-scout-tntsearch-driver-13.2.0
+- Merge pull request [#8](https://github.com/guanguans/laravel-skeleton/issues/8) from guanguans/dependabot/composer/jasny/sso-0.5.0
+- Merge pull request [#7](https://github.com/guanguans/laravel-skeleton/issues/7) from guanguans/dependabot/composer/vectorface/whip-0.4.0
+- Merge pull request [#5](https://github.com/guanguans/laravel-skeleton/issues/5) from guanguans/dependabot/composer/ergebnis/composer-normalize-2.35.0
+- Merge pull request [#2](https://github.com/guanguans/laravel-skeleton/issues/2) from guanguans/imgbot
+- Merge pull request [#1](https://github.com/guanguans/laravel-skeleton/issues/1) from myxiaoao/larastan
+
+### BREAKING CHANGE
+
+The application.php file has been renamed to app.php following
+Laravel's best practices. Adjustments have been made to the file to reflect the new
+Laravel setup. This change may affect custom bootstrapping logic that was previouslyrelying on the old file name and structure.
+
+Related to changes in commit216ae9722083b8907ef4e9207f34c1c09c374970.
+
+The addition of new commands and modifications to existing
+ones may affect users who rely on the previous structure and functionality.
+
+
+[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/12.0.0...HEAD
+[12.0.0]: https://github.com/guanguans/laravel-skeleton/compare/11.0.0...12.0.0
