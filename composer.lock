@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6d83613e09cdd7d1c155a31fa9081c4",
+    "content-hash": "36b406147ca4286698200b3e9dd3aa68",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -13334,71 +13334,6 @@
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
             "time": "2024-08-21T00:29:20+00:00"
-        },
-        {
-            "name": "overtrue/laravel-query-logger",
-            "version": "3.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overtrue/laravel-query-logger.git",
-                "reference": "667565274041f4d6f2c6da6dc433bac2f9a7233e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-query-logger/zipball/667565274041f4d6f2c6da6dc433bac2f9a7233e",
-                "reference": "667565274041f4d6f2c6da6dc433bac2f9a7233e",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^9.0|^10.0|^11.0|^12.0"
-            },
-            "require-dev": {
-                "brainmaestro/composer-git-hooks": "dev-master",
-                "laravel/pint": "^1.5"
-            },
-            "type": "library",
-            "extra": {
-                "hooks": {
-                    "pre-push": [
-                        "composer check-style"
-                    ],
-                    "pre-commit": [
-                        "composer check-style"
-                    ]
-                },
-                "laravel": {
-                    "providers": [
-                        "Overtrue\\LaravelQueryLogger\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Overtrue\\LaravelQueryLogger\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "overtrue",
-                    "email": "anzhengchao@gmail.com"
-                }
-            ],
-            "description": "A dev tool to log all queries for laravel application.",
-            "support": {
-                "issues": "https://github.com/overtrue/laravel-query-logger/issues",
-                "source": "https://github.com/overtrue/laravel-query-logger/tree/3.4.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/overtrue",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-02-20T15:32:02+00:00"
         },
         {
             "name": "overtrue/laravel-uploader",

@@ -47,7 +47,6 @@ class LogServiceProvider extends ServiceProvider
                 'laravel-version' => $this->app->version(),
                 'running-in-console' => $this->app->runningInConsole(),
                 'trace-id' => TRACE_ID,
-                // self::REQUEST_ID_NAME => $this->app->make(self::REQUEST_ID_NAME),
             ]);
 
             LogHttp::skipWhen(

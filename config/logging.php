@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -11,11 +13,18 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Models\HttpLog;
+use App\Support\Monolog\Formatter\EloquentLogHttpModelFormatter;
+use App\Support\Monolog\Handler\EloquentHandler;
+use App\Support\Monolog\Processor\EloquentLogHttpModelProcessor;
 use Monolog\Handler\FilterHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Level;
+use Monolog\Processor\LoadAverageProcessor;
+use Monolog\Processor\MemoryPeakUsageProcessor;
+use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
@@ -89,6 +98,30 @@ return [
             'path' => storage_path('logs/query/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => env('LOG_DAILY_DAYS', 14),
+            'replace_placeholders' => true,
+        ],
+
+        'daily-deprecations' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/deprecations/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 3,
+            'replace_placeholders' => true,
+        ],
+
+        'daily-elasticsearch' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/elasticsearch/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'daily-http' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/http/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 30,
             'replace_placeholders' => true,
         ],
 
@@ -169,6 +202,29 @@ return [
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],
+
+        'eloquent-http' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'action_level' => env('LOG_ACTION_LEVEL', 'debug'),
+            'stop_buffering' => true,
+            'handler' => EloquentHandler::class,
+            'handler_with' => [
+                'modelClass' => HttpLog::class,
+            ],
+            'formatter' => EloquentLogHttpModelFormatter::class,
+            'formatter_with' => [],
+            'processors' => [
+                // EloquentLogHttpModelProcessor::class,
+                // LoadAverageProcessor::class,
+                // [
+                //     'processor' => LoadAverageProcessor::class,
+                //     'with' => ['avgSystemLoad' => LoadAverageProcessor::LOAD_5_MINUTE],
+                // ],
+                MemoryPeakUsageProcessor::class,
+                // MemoryUsageProcessor::class,
+            ],
+        ],
     ],
 
     'query' => [
@@ -180,7 +236,7 @@ return [
 
         // Only record queries that are slower than the following time
         // Unit: milliseconds
-        'slower_than' => env('QUERY_LOG_SLOWER_THAN', 618),
+        'slower_than' => env('QUERY_LOG_SLOWER_THAN', 0),
 
         // Except record queries
         'except' => env_explode(

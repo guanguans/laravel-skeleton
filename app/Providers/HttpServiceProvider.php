@@ -49,9 +49,9 @@ class HttpServiceProvider extends ServiceProvider
                 'connect_timeout' => 10,
                 'timeout' => 30,
             ]);
-            Http::globalMiddleware(
-                Middleware::log(Log::channel(), new MessageFormatter(MessageFormatter::DEBUG))
-            );
+            // Http::globalMiddleware(
+            //     Middleware::log(Log::channel(), new MessageFormatter(MessageFormatter::DEBUG))
+            // );
 
             Event::listen(RequestHandled::class, static function (RequestHandled $event): void {
                 if ($event->response instanceof JsonResponse) {

@@ -156,13 +156,6 @@ abstract class AbstractClient
     {
         return Http::baseUrl($this->configRepository->get('base_url'))
             ->when(
-                $this->requestId(),
-                static fn (
-                    PendingRequest $pendingRequest,
-                    string $requestId
-                ) => $pendingRequest->withHeader('X-Request-Id', $requestId)
-            )
-            ->when(
                 $this->getUserAgent(),
                 static fn (
                     PendingRequest $pendingRequest,
@@ -176,13 +169,27 @@ abstract class AbstractClient
                 when: $this->configRepository->get('retry.when'),
                 throw: $this->configRepository->get('retry.throw')
             )
-            ->withMiddleware($this->makeLoggerMiddleware($this->configRepository->get('logger')))
+            ->when(
+                $this->requestId(),
+                static fn (
+                    PendingRequest $pendingRequest,
+                    string $requestId
+                ) => $pendingRequest->withHeader('X-Request-Id', $requestId)
+            )
             ->withMiddleware(Middleware::mapRequest(
                 static fn (RequestInterface $request) => $request->withHeader('X-Date-Time', now()->toDateTimeString('m'))
             ))
+            ->withMiddleware($this->makeLoggerMiddleware($this->configRepository->get('logger')))
             ->withMiddleware(Middleware::mapResponse(
                 static fn (ResponseInterface $response) => $response->withHeader('X-Date-Time', now()->toDateTimeString('m'))
-            ));
+            ))
+            ->when(
+                $this->requestId(),
+                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest
+                    ->withMiddleware(Middleware::mapResponse(
+                        static fn (ResponseInterface $response) => $response->withHeader('X-Request-Id', $requestId)
+                    ))
+            );
     }
 
     private function validateConfig(array $config): array

@@ -102,7 +102,6 @@
         "nunomaduro/termwind": "^2.3",
         "nyholm/psr7": "^1.8",
         "opcodesio/log-viewer": "^3.15",
-        "overtrue/laravel-query-logger": "^3.4",
         "overtrue/laravel-uploader": "^3.3",
         "perryvandermeer/laravel-console-validator": "^1.2",
         "phiki/phiki": "^1.1",

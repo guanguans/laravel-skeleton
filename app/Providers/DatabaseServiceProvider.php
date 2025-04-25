@@ -27,6 +27,7 @@ use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
@@ -61,7 +62,7 @@ class DatabaseServiceProvider extends ServiceProvider
             $this->whenProduction();
             $this->whenSQLiteConnection();
             $this->unlessProduction();
-
+            $this->listenQueryExecuted();
             Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
                 $value,
                 \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
@@ -153,11 +154,6 @@ class DatabaseServiceProvider extends ServiceProvider
             Model::preventLazyLoading(); // 预防 N+1 查询问题
             Model::preventSilentlyDiscardingAttributes(); // 防止模型静默丢弃不在 fillable 中的字段
             Model::shouldBeStrict(); // Eloquent 严格模式
-
-            DB::listen(static fn (QueryExecuted $queryExecuted) => Log::debug(
-                $queryExecuted->toRawSql(),
-                (array) $queryExecuted
-            ));
         });
     }
 
@@ -168,6 +164,42 @@ class DatabaseServiceProvider extends ServiceProvider
              * Enable on delete cascade for sqlite connections.
              */
             DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
+        });
+    }
+
+    /**
+     * @see https://github.com/overtrue/laravel-query-logger
+     */
+    private function listenQueryExecuted(): void
+    {
+        if (!Config::get('logging.query.enabled', false)) {
+            return;
+        }
+
+        $requestHasTrigger = static fn (string $trigger): bool => false !== getenv($trigger)
+            || request()->hasHeader($trigger)
+            || request()->has($trigger)
+            || request()->hasCookie($trigger);
+
+        if (!empty($trigger = Config::get('logging.query.trigger')) && !$requestHasTrigger($trigger)) {
+            return;
+        }
+
+        Event::listen(QueryExecuted::class, static function (QueryExecuted $query): void {
+            if (
+                Config::get('logging.query.slower_than', 0) > $query->time
+                || str($query->sql)->is(Config::get('logging.query.except', []))
+            ) {
+                return;
+            }
+
+            Log::channel(config('logging.query.channel'))->debug($query->toRawSql(), [
+                'time' => $query->time,
+                'humanly_time' => humans_milliseconds($query->time),
+                'connection_name' => $query->connectionName,
+                // 'database_name' => $query->connection->getDatabaseName(),
+                // 'driver_name' => $query->connection->getDriverName(),
+            ]);
         });
     }
 }
