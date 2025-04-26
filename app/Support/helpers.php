@@ -247,7 +247,7 @@ if (!\function_exists('partical')) {
     /**
      * 偏函数.
      */
-    function partical(callable $function, ...$args): callable
+    function partical(callable $function, mixed ...$args): callable
     {
         return static fn (...$moreArgs) => $function(...$args, ...$moreArgs);
     }
@@ -295,7 +295,7 @@ if (!\function_exists('compose')) {
 }
 
 if (!\function_exists('catch_query_log')) {
-    function catch_query_log(callable|string $callback, ...$parameters): array
+    function catch_query_log(callable|string $callback, mixed ...$parameters): array
     {
         return (new Pipeline(app()))
             ->send($callback)
@@ -341,7 +341,7 @@ if (!\function_exists('dump_to_server')) {
 }
 
 if (!\function_exists('pd')) {
-    function pd(...$vars): never
+    function pd(mixed ...$vars): never
     {
         pp(...$vars);
 
@@ -353,7 +353,7 @@ if (!\function_exists('pp')) {
     /**
      * @noinspection DebugFunctionUsageInspection
      */
-    function pp(...$vars): void
+    function pp(mixed ...$vars): void
     {
         foreach ($vars as $var) {
             highlight_string(\sprintf("\n<?php\n\$var = %s;\n?>\n", var_export($var, true)));

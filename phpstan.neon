@@ -42,7 +42,7 @@ parameters:
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 5
+    level: 6
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify
@@ -90,7 +90,7 @@ parameters:
 #        - '#^Cannot cast mixed to .*\.$#'
 #        - '#^Cannot use array destructuring on mixed\.$#'
 #        - '#Property .* does not accept mixed#'
-#        - identifier: argument.templateType
+        - identifier: argument.templateType
         - identifier: argument.type
         - identifier: binaryOp.invalid
         - identifier: logicalAnd.resultUnused
@@ -99,8 +99,8 @@ parameters:
 #        - identifier: encapsedStringPart.nonString
         - identifier: method.nonObject
         - identifier: trait.unused
-#        - identifier: missingType.generics
-#        - identifier: missingType.iterableValue
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
 #        - identifier: return.type
 #        - identifier: return.void
 #        - identifier: symplify.noDynamicName

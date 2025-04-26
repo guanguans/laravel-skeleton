@@ -21,7 +21,7 @@ trait Makeable
     /**
      * @noinspection PhpMethodParametersCountMismatchInspection
      */
-    public static function make(...$parameters): static
+    public static function make(mixed ...$parameters): static
     {
         return new static(...$parameters);
     }

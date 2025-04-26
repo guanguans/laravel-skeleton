@@ -73,7 +73,7 @@ final class BitEncoder implements BitEncoderContract
      * @throws \InvalidArgumentException
      * @throws \Throwable
      */
-    public function attach(int $value, ...$set): int
+    public function attach(int $value, int ...$set): int
     {
         throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
 
@@ -98,7 +98,7 @@ final class BitEncoder implements BitEncoderContract
      * @throws \InvalidArgumentException
      * @throws \Throwable
      */
-    public function detach(int $value, ...$set): int
+    public function detach(int $value, int ...$set): int
     {
         throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
 
