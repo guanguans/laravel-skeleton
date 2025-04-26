@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \App\Support\Clients\PushDeer
  */
-class PushDeer extends Facade
+final class PushDeer extends Facade
 {
     /**
      * @noinspection PhpMissingParentCallCommonInspection

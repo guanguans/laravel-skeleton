@@ -18,7 +18,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class AutowiredServiceProvider extends ServiceProvider
+final class AutowiredServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

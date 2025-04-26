@@ -17,7 +17,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
 
-class EloquentHandler extends AbstractProcessingHandler
+final class EloquentHandler extends AbstractProcessingHandler
 {
     /**
      * @param class-string $modelClass

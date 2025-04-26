@@ -15,7 +15,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\App;
 
-class AbortIfProduction extends AbortIf
+final class AbortIfProduction extends AbortIf
 {
     #[\Override]
     protected function when(): bool

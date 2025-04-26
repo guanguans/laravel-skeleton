@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/MGeurts/genealogy/blob/main/app/Http/Middleware/SetLocale.php
  */
-class SetLocale
+final class SetLocale
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

@@ -16,7 +16,7 @@ namespace App\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
-readonly class CurrencyCast implements CastsAttributes
+final readonly class CurrencyCast implements CastsAttributes
 {
     /**
      * @throws \Throwable

@@ -21,7 +21,7 @@ use Illuminate\Support\Composer;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\ExecutableFinder;
 
-class OptimizeAllCommand extends Command
+final class OptimizeAllCommand extends Command
 {
     protected $signature = 'optimize:all {--f|force : Force optimize.}';
     protected $description = 'Optimize all.';

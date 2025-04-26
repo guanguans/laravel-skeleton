@@ -18,7 +18,7 @@ use Illuminate\Console\Prohibitable;
 use Illuminate\Contracts\Console\Isolatable;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 
-class ClearAllCommand extends Command implements Isolatable, PromptsForMissingInput
+final class ClearAllCommand extends Command implements Isolatable, PromptsForMissingInput
 {
     use Prohibitable;
     protected $signature = 'clear:all {--f|force : Force clear optimized.}';

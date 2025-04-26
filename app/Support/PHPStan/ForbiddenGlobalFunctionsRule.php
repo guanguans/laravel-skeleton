@@ -23,7 +23,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 /**
  * @see https://github.com/pelican-dev/panel/blob/main/app/PHPStan/ForbiddenGlobalFunctionsRule.php
  */
-class ForbiddenGlobalFunctionsRule implements Rule
+final class ForbiddenGlobalFunctionsRule implements Rule
 {
     /** @var list<string> */
     public const array FORBIDDEN_FUNCTIONS = [

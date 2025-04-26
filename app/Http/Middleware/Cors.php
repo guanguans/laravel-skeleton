@@ -22,7 +22,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class Cors
+final class Cors
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

@@ -23,7 +23,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Monolog\Logger as MonologLogger;
 
-class LogServiceProvider extends ServiceProvider
+final class LogServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

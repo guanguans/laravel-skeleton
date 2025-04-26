@@ -26,7 +26,7 @@ use App\Support\Contracts\BitEncoderContract;
  * $bitEncoder->decode(71336225); // [11, 21, 31, 41, 51, 61]
  * ```
  */
-class BitEncoder implements BitEncoderContract
+final class BitEncoder implements BitEncoderContract
 {
     /**
      * 无重复元素的数组.
@@ -340,7 +340,7 @@ class BitEncoder implements BitEncoderContract
     /**
      * 组合生成器.
      */
-    protected function combinationGenerator(array $set, int $length): \Generator
+    private function combinationGenerator(array $set, int $length): \Generator
     {
         $originalLength = \count($set);
         $remainingLength = $originalLength - $length + 1;

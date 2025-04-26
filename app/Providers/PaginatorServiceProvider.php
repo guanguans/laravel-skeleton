@@ -17,7 +17,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class PaginatorServiceProvider extends ServiceProvider
+final class PaginatorServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

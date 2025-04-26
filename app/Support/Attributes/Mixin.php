@@ -17,7 +17,7 @@ namespace App\Support\Attributes;
  * @see https://github.com/TheFlowByte/laravel-macro-attribute
  */
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
-readonly class Mixin
+final readonly class Mixin
 {
     public function __construct(
         /**

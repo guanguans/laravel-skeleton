@@ -16,7 +16,7 @@ namespace App\View\Composers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-readonly class RequestComposer
+final readonly class RequestComposer
 {
     public function __construct(private Request $request) {}
 

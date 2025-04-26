@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-class AddressIPV4Rule extends RegexRule
+final class AddressIPV4Rule extends RegexRule
 {
     #[\Override]
     protected function pattern(): string

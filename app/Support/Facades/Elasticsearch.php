@@ -127,7 +127,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \App\Support\Managers\ElasticsearchManager
  */
-class Elasticsearch extends Facade
+final class Elasticsearch extends Facade
 {
     /**
      * @noinspection PhpMissingParentCallCommonInspection

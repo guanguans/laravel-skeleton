@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-class AddressIPV6Rule extends RegexRule
+final class AddressIPV6Rule extends RegexRule
 {
     #[\Override]
     protected function pattern(): string

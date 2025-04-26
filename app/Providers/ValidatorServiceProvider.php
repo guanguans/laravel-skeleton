@@ -23,7 +23,7 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Validator;
 use Laragear\Discover\Facades\Discover;
 
-class ValidatorServiceProvider extends ServiceProvider
+final class ValidatorServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

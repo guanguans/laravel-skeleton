@@ -28,7 +28,7 @@ use Illuminate\Support\Traits\Tappable;
 /**
  * @mixin  \Elastic\Elasticsearch\Client
  */
-class ElasticsearchManager extends Manager
+final class ElasticsearchManager extends Manager
 {
     use Conditionable;
     use Tappable;

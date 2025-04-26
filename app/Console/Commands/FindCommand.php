@@ -20,7 +20,7 @@ use function Laravel\Prompts\text;
 /**
  * @see https://github.com/binafy/artisan-finder
  */
-class FindCommand extends Command
+final class FindCommand extends Command
 {
     protected $signature = 'find:art {args?}';
     protected $description = 'Find artisan command with given name';

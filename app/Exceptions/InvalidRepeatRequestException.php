@@ -15,7 +15,7 @@ namespace App\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class InvalidRepeatRequestException extends AccessDeniedHttpException
+final class InvalidRepeatRequestException extends AccessDeniedHttpException
 {
     /**
      * @see self::fromStatusCode()

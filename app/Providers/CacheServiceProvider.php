@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class CacheServiceProvider extends ServiceProvider
+final class CacheServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

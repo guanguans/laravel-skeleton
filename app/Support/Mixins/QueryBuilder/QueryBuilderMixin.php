@@ -27,7 +27,7 @@ use Illuminate\Pipeline\Pipeline;
 #[Mixin(EloquentBuilder::class)]
 #[Mixin(QueryBuilder::class)]
 #[Mixin(RelationBuilder::class)]
-class QueryBuilderMixin
+final class QueryBuilderMixin
 {
     public function pipe(): callable
     {

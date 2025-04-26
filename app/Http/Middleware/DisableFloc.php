@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/laravelio/laravel.io
  */
-class DisableFloc
+final class DisableFloc
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

@@ -15,7 +15,7 @@ namespace App\Casts;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CallbackSetCast extends CallbackGetCast
+final class CallbackSetCast extends CallbackGetCast
 {
     /**
      * @noinspection PhpMissingParentCallCommonInspection

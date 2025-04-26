@@ -15,7 +15,7 @@ namespace App\Models\Pivots;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class PivotWithCreatorPivot extends Pivot
+final class PivotWithCreatorPivot extends Pivot
 {
     public function fill(array $attributes): self
     {

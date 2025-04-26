@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 /**
  * @see https://masteringlaravel.io/daily/2024-07-15-how-to-enforce-all-api-requests-are-json
  */
-class RequiresJson
+final class RequiresJson
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

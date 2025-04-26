@@ -16,7 +16,7 @@ namespace App\Support\Bootstrappers;
 /**
  * @see https://github.com/inspector-apm/inspector-laravel/blob/master/src/OutOfMemoryBootstrapper.php
  */
-class OutOfMemoryBootstrapper
+final class OutOfMemoryBootstrapper
 {
     /**
      * A bit of reserved memory to ensure we are able to increase the memory
@@ -28,7 +28,7 @@ class OutOfMemoryBootstrapper
      *
      * @noinspection PropertyCanBePrivateInspection
      */
-    protected ?string $reservedMemory = null;
+    private ?string $reservedMemory = null;
 
     /** A regex that matches PHP OOM errors. */
     private string $oomRegex = '/^Allowed memory size of (\d+) bytes exhausted \(tried to allocate \d+ bytes\)/';

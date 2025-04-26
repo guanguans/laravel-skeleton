@@ -22,7 +22,7 @@ use Stevebauman\Location\Position;
 /**
  * @see https://github.com/nandi95/laravel-starter/blob/main/app/Listeners/RecordRequestIdentifiers.php
  */
-class RecordRequestIdentifiersListener
+final class RecordRequestIdentifiersListener
 {
     public function handle(TokenAuthenticated $event): void
     {

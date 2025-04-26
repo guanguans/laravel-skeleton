@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-class BitcoinAddressRule extends RegexRule
+final class BitcoinAddressRule extends RegexRule
 {
     #[\Override]
     protected function pattern(): string

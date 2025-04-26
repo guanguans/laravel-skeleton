@@ -16,7 +16,7 @@ namespace App\Listeners;
 use Illuminate\Foundation\Events\MaintenanceModeEnabled;
 use Illuminate\Support\Facades\Log;
 
-class MaintenanceModeEnabledNotificationListener
+final class MaintenanceModeEnabledNotificationListener
 {
     /**
      * @noinspection PhpUnusedParameterInspection

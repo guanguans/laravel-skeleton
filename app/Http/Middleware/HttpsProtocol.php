@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/owlchester/kanka/blob/develop/app/Http/Middleware/HttpsProtocol.php
  */
-class HttpsProtocol
+final class HttpsProtocol
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

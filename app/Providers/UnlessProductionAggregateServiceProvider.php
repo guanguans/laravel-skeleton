@@ -16,7 +16,7 @@ namespace App\Providers;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class UnlessProductionAggregateServiceProvider extends AggregateServiceProvider
+final class UnlessProductionAggregateServiceProvider extends AggregateServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

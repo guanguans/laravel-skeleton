@@ -39,7 +39,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @see https://github.com/laminas/laminas-diagnostics
  * @see https://github.com/spatie/laravel-health
  */
-class HealthCheckCommand extends Command
+final class HealthCheckCommand extends Command
 {
     private const string RESULT_SUCCESS = '<info>ok</info>';
     private const string RESULT_ERROR = '<error>failing</error>';

@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/MGeurts/genealogy/blob/main/app/Http/Middleware/Localization.php
  */
-class Localization
+final class Localization
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

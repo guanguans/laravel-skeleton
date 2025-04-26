@@ -16,7 +16,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Sushi\Sushi;
 
-class Province extends Model
+final class Province extends Model
 {
     use Sushi;
 

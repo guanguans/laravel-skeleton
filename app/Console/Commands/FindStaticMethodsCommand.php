@@ -34,7 +34,7 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use function Laravel\Prompts\select;
 
-class FindStaticMethodsCommand extends Command
+final class FindStaticMethodsCommand extends Command
 {
     protected $signature = 'find:static-methods';
     protected $description = 'Find static methods';
@@ -58,7 +58,7 @@ class FindStaticMethodsCommand extends Command
     /**
      * @throws \ReflectionException
      */
-    protected function findStaticMethods(): void
+    private function findStaticMethods(): void
     {
         classes(
             static fn (string $file, string $class): bool => str($class)->is([

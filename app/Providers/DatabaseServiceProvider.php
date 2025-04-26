@@ -38,7 +38,7 @@ use Illuminate\Support\Lottery;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class DatabaseServiceProvider extends ServiceProvider
+final class DatabaseServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

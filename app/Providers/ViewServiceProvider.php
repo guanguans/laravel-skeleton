@@ -30,7 +30,7 @@ use Illuminate\Support\Traits\Conditionable;
 use Illuminate\View\View;
 use Stillat\BladeDirectives\Support\Facades\Directive;
 
-class ViewServiceProvider extends ServiceProvider
+final class ViewServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

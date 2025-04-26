@@ -21,7 +21,7 @@ use Illuminate\Notifications\Notification;
 /**
  * @see https://github.com/laravelio/laravel.io/blob/main/app/Notifications/SlowQueryLogged.php
  */
-class SlowQueryLoggedNotification extends Notification implements ShouldQueue
+final class SlowQueryLoggedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 

@@ -15,7 +15,7 @@ namespace App\Casts;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CommaSeparatedToIntegerArrayCast extends CommaSeparatedToArrayCast
+final class CommaSeparatedToIntegerArrayCast extends CommaSeparatedToArrayCast
 {
     #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): array

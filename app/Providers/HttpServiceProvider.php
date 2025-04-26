@@ -30,7 +30,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class HttpServiceProvider extends ServiceProvider
+final class HttpServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

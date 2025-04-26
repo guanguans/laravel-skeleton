@@ -32,7 +32,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class FindDumpStatementCommand extends Command
+final class FindDumpStatementCommand extends Command
 {
     protected $signature = <<<'EOD'
         find:dump-statement
@@ -156,7 +156,7 @@ class FindDumpStatementCommand extends Command
             $this->info('The print statement was not found.');
             $this->info($this->resourceUsageFormatter->resourceUsage($timer->stop()));
 
-            return static::INVALID;
+            return self::INVALID;
         }
 
         $findInfos = array_map(static function (array $info, $index): array {

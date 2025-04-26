@@ -23,7 +23,7 @@ use Illuminate\Support\Str;
  * @mixin \Illuminate\Http\UploadedFile
  */
 #[Mixin(UploadedFile::class)]
-class UploadedFileMixin
+final class UploadedFileMixin
 {
     /**
      * @see https://github.com/MrPunyapal/basic-crud/blob/main/app/Support/FileUploaderFromUrl.php

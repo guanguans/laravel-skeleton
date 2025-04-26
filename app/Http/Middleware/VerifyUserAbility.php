@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/slimkit/plus/blob/2.4/app/Http/Middleware/UserAbility.php
  */
-readonly class VerifyUserAbility
+final readonly class VerifyUserAbility
 {
     /**
      * @noinspection SensitiveParameterInspection

@@ -21,7 +21,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @mixin \App\Models\JWTUser
  * @mixin \App\Models\User
  */
-class UserResource extends JsonResource
+final class UserResource extends JsonResource
 {
     #[\Override]
     public function toArray(Request $request): array|Arrayable|\JsonSerializable

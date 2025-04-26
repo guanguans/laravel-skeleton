@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class ClearLogsCommand extends Command
+final class ClearLogsCommand extends Command
 {
     protected $signature = 'clear:logs {days=30 : The number of days to keep}';
     protected $description = 'Clear logs';

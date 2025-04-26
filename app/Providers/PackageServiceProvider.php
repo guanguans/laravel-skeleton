@@ -31,7 +31,7 @@ use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
 
-class PackageServiceProvider extends ServiceProvider
+final class PackageServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

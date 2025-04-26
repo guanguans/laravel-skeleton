@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Log;
 /**
  * @see https://gist.github.com/valorin/b90dc36197f47323a9207093f6a6dfc5
  */
-class LogActivity
+final class LogActivity
 {
     public function login(AuthEvents\Login $event): void
     {
@@ -50,7 +50,7 @@ class LogActivity
 
     public static function callbackFor(string $method): string
     {
-        return static::class.'@'.$method;
+        return self::class.'@'.$method;
     }
 
     private function info(object $event, string $message, array $context = []): void

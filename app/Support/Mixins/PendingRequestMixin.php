@@ -28,7 +28,7 @@ use Psr\Log\LoggerInterface;
  * @see https://github.com/TheDragonCode/laravel-http-macros
  */
 #[Mixin(PendingRequest::class)]
-class PendingRequestMixin
+final class PendingRequestMixin
 {
     public function withLogger(): \Closure
     {

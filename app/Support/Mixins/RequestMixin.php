@@ -24,7 +24,7 @@ use Illuminate\Support\Arr;
  * @mixin \Illuminate\Http\Request
  */
 #[Mixin(Request::class)]
-class RequestMixin
+final class RequestMixin
 {
     public function userId(): callable
     {

@@ -17,7 +17,7 @@ use Guanguans\LaravelSoar\SoarServiceProvider;
 use Illuminate\Support\AggregateServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class WhenLocalAggregateServiceProvider extends AggregateServiceProvider
+final class WhenLocalAggregateServiceProvider extends AggregateServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

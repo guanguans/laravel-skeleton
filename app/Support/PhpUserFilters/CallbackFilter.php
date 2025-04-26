@@ -20,4 +20,4 @@ namespace App\Support\PhpUserFilters;
  * @see https://www.php.net/manual/zh/book.stream.php
  * @see https://www.php.net/manual/zh/class.php-user-filter.php
  */
-class CallbackFilter extends \Clue\StreamFilter\CallbackFilter {}
+final class CallbackFilter extends \Clue\StreamFilter\CallbackFilter {}

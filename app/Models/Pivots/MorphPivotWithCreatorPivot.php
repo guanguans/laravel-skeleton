@@ -15,7 +15,7 @@ namespace App\Models\Pivots;
 
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
-class MorphPivotWithCreatorPivot extends MorphPivot
+final class MorphPivotWithCreatorPivot extends MorphPivot
 {
     public function fill(array $attributes): self
     {

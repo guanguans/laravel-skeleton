@@ -46,7 +46,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class GenerateTestsCommand extends Command
+final class GenerateTestsCommand extends Command
 {
     protected $signature = <<<'EOD'
         generate:tests
@@ -239,7 +239,7 @@ class GenerateTestsCommand extends Command
         $this->initializeProperties();
     }
 
-    protected function checkOptions(): void
+    private function checkOptions(): void
     {
         if (!\in_array($this->option('method-format'), ['snake', 'camel'], true)) {
             $this->error('The method-format option is not valid(snake/camel).');
@@ -274,7 +274,7 @@ class GenerateTestsCommand extends Command
         }
     }
 
-    protected function initializeEnvs(): void
+    private function initializeEnvs(): void
     {
         $xdebug = new XdebugHandler(self::class);
         $xdebug->check();
@@ -285,7 +285,7 @@ class GenerateTestsCommand extends Command
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
 
-    protected function initializeProperties(): void
+    private function initializeProperties(): void
     {
         $this->fileFinder = tap(
             Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true),

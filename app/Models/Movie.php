@@ -21,7 +21,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Orbit\Concerns\Orbital;
 use Orbit\Concerns\SoftDeletes;
 
-class Movie extends Model
+final class Movie extends Model
 {
     use Orbital;
     use SerializeDate;

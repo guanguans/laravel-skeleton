@@ -17,7 +17,7 @@ use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
-class CommaSeparatedToArrayCastUsing implements Castable
+final class CommaSeparatedToArrayCastUsing implements Castable
 {
     /**
      * @param list<mixed> $arguments

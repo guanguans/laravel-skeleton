@@ -27,7 +27,7 @@ use Illuminate\Support\Stringable;
  * @mixin \Illuminate\Console\Scheduling\Event
  */
 #[Mixin(Event::class)]
-class SchedulingEventMixin
+final class SchedulingEventMixin
 {
     public function userAppendOutputToDaily(): callable
     {

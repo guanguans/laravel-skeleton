@@ -15,7 +15,7 @@ namespace App\Listeners;
 
 use Illuminate\Support\Facades\Config;
 
-class CollectGarbageListener
+final class CollectGarbageListener
 {
     /**
      * @noinspection PhpUnusedParameterInspection

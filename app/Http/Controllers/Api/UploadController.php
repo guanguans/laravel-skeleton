@@ -17,7 +17,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Overtrue\LaravelUploader\StrategyResolver;
 
-class UploadController extends Controller
+final class UploadController extends Controller
 {
     public function __invoke(string $strategy, Request $request): JsonResponse
     {

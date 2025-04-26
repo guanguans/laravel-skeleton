@@ -15,7 +15,7 @@ namespace App\Support\Signers;
 
 use App\Support\Contracts\SignerContract;
 
-readonly class HmacSigner implements SignerContract
+final readonly class HmacSigner implements SignerContract
 {
     public function __construct(
         #[\SensitiveParameter]

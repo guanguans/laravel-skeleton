@@ -28,7 +28,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 #[Mixin(EloquentBuilder::class)]
 #[Mixin(QueryBuilder::class)]
 #[Mixin(RelationBuilder::class)]
-class WhereFullTextQueryBuilderMixin
+final class WhereFullTextQueryBuilderMixin
 {
     public function whereFullText(): callable
     {

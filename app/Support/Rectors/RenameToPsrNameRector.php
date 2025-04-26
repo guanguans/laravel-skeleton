@@ -51,7 +51,7 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
 
-class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
+final class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
 {
     /**
      * @var list<string>
@@ -59,7 +59,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
      * @noinspection PropertyCanBeStaticInspection
      * @noinspection RedundantSuppression
      */
-    protected array $except = [
+    private array $except = [
         '_*',
         '*_',
 
@@ -334,7 +334,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
-    protected function rename(Node $node, callable $renamer): ?Node
+    private function rename(Node $node, callable $renamer): ?Node
     {
         $renamer = fn (string $name): string => $renamer((function (string $name): string {
             throw_if($this->isMatches($name, $this->except), \RuntimeException::class, "The name[$name] is skipped.");
@@ -419,7 +419,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
-    protected function shouldLowerSnakeName(Node $node): bool
+    private function shouldLowerSnakeName(Node $node): bool
     {
         $parent = $node->getAttribute('parent');
 
@@ -448,7 +448,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
-    protected function shouldUcfirstCamelName(Node $node): bool
+    private function shouldUcfirstCamelName(Node $node): bool
     {
         $parent = $node->getAttribute('parent');
 
@@ -545,7 +545,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
-    protected function shouldUpperSnakeName(Node $node): bool
+    private function shouldUpperSnakeName(Node $node): bool
     {
         $parent = $node->getAttribute('parent');
 
@@ -586,7 +586,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param Node\Expr\FuncCall|Node\Expr\Variable|Node\Identifier|Node\Name $node
      */
-    protected function shouldLcfirstCamelName(Node $node): bool
+    private function shouldLcfirstCamelName(Node $node): bool
     {
         // $varName;
         if ($node instanceof Variable && \is_string($node->name)) {
@@ -647,7 +647,7 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
     /**
      * @param class-string|object $object
      */
-    protected function isSubclasses(object|string $object, array $classes): bool
+    private function isSubclasses(object|string $object, array $classes): bool
     {
         if (!\is_object($object)) {
             return false;
@@ -662,14 +662,14 @@ class RenameToPsrNameRector extends AbstractRector implements ConfigurableRector
         return false;
     }
 
-    protected function hasFuncCallIndexStringArg(FuncCall $funcCall, int $index): bool
+    private function hasFuncCallIndexStringArg(FuncCall $funcCall, int $index): bool
     {
         return isset($funcCall->args[$index])
             && null === $funcCall->args[$index]->name
             && $funcCall->args[$index]->value instanceof String_;
     }
 
-    protected function hasFuncCallNameStringArg(FuncCall $funcCall, string $name): bool
+    private function hasFuncCallNameStringArg(FuncCall $funcCall, string $name): bool
     {
         foreach ($funcCall->args as $arg) {
             if (

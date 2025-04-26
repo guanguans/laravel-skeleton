@@ -18,7 +18,7 @@ namespace App\Http\Requests\Auth;
 use App\Models\JWTUser;
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexRequest extends FormRequest
+final class IndexRequest extends FormRequest
 {
     public function authorize(): bool
     {

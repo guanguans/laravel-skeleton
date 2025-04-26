@@ -17,7 +17,7 @@ use Illuminate\Support\Arr;
 use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
 
-class EloquentLogHttpModelProcessor implements ProcessorInterface
+final class EloquentLogHttpModelProcessor implements ProcessorInterface
 {
     public function __invoke(LogRecord $record): LogRecord
     {

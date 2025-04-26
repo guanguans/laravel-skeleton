@@ -24,7 +24,7 @@ use Monolog\Processor\ProcessorInterface;
  * @see https://github.com/creitive/monolog-extra-data-processor
  * @see https://github.com/WyriHaximus/php-monolog-processors
  */
-readonly class AppendExtraDataProcessor implements ProcessorInterface
+final readonly class AppendExtraDataProcessor implements ProcessorInterface
 {
     public function __construct(private array $extraData) {}
 

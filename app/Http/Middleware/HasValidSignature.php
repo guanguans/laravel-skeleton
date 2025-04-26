@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
  *
  * @see https://github.com/nandi95/laravel-starter/blob/main/app/Http/Middleware/HasValidSignature.php
  */
-class HasValidSignature
+final class HasValidSignature
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

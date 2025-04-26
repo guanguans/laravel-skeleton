@@ -22,7 +22,7 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
-class OpcacheUrlCommand extends Command
+final class OpcacheUrlCommand extends Command
 {
     // use CreatesRequest;
     protected $signature = 'opcache:url {route=compile} {--force}';

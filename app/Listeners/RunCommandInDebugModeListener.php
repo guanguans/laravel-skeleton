@@ -28,7 +28,7 @@ use function Illuminate\Support\php_binary;
  * @see https://symfony.com/doc/current/components/console/events.html
  */
 #[AsEventListener(ConsoleEvents::COMMAND, 'configure')]
-class RunCommandInDebugModeListener
+final class RunCommandInDebugModeListener
 {
     /**
      * @throws \Throwable

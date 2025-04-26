@@ -18,7 +18,7 @@ namespace App\Support\Attributes;
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 // #️⃣[\Attribute(\Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
-readonly class Autowired
+final readonly class Autowired
 {
     public function __construct(
         public ?string $propertyType = null,

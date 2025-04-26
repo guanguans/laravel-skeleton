@@ -16,7 +16,7 @@ namespace App\Listeners;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Arr;
 
-class TraceEventListener
+final class TraceEventListener
 {
     public function __invoke(string $event): void
     {

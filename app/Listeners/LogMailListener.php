@@ -16,7 +16,7 @@ namespace App\Listeners;
 use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Support\Facades\Log;
 
-class LogMailListener
+final class LogMailListener
 {
     public function handle(MessageSent $event): void
     {

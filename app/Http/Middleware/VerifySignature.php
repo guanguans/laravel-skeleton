@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class VerifySignature
+final class VerifySignature
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

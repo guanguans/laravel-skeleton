@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\DB;
 #[Mixin(EloquentBuilder::class)]
 #[Mixin(QueryBuilder::class)]
 #[Mixin(RelationBuilder::class)]
-class WhereFindInSetQueryBuilderMixin
+final class WhereFindInSetQueryBuilderMixin
 {
     public function whereFindInSet(): callable
     {

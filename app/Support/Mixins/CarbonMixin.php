@@ -20,7 +20,7 @@ use Illuminate\Support\Carbon;
  * @mixin \Illuminate\Support\Carbon
  */
 #[Mixin(Carbon::class)]
-class CarbonMixin
+final class CarbonMixin
 {
     public function inAppTimezone(): \Closure
     {
@@ -39,6 +39,6 @@ class CarbonMixin
      */
     public function toFormattedDateTimeString(): \Closure
     {
-        return static fn (): Carbon => static::this()->format('Y-m-d H:i:s');
+        return static fn (): Carbon => self::this()->format('Y-m-d H:i:s');
     }
 }

@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/MGeurts/genealogy/blob/main/app/Http/Middleware/LogAllRequests.php
  */
-class LogAllRequests
+final class LogAllRequests
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

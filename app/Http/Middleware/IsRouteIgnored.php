@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://blog.oussama-mater.tech/php-attributes/
  */
-class IsRouteIgnored
+final class IsRouteIgnored
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

@@ -77,9 +77,9 @@ use Illuminate\Support\Sleep;
  * @see https://github.com/sarfraznawaz2005/laravel-sse
  * @see https://github.com/qruto/laravel-wave
  */
-class ServerSentEvent implements \Stringable
+final class ServerSentEvent implements \Stringable
 {
-    final public const array HEADERS = [
+    public const array HEADERS = [
         'Content-Type' => 'text/event-stream',
         'Connection' => 'keep-alive',
         'Cache-Control' => 'no-cache, no-store, must-revalidate, pre-check=0, post-check=0',

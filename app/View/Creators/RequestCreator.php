@@ -16,7 +16,7 @@ namespace App\View\Creators;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-readonly class RequestCreator
+final readonly class RequestCreator
 {
     public function __construct(private Request $request) {}
 

@@ -30,7 +30,7 @@ use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-class ClassHandleMethodRector extends AbstractRector
+final class ClassHandleMethodRector extends AbstractRector
 {
     public function __construct(
         private readonly DocBlockUpdater $docBlockUpdater,
@@ -43,7 +43,7 @@ class ClassHandleMethodRector extends AbstractRector
      * @throws PoorDocumentationException
      * @throws ShouldNotHappenException
      */
-    final public function getRuleDefinition(): RuleDefinition
+    public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
             'Add noinspections doc comment to declare',
@@ -87,7 +87,7 @@ class ClassHandleMethodRector extends AbstractRector
     }
 
     #[\Override]
-    final public function getNodeTypes(): array
+    public function getNodeTypes(): array
     {
         return [
             ClassMethod::class,
@@ -98,7 +98,7 @@ class ClassHandleMethodRector extends AbstractRector
      * @param Node\Stmt\ClassMethod $node
      */
     #[\Override]
-    final public function refactor(Node $node): ?Node
+    public function refactor(Node $node): ?Node
     {
         if (!$this->isName($node, 'handle')) {
             return null;

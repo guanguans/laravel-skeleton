@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Http;
  * @see https://ammar-aldwayma.me/blog/dealing-with-an-unstable-services-in-laravel
  * @see https://www.harrisrafto.eu/enhancing-your-laravel-job-handling-with-middleware-managing-httpclientexception
  */
-class SendThirdPartyRequestJob implements ShouldQueue
+final class SendThirdPartyRequestJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

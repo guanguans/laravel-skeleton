@@ -21,7 +21,7 @@ namespace App\Support\StreamWrappers;
 /**
  * @see https://www.php.net/manual/zh/class.globiterator.php
  */
-class GlobStreamWrapper extends StreamWrapper
+final class GlobStreamWrapper extends StreamWrapper
 {
     private array $files = [];
     private int $position = 0;
@@ -40,7 +40,7 @@ class GlobStreamWrapper extends StreamWrapper
     }
 
     #[\Override]
-    final public static function name(): string
+    public static function name(): string
     {
         return 'glob';
     }

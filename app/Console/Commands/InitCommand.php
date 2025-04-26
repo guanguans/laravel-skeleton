@@ -23,4 +23,4 @@ use Symfony\Component\Console\Attribute\AsCommand;
  * @see https://github.com/RonasIT/laravel-project-initializator
  */
 #[AsCommand('init')]
-class InitCommand extends Command implements Isolatable {}
+final class InitCommand extends Command implements Isolatable {}

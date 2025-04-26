@@ -17,7 +17,7 @@ use Hamidrezaniazi\Pecs\Monolog\EcsFormatter;
 use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Logger;
 
-class EcsFormatterTapper
+final class EcsFormatterTapper
 {
     public function __invoke(Logger $logger): void
     {

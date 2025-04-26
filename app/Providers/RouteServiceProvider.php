@@ -22,12 +22,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Traits\Conditionable;
 
-class RouteServiceProvider extends ServiceProvider
+final class RouteServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
     }
-    protected array $routeModels = [
+    private array $routeModels = [
         'user' => User::class,
         JWTUser::class,
     ];

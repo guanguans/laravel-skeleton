@@ -19,7 +19,7 @@ use Symfony\Component\Console\Style\OutputStyle;
 /**
  * @see https://github.com/matchish/laravel-scout-elasticsearch/blob/master/src/Console/Commands/ProgressBarFactory.php
  */
-readonly class ProgressBarFactory
+final readonly class ProgressBarFactory
 {
     public function __construct(
         /** @var OutputStyle */

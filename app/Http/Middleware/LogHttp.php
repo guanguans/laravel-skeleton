@@ -24,7 +24,7 @@ use Illuminate\Support\Str;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class LogHttp
+final class LogHttp
 {
     /** @var list<\Closure> */
     private static array $skipCallbacks = [];
@@ -55,7 +55,7 @@ class LogHttp
          *
          * @see https://www.harrisrafto.eu/mastering-laravels-terminable-middleware-post-response-magic/
          */
-        app()->instance(static::class, $this);
+        app()->instance(self::class, $this);
     }
 
     /**
@@ -63,7 +63,7 @@ class LogHttp
      */
     public static function skipWhen(\Closure $callback): void
     {
-        static::$skipCallbacks[] = $callback;
+        self::$skipCallbacks[] = $callback;
     }
 
     public static function setLogger(LoggerInterface|string $logger): void
@@ -76,12 +76,12 @@ class LogHttp
             $logger = new Logger($logger, app(Dispatcher::class));
         }
 
-        static::$logger = $logger;
+        self::$logger = $logger;
     }
 
     public static function setLevel(string $level): void
     {
-        static::$level = $level;
+        self::$level = $level;
     }
 
     /**
@@ -91,8 +91,8 @@ class LogHttp
      */
     public function handle(Request $request, \Closure $next, LoggerInterface|string $logger, string $level = 'info'): SymfonyResponse
     {
-        static::setLogger($logger);
-        static::setLevel($level);
+        self::setLogger($logger);
+        self::setLevel($level);
         // $this->terminate($request, $next($request));
 
         return $next($request);
@@ -104,8 +104,8 @@ class LogHttp
             return;
         }
 
-        static::$logger->log(
-            static::$level,
+        self::$logger->log(
+            self::$level,
             $this->messageFor($request, $response),
             $this->contextFor($request, $response)
         );
@@ -113,7 +113,7 @@ class LogHttp
 
     private function shouldSkip(Request $request): bool
     {
-        foreach (static::$skipCallbacks as $callback) {
+        foreach (self::$skipCallbacks as $callback) {
             if ($callback($request)) {
                 return true;
             }

@@ -16,7 +16,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class PingController extends Controller
+final class PingController extends Controller
 {
     public function ping(Request $request, int $isBad = 0): JsonResponse
     {

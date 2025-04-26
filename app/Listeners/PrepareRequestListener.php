@@ -21,9 +21,9 @@ use Illuminate\Support\Str;
  * @see \Illuminate\Foundation\Http\Kernel::bootstrappers()
  * @see \Illuminate\Foundation\Application::bootstrapWith()
  */
-class PrepareRequestListener
+final class PrepareRequestListener
 {
-    final public const string X_REQUEST_ID = 'X-Request-Id';
+    public const string X_REQUEST_ID = 'X-Request-Id';
 
     /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException

@@ -17,7 +17,7 @@ namespace App\Support\Attributes;
  * @see https://blog.oussama-mater.tech/php-attributes/
  */
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD)]
-readonly class Ignore
+final readonly class Ignore
 {
     public function __construct(
         public array $in = ['production']

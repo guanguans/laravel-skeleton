@@ -17,7 +17,7 @@ use App\Support\Attributes\Mixin;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class AppServiceProvider extends ServiceProvider
+final class AppServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

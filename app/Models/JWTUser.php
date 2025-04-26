@@ -18,7 +18,7 @@ namespace App\Models;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Watson\Validating\ValidatingTrait;
 
-class JWTUser extends User implements JWTSubject
+final class JWTUser extends User implements JWTSubject
 {
     use ValidatingTrait;
     protected $table = 'users';

@@ -15,7 +15,7 @@ namespace App\Observers;
 
 use App\Models\User;
 
-class UserObserver
+final class UserObserver
 {
     /**
      * Handle the User "created" event.

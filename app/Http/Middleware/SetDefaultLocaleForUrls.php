@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://www.harrisrafto.eu/simplifying-route-parameters-with-laravels-url-defaults/
  */
-class SetDefaultLocaleForUrls
+final class SetDefaultLocaleForUrls
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

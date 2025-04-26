@@ -27,7 +27,7 @@ use function Illuminate\Filesystem\join_paths;
  * $resource = opendir('user-file://dir');
  * ```.
  */
-class UserFileStreamWrapper extends StreamWrapper
+final class UserFileStreamWrapper extends StreamWrapper
 {
     /** @var null|resource */
     private $handle;
@@ -46,7 +46,7 @@ class UserFileStreamWrapper extends StreamWrapper
     }
 
     #[\Override]
-    final public static function name(): string
+    public static function name(): string
     {
         return 'user-file';
     }

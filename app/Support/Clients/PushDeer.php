@@ -20,7 +20,7 @@ use Illuminate\Http\Client\Response;
 /**
  * @see http://www.pushdeer.com/dev.html
  */
-class PushDeer extends AbstractClient
+final class PushDeer extends AbstractClient
 {
     /**
      * @throws \Illuminate\Http\Client\ConnectionException

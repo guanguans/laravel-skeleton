@@ -20,7 +20,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rules\Password;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class VerifyFormPassword
+final class VerifyFormPassword
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

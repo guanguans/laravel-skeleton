@@ -21,7 +21,7 @@ use Mtownsend\ReadTime\ReadTime;
  * @mixin \Illuminate\Support\Str
  */
 #[Mixin(Str::class)]
-class StrMixin
+final class StrMixin
 {
     /**
      * @see https://github.com/symfony/polyfill-php83

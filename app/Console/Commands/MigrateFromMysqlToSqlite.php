@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\File;
 /**
  * @see https://github.com/vitodeploy/vito/blob/2.x/app/Console/Commands/MigrateFromMysqlToSqlite.php
  */
-class MigrateFromMysqlToSqlite extends Command
+final class MigrateFromMysqlToSqlite extends Command
 {
     protected $signature = 'migrate-from-mysql-to-sqlite';
     protected $description = 'Migrate from Mysql to SQLite';

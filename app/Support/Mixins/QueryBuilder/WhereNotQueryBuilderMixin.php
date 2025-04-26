@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\DB;
 #[Mixin(EloquentBuilder::class)]
 #[Mixin(QueryBuilder::class)]
 #[Mixin(RelationBuilder::class)]
-class WhereNotQueryBuilderMixin
+final class WhereNotQueryBuilderMixin
 {
     /** The count for each table. */
     private static array $tableSubCount = [];

@@ -20,7 +20,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse as SymfonyJsonResponse;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class SetJsonResponseEncodingOptions
+final class SetJsonResponseEncodingOptions
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

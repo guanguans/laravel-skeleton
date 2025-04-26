@@ -15,7 +15,7 @@ namespace App\Exceptions;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class BadRequestHttpException extends \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+final class BadRequestHttpException extends \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
 {
     /**
      * @see self::fromStatusCode()

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class QueueServiceProvider extends ServiceProvider
+final class QueueServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

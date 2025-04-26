@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Redis;
 /**
  * @see https://www.harrisrafto.eu/throttling-jobs-in-laravel-to-prevent-api-flooding
  */
-class RateLimitedForJob
+final class RateLimitedForJob
 {
     /**
      * @noinspection PhpDocSignatureInspection
@@ -30,7 +30,7 @@ class RateLimitedForJob
      */
     public function handle(ShouldQueue $job, \Closure $next): void
     {
-        Redis::throttle(static::class)
+        Redis::throttle(self::class)
             ->block(2) // 指定任务获得锁最多等待 2 秒。
             ->allow(10)->every(2) // 每 2 秒最多允许 10 次操作。
             ->then(

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-class EvenNumberRule extends RegexRule
+final class EvenNumberRule extends RegexRule
 {
     #[\Override]
     protected function pattern(): string

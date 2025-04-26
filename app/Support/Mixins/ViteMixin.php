@@ -20,7 +20,7 @@ use Illuminate\Foundation\Vite;
  * @mixin \Illuminate\Foundation\Vite
  */
 #[Mixin(Vite::class)]
-class ViteMixin
+final class ViteMixin
 {
     /**
      * @see https://github.com/dasundev/dasun.dev

@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * ETag middleware.
  */
-class ETag
+final class ETag
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

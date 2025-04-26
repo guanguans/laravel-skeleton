@@ -35,7 +35,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
  * @see https://larasec.substack.com/p/in-depth-content-security-policy
  * @see https://gist.github.com/valorin/d4cb9daa190fdee90603efaa8cbc5886
  */
-class CSP
+final class CSP
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

@@ -20,7 +20,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class VerifyCommonParameters
+final class VerifyCommonParameters
 {
     /** @var list<string> */
     private static array $rules = [

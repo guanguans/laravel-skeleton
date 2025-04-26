@@ -18,7 +18,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 /**
  * @see https://www.daveyshafik.com/archives/70916-laravel-pipelines-and-composable-job-middleware.html
  */
-class EnsureTokenIsValid
+final class EnsureTokenIsValid
 {
     public function handle(ShouldQueue $job, \Closure $next): void
     {

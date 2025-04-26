@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-class HtmlTagRule extends RegexRule
+final class HtmlTagRule extends RegexRule
 {
     #[\Override]
     protected function pattern(): string

@@ -20,7 +20,7 @@ use Illuminate\Support\Pluralizer;
 use Illuminate\Support\Str;
 use Symfony\Component\String\Inflector\EnglishInflector;
 
-class InflectorCommand extends Command
+final class InflectorCommand extends Command
 {
     protected $signature = 'inflector';
     protected $description = 'Inflector pluralizes and singularizes English nouns.';

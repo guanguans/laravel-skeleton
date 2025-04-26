@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/MGeurts/genealogy/blob/main/app/Http/Middleware/IsDeveloper.php
  */
-class IsDeveloper
+final class IsDeveloper
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

@@ -23,7 +23,7 @@ use Illuminate\Support\Stringable;
  * @mixin \Illuminate\Support\Stringable
  */
 #[Mixin(Stringable::class)]
-class StringableMixin
+final class StringableMixin
 {
     public function jsonValidate(): \Closure
     {

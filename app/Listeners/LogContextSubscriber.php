@@ -18,7 +18,7 @@ use Illuminate\Console\Events\ScheduledTaskStarting;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Context;
 
-class LogContextSubscriber
+final class LogContextSubscriber
 {
     public function subscribe(): array
     {

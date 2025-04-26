@@ -20,10 +20,10 @@ use App\Support\Attributes\Mixin;
  * @mixin \App\Models\Model
  */
 #[Mixin(Model::class)]
-class ModelMixin
+final class ModelMixin
 {
     public static function getTableName(): \Closure
     {
-        return static fn (): string => (new static)->getTable();
+        return static fn (): string => (new self)->getTable();
     }
 }

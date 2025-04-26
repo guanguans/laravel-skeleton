@@ -18,7 +18,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class Curl implements ClientInterface
+final class Curl implements ClientInterface
 {
     public const int DEFAULT_CONNECTION_TIMEOUT = 0;
     private const array BODYLESS_HTTP_METHODS = ['HEAD', 'GET'];

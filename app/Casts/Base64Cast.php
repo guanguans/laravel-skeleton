@@ -16,7 +16,7 @@ namespace App\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
-readonly class Base64Cast implements CastsAttributes
+final readonly class Base64Cast implements CastsAttributes
 {
     public function __construct(
         private bool $isCastGet = true,

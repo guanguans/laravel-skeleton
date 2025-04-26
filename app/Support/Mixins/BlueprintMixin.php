@@ -25,7 +25,7 @@ use Illuminate\Support\Fluent;
  * @mixin \Illuminate\Database\Schema\Blueprint
  */
 #[Mixin(Blueprint::class)]
-class BlueprintMixin
+final class BlueprintMixin
 {
     /**
      * @see https://xammar-aldwayma.me/blog/avoid-duplication-in-laravel-migrations-with-custom-blueprint-macros

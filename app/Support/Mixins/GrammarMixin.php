@@ -23,7 +23,7 @@ use Illuminate\Support\Fluent;
  * @mixin \Illuminate\Database\Schema\Grammars\Grammar
  */
 #[Mixin(Grammar::class)]
-class GrammarMixin
+final class GrammarMixin
 {
     /**
      * Compile a table comment command.

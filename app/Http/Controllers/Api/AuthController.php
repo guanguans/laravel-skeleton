@@ -34,7 +34,7 @@ use function Illuminate\Support\defer;
  * @see https://laravel-jwt-auth.readthedocs.io/en/latest/quick-start/
  * @see https://github.com/nandi95/laravel-starter/blob/main/app/Http/Controllers/Authentication/
  */
-class AuthController extends Controller
+final class AuthController extends Controller
 {
     public function index(IndexRequest $request): JsonResponse
     {

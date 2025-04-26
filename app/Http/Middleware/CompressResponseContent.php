@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/vrkansagara/LaraOutPress
  */
-class CompressResponseContent
+final class CompressResponseContent
 {
     /** @var list<\Closure> */
     private static array $skipCallbacks = [];
@@ -66,7 +66,7 @@ class CompressResponseContent
      */
     public static function skipWhen(\Closure $callback): void
     {
-        static::$skipCallbacks[] = $callback;
+        self::$skipCallbacks[] = $callback;
     }
 
     /**
@@ -74,21 +74,21 @@ class CompressResponseContent
      */
     public static function mergeReplacementRules(array $replacementRules): void
     {
-        static::$replacementRules = [...static::$replacementRules, ...$replacementRules];
+        self::$replacementRules = [...self::$replacementRules, ...$replacementRules];
     }
 
-    protected function shouldCompress(Request $request): bool
+    private function shouldCompress(Request $request): bool
     {
         return !$this->shouldntCompress($request);
     }
 
-    protected function shouldntCompress(Request $request): bool
+    private function shouldntCompress(Request $request): bool
     {
         if ($request->expectsJson()) {
             return true;
         }
 
-        foreach (static::$skipCallbacks as $callback) {
+        foreach (self::$skipCallbacks as $callback) {
             if ($callback($request)) {
                 return true;
             }
@@ -97,7 +97,7 @@ class CompressResponseContent
         return false;
     }
 
-    protected function debugInformation(string $content, string $compressedContent): string
+    private function debugInformation(string $content, string $compressedContent): string
     {
         $compressingContentSize = \strlen($content);
         $compressedContentSize = \strlen($compressedContent);
@@ -123,14 +123,14 @@ class CompressResponseContent
             HTML;
     }
 
-    protected function compress(string $content): string
+    private function compress(string $content): string
     {
         $compressedContent = $this->compressJavascript($content);
 
         return $this->compressHtml($compressedContent);
     }
 
-    protected function compressJavascript(string $content): string
+    private function compressJavascript(string $content): string
     {
         // JavaScript compressor by John Elliot <jj5@jj5.net>
         $replaceRules = [
@@ -180,7 +180,7 @@ class CompressResponseContent
         return trim($compressedContent);
     }
 
-    protected function compressHtml(string $content): string
+    private function compressHtml(string $content): string
     {
         $whiteSpaceRules = [
             '/(\s)+/s' => '\\1', // shorten multiple whitespace sequences
@@ -213,14 +213,14 @@ class CompressResponseContent
             // '/\bOldWord\b/i' => 'NewWord'
         ];
 
-        $rules = [...$replaceWordsRules, ...$commentRules, ...$whiteSpaceRules, ...static::$replacementRules];
+        $rules = [...$replaceWordsRules, ...$commentRules, ...$whiteSpaceRules, ...self::$replacementRules];
 
         $compressedContent = preg_replace(array_keys($rules), $rules, $content);
 
         return trim($compressedContent);
     }
 
-    protected function formatBytes(int $bytes, int $precision = 2): string
+    private function formatBytes(int $bytes, int $precision = 2): string
     {
         if (0 < $bytes) {
             $index = (int) floor(log($bytes) / log(1024));
@@ -238,7 +238,7 @@ class CompressResponseContent
      *
      * @deprecated
      */
-    protected function simpleCompression(string $content): string
+    private function simpleCompression(string $content): string
     {
         /**
          * To remove useless whitespace from generated HTML, except for Javascript.

@@ -25,7 +25,7 @@ use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
-class SupportServiceProvider extends ServiceProvider
+final class SupportServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

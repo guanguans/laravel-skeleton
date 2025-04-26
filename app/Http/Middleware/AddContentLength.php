@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 /**
  * @see https://github.com/ushahidi/platform/blob/develop/app/Http/Middleware/AddContentLength.php
  */
-class AddContentLength
+final class AddContentLength
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

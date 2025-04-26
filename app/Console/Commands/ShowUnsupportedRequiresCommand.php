@@ -27,7 +27,7 @@ use Spatie\Packagist\PackagistUrlGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ShowUnsupportedRequiresCommand extends Command
+final class ShowUnsupportedRequiresCommand extends Command
 {
     protected $signature = <<<'EOF'
         show-unsupported-requires

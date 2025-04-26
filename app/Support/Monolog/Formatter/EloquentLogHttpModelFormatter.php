@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
 use Monolog\Formatter\NormalizerFormatter;
 use Monolog\LogRecord;
 
-class EloquentLogHttpModelFormatter extends NormalizerFormatter
+final class EloquentLogHttpModelFormatter extends NormalizerFormatter
 {
     #[\Override]
     public function format(LogRecord $record): array

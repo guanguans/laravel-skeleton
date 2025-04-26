@@ -28,7 +28,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 #[Mixin(EloquentBuilder::class)]
 #[Mixin(QueryBuilder::class)]
 #[Mixin(RelationBuilder::class)]
-class WhereLikeQueryBuilderMixin
+final class WhereLikeQueryBuilderMixin
 {
     public function whereLike(): callable
     {

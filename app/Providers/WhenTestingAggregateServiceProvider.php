@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\ParallelTesting;
 use Illuminate\Support\Traits\Conditionable;
 
-class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
+final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

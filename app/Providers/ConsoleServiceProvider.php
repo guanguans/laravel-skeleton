@@ -25,7 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @property EventDispatcherInterface $symfonyDispatcher
  */
-class ConsoleServiceProvider extends ServiceProvider
+final class ConsoleServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-class SetLocales
+final class SetLocales
 {
     /**
      * @noinspection RedundantDocCommentTagInspection

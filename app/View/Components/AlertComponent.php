@@ -15,7 +15,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class AlertComponent extends Component
+final class AlertComponent extends Component
 {
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     protected $except = [
