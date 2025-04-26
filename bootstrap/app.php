@@ -35,7 +35,7 @@ use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-$app = Application::configure(basePath: \dirname(__DIR__))
+return Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {})
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -142,11 +142,8 @@ $app = Application::configure(basePath: \dirname(__DIR__))
         $exceptions->reportable(static function (QueryException $queryException): void {});
         $exceptions->renderable(static function (QueryException $queryException): void {});
     })
-    ->create();
-
-$app->afterLoadingEnvironment((new PrepareRequestListener)(...));
-
-/** @noinspection PhpUnhandledExceptionInspection */
-$app->make(DispatcherContract::class)->listen('*', TraceEventListener::class);
-
-return $app;
+    ->create()
+    ->tap(function (Application $app): void {
+        $app->afterLoadingEnvironment((new PrepareRequestListener)(...));
+        $app->make(DispatcherContract::class)->listen('*', TraceEventListener::class);
+    });

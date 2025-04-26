@@ -27,6 +27,8 @@ final class TraceEventListener
         if (!$clear && is_file($file)) {
             unlink($file);
             $clear = true;
+            date_default_timezone_set('Asia/Shanghai');
+            file_put_contents($file, date('Y-m-d H:i:s').\PHP_EOL.\PHP_EOL);
         }
 
         /**
