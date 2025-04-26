@@ -34,11 +34,8 @@ final class CarbonMixin
         );
     }
 
-    /**
-     * @noinspection PhpIncompatibleReturnTypeInspection
-     */
     public function toFormattedDateTimeString(): \Closure
     {
-        return static fn (): Carbon => self::this()->format('Y-m-d H:i:s');
+        return static fn (): string => self::this()->format('Y-m-d H:i:s');
     }
 }

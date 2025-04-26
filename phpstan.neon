@@ -30,6 +30,7 @@ includes:
 rules:
 #    - App\Support\PHPStan\ForbiddenGlobalFunctionsRule
 
+# https://phpstan.org/writing-php-code/phpdoc-types
 parameters:
     paths:
         - app/
@@ -41,7 +42,7 @@ parameters:
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 2
+    level: 3
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify

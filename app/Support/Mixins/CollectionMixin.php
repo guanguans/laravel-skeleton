@@ -32,7 +32,7 @@ final class CollectionMixin
      */
     public static function json(): callable
     {
-        return static fn (string $json, int $depth = 512, int $options = 0): static => new self(json_decode(
+        return static fn (string $json, int $depth = 512, int $options = 0): self => new self(json_decode(
             $json,
             true,
             $depth,
@@ -88,6 +88,7 @@ final class CollectionMixin
                 $callback($this);
             }
 
+            /** @var \Illuminate\Support\Collection $this */
             return $this;
         };
     }
@@ -151,6 +152,7 @@ final class CollectionMixin
     public function reduceWithKeys(): callable
     {
         return function (callable $callback, $carry = null) {
+            /** @var \Illuminate\Support\Collection $this */
             foreach ($this as $key => $value) {
                 $carry = $callback($carry, $value, $key);
             }

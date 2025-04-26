@@ -66,21 +66,18 @@ class User extends Authenticatable
 
     /**
      * {@inheritDoc}
-     *
-     * @noinspection PhpMissingParentCallCommonInspection
-     * @noinspection PhpMethodParametersCountMismatchInspection
      */
     #[\Override]
     public function newEloquentBuilder($query): Builder
     {
-        return new Builder($query);
+        return parent::newEloquentBuilder($query);
     }
 
-    #[\Override]
-    public static function query(): Builder
-    {
-        return parent::query();
-    }
+    // #[\Override]
+    // public static function query(): Builder
+    // {
+    //     return parent::query();
+    // }
 
     /**
      * {@inheritDoc}

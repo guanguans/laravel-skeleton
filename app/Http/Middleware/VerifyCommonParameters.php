@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 final class VerifyCommonParameters
 {
-    /** @var list<string> */
+    /** @var array<string, array|string> */
     private static array $rules = [
         'signature' => 'required|string',
         'timestamp' => 'required|int',

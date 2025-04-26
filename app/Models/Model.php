@@ -67,11 +67,11 @@ class Model extends \Illuminate\Database\Eloquent\Model
         return Arr::dot($this->toArray());
     }
 
-    #[\Override]
-    public function newCollection(array $models = []): Collection
-    {
-        return parent::newCollection($models);
-    }
+    // #[\Override]
+    // public function newCollection(array $models = []): Collection
+    // {
+    //     return parent::newCollection($models);
+    // }
 
     #[\Override]
     public function getRouteKeyName(): string
