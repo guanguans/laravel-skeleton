@@ -15,6 +15,7 @@ namespace App\Listeners;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 
 final class TraceEventListener
 {
@@ -28,7 +29,7 @@ final class TraceEventListener
             unlink($file);
             $clear = true;
             date_default_timezone_set('Asia/Shanghai');
-            file_put_contents($file, date('Y-m-d H:i:s').\PHP_EOL.\PHP_EOL);
+            file_put_contents($file, Carbon::now()->format("Y-m-d H:i:s\n\n"));
         }
 
         /**

@@ -143,7 +143,7 @@ return Application::configure(basePath: \dirname(__DIR__))
         $exceptions->renderable(static function (QueryException $queryException): void {});
     })
     ->create()
-    ->tap(function (Application $app): void {
+    ->tap(static function (Application $app): void {
         $app->afterLoadingEnvironment((new PrepareRequestListener)(...));
         $app->make(DispatcherContract::class)->listen('*', TraceEventListener::class);
     });

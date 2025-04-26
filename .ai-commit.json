@@ -10,7 +10,7 @@
     "generator": "github_models_cli",
     "generators": {
         "github_models_cli": {
-            "model": "gpt-4o"
+            "model": "gpt-4.1-mini"
         }
     }
 }
