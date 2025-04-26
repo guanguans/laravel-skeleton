@@ -117,7 +117,7 @@ final class FindDumpStatementCommand extends Command
             }
 
             $findInfos[] = array_map(function (Node $dumpNode) use ($fileInfo, $odd): array {
-                if ($dumpNode instanceof Expression && $dumpNode->expr instanceof FuncCall) {
+                if ($dumpNode instanceof Expression && $dumpNode->expr instanceof FuncCall && $dumpNode->expr->name instanceof Name) {
                     $name = "<fg=cyan>{$dumpNode->expr->name->getFirst()}</>";
                     $type = '<fg=cyan>func</>';
                 } else {

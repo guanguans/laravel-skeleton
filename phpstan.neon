@@ -42,7 +42,7 @@ parameters:
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 6
+    level: 7
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify
@@ -96,13 +96,14 @@ parameters:
         - identifier: logicalAnd.resultUnused
         - identifier: logicalOr.resultUnused
         - identifier: cast.string
-#        - identifier: encapsedStringPart.nonString
+        - identifier: encapsedStringPart.nonString
         - identifier: method.nonObject
         - identifier: trait.unused
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
-#        - identifier: return.type
+        - identifier: return.type
 #        - identifier: return.void
+        - identifier: assign.propertyType
 #        - identifier: symplify.noDynamicName
 #        - identifier: typePerfect.noMixedMethodCaller
 #        - identifier: new.static

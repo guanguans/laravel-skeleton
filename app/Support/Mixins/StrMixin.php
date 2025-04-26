@@ -65,7 +65,7 @@ final class StrMixin
 
             $acronym = '';
 
-            foreach (preg_split('/[^\p{L}]+/u', $string) as $word) {
+            foreach ((array) preg_split('/[^\p{L}]+/u', $string) as $word) {
                 if (!empty($word)) {
                     $firstLetter = mb_substr($word, 0, 1);
                     $acronym .= $firstLetter.$delimiter;

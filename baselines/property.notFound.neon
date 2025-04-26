@@ -1,0 +1,13 @@
+# total 8 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Access to an undefined property PhpParser\\Node\\Arg\|PhpParser\\Node\\VariadicPlaceholder\:\:\$name\.$#'
+            count: 2
+            path: ../app/Support/Rectors/RenameToPsrNameRector.php
+
+        -
+            message: '#^Access to an undefined property PhpParser\\Node\\Arg\|PhpParser\\Node\\VariadicPlaceholder\:\:\$value\.$#'
+            count: 6
+            path: ../app/Support/Rectors/RenameToPsrNameRector.php
