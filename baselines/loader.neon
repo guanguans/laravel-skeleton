@@ -1,4 +1,4 @@
-# total 13 errors
+# total 15 errors
 includes:
     - deadCode.unreachable.neon
     - disallowed.function.neon
@@ -7,4 +7,6 @@ includes:
     - if.alwaysTrue.neon
     - method.notFound.neon
     - method.unused.neon
+    - parameter.trait.neon
+    - property.trait.neon
     - return.unusedType.neon

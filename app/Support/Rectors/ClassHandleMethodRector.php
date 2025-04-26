@@ -131,7 +131,7 @@ final class ClassHandleMethodRector extends AbstractRector
 
         if (
             collect($phpDocInfo->getTagsByName($noinspectionTag))
-                ->filter(static fn (PhpDocTagNode $phpDocTagNode) => str($phpDocTagNode)->endsWith($noinspectionTagValue))
+                ->filter(static fn (PhpDocTagNode $phpDocTagNode) => str((string) $phpDocTagNode)->endsWith($noinspectionTagValue))
                 ->isEmpty()
         ) {
             $this->addEmptyPhpDocTagNodeFor($phpDocInfo);
@@ -145,7 +145,7 @@ final class ClassHandleMethodRector extends AbstractRector
         /** @noinspection MissingOrEmptyGroupStatementInspection */
         if (
             collect($phpDocInfo->getParamTagValueNodes())
-                ->filter(static fn (ParamTagValueNode $paramTagValueNode) => str($paramTagValueNode)->is(
+                ->filter(static fn (ParamTagValueNode $paramTagValueNode) => str((string) $paramTagValueNode)->is(
                     '\Closure(\Illuminate\Http\Request):\Symfony\Component\HttpFoundation\Response $next'
                 ))
                 ->isEmpty()

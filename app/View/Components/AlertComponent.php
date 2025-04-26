@@ -36,6 +36,7 @@ final class AlertComponent extends Component
     #[\Override]
     public function render(): View
     {
-        return view('components.alert');
+        // return view('components.alert');
+        return view('welcome');
     }
 }

@@ -42,7 +42,7 @@ parameters:
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 4
+    level: 5
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify
@@ -91,7 +91,7 @@ parameters:
 #        - '#^Cannot use array destructuring on mixed\.$#'
 #        - '#Property .* does not accept mixed#'
 #        - identifier: argument.templateType
-#        - identifier: argument.type
+        - identifier: argument.type
         - identifier: binaryOp.invalid
         - identifier: logicalAnd.resultUnused
         - identifier: logicalOr.resultUnused
