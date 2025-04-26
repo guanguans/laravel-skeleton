@@ -400,11 +400,13 @@ if (!\function_exists('user_http_build_query')) {
     {
         /**
          * 转换值是非标量的情况.
-         *
-         * @param array|object $value
          */
-        $toQueryStr = static function (string $key, mixed $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
+        $toQueryStr = static function (string $key, array|object $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
             $queryStr = '';
+
+            if (!$value instanceof Traversable) {
+                $value = (array) $value;
+            }
 
             foreach ($value as $k => $v) {
                 // 特殊值处理

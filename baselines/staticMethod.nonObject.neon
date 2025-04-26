@@ -1,0 +1,8 @@
+# total 2 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Cannot call static method isAdminDeveloper\(\) on mixed\.$#'
+            count: 2
+            path: ../app/Providers/PackageServiceProvider.php

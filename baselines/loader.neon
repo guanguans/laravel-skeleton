@@ -1,5 +1,6 @@
-# total 29 errors
+# total 66 errors
 includes:
+    - callable.nonCallable.neon
     - clone.nonObject.neon
     - deadCode.unreachable.neon
     - disallowed.function.neon
@@ -8,8 +9,10 @@ includes:
     - if.alwaysTrue.neon
     - method.notFound.neon
     - method.unused.neon
+    - offsetAccess.nonOffsetAccessible.neon
     - parameter.trait.neon
     - property.nonObject.neon
     - property.notFound.neon
     - property.trait.neon
     - return.unusedType.neon
+    - staticMethod.nonObject.neon

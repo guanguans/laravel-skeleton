@@ -42,7 +42,7 @@ parameters:
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 8
+    level: 9
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify

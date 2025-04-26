@@ -1,4 +1,4 @@
-# total 6 errors
+# total 13 errors
 
 parameters:
     ignoreErrors:
@@ -21,6 +21,36 @@ parameters:
             message: '#^Cannot access property \$testClassNamespace on PhpParser\\NodeVisitorAbstract\|null\.$#'
             count: 1
             path: ../app/Console/Commands/GenerateTestsCommand.php
+
+        -
+            message: '#^Cannot access property \$Value on mixed\.$#'
+            count: 2
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access property \$id on mixed\.$#'
+            count: 1
+            path: ../app/Providers/LogServiceProvider.php
+
+        -
+            message: '#^Cannot access property \$stubCallbacks on mixed\.$#'
+            count: 1
+            path: ../app/Support/Clients/AbstractClient.php
+
+        -
+            message: '#^Cannot access property \$timezone on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/CarbonMixin.php
+
+        -
+            message: '#^Cannot access property \$id on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/RequestMixin.php
+
+        -
+            message: '#^Cannot access property \$is_admin on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/RequestMixin.php
 
         -
             message: '#^Cannot access property \$name on PhpParser\\Node\\Name\|null\.$#'

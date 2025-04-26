@@ -1,0 +1,83 @@
+# total 27 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Cannot access offset ''dont\-discover'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access offset ''extra'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access offset ''laravel'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access offset ''require'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access offset ''require\-dev'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access an offset on mixed\.$#'
+            count: 5
+            path: ../app/Http/Middleware/CSP.php
+
+        -
+            message: '#^Cannot access offset ''connect\-src'' on mixed\.$#'
+            count: 1
+            path: ../app/Http/Middleware/CSP.php
+
+        -
+            message: '#^Cannot access offset ''policy'' on mixed\.$#'
+            count: 6
+            path: ../app/Http/Middleware/CSP.php
+
+        -
+            message: '#^Cannot access offset ''report_only'' on mixed\.$#'
+            count: 1
+            path: ../app/Http/Middleware/CSP.php
+
+        -
+            message: '#^Cannot access offset ''script\-src'' on mixed\.$#'
+            count: 2
+            path: ../app/Http/Middleware/CSP.php
+
+        -
+            message: '#^Cannot access offset ''style\-src'' on mixed\.$#'
+            count: 2
+            path: ../app/Http/Middleware/CSP.php
+
+        -
+            message: '#^Cannot access offset ''errors'' on mixed\.$#'
+            count: 1
+            path: ../app/Http/Middleware/LogAllRequests.php
+
+        -
+            message: '#^Cannot access offset ''message'' on mixed\.$#'
+            count: 1
+            path: ../app/Http/Middleware/LogAllRequests.php
+
+        -
+            message: '#^Cannot access offset ''result'' on mixed\.$#'
+            count: 1
+            path: ../app/Http/Middleware/LogAllRequests.php
+
+        -
+            message: '#^Cannot access offset ''disposable'' on mixed\.$#'
+            count: 1
+            path: ../app/Rules/NotDisposableEmailRule.php
+
+        -
+            message: '#^Cannot access offset ''context'' on mixed\.$#'
+            count: 1
+            path: ../app/Support/Monolog/Formatter/EloquentLogHttpModelFormatter.php
