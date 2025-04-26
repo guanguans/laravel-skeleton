@@ -53,15 +53,14 @@ $status = (new SingleCommandApplication)
             new SymfonyStyle($input, $output),
             new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true)),
         ) {
-            private string $composerJsonPath;
-            private string $composerJsonContents;
-            private string $highestComposerBinary;
-            private string $composerBinary;
-            private array $exceptPackages;
-            private array $exceptDependencyVersions;
-            private bool $dryRun;
-            private SymfonyStyle $symfonyStyle;
-            private Differ $differ;
+            private readonly string $composerJsonPath;
+            private readonly string $composerJsonContents;
+            private readonly string $highestComposerBinary;
+            private readonly string $composerBinary;
+            private readonly array $exceptPackages;
+            private readonly array $exceptDependencyVersions;
+            private readonly SymfonyStyle $symfonyStyle;
+            private readonly Differ $differ;
 
             /**
              * @noinspection ParameterDefaultsNullInspection
@@ -72,7 +71,7 @@ $status = (new SingleCommandApplication)
                 ?string $composerBinary = null,
                 array $exceptPackages = [],
                 array $exceptDependencyVersions = [],
-                bool $dryRun = false,
+                private readonly bool $dryRun = false,
                 ?SymfonyStyle $symfonyStyle = null,
                 ?Differ $differ = null
             ) {
@@ -84,17 +83,8 @@ $status = (new SingleCommandApplication)
                 $this->composerJsonContents = file_get_contents($composerJsonPath);
                 $this->highestComposerBinary = $this->getComposerBinary($composerBinary, $highestPhpBinary);
                 $this->composerBinary = $this->getComposerBinary($composerBinary);
-                $this->exceptPackages = array_merge([
-                    'php',
-                    'ext-*',
-                ], $exceptPackages);
-                $this->exceptDependencyVersions = array_merge([
-                    '\*',
-                    '*-*',
-                    '*@*',
-                    // '*|*',
-                ], $exceptDependencyVersions);
-                $this->dryRun = $dryRun;
+                $this->exceptPackages = ['php', 'ext-*', ...$exceptPackages];
+                $this->exceptDependencyVersions = ['\*', '*-*', '*@*', ...$exceptDependencyVersions];
                 $this->symfonyStyle = $symfonyStyle ?? new SymfonyStyle(new ArgvInput, new ConsoleOutput);
                 $this->differ = $differ ?? new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true));
             }
@@ -168,7 +158,7 @@ $status = (new SingleCommandApplication)
             private function getOutdatedDecodedComposerJson(): array
             {
                 $outdatedComposerPackages = $this->getOutdatedComposerPackages();
-                $decodedComposerJson = json_decode(file_get_contents($this->composerJsonPath), true);
+                $decodedComposerJson = json_decode(file_get_contents($this->composerJsonPath), true, 512, \JSON_THROW_ON_ERROR);
                 InstalledVersions::reload([]);
 
                 foreach ($decodedComposerJson as $name => &$value) {
@@ -210,7 +200,9 @@ $status = (new SingleCommandApplication)
                                 ->getOutput(),
                             strpos($output, '{'.\PHP_EOL)
                         ),
-                        true
+                        true,
+                        512,
+                        \JSON_THROW_ON_ERROR
                     )['installed'],
                     function (array $carry, array $package): array {
                         $lowestArrayVersion = $this->toArrayVersion($package['version']);

@@ -1,0 +1,18 @@
+--- /dev/null
++++ ../src/Illuminate/Foundation/Application.php
+@@ -25,6 +25,7 @@
+ use Illuminate\Support\ServiceProvider;
+ use Illuminate\Support\Str;
+ use Illuminate\Support\Traits\Macroable;
++use Illuminate\Support\Traits\Tappable;
+ use RuntimeException;
+ use Symfony\Component\Console\Input\InputInterface;
+ use Symfony\Component\Console\Output\ConsoleOutput;
+@@ -39,6 +40,7 @@
+ class Application extends Container implements ApplicationContract, CachesConfiguration, CachesRoutes, HttpKernelInterface
+ {
+     use Macroable;
++    use Tappable;
+
+     /**
+      * The Laravel framework version.

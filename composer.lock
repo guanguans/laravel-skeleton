@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6474e1dad8f417987ed852b5fbce046b",
+    "content-hash": "896d127aae5009c45296a797fa37c0cf",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",

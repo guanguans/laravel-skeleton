@@ -314,6 +314,11 @@
                 "thedoctor0/laravel-factory-generator",
                 "worksome/envy"
             ]
+        },
+        "patches": {
+            "laravel/framework": [
+                "patches/laravel-framework-src-illuminate-foundation-application-php.patch"
+            ]
         }
     },
     "scripts": {
