@@ -1,5 +1,10 @@
-# total 6 errors
+# total 13 errors
 includes:
+    - deadCode.unreachable.neon
     - disallowed.function.neon
+    - finally.exitPoint.neon
+    - function.alreadyNarrowedType.neon
+    - if.alwaysTrue.neon
     - method.notFound.neon
-    - property.notFound.neon
+    - method.unused.neon
+    - return.unusedType.neon

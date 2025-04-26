@@ -42,7 +42,7 @@ parameters:
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 3
+    level: 4
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify
@@ -51,7 +51,7 @@ parameters:
         lineBefore: 3
         lineAfter: 3
         editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
-#    treatPhpDocTypesAsCertain: false
+    treatPhpDocTypesAsCertain: false
 #    cognitive_complexity:
 #        class: 50
 #        function: 8
@@ -93,9 +93,12 @@ parameters:
 #        - identifier: argument.templateType
 #        - identifier: argument.type
         - identifier: binaryOp.invalid
+        - identifier: logicalAnd.resultUnused
+        - identifier: logicalOr.resultUnused
         - identifier: cast.string
 #        - identifier: encapsedStringPart.nonString
         - identifier: method.nonObject
+        - identifier: trait.unused
 #        - identifier: missingType.generics
 #        - identifier: missingType.iterableValue
 #        - identifier: return.type

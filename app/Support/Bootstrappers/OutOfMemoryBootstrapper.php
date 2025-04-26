@@ -43,7 +43,7 @@ final class OutOfMemoryBootstrapper
         $this->reservedMemory = str_repeat(' ', 1024 * 256);
 
         register_shutdown_function(function (): void {
-            $this->reservedMemory = null;
+            $this->reservedMemory and $this->reservedMemory = null;
 
             $lastError = error_get_last();
 

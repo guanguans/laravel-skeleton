@@ -1,0 +1,8 @@
+# total 1 error
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Call to function is_subclass_of\(\) with class\-string and string will always evaluate to true\.$#'
+            count: 1
+            path: ../app/Console/Commands/FindStaticMethodsCommand.php

@@ -140,6 +140,8 @@ if (!\function_exists('mysql_timezone_offset')) {
 if (!\function_exists('deference')) {
     /**
      * @see https://github.com/php-defer/php-defer
+     *
+     * @param-out SplStack $context
      */
     function deference(?SplStack &$context, callable $callback): void
     {

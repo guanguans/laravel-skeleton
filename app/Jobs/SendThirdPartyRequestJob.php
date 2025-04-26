@@ -53,7 +53,7 @@ final class SendThirdPartyRequestJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Http::acceptJson()->timeout(10)->get('https://...');
+        Http::acceptJson()->timeout(10)->get('https://...', $this->user->toArray());
 
         // Use the response to run the business logic ...
     }

@@ -1,0 +1,13 @@
+# total 2 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^The overwriting return is on this line\.$#'
+            count: 1
+            path: ../app/Support/Sse/ServerSentEvent.php
+
+        -
+            message: '#^This return is overwritten by a different one in the finally block below\.$#'
+            count: 1
+            path: ../app/Support/Sse/ServerSentEvent.php

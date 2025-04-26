@@ -98,7 +98,7 @@ final class LogHttp
         return $next($request);
     }
 
-    public function terminate(Request $request, Response $response): void
+    public function terminate(Request $request, SymfonyResponse $response): void
     {
         if ($this->shouldSkip($request)) {
             return;
@@ -126,7 +126,7 @@ final class LogHttp
      * @see \Symfony\Component\HttpFoundation\Request::__toString()
      * @see \Symfony\Component\HttpFoundation\Response::__toString()
      */
-    private function messageFor(Request $request, Response $response): string
+    private function messageFor(Request $request, SymfonyResponse $response): string
     {
         return \sprintf(
             '%s %s %s -> HTTP/%s %s %s',
@@ -142,7 +142,7 @@ final class LogHttp
     /**
      * @noinspection GlobalVariableUsageInspection
      */
-    private function contextFor(Request $request, Response $response): array
+    private function contextFor(Request $request, SymfonyResponse $response): array
     {
         return [
             'method' => $request->method(),
@@ -165,7 +165,7 @@ final class LogHttp
     /**
      * @noinspection SensitiveParameterInspection
      */
-    private function headerFor(Request|Response $requestOrResponse): array
+    private function headerFor(Request|SymfonyResponse $requestOrResponse): array
     {
         return collect($requestOrResponse->headers->all())
             ->map(static fn (array $header, string $key): string => Str::is(self::$headerHidden, $key) ? '***' : $header[0])
@@ -182,12 +182,12 @@ final class LogHttp
     /**
      * @see \Symfony\Component\HttpFoundation\Response::setStatusCode()
      */
-    private function statusTextFor(Response $response): string
+    private function statusTextFor(SymfonyResponse $response): string
     {
         return Response::$statusTexts[$response->getStatusCode()] ?? 'unknown status';
     }
 
-    private function responseFor(Response $response): mixed
+    private function responseFor(SymfonyResponse $response): mixed
     {
         return $response instanceof JsonResponse ? $response->getData(true) : $response->getContent();
     }

@@ -36,7 +36,7 @@ final class OpcacheUrlCommand extends Command
      */
     public function handle(): void
     {
-        $this->sendRequest($this->argument('route'), ['force' => $this->option('force') ?? false]);
+        $this->sendRequest($this->argument('route'), ['force' => $this->option('force')]);
     }
 
     /**

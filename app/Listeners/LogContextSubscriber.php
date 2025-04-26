@@ -25,7 +25,7 @@ final class LogContextSubscriber
         return [
             RouteMatched::class => static function (RouteMatched $event): void {
                 Context::add([
-                    'action' => $event->route?->getActionName(),
+                    'action' => $event->route->getActionName(),
                 ]);
             },
             CommandStarting::class => static function (CommandStarting $event): void {

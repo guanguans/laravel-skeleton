@@ -15,6 +15,7 @@ namespace App\Support\Mixins;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Request as RequestFacade;
 
 /**
  * @mixin \Illuminate\Support\Carbon
@@ -30,7 +31,7 @@ final class CarbonMixin
     public function inUserTimezone(): \Closure
     {
         return fn (?string $guard = null): Carbon => $this->setTimezone(
-            auth($guard)->user()?->timezone ?? config('app.timezone')
+            RequestFacade::user($guard)->timezone ?? config('app.timezone')
         );
     }
 

@@ -52,7 +52,7 @@ final class CircuitBreakerMiddleware
                 ): Builder => $builder->{$method}($parameter),
                 Ganesha\Builder::withRateStrategy()
             )
-            ?->build();
+            ->build();
     }
 
     public function __invoke(callable $handler): \Closure

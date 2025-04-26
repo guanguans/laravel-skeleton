@@ -1,0 +1,8 @@
+# total 1 error
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Anonymous function never returns bool so it can be removed from the return type\.$#'
+            count: 1
+            path: ../app/Providers/DatabaseServiceProvider.php

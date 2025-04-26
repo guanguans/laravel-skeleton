@@ -17,7 +17,6 @@ namespace App\Policies;
 
 use App\Models\JWTUser;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 final class UserPolicy extends Policy
 {
@@ -40,7 +39,7 @@ final class UserPolicy extends Policy
     /**
      * Determine whether the user can create models.
      */
-    public function create(JWTUser $jWTUser): bool|Response
+    public function create(JWTUser $jWTUser): bool
     {
         return $jWTUser->can('create-user');
     }

@@ -1,0 +1,23 @@
+# total 4 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Method App\\Console\\Commands\\IdeHelperChoresCommand\:\:ruleChore\(\) is unused\.$#'
+            count: 1
+            path: ../app/Console/Commands/IdeHelperChoresCommand.php
+
+        -
+            message: '#^Method App\\Http\\Middleware\\CompressResponseContent\:\:shouldCompress\(\) is unused\.$#'
+            count: 1
+            path: ../app/Http/Middleware/CompressResponseContent.php
+
+        -
+            message: '#^Method App\\Http\\Middleware\\CompressResponseContent\:\:simpleCompression\(\) is unused\.$#'
+            count: 1
+            path: ../app/Http/Middleware/CompressResponseContent.php
+
+        -
+            message: '#^Method App\\Support\\Rectors\\RenameToPsrNameRector\:\:hasFuncCallNameStringArg\(\) is unused\.$#'
+            count: 1
+            path: ../app/Support/Rectors/RenameToPsrNameRector.php

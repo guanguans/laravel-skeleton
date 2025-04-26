@@ -82,7 +82,7 @@ final class RequestMixin
 
     public function propertyAware(): callable
     {
-        return function ($property, $value): static {
+        return function ($property, $value): self {
             throw_unless(property_exists($this, $property), \InvalidArgumentException::class, 'The property not exists.');
 
             app()->has('original_properties') or app()->instance('original_properties', []);

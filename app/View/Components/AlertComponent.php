@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 final class AlertComponent extends Component
 {
@@ -30,12 +31,10 @@ final class AlertComponent extends Component
     ) {}
 
     /**
-     * {@inheritDoc}
-     *
      * @noinspection LaravelUnknownViewInspection
      */
     #[\Override]
-    public function render(): mixed
+    public function render(): View
     {
         return view('components.alert');
     }

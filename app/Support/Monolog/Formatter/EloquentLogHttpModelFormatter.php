@@ -30,19 +30,19 @@ final class EloquentLogHttpModelFormatter extends NormalizerFormatter
         return collect($context)
             ->only(['method', 'path', 'request_header', 'input', 'response_header', 'response', 'ip', 'duration'])
             ->map(fn (mixed $value): string => \is_string($value) ? $value : $this->strFor($value))
-            ->pipe(fn (Collection $context): array => [
-                'method' => substr($context['method'], 0, 10),
-                'path' => substr($context['path'], 0, 128),
-                'request_header' => $this->textFor($context['request_header']),
-                'input' => $this->textFor($context['input']),
-                'response_header' => $this->textFor($context['response_header']),
+            ->pipe(fn (Collection $newContext): array => [
+                'method' => substr($newContext['method'], 0, 10),
+                'path' => substr($newContext['path'], 0, 128),
+                'request_header' => $this->textFor($newContext['request_header']),
+                'input' => $this->textFor($newContext['input']),
+                'response_header' => $this->textFor($newContext['response_header']),
                 'response' => $this->textFor(
-                    json_validate($context['response'])
-                        ? $context['response']
+                    json_validate($newContext['response'])
+                        ? $newContext['response']
                         : implode(', ', $context['response_header']['content-type'] ?? [])
                 ),
-                'ip' => substr($context['ip'], 0, 16),
-                'duration' => substr($context['duration'], 0, 10),
+                'ip' => substr($newContext['ip'], 0, 16),
+                'duration' => substr($newContext['duration'], 0, 10),
             ]);
     }
 
