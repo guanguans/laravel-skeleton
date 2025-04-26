@@ -71,7 +71,7 @@ final class ShowUnsupportedRequiresCommand extends Command
                     return true;
                 }
 
-                $latestVersion = collect($package['package']['versions'])->first(
+                $latestVersion = collect($package['package']['versions'] ?? [])->first(
                     static fn (array $package): bool => !str($package['version'])->contains('dev'),
                     []
                 );

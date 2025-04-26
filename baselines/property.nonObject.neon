@@ -1,0 +1,28 @@
+# total 6 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Cannot access property \$name on PhpParser\\Node\\Identifier\|null\.$#'
+            count: 2
+            path: ../app/Console/Commands/GenerateTestsCommand.php
+
+        -
+            message: '#^Cannot access property \$testClassAddedMethodNodes on PhpParser\\NodeVisitorAbstract\|null\.$#'
+            count: 1
+            path: ../app/Console/Commands/GenerateTestsCommand.php
+
+        -
+            message: '#^Cannot access property \$testClassName on PhpParser\\NodeVisitorAbstract\|null\.$#'
+            count: 1
+            path: ../app/Console/Commands/GenerateTestsCommand.php
+
+        -
+            message: '#^Cannot access property \$testClassNamespace on PhpParser\\NodeVisitorAbstract\|null\.$#'
+            count: 1
+            path: ../app/Console/Commands/GenerateTestsCommand.php
+
+        -
+            message: '#^Cannot access property \$name on PhpParser\\Node\\Name\|null\.$#'
+            count: 1
+            path: ../app/Support/Rectors/RenameToPsrNameRector.php

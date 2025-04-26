@@ -86,7 +86,11 @@ final class ServerSentEvent implements \Stringable
         'X-Accel-Buffering' => 'no',
     ];
 
-    /** @var null|callable */
+    /**
+     * @var callable
+     *
+     * @noinspection PropertyAnnotationInspection
+     */
     private $tapper;
     private bool $headersSent = false;
     private array $beforeCallbacks = [];

@@ -1,5 +1,6 @@
-# total 23 errors
+# total 29 errors
 includes:
+    - clone.nonObject.neon
     - deadCode.unreachable.neon
     - disallowed.function.neon
     - finally.exitPoint.neon
@@ -8,6 +9,7 @@ includes:
     - method.notFound.neon
     - method.unused.neon
     - parameter.trait.neon
+    - property.nonObject.neon
     - property.notFound.neon
     - property.trait.neon
     - return.unusedType.neon

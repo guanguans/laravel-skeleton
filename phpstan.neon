@@ -42,7 +42,7 @@ parameters:
     excludePaths:
         - app/Support/StreamWrappers/
 #    level: max
-    level: 7
+    level: 8
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify
@@ -139,10 +139,10 @@ parameters:
             message: '#^Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable\:\:\$email\.$#'
             count: 4
             path: app/Listeners/LogActivity.php
-        -
-            message: '#^Access to an undefined property PhpParser\\NodeVisitorAbstract\:\:\$testClass.*\.$#'
-            count: 3
-            path: app/Console/Commands/GenerateTestsCommand.php
+#        -
+#            message: '#^Access to an undefined property PhpParser\\NodeVisitorAbstract\:\:\$testClass.*\.$#'
+#            count: 3
+#            path: app/Console/Commands/GenerateTestsCommand.php
 #        -
 #            identifier: return.missing
 #            path: app/Support/StreamWrappers/

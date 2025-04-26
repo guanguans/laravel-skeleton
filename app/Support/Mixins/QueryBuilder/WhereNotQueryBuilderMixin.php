@@ -40,6 +40,7 @@ final class WhereNotQueryBuilderMixin
     public static function whereNot(): callable
     {
         return function ($withQuery) {
+            /** @var callable $callable */
             $callable = \is_callable($withQuery)
                 ? $withQuery
                 : transform($withQuery, static function ($value): callable {
