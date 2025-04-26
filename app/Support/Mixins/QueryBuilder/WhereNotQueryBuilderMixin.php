@@ -34,7 +34,11 @@ use Illuminate\Support\Facades\DB;
 #[Mixin(RelationBuilder::class)]
 final class WhereNotQueryBuilderMixin
 {
-    /** The count for each table. */
+    /**
+     * The count for each table.
+     *
+     * @var array<string, int>
+     */
     private static array $tableSubCount = [];
 
     public static function whereNot(): callable

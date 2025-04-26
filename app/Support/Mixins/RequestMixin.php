@@ -105,7 +105,7 @@ final class RequestMixin
                 return;
             }
 
-            foreach (app('original_properties') as $property => $value) {
+            foreach ((array) app('original_properties') as $property => $value) {
                 $this->{$property} = $value;
             }
         };

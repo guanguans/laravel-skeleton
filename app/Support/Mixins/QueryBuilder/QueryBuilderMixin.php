@@ -31,7 +31,7 @@ final class QueryBuilderMixin
 {
     public function pipe(): callable
     {
-        return fn (...$pipes) => tap($this, static function ($builder) use ($pipes): void {
+        return fn (mixed ...$pipes) => tap($this, static function ($builder) use ($pipes): void {
             array_unshift($pipes, static function ($builder, $next): void {
                 throw_if(!($piped = $next($builder)) instanceof EloquentBuilder
                 && !$piped instanceof QueryBuilder

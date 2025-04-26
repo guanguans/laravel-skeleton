@@ -22,10 +22,10 @@ final class JWTUser extends User implements JWTSubject
 {
     use ValidatingTrait;
     protected $table = 'users';
-    // protected $rules = [
-    //     // 'email' => 'required|email',
-    //     // 'password' => 'required|string',
-    // ];
+    protected $rules = [
+        // 'email' => 'required|email',
+        // 'password' => 'required|string',
+    ];
 
     public function getJWTIdentifier(): mixed
     {

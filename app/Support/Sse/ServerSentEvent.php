@@ -87,7 +87,7 @@ final class ServerSentEvent implements \Stringable
     ];
 
     /**
-     * @var callable
+     * @var callable(self): self
      *
      * @noinspection PropertyAnnotationInspection
      */

@@ -1,4 +1,4 @@
-# total 66 errors
+# total 93 errors
 includes:
     - callable.nonCallable.neon
     - clone.nonObject.neon
@@ -9,6 +9,7 @@ includes:
     - if.alwaysTrue.neon
     - method.notFound.neon
     - method.unused.neon
+    - missingType.property.neon
     - offsetAccess.nonOffsetAccessible.neon
     - parameter.trait.neon
     - property.nonObject.neon

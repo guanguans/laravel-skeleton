@@ -62,6 +62,8 @@ final class GenerateTestsCommand extends Command
         {--M|memory-limit= : The memory limit to use for the PHP parser}
         EOD;
     protected $description = 'Generate tests for the given files';
+
+    /** @var array<string, int> */
     private static array $statistics = [
         'scanned_files' => 0,
         'scanned_classes' => 0,

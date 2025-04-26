@@ -1,4 +1,4 @@
-# total 27 errors
+# total 42 errors
 
 parameters:
     ignoreErrors:
@@ -18,6 +18,11 @@ parameters:
             path: ../app/Console/Commands/HealthCheckCommand.php
 
         -
+            message: '#^Cannot access offset ''local_value'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
             message: '#^Cannot access offset ''require'' on mixed\.$#'
             count: 1
             path: ../app/Console/Commands/HealthCheckCommand.php
@@ -26,6 +31,31 @@ parameters:
             message: '#^Cannot access offset ''require\-dev'' on mixed\.$#'
             count: 1
             path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access offset ''name'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/ShowUnsupportedRequiresCommand.php
+
+        -
+            message: '#^Cannot access offset ''require'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/ShowUnsupportedRequiresCommand.php
+
+        -
+            message: '#^Cannot access offset ''version'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/ShowUnsupportedRequiresCommand.php
+
+        -
+            message: '#^Cannot access offset ''versions'' on mixed\.$#'
+            count: 1
+            path: ../app/Console/Commands/ShowUnsupportedRequiresCommand.php
+
+        -
+            message: '#^Cannot access offset ''name'' on mixed\.$#'
+            count: 1
+            path: ../app/Http/Controllers/Api/AuthController.php
 
         -
             message: '#^Cannot access an offset on mixed\.$#'
@@ -64,7 +94,7 @@ parameters:
 
         -
             message: '#^Cannot access offset ''message'' on mixed\.$#'
-            count: 1
+            count: 2
             path: ../app/Http/Middleware/LogAllRequests.php
 
         -
@@ -76,6 +106,36 @@ parameters:
             message: '#^Cannot access offset ''disposable'' on mixed\.$#'
             count: 1
             path: ../app/Rules/NotDisposableEmailRule.php
+
+        -
+            message: '#^Cannot access offset ''expanded'' on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/MySqlGrammarMixin.php
+
+        -
+            message: '#^Cannot access offset ''mode'' on mixed\.$#'
+            count: 2
+            path: ../app/Support/Mixins/MySqlGrammarMixin.php
+
+        -
+            message: '#^Cannot access an offset on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/QueryBuilder/WhereFullTextQueryBuilderMixin.php
+
+        -
+            message: '#^Cannot access offset mixed on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/QueryBuilder/WhereInsQueryBuilderMixin.php
+
+        -
+            message: '#^Cannot access offset mixed on mixed\.$#'
+            count: 2
+            path: ../app/Support/Mixins/RequestMixin.php
+
+        -
+            message: '#^Cannot access offset ''content\-type'' on mixed\.$#'
+            count: 1
+            path: ../app/Support/Monolog/Formatter/EloquentLogHttpModelFormatter.php
 
         -
             message: '#^Cannot access offset ''context'' on mixed\.$#'

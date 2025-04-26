@@ -112,7 +112,7 @@ final class CollectionMixin
 
     public function paginate(): callable
     {
-        return function ($perPage = 15, $pageName = 'page', $page = null, $total = null, $options = []): LengthAwarePaginator {
+        return function ($perPage = 15, $pageName = 'page', $page = null, $total = null, array $options = []): LengthAwarePaginator {
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
 
             $items = $this->forPage($page, $perPage)->values();
@@ -130,7 +130,7 @@ final class CollectionMixin
 
     public function simplePaginate(): callable
     {
-        return function ($perPage = 15, $pageName = 'page', $page = null, $options = []): Paginator {
+        return function ($perPage = 15, $pageName = 'page', $page = null, array $options = []): Paginator {
             $page = $page ?: Paginator::resolveCurrentPage($pageName);
 
             $items = $this->slice(($page - 1) * $perPage)->take($perPage + 1);

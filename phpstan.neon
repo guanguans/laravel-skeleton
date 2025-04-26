@@ -41,8 +41,8 @@ parameters:
         - vendor-bin/laravel10/vendor/laravel/framework/src/Illuminate/Database/Connection.php
     excludePaths:
         - app/Support/StreamWrappers/
-#    level: max
-    level: 9
+    level: max
+#    level: 10
     tmpDir: .build/phpstan/
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 #    errorFormat: symplify

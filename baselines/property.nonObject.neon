@@ -1,4 +1,4 @@
-# total 13 errors
+# total 19 errors
 
 parameters:
     ignoreErrors:
@@ -24,6 +24,11 @@ parameters:
 
         -
             message: '#^Cannot access property \$Value on mixed\.$#'
+            count: 4
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot access property \$name on mixed\.$#'
             count: 2
             path: ../app/Console/Commands/HealthCheckCommand.php
 
@@ -48,7 +53,17 @@ parameters:
             path: ../app/Support/Mixins/RequestMixin.php
 
         -
+            message: '#^Cannot access property \$isFallback on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/RequestMixin.php
+
+        -
             message: '#^Cannot access property \$is_admin on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixins/RequestMixin.php
+
+        -
+            message: '#^Cannot access property \$username on mixed\.$#'
             count: 1
             path: ../app/Support/Mixins/RequestMixin.php
 
