@@ -179,6 +179,7 @@
         "guanguans/laravel-soar": "^3.18",
         "guanguans/monorepo-builder-worker": "dev-main",
         "ion-bazan/composer-diff": "^1.12",
+        "jasonmccreary/laravel-test-assertions": "^2.8",
         "josezenem/laravel-make-migration-pivot": "^1.3",
         "kitloong/laravel-migrations-generator": "^7.1",
         "laracademy/generators": "^3.7",

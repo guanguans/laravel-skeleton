@@ -5,6 +5,7 @@
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpUnusedAliasInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 declare(strict_types=1);
 
@@ -24,7 +25,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(function (): void {
-    Carbon::setTestNow(now());
+    // Carbon::setTestNow(now());
+    // $this->freezeSecond();
+    $this->freezeTime();
     Http::preventStrayRequests();
 });
 

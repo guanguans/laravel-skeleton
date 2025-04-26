@@ -41,7 +41,7 @@ class TraceEventListener
             )
             ->map(static fn (array $trace) => Arr::except($trace, ['args', 'object']))
             // ->dd()
-            ->firstOrFail(static fn (array $trace): bool => !str($trace['file'])->startsWith(
+            ->sole(static fn (array $trace): bool => !str($trace['file'])->startsWith(
                 \dirname((new \ReflectionClass(Dispatcher::class))->getFileName())
             ));
 

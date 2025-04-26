@@ -17,11 +17,13 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use JMac\Testing\Traits\AdditionalAssertions;
 use Plannr\Laravel\FastRefreshDatabase\Traits\FastRefreshDatabase;
 use Tests\Concerns\Bootloadable;
 
 abstract class TestCase extends BaseTestCase
 {
+    use AdditionalAssertions;
     // use Bootloadable;
     // use DatabaseMigrations;
     // use DatabaseTruncation;
