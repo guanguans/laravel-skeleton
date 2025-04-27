@@ -105,14 +105,13 @@ return RectorConfig::configure()
         '**/__snapshots__/*',
         '**/Fixtures/*',
         '**/vendor/*',
+        __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
         __DIR__.'/app/Providers/EventServiceProvider.php',
         __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
         __DIR__.'/bootstrap/cache/',
         __DIR__.'/bootstrap/providers.php',
         __DIR__.'/resources/lang/',
         __FILE__,
-        __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
-        __DIR__.'/app/Enums/IntegerBooleanEnum.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
     ->withParallel()

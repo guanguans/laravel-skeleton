@@ -18,7 +18,7 @@ namespace App\Support\Traits;
  * @see \Guanguans\LaravelExceptionNotify\Support\Traits\WithPipeArgs
  * @see \TiMacDonald\Middleware\HasParameters
  */
-trait WithMiddlewareArgs
+trait WithPipeArgs
 {
     public static function with(mixed ...$args): string
     {

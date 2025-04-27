@@ -186,10 +186,11 @@ abstract class AbstractClient
             ))
             ->when(
                 $this->requestId(),
-                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest
-                    ->withMiddleware(Middleware::mapResponse(
+                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withMiddleware(
+                    Middleware::mapResponse(
                         static fn (ResponseInterface $response) => $response->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
-                    ))
+                    )
+                )
             );
     }
 

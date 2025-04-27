@@ -187,7 +187,7 @@ final class FindDumpStatementCommand extends Command
         $this->initializeProperties();
     }
 
-    protected function checkOptions(): void
+    private function checkOptions(): void
     {
         if ($this->option('struct')) {
             $this->statements['struct'] = array_intersect($this->statements['struct'], $this->option('struct'));
@@ -198,12 +198,12 @@ final class FindDumpStatementCommand extends Command
         }
     }
 
-    protected function initializeEnvs(): void
+    private function initializeEnvs(): void
     {
         $this->option('memory-limit') and ini_set('memory_limit', $this->option('memory-limit'));
     }
 
-    protected function initializeProperties(): void
+    private function initializeProperties(): void
     {
         $this->fileFinder = tap(
             Finder::create()->files()->ignoreDotFiles(true)->ignoreVCS(true),

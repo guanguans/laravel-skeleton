@@ -295,11 +295,11 @@ if (!\function_exists('compose')) {
 }
 
 if (!\function_exists('catch_query_log')) {
-    function catch_query_log(callable|string $callback, mixed ...$parameters): array
+    function catch_query_log(callable $callback, mixed ...$parameters): array
     {
         return (new Pipeline(app()))
             ->send($callback)
-            ->through(static function ($callback, Closure $next) {
+            ->through(static function (callable $callback, Closure $next): Collection {
                 DB::enableQueryLog();
                 DB::flushQueryLog();
 
@@ -309,10 +309,10 @@ if (!\function_exists('catch_query_log')) {
 
                 return $queryLog;
             })
-            ->then(static function ($callback) use ($parameters) {
+            ->then(static function (callable $callback) use ($parameters): Collection {
                 $callback(...$parameters);
 
-                return DB::getRawQueryLog();
+                return collect(DB::getRawQueryLog());
             });
     }
 }

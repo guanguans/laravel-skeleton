@@ -18,10 +18,11 @@ namespace App\Support\Mixins;
 use App\Support\Attributes\Mixin;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\ColumnDefinition;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Fluent;
 
 /**
+ * @see https://github.com/laravel/framework/commit/9ccf0031d1cb8669752bc95e85cdccad20706461
+ * @see https://github.com/laravel/framework/blob/10.x/src/Illuminate/Database/Connection.php
+ *
  * @mixin \Illuminate\Database\Schema\Blueprint
  */
 #[Mixin(Blueprint::class)]
@@ -69,29 +70,5 @@ final class BlueprintMixin
          * @return \Illuminate\Support\Fluent
          */
         return fn ($comment) => $this->addCommand('tableComment', ['comment' => $comment]);
-    }
-
-    public function hasIndex(): \Closure
-    {
-        /**
-         * @see https://github.com/laravel/framework/commit/9ccf0031d1cb8669752bc95e85cdccad20706461
-         * @see https://github.com/laravel/framework/blob/10.x/src/Illuminate/Database/Connection.php
-         */
-        return function (string $index): bool {
-            $schemaManager = Schema::getConnection()->getDoctrineSchemaManager();
-
-            return $schemaManager->introspectTable($this->getTable())->hasIndex($index);
-        };
-    }
-
-    public function dropIndexIfExists(): \Closure
-    {
-        return function (string $index): Fluent {
-            if ($this->hasIndex($index)) {
-                return $this->dropIndex($index);
-            }
-
-            return new Fluent;
-        };
     }
 }

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support;
+namespace App\Support\Traits;
 
 /**
  * @see https://dev.to/lotyp/laravel-config-problem-is-it-time-for-a-revolution-159f
@@ -23,31 +23,13 @@ namespace App\Support;
  * @see https://github.com/cycle/database/tree/2.x/src/Config
  * @see \Guanguans\LaravelApiResponse\Support\Traits\SetStateable
  */
-final readonly class Autowire
+trait SetStateable
 {
     /**
-     * @param array<string, mixed> $parameters
-     */
-    public function __construct(
-        private string $abstract,
-        private array $parameters = []
-    ) {}
-
-    /**
-     * Magic method for var_export().
-     *
-     * @param array{abstract: string, parameters: array<string, mixed>} $properties
+     * @noinspection MagicMethodsValidityInspection
      */
     public static function __set_state(array $properties): self
     {
-        return new self($properties['abstract'], $properties['parameters']);
-    }
-
-    /**
-     * Resolve the AutoWire instance using the container.
-     */
-    public function resolve(): mixed
-    {
-        return resolve($this->abstract, $this->parameters);
+        return app(static::class, $properties);
     }
 }
