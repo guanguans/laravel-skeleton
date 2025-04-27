@@ -19,8 +19,10 @@ use App\Models\User;
 use App\View\Components\AlertComponent;
 use App\View\Composers\RequestComposer;
 use App\View\Creators\RequestCreator;
+use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\Facades\Vite;
@@ -48,6 +50,16 @@ final class ViewServiceProvider extends ServiceProvider
     private function ever(): void
     {
         $this->whenever(true, function (): void {
+            Event::listen('creating: errors.*', static function (string $event): void {
+                /**
+                 * @see https://github.com/laravel/framework/issues/30226
+                 */
+                sscanf($event, 'creating: errors.%d', $statusCode);
+
+                if (400 <= $statusCode && 600 > $statusCode) {
+                    (new RegisterErrorViewPaths)();
+                }
+            });
             $this->extendBlade();
             $this->extendView();
         });
