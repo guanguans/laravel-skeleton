@@ -1,0 +1,38 @@
+# total 7 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Mixed property fetch in a "\$sqlModes\-\>\.\.\." can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Mixed property fetch in a "\$sqlSafeUpdates\-\>\.\.\." can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Mixed property fetch in a "\\Illuminate\\Support\\Facades\\DB\:\:selectOne\("SHOW VARIABLES LIKE ''system_time_zone''"\)\-\>\.\.\." can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Mixed property fetch in a "\\Illuminate\\Support\\Facades\\DB\:\:selectOne\("SHOW VARIABLES LIKE ''time_zone''"\)\-\>\.\.\." can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Mixed property fetch in a "\\Illuminate\\Support\\Facades\\Request\:\:user\(\)\-\>\.\.\." can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Providers/LogServiceProvider.php
+
+        -
+            message: '#^Mixed property fetch in a "\$this\-\>\.\.\." can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Support/Clients/AbstractClient.php
+
+        -
+            message: '#^Mixed property fetch in a "\$this\-\>user\(\)\-\>\.\.\." can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Support/Mixins/RequestMixin.php

@@ -31,7 +31,7 @@ final class CarbonMixin
     public function inUserTimezone(): \Closure
     {
         return fn (?string $guard = null): Carbon => $this->setTimezone(
-            RequestFacade::user($guard)->timezone ?? config('app.timezone')
+            RequestFacade::user($guard)?->timezone()
         );
     }
 

@@ -19,6 +19,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request as RequestFacade;
 
 /**
  * @mixin \Illuminate\Http\Request
@@ -33,12 +34,12 @@ final class RequestMixin
 
     public function isAdmin(): \Closure
     {
-        return fn (): bool => (bool) $this->user()?->is_admin;
+        return static fn (): bool => (bool) RequestFacade::user()?->isAdmin();
     }
 
-    public static function isAdminDeveloper(): \Closure
+    public static function isDeveloper(): \Closure
     {
-        return static fn (): bool => str(\Illuminate\Support\Facades\Request::getFacadeRoot()->user()?->username)->is(config('services.develop.fingerprints'));
+        return static fn (): bool => (bool) RequestFacade::user()?->isDeveloper();
     }
 
     public function isWechat(): \Closure
@@ -124,6 +125,7 @@ final class RequestMixin
 
             [$fallbacks, $routes] = collect($routes)->partition(static fn (Route $route) => $route->isFallback);
 
+            /** @var \Illuminate\Support\Collection $routes */
             return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
         };
     }

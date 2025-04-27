@@ -1,6 +1,8 @@
-# total 58 errors
+# total 73 errors
 includes:
     - callable.nonCallable.neon
+    - complexity.classLike.neon
+    - complexity.functionLike.neon
     - finally.exitPoint.neon
     - function.alreadyNarrowedType.neon
     - method.childReturnType.neon
@@ -15,3 +17,6 @@ includes:
     - return.unusedType.neon
     - staticMethod.nonObject.neon
     - typeCoverage.paramTypeCoverage.neon
+    - typePerfect.narrowPublicClassMethodParamType.neon
+    - typePerfect.noMixedMethodCaller.neon
+    - typePerfect.noMixedPropertyFetcher.neon

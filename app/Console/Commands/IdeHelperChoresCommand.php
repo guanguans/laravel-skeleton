@@ -94,9 +94,6 @@ final class IdeHelperChoresCommand extends Command
         ];
     }
 
-    /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
     private function ruleChore(): void
     {
         Discover::in('Rules')

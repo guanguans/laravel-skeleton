@@ -1,0 +1,33 @@
+# total 7 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Mixed variable in a `\$attributes\[''created_at''\]\-\>\.\.\.\(\)` can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Models/Example.php
+
+        -
+            message: '#^Mixed variable in a `\$attributes\[''updated_at''\]\-\>\.\.\.\(\)` can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Models/Example.php
+
+        -
+            message: '#^Mixed variable in a `\\Illuminate\\Support\\Facades\\Request\:\:user\(\$guard\)\-\>\.\.\.\(\)` can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Support/Mixins/CarbonMixin.php
+
+        -
+            message: '#^Mixed variable in a `\\Illuminate\\Support\\Facades\\Request\:\:user\(\)\-\>\.\.\.\(\)` can skip important errors\. Make sure the type is known$#'
+            count: 2
+            path: ../app/Support/Mixins/RequestMixin.php
+
+        -
+            message: '#^Mixed variable in a `\$allClasses\-\>\.\.\.\(\)` can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Support/helpers.php
+
+        -
+            message: '#^Mixed variable in a `\$allClasses\-\>filter\(\$filter\)\-\>\.\.\.\(\)` can skip important errors\. Make sure the type is known$#'
+            count: 1
+            path: ../app/Support/helpers.php

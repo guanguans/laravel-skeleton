@@ -1,0 +1,8 @@
+# total 1 error
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Parameters should have "Closure" types as the only types passed to this method$#'
+            count: 1
+            path: ../app/Support/Sse/ServerSentEvent.php

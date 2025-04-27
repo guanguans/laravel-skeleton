@@ -84,6 +84,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @todo implement
+     */
+    public function timezone(): string
+    {
+        return $this->timezone ?? config('app.timezone');
+    }
+
+    /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]

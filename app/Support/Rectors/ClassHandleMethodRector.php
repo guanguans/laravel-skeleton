@@ -123,7 +123,7 @@ final class ClassHandleMethodRector extends AbstractRector
         return null;
     }
 
-    private function updateDocBlock(Node $node): void
+    private function updateDocBlock(ClassMethod $node): void
     {
         $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($node);
         $noinspectionTag = 'noinspection';
