@@ -40,6 +40,7 @@ final class JWTUser extends User implements JWTSubject
     public static function wrapToken(#[\SensitiveParameter] string $token): array
     {
         /** @noinspection PhpParamsInspection */
+        /** @noinspection PhpUndefinedMethodInspection */
         return [
             'access_token' => $token,
             'token_type' => 'bearer',

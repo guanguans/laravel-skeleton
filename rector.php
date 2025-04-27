@@ -75,7 +75,6 @@ use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
 
-/** @noinspection PhpUndefinedMethodInspection */
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/app/',

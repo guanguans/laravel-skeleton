@@ -75,7 +75,7 @@ final class WhereNotQueryBuilderMixin
             return $builder->whereNotExists(static function (ContractBuilder $query) use ($builder, $callable): void {
                 // Create a new Eloquent Query Builder with the given Query Builder and
                 // set the model from the original builder.
-                /** @noinspection PhpMethodParametersCountMismatchInspection */
+                /** @noinspection PhpParamsInspection */
                 $query = new Builder($query);
                 $query->setModel($model = $builder->getModel());
 
@@ -84,11 +84,11 @@ final class WhereNotQueryBuilderMixin
 
                 // Instantiate a new model that uses the aliased table.
                 $aliasedTable = transform($originalTable, static function ($table): string {
-                    if (!\array_key_exists($table, static::$tableSubCount)) {
-                        static::$tableSubCount[$table] = 0;
+                    if (!\array_key_exists($table, self::$tableSubCount)) {
+                        self::$tableSubCount[$table] = 0;
                     }
 
-                    $count = static::$tableSubCount[$table]++;
+                    $count = self::$tableSubCount[$table]++;
 
                     return "where_not_{$count}_$table";
                 });

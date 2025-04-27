@@ -30,9 +30,6 @@ final class AlertComponent extends Component
         public string $message
     ) {}
 
-    /**
-     * @noinspection LaravelUnknownViewInspection
-     */
     #[\Override]
     public function render(): View
     {

@@ -25,9 +25,6 @@ namespace App\Support\Traits;
  */
 trait SetStateable
 {
-    /**
-     * @noinspection MagicMethodsValidityInspection
-     */
     public static function __set_state(array $properties): self
     {
         return app(static::class, $properties);

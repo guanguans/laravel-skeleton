@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Redis;
 final class RateLimitedForJob
 {
     /**
-     * @noinspection PhpDocSignatureInspection
-     *
      * @param \Illuminate\Queue\CallQueuedClosure $job
      *
      * @throws \Illuminate\Contracts\Redis\LimiterTimeoutException

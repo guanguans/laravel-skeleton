@@ -40,17 +40,17 @@ final class HasValidSignature
         $givenSignature = $request->header('x-signature');
 
         // abort if the signature is not present
-        abort_if(!\is_string($givenSignature), Response::HTTP_UNAUTHORIZED, 'Invalid signature');
+        abort_if(!\is_string($givenSignature), SymfonyResponse::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         $decoded = base64_decode($givenSignature, true);
 
         // abort if the signature is not valid base64
-        abort_if(false === $decoded, Response::HTTP_UNAUTHORIZED, 'Invalid signature');
+        abort_if(false === $decoded, SymfonyResponse::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         $explodedDecoded = explode('$', $decoded);
 
         // abort if the signature is not in the correct format
-        abort_if(\count($explodedDecoded) !== 2, Response::HTTP_UNAUTHORIZED, 'Invalid signature');
+        abort_if(\count($explodedDecoded) !== 2, SymfonyResponse::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         [$timestamp, $givenSignature] = $explodedDecoded;
         $timestamp = Carbon::parse($timestamp);
@@ -58,7 +58,7 @@ final class HasValidSignature
         // abort if the timestamp is invalid or older than a minute
         abort_if(
             !$timestamp->isValid() || $timestamp->isBefore(now()->subMinute()),
-            Response::HTTP_UNAUTHORIZED,
+            SymfonyResponse::HTTP_UNAUTHORIZED,
             'Invalid signature'
         );
 
@@ -68,7 +68,7 @@ final class HasValidSignature
         );
 
         // abort if the signature is invalid
-        abort_if(!$validSignature, Response::HTTP_UNAUTHORIZED, 'Invalid signature');
+        abort_if(!$validSignature, SymfonyResponse::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         return $next($request);
     }

@@ -31,14 +31,14 @@ final class BasicAuthentication
         if (!$request->hasHeader('Authorization')) {
             // Display login prompt
             header('WWW-Authenticate: Basic realm="Unauthorized"');
-            abort(Response::HTTP_UNAUTHORIZED);
+            abort(SymfonyResponse::HTTP_UNAUTHORIZED);
         }
 
         // Provided username or password does not match, throw an exception
         // Alternatively, the login prompt can be displayed once more
         abort_unless(
             $this->validateCredentials(explode(':', base64_decode(substr($request->header('Authorization'), 6), true))),
-            Response::HTTP_UNAUTHORIZED
+            SymfonyResponse::HTTP_UNAUTHORIZED
         );
 
         return $next($request);

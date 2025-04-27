@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpMissingDocCommentInspection */
 /** @noinspection PhpUnusedAliasInspection */
 
 declare(strict_types=1);
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -59,7 +61,7 @@ final class Example extends BaseModel
     // protected $attributes = [];
 
     #[\Override]
-    public function resolveRouteBinding($value, $field = null): self
+    public function resolveRouteBinding($value, $field = null): Model
     {
         return parent::resolveRouteBinding($value, $field);
     }

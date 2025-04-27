@@ -74,7 +74,6 @@ final class FindDumpStatementCommand extends Command
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
-    #[\Override]
     public function isEnabled(): bool
     {
         return !$this->laravel->isProduction();
@@ -179,7 +178,6 @@ final class FindDumpStatementCommand extends Command
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
-    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->checkOptions();

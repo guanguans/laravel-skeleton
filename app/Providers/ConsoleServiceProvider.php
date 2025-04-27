@@ -40,9 +40,6 @@ final class ConsoleServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
-    /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
     public function boot(): void
     {
         $this->ever();
@@ -75,9 +72,6 @@ final class ConsoleServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
     private function never(): void
     {
         $this->whenever(false, function (): void {

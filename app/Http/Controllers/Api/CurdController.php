@@ -19,10 +19,8 @@ use Illuminate\Http\Request;
 
 abstract class CurdController extends Controller
 {
-    /**
-     * @var class-string<Model>|Model
-     */
-    protected Model|string $modelClass;
+    /** @var class-string<\Illuminate\Database\Eloquent\Model> */
+    protected string $modelClass;
 
     public function index(Request $request): JsonResponse
     {
