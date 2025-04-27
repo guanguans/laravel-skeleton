@@ -36,6 +36,9 @@ final class ViewServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
+    /**
+     * @see https://github.com/laravel/framework/issues/3022
+     */
     public function boot(): void
     {
         $this->ever();

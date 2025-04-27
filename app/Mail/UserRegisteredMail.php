@@ -27,7 +27,6 @@ final class UserRegisteredMail extends Mailable implements ShouldQueue
     {
         return $this
             ->subject('您已成功注册账号')
-            // ->markdown('emails.users.registered')
-            ->html('<div>您已成功注册账号</div>');
+            ->markdown('emails.users.registered');
     }
 }

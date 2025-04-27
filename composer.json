@@ -330,6 +330,7 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
+            "@artisan vendor:publish --tag=laravel-errors",
             "@artisan spatie-stub:publish --force",
             "@cghooks update",
             "@composer-diff"
