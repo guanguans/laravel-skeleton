@@ -1,15 +1,12 @@
-# total 93 errors
+# total 62 errors
 includes:
     - callable.nonCallable.neon
-    - clone.nonObject.neon
-    - deadCode.unreachable.neon
-    - disallowed.function.neon
     - finally.exitPoint.neon
     - function.alreadyNarrowedType.neon
-    - if.alwaysTrue.neon
+    - method.childReturnType.neon
     - method.notFound.neon
     - method.unused.neon
-    - missingType.property.neon
+    - new.static.neon
     - offsetAccess.nonOffsetAccessible.neon
     - parameter.trait.neon
     - property.nonObject.neon

@@ -8,14 +8,14 @@ parameters:
             path: ../app/Console/Commands/IdeHelperChoresCommand.php
 
         -
-            message: '#^Method App\\Http\\Middleware\\CompressResponseContent\:\:shouldCompress\(\) is unused\.$#'
+            message: '#^Method App\\Models\\Example\:\:createdAtFormatted\(\) is unused\.$#'
             count: 1
-            path: ../app/Http/Middleware/CompressResponseContent.php
+            path: ../app/Models/Example.php
 
         -
-            message: '#^Method App\\Http\\Middleware\\CompressResponseContent\:\:simpleCompression\(\) is unused\.$#'
+            message: '#^Method App\\Models\\Example\:\:updatedAtFormatted\(\) is unused\.$#'
             count: 1
-            path: ../app/Http/Middleware/CompressResponseContent.php
+            path: ../app/Models/Example.php
 
         -
             message: '#^Method App\\Support\\Rectors\\RenameToPsrNameRector\:\:hasFuncCallNameStringArg\(\) is unused\.$#'

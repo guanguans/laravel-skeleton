@@ -1,4 +1,4 @@
-# total 42 errors
+# total 21 errors
 
 parameters:
     ignoreErrors:
@@ -56,51 +56,6 @@ parameters:
             message: '#^Cannot access offset ''name'' on mixed\.$#'
             count: 1
             path: ../app/Http/Controllers/Api/AuthController.php
-
-        -
-            message: '#^Cannot access an offset on mixed\.$#'
-            count: 5
-            path: ../app/Http/Middleware/CSP.php
-
-        -
-            message: '#^Cannot access offset ''connect\-src'' on mixed\.$#'
-            count: 1
-            path: ../app/Http/Middleware/CSP.php
-
-        -
-            message: '#^Cannot access offset ''policy'' on mixed\.$#'
-            count: 6
-            path: ../app/Http/Middleware/CSP.php
-
-        -
-            message: '#^Cannot access offset ''report_only'' on mixed\.$#'
-            count: 1
-            path: ../app/Http/Middleware/CSP.php
-
-        -
-            message: '#^Cannot access offset ''script\-src'' on mixed\.$#'
-            count: 2
-            path: ../app/Http/Middleware/CSP.php
-
-        -
-            message: '#^Cannot access offset ''style\-src'' on mixed\.$#'
-            count: 2
-            path: ../app/Http/Middleware/CSP.php
-
-        -
-            message: '#^Cannot access offset ''errors'' on mixed\.$#'
-            count: 1
-            path: ../app/Http/Middleware/LogAllRequests.php
-
-        -
-            message: '#^Cannot access offset ''message'' on mixed\.$#'
-            count: 2
-            path: ../app/Http/Middleware/LogAllRequests.php
-
-        -
-            message: '#^Cannot access offset ''result'' on mixed\.$#'
-            count: 1
-            path: ../app/Http/Middleware/LogAllRequests.php
 
         -
             message: '#^Cannot access offset ''disposable'' on mixed\.$#'

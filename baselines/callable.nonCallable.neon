@@ -1,12 +1,7 @@
-# total 6 errors
+# total 4 errors
 
 parameters:
     ignoreErrors:
-        -
-            message: '#^Trying to invoke mixed but it''s not a callable\.$#'
-            count: 1
-            path: ../app/Models/Model.php
-
         -
             message: '#^Trying to invoke mixed but it''s not a callable\.$#'
             count: 1
@@ -19,5 +14,5 @@ parameters:
 
         -
             message: '#^Trying to invoke mixed but it''s not a callable\.$#'
-            count: 2
+            count: 1
             path: ../app/Support/helpers.php

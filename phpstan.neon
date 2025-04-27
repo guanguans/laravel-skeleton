@@ -86,28 +86,24 @@ parameters:
             function: 'env_json_decode()'
             message: 'use config() instead'
     ignoreErrors:
-#        - '#^Cannot call method .*\(\) on mixed\.$#'
-#        - '#^Cannot cast mixed to .*\.$#'
-#        - '#^Cannot use array destructuring on mixed\.$#'
-#        - '#Property .* does not accept mixed#'
+#        - identifier: new.static
+#        - identifier: return.void
+#        - identifier: staticClassAccess.privateProperty
+#        - identifier: symplify.noDynamicName
+#        - identifier: typePerfect.noMixedMethodCaller
         - identifier: argument.templateType
         - identifier: argument.type
+        - identifier: assign.propertyType
         - identifier: binaryOp.invalid
-        - identifier: logicalAnd.resultUnused
-        - identifier: logicalOr.resultUnused
         - identifier: cast.string
         - identifier: encapsedStringPart.nonString
+        - identifier: logicalAnd.resultUnused
+        - identifier: logicalOr.resultUnused
         - identifier: method.nonObject
-        - identifier: trait.unused
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
         - identifier: return.type
-#        - identifier: return.void
-        - identifier: assign.propertyType
-#        - identifier: symplify.noDynamicName
-#        - identifier: typePerfect.noMixedMethodCaller
-#        - identifier: new.static
-#        - identifier: staticClassAccess.privateProperty
+        - identifier: trait.unused
         - '#^Call to an undefined method Guanguans\\LaravelApiResponse\\Contracts\\ApiResponseContract\:\:.*\(\)\.$#'
         -
             identifier: larastan.noEnvCallsOutsideOfConfig
@@ -116,8 +112,6 @@ parameters:
             identifier: new.static
             paths:
                 - app/Rules/Rule.php
-#                - app/Support/Mixins/CollectionMixin.php
-#                - app/Support/Mixins/ModelMixin.php
         -
             message: '#^Calling env\(\) is forbidden, use config\(\) instead\.$#'
             path: app/Support/helpers.php
