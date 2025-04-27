@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
+use Illuminate\Console\Events\CommandStarting;
+use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\HelpCommand;
 use Symfony\Component\Console\ConsoleEvents;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
@@ -27,15 +28,15 @@ use function Illuminate\Support\php_binary;
  * @see https://dev.to/serendipityhq/how-to-debug-any-symfony-command-simply-passing-x-214o
  * @see https://symfony.com/doc/current/components/console/events.html
  */
-#[AsEventListener(ConsoleEvents::COMMAND, 'configure')]
+#[AsEventListener(ConsoleEvents::COMMAND)]
 final class RunCommandInDebugModeListener
 {
     /**
      * @throws \Throwable
      */
-    public function __invoke(ConsoleCommandEvent $event): void
+    public function __invoke(CommandStarting $event): void
     {
-        $command = $event->getCommand();
+        $command = collect(Artisan::all())->get($event->command);
 
         throw_unless(
             $command instanceof Command,
@@ -54,7 +55,7 @@ final class RunCommandInDebugModeListener
             description: 'If passed, the command is re-run setting env variables required by xDebug.',
         );
 
-        $input = $event->getInput();
+        $input = $event->input;
 
         if (
             $command instanceof HelpCommand
@@ -66,7 +67,7 @@ final class RunCommandInDebugModeListener
             return;
         }
 
-        $output = $event->getOutput();
+        $output = $event->output;
         $output->writeln('<comment>Relaunching the command with xDebug...</comment>');
 
         $exitCode = (new Process($this->buildCommandWithXDebugActivated()))

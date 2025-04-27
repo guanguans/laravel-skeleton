@@ -51,6 +51,7 @@ return Application::configure(basePath: \dirname(__DIR__))
             //     ->where('any', '.*');
         },
     )
+    ->withEvents(false)
     ->withMiddleware(static function (Middleware $middleware): void {
         $middleware
             ->convertEmptyStringsToNull(except: [

@@ -20,7 +20,6 @@ use Composer\XdebugHandler\XdebugHandler;
 use Illuminate\Console\Application;
 use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Console\Events\CommandStarting;
-use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
@@ -28,7 +27,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Webmozart\Assert\Assert;
@@ -83,11 +81,11 @@ final class ConsoleServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, function (): void {
-            $this->app->booted(function (): void {
-                (fn () => $this->symfonyDispatcher->addListener(
-                    ConsoleEvents::COMMAND,
-                    new RunCommandInDebugModeListener
-                ))->call($this->app->make(Kernel::class));
+            $this->app->booted(static function (): void {
+                /**
+                 * @see \Illuminate\Foundation\Console\Kernel::rerouteSymfonyCommandEvents()
+                 */
+                Event::listen(CommandStarting::class, RunCommandInDebugModeListener::class);
             });
         });
     }
@@ -109,16 +107,16 @@ final class ConsoleServiceProvider extends ServiceProvider
                 ->each(static function (SymfonyCommand $command): void {
                     $command
                         ->addOption(
-                            'configuration',
-                            null,
-                            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-                            'Configure able (e.g. `--configuration=app.name=guanguans` or `--configuration app.name=guanguans`)',
-                        )
-                        ->addOption(
                             'xdebug',
                             null,
                             InputOption::VALUE_NONE,
                             'Display xdebug output'
+                        )
+                        ->addOption(
+                            'configuration',
+                            null,
+                            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+                            'Configure able (e.g. `--configuration=app.name=guanguans` or `--configuration app.name=guanguans`)',
                         );
                 })
                 ->tap(function (): void {
