@@ -24,7 +24,6 @@ use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
-use Illuminate\Support\Facades\Queue;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -308,15 +307,6 @@ final class HealthCheckCommand extends Command
         return $this->createSuccessResult();
     }
 
-    private function checkPhpVersion(): Result
-    {
-        // if (\PHP_VERSION_ID < 80300) {
-        //     return Error::create('PHP version is less than 8.3.0.');
-        // }
-
-        return $this->createSuccessResult();
-    }
-
     /**
      * @throws \JsonException
      */
@@ -392,15 +382,6 @@ final class HealthCheckCommand extends Command
 
         if (0 < $localValue && $localValue < $limit) {
             return Error::create("The memory limit is less than {$limit}M: `$localValue`.");
-        }
-
-        return $this->createSuccessResult();
-    }
-
-    private function checkQueue(): Result
-    {
-        if (!Queue::connected()) {
-            return Error::create('The queue is not connected.');
         }
 
         return $this->createSuccessResult();

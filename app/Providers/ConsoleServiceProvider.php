@@ -15,12 +15,23 @@ namespace App\Providers;
 
 use App\Console\Commands\ClearAllCommand;
 use App\Listeners\RunCommandInDebugModeListener;
+use Carbon\CarbonInterval;
+use Composer\XdebugHandler\XdebugHandler;
+use Illuminate\Console\Application;
+use Illuminate\Console\Events\ArtisanStarting;
+use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Console\AboutCommand;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @property EventDispatcherInterface $symfonyDispatcher
@@ -57,6 +68,11 @@ final class ConsoleServiceProvider extends ServiceProvider
                 key: 'filament'
             );
 
+            Event::listen(ArtisanStarting::class, static function (ArtisanStarting $artisanStarting): void {});
+            Artisan::whenCommandLifecycleIsLongerThan(CarbonInterval::seconds(3), static function (): void {});
+            Application::starting(static function (Application $application): void {});
+            $this->addDefaultInputDefinition();
+
             $this->whenProduction();
         });
     }
@@ -80,6 +96,64 @@ final class ConsoleServiceProvider extends ServiceProvider
     {
         $this->whenever($this->app->isProduction(), static function (): void {
             ClearAllCommand::prohibit();
+        });
+    }
+
+    /**
+     * @see \Illuminate\Console\Application::getDefaultInputDefinition()
+     */
+    private function addDefaultInputDefinition(): void
+    {
+        $this->app->booted(function (): void {
+            collect(Artisan::all())
+                ->each(function (SymfonyCommand $command): void {
+                    $command
+                        ->addOption(
+                            'configuration',
+                            null,
+                            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+                            'Configure able (e.g. `--configuration=app.name=guanguans` or `--configuration app.name=guanguans`)',
+                        )
+                        ->addOption(
+                            'xdebug',
+                            null,
+                            InputOption::VALUE_NONE,
+                            'Display xdebug output'
+                        );
+                })
+                ->tap(function (): void {
+                    /**
+                     * @see \Illuminate\Foundation\Console\Kernel::rerouteSymfonyCommandEvents()
+                     */
+                    Event::listen(CommandStarting::class, function (CommandStarting $commandStarting): void {
+                        $input = $commandStarting->input;
+
+                        /**
+                         * @see \Rector\Console\ConsoleApplication::doRun()
+                         */
+                        $isXdebugAllowed = $input->hasParameterOption('--xdebug') || $this->app->runningUnitTests();
+
+                        if (!$isXdebugAllowed) {
+                            $xdebugHandler = new XdebugHandler(config('app.name'));
+                            $xdebugHandler->setPersistent();
+                            $xdebugHandler->check();
+                            unset($xdebugHandler);
+                        }
+
+                        collect($input->getOption('configuration'))
+                            // ->dump()
+                            ->mapWithKeys(static function ($config): array {
+                                Assert::contains($config, '=', "The configureable option [$config] must be formatted as key=value.");
+
+                                [$key, $value] = str($config)->explode('=', 2)->all();
+
+                                return [$key => $value];
+                            })
+                            ->tap(static function (Collection $config): void {
+                                config($config->all());
+                            });
+                    });
+                });
         });
     }
 }
