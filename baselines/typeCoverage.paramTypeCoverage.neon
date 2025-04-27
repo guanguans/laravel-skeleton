@@ -3,6 +3,6 @@
 parameters:
     ignoreErrors:
         -
-            message: '#^Out of 948 possible param types, only 943 \- 99\.4 %% actually have it\. Add more param types to get over 100 %%$#'
+            message: '#^Out of 949 possible param types, only 944 \- 99\.4 %% actually have it\. Add more param types to get over 100 %%$#'
             count: 5
             path: ../app/Models/Example.php

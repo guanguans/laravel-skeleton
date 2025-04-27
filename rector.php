@@ -105,6 +105,7 @@ return RectorConfig::configure()
         '**/Fixtures/*',
         '**/vendor/*',
         __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
+        __DIR__.'/app/Listeners/TraceEventListener.php',
         __DIR__.'/app/Providers/EventServiceProvider.php',
         __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
         __DIR__.'/bootstrap/cache/',

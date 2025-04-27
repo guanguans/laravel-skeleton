@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Listeners;
 
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 /**
@@ -33,10 +34,10 @@ final class PrepareRequestListener
         \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
 
         if (!$app->runningInConsole()) {
-            $app->make('request')->headers->set(self::X_REQUEST_ID, TRACE_ID);
+            $app->make(Request::class)->headers->set(self::X_REQUEST_ID, TRACE_ID);
 
-            if ($app->make('request')->is('api/*')) {
-                $app->make('request')->headers->set('Accept', 'application/json');
+            if ($app->make(Request::class)->is('api/*')) {
+                $app->make(Request::class)->headers->set('Accept', 'application/json');
             }
         }
     }

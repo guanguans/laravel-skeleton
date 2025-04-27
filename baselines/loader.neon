@@ -1,4 +1,4 @@
-# total 73 errors
+# total 74 errors
 includes:
     - callable.nonCallable.neon
     - complexity.classLike.neon

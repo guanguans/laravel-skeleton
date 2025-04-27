@@ -146,5 +146,5 @@ return Application::configure(basePath: \dirname(__DIR__))
     ->create()
     ->tap(static function (Application $app): void {
         $app->afterLoadingEnvironment((new PrepareRequestListener)(...));
-        $app->make(DispatcherContract::class)->listen('*', TraceEventListener::class);
+        // $app->make(DispatcherContract::class)->listen('*', TraceEventListener::class);
     });

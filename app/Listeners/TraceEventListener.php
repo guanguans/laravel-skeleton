@@ -14,13 +14,20 @@ declare(strict_types=1);
 namespace App\Listeners;
 
 use Illuminate\Events\Dispatcher;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 
 final class TraceEventListener
 {
+    private const string TRIGGER = 'DEBUG_EVENT';
+
     public function __invoke(string $event): void
     {
+        // if (!$this->requestHasTrigger()) {
+        //     return;
+        // }
+
         static $clear = false;
 
         $file = __DIR__.'/../../storage/logs/events.log';
@@ -59,5 +66,16 @@ final class TraceEventListener
             ),
             \FILE_APPEND
         );
+    }
+
+    private function requestHasTrigger(): bool
+    {
+        $request = app()->runningInConsole() ? Request::capture() : resolve(Request::class);
+
+        return false !== getenv(self::TRIGGER)
+            || $request->hasHeader(self::TRIGGER)
+            || $request->has(self::TRIGGER)
+            || $request->server->has(self::TRIGGER)
+            || $request->hasCookie(self::TRIGGER);
     }
 }

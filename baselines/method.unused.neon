@@ -1,4 +1,4 @@
-# total 4 errors
+# total 5 errors
 
 parameters:
     ignoreErrors:
@@ -6,6 +6,11 @@ parameters:
             message: '#^Method App\\Console\\Commands\\IdeHelperChoresCommand\:\:ruleChore\(\) is unused\.$#'
             count: 1
             path: ../app/Console/Commands/IdeHelperChoresCommand.php
+
+        -
+            message: '#^Method App\\Listeners\\TraceEventListener\:\:requestHasTrigger\(\) is unused\.$#'
+            count: 1
+            path: ../app/Listeners/TraceEventListener.php
 
         -
             message: '#^Method App\\Models\\Example\:\:createdAtFormatted\(\) is unused\.$#'

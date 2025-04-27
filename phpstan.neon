@@ -36,7 +36,7 @@ parameters:
         - app/
         - bootstrap/app.php
         - bootstrap/providers.php
-#        - config/
+        - config/
 #        - database/
         - public/
         - resources/
@@ -110,6 +110,9 @@ parameters:
         -
             identifier: larastan.noEnvCallsOutsideOfConfig
             path: app/Support/helpers.php
+        -
+            message: '#^Calling env_explode\(\) is forbidden, use config\(\) instead\.$#'
+            path: config/logging.php
         -
             identifier: new.static
             paths:
