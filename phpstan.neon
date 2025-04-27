@@ -35,8 +35,16 @@ parameters:
     paths:
         - app/
         - bootstrap/app.php
+        - bootstrap/providers.php
+#        - config/
+#        - database/
+        - public/
+        - resources/
+#        - routes/
+#        - tests/
     excludePaths:
         - app/Support/StreamWrappers/
+        - *.blade.php
     level: max
 #    level: 10
     tmpDir: .build/phpstan/
