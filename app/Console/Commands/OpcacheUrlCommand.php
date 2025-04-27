@@ -21,6 +21,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
+use function Illuminate\Filesystem\join_paths;
 
 final class OpcacheUrlCommand extends Command
 {
@@ -36,7 +37,12 @@ final class OpcacheUrlCommand extends Command
      */
     public function handle(): void
     {
+        $preventStrayRequests = Http::preventingStrayRequests();
+        Http::preventStrayRequests();
+
         $this->sendRequest($this->argument('route'), ['force' => $this->option('force')]);
+
+        Http::preventStrayRequests($preventStrayRequests);
     }
 
     /**
@@ -44,15 +50,31 @@ final class OpcacheUrlCommand extends Command
      */
     public function sendRequest(string $url, array $parameters = []): PromiseInterface|Response
     {
-        return Http::withHeaders(config('opcache.headers'))
-            ->withOptions(['verify' => config('opcache.verify')])
-            ->beforeSending(function (Request $request): never {
-                $this->line($request->url());
+        $baseUri = join_paths(
+            rtrim(config('opcache.url', config('app.url')), '/'),
+            trim(config('opcache.prefix', 'opcache-api'), '/'),
+            ltrim($url, '/')
+        );
 
-                exit(1);
+        Http::fake([
+            "$baseUri?key=*" => Http::response(),
+        ]);
+
+        return Http::withHeaders(config('opcache.headers', []))
+            ->withOptions(['verify' => config('opcache.verify', false)])
+            ->retry(0)
+            ->beforeSending(function (Request $request): void {
+                static $isPrinted = false;
+
+                if ($isPrinted) {
+                    return;
+                }
+
+                $this->line($request->url());
+                $isPrinted = true;
             })
             ->get(
-                rtrim(config('opcache.url'), '/').'/'.trim(config('opcache.prefix'), '/').'/'.ltrim($url, '/'),
+                $baseUri,
                 ['key' => Crypt::encrypt('opcache'), ...$parameters]
             );
     }

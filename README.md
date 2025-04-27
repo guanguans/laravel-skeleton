@@ -264,10 +264,9 @@ composer var-dump-server                # 启动变量打印服务
 │   │   ├── Autowired.php
 │   │   ├── Ignore.php
 │   │   └── Mixin.php
-│   ├── Autowire.php
 │   ├── BitEncoder.php
-│   ├── Bootstrappers
-│   │   └── OutOfMemoryBootstrapper.php
+│   ├── Bootstrap
+│   │   └── OutOfMemoryBootstrap.php
 │   ├── Clients
 │   │   ├── AbstractClient.php
 │   │   └── PushDeer.php
@@ -277,7 +276,6 @@ composer var-dump-server                # 启动变量打印服务
 │   ├── Contracts
 │   │   ├── BitEncoderContract.php
 │   │   └── SignerContract.php
-│   ├── Curl.php
 │   ├── Facades
 │   │   ├── Elasticsearch.php
 │   │   └── PushDeer.php
@@ -301,7 +299,6 @@ composer var-dump-server                # 启动变量打印服务
 │   │   │   ├── WhereFullTextQueryBuilderMixin.php
 │   │   │   ├── WhereInsQueryBuilderMixin.php
 │   │   │   ├── WhereLikeQueryBuilderMixin.php
-│   │   │   ├── WhereNotQueryBuilderMixin.php
 │   │   │   └── WhereStartsWithQueryBuilderMixin.php
 │   │   ├── RequestMixin.php
 │   │   ├── ResponseFactoryMixin.php
@@ -347,10 +344,11 @@ composer var-dump-server                # 启动变量打印服务
 │   │   ├── Immutable.php
 │   │   ├── Makeable.php
 │   │   ├── Sanitizeable.php
+│   │   ├── SetStateable.php
 │   │   ├── Singletonable.php
 │   │   ├── Uncloneable.php
 │   │   ├── Unconstructable.php
-│   │   └── WithMiddlewareArgs.php
+│   │   └── WithPipeArgs.php
 │   └── helpers.php
 └── View
     ├── Components
@@ -360,6 +358,6 @@ composer var-dump-server                # 启动变量打印服务
     └── Creators
         └── RequestCreator.php
 
-55 directories, 255 files
+55 directories, 253 files
 
 ```
