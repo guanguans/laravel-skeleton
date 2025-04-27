@@ -259,7 +259,7 @@ if (!\function_exists('curry')) {
      */
     function curry(callable $function): callable
     {
-        $accumulator = static fn ($arguments): Closure => static function (...$args) use (
+        $accumulator = static fn (mixed $arguments): Closure => static function (mixed ...$args) use (
             $arguments,
             $function,
             &$accumulator
@@ -288,8 +288,8 @@ if (!\function_exists('compose')) {
     {
         return array_reduce(
             $functions,
-            static fn (callable $carry, callable $function): Closure => static fn ($x) => $function($carry($x)),
-            static fn ($x) => $x
+            static fn (callable $carry, callable $function): Closure => static fn (mixed $x) => $function($carry($x)),
+            static fn (mixed $x): mixed => $x
         );
     }
 }

@@ -1,15 +1,10 @@
-# total 14 errors
+# total 11 errors
 
 parameters:
     ignoreErrors:
         -
             message: '#^Cannot access property \$Value on mixed\.$#'
             count: 4
-            path: ../app/Console/Commands/HealthCheckCommand.php
-
-        -
-            message: '#^Cannot access property \$name on mixed\.$#'
-            count: 2
             path: ../app/Console/Commands/HealthCheckCommand.php
 
         -
@@ -29,11 +24,6 @@ parameters:
 
         -
             message: '#^Cannot access property \$id on mixed\.$#'
-            count: 1
-            path: ../app/Support/Mixins/RequestMixin.php
-
-        -
-            message: '#^Cannot access property \$isFallback on mixed\.$#'
             count: 1
             path: ../app/Support/Mixins/RequestMixin.php
 

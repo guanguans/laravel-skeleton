@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
 
 declare(strict_types=1);
@@ -16,6 +17,7 @@ declare(strict_types=1);
 namespace App\Support\Mixins\QueryBuilder;
 
 use App\Support\Attributes\Mixin;
+use Illuminate\Contracts\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -30,27 +32,27 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 #[Mixin(RelationBuilder::class)]
 final class WhereStartsWithQueryBuilderMixin
 {
-    public function whereStartsWith(): callable
+    public function whereStartsWith(): \Closure
     {
-        return function ($column, string $value, string $boolean = 'and', bool $not = false) {
+        return function (array|\Closure|Expression|string $column, string $value, string $boolean = 'and', bool $not = false): self {
             $operator = $not ? 'not like' : 'like';
 
             return $this->where($column, $operator, "$value%", $boolean);
         };
     }
 
-    public function whereNotStartsWith(): callable
+    public function whereNotStartsWith(): \Closure
     {
-        return fn ($column, string $value): callable => $this->whereStartsWith($column, $value, 'and', true);
+        return fn (array|\Closure|Expression|string $column, string $value): self => $this->whereStartsWith($column, $value, 'and', true);
     }
 
-    public function orWhereStartsWith(): callable
+    public function orWhereStartsWith(): \Closure
     {
-        return fn ($column, string $value): callable => $this->whereStartsWith($column, $value, 'or');
+        return fn (array|\Closure|Expression|string $column, string $value): self => $this->whereStartsWith($column, $value, 'or');
     }
 
-    public function orWhereNotStartsWith(): callable
+    public function orWhereNotStartsWith(): \Closure
     {
-        return fn ($column, string $value): callable => $this->whereStartsWith($column, $value, 'or', true);
+        return fn (array|\Closure|Expression|string $column, string $value): self => $this->whereStartsWith($column, $value, 'or', true);
     }
 }

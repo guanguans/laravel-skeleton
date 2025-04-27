@@ -64,7 +64,7 @@ final class BitEncoder implements BitEncoderContract
      */
     public function decode(int $value): array
     {
-        return array_filter($this->set, fn ($item): bool => $this->has($value, $item));
+        return array_filter($this->set, fn (mixed $item): bool => $this->has($value, $item));
     }
 
     /**
@@ -79,7 +79,7 @@ final class BitEncoder implements BitEncoderContract
 
         return array_reduce(
             $set,
-            function (int $value, $item): int {
+            function (int $value, mixed $item): int {
                 $index = array_search($item, $this->set, true);
 
                 if (false !== $index) {
@@ -104,7 +104,7 @@ final class BitEncoder implements BitEncoderContract
 
         return array_reduce(
             $set,
-            function (int $value, $item): int {
+            function (int $value, mixed $item): int {
                 $index = array_search($item, $this->set, true);
 
                 if (false !== $index) {

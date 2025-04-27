@@ -26,22 +26,22 @@ use Illuminate\Support\Arr;
 #[Mixin(Request::class)]
 final class RequestMixin
 {
-    public function userId(): callable
+    public function userId(): \Closure
     {
         return fn () => $this->user()?->id;
     }
 
-    public function isAdmin(): callable
+    public function isAdmin(): \Closure
     {
         return fn (): bool => (bool) $this->user()?->is_admin;
     }
 
-    public static function isAdminDeveloper(): callable
+    public static function isAdminDeveloper(): \Closure
     {
         return static fn (): bool => str(\Illuminate\Support\Facades\Request::getFacadeRoot()->user()?->username)->is(config('services.develop.fingerprints'));
     }
 
-    public function isWechat(): callable
+    public function isWechat(): \Closure
     {
         return fn (): bool => str_contains($this->userAgent(), 'MicroMessenger');
     }
@@ -49,18 +49,18 @@ final class RequestMixin
     /**
      * @noinspection SensitiveParameterInspection
      */
-    public function headers(): callable
+    public function headers(): \Closure
     {
-        return fn ($key = null, $default = null) => null === $key
+        return fn (?string $key = null, ?string $default = null) => null === $key
             ? collect($this->header())
-                ->map(static fn ($header) => $header[0])
+                ->map(static fn (array $header) => $header[0])
                 ->toArray()
             : $this->header($key, $default);
     }
 
-    public function whenRouteIs(): callable
+    public function whenRouteIs(): \Closure
     {
-        return function ($patterns, callable $callback) {
+        return function (iterable|string $patterns, callable $callback) {
             if ($value = $this->routeIs($patterns)) {
                 return $callback($this, $value) ?: $this;
             }
@@ -69,9 +69,9 @@ final class RequestMixin
         };
     }
 
-    public function whenIs(): callable
+    public function whenIs(): \Closure
     {
-        return function ($patterns, callable $callback) {
+        return function (iterable|string $patterns, callable $callback) {
             if ($value = $this->is($patterns)) {
                 return $callback($this, $value) ?: $this;
             }
@@ -80,13 +80,13 @@ final class RequestMixin
         };
     }
 
-    public function propertyAware(): callable
+    public function propertyAware(): \Closure
     {
-        return function ($property, $value): self {
+        return function (string $property, mixed $value): self {
             throw_unless(property_exists($this, $property), \InvalidArgumentException::class, 'The property not exists.');
 
             app()->has('original_properties') or app()->instance('original_properties', []);
-            app()->extend('original_properties', function ($properties) use ($property) {
+            app()->extend('original_properties', function (array $properties) use ($property): array {
                 isset($properties[$property]) or $properties[$property] = $this->{$property};
 
                 return $properties;
@@ -98,7 +98,7 @@ final class RequestMixin
         };
     }
 
-    public function recoverProperties(): callable
+    public function recoverProperties(): \Closure
     {
         return function (): void {
             if (!app()->has('original_properties')) {
@@ -114,15 +114,15 @@ final class RequestMixin
     /**
      * @noinspection PhpParamsInspection
      */
-    public function matchRoute(): callable
+    public function matchRoute(): \Closure
     {
-        return function ($includingMethod = true) {
+        return function (bool $includingMethod = true) {
             /** @var \Illuminate\Routing\RouteCollection $routeCollection */
             $routeCollection = app(Router::class)->getRoutes();
 
             $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
 
-            [$fallbacks, $routes] = collect($routes)->partition(static fn ($route) => $route->isFallback);
+            [$fallbacks, $routes] = collect($routes)->partition(static fn (Route $route) => $route->isFallback);
 
             return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
         };
@@ -135,7 +135,7 @@ final class RequestMixin
      *
      * @noinspection PhpUndefinedMethodInspection
      */
-    public function resolveFileFromUrl(): callable
+    public function resolveFileFromUrl(): \Closure
     {
         return function (string $field): void {
             if (!$this->hasFile($field) && filter_var($this->get($field), \FILTER_VALIDATE_URL)) {

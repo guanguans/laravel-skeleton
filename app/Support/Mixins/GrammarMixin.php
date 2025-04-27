@@ -28,7 +28,7 @@ final class GrammarMixin
     /**
      * Compile a table comment command.
      */
-    public function compileTableComment(): callable
+    public function compileTableComment(): \Closure
     {
         /*
          * @param  \Illuminate\Database\Schema\Blueprint  $blueprint

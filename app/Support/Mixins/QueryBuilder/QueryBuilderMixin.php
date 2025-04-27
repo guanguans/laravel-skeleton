@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Support\Mixins\QueryBuilder;
 
 use App\Support\Attributes\Mixin;
+use Illuminate\Contracts\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -29,43 +30,53 @@ use Illuminate\Pipeline\Pipeline;
 #[Mixin(RelationBuilder::class)]
 final class QueryBuilderMixin
 {
-    public function pipe(): callable
+    public function pipe(): \Closure
     {
-        return fn (mixed ...$pipes) => tap($this, static function ($builder) use ($pipes): void {
-            array_unshift($pipes, static function ($builder, $next): void {
-                throw_if(!($piped = $next($builder)) instanceof EloquentBuilder
-                && !$piped instanceof QueryBuilder
-                && !$piped instanceof RelationBuilder, \InvalidArgumentException::class, \sprintf(
-                    'Query builder pipeline must be return a %s or %s or %s instance.',
-                    EloquentBuilder::class,
-                    QueryBuilder::class,
-                    RelationBuilder::class,
-                ));
-            });
+        return fn (mixed ...$pipes) => tap(
+            $this,
+            static function (EloquentBuilder|QueryBuilder|RelationBuilder $builder) use ($pipes): void {
+                array_unshift(
+                    $pipes,
+                    static function (EloquentBuilder|QueryBuilder|RelationBuilder $builder, \Closure $next): void {
+                        throw_if(
+                            !($piped = $next($builder)) instanceof EloquentBuilder
+                            && !$piped instanceof QueryBuilder
+                            && !$piped instanceof RelationBuilder,
+                            \InvalidArgumentException::class,
+                            \sprintf(
+                                'Query builder pipeline must be return a %s or %s or %s instance.',
+                                EloquentBuilder::class,
+                                QueryBuilder::class,
+                                RelationBuilder::class,
+                            )
+                        );
+                    }
+                );
 
-            (new Pipeline(app()))
-                ->send($builder)
-                ->through(...$pipes)
-                ->thenReturn();
-        });
+                (new Pipeline(app()))
+                    ->send($builder)
+                    ->through(...$pipes)
+                    ->thenReturn();
+            }
+        );
     }
 
-    public function getToArray(): callable
+    public function getToArray(): \Closure
     {
-        return fn ($columns = ['*']): array => $this->get($columns)->toArray();
+        return fn (array|string $columns = ['*']): array => $this->get($columns)->toArray();
     }
 
-    public function firstToArray(): callable
+    public function firstToArray(): \Closure
     {
-        return fn ($columns = ['*']): ?array => $this->first($columns)?->toArray();
+        return fn (array|string $columns = ['*']): ?array => $this->first($columns)?->toArray();
     }
 
     /**
      * @see https://github.com/ankane/hightop-php
      */
-    public function top(): callable
+    public function top(): \Closure
     {
-        return function ($column, ?int $limit = null, ?bool $null = false, ?int $min = null, ?string $distinct = null): array {
+        return function (Expression|string $column, ?int $limit = null, ?bool $null = false, ?int $min = null, ?string $distinct = null): array {
             if (null === $distinct) {
                 $op = 'count(*)';
             } else {

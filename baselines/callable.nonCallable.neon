@@ -1,12 +1,7 @@
-# total 4 errors
+# total 3 errors
 
 parameters:
     ignoreErrors:
-        -
-            message: '#^Trying to invoke mixed but it''s not a callable\.$#'
-            count: 1
-            path: ../app/Support/Mixins/QueryBuilder/QueryBuilderMixin.php
-
         -
             message: '#^Trying to invoke mixed but it''s not a callable\.$#'
             count: 2

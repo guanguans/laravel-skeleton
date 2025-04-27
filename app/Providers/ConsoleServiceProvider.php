@@ -134,7 +134,7 @@ final class ConsoleServiceProvider extends ServiceProvider
 
                         collect($input->getOption('configuration'))
                             // ->dump()
-                            ->mapWithKeys(static function ($config): array {
+                            ->mapWithKeys(static function (string $config): array {
                                 Assert::contains($config, '=', "The configureable option [$config] must be formatted as key=value.");
 
                                 [$key, $value] = str($config)->explode('=', 2)->all();

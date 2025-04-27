@@ -65,7 +65,7 @@ final class HealthCheckCommand extends Command
             ->pipe(function (Collection $methods) {
                 $this
                     ->setProcessTitle('Health checking...')
-                    ->withProgressBar($methods, function ($method) use (&$checks): void {
+                    ->withProgressBar($methods, function (\ReflectionMethod $method) use (&$checks): void {
                         $result = $this->{$method->name}();
 
                         \assert($result instanceof Result);
@@ -86,7 +86,7 @@ final class HealthCheckCommand extends Command
                 ['Index', 'Resource', 'State', 'Message'],
                 $checks->all()
             ))
-            ->filter(static fn ($check): bool => self::RESULT_SUCCESS !== $check['state'])
+            ->filter(static fn (array $check): bool => self::RESULT_SUCCESS !== $check['state'])
             ->whenNotEmpty(function (): void {
                 $this->components->error('Health check failed.');
             })
@@ -321,7 +321,7 @@ final class HealthCheckCommand extends Command
             'xml',
             'zip',
         ])->reduce(
-            static fn (Collection $missingExtensions, $extension) => $missingExtensions->unless(
+            static fn (Collection $missingExtensions, string $extension) => $missingExtensions->unless(
                 \extension_loaded($extension),
                 static fn (Collection $missingExtensions) => $missingExtensions->add($extension)
             ),
@@ -371,7 +371,7 @@ final class HealthCheckCommand extends Command
      */
     private function checkMemoryLimit(int $limit = 256): Result
     {
-        $inis = collect(ini_get_all())->filter(static fn ($value, $key): bool => str_contains($key, 'memory_limit'));
+        $inis = collect(ini_get_all())->filter(static fn (array $value, string $key): bool => str_contains($key, 'memory_limit'));
 
         if ($inis->isEmpty()) {
             return Error::create('The memory limit is not set.');

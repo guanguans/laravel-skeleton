@@ -29,7 +29,7 @@ use Illuminate\Support\Stringable;
 #[Mixin(Event::class)]
 final class SchedulingEventMixin
 {
-    public function userAppendOutputToDaily(): callable
+    public function userAppendOutputToDaily(): \Closure
     {
         return fn (
             ?string $filename = null,
@@ -37,7 +37,7 @@ final class SchedulingEventMixin
         ): Event => $this->userAppendOutputTo($filename, \sprintf('daily-%s', Carbon::now()->format('Y-m-d')), $dirname);
     }
 
-    public function userAppendOutputToWeekly(): callable
+    public function userAppendOutputToWeekly(): \Closure
     {
         return fn (
             ?string $filename = null,
@@ -45,7 +45,7 @@ final class SchedulingEventMixin
         ): Event => $this->userAppendOutputTo($filename, \sprintf('weekly-%s', Carbon::now()->format('Y-W')), $dirname);
     }
 
-    public function userAppendOutputToMonthly(): callable
+    public function userAppendOutputToMonthly(): \Closure
     {
         return fn (
             ?string $filename = null,
@@ -53,7 +53,7 @@ final class SchedulingEventMixin
         ): Event => $this->userAppendOutputTo($filename, \sprintf('monthly-%s', Carbon::now()->format('Y-m')), $dirname);
     }
 
-    public function userAppendOutputToQuarterly(): callable
+    public function userAppendOutputToQuarterly(): \Closure
     {
         return fn (
             ?string $filename = null,
@@ -65,7 +65,7 @@ final class SchedulingEventMixin
         );
     }
 
-    public function userAppendOutputToYearly(): callable
+    public function userAppendOutputToYearly(): \Closure
     {
         return fn (
             ?string $filename = null,
@@ -73,7 +73,7 @@ final class SchedulingEventMixin
         ): Event => $this->userAppendOutputTo($filename, \sprintf('yearly-%s', Carbon::now()->format('Y')), $dirname);
     }
 
-    public function userAppendOutputTo(): callable
+    public function userAppendOutputTo(): \Closure
     {
         return function (?string $filename = null, ?string $suffix = null, ?string $dirname = null): Event {
             $outputPath = value(

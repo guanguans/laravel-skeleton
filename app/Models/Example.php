@@ -120,7 +120,7 @@ final class Example extends BaseModel
     private function createdAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: static fn ($value, $attributes) => $attributes['created_at']->format('Y-m-d H:i:s'),
+            get: static fn (mixed $value, array $attributes) => $attributes['created_at']->format('Y-m-d H:i:s'),
         )->shouldCache();
     }
 
@@ -130,7 +130,7 @@ final class Example extends BaseModel
     private function updatedAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: static fn ($value, $attributes) => $attributes['updated_at']->format('Y-m-d H:i:s'),
+            get: static fn (mixed $value, array $attributes) => $attributes['updated_at']->format('Y-m-d H:i:s'),
         )->withoutObjectCaching();
     }
 }

@@ -54,7 +54,7 @@ final class ShowUnsupportedRequiresCommand extends Command
             ]))
             ->filter(
                 fn (array $package): bool => collect($package['requires'] ?? [])
-                    ->filter(fn ($package): bool => $this->isUnsupported($package['name'], $package['version']))
+                    ->filter(fn (array $package): bool => $this->isUnsupported($package['name'], $package['version']))
                     ->isNotEmpty()
             )
             ->pluck('name')

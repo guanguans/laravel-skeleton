@@ -102,7 +102,12 @@ final class IdeHelperChoresCommand extends Command
         Discover::in('Rules')
             ->instancesOf(Rule::class)
             ->allClasses()
-            ->map(static fn (\ReflectionClass $ruleReflectionClass, $ruleClass): string => $ruleClass::name())
+            ->map(
+                /**
+                 * @param class-string<\App\Rules\Rule> $ruleClass
+                 */
+                static fn (\ReflectionClass $ruleReflectionClass, string $ruleClass): string => $ruleClass::name()
+            )
             ->sort()
             ->values()
             ->tap(fn (Collection $rules) => $this->output($rules));

@@ -223,6 +223,7 @@
         "symplify/vendor-patches": "^11.4",
         "thedoctor0/laravel-factory-generator": "^1.4",
         "tomasvotruba/class-leak": "^2.0",
+        "tomasvotruba/type-coverage": "^2.0",
         "vcian/laravel-db-auditor": "^2.2",
         "worksome/envy": "^1.4",
         "yamadashy/phpstan-friendly-formatter": "^1.2"

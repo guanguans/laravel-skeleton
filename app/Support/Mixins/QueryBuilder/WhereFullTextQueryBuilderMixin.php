@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
 
 declare(strict_types=1);
@@ -30,17 +31,16 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 #[Mixin(RelationBuilder::class)]
 final class WhereFullTextQueryBuilderMixin
 {
-    public function whereFullText(): callable
+    public function whereFullText(): \Closure
     {
-        /*
+        /**
          * Add a "where fulltext" clause to the query.
          *
-         * @param  string|string[]  $columns
-         * @param  string  $value
-         * @param  string  $boolean
+         * @param list<string>|string $columns
+         *
          * @return $this
          */
-        return function ($columns, $value, array $options = [], $boolean = 'and'): self {
+        return function (array|string $columns, string $value, array $options = [], string $boolean = 'and'): self {
             $type = 'Fulltext';
 
             $columns = (array) $columns;
@@ -53,15 +53,15 @@ final class WhereFullTextQueryBuilderMixin
         };
     }
 
-    public function orWhereFullText(): callable
+    public function orWhereFullText(): \Closure
     {
-        /*
+        /**
          * Add an "or where fulltext" clause to the query.
          *
-         * @param  string|string[]  $columns
-         * @param  string  $value
-         * @return $this|callable
+         * @param list<string>|string $columns
+         *
+         * @return $this
          */
-        return fn ($columns, $value, array $options = []): callable => $this->whereFullText($columns, $value, $options, 'or');
+        return fn (array|string $columns, string $value, array $options = []): self => $this->whereFullText($columns, $value, $options, 'or');
     }
 }

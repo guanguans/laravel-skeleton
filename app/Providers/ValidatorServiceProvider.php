@@ -68,7 +68,7 @@ final class ValidatorServiceProvider extends ServiceProvider
         Discover::in('Rules')
             ->instancesOf(Rule::class)
             ->classes()
-            ->each(static function (\ReflectionClass $ruleReflectionClass, $ruleClass): void {
+            ->each(static function (\ReflectionClass $ruleReflectionClass, string $ruleClass): void {
                 /** @var class-string<\App\Rules\Rule> $ruleClass */
                 ValidatorFacade::{$ruleClass::extendType()}(
                     $ruleClass::name(),

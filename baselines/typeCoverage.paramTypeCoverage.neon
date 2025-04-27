@@ -1,0 +1,8 @@
+# total 5 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Out of 948 possible param types, only 943 \- 99\.4 %% actually have it\. Add more param types to get over 100 %%$#'
+            count: 5
+            path: ../app/Models/Example.php

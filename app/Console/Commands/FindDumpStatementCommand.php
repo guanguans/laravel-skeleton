@@ -158,7 +158,7 @@ final class FindDumpStatementCommand extends Command
             return self::INVALID;
         }
 
-        $findInfos = array_map(static function (array $info, $index): array {
+        $findInfos = array_map(static function (array $info, int $index): array {
             ++$index;
             $info['index'] = "<fg=yellow>$index</>";
 
@@ -166,7 +166,7 @@ final class FindDumpStatementCommand extends Command
         }, $findInfos = array_merge([], ...$findInfos), array_keys($findInfos));
 
         $this->table(
-            array_map(static fn ($name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])),
+            array_map(static fn (string $name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])),
             $findInfos
         );
 

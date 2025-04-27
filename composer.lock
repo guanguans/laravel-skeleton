@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "896d127aae5009c45296a797fa37c0cf",
+    "content-hash": "55168a08f49470c242fe05dfe4854b56",
     "packages": [
         {
             "name": "aaronfrancis/fast-paginate",
@@ -35356,6 +35356,63 @@
                 }
             ],
             "time": "2025-04-14T20:38:46+00:00"
+        },
+        {
+            "name": "tomasvotruba/type-coverage",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomasVotruba/type-coverage.git",
+                "reference": "d033429580f2c18bda538fa44f2939236a990e0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/d033429580f2c18bda538fa44f2939236a990e0c",
+                "reference": "d033429580f2c18bda538fa44f2939236a990e0c",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.2 || ^4.0",
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "config/extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TomasVotruba\\TypeCoverage\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Measure type coverage of your project",
+            "keywords": [
+                "phpstan-extension",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/TomasVotruba/type-coverage/issues",
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/2.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-07T00:10:26+00:00"
         },
         {
             "name": "vcian/laravel-db-auditor",

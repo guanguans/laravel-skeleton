@@ -1,4 +1,4 @@
-# total 62 errors
+# total 58 errors
 includes:
     - callable.nonCallable.neon
     - finally.exitPoint.neon
@@ -14,3 +14,4 @@ includes:
     - property.trait.neon
     - return.unusedType.neon
     - staticMethod.nonObject.neon
+    - typeCoverage.paramTypeCoverage.neon

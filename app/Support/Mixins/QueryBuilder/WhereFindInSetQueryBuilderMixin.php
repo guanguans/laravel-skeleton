@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
 
 declare(strict_types=1);
@@ -32,10 +33,9 @@ use Illuminate\Support\Facades\DB;
 #[Mixin(RelationBuilder::class)]
 final class WhereFindInSetQueryBuilderMixin
 {
-    public function whereFindInSet(): callable
+    public function whereFindInSet(): \Closure
     {
-        // @var string|Arrayable|string[] $values
-        return function (string $column, $values, string $boolean = 'and', bool $not = false) {
+        return function (string $column, array|Arrayable|string $values, string $boolean = 'and', bool $not = false): self {
             if (str_contains($column, '.') && ($tablePrefix = DB::getTablePrefix()) && !str_starts_with($column, $tablePrefix)) {
                 $column = $tablePrefix.$column;
             }
@@ -49,21 +49,18 @@ final class WhereFindInSetQueryBuilderMixin
         };
     }
 
-    public function whereNotFindInSet(): callable
+    public function whereNotFindInSet(): \Closure
     {
-        // @var string|Arrayable|string[] $values
-        return fn (string $column, $values): callable => $this->whereFindInSet($column, $values, 'and', true);
+        return fn (string $column, array|Arrayable|string $values): self => $this->whereFindInSet($column, $values, 'and', true);
     }
 
-    public function orWhereFindInSet(): callable
+    public function orWhereFindInSet(): \Closure
     {
-        // @var string|Arrayable|string[] $values
-        return fn (string $column, $values): callable => $this->whereFindInSet($column, $values, 'or');
+        return fn (string $column, array|Arrayable|string $values): self => $this->whereFindInSet($column, $values, 'or');
     }
 
-    public function orWhereNotFindInSet(): callable
+    public function orWhereNotFindInSet(): \Closure
     {
-        // @var string|Arrayable|string[] $values
-        return fn (string $column, $values): callable => $this->whereFindInSet($column, $values, 'or', true);
+        return fn (string $column, array|Arrayable|string $values): self => $this->whereFindInSet($column, $values, 'or', true);
     }
 }

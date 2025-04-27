@@ -127,7 +127,7 @@ final class ViewServiceProvider extends ServiceProvider
         /**
          * 自定义 if 声明.
          */
-        Blade::if('disk', static fn ($value): bool => config('filesystems.default') === $value);
+        Blade::if('disk', static fn (string $value): bool => config('filesystems.default') === $value);
 
         /**
          * 回显变量.

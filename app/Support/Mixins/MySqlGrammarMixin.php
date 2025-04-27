@@ -23,7 +23,7 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 #[Mixin(MySqlGrammar::class)]
 final class MySqlGrammarMixin
 {
-    public function whereFullText(): callable
+    public function whereFullText(): \Closure
     {
         /*
          * Compile a "where fulltext" clause.

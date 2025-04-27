@@ -54,7 +54,7 @@ class User extends Authenticatable
     ];
 
     /** @var array<string, mixed> */
-    protected $rules = [
+    protected array $rules = [
         'email' => 'required|email',
         'password' => 'required|string',
     ];

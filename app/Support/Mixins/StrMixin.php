@@ -31,34 +31,34 @@ final class StrMixin
         return static fn (string $json, int $depth = 512, int $flags = 0): bool => json_validate($json, $depth, $flags);
     }
 
-    public static function appendIf(): callable
+    public static function appendIf(): \Closure
     {
-        return static fn ($value, $suffix) => Str::endsWith($value, $suffix) ? $value : $value.$suffix;
+        return static fn (string $value, string $suffix): string => Str::endsWith($value, $suffix) ? $value : $value.$suffix;
     }
 
-    public static function prependIf(): callable
+    public static function prependIf(): \Closure
     {
-        return static fn ($value, $prefix) => Str::startsWith($value, $prefix) ? $value : $prefix.$value;
+        return static fn (string $value, string $prefix): string => Str::startsWith($value, $prefix) ? $value : $prefix.$value;
     }
 
-    public static function mbSubstrCount(): callable
+    public static function mbSubstrCount(): \Closure
     {
         // return fn($haystack, $needle, $encoding = null) => mb_substr_count($haystack, $needle, $encoding);
 
-        return static fn ($haystack, $needle, $encoding = null): int => mb_substr_count($haystack, $needle, $encoding);
+        return static fn (string $haystack, string $needle, ?string $encoding = null): int => mb_substr_count($haystack, $needle, $encoding);
     }
 
-    public static function pipe(): callable
+    public static function pipe(): \Closure
     {
-        return static fn ($value, callable $callback) => $callback($value);
+        return static fn (string $value, callable $callback) => $callback($value);
     }
 
     /**
      * @see https://github.com/koenhendriks/laravel-str-acronym
      */
-    public static function acronym(): callable
+    public static function acronym(): \Closure
     {
-        return static function ($string, string $delimiter = ''): string {
+        return static function (string $string, string $delimiter = ''): string {
             if (empty($string)) {
                 return '';
             }
@@ -81,7 +81,7 @@ final class StrMixin
      * @see https://github.com/mtownsend5512/read-time
      * @see https://github.com/vdhicts/read-time
      */
-    public static function readTime(): callable
+    public static function readTime(): \Closure
     {
         /**
          * @param list<string>|string $content

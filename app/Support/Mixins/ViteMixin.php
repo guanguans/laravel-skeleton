@@ -25,7 +25,7 @@ final class ViteMixin
     /**
      * @see https://github.com/dasundev/dasun.dev
      */
-    public static function image(): callable
+    public static function image(): \Closure
     {
         return fn (string $asset) => $this->asset("resources/images/$asset");
     }

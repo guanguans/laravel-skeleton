@@ -36,7 +36,7 @@ final class BlueprintMixin
             int $total = 16,
             int $places = 2,
             bool $unsigned = false,
-            $default = null
+            ?float $default = null
         ): ColumnDefinition {
             $columnDefinition = $this->decimal($column, $total, $places);
 
@@ -63,10 +63,9 @@ final class BlueprintMixin
      */
     public function comment(): \Closure
     {
-        /*
-         * @param  string  $comment
+        /**
          * @return \Illuminate\Support\Fluent
          */
-        return fn ($comment) => $this->addCommand('tableComment', ['comment' => $comment]);
+        return fn (string $comment) => $this->addCommand('tableComment', ['comment' => $comment]);
     }
 }

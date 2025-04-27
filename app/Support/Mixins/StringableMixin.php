@@ -30,40 +30,40 @@ final class StringableMixin
         return fn (int $depth = 512, int $flags = 0): bool => Str::jsonValidate($this->value, $depth, $flags);
     }
 
-    public function appendIf(): callable
+    public function appendIf(): \Closure
     {
-        return fn ($suffix): Stringable => new Stringable(
+        return fn (string $suffix): Stringable => new Stringable(
             Str::appendIf((string) $this, $suffix)
         );
     }
 
-    public function prependIf(): callable
+    public function prependIf(): \Closure
     {
-        return fn ($prefix): Stringable => new Stringable(
+        return fn (string $prefix): Stringable => new Stringable(
             Str::prependIf((string) $this, $prefix)
         );
     }
 
-    public function mbSubstrCount(): callable
+    public function mbSubstrCount(): \Closure
     {
-        return fn ($needle, $encoding = null): Stringable => new Stringable(
+        return fn (string $needle, ?string $encoding = null): Stringable => new Stringable(
             Str::mbSubstrCount((string) $this, $needle, $encoding)
         );
     }
 
-    public function get(): callable
+    public function get(): \Closure
     {
         return fn () => (string) $this;
     }
 
-    public function acronym(): callable
+    public function acronym(): \Closure
     {
         return fn (string $delimiter = ''): Stringable => new Stringable(
             Str::acronym($this->value, $delimiter)
         );
     }
 
-    public function readTime(): callable
+    public function readTime(): \Closure
     {
         return fn (
             bool $omitSeconds = true,

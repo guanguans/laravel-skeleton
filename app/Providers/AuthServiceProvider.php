@@ -20,6 +20,7 @@ use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Traits\Conditionable;
 
@@ -47,7 +48,7 @@ final class AuthServiceProvider extends ServiceProvider
             $this->gateBefore();
             Gate::guessPolicyNamesUsing(static fn (string $modelClass): string => 'App\\Policies\\'.class_basename($modelClass).'Policy');
             Gate::policy(User::class, UserPolicy::class);
-            RedirectIfAuthenticated::redirectUsing(static fn ($request) => route('dashboard'));
+            RedirectIfAuthenticated::redirectUsing(static fn (Request $request) => route('dashboard'));
         });
     }
 

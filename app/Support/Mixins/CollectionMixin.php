@@ -30,7 +30,7 @@ final class CollectionMixin
      * @noinspection JsonEncodingApiUsageInspection
      * @noinspection PhpMethodParametersCountMismatchInspection
      */
-    public static function json(): callable
+    public static function json(): \Closure
     {
         return static fn (string $json, int $depth = 512, int $options = 0): self => new self(json_decode(
             $json,
@@ -40,24 +40,24 @@ final class CollectionMixin
         ));
     }
 
-    public function pluckToArray(): callable
+    public function pluckToArray(): \Closure
     {
-        return fn ($value, $key = null): array => $this->pluck($value, $key)->toArray();
+        return fn (null|array|int|string $value, ?string $key = null): array => $this->pluck($value, $key)->toArray();
     }
 
-    public function head(): callable
+    public function head(): \Closure
     {
         return fn () => $this->first();
     }
 
-    public function end(): callable
+    public function end(): \Closure
     {
         return fn () => $this->last();
     }
 
-    public function after(): callable
+    public function after(): \Closure
     {
-        return function ($currentItem, $fallback = null) {
+        return function (mixed $currentItem, mixed $fallback = null) {
             $currentKey = $this->search($currentItem, true);
 
             if (false === $currentKey) {
@@ -76,12 +76,12 @@ final class CollectionMixin
         };
     }
 
-    public function before(): callable
+    public function before(): \Closure
     {
-        return fn ($currentItem, $fallback = null) => $this->reverse()->after($currentItem, $fallback);
+        return fn (mixed $currentItem, mixed $fallback = null) => $this->reverse()->after($currentItem, $fallback);
     }
 
-    public function ifAny(): callable
+    public function ifAny(): \Closure
     {
         return function (callable $callback): Collection {
             if (!$this->isEmpty()) {
@@ -93,7 +93,7 @@ final class CollectionMixin
         };
     }
 
-    public function ifEmpty(): callable
+    public function ifEmpty(): \Closure
     {
         return function (callable $callback): Collection {
             /** @var \Illuminate\Support\Collection $this */
@@ -105,14 +105,14 @@ final class CollectionMixin
         };
     }
 
-    public function if(): callable
+    public function if(): \Closure
     {
-        return fn ($if, $then = null, $else = null) => value($if, $this) ? value($then, $this) : value($else, $this);
+        return fn (mixed $if, mixed $then = null, mixed $else = null) => value($if, $this) ? value($then, $this) : value($else, $this);
     }
 
-    public function paginate(): callable
+    public function paginate(): \Closure
     {
-        return function ($perPage = 15, $pageName = 'page', $page = null, $total = null, array $options = []): LengthAwarePaginator {
+        return function (int $perPage = 15, string $pageName = 'page', ?int $page = null, ?int $total = null, array $options = []): LengthAwarePaginator {
             $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
 
             $items = $this->forPage($page, $perPage)->values();
@@ -128,9 +128,9 @@ final class CollectionMixin
         };
     }
 
-    public function simplePaginate(): callable
+    public function simplePaginate(): \Closure
     {
-        return function ($perPage = 15, $pageName = 'page', $page = null, array $options = []): Paginator {
+        return function (int $perPage = 15, string $pageName = 'page', ?int $page = null, array $options = []): Paginator {
             $page = $page ?: Paginator::resolveCurrentPage($pageName);
 
             $items = $this->slice(($page - 1) * $perPage)->take($perPage + 1);
@@ -144,14 +144,14 @@ final class CollectionMixin
         };
     }
 
-    public function filterFilled(): callable
+    public function filterFilled(): \Closure
     {
-        return fn () => $this->filter(static fn ($value) => filled($value));
+        return fn () => $this->filter(static fn (mixed $value) => filled($value));
     }
 
-    public function reduceWithKeys(): callable
+    public function reduceWithKeys(): \Closure
     {
-        return function (callable $callback, $carry = null) {
+        return function (callable $callback, mixed $carry = null) {
             /** @var \Illuminate\Support\Collection $this */
             foreach ($this as $key => $value) {
                 $carry = $callback($carry, $value, $key);

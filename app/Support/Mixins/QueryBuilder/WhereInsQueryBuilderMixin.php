@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
 
 declare(strict_types=1);
@@ -32,10 +33,9 @@ use Illuminate\Support\Facades\DB;
 #[Mixin(RelationBuilder::class)]
 final class WhereInsQueryBuilderMixin
 {
-    public function whereIns(): callable
+    public function whereIns(): \Closure
     {
-        // @var Arrayable|array[] $values
-        return function (array $columns, $values, string $boolean = 'and', bool $not = false) {
+        return function (array $columns, array|Arrayable $values, string $boolean = 'and', bool $not = false): self {
             $operator = $not ? 'not in' : 'in';
 
             $sterilizedColumns = array_map(static function (string $column): string {
@@ -48,12 +48,12 @@ final class WhereInsQueryBuilderMixin
             $rawColumns = implode(',', $sterilizedColumns);
 
             $values instanceof Arrayable and $values = $values->toArray();
-            $values = array_map(static function ($value) use ($columns) {
+            $values = array_map(static function (array $value) use ($columns) {
                 if (array_is_list($value)) {
                     return $value;
                 }
 
-                return array_reduce($columns, static function (array $sortedValue, $column) use ($value) {
+                return array_reduce($columns, static function (array $sortedValue, string $column) use ($value) {
                     $sortedValue[$column] = $value[$column] ?? trigger_error(
                         \sprintf('The value of the column is not found in the array.: %s', $column),
                         \E_USER_ERROR
@@ -72,18 +72,18 @@ final class WhereInsQueryBuilderMixin
         };
     }
 
-    public function whereNotIns(): callable
+    public function whereNotIns(): \Closure
     {
-        return fn (array $columns, $values): callable => $this->whereIns($columns, $values, 'and', true);
+        return fn (array $columns, array|Arrayable $values): self => $this->whereIns($columns, $values, 'and', true);
     }
 
-    public function orWhereIns(): callable
+    public function orWhereIns(): \Closure
     {
-        return fn (array $columns, $values): callable => $this->whereIns($columns, $values, 'or');
+        return fn (array $columns, array|Arrayable $values): self => $this->whereIns($columns, $values, 'or');
     }
 
-    public function orWhereNotIns(): callable
+    public function orWhereNotIns(): \Closure
     {
-        return fn (array $columns, $values): callable => $this->whereIns($columns, $values, 'or', true);
+        return fn (array $columns, array|Arrayable $values): self => $this->whereIns($columns, $values, 'or', true);
     }
 }

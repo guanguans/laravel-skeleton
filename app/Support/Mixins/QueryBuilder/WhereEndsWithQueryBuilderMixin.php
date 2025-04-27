@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
 
 declare(strict_types=1);
@@ -16,6 +17,7 @@ declare(strict_types=1);
 namespace App\Support\Mixins\QueryBuilder;
 
 use App\Support\Attributes\Mixin;
+use Illuminate\Contracts\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -30,27 +32,27 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 #[Mixin(RelationBuilder::class)]
 final class WhereEndsWithQueryBuilderMixin
 {
-    public function whereEndsWith(): callable
+    public function whereEndsWith(): \Closure
     {
-        return function ($column, string $value, string $boolean = 'and', bool $not = false) {
+        return function (array|\Closure|Expression|string $column, string $value, string $boolean = 'and', bool $not = false): self {
             $operator = $not ? 'not like' : 'like';
 
             return $this->where($column, $operator, "%$value", $boolean);
         };
     }
 
-    public function whereNotEndsWith(): callable
+    public function whereNotEndsWith(): \Closure
     {
-        return fn ($column, string $value): callable => $this->whereEndsWith($column, $value, 'and', true);
+        return fn (array|\Closure|Expression|string $column, string $value): self => $this->whereEndsWith($column, $value, 'and', true);
     }
 
-    public function orWhereEndsWith(): callable
+    public function orWhereEndsWith(): \Closure
     {
-        return fn ($column, string $value): callable => $this->whereEndsWith($column, $value, 'or');
+        return fn (array|\Closure|Expression|string $column, string $value): self => $this->whereEndsWith($column, $value, 'or');
     }
 
-    public function orWhereNotEndsWith(): callable
+    public function orWhereNotEndsWith(): \Closure
     {
-        return fn ($column, string $value): callable => $this->whereEndsWith($column, $value, 'or', true);
+        return fn (array|\Closure|Expression|string $column, string $value): self => $this->whereEndsWith($column, $value, 'or', true);
     }
 }
