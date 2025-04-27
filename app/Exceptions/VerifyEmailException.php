@@ -18,7 +18,7 @@ use Illuminate\Validation\ValidationException;
 
 final class VerifyEmailException extends ValidationException
 {
-    public static function forUser(User $user): static
+    public static function forUser(User $user): self
     {
         return self::withMessages([
             'email' => [__('You must :linkOpen verify :linkClose your email first.', [

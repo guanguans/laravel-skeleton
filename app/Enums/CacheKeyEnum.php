@@ -13,11 +13,19 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
+use Cerbero\Enum\Concerns\Enumerates;
+use Elao\Enum\ExtrasTrait;
+use Elao\Enum\ReadableEnumTrait;
+
 /**
  * @see https://github.com/anisAronno/laravel-starter/blob/develop/app/Helpers/CacheKey.php
  */
 enum CacheKeyEnum: string
 {
+    // use EnumConcern;
+    use Enumerates;
+    use ExtrasTrait;
+    use ReadableEnumTrait;
     case ROLE = 'role_';
     case USER = 'user_';
     case PRODUCT = 'product_';
