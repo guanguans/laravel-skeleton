@@ -48,8 +48,8 @@ composer var-dump-server                # 启动变量打印服务
 
 ## 应用目录结构
 
-```shell
-app
+```tree
+/Users/yaozm/Documents/wwwroot/laravel-skeleton/app
 ├── Casts
 │   ├── Base64Cast.php
 │   ├── CallbackGetCast.php
@@ -65,13 +65,10 @@ app
 │       ├── Command.php
 │       ├── Concerns
 │       │   ├── AskForPassword.php
-│       │   ├── Configureable.php
 │       │   └── Rescuer.php
-│       ├── FindCommand.php
 │       ├── FindDumpStatementCommand.php
 │       ├── FindStaticMethodsCommand.php
 │       ├── GenerateSitemapCommand.php
-│       ├── GenerateTestsCommand.php
 │       ├── HealthCheckCommand.php
 │       ├── IdeHelperChoresCommand.php
 │       ├── InflectorCommand.php
@@ -80,13 +77,11 @@ app
 │       ├── OpcacheUrlCommand.php
 │       ├── OptimizeAllCommand.php
 │       ├── PerformDatabaseBackupCommand.php
-│       └── ShowUnsupportedRequiresCommand.php
+│       ├── ShowUnsupportedRequiresCommand.php
+│       └── UpdateReadmeCommand.php
 ├── Enums
 │   ├── CacheKeyEnum.php
-│   ├── Configuration.php
-│   ├── HealthCheckStatusEnum.php
-│   ├── IntegerBooleanEnum.php
-│   └── StringBooleanEnum.php
+│   └── ConfigurationKey.php
 ├── Exceptions
 │   ├── BadRequestHttpException.php
 │   ├── InvalidRepeatRequestException.php
@@ -106,18 +101,14 @@ app
 │   │   ├── AbortIfProduction.php
 │   │   ├── AddContentLength.php
 │   │   ├── BasicAuthentication.php
-│   │   ├── CSP.php
-│   │   ├── CompressResponseContent.php
 │   │   ├── Cors.php
 │   │   ├── DisableFloc.php
-│   │   ├── ETag.php
 │   │   ├── EnsureVerifiedEmailsForSignInUsers.php
 │   │   ├── HasValidSignature.php
 │   │   ├── HttpsProtocol.php
 │   │   ├── IsDeveloper.php
 │   │   ├── IsRouteIgnored.php
 │   │   ├── Localization.php
-│   │   ├── LogAllRequests.php
 │   │   ├── LogHttp.php
 │   │   ├── MustBeAdmin.php
 │   │   ├── RedirectUppercase.php
@@ -126,10 +117,7 @@ app
 │   │   ├── SetDefaultLocaleForUrls.php
 │   │   ├── SetJsonResponseEncodingOptions.php
 │   │   ├── SetLocale.php
-│   │   ├── SetLocales.php
 │   │   ├── SetTimezone.php
-│   │   ├── UserLocale.php
-│   │   ├── VerifyCommonParameters.php
 │   │   ├── VerifyFormPaginate.php
 │   │   ├── VerifyFormPassword.php
 │   │   ├── VerifyJsonContent.php
@@ -150,26 +138,27 @@ app
 │   └── SendThirdPartyRequestJob.php
 ├── Listeners
 │   ├── CollectGarbageListener.php
+│   ├── ContextSubscriber.php
 │   ├── LogActivity.php
 │   ├── LogMailListener.php
 │   ├── MaintenanceModeDisabledNotificationListener.php
 │   ├── MaintenanceModeEnabledNotificationListener.php
+│   ├── PrepareRequestListener.php
 │   ├── RecordRequestIdentifiersListener.php
 │   ├── RunCommandInDebugModeListener.php
-│   ├── SetRequestIdListener.php
-│   └── LogContextSubscriber.php
+│   └── TraceEventListener.php
 ├── Mail
 │   └── UserRegisteredMail.php
 ├── Models
+│   ├── BaseModel.php
 │   ├── Concerns
-│   │   ├── AllowedFilterable.php
 │   │   ├── BelongsToCreator.php
 │   │   ├── CacheCleaner.php
 │   │   ├── ForceUseIndexable.php
 │   │   ├── GetModelByUuid.php
 │   │   ├── HasPivot.php
+│   │   ├── HasSchemalessAttributes.php
 │   │   ├── HasWrappedApiTokens.php
-│   │   ├── IndexHintsable.php
 │   │   ├── Nullable.php
 │   │   ├── Observable.php
 │   │   ├── Pipeable.php
@@ -177,9 +166,9 @@ app
 │   │   ├── Trashed.php
 │   │   └── UuidGenerator.php
 │   ├── DatabaseNotification.php
+│   ├── Example.php
 │   ├── HttpLog.php
 │   ├── JWTUser.php
-│   ├── Model.php
 │   ├── Movie.php
 │   ├── PersonalAccessToken.php
 │   ├── Pivots
@@ -238,8 +227,8 @@ app
 │   ├── EvenNumberRule.php
 │   ├── HexColorRule.php
 │   ├── HexRule.php
-│   ├── HtmlTagRule.php
 │   ├── HtmlCleanRule.php
+│   ├── HtmlTagRule.php
 │   ├── IdCardRule.php
 │   ├── ImeiRule.php
 │   ├── InstanceofRule.php
@@ -278,8 +267,7 @@ app
 │   ├── Autowire.php
 │   ├── BitEncoder.php
 │   ├── Bootstrappers
-│   │   ├── OutOfMemoryBootstrapper.php
-│   │   └── SetRequestIdGlobalBootstrapper.php
+│   │   └── OutOfMemoryBootstrapper.php
 │   ├── Clients
 │   │   ├── AbstractClient.php
 │   │   └── PushDeer.php
@@ -303,7 +291,6 @@ app
 │   │   ├── CollectionMixin.php
 │   │   ├── CommandMixin.php
 │   │   ├── GrammarMixin.php
-│   │   ├── ModelMixin.php
 │   │   ├── MySqlGrammarMixin.php
 │   │   ├── PendingRequestMixin.php
 │   │   ├── QueryBuilder
@@ -373,6 +360,6 @@ app
     └── Creators
         └── RequestCreator.php
 
-55 directories, 268 files
+55 directories, 255 files
 
 ```

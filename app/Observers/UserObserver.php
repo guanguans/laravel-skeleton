@@ -15,30 +15,33 @@ namespace App\Observers;
 
 use App\Models\User;
 
-final class UserObserver
+class UserObserver
 {
-    /**
-     * Handle the User "created" event.
-     */
+    public function creating(User $user): void {}
+
     public function created(User $user): void {}
 
-    /**
-     * Handle the User "updated" event.
-     */
+    public function updating(User $user): void {}
+
     public function updated(User $user): void {}
 
-    /**
-     * Handle the User "deleted" event.
-     */
+    public function saving(User $user): void {}
+
+    public function saved(User $user): void {}
+
+    public function deleting(User $user): void {}
+
     public function deleted(User $user): void {}
 
-    /**
-     * Handle the User "restored" event.
-     */
+    public function restoring(User $user): void {}
+
     public function restored(User $user): void {}
 
-    /**
-     * Handle the User "force deleted" event.
-     */
+    public function retrieved(User $user): void {}
+
+    public function forceDeleting(User $user): void {}
+
     public function forceDeleted(User $user): void {}
+
+    public function replicating(User $user): void {}
 }
