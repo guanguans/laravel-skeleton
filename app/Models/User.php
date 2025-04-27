@@ -21,13 +21,11 @@ use Database\Factories\UserFactory;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Watson\Validating\ValidatingTrait;
 
 #[ObservedBy(UserObserver::class)]
 #[UseFactory(UserFactory::class)]
@@ -40,16 +38,7 @@ class User extends Authenticatable
 
     use Notifiable;
     use SerializeDate;
-
-    /**
-     * The model's default values for attributes.
-     *
-     * @noinspection PropertyInitializationFlawsInspection
-     */
-    protected $attributes = [
-        // 'options' => '[]',
-        // 'delayed' => false,
-    ];
+    use ValidatingTrait;
 
     /** @var list<string> */
     protected $fillable = [
@@ -64,39 +53,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * {@inheritDoc}
-     */
-    #[\Override]
-    public function newEloquentBuilder($query): Builder
-    {
-        return parent::newEloquentBuilder($query);
-    }
-
-    // #[\Override]
-    // public static function query(): Builder
-    // {
-    //     return parent::query();
-    // }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    public function resolveRouteBinding($value, $field = null): self
-    {
-        return $this->where('id', $value)->firstOrFail();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<\App\Models\DatabaseNotification, $this>
-     */
-    public function notifications(): MorphMany
-    {
-        return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
-    }
+    /** @var array<string, mixed> */
+    protected $rules = [
+        'email' => 'required|email',
+        'password' => 'required|string',
+    ];
 
     /**
      * @todo implement
@@ -132,19 +93,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    protected function createdAtFormatted(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value, $attributes) => $attributes['created_at']->format('Y-m-d H:i:s'),
-        )->shouldCache();
-    }
-
-    protected function updatedAtFormatted(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value, $attributes) => $attributes['updated_at']->format('Y-m-d H:i:s'),
-        )->withoutObjectCaching();
     }
 }

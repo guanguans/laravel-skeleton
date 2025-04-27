@@ -17,6 +17,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 /**
+ * @see https://github.com/vpominchuk/laravel-mysql-use-index-scope
+ * @see https://github.com/ishaburov/laravel-mysql-index-hints-scope
+ * @see https://dev.mysql.com/doc/refman/5.7/en/index-hints.html
+ *
  * @method Builder useIndex(string|string[] $index)
  * @method Builder forceIndex(string|string[] $index)
  * @method Builder ignoreIndex(string|string[] $index)

@@ -16,16 +16,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
-use Watson\Validating\ValidatingTrait;
 
 final class JWTUser extends User implements JWTSubject
 {
-    use ValidatingTrait;
     protected $table = 'users';
-    protected $rules = [
-        // 'email' => 'required|email',
-        // 'password' => 'required|string',
-    ];
 
     public function getJWTIdentifier(): mixed
     {

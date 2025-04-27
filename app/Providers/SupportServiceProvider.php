@@ -46,6 +46,8 @@ final class SupportServiceProvider extends ServiceProvider
 
     /**
      * @see https://github.com/cachethq/cachet
+     * @see https://github.com/LaravelDaily/laravel-tips
+     * @see https://github.com/OussamaMater/Laravel-Tips
      *
      * @throws \Exception
      */
