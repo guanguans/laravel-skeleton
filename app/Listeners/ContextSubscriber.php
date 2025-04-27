@@ -18,7 +18,7 @@ use Illuminate\Console\Events\ScheduledTaskStarting;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Context;
 
-final class LogContextSubscriber
+final class ContextSubscriber
 {
     /**
      * @see \Symfony\Component\Console\DataCollector\CommandDataCollector

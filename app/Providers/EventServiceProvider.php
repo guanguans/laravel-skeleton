@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Listeners\LogContextSubscriber;
+use App\Listeners\ContextSubscriber;
 use App\Listeners\MaintenanceModeDisabledNotificationListener;
 use App\Listeners\MaintenanceModeEnabledNotificationListener;
 use App\Observers\UserObserver;
@@ -68,7 +68,7 @@ final class EventServiceProvider extends ServiceProvider
 
     /** {@inheritDoc} */
     protected $subscribe = [
-        LogContextSubscriber::class,
+        ContextSubscriber::class,
     ];
 
     /**
