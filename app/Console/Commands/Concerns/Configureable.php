@@ -33,9 +33,9 @@ trait Configureable
         return tap(parent::getDefinition(), static function (InputDefinition $definition): void {
             $definition->addOption(new InputOption(
                 'config',
-                'c',
+                null,
                 InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-                'Configure able (e.g. `--config=app.name=guanguans` or `--config app.name=guanguans` or `-c app.name=guanguans`)',
+                'Configure able (e.g. `--config=app.name=guanguans` or `--config app.name=guanguans`).',
             ));
 
             $definition->addOption(new InputOption(

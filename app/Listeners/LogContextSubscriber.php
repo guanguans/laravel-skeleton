@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Context;
 
 final class LogContextSubscriber
 {
+    /**
+     * @see \Symfony\Component\Console\DataCollector\CommandDataCollector
+     * @see \Symfony\Component\Console\Debug\CliRequest
+     * @see \Symfony\Component\Console\Command\TraceableCommand
+     */
     public function subscribe(): array
     {
         return [

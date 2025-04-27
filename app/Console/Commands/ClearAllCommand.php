@@ -61,7 +61,6 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
-    #[\Override]
     protected function promptForMissingArgumentsUsing(): array
     {
         return [

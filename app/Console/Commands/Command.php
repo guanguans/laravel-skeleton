@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -13,11 +15,20 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Console\Commands\Concerns\AskForPassword;
+use App\Console\Commands\Concerns\Configureable;
 use App\Console\Commands\Concerns\Rescuer;
 use Cerbero\CommandValidator\ValidatesInput;
+use Illuminate\Console\Prohibitable;
+use Symfony\Component\Console\Command\LockableTrait;
 
 abstract class Command extends \Illuminate\Console\Command
 {
+    // use Configureable;
+    // use Prohibitable;
+
+    use AskForPassword;
+    use LockableTrait;
     use Rescuer;
     use ValidatesInput;
 }
