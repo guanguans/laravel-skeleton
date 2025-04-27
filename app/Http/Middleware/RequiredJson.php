@@ -18,17 +18,27 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
-final class UserLocale
+/**
+ * @see https://masteringlaravel.io/daily/2024-07-15-how-to-enforce-all-api-requests-are-json
+ */
+final class RequiredJson
 {
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
+     *
+     * @throws \Throwable
      */
-    public function handle(Request $request, \Closure $next, ?string $guard = null): SymfonyResponse
+    public function handle(Request $request, \Closure $next): SymfonyResponse
     {
-        $locale = auth($guard)->user()?->locale() and app()->setLocale($locale);
+        throw_unless(
+            $request->wantsJson(),
+            NotAcceptableHttpException::class,
+            'Please request with HTTP header: Accept: application/json'
+        );
 
         return $next($request);
     }

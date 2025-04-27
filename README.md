@@ -121,7 +121,7 @@ app
 │   │   ├── LogHttp.php
 │   │   ├── MustBeAdmin.php
 │   │   ├── RedirectUppercase.php
-│   │   ├── RequiresJson.php
+│   │   ├── RequiredJson.php
 │   │   ├── SetAcceptHeader.php
 │   │   ├── SetDefaultLocaleForUrls.php
 │   │   ├── SetJsonResponseEncodingOptions.php

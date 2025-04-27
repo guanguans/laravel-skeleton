@@ -20,6 +20,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
+/**
+ * @see https://github.com/apiato/core/blob/7.x/Middlewares/Http/ValidateJsonContent.php
+ */
 final class VerifyJsonContent
 {
     /**
@@ -34,7 +37,11 @@ final class VerifyJsonContent
         $acceptHeader = $request->header('accept');
         $contentType = 'application/json';
 
-        throw_unless(str_contains($acceptHeader, $contentType), BadRequestHttpException::class, 'Your request must contain [Accept = application/json].');
+        throw_unless(
+            str_contains($acceptHeader, $contentType),
+            BadRequestHttpException::class,
+            'Your request must contain [Accept = application/json].'
+        );
 
         $response = $next($request);
 

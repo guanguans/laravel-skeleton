@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Support\Attributes\Autowired;
-use Guanguans\LaravelApiResponse\Contracts\ApiResponseContract;
+use Guanguans\LaravelApiResponse\ApiResponse;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 
 class Controller extends \App\Http\Controllers\Controller
 {
     use ApiResponseFactory;
 
-    #[Autowired(ApiResponseContract::class)]
-    protected ApiResponseContract $apiResponse;
+    #[Autowired(ApiResponse::class)]
+    protected ApiResponse $apiResponse;
 }

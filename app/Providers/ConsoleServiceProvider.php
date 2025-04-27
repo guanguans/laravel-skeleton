@@ -106,7 +106,7 @@ final class ConsoleServiceProvider extends ServiceProvider
     {
         $this->app->booted(function (): void {
             collect(Artisan::all())
-                ->each(function (SymfonyCommand $command): void {
+                ->each(static function (SymfonyCommand $command): void {
                     $command
                         ->addOption(
                             'configuration',
