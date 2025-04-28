@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Support\Traits\WithPipeArgs;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -22,6 +23,8 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 abstract class AbortIf
 {
+    use WithPipeArgs;
+
     /**
      * @noinspection RedundantDocCommentTagInspection
      *

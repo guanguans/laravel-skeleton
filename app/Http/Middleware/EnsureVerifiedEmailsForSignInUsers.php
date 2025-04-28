@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Models\User;
+use App\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ use Webmozart\Assert\Assert;
  */
 final readonly class EnsureVerifiedEmailsForSignInUsers
 {
+    use WithPipeArgs;
+
     /**
      * @noinspection RedundantDocCommentTagInspection
      *

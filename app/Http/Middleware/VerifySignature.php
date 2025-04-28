@@ -15,6 +15,7 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\InvalidRepeatRequestException;
 use App\Support\Signers\HmacSigner;
+use App\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,6 +28,8 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 final class VerifySignature
 {
+    use WithPipeArgs;
+
     /**
      * @noinspection RedundantDocCommentTagInspection
      *

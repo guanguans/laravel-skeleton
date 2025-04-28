@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Exceptions\BadRequestHttpException;
+use App\Support\Traits\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,6 +26,8 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
  */
 final class VerifyJsonContent
 {
+    use WithPipeArgs;
+
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
