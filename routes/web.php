@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 /**
  * @routeNamespace("App\Http\Controllers")
  *
@@ -18,12 +20,10 @@ declare(strict_types=1);
  */
 
 use Illuminate\Foundation\Events\DiagnosingHealth;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Overtrue\LaravelUploader\LaravelUploader;
@@ -41,20 +41,9 @@ use Overtrue\LaravelUploader\LaravelUploader;
 
 Route::get('/', static fn () => view('welcome'));
 
-// 接口文档
-// Route::get('docs', static fn () => view('scribe.index'))->middleware(['verify.production.environment', 'signed'])->name('docs');
+Route::fallback(static fn () => abort(404));
 
-// fallback 路由应该始终是应用程序注册的最后一个路由
-Route::fallback(static function (): void {
-    // redirect 404
-    abort(404, 'Web page not found.');
-});
-
-Route::fallback(static fn (Request $request) => $request->expectsJson()
-    ? new JsonResponse(['error' => 'Not Found'], 404)
-    : view('errors.404', ['path' => $request->path()]));
-
-// LaravelUploader::routes();
+LaravelUploader::routes();
 
 Route::middleware('web')->get('up', static function () {
     Event::dispatch(new DiagnosingHealth);
@@ -76,11 +65,11 @@ Route::get('acting-as/{id}', static function (int $id) {
 /**
  * @see https://www.harrisrafto.eu/enhancing-concurrency-control-with-laravels-session-blocking
  */
-Route::post('/order', static function (): void {
+Route::post('order', static function (): void {
     // Order processing logic
-})->block($lockSeconds = 5, $waitSeconds = 10);
+})->block(5, 5);
 
-Route::post('/update-password', static function (Request $request) {
+Route::post('update-password', static function (Request $request) {
     // Validate the new password
     $request->validate([
         'current_password' => 'required',
@@ -103,7 +92,7 @@ Route::post('/update-password', static function (Request $request) {
     return redirect('/dashboard')->with('status', 'Password updated and other devices logged out.');
 });
 
-Route::post('/confirm-password', static function (Request $request) {
+Route::post('confirm-password', static function (Request $request) {
     if (!Hash::check($request->password, $request->user()?->password)) {
         return back()->withErrors([
             'password' => ['The provided password does not match our records.'],
@@ -115,7 +104,7 @@ Route::post('/confirm-password', static function (Request $request) {
     return redirect()->intended();
 })->middleware(['auth', 'throttle:6,1']);
 
-Route::delete('/account', static function (Request $request) {
+Route::delete('account', static function (Request $request) {
     $request->user()->delete();
     Auth::logout();
 

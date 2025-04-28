@@ -46,7 +46,7 @@ it('is http', function (): void {
         ->assertOk()
         ->assertJsonStructure();
 
-    $this->get('api/v1/ping?is_bad=1')
+    $this->get('api/v1/ping?bad=1')
         // ->ddBody()
         // ->ddHeaders()
         // ->ddJson()

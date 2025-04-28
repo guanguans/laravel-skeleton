@@ -17,39 +17,42 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', static fn (Request $request) => $request->user())->middleware('auth:sanctum');
+Route::get('user', static fn (Request $request) => $request->user())->middleware('auth:sanctum');
 
-Route::fallback(static function (): void {
-    abort(404, 'Not Found Api');
-});
+Route::fallback(static fn () => abort(404, 'Not Found Api'));
 
 /**
  * @see https://www.harrisrafto.eu/streaming-large-json-datasets-in-laravel-with-streamjson/
  */
-Route::get('/users.json', static fn () => response()->streamJson([
+Route::get('users.json', static fn () => response()->streamJson([
     'users' => HttpLog::query()->cursor(),
 ]));
 
-Route::middleware([
-    'api',
-    // sprintf('verify.signature:%s', config('services.signer.default.secret')),
-    // LogHttp::class.':daily',
-])->scopeBindings()->prefix('v1')->namespace('App\Http\Controllers\Api')->group(static function (Router $router): void {
-    Route::middleware([])->group(static function (Router $router): void {
-        Route::match(['GET', 'POST'], 'ping/{is_bad?}', 'PingController@ping')->name('ping');
-    });
-    Route::middleware(['auth:api'])->group(static function (Router $router): void {
-        Route::prefix('auth')->name('auth.')->group(static function (Router $router): void {
-            Route::post('register', 'AuthController@register')->name('register')->withoutMiddleware(['auth:api']);
-            Route::post('login', 'AuthController@login')->name('login')->withoutMiddleware(['auth:api']);
-            Route::post('logout', 'AuthController@logout')->name('logout');
-            Route::post('refresh', 'AuthController@refresh')->name('refresh');
-
+Route::group([
+    'as' => 'api.',
+    'namespace' => '\App\Http\Controllers\Api',
+    'prefix' => 'v1',
+    'middleware' => [
+        'api',
+        // sprintf('verify.signature:%s', config('services.signer.default.secret')),
+        // LogHttp::class.':daily',
+        // VerifySignature::in([config('services.signers.parent_admin.secret')]),
+    ],
+], static function (Router $router): void {
+    $router->get('ping/{bad?}', 'PingController')->name('ping');
+    $router->middleware('auth:api')->group(static function (Router $router): void {
+        $router->group([
+            'as' => 'auth.',
+            'prefix' => 'auth',
+            'controller' => 'AuthController',
+        ], static function (Router $router): void {
             /** @see https://www.harrisrafto.eu/laravels-missing-link-customizing-404-responses-for-model-binding */
-            Route::get('me', 'AuthController@me')
-                ->name('me')
-                ->missing(static fn (Request $request) => to_route('index'));
-            Route::get('index', 'AuthController@index')->name('index')->withoutMiddleware(['auth:api']);
+            $router->get('index', 'index')->name('index')->withoutMiddleware('auth:api');
+            $router->get('me', 'me')->name('me')->missing(static fn (Request $request) => to_route('api.auth.index'));
+            $router->post('login', 'login')->name('login')->withoutMiddleware('auth:api');
+            $router->post('logout', 'logout')->name('logout');
+            $router->post('refresh', 'refresh')->name('refresh');
+            $router->post('register', 'register')->name('register')->withoutMiddleware('auth:api');
         });
     });
 });

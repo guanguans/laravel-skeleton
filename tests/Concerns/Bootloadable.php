@@ -1,5 +1,15 @@
 <?php
 
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
+/** @noinspection DebugFunctionUsageInspection */
+/** @noinspection PhpInternalEntityUsedInspection */
+/** @noinspection PhpUndefinedClassInspection */
+
 declare(strict_types=1);
 
 /**

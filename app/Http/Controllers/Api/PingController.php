@@ -18,11 +18,11 @@ use Illuminate\Http\Request;
 
 final class PingController extends Controller
 {
-    public function ping(Request $request, int $isBad = 0): JsonResponse
+    public function __invoke(Request $request, bool $bad = false): JsonResponse
     {
-        $validatedParameters = $request->validate(['is_bad' => 'integer']) + ['is_bad' => $isBad];
+        $validatedParameters = $request->validate(['bad' => 'bool']) + ['bad' => $bad];
 
-        if ($validatedParameters['is_bad']) {
+        if ($validatedParameters['bad']) {
             return $this->apiResponse()->badRequest();
         }
 

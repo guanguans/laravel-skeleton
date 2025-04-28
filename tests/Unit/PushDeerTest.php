@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpDynamicAsStaticMethodCallInspection */
 /** @noinspection AnonymousFunctionStaticInspection */
 /** @noinspection NullPointerExceptionInspection */
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */

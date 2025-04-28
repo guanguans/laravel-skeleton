@@ -44,12 +44,7 @@ return Application::configure(basePath: \dirname(__DIR__))
         channels: __DIR__.'/../routes/channels.php',
         health: '/up',
         // apiPrefix: 'api/v1',
-        then: static function (): void {
-            // /** @see https://github.com/packistry/packistry/blob/main/bootstrap/app.php */
-            // Route::middleware('web')->get('{any?}', fn () => response()
-            //     ->file(public_path('index.html')))
-            //     ->where('any', '.*');
-        },
+        then: static function (): void {},
     )
     ->withEvents(false)
     ->withMiddleware(static function (Middleware $middleware): void {
@@ -96,7 +91,8 @@ return Application::configure(basePath: \dirname(__DIR__))
                     : route('account.dashboard')
             )
             ->statefulApi()
-            ->throttleApi(/* redis: true */)
+            ->throttleApi()
+            // ->throttleWithRedis()
             ->trustProxies(at: [
                 '127.0.0.1',
             ]);

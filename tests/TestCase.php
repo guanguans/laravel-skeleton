@@ -1,5 +1,14 @@
 <?php
 
+/** @noinspection PhpAttributeCanBeAddedToOverriddenMemberInspection */
+/** @noinspection AnonymousFunctionStaticInspection */
+/** @noinspection NullPointerExceptionInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection StaticClosureCanBeUsedInspection */
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -18,7 +27,6 @@ use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use JMac\Testing\Traits\AdditionalAssertions;
-use Plannr\Laravel\FastRefreshDatabase\Traits\FastRefreshDatabase;
 use Tests\Concerns\Bootloadable;
 
 abstract class TestCase extends BaseTestCase
@@ -31,16 +39,10 @@ abstract class TestCase extends BaseTestCase
     // use LazilyRefreshDatabase;
     // use RefreshDatabase;
 
-    /**
-     * 在测试前指定要运行的 seeder.
-     *
-     * @var string
-     */
-    // protected $seeder = OrderStatusSeeder::class;
+    // /** 在测试前指定要运行的 seeder. */
+    // protected string $seeder = OrderStatusSeeder::class;
 
-    /**
-     * Indicates whether the default seeder should run before each test.
-     */
+    /** Indicates whether the default seeder should run before each test. */
     protected bool $seed = false;
 
     #[\Override]
