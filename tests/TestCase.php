@@ -40,10 +40,8 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Indicates whether the default seeder should run before each test.
-     *
-     * @var bool
      */
-    protected $seed = false;
+    protected bool $seed = false;
 
     #[\Override]
     protected function setUp(): void

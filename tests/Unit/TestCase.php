@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 
 class TestCase extends \Tests\TestCase
@@ -26,7 +27,7 @@ class TestCase extends \Tests\TestCase
 
     private function alertUnwantedDBAccess(): void
     {
-        DB::listen(static function ($query): void {
+        DB::listen(static function (QueryExecuted $query): void {
             throw new \RuntimeException("Database access detected: $query->sql");
         });
     }

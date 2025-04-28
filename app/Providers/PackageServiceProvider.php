@@ -69,10 +69,10 @@ final class PackageServiceProvider extends ServiceProvider
 
             Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
-            LogViewer::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+            LogViewer::auth(static fn (): bool => RequestFacade::user()?->isDeveloper());
 
             if (class_exists(Telescope::class)) {
-                Telescope::auth(static fn (): bool => RequestFacade::getFacadeRoot()::isAdminDeveloper());
+                Telescope::auth(static fn (): bool => RequestFacade::user()?->isDeveloper());
             }
 
             /**

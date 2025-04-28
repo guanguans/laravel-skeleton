@@ -54,10 +54,6 @@ expect()->extend('toAssert', function (Closure $assertions): Expectation {
     return $this;
 });
 
-expect()->extend('toBetween', fn (int $min, int $max): Expectation => expect($this->value)
-    ->toBeGreaterThanOrEqual($min)
-    ->toBeLessThanOrEqual($max));
-
 /*
 |--------------------------------------------------------------------------
 | Functions

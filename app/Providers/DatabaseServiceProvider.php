@@ -63,7 +63,7 @@ final class DatabaseServiceProvider extends ServiceProvider
             $this->whenSQLiteConnection();
             $this->unlessProduction();
             $this->listenQueryExecuted();
-            Json::encodeUsing(static fn (mixed $value): bool|string => json_encode(
+            Json::encodeUsing(static fn (mixed $value): string => json_encode(
                 $value,
                 \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
             ));

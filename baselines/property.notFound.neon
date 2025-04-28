@@ -1,7 +1,12 @@
-# total 8 errors
+# total 16 errors
 
 parameters:
     ignoreErrors:
+        -
+            message: '#^Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable\:\:\$email\.$#'
+            count: 4
+            path: ../app/Listeners/LogActivity.php
+
         -
             message: '#^Access to an undefined property PhpParser\\Node\\Arg\|PhpParser\\Node\\VariadicPlaceholder\:\:\$name\.$#'
             count: 2
@@ -10,4 +15,9 @@ parameters:
         -
             message: '#^Access to an undefined property PhpParser\\Node\\Arg\|PhpParser\\Node\\VariadicPlaceholder\:\:\$value\.$#'
             count: 6
+            path: ../app/Support/Rectors/RenameToPsrNameRector.php
+
+        -
+            message: '#^Access to an undefined property PhpParser\\Node\\Expr\:\:\$value\.$#'
+            count: 4
             path: ../app/Support/Rectors/RenameToPsrNameRector.php

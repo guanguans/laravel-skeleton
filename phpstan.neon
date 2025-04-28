@@ -37,10 +37,10 @@ parameters:
         - bootstrap/app.php
         - bootstrap/providers.php
         - config/
-#        - database/
+        - database/
         - public/
         - resources/
-#        - routes/
+        - routes/
 #        - tests/
     excludePaths:
         - app/Support/StreamWrappers/
@@ -87,11 +87,9 @@ parameters:
             function: 'env_json_decode()'
             message: 'use config() instead'
     ignoreErrors:
-#        - identifier: new.static
 #        - identifier: return.void
 #        - identifier: staticClassAccess.privateProperty
 #        - identifier: symplify.noDynamicName
-#        - identifier: typePerfect.noMixedMethodCaller
         - identifier: argument.templateType
         - identifier: argument.type
         - identifier: assign.propertyType
@@ -105,18 +103,26 @@ parameters:
         - identifier: missingType.iterableValue
         - identifier: return.type
         - identifier: trait.unused
+        - identifier: typePerfect.narrowPublicClassMethodParamType
         - identifier: typePerfect.noArrayAccessOnObject
+        - identifier: typePerfect.noMixedMethodCaller
+        - identifier: typePerfect.noMixedPropertyFetcher
         - '#^Call to an undefined method Guanguans\\LaravelApiResponse\\Contracts\\ApiResponseContract\:\:.*\(\)\.$#'
-        -
-            identifier: larastan.noEnvCallsOutsideOfConfig
-            path: app/Support/helpers.php
         -
             message: '#^Calling env_explode\(\) is forbidden, use config\(\) instead\.$#'
             path: config/logging.php
         -
             identifier: new.static
             paths:
+                - app/Models/BaseModel.php
                 - app/Rules/Rule.php
+        -
+            identifier: typeCoverage.paramTypeCoverage
+            paths:
+                - app/Models/Example.php
+        -
+            identifier: property.trait
+            path: app/Support/Attributes/Mixin.php
         -
             messages:
                 - '#^Access to an undefined property App\\Support\\Mixins\\.*Mixin\:\:\$.*\.$#'
@@ -127,21 +133,3 @@ parameters:
                 - '#^PHPDoc tag @var with type .* is not subtype of native type .*\.$#'
                 - '#^Class App\\Support\\Mixins\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
             path: app/Support/Mixins/
-        -
-            message: '#^Access to an undefined property PhpParser\\Node\\Expr\:\:\$value\.$#'
-            count: 4
-            path: app/Support/Rectors/RenameToPsrNameRector.php
-        -
-            message: '#^Access to an undefined property Illuminate\\Contracts\\Auth\\Authenticatable\:\:\$email\.$#'
-            count: 4
-            path: app/Listeners/LogActivity.php
-#        -
-#            message: '#^Access to an undefined property PhpParser\\NodeVisitorAbstract\:\:\$testClass.*\.$#'
-#            count: 3
-#            path: app/Console/Commands/GenerateTestsCommand.php
-#        -
-#            identifier: return.missing
-#            path: app/Support/StreamWrappers/
-#        -
-#            message: '#^Method App\\Support\\StreamWrappers\\StreamWrapper\:\:.*\(\) should return .* but return statement is missing\.$#'
-#            path: app/Support/StreamWrappers/

@@ -65,7 +65,7 @@ Route::middleware('web')->get('up', static function () {
 /**
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet
  */
-Route::get('acting-as/{id}', static function ($id) {
+Route::get('acting-as/{id}', static function (int $id) {
     abort_unless(app()->isLocal() && app()->hasDebugModeEnabled(), 404);
 
     Auth::loginUsingId($id);
@@ -88,7 +88,7 @@ Route::post('/update-password', static function (Request $request) {
     ]);
 
     // Check the current password
-    if (!Hash::check($request->current_password, Auth::user()->password)) {
+    if (!Hash::check($request->current_password, Auth::user()?->password)) {
         return back()->withErrors(['current_password' => 'The provided password does not match our records.']);
     }
 
@@ -104,7 +104,7 @@ Route::post('/update-password', static function (Request $request) {
 });
 
 Route::post('/confirm-password', static function (Request $request) {
-    if (!Hash::check($request->password, $request->user()->password)) {
+    if (!Hash::check($request->password, $request->user()?->password)) {
         return back()->withErrors([
             'password' => ['The provided password does not match our records.'],
         ]);

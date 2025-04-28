@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Database\Seeders\Concerns;
 
 use Illuminate\Console\View\Components\TwoColumnDetail;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -24,7 +25,7 @@ trait CanSeedOncePerDatabase
     protected string $seedersTable = 'seeders';
     protected bool $seedersTableExists = false;
 
-    public function callOncePerDatabase($class, $silent = false, array $parameters = []): void
+    public function callOncePerDatabase(string $class, bool $silent = false, array $parameters = []): void
     {
         if ($this->seederHasAlreadyBeenCalled($class)) {
             if (false === $silent && isset($this->command)) {
@@ -44,7 +45,7 @@ trait CanSeedOncePerDatabase
         $this->markSeederAsCalled($class);
     }
 
-    protected function seederHasAlreadyBeenCalled($class): bool
+    protected function seederHasAlreadyBeenCalled(string $class): bool
     {
         $this->createSeedersTableIfNotExists();
 
@@ -53,7 +54,7 @@ trait CanSeedOncePerDatabase
             ->exists();
     }
 
-    protected function markSeederAsCalled($class): void
+    protected function markSeederAsCalled(string $class): void
     {
         $this->createSeedersTableIfNotExists();
 
@@ -70,7 +71,7 @@ trait CanSeedOncePerDatabase
         $schema = DB::connection()->getSchemaBuilder();
 
         if (!$schema->hasTable($this->seedersTable)) {
-            $schema->create($this->seedersTable, static function ($table): void {
+            $schema->create($this->seedersTable, static function (Blueprint $table): void {
                 $table->string('seeder')->unique();
             });
         }
