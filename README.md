@@ -1,52 +1,382 @@
 # laravel-skeleton
 
-> 本项目收集了最常用 Laravel 扩展包、以及一些功能特性的使用范例供日常开发参考使用。
+> This project collects the most commonly used Laravel extension packages and some functional feature examples for daily development reference. - 本项目收集了最常用 Laravel 扩展包、以及一些功能特性的使用范例供日常开发参考使用。
 
 [![tests](https://github.com/guanguans/laravel-skeleton/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions)
 [![phpstan](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml)
 [![check & fix styling](https://github.com/guanguans/laravel-skeleton/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions)
 [![codecov](https://codecov.io/gh/guanguans/laravel-skeleton/branch/main/graph/badge.svg?token=URGFAWS6S4)](https://codecov.io/gh/guanguans/laravel-skeleton)
-[![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-skeleton/v)](https://packagist.org/packages/guanguans/laravel-skeleton)
+![GitHub Tag](https://img.shields.io/github/v/tag/guanguans/laravel-skeleton)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/guanguans/laravel-skeleton)
-[![Total Downloads](https://poser.pugx.org/guanguans/laravel-skeleton/downloads)](https://packagist.org/packages/guanguans/laravel-skeleton)
-[![License](https://poser.pugx.org/guanguans/laravel-skeleton/license)](https://packagist.org/packages/guanguans/laravel-skeleton)
+![GitHub License](https://img.shields.io/github/license/guanguans/laravel-skeleton)
 
-## Composer 脚本
+## Reference
 
-```shell
-composer ai-commit                      # AI 提交
-composer checks                         # 基本检查
-composer composer-check-platform-reqs   # PHP cli 环境检查
-composer composer-normalize             # composer.json 文件修复
-composer composer-require-checker       # composer require 检查
-composer composer-unused-checker        # composer unused 检查
-composer composer-updater               # composer 更新依赖
-composer composer-updater-dry-run       # composer 尝试更新依赖
-composer composer-validate              # composer.json 文件验证
-composer docs-generate                  # API 文档生成
-composer envoy-testing                  # envoy 部署
-composer envy-prune                     # env 文件修剪
-composer envy-sync                      # env 文件同步
-composer facade-lint                    # 门面检查
-composer facade-update                  # 门面更新
-composer ide-helper                     # IDE 帮助文件
-composer lint                           # 语法检查
-composer phpstan                        # 静态检查
-composer pint                           # 代码风格修复
-composer pint-test                      # 代码风格检查
-composer rector                         # 代码重构(risky)
-composer rector-dry-run                 # 代码重构检查
-composer sk-check-commented-code        # 注释检查
-composer sk-check-conflicts             # git 合并冲突检查
-composer sk-finalize-classes            # finalize 类
-composer sk-finalize-classes-dry-run    # finalize 类检查
-composer tlint                          # laravel 代码风格修复
-composer tlint-format                   # laravel 代码风格检查
-composer trap                           # 启动 trap 调试服务
-composer var-dump-server                # 启动变量打印服务
+<details>
+<summary>Composer scripts</summary>
+
+```script
+composer ai-commit
+composer ai-commit-bito
+composer ai-commit-bito-no-verify
+composer ai-commit-github-copilot
+composer ai-commit-github-copilot-no-verify
+composer ai-commit-github-models
+composer ai-commit-github-models-no-verify
+composer ai-commit-no-verify
+composer art
+composer art-xdebug
+composer artisan
+composer artisan-envy-prune
+composer artisan-envy-sync
+composer artisan-ide-helper
+composer artisan-solo-dumps
+composer artisan-xdebug
+composer benchmark
+composer cghooks
+composer cghooks-ignore
+composer checks
+composer class-leak
+composer class-leak-check
+composer composer-bin-all-update
+composer composer-check-platform-reqs
+composer composer-dependency-analyser
+composer composer-diff
+composer composer-disable-process-timeout
+composer composer-normalize
+composer composer-normalize-dry-run
+composer composer-updater
+composer composer-updater-dry-run
+composer composer-updater-laravel10
+composer composer-updater-laravel11
+composer composer-validate
+composer composer-vendor-patches
+composer dev
+composer env-put-composer-memory-unlimited
+composer env-put-php
+composer env-put-xdebug-off
+composer env-put-xdebug-on
+composer envoy
+composer envoy-local
+composer envoy-ssh-testing
+composer envoy-testing
+composer facade-lint
+composer facade-update
+composer install-project
+composer json-lint
+composer lint
+composer md-fix
+composer md-lint
+composer neon-lint
+composer normalized
+composer normalized-dry-run
+composer peck
+composer peck-init
+composer pest
+composer pest-bail
+composer pest-coverage
+composer pest-migrate-configuration
+composer pest-parallel
+composer pest-profile
+composer pest-type-coverage
+composer pest-update-snapshots
+composer phploc
+composer phpmd
+composer phpmetrics
+composer phpmnd
+composer phpstan
+composer phpstan-baseline
+composer phpstan-split-baseline
+composer pint
+composer pint-bail
+composer pint-dirty
+composer pint-dirty-bail
+composer pint-dirty-test
+composer pint-test
+composer rector
+composer rector-clear-cache
+composer rector-clear-cache-dry-run
+composer rector-custom-rule
+composer rector-detect-node
+composer rector-dry-run
+composer rector-list-rules
+composer rector-only
+composer rector-only-dry-run
+composer rector-setup-ci
+composer release
+composer release-1.0.0-BETA1
+composer release-1.0.0-BETA1-dry-run
+composer release-major
+composer release-major-dry-run
+composer release-minor
+composer release-minor-dry-run
+composer release-patch
+composer release-patch-dry-run
+composer roave-infection-static-analysis-plugin
+composer roave-no-leaks
+composer sk
+composer sk-alice-yaml-fixtures-to-php
+composer sk-check-commented-code
+composer sk-check-conflicts
+composer sk-dump-editorconfig
+composer sk-finalize-classes
+composer sk-finalize-classes-dry-run
+composer sk-find-multi-classes
+composer sk-generate-symfony-config-builders
+composer sk-multi-package-composer-stats
+composer sk-namespace-to-psr-4
+composer sk-pretty-json
+composer sk-pretty-json-dry-run
+composer sk-privatize-constants
+composer sk-search-regex
+composer sk-split-config-per-package
+composer sk-spot-lazy-traits
+composer style-fix
+composer style-lint
+composer test
+composer test-bail
+composer test-coverage
+composer test-migrate-configuration
+composer test-parallel
+composer test-profile
+composer test-type-coverage
+composer test-update-snapshots
+composer text-fix
+composer text-lint
+composer trap
+composer trufflehog
+composer user-composer
+composer user-php
+composer var-dump-server
+composer vhs
+composer yaml-lint
+composer zh-fix
+composer zh-lint
 ```
+</details>
 
-## 应用目录结构
+<details>
+<summary>Packages</summary>
+
+<!--package-start-->
+* [aaronfrancis/fast-paginate](https://github.com/aarondfrancis/fast-paginate) - Fast paginate for Laravel
+* [aaronfrancis/flaky](https://github.com/aarondfrancis/flaky) - A Laravel package to elegantly handle flaky operations.
+* [ackintosh/ganesha](https://github.com/ackintosh/ganesha) - PHP implementation of Circuit Breaker pattern
+* [akaunting/laravel-money](https://github.com/akaunting/laravel-money) - Currency formatting and conversion package for Laravel
+* [alexandre-daubois/monolog-processor-collection](https://github.com/alexandre-daubois/monolog-processor-collection) - A collection of Monolog processors
+* [anlutro/l4-settings](https://github.com/anlutro/laravel-settings) - Persistent settings in Laravel.
+* [arifhp86/laravel-clear-expired-cache-file](https://github.com/arifhp86/laravel-clear-expired-cache-file) - Remove laravel expired cache file/folder
+* [astrotomic/laravel-translatable](https://github.com/Astrotomic/laravel-translatable) - A Laravel package for multilingual models
+* [awobaz/compoships](https://github.com/topclaudy/compoships) - Laravel relationships with support for composite/multiple keys
+* [axlon/laravel-postal-code-validation](https://github.com/axlon/laravel-postal-code-validation) - Worldwide postal code validation for Laravel and Lumen
+* [azjezz/psl](https://github.com/azjezz/psl) - PHP Standard Library
+* [balping/json-raw-encoder](git@gitlab.com:balping/json-raw-encoder.git) - Encode arrays to json with raw JS objects (eg. callbacks) in them
+* [beyondcode/laravel-mailbox](https://github.com/beyondcode/laravel-mailbox) - Handle incoming emails in your Laravel application.
+* [biiiiiigmonster/hasin](https://github.com/biiiiiigmonster/hasin) - Laravel framework relation has in implement
+* [bramus/monolog-colored-line-formatter](https://github.com/bramus/monolog-colored-line-formatter) - Colored Line Formatter for Monolog
+* [cakephp/utility](https://github.com/cakephp/utility) - CakePHP Utility classes such as Inflector, String, Hash, and Security
+* [calebporzio/sushi](https://github.com/calebporzio/sushi) - Eloquent's missing "array" driver.
+* [cerbero/command-validator](https://github.com/cerbero90/command-validator) - Laravel package to validate the input of console commands.
+* [cerbero/enum](https://github.com/cerbero90/enum) - Zero-dependencies package to supercharge enum functionalities.
+* [christophrumpel/artisan-benchmark](https://github.com/christophrumpel/artisan-benchmark) - Benchmark Artisan Commands
+* [cknow/laravel-money](https://github.com/cknow/laravel-money) - Laravel Money
+* [creagia/laravel-web-mailer](https://github.com/creagia/laravel-web-mailer) - Laravel Web Mailer
+* [cweagans/composer-patches](https://github.com/cweagans/composer-patches) - Provides a way to patch Composer packages.
+* [dcblogdev/laravel-sent-emails](https://github.com/dcblogdev/laravel-sent-emails) - Store outgoing emails in Laravel
+* [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
+* [divineomega/password_exposed](https://github.com/DivineOmega/password_exposed/releases) - This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.
+* [dragon-code/laravel-data-dumper](https://github.com/TheDragonCode/laravel-data-dumper) - Adding data from certain tables when executing the `php artisan schema:dump` console command
+* [dragon-code/laravel-deploy-operations](https://github.com/TheDragonCode/laravel-actions) - Performing any actions during the deployment process
+* [dragon-code/laravel-http-logger](https://github.com/TheDragonCode/laravel-http-logger) - Logging incoming HTTP requests
+* [dragon-code/laravel-route-names](https://github.com/TheDragonCode/laravel-route-names) - Automatic generation of route names
+* [dragon-code/laravel-support](https://github.com/TheDragonCode/laravel-support) - Various helper files for the Laravel and Lumen frameworks
+* [dragon-code/support](https://github.com/TheDragonCode/support) - Support package is a collection of helpers and tools for any project.
+* [echolabsdev/prism](https://github.com/echolabsdev/prism) - A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
+* [elao/enum](https://github.com/Elao/PhpEnums) - Extended PHP enums capabilities and frameworks integrations
+* [elasticsearch/elasticsearch](https://github.com/elastic/elasticsearch-php) - PHP Client for Elasticsearch
+* [emreyarligan/enum-concern](https://github.com/emreyarligan/enum-concern) - A PHP package for effortless Enumeration handling with Laravel Collections 📦 ✨
+* [ergebnis/classy](https://github.com/ergebnis/classy) - Provides a finder for classy constructs (classes, enums, interfaces, and traits).
+* [genealabs/laravel-caffeine](https://github.com/mikebronner/laravel-caffeine) - Keeping Your Laravel Forms Awake
+* [glorand/laravel-model-settings](https://github.com/glorand/laravel-model-settings) - Model Settings for your Laravel app
+* [graham-campbell/result-type](https://github.com/GrahamCampbell/Result-Type) - An Implementation Of The Result Type
+* [guanguans/laravel-api-response](https://github.com/guanguans/laravel-api-response) - Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。
+* [guanguans/laravel-exception-notify](https://github.com/guanguans/laravel-exception-notify) - Monitor exception and report to the notification channels(Dump、Log、Mail、AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).
+* [guanguans/notify](https://github.com/guanguans/notify) - Push notification SDK(AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).
+* [guzzlehttp/guzzle](https://github.com/guzzle/guzzle) - Guzzle is a PHP HTTP client library
+* [hamidrezaniazi/pecs](https://github.com/hamidrezaniazi/pecs) - PHP ECS (Elastic Common Schema): Simplify logging with the power of elastic common schema.
+* [hashids/hashids](https://github.com/vinkla/hashids) - Generate short, unique, non-sequential ids (like YouTube and Bitly) from numbers
+* [haydenpierce/class-finder](git@gitlab.com:hpierce1102/ClassFinder.git) - A library that can provide of a list of classes in a given namespace
+* [huangdijia/laravel-horizon-restart](https://github.com/huangdijia/laravel-horizon-restart) - Horizon Restart for Laravel.
+* [inertiajs/inertia-laravel](https://github.com/inertiajs/inertia-laravel) - The Laravel adapter for Inertia.js.
+* [inspector-apm/inspector-laravel](https://github.com/inspector-apm/inspector-laravel) - Code Execution Monitoring, built for developers.
+* [izniburak/bit-permission](https://github.com/izniburak/bit-permission) - simple PHP bitwise control to check somethings like Permissions, Roles, etc.
+* [jasny/sso](https://github.com/jasny/sso) - Simple Single Sign-On
+* [jdavidbakr/laravel-cache-garbage-collector](https://github.com/jdavidbakr/laravel-cache-garbage-collector) - A script that will clean up expired cache files if the system is using the files cache system
+* [jenssegers/agent](https://github.com/jenssegers/agent) - Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect
+* [juliomotol/laravel-auth-timeout](https://github.com/juliomotol/laravel-auth-timeout) - Authentication Timeout for Laravel
+* [kcs/class-finder](https://github.com/alekitto/class-finder) - Utility classes to help discover other classes/namespaces
+* [kevinrob/guzzle-cache-middleware](https://github.com/Kevinrob/guzzle-cache-middleware) - A HTTP/1.1 Cache for Guzzle 6. It's a simple Middleware to be added in the HandlerStack. (RFC 7234)
+* [kirkbushell/eloquence](https://github.com/kirkbushell/eloquence) - A set of extensions adding additional functionality and consistency to Laravel's awesome Eloquent library.
+* [knuckleswtf/scribe](https://github.com/knuckleswtf/scribe) - Generate API documentation for humans from your Laravel codebase.✍
+* [laminas/laminas-diagnostics](https://github.com/laminas/laminas-diagnostics) - A set of components for performing diagnostic tests in PHP applications
+* [laracasts/presenter](https://github.com/laracasts/Presenter) - Simple view presenters
+* [laragear/cache-query](https://github.com/laragear/cache-query) - Remember your query results using only one method. Yes, only one.
+* [laragear/discover](https://github.com/Laragear/Discover) - Discover and filter PHP Classes within a directory
+* [laragear/preload](https://github.com/Laragear/Preload) - Effortlessly make a Preload script for your Laravel application.
+* [laragear/two-factor](https://github.com/Laragear/TwoFactor) - On-premises 2FA Authentication for out-of-the-box.
+* [laragear/webauthn](https://github.com/Laragear/WebAuthn) - Authenticate users with Passkeys: fingerprints, patterns and biometric data.
+* [laravel-frontend-presets/tall](https://github.com/laravel-frontend-presets/tall) - TALL preset for Laravel.
+* [laravel/folio](https://github.com/laravel/folio) - Page based routing for Laravel.
+* [laravel/framework](https://github.com/laravel/framework) - The Laravel Framework.
+* [laravel/octane](https://github.com/laravel/octane) - Supercharge your Laravel application's performance.
+* [laravel/pennant](https://github.com/laravel/pennant) - A simple, lightweight library for managing feature flags.
+* [laravel/pulse](https://github.com/laravel/pulse) - Laravel Pulse is a real-time application performance monitoring tool and dashboard for your Laravel application.
+* [laravel/reverb](https://github.com/laravel/reverb) - Laravel Reverb provides a real-time WebSocket communication backend for Laravel applications.
+* [laravel/sanctum](https://github.com/laravel/sanctum) - Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs.
+* [laravel/tinker](https://github.com/laravel/tinker) - Powerful REPL for the Laravel framework.
+* [laravel/wayfinder](https://github.com/laravel/wayfinder) - Generate TypeScript representations of your Laravel actions and routes.
+* [laravolt/avatar](https://github.com/laravolt/avatar) - Turn name, email, and any other string into initial-based avatar or gravatar.
+* [leventcz/laravel-top](https://github.com/leventcz/laravel-top) - Real-time monitoring straight from the command line for Laravel applications.
+* [morrislaptop/laravel-popo-caster](https://github.com/morrislaptop/laravel-popo-caster) - Automatically cast JSON columns to rich PHP objects in Laravel using Symfony's Serializer
+* [mpyw/laravel-cached-database-stickiness](https://github.com/mpyw/laravel-cached-database-stickiness) - Guarantee database stickiness over the same user's consecutive requests
+* [mtownsend/read-time](https://github.com/mtownsend5512/read-time) - A PHP package to show users how long it takes to read content.
+* [naoray/laravel-github-monolog](https://github.com/Naoray/laravel-github-monolog) - Log driver to store logs as github issues
+* [nette/utils](https://github.com/nette/utils) - 🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.
+* [nunomaduro/laravel-console-task](https://github.com/nunomaduro/laravel-console-task) - Laravel Console Task is a output method for your Laravel/Laravel Zero commands.
+* [nunomaduro/laravel-optimize-database](https://github.com/nunomaduro/laravel-optimize-database) - Publishes migrations that make your database production ready.
+* [nunomaduro/termwind](https://github.com/nunomaduro/termwind) - Its like Tailwind CSS, but for the console.
+* [nyholm/psr7](https://github.com/Nyholm/psr7) - A fast PHP7 implementation of PSR-7
+* [opcodesio/log-viewer](https://github.com/opcodesio/log-viewer) - Fast and easy-to-use log viewer for your Laravel application
+* [overtrue/laravel-uploader](https://github.com/overtrue/laravel-uploader) - An upload component for Laravel.
+* [perryvandermeer/laravel-console-validator](https://github.com/PerryvanderMeer/laravel-console-validator) - Validate arguments for Laravel commands
+* [phiki/phiki](https://github.com/phikiphp/phiki) - Syntax highlighting using TextMate grammars in PHP.
+* [php-ds/php-ds](https://github.com/php-ds/polyfill) - 
+* [php-open-source-saver/jwt-auth](https://github.com/PHP-Open-Source-Saver/jwt-auth) - JSON Web Token Authentication for Laravel and Lumen
+* [php-static-analysis/attributes](https://github.com/php-static-analysis/attributes) - Attributes used instead of PHPDocs for static analysis tools
+* [phpyh/lru-memoizer](https://github.com/phpyh/lru-memoizer) - PHPyh LRU Memoizer
+* [pion/laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) - Service for chunked upload with several js providers
+* [prinsfrank/standards](https://github.com/PrinsFrank/standards) - A collection of standards as PHP Enums: ISO3166, ISO4217, ISO639...
+* [proengsoft/laravel-jsvalidation](https://github.com/proengsoft/laravel-jsvalidation) - Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest
+* [pusher/pusher-php-server](https://github.com/pusher/pusher-http-php) - Library for interacting with the Pusher REST API
+* [rakutentech/laravel-request-docs](https://github.com/rakutentech/laravel-request-docs) - Automatically generate Laravel docs from request rules, controllers and routes
+* [reinink/remember-query-strings](https://github.com/reinink/remember-query-strings) - Laravel middleware that automatically remembers and restores query strings.
+* [rennokki/laravel-eloquent-query-cache](https://github.com/renoki-co/laravel-eloquent-query-cache) - Adding cache on your Laravel Eloquent queries' results is now a breeze.
+* [robclancy/presenter](https://github.com/robclancy/presenter) - Decorate your objects using presenters. Primarily to keep presentation logic out of your models.
+* [ryangjchandler/orbit](https://github.com/ryangjchandler/orbit) - A flat-file database driver for Eloquent.
+* [sbamtr/laravel-query-enrich](https://github.com/SiavashBamshadnia/Laravel-Query-Enrich) - A helper for Laravel eloquent and query builder
+* [skywarth/chaotic-schedule](https://github.com/skywarth/chaotic-schedule) - Randomize scheduled command execution time and date intervals
+* [spatie/fork](https://github.com/spatie/fork) - A lightweight solution for running code concurrently in PHP
+* [spatie/guzzle-rate-limiter-middleware](https://github.com/spatie/guzzle-rate-limiter-middleware) - A rate limiter for Guzzle
+* [spatie/invade](https://github.com/spatie/invade) - A PHP function to work with private properties and methods
+* [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) - A very simple activity logger to monitor the users of your website or application
+* [spatie/laravel-backup](https://github.com/spatie/laravel-backup) - A Laravel package to backup your application
+* [spatie/laravel-csp](https://github.com/spatie/laravel-csp) - Add CSP headers to the responses of a Laravel app
+* [spatie/laravel-failed-job-monitor](https://github.com/spatie/laravel-failed-job-monitor) - Get notified when a queued job fails
+* [spatie/laravel-health](https://github.com/spatie/laravel-health) - Monitor the health of a Laravel application
+* [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary) - Associate files with Eloquent models
+* [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) - Easily build Eloquent queries from API requests
+* [spatie/laravel-responsecache](https://github.com/spatie/laravel-responsecache) - Speed up a Laravel application by caching the entire response
+* [spatie/laravel-route-attributes](https://github.com/spatie/laravel-route-attributes) - Auto register routes using PHP attributes
+* [spatie/laravel-route-discovery](https://github.com/spatie/laravel-route-discovery) - Auto register routes using PHP attributes
+* [spatie/laravel-schedule-monitor](https://github.com/spatie/laravel-schedule-monitor) - Monitor scheduled tasks in a Laravel app
+* [spatie/laravel-schemaless-attributes](https://github.com/spatie/laravel-schemaless-attributes) - Add schemaless attributes to Eloquent models
+* [spatie/laravel-settings](https://github.com/spatie/laravel-settings) - Store your application settings
+* [spatie/laravel-sitemap](https://github.com/spatie/laravel-sitemap) - Create and generate sitemaps with ease
+* [spatie/laravel-webhook-client](https://github.com/spatie/laravel-webhook-client) - Receive webhooks in Laravel apps
+* [spatie/packagist-api](https://github.com/spatie/packagist-api) - Fetch package info from Packagist
+* [spatie/php-structure-discoverer](https://github.com/spatie/php-structure-discoverer) - Automatically discover structures within your PHP application
+* [spatie/query-string](https://github.com/spatie/query-string) - Manipulate query strings
+* [sqids/sqids](https://github.com/sqids/sqids-php) - Generate short YouTube-looking IDs from numbers
+* [square1/laravel-idempotency](https://github.com/square1-io/laravel-idempotency) - Add idempotency to Laravel-based APIs, preventing duplicate request processing.
+* [staudenmeir/laravel-adjacency-list](https://github.com/staudenmeir/laravel-adjacency-list) - Recursive Laravel Eloquent relationships with CTEs
+* [stevebauman/location](https://github.com/stevebauman/location) - Retrieve a user's location by their IP Address
+* [swiss-devjoy/laravel-optimize-sqlite](https://github.com/Swiss-Devjoy/laravel-optimize-sqlite) - Optimize your SQLite database for production in Laravel
+* [symfony/polyfill-php84](https://github.com/symfony/polyfill-php84) - Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions
+* [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
+* [tightenco/ziggy](https://github.com/tighten/ziggy) - Use your Laravel named routes in JavaScript.
+* [tpetry/laravel-mysql-explain](https://github.com/tpetry/laravel-mysql-explain) - Get Visual MySQL EXPLAIN for Laravel.
+* [unicodeveloper/laravel-password](https://github.com/unicodeveloper/laravel-password) - Protect your users from entering dumb and common passwords
+* [utopia-php/system](https://github.com/utopia-php/system) - A simple library for obtaining information about the host's system.
+* [valorin/pwned-validator](https://github.com/valorin/pwned-validator) - Super simple Laravel Validator for checking password via the Pwned Passwords service of Have I Been Pwned
+* [vectorface/whip](https://github.com/Vectorface/whip) - A PHP class for retrieving accurate IP address information for the client.
+* [watson/validating](https://github.com/dwightwatson/validating) - Eloquent model validating trait.
+* [wendelladriel/laravel-validated-dto](https://github.com/WendellAdriel/laravel-validated-dto) - Data Transfer Objects with validation for Laravel applications
+* [wikimedia/composer-merge-plugin](https://github.com/wikimedia/composer-merge-plugin) - Composer plugin to merge multiple composer.json files
+* [zenstruck/stream](https://github.com/zenstruck/stream) - Object wrapper for PHP resources.
+* [andreaselia/laravel-api-to-postman](https://github.com/andreaselia/laravel-api-to-postman) - Generate a Postman collection automatically from your Laravel API
+* [bamarni/composer-bin-plugin](https://github.com/bamarni/composer-bin-plugin) - No conflicts for your bin dependencies
+* [barryvdh/laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper) - Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.
+* [brainmaestro/composer-git-hooks](https://github.com/BrainMaestro/composer-git-hooks) - Easily manage git hooks in your composer config
+* [buggregator/trap](https://github.com/buggregator/trap) - A simple and powerful tool for debugging PHP applications.
+* [carthage-software/mago](https://github.com/carthage-software/mago) - Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.
+* [composer/composer](https://github.com/composer/composer) - Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.
+* [deployer/deployer](https://github.com/deployphp/deployer) - Deployment Tool
+* [dragon-code/benchmark](https://github.com/TheDragonCode/benchmark) - Simple comparison of code execution speed between different options
+* [dragon-code/pretty-routes](https://github.com/TheDragonCode/pretty-routes) - Pretty Routes for Laravel
+* [driftingly/rector-laravel](https://github.com/driftingly/rector-laravel) - Rector upgrades rules for Laravel Framework
+* [ergebnis/composer-normalize](https://github.com/ergebnis/composer-normalize) - Provides a composer plugin for normalizing composer.json.
+* [ergebnis/license](https://github.com/ergebnis/license) - Provides an abstraction of an open-source license.
+* [ergebnis/php-cs-fixer-config](https://github.com/ergebnis/php-cs-fixer-config) - Provides a configuration factory and rule set factories for friendsofphp/php-cs-fixer.
+* [ergebnis/rector-rules](https://github.com/ergebnis/rector-rules) - Provides rules for rector/rector.
+* [fakerphp/faker](https://github.com/FakerPHP/Faker) - Faker is a PHP library that generates fake data for you.
+* [guanguans/ai-commit](https://github.com/guanguans/ai-commit) - Automagically generate conventional git commit message with AI. - 使用 AI 自动生成约定式 git 提交信息。
+* [guanguans/laravel-soar](https://github.com/guanguans/laravel-soar) - SQL optimizer and rewriter for laravel. - laravel 的 SQL 优化器和重写器。
+* [guanguans/monorepo-builder-worker](https://github.com/guanguans/monorepo-builder-worker) - List of release worker collections for symplify/monorepo-builder.
+* [ion-bazan/composer-diff](https://github.com/IonBazan/composer-diff) - Compares composer.lock changes and generates Markdown report so you can use it in PR description.
+* [jasonmccreary/laravel-test-assertions](https://github.com/jasonmccreary/laravel-test-assertions) - A set of helpful assertions when testing Laravel applications.
+* [josezenem/laravel-make-migration-pivot](https://github.com/josezenem/laravel-make-migration-pivot) - Make Laravel pivot tables using the new Laravel 9 closure migrations.
+* [kitloong/laravel-migrations-generator](https://github.com/kitloong/laravel-migrations-generator) - Generates Laravel Migrations from an existing database
+* [laracademy/generators](https://github.com/laracademy/generators) - This package will generate a Laravel Model based on your database table itself, filling in the required fields automatically.
+* [laracraft-tech/laravel-schema-rules](https://github.com/laracraft-tech/laravel-schema-rules) - Automatically generate Laravel validation rules based on your database table schema!
+* [larastan/larastan](https://github.com/larastan/larastan) - Larastan - Discover bugs in your code without running it. A phpstan/phpstan extension for Laravel
+* [laravel-lang/common](https://github.com/Laravel-Lang/common) - Easily connect the necessary language packs to the application
+* [laravel-shift/factory-generator](https://github.com/laravel-shift/factory-generator) - Generate factories from existing models
+* [laravel/envoy](https://github.com/laravel/envoy) - Elegant SSH tasks for PHP.
+* [laravel/facade-documenter](https://github.com/laravel/facade-documenter/tree/main) - 
+* [laravel/pail](https://github.com/laravel/pail) - Easily delve into your Laravel application's log files directly from the command line.
+* [laravel/pint](https://github.com/laravel/pint) - An opinionated code formatter for PHP.
+* [laravel/sail](https://github.com/laravel/sail) - Docker files for running a basic Laravel application.
+* [laravel/telescope](https://github.com/laravel/telescope) - An elegant debug assistant for the Laravel framework.
+* [mockery/mockery](https://github.com/mockery/mockery) - Mockery is a simple yet flexible PHP mock object framework
+* [msamgan/laravel-env-keys-checker](https://github.com/msamgan/laravel-env-keys-checker) - check if all the keys are available in all the .env files.
+* [muhammadhuzaifa/telescope-guzzle-watcher](https://github.com/huzaifaarain/telescope-guzzle-watcher) - Telescope Guzzle Watcher provide a custom watcher for intercepting http requests made via guzzlehttp/guzzle php library. The package uses the on_stats request option for extracting the request/response data. The watcher intercept and log the request into the Laravel Telescope HTTP Client Watcher.
+* [nunomaduro/collision](https://github.com/nunomaduro/collision) - Cli error handling for console/command-line PHP applications.
+* [orangehill/iseed](https://github.com/orangehill/iseed) - Generate a new Laravel database seed file based on data from the existing database table.
+* [peckphp/peck](https://github.com/peckphp/peck) - Peck is a powerful CLI tool designed to identify pure wording or spelling (grammar) mistakes in your codebase.
+* [pestphp/pest](https://github.com/pestphp/pest) - The elegant PHP Testing Framework.
+* [phpstan/extension-installer](https://github.com/phpstan/extension-installer) - Composer plugin for automatic installation of PHPStan extensions
+* [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules) - PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.
+* [phpstan/phpstan-webmozart-assert](https://github.com/phpstan/phpstan-webmozart-assert) - PHPStan webmozart/assert extension
+* [povils/phpmnd](https://github.com/povils/phpmnd) - A tool to detect Magic numbers in codebase
+* [rector/rector](https://github.com/rectorphp/rector) - Instant Upgrade and Automated Refactoring of any PHP code
+* [rector/swiss-knife](https://github.com/rectorphp/swiss-knife) - Swiss knife in pocket of every upgrade architect
+* [rector/type-perfect](https://github.com/rectorphp/type-perfect) - Next level type declaration checks
+* [reliese/laravel](https://github.com/reliese/laravel) - Reliese Components for Laravel Framework code generation.
+* [scalar/laravel](https://github.com/scalar/laravel) - Render your OpenAPI-based API reference
+* [shipmonk/composer-dependency-analyser](https://github.com/shipmonk-rnd/composer-dependency-analyser) - Fast detection of composer dependency issues (dead dependencies, shadow dependencies, misplaced dependencies)
+* [shipmonk/phpstan-baseline-per-identifier](https://github.com/shipmonk-rnd/phpstan-baseline-per-identifier) - Split your PHPStan baseline into multiple files, one per error identifier. Supports both neon baseline and PHP baseline.
+* [soloterm/dumps](https://github.com/soloterm/dumps) - A Laravel command to intercept dumps from your Laravel application.
+* [soloterm/solo](https://github.com/soloterm/solo) - A Laravel package to run multiple commands at once, to aid in local development.
+* [spatie/laravel-error-solutions](https://github.com/spatie/laravel-error-solutions) - Display solutions on the Laravel error page
+* [spatie/laravel-ignition](https://github.com/spatie/laravel-ignition) - A beautiful error page for Laravel applications.
+* [spatie/laravel-stubs](https://github.com/spatie/laravel-stubs) - Opinionated Laravel stubs
+* [spaze/phpstan-disallowed-calls](https://github.com/spaze/phpstan-disallowed-calls) - PHPStan rules to detect disallowed method & function calls, constant, namespace, attribute & superglobal usages, with powerful rules to re-allow a call or a usage in places where it should be allowed.
+* [sti3bas/laravel-scout-array-driver](https://github.com/Sti3bas/laravel-scout-array-driver) - Array driver for Laravel Scout
+* [symplify/easy-coding-standard](https://github.com/easy-coding-standard/easy-coding-standard) - Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer
+* [symplify/phpstan-rules](https://github.com/symplify/phpstan-rules) - Set of Symplify rules for PHPStan
+* [symplify/vendor-patches](https://github.com/symplify/vendor-patches) - Generate vendor patches for packages with single command
+* [thedoctor0/laravel-factory-generator](https://github.com/TheDoctor0/laravel-factory-generator) - Automatically generate Laravel factories for your models.
+* [tomasvotruba/class-leak](https://github.com/TomasVotruba/class-leak) - Detect leaking classes
+* [tomasvotruba/cognitive-complexity](https://github.com/TomasVotruba/cognitive-complexity) - PHPStan rules to measure cognitive complexity of your classes and methods
+* [tomasvotruba/type-coverage](https://github.com/TomasVotruba/type-coverage) - Measure type coverage of your project
+* [vcian/laravel-db-auditor](https://github.com/vcian/laravel-db-auditor) - Database DB Auditor provide leverage to audit your MySql,sqlite, PostgreSQL database standards and also provide options to add constraints in table.
+* [worksome/envy](https://github.com/worksome/envy) - Automatically keep your .env files in sync.
+* [yamadashy/phpstan-friendly-formatter](https://github.com/yamadashy/phpstan-friendly-formatter) - Simple error formatter for PHPStan that display code frame
+<!--package-end-->
+</details>
+
+<details>
+<summary>App tree</summary>
 
 ```tree
 /Users/yaozm/Documents/wwwroot/laravel-skeleton/app
@@ -361,3 +691,35 @@ composer var-dump-server                # 启动变量打印服务
 55 directories, 253 files
 
 ```
+</details>
+
+## Testing
+
+```shell
+composer test
+```
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+
+## Security Vulnerabilities
+
+Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+
+## Credits
+
+* [guanguans](https://github.com/guanguans)
+* [All Contributors](../../contributors)
+
+## Thanks
+
+[![](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/?from=https://github.com/guanguans)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
