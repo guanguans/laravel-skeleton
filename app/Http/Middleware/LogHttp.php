@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Support\Traits\WithPipeArgs;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Psr\Log\LoggerInterface;
@@ -31,24 +32,26 @@ final class LogHttp
 
     /** @var list<\Closure> */
     private static array $skipCallbacks = [];
-    private static Logger $logger;
-    private static string $level;
 
     /** @var list<string> */
     private static array $headerHidden = [
         'api-key',
         'authorization',
         'cookie',
+        'set-cookie',
         'token',
+        'x-xsrf-token',
     ];
 
     /** @var list<string> */
-    private static array $inputHidden = [
+    private static array $postHidden = [
         '*password',
         '*password*',
         'password',
         'password*',
     ];
+    private Logger $logger;
+    private string $level;
 
     public function __construct()
     {
@@ -69,33 +72,19 @@ final class LogHttp
         self::$skipCallbacks[] = $callback;
     }
 
-    public static function setLogger(LoggerInterface|string $logger): void
-    {
-        if (\is_string($logger)) {
-            $logger = Log::channel($logger);
-        }
-
-        if (!$logger instanceof Logger) {
-            $logger = new Logger($logger, app(Dispatcher::class));
-        }
-
-        self::$logger = $logger;
-    }
-
-    public static function setLevel(string $level): void
-    {
-        self::$level = $level;
-    }
-
     /**
      * @noinspection RedundantDocCommentTagInspection
      *
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      */
-    public function handle(Request $request, \Closure $next, LoggerInterface|string $logger, string $level = 'info'): SymfonyResponse
-    {
-        self::setLogger($logger);
-        self::setLevel($level);
+    public function handle(
+        Request $request,
+        \Closure $next,
+        null|LoggerInterface|string $logger,
+        string $level = 'info'
+    ): SymfonyResponse {
+        $this->setLogger($logger);
+        $this->level = $level;
         // $this->terminate($request, $next($request));
 
         return $next($request);
@@ -107,11 +96,24 @@ final class LogHttp
             return;
         }
 
-        self::$logger->log(
-            self::$level,
+        $this->logger->log(
+            $this->level,
             $this->messageFor($request, $response),
             $this->contextFor($request, $response)
         );
+    }
+
+    private function setLogger(null|LoggerInterface|string $logger): void
+    {
+        if (!$logger instanceof LoggerInterface) {
+            $logger = Log::channel($logger);
+        }
+
+        if (!$logger instanceof Logger) {
+            $logger = new Logger($logger, Event::getFacadeRoot());
+        }
+
+        $this->logger = $logger;
     }
 
     private function shouldSkip(Request $request): bool
@@ -142,26 +144,22 @@ final class LogHttp
         );
     }
 
-    /**
-     * @noinspection GlobalVariableUsageInspection
-     */
     private function contextFor(Request $request, SymfonyResponse $response): array
     {
         return [
             'method' => $request->method(),
             'path' => $request->path(),
             'request_header' => $this->headerFor($request),
-            // 'files' => $request->allFiles(),
-            'files' => $_FILES,
-            'post' => $this->inputFor($request->post()),
             'query' => $request->query(),
-            'input' => $this->inputFor($request->input()),
+            'post' => $this->postFor($request->post()),
+            'files' => $this->filesFor($request),
             'status_code' => $response->getStatusCode(),
             'status_text' => $this->statusTextFor($response),
             'response_header' => $this->headerFor($response),
-            'response' => $this->responseFor($response),
+            'response_body' => $this->responseBodyFor($response),
             'ip' => $request->getClientIp(),
-            'duration' => $this->duration(),
+            'duration' => $duration = $this->duration(),
+            'human_duration' => humans_milliseconds($duration, ['minimumUnit' => 'ms']),
         ];
     }
 
@@ -175,11 +173,32 @@ final class LogHttp
             ->all();
     }
 
-    private function inputFor(array $input): array
+    private function postFor(array $post): array
     {
-        return collect($input)
-            ->map(static fn (mixed $value, string $key): mixed => Str::is(self::$inputHidden, $key) ? '***' : $value)
+        return collect($post)
+            ->map(static fn (mixed $value, string $key): mixed => Str::is(self::$postHidden, $key) ? '***' : $value)
             ->all();
+    }
+
+    /**
+     * @noinspection CallableParameterUseCaseInTypeContextInspection
+     */
+    private function filesFor(Request $request): array
+    {
+        $files = $request->allFiles();
+
+        array_walk_recursive($files, static function (UploadedFile &$uploadedFile): void {
+            $uploadedFile = [
+                'name' => $uploadedFile->getClientOriginalName(),
+                'type' => $uploadedFile->getMimeType(),
+                'tmp_name' => $uploadedFile->getPathname(),
+                // 'error' => $uploadedFile->getError(),
+                'error' => $uploadedFile->getErrorMessage(),
+                // 'size' => Utils::humanBytes($uploadedFile->getSize()),
+            ];
+        });
+
+        return $files;
     }
 
     /**
@@ -190,13 +209,24 @@ final class LogHttp
         return Response::$statusTexts[$response->getStatusCode()] ?? 'unknown status';
     }
 
-    private function responseFor(SymfonyResponse $response): mixed
+    private function responseBodyFor(SymfonyResponse $response): string
     {
-        return $response instanceof JsonResponse ? $response->getData(true) : $response->getContent();
+        $content = $response->getContent();
+
+        if (json_validate($content)) {
+            return $content;
+        }
+
+        return str(\sprintf('%s: %s', $response->headers->get('Content-Type'), $content))
+            ->limit()
+            ->toString();
     }
 
-    private function duration(): string
+    /**
+     * @return float milliseconds
+     */
+    private function duration(): float
     {
-        return number_format(microtime(true) - LARAVEL_START, 3);
+        return (microtime(true) - LARAVEL_START) * 1000;
     }
 }

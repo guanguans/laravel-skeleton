@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 
 use App\Http\Middleware\LogHttp;
+use App\Http\Middleware\VerifySignature;
 use App\Models\HttpLog;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
@@ -34,9 +35,8 @@ Route::group([
     'prefix' => 'v1',
     'middleware' => [
         'api',
-        // sprintf('verify.signature:%s', config('services.signer.default.secret')),
-        // LogHttp::class.':daily',
-        // VerifySignature::in([config('services.signers.parent_admin.secret')]),
+        // VerifySignature::with(config('services.signer.default.secret')),
+        LogHttp::with('daily'),
     ],
 ], static function (Router $router): void {
     $router->get('ping/{bad?}', 'PingController')->name('ping');

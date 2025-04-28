@@ -50,7 +50,7 @@ final class LogServiceProvider extends ServiceProvider
             ]);
 
             LogHttp::skipWhen(
-                fn (Request $request): bool => $this->app->runningUnitTests() || $request->isMethodSafe()
+                fn (Request $request): bool => $this->app->runningUnitTests() /* || $request->isMethodSafe() */
             );
 
             $this->unlessConsole();

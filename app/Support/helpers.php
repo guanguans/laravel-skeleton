@@ -161,13 +161,13 @@ if (!\function_exists('deference')) {
 
 if (!\function_exists('humans_milliseconds')) {
     /**
-     * @throws \Exception
+     * @noinspection PhpUnhandledExceptionInspection
      */
-    function humans_milliseconds(float|int $milliseconds, ?array $syntax = null): string
+    function humans_milliseconds(float|int $milliseconds, array $syntax = []): string
     {
         return CarbonInterval::microseconds($milliseconds * 1000)
             ->cascade()
-            ->forHumans($syntax ?? [
+            ->forHumans($syntax + [
                 'join' => ', ',
                 'locale' => 'en',
                 // 'locale' => 'zh_CN',
