@@ -13,34 +13,22 @@ declare(strict_types=1);
 
 use App\Http\Middleware\LogHttp;
 use App\Models\HttpLog;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', static fn (Request $request) => $request->user())->middleware('auth:sanctum');
 
-// 可以为 API 定义单独的回退路由
 Route::fallback(static function (): void {
-    // redirect 404
-    abort(404, 'API page not found.');
+    abort(404, 'Not Found Api');
 });
 
-Route::any('/any', static function (Request $request): JsonResponse {
-    $request->validate([
-        'file_name' => 'file',
-    ]);
-
-    return new JsonResponse([
-        'method' => $request->method(),
-        'headers' => $request->header(),
-        'query' => $request->query(),
-        'post' => $request->post(),
-        'FILES' => $_FILES,
-        'files' => $request->file(),
-        'cookie' => $request->cookie(),
-    ]);
-});
+/**
+ * @see https://www.harrisrafto.eu/streaming-large-json-datasets-in-laravel-with-streamjson/
+ */
+Route::get('/users.json', static fn () => response()->streamJson([
+    'users' => HttpLog::query()->cursor(),
+]));
 
 Route::middleware([
     'api',
@@ -65,10 +53,3 @@ Route::middleware([
         });
     });
 });
-
-/**
- * @see https://www.harrisrafto.eu/streaming-large-json-datasets-in-laravel-with-streamjson/
- */
-Route::get('/users.json', static fn () => response()->streamJson([
-    'users' => HttpLog::query()->cursor(),
-]));

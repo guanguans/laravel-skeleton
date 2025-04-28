@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -29,11 +31,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-        // $this->call(UsersTableSeeder::class);
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // $this->call(UsersTableSeeder::class);
         $this->callOncePerDatabase(UsersTableSeeder::class);
     }
 }

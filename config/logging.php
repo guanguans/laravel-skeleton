@@ -17,11 +17,9 @@ use App\Models\HttpLog;
 use App\Support\Monolog\Formatter\EloquentLogHttpModelFormatter;
 use App\Support\Monolog\Handler\EloquentHandler;
 use App\Support\Monolog\Processor\EloquentLogHttpModelProcessor;
-use Monolog\Handler\FilterHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
-use Monolog\Level;
 use Monolog\Processor\LoadAverageProcessor;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
@@ -194,12 +192,12 @@ return [
          */
         'stdout' => [
             'driver' => 'monolog',
-            'handler' => FilterHandler::class,
-            'formatter' => env('LOG_STDOUT_FORMATTER'),
-            'with' => [
-                'handler' => static fn (): StreamHandler => new StreamHandler('php://stdout'),
-                'minLevelOrList' => [Level::Debug, Level::Info],
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => StreamHandler::class,
+            'handler_with' => [
+                'stream' => 'php://stdout',
             ],
+            'formatter' => env('LOG_STDOUT_FORMATTER'),
             'processors' => [PsrLogMessageProcessor::class],
         ],
 
