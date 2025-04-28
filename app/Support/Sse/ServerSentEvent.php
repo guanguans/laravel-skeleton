@@ -93,7 +93,11 @@ final class ServerSentEvent implements \Stringable
      */
     private $tapper;
     private bool $headersSent = false;
+
+    /** @var list<callable(self): void> */
     private array $beforeCallbacks = [];
+
+    /** @var list<callable(self): void> */
     private array $afterCallbacks = [];
 
     public function __construct(
@@ -157,7 +161,7 @@ final class ServerSentEvent implements \Stringable
                 // $closeServerSentEventException->serverSentEvent?->sendContent();
                 $closeServerSentEventException->serverSentEvent?->send();
 
-                return;
+                // return;
             } finally {
                 // Flush the output buffer and send echoed messages to the browser.
                 if (ob_get_level() > 0) {
@@ -167,7 +171,7 @@ final class ServerSentEvent implements \Stringable
                 flush();
 
                 // Break the loop if the client aborted the connection.
-                if (connection_aborted()) {
+                if (isset($closeServerSentEventException) || connection_aborted()) {
                     return;
                 }
 

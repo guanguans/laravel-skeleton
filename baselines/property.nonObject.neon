@@ -1,4 +1,4 @@
-# total 8 errors
+# total 7 errors
 
 parameters:
     ignoreErrors:
@@ -21,8 +21,3 @@ parameters:
             message: '#^Cannot access property \$id on mixed\.$#'
             count: 1
             path: ../app/Support/Mixins/RequestMixin.php
-
-        -
-            message: '#^Cannot access property \$name on PhpParser\\Node\\Name\|null\.$#'
-            count: 1
-            path: ../app/Support/Rectors/RenameToPsrNameRector.php

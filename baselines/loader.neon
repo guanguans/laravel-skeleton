@@ -1,16 +1,3 @@
-# total 61 errors
+# total 7 errors
 includes:
-    - callable.nonCallable.neon
-    - complexity.classLike.neon
-    - complexity.functionLike.neon
-    - finally.exitPoint.neon
-    - function.alreadyNarrowedType.neon
-    - isset.property.neon
-    - larastan.noEnvCallsOutsideOfConfig.neon
-    - method.childReturnType.neon
-    - method.notFound.neon
-    - method.unused.neon
-    - offsetAccess.nonOffsetAccessible.neon
-    - parameter.trait.neon
     - property.nonObject.neon
-    - property.notFound.neon

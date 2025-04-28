@@ -1,8 +1,0 @@
-# total 3 errors
-
-parameters:
-    ignoreErrors:
-        -
-            message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
-            count: 3
-            path: ../app/Support/helpers.php

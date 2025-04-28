@@ -44,6 +44,7 @@ parameters:
 #        - tests/
     excludePaths:
         - app/Support/StreamWrappers/
+        - app/Support/Rectors/RenameToPsrNameRector.php
         - *.blade.php
     level: max
 #    level: 10
@@ -99,8 +100,10 @@ parameters:
         - identifier: logicalAnd.resultUnused
         - identifier: logicalOr.resultUnused
         - identifier: method.nonObject
+        - identifier: method.unused
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
+        - identifier: offsetAccess.nonOffsetAccessible
         - identifier: return.type
         - identifier: trait.unused
         - identifier: typePerfect.narrowPublicClassMethodParamType
@@ -108,28 +111,37 @@ parameters:
         - identifier: typePerfect.noMixedMethodCaller
         - identifier: typePerfect.noMixedPropertyFetcher
         - '#^Call to an undefined method Guanguans\\LaravelApiResponse\\Contracts\\ApiResponseContract\:\:.*\(\)\.$#'
+        - '#^Call to an undefined method Illuminate\\Auth\\AuthManager\:\:factory\(\)\.$#'
+        - '#^Call to function is_subclass_of\(\) with class\-string and string will always evaluate to true\.$#'
+        - '#^Cognitive complexity for "user_http_build_query\(\)" is 24, keep it under 12$#'
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            count: 3
+            path: app/Support/helpers.php
         -
             message: '#^Calling env_explode\(\) is forbidden, use config\(\) instead\.$#'
             path: config/logging.php
+        -
+            identifier: typeCoverage.paramTypeCoverage
+            count: 5
+            path: app/Models/Example.php
         -
             identifier: new.static
             paths:
                 - app/Models/BaseModel.php
                 - app/Rules/Rule.php
         -
-            identifier: typeCoverage.paramTypeCoverage
-            paths:
-                - app/Models/Example.php
-        -
-            identifier: property.trait
+            messages:
+                - '#^Parameter \$class of method App\\Support\\Attributes\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
+                - '#^Property App\\Support\\Attributes\\Mixin\:\:\$class has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
             path: app/Support/Attributes/Mixin.php
         -
             messages:
                 - '#^Access to an undefined property App\\Support\\Mixins\\.*Mixin\:\:\$.*\.$#'
                 - '#^Call to protected method .*\(\) of class Illuminate\\.*\.$#'
                 - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
-                - '#^Method App\\Support\\Mixins\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
-                - '#^Undefined variable\: \$this$#'
-                - '#^PHPDoc tag @var with type .* is not subtype of native type .*\.$#'
                 - '#^Class App\\Support\\Mixins\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
+                - '#^Method App\\Support\\Mixins\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
+                - '#^PHPDoc tag @var with type .* is not subtype of native type .*\.$#'
+                - '#^Undefined variable\: \$this$#'
             path: app/Support/Mixins/

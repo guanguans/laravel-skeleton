@@ -137,9 +137,9 @@ composer var-dump-server                # 启动变量打印服务
 │   │   └── RateLimitedForJob.php
 │   └── SendThirdPartyRequestJob.php
 ├── Listeners
+│   ├── AuthSubscriber.php
 │   ├── CollectGarbageListener.php
 │   ├── ContextSubscriber.php
-│   ├── LogActivity.php
 │   ├── LogMailListener.php
 │   ├── MaintenanceModeDisabledNotificationListener.php
 │   ├── MaintenanceModeEnabledNotificationListener.php

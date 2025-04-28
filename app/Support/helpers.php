@@ -149,6 +149,7 @@ if (!\function_exists('deference')) {
             public function __destruct()
             {
                 while ($this->count() > 0) {
+                    /** @phpstan-ignore-next-line  */
                     ($this->pop())();
                 }
             }

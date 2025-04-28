@@ -56,6 +56,7 @@ final class Example extends BaseModel
     // use SoftDeletes;
     // use Sushi;
     // use ValidatingTrait;
+    use Notifiable;
 
     // protected static $unguarded = true;
     // protected $attributes = [];
@@ -78,10 +79,9 @@ final class Example extends BaseModel
         return parent::query();
     }
 
-    #[\Override]
     public function notifications(): MorphMany
     {
-        return parent::notifications();
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
     }
 
     #[\Override]

@@ -1,8 +1,0 @@
-# total 1 error
-
-parameters:
-    ignoreErrors:
-        -
-            message: '#^Property Illuminate\\Database\\Seeder\:\:\$command \(Illuminate\\Console\\Command\) in isset\(\) is not nullable\.$#'
-            count: 1
-            path: ../database/seeders/DatabaseSeeder.php

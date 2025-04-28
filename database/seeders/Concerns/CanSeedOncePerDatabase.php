@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Concerns;
 
+use Illuminate\Console\Command;
 use Illuminate\Console\View\Components\TwoColumnDetail;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ trait CanSeedOncePerDatabase
     public function callOncePerDatabase(string $class, bool $silent = false, array $parameters = []): void
     {
         if ($this->seederHasAlreadyBeenCalled($class)) {
-            if (false === $silent && isset($this->command)) {
+            if (false === $silent && $this->command instanceof Command) {
                 (new TwoColumnDetail($this->command->getOutput()))->render(
                     $class,
                     '<fg=gray>Seeder had already run on this database</> <fg=yellow;options=bold>SKIPPING</>'

@@ -34,7 +34,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 final class FindDumpStatementCommand extends Command
 {
-    protected $signature = <<<'EOD'
+    protected $signature = <<<'SIGNATURE'
         find:dump-statement
         {--dir=* : The directories to search for files}
         {--path=* : The paths to search for files}
@@ -44,7 +44,7 @@ final class FindDumpStatementCommand extends Command
         {--s|struct=* : The structs to search}
         {--f|func=* : The functions to search}
         {--M|memory-limit= : The memory limit to use for the PHP parser}
-        EOD;
+        SIGNATURE;
     protected $description = 'Find dump statements in PHP files.';
 
     /** @var array<string, list<string>> */
@@ -79,9 +79,6 @@ final class FindDumpStatementCommand extends Command
         return !$this->laravel->isProduction();
     }
 
-    /**
-     * @noinspection SensitiveParameterInspection
-     */
     public function handle(Timer $timer): int
     {
         $timer->start();
@@ -115,37 +112,7 @@ final class FindDumpStatementCommand extends Command
                 return;
             }
 
-            $findInfos[] = array_map(function (Node $dumpNode) use ($fileInfo, $odd): array {
-                if ($dumpNode instanceof Expression && $dumpNode->expr instanceof FuncCall && $dumpNode->expr->name instanceof Name) {
-                    $name = "<fg=cyan>{$dumpNode->expr->name->getFirst()}</>";
-                    $type = '<fg=cyan>func</>';
-                } else {
-                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(
-                        static fn (Stringable $name): string => "<fg=red>$name</>"
-                    );
-                    $type = '<fg=red>struct</>';
-                }
-
-                $file = Str::of($fileInfo->getRealPath())->replace(base_path().\DIRECTORY_SEPARATOR, '')->pipe(
-                    static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>"
-                );
-                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(
-                    static fn (Stringable $startLine): string => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>"
-                );
-                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(
-                    static fn (Stringable $formattedCode): string => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>"
-                );
-
-                return [
-                    'index' => null,
-                    'name' => $name,
-                    'type' => $type,
-                    'file' => $file,
-                    'start_line' => $startLine,
-                    'formatted_code' => $formattedCode,
-                ];
-            }, $dumpNodes);
-
+            $findInfos[] = $this->findInfo($fileInfo, $dumpNodes, (bool) $odd);
             $odd = !$odd;
         });
 
@@ -183,6 +150,53 @@ final class FindDumpStatementCommand extends Command
         $this->checkOptions();
         $this->initializeEnvs();
         $this->initializeProperties();
+    }
+
+    /**
+     * @return list<array>
+     */
+    private function findInfo(SplFileInfo $fileInfo, array $dumpNodes, bool $odd): array
+    {
+        return array_map(
+            function (Node $dumpNode) use ($fileInfo, $odd): array {
+                if (
+                    $dumpNode instanceof Expression
+                    && $dumpNode->expr instanceof FuncCall
+                    && $dumpNode->expr->name instanceof Name
+                ) {
+                    $name = "<fg=cyan>{$dumpNode->expr->name->getFirst()}</>";
+                    $type = '<fg=cyan>func</>';
+                } else {
+                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(
+                        static fn (Stringable $name): string => "<fg=red>$name</>"
+                    );
+                    $type = '<fg=red>struct</>';
+                }
+
+                $file = Str::of($fileInfo->getRealPath())->replace(base_path().\DIRECTORY_SEPARATOR, '')->pipe(
+                    static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>"
+                );
+                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(
+                    static fn (Stringable $startLine): string => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>"
+                );
+                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(
+                    static fn (
+                        #[\SensitiveParameter]
+                        Stringable $formattedCode
+                    ): string => $odd ? "<fg=green>$formattedCode</>" : "<fg=blue>$formattedCode</>"
+                );
+
+                return [
+                    'index' => null,
+                    'name' => $name,
+                    'type' => $type,
+                    'file' => $file,
+                    'start_line' => $startLine,
+                    'formatted_code' => $formattedCode,
+                ];
+            },
+            $dumpNodes
+        );
     }
 
     private function checkOptions(): void

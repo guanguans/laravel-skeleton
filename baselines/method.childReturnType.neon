@@ -1,8 +1,0 @@
-# total 1 error
-
-parameters:
-    ignoreErrors:
-        -
-            message: '#^Return type \(Illuminate\\Database\\Eloquent\\Relations\\MorphMany\<Illuminate\\Notifications\\DatabaseNotification, \$this\(App\\Models\\Example\)\>\) of method App\\Models\\Example\:\:notifications\(\) should be compatible with return type \(Illuminate\\Database\\Eloquent\\Relations\\MorphMany\<Illuminate\\Notifications\\DatabaseNotification, \$this\(App\\Models\\BaseModel\)\>\) of method App\\Models\\BaseModel\:\:notifications\(\)$#'
-            count: 1
-            path: ../app/Models/Example.php
