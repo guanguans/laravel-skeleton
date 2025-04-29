@@ -15,7 +15,7 @@
 <details>
 <summary>Composer scripts</summary>
 
-```script
+```shell
 composer ai-commit
 composer ai-commit-bito
 composer ai-commit-bito-no-verify
@@ -158,7 +158,6 @@ composer zh-lint
 <details>
 <summary>Packages</summary>
 
-<!--package-start-->
 * [aaronfrancis/fast-paginate](https://github.com/aarondfrancis/fast-paginate) - Fast paginate for Laravel
 * [aaronfrancis/flaky](https://github.com/aarondfrancis/flaky) - A Laravel package to elegantly handle flaky operations.
 * [ackintosh/ganesha](https://github.com/ackintosh/ganesha) - PHP implementation of Circuit Breaker pattern
@@ -372,14 +371,13 @@ composer zh-lint
 * [vcian/laravel-db-auditor](https://github.com/vcian/laravel-db-auditor) - Database DB Auditor provide leverage to audit your MySql,sqlite, PostgreSQL database standards and also provide options to add constraints in table.
 * [worksome/envy](https://github.com/worksome/envy) - Automatically keep your .env files in sync.
 * [yamadashy/phpstan-friendly-formatter](https://github.com/yamadashy/phpstan-friendly-formatter) - Simple error formatter for PHPStan that display code frame
-<!--package-end-->
 </details>
 
 <details>
 <summary>App tree</summary>
 
-```tree
-/Users/yaozm/Documents/wwwroot/laravel-skeleton/app
+```shell
+app
 ├── Casts
 │   ├── Base64Cast.php
 │   ├── CallbackGetCast.php

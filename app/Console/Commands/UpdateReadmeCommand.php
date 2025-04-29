@@ -34,9 +34,9 @@ final class UpdateReadmeCommand extends Command
      */
     public function handle(): void
     {
-        $this->updateScript();
-        $this->updatePackage();
-        $this->updateTree();
+        $this->updateComposerScripts();
+        $this->updatePackages();
+        $this->updateAppTree();
     }
 
     #[\Override]
@@ -50,9 +50,9 @@ final class UpdateReadmeCommand extends Command
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function updateScript(): void
+    private function updateComposerScripts(): void
     {
-        $scripts = $this->composerJsonCollection()
+        $composerScripts = $this->composerJsonCollection()
             ->pipe(static fn (Collection $collection): Collection => collect([
                 ...array_keys($collection->get('scripts', [])),
                 ...Arr::flatten($collection->get('scripts-aliases')),
@@ -65,32 +65,31 @@ final class UpdateReadmeCommand extends Command
             ->sort()
             ->implode(\PHP_EOL);
 
-        $this->replaceMatchesReadme(
-            /** @lang PhpRegExp */
-            '/```script\n.*\n```/sU',
-            <<<SCRIPT
-                ```script
-                $scripts
+        $this->replaceMatchesReadmeDetails(
+            'Composer scripts',
+            <<<COMPOSER_SCRIPTS
+                ```shell
+                $composerScripts
                 ```
-                SCRIPT
+                COMPOSER_SCRIPTS
         );
     }
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function updatePackage(): void
+    private function updatePackages(): void
     {
-        $packages = Process::run([
-            ...resolve(Composer::class)->findComposer(),
-            'show',
-            '--format=json',
-            '--direct',
-        ])
-            ->throw()
-            ->output();
-
-        $list = Collection::fromJson($packages)
+        $packages = Collection::fromJson(
+            Process::run([
+                ...resolve(Composer::class)->findComposer(),
+                'show',
+                '--format=json',
+                '--direct',
+            ])
+                ->throw()
+                ->output()
+        )
             ->collapse()
             ->sort(function (array $a, array $b): int {
                 $require = $this->composerJsonCollection()->get('require', []);
@@ -117,42 +116,48 @@ final class UpdateReadmeCommand extends Command
             ))
             ->implode(\PHP_EOL);
 
-        $this->replaceMatchesReadme(
-            /** @lang PhpRegExp */
-            '/<!--package-start-->\n.*\n<!--package-end-->/sU',
-            <<<PACKAGE
-                <!--package-start-->
-                $list
-                <!--package-end-->
-                PACKAGE
+        $this->replaceMatchesReadmeDetails(
+            'Packages',
+            <<<PACKAGES
+                $packages
+                PACKAGES
         );
     }
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function updateTree(): void
+    private function updateAppTree(): void
     {
-        $tree = Process::run(['tree', app_path()])->throw()->output();
+        $appTree = Process::path(base_path())->run(['tree', 'app'])->throw()->output();
 
-        $this->replaceMatchesReadme(
-            /** @lang PhpRegExp */
-            '/```tree\n.*\n```/sU',
-            <<<TREE
-                ```tree
-                $tree
+        $this->replaceMatchesReadmeDetails(
+            'App tree',
+            <<<APP_TREE
+                ```shell
+                $appTree
                 ```
-                TREE
+                APP_TREE
         );
     }
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function replaceMatchesReadme(array|string $pattern, array|\Closure|string $replace, int $limit = -1): void
+    private function replaceMatchesReadmeDetails(string $summary, string $details, int $limit = -1): void
     {
         str(File::get($readmePath = ($this->argument('path') ?? base_path('README.md'))))
-            ->replaceMatches($pattern, $replace, $limit)
+            ->replaceMatches(
+                "/<details>\\n<summary>$summary<\\/summary>\\n.*\\n<\\/details>/sU",
+                <<<DETAILS
+                    <details>
+                    <summary>$summary</summary>
+
+                    $details
+                    </details>
+                    DETAILS,
+                $limit
+            )
             ->tap(static fn (Stringable $readmeContent): bool|int => File::put($readmePath, $readmeContent));
     }
 
@@ -161,8 +166,8 @@ final class UpdateReadmeCommand extends Command
      */
     private function composerJsonCollection(): Collection
     {
-        static $composerJsonCollection;
+        static $collection;
 
-        return $composerJsonCollection ?? Collection::fromJson(File::get(base_path('composer.json')));
+        return $collection ?? Collection::fromJson(File::get(base_path('composer.json')));
     }
 }
