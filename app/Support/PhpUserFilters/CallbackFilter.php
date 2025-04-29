@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace App\Support\PhpUserFilters;
 
 /**
+ * @see https://github.com/clue/stream-filter
  * @see https://www.php.net/manual/zh/book.stream.php
  * @see https://www.php.net/manual/zh/class.php-user-filter.php
  */

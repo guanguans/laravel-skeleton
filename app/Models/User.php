@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 /** @noinspection ClassOverridesFieldOfSuperClassInspection */
 
 declare(strict_types=1);
@@ -25,12 +27,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Parental\HasChildren;
 use Watson\Validating\ValidatingTrait;
 
 #[ObservedBy(UserObserver::class)]
 #[UseFactory(UserFactory::class)]
 class User extends Authenticatable
 {
+    // use HasChildren;
     use HasApiTokens;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */

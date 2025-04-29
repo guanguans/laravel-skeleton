@@ -15,11 +15,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Parental\HasParent;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 final class JWTUser extends User implements JWTSubject
 {
-    protected $table = 'users';
+    use HasParent;
 
     public function getJWTIdentifier(): mixed
     {

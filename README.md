@@ -158,12 +158,12 @@ composer zh-lint
 <details>
 <summary>Packages</summary>
 
+* [24slides/laravel-saml2](https://github.com/24Slides/laravel-saml2) - SAML2 Service Provider integration to your Laravel 5.4+ application, based on OneLogin toolkit
 * [aaronfrancis/fast-paginate](https://github.com/aarondfrancis/fast-paginate) - Fast paginate for Laravel
 * [aaronfrancis/flaky](https://github.com/aarondfrancis/flaky) - A Laravel package to elegantly handle flaky operations.
 * [ackintosh/ganesha](https://github.com/ackintosh/ganesha) - PHP implementation of Circuit Breaker pattern
 * [akaunting/laravel-money](https://github.com/akaunting/laravel-money) - Currency formatting and conversion package for Laravel
 * [alexandre-daubois/monolog-processor-collection](https://github.com/alexandre-daubois/monolog-processor-collection) - A collection of Monolog processors
-* [anlutro/l4-settings](https://github.com/anlutro/laravel-settings) - Persistent settings in Laravel.
 * [arifhp86/laravel-clear-expired-cache-file](https://github.com/arifhp86/laravel-clear-expired-cache-file) - Remove laravel expired cache file/folder
 * [astrotomic/laravel-translatable](https://github.com/Astrotomic/laravel-translatable) - A Laravel package for multilingual models
 * [awobaz/compoships](https://github.com/topclaudy/compoships) - Laravel relationships with support for composite/multiple keys
@@ -173,50 +173,34 @@ composer zh-lint
 * [beyondcode/laravel-mailbox](https://github.com/beyondcode/laravel-mailbox) - Handle incoming emails in your Laravel application.
 * [biiiiiigmonster/hasin](https://github.com/biiiiiigmonster/hasin) - Laravel framework relation has in implement
 * [bramus/monolog-colored-line-formatter](https://github.com/bramus/monolog-colored-line-formatter) - Colored Line Formatter for Monolog
-* [cakephp/utility](https://github.com/cakephp/utility) - CakePHP Utility classes such as Inflector, String, Hash, and Security
 * [calebporzio/sushi](https://github.com/calebporzio/sushi) - Eloquent's missing "array" driver.
 * [cerbero/command-validator](https://github.com/cerbero90/command-validator) - Laravel package to validate the input of console commands.
 * [cerbero/enum](https://github.com/cerbero90/enum) - Zero-dependencies package to supercharge enum functionalities.
 * [christophrumpel/artisan-benchmark](https://github.com/christophrumpel/artisan-benchmark) - Benchmark Artisan Commands
 * [cknow/laravel-money](https://github.com/cknow/laravel-money) - Laravel Money
-* [creagia/laravel-web-mailer](https://github.com/creagia/laravel-web-mailer) - Laravel Web Mailer
 * [cweagans/composer-patches](https://github.com/cweagans/composer-patches) - Provides a way to patch Composer packages.
 * [dcblogdev/laravel-sent-emails](https://github.com/dcblogdev/laravel-sent-emails) - Store outgoing emails in Laravel
-* [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
 * [divineomega/password_exposed](https://github.com/DivineOmega/password_exposed/releases) - This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.
 * [dragon-code/laravel-data-dumper](https://github.com/TheDragonCode/laravel-data-dumper) - Adding data from certain tables when executing the `php artisan schema:dump` console command
-* [dragon-code/laravel-deploy-operations](https://github.com/TheDragonCode/laravel-actions) - Performing any actions during the deployment process
-* [dragon-code/laravel-http-logger](https://github.com/TheDragonCode/laravel-http-logger) - Logging incoming HTTP requests
 * [dragon-code/laravel-route-names](https://github.com/TheDragonCode/laravel-route-names) - Automatic generation of route names
-* [dragon-code/laravel-support](https://github.com/TheDragonCode/laravel-support) - Various helper files for the Laravel and Lumen frameworks
 * [dragon-code/support](https://github.com/TheDragonCode/support) - Support package is a collection of helpers and tools for any project.
 * [echolabsdev/prism](https://github.com/echolabsdev/prism) - A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
 * [elao/enum](https://github.com/Elao/PhpEnums) - Extended PHP enums capabilities and frameworks integrations
+* [elastic/ecs-logging](https://github.com/elastic/ecs-logging-php) - Format and enrich your log files in the elastic common schema
 * [elasticsearch/elasticsearch](https://github.com/elastic/elasticsearch-php) - PHP Client for Elasticsearch
 * [emreyarligan/enum-concern](https://github.com/emreyarligan/enum-concern) - A PHP package for effortless Enumeration handling with Laravel Collections 📦 ✨
-* [ergebnis/classy](https://github.com/ergebnis/classy) - Provides a finder for classy constructs (classes, enums, interfaces, and traits).
 * [genealabs/laravel-caffeine](https://github.com/mikebronner/laravel-caffeine) - Keeping Your Laravel Forms Awake
-* [glorand/laravel-model-settings](https://github.com/glorand/laravel-model-settings) - Model Settings for your Laravel app
 * [graham-campbell/result-type](https://github.com/GrahamCampbell/Result-Type) - An Implementation Of The Result Type
 * [guanguans/laravel-api-response](https://github.com/guanguans/laravel-api-response) - Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。
 * [guanguans/laravel-exception-notify](https://github.com/guanguans/laravel-exception-notify) - Monitor exception and report to the notification channels(Dump、Log、Mail、AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).
-* [guanguans/notify](https://github.com/guanguans/notify) - Push notification SDK(AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).
-* [guzzlehttp/guzzle](https://github.com/guzzle/guzzle) - Guzzle is a PHP HTTP client library
 * [hamidrezaniazi/pecs](https://github.com/hamidrezaniazi/pecs) - PHP ECS (Elastic Common Schema): Simplify logging with the power of elastic common schema.
-* [hashids/hashids](https://github.com/vinkla/hashids) - Generate short, unique, non-sequential ids (like YouTube and Bitly) from numbers
-* [haydenpierce/class-finder](git@gitlab.com:hpierce1102/ClassFinder.git) - A library that can provide of a list of classes in a given namespace
 * [huangdijia/laravel-horizon-restart](https://github.com/huangdijia/laravel-horizon-restart) - Horizon Restart for Laravel.
 * [inertiajs/inertia-laravel](https://github.com/inertiajs/inertia-laravel) - The Laravel adapter for Inertia.js.
-* [inspector-apm/inspector-laravel](https://github.com/inspector-apm/inspector-laravel) - Code Execution Monitoring, built for developers.
-* [izniburak/bit-permission](https://github.com/izniburak/bit-permission) - simple PHP bitwise control to check somethings like Permissions, Roles, etc.
 * [jasny/sso](https://github.com/jasny/sso) - Simple Single Sign-On
-* [jdavidbakr/laravel-cache-garbage-collector](https://github.com/jdavidbakr/laravel-cache-garbage-collector) - A script that will clean up expired cache files if the system is using the files cache system
 * [jenssegers/agent](https://github.com/jenssegers/agent) - Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect
 * [juliomotol/laravel-auth-timeout](https://github.com/juliomotol/laravel-auth-timeout) - Authentication Timeout for Laravel
-* [kcs/class-finder](https://github.com/alekitto/class-finder) - Utility classes to help discover other classes/namespaces
 * [kevinrob/guzzle-cache-middleware](https://github.com/Kevinrob/guzzle-cache-middleware) - A HTTP/1.1 Cache for Guzzle 6. It's a simple Middleware to be added in the HandlerStack. (RFC 7234)
 * [kirkbushell/eloquence](https://github.com/kirkbushell/eloquence) - A set of extensions adding additional functionality and consistency to Laravel's awesome Eloquent library.
-* [knuckleswtf/scribe](https://github.com/knuckleswtf/scribe) - Generate API documentation for humans from your Laravel codebase.✍
 * [laminas/laminas-diagnostics](https://github.com/laminas/laminas-diagnostics) - A set of components for performing diagnostic tests in PHP applications
 * [laracasts/presenter](https://github.com/laracasts/Presenter) - Simple view presenters
 * [laragear/cache-query](https://github.com/laragear/cache-query) - Remember your query results using only one method. Yes, only one.
@@ -225,26 +209,29 @@ composer zh-lint
 * [laragear/two-factor](https://github.com/Laragear/TwoFactor) - On-premises 2FA Authentication for out-of-the-box.
 * [laragear/webauthn](https://github.com/Laragear/WebAuthn) - Authenticate users with Passkeys: fingerprints, patterns and biometric data.
 * [laravel-frontend-presets/tall](https://github.com/laravel-frontend-presets/tall) - TALL preset for Laravel.
-* [laravel/folio](https://github.com/laravel/folio) - Page based routing for Laravel.
+* [laravel-notification-channels/discord](https://github.com/laravel-notification-channels/discord) - Laravel notification driver for Discord.
+* [laravel-notification-channels/telegram](https://github.com/laravel-notification-channels/telegram) - Telegram Notifications Channel for Laravel
 * [laravel/framework](https://github.com/laravel/framework) - The Laravel Framework.
+* [laravel/helpers](https://github.com/laravel/helpers) - Provides backwards compatibility for helpers in the latest Laravel release.
 * [laravel/octane](https://github.com/laravel/octane) - Supercharge your Laravel application's performance.
 * [laravel/pennant](https://github.com/laravel/pennant) - A simple, lightweight library for managing feature flags.
 * [laravel/pulse](https://github.com/laravel/pulse) - Laravel Pulse is a real-time application performance monitoring tool and dashboard for your Laravel application.
 * [laravel/reverb](https://github.com/laravel/reverb) - Laravel Reverb provides a real-time WebSocket communication backend for Laravel applications.
 * [laravel/sanctum](https://github.com/laravel/sanctum) - Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs.
+* [laravel/scout](https://github.com/laravel/scout) - Laravel Scout provides a driver based solution to searching your Eloquent models.
 * [laravel/tinker](https://github.com/laravel/tinker) - Powerful REPL for the Laravel framework.
 * [laravel/wayfinder](https://github.com/laravel/wayfinder) - Generate TypeScript representations of your Laravel actions and routes.
 * [laravolt/avatar](https://github.com/laravolt/avatar) - Turn name, email, and any other string into initial-based avatar or gravatar.
+* [leocavalcante/redact-sensitive](https://github.com/leocavalcante/redact-sensitive) - Monolog processor to protect sensitive information from logging
 * [leventcz/laravel-top](https://github.com/leventcz/laravel-top) - Real-time monitoring straight from the command line for Laravel applications.
-* [morrislaptop/laravel-popo-caster](https://github.com/morrislaptop/laravel-popo-caster) - Automatically cast JSON columns to rich PHP objects in Laravel using Symfony's Serializer
+* [mcamara/laravel-localization](https://github.com/mcamara/laravel-localization) - Easy localization for Laravel
 * [mpyw/laravel-cached-database-stickiness](https://github.com/mpyw/laravel-cached-database-stickiness) - Guarantee database stickiness over the same user's consecutive requests
 * [mtownsend/read-time](https://github.com/mtownsend5512/read-time) - A PHP package to show users how long it takes to read content.
 * [naoray/laravel-github-monolog](https://github.com/Naoray/laravel-github-monolog) - Log driver to store logs as github issues
 * [nette/utils](https://github.com/nette/utils) - 🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.
 * [nunomaduro/laravel-console-task](https://github.com/nunomaduro/laravel-console-task) - Laravel Console Task is a output method for your Laravel/Laravel Zero commands.
 * [nunomaduro/laravel-optimize-database](https://github.com/nunomaduro/laravel-optimize-database) - Publishes migrations that make your database production ready.
-* [nunomaduro/termwind](https://github.com/nunomaduro/termwind) - Its like Tailwind CSS, but for the console.
-* [nyholm/psr7](https://github.com/Nyholm/psr7) - A fast PHP7 implementation of PSR-7
+* [nwidart/laravel-modules](https://github.com/nWidart/laravel-modules) - Laravel Module management
 * [opcodesio/log-viewer](https://github.com/opcodesio/log-viewer) - Fast and easy-to-use log viewer for your Laravel application
 * [overtrue/laravel-uploader](https://github.com/overtrue/laravel-uploader) - An upload component for Laravel.
 * [perryvandermeer/laravel-console-validator](https://github.com/PerryvanderMeer/laravel-console-validator) - Validate arguments for Laravel commands
@@ -256,20 +243,22 @@ composer zh-lint
 * [pion/laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) - Service for chunked upload with several js providers
 * [prinsfrank/standards](https://github.com/PrinsFrank/standards) - A collection of standards as PHP Enums: ISO3166, ISO4217, ISO639...
 * [proengsoft/laravel-jsvalidation](https://github.com/proengsoft/laravel-jsvalidation) - Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest
-* [pusher/pusher-php-server](https://github.com/pusher/pusher-http-php) - Library for interacting with the Pusher REST API
-* [rakutentech/laravel-request-docs](https://github.com/rakutentech/laravel-request-docs) - Automatically generate Laravel docs from request rules, controllers and routes
 * [reinink/remember-query-strings](https://github.com/reinink/remember-query-strings) - Laravel middleware that automatically remembers and restores query strings.
 * [rennokki/laravel-eloquent-query-cache](https://github.com/renoki-co/laravel-eloquent-query-cache) - Adding cache on your Laravel Eloquent queries' results is now a breeze.
 * [robclancy/presenter](https://github.com/robclancy/presenter) - Decorate your objects using presenters. Primarily to keep presentation logic out of your models.
+* [ryangjchandler/bearer](https://github.com/ryangjchandler/bearer) - Minimalistic token-based authentication for Laravel API endpoints.
 * [ryangjchandler/orbit](https://github.com/ryangjchandler/orbit) - A flat-file database driver for Eloquent.
-* [sbamtr/laravel-query-enrich](https://github.com/SiavashBamshadnia/Laravel-Query-Enrich) - A helper for Laravel eloquent and query builder
+* [salsify/json-streaming-parser](https://github.com/salsify/jsonstreamingparser) - A streaming parser for JSON in PHP.
 * [skywarth/chaotic-schedule](https://github.com/skywarth/chaotic-schedule) - Randomize scheduled command execution time and date intervals
+* [socialiteproviders/weixin](https://github.com/SocialiteProviders/Weixin) - Weixin OAuth2 Provider for Laravel Socialite
+* [socialiteproviders/weixin-web](https://github.com/SocialiteProviders/Weixin-Web) - Weixin-Web OAuth2 Provider for Laravel Socialite
 * [spatie/fork](https://github.com/spatie/fork) - A lightweight solution for running code concurrently in PHP
 * [spatie/guzzle-rate-limiter-middleware](https://github.com/spatie/guzzle-rate-limiter-middleware) - A rate limiter for Guzzle
 * [spatie/invade](https://github.com/spatie/invade) - A PHP function to work with private properties and methods
 * [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) - A very simple activity logger to monitor the users of your website or application
 * [spatie/laravel-backup](https://github.com/spatie/laravel-backup) - A Laravel package to backup your application
 * [spatie/laravel-csp](https://github.com/spatie/laravel-csp) - Add CSP headers to the responses of a Laravel app
+* [spatie/laravel-data](https://github.com/spatie/laravel-data) - Create unified resources and data transfer objects
 * [spatie/laravel-failed-job-monitor](https://github.com/spatie/laravel-failed-job-monitor) - Get notified when a queued job fails
 * [spatie/laravel-health](https://github.com/spatie/laravel-health) - Monitor the health of a Laravel application
 * [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary) - Associate files with Eloquent models
@@ -283,21 +272,26 @@ composer zh-lint
 * [spatie/laravel-sitemap](https://github.com/spatie/laravel-sitemap) - Create and generate sitemaps with ease
 * [spatie/laravel-webhook-client](https://github.com/spatie/laravel-webhook-client) - Receive webhooks in Laravel apps
 * [spatie/packagist-api](https://github.com/spatie/packagist-api) - Fetch package info from Packagist
-* [spatie/php-structure-discoverer](https://github.com/spatie/php-structure-discoverer) - Automatically discover structures within your PHP application
-* [spatie/query-string](https://github.com/spatie/query-string) - Manipulate query strings
 * [sqids/sqids](https://github.com/sqids/sqids-php) - Generate short YouTube-looking IDs from numbers
 * [square1/laravel-idempotency](https://github.com/square1-io/laravel-idempotency) - Add idempotency to Laravel-based APIs, preventing duplicate request processing.
+* [staudenmeir/belongs-to-through](https://github.com/staudenmeir/belongs-to-through) - Laravel Eloquent BelongsToThrough relationships
+* [staudenmeir/eloquent-has-many-deep](https://github.com/staudenmeir/eloquent-has-many-deep) - Laravel Eloquent HasManyThrough relationships with unlimited levels
+* [staudenmeir/eloquent-json-relations](https://github.com/staudenmeir/eloquent-json-relations) - Laravel Eloquent relationships with JSON keys
 * [staudenmeir/laravel-adjacency-list](https://github.com/staudenmeir/laravel-adjacency-list) - Recursive Laravel Eloquent relationships with CTEs
+* [staudenmeir/laravel-cte](https://github.com/staudenmeir/laravel-cte/tree/v12.1) - Laravel queries with common table expressions
+* [staudenmeir/laravel-migration-views](https://github.com/staudenmeir/laravel-migration-views) - Laravel database migrations with SQL views
 * [stevebauman/location](https://github.com/stevebauman/location) - Retrieve a user's location by their IP Address
 * [swiss-devjoy/laravel-optimize-sqlite](https://github.com/Swiss-Devjoy/laravel-optimize-sqlite) - Optimize your SQLite database for production in Laravel
 * [symfony/polyfill-php84](https://github.com/symfony/polyfill-php84) - Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions
 * [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
+* [tightenco/parental](https://github.com/tighten/parental) - A simple eloquent trait that allows relationships to be accessed through child models.
 * [tightenco/ziggy](https://github.com/tighten/ziggy) - Use your Laravel named routes in JavaScript.
 * [tpetry/laravel-mysql-explain](https://github.com/tpetry/laravel-mysql-explain) - Get Visual MySQL EXPLAIN for Laravel.
 * [unicodeveloper/laravel-password](https://github.com/unicodeveloper/laravel-password) - Protect your users from entering dumb and common passwords
 * [utopia-php/system](https://github.com/utopia-php/system) - A simple library for obtaining information about the host's system.
 * [valorin/pwned-validator](https://github.com/valorin/pwned-validator) - Super simple Laravel Validator for checking password via the Pwned Passwords service of Have I Been Pwned
 * [vectorface/whip](https://github.com/Vectorface/whip) - A PHP class for retrieving accurate IP address information for the client.
+* [vinkla/hashids](https://github.com/vinkla/laravel-hashids) - A Hashids bridge for Laravel
 * [watson/validating](https://github.com/dwightwatson/validating) - Eloquent model validating trait.
 * [wendelladriel/laravel-validated-dto](https://github.com/WendellAdriel/laravel-validated-dto) - Data Transfer Objects with validation for Laravel applications
 * [wikimedia/composer-merge-plugin](https://github.com/wikimedia/composer-merge-plugin) - Composer plugin to merge multiple composer.json files
@@ -309,6 +303,7 @@ composer zh-lint
 * [buggregator/trap](https://github.com/buggregator/trap) - A simple and powerful tool for debugging PHP applications.
 * [carthage-software/mago](https://github.com/carthage-software/mago) - Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.
 * [composer/composer](https://github.com/composer/composer) - Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.
+* [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
 * [deployer/deployer](https://github.com/deployphp/deployer) - Deployment Tool
 * [dragon-code/benchmark](https://github.com/TheDragonCode/benchmark) - Simple comparison of code execution speed between different options
 * [dragon-code/pretty-routes](https://github.com/TheDragonCode/pretty-routes) - Pretty Routes for Laravel
@@ -325,6 +320,7 @@ composer zh-lint
 * [jasonmccreary/laravel-test-assertions](https://github.com/jasonmccreary/laravel-test-assertions) - A set of helpful assertions when testing Laravel applications.
 * [josezenem/laravel-make-migration-pivot](https://github.com/josezenem/laravel-make-migration-pivot) - Make Laravel pivot tables using the new Laravel 9 closure migrations.
 * [kitloong/laravel-migrations-generator](https://github.com/kitloong/laravel-migrations-generator) - Generates Laravel Migrations from an existing database
+* [knuckleswtf/scribe](https://github.com/knuckleswtf/scribe) - Generate API documentation for humans from your Laravel codebase.✍
 * [laracademy/generators](https://github.com/laracademy/generators) - This package will generate a Laravel Model based on your database table itself, filling in the required fields automatically.
 * [laracraft-tech/laravel-schema-rules](https://github.com/laracraft-tech/laravel-schema-rules) - Automatically generate Laravel validation rules based on your database table schema!
 * [larastan/larastan](https://github.com/larastan/larastan) - Larastan - Discover bugs in your code without running it. A phpstan/phpstan extension for Laravel
@@ -347,6 +343,7 @@ composer zh-lint
 * [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules) - PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.
 * [phpstan/phpstan-webmozart-assert](https://github.com/phpstan/phpstan-webmozart-assert) - PHPStan webmozart/assert extension
 * [povils/phpmnd](https://github.com/povils/phpmnd) - A tool to detect Magic numbers in codebase
+* [rakutentech/laravel-request-docs](https://github.com/rakutentech/laravel-request-docs) - Automatically generate Laravel docs from request rules, controllers and routes
 * [rector/rector](https://github.com/rectorphp/rector) - Instant Upgrade and Automated Refactoring of any PHP code
 * [rector/swiss-knife](https://github.com/rectorphp/swiss-knife) - Swiss knife in pocket of every upgrade architect
 * [rector/type-perfect](https://github.com/rectorphp/type-perfect) - Next level type declaration checks
@@ -393,6 +390,7 @@ app
 │       ├── Command.php
 │       ├── Concerns
 │       │   ├── AskForPassword.php
+│       │   ├── Graceful.php
 │       │   └── Rescuer.php
 │       ├── FindDumpStatementCommand.php
 │       ├── FindStaticMethodsCommand.php
@@ -686,7 +684,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-55 directories, 253 files
+55 directories, 254 files
 
 ```
 </details>

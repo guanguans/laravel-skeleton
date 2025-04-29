@@ -17,6 +17,7 @@ namespace App\Models;
 
 use App\Models\Concerns\HasSchemalessAttributes;
 use App\Models\Concerns\SerializeDate;
+use Eloquence\Behaviours\HasCamelCasing;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,9 +26,11 @@ use Watson\Validating\ValidatingTrait;
 /**
  * @see https://github.com/LaravelDaily/laravel-tips
  * @see https://github.com/OussamaMater/Laravel-Tips
+ * @see https://github.com/kirkbushell/eloquence
  */
 class BaseModel extends Model
 {
+    use HasCamelCasing;
     use HasFactory;
     use HasSchemalessAttributes;
     use SerializeDate;

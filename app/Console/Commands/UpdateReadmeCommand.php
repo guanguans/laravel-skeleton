@@ -21,6 +21,7 @@ use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Stringable;
+use Symfony\Component\Process\ExecutableFinder;
 
 final class UpdateReadmeCommand extends Command
 {
@@ -37,6 +38,16 @@ final class UpdateReadmeCommand extends Command
         $this->updateComposerScripts();
         $this->updatePackages();
         $this->updateAppTree();
+
+        Process::run(
+            [
+                (new ExecutableFinder)->find('git', 'git'),
+                'diff',
+                '--color',
+                $this->readmePath(),
+            ],
+            fn (string $type, string $line): null => $this->output->write($line)
+        )->throw();
     }
 
     #[\Override]
@@ -82,7 +93,7 @@ final class UpdateReadmeCommand extends Command
     {
         $packages = Collection::fromJson(
             Process::run([
-                ...resolve(Composer::class)->findComposer(),
+                ...resolve(Composer::class)->findComposer((new ExecutableFinder)->find('composer')),
                 'show',
                 '--format=json',
                 '--direct',
@@ -116,6 +127,11 @@ final class UpdateReadmeCommand extends Command
             ))
             ->implode(\PHP_EOL);
 
+        // 防止异常情况导致清空
+        if (blank($packages)) {
+            return;
+        }
+
         $this->replaceMatchesReadmeDetails(
             'Packages',
             <<<PACKAGES
@@ -129,7 +145,10 @@ final class UpdateReadmeCommand extends Command
      */
     private function updateAppTree(): void
     {
-        $appTree = Process::path(base_path())->run(['tree', 'app'])->throw()->output();
+        $appTree = Process::path(base_path())
+            ->run([(new ExecutableFinder)->find('tree', 'tree'), 'app'])
+            ->throw()
+            ->output();
 
         $this->replaceMatchesReadmeDetails(
             'App tree',
@@ -146,7 +165,7 @@ final class UpdateReadmeCommand extends Command
      */
     private function replaceMatchesReadmeDetails(string $summary, string $details, int $limit = -1): void
     {
-        str(File::get($readmePath = ($this->argument('path') ?? base_path('README.md'))))
+        str(File::get($readmePath = $this->readmePath()))
             ->replaceMatches(
                 "/<details>\\n<summary>$summary<\\/summary>\\n.*\\n<\\/details>/sU",
                 <<<DETAILS
@@ -169,5 +188,10 @@ final class UpdateReadmeCommand extends Command
         static $collection;
 
         return $collection ?? Collection::fromJson(File::get(base_path('composer.json')));
+    }
+
+    private function readmePath(): string
+    {
+        return $this->argument('path') ?? base_path('README.md');
     }
 }

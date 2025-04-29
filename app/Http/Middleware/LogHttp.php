@@ -26,6 +26,9 @@ use Illuminate\Support\Str;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
+/**
+ * @see https://github.com/TheDragonCode/laravel-http-logger
+ */
 final class LogHttp
 {
     use WithPipeArgs;
@@ -41,6 +44,7 @@ final class LogHttp
         'set-cookie',
         'token',
         'x-xsrf-token',
+        'access_token',
     ];
 
     /** @var list<string> */
@@ -49,6 +53,7 @@ final class LogHttp
         '*password*',
         'password',
         'password*',
+        'password_confirmation',
     ];
     private Logger $logger;
     private string $level;

@@ -14,23 +14,26 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Console\Prohibitable;
 use Illuminate\Contracts\Console\Isolatable;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 
 final class ClearAllCommand extends Command implements Isolatable, PromptsForMissingInput
 {
+    use ConfirmableTrait;
     use Prohibitable;
     protected $signature = 'clear:all {--f|force : Force clear optimized.}';
     protected $aliases = ['ca'];
     protected $description = 'clear optimized all.';
 
-    public function handle(): void
+    public function handle(): int
     {
-        if (!$this->option('force') && $this->getLaravel()->isProduction()) {
-            $this->output->warning('⚠️ Please use --force option in production.');
-
-            return;
+        /**
+         * @see \Illuminate\Database\Console\Migrations\RefreshCommand
+         */
+        if (/* $this->isProhibited() || */ !$this->confirmToProceed()) {
+            return self::FAILURE;
         }
 
         $this->output->info('⏳ Clearing all...');
@@ -56,6 +59,8 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
         //     $this->shouldKeepRunning = false;
         //     dump($signal);
         // });
+
+        return self::SUCCESS;
     }
 
     /**

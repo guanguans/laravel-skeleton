@@ -42,7 +42,6 @@
         <env name="APP_BASE_PATH" value="./"/>
         <env name="AUTH_GUARD" value="api"/>
         <env name="AUTH_PASSWORD_BROKER" value="jwtUsers"/>
-        <!--<env name="HTTP_LOG_ENABLED" value="false"/>-->
         <env name="JWT_PRIVATE_KEY" value="file://storage/certs/jwt-rsa-4096-private.pem"/>
         <env name="JWT_PUBLIC_KEY" value="file://storage/certs/jwt-rsa-4096-public.pem"/>
         <env name="PUSHDEER_KEY" value="PDU3062THLWPFpHEmFQrKhFp9Tlz9q0qE9Nfz"/>

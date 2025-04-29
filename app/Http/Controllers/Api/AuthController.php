@@ -121,8 +121,7 @@ final class AuthController extends Controller
             return $this->apiResponse()->forbidden();
         }
 
-        /** @noinspection PhpParamsInspection */
-        return $this->apiResponse()->success(JWTUser::wrapToken(auth()->refresh()));
+        return $this->apiResponse()->success(JWTUser::wrapToken(Auth::guard()->refresh()));
     }
 
     public function logout(): JsonResponse

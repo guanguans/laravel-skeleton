@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Cake\Utility\Inflector;
-use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Pluralizer;
 use Illuminate\Support\Str;
@@ -22,14 +20,14 @@ use Symfony\Component\String\Inflector\EnglishInflector;
 
 final class InflectorCommand extends Command
 {
-    protected $signature = 'inflector';
+    protected $signature = 'inflector {phrase? : The word or phrase to be inflected}';
     protected $description = 'Inflector pluralizes and singularizes English nouns.';
 
     public function handle(): void
     {
         collect()
             ->pipe(function () {
-                while (true) {
+                while (blank($phrase = $this->argument('phrase'))) {
                     if (filled($phrase = $this->ask('Please enter a phrase to inflect.'))) {
                         break;
                     }
@@ -43,15 +41,6 @@ final class InflectorCommand extends Command
                         'Laravel:singular',
                         'Symfony:pluralize',
                         'Symfony:singularize',
-                        'CakePHP:pluralize',
-                        'CakePHP:singularize',
-                        'CakePHP:camelize',
-                        'CakePHP:variable',
-                        'CakePHP:classify',
-                        'CakePHP:tableize',
-                        'CakePHP:underscore',
-                        'CakePHP:dasherize',
-                        'CakePHP:humanize',
                     ],
                     'all'
                 );
@@ -69,7 +58,6 @@ final class InflectorCommand extends Command
                                                 [
                                                     'Laravel' => Pluralizer::class,
                                                     'Symfony' => EnglishInflector::class,
-                                                    'CakePHP' => Inflector::class,
                                                 ][$parts->first()]
                                             ),
                                             $parts->last(),
@@ -86,5 +74,13 @@ final class InflectorCommand extends Command
             ->tap(function (Collection $results): void {
                 $this->table(['Type', 'Result'], $results->toArray());
             });
+    }
+
+    #[\Override]
+    protected function rules(): array
+    {
+        return [
+            'phrase' => 'nullable|filled',
+        ];
     }
 }

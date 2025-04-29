@@ -16,6 +16,8 @@ namespace App\Support;
 use App\Support\Contracts\BitEncoderContract;
 
 /**
+ * @see https://github.com/izniburak/bit-permission
+ *
  * 主要用来处理数据库多个值单字段储存问题。
  *
  * ```php

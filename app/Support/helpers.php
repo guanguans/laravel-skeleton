@@ -79,6 +79,10 @@ if (!\function_exists('env_json_decode')) {
 
 if (!\function_exists('classes')) {
     /**
+     * @see https://github.com/alekitto/class-finder
+     * @see https://github.com/ergebnis/classy
+     * @see https://gitlab.com/hpierce1102/ClassFinder
+     * @see https://packagist.org/packages/haydenpierce/class-finder
      * @see \get_declared_classes()
      * @see \get_declared_interfaces()
      * @see \get_declared_traits()

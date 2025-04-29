@@ -19,6 +19,10 @@ namespace App\Models;
 use App\Models\Concerns\Pipeable;
 use App\Models\Concerns\SerializeDate;
 use Awobaz\Compoships\Compoships;
+use Eloquence\Behaviours\CountCache\HasCounts;
+use Eloquence\Behaviours\HasCamelCasing;
+use Eloquence\Behaviours\HasSlugs;
+use Eloquence\Behaviours\SumCache\HasSums;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -32,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Traits\Macroable;
+use Kleemans\AttributeEvents;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 use Sushi\Sushi;
 use Watson\Validating\ValidatingTrait;
@@ -39,11 +44,17 @@ use Watson\Validating\ValidatingTrait;
 /**
  * @see https://github.com/LaravelDaily/laravel-tips
  * @see https://github.com/OussamaMater/Laravel-Tips
+ * @see https://github.com/kirkbushell/eloquence
  */
 final class Example extends BaseModel
 {
+    // use AttributeEvents;
     // use Compoships;
+    // use HasCamelCasing;
+    // use HasCounts;
     // use HasFactory;
+    // use HasSlugs;
+    // use HasSums;
     // use HasUlids;
     // use HasUuids;
     // use Macroable;

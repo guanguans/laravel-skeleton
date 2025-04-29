@@ -19,7 +19,6 @@ namespace App\Support\Mixins;
 use App\Support\Attributes\Mixin;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
 
@@ -91,7 +90,11 @@ final class SchedulingEventMixin
                                 return $commands[array_search("'artisan'", $commands, true) + 1];
                             }
 
-                            throw_if(empty($this->description), \LogicException::class, "Please incoming the \$filename parameter, Or use the 'name' method before 'userAppendOutputTo'.");
+                            throw_if(
+                                empty($this->description),
+                                \LogicException::class,
+                                "Please incoming the \$filename parameter, Or use the 'name' method before 'userAppendOutputTo'."
+                            );
 
                             // exec|call|job
                             return $this->description;
@@ -131,15 +134,7 @@ final class SchedulingEventMixin
 
             return $this
                 ->before(static function () use ($outputPath): void {
-                    $singleLogPath = config('logging.channels.single.path');
-
-                    Config::set('logging.channels.single.path', $outputPath);
-                    Log::forgetChannel('single');
-
-                    Log::channel('single')->info('>>>>>>>>');
-
-                    Config::set('logging.channels.single.path', $singleLogPath);
-                    Log::forgetChannel('single');
+                    Log::build(['path' => $outputPath] + config('logging.channels.single'))->info('>>>>>>>>');
                 })
                 ->appendOutputTo($outputPath);
         };

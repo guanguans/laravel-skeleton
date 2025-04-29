@@ -77,6 +77,10 @@ it('is console', function (): void {
         ->keys()
         // ->dd()
         ->each(function (string $class): void {
-            $this->artisan($class)->assertOk();
+            $this->artisan($class, [
+                '--no-interaction' => true,
+                // '--quiet' => true,
+                // '--silent' => true,
+            ])->assertOk();
         });
 })->group(__DIR__, __FILE__);
