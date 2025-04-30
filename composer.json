@@ -37,7 +37,7 @@
         "dragon-code/laravel-data-dumper": "^1.4",
         "dragon-code/laravel-route-names": "^1.6",
         "dragon-code/support": "^6.16",
-        "echolabsdev/prism": "^0.46",
+        "echolabsdev/prism": "^0.65",
         "elao/enum": "^2.5",
         "elastic/ecs-logging": "^2.0",
         "elasticsearch/elasticsearch": "^8.17 || ^9.0",
