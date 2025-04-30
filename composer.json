@@ -97,7 +97,7 @@
         "phiki/phiki": "^1.1",
         "php-ds/php-ds": "^1.5",
         "php-open-source-saver/jwt-auth": "^2.8",
-        "php-static-analysis/attributes": "^0.2",
+        "php-static-analysis/attributes": "^0.4",
         "phpyh/lru-memoizer": "^0.2",
         "pion/laravel-chunk-upload": "^1.5",
         "prinsfrank/standards": "^3.12",
