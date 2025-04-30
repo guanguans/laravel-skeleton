@@ -212,7 +212,7 @@
         "shipmonk/composer-dependency-analyser": "^1.8",
         "shipmonk/phpstan-baseline-per-identifier": "^2.1",
         "soloterm/dumps": "^1.0",
-        "soloterm/solo": "^0.4",
+        "soloterm/solo": "^0.5",
         "spatie/laravel-error-solutions": "^1.0",
         "spatie/laravel-horizon-watcher": "^1.1",
         "spatie/laravel-ignition": "^2.9",
