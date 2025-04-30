@@ -8477,16 +8477,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.10.2",
+            "version": "v12.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0f123cc857bc177abe4d417448d4f7164f71802a"
+                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0f123cc857bc177abe4d417448d4f7164f71802a",
-                "reference": "0f123cc857bc177abe4d417448d4f7164f71802a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/bd0d62bd9c5196728e428cd695d89ec8640daac1",
+                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1",
                 "shasum": ""
             },
             "require": {
@@ -8688,7 +8688,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-04-24T14:11:20+00:00"
+            "time": "2025-04-30T13:48:39+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -36855,6 +36855,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
