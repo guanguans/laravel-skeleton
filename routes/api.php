@@ -34,7 +34,6 @@ Route::group([
     'namespace' => '\App\Http\Controllers\Api',
     'prefix' => 'v1',
     'middleware' => [
-        'api',
         // VerifySignature::with(config('services.signer.default.secret')),
         LogHttp::with('daily'),
     ],

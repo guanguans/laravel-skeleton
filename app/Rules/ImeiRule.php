@@ -17,10 +17,12 @@ use Illuminate\Support\Str;
 
 final class ImeiRule extends Rule
 {
+    private const int LENGTH = 15;
+
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        if (\strlen($value) !== 15 || !ctype_digit($value)) {
+        if (\strlen($value) !== self::LENGTH || !ctype_digit($value)) {
             return false;
         }
 

@@ -348,12 +348,12 @@ final class HealthCheckCommand extends Command
         return $this->createSuccessResult();
     }
 
-    private function checkDiskSpace(): Result
+    private function checkDiskSpace(int $limit = 100): Result
     {
         $freeSpace = disk_free_space(base_path());
         $diskSpace = \sprintf('%.1f', $freeSpace / (1024 * 1024));
 
-        if (100 > $diskSpace) {
+        if ($limit > $diskSpace) {
             return Error::create("The disk space is less than 100MB: `$diskSpace`.");
         }
 

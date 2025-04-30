@@ -37,7 +37,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
         \KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
         // \Ladumor\LaravelPwa\PWAServiceProvider::class,
         // \Lanin\Laravel\ApiDebugger\ServiceProvider::class,
-        \Laracademy\Generators\GeneratorsServiceProvider::class,
+        // \Laracademy\Generators\GeneratorsServiceProvider::class,
         \LaracraftTech\LaravelSchemaRules\LaravelSchemaRulesServiceProvider::class,
         // \LaraDumps\LaraDumps\LaraDumpsServiceProvider::class,
         \Laravel\Sail\SailServiceProvider::class,

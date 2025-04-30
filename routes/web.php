@@ -19,10 +19,8 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use Illuminate\Foundation\Events\DiagnosingHealth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -44,12 +42,6 @@ Route::get('/', static fn () => view('welcome'));
 Route::fallback(static fn () => abort(404));
 
 LaravelUploader::routes();
-
-Route::middleware('web')->get('up', static function () {
-    Event::dispatch(new DiagnosingHealth);
-
-    return View::file(base_path('vendor/laravel/framework/src/Illuminate/Foundation/resources/health-up.blade.php'));
-});
 
 /**
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet

@@ -31,12 +31,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\View\View;
 use Stillat\BladeDirectives\Support\Facades\Directive;
+use Symfony\Component\HttpFoundation\Response;
 
 final class ViewServiceProvider extends ServiceProvider
 {
     use Conditionable {
         Conditionable::when as whenever;
     }
+    private const int HTTP_STATUS_CODE_LIMIT = 600;
 
     /**
      * @see https://github.com/laravel/framework/issues/3022
@@ -56,7 +58,7 @@ final class ViewServiceProvider extends ServiceProvider
                  */
                 sscanf($event, 'creating: errors.%d', $statusCode);
 
-                if (400 <= $statusCode && 600 > $statusCode) {
+                if (Response::HTTP_BAD_REQUEST <= $statusCode && self::HTTP_STATUS_CODE_LIMIT > $statusCode) {
                     (new RegisterErrorViewPaths)();
                 }
             });

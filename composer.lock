@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23d6055a7ba896a2394e52730e82a45f",
+    "content-hash": "22f3bb044385cec977a56dfb36b8979a",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -403,6 +403,161 @@
                 "source": "https://github.com/alexandre-daubois/monolog-processor-collection/tree/1.3.2"
             },
             "time": "2023-12-23T17:55:38+00:00"
+        },
+        {
+            "name": "algolia/algoliasearch-client-php",
+            "version": "3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/algoliasearch-client-php.git",
+                "reference": "7505959737f7944507be7ef476752ad761873c4a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/7505959737f7944507be7ef476752ad761873c4a",
+                "reference": "7505959737f7944507be7ef476752ad761873c4a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^7.3 || ^8.0",
+                "psr/http-message": "^1.1 || ^2.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "fzaninotto/faker": "^1.8",
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "symfony/yaml": "^2.0 || ^4.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package"
+            },
+            "bin": [
+                "bin/algolia-doctor"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.0": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Http/Psr7/functions.php",
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Algolia\\AlgoliaSearch\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Algolia Team",
+                    "email": "contact@algolia.com"
+                }
+            ],
+            "description": "Algolia Search API Client for PHP",
+            "keywords": [
+                "algolia",
+                "api",
+                "client",
+                "php",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/3.4.2"
+            },
+            "time": "2025-01-22T11:13:54+00:00"
+        },
+        {
+            "name": "algolia/scout-extended",
+            "version": "v3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/scout-extended.git",
+                "reference": "f772f719f5b85670461195824c28f9530137bb28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/scout-extended/zipball/f772f719f5b85670461195824c28f9530137bb28",
+                "reference": "f772f719f5b85670461195824c28f9530137bb28",
+                "shasum": ""
+            },
+            "require": {
+                "algolia/algoliasearch-client-php": "^3.0.0",
+                "ext-json": "*",
+                "illuminate/console": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/database": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/filesystem": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+                "laravel/scout": "^9.0|^10.0",
+                "php": "^8.0",
+                "riimu/kit-phpencoder": "^2.4"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.13",
+                "larastan/larastan": "^1.0|^2.0|^3.0",
+                "laravel/legacy-factories": "^1.1",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^4.9|^5.9|^6.6|^7.0|^8.0|^9.0|^10.0",
+                "phpstan/phpstan": "^1.3|^2.1",
+                "phpunit/phpunit": "^8.0|^9.0|^10.5|^11.5.3"
+            },
+            "suggest": {
+                "ext-dom": "Required to use the HTML Splitter."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Algolia\\ScoutExtended\\ScoutExtendedServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Algolia\\ScoutExtended\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                },
+                {
+                    "name": "Algolia Team",
+                    "email": "contact@algolia.com"
+                }
+            ],
+            "description": "Scout Extended extends Laravel Scout adding algolia-specific features",
+            "keywords": [
+                "algolia",
+                "analytics",
+                "extended",
+                "laravel",
+                "places",
+                "scout",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/algolia/scout-extended/issues",
+                "source": "https://github.com/algolia/scout-extended/tree/v3.2.1"
+            },
+            "time": "2025-04-16T09:34:44+00:00"
         },
         {
             "name": "amphp/amp",
@@ -6429,6 +6584,65 @@
             "time": "2023-02-23T15:00:54+00:00"
         },
         {
+            "name": "hosmelq/laravel-pulse-schedule",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hosmelq/laravel-pulse-schedule.git",
+                "reference": "33a566003715027a421fe29aa0766568cd36362b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hosmelq/laravel-pulse-schedule/zipball/33a566003715027a421fe29aa0766568cd36362b",
+                "reference": "33a566003715027a421fe29aa0766568cd36362b",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^10.48.4|^11.0.8|^12.0",
+                "laravel/pulse": "^1.4",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "HosmelQ\\Laravel\\Pulse\\Schedule\\ScheduleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "HosmelQ\\Laravel\\Pulse\\Schedule\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hosmel Quintana",
+                    "email": "hosmelq@gmail.com"
+                }
+            ],
+            "description": "Laravel Pulse card that list all scheduled tasks.",
+            "keywords": [
+                "hosmelq",
+                "laravel",
+                "laravel-pulse",
+                "laravel-pulse-schedule",
+                "pulse"
+            ],
+            "support": {
+                "issues": "https://github.com/hosmelq/laravel-pulse-schedule/issues",
+                "source": "https://github.com/hosmelq/laravel-pulse-schedule/tree/v1.0.0"
+            },
+            "time": "2025-02-15T19:56:16+00:00"
+        },
+        {
             "name": "huangdijia/laravel-horizon-restart",
             "version": "v3.1.0",
             "source": {
@@ -10512,6 +10726,65 @@
                 }
             ],
             "time": "2024-02-02T10:51:56+00:00"
+        },
+        {
+            "name": "maantje/pulse-database",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maantje/pulse-database.git",
+                "reference": "a3f3205dcfc197aae7413f0cff0e79293ae3a2ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maantje/pulse-database/zipball/a3f3205dcfc197aae7413f0cff0e79293ae3a2ea",
+                "reference": "a3f3205dcfc197aae7413f0cff0e79293ae3a2ea",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "laravel/pulse": "^1",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5.0",
+                "orchestra/testbench": "^8",
+                "phpunit/phpunit": "^10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Maantje\\Pulse\\Database\\DatabaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Maantje\\Pulse\\Database\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jamie Schouten",
+                    "email": "j4mie@hey.com"
+                }
+            ],
+            "description": "A Laravel Pulse card for database status",
+            "keywords": [
+                "database",
+                "database-status",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/maantje/pulse-database/issues",
+                "source": "https://github.com/maantje/pulse-database/tree/v0.3.0"
+            },
+            "time": "2025-03-01T19:54:56+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -16040,6 +16313,55 @@
                 "source": "https://github.com/revoltphp/event-loop/tree/v1.0.7"
             },
             "time": "2025-01-25T19:27:39+00:00"
+        },
+        {
+            "name": "riimu/kit-phpencoder",
+            "version": "v2.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Riimu/Kit-PHPEncoder.git",
+                "reference": "72ff7825de193b272e17b228394819dbfc638e72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Riimu/Kit-PHPEncoder/zipball/72ff7825de193b272e17b228394819dbfc638e72",
+                "reference": "72ff7825de193b272e17b228394819dbfc638e72",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Riimu\\Kit\\PHPEncoder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Riikka Kalliomäki",
+                    "email": "riikka.kalliomaki@gmail.com",
+                    "homepage": "http://riimu.net"
+                }
+            ],
+            "description": "Highly customizable alternative to var_export for PHP code generation",
+            "homepage": "http://kit.riimu.net",
+            "keywords": [
+                "code",
+                "encoder",
+                "export",
+                "generator",
+                "variable"
+            ],
+            "support": {
+                "issues": "https://github.com/Riimu/Kit-PHPEncoder/issues",
+                "source": "https://github.com/Riimu/Kit-PHPEncoder/tree/v2.4.2"
+            },
+            "time": "2022-12-10T18:12:25+00:00"
         },
         {
             "name": "robclancy/presenter",
@@ -24894,59 +25216,6 @@
             "time": "2025-04-16T14:19:54+00:00"
         },
         {
-            "name": "carthage-software/mago",
-            "version": "0.16.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/carthage-software/mago.git",
-                "reference": "10b8a37ed15e0148ac963f6ec2c56e89e94e6ee4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/carthage-software/mago/zipball/10b8a37ed15e0148ac963f6ec2c56e89e94e6ee4",
-                "reference": "10b8a37ed15e0148ac963f6ec2c56e89e94e6ee4",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^2.6",
-                "php": "~8.1 || ~8.2 || ~8.3 || ~8.4"
-            },
-            "require-dev": {
-                "composer/composer": "^2.8"
-            },
-            "bin": [
-                "composer/bin/mago"
-            ],
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Mago\\MagoPlugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "Mago\\": "composer/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT OR Apache-2.0"
-            ],
-            "description": "Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.",
-            "keywords": [
-                "dev"
-            ],
-            "support": {
-                "issues": "https://github.com/carthage-software/mago/issues",
-                "source": "https://github.com/carthage-software/mago/tree/0.16.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/azjezz",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-04T09:06:18+00:00"
-        },
-        {
             "name": "clue/ndjson-react",
             "version": "v1.3.0",
             "source": {
@@ -28454,57 +28723,6 @@
                 "source": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/tree/v3.24.0"
             },
             "time": "2025-03-22T16:51:39+00:00"
-        },
-        {
-            "name": "laracademy/generators",
-            "version": "3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laracademy/generators.git",
-                "reference": "69010c4257ea190638978ef60674b44b318fe16d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laracademy/generators/zipball/69010c4257ea190638978ef60674b44b318fe16d",
-                "reference": "69010c4257ea190638978ef60674b44b318fe16d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.4"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laracademy\\Generators\\GeneratorsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laracademy\\Generators\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael McMullen",
-                    "email": "michael@laracademy.co"
-                }
-            ],
-            "description": "This package will generate a Laravel Model based on your database table itself, filling in the required fields automatically.",
-            "keywords": [
-                "generators",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/laracademy/generators/issues",
-                "source": "https://github.com/laracademy/generators/tree/3.7"
-            },
-            "time": "2023-10-21T03:09:07+00:00"
         },
         {
             "name": "laracraft-tech/laravel-schema-rules",
@@ -34547,6 +34765,66 @@
             "time": "2025-02-14T12:29:50+00:00"
         },
         {
+            "name": "spatie/file-system-watcher",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/file-system-watcher.git",
+                "reference": "d9511ecbd266f190c4abce88516c3f231fcb6bfe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/file-system-watcher/zipball/d9511ecbd266f190c4abce88516c3f231fcb6bfe",
+                "reference": "d9511ecbd266f190c4abce88516c3f231fcb6bfe",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "symfony/process": "^5.2|^6.0|^7.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5",
+                "spatie/ray": "^1.22",
+                "spatie/temporary-directory": "^2.0",
+                "vimeo/psalm": "^4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Watcher\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Watch changes in the file system using PHP",
+            "homepage": "https://github.com/spatie/file-system-watcher",
+            "keywords": [
+                "file-system-watcher",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/file-system-watcher/issues",
+                "source": "https://github.com/spatie/file-system-watcher/tree/1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-12-18T14:26:25+00:00"
+        },
+        {
             "name": "spatie/flare-client-php",
             "version": "1.10.1",
             "source": {
@@ -34779,6 +35057,76 @@
                 }
             ],
             "time": "2025-03-08T07:42:43+00:00"
+        },
+        {
+            "name": "spatie/laravel-horizon-watcher",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-horizon-watcher.git",
+                "reference": "cbebdaab800f9fd1bbb446223502466170d09363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-horizon-watcher/zipball/cbebdaab800f9fd1bbb446223502466170d09363",
+                "reference": "cbebdaab800f9fd1bbb446223502466170d09363",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.1",
+                "spatie/file-system-watcher": "^1.1.1",
+                "spatie/laravel-package-tools": "^1.13.6"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.2",
+                "nunomaduro/collision": "^6.3.1|^8.0",
+                "orchestra/testbench": "^7.11|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.22.1|^2.34|^3.7",
+                "pestphp/pest-plugin-laravel": "^1.3|^2.3|^3.1",
+                "phpunit/phpunit": "^9.5.26|^10.5|^11.5.3",
+                "spatie/laravel-ray": "^1.31"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "HorizonWatcher": "Spatie\\HorizonWatcher\\Facades\\HorizonWatcher"
+                    },
+                    "providers": [
+                        "Spatie\\HorizonWatcher\\HorizonWatcherServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\HorizonWatcher\\": "src",
+                    "Spatie\\HorizonWatcher\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Automatically restart Horizon when local PHP files change",
+            "homepage": "https://github.com/spatie/laravel-horizon-watcher",
+            "keywords": [
+                "laravel",
+                "laravel-horizon-watcher",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-horizon-watcher/issues",
+                "source": "https://github.com/spatie/laravel-horizon-watcher/tree/1.1.3"
+            },
+            "time": "2025-04-17T06:26:21+00:00"
         },
         {
             "name": "spatie/laravel-http-logger",
