@@ -8224,16 +8224,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.11.1",
+            "version": "v12.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1"
+                "reference": "8f6cd73696068c28f30f5964556ec9d14e5d90d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/bd0d62bd9c5196728e428cd695d89ec8640daac1",
-                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8f6cd73696068c28f30f5964556ec9d14e5d90d7",
+                "reference": "8f6cd73696068c28f30f5964556ec9d14e5d90d7",
                 "shasum": ""
             },
             "require": {
@@ -8435,7 +8435,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-04-30T13:48:39+00:00"
+            "time": "2025-05-01T16:13:12+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -11406,16 +11406,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.9.0",
+            "version": "3.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "6d16a8a015166fe54e22c042e0805c5363aef50d"
+                "reference": "ced71f79398ece168e24f7f7710462f462310d4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/6d16a8a015166fe54e22c042e0805c5363aef50d",
-                "reference": "6d16a8a015166fe54e22c042e0805c5363aef50d",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/ced71f79398ece168e24f7f7710462f462310d4d",
+                "reference": "ced71f79398ece168e24f7f7710462f462310d4d",
                 "shasum": ""
             },
             "require": {
@@ -11508,7 +11508,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-27T12:57:33+00:00"
+            "time": "2025-05-01T19:51:51+00:00"
         },
         {
             "name": "nette/schema",
@@ -26162,16 +26162,16 @@
         },
         {
             "name": "dragon-code/pretty-routes",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/pretty-routes.git",
-                "reference": "1cd34077216d95b91292e55a855f57230edd8862"
+                "reference": "330e74910385879174d823b339849cfdebcffb98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/pretty-routes/zipball/1cd34077216d95b91292e55a855f57230edd8862",
-                "reference": "1cd34077216d95b91292e55a855f57230edd8862",
+                "url": "https://api.github.com/repos/TheDragonCode/pretty-routes/zipball/330e74910385879174d823b339849cfdebcffb98",
+                "reference": "330e74910385879174d823b339849cfdebcffb98",
                 "shasum": ""
             },
             "require": {
@@ -26257,7 +26257,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2025-02-25T12:23:18+00:00"
+            "time": "2025-05-01T14:51:18+00:00"
         },
         {
             "name": "driftingly/rector-laravel",
@@ -36955,6 +36955,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
