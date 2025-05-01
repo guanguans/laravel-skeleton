@@ -27,6 +27,8 @@ final class CheckServiceProviderCommand extends Command
         SIGNATURE;
     protected $description = 'Check service providers and ensure they are correctly registered.';
     private array $except = [
+        'orchestra/canvas',
+        'orchestra/canvas-core',
         'kitloong/laravel-app-logger',
         'laravel-lang/actions',
         'laravel-lang/attributes',

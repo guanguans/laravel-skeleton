@@ -76,19 +76,19 @@ return Application::configure(basePath: \dirname(__DIR__))
                 ],
             )
             ->append([
-                Localization::class,
+                // Localization::class,
                 SetCacheHeaders::using([
                     'etag',
                     'max_age' => 24 * 60 * 60,
                     'private',
                 ]),
             ])
-            ->redirectGuestsTo('/account/login')
-            ->redirectUsersTo(
-                static fn (Request $request): string => $request->user()->isAdmin()
-                    ? route('admin.dashboard')
-                    : route('account.dashboard')
-            )
+            // ->redirectGuestsTo('/account/login')
+            // ->redirectUsersTo(
+            //     static fn (Request $request): string => $request->user()->isAdmin()
+            //         ? route('admin.dashboard')
+            //         : route('account.dashboard')
+            // )
             ->statefulApi()
             ->throttleApi()
             // ->throttleWithRedis()

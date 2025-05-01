@@ -179,6 +179,7 @@ composer zh-lint
 * [calebporzio/sushi](https://github.com/calebporzio/sushi) - Eloquent's missing "array" driver.
 * [cerbero/command-validator](https://github.com/cerbero90/command-validator) - Laravel package to validate the input of console commands.
 * [cerbero/enum](https://github.com/cerbero90/enum) - Zero-dependencies package to supercharge enum functionalities.
+* [cesargb/laravel-magiclink](https://github.com/cesargb/laravel-magiclink) - Create secure link for access to private data or login in Laravel without password
 * [christophrumpel/artisan-benchmark](https://github.com/christophrumpel/artisan-benchmark) - Benchmark Artisan Commands
 * [cknow/laravel-money](https://github.com/cknow/laravel-money) - Laravel Money
 * [crell/attributeutils](https://github.com/Crell/AttributeUtils) - A robust, flexible attribute handling framework
@@ -367,6 +368,7 @@ composer zh-lint
 * [spatie/laravel-error-solutions](https://github.com/spatie/laravel-error-solutions) - Display solutions on the Laravel error page
 * [spatie/laravel-horizon-watcher](https://github.com/spatie/laravel-horizon-watcher) - Automatically restart Horizon when local PHP files change
 * [spatie/laravel-ignition](https://github.com/spatie/laravel-ignition) - A beautiful error page for Laravel applications.
+* [spatie/laravel-login-link](https://github.com/spatie/laravel-login-link) - Quickly login to your local environment
 * [spatie/laravel-stubs](https://github.com/spatie/laravel-stubs) - Opinionated Laravel stubs
 * [spaze/phpstan-disallowed-calls](https://github.com/spaze/phpstan-disallowed-calls) - PHPStan rules to detect disallowed method & function calls, constant, namespace, attribute & superglobal usages, with powerful rules to re-allow a call or a usage in places where it should be allowed.
 * [sti3bas/laravel-scout-array-driver](https://github.com/Sti3bas/laravel-scout-array-driver) - Array driver for Laravel Scout
