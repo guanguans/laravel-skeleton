@@ -26163,16 +26163,16 @@
         },
         {
             "name": "dragon-code/pretty-routes",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/pretty-routes.git",
-                "reference": "1cd34077216d95b91292e55a855f57230edd8862"
+                "reference": "330e74910385879174d823b339849cfdebcffb98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/pretty-routes/zipball/1cd34077216d95b91292e55a855f57230edd8862",
-                "reference": "1cd34077216d95b91292e55a855f57230edd8862",
+                "url": "https://api.github.com/repos/TheDragonCode/pretty-routes/zipball/330e74910385879174d823b339849cfdebcffb98",
+                "reference": "330e74910385879174d823b339849cfdebcffb98",
                 "shasum": ""
             },
             "require": {
@@ -26258,7 +26258,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2025-02-25T12:23:18+00:00"
+            "time": "2025-05-01T14:51:18+00:00"
         },
         {
             "name": "driftingly/rector-laravel",
