@@ -45,7 +45,7 @@ return (new Configuration)
     ->ignoreErrorsOnPaths(
         [
             __DIR__.'/app/Providers/PackageServiceProvider.php',
-            __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
+            // __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
             __DIR__.'/app/Providers/WhenLocalAggregateServiceProvider.php',
             __DIR__.'/app/Providers/WhenTestingAggregateServiceProvider.php',
         ],

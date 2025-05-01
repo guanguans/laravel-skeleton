@@ -23,42 +23,44 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
     }
 
     /**
+     * @noinspection ClassConstantCanBeUsedInspection
+     * @noinspection ClassnameLiteralInspection
      * @noinspection ClassOverridesFieldOfSuperClassInspection
-     * @noinspection PhpFullyQualifiedNameUsageInspection
-     * @noinspection PhpInternalEntityUsedInspection
      * @noinspection SpellCheckingInspection
      */
     protected $providers = [
-        \AndreasElia\PostmanGenerator\PostmanGeneratorServiceProvider::class,
-        \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        // \ChrisDiCarlo\LaravelConfigChecker\LaravelConfigCheckerServiceProvider::class,
-        // \Enlightn\Enlightn\EnlightnServiceProvider::class,
-        // \Guanguans\LaravelSoar\SoarServiceProvider::class,
-        \KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
-        // \Ladumor\LaravelPwa\PWAServiceProvider::class,
-        // \Lanin\Laravel\ApiDebugger\ServiceProvider::class,
-        // \Laracademy\Generators\GeneratorsServiceProvider::class,
-        \LaracraftTech\LaravelSchemaRules\LaravelSchemaRulesServiceProvider::class,
-        // \LaraDumps\LaraDumps\LaraDumpsServiceProvider::class,
-        \Laravel\Sail\SailServiceProvider::class,
-        \Laravel\Telescope\TelescopeServiceProvider::class,
-        // \LaravelMigrationGenerator\LaravelMigrationGeneratorProvider::class,
-        // \Mortexa\LaravelArkitect\ArkitectServiceProvider::class,
-        \Msamgan\LaravelEnvKeysChecker\LaravelEnvKeysCheckerServiceProvider::class,
-        \MuhammadHuzaifa\TelescopeGuzzleWatcher\TelescopeGuzzleWatcherServiceProvider::class,
-        \NunoMaduro\Collision\Adapters\Laravel\CollisionServiceProvider::class,
-        \Orangehill\Iseed\IseedServiceProvider::class,
-        \PrettyRoutes\ServiceProvider::class,
-        \Reliese\Coders\CodersServiceProvider::class,
-        // \Salahhusa9\Updater\UpdaterServiceProvider::class,
-        // \Scalar\ScalarServiceProvider::class,
-        \Shift\FactoryGenerator\FactoryGeneratorServiceProvider::class,
-        \SoloTerm\Solo\Providers\SoloServiceProvider::class,
-        \Spatie\LaravelErrorSolutions\LaravelErrorSolutionsServiceProvider::class,
-        \Spatie\LaravelIgnition\IgnitionServiceProvider::class,
-        \Spatie\Stubs\StubsServiceProvider::class,
-        \TheDoctor0\LaravelFactoryGenerator\FactoryGeneratorServiceProvider::class,
-        \Worksome\Envy\EnvyServiceProvider::class,
+        'AndreasElia\\PostmanGenerator\\PostmanGeneratorServiceProvider',
+        'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+        'Dedoc\\Scramble\\ScrambleServiceProvider',
+        'DragonCode\\MigrateDB\\ServiceProvider',
+        'Guanguans\\LaravelSoar\\SoarServiceProvider',
+        'JMac\\Testing\\AdditionalAssertionsServiceProvider',
+        'Josezenem\\LaravelMakeMigrationPivot\\LaravelMakeMigrationPivotServiceProvider',
+        'KitLoong\\MigrationsGenerator\\MigrationsGeneratorServiceProvider',
+        'Knuckles\\Scribe\\ScribeServiceProvider',
+        'LaracraftTech\\LaravelSchemaRules\\LaravelSchemaRulesServiceProvider',
+        'Laravel\\Pail\\PailServiceProvider',
+        'Laravel\\Sail\\SailServiceProvider',
+        'Laravel\\Telescope\\TelescopeServiceProvider',
+        'Msamgan\\LaravelEnvKeysChecker\\LaravelEnvKeysCheckerServiceProvider',
+        'MuhammadHuzaifa\\TelescopeGuzzleWatcher\\TelescopeGuzzleWatcherServiceProvider',
+        'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+        'Orangehill\\Iseed\\IseedServiceProvider',
+        'PrettyRoutes\\ServiceProvider',
+        'Rakutentech\\LaravelRequestDocs\\LaravelRequestDocsServiceProvider',
+        'Reliese\\Coders\\CodersServiceProvider',
+        'Scalar\\ScalarServiceProvider',
+        'Shift\\FactoryGenerator\\FactoryGeneratorServiceProvider',
+        'SoloTerm\\Dumps\\Providers\\DumpServiceProvider',
+        'SoloTerm\\Solo\\Providers\\SoloServiceProvider',
+        'Spatie\\HorizonWatcher\\HorizonWatcherServiceProvider',
+        'Spatie\\LaravelErrorSolutions\\LaravelErrorSolutionsServiceProvider',
+        'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+        'Spatie\\Stubs\\StubsServiceProvider',
+        'Sti3bas\\ScoutArray\\ScoutArrayEngineServiceProvider',
+        'TheDoctor0\\LaravelFactoryGenerator\\FactoryGeneratorServiceProvider',
+        'Vcian\\LaravelDBAuditor\\Providers\\DBAuditorServiceProvider',
+        'Worksome\\Envy\\EnvyServiceProvider',
     ];
 
     public function register(): void

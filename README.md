@@ -1,6 +1,6 @@
 # laravel-skeleton
 
-> This project collects the most commonly used Laravel extension packages and some functional feature examples for daily development reference. - 本项目收集了最常用 Laravel 扩展包、以及一些功能特性的使用范例供日常开发参考使用。
+> This project collects the most commonly used Laravel extension packages, as well as usage examples of some functional features, for reference in daily development. - 本项目收集了最常用 Laravel 扩展包、以及一些功能特性的使用范例供日常开发参考使用。
 
 [![tests](https://github.com/guanguans/laravel-skeleton/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions)
 [![phpstan](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml)
@@ -398,6 +398,7 @@ app
 │   └── CurrencyCast.php
 ├── Console
 │   └── Commands
+│       ├── CheckServiceProviderCommand.php
 │       ├── ClearAllCommand.php
 │       ├── ClearLogsCommand.php
 │       ├── Command.php
@@ -697,7 +698,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-55 directories, 254 files
+55 directories, 255 files
 
 ```
 </details>

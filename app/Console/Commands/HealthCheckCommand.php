@@ -17,8 +17,6 @@ use GrahamCampbell\ResultType\Error;
 use GrahamCampbell\ResultType\Result;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Console\Command;
-use Illuminate\Console\Events\CommandFinished;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\DB;
@@ -102,102 +100,6 @@ final class HealthCheckCommand extends Command
     {
         $this->only = array_merge($this->only, $this->option('only'));
         $this->except = array_merge($this->except, $this->option('except'));
-    }
-
-    /**
-     * @noinspection PhpSameParameterValueInspection
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     * @throws \JsonException
-     */
-    private function checkServiceProvider(
-        array $except = [
-            'intervention/image',
-            'kitloong/laravel-app-logger',
-            'laravel-lang/actions',
-            'laravel-lang/attributes',
-            'laravel-lang/config',
-            'laravel-lang/http-statuses',
-            'laravel-lang/lang',
-            'laravel-lang/locales',
-            'laravel-lang/models',
-            'laravel-lang/moonshine',
-            'laravel-lang/publisher',
-            'laravel-lang/routes',
-            'laravel/horizon',
-            'laravel/scout',
-            'livewire/livewire',
-            'nesbot/carbon',
-            'nunomaduro/termwind',
-            'orchid/blade-icons',
-            'spatie/eloquent-sortable',
-            'spatie/laravel-http-logger',
-            'spatie/laravel-signal-aware-command',
-            'staudenmeir/laravel-cte',
-            'watson/active',
-            'whitecube/laravel-timezones',
-            'wilderborn/partyline',
-        ]
-    ): Result {
-        $this->callSilently('package:discover');
-
-        $composer = json_decode(file_get_contents(base_path('composer.json')), true, 512, \JSON_THROW_ON_ERROR);
-        $prodPackages = array_keys($composer['require'] ?? []);
-        $devPackages = array_keys($composer['require-dev'] ?? []);
-        $dontDiscoverPackages = $composer['extra']['laravel']['dont-discover'] ?? [];
-
-        /** @noinspection UsingInclusionReturnValueInspection */
-        $discoveredPackages = collect(require base_path('bootstrap/cache/packages.php'))->reject(
-            static fn (array $map, string $package): bool => str($package)->is($except)
-        );
-        $shouldntDiscoverPackages = $discoveredPackages->filter(static fn (
-            array $map,
-            string $package
-        ): bool => \in_array($package, $devPackages, true) && !\in_array($package, $dontDiscoverPackages, true));
-        $indirectDiscoveredPackages = $discoveredPackages->filter(static fn (
-            array $map,
-            string $package
-        ): bool => !\in_array($package, $prodPackages, true) && !\in_array($package, $devPackages, true));
-
-        if ($shouldntDiscoverPackages->isNotEmpty() || $indirectDiscoveredPackages->isNotEmpty()) {
-            $this->laravel->make(Dispatcher::class)->listen(
-                CommandFinished::class,
-                function () use ($shouldntDiscoverPackages, $indirectDiscoveredPackages): void {
-                    $this->warn(\sprintf(
-                        <<<'WARN'
-                            The dev packages should be added to `extra.laravel.dont-discover` in `composer.json`:
-                            %s
-
-                            The dev service providers should be manually registered to dev environment:
-                            %s
-
-                            The indirect discovered packages should be manually handled:
-                            %s
-                            %s
-                            %s
-                            WARN,
-                        $shouldntDiscoverPackages->keys()->pipe(
-                            $piper = static fn (Collection $collection) => $collection
-                                ->sort()
-                                ->values()
-                                ->toJson(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES)
-                        ),
-                        $shouldntDiscoverPackages->pluck('providers')->flatten()->pipe($piper),
-                        $indirectDiscoveredPackages->pipe($piper),
-                        $indirectDiscoveredPackages->keys()->pipe($piper),
-                        $indirectDiscoveredPackages->pluck('providers')->flatten()->pipe($piper),
-                    ));
-                }
-            );
-
-            return Error::create(
-                $shouldntDiscoverPackages->isNotEmpty()
-                    ? "The dev packages shouldn't be automatically discovered."
-                    : 'The indirect discovered packages should be manually handled.'
-            );
-        }
-
-        return $this->createSuccessResult();
     }
 
     /**
