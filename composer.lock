@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92836909062f47727487926ac74d0ffc",
+    "content-hash": "77d6545711c0c691ba7c612dd7f2e795",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4137,26 +4137,25 @@
         },
         {
             "name": "dragon-code/laravel-route-names",
-            "version": "1.6.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/laravel-route-names.git",
-                "reference": "d488062abcbbc6603f55ca76047e6b4c078cd875"
+                "reference": "1bc176293e9ca47ff10a1c45d9ad9aeb56978e51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-route-names/zipball/d488062abcbbc6603f55ca76047e6b4c078cd875",
-                "reference": "d488062abcbbc6603f55ca76047e6b4c078cd875",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-route-names/zipball/1bc176293e9ca47ff10a1c45d9ad9aeb56978e51",
+                "reference": "1bc176293e9ca47ff10a1c45d9ad9aeb56978e51",
                 "shasum": ""
             },
             "require": {
-                "fig/http-message-util": "^1.1",
-                "illuminate/routing": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
-                "php": "^7.4 || ^8.0"
+                "illuminate/routing": "^11.0 || ^12.0",
+                "php": "^8.2"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
-                "phpunit/phpunit": "^9.6 || ^10.0 || ^11.0 || ^12.0"
+                "orchestra/testbench": "^9.0 || ^10.0",
+                "phpunit/phpunit": "^11.0 || ^12.0"
             },
             "type": "library",
             "extra": {
@@ -4168,7 +4167,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "DragonCode\\LaravelRouteNames\\": "src"
+                    "DragonCode\\LaravelRouteNames\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4205,7 +4204,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2025-02-24T17:35:38+00:00"
+            "time": "2025-04-30T20:27:28+00:00"
         },
         {
             "name": "dragon-code/support",
@@ -5060,62 +5059,6 @@
                 "source": "https://github.com/php-fig/event-dispatcher-util/tree/1.3.1"
             },
             "time": "2022-03-30T18:25:35+00:00"
-        },
-        {
-            "name": "fig/http-message-util",
-            "version": "1.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message-util.git",
-                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message-util/zipball/9d94dc0154230ac39e5bf89398b324a86f63f765",
-                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3 || ^7.0 || ^8.0"
-            },
-            "suggest": {
-                "psr/http-message": "The package containing the PSR-7 interfaces"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Fig\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Utility classes and constants for use with PSR-7 (psr/http-message)",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "support": {
-                "issues": "https://github.com/php-fig/http-message-util/issues",
-                "source": "https://github.com/php-fig/http-message-util/tree/1.1.5"
-            },
-            "time": "2020-11-24T22:02:12+00:00"
         },
         {
             "name": "firebase/php-jwt",

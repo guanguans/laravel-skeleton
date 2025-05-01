@@ -35,7 +35,7 @@
         "dcblogdev/laravel-sent-emails": "^2.0",
         "divineomega/password_exposed": "^3.2",
         "dragon-code/laravel-data-dumper": "^1.4",
-        "dragon-code/laravel-route-names": "^1.6",
+        "dragon-code/laravel-route-names": "^2.0",
         "dragon-code/support": "^6.16",
         "echolabsdev/prism": "^0.65",
         "elao/enum": "^2.5",
