@@ -8224,16 +8224,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.11.1",
+            "version": "v12.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1"
+                "reference": "8f6cd73696068c28f30f5964556ec9d14e5d90d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/bd0d62bd9c5196728e428cd695d89ec8640daac1",
-                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8f6cd73696068c28f30f5964556ec9d14e5d90d7",
+                "reference": "8f6cd73696068c28f30f5964556ec9d14e5d90d7",
                 "shasum": ""
             },
             "require": {
@@ -8435,7 +8435,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-04-30T13:48:39+00:00"
+            "time": "2025-05-01T16:13:12+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -11406,16 +11406,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.9.0",
+            "version": "3.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "6d16a8a015166fe54e22c042e0805c5363aef50d"
+                "reference": "ced71f79398ece168e24f7f7710462f462310d4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/6d16a8a015166fe54e22c042e0805c5363aef50d",
-                "reference": "6d16a8a015166fe54e22c042e0805c5363aef50d",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/ced71f79398ece168e24f7f7710462f462310d4d",
+                "reference": "ced71f79398ece168e24f7f7710462f462310d4d",
                 "shasum": ""
             },
             "require": {
@@ -11508,7 +11508,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-27T12:57:33+00:00"
+            "time": "2025-05-01T19:51:51+00:00"
         },
         {
             "name": "nette/schema",
@@ -19617,23 +19617,23 @@
         },
         {
             "name": "staudenmeir/laravel-adjacency-list",
-            "version": "v1.24",
+            "version": "v1.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-adjacency-list.git",
-                "reference": "80af217e7ec9b7ff13afbc90ad6b44f403dc2bc2"
+                "reference": "01672577da7ab120ae6d1d1b27f8caa979b97928"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/80af217e7ec9b7ff13afbc90ad6b44f403dc2bc2",
-                "reference": "80af217e7ec9b7ff13afbc90ad6b44f403dc2bc2",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/01672577da7ab120ae6d1d1b27f8caa979b97928",
+                "reference": "01672577da7ab120ae6d1d1b27f8caa979b97928",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": "^12.0",
                 "php": "^8.2",
                 "staudenmeir/eloquent-has-many-deep-contracts": "^1.3",
-                "staudenmeir/laravel-cte": "^1.12"
+                "staudenmeir/laravel-cte": "^1.12.1"
             },
             "require-dev": {
                 "barryvdh/laravel-ide-helper": "^3.0",
@@ -19642,6 +19642,7 @@
                 "mockery/mockery": "^1.5.1",
                 "orchestra/testbench-core": "^10.0",
                 "phpunit/phpunit": "^11.0",
+                "singlestoredb/singlestoredb-laravel": "^2.0",
                 "staudenmeir/eloquent-has-many-deep": "^1.21"
             },
             "suggest": {
@@ -19673,7 +19674,7 @@
             "description": "Recursive Laravel Eloquent relationships with CTEs",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-adjacency-list/issues",
-                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.24"
+                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.25"
             },
             "funding": [
                 {
@@ -19681,7 +19682,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-02-25T21:23:11+00:00"
+            "time": "2025-05-01T15:49:06+00:00"
         },
         {
             "name": "staudenmeir/laravel-cte",
@@ -36955,6 +36956,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
