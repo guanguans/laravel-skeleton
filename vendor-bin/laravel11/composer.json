@@ -1,12 +1,11 @@
 {
     "require": {
-        "appstract/laravel-opcache": "^4.0",
-        "spatie/laravel-morph-map-generator": "^1.3",
+        "stechstudio/laravel-zipstream": "^5.4",
+        "stillat/blade-directives": "^1.2",
         "timacdonald/has-parameters": "^1.5",
         "wendelladriel/laravel-lift": "^0.15"
     },
     "require-dev": {
-        "php-static-analysis/rector-rule": "^0.3",
         "chrisdicarlo/laravel-config-checker": "^1.2",
         "enlightn/enlightn": "^2.10"
     },

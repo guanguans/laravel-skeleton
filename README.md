@@ -166,6 +166,7 @@ composer zh-lint
 * [akaunting/laravel-money](https://github.com/akaunting/laravel-money) - Currency formatting and conversion package for Laravel
 * [alexandre-daubois/monolog-processor-collection](https://github.com/alexandre-daubois/monolog-processor-collection) - A collection of Monolog processors
 * [algolia/scout-extended](https://github.com/algolia/scout-extended) - Scout Extended extends Laravel Scout adding algolia-specific features
+* [appstract/laravel-opcache](https://github.com/appstract/laravel-opcache) - PHP OPcache Artisan commands for Laravel.
 * [arifhp86/laravel-clear-expired-cache-file](https://github.com/arifhp86/laravel-clear-expired-cache-file) - Remove laravel expired cache file/folder
 * [astrotomic/laravel-translatable](https://github.com/Astrotomic/laravel-translatable) - A Laravel package for multilingual models
 * [awobaz/compoships](https://github.com/topclaudy/compoships) - Laravel relationships with support for composite/multiple keys
@@ -185,9 +186,8 @@ composer zh-lint
 * [dcblogdev/laravel-sent-emails](https://github.com/dcblogdev/laravel-sent-emails) - Store outgoing emails in Laravel
 * [divineomega/password_exposed](https://github.com/DivineOmega/password_exposed/releases) - This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.
 * [dragon-code/laravel-data-dumper](https://github.com/TheDragonCode/laravel-data-dumper) - Adding data from certain tables when executing the `php artisan schema:dump` console command
-* [dragon-code/laravel-route-names](https://github.com/TheDragonCode/laravel-route-names) - Automatic generation of route names
 * [dragon-code/support](https://github.com/TheDragonCode/support) - Support package is a collection of helpers and tools for any project.
-* [echolabsdev/prism](https://github.com/echolabsdev/prism) - A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
+* [echolabsdev/prism](https://github.com/prism-php/prism) - A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
 * [elao/enum](https://github.com/Elao/PhpEnums) - Extended PHP enums capabilities and frameworks integrations
 * [elastic/ecs-logging](https://github.com/elastic/ecs-logging-php) - Format and enrich your log files in the elastic common schema
 * [elasticsearch/elasticsearch](https://github.com/elastic/elasticsearch-php) - PHP Client for Elasticsearch
@@ -271,6 +271,7 @@ composer zh-lint
 * [spatie/laravel-failed-job-monitor](https://github.com/spatie/laravel-failed-job-monitor) - Get notified when a queued job fails
 * [spatie/laravel-health](https://github.com/spatie/laravel-health) - Monitor the health of a Laravel application
 * [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary) - Associate files with Eloquent models
+* [spatie/laravel-morph-map-generator](https://github.com/spatie/laravel-morph-map-generator) - Automatically generate morph maps in your Laravel application
 * [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) - Easily build Eloquent queries from API requests
 * [spatie/laravel-responsecache](https://github.com/spatie/laravel-responsecache) - Speed up a Laravel application by caching the entire response
 * [spatie/laravel-route-attributes](https://github.com/spatie/laravel-route-attributes) - Auto register routes using PHP attributes
@@ -315,6 +316,7 @@ composer zh-lint
 * [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
 * [deployer/deployer](https://github.com/deployphp/deployer) - Deployment Tool
 * [dragon-code/benchmark](https://github.com/TheDragonCode/benchmark) - Simple comparison of code execution speed between different options
+* [dragon-code/migrate-db](https://github.com/TheDragonCode/migrate-db) - Easy data transfer from one database to another
 * [dragon-code/pretty-routes](https://github.com/TheDragonCode/pretty-routes) - Pretty Routes for Laravel
 * [driftingly/rector-laravel](https://github.com/driftingly/rector-laravel) - Rector upgrades rules for Laravel Framework
 * [ergebnis/composer-normalize](https://github.com/ergebnis/composer-normalize) - Provides a composer plugin for normalizing composer.json.
@@ -347,6 +349,7 @@ composer zh-lint
 * [orangehill/iseed](https://github.com/orangehill/iseed) - Generate a new Laravel database seed file based on data from the existing database table.
 * [peckphp/peck](https://github.com/peckphp/peck) - Peck is a powerful CLI tool designed to identify pure wording or spelling (grammar) mistakes in your codebase.
 * [pestphp/pest](https://github.com/pestphp/pest) - The elegant PHP Testing Framework.
+* [php-static-analysis/rector-rule](https://github.com/php-static-analysis/rector-rule) - RectorPHP rule to convert PHPDoc annotations for static analysis to PHP attributes
 * [phpstan/extension-installer](https://github.com/phpstan/extension-installer) - Composer plugin for automatic installation of PHPStan extensions
 * [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules) - PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.
 * [phpstan/phpstan-webmozart-assert](https://github.com/phpstan/phpstan-webmozart-assert) - PHPStan webmozart/assert extension

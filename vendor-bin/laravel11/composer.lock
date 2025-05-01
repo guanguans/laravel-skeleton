@@ -4,70 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68c2d64d2db268a0da3531d670974c1b",
+    "content-hash": "fc7a1347b9aebc2a7366c787577e3236",
     "packages": [
-        {
-            "name": "appstract/laravel-opcache",
-            "version": "4.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/appstract/laravel-opcache.git",
-                "reference": "d2ce88cddda6af54c14d1f9ceaaf94b54f38f9d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/appstract/laravel-opcache/zipball/d2ce88cddda6af54c14d1f9ceaaf94b54f38f9d3",
-                "reference": "d2ce88cddda6af54c14d1f9ceaaf94b54f38f9d3",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3.1|^7.0",
-                "laravel/framework": ">=7.0",
-                "php": ">=7.2.5"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^5.0",
-                "phpunit/phpunit": "^8.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Appstract\\Opcache\\OpcacheServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Appstract\\Opcache\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Olav van Schie",
-                    "email": "mail@appstract.nl",
-                    "homepage": "https://appstract.nl",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP OPcache Artisan commands for Laravel.",
-            "homepage": "https://github.com/appstract/laravel-opcache",
-            "keywords": [
-                "Opcache",
-                "appstract",
-                "laravel",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/appstract/laravel-opcache/issues",
-                "source": "https://github.com/appstract/laravel-opcache/tree/4.0.2"
-            },
-            "time": "2020-12-01T16:12:14+00:00"
-        },
         {
             "name": "brick/math",
             "version": "0.12.3",
@@ -1118,16 +1056,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.44.2",
+            "version": "v11.44.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f85216c82cbd38b66d67ebd20ea762cb3751a4b4"
+                "reference": "00bc6ac91a6d577bf051c18ddaa638c0d221e1c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f85216c82cbd38b66d67ebd20ea762cb3751a4b4",
-                "reference": "f85216c82cbd38b66d67ebd20ea762cb3751a4b4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/00bc6ac91a6d577bf051c18ddaa638c0d221e1c7",
+                "reference": "00bc6ac91a6d577bf051c18ddaa638c0d221e1c7",
                 "shasum": ""
             },
             "require": {
@@ -1329,7 +1267,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-03-12T14:34:30+00:00"
+            "time": "2025-04-25T12:40:47+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1453,16 +1391,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.6.1",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "d990688c91cedfb69753ffc2512727ec646df2ad"
+                "reference": "06c3b0bf2540338094575612f4a1778d0d2d5e94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/d990688c91cedfb69753ffc2512727ec646df2ad",
-                "reference": "d990688c91cedfb69753ffc2512727ec646df2ad",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/06c3b0bf2540338094575612f4a1778d0d2d5e94",
+                "reference": "06c3b0bf2540338094575612f4a1778d0d2d5e94",
                 "shasum": ""
             },
             "require": {
@@ -1556,7 +1494,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-29T14:10:59+00:00"
+            "time": "2025-04-18T21:09:27+00:00"
         },
         {
             "name": "league/config",
@@ -1771,6 +1709,52 @@
                 "source": "https://github.com/thephpleague/flysystem-local/tree/3.29.0"
             },
             "time": "2024-08-09T21:24:39+00:00"
+        },
+        {
+            "name": "league/flysystem-path-prefixing",
+            "version": "3.28.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem-path-prefixing.git",
+                "reference": "fe187456d824b288672b89d1b32b2d78975bb934"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-path-prefixing/zipball/fe187456d824b288672b89d1b32b2d78975bb934",
+                "reference": "fe187456d824b288672b89d1b32b2d78975bb934",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "^3.10.0",
+                "php": "^8.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Flysystem\\PathPrefixing\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frankdejonge.nl"
+                }
+            ],
+            "description": "Path prefixing filesystem adapter for Flysystem.",
+            "keywords": [
+                "Flysystem",
+                "filesystem",
+                "prefix",
+                "prefixing"
+            ],
+            "support": {
+                "source": "https://github.com/thephpleague/flysystem-path-prefixing/tree/3.28.0"
+            },
+            "time": "2024-05-06T20:05:52+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -2001,6 +1985,84 @@
                 }
             ],
             "time": "2024-12-08T08:18:47+00:00"
+        },
+        {
+            "name": "maennchen/zipstream-php",
+            "version": "3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maennchen/ZipStream-PHP.git",
+                "reference": "aeadcf5c412332eb426c0f9b4485f6accba2a99f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/aeadcf5c412332eb426c0f9b4485f6accba2a99f",
+                "reference": "aeadcf5c412332eb426c0f9b4485f6accba2a99f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-zlib": "*",
+                "php-64bit": "^8.2"
+            },
+            "require-dev": {
+                "brianium/paratest": "^7.7",
+                "ext-zip": "*",
+                "friendsofphp/php-cs-fixer": "^3.16",
+                "guzzlehttp/guzzle": "^7.5",
+                "mikey179/vfsstream": "^1.6",
+                "php-coveralls/php-coveralls": "^2.5",
+                "phpunit/phpunit": "^11.0",
+                "vimeo/psalm": "^6.0"
+            },
+            "suggest": {
+                "guzzlehttp/psr7": "^2.4",
+                "psr/http-message": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZipStream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Duncan",
+                    "email": "pabs@pablotron.org"
+                },
+                {
+                    "name": "Jonatan Männchen",
+                    "email": "jonatan@maennchen.ch"
+                },
+                {
+                    "name": "Jesse Donat",
+                    "email": "donatj@gmail.com"
+                },
+                {
+                    "name": "András Kolesár",
+                    "email": "kolesar@kolesar.hu"
+                }
+            ],
+            "description": "ZipStream is a library for dynamically streaming dynamic zip files from PHP without writing to the disk at all on the server.",
+            "keywords": [
+                "stream",
+                "zip"
+            ],
+            "support": {
+                "issues": "https://github.com/maennchen/ZipStream-PHP/issues",
+                "source": "https://github.com/maennchen/ZipStream-PHP/tree/3.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/maennchen",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-27T12:07:53+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2358,6 +2420,62 @@
                 "source": "https://github.com/nette/utils/tree/v4.0.6"
             },
             "time": "2025-03-30T21:06:30+00:00"
+        },
+        {
+            "name": "nikic/php-parser",
+            "version": "v4.19.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "715f4d25e225bc47b293a8b997fe6ce99bf987d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/715f4d25e225bc47b293a8b997fe6ce99bf987d2",
+                "reference": "715f4d25e225bc47b293a8b997fe6ce99bf987d2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "ircmaxell/php-yacc": "^0.0.7",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+            },
+            "bin": [
+                "bin/php-parse"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpParser\\": "lib/PhpParser"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.19.4"
+            },
+            "time": "2024-09-29T15:01:53+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -3146,45 +3264,35 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
-            "name": "spatie/laravel-morph-map-generator",
-            "version": "1.3.1",
+            "name": "spatie/laravel-package-tools",
+            "version": "1.92.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spatie/laravel-morph-map-generator.git",
-                "reference": "74fd0e74496f89f584a44e9b38da62e9f8ff3b4d"
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-morph-map-generator/zipball/74fd0e74496f89f584a44e9b38da62e9f8ff3b4d",
-                "reference": "74fd0e74496f89f584a44e9b38da62e9f8ff3b4d",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/d20b1969f836d210459b78683d85c9cd5c5f508c",
+                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "illuminate/console": "^8.0|^9.0|^10.0|^11.0|^12.0",
-                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0|^12.0",
-                "illuminate/database": "^8.0|^9.0|^10.0|^11.0|^12.0",
-                "php": "^7.4|^8.0"
+                "illuminate/contracts": "^9.28|^10.0|^11.0|^12.0",
+                "php": "^8.0"
             },
             "require-dev": {
-                "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^6.24|^7.0|^8.0|^9.0|^10.0",
-                "pestphp/pest-plugin-laravel": "^1.3|^2.1|^3.0",
-                "phpunit/phpunit": "^9.6|^10.5|^11.1",
-                "spatie/temporary-directory": "^1.2",
-                "vimeo/psalm": "^4.2|^5.20|^6.0"
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0|^9.0|^10.0",
+                "pestphp/pest": "^1.23|^2.1|^3.1",
+                "phpunit/php-code-coverage": "^9.0|^10.0|^11.0",
+                "phpunit/phpunit": "^9.5.24|^10.5|^11.5",
+                "spatie/pest-plugin-test-time": "^1.1|^2.2"
             },
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\LaravelMorphMapGenerator\\MorphMapGeneratorServiceProvider"
-                    ]
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "Spatie\\LaravelMorphMapGenerator\\": "src"
+                    "Spatie\\LaravelPackageTools\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3193,33 +3301,197 @@
             ],
             "authors": [
                 {
-                    "name": "Ruben Van Assche",
-                    "email": "ruben@spatie.be",
-                    "homepage": "https://spatie.be",
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
                     "role": "Developer"
                 }
             ],
-            "description": "Automatically generate morph maps in your Laravel application",
-            "homepage": "https://github.com/spatie/laravel-morph-map-generator",
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
             "keywords": [
-                "laravel-morph-map-generator",
+                "laravel-package-tools",
                 "spatie"
             ],
             "support": {
-                "issues": "https://github.com/spatie/laravel-morph-map-generator/issues",
-                "source": "https://github.com/spatie/laravel-morph-map-generator/tree/1.3.1"
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.92.4"
             },
             "funding": [
                 {
-                    "url": "https://github.com/sponsors/spatie",
+                    "url": "https://github.com/spatie",
                     "type": "github"
-                },
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "other"
                 }
             ],
-            "time": "2025-02-06T11:51:26+00:00"
+            "time": "2025-04-11T15:27:14+00:00"
+        },
+        {
+            "name": "stechstudio/laravel-zipstream",
+            "version": "5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stechstudio/laravel-zipstream.git",
+                "reference": "9aa106c2a29b6be98fb07d9eb69611a8582ebccc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stechstudio/laravel-zipstream/zipball/9aa106c2a29b6be98fb07d9eb69611a8582ebccc",
+                "reference": "9aa106c2a29b6be98fb07d9eb69611a8582ebccc",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "guzzlehttp/psr7": "^2.6",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "league/flysystem-path-prefixing": "^3.28",
+                "maennchen/zipstream-php": "^v3.0",
+                "php": "^8.1",
+                "psr/http-message": "^2.0",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "league/flysystem-aws-s3-v3": "^3.28",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.0|^10.0|^11.5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Zip": "STS\\ZipStream\\Facades\\Zip"
+                    },
+                    "providers": [
+                        "STS\\ZipStream\\ZipStreamServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "STS\\ZipStream\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joseph Szobody",
+                    "email": "joseph@stechstudio.com"
+                }
+            ],
+            "description": "A fast and simple streaming zip file downloader for Laravel.",
+            "homepage": "https://github.com/stechstudio/laravel-zipstream",
+            "keywords": [
+                "laravel-zipstream",
+                "stechstudio"
+            ],
+            "support": {
+                "issues": "https://github.com/stechstudio/laravel-zipstream/issues",
+                "source": "https://github.com/stechstudio/laravel-zipstream/tree/5.4"
+            },
+            "time": "2025-02-21T01:20:38+00:00"
+        },
+        {
+            "name": "stillat/blade-directives",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stillat/blade-directives.git",
+                "reference": "c12c6c89b119b45127b707bcbd313195dcac2569"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stillat/blade-directives/zipball/c12c6c89b119b45127b707bcbd313195dcac2569",
+                "reference": "c12c6c89b119b45127b707bcbd313195dcac2569",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "illuminate/view": "*",
+                "stillat/primitives": "^1.4.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.22",
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stillat\\BladeDirectives\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Koster",
+                    "email": "john@stillat.com"
+                }
+            ],
+            "description": "Provides utilities to help write Laravel Blade directives.",
+            "support": {
+                "issues": "https://github.com/Stillat/blade-directives/issues",
+                "source": "https://github.com/Stillat/blade-directives/tree/v1.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/JohnathonKoster",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-01T14:42:51+00:00"
+        },
+        {
+            "name": "stillat/primitives",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stillat/primitives.git",
+                "reference": "116f1a05b619a2c9c403051ee37981c541de2535"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stillat/primitives/zipball/116f1a05b619a2c9c403051ee37981c541de2535",
+                "reference": "116f1a05b619a2c9c403051ee37981c541de2535",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "nikic/php-parser": "^4.10.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stillat\\Primitives\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John Koster",
+                    "email": "john@stillat.com"
+                }
+            ],
+            "description": "Parses strings of primitive values into a PHP array.",
+            "support": {
+                "issues": "https://github.com/Stillat/primitives/issues",
+                "source": "https://github.com/Stillat/primitives/tree/v1.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/JohnathonKoster",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-10-24T00:24:10+00:00"
         },
         {
             "name": "symfony/clock",
@@ -5559,16 +5831,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v5.6.1",
+            "version": "v5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "a59a13791077fe3d44f90e7133eb68e7d22eaff2"
+                "reference": "24ac4c74f91ee2c193fa1aaa5c249cb0822809af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/a59a13791077fe3d44f90e7133eb68e7d22eaff2",
-                "reference": "a59a13791077fe3d44f90e7133eb68e7d22eaff2",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/24ac4c74f91ee2c193fa1aaa5c249cb0822809af",
+                "reference": "24ac4c74f91ee2c193fa1aaa5c249cb0822809af",
                 "shasum": ""
             },
             "require": {
@@ -5627,7 +5899,7 @@
             ],
             "support": {
                 "issues": "https://github.com/vlucas/phpdotenv/issues",
-                "source": "https://github.com/vlucas/phpdotenv/tree/v5.6.1"
+                "source": "https://github.com/vlucas/phpdotenv/tree/v5.6.2"
             },
             "funding": [
                 {
@@ -5639,7 +5911,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-20T21:52:34+00:00"
+            "time": "2025-04-30T23:37:27+00:00"
         },
         {
             "name": "voku/portable-ascii",
@@ -6215,250 +6487,6 @@
             "time": "2025-03-14T21:52:58+00:00"
         },
         {
-            "name": "nikic/php-parser",
-            "version": "v5.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ctype": "*",
-                "ext-json": "*",
-                "ext-tokenizer": "*",
-                "php": ">=7.4"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^9.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
-            },
-            "time": "2024-12-30T11:07:19+00:00"
-        },
-        {
-            "name": "php-static-analysis/attributes",
-            "version": "0.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-static-analysis/attributes.git",
-                "reference": "75f5686e6314ddd3e6e37ce88c3801325ba97245"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-static-analysis/attributes/zipball/75f5686e6314ddd3e6e37ce88c3801325ba97245",
-                "reference": "75f5686e6314ddd3e6e37ce88c3801325ba97245",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0"
-            },
-            "require-dev": {
-                "php-static-analysis/node-visitor": "dev-main",
-                "php-static-analysis/phpstan-extension": "dev-main",
-                "php-static-analysis/psalm-plugin": "dev-main",
-                "phpstan/extension-installer": "^1.3",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.0",
-                "symplify/easy-coding-standard": "^12.1",
-                "vimeo/psalm": "^5"
-            },
-            "suggest": {
-                "php-static-analysis/phpstan-extension": "PHPStan extension to read static analysis attributes",
-                "php-static-analysis/psalm-plugin": "Psalm plugin to read static analysis attributes",
-                "php-static-analysis/rector-rule": "RectorPHP rule to convert PHPDoc annotations to static analysis attributes"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PhpStaticAnalysis\\Attributes\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Carlos Granados",
-                    "email": "carlos@fastdebug.io"
-                }
-            ],
-            "description": "Attributes used instead of PHPDocs for static analysis tools",
-            "support": {
-                "issues": "https://github.com/php-static-analysis/attributes/issues",
-                "source": "https://github.com/php-static-analysis/attributes/tree/0.3.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/carlos-granados",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-09-13T07:46:11+00:00"
-        },
-        {
-            "name": "php-static-analysis/node-visitor",
-            "version": "0.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-static-analysis/node-visitor.git",
-                "reference": "919f57ca466d9dedda852997d2ceaca15d128cc8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-static-analysis/node-visitor/zipball/919f57ca466d9dedda852997d2ceaca15d128cc8",
-                "reference": "919f57ca466d9dedda852997d2ceaca15d128cc8",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "^4 || ^5",
-                "php": ">=8.0",
-                "php-static-analysis/attributes": "^0.3.1 || dev-main"
-            },
-            "require-dev": {
-                "php-static-analysis/phpstan-extension": "dev-main",
-                "php-static-analysis/psalm-plugin": "dev-main",
-                "phpstan/extension-installer": "^1.3",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.0",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "symplify/easy-coding-standard": "^12.1",
-                "vimeo/psalm": "^5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PhpStaticAnalysis\\NodeVisitor\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Carlos Granados",
-                    "email": "carlos@fastdebug.io"
-                }
-            ],
-            "description": "PHP parser node visitor that converts Attributes into PHPDoc annotations",
-            "keywords": [
-                "dev",
-                "static analysis"
-            ],
-            "support": {
-                "issues": "https://github.com/php-static-analysis/node-visitor/issues",
-                "source": "https://github.com/php-static-analysis/node-visitor/tree/0.3.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/carlos-granados",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-09-12T17:15:47+00:00"
-        },
-        {
-            "name": "php-static-analysis/rector-rule",
-            "version": "0.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-static-analysis/rector-rule.git",
-                "reference": "f123356b4c6a821b0b5ddca1bca6c719f59b901a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-static-analysis/rector-rule/zipball/f123356b4c6a821b0b5ddca1bca6c719f59b901a",
-                "reference": "f123356b4c6a821b0b5ddca1bca6c719f59b901a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0",
-                "php-static-analysis/attributes": "^0.3.1 || dev-main",
-                "php-static-analysis/node-visitor": "^0.3.1 || dev-main",
-                "rector/rector": "^0.19 || ^1.0"
-            },
-            "require-dev": {
-                "php-static-analysis/phpstan-extension": "dev-main",
-                "php-static-analysis/psalm-plugin": "dev-main",
-                "phpstan/extension-installer": "^1.3",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^9.0",
-                "symplify/easy-coding-standard": "^12.1",
-                "vimeo/psalm": "^5",
-                "webmozart/assert": "^1.11"
-            },
-            "type": "rector-extension",
-            "autoload": {
-                "psr-4": {
-                    "PhpStaticAnalysis\\RectorRule\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Carlos Granados",
-                    "email": "carlos@fastdebug.io"
-                }
-            ],
-            "description": "RectorPHP rule to convert PHPDoc annotations for static analysis to PHP attributes",
-            "keywords": [
-                "dev",
-                "static analysis"
-            ],
-            "support": {
-                "issues": "https://github.com/php-static-analysis/rector-rule/issues",
-                "source": "https://github.com/php-static-analysis/rector-rule/tree/0.3.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/carlos-granados",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-09-12T21:03:27+00:00"
-        },
-        {
             "name": "phpstan/phpstan",
             "version": "1.12.23",
             "source": {
@@ -6562,126 +6590,6 @@
                 "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/1.2.1"
             },
             "time": "2024-09-11T15:52:35+00:00"
-        },
-        {
-            "name": "rector/rector",
-            "version": "1.2.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rectorphp/rector.git",
-                "reference": "40f9cf38c05296bd32f444121336a521a293fa61"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/40f9cf38c05296bd32f444121336a521a293fa61",
-                "reference": "40f9cf38c05296bd32f444121336a521a293fa61",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.12.5"
-            },
-            "conflict": {
-                "rector/rector-doctrine": "*",
-                "rector/rector-downgrade-php": "*",
-                "rector/rector-phpunit": "*",
-                "rector/rector-symfony": "*"
-            },
-            "suggest": {
-                "ext-dom": "To manipulate phpunit.xml via the custom-rule command"
-            },
-            "bin": [
-                "bin/rector"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Instant Upgrade and Automated Refactoring of any PHP code",
-            "keywords": [
-                "automation",
-                "dev",
-                "migration",
-                "refactoring"
-            ],
-            "support": {
-                "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/1.2.10"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/tomasvotruba",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-11-08T13:59:10+00:00"
-        },
-        {
-            "name": "spatie/laravel-package-tools",
-            "version": "1.92.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/d20b1969f836d210459b78683d85c9cd5c5f508c",
-                "reference": "d20b1969f836d210459b78683d85c9cd5c5f508c",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^9.28|^10.0|^11.0|^12.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^7.7|^8.0|^9.0|^10.0",
-                "pestphp/pest": "^1.23|^2.1|^3.1",
-                "phpunit/php-code-coverage": "^9.0|^10.0|^11.0",
-                "phpunit/phpunit": "^9.5.24|^10.5|^11.5",
-                "spatie/pest-plugin-test-time": "^1.1|^2.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelPackageTools\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Tools for creating Laravel packages",
-            "homepage": "https://github.com/spatie/laravel-package-tools",
-            "keywords": [
-                "laravel-package-tools",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.92.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-04-11T15:27:14+00:00"
         },
         {
             "name": "symfony/yaml",
