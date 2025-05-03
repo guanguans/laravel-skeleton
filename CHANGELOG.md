@@ -8,6 +8,104 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="12.1.0"></a>
+## [12.1.0] - 2025-05-03
+### ✨ Features
+- **console:** add CheckServiceProviderCommand to clear logs by days ([13369c35](https://github.com/guanguans/laravel-skeleton/commit/13369c35))
+- **console:** update ReadmeCommand to refresh scripts and tree sections ([507a881e](https://github.com/guanguans/laravel-skeleton/commit/507a881e))
+- **console:** add custom input options and xdebug handling to Artisan commands ([7ad2823c](https://github.com/guanguans/laravel-skeleton/commit/7ad2823c))
+- **dependencies:** Add new packages to composer.json ([1683400e](https://github.com/guanguans/laravel-skeleton/commit/1683400e))
+- **dependencies:** integrate additional tools and plugins ([cfba47a7](https://github.com/guanguans/laravel-skeleton/commit/cfba47a7))
+- **errors:** Add custom error pages for 401 and 503 status codes ([0b0aaf26](https://github.com/guanguans/laravel-skeleton/commit/0b0aaf26))
+- **readme:** add command to update README tree structure ([74ead701](https://github.com/guanguans/laravel-skeleton/commit/74ead701))
+
+### 🐞 Bug Fixes
+- **api:** update middleware configuration for API routes ([b63da72a](https://github.com/guanguans/laravel-skeleton/commit/b63da72a))
+- **api:** refactor API route definitions for clarity and organization ([740759a8](https://github.com/guanguans/laravel-skeleton/commit/740759a8))
+- **auth:** replace LogActivity listener with consolidated AuthSubscriber ([1ab7854d](https://github.com/guanguans/laravel-skeleton/commit/1ab7854d))
+- **composer:** add patches configuration for Laravel framework ([947f004c](https://github.com/guanguans/laravel-skeleton/commit/947f004c))
+- **config:** update AI commit generator model to gpt-4.1-mini ([3f5b1f33](https://github.com/guanguans/laravel-skeleton/commit/3f5b1f33))
+- **event-listener:** replace deprecated method and update test setup ([71c1e788](https://github.com/guanguans/laravel-skeleton/commit/71c1e788))
+- **logging:** remove FilterHandler and simplify stdout log configuration ([46157776](https://github.com/guanguans/laravel-skeleton/commit/46157776))
+- **middleware:** add WithPipeArgs trait usage to all HTTP middlewares ([722d2fab](https://github.com/guanguans/laravel-skeleton/commit/722d2fab))
+- **readme:** correct section replacement patterns in UpdateReadmeCommand ([8b749f1f](https://github.com/guanguans/laravel-skeleton/commit/8b749f1f))
+- **trace-event:** add conditional logging trigger check ([a7732736](https://github.com/guanguans/laravel-skeleton/commit/a7732736))
+- **trace-listener:** adjust timezone handling and streamline app configuration ([b24245de](https://github.com/guanguans/laravel-skeleton/commit/b24245de))
+- **view:** register custom error view paths for HTTP errors ([edcdd018](https://github.com/guanguans/laravel-skeleton/commit/edcdd018))
+
+### 🎨 Styles
+- apply finalize classes ([0b94ec5e](https://github.com/guanguans/laravel-skeleton/commit/0b94ec5e))
+
+### 💅 Code Refactorings
+- apply inspection ([676319d6](https://github.com/guanguans/laravel-skeleton/commit/676319d6))
+- **bootstrap:** Remove OutOfMemoryBootstrapper and add placeholder class ([4d8ec4a1](https://github.com/guanguans/laravel-skeleton/commit/4d8ec4a1))
+- **console:** update command listener to use CommandStarting event ([0ae69fe5](https://github.com/guanguans/laravel-skeleton/commit/0ae69fe5))
+- **console:** improve command classes and configureable concern ([a0d94f0d](https://github.com/guanguans/laravel-skeleton/commit/a0d94f0d))
+- **enums:** clean up obsolete enums and enhance existing ones ([832556f7](https://github.com/guanguans/laravel-skeleton/commit/832556f7))
+- **event:** rename LogContextSubscriber to ContextSubscriber ([64d96111](https://github.com/guanguans/laravel-skeleton/commit/64d96111))
+- **middleware:** Remove SetLocales and rename RequiresJson to RequiredJson ([5f505b3a](https://github.com/guanguans/laravel-skeleton/commit/5f505b3a))
+- **types:** add strict type hints to string helper functions ([75be9af5](https://github.com/guanguans/laravel-skeleton/commit/75be9af5))
+- **user:** move validation trait and rules to User model ([30f83a9d](https://github.com/guanguans/laravel-skeleton/commit/30f83a9d))
+
+### ✅ Tests
+- **console:** enhance test coverage for all console commands ([7237a849](https://github.com/guanguans/laravel-skeleton/commit/7237a849))
+
+### 📦 Builds
+- remove unused packages and clean environment config ([877f5352](https://github.com/guanguans/laravel-skeleton/commit/877f5352))
+- **composer:** update dependencies and disable middleware in app bootstrap ([2807a8c3](https://github.com/guanguans/laravel-skeleton/commit/2807a8c3))
+- **composer:** update dependencies versions and pest script options ([d55a6d08](https://github.com/guanguans/laravel-skeleton/commit/d55a6d08))
+- **dependencies:** update composer package versions and requirements ([60517110](https://github.com/guanguans/laravel-skeleton/commit/60517110))
+- **deps:** bump php-static-analysis/attributes from 0.2.2 to 0.4.1 ([0c50ec28](https://github.com/guanguans/laravel-skeleton/commit/0c50ec28))
+- **deps:** bump laravel/sanctum from 4.1.0 to 4.1.1 ([df78de98](https://github.com/guanguans/laravel-skeleton/commit/df78de98))
+- **deps:** bump laravel/framework from 12.11.1 to 12.12.0 ([4b5b193a](https://github.com/guanguans/laravel-skeleton/commit/4b5b193a))
+- **deps:** bump dragon-code/laravel-route-names from 1.6.0 to 2.0.0 ([8efdc6b4](https://github.com/guanguans/laravel-skeleton/commit/8efdc6b4))
+- **deps:** bump echolabsdev/prism from 0.46.0 to 0.65.2 ([af4a630e](https://github.com/guanguans/laravel-skeleton/commit/af4a630e))
+- **deps:** bump symfony/polyfill-php84 from 1.31.0 to 1.32.0 ([5e5aa9d3](https://github.com/guanguans/laravel-skeleton/commit/5e5aa9d3))
+- **deps:** bump spatie/laravel-csp from 3.9.0 to 3.11.0 ([a581b447](https://github.com/guanguans/laravel-skeleton/commit/a581b447))
+- **deps:** bump staudenmeir/laravel-adjacency-list from 1.24 to 1.25 ([4ef8a13d](https://github.com/guanguans/laravel-skeleton/commit/4ef8a13d))
+- **deps:** bump prinsfrank/standards from 3.12.1 to 3.12.2 ([1430fb7a](https://github.com/guanguans/laravel-skeleton/commit/1430fb7a))
+- **deps-dev:** bump laravel/sail from 1.41.1 to 1.42.0 ([17a91e7e](https://github.com/guanguans/laravel-skeleton/commit/17a91e7e))
+- **deps-dev:** bump symplify/phpstan-rules from 14.6.3 to 14.6.9 ([881d3372](https://github.com/guanguans/laravel-skeleton/commit/881d3372))
+- **deps-dev:** bump dragon-code/pretty-routes from 3.6.0 to 3.7.0 ([d2f8dc46](https://github.com/guanguans/laravel-skeleton/commit/d2f8dc46))
+- **deps-dev:** bump rector/rector from 2.0.12 to 2.0.14 ([a9bfd024](https://github.com/guanguans/laravel-skeleton/commit/a9bfd024))
+- **deps-dev:** bump phpstan/phpstan-deprecation-rules ([b106b55e](https://github.com/guanguans/laravel-skeleton/commit/b106b55e))
+- **deps-dev:** bump symplify/easy-coding-standard ([5c58f61e](https://github.com/guanguans/laravel-skeleton/commit/5c58f61e))
+- **deps-dev:** bump soloterm/solo from 0.4.0 to 0.5.0 ([4065a51d](https://github.com/guanguans/laravel-skeleton/commit/4065a51d))
+
+### 🤖 Continuous Integrations
+- apply phpstan level 7 ([9778620e](https://github.com/guanguans/laravel-skeleton/commit/9778620e))
+- apply phpstan level max ([5460f210](https://github.com/guanguans/laravel-skeleton/commit/5460f210))
+- apply phpstan level 9 ([ab0199ae](https://github.com/guanguans/laravel-skeleton/commit/ab0199ae))
+- apply phpstan level 8 ([15c15f80](https://github.com/guanguans/laravel-skeleton/commit/15c15f80))
+- apply phpstan level 6 ([71cee6b7](https://github.com/guanguans/laravel-skeleton/commit/71cee6b7))
+- apply phpstan level 5 ([e3e59236](https://github.com/guanguans/laravel-skeleton/commit/e3e59236))
+- apply phpstan level 4 ([f5a539a5](https://github.com/guanguans/laravel-skeleton/commit/f5a539a5))
+- apply phpstan level 3 ([7ad007f7](https://github.com/guanguans/laravel-skeleton/commit/7ad007f7))
+- apply phpstan level 2 ([6e7c1c1c](https://github.com/guanguans/laravel-skeleton/commit/6e7c1c1c))
+- **config:** update ignored PHPStan error identifiers in phpstan.neon ([0344a2bb](https://github.com/guanguans/laravel-skeleton/commit/0344a2bb))
+- **config:** update PHPStan configuration for stricter analysis ([225c5bdc](https://github.com/guanguans/laravel-skeleton/commit/225c5bdc))
+- **database:** add type declarations and fix seeder table creation callback ([3924a340](https://github.com/guanguans/laravel-skeleton/commit/3924a340))
+- **phpstan:** update analysis paths and exclusions in configuration ([64fbd078](https://github.com/guanguans/laravel-skeleton/commit/64fbd078))
+
+### Pull Requests
+- Merge pull request [#1171](https://github.com/guanguans/laravel-skeleton/issues/1171) from guanguans/dependabot/composer/symfony/polyfill-php84-1.32.0
+- Merge pull request [#1170](https://github.com/guanguans/laravel-skeleton/issues/1170) from guanguans/dependabot/composer/dragon-code/pretty-routes-3.7.0
+- Merge pull request [#1169](https://github.com/guanguans/laravel-skeleton/issues/1169) from guanguans/dependabot/composer/laravel/framework-12.12.0
+- Merge pull request [#1168](https://github.com/guanguans/laravel-skeleton/issues/1168) from guanguans/dependabot/composer/staudenmeir/laravel-adjacency-list-1.25
+- Merge pull request [#1166](https://github.com/guanguans/laravel-skeleton/issues/1166) from guanguans/dependabot/composer/dragon-code/laravel-route-names-2.0.0
+- Merge pull request [#1167](https://github.com/guanguans/laravel-skeleton/issues/1167) from guanguans/dependabot/composer/echolabsdev/prism-0.65.2
+- Merge pull request [#1165](https://github.com/guanguans/laravel-skeleton/issues/1165) from guanguans/dependabot/composer/soloterm/solo-0.5.0
+- Merge pull request [#1164](https://github.com/guanguans/laravel-skeleton/issues/1164) from guanguans/dependabot/composer/php-static-analysis/attributes-0.4.1
+- Merge pull request [#1162](https://github.com/guanguans/laravel-skeleton/issues/1162) from guanguans/dependabot/composer/laravel/sail-1.42.0
+- Merge pull request [#1161](https://github.com/guanguans/laravel-skeleton/issues/1161) from guanguans/dependabot/composer/prinsfrank/standards-3.12.2
+- Merge pull request [#1160](https://github.com/guanguans/laravel-skeleton/issues/1160) from guanguans/dependabot/composer/laravel/sanctum-4.1.1
+- Merge pull request [#1159](https://github.com/guanguans/laravel-skeleton/issues/1159) from guanguans/dependabot/composer/symplify/phpstan-rules-14.6.9
+- Merge pull request [#1158](https://github.com/guanguans/laravel-skeleton/issues/1158) from guanguans/dependabot/composer/spatie/laravel-csp-3.11.0
+- Merge pull request [#1157](https://github.com/guanguans/laravel-skeleton/issues/1157) from guanguans/dependabot/composer/rector/rector-2.0.14
+- Merge pull request [#1156](https://github.com/guanguans/laravel-skeleton/issues/1156) from guanguans/dependabot/composer/phpstan/phpstan-deprecation-rules-2.0.2
+- Merge pull request [#1155](https://github.com/guanguans/laravel-skeleton/issues/1155) from guanguans/dependabot/composer/symplify/easy-coding-standard-12.5.16
+
+
 <a name="12.0.0"></a>
 ## [12.0.0] - 2025-04-25
 ### ✨ Features
@@ -1861,5 +1959,6 @@ The addition of new commands and modifications to existing
 ones may affect users who rely on the previous structure and functionality.
 
 
-[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/12.0.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/12.1.0...HEAD
+[12.1.0]: https://github.com/guanguans/laravel-skeleton/compare/12.0.0...12.1.0
 [12.0.0]: https://github.com/guanguans/laravel-skeleton/compare/11.0.0...12.0.0
