@@ -208,6 +208,7 @@
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "povils/phpmnd": "^3.6",
         "rakutentech/laravel-request-docs": "^2.42",
+        "rector/jack": "^0.1",
         "rector/rector": "^2.0",
         "rector/swiss-knife": "^2.2",
         "rector/type-perfect": "^2.0",
@@ -448,6 +449,12 @@
             "@post-create-project-cmd",
             "@artisan jwt:secret --force"
         ],
+        "jack": "@php vendor/bin/jack --ansi -v",
+        "jack-breakpoint": "@jack breakpoint",
+        "jack-open-versions": "@jack open-versions",
+        "jack-open-versions-dev": "@jack-open-versions --dev",
+        "jack-open-versions-dev-dry-run": "@jack-open-versions-dev --dry-run",
+        "jack-open-versions-dry-run": "@jack-open-versions --dry-run",
         "json-lint": "@php ./vendor/bin/jsonlint *.json .*rc",
         "lint": [
             "@env-put-php",

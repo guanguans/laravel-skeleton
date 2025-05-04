@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acc1d037fad8f14b839677c440356a8a",
+    "content-hash": "0e5f22a0f64393cd70389b3d18d7e854",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -29791,12 +29791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/ai-commit.git",
-                "reference": "a4ba0480f4f7d3cc788387051af85cb20351f463"
+                "reference": "b884a5a397f47c324e42cf8611327e6e22fab524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/a4ba0480f4f7d3cc788387051af85cb20351f463",
-                "reference": "a4ba0480f4f7d3cc788387051af85cb20351f463",
+                "url": "https://api.github.com/repos/guanguans/ai-commit/zipball/b884a5a397f47c324e42cf8611327e6e22fab524",
+                "reference": "b884a5a397f47c324e42cf8611327e6e22fab524",
                 "shasum": ""
             },
             "require": {
@@ -29808,15 +29808,15 @@
                 "bamarni/composer-bin-plugin": "^1.8",
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
                 "guzzlehttp/guzzle": "^7.9",
-                "illuminate/http": "^8.83 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/translation": "^8.83 || ^9.0 || ^10.0 || ^11.0",
-                "illuminate/validation": "^8.83 || ^9.0 || ^10.0 || ^11.0",
+                "illuminate/http": "^8.83 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/translation": "^8.83 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
+                "illuminate/validation": "^8.83 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
                 "laminas/laminas-text": "^2.9",
                 "laravel-zero/framework": "^8.10 || ^9.0 || ^10.0 || ^11.0",
                 "laravel-zero/phar-updater": "^1.1",
                 "mockery/mockery": "^1.6",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
-                "php-mock/php-mock-phpunit": "^2.10"
+                "php-mock/php-mock-phpunit": "^2.13"
             },
             "default-branch": true,
             "bin": [
@@ -29911,20 +29911,20 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-05-02T21:12:18+00:00"
+            "time": "2025-05-03T12:32:33+00:00"
         },
         {
             "name": "guanguans/laravel-soar",
-            "version": "3.18.0",
+            "version": "3.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-soar.git",
-                "reference": "016f38f27ea0966bc59a59dffd448a25fb263848"
+                "reference": "a8079dba6ecf85017eace7c9f27a33863468fe5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/016f38f27ea0966bc59a59dffd448a25fb263848",
-                "reference": "016f38f27ea0966bc59a59dffd448a25fb263848",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/a8079dba6ecf85017eace7c9f27a33863468fe5d",
+                "reference": "a8079dba6ecf85017eace7c9f27a33863468fe5d",
                 "shasum": ""
             },
             "require": {
@@ -29939,24 +29939,24 @@
                 "bamarni/composer-bin-plugin": "^1.8",
                 "barryvdh/laravel-debugbar": "^3.7",
                 "brainmaestro/composer-git-hooks": "^2.8 || ^3.0",
-                "ergebnis/composer-normalize": "^2.45",
-                "friendsofphp/php-cs-fixer": "^3.70",
+                "ergebnis/composer-normalize": "^2.47",
+                "friendsofphp/php-cs-fixer": "^3.75",
                 "guanguans/ai-commit": "dev-main",
-                "guanguans/monorepo-builder-worker": "^1.4",
+                "guanguans/monorepo-builder-worker": "^1.5 || ^2.0",
                 "itsgoingd/clockwork": "^5.3",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.23",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.24",
                 "laravel/legacy-factories": "^1.4",
                 "mockery/mockery": "^1.6",
                 "orchestra/testbench": "^6.47 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-laravel": "^1.2 || ^2.0 || ^3.0",
-                "php-mock/php-mock-phpunit": "^2.10",
+                "php-mock/php-mock-phpunit": "^2.13",
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan-deprecation-rules": "^2.0",
                 "rector/rector": "^2.0",
                 "spatie/pest-plugin-snapshots": "^1.1 || ^2.0",
-                "spatie/ray": "^1.41",
+                "spatie/ray": "^1.42",
                 "symplify/phpstan-extensions": "^12.0",
                 "vimeo/psalm": "^4.0 || ^5.0 || ^6.0",
                 "yamadashy/phpstan-friendly-formatter": "^1.2"
@@ -30048,7 +30048,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-03-01T13:09:44+00:00"
+            "time": "2025-05-03T12:49:00+00:00"
         },
         {
             "name": "guanguans/monorepo-builder-worker",
@@ -34349,6 +34349,53 @@
                 }
             ],
             "time": "2025-01-01T16:37:48+00:00"
+        },
+        {
+            "name": "rector/jack",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rectorphp/jack.git",
+                "reference": "dddfc1e2650b67e90e1eb67bda354d9cc6587820"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rectorphp/jack/zipball/dddfc1e2650b67e90e1eb67bda354d9cc6587820",
+                "reference": "dddfc1e2650b67e90e1eb67bda354d9cc6587820",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "bin": [
+                "bin/jack"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rector\\SwissKnife\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Swiss knife in pocket of every upgrade architect",
+            "support": {
+                "issues": "https://github.com/rectorphp/jack/issues",
+                "source": "https://github.com/rectorphp/jack/tree/0.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-05-02T10:59:09+00:00"
         },
         {
             "name": "rector/rector",
