@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccc6460a1754d889570d7a6009572e4c",
+    "content-hash": "08317eb8af73a32e8be8b983b2045073",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4238,16 +4238,16 @@
         },
         {
             "name": "echolabsdev/prism",
-            "version": "v0.65.2",
+            "version": "v0.66.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "79c1795f80d160b682270d0ad6fb56c4f161ca87"
+                "reference": "e057c7097571c04b536aba8a7d9c609b63998926"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/79c1795f80d160b682270d0ad6fb56c4f161ca87",
-                "reference": "79c1795f80d160b682270d0ad6fb56c4f161ca87",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/e057c7097571c04b536aba8a7d9c609b63998926",
+                "reference": "e057c7097571c04b536aba8a7d9c609b63998926",
                 "shasum": ""
             },
             "require": {
@@ -4302,7 +4302,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.65.2"
+                "source": "https://github.com/prism-php/prism/tree/v0.66.0"
             },
             "funding": [
                 {
@@ -4310,7 +4310,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-29T12:53:11+00:00"
+            "time": "2025-05-04T15:55:15+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -10001,16 +10001,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.6.2",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "06c3b0bf2540338094575612f4a1778d0d2d5e94"
+                "reference": "6fbb36d44824ed4091adbcf4c7d4a3923cdb3405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/06c3b0bf2540338094575612f4a1778d0d2d5e94",
-                "reference": "06c3b0bf2540338094575612f4a1778d0d2d5e94",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/6fbb36d44824ed4091adbcf4c7d4a3923cdb3405",
+                "reference": "6fbb36d44824ed4091adbcf4c7d4a3923cdb3405",
                 "shasum": ""
             },
             "require": {
@@ -10047,7 +10047,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.7-dev"
+                    "dev-main": "2.8-dev"
                 }
             },
             "autoload": {
@@ -10104,7 +10104,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-18T21:09:27+00:00"
+            "time": "2025-05-05T12:20:28+00:00"
         },
         {
             "name": "league/config",
