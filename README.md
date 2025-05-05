@@ -64,6 +64,12 @@ composer envoy-testing
 composer facade-lint
 composer facade-update
 composer install-project
+composer jack
+composer jack-breakpoint
+composer jack-open-versions
+composer jack-open-versions-dev
+composer jack-open-versions-dev-dry-run
+composer jack-open-versions-dry-run
 composer json-lint
 composer lint
 composer md-fix
@@ -213,6 +219,7 @@ composer zh-lint
 * [laracasts/presenter](https://github.com/laracasts/Presenter) - Simple view presenters
 * [laragear/cache-query](https://github.com/laragear/cache-query) - Remember your query results using only one method. Yes, only one.
 * [laragear/discover](https://github.com/Laragear/Discover) - Discover and filter PHP Classes within a directory
+* [laragear/populate](https://github.com/Laragear/Populate) - Populate your database with a supercharged, continuable seeder
 * [laragear/preload](https://github.com/Laragear/Preload) - Effortlessly make a Preload script for your Laravel application.
 * [laragear/two-factor](https://github.com/Laragear/TwoFactor) - On-premises 2FA Authentication for out-of-the-box.
 * [laragear/webauthn](https://github.com/Laragear/WebAuthn) - Authenticate users with Passkeys: fingerprints, patterns and biometric data.
@@ -356,6 +363,7 @@ composer zh-lint
 * [phpstan/phpstan-webmozart-assert](https://github.com/phpstan/phpstan-webmozart-assert) - PHPStan webmozart/assert extension
 * [povils/phpmnd](https://github.com/povils/phpmnd) - A tool to detect Magic numbers in codebase
 * [rakutentech/laravel-request-docs](https://github.com/rakutentech/laravel-request-docs) - Automatically generate Laravel docs from request rules, controllers and routes
+* [rector/jack](https://github.com/rectorphp/jack) - Swiss knife in pocket of every upgrade architect
 * [rector/rector](https://github.com/rectorphp/rector) - Instant Upgrade and Automated Refactoring of any PHP code
 * [rector/swiss-knife](https://github.com/rectorphp/swiss-knife) - Swiss knife in pocket of every upgrade architect
 * [rector/type-perfect](https://github.com/rectorphp/type-perfect) - Next level type declaration checks

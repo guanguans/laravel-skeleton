@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e5f22a0f64393cd70389b3d18d7e854",
+    "content-hash": "ccc6460a1754d889570d7a6009572e4c",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -8010,6 +8010,73 @@
                 }
             ],
             "time": "2025-02-16T04:19:25+00:00"
+        },
+        {
+            "name": "laragear/populate",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laragear/Populate.git",
+                "reference": "1662a5749fc484e69704bdb32e83398f141c2b45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laragear/Populate/zipball/1662a5749fc484e69704bdb32e83398f141c2b45",
+                "reference": "1662a5749fc484e69704bdb32e83398f141c2b45",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "11.*|12.*",
+                "illuminate/database": "11.*|12.*",
+                "illuminate/filesystem": "11.*|12.*",
+                "illuminate/pipeline": "11.*|12.*",
+                "illuminate/support": "11.*|12.*",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laragear/meta-testing": "^3.1.0",
+                "orchestra/testbench": "9.*|10.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laragear\\Populate\\PopulateServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laragear\\Populate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Italo Baeza C.",
+                    "email": "DarkGhostHunter@Gmail.com",
+                    "homepage": "https://github.com/DarkGhostHunter"
+                }
+            ],
+            "description": "Populate your database with a supercharged, continuable seeder",
+            "support": {
+                "issues": "https://github.com/Laragear/Populate/issues",
+                "source": "https://github.com/Laragear/Populate"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/DarkGhostHunter",
+                    "type": "Github Sponsorship"
+                },
+                {
+                    "url": "https://paypal.me/darkghosthunter",
+                    "type": "Paypal"
+                }
+            ],
+            "time": "2025-04-27T05:15:40+00:00"
         },
         {
             "name": "laragear/preload",
