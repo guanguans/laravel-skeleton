@@ -34572,21 +34572,21 @@
         },
         {
             "name": "rector/type-perfect",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/type-perfect.git",
-                "reference": "eefd712f182ebdde175090ccdb1ee8acb0265986"
+                "reference": "098eea3fe0e884fe281d939e5e4142151ab67368"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/eefd712f182ebdde175090ccdb1ee8acb0265986",
-                "reference": "eefd712f182ebdde175090ccdb1ee8acb0265986",
+                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/098eea3fe0e884fe281d939e5e4142151ab67368",
+                "reference": "098eea3fe0e884fe281d939e5e4142151ab67368",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan": "^2.1.14",
                 "webmozart/assert": "^1.11"
             },
             "type": "phpstan-extension",
@@ -34609,7 +34609,7 @@
             "description": "Next level type declaration checks",
             "support": {
                 "issues": "https://github.com/rectorphp/type-perfect/issues",
-                "source": "https://github.com/rectorphp/type-perfect/tree/2.0.2"
+                "source": "https://github.com/rectorphp/type-perfect/tree/2.1.0"
             },
             "funding": [
                 {
@@ -34621,7 +34621,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-04T09:04:08+00:00"
+            "time": "2025-05-04T20:38:57+00:00"
         },
         {
             "name": "reliese/laravel",
@@ -37612,6 +37612,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
