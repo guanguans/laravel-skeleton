@@ -1,3 +1,4 @@
-# total 7 errors
+# total 8 errors
 includes:
+    - nullsafe.neverNull.neon
     - property.nonObject.neon

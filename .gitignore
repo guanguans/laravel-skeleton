@@ -23,6 +23,7 @@ yarn-error.log
 /.zed
 
 /.build/
+/.qodo/
 /vendor-bin/**/vendor/
 .DS_Store
 /.phpstorm.meta.php

@@ -59,6 +59,7 @@
         "juliomotol/laravel-auth-timeout": "^4.2",
         "kevinrob/guzzle-cache-middleware": "^6.0",
         "kirkbushell/eloquence": "^12.0",
+        "kirschbaum-development/eloquent-power-joins": "^4.2",
         "laminas/laminas-diagnostics": "^1.27",
         "laracasts/presenter": "^0.2",
         "laragear/cache-query": "^5.0",

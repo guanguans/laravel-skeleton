@@ -110,7 +110,6 @@ parameters:
         - identifier: typePerfect.noArrayAccessOnObject
         - identifier: typePerfect.noMixedMethodCaller
         - identifier: typePerfect.noMixedPropertyFetcher
-        - '#^Call to an undefined method Guanguans\\LaravelApiResponse\\Contracts\\ApiResponseContract\:\:.*\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Auth\\AuthManager\:\:factory\(\)\.$#'
         - '#^Call to function is_subclass_of\(\) with class\-string and string will always evaluate to true\.$#'

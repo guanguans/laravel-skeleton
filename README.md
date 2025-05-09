@@ -215,6 +215,7 @@ composer zh-lint
 * [juliomotol/laravel-auth-timeout](https://github.com/juliomotol/laravel-auth-timeout) - Authentication Timeout for Laravel
 * [kevinrob/guzzle-cache-middleware](https://github.com/Kevinrob/guzzle-cache-middleware) - A HTTP/1.1 Cache for Guzzle 6. It's a simple Middleware to be added in the HandlerStack. (RFC 7234)
 * [kirkbushell/eloquence](https://github.com/kirkbushell/eloquence) - A set of extensions adding additional functionality and consistency to Laravel's awesome Eloquent library.
+* [kirschbaum-development/eloquent-power-joins](https://github.com/kirschbaum-development/eloquent-power-joins) - The Laravel magic applied to joins.
 * [laminas/laminas-diagnostics](https://github.com/laminas/laminas-diagnostics) - A set of components for performing diagnostic tests in PHP applications
 * [laracasts/presenter](https://github.com/laracasts/Presenter) - Simple view presenters
 * [laragear/cache-query](https://github.com/laragear/cache-query) - Remember your query results using only one method. Yes, only one.
@@ -408,6 +409,7 @@ app
 │   └── CurrencyCast.php
 ├── Console
 │   └── Commands
+│       ├── CachePruneCommand.php
 │       ├── CheckServiceProviderCommand.php
 │       ├── ClearAllCommand.php
 │       ├── ClearLogsCommand.php
@@ -652,6 +654,7 @@ app
 │   │   │   └── WhereStartsWithQueryBuilderMixin.php
 │   │   ├── RequestMixin.php
 │   │   ├── ResponseFactoryMixin.php
+│   │   ├── RouterMixin.php
 │   │   ├── SchedulingEventMixin.php
 │   │   ├── StrMixin.php
 │   │   ├── StringableMixin.php
@@ -708,7 +711,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-55 directories, 255 files
+55 directories, 257 files
 
 ```
 </details>
