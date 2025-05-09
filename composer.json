@@ -179,7 +179,7 @@
         "ergebnis/rector-rules": "^1.4",
         "fakerphp/faker": "^1.24",
         "guanguans/ai-commit": "dev-main",
-        "guanguans/laravel-soar": "^3.18",
+        "guanguans/laravel-soar": "^4.0",
         "guanguans/monorepo-builder-worker": "dev-main",
         "ion-bazan/composer-diff": "^1.12",
         "jasonmccreary/laravel-test-assertions": "^2.8",
