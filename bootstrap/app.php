@@ -119,7 +119,7 @@ return Application::configure(basePath: \dirname(__DIR__))
     })
     ->withExceptions(static function (Exceptions $exceptions): void {
         $exceptions
-            ->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 1000))
+            // ->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 10))
             ->truncateRequestExceptionsAt(256)
             ->dontTruncateRequestExceptions()
             ->dontReport([
