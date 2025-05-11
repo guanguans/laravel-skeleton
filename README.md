@@ -251,6 +251,7 @@ composer zh-lint
 * [nunomaduro/laravel-optimize-database](https://github.com/nunomaduro/laravel-optimize-database) - Publishes migrations that make your database production ready.
 * [nwidart/laravel-modules](https://github.com/nWidart/laravel-modules) - Laravel Module management
 * [opcodesio/log-viewer](https://github.com/opcodesio/log-viewer) - Fast and easy-to-use log viewer for your Laravel application
+* [orchestra/sidekick](https://github.com/orchestral/sidekick) - Packages Toolkit Utilities and Helpers for Laravel
 * [overtrue/laravel-uploader](https://github.com/overtrue/laravel-uploader) - An upload component for Laravel.
 * [perryvandermeer/laravel-console-validator](https://github.com/PerryvanderMeer/laravel-console-validator) - Validate arguments for Laravel commands
 * [phiki/phiki](https://github.com/phikiphp/phiki) - Syntax highlighting using TextMate grammars in PHP.
