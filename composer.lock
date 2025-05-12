@@ -2495,16 +2495,16 @@
         },
         {
             "name": "christophrumpel/artisan-benchmark",
-            "version": "v0.0.3",
+            "version": "v0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/christophrumpel/artisan-benchmark.git",
-                "reference": "2458217611849d11d48dcaa663167e1f639234ce"
+                "reference": "1553cdb0a276ade36a918f1f9c0a8f3b49e632fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/christophrumpel/artisan-benchmark/zipball/2458217611849d11d48dcaa663167e1f639234ce",
-                "reference": "2458217611849d11d48dcaa663167e1f639234ce",
+                "url": "https://api.github.com/repos/christophrumpel/artisan-benchmark/zipball/1553cdb0a276ade36a918f1f9c0a8f3b49e632fd",
+                "reference": "1553cdb0a276ade36a918f1f9c0a8f3b49e632fd",
                 "shasum": ""
             },
             "require": {
@@ -2548,9 +2548,9 @@
             ],
             "support": {
                 "issues": "https://github.com/christophrumpel/artisan-benchmark/issues",
-                "source": "https://github.com/christophrumpel/artisan-benchmark/tree/v0.0.3"
+                "source": "https://github.com/christophrumpel/artisan-benchmark/tree/v0.0.4"
             },
-            "time": "2025-02-19T08:11:23+00:00"
+            "time": "2025-05-12T06:48:45+00:00"
         },
         {
             "name": "cknow/laravel-money",
@@ -37648,6 +37648,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
