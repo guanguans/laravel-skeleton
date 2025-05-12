@@ -38,7 +38,7 @@
         "divineomega/password_exposed": "^3.2",
         "dragon-code/laravel-data-dumper": "^1.4",
         "dragon-code/support": "^6.16",
-        "echolabsdev/prism": "^0.66",
+        "echolabsdev/prism": "^0.67",
         "elao/enum": "^2.5",
         "elastic/ecs-logging": "^2.0",
         "elasticsearch/elasticsearch": "^8.18 || ^9.0",

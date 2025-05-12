@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eea38bf74e8d0437789feb6a0a03c323",
+    "content-hash": "609c5e594cedafb0889f4df398b5421b",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4238,16 +4238,16 @@
         },
         {
             "name": "echolabsdev/prism",
-            "version": "v0.66.0",
+            "version": "v0.67.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "e057c7097571c04b536aba8a7d9c609b63998926"
+                "reference": "d08aa262736de355654c359f240d74421b095bfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/e057c7097571c04b536aba8a7d9c609b63998926",
-                "reference": "e057c7097571c04b536aba8a7d9c609b63998926",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/d08aa262736de355654c359f240d74421b095bfb",
+                "reference": "d08aa262736de355654c359f240d74421b095bfb",
                 "shasum": ""
             },
             "require": {
@@ -4302,7 +4302,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.66.0"
+                "source": "https://github.com/prism-php/prism/tree/v0.67.0"
             },
             "funding": [
                 {
@@ -4310,7 +4310,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-04T15:55:15+00:00"
+            "time": "2025-05-12T15:31:56+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -37648,6 +37648,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
