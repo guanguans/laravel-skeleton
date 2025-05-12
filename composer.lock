@@ -12928,16 +12928,16 @@
         },
         {
             "name": "opcodesio/log-viewer",
-            "version": "v3.15.5",
+            "version": "v3.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opcodesio/log-viewer.git",
-                "reference": "726afaac63458ad41073057670727fd892cf10d1"
+                "reference": "0f8ca746d1407f18f3b50424a3e36c239a48b73f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/726afaac63458ad41073057670727fd892cf10d1",
-                "reference": "726afaac63458ad41073057670727fd892cf10d1",
+                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/0f8ca746d1407f18f3b50424a3e36c239a48b73f",
+                "reference": "0f8ca746d1407f18f3b50424a3e36c239a48b73f",
                 "shasum": ""
             },
             "require": {
@@ -13000,7 +13000,7 @@
             ],
             "support": {
                 "issues": "https://github.com/opcodesio/log-viewer/issues",
-                "source": "https://github.com/opcodesio/log-viewer/tree/v3.15.5"
+                "source": "https://github.com/opcodesio/log-viewer/tree/v3.17.0"
             },
             "funding": [
                 {
@@ -13012,7 +13012,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-02T17:40:35+00:00"
+            "time": "2025-05-11T06:47:28+00:00"
         },
         {
             "name": "opcodesio/mail-parser",
@@ -37648,6 +37648,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
