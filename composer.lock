@@ -30045,16 +30045,16 @@
         },
         {
             "name": "guanguans/laravel-soar",
-            "version": "4.0.0",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-soar.git",
-                "reference": "108c3d4e307a04cf4d7f79577acc1dfccbc6c4d7"
+                "reference": "941165fd5d50bf0c5bd7b63acc425b86ed09f7f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/108c3d4e307a04cf4d7f79577acc1dfccbc6c4d7",
-                "reference": "108c3d4e307a04cf4d7f79577acc1dfccbc6c4d7",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/941165fd5d50bf0c5bd7b63acc425b86ed09f7f3",
+                "reference": "941165fd5d50bf0c5bd7b63acc425b86ed09f7f3",
                 "shasum": ""
             },
             "require": {
@@ -30077,10 +30077,11 @@
                 "itsgoingd/clockwork": "^5.3",
                 "laradumps/laradumps": "^2.2 || ^3.0 || ^4.0",
                 "laravel/facade-documenter": "dev-main",
-                "laravel/legacy-factories": "^1.4",
+                "laravel/helpers": "^1.7",
+                "laravel/telescope": "^5.7",
                 "mockery/mockery": "^1.6",
                 "nette/utils": "^4.0",
-                "orchestra/testbench": "^7.54 || ^8.0 || ^9.0 || ^10.0",
+                "orchestra/testbench": "^7.55 || ^8.0 || ^9.0 || ^10.0",
                 "pestphp/pest": "^1.23 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-faker": "^1.0 || ^2.0 || ^3.0",
                 "pestphp/pest-plugin-laravel": "^1.4 || ^2.0 || ^3.0",
@@ -30115,6 +30116,7 @@
                 "buggregator/trap": "Output SQL scores to Trap.",
                 "itsgoingd/clockwork": "Output SQL scores to Clockwork.",
                 "laradumps/laradumps": "Output SQL scores to Laradumps.",
+                "laravel/telescope": "Output SQL scores to Telescope.",
                 "spatie/laravel-ray": "Output SQL scores to Laravel Ray."
             },
             "type": "laravel",
@@ -30202,7 +30204,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-05-08T10:29:02+00:00"
+            "time": "2025-05-12T13:59:46+00:00"
         },
         {
             "name": "guanguans/monorepo-builder-worker",
@@ -37648,6 +37650,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
