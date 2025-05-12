@@ -8305,16 +8305,16 @@
         },
         {
             "name": "laragear/webauthn",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/WebAuthn.git",
-                "reference": "7eed0fa249f8a6b1e3611a4a31f6ab14c28da402"
+                "reference": "fe805c71e4ebbf0ce6b800e4c010460cdff93258"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/WebAuthn/zipball/7eed0fa249f8a6b1e3611a4a31f6ab14c28da402",
-                "reference": "7eed0fa249f8a6b1e3611a4a31f6ab14c28da402",
+                "url": "https://api.github.com/repos/Laragear/WebAuthn/zipball/fe805c71e4ebbf0ce6b800e4c010460cdff93258",
+                "reference": "fe805c71e4ebbf0ce6b800e4c010460cdff93258",
                 "shasum": ""
             },
             "require": {
@@ -8391,7 +8391,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2025-02-16T06:40:11+00:00"
+            "time": "2025-05-09T23:25:49+00:00"
         },
         {
             "name": "laravel-frontend-presets/tall",
