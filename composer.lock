@@ -16054,16 +16054,16 @@
         },
         {
             "name": "proengsoft/laravel-jsvalidation",
-            "version": "v4.10.1",
+            "version": "v4.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/proengsoft/laravel-jsvalidation.git",
-                "reference": "bb22ab44374304e322889bd0065159af5f1e6cc7"
+                "reference": "f947c0540fbd260eea8a7f834704fdadf45ea1d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/proengsoft/laravel-jsvalidation/zipball/bb22ab44374304e322889bd0065159af5f1e6cc7",
-                "reference": "bb22ab44374304e322889bd0065159af5f1e6cc7",
+                "url": "https://api.github.com/repos/proengsoft/laravel-jsvalidation/zipball/f947c0540fbd260eea8a7f834704fdadf45ea1d7",
+                "reference": "f947c0540fbd260eea8a7f834704fdadf45ea1d7",
                 "shasum": ""
             },
             "require": {
@@ -16127,7 +16127,7 @@
             ],
             "support": {
                 "issues": "https://github.com/proengsoft/laravel-jsvalidation/issues",
-                "source": "https://github.com/proengsoft/laravel-jsvalidation/tree/v4.10.1"
+                "source": "https://github.com/proengsoft/laravel-jsvalidation/tree/v4.10.2"
             },
             "funding": [
                 {
@@ -16135,7 +16135,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-15T15:05:24+00:00"
+            "time": "2025-05-12T08:28:30+00:00"
         },
         {
             "name": "psr/cache",
