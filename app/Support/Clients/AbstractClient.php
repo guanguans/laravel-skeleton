@@ -153,6 +153,27 @@ abstract class AbstractClient
         return [];
     }
 
+    /**
+     * @param int $retries 重试次数
+     * @param int $baseIntervalMs 基础间隔（毫秒）
+     *
+     * @see \GuzzleHttp\RetryMiddleware::exponentialDelay()
+     * @see \retry()
+     */
+    protected function fibonacciRetryIntervals(int $retries, int $baseIntervalMs = 1000): array
+    {
+        $intervals = [];
+        $prev = 0;
+        $curr = 1;
+
+        for ($index = 0; $index < $retries; ++$index) {
+            $intervals[] = $curr * $baseIntervalMs;
+            [$prev, $curr] = [$curr, $prev + $curr];
+        }
+
+        return $intervals;
+    }
+
     private function defaultPendingRequest(): PendingRequest
     {
         return Http::baseUrl($this->configRepository->get('base_url'))
@@ -218,8 +239,8 @@ abstract class AbstractClient
              * @see PendingRequest::$tries
              */
             'retry' => [
-                'times' => 1,
-                'sleep' => 100,
+                'times' => $this->fibonacciRetryIntervals(1),
+                'sleep' => 1000,
                 // 'when' => static fn (\Throwable $throwable): bool => $throwable instanceof ConnectException,
                 'when' => null,
                 'throw' => true,
