@@ -38449,16 +38449,16 @@
         },
         {
             "name": "symplify/easy-coding-standard",
-            "version": "12.5.17",
+            "version": "12.5.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/easy-coding-standard/easy-coding-standard.git",
-                "reference": "9ffb593275f3687a9a7f9b816a67e6a3470e9661"
+                "reference": "451dfeba3770f2d7476468b891a789c451ae4b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/9ffb593275f3687a9a7f9b816a67e6a3470e9661",
-                "reference": "9ffb593275f3687a9a7f9b816a67e6a3470e9661",
+                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/451dfeba3770f2d7476468b891a789c451ae4b34",
+                "reference": "451dfeba3770f2d7476468b891a789c451ae4b34",
                 "shasum": ""
             },
             "require": {
@@ -38494,7 +38494,7 @@
             ],
             "support": {
                 "issues": "https://github.com/easy-coding-standard/easy-coding-standard/issues",
-                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.5.17"
+                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.5.18"
             },
             "funding": [
                 {
@@ -38506,7 +38506,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-13T13:16:20+00:00"
+            "time": "2025-05-14T09:38:08+00:00"
         },
         {
             "name": "symplify/monorepo-builder",
@@ -39365,6 +39365,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
