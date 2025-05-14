@@ -15,6 +15,7 @@ namespace App\Support\Traits;
 
 /**
  * @see https://github.com/coralsio/laraship/blob/main/Corals/core/Foundation/Formatter/Immutable.php
+ * @see https://github.com/Roave/Dont
  *
  * The **immutable** trait is a combination of the {@see Disenchant},
  * {@see Uncloneable}, and {@see Unconstructable} traits. It is the perfect
@@ -24,9 +25,4 @@ namespace App\Support\Traits;
  * Obviously mutation is always possible through reflection, this cannot and
  * should not be disabled.
  */
-trait Immutable
-{
-    use Disenchant;
-    use Uncloneable;
-    use Unconstructable;
-}
+trait Immutable {}

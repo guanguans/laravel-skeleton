@@ -34,6 +34,11 @@ abstract class Rule implements ValidationRule
     abstract public function passes(string $attribute, mixed $value): bool;
 
     /**
+     * @see https://github.com/Respect/Validation
+     * @see https://github.com/ronanguilloux/IsoCodes
+     * @see https://github.com/vlucas/valitron
+     * @see https://github.com/Wixel/GUMP
+     *
      * @noinspection RedundantDocCommentTagInspection
      *
      * @param \Closure(string, null|string): \Illuminate\Translation\PotentiallyTranslatedString $fail

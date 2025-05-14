@@ -51,6 +51,9 @@ class CallbackGetCast implements CastsAttributes
     }
 
     /**
+     * @see \Illuminate\Container\Container::call()
+     * @see https://github.com/PHP-DI/Invoker/blob/master/src/CallableResolver.php
+     *
      * @throws \Throwable
      */
     protected function resolveCallback(string $callback): callable
@@ -65,12 +68,20 @@ class CallbackGetCast implements CastsAttributes
             return $segments;
         }
 
-        throw_if(\count($segments) !== 2 || !method_exists($segments[0], $segments[1]), \InvalidArgumentException::class, "Invalid callback: $callback");
+        throw_if(
+            \count($segments) !== 2 || !method_exists($segments[0], $segments[1]),
+            \InvalidArgumentException::class,
+            "Invalid callback: $callback"
+        );
 
         try {
             return [resolve($segments[0]), $segments[1]];
         } catch (\Throwable $throwable) {
-            throw new \InvalidArgumentException("Invalid callback: $callback({$throwable->getMessage()})", $throwable->getCode(), $throwable);
+            throw new \InvalidArgumentException(
+                "Invalid callback: $callback({$throwable->getMessage()})",
+                $throwable->getCode(),
+                $throwable
+            );
         }
     }
 }
