@@ -23,8 +23,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
 use Overtrue\LaravelUploader\LaravelUploader;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +40,8 @@ use Overtrue\LaravelUploader\LaravelUploader;
 Route::get('/', static fn () => view('welcome'));
 
 Route::fallback(static fn () => abort(404));
+
+Route::get('logs', [LogViewerController::class, 'index']);
 
 LaravelUploader::routes();
 

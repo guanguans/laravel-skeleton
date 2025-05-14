@@ -172,6 +172,7 @@ composer zh-lint
 * [akaunting/laravel-money](https://github.com/akaunting/laravel-money) - Currency formatting and conversion package for Laravel
 * [alexandre-daubois/monolog-processor-collection](https://github.com/alexandre-daubois/monolog-processor-collection) - A collection of Monolog processors
 * [algolia/scout-extended](https://github.com/algolia/scout-extended) - Scout Extended extends Laravel Scout adding algolia-specific features
+* [appstract/laravel-blade-directives](https://github.com/appstract/laravel-blade-directives) - Handy Blade directives
 * [appstract/laravel-opcache](https://github.com/appstract/laravel-opcache) - PHP OPcache Artisan commands for Laravel.
 * [arifhp86/laravel-clear-expired-cache-file](https://github.com/arifhp86/laravel-clear-expired-cache-file) - Remove laravel expired cache file/folder
 * [astrotomic/laravel-translatable](https://github.com/Astrotomic/laravel-translatable) - A Laravel package for multilingual models
@@ -181,6 +182,7 @@ composer zh-lint
 * [balping/json-raw-encoder](git@gitlab.com:balping/json-raw-encoder.git) - Encode arrays to json with raw JS objects (eg. callbacks) in them
 * [beyondcode/laravel-mailbox](https://github.com/beyondcode/laravel-mailbox) - Handle incoming emails in your Laravel application.
 * [biiiiiigmonster/hasin](https://github.com/biiiiiigmonster/hasin) - Laravel framework relation has in implement
+* [binarytorch/larecipe](https://github.com/saleem-hadad/larecipe) - Generate gorgeous recipes for your Laravel applications using MarkDown
 * [bramus/monolog-colored-line-formatter](https://github.com/bramus/monolog-colored-line-formatter) - Colored Line Formatter for Monolog
 * [calebporzio/sushi](https://github.com/calebporzio/sushi) - Eloquent's missing "array" driver.
 * [cerbero/command-validator](https://github.com/cerbero90/command-validator) - Laravel package to validate the input of console commands.
@@ -189,11 +191,13 @@ composer zh-lint
 * [christophrumpel/artisan-benchmark](https://github.com/christophrumpel/artisan-benchmark) - Benchmark Artisan Commands
 * [cknow/laravel-money](https://github.com/cknow/laravel-money) - Laravel Money
 * [crell/attributeutils](https://github.com/Crell/AttributeUtils) - A robust, flexible attribute handling framework
+* [cviebrock/eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable) - Easy creation of slugs for your Eloquent models in Laravel
 * [cweagans/composer-patches](https://github.com/cweagans/composer-patches) - Provides a way to patch Composer packages.
 * [dcblogdev/laravel-sent-emails](https://github.com/dcblogdev/laravel-sent-emails) - Store outgoing emails in Laravel
 * [divineomega/password_exposed](https://github.com/DivineOmega/password_exposed/releases) - This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.
 * [dragon-code/laravel-data-dumper](https://github.com/TheDragonCode/laravel-data-dumper) - Adding data from certain tables when executing the `php artisan schema:dump` console command
 * [dragon-code/support](https://github.com/TheDragonCode/support) - Support package is a collection of helpers and tools for any project.
+* [dyrynda/laravel-cascade-soft-deletes](https://github.com/michaeldyrynda/laravel-cascade-soft-deletes) - Cascading deletes for Eloquent models that implement soft deletes
 * [echolabsdev/prism](https://github.com/prism-php/prism) - A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
 * [elao/enum](https://github.com/Elao/PhpEnums) - Extended PHP enums capabilities and frameworks integrations
 * [elastic/ecs-logging](https://github.com/elastic/ecs-logging-php) - Format and enrich your log files in the elastic common schema
@@ -201,11 +205,13 @@ composer zh-lint
 * [emreyarligan/enum-concern](https://github.com/emreyarligan/enum-concern) - A PHP package for effortless Enumeration handling with Laravel Collections 📦 ✨
 * [fig/cache-util](https://github.com/php-fig/cache-util) - Useful utility classes and traits for implementing the PSR cache standard
 * [fig/event-dispatcher-util](https://github.com/php-fig/event-dispatcher-util) - Useful utility classes and traits for implementing the PSR events standard
+* [fntneves/laravel-transactional-events](https://github.com/fntneves/laravel-transactional-events) - Transaction-aware Event Dispatcher for Laravel
 * [genealabs/laravel-caffeine](https://github.com/mikebronner/laravel-caffeine) - Keeping Your Laravel Forms Awake
 * [graham-campbell/result-type](https://github.com/GrahamCampbell/Result-Type) - An Implementation Of The Result Type
 * [guanguans/laravel-api-response](https://github.com/guanguans/laravel-api-response) - Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。
 * [guanguans/laravel-exception-notify](https://github.com/guanguans/laravel-exception-notify) - Monitor exception and report to the notification channels(Dump、Log、Mail、AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).
 * [hamidrezaniazi/pecs](https://github.com/hamidrezaniazi/pecs) - PHP ECS (Elastic Common Schema): Simplify logging with the power of elastic common schema.
+* [hisorange/browser-detect](https://github.com/hisorange/browser-detect) - Browser & Mobile detection package for Laravel.
 * [hosmelq/laravel-pulse-schedule](https://github.com/hosmelq/laravel-pulse-schedule) - Laravel Pulse card that list all scheduled tasks.
 * [huangdijia/laravel-horizon-restart](https://github.com/huangdijia/laravel-horizon-restart) - Horizon Restart for Laravel.
 * [inertiajs/inertia-laravel](https://github.com/inertiajs/inertia-laravel) - The Laravel adapter for Inertia.js.
@@ -262,6 +268,8 @@ composer zh-lint
 * [pion/laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) - Service for chunked upload with several js providers
 * [prinsfrank/standards](https://github.com/PrinsFrank/standards) - A collection of standards as PHP Enums: ISO3166, ISO4217, ISO639...
 * [proengsoft/laravel-jsvalidation](https://github.com/proengsoft/laravel-jsvalidation) - Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest
+* [propaganistas/laravel-disposable-email](https://github.com/Propaganistas/Laravel-Disposable-Email) - Disposable email validator
+* [rap2hpoutre/laravel-log-viewer](https://github.com/rap2hpoutre/laravel-log-viewer) - A Laravel log reader
 * [reinink/remember-query-strings](https://github.com/reinink/remember-query-strings) - Laravel middleware that automatically remembers and restores query strings.
 * [rennokki/laravel-eloquent-query-cache](https://github.com/renoki-co/laravel-eloquent-query-cache) - Adding cache on your Laravel Eloquent queries' results is now a breeze.
 * [robclancy/presenter](https://github.com/robclancy/presenter) - Decorate your objects using presenters. Primarily to keep presentation logic out of your models.
@@ -271,16 +279,21 @@ composer zh-lint
 * [skywarth/chaotic-schedule](https://github.com/skywarth/chaotic-schedule) - Randomize scheduled command execution time and date intervals
 * [socialiteproviders/weixin](https://github.com/SocialiteProviders/Weixin) - Weixin OAuth2 Provider for Laravel Socialite
 * [socialiteproviders/weixin-web](https://github.com/SocialiteProviders/Weixin-Web) - Weixin-Web OAuth2 Provider for Laravel Socialite
+* [spatie/db-dumper](https://github.com/spatie/db-dumper) - Dump databases
 * [spatie/fork](https://github.com/spatie/fork) - A lightweight solution for running code concurrently in PHP
 * [spatie/guzzle-rate-limiter-middleware](https://github.com/spatie/guzzle-rate-limiter-middleware) - A rate limiter for Guzzle
 * [spatie/invade](https://github.com/spatie/invade) - A PHP function to work with private properties and methods
 * [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) - A very simple activity logger to monitor the users of your website or application
 * [spatie/laravel-backup](https://github.com/spatie/laravel-backup) - A Laravel package to backup your application
+* [spatie/laravel-cookie-consent](https://github.com/spatie/laravel-cookie-consent) - Make your Laravel app comply with the crazy EU cookie law
 * [spatie/laravel-csp](https://github.com/spatie/laravel-csp) - Add CSP headers to the responses of a Laravel app
 * [spatie/laravel-data](https://github.com/spatie/laravel-data) - Create unified resources and data transfer objects
 * [spatie/laravel-failed-job-monitor](https://github.com/spatie/laravel-failed-job-monitor) - Get notified when a queued job fails
 * [spatie/laravel-health](https://github.com/spatie/laravel-health) - Monitor the health of a Laravel application
+* [spatie/laravel-http-logger](https://github.com/spatie/laravel-http-logger) - A Laravel package to log HTTP requests
+* [spatie/laravel-json-api-paginate](https://github.com/spatie/laravel-json-api-paginate) - A paginator that plays nice with the JSON API spec
 * [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary) - Associate files with Eloquent models
+* [spatie/laravel-missing-page-redirector](https://github.com/spatie/laravel-missing-page-redirector) - Redirect missing pages in your Laravel application
 * [spatie/laravel-morph-map-generator](https://github.com/spatie/laravel-morph-map-generator) - Automatically generate morph maps in your Laravel application
 * [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) - Easily build Eloquent queries from API requests
 * [spatie/laravel-responsecache](https://github.com/spatie/laravel-responsecache) - Speed up a Laravel application by caching the entire response
@@ -289,7 +302,9 @@ composer zh-lint
 * [spatie/laravel-schedule-monitor](https://github.com/spatie/laravel-schedule-monitor) - Monitor scheduled tasks in a Laravel app
 * [spatie/laravel-schemaless-attributes](https://github.com/spatie/laravel-schemaless-attributes) - Add schemaless attributes to Eloquent models
 * [spatie/laravel-settings](https://github.com/spatie/laravel-settings) - Store your application settings
+* [spatie/laravel-signal-aware-command](https://github.com/spatie/laravel-signal-aware-command) - Handle signals in artisan commands
 * [spatie/laravel-sitemap](https://github.com/spatie/laravel-sitemap) - Create and generate sitemaps with ease
+* [spatie/laravel-translatable](https://github.com/spatie/laravel-translatable) - A trait to make an Eloquent model hold translations
 * [spatie/laravel-webhook-client](https://github.com/spatie/laravel-webhook-client) - Receive webhooks in Laravel apps
 * [spatie/packagist-api](https://github.com/spatie/packagist-api) - Fetch package info from Packagist
 * [spiral/attributes](https://github.com/spiral/attributes) - PHP attributes reader
@@ -302,6 +317,7 @@ composer zh-lint
 * [staudenmeir/laravel-cte](https://github.com/staudenmeir/laravel-cte/tree/v12.1) - Laravel queries with common table expressions
 * [staudenmeir/laravel-migration-views](https://github.com/staudenmeir/laravel-migration-views) - Laravel database migrations with SQL views
 * [stevebauman/location](https://github.com/stevebauman/location) - Retrieve a user's location by their IP Address
+* [stillat/blade-parser](https://github.com/Stillat/blade-parser) - 
 * [swiss-devjoy/laravel-optimize-sqlite](https://github.com/Swiss-Devjoy/laravel-optimize-sqlite) - Optimize your SQLite database for production in Laravel
 * [symfony/polyfill-php84](https://github.com/symfony/polyfill-php84) - Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions
 * [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
@@ -316,14 +332,17 @@ composer zh-lint
 * [watson/validating](https://github.com/dwightwatson/validating) - Eloquent model validating trait.
 * [wendelladriel/laravel-validated-dto](https://github.com/WendellAdriel/laravel-validated-dto) - Data Transfer Objects with validation for Laravel applications
 * [wikimedia/composer-merge-plugin](https://github.com/wikimedia/composer-merge-plugin) - Composer plugin to merge multiple composer.json files
+* [wireui/wireui](https://github.com/wireui/wireui) - TallStack components
 * [zenstruck/stream](https://github.com/zenstruck/stream) - Object wrapper for PHP resources.
 * [andreaselia/laravel-api-to-postman](https://github.com/andreaselia/laravel-api-to-postman) - Generate a Postman collection automatically from your Laravel API
 * [bamarni/composer-bin-plugin](https://github.com/bamarni/composer-bin-plugin) - No conflicts for your bin dependencies
 * [barryvdh/laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper) - Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.
+* [beyondcode/laravel-query-detector](https://github.com/beyondcode/laravel-query-detector) - Laravel N+1 Query Detector
 * [brainmaestro/composer-git-hooks](https://github.com/BrainMaestro/composer-git-hooks) - Easily manage git hooks in your composer config
 * [buggregator/trap](https://github.com/buggregator/trap) - A simple and powerful tool for debugging PHP applications.
 * [composer/composer](https://github.com/composer/composer) - Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.
 * [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
+* [defstudio/pest-plugin-laravel-expectations](https://github.com/defstudio/pest-plugin-laravel-expectations) - A plugin to add laravel tailored expectations to Pest
 * [deployer/deployer](https://github.com/deployphp/deployer) - Deployment Tool
 * [dragon-code/benchmark](https://github.com/TheDragonCode/benchmark) - Simple comparison of code execution speed between different options
 * [dragon-code/migrate-db](https://github.com/TheDragonCode/migrate-db) - Easy data transfer from one database to another
@@ -694,14 +713,11 @@ app
 │   ├── Traits
 │   │   ├── Configurable.php
 │   │   ├── Copyable.php
-│   │   ├── Disenchant.php
 │   │   ├── Immutable.php
 │   │   ├── Makeable.php
 │   │   ├── Sanitizeable.php
 │   │   ├── SetStateable.php
 │   │   ├── Singletonable.php
-│   │   ├── Uncloneable.php
-│   │   ├── Unconstructable.php
 │   │   └── WithPipeArgs.php
 │   └── helpers.php
 └── View
@@ -712,7 +728,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-55 directories, 257 files
+55 directories, 254 files
 
 ```
 </details>

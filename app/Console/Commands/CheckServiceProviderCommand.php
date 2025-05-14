@@ -27,8 +27,6 @@ final class CheckServiceProviderCommand extends Command
         SIGNATURE;
     protected $description = 'Check service providers and ensure they are correctly registered.';
     private array $except = [
-        'orchestra/canvas',
-        'orchestra/canvas-core',
         'kitloong/laravel-app-logger',
         'laravel-lang/actions',
         'laravel-lang/attributes',
@@ -46,11 +44,15 @@ final class CheckServiceProviderCommand extends Command
         'livewire/livewire',
         'nesbot/carbon',
         'nunomaduro/termwind',
+        'orchestra/canvas',
+        'orchestra/canvas-core',
+        'pestphp/pest-plugin-laravel',
         'socialiteproviders/manager',
         'spatie/laravel-http-logger',
         'spatie/laravel-signal-aware-command',
         'spatie/php-structure-discoverer',
         'wilderborn/partyline',
+        'wireui/heroicons',
     ];
 
     /**
@@ -106,6 +108,8 @@ final class CheckServiceProviderCommand extends Command
 
             return 1;
         }
+
+        $this->components->info('All service providers are correctly registered.');
 
         return 0;
     }

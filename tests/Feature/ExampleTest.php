@@ -17,16 +17,23 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Console\Commands\CachePruneCommand;
+use App\Console\Commands\CheckServiceProviderCommand;
+use App\Console\Commands\ClearAllCommand;
+use App\Console\Commands\ClearLogsCommand;
 use App\Console\Commands\FindDumpStatementCommand;
 use App\Console\Commands\FindStaticMethodsCommand;
 use App\Console\Commands\GenerateSitemapCommand;
+use App\Console\Commands\HealthCheckCommand;
 use App\Console\Commands\IdeHelperChoresCommand;
 use App\Console\Commands\InflectorCommand;
 use App\Console\Commands\InitCommand;
 use App\Console\Commands\MigrateFromMysqlToSqlite;
+use App\Console\Commands\OpcacheUrlCommand;
 use App\Console\Commands\OptimizeAllCommand;
 use App\Console\Commands\PerformDatabaseBackupCommand;
 use App\Console\Commands\ShowUnsupportedRequiresCommand;
+use App\Console\Commands\UpdateReadmeCommand;
 
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>.
@@ -71,8 +78,16 @@ it('is console', function (): void {
             InitCommand::class,
             MigrateFromMysqlToSqlite::class,
             OptimizeAllCommand::class,
+
+            // CachePruneCommand::class,
+            CheckServiceProviderCommand::class,
+            // ClearAllCommand::class,
+            // ClearLogsCommand::class,
+            // HealthCheckCommand::class,
+            // OpcacheUrlCommand::class,
             PerformDatabaseBackupCommand::class,
-            ShowUnsupportedRequiresCommand::class,
+            // ShowUnsupportedRequiresCommand::class,
+            // UpdateReadmeCommand::class,
         ]))
         ->keys()
         // ->dd()

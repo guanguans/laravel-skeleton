@@ -31,6 +31,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
     protected $providers = [
         'AndreasElia\\PostmanGenerator\\PostmanGeneratorServiceProvider',
         'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
+        'BeyondCode\QueryDetector\QueryDetectorServiceProvider',
         'Dedoc\\Scramble\\ScrambleServiceProvider',
         'DragonCode\\MigrateDB\\ServiceProvider',
         'Guanguans\\LaravelSoar\\SoarServiceProvider',
