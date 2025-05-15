@@ -117,7 +117,14 @@ final class ShowUnsupportedRequiresCommand extends Command
             'package' => 'array',
             // 'package.*' => 'nullable|string|contains:/',
             'major-version' => 'integer|min:0',
-            'cwd' => 'nullable|string',
+            'cwd' => 'nullable|string|callback:is_dir',
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            'cwd.callback' => 'The :attribute [:input] is not a directory.',
         ];
     }
 

@@ -18,24 +18,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class CallbackGetCast implements CastsAttributes
 {
-    /** @var callable */
-    protected $callback;
-    protected array $remainingCallbackArgs;
+    private array $callbackArgs;
 
-    /**
-     * @param string $callback the callback(function、class::method、class@method) to be used to cast the attribute
-     * @param int $castingAttributeCallbackArgIndex the index of the argument that will be the attribute being cast
-     * @param scalar ...$remainingCallbackArgs The remaining callback arguments.
-     *
-     * @throws \Throwable
-     */
     public function __construct(
-        string $callback,
-        protected int $castingAttributeCallbackArgIndex = 0,
-        ...$remainingCallbackArgs
+        private readonly mixed $callback,
+        private readonly int $idxOfAttrValInCallbackArgs = 0,
+        mixed ...$callbackArgs
     ) {
-        $this->callback = $this->resolveCallback($callback);
-        $this->remainingCallbackArgs = $remainingCallbackArgs;
+        $this->callbackArgs = $callbackArgs;
     }
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
@@ -43,20 +33,29 @@ class CallbackGetCast implements CastsAttributes
         return $value;
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        array_splice($this->remainingCallbackArgs, $this->castingAttributeCallbackArgIndex, 0, $value);
+        array_splice($this->callbackArgs, $this->idxOfAttrValInCallbackArgs, 0, $value);
 
-        return \call_user_func($this->callback, ...$this->remainingCallbackArgs);
+        return \call_user_func_array(self::resolveCallback($this->callback), $this->callbackArgs);
     }
 
     /**
-     * @see \Illuminate\Container\Container::call()
      * @see https://github.com/PHP-DI/Invoker/blob/master/src/CallableResolver.php
+     * @see \Illuminate\Container\Container::call()
+     *
+     * @noinspection RedundantDocCommentTagInspection
+     *
+     * @param callable|string $callback
      *
      * @throws \Throwable
+     *
+     * @return callable(mixed...): bool
      */
-    protected function resolveCallback(string $callback): callable
+    public static function resolveCallback(mixed $callback): callable
     {
         if (\is_callable($callback)) {
             return $callback;
@@ -68,17 +67,19 @@ class CallbackGetCast implements CastsAttributes
             return $segments;
         }
 
+        $callbackName = \is_string($callback) ? $callback : json_encode($callback, \JSON_THROW_ON_ERROR);
+
         throw_if(
             \count($segments) !== 2 || !method_exists($segments[0], $segments[1]),
             \InvalidArgumentException::class,
-            "Invalid callback: $callback"
+            "Invalid callback [$callbackName]."
         );
 
         try {
             return [resolve($segments[0]), $segments[1]];
         } catch (\Throwable $throwable) {
             throw new \InvalidArgumentException(
-                "Invalid callback: $callback({$throwable->getMessage()})",
+                "Invalid callback [$callbackName({$throwable->getMessage()})]",
                 $throwable->getCode(),
                 $throwable
             );

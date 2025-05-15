@@ -72,6 +72,7 @@ use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
+use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
 
@@ -296,6 +297,7 @@ return RectorConfig::configure()
         HelperFuncCallToFacadeClassRector::class,
         ModelCastsPropertyToCastsMethodRector::class,
         TypeHintTappableCallRector::class,
+        ValidationRuleArrayStringValueToArrayRector::class,
     ])
     ->withSkip([
         StringToClassConstantRector::class => [

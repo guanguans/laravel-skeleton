@@ -112,7 +112,6 @@ parameters:
         - identifier: typePerfect.noMixedPropertyFetcher
         - '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Auth\\AuthManager\:\:factory\(\)\.$#'
-        - '#^Call to function is_subclass_of\(\) with class\-string and string will always evaluate to true\.$#'
         - '#^Cognitive complexity for "user_http_build_query\(\)" is 24, keep it under 12$#'
         -
             identifier: larastan.noEnvCallsOutsideOfConfig

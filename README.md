@@ -584,6 +584,7 @@ app
 │   ├── Base64Rule.php
 │   ├── BetweenWordsRule.php
 │   ├── BitcoinAddressRule.php
+│   ├── CallbackRule.php
 │   ├── CamelCaseRule.php
 │   ├── CapitalCharWithNumberRule.php
 │   ├── CarNumberRule.php
@@ -728,7 +729,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-55 directories, 254 files
+55 directories, 255 files
 
 ```
 </details>
