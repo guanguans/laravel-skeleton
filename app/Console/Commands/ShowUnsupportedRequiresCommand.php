@@ -16,7 +16,6 @@ namespace App\Console\Commands;
 use Composer\Semver\Comparator;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -26,11 +25,13 @@ use Spatie\Packagist\PackagistClient;
 use Spatie\Packagist\PackagistUrlGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function Illuminate\Filesystem\join_paths;
 
 final class ShowUnsupportedRequiresCommand extends Command
 {
     protected $signature = <<<'EOF'
         show-unsupported-requires
+        {--cwd= : The current working directory.}
         {--package=* : The name of package.}
         {--major-version=12 : The minimum major version of the package is required.}
         EOF;
@@ -42,11 +43,11 @@ final class ShowUnsupportedRequiresCommand extends Command
      */
     public function handle(): void
     {
-        $jsonTree = Process::run('composer show --format=json --installed --tree')
+        $jsonTree = Process::path($this->option('cwd'))->run('composer show --format=json --installed --tree')
             ->throw()
             ->output();
 
-        $requires = collect(File::json(base_path('composer.json')));
+        $requires = collect(File::json(join_paths($this->option('cwd'), 'composer.json')));
 
         collect(Collection::fromJson($jsonTree)->get('installed'))
             ->reject(static fn (array $package) => str($package['name'])->is([
@@ -106,6 +107,18 @@ final class ShowUnsupportedRequiresCommand extends Command
             new Client([RequestOptions::VERIFY => false]),
             new PackagistUrlGenerator
         );
+
+        $this->input->setOption('cwd', $this->option('cwd') ?: base_path());
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'package' => 'array',
+            // 'package.*' => 'nullable|string|contains:/',
+            'major-version' => 'integer|min:0',
+            'cwd' => 'nullable|string',
+        ];
     }
 
     private function isUnsupported(string $name, string $version): bool

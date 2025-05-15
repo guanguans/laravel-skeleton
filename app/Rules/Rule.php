@@ -34,6 +34,7 @@ abstract class Rule implements ValidationRule
     abstract public function passes(string $attribute, mixed $value): bool;
 
     /**
+     * @see https://github.com/egulias/EmailValidator
      * @see https://github.com/Respect/Validation
      * @see https://github.com/ronanguilloux/IsoCodes
      * @see https://github.com/vlucas/valitron

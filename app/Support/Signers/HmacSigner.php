@@ -15,6 +15,11 @@ namespace App\Support\Signers;
 
 use App\Support\Contracts\SignerContract;
 
+/**
+ * @see https://github.com/mcordingley/LaravelSapient
+ * @see https://github.com/paragonie/sapient
+ * @see https://github.com/paragonie/sapient-js
+ */
 final readonly class HmacSigner implements SignerContract
 {
     public function __construct(
