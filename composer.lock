@@ -7732,26 +7732,26 @@
         },
         {
             "name": "jpkleemans/attribute-events",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jpkleemans/attribute-events.git",
-                "reference": "d9478f992699257845e5d7824dc0f7fee6a22471"
+                "reference": "e3fe3af55d61c88ec25702f27b1a4f3421d12e2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jpkleemans/attribute-events/zipball/d9478f992699257845e5d7824dc0f7fee6a22471",
-                "reference": "d9478f992699257845e5d7824dc0f7fee6a22471",
+                "url": "https://api.github.com/repos/jpkleemans/attribute-events/zipball/e3fe3af55d61c88ec25702f27b1a4f3421d12e2a",
+                "reference": "e3fe3af55d61c88ec25702f27b1a4f3421d12e2a",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.41",
-                "illuminate/database": "^10.37",
-                "illuminate/events": "^10.37",
-                "phpunit/phpunit": "^10.5"
+                "friendsofphp/php-cs-fixer": "^3.75",
+                "illuminate/database": "^11.44",
+                "illuminate/events": "^11.44",
+                "phpunit/phpunit": "^11.5"
             },
             "type": "library",
             "autoload": {
@@ -7782,7 +7782,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jpkleemans/attribute-events/issues",
-                "source": "https://github.com/jpkleemans/attribute-events/tree/1.5.0"
+                "source": "https://github.com/jpkleemans/attribute-events/tree/1.5.1"
             },
             "funding": [
                 {
@@ -7790,7 +7790,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-14T14:48:41+00:00"
+            "time": "2025-05-16T10:21:15+00:00"
         },
         {
             "name": "juliomotol/laravel-auth-timeout",
