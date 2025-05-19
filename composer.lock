@@ -14078,16 +14078,16 @@
         },
         {
             "name": "orchestra/sidekick",
-            "version": "v1.2.5",
+            "version": "v1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/sidekick.git",
-                "reference": "f316bc892c0ca893215a65f192d7d1740356bd38"
+                "reference": "19f19a5780fe78cad76222b364438aad0df65a83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/sidekick/zipball/f316bc892c0ca893215a65f192d7d1740356bd38",
-                "reference": "f316bc892c0ca893215a65f192d7d1740356bd38",
+                "url": "https://api.github.com/repos/orchestral/sidekick/zipball/19f19a5780fe78cad76222b364438aad0df65a83",
+                "reference": "19f19a5780fe78cad76222b364438aad0df65a83",
                 "shasum": ""
             },
             "require": {
@@ -14096,8 +14096,11 @@
                 "symfony/polyfill-php83": "^1.32"
             },
             "require-dev": {
+                "fakerphp/faker": "^1.21",
                 "laravel/framework": "^10.48.29|^11.44.7|^12.1.1|^13.0",
                 "laravel/pint": "^1.4",
+                "mockery/mockery": "^1.5.1",
+                "orchestra/testbench-core": "^8.37.0|^9.14.0|^10.0|^11.0",
                 "phpstan/phpstan": "^2.1.14",
                 "phpunit/phpunit": "^10.0|^11.0|^12.0",
                 "symfony/process": "^6.0|^7.0"
@@ -14126,9 +14129,9 @@
             "description": "Packages Toolkit Utilities and Helpers for Laravel",
             "support": {
                 "issues": "https://github.com/orchestral/sidekick/issues",
-                "source": "https://github.com/orchestral/sidekick/tree/v1.2.5"
+                "source": "https://github.com/orchestral/sidekick/tree/v1.2.7"
             },
-            "time": "2025-05-16T03:18:46+00:00"
+            "time": "2025-05-19T03:32:53+00:00"
         },
         {
             "name": "orchestra/testbench",
