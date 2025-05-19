@@ -230,7 +230,7 @@
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "povils/phpmnd": "^3.6",
         "rakutentech/laravel-request-docs": "^2.42",
-        "rector/jack": "^0.1",
+        "rector/jack": "^0.2",
         "rector/rector": "^2.0",
         "rector/swiss-knife": "^2.2",
         "rector/type-perfect": "^2.1",
