@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83317f474015064c3898fbb403ce8649",
+    "content-hash": "a0832d882ed339d88f03120aa6a975d6",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -36245,16 +36245,16 @@
         },
         {
             "name": "rector/jack",
-            "version": "0.1.7",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/jack.git",
-                "reference": "b1696e73db88a461249a5fedc116d5da855b6c9c"
+                "reference": "c367ebae77afffb3fa9ee3e6d31e7f372f97eb2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/jack/zipball/b1696e73db88a461249a5fedc116d5da855b6c9c",
-                "reference": "b1696e73db88a461249a5fedc116d5da855b6c9c",
+                "url": "https://api.github.com/repos/rectorphp/jack/zipball/c367ebae77afffb3fa9ee3e6d31e7f372f97eb2f",
+                "reference": "c367ebae77afffb3fa9ee3e6d31e7f372f97eb2f",
                 "shasum": ""
             },
             "require": {
@@ -36276,7 +36276,7 @@
             "description": "Swiss knife in pocket of every upgrade architect",
             "support": {
                 "issues": "https://github.com/rectorphp/jack/issues",
-                "source": "https://github.com/rectorphp/jack/tree/0.1.7"
+                "source": "https://github.com/rectorphp/jack/tree/0.2.0"
             },
             "funding": [
                 {
@@ -36288,7 +36288,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-13T13:47:54+00:00"
+            "time": "2025-05-19T11:47:30+00:00"
         },
         {
             "name": "rector/rector",
