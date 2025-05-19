@@ -30076,16 +30076,16 @@
         },
         {
             "name": "defstudio/pest-plugin-laravel-expectations",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/defstudio/pest-plugin-laravel-expectations.git",
-                "reference": "6e5c5fd57ff54f1652a4cf6b569727fe5c645852"
+                "reference": "c903ba55387405f653d21cfa84775e0a602e2d28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/defstudio/pest-plugin-laravel-expectations/zipball/6e5c5fd57ff54f1652a4cf6b569727fe5c645852",
-                "reference": "6e5c5fd57ff54f1652a4cf6b569727fe5c645852",
+                "url": "https://api.github.com/repos/defstudio/pest-plugin-laravel-expectations/zipball/c903ba55387405f653d21cfa84775e0a602e2d28",
+                "reference": "c903ba55387405f653d21cfa84775e0a602e2d28",
                 "shasum": ""
             },
             "require": {
@@ -30157,7 +30157,7 @@
             ],
             "support": {
                 "issues": "https://github.com/defstudio/pest-plugin-laravel-expectations/issues",
-                "source": "https://github.com/defstudio/pest-plugin-laravel-expectations/tree/v2.5.0"
+                "source": "https://github.com/defstudio/pest-plugin-laravel-expectations/tree/v2.5.1"
             },
             "funding": [
                 {
@@ -30169,7 +30169,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-28T14:29:17+00:00"
+            "time": "2025-05-19T16:11:04+00:00"
         },
         {
             "name": "deployer/deployer",
