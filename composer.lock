@@ -14078,16 +14078,16 @@
         },
         {
             "name": "orchestra/sidekick",
-            "version": "v1.2.7",
+            "version": "v1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/sidekick.git",
-                "reference": "19f19a5780fe78cad76222b364438aad0df65a83"
+                "reference": "4e01680e7109596072f22382626970ba1a2ab92a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/sidekick/zipball/19f19a5780fe78cad76222b364438aad0df65a83",
-                "reference": "19f19a5780fe78cad76222b364438aad0df65a83",
+                "url": "https://api.github.com/repos/orchestral/sidekick/zipball/4e01680e7109596072f22382626970ba1a2ab92a",
+                "reference": "4e01680e7109596072f22382626970ba1a2ab92a",
                 "shasum": ""
             },
             "require": {
@@ -14129,9 +14129,9 @@
             "description": "Packages Toolkit Utilities and Helpers for Laravel",
             "support": {
                 "issues": "https://github.com/orchestral/sidekick/issues",
-                "source": "https://github.com/orchestral/sidekick/tree/v1.2.7"
+                "source": "https://github.com/orchestral/sidekick/tree/v1.2.8"
             },
-            "time": "2025-05-19T03:32:53+00:00"
+            "time": "2025-05-21T11:25:24+00:00"
         },
         {
             "name": "orchestra/testbench",
