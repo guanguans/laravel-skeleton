@@ -222,6 +222,7 @@ composer zh-lint
 * [kevinrob/guzzle-cache-middleware](https://github.com/Kevinrob/guzzle-cache-middleware) - A HTTP/1.1 Cache for Guzzle 6. It's a simple Middleware to be added in the HandlerStack. (RFC 7234)
 * [kirkbushell/eloquence](https://github.com/kirkbushell/eloquence) - A set of extensions adding additional functionality and consistency to Laravel's awesome Eloquent library.
 * [kirschbaum-development/eloquent-power-joins](https://github.com/kirschbaum-development/eloquent-power-joins) - The Laravel magic applied to joins.
+* [lab404/laravel-impersonate](https://github.com/404labfr/laravel-impersonate) - Laravel Impersonate is a plugin that allows to you to authenticate as your users.
 * [laminas/laminas-diagnostics](https://github.com/laminas/laminas-diagnostics) - A set of components for performing diagnostic tests in PHP applications
 * [laracasts/presenter](https://github.com/laracasts/Presenter) - Simple view presenters
 * [laragear/cache-query](https://github.com/laragear/cache-query) - Remember your query results using only one method. Yes, only one.
@@ -261,7 +262,7 @@ composer zh-lint
 * [overtrue/laravel-uploader](https://github.com/overtrue/laravel-uploader) - An upload component for Laravel.
 * [perryvandermeer/laravel-console-validator](https://github.com/PerryvanderMeer/laravel-console-validator) - Validate arguments for Laravel commands
 * [phiki/phiki](https://github.com/phikiphp/phiki) - Syntax highlighting using TextMate grammars in PHP.
-* [php-ds/php-ds](https://github.com/php-ds/polyfill) - 
+* [php-ds/php-ds](https://github.com/php-ds/polyfill) - Specialized data structures as alternatives to the PHP array
 * [php-open-source-saver/jwt-auth](https://github.com/PHP-Open-Source-Saver/jwt-auth) - JSON Web Token Authentication for Laravel and Lumen
 * [php-static-analysis/attributes](https://github.com/php-static-analysis/attributes) - Attributes used instead of PHPDocs for static analysis tools
 * [phpyh/lru-memoizer](https://github.com/phpyh/lru-memoizer) - PHPyh LRU Memoizer
@@ -323,6 +324,7 @@ composer zh-lint
 * [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
 * [tightenco/parental](https://github.com/tighten/parental) - A simple eloquent trait that allows relationships to be accessed through child models.
 * [tightenco/ziggy](https://github.com/tighten/ziggy) - Use your Laravel named routes in JavaScript.
+* [torann/geoip](https://github.com/Torann/laravel-geoip) - Support for multiple Geographical Location services.
 * [tpetry/laravel-mysql-explain](https://github.com/tpetry/laravel-mysql-explain) - Get Visual MySQL EXPLAIN for Laravel.
 * [unicodeveloper/laravel-password](https://github.com/unicodeveloper/laravel-password) - Protect your users from entering dumb and common passwords
 * [utopia-php/system](https://github.com/utopia-php/system) - A simple library for obtaining information about the host's system.
