@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29d4c2763e355077f0839c5c35369bf2",
+    "content-hash": "bec5e6f626638c1eb2f3ee02c8018f60",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -19967,24 +19967,25 @@
         },
         {
             "name": "skywarth/chaotic-schedule",
-            "version": "v1.1.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/skywarth/chaotic-schedule.git",
-                "reference": "008c786548d6f1a74b4c178612ce5e040c5a7a50"
+                "reference": "2fca1efd7c2a0947fda225722b5055c58b00a783"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/skywarth/chaotic-schedule/zipball/008c786548d6f1a74b4c178612ce5e040c5a7a50",
-                "reference": "008c786548d6f1a74b4c178612ce5e040c5a7a50",
+                "url": "https://api.github.com/repos/skywarth/chaotic-schedule/zipball/2fca1efd7c2a0947fda225722b5055c58b00a783",
+                "reference": "2fca1efd7c2a0947fda225722b5055c58b00a783",
                 "shasum": ""
             },
             "require": {
                 "paragonie/seedspring": "^1.2",
-                "php": ">=7.4"
+                "php": ">=8.1"
             },
             "require-dev": {
                 "orchestra/testbench": "^6.28",
+                "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^9.6"
             },
             "type": "library",
@@ -20026,9 +20027,19 @@
             ],
             "support": {
                 "issues": "https://github.com/skywarth/chaotic-schedule/issues",
-                "source": "https://github.com/skywarth/chaotic-schedule/tree/v1.1.0"
+                "source": "https://github.com/skywarth/chaotic-schedule/tree/v2.0.0"
             },
-            "time": "2024-05-25T22:22:48+00:00"
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/skywarth",
+                    "type": "buy_me_a_coffee"
+                },
+                {
+                    "url": "https://github.com/skywarth",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-05-22T00:50:59+00:00"
         },
         {
             "name": "socialiteproviders/manager",
@@ -39519,6 +39530,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
