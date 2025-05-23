@@ -121,7 +121,7 @@
         "ryangjchandler/bearer": "^2.1",
         "ryangjchandler/orbit": "^1.4",
         "salsify/json-streaming-parser": "^8.3",
-        "skywarth/chaotic-schedule": "^1.1",
+        "skywarth/chaotic-schedule": "^2.0",
         "socialiteproviders/weixin": "^4.1",
         "socialiteproviders/weixin-web": "^4.1",
         "spatie/db-dumper": "^3.8",
