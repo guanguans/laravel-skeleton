@@ -31913,20 +31913,20 @@
         },
         {
             "name": "guanguans/laravel-soar",
-            "version": "4.1.1",
+            "version": "4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/laravel-soar.git",
-                "reference": "5463d8a8a99f0c1ea6ee5622dd16856986d75422"
+                "reference": "043fdeb9361957517b12fdbbeae72f15b174de4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/5463d8a8a99f0c1ea6ee5622dd16856986d75422",
-                "reference": "5463d8a8a99f0c1ea6ee5622dd16856986d75422",
+                "url": "https://api.github.com/repos/guanguans/laravel-soar/zipball/043fdeb9361957517b12fdbbeae72f15b174de4c",
+                "reference": "043fdeb9361957517b12fdbbeae72f15b174de4c",
                 "shasum": ""
             },
             "require": {
-                "guanguans/soar-php": "^6.1",
+                "guanguans/soar-php": "^6.2",
                 "laravel/framework": "^9.52 || ^10.0 || ^11.0 || ^12.0",
                 "php": ">=8.0"
             },
@@ -31939,7 +31939,7 @@
                 "driftingly/rector-laravel": "^2.0",
                 "ergebnis/composer-normalize": "^2.47",
                 "ergebnis/rector-rules": "^1.4",
-                "guanguans/ai-commit": "dev-main",
+                "guanguans/ai-commit": "^1.15",
                 "guanguans/monorepo-builder-worker": "^2.0",
                 "guzzlehttp/guzzle": "^7.9",
                 "itsgoingd/clockwork": "^5.3",
@@ -32076,7 +32076,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-05-13T11:17:32+00:00"
+            "time": "2025-05-23T02:48:21+00:00"
         },
         {
             "name": "guanguans/monorepo-builder-worker",
@@ -32216,16 +32216,16 @@
         },
         {
             "name": "guanguans/soar-php",
-            "version": "6.1.0",
+            "version": "6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/soar-php.git",
-                "reference": "0fc5a3553c1dee77944cee862406fe61fa18e2e3"
+                "reference": "2cbad1ead737880529077cbf8758cc75a2f5fe77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/soar-php/zipball/0fc5a3553c1dee77944cee862406fe61fa18e2e3",
-                "reference": "0fc5a3553c1dee77944cee862406fe61fa18e2e3",
+                "url": "https://api.github.com/repos/guanguans/soar-php/zipball/2cbad1ead737880529077cbf8758cc75a2f5fe77",
+                "reference": "2cbad1ead737880529077cbf8758cc75a2f5fe77",
                 "shasum": ""
             },
             "require": {
@@ -32242,7 +32242,7 @@
                 "ergebnis/license": "^2.6",
                 "ergebnis/php-cs-fixer-config": "dev-main",
                 "ergebnis/rector-rules": "^1.4",
-                "guanguans/ai-commit": "dev-main",
+                "guanguans/ai-commit": "^1.15",
                 "guanguans/monorepo-builder-worker": "^2.0",
                 "illuminate/support": "^9.52 || ^10.0 || ^11.0 || ^12.0",
                 "mockery/mockery": "^1.6",
@@ -32351,7 +32351,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-05-08T09:41:12+00:00"
+            "time": "2025-05-23T02:21:27+00:00"
         },
         {
             "name": "iamcal/sql-parser",
