@@ -101,6 +101,7 @@
         "nunomaduro/laravel-console-task": "^1.10",
         "nunomaduro/laravel-optimize-database": "^1.0",
         "nwidart/laravel-modules": "^12.0",
+        "olvlvl/composer-attribute-collector": "^2.0",
         "opcodesio/log-viewer": "^3.17",
         "orchestra/sidekick": "^1.2",
         "overtrue/laravel-uploader": "^3.3",
@@ -276,7 +277,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Support/helpers.php"
+            "app/Support/helpers.php",
+            "vendor/attributes.php"
         ]
     },
     "autoload-dev": {
@@ -290,6 +292,7 @@
             "cweagans/composer-patches": true,
             "ergebnis/composer-normalize": true,
             "ion-bazan/composer-diff": true,
+            "olvlvl/composer-attribute-collector": true,
             "pestphp/pest-plugin": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
@@ -306,6 +309,11 @@
             "bin-links": true,
             "forward-command": true,
             "target-directory": "vendor-bin"
+        },
+        "composer-attribute-collector": {
+            "include": [
+                "app/"
+            ]
         },
         "hooks": {
             "post-merge": [

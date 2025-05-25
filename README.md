@@ -257,6 +257,7 @@ composer zh-lint
 * [nunomaduro/laravel-console-task](https://github.com/nunomaduro/laravel-console-task) - Laravel Console Task is a output method for your Laravel/Laravel Zero commands.
 * [nunomaduro/laravel-optimize-database](https://github.com/nunomaduro/laravel-optimize-database) - Publishes migrations that make your database production ready.
 * [nwidart/laravel-modules](https://github.com/nWidart/laravel-modules) - Laravel Module management
+* [olvlvl/composer-attribute-collector](https://github.com/olvlvl/composer-attribute-collector) - A convenient and near zero-cost way to retrieve targets of PHP 8 attributes
 * [opcodesio/log-viewer](https://github.com/opcodesio/log-viewer) - Fast and easy-to-use log viewer for your Laravel application
 * [orchestra/sidekick](https://github.com/orchestral/sidekick) - Packages Toolkit Utilities and Helpers for Laravel
 * [overtrue/laravel-uploader](https://github.com/overtrue/laravel-uploader) - An upload component for Laravel.

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bec5e6f626638c1eb2f3ee02c8018f60",
+    "content-hash": "555097c1be3cde9eb7c8bc3d7b6b2028",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -13669,6 +13669,65 @@
                 }
             ],
             "time": "2024-09-09T07:06:30+00:00"
+        },
+        {
+            "name": "olvlvl/composer-attribute-collector",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/olvlvl/composer-attribute-collector.git",
+                "reference": "990adbcc8f4f069a71be12dc980ce12689cf897a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/olvlvl/composer-attribute-collector/zipball/990adbcc8f4f069a71be12dc980ce12689cf897a",
+                "reference": "990adbcc8f4f069a71be12dc980ce12689cf897a",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "composer/composer": ">=2.4",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "olvlvl\\ComposerAttributeCollector\\Plugin",
+                "composer-attribute-collector": {
+                    "exclude": [
+                        "tests/Acme/PSR4/IncompatibleSignature.php"
+                    ],
+                    "include": [
+                        "tests"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "olvlvl\\ComposerAttributeCollector\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Laviale",
+                    "email": "olivier.laviale@gmail.com",
+                    "homepage": "https://olvlvl.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A convenient and near zero-cost way to retrieve targets of PHP 8 attributes",
+            "support": {
+                "issues": "https://github.com/olvlvl/composer-attribute-collector/issues",
+                "source": "https://github.com/olvlvl/composer-attribute-collector/tree/v2.0.2"
+            },
+            "time": "2024-11-29T13:09:50+00:00"
         },
         {
             "name": "onelogin/php-saml",
@@ -39530,6 +39589,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
