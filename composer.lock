@@ -9234,16 +9234,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.15.0",
+            "version": "v12.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "2ef7fb183f18e547af4eb9f5a55b2ac1011f0b77"
+                "reference": "293bb1c70224faebfd3d4328e201c37115da055f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/2ef7fb183f18e547af4eb9f5a55b2ac1011f0b77",
-                "reference": "2ef7fb183f18e547af4eb9f5a55b2ac1011f0b77",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/293bb1c70224faebfd3d4328e201c37115da055f",
+                "reference": "293bb1c70224faebfd3d4328e201c37115da055f",
                 "shasum": ""
             },
             "require": {
@@ -9445,7 +9445,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-05-20T15:10:44+00:00"
+            "time": "2025-05-27T15:49:44+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -9506,16 +9506,16 @@
         },
         {
             "name": "laravel/horizon",
-            "version": "v5.32.0",
+            "version": "v5.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/horizon.git",
-                "reference": "7686a8e1996472cc341dfd6f1d437065698594ad"
+                "reference": "e78d9689d85b3d4769dc64def5eb6d94e5776beb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/horizon/zipball/7686a8e1996472cc341dfd6f1d437065698594ad",
-                "reference": "7686a8e1996472cc341dfd6f1d437065698594ad",
+                "url": "https://api.github.com/repos/laravel/horizon/zipball/e78d9689d85b3d4769dc64def5eb6d94e5776beb",
+                "reference": "e78d9689d85b3d4769dc64def5eb6d94e5776beb",
                 "shasum": ""
             },
             "require": {
@@ -9555,7 +9555,7 @@
                     ]
                 },
                 "branch-alias": {
-                    "dev-master": "5.x-dev"
+                    "dev-master": "6.x-dev"
                 }
             },
             "autoload": {
@@ -9580,9 +9580,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/horizon/issues",
-                "source": "https://github.com/laravel/horizon/tree/v5.32.0"
+                "source": "https://github.com/laravel/horizon/tree/v5.32.1"
             },
-            "time": "2025-05-09T14:58:32+00:00"
+            "time": "2025-05-19T13:13:30+00:00"
         },
         {
             "name": "laravel/octane",
@@ -39711,6 +39711,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
