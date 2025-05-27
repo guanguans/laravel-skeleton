@@ -24,6 +24,7 @@ use App\Rules\DefaultRule;
 use App\Rules\InstanceofRule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 it('can validate rules', function (): void {
     classes(
@@ -36,24 +37,38 @@ it('can validate rules', function (): void {
         ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([
             BetweenWordsRule::class,
             CallbackRule::class,
-            ChineseNameRule::class,
+            // ChineseNameRule::class,
             DefaultRule::class,
             InstanceofRule::class,
         ]))
         ->keys()
         ->tap(function (Collection $ruleClasses): void {
             $validator = Validator::make(
-                ['string' => 'string'],
-                ['string' => $ruleClasses
-                    ->map(
-                        /**
-                         * @param class-string<\App\Rules\Rule> $ruleClass $ruleClass
-                         */
-                        static fn (string $ruleClass): string => $ruleClass::name()
-                    )
-                    ->all()],
+                [
+                    'all' => 'all value',
+                    'between_words' => 'between words value',
+                    'callback' => 'callback value',
+                    'default' => null,
+                    'instanceof' => 'instanceof value',
+                ],
+                [
+                    'all' => $ruleClasses
+                        ->map(
+                            /**
+                             * @param class-string<\App\Rules\Rule> $ruleClass
+                             */
+                            static fn (string $ruleClass): string => $ruleClass::name()
+                        )
+                        ->all(),
+                    'between_words' => 'between_words:6,10',
+                    'callback' => \sprintf('callback:%s::contains,0,foo', Str::class),
+                    'default' => 'default:default value',
+                    'instanceof' => 'instanceof:stdClass',
+                ],
             );
 
-            expect($validator->errors()->all())->toBeArray();
+            expect($validator->errors()->all())
+                // ->dd()
+                ->toBeArray();
         });
 })->group(__DIR__, __FILE__);

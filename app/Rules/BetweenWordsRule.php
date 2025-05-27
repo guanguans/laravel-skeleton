@@ -15,9 +15,13 @@ namespace App\Rules;
 
 final class BetweenWordsRule extends Rule
 {
+    /**
+     * @param int|numeric-string $min
+     * @param int|numeric-string $max
+     */
     public function __construct(
-        private readonly int $min,
-        private readonly int $max
+        private readonly int|string $min,
+        private readonly int|string $max
     ) {}
 
     #[\Override]

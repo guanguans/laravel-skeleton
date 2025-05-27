@@ -21,12 +21,14 @@ final class CallbackRule extends Rule
 
     /**
      * @param callable|string $callback
+     * @param int|numeric-string $idxOfAttrValInCallbackArgs
      */
     public function __construct(
         private readonly mixed $callback,
-        private readonly int $idxOfAttrValInCallbackArgs = 0,
+        private int|string $idxOfAttrValInCallbackArgs = 0,
         mixed ...$callbackArgs
     ) {
+        $this->idxOfAttrValInCallbackArgs = (int) $this->idxOfAttrValInCallbackArgs;
         $this->callbackArgs = $callbackArgs;
     }
 

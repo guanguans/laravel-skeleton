@@ -42,6 +42,8 @@ parameters:
         - resources/
         - routes/
 #        - tests/
+    scanFiles:
+      - vendor/lubusin/laravel-decomposer/src/controllers/DecomposerController.php
     excludePaths:
         - app/Support/StreamWrappers/
         - app/Support/Rectors/RenameToPsrNameRector.php
