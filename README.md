@@ -325,6 +325,7 @@ composer zh-lint
 * [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
 * [tightenco/parental](https://github.com/tighten/parental) - A simple eloquent trait that allows relationships to be accessed through child models.
 * [tightenco/ziggy](https://github.com/tighten/ziggy) - Use your Laravel named routes in JavaScript.
+* [timacdonald/has-parameters](https://github.com/timacdonald/has-parameters) - A trait that allows you to pass arguments to Laravel middleware in a more PHP'ish way.
 * [torann/geoip](https://github.com/Torann/laravel-geoip) - Support for multiple Geographical Location services.
 * [tpetry/laravel-mysql-explain](https://github.com/tpetry/laravel-mysql-explain) - Get Visual MySQL EXPLAIN for Laravel.
 * [unicodeveloper/laravel-password](https://github.com/unicodeveloper/laravel-password) - Protect your users from entering dumb and common passwords

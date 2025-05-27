@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc7a1347b9aebc2a7366c787577e3236",
+    "content-hash": "8f1151dc3dd2a6db42831e49f802da35",
     "packages": [
         {
             "name": "brick/math",
@@ -5775,59 +5775,6 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.3.0"
             },
             "time": "2024-12-21T16:25:41+00:00"
-        },
-        {
-            "name": "timacdonald/has-parameters",
-            "version": "v1.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/timacdonald/has-parameters.git",
-                "reference": "6acbccb2ae3e1a2d37978943e37bb223bf55abfb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/timacdonald/has-parameters/zipball/6acbccb2ae3e1a2d37978943e37bb223bf55abfb",
-                "reference": "6acbccb2ae3e1a2d37978943e37bb223bf55abfb",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/http": "^10.0 || ^11.0",
-                "illuminate/support": "^10.0 || ^11.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^8.0 || ^9.0",
-                "phpunit/phpunit": "^10.0 || ^11.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "TiMacDonald\\Middleware\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim MacDonald",
-                    "email": "hello@timacdonald.me",
-                    "homepage": "https://timacdonald.me"
-                }
-            ],
-            "description": "A trait that allows you to pass arguments to Laravel middleware in a more PHP'ish way.",
-            "keywords": [
-                "arguments",
-                "laravel",
-                "middleware",
-                "parameters"
-            ],
-            "support": {
-                "issues": "https://github.com/timacdonald/has-parameters/issues",
-                "source": "https://github.com/timacdonald/has-parameters/tree/v1.5.1"
-            },
-            "time": "2024-05-18T07:27:20+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
