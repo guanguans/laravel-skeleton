@@ -9890,16 +9890,16 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.4.1",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "b3cf86e88fa78ea8e6aeb86a7d9ea25ba2c1d31f"
+                "reference": "73c349777e09893a68d747bb6ae87e54eb5e5aec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/b3cf86e88fa78ea8e6aeb86a7d9ea25ba2c1d31f",
-                "reference": "b3cf86e88fa78ea8e6aeb86a7d9ea25ba2c1d31f",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/73c349777e09893a68d747bb6ae87e54eb5e5aec",
+                "reference": "73c349777e09893a68d747bb6ae87e54eb5e5aec",
                 "shasum": ""
             },
             "require": {
@@ -9973,7 +9973,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2025-03-30T16:25:37+00:00"
+            "time": "2025-05-19T13:12:28+00:00"
         },
         {
             "name": "laravel/reverb",
