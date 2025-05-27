@@ -221,6 +221,7 @@
         "laravel/pint": "^1.22",
         "laravel/sail": "^1.43",
         "laravel/telescope": "^5.7",
+        "lubusin/laravel-decomposer": "^1.3",
         "mockery/mockery": "^1.6",
         "msamgan/laravel-env-keys-checker": "^1.7",
         "muhammadhuzaifa/telescope-guzzle-watcher": "^3.2",
@@ -342,6 +343,7 @@
                 "laravel/pail",
                 "laravel/sail",
                 "laravel/telescope",
+                "lubusin/laravel-decomposer",
                 "msamgan/laravel-env-keys-checker",
                 "muhammadhuzaifa/telescope-guzzle-watcher",
                 "nunomaduro/collision",
@@ -375,6 +377,7 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
             "@artisan vendor:publish --tag=laravel-errors",
+            "@artisan vendor:publish --tag=DecomposerAssets --force",
             "@artisan spatie-stub:publish --force",
             "@cghooks update",
             "@composer-diff"

@@ -39,6 +39,7 @@ return (new Configuration)
     ->ignoreErrorsOnPackages(
         [
             'guanguans/ai-commit',
+            'lubusin/laravel-decomposer',
         ],
         [ErrorType::DEV_DEPENDENCY_IN_PROD]
     )

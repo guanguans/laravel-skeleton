@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d73e15c25ab88d58ac2948e601efc7b1",
+    "content-hash": "bfa29123dfa19a2efe7c2acec3b496e9",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -34946,6 +34946,64 @@
                 "source": "https://github.com/localheinz/diff/tree/1.2.0"
             },
             "time": "2024-12-04T14:16:01+00:00"
+        },
+        {
+            "name": "lubusin/laravel-decomposer",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lubusIN/laravel-decomposer.git",
+                "reference": "0f16c483c3f18fb2b21c5893de9a275acb1b11e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lubusIN/laravel-decomposer/zipball/0f16c483c3f18fb2b21c5893de9a275acb1b11e6",
+                "reference": "0f16c483c3f18fb2b21c5893de9a275acb1b11e6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=6.0  <=12.0 || ^12.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "illuminate/http": ">=6.0  <=12.0 || ^12.0",
+                "illuminate/routing": ">=6.0  <=12.0 || ^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lubusin\\Decomposer\\DecomposerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lubusin\\Decomposer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Harish Toshniwal",
+                    "email": "harish@lubus.in"
+                }
+            ],
+            "description": "A Laravel package to decompose your installed packages, their dependencies, your app & server environment",
+            "support": {
+                "issues": "https://github.com/lubusIN/laravel-decomposer/issues",
+                "source": "https://github.com/lubusIN/laravel-decomposer/tree/v1.3"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/lubus",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2025-05-14T11:33:07+00:00"
         },
         {
             "name": "marc-mabe/php-enum",

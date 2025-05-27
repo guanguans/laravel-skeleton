@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Lubusin\Decomposer\Controllers\DecomposerController;
 use Overtrue\LaravelUploader\LaravelUploader;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
@@ -38,12 +39,11 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 */
 
 Route::get('/', static fn () => view('welcome'));
-
 Route::fallback(static fn () => abort(404));
 
-Route::get('logs', [LogViewerController::class, 'index']);
-
 LaravelUploader::routes();
+Route::get('composer', [DecomposerController::class, 'index']);
+Route::get('logs', [LogViewerController::class, 'index']);
 
 /**
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet
