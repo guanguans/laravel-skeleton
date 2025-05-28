@@ -30287,16 +30287,16 @@
         },
         {
             "name": "dedoc/scramble",
-            "version": "v0.12.19",
+            "version": "v0.12.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "f6516eb82c7c86e57e2cfaead4a05b900e4b5ecc"
+                "reference": "283bc6a8790ffaa5ea14d2cbdba83a42b414f7f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/f6516eb82c7c86e57e2cfaead4a05b900e4b5ecc",
-                "reference": "f6516eb82c7c86e57e2cfaead4a05b900e4b5ecc",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/283bc6a8790ffaa5ea14d2cbdba83a42b414f7f5",
+                "reference": "283bc6a8790ffaa5ea14d2cbdba83a42b414f7f5",
                 "shasum": ""
             },
             "require": {
@@ -30308,11 +30308,15 @@
                 "spatie/laravel-package-tools": "^1.9.2"
             },
             "require-dev": {
+                "larastan/larastan": "^3.3",
                 "laravel/pint": "^v1.1.0",
                 "nunomaduro/collision": "^7.0|^8.0",
                 "orchestra/testbench": "^8.0|^9.0|^10.0",
                 "pestphp/pest": "^2.34|^3.7",
                 "pestphp/pest-plugin-laravel": "^2.3|^3.1",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.5|^11.5.3",
                 "spatie/laravel-permission": "^6.10",
                 "spatie/pest-plugin-snapshots": "^2.1"
@@ -30351,7 +30355,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.12.19"
+                "source": "https://github.com/dedoc/scramble/tree/v0.12.20"
             },
             "funding": [
                 {
@@ -30359,7 +30363,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-23T09:41:53+00:00"
+            "time": "2025-05-28T13:13:29+00:00"
         },
         {
             "name": "defstudio/pest-plugin-laravel-expectations",
