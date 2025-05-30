@@ -116,15 +116,19 @@ final class UpdateReadmeCommand extends Command
 
                 return strcmp($a['name'], $b['name']);
             })
-            ->map(static fn (array $package): string => \sprintf(
-                '* [%s](%s) - %s',
-                $package['name'],
-                str($package['source'])->whenEndsWith(
-                    $package['version'],
-                    static fn (Stringable $source): Stringable => $source->replaceEnd("/tree/{$package['version']}", '')
-                ),
-                $package['description']
-            ))
+            ->map(
+                static fn (array $package): string => str(\sprintf(
+                    '* [%s](%s)',
+                    $package['name'],
+                    str($package['source'])->whenEndsWith(
+                        $package['version'],
+                        static fn (Stringable $source): Stringable => $source->replaceEnd("/tree/{$package['version']}", '')
+                    )
+                ))->when(
+                    $package['description'],
+                    static fn (Stringable $str, string $description) => $str->append(" - $description")
+                )->toString()
+            )
             ->implode(\PHP_EOL);
 
         // 防止异常情况导致清空

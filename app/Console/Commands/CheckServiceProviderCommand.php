@@ -27,6 +27,8 @@ final class CheckServiceProviderCommand extends Command
         SIGNATURE;
     protected $description = 'Check service providers and ensure they are correctly registered.';
     private array $except = [
+        'blade-ui-kit/blade-heroicons',
+        'blade-ui-kit/blade-icons',
         'kitloong/laravel-app-logger',
         'laravel-lang/actions',
         'laravel-lang/attributes',

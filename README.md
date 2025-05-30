@@ -275,6 +275,7 @@ composer zh-lint
 * [reinink/remember-query-strings](https://github.com/reinink/remember-query-strings) - Laravel middleware that automatically remembers and restores query strings.
 * [rennokki/laravel-eloquent-query-cache](https://github.com/renoki-co/laravel-eloquent-query-cache) - Adding cache on your Laravel Eloquent queries' results is now a breeze.
 * [robclancy/presenter](https://github.com/robclancy/presenter) - Decorate your objects using presenters. Primarily to keep presentation logic out of your models.
+* [robsontenorio/mary](https://github.com/robsontenorio/mary) - Gorgeous UI components for Livewire powered by daisyUI and Tailwind
 * [ryangjchandler/bearer](https://github.com/ryangjchandler/bearer) - Minimalistic token-based authentication for Laravel API endpoints.
 * [ryangjchandler/orbit](https://github.com/ryangjchandler/orbit) - A flat-file database driver for Eloquent.
 * [salsify/json-streaming-parser](https://github.com/salsify/jsonstreamingparser) - A streaming parser for JSON in PHP.
@@ -319,7 +320,7 @@ composer zh-lint
 * [staudenmeir/laravel-cte](https://github.com/staudenmeir/laravel-cte/tree/v12.1) - Laravel queries with common table expressions
 * [staudenmeir/laravel-migration-views](https://github.com/staudenmeir/laravel-migration-views) - Laravel database migrations with SQL views
 * [stevebauman/location](https://github.com/stevebauman/location) - Retrieve a user's location by their IP Address
-* [stillat/blade-parser](https://github.com/Stillat/blade-parser) - 
+* [stillat/blade-parser](https://github.com/Stillat/blade-parser)
 * [swiss-devjoy/laravel-optimize-sqlite](https://github.com/Swiss-Devjoy/laravel-optimize-sqlite) - Optimize your SQLite database for production in Laravel
 * [symfony/polyfill-php84](https://github.com/symfony/polyfill-php84) - Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions
 * [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
@@ -370,7 +371,7 @@ composer zh-lint
 * [laravel-lang/common](https://github.com/Laravel-Lang/common) - Easily connect the necessary language packs to the application
 * [laravel-shift/factory-generator](https://github.com/laravel-shift/factory-generator) - Generate factories from existing models
 * [laravel/envoy](https://github.com/laravel/envoy) - Elegant SSH tasks for PHP.
-* [laravel/facade-documenter](https://github.com/laravel/facade-documenter/tree/main) - 
+* [laravel/facade-documenter](https://github.com/laravel/facade-documenter/tree/main)
 * [laravel/pail](https://github.com/laravel/pail) - Easily delve into your Laravel application's log files directly from the command line.
 * [laravel/pint](https://github.com/laravel/pint) - An opinionated code formatter for PHP.
 * [laravel/sail](https://github.com/laravel/sail) - Docker files for running a basic Laravel application.
@@ -381,6 +382,7 @@ composer zh-lint
 * [muhammadhuzaifa/telescope-guzzle-watcher](https://github.com/huzaifaarain/telescope-guzzle-watcher) - Telescope Guzzle Watcher provide a custom watcher for intercepting http requests made via guzzlehttp/guzzle php library. The package uses the on_stats request option for extracting the request/response data. The watcher intercept and log the request into the Laravel Telescope HTTP Client Watcher.
 * [nunomaduro/collision](https://github.com/nunomaduro/collision) - Cli error handling for console/command-line PHP applications.
 * [orangehill/iseed](https://github.com/orangehill/iseed) - Generate a new Laravel database seed file based on data from the existing database table.
+* [pb30/phpstan-composer-analysis](https://github.com/pb30/phpstan-composer-analysis)
 * [peckphp/peck](https://github.com/peckphp/peck) - Peck is a powerful CLI tool designed to identify pure wording or spelling (grammar) mistakes in your codebase.
 * [pestphp/pest](https://github.com/pestphp/pest) - The elegant PHP Testing Framework.
 * [php-static-analysis/rector-rule](https://github.com/php-static-analysis/rector-rule) - RectorPHP rule to convert PHPDoc annotations for static analysis to PHP attributes
