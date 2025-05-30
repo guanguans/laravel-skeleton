@@ -100,50 +100,37 @@ final class ConsoleServiceProvider extends ServiceProvider
             collect(Artisan::all())
                 ->each(static function (SymfonyCommand $command): void {
                     $command
-                        ->addOption(
-                            'xdebug',
-                            null,
-                            InputOption::VALUE_NONE,
-                            'Display xdebug output'
-                        )
+                        ->addOption('xdebug', null, InputOption::VALUE_NONE, 'Display xdebug output')
                         ->addOption(
                             'configuration',
                             null,
                             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-                            'Configure able (e.g. `--configuration=app.name=guanguans` or `--configuration app.name=guanguans`)',
+                            'Used to dynamically pass one or more configuration key-value pairs(e.g. `--configuration=app.name=guanguans` or `--configuration app.name=guanguans`).',
                         );
                 })
                 ->tap(function (): void {
                     /**
                      * @see \Illuminate\Foundation\Console\Kernel::rerouteSymfonyCommandEvents()
+                     * @see \Rector\Console\ConsoleApplication::doRun()
                      */
                     Event::listen(CommandStarting::class, function (CommandStarting $commandStarting): void {
-                        $input = $commandStarting->input;
-
-                        /**
-                         * @see \Rector\Console\ConsoleApplication::doRun()
-                         */
-                        $isXdebugAllowed = $input->hasParameterOption('--xdebug') || $this->app->runningUnitTests();
-
-                        if (!$isXdebugAllowed) {
+                        if (!$commandStarting->input->hasParameterOption('--xdebug') && !$this->app->runningUnitTests()) {
                             $xdebugHandler = new XdebugHandler(config('app.name'));
                             $xdebugHandler->setPersistent();
                             $xdebugHandler->check();
                             unset($xdebugHandler);
                         }
 
-                        collect($input->getOption('configuration'))
+                        collect($commandStarting->input->getOption('configuration'))
                             // ->dump()
-                            ->mapWithKeys(static function (string $config): array {
-                                Assert::contains($config, '=', "The configureable option [$config] must be formatted as key=value.");
+                            ->mapWithKeys(static function (string $configuration): array {
+                                Assert::contains($configuration, '=', "The configureable option [$configuration] must be formatted as key=value.");
 
-                                [$key, $value] = str($config)->explode('=', 2)->all();
+                                [$key, $value] = str($configuration)->explode('=', 2)->all();
 
                                 return [$key => $value];
                             })
-                            ->tap(static function (Collection $config): void {
-                                config($config->all());
-                            });
+                            ->tap(static fn (Collection $configuration): mixed => config($configuration->all()));
                     });
                 });
         });
