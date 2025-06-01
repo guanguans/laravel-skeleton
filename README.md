@@ -338,6 +338,7 @@ composer zh-lint
 * [wendelladriel/laravel-validated-dto](https://github.com/WendellAdriel/laravel-validated-dto) - Data Transfer Objects with validation for Laravel applications
 * [wikimedia/composer-merge-plugin](https://github.com/wikimedia/composer-merge-plugin) - Composer plugin to merge multiple composer.json files
 * [wireui/wireui](https://github.com/wireui/wireui) - TallStack components
+* [yiisoft/injector](https://github.com/yiisoft/injector) - PSR-11 compatible injector. Executes a callable and makes an instances by injecting dependencies from a given DI container.
 * [zenstruck/stream](https://github.com/zenstruck/stream) - Object wrapper for PHP resources.
 * [andreaselia/laravel-api-to-postman](https://github.com/andreaselia/laravel-api-to-postman) - Generate a Postman collection automatically from your Laravel API
 * [bamarni/composer-bin-plugin](https://github.com/bamarni/composer-bin-plugin) - No conflicts for your bin dependencies

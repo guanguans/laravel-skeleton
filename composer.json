@@ -182,6 +182,7 @@
         "wendelladriel/laravel-validated-dto": "^4.1",
         "wikimedia/composer-merge-plugin": "^2.1",
         "wireui/wireui": "^2.4",
+        "yiisoft/injector": "^1.2",
         "zenstruck/stream": "^1.2"
     },
     "require-dev": {

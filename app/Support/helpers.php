@@ -19,6 +19,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\VarDumper;
+use Yiisoft\Injector\Injector;
 
 if (!\function_exists('env_explode')) {
     /**
@@ -178,6 +179,20 @@ if (!\function_exists('humans_milliseconds')) {
                 'minimumUnit' => 'us',
                 'short' => true,
             ]);
+    }
+}
+
+if (!\function_exists('invoke')) {
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \ReflectionException
+     */
+    function invoke(callable $callable, array $arguments = [], bool $cacheReflections = false): mixed
+    {
+        return tap(
+            new Injector(app()),
+            static fn (Injector $injector): bool => $cacheReflections and $injector->withCacheReflections($cacheReflections)
+        )->invoke($callable, $arguments);
     }
 }
 
