@@ -9091,16 +9091,16 @@
         },
         {
             "name": "laragear/populate",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laragear/Populate.git",
-                "reference": "1662a5749fc484e69704bdb32e83398f141c2b45"
+                "reference": "f14227d60873d4dff2fd2e1dcc54ef72c63fc5cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laragear/Populate/zipball/1662a5749fc484e69704bdb32e83398f141c2b45",
-                "reference": "1662a5749fc484e69704bdb32e83398f141c2b45",
+                "url": "https://api.github.com/repos/Laragear/Populate/zipball/f14227d60873d4dff2fd2e1dcc54ef72c63fc5cb",
+                "reference": "f14227d60873d4dff2fd2e1dcc54ef72c63fc5cb",
                 "shasum": ""
             },
             "require": {
@@ -9154,7 +9154,7 @@
                     "type": "Paypal"
                 }
             ],
-            "time": "2025-04-27T05:15:40+00:00"
+            "time": "2025-05-30T23:20:31+00:00"
         },
         {
             "name": "laragear/preload",
