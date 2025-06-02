@@ -13512,16 +13512,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
                 "shasum": ""
             },
             "require": {
@@ -13564,9 +13564,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
             },
-            "time": "2024-12-30T11:07:19+00:00"
+            "time": "2025-05-31T08:24:38+00:00"
         },
         {
             "name": "nunomaduro/collision",
@@ -30824,16 +30824,16 @@
         },
         {
             "name": "dedoc/scramble",
-            "version": "v0.12.20",
+            "version": "v0.12.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "283bc6a8790ffaa5ea14d2cbdba83a42b414f7f5"
+                "reference": "5b2d7d5456942e2a7c984c6d7e4690ba66c05f16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/283bc6a8790ffaa5ea14d2cbdba83a42b414f7f5",
-                "reference": "283bc6a8790ffaa5ea14d2cbdba83a42b414f7f5",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/5b2d7d5456942e2a7c984c6d7e4690ba66c05f16",
+                "reference": "5b2d7d5456942e2a7c984c6d7e4690ba66c05f16",
                 "shasum": ""
             },
             "require": {
@@ -30892,7 +30892,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.12.20"
+                "source": "https://github.com/dedoc/scramble/tree/v0.12.21"
             },
             "funding": [
                 {
@@ -30900,7 +30900,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-28T13:13:29+00:00"
+            "time": "2025-05-31T06:35:24+00:00"
         },
         {
             "name": "defstudio/pest-plugin-laravel-expectations",
