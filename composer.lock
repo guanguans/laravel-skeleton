@@ -15524,16 +15524,16 @@
         },
         {
             "name": "phiki/phiki",
-            "version": "v1.1.5",
+            "version": "v1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phikiphp/phiki.git",
-                "reference": "30280485e06201b28532f4e441580c2c969e539e"
+                "reference": "3174d8cb309bdccc32b7a33500379de76148256b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phikiphp/phiki/zipball/30280485e06201b28532f4e441580c2c969e539e",
-                "reference": "30280485e06201b28532f4e441580c2c969e539e",
+                "url": "https://api.github.com/repos/phikiphp/phiki/zipball/3174d8cb309bdccc32b7a33500379de76148256b",
+                "reference": "3174d8cb309bdccc32b7a33500379de76148256b",
                 "shasum": ""
             },
             "require": {
@@ -15572,9 +15572,9 @@
             "description": "Syntax highlighting using TextMate grammars in PHP.",
             "support": {
                 "issues": "https://github.com/phikiphp/phiki/issues",
-                "source": "https://github.com/phikiphp/phiki/tree/v1.1.5"
+                "source": "https://github.com/phikiphp/phiki/tree/v1.1.6"
             },
-            "time": "2025-04-06T23:40:06+00:00"
+            "time": "2025-06-06T20:18:29+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -40314,6 +40314,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
