@@ -230,7 +230,7 @@
         "muhammadhuzaifa/telescope-guzzle-watcher": "^3.2",
         "nunomaduro/collision": "^8.8",
         "orangehill/iseed": "^3.1",
-        "pb30/phpstan-composer-analysis": "^0.12",
+        "pb30/phpstan-composer-analysis": "^1.0",
         "peckphp/peck": "^0.1",
         "pestphp/pest": "^3.8",
         "php-static-analysis/rector-rule": "^0.4",
