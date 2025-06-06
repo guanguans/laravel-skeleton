@@ -254,6 +254,7 @@ composer zh-lint
 * [mtownsend/read-time](https://github.com/mtownsend5512/read-time) - A PHP package to show users how long it takes to read content.
 * [naoray/laravel-github-monolog](https://github.com/Naoray/laravel-github-monolog) - Log driver to store logs as github issues
 * [nette/utils](https://github.com/nette/utils) - 🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.
+* [nunomaduro/essentials](https://github.com/nunomaduro/essentials) - Just better defaults for your Laravel projects.
 * [nunomaduro/laravel-console-task](https://github.com/nunomaduro/laravel-console-task) - Laravel Console Task is a output method for your Laravel/Laravel Zero commands.
 * [nunomaduro/laravel-optimize-database](https://github.com/nunomaduro/laravel-optimize-database) - Publishes migrations that make your database production ready.
 * [nwidart/laravel-modules](https://github.com/nWidart/laravel-modules) - Laravel Module management

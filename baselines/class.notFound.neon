@@ -1,0 +1,23 @@
+# total 4 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Call to method format\(\) on an unknown class self\.$#'
+            count: 1
+            path: ../app/Models/BaseModel.php
+
+        -
+            message: '#^Call to method format\(\) on an unknown class self\.$#'
+            count: 1
+            path: ../app/Models/HttpLog.php
+
+        -
+            message: '#^Call to method format\(\) on an unknown class self\.$#'
+            count: 1
+            path: ../app/Models/Movie.php
+
+        -
+            message: '#^Call to method format\(\) on an unknown class self\.$#'
+            count: 1
+            path: ../app/Models/User.php

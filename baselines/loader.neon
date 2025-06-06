@@ -1,4 +1,5 @@
-# total 8 errors
+# total 12 errors
 includes:
+    - class.notFound.neon
     - nullsafe.neverNull.neon
     - property.nonObject.neon

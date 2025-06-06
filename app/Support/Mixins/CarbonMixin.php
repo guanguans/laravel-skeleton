@@ -25,12 +25,12 @@ final class CarbonMixin
 {
     public function inAppTimezone(): \Closure
     {
-        return fn (): Carbon => $this->setTimezone(config('app.timezone'));
+        return fn (): self => $this->setTimezone(config('app.timezone'));
     }
 
     public function inUserTimezone(): \Closure
     {
-        return fn (?string $guard = null): Carbon => $this->setTimezone(
+        return fn (?string $guard = null): self => $this->setTimezone(
             RequestFacade::user($guard)?->timezone()
         );
     }
