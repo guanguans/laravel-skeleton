@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27b7280ed4f95b9ec32fccc2d143a9e0",
+    "content-hash": "5f407388104bc4be18446643bb3fcc19",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -36034,16 +36034,16 @@
         },
         {
             "name": "pb30/phpstan-composer-analysis",
-            "version": "v0.12.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pb30/phpstan-composer-analysis.git",
-                "reference": "17457d6bc533e556436cc4e494cff58bb8c23c25"
+                "reference": "273006ee44f499eab6ccb8fb9b8f2bf8a612585a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pb30/phpstan-composer-analysis/zipball/17457d6bc533e556436cc4e494cff58bb8c23c25",
-                "reference": "17457d6bc533e556436cc4e494cff58bb8c23c25",
+                "url": "https://api.github.com/repos/pb30/phpstan-composer-analysis/zipball/273006ee44f499eab6ccb8fb9b8f2bf8a612585a",
+                "reference": "273006ee44f499eab6ccb8fb9b8f2bf8a612585a",
                 "shasum": ""
             },
             "require": {
@@ -36077,9 +36077,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pb30/phpstan-composer-analysis/issues",
-                "source": "https://github.com/pb30/phpstan-composer-analysis/tree/v0.12.0"
+                "source": "https://github.com/pb30/phpstan-composer-analysis/tree/v1.0.0"
             },
-            "time": "2025-05-12T14:41:58+00:00"
+            "time": "2025-06-06T18:43:54+00:00"
         },
         {
             "name": "peckphp/peck",
