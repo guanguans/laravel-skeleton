@@ -30189,16 +30189,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.13.14",
+            "version": "1.13.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "6c4c9f5f1260eb5324a3c433657e6c366fb454e1"
+                "reference": "2c08a25c77fc5aa5cde1a3ce9b0199306a3ee49a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/6c4c9f5f1260eb5324a3c433657e6c366fb454e1",
-                "reference": "6c4c9f5f1260eb5324a3c433657e6c366fb454e1",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/2c08a25c77fc5aa5cde1a3ce9b0199306a3ee49a",
+                "reference": "2c08a25c77fc5aa5cde1a3ce9b0199306a3ee49a",
                 "shasum": ""
             },
             "require": {
@@ -30275,7 +30275,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.13.14"
+                "source": "https://github.com/buggregator/trap/tree/1.13.16"
             },
             "funding": [
                 {
@@ -30287,7 +30287,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-06-05T09:48:28+00:00"
+            "time": "2025-06-09T08:58:44+00:00"
         },
         {
             "name": "clue/ndjson-react",
