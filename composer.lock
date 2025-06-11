@@ -35568,16 +35568,16 @@
         },
         {
             "name": "lubusin/laravel-decomposer",
-            "version": "v1.3",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lubusIN/laravel-decomposer.git",
-                "reference": "0f16c483c3f18fb2b21c5893de9a275acb1b11e6"
+                "reference": "79a7b37d8d803f924f3f79146e41a0d7c21766ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lubusIN/laravel-decomposer/zipball/0f16c483c3f18fb2b21c5893de9a275acb1b11e6",
-                "reference": "0f16c483c3f18fb2b21c5893de9a275acb1b11e6",
+                "url": "https://api.github.com/repos/lubusIN/laravel-decomposer/zipball/79a7b37d8d803f924f3f79146e41a0d7c21766ef",
+                "reference": "79a7b37d8d803f924f3f79146e41a0d7c21766ef",
                 "shasum": ""
             },
             "require": {
@@ -35614,15 +35614,9 @@
             "description": "A Laravel package to decompose your installed packages, their dependencies, your app & server environment",
             "support": {
                 "issues": "https://github.com/lubusIN/laravel-decomposer/issues",
-                "source": "https://github.com/lubusIN/laravel-decomposer/tree/v1.3"
+                "source": "https://github.com/lubusIN/laravel-decomposer/tree/v1.3.1"
             },
-            "funding": [
-                {
-                    "url": "https://www.patreon.com/lubus",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2025-05-14T11:33:07+00:00"
+            "time": "2025-06-11T04:00:42+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
