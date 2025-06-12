@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f407388104bc4be18446643bb3fcc19",
+    "content-hash": "34d3f31b4e36082c027f404aa295f0d2",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4716,19 +4716,20 @@
         },
         {
             "name": "echolabsdev/prism",
-            "version": "v0.69.0",
+            "version": "v0.71.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "0207b0875e9d3bcf560ea424471e3c96126964e7"
+                "reference": "7057263a2289f2bab35e1bd445ffdb1e3488caa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/0207b0875e9d3bcf560ea424471e3c96126964e7",
-                "reference": "0207b0875e9d3bcf560ea424471e3c96126964e7",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/7057263a2289f2bab35e1bd445ffdb1e3488caa7",
+                "reference": "7057263a2289f2bab35e1bd445ffdb1e3488caa7",
                 "shasum": ""
             },
             "require": {
+                "ext-fileinfo": "*",
                 "laravel/framework": "^11.0|^12.0",
                 "php": "^8.2"
             },
@@ -4780,7 +4781,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.69.0"
+                "source": "https://github.com/prism-php/prism/tree/v0.71.1"
             },
             "funding": [
                 {
@@ -4788,7 +4789,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-03T14:17:34+00:00"
+            "time": "2025-06-12T21:53:14+00:00"
         },
         {
             "name": "egulias/email-validator",
