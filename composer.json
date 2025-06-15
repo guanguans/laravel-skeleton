@@ -331,6 +331,7 @@
         },
         "laravel": {
             "dont-discover": [
+                "binarytorch/larecipe",
                 "andreaselia/laravel-api-to-postman",
                 "barryvdh/laravel-ide-helper",
                 "beyondcode/laravel-query-detector",
@@ -382,6 +383,7 @@
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
             "@artisan vendor:publish --tag=laravel-errors",
             "@artisan vendor:publish --tag=DecomposerAssets --force",
+            "@artisan log-viewer:publish",
             "@artisan spatie-stub:publish --force",
             "@cghooks update",
             "@composer-diff"
