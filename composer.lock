@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34d3f31b4e36082c027f404aa295f0d2",
+    "content-hash": "d08581e376095cee380829277d5294f7",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -37362,16 +37362,16 @@
         },
         {
             "name": "rector/swiss-knife",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/swiss-knife.git",
-                "reference": "32688d02c0f84b12dc98b137e13e87a42203ed96"
+                "reference": "d681109ef62d0657cca6610fdf4488837e5e9522"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/32688d02c0f84b12dc98b137e13e87a42203ed96",
-                "reference": "32688d02c0f84b12dc98b137e13e87a42203ed96",
+                "url": "https://api.github.com/repos/rectorphp/swiss-knife/zipball/d681109ef62d0657cca6610fdf4488837e5e9522",
+                "reference": "d681109ef62d0657cca6610fdf4488837e5e9522",
                 "shasum": ""
             },
             "require": {
@@ -37393,7 +37393,7 @@
             "description": "Swiss knife in pocket of every upgrade architect",
             "support": {
                 "issues": "https://github.com/rectorphp/swiss-knife/issues",
-                "source": "https://github.com/rectorphp/swiss-knife/tree/2.2.0"
+                "source": "https://github.com/rectorphp/swiss-knife/tree/2.3.0"
             },
             "funding": [
                 {
@@ -37405,7 +37405,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-13T21:54:21+00:00"
+            "time": "2025-06-16T07:59:07+00:00"
         },
         {
             "name": "rector/type-perfect",
