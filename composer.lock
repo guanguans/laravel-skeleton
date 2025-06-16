@@ -8400,16 +8400,16 @@
         },
         {
             "name": "kirkbushell/eloquence",
-            "version": "12.0.0",
+            "version": "12.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kirkbushell/eloquence.git",
-                "reference": "e85e778bb547cf3ebf81264806b7c3aa493fe293"
+                "reference": "2da9afe047a5849a9cebdd891ee9ba0abac4a256"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kirkbushell/eloquence/zipball/e85e778bb547cf3ebf81264806b7c3aa493fe293",
-                "reference": "e85e778bb547cf3ebf81264806b7c3aa493fe293",
+                "url": "https://api.github.com/repos/kirkbushell/eloquence/zipball/2da9afe047a5849a9cebdd891ee9ba0abac4a256",
+                "reference": "2da9afe047a5849a9cebdd891ee9ba0abac4a256",
                 "shasum": ""
             },
             "require": {
@@ -8464,9 +8464,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kirkbushell/eloquence/issues",
-                "source": "https://github.com/kirkbushell/eloquence/tree/12.0.0"
+                "source": "https://github.com/kirkbushell/eloquence/tree/12.0.1"
             },
-            "time": "2025-02-28T11:38:18+00:00"
+            "time": "2025-06-16T02:28:58+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
