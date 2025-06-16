@@ -21835,7 +21835,7 @@
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
-            "version": "4.3.3",
+            "version": "4.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-failed-job-monitor.git",
@@ -21898,7 +21898,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.3.3"
+                "source": "https://github.com/spatie/laravel-failed-job-monitor/tree/4.3.4"
             },
             "funding": [
                 {
