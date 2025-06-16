@@ -23947,16 +23947,16 @@
         },
         {
             "name": "square1/laravel-idempotency",
-            "version": "12.0.0",
+            "version": "12.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/square1-io/laravel-idempotency.git",
-                "reference": "feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844"
+                "reference": "d6a550cfee9663e6ad11a3f103aba5f4355c4a47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844",
-                "reference": "feaf79ec8a4fb2fe6a3af2141d233a68ef6d4844",
+                "url": "https://api.github.com/repos/square1-io/laravel-idempotency/zipball/d6a550cfee9663e6ad11a3f103aba5f4355c4a47",
+                "reference": "d6a550cfee9663e6ad11a3f103aba5f4355c4a47",
                 "shasum": ""
             },
             "require": {
@@ -24002,9 +24002,9 @@
             ],
             "support": {
                 "issues": "https://github.com/square1-io/laravel-idempotency/issues",
-                "source": "https://github.com/square1-io/laravel-idempotency/tree/12.0.0"
+                "source": "https://github.com/square1-io/laravel-idempotency/tree/12.1.0"
             },
-            "time": "2025-02-24T16:44:24+00:00"
+            "time": "2025-06-16T16:18:30+00:00"
         },
         {
             "name": "staabm/side-effects-detector",
