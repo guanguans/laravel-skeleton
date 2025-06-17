@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dca6781c95304b6c1e474991c769a99a",
+    "content-hash": "6b8eadc1ae4ea1c847295a589403d061",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4716,16 +4716,16 @@
         },
         {
             "name": "echolabsdev/prism",
-            "version": "v0.71.1",
+            "version": "v0.72.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "7057263a2289f2bab35e1bd445ffdb1e3488caa7"
+                "reference": "c2bde5907513887caa198716aa038eab72106fe0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/7057263a2289f2bab35e1bd445ffdb1e3488caa7",
-                "reference": "7057263a2289f2bab35e1bd445ffdb1e3488caa7",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/c2bde5907513887caa198716aa038eab72106fe0",
+                "reference": "c2bde5907513887caa198716aa038eab72106fe0",
                 "shasum": ""
             },
             "require": {
@@ -4781,7 +4781,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.71.1"
+                "source": "https://github.com/prism-php/prism/tree/v0.72.0"
             },
             "funding": [
                 {
@@ -4789,7 +4789,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-12T21:53:14+00:00"
+            "time": "2025-06-17T11:47:10+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -9622,16 +9622,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.18.0",
+            "version": "v12.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7d264a0dad2bfc5c154240b38e8ce9b2c4cdd14d"
+                "reference": "dc96bb635385a7f139afe39b339a36e87ec72770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7d264a0dad2bfc5c154240b38e8ce9b2c4cdd14d",
-                "reference": "7d264a0dad2bfc5c154240b38e8ce9b2c4cdd14d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/dc96bb635385a7f139afe39b339a36e87ec72770",
+                "reference": "dc96bb635385a7f139afe39b339a36e87ec72770",
                 "shasum": ""
             },
             "require": {
@@ -9833,7 +9833,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-06-10T14:48:34+00:00"
+            "time": "2025-06-17T17:02:22+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -40321,6 +40321,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
