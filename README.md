@@ -66,10 +66,13 @@ composer facade-update
 composer install-project
 composer jack
 composer jack-breakpoint
+composer jack-breakpoint-dev
 composer jack-open-versions
 composer jack-open-versions-dev
 composer jack-open-versions-dev-dry-run
 composer jack-open-versions-dry-run
+composer jack-raise-to-installed
+composer jack-raise-to-installed-dry-run
 composer json-lint
 composer lint
 composer md-fix
