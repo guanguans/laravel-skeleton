@@ -21906,16 +21906,16 @@
         },
         {
             "name": "spatie/laravel-data",
-            "version": "4.15.2",
+            "version": "4.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-data.git",
-                "reference": "50f5abe716ff1ad9a3e96dcfdeb4ad00f014bf8d"
+                "reference": "a33ddeb6bd9fd97447780ea9b4cc77dff94cf9b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/50f5abe716ff1ad9a3e96dcfdeb4ad00f014bf8d",
-                "reference": "50f5abe716ff1ad9a3e96dcfdeb4ad00f014bf8d",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/a33ddeb6bd9fd97447780ea9b4cc77dff94cf9b1",
+                "reference": "a33ddeb6bd9fd97447780ea9b4cc77dff94cf9b1",
                 "shasum": ""
             },
             "require": {
@@ -21977,7 +21977,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-data/issues",
-                "source": "https://github.com/spatie/laravel-data/tree/4.15.2"
+                "source": "https://github.com/spatie/laravel-data/tree/4.15.3"
             },
             "funding": [
                 {
@@ -21985,7 +21985,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-12T09:42:08+00:00"
+            "time": "2025-06-19T15:34:37+00:00"
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
