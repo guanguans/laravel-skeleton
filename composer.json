@@ -42,7 +42,7 @@
         "dragon-code/laravel-data-dumper": "^1.4",
         "dragon-code/support": "^6.16",
         "dyrynda/laravel-cascade-soft-deletes": "^4.5",
-        "echolabsdev/prism": "^0.72",
+        "echolabsdev/prism": "^0.74",
         "elao/enum": "^2.5",
         "elastic/ecs-logging": "^2.0",
         "elasticsearch/elasticsearch": "^8.18 || ^9.0",
