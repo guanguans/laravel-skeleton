@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42fa52061243010e5e814129fccd549e",
+    "content-hash": "0d6d0147a6b1225e1d495bc893107c16",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4868,16 +4868,16 @@
         },
         {
             "name": "echolabsdev/prism",
-            "version": "v0.74.0",
+            "version": "v0.77.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "1450e24962241f7739ab31678b258402917f678a"
+                "reference": "235fc58064785c6e601d7c6430d3cea88fd44d9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/1450e24962241f7739ab31678b258402917f678a",
-                "reference": "1450e24962241f7739ab31678b258402917f678a",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/235fc58064785c6e601d7c6430d3cea88fd44d9f",
+                "reference": "235fc58064785c6e601d7c6430d3cea88fd44d9f",
                 "shasum": ""
             },
             "require": {
@@ -4888,7 +4888,7 @@
             "require-dev": {
                 "laravel/pint": "^1.14",
                 "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^9.4",
+                "orchestra/testbench": "^10",
                 "pestphp/pest": "^3.0",
                 "pestphp/pest-plugin-arch": "^3.0",
                 "pestphp/pest-plugin-laravel": "^3.0",
@@ -4933,7 +4933,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.74.0"
+                "source": "https://github.com/prism-php/prism/tree/v0.77.1"
             },
             "funding": [
                 {
@@ -4941,7 +4941,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-19T20:43:03+00:00"
+            "time": "2025-06-23T17:39:40+00:00"
         },
         {
             "name": "egulias/email-validator",
