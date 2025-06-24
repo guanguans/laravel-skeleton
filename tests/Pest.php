@@ -27,8 +27,12 @@ use Tests\TestCase;
 
 uses(TestCase::class)
     ->beforeAll(function (): void {})
-    ->beforeEach(function (): void {})
-    ->afterEach(function (): void {})
+    ->beforeEach(function (): void {
+        $this->withoutDefer();
+    })
+    ->afterEach(function (): void {
+        $this->withDefer();
+    })
     ->afterAll(function (): void {})
     ->in(
         // __DIR__,

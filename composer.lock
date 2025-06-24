@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d6d0147a6b1225e1d495bc893107c16",
+    "content-hash": "f7404c8083568538cd8f0452d665cd58",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -13788,12 +13788,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/olvlvl/composer-attribute-collector.git",
-                "reference": "2f246696419f6aec02c5417dba848c8d0580e9ee"
+                "reference": "8f48126f37dfd52fac03d1215ce4d7af1c96e61e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/olvlvl/composer-attribute-collector/zipball/2f246696419f6aec02c5417dba848c8d0580e9ee",
-                "reference": "2f246696419f6aec02c5417dba848c8d0580e9ee",
+                "url": "https://api.github.com/repos/olvlvl/composer-attribute-collector/zipball/8f48126f37dfd52fac03d1215ce4d7af1c96e61e",
+                "reference": "8f48126f37dfd52fac03d1215ce4d7af1c96e61e",
                 "shasum": ""
             },
             "require": {
@@ -13840,7 +13840,7 @@
                 "issues": "https://github.com/olvlvl/composer-attribute-collector/issues",
                 "source": "https://github.com/olvlvl/composer-attribute-collector/tree/v2.1.0"
             },
-            "time": "2025-06-17T14:55:44+00:00"
+            "time": "2025-06-18T11:10:53+00:00"
         },
         {
             "name": "onelogin/php-saml",
@@ -13908,16 +13908,16 @@
         },
         {
             "name": "opcodesio/log-viewer",
-            "version": "v3.17.1",
+            "version": "v3.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opcodesio/log-viewer.git",
-                "reference": "871b7ac2adf8e623b3145e438fb2a2fdc0f8476c"
+                "reference": "9e46dd5b1fa0ff5119fac75cc2048b263cd60893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/871b7ac2adf8e623b3145e438fb2a2fdc0f8476c",
-                "reference": "871b7ac2adf8e623b3145e438fb2a2fdc0f8476c",
+                "url": "https://api.github.com/repos/opcodesio/log-viewer/zipball/9e46dd5b1fa0ff5119fac75cc2048b263cd60893",
+                "reference": "9e46dd5b1fa0ff5119fac75cc2048b263cd60893",
                 "shasum": ""
             },
             "require": {
@@ -13980,7 +13980,7 @@
             ],
             "support": {
                 "issues": "https://github.com/opcodesio/log-viewer/issues",
-                "source": "https://github.com/opcodesio/log-viewer/tree/v3.17.1"
+                "source": "https://github.com/opcodesio/log-viewer/tree/v3.18.0"
             },
             "funding": [
                 {
@@ -13992,7 +13992,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-19T09:20:51+00:00"
+            "time": "2025-06-24T03:35:57+00:00"
         },
         {
             "name": "opcodesio/mail-parser",
@@ -15604,16 +15604,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.44",
+            "version": "3.0.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "1d0b5e7e1434678411787c5a0535e68907cf82d9"
+                "reference": "bd81b90d5963c6b9d87de50357585375223f4dd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/1d0b5e7e1434678411787c5a0535e68907cf82d9",
-                "reference": "1d0b5e7e1434678411787c5a0535e68907cf82d9",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/bd81b90d5963c6b9d87de50357585375223f4dd8",
+                "reference": "bd81b90d5963c6b9d87de50357585375223f4dd8",
                 "shasum": ""
             },
             "require": {
@@ -15694,7 +15694,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.44"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.45"
             },
             "funding": [
                 {
@@ -15710,7 +15710,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-15T09:59:26+00:00"
+            "time": "2025-06-22T22:54:43+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -16770,16 +16770,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.12.8",
+            "version": "v0.12.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "85057ceedee50c49d4f6ecaff73ee96adb3b3625"
+                "reference": "1b801844becfe648985372cb4b12ad6840245ace"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/85057ceedee50c49d4f6ecaff73ee96adb3b3625",
-                "reference": "85057ceedee50c49d4f6ecaff73ee96adb3b3625",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1b801844becfe648985372cb4b12ad6840245ace",
+                "reference": "1b801844becfe648985372cb4b12ad6840245ace",
                 "shasum": ""
             },
             "require": {
@@ -16843,9 +16843,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.12.8"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.9"
             },
-            "time": "2025-03-16T03:05:19+00:00"
+            "time": "2025-06-23T02:35:06+00:00"
         },
         {
             "name": "pusher/pusher-php-server",
@@ -19565,16 +19565,16 @@
         },
         {
             "name": "spatie/laravel-data",
-            "version": "4.16.0",
+            "version": "4.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-data.git",
-                "reference": "5ec820642ccfec47cd481cfc638d6148684f9655"
+                "reference": "e652b52bdaca4774abb4a6024736850a1c4ab50b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/5ec820642ccfec47cd481cfc638d6148684f9655",
-                "reference": "5ec820642ccfec47cd481cfc638d6148684f9655",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/e652b52bdaca4774abb4a6024736850a1c4ab50b",
+                "reference": "e652b52bdaca4774abb4a6024736850a1c4ab50b",
                 "shasum": ""
             },
             "require": {
@@ -19636,7 +19636,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-data/issues",
-                "source": "https://github.com/spatie/laravel-data/tree/4.16.0"
+                "source": "https://github.com/spatie/laravel-data/tree/4.16.1"
             },
             "funding": [
                 {
@@ -19644,7 +19644,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-20T12:20:21+00:00"
+            "time": "2025-06-24T08:19:42+00:00"
         },
         {
             "name": "spatie/laravel-failed-job-monitor",
@@ -35244,16 +35244,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "11.0.9",
+            "version": "11.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "14d63fbcca18457e49c6f8bebaa91a87e8e188d7"
+                "reference": "1a800a7446add2d79cc6b3c01c45381810367d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/14d63fbcca18457e49c6f8bebaa91a87e8e188d7",
-                "reference": "14d63fbcca18457e49c6f8bebaa91a87e8e188d7",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/1a800a7446add2d79cc6b3c01c45381810367d76",
+                "reference": "1a800a7446add2d79cc6b3c01c45381810367d76",
                 "shasum": ""
             },
             "require": {
@@ -35310,15 +35310,27 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/11.0.9"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/show"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpunit/php-code-coverage",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-02-25T13:26:39+00:00"
+            "time": "2025-06-18T08:56:18+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -39967,6 +39979,6 @@
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
