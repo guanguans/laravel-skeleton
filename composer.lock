@@ -2639,16 +2639,16 @@
         },
         {
             "name": "cerbero/enum",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cerbero90/enum.git",
-                "reference": "427786f8331c11ca07664fd1b677265026f31e85"
+                "reference": "2aac6e6f2fbd2ad338324007f3de07e9dbb2d8db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cerbero90/enum/zipball/427786f8331c11ca07664fd1b677265026f31e85",
-                "reference": "427786f8331c11ca07664fd1b677265026f31e85",
+                "url": "https://api.github.com/repos/cerbero90/enum/zipball/2aac6e6f2fbd2ad338324007f3de07e9dbb2d8db",
+                "reference": "2aac6e6f2fbd2ad338324007f3de07e9dbb2d8db",
                 "shasum": ""
             },
             "require": {
@@ -2699,7 +2699,7 @@
             ],
             "support": {
                 "issues": "https://github.com/cerbero90/enum/issues",
-                "source": "https://github.com/cerbero90/enum/tree/2.3.2"
+                "source": "https://github.com/cerbero90/enum/tree/2.3.3"
             },
             "funding": [
                 {
@@ -2707,7 +2707,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-30T14:58:56+00:00"
+            "time": "2025-06-25T19:33:29+00:00"
         },
         {
             "name": "cesargb/laravel-magiclink",
