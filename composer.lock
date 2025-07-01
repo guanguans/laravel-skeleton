@@ -22190,16 +22190,16 @@
         },
         {
             "name": "staudenmeir/laravel-migration-views",
-            "version": "v1.11",
+            "version": "v1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-migration-views.git",
-                "reference": "f8c2be88be300489a5e84fdba3e3579cf00069f3"
+                "reference": "0a930da7f3a708e9472a6f6f7e8ae2d2d80c3ba2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-migration-views/zipball/f8c2be88be300489a5e84fdba3e3579cf00069f3",
-                "reference": "f8c2be88be300489a5e84fdba3e3579cf00069f3",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-migration-views/zipball/0a930da7f3a708e9472a6f6f7e8ae2d2d80c3ba2",
+                "reference": "0a930da7f3a708e9472a6f6f7e8ae2d2d80c3ba2",
                 "shasum": ""
             },
             "require": {
@@ -22238,7 +22238,7 @@
             "description": "Laravel database migrations with SQL views",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-migration-views/issues",
-                "source": "https://github.com/staudenmeir/laravel-migration-views/tree/v1.11"
+                "source": "https://github.com/staudenmeir/laravel-migration-views/tree/v1.11.1"
             },
             "funding": [
                 {
@@ -22246,7 +22246,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-02-16T09:41:55+00:00"
+            "time": "2025-06-29T11:19:07+00:00"
         },
         {
             "name": "stevebauman/location",
