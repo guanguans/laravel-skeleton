@@ -115,8 +115,8 @@ final class DatabaseServiceProvider extends ServiceProvider
 
     private function whenProduction(): void
     {
-        $this->whenever($this->app->isProduction(), static function (): void {
-            DB::prohibitDestructiveCommands();
+        $this->whenever($this->app->isProduction(), function (): void {
+            DB::prohibitDestructiveCommands($this->app->isProduction());
 
             /**
              * 此设置将仅报告 1% 的耗时超过 2 秒的查询，从而帮助您监控性能而不会使日志记录系统不堪重负。

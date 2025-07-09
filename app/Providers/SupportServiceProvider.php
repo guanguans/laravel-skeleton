@@ -100,6 +100,7 @@ final class SupportServiceProvider extends ServiceProvider
         $this->whenever(false, function (): void {
             /**
              * @see \Carbon\Laravel\ServiceProvider
+             * @see https://dyrynda.com.au/blog/laravel-immutable-dates
              */
             Date::use(CarbonImmutable::class);
             Date::useCallable(
