@@ -106,7 +106,7 @@ $status = (new SingleCommandApplication)
 
             private function updateComposerPackages(): self
             {
-                $this->mustRunCommand("$this->composerBinary update -W --ansi");
+                $this->mustRunCommand("$this->composerBinary update -W --ansi", \dirname($this->composerJsonPath));
 
                 return $this;
             }
@@ -198,7 +198,7 @@ $status = (new SingleCommandApplication)
                             $output = $this
                                 ->mustRunCommand("$this->highestComposerBinary outdated --format=json --direct --ansi")
                                 ->getOutput(),
-                            strpos($output, '{'.\PHP_EOL)
+                            (int) strpos($output, '{'.\PHP_EOL)
                         ),
                         true,
                         512,
@@ -229,8 +229,8 @@ $status = (new SingleCommandApplication)
             {
                 return \sprintf(
                     '%s %s',
-                    $phpBinary ?? (new PhpExecutableFinder)->find(),
-                    $composerBinary ?? (new ExecutableFinder)->find('composer')
+                    escapeshellarg($phpBinary ?? (new PhpExecutableFinder)->find()),
+                    escapeshellarg((string) ($composerBinary ?? (new ExecutableFinder)->find('composer')))
                 );
             }
 

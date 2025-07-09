@@ -25,6 +25,8 @@ use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
 use PhpCsFixerCustomFixers\Fixer\AbstractFixer;
 
+require __DIR__.'/vendor/autoload.php';
+
 return Factory::fromRuleSet(Php83::create()
     ->withHeader(
         (static function (): string {
@@ -103,6 +105,7 @@ return Factory::fromRuleSet(Php83::create()
         // '@PhpCsFixer:risky' => true,
     ]))
     ->withRules(Rules::fromArray([
+        'PhpCsFixerCustomFixers/phpdoc_tag_no_named_arguments' => false,
         'align_multiline_comment' => [
             'comment_type' => 'phpdocs_only',
         ],
@@ -191,6 +194,24 @@ return Factory::fromRuleSet(Php83::create()
             'anonymous_class' => false,
             'named_class' => false,
         ],
+        'no_extra_blank_lines' => [
+            'tokens' => [
+                'attribute',
+                'break',
+                'case',
+                // 'comma',
+                'continue',
+                'curly_brace_block',
+                'default',
+                'extra',
+                'parenthesis_brace_block',
+                'return',
+                'square_brace_block',
+                'switch',
+                'throw',
+                'use',
+            ],
+        ],
         'ordered_traits' => [
             'case_sensitive' => true,
         ],
@@ -278,10 +299,12 @@ return Factory::fromRuleSet(Php83::create()
         'statement_indentation' => [
             'stick_comment_to_next_continuous_control_statement' => true,
         ],
-        'static_lambda' => false, // pest
+        'static_lambda' => false,
+        'static_private_method' => false, // pest
     ])))
     ->setUsingCache(true)
     ->setCacheFile(__DIR__.'/.build/php-cs-fixer/.php-cs-fixer.cache')
+    ->setUnsupportedPhpVersionAllowed(true)
     ->setFinder(
         /**
          * @see https://github.com/laravel/pint/blob/main/app/Commands/DefaultCommand.php
