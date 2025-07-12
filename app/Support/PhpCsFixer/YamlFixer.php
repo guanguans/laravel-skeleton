@@ -29,25 +29,29 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * @see https://github.com/TheDragonCode/codestyler/blob/5.x/app/Fixers/JsonFixer.php
  * @see \Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer
  */
-final class JsonFixer extends AbstractFixer implements ConfigurableFixerInterface
+final class YamlFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     use ConfigurableFixerTrait;
-    public const string FLAGS = 'flags';
+    public const string PARSE_FLAGS = 'parse_flags';
+    public const string INLINE = 'inline';
+    public const string INDENT = 'indent';
+    public const string DUMP_FLAGS = 'dump_flags';
 
     #[\Override]
     public function getDefinition(): FixerDefinitionInterface
     {
-        return new FixerDefinition('Format a JSON file.', [new CodeSample('Format a JSON file.')]);
+        return new FixerDefinition('Format a YAML file.', [new CodeSample('Format a YAML file.')]);
     }
 
     public static function name(): string
     {
-        return 'User/json';
+        return 'User/yaml';
     }
 
     #[\Override]
@@ -80,7 +84,7 @@ final class JsonFixer extends AbstractFixer implements ConfigurableFixerInterfac
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is('json', true);
+        return str($file->getExtension())->is(['yaml', 'yml'], true);
     }
 
     protected function configurePreNormalisation(array &$configuration): void {}
@@ -90,9 +94,21 @@ final class JsonFixer extends AbstractFixer implements ConfigurableFixerInterfac
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([
-            (new FixerOptionBuilder(self::FLAGS, 'The flags to use when encoding JSON.'))
+            (new FixerOptionBuilder(self::PARSE_FLAGS, 'A bit field of PARSE_* constants to customize the YAML parser behavior.'))
                 ->setAllowedTypes(['int'])
-                ->setDefault(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_THROW_ON_ERROR)
+                ->setDefault(0)
+                ->getOption(),
+            (new FixerOptionBuilder(self::INLINE, 'The level where you switch to inline YAML.'))
+                ->setAllowedTypes(['int'])
+                ->setDefault(\PHP_INT_MAX)
+                ->getOption(),
+            (new FixerOptionBuilder(self::INDENT, 'The amount of spaces to use for indentation of nested nodes.'))
+                ->setAllowedTypes(['int'])
+                ->setDefault(2)
+                ->getOption(),
+            (new FixerOptionBuilder(self::DUMP_FLAGS, 'A bit field of DUMP_* constants to customize the dumped YAML string.'))
+                ->setAllowedTypes(['int'])
+                ->setDefault(Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE)
                 ->getOption(),
         ]);
     }
@@ -108,14 +124,13 @@ final class JsonFixer extends AbstractFixer implements ConfigurableFixerInterfac
         $tokens[0] = new Token([\TOKEN_PARSE, $this->convert($tokens[0]->getContent())]);
     }
 
-    /**
-     * @throws \JsonException
-     */
     private function convert(string $content): string
     {
-        return trim(json_encode(
-            json_decode($content, true, 512, \JSON_THROW_ON_ERROR),
-            \JSON_THROW_ON_ERROR | $this->configuration[self::FLAGS]
+        return trim(Yaml::dump(
+            Yaml::parse($content, $this->configuration[self::PARSE_FLAGS]),
+            $this->configuration[self::INLINE],
+            $this->configuration[self::INDENT],
+            $this->configuration[self::DUMP_FLAGS]
         ));
     }
 }

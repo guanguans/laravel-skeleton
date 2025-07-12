@@ -526,7 +526,7 @@
         "phpmd": "@php ./vendor/bin/phpmd src/ ansi cleancode,codesize,controversial,design,naming,unusedcode --suffixes=php",
         "phpmetrics": "@php ./vendor/bin/phpmetrics --report-html=./.build/phpmetrics/ ./src/",
         "phpmnd": "@php ./vendor/bin/phpmnd app/ --exclude-path=Support/Utils.php --ignore-numbers=2,-1 --hint --progress --ansi -v",
-        "phpstan": "@php ./vendor/bin/phpstan analyse --ansi -vv",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
         "phpstan-split-baseline": [
             "@phpstan --generate-baseline=baselines/loader.neon --allow-empty-baseline",

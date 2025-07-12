@@ -106,6 +106,7 @@ parameters:
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
         - identifier: offsetAccess.nonOffsetAccessible
+        - identifier: offsetAccess.notFound
         - identifier: return.type
         - identifier: trait.unused
         - identifier: typePerfect.narrowPublicClassMethodParamType

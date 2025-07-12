@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use App\Support\PhpCsFixer\JsonFixer;
 use App\Support\PhpCsFixer\PintFixer;
+use App\Support\PhpCsFixer\YamlFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -81,10 +82,12 @@ return Factory::fromRuleSet(Php83::create()
     ->withCustomFixers(Fixers::fromFixers(
         new JsonFixer,
         new PintFixer,
+        new YamlFixer,
     ))
     ->withRules(Rules::fromArray([
         JsonFixer::name() => true,
         // PintFixer::name() => true,
+        // YamlFixer::name() => true,
     ]))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,
@@ -330,15 +333,17 @@ return Factory::fromRuleSet(Php83::create()
                 'Fixtures/',
             ])
             ->name([
-                '/\.php$/',
                 '/\.json$/',
+                '/\.php$/',
+                // '/\.yaml$/',
+                // '/\.yml$/',
             ])
             ->notName([
                 '*.blade.php',
             ])
             ->append([
                 ...array_filter(
-                    glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
+                    glob(__DIR__.'/{*,.*}.{php}', \GLOB_BRACE),
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',
