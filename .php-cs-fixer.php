@@ -11,6 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Support\PhpCsFixer\JsonFixer;
 use App\Support\PhpCsFixer\PintFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
@@ -78,9 +79,11 @@ return Factory::fromRuleSet(Php83::create()
     //     []
     // )))
     ->withCustomFixers(Fixers::fromFixers(
-        new PintFixer
+        new JsonFixer,
+        new PintFixer,
     ))
     ->withRules(Rules::fromArray([
+        JsonFixer::name() => true,
         // PintFixer::name() => true,
     ]))
     ->withRules(Rules::fromArray([
@@ -325,6 +328,10 @@ return Factory::fromRuleSet(Php83::create()
             ->exclude([
                 'cache/',
                 'Fixtures/',
+            ])
+            ->name([
+                '/\.php$/',
+                '/\.json$/',
             ])
             ->notName([
                 '*.blade.php',

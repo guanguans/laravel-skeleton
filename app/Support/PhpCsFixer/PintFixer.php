@@ -55,7 +55,7 @@ final class PintFixer extends AbstractFixer
     #[\Override]
     public function getPriority(): int
     {
-        return \PHP_INT_MAX;
+        return -\PHP_INT_MAX;
     }
 
     /**
@@ -89,6 +89,7 @@ final class PintFixer extends AbstractFixer
             '--output-to-file=.build/pint/.pint.output',
             '--output-format=txt',
             // '--format=json',
+            // '--parallel',
             // '--test',
             // '--ansi',
             '-v',
