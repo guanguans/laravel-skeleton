@@ -380,7 +380,7 @@
             "@cghooks add --ignore-lock"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --force --ansi -v",
+            "@php artisan vendor:publish --tag=laravel-assets --force --ansi -vv",
             "@artisan vendor:publish --tag=laravel-errors",
             "@artisan vendor:publish --tag=DecomposerAssets --force",
             "@artisan log-viewer:publish",
@@ -394,15 +394,15 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi -v"
+            "@php artisan package:discover --ansi -vv"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi -v",
+            "@php artisan key:generate --ansi -vv",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
-            "@php artisan migrate --graceful --ansi -v"
+            "@php artisan migrate --graceful --ansi -vv"
         ],
         "ai-commit": "@php ./vendor/bin/ai-commit commit --ansi",
         "ai-commit-bito": "@ai-commit --generator=bito_cli",
@@ -412,7 +412,7 @@
         "ai-commit-github-models": "@ai-commit --generator=github_models_cli",
         "ai-commit-github-models-no-verify": "@ai-commit-github-models --no-verify",
         "ai-commit-no-verify": "@ai-commit --no-verify",
-        "artisan": "@php artisan --ansi -v",
+        "artisan": "@php artisan --ansi -vv",
         "artisan-envy-prune": "@artisan envy:prune",
         "artisan-envy-sync": "@artisan envy:sync",
         "artisan-ide-helper": [
@@ -427,9 +427,9 @@
             "@env-put-xdebug-on",
             "@php artisan --ansi"
         ],
-        "benchmark": "@php ./vendor/bin/phpbench run --report=aggregate --ansi -v",
-        "cghooks": "@php ./vendor/bin/cghooks --ansi -v",
-        "cghooks-ignore": "[ ! -f \"./vendor/bin/cghooks\" ] && exit 0 || php ./vendor/bin/cghooks --ansi -v",
+        "benchmark": "@php ./vendor/bin/phpbench run --report=aggregate --ansi -vv",
+        "cghooks": "@php ./vendor/bin/cghooks --ansi -vv",
+        "cghooks-ignore": "[ ! -f \"./vendor/bin/cghooks\" ] && exit 0 || php ./vendor/bin/cghooks --ansi -vv",
         "checks": [
             "@env-put-xdebug-off",
             "@composer-normalize",
@@ -450,19 +450,19 @@
             "@phpstan",
             "@composer-dependency-analyser"
         ],
-        "class-leak": "@php ./vendor/bin/class-leak --ansi -v",
+        "class-leak": "@php ./vendor/bin/class-leak --ansi -vv",
         "class-leak-check": "@class-leak check app/ config/ --skip-suffix=Pipe --skip-path=Support/Traits --skip-path=Channels --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Channel --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Collector --skip-type=Rector\\Rector\\AbstractRector",
-        "composer-bin-all-update": "@composer bin all update --ansi -v",
-        "composer-check-platform-reqs": "@composer check-platform-reqs --lock --ansi -v",
+        "composer-bin-all-update": "@composer bin all update --ansi -vv",
+        "composer-check-platform-reqs": "@composer check-platform-reqs --lock --ansi -vv",
         "composer-dependency-analyser": "@php ./vendor/bin/composer-dependency-analyser --verbose",
-        "composer-diff": "@composer diff --with-platform --ansi -v",
+        "composer-diff": "@composer diff --with-platform --ansi -vv",
         "composer-disable-process-timeout": "Composer\\Config::disableProcessTimeout",
         "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.4/bin/php --except-packages=pestphp/pest-plugin-laravel --ansi",
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-updater-laravel10": "@composer-updater --composer-json-path=vendor-bin/laravel10/composer.json",
         "composer-updater-laravel11": "@composer-updater --composer-json-path=vendor-bin/laravel11/composer.json",
-        "composer-validate": "@composer validate --check-lock --strict --ansi -v",
-        "composer-vendor-patches": "@php vendor/bin/vendor-patches generate --ansi -v",
+        "composer-validate": "@composer validate --check-lock --strict --ansi -vv",
+        "composer-vendor-patches": "@php vendor/bin/vendor-patches generate --ansi -vv",
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
@@ -482,7 +482,7 @@
             "@putenv XDEBUG_MODE=coverage,debug",
             "@putenv XDEBUG_SESSION=1"
         ],
-        "envoy": "@php ./vendor/bin/envoy --ansi -v",
+        "envoy": "@php ./vendor/bin/envoy --ansi -vv",
         "envoy-local": "@envoy run local",
         "envoy-ssh-testing": "@envoy ssh testing",
         "envoy-testing": "@envoy run testing",
@@ -492,7 +492,7 @@
             "@post-create-project-cmd",
             "@artisan jwt:secret --force"
         ],
-        "jack": "@php vendor/bin/jack --ansi -v",
+        "jack": "@php vendor/bin/jack --ansi -vv",
         "jack-breakpoint": "@jack breakpoint --limit=5",
         "jack-breakpoint-dev": "@jack-breakpoint --dev",
         "jack-open-versions": "@jack open-versions --limit=99",
@@ -510,9 +510,9 @@
         "md-fix": "@md-lint --fix",
         "md-lint": "lint-md --config .lintmdrc ./*.md ./.github/ ./docs/",
         "neon-lint": "@php ./vendor/bin/neon-lint *.neon",
-        "normalized": "@composer normalize --diff --ansi -v",
+        "normalized": "@composer normalize --diff --ansi -vv",
         "normalized-dry-run": "@normalized --dry-run",
-        "peck": "@php ./vendor/bin/peck check --path=app/ --config=peck.json --ansi -v",
+        "peck": "@php ./vendor/bin/peck check --path=app/ --config=peck.json --ansi -vv",
         "peck-init": "@peck --init",
         "pest": "@php ./vendor/bin/pest --colors=always --coverage",
         "pest-bail": "@pest --bail",
@@ -525,7 +525,7 @@
         "phploc": "@php ./vendor/bin/phploc --suffix=php src/",
         "phpmd": "@php ./vendor/bin/phpmd src/ ansi cleancode,codesize,controversial,design,naming,unusedcode --suffixes=php",
         "phpmetrics": "@php ./vendor/bin/phpmetrics --report-html=./.build/phpmetrics/ ./src/",
-        "phpmnd": "@php ./vendor/bin/phpmnd app/ --exclude-path=Support/Utils.php --ignore-numbers=2,-1 --hint --progress --ansi -v",
+        "phpmnd": "@php ./vendor/bin/phpmnd app/ --exclude-path=Support/Utils.php --ignore-numbers=2,-1 --hint --progress --ansi -vv",
         "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
         "phpstan-split-baseline": [
@@ -535,14 +535,14 @@
         ],
         "pint": [
             "@env-put-xdebug-off",
-            "@php ./vendor/bin/pint --parallel --ansi -v"
+            "@php ./vendor/bin/pint --parallel --ansi -vv"
         ],
         "pint-bail": "@pint --bail",
         "pint-dirty": "@pint --dirty",
         "pint-dirty-bail": "@pint-dirty --bail",
         "pint-dirty-test": "@pint-dirty --test",
         "pint-test": "@pint --test",
-        "rector": "@php ./vendor/bin/rector --ansi -v",
+        "rector": "@php ./vendor/bin/rector --ansi -vv",
         "rector-clear-cache": "@rector --clear-cache",
         "rector-clear-cache-dry-run": "@rector-clear-cache --dry-run",
         "rector-custom-rule": "@rector custom-rule",
@@ -552,7 +552,7 @@
         "rector-only": "@rector-clear-cache --only=Guanguans\\MonorepoBuilderWorker\\Support\\Rectors\\RenameToPsrNameRector",
         "rector-only-dry-run": "@rector-only --dry-run",
         "rector-setup-ci": "@rector setup-ci",
-        "release": "@php ./vendor/bin/monorepo-builder release --ansi -v",
+        "release": "@php ./vendor/bin/monorepo-builder release --ansi -vv",
         "release-1.0.0-BETA1": "@release 1.0.0-BETA1",
         "release-1.0.0-BETA1-dry-run": "@release-1.0.0-BETA1 --dry-run",
         "release-major": "@release major",
@@ -563,7 +563,7 @@
         "release-patch-dry-run": "@release-patch --dry-run",
         "roave-infection-static-analysis-plugin": "@php ./vendor/bin/roave-infection-static-analysis-plugin --psalm-config=psalm.xml.dist",
         "roave-no-leaks": "@php ./vendor/bin/roave-no-leaks",
-        "sk": "@php ./vendor/bin/swiss-knife --ansi -v",
+        "sk": "@php ./vendor/bin/swiss-knife --ansi -vv",
         "sk-alice-yaml-fixtures-to-php": "@sk alice-yaml-fixtures-to-php --help",
         "sk-check-commented-code": "@sk check-commented-code app/ routes/ --line-limit=20",
         "sk-check-conflicts": "@sk check-conflicts app/ bootstrap/ config/ database/ resources/ routes/ tests/",
@@ -584,24 +584,24 @@
         "style-lint": "@style-fix --diff --dry-run",
         "text-fix": "npx textlint --fix ./*.md ./.github/*.md ./docs/**/*.md",
         "text-lint": "npx textlint --format=pretty-error ./*.md ./.github/*.md ./docs/**/*.md",
-        "trap": "@php ./vendor/bin/trap --ui --ansi -v",
+        "trap": "@php ./vendor/bin/trap --ui --ansi -vv",
         "trufflehog": "trufflehog git https://github.com/guanguans/laravel-skeleton --only-verified",
         "user-composer": [
             "@env-put-composer-memory-unlimited",
             "@env-put-xdebug-off",
-            "@composer --ansi -v"
+            "@composer --ansi -vv"
         ],
         "user-php": [
             "@env-put-xdebug-off",
             "@php -d xdebug.mode=off"
         ],
-        "var-dump-server": "@php ./vendor/bin/var-dump-server --ansi -v",
+        "var-dump-server": "@php ./vendor/bin/var-dump-server --ansi -vv",
         "vhs": [
             "@cghooks-uninstall",
             "vhs < vhs.tape",
             "@cghooks-install"
         ],
-        "yaml-lint": "@php ./vendor/bin/yaml-lint .github/ --ansi -v",
+        "yaml-lint": "@php ./vendor/bin/yaml-lint .github/ --ansi -vv",
         "zh-fix": "@zh-lint --fix",
         "zh-lint": "zhlint {./,docs/,docs/**/}*-zh_CN.md"
     },
