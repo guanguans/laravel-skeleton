@@ -96,6 +96,9 @@ final class YamlFixer extends AbstractConfigurableFixer
         $tokens[0] = new Token([\TOKEN_PARSE, $this->convert($tokens[0]->getContent())]);
     }
 
+    /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     */
     private function convert(string $content): string
     {
         return trim(Yaml::dump(

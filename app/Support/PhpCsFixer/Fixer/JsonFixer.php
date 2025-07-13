@@ -91,6 +91,8 @@ final class JsonFixer extends AbstractConfigurableFixer
     }
 
     /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     *
      * @throws \JsonException
      */
     private function convert(string $content): string

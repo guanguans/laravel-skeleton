@@ -30,19 +30,6 @@ use function Psl\Filesystem\create_temporary_file;
  */
 final class PintFixer extends AbstractFixer
 {
-    private static ?string $temporaryFile = null;
-
-    /**
-     * @see \Illuminate\Filesystem\Filesystem::delete()
-     */
-    public function __destruct()
-    {
-        if (self::$temporaryFile && unlink(self::$temporaryFile)) {
-            clearstatcache(false, self::$temporaryFile);
-            self::$temporaryFile = null;
-        }
-    }
-
     #[\Override]
     public function getDefinition(): FixerDefinitionInterface
     {
@@ -65,7 +52,7 @@ final class PintFixer extends AbstractFixer
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        // Only specific single file can be fixed by pint.
+        // Only specific single file is supported.
         return str($file)->contains(self::argv());
     }
 
@@ -76,7 +63,7 @@ final class PintFixer extends AbstractFixer
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
         $process = new Process([
-            self::findPhpBinary(),
+            php_binary(),
             'vendor/bin/pint',
             $path = self::pathFor($file, $tokens),
             // '--ansi',
@@ -94,13 +81,6 @@ final class PintFixer extends AbstractFixer
         $process->isSuccessful() or $tokens->setCode(file_get_contents($path));
     }
 
-    private static function findPhpBinary(): string
-    {
-        static $phpBinary;
-
-        return $phpBinary ??= php_binary();
-    }
-
     /**
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
@@ -109,7 +89,7 @@ final class PintFixer extends AbstractFixer
         $path = (string) $file;
 
         if (self::isDryRun()) {
-            file_put_contents($path = self::getTemporaryFile(), $tokens->generateCode());
+            file_put_contents($path = self::createTemporaryFile(), $tokens->generateCode());
         }
 
         return $path;
@@ -117,9 +97,7 @@ final class PintFixer extends AbstractFixer
 
     private static function isDryRun(): bool
     {
-        static $isDryRun;
-
-        return $isDryRun ??= \in_array('--dry-run', self::argv(), true);
+        return \in_array('--dry-run', self::argv(), true);
     }
 
     /**
@@ -130,8 +108,10 @@ final class PintFixer extends AbstractFixer
         return $_SERVER['argv'] ?? [];
     }
 
-    private static function getTemporaryFile(): string
+    private static function createTemporaryFile(): string
     {
-        return self::$temporaryFile ??= create_temporary_file();
+        static $temporaryFile;
+
+        return $temporaryFile ??= create_temporary_file();
     }
 }
