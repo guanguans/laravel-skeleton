@@ -20,54 +20,17 @@ namespace App\Support\PhpCsFixer\Fixer;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
-use PhpCsFixer\FixerDefinition\CodeSample;
-use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
-use PhpCsFixer\Tokenizer\Token;
-use PhpCsFixer\Tokenizer\Tokens;
 
 /**
  * @see https://github.com/TheDragonCode/codestyler/blob/5.x/app/Fixers/JsonFixer.php
- * @see \Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer
+ * @see https://github.com/ergebnis/composer-normalize
+ * @see https://github.com/Seldaek/jsonlint
  */
-final class JsonFixer extends AbstractConfigurableFixer
+final class JsonFixer extends AbstractInlineHtmlFixer
 {
     public const string DECODE_ASSOCIATIVE = 'decode_associative';
     public const string DECODE_FLAGS = 'decode_flags';
     public const string ENCODE_FLAGS = 'encode_flags';
-
-    #[\Override]
-    public function getDefinition(): FixerDefinitionInterface
-    {
-        return new FixerDefinition('Format a JSON file.', [new CodeSample('Format a JSON file.')]);
-    }
-
-    /**
-     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
-     */
-    #[\Override]
-    public function getPriority(): int
-    {
-        return -99;
-    }
-
-    #[\Override]
-    public function isRisky(): bool
-    {
-        return true;
-    }
-
-    #[\Override]
-    public function isCandidate(Tokens $tokens): bool
-    {
-        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
-    }
-
-    #[\Override]
-    public function supports(\SplFileInfo $file): bool
-    {
-        return str($file->getExtension())->is('json', true);
-    }
 
     #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
@@ -88,27 +51,21 @@ final class JsonFixer extends AbstractConfigurableFixer
         ]);
     }
 
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     *
-     * @throws \Throwable
-     */
     #[\Override]
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
+    protected function supportedExtensions(): iterable|string
     {
-        $tokens[0] = new Token([\TOKEN_PARSE, $this->convert($tokens[0]->getContent())]);
+        return 'json';
     }
 
     /**
-     * @noinspection PhpMemberCanBePulledUpInspection
-     *
      * @throws \JsonException
      */
-    private function convert(string $content): string
+    #[\Override]
+    protected function format(string $content): string
     {
-        return trim(json_encode(
+        return json_encode(
             json_decode($content, $this->configuration[self::DECODE_ASSOCIATIVE], 512, \JSON_THROW_ON_ERROR | $this->configuration[self::DECODE_FLAGS]),
             \JSON_THROW_ON_ERROR | $this->configuration[self::ENCODE_FLAGS]
-        ));
+        );
     }
 }

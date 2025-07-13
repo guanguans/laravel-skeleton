@@ -31,7 +31,17 @@ final class Fixers implements \IteratorAggregate
         foreach (new \DirectoryIterator(__DIR__.'/Fixer') as $fileInfo) {
             $fileName = $fileInfo->getBasename('.php');
 
-            if (\in_array($fileName, ['.', '..', 'AbstractFixer', 'AbstractConfigurableFixer'], true)) {
+            if (\in_array(
+                $fileName,
+                [
+                    '.',
+                    '..',
+                    'AbstractConfigurableFixer',
+                    'AbstractFixer',
+                    'AbstractInlineHtmlFixer',
+                ],
+                true
+            )) {
                 continue;
             }
 
@@ -42,7 +52,11 @@ final class Fixers implements \IteratorAggregate
 
         foreach ($classNames as $className) {
             $fixer = new $className;
-            \assert($fixer instanceof FixerInterface);
+
+            // \assert($fixer instanceof FixerInterface);
+            if (!$fixer instanceof FixerInterface) {
+                continue;
+            }
 
             yield $fixer;
         }

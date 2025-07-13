@@ -11,6 +11,8 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Support\PhpCsFixer\Fixer\DoctrineSqlFixer;
+use App\Support\PhpCsFixer\Fixer\PhpmyadminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\PintFixer;
 use App\Support\PhpCsFixer\Fixer\YamlFixer;
 use Ergebnis\License\Holder;
@@ -78,8 +80,9 @@ return Factory::fromRuleSet(Php83::create()
         array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
             $fixer->getName(),
             [
+                // DoctrineSqlFixer::name(),
+                // PhpmyadminSqlFixer::name(),
                 // PintFixer::name(),
-                // YamlFixer::name(),
                 // YamlFixer::name(),
             ],
             true
@@ -341,6 +344,7 @@ return Factory::fromRuleSet(Php83::create()
             ->name([
                 '/\.json$/',
                 '/\.php$/',
+                '/\.sql$/',
                 '/\.yaml$/',
                 '/\.yml$/',
             ])
@@ -349,7 +353,7 @@ return Factory::fromRuleSet(Php83::create()
             ])
             ->append([
                 ...array_filter(
-                    glob(__DIR__.'/{*,.*}.{json,php,yaml,yml}', \GLOB_BRACE),
+                    glob(__DIR__.'/{*,.*}.{json,php,sql,yaml,yml}', \GLOB_BRACE),
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',

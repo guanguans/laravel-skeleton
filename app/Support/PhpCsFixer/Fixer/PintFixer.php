@@ -27,6 +27,7 @@ use function Psl\Filesystem\create_temporary_file;
 
 /**
  * @see https://github.com/prettier/plugin-php/blob/main/docs/recipes/php-cs-fixer/PrettierPHPFixer.php
+ * @see https://github.com/laravel/pint
  */
 final class PintFixer extends AbstractFixer
 {

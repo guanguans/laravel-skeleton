@@ -111,6 +111,7 @@
         "php-ds/php-ds": "^1.7",
         "php-open-source-saver/jwt-auth": "^2.8",
         "php-static-analysis/attributes": "^0.4",
+        "phpmyadmin/sql-parser": "^5.11",
         "phpyh/lru-memoizer": "^0.2",
         "pion/laravel-chunk-upload": "^1.5",
         "prinsfrank/standards": "^3.12",
@@ -525,7 +526,7 @@
         "phploc": "@php ./vendor/bin/phploc --suffix=php src/",
         "phpmd": "@php ./vendor/bin/phpmd src/ ansi cleancode,codesize,controversial,design,naming,unusedcode --suffixes=php",
         "phpmetrics": "@php ./vendor/bin/phpmetrics --report-html=./.build/phpmetrics/ ./src/",
-        "phpmnd": "@php ./vendor/bin/phpmnd app/ --exclude-path=Support/Utils.php --ignore-numbers=2,-1 --hint --progress --ansi -vv",
+        "phpmnd": "@php ./vendor/bin/phpmnd app/ --exclude=Support/PhpCsFixer/Fixer/ --exclude-path=Support/Utils.php --ignore-numbers=2,-1 --hint --progress --ansi -vv",
         "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
         "phpstan-split-baseline": [
