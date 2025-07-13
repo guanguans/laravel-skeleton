@@ -346,6 +346,8 @@ return Factory::fromRuleSet(Php83::create()
                 '/\.neon$/',
                 '/\.php$/',
                 '/\.sql$/',
+                '/\.xml$/',
+                '/\.xml\.dist$/',
                 '/\.yaml$/',
                 '/\.yml$/',
             ])
@@ -354,7 +356,7 @@ return Factory::fromRuleSet(Php83::create()
             ])
             ->append([
                 ...array_filter(
-                    glob(__DIR__.'/{*,.*}.{json,php,sql,yaml,yml}', \GLOB_BRACE),
+                    glob(__DIR__.'/{*,.*}.{json,php,sql,xml.dist,yaml,yml}', \GLOB_BRACE),
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',

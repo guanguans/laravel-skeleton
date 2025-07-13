@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-    bootstrap="vendor/autoload.php"
-    cacheDirectory=".build/phpunit/"
-    colors="true"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+  bootstrap="vendor/autoload.php"
+  cacheDirectory=".build/phpunit/"
+  colors="true"
 >
-    <testsuites>
-        <testsuite name="Unit">
-            <directory>tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
-            <directory>tests/Feature</directory>
-        </testsuite>
-        <testsuite name="Arch">
-            <directory>tests/Arch</directory>
-        </testsuite>
-        <testsuite name="Integration">
-            <directory>tests/Integration</directory>
-        </testsuite>
-    </testsuites>
-    <source>
-        <include>
-            <directory>app</directory>
-        </include>
-    </source>
-    <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_STORE" value="array"/>
-        <env name="DB_CONNECTION" value="sqlite"/>
-        <env name="DB_DATABASE" value=":memory:"/>
-        <env name="MAIL_MAILER" value="array"/>
-        <env name="PULSE_ENABLED" value="false"/>
-        <env name="QUEUE_CONNECTION" value="sync"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="TELESCOPE_ENABLED" value="false"/>
-        <env name="TELESCOPE_ENABLED" value="false"/>
+  <testsuites>
+    <testsuite name="Unit">
+      <directory>tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Feature">
+      <directory>tests/Feature</directory>
+    </testsuite>
+    <testsuite name="Arch">
+      <directory>tests/Arch</directory>
+    </testsuite>
+    <testsuite name="Integration">
+      <directory>tests/Integration</directory>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <directory>app</directory>
+    </include>
+  </source>
+  <php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+    <env name="BCRYPT_ROUNDS" value="4"/>
+    <env name="CACHE_STORE" value="array"/>
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="DB_DATABASE" value=":memory:"/>
+    <env name="MAIL_MAILER" value="array"/>
+    <env name="PULSE_ENABLED" value="false"/>
+    <env name="QUEUE_CONNECTION" value="sync"/>
+    <env name="SESSION_DRIVER" value="array"/>
+    <env name="TELESCOPE_ENABLED" value="false"/>
+    <env name="TELESCOPE_ENABLED" value="false"/>
 
-        <env name="APP_BASE_PATH" value="./"/>
-        <env name="AUTH_GUARD" value="api"/>
-        <env name="AUTH_PASSWORD_BROKER" value="jwtUsers"/>
-        <env name="JWT_PRIVATE_KEY" value="file://storage/certs/jwt-rsa-4096-private.pem"/>
-        <env name="JWT_PUBLIC_KEY" value="file://storage/certs/jwt-rsa-4096-public.pem"/>
-        <env name="PUSHDEER_KEY" value="PDU3062THLWPFpHEmFQrKhFp9Tlz9q0qE9Nfz"/>
-        <env name="SOAR_SCORE_ENABLED" value="false"/>
-    </php>
+    <env name="APP_BASE_PATH" value="./"/>
+    <env name="AUTH_GUARD" value="api"/>
+    <env name="AUTH_PASSWORD_BROKER" value="jwtUsers"/>
+    <env name="JWT_PRIVATE_KEY" value="file://storage/certs/jwt-rsa-4096-private.pem"/>
+    <env name="JWT_PUBLIC_KEY" value="file://storage/certs/jwt-rsa-4096-public.pem"/>
+    <env name="PUSHDEER_KEY" value="PDU3062THLWPFpHEmFQrKhFp9Tlz9q0qE9Nfz"/>
+    <env name="SOAR_SCORE_ENABLED" value="false"/>
+  </php>
 </phpunit>

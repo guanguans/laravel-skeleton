@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection MissingParentCallInspection */
 /** @noinspection PhpMissingParentCallCommonInspection */
 /** @noinspection SensitiveParameterInspection */
 
@@ -36,7 +35,7 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a %s file.', str($this->getName())->chopStart('User/')->headline()->lower()),
+            $summary = \sprintf('Format a %s file.', str($this->getSortName())->headline()->lower()),
             [new CodeSample($summary)]
         );
     }
@@ -62,13 +61,14 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     #[\Override]
     public function isCandidate(Tokens $tokens): bool
     {
-        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
+        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML) && trim($tokens[0]->getContent());
     }
 
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is($this->supportedExtensions(), true);
+        return str($file->getExtension())->is($this->supportedExtensions(), true)
+            && str($file->getPathname())->lower()->endsWith($this->supportedExtensions());
     }
 
     /**
@@ -85,12 +85,14 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
                 $this->format(
                     str($tokens[0]->getContent())
                         ->trim()
-                        ->when($this->configuration[self::START], function (Stringable $content, string $start) {
-                            return $content->chopStart($start);
-                        })
-                        ->when($this->configuration[self::FINISH], function (Stringable $content, string $finish) {
-                            return $content->chopEnd($finish);
-                        })
+                        ->when(
+                            $this->configuration[self::START],
+                            static fn (Stringable $content, string $start) => $content->chopStart($start)
+                        )
+                        ->when(
+                            $this->configuration[self::FINISH],
+                            static fn (Stringable $content, string $finish) => $content->chopEnd($finish)
+                        )
                         // ->dd()
                         ->toString()
                 )
@@ -106,7 +108,7 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return new FixerConfigurationResolver([...$this->fixerOptions(), ...$this->defaultFixerOptions()]);
+        return new FixerConfigurationResolver([...$this->defaultFixerOptions(), ...$this->fixerOptions()]);
     }
 
     protected function defaultStart(): string
@@ -118,18 +120,6 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     {
         return '';
     }
-
-    /**
-     * @return iterable<string>|string
-     */
-    abstract protected function supportedExtensions(): iterable|string;
-
-    abstract protected function format(string $content): string;
-
-    /**
-     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
-     */
-    abstract protected function fixerOptions(): array;
 
     /**
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
@@ -147,4 +137,16 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
                 ->getOption(),
         ];
     }
+
+    /**
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    abstract protected function fixerOptions(): array;
+
+    /**
+     * @return iterable<string>|string
+     */
+    abstract protected function supportedExtensions(): iterable|string;
+
+    abstract protected function format(string $content): string;
 }

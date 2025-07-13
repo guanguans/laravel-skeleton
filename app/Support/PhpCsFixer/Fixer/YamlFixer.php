@@ -1,9 +1,5 @@
 <?php
 
-/** @noinspection MissingParentCallInspection */
-/** @noinspection PhpMissingParentCallCommonInspection */
-/** @noinspection SensitiveParameterInspection */
-
 declare(strict_types=1);
 
 /**
@@ -23,6 +19,7 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @see https://github.com/TheDragonCode/codestyler/blob/5.x/app/Fixers/YamlFixer.php
  * @see https://github.com/symfony/yaml
+ * @see \Symfony\Component\Serializer\Encoder\YamlEncoder
  */
 final class YamlFixer extends AbstractInlineHtmlFixer
 {
@@ -30,12 +27,6 @@ final class YamlFixer extends AbstractInlineHtmlFixer
     public const string DUMP_INLINE = 'dump_inline';
     public const string DUMP_INDENT = 'dump_indent';
     public const string DUMP_FLAGS = 'dump_flags';
-
-    #[\Override]
-    public function supports(\SplFileInfo $file): bool
-    {
-        return parent::supports($file) && !str(file_get_contents((string) $file))->contains('#');
-    }
 
     #[\Override]
     protected function fixerOptions(): array
@@ -59,6 +50,7 @@ final class YamlFixer extends AbstractInlineHtmlFixer
                     Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE
                     | Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK
                     | Yaml::DUMP_NULL_AS_EMPTY
+                    | Yaml::DUMP_OBJECT_AS_MAP
                 )
                 ->getOption(),
         ];

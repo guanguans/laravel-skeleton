@@ -1,8 +1,6 @@
 <?php
 
-/** @noinspection MissingParentCallInspection */
 /** @noinspection PhpInternalEntityUsedInspection */
-/** @noinspection PhpMissingParentCallCommonInspection */
 /** @noinspection SensitiveParameterInspection */
 
 declare(strict_types=1);
@@ -37,10 +35,19 @@ abstract class AbstractFixer extends \PhpCsFixer\AbstractFixer
         return (new static)->getName();
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     * @noinspection MissingParentCallInspection
+     */
     #[\Override]
     public function getName(): string
     {
-        return \sprintf('User/%s', parent::getName());
+        return \sprintf('User/%s', $this->getSortName());
+    }
+
+    public function getSortName(): string
+    {
+        return parent::getName();
     }
 
     /**
