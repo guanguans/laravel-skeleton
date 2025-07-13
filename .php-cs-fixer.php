@@ -12,7 +12,7 @@ declare(strict_types=1);
  */
 
 use App\Support\PhpCsFixer\Fixer\DoctrineSqlFixer;
-use App\Support\PhpCsFixer\Fixer\PhpmyadminSqlFixer;
+use App\Support\PhpCsFixer\Fixer\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\PintFixer;
 use App\Support\PhpCsFixer\Fixer\YamlFixer;
 use Ergebnis\License\Holder;
@@ -81,7 +81,7 @@ return Factory::fromRuleSet(Php83::create()
             $fixer->getName(),
             [
                 // DoctrineSqlFixer::name(),
-                // PhpmyadminSqlFixer::name(),
+                // PhpMyAdminSqlFixer::name(),
                 // PintFixer::name(),
                 // YamlFixer::name(),
             ],
@@ -343,6 +343,7 @@ return Factory::fromRuleSet(Php83::create()
             ])
             ->name([
                 '/\.json$/',
+                '/\.neon$/',
                 '/\.php$/',
                 '/\.sql$/',
                 '/\.yaml$/',

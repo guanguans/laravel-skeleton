@@ -29,7 +29,7 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a %s file.', str($this->getName())->chopStart('User/')),
+            $summary = \sprintf('Format a %s file.', str($this->getName())->chopStart('User/')->headline()->lower()),
             [new CodeSample($summary)]
         );
     }
@@ -49,6 +49,9 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
         return true;
     }
 
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
     #[\Override]
     public function isCandidate(Tokens $tokens): bool
     {
@@ -69,7 +72,25 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     #[\Override]
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        $tokens[0] = new Token([\TOKEN_PARSE, $this->format($tokens[0]->getContent())]);
+        $tokens[0] = new Token([
+            \TOKEN_PARSE,
+            str($this->format($tokens[0]->getContent()))
+                ->trim()
+                ->start($this->start())
+                ->finish($this->finish())
+                // ->dd()
+                ->toString(),
+        ]);
+    }
+
+    protected function start(): string
+    {
+        return '';
+    }
+
+    protected function finish(): string
+    {
+        return '';
     }
 
     /**

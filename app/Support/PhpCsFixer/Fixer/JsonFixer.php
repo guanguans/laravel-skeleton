@@ -52,7 +52,7 @@ final class JsonFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): iterable|string
+    protected function supportedExtensions(): string
     {
         return 'json';
     }

@@ -21,8 +21,4 @@ use PhpCsFixer\Fixer\ConfigurableFixerTrait;
 abstract class AbstractConfigurableFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     use ConfigurableFixerTrait;
-
-    protected function configurePreNormalisation(array &$configuration): void {}
-
-    protected function configurePostNormalisation(): void {}
 }

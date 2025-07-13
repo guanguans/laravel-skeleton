@@ -64,7 +64,7 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): iterable|string
+    protected function supportedExtensions(): string
     {
         return 'sql';
     }

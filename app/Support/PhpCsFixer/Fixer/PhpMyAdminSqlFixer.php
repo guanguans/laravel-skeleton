@@ -27,7 +27,7 @@ use PhpMyAdmin\SqlParser\Utils\Formatter;
  * @see https://github.com/doctrine/sql-formatter
  * @see https://github.com/phpmyadmin/sql-parser
  */
-final class PhpmyadminSqlFixer extends AbstractInlineHtmlFixer
+final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
 {
     public const string HEADER_COMMENT = 'header_comment';
     public const string OPTIONS = 'options';
@@ -55,7 +55,7 @@ final class PhpmyadminSqlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): iterable|string
+    protected function supportedExtensions(): string
     {
         return 'sql';
     }

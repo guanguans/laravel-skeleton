@@ -270,6 +270,7 @@ composer zh-lint
 * [php-ds/php-ds](https://github.com/php-ds/polyfill) - Specialized data structures as alternatives to the PHP array
 * [php-open-source-saver/jwt-auth](https://github.com/PHP-Open-Source-Saver/jwt-auth) - JSON Web Token Authentication for Laravel and Lumen
 * [php-static-analysis/attributes](https://github.com/php-static-analysis/attributes) - Attributes used instead of PHPDocs for static analysis tools
+* [phpmyadmin/sql-parser](https://github.com/phpmyadmin/sql-parser) - A validating SQL lexer and parser with a focus on MySQL dialect.
 * [phpyh/lru-memoizer](https://github.com/phpyh/lru-memoizer) - PHPyh LRU Memoizer
 * [pion/laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) - Service for chunked upload with several js providers
 * [prinsfrank/standards](https://github.com/PrinsFrank/standards) - A collection of standards as PHP Enums: ISO3166, ISO4217, ISO639...
@@ -708,8 +709,13 @@ app
 │   │   ├── Fixer
 │   │   │   ├── AbstractConfigurableFixer.php
 │   │   │   ├── AbstractFixer.php
+│   │   │   ├── AbstractInlineHtmlFixer.php
+│   │   │   ├── DoctrineSqlFixer.php
 │   │   │   ├── JsonFixer.php
+│   │   │   ├── NeonFixer.php
+│   │   │   ├── PhpMyAdminSqlFixer.php
 │   │   │   ├── PintFixer.php
+│   │   │   ├── XmlFixer.php
 │   │   │   └── YamlFixer.php
 │   │   └── Fixers.php
 │   ├── PhpUserFilters
@@ -747,7 +753,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-56 directories, 260 files
+56 directories, 265 files
 
 ```
 </details>

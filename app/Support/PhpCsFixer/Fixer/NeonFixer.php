@@ -1,5 +1,9 @@
 <?php
 
+/** @noinspection MissingParentCallInspection */
+/** @noinspection PhpMissingParentCallCommonInspection */
+/** @noinspection SensitiveParameterInspection */
+
 declare(strict_types=1);
 
 /**
@@ -13,8 +17,47 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer;
 
+use Nette\Neon\Neon;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
+
 /**
- * @see https://github.com/doctrine/sql-formatter
- * @see https://github.com/phpmyadmin/sql-parser
+ * @see https://github.com/nette/neon
  */
-final class NeonFixer {}
+final class NeonFixer extends AbstractInlineHtmlFixer
+{
+    public const string BLOCK_MODE = 'block_mode';
+    public const string INDENTATION = 'indentation';
+
+    #[\Override]
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    {
+        return new FixerConfigurationResolver([
+            (new FixerOptionBuilder(self::BLOCK_MODE, ''))
+                ->setAllowedTypes(['bool'])
+                ->setDefault(true)
+                ->getOption(),
+            (new FixerOptionBuilder(self::INDENTATION, ''))
+                ->setAllowedTypes(['string'])
+                ->setDefault('    ')
+                ->getOption(),
+        ]);
+    }
+
+    #[\Override]
+    protected function supportedExtensions(): string
+    {
+        return 'neon';
+    }
+
+    #[\Override]
+    protected function format(string $content): string
+    {
+        return Neon::encode(
+            Neon::decode($content),
+            $this->configuration[self::BLOCK_MODE],
+            $this->configuration[self::INDENTATION]
+        );
+    }
+}
