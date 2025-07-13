@@ -17,9 +17,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer;
 
-use Illuminate\Support\Str;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpMyAdmin\SqlParser\Utils\Formatter;
 
@@ -29,29 +26,28 @@ use PhpMyAdmin\SqlParser\Utils\Formatter;
  */
 final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
 {
-    public const string HEADER_COMMENT = 'header_comment';
     public const string OPTIONS = 'options';
 
     #[\Override]
-    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    protected function fixerOptions(): array
     {
-        return new FixerConfigurationResolver([
-            (new FixerOptionBuilder(self::HEADER_COMMENT, 'The header comment to be prepended to the SQL string.'))
-                ->setAllowedTypes(['string'])
-                ->setDefault(
-                    <<<'HEADER_COMMENT'
-                        # noinspection SqlResolveForFile
-
-
-                        HEADER_COMMENT,
-                )
-                ->getOption(),
+        return [
             /**  @see \PhpMyAdmin\SqlParser\Utils\Formatter::getDefaultOptions() */
             (new FixerOptionBuilder(self::OPTIONS, 'The formatting options.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault(['type' => 'text'])
                 ->getOption(),
-        ]);
+        ];
+    }
+
+    #[\Override]
+    protected function defaultStart(): string
+    {
+        return <<<'HEADER_COMMENT'
+            # noinspection SqlResolveForFile
+
+
+            HEADER_COMMENT;
     }
 
     #[\Override]
@@ -63,14 +59,6 @@ final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
     #[\Override]
     protected function format(string $content): string
     {
-        return str(
-            Formatter::format(
-                Str::chopStart($content, $this->configuration[self::HEADER_COMMENT]),
-                $this->configuration[self::OPTIONS]
-            )
-        )
-            ->start($this->configuration[self::HEADER_COMMENT])
-            // ->dd()
-            ->toString();
+        return Formatter::format($content, $this->configuration[self::OPTIONS]);
     }
 }

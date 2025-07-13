@@ -17,6 +17,10 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer;
 
+use Illuminate\Support\Stringable;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -25,6 +29,9 @@ use PhpCsFixer\Tokenizer\Tokens;
 
 abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
 {
+    public const string START = 'start';
+    public const string FINISH = 'finish';
+
     #[\Override]
     public function getDefinition(): FixerDefinitionInterface
     {
@@ -74,21 +81,40 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     {
         $tokens[0] = new Token([
             \TOKEN_PARSE,
-            str($this->format($tokens[0]->getContent()))
+            str(
+                $this->format(
+                    str($tokens[0]->getContent())
+                        ->trim()
+                        ->when($this->configuration[self::START], function (Stringable $content, string $start) {
+                            return $content->chopStart($start);
+                        })
+                        ->when($this->configuration[self::FINISH], function (Stringable $content, string $finish) {
+                            return $content->chopEnd($finish);
+                        })
+                        // ->dd()
+                        ->toString()
+                )
+            )
                 ->trim()
-                ->start($this->start())
-                ->finish($this->finish())
+                ->start($this->configuration[self::START])
+                ->finish($this->configuration[self::FINISH])
                 // ->dd()
                 ->toString(),
         ]);
     }
 
-    protected function start(): string
+    #[\Override]
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    {
+        return new FixerConfigurationResolver([...$this->fixerOptions(), ...$this->defaultFixerOptions()]);
+    }
+
+    protected function defaultStart(): string
     {
         return '';
     }
 
-    protected function finish(): string
+    protected function defaultFinish(): string
     {
         return '';
     }
@@ -99,4 +125,26 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     abstract protected function supportedExtensions(): iterable|string;
 
     abstract protected function format(string $content): string;
+
+    /**
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    abstract protected function fixerOptions(): array;
+
+    /**
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    protected function defaultFixerOptions(): array
+    {
+        return [
+            (new FixerOptionBuilder(self::START, 'The header comment to be prepended to the string.'))
+                ->setAllowedTypes(['string'])
+                ->setDefault($this->defaultStart())
+                ->getOption(),
+            (new FixerOptionBuilder(self::FINISH, 'The footer comment to be appended to the string.'))
+                ->setAllowedTypes(['string'])
+                ->setDefault($this->defaultFinish())
+                ->getOption(),
+        ];
+    }
 }

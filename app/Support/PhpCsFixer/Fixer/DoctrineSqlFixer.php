@@ -19,9 +19,6 @@ namespace App\Support\PhpCsFixer\Fixer;
 
 use Doctrine\SqlFormatter\NullHighlighter;
 use Doctrine\SqlFormatter\SqlFormatter;
-use Illuminate\Support\Str;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
@@ -30,7 +27,6 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
  */
 final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
 {
-    public const string HEADER_COMMENT = 'header_comment';
     public const string INDENT_STRING = 'indent_string';
 
     /**
@@ -43,24 +39,24 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    protected function fixerOptions(): array
     {
-        return new FixerConfigurationResolver([
-            (new FixerOptionBuilder(self::HEADER_COMMENT, 'The header comment to be prepended to the SQL string.'))
-                ->setAllowedTypes(['string'])
-                ->setDefault(
-                    <<<'HEADER_COMMENT'
-                        # noinspection SqlResolveForFile
-
-
-                        HEADER_COMMENT
-                )
-                ->getOption(),
+        return [
             (new FixerOptionBuilder(self::INDENT_STRING, 'The SQL string with HTML styles and formatting wrapped in a <pre> tag.'))
                 ->setAllowedTypes(['string'])
                 ->setDefault('    ')
                 ->getOption(),
-        ]);
+        ];
+    }
+
+    #[\Override]
+    protected function defaultStart(): string
+    {
+        return <<<'HEADER_COMMENT'
+            # noinspection SqlResolveForFile
+
+
+            HEADER_COMMENT;
     }
 
     #[\Override]
@@ -72,15 +68,7 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
     #[\Override]
     protected function format(string $content): string
     {
-        return str(
-            $this->createSqlFormatter()->format(
-                Str::chopStart($content, $this->configuration[self::HEADER_COMMENT]),
-                $this->configuration[self::INDENT_STRING]
-            )
-        )
-            ->start($this->configuration[self::HEADER_COMMENT])
-            // ->dd()
-            ->toString();
+        return $this->createSqlFormatter()->format($content, $this->configuration[self::INDENT_STRING]);
     }
 
     private function createSqlFormatter(): SqlFormatter

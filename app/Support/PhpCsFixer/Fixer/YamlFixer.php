@@ -17,8 +17,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer;
 
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use Symfony\Component\Yaml\Yaml;
 
@@ -40,9 +38,9 @@ final class YamlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    protected function fixerOptions(): array
     {
-        return new FixerConfigurationResolver([
+        return [
             (new FixerOptionBuilder(self::PARSE_FLAGS, 'A bit field of PARSE_* constants to customize the YAML parser behavior.'))
                 ->setAllowedTypes(['int'])
                 ->setDefault(0)
@@ -63,7 +61,7 @@ final class YamlFixer extends AbstractInlineHtmlFixer
                     | Yaml::DUMP_NULL_AS_EMPTY
                 )
                 ->getOption(),
-        ]);
+        ];
     }
 
     #[\Override]

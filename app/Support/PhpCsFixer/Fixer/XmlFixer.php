@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer;
 
 /**
- * @see https://github.com/doctrine/sql-formatter
- * @see https://github.com/phpmyadmin/sql-parser
+ * @see https://github.com/schmittjoh/serializer
+ * @see https://github.com/symfony/serializer
  */
 final class XmlFixer {}
