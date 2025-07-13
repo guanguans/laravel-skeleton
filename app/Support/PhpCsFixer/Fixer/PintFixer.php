@@ -16,7 +16,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer;
+namespace App\Support\PhpCsFixer\Fixer;
 
 use App\Support\Console\SymfonyStyleFactory;
 use PhpCsFixer\AbstractFixer;

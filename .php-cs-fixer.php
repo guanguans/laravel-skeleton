@@ -11,9 +11,8 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Support\PhpCsFixer\JsonFixer;
-use App\Support\PhpCsFixer\PintFixer;
-use App\Support\PhpCsFixer\YamlFixer;
+use App\Support\PhpCsFixer\Fixer\PintFixer;
+use App\Support\PhpCsFixer\Fixer\YamlFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -25,6 +24,7 @@ use Ergebnis\PhpCsFixer\Config\Rules;
 use Ergebnis\PhpCsFixer\Config\RuleSet\Php83;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
+use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixerCustomFixers\Fixer\AbstractFixer;
 
 require __DIR__.'/vendor/autoload.php';
@@ -53,26 +53,19 @@ return Factory::fromRuleSet(Php83::create()
             && !\array_key_exists($fixer->getName(), Php83::create()->rules()->toArray())
     )))
     // ->withRules(Rules::fromArray(array_reduce(
-    //     $phpCsFixerCustomFixers,
+    //     array_filter($phpCsFixerCustomFixers, static fn (AbstractFixer $fixer): bool => !\in_array(
+    //         $fixer->getName(),
+    //         [
+    //             'PhpCsFixerCustomFixers/comment_surrounded_by_spaces',
+    //             'PhpCsFixerCustomFixers/declare_after_opening_tag',
+    //             'PhpCsFixerCustomFixers/isset_to_array_key_exists',
+    //             'PhpCsFixerCustomFixers/no_commented_out_code',
+    //             'PhpCsFixerCustomFixers/phpdoc_only_allowed_annotations',
+    //             'PhpCsFixerCustomFixers/phpdoc_var_annotation_to_assert',
+    //         ],
+    //         true
+    //     )),
     //     static function (array $rules, AbstractFixer $fixer): array {
-    //         if (
-    //             \in_array(
-    //                 $fixer->getName(),
-    //                 [
-    //                     'PhpCsFixerCustomFixers/comment_surrounded_by_spaces',
-    //                     'PhpCsFixerCustomFixers/declare_after_opening_tag',
-    //                     'PhpCsFixerCustomFixers/isset_to_array_key_exists',
-    //                     'PhpCsFixerCustomFixers/no_commented_out_code',
-    //                     'PhpCsFixerCustomFixers/phpdoc_only_allowed_annotations',
-    //                     'PhpCsFixerCustomFixers/phpdoc_var_annotation_to_assert',
-    //                 ],
-    //                 true
-    //             )
-    //         ) {
-    //             return $rules;
-    //
-    //         }
-    //
     //         $rules[$fixer->getName()] = true;
     //
     //         return $rules;
@@ -80,15 +73,24 @@ return Factory::fromRuleSet(Php83::create()
     //     []
     // )))
     ->withCustomFixers(Fixers::fromFixers(
-        new JsonFixer,
-        new PintFixer,
-        new YamlFixer,
+        ...$userFixers = iterator_to_array(new App\Support\PhpCsFixer\Fixers)
     ))
-    ->withRules(Rules::fromArray([
-        JsonFixer::name() => true,
-        // PintFixer::name() => true,
-        // YamlFixer::name() => true,
-    ]))
+    ->withRules(Rules::fromArray(array_reduce(
+        array_filter($userFixers, static fn (FixerInterface $fixer): bool => !\in_array(
+            $fixer->getName(),
+            [
+                PintFixer::name(),
+                YamlFixer::name(),
+            ],
+            true
+        )),
+        static function (array $rules, FixerInterface $fixer): array {
+            $rules[$fixer->getName()] = true;
+
+            return $rules;
+        },
+        []
+    )))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,
         // '@PHP70Migration:risky' => true,
