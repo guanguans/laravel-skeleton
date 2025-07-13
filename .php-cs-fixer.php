@@ -24,7 +24,6 @@ use Ergebnis\PhpCsFixer\Config\Rules;
 use Ergebnis\PhpCsFixer\Config\RuleSet\Php83;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
-use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixerCustomFixers\Fixer\AbstractFixer;
 
 require __DIR__.'/vendor/autoload.php';
@@ -76,15 +75,16 @@ return Factory::fromRuleSet(Php83::create()
         ...$userFixers = iterator_to_array(new App\Support\PhpCsFixer\Fixers)
     ))
     ->withRules(Rules::fromArray(array_reduce(
-        array_filter($userFixers, static fn (FixerInterface $fixer): bool => !\in_array(
+        array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
             $fixer->getName(),
             [
-                PintFixer::name(),
+                // PintFixer::name(),
+                YamlFixer::name(),
                 YamlFixer::name(),
             ],
             true
         )),
-        static function (array $rules, FixerInterface $fixer): array {
+        static function (array $rules, App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): array {
             $rules[$fixer->getName()] = true;
 
             return $rules;

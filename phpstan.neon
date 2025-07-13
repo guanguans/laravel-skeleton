@@ -132,6 +132,7 @@ parameters:
             paths:
                 - app/Models/BaseModel.php
                 - app/Rules/Rule.php
+                - app/Support/PhpCsFixer/Fixer/AbstractFixer.php
         -
             messages:
                 - '#^Parameter \$class of method App\\Support\\Attributes\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'

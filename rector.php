@@ -24,6 +24,7 @@ use Illuminate\Support\Carbon as IlluminateCarbon;
 use Illuminate\Support\Str;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
+use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
@@ -282,6 +283,7 @@ return RectorConfig::configure()
 
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
+        LocallyCalledStaticMethodToNonStaticRector::class,
         LogicalToBooleanRector::class,
         NewlineAfterStatementRector::class,
         ParenthesizeNestedTernaryRector::class,

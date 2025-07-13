@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection MissingParentCallInspection */
-/** @noinspection PhpInternalEntityUsedInspection */
 /** @noinspection PhpMissingParentCallCommonInspection */
 /** @noinspection SensitiveParameterInspection */
 
@@ -18,9 +17,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer;
 
-use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
-use PhpCsFixer\Fixer\ConfigurableFixerTrait;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
@@ -35,12 +31,11 @@ use Symfony\Component\Yaml\Yaml;
  * @see https://github.com/TheDragonCode/codestyler/blob/5.x/app/Fixers/JsonFixer.php
  * @see \Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer
  */
-final class YamlFixer extends AbstractFixer implements ConfigurableFixerInterface
+final class YamlFixer extends AbstractConfigurableFixer
 {
-    use ConfigurableFixerTrait;
     public const string PARSE_FLAGS = 'parse_flags';
-    public const string INLINE = 'inline';
-    public const string INDENT = 'indent';
+    public const string DUMP_INLINE = 'dump_inline';
+    public const string DUMP_INDENT = 'dump_indent';
     public const string DUMP_FLAGS = 'dump_flags';
 
     #[\Override]
@@ -49,30 +44,10 @@ final class YamlFixer extends AbstractFixer implements ConfigurableFixerInterfac
         return new FixerDefinition('Format a YAML file.', [new CodeSample('Format a YAML file.')]);
     }
 
-    public static function name(): string
-    {
-        return 'User/yaml';
-    }
-
-    #[\Override]
-    public function getName(): string
-    {
-        return self::name();
-    }
-
     #[\Override]
     public function getPriority(): int
     {
         return -\PHP_INT_MAX;
-    }
-
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    #[\Override]
-    public function isCandidate(Tokens $tokens): bool
-    {
-        return true;
     }
 
     #[\Override]
@@ -87,10 +62,7 @@ final class YamlFixer extends AbstractFixer implements ConfigurableFixerInterfac
         return str($file->getExtension())->is(['yaml', 'yml'], true);
     }
 
-    protected function configurePreNormalisation(array &$configuration): void {}
-
-    protected function configurePostNormalisation(): void {}
-
+    #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([
@@ -98,11 +70,11 @@ final class YamlFixer extends AbstractFixer implements ConfigurableFixerInterfac
                 ->setAllowedTypes(['int'])
                 ->setDefault(0)
                 ->getOption(),
-            (new FixerOptionBuilder(self::INLINE, 'The level where you switch to inline YAML.'))
+            (new FixerOptionBuilder(self::DUMP_INLINE, 'The level where you switch to inline YAML.'))
                 ->setAllowedTypes(['int'])
                 ->setDefault(\PHP_INT_MAX)
                 ->getOption(),
-            (new FixerOptionBuilder(self::INDENT, 'The amount of spaces to use for indentation of nested nodes.'))
+            (new FixerOptionBuilder(self::DUMP_INDENT, 'The amount of spaces to use for indentation of nested nodes.'))
                 ->setAllowedTypes(['int'])
                 ->setDefault(2)
                 ->getOption(),
@@ -128,8 +100,8 @@ final class YamlFixer extends AbstractFixer implements ConfigurableFixerInterfac
     {
         return trim(Yaml::dump(
             Yaml::parse($content, $this->configuration[self::PARSE_FLAGS]),
-            $this->configuration[self::INLINE],
-            $this->configuration[self::INDENT],
+            $this->configuration[self::DUMP_INLINE],
+            $this->configuration[self::DUMP_INDENT],
             $this->configuration[self::DUMP_FLAGS]
         ));
     }

@@ -705,9 +705,13 @@ app
 │   ├── PHPStan
 │   │   └── ForbiddenGlobalFunctionsRule.php
 │   ├── PhpCsFixer
-│   │   ├── JsonFixer.php
-│   │   ├── PintFixer.php
-│   │   └── YamlFixer.php
+│   │   ├── Fixer
+│   │   │   ├── AbstractConfigurableFixer.php
+│   │   │   ├── AbstractFixer.php
+│   │   │   ├── JsonFixer.php
+│   │   │   ├── PintFixer.php
+│   │   │   └── YamlFixer.php
+│   │   └── Fixers.php
 │   ├── PhpUserFilters
 │   │   └── CallbackFilter.php
 │   ├── Rectors
@@ -743,7 +747,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-55 directories, 257 files
+56 directories, 260 files
 
 ```
 </details>
