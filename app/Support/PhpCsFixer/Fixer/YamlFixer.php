@@ -44,10 +44,13 @@ final class YamlFixer extends AbstractConfigurableFixer
         return new FixerDefinition('Format a YAML file.', [new CodeSample('Format a YAML file.')]);
     }
 
+    /**
+     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
+     */
     #[\Override]
     public function getPriority(): int
     {
-        return -\PHP_INT_MAX;
+        return -99;
     }
 
     #[\Override]
@@ -57,9 +60,15 @@ final class YamlFixer extends AbstractConfigurableFixer
     }
 
     #[\Override]
+    public function isCandidate(Tokens $tokens): bool
+    {
+        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
+    }
+
+    #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is(['yaml', 'yml'], true);
+        return str($file->getExtension())->is(['yaml', 'yml'], true) && !str(file_get_contents((string) $file))->contains('#');
     }
 
     #[\Override]
@@ -80,7 +89,11 @@ final class YamlFixer extends AbstractConfigurableFixer
                 ->getOption(),
             (new FixerOptionBuilder(self::DUMP_FLAGS, 'A bit field of DUMP_* constants to customize the dumped YAML string.'))
                 ->setAllowedTypes(['int'])
-                ->setDefault(Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE)
+                ->setDefault(
+                    Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE
+                    | Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK
+                    | Yaml::DUMP_NULL_AS_EMPTY
+                )
                 ->getOption(),
         ]);
     }

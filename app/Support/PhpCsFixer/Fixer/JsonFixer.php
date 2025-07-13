@@ -42,16 +42,25 @@ final class JsonFixer extends AbstractConfigurableFixer
         return new FixerDefinition('Format a JSON file.', [new CodeSample('Format a JSON file.')]);
     }
 
+    /**
+     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
+     */
     #[\Override]
     public function getPriority(): int
     {
-        return -\PHP_INT_MAX;
+        return -99;
     }
 
     #[\Override]
     public function isRisky(): bool
     {
         return true;
+    }
+
+    #[\Override]
+    public function isCandidate(Tokens $tokens): bool
+    {
+        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
     }
 
     #[\Override]

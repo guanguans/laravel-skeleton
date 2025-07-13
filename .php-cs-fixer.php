@@ -79,8 +79,8 @@ return Factory::fromRuleSet(Php83::create()
             $fixer->getName(),
             [
                 // PintFixer::name(),
-                YamlFixer::name(),
-                YamlFixer::name(),
+                // YamlFixer::name(),
+                // YamlFixer::name(),
             ],
             true
         )),
@@ -321,6 +321,7 @@ return Factory::fromRuleSet(Php83::create()
          */
         Finder::create()
             ->in([
+                // __DIR__.'/.github/',
                 __DIR__.'/app/',
                 __DIR__.'/bootstrap/',
                 __DIR__.'/config/',
@@ -334,18 +335,21 @@ return Factory::fromRuleSet(Php83::create()
                 'cache/',
                 'Fixtures/',
             ])
+            ->notPath([
+                '/lang\/.*\.json$/',
+            ])
             ->name([
                 '/\.json$/',
                 '/\.php$/',
-                // '/\.yaml$/',
-                // '/\.yml$/',
+                '/\.yaml$/',
+                '/\.yml$/',
             ])
             ->notName([
                 '*.blade.php',
             ])
             ->append([
                 ...array_filter(
-                    glob(__DIR__.'/{*,.*}.{php}', \GLOB_BRACE),
+                    glob(__DIR__.'/{*,.*}.{json,php,yaml,yml}', \GLOB_BRACE),
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',
