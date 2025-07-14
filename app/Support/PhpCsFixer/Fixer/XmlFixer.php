@@ -37,10 +37,10 @@ final class XmlFixer extends AbstractInlineHtmlFixer
             (new FixerOptionBuilder(self::CONTEXT, 'The context options for the XML encoder.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault([
-                    self::MULTILINE_ATTRIBUTE_THRESHOLD => 0,
+                    self::MULTILINE_ATTRIBUTE_THRESHOLD => 5,
                     XmlEncoder::ENCODING => 'UTF-8',
                     XmlEncoder::FORMAT_OUTPUT => true,
-                    XmlEncoder::LOAD_OPTIONS => \LIBXML_NONET | \LIBXML_NOBLANKS,
+                    // XmlEncoder::LOAD_OPTIONS => \LIBXML_NONET | \LIBXML_NOBLANKS,
                     XmlEncoder::SAVE_OPTIONS => 0,
                 ])
                 ->getOption(),
@@ -61,16 +61,17 @@ final class XmlFixer extends AbstractInlineHtmlFixer
     {
         return str(
             $this->createXmlEncoder($content)->encode(
-                $this->createXmlEncoder($content)->decode($content, 'xml'),
                 // $this->createXmlDomDocument($content),
+                $this->createXmlEncoder($content)->decode($content, 'xml'),
                 'xml'
             )
         )
-            ->when(
-                0 === ($this->configuration[self::CONTEXT][XmlEncoder::SAVE_OPTIONS] & \LIBXML_NOEMPTYTAG),
+            // 自闭合标签
+            ->unless(
+                $this->configuration[self::CONTEXT][XmlEncoder::SAVE_OPTIONS] & \LIBXML_NOEMPTYTAG,
                 static fn (Stringable $content) => $content->replaceMatches('/<(\w+)([^>]*)>\s*<\/\1>/', '<$1$2/>')
             )
-            ->pipe(fn (Stringable $content): string => $this->formatAttributesToMultiline($content->toString()))
+            ->pipe(fn (Stringable $content): string => $this->formatAttribute($content->toString()))
             ->toString();
     }
 
@@ -97,19 +98,19 @@ final class XmlFixer extends AbstractInlineHtmlFixer
         return $domDocument;
     }
 
-    private function formatAttributesToMultiline(string $content): string
+    private function formatAttribute(string $content): string
     {
         return preg_replace_callback(
             '/<([^\s>\/]+)(\s+[^>]+?)(\s*\/?)>/',
             function (array $matches) use ($content): string {
                 [$fullMatch, $tagName, $attributes, $selfClosing] = $matches;
 
-                // 如果属性数量不超过阈值，保持单行
+                // 属性数量小于阈值保持单行
                 if (
                     preg_match_all(
                         '/\s+[^\s=]+="/',
                         $attributes
-                    ) <= $this->configuration[self::CONTEXT][self::MULTILINE_ATTRIBUTE_THRESHOLD]
+                    ) < $this->configuration[self::CONTEXT][self::MULTILINE_ATTRIBUTE_THRESHOLD]
                 ) {
                     return $fullMatch;
                 }

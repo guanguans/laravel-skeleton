@@ -38,6 +38,7 @@ abstract class AbstractFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      * @noinspection MissingParentCallInspection
+     * @noinspection PhpAttributeCanBeAddedToOverriddenMemberInspection
      */
     #[\Override]
     public function getName(): string

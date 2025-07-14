@@ -61,14 +61,14 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     #[\Override]
     public function isCandidate(Tokens $tokens): bool
     {
-        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML) && trim($tokens[0]->getContent());
+        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
     }
 
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
         return str($file->getExtension())->is($this->supportedExtensions(), true)
-            && str($file->getPathname())->lower()->endsWith($this->supportedExtensions());
+            || str($file->getPathname())->lower()->endsWith($this->supportedExtensions());
     }
 
     /**
@@ -127,11 +127,11 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     protected function defaultFixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::START, 'The header comment to be prepended to the string.'))
+            (new FixerOptionBuilder(self::START, 'The header comment to be prepended to the content.'))
                 ->setAllowedTypes(['string'])
                 ->setDefault($this->defaultStart())
                 ->getOption(),
-            (new FixerOptionBuilder(self::FINISH, 'The footer comment to be appended to the string.'))
+            (new FixerOptionBuilder(self::FINISH, 'The footer comment to be appended to the content.'))
                 ->setAllowedTypes(['string'])
                 ->setDefault($this->defaultFinish())
                 ->getOption(),

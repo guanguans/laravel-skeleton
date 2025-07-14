@@ -27,6 +27,7 @@ use function Psl\Filesystem\create_temporary_file;
 /**
  * @see https://github.com/prettier/plugin-php/blob/main/docs/recipes/php-cs-fixer/PrettierPHPFixer.php
  * @see https://github.com/laravel/pint
+ * @see https://github.com/super-linter/super-linter
  */
 final class PintFixer extends AbstractFixer
 {
@@ -39,7 +40,7 @@ final class PintFixer extends AbstractFixer
     #[\Override]
     public function getPriority(): int
     {
-        // Ensure pint post-process the code after php-cs-fixer.
+        // Ensure pint process the code after php-cs-fixer.
         return -\PHP_INT_MAX;
     }
 
@@ -52,7 +53,7 @@ final class PintFixer extends AbstractFixer
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        // Only specific single file is supported.
+        // Only support file that is php-cs-fixer's argument path.
         return str($file)->contains(self::argv());
     }
 

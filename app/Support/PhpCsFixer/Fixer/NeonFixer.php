@@ -28,11 +28,11 @@ final class NeonFixer extends AbstractInlineHtmlFixer
     protected function fixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::BLOCK_MODE, ''))
+            (new FixerOptionBuilder(self::BLOCK_MODE, 'Whether to use block mode for encoding.'))
                 ->setAllowedTypes(['bool'])
                 ->setDefault(true)
                 ->getOption(),
-            (new FixerOptionBuilder(self::INDENTATION, ''))
+            (new FixerOptionBuilder(self::INDENTATION, 'The indentation string to use for encoding.'))
                 ->setAllowedTypes(['string'])
                 ->setDefault('    ')
                 ->getOption(),
@@ -40,9 +40,9 @@ final class NeonFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): string
+    protected function supportedExtensions(): array
     {
-        return 'neon';
+        return ['neon', 'neon.dist'];
     }
 
     #[\Override]
