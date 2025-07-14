@@ -1,0 +1,202 @@
+<?php
+
+/** @noinspection PhpConstantNamingConventionInspection */
+/** @noinspection PhpMissingParentCallCommonInspection */
+/** @noinspection SensitiveParameterInspection */
+
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
+namespace App\Support\PhpCsFixer\Fixer;
+
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
+use PhpCsFixer\FixerDefinition\CodeSample;
+use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
+use PhpCsFixer\Tokenizer\Tokens;
+use Symfony\Component\Process\Process;
+use function Psl\Filesystem\create_temporary_file;
+
+/**
+ * @see https://github.com/super-linter/super-linter
+ */
+abstract class AbstractToolFixer extends AbstractConfigurableFixer
+{
+    public const string PROGRAM = 'program';
+    public const string ARGUMENTS = 'arguments';
+    public const string CWD = 'cwd';
+    public const string ENV = 'env';
+    public const string INPUT = 'input';
+    public const string TIMEOUT = 'timeout';
+
+    #[\Override]
+    public function getDefinition(): FixerDefinitionInterface
+    {
+        return new FixerDefinition(
+            $summary = \sprintf('Format a file by %s.', str($this->getSortName())->headline()->lower()),
+            [new CodeSample($summary)]
+        );
+    }
+
+    #[\Override]
+    public function supports(\SplFileInfo $file): bool
+    {
+        return str($file->getExtension())->is($this->supportedExtensions(), true)
+            || str($file->getPathname())->lower()->endsWith($this->supportedExtensions());
+    }
+
+    #[\Override]
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    {
+        return new FixerConfigurationResolver([...$this->defaultFixerOptions(), ...$this->fixerOptions()]);
+    }
+
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
+    #[\Override]
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
+    {
+        $process = $this->createProcess($file, $tokens);
+        // dd($process->getCommandLine());
+        $process->run();
+
+        if ($this->isProcessSuccessful($process, $file, $tokens)) {
+            $tokens->setCode(file_get_contents($this->path($file, $tokens)));
+        }
+        // dd($process->getOutput(), $process->getErrorOutput());
+    }
+
+    /**
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    protected function fixerOptions(): array
+    {
+        return [];
+    }
+
+    protected function program(): array|string
+    {
+        return $this->defaultProgram();
+    }
+
+    /**
+     * @return iterable<string>|string
+     */
+    abstract protected function supportedExtensions(): iterable|string;
+
+    abstract protected function defaultProgram(): array|string;
+
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
+    protected function arguments(\SplFileInfo $file, Tokens $tokens): array
+    {
+        return [$this->path($file, $tokens), ...$this->configuration[self::ARGUMENTS]];
+    }
+
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
+    protected function path(\SplFileInfo $file, Tokens $tokens): string
+    {
+        static $path;
+
+        if ($path) {
+            return $path;
+        }
+
+        $path = (string) $file;
+
+        if (self::isDryRun()) {
+            file_put_contents($path = self::createTemporaryFile(), $tokens->generateCode());
+        }
+
+        return $path;
+    }
+
+    protected static function isDryRun(): bool
+    {
+        return \in_array('--dry-run', self::argv(), true);
+    }
+
+    /**
+     * @noinspection GlobalVariableUsageInspection
+     */
+    protected static function argv(): array
+    {
+        return $_SERVER['argv'] ?? [];
+    }
+
+    protected static function createTemporaryFile(): string
+    {
+        static $temporaryFile;
+
+        return $temporaryFile ??= create_temporary_file();
+    }
+
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
+    protected function isProcessSuccessful(Process $process, \SplFileInfo $file, Tokens $tokens): bool
+    {
+        return $process->isSuccessful();
+    }
+
+    /**
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    private function defaultFixerOptions(): array
+    {
+        return [
+            (new FixerOptionBuilder(self::PROGRAM, '.'))
+                ->setAllowedTypes(['string', 'array'])
+                ->setDefault($this->defaultProgram())
+                ->getOption(),
+            (new FixerOptionBuilder(self::ARGUMENTS, '.'))
+                ->setAllowedTypes(['array'])
+                ->setDefault([])
+                ->getOption(),
+            (new FixerOptionBuilder(self::CWD, '.'))
+                ->setAllowedTypes(['string', 'null'])
+                ->setDefault(null)
+                ->getOption(),
+            (new FixerOptionBuilder(self::ENV, '.'))
+                ->setAllowedTypes(['array', 'null'])
+                ->setDefault(null)
+                ->getOption(),
+            (new FixerOptionBuilder(self::INPUT, '.'))
+                ->setAllowedTypes(['string', 'null'])
+                ->setDefault(null)
+                ->getOption(),
+            (new FixerOptionBuilder(self::TIMEOUT, '.'))
+                ->setAllowedTypes(['float', 'int', 'null'])
+                ->setDefault(60)
+                ->getOption(),
+        ];
+    }
+
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
+    private function createProcess(\SplFileInfo $file, Tokens $tokens): Process
+    {
+        return new Process(
+            command: [...(array) $this->program(), ...$this->arguments($file, $tokens)],
+            cwd: $this->configuration[self::CWD],
+            env: $this->configuration[self::ENV],
+            input: $this->configuration[self::INPUT],
+            timeout: $this->configuration[self::TIMEOUT],
+        );
+    }
+}

@@ -39,6 +39,7 @@ final class Fixers implements \IteratorAggregate
                     'AbstractConfigurableFixer',
                     'AbstractFixer',
                     'AbstractInlineHtmlFixer',
+                    'AbstractToolFixer',
                 ],
                 true
             )) {

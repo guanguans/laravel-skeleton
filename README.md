@@ -711,7 +711,9 @@ app
 │   │   │   ├── AbstractConfigurableFixer.php
 │   │   │   ├── AbstractFixer.php
 │   │   │   ├── AbstractInlineHtmlFixer.php
+│   │   │   ├── AbstractToolFixer.php
 │   │   │   ├── DoctrineSqlFixer.php
+│   │   │   ├── DotenvLinterFixer.php
 │   │   │   ├── JsonFixer.php
 │   │   │   ├── NeonFixer.php
 │   │   │   ├── PhpMyAdminSqlFixer.php
@@ -754,7 +756,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-56 directories, 265 files
+56 directories, 267 files
 
 ```
 </details>
