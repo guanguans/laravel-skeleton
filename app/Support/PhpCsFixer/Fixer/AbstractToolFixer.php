@@ -135,6 +135,9 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         );
     }
 
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
     protected function command(\SplFileInfo $file, Tokens $tokens): array
     {
         return [...(array) $this->program(), ...$this->arguments($file, $tokens)];

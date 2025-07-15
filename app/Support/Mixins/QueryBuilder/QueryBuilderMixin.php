@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -30,6 +31,24 @@ use Illuminate\Pipeline\Pipeline;
 #[Mixin(RelationBuilder::class)]
 final class QueryBuilderMixin
 {
+    /**
+     * @see https://medium.com/@developerawam/laravel-too-slow-just-add-these-few-lines-of-cache-cf2893e50eef
+     */
+    public function cache(): \Closure
+    {
+        /**
+         * @noinspection RedundantDocCommentTagInspection
+         *
+         * @param \Closure(EloquentBuilder|QueryBuilder|RelationBuilder|self): mixed $callback
+         */
+        return fn (
+            string $key,
+            null|\Closure|\DateInterval|\DateTimeInterface|int $ttl,
+            \Closure $callback,
+            ?string $driver = null
+        ): mixed => Cache::memo($driver)->remember($key, $ttl, fn (): mixed => $callback($this));
+    }
+
     public function pipe(): \Closure
     {
         return fn (mixed ...$pipes) => tap(

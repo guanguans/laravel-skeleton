@@ -72,10 +72,11 @@ use Illuminate\Support\Sleep;
  *
  * @see https://developer.mozilla.org/zh-CN/docs/Web/API/EventSource
  * @see https://developer.mozilla.org/zh-CN/docs/Web/API/Server-sent_events/Using_server-sent_events
- * @see https://github.com/mdn/dom-examples/tree/main/server-sent-events
  * @see https://github.com/hhxsv5/php-sse
- * @see https://github.com/sarfraznawaz2005/laravel-sse
+ * @see https://github.com/hosmelq/sse-php
+ * @see https://github.com/mdn/dom-examples/tree/main/server-sent-events
  * @see https://github.com/qruto/laravel-wave
+ * @see https://github.com/sarfraznawaz2005/laravel-sse
  */
 final class ServerSentEvent implements \Stringable
 {
