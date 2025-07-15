@@ -25,7 +25,7 @@ final class DotenvLinterFixer extends AbstractToolFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): array
+    protected function supportsExtensions(): array
     {
         return ['env', 'env.example'];
     }

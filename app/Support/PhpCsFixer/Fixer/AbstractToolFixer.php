@@ -38,6 +38,18 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     public const string ENV = 'env';
     public const string INPUT = 'input';
     public const string TIMEOUT = 'timeout';
+    protected static ?string $temporaryFile = null;
+
+    /**
+     * @see \Illuminate\Filesystem\Filesystem::delete()
+     */
+    public function __destruct()
+    {
+        if (self::$temporaryFile && unlink(self::$temporaryFile)) {
+            clearstatcache(false, self::$temporaryFile);
+            self::$temporaryFile = null;
+        }
+    }
 
     #[\Override]
     public function getDefinition(): FixerDefinitionInterface
@@ -51,14 +63,47 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is($this->supportedExtensions(), true)
-            || str($file->getPathname())->lower()->endsWith($this->supportedExtensions());
+        return str($file->getExtension())->is($this->supportsExtensions(), true)
+            || str($file->getPathname())->lower()->endsWith($this->supportsExtensions());
     }
 
     #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return new FixerConfigurationResolver([...$this->defaultFixerOptions(), ...$this->fixerOptions()]);
+        return new FixerConfigurationResolver($this->fixerOptions());
+    }
+
+    /**
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    protected function fixerOptions(): array
+    {
+        return [
+            (new FixerOptionBuilder(self::PROGRAM, '.'))
+                ->setAllowedTypes(['string', 'array'])
+                ->setDefault($this->defaultProgram())
+                ->getOption(),
+            (new FixerOptionBuilder(self::ARGUMENTS, '.'))
+                ->setAllowedTypes(['array'])
+                ->setDefault($this->defaultArguments())
+                ->getOption(),
+            (new FixerOptionBuilder(self::CWD, 'The working directory or null to use the working dir of the current PHP process.'))
+                ->setAllowedTypes(['string', 'null'])
+                ->setDefault($this->defaultCwd())
+                ->getOption(),
+            (new FixerOptionBuilder(self::ENV, 'The environment variables or null to use the same environment as the current PHP process.'))
+                ->setAllowedTypes(['array', 'null'])
+                ->setDefault($this->defaultEnv())
+                ->getOption(),
+            (new FixerOptionBuilder(self::INPUT, 'The input as stream resource, scalar or \Traversable, or null for no input.'))
+                ->setAllowedTypes(['string', 'null'])
+                ->setDefault($this->defaultInput())
+                ->getOption(),
+            (new FixerOptionBuilder(self::TIMEOUT, 'The timeout in seconds or null to disable.'))
+                ->setAllowedTypes(['float', 'int', 'null'])
+                ->setDefault($this->defaultTimeout())
+                ->getOption(),
+        ];
     }
 
     /**
@@ -74,15 +119,25 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         if ($this->isProcessSuccessful($process, $file, $tokens)) {
             $tokens->setCode(file_get_contents($this->path($file, $tokens)));
         }
-        // dd($process->getOutput(), $process->getErrorOutput());
     }
 
     /**
-     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
-    protected function fixerOptions(): array
+    protected function createProcess(\SplFileInfo $file, Tokens $tokens): Process
     {
-        return [];
+        return new Process(
+            command: $this->command($file, $tokens),
+            cwd: $this->configuration[self::CWD],
+            env: $this->configuration[self::ENV],
+            input: $this->configuration[self::INPUT],
+            timeout: $this->configuration[self::TIMEOUT],
+        );
+    }
+
+    protected function command(\SplFileInfo $file, Tokens $tokens): array
+    {
+        return [...(array) $this->program(), ...$this->arguments($file, $tokens)];
     }
 
     protected function program(): array|string
@@ -93,7 +148,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     /**
      * @return iterable<string>|string
      */
-    abstract protected function supportedExtensions(): iterable|string;
+    abstract protected function supportsExtensions(): array|string;
 
     abstract protected function defaultProgram(): array|string;
 
@@ -140,9 +195,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
 
     protected static function createTemporaryFile(): string
     {
-        static $temporaryFile;
-
-        return $temporaryFile ??= create_temporary_file();
+        return self::$temporaryFile ??= create_temporary_file();
     }
 
     /**
@@ -153,50 +206,28 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         return $process->isSuccessful();
     }
 
-    /**
-     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
-     */
-    private function defaultFixerOptions(): array
+    protected function defaultArguments(): array
     {
-        return [
-            (new FixerOptionBuilder(self::PROGRAM, '.'))
-                ->setAllowedTypes(['string', 'array'])
-                ->setDefault($this->defaultProgram())
-                ->getOption(),
-            (new FixerOptionBuilder(self::ARGUMENTS, '.'))
-                ->setAllowedTypes(['array'])
-                ->setDefault([])
-                ->getOption(),
-            (new FixerOptionBuilder(self::CWD, '.'))
-                ->setAllowedTypes(['string', 'null'])
-                ->setDefault(null)
-                ->getOption(),
-            (new FixerOptionBuilder(self::ENV, '.'))
-                ->setAllowedTypes(['array', 'null'])
-                ->setDefault(null)
-                ->getOption(),
-            (new FixerOptionBuilder(self::INPUT, '.'))
-                ->setAllowedTypes(['string', 'null'])
-                ->setDefault(null)
-                ->getOption(),
-            (new FixerOptionBuilder(self::TIMEOUT, '.'))
-                ->setAllowedTypes(['float', 'int', 'null'])
-                ->setDefault(60)
-                ->getOption(),
-        ];
+        return [];
     }
 
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    private function createProcess(\SplFileInfo $file, Tokens $tokens): Process
+    protected function defaultCwd(): ?string
     {
-        return new Process(
-            command: [...(array) $this->program(), ...$this->arguments($file, $tokens)],
-            cwd: $this->configuration[self::CWD],
-            env: $this->configuration[self::ENV],
-            input: $this->configuration[self::INPUT],
-            timeout: $this->configuration[self::TIMEOUT],
-        );
+        return null;
+    }
+
+    protected function defaultEnv(): ?array
+    {
+        return null;
+    }
+
+    protected function defaultInput(): ?string
+    {
+        return null;
+    }
+
+    protected function defaultTimeout(): int
+    {
+        return 60;
     }
 }
