@@ -13,25 +13,35 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
+use PhpCsFixer\Tokenizer\Tokens;
+
 /**
- * @see https://github.com/shufo/blade-formatter
+ * @see https://github.com/mvdan/sh
  */
-final class BladeFormatterFixer extends AbstractToolFixer
+final class ShFmtFixer extends AbstractToolFixer
 {
     #[\Override]
     protected function defaultProgram(): array
     {
-        return ['blade-formatter'];
+        return ['shfmt'];
+    }
+
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
+    protected function arguments(\SplFileInfo $file, Tokens $tokens): array
+    {
+        return [...$this->configuration[self::ARGUMENTS], $this->path($file, $tokens)];
     }
 
     protected function defaultArguments(): array
     {
-        return ['-w'];
+        return ['-l', '-w'];
     }
 
     #[\Override]
     protected function supportsExtensions(): array
     {
-        return ['blade.php'];
+        return ['sh', 'bash', 'ksh', 'zsh', 'fish'];
     }
 }

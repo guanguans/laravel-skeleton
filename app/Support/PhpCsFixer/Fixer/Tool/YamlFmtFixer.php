@@ -14,19 +14,19 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 /**
- * @see https://github.com/dotenv-linter/dotenv-linter
+ * @see https://github.com/google/yamlfmt
  */
-final class DotenvLinterFixer extends AbstractToolFixer
+final class YamlFmtFixer extends AbstractToolFixer
 {
     #[\Override]
     protected function defaultProgram(): array
     {
-        return ['dotenv-linter', 'fix'];
+        return ['yamlfmt'];
     }
 
     #[\Override]
     protected function supportsExtensions(): array
     {
-        return ['env', 'env.example'];
+        return ['yaml', 'yml'];
     }
 }
