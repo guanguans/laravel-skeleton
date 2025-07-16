@@ -19,8 +19,8 @@ namespace App\Support\PhpCsFixer\Fixer;
 use PhpCsFixer\Tokenizer\Tokens;
 
 /**
- * @see \ErickSkrauch\PhpCsFixer\Fixer
- * @see \ErickSkrauch\PhpCsFixer\Fixer\AbstractFixer
+ * @see \App\Support\PhpCsFixer\Fixer
+ * @see \App\Support\PhpCsFixer\Fixer\AbstractFixer
  * @see \PhpCsFixer\AbstractFixer
  * @see \PhpCsFixer\Fixer
  * @see \PhpCsFixerCustomFixers\Fixer

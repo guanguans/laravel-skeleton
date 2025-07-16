@@ -13,53 +13,47 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer;
 
+use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\FixerInterface;
 
 /**
+ * @implements \IteratorAggregate<FixerInterface>
+ *
  * @see \PhpCsFixerCustomFixers\Fixers
- * @see \ErickSkrauch\PhpCsFixer\Fixers
+ * @see \App\Support\PhpCsFixer\Fixers
  */
 final class Fixers implements \IteratorAggregate
 {
     /**
      * @return \Generator<FixerInterface>
      */
-    public function getIterator(): \Generator
+    public function getIterator(): \Traversable
     {
-        $classNames = [];
+        $finder = new Finder;
+        $finder->in(__DIR__.'/Fixer')->name('*.php');
+        $classes = [];
 
-        foreach (new \DirectoryIterator(__DIR__.'/Fixer') as $fileInfo) {
-            $fileName = $fileInfo->getBasename('.php');
+        /** @var \Symfony\Component\Finder\SplFileInfo $file */
+        foreach ($finder as $file) {
+            // -4 is set to cut ".php" extension
+            /** @var class-string<FixerInterface> $class */
+            $class = __NAMESPACE__.str_replace('/', '\\', mb_substr($file->getPathname(), mb_strlen(__DIR__), -4));
 
-            if (\in_array(
-                $fileName,
-                [
-                    '.',
-                    '..',
-                    'AbstractConfigurableFixer',
-                    'AbstractFixer',
-                    'AbstractInlineHtmlFixer',
-                    'AbstractToolFixer',
-                ],
-                true
-            )) {
+            if (!class_exists($class)) {
                 continue;
             }
 
-            $classNames[] = __NAMESPACE__.'\\Fixer\\'.$fileName;
+            $rfl = new \ReflectionClass($class);
+
+            if (!$rfl->implementsInterface(FixerInterface::class) || $rfl->isAbstract()) {
+                continue;
+            }
+
+            $classes[] = $class;
         }
 
-        sort($classNames);
-
-        foreach ($classNames as $className) {
-            $fixer = new $className;
-
-            // \assert($fixer instanceof FixerInterface);
-            if (!$fixer instanceof FixerInterface) {
-                continue;
-            }
-
-            yield $fixer;
+        foreach ($classes as $class) {
+            yield new $class;
         }
     }
 }

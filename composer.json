@@ -206,7 +206,7 @@
         "driftingly/rector-laravel": "^2.0",
         "ergebnis/composer-normalize": "^2.47",
         "ergebnis/license": "^2.6",
-        "ergebnis/php-cs-fixer-config": "^6.49",
+        "ergebnis/php-cs-fixer-config": "^6.50",
         "ergebnis/rector-rules": "^1.4",
         "fakerphp/faker": "^1.24",
         "guanguans/ai-commit": "^1.15",
@@ -437,6 +437,7 @@
             "@env-put-xdebug-off",
             "@composer-normalize",
             "@composer-validate",
+            "@composer-dependency-analyser",
             "@json-lint",
             "@md-lint",
             "@yaml-lint",
@@ -450,8 +451,7 @@
             "@pest-bail",
             "@env-put-xdebug-off",
             "@rector-dry-run",
-            "@phpstan",
-            "@composer-dependency-analyser"
+            "@phpstan"
         ],
         "class-leak": "@php ./vendor/bin/class-leak --ansi -vv",
         "class-leak-check": "@class-leak check app/ config/ --skip-suffix=Pipe --skip-path=Support/Traits --skip-path=Channels --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Channel --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Collector --skip-type=Rector\\Rector\\AbstractRector",
