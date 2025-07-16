@@ -30055,16 +30055,16 @@
         },
         {
             "name": "ergebnis/rector-rules",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/rector-rules.git",
-                "reference": "26e1663c1d71f8a93436a62a949e3ce705f76a6d"
+                "reference": "c0a0011efbb010db34021aeaa4417d5bae101f42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/rector-rules/zipball/26e1663c1d71f8a93436a62a949e3ce705f76a6d",
-                "reference": "26e1663c1d71f8a93436a62a949e3ce705f76a6d",
+                "url": "https://api.github.com/repos/ergebnis/rector-rules/zipball/c0a0011efbb010db34021aeaa4417d5bae101f42",
+                "reference": "c0a0011efbb010db34021aeaa4417d5bae101f42",
                 "shasum": ""
             },
             "require": {
@@ -30074,14 +30074,14 @@
                 "rector/rector": "^2.0.11"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.46.0",
+                "ergebnis/composer-normalize": "^2.47.0",
                 "ergebnis/data-provider": "^3.4.0",
                 "ergebnis/license": "^2.6.0",
-                "ergebnis/php-cs-fixer-config": "^6.46.0",
+                "ergebnis/php-cs-fixer-config": "^6.50.0",
                 "ergebnis/phpunit-slow-test-detector": "^2.19.1",
                 "infection/infection": "~0.26.6",
                 "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan-deprecation-rules": "^2.0.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0.3",
                 "phpstan/phpstan-phpunit": "^2.0.6",
                 "phpstan/phpstan-strict-rules": "^2.0.4",
                 "phpunit/phpunit": "^9.6.20"
@@ -30116,7 +30116,7 @@
                 "security": "https://github.com/ergebnis/rector-rules/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/rector-rules"
             },
-            "time": "2025-04-15T11:04:20+00:00"
+            "time": "2025-07-16T16:33:53+00:00"
         },
         {
             "name": "erickskrauch/php-cs-fixer-custom-fixers",
