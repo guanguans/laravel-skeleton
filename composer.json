@@ -431,6 +431,9 @@
             "@php artisan --ansi"
         ],
         "benchmark": "@php ./vendor/bin/phpbench run --report=aggregate --ansi -vv",
+        "blade-formatter": "blade-formatter resources/views/*.blade.php resources/views/**/*.blade.php --ignore-path= --php-version=8.3 --progress",
+        "blade-formatter-check-formatted": "@blade-formatter --check-formatted",
+        "blade-formatter-write": "@blade-formatter --write",
         "cghooks": "@php ./vendor/bin/cghooks --ansi -vv",
         "cghooks-ignore": "[ ! -f \"./vendor/bin/cghooks\" ] && exit 0 || php ./vendor/bin/cghooks --ansi -vv",
         "checks": [
