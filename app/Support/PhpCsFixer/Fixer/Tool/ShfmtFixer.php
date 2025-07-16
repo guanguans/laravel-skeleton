@@ -11,12 +11,12 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer;
+namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 /**
- * @see https://github.com/dotenv-linter/dotenv-linter
+ * @see https://github.com/mvdan/sh
  */
-final class DotenvLinterFixer extends AbstractToolFixer
+final class ShfmtFixer extends AbstractToolFixer
 {
     #[\Override]
     protected function defaultProgram(): array
@@ -27,6 +27,6 @@ final class DotenvLinterFixer extends AbstractToolFixer
     #[\Override]
     protected function supportsExtensions(): array
     {
-        return ['env', 'env.example'];
+        return ['sh', 'zsh', 'bash', 'fish'];
     }
 }

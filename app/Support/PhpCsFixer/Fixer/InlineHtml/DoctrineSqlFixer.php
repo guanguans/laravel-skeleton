@@ -13,27 +13,36 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer;
+namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
+use Doctrine\SqlFormatter\NullHighlighter;
+use Doctrine\SqlFormatter\SqlFormatter;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
-use PhpMyAdmin\SqlParser\Utils\Formatter;
 
 /**
  * @see https://github.com/doctrine/sql-formatter
  * @see https://github.com/phpmyadmin/sql-parser
  */
-final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
+final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
 {
-    public const string OPTIONS = 'options';
+    public const string INDENT_STRING = 'indent_string';
+
+    /**
+     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
+     */
+    #[\Override]
+    public function getPriority(): int
+    {
+        return -98;
+    }
 
     #[\Override]
     protected function fixerOptions(): array
     {
         return [
-            /**  @see \PhpMyAdmin\SqlParser\Utils\Formatter::getDefaultOptions() */
-            (new FixerOptionBuilder(self::OPTIONS, 'The formatting options.'))
-                ->setAllowedTypes(['array'])
-                ->setDefault(['type' => 'text'])
+            (new FixerOptionBuilder(self::INDENT_STRING, 'The SQL string with HTML styles and formatting wrapped in a <pre> tag.'))
+                ->setAllowedTypes(['string'])
+                ->setDefault('    ')
                 ->getOption(),
         ];
     }
@@ -57,6 +66,13 @@ final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
     #[\Override]
     protected function format(string $content): string
     {
-        return Formatter::format($content, $this->configuration[self::OPTIONS]);
+        return $this->createSqlFormatter()->format($content, $this->configuration[self::INDENT_STRING]);
+    }
+
+    private function createSqlFormatter(): SqlFormatter
+    {
+        static $sqlFormatter;
+
+        return $sqlFormatter ??= new SqlFormatter(new NullHighlighter);
     }
 }

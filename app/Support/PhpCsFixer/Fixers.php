@@ -20,7 +20,7 @@ use PhpCsFixer\Fixer\FixerInterface;
  * @implements \IteratorAggregate<FixerInterface>
  *
  * @see \PhpCsFixerCustomFixers\Fixers
- * @see \App\Support\PhpCsFixer\Fixers
+ * @see \ErickSkrauch\PhpCsFixer\Fixers
  */
 final class Fixers implements \IteratorAggregate
 {

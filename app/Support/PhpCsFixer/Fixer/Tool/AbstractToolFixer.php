@@ -15,8 +15,9 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer;
+namespace App\Support\PhpCsFixer\Fixer\Tool;
 
+use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;

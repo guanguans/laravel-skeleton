@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>.
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Support\PhpCsFixer\Fixer\DoctrineSqlFixer;
-use App\Support\PhpCsFixer\Fixer\PhpMyAdminSqlFixer;
-use App\Support\PhpCsFixer\Fixer\PintFixer;
-use App\Support\PhpCsFixer\Fixer\YamlFixer;
+use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
+use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
+use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
+use App\Support\PhpCsFixer\Fixer\Tool\PintFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;

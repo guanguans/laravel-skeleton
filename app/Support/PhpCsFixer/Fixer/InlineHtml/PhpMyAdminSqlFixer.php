@@ -13,36 +13,27 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer;
+namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
-use Doctrine\SqlFormatter\NullHighlighter;
-use Doctrine\SqlFormatter\SqlFormatter;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
+use PhpMyAdmin\SqlParser\Utils\Formatter;
 
 /**
  * @see https://github.com/doctrine/sql-formatter
  * @see https://github.com/phpmyadmin/sql-parser
  */
-final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
+final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
 {
-    public const string INDENT_STRING = 'indent_string';
-
-    /**
-     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
-     */
-    #[\Override]
-    public function getPriority(): int
-    {
-        return -98;
-    }
+    public const string OPTIONS = 'options';
 
     #[\Override]
     protected function fixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::INDENT_STRING, 'The SQL string with HTML styles and formatting wrapped in a <pre> tag.'))
-                ->setAllowedTypes(['string'])
-                ->setDefault('    ')
+            /**  @see \PhpMyAdmin\SqlParser\Utils\Formatter::getDefaultOptions() */
+            (new FixerOptionBuilder(self::OPTIONS, 'The formatting options.'))
+                ->setAllowedTypes(['array'])
+                ->setDefault(['type' => 'text'])
                 ->getOption(),
         ];
     }
@@ -66,13 +57,6 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
     #[\Override]
     protected function format(string $content): string
     {
-        return $this->createSqlFormatter()->format($content, $this->configuration[self::INDENT_STRING]);
-    }
-
-    private function createSqlFormatter(): SqlFormatter
-    {
-        static $sqlFormatter;
-
-        return $sqlFormatter ??= new SqlFormatter(new NullHighlighter);
+        return Formatter::format($content, $this->configuration[self::OPTIONS]);
     }
 }

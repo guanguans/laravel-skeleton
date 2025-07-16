@@ -11,12 +11,12 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer;
+namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 /**
- * @see https://github.com/mvdan/sh
+ * @see https://github.com/shufo/blade-formatter
  */
-final class ShfmtFixer extends AbstractToolFixer
+final class BladeFormatterFixer extends AbstractToolFixer
 {
     #[\Override]
     protected function defaultProgram(): array
@@ -27,6 +27,6 @@ final class ShfmtFixer extends AbstractToolFixer
     #[\Override]
     protected function supportsExtensions(): array
     {
-        return ['sh', 'zsh', 'bash', 'fish'];
+        return ['blade.php'];
     }
 }

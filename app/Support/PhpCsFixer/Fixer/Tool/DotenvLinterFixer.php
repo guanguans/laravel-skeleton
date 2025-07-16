@@ -11,12 +11,12 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer;
+namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 /**
- * @see https://github.com/shufo/blade-formatter
+ * @see https://github.com/dotenv-linter/dotenv-linter
  */
-final class BladeFormatterFixer extends AbstractToolFixer
+final class DotenvLinterFixer extends AbstractToolFixer
 {
     #[\Override]
     protected function defaultProgram(): array
@@ -27,6 +27,6 @@ final class BladeFormatterFixer extends AbstractToolFixer
     #[\Override]
     protected function supportsExtensions(): array
     {
-        return ['blade.php'];
+        return ['env', 'env.example'];
     }
 }

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer;
+namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 use PhpCsFixer\Tokenizer\Tokens;
 use Symfony\Component\Process\Process;
