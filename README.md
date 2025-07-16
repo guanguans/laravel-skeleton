@@ -34,6 +34,9 @@ composer artisan-solo
 composer artisan-solo-dumps
 composer artisan-xdebug
 composer benchmark
+composer blade-formatter
+composer blade-formatter-check-formatted
+composer blade-formatter-write
 composer cghooks
 composer cghooks-ignore
 composer checks
@@ -711,18 +714,28 @@ app
 │   │   ├── Fixer
 │   │   │   ├── AbstractConfigurableFixer.php
 │   │   │   ├── AbstractFixer.php
-│   │   │   ├── AbstractInlineHtmlFixer.php
-│   │   │   ├── AbstractToolFixer.php
-│   │   │   ├── BladeFormatterFixer.php
-│   │   │   ├── DoctrineSqlFixer.php
-│   │   │   ├── DotenvLinterFixer.php
-│   │   │   ├── JsonFixer.php
-│   │   │   ├── NeonFixer.php
-│   │   │   ├── PhpMyAdminSqlFixer.php
-│   │   │   ├── PintFixer.php
-│   │   │   ├── ShfmtFixer.php
-│   │   │   ├── XmlFixer.php
-│   │   │   └── YamlFixer.php
+│   │   │   ├── Concerns
+│   │   │   │   ├── AllowRisky.php
+│   │   │   │   ├── HighestPriority.php
+│   │   │   │   ├── InlineHtmlCandidate.php
+│   │   │   │   ├── LowestPriority.php
+│   │   │   │   ├── SupportsExtensions.php
+│   │   │   │   └── SupportsPathArg.php
+│   │   │   ├── InlineHtml
+│   │   │   │   ├── AbstractInlineHtmlFixer.php
+│   │   │   │   ├── DoctrineSqlFixer.php
+│   │   │   │   ├── JsonFixer.php
+│   │   │   │   ├── NeonFixer.php
+│   │   │   │   ├── PhpMyAdminSqlFixer.php
+│   │   │   │   ├── XmlFixer.php
+│   │   │   │   └── YamlFixer.php
+│   │   │   └── Tool
+│   │   │       ├── AbstractToolFixer.php
+│   │   │       ├── BladeFormatterFixer.php
+│   │   │       ├── DotEnvLinterFixer.php
+│   │   │       ├── PintFixer.php
+│   │   │       ├── ShFmtFixer.php
+│   │   │       └── YamlFmtFixer.php
 │   │   └── Fixers.php
 │   ├── PhpUserFilters
 │   │   └── CallbackFilter.php
@@ -759,7 +772,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-56 directories, 269 files
+59 directories, 276 files
 
 ```
 </details>
