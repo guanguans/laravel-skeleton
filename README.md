@@ -189,6 +189,7 @@ composer zh-lint
 * [beyondcode/laravel-mailbox](https://github.com/beyondcode/laravel-mailbox) - Handle incoming emails in your Laravel application.
 * [biiiiiigmonster/hasin](https://github.com/biiiiiigmonster/hasin) - Laravel framework relation has in implement
 * [binarytorch/larecipe](https://github.com/saleem-hadad/larecipe) - Generate gorgeous recipes for your Laravel applications using MarkDown
+* [blade-ui-kit/blade-icons](https://github.com/blade-ui-kit/blade-icons) - A package to easily make use of icons in your Laravel Blade views.
 * [bramus/monolog-colored-line-formatter](https://github.com/bramus/monolog-colored-line-formatter) - Colored Line Formatter for Monolog
 * [calebporzio/sushi](https://github.com/calebporzio/sushi) - Eloquent's missing "array" driver.
 * [cerbero/command-validator](https://github.com/cerbero90/command-validator) - Laravel package to validate the input of console commands.
@@ -280,6 +281,7 @@ composer zh-lint
 * [prinsfrank/standards](https://github.com/PrinsFrank/standards) - A collection of standards as PHP Enums: ISO3166, ISO4217, ISO639...
 * [proengsoft/laravel-jsvalidation](https://github.com/proengsoft/laravel-jsvalidation) - Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest
 * [propaganistas/laravel-disposable-email](https://github.com/Propaganistas/Laravel-Disposable-Email) - Disposable email validator
+* [propaganistas/laravel-phone](https://github.com/Propaganistas/Laravel-Phone) - Adds phone number functionality to Laravel based on Google's libphonenumber API.
 * [rap2hpoutre/laravel-log-viewer](https://github.com/rap2hpoutre/laravel-log-viewer) - A Laravel log reader
 * [reinink/remember-query-strings](https://github.com/reinink/remember-query-strings) - Laravel middleware that automatically remembers and restores query strings.
 * [rennokki/laravel-eloquent-query-cache](https://github.com/renoki-co/laravel-eloquent-query-cache) - Adding cache on your Laravel Eloquent queries' results is now a breeze.
@@ -350,6 +352,7 @@ composer zh-lint
 * [wireui/wireui](https://github.com/wireui/wireui) - TallStack components
 * [yiisoft/injector](https://github.com/yiisoft/injector) - PSR-11 compatible injector. Executes a callable and makes an instances by injecting dependencies from a given DI container.
 * [zenstruck/stream](https://github.com/zenstruck/stream) - Object wrapper for PHP resources.
+* [amirami/localizator](https://github.com/amiranagram/localizator) - Localizator is a small tool for Laravel that gives you the ability to extract untranslated strings from project files. It works using the artisan command line and the provided localize command.
 * [andreaselia/laravel-api-to-postman](https://github.com/andreaselia/laravel-api-to-postman) - Generate a Postman collection automatically from your Laravel API
 * [bamarni/composer-bin-plugin](https://github.com/bamarni/composer-bin-plugin) - No conflicts for your bin dependencies
 * [barryvdh/laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper) - Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.
@@ -381,6 +384,7 @@ composer zh-lint
 * [larastan/larastan](https://github.com/larastan/larastan) - Larastan - Discover bugs in your code without running it. A phpstan/phpstan extension for Laravel
 * [laravel-lang/common](https://github.com/Laravel-Lang/common) - Easily connect the necessary language packs to the application
 * [laravel-shift/factory-generator](https://github.com/laravel-shift/factory-generator) - Generate factories from existing models
+* [laravel/dusk](https://github.com/laravel/dusk) - Laravel Dusk provides simple end-to-end testing and browser automation.
 * [laravel/envoy](https://github.com/laravel/envoy) - Elegant SSH tasks for PHP.
 * [laravel/facade-documenter](https://github.com/laravel/facade-documenter/tree/main)
 * [laravel/pail](https://github.com/laravel/pail) - Easily delve into your Laravel application's log files directly from the command line.
@@ -429,6 +433,7 @@ composer zh-lint
 * [tomasvotruba/type-coverage](https://github.com/TomasVotruba/type-coverage) - Measure type coverage of your project
 * [vcian/laravel-db-auditor](https://github.com/vcian/laravel-db-auditor) - Database DB Auditor provide leverage to audit your MySql,sqlite, PostgreSQL database standards and also provide options to add constraints in table.
 * [worksome/envy](https://github.com/worksome/envy) - Automatically keep your .env files in sync.
+* [worksome/request-factories](https://github.com/worksome/request-factories) - Test Form Requests in Laravel without all of the boilerplate.
 * [yamadashy/phpstan-friendly-formatter](https://github.com/yamadashy/phpstan-friendly-formatter) - Simple error formatter for PHPStan that display code frame
 </details>
 

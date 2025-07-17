@@ -29,6 +29,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
      * @noinspection SpellCheckingInspection
      */
     protected $providers = [
+        'Amirami\\Localizator\\ServiceProvider',
         'AndreasElia\\PostmanGenerator\\PostmanGeneratorServiceProvider',
         'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
         'BeyondCode\QueryDetector\QueryDetectorServiceProvider',
@@ -40,6 +41,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
         'KitLoong\\MigrationsGenerator\\MigrationsGeneratorServiceProvider',
         'Knuckles\\Scribe\\ScribeServiceProvider',
         'LaracraftTech\\LaravelSchemaRules\\LaravelSchemaRulesServiceProvider',
+        'Laravel\\Dusk\\DuskServiceProvider',
         'Laravel\\Pail\\PailServiceProvider',
         'Laravel\\Sail\\SailServiceProvider',
         'Laravel\\Telescope\\TelescopeServiceProvider',
@@ -63,6 +65,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
         'TheDoctor0\\LaravelFactoryGenerator\\FactoryGeneratorServiceProvider',
         'Vcian\\LaravelDBAuditor\\Providers\\DBAuditorServiceProvider',
         'Worksome\\Envy\\EnvyServiceProvider',
+        'Worksome\\RequestFactories\\RequestFactoriesServiceProvider',
     ];
 
     public function register(): void
