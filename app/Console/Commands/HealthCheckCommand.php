@@ -17,6 +17,7 @@ use GrahamCampbell\ResultType\Error;
 use GrahamCampbell\ResultType\Result;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Console\Isolatable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\DB;
@@ -35,8 +36,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @see https://github.com/Jorijn/laravel-security-checker
  * @see https://github.com/laminas/laminas-diagnostics
  * @see https://github.com/spatie/laravel-health
+ * @see https://laravel-news.com/isolatable
  */
-final class HealthCheckCommand extends Command
+final class HealthCheckCommand extends Command implements Isolatable
 {
     private const string RESULT_SUCCESS = '<info>ok</info>';
     private const string RESULT_ERROR = '<error>failing</error>';
