@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce6be4bab6f6d4c9d52553ad97fff6fa",
+    "content-hash": "4d4feed2cd4bc22aefe6abfa7aca2497",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4872,12 +4872,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "020941cd66bcc4adafd865a86f031a36f2e0bb3a"
+                "reference": "6e68c96b5a2cbee7614ebd316c308441ce7bb45f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/020941cd66bcc4adafd865a86f031a36f2e0bb3a",
-                "reference": "020941cd66bcc4adafd865a86f031a36f2e0bb3a",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/6e68c96b5a2cbee7614ebd316c308441ce7bb45f",
+                "reference": "6e68c96b5a2cbee7614ebd316c308441ce7bb45f",
                 "shasum": ""
             },
             "require": {
@@ -4941,7 +4941,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-18T20:28:53+00:00"
+            "time": "2025-07-19T13:27:09+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -5972,16 +5972,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php-lite",
-            "version": "9.0.9",
+            "version": "9.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php-lite.git",
-                "reference": "d7ae8dd1186b54ce1451aec437346dd772321492"
+                "reference": "205492b2d54e3cc808110f1ba6e7c53a1b839196"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/d7ae8dd1186b54ce1451aec437346dd772321492",
-                "reference": "d7ae8dd1186b54ce1451aec437346dd772321492",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php-lite/zipball/205492b2d54e3cc808110f1ba6e7c53a1b839196",
+                "reference": "205492b2d54e3cc808110f1ba6e7c53a1b839196",
                 "shasum": ""
             },
             "require": {
@@ -6046,7 +6046,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php-lite/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php-lite"
             },
-            "time": "2025-07-08T08:38:23+00:00"
+            "time": "2025-07-18T06:46:03+00:00"
         },
         {
             "name": "graham-campbell/manager",
@@ -22433,16 +22433,16 @@
         },
         {
             "name": "staudenmeir/laravel-cte",
-            "version": "v1.12.1",
+            "version": "v1.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-cte.git",
-                "reference": "36b1ec2ad2ec964c0b0963f4941e019a6fe9c844"
+                "reference": "842e538dab93b065f8b9e0673c580b6aec8a2346"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-cte/zipball/36b1ec2ad2ec964c0b0963f4941e019a6fe9c844",
-                "reference": "36b1ec2ad2ec964c0b0963f4941e019a6fe9c844",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-cte/zipball/842e538dab93b065f8b9e0673c580b6aec8a2346",
+                "reference": "842e538dab93b065f8b9e0673c580b6aec8a2346",
                 "shasum": ""
             },
             "require": {
@@ -22454,7 +22454,8 @@
                 "orchestra/testbench-core": "^10.0",
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.0",
-                "singlestoredb/singlestoredb-laravel": "^2.0"
+                "singlestoredb/singlestoredb-laravel": "^2.0",
+                "yajra/laravel-oci8": "^12.0"
             },
             "type": "library",
             "extra": {
@@ -22482,7 +22483,7 @@
             "description": "Laravel queries with common table expressions",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-cte/issues",
-                "source": "https://github.com/staudenmeir/laravel-cte/tree/v12.1"
+                "source": "https://github.com/staudenmeir/laravel-cte/tree/v1.12.2"
             },
             "funding": [
                 {
@@ -22490,7 +22491,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-03-31T19:16:13+00:00"
+            "time": "2025-07-19T13:12:46+00:00"
         },
         {
             "name": "staudenmeir/laravel-migration-views",
@@ -31014,12 +31015,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guanguans/monorepo-builder-worker.git",
-                "reference": "44de0242f17311eddecbf8d3c6259505508a6d0d"
+                "reference": "5c7a3357684d9bd498548f3e02723422e5581c0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guanguans/monorepo-builder-worker/zipball/44de0242f17311eddecbf8d3c6259505508a6d0d",
-                "reference": "44de0242f17311eddecbf8d3c6259505508a6d0d",
+                "url": "https://api.github.com/repos/guanguans/monorepo-builder-worker/zipball/5c7a3357684d9bd498548f3e02723422e5581c0e",
+                "reference": "5c7a3357684d9bd498548f3e02723422e5581c0e",
                 "shasum": ""
             },
             "require": {
@@ -31142,7 +31143,7 @@
                     "type": "wechat"
                 }
             ],
-            "time": "2025-06-10T23:12:06+00:00"
+            "time": "2025-07-19T00:24:56+00:00"
         },
         {
             "name": "guanguans/soar-php",
