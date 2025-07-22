@@ -31378,16 +31378,16 @@
         },
         {
             "name": "ion-bazan/composer-diff",
-            "version": "v1.12.0",
+            "version": "v1.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/IonBazan/composer-diff.git",
-                "reference": "5eb28baa038045f5a161c958847e6d9920c79191"
+                "reference": "46a16883cd662f78045e80e89d0e2b2e1e5cf7cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IonBazan/composer-diff/zipball/5eb28baa038045f5a161c958847e6d9920c79191",
-                "reference": "5eb28baa038045f5a161c958847e6d9920c79191",
+                "url": "https://api.github.com/repos/IonBazan/composer-diff/zipball/46a16883cd662f78045e80e89d0e2b2e1e5cf7cf",
+                "reference": "46a16883cd662f78045e80e89d0e2b2e1e5cf7cf",
                 "shasum": ""
             },
             "require": {
@@ -31439,7 +31439,7 @@
             ],
             "support": {
                 "issues": "https://github.com/IonBazan/composer-diff/issues",
-                "source": "https://github.com/IonBazan/composer-diff/tree/v1.12.0"
+                "source": "https://github.com/IonBazan/composer-diff/tree/v1.12.1"
             },
             "funding": [
                 {
@@ -31447,7 +31447,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-18T14:19:55+00:00"
+            "time": "2025-07-22T16:53:41+00:00"
         },
         {
             "name": "jasonmccreary/laravel-test-assertions",
