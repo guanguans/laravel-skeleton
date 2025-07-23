@@ -36493,16 +36493,16 @@
         },
         {
             "name": "rakutentech/laravel-request-docs",
-            "version": "v2.42",
+            "version": "v2.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rakutentech/laravel-request-docs.git",
-                "reference": "640f7b298da522c2d1cc7cd8339a95291f87e911"
+                "reference": "0e9db7bb66c5bdd7117f511099516d0a475b7f5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rakutentech/laravel-request-docs/zipball/640f7b298da522c2d1cc7cd8339a95291f87e911",
-                "reference": "640f7b298da522c2d1cc7cd8339a95291f87e911",
+                "url": "https://api.github.com/repos/rakutentech/laravel-request-docs/zipball/0e9db7bb66c5bdd7117f511099516d0a475b7f5f",
+                "reference": "0e9db7bb66c5bdd7117f511099516d0a475b7f5f",
                 "shasum": ""
             },
             "require": {
@@ -36561,9 +36561,9 @@
             ],
             "support": {
                 "issues": "https://github.com/rakutentech/laravel-request-docs/issues",
-                "source": "https://github.com/rakutentech/laravel-request-docs/tree/v2.42"
+                "source": "https://github.com/rakutentech/laravel-request-docs/tree/v2.43"
             },
-            "time": "2025-03-05T06:07:36+00:00"
+            "time": "2025-07-23T02:47:51+00:00"
         },
         {
             "name": "react/child-process",
