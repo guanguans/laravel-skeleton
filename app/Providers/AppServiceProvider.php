@@ -41,9 +41,9 @@ final class AppServiceProvider extends ServiceProvider
     {
         classes(
             static fn (
-                string $file,
-                string $class
-            ): bool => str($file)->is('*/../../app/Support/Mixins/*') && str($class)->is('App\\Support\\Mixins\\*')
+                string $class,
+                string $file
+            ): bool => str($class)->is('App\\Support\\Mixins\\*') && str($file)->is('*/../../app/Support/Mixins/*')
         )
             // ->keys()
             // ->dd()
@@ -62,9 +62,9 @@ final class AppServiceProvider extends ServiceProvider
     {
         classes(
             static fn (
-                string $file,
-                string $class
-            ): bool => str($file)->is('*/../../app/Providers/*') && str($class)->is('App\\Providers\\*')
+                string $class,
+                string $file
+            ): bool => str($class)->is('App\\Providers\\*') && str($file)->is('*/../../app/Providers/*')
         )
             // ->keys()
             // ->dd()

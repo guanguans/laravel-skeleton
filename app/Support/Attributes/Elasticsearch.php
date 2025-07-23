@@ -18,6 +18,13 @@ use Elastic\Elasticsearch\Client;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Container\ContextualAttribute;
 
+/**
+ * @see \Illuminate\Container\Attributes\Auth
+ * @see \Illuminate\Container\Attributes\Cache
+ * @see \Illuminate\Container\Attributes\Database
+ * @see \Illuminate\Container\Attributes\Log
+ * @see \Illuminate\Container\Attributes\Storage
+ */
 #[\Attribute(\Attribute::TARGET_PARAMETER)]
 final readonly class Elasticsearch implements ContextualAttribute
 {

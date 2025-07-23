@@ -162,7 +162,7 @@ return RectorConfig::configure()
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
-        ...classes(static fn (string $file, string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
+        ...classes(static fn (string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
             ->keys()
             ->all(),
     ])

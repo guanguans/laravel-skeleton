@@ -29,9 +29,9 @@ use Illuminate\Support\Str;
 it('can validate rules', function (): void {
     classes(
         static fn (
-            string $file,
-            string $class
-        ): bool => str($file)->is('*/../../app/Rules/*') && str($class)->is('App\\Rules\\*')
+            string $class,
+            string $file
+        ): bool => str($class)->is('App\\Rules\\*') && str($file)->is('*/../../app/Rules/*')
     )
         ->filter(fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
         ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([

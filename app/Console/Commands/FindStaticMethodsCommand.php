@@ -61,7 +61,7 @@ final class FindStaticMethodsCommand extends Command
     private function findStaticMethods(): void
     {
         classes(
-            static fn (string $file, string $class): bool => str($class)->is([
+            static fn (string $class): bool => str($class)->is([
                 'Illuminate\\*',
             ]) && !str($class)->is([
                 // Arr::class,

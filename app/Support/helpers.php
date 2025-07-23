@@ -89,23 +89,28 @@ if (!\function_exists('classes')) {
      * @see \get_declared_traits()
      * @see \DG\BypassFinals::enable()
      *
-     * @noinspection PhpUndefinedNamespaceInspection
      * @noinspection RedundantDocCommentTagInspection
+     * @noinspection PhpDocSignatureIsNotCompleteInspection
      *
-     * @param callable(string, class-string): bool $filter
+     * @param null|(callable(class-string, string): bool) $filter
      */
-    function classes(callable $filter): Collection
+    function classes(?callable $filter = null): Collection
     {
-        static $allClasses;
+        static $classes;
 
-        $allClasses ??= collect(spl_autoload_functions())->flatMap(
+        $classes ??= collect(spl_autoload_functions())->flatMap(
             static fn (mixed $loader): array => \is_array($loader) && $loader[0] instanceof ClassLoader
                 ? $loader[0]->getClassMap()
                 : []
         );
 
-        return $allClasses
-            ->filter($filter)
+        return $classes
+            ->when(
+                \is_callable($filter),
+                static fn (Collection $classes): Collection => $classes->filter(
+                    static fn (string $file, string $class) => $filter($class, $file)
+                )
+            )
             ->mapWithKeys(static function (string $file, string $class): array {
                 try {
                     return [$class => new ReflectionClass($class)];

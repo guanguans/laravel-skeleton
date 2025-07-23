@@ -64,9 +64,9 @@ it('is http', function (): void {
 it('is console', function (): void {
     classes(
         static fn (
-            string $file,
-            string $class
-        ): bool => str($file)->is('*/../../app/Console/Commands/*') && str($class)->is('App\\Console\\Commands\\*')
+            string $class,
+            string $file
+        ): bool => str($class)->is('App\\Console\\Commands\\*') && str($file)->is('*/../../app/Console/Commands/*')
     )
         ->filter(fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
         ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([
