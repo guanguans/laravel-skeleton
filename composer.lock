@@ -18555,16 +18555,16 @@
         },
         {
             "name": "ryangjchandler/orbit",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ryangjchandler/orbit.git",
-                "reference": "54f2c888eaced47bb0ba7f03e9accbf8fe2b6b02"
+                "reference": "2a4274d31ed4f4b6824cdda91e84e964ea9a4745"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ryangjchandler/orbit/zipball/54f2c888eaced47bb0ba7f03e9accbf8fe2b6b02",
-                "reference": "54f2c888eaced47bb0ba7f03e9accbf8fe2b6b02",
+                "url": "https://api.github.com/repos/ryangjchandler/orbit/zipball/2a4274d31ed4f4b6824cdda91e84e964ea9a4745",
+                "reference": "2a4274d31ed4f4b6824cdda91e84e964ea9a4745",
                 "shasum": ""
             },
             "require": {
@@ -18614,7 +18614,7 @@
             "description": "A flat-file database driver for Eloquent.",
             "support": {
                 "issues": "https://github.com/ryangjchandler/orbit/issues",
-                "source": "https://github.com/ryangjchandler/orbit/tree/v1.4.0"
+                "source": "https://github.com/ryangjchandler/orbit/tree/v1.4.1"
             },
             "funding": [
                 {
@@ -18622,7 +18622,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-02T23:11:23+00:00"
+            "time": "2025-07-23T09:16:23+00:00"
         },
         {
             "name": "salsify/json-streaming-parser",
