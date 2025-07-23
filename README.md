@@ -404,6 +404,7 @@ composer zh-lint
 * [php-static-analysis/rector-rule](https://github.com/php-static-analysis/rector-rule) - RectorPHP rule to convert PHPDoc annotations for static analysis to PHP attributes
 * [phpstan/extension-installer](https://github.com/phpstan/extension-installer) - Composer plugin for automatic installation of PHPStan extensions
 * [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules) - PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.
+* [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery) - PHPStan Mockery extension
 * [phpstan/phpstan-webmozart-assert](https://github.com/phpstan/phpstan-webmozart-assert) - PHPStan webmozart/assert extension
 * [povils/phpmnd](https://github.com/povils/phpmnd) - A tool to detect Magic numbers in codebase
 * [rakutentech/laravel-request-docs](https://github.com/rakutentech/laravel-request-docs) - Automatically generate Laravel docs from request rules, controllers and routes

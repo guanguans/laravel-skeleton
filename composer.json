@@ -244,6 +244,7 @@
         "php-static-analysis/rector-rule": "^0.4",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-mockery": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "povils/phpmnd": "^3.6",
         "rakutentech/laravel-request-docs": "^2.42",
