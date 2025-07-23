@@ -299,6 +299,7 @@ composer zh-lint
 * [spatie/invade](https://github.com/spatie/invade) - A PHP function to work with private properties and methods
 * [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) - A very simple activity logger to monitor the users of your website or application
 * [spatie/laravel-backup](https://github.com/spatie/laravel-backup) - A Laravel package to backup your application
+* [spatie/laravel-collection-macros](https://github.com/spatie/laravel-collection-macros) - A set of useful Laravel collection macros
 * [spatie/laravel-cookie-consent](https://github.com/spatie/laravel-cookie-consent) - Make your Laravel app comply with the crazy EU cookie law
 * [spatie/laravel-csp](https://github.com/spatie/laravel-csp) - Add CSP headers to the responses of a Laravel app
 * [spatie/laravel-data](https://github.com/spatie/laravel-data) - Create unified resources and data transfer objects

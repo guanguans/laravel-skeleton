@@ -29,20 +29,16 @@ final class CollectionMixin
     /**
      * @noinspection JsonEncodingApiUsageInspection
      * @noinspection PhpMethodParametersCountMismatchInspection
+     *
+     * @see \Illuminate\Support\Traits\EnumeratesValues::fromJson()
      */
-    public static function json(): \Closure
+    public static function fromJson(): \Closure
     {
-        return static fn (string $json, int $depth = 512, int $options = 0): self => new self(json_decode(
-            $json,
-            true,
-            $depth,
-            $options
-        ));
-    }
-
-    public function pluckToArray(): \Closure
-    {
-        return fn (null|array|int|string $value, ?string $key = null): array => $this->pluck($value, $key)->toArray();
+        return static fn (
+            string $json,
+            int $depth = 512,
+            int $flags = 0
+        ): self => new self(json_decode($json, true, $depth, $flags));
     }
 
     public function head(): \Closure
@@ -81,35 +77,14 @@ final class CollectionMixin
         return fn (mixed $currentItem, mixed $fallback = null) => $this->reverse()->after($currentItem, $fallback);
     }
 
-    public function ifAny(): \Closure
-    {
-        return function (callable $callback): Collection {
-            if (!$this->isEmpty()) {
-                $callback($this);
-            }
-
-            /** @var \Illuminate\Support\Collection $this */
-            return $this;
-        };
-    }
-
-    public function ifEmpty(): \Closure
-    {
-        return function (callable $callback): Collection {
-            /** @var \Illuminate\Support\Collection $this */
-            if ($this->isEmpty()) {
-                $callback($this);
-            }
-
-            return $this;
-        };
-    }
-
     public function if(): \Closure
     {
         return fn (mixed $if, mixed $then = null, mixed $else = null) => value($if, $this) ? value($then, $this) : value($else, $this);
     }
 
+    /**
+     * @see https://github.com/spatie/laravel-collection-macros/blob/main/src/Macros/Paginate.php
+     */
     public function paginate(): \Closure
     {
         return function (int $perPage = 15, string $pageName = 'page', ?int $page = null, ?int $total = null, array $options = []): LengthAwarePaginator {
@@ -128,6 +103,9 @@ final class CollectionMixin
         };
     }
 
+    /**
+     * @see https://github.com/spatie/laravel-collection-macros/blob/main/src/Macros/SimplePaginate.php
+     */
     public function simplePaginate(): \Closure
     {
         return function (int $perPage = 15, string $pageName = 'page', ?int $page = null, array $options = []): Paginator {
@@ -147,17 +125,5 @@ final class CollectionMixin
     public function filterFilled(): \Closure
     {
         return fn () => $this->filter(static fn (mixed $value) => filled($value));
-    }
-
-    public function reduceWithKeys(): \Closure
-    {
-        return function (callable $callback, mixed $carry = null) {
-            /** @var \Illuminate\Support\Collection $this */
-            foreach ($this as $key => $value) {
-                $carry = $callback($carry, $value, $key);
-            }
-
-            return $carry;
-        };
     }
 }
