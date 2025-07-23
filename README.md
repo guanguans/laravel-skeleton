@@ -328,7 +328,7 @@ composer zh-lint
 * [staudenmeir/eloquent-has-many-deep](https://github.com/staudenmeir/eloquent-has-many-deep) - Laravel Eloquent HasManyThrough relationships with unlimited levels
 * [staudenmeir/eloquent-json-relations](https://github.com/staudenmeir/eloquent-json-relations) - Laravel Eloquent relationships with JSON keys
 * [staudenmeir/laravel-adjacency-list](https://github.com/staudenmeir/laravel-adjacency-list) - Recursive Laravel Eloquent relationships with CTEs
-* [staudenmeir/laravel-cte](https://github.com/staudenmeir/laravel-cte/tree/v12.1) - Laravel queries with common table expressions
+* [staudenmeir/laravel-cte](https://github.com/staudenmeir/laravel-cte) - Laravel queries with common table expressions
 * [staudenmeir/laravel-migration-views](https://github.com/staudenmeir/laravel-migration-views) - Laravel database migrations with SQL views
 * [stevebauman/location](https://github.com/stevebauman/location) - Retrieve a user's location by their IP Address
 * [stillat/blade-parser](https://github.com/Stillat/blade-parser)
