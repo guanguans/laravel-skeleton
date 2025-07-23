@@ -660,6 +660,7 @@ app
 ├── Support
 │   ├── Attributes
 │   │   ├── Autowired.php
+│   │   ├── Elasticsearch.php
 │   │   ├── Ignore.php
 │   │   └── Mixin.php
 │   ├── BitEncoder.php
@@ -779,7 +780,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-59 directories, 276 files
+59 directories, 277 files
 
 ```
 </details>
