@@ -18,7 +18,9 @@ namespace App\Support\PhpCsFixer\Fixer\Tool\Concerns;
  */
 trait PostPathCommand
 {
-    #[\Override]
+    /**
+     * @noinspection OverrideMissingInspection
+     */
     protected function command(): array
     {
         return [

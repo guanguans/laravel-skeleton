@@ -747,8 +747,11 @@ app
 │   │   │       ├── Concerns
 │   │   │       │   └── PostPathCommand.php
 │   │   │       ├── DotEnvLinterFixer.php
+│   │   │       ├── MarkDownLintCli2Fixer.php
 │   │   │       ├── PintFixer.php
 │   │   │       ├── ShFmtFixer.php
+│   │   │       ├── SqlFluffFixer.php
+│   │   │       ├── XmllintFixer.php
 │   │   │       └── YamlFmtFixer.php
 │   │   └── Fixers.php
 │   ├── PhpUserFilters
@@ -786,7 +789,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 282 files
+60 directories, 285 files
 
 ```
 </details>
