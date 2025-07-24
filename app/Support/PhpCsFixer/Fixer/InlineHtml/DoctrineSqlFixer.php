@@ -33,7 +33,7 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
     #[\Override]
     public function getPriority(): int
     {
-        return -98;
+        return parent::getPriority() - 1;
     }
 
     #[\Override]

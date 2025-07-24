@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +16,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 use App\Support\PhpCsFixer\Fixer\Concerns\AlwaysCandidate;
+use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensionsAndPathArg;
 use Symfony\Component\Process\Process;
 use function Illuminate\Support\php_binary;
@@ -25,12 +28,13 @@ use function Illuminate\Support\php_binary;
  */
 final class PintFixer extends AbstractToolFixer
 {
+    // use HighestPriority;
     use AlwaysCandidate;
     use SupportsExtensionsAndPathArg;
 
     protected function isProcessSuccessful(Process $process): bool
     {
-        return !$process->isSuccessful();
+        return !parent::isProcessSuccessful($process);
     }
 
     #[\Override]
@@ -39,6 +43,10 @@ final class PintFixer extends AbstractToolFixer
         return [php_binary(), 'vendor/bin/pint'];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
     protected function defaultArgs(): array
     {
         return [
@@ -55,6 +63,10 @@ final class PintFixer extends AbstractToolFixer
         ];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
     protected function defaultEnv(): ?array
     {
         return ['XDEBUG_MODE' => 'off'];

@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection PhpConstantNamingConventionInspection */
-/** @noinspection PhpMissingParentCallCommonInspection */
 /** @noinspection SensitiveParameterInspection */
 
 declare(strict_types=1);
@@ -20,7 +19,6 @@ namespace App\Support\PhpCsFixer\Fixer\Tool;
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
-use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\LowestPriority;
@@ -44,8 +42,6 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     use Awarer;
     use InlineHtmlCandidate;
     use IsDryRun;
-
-    // use HighestPriority;
     use LowestPriority;
     use SupportsExtensions;
     public const string TOOL = 'tool';
@@ -54,7 +50,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     public const string ENV = 'env';
     public const string INPUT = 'input';
     public const string TIMEOUT = 'timeout';
-    protected static ?string $temporaryFile = null;
+    private static ?string $temporaryFile = null;
 
     /**
      * @see \Illuminate\Filesystem\Filesystem::delete()
@@ -71,7 +67,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a file by %s.', str($this->getSortName())->headline()->lower()),
+            $summary = \sprintf('Format a file by [%s].', $this->getSortHeadlineName()),
             [new CodeSample($summary)]
         );
     }
@@ -83,6 +79,8 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     }
 
     /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     *
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
      */
     protected function fixerOptions(): array
@@ -119,26 +117,23 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
     #[\Override]
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
+    final protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
         $this->setFileAndTokens($file, $tokens);
 
-        $process = $this->createProcess($file, $tokens);
+        $process = $this->createProcess();
         // dd($process->getCommandLine());
         $process->run();
 
         if ($this->isProcessSuccessful($process)) {
-            $tokens->setCode(file_get_contents($this->path($file, $tokens)));
+            $tokens->setCode(file_get_contents($this->path()));
         }
     }
 
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    protected function createProcess(\SplFileInfo $file, Tokens $tokens): Process
+    protected function createProcess(): Process
     {
         return new Process(
-            command: $this->command($file, $tokens),
+            command: $this->command(),
             cwd: $this->configuration[self::CWD],
             env: $this->configuration[self::ENV],
             input: $this->configuration[self::INPUT],
@@ -146,22 +141,16 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         );
     }
 
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    protected function command(\SplFileInfo $file, Tokens $tokens): array
+    protected function command(): array
     {
         return [
-            ...(array) $this->configuration[self::TOOL],
-            $this->path($file, $tokens),
+            ...$this->configuration[self::TOOL],
+            $this->path(),
             ...$this->configuration[self::ARGS],
         ];
     }
 
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    protected function path(\SplFileInfo $file, Tokens $tokens): string
+    protected function path(): string
     {
         static $path;
 
@@ -169,10 +158,10 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
             return $path;
         }
 
-        $path = (string) $file;
+        $path = (string) $this->file;
 
         if ($this->isDryRun()) {
-            file_put_contents($path = $this->createTemporaryFile(), $tokens->generateCode());
+            file_put_contents($path = $this->createTemporaryFile(), $this->tokens->generateCode());
         }
 
         return $path;

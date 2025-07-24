@@ -24,6 +24,10 @@ final class BladeFormatterFixer extends AbstractToolFixer
         return ['blade-formatter'];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
     protected function defaultArgs(): array
     {
         return ['-w'];

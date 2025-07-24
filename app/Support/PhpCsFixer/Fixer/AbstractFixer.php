@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection PhpInternalEntityUsedInspection */
-/** @noinspection SensitiveParameterInspection */
 
 declare(strict_types=1);
 
@@ -46,6 +45,11 @@ abstract class AbstractFixer extends \PhpCsFixer\AbstractFixer
     public function getName(): string
     {
         return \sprintf('User/%s', $this->getSortName());
+    }
+
+    public function getSortHeadlineName(): string
+    {
+        return str($this->getSortName())->headline()->toString();
     }
 
     public function getSortName(): string

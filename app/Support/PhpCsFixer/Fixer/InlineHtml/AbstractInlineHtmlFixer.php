@@ -18,6 +18,7 @@ namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
+use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use Illuminate\Support\Stringable;
@@ -33,6 +34,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
 {
     use AllowRisky;
+    use HighestPriority;
     use InlineHtmlCandidate;
     use SupportsExtensions;
     public const string START = 'start';
@@ -42,18 +44,9 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a %s file.', str($this->getSortName())->headline()->lower()),
+            $summary = \sprintf('Format a [%s] file.', $this->getSortHeadlineName()),
             [new CodeSample($summary)]
         );
-    }
-
-    /**
-     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
-     */
-    #[\Override]
-    public function getPriority(): int
-    {
-        return -99;
     }
 
     /**
@@ -62,7 +55,7 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
      * @throws \Throwable
      */
     #[\Override]
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
+    final protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
         $tokens[0] = new Token([
             \TOKEN_PARSE,
@@ -96,16 +89,6 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
         return new FixerConfigurationResolver([...$this->defaultFixerOptions(), ...$this->fixerOptions()]);
     }
 
-    protected function defaultStart(): string
-    {
-        return '';
-    }
-
-    protected function defaultFinish(): string
-    {
-        return '';
-    }
-
     /**
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
      */
@@ -123,7 +106,19 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
         ];
     }
 
+    protected function defaultStart(): string
+    {
+        return '';
+    }
+
+    protected function defaultFinish(): string
+    {
+        return '';
+    }
+
     /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     *
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
      */
     abstract protected function fixerOptions(): array;

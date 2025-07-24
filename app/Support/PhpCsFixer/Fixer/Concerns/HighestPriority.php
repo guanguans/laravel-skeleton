@@ -15,6 +15,7 @@ namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
 trait HighestPriority
 {
+    #[\Override]
     public function getPriority(): int
     {
         return \PHP_INT_MAX;

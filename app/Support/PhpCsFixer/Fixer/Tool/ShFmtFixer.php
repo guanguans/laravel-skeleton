@@ -13,27 +13,34 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
-use PhpCsFixer\Tokenizer\Tokens;
-
 /**
  * @see https://github.com/mvdan/sh
  */
 final class ShFmtFixer extends AbstractToolFixer
 {
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function command(): array
+    {
+        return [
+            ...$this->configuration[self::TOOL],
+            ...$this->configuration[self::ARGS],
+            $this->path(),
+        ];
+    }
+
     #[\Override]
     protected function defaultTool(): array
     {
         return ['shfmt'];
     }
 
-    // /**
-    //  * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-    //  */
-    // protected function args(\SplFileInfo $file, Tokens $tokens): array
-    // {
-    //     return [...$this->configuration[self::ARGS], $this->path($file, $tokens)];
-    // }
-
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
     protected function defaultArgs(): array
     {
         return ['-l', '-w'];

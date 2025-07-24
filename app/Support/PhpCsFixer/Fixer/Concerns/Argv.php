@@ -20,6 +20,6 @@ trait Argv
      */
     protected function argv(): array
     {
-        return $_SERVER['argv'] ?? [];
+        return $_SERVER['argv'] ??= [];
     }
 }
