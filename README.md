@@ -753,6 +753,7 @@ app
 │   │   │       ├── PintFixer.php
 │   │   │       ├── ShFmtFixer.php
 │   │   │       ├── SqlFluffFixer.php
+│   │   │       ├── TextLintFixer.php
 │   │   │       ├── XmllintFixer.php
 │   │   │       ├── YamlFmtFixer.php
 │   │   │       └── ZhLintFixer.php
@@ -792,7 +793,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 288 files
+60 directories, 289 files
 
 ```
 </details>
