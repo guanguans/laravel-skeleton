@@ -15,6 +15,7 @@ use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
+use App\Support\PhpCsFixer\Fixer\Tool\MarkDownLintCli2Fixer;
 use App\Support\PhpCsFixer\Fixer\Tool\PintFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\SqlFluffFixer;
 use Ergebnis\License\Holder;
@@ -87,6 +88,7 @@ return Factory::fromRuleSet(Php83::create()
                 // YamlFixer::name(),
                 PhpMyAdminSqlFixer::name(),
                 SqlFluffFixer::name(),
+                MarkDownLintCli2Fixer::name(),
                 // XmlFixer::name(),
             ],
             true

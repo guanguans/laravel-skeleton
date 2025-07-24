@@ -747,6 +747,7 @@ app
 │   │   │       ├── Concerns
 │   │   │       │   └── PostPathCommand.php
 │   │   │       ├── DotEnvLinterFixer.php
+│   │   │       ├── LintMdFixer.php
 │   │   │       ├── MarkDownLintCli2Fixer.php
 │   │   │       ├── PintFixer.php
 │   │   │       ├── ShFmtFixer.php
@@ -789,7 +790,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 285 files
+60 directories, 286 files
 
 ```
 </details>
