@@ -11,10 +11,10 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool\Concerns;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns;
 
 /**
- * @mixin \App\Support\PhpCsFixer\Fixer\Tool\AbstractToolFixer
+ * @mixin \App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer
  */
 trait PrePathCommand
 {
@@ -26,7 +26,7 @@ trait PrePathCommand
     protected function prePathCommand(): array
     {
         return [
-            ...$this->configuration[self::TOOL],
+            ...$this->configuration[self::MAIN_COMMAND],
             $this->path(),
             ...$this->configuration[self::ARGS],
         ];

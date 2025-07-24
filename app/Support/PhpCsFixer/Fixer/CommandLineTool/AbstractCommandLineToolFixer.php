@@ -15,16 +15,16 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
-use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PrePathCommand;
 use Illuminate\Support\Str;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -44,7 +44,7 @@ use function Psl\Filesystem\create_temporary_file;
  * @see https://github.com/super-linter/super-linter
  *
  * @property array{
- *     tool: array,
+ *     main_command: array,
  *     args: array,
  *     cwd: ?string,
  *     env: ?array,
@@ -52,7 +52,7 @@ use function Psl\Filesystem\create_temporary_file;
  *     timeout: ?float
  * } $configuration
  */
-abstract class AbstractToolFixer extends AbstractConfigurableFixer
+abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 {
     use AllowRisky;
     use Awarer;
@@ -61,7 +61,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     use IsDryRun;
     use PrePathCommand;
     use SupportsExtensions;
-    public const string TOOL = 'tool';
+    public const string MAIN_COMMAND = 'main_command';
     public const string ARGS = 'args';
     public const string CWD = 'cwd';
     public const string ENV = 'env';
@@ -101,11 +101,11 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     protected function defaultFixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::TOOL, 'The tool to run, e.g. `blade-formatter`.'))
+            (new FixerOptionBuilder(self::MAIN_COMMAND, 'The main command to run the tool (e.g. `dotenv-linter fix`).'))
                 ->setAllowedTypes(['array'])
-                ->setDefault($this->defaultTool())
+                ->setDefault($this->defaultMainCommand())
                 ->getOption(),
-            (new FixerOptionBuilder(self::ARGS, 'The args to pass to the tool.'))
+            (new FixerOptionBuilder(self::ARGS, 'The args to pass to the main command.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault($this->defaultArgs())
                 ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value) => collect($value)->reduce(
@@ -233,7 +233,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         return $process->isSuccessful();
     }
 
-    abstract protected function defaultTool(): array;
+    abstract protected function defaultMainCommand(): array;
 
     protected function defaultArgs(): array
     {

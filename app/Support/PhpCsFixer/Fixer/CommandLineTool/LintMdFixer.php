@@ -11,21 +11,18 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
-
-use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 /**
- * @see https://github.com/textlint/textlint
+ * @see https://github.com/lint-md
+ * @see https://github.com/lint-md/cli
  */
-final class TextLintFixer extends AbstractToolFixer
+final class LintMdFixer extends AbstractCommandLineToolFixer
 {
-    use PostPathCommand;
-
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
-        return ['textlint'];
+        return ['lint-md'];
     }
 
     /**
@@ -40,6 +37,6 @@ final class TextLintFixer extends AbstractToolFixer
     #[\Override]
     protected function extensions(): array
     {
-        return ['md', 'markdown', 'txt', 'text'];
+        return ['md', 'markdown'];
     }
 }

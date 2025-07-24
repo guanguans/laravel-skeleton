@@ -11,15 +11,15 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
 
 /**
  * @see https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home
  * @see https://gnome.pages.gitlab.gnome.org/libxml2/xmllint.html
  */
-final class XmllintFixer extends AbstractToolFixer
+final class XmllintFixer extends AbstractCommandLineToolFixer
 {
     use PostPathCommand;
 
@@ -33,7 +33,7 @@ final class XmllintFixer extends AbstractToolFixer
     }
 
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
         return ['xmllint'];
     }

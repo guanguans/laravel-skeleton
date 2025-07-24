@@ -11,19 +11,19 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
 
 /**
  * @see https://github.com/dotenv-linter/dotenv-linter
  */
-final class DotEnvLinterFixer extends AbstractToolFixer
+final class DotEnvLinterFixer extends AbstractCommandLineToolFixer
 {
     use PostPathCommand;
 
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
         return ['dotenv-linter', 'fix'];
     }

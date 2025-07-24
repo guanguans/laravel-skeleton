@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\Concerns\AlwaysCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\LowestPriority;
@@ -24,7 +24,7 @@ use function Illuminate\Support\php_binary;
  * @see https://github.com/laravel/pint
  * @see https://github.com/super-linter/super-linter
  */
-final class PintFixer extends AbstractToolFixer
+final class PintFixer extends AbstractCommandLineToolFixer
 {
     use AlwaysCandidate;
     use LowestPriority;
@@ -36,7 +36,7 @@ final class PintFixer extends AbstractToolFixer
     }
 
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
         return [php_binary(), 'vendor/bin/pint'];
     }

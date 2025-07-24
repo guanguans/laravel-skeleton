@@ -11,18 +11,17 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 /**
- * @see https://github.com/lint-md
- * @see https://github.com/lint-md/cli
+ * @see https://github.com/shufo/blade-formatter
  */
-final class LintMdFixer extends AbstractToolFixer
+final class BladeFormatterFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
-        return ['lint-md'];
+        return ['blade-formatter'];
     }
 
     /**
@@ -31,12 +30,12 @@ final class LintMdFixer extends AbstractToolFixer
     #[\Override]
     protected function defaultArgs(): array
     {
-        return ['--fix'];
+        return ['-w'];
     }
 
     #[\Override]
     protected function extensions(): array
     {
-        return ['md', 'markdown'];
+        return ['blade.php'];
     }
 }

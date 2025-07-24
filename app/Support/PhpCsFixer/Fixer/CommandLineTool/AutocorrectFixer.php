@@ -11,21 +11,17 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
-
-use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 /**
- * @see https://github.com/mvdan/sh
+ * @see https://github.com/huacnlee/autocorrect
  */
-final class ShFmtFixer extends AbstractToolFixer
+final class AutocorrectFixer extends AbstractCommandLineToolFixer
 {
-    use PostPathCommand;
-
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
-        return ['shfmt'];
+        return ['autocorrect'];
     }
 
     /**
@@ -34,12 +30,12 @@ final class ShFmtFixer extends AbstractToolFixer
     #[\Override]
     protected function defaultArgs(): array
     {
-        return ['-l', '-w'];
+        return ['--fix'];
     }
 
     #[\Override]
     protected function extensions(): array
     {
-        return ['sh', 'bash', 'ksh', 'zsh', 'fish'];
+        return ['md', 'markdown', 'txt', 'text'];
     }
 }

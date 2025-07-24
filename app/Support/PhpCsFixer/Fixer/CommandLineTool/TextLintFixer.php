@@ -11,17 +11,21 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
+
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
 
 /**
- * @see https://github.com/huacnlee/autocorrect
+ * @see https://github.com/textlint/textlint
  */
-final class AutocorrectFixer extends AbstractToolFixer
+final class TextLintFixer extends AbstractCommandLineToolFixer
 {
+    use PostPathCommand;
+
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
-        return ['autocorrect'];
+        return ['textlint'];
     }
 
     /**

@@ -11,15 +11,15 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
  * @see https://github.com/sqlfluff/sqlfluff
  */
-final class SqlFluffFixer extends AbstractToolFixer
+final class SqlFluffFixer extends AbstractCommandLineToolFixer
 {
     use PostPathCommand;
     public const string EXTENSIONS = 'extensions';
@@ -41,7 +41,7 @@ final class SqlFluffFixer extends AbstractToolFixer
     }
 
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
         return ['sqlfluff', 'format'];
     }

@@ -11,18 +11,18 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\LintMdFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkDownLintCli2Fixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqlFluffFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\TextLintFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\ZhLintFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
-use App\Support\PhpCsFixer\Fixer\Tool\AbstractToolFixer;
-use App\Support\PhpCsFixer\Fixer\Tool\AutocorrectFixer;
-use App\Support\PhpCsFixer\Fixer\Tool\LintMdFixer;
-use App\Support\PhpCsFixer\Fixer\Tool\MarkDownLintCli2Fixer;
-use App\Support\PhpCsFixer\Fixer\Tool\PintFixer;
-use App\Support\PhpCsFixer\Fixer\Tool\SqlFluffFixer;
-use App\Support\PhpCsFixer\Fixer\Tool\TextLintFixer;
-use App\Support\PhpCsFixer\Fixer\Tool\ZhLintFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -132,7 +132,7 @@ return Factory::fromRuleSet(Php83::create()
     ]))
     ->withRules(Rules::fromArray([
         SqlFluffFixer::name() => [
-            AbstractToolFixer::ARGS => [
+            AbstractCommandLineToolFixer::ARGS => [
                 '--dialect' => 'mysql',
             ],
             SqlFluffFixer::EXTENSIONS => ['sql'],

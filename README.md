@@ -722,6 +722,23 @@ app
 │   │   ├── Fixer
 │   │   │   ├── AbstractConfigurableFixer.php
 │   │   │   ├── AbstractFixer.php
+│   │   │   ├── CommandLineTool
+│   │   │   │   ├── AbstractCommandLineToolFixer.php
+│   │   │   │   ├── AutocorrectFixer.php
+│   │   │   │   ├── BladeFormatterFixer.php
+│   │   │   │   ├── Concerns
+│   │   │   │   │   ├── PostPathCommand.php
+│   │   │   │   │   └── PrePathCommand.php
+│   │   │   │   ├── DotEnvLinterFixer.php
+│   │   │   │   ├── LintMdFixer.php
+│   │   │   │   ├── MarkDownLintCli2Fixer.php
+│   │   │   │   ├── PintFixer.php
+│   │   │   │   ├── ShFmtFixer.php
+│   │   │   │   ├── SqlFluffFixer.php
+│   │   │   │   ├── TextLintFixer.php
+│   │   │   │   ├── XmllintFixer.php
+│   │   │   │   ├── YamlFmtFixer.php
+│   │   │   │   └── ZhLintFixer.php
 │   │   │   ├── Concerns
 │   │   │   │   ├── AllowRisky.php
 │   │   │   │   ├── AlwaysCandidate.php
@@ -734,31 +751,14 @@ app
 │   │   │   │   ├── SupportsExtensions.php
 │   │   │   │   ├── SupportsExtensionsAndPathArg.php
 │   │   │   │   └── SupportsPathArg.php
-│   │   │   ├── InlineHtml
-│   │   │   │   ├── AbstractInlineHtmlFixer.php
-│   │   │   │   ├── DoctrineSqlFixer.php
-│   │   │   │   ├── JsonFixer.php
-│   │   │   │   ├── NeonFixer.php
-│   │   │   │   ├── PhpMyAdminSqlFixer.php
-│   │   │   │   ├── XmlFixer.php
-│   │   │   │   └── YamlFixer.php
-│   │   │   └── Tool
-│   │   │       ├── AbstractToolFixer.php
-│   │   │       ├── AutocorrectFixer.php
-│   │   │       ├── BladeFormatterFixer.php
-│   │   │       ├── Concerns
-│   │   │       │   ├── PostPathCommand.php
-│   │   │       │   └── PrePathCommand.php
-│   │   │       ├── DotEnvLinterFixer.php
-│   │   │       ├── LintMdFixer.php
-│   │   │       ├── MarkDownLintCli2Fixer.php
-│   │   │       ├── PintFixer.php
-│   │   │       ├── ShFmtFixer.php
-│   │   │       ├── SqlFluffFixer.php
-│   │   │       ├── TextLintFixer.php
-│   │   │       ├── XmllintFixer.php
-│   │   │       ├── YamlFmtFixer.php
-│   │   │       └── ZhLintFixer.php
+│   │   │   └── InlineHtml
+│   │   │       ├── AbstractInlineHtmlFixer.php
+│   │   │       ├── DoctrineSqlFixer.php
+│   │   │       ├── JsonFixer.php
+│   │   │       ├── NeonFixer.php
+│   │   │       ├── PhpMyAdminSqlFixer.php
+│   │   │       ├── XmlFixer.php
+│   │   │       └── YamlFixer.php
 │   │   └── Fixers.php
 │   ├── PhpUserFilters
 │   │   └── CallbackFilter.php

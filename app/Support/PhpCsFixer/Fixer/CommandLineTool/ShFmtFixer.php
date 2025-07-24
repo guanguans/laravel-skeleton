@@ -11,17 +11,21 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
+
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
 
 /**
- * @see https://github.com/shufo/blade-formatter
+ * @see https://github.com/mvdan/sh
  */
-final class BladeFormatterFixer extends AbstractToolFixer
+final class ShFmtFixer extends AbstractCommandLineToolFixer
 {
+    use PostPathCommand;
+
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
-        return ['blade-formatter'];
+        return ['shfmt'];
     }
 
     /**
@@ -30,12 +34,12 @@ final class BladeFormatterFixer extends AbstractToolFixer
     #[\Override]
     protected function defaultArgs(): array
     {
-        return ['-w'];
+        return ['-l', '-w'];
     }
 
     #[\Override]
     protected function extensions(): array
     {
-        return ['blade.php'];
+        return ['sh', 'bash', 'ksh', 'zsh', 'fish'];
     }
 }

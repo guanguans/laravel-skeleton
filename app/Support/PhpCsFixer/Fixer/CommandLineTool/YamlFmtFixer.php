@@ -11,15 +11,15 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Support\PhpCsFixer\Fixer\Tool;
+namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 /**
  * @see https://github.com/google/yamlfmt
  */
-final class YamlFmtFixer extends AbstractToolFixer
+final class YamlFmtFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
-    protected function defaultTool(): array
+    protected function defaultMainCommand(): array
     {
         return ['yamlfmt'];
     }
