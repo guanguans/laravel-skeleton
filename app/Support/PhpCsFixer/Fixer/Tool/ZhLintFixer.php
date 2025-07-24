@@ -44,7 +44,7 @@ final class ZhLintFixer extends AbstractToolFixer
         return $this->relativePath(parent::path());
     }
 
-    protected function relativePath(string $path): string
+    private function relativePath(string $path): string
     {
         $workingDir = $this->configuration[self::CWD] ?? getcwd();
         $pathParts = explode(\DIRECTORY_SEPARATOR, realpath($path) ?: $path);

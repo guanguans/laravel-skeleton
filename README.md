@@ -743,6 +743,7 @@ app
 │   │   │   │   └── YamlFixer.php
 │   │   │   └── Tool
 │   │   │       ├── AbstractToolFixer.php
+│   │   │       ├── AutocorrectFixer.php
 │   │   │       ├── BladeFormatterFixer.php
 │   │   │       ├── Concerns
 │   │   │       │   └── PostPathCommand.php
@@ -753,7 +754,8 @@ app
 │   │   │       ├── ShFmtFixer.php
 │   │   │       ├── SqlFluffFixer.php
 │   │   │       ├── XmllintFixer.php
-│   │   │       └── YamlFmtFixer.php
+│   │   │       ├── YamlFmtFixer.php
+│   │   │       └── ZhLintFixer.php
 │   │   └── Fixers.php
 │   ├── PhpUserFilters
 │   │   └── CallbackFilter.php
@@ -790,7 +792,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 286 files
+60 directories, 288 files
 
 ```
 </details>

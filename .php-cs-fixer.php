@@ -19,6 +19,7 @@ use App\Support\PhpCsFixer\Fixer\Tool\LintMdFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\MarkDownLintCli2Fixer;
 use App\Support\PhpCsFixer\Fixer\Tool\PintFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\SqlFluffFixer;
+use App\Support\PhpCsFixer\Fixer\Tool\ZhLintFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -91,6 +92,7 @@ return Factory::fromRuleSet(Php83::create()
                 SqlFluffFixer::name(),
                 MarkDownLintCli2Fixer::name(),
                 LintMdFixer::name(),
+                ZhLintFixer::name(),
                 // XmlFixer::name(),
             ],
             true
