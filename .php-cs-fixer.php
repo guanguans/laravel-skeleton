@@ -15,6 +15,7 @@ use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\PintFixer;
+use App\Support\PhpCsFixer\Fixer\Tool\SqlFluffFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -81,7 +82,8 @@ return Factory::fromRuleSet(Php83::create()
             $fixer->getName(),
             [
                 // DoctrineSqlFixer::name(),
-                // PhpMyAdminSqlFixer::name(),
+                PhpMyAdminSqlFixer::name(),
+                SqlFluffFixer::name(),
                 // PintFixer::name(),
                 // YamlFixer::name(),
             ],

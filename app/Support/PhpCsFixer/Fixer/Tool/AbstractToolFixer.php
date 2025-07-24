@@ -129,14 +129,22 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     final protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
         $this->setFileAndTokens($file, $tokens);
-
         $process = $this->createProcess();
-        // dd($process->getCommandLine());
         $process->run();
 
         if ($this->isProcessSuccessful($process)) {
             $tokens->setCode(file_get_contents($this->path()));
         }
+
+        // dump(
+        //     $process->getCommandLine(),
+        //     $process->getExitCode(),
+        //     $process->getExitCodeText(),
+        //     $process->getOutput(),
+        //     $process->getErrorOutput(),
+        //     $process->getWorkingDirectory(),
+        //     file_get_contents($this->path()),
+        // );
     }
 
     protected function createProcess(): Process
@@ -176,9 +184,9 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         return $path;
     }
 
-    protected function createTemporaryFile(): string
+    protected function createTemporaryFile(?string $directory = null, ?string $prefix = null): string
     {
-        return self::$temporaryFile ??= create_temporary_file();
+        return self::$temporaryFile ??= create_temporary_file($directory, $prefix ?? $this->getSortName());
     }
 
     protected function isProcessSuccessful(Process $process): bool
