@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -16,7 +14,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 use App\Support\PhpCsFixer\Fixer\Concerns\AlwaysCandidate;
-use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
+use App\Support\PhpCsFixer\Fixer\Concerns\LowestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensionsAndPathArg;
 use Symfony\Component\Process\Process;
 use function Illuminate\Support\php_binary;
@@ -28,8 +26,8 @@ use function Illuminate\Support\php_binary;
  */
 final class PintFixer extends AbstractToolFixer
 {
-    // use HighestPriority;
     use AlwaysCandidate;
+    use LowestPriority;
     use SupportsExtensionsAndPathArg;
 
     protected function isProcessSuccessful(Process $process): bool

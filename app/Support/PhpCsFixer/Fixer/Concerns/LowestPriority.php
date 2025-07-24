@@ -15,6 +15,10 @@ namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
 trait LowestPriority
 {
+    /**
+     * @see \PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer::getPriority()
+     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
+     */
     #[\Override]
     public function getPriority(): int
     {

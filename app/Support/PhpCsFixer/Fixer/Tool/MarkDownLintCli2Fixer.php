@@ -21,7 +21,7 @@ final class MarkDownLintCli2Fixer extends AbstractToolFixer
     #[\Override]
     protected function defaultTool(): array
     {
-        return ['markdownlint-cli'];
+        return ['markdownlint-cli2'];
     }
 
     /**

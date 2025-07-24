@@ -1,6 +1,7 @@
 <?php
 
 /** @noinspection PhpConstantNamingConventionInspection */
+/** @noinspection PhpUnusedAliasInspection */
 /** @noinspection SensitiveParameterInspection */
 
 declare(strict_types=1);
@@ -19,18 +20,22 @@ namespace App\Support\PhpCsFixer\Fixer\Tool;
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
+use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
-use App\Support\PhpCsFixer\Fixer\Concerns\LowestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
+use Illuminate\Support\Str;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
+use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use Spatie\TemporaryDirectory\TemporaryDirectory;
 use Symfony\Component\Process\Process;
+use function Psl\Filesystem\create_file;
 use function Psl\Filesystem\create_temporary_file;
 
 /**
@@ -49,9 +54,9 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
 {
     use AllowRisky;
     use Awarer;
+    use HighestPriority;
     use InlineHtmlCandidate;
     use IsDryRun;
-    use LowestPriority;
     use SupportsExtensions;
     public const string TOOL = 'tool';
     public const string ARGS = 'args';
@@ -133,6 +138,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         $process->run();
 
         if ($this->isProcessSuccessful($process)) {
+            // $tokens[0] = new Token([\TOKEN_PARSE, file_get_contents($this->path())]);
             $tokens->setCode(file_get_contents($this->path()));
         }
 
@@ -143,7 +149,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         //     $process->getOutput(),
         //     $process->getErrorOutput(),
         //     $process->getWorkingDirectory(),
-        //     // $this->path(),
+        //     $this->path(),
         //     // file_get_contents($this->path()),
         // );
     }
@@ -185,9 +191,32 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         return $path;
     }
 
-    protected function createTemporaryFile(?string $directory = null, ?string $prefix = null): string
+    /**
+     * @noinspection PhpUnhandledExceptionInspection
+     */
+    protected function createTemporaryFile(): string
     {
-        return self::$temporaryFile ??= create_temporary_file($directory, $prefix ?? $this->getSortName());
+        if (self::$temporaryFile) {
+            return self::$temporaryFile;
+        }
+
+        $temporaryFile = (new TemporaryDirectory)
+            ->deleteWhenDestroyed()
+            ->force()
+            ->name($this->getSortName())
+            ->create()
+            ->path(
+                str(Str::random(8))
+                    ->finish('.')
+                    ->finish(collect($this->extensions())->random())
+                    ->toString()
+            );
+
+        // touch($temporaryFile);
+        create_file($temporaryFile);
+
+        // return self::$temporaryFile ??= create_temporary_file(null, $this->getSortName());
+        return self::$temporaryFile ??= $temporaryFile;
     }
 
     protected function isProcessSuccessful(Process $process): bool

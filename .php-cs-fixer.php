@@ -20,6 +20,7 @@ use App\Support\PhpCsFixer\Fixer\Tool\LintMdFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\MarkDownLintCli2Fixer;
 use App\Support\PhpCsFixer\Fixer\Tool\PintFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\SqlFluffFixer;
+use App\Support\PhpCsFixer\Fixer\Tool\TextLintFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\ZhLintFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
@@ -93,8 +94,9 @@ return Factory::fromRuleSet(Php83::create()
                 PhpMyAdminSqlFixer::name(),
                 SqlFluffFixer::name(),
                 AutocorrectFixer::name(),
-                LintMdFixer::name(),
+                // LintMdFixer::name(),
                 MarkDownLintCli2Fixer::name(),
+                TextLintFixer::name(),
                 ZhLintFixer::name(),
             ],
             true
