@@ -25,16 +25,7 @@ final class DotEnvLinterFixer extends AbstractToolFixer
     #[\Override]
     protected function defaultTool(): array
     {
-        return ['dotenv-linter'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function defaultArgs(): array
-    {
-        return ['fix', '--no-color'];
+        return ['dotenv-linter', 'fix'];
     }
 
     #[\Override]

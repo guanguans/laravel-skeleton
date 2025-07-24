@@ -15,6 +15,7 @@ use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
+use App\Support\PhpCsFixer\Fixer\Tool\AbstractToolFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\AutocorrectFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\LintMdFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\MarkDownLintCli2Fixer;
@@ -87,7 +88,7 @@ return Factory::fromRuleSet(Php83::create()
         array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
             $fixer->getName(),
             [
-                // DoctrineSqlFixer::name(),
+                DoctrineSqlFixer::name(),
                 // PintFixer::name(),
                 // YamlFixer::name(),
                 // XmlFixer::name(),
@@ -130,6 +131,12 @@ return Factory::fromRuleSet(Php83::create()
         // '@PhpCsFixer:risky' => true,
     ]))
     ->withRules(Rules::fromArray([
+        SqlFluffFixer::name() => [
+            AbstractToolFixer::ARGS => [
+                '--dialect' => 'mysql',
+            ],
+            SqlFluffFixer::EXTENSIONS => ['sql'],
+        ],
         'PhpCsFixerCustomFixers/phpdoc_tag_no_named_arguments' => false,
         'align_multiline_comment' => [
             'comment_type' => 'phpdocs_only',

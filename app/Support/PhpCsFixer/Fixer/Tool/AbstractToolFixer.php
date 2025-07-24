@@ -35,6 +35,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Spatie\TemporaryDirectory\TemporaryDirectory;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Process;
 use function Psl\Filesystem\create_file;
 use function Psl\Filesystem\create_temporary_file;
@@ -91,13 +92,13 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return new FixerConfigurationResolver($this->fixerOptions());
+        return new FixerConfigurationResolver([...$this->defaultFixerOptions(), ...$this->fixerOptions()]);
     }
 
     /**
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
      */
-    protected function fixerOptions(): array
+    protected function defaultFixerOptions(): array
     {
         return [
             (new FixerOptionBuilder(self::TOOL, 'The tool to run, e.g. `blade-formatter`.'))
@@ -107,6 +108,15 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
             (new FixerOptionBuilder(self::ARGS, 'The args to pass to the tool.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault($this->defaultArgs())
+                ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value) => collect($value)->reduce(
+                    static function (array $carry, mixed $val, int|string $key): array {
+                        \is_string($key) and str_starts_with($key, '-') and $carry[] = $key;
+                        $carry[] = $val;
+
+                        return $carry;
+                    },
+                    []
+                ))
                 ->getOption(),
             (new FixerOptionBuilder(self::CWD, 'The working directory or null to use the working dir of the current PHP process.'))
                 ->setAllowedTypes(['string', 'null'])
@@ -125,6 +135,14 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
                 ->setDefault($this->defaultTimeout())
                 ->getOption(),
         ];
+    }
+
+    /**
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    protected function fixerOptions(): array
+    {
+        return [];
     }
 
     /**

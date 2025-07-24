@@ -46,10 +46,8 @@ final class XmllintFixer extends AbstractToolFixer
     {
         return [
             '--format',
-            '--encode',
-            'utf-8',
-            '--pretty',
-            1,
+            '--encode' => 'utf-8',
+            '--pretty' => 1,
             '--output',
             // $this->path()
         ];

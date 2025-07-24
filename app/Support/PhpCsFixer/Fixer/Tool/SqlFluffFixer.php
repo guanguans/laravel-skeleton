@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
  * @see https://github.com/sqlfluff/sqlfluff
@@ -21,11 +22,28 @@ use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
 final class SqlFluffFixer extends AbstractToolFixer
 {
     use PostPathCommand;
+    public const string EXTENSIONS = 'extensions';
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     *
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    #[\Override]
+    protected function fixerOptions(): array
+    {
+        return [
+            (new FixerOptionBuilder(self::EXTENSIONS, 'The file extensions to format.'))
+                ->setAllowedTypes(['array'])
+                ->setDefault(['sql'])
+                ->getOption(),
+        ];
+    }
 
     #[\Override]
     protected function defaultTool(): array
     {
-        return ['sqlfluff'];
+        return ['sqlfluff', 'format'];
     }
 
     /**
@@ -34,12 +52,12 @@ final class SqlFluffFixer extends AbstractToolFixer
     #[\Override]
     protected function defaultArgs(): array
     {
-        return ['format', '--dialect', 'mysql'];
+        return ['--dialect' => 'mysql'];
     }
 
     #[\Override]
     protected function extensions(): array
     {
-        return ['sql'];
+        return $this->configuration[self::EXTENSIONS];
     }
 }
