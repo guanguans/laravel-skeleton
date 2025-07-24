@@ -13,19 +13,18 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
-trait SupportsPathArg
-{
-    #[\Override]
-    public function supports(\SplFileInfo $file): bool
-    {
-        return str($file)->contains($this->argv());
-    }
+use PhpCsFixer\Tokenizer\Tokens;
 
+trait AlwaysCandidate
+{
     /**
-     * @noinspection GlobalVariableUsageInspection
+     * @noinspection SensitiveParameterInspection
+     *
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
-    protected function argv(): array
+    #[\Override]
+    public function isCandidate(Tokens $tokens): bool
     {
-        return $_SERVER['argv'] ?? [];
+        return true;
     }
 }

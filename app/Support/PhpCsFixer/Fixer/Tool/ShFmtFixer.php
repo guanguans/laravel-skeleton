@@ -21,26 +21,26 @@ use PhpCsFixer\Tokenizer\Tokens;
 final class ShFmtFixer extends AbstractToolFixer
 {
     #[\Override]
-    protected function defaultProgram(): array
+    protected function defaultTool(): array
     {
         return ['shfmt'];
     }
 
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    protected function arguments(\SplFileInfo $file, Tokens $tokens): array
-    {
-        return [...$this->configuration[self::ARGUMENTS], $this->path($file, $tokens)];
-    }
+    // /**
+    //  * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+    //  */
+    // protected function args(\SplFileInfo $file, Tokens $tokens): array
+    // {
+    //     return [...$this->configuration[self::ARGS], $this->path($file, $tokens)];
+    // }
 
-    protected function defaultArguments(): array
+    protected function defaultArgs(): array
     {
         return ['-l', '-w'];
     }
 
     #[\Override]
-    protected function supportsExtensions(): array
+    protected function extensions(): array
     {
         return ['sh', 'bash', 'ksh', 'zsh', 'fish'];
     }

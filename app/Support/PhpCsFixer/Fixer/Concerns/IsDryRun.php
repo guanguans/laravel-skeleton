@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
-trait AllowRisky
+trait IsDryRun
 {
-    #[\Override]
-    public function isRisky(): bool
+    use Argv;
+
+    protected function isDryRun(): bool
     {
-        return true;
+        return \in_array('--dry-run', $this->argv(), true);
     }
 }

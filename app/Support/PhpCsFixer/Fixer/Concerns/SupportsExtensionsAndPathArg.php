@@ -13,18 +13,16 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
-use PhpCsFixer\Tokenizer\Tokens;
-
-trait InlineHtmlCandidate
+trait SupportsExtensionsAndPathArg
 {
-    /**
-     * @noinspection SensitiveParameterInspection
-     *
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
+    use Argv;
+    use SupportsExtensions {
+        SupportsExtensions::supports as supportsExtensions;
+    }
+
     #[\Override]
-    public function isCandidate(Tokens $tokens): bool
+    public function supports(\SplFileInfo $file): bool
     {
-        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
+        return $this->supportsExtensions($file) && str($file)->contains($this->argv());
     }
 }

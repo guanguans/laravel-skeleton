@@ -19,13 +19,13 @@ namespace App\Support\PhpCsFixer\Fixer\Tool;
 final class DotEnvLinterFixer extends AbstractToolFixer
 {
     #[\Override]
-    protected function defaultProgram(): array
+    protected function defaultTool(): array
     {
         return ['dotenv-linter', 'fix'];
     }
 
     #[\Override]
-    protected function supportsExtensions(): array
+    protected function extensions(): array
     {
         return ['env', 'env.example'];
     }

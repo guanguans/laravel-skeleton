@@ -47,9 +47,9 @@ final class JsonFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): string
+    protected function extensions(): array
     {
-        return 'json';
+        return ['json'];
     }
 
     /**

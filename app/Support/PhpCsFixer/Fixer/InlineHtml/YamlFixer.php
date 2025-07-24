@@ -57,7 +57,7 @@ final class YamlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): array
+    protected function extensions(): array
     {
         return ['yaml', 'yml'];
     }

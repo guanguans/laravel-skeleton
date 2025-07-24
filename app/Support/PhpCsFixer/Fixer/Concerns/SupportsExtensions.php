@@ -17,12 +17,12 @@ trait SupportsExtensions
 {
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is($this->supportsExtensions(), true)
-            || str($file->getPathname())->lower()->endsWith($this->supportsExtensions());
+        return str($file->getExtension())->is($this->extensions(), true)
+            || str($file->getPathname())->lower()->endsWith($this->extensions());
     }
 
     /**
      * @return list<string>
      */
-    abstract protected function supportsExtensions(): array;
+    abstract protected function extensions(): array;
 }

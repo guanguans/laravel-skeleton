@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer;
 
-use PhpCsFixer\Tokenizer\Tokens;
+use App\Support\PhpCsFixer\Fixer\Concerns\AlwaysCandidate;
 
 /**
  * @see \App\Support\PhpCsFixer\Fixer
@@ -30,6 +30,8 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 abstract class AbstractFixer extends \PhpCsFixer\AbstractFixer
 {
+    use AlwaysCandidate;
+
     public static function name(): string
     {
         return (new static)->getName();
@@ -49,14 +51,5 @@ abstract class AbstractFixer extends \PhpCsFixer\AbstractFixer
     public function getSortName(): string
     {
         return parent::getName();
-    }
-
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    #[\Override]
-    public function isCandidate(Tokens $tokens): bool
-    {
-        return true;
     }
 }

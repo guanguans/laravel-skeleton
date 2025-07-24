@@ -18,6 +18,13 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
+use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
+use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
+use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
+use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
+use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
+use App\Support\PhpCsFixer\Fixer\Concerns\LowestPriority;
+use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
@@ -33,8 +40,16 @@ use function Psl\Filesystem\create_temporary_file;
  */
 abstract class AbstractToolFixer extends AbstractConfigurableFixer
 {
-    public const string PROGRAM = 'program';
-    public const string ARGUMENTS = 'arguments';
+    use AllowRisky;
+    use Awarer;
+    use InlineHtmlCandidate;
+    use IsDryRun;
+
+    // use HighestPriority;
+    use LowestPriority;
+    use SupportsExtensions;
+    public const string TOOL = 'tool';
+    public const string ARGS = 'args';
     public const string CWD = 'cwd';
     public const string ENV = 'env';
     public const string INPUT = 'input';
@@ -62,13 +77,6 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     }
 
     #[\Override]
-    public function supports(\SplFileInfo $file): bool
-    {
-        return str($file->getExtension())->is($this->supportsExtensions(), true)
-            || str($file->getPathname())->lower()->endsWith($this->supportsExtensions());
-    }
-
-    #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver($this->fixerOptions());
@@ -80,13 +88,13 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     protected function fixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::PROGRAM, '.'))
-                ->setAllowedTypes(['string', 'array'])
-                ->setDefault($this->defaultProgram())
-                ->getOption(),
-            (new FixerOptionBuilder(self::ARGUMENTS, '.'))
+            (new FixerOptionBuilder(self::TOOL, 'The tool to run, e.g. `blade-formatter`.'))
                 ->setAllowedTypes(['array'])
-                ->setDefault($this->defaultArguments())
+                ->setDefault($this->defaultTool())
+                ->getOption(),
+            (new FixerOptionBuilder(self::ARGS, 'The args to pass to the tool.'))
+                ->setAllowedTypes(['array'])
+                ->setDefault($this->defaultArgs())
                 ->getOption(),
             (new FixerOptionBuilder(self::CWD, 'The working directory or null to use the working dir of the current PHP process.'))
                 ->setAllowedTypes(['string', 'null'])
@@ -113,11 +121,13 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     #[\Override]
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
+        $this->setFileAndTokens($file, $tokens);
+
         $process = $this->createProcess($file, $tokens);
         // dd($process->getCommandLine());
         $process->run();
 
-        if ($this->isProcessSuccessful($process, $file, $tokens)) {
+        if ($this->isProcessSuccessful($process)) {
             $tokens->setCode(file_get_contents($this->path($file, $tokens)));
         }
     }
@@ -141,27 +151,11 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
      */
     protected function command(\SplFileInfo $file, Tokens $tokens): array
     {
-        return [...(array) $this->program(), ...$this->arguments($file, $tokens)];
-    }
-
-    protected function program(): array|string
-    {
-        return $this->defaultProgram();
-    }
-
-    /**
-     * @return iterable<string>|string
-     */
-    abstract protected function supportsExtensions(): array|string;
-
-    abstract protected function defaultProgram(): array|string;
-
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    protected function arguments(\SplFileInfo $file, Tokens $tokens): array
-    {
-        return [$this->path($file, $tokens), ...$this->configuration[self::ARGUMENTS]];
+        return [
+            ...(array) $this->configuration[self::TOOL],
+            $this->path($file, $tokens),
+            ...$this->configuration[self::ARGS],
+        ];
     }
 
     /**
@@ -177,40 +171,26 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
 
         $path = (string) $file;
 
-        if (self::isDryRun()) {
-            file_put_contents($path = self::createTemporaryFile(), $tokens->generateCode());
+        if ($this->isDryRun()) {
+            file_put_contents($path = $this->createTemporaryFile(), $tokens->generateCode());
         }
 
         return $path;
     }
 
-    protected static function isDryRun(): bool
-    {
-        return \in_array('--dry-run', self::argv(), true);
-    }
-
-    /**
-     * @noinspection GlobalVariableUsageInspection
-     */
-    protected static function argv(): array
-    {
-        return $_SERVER['argv'] ?? [];
-    }
-
-    protected static function createTemporaryFile(): string
+    protected function createTemporaryFile(): string
     {
         return self::$temporaryFile ??= create_temporary_file();
     }
 
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    protected function isProcessSuccessful(Process $process, \SplFileInfo $file, Tokens $tokens): bool
+    protected function isProcessSuccessful(Process $process): bool
     {
         return $process->isSuccessful();
     }
 
-    protected function defaultArguments(): array
+    abstract protected function defaultTool(): array;
+
+    protected function defaultArgs(): array
     {
         return [];
     }
@@ -230,7 +210,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         return null;
     }
 
-    protected function defaultTimeout(): int
+    protected function defaultTimeout(): ?float
     {
         return 60;
     }

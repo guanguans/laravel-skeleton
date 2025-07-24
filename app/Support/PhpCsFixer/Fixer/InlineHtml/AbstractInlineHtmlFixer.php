@@ -17,6 +17,9 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
+use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
+use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
+use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use Illuminate\Support\Stringable;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -29,6 +32,9 @@ use PhpCsFixer\Tokenizer\Tokens;
 
 abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
 {
+    use AllowRisky;
+    use InlineHtmlCandidate;
+    use SupportsExtensions;
     public const string START = 'start';
     public const string FINISH = 'finish';
 
@@ -48,28 +54,6 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     public function getPriority(): int
     {
         return -99;
-    }
-
-    #[\Override]
-    public function isRisky(): bool
-    {
-        return true;
-    }
-
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    #[\Override]
-    public function isCandidate(Tokens $tokens): bool
-    {
-        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
-    }
-
-    #[\Override]
-    public function supports(\SplFileInfo $file): bool
-    {
-        return str($file->getExtension())->is($this->supportedExtensions(), true)
-            || str($file->getPathname())->lower()->endsWith($this->supportedExtensions());
     }
 
     /**
@@ -143,11 +127,6 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
      */
     abstract protected function fixerOptions(): array;
-
-    /**
-     * @return iterable<string>|string
-     */
-    abstract protected function supportedExtensions(): iterable|string;
 
     abstract protected function format(string $content): string;
 }

@@ -13,18 +13,13 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
-use PhpCsFixer\Tokenizer\Tokens;
-
-trait InlineHtmlCandidate
+trait Argv
 {
     /**
-     * @noinspection SensitiveParameterInspection
-     *
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     * @noinspection GlobalVariableUsageInspection
      */
-    #[\Override]
-    public function isCandidate(Tokens $tokens): bool
+    protected function argv(): array
     {
-        return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
+        return $_SERVER['argv'] ?? [];
     }
 }

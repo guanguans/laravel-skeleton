@@ -49,9 +49,9 @@ final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): string
+    protected function extensions(): array
     {
-        return 'sql';
+        return ['sql'];
     }
 
     #[\Override]

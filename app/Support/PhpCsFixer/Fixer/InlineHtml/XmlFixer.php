@@ -48,7 +48,7 @@ final class XmlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): array
+    protected function extensions(): array
     {
         return ['xml', 'xml.dist'];
     }

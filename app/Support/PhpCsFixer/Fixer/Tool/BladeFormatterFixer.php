@@ -19,18 +19,18 @@ namespace App\Support\PhpCsFixer\Fixer\Tool;
 final class BladeFormatterFixer extends AbstractToolFixer
 {
     #[\Override]
-    protected function defaultProgram(): array
+    protected function defaultTool(): array
     {
         return ['blade-formatter'];
     }
 
-    protected function defaultArguments(): array
+    protected function defaultArgs(): array
     {
         return ['-w'];
     }
 
     #[\Override]
-    protected function supportsExtensions(): array
+    protected function extensions(): array
     {
         return ['blade.php'];
     }

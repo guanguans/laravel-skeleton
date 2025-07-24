@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
-use PhpCsFixer\Tokenizer\Tokens;
+use App\Support\PhpCsFixer\Fixer\Concerns\AlwaysCandidate;
+use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensionsAndPathArg;
 use Symfony\Component\Process\Process;
 use function Illuminate\Support\php_binary;
 
@@ -24,41 +25,21 @@ use function Illuminate\Support\php_binary;
  */
 final class PintFixer extends AbstractToolFixer
 {
-    #[\Override]
-    public function getPriority(): int
-    {
-        // Ensure pint process the code after php-cs-fixer.
-        return \PHP_INT_MAX;
-    }
+    use AlwaysCandidate;
+    use SupportsExtensionsAndPathArg;
 
-    #[\Override]
-    public function isRisky(): bool
-    {
-        return true;
-    }
-
-    #[\Override]
-    public function supports(\SplFileInfo $file): bool
-    {
-        // Only support file that is php-cs-fixer's argument path.
-        return parent::supports($file) && str($file)->contains(self::argv());
-    }
-
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
-     */
-    protected function isProcessSuccessful(Process $process, \SplFileInfo $file, Tokens $tokens): bool
+    protected function isProcessSuccessful(Process $process): bool
     {
         return !$process->isSuccessful();
     }
 
     #[\Override]
-    protected function defaultProgram(): array
+    protected function defaultTool(): array
     {
         return [php_binary(), 'vendor/bin/pint'];
     }
 
-    protected function defaultArguments(): array
+    protected function defaultArgs(): array
     {
         return [
             // '--ansi',
@@ -80,7 +61,7 @@ final class PintFixer extends AbstractToolFixer
     }
 
     #[\Override]
-    protected function supportsExtensions(): array
+    protected function extensions(): array
     {
         return ['php'];
     }

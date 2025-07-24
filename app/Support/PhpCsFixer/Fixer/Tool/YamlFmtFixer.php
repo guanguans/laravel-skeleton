@@ -19,13 +19,13 @@ namespace App\Support\PhpCsFixer\Fixer\Tool;
 final class YamlFmtFixer extends AbstractToolFixer
 {
     #[\Override]
-    protected function defaultProgram(): array
+    protected function defaultTool(): array
     {
         return ['yamlfmt'];
     }
 
     #[\Override]
-    protected function supportsExtensions(): array
+    protected function extensions(): array
     {
         return ['yaml', 'yml'];
     }

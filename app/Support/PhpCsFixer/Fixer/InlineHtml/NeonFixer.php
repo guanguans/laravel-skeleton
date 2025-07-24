@@ -40,7 +40,7 @@ final class NeonFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function supportedExtensions(): array
+    protected function extensions(): array
     {
         return ['neon', 'neon.dist'];
     }
