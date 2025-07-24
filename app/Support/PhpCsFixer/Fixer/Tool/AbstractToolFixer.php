@@ -24,6 +24,7 @@ use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
+use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PrePathCommand;
 use Illuminate\Support\Str;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -57,6 +58,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     use HighestPriority;
     use InlineHtmlCandidate;
     use IsDryRun;
+    use PrePathCommand;
     use SupportsExtensions;
     public const string TOOL = 'tool';
     public const string ARGS = 'args';
@@ -93,8 +95,6 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
     }
 
     /**
-     * @noinspection PhpMemberCanBePulledUpInspection
-     *
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
      */
     protected function fixerOptions(): array
@@ -131,7 +131,7 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
     #[\Override]
-    final protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
         $this->setFileAndTokens($file, $tokens);
         $process = $this->createProcess();
@@ -163,15 +163,6 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
             input: $this->configuration[self::INPUT],
             timeout: $this->configuration[self::TIMEOUT],
         );
-    }
-
-    protected function command(): array
-    {
-        return [
-            ...$this->configuration[self::TOOL],
-            $this->path(),
-            ...$this->configuration[self::ARGS],
-        ];
     }
 
     protected function path(): string

@@ -25,13 +25,13 @@ trait Awarer
      *
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
-    public function setFileAndTokens(\SplFileInfo $file, Tokens $tokens): void
+    protected function setFileAndTokens(\SplFileInfo $file, Tokens $tokens): void
     {
         $this->setFile($file);
         $this->setTokens($tokens);
     }
 
-    public function setFile(\SplFileInfo $file): void
+    protected function setFile(\SplFileInfo $file): void
     {
         $this->file = $file;
     }
@@ -41,7 +41,7 @@ trait Awarer
      *
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
-    public function setTokens(Tokens $tokens): void
+    protected function setTokens(Tokens $tokens): void
     {
         $this->tokens = $tokens;
     }

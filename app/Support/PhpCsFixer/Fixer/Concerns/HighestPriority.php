@@ -18,6 +18,15 @@ trait HighestPriority
     #[\Override]
     public function getPriority(): int
     {
+        return $this->getHighestPriority();
+    }
+
+    /**
+     * @see \PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer::getPriority()
+     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
+     */
+    protected function getHighestPriority(): int
+    {
         return \PHP_INT_MAX;
     }
 }

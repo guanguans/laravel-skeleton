@@ -13,21 +13,17 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
-trait SupportsExtensions
+trait SupportsPathArg
 {
+    use Argv;
+
     public function supports(\SplFileInfo $file): bool
     {
-        return $this->supportsExtensions($file);
+        return $this->supportsPathArg($file);
     }
 
-    protected function supportsExtensions(\SplFileInfo $file): bool
+    protected function supportsPathArg(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is($this->extensions(), true)
-            || str($file->getPathname())->lower()->endsWith($this->extensions());
+        return str($file)->contains($this->argv());
     }
-
-    /**
-     * @return list<string>
-     */
-    abstract protected function extensions(): array;
 }

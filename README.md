@@ -732,7 +732,8 @@ app
 │   │   │   │   ├── IsDryRun.php
 │   │   │   │   ├── LowestPriority.php
 │   │   │   │   ├── SupportsExtensions.php
-│   │   │   │   └── SupportsExtensionsAndPathArg.php
+│   │   │   │   ├── SupportsExtensionsAndPathArg.php
+│   │   │   │   └── SupportsPathArg.php
 │   │   │   ├── InlineHtml
 │   │   │   │   ├── AbstractInlineHtmlFixer.php
 │   │   │   │   ├── DoctrineSqlFixer.php
@@ -746,7 +747,8 @@ app
 │   │   │       ├── AutocorrectFixer.php
 │   │   │       ├── BladeFormatterFixer.php
 │   │   │       ├── Concerns
-│   │   │       │   └── PostPathCommand.php
+│   │   │       │   ├── PostPathCommand.php
+│   │   │       │   └── PrePathCommand.php
 │   │   │       ├── DotEnvLinterFixer.php
 │   │   │       ├── LintMdFixer.php
 │   │   │       ├── MarkDownLintCli2Fixer.php
@@ -793,7 +795,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 289 files
+60 directories, 291 files
 
 ```
 </details>

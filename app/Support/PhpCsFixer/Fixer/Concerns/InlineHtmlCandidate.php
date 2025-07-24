@@ -33,7 +33,7 @@ trait InlineHtmlCandidate
      *
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
-    public function isInlineHtmlCandidate(Tokens $tokens): bool
+    protected function isInlineHtmlCandidate(Tokens $tokens): bool
     {
         return $tokens->count() === 1 && $tokens[0]->isGivenKind(\T_INLINE_HTML);
     }

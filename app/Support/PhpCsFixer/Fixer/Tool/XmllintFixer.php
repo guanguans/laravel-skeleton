@@ -21,9 +21,7 @@ use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
  */
 final class XmllintFixer extends AbstractToolFixer
 {
-    use PostPathCommand {
-        command as postPathCommand;
-    }
+    use PostPathCommand;
 
     /**
      * @noinspection PhpMissingParentCallCommonInspection

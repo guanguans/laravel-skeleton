@@ -16,25 +16,19 @@ namespace App\Support\PhpCsFixer\Fixer\Tool\Concerns;
 /**
  * @mixin \App\Support\PhpCsFixer\Fixer\Tool\AbstractToolFixer
  */
-trait PostPathCommand
+trait PrePathCommand
 {
-    /**
-     * @noinspection OverrideMissingInspection
-     */
     protected function command(): array
     {
-        return $this->postPathCommand();
+        return $this->prePathCommand();
     }
 
-    /**
-     * @noinspection OverrideMissingInspection
-     */
-    protected function postPathCommand(): array
+    protected function prePathCommand(): array
     {
         return [
             ...$this->configuration[self::TOOL],
-            ...$this->configuration[self::ARGS],
             $this->path(),
+            ...$this->configuration[self::ARGS],
         ];
     }
 }
