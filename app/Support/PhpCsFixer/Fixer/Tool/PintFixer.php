@@ -67,7 +67,7 @@ final class PintFixer extends AbstractToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultEnv(): ?array
+    protected function defaultEnv(): array
     {
         return ['XDEBUG_MODE' => 'off'];
     }

@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection PhpMissingParentCallCommonInspection */
 /** @noinspection SensitiveParameterInspection */
 
 declare(strict_types=1);

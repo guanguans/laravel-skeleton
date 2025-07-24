@@ -724,11 +724,15 @@ app
 │   │   │   ├── AbstractFixer.php
 │   │   │   ├── Concerns
 │   │   │   │   ├── AllowRisky.php
+│   │   │   │   ├── AlwaysCandidate.php
+│   │   │   │   ├── Argv.php
+│   │   │   │   ├── Awarer.php
 │   │   │   │   ├── HighestPriority.php
 │   │   │   │   ├── InlineHtmlCandidate.php
+│   │   │   │   ├── IsDryRun.php
 │   │   │   │   ├── LowestPriority.php
 │   │   │   │   ├── SupportsExtensions.php
-│   │   │   │   └── SupportsPathArg.php
+│   │   │   │   └── SupportsExtensionsAndPathArg.php
 │   │   │   ├── InlineHtml
 │   │   │   │   ├── AbstractInlineHtmlFixer.php
 │   │   │   │   ├── DoctrineSqlFixer.php
@@ -740,6 +744,8 @@ app
 │   │   │   └── Tool
 │   │   │       ├── AbstractToolFixer.php
 │   │   │       ├── BladeFormatterFixer.php
+│   │   │       ├── Concerns
+│   │   │       │   └── PostPathCommand.php
 │   │   │       ├── DotEnvLinterFixer.php
 │   │   │       ├── PintFixer.php
 │   │   │       ├── ShFmtFixer.php
@@ -780,7 +786,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-59 directories, 277 files
+60 directories, 282 files
 
 ```
 </details>

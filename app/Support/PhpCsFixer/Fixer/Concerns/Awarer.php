@@ -22,6 +22,8 @@ trait Awarer
 
     /**
      * @noinspection SensitiveParameterInspection
+     *
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
     public function setFileAndTokens(\SplFileInfo $file, Tokens $tokens): void
     {
@@ -36,6 +38,8 @@ trait Awarer
 
     /**
      * @noinspection SensitiveParameterInspection
+     *
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
     public function setTokens(Tokens $tokens): void
     {

@@ -35,6 +35,15 @@ use function Psl\Filesystem\create_temporary_file;
 
 /**
  * @see https://github.com/super-linter/super-linter
+ *
+ * @property array{
+ *     tool: array,
+ *     args: array,
+ *     cwd: ?string,
+ *     env: ?array,
+ *     input: ?string,
+ *     timeout: ?float
+ * } $configuration
  */
 abstract class AbstractToolFixer extends AbstractConfigurableFixer
 {

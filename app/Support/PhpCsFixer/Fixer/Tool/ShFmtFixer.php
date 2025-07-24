@@ -13,23 +13,14 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Tool;
 
+use App\Support\PhpCsFixer\Fixer\Tool\Concerns\PostPathCommand;
+
 /**
  * @see https://github.com/mvdan/sh
  */
 final class ShFmtFixer extends AbstractToolFixer
 {
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function command(): array
-    {
-        return [
-            ...$this->configuration[self::TOOL],
-            ...$this->configuration[self::ARGS],
-            $this->path(),
-        ];
-    }
+    use PostPathCommand;
 
     #[\Override]
     protected function defaultTool(): array
