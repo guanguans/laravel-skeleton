@@ -143,7 +143,8 @@ abstract class AbstractToolFixer extends AbstractConfigurableFixer
         //     $process->getOutput(),
         //     $process->getErrorOutput(),
         //     $process->getWorkingDirectory(),
-        //     file_get_contents($this->path()),
+        //     // $this->path(),
+        //     // file_get_contents($this->path()),
         // );
     }
 

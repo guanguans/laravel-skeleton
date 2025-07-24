@@ -15,6 +15,7 @@ use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
+use App\Support\PhpCsFixer\Fixer\Tool\LintMdFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\MarkDownLintCli2Fixer;
 use App\Support\PhpCsFixer\Fixer\Tool\PintFixer;
 use App\Support\PhpCsFixer\Fixer\Tool\SqlFluffFixer;
@@ -89,6 +90,7 @@ return Factory::fromRuleSet(Php83::create()
                 PhpMyAdminSqlFixer::name(),
                 SqlFluffFixer::name(),
                 MarkDownLintCli2Fixer::name(),
+                LintMdFixer::name(),
                 // XmlFixer::name(),
             ],
             true
