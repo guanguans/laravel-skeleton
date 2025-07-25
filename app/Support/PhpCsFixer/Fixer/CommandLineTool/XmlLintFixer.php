@@ -23,15 +23,6 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
 {
     use PostPathCommand;
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function command(): array
-    {
-        return [...$this->postPathCommand(), $this->path()];
-    }
-
     #[\Override]
     protected function defaultCommand(): array
     {
@@ -45,12 +36,32 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
     protected function requiredOptions(): array
     {
         return [
+            // '--noblanks',
+            // '--nocompact',
             '--format',
-            '--encode' => 'utf-8',
             '--pretty' => 1,
-            '--output',
-            // $this->path()
+            // '--path' => $this->path(),
+            '--output' => $this->path(),
+            '--encode' => 'utf-8',
         ];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function silentOptions(): array
+    {
+        return ['--quiet'];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function debugOptions(): array
+    {
+        return ['--timing'];
     }
 
     #[\Override]
