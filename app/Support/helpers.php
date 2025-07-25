@@ -18,6 +18,7 @@ use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use PhpCsFixer\ExecutorWithoutErrorHandler;
 use Symfony\Component\VarDumper\VarDumper;
 use Yiisoft\Injector\Injector;
 
@@ -116,6 +117,7 @@ if (!\function_exists('classes')) {
             )
             ->mapWithKeys(static function (string $file, string $class): array {
                 try {
+                    // return [$class => ExecutorWithoutErrorHandler::execute(static fn () => new ReflectionClass($class))];
                     return [$class => new ReflectionClass($class)];
                 } catch (Throwable $throwable) {
                     return [$class => $throwable];

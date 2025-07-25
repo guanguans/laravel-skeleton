@@ -66,6 +66,7 @@ return Factory::fromRuleSet(Php83::create()
     //     array_filter($phpCsFixerCustomFixers, static fn (AbstractFixer $fixer): bool => !\in_array(
     //         $fixer->getName(),
     //         [
+    //             'PhpCsFixerCustomFixers/*',
     //             'PhpCsFixerCustomFixers/comment_surrounded_by_spaces',
     //             'PhpCsFixerCustomFixers/declare_after_opening_tag',
     //             'PhpCsFixerCustomFixers/isset_to_array_key_exists',
@@ -95,7 +96,7 @@ return Factory::fromRuleSet(Php83::create()
                 XmlFixer::name(),
                 XmlLintFixer::name(),
                 PhpMyAdminSqlFixer::name(),
-                // SqlFluffFixer::name(),
+                SqlFluffFixer::name(),
                 AutocorrectFixer::name(),
                 LintMdFixer::name(),
                 MarkDownLintCli2Fixer::name(),
@@ -109,7 +110,14 @@ return Factory::fromRuleSet(Php83::create()
 
             return $rules;
         },
-        []
+        [
+            SqlFluffFixer::name() => [
+                AbstractCommandLineToolFixer::OPTIONS => [
+                    '--dialect' => 'mysql',
+                ],
+                SqlFluffFixer::EXTENSIONS => ['sql'],
+            ],
+        ]
     )))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,
@@ -133,12 +141,6 @@ return Factory::fromRuleSet(Php83::create()
         // '@PhpCsFixer:risky' => true,
     ]))
     ->withRules(Rules::fromArray([
-        SqlFluffFixer::name() => [
-            AbstractCommandLineToolFixer::OPTIONS => [
-                '--dialect' => 'mysql',
-            ],
-            SqlFluffFixer::EXTENSIONS => ['sql'],
-        ],
         'PhpCsFixerCustomFixers/phpdoc_tag_no_named_arguments' => false,
         'align_multiline_comment' => [
             'comment_type' => 'phpdocs_only',
@@ -365,21 +367,29 @@ return Factory::fromRuleSet(Php83::create()
                 '/lang\/.*\.json$/',
             ])
             ->name([
-                '/\.json$/',
-                '/\.neon$/',
+                // '/\.bats$/',
+                // '/\.env$/',
+                // '/\.env\.example$/',
+                // '/\.json$/',
+                // '/\.markdown$/',
+                // '/\.md$/',
+                // '/\.neon$/',
                 '/\.php$/',
-                '/\.sql$/',
-                '/\.xml$/',
-                '/\.xml\.dist$/',
-                '/\.yaml$/',
-                '/\.yml$/',
+                // '/\.sh$/',
+                // '/\.sql$/',
+                // '/\.text$/',
+                // '/\.txt$/',
+                // '/\.xml$/',
+                // '/\.xml\.dist$/',
+                // '/\.yaml$/',
+                // '/\.yml$/',
             ])
             ->notName([
                 '*.blade.php',
             ])
             ->append([
                 ...array_filter(
-                    glob(__DIR__.'/{*,.*}.{json,php,sql,xml,xml.dist,yaml,yml}', \GLOB_BRACE),
+                    glob(__DIR__.'/{*,.*}.{php}', \GLOB_BRACE),
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',

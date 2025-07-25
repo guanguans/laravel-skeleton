@@ -19,6 +19,7 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\TemporaryFileCreator;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
@@ -26,7 +27,6 @@ use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Fixer\Concerns\SymfonyStyleFactory;
-use Illuminate\Support\Str;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
@@ -35,10 +35,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use Spatie\TemporaryDirectory\TemporaryDirectory;
 use Symfony\Component\Process\Process;
-use function Psl\Filesystem\create_file;
-use function Psl\Filesystem\create_temporary_file;
 
 /**
  * @see https://github.com/super-linter/super-linter
@@ -66,24 +63,13 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use PrePathCommand;
     use SupportsExtensions;
     use SymfonyStyleFactory;
+    use TemporaryFileCreator;
     public const string COMMAND = 'command';
     public const string OPTIONS = 'options';
     public const string CWD = 'cwd';
     public const string ENV = 'env';
     public const string INPUT = 'input';
     public const string TIMEOUT = 'timeout';
-    private static ?string $temporaryFile = null;
-
-    /**
-     * @see \Illuminate\Filesystem\Filesystem::delete()
-     */
-    public function __destruct()
-    {
-        if (self::$temporaryFile && unlink(self::$temporaryFile)) {
-            clearstatcache(false, self::$temporaryFile);
-            self::$temporaryFile = null;
-        }
-    }
 
     #[\Override]
     public function getDefinition(): FixerDefinitionInterface
@@ -205,36 +191,8 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
     /**
      * @noinspection PhpUnhandledExceptionInspection
-     */
-    protected function createTemporaryFile(string $location = '', ?string $dirName = null): string
-    {
-        if (self::$temporaryFile) {
-            return self::$temporaryFile;
-        }
-
-        $temporaryFile = (new TemporaryDirectory)
-            ->deleteWhenDestroyed()
-            ->force()
-            ->location($location)
-            ->name($dirName ?? $this->getShortName())
-            ->create()
-            ->path(
-                str(Str::random())
-                    ->remove(\DIRECTORY_SEPARATOR)
-                    ->finish('.')
-                    ->finish(collect($this->extensions())->random())
-                    ->toString()
-            );
-
-        // touch($temporaryFile);
-        create_file($temporaryFile);
-
-        // return self::$temporaryFile ??= create_temporary_file(null, $this->getSortName());
-        return self::$temporaryFile ??= $temporaryFile;
-    }
-
-    /**
-     * @noinspection PhpUnhandledExceptionInspection
+     *
+     * @see \PhpCsFixer\Utils::toString()
      */
     protected function escape(mixed $value): string
     {

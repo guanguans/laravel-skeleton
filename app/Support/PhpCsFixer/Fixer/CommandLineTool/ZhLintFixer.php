@@ -41,14 +41,13 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
 
     protected function path(): string
     {
+        if ($this->isDryRun()) {
+            $this->createTemporaryFile(getcwd());
+        }
+
         return str(parent::path())
             ->chopStart($this->configuration[self::CWD] ?? getcwd())
             ->chopStart(\DIRECTORY_SEPARATOR)
             ->toString();
-    }
-
-    protected function createTemporaryFile(string $location = '', ?string $dirName = null): string
-    {
-        return parent::createTemporaryFile(getcwd(), $dirName);
     }
 }
