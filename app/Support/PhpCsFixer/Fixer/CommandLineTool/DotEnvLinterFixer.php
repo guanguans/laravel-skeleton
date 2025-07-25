@@ -13,19 +13,24 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
-
 /**
  * @see https://github.com/dotenv-linter/dotenv-linter
  */
 final class DotEnvLinterFixer extends AbstractCommandLineToolFixer
 {
-    use PostPathCommand;
-
     #[\Override]
     protected function defaultCommand(): array
     {
         return ['dotenv-linter', 'fix'];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function silentOptions(): array
+    {
+        return ['--no-color', '--quiet'];
     }
 
     #[\Override]
