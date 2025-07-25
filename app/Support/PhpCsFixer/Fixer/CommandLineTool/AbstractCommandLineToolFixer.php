@@ -262,18 +262,15 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
     abstract protected function defaultCommand(): array;
 
-    /**
-     * @todo --ansi
-     * @todo --color
-     * @todo -vvv
-     * @todo --debug
-     */
     protected function options(): array
     {
         return collect([
             ...$this->requiredOptions(),
             ...match (true) {
-                /** @see \Symfony\Component\Console\Output\OutputInterface::VERBOSITY_SILENT */
+                /**
+                 * @see \Symfony\Component\Console\Output\OutputInterface::VERBOSITY_SILENT
+                 * @see --ansi, --color, --slient, --quiet, -v, --verbose, --debug
+                 */
                 $this->makeOutput()->isSilent() => $this->silentOptions(),
                 $this->makeOutput()->isQuiet() and method_exists($this, 'quietOptions') => $this->quietOptions(),
                 $this->makeOutput()->isVerbose() and method_exists($this, 'verboseOptions') => $this->verboseOptions(),
