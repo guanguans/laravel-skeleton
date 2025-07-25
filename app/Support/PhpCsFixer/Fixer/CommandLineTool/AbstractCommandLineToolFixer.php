@@ -19,7 +19,6 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\TemporaryFileCreator;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
@@ -27,6 +26,8 @@ use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Fixer\Concerns\SymfonyStyleFactory;
+use Illuminate\Support\Str;
+use PhpCsFixer\FileRemoval;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
@@ -35,7 +36,9 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use Spatie\TemporaryDirectory\TemporaryDirectory;
 use Symfony\Component\Process\Process;
+use function Psl\Filesystem\create_file;
 
 /**
  * @see https://github.com/super-linter/super-linter
@@ -63,7 +66,6 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use PrePathCommand;
     use SupportsExtensions;
     use SymfonyStyleFactory;
-    use TemporaryFileCreator;
     public const string COMMAND = 'command';
     public const string OPTIONS = 'options';
     public const string CWD = 'cwd';
@@ -143,15 +145,15 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         if ($this->makeOutput()->isDebug() || true) {
             $this->makeOutput()->title("Process debugging information for [{$this->getName()}]");
             $this->makeOutput()->warning([
-                \sprintf('Command Line: %s', $this->escape($process->getCommandLine())),
-                \sprintf('Exit Code: %s', $this->escape($process->getExitCode())),
-                \sprintf('Exit Code Text: %s', $this->escape($process->getExitCodeText())),
-                \sprintf('Output: %s', $this->escape($process->getOutput())),
-                \sprintf('Error Output: %s', $this->escape($process->getErrorOutput())),
-                \sprintf('Working Directory: %s', $this->escape($process->getWorkingDirectory())),
-                \sprintf('Env: %s', $this->escape($process->getEnv())),
-                \sprintf('Input: %s', $this->escape($process->getInput())),
-                \sprintf('Timeout: %s', $this->escape($process->getTimeout())),
+                \sprintf('Command Line: %s', $this->stringFor($process->getCommandLine())),
+                \sprintf('Exit Code: %s', $this->stringFor($process->getExitCode())),
+                \sprintf('Exit Code Text: %s', $this->stringFor($process->getExitCodeText())),
+                \sprintf('Output: %s', $this->stringFor($process->getOutput())),
+                \sprintf('Error Output: %s', $this->stringFor($process->getErrorOutput())),
+                \sprintf('Working Directory: %s', $this->stringFor($process->getWorkingDirectory())),
+                \sprintf('Env: %s', $this->stringFor($process->getEnv())),
+                \sprintf('Input: %s', $this->stringFor($process->getInput())),
+                \sprintf('Timeout: %s', $this->stringFor($process->getTimeout())),
             ]);
         }
 
@@ -191,10 +193,43 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
     /**
      * @noinspection PhpUnhandledExceptionInspection
+     */
+    protected function createTemporaryFile(string $location = '', ?string $dirName = null): string
+    {
+        static $temporaryFile;
+
+        if ($temporaryFile) {
+            return $temporaryFile;
+        }
+
+        $path = (new TemporaryDirectory)
+            ->deleteWhenDestroyed()
+            ->force()
+            ->location($location)
+            ->name($dirName ?? $this->getShortName())
+            ->create()
+            ->path(
+                str(Str::random())
+                    ->remove(\DIRECTORY_SEPARATOR)
+                    ->finish('.')
+                    ->finish(collect($this->extensions())->random())
+                    ->toString()
+            );
+
+        // touch($path);
+        create_file($path);
+        (new FileRemoval)->observe($path);
+
+        // return $temporaryFile ??= create_temporary_file(null, $this->getSortName());
+        return $temporaryFile ??= $path;
+    }
+
+    /**
+     * @noinspection PhpUnhandledExceptionInspection
      *
      * @see \PhpCsFixer\Utils::toString()
      */
-    protected function escape(mixed $value): string
+    protected function stringFor(mixed $value): string
     {
         return \is_string($value)
             ? $value
