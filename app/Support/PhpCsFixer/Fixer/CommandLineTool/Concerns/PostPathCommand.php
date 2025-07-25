@@ -32,8 +32,8 @@ trait PostPathCommand
     protected function postPathCommand(): array
     {
         return [
-            ...$this->configuration[self::MAIN_COMMAND],
-            ...$this->configuration[self::OPTIONS],
+            ...$this->configuration[self::COMMAND],
+            ...$this->options(),
             $this->path(),
         ];
     }

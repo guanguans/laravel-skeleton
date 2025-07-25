@@ -49,7 +49,7 @@ use function Psl\Filesystem\create_temporary_file;
  * @see https://plugins.jetbrains.com/search?search=lint
  *
  * @property array{
- *     main_command: array,
+ *     command: array,
  *     options: array,
  *     cwd: ?string,
  *     env: ?array,
@@ -67,7 +67,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use PrePathCommand;
     use SupportsExtensions;
     use SymfonyStyleFactory;
-    public const string MAIN_COMMAND = 'main_command';
+    public const string COMMAND = 'command';
     public const string OPTIONS = 'options';
     public const string CWD = 'cwd';
     public const string ENV = 'env';
@@ -107,22 +107,22 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     protected function defaultFixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::MAIN_COMMAND, 'The main command to run the tool (e.g. `dotenv-linter fix`).'))
+            (new FixerOptionBuilder(self::COMMAND, 'The command to run the tool (e.g. `dotenv-linter fix`).'))
                 ->setAllowedTypes(['array'])
-                ->setDefault($this->defaultMainCommand())
+                ->setDefault($this->defaultCommand())
                 ->getOption(),
             (new FixerOptionBuilder(self::OPTIONS, 'The options to pass to the tool (e.g. `--fix`).'))
                 ->setAllowedTypes(['array'])
                 ->setDefault($this->defaultOptions())
-                ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value) => collect($value)->reduce(
-                    static function (array $carry, mixed $val, int|string $key): array {
-                        \is_string($key) and str_starts_with($key, '-') and $carry[] = $key;
-                        $carry[] = $val;
-
-                        return $carry;
-                    },
-                    []
-                ))
+                // ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value) => collect($value)->reduce(
+                //     static function (array $carry, mixed $val, int|string $key): array {
+                //         \is_string($key) and str_starts_with($key, '-') and $carry[] = $key;
+                //         $carry[] = $val;
+                //
+                //         return $carry;
+                //     },
+                //     []
+                // ))
                 ->getOption(),
             (new FixerOptionBuilder(self::CWD, 'The working directory or null to use the working dir of the current PHP process.'))
                 ->setAllowedTypes(['string', 'null'])
@@ -260,7 +260,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         return $process->isSuccessful();
     }
 
-    abstract protected function defaultMainCommand(): array;
+    abstract protected function defaultCommand(): array;
 
     /**
      * @todo --ansi
@@ -268,7 +268,42 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
      * @todo -vvv
      * @todo --debug
      */
+    protected function options(): array
+    {
+        return collect([
+            ...$this->requiredOptions(),
+            ...match (true) {
+                /** @see \Symfony\Component\Console\Output\OutputInterface::VERBOSITY_SILENT */
+                $this->makeOutput()->isSilent() => $this->silentOptions(),
+                $this->makeOutput()->isQuiet() and method_exists($this, 'quietOptions') => $this->quietOptions(),
+                $this->makeOutput()->isVerbose() and method_exists($this, 'verboseOptions') => $this->verboseOptions(),
+                $this->makeOutput()->isVeryVerbose() and method_exists($this, 'veryVerboseOptions') => $this->veryVerboseOptions(),
+                $this->makeOutput()->isDebug() => $this->debugOptions(),
+                default => $this->silentOptions(),
+            },
+            ...$this->configuration[self::OPTIONS],
+        ])->reduce(
+            static function (array $options, mixed $value, int|string $key): array {
+                \is_string($key) and str_starts_with($key, '-') and $options[] = $key;
+                $options[] = $value;
+
+                return $options;
+            },
+            []
+        );
+    }
+
     protected function requiredOptions(): array
+    {
+        return [];
+    }
+
+    protected function silentOptions(): array
+    {
+        return [];
+    }
+
+    protected function debugOptions(): array
     {
         return [];
     }

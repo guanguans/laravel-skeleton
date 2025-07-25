@@ -23,7 +23,7 @@ final class DotEnvLinterFixer extends AbstractCommandLineToolFixer
     use PostPathCommand;
 
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['dotenv-linter', 'fix'];
     }

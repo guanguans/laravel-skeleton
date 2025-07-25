@@ -20,7 +20,7 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class LintMdFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['lint-md'];
     }
@@ -29,7 +29,7 @@ final class LintMdFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultOptions(): array
+    protected function requiredOptions(): array
     {
         return ['--fix'];
     }

@@ -19,7 +19,7 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class AutocorrectFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['autocorrect'];
     }
@@ -28,7 +28,7 @@ final class AutocorrectFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultOptions(): array
+    protected function requiredOptions(): array
     {
         return ['--fix'];
     }

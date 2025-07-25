@@ -19,7 +19,7 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class YamlFmtFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['yamlfmt'];
     }

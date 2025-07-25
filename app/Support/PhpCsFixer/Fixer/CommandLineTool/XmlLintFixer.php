@@ -33,7 +33,7 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['xmllint'];
     }
@@ -42,7 +42,7 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultOptions(): array
+    protected function requiredOptions(): array
     {
         return [
             '--format',

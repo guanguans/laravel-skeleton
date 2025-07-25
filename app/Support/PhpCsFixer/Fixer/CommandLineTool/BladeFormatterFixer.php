@@ -19,7 +19,7 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class BladeFormatterFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['blade-formatter'];
     }
@@ -28,7 +28,7 @@ final class BladeFormatterFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultOptions(): array
+    protected function requiredOptions(): array
     {
         return ['-w'];
     }

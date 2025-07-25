@@ -41,7 +41,7 @@ final class SqlFluffFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['sqlfluff', 'format'];
     }
@@ -50,7 +50,7 @@ final class SqlFluffFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultOptions(): array
+    protected function requiredOptions(): array
     {
         return ['--dialect' => 'mysql'];
     }

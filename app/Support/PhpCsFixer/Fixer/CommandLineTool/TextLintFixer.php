@@ -23,7 +23,7 @@ final class TextLintFixer extends AbstractCommandLineToolFixer
     use PostPathCommand;
 
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['textlint'];
     }
@@ -32,7 +32,7 @@ final class TextLintFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultOptions(): array
+    protected function requiredOptions(): array
     {
         return ['--fix'];
     }

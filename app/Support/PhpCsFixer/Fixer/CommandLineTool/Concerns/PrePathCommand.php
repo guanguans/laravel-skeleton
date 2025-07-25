@@ -26,9 +26,9 @@ trait PrePathCommand
     protected function prePathCommand(): array
     {
         return [
-            ...$this->configuration[self::MAIN_COMMAND],
+            ...$this->configuration[self::COMMAND],
             $this->path(),
-            ...$this->configuration[self::OPTIONS],
+            ...$this->options(),
         ];
     }
 }

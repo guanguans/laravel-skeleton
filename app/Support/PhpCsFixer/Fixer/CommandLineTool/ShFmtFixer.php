@@ -23,7 +23,7 @@ final class ShFmtFixer extends AbstractCommandLineToolFixer
     use PostPathCommand;
 
     #[\Override]
-    protected function defaultMainCommand(): array
+    protected function defaultCommand(): array
     {
         return ['shfmt'];
     }
@@ -32,7 +32,7 @@ final class ShFmtFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultOptions(): array
+    protected function requiredOptions(): array
     {
         return ['-l', '-w'];
     }
