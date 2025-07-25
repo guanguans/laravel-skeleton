@@ -41,35 +41,14 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
 
     protected function path(): string
     {
-        return $this->relativePath(parent::path());
+        return str(parent::path())
+            ->chopStart($this->configuration[self::CWD] ?? getcwd())
+            ->chopStart(\DIRECTORY_SEPARATOR)
+            ->toString();
     }
 
-    private function relativePath(string $path): string
+    protected function createTemporaryFile(string $location = '', ?string $dirName = null): string
     {
-        $workingDir = $this->configuration[self::CWD] ?? getcwd();
-        $pathParts = explode(\DIRECTORY_SEPARATOR, realpath($path) ?: $path);
-        $workingDirParts = explode(\DIRECTORY_SEPARATOR, realpath($workingDir) ?: $workingDir);
-
-        // 找到共同的根路径
-        $commonLength = 0;
-        $minLength = min(\count($pathParts), \count($workingDirParts));
-
-        for ($index = 0; $index < $minLength; ++$index) {
-            /** @noinspection OffsetOperationsInspection */
-            if ($pathParts[$index] !== $workingDirParts[$index]) {
-                break;
-            }
-
-            ++$commonLength;
-        }
-
-        // 计算需要返回的层级数
-        $upLevels = \count($workingDirParts) - $commonLength;
-        $downPath = \array_slice($pathParts, $commonLength);
-
-        // 构建相对路径
-        $relativeParts = array_merge(array_fill(0, $upLevels, '..'), $downPath);
-
-        return implode(\DIRECTORY_SEPARATOR, $relativeParts);
+        return parent::createTemporaryFile(getcwd(), $dirName);
     }
 }

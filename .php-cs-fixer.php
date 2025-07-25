@@ -99,8 +99,8 @@ return Factory::fromRuleSet(Php83::create()
                 AutocorrectFixer::name(),
                 LintMdFixer::name(),
                 MarkDownLintCli2Fixer::name(),
-                // TextLintFixer::name(),
-                ZhLintFixer::name(),
+                TextLintFixer::name(),
+                // ZhLintFixer::name(),
             ],
             true
         )),

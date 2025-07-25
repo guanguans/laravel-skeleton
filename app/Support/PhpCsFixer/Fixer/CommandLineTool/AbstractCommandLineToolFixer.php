@@ -206,7 +206,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     /**
      * @noinspection PhpUnhandledExceptionInspection
      */
-    protected function createTemporaryFile(): string
+    protected function createTemporaryFile(string $location = '', ?string $dirName = null): string
     {
         if (self::$temporaryFile) {
             return self::$temporaryFile;
@@ -215,7 +215,8 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $temporaryFile = (new TemporaryDirectory)
             ->deleteWhenDestroyed()
             ->force()
-            ->name($this->getShortName())
+            ->location($location)
+            ->name($dirName ?? $this->getShortName())
             ->create()
             ->path(
                 str(Str::random())

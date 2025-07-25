@@ -729,7 +729,8 @@ app
 │   │   │   │   ├── BladeFormatterFixer.php
 │   │   │   │   ├── Concerns
 │   │   │   │   │   ├── PostPathCommand.php
-│   │   │   │   │   └── PrePathCommand.php
+│   │   │   │   │   ├── PrePathCommand.php
+│   │   │   │   │   └── ReverseSuccessfulProcess.php
 │   │   │   │   ├── DotEnvLinterFixer.php
 │   │   │   │   ├── LintMdFixer.php
 │   │   │   │   ├── MarkDownLintCli2Fixer.php
@@ -797,7 +798,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 292 files
+60 directories, 293 files
 
 ```
 </details>
