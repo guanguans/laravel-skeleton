@@ -13,16 +13,12 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
-
 /**
  * @see https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home
  * @see https://gnome.pages.gitlab.gnome.org/libxml2/xmllint.html
  */
 final class XmlLintFixer extends AbstractCommandLineToolFixer
 {
-    use PostPathCommand;
-
     #[\Override]
     protected function defaultCommand(): array
     {
@@ -40,7 +36,6 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
             // '--nocompact',
             '--format',
             '--pretty' => 1,
-            // '--path' => $this->path(),
             '--output' => $this->path(),
             '--encode' => 'utf-8',
         ];

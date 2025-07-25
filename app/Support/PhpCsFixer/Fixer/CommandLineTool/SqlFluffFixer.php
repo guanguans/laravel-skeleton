@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
@@ -21,7 +20,6 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
  */
 final class SqlFluffFixer extends AbstractCommandLineToolFixer
 {
-    use PostPathCommand;
     public const string EXTENSIONS = 'extensions';
 
     /**

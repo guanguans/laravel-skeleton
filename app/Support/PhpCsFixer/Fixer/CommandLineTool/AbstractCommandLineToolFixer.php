@@ -257,11 +257,13 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     {
         return collect([
             ...$this->requiredOptions(),
+            /**
+             * @see \Symfony\Component\Console\Output\OutputInterface::VERBOSITY_SILENT
+             * @see --ansi, --color, --slient, --quiet, -v, --verbose, --debug
+             *
+             * @phpstan-ignore-next-line
+             */
             ...match (true) {
-                /**
-                 * @see \Symfony\Component\Console\Output\OutputInterface::VERBOSITY_SILENT
-                 * @see --ansi, --color, --slient, --quiet, -v, --verbose, --debug
-                 */
                 $this->makeOutput()->isSilent() => $this->silentOptions(),
                 $this->makeOutput()->isQuiet() and method_exists($this, 'quietOptions') => $this->quietOptions(),
                 $this->makeOutput()->isVerbose() and method_exists($this, 'verboseOptions') => $this->verboseOptions(),

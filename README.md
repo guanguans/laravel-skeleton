@@ -730,7 +730,8 @@ app
 │   │   │   │   ├── Concerns
 │   │   │   │   │   ├── PostPathCommand.php
 │   │   │   │   │   ├── PrePathCommand.php
-│   │   │   │   │   └── ReverseSuccessfulProcess.php
+│   │   │   │   │   ├── ReverseSuccessfulProcess.php
+│   │   │   │   │   └── WithoutPathCommand.php
 │   │   │   │   ├── DotEnvLinterFixer.php
 │   │   │   │   ├── LintMdFixer.php
 │   │   │   │   ├── MarkDownLintCli2Fixer.php
@@ -798,7 +799,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 293 files
+60 directories, 294 files
 
 ```
 </details>

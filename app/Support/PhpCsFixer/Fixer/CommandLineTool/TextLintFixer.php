@@ -13,15 +13,11 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
-
 /**
  * @see https://github.com/textlint/textlint
  */
 final class TextLintFixer extends AbstractCommandLineToolFixer
 {
-    use PostPathCommand;
-
     #[\Override]
     protected function defaultCommand(): array
     {
