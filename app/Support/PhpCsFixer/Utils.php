@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer;
 
-class Utils
+final class Utils
 {
     private function __construct() {}
 }
