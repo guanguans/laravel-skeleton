@@ -17,7 +17,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\Console\SymfonyStyleFactory;
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
@@ -26,6 +25,7 @@ use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
+use App\Support\PhpCsFixer\Fixer\Concerns\SymfonyStyleFactory;
 use Illuminate\Support\Str;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -36,7 +36,6 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Spatie\TemporaryDirectory\TemporaryDirectory;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Process;
 use function Psl\Filesystem\create_file;
@@ -63,20 +62,14 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use IsDryRun;
     use PrePathCommand;
     use SupportsExtensions;
+    use SymfonyStyleFactory;
     public const string MAIN_COMMAND = 'main_command';
     public const string ARGS = 'args';
     public const string CWD = 'cwd';
     public const string ENV = 'env';
     public const string INPUT = 'input';
     public const string TIMEOUT = 'timeout';
-    protected SymfonyStyle $output;
     private static ?string $temporaryFile = null;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->output = SymfonyStyleFactory::create();
-    }
 
     /**
      * @see \Illuminate\Filesystem\Filesystem::delete()
@@ -167,9 +160,9 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $process = $this->createProcess();
         $process->run();
 
-        if ($this->output->isDebug()) {
-            $this->output->title("Process debugging information for [{$this->getName()}]");
-            $this->output->warning([
+        if ($this->makeOutput()->isDebug()) {
+            $this->makeOutput()->title("Process debugging information for [{$this->getName()}]");
+            $this->makeOutput()->warning([
                 \sprintf('Command Line: %s', $this->escape($process->getCommandLine())),
                 \sprintf('Exit Code: %s', $this->escape($process->getExitCode())),
                 \sprintf('Exit Code Text: %s', $this->escape($process->getExitCodeText())),
