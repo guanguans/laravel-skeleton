@@ -34,12 +34,28 @@ final class ShFmtFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function requiredOptions(): array
     {
-        return ['-l', '-w'];
+        return [
+            '--write',
+            // '--simplify',
+            // '--minify',
+        ];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function debugOptions(): array
+    {
+        return ['--list'];
+    }
+
+    /**
+     * @see `-ln, --language-dialect str  bash/posix/mksh/bats, default "auto"`
+     */
     #[\Override]
     protected function extensions(): array
     {
-        return ['sh', 'bash', 'ksh', 'zsh', 'fish'];
+        return ['sh', 'bats'];
     }
 }
