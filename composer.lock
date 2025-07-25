@@ -1928,16 +1928,16 @@
         },
         {
             "name": "beyondcode/laravel-mailbox",
-            "version": "5.0.1",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beyondcode/laravel-mailbox.git",
-                "reference": "298aff3e4fb92dde455fa395f974826896051b5e"
+                "reference": "c3dee1cf509c697729050ef430aa53d2ec38fd95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beyondcode/laravel-mailbox/zipball/298aff3e4fb92dde455fa395f974826896051b5e",
-                "reference": "298aff3e4fb92dde455fa395f974826896051b5e",
+                "url": "https://api.github.com/repos/beyondcode/laravel-mailbox/zipball/c3dee1cf509c697729050ef430aa53d2ec38fd95",
+                "reference": "c3dee1cf509c697729050ef430aa53d2ec38fd95",
                 "shasum": ""
             },
             "require": {
@@ -1995,9 +1995,9 @@
             ],
             "support": {
                 "issues": "https://github.com/beyondcode/laravel-mailbox/issues",
-                "source": "https://github.com/beyondcode/laravel-mailbox/tree/5.0.1"
+                "source": "https://github.com/beyondcode/laravel-mailbox/tree/5.0.2"
             },
-            "time": "2025-04-04T13:35:07+00:00"
+            "time": "2025-07-25T11:51:34+00:00"
         },
         {
             "name": "biiiiiigmonster/hasin",
