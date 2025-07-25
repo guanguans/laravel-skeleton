@@ -43,7 +43,7 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a [%s] file.', $this->getSortHeadlineName()),
+            $summary = \sprintf('Format a [%s] file.', $this->getShortHeadlineName()),
             [new CodeSample($summary)]
         );
     }

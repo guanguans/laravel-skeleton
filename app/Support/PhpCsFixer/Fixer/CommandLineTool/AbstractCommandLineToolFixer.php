@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
+use App\Support\Console\SymfonyStyleFactory;
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
@@ -35,6 +36,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Spatie\TemporaryDirectory\TemporaryDirectory;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Process;
 use function Psl\Filesystem\create_file;
@@ -67,7 +69,14 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     public const string ENV = 'env';
     public const string INPUT = 'input';
     public const string TIMEOUT = 'timeout';
+    protected SymfonyStyle $output;
     private static ?string $temporaryFile = null;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->output = SymfonyStyleFactory::create();
+    }
 
     /**
      * @see \Illuminate\Filesystem\Filesystem::delete()
@@ -84,7 +93,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a file by [%s].', $this->getSortHeadlineName()),
+            $summary = \sprintf('Format a file by [%s].', $this->getShortHeadlineName()),
             [new CodeSample($summary)]
         );
     }
@@ -146,6 +155,9 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     }
 
     /**
+     * @noinspection PhpUnhandledExceptionInspection
+     * @noinspection PhpDocMissingThrowsInspection
+     *
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
      */
     #[\Override]
@@ -155,21 +167,25 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $process = $this->createProcess();
         $process->run();
 
+        if ($this->output->isDebug()) {
+            $this->output->title("Process debugging information for [{$this->getName()}]");
+            $this->output->warning([
+                \sprintf('Command Line: %s', $this->escape($process->getCommandLine())),
+                \sprintf('Exit Code: %s', $this->escape($process->getExitCode())),
+                \sprintf('Exit Code Text: %s', $this->escape($process->getExitCodeText())),
+                \sprintf('Output: %s', $this->escape($process->getOutput())),
+                \sprintf('Error Output: %s', $this->escape($process->getErrorOutput())),
+                \sprintf('Working Directory: %s', $this->escape($process->getWorkingDirectory())),
+                \sprintf('Env: %s', $this->escape($process->getEnv())),
+                \sprintf('Input: %s', $this->escape($process->getInput())),
+                \sprintf('Timeout: %s', $this->escape($process->getTimeout())),
+            ]);
+        }
+
         if ($this->isProcessSuccessful($process)) {
             // $tokens[0] = new Token([\TOKEN_PARSE, file_get_contents($this->path())]);
             $tokens->setCode(file_get_contents($this->path()));
         }
-
-        // dump(
-        //     $process->getCommandLine(),
-        //     $process->getExitCode(),
-        //     $process->getExitCodeText(),
-        //     $process->getOutput(),
-        //     $process->getErrorOutput(),
-        //     $process->getWorkingDirectory(),
-        //     $this->path(),
-        //     // file_get_contents($this->path()),
-        // );
     }
 
     protected function createProcess(): Process
@@ -212,7 +228,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $temporaryFile = (new TemporaryDirectory)
             ->deleteWhenDestroyed()
             ->force()
-            ->name($this->getSortName())
+            ->name($this->getShortName())
             ->create()
             ->path(
                 str(Str::random())
@@ -227,6 +243,19 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
         // return self::$temporaryFile ??= create_temporary_file(null, $this->getSortName());
         return self::$temporaryFile ??= $temporaryFile;
+    }
+
+    /**
+     * @noinspection PhpUnhandledExceptionInspection
+     */
+    protected function escape(mixed $value): string
+    {
+        return \is_string($value)
+            ? $value
+            : json_encode(
+                $value,
+                \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_THROW_ON_ERROR | \JSON_FORCE_OBJECT
+            );
     }
 
     protected function isProcessSuccessful(Process $process): bool

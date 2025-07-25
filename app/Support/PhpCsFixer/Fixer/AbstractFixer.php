@@ -44,15 +44,15 @@ abstract class AbstractFixer extends \PhpCsFixer\AbstractFixer
     #[\Override]
     public function getName(): string
     {
-        return \sprintf('User/%s', $this->getSortName());
+        return \sprintf('User/%s', $this->getShortName());
     }
 
-    public function getSortHeadlineName(): string
+    public function getShortHeadlineName(): string
     {
-        return str($this->getSortName())->headline()->toString();
+        return str($this->getShortName())->headline()->toString();
     }
 
-    public function getSortName(): string
+    public function getShortName(): string
     {
         return parent::getName();
     }
