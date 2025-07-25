@@ -215,7 +215,8 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             ->name($this->getSortName())
             ->create()
             ->path(
-                str(Str::random(8))
+                str(Str::random())
+                    ->remove(\DIRECTORY_SEPARATOR)
                     ->finish('.')
                     ->finish(collect($this->extensions())->random())
                     ->toString()

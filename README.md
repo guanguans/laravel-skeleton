@@ -2,6 +2,7 @@
 
 > This project collects the most commonly used Laravel extension packages, as well as usage examples of some functional features, for reference in daily development. - 本项目收集了最常用 Laravel 扩展包、以及一些功能特性的使用范例供日常开发参考使用。
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/guanguans/laravel-skeleton)
 [![tests](https://github.com/guanguans/laravel-skeleton/workflows/tests/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions)
 [![phpstan](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions/workflows/phpstan.yml)
 [![check & fix styling](https://github.com/guanguans/laravel-skeleton/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions)
