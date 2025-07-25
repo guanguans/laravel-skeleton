@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d54a821ebd28b75efa9e4a2fb2802b4",
+    "content-hash": "f8ae025177d2e034e654fd2187c80407",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4868,16 +4868,16 @@
         },
         {
             "name": "echolabsdev/prism",
-            "version": "v0.81.0",
+            "version": "v0.82.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "6e68c96b5a2cbee7614ebd316c308441ce7bb45f"
+                "reference": "7b6d059b9fb7a40bc5b3a12cc6f28fd942f8fb21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/6e68c96b5a2cbee7614ebd316c308441ce7bb45f",
-                "reference": "6e68c96b5a2cbee7614ebd316c308441ce7bb45f",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/7b6d059b9fb7a40bc5b3a12cc6f28fd942f8fb21",
+                "reference": "7b6d059b9fb7a40bc5b3a12cc6f28fd942f8fb21",
                 "shasum": ""
             },
             "require": {
@@ -4933,7 +4933,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.81.0"
+                "source": "https://github.com/prism-php/prism/tree/v0.82.0"
             },
             "funding": [
                 {
@@ -4941,7 +4941,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-19T13:27:09+00:00"
+            "time": "2025-07-25T13:34:13+00:00"
         },
         {
             "name": "egulias/email-validator",
