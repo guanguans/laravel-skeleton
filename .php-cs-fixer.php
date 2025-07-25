@@ -96,8 +96,8 @@ return Factory::fromRuleSet(Php83::create()
                 // SqlFluffFixer::name(),
                 AutocorrectFixer::name(),
                 LintMdFixer::name(),
-                // MarkDownLintCli2Fixer::name(),
-                TextLintFixer::name(),
+                MarkDownLintCli2Fixer::name(),
+                // TextLintFixer::name(),
                 ZhLintFixer::name(),
             ],
             true
