@@ -179,7 +179,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             ]);
         }
 
-        if ($this->isProcessSuccessful($process)) {
+        if ($this->isSuccessfulProcess($process)) {
             // $tokens[0] = new Token([\TOKEN_PARSE, file_get_contents($this->path())]);
             $tokens->setCode(file_get_contents($this->path()));
         }
@@ -255,7 +255,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             );
     }
 
-    protected function isProcessSuccessful(Process $process): bool
+    protected function isSuccessfulProcess(Process $process): bool
     {
         return $process->isSuccessful();
     }

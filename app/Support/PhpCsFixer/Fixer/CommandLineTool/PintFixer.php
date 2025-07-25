@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\ReverseSuccessfulProcess;
 use App\Support\PhpCsFixer\Fixer\Concerns\AlwaysCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\LowestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensionsAndPathArg;
-use Symfony\Component\Process\Process;
 use function Illuminate\Support\php_binary;
 
 /**
@@ -28,12 +28,8 @@ final class PintFixer extends AbstractCommandLineToolFixer
 {
     use AlwaysCandidate;
     use LowestPriority;
+    use ReverseSuccessfulProcess;
     use SupportsExtensionsAndPathArg;
-
-    protected function isProcessSuccessful(Process $process): bool
-    {
-        return !parent::isProcessSuccessful($process);
-    }
 
     #[\Override]
     protected function defaultCommand(): array
