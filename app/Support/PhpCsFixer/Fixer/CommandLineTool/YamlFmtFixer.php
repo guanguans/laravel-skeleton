@@ -24,6 +24,35 @@ final class YamlFmtFixer extends AbstractCommandLineToolFixer
         return ['yamlfmt'];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function requiredOptions(): array
+    {
+        return [
+            '-gitignore_excludes',
+        ];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function silentOptions(): array
+    {
+        return ['-quiet'];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function debugOptions(): array
+    {
+        return ['-debug', '-lint', '-print_conf', '-verbose'];
+    }
+
     #[\Override]
     protected function extensions(): array
     {
