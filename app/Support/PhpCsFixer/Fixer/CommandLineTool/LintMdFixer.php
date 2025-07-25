@@ -34,6 +34,15 @@ final class LintMdFixer extends AbstractCommandLineToolFixer
         return ['--fix'];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function debugOptions(): array
+    {
+        return ['--dev'];
+    }
+
     #[\Override]
     protected function extensions(): array
     {
