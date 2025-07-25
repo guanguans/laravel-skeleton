@@ -13,11 +13,18 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
+use Symfony\Component\Process\Process;
+
 /**
  * @see https://github.com/DavidAnson/markdownlint-cli2
  */
 final class MarkDownLintCli2Fixer extends AbstractCommandLineToolFixer
 {
+    protected function isProcessSuccessful(Process $process): bool
+    {
+        return !parent::isProcessSuccessful($process);
+    }
+
     #[\Override]
     protected function defaultCommand(): array
     {
@@ -30,7 +37,7 @@ final class MarkDownLintCli2Fixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function requiredOptions(): array
     {
-        return ['--fix'];
+        return ['--fix', '--no-globs'];
     }
 
     #[\Override]
