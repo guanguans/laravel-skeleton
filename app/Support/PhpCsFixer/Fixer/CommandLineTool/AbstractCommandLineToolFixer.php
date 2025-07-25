@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpInternalEntityUsedInspection */
 /** @noinspection PhpConstantNamingConventionInspection */
 /** @noinspection PhpUnusedAliasInspection */
 /** @noinspection SensitiveParameterInspection */
@@ -27,6 +28,7 @@ use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Fixer\Concerns\SymfonyStyleFactory;
 use Illuminate\Support\Str;
+use PhpCsFixer\FileReader;
 use PhpCsFixer\FileRemoval;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -142,7 +144,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $process = $this->createProcess();
         $process->run();
 
-        if ($this->makeOutput()->isDebug() || true) {
+        if ($this->makeOutput()->isDebug()) {
             $this->makeOutput()->title("Process debugging information for [{$this->getName()}]");
             $this->makeOutput()->warning([
                 \sprintf('Command Line: %s', $this->stringFor($process->getCommandLine())),
@@ -158,8 +160,8 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         }
 
         if ($this->isSuccessfulProcess($process)) {
-            // $tokens[0] = new Token([\TOKEN_PARSE, file_get_contents($this->path())]);
-            $tokens->setCode(file_get_contents($this->path()));
+            // $tokens[0] = new Token([\TOKEN_PARSE, FileReader::createSingleton()->read($this->path())]);
+            $tokens->setCode(FileReader::createSingleton()->read($this->path()));
         }
     }
 
@@ -193,6 +195,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
     /**
      * @noinspection PhpUnhandledExceptionInspection
+     * @noinspection PhpConditionAlreadyCheckedInspection
      */
     protected function createTemporaryFile(string $location = '', ?string $dirName = null): string
     {
