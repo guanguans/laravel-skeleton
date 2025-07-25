@@ -44,17 +44,33 @@ final class PintFixer extends AbstractCommandLineToolFixer
     protected function requiredOptions(): array
     {
         return [
-            // '--ansi',
             // '--config=pint.json',
             // '--format=json',
+            '--no-interaction',
             // '--output-format=txt',
             // '--output-to-file=.build/pint/.pint.output',
             // '--parallel',
             '--repair',
-            '--silent',
             // '--test',
-            // '-vv',
         ];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function silentOptions(): array
+    {
+        return ['--silent', '--quiet', '--no-ansi'];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function debugOptions(): array
+    {
+        return ['--ansi', '-vvv'];
     }
 
     /**
