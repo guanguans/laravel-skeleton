@@ -132,7 +132,7 @@ return Factory::fromRuleSet(Php83::create()
     ]))
     ->withRules(Rules::fromArray([
         SqlFluffFixer::name() => [
-            AbstractCommandLineToolFixer::ARGS => [
+            AbstractCommandLineToolFixer::OPTIONS => [
                 '--dialect' => 'mysql',
             ],
             SqlFluffFixer::EXTENSIONS => ['sql'],

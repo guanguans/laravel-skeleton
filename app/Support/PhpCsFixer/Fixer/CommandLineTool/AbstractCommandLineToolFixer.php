@@ -50,7 +50,7 @@ use function Psl\Filesystem\create_temporary_file;
  *
  * @property array{
  *     main_command: array,
- *     args: array,
+ *     options: array,
  *     cwd: ?string,
  *     env: ?array,
  *     input: ?string,
@@ -68,7 +68,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use SupportsExtensions;
     use SymfonyStyleFactory;
     public const string MAIN_COMMAND = 'main_command';
-    public const string ARGS = 'args';
+    public const string OPTIONS = 'options';
     public const string CWD = 'cwd';
     public const string ENV = 'env';
     public const string INPUT = 'input';
@@ -111,9 +111,9 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
                 ->setAllowedTypes(['array'])
                 ->setDefault($this->defaultMainCommand())
                 ->getOption(),
-            (new FixerOptionBuilder(self::ARGS, 'The args to pass to the main command.'))
+            (new FixerOptionBuilder(self::OPTIONS, 'The options to pass to the tool (e.g. `--fix`).'))
                 ->setAllowedTypes(['array'])
-                ->setDefault($this->defaultArgs())
+                ->setDefault($this->defaultOptions())
                 ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value) => collect($value)->reduce(
                     static function (array $carry, mixed $val, int|string $key): array {
                         \is_string($key) and str_starts_with($key, '-') and $carry[] = $key;
@@ -268,12 +268,12 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
      * @todo -vvv
      * @todo --debug
      */
-    protected function requiredArgs(): array
+    protected function requiredOptions(): array
     {
         return [];
     }
 
-    protected function defaultArgs(): array
+    protected function defaultOptions(): array
     {
         return [];
     }

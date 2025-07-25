@@ -29,7 +29,7 @@ final class LintMdFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function defaultArgs(): array
+    protected function defaultOptions(): array
     {
         return ['--fix'];
     }

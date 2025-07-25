@@ -28,7 +28,7 @@ trait PrePathCommand
         return [
             ...$this->configuration[self::MAIN_COMMAND],
             $this->path(),
-            ...$this->configuration[self::ARGS],
+            ...$this->configuration[self::OPTIONS],
         ];
     }
 }

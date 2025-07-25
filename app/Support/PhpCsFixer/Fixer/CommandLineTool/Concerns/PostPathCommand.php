@@ -33,7 +33,7 @@ trait PostPathCommand
     {
         return [
             ...$this->configuration[self::MAIN_COMMAND],
-            ...$this->configuration[self::ARGS],
+            ...$this->configuration[self::OPTIONS],
             $this->path(),
         ];
     }
