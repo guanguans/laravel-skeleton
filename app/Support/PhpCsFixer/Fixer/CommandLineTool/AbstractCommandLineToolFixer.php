@@ -258,6 +258,17 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
     abstract protected function defaultMainCommand(): array;
 
+    /**
+     * @todo --ansi
+     * @todo --color
+     * @todo -vvv
+     * @todo --debug
+     */
+    protected function requiredArgs(): array
+    {
+        return [];
+    }
+
     protected function defaultArgs(): array
     {
         return [];
