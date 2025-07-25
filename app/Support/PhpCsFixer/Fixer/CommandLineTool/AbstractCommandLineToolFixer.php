@@ -36,7 +36,6 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Spatie\TemporaryDirectory\TemporaryDirectory;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Process;
 use function Psl\Filesystem\create_file;
 use function Psl\Filesystem\create_temporary_file;
@@ -113,16 +112,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
                 ->getOption(),
             (new FixerOptionBuilder(self::OPTIONS, 'The options to pass to the tool (e.g. `--fix`).'))
                 ->setAllowedTypes(['array'])
-                ->setDefault($this->defaultOptions())
-                // ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value) => collect($value)->reduce(
-                //     static function (array $carry, mixed $val, int|string $key): array {
-                //         \is_string($key) and str_starts_with($key, '-') and $carry[] = $key;
-                //         $carry[] = $val;
-                //
-                //         return $carry;
-                //     },
-                //     []
-                // ))
+                ->setDefault([])
                 ->getOption(),
             (new FixerOptionBuilder(self::CWD, 'The working directory or null to use the working dir of the current PHP process.'))
                 ->setAllowedTypes(['string', 'null'])
@@ -301,11 +291,6 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     }
 
     protected function debugOptions(): array
-    {
-        return [];
-    }
-
-    protected function defaultOptions(): array
     {
         return [];
     }
