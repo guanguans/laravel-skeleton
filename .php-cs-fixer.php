@@ -93,7 +93,7 @@ return Factory::fromRuleSet(Php83::create()
                 // YamlFixer::name(),
                 // XmlFixer::name(),
                 PhpMyAdminSqlFixer::name(),
-                SqlFluffFixer::name(),
+                // SqlFluffFixer::name(),
                 AutocorrectFixer::name(),
                 LintMdFixer::name(),
                 // MarkDownLintCli2Fixer::name(),
