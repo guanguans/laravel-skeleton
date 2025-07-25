@@ -164,7 +164,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $process = $this->createProcess();
         $process->run();
 
-        if ($this->makeOutput()->isDebug()) {
+        if ($this->makeOutput()->isDebug() || true) {
             $this->makeOutput()->title("Process debugging information for [{$this->getName()}]");
             $this->makeOutput()->warning([
                 \sprintf('Command Line: %s', $this->escape($process->getCommandLine())),

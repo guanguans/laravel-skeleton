@@ -30,7 +30,16 @@ final class BladeFormatterFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function requiredOptions(): array
     {
-        return ['-w'];
+        return ['--write'];
+    }
+
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function debugOptions(): array
+    {
+        return ['--diff', '--progress'];
     }
 
     #[\Override]
