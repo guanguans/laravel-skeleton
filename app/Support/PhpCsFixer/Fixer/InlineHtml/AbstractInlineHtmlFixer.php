@@ -89,6 +89,8 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     }
 
     /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     *
      * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
      */
     protected function defaultFixerOptions(): array

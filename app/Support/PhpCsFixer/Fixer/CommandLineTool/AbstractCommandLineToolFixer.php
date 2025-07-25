@@ -43,6 +43,10 @@ use function Psl\Filesystem\create_temporary_file;
 
 /**
  * @see https://github.com/super-linter/super-linter
+ * @see https://marketplace.visualstudio.com/search?term=format&target=VSCode&category=All%20categories&sortBy=Relevance
+ * @see https://marketplace.visualstudio.com/search?term=lint&target=VSCode&category=All%20categories&sortBy=Relevance
+ * @see https://plugins.jetbrains.com/search?search=format
+ * @see https://plugins.jetbrains.com/search?search=lint
  *
  * @property array{
  *     main_command: array,

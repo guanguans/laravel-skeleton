@@ -19,7 +19,7 @@ use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
  * @see https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home
  * @see https://gnome.pages.gitlab.gnome.org/libxml2/xmllint.html
  */
-final class XmllintFixer extends AbstractCommandLineToolFixer
+final class XmlLintFixer extends AbstractCommandLineToolFixer
 {
     use PostPathCommand;
 

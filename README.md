@@ -737,7 +737,7 @@ app
 │   │   │   │   ├── ShFmtFixer.php
 │   │   │   │   ├── SqlFluffFixer.php
 │   │   │   │   ├── TextLintFixer.php
-│   │   │   │   ├── XmllintFixer.php
+│   │   │   │   ├── XmlLintFixer.php
 │   │   │   │   ├── YamlFmtFixer.php
 │   │   │   │   └── ZhLintFixer.php
 │   │   │   ├── Concerns
@@ -751,7 +751,8 @@ app
 │   │   │   │   ├── LowestPriority.php
 │   │   │   │   ├── SupportsExtensions.php
 │   │   │   │   ├── SupportsExtensionsAndPathArg.php
-│   │   │   │   └── SupportsPathArg.php
+│   │   │   │   ├── SupportsPathArg.php
+│   │   │   │   └── SymfonyStyleFactory.php
 │   │   │   └── InlineHtml
 │   │   │       ├── AbstractInlineHtmlFixer.php
 │   │   │       ├── DoctrineSqlFixer.php
@@ -796,7 +797,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 291 files
+60 directories, 292 files
 
 ```
 </details>
