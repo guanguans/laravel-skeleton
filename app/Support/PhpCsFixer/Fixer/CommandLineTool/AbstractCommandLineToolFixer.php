@@ -25,7 +25,6 @@ use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
-use App\Support\PhpCsFixer\Fixer\Concerns\SymfonyStyleFactory;
 use App\Support\PhpCsFixer\Utils;
 use Illuminate\Support\Str;
 use PhpCsFixer\FileReader;
@@ -66,7 +65,6 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use InlineHtmlCandidate;
     use PrePathCommand;
     use SupportsExtensions;
-    use SymfonyStyleFactory;
     public const string COMMAND = 'command';
     public const string OPTIONS = 'options';
     public const string CWD = 'cwd';
@@ -143,9 +141,9 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $process = $this->createProcess();
         $process->run();
 
-        if ($this->makeOutput()->isDebug()) {
-            $this->makeOutput()->title("Process debugging information for [{$this->getName()}]");
-            $this->makeOutput()->warning([
+        if (Utils::output()->isDebug()) {
+            Utils::output()->title("Process debugging information for [{$this->getName()}]");
+            Utils::output()->warning([
                 \sprintf('Command Line: %s', $this->stringFor($process->getCommandLine())),
                 \sprintf('Exit Code: %s', $this->stringFor($process->getExitCode())),
                 \sprintf('Exit Code Text: %s', $this->stringFor($process->getExitCodeText())),
@@ -259,11 +257,11 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
              * @phpstan-ignore-next-line
              */
             ...match (true) {
-                $this->makeOutput()->isSilent() => $this->silentOptions(),
-                $this->makeOutput()->isQuiet() and method_exists($this, 'quietOptions') => $this->quietOptions(),
-                $this->makeOutput()->isVerbose() and method_exists($this, 'verboseOptions') => $this->verboseOptions(),
-                $this->makeOutput()->isVeryVerbose() and method_exists($this, 'veryVerboseOptions') => $this->veryVerboseOptions(),
-                $this->makeOutput()->isDebug() => $this->debugOptions(),
+                Utils::output()->isSilent() => $this->silentOptions(),
+                Utils::output()->isQuiet() and method_exists($this, 'quietOptions') => $this->quietOptions(),
+                Utils::output()->isVerbose() and method_exists($this, 'verboseOptions') => $this->verboseOptions(),
+                Utils::output()->isVeryVerbose() and method_exists($this, 'veryVerboseOptions') => $this->veryVerboseOptions(),
+                Utils::output()->isDebug() => $this->debugOptions(),
                 default => $this->silentOptions(),
             },
             ...$this->configuration[self::OPTIONS],

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer;
 
+use App\Support\Console\SymfonyStyleFactory;
+use Symfony\Component\Console\Style\SymfonyStyle;
+
 final class Utils
 {
     private function __construct() {}
@@ -28,5 +31,12 @@ final class Utils
     public static function argv(): array
     {
         return $_SERVER['argv'] ??= [];
+    }
+
+    public static function output(): SymfonyStyle
+    {
+        static $symfonyStyle;
+
+        return $symfonyStyle ??= SymfonyStyleFactory::create();
     }
 }
