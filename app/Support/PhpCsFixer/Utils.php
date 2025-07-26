@@ -17,6 +17,11 @@ final class Utils
 {
     private function __construct() {}
 
+    public static function isDryRun(): bool
+    {
+        return \in_array('--dry-run', self::argv(), true);
+    }
+
     /**
      * @noinspection GlobalVariableUsageInspection
      */

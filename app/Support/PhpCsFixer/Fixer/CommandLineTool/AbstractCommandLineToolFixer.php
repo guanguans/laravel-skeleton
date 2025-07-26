@@ -24,9 +24,9 @@ use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
-use App\Support\PhpCsFixer\Fixer\Concerns\IsDryRun;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Fixer\Concerns\SymfonyStyleFactory;
+use App\Support\PhpCsFixer\Utils;
 use Illuminate\Support\Str;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FileRemoval;
@@ -64,7 +64,6 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use Awarer;
     use HighestPriority;
     use InlineHtmlCandidate;
-    use IsDryRun;
     use PrePathCommand;
     use SupportsExtensions;
     use SymfonyStyleFactory;
@@ -186,7 +185,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
         $path = (string) $this->file;
 
-        if ($this->isDryRun()) {
+        if (Utils::isDryRun()) {
             file_put_contents($path = $this->createTemporaryFile(), $this->tokens->generateCode());
         }
 

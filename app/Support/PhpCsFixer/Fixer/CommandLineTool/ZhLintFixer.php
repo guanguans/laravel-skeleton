@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
+use App\Support\PhpCsFixer\Utils;
+
 /**
  * @see https://github.com/zhlint-project/zhlint
  */
@@ -41,7 +43,7 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
 
     protected function path(): string
     {
-        if ($this->isDryRun()) {
+        if (Utils::isDryRun()) {
             $this->createTemporaryFile(getcwd());
         }
 
