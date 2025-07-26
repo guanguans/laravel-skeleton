@@ -155,7 +155,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
         if ($this->isSuccessfulProcess($process)) {
             // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->path()))]);
-            $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->path())));
+            $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->singletonPath())));
         }
     }
 
@@ -170,14 +170,15 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         );
     }
 
-    protected function path(): string
+    protected function singletonPath(): string
     {
         static $path;
 
-        if ($path) {
-            return $path;
-        }
+        return $path ??= $this->path();
+    }
 
+    protected function path(): string
+    {
         $path = (string) $this->file;
 
         if (Utils::isDryRun()) {

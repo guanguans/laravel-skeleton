@@ -41,12 +41,12 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
         return ['md', 'markdown', 'txt', 'text'];
     }
 
-    protected function path(): string
+    protected function singletonPath(): string
     {
         $cwd = $this->configuration[self::CWD] ?? getcwd();
         Utils::isDryRun() and $this->createSingletonTemporaryFile($cwd);
 
-        return str(parent::path())
+        return str(parent::singletonPath())
             ->chopStart($cwd)
             ->chopStart(\DIRECTORY_SEPARATOR)
             ->toString();
