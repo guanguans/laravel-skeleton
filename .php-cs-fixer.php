@@ -99,27 +99,27 @@ return Factory::fromRuleSet(Php83::create()
                 // AutocorrectFixer::name(),
                 // LintMdFixer::name(),
                 // MarkDownLintCli2Fixer::name(),
-                // TextLintFixer::name(),
-                // ZhLintFixer::name(),
+                TextLintFixer::name(),
+                ZhLintFixer::name(),
 
                 // PintFixer::name(),
                 // BladeFormatterFixer::name(),
 
-                DotEnvLinterFixer::name(),
+                // DotEnvLinterFixer::name(),
 
-                ShFmtFixer::name(),
+                // ShFmtFixer::name(),
 
-                DoctrineSqlFixer::name(),
+                // DoctrineSqlFixer::name(),
                 PhpMyAdminSqlFixer::name(),
-                // SqlFluffFixer::name(),
+                SqlFluffFixer::name(),
 
                 YamlFixer::name(),
-                // YamlFmtFixer::name(),
+                YamlFmtFixer::name(),
 
                 XmlFixer::name(),
                 // XmlLintFixer::name(),
 
-                JsonFixer::name(),
+                // JsonFixer::name(),
 
                 NeonFixer::name(),
             ],
@@ -369,7 +369,7 @@ return Factory::fromRuleSet(Php83::create()
          */
         Finder::create()
             ->in([
-                // __DIR__.'/.github/',
+                __DIR__.'/.github/',
                 __DIR__.'/app/',
                 __DIR__.'/bootstrap/',
                 __DIR__.'/config/',
@@ -387,34 +387,35 @@ return Factory::fromRuleSet(Php83::create()
                 '/lang\/.*\.json$/',
             ])
             ->name([
-                // '/\.bats$/',
-                // '/\.env$/',
-                // '/\.env\.example$/',
-                // '/\.json$/',
-                // '/\.markdown$/',
-                // '/\.md$/',
-                // '/\.neon$/',
+                '/\.bats$/',
+                '/\.env$/',
+                '/\.env\.example$/',
+                '/\.json$/',
+                '/\.markdown$/',
+                '/\.md$/',
+                '/\.neon$/',
                 '/\.php$/',
-                // '/\.sh$/',
-                // '/\.sql$/',
-                // '/\.text$/',
-                // '/\.txt$/',
-                // '/\.xml$/',
-                // '/\.xml\.dist$/',
-                // '/\.yaml$/',
-                // '/\.yml$/',
+                '/\.sh$/',
+                '/\.sql$/',
+                '/\.text$/',
+                '/\.txt$/',
+                '/\.xml$/',
+                '/\.xml\.dist$/',
+                '/\.yaml$/',
+                '/\.yml$/',
             ])
             ->notName([
                 '*.blade.php',
             ])
             ->append([
                 ...array_filter(
-                    glob(__DIR__.'/{*,.*}.{php}', \GLOB_BRACE),
+                    glob(__DIR__.'/{*,.*}', \GLOB_BRACE),
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',
                         __DIR__.'/_ide_helper_actions.php',
                         __DIR__.'/_ide_helper_models.php',
+                        __DIR__.'/CHANGELOG.md',
                     ], true)
                 ),
                 __DIR__.'/artisan',
