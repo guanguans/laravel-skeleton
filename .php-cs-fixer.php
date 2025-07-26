@@ -94,8 +94,8 @@ return Factory::fromRuleSet(Php83::create()
                 // PintFixer::name(),
 
                 DoctrineSqlFixer::name(),
-                // PhpMyAdminSqlFixer::name(),
-                SqlFluffFixer::name(),
+                PhpMyAdminSqlFixer::name(),
+                // SqlFluffFixer::name(),
 
                 YamlFixer::name(),
                 YamlFmtFixer::name(),
