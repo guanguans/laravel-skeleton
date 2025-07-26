@@ -26,7 +26,6 @@ use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Utils;
-use Illuminate\Support\Str;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -36,9 +35,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use Spatie\TemporaryDirectory\TemporaryDirectory;
 use Symfony\Component\Process\Process;
-use function Psl\Filesystem\create_file;
 
 /**
  * @see https://github.com/super-linter/super-linter
@@ -183,44 +180,24 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $path = (string) $this->file;
 
         if (Utils::isDryRun()) {
-            file_put_contents($path = $this->createTemporaryFile(), $this->tokens->generateCode());
+            file_put_contents($path = $this->createSingletonTemporaryFile(), $this->tokens->generateCode());
         }
 
         return $path;
     }
 
-    /**
-     * @noinspection PhpUnhandledExceptionInspection
-     * @noinspection PhpConditionAlreadyCheckedInspection
-     */
-    protected function createTemporaryFile(string $location = '', ?string $dirName = null): string
-    {
-        static $temporaryFile;
-
-        if ($temporaryFile) {
-            return $temporaryFile;
-        }
-
-        $path = (new TemporaryDirectory)
-            ->deleteWhenDestroyed()
-            ->force()
-            ->location($location)
-            ->name($dirName ?? $this->getShortName())
-            ->create()
-            ->path(
-                str(Str::random())
-                    ->remove(\DIRECTORY_SEPARATOR)
-                    ->finish('.')
-                    ->finish(collect($this->extensions())->random())
-                    ->toString()
-            );
-
-        // touch($path);
-        create_file($path);
-        Utils::deferDelete($path);
-
-        // return $temporaryFile ??= create_temporary_file(null, $this->getSortName());
-        return $temporaryFile ??= $path;
+    protected function createSingletonTemporaryFile(
+        ?string $directory = null,
+        ?string $prefix = null,
+        ?string $extension = null,
+        bool $deferDelete = true,
+    ): string {
+        return Utils::createSingletonTemporaryFile(
+            directory: $directory,
+            prefix: $prefix ?? "{$this->getShortName()}_",
+            extension: $extension ?? array_random($this->extensions()),
+            deferDelete: $deferDelete,
+        );
     }
 
     protected function isSuccessfulProcess(Process $process): bool

@@ -67,4 +67,51 @@ final class Utils
                 \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_THROW_ON_ERROR | \JSON_FORCE_OBJECT
             );
     }
+
+    public static function createSingletonTemporaryFile(
+        ?string $directory = null,
+        ?string $prefix = null,
+        ?string $extension = null,
+        bool $deferDelete = true,
+    ): string {
+        static $temporaryFile;
+
+        return $temporaryFile ??= self::createTemporaryFile($directory, $prefix, $extension, $deferDelete);
+    }
+
+    /**
+     * @see \Psl\Filesystem\create_temporary_file()
+     * @see \Spatie\TemporaryDirectory\TemporaryDirectory
+     * @see \Illuminate\Filesystem\Filesystem::ensureDirectoryExists()
+     */
+    public static function createTemporaryFile(
+        ?string $directory = null,
+        ?string $prefix = null,
+        ?string $extension = null,
+        bool $deferDelete = true
+    ): string {
+        $directory ??= sys_get_temp_dir();
+
+        if (!is_dir($directory) && !mkdir($directory, 0o755, true) && !is_dir($directory)) {
+            throw new \RuntimeException("The directory [$directory] could not be created.");
+        }
+
+        $temporaryFile = tempnam($directory, $prefix ?? '');
+
+        if (!$temporaryFile) {
+            throw new \RuntimeException("Failed to create a temporary file in directory [$directory].");
+        }
+
+        if ($extension) {
+            $isRenamed = rename($temporaryFile, $temporaryFile .= ".$extension");
+
+            if (!$isRenamed) {
+                throw new \RuntimeException("Failed to rename temporary file [$temporaryFile] with extension [$extension].");
+            }
+        }
+
+        $deferDelete and self::deferDelete($temporaryFile);
+
+        return $temporaryFile;
+    }
 }
