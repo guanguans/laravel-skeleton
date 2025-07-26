@@ -102,19 +102,19 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
                 ->getOption(),
             (new FixerOptionBuilder(self::CWD, 'The working directory or null to use the working dir of the current PHP process.'))
                 ->setAllowedTypes(['string', 'null'])
-                ->setDefault($this->defaultCwd())
+                ->setDefault(null)
                 ->getOption(),
             (new FixerOptionBuilder(self::ENV, 'The environment variables or null to use the same environment as the current PHP process.'))
                 ->setAllowedTypes(['array', 'null'])
-                ->setDefault($this->defaultEnv())
+                ->setDefault(null)
                 ->getOption(),
             (new FixerOptionBuilder(self::INPUT, 'The input as stream resource, scalar or \Traversable, or null for no input.'))
                 ->setAllowedTypes(['string', 'null'])
-                ->setDefault($this->defaultInput())
+                ->setDefault(null)
                 ->getOption(),
             (new FixerOptionBuilder(self::TIMEOUT, 'The timeout in seconds or null to disable.'))
                 ->setAllowedTypes(['float', 'int', 'null'])
-                ->setDefault($this->defaultTimeout())
+                ->setDefault(60)
                 ->getOption(),
         ];
     }
@@ -288,25 +288,5 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     protected function debugOptions(): array
     {
         return [];
-    }
-
-    protected function defaultCwd(): ?string
-    {
-        return null;
-    }
-
-    protected function defaultEnv(): ?array
-    {
-        return null;
-    }
-
-    protected function defaultInput(): ?string
-    {
-        return null;
-    }
-
-    protected function defaultTimeout(): ?float
-    {
-        return 60;
     }
 }
