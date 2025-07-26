@@ -432,6 +432,8 @@ if (!\function_exists('user_http_build_query')) {
          * 转换值是非标量的情况.
          */
         $toQueryStr = static function (string $key, array|object $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
+            /** @see https://laravel-news.com/retrieve-the-currently-executing-closure-in-php-85 */
+            // $toQueryStr = Closure::getCurrent();
             $queryStr = '';
 
             if (!$value instanceof Traversable) {

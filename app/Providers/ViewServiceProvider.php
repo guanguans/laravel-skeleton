@@ -157,6 +157,11 @@ final class ViewServiceProvider extends ServiceProvider
 
     /**
      * @see https://www.harrisrafto.eu/simplifying-view-logic-with-laravel-blades-service-injection
+     * @see https://laravel-news.com/blade-inject
+     *
+     * ```blade
+     * inject('request', 'Illuminate\Http\Request)
+     * ```
      */
     private function extendView(): void
     {
