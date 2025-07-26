@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -114,7 +116,7 @@ return Factory::fromRuleSet(Php83::create()
                 SqlFluffFixer::name(),
 
                 YamlFixer::name(),
-                YamlFmtFixer::name(),
+                // YamlFmtFixer::name(),
 
                 XmlFixer::name(),
                 // XmlLintFixer::name(),
@@ -405,17 +407,18 @@ return Factory::fromRuleSet(Php83::create()
                 '/\.yml$/',
             ])
             ->notName([
-                '*.blade.php',
+                // '*.blade.php',
             ])
             ->append([
                 ...array_filter(
-                    glob(__DIR__.'/{*,.*}', \GLOB_BRACE),
+                    glob(__DIR__.'/{*,.*}.*', \GLOB_BRACE),
                     static fn (string $filename): bool => !\in_array($filename, [
                         __DIR__.'/.phpstorm.meta.php',
                         __DIR__.'/_ide_helper.php',
                         __DIR__.'/_ide_helper_actions.php',
                         __DIR__.'/_ide_helper_models.php',
                         __DIR__.'/CHANGELOG.md',
+                        __DIR__.'/README.md',
                     ], true)
                 ),
                 __DIR__.'/artisan',
