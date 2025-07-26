@@ -13,15 +13,20 @@ declare(strict_types=1);
 
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\BladeFormatterFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\DotEnvLinterFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\LintMdFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkDownLintCli2Fixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\ShFmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqlFluffFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\TextLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\XmlLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\YamlFmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\ZhLintFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
+use App\Support\PhpCsFixer\Fixer\InlineHtml\JsonFixer;
+use App\Support\PhpCsFixer\Fixer\InlineHtml\NeonFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
@@ -91,7 +96,18 @@ return Factory::fromRuleSet(Php83::create()
         array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
             $fixer->getName(),
             [
+                // AutocorrectFixer::name(),
+                // LintMdFixer::name(),
+                // MarkDownLintCli2Fixer::name(),
+                // TextLintFixer::name(),
+                // ZhLintFixer::name(),
+
                 // PintFixer::name(),
+                // BladeFormatterFixer::name(),
+
+                DotEnvLinterFixer::name(),
+
+                ShFmtFixer::name(),
 
                 DoctrineSqlFixer::name(),
                 PhpMyAdminSqlFixer::name(),
@@ -99,14 +115,13 @@ return Factory::fromRuleSet(Php83::create()
 
                 YamlFixer::name(),
                 // YamlFmtFixer::name(),
+
                 XmlFixer::name(),
                 // XmlLintFixer::name(),
 
-                // AutocorrectFixer::name(),
-                // LintMdFixer::name(),
-                // MarkDownLintCli2Fixer::name(),
-                // TextLintFixer::name(),
-                // ZhLintFixer::name(),
+                JsonFixer::name(),
+
+                NeonFixer::name(),
             ],
             true
         )),
