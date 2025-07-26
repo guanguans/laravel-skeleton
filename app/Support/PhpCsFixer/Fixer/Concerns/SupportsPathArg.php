@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
+use App\Support\PhpCsFixer\Utils;
+
 trait SupportsPathArg
 {
-    use Argv;
-
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file)->contains($this->argv());
+        return str($file)->contains(Utils::argv());
     }
 }

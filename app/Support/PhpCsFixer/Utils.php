@@ -16,4 +16,12 @@ namespace App\Support\PhpCsFixer;
 final class Utils
 {
     private function __construct() {}
+
+    /**
+     * @noinspection GlobalVariableUsageInspection
+     */
+    public static function argv(): array
+    {
+        return $_SERVER['argv'] ??= [];
+    }
 }

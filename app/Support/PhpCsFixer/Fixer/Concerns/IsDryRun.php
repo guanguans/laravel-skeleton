@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
+use App\Support\PhpCsFixer\Utils;
+
 trait IsDryRun
 {
-    use Argv;
-
     protected function isDryRun(): bool
     {
-        return \in_array('--dry-run', $this->argv(), true);
+        return \in_array('--dry-run', Utils::argv(), true);
     }
 }
