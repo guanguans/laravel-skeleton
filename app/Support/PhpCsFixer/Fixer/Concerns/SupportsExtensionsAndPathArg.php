@@ -15,16 +15,15 @@ namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
 trait SupportsExtensionsAndPathArg
 {
-    use SupportsExtensions;
-    use SupportsPathArg;
+    use SupportsExtensions {
+        SupportsExtensions::supports as supportsExtensions;
+    }
+    use SupportsPathArg{
+        SupportsPathArg::supports as supportsPathArg;
+    }
 
     #[\Override]
     public function supports(\SplFileInfo $file): bool
-    {
-        return $this->supportsExtensionsAndPathArg($file);
-    }
-
-    protected function supportsExtensionsAndPathArg(\SplFileInfo $file): bool
     {
         return $this->supportsExtensions($file) && $this->supportsPathArg($file);
     }

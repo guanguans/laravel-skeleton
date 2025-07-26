@@ -20,11 +20,6 @@ trait PrePathCommand
 {
     protected function command(): array
     {
-        return $this->prePathCommand();
-    }
-
-    protected function prePathCommand(): array
-    {
         return [
             ...$this->configuration[self::COMMAND],
             $this->path(),

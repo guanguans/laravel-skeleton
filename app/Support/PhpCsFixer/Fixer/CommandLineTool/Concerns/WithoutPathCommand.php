@@ -20,11 +20,6 @@ trait WithoutPathCommand
 {
     protected function command(): array
     {
-        return $this->withoutPathCommand();
-    }
-
-    protected function withoutPathCommand(): array
-    {
         return [
             ...$this->configuration[self::COMMAND],
             ...$this->options(),

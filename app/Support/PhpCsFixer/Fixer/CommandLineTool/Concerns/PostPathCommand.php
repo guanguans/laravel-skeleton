@@ -23,14 +23,6 @@ trait PostPathCommand
      */
     protected function command(): array
     {
-        return $this->postPathCommand();
-    }
-
-    /**
-     * @noinspection OverrideMissingInspection
-     */
-    protected function postPathCommand(): array
-    {
         return [
             ...$this->configuration[self::COMMAND],
             ...$this->options(),

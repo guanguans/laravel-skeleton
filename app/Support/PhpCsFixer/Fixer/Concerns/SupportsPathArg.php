@@ -19,11 +19,6 @@ trait SupportsPathArg
 
     public function supports(\SplFileInfo $file): bool
     {
-        return $this->supportsPathArg($file);
-    }
-
-    protected function supportsPathArg(\SplFileInfo $file): bool
-    {
         return str($file)->contains($this->argv());
     }
 }
