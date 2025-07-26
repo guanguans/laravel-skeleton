@@ -182,23 +182,25 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $path = (string) $this->file;
 
         if (Utils::isDryRun()) {
-            file_put_contents($path = $this->createSingletonTemporaryFile(), $this->tokens->generateCode());
+            file_put_contents($path = $this->createTemporaryFile(), $this->tokens->generateCode());
         }
 
         return $path;
     }
 
-    protected function createSingletonTemporaryFile(
+    protected function createTemporaryFile(
         ?string $directory = null,
         ?string $prefix = null,
         ?string $extension = null,
         bool $deferDelete = true,
+        bool $singleton = true,
     ): string {
-        return Utils::createSingletonTemporaryFile(
+        return Utils::createTemporaryFile(
             directory: $directory,
             prefix: $prefix ?? "{$this->getShortName()}_",
             extension: $extension ?? Arr::random($this->extensions()),
             deferDelete: $deferDelete,
+            singleton: $singleton,
         );
     }
 

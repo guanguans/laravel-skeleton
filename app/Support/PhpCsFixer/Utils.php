@@ -58,17 +58,6 @@ final class Utils
             );
     }
 
-    public static function createSingletonTemporaryFile(
-        ?string $directory = null,
-        ?string $prefix = null,
-        ?string $extension = null,
-        bool $deferDelete = true,
-    ): string {
-        static $temporaryFile;
-
-        return $temporaryFile ??= self::createTemporaryFile($directory, $prefix, $extension, $deferDelete);
-    }
-
     /**
      * @see \Illuminate\Filesystem\Filesystem::ensureDirectoryExists()
      * @see \Psl\Filesystem\create_temporary_file()
@@ -78,8 +67,15 @@ final class Utils
         ?string $directory = null,
         ?string $prefix = null,
         ?string $extension = null,
-        bool $deferDelete = true
+        bool $deferDelete = true,
+        bool $singleton = false,
     ): string {
+        static $temporaryFile;
+
+        if ($singleton && $temporaryFile) {
+            return $temporaryFile;
+        }
+
         $directory ??= sys_get_temp_dir();
 
         if (!is_dir($directory) && !mkdir($directory, 0o755, true) && !is_dir($directory)) {

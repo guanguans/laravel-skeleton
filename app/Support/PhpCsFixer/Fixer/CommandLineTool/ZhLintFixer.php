@@ -41,13 +41,22 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
         return ['md', 'markdown', 'txt', 'text'];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function configurePostNormalisation(): void
+    {
+        Utils::isDryRun() and $this->createTemporaryFile(
+            directory: $this->configuration[self::CWD] ?? getcwd(),
+            singleton: false
+        );
+    }
+
     protected function singletonPath(): string
     {
-        $cwd = $this->configuration[self::CWD] ?? getcwd();
-        Utils::isDryRun() and $this->createSingletonTemporaryFile($cwd);
-
         return str(parent::singletonPath())
-            ->chopStart($cwd)
+            ->chopStart($this->configuration[self::CWD] ?? getcwd())
             ->chopStart(\DIRECTORY_SEPARATOR)
             ->toString();
     }

@@ -102,10 +102,10 @@ return Factory::fromRuleSet(Php83::create()
                 XmlFixer::name(),
                 // XmlLintFixer::name(),
 
-                AutocorrectFixer::name(),
-                LintMdFixer::name(),
-                MarkDownLintCli2Fixer::name(),
-                TextLintFixer::name(),
+                // AutocorrectFixer::name(),
+                // LintMdFixer::name(),
+                // MarkDownLintCli2Fixer::name(),
+                // TextLintFixer::name(),
                 // ZhLintFixer::name(),
             ],
             true
