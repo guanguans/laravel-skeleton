@@ -26,6 +26,7 @@ use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Utils;
+use Illuminate\Support\Arr;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -153,9 +154,14 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         }
 
         if ($this->isSuccessfulProcess($process)) {
-            // $tokens[0] = new Token([\TOKEN_PARSE, FileReader::createSingleton()->read($this->path())]);
-            $tokens->setCode(FileReader::createSingleton()->read($this->path()));
+            // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->path()))]);
+            $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->path())));
         }
+    }
+
+    protected function postFix(string $content): string
+    {
+        return $content;
     }
 
     protected function createProcess(): Process
@@ -195,7 +201,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         return Utils::createSingletonTemporaryFile(
             directory: $directory,
             prefix: $prefix ?? "{$this->getShortName()}_",
-            extension: $extension ?? array_random($this->extensions()),
+            extension: $extension ?? Arr::random($this->extensions()),
             deferDelete: $deferDelete,
         );
     }

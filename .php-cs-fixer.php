@@ -99,8 +99,8 @@ return Factory::fromRuleSet(Php83::create()
 
                 YamlFixer::name(),
                 YamlFmtFixer::name(),
-                // XmlFixer::name(),
-                XmlLintFixer::name(),
+                XmlFixer::name(),
+                // XmlLintFixer::name(),
 
                 AutocorrectFixer::name(),
                 LintMdFixer::name(),

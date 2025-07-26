@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
+use App\Support\PhpCsFixer\Utils;
 use Illuminate\Support\Stringable;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -30,7 +31,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 final class XmlFixer extends AbstractInlineHtmlFixer
 {
     public const string CONTEXT = 'context';
-    public const string MULTILINE_ATTRIBUTE_THRESHOLD = 'multiline_attribute_threshold';
+    public const string MULTILINE_ATTR_THRESHOLD = 'multiline_attr_threshold';
 
     #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
@@ -39,7 +40,7 @@ final class XmlFixer extends AbstractInlineHtmlFixer
             (new FixerOptionBuilder(self::CONTEXT, 'The context options for the XML encoder.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault([
-                    self::MULTILINE_ATTRIBUTE_THRESHOLD => 5,
+                    self::MULTILINE_ATTR_THRESHOLD => 5,
                     XmlEncoder::ENCODING => 'UTF-8',
                     XmlEncoder::FORMAT_OUTPUT => true,
                     // XmlEncoder::LOAD_OPTIONS => \LIBXML_NONET | \LIBXML_NOBLANKS,
@@ -73,7 +74,15 @@ final class XmlFixer extends AbstractInlineHtmlFixer
                 $this->configuration[self::CONTEXT][XmlEncoder::SAVE_OPTIONS] & \LIBXML_NOEMPTYTAG,
                 static fn (Stringable $content) => $content->replaceMatches('/<(\w+)([^>]*)>\s*<\/\1>/', '<$1$2/>')
             )
-            ->pipe(fn (Stringable $content): string => $this->formatAttribute($content->toString()))
+            ->when(
+                $this->configuration[self::CONTEXT][XmlEncoder::FORMAT_OUTPUT],
+                fn (Stringable $content): Stringable => str(
+                    Utils::formatXmlAttributes(
+                        $content->toString(),
+                        $this->configuration[self::CONTEXT][self::MULTILINE_ATTR_THRESHOLD]
+                    )
+                )
+            )
             ->toString();
     }
 
@@ -98,42 +107,5 @@ final class XmlFixer extends AbstractInlineHtmlFixer
         }
 
         return $domDocument;
-    }
-
-    private function formatAttribute(string $content): string
-    {
-        return preg_replace_callback(
-            '/<([^\s>\/]+)(\s+[^>]+?)(\s*\/?)>/',
-            function (array $matches) use ($content): string {
-                [$fullMatch, $tagName, $attributes, $selfClosing] = $matches;
-
-                // 属性数量小于阈值保持单行
-                if (
-                    preg_match_all(
-                        '/\s+[^\s=]+="/',
-                        $attributes
-                    ) < $this->configuration[self::CONTEXT][self::MULTILINE_ATTRIBUTE_THRESHOLD]
-                ) {
-                    return $fullMatch;
-                }
-
-                // 计算当前行的缩进
-                $position = strpos($content, $fullMatch);
-                $lastNewline = strrpos(substr($content, 0, $position), \PHP_EOL);
-                $currentIndent = '';
-
-                if (false !== $lastNewline) {
-                    $lineBeforeTag = substr($content, $lastNewline + 1, $position - $lastNewline - 1);
-                    $currentIndent = str_repeat(' ', \strlen($lineBeforeTag) - \strlen(ltrim($lineBeforeTag)));
-                }
-
-                // 格式化属性为多行
-                $formattedAttrs = preg_replace('/\s+([^\s=]+="[^"]*")/', "\n$currentIndent  $1", $attributes);
-                $closing = $selfClosing ? "\n$currentIndent$selfClosing>" : "\n$currentIndent>";
-
-                return "<$tagName$formattedAttrs$closing";
-            },
-            $content
-        );
     }
 }
