@@ -159,11 +159,6 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         }
     }
 
-    protected function postFix(string $content): string
-    {
-        return $content;
-    }
-
     protected function createProcess(): Process
     {
         return new Process(
@@ -209,6 +204,11 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     protected function isSuccessfulProcess(Process $process): bool
     {
         return $process->isSuccessful();
+    }
+
+    protected function postFix(string $content): string
+    {
+        return $content;
     }
 
     abstract protected function defaultCommand(): array;

@@ -61,7 +61,12 @@ final class JsonFixer extends AbstractInlineHtmlFixer
     protected function format(string $content): string
     {
         return json_encode(
-            json_decode($content, $this->configuration[self::DECODE_ASSOCIATIVE], 512, \JSON_THROW_ON_ERROR | $this->configuration[self::DECODE_FLAGS]),
+            json_decode(
+                $content,
+                $this->configuration[self::DECODE_ASSOCIATIVE],
+                512,
+                \JSON_THROW_ON_ERROR | $this->configuration[self::DECODE_FLAGS]
+            ),
             \JSON_THROW_ON_ERROR | $this->configuration[self::ENCODE_FLAGS]
         );
     }

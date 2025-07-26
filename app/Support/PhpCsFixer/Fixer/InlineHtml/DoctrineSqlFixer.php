@@ -27,15 +27,6 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
 {
     public const string INDENT_STRING = 'indent_string';
 
-    /**
-     * @see \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::getPriority()
-     */
-    #[\Override]
-    public function getPriority(): int
-    {
-        return parent::getPriority() - 1;
-    }
-
     #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
