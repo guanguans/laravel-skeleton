@@ -745,16 +745,13 @@ app
 │   │   │   ├── Concerns
 │   │   │   │   ├── AllowRisky.php
 │   │   │   │   ├── AlwaysCandidate.php
-│   │   │   │   ├── Argv.php
-│   │   │   │   ├── Awarer.php
+│   │   │   │   ├── FileAndTokensAwarer.php
 │   │   │   │   ├── HighestPriority.php
 │   │   │   │   ├── InlineHtmlCandidate.php
-│   │   │   │   ├── IsDryRun.php
 │   │   │   │   ├── LowestPriority.php
 │   │   │   │   ├── SupportsExtensions.php
 │   │   │   │   ├── SupportsExtensionsAndPathArg.php
-│   │   │   │   ├── SupportsPathArg.php
-│   │   │   │   └── SymfonyStyleFactory.php
+│   │   │   │   └── SupportsPathArg.php
 │   │   │   └── InlineHtml
 │   │   │       ├── AbstractInlineHtmlFixer.php
 │   │   │       ├── DoctrineSqlFixer.php
@@ -800,7 +797,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 295 files
+60 directories, 292 files
 
 ```
 </details>

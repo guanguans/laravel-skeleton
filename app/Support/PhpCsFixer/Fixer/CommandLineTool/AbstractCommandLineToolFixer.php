@@ -21,14 +21,13 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
-use App\Support\PhpCsFixer\Fixer\Concerns\Awarer;
+use App\Support\PhpCsFixer\Fixer\Concerns\FileAndTokensAwarer;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Utils;
 use Illuminate\Support\Str;
 use PhpCsFixer\FileReader;
-use PhpCsFixer\FileRemoval;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
@@ -60,7 +59,7 @@ use function Psl\Filesystem\create_file;
 abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 {
     use AllowRisky;
-    use Awarer;
+    use FileAndTokensAwarer;
     use HighestPriority;
     use InlineHtmlCandidate;
     use PrePathCommand;
@@ -218,7 +217,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
         // touch($path);
         create_file($path);
-        (new FileRemoval)->observe($path);
+        Utils::deferDelete($path);
 
         // return $temporaryFile ??= create_temporary_file(null, $this->getSortName());
         return $temporaryFile ??= $path;

@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpInternalEntityUsedInspection */
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +16,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer;
 
 use App\Support\Console\SymfonyStyleFactory;
+use PhpCsFixer\FileRemoval;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class Utils
@@ -38,5 +41,15 @@ final class Utils
         static $symfonyStyle;
 
         return $symfonyStyle ??= SymfonyStyleFactory::create();
+    }
+
+    /**
+     * @see \Illuminate\Filesystem\Filesystem::delete()
+     */
+    public static function deferDelete(string ...$paths): void
+    {
+        foreach ($paths as $path) {
+            ($fileRemoval ??= new FileRemoval)->observe($path);
+        }
     }
 }

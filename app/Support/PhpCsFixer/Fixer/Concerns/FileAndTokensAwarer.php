@@ -15,7 +15,7 @@ namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
 use PhpCsFixer\Tokenizer\Tokens;
 
-trait Awarer
+trait FileAndTokensAwarer
 {
     protected \SplFileInfo $file;
     protected Tokens $tokens;
