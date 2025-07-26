@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PathAwarer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\FileAndTokensAwarer;
@@ -60,6 +61,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     use FileAndTokensAwarer;
     use HighestPriority;
     use InlineHtmlCandidate;
+    use PathAwarer;
     use PrePathCommand;
     use SupportsExtensions;
     public const string COMMAND = 'command';
@@ -135,6 +137,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
         $this->setFileAndTokens($file, $tokens);
+        $this->setPath($this->path());
         $process = $this->createProcess();
         $process->run();
 
@@ -154,27 +157,9 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         }
 
         if ($this->isSuccessfulProcess($process)) {
-            // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->path()))]);
-            $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->singletonPath())));
+            // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->path))]);
+            $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->path)));
         }
-    }
-
-    protected function createProcess(): Process
-    {
-        return new Process(
-            command: $this->command(),
-            cwd: $this->configuration[self::CWD],
-            env: $this->configuration[self::ENV],
-            input: $this->configuration[self::INPUT],
-            timeout: $this->configuration[self::TIMEOUT],
-        );
-    }
-
-    protected function singletonPath(): string
-    {
-        static $path;
-
-        return $path ??= $this->path();
     }
 
     protected function path(): string
@@ -193,14 +178,23 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         ?string $prefix = null,
         ?string $extension = null,
         bool $deferDelete = true,
-        bool $singleton = true,
     ): string {
         return Utils::createTemporaryFile(
             directory: $directory,
             prefix: $prefix ?? "{$this->getShortName()}_",
             extension: $extension ?? Arr::random($this->extensions()),
             deferDelete: $deferDelete,
-            singleton: $singleton,
+        );
+    }
+
+    protected function createProcess(): Process
+    {
+        return new Process(
+            command: $this->command(),
+            cwd: $this->configuration[self::CWD],
+            env: $this->configuration[self::ENV],
+            input: $this->configuration[self::INPUT],
+            timeout: $this->configuration[self::TIMEOUT],
         );
     }
 

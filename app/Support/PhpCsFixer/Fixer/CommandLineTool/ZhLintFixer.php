@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Utils;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\Cmd;
 
 /**
  * @see https://github.com/zhlint-project/zhlint
  */
 final class ZhLintFixer extends AbstractCommandLineToolFixer
 {
+    use Cmd;
+
     #[\Override]
     protected function defaultCommand(): array
     {
@@ -38,26 +40,23 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function extensions(): array
     {
-        return ['md', 'markdown', 'txt', 'text', '*'];
+        return ['md', 'markdown', 'txt', 'text'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function configurePostNormalisation(): void
+    protected function path(): string
     {
-        Utils::isDryRun() and $this->createTemporaryFile(
-            directory: $this->configuration[self::CWD] ?? getcwd(),
-            singleton: false
-        );
-    }
-
-    protected function singletonPath(): string
-    {
-        return str(parent::singletonPath())
-            ->chopStart($this->configuration[self::CWD] ?? getcwd())
+        return str(parent::path())
+            ->chopStart($this->cmd())
             ->chopStart(\DIRECTORY_SEPARATOR)
             ->toString();
+    }
+
+    protected function createTemporaryFile(
+        ?string $directory = null,
+        ?string $prefix = null,
+        ?string $extension = null,
+        bool $deferDelete = true,
+    ): string {
+        return parent::createTemporaryFile($this->cmd(), $prefix, $extension, $deferDelete);
     }
 }

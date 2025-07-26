@@ -68,14 +68,7 @@ final class Utils
         ?string $prefix = null,
         ?string $extension = null,
         bool $deferDelete = true,
-        bool $singleton = false,
     ): string {
-        static $temporaryFile;
-
-        if ($singleton && $temporaryFile) {
-            return $temporaryFile;
-        }
-
         $directory ??= sys_get_temp_dir();
 
         if (!is_dir($directory) && !mkdir($directory, 0o755, true) && !is_dir($directory)) {

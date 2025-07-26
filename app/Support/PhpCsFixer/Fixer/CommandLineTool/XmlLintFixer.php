@@ -57,7 +57,7 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
             // '--nocompact',
             '--format',
             '--pretty' => 1,
-            '--output' => $this->singletonPath(),
+            '--output' => $this->path,
             '--encode' => 'UTF-8',
         ];
     }

@@ -54,6 +54,6 @@ final class AutocorrectFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function extensions(): array
     {
-        return ['md', 'markdown', 'txt', 'text', '*'];
+        return ['md', 'markdown', 'txt', 'text'];
     }
 }

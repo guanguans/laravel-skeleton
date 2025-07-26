@@ -16,14 +16,10 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns;
 /**
  * @mixin \App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer
  */
-trait PrePathCommand
+trait Cmd
 {
-    protected function command(): array
+    protected function cmd(): string
     {
-        return [
-            ...$this->configuration[self::COMMAND],
-            $this->path,
-            ...$this->options(),
-        ];
+        return $this->configuration[self::CWD] ?? getcwd();
     }
 }

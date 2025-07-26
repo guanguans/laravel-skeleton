@@ -98,7 +98,7 @@ return Factory::fromRuleSet(Php83::create()
                 // SqlFluffFixer::name(),
 
                 YamlFixer::name(),
-                YamlFmtFixer::name(),
+                // YamlFmtFixer::name(),
                 XmlFixer::name(),
                 // XmlLintFixer::name(),
 

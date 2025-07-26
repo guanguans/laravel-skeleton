@@ -13,17 +13,12 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns;
 
-/**
- * @mixin \App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer
- */
-trait PrePathCommand
+trait PathAwarer
 {
-    protected function command(): array
+    protected string $path;
+
+    protected function setPath(string $path): void
     {
-        return [
-            ...$this->configuration[self::COMMAND],
-            $this->path,
-            ...$this->options(),
-        ];
+        $this->path = $path;
     }
 }
