@@ -16,6 +16,8 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
 use Illuminate\Support\Stringable;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
@@ -31,9 +33,9 @@ final class XmlFixer extends AbstractInlineHtmlFixer
     public const string MULTILINE_ATTRIBUTE_THRESHOLD = 'multiline_attribute_threshold';
 
     #[\Override]
-    protected function fixerOptions(): array
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return [
+        return new FixerConfigurationResolver([
             (new FixerOptionBuilder(self::CONTEXT, 'The context options for the XML encoder.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault([
@@ -44,7 +46,7 @@ final class XmlFixer extends AbstractInlineHtmlFixer
                     XmlEncoder::SAVE_OPTIONS => 0,
                 ])
                 ->getOption(),
-        ];
+        ]);
     }
 
     #[\Override]

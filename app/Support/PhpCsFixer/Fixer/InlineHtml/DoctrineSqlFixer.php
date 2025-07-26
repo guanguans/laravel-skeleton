@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpMissingParentCallCommonInspection */
-
 declare(strict_types=1);
 
 /**
@@ -17,6 +15,8 @@ namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
 use Doctrine\SqlFormatter\NullHighlighter;
 use Doctrine\SqlFormatter\SqlFormatter;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
@@ -37,24 +37,17 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
     }
 
     #[\Override]
-    protected function fixerOptions(): array
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return [
-            (new FixerOptionBuilder(self::INDENT_STRING, 'The SQL string with HTML styles and formatting wrapped in a <pre> tag.'))
+        return new FixerConfigurationResolver([
+            (new FixerOptionBuilder(
+                self::INDENT_STRING,
+                'The SQL string with HTML styles and formatting wrapped in a <pre> tag.'
+            ))
                 ->setAllowedTypes(['string'])
                 ->setDefault('    ')
                 ->getOption(),
-        ];
-    }
-
-    #[\Override]
-    protected function defaultStart(): string
-    {
-        return <<<'HEADER_COMMENT'
-            # noinspection SqlResolveForFile
-
-
-            HEADER_COMMENT;
+        ]);
     }
 
     #[\Override]

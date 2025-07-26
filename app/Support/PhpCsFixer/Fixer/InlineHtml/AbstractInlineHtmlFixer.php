@@ -20,10 +20,6 @@ use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
-use Illuminate\Support\Stringable;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
-use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -36,8 +32,6 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     use HighestPriority;
     use InlineHtmlCandidate;
     use SupportsExtensions;
-    public const string START = 'start';
-    public const string FINISH = 'finish';
 
     #[\Override]
     public function getDefinition(): FixerDefinitionInterface
@@ -56,73 +50,8 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     #[\Override]
     final protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        $tokens[0] = new Token([
-            \TOKEN_PARSE,
-            str(
-                $this->format(
-                    str($tokens[0]->getContent())
-                        ->trim()
-                        ->when(
-                            $this->configuration[self::START],
-                            static fn (Stringable $content, string $start) => $content->chopStart($start)
-                        )
-                        ->when(
-                            $this->configuration[self::FINISH],
-                            static fn (Stringable $content, string $finish) => $content->chopEnd($finish)
-                        )
-                        // ->dd()
-                        ->toString()
-                )
-            )
-                ->trim()
-                ->start($this->configuration[self::START])
-                ->finish($this->configuration[self::FINISH])
-                // ->dd()
-                ->toString(),
-        ]);
+        $tokens[0] = new Token([\TOKEN_PARSE, $this->format($tokens[0]->getContent())]);
     }
-
-    #[\Override]
-    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
-    {
-        return new FixerConfigurationResolver([...$this->defaultFixerOptions(), ...$this->fixerOptions()]);
-    }
-
-    /**
-     * @noinspection PhpMemberCanBePulledUpInspection
-     *
-     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
-     */
-    protected function defaultFixerOptions(): array
-    {
-        return [
-            (new FixerOptionBuilder(self::START, 'The header comment to be prepended to the content.'))
-                ->setAllowedTypes(['string'])
-                ->setDefault($this->defaultStart())
-                ->getOption(),
-            (new FixerOptionBuilder(self::FINISH, 'The footer comment to be appended to the content.'))
-                ->setAllowedTypes(['string'])
-                ->setDefault($this->defaultFinish())
-                ->getOption(),
-        ];
-    }
-
-    protected function defaultStart(): string
-    {
-        return '';
-    }
-
-    protected function defaultFinish(): string
-    {
-        return '';
-    }
-
-    /**
-     * @noinspection PhpMemberCanBePulledUpInspection
-     *
-     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
-     */
-    abstract protected function fixerOptions(): array;
 
     abstract protected function format(string $content): string;
 }

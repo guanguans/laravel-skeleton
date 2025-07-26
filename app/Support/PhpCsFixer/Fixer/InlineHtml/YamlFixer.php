@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use Symfony\Component\Yaml\Yaml;
 
@@ -29,9 +31,9 @@ final class YamlFixer extends AbstractInlineHtmlFixer
     public const string DUMP_FLAGS = 'dump_flags';
 
     #[\Override]
-    protected function fixerOptions(): array
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return [
+        return new FixerConfigurationResolver([
             (new FixerOptionBuilder(self::PARSE_FLAGS, 'A bit field of PARSE_* constants to customize the YAML parser behavior.'))
                 ->setAllowedTypes(['int'])
                 ->setDefault(0)
@@ -53,7 +55,7 @@ final class YamlFixer extends AbstractInlineHtmlFixer
                     | Yaml::DUMP_OBJECT_AS_MAP
                 )
                 ->getOption(),
-        ];
+        ]);
     }
 
     #[\Override]

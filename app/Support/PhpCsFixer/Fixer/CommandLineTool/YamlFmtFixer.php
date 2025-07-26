@@ -30,9 +30,7 @@ final class YamlFmtFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function requiredOptions(): array
     {
-        return [
-            '-gitignore_excludes',
-        ];
+        return ['-gitignore_excludes'];
     }
 
     /**

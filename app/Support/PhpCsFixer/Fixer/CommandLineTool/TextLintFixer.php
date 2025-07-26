@@ -30,10 +30,7 @@ final class TextLintFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function requiredOptions(): array
     {
-        return [
-            '--fix',
-            '--experimental',
-        ];
+        return ['--fix', '--experimental'];
     }
 
     /**

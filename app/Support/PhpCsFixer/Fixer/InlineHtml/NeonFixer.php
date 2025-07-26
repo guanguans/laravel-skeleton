@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
 use Nette\Neon\Neon;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
@@ -25,9 +27,9 @@ final class NeonFixer extends AbstractInlineHtmlFixer
     public const string INDENTATION = 'indentation';
 
     #[\Override]
-    protected function fixerOptions(): array
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return [
+        return new FixerConfigurationResolver([
             (new FixerOptionBuilder(self::BLOCK_MODE, 'Whether to use block mode for encoding.'))
                 ->setAllowedTypes(['bool'])
                 ->setDefault(true)
@@ -36,7 +38,7 @@ final class NeonFixer extends AbstractInlineHtmlFixer
                 ->setAllowedTypes(['string'])
                 ->setDefault('    ')
                 ->getOption(),
-        ];
+        ]);
     }
 
     #[\Override]

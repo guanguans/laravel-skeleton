@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpMissingParentCallCommonInspection */
-
 declare(strict_types=1);
 
 /**
@@ -15,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpMyAdmin\SqlParser\Utils\Formatter;
 
@@ -27,25 +27,15 @@ final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
     public const string OPTIONS = 'options';
 
     #[\Override]
-    protected function fixerOptions(): array
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return [
+        return new FixerConfigurationResolver([
             /**  @see \PhpMyAdmin\SqlParser\Utils\Formatter::getDefaultOptions() */
             (new FixerOptionBuilder(self::OPTIONS, 'The formatting options.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault(['type' => 'text'])
                 ->getOption(),
-        ];
-    }
-
-    #[\Override]
-    protected function defaultStart(): string
-    {
-        return <<<'HEADER_COMMENT'
-            # noinspection SqlResolveForFile
-
-
-            HEADER_COMMENT;
+        ]);
     }
 
     #[\Override]

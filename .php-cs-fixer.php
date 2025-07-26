@@ -19,6 +19,7 @@ use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqlFluffFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\TextLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\XmlLintFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\YamlFmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\ZhLintFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
@@ -90,13 +91,17 @@ return Factory::fromRuleSet(Php83::create()
         array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
             $fixer->getName(),
             [
-                DoctrineSqlFixer::name(),
                 // PintFixer::name(),
-                YamlFixer::name(),
-                XmlFixer::name(),
-                XmlLintFixer::name(),
-                PhpMyAdminSqlFixer::name(),
+
+                DoctrineSqlFixer::name(),
+                // PhpMyAdminSqlFixer::name(),
                 SqlFluffFixer::name(),
+
+                YamlFixer::name(),
+                YamlFmtFixer::name(),
+                // XmlFixer::name(),
+                XmlLintFixer::name(),
+
                 AutocorrectFixer::name(),
                 LintMdFixer::name(),
                 MarkDownLintCli2Fixer::name(),
@@ -111,12 +116,12 @@ return Factory::fromRuleSet(Php83::create()
             return $rules;
         },
         [
-            SqlFluffFixer::name() => [
-                AbstractCommandLineToolFixer::OPTIONS => [
-                    '--dialect' => 'mysql',
-                ],
-                SqlFluffFixer::EXTENSIONS => ['sql'],
-            ],
+            // SqlFluffFixer::name() => [
+            //     AbstractCommandLineToolFixer::OPTIONS => [
+            //         '--dialect' => 'mysql',
+            //     ],
+            //     SqlFluffFixer::EXTENSIONS => ['sql'],
+            // ],
         ]
     )))
     ->withRules(Rules::fromArray([
