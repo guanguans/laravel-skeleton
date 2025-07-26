@@ -143,15 +143,15 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         if (Utils::output()->isDebug()) {
             Utils::output()->title("Process debugging information for [{$this->getName()}]");
             Utils::output()->warning([
-                \sprintf('Command Line: %s', $this->stringFor($process->getCommandLine())),
-                \sprintf('Exit Code: %s', $this->stringFor($process->getExitCode())),
-                \sprintf('Exit Code Text: %s', $this->stringFor($process->getExitCodeText())),
-                \sprintf('Output: %s', $this->stringFor($process->getOutput())),
-                \sprintf('Error Output: %s', $this->stringFor($process->getErrorOutput())),
-                \sprintf('Working Directory: %s', $this->stringFor($process->getWorkingDirectory())),
-                \sprintf('Env: %s', $this->stringFor($process->getEnv())),
-                \sprintf('Input: %s', $this->stringFor($process->getInput())),
-                \sprintf('Timeout: %s', $this->stringFor($process->getTimeout())),
+                \sprintf('Command Line: %s', Utils::toString($process->getCommandLine())),
+                \sprintf('Exit Code: %s', Utils::toString($process->getExitCode())),
+                \sprintf('Exit Code Text: %s', Utils::toString($process->getExitCodeText())),
+                \sprintf('Output: %s', Utils::toString($process->getOutput())),
+                \sprintf('Error Output: %s', Utils::toString($process->getErrorOutput())),
+                \sprintf('Working Directory: %s', Utils::toString($process->getWorkingDirectory())),
+                \sprintf('Env: %s', Utils::toString($process->getEnv())),
+                \sprintf('Input: %s', Utils::toString($process->getInput())),
+                \sprintf('Timeout: %s', Utils::toString($process->getTimeout())),
             ]);
         }
 
@@ -223,21 +223,6 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         return $temporaryFile ??= $path;
     }
 
-    /**
-     * @noinspection PhpUnhandledExceptionInspection
-     *
-     * @see \PhpCsFixer\Utils::toString()
-     */
-    protected function stringFor(mixed $value): string
-    {
-        return \is_string($value)
-            ? $value
-            : json_encode(
-                $value,
-                \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_THROW_ON_ERROR | \JSON_FORCE_OBJECT
-            );
-    }
-
     protected function isSuccessfulProcess(Process $process): bool
     {
         return $process->isSuccessful();
@@ -249,12 +234,6 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     {
         return collect([
             ...$this->requiredOptions(),
-            /**
-             * @see \Symfony\Component\Console\Output\OutputInterface::VERBOSITY_SILENT
-             * @see --ansi, --color, --slient, --quiet, -v, --verbose, --debug
-             *
-             * @phpstan-ignore-next-line
-             */
             ...match (true) {
                 Utils::output()->isSilent() => $this->silentOptions(),
                 Utils::output()->isQuiet() and method_exists($this, 'quietOptions') => $this->quietOptions(),

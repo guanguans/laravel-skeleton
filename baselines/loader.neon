@@ -1,5 +1,6 @@
-# total 12 errors
+# total 13 errors
 includes:
+    - arrayUnpacking.nonIterable.neon
     - class.notFound.neon
     - nullsafe.neverNull.neon
     - property.nonObject.neon

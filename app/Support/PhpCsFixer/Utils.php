@@ -52,4 +52,19 @@ final class Utils
             ($fileRemoval ??= new FileRemoval)->observe($path);
         }
     }
+
+    /**
+     * @noinspection PhpUnhandledExceptionInspection
+     *
+     * @see \PhpCsFixer\Utils::toString()
+     */
+    public static function toString(mixed $value): string
+    {
+        return \is_string($value)
+            ? $value
+            : json_encode(
+                $value,
+                \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_THROW_ON_ERROR | \JSON_FORCE_OBJECT
+            );
+    }
 }

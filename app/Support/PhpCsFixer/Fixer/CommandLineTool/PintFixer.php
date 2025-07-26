@@ -73,6 +73,9 @@ final class PintFixer extends AbstractCommandLineToolFixer
         return ['--ansi', '-vvv'];
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     #[\Override]
     protected function configurePostNormalisation(): void
     {
