@@ -734,11 +734,12 @@ app
 │   │   │   │   │   ├── PostPathCommand.php
 │   │   │   │   │   ├── PrePathCommand.php
 │   │   │   │   │   └── WithoutPathCommand.php
-│   │   │   │   ├── DotEnvLinterFixer.php
+│   │   │   │   ├── DotenvLinterFixer.php
 │   │   │   │   ├── LintMdFixer.php
-│   │   │   │   ├── MarkDownLintCli2Fixer.php
+│   │   │   │   ├── MarkdownLintCli2Fixer.php
+│   │   │   │   ├── MarkdownLintFixer.php
 │   │   │   │   ├── PintFixer.php
-│   │   │   │   ├── ShFmtFixer.php
+│   │   │   │   ├── ShfmtFixer.php
 │   │   │   │   ├── SqlFluffFixer.php
 │   │   │   │   ├── TextLintFixer.php
 │   │   │   │   ├── XmlLintFixer.php
@@ -799,7 +800,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 293 files
+60 directories, 294 files
 
 ```
 </details>

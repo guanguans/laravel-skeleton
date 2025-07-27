@@ -18,7 +18,7 @@ use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
 /**
  * @see https://github.com/mvdan/sh
  */
-final class ShFmtFixer extends AbstractCommandLineToolFixer
+final class ShfmtFixer extends AbstractCommandLineToolFixer
 {
     use PostPathCommand;
 

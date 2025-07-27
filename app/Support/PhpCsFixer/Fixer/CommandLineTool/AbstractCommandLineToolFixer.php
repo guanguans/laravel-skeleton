@@ -46,6 +46,9 @@ use Symfony\Component\Process\Process;
  * @see https://marketplace.visualstudio.com/search?term=lint&target=VSCode&category=All%20categories&sortBy=Relevance
  * @see https://plugins.jetbrains.com/search?search=format
  * @see https://plugins.jetbrains.com/search?search=lint
+ * @see https://prettier.io/docs/plugins
+ * @see `brew search format`
+ * @see `brew search lint`
  *
  * @property array{
  *     command: array,

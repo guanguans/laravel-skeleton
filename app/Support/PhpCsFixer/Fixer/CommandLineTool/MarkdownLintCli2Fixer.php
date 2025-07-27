@@ -18,7 +18,7 @@ use Symfony\Component\Process\Process;
 /**
  * @see https://github.com/DavidAnson/markdownlint-cli2
  */
-final class MarkDownLintCli2Fixer extends AbstractCommandLineToolFixer
+final class MarkdownLintCli2Fixer extends AbstractCommandLineToolFixer
 {
     protected function isSuccessfulProcess(Process $process): bool
     {

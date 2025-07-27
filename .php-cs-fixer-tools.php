@@ -17,11 +17,12 @@ use App\Support\PhpCsFixer\Fixer\AbstractFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\BladeFormatterFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\DotEnvLinterFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\DotenvLinterFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\LintMdFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkDownLintCli2Fixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkdownLintCli2Fixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkdownLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\ShFmtFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\ShfmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqlFluffFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\TextLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\XmlLintFixer;
@@ -44,7 +45,7 @@ use Symfony\Component\Finder\Finder;
 return (new Config)
     ->registerCustomFixers($userFixers = iterator_to_array(new Fixers))
     ->setRules([
-        // '@PhpCsFixer' => true,
+        // '@PhpCsFixer:risky' => true,
         'encoding' => true,
         'no_trailing_whitespace' => true,
         'no_whitespace_in_blank_line' => true,
@@ -60,16 +61,17 @@ return (new Config)
 
         AutocorrectFixer::name() => true,
         LintMdFixer::name() => true,
-        // MarkDownLintCli2Fixer::name() => true,
+        // MarkdownLintCli2Fixer::name() => true,
+        // MarkdownLintFixer::name() => true,
         // TextLintFixer::name() => true,
         // ZhLintFixer::name() => true,
 
         // PintFixer::name() => true,
         BladeFormatterFixer::name() => true,
 
-        DotEnvLinterFixer::name() => true,
+        DotenvLinterFixer::name() => true,
 
-        ShFmtFixer::name() => true,
+        ShfmtFixer::name() => true,
 
         DoctrineSqlFixer::name() => true,
         // PhpMyAdminSqlFixer::name() => true,
