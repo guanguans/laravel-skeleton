@@ -150,7 +150,7 @@ final class UpdateReadmeCommand extends Command
     private function updateAppTree(): void
     {
         $appTree = Process::path(base_path())
-            ->run([(new ExecutableFinder)->find('tree', 'tree'), 'app'])
+            ->run([(new ExecutableFinder)->find('tree', 'tree'), 'app', '--charset', 'HTML', '-F'])
             ->throw()
             ->output();
 

@@ -445,362 +445,362 @@ composer zh-lint
 <summary>App tree</summary>
 
 ```shell
-app
-├── Casts
-│   ├── Base64Cast.php
-│   ├── CallbackGetCast.php
-│   ├── CallbackSetCast.php
-│   ├── CommaSeparatedToArrayCast.php
-│   ├── CommaSeparatedToArrayCastUsing.php
-│   ├── CommaSeparatedToIntegerArrayCast.php
-│   └── CurrencyCast.php
-├── Console
-│   └── Commands
-│       ├── CachePruneCommand.php
-│       ├── CheckServiceProviderCommand.php
-│       ├── ClearAllCommand.php
-│       ├── ClearLogsCommand.php
-│       ├── Command.php
-│       ├── Concerns
-│       │   ├── AskForPassword.php
-│       │   ├── Graceful.php
-│       │   └── Rescuer.php
-│       ├── FindDumpStatementCommand.php
-│       ├── FindStaticMethodsCommand.php
-│       ├── GenerateSitemapCommand.php
-│       ├── HealthCheckCommand.php
-│       ├── IdeHelperChoresCommand.php
-│       ├── InflectorCommand.php
-│       ├── InitCommand.php
-│       ├── MigrateFromMysqlToSqlite.php
-│       ├── OpcacheUrlCommand.php
-│       ├── OptimizeAllCommand.php
-│       ├── PerformDatabaseBackupCommand.php
-│       ├── ShowUnsupportedRequiresCommand.php
-│       └── UpdateReadmeCommand.php
-├── Enums
-│   ├── CacheKeyEnum.php
-│   └── ConfigurationKey.php
-├── Exceptions
-│   ├── BadRequestHttpException.php
-│   ├── InvalidRepeatRequestException.php
-│   └── VerifyEmailException.php
-├── Http
-│   ├── Controllers
-│   │   ├── Api
-│   │   │   ├── AuthController.php
-│   │   │   ├── ChunkUploadController.php
-│   │   │   ├── Controller.php
-│   │   │   ├── CurdController.php
-│   │   │   ├── PingController.php
-│   │   │   └── UploadController.php
-│   │   └── Controller.php
-│   ├── Middleware
-│   │   ├── AbortIf.php
-│   │   ├── AbortIfProduction.php
-│   │   ├── AddContentLength.php
-│   │   ├── BasicAuthentication.php
-│   │   ├── Cors.php
-│   │   ├── DisableFloc.php
-│   │   ├── EnsureVerifiedEmailsForSignInUsers.php
-│   │   ├── HasValidSignature.php
-│   │   ├── HttpsProtocol.php
-│   │   ├── IsDeveloper.php
-│   │   ├── IsRouteIgnored.php
-│   │   ├── Localization.php
-│   │   ├── LogHttp.php
-│   │   ├── MustBeAdmin.php
-│   │   ├── RedirectUppercase.php
-│   │   ├── RequiredJson.php
-│   │   ├── SetAcceptHeader.php
-│   │   ├── SetDefaultLocaleForUrls.php
-│   │   ├── SetJsonResponseEncodingOptions.php
-│   │   ├── SetLocale.php
-│   │   ├── SetTimezone.php
-│   │   ├── VerifyFormPaginate.php
-│   │   ├── VerifyFormPassword.php
-│   │   ├── VerifyJsonContent.php
-│   │   ├── VerifySignature.php
-│   │   └── VerifyUserAbility.php
-│   ├── Requests
-│   │   ├── Auth
-│   │   │   ├── AuthRequest.php
-│   │   │   └── IndexRequest.php
-│   │   └── FormRequest.php
-│   └── Resources
-│       ├── UserCollection.php
-│       └── UserResource.php
-├── Jobs
-│   ├── Middleware
-│   │   ├── EnsureTokenIsValid.php
-│   │   └── RateLimitedForJob.php
-│   └── SendThirdPartyRequestJob.php
-├── Listeners
-│   ├── AuthSubscriber.php
-│   ├── CollectGarbageListener.php
-│   ├── ContextSubscriber.php
-│   ├── LogMailListener.php
-│   ├── MaintenanceModeDisabledNotificationListener.php
-│   ├── MaintenanceModeEnabledNotificationListener.php
-│   ├── PrepareRequestListener.php
-│   ├── RecordRequestIdentifiersListener.php
-│   ├── RunCommandInDebugModeListener.php
-│   └── TraceEventListener.php
-├── Mail
-│   └── UserRegisteredMail.php
-├── Models
-│   ├── BaseModel.php
-│   ├── Concerns
-│   │   ├── BelongsToCreator.php
-│   │   ├── CacheCleaner.php
-│   │   ├── ForceUseIndexable.php
-│   │   ├── GetModelByUuid.php
-│   │   ├── HasPivot.php
-│   │   ├── HasSchemalessAttributes.php
-│   │   ├── HasWrappedApiTokens.php
-│   │   ├── Nullable.php
-│   │   ├── Observable.php
-│   │   ├── Pipeable.php
-│   │   ├── SerializeDate.php
-│   │   ├── Trashed.php
-│   │   └── UuidGenerator.php
-│   ├── DatabaseNotification.php
-│   ├── Example.php
-│   ├── HttpLog.php
-│   ├── JWTUser.php
-│   ├── Movie.php
-│   ├── PersonalAccessToken.php
-│   ├── Pivots
-│   │   ├── MorphPivotWithCreatorPivot.php
-│   │   └── PivotWithCreatorPivot.php
-│   ├── Province.php
-│   └── User.php
-├── Notifications
-│   ├── SlowQueryLoggedNotification.php
-│   └── WelcomeNotification.php
-├── Observers
-│   └── UserObserver.php
-├── Policies
-│   ├── Policy.php
-│   └── UserPolicy.php
-├── Providers
-│   ├── AppServiceProvider.php
-│   ├── AuthServiceProvider.php
-│   ├── AutowiredServiceProvider.php
-│   ├── CacheServiceProvider.php
-│   ├── ConsoleServiceProvider.php
-│   ├── DatabaseServiceProvider.php
-│   ├── EventServiceProvider.php
-│   ├── HttpServiceProvider.php
-│   ├── LogServiceProvider.php
-│   ├── PackageServiceProvider.php
-│   ├── PaginatorServiceProvider.php
-│   ├── QueueServiceProvider.php
-│   ├── RouteServiceProvider.php
-│   ├── SupportServiceProvider.php
-│   ├── UnlessProductionAggregateServiceProvider.php
-│   ├── ValidatorServiceProvider.php
-│   ├── ViewServiceProvider.php
-│   ├── WhenLocalAggregateServiceProvider.php
-│   └── WhenTestingAggregateServiceProvider.php
-├── Rules
-│   ├── AddressIPV4Rule.php
-│   ├── AddressIPV6Rule.php
-│   ├── AggregateRule.php
-│   ├── BankCardRule.php
-│   ├── Base64Rule.php
-│   ├── BetweenWordsRule.php
-│   ├── BitcoinAddressRule.php
-│   ├── CallbackRule.php
-│   ├── CamelCaseRule.php
-│   ├── CapitalCharWithNumberRule.php
-│   ├── CarNumberRule.php
-│   ├── ChineseNameRule.php
-│   ├── Concerns
-│   │   ├── DataAware.php
-│   │   └── ValidatorAware.php
-│   ├── CurrentUserPasswordRule.php
-│   ├── DefaultRule.php
-│   ├── DomainRule.php
-│   ├── DuplicateRule.php
-│   ├── EmailRule.php
-│   ├── EvenNumberRule.php
-│   ├── HexColorRule.php
-│   ├── HexRule.php
-│   ├── HtmlCleanRule.php
-│   ├── HtmlTagRule.php
-│   ├── IdCardRule.php
-│   ├── ImeiRule.php
-│   ├── InstanceofRule.php
-│   ├── IntegerBooleanRule.php
-│   ├── IpRule.php
-│   ├── JwtRule.php
-│   ├── KebabCaseRule.php
-│   ├── LenientPortRule.php
-│   ├── LocationCoordinatesRule.php
-│   ├── MacAddressRule.php
-│   ├── MaxUploadSizeRule.php
-│   ├── MimeTypeRule.php
-│   ├── NotDisposableEmailRule.php
-│   ├── OddNumberRule.php
-│   ├── PhoneCisRule.php
-│   ├── PhoneRule.php
-│   ├── PhoneWorldRule.php
-│   ├── PortRule.php
-│   ├── PostalCodeRule.php
-│   ├── RegexRule.php
-│   ├── Rule.php
-│   ├── SemverRule.php
-│   ├── SlugRule.php
-│   ├── SnakeCaseRule.php
-│   ├── StrongPassword.php
-│   ├── TimezoneRule.php
-│   ├── UlidRule.php
-│   ├── UrlRule.php
-│   ├── UuidRule.php
-│   └── WithoutWhitespaceRule.php
-├── Support
-│   ├── Attributes
-│   │   ├── Autowired.php
-│   │   ├── Elasticsearch.php
-│   │   ├── Ignore.php
-│   │   └── Mixin.php
-│   ├── BitEncoder.php
-│   ├── Bootstrap
-│   │   └── OutOfMemoryBootstrap.php
-│   ├── Clients
-│   │   ├── AbstractClient.php
-│   │   └── PushDeer.php
-│   ├── Console
-│   │   ├── ProgressBarFactory.php
-│   │   └── SymfonyStyleFactory.php
-│   ├── Contracts
-│   │   ├── BitEncoderContract.php
-│   │   └── SignerContract.php
-│   ├── Facades
-│   │   ├── Elasticsearch.php
-│   │   └── PushDeer.php
-│   ├── Guzzle
-│   │   └── CircuitBreakerMiddleware.php
-│   ├── Managers
-│   │   └── ElasticsearchManager.php
-│   ├── Mixins
-│   │   ├── BlueprintMixin.php
-│   │   ├── CarbonMixin.php
-│   │   ├── CollectionMixin.php
-│   │   ├── CommandMixin.php
-│   │   ├── GrammarMixin.php
-│   │   ├── MySqlGrammarMixin.php
-│   │   ├── PendingRequestMixin.php
-│   │   ├── QueryBuilder
-│   │   │   ├── OrderByWithQueryBuilderMixin.php
-│   │   │   ├── QueryBuilderMixin.php
-│   │   │   ├── WhereEndsWithQueryBuilderMixin.php
-│   │   │   ├── WhereFindInSetQueryBuilderMixin.php
-│   │   │   ├── WhereFullTextQueryBuilderMixin.php
-│   │   │   ├── WhereInsQueryBuilderMixin.php
-│   │   │   ├── WhereLikeQueryBuilderMixin.php
-│   │   │   └── WhereStartsWithQueryBuilderMixin.php
-│   │   ├── RequestMixin.php
-│   │   ├── ResponseFactoryMixin.php
-│   │   ├── RouterMixin.php
-│   │   ├── SchedulingEventMixin.php
-│   │   ├── StrMixin.php
-│   │   ├── StringableMixin.php
-│   │   ├── UploadedFileMixin.php
-│   │   └── ViteMixin.php
-│   ├── Monolog
-│   │   ├── EcsFormatterTapper.php
-│   │   ├── Formatter
-│   │   │   └── EloquentLogHttpModelFormatter.php
-│   │   ├── Handler
-│   │   │   └── EloquentHandler.php
-│   │   └── Processor
-│   │       ├── AppendExtraDataProcessor.php
-│   │       └── EloquentLogHttpModelProcessor.php
-│   ├── PHPStan
-│   │   └── ForbiddenGlobalFunctionsRule.php
-│   ├── PhpCsFixer
-│   │   ├── Fixer
-│   │   │   ├── AbstractConfigurableFixer.php
-│   │   │   ├── AbstractFixer.php
-│   │   │   ├── CommandLineTool
-│   │   │   │   ├── AbstractCommandLineToolFixer.php
-│   │   │   │   ├── AutocorrectFixer.php
-│   │   │   │   ├── BladeFormatterFixer.php
-│   │   │   │   ├── Concerns
-│   │   │   │   │   ├── Cmd.php
-│   │   │   │   │   ├── PathAwarer.php
-│   │   │   │   │   ├── PostPathCommand.php
-│   │   │   │   │   ├── PrePathCommand.php
-│   │   │   │   │   └── WithoutPathCommand.php
-│   │   │   │   ├── DockerFmtFixer.php
-│   │   │   │   ├── DotenvLinterFixer.php
-│   │   │   │   ├── HadoLintFixer.php
-│   │   │   │   ├── LintMdFixer.php
-│   │   │   │   ├── MarkdownLintCli2Fixer.php
-│   │   │   │   ├── MarkdownLintFixer.php
-│   │   │   │   ├── PintFixer.php
-│   │   │   │   ├── ShfmtFixer.php
-│   │   │   │   ├── SqlFluffFixer.php
-│   │   │   │   ├── TextLintFixer.php
-│   │   │   │   ├── XmlLintFixer.php
-│   │   │   │   ├── YamlFmtFixer.php
-│   │   │   │   └── ZhLintFixer.php
-│   │   │   ├── Concerns
-│   │   │   │   ├── AllowRisky.php
-│   │   │   │   ├── AlwaysCandidate.php
-│   │   │   │   ├── FileAndTokensAwarer.php
-│   │   │   │   ├── HighestPriority.php
-│   │   │   │   ├── InlineHtmlCandidate.php
-│   │   │   │   ├── LowestPriority.php
-│   │   │   │   ├── SupportsExtensions.php
-│   │   │   │   ├── SupportsExtensionsAndPathArg.php
-│   │   │   │   └── SupportsPathArg.php
-│   │   │   └── InlineHtml
-│   │   │       ├── AbstractInlineHtmlFixer.php
-│   │   │       ├── DoctrineSqlFixer.php
-│   │   │       ├── JsonFixer.php
-│   │   │       ├── NeonFixer.php
-│   │   │       ├── PhpMyAdminSqlFixer.php
-│   │   │       ├── XmlFixer.php
-│   │   │       └── YamlFixer.php
-│   │   ├── Fixers.php
-│   │   └── Utils.php
-│   ├── PhpUserFilters
-│   │   └── CallbackFilter.php
-│   ├── Rectors
-│   │   ├── ClassHandleMethodRector.php
-│   │   └── RenameToPsrNameRector.php
-│   ├── Signers
-│   │   └── HmacSigner.php
-│   ├── Sse
-│   │   ├── CloseServerSentEventException.php
-│   │   └── ServerSentEvent.php
-│   ├── StreamWrappers
-│   │   ├── Concerns
-│   │   │   ├── HasContext.php
-│   │   │   └── Nameable.php
-│   │   ├── GlobStreamWrapper.php
-│   │   ├── StreamWrapper.php
-│   │   └── UserFileStreamWrapper.php
-│   ├── Traits
-│   │   ├── Configurable.php
-│   │   ├── Copyable.php
-│   │   ├── Immutable.php
-│   │   ├── Makeable.php
-│   │   ├── Sanitizeable.php
-│   │   ├── SetStateable.php
-│   │   ├── Singletonable.php
-│   │   └── WithPipeArgs.php
-│   └── helpers.php
-└── View
-    ├── Components
-    │   └── AlertComponent.php
-    ├── Composers
-    │   └── RequestComposer.php
-    └── Creators
-        └── RequestCreator.php
+app/
+|-- Casts/
+|   |-- Base64Cast.php
+|   |-- CallbackGetCast.php
+|   |-- CallbackSetCast.php
+|   |-- CommaSeparatedToArrayCast.php
+|   |-- CommaSeparatedToArrayCastUsing.php
+|   |-- CommaSeparatedToIntegerArrayCast.php
+|   `-- CurrencyCast.php
+|-- Console/
+|   `-- Commands/
+|       |-- CachePruneCommand.php
+|       |-- CheckServiceProviderCommand.php
+|       |-- ClearAllCommand.php
+|       |-- ClearLogsCommand.php
+|       |-- Command.php
+|       |-- Concerns/
+|       |   |-- AskForPassword.php
+|       |   |-- Graceful.php
+|       |   `-- Rescuer.php
+|       |-- FindDumpStatementCommand.php
+|       |-- FindStaticMethodsCommand.php
+|       |-- GenerateSitemapCommand.php
+|       |-- HealthCheckCommand.php
+|       |-- IdeHelperChoresCommand.php
+|       |-- InflectorCommand.php
+|       |-- InitCommand.php
+|       |-- MigrateFromMysqlToSqlite.php
+|       |-- OpcacheUrlCommand.php
+|       |-- OptimizeAllCommand.php
+|       |-- PerformDatabaseBackupCommand.php
+|       |-- ShowUnsupportedRequiresCommand.php
+|       `-- UpdateReadmeCommand.php
+|-- Enums/
+|   |-- CacheKeyEnum.php
+|   `-- ConfigurationKey.php
+|-- Exceptions/
+|   |-- BadRequestHttpException.php
+|   |-- InvalidRepeatRequestException.php
+|   `-- VerifyEmailException.php
+|-- Http/
+|   |-- Controllers/
+|   |   |-- Api/
+|   |   |   |-- AuthController.php
+|   |   |   |-- ChunkUploadController.php
+|   |   |   |-- Controller.php
+|   |   |   |-- CurdController.php
+|   |   |   |-- PingController.php
+|   |   |   `-- UploadController.php
+|   |   `-- Controller.php
+|   |-- Middleware/
+|   |   |-- AbortIf.php
+|   |   |-- AbortIfProduction.php
+|   |   |-- AddContentLength.php
+|   |   |-- BasicAuthentication.php
+|   |   |-- Cors.php
+|   |   |-- DisableFloc.php
+|   |   |-- EnsureVerifiedEmailsForSignInUsers.php
+|   |   |-- HasValidSignature.php
+|   |   |-- HttpsProtocol.php
+|   |   |-- IsDeveloper.php
+|   |   |-- IsRouteIgnored.php
+|   |   |-- Localization.php
+|   |   |-- LogHttp.php
+|   |   |-- MustBeAdmin.php
+|   |   |-- RedirectUppercase.php
+|   |   |-- RequiredJson.php
+|   |   |-- SetAcceptHeader.php
+|   |   |-- SetDefaultLocaleForUrls.php
+|   |   |-- SetJsonResponseEncodingOptions.php
+|   |   |-- SetLocale.php
+|   |   |-- SetTimezone.php
+|   |   |-- VerifyFormPaginate.php
+|   |   |-- VerifyFormPassword.php
+|   |   |-- VerifyJsonContent.php
+|   |   |-- VerifySignature.php
+|   |   `-- VerifyUserAbility.php
+|   |-- Requests/
+|   |   |-- Auth/
+|   |   |   |-- AuthRequest.php
+|   |   |   `-- IndexRequest.php
+|   |   `-- FormRequest.php
+|   `-- Resources/
+|       |-- UserCollection.php
+|       `-- UserResource.php
+|-- Jobs/
+|   |-- Middleware/
+|   |   |-- EnsureTokenIsValid.php
+|   |   `-- RateLimitedForJob.php
+|   `-- SendThirdPartyRequestJob.php
+|-- Listeners/
+|   |-- AuthSubscriber.php
+|   |-- CollectGarbageListener.php
+|   |-- ContextSubscriber.php
+|   |-- LogMailListener.php
+|   |-- MaintenanceModeDisabledNotificationListener.php
+|   |-- MaintenanceModeEnabledNotificationListener.php
+|   |-- PrepareRequestListener.php
+|   |-- RecordRequestIdentifiersListener.php
+|   |-- RunCommandInDebugModeListener.php
+|   `-- TraceEventListener.php
+|-- Mail/
+|   `-- UserRegisteredMail.php
+|-- Models/
+|   |-- BaseModel.php
+|   |-- Concerns/
+|   |   |-- BelongsToCreator.php
+|   |   |-- CacheCleaner.php
+|   |   |-- ForceUseIndexable.php
+|   |   |-- GetModelByUuid.php
+|   |   |-- HasPivot.php
+|   |   |-- HasSchemalessAttributes.php
+|   |   |-- HasWrappedApiTokens.php
+|   |   |-- Nullable.php
+|   |   |-- Observable.php
+|   |   |-- Pipeable.php
+|   |   |-- SerializeDate.php
+|   |   |-- Trashed.php
+|   |   `-- UuidGenerator.php
+|   |-- DatabaseNotification.php
+|   |-- Example.php
+|   |-- HttpLog.php
+|   |-- JWTUser.php
+|   |-- Movie.php
+|   |-- PersonalAccessToken.php
+|   |-- Pivots/
+|   |   |-- MorphPivotWithCreatorPivot.php
+|   |   `-- PivotWithCreatorPivot.php
+|   |-- Province.php
+|   `-- User.php
+|-- Notifications/
+|   |-- SlowQueryLoggedNotification.php
+|   `-- WelcomeNotification.php
+|-- Observers/
+|   `-- UserObserver.php
+|-- Policies/
+|   |-- Policy.php
+|   `-- UserPolicy.php
+|-- Providers/
+|   |-- AppServiceProvider.php
+|   |-- AuthServiceProvider.php
+|   |-- AutowiredServiceProvider.php
+|   |-- CacheServiceProvider.php
+|   |-- ConsoleServiceProvider.php
+|   |-- DatabaseServiceProvider.php
+|   |-- EventServiceProvider.php
+|   |-- HttpServiceProvider.php
+|   |-- LogServiceProvider.php
+|   |-- PackageServiceProvider.php
+|   |-- PaginatorServiceProvider.php
+|   |-- QueueServiceProvider.php
+|   |-- RouteServiceProvider.php
+|   |-- SupportServiceProvider.php
+|   |-- UnlessProductionAggregateServiceProvider.php
+|   |-- ValidatorServiceProvider.php
+|   |-- ViewServiceProvider.php
+|   |-- WhenLocalAggregateServiceProvider.php
+|   `-- WhenTestingAggregateServiceProvider.php
+|-- Rules/
+|   |-- AddressIPV4Rule.php
+|   |-- AddressIPV6Rule.php
+|   |-- AggregateRule.php
+|   |-- BankCardRule.php
+|   |-- Base64Rule.php
+|   |-- BetweenWordsRule.php
+|   |-- BitcoinAddressRule.php
+|   |-- CallbackRule.php
+|   |-- CamelCaseRule.php
+|   |-- CapitalCharWithNumberRule.php
+|   |-- CarNumberRule.php
+|   |-- ChineseNameRule.php
+|   |-- Concerns/
+|   |   |-- DataAware.php
+|   |   `-- ValidatorAware.php
+|   |-- CurrentUserPasswordRule.php
+|   |-- DefaultRule.php
+|   |-- DomainRule.php
+|   |-- DuplicateRule.php
+|   |-- EmailRule.php
+|   |-- EvenNumberRule.php
+|   |-- HexColorRule.php
+|   |-- HexRule.php
+|   |-- HtmlCleanRule.php
+|   |-- HtmlTagRule.php
+|   |-- IdCardRule.php
+|   |-- ImeiRule.php
+|   |-- InstanceofRule.php
+|   |-- IntegerBooleanRule.php
+|   |-- IpRule.php
+|   |-- JwtRule.php
+|   |-- KebabCaseRule.php
+|   |-- LenientPortRule.php
+|   |-- LocationCoordinatesRule.php
+|   |-- MacAddressRule.php
+|   |-- MaxUploadSizeRule.php
+|   |-- MimeTypeRule.php
+|   |-- NotDisposableEmailRule.php
+|   |-- OddNumberRule.php
+|   |-- PhoneCisRule.php
+|   |-- PhoneRule.php
+|   |-- PhoneWorldRule.php
+|   |-- PortRule.php
+|   |-- PostalCodeRule.php
+|   |-- RegexRule.php
+|   |-- Rule.php
+|   |-- SemverRule.php
+|   |-- SlugRule.php
+|   |-- SnakeCaseRule.php
+|   |-- StrongPassword.php
+|   |-- TimezoneRule.php
+|   |-- UlidRule.php
+|   |-- UrlRule.php
+|   |-- UuidRule.php
+|   `-- WithoutWhitespaceRule.php
+|-- Support/
+|   |-- Attributes/
+|   |   |-- Autowired.php
+|   |   |-- Elasticsearch.php
+|   |   |-- Ignore.php
+|   |   `-- Mixin.php
+|   |-- BitEncoder.php
+|   |-- Bootstrap/
+|   |   `-- OutOfMemoryBootstrap.php
+|   |-- Clients/
+|   |   |-- AbstractClient.php
+|   |   `-- PushDeer.php
+|   |-- Console/
+|   |   |-- ProgressBarFactory.php
+|   |   `-- SymfonyStyleFactory.php
+|   |-- Contracts/
+|   |   |-- BitEncoderContract.php
+|   |   `-- SignerContract.php
+|   |-- Facades/
+|   |   |-- Elasticsearch.php
+|   |   `-- PushDeer.php
+|   |-- Guzzle/
+|   |   `-- CircuitBreakerMiddleware.php
+|   |-- Managers/
+|   |   `-- ElasticsearchManager.php
+|   |-- Mixins/
+|   |   |-- BlueprintMixin.php
+|   |   |-- CarbonMixin.php
+|   |   |-- CollectionMixin.php
+|   |   |-- CommandMixin.php
+|   |   |-- GrammarMixin.php
+|   |   |-- MySqlGrammarMixin.php
+|   |   |-- PendingRequestMixin.php
+|   |   |-- QueryBuilder/
+|   |   |   |-- OrderByWithQueryBuilderMixin.php
+|   |   |   |-- QueryBuilderMixin.php
+|   |   |   |-- WhereEndsWithQueryBuilderMixin.php
+|   |   |   |-- WhereFindInSetQueryBuilderMixin.php
+|   |   |   |-- WhereFullTextQueryBuilderMixin.php
+|   |   |   |-- WhereInsQueryBuilderMixin.php
+|   |   |   |-- WhereLikeQueryBuilderMixin.php
+|   |   |   `-- WhereStartsWithQueryBuilderMixin.php
+|   |   |-- RequestMixin.php
+|   |   |-- ResponseFactoryMixin.php
+|   |   |-- RouterMixin.php
+|   |   |-- SchedulingEventMixin.php
+|   |   |-- StrMixin.php
+|   |   |-- StringableMixin.php
+|   |   |-- UploadedFileMixin.php
+|   |   `-- ViteMixin.php
+|   |-- Monolog/
+|   |   |-- EcsFormatterTapper.php
+|   |   |-- Formatter/
+|   |   |   `-- EloquentLogHttpModelFormatter.php
+|   |   |-- Handler/
+|   |   |   `-- EloquentHandler.php
+|   |   `-- Processor/
+|   |       |-- AppendExtraDataProcessor.php
+|   |       `-- EloquentLogHttpModelProcessor.php
+|   |-- PHPStan/
+|   |   `-- ForbiddenGlobalFunctionsRule.php
+|   |-- PhpCsFixer/
+|   |   |-- Fixer/
+|   |   |   |-- AbstractConfigurableFixer.php
+|   |   |   |-- AbstractFixer.php
+|   |   |   |-- CommandLineTool/
+|   |   |   |   |-- AbstractCommandLineToolFixer.php
+|   |   |   |   |-- AutocorrectFixer.php
+|   |   |   |   |-- BladeFormatterFixer.php
+|   |   |   |   |-- Concerns/
+|   |   |   |   |   |-- Cmd.php
+|   |   |   |   |   |-- PathAwarer.php
+|   |   |   |   |   |-- PostPathCommand.php
+|   |   |   |   |   |-- PrePathCommand.php
+|   |   |   |   |   `-- WithoutPathCommand.php
+|   |   |   |   |-- DockerFmtFixer.php
+|   |   |   |   |-- DotenvLinterFixer.php
+|   |   |   |   |-- HadoLintFixer.php
+|   |   |   |   |-- LintMdFixer.php
+|   |   |   |   |-- MarkdownLintCli2Fixer.php
+|   |   |   |   |-- MarkdownLintFixer.php
+|   |   |   |   |-- PintFixer.php
+|   |   |   |   |-- ShfmtFixer.php
+|   |   |   |   |-- SqlFluffFixer.php
+|   |   |   |   |-- TextLintFixer.php
+|   |   |   |   |-- XmlLintFixer.php
+|   |   |   |   |-- YamlFmtFixer.php
+|   |   |   |   `-- ZhLintFixer.php
+|   |   |   |-- Concerns/
+|   |   |   |   |-- AllowRisky.php
+|   |   |   |   |-- AlwaysCandidate.php
+|   |   |   |   |-- FileAndTokensAwarer.php
+|   |   |   |   |-- HighestPriority.php
+|   |   |   |   |-- InlineHtmlCandidate.php
+|   |   |   |   |-- LowestPriority.php
+|   |   |   |   |-- SupportsExtensions.php
+|   |   |   |   |-- SupportsExtensionsAndPathArg.php
+|   |   |   |   `-- SupportsPathArg.php
+|   |   |   `-- InlineHtml/
+|   |   |       |-- AbstractInlineHtmlFixer.php
+|   |   |       |-- DoctrineSqlFixer.php
+|   |   |       |-- JsonFixer.php
+|   |   |       |-- NeonFixer.php
+|   |   |       |-- PhpMyAdminSqlFixer.php
+|   |   |       |-- XmlFixer.php
+|   |   |       `-- YamlFixer.php
+|   |   |-- Fixers.php
+|   |   `-- Utils.php
+|   |-- PhpUserFilters/
+|   |   `-- CallbackFilter.php
+|   |-- Rectors/
+|   |   |-- ClassHandleMethodRector.php
+|   |   `-- RenameToPsrNameRector.php
+|   |-- Signers/
+|   |   `-- HmacSigner.php
+|   |-- Sse/
+|   |   |-- CloseServerSentEventException.php
+|   |   `-- ServerSentEvent.php
+|   |-- StreamWrappers/
+|   |   |-- Concerns/
+|   |   |   |-- HasContext.php
+|   |   |   `-- Nameable.php
+|   |   |-- GlobStreamWrapper.php
+|   |   |-- StreamWrapper.php
+|   |   `-- UserFileStreamWrapper.php
+|   |-- Traits/
+|   |   |-- Configurable.php
+|   |   |-- Copyable.php
+|   |   |-- Immutable.php
+|   |   |-- Makeable.php
+|   |   |-- Sanitizeable.php
+|   |   |-- SetStateable.php
+|   |   |-- Singletonable.php
+|   |   `-- WithPipeArgs.php
+|   `-- helpers.php
+`-- View/
+    |-- Components/
+    |   `-- AlertComponent.php
+    |-- Composers/
+    |   `-- RequestComposer.php
+    `-- Creators/
+        `-- RequestCreator.php
 
 60 directories, 296 files
 

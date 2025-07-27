@@ -49,7 +49,7 @@ return (new Config)
         'encoding' => true,
         'no_trailing_whitespace' => true,
         'no_whitespace_in_blank_line' => true,
-        // 'non_printable_character' => true,
+        'non_printable_character' => true,
         'single_blank_line_at_eof' => true,
 
         // SqlFluffFixer::name() => [
