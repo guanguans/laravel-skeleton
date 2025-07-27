@@ -94,53 +94,53 @@ return Factory::fromRuleSet(Php83::create()
     ->withCustomFixers(Fixers::fromFixers(
         ...$userFixers = iterator_to_array(new App\Support\PhpCsFixer\Fixers)
     ))
-    ->withRules(Rules::fromArray(array_reduce(
-        array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
-            $fixer->getName(),
-            [
-                // AutocorrectFixer::name(),
-                // LintMdFixer::name(),
-                // MarkDownLintCli2Fixer::name(),
-                TextLintFixer::name(),
-                ZhLintFixer::name(),
-
-                // PintFixer::name(),
-                // BladeFormatterFixer::name(),
-
-                // DotEnvLinterFixer::name(),
-
-                // ShFmtFixer::name(),
-
-                // DoctrineSqlFixer::name(),
-                PhpMyAdminSqlFixer::name(),
-                SqlFluffFixer::name(),
-
-                YamlFixer::name(),
-                // YamlFmtFixer::name(),
-
-                XmlFixer::name(),
-                // XmlLintFixer::name(),
-
-                // JsonFixer::name(),
-
-                NeonFixer::name(),
-            ],
-            true
-        )),
-        static function (array $rules, App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): array {
-            $rules[$fixer->getName()] = true;
-
-            return $rules;
-        },
-        [
-            // SqlFluffFixer::name() => [
-            //     AbstractCommandLineToolFixer::OPTIONS => [
-            //         '--dialect' => 'mysql',
-            //     ],
-            //     SqlFluffFixer::EXTENSIONS => ['sql'],
-            // ],
-        ]
-    )))
+    // ->withRules(Rules::fromArray(array_reduce(
+    //     array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
+    //         $fixer->getName(),
+    //         [
+    //             // AutocorrectFixer::name(),
+    //             // LintMdFixer::name(),
+    //             // MarkDownLintCli2Fixer::name(),
+    //             TextLintFixer::name(),
+    //             ZhLintFixer::name(),
+    //
+    //             // PintFixer::name(),
+    //             // BladeFormatterFixer::name(),
+    //
+    //             // DotEnvLinterFixer::name(),
+    //
+    //             // ShFmtFixer::name(),
+    //
+    //             // DoctrineSqlFixer::name(),
+    //             PhpMyAdminSqlFixer::name(),
+    //             SqlFluffFixer::name(),
+    //
+    //             YamlFixer::name(),
+    //             // YamlFmtFixer::name(),
+    //
+    //             XmlFixer::name(),
+    //             // XmlLintFixer::name(),
+    //
+    //             // JsonFixer::name(),
+    //
+    //             NeonFixer::name(),
+    //         ],
+    //         true
+    //     )),
+    //     static function (array $rules, App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): array {
+    //         $rules[$fixer->getName()] = true;
+    //
+    //         return $rules;
+    //     },
+    //     [
+    //         // SqlFluffFixer::name() => [
+    //         //     AbstractCommandLineToolFixer::OPTIONS => [
+    //         //         '--dialect' => 'mysql',
+    //         //     ],
+    //         //     SqlFluffFixer::EXTENSIONS => ['sql'],
+    //         // ],
+    //     ]
+    // )))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,
         // '@PHP70Migration:risky' => true,
@@ -370,58 +370,21 @@ return Factory::fromRuleSet(Php83::create()
          * @see https://github.com/laravel/pint/blob/main/app/Repositories/ConfigurationJsonRepository.php
          */
         Finder::create()
-            ->in([
-                __DIR__.'/.github/',
-                // __DIR__.'/.tinker/',
-                __DIR__.'/app/',
-                __DIR__.'/bootstrap/',
-                __DIR__.'/config/',
-                __DIR__.'/database/',
-                __DIR__.'/public/',
-                __DIR__.'/resources/',
-                __DIR__.'/routes/',
-                __DIR__.'/tests/',
-            ])
+            ->in(__DIR__)
             ->exclude([
-                'cache/',
                 'Fixtures/',
             ])
             ->notPath([
-                '/lang\/.*\.json$/',
-            ])
-            ->name([
-                '/\.bats$/',
-                '/\.env$/',
-                '/\.env\.example$/',
-                '/\.json$/',
-                '/\.markdown$/',
-                '/\.md$/',
-                '/\.neon$/',
-                '/\.php$/',
-                '/\.sh$/',
-                '/\.sql$/',
-                '/\.text$/',
-                '/\.txt$/',
-                '/\.xml$/',
-                '/\.xml\.dist$/',
-                '/\.yaml$/',
-                '/\.yml$/',
+                // '/lang\/.*\.json$/',
             ])
             ->notName([
-                // '*.blade.php',
+                '/\.blade\.php$/',
             ])
+            ->ignoreDotFiles(false)
+            ->ignoreUnreadableDirs(false)
+            ->ignoreVCS(true)
+            ->ignoreVCSIgnored(true)
             ->append([
-                ...array_filter(
-                    glob(__DIR__.'/{*,.*}.*', \GLOB_BRACE),
-                    static fn (string $filename): bool => !\in_array($filename, [
-                        __DIR__.'/.phpstorm.meta.php',
-                        __DIR__.'/_ide_helper.php',
-                        __DIR__.'/_ide_helper_actions.php',
-                        __DIR__.'/_ide_helper_models.php',
-                        __DIR__.'/CHANGELOG.md',
-                        __DIR__.'/README.md',
-                    ], true)
-                ),
                 __DIR__.'/artisan',
                 __DIR__.'/composer-updater',
             ])
