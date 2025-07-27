@@ -734,7 +734,9 @@ app
 │   │   │   │   │   ├── PostPathCommand.php
 │   │   │   │   │   ├── PrePathCommand.php
 │   │   │   │   │   └── WithoutPathCommand.php
+│   │   │   │   ├── DockerFmtFixer.php
 │   │   │   │   ├── DotenvLinterFixer.php
+│   │   │   │   ├── HadoLintFixer.php
 │   │   │   │   ├── LintMdFixer.php
 │   │   │   │   ├── MarkdownLintCli2Fixer.php
 │   │   │   │   ├── MarkdownLintFixer.php
@@ -800,7 +802,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 294 files
+60 directories, 296 files
 
 ```
 </details>

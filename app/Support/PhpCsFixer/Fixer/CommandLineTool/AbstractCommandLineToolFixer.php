@@ -47,6 +47,7 @@ use Symfony\Component\Process\Process;
  * @see https://plugins.jetbrains.com/search?search=format
  * @see https://plugins.jetbrains.com/search?search=lint
  * @see https://prettier.io/docs/plugins
+ * @see https://github.com/search?q=eslint-plugin&type=repositories
  * @see `brew search format`
  * @see `brew search lint`
  *
