@@ -82,8 +82,6 @@ composer lint
 composer md-fix
 composer md-lint
 composer neon-lint
-composer normalized
-composer normalized-dry-run
 composer peck
 composer peck-init
 composer pest
@@ -94,6 +92,7 @@ composer pest-parallel
 composer pest-profile
 composer pest-type-coverage
 composer pest-update-snapshots
+composer php-cs-fixer
 composer phploc
 composer phpmd
 composer phpmetrics
@@ -147,6 +146,8 @@ composer sk-split-config-per-package
 composer sk-spot-lazy-traits
 composer style-fix
 composer style-lint
+composer style-tools-fix
+composer style-tools-lint
 composer test
 composer test-bail
 composer test-coverage
@@ -732,7 +733,6 @@ app
 │   │   │   │   │   ├── PathAwarer.php
 │   │   │   │   │   ├── PostPathCommand.php
 │   │   │   │   │   ├── PrePathCommand.php
-│   │   │   │   │   ├── ReverseSuccessfulProcess.php
 │   │   │   │   │   └── WithoutPathCommand.php
 │   │   │   │   ├── DotEnvLinterFixer.php
 │   │   │   │   ├── LintMdFixer.php
@@ -799,7 +799,7 @@ app
     └── Creators
         └── RequestCreator.php
 
-60 directories, 294 files
+60 directories, 293 files
 
 ```
 </details>

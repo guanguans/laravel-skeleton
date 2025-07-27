@@ -13,6 +13,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Support\PhpCsFixer\Fixer\AbstractFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\BladeFormatterFixer;
@@ -32,132 +33,93 @@ use App\Support\PhpCsFixer\Fixer\InlineHtml\NeonFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
+use App\Support\PhpCsFixer\Fixers;
 use PhpCsFixer\Config;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 use Symfony\Component\Finder\Finder;
 
-/** @see https://github.com/laravel/pint/blob/main/resources/presets */
+/**
+ * @see https://github.com/laravel/pint/blob/main/resources/presets
+ */
 return (new Config)
-    ->registerCustomFixers($userFixers = iterator_to_array(new App\Support\PhpCsFixer\Fixers))
-    ->setRules(array_reduce(
-        array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
-            $fixer->getName(),
-            [
-                // AutocorrectFixer::name(),
-                // LintMdFixer::name(),
-                // MarkDownLintCli2Fixer::name(),
-                TextLintFixer::name(),
-                ZhLintFixer::name(),
+    ->registerCustomFixers($userFixers = iterator_to_array(new Fixers))
+    ->setRules([
+        // '@PhpCsFixer' => true,
+        'encoding' => true,
+        'no_trailing_whitespace' => true,
+        'no_whitespace_in_blank_line' => true,
+        // 'non_printable_character' => true,
+        'single_blank_line_at_eof' => true,
 
-                // PintFixer::name(),
-                // BladeFormatterFixer::name(),
+        // SqlFluffFixer::name() => [
+        //     AbstractCommandLineToolFixer::OPTIONS => [
+        //         '--dialect' => 'mysql',
+        //     ],
+        //     SqlFluffFixer::EXTENSIONS => ['sql'],
+        // ],
 
-                // DotEnvLinterFixer::name(),
+        AutocorrectFixer::name() => true,
+        LintMdFixer::name() => true,
+        // MarkDownLintCli2Fixer::name() => true,
+        // TextLintFixer::name() => true,
+        // ZhLintFixer::name() => true,
 
-                // ShFmtFixer::name(),
+        // PintFixer::name() => true,
+        BladeFormatterFixer::name() => true,
 
-                // DoctrineSqlFixer::name(),
-                PhpMyAdminSqlFixer::name(),
-                SqlFluffFixer::name(),
+        DotEnvLinterFixer::name() => true,
 
-                YamlFixer::name(),
-                // YamlFmtFixer::name(),
+        ShFmtFixer::name() => true,
 
-                XmlFixer::name(),
-                // XmlLintFixer::name(),
+        DoctrineSqlFixer::name() => true,
+        // PhpMyAdminSqlFixer::name() => true,
+        SqlFluffFixer::name() => true,
 
-                // JsonFixer::name(),
+        // YamlFixer::name() => true,
+        YamlFmtFixer::name() => true,
 
-                NeonFixer::name(),
-            ],
-            true
-        )),
-        static function (array $rules, App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): array {
-            $rules[$fixer->getName()] = true;
+        // XmlFixer::name() => true,
+        XmlLintFixer::name() => true,
 
-            return $rules;
-        },
-        [
-            // '@PhpCsFixer' => true,
-            'single_blank_line_at_eof' => true,
-            // SqlFluffFixer::name() => [
-            //     AbstractCommandLineToolFixer::OPTIONS => [
-            //         '--dialect' => 'mysql',
-            //     ],
-            //     SqlFluffFixer::EXTENSIONS => ['sql'],
-            // ],
-        ]
-    ))
+        JsonFixer::name() => true,
+
+        // NeonFixer::name() => true,
+    ])
     ->setFinder(
         Finder::create()
-            ->in([
-                __DIR__.'/.github/',
-                // __DIR__.'/.tinker/',
-                // __DIR__.'/app/',
-                // __DIR__.'/bootstrap/',
-                // __DIR__.'/config/',
-                __DIR__.'/database/',
-                // __DIR__.'/public/',
-                __DIR__.'/resources/',
-                // __DIR__.'/routes/',
-                __DIR__.'/tests/',
-            ])
+            ->in(__DIR__)
             ->exclude([
-                'cache/',
                 'Fixtures/',
+                'vendor-bin/',
+                'vendor/',
             ])
             ->notPath([
-                '/lang\/.*\.json$/',
+                '.chglog/CHANGELOG.tpl.md',
+                '/resources\/lang\/.*\.json$/',
+                'CHANGELOG.md',
             ])
-            ->name([
-                '/\.bats$/',
-                '/\.env$/',
-                '/\.env\.example$/',
-                '/\.json$/',
-                '/\.markdown$/',
-                '/\.md$/',
-                '/\.neon$/',
-                '/\.sh$/',
-                '/\.sql$/',
-                '/\.text$/',
-                '/\.txt$/',
-                '/\.xml$/',
-                '/\.xml\.dist$/',
-                '/\.yaml$/',
-                '/\.yml$/',
-            ])
+            ->name(array_unique(array_merge(...array_map(
+                fn (AbstractFixer $fixer): array => array_map(
+                    static fn (string $extension): string => \sprintf('/\.%s$/', str_replace('.', '\.', $extension)),
+                    array_filter(
+                        (fn (): array => $this->extensions())->call($fixer),
+                        static fn (string $extension): bool => !\in_array($extension, ['php', 'php'], true)
+                    )
+                ),
+                $userFixers,
+            ))))
             ->notName([
                 '/\.lock$/',
-                '/\.php$/',
+                // '/\.php$/',
+                '/(?<!\.blade)\.php$/',
             ])
             ->ignoreDotFiles(false)
             ->ignoreUnreadableDirs(false)
             ->ignoreVCS(true)
             ->ignoreVCSIgnored(true)
             ->files()
-            ->append(
-                Finder::create()
-                    ->in([
-                        __DIR__,
-                    ])
-                    ->notName([
-                        '/\.lock$/',
-                        '/\.php$/',
-                        'artisan',
-                        'CHANGELOG.md',
-                        'composer-updater',
-                        'README.md',
-                    ])
-                    ->depth(0)
-                    ->ignoreDotFiles(false)
-                    ->ignoreUnreadableDirs(false)
-                    ->ignoreVCS(true)
-                    ->ignoreVCSIgnored(true)
-                    ->sortByName()
-                    ->files()
-            )
     )
-    ->setCacheFile(__DIR__.'/.build/php-cs-fixer/.php-cs-fixer-tools.cache')
+    ->setCacheFile(\sprintf('%s/.build/php-cs-fixer/%s.cache', __DIR__, pathinfo(__FILE__, \PATHINFO_FILENAME)))
     ->setParallelConfig(ParallelConfigFactory::detect())
     ->setRiskyAllowed(true)
     ->setUnsupportedPhpVersionAllowed(true)

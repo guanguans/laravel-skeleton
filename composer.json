@@ -455,6 +455,7 @@
             "@md-lint",
             "@yaml-lint",
             "@phpmnd",
+            "@style-tools-lint",
             "@style-lint",
             "@pint-bail",
             "@facade-lint",
@@ -473,6 +474,8 @@
         "composer-dependency-analyser": "@php ./vendor/bin/composer-dependency-analyser --verbose",
         "composer-diff": "@composer diff --with-platform --ansi -vv",
         "composer-disable-process-timeout": "Composer\\Config::disableProcessTimeout",
+        "composer-normalize": "@composer normalize --diff --ansi -vv",
+        "composer-normalize-dry-run": "@composer-normalize --dry-run",
         "composer-updater": "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.4/bin/php --except-packages=pestphp/pest-plugin-laravel --ansi",
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-updater-laravel10": "@composer-updater --composer-json-path=vendor-bin/laravel10/composer.json",
@@ -526,8 +529,6 @@
         "md-fix": "@md-lint --fix",
         "md-lint": "lint-md --config .lintmdrc ./*.md ./.github/ ./docs/",
         "neon-lint": "@php ./vendor/bin/neon-lint *.neon",
-        "normalized": "@composer normalize --diff --ansi -vv",
-        "normalized-dry-run": "@normalized --dry-run",
         "peck": "@php ./vendor/bin/peck check --path=app/ --config=peck.json --ansi -vv",
         "peck-init": "@peck --init",
         "pest": "@php ./vendor/bin/pest --colors=always --coverage",
@@ -538,6 +539,7 @@
         "pest-profile": "@pest --profile",
         "pest-type-coverage": "@pest --type-coverage",
         "pest-update-snapshots": "@pest -d --update-snapshots",
+        "php-cs-fixer": "@php ./vendor/bin/php-cs-fixer fix --show-progress=dots --diff --ansi -vv",
         "phploc": "@php ./vendor/bin/phploc --suffix=php src/",
         "phpmd": "@php ./vendor/bin/phpmd src/ ansi cleancode,codesize,controversial,design,naming,unusedcode --suffixes=php",
         "phpmetrics": "@php ./vendor/bin/phpmetrics --report-html=./.build/phpmetrics/ ./src/",
@@ -596,10 +598,9 @@
         "sk-search-regex": "@sk search-regex 'Guanguans.*ValetDrivers'",
         "sk-split-config-per-package": "@sk split-config-per-package monorepo-builder.php",
         "sk-spot-lazy-traits": "@sk spot-lazy-traits app/",
-        "php-cs-fixer": "@php ./vendor/bin/php-cs-fixer fix --show-progress=dots --diff --ansi -vv",
         "style-fix": "@php-cs-fixer --config=.php-cs-fixer.php",
-        "style-tools-fix": "@php-cs-fixer --config=.php-cs-fixer-tools.php",
         "style-lint": "@style-fix --dry-run",
+        "style-tools-fix": "@php-cs-fixer --config=.php-cs-fixer-tools.php",
         "style-tools-lint": "@style-tools-fix --dry-run",
         "text-fix": "npx textlint --fix ./*.md ./.github/*.md ./docs/**/*.md",
         "text-lint": "npx textlint --format=pretty-error ./*.md ./.github/*.md ./docs/**/*.md",
@@ -630,12 +631,6 @@
         ],
         "artisan-xdebug": [
             "art-xdebug"
-        ],
-        "normalized": [
-            "composer-normalize"
-        ],
-        "normalized-dry-run": [
-            "composer-normalize-dry-run"
         ],
         "pest": [
             "test"

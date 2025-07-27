@@ -13,25 +13,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\BladeFormatterFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\DotEnvLinterFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\LintMdFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkDownLintCli2Fixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\ShFmtFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqlFluffFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\TextLintFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\XmlLintFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\YamlFmtFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\ZhLintFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\JsonFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\NeonFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -92,55 +74,11 @@ return Factory::fromRuleSet(Php83::create()
     //     []
     // )))
     ->withCustomFixers(Fixers::fromFixers(
-        ...$userFixers = iterator_to_array(new App\Support\PhpCsFixer\Fixers)
+        new PintFixer
     ))
-    // ->withRules(Rules::fromArray(array_reduce(
-    //     array_filter($userFixers, static fn (App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): bool => !\in_array(
-    //         $fixer->getName(),
-    //         [
-    //             // AutocorrectFixer::name(),
-    //             // LintMdFixer::name(),
-    //             // MarkDownLintCli2Fixer::name(),
-    //             TextLintFixer::name(),
-    //             ZhLintFixer::name(),
-    //
-    //             // PintFixer::name(),
-    //             // BladeFormatterFixer::name(),
-    //
-    //             // DotEnvLinterFixer::name(),
-    //
-    //             // ShFmtFixer::name(),
-    //
-    //             // DoctrineSqlFixer::name(),
-    //             PhpMyAdminSqlFixer::name(),
-    //             SqlFluffFixer::name(),
-    //
-    //             YamlFixer::name(),
-    //             // YamlFmtFixer::name(),
-    //
-    //             XmlFixer::name(),
-    //             // XmlLintFixer::name(),
-    //
-    //             // JsonFixer::name(),
-    //
-    //             NeonFixer::name(),
-    //         ],
-    //         true
-    //     )),
-    //     static function (array $rules, App\Support\PhpCsFixer\Fixer\AbstractFixer $fixer): array {
-    //         $rules[$fixer->getName()] = true;
-    //
-    //         return $rules;
-    //     },
-    //     [
-    //         // SqlFluffFixer::name() => [
-    //         //     AbstractCommandLineToolFixer::OPTIONS => [
-    //         //         '--dialect' => 'mysql',
-    //         //     ],
-    //         //     SqlFluffFixer::EXTENSIONS => ['sql'],
-    //         // ],
-    //     ]
-    // )))
+    ->withRules(Rules::fromArray([
+        PintFixer::name() => true,
+    ]))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,
         // '@PHP70Migration:risky' => true,
@@ -373,6 +311,7 @@ return Factory::fromRuleSet(Php83::create()
             ->in(__DIR__)
             ->exclude([
                 'Fixtures/',
+                'vendor-bin/',
             ])
             ->notPath([
                 // '/lang\/.*\.json$/',
