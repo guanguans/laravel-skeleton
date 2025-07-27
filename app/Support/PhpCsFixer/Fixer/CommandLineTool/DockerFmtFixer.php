@@ -15,6 +15,7 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 /**
  * @see https://github.com/reteps/dockerfmt
+ * @see https://github.com/hadolint/hadolint
  */
 final class DockerFmtFixer extends AbstractCommandLineToolFixer
 {
@@ -30,30 +31,12 @@ final class DockerFmtFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function requiredOptions(): array
     {
-        return ['--fix'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--quiet', '--no-diff-bg-color'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function debugOptions(): array
-    {
-        return ['--debug'];
+        return ['--write', '--newline', '--space-redirects'];
     }
 
     #[\Override]
     protected function extensions(): array
     {
-        return ['md', 'markdown', 'txt', 'text'];
+        return ['dockerfile'];
     }
 }

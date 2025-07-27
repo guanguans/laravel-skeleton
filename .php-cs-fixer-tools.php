@@ -17,6 +17,7 @@ use App\Support\PhpCsFixer\Fixer\AbstractFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\BladeFormatterFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\DockerFmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\DotenvLinterFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\LintMdFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkdownLintCli2Fixer;
@@ -68,6 +69,8 @@ return (new Config)
 
         // PintFixer::name() => true,
         BladeFormatterFixer::name() => true,
+
+        DockerFmtFixer::name() => true,
 
         DotenvLinterFixer::name() => true,
 
