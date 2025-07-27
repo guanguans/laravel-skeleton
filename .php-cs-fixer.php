@@ -372,6 +372,7 @@ return Factory::fromRuleSet(Php83::create()
         Finder::create()
             ->in([
                 __DIR__.'/.github/',
+                // __DIR__.'/.tinker/',
                 __DIR__.'/app/',
                 __DIR__.'/bootstrap/',
                 __DIR__.'/config/',

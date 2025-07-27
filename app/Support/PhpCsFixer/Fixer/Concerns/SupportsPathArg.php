@@ -19,6 +19,8 @@ trait SupportsPathArg
 {
     public function supports(\SplFileInfo $file): bool
     {
+        // This is a workaround for the `--path` argument in the command line.
+        // It checks if the file path contains the `--path` argument.
         return str($file)->contains(Utils::argv());
     }
 }

@@ -37,6 +37,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 /**
@@ -156,10 +157,12 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             ]);
         }
 
-        if ($this->isSuccessfulProcess($process)) {
-            // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->path))]);
-            $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->path)));
+        if (!$this->isSuccessfulProcess($process)) {
+            throw new ProcessFailedException($process);
         }
+
+        // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->path))]);
+        $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->path)));
     }
 
     protected function path(): string

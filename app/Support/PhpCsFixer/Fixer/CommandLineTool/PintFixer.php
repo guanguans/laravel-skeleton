@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\ReverseSuccessfulProcess;
 use App\Support\PhpCsFixer\Fixer\Concerns\AlwaysCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\LowestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensionsAndPathArg;
@@ -28,7 +27,6 @@ final class PintFixer extends AbstractCommandLineToolFixer
 {
     use AlwaysCandidate;
     use LowestPriority;
-    use ReverseSuccessfulProcess;
     use SupportsExtensionsAndPathArg;
 
     #[\Override]
@@ -50,7 +48,7 @@ final class PintFixer extends AbstractCommandLineToolFixer
             // '--output-format=txt',
             // '--output-to-file=.build/pint/.pint.output',
             // '--parallel',
-            '--repair',
+            // '--repair',
             // '--test',
         ];
     }
