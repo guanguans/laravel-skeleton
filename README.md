@@ -168,6 +168,7 @@ composer yaml-lint
 composer zh-fix
 composer zh-lint
 ```
+
 </details>
 
 <details>
@@ -439,6 +440,7 @@ composer zh-lint
 * [worksome/envy](https://github.com/worksome/envy) - Automatically keep your .env files in sync.
 * [worksome/request-factories](https://github.com/worksome/request-factories) - Test Form Requests in Laravel without all of the boilerplate.
 * [yamadashy/phpstan-friendly-formatter](https://github.com/yamadashy/phpstan-friendly-formatter) - Simple error formatter for PHPStan that display code frame
+
 </details>
 
 <details>
@@ -804,6 +806,7 @@ app/
 60 directories, 295 files
 
 ```
+
 </details>
 
 ## Testing

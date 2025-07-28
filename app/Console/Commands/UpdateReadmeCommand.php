@@ -177,6 +177,7 @@ final class UpdateReadmeCommand extends Command
                     <summary>$summary</summary>
 
                     $details
+
                     </details>
                     DETAILS,
                 $limit
