@@ -731,7 +731,7 @@ app/
 |   |   |   |   |-- AutocorrectFixer.php
 |   |   |   |   |-- BladeFormatterFixer.php
 |   |   |   |   |-- Concerns/
-|   |   |   |   |   |-- Cmd.php
+|   |   |   |   |   |-- FinalCmd.php
 |   |   |   |   |   |-- PathAwarer.php
 |   |   |   |   |   |-- PostPathCommand.php
 |   |   |   |   |   |-- PrePathCommand.php

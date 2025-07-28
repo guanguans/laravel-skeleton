@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\Cmd;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\FinalCmd;
 
 /**
  * @see https://github.com/zhlint-project/zhlint
  */
 final class ZhLintFixer extends AbstractCommandLineToolFixer
 {
-    use Cmd;
+    use FinalCmd;
 
     /**
      * @noinspection PhpMissingParentCallCommonInspection
@@ -55,7 +55,7 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
     protected function path(): string
     {
         return str(parent::path())
-            ->chopStart($this->cmd())
+            ->chopStart($this->finalCmd())
             ->chopStart(\DIRECTORY_SEPARATOR)
             ->toString();
     }
@@ -66,6 +66,6 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
         ?string $extension = null,
         bool $deferDelete = true,
     ): string {
-        return parent::createTemporaryFile($this->cmd(), $prefix, $extension, $deferDelete);
+        return parent::createTemporaryFile($this->finalCmd(), $prefix, $extension, $deferDelete);
     }
 }

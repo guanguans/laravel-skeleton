@@ -16,9 +16,9 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns;
 /**
  * @mixin \App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer
  */
-trait Cmd
+trait FinalCmd
 {
-    protected function cmd(): string
+    protected function finalCmd(): string
     {
         return $this->configuration[self::CWD] ?? getcwd();
     }
