@@ -232,10 +232,19 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             ...$this->configuration[self::OPTIONS],
         ])->reduce(
             static function (array $options, mixed $value, int|string $key): array {
-                \is_string($key) and str_starts_with($key, '-') and $options[] = $key;
-                $options[] = $value;
+                $option = [$value];
 
-                return $options;
+                if (\is_string($key) && str_starts_with($key, '-')) {
+                    $option = \is_array($value)
+                        ? array_reduce(
+                            $value,
+                            static fn (array $option, mixed $value): array => [...$option, $key, $value],
+                            []
+                        )
+                        : [$key, $value];
+                }
+
+                return [...$options, ...$option];
             },
             []
         );

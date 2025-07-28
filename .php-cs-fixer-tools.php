@@ -63,7 +63,7 @@ return (new Config)
         AutocorrectFixer::name() => true,
         LintMdFixer::name() => true,
         // MarkdownLintCli2Fixer::name() => true,
-        // MarkdownLintFixer::name() => true,
+        MarkdownLintFixer::name() => true,
         // TextLintFixer::name() => true,
         ZhLintFixer::name() => true,
 
