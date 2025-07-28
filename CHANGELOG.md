@@ -5,12 +5,167 @@ All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
 <a name="unreleased"></a>
+
 ## [Unreleased]
+
+### ✨ Features
+
+- **QueryBuilder:** add cache method to optimize query performance ([7471baf7](https://github.com/guanguans/laravel-skeleton/commit/7471baf7))
+- **composer:** add blade-formatter scripts to composer.json ([99bfc5f5](https://github.com/guanguans/laravel-skeleton/commit/99bfc5f5))
+- **config:** add PHP CS Fixer configuration file ([a1b61baa](https://github.com/guanguans/laravel-skeleton/commit/a1b61baa))
+- **php-cs-fixer:** add SqlFluffFixer tool for SQL file formatting ([da69f04b](https://github.com/guanguans/laravel-skeleton/commit/da69f04b))
+- **php-cs-fixer:** add MarkdownLintFixer for markdown file linting ([9e207a6e](https://github.com/guanguans/laravel-skeleton/commit/9e207a6e))
+- **php-cs-fixer:** add NeonFixer to support NEON file formatting ([16a97f78](https://github.com/guanguans/laravel-skeleton/commit/16a97f78))
+- **php-cs-fixer:** rename getSortName methods to getShortName for clarity and add debug output ([6d0f5504](https://github.com/guanguans/laravel-skeleton/commit/6d0f5504))
+- **php-cs-fixer:** add TextLintFixer and improve tooling configuration ([7467c490](https://github.com/guanguans/laravel-skeleton/commit/7467c490))
+- **php-cs-fixer:** add AutocorrectFixer and ZhLintFixer tools ([3d8ab484](https://github.com/guanguans/laravel-skeleton/commit/3d8ab484))
+- **php-cs-fixer:** add ZhLintFixer and enable LintMdFixer tool ([3a64b229](https://github.com/guanguans/laravel-skeleton/commit/3a64b229))
+- **php-cs-fixer:** add LintMdFixer tool for markdown linting ([9289ea7f](https://github.com/guanguans/laravel-skeleton/commit/9289ea7f))
+- **php-cs-fixer:** add XmllintFixer tool for XML formatting ([e7b8baec](https://github.com/guanguans/laravel-skeleton/commit/e7b8baec))
+- **php-cs-fixer:** add placeholder for required command line arguments ([4882d221](https://github.com/guanguans/laravel-skeleton/commit/4882d221))
+- **php-cs-fixer:** add ShfmtFixer for shell script formatting ([e948b762](https://github.com/guanguans/laravel-skeleton/commit/e948b762))
+- **php-cs-fixer:** add YamlfmtFixer to support YAML file formatting ([9492a2f7](https://github.com/guanguans/laravel-skeleton/commit/9492a2f7))
+- **phpcsfixer:** add utility methods for creating temporary files ([ba83f665](https://github.com/guanguans/laravel-skeleton/commit/ba83f665))
+- **phpcsfixer:** add MarkDownLintCli2Fixer for markdown linting ([4945fa36](https://github.com/guanguans/laravel-skeleton/commit/4945fa36))
+- **phpcsfixer:** add DockerFmtFixer and HadoLintFixer for command line tools ([49202806](https://github.com/guanguans/laravel-skeleton/commit/49202806))
+- **phpcsfixer:** add AbstractToolFixer base class and refactor DotenvLinterFixer to use it ([f04a2626](https://github.com/guanguans/laravel-skeleton/commit/f04a2626))
+- **phpcsfixer:** add DotenvLinterFixer to format dotenv files ([3073ffd1](https://github.com/guanguans/laravel-skeleton/commit/3073ffd1))
+- **phpcsfixer:** refactor output handling with SymfonyStyleFactory trait ([68456218](https://github.com/guanguans/laravel-skeleton/commit/68456218))
+- **phpcsfixer:** add SqlFixer and XmlFixer classes and improve Fixers iterator ([cf197040](https://github.com/guanguans/laravel-skeleton/commit/cf197040))
+- **static analysis:** add PHPStan Mockery extension ([26898716](https://github.com/guanguans/laravel-skeleton/commit/26898716))
+- **support:** add Elasticsearch attribute for dependency injection ([f7f8cc25](https://github.com/guanguans/laravel-skeleton/commit/f7f8cc25))
+- **support:** add XML fixer using Symfony serializer ([509eec73](https://github.com/guanguans/laravel-skeleton/commit/509eec73))
+
+### 🐞 Bug Fixes
+
+- **PhpCsFixer:** correct priority and add candidate detection in JsonFixer ([9f888e57](https://github.com/guanguans/laravel-skeleton/commit/9f888e57))
+- **changelog:** correct and update changelog entries for recent changes ([f26f01d1](https://github.com/guanguans/laravel-skeleton/commit/f26f01d1))
+- **ci:** clean up YAML workflows and adjust php-cs-fixer configuration ([aef33dcc](https://github.com/guanguans/laravel-skeleton/commit/aef33dcc))
+- **ci:** enable PHP-CS-Fixer on GitHub directory and unskip file patterns ([c7da1183](https://github.com/guanguans/laravel-skeleton/commit/c7da1183))
+- **collection:** rename json method to fromJson and update implementation ([bcd1c859](https://github.com/guanguans/laravel-skeleton/commit/bcd1c859))
+- **command-line-tool:** update shfmt fixer options and extensions ([66694c95](https://github.com/guanguans/laravel-skeleton/commit/66694c95))
+- **config:** correct file patterns and XML encoding options ([f58816e8](https://github.com/guanguans/laravel-skeleton/commit/f58816e8))
+- **cs-fixer:** update enabled fixers and extend supported file extensions ([fbe65964](https://github.com/guanguans/laravel-skeleton/commit/fbe65964))
+- **cs-fixer:** simplify finder configuration to scan project root ([019e2725](https://github.com/guanguans/laravel-skeleton/commit/019e2725))
+- **db:** remove obsolete MySQL query script ([88402949](https://github.com/guanguans/laravel-skeleton/commit/88402949))
+- **dependencies:** update Laravel framework and related package versions ([060970e5](https://github.com/guanguans/laravel-skeleton/commit/060970e5))
+- **path:** refactor path handling with PathAwarer trait ([224e78d2](https://github.com/guanguans/laravel-skeleton/commit/224e78d2))
+- **php-cs-fixer:** improve temporary file handling and enable TextLintFixer ([3ab78996](https://github.com/guanguans/laravel-skeleton/commit/3ab78996))
+- **php-cs-fixer:** add new fixers and update excluded fixers list ([c0879b03](https://github.com/guanguans/laravel-skeleton/commit/c0879b03))
+- **php-cs-fixer:** replace singleton temporary file with flexible temporary file creation ([ad8a554c](https://github.com/guanguans/laravel-skeleton/commit/ad8a554c))
+- **php-cs-fixer:** restructure fixer classes and improve inline HTML detection ([c00622e0](https://github.com/guanguans/laravel-skeleton/commit/c00622e0))
+- **php-cs-fixer:** improve fixer class loading and update dependencies ([25b62ab5](https://github.com/guanguans/laravel-skeleton/commit/25b62ab5))
+- **php-cs-fixer:** comment out complex rules configuration and adjust finder paths ([11d923df](https://github.com/guanguans/laravel-skeleton/commit/11d923df))
+- **php-cs-fixer:** add TextLintFixer and improve temporary file creation ([8dd2ced9](https://github.com/guanguans/laravel-skeleton/commit/8dd2ced9))
+- **php-cs-fixer:** remove unused OptionsResolver and simplify default options ([c7d72481](https://github.com/guanguans/laravel-skeleton/commit/c7d72481))
+- **php-cs-fixer:** add and enable DockerFmtFixer and HadoLintFixer tools ([8b628f84](https://github.com/guanguans/laravel-skeleton/commit/8b628f84))
+- **php-cs-fixer:** enable AutocorrectFixer and LintMdFixer, disable MarkDownLintCli2Fixer ([65c263ba](https://github.com/guanguans/laravel-skeleton/commit/65c263ba))
+- **php-cs-fixer:** enable ZhLintFixer and improve file support detection ([c7b4a8d5](https://github.com/guanguans/laravel-skeleton/commit/c7b4a8d5))
+- **php-cs-fixer:** remove directory separators from temporary file name ([48c7d7bd](https://github.com/guanguans/laravel-skeleton/commit/48c7d7bd))
+- **php-cs-fixer:** improve MarkdownLintFixer options and fix options array handling ([fd6a429f](https://github.com/guanguans/laravel-skeleton/commit/fd6a429f))
+- **phpcsfixer:** remove deprecated priority override and improve json formatting ([37c3daad](https://github.com/guanguans/laravel-skeleton/commit/37c3daad))
+- **phpcsfixer:** make Utils class final to prevent extension ([90ef16f1](https://github.com/guanguans/laravel-skeleton/commit/90ef16f1))
+- **phpcsfixer:** replace path() calls with singletonPath() for consistent file handling ([fd053df3](https://github.com/guanguans/laravel-skeleton/commit/fd053df3))
+- **phpcsfixer:** throw exception on failed process during fix application ([a84952f1](https://github.com/guanguans/laravel-skeleton/commit/a84952f1))
+- **phpcsfixer:** improve option descriptions for default fixer options ([976abe89](https://github.com/guanguans/laravel-skeleton/commit/976abe89))
+- **phpcsfixer:** suppress PhpMemberCanBePulledUpInspection warnings ([f275af46](https://github.com/guanguans/laravel-skeleton/commit/f275af46))
+- **readme:** correct directory tree display in app section ([90d14bae](https://github.com/guanguans/laravel-skeleton/commit/90d14bae))
+- **readme:** add missing trailing newlines in README and command output ([4233a516](https://github.com/guanguans/laravel-skeleton/commit/4233a516))
+- **sqlfluff:** integrate SqlFluff fixer with configurable options and improve argument handling ([20fadcd7](https://github.com/guanguans/laravel-skeleton/commit/20fadcd7))
+
+### 📖 Documents
+
+- **view:** add reference for Blade [@inject](https://github.com/inject) directive usage ([e50e8087](https://github.com/guanguans/laravel-skeleton/commit/e50e8087))
+
+### 💅 Code Refactorings
+
+- **CommandLineTool:** override debugOptions to return --dev flag ([cbaf33a6](https://github.com/guanguans/laravel-skeleton/commit/cbaf33a6))
+- **InlineHtmlFixer:** extract traits and rename supportedExtensions method ([6ae0827e](https://github.com/guanguans/laravel-skeleton/commit/6ae0827e))
+- **PhpCsFixer:** enhance SqlFluffFixer command line options and disable it by default ([57a641b6](https://github.com/guanguans/laravel-skeleton/commit/57a641b6))
+- **PhpCsFixer:** simplify default fixer options initialization ([2434ac27](https://github.com/guanguans/laravel-skeleton/commit/2434ac27))
+- **PhpCsFixer:** simplify AbstractToolFixer process handling and improve PintFixer priority ([62ab2657](https://github.com/guanguans/laravel-skeleton/commit/62ab2657))
+- **PhpCsFixer:** centralize dry run check into Utils class ([b267963d](https://github.com/guanguans/laravel-skeleton/commit/b267963d))
+- **PhpCsFixer:** centralize argv retrieval in Utils class ([86142e9d](https://github.com/guanguans/laravel-skeleton/commit/86142e9d))
+- **PhpCsFixer:** add formatXmlAttribute method to format XML attributes ([ffaf8683](https://github.com/guanguans/laravel-skeleton/commit/ffaf8683))
+- **PhpCsFixer:** improve command line tool options and always show debug output ([3c0f2bdd](https://github.com/guanguans/laravel-skeleton/commit/3c0f2bdd))
+- **cli:** rename ARGS to OPTIONS in command line tool fixer ([87e570e4](https://github.com/guanguans/laravel-skeleton/commit/87e570e4))
+- **command:** remove redundant wrapper methods in command traits ([87fb63e3](https://github.com/guanguans/laravel-skeleton/commit/87fb63e3))
+- **command-line-tool:** enhance DotEnvLinterFixer with silent options ([6300a91e](https://github.com/guanguans/laravel-skeleton/commit/6300a91e))
+- **command-line-tool:** simplify temporary file handling in TemporaryFileCreator trait ([2251c975](https://github.com/guanguans/laravel-skeleton/commit/2251c975))
+- **command-line-tool:** improve default and debug options in PintFixer ([d9fcdf57](https://github.com/guanguans/laravel-skeleton/commit/d9fcdf57))
+- **command-line-tool:** rename MAIN_COMMAND constant to COMMAND ([fcb101e9](https://github.com/guanguans/laravel-skeleton/commit/fcb101e9))
+- **core:** improve classes function signature and usage consistency ([9d7e5948](https://github.com/guanguans/laravel-skeleton/commit/9d7e5948))
+- **php-cs-fixer:** move stringFor to Utils and replace method calls ([e839147a](https://github.com/guanguans/laravel-skeleton/commit/e839147a))
+- **php-cs-fixer:** enable MarkDownLintCli2Fixer and update TextLintFixer options ([a27f221b](https://github.com/guanguans/laravel-skeleton/commit/a27f221b))
+- **php-cs-fixer:** simplify inline HTML fixers and update fixer registrations ([74498cb9](https://github.com/guanguans/laravel-skeleton/commit/74498cb9))
+- **php-cs-fixer:** reorganize fixer classes into InlineHtml and Tool namespaces ([fbc10a25](https://github.com/guanguans/laravel-skeleton/commit/fbc10a25))
+- **php-cs-fixer:** unify fixer configuration definitions into fixerOptions method ([aff5120d](https://github.com/guanguans/laravel-skeleton/commit/aff5120d))
+- **php-cs-fixer:** enable XmlFixer and update XmlLintFixer command options ([3e751120](https://github.com/guanguans/laravel-skeleton/commit/3e751120))
+- **php-cs-fixer:** rename Tool namespace to CommandLineTool and update imports ([555d03aa](https://github.com/guanguans/laravel-skeleton/commit/555d03aa))
+- **php-cs-fixer:** enhance YAML and XML linting tool integration ([92c095b2](https://github.com/guanguans/laravel-skeleton/commit/92c095b2))
+- **php-cs-fixer:** extract common command logic into PostPathCommand trait ([755220f6](https://github.com/guanguans/laravel-skeleton/commit/755220f6))
+- **phpcsfixer:** enhance command line options handling for verbosity levels ([8e4fafdd](https://github.com/guanguans/laravel-skeleton/commit/8e4fafdd))
+- **phpcsfixer:** simplify SupportsExtensions trait usage ([666e3e8b](https://github.com/guanguans/laravel-skeleton/commit/666e3e8b))
+- **phpcsfixer:** centralize SymfonyStyle output creation in Utils ([c9517094](https://github.com/guanguans/laravel-skeleton/commit/c9517094))
+- **phpcsfixer:** extract reverse success check into reusable trait ([65cdcc93](https://github.com/guanguans/laravel-skeleton/commit/65cdcc93))
+- **utils:** add deferDelete method for file removal abstraction ([15d0797f](https://github.com/guanguans/laravel-skeleton/commit/15d0797f))
+
+### 🏎 Performance Improvements
+
+- **console:** implement Isolatable interface in HealthCheckCommand ([94013cbe](https://github.com/guanguans/laravel-skeleton/commit/94013cbe))
+- **php-cs-fixer:** optimize file content reading with FileReader singleton ([3f0a2010](https://github.com/guanguans/laravel-skeleton/commit/3f0a2010))
+- **php-cs-fixer:** remove PostPathCommand trait and add WithoutPathCommand trait ([8730f3b5](https://github.com/guanguans/laravel-skeleton/commit/8730f3b5))
+- **phpcsfixer:** optimize path handling with conditional temp file creation ([33229fed](https://github.com/guanguans/laravel-skeleton/commit/33229fed))
+
+### 📦 Builds
+
+- **composer:** update laravel-ide-helper and larastan dependencies ([6170b681](https://github.com/guanguans/laravel-skeleton/commit/6170b681))
+- **config:** add and register new Laravel packages and service providers ([cc842602](https://github.com/guanguans/laravel-skeleton/commit/cc842602))
+- **deps:** bump echolabsdev/prism from 0.79.0 to 0.80.0 ([bc70b249](https://github.com/guanguans/laravel-skeleton/commit/bc70b249))
+- **deps:** bump spatie/laravel-health from 1.34.3 to 1.34.4 ([8b1cdc24](https://github.com/guanguans/laravel-skeleton/commit/8b1cdc24))
+- **deps:** bump beyondcode/laravel-mailbox from 5.0.1 to 5.0.2 ([35b501ff](https://github.com/guanguans/laravel-skeleton/commit/35b501ff))
+- **deps:** add php-cs-fixer shim and initialize symfony ai composer file ([dc0982da](https://github.com/guanguans/laravel-skeleton/commit/dc0982da))
+- **deps:** bump spatie/laravel-health from 1.34.4 to 1.34.5 ([ccd37605](https://github.com/guanguans/laravel-skeleton/commit/ccd37605))
+- **deps:** bump opcodesio/log-viewer from 3.18.0 to 3.19.0 ([eca8ab29](https://github.com/guanguans/laravel-skeleton/commit/eca8ab29))
+- **deps:** bump laravel/pennant from 1.17.1 to 1.18.0 ([7537f736](https://github.com/guanguans/laravel-skeleton/commit/7537f736))
+- **deps:** bump ryangjchandler/orbit from 1.4.0 to 1.4.1 ([daf257d5](https://github.com/guanguans/laravel-skeleton/commit/daf257d5))
+- **deps:** bump spatie/laravel-query-builder from 6.3.3 to 6.3.4 ([982e0373](https://github.com/guanguans/laravel-skeleton/commit/982e0373))
+- **deps:** bump robsontenorio/mary from 2.4.4 to 2.4.5 ([4794bbbc](https://github.com/guanguans/laravel-skeleton/commit/4794bbbc))
+- **deps:** bump laravel/framework from 12.20.0 to 12.21.0 ([80ef0d6b](https://github.com/guanguans/laravel-skeleton/commit/80ef0d6b))
+- **deps:** bump echolabsdev/prism from 0.81.0 to 0.82.0 ([718eacaf](https://github.com/guanguans/laravel-skeleton/commit/718eacaf))
+- **deps:** bump laravel/octane from 2.11.0 to 2.12.0 ([c5adf74f](https://github.com/guanguans/laravel-skeleton/commit/c5adf74f))
+- **deps:** bump laravel/sanctum from 4.1.2 to 4.2.0 ([c42a794a](https://github.com/guanguans/laravel-skeleton/commit/c42a794a))
+- **deps:** bump phpmyadmin/sql-parser from 5.11.0 to 5.11.1 ([a7458274](https://github.com/guanguans/laravel-skeleton/commit/a7458274))
+- **deps:** bump crell/attributeutils from 1.2.0 to 1.3.0 ([e26e0864](https://github.com/guanguans/laravel-skeleton/commit/e26e0864))
+- **deps:** bump spatie/laravel-backup from 9.3.3 to 9.3.4 ([1d454078](https://github.com/guanguans/laravel-skeleton/commit/1d454078))
+- **deps:** bump echolabsdev/prism from 0.80.0 to 0.81.0 ([0311ab4e](https://github.com/guanguans/laravel-skeleton/commit/0311ab4e))
+- **deps:** bump robsontenorio/mary from 2.4.3 to 2.4.4 ([6e7681f4](https://github.com/guanguans/laravel-skeleton/commit/6e7681f4))
+- **deps:** bump laravel/pulse from 1.4.2 to 1.4.3 ([d58d1e54](https://github.com/guanguans/laravel-skeleton/commit/d58d1e54))
+- **deps:** bump laravel/scout from 10.16.0 to 10.17.0 ([b03cf308](https://github.com/guanguans/laravel-skeleton/commit/b03cf308))
+- **deps-dev:** bump laravel/telescope from 5.10.1 to 5.10.2 ([ef492f7c](https://github.com/guanguans/laravel-skeleton/commit/ef492f7c))
+- **deps-dev:** bump barryvdh/laravel-ide-helper from 3.5.5 to 3.6.0 ([8524ea63](https://github.com/guanguans/laravel-skeleton/commit/8524ea63))
+- **deps-dev:** bump rector/swiss-knife from 2.3.1 to 2.3.2 ([a7b0d830](https://github.com/guanguans/laravel-skeleton/commit/a7b0d830))
+- **deps-dev:** bump ion-bazan/composer-diff from 1.12.0 to 1.12.1 ([f38cc1b4](https://github.com/guanguans/laravel-skeleton/commit/f38cc1b4))
+- **deps-dev:** bump larastan/larastan from 3.5.0 to 3.6.0 ([a00139b0](https://github.com/guanguans/laravel-skeleton/commit/a00139b0))
+- **deps-dev:** bump symplify/phpstan-rules from 14.6.9 to 14.6.11 ([bf469463](https://github.com/guanguans/laravel-skeleton/commit/bf469463))
+- **deps-dev:** bump rector/rector from 2.1.1 to 2.1.2 ([3792118d](https://github.com/guanguans/laravel-skeleton/commit/3792118d))
+- **deps-dev:** bump laravel/telescope from 5.10.0 to 5.10.1 ([7da9f7db](https://github.com/guanguans/laravel-skeleton/commit/7da9f7db))
+- **deps-dev:** bump ergebnis/rector-rules from 1.4.0 to 1.5.0 ([6e776997](https://github.com/guanguans/laravel-skeleton/commit/6e776997))
+- **deps-dev:** bump laravel/sail from 1.43.1 to 1.44.0 ([978015a7](https://github.com/guanguans/laravel-skeleton/commit/978015a7))
+- **deps-dev:** bump rakutentech/laravel-request-docs from 2.42 to 2.43 ([152faa7c](https://github.com/guanguans/laravel-skeleton/commit/152faa7c))
+- **deps-dev:** bump dedoc/scramble from 0.12.23 to 0.12.24 ([5c855b5f](https://github.com/guanguans/laravel-skeleton/commit/5c855b5f))
+
+### 🤖 Continuous Integrations
+
+- increase verbosity level for composer scripts and artisan commands ([cb733c4d](https://github.com/guanguans/laravel-skeleton/commit/cb733c4d))
 
 
 <a name="12.2.0"></a>
+
 ## [12.2.0] - 2025-07-13
+
 ### ✨ Features
+
 - **Support:** add abstract PHP CS Fixer base class ([d33ed568](https://github.com/guanguans/laravel-skeleton/commit/d33ed568))
 - **cache:** add CachePruneCommand to remove expired database cache entries ([6cc077c6](https://github.com/guanguans/laravel-skeleton/commit/6cc077c6))
 - **database:** add unconditional migration run check for users table ([958fc7a1](https://github.com/guanguans/laravel-skeleton/commit/958fc7a1))
@@ -22,27 +177,33 @@ All notable changes to this project will be documented in this file.
 - **validation:** add callback validation rule ([cd4e9d84](https://github.com/guanguans/laravel-skeleton/commit/cd4e9d84))
 
 ### 🐞 Bug Fixes
+
 - **config:** update AI model reference and add laravel package to discovery ([cbeee887](https://github.com/guanguans/laravel-skeleton/commit/cbeee887))
 - **dependencies:** add nunomaduro/essentials package and update CarbonMixin return types ([0b492703](https://github.com/guanguans/laravel-skeleton/commit/0b492703))
 - **exception handling:** disable throttling for exceptions ([794ac551](https://github.com/guanguans/laravel-skeleton/commit/794ac551))
 
 ### 📖 Documents
+
 - **github:** disable automated update docs reminder comment ([be3d3449](https://github.com/guanguans/laravel-skeleton/commit/be3d3449))
 
 ### 💅 Code Refactorings
+
 - **console:** add cwd option to ShowUnsupportedRequiresCommand ([6da0e867](https://github.com/guanguans/laravel-skeleton/commit/6da0e867))
 - **php-cs-fixer:** reorganize fixer classes under Fixer namespace ([8a19167f](https://github.com/guanguans/laravel-skeleton/commit/8a19167f))
 
 ### 🏎 Performance Improvements
+
 - **client:** add fibonacci retry intervals for exponential backoff ([52477b2d](https://github.com/guanguans/laravel-skeleton/commit/52477b2d))
 - **console:** optimize input option handling in ConsoleServiceProvider ([ccf89a7d](https://github.com/guanguans/laravel-skeleton/commit/ccf89a7d))
 - **database:** optimize production environment destructive command handling ([beb2793d](https://github.com/guanguans/laravel-skeleton/commit/beb2793d))
 
 ### ✅ Tests
+
 - **rules:** add validation tests for all rule names ([b16dee38](https://github.com/guanguans/laravel-skeleton/commit/b16dee38))
 - **rules:** add unit tests for custom validation rules ([5a93a32f](https://github.com/guanguans/laravel-skeleton/commit/5a93a32f))
 
 ### 📦 Builds
+
 - update composer dependencies and reorder gitignore entries ([150146e3](https://github.com/guanguans/laravel-skeleton/commit/150146e3))
 - update dependency versions and adjust commit path exclusions ([88b9e014](https://github.com/guanguans/laravel-skeleton/commit/88b9e014))
 - **composer:** add rector/jack package and scripts for code analysis ([3ff35761](https://github.com/guanguans/laravel-skeleton/commit/3ff35761))
@@ -205,6 +366,7 @@ All notable changes to this project will be documented in this file.
 - **deps-dev:** bump laravel/telescope from 5.9.1 to 5.10.0 ([9f449af3](https://github.com/guanguans/laravel-skeleton/commit/9f449af3))
 
 ### Pull Requests
+
 - Merge pull request [#1321](https://github.com/guanguans/laravel-skeleton/issues/1321) from guanguans/dependabot/composer/spaze/phpstan-disallowed-calls-4.6.0
 - Merge pull request [#1317](https://github.com/guanguans/laravel-skeleton/issues/1317) from guanguans/dependabot/composer/symplify/vendor-patches-11.5.0
 - Merge pull request [#1320](https://github.com/guanguans/laravel-skeleton/issues/1320) from guanguans/dependabot/composer/kirschbaum-development/eloquent-power-joins-4.2.6
@@ -358,8 +520,11 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="12.1.0"></a>
+
 ## [12.1.0] - 2025-05-03
+
 ### ✨ Features
+
 - **console:** add CheckServiceProviderCommand to clear logs by days ([13369c35](https://github.com/guanguans/laravel-skeleton/commit/13369c35))
 - **console:** update ReadmeCommand to refresh scripts and tree sections ([507a881e](https://github.com/guanguans/laravel-skeleton/commit/507a881e))
 - **console:** add custom input options and xdebug handling to Artisan commands ([7ad2823c](https://github.com/guanguans/laravel-skeleton/commit/7ad2823c))
@@ -369,6 +534,7 @@ All notable changes to this project will be documented in this file.
 - **readme:** add command to update README tree structure ([74ead701](https://github.com/guanguans/laravel-skeleton/commit/74ead701))
 
 ### 🐞 Bug Fixes
+
 - **api:** update middleware configuration for API routes ([b63da72a](https://github.com/guanguans/laravel-skeleton/commit/b63da72a))
 - **api:** refactor API route definitions for clarity and organization ([740759a8](https://github.com/guanguans/laravel-skeleton/commit/740759a8))
 - **auth:** replace LogActivity listener with consolidated AuthSubscriber ([1ab7854d](https://github.com/guanguans/laravel-skeleton/commit/1ab7854d))
@@ -383,9 +549,11 @@ All notable changes to this project will be documented in this file.
 - **view:** register custom error view paths for HTTP errors ([edcdd018](https://github.com/guanguans/laravel-skeleton/commit/edcdd018))
 
 ### 🎨 Styles
+
 - apply finalize classes ([0b94ec5e](https://github.com/guanguans/laravel-skeleton/commit/0b94ec5e))
 
 ### 💅 Code Refactorings
+
 - apply inspection ([676319d6](https://github.com/guanguans/laravel-skeleton/commit/676319d6))
 - **bootstrap:** Remove OutOfMemoryBootstrapper and add placeholder class ([4d8ec4a1](https://github.com/guanguans/laravel-skeleton/commit/4d8ec4a1))
 - **console:** update command listener to use CommandStarting event ([0ae69fe5](https://github.com/guanguans/laravel-skeleton/commit/0ae69fe5))
@@ -397,9 +565,11 @@ All notable changes to this project will be documented in this file.
 - **user:** move validation trait and rules to User model ([30f83a9d](https://github.com/guanguans/laravel-skeleton/commit/30f83a9d))
 
 ### ✅ Tests
+
 - **console:** enhance test coverage for all console commands ([7237a849](https://github.com/guanguans/laravel-skeleton/commit/7237a849))
 
 ### 📦 Builds
+
 - remove unused packages and clean environment config ([877f5352](https://github.com/guanguans/laravel-skeleton/commit/877f5352))
 - **composer:** update dependencies and disable middleware in app bootstrap ([2807a8c3](https://github.com/guanguans/laravel-skeleton/commit/2807a8c3))
 - **composer:** update dependencies versions and pest script options ([d55a6d08](https://github.com/guanguans/laravel-skeleton/commit/d55a6d08))
@@ -422,6 +592,7 @@ All notable changes to this project will be documented in this file.
 - **deps-dev:** bump soloterm/solo from 0.4.0 to 0.5.0 ([4065a51d](https://github.com/guanguans/laravel-skeleton/commit/4065a51d))
 
 ### 🤖 Continuous Integrations
+
 - apply phpstan level 7 ([9778620e](https://github.com/guanguans/laravel-skeleton/commit/9778620e))
 - apply phpstan level max ([5460f210](https://github.com/guanguans/laravel-skeleton/commit/5460f210))
 - apply phpstan level 9 ([ab0199ae](https://github.com/guanguans/laravel-skeleton/commit/ab0199ae))
@@ -437,6 +608,7 @@ All notable changes to this project will be documented in this file.
 - **phpstan:** update analysis paths and exclusions in configuration ([64fbd078](https://github.com/guanguans/laravel-skeleton/commit/64fbd078))
 
 ### Pull Requests
+
 - Merge pull request [#1171](https://github.com/guanguans/laravel-skeleton/issues/1171) from guanguans/dependabot/composer/symfony/polyfill-php84-1.32.0
 - Merge pull request [#1170](https://github.com/guanguans/laravel-skeleton/issues/1170) from guanguans/dependabot/composer/dragon-code/pretty-routes-3.7.0
 - Merge pull request [#1169](https://github.com/guanguans/laravel-skeleton/issues/1169) from guanguans/dependabot/composer/laravel/framework-12.12.0
@@ -456,8 +628,11 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="12.0.0"></a>
+
 ## [12.0.0] - 2025-04-25
+
 ### ✨ Features
+
 - **AutowiredServiceProvider:** Add AutowiredServiceProvider for dependency injection ([498d5d67](https://github.com/guanguans/laravel-skeleton/commit/498d5d67))
 - **PhpCsFixer:** Replace PrettierPHPFixer with PintFixer ([3e15b8b7](https://github.com/guanguans/laravel-skeleton/commit/3e15b8b7))
 - **app:** refactor and introduce global trace ID setup ([86b87e7f](https://github.com/guanguans/laravel-skeleton/commit/86b87e7f))
@@ -491,6 +666,7 @@ All notable changes to this project will be documented in this file.
 - **view:** Add ViewServiceProvider for view extensions ([9658ceb9](https://github.com/guanguans/laravel-skeleton/commit/9658ceb9))
 
 ### 🐞 Bug Fixes
+
 - **app-service-provider:** refine class filtering logic ([6a3c6bd3](https://github.com/guanguans/laravel-skeleton/commit/6a3c6bd3))
 - **client:** simplify logger configuration and remove unused imports ([08c61936](https://github.com/guanguans/laravel-skeleton/commit/08c61936))
 - **listeners:** refactor code to improve request handling and traceability ([4cfb0178](https://github.com/guanguans/laravel-skeleton/commit/4cfb0178))
@@ -506,9 +682,11 @@ All notable changes to this project will be documented in this file.
 - **workflows:** add missing 'create project cmd' step ([2f72cbe6](https://github.com/guanguans/laravel-skeleton/commit/2f72cbe6))
 
 ### 🎨 Styles
+
 - **codebase:** remove fully-qualified class names in favor of imports ([2d15421f](https://github.com/guanguans/laravel-skeleton/commit/2d15421f))
 
 ### 💅 Code Refactorings
+
 - apply phpstan ([577f5a30](https://github.com/guanguans/laravel-skeleton/commit/577f5a30))
 - apply rector ([afb041f3](https://github.com/guanguans/laravel-skeleton/commit/afb041f3))
 - apply rector ([21a3884c](https://github.com/guanguans/laravel-skeleton/commit/21a3884c))
@@ -575,12 +753,14 @@ All notable changes to this project will be documented in this file.
 - **view:** improve property handling and visibility in components ([a8ec89a1](https://github.com/guanguans/laravel-skeleton/commit/a8ec89a1))
 
 ### ✅ Tests
+
 - **auth:** update and improve authentication tests ([ea3a1608](https://github.com/guanguans/laravel-skeleton/commit/ea3a1608))
 - **core:** remove CreatesApplication trait and enhance test utilities ([c0c77a9a](https://github.com/guanguans/laravel-skeleton/commit/c0c77a9a))
 - **pushdeer:** add unit test for message push functionality ([9ebca1db](https://github.com/guanguans/laravel-skeleton/commit/9ebca1db))
 - **refactor:** replace class-based tests with closure-based syntax ([b690255b](https://github.com/guanguans/laravel-skeleton/commit/b690255b))
 
 ### 📦 Builds
+
 - **composer:** Update project description and dependencies ([68ea06ba](https://github.com/guanguans/laravel-skeleton/commit/68ea06ba))
 - **dependencies:** Add and remove Composer packages ([e9899b86](https://github.com/guanguans/laravel-skeleton/commit/e9899b86))
 - **dependencies:** Update package versions in composer.json ([82fdd448](https://github.com/guanguans/laravel-skeleton/commit/82fdd448))
@@ -591,6 +771,7 @@ All notable changes to this project will be documented in this file.
 - **platform:** Remove unused decorator functionality ([8d5d6582](https://github.com/guanguans/laravel-skeleton/commit/8d5d6582))
 
 ### 🤖 Continuous Integrations
+
 - **cache:** Remove cache-query stub and update dependencies ([26edc895](https://github.com/guanguans/laravel-skeleton/commit/26edc895))
 - **config:** add new configurations and dependencies for project setup ([f64f1141](https://github.com/guanguans/laravel-skeleton/commit/f64f1141))
 - **dependency-analyser:** update error handling configurations ([1e9b1898](https://github.com/guanguans/laravel-skeleton/commit/1e9b1898))
@@ -600,8 +781,11 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="11.0.0"></a>
+
 ## 11.0.0 - 2025-04-08
+
 ### ✨ Features
+
 - 添加 Env 类使用及 DB_HOST 环境变量校验 ([9f1c6391](https://github.com/guanguans/laravel-skeleton/commit/9f1c6391))
 - add laravel-console-task ([90021b8d](https://github.com/guanguans/laravel-skeleton/commit/90021b8d))
 - Add AutoCommitCommand to generate ([c15c1fcd](https://github.com/guanguans/laravel-skeleton/commit/c15c1fcd))
@@ -876,6 +1060,7 @@ All notable changes to this project will be documented in this file.
 - **workflow:** Add security-checker workflow ([ee0250a9](https://github.com/guanguans/laravel-skeleton/commit/ee0250a9))
 
 ### 🐞 Bug Fixes
+
 - Remove SoloServiceProvider and update dependencies ([d43daa04](https://github.com/guanguans/laravel-skeleton/commit/d43daa04))
 - Update instantiation of classes to use parentheses ([ddf846e2](https://github.com/guanguans/laravel-skeleton/commit/ddf846e2))
 - **ApiResponse:** reorder conditions in dataFor method ([2b419ab1](https://github.com/guanguans/laravel-skeleton/commit/2b419ab1))
@@ -939,6 +1124,7 @@ All notable changes to this project will be documented in this file.
 - **tests:** update class retrieval in class_namespace function ([a03578ae](https://github.com/guanguans/laravel-skeleton/commit/a03578ae))
 
 ### 📖 Documents
+
 - **AppServiceProvider:** Add link to Cachet repository ([68cda2b8](https://github.com/guanguans/laravel-skeleton/commit/68cda2b8))
 - **FgcClient:** add class description ([04da5484](https://github.com/guanguans/laravel-skeleton/commit/04da5484))
 - **FgcPsrClient:** Add documentation reference ([d0c067f7](https://github.com/guanguans/laravel-skeleton/commit/d0c067f7))
@@ -950,6 +1136,7 @@ All notable changes to this project will be documented in this file.
 - **streamwrapper:** Add documentation for stream wrapper methods ([2719d8fb](https://github.com/guanguans/laravel-skeleton/commit/2719d8fb))
 
 ### 🎨 Styles
+
 - add declare(strict_types=1) and update method signatures ([a9e9dc3a](https://github.com/guanguans/laravel-skeleton/commit/a9e9dc3a))
 - apply consistent new object instantiation syntax ([216ae972](https://github.com/guanguans/laravel-skeleton/commit/216ae972))
 - Update formatting for improved readability ([e8aae925](https://github.com/guanguans/laravel-skeleton/commit/e8aae925))
@@ -965,6 +1152,7 @@ All notable changes to this project will be documented in this file.
 - **mixins:** Simplify mixin annotations for better clarity ([10e381f5](https://github.com/guanguans/laravel-skeleton/commit/10e381f5))
 
 ### 💅 Code Refactorings
+
 - optimize Laravel Rector rules ([4dc419e1](https://github.com/guanguans/laravel-skeleton/commit/4dc419e1))
 - replace fully qualified class names with aliases ([a288b122](https://github.com/guanguans/laravel-skeleton/commit/a288b122))
 - update routing and middleware setup in Laravel ([8d02d276](https://github.com/guanguans/laravel-skeleton/commit/8d02d276))
@@ -1100,9 +1288,11 @@ All notable changes to this project will be documented in this file.
 - **validates-input:** improve validator handling and code clarity ([0cfaf0d9](https://github.com/guanguans/laravel-skeleton/commit/0cfaf0d9))
 
 ### 🏎 Performance Improvements
+
 - **rateLimiter:** Refactor apply method and fingerprint generation ([1f4eaa7d](https://github.com/guanguans/laravel-skeleton/commit/1f4eaa7d))
 
 ### ✅ Tests
+
 - 添加 Bootloadable 特性并更新测试用例 ([e2229d2a](https://github.com/guanguans/laravel-skeleton/commit/e2229d2a))
 - **AppServiceProvider:** set up test database with seeding ([ef8ae2a7](https://github.com/guanguans/laravel-skeleton/commit/ef8ae2a7))
 - **ArchTest:** add initial test for debugging function usage ([24fdd2c1](https://github.com/guanguans/laravel-skeleton/commit/24fdd2c1))
@@ -1110,6 +1300,7 @@ All notable changes to this project will be documented in this file.
 - **seeder:** Add CanSeedOncePerDatabase trait for idempotent seeding ([c47aaba9](https://github.com/guanguans/laravel-skeleton/commit/c47aaba9))
 
 ### 📦 Builds
+
 - integrate Spatie Laravel stubs ([e5cc4733](https://github.com/guanguans/laravel-skeleton/commit/e5cc4733))
 - **composer:** Update package versions in composer.json ([ccab2b30](https://github.com/guanguans/laravel-skeleton/commit/ccab2b30))
 - **composer:** update package versions ([371e1692](https://github.com/guanguans/laravel-skeleton/commit/371e1692))
@@ -1144,12 +1335,14 @@ All notable changes to this project will be documented in this file.
 - **vendor:** remove laravel-github-monolog and rename translation-checker ([0e84a1d2](https://github.com/guanguans/laravel-skeleton/commit/0e84a1d2))
 
 ### 🤖 Continuous Integrations
+
 - apply php-cs-fixer ([bb5e7620](https://github.com/guanguans/laravel-skeleton/commit/bb5e7620))
 - apply php-cs-fixer ([4f7c9598](https://github.com/guanguans/laravel-skeleton/commit/4f7c9598))
 - **dependencies:** Update laravel-api-response version and scripts ([13c76a60](https://github.com/guanguans/laravel-skeleton/commit/13c76a60))
 - **skeletor:** Add Skeletor integration for command checks ([8b517738](https://github.com/guanguans/laravel-skeleton/commit/8b517738))
 
 ### Pull Requests
+
 - Merge pull request [#1154](https://github.com/guanguans/laravel-skeleton/issues/1154) from guanguans/dependabot/composer/laravel-lang/common-6.7.0
 - Merge pull request [#1153](https://github.com/guanguans/laravel-skeleton/issues/1153) from guanguans/dependabot/composer/echolabsdev/prism-0.46.0
 - Merge pull request [#1152](https://github.com/guanguans/laravel-skeleton/issues/1152) from guanguans/dependabot/composer/inspector-apm/inspector-laravel-4.11.2
