@@ -22,6 +22,15 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
 {
     use Cmd;
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    public function supports(\SplFileInfo $file): bool
+    {
+        return (bool) preg_match('/(zh|cn|chinese).*\.(md|markdown|text|txt)$/mi', $file->getBasename());
+    }
+
     #[\Override]
     protected function defaultCommand(): array
     {

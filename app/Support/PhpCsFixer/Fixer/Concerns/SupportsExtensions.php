@@ -18,7 +18,7 @@ trait SupportsExtensions
     public function supports(\SplFileInfo $file): bool
     {
         return str($file->getExtension())->is($this->extensions(), true)
-            || str($file->getPathname())->lower()->endsWith($this->extensions());
+            || str($file->getBasename())->lower()->endsWith($this->extensions());
     }
 
     /**

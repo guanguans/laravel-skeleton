@@ -65,7 +65,7 @@ return (new Config)
         // MarkdownLintCli2Fixer::name() => true,
         // MarkdownLintFixer::name() => true,
         // TextLintFixer::name() => true,
-        // ZhLintFixer::name() => true,
+        ZhLintFixer::name() => true,
 
         // PintFixer::name() => true,
         BladeFormatterFixer::name() => true,
