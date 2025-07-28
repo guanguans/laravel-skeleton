@@ -52,7 +52,7 @@ final class TextLintFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['md', 'markdown', 'txt', 'text'];
     }

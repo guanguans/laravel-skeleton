@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
@@ -30,9 +28,9 @@ final class JsonFixer extends AbstractInlineHtmlFixer
     public const string ENCODE_FLAGS = 'encode_flags';
 
     #[\Override]
-    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    protected function fixerOptions(): array
     {
-        return new FixerConfigurationResolver([
+        return [
             (new FixerOptionBuilder(self::DECODE_ASSOCIATIVE, 'Whether to decode JSON as an associative array.'))
                 ->setAllowedTypes(['bool'])
                 ->setDefault(true)
@@ -45,11 +43,11 @@ final class JsonFixer extends AbstractInlineHtmlFixer
                 ->setAllowedTypes(['int'])
                 ->setDefault(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_THROW_ON_ERROR)
                 ->getOption(),
-        ]);
+        ];
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['json'];
     }

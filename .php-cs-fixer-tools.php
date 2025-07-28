@@ -107,7 +107,7 @@ return (new Config)
                 fn (AbstractFixer $fixer): array => array_map(
                     static fn (string $extension): string => \sprintf('/\.%s$/', str_replace('.', '\.', $extension)),
                     array_filter(
-                        (fn (): array => $this->extensions())->call($fixer),
+                        (fn (): array => $this->defaultExtensions())->call($fixer),
                         static fn (string $extension): bool => !\in_array($extension, ['php', 'php'], true)
                     )
                 ),

@@ -13,18 +13,11 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use Symfony\Component\Process\Process;
-
 /**
  * @see https://github.com/igorshubovych/markdownlint-cli
  */
 final class MarkdownLintFixer extends AbstractCommandLineToolFixer
 {
-    // protected function isSuccessfulProcess(Process $process): bool
-    // {
-    //     return parent::isSuccessfulProcess($process) || $process->getExitCode() === 1;
-    // }
-
     #[\Override]
     protected function defaultCommand(): array
     {
@@ -95,7 +88,7 @@ final class MarkdownLintFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['md', 'markdown'];
     }

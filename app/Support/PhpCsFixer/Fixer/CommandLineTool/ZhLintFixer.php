@@ -47,9 +47,9 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
-        return ['md', 'markdown', 'txt', 'text'];
+        return ['zh_CN.md'];
     }
 
     protected function path(): string

@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpMyAdmin\SqlParser\Utils\Formatter;
 
@@ -27,19 +25,19 @@ final class PhpMyAdminSqlFixer extends AbstractInlineHtmlFixer
     public const string OPTIONS = 'options';
 
     #[\Override]
-    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    protected function fixerOptions(): array
     {
-        return new FixerConfigurationResolver([
+        return [
             /**  @see \PhpMyAdmin\SqlParser\Utils\Formatter::getDefaultOptions() */
             (new FixerOptionBuilder(self::OPTIONS, 'The formatting options.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault(['type' => 'text'])
                 ->getOption(),
-        ]);
+        ];
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['sql'];
     }

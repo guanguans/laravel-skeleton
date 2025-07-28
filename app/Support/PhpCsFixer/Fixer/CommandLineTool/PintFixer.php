@@ -81,7 +81,7 @@ final class PintFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['php'];
     }

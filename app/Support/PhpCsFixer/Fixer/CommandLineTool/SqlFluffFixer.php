@@ -13,31 +13,11 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
-
 /**
  * @see https://github.com/sqlfluff/sqlfluff
  */
 final class SqlFluffFixer extends AbstractCommandLineToolFixer
 {
-    public const string EXTENSIONS = 'extensions';
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     *
-     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
-     */
-    #[\Override]
-    protected function fixerOptions(): array
-    {
-        return [
-            (new FixerOptionBuilder(self::EXTENSIONS, 'The file extensions to format.'))
-                ->setAllowedTypes(['array'])
-                ->setDefault(['sql'])
-                ->getOption(),
-        ];
-    }
-
     #[\Override]
     protected function defaultCommand(): array
     {
@@ -72,8 +52,8 @@ final class SqlFluffFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
-        return $this->configuration[self::EXTENSIONS];
+        return ['sql'];
     }
 }

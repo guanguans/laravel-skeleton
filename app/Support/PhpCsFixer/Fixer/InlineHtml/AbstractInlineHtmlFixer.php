@@ -20,6 +20,8 @@ use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -41,6 +43,19 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
             [new CodeSample($summary)]
         );
     }
+
+    #[\Override]
+    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    {
+        return new FixerConfigurationResolver([$this->extensionsFixerOption(), ...$this->fixerOptions()]);
+    }
+
+    /**
+     * @noinspection PhpMemberCanBePulledUpInspection
+     *
+     * @return list<\PhpCsFixer\FixerConfiguration\FixerOptionInterface>
+     */
+    abstract protected function fixerOptions(): array;
 
     /**
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens

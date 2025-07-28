@@ -81,7 +81,7 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['xml', 'xml.dist'];
     }

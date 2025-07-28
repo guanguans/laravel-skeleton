@@ -13,16 +13,32 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\Concerns;
 
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
+use PhpCsFixer\FixerConfiguration\FixerOptionInterface;
+
+/**
+ * @mixin \App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer
+ */
 trait SupportsExtensions
 {
+    public const string EXTENSIONS = 'extensions';
+
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is($this->extensions(), true)
-            || str($file->getBasename())->lower()->endsWith($this->extensions());
+        return str($file->getExtension())->is($this->configuration[self::EXTENSIONS], true)
+            || str($file->getBasename())->lower()->endsWith($this->configuration[self::EXTENSIONS]);
+    }
+
+    protected function extensionsFixerOption(): FixerOptionInterface
+    {
+        return (new FixerOptionBuilder(self::EXTENSIONS, 'The file extensions to format.'))
+            ->setAllowedTypes(['array'])
+            ->setDefault($this->defaultExtensions())
+            ->getOption();
     }
 
     /**
      * @return list<string>
      */
-    abstract protected function extensions(): array;
+    abstract protected function defaultExtensions(): array;
 }

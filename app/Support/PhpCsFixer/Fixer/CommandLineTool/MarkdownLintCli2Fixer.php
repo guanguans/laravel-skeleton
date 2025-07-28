@@ -41,7 +41,7 @@ final class MarkdownLintCli2Fixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['md', 'markdown'];
     }

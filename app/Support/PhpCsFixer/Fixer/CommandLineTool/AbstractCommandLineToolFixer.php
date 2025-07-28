@@ -121,6 +121,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
                 ->setAllowedTypes(['float', 'int', 'null'])
                 ->setDefault(60)
                 ->getOption(),
+            $this->extensionsFixerOption(),
         ];
     }
 
@@ -189,7 +190,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         return Utils::createTemporaryFile(
             directory: $directory,
             prefix: $prefix ?? "{$this->getShortName()}_",
-            extension: $extension ?? Arr::random($this->extensions()),
+            extension: $extension ?? Arr::random($this->configuration[self::EXTENSIONS]),
             deferDelete: $deferDelete,
         );
     }

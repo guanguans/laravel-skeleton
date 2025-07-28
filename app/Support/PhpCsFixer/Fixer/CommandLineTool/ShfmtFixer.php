@@ -54,7 +54,7 @@ final class ShfmtFixer extends AbstractCommandLineToolFixer
      * @see `-ln, --language-dialect str  bash/posix/mksh/bats, default "auto"`
      */
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['sh', 'bats'];
     }

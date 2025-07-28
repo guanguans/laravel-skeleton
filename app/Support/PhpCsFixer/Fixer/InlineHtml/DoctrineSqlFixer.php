@@ -15,8 +15,6 @@ namespace App\Support\PhpCsFixer\Fixer\InlineHtml;
 
 use Doctrine\SqlFormatter\NullHighlighter;
 use Doctrine\SqlFormatter\SqlFormatter;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
@@ -28,9 +26,9 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
     public const string INDENT_STRING = 'indent_string';
 
     #[\Override]
-    protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
+    protected function fixerOptions(): array
     {
-        return new FixerConfigurationResolver([
+        return [
             (new FixerOptionBuilder(
                 self::INDENT_STRING,
                 'The SQL string with HTML styles and formatting wrapped in a <pre> tag.'
@@ -38,11 +36,11 @@ final class DoctrineSqlFixer extends AbstractInlineHtmlFixer
                 ->setAllowedTypes(['string'])
                 ->setDefault('    ')
                 ->getOption(),
-        ]);
+        ];
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['sql'];
     }

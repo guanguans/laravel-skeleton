@@ -34,7 +34,7 @@ final class DotenvLinterFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
-    protected function extensions(): array
+    protected function defaultExtensions(): array
     {
         return ['env', 'env.example'];
     }
