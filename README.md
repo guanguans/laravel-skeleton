@@ -758,14 +758,15 @@ app/
 |   |   |   |   |-- SupportsExtensions.php
 |   |   |   |   |-- SupportsExtensionsAndPathArg.php
 |   |   |   |   `-- SupportsPathArg.php
-|   |   |   `-- InlineHtml/
-|   |   |       |-- AbstractInlineHtmlFixer.php
-|   |   |       |-- DoctrineSqlFixer.php
-|   |   |       |-- JsonFixer.php
-|   |   |       |-- NeonFixer.php
-|   |   |       |-- PhpMyAdminSqlFixer.php
-|   |   |       |-- XmlFixer.php
-|   |   |       `-- YamlFixer.php
+|   |   |   |-- InlineHtml/
+|   |   |   |   |-- AbstractInlineHtmlFixer.php
+|   |   |   |   |-- DoctrineSqlFixer.php
+|   |   |   |   |-- JsonFixer.php
+|   |   |   |   |-- NeonFixer.php
+|   |   |   |   |-- PhpMyAdminSqlFixer.php
+|   |   |   |   |-- XmlFixer.php
+|   |   |   |   `-- YamlFixer.php
+|   |   |   `-- SqlFixer.php
 |   |   |-- Fixers.php
 |   |   `-- Utils.php
 |   |-- PhpUserFilters/
@@ -803,7 +804,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-60 directories, 295 files
+60 directories, 296 files
 
 ```
 

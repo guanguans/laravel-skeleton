@@ -35,6 +35,7 @@ use App\Support\PhpCsFixer\Fixer\InlineHtml\NeonFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
+use App\Support\PhpCsFixer\Fixer\SqlFixer;
 use App\Support\PhpCsFixer\Fixers;
 use PhpCsFixer\Config;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
@@ -45,6 +46,9 @@ use Symfony\Component\Finder\Finder;
  */
 return (new Config)
     ->registerCustomFixers($userFixers = iterator_to_array(new Fixers))
+    ->registerCustomFixers([
+        new SqlFixer,
+    ])
     ->setRules([
         // '@PhpCsFixer:risky' => true,
         'encoding' => true,
@@ -76,9 +80,9 @@ return (new Config)
 
         ShfmtFixer::name() => true,
 
-        DoctrineSqlFixer::name() => true,
+        // DoctrineSqlFixer::name() => true,
         // PhpMyAdminSqlFixer::name() => true,
-        SqlFluffFixer::name() => true,
+        // SqlFluffFixer::name() => true,
 
         // YamlFixer::name() => true,
         YamlFmtFixer::name() => true,
@@ -89,6 +93,10 @@ return (new Config)
         JsonFixer::name() => true,
 
         // NeonFixer::name() => true,
+
+        SqlFixer::name() => [
+            SqlFixer::INDENT_STRING => '  ',
+        ],
     ])
     ->setFinder(
         Finder::create()

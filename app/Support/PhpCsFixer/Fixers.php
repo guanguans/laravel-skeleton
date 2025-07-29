@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer;
 
+use App\Support\PhpCsFixer\Fixer\SqlFixer;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\FixerInterface;
 
@@ -39,7 +40,7 @@ final class Fixers implements \IteratorAggregate
             /** @var class-string<FixerInterface> $class */
             $class = __NAMESPACE__.str_replace('/', '\\', mb_substr($file->getPathname(), mb_strlen(__DIR__), -4));
 
-            if (!class_exists($class)) {
+            if (!class_exists($class) || SqlFixer::class === $class) {
                 continue;
             }
 
