@@ -14,6 +14,7 @@ declare(strict_types=1);
  */
 
 use App\Support\PhpCsFixer\Fixer\AbstractFixer;
+use App\Support\PhpCsFixer\Fixer\BladeFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\BladeFormatterFixer;
@@ -47,6 +48,7 @@ use Symfony\Component\Finder\Finder;
 return (new Config)
     ->registerCustomFixers($userFixers = iterator_to_array(new Fixers))
     ->registerCustomFixers([
+        new BladeFixer,
         new SqlFixer,
     ])
     ->setRules([
@@ -72,7 +74,7 @@ return (new Config)
         ZhLintFixer::name() => true,
 
         // PintFixer::name() => true,
-        BladeFormatterFixer::name() => true,
+        // BladeFormatterFixer::name() => true,
 
         DockerFmtFixer::name() => true,
 
@@ -94,6 +96,13 @@ return (new Config)
 
         // NeonFixer::name() => true,
 
+        BladeFixer::name() => [
+            // BladeFixer::COMMAND => ['node', 'blade-formatter'],
+            BladeFixer::COMMAND => 'blade-formatter',
+            BladeFixer::OPTIONS => [
+                // '--indent-size' => 2,
+            ],
+        ],
         SqlFixer::name() => [
             SqlFixer::INDENT_STRING => '  ',
         ],

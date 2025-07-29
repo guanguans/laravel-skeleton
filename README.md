@@ -726,6 +726,7 @@ app/
 |   |   |-- Fixer/
 |   |   |   |-- AbstractConfigurableFixer.php
 |   |   |   |-- AbstractFixer.php
+|   |   |   |-- BladeFixer.php
 |   |   |   |-- CommandLineTool/
 |   |   |   |   |-- AbstractCommandLineToolFixer.php
 |   |   |   |   |-- AutocorrectFixer.php
@@ -804,7 +805,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-60 directories, 296 files
+60 directories, 297 files
 
 ```
 

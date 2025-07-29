@@ -32,6 +32,9 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 
+/**
+ * @see https://github.com/doctrine/sql-formatter
+ */
 final class SqlFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     use ConfigurableFixerTrait;
@@ -91,7 +94,8 @@ final class SqlFixer extends AbstractFixer implements ConfigurableFixerInterface
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        return str($file->getExtension())->is('sql', true);
+        // return str_ends_with($file->getBasename(), 'blade.php');
+        return $file->getExtension() === 'sql';
     }
 
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
