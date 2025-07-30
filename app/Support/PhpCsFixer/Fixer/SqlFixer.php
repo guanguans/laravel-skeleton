@@ -94,7 +94,7 @@ final class SqlFixer extends AbstractFixer implements ConfigurableFixerInterface
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        // return str_ends_with($file->getBasename(), 'blade.php');
+        // return str_ends_with($file->getBasename(), '.sql');
         return $file->getExtension() === 'sql';
     }
 

@@ -122,7 +122,7 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
     #[\Override]
     public function supports(\SplFileInfo $file): bool
     {
-        return str_ends_with($file->getBasename(), 'blade.php');
+        return str_ends_with($file->getBasename(), '.blade.php');
     }
 
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
@@ -141,6 +141,15 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
             (new FixerOptionBuilder(self::OPTIONS, 'The options to pass to the command.'))
                 ->setAllowedTypes(['array'])
                 ->setDefault([])
+                ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value): array => collect($value)->reduce(
+                    static function (array $options, mixed $value, int|string $key): array {
+                        \is_string($key) and str_starts_with($key, '-') and $options[] = $key;
+                        $options[] = $value;
+
+                        return $options;
+                    },
+                    []
+                ))
                 ->getOption(),
             (new FixerOptionBuilder(self::CWD, 'The working directory or null to use the working dir of the current PHP process.'))
                 ->setAllowedTypes(['string', 'null'])
@@ -173,7 +182,8 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
             command: [
                 ...$this->configuration[self::COMMAND],
                 $finalPath = $this->finalFile($file, $tokens),
-                ...$this->options(),
+                '--write',
+                ...$this->configuration[self::OPTIONS],
             ],
             cwd: $this->configuration[self::CWD],
             env: $this->configuration[self::ENV],
@@ -225,19 +235,6 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
         return $temporaryFile;
     }
 
-    private function options(): array
-    {
-        return collect(['--write', ...$this->configuration[self::OPTIONS]])->reduce(
-            static function (array $options, mixed $value, int|string $key): array {
-                \is_string($key) and str_starts_with($key, '-') and $options[] = $key;
-                $options[] = $value;
-
-                return $options;
-            },
-            []
-        );
-    }
-
     /**
      * @noinspection DuplicatedCode
      */
@@ -249,11 +246,11 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
 
         $symfonyStyle->title("Process debugging information for [{$this->getName()}]");
         $symfonyStyle->warning([
-            \sprintf('Command Line: %s', Utils::toString($process->getCommandLine())),
+            \sprintf('Command Line: %s', $process->getCommandLine()),
             \sprintf('Exit Code: %s', Utils::toString($process->getExitCode())),
             \sprintf('Exit Code Text: %s', Utils::toString($process->getExitCodeText())),
-            \sprintf('Output: %s', Utils::toString($process->getOutput())),
-            \sprintf('Error Output: %s', Utils::toString($process->getErrorOutput())),
+            \sprintf('Output: %s', $process->getOutput()),
+            \sprintf('Error Output: %s', $process->getErrorOutput()),
             \sprintf('Working Directory: %s', Utils::toString($process->getWorkingDirectory())),
             \sprintf('Env: %s', Utils::toString($process->getEnv())),
             \sprintf('Input: %s', Utils::toString($process->getInput())),
