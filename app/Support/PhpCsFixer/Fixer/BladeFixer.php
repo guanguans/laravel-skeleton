@@ -72,7 +72,7 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a [%s] file.', $this->getShortHeadlineName()),
+            $summary = "Format a [{$this->getShortHeadlineName()}] file.",
             [new CodeSample($summary)]
         );
     }
@@ -85,7 +85,7 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
     #[\Override]
     public function getName(): string
     {
-        return \sprintf('User/%s', $this->getShortName());
+        return "User/{$this->getShortName()}";
     }
 
     public function getShortHeadlineName(): string

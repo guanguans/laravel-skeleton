@@ -44,7 +44,7 @@ final class SqlFixer extends AbstractFixer implements ConfigurableFixerInterface
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a [%s] file.', $this->getShortHeadlineName()),
+            $summary = "Format a [{$this->getShortHeadlineName()}] file.",
             [new CodeSample($summary)]
         );
     }
@@ -57,7 +57,7 @@ final class SqlFixer extends AbstractFixer implements ConfigurableFixerInterface
     #[\Override]
     public function getName(): string
     {
-        return \sprintf('User/%s', $this->getShortName());
+        return "User/{$this->getShortName()}";
     }
 
     public function getShortHeadlineName(): string

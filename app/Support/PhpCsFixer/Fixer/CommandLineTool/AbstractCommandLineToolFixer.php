@@ -82,7 +82,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     public function getDefinition(): FixerDefinitionInterface
     {
         return new FixerDefinition(
-            $summary = \sprintf('Format a file by [%s].', $this->getShortHeadlineName()),
+            $summary = "Format a file by [{$this->getShortHeadlineName()}].",
             [new CodeSample($summary)]
         );
     }

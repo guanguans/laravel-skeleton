@@ -44,7 +44,7 @@ abstract class AbstractFixer extends \PhpCsFixer\AbstractFixer
     #[\Override]
     public function getName(): string
     {
-        return \sprintf('User/%s', $this->getShortName());
+        return "User/{$this->getShortName()}";
     }
 
     public function getShortHeadlineName(): string
