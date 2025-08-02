@@ -94,6 +94,7 @@
         "leocavalcante/redact-sensitive": "^0.4",
         "leventcz/laravel-top": "^1.2",
         "livewire/flux": "^2.2",
+        "lorisleiva/cron-translator": "^0.4.6",
         "maantje/pulse-database": "^0.3",
         "mcamara/laravel-localization": "^2.3",
         "mpyw/laravel-cached-database-stickiness": "^2.2",

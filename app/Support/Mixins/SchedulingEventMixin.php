@@ -28,6 +28,29 @@ use Illuminate\Support\Stringable;
 #[Mixin(Event::class)]
 final class SchedulingEventMixin
 {
+    /**
+     * @noinspection ForgottenDebugOutputInspection
+     */
+    public function ddExpression(): \Closure
+    {
+        return function (): void {
+            dd($this->expression);
+        };
+    }
+
+    /**
+     * @noinspection ForgottenDebugOutputInspection
+     * @noinspection DebugFunctionUsageInspection
+     */
+    public function dumpExpression(): \Closure
+    {
+        return function (): Event {
+            dump($this->expression);
+
+            return $this;
+        };
+    }
+
     public function userAppendOutputToDaily(): \Closure
     {
         return fn (
