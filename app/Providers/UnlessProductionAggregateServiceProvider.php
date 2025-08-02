@@ -43,6 +43,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
         'LaracraftTech\\LaravelSchemaRules\\LaravelSchemaRulesServiceProvider',
         'Laravel\\Dusk\\DuskServiceProvider',
         'Laravel\\Pail\\PailServiceProvider',
+        'Laravel\\Roster\\RosterServiceProvider',
         'Laravel\\Sail\\SailServiceProvider',
         'Laravel\\Telescope\\TelescopeServiceProvider',
         'Lubusin\\Decomposer\\DecomposerServiceProvider',

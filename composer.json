@@ -360,6 +360,7 @@
                 "laravel-shift/factory-generator",
                 "laravel/dusk",
                 "laravel/pail",
+                "laravel/roster",
                 "laravel/sail",
                 "laravel/telescope",
                 "lubusin/laravel-decomposer",
