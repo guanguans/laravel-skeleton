@@ -63,6 +63,14 @@ Route::post('order', static function (): void {
     // Order processing logic
 })->block(5, 5);
 
+/**
+ * @see https://laravel-news.com/route-shallow-resource
+ * @see https://laravel-news.com/route-resource-scoped
+ */
+Route::resource('order.items', 'App\Http\Controllers\OrderItemController')->shallow()->scoped([
+    'item' => 'sku',
+]);
+
 Route::post('update-password', static function (Request $request) {
     // Validate the new password
     $request->validate([
