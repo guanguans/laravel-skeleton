@@ -21,6 +21,7 @@ use Illuminate\Console\Scheduling\Event;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
+use Lorisleiva\CronTranslator\CronTranslator;
 
 /**
  * @mixin \Illuminate\Console\Scheduling\Event
@@ -28,6 +29,29 @@ use Illuminate\Support\Stringable;
 #[Mixin(Event::class)]
 final class SchedulingEventMixin
 {
+    /**
+     * @noinspection ForgottenDebugOutputInspection
+     */
+    public function ddHumanlyExpression(): \Closure
+    {
+        return function (string $locale = 'en', bool $timeFormat24hours = false): void {
+            dd(CronTranslator::translate($this->expression, $locale, $timeFormat24hours));
+        };
+    }
+
+    /**
+     * @noinspection ForgottenDebugOutputInspection
+     * @noinspection DebugFunctionUsageInspection
+     */
+    public function dumpHumanlyExpression(): \Closure
+    {
+        return function (string $locale = 'en', bool $timeFormat24hours = false): Event {
+            dump(CronTranslator::translate($this->expression, $locale, $timeFormat24hours));
+
+            return $this;
+        };
+    }
+
     /**
      * @noinspection ForgottenDebugOutputInspection
      */
