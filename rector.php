@@ -72,6 +72,7 @@ use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
+use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\If_\ThrowIfRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
@@ -306,6 +307,9 @@ return RectorConfig::configure()
     ->withSkip([
         StringToClassConstantRector::class => [
             __DIR__.'/app/Listeners/PrepareRequestListener.php',
+        ],
+        RemoveDumpDataDeadCodeRector::class => [
+            __DIR__.'/app/Support/Mixins/SchedulingEventMixin.php',
         ],
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
             __DIR__.'/app/Support/Clients/AbstractClient.php',

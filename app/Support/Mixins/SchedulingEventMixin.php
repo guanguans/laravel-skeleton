@@ -35,7 +35,7 @@ final class SchedulingEventMixin
      */
     public function ddHumanlyExpression(): \Closure
     {
-        return function (string $locale = 'en', bool $timeFormat24hours = false): void {
+        return function (string $locale = 'en', bool $timeFormat24hours = false): never {
             dd(CronTranslator::translate($this->expression, $locale, $timeFormat24hours));
         };
     }
@@ -58,7 +58,7 @@ final class SchedulingEventMixin
      */
     public function ddExpression(): \Closure
     {
-        return function (): void {
+        return function (): never {
             dd($this->expression);
         };
     }
