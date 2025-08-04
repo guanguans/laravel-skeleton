@@ -259,6 +259,7 @@ composer zh-lint
 * [leocavalcante/redact-sensitive](https://github.com/leocavalcante/redact-sensitive) - Monolog processor to protect sensitive information from logging
 * [leventcz/laravel-top](https://github.com/leventcz/laravel-top) - Real-time monitoring straight from the command line for Laravel applications.
 * [livewire/flux](https://github.com/livewire/flux) - The official UI component library for Livewire.
+* [lorisleiva/cron-translator](https://github.com/lorisleiva/cron-translator) - Makes CRON expressions human-readable
 * [maantje/pulse-database](https://github.com/maantje/pulse-database) - A Laravel Pulse card for database status
 * [mcamara/laravel-localization](https://github.com/mcamara/laravel-localization) - Easy localization for Laravel
 * [mpyw/laravel-cached-database-stickiness](https://github.com/mpyw/laravel-cached-database-stickiness) - Guarantee database stickiness over the same user's consecutive requests

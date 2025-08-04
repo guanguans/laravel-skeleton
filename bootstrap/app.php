@@ -97,7 +97,7 @@ return Application::configure(basePath: \dirname(__DIR__))
             ]);
     })
     ->withSchedule(static function (Schedule $schedule): void {
-        $schedule->command('inspire')->userAppendOutputToDaily()->doNotMonitor()->everyMinute()->withoutOverlapping(60);
+        $schedule->command('inspire')->dailyAppendOutputTo()->doNotMonitor()->everyMinute()->withoutOverlapping(60);
         // $schedule->command('inspire')->daily()->atRandom('07:15', '11:42')->withoutOverlapping(60);
         // $schedule->command('backup:clean')->daily()->at('05:15')->withoutOverlapping();
         // $schedule->command('backup:run')->daily()->at('05:30')->withoutOverlapping();
@@ -107,7 +107,7 @@ return Application::configure(basePath: \dirname(__DIR__))
         // $schedule->command(ClearLogsCommand::class)->daily()->withoutOverlapping();
         // $schedule->command(ClearExpiredCommand::class)->daily()->withoutOverlapping();
         // $schedule->command('disposable:update')->weekly()->at('04:00');
-        // $schedule->command('db:monitor', ['--databases' => 'mysql', '--max' => 100])->userAppendOutputToDaily()->everyMinute();
+        // $schedule->command('db:monitor', ['--databases' => 'mysql', '--max' => 100])->dailyAppendOutputTo()->everyMinute();
         // $schedule->command(RunHealthChecksCommand::class)->everyMinute();
         // $schedule->job(function (ConsoleOutput $consoleOutput): void {
         //     $consoleOutput->writeln(Inspiring::quote());

@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
 use Lorisleiva\CronTranslator\CronTranslator;
+use function Illuminate\Filesystem\join_paths;
 
 /**
  * @mixin \Illuminate\Console\Scheduling\Event
@@ -75,115 +76,105 @@ final class SchedulingEventMixin
         };
     }
 
-    public function userAppendOutputToDaily(): \Closure
+    public function dailyAppendOutputTo(): \Closure
     {
         return fn (
-            ?string $filename = null,
-            ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('daily-%s', Carbon::now()->format('Y-m-d')), $dirname);
+            ?string $directory = null,
+            ?string $filename = null
+        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('daily-%s', Carbon::now()->format('Y-m-d')));
     }
 
-    public function userAppendOutputToWeekly(): \Closure
+    public function weeklyAppendOutputTo(): \Closure
     {
         return fn (
-            ?string $filename = null,
-            ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('weekly-%s', Carbon::now()->format('Y-W')), $dirname);
+            ?string $directory = null,
+            ?string $filename = null
+        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('weekly-%s', Carbon::now()->format('Y-W')));
     }
 
-    public function userAppendOutputToMonthly(): \Closure
+    public function monthlyAppendOutputTo(): \Closure
     {
         return fn (
-            ?string $filename = null,
-            ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('monthly-%s', Carbon::now()->format('Y-m')), $dirname);
+            ?string $directory = null,
+            ?string $filename = null
+        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('monthly-%s', Carbon::now()->format('Y-m')));
     }
 
-    public function userAppendOutputToQuarterly(): \Closure
+    public function quarterlyAppendOutputTo(): \Closure
     {
         return fn (
-            ?string $filename = null,
-            ?string $dirname = null
-        ): Event => $this->userAppendOutputTo(
-            $filename,
-            \sprintf('quarterly-%s-%s', Carbon::now()->format('Y'), now()->quarter),
-            $dirname
-        );
+            ?string $directory = null,
+            ?string $filename = null
+        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('quarterly-%s-%s', Carbon::now()->format('Y'), now()->quarter));
     }
 
-    public function userAppendOutputToYearly(): \Closure
+    public function yearlyAppendOutputTo(): \Closure
     {
         return fn (
-            ?string $filename = null,
-            ?string $dirname = null
-        ): Event => $this->userAppendOutputTo($filename, \sprintf('yearly-%s', Carbon::now()->format('Y')), $dirname);
+            ?string $directory = null,
+            ?string $filename = null
+        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('yearly-%s', Carbon::now()->format('Y')));
     }
 
+    /**
+     * @noinspection CallableParameterUseCaseInTypeContextInspection
+     */
     public function userAppendOutputTo(): \Closure
     {
-        return function (?string $filename = null, ?string $suffix = null, ?string $dirname = null): Event {
-            $outputPath = value(
-                function (?string $filename, ?string $suffix, ?string $dirname): string {
-                    $filename = value(
-                        function (?string $filename): string {
-                            if ($filename) {
-                                return $filename;
-                            }
+        return function (?string $directory = null, ?string $filename = null, ?string $suffix = null): Event {
+            $filename = value(
+                function (?string $filename): string {
+                    if ($filename) {
+                        return $filename;
+                    }
 
-                            // artisan
-                            if (str($this->command)->contains("'artisan'")) {
-                                $commands = explode(' ', $this->command);
+                    // artisan
+                    if (str($this->command)->contains("'artisan'")) {
+                        return str($this->command)->explode(' ')->get(2);
+                    }
 
-                                return $commands[array_search("'artisan'", $commands, true) + 1];
-                            }
-
-                            throw_if(
-                                empty($this->description),
-                                \LogicException::class,
-                                "Please incoming the \$filename parameter, Or use the 'name' method before 'userAppendOutputTo'."
-                            );
-
-                            // exec|call|job
-                            return $this->description;
-                        },
-                        $filename
+                    throw_if(
+                        empty($this->description),
+                        \LogicException::class,
+                        'Please input the parameter [$filename], Or call the method [name/description] before call the method [userAppendOutputTo].'
                     );
 
-                    $normalizedFilename = str($filename)->replace([\DIRECTORY_SEPARATOR, '\\', ' '], ['-', '-', '-']);
-
-                    return (
-                        $dirname
-                            ? str($dirname)
-                            : str(storage_path('logs'))
-                                ->finish(\DIRECTORY_SEPARATOR)
-                                ->append('schedules')
-                                ->finish(\DIRECTORY_SEPARATOR)
-                                ->append($normalizedFilename)
-                    )
-                        ->finish(\DIRECTORY_SEPARATOR)
-                        ->append($normalizedFilename)
-                        ->when(
-                            $suffix,
-                            static fn (
-                                Stringable $stringable,
-                                string $suffix
-                            ) => $stringable->finish('-')->finish($suffix)
-                        )
-                        ->append('.log')
-                        ->toString();
+                    // exec|call|job
+                    return $this->description;
                 },
-                $filename,
-                $suffix,
-                $dirname,
+                $filename
             );
 
-            // dump($outputPath);
+            $filename = str($filename)
+                ->replace(
+                    [\DIRECTORY_SEPARATOR, '/', '\\', ':', ' ', ...match (\PHP_OS_FAMILY) {
+                        'Windows' => ['<', '>', '/', '\\', '|', ':', '"', '?', '*'],
+                        'Darwin' => [':'],
+                        'Linux' => ['/'],
+                        default => [\DIRECTORY_SEPARATOR],
+                    }],
+                    '-'
+                )
+                ->replaceMatches('/-{2,}/', '-')
+                ->take(200);
+
+            $location = join_paths(
+                $directory ?? join_paths(storage_path('logs'), 'schedules', $filename),
+                str($filename)
+                    ->when(
+                        $suffix,
+                        static fn (Stringable $filename): Stringable => $filename->finish('-')->finish($suffix)
+                    )
+                    ->finish('.log')
+            );
+
+            // dump($location);
 
             return $this
-                ->before(static function () use ($outputPath): void {
-                    Log::build(['path' => $outputPath] + config('logging.channels.single'))->info('>>>>>>>>');
+                ->before(static function () use ($location): void {
+                    Log::build(['path' => $location] + config('logging.channels.single'))->info('>>>>>>>>');
                 })
-                ->appendOutputTo($outputPath);
+                ->appendOutputTo($location);
         };
     }
 }
