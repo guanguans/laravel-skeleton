@@ -145,6 +145,7 @@ parameters:
         -
             messages:
                 - '#^Access to an undefined property App\\Support\\Mixins\\.*Mixin\:\:\$.*\.$#'
+                - '#^Call to method App\\Support\\Mixins\\.*Mixin\:\:dump.*\(\) on a separate line has no effect\.$#'
                 - '#^Call to protected method .*\(\) of class Illuminate\\.*\.$#'
                 - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
                 - '#^Class App\\Support\\Mixins\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'

@@ -32,11 +32,14 @@ final class SchedulingEventMixin
 {
     /**
      * @noinspection ForgottenDebugOutputInspection
+     * @noinspection PhpExpressionResultUnusedInspection
      */
     public function ddHumanlyExpression(): \Closure
     {
-        return function (string $locale = 'en', bool $timeFormat24hours = false): never {
-            dd(CronTranslator::translate($this->expression, $locale, $timeFormat24hours));
+        return function (?string $locale = null, bool $timeFormat24hours = false): never {
+            $this->dumpHumanlyExpression($locale, $timeFormat24hours);
+
+            exit(1);
         };
     }
 
@@ -46,8 +49,16 @@ final class SchedulingEventMixin
      */
     public function dumpHumanlyExpression(): \Closure
     {
-        return function (string $locale = 'en', bool $timeFormat24hours = false): Event {
-            dump(CronTranslator::translate($this->expression, $locale, $timeFormat24hours));
+        return function (?string $locale = null, bool $timeFormat24hours = false): Event {
+            dump(CronTranslator::translate(
+                $this->expression,
+                match ($locale ??= config('app.locale', 'en')) {
+                    'zh_CN' => 'zh',
+                    'zh_TW' => 'zh-TW',
+                    default => $locale,
+                },
+                $timeFormat24hours
+            ));
 
             return $this;
         };
@@ -78,42 +89,47 @@ final class SchedulingEventMixin
 
     public function dailyAppendOutputTo(): \Closure
     {
-        return fn (
-            ?string $directory = null,
-            ?string $filename = null
-        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('daily-%s', Carbon::now()->format('Y-m-d')));
+        return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
+            $directory,
+            $filename,
+            \sprintf('daily-%s', Carbon::now()->format('Y-m-d'))
+        );
     }
 
     public function weeklyAppendOutputTo(): \Closure
     {
-        return fn (
-            ?string $directory = null,
-            ?string $filename = null
-        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('weekly-%s', Carbon::now()->format('Y-W')));
+        return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
+            $directory,
+            $filename,
+            \sprintf('weekly-%s', Carbon::now()->format('Y-W'))
+        );
     }
 
     public function monthlyAppendOutputTo(): \Closure
     {
-        return fn (
-            ?string $directory = null,
-            ?string $filename = null
-        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('monthly-%s', Carbon::now()->format('Y-m')));
+        return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
+            $directory,
+            $filename,
+            \sprintf('monthly-%s', Carbon::now()->format('Y-m'))
+        );
     }
 
     public function quarterlyAppendOutputTo(): \Closure
     {
-        return fn (
-            ?string $directory = null,
-            ?string $filename = null
-        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('quarterly-%s-%s', Carbon::now()->format('Y'), now()->quarter));
+        return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
+            $directory,
+            $filename,
+            \sprintf('quarterly-%s-%s', Carbon::now()->format('Y'), now()->quarter)
+        );
     }
 
     public function yearlyAppendOutputTo(): \Closure
     {
-        return fn (
-            ?string $directory = null,
-            ?string $filename = null
-        ): Event => $this->userAppendOutputTo($directory, $filename, \sprintf('yearly-%s', Carbon::now()->format('Y')));
+        return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
+            $directory,
+            $filename,
+            \sprintf('yearly-%s', Carbon::now()->format('Y'))
+        );
     }
 
     /**
