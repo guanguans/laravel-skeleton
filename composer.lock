@@ -39605,16 +39605,16 @@
         },
         {
             "name": "sti3bas/laravel-scout-array-driver",
-            "version": "v4.1.1",
+            "version": "v4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sti3bas/laravel-scout-array-driver.git",
-                "reference": "45066b393369ce02f7e515c40e676705463cfb9a"
+                "reference": "af6115e2f10e194251af75bedf11bf92a02e5189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sti3bas/laravel-scout-array-driver/zipball/45066b393369ce02f7e515c40e676705463cfb9a",
-                "reference": "45066b393369ce02f7e515c40e676705463cfb9a",
+                "url": "https://api.github.com/repos/Sti3bas/laravel-scout-array-driver/zipball/af6115e2f10e194251af75bedf11bf92a02e5189",
+                "reference": "af6115e2f10e194251af75bedf11bf92a02e5189",
                 "shasum": ""
             },
             "require": {
@@ -39670,7 +39670,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Sti3bas/laravel-scout-array-driver/issues",
-                "source": "https://github.com/Sti3bas/laravel-scout-array-driver/tree/v4.1.1"
+                "source": "https://github.com/Sti3bas/laravel-scout-array-driver/tree/v4.2"
             },
             "funding": [
                 {
@@ -39678,7 +39678,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-24T20:28:31+00:00"
+            "time": "2025-08-04T07:25:55+00:00"
         },
         {
             "name": "symfony/filesystem",
