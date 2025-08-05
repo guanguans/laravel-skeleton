@@ -43,6 +43,10 @@ return [
     */
 
     'connections' => [
+        /**
+         * @see \NunoMaduro\LaravelOptimizeDatabase\LaravelOptimizeDatabaseServiceProvider
+         * @see \SwissDevjoy\LaravelOptimizeSqlite\LaravelOptimizeSqliteServiceProvider
+         */
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
