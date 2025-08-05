@@ -146,17 +146,17 @@ final class SchedulingEventMixin
 
                     // artisan
                     if (str($this->command)->contains("'artisan'")) {
-                        return str($this->command)->explode(' ')->get(2);
+                        return str($this->command)->explode(' ', 4)->get(2);
                     }
 
-                    throw_if(
-                        empty($this->description),
-                        \LogicException::class,
+                    // exec|call|job
+                    if ($this->description) {
+                        return $this->description;
+                    }
+
+                    throw new \LogicException(
                         'Please input the parameter [$filename], Or call the method [name/description] before call the method [userAppendOutputTo].'
                     );
-
-                    // exec|call|job
-                    return $this->description;
                 },
                 $filename
             );
