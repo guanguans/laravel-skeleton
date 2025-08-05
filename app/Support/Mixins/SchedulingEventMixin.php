@@ -163,16 +163,12 @@ final class SchedulingEventMixin
 
             $filename = str($filename)
                 ->replace(
-                    [\DIRECTORY_SEPARATOR, '/', '\\', ':', ' ', ...match (\PHP_OS_FAMILY) {
-                        'Windows' => ['<', '>', '/', '\\', '|', ':', '"', '?', '*'],
-                        'Darwin' => [':'],
-                        'Linux' => ['/'],
-                        default => [\DIRECTORY_SEPARATOR],
-                    }],
+                    ['<', '>', '/', '\\', '|', ':', '"', '?', '*', \DIRECTORY_SEPARATOR, ' ', "\n", "\r", "\t"],
                     '-'
                 )
                 ->replaceMatches('/-{2,}/', '-')
-                ->take(200);
+                ->take(200)
+                ->trim('.-');
 
             $location = join_paths(
                 $directory ?? join_paths(storage_path('logs'), 'schedules', $filename),
