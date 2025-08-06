@@ -36,10 +36,7 @@ final class MarkdownLintFixer extends AbstractCommandLineToolFixer
         return [
             '--fix',
             '--dot',
-            ...array_merge(...array_map(
-                static fn (string $rule): array => ['--disable', $rule],
-                $this->unFixableRules()
-            )),
+            ...array_merge(...array_map(static fn (string $rule): array => ['--disable', $rule], $this->unFixableRules())),
             '--disable' => $this->fixableRules(),
         ];
     }

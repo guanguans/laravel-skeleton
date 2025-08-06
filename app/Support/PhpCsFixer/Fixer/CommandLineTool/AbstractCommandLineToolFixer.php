@@ -26,7 +26,6 @@ use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
 use App\Support\PhpCsFixer\Utils;
-use Illuminate\Support\Arr;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
@@ -162,7 +161,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         $process->run();
         $this->debugProcess($process);
 
-        if (!$this->isSuccessfulProcess($process)) {
+        if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
 
@@ -193,7 +192,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         return Utils::createTemporaryFile(
             directory: $directory,
             prefix: $prefix ?? "{$this->getShortName()}_",
-            extension: $extension ?? Arr::random($this->configuration[self::EXTENSIONS]),
+            extension: $extension ?? $this->configuration[self::EXTENSIONS][array_rand($this->configuration[self::EXTENSIONS])],
             deferDelete: $deferDelete,
         );
     }
@@ -202,31 +201,22 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 
     abstract protected function requiredOptions(): array;
 
+    /**
+     * @noinspection NestedTernaryOperatorInspection
+     */
     protected function options(): array
     {
-        return collect([...$this->requiredOptions(), ...$this->configuration[self::OPTIONS]])->reduce(
-            static function (array $options, mixed $value, int|string $key): array {
-                $option = [$value];
-
-                if (\is_string($key) && str_starts_with($key, '-')) {
-                    $option = \is_array($value)
-                        ? array_reduce(
-                            $value,
-                            static fn (array $option, mixed $value): array => [...$option, $key, $value],
-                            []
-                        )
-                        : [$key, $value];
-                }
-
-                return [...$options, ...$option];
-            },
-            []
-        );
-    }
-
-    protected function isSuccessfulProcess(Process $process): bool
-    {
-        return $process->isSuccessful();
+        return array_merge(...array_map(
+            static fn (mixed $value, int|string $key): array => \is_string($key) && str_starts_with($key, '-')
+                ? (
+                    \is_array($value)
+                        ? array_merge(...array_map(static fn (string $val): array => [$key, $val], $value))
+                        : [$key, $value]
+                )
+                : [$value],
+            $options = [...$this->requiredOptions(), ...$this->configuration[self::OPTIONS]],
+            array_keys($options)
+        ));
     }
 
     protected function fixedCode(): string
