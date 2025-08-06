@@ -339,7 +339,6 @@ composer zh-lint
 * [stillat/blade-parser](https://github.com/Stillat/blade-parser)
 * [swiss-devjoy/laravel-optimize-sqlite](https://github.com/Swiss-Devjoy/laravel-optimize-sqlite) - Optimize your SQLite database for production in Laravel
 * [symfony/polyfill-php84](https://github.com/symfony/polyfill-php84) - Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions
-* [symfony/serializer](https://github.com/symfony/serializer) - Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.
 * [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
 * [tightenco/parental](https://github.com/tighten/parental) - A simple eloquent trait that allows relationships to be accessed through child models.
 * [tightenco/ziggy](https://github.com/tighten/ziggy) - Use your Laravel named routes in JavaScript.
@@ -735,11 +734,9 @@ app/
 |   |   |   |   |-- AutocorrectFixer.php
 |   |   |   |   |-- BladeFormatterFixer.php
 |   |   |   |   |-- Concerns/
-|   |   |   |   |   |-- FinalCmd.php
-|   |   |   |   |   |-- PathAwarer.php
-|   |   |   |   |   |-- PostPathCommand.php
-|   |   |   |   |   |-- PrePathCommand.php
-|   |   |   |   |   `-- WithoutPathCommand.php
+|   |   |   |   |   |-- FinalFileAwarer.php
+|   |   |   |   |   |-- PostFinalFileCommand.php
+|   |   |   |   |   `-- PreFinalFileCommand.php
 |   |   |   |   |-- DockerFmtFixer.php
 |   |   |   |   |-- DotenvLinterFixer.php
 |   |   |   |   |-- LintMdFixer.php
@@ -755,7 +752,6 @@ app/
 |   |   |   |-- Concerns/
 |   |   |   |   |-- AllowRisky.php
 |   |   |   |   |-- AlwaysCandidate.php
-|   |   |   |   |-- FileAndTokensAwarer.php
 |   |   |   |   |-- HighestPriority.php
 |   |   |   |   |-- InlineHtmlCandidate.php
 |   |   |   |   |-- LowestPriority.php
@@ -766,10 +762,7 @@ app/
 |   |   |   |   |-- AbstractInlineHtmlFixer.php
 |   |   |   |   |-- DoctrineSqlFixer.php
 |   |   |   |   |-- JsonFixer.php
-|   |   |   |   |-- NeonFixer.php
-|   |   |   |   |-- PhpMyAdminSqlFixer.php
-|   |   |   |   |-- XmlFixer.php
-|   |   |   |   `-- YamlFixer.php
+|   |   |   |   `-- PhpMyAdminSqlFixer.php
 |   |   |   `-- SqlFixer.php
 |   |   |-- Fixers.php
 |   |   `-- Utils.php
@@ -808,7 +801,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-60 directories, 297 files
+60 directories, 291 files
 
 ```
 

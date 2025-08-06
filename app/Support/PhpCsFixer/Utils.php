@@ -47,17 +47,17 @@ final class Utils
     {
         static $symfonyStyle;
 
-        if ($symfonyStyle && null === $input && null === $output) {
+        if ($symfonyStyle && !$input instanceof InputInterface && !$output instanceof OutputInterface) {
             return $symfonyStyle;
         }
 
-        $argvInput ??= new ArgvInput;
-        $consoleOutput ??= new ConsoleOutput;
+        $input ??= new ArgvInput;
+        $output ??= new ConsoleOutput;
 
         // to configure all -v, -vv, -vvv options without memory-lock to Application run() arguments
-        (fn () => $this->configureIO($argvInput, $consoleOutput))->call(new Application);
+        (fn () => $this->configureIO($input, $output))->call(new Application);
 
-        return $symfonyStyle = new SymfonyStyle($argvInput, $consoleOutput);
+        return $symfonyStyle = new SymfonyStyle($input, $output);
     }
 
     /**

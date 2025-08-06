@@ -22,18 +22,14 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
  */
 final class JsonFixer extends AbstractInlineHtmlFixer
 {
-    public const string DECODE_ASSOCIATIVE = 'decode_associative';
     public const string DECODE_FLAGS = 'decode_flags';
     public const string ENCODE_FLAGS = 'encode_flags';
+    public const string INDENT_SIZE = 'indent_size';
 
     #[\Override]
     protected function fixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::DECODE_ASSOCIATIVE, 'Whether to decode JSON as an associative array.'))
-                ->setAllowedTypes(['bool'])
-                ->setDefault(true)
-                ->getOption(),
             (new FixerOptionBuilder(self::DECODE_FLAGS, 'The flags to use when decoding JSON.'))
                 ->setAllowedTypes(['int'])
                 ->setDefault(0)
@@ -41,6 +37,10 @@ final class JsonFixer extends AbstractInlineHtmlFixer
             (new FixerOptionBuilder(self::ENCODE_FLAGS, 'The flags to use when encoding JSON.'))
                 ->setAllowedTypes(['int'])
                 ->setDefault(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_THROW_ON_ERROR)
+                ->getOption(),
+            (new FixerOptionBuilder(self::INDENT_SIZE, 'The number of spaces to use for indentation.'))
+                ->setAllowedTypes(['int'])
+                ->setDefault(4)
                 ->getOption(),
         ];
     }
@@ -57,14 +57,25 @@ final class JsonFixer extends AbstractInlineHtmlFixer
     #[\Override]
     protected function format(string $content): string
     {
-        return json_encode(
-            json_decode(
-                $content,
-                $this->configuration[self::DECODE_ASSOCIATIVE],
-                512,
-                \JSON_THROW_ON_ERROR | $this->configuration[self::DECODE_FLAGS]
+        return $this->formatIndentation(
+            json_encode(
+                json_decode(
+                    $content,
+                    true,
+                    512,
+                    \JSON_THROW_ON_ERROR | $this->configuration[self::DECODE_FLAGS]
+                ),
+                \JSON_THROW_ON_ERROR | $this->configuration[self::ENCODE_FLAGS]
             ),
-            \JSON_THROW_ON_ERROR | $this->configuration[self::ENCODE_FLAGS]
+            $this->configuration[self::INDENT_SIZE]
         );
+    }
+
+    /**
+     * @see https://github.com/dingo/api/blob/master/src/Http/Response/Format/JsonOptionalFormatting.php
+     */
+    private function formatIndentation(string $json, int $indentSize = 4): string
+    {
+        return preg_replace('/(^|\G) {4}/m', str_repeat(' ', $indentSize).'$1', $json);
     }
 }
