@@ -21,7 +21,7 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
  */
 final class XmlLintFixer extends AbstractCommandLineToolFixer
 {
-    public const string MULTILINE_ATTR_THRESHOLD = 'multiline_attr_threshold';
+    public const string WRAP_ATTRS_MIN_NUM = 'wrap_attrs_min_num';
 
     /**
      * @noinspection PhpMissingParentCallCommonInspection
@@ -32,7 +32,10 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
     protected function fixerOptions(): array
     {
         return [
-            (new FixerOptionBuilder(self::MULTILINE_ATTR_THRESHOLD, 'The threshold for multiline attributes.'))
+            (new FixerOptionBuilder(
+                self::WRAP_ATTRS_MIN_NUM,
+                'Wrap attributes to multiple lines when the number of attributes is greater than or equal to this value.',
+            ))
                 ->setAllowedTypes(['int'])
                 ->setDefault(5)
                 ->getOption(),
@@ -69,18 +72,21 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
 
     protected function fixedCode(): string
     {
-        return $this->formatXmlAttributes(parent::fixedCode(), $this->configuration[self::MULTILINE_ATTR_THRESHOLD]);
+        return $this->formatAttributes(parent::fixedCode(), $this->configuration[self::WRAP_ATTRS_MIN_NUM]);
     }
 
-    private function formatXmlAttributes(string $xml, int $multilineAttrThreshold = 5, int $indent = 2): string
+    /**
+     * @noinspection PhpSameParameterValueInspection
+     */
+    private function formatAttributes(string $xml, int $wrapAttrsMinNum = 5, int $indent = 2): string
     {
         return preg_replace_callback(
             '/<([^\s>\/]+)(\s+[^>]+?)(\s*\/?)>/',
-            static function (array $matches) use ($multilineAttrThreshold, $xml, $indent): string {
+            static function (array $matches) use ($wrapAttrsMinNum, $xml, $indent): string {
                 [$fullTag, $tagName, $attrs, $selfClose] = $matches;
 
                 // 属性数量小于阈值保持单行
-                if (preg_match_all('/\s+[^\s=]+="/', $attrs) < $multilineAttrThreshold) {
+                if (preg_match_all('/\s+[^\s=]+="/', $attrs) < $wrapAttrsMinNum) {
                     return $fullTag;
                 }
 
