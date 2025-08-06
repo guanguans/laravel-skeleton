@@ -24,15 +24,6 @@ final class DotenvLinterFixer extends AbstractCommandLineToolFixer
         return ['dotenv-linter', 'fix'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--no-color', '--quiet'];
-    }
-
     #[\Override]
     protected function defaultExtensions(): array
     {

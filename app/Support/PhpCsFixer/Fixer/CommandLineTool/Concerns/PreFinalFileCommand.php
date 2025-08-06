@@ -16,17 +16,14 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns;
 /**
  * @mixin \App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer
  */
-trait PostPathCommand
+trait PreFinalFileCommand
 {
-    /**
-     * @noinspection OverrideMissingInspection
-     */
     protected function command(): array
     {
         return [
             ...$this->configuration[self::COMMAND],
-            ...$this->options(),
             $this->finalFile,
+            ...$this->options(),
         ];
     }
 }

@@ -57,24 +57,6 @@ final class PintFixer extends AbstractCommandLineToolFixer
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--silent', '--quiet', '--no-ansi'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function debugOptions(): array
-    {
-        return ['--ansi', '-vvv'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
     protected function configurePostNormalisation(): void
     {
         $this->configuration[self::ENV] = ($this->configuration[self::ENV] ?? []) + ['XDEBUG_MODE' => 'off'];

@@ -181,7 +181,7 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
         $process = new Process(
             command: [
                 ...$this->configuration[self::COMMAND],
-                $finalPath = $this->finalFile($file, $tokens),
+                $finalFile = $this->finalFile($file, $tokens),
                 '--write',
                 ...$this->configuration[self::OPTIONS],
             ],
@@ -197,7 +197,7 @@ final class BladeFixer extends AbstractFixer implements ConfigurableFixerInterfa
             throw new ProcessFailedException($process);
         }
 
-        $tokens->setCode(FileReader::createSingleton()->read($finalPath));
+        $tokens->setCode(FileReader::createSingleton()->read($finalFile));
     }
 
     /**

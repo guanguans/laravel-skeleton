@@ -78,15 +78,6 @@ final class MarkdownLintFixer extends AbstractCommandLineToolFixer
         ];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--quiet'];
-    }
-
     #[\Override]
     protected function defaultExtensions(): array
     {

@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostPathCommand;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PostFinalFileCommand;
 
 /**
  * @see https://github.com/mvdan/sh
  */
 final class ShfmtFixer extends AbstractCommandLineToolFixer
 {
-    use PostPathCommand;
+    use PostFinalFileCommand;
 
     #[\Override]
     protected function defaultCommand(): array
@@ -39,15 +39,6 @@ final class ShfmtFixer extends AbstractCommandLineToolFixer
             // '--simplify',
             // '--minify',
         ];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function debugOptions(): array
-    {
-        return ['--list'];
     }
 
     /**

@@ -33,24 +33,6 @@ final class SqlFluffFixer extends AbstractCommandLineToolFixer
         return ['--dialect' => 'mysql'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--nocolor', '--disable-progress-bar'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function debugOptions(): array
-    {
-        return ['--color', '-vv', '--bench'];
-    }
-
     #[\Override]
     protected function defaultExtensions(): array
     {

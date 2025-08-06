@@ -33,24 +33,6 @@ final class AutocorrectFixer extends AbstractCommandLineToolFixer
         return ['--fix'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--quiet', '--no-diff-bg-color'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function debugOptions(): array
-    {
-        return ['--debug'];
-    }
-
     #[\Override]
     protected function defaultExtensions(): array
     {

@@ -62,24 +62,6 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
         ];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--quiet'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function debugOptions(): array
-    {
-        return ['--timing'];
-    }
-
     #[\Override]
     protected function defaultExtensions(): array
     {

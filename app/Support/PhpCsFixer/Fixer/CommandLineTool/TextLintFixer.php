@@ -33,24 +33,6 @@ final class TextLintFixer extends AbstractCommandLineToolFixer
         return ['--fix', '--experimental'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function silentOptions(): array
-    {
-        return ['--no-color', '--quiet'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function debugOptions(): array
-    {
-        return ['--debug'];
-    }
-
     #[\Override]
     protected function defaultExtensions(): array
     {
