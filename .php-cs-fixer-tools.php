@@ -84,7 +84,7 @@ return (new Config)
 
         // DoctrineSqlFixer::name() => true,
         // PhpMyAdminSqlFixer::name() => true,
-        // SqlFluffFixer::name() => true,
+        SqlFluffFixer::name() => true,
 
         // YamlFixer::name() => true,
         YamlFmtFixer::name() => true,

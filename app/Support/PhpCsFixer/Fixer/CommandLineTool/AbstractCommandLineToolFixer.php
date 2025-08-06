@@ -36,7 +36,9 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 
 /**
@@ -100,6 +102,13 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             (new FixerOptionBuilder(self::COMMAND, 'The command to run the tool (e.g. `dotenv-linter fix`).'))
                 ->setAllowedTypes(['array'])
                 ->setDefault($this->defaultCommand())
+                ->setNormalizer(static fn (OptionsResolver $optionsResolver, array $value): array => array_map(
+                    static fn (string $value): string => str_contains(
+                        $value,
+                        \DIRECTORY_SEPARATOR
+                    ) || \in_array($value, ['fix', 'format'], true) ? $value : (new ExecutableFinder)->find($value, $value),
+                    $value,
+                ))
                 ->getOption(),
             (new FixerOptionBuilder(self::OPTIONS, 'The options to pass to the tool (e.g. `--fix`).'))
                 ->setAllowedTypes(['array'])
@@ -232,7 +241,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
      */
     private function debugProcess(Process $process): void
     {
-        if (!($symfonyStyle = Utils::output())->isDebug()) {
+        if (!($symfonyStyle = Utils::createSymfonyStyle())->isDebug()) {
             return;
         }
 

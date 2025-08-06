@@ -43,16 +43,16 @@ final class Utils
         return $_SERVER['argv'] ??= [];
     }
 
-    public static function output(): SymfonyStyle
+    public static function createSymfonyStyle(?InputInterface $input = null, ?OutputInterface $output = null): SymfonyStyle
     {
         static $symfonyStyle;
 
-        if ($symfonyStyle) {
+        if ($symfonyStyle && null === $input && null === $output) {
             return $symfonyStyle;
         }
 
-        $argvInput = new ArgvInput;
-        $consoleOutput = new ConsoleOutput;
+        $argvInput ??= new ArgvInput;
+        $consoleOutput ??= new ConsoleOutput;
 
         // to configure all -v, -vv, -vvv options without memory-lock to Application run() arguments
         (fn () => $this->configureIO($argvInput, $consoleOutput))->call(new Application);
