@@ -35,7 +35,7 @@ final class PintFixer extends AbstractCommandLineToolFixer
     #[\Override]
     protected function configurePostNormalisation(): void
     {
-        $this->configuration[self::ENV] = ($this->configuration[self::ENV] ?? []) + ['XDEBUG_MODE' => 'off'];
+        $this->configuration[self::ENV] += ['XDEBUG_MODE' => 'off'];
     }
 
     #[\Override]
