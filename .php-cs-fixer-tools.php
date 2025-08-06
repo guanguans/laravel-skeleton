@@ -96,16 +96,16 @@ return (new Config)
 
         // NeonFixer::name() => true,
 
-        BladeFixer::name() => [
-            // BladeFixer::COMMAND => ['node', 'blade-formatter'],
-            BladeFixer::COMMAND => 'blade-formatter',
-            BladeFixer::OPTIONS => [
-                // '--indent-size' => 2,
-            ],
-        ],
-        SqlFixer::name() => [
-            SqlFixer::INDENT_STRING => '  ',
-        ],
+        // BladeFixer::name() => [
+        //     // BladeFixer::COMMAND => ['node', 'blade-formatter'],
+        //     BladeFixer::COMMAND => 'blade-formatter',
+        //     BladeFixer::OPTIONS => [
+        //         // '--indent-size' => 2,
+        //     ],
+        // ],
+        // SqlFixer::name() => [
+        //     SqlFixer::INDENT_STRING => '  ',
+        // ],
     ])
     ->setFinder(
         Finder::create()
