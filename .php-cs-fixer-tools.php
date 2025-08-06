@@ -32,10 +32,7 @@ use App\Support\PhpCsFixer\Fixer\CommandLineTool\YamlFmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\ZhLintFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\DoctrineSqlFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\JsonFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\NeonFixer;
 use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\XmlFixer;
-use App\Support\PhpCsFixer\Fixer\InlineHtml\YamlFixer;
 use App\Support\PhpCsFixer\Fixer\SqlFixer;
 use App\Support\PhpCsFixer\Fixers;
 use PhpCsFixer\Config;
@@ -86,15 +83,11 @@ return (new Config)
         // PhpMyAdminSqlFixer::name() => true,
         SqlFluffFixer::name() => true,
 
-        // YamlFixer::name() => true,
         YamlFmtFixer::name() => true,
 
-        // XmlFixer::name() => true,
         XmlLintFixer::name() => true,
 
         JsonFixer::name() => true,
-
-        // NeonFixer::name() => true,
 
         // BladeFixer::name() => [
         //     // BladeFixer::COMMAND => ['node', 'blade-formatter'],

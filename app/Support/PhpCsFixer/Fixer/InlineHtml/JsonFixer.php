@@ -19,7 +19,6 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
  * @see https://github.com/TheDragonCode/codestyler/blob/5.x/app/Fixers/JsonFixer.php
  * @see https://github.com/ergebnis/composer-normalize
  * @see https://github.com/Seldaek/jsonlint
- * @see \Symfony\Component\Serializer\Encoder\JsonEncoder
  */
 final class JsonFixer extends AbstractInlineHtmlFixer
 {

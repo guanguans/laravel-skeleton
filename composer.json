@@ -174,7 +174,6 @@
         "stillat/blade-parser": "^2.0",
         "swiss-devjoy/laravel-optimize-sqlite": "^1.0",
         "symfony/polyfill-php84": "^1.32",
-        "symfony/serializer": "^7.3",
         "teamtnt/laravel-scout-tntsearch-driver": "^15.0",
         "tightenco/parental": "^1.4",
         "tightenco/ziggy": "^2.5",
