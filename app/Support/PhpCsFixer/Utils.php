@@ -120,40 +120,4 @@ final class Utils
             ($fileRemoval ??= new FileRemoval)->observe($path);
         }
     }
-
-    public static function formatXmlAttributes(
-        string $content,
-        int $multilineAttrThreshold = 5,
-        int $indent = 2
-    ): string {
-        return preg_replace_callback(
-            '/<([^\s>\/]+)(\s+[^>]+?)(\s*\/?)>/',
-            static function (array $matches) use ($multilineAttrThreshold, $content, $indent): string {
-                [$fullTag, $tagName, $attrs, $selfClose] = $matches;
-
-                // 属性数量小于阈值保持单行
-                if (preg_match_all('/\s+[^\s=]+="/', $attrs) < $multilineAttrThreshold) {
-                    return $fullTag;
-                }
-
-                // 计算当前行的缩进
-                $currentPos = strpos($content, $fullTag);
-                $lineStart = strrpos(substr($content, 0, $currentPos), \PHP_EOL);
-                $currentIndent = '';
-
-                if (false !== $lineStart) {
-                    $lineText = substr($content, $lineStart + 1, $currentPos - $lineStart - 1);
-                    $currentIndent = str_repeat(' ', \strlen($lineText) - \strlen(ltrim($lineText)));
-                }
-
-                // 格式化属性为多行
-                $attrIndent = str_repeat(' ', $indent);
-                $multilineAttrs = preg_replace('/\s+([^\s=]+="[^"]*")/', "\n$currentIndent$attrIndent$1", $attrs);
-                $tagClose = $selfClose ? "\n$currentIndent$selfClose>" : "\n$currentIndent>";
-
-                return "<$tagName$multilineAttrs$tagClose";
-            },
-            $content
-        );
-    }
 }

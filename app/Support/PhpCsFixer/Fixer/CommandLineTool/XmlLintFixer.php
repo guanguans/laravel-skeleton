@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Utils;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 
 /**
@@ -70,6 +69,39 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
 
     protected function fixedCode(): string
     {
-        return Utils::formatXmlAttributes(parent::fixedCode(), $this->configuration[self::MULTILINE_ATTR_THRESHOLD]);
+        return $this->formatXmlAttributes(parent::fixedCode(), $this->configuration[self::MULTILINE_ATTR_THRESHOLD]);
+    }
+
+    private function formatXmlAttributes(string $xml, int $multilineAttrThreshold = 5, int $indent = 2): string
+    {
+        return preg_replace_callback(
+            '/<([^\s>\/]+)(\s+[^>]+?)(\s*\/?)>/',
+            static function (array $matches) use ($multilineAttrThreshold, $xml, $indent): string {
+                [$fullTag, $tagName, $attrs, $selfClose] = $matches;
+
+                // 属性数量小于阈值保持单行
+                if (preg_match_all('/\s+[^\s=]+="/', $attrs) < $multilineAttrThreshold) {
+                    return $fullTag;
+                }
+
+                // 计算当前行的缩进
+                $currentPos = strpos($xml, $fullTag);
+                $lineStart = strrpos(substr($xml, 0, $currentPos), \PHP_EOL);
+                $currentIndent = '';
+
+                if (false !== $lineStart) {
+                    $lineText = substr($xml, $lineStart + 1, $currentPos - $lineStart - 1);
+                    $currentIndent = str_repeat(' ', \strlen($lineText) - \strlen(ltrim($lineText)));
+                }
+
+                // 格式化属性为多行
+                $attrIndent = str_repeat(' ', $indent);
+                $multilineAttrs = preg_replace('/\s+([^\s=]+="[^"]*")/', "\n$currentIndent$attrIndent$1", $attrs);
+                $tagClose = $selfClose ? "\n$currentIndent$selfClose>" : "\n$currentIndent>";
+
+                return "<$tagName$multilineAttrs$tagClose";
+            },
+            $xml
+        );
     }
 }
