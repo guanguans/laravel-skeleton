@@ -19,23 +19,20 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class TextLintFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['md', 'markdown', 'txt', 'text'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['textlint'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
         return ['--fix', '--experimental'];
-    }
-
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['md', 'markdown', 'txt', 'text'];
     }
 }

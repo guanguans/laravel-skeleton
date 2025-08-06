@@ -29,6 +29,21 @@ final class PintFixer extends AbstractCommandLineToolFixer
     use LowestPriority;
     use SupportsExtensionsAndPathArg;
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function configurePostNormalisation(): void
+    {
+        $this->configuration[self::ENV] = ($this->configuration[self::ENV] ?? []) + ['XDEBUG_MODE' => 'off'];
+    }
+
+    #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['php'];
+    }
+
     #[\Override]
     protected function defaultCommand(): array
     {
@@ -51,20 +66,5 @@ final class PintFixer extends AbstractCommandLineToolFixer
             // '--repair',
             // '--test',
         ];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function configurePostNormalisation(): void
-    {
-        $this->configuration[self::ENV] = ($this->configuration[self::ENV] ?? []) + ['XDEBUG_MODE' => 'off'];
-    }
-
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['php'];
     }
 }

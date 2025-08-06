@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\FinalCmd;
 use PhpCsFixer\Tokenizer\Tokens;
 
 /**
@@ -21,8 +20,6 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class ZhLintFixer extends AbstractCommandLineToolFixer
 {
-    use FinalCmd;
-
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
@@ -30,6 +27,12 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
     public function supports(\SplFileInfo $file): bool
     {
         return (bool) preg_match('/(zh|cn|chinese).*\.(md|markdown|text|txt)$/mi', $file->getBasename());
+    }
+
+    #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['zh_CN.md'];
     }
 
     #[\Override]
@@ -47,16 +50,13 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
         return ['--fix'];
     }
 
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['zh_CN.md'];
-    }
-
+    /**
+     * @noinspection SensitiveParameterInspection
+     */
     protected function finalFile(\SplFileInfo $file, Tokens $tokens): string
     {
         return str(parent::finalFile($file, $tokens))
-            ->chopStart($this->finalCmd())
+            ->chopStart($this->cmd())
             ->chopStart(\DIRECTORY_SEPARATOR)
             ->toString();
     }
@@ -67,6 +67,11 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
         ?string $extension = null,
         bool $deferDelete = true,
     ): string {
-        return parent::createTemporaryFile($this->finalCmd(), $prefix, $extension, $deferDelete);
+        return parent::createTemporaryFile($this->cmd(), $prefix, $extension, $deferDelete);
+    }
+
+    private function cmd(): string
+    {
+        return $this->configuration[self::CWD] ?? getcwd();
     }
 }

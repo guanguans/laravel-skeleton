@@ -19,14 +19,20 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class DotenvLinterFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['env', 'env.example'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['dotenv-linter', 'fix'];
     }
 
     #[\Override]
-    protected function defaultExtensions(): array
+    protected function requiredOptions(): array
     {
-        return ['env', 'env.example'];
+        return [];
     }
 }

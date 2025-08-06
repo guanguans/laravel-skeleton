@@ -157,8 +157,8 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             throw new ProcessFailedException($process);
         }
 
-        // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->finalFile))]);
-        $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->finalFile)));
+        // $tokens[0] = new Token([\TOKEN_PARSE, $this->fixedCode()]);
+        $tokens->setCode($this->fixedCode());
     }
 
     /**
@@ -189,24 +189,13 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         );
     }
 
-    protected function isSuccessfulProcess(Process $process): bool
-    {
-        return $process->isSuccessful();
-    }
-
-    protected function postFix(string $content): string
-    {
-        return $content;
-    }
-
     abstract protected function defaultCommand(): array;
+
+    abstract protected function requiredOptions(): array;
 
     protected function options(): array
     {
-        return collect([
-            ...$this->requiredOptions(),
-            ...$this->configuration[self::OPTIONS],
-        ])->reduce(
+        return collect([...$this->requiredOptions(), ...$this->configuration[self::OPTIONS]])->reduce(
             static function (array $options, mixed $value, int|string $key): array {
                 $option = [$value];
 
@@ -226,9 +215,14 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
         );
     }
 
-    protected function requiredOptions(): array
+    protected function isSuccessfulProcess(Process $process): bool
     {
-        return [];
+        return $process->isSuccessful();
+    }
+
+    protected function fixedCode(): string
+    {
+        return FileReader::createSingleton()->read($this->finalFile);
     }
 
     /**

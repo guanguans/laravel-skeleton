@@ -20,23 +20,20 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class LintMdFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['md', 'markdown'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['lint-md'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
         return ['--fix'];
-    }
-
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['md', 'markdown'];
     }
 }

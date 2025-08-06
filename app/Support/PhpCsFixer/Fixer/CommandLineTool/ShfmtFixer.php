@@ -22,15 +22,21 @@ final class ShfmtFixer extends AbstractCommandLineToolFixer
 {
     use PostFinalFileCommand;
 
+    /**
+     * @see `-ln, --language-dialect str  bash/posix/mksh/bats, default "auto"`
+     */
+    #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['sh', 'bats'];
+    }
+
     #[\Override]
     protected function defaultCommand(): array
     {
         return ['shfmt'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
@@ -39,14 +45,5 @@ final class ShfmtFixer extends AbstractCommandLineToolFixer
             // '--simplify',
             // '--minify',
         ];
-    }
-
-    /**
-     * @see `-ln, --language-dialect str  bash/posix/mksh/bats, default "auto"`
-     */
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['sh', 'bats'];
     }
 }

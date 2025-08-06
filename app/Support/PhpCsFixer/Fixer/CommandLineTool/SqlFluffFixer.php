@@ -19,23 +19,20 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class SqlFluffFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['sql'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['sqlfluff', 'format'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
         return ['--dialect' => 'mysql'];
-    }
-
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['sql'];
     }
 }

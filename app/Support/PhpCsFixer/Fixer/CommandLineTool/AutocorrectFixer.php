@@ -19,23 +19,20 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class AutocorrectFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['md', 'markdown', 'txt', 'text'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['autocorrect'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
         return ['--fix'];
-    }
-
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['md', 'markdown', 'txt', 'text'];
     }
 }

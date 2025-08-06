@@ -19,14 +19,17 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class MarkdownLintFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['md', 'markdown'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['markdownlint'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
@@ -76,12 +79,6 @@ final class MarkdownLintFixer extends AbstractCommandLineToolFixer
                 // 'MD058', // blanks-around-tables - 表格周围空行
             ],
         ];
-    }
-
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['md', 'markdown'];
     }
 
     private function disableNonFixableRulesOptions(): array

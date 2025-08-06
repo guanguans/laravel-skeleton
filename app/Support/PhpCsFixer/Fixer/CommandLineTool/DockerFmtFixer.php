@@ -20,23 +20,20 @@ namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 final class DockerFmtFixer extends AbstractCommandLineToolFixer
 {
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['Dockerfile'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['dockerfmt'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
         return ['--write', '--newline', '--space-redirects'];
-    }
-
-    #[\Override]
-    protected function defaultExtensions(): array
-    {
-        return ['dockerfile'];
     }
 }

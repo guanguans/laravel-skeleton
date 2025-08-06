@@ -15,10 +15,17 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer;
 
-use App\Support\Console\SymfonyStyleFactory;
 use PhpCsFixer\FileRemoval;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * @method void configureIO(InputInterface $input, OutputInterface $output)
+ */
 final class Utils
 {
     private function __construct() {}
@@ -40,7 +47,17 @@ final class Utils
     {
         static $symfonyStyle;
 
-        return $symfonyStyle ??= SymfonyStyleFactory::create();
+        if ($symfonyStyle) {
+            return $symfonyStyle;
+        }
+
+        $argvInput = new ArgvInput;
+        $consoleOutput = new ConsoleOutput;
+
+        // to configure all -v, -vv, -vvv options without memory-lock to Application run() arguments
+        (fn () => $this->configureIO($argvInput, $consoleOutput))->call(new Application);
+
+        return $symfonyStyle = new SymfonyStyle($argvInput, $consoleOutput);
     }
 
     /**

@@ -20,9 +20,10 @@ use Symfony\Component\Process\Process;
  */
 final class MarkdownLintCli2Fixer extends AbstractCommandLineToolFixer
 {
-    protected function isSuccessfulProcess(Process $process): bool
+    #[\Override]
+    protected function defaultExtensions(): array
     {
-        return parent::isSuccessfulProcess($process) || $process->getExitCode() === 1;
+        return ['md', 'markdown'];
     }
 
     #[\Override]
@@ -31,18 +32,14 @@ final class MarkdownLintCli2Fixer extends AbstractCommandLineToolFixer
         return ['markdownlint-cli2'];
     }
 
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
     #[\Override]
     protected function requiredOptions(): array
     {
         return ['--fix', '--no-globs'];
     }
 
-    #[\Override]
-    protected function defaultExtensions(): array
+    protected function isSuccessfulProcess(Process $process): bool
     {
-        return ['md', 'markdown'];
+        return parent::isSuccessfulProcess($process) || $process->getExitCode() === 1;
     }
 }

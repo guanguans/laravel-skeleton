@@ -41,6 +41,12 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
     }
 
     #[\Override]
+    protected function defaultExtensions(): array
+    {
+        return ['xml', 'xml.dist'];
+    }
+
+    #[\Override]
     protected function defaultCommand(): array
     {
         return ['xmllint'];
@@ -62,18 +68,8 @@ final class XmlLintFixer extends AbstractCommandLineToolFixer
         ];
     }
 
-    #[\Override]
-    protected function defaultExtensions(): array
+    protected function fixedCode(): string
     {
-        return ['xml', 'xml.dist'];
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function postFix(string $content): string
-    {
-        return Utils::formatXmlAttributes($content, $this->configuration[self::MULTILINE_ATTR_THRESHOLD]);
+        return Utils::formatXmlAttributes(parent::fixedCode(), $this->configuration[self::MULTILINE_ATTR_THRESHOLD]);
     }
 }
