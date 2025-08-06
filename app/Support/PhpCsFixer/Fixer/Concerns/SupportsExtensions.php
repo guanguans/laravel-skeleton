@@ -29,7 +29,7 @@ trait SupportsExtensions
             || str($file->getBasename())->lower()->endsWith($this->configuration[self::EXTENSIONS]);
     }
 
-    protected function extensionsFixerOption(): FixerOptionInterface
+    protected function fixerOptionOfExtensions(): FixerOptionInterface
     {
         return (new FixerOptionBuilder(self::EXTENSIONS, 'The file extensions to format.'))
             ->setAllowedTypes(['array'])

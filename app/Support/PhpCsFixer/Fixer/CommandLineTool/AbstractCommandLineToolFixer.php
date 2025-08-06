@@ -123,7 +123,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
                 ->setAllowedTypes(['float', 'int', 'null'])
                 ->setDefault(60)
                 ->getOption(),
-            $this->extensionsFixerOption(),
+            $this->fixerOptionOfExtensions(),
         ];
     }
 

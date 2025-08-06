@@ -47,7 +47,7 @@ abstract class AbstractInlineHtmlFixer extends AbstractConfigurableFixer
     #[\Override]
     protected function createConfigurationDefinition(): FixerConfigurationResolverInterface
     {
-        return new FixerConfigurationResolver([$this->extensionsFixerOption(), ...$this->fixerOptions()]);
+        return new FixerConfigurationResolver([$this->fixerOptionOfExtensions(), ...$this->fixerOptions()]);
     }
 
     /**
