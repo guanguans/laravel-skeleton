@@ -71,7 +71,7 @@ return (new Config)
         ZhLintFixer::name() => true,
 
         // PintFixer::name() => true,
-        // BladeFormatterFixer::name() => true,
+        BladeFormatterFixer::name() => true,
 
         DockerFmtFixer::name() => true,
 
@@ -79,9 +79,9 @@ return (new Config)
 
         ShfmtFixer::name() => true,
 
-        // DoctrineSqlFixer::name() => true,
+        DoctrineSqlFixer::name() => true,
         // PhpMyAdminSqlFixer::name() => true,
-        SqlFluffFixer::name() => true,
+        // SqlFluffFixer::name() => true,
 
         YamlFmtFixer::name() => true,
 
