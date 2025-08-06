@@ -19,10 +19,9 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PathAwarer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\FinalFileAwarer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PrePathCommand;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
-use App\Support\PhpCsFixer\Fixer\Concerns\FileAndTokensAwarer;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
 use App\Support\PhpCsFixer\Fixer\Concerns\InlineHtmlCandidate;
 use App\Support\PhpCsFixer\Fixer\Concerns\SupportsExtensions;
@@ -65,10 +64,9 @@ use Symfony\Component\Process\Process;
 abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 {
     use AllowRisky;
-    use FileAndTokensAwarer;
+    use FinalFileAwarer;
     use HighestPriority;
     use InlineHtmlCandidate;
-    use PathAwarer;
     use PrePathCommand;
     use SupportsExtensions;
     public const string COMMAND = 'command';
@@ -144,8 +142,7 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
     #[\Override]
     protected function applyFix(\SplFileInfo $file, Tokens $tokens): void
     {
-        $this->setFileAndTokens($file, $tokens);
-        $this->setPath($this->path());
+        $this->setFinalFile($this->finalFile($file, $tokens));
         $process = $this->createProcess();
         $process->run();
 
@@ -168,19 +165,22 @@ abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
             throw new ProcessFailedException($process);
         }
 
-        // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->path))]);
-        $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->path)));
+        // $tokens[0] = new Token([\TOKEN_PARSE, $this->postFix(FileReader::createSingleton()->read($this->finalFile))]);
+        $tokens->setCode($this->postFix(FileReader::createSingleton()->read($this->finalFile)));
     }
 
-    protected function path(): string
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
+     */
+    protected function finalFile(\SplFileInfo $file, Tokens $tokens): string
     {
-        $path = (string) $this->file;
+        $finalFile = (string) $file;
 
         if (Utils::isDryRun()) {
-            file_put_contents($path = $this->createTemporaryFile(), $this->tokens->generateCode());
+            file_put_contents($finalFile = $this->createTemporaryFile(), $tokens->generateCode());
         }
 
-        return $path;
+        return $finalFile;
     }
 
     protected function createTemporaryFile(

@@ -22,7 +22,7 @@ trait PrePathCommand
     {
         return [
             ...$this->configuration[self::COMMAND],
-            $this->path,
+            $this->finalFile,
             ...$this->options(),
         ];
     }

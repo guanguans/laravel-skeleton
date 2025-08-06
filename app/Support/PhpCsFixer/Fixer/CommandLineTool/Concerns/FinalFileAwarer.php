@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns;
 
-trait PathAwarer
+trait FinalFileAwarer
 {
-    protected string $path;
+    protected string $finalFile;
 
-    protected function setPath(string $path): void
+    protected function setFinalFile(string $path): void
     {
-        $this->path = $path;
+        $this->finalFile = $path;
     }
 }

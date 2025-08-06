@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\FinalCmd;
+use PhpCsFixer\Tokenizer\Tokens;
 
 /**
  * @see https://github.com/zhlint-project/zhlint
@@ -52,9 +53,9 @@ final class ZhLintFixer extends AbstractCommandLineToolFixer
         return ['zh_CN.md'];
     }
 
-    protected function path(): string
+    protected function finalFile(\SplFileInfo $file, Tokens $tokens): string
     {
-        return str(parent::path())
+        return str(parent::finalFile($file, $tokens))
             ->chopStart($this->finalCmd())
             ->chopStart(\DIRECTORY_SEPARATOR)
             ->toString();

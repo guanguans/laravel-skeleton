@@ -26,7 +26,7 @@ trait PostPathCommand
         return [
             ...$this->configuration[self::COMMAND],
             ...$this->options(),
-            $this->path,
+            $this->finalFile,
         ];
     }
 }
