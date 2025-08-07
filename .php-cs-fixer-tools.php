@@ -80,7 +80,7 @@ return (new Config)
         DotenvLinterFixer::name() => true,
         JsonFixer::name() => true,
         ShfmtFixer::name() => true,
-        // TombiFixer::name() => true,
+        TombiFixer::name() => true,
         XmlLintFixer::name() => true,
         YamlFmtFixer::name() => true,
     ])

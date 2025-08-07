@@ -15,7 +15,7 @@ paths = [
   "tests/",
 ]
 includes = [
-#  "vendor"
+  # "vendor"
 ]
 excludes = [
   "bootstrap/cache/",
@@ -31,17 +31,17 @@ null_type_hint = "question"
 [linter]
 default_plugins = false
 plugins = [
-#  "analysis",
-#  "best-practices",
-#  "comment",
-#  "consistency",
-#  "deprecation",
+  # "analysis",
+  #  "best-practices",
+  #  "comment",
+  #  "consistency",
+  #  "deprecation",
   "laravel",
-#  "migration",
-#  "naming",
-#  "phpunit",
-#  "redundancy",
-#  "safety",
-#  "strictness",
-#  "symfony",
+  # "migration",
+  #  "naming",
+  #  "phpunit",
+  #  "redundancy",
+  #  "safety",
+  #  "strictness",
+  #  "symfony",
 ]
