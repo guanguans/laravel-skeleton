@@ -13,7 +13,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Support\PhpCsFixer\Fixer\AbstractFixer;
 use App\Support\PhpCsFixer\Fixer\BladeFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AbstractCommandLineToolFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\AutocorrectFixer;
@@ -37,6 +36,7 @@ use App\Support\PhpCsFixer\Fixer\InlineHtml\PhpMyAdminSqlFixer;
 use App\Support\PhpCsFixer\Fixer\SqlFixer;
 use App\Support\PhpCsFixer\Fixers;
 use PhpCsFixer\Config;
+use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 use Symfony\Component\Finder\Finder;
 
@@ -44,11 +44,7 @@ use Symfony\Component\Finder\Finder;
  * @see https://github.com/laravel/pint/blob/main/resources/presets
  */
 return (new Config)
-    ->registerCustomFixers($userFixers = iterator_to_array(new Fixers))
-    ->registerCustomFixers([
-        new BladeFixer,
-        new SqlFixer,
-    ])
+    ->registerCustomFixers($fixers = (new Fixers))
     ->setRules([
         // '@PhpCsFixer:risky' => true,
         'encoding' => true,
@@ -110,14 +106,11 @@ return (new Config)
                 'CHANGELOG.md',
             ])
             ->name(array_unique(array_merge(...array_map(
-                fn (AbstractFixer $fixer): array => array_map(
+                fn (FixerInterface $fixer): array => array_map(
                     static fn (string $extension): string => \sprintf('/\.%s$/', str_replace('.', '\.', $extension)),
-                    array_filter(
-                        (fn (): array => $this->defaultExtensions())->call($fixer),
-                        static fn (string $extension): bool => !\in_array($extension, ['php', 'php'], true)
-                    )
+                    (fn (): array => method_exists($this, 'defaultExtensions') ? $this->defaultExtensions() : [])->call($fixer),
                 ),
-                $userFixers,
+                iterator_to_array($fixers),
             ))))
             ->notName([
                 '/\.lock$/',
