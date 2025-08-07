@@ -94,6 +94,8 @@ if (!\function_exists('classes')) {
      * @noinspection PhpDocSignatureIsNotCompleteInspection
      *
      * @param null|(callable(class-string, string): bool) $filter
+     *
+     * @return \Illuminate\Support\Collection<class-string, \ReflectionClass>
      */
     function classes(?callable $filter = null): Collection
     {

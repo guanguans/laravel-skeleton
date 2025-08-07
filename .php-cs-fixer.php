@@ -295,8 +295,8 @@ return Factory::fromRuleSet(Php83::create()
         'statement_indentation' => [
             'stick_comment_to_next_continuous_control_statement' => true,
         ],
-        'static_lambda' => false,
-        'static_private_method' => false, // pest
+        'static_lambda' => false, // pest
+        'static_private_method' => false,
     ])))
     ->setUsingCache(true)
     ->setCacheFile(__DIR__.'/.build/php-cs-fixer/.php-cs-fixer.cache')
