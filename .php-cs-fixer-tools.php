@@ -53,6 +53,9 @@ return (new Config)
         'non_printable_character' => true,
         'single_blank_line_at_eof' => true,
 
+        // BladeFixer::name() => true,
+        // SqlFixer::name() => true,
+
         AutocorrectFixer::name() => true,
         LintMdFixer::name() => true,
         // MarkdownLintCli2Fixer::name() => true,
@@ -80,17 +83,6 @@ return (new Config)
         // TombiFixer::name() => true,
         XmlLintFixer::name() => true,
         YamlFmtFixer::name() => true,
-
-        // BladeFixer::name() => [
-        //     // BladeFixer::COMMAND => ['node', 'blade-formatter'],
-        //     BladeFixer::COMMAND => 'blade-formatter',
-        //     BladeFixer::OPTIONS => [
-        //         // '--indent-size' => 2,
-        //     ],
-        // ],
-        // SqlFixer::name() => [
-        //     SqlFixer::INDENT_STRING => '  ',
-        // ],
     ])
     ->setFinder(
         Finder::create()
