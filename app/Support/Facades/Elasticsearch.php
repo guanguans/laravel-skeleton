@@ -118,6 +118,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Elastic\Elasticsearch\Endpoints\Snapshot snapshot()
  * @method static \Elastic\Elasticsearch\Endpoints\Sql sql()
  * @method static \Elastic\Elasticsearch\Endpoints\Ssl ssl()
+ * @method static \Elastic\Elasticsearch\Endpoints\Streams streams()
  * @method static \Elastic\Elasticsearch\Endpoints\Synonyms synonyms()
  * @method static \Elastic\Elasticsearch\Endpoints\Tasks tasks()
  * @method static \Elastic\Elasticsearch\Endpoints\TextStructure textStructure()

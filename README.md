@@ -79,6 +79,15 @@ composer jack-raise-to-installed
 composer jack-raise-to-installed-dry-run
 composer json-lint
 composer lint
+composer mago
+composer mago-format
+composer mago-format-dry-run
+composer mago-init
+composer mago-lint
+composer mago-lint-compilation
+composer mago-lint-dry-run
+composer mago-lint-list-rules
+composer mago-lint-semantics-only
 composer md-fix
 composer md-lint
 composer neon-lint
@@ -363,6 +372,7 @@ composer zh-lint
 * [beyondcode/laravel-query-detector](https://github.com/beyondcode/laravel-query-detector) - Laravel N+1 Query Detector
 * [brainmaestro/composer-git-hooks](https://github.com/BrainMaestro/composer-git-hooks) - Easily manage git hooks in your composer config
 * [buggregator/trap](https://github.com/buggregator/trap) - A simple and powerful tool for debugging PHP applications.
+* [carthage-software/mago](https://github.com/carthage-software/mago) - Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.
 * [composer/composer](https://github.com/composer/composer) - Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.
 * [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
 * [defstudio/pest-plugin-laravel-expectations](https://github.com/defstudio/pest-plugin-laravel-expectations) - A plugin to add laravel tailored expectations to Pest
@@ -746,6 +756,7 @@ app/
 |   |   |   |   |-- ShfmtFixer.php
 |   |   |   |   |-- SqlFluffFixer.php
 |   |   |   |   |-- TextLintFixer.php
+|   |   |   |   |-- TombiFixer.php
 |   |   |   |   |-- XmlLintFixer.php
 |   |   |   |   |-- YamlFmtFixer.php
 |   |   |   |   `-- ZhLintFixer.php
@@ -801,7 +812,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-60 directories, 291 files
+60 directories, 292 files
 
 ```
 
