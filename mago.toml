@@ -1,0 +1,47 @@
+# Mago configuration file
+# For more information, see https://mago.carthage.software/#/getting-started/configuration
+# https://github.com/tempestphp/tempest-framework/blob/main/mago.toml
+php_version = "8.3.0"
+
+[source]
+paths = [
+    "app/",
+    "bootstrap/",
+    "config/",
+    "database/",
+    "public/",
+    "resources/",
+    "routes/",
+    "tests/",
+]
+includes = [
+#    "vendor"
+]
+excludes = [
+    "bootstrap/cache/",
+    "resources/views/",
+]
+
+[format]
+print_width = 180
+tab_width = 4
+use_tabs = false
+null_type_hint = "question"
+
+[linter]
+default_plugins = false
+plugins = [
+#    "analysis",
+#    "best-practices",
+#    "comment",
+#    "consistency",
+#    "deprecation",
+    "laravel",
+#    "migration",
+#    "naming",
+#    "phpunit",
+#    "redundancy",
+#    "safety",
+#    "strictness",
+#    "symfony",
+]
