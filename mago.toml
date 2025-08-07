@@ -5,21 +5,21 @@ php_version = "8.3.0"
 
 [source]
 paths = [
-    "app/",
-    "bootstrap/",
-    "config/",
-    "database/",
-    "public/",
-    "resources/",
-    "routes/",
-    "tests/",
+  "app/",
+  "bootstrap/",
+  "config/",
+  "database/",
+  "public/",
+  "resources/",
+  "routes/",
+  "tests/",
 ]
 includes = [
-#    "vendor"
+#  "vendor"
 ]
 excludes = [
-    "bootstrap/cache/",
-    "resources/views/",
+  "bootstrap/cache/",
+  "resources/views/",
 ]
 
 [format]
@@ -31,17 +31,17 @@ null_type_hint = "question"
 [linter]
 default_plugins = false
 plugins = [
-#    "analysis",
-#    "best-practices",
-#    "comment",
-#    "consistency",
-#    "deprecation",
-    "laravel",
-#    "migration",
-#    "naming",
-#    "phpunit",
-#    "redundancy",
-#    "safety",
-#    "strictness",
-#    "symfony",
+#  "analysis",
+#  "best-practices",
+#  "comment",
+#  "consistency",
+#  "deprecation",
+  "laravel",
+#  "migration",
+#  "naming",
+#  "phpunit",
+#  "redundancy",
+#  "safety",
+#  "strictness",
+#  "symfony",
 ]

@@ -27,6 +27,7 @@ use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\ShfmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqlFluffFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\TextLintFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\TombiFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\XmlLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\YamlFmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\ZhLintFixer;
@@ -56,13 +57,6 @@ return (new Config)
         'non_printable_character' => true,
         'single_blank_line_at_eof' => true,
 
-        // SqlFluffFixer::name() => [
-        //     AbstractCommandLineToolFixer::OPTIONS => [
-        //         '--dialect' => 'mysql',
-        //     ],
-        //     SqlFluffFixer::EXTENSIONS => ['sql'],
-        // ],
-
         AutocorrectFixer::name() => true,
         LintMdFixer::name() => true,
         // MarkdownLintCli2Fixer::name() => true,
@@ -73,21 +67,23 @@ return (new Config)
         // PintFixer::name() => true,
         BladeFormatterFixer::name() => true,
 
-        DockerFmtFixer::name() => true,
-
-        DotenvLinterFixer::name() => true,
-
-        ShfmtFixer::name() => true,
-
         DoctrineSqlFixer::name() => true,
         // PhpMyAdminSqlFixer::name() => true,
         // SqlFluffFixer::name() => true,
+        // SqlFluffFixer::name() => [
+        //     AbstractCommandLineToolFixer::OPTIONS => [
+        //         '--dialect' => 'mysql',
+        //     ],
+        //     SqlFluffFixer::EXTENSIONS => ['sql'],
+        // ],
 
-        YamlFmtFixer::name() => true,
-
-        XmlLintFixer::name() => true,
-
+        DockerFmtFixer::name() => true,
+        DotenvLinterFixer::name() => true,
         JsonFixer::name() => true,
+        ShfmtFixer::name() => true,
+        TombiFixer::name() => true,
+        XmlLintFixer::name() => true,
+        YamlFmtFixer::name() => true,
 
         // BladeFixer::name() => [
         //     // BladeFixer::COMMAND => ['node', 'blade-formatter'],
