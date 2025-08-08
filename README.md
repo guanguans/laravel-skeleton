@@ -618,8 +618,8 @@ app/
 |   |-- WhenLocalAggregateServiceProvider.php
 |   `-- WhenTestingAggregateServiceProvider.php
 |-- Rules/
-|   |-- AddressIPV4Rule.php
-|   |-- AddressIPV6Rule.php
+|   |-- AddressIpV4Rule.php
+|   |-- AddressIpV6Rule.php
 |   |-- AggregateRule.php
 |   |-- BankCardRule.php
 |   |-- Base64Rule.php
@@ -744,7 +744,7 @@ app/
 |   |   |   |   |-- AutocorrectFixer.php
 |   |   |   |   |-- BladeFormatterFixer.php
 |   |   |   |   |-- Concerns/
-|   |   |   |   |   |-- FinalFileAwarer.php
+|   |   |   |   |   |-- FinalFileAware.php
 |   |   |   |   |   |-- PostFinalFileCommand.php
 |   |   |   |   |   `-- PreFinalFileCommand.php
 |   |   |   |   |-- DockerFmtFixer.php

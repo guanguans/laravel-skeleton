@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonTimeZone;
 use Illuminate\Support\Str;
 
 return [
@@ -78,7 +78,7 @@ return [
                 // PDO::ATTR_CASE => PDO::CASE_LOWER, // @see https://www.yiichina.com/tutorial/65543
                 PDO::MYSQL_ATTR_INIT_COMMAND => \sprintf(
                     "SET time_zone = '%s';",
-                    Carbon::now()->setTimezone(new DateTimeZone(config('app.timezone')))->format('P')
+                    CarbonTimeZone::instance(config('app.timezone'))->toOffsetName(),
                 ),
             ]) : [],
         ],
