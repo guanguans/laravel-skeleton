@@ -783,7 +783,8 @@ app/
 |   |   |-- ClassHandleMethodRector.php
 |   |   `-- RenameToPsrNameRector.php
 |   |-- Signers/
-|   |   `-- HmacSigner.php
+|   |   |-- HmacSigner.php
+|   |   `-- Utils.php
 |   |-- Sse/
 |   |   |-- CloseServerSentEventException.php
 |   |   `-- ServerSentEvent.php
@@ -812,7 +813,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-60 directories, 292 files
+60 directories, 293 files
 
 ```
 
