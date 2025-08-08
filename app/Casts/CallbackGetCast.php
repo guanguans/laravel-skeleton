@@ -48,14 +48,13 @@ class CallbackGetCast implements CastsAttributes
      * @see \Illuminate\Container\Container::call()
      *
      * @noinspection RedundantDocCommentTagInspection
-     *
-     * @param callable|string $callback
+     * @noinspection DebugFunctionUsageInspection
      *
      * @throws \Throwable
      *
      * @return callable(mixed...): bool
      */
-    public static function resolveCallback(mixed $callback): callable
+    public static function resolveCallback(callable|string $callback): callable
     {
         if (\is_callable($callback)) {
             return $callback;
@@ -67,7 +66,7 @@ class CallbackGetCast implements CastsAttributes
             return $segments;
         }
 
-        $callbackName = \is_string($callback) ? $callback : json_encode($callback, \JSON_THROW_ON_ERROR);
+        $callbackName = var_export($callback, true);
 
         throw_if(
             \count($segments) !== 2 || !method_exists($segments[0], $segments[1]),
@@ -79,7 +78,7 @@ class CallbackGetCast implements CastsAttributes
             return [resolve($segments[0]), $segments[1]];
         } catch (\Throwable $throwable) {
             throw new \InvalidArgumentException(
-                "Invalid callback [$callbackName({$throwable->getMessage()})]",
+                "Invalid callback [$callbackName] [{$throwable->getMessage()}].",
                 $throwable->getCode(),
                 $throwable
             );
