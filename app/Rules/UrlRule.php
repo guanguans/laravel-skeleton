@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class UrlRule extends RegexRule
+final class UrlRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

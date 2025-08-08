@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class InstanceofRule extends Rule
+final class InstanceofRule extends AbstractRule
 {
     public function __construct(private readonly string $class) {}
 

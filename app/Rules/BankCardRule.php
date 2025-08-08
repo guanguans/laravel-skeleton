@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class BankCardRule extends RegexRule
+final class BankCardRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

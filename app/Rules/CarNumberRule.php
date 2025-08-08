@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class CarNumberRule extends RegexRule
+final class CarNumberRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class SnakeCaseRule extends RegexRule
+final class SnakeCaseRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

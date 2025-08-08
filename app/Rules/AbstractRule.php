@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
 
-abstract class Rule implements ValidationRule
+abstract class AbstractRule implements ValidationRule
 {
     use Makeable;
     // use ValidatesAttributes;

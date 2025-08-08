@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class WithoutWhitespaceRule extends RegexRule
+final class WithoutWhitespaceRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

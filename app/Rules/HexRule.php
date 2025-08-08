@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class HexRule extends RegexRule
+final class HexRule extends AbstractRegexRule
 {
     public function __construct(
         private readonly bool $forceFull = false,

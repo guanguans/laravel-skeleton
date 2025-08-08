@@ -55,7 +55,7 @@ it('can validate rules', function (): void {
                     'all' => $ruleClasses
                         ->map(
                             /**
-                             * @param class-string<\App\Rules\Rule> $ruleClass
+                             * @param class-string<\App\Rules\AbstractRule> $ruleClass
                              */
                             static fn (string $ruleClass): string => $ruleClass::name()
                         )

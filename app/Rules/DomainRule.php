@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class DomainRule extends RegexRule
+final class DomainRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

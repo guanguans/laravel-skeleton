@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class SemverRule extends RegexRule
+final class SemverRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator as ValidatorFactory;
 use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Validator;
 
-abstract class AggregateRule extends Rule
+abstract class AbstractAggregateRule extends AbstractRule
 {
     protected Validator $aggregateValidator;
 

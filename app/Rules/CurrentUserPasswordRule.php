@@ -15,7 +15,7 @@ namespace App\Rules;
 
 use Illuminate\Support\Facades\Hash;
 
-final class CurrentUserPasswordRule extends Rule
+final class CurrentUserPasswordRule extends AbstractRule
 {
     #[\Override]
     public function passes(string $attribute, mixed $value): bool

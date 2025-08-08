@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class OddNumberRule extends RegexRule
+final class OddNumberRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

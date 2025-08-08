@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class EmailRule extends RegexRule
+final class EmailRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

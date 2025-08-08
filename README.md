@@ -618,9 +618,11 @@ app/
 |   |-- WhenLocalAggregateServiceProvider.php
 |   `-- WhenTestingAggregateServiceProvider.php
 |-- Rules/
+|   |-- AbstractAggregateRule.php
+|   |-- AbstractRegexRule.php
+|   |-- AbstractRule.php
 |   |-- AddressIpV4Rule.php
 |   |-- AddressIpV6Rule.php
-|   |-- AggregateRule.php
 |   |-- BankCardRule.php
 |   |-- Base64Rule.php
 |   |-- BetweenWordsRule.php
@@ -662,8 +664,6 @@ app/
 |   |-- PhoneWorldRule.php
 |   |-- PortRule.php
 |   |-- PostalCodeRule.php
-|   |-- RegexRule.php
-|   |-- Rule.php
 |   |-- SemverRule.php
 |   |-- SlugRule.php
 |   |-- SnakeCaseRule.php

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class KebabCaseRule extends RegexRule
+final class KebabCaseRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

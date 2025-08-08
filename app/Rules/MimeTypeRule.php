@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class MimeTypeRule extends RegexRule
+final class MimeTypeRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

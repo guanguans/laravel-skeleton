@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Rules\Rule;
+use App\Rules\AbstractRule;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
@@ -66,15 +66,15 @@ final class ValidatorServiceProvider extends ServiceProvider
     private function extendValidator(): void
     {
         Discover::in('Rules')
-            ->instancesOf(Rule::class)
+            ->instancesOf(AbstractRule::class)
             ->classes()
             ->each(static function (\ReflectionClass $ruleReflectionClass, string $ruleClass): void {
-                /** @var class-string<\App\Rules\Rule> $ruleClass */
+                /** @var class-string<\App\Rules\AbstractRule> $ruleClass */
                 ValidatorFacade::{$ruleClass::extendMethod()}(
                     $ruleClass::name(),
                     static fn (string $attribute, mixed $value, array $parameters, Validator $validator): bool => tap(
                         new $ruleClass(...$parameters),
-                        static function (Rule $rule) use ($validator): void {
+                        static function (AbstractRule $rule) use ($validator): void {
                             $rule instanceof DataAwareRule and $rule->setData($validator->getData());
                             $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
                         }

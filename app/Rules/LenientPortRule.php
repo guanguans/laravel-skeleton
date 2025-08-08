@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class LenientPortRule extends AggregateRule
+final class LenientPortRule extends AbstractAggregateRule
 {
     #[\Override]
     protected function rules(): array

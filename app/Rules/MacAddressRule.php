@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class MacAddressRule extends Rule
+final class MacAddressRule extends AbstractRule
 {
     #[\Override]
     public function passes(string $attribute, mixed $value): bool

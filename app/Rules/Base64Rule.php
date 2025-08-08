@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class Base64Rule extends Rule
+final class Base64Rule extends AbstractRule
 {
     #[\Override]
     public function passes(string $attribute, mixed $value): bool

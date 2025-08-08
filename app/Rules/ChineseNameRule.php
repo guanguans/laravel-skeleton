@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class ChineseNameRule extends RegexRule
+final class ChineseNameRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

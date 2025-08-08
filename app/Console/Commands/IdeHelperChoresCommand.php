@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Rules\Rule;
+use App\Rules\AbstractRule;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
@@ -97,11 +97,11 @@ final class IdeHelperChoresCommand extends Command
     private function ruleChore(): void
     {
         Discover::in('Rules')
-            ->instancesOf(Rule::class)
+            ->instancesOf(AbstractRule::class)
             ->allClasses()
             ->map(
                 /**
-                 * @param class-string<\App\Rules\Rule> $ruleClass
+                 * @param class-string<\App\Rules\AbstractRule> $ruleClass
                  */
                 static fn (\ReflectionClass $ruleReflectionClass, string $ruleClass): string => $ruleClass::name()
             )

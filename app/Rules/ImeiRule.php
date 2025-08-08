@@ -15,7 +15,7 @@ namespace App\Rules;
 
 use Illuminate\Support\Str;
 
-final class ImeiRule extends Rule
+final class ImeiRule extends AbstractRule
 {
     private const int LENGTH = 15;
 

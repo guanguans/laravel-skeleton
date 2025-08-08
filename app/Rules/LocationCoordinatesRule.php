@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class LocationCoordinatesRule extends RegexRule
+final class LocationCoordinatesRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

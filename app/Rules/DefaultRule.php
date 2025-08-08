@@ -20,7 +20,7 @@ use App\Rules\Concerns\ValidatorAware;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Arr;
 
-final class DefaultRule extends Rule implements ValidatorAwareRule
+final class DefaultRule extends AbstractRule implements ValidatorAwareRule
 {
     // use DataAware;
     use ValidatorAware;

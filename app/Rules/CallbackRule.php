@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class CallbackRule extends Rule
+final class CallbackRule extends AbstractRule
 {
     private array $callbackArgs;
 

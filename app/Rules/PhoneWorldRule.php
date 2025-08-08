@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class PhoneWorldRule extends RegexRule
+final class PhoneWorldRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

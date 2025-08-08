@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class IdCardRule extends RegexRule
+final class IdCardRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

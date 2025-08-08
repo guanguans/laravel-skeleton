@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class CamelCaseRule extends RegexRule
+final class CamelCaseRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

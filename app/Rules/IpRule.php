@@ -15,7 +15,7 @@ namespace App\Rules;
 
 use Symfony\Component\HttpFoundation\IpUtils;
 
-final class IpRule extends Rule
+final class IpRule extends AbstractRule
 {
     /** @var list<string> */
     private static array $v4 = [

@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 /**
  * @see https://github.com/caneara/axiom
  */
-final class NotDisposableEmailRule extends Rule
+final class NotDisposableEmailRule extends AbstractRule
 {
     private static array $vendorCache = [];
     private readonly bool $default;

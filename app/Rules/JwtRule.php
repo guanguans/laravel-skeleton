@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class JwtRule extends RegexRule
+final class JwtRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

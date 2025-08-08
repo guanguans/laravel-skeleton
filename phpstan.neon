@@ -135,7 +135,7 @@ parameters:
             identifier: new.static
             paths:
                 - app/Models/BaseModel.php
-                - app/Rules/Rule.php
+                - app/Rules/AbstractRule.php
                 - app/Support/PhpCsFixer/Fixer/AbstractFixer.php
         -
             messages:

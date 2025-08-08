@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class PhoneCisRule extends RegexRule
+final class PhoneCisRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string

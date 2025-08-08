@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class BetweenWordsRule extends Rule
+final class BetweenWordsRule extends AbstractRule
 {
     /**
      * @param int|numeric-string $min

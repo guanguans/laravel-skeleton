@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class DuplicateRule extends Rule
+final class DuplicateRule extends AbstractRule
 {
     public function __construct(private readonly ?string $delimiter = null) {}
 

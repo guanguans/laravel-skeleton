@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class CapitalCharWithNumberRule extends RegexRule
+final class CapitalCharWithNumberRule extends AbstractRegexRule
 {
     #[\Override]
     protected function pattern(): string
