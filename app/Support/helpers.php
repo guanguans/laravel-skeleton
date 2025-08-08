@@ -426,64 +426,63 @@ if (!\function_exists('user_http_build_query')) {
      * ];
      * ```
      *
-     * @noinspection PhpVariableNamingConventionInspection
+     * @noinspection D
+     *
+     * @see https://laravel-news.com/retrieve-the-currently-executing-closure-in-php-85
      */
-    function user_http_build_query(array $queryPayload, string $numericPrefix = '', string $argSeparator = '&', int $encType = \PHP_QUERY_RFC1738): string
-    {
-        /**
-         * 转换值是非标量的情况.
-         */
-        $toQueryStr = static function (string $key, array|object $value, string $argSeparator, int $encType) use (&$toQueryStr): string {
-            /** @see https://laravel-news.com/retrieve-the-currently-executing-closure-in-php-85 */
-            // $toQueryStr = Closure::getCurrent();
-            $queryStr = '';
-
-            if (!$value instanceof Traversable) {
-                $value = (array) $value;
+    function user_http_build_query(
+        array|object $data,
+        string $numericPrefix = '',
+        ?string $argSeparator = null,
+        int $encodingType = \PHP_QUERY_RFC1738
+    ): string {
+        $toQuery = static function (
+            ?string $mainKey,
+            mixed $data,
+            string $numericPrefix,
+            string $argSeparator,
+            int $encodingType
+        ) use (&$toQuery): string {
+            if (!$data instanceof Traversable) {
+                $data = (array) $data;
             }
 
-            foreach ($value as $k => $v) {
-                // 特殊值处理
-                if (null === $v) {
+            reset($data);
+            $query = '';
+
+            foreach ($data as $key => $value) {
+                // 值处理
+                if (null === $value) {
                     continue;
                 }
 
-                if (0 === $v || false === $v) {
-                    $v = '0';
+                $value = match ($value) {
+                    0,false => '0',
+                    default => $value
+                };
+
+                // 键处理
+                if (null === $mainKey) {
+                    // 为了对数据进行解码时获取合法的变量名
+                    is_numeric($key) and !\is_string($key) and $key = $numericPrefix.$key;
+                } else {
+                    $key = "{$mainKey}[$key]";
                 }
 
-                $fullKey = "{$key}[$k]";
-                $queryStr .= \is_scalar($v)
-                    ? \sprintf("%s=%s$argSeparator", \PHP_QUERY_RFC3986 === $encType ? rawurlencode($fullKey) : urlencode($fullKey), \PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
-                    : $toQueryStr($fullKey, $v, $argSeparator, $encType); // 递归调用
+                $query .= \is_scalar($value)
+                    ? \sprintf(
+                        "%s=%s$argSeparator",
+                        \PHP_QUERY_RFC3986 === $encodingType ? rawurlencode((string) $key) : urlencode((string) $key),
+                        \PHP_QUERY_RFC3986 === $encodingType ? rawurlencode((string) $value) : urlencode((string) $value)
+                    )
+                    : $toQuery($key, $value, $numericPrefix, $argSeparator, $encodingType); // 递归调用
             }
 
-            return $queryStr;
+            return $query;
         };
 
-        reset($queryPayload);
-        $queryStr = '';
+        $argSeparator ??= '&';
 
-        foreach ($queryPayload as $k => $v) {
-            // 特殊值处理
-            if (null === $v) {
-                continue;
-            }
-
-            if (0 === $v || false === $v) {
-                $v = '0';
-            }
-
-            // 为了对数据进行解码时获取合法的变量名
-            if (is_numeric($k) && !\is_string($k)) {
-                $k = $numericPrefix.$k;
-            }
-
-            $queryStr .= \is_scalar($v)
-                ? \sprintf("%s=%s$argSeparator", \PHP_QUERY_RFC3986 === $encType ? rawurlencode($k) : urlencode($k), \PHP_QUERY_RFC3986 === $encType ? rawurlencode($v) : urlencode($v))
-                : $toQueryStr($k, $v, $argSeparator, $encType);
-        }
-
-        return substr($queryStr, 0, -\strlen($argSeparator));
+        return substr($toQuery(null, $data, $numericPrefix, $argSeparator, $encodingType), 0, -\strlen($argSeparator));
     }
 }
