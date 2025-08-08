@@ -70,7 +70,7 @@ final class ValidatorServiceProvider extends ServiceProvider
             ->classes()
             ->each(static function (\ReflectionClass $ruleReflectionClass, string $ruleClass): void {
                 /** @var class-string<\App\Rules\Rule> $ruleClass */
-                ValidatorFacade::{$ruleClass::extendType()}(
+                ValidatorFacade::{$ruleClass::extendMethod()}(
                     $ruleClass::name(),
                     static fn (string $attribute, mixed $value, array $parameters, Validator $validator): bool => tap(
                         new $ruleClass(...$parameters),

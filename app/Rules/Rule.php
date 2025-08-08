@@ -69,7 +69,7 @@ abstract class Rule implements ValidationRule
      *
      * @todo extendDependent、replacer
      */
-    public static function extendType(): string
+    public static function extendMethod(): string
     {
         $ruleReflectionClass = new \ReflectionClass(static::class);
 

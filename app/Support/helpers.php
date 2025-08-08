@@ -138,7 +138,7 @@ if (!\function_exists('str_random')) {
     }
 }
 
-if (!\function_exists('mysql_timezone_offset')) {
+if (!\function_exists('timezone_offset_name')) {
     /**
      * Gets the time offset from the provided timezone relative to UTC as a number. This
      * is used in the database configuration since we can't always rely on there being support
@@ -148,7 +148,7 @@ if (!\function_exists('mysql_timezone_offset')) {
      *
      * @see https://github.com/pelican-dev/panel/blob/3.x/app/Helpers/Time.php
      */
-    function mysql_timezone_offset(?string $timezone = null): string
+    function timezone_offset_name(?string $timezone = null): string
     {
         return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
     }
