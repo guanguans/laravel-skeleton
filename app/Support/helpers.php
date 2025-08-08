@@ -439,6 +439,11 @@ if (!\function_exists('user_http_build_query')) {
     /**
      * http_build_query 的实现。
      *
+     * @see \http_build_query()
+     * @see https://laravel-news.com/retrieve-the-currently-executing-closure-in-php-85
+     *
+     * @noinspection D
+     *
      * ```
      * $queryPayload = [
      *     1 => 'a',
@@ -467,15 +472,11 @@ if (!\function_exists('user_http_build_query')) {
      *     ],
      * ];
      * ```
-     *
-     * @noinspection D
-     *
-     * @see https://laravel-news.com/retrieve-the-currently-executing-closure-in-php-85
      */
     function user_http_build_query(
         array|object $data,
         string $numericPrefix = '',
-        ?string $argSeparator = null,
+        string $argSeparator = '&',
         int $encodingType = \PHP_QUERY_RFC1738
     ): string {
         $toQuery = static function (
@@ -523,8 +524,42 @@ if (!\function_exists('user_http_build_query')) {
             return $query;
         };
 
-        $argSeparator ??= '&';
-
         return substr($toQuery(null, $data, $numericPrefix, $argSeparator, $encodingType), 0, -\strlen($argSeparator));
+    }
+
+    /**
+     * @noinspection D
+     */
+    function simple_http_build_query(array|object $data): string
+    {
+        $toQuery = static function (?string $mainKey, mixed $data) use (&$toQuery): string {
+            if (!$data instanceof Traversable) {
+                $data = (array) $data;
+            }
+
+            reset($data);
+            $query = '';
+
+            foreach ($data as $key => $value) {
+                if (null === $value) {
+                    continue;
+                }
+
+                $value = match ($value) {
+                    0,false => '0',
+                    default => $value
+                };
+
+                if (null !== $mainKey) {
+                    $key = "{$mainKey}[$key]";
+                }
+
+                $query .= \is_scalar($value) ? "&$key=$value" : $toQuery($key, $value); // 递归调用
+            }
+
+            return $query;
+        };
+
+        return substr($toQuery(null, $data), 1);
     }
 }

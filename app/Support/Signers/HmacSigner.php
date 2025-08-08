@@ -38,6 +38,9 @@ final readonly class HmacSigner implements SignerContract
         return hash_equals($signature, $this->sign($payload));
     }
 
+    /**
+     * @see \simple_http_build_query()
+     */
     private function hashingDataFor(array $payload): string
     {
         return urldecode(http_build_query($this->sort($payload)));
