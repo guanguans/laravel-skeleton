@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns;
 
-trait FinalFileAwarer
+trait FinalFileAware
 {
     protected string $finalFile;
 

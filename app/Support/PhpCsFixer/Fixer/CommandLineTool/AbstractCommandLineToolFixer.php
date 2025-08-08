@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace App\Support\PhpCsFixer\Fixer\CommandLineTool;
 
 use App\Support\PhpCsFixer\Fixer\AbstractConfigurableFixer;
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\FinalFileAwarer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\FinalFileAware;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\Concerns\PreFinalFileCommand;
 use App\Support\PhpCsFixer\Fixer\Concerns\AllowRisky;
 use App\Support\PhpCsFixer\Fixer\Concerns\HighestPriority;
@@ -65,7 +65,7 @@ use Symfony\Component\Process\Process;
 abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 {
     use AllowRisky;
-    use FinalFileAwarer;
+    use FinalFileAware;
     use HighestPriority;
     use InlineHtmlCandidate;
     use PreFinalFileCommand;
