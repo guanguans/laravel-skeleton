@@ -22,7 +22,7 @@ class CallbackGetCast implements CastsAttributes
 
     public function __construct(
         private readonly mixed $callback,
-        private readonly int $idxOfAttrValInCallbackArgs = 0,
+        private readonly int|string $idxOfAttrValInCallbackArgs = 0,
         mixed ...$callbackArgs
     ) {
         $this->callbackArgs = $callbackArgs;
@@ -40,48 +40,6 @@ class CallbackGetCast implements CastsAttributes
     {
         array_splice($this->callbackArgs, $this->idxOfAttrValInCallbackArgs, 0, $value);
 
-        return \call_user_func_array(self::resolveCallback($this->callback), $this->callbackArgs);
-    }
-
-    /**
-     * @see https://github.com/PHP-DI/Invoker/blob/master/src/CallableResolver.php
-     * @see \Illuminate\Container\Container::call()
-     *
-     * @noinspection RedundantDocCommentTagInspection
-     * @noinspection DebugFunctionUsageInspection
-     *
-     * @throws \Throwable
-     *
-     * @return callable(mixed...): bool
-     */
-    public static function resolveCallback(callable|string $callback): callable
-    {
-        if (\is_callable($callback)) {
-            return $callback;
-        }
-
-        $segments = explode('@', $callback, 2);
-
-        if (\is_callable($segments)) {
-            return $segments;
-        }
-
-        $callbackName = var_export($callback, true);
-
-        throw_if(
-            \count($segments) !== 2 || !method_exists($segments[0], $segments[1]),
-            \InvalidArgumentException::class,
-            "Invalid callback [$callbackName]."
-        );
-
-        try {
-            return [resolve($segments[0]), $segments[1]];
-        } catch (\Throwable $throwable) {
-            throw new \InvalidArgumentException(
-                "Invalid callback [$callbackName] [{$throwable->getMessage()}].",
-                $throwable->getCode(),
-                $throwable
-            );
-        }
+        return \call_user_func_array(resolve_callback($this->callback), $this->callbackArgs);
     }
 }

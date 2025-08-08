@@ -61,6 +61,6 @@ abstract class AggregateRule extends Rule
         mixed $value,
         \Closure $fail
     ): PotentiallyTranslatedString {
-        return $fail($this->makeAggregateValidator($attribute, $value)->errors()->first($attribute));
+        return $fail($attribute, $this->makeAggregateValidator($attribute, $value)->errors()->first($attribute));
     }
 }

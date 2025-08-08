@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterval;
+use Carbon\CarbonTimeZone;
 use Composer\Autoload\ClassLoader;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
@@ -128,6 +129,46 @@ if (!\function_exists('classes')) {
     }
 }
 
+if (!\function_exists('resolve_callback')) {
+    /**
+     * @see https://github.com/PHP-DI/Invoker/blob/master/src/CallableResolver.php
+     * @see \Illuminate\Container\Container::call()
+     *
+     * @noinspection RedundantDocCommentTagInspection
+     * @noinspection DebugFunctionUsageInspection
+     *
+     * @throws \Throwable
+     */
+    function resolve_callback(callable|string $callback): callable
+    {
+        if (\is_callable($callback)) {
+            return $callback;
+        }
+
+        if (\is_callable($segments = explode('@', $callback, 2))) {
+            return $segments;
+        }
+
+        $exportedCallback = var_export($callback, true);
+
+        throw_if(
+            \count($segments) !== 2 || !method_exists($segments[0], $segments[1]),
+            InvalidArgumentException::class,
+            "Invalid callback: $exportedCallback."
+        );
+
+        try {
+            return [resolve($segments[0]), $segments[1]];
+        } catch (Throwable $throwable) {
+            throw new InvalidArgumentException(
+                "Invalid callback: $exportedCallback, Error message: {$throwable->getMessage()}.",
+                $throwable->getCode(),
+                $throwable
+            );
+        }
+    }
+}
+
 if (!\function_exists('str_random')) {
     /**
      * @throws \Random\RandomException
@@ -148,9 +189,10 @@ if (!\function_exists('timezone_offset_name')) {
      *
      * @see https://github.com/pelican-dev/panel/blob/3.x/app/Helpers/Time.php
      */
-    function timezone_offset_name(?string $timezone = null): string
+    function timezone_offset_name(null|DateTimeZone|false|int|string $timezone = null): string
     {
-        return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
+        // return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
+        return CarbonTimeZone::instance($timezone ?? config('app.timezone'))?->toOffsetName();
     }
 }
 

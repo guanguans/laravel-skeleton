@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-use App\Casts\CallbackGetCast;
-
 final class CallbackRule extends Rule
 {
     private array $callbackArgs;
@@ -40,9 +38,6 @@ final class CallbackRule extends Rule
     {
         array_splice($this->callbackArgs, $this->idxOfAttrValInCallbackArgs, 0, $value);
 
-        return (bool) \call_user_func_array(
-            CallbackGetCast::resolveCallback($this->callback),
-            $this->callbackArgs
-        );
+        return (bool) \call_user_func_array(resolve_callback($this->callback), $this->callbackArgs);
     }
 }
