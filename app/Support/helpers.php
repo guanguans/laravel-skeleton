@@ -192,6 +192,7 @@ if (!\function_exists('timezone_offset_name')) {
     function timezone_offset_name(null|DateTimeZone|false|int|string $timezone = null): string
     {
         // return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
+        // return CarbonImmutable::now($timezone ?? config('app.timezone'))->format('P');
         return CarbonTimeZone::instance($timezone ?? config('app.timezone'))?->toOffsetName();
     }
 }

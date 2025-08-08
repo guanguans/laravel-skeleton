@@ -29,19 +29,14 @@ final class Fixers implements \IteratorAggregate
      */
     public function getIterator(): \Traversable
     {
-        /** @var \Symfony\Component\Finder\SplFileInfo $file */
         foreach ((Finder::create())->in(__DIR__.'/Fixer')->name('*Fixer.php') as $file) {
             // -4 is set to cut ".php" extension
-            /** @var class-string<FixerInterface> $class */
             $class = __NAMESPACE__.str_replace('/', '\\', mb_substr($file->getPathname(), mb_strlen(__DIR__), -4));
 
-            if (!class_exists($class) || !is_subclass_of($class, FixerInterface::class)) {
-                continue;
-            }
-
-            $rfl = new \ReflectionClass($class);
-
-            if (!$rfl->isInstantiable()) {
+            if (
+                !is_subclass_of($class, FixerInterface::class)
+                || !(new \ReflectionClass($class))->isInstantiable()
+            ) {
                 continue;
             }
 
