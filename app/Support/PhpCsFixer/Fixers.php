@@ -25,6 +25,8 @@ use PhpCsFixer\Fixer\FixerInterface;
 final class Fixers implements \IteratorAggregate
 {
     /**
+     * @throws \ReflectionException
+     *
      * @return \Generator<FixerInterface>
      */
     public function getIterator(): \Traversable
