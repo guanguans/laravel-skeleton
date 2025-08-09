@@ -34,7 +34,8 @@ final class Utils
             }
 
             $value = match ($value) {
-                0,false => '0',
+                0,0.0,false => '0',
+                true => '1',
                 default => $value
             };
 
@@ -60,7 +61,8 @@ final class Utils
                 }
 
                 $value = match ($value) {
-                    0,false => '0',
+                    0,0.0,false => '0',
+                    true => '1',
                     default => $value
                 };
 
@@ -141,7 +143,8 @@ final class Utils
                 }
 
                 $value = match ($value) {
-                    0,false => '0',
+                    0,0.0,false => '0',
+                    true => '1',
                     default => $value
                 };
 
