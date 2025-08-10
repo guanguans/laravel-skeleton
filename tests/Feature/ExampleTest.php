@@ -34,6 +34,7 @@ use App\Console\Commands\OptimizeAllCommand;
 use App\Console\Commands\PerformDatabaseBackupCommand;
 use App\Console\Commands\ShowUnsupportedRequiresCommand;
 use App\Console\Commands\UpdateReadmeCommand;
+use Illuminate\Foundation\Console\RouteListCommand;
 
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>.
@@ -90,6 +91,9 @@ it('is console', function (): void {
             // UpdateReadmeCommand::class,
         ]))
         ->keys()
+        ->merge([
+            RouteListCommand::class,
+        ])
         // ->dd()
         ->each(function (string $class): void {
             $this->artisan($class, [
