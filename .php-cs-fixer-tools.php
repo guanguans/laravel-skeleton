@@ -106,6 +106,7 @@ return (new Config)
             ))))
             ->notName([
                 '/\.lock$/',
+                '/\-lock\.json$/',
                 // '/\.php$/',
                 '/(?<!\.blade)\.php$/',
             ])

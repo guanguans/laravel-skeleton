@@ -36,6 +36,7 @@
         "christophrumpel/artisan-benchmark": "^0.0",
         "cknow/laravel-money": "^8.4",
         "crell/attributeutils": "^1.3",
+        "cuyz/valinor": "^2.1",
         "cviebrock/eloquent-sluggable": "^12.0",
         "cweagans/composer-patches": "^1.7",
         "dcblogdev/laravel-sent-emails": "^2.0",

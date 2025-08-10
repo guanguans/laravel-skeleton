@@ -83,6 +83,10 @@ final class Utils
      * http_build_query 的实现。
      *
      * @see \http_build_query()
+     * @see https://github.com/google/go-querystring
+     * @see https://github.com/gorilla/schema
+     * @see https://github.com/ljharb/qs
+     * @see https://github.com/sindresorhus/query-string
      * @see https://laravel-news.com/retrieve-the-currently-executing-closure-in-php-85
      *
      * @noinspection D
