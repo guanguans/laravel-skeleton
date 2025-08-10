@@ -423,6 +423,7 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi -vv"
         ],
+        "actionlint": "actionlint -color -oneline -verbose",
         "ai-commit": "@php ./vendor/bin/ai-commit commit --ansi",
         "ai-commit-bito": "@ai-commit --generator=bito_cli",
         "ai-commit-bito-no-verify": "@ai-commit-bito --no-verify",
