@@ -35,6 +35,8 @@ use App\Console\Commands\PerformDatabaseBackupCommand;
 use App\Console\Commands\ShowUnsupportedRequiresCommand;
 use App\Console\Commands\UpdateReadmeCommand;
 use Illuminate\Foundation\Console\RouteListCommand;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>.
@@ -101,5 +103,64 @@ it('is console', function (): void {
                 // '--quiet' => true,
                 // '--silent' => true,
             ])->assertOk();
+        });
+})->group(__DIR__, __FILE__);
+
+it('is route', function (): void {
+    Artisan::call(RouteListCommand::class, [
+        '--except-vendor' => true,
+        '--json' => true,
+    ]);
+
+    Collection::fromJson(Artisan::output())
+        // ->dd()
+        // ->whereNotNull('name')
+        ->whereNotInStrict('name', [
+            // 'ignition.executeSolution',
+            // 'ignition.healthCheck',
+            // 'ignition.updateConfig',
+            // 'sentemails.downloadAttachment',
+        ])
+        ->whereNotInStrict('uri', [
+            'api/users.json',
+            // 'api/{fallbackPlaceholder}',
+            // '{fallbackPlaceholder}',
+            // '_dusk/login/{userId}/{guard?}',
+            // 'log-viewer/api/files/{fileIdentifier}',
+            // 'log-viewer/api/files/{fileIdentifier}/clear-cache',
+            // 'log-viewer/api/files/{fileIdentifier}/download',
+            // 'log-viewer/api/files/{fileIdentifier}/download/request',
+            // 'log-viewer/api/folders/{folderIdentifier}',
+            // 'log-viewer/api/folders/{folderIdentifier}/clear-cache',
+            // 'log-viewer/api/folders/{folderIdentifier}/download',
+            // 'log-viewer/api/folders/{folderIdentifier}/download/request',
+            // '__execute-laravel-error-solution',
+            // '_dusk/login/{userId}/{guard?}',
+            // '_dusk/logout/{guard?}',
+            // '_dusk/user/{guard?}',
+            // 'docs.openapi',
+            // 'docs.postman',
+            // 'docs/api.json',
+        ])
+        ->each(function (array $route): void {
+            expect($route['name'])
+                ->not->toBeNull("The route [{$route['method']} {$route['uri']}] name should not be null.");
+
+            expect(str($route['name'])->explode('.'))->each->toBeKebabCase(
+                "The route [{$route['method']} {$route['uri']}] name [{$route['name']}] should be kebabcase."
+            );
+
+            expect(
+                str($route['uri'])
+                    ->explode('/')
+                    ->reject(static fn (string $segment): bool => str($segment)->isMatch([
+                        '/^$/',
+                        '/^\{.*\}$/',
+                        '/^v[1-9]$/',
+                        // '/^_.*$/',
+                    ]))
+            )->each->toBeKebabCase(
+                "The route [{$route['method']} {$route['uri']}] uri [{$route['uri']}] should be kebabcase."
+            );
         });
 })->group(__DIR__, __FILE__);

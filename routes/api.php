@@ -18,16 +18,16 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
-Route::get('user', static fn (Request $request) => $request->user())->middleware('auth:sanctum');
+Route::get('user', static fn (Request $request) => $request->user())->name('user')->middleware('auth:sanctum');
 
-Route::fallback(static fn () => abort(404, 'Not Found Api'));
+Route::fallback(static fn () => abort(404, 'Not Found Api'))->name('fallback');
 
 /**
  * @see https://www.harrisrafto.eu/streaming-large-json-datasets-in-laravel-with-streamjson/
  */
 Route::get('users.json', static fn () => response()->streamJson([
     'users' => HttpLog::query()->cursor(),
-]));
+]))->name('users.json');
 
 Route::group([
     'as' => 'api.',

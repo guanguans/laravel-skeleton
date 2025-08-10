@@ -39,8 +39,8 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 |
 */
 
-Route::get('/', static fn () => view('welcome'));
-Route::fallback(static fn () => abort(404));
+Route::get('/', static fn () => view('welcome'))->name('index');
+Route::fallback(static fn () => abort(404))->name('fallback');
 
 LaravelUploader::routes();
 Route::get('composer', [DecomposerController::class, 'index']);
@@ -55,14 +55,14 @@ Route::get('acting-as/{id}', static function (int $id) {
     Auth::loginUsingId($id);
 
     return redirect('dashboard');
-});
+})->name('acting-as.id');
 
 /**
  * @see https://www.harrisrafto.eu/enhancing-concurrency-control-with-laravels-session-blocking
  */
 Route::post('order', static function (): void {
     // Order processing logic
-})->block(5, 5);
+})->name('order')->block(5, 5);
 
 /**
  * @see https://laravel-news.com/route-shallow-resource
@@ -93,7 +93,7 @@ Route::post('update-password', static function (Request $request) {
     ]);
 
     return redirect('/dashboard')->with('status', 'Password updated and other devices logged out.');
-});
+})->name('update-password');
 
 Route::post('confirm-password', static function (Request $request) {
     if (!Hash::check($request->password, $request->user()?->password)) {
@@ -105,11 +105,11 @@ Route::post('confirm-password', static function (Request $request) {
     $request->session()->passwordConfirmed();
 
     return redirect()->intended();
-})->middleware(['auth', 'throttle:6,1']);
+})->name('confirm-password')->middleware(['auth', 'throttle:6,1']);
 
 Route::delete('account', static function (Request $request) {
     $request->user()->delete();
     Auth::logout();
 
     return redirect('/')->with('status', 'Your account has been deleted.');
-})->middleware(['auth', 'password.confirm']);
+})->name('account.destroy')->middleware(['auth', 'password.confirm']);
