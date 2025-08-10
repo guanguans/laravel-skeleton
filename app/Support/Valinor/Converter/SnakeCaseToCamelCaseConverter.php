@@ -33,7 +33,7 @@ final class SnakeCaseToCamelCaseConverter
 
         $camelCaseConverted = array_combine(
             array_map(
-                fn ($key): string => lcfirst(str_replace('_', '', ucwords((string) $key, '_'))),
+                static fn (int|string $key): string => lcfirst(str_replace('_', '', ucwords((string) $key, '_'))),
                 array_keys($values),
             ),
             $values,

@@ -167,6 +167,7 @@ composer test-type-coverage
 composer test-update-snapshots
 composer text-fix
 composer text-lint
+composer todo-lint
 composer trap
 composer trufflehog
 composer user-composer
@@ -210,6 +211,7 @@ composer zh-lint
 * [christophrumpel/artisan-benchmark](https://github.com/christophrumpel/artisan-benchmark) - Benchmark Artisan Commands
 * [cknow/laravel-money](https://github.com/cknow/laravel-money) - Laravel Money
 * [crell/attributeutils](https://github.com/Crell/AttributeUtils) - A robust, flexible attribute handling framework
+* [cuyz/valinor](https://github.com/CuyZ/Valinor) - Library that helps to map any input into a strongly-typed value object structure.
 * [cviebrock/eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable) - Easy creation of slugs for your Eloquent models in Laravel
 * [cweagans/composer-patches](https://github.com/cweagans/composer-patches) - Provides a way to patch Composer packages.
 * [dcblogdev/laravel-sent-emails](https://github.com/dcblogdev/laravel-sent-emails) - Store outgoing emails in Laravel
@@ -804,6 +806,11 @@ app/
 |   |   |-- SetStateable.php
 |   |   |-- Singletonable.php
 |   |   `-- WithPipeArgs.php
+|   |-- Valinor/
+|   |   |-- Converter/
+|   |   |   `-- SnakeCaseToCamelCaseConverter.php
+|   |   `-- Transformer/
+|   |       `-- CamelToSnakeCaseTransformer.php
 |   `-- helpers.php
 `-- View/
     |-- Components/
@@ -813,7 +820,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-60 directories, 293 files
+63 directories, 295 files
 
 ```
 
