@@ -619,6 +619,7 @@
         "style-tools-lint": "@style-tools-fix --dry-run",
         "text-fix": "npx textlint --fix ./*.md ./.github/*.md ./docs/**/*.md",
         "text-lint": "npx textlint --format=pretty-error ./*.md ./.github/*.md ./docs/**/*.md",
+        "todo-lint": "! git --no-pager grep --extended-regexp --ignore-case 'todo|fixme' -- '*.php' ':!*.blade.php' ':(exclude)resources/'",
         "trap": "@php ./vendor/bin/trap --ui --ansi -vv",
         "trufflehog": "trufflehog git https://github.com/guanguans/laravel-skeleton --only-verified",
         "user-composer": [
