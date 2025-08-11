@@ -35,6 +35,8 @@ use App\Console\Commands\PerformDatabaseBackupCommand;
 use App\Console\Commands\ShowUnsupportedRequiresCommand;
 use App\Console\Commands\UpdateReadmeCommand;
 use Illuminate\Foundation\Console\RouteListCommand;
+use Illuminate\Routing\Route;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
@@ -64,6 +66,16 @@ it('is http', function (): void {
         ->assertBadRequest()
         ->assertJsonStructure();
 })->group(__DIR__, __FILE__);
+
+it('is all routes', function (): void {
+    collect(app(Router::class)->getRoutes())
+        ->reject(fn (Route $route) => (fn () => $this->isVendorRoute($route))->call(app()->make(RouteListCommand::class)))
+        ->each(function (Route $route): void {
+            foreach (array_map(strtolower(...), $route->methods()) as $method) {
+                $this->{$method}($route->uri());
+            }
+        });
+})->throwsNoExceptions()->group(__DIR__, __FILE__);
 
 it('is console', function (): void {
     classes(

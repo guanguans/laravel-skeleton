@@ -17,6 +17,7 @@
 <summary>Composer scripts</summary>
 
 ```shell
+composer actionlint
 composer ai-commit
 composer ai-commit-bito
 composer ai-commit-bito-no-verify
