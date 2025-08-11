@@ -37,6 +37,7 @@ use App\Console\Commands\UpdateReadmeCommand;
 use Illuminate\Foundation\Console\RouteListCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 /**
  * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>.
@@ -106,7 +107,23 @@ it('is console', function (): void {
         });
 })->group(__DIR__, __FILE__);
 
-it('is route', function (): void {
+it('is command naming', function (): void {
+    collect(Artisan::all())
+        ->filter(fn (SymfonyCommand $command): bool => str($command::class)->startsWith('App\\Console\\Commands'))
+        ->reject(fn (SymfonyCommand $command): bool => str($command->getName())->is([
+            // '_complete',
+            // 'livewire:configure-s3-upload-cleanup',
+            // 'module:v6:migrate',
+            // 'saml2:*',
+        ]))
+        ->each(function (SymfonyCommand $command): void {
+            expect(str($command->getName())->replaceMatches('/\d/', '')->explode(':'))->each->toBeKebabCase(
+                \sprintf('The command [%s] name [%s] should be kebabcase.', $command::class, $command->getName())
+            );
+        });
+})->group(__DIR__, __FILE__);
+
+it('is route naming', function (): void {
     Artisan::call(RouteListCommand::class, [
         '--except-vendor' => true,
         '--json' => true,
