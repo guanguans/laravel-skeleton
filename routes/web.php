@@ -24,9 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Lubusin\Decomposer\Controllers\DecomposerController;
 use Overtrue\LaravelUploader\LaravelUploader;
-use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +41,6 @@ Route::get('/', static fn () => view('welcome'))->name('index');
 Route::fallback(static fn () => abort(404))->name('fallback');
 
 LaravelUploader::routes();
-Route::get('composer', [DecomposerController::class, 'index']);
-Route::get('logs', [LogViewerController::class, 'index']);
 
 /**
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet
@@ -64,13 +60,13 @@ Route::post('order', static function (): void {
     // Order processing logic
 })->name('order')->block(5, 5);
 
-/**
- * @see https://laravel-news.com/route-shallow-resource
- * @see https://laravel-news.com/route-resource-scoped
- */
-Route::resource('order.items', Controller::class)->shallow()->scoped([
-    'item' => 'sku',
-]);
+// /**
+//  * @see https://laravel-news.com/route-shallow-resource
+//  * @see https://laravel-news.com/route-resource-scoped
+//  */
+// Route::resource('order.items', Controller::class)->shallow()->scoped([
+//     'item' => 'sku',
+// ]);
 
 Route::post('update-password', static function (Request $request) {
     // Validate the new password

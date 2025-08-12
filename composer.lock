@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be0e73b0ca887bc4c15c1003c125e743",
+    "content-hash": "afd57dfdb4510bd9c58e1d457fa17ce6",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -17488,69 +17488,6 @@
             "time": "2025-06-25T14:20:11+00:00"
         },
         {
-            "name": "rap2hpoutre/laravel-log-viewer",
-            "version": "v2.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
-                "reference": "ab85d5d88de728b99a9391a0c70e9b2f5743a589"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/ab85d5d88de728b99a9391a0c70e9b2f5743a589",
-                "reference": "ab85d5d88de728b99a9391a0c70e9b2f5743a589",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
-                "phpunit/phpunit": "^7||^8.4|^9.3.3|^10.1|^11.0"
-            },
-            "type": "laravel-package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Rap2hpoutre\\LaravelLogViewer\\": "src/"
-                },
-                "classmap": [
-                    "src/controllers"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "rap2hpoutre",
-                    "email": "raphaelht@gmail.com"
-                }
-            ],
-            "description": "A Laravel log reader",
-            "keywords": [
-                "laravel",
-                "log",
-                "log-reader",
-                "log-viewer",
-                "logging",
-                "lumen"
-            ],
-            "support": {
-                "issues": "https://github.com/rap2hpoutre/laravel-log-viewer/issues",
-                "source": "https://github.com/rap2hpoutre/laravel-log-viewer/tree/v2.5.0"
-            },
-            "time": "2025-03-10T15:35:06+00:00"
-        },
-        {
             "name": "ratchet/rfc6455",
             "version": "v0.4.0",
             "source": {
@@ -34334,58 +34271,6 @@
                 "source": "https://github.com/localheinz/diff/tree/1.2.0"
             },
             "time": "2024-12-04T14:16:01+00:00"
-        },
-        {
-            "name": "lubusin/laravel-decomposer",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lubusIN/laravel-decomposer.git",
-                "reference": "79a7b37d8d803f924f3f79146e41a0d7c21766ef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lubusIN/laravel-decomposer/zipball/79a7b37d8d803f924f3f79146e41a0d7c21766ef",
-                "reference": "79a7b37d8d803f924f3f79146e41a0d7c21766ef",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": ">=6.0  <=12.0 || ^12.0",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "illuminate/http": ">=6.0  <=12.0 || ^12.0",
-                "illuminate/routing": ">=6.0  <=12.0 || ^12.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Lubusin\\Decomposer\\DecomposerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lubusin\\Decomposer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Harish Toshniwal",
-                    "email": "harish@lubus.in"
-                }
-            ],
-            "description": "A Laravel package to decompose your installed packages, their dependencies, your app & server environment",
-            "support": {
-                "issues": "https://github.com/lubusIN/laravel-decomposer/issues",
-                "source": "https://github.com/lubusIN/laravel-decomposer/tree/v1.3.1"
-            },
-            "time": "2025-06-11T04:00:42+00:00"
         },
         {
             "name": "marc-mabe/php-enum",

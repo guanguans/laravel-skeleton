@@ -301,7 +301,6 @@ composer zh-lint
 * [proengsoft/laravel-jsvalidation](https://github.com/proengsoft/laravel-jsvalidation) - Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest
 * [propaganistas/laravel-disposable-email](https://github.com/Propaganistas/Laravel-Disposable-Email) - Disposable email validator
 * [propaganistas/laravel-phone](https://github.com/Propaganistas/Laravel-Phone) - Adds phone number functionality to Laravel based on Google's libphonenumber API.
-* [rap2hpoutre/laravel-log-viewer](https://github.com/rap2hpoutre/laravel-log-viewer) - A Laravel log reader
 * [reinink/remember-query-strings](https://github.com/reinink/remember-query-strings) - Laravel middleware that automatically remembers and restores query strings.
 * [rennokki/laravel-eloquent-query-cache](https://github.com/renoki-co/laravel-eloquent-query-cache) - Adding cache on your Laravel Eloquent queries' results is now a breeze.
 * [robclancy/presenter](https://github.com/robclancy/presenter) - Decorate your objects using presenters. Primarily to keep presentation logic out of your models.
@@ -414,7 +413,6 @@ composer zh-lint
 * [laravel/roster](https://github.com/laravel/roster) - Detect packages & approaches in use within a Laravel project
 * [laravel/sail](https://github.com/laravel/sail) - Docker files for running a basic Laravel application.
 * [laravel/telescope](https://github.com/laravel/telescope) - An elegant debug assistant for the Laravel framework.
-* [lubusin/laravel-decomposer](https://github.com/lubusIN/laravel-decomposer) - A Laravel package to decompose your installed packages, their dependencies, your app & server environment
 * [mockery/mockery](https://github.com/mockery/mockery) - Mockery is a simple yet flexible PHP mock object framework
 * [msamgan/laravel-env-keys-checker](https://github.com/msamgan/laravel-env-keys-checker) - check if all the keys are available in all the .env files.
 * [muhammadhuzaifa/telescope-guzzle-watcher](https://github.com/huzaifaarain/telescope-guzzle-watcher) - Telescope Guzzle Watcher provide a custom watcher for intercepting http requests made via guzzlehttp/guzzle php library. The package uses the on_stats request option for extracting the request/response data. The watcher intercept and log the request into the Laravel Telescope HTTP Client Watcher.
