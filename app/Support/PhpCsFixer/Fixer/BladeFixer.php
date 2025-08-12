@@ -47,14 +47,7 @@ use Symfony\Component\Process\Process;
 /**
  * @see https://github.com/shufo/blade-formatter
  *
- * @property array{
- *     command: array,
- *     options: array,
- *     cwd: ?string,
- *     env: ?array,
- *     input: ?string,
- *     timeout: ?float
- * } $configuration
+ * @property array{command: array, options: array, cwd: ?string, env: ?array, input: ?string, timeout: ?float} $configuration
  *
  * @method void configureIO(InputInterface $input, OutputInterface $output)
  */

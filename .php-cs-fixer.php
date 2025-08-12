@@ -29,6 +29,12 @@ use PhpCsFixerCustomFixers\Fixer\AbstractFixer;
 
 require __DIR__.'/vendor/autoload.php';
 
+// putenv('PHP_CS_FIXER_ENFORCE_CACHE=1');
+// putenv('PHP_CS_FIXER_IGNORE_ENV=1');
+putenv('PHP_CS_FIXER_FUTURE_MODE=1');
+putenv('PHP_CS_FIXER_NON_MONOLITHIC=1');
+putenv('PHP_CS_FIXER_PARALLEL=1');
+
 return Factory::fromRuleSet(Php83::create()
     ->withHeader(
         (static function (): string {

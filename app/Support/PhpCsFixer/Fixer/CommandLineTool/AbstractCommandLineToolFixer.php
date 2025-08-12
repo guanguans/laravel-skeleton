@@ -53,14 +53,7 @@ use Symfony\Component\Process\Process;
  * @see `brew search format`
  * @see `brew search lint`
  *
- * @property array{
- *     command: array,
- *     options: array,
- *     cwd: ?string,
- *     env: ?array,
- *     input: ?string,
- *     timeout: ?float
- * } $configuration
+ * @property array{command: array, options: array, cwd: ?string, env: array, input: ?string, timeout: ?float} $configuration
  */
 abstract class AbstractCommandLineToolFixer extends AbstractConfigurableFixer
 {

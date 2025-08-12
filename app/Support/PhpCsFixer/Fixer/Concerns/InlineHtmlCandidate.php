@@ -18,6 +18,8 @@ use PhpCsFixer\Tokenizer\Tokens;
 trait InlineHtmlCandidate
 {
     /**
+     * @see \PhpCsFixer\Tokenizer\Tokens::isMonolithicPhp()
+     *
      * @noinspection SensitiveParameterInspection
      *
      * @param \PhpCsFixer\Tokenizer\Tokens<\PhpCsFixer\Tokenizer\Token> $tokens
