@@ -25,12 +25,13 @@ use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfoFactory;
 use Rector\Comments\NodeDocBlock\DocBlockUpdater;
 use Rector\Rector\AbstractRector;
 use Symfony\Component\HttpFoundation\Response;
+use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class ClassHandleMethodRector extends AbstractRector
+final class ClassHandleMethodRector extends AbstractRector implements DocumentedRuleInterface
 {
     public function __construct(
         private readonly DocBlockUpdater $docBlockUpdater,
@@ -48,7 +49,7 @@ final class ClassHandleMethodRector extends AbstractRector
         return new RuleDefinition(
             'Add noinspections doc comment to declare',
             [
-                new ConfiguredCodeSample(
+                new CodeSample(
                     <<<'CODE_SAMPLE'
                         <?php
 
@@ -80,7 +81,6 @@ final class ClassHandleMethodRector extends AbstractRector
                             }
                         }
                         CODE_SAMPLE,
-                    [],
                 ),
             ],
         );

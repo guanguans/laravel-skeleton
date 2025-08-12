@@ -112,6 +112,7 @@ return (new Config)
                 iterator_to_array($fixers),
             ))))
             ->notName([
+                '/\-overview\.md$/',
                 '/\.lock$/',
                 '/\-lock\.json$/',
                 // '/\.php$/',

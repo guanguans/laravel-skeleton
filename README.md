@@ -137,6 +137,9 @@ composer release-patch
 composer release-patch-dry-run
 composer roave-infection-static-analysis-plugin
 composer roave-no-leaks
+composer rule-docs
+composer rule-docs-rector
+composer rule-docs-validate
 composer sk
 composer sk-alice-yaml-fixtures-to-php
 composer sk-check-commented-code
@@ -447,6 +450,7 @@ composer zh-lint
 * [symfony/thanks](https://github.com/symfony/thanks) - Encourages sending ⭐ and 💵 to fellow PHP package maintainers (not limited to Symfony components)!
 * [symplify/easy-coding-standard](https://github.com/easy-coding-standard/easy-coding-standard) - Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer
 * [symplify/phpstan-rules](https://github.com/symplify/phpstan-rules) - Set of Symplify rules for PHPStan
+* [symplify/rule-doc-generator-contracts](https://github.com/symplify/rule-doc-generator-contracts) - Contracts for production code of RuleDocGenerator
 * [symplify/vendor-patches](https://github.com/symplify/vendor-patches) - Generate vendor patches for packages with single command
 * [thedoctor0/laravel-factory-generator](https://github.com/TheDoctor0/laravel-factory-generator) - Automatically generate Laravel factories for your models.
 * [tomasvotruba/class-leak](https://github.com/TomasVotruba/class-leak) - Detect leaking classes
@@ -785,7 +789,8 @@ app/
 |   |   `-- CallbackFilter.php
 |   |-- Rectors/
 |   |   |-- ClassHandleMethodRector.php
-|   |   `-- RenameToPsrNameRector.php
+|   |   |-- RenameToPsrNameRector.php
+|   |   `-- rector-rules-overview.md
 |   |-- Signers/
 |   |   |-- HmacSigner.php
 |   |   `-- Utils.php
@@ -822,7 +827,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-63 directories, 295 files
+63 directories, 296 files
 
 ```
 

@@ -273,6 +273,7 @@
         "symfony/thanks": "^1.4",
         "symplify/easy-coding-standard": "^12.5",
         "symplify/phpstan-rules": "^14.6",
+        "symplify/rule-doc-generator-contracts": "^11.2",
         "symplify/vendor-patches": "^11.5",
         "thedoctor0/laravel-factory-generator": "^1.4",
         "tomasvotruba/class-leak": "^2.0",
@@ -498,7 +499,6 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
         ],
-        "docs-rector": "@php ./vendor/bin/rule-doc-generator generate src --output-file=docs/rector_rules_overview.md --ansi -vv",
         "env-put-composer-memory-unlimited": "@putenv COMPOSER_MEMORY_LIMIT=-1",
         "env-put-php": [
             "@putenv PHP73=/opt/homebrew/opt/php@7.3/bin/php",
@@ -603,6 +603,9 @@
         "release-patch-dry-run": "@release-patch --dry-run",
         "roave-infection-static-analysis-plugin": "@php ./vendor/bin/roave-infection-static-analysis-plugin --psalm-config=psalm.xml.dist",
         "roave-no-leaks": "@php ./vendor/bin/roave-no-leaks",
+        "rule-doc": "@php ./rule-doc-generator generate --ansi -vv",
+        "rule-doc-rector": "@rule-doc app/Support/Rectors/ --categorize=rector --output-file=app/Support/Rectors/rector-rules-overview.md",
+        "rule-doc-validate": "@php ./rule-doc-generator validate --ansi -vv app/Support/",
         "sk": "@php ./vendor/bin/swiss-knife --ansi -vv",
         "sk-alice-yaml-fixtures-to-php": "@sk alice-yaml-fixtures-to-php --help",
         "sk-check-commented-code": "@sk check-commented-code app/ routes/ --line-limit=20",

@@ -45,13 +45,14 @@ use PhpParser\Node\Stmt\TraitUse;
 use PhpParser\Node\Stmt\UseUse;
 use Rector\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Rector\AbstractRector;
+use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Webmozart\Assert\Assert;
 
-final class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface
+final class RenameToPsrNameRector extends AbstractRector implements ConfigurableRectorInterface, DocumentedRuleInterface
 {
     /**
      * @var list<string>
@@ -249,7 +250,10 @@ final class RenameToPsrNameRector extends AbstractRector implements Configurable
                         method_exists($object, 'methodName');
                         property_exists($object, 'propertyName');
                         CODE_SAMPLE,
-                    ['exceptName']
+                    [
+                        '_*',
+                        '*_',
+                    ]
                 ),
             ]
         );
