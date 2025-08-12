@@ -333,6 +333,10 @@
             "target-directory": "vendor-bin"
         },
         "composer-attribute-collector": {
+            "exclude": [
+                "app/Support/PhpCsFixer/",
+                "{vendor}/symplify/rule-doc-generator/"
+            ],
             "include": [
                 "app/"
             ]
@@ -494,6 +498,7 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
         ],
+        "docs-rector": "@php ./vendor/bin/rule-doc-generator generate src --output-file=docs/rector_rules_overview.md --ansi -vv",
         "env-put-composer-memory-unlimited": "@putenv COMPOSER_MEMORY_LIMIT=-1",
         "env-put-php": [
             "@putenv PHP73=/opt/homebrew/opt/php@7.3/bin/php",

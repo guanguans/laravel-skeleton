@@ -6,7 +6,8 @@
     "require-dev": {
         "chrisdicarlo/laravel-config-checker": "^1.2",
         "enlightn/enlightn": "^2.10",
-        "php-cs-fixer/shim": "^3.82"
+        "php-cs-fixer/shim": "^3.82",
+        "symplify/rule-doc-generator": "^12.2"
     },
     "suggest": {
         "appstract/laravel-opcache": "Required to use the package [appstract/laravel-opcache]."

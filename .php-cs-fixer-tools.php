@@ -102,6 +102,7 @@ return (new Config)
                 '.chglog/CHANGELOG.tpl.md',
                 '/resources\/lang\/.*\.json$/',
                 'CHANGELOG.md',
+                'composer.json',
             ])
             ->name(array_unique(array_merge(...array_map(
                 fn (FixerInterface $fixer): array => array_map(

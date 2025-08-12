@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b76c262750e66bffaf7d304485b3513c",
+    "content-hash": "9d053b8d4cebe1c983682bbdcb83afeb",
     "packages": [
         {
             "name": "brick/math",
@@ -6585,6 +6585,54 @@
                 }
             ],
             "time": "2025-03-03T07:12:39+00:00"
+        },
+        {
+            "name": "symplify/rule-doc-generator",
+            "version": "12.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symplify/rule-doc-generator.git",
+                "reference": "0bed481b115cf801edff518ac0d27be2dd182f62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symplify/rule-doc-generator/zipball/0bed481b115cf801edff518ac0d27be2dd182f62",
+                "reference": "0bed481b115cf801edff518ac0d27be2dd182f62",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "bin": [
+                "bin/rule-doc-generator"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Documentation generator for coding standard or static analysis rules",
+            "support": {
+                "issues": "https://github.com/symplify/rule-doc-generator/issues",
+                "source": "https://github.com/symplify/rule-doc-generator/tree/12.2.5"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "abandoned": true,
+            "time": "2024-08-08T12:13:41+00:00"
         }
     ],
     "aliases": [],
