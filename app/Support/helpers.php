@@ -19,7 +19,7 @@ use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use PhpCsFixer\ExecutorWithoutErrorHandler;
+use Phrity\Util\ErrorHandler;
 use Symfony\Component\VarDumper\VarDumper;
 use Yiisoft\Injector\Injector;
 
@@ -90,6 +90,10 @@ if (!\function_exists('classes')) {
      * @see \get_declared_interfaces()
      * @see \get_declared_traits()
      * @see \DG\BypassFinals::enable()
+     * @see \Composer\Util\ErrorHandler
+     * @see \Monolog\ErrorHandler
+     * @see \PhpCsFixer\ExecutorWithoutErrorHandler
+     * @see \Phrity\Util\ErrorHandler
      *
      * @noinspection RedundantDocCommentTagInspection
      * @noinspection PhpDocSignatureIsNotCompleteInspection
@@ -120,7 +124,7 @@ if (!\function_exists('classes')) {
             )
             ->mapWithKeys(static function (string $file, string $class): array {
                 try {
-                    // return [$class => ExecutorWithoutErrorHandler::execute(static fn () => new ReflectionClass($class))];
+                    // return [$class => (new ErrorHandler)->with(static fn () => new ReflectionClass($class))];
                     return [$class => new ReflectionClass($class)];
                 } catch (Throwable $throwable) {
                     return [$class => $throwable];
