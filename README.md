@@ -363,6 +363,7 @@ composer zh-lint
 * [vectorface/whip](https://github.com/Vectorface/whip) - A PHP class for retrieving accurate IP address information for the client.
 * [vinkla/hashids](https://github.com/vinkla/laravel-hashids) - A Hashids bridge for Laravel
 * [watson/validating](https://github.com/dwightwatson/validating) - Eloquent model validating trait.
+* [wendelladriel/laravel-lift](https://github.com/WendellAdriel/laravel-lift) - Take your Eloquent Models to the next level
 * [wendelladriel/laravel-validated-dto](https://github.com/WendellAdriel/laravel-validated-dto) - Data Transfer Objects with validation for Laravel applications
 * [wikimedia/composer-merge-plugin](https://github.com/wikimedia/composer-merge-plugin) - Composer plugin to merge multiple composer.json files
 * [wireui/wireui](https://github.com/wireui/wireui) - TallStack components

@@ -15,4 +15,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-final class DatabaseNotification extends \Illuminate\Notifications\DatabaseNotification {}
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+final class DatabaseNotification extends \Illuminate\Notifications\DatabaseNotification
+{
+    use HasFactory;
+}

@@ -16,10 +16,12 @@ namespace App\Console\Commands;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Pluralizer;
 use Illuminate\Support\Str;
+use Illuminate\Support\Traits\ForwardsCalls;
 use Symfony\Component\String\Inflector\EnglishInflector;
 
 final class InflectorCommand extends Command
 {
+    use ForwardsCalls;
     protected $signature = 'inflector {phrase? : The word or phrase to be inflected}';
     protected $description = 'Inflector pluralizes and singularizes English nouns.';
 
@@ -47,25 +49,21 @@ final class InflectorCommand extends Command
 
                 return collect('all' === $type ? \array_slice($types, 1) : [$type])
                     ->reduce(
-                        static fn (Collection $results, string $type) => $results->add([
+                        fn (Collection $results, string $type) => $results->add([
                             'type' => $type,
                             'result' => Str::of($type)
                                 ->explode(':', 2)
                                 ->pipe(
-                                    static fn (Collection $parts): mixed => \is_array($result = \call_user_func(
-                                        [
-                                            app(
-                                                [
-                                                    'Laravel' => Pluralizer::class,
-                                                    'Symfony' => EnglishInflector::class,
-                                                ][$parts->first()]
-                                            ),
-                                            $parts->last(),
-                                        ],
-                                        $phrase
-                                    ))
-                                        ? implode('、', $result)
-                                        : $result
+                                    fn (Collection $parts): mixed => \is_array($result = $this->forwardCallTo(
+                                        app(
+                                            [
+                                                'Laravel' => Pluralizer::class,
+                                                'Symfony' => EnglishInflector::class,
+                                            ][$parts->first()]
+                                        ),
+                                        $parts->last(),
+                                        [$phrase]
+                                    )) ? implode('、', $result) : $result
                                 ),
                         ]),
                         collect()

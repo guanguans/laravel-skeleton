@@ -13,10 +13,13 @@ declare(strict_types=1);
 
 namespace App\Models\Pivots;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
 final class MorphPivotWithCreatorPivot extends MorphPivot
 {
+    use HasFactory;
+
     public function fill(array $attributes): self
     {
         return parent::fill([...$attributes, 'creator_id' => $attributes['creator_id'] ?? auth()->id()]);
