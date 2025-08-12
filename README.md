@@ -137,9 +137,9 @@ composer release-patch
 composer release-patch-dry-run
 composer roave-infection-static-analysis-plugin
 composer roave-no-leaks
-composer rule-docs
-composer rule-docs-rector
-composer rule-docs-validate
+composer rule-doc
+composer rule-doc-rector
+composer rule-doc-rector-validate
 composer sk
 composer sk-alice-yaml-fixtures-to-php
 composer sk-check-commented-code
