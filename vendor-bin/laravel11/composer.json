@@ -1,8 +1,7 @@
 {
     "require": {
         "stechstudio/laravel-zipstream": "^5.4",
-        "stillat/blade-directives": "^1.2",
-        "wendelladriel/laravel-lift": "^0.15"
+        "stillat/blade-directives": "^1.2"
     },
     "require-dev": {
         "chrisdicarlo/laravel-config-checker": "^1.2",

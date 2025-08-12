@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "329e63ac1c7f71103bde97d9555b3974",
+    "content-hash": "47d7c3fe5034aca8084493670790c90a",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -4370,33 +4370,32 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.0.10",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "5817d0659c5b50c9b950feb9af7b9668e2c436bc"
+                "reference": "6d6c96277ea252fc1304627204c3d5e6e15faa3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/5817d0659c5b50c9b950feb9af7b9668e2c436bc",
-                "reference": "5817d0659c5b50c9b950feb9af7b9668e2c436bc",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/6d6c96277ea252fc1304627204c3d5e6e15faa3b",
+                "reference": "6d6c96277ea252fc1304627204c3d5e6e15faa3b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^11.0",
-                "phpstan/phpstan": "^1.8",
-                "phpstan/phpstan-phpunit": "^1.1",
-                "phpstan/phpstan-strict-rules": "^1.3",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "vimeo/psalm": "^4.25 || ^5.4"
+                "doctrine/coding-standard": "^12.0 || ^13.0",
+                "phpstan/phpstan": "^1.12 || ^2.0",
+                "phpstan/phpstan-phpunit": "^1.4 || ^2.0",
+                "phpstan/phpstan-strict-rules": "^1.6 || ^2.0",
+                "phpunit/phpunit": "^8.5 || ^12.2"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Inflector\\": "lib/Doctrine/Inflector"
+                    "Doctrine\\Inflector\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4441,7 +4440,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.0.10"
+                "source": "https://github.com/doctrine/inflector/tree/2.1.0"
             },
             "funding": [
                 {
@@ -4457,7 +4456,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-18T20:23:39+00:00"
+            "time": "2025-08-10T19:31:58+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -11921,16 +11920,16 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.2.3",
+            "version": "v2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
-                "reference": "0fb4c0b78eac393ad3a19a387af193573c310371"
+                "reference": "af81b5fd34c6490d5b5e05ed0f8140c0250e5069"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/flux/zipball/0fb4c0b78eac393ad3a19a387af193573c310371",
-                "reference": "0fb4c0b78eac393ad3a19a387af193573c310371",
+                "url": "https://api.github.com/repos/livewire/flux/zipball/af81b5fd34c6490d5b5e05ed0f8140c0250e5069",
+                "reference": "af81b5fd34c6490d5b5e05ed0f8140c0250e5069",
                 "shasum": ""
             },
             "require": {
@@ -11978,9 +11977,9 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.2.3"
+                "source": "https://github.com/livewire/flux/tree/v2.2.4"
             },
-            "time": "2025-07-11T00:25:51+00:00"
+            "time": "2025-08-09T01:46:51+00:00"
         },
         {
             "name": "livewire/livewire",
@@ -16173,16 +16172,16 @@
         },
         {
             "name": "phrity/util-errorhandler",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sirn-se/phrity-util-errorhandler.git",
-                "reference": "61813189e4525fde4aecad3df849829d526d6f76"
+                "reference": "9825f15ef9b4a93252ce53ca8962278832d834da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sirn-se/phrity-util-errorhandler/zipball/61813189e4525fde4aecad3df849829d526d6f76",
-                "reference": "61813189e4525fde4aecad3df849829d526d6f76",
+                "url": "https://api.github.com/repos/sirn-se/phrity-util-errorhandler/zipball/9825f15ef9b4a93252ce53ca8962278832d834da",
+                "reference": "9825f15ef9b4a93252ce53ca8962278832d834da",
                 "shasum": ""
             },
             "require": {
@@ -16219,9 +16218,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sirn-se/phrity-util-errorhandler/issues",
-                "source": "https://github.com/sirn-se/phrity-util-errorhandler/tree/1.2.0"
+                "source": "https://github.com/sirn-se/phrity-util-errorhandler/tree/1.2.1"
             },
-            "time": "2025-05-26T18:26:51+00:00"
+            "time": "2025-08-08T09:48:45+00:00"
         },
         {
             "name": "pion/laravel-chunk-upload",
@@ -27125,6 +27124,82 @@
             "time": "2022-06-03T18:03:27+00:00"
         },
         {
+            "name": "wendelladriel/laravel-lift",
+            "version": "v0.16.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WendellAdriel/laravel-lift.git",
+                "reference": "3ac4cf1e797f3f412066b99e88005e078092295d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/3ac4cf1e797f3f412066b99e88005e078092295d",
+                "reference": "3ac4cf1e797f3f412066b99e88005e078092295d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^11.0 || ^12.0",
+                "illuminate/support": "^11.0 || ^12.0",
+                "illuminate/validation": "^11.0 || ^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.24",
+                "orchestra/testbench": "^9.0 || ^10.0",
+                "pestphp/pest": "^3.0",
+                "pestphp/pest-plugin-faker": "^3.0",
+                "phpstan/phpstan": "^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "WendellAdriel\\Lift\\Providers\\LiftServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "WendellAdriel\\Lift\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wendell Adriel",
+                    "email": "wendelladriel.ti@gmail.com"
+                }
+            ],
+            "description": "Take your Eloquent Models to the next level",
+            "keywords": [
+                "attributes",
+                "casts",
+                "eloquent",
+                "laravel",
+                "model",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/WendellAdriel/laravel-lift/issues",
+                "source": "https://github.com/WendellAdriel/laravel-lift"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/wendelladriel",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/WendellAdriel",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-08-06T14:18:34+00:00"
+        },
+        {
             "name": "wendelladriel/laravel-validated-dto",
             "version": "v4.2.1",
             "source": {
@@ -29829,16 +29904,16 @@
         },
         {
             "name": "driftingly/rector-laravel",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/driftingly/rector-laravel.git",
-                "reference": "ac61de4f267c23249d175d7fc9149fd01528567d"
+                "reference": "5be95811801fc06126dd844beaeb6a41721ba3d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driftingly/rector-laravel/zipball/ac61de4f267c23249d175d7fc9149fd01528567d",
-                "reference": "ac61de4f267c23249d175d7fc9149fd01528567d",
+                "url": "https://api.github.com/repos/driftingly/rector-laravel/zipball/5be95811801fc06126dd844beaeb6a41721ba3d3",
+                "reference": "5be95811801fc06126dd844beaeb6a41721ba3d3",
                 "shasum": ""
             },
             "require": {
@@ -29858,9 +29933,9 @@
             "description": "Rector upgrades rules for Laravel Framework",
             "support": {
                 "issues": "https://github.com/driftingly/rector-laravel/issues",
-                "source": "https://github.com/driftingly/rector-laravel/tree/2.0.5"
+                "source": "https://github.com/driftingly/rector-laravel/tree/2.0.6"
             },
-            "time": "2025-05-14T17:30:41+00:00"
+            "time": "2025-08-08T22:10:01+00:00"
         },
         {
             "name": "ergebnis/composer-normalize",
@@ -30384,23 +30459,23 @@
         },
         {
             "name": "ergebnis/php-cs-fixer-config",
-            "version": "6.50.0",
+            "version": "6.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/php-cs-fixer-config.git",
-                "reference": "9fb26b410c509a056487c0a75cd6a5a64c75a076"
+                "reference": "f02ec4b48a7fbe3c08c1082d4dfa375fd28ec1fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/9fb26b410c509a056487c0a75cd6a5a64c75a076",
-                "reference": "9fb26b410c509a056487c0a75cd6a5a64c75a076",
+                "url": "https://api.github.com/repos/ergebnis/php-cs-fixer-config/zipball/f02ec4b48a7fbe3c08c1082d4dfa375fd28ec1fd",
+                "reference": "f02ec4b48a7fbe3c08c1082d4dfa375fd28ec1fd",
                 "shasum": ""
             },
             "require": {
                 "erickskrauch/php-cs-fixer-custom-fixers": "~1.3.0",
                 "ext-filter": "*",
-                "friendsofphp/php-cs-fixer": "~3.84.0",
-                "kubawerlos/php-cs-fixer-custom-fixers": "~3.30.2",
+                "friendsofphp/php-cs-fixer": "~3.85.1",
+                "kubawerlos/php-cs-fixer-custom-fixers": "~3.31.0",
                 "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
             },
             "require-dev": {
@@ -30409,15 +30484,15 @@
                 "ergebnis/license": "^2.6.0",
                 "ergebnis/phpstan-rules": "^2.10.5",
                 "ergebnis/phpunit-slow-test-detector": "^2.19.1",
-                "ergebnis/rector-rules": "^1.4.0",
+                "ergebnis/rector-rules": "^1.5.1",
                 "fakerphp/faker": "^1.24.1",
                 "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan": "^2.1.17",
+                "phpstan/phpstan": "^2.1.22",
                 "phpstan/phpstan-deprecation-rules": "^2.0.3",
-                "phpstan/phpstan-phpunit": "^2.0.6",
-                "phpstan/phpstan-strict-rules": "^2.0.4",
+                "phpstan/phpstan-phpunit": "^2.0.7",
+                "phpstan/phpstan-strict-rules": "^2.0.6",
                 "phpunit/phpunit": "^9.6.22",
-                "rector/rector": "^2.1.1",
+                "rector/rector": "^2.1.2",
                 "symfony/filesystem": "^5.0.0 || ^6.0.0",
                 "symfony/process": "^5.0.0 || ^6.0.0"
             },
@@ -30451,7 +30526,7 @@
                 "security": "https://github.com/ergebnis/php-cs-fixer-config/blob/main/.github/SECURITY.md",
                 "source": "https://github.com/ergebnis/php-cs-fixer-config"
             },
-            "time": "2025-07-16T09:36:03+00:00"
+            "time": "2025-08-09T08:40:38+00:00"
         },
         {
             "name": "ergebnis/rector-rules",
@@ -30711,16 +30786,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.18.3",
+            "version": "2.18.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "59a123a3d459c5a23055802237cb317f609867e5"
+                "reference": "d2102955e48b9fd9ab24280a7ad12ed552752c4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/59a123a3d459c5a23055802237cb317f609867e5",
-                "reference": "59a123a3d459c5a23055802237cb317f609867e5",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/d2102955e48b9fd9ab24280a7ad12ed552752c4d",
+                "reference": "d2102955e48b9fd9ab24280a7ad12ed552752c4d",
                 "shasum": ""
             },
             "require": {
@@ -30770,7 +30845,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.18.3"
+                "source": "https://github.com/filp/whoops/tree/2.18.4"
             },
             "funding": [
                 {
@@ -30778,24 +30853,24 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-16T00:02:10+00:00"
+            "time": "2025-08-08T12:00:00+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.84.0",
+            "version": "v3.85.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca"
+                "reference": "2fb6d7f6c3398dca5786a1635b27405d73a417ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/38dad0767bf2a9b516b976852200ae722fe984ca",
-                "reference": "38dad0767bf2a9b516b976852200ae722fe984ca",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/2fb6d7f6c3398dca5786a1635b27405d73a417ba",
+                "reference": "2fb6d7f6c3398dca5786a1635b27405d73a417ba",
                 "shasum": ""
             },
             "require": {
-                "clue/ndjson-react": "^1.0",
+                "clue/ndjson-react": "^1.3",
                 "composer/semver": "^3.4",
                 "composer/xdebug-handler": "^3.0.5",
                 "ext-filter": "*",
@@ -30805,12 +30880,12 @@
                 "fidry/cpu-core-counter": "^1.2",
                 "php": "^7.4 || ^8.0",
                 "react/child-process": "^0.6.6",
-                "react/event-loop": "^1.0",
-                "react/promise": "^2.11 || ^3.0",
-                "react/socket": "^1.0",
-                "react/stream": "^1.0",
+                "react/event-loop": "^1.5",
+                "react/promise": "^3.2",
+                "react/socket": "^1.16",
+                "react/stream": "^1.4",
                 "sebastian/diff": "^4.0.6 || ^5.1.1 || ^6.0.2 || ^7.0",
-                "symfony/console": "^5.4.45 || ^6.4.13 || ^7.0",
+                "symfony/console": "^5.4.47 || ^6.4.13 || ^7.0",
                 "symfony/event-dispatcher": "^5.4.45 || ^6.4.13 || ^7.0",
                 "symfony/filesystem": "^5.4.45 || ^6.4.13 || ^7.0",
                 "symfony/finder": "^5.4.45 || ^6.4.17 || ^7.0",
@@ -30875,7 +30950,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.84.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.85.1"
             },
             "funding": [
                 {
@@ -30883,7 +30958,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-15T18:21:57+00:00"
+            "time": "2025-07-29T22:22:50+00:00"
         },
         {
             "name": "guanguans/ai-commit",
@@ -31992,16 +32067,16 @@
         },
         {
             "name": "kitloong/laravel-migrations-generator",
-            "version": "v7.1.2",
+            "version": "v7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kitloong/laravel-migrations-generator.git",
-                "reference": "e46bdbe9308c211fd896cdc834b28d6b9f0dce3f"
+                "reference": "37f29a99671a5dde3a598e40157e2e245f077878"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/e46bdbe9308c211fd896cdc834b28d6b9f0dce3f",
-                "reference": "e46bdbe9308c211fd896cdc834b28d6b9f0dce3f",
+                "url": "https://api.github.com/repos/kitloong/laravel-migrations-generator/zipball/37f29a99671a5dde3a598e40157e2e245f077878",
+                "reference": "37f29a99671a5dde3a598e40157e2e245f077878",
                 "shasum": ""
             },
             "require": {
@@ -32054,7 +32129,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kitloong/laravel-migrations-generator/issues",
-                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.1.2"
+                "source": "https://github.com/kitloong/laravel-migrations-generator/tree/v7.2.0"
             },
             "funding": [
                 {
@@ -32066,7 +32141,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-27T12:06:46+00:00"
+            "time": "2025-08-10T07:31:19+00:00"
         },
         {
             "name": "knuckleswtf/scribe",
@@ -32164,22 +32239,22 @@
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
-            "version": "v3.30.2",
+            "version": "v3.31.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers.git",
-                "reference": "79e14df217883c32bfdf2205b5eef771cf68bfb6"
+                "reference": "207182775ff9121dafc1c8c3b28e9d3f2f567fe1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/79e14df217883c32bfdf2205b5eef771cf68bfb6",
-                "reference": "79e14df217883c32bfdf2205b5eef771cf68bfb6",
+                "url": "https://api.github.com/repos/kubawerlos/php-cs-fixer-custom-fixers/zipball/207182775ff9121dafc1c8c3b28e9d3f2f567fe1",
+                "reference": "207182775ff9121dafc1c8c3b28e9d3f2f567fe1",
                 "shasum": ""
             },
             "require": {
                 "ext-filter": "*",
                 "ext-tokenizer": "*",
-                "friendsofphp/php-cs-fixer": "^3.82",
+                "friendsofphp/php-cs-fixer": "^3.84",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
@@ -32204,7 +32279,7 @@
             "description": "A set of custom fixers for PHP CS Fixer",
             "support": {
                 "issues": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/issues",
-                "source": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/tree/v3.30.2"
+                "source": "https://github.com/kubawerlos/php-cs-fixer-custom-fixers/tree/v3.31.1"
             },
             "funding": [
                 {
@@ -32212,7 +32287,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-14T19:33:37+00:00"
+            "time": "2025-07-21T18:19:38+00:00"
         },
         {
             "name": "laracraft-tech/laravel-schema-rules",
@@ -32672,16 +32747,16 @@
         },
         {
             "name": "laravel-lang/http-statuses",
-            "version": "3.10.4",
+            "version": "3.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/http-statuses.git",
-                "reference": "97fdb638f95bf9ca8131cc887750d70980aa7be3"
+                "reference": "a4a5508088950a97058ab06e8f3587c611b97097"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/http-statuses/zipball/97fdb638f95bf9ca8131cc887750d70980aa7be3",
-                "reference": "97fdb638f95bf9ca8131cc887750d70980aa7be3",
+                "url": "https://api.github.com/repos/Laravel-Lang/http-statuses/zipball/a4a5508088950a97058ab06e8f3587c611b97097",
+                "reference": "a4a5508088950a97058ab06e8f3587c611b97097",
                 "shasum": ""
             },
             "require": {
@@ -32733,9 +32808,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Lang/http-statuses/issues",
-                "source": "https://github.com/Laravel-Lang/http-statuses/tree/3.10.4"
+                "source": "https://github.com/Laravel-Lang/http-statuses/tree/3.10.5"
             },
-            "time": "2025-06-23T09:39:16+00:00"
+            "time": "2025-08-10T12:13:52+00:00"
         },
         {
             "name": "laravel-lang/json-fallback",
@@ -32790,16 +32865,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "15.22.6",
+            "version": "15.22.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "ae837229304b25eb19c0fbfc0aa9b772b8110a97"
+                "reference": "cc45f0d1df17c3521429cfae9b78b42ae7b2ad32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/ae837229304b25eb19c0fbfc0aa9b772b8110a97",
-                "reference": "ae837229304b25eb19c0fbfc0aa9b772b8110a97",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/cc45f0d1df17c3521429cfae9b78b42ae7b2ad32",
+                "reference": "cc45f0d1df17c3521429cfae9b78b42ae7b2ad32",
                 "shasum": ""
             },
             "require": {
@@ -32849,7 +32924,7 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2025-08-06T11:03:57+00:00"
+            "time": "2025-08-09T14:38:01+00:00"
         },
         {
             "name": "laravel-lang/locale-list",
@@ -37365,16 +37440,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "6.3.1",
+            "version": "6.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "24b8fbc2c8e201bb1308e7b05148d6ab393b6959"
+                "reference": "85c77556683e6eee4323e4c5468641ca0237e2e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/24b8fbc2c8e201bb1308e7b05148d6ab393b6959",
-                "reference": "24b8fbc2c8e201bb1308e7b05148d6ab393b6959",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/85c77556683e6eee4323e4c5468641ca0237e2e8",
+                "reference": "85c77556683e6eee4323e4c5468641ca0237e2e8",
                 "shasum": ""
             },
             "require": {
@@ -37433,15 +37508,27 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
                 "security": "https://github.com/sebastianbergmann/comparator/security/policy",
-                "source": "https://github.com/sebastianbergmann/comparator/tree/6.3.1"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/6.3.2"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/sebastian/comparator",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-03-07T06:57:01+00:00"
+            "time": "2025-08-10T08:07:46+00:00"
         },
         {
             "name": "sebastian/complexity",
@@ -38022,16 +38109,16 @@
         },
         {
             "name": "sebastian/type",
-            "version": "5.1.2",
+            "version": "5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "a8a7e30534b0eb0c77cd9d07e82de1a114389f5e"
+                "reference": "f77d2d4e78738c98d9a68d2596fe5e8fa380f449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/a8a7e30534b0eb0c77cd9d07e82de1a114389f5e",
-                "reference": "a8a7e30534b0eb0c77cd9d07e82de1a114389f5e",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/f77d2d4e78738c98d9a68d2596fe5e8fa380f449",
+                "reference": "f77d2d4e78738c98d9a68d2596fe5e8fa380f449",
                 "shasum": ""
             },
             "require": {
@@ -38067,15 +38154,27 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/type/issues",
                 "security": "https://github.com/sebastianbergmann/type/security/policy",
-                "source": "https://github.com/sebastianbergmann/type/tree/5.1.2"
+                "source": "https://github.com/sebastianbergmann/type/tree/5.1.3"
             },
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
                     "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/sebastian/type",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2025-03-18T13:35:50+00:00"
+            "time": "2025-08-09T06:55:48+00:00"
         },
         {
             "name": "sebastian/version",
