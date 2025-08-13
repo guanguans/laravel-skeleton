@@ -34106,16 +34106,16 @@
         },
         {
             "name": "laravel/roster",
-            "version": "v0.2.2",
+            "version": "v0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/roster.git",
-                "reference": "67a39bce557a6cb7e7205a2a9d6c464f0e72956f"
+                "reference": "caeed7609b02c00c3f1efec52812d8d87c5d4096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/roster/zipball/67a39bce557a6cb7e7205a2a9d6c464f0e72956f",
-                "reference": "67a39bce557a6cb7e7205a2a9d6c464f0e72956f",
+                "url": "https://api.github.com/repos/laravel/roster/zipball/caeed7609b02c00c3f1efec52812d8d87c5d4096",
+                "reference": "caeed7609b02c00c3f1efec52812d8d87c5d4096",
                 "shasum": ""
             },
             "require": {
@@ -34123,7 +34123,8 @@
                 "illuminate/contracts": "^10.0|^11.0|^12.0",
                 "illuminate/routing": "^10.0|^11.0|^12.0",
                 "illuminate/support": "^10.0|^11.0|^12.0",
-                "php": "^8.1|^8.2"
+                "php": "^8.1|^8.2",
+                "symfony/yaml": "^6.4|^7.2"
             },
             "require-dev": {
                 "laravel/pint": "^1.14",
@@ -34162,7 +34163,7 @@
                 "issues": "https://github.com/laravel/roster/issues",
                 "source": "https://github.com/laravel/roster"
             },
-            "time": "2025-07-24T12:31:13+00:00"
+            "time": "2025-08-13T15:00:25+00:00"
         },
         {
             "name": "laravel/sail",
