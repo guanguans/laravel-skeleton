@@ -244,7 +244,7 @@ $status = (new SingleCommandApplication)
                 ?string $cwd = null,
                 ?array $env = null,
                 mixed $input = null,
-                ?float $timeout = 300
+                ?float $timeout = 600
             ): Process {
                 $additionalOptions = [
                     '--no-interaction',
@@ -279,27 +279,18 @@ $status = (new SingleCommandApplication)
 
             private function formatDiff(string $diff): string
             {
-                $lines = explode(
-                    "\n",
-                    $diff,
+                $lines = explode("\n", $diff);
+
+                $formatted = array_map(
+                    static fn (string $line): string => preg_replace(
+                        ['/^(\+.*)$/', '/^(-.*)$/'],
+                        ['<fg=green>$1</>', '<fg=red>$1</>'],
+                        $line,
+                    ),
+                    $lines
                 );
 
-                $formatted = array_map(static fn (string $line): string => preg_replace(
-                    [
-                        '/^(\+.*)$/',
-                        '/^(-.*)$/',
-                    ],
-                    [
-                        '<fg=green>$1</>',
-                        '<fg=red>$1</>',
-                    ],
-                    $line,
-                ), $lines);
-
-                return implode(
-                    "\n",
-                    $formatted,
-                );
+                return implode("\n", $formatted);
             }
         })();
     })

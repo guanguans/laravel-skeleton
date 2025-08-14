@@ -404,10 +404,12 @@ composer zh-lint
 * [larastan/larastan](https://github.com/larastan/larastan) - Larastan - Discover bugs in your code without running it. A phpstan/phpstan extension for Laravel
 * [laravel-lang/common](https://github.com/Laravel-Lang/common) - Easily connect the necessary language packs to the application
 * [laravel-shift/factory-generator](https://github.com/laravel-shift/factory-generator) - Generate factories from existing models
+* [laravel/boost](https://github.com/laravel/boost) - Laravel Boost accelerates AI-assisted development to generate high-quality, Laravel-specific code.
 * [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing) - Provides backwards compatibility for BrowserKit testing in the latest Laravel release.
 * [laravel/dusk](https://github.com/laravel/dusk) - Laravel Dusk provides simple end-to-end testing and browser automation.
 * [laravel/envoy](https://github.com/laravel/envoy) - Elegant SSH tasks for PHP.
 * [laravel/facade-documenter](https://github.com/laravel/facade-documenter/tree/main)
+* [laravel/mcp](https://github.com/laravel/mcp) - The easiest way to add MCP servers to your Laravel app.
 * [laravel/pail](https://github.com/laravel/pail) - Easily delve into your Laravel application's log files directly from the command line.
 * [laravel/pint](https://github.com/laravel/pint) - An opinionated code formatter for PHP.
 * [laravel/roster](https://github.com/laravel/roster) - Detect packages & approaches in use within a Laravel project
