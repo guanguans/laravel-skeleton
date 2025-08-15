@@ -223,7 +223,6 @@ composer zh-lint
 * [dragon-code/laravel-data-dumper](https://github.com/TheDragonCode/laravel-data-dumper) - Adding data from certain tables when executing the `php artisan schema:dump` console command
 * [dragon-code/support](https://github.com/TheDragonCode/support) - Support package is a collection of helpers and tools for any project.
 * [dyrynda/laravel-cascade-soft-deletes](https://github.com/michaeldyrynda/laravel-cascade-soft-deletes) - Cascading deletes for Eloquent models that implement soft deletes
-* [echolabsdev/prism](https://github.com/prism-php/prism) - A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
 * [elao/enum](https://github.com/Elao/PhpEnums) - Extended PHP enums capabilities and frameworks integrations
 * [elastic/ecs-logging](https://github.com/elastic/ecs-logging-php) - Format and enrich your log files in the elastic common schema
 * [elasticsearch/elasticsearch](https://github.com/elastic/elasticsearch-php) - PHP Client for Elasticsearch
@@ -298,6 +297,7 @@ composer zh-lint
 * [phpyh/lru-memoizer](https://github.com/phpyh/lru-memoizer) - PHPyh LRU Memoizer
 * [pion/laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) - Service for chunked upload with several js providers
 * [prinsfrank/standards](https://github.com/PrinsFrank/standards) - A collection of standards as PHP Enums: ISO3166, ISO4217, ISO639...
+* [prism-php/prism](https://github.com/prism-php/prism) - A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
 * [proengsoft/laravel-jsvalidation](https://github.com/proengsoft/laravel-jsvalidation) - Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest
 * [propaganistas/laravel-disposable-email](https://github.com/Propaganistas/Laravel-Disposable-Email) - Disposable email validator
 * [propaganistas/laravel-phone](https://github.com/Propaganistas/Laravel-Phone) - Adds phone number functionality to Laravel based on Google's libphonenumber API.

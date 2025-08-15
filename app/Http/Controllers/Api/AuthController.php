@@ -40,7 +40,10 @@ final class AuthController extends Controller
     {
         $validated = $request->validated();
 
-        $users = User::query()->simplePaginate($validated['per_page'] ?? null)->withQueryString();
+        $users = User::query()
+            ->simplePaginate($validated['per_page'] ?? null)
+            ->appends([])
+            ->withQueryString();
 
         return $this->apiResponse()->success(UserCollection::make($users));
     }
