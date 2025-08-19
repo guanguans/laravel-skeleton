@@ -19722,16 +19722,16 @@
         },
         {
             "name": "spatie/laravel-collection-macros",
-            "version": "8.0.0",
+            "version": "8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-collection-macros.git",
-                "reference": "d3a4496c9363bbf71ed0bcf12c539a117466b7ac"
+                "reference": "a2c1f4e4df5b61b1d9228835f3c413cc2672bb4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-collection-macros/zipball/d3a4496c9363bbf71ed0bcf12c539a117466b7ac",
-                "reference": "d3a4496c9363bbf71ed0bcf12c539a117466b7ac",
+                "url": "https://api.github.com/repos/spatie/laravel-collection-macros/zipball/a2c1f4e4df5b61b1d9228835f3c413cc2672bb4d",
+                "reference": "a2c1f4e4df5b61b1d9228835f3c413cc2672bb4d",
                 "shasum": ""
             },
             "require": {
@@ -19789,7 +19789,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-collection-macros/tree/8.0.0"
+                "source": "https://github.com/spatie/laravel-collection-macros/tree/8.0.1"
             },
             "funding": [
                 {
@@ -19797,7 +19797,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-17T09:53:23+00:00"
+            "time": "2025-08-18T07:40:01+00:00"
         },
         {
             "name": "spatie/laravel-cookie-consent",
