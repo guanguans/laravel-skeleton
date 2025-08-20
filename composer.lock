@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f54a216737f60981ad500010cec1850",
+    "content-hash": "1e7893d8d7e0109173e33f381c1aa3b5",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -27185,16 +27185,16 @@
         },
         {
             "name": "wendelladriel/laravel-lift",
-            "version": "v0.16.0",
+            "version": "v0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WendellAdriel/laravel-lift.git",
-                "reference": "3ac4cf1e797f3f412066b99e88005e078092295d"
+                "reference": "9d314ccb68342cb6762d5ae565bcc6e5956d1d7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/3ac4cf1e797f3f412066b99e88005e078092295d",
-                "reference": "3ac4cf1e797f3f412066b99e88005e078092295d",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-lift/zipball/9d314ccb68342cb6762d5ae565bcc6e5956d1d7e",
+                "reference": "9d314ccb68342cb6762d5ae565bcc6e5956d1d7e",
                 "shasum": ""
             },
             "require": {
@@ -27257,7 +27257,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-06T14:18:34+00:00"
+            "time": "2025-08-20T10:09:57+00:00"
         },
         {
             "name": "wendelladriel/laravel-validated-dto",
