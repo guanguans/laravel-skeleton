@@ -37025,16 +37025,16 @@
         },
         {
             "name": "rector/jack",
-            "version": "0.2.7",
+            "version": "0.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/jack.git",
-                "reference": "7ad22cde514c09779e6e6e9f851d3a161a462eee"
+                "reference": "6e1d62bdeebf38f44caf03b35058bbc42bd599cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/jack/zipball/7ad22cde514c09779e6e6e9f851d3a161a462eee",
-                "reference": "7ad22cde514c09779e6e6e9f851d3a161a462eee",
+                "url": "https://api.github.com/repos/rectorphp/jack/zipball/6e1d62bdeebf38f44caf03b35058bbc42bd599cb",
+                "reference": "6e1d62bdeebf38f44caf03b35058bbc42bd599cb",
                 "shasum": ""
             },
             "require": {
@@ -37056,7 +37056,7 @@
             "description": "Swiss knife in pocket of every upgrade architect",
             "support": {
                 "issues": "https://github.com/rectorphp/jack/issues",
-                "source": "https://github.com/rectorphp/jack/tree/0.2.7"
+                "source": "https://github.com/rectorphp/jack/tree/0.2.9"
             },
             "funding": [
                 {
@@ -37068,7 +37068,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-15T14:47:56+00:00"
+            "time": "2025-08-19T08:57:35+00:00"
         },
         {
             "name": "rector/rector",
