@@ -31668,16 +31668,16 @@
         },
         {
             "name": "ion-bazan/composer-diff",
-            "version": "v1.12.1",
+            "version": "v1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/IonBazan/composer-diff.git",
-                "reference": "46a16883cd662f78045e80e89d0e2b2e1e5cf7cf"
+                "reference": "8907711f0bf74677041f7b356da2367afea44a53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IonBazan/composer-diff/zipball/46a16883cd662f78045e80e89d0e2b2e1e5cf7cf",
-                "reference": "46a16883cd662f78045e80e89d0e2b2e1e5cf7cf",
+                "url": "https://api.github.com/repos/IonBazan/composer-diff/zipball/8907711f0bf74677041f7b356da2367afea44a53",
+                "reference": "8907711f0bf74677041f7b356da2367afea44a53",
                 "shasum": ""
             },
             "require": {
@@ -31687,8 +31687,8 @@
             },
             "require-dev": {
                 "composer/composer": "^1.1 || ^2.0",
-                "symfony/console": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/phpunit-bridge": "^4.2 || ^5.0 || ^6.0 || ^7.0"
+                "symfony/console": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0",
+                "symfony/phpunit-bridge": "^4.2 || ^5.0 || ^6.0 || ^7.0 || ^8.0"
             },
             "suggest": {
                 "composer/composer": "To use the binary without composer runtime",
@@ -31729,7 +31729,7 @@
             ],
             "support": {
                 "issues": "https://github.com/IonBazan/composer-diff/issues",
-                "source": "https://github.com/IonBazan/composer-diff/tree/v1.12.1"
+                "source": "https://github.com/IonBazan/composer-diff/tree/v1.13.0"
             },
             "funding": [
                 {
@@ -31737,7 +31737,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-22T16:53:41+00:00"
+            "time": "2025-08-21T15:42:55+00:00"
         },
         {
             "name": "jasonmccreary/laravel-test-assertions",
