@@ -6787,16 +6787,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c"
+                "reference": "481557b130ef3790cf82b713667b43030dc9c957"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/7c69f28996b0a6920945dd20b3857e499d9ca96c",
-                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/481557b130ef3790cf82b713667b43030dc9c957",
+                "reference": "481557b130ef3790cf82b713667b43030dc9c957",
                 "shasum": ""
             },
             "require": {
@@ -6804,7 +6804,7 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
+                "phpunit/phpunit": "^8.5.44 || ^9.6.25"
             },
             "type": "library",
             "extra": {
@@ -6850,7 +6850,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.2.0"
+                "source": "https://github.com/guzzle/promises/tree/2.3.0"
             },
             "funding": [
                 {
@@ -6866,7 +6866,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-27T13:27:01+00:00"
+            "time": "2025-08-22T14:34:08+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -6986,16 +6986,16 @@
         },
         {
             "name": "guzzlehttp/uri-template",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/uri-template.git",
-                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2"
+                "reference": "4f4bbd4e7172148801e76e3decc1e559bdee34e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/30e286560c137526eccd4ce21b2de477ab0676d2",
-                "reference": "30e286560c137526eccd4ce21b2de477ab0676d2",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/4f4bbd4e7172148801e76e3decc1e559bdee34e1",
+                "reference": "4f4bbd4e7172148801e76e3decc1e559bdee34e1",
                 "shasum": ""
             },
             "require": {
@@ -7004,7 +7004,7 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^8.5.36 || ^9.6.15",
+                "phpunit/phpunit": "^8.5.44 || ^9.6.25",
                 "uri-template/tests": "1.0.0"
             },
             "type": "library",
@@ -7052,7 +7052,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/uri-template/issues",
-                "source": "https://github.com/guzzle/uri-template/tree/v1.0.4"
+                "source": "https://github.com/guzzle/uri-template/tree/v1.0.5"
             },
             "funding": [
                 {
@@ -7068,7 +7068,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-03T10:55:03+00:00"
+            "time": "2025-08-22T14:27:06+00:00"
         },
         {
             "name": "hamidrezaniazi/pecs",
@@ -29324,16 +29324,16 @@
         },
         {
             "name": "defstudio/pest-plugin-laravel-expectations",
-            "version": "v2.5.1",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/defstudio/pest-plugin-laravel-expectations.git",
-                "reference": "c903ba55387405f653d21cfa84775e0a602e2d28"
+                "reference": "4f28efa1a6edb3d97ab48b1cde85d6d85560de8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/defstudio/pest-plugin-laravel-expectations/zipball/c903ba55387405f653d21cfa84775e0a602e2d28",
-                "reference": "c903ba55387405f653d21cfa84775e0a602e2d28",
+                "url": "https://api.github.com/repos/defstudio/pest-plugin-laravel-expectations/zipball/4f28efa1a6edb3d97ab48b1cde85d6d85560de8d",
+                "reference": "4f28efa1a6edb3d97ab48b1cde85d6d85560de8d",
                 "shasum": ""
             },
             "require": {
@@ -29342,9 +29342,9 @@
                 "illuminate/http": "^10.0|^11.0.3|^12.0",
                 "illuminate/support": "^10.0|^11.0.3|^12.0",
                 "illuminate/testing": "^10.0|^11.0.3|^12.0",
-                "pestphp/pest": "^2.0|^3.0",
-                "pestphp/pest-plugin": "^2.0|^3.0",
-                "pestphp/pest-plugin-laravel": "^2.0|^3.0",
+                "pestphp/pest": "^2.0|^3.0|^4.0",
+                "pestphp/pest-plugin": "^2.0|^3.0|^4.0",
+                "pestphp/pest-plugin-laravel": "^2.0|^3.0|^4.0",
                 "php": "^8.1.0"
             },
             "require-dev": {
@@ -29405,7 +29405,7 @@
             ],
             "support": {
                 "issues": "https://github.com/defstudio/pest-plugin-laravel-expectations/issues",
-                "source": "https://github.com/defstudio/pest-plugin-laravel-expectations/tree/v2.5.1"
+                "source": "https://github.com/defstudio/pest-plugin-laravel-expectations/tree/v2.6.0"
             },
             "funding": [
                 {
@@ -29417,7 +29417,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-19T16:11:04+00:00"
+            "time": "2025-08-22T11:12:22+00:00"
         },
         {
             "name": "deployer/deployer",
@@ -35284,20 +35284,20 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v3.8.3",
+            "version": "v3.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "165c879fe6e66926235d562123db206861aa6cc1"
+                "reference": "72cf695554420e21858cda831d5db193db102574"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/165c879fe6e66926235d562123db206861aa6cc1",
-                "reference": "165c879fe6e66926235d562123db206861aa6cc1",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/72cf695554420e21858cda831d5db193db102574",
+                "reference": "72cf695554420e21858cda831d5db193db102574",
                 "shasum": ""
             },
             "require": {
-                "brianium/paratest": "^7.8.3",
+                "brianium/paratest": "^7.8.4",
                 "nunomaduro/collision": "^8.8.2",
                 "nunomaduro/termwind": "^2.3.1",
                 "pestphp/pest-plugin": "^3.0.0",
@@ -35380,7 +35380,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v3.8.3"
+                "source": "https://github.com/pestphp/pest/tree/v3.8.4"
             },
             "funding": [
                 {
@@ -35392,7 +35392,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-19T10:11:21+00:00"
+            "time": "2025-08-20T19:12:42+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
