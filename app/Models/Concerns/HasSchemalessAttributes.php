@@ -37,7 +37,7 @@ trait HasSchemalessAttributes
     // }
 
     #[Scope]
-    public function withExtraAttributes(): Builder
+    protected function withExtraAttributes(): Builder
     {
         return $this->extra_attributes->modelScope();
     }

@@ -35,7 +35,7 @@ trait ForceUseIndexable
     /**
      * @param list<string>|string $index
      */
-    public function scopeUseIndex(Builder $query, array|string $index): Builder
+    protected function scopeUseIndex(Builder $query, array|string $index): Builder
     {
         $table = $this->getTable();
 
@@ -52,7 +52,7 @@ trait ForceUseIndexable
     /**
      * @param list<string>|string $index
      */
-    public function scopeForceIndex(Builder $query, array|string $index): Builder
+    protected function scopeForceIndex(Builder $query, array|string $index): Builder
     {
         $table = $this->getTable();
 
@@ -69,7 +69,7 @@ trait ForceUseIndexable
     /**
      * @param list<string>|string $index
      */
-    public function scopeIgnoreIndex(Builder $query, array|string $index): Builder
+    protected function scopeIgnoreIndex(Builder $query, array|string $index): Builder
     {
         $table = $this->getTable();
 

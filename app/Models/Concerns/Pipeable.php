@@ -49,7 +49,7 @@ trait Pipeable
      *
      * @throws \Throwable
      */
-    public function scopePipe(Builder $builder, ...$pipes): Builder
+    protected function scopePipe(Builder $builder, ...$pipes): Builder
     {
         array_unshift($pipes, static function (Builder $builder, $next): void {
             throw_unless(

@@ -29,7 +29,7 @@ trait Trashed
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function scopeTrashed(Builder $query): Builder
+    protected function scopeTrashed(Builder $query): Builder
     {
         if (!empty(Request::getFacadeRoot()->get('trashed')) && Request::getFacadeRoot()->get('trashed') === 'with') {
             return $query->withTrashed();
