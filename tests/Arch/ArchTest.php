@@ -41,7 +41,7 @@ use App\Support\Sse\CloseServerSentEventException;
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
-arch()->group(__DIR__, __FILE__)->preset()->php()->ignoring([
+arch()->group(__DIR__, __FILE__)->skip()->preset()->php()->ignoring([
     'debug_backtrace',
     SchedulingEventMixin::class,
 ]);
