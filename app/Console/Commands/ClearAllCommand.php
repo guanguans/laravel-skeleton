@@ -39,6 +39,7 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
         $this->output->info('⏳ Clearing all...');
 
         $this->call('config:clear', $arguments = ['--ansi' => true, '-v' => true]);
+        $this->call('cache:clear', $arguments);
         $this->call('clear-compiled', $arguments);
         $this->call('event:clear', $arguments);
         $this->call('optimize:clear', $arguments);
