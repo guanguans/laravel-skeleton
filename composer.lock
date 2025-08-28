@@ -40397,16 +40397,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.6.13",
+            "version": "14.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "78f9be521db06829c611354696a6af9cf382de0c"
+                "reference": "83569d442ffb9373bf3124aec4fe5cbbc1b0475a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/78f9be521db06829c611354696a6af9cf382de0c",
-                "reference": "78f9be521db06829c611354696a6af9cf382de0c",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/83569d442ffb9373bf3124aec4fe5cbbc1b0475a",
+                "reference": "83569d442ffb9373bf3124aec4fe5cbbc1b0475a",
                 "shasum": ""
             },
             "require": {
@@ -40438,7 +40438,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.13"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.7.0"
             },
             "funding": [
                 {
@@ -40450,7 +40450,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-14T10:31:25+00:00"
+            "time": "2025-08-27T10:34:20+00:00"
         },
         {
             "name": "symplify/rule-doc-generator-contracts",
