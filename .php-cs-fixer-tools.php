@@ -25,6 +25,7 @@ use App\Support\PhpCsFixer\Fixer\CommandLineTool\MarkdownLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\ShfmtFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqlFluffFixer;
+use App\Support\PhpCsFixer\Fixer\CommandLineTool\SqRuffFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\TextLintFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\TombiFixer;
 use App\Support\PhpCsFixer\Fixer\CommandLineTool\XmlLintFixer;
@@ -74,6 +75,7 @@ return (new Config)
 
         DoctrineSqlFixer::name() => true,
         // PhpMyAdminSqlFixer::name() => true,
+        // SqRuffFixer::name() => true,
         // SqlFluffFixer::name() => true,
         // SqlFluffFixer::name() => [
         //     AbstractCommandLineToolFixer::OPTIONS => [
