@@ -9656,16 +9656,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.26.2",
+            "version": "v12.26.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "56c5fc46cfb1005d0aaa82c7592d63edb776a787"
+                "reference": "1a8e961a1801794c36c243bb610210d0a2bd61cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/56c5fc46cfb1005d0aaa82c7592d63edb776a787",
-                "reference": "56c5fc46cfb1005d0aaa82c7592d63edb776a787",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1a8e961a1801794c36c243bb610210d0a2bd61cb",
+                "reference": "1a8e961a1801794c36c243bb610210d0a2bd61cb",
                 "shasum": ""
             },
             "require": {
@@ -9705,8 +9705,8 @@
                 "symfony/http-kernel": "^7.2.0",
                 "symfony/mailer": "^7.2.0",
                 "symfony/mime": "^7.2.0",
-                "symfony/polyfill-php83": "^1.31",
-                "symfony/polyfill-php84": "^1.31",
+                "symfony/polyfill-php83": "^1.33",
+                "symfony/polyfill-php84": "^1.33",
                 "symfony/polyfill-php85": "^1.33",
                 "symfony/process": "^7.2.0",
                 "symfony/routing": "^7.2.0",
@@ -9869,7 +9869,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-08-26T18:04:56+00:00"
+            "time": "2025-08-27T13:51:06+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -33779,16 +33779,16 @@
         },
         {
             "name": "laravel/boost",
-            "version": "v1.0.18",
+            "version": "v1.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/boost.git",
-                "reference": "df2a62b5864759ea8cce8a4b7575b657e9c7d4ab"
+                "reference": "a18c0408b91b119f1105daf7b2ff4e66fa1bc8e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/boost/zipball/df2a62b5864759ea8cce8a4b7575b657e9c7d4ab",
-                "reference": "df2a62b5864759ea8cce8a4b7575b657e9c7d4ab",
+                "url": "https://api.github.com/repos/laravel/boost/zipball/a18c0408b91b119f1105daf7b2ff4e66fa1bc8e7",
+                "reference": "a18c0408b91b119f1105daf7b2ff4e66fa1bc8e7",
                 "shasum": ""
             },
             "require": {
@@ -33797,13 +33797,13 @@
                 "illuminate/contracts": "^10.0|^11.0|^12.0",
                 "illuminate/routing": "^10.0|^11.0|^12.0",
                 "illuminate/support": "^10.0|^11.0|^12.0",
-                "laravel/mcp": "^0.1.0",
+                "laravel/mcp": "^0.1.1",
                 "laravel/prompts": "^0.1.9|^0.3",
-                "laravel/roster": "^0.2",
-                "php": "^8.1|^8.2"
+                "laravel/roster": "^0.2.4",
+                "php": "^8.1"
             },
             "require-dev": {
-                "laravel/pint": "^1.14|^1.23",
+                "laravel/pint": "^1.14",
                 "mockery/mockery": "^1.6",
                 "orchestra/testbench": "^8.22.0|^9.0|^10.0",
                 "pestphp/pest": "^2.0|^3.0",
@@ -33840,7 +33840,7 @@
                 "issues": "https://github.com/laravel/boost/issues",
                 "source": "https://github.com/laravel/boost"
             },
-            "time": "2025-08-16T09:10:03+00:00"
+            "time": "2025-08-27T19:28:28+00:00"
         },
         {
             "name": "laravel/browser-kit-testing",
@@ -34287,16 +34287,16 @@
         },
         {
             "name": "laravel/roster",
-            "version": "v0.2.3",
+            "version": "v0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/roster.git",
-                "reference": "caeed7609b02c00c3f1efec52812d8d87c5d4096"
+                "reference": "d5b04fafd28bbab1f4cedd48f83c7abbddca4d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/roster/zipball/caeed7609b02c00c3f1efec52812d8d87c5d4096",
-                "reference": "caeed7609b02c00c3f1efec52812d8d87c5d4096",
+                "url": "https://api.github.com/repos/laravel/roster/zipball/d5b04fafd28bbab1f4cedd48f83c7abbddca4d76",
+                "reference": "d5b04fafd28bbab1f4cedd48f83c7abbddca4d76",
                 "shasum": ""
             },
             "require": {
@@ -34344,7 +34344,7 @@
                 "issues": "https://github.com/laravel/roster/issues",
                 "source": "https://github.com/laravel/roster"
             },
-            "time": "2025-08-13T15:00:25+00:00"
+            "time": "2025-08-27T09:45:13+00:00"
         },
         {
             "name": "laravel/sail",
