@@ -33779,16 +33779,16 @@
         },
         {
             "name": "laravel/boost",
-            "version": "v1.0.18",
+            "version": "v1.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/boost.git",
-                "reference": "df2a62b5864759ea8cce8a4b7575b657e9c7d4ab"
+                "reference": "a18c0408b91b119f1105daf7b2ff4e66fa1bc8e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/boost/zipball/df2a62b5864759ea8cce8a4b7575b657e9c7d4ab",
-                "reference": "df2a62b5864759ea8cce8a4b7575b657e9c7d4ab",
+                "url": "https://api.github.com/repos/laravel/boost/zipball/a18c0408b91b119f1105daf7b2ff4e66fa1bc8e7",
+                "reference": "a18c0408b91b119f1105daf7b2ff4e66fa1bc8e7",
                 "shasum": ""
             },
             "require": {
@@ -33797,13 +33797,13 @@
                 "illuminate/contracts": "^10.0|^11.0|^12.0",
                 "illuminate/routing": "^10.0|^11.0|^12.0",
                 "illuminate/support": "^10.0|^11.0|^12.0",
-                "laravel/mcp": "^0.1.0",
+                "laravel/mcp": "^0.1.1",
                 "laravel/prompts": "^0.1.9|^0.3",
-                "laravel/roster": "^0.2",
-                "php": "^8.1|^8.2"
+                "laravel/roster": "^0.2.4",
+                "php": "^8.1"
             },
             "require-dev": {
-                "laravel/pint": "^1.14|^1.23",
+                "laravel/pint": "^1.14",
                 "mockery/mockery": "^1.6",
                 "orchestra/testbench": "^8.22.0|^9.0|^10.0",
                 "pestphp/pest": "^2.0|^3.0",
@@ -33840,7 +33840,7 @@
                 "issues": "https://github.com/laravel/boost/issues",
                 "source": "https://github.com/laravel/boost"
             },
-            "time": "2025-08-16T09:10:03+00:00"
+            "time": "2025-08-27T19:28:28+00:00"
         },
         {
             "name": "laravel/browser-kit-testing",
