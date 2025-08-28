@@ -10874,16 +10874,16 @@
         },
         {
             "name": "laravolt/avatar",
-            "version": "6.2.0",
+            "version": "6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravolt/avatar.git",
-                "reference": "d0941f19aa2375b98333a80c1b272137bdd0a18b"
+                "reference": "dea77b6fbff08f38e744a9e23855369c8270f2aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravolt/avatar/zipball/d0941f19aa2375b98333a80c1b272137bdd0a18b",
-                "reference": "d0941f19aa2375b98333a80c1b272137bdd0a18b",
+                "url": "https://api.github.com/repos/laravolt/avatar/zipball/dea77b6fbff08f38e744a9e23855369c8270f2aa",
+                "reference": "dea77b6fbff08f38e744a9e23855369c8270f2aa",
                 "shasum": ""
             },
             "require": {
@@ -10945,7 +10945,7 @@
             ],
             "support": {
                 "issues": "https://github.com/laravolt/avatar/issues",
-                "source": "https://github.com/laravolt/avatar/tree/6.2.0"
+                "source": "https://github.com/laravolt/avatar/tree/6.3.1"
             },
             "funding": [
                 {
@@ -10961,7 +10961,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-04-16T14:21:06+00:00"
+            "time": "2025-08-27T08:20:27+00:00"
         },
         {
             "name": "lcobucci/jwt",
