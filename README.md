@@ -415,6 +415,7 @@ composer zh-lint
 * [laravel/roster](https://github.com/laravel/roster) - Detect packages & approaches in use within a Laravel project
 * [laravel/sail](https://github.com/laravel/sail) - Docker files for running a basic Laravel application.
 * [laravel/telescope](https://github.com/laravel/telescope) - An elegant debug assistant for the Laravel framework.
+* [localheinz/diff](https://github.com/localheinz/diff) - Diff implementation
 * [mockery/mockery](https://github.com/mockery/mockery) - Mockery is a simple yet flexible PHP mock object framework
 * [msamgan/laravel-env-keys-checker](https://github.com/msamgan/laravel-env-keys-checker) - check if all the keys are available in all the .env files.
 * [muhammadhuzaifa/telescope-guzzle-watcher](https://github.com/huzaifaarain/telescope-guzzle-watcher) - Telescope Guzzle Watcher provide a custom watcher for intercepting http requests made via guzzlehttp/guzzle php library. The package uses the on_stats request option for extracting the request/response data. The watcher intercept and log the request into the Laravel Telescope HTTP Client Watcher.
@@ -762,6 +763,7 @@ app/
 |   |   |   |   |-- MarkdownLintFixer.php
 |   |   |   |   |-- PintFixer.php
 |   |   |   |   |-- ShfmtFixer.php
+|   |   |   |   |-- SqRuffFixer.php
 |   |   |   |   |-- SqlFluffFixer.php
 |   |   |   |   |-- TextLintFixer.php
 |   |   |   |   |-- TombiFixer.php
@@ -827,7 +829,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-63 directories, 296 files
+63 directories, 297 files
 
 ```
 
