@@ -4999,16 +4999,16 @@
         },
         {
             "name": "elao/enum",
-            "version": "v2.5.2",
+            "version": "v2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Elao/PhpEnums.git",
-                "reference": "0e67f9baff2d8e40291218f2e24e94ef8b8caa55"
+                "reference": "a1e09f8c781e383071f5257661be9af485c665a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/0e67f9baff2d8e40291218f2e24e94ef8b8caa55",
-                "reference": "0e67f9baff2d8e40291218f2e24e94ef8b8caa55",
+                "url": "https://api.github.com/repos/Elao/PhpEnums/zipball/a1e09f8c781e383071f5257661be9af485c665a4",
+                "reference": "a1e09f8c781e383071f5257661be9af485c665a4",
                 "shasum": ""
             },
             "require": {
@@ -5076,7 +5076,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Elao/PhpEnums/issues",
-                "source": "https://github.com/Elao/PhpEnums/tree/v2.5.2"
+                "source": "https://github.com/Elao/PhpEnums/tree/v2.5.3"
             },
             "funding": [
                 {
@@ -5084,7 +5084,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-20T12:56:25+00:00"
+            "time": "2025-06-06T06:50:35+00:00"
         },
         {
             "name": "elastic/ecs-logging",
