@@ -9656,16 +9656,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.26.4",
+            "version": "v12.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "085a367a32ba86fcfa647bfc796098ae6f795b09"
+                "reference": "3fdcf8f3788fcb154df12ebf1fe0dd4a199e92a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/085a367a32ba86fcfa647bfc796098ae6f795b09",
-                "reference": "085a367a32ba86fcfa647bfc796098ae6f795b09",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3fdcf8f3788fcb154df12ebf1fe0dd4a199e92a8",
+                "reference": "3fdcf8f3788fcb154df12ebf1fe0dd4a199e92a8",
                 "shasum": ""
             },
             "require": {
@@ -9869,20 +9869,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-08-29T14:15:53+00:00"
+            "time": "2025-09-02T15:32:28+00:00"
         },
         {
             "name": "laravel/helpers",
-            "version": "v1.7.2",
+            "version": "v1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/helpers.git",
-                "reference": "672d79d5b5f65dc821e57783fa11f22c4d762d70"
+                "reference": "d0094b4bc4364560c8ee3a9e956596d760d4afab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/helpers/zipball/672d79d5b5f65dc821e57783fa11f22c4d762d70",
-                "reference": "672d79d5b5f65dc821e57783fa11f22c4d762d70",
+                "url": "https://api.github.com/repos/laravel/helpers/zipball/d0094b4bc4364560c8ee3a9e956596d760d4afab",
+                "reference": "d0094b4bc4364560c8ee3a9e956596d760d4afab",
                 "shasum": ""
             },
             "require": {
@@ -9924,9 +9924,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/helpers/tree/v1.7.2"
+                "source": "https://github.com/laravel/helpers/tree/v1.8.1"
             },
-            "time": "2025-01-24T15:41:25+00:00"
+            "time": "2025-09-02T15:31:25+00:00"
         },
         {
             "name": "laravel/horizon",
