@@ -28670,16 +28670,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.13.16",
+            "version": "1.13.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "2c08a25c77fc5aa5cde1a3ce9b0199306a3ee49a"
+                "reference": "ce7334572fa57b6f6902ce211d69ed61d70bd4fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/2c08a25c77fc5aa5cde1a3ce9b0199306a3ee49a",
-                "reference": "2c08a25c77fc5aa5cde1a3ce9b0199306a3ee49a",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/ce7334572fa57b6f6902ce211d69ed61d70bd4fd",
+                "reference": "ce7334572fa57b6f6902ce211d69ed61d70bd4fd",
                 "shasum": ""
             },
             "require": {
@@ -28756,7 +28756,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.13.16"
+                "source": "https://github.com/buggregator/trap/tree/1.13.17"
             },
             "funding": [
                 {
@@ -28768,7 +28768,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-06-09T08:58:44+00:00"
+            "time": "2025-09-05T19:20:46+00:00"
         },
         {
             "name": "carthage-software/mago",
