@@ -28670,23 +28670,23 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.13.17",
+            "version": "1.13.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "ce7334572fa57b6f6902ce211d69ed61d70bd4fd"
+                "reference": "1560e7da26691baa2aace06cbd575cc9e8b06624"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/ce7334572fa57b6f6902ce211d69ed61d70bd4fd",
-                "reference": "ce7334572fa57b6f6902ce211d69ed61d70bd4fd",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/1560e7da26691baa2aace06cbd575cc9e8b06624",
+                "reference": "1560e7da26691baa2aace06cbd575cc9e8b06624",
                 "shasum": ""
             },
             "require": {
                 "clue/stream-filter": "^1.6",
                 "ext-filter": "*",
                 "ext-sockets": "*",
-                "nunomaduro/termwind": "^1.15.1 || ^2",
+                "internal/destroy": "^1.0",
                 "nyholm/psr7": "^1.8",
                 "php": ">=8.1",
                 "php-http/message": "^1.15",
@@ -28756,7 +28756,7 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.13.17"
+                "source": "https://github.com/buggregator/trap/tree/1.13.18"
             },
             "funding": [
                 {
@@ -28768,7 +28768,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-09-05T19:20:46+00:00"
+            "time": "2025-09-08T19:47:24+00:00"
         },
         {
             "name": "carthage-software/mago",
@@ -31723,6 +31723,65 @@
                 "source": "https://github.com/iamcal/SQLParser/tree/v0.6"
             },
             "time": "2025-03-17T16:59:46+00:00"
+        },
+        {
+            "name": "internal/destroy",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-internal/destroy.git",
+                "reference": "93068c4f7da218034f5373e31407f564b74b4a06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-internal/destroy/zipball/93068c4f7da218034f5373e31407f564b74b4a06",
+                "reference": "93068c4f7da218034f5373e31407f564b74b4a06",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "buggregator/trap": "^1.10",
+                "phpunit/phpunit": "^10.5",
+                "spiral/code-style": "^2.2.2",
+                "ta-tikoma/phpunit-architecture-test": "^0.8.4",
+                "vimeo/psalm": "^6.10"
+            },
+            "suggest": {
+                "ext-simplexml": "to support XML configs parsing"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Internal\\Destroy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksei Gagarin (roxblnfk)",
+                    "homepage": "https://github.com/roxblnfk"
+                }
+            ],
+            "keywords": [
+                "download binaries",
+                "memory"
+            ],
+            "support": {
+                "issues": "https://github.com/php-internal/destroy/issues",
+                "source": "https://github.com/php-internal/destroy/tree/1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://patreon.com/roxblnfk",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2025-09-08T14:29:16+00:00"
         },
         {
             "name": "ion-bazan/composer-diff",
