@@ -224,7 +224,7 @@
         "kitloong/laravel-migrations-generator": "^7.2",
         "knuckleswtf/scribe": "^5.3",
         "laracraft-tech/laravel-schema-rules": "^1.5",
-        "larastan/larastan": "^3.6",
+        "larastan/larastan": "^3.7",
         "laravel-lang/common": "^6.7",
         "laravel-shift/factory-generator": "^2.2",
         "laravel/boost": "^1.1",
