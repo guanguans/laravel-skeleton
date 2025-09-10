@@ -118,7 +118,7 @@
         "phpyh/lru-memoizer": "^0.2",
         "pion/laravel-chunk-upload": "^1.5",
         "prinsfrank/standards": "^3.13",
-        "prism-php/prism": "^0.88",
+        "prism-php/prism": "^0.89",
         "proengsoft/laravel-jsvalidation": "^4.10",
         "propaganistas/laravel-disposable-email": "^2.4",
         "propaganistas/laravel-phone": "^6.0",
