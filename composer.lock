@@ -4644,16 +4644,16 @@
         },
         {
             "name": "dragon-code/laravel-data-dumper",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheDragonCode/laravel-data-dumper.git",
-                "reference": "7f78f6fbb8d758b73224897f50232f9b8bfdc991"
+                "reference": "6e8142129af76dd1b0ae194b2ce5b738381b3e79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheDragonCode/laravel-data-dumper/zipball/7f78f6fbb8d758b73224897f50232f9b8bfdc991",
-                "reference": "7f78f6fbb8d758b73224897f50232f9b8bfdc991",
+                "url": "https://api.github.com/repos/TheDragonCode/laravel-data-dumper/zipball/6e8142129af76dd1b0ae194b2ce5b738381b3e79",
+                "reference": "6e8142129af76dd1b0ae194b2ce5b738381b3e79",
                 "shasum": ""
             },
             "require": {
@@ -4721,7 +4721,7 @@
                     "type": "yoomoney"
                 }
             ],
-            "time": "2025-02-24T22:24:01+00:00"
+            "time": "2025-09-12T07:47:52+00:00"
         },
         {
             "name": "dragon-code/support",
