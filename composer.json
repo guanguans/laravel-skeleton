@@ -479,6 +479,7 @@
             "@rector-dry-run",
             "@phpstan"
         ],
+        "checks-verbose": "time /opt/homebrew/bin/composer checks",
         "class-leak": "@php ./vendor/bin/class-leak --ansi -vv",
         "class-leak-check": "@class-leak check app/ config/ --skip-suffix=Pipe --skip-path=Support/Traits --skip-path=Channels --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Channel --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Collector --skip-type=Rector\\Rector\\AbstractRector",
         "composer-bin-all-update": "@composer bin all update --ansi -vv",
