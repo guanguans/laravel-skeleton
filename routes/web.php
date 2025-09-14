@@ -18,10 +18,11 @@ declare(strict_types=1);
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
+
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +40,7 @@ use Overtrue\LaravelUploader\LaravelUploader;
 |
 */
 
-Route::get('/', static fn (): View|Factory => view('welcome'))->name('index');
+Route::get('/', static fn (): Factory|View => view('welcome'))->name('index');
 Route::fallback(static fn () => abort(404))->name('fallback');
 
 LaravelUploader::routes();

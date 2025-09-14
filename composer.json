@@ -397,6 +397,9 @@
         "patches": {
             "laravel/framework": [
                 "patches/laravel-framework-src-illuminate-foundation-application-php.patch"
+            ],
+            "laravel/pint": [
+                "patches/laravel-pint-overrides-runner-parallel-processfactory-php.patch"
             ]
         }
     },
