@@ -131,7 +131,7 @@ final class Example extends BaseModel
     /**
      * @see https://github.com/LaravelDaily/laravel-tips/blob/master/db-models-and-eloquent.md#change-format-of-created_at-and-updated_at
      */
-    private function createdAtFormatted(): Attribute
+    protected function createdAtFormatted(): Attribute
     {
         return Attribute::make(
             get: static fn (mixed $value, array $attributes) => $attributes['created_at']->format('Y-m-d H:i:s'),
@@ -141,7 +141,7 @@ final class Example extends BaseModel
     /**
      * @see https://github.com/LaravelDaily/laravel-tips/blob/master/db-models-and-eloquent.md#change-format-of-created_at-and-updated_at
      */
-    private function updatedAtFormatted(): Attribute
+    protected function updatedAtFormatted(): Attribute
     {
         return Attribute::make(
             get: static fn (mixed $value, array $attributes) => $attributes['updated_at']->format('Y-m-d H:i:s'),

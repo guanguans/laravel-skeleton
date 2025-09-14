@@ -62,7 +62,7 @@ final class HealthCheckCommand extends Command implements Isolatable
                 fn (\ReflectionMethod $method) => str($method->name)->is($this->except)
             ))
             ->sortBy(static fn (\ReflectionMethod $method) => $method->name)
-            ->pipe(function (Collection $methods) {
+            ->pipe(function (Collection $methods): Collection {
                 $this
                     ->setProcessTitle('Health checking...')
                     ->withProgressBar($methods, function (\ReflectionMethod $method) use (&$checks): void {

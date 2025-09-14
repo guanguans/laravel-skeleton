@@ -124,6 +124,6 @@ final class CollectionMixin
 
     public function filterFilled(): \Closure
     {
-        return fn () => $this->filter(static fn (mixed $value) => filled($value));
+        return fn () => $this->filter(static fn (mixed $value): bool => filled($value));
     }
 }

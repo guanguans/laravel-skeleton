@@ -48,7 +48,7 @@ final class AuthServiceProvider extends ServiceProvider
             $this->gateBefore();
             Gate::guessPolicyNamesUsing(static fn (string $modelClass): string => 'App\\Policies\\'.class_basename($modelClass).'Policy');
             Gate::policy(User::class, UserPolicy::class);
-            RedirectIfAuthenticated::redirectUsing(static fn (Request $request) => route('dashboard'));
+            RedirectIfAuthenticated::redirectUsing(static fn (Request $request): string => route('dashboard'));
         });
     }
 

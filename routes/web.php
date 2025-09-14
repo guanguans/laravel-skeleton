@@ -18,7 +18,9 @@ declare(strict_types=1);
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
-
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +39,7 @@ use Overtrue\LaravelUploader\LaravelUploader;
 |
 */
 
-Route::get('/', static fn () => view('welcome'))->name('index');
+Route::get('/', static fn (): View|Factory => view('welcome'))->name('index');
 Route::fallback(static fn () => abort(404))->name('fallback');
 
 LaravelUploader::routes();
@@ -45,7 +47,7 @@ LaravelUploader::routes();
 /**
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet
  */
-Route::get('acting-as/{id}', static function (int $id) {
+Route::get('acting-as/{id}', static function (int $id): RedirectResponse {
     abort_unless(app()->isLocal() && app()->hasDebugModeEnabled(), 404);
 
     Auth::loginUsingId($id);
