@@ -22,7 +22,7 @@
         "astrotomic/laravel-translatable": "^11.16",
         "awobaz/compoships": "^2.4",
         "axlon/laravel-postal-code-validation": "^3.8",
-        "azjezz/psl": "^3.3",
+        "azjezz/psl": "^4.0",
         "balping/json-raw-encoder": "^1.0",
         "beyondcode/laravel-mailbox": "^5.0",
         "biiiiiigmonster/hasin": "^5.0",
