@@ -10324,16 +10324,16 @@
         },
         {
             "name": "laravel/reverb",
-            "version": "v1.5.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/reverb.git",
-                "reference": "c82751070c9a5397095d91ff743aefb0549917c3"
+                "reference": "728f6e2c779dae844c2862ea060ca32db5b6b495"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/reverb/zipball/c82751070c9a5397095d91ff743aefb0549917c3",
-                "reference": "c82751070c9a5397095d91ff743aefb0549917c3",
+                "url": "https://api.github.com/repos/laravel/reverb/zipball/728f6e2c779dae844c2862ea060ca32db5b6b495",
+                "reference": "728f6e2c779dae844c2862ea060ca32db5b6b495",
                 "shasum": ""
             },
             "require": {
@@ -10400,9 +10400,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/reverb/issues",
-                "source": "https://github.com/laravel/reverb/tree/v1.5.1"
+                "source": "https://github.com/laravel/reverb/tree/v1.6.0"
             },
-            "time": "2025-06-16T13:48:47+00:00"
+            "time": "2025-09-07T23:21:05+00:00"
         },
         {
             "name": "laravel/sanctum",
