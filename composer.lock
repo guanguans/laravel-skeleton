@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a05d4f6857e6d241a2cf465b5837cdf8",
+    "content-hash": "3cc609a478d5f68232859cbed1416f4f",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -13455,30 +13455,30 @@
         },
         {
             "name": "nunomaduro/essentials",
-            "version": "v0.1.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/essentials.git",
-                "reference": "ccfd36a8e7ec5ad7ce83109775bd75851b123a41"
+                "reference": "f0bded5eaa1552a3a1a8dbaab9c54bdd52df1cc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/essentials/zipball/ccfd36a8e7ec5ad7ce83109775bd75851b123a41",
-                "reference": "ccfd36a8e7ec5ad7ce83109775bd75851b123a41",
+                "url": "https://api.github.com/repos/nunomaduro/essentials/zipball/f0bded5eaa1552a3a1a8dbaab9c54bdd52df1cc1",
+                "reference": "f0bded5eaa1552a3a1a8dbaab9c54bdd52df1cc1",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^11.44.2|^12.17.0",
+                "laravel/framework": "^11.44.2|^12.29.0",
                 "php": "^8.3.0"
             },
             "require-dev": {
-                "laravel/pint": "^1.22.1",
-                "orchestra/testbench": "^10.3.0",
-                "pestphp/pest": "^3.8.2",
-                "pestphp/pest-plugin-type-coverage": "^3.5.1",
-                "phpstan/phpstan": "^2.1.17",
-                "rector/rector": "^2.0.17",
-                "symfony/var-dumper": "^7.3.0"
+                "laravel/pint": "^1.25.0",
+                "orchestra/testbench": "^10.6.0",
+                "pestphp/pest": "^3.8.4",
+                "pestphp/pest-plugin-type-coverage": "^3.6.1",
+                "phpstan/phpstan": "^2.1.27",
+                "rector/rector": "^2.1.7",
+                "symfony/var-dumper": "^7.3.3"
             },
             "type": "library",
             "extra": {
@@ -13513,7 +13513,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/essentials/issues",
-                "source": "https://github.com/nunomaduro/essentials/tree/v0.1.0"
+                "source": "https://github.com/nunomaduro/essentials/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -13529,7 +13529,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-06-04T18:20:41+00:00"
+            "time": "2025-09-17T17:40:22+00:00"
         },
         {
             "name": "nunomaduro/laravel-console-task",
