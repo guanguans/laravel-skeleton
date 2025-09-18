@@ -47,7 +47,9 @@ abstract class AbstractRule implements ValidationRule
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (!$this->passes($attribute, $value)) {
-            $this->failedPotentiallyTranslatedString($attribute, $value, $fail)->translate($this->replace());
+            $this
+                ->createPotentiallyTranslatedString($attribute, $value, $fail)
+                ->translate($this->replace($attribute, $value));
         }
     }
 
@@ -98,7 +100,12 @@ abstract class AbstractRule implements ValidationRule
         );
     }
 
-    protected function failedPotentiallyTranslatedString(
+    /**
+     * @see \Illuminate\Translation\CreatesPotentiallyTranslatedStrings::pendingPotentiallyTranslatedString()
+     * @see \Illuminate\Validation\ClosureValidationRule::passes()
+     * @see \Illuminate\Validation\InvokableValidationRule::passes()
+     */
+    protected function createPotentiallyTranslatedString(
         string $attribute,
         mixed $value,
         \Closure $fail
@@ -106,8 +113,11 @@ abstract class AbstractRule implements ValidationRule
         return $fail($attribute, static::message());
     }
 
-    protected function replace(): array
+    protected function replace(string $attribute, mixed $value): array
     {
-        return [];
+        return [
+            'attribute' => $attribute,
+            'value' => $value,
+        ];
     }
 }

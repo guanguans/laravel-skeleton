@@ -56,7 +56,7 @@ abstract class AbstractAggregateRule extends AbstractRule
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
-    protected function failedPotentiallyTranslatedString(
+    protected function createPotentiallyTranslatedString(
         string $attribute,
         mixed $value,
         \Closure $fail
