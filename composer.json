@@ -101,7 +101,7 @@
         "mtownsend/read-time": "^2.0",
         "naoray/laravel-github-monolog": "^3.3",
         "nette/utils": "^4.0",
-        "nunomaduro/essentials": "^0.1",
+        "nunomaduro/essentials": "^1.0",
         "nunomaduro/laravel-console-task": "^1.10",
         "nunomaduro/laravel-optimize-database": "^1.0",
         "nwidart/laravel-modules": "^12.0",
