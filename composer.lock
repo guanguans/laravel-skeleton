@@ -9654,16 +9654,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.29.0",
+            "version": "v12.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a9e4c73086f5ba38383e9c1d74b84fe46aac730b"
+                "reference": "7f61e8679f9142f282a0184ac7ef9e3834bfd023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a9e4c73086f5ba38383e9c1d74b84fe46aac730b",
-                "reference": "a9e4c73086f5ba38383e9c1d74b84fe46aac730b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7f61e8679f9142f282a0184ac7ef9e3834bfd023",
+                "reference": "7f61e8679f9142f282a0184ac7ef9e3834bfd023",
                 "shasum": ""
             },
             "require": {
@@ -9691,7 +9691,7 @@
                 "monolog/monolog": "^3.0",
                 "nesbot/carbon": "^3.8.4",
                 "nunomaduro/termwind": "^2.0",
-                "phiki/phiki": "v2.0.0",
+                "phiki/phiki": "^2.0.0",
                 "php": "^8.2",
                 "psr/container": "^1.1.1|^2.0.1",
                 "psr/log": "^1.0|^2.0|^3.0",
@@ -9870,7 +9870,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-09-16T14:15:03+00:00"
+            "time": "2025-09-18T21:07:07+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -14838,16 +14838,16 @@
         },
         {
             "name": "phiki/phiki",
-            "version": "v2.0.0",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phikiphp/phiki.git",
-                "reference": "461f6dd7e91dc3a95463b42f549ac7d0aab4702f"
+                "reference": "6d735108238c03daaaef571448d8dee8187cab5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phikiphp/phiki/zipball/461f6dd7e91dc3a95463b42f549ac7d0aab4702f",
-                "reference": "461f6dd7e91dc3a95463b42f549ac7d0aab4702f",
+                "url": "https://api.github.com/repos/phikiphp/phiki/zipball/6d735108238c03daaaef571448d8dee8187cab5e",
+                "reference": "6d735108238c03daaaef571448d8dee8187cab5e",
                 "shasum": ""
             },
             "require": {
@@ -14893,7 +14893,7 @@
             "description": "Syntax highlighting using TextMate grammars in PHP.",
             "support": {
                 "issues": "https://github.com/phikiphp/phiki/issues",
-                "source": "https://github.com/phikiphp/phiki/tree/v2.0.0"
+                "source": "https://github.com/phikiphp/phiki/tree/v2.0.2"
             },
             "funding": [
                 {
@@ -14905,7 +14905,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-08-28T18:20:27+00:00"
+            "time": "2025-09-17T18:32:40+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -19949,16 +19949,16 @@
         },
         {
             "name": "spatie/laravel-csp",
-            "version": "3.17.1",
+            "version": "3.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-csp.git",
-                "reference": "12e0e09f08757b3ef12f84070416371b8dfcc245"
+                "reference": "532330226ab2be6da35ec53e3f25b84d44e086ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-csp/zipball/12e0e09f08757b3ef12f84070416371b8dfcc245",
-                "reference": "12e0e09f08757b3ef12f84070416371b8dfcc245",
+                "url": "https://api.github.com/repos/spatie/laravel-csp/zipball/532330226ab2be6da35ec53e3f25b84d44e086ab",
+                "reference": "532330226ab2be6da35ec53e3f25b84d44e086ab",
                 "shasum": ""
             },
             "require": {
@@ -20022,7 +20022,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-csp/tree/3.17.1"
+                "source": "https://github.com/spatie/laravel-csp/tree/3.17.2"
             },
             "funding": [
                 {
@@ -20030,7 +20030,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-09-13T10:13:23+00:00"
+            "time": "2025-09-18T15:21:17+00:00"
         },
         {
             "name": "spatie/laravel-data",
