@@ -1999,16 +1999,16 @@
         },
         {
             "name": "biiiiiigmonster/hasin",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/biiiiiigmonster/hasin.git",
-                "reference": "c5339b9f47fa9b29b679ec6d152611e0a05f0823"
+                "reference": "4de609abded5ad40e2a569dc7b3acafd50130df7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/biiiiiigmonster/hasin/zipball/c5339b9f47fa9b29b679ec6d152611e0a05f0823",
-                "reference": "c5339b9f47fa9b29b679ec6d152611e0a05f0823",
+                "url": "https://api.github.com/repos/biiiiiigmonster/hasin/zipball/4de609abded5ad40e2a569dc7b3acafd50130df7",
+                "reference": "4de609abded5ad40e2a569dc7b3acafd50130df7",
                 "shasum": ""
             },
             "require": {
@@ -2053,9 +2053,9 @@
             ],
             "support": {
                 "issues": "https://github.com/biiiiiigmonster/hasin/issues",
-                "source": "https://github.com/biiiiiigmonster/hasin/tree/v5.0.0"
+                "source": "https://github.com/biiiiiigmonster/hasin/tree/v5.0.1"
             },
-            "time": "2025-03-04T03:46:09+00:00"
+            "time": "2025-09-18T14:21:54+00:00"
         },
         {
             "name": "binarytorch/larecipe",
