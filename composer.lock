@@ -13455,16 +13455,16 @@
         },
         {
             "name": "nunomaduro/essentials",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/essentials.git",
-                "reference": "f0bded5eaa1552a3a1a8dbaab9c54bdd52df1cc1"
+                "reference": "75665a7c067bbf8f0556d7e924249e9a58f9a6d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/essentials/zipball/f0bded5eaa1552a3a1a8dbaab9c54bdd52df1cc1",
-                "reference": "f0bded5eaa1552a3a1a8dbaab9c54bdd52df1cc1",
+                "url": "https://api.github.com/repos/nunomaduro/essentials/zipball/75665a7c067bbf8f0556d7e924249e9a58f9a6d9",
+                "reference": "75665a7c067bbf8f0556d7e924249e9a58f9a6d9",
                 "shasum": ""
             },
             "require": {
@@ -13513,7 +13513,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/essentials/issues",
-                "source": "https://github.com/nunomaduro/essentials/tree/v1.0.0"
+                "source": "https://github.com/nunomaduro/essentials/tree/v1.0.1"
             },
             "funding": [
                 {
@@ -13529,7 +13529,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-09-17T17:40:22+00:00"
+            "time": "2025-09-18T08:52:39+00:00"
         },
         {
             "name": "nunomaduro/laravel-console-task",
