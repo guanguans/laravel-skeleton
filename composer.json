@@ -64,7 +64,7 @@
         "jenssegers/agent": "^2.6",
         "jpkleemans/attribute-events": "^1.5",
         "juliomotol/laravel-auth-timeout": "^4.2",
-        "kevinrob/guzzle-cache-middleware": "^6.0",
+        "kevinrob/guzzle-cache-middleware": "^7.0",
         "kirkbushell/eloquence": "^12.0",
         "kirschbaum-development/eloquent-power-joins": "^4.2",
         "lab404/laravel-impersonate": "^1.7",
