@@ -1,6 +1,7 @@
-# total 9 errors
+# total 11 errors
 
 includes:
+    - arrayUnpacking.nonIterable.neon
     - nullsafe.neverNull.neon
     - offsetAccess.invalidOffset.neon
     - property.nonObject.neon
