@@ -91,4 +91,8 @@ return [
             'App\Support\Macros\*',
         ],
     ],
+
+    'var_dump_server' => [
+        'host' => env('VAR_DUMP_SERVER_HOST', 'tcp://127.0.0.1:9912'),
+    ],
 ];

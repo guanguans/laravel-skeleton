@@ -15,6 +15,7 @@ namespace App\Providers;
 
 use App\Console\Commands\ClearAllCommand;
 use App\Listeners\RunCommandInDebugModeListener;
+use App\Support\VarDumper\ServerDumper;
 use Carbon\CarbonInterval;
 use Composer\XdebugHandler\XdebugHandler;
 use Illuminate\Console\Application;
@@ -63,6 +64,7 @@ final class ConsoleServiceProvider extends ServiceProvider
                 key: 'filament'
             );
 
+            ServerDumper::register(config('services.var_dump_server.host', 'tcp://127.0.0.1:9912'));
             Event::listen(ArtisanStarting::class, static function (ArtisanStarting $artisanStarting): void {});
             Artisan::whenCommandLifecycleIsLongerThan(CarbonInterval::seconds(3), static function (): void {});
             Application::starting(static function (Application $application): void {});
