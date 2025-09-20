@@ -51,6 +51,8 @@ composer composer-dependency-analyser
 composer composer-diff
 composer composer-disable-process-timeout
 composer composer-normalize
+composer composer-normalize
+composer composer-normalize-dry-run
 composer composer-normalize-dry-run
 composer composer-updater
 composer composer-updater-dry-run
@@ -58,6 +60,7 @@ composer composer-updater-laravel10
 composer composer-updater-laravel11
 composer composer-validate
 composer composer-vendor-patches
+composer detect-collisions
 composer dev
 composer env-put-composer-memory-unlimited
 composer env-put-php
@@ -93,17 +96,25 @@ composer mago-lint-semantics-only
 composer md-fix
 composer md-lint
 composer neon-lint
+composer normalized
+composer normalized-dry-run
 composer peck
 composer peck-init
 composer pest
 composer pest-bail
 composer pest-coverage
+composer pest-disable-coverage-ignore
+composer pest-highest
 composer pest-migrate-configuration
 composer pest-parallel
 composer pest-profile
 composer pest-type-coverage
 composer pest-update-snapshots
 composer php-cs-fixer
+composer phpcs
+composer phpcs:compatibility
+composer phpcs:help
+composer phpcs:i
 composer phploc
 composer phpmd
 composer phpmetrics
@@ -165,6 +176,8 @@ composer style-tools-lint
 composer test
 composer test-bail
 composer test-coverage
+composer test-disable-coverage-ignore
+composer test-highest
 composer test-migrate-configuration
 composer test-parallel
 composer test-profile
@@ -178,6 +191,7 @@ composer trufflehog
 composer user-composer
 composer user-php
 composer var-dump-server
+composer var-dump-server-html
 composer vhs
 composer yaml-lint
 composer zh-fix
@@ -382,6 +396,7 @@ composer zh-lint
 * [buggregator/trap](https://github.com/buggregator/trap) - A simple and powerful tool for debugging PHP applications.
 * [carthage-software/mago](https://github.com/carthage-software/mago) - Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.
 * [composer/composer](https://github.com/composer/composer) - Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.
+* [dealerdirect/phpcodesniffer-composer-installer](https://github.com/PHPCSStandards/composer-installer) - PHP_CodeSniffer Standards Composer Installer Plugin
 * [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
 * [defstudio/pest-plugin-laravel-expectations](https://github.com/defstudio/pest-plugin-laravel-expectations) - A plugin to add laravel tailored expectations to Pest
 * [deployer/deployer](https://github.com/deployphp/deployer) - Deployment Tool
@@ -426,6 +441,7 @@ composer zh-lint
 * [peckphp/peck](https://github.com/peckphp/peck) - Peck is a powerful CLI tool designed to identify pure wording or spelling (grammar) mistakes in your codebase.
 * [pestphp/pest](https://github.com/pestphp/pest) - The elegant PHP Testing Framework.
 * [php-static-analysis/rector-rule](https://github.com/php-static-analysis/rector-rule) - RectorPHP rule to convert PHPDoc annotations for static analysis to PHP attributes
+* [phpcompatibility/php-compatibility](https://github.com/PHPCompatibility/PHPCompatibility) - A set of sniffs for PHP_CodeSniffer that checks for PHP cross-version compatibility.
 * [phpstan/extension-installer](https://github.com/phpstan/extension-installer) - Composer plugin for automatic installation of PHPStan extensions
 * [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules) - PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.
 * [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery) - PHPStan Mockery extension
@@ -439,6 +455,9 @@ composer zh-lint
 * [reliese/laravel](https://github.com/reliese/laravel) - Reliese Components for Laravel Framework code generation.
 * [scalar/laravel](https://github.com/scalar/laravel) - Render your OpenAPI-based API reference
 * [shipmonk/composer-dependency-analyser](https://github.com/shipmonk-rnd/composer-dependency-analyser) - Fast detection of composer dependency issues (dead dependencies, shadow dependencies, misplaced dependencies)
+* [shipmonk/dead-code-detector](https://github.com/shipmonk-rnd/dead-code-detector) - Dead code detector to find unused PHP code via PHPStan extension. Can automatically remove dead PHP code. Supports libraries like Symfony, Doctrine, PHPUnit etc. Detects dead cycles. Can detect dead code that is tested.
+* [shipmonk/memory-scanner](https://github.com/shipmonk-rnd/memory-scanner) - Lightweight PHP library for analyzing memory usage, tracking object references, and debugging memory leaks
+* [shipmonk/name-collision-detector](https://github.com/shipmonk-rnd/name-collision-detector) - Simple tool to find ambiguous classes or any other name duplicates within your project.
 * [shipmonk/phpstan-baseline-per-identifier](https://github.com/shipmonk-rnd/phpstan-baseline-per-identifier) - Split your PHPStan baseline into multiple files, one per error identifier. Supports both neon baseline and PHP baseline.
 * [soloterm/dumps](https://github.com/soloterm/dumps) - A Laravel command to intercept dumps from your Laravel application.
 * [soloterm/solo](https://github.com/soloterm/solo) - A Laravel package to run multiple commands at once, to aid in local development.

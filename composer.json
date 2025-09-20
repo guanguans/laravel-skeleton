@@ -204,6 +204,7 @@
         "buggregator/trap": "^1.13",
         "carthage-software/mago": "^0.26",
         "composer/composer": "^2.8",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.1",
         "dedoc/scramble": "^0.12",
         "defstudio/pest-plugin-laravel-expectations": "^2.6",
         "deployer/deployer": "^7.5",
@@ -248,6 +249,7 @@
         "peckphp/peck": "^0.1",
         "pestphp/pest": "^4.1",
         "php-static-analysis/rector-rule": "^0.4",
+        "phpcompatibility/php-compatibility": "^9.3",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-mockery": "^2.0",
@@ -261,6 +263,9 @@
         "reliese/laravel": "^1.4",
         "scalar/laravel": "^0.2",
         "shipmonk/composer-dependency-analyser": "^1.8",
+        "shipmonk/dead-code-detector": "^0.11",
+        "shipmonk/memory-scanner": "^1.0",
+        "shipmonk/name-collision-detector": "^2.1",
         "shipmonk/phpstan-baseline-per-identifier": "^2.2",
         "soloterm/dumps": "^1.0",
         "soloterm/solo": "^0.5",
@@ -314,6 +319,7 @@
             "bamarni/composer-bin-plugin": true,
             "carthage-software/mago": true,
             "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "ergebnis/composer-normalize": true,
             "ion-bazan/composer-diff": true,
             "olvlvl/composer-attribute-collector": true,
@@ -394,6 +400,9 @@
                 "worksome/request-factories"
             ]
         },
+        "merge-plugin": {
+            "include": []
+        },
         "patches": {
             "laravel/framework": [
                 "patches/laravel-framework-src-illuminate-foundation-application-php.patch"
@@ -401,6 +410,9 @@
             "laravel/pint": [
                 "patches/laravel-pint-overrides-runner-parallel-processfactory-php.patch"
             ]
+        },
+        "phpstan/extension-installer": {
+            "ignore": []
         }
     },
     "scripts": {
@@ -432,7 +444,7 @@
             "@php artisan migrate --graceful --ansi -vv"
         ],
         "actionlint": "actionlint -color -oneline -verbose",
-        "ai-commit": "@php ./vendor/bin/ai-commit commit --ansi",
+        "ai-commit": "@php vendor/bin/ai-commit commit --ansi",
         "ai-commit-bito": "@ai-commit --generator=bito_cli",
         "ai-commit-bito-no-verify": "@ai-commit-bito --no-verify",
         "ai-commit-github-copilot": "@ai-commit --generator=github_copilot_cli",
@@ -455,12 +467,12 @@
             "@env-put-xdebug-on",
             "@php artisan --ansi"
         ],
-        "benchmark": "@php ./vendor/bin/phpbench run --report=aggregate --ansi -vv",
+        "benchmark": "@php vendor/bin/phpbench run --report=aggregate --ansi -vv",
         "blade-formatter": "blade-formatter resources/views/*.blade.php resources/views/**/*.blade.php --ignore-path= --php-version=8.3 --progress",
         "blade-formatter-check-formatted": "@blade-formatter --check-formatted",
         "blade-formatter-write": "@blade-formatter --write",
-        "cghooks": "@php ./vendor/bin/cghooks --ansi -vv",
-        "cghooks-ignore": "[ ! -f \"./vendor/bin/cghooks\" ] && exit 0 || php ./vendor/bin/cghooks --ansi -vv",
+        "cghooks": "@php vendor/bin/cghooks --ansi -vv",
+        "cghooks-ignore": "[ ! -f \"vendor/bin/cghooks\" ] && exit 0 || php vendor/bin/cghooks --ansi -vv",
         "checks": [
             "@env-put-xdebug-off",
             "@composer-normalize",
@@ -470,6 +482,7 @@
             "@md-lint",
             "@yaml-lint",
             "@phpmnd",
+            "@phpcs:compatibility",
             "@style-tools-lint",
             "@style-lint",
             "@pint-bail",
@@ -484,24 +497,25 @@
             "@phpstan"
         ],
         "checks-verbose": "time /opt/homebrew/bin/composer checks",
-        "class-leak": "@php ./vendor/bin/class-leak --ansi -vv",
+        "class-leak": "@php vendor/bin/class-leak --ansi -vv",
         "class-leak-check": "@class-leak check app/ config/ --skip-suffix=Pipe --skip-path=Support/Traits --skip-path=Channels --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Channel --skip-type=\\Guanguans\\LaravelExceptionNotify\\Contracts\\Collector --skip-type=Rector\\Rector\\AbstractRector",
         "composer-bin-all-update": "@composer bin all update --ansi -vv",
         "composer-check-platform-reqs": "@composer check-platform-reqs --lock --ansi -vv",
-        "composer-dependency-analyser": "@php ./vendor/bin/composer-dependency-analyser --verbose",
+        "composer-dependency-analyser": "@php vendor/bin/composer-dependency-analyser --verbose",
         "composer-diff": "@composer diff --with-platform --ansi -vv",
         "composer-disable-process-timeout": "Composer\\Config::disableProcessTimeout",
         "composer-normalize": "@composer normalize --diff --ansi -vv",
         "composer-normalize-dry-run": "@composer-normalize --dry-run",
         "composer-updater": [
             "Composer\\Config::disableProcessTimeout",
-            "@php ./composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.4/bin/php --except-packages=pestphp/pest-plugin-laravel --ansi"
+            "@php composer-updater --highest-php-binary=/opt/homebrew/opt/php@8.4/bin/php --except-packages=pestphp/pest-plugin-laravel --ansi"
         ],
         "composer-updater-dry-run": "@composer-updater --dry-run",
         "composer-updater-laravel10": "@composer-updater --composer-json-path=vendor-bin/laravel10/composer.json",
         "composer-updater-laravel11": "@composer-updater --composer-json-path=vendor-bin/laravel11/composer.json",
         "composer-validate": "@composer validate --check-lock --strict --ansi -vv",
         "composer-vendor-patches": "@php vendor/bin/vendor-patches generate --ansi -vv",
+        "detect-collisions": "@php vendor/bin/detect-collisions app/",
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
@@ -521,12 +535,12 @@
             "@putenv XDEBUG_MODE=coverage,debug",
             "@putenv XDEBUG_SESSION=1"
         ],
-        "envoy": "@php ./vendor/bin/envoy --ansi -vv",
+        "envoy": "@php vendor/bin/envoy --ansi -vv",
         "envoy-local": "@envoy run local",
         "envoy-ssh-testing": "@envoy ssh testing",
         "envoy-testing": "@envoy run testing",
         "facade-lint": "@facade-update --lint",
-        "facade-update": "@php -f ./facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facades/*.php'\\'')));')",
+        "facade-update": "@php -f facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facades/*.php'\\'')));')",
         "install-project": [
             "@post-create-project-cmd",
             "@artisan jwt:secret --force"
@@ -540,11 +554,11 @@
         "jack-open-versions-dry-run": "@jack-open-versions --dry-run",
         "jack-raise-to-installed": "@jack raise-to-installed",
         "jack-raise-to-installed-dry-run": "@jack-raise-to-installed --dry-run",
-        "json-lint": "@php ./vendor/bin/jsonlint *.json .*rc",
+        "json-lint": "@php vendor/bin/jsonlint *.json .*rc",
         "lint": [
             "@env-put-php",
             "for DIR in .; do find $DIR -maxdepth 1 -type f -name '*.php' -type f ! -name 'xxx.php' -exec $PHP83 -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done",
-            "for DIR in ./app ./config ./database ./lang ./resources ./routes ./tests; do find $DIR -type f -name '*.php' -type f ! -name 'xxx.php' -exec $PHP83 -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done"
+            "for DIR in app/ config/ database/ lang/ resources/ routes/ tests/; do find $DIR -type f -name '*.php' -type f ! -name 'xxx.php' -exec $PHP83 -l {} \\; 2>&1 | (! grep -v '^No syntax errors detected'); done"
         ],
         "mago": "@php vendor/bin/mago --config=mago.toml",
         "mago-format": "@mago format",
@@ -557,39 +571,50 @@
         "mago-lint-semantics-only": "@mago lint --semantics-only",
         "md-fix": "@md-lint --fix",
         "md-lint": "lint-md --config .lintmdrc --suppress-warnings *.md .github/ docs/",
-        "neon-lint": "@php ./vendor/bin/neon-lint *.neon",
-        "peck": "@php ./vendor/bin/peck check --path=app/ --config=peck.json --ansi -vv",
+        "neon-lint": "@php vendor/bin/neon-lint *.neon",
+        "normalized": "@composer-normalize",
+        "normalized-dry-run": "@composer-normalize-dry-run",
+        "peck": "@php vendor/bin/peck check --path=app/ --config=peck.json --ansi -vv",
         "peck-init": "@peck --init",
-        "pest": "@php ./vendor/bin/pest --colors=always --coverage",
+        "pest": "@php vendor/bin/pest --colors=always --coverage",
         "pest-bail": "@pest --bail",
-        "pest-coverage": "@pest --coverage-html=./.build/phpunit/ --coverage-clover=./.build/phpunit/clover.xml",
+        "pest-coverage": "@pest --coverage-html=.build/phpunit/ --coverage-clover=.build/phpunit/clover.xml",
+        "pest-disable-coverage-ignore": "@pest --disable-coverage-ignore",
+        "pest-highest": [
+            "@env-put-php",
+            "$PHP85 vendor/bin/pest --coverage"
+        ],
         "pest-migrate-configuration": "@pest --migrate-configuration",
         "pest-parallel": "@pest --parallel",
         "pest-profile": "@pest --profile",
         "pest-type-coverage": "@pest --type-coverage",
         "pest-update-snapshots": "@pest -d --update-snapshots",
-        "php-cs-fixer": "@php ./vendor/bin/php-cs-fixer fix --show-progress=dots --diff --ansi -vv",
-        "phploc": "@php ./vendor/bin/phploc --suffix=php src/",
-        "phpmd": "@php ./vendor/bin/phpmd src/ ansi cleancode,codesize,controversial,design,naming,unusedcode --suffixes=php",
-        "phpmetrics": "@php ./vendor/bin/phpmetrics --report-html=./.build/phpmetrics/ ./src/",
-        "phpmnd": "@php ./vendor/bin/phpmnd app/ --exclude=Support/PhpCsFixer/Fixer/ --exclude-path=Support/Utils.php --ignore-numbers=2,-1 --hint --progress --ansi -vv",
-        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
+        "php-cs-fixer": "@php vendor/bin/php-cs-fixer fix --show-progress=dots --diff --ansi -vv",
+        "phpcs": "@php vendor/bin/phpcs app/ bootstrap/ config/ resources/ tests/ --extensions=php --ignore=*/vendor/* --parallel=8 --cache --colors -n -p -s -v",
+        "phpcs:compatibility": "@phpcs --standard=PHPCompatibility --exclude=PHPCompatibility.Variables.ForbiddenThisUseContexts,PHPCompatibility.FunctionDeclarations.NewClosure,PHPCompatibility.FunctionDeclarations.NonStaticMagicMethods --runtime-set testVersion 8.3-",
+        "phpcs:help": "@phpcs --help",
+        "phpcs:i": "@phpcs -i",
+        "phploc": "@php vendor/bin/phploc --suffix=php src/",
+        "phpmd": "@php vendor/bin/phpmd src/ ansi cleancode,codesize,controversial,design,naming,unusedcode --suffixes=php",
+        "phpmetrics": "@php vendor/bin/phpmetrics --report-html=.build/phpmetrics/ src/",
+        "phpmnd": "@php vendor/bin/phpmnd app/ --exclude=Support/PhpCsFixer/Fixer/ --exclude-path=Support/Utils.php --ignore-numbers=2,-1 --hint --progress --ansi -vv",
+        "phpstan": "@php vendor/bin/phpstan analyse --memory-limit=1G --ansi -vv",
         "phpstan-baseline": "@phpstan --generate-baseline --allow-empty-baseline",
         "phpstan-split-baseline": [
             "@phpstan --generate-baseline=baselines/loader.neon --allow-empty-baseline",
             "find baselines/ -type f -not -name loader.neon -delete",
-            "@php ./vendor/bin/split-phpstan-baseline baselines/loader.neon"
+            "@php vendor/bin/split-phpstan-baseline baselines/loader.neon"
         ],
         "pint": [
             "@env-put-xdebug-off",
-            "@php ./vendor/bin/pint --parallel --ansi -vv"
+            "@php vendor/bin/pint --parallel --ansi -vv"
         ],
         "pint-bail": "@pint --bail",
         "pint-dirty": "@pint --dirty",
         "pint-dirty-bail": "@pint-dirty --bail",
         "pint-dirty-test": "@pint-dirty --test",
         "pint-test": "@pint --test",
-        "rector": "@php ./vendor/bin/rector --ansi -vv",
+        "rector": "@php vendor/bin/rector --ansi -vv",
         "rector-clear-cache": "@rector --clear-cache",
         "rector-clear-cache-dry-run": "@rector-clear-cache --dry-run",
         "rector-custom-rule": "@rector custom-rule",
@@ -599,7 +624,7 @@
         "rector-only": "@rector-clear-cache --only=Guanguans\\MonorepoBuilderWorker\\Support\\Rectors\\RenameToPsrNameRector",
         "rector-only-dry-run": "@rector-only --dry-run",
         "rector-setup-ci": "@rector setup-ci",
-        "release": "@php ./vendor/bin/monorepo-builder release --ansi -vv",
+        "release": "@php vendor/bin/monorepo-builder release --ansi -vv",
         "release-1.0.0-BETA1": "@release 1.0.0-BETA1",
         "release-1.0.0-BETA1-dry-run": "@release-1.0.0-BETA1 --dry-run",
         "release-major": "@release major",
@@ -608,12 +633,12 @@
         "release-minor-dry-run": "@release-minor --dry-run",
         "release-patch": "@release patch",
         "release-patch-dry-run": "@release-patch --dry-run",
-        "roave-infection-static-analysis-plugin": "@php ./vendor/bin/roave-infection-static-analysis-plugin --psalm-config=psalm.xml.dist",
-        "roave-no-leaks": "@php ./vendor/bin/roave-no-leaks",
-        "rule-doc": "@php ./rule-doc-generator generate --ansi -vv",
+        "roave-infection-static-analysis-plugin": "@php vendor/bin/roave-infection-static-analysis-plugin --psalm-config=psalm.xml.dist",
+        "roave-no-leaks": "@php vendor/bin/roave-no-leaks",
+        "rule-doc": "@php rule-doc-generator generate --ansi -vv",
         "rule-doc-rector": "@rule-doc app/Support/Rectors/ --categorize=rector --output-file=app/Support/Rectors/rector-rules-overview.md",
-        "rule-doc-rector-validate": "@php ./rule-doc-generator validate --ansi -vv app/Support/Rectors/",
-        "sk": "@php ./vendor/bin/swiss-knife --ansi -vv",
+        "rule-doc-rector-validate": "@php rule-doc-generator validate --ansi -vv app/Support/Rectors/",
+        "sk": "@php vendor/bin/swiss-knife --ansi -vv",
         "sk-alice-yaml-fixtures-to-php": "@sk alice-yaml-fixtures-to-php --help",
         "sk-check-commented-code": "@sk check-commented-code app/ routes/ --line-limit=20",
         "sk-check-conflicts": "@sk check-conflicts app/ bootstrap/ config/ database/ resources/ routes/ tests/",
@@ -634,10 +659,10 @@
         "style-lint": "@style-fix --dry-run",
         "style-tools-fix": "@php-cs-fixer --config=.php-cs-fixer-tools.php",
         "style-tools-lint": "@style-tools-fix --dry-run",
-        "text-fix": "npx textlint --fix ./*.md ./.github/*.md ./docs/**/*.md",
-        "text-lint": "npx textlint --format=pretty-error ./*.md ./.github/*.md ./docs/**/*.md",
+        "text-fix": "npx textlint --fix *.md .github/*.md docs/**/*.md",
+        "text-lint": "npx textlint --format=pretty-error *.md .github/*.md docs/**/*.md",
         "todo-lint": "! git --no-pager grep --extended-regexp --ignore-case 'todo|fixme' -- '*.php' ':!*.blade.php' ':(exclude)resources/'",
-        "trap": "@php ./vendor/bin/trap --ui --ansi -vv",
+        "trap": "@php vendor/bin/trap --ui --ansi -vv",
         "trufflehog": "trufflehog git https://github.com/guanguans/laravel-skeleton --only-verified",
         "user-composer": [
             "@env-put-composer-memory-unlimited",
@@ -648,15 +673,22 @@
             "@env-put-xdebug-off",
             "@php -d xdebug.mode=off"
         ],
-        "var-dump-server": "@php ./vendor/bin/var-dump-server --ansi -vv",
+        "var-dump-server": "@php vendor/bin/var-dump-server --ansi -vv",
+        "var-dump-server-html": [
+            "Composer\\Config::disableProcessTimeout",
+            "[ -d .build ] || mkdir -p .build/",
+            "[ -f .build/dump.html ] || touch .build/dump.html",
+            "open .build/dump.html",
+            "@php vendor/bin/var-dump-server --ansi -v --format=html > .build/dump.html"
+        ],
         "vhs": [
             "@cghooks-uninstall",
             "vhs < vhs.tape",
             "@cghooks-install"
         ],
-        "yaml-lint": "@php ./vendor/bin/yaml-lint .github/ --ansi -vv",
+        "yaml-lint": "@php vendor/bin/yaml-lint .github/ --ansi -vv",
         "zh-fix": "@zh-lint --fix",
-        "zh-lint": "zhlint {./,docs/,docs/**/}*-zh_CN.md"
+        "zh-lint": "zhlint {,docs/,docs/**/}*-zh_CN.md"
     },
     "scripts-aliases": {
         "artisan": [
@@ -664,6 +696,12 @@
         ],
         "artisan-xdebug": [
             "art-xdebug"
+        ],
+        "normalized": [
+            "composer-normalize"
+        ],
+        "normalized-dry-run": [
+            "composer-normalize-dry-run"
         ],
         "pest": [
             "test"
@@ -673,6 +711,12 @@
         ],
         "pest-coverage": [
             "test-coverage"
+        ],
+        "pest-disable-coverage-ignore": [
+            "test-disable-coverage-ignore"
+        ],
+        "pest-highest": [
+            "test-highest"
         ],
         "pest-migrate-configuration": [
             "test-migrate-configuration"

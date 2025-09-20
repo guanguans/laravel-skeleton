@@ -108,6 +108,8 @@ parameters:
         - identifier: offsetAccess.nonOffsetAccessible
         - identifier: offsetAccess.notFound
         - identifier: return.type
+        - identifier: shipmonk.deadConstant
+        - identifier: shipmonk.deadMethod
         - identifier: trait.unused
         - identifier: typePerfect.narrowPublicClassMethodParamType
         - identifier: typePerfect.noArrayAccessOnObject
