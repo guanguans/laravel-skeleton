@@ -821,6 +821,8 @@ app/
 |   |   |   `-- SnakeCaseToCamelCaseConverter.php
 |   |   `-- Transformer/
 |   |       `-- CamelToSnakeCaseTransformer.php
+|   |-- VarDumper/
+|   |   `-- ServerDumper.php
 |   `-- helpers.php
 `-- View/
     |-- Components/
@@ -830,7 +832,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-63 directories, 297 files
+64 directories, 298 files
 
 ```
 

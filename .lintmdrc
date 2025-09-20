@@ -3,7 +3,7 @@
         "src/",
         "tests/",
         "vendor/",
-        "./CHANGELOG.md"
+        "CHANGELOG.md"
     ],
     "rules": {
         "space-around-alphabet": 2,
@@ -24,7 +24,7 @@
         "no-long-code": [
             1,
             {
-                "length": 200,
+                "length": 120,
                 "exclude": [
                     "dot"
                 ]

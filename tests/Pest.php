@@ -22,6 +22,7 @@ declare(strict_types=1);
  */
 
 use Faker\Factory;
+use Illuminate\Support\Facades\Http;
 use Pest\Expectation;
 use Symfony\Component\Finder\Finder;
 use Tests\TestCase;
@@ -99,7 +100,7 @@ function reset_http_fake(?Illuminate\Http\Client\Factory $factory = null): void
 {
     (function (): void {
         $this->stubCallbacks = collect();
-    })->call($factory ?? Illuminate\Support\Facades\Http::getFacadeRoot());
+    })->call($factory ?? Http::getFacadeRoot());
 }
 
 function clear_same_namespace(): void
