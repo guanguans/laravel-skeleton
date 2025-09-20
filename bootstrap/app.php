@@ -30,6 +30,7 @@ use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Lottery;
+use Illuminate\Validation\ValidationException;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -119,6 +120,19 @@ return Application::configure(basePath: \dirname(__DIR__))
     })
     ->withExceptions(static function (Exceptions $exceptions): void {
         $exceptions
+            ->map(
+                ValidationException::class,
+                fn (ValidationException $validationException) => (function (): ValidationException {
+                    // @codeCoverageIgnoreStart
+                    $this->message = collect($this->validator->errors()->all())
+                        ->map(static fn (string $message): string => "- $message")
+                        ->unshift(\PHP_EOL)
+                        ->implode(\PHP_EOL);
+
+                    return $this;
+                    // @codeCoverageIgnoreEnd
+                })->call($validationException)
+            )
             // ->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 10))
             ->truncateRequestExceptionsAt(256)
             ->dontTruncateRequestExceptions()

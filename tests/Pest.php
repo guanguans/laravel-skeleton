@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 use Faker\Factory;
 use Pest\Expectation;
+use Symfony\Component\Finder\Finder;
 use Tests\TestCase;
 
 uses(TestCase::class)
@@ -92,4 +93,22 @@ function faker(string $locale = Factory::DEFAULT_LOCALE): Generator
 function running_in_github_action(): bool
 {
     return 'true' === getenv('GITHUB_ACTIONS');
+}
+
+function reset_http_fake(?Illuminate\Http\Client\Factory $factory = null): void
+{
+    (function (): void {
+        $this->stubCallbacks = collect();
+    })->call($factory ?? Illuminate\Support\Facades\Http::getFacadeRoot());
+}
+
+function clear_same_namespace(): void
+{
+    foreach (
+        Finder::create()
+            ->in(__DIR__.'/../vendor/guanguans/ai-commit/app')
+            ->name('*.php') as $splFileInfo
+    ) {
+        file_put_contents($splFileInfo->getPathname(), '');
+    }
 }
