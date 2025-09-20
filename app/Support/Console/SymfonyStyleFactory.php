@@ -44,23 +44,15 @@ final readonly class SymfonyStyleFactory
         (fn () => $this->configureIO($argvInput, $consoleOutput))->call(new Application);
 
         // --debug is called
-        if ($argvInput->hasParameterOption('--debug')) {
+        if ($argvInput->hasParameterOption(['--debug', '--xdebug'])) {
             $consoleOutput->setVerbosity(OutputInterface::VERBOSITY_DEBUG);
         }
 
         // disable output for tests
-        if (self::isPHPUnitRun()) {
+        if (app()->runningUnitTests()) {
             $consoleOutput->setVerbosity(OutputInterface::VERBOSITY_QUIET);
         }
 
         return new SymfonyStyle($argvInput, $consoleOutput);
-    }
-
-    /**
-     * Never ever used static methods if not necessary, this is just handy for tests + src to prevent duplication.
-     */
-    private static function isPHPUnitRun(): bool
-    {
-        return \defined('PHPUNIT_COMPOSER_INSTALL') || \defined('__PHPUNIT_PHAR__');
     }
 }
