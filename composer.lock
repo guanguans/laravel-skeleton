@@ -18723,16 +18723,16 @@
         },
         {
             "name": "sheaf/cli",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sheafui/cli.git",
-                "reference": "f27d75e69c6d2457a97e30878d19870fe62db3ad"
+                "reference": "4d588c70fa9887d043bc606226ebe65e0ebf2969"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sheafui/cli/zipball/f27d75e69c6d2457a97e30878d19870fe62db3ad",
-                "reference": "f27d75e69c6d2457a97e30878d19870fe62db3ad",
+                "url": "https://api.github.com/repos/sheafui/cli/zipball/4d588c70fa9887d043bc606226ebe65e0ebf2969",
+                "reference": "4d588c70fa9887d043bc606226ebe65e0ebf2969",
                 "shasum": ""
             },
             "require-dev": {
@@ -18777,9 +18777,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sheafui/cli/issues",
-                "source": "https://github.com/sheafui/cli/tree/v1.1.1"
+                "source": "https://github.com/sheafui/cli/tree/v1.2.0"
             },
-            "time": "2025-09-14T20:07:51+00:00"
+            "time": "2025-09-22T19:18:45+00:00"
         },
         {
             "name": "skywarth/chaotic-schedule",
