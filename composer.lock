@@ -29440,16 +29440,16 @@
         },
         {
             "name": "dedoc/scramble",
-            "version": "v0.12.34",
+            "version": "v0.12.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dedoc/scramble.git",
-                "reference": "fdedbaac3271b466182d4029651aa90eac53cee5"
+                "reference": "b6d06a1cec5f8a8ad08ebce9c2df37a1ef4a2629"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dedoc/scramble/zipball/fdedbaac3271b466182d4029651aa90eac53cee5",
-                "reference": "fdedbaac3271b466182d4029651aa90eac53cee5",
+                "url": "https://api.github.com/repos/dedoc/scramble/zipball/b6d06a1cec5f8a8ad08ebce9c2df37a1ef4a2629",
+                "reference": "b6d06a1cec5f8a8ad08ebce9c2df37a1ef4a2629",
                 "shasum": ""
             },
             "require": {
@@ -29508,7 +29508,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dedoc/scramble/issues",
-                "source": "https://github.com/dedoc/scramble/tree/v0.12.34"
+                "source": "https://github.com/dedoc/scramble/tree/v0.12.35"
             },
             "funding": [
                 {
@@ -29516,7 +29516,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-09T14:36:44+00:00"
+            "time": "2025-09-24T07:18:11+00:00"
         },
         {
             "name": "defstudio/pest-plugin-laravel-expectations",
