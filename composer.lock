@@ -7461,16 +7461,16 @@
         },
         {
             "name": "inertiajs/inertia-laravel",
-            "version": "v2.0.7",
+            "version": "v2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "a08aea5a16fed187dcf815c9037b62cc544ab809"
+                "reference": "82931953935e0b9b9a7f9ab26e3a9d4603e02917"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/a08aea5a16fed187dcf815c9037b62cc544ab809",
-                "reference": "a08aea5a16fed187dcf815c9037b62cc544ab809",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/82931953935e0b9b9a7f9ab26e3a9d4603e02917",
+                "reference": "82931953935e0b9b9a7f9ab26e3a9d4603e02917",
                 "shasum": ""
             },
             "require": {
@@ -7525,9 +7525,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inertiajs/inertia-laravel/issues",
-                "source": "https://github.com/inertiajs/inertia-laravel/tree/v2.0.7"
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v2.0.9"
             },
-            "time": "2025-09-24T16:49:48+00:00"
+            "time": "2025-09-26T17:20:38+00:00"
         },
         {
             "name": "intervention/gif",
