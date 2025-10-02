@@ -14313,16 +14313,16 @@
         },
         {
             "name": "orchestra/sidekick",
-            "version": "v1.2.15",
+            "version": "v1.2.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/sidekick.git",
-                "reference": "1cbe9a01d4db54aea85afe1dffd41f5e5de82243"
+                "reference": "371ce2882ee3f5bf826b36e75d461e51c9cd76c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/sidekick/zipball/1cbe9a01d4db54aea85afe1dffd41f5e5de82243",
-                "reference": "1cbe9a01d4db54aea85afe1dffd41f5e5de82243",
+                "url": "https://api.github.com/repos/orchestral/sidekick/zipball/371ce2882ee3f5bf826b36e75d461e51c9cd76c2",
+                "reference": "371ce2882ee3f5bf826b36e75d461e51c9cd76c2",
                 "shasum": ""
             },
             "require": {
@@ -14364,9 +14364,9 @@
             "description": "Packages Toolkit Utilities and Helpers for Laravel",
             "support": {
                 "issues": "https://github.com/orchestral/sidekick/issues",
-                "source": "https://github.com/orchestral/sidekick/tree/v1.2.15"
+                "source": "https://github.com/orchestral/sidekick/tree/v1.2.17"
             },
-            "time": "2025-10-01T11:36:41+00:00"
+            "time": "2025-10-02T11:02:26+00:00"
         },
         {
             "name": "overtrue/laravel-uploader",
