@@ -18417,16 +18417,16 @@
         },
         {
             "name": "robsontenorio/mary",
-            "version": "2.4.6",
+            "version": "2.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robsontenorio/mary.git",
-                "reference": "983c733058205f69a1edf68037633e522c43870f"
+                "reference": "442c005a0b9f7365356ec73bd8a900e539f46ae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/983c733058205f69a1edf68037633e522c43870f",
-                "reference": "983c733058205f69a1edf68037633e522c43870f",
+                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/442c005a0b9f7365356ec73bd8a900e539f46ae0",
+                "reference": "442c005a0b9f7365356ec73bd8a900e539f46ae0",
                 "shasum": ""
             },
             "require": {
@@ -18492,7 +18492,7 @@
             ],
             "support": {
                 "issues": "https://github.com/robsontenorio/mary/issues",
-                "source": "https://github.com/robsontenorio/mary/tree/2.4.6"
+                "source": "https://github.com/robsontenorio/mary/tree/2.4.7"
             },
             "funding": [
                 {
@@ -18500,7 +18500,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-26T13:12:18+00:00"
+            "time": "2025-10-05T15:30:24+00:00"
         },
         {
             "name": "ryangjchandler/bearer",
