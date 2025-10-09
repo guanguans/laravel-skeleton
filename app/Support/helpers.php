@@ -338,12 +338,12 @@ if (!\function_exists('curry')) {
      */
     function curry(callable $function): callable
     {
-        $accumulator = static fn (mixed $arguments): Closure => static function (mixed ...$args) use (
+        $accumulator = static fn (array $arguments): Closure => static function (mixed ...$args) use (
             $arguments,
             $function,
             &$accumulator
         ) {
-            $arguments = array_merge($arguments, $args);
+            $arguments = [...$arguments, ...$args];
             $reflection = new ReflectionFunction($function);
             $totalArguments = $reflection->getNumberOfRequiredParameters();
 

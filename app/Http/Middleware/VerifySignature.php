@@ -76,10 +76,7 @@ final class VerifySignature
         throw_unless(
             (new HmacSigner(secret: $secret))->validate(
                 $request->header('signature'),
-                array_merge($request->input(), [
-                    'timestamp' => $request->header('timestamp'),
-                    'nonce' => $request->header('nonce'),
-                ])
+                [...(array) $request->input(), 'timestamp' => $request->header('timestamp'), 'nonce' => $request->header('nonce')]
             ),
             InvalidSignatureException::class
         );

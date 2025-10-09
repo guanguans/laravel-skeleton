@@ -55,7 +55,7 @@ trait Nullable
     {
         $attributes = \is_array($attributes) ? $attributes : \func_get_args();
 
-        $this->nullable = array_merge($this->nullable, $attributes);
+        $this->nullable = [...$this->nullable, ...$attributes];
     }
 
     /**

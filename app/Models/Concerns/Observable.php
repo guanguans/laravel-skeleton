@@ -25,7 +25,7 @@ trait Observable
         $traitEvents = self::collectEventsRegisteredByTraits();
 
         if (null !== $traitEvents) {
-            $events = array_values(array_unique(array_merge($events, $traitEvents)));
+            $events = array_values(array_unique([...$events, ...$traitEvents]));
         }
 
         $class = static::class;

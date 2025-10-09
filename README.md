@@ -152,6 +152,7 @@ composer roave-no-leaks
 composer rule-doc
 composer rule-doc-rector
 composer rule-doc-rector-validate
+composer setup
 composer sk
 composer sk-alice-yaml-fixtures-to-php
 composer sk-check-commented-code
@@ -384,6 +385,7 @@ composer zh-lint
 * [wendelladriel/laravel-lift](https://github.com/WendellAdriel/laravel-lift) - Take your Eloquent Models to the next level
 * [wendelladriel/laravel-validated-dto](https://github.com/WendellAdriel/laravel-validated-dto) - Data Transfer Objects with validation for Laravel applications
 * [wikimedia/composer-merge-plugin](https://github.com/wikimedia/composer-merge-plugin) - Composer plugin to merge multiple composer.json files
+* [wildside/userstamps](https://github.com/mattiverse/Laravel-Userstamps) - Laravel Userstamps provides an Eloquent trait which automatically maintains `created_by` and `updated_by` columns on your model, populated by the currently authenticated user in your application.
 * [wireui/wireui](https://github.com/wireui/wireui) - TallStack components
 * [yiisoft/injector](https://github.com/yiisoft/injector) - PSR-11 compatible injector. Executes a callable and makes an instances by injecting dependencies from a given DI container.
 * [zenstruck/stream](https://github.com/zenstruck/stream) - Object wrapper for PHP resources.

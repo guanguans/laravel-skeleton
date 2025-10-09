@@ -97,7 +97,7 @@ return Factory::fromRuleSet(Php83::create()
         // '@PHP80Migration:risky' => true,
         // '@PHP81Migration' => true,
         // '@PHP82Migration' => true,
-        '@PHP83Migration' => true,
+        '@PHP8x3Migration' => true,
         // '@PHP84Migration' => true,
         // '@PHPUnit75Migration:risky' => true,
         // '@PHPUnit84Migration:risky' => true,
@@ -107,7 +107,6 @@ return Factory::fromRuleSet(Php83::create()
         // '@PhpCsFixer:risky' => true,
     ]))
     ->withRules(Rules::fromArray([
-        'PhpCsFixerCustomFixers/phpdoc_tag_no_named_arguments' => false,
         'align_multiline_comment' => [
             'comment_type' => 'phpdocs_only',
         ],

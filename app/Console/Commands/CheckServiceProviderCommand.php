@@ -118,7 +118,7 @@ final class CheckServiceProviderCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->except = array_merge($this->except, $this->option('except'));
+        $this->except = [...$this->except, ...$this->option('except')];
     }
 
     #[\Override]
