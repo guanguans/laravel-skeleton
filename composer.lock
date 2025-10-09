@@ -36760,16 +36760,16 @@
         },
         {
             "name": "rector/type-perfect",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/type-perfect.git",
-                "reference": "098eea3fe0e884fe281d939e5e4142151ab67368"
+                "reference": "542941e6d7268212d7d0c67ce9b594770ae3eb0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/098eea3fe0e884fe281d939e5e4142151ab67368",
-                "reference": "098eea3fe0e884fe281d939e5e4142151ab67368",
+                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/542941e6d7268212d7d0c67ce9b594770ae3eb0d",
+                "reference": "542941e6d7268212d7d0c67ce9b594770ae3eb0d",
                 "shasum": ""
             },
             "require": {
@@ -36797,7 +36797,7 @@
             "description": "Next level type declaration checks",
             "support": {
                 "issues": "https://github.com/rectorphp/type-perfect/issues",
-                "source": "https://github.com/rectorphp/type-perfect/tree/2.1.0"
+                "source": "https://github.com/rectorphp/type-perfect/tree/2.1.1"
             },
             "funding": [
                 {
@@ -36809,7 +36809,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-04T20:38:57+00:00"
+            "time": "2025-10-09T15:49:34+00:00"
         },
         {
             "name": "reliese/laravel",
