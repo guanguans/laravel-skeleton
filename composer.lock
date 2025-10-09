@@ -38186,16 +38186,16 @@
         },
         {
             "name": "shipmonk/dead-code-detector",
-            "version": "0.13.3",
+            "version": "0.13.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shipmonk-rnd/dead-code-detector.git",
-                "reference": "40ab4426238c26aa0ddb963b41ffd438450153a1"
+                "reference": "5acf47424cc0eb0d72a80b3695051c64e590fe08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shipmonk-rnd/dead-code-detector/zipball/40ab4426238c26aa0ddb963b41ffd438450153a1",
-                "reference": "40ab4426238c26aa0ddb963b41ffd438450153a1",
+                "url": "https://api.github.com/repos/shipmonk-rnd/dead-code-detector/zipball/5acf47424cc0eb0d72a80b3695051c64e590fe08",
+                "reference": "5acf47424cc0eb0d72a80b3695051c64e590fe08",
                 "shasum": ""
             },
             "require": {
@@ -38257,9 +38257,9 @@
             ],
             "support": {
                 "issues": "https://github.com/shipmonk-rnd/dead-code-detector/issues",
-                "source": "https://github.com/shipmonk-rnd/dead-code-detector/tree/0.13.3"
+                "source": "https://github.com/shipmonk-rnd/dead-code-detector/tree/0.13.4"
             },
-            "time": "2025-09-01T09:03:40+00:00"
+            "time": "2025-10-09T17:12:07+00:00"
         },
         {
             "name": "shipmonk/memory-scanner",
