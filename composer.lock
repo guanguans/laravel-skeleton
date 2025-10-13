@@ -15487,16 +15487,16 @@
         },
         {
             "name": "prism-php/prism",
-            "version": "v0.91.0",
+            "version": "v0.91.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "0c09548c594bbd761d772e4495ea9d9f208ba61f"
+                "reference": "509586f2528ac8b346a8aeac2082cfdaca7d0a58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/0c09548c594bbd761d772e4495ea9d9f208ba61f",
-                "reference": "0c09548c594bbd761d772e4495ea9d9f208ba61f",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/509586f2528ac8b346a8aeac2082cfdaca7d0a58",
+                "reference": "509586f2528ac8b346a8aeac2082cfdaca7d0a58",
                 "shasum": ""
             },
             "require": {
@@ -15552,7 +15552,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.91.0"
+                "source": "https://github.com/prism-php/prism/tree/v0.91.1"
             },
             "funding": [
                 {
@@ -15560,7 +15560,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-10T16:34:01+00:00"
+            "time": "2025-10-13T16:08:58+00:00"
         },
         {
             "name": "proengsoft/laravel-jsvalidation",
