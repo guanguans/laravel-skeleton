@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3993030e414f4a8b4c1d321104894f4",
+    "content-hash": "0997b72da7d7c389a362fbbd9ead8802",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -15487,16 +15487,16 @@
         },
         {
             "name": "prism-php/prism",
-            "version": "v0.91.1",
+            "version": "v0.92.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "509586f2528ac8b346a8aeac2082cfdaca7d0a58"
+                "reference": "90cd46fd84d5135d4793d29310e86353bb111040"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/509586f2528ac8b346a8aeac2082cfdaca7d0a58",
-                "reference": "509586f2528ac8b346a8aeac2082cfdaca7d0a58",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/90cd46fd84d5135d4793d29310e86353bb111040",
+                "reference": "90cd46fd84d5135d4793d29310e86353bb111040",
                 "shasum": ""
             },
             "require": {
@@ -15552,7 +15552,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.91.1"
+                "source": "https://github.com/prism-php/prism/tree/v0.92.0"
             },
             "funding": [
                 {
@@ -15560,7 +15560,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-13T16:08:58+00:00"
+            "time": "2025-10-14T20:09:20+00:00"
         },
         {
             "name": "proengsoft/laravel-jsvalidation",
