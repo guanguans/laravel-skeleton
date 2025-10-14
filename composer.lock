@@ -18785,16 +18785,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "9.3.4",
+            "version": "9.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "707e27eb1746296ac7e111179ec5da842f64e235"
+                "reference": "24dbff042320c2a8ca70b3975e684a1240422b02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/707e27eb1746296ac7e111179ec5da842f64e235",
-                "reference": "707e27eb1746296ac7e111179ec5da842f64e235",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/24dbff042320c2a8ca70b3975e684a1240422b02",
+                "reference": "24dbff042320c2a8ca70b3975e684a1240422b02",
                 "shasum": ""
             },
             "require": {
@@ -18822,7 +18822,7 @@
                 "league/flysystem-aws-s3-v3": "^2.0|^3.0",
                 "mockery/mockery": "^1.4",
                 "orchestra/testbench": "^8.0|^9.0|^10.0",
-                "pestphp/pest": "^1.20|^2.0|^3.0",
+                "pestphp/pest": "^1.20|^2.0|^3.0|^4.0",
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.1",
@@ -18869,7 +18869,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/9.3.4"
+                "source": "https://github.com/spatie/laravel-backup/tree/9.3.5"
             },
             "funding": [
                 {
@@ -18881,7 +18881,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-07-25T07:51:20+00:00"
+            "time": "2025-10-14T11:25:29+00:00"
         },
         {
             "name": "spatie/laravel-collection-macros",
