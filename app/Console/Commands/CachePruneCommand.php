@@ -15,9 +15,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Cache\DatabaseStore;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -42,7 +42,7 @@ final class CachePruneCommand extends Command
         $table = Config::get('cache.stores.database.table', 'cache');
 
         $deleted = DB::table($table)
-            ->where('expiration', '<=', Carbon::now()->getTimestamp())
+            ->where('expiration', '<=', Date::now()->getTimestamp())
             ->delete();
 
         $this->components->info("Successfully pruned $deleted expired cache entries from the database.");

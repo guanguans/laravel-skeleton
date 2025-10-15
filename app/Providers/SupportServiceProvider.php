@@ -17,7 +17,6 @@ use App\Support\Clients\PushDeer;
 use App\Support\Managers\ElasticsearchManager;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
@@ -119,7 +118,7 @@ final class SupportServiceProvider extends ServiceProvider
             Env::getOrFail('DB_HOST');
 
             Number::useLocale($this->app->getLocale());
-            Carbon::setLocale($this->app->getLocale());
+            Date::setLocale($this->app->getLocale());
         });
     }
 

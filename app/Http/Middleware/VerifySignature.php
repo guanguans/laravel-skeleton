@@ -21,8 +21,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
@@ -62,7 +62,7 @@ final class VerifySignature
             'nonce' => ['required', 'string', 'size:16'],
             'timestamp' => \sprintf(
                 'required|int|max:%s|min:%s',
-                $time = Carbon::now()->timestamp + 1,
+                $time = Date::now()->timestamp + 1,
                 $time - $effectiveTime
             ),
         ])->validate();

@@ -18,7 +18,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
@@ -40,7 +39,7 @@ final class SetLocale
         // $locale = auth()->user()?->locale() and app()->setLocale($locale);
         Config::set('app.locale', $locale);
         app()->setLocale($locale);
-        Carbon::setLocale($locale);
+        Date::setLocale($locale);
         Date::setLocale($locale);
 
         return $next($request);

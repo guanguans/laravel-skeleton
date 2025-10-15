@@ -67,6 +67,7 @@ use Rector\Transform\ValueObject\FuncCallToStaticCall;
 use Rector\Transform\ValueObject\StaticCallToFuncCall;
 use Rector\Transform\ValueObject\StringToClassConstant;
 use Rector\ValueObject\PhpVersion;
+use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
 use RectorLaravel\Rector\ArrayDimFetch\EnvVariableToEnvHelperRector;
 use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
@@ -296,6 +297,7 @@ return RectorConfig::configure()
         EnvVariableToEnvHelperRector::class,
         ServerVariableToRequestFacadeRector::class,
 
+        ArrayToArrGetRector::class,
         DispatchToHelperFunctionsRector::class,
         EmptyToBlankAndFilledFuncRector::class,
         HelperFuncCallToFacadeClassRector::class,

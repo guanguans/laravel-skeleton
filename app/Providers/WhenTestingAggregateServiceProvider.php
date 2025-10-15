@@ -16,8 +16,8 @@ namespace App\Providers;
 use Carbon\CarbonImmutable;
 use Faker\Generator;
 use Illuminate\Support\AggregateServiceProvider;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\ParallelTesting;
@@ -60,8 +60,8 @@ final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
     private function whenTesting(): void
     {
         $this->whenever($this->app->runningUnitTests(), function (): void {
-            Carbon::setTestNow();
-            Carbon::setTestNowAndTimezone();
+            Date::setTestNow();
+            Date::setTestNowAndTimezone();
             CarbonImmutable::setTestNow();
             CarbonImmutable::setTestNowAndTimezone();
             Http::preventStrayRequests();

@@ -18,7 +18,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
@@ -56,7 +56,7 @@ final class HasValidSignature
         abort_if(\count($explodedDecoded) !== 2, SymfonyResponse::HTTP_UNAUTHORIZED, 'Invalid signature');
 
         [$timestamp, $givenSignature] = $explodedDecoded;
-        $timestamp = Carbon::parse($timestamp);
+        $timestamp = Date::parse($timestamp);
 
         // abort if the timestamp is invalid or older than a minute
         abort_if(
@@ -67,7 +67,7 @@ final class HasValidSignature
 
         $validSignature = hash_equals(
             $givenSignature,
-            hash_hmac('sha256', $request->getContent(), (string) config('auth.encrypt_pass'))
+            hash_hmac('sha256', $request->getContent(), config()->string('auth.encrypt_pass'))
         );
 
         // abort if the signature is invalid

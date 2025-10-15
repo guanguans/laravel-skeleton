@@ -18,7 +18,7 @@ namespace App\Support\Mixins;
 
 use App\Support\Attributes\Mixin;
 use Illuminate\Console\Scheduling\Event;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
 use Lorisleiva\CronTranslator\CronTranslator;
@@ -92,7 +92,7 @@ final class SchedulingEventMixin
         return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
             $directory,
             $filename,
-            \sprintf('daily-%s', Carbon::now()->format('Y-m-d'))
+            \sprintf('daily-%s', Date::now()->format('Y-m-d'))
         );
     }
 
@@ -101,7 +101,7 @@ final class SchedulingEventMixin
         return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
             $directory,
             $filename,
-            \sprintf('weekly-%s', Carbon::now()->format('Y-W'))
+            \sprintf('weekly-%s', Date::now()->format('Y-W'))
         );
     }
 
@@ -110,7 +110,7 @@ final class SchedulingEventMixin
         return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
             $directory,
             $filename,
-            \sprintf('monthly-%s', Carbon::now()->format('Y-m'))
+            \sprintf('monthly-%s', Date::now()->format('Y-m'))
         );
     }
 
@@ -119,7 +119,7 @@ final class SchedulingEventMixin
         return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
             $directory,
             $filename,
-            \sprintf('quarterly-%s-%s', Carbon::now()->format('Y'), now()->quarter)
+            \sprintf('quarterly-%s-%s', Date::now()->format('Y'), now()->quarter)
         );
     }
 
@@ -128,7 +128,7 @@ final class SchedulingEventMixin
         return fn (?string $directory = null, ?string $filename = null): Event => $this->userAppendOutputTo(
             $directory,
             $filename,
-            \sprintf('yearly-%s', Carbon::now()->format('Y'))
+            \sprintf('yearly-%s', Date::now()->format('Y'))
         );
     }
 
