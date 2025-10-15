@@ -35,3 +35,4 @@ yarn-error.log
 /public/xhgui
 /tests.*
 /vendor-bin/**/vendor/
+composer.lock
