@@ -197,6 +197,7 @@ composer vhs
 composer yaml-lint
 composer zh-fix
 composer zh-lint
+composer zizmor
 ```
 
 </details>

@@ -422,8 +422,7 @@
             "@artisan vendor:publish --tag=laravel-errors",
             "@artisan log-viewer:publish",
             "@artisan spatie-stub:publish --force",
-            "@cghooks update",
-            "@composer-diff"
+            "@cghooks update"
         ],
         "pre-autoload-dump": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
@@ -694,7 +693,8 @@
         ],
         "yaml-lint": "@php vendor/bin/yaml-lint .github/ --ansi -vv",
         "zh-fix": "@zh-lint --fix",
-        "zh-lint": "zhlint {,docs/,docs/**/}*-zh_CN.md"
+        "zh-lint": "zhlint {,docs/,docs/**/}*-zh_CN.md",
+        "zizmor": "zizmor .github/ --verbose"
     },
     "scripts-aliases": {
         "artisan": [
