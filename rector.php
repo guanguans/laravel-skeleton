@@ -24,9 +24,11 @@ use Illuminate\Support\Carbon as IlluminateCarbon;
 use Illuminate\Support\Str;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
+use Rector\CodeQuality\Rector\Class_\ConvertStaticToSelfRector;
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
+use Rector\CodeQuality\Rector\New_\NewStaticToNewSelfRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
 use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
@@ -79,6 +81,7 @@ use RectorLaravel\Rector\If_\ThrowIfRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Set\LaravelSetList;
+use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -123,10 +126,13 @@ return RectorConfig::configure()
     // ->withoutParallel()
     // ->withImportNames(importNames: false)
     ->withImportNames(importDocBlockNames: false, importShortClasses: false)
+    // ->withEditorUrl()
     ->withFluentCallNewLine()
+    ->withTreatClassesAsFinal()
     ->withAttributesSets(phpunit: true, all: true)
-    ->withComposerBased(phpunit: true)
+    ->withComposerBased(phpunit: true, laravel: true)
     ->withPhpVersion(PhpVersion::PHP_83)
+    ->withSetProviders(LaravelSetProvider::class)
     // ->withDowngradeSets(php83: true)
     ->withPhpSets(php83: true)
     ->withPreparedSets(
@@ -307,11 +313,17 @@ return RectorConfig::configure()
         ValidationRuleArrayStringValueToArrayRector::class,
     ])
     ->withSkip([
-        StringToClassConstantRector::class => [
-            __DIR__.'/app/Listeners/PrepareRequestListener.php',
+        ConvertStaticToSelfRector::class => [
+            __DIR__.'/database/factories/UserFactory.php',
+        ],
+        NewStaticToNewSelfRector::class => [
+            __DIR__.'/app/Models/BaseModel.php',
         ],
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/app/Support/Mixins/SchedulingEventMixin.php',
+        ],
+        StringToClassConstantRector::class => [
+            __DIR__.'/app/Listeners/PrepareRequestListener.php',
         ],
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
             __DIR__.'/app/Support/Clients/AbstractClient.php',
