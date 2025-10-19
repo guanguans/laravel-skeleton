@@ -132,4 +132,13 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    /*
+    | @see \Illuminate\Foundation\Concerns\ResolvesDumpSource
+    |--------------------------------------------------------------------------
+    | Editor
+    |--------------------------------------------------------------------------
+    */
+
+    'editor' => env('APP_EDITOR'),
 ];

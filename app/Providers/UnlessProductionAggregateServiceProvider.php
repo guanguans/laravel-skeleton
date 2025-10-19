@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Illuminate\Support\AggregateServiceProvider;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Traits\Conditionable;
 
 final class UnlessProductionAggregateServiceProvider extends AggregateServiceProvider
@@ -83,7 +84,9 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
 
     private function ever(): void
     {
-        $this->whenever(true, static function (): void {});
+        $this->whenever(true, static function (): void {
+            Mail::alwaysTo('example@example.com');
+        });
     }
 
     private function never(): void
