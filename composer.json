@@ -678,7 +678,7 @@
             "@env-put-xdebug-off",
             "@php -d xdebug.mode=off"
         ],
-        "var-dump-server": "@php vendor/bin/var-dump-server --ansi -vv",
+        "var-dump-server-cli": "@php vendor/bin/var-dump-server --ansi -vv",
         "var-dump-server-html": [
             "Composer\\Config::disableProcessTimeout",
             "[ -d .build ] || mkdir -p .build/",

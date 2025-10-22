@@ -192,7 +192,7 @@ composer trap
 composer trufflehog
 composer user-composer
 composer user-php
-composer var-dump-server
+composer var-dump-server-cli
 composer var-dump-server-html
 composer vhs
 composer yaml-lint

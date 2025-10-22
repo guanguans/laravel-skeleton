@@ -44,19 +44,15 @@ final readonly class ServerDumper implements DataDumperInterface
         ?DataDumperInterface $fallbackDumper = null,
         ?array $contextProviders = null,
     ) {
-        $this->fallbackDumper = method_exists(
+        $this->fallbackDumper = $this->dumpWithSourceMethodExists(
             $fallbackDumper ??= (
                 app()->runningInConsole()
                     ? new CliDumper(new ConsoleOutput, app()->basePath(), config('view.compiled'))
                     : new HtmlDumper(app()->basePath(), config('view.compiled')) // @codeCoverageIgnore
-            ),
-            'dumpWithSource'
+            )
         )
             ? $fallbackDumper
-            : new ContextualizedDumper(
-                $fallbackDumper,
-                [new SourceContextProvider]
-            );
+            : new ContextualizedDumper($fallbackDumper, [new SourceContextProvider]);
 
         $this->connection = new Connection(
             $host,
@@ -115,11 +111,16 @@ final readonly class ServerDumper implements DataDumperInterface
     public function dump(Data $data): ?string
     {
         if (!$this->connection->write($data)) {
-            return method_exists($this->fallbackDumper, 'dumpWithSource')
+            return $this->dumpWithSourceMethodExists($this->fallbackDumper)
                 ? $this->fallbackDumper->dumpWithSource($data)
                 : $this->fallbackDumper->dump($data);
         }
 
         return null; // @codeCoverageIgnore
+    }
+
+    private function dumpWithSourceMethodExists(DataDumperInterface $dumper): bool
+    {
+        return method_exists($dumper, 'dumpWithSource');
     }
 }
