@@ -44,7 +44,7 @@ final readonly class ServerDumper implements DataDumperInterface
         ?DataDumperInterface $fallbackDumper = null,
         ?array $contextProviders = null,
     ) {
-        $this->fallbackDumper = $this->dumpWithSourceMethodExists(
+        $this->fallbackDumper = $this->methodExistsOfDumpWithSource(
             $fallbackDumper ??= (
                 app()->runningInConsole()
                     ? new CliDumper(new ConsoleOutput, app()->basePath(), config('view.compiled'))
@@ -71,20 +71,31 @@ final readonly class ServerDumper implements DataDumperInterface
      * @see \Illuminate\Foundation\Http\HtmlDumper::register()
      *
      * @noinspection PhpVoidFunctionResultUsedInspection
+     * @noinspection GlobalVariableUsageInspection
      */
     public static function register(
-        string $host,
         ?DataDumperInterface $fallbackDumper = null,
         ?array $contextProviders = null,
         ?ClonerInterface $cloner = null,
+        bool $force = true,
     ): void {
         // (new FoundationServiceProvider(app()))->registerDumper();
+
+        $host = $_SERVER['VAR_DUMPER_SERVER'] ?? '127.0.0.1:9912';
+
+        isset($_SERVER[$formatIndex = 'VAR_DUMPER_FORMAT'])
+        and 'tcp' === parse_url($format = $_SERVER[$formatIndex], \PHP_URL_SCHEME)
+        and $host = $format;
+
+        $dumper = new self($host, $fallbackDumper, $contextProviders);
 
         $cloner ??= tap(new VarCloner, static function (VarCloner $varCloner): void {
             $varCloner->addCasters(ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
         });
 
-        $dumper = new self($host, $fallbackDumper, $contextProviders);
+        if ($force && isset($_SERVER[$formatIndex])) {
+            unset($_SERVER[$formatIndex]);
+        }
 
         VarDumper::setHandler(static function (mixed $var, ?string $label = null) use ($cloner, $dumper): void {
             $var = $cloner->cloneVar($var);
@@ -111,7 +122,7 @@ final readonly class ServerDumper implements DataDumperInterface
     public function dump(Data $data): ?string
     {
         if (!$this->connection->write($data)) {
-            return $this->dumpWithSourceMethodExists($this->fallbackDumper)
+            return $this->methodExistsOfDumpWithSource($this->fallbackDumper)
                 ? $this->fallbackDumper->dumpWithSource($data)
                 : $this->fallbackDumper->dump($data);
         }
@@ -119,7 +130,7 @@ final readonly class ServerDumper implements DataDumperInterface
         return null; // @codeCoverageIgnore
     }
 
-    private function dumpWithSourceMethodExists(DataDumperInterface $dumper): bool
+    private function methodExistsOfDumpWithSource(DataDumperInterface $dumper): bool
     {
         return method_exists($dumper, 'dumpWithSource');
     }
