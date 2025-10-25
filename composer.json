@@ -206,7 +206,7 @@
         "carthage-software/mago": "^0.26",
         "composer/composer": "^2.8",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.1",
-        "dedoc/scramble": "^0.12",
+        "dedoc/scramble": "^0.13",
         "defstudio/pest-plugin-laravel-expectations": "^2.6",
         "deployer/deployer": "^7.5",
         "dragon-code/benchmark": "^3.1",
