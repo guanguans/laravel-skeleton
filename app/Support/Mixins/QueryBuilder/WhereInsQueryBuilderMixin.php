@@ -48,7 +48,7 @@ final class WhereInsQueryBuilderMixin
             $rawColumns = implode(',', $sterilizedColumns);
 
             $values instanceof Arrayable and $values = $values->toArray();
-            $values = array_map(static function (array $value) use ($columns) {
+            $values = array_map(static function (array $value) use ($columns): array {
                 if (array_is_list($value)) {
                     return $value;
                 }
