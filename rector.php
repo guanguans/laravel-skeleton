@@ -34,6 +34,7 @@ use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
 use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
+use Rector\CodingStyle\Rector\FunctionLike\FunctionLikeToFirstClassCallableRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
@@ -181,9 +182,9 @@ return RectorConfig::configure()
         'phpstan-ignore-next-line',
         'psalm-suppress',
     ])
-    ->withConfiguredRule(ReturnTypeWillChangeRector::class, [
-        new ClassMethodReference(ArrayAccess::class, 'offsetGet'),
-    ])
+    // ->withConfiguredRule(ReturnTypeWillChangeRector::class, [
+    //     new ClassMethodReference(ArrayAccess::class, 'offsetGet'),
+    // ])
     ->registerService(className: ParentConnectingVisitor::class, tag: ScopeResolverNodeVisitorInterface::class)
     // ->withConfiguredRule(RenameToPsrNameRector::class, [
     //     // '*',
@@ -281,6 +282,7 @@ return RectorConfig::configure()
         AddOverrideAttributeToOverriddenMethodsRector::class,
         ChangeOrIfContinueToMultiContinueRector::class,
         DisallowedEmptyRuleFixerRector::class,
+        // FunctionLikeToFirstClassCallableRector::class,
         NullToStrictStringFuncCallArgRector::class,
         PreferPHPUnitThisCallRector::class,
         RenameForeachValueVariableToMatchExprVariableRector::class,

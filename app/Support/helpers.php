@@ -116,10 +116,7 @@ if (!\function_exists('classes')) {
             ->when(
                 \is_callable($filter),
                 static fn (Collection $classes): Collection => $classes->filter(
-                    static function (string $file, string $class) use ($filter) {
-                        /** @var callable $filter */
-                        return $filter($class, $file);
-                    }
+                    static fn (string $file, string $class) => $filter($class, $file)
                 )
             )
             ->mapWithKeys(static function (string $file, string $class): array {

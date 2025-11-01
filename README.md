@@ -195,6 +195,7 @@ composer user-php
 composer var-dump-server-cli
 composer var-dump-server-html
 composer vhs
+composer whatsdiff
 composer yaml-lint
 composer zh-fix
 composer zh-lint
@@ -247,6 +248,7 @@ composer zizmor
 * [emreyarligan/enum-concern](https://github.com/emreyarligan/enum-concern) - A PHP package for effortless Enumeration handling with Laravel Collections 📦 ✨
 * [fig/cache-util](https://github.com/php-fig/cache-util) - Useful utility classes and traits for implementing the PSR cache standard
 * [fig/event-dispatcher-util](https://github.com/php-fig/event-dispatcher-util) - Useful utility classes and traits for implementing the PSR events standard
+* [filament/filament](https://github.com/filamentphp/filament) - A collection of full-stack components for accelerated Laravel app development.
 * [fntneves/laravel-transactional-events](https://github.com/fntneves/laravel-transactional-events) - Transaction-aware Event Dispatcher for Laravel
 * [genealabs/laravel-caffeine](https://github.com/mikebronner/laravel-caffeine) - Keeping Your Laravel Forms Awake
 * [graham-campbell/result-type](https://github.com/GrahamCampbell/Result-Type) - An Implementation Of The Result Type
@@ -259,6 +261,7 @@ composer zizmor
 * [inertiajs/inertia-laravel](https://github.com/inertiajs/inertia-laravel) - The Laravel adapter for Inertia.js.
 * [jasny/sso](https://github.com/jasny/sso) - Simple Single Sign-On
 * [jenssegers/agent](https://github.com/jenssegers/agent) - Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect
+* [joetannenbaum/chewie](https://github.com/joetannenbaum/chewie)
 * [jpkleemans/attribute-events](https://github.com/jpkleemans/attribute-events) - 🔥 Fire events on attribute changes of your Eloquent model
 * [juliomotol/laravel-auth-timeout](https://github.com/juliomotol/laravel-auth-timeout) - Authentication Timeout for Laravel
 * [kevinrob/guzzle-cache-middleware](https://github.com/Kevinrob/guzzle-cache-middleware) - A HTTP/1.1 Cache for Guzzle 6. It's a simple Middleware to be added in the HandlerStack. (RFC 7234)
@@ -482,6 +485,7 @@ composer zizmor
 * [tomasvotruba/cognitive-complexity](https://github.com/TomasVotruba/cognitive-complexity) - PHPStan rules to measure cognitive complexity of your classes and methods
 * [tomasvotruba/type-coverage](https://github.com/TomasVotruba/type-coverage) - Measure type coverage of your project
 * [vcian/laravel-db-auditor](https://github.com/vcian/laravel-db-auditor) - Database DB Auditor provide leverage to audit your MySql,sqlite, PostgreSQL database standards and also provide options to add constraints in table.
+* [whatsdiff/whatsdiff](https://github.com/whatsdiff/whatsdiff) - See what's changed in your project's dependencies
 * [worksome/envy](https://github.com/worksome/envy) - Automatically keep your .env files in sync.
 * [worksome/request-factories](https://github.com/worksome/request-factories) - Test Form Requests in Laravel without all of the boilerplate.
 * [yamadashy/phpstan-friendly-formatter](https://github.com/yamadashy/phpstan-friendly-formatter) - Simple error formatter for PHPStan that display code frame
