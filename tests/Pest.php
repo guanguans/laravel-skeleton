@@ -30,6 +30,7 @@ use Tests\TestCase;
 uses(TestCase::class)
     ->beforeAll(function (): void {})
     ->beforeEach(function (): void {
+        $this->withoutVite();
         $this->withoutDefer();
     })
     ->afterEach(function (): void {
