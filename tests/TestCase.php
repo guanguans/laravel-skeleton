@@ -26,6 +26,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\WithCachedConfig;
+use Illuminate\Foundation\Testing\WithCachedRoutes;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Tests\Concerns\Bootloadable;
 
@@ -38,6 +40,8 @@ abstract class TestCase extends BaseTestCase
     // use FastRefreshDatabase;
     // use LazilyRefreshDatabase;
     // use RefreshDatabase;
+    // use WithCachedConfig;
+    // use WithCachedRoutes;
 
     // /** 在测试前指定要运行的 seeder. */
     // protected string $seeder = OrderStatusSeeder::class;

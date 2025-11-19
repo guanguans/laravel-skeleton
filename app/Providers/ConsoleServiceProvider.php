@@ -25,6 +25,8 @@ use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Lottery;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
@@ -114,6 +116,12 @@ final class ConsoleServiceProvider extends ServiceProvider
                     /**
                      * @see \Illuminate\Foundation\Console\Kernel::rerouteSymfonyCommandEvents()
                      * @see \Rector\Console\ConsoleApplication::doRun()
+                     * @see https://github.com/infection/infection/blob/master/src/Command/RunCommand.php#L586
+                     * @see https://github.com/infection/infection/blob/master/src/Console/XdebugHandler.php
+                     * @see https://github.com/phan/phan/blob/v6/src/Phan/CLI.php#L3156
+                     * @see https://github.com/phan/phan/blob/v6/src/Phan/Library/Restarter.php
+                     * @see https://github.com/vimeo/psalm/blob/6.x/src/Psalm/Internal/Cli/Psalm.php#L948
+                     * @see https://github.com/vimeo/psalm/blob/6.x/src/Psalm/Internal/Fork/PsalmRestarter.php
                      */
                     fn (): null => Event::listen(CommandStarting::class, function (CommandStarting $commandStarting): void {
                         if (
@@ -124,8 +132,17 @@ final class ConsoleServiceProvider extends ServiceProvider
                             $xdebugHandler = tap(
                                 new XdebugHandler(config('app.name')),
                                 static function (XdebugHandler $xdebugHandler): void {
-                                    $xdebugHandler->setPersistent();
-                                    $xdebugHandler->check();
+                                    // If Xdebug is enabled, restart without it
+                                    $xdebugHandler
+                                        // ->setLogger(Log::channel('stderr'))
+                                        ->setLogger(Log::channel(
+                                            Lottery::odds(1, 100)
+                                                ->winner(static fn (): null => null)
+                                                ->loser(static fn (): string => 'null')
+                                                ->choose()
+                                        ))
+                                        ->setPersistent()
+                                        ->check();
                                 }
                             );
                             unset($xdebugHandler);
