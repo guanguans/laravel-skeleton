@@ -183,7 +183,6 @@
         "tightenco/ziggy": "^2.6",
         "timacdonald/has-parameters": "^1.5",
         "torann/geoip": "^3.0",
-        "tpetry/laravel-mysql-explain": "^2.1",
         "unicodeveloper/laravel-password": "^1.0",
         "utopia-php/system": "^0.9",
         "valorin/pwned-validator": "^1.3",
