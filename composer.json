@@ -35,6 +35,8 @@
         "cesargb/laravel-magiclink": "^2.24",
         "christophrumpel/artisan-benchmark": "^0.0",
         "cknow/laravel-money": "^1.0 || ^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+        "cmixin/business-day": "^1.20",
+        "cmixin/business-time": "^2.0",
         "crell/attributeutils": "^1.3",
         "cuyz/valinor": "^2.3",
         "cviebrock/eloquent-sluggable": "^12.0",

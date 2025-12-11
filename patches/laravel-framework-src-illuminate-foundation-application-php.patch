@@ -13,6 +13,6 @@
  {
      use Macroable;
 +    use Tappable;
-
+ 
      /**
       * The Laravel framework version.
