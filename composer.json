@@ -240,7 +240,7 @@
         "laravel/dusk": "^8.3",
         "laravel/envoy": "^2.10",
         "laravel/facade-documenter": "dev-main",
-        "laravel/mcp": "^0.4",
+        "laravel/mcp": "^0.5",
         "laravel/pail": "^1.2",
         "laravel/pint": "^1.25",
         "laravel/roster": "^0.2",
