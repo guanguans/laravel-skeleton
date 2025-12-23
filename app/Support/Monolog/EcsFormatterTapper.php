@@ -23,7 +23,7 @@ final class EcsFormatterTapper
     {
         foreach ($logger->getHandlers() as $handler) {
             if ($handler instanceof FormattableHandlerInterface) {
-                $handler->setFormatter(app(EcsFormatter::class));
+                $handler->setFormatter(resolve(EcsFormatter::class));
             }
         }
     }

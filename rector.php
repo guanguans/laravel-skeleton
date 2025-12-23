@@ -29,7 +29,9 @@ use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRe
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodeQuality\Rector\New_\NewStaticToNewSelfRector;
+use Rector\CodingStyle\Rector\ArrowFunction\ArrowFunctionDelegatingCallToFirstClassCallableRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
+use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
 use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
@@ -279,10 +281,13 @@ return RectorConfig::configure()
         RemoveUnusedPrivatePropertyRector::class,
         RemoveUnusedPublicMethodParameterRector::class,
 
+        // first class callable
+        // FunctionLikeToFirstClassCallableRector::class,
+        ArrowFunctionDelegatingCallToFirstClassCallableRector::class,
+
         AddOverrideAttributeToOverriddenMethodsRector::class,
         ChangeOrIfContinueToMultiContinueRector::class,
         DisallowedEmptyRuleFixerRector::class,
-        // FunctionLikeToFirstClassCallableRector::class,
         NullToStrictStringFuncCallArgRector::class,
         PreferPHPUnitThisCallRector::class,
         RenameForeachValueVariableToMatchExprVariableRector::class,
@@ -297,6 +302,7 @@ return RectorConfig::configure()
         LocallyCalledStaticMethodToNonStaticRector::class,
         LogicalToBooleanRector::class,
         NewlineAfterStatementRector::class,
+        NewlineBetweenClassLikeStmtsRector::class,
         ParenthesizeNestedTernaryRector::class,
         ReturnBinaryOrToEarlyReturnRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,

@@ -178,6 +178,7 @@
         "staudenmeir/laravel-migration-views": "^1.11",
         "stevebauman/location": "^7.6",
         "stillat/blade-parser": "^2.0",
+        "sunchayn/nimbus": "0.3.0-alpha",
         "swiss-devjoy/laravel-optimize-sqlite": "^1.0",
         "symfony/polyfill-php84": "^1.33",
         "teamtnt/laravel-scout-tntsearch-driver": "^15.0",

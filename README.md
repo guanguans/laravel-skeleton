@@ -233,6 +233,8 @@ composer zizmor
 * [cesargb/laravel-magiclink](https://github.com/cesargb/laravel-magiclink) - Create secure link for access to private data or login in Laravel without password
 * [christophrumpel/artisan-benchmark](https://github.com/christophrumpel/artisan-benchmark) - Benchmark Artisan Commands
 * [cknow/laravel-money](https://github.com/cknow/laravel-money) - Laravel Money
+* [cmixin/business-day](https://github.com/kylekatarnls/business-day) - Carbon mixin to handle business days
+* [cmixin/business-time](https://github.com/kylekatarnls/business-time) - Carbon mixin to handle business days and opening hours
 * [crell/attributeutils](https://github.com/Crell/AttributeUtils) - A robust, flexible attribute handling framework
 * [cuyz/valinor](https://github.com/CuyZ/Valinor) - Library that helps to map any input into a strongly-typed value object structure.
 * [cviebrock/eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable) - Easy creation of slugs for your Eloquent models in Laravel
@@ -374,6 +376,7 @@ composer zizmor
 * [staudenmeir/laravel-migration-views](https://github.com/staudenmeir/laravel-migration-views) - Laravel database migrations with SQL views
 * [stevebauman/location](https://github.com/stevebauman/location) - Retrieve a user's location by their IP Address
 * [stillat/blade-parser](https://github.com/Stillat/blade-parser)
+* [sunchayn/nimbus](https://github.com/sunchayn/nimbus) - A Laravel package providing an in-browser API client with automatic schema generation, live validation, and built-in authentication with a touch of Laravel-tailored magic for effortless API testing.
 * [swiss-devjoy/laravel-optimize-sqlite](https://github.com/Swiss-Devjoy/laravel-optimize-sqlite) - Optimize your SQLite database for production in Laravel
 * [symfony/polyfill-php84](https://github.com/symfony/polyfill-php84) - Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions
 * [teamtnt/laravel-scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver) - Driver for Laravel Scout search package based on https://github.com/teamtnt/tntsearch
@@ -381,7 +384,6 @@ composer zizmor
 * [tightenco/ziggy](https://github.com/tighten/ziggy) - Use your Laravel named routes in JavaScript.
 * [timacdonald/has-parameters](https://github.com/timacdonald/has-parameters) - A trait that allows you to pass arguments to Laravel middleware in a more PHP'ish way.
 * [torann/geoip](https://github.com/Torann/laravel-geoip) - Support for multiple Geographical Location services.
-* [tpetry/laravel-mysql-explain](https://github.com/tpetry/laravel-mysql-explain) - Get Visual MySQL EXPLAIN for Laravel.
 * [unicodeveloper/laravel-password](https://github.com/unicodeveloper/laravel-password) - Protect your users from entering dumb and common passwords
 * [utopia-php/system](https://github.com/utopia-php/system) - A simple library for obtaining information about the host's system.
 * [valorin/pwned-validator](https://github.com/valorin/pwned-validator) - Super simple Laravel Validator for checking password via the Pwned Passwords service of Have I Been Pwned
@@ -403,6 +405,7 @@ composer zizmor
 * [brainmaestro/composer-git-hooks](https://github.com/BrainMaestro/composer-git-hooks) - Easily manage git hooks in your composer config
 * [buggregator/trap](https://github.com/buggregator/trap) - A simple and powerful tool for debugging PHP applications.
 * [carthage-software/mago](https://github.com/carthage-software/mago) - Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.
+* [chrisdicarlo/laravel-config-checker](https://github.com/chrisdicarlo/laravel-config-checker) - Package to check that configuration key references actually exist in your config files.
 * [composer/composer](https://github.com/composer/composer) - Composer helps you declare, manage and install dependencies of PHP projects. It ensures you have the right stack everywhere.
 * [dealerdirect/phpcodesniffer-composer-installer](https://github.com/PHPCSStandards/composer-installer) - PHP_CodeSniffer Standards Composer Installer Plugin
 * [dedoc/scramble](https://github.com/dedoc/scramble) - Automatic generation of API documentation for Laravel applications.
@@ -720,6 +723,8 @@ app/
 |   |-- BitEncoder.php
 |   |-- Bootstrap/
 |   |   `-- OutOfMemoryBootstrap.php
+|   |-- Carbon/
+|   |   `-- NullCarbon.php
 |   |-- Clients/
 |   |   |-- AbstractClient.php
 |   |   `-- PushDeer.php
@@ -860,7 +865,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-64 directories, 298 files
+65 directories, 299 files
 
 ```
 

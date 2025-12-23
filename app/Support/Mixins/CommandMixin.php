@@ -43,7 +43,7 @@ final class CommandMixin
             ?OutputInterface $output = null,
         ): Logger => new Logger(
             new ConsoleLogger($output ?? $this->output, $verbosityLevelMap, $formatLevelMap),
-            app(Dispatcher::class)
+            resolve(Dispatcher::class)
         );
     }
 

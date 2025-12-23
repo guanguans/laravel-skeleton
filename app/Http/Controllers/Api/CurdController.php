@@ -25,7 +25,7 @@ abstract class CurdController extends Controller
     public function index(Request $request): JsonResponse
     {
         return $this->apiResponse()->success(
-            $this->modelClass::query()->simplePaginate($request->get('per_page'))
+            $this->modelClass::query()->simplePaginate($request->query('per_page'))
         );
     }
 

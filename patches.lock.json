@@ -1,12 +1,12 @@
 {
-    "_hash": "878a2b5a8d47946aa8687c1acf6a47d0626566d01465e91afcdf12b0461d11b4",
+    "_hash": "7e07be3328dfd0d516da8870d21f8322a2bda55e36fa725be1d207a4ca7d3cea",
     "patches": {
         "laravel/framework": [
             {
                 "package": "laravel/framework",
                 "description": "0",
                 "url": "patches/laravel-framework-src-illuminate-foundation-application-php.patch",
-                "sha256": "d6c828ebb962f6a8b32d04bb4d7050bfa4b9bf6abb2a46b9e9fe8b1621f75c91",
+                "sha256": "8851c0e9eea68b4649b4251533430d5cec175c6d1067da506e0e349dae214b92",
                 "depth": 1,
                 "extra": {
                     "provenance": "root"

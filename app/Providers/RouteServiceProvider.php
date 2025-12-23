@@ -59,8 +59,8 @@ final class RouteServiceProvider extends ServiceProvider
         $this->whenever(false, static function (): void {
             URL::forceHttps();
             URL::forceScheme('https');
-            app(Request::class)->server->set('HTTPS', 'on');
-            app(Request::class)->server->set('SERVER_PORT', 443);
+            resolve(Request::class)->server->set('HTTPS', 'on');
+            resolve(Request::class)->server->set('SERVER_PORT', 443);
             Config::set('session.secure', true);
 
             Route::resourceVerbs([
@@ -72,7 +72,7 @@ final class RouteServiceProvider extends ServiceProvider
 
     private function bindRouteModels(): void
     {
-        Route::bind('user', static fn (mixed $value) => User::query()->where('id', $value)->firstOrFail());
+        Route::bind('user', static fn (mixed $value) => User::query()->whereNull('id')->firstOrFail());
 
         foreach ($this->routeModels as $name => $model) {
             if (\is_int($name)) {

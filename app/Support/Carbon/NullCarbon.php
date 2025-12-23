@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpMissingParentCallCommonInspection */
+
 declare(strict_types=1);
 
 /**
@@ -18,23 +20,23 @@ use Illuminate\Support\Carbon;
 /**
  * @see https://github.com/mikebronner/laravel-null-carbon
  */
-class NullCarbon extends Carbon implements \Stringable
+final class NullCarbon extends Carbon implements \Stringable
 {
-    public function __toString()
+    public function __toString(): string
     {
         return '';
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
     public function format(string $format): string
     {
         return '';
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @throws \JsonException
+     */
+    public function jsonSerialize(): string
     {
-        return json_encode(null);
+        return json_encode(null, \JSON_THROW_ON_ERROR);
     }
 }

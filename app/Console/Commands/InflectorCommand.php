@@ -55,7 +55,7 @@ final class InflectorCommand extends Command
                                 ->explode(':', 2)
                                 ->pipe(
                                     fn (Collection $parts): mixed => \is_array($result = $this->forwardCallTo(
-                                        app(
+                                        resolve(
                                             [
                                                 'Laravel' => Pluralizer::class,
                                                 'Symfony' => EnglishInflector::class,

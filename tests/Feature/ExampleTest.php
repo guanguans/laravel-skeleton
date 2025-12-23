@@ -68,7 +68,7 @@ it('is http', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is all routes', function (): void {
-    collect(app(Router::class)->getRoutes())
+    collect(resolve(Router::class)->getRoutes())
         ->reject(fn (Route $route) => (fn () => $this->isVendorRoute($route))->call(app()->make(RouteListCommand::class)))
         ->each(function (Route $route): void {
             foreach (array_map(strtolower(...), $route->methods()) as $method) {

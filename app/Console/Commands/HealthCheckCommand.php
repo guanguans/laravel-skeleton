@@ -239,7 +239,7 @@ final class HealthCheckCommand extends Command implements Isolatable
         }
 
         $processResult = Process::run([
-            ...app(Composer::class)->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
+            ...resolve(Composer::class)->findComposer(), 'check-platform-reqs', '--format', 'json', '--ansi', '-v',
         ])->throw();
         $errorExtensions = collect(json_decode($processResult->output(), true, 512, \JSON_THROW_ON_ERROR))->filter(
             static fn (array $item): bool => 'success' !== $item['status']

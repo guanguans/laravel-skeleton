@@ -25,6 +25,6 @@ trait Singletonable
     {
         app()->singletonIf(static::class, static fn (): static => new static(...$parameters));
 
-        return app(static::class);
+        return resolve(static::class);
     }
 }

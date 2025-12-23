@@ -68,7 +68,7 @@ final class HttpServiceProvider extends ServiceProvider
             });
 
             if (RequestFacade::is('api/*')) {
-                app(Request::class)->headers->set('Accept', 'application/json');
+                resolve(Request::class)->headers->set('Accept', 'application/json');
             }
         });
     }

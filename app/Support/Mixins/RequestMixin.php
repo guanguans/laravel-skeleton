@@ -106,7 +106,7 @@ final class RequestMixin
                 return;
             }
 
-            foreach ((array) app('original_properties') as $property => $value) {
+            foreach ((array) resolve('original_properties') as $property => $value) {
                 $this->{$property} = $value;
             }
         };
@@ -119,7 +119,7 @@ final class RequestMixin
     {
         return function (bool $includingMethod = true) {
             /** @var \Illuminate\Routing\RouteCollection $routeCollection */
-            $routeCollection = app(Router::class)->getRoutes();
+            $routeCollection = resolve(Router::class)->getRoutes();
 
             $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
 
@@ -140,7 +140,7 @@ final class RequestMixin
     public function resolveFileFromUrl(): \Closure
     {
         return function (string $field): void {
-            if (!$this->hasFile($field) && filter_var($this->get($field), \FILTER_VALIDATE_URL)) {
+            if (!$this->hasFile($field) && filter_var($this->input($field), \FILTER_VALIDATE_URL)) {
                 $file = UploadedFile::makeFromUrl((string) $this->string($field));
 
                 if ($file instanceof UploadedFile) {
