@@ -208,7 +208,7 @@
         "beyondcode/laravel-query-detector": "^2.1",
         "brainmaestro/composer-git-hooks": "^3.0",
         "buggregator/trap": "^1.14",
-        "carthage-software/mago": "^0.26",
+        "carthage-software/mago": "^1.0",
         "chrisdicarlo/laravel-config-checker": "^1.4",
         "composer/composer": "^2.9",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
