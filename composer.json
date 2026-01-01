@@ -225,7 +225,7 @@
         "ergebnis/rector-rules": "^1.7",
         "fakerphp/faker": "^1.24",
         "guanguans/ai-commit": "^1.15",
-        "guanguans/laravel-soar": "^4.1",
+        "guanguans/laravel-soar": "^5.0",
         "guanguans/monorepo-builder-worker": "dev-main",
         "ion-bazan/composer-diff": "^1.13",
         "jasonmccreary/laravel-test-assertions": "^2.8",
