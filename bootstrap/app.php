@@ -5,7 +5,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ * Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -35,7 +35,7 @@ use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-return Application::configure(basePath: \dirname(__DIR__))
+return App\Application::configure(basePath: \dirname(__DIR__))
     ->booting(static function (Application $app): void {})
     ->withRouting(
         web: __DIR__.'/../routes/web.php',

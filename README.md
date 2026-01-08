@@ -501,6 +501,7 @@ composer zizmor
 
 ```shell
 app/
+|-- Application.php
 |-- Casts/
 |   |-- Base64Cast.php
 |   |-- CallbackGetCast.php
@@ -865,7 +866,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-65 directories, 299 files
+65 directories, 300 files
 
 ```
 

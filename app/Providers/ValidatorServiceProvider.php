@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ * Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -65,9 +65,17 @@ final class ValidatorServiceProvider extends ServiceProvider
 
     private function extendValidator(): void
     {
-        Discover::in('Rules')
-            ->instancesOf(AbstractRule::class)
-            ->classes()
+        // Discover::in('Rules')
+        //     ->instancesOf(AbstractRule::class)
+        //     ->classes()
+        classes(
+            static fn (string $class, string $file): bool => str($class)->is('App\\Rules\\*')
+                && str($file)->is('*/../../app/Rules/*')
+        )
+            ->filter(
+                static fn (\ReflectionClass $reflectionClass): bool => $reflectionClass->isSubclassOf(AbstractRule::class)
+                    && $reflectionClass->isInstantiable()
+            )
             ->each(static function (\ReflectionClass $ruleReflectionClass, string $ruleClass): void {
                 /** @var class-string<\App\Rules\AbstractRule> $ruleClass */
                 ValidatorFacade::{$ruleClass::extendMethod()}(

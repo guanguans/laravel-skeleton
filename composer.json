@@ -411,11 +411,6 @@
         "merge-plugin": {
             "include": []
         },
-        "patches": {
-            "laravel/framework": [
-                "patches/laravel-framework-src-illuminate-foundation-application-php.patch"
-            ]
-        },
         "phpstan/extension-installer": {
             "ignore": []
         }

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ * Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -167,6 +167,39 @@ if (!\function_exists('resolve_callback')) {
                 $throwable
             );
         }
+    }
+}
+
+if (!\function_exists('rescuer')) {
+    /**
+     * @see \Composer\Util\Silencer::call()
+     * @see \Illuminate\Foundation\Bootstrap\HandleExceptions::bootstrap()
+     */
+    function rescuer(callable $callback, ?callable $rescuer = null): mixed
+    {
+        /** @phpstan-ignore-next-line  */
+        set_error_handler(static function (
+            int $errNo,
+            string $errStr,
+            string $errFile = '',
+            int $errLine = 0
+        ) use ($rescuer, &$result): void {
+            $rescuer and $result = $rescuer(new ErrorException($errStr, 0, $errNo, $errFile, $errLine));
+        });
+
+        // set_exception_handler(static function (\Throwable $throwable) use ($rescuer, &$result): void {
+        //     $rescuer and $result = $rescuer($throwable);
+        // });
+
+        try {
+            $result = $callback();
+        } catch (Throwable $throwable) {
+            $rescuer and $result = $rescuer($throwable);
+        } finally {
+            restore_error_handler();
+        }
+
+        return $result;
     }
 }
 

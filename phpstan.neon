@@ -117,6 +117,7 @@ parameters:
         - identifier: typePerfect.noMixedPropertyFetcher
         - '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Auth\\AuthManager\:\:factory\(\)\.$#'
+        - '#^Call to an undefined method Illuminate\\Foundation\\Application\:\:tap\(\)\.$#'
         - '''
             #^Call to method toString\(\) of deprecated class PhpCsFixer\\Utils\:
             This is a God Class anti\-pattern\. Don't expand it\. It is fine to use logic that is already here \(that's why we don't trigger deprecation warnings\), but over time logic should be moved to dedicated, single\-responsibility classes\.$#

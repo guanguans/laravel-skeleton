@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2021-2025 guanguans<ityaozm@gmail.com>
+ * Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -17,6 +17,7 @@ use App\Support\Contracts\SignerContract;
 
 /**
  * @see https://github.com/mcordingley/LaravelSapient
+ * @see https://github.com/nelmio/NelmioSecurityBundle/blob/master/src/Signer.php
  * @see https://github.com/paragonie/sapient
  * @see https://github.com/paragonie/sapient-js
  */

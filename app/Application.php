@@ -11,14 +11,11 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace App\Rules;
+namespace App;
 
-final class MimeTypeRule extends AbstractRegexRule
+use Illuminate\Support\Traits\Tappable;
+
+final class Application extends \Illuminate\Foundation\Application
 {
-    #[\Override]
-    protected function pattern(): string
-    {
-        /** @lang PhpRegExp */
-        return '/^(multipart|application|audio|image|message|text|video|font|example|model)\/([-+.\w]+)$/i';
-    }
+    use Tappable;
 }
