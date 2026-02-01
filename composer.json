@@ -59,6 +59,7 @@
         "guanguans/laravel-api-response": "^3.0",
         "guanguans/laravel-exception-notify": "^5.2",
         "hamidrezaniazi/pecs": "^2.0",
+        "harris21/laravel-fuse": "^0.1",
         "hisorange/browser-detect": "^4.5 || ^5.0",
         "hosmelq/laravel-pulse-schedule": "^1.0",
         "houdaslassi/vantage": "^0.1",
@@ -302,6 +303,10 @@
         "facade-documenter": {
             "type": "vcs",
             "url": "https://github.com/laravel/facade-documenter.git"
+        },
+        "laravel-fuse": {
+            "type": "vcs",
+            "url": "git@github.com:harris21/laravel-fuse.git"
         }
     },
     "minimum-stability": "stable",
