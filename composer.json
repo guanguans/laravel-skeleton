@@ -152,7 +152,7 @@
         "spatie/laravel-failed-job-monitor": "^4.3",
         "spatie/laravel-health": "^1.34",
         "spatie/laravel-http-logger": "^1.11",
-        "spatie/laravel-json-api-paginate": "^1.16",
+        "spatie/laravel-json-api-paginate": "^2.0",
         "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-missing-page-redirector": "^2.11",
         "spatie/laravel-morph-map-generator": "^1.3",
