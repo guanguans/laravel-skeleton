@@ -49,7 +49,6 @@ abstract class TestCase extends BaseTestCase
     /** Indicates whether the default seeder should run before each test. */
     protected bool $seed = false;
 
-    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

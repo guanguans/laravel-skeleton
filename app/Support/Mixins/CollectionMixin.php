@@ -43,12 +43,12 @@ final class CollectionMixin
 
     public function head(): \Closure
     {
-        return fn () => $this->first();
+        return fn (): mixed => $this->first();
     }
 
     public function end(): \Closure
     {
-        return fn () => $this->last();
+        return fn (): mixed => $this->last();
     }
 
     public function after(): \Closure

@@ -225,7 +225,7 @@ composer zizmor
 * [beyondcode/laravel-mailbox](https://github.com/beyondcode/laravel-mailbox) - Handle incoming emails in your Laravel application.
 * [biiiiiigmonster/hasin](https://github.com/biiiiiigmonster/hasin) - Laravel framework relation has in implement
 * [binarytorch/larecipe](https://github.com/saleem-hadad/larecipe) - Generate gorgeous recipes for your Laravel applications using MarkDown
-* [blade-ui-kit/blade-icons](https://github.com/blade-ui-kit/blade-icons) - A package to easily make use of icons in your Laravel Blade views.
+* [blade-ui-kit/blade-icons](https://github.com/driesvints/blade-icons) - A package to easily make use of icons in your Laravel Blade views.
 * [bramus/monolog-colored-line-formatter](https://github.com/bramus/monolog-colored-line-formatter) - Colored Line Formatter for Monolog
 * [calebporzio/sushi](https://github.com/calebporzio/sushi) - Eloquent's missing "array" driver.
 * [cerbero/command-validator](https://github.com/cerbero90/command-validator) - Laravel package to validate the input of console commands.
@@ -236,7 +236,7 @@ composer zizmor
 * [cmixin/business-day](https://github.com/kylekatarnls/business-day) - Carbon mixin to handle business days
 * [cmixin/business-time](https://github.com/kylekatarnls/business-time) - Carbon mixin to handle business days and opening hours
 * [crell/attributeutils](https://github.com/Crell/AttributeUtils) - A robust, flexible attribute handling framework
-* [cuyz/valinor](https://github.com/CuyZ/Valinor) - Library that helps to map any input into a strongly-typed value object structure.
+* [cuyz/valinor](https://github.com/CuyZ/Valinor) - Dependency free PHP library that helps to map any input into a strongly-typed structure.
 * [cviebrock/eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable) - Easy creation of slugs for your Eloquent models in Laravel
 * [cweagans/composer-patches](https://github.com/cweagans/composer-patches) - Provides a way to patch Composer packages.
 * [dcblogdev/laravel-sent-emails](https://github.com/dcblogdev/laravel-sent-emails) - Store outgoing emails in Laravel
@@ -254,9 +254,10 @@ composer zizmor
 * [fntneves/laravel-transactional-events](https://github.com/fntneves/laravel-transactional-events) - Transaction-aware Event Dispatcher for Laravel
 * [genealabs/laravel-caffeine](https://github.com/mikebronner/laravel-caffeine) - Keeping Your Laravel Forms Awake
 * [graham-campbell/result-type](https://github.com/GrahamCampbell/Result-Type) - An Implementation Of The Result Type
-* [guanguans/laravel-api-response](https://github.com/guanguans/laravel-api-response) - Normalize and standardize Laravel API response data structures. - 规范化和标准化 Laravel API 响应数据结构。
+* [guanguans/laravel-api-response](https://github.com/guanguans/laravel-api-response) - Normalize and standardize Laravel API response data structure. - 规范化和标准化 Laravel API 响应数据结构。
 * [guanguans/laravel-exception-notify](https://github.com/guanguans/laravel-exception-notify) - Monitor exception and report to the notification channels(Dump、Log、Mail、AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).
 * [hamidrezaniazi/pecs](https://github.com/hamidrezaniazi/pecs) - PHP ECS (Elastic Common Schema): Simplify logging with the power of elastic common schema.
+* [harris21/laravel-fuse](https://github.com/harris21/laravel-fuse) - Circuit breaker for Laravel queue jobs. Protect your workers from cascading failures.
 * [hisorange/browser-detect](https://github.com/hisorange/browser-detect) - Browser & Mobile detection package for Laravel.
 * [hosmelq/laravel-pulse-schedule](https://github.com/hosmelq/laravel-pulse-schedule) - Laravel Pulse card that list all scheduled tasks.
 * [houdaslassi/vantage](https://github.com/houdaslassi/vantage) - Vantage: Strategic queue monitoring and observability for Laravel applications.
@@ -422,7 +423,7 @@ composer zizmor
 * [fakerphp/faker](https://github.com/FakerPHP/Faker) - Faker is a PHP library that generates fake data for you.
 * [guanguans/ai-commit](https://github.com/guanguans/ai-commit) - Automagically generate conventional git commit message with AI. - 使用 AI 自动生成约定式 git 提交信息。
 * [guanguans/laravel-soar](https://github.com/guanguans/laravel-soar) - SQL optimizer and rewriter for laravel. - laravel 的 SQL 优化器和重写器。
-* [guanguans/monorepo-builder-worker](https://github.com/guanguans/monorepo-builder-worker) - List of release worker collections for symplify/monorepo-builder.
+* [guanguans/monorepo-builder-worker](https://github.com/guanguans/monorepo-builder-worker) - A set of additional release workers for symplify/monorepo-builder.
 * [ion-bazan/composer-diff](https://github.com/IonBazan/composer-diff) - Compares composer.lock changes and generates Markdown report so you can use it in PR description.
 * [jasonmccreary/laravel-test-assertions](https://github.com/jasonmccreary/laravel-test-assertions) - A set of helpful assertions when testing Laravel applications.
 * [josezenem/laravel-make-migration-pivot](https://github.com/josezenem/laravel-make-migration-pivot) - Make Laravel pivot tables using the new Laravel 9 closure migrations.
