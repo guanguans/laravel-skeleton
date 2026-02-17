@@ -42,7 +42,7 @@
         "cviebrock/eloquent-sluggable": "^12.0",
         "cweagans/composer-patches": "^2.0",
         "dcblogdev/laravel-sent-emails": "^2.0",
-        "divineomega/password_exposed": "^3.2",
+        "divineomega/password_exposed": "^5.0",
         "dragon-code/laravel-data-dumper": "^1.5",
         "dragon-code/support": "^6.16",
         "dyrynda/laravel-cascade-soft-deletes": "^4.5",
