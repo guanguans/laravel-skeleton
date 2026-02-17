@@ -216,7 +216,7 @@
         "dedoc/scramble": "^0.13",
         "defstudio/pest-plugin-laravel-expectations": "^2.6",
         "deployer/deployer": "^7.5",
-        "dragon-code/benchmark": "^3.1",
+        "dragon-code/benchmark": "^4.4",
         "dragon-code/migrate-db": "^3.3",
         "dragon-code/pretty-routes": "^3.7",
         "driftingly/rector-laravel": "^2.1",
