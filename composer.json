@@ -245,7 +245,7 @@
         "laravel/mcp": "^0.5",
         "laravel/pail": "^1.2",
         "laravel/pint": "^1.27",
-        "laravel/roster": "^0.4",
+        "laravel/roster": "^0.5",
         "laravel/sail": "^1.52",
         "laravel/telescope": "^5.16",
         "mockery/mockery": "^1.6",
