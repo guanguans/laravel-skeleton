@@ -59,7 +59,7 @@
         "guanguans/laravel-api-response": "^3.1",
         "guanguans/laravel-exception-notify": "^5.2",
         "hamidrezaniazi/pecs": "^2.0",
-        "harris21/laravel-fuse": "^0.2",
+        "harris21/laravel-fuse": "^0.3",
         "hisorange/browser-detect": "^4.5 || ^5.0",
         "hosmelq/laravel-pulse-schedule": "^1.0",
         "houdaslassi/vantage": "^0.1",
