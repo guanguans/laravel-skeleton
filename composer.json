@@ -193,7 +193,7 @@
         "vectorface/whip": "^0.5",
         "vinkla/hashids": "^13.0",
         "watson/validating": "^8.3",
-        "wendelladriel/laravel-lift": "^0.17",
+        "wendelladriel/laravel-lift": "^0.18",
         "wendelladriel/laravel-validated-dto": "^4.4",
         "wikimedia/composer-merge-plugin": "^2.1",
         "wildside/userstamps": "^3.1",
