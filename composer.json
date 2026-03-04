@@ -76,7 +76,7 @@
         "lab404/laravel-impersonate": "^1.7",
         "laminas/laminas-diagnostics": "^1.30",
         "laracasts/presenter": "^0.2",
-        "laragear/cache-query": "^5.0",
+        "laragear/cache-query": "^6.0",
         "laragear/discover": "^2.0",
         "laragear/populate": "^1.1",
         "laragear/preload": "^3.0",
