@@ -78,7 +78,7 @@
         "laracasts/presenter": "^0.2",
         "laragear/cache-query": "^6.0",
         "laragear/discover": "^3.0",
-        "laragear/populate": "^1.1",
+        "laragear/populate": "^2.0",
         "laragear/preload": "^3.0",
         "laragear/two-factor": "^3.0",
         "laragear/webauthn": "^4.1",
