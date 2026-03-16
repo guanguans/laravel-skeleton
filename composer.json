@@ -156,7 +156,7 @@
         "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-missing-page-redirector": "^2.11",
         "spatie/laravel-morph-map-generator": "^1.3",
-        "spatie/laravel-query-builder": "^6.4",
+        "spatie/laravel-query-builder": "^7.0",
         "spatie/laravel-responsecache": "^7.7",
         "spatie/laravel-route-attributes": "^1.26",
         "spatie/laravel-route-discovery": "^1.4",
