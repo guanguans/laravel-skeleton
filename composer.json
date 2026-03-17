@@ -79,7 +79,7 @@
         "laragear/cache-query": "^6.0",
         "laragear/discover": "^3.0",
         "laragear/populate": "^2.0",
-        "laragear/preload": "^3.0",
+        "laragear/preload": "^4.0",
         "laragear/two-factor": "^3.0",
         "laragear/webauthn": "^4.1",
         "laravel-frontend-presets/tall": "^9.1",
