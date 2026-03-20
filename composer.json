@@ -196,7 +196,7 @@
         "wendelladriel/laravel-lift": "^0.18",
         "wendelladriel/laravel-validated-dto": "^4.4",
         "wikimedia/composer-merge-plugin": "^2.1",
-        "wildside/userstamps": "^3.1",
+        "wildside/userstamps": "^4.0",
         "wireui/wireui": "^2.5",
         "yiisoft/injector": "^1.2",
         "zenstruck/stream": "^1.3"
