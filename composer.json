@@ -94,7 +94,7 @@
         "laravel/reverb": "^1.7",
         "laravel/sanctum": "^4.3",
         "laravel/scout": "^10.23",
-        "laravel/tinker": "^2.11",
+        "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1",
         "laravolt/avatar": "^6.3",
         "leocavalcante/redact-sensitive": "^0.4",
