@@ -57,7 +57,7 @@
         "genealabs/laravel-caffeine": "^13.0",
         "graham-campbell/result-type": "^1.1",
         "guanguans/laravel-api-response": "^3.1",
-        "guanguans/laravel-exception-notify": "^5.2",
+        "guanguans/laravel-exception-notify": "^6.1",
         "hamidrezaniazi/pecs": "^2.0",
         "harris21/laravel-fuse": "^0.3",
         "hisorange/browser-detect": "^4.5 || ^5.0",
