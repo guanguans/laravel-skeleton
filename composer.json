@@ -84,7 +84,7 @@
         "laragear/webauthn": "^4.1",
         "laravel-frontend-presets/tall": "^9.1",
         "laravel-notification-channels/discord": "^1.7",
-        "laravel-notification-channels/telegram": "^6.0",
+        "laravel-notification-channels/telegram": "^7.0",
         "laravel/framework": "^12.49",
         "laravel/helpers": "^1.8",
         "laravel/horizon": "^5.43",
