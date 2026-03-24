@@ -24,7 +24,7 @@
         "axlon/laravel-postal-code-validation": "^3.8",
         "azjezz/psl": "^4.2",
         "balping/json-raw-encoder": "^1.0",
-        "beyondcode/laravel-mailbox": "^5.0",
+        "beyondcode/laravel-mailbox": "^6.0",
         "biiiiiigmonster/hasin": "^5.0",
         "binarytorch/larecipe": "^2.8",
         "blade-ui-kit/blade-icons": "^1.8",
