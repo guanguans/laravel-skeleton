@@ -110,7 +110,7 @@
         "nunomaduro/essentials": "^1.0",
         "nunomaduro/laravel-console-task": "^1.10",
         "nunomaduro/laravel-optimize-database": "^1.0",
-        "nwidart/laravel-modules": "^12.0",
+        "nwidart/laravel-modules": "^13.0",
         "olvlvl/composer-attribute-collector": "^2.1",
         "opcodesio/log-viewer": "^3.21",
         "orchestra/sidekick": "^1.2",
