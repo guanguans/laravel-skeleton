@@ -25,8 +25,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Http\Client\PendingRequest pendingRequest(callable|null $callback = null, bool $clone = false)
  * @method static \App\Support\Clients\PushDeer|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \App\Support\Clients\PushDeer|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
- * @method static void dd(mixed ...$args)
- * @method static \App\Support\Clients\AbstractClient dump(mixed ...$args)
+ * @method static never dd(mixed ...$args)
+ * @method static \App\Support\Clients\PushDeer dump(mixed ...$args)
  * @method static mixed withLocale(string $locale, \Closure $callback)
  * @method static \Illuminate\Support\HigherOrderTapProxy|\App\Support\Clients\PushDeer tap(callable|null $callback = null)
  *

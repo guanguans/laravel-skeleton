@@ -75,7 +75,11 @@ use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
 use RectorLaravel\Rector\ArrayDimFetch\EnvVariableToEnvHelperRector;
 use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
+use RectorLaravel\Rector\Class_\FillablePropertyToFillableAttributeRector;
+use RectorLaravel\Rector\Class_\HiddenPropertyToHiddenAttributeRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
+use RectorLaravel\Rector\Class_\ReplaceQueueTraitsWithQueueableRector;
+use RectorLaravel\Rector\Class_\TablePropertyToTableAttributeRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
@@ -170,7 +174,7 @@ return RectorConfig::configure()
         // AddOverrideAttributeToOverriddenMethodsRector::class,
         ArraySpreadInsteadOfArrayMergeRector::class,
         ClassHandleMethodRector::class,
-        JsonThrowOnErrorRector::class,
+        // JsonThrowOnErrorRector::class,
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
@@ -308,6 +312,11 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        ReplaceQueueTraitsWithQueueableRector::class,
+        TablePropertyToTableAttributeRector::class,
+        FillablePropertyToFillableAttributeRector::class,
+        HiddenPropertyToHiddenAttributeRector::class,
+
         EnvVariableToEnvHelperRector::class,
         ServerVariableToRequestFacadeRector::class,
 

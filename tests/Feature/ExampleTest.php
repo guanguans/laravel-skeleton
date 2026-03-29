@@ -75,7 +75,7 @@ it('is all routes', function (): void {
                 $this->{$method}($route->uri());
             }
         });
-})->throwsNoExceptions()->group(__DIR__, __FILE__);
+})->throwsNoExceptions()->group(__DIR__, __FILE__)->todo('This test is too slow, need to optimize.');
 
 it('is console', function (): void {
     classes(

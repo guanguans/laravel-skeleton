@@ -158,3 +158,9 @@ parameters:
                 - '#^PHPDoc tag @var with type .* is not subtype of native type .*\.$#'
                 - '#^Undefined variable\: \$this$#'
             path: app/Support/Mixins/
+
+
+
+        - identifier: shipmonk.deadProperty.neverRead
+        - identifier: shipmonk.deadEnumCase
+        - identifier: shipmonk.deadProperty.neverWritten

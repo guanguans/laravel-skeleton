@@ -27,6 +27,11 @@
             "single_line": false,
             "space_before_parenthesis": false
         },
+        "fully_qualified_strict_types": {
+            "import_symbols": false,
+            "leading_backslash_in_global_namespace": false,
+            "phpdoc_tags": []
+        },
         "header_comment": {
             "comment_type": "PHPDoc",
             "header": "Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>\n\nFor the full copyright and license information, please view\nthe LICENSE file that was distributed with this source code.\n\n@see https://github.com/guanguans/laravel-skeleton",

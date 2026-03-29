@@ -207,20 +207,20 @@ composer zizmor
 <details>
 <summary>Packages</summary>
 
-* [24slides/laravel-saml2](https://github.com/24Slides/laravel-saml2) - SAML2 Service Provider integration to your Laravel 5.4+ application, based on OneLogin toolkit
+* [24slides/laravel-saml2](https://github.com/scaler-tech/laravel-saml2) - SAML2 Service Provider integration for Laravel applications, based on OneLogin toolkit
 * [aaronfrancis/fast-paginate](https://github.com/aarondfrancis/fast-paginate) - Fast paginate for Laravel
 * [aaronfrancis/flaky](https://github.com/aarondfrancis/flaky) - A Laravel package to elegantly handle flaky operations.
 * [ackintosh/ganesha](https://github.com/ackintosh/ganesha) - PHP implementation of Circuit Breaker pattern
 * [akaunting/laravel-money](https://github.com/akaunting/laravel-money) - Currency formatting and conversion package for Laravel
 * [alexandre-daubois/monolog-processor-collection](https://github.com/alexandre-daubois/monolog-processor-collection) - A collection of Monolog processors
 * [algolia/scout-extended](https://github.com/algolia/scout-extended) - Scout Extended extends Laravel Scout adding algolia-specific features
+* [algoyounes/circuit-breaker](https://github.com/algoyounes/circuit-breaker) - Circuit Breaker is laravel package that provides a way to handle failures gracefully
 * [appstract/laravel-blade-directives](https://github.com/appstract/laravel-blade-directives) - Handy Blade directives
 * [appstract/laravel-opcache](https://github.com/appstract/laravel-opcache) - PHP OPcache Artisan commands for Laravel.
 * [arifhp86/laravel-clear-expired-cache-file](https://github.com/arifhp86/laravel-clear-expired-cache-file) - Remove laravel expired cache file/folder
 * [astrotomic/laravel-translatable](https://github.com/Astrotomic/laravel-translatable) - A Laravel package for multilingual models
 * [awobaz/compoships](https://github.com/topclaudy/compoships) - Laravel relationships with support for composite/multiple keys
 * [axlon/laravel-postal-code-validation](https://github.com/axlon/laravel-postal-code-validation) - Worldwide postal code validation for Laravel and Lumen
-* [azjezz/psl](https://github.com/azjezz/psl) - PHP Standard Library
 * [balping/json-raw-encoder](git@gitlab.com:balping/json-raw-encoder.git) - Encode arrays to json with raw JS objects (eg. callbacks) in them
 * [beyondcode/laravel-mailbox](https://github.com/beyondcode/laravel-mailbox) - Handle incoming emails in your Laravel application.
 * [biiiiiigmonster/hasin](https://github.com/biiiiiigmonster/hasin) - Laravel framework relation has in implement
@@ -240,7 +240,7 @@ composer zizmor
 * [cviebrock/eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable) - Easy creation of slugs for your Eloquent models in Laravel
 * [cweagans/composer-patches](https://github.com/cweagans/composer-patches) - Provides a way to patch Composer packages.
 * [dcblogdev/laravel-sent-emails](https://github.com/dcblogdev/laravel-sent-emails) - Store outgoing emails in Laravel
-* [divineomega/password_exposed](https://github.com/DivineOmega/password_exposed/releases) - This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.
+* [divineomega/password_exposed](https://github.com/Jord-JD/password_exposed/releases) - This PHP package provides a `password_exposed` helper function, that uses the haveibeenpwned.com API to check if a password has been exposed in a data breach.
 * [dragon-code/laravel-data-dumper](https://github.com/TheDragonCode/laravel-data-dumper) - Adding data from certain tables when executing the `php artisan schema:dump` console command
 * [dragon-code/support](https://github.com/TheDragonCode/support) - Support package is a collection of helpers and tools for any project.
 * [dyrynda/laravel-cascade-soft-deletes](https://github.com/michaeldyrynda/laravel-cascade-soft-deletes) - Cascading deletes for Eloquent models that implement soft deletes
@@ -255,12 +255,11 @@ composer zizmor
 * [genealabs/laravel-caffeine](https://github.com/mikebronner/laravel-caffeine) - Keeping Your Laravel Forms Awake
 * [graham-campbell/result-type](https://github.com/GrahamCampbell/Result-Type) - An Implementation Of The Result Type
 * [guanguans/laravel-api-response](https://github.com/guanguans/laravel-api-response) - Normalize and standardize Laravel API response data structure. - 规范化和标准化 Laravel API 响应数据结构。
-* [guanguans/laravel-exception-notify](https://github.com/guanguans/laravel-exception-notify) - Monitor exception and report to the notification channels(Dump、Log、Mail、AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、Zulip).
+* [guanguans/laravel-exception-notify](https://github.com/guanguans/laravel-exception-notify) - Monitor exception and report to the notification channels(Log、Mail、AnPush、Bark、Chanify、DingTalk、Discord、Gitter、GoogleChat、IGot、Lark、Mattermost、MicrosoftTeams、NowPush、Ntfy、Push、Pushback、PushBullet、PushDeer、PushMe、Pushover、PushPlus、QQ、RocketChat、ServerChan、ShowdocPush、SimplePush、Slack、Telegram、WeWork、WPush、XiZhi、YiFengChuanHua、ZohoCliq、ZohoCliqWebHook、Zulip).
 * [hamidrezaniazi/pecs](https://github.com/hamidrezaniazi/pecs) - PHP ECS (Elastic Common Schema): Simplify logging with the power of elastic common schema.
 * [harris21/laravel-fuse](https://github.com/harris21/laravel-fuse) - Circuit breaker for Laravel queue jobs. Protect your workers from cascading failures.
 * [hisorange/browser-detect](https://github.com/hisorange/browser-detect) - Browser & Mobile detection package for Laravel.
 * [hosmelq/laravel-pulse-schedule](https://github.com/hosmelq/laravel-pulse-schedule) - Laravel Pulse card that list all scheduled tasks.
-* [houdaslassi/vantage](https://github.com/houdaslassi/vantage) - Vantage: Strategic queue monitoring and observability for Laravel applications.
 * [huangdijia/laravel-horizon-restart](https://github.com/huangdijia/laravel-horizon-restart) - Horizon Restart for Laravel.
 * [inertiajs/inertia-laravel](https://github.com/inertiajs/inertia-laravel) - The Laravel adapter for Inertia.js.
 * [jasny/sso](https://github.com/jasny/sso) - Simple Single Sign-On
@@ -317,6 +316,7 @@ composer zizmor
 * [phiki/phiki](https://github.com/phikiphp/phiki) - Syntax highlighting using TextMate grammars in PHP.
 * [php-ds/php-ds](https://github.com/php-ds/polyfill) - Specialized data structures as alternatives to the PHP array
 * [php-open-source-saver/jwt-auth](https://github.com/PHP-Open-Source-Saver/jwt-auth) - JSON Web Token Authentication for Laravel and Lumen
+* [php-standard-library/php-standard-library](https://github.com/php-standard-library/php-standard-library) - PHP Standard Library
 * [php-static-analysis/attributes](https://github.com/php-static-analysis/attributes) - Attributes used instead of PHPDocs for static analysis tools
 * [phpmyadmin/sql-parser](https://github.com/phpmyadmin/sql-parser) - A validating SQL lexer and parser with a focus on MySQL dialect.
 * [phpyh/lru-memoizer](https://github.com/phpyh/lru-memoizer) - PHPyh LRU Memoizer
@@ -377,6 +377,7 @@ composer zizmor
 * [staudenmeir/laravel-migration-views](https://github.com/staudenmeir/laravel-migration-views) - Laravel database migrations with SQL views
 * [stevebauman/location](https://github.com/stevebauman/location) - Retrieve a user's location by their IP Address
 * [stillat/blade-parser](https://github.com/Stillat/blade-parser)
+* [storviaio/vantage](https://github.com/storviaio/vantage) - Vantage: Strategic queue monitoring and observability for Laravel applications.
 * [sunchayn/nimbus](https://github.com/sunchayn/nimbus) - A Laravel package providing an in-browser API client with automatic schema generation, live validation, and built-in authentication with a touch of Laravel-tailored magic for effortless API testing.
 * [swiss-devjoy/laravel-optimize-sqlite](https://github.com/Swiss-Devjoy/laravel-optimize-sqlite) - Optimize your SQLite database for production in Laravel
 * [symfony/polyfill-php84](https://github.com/symfony/polyfill-php84) - Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions
@@ -478,7 +479,7 @@ composer zizmor
 * [spatie/laravel-ignition](https://github.com/spatie/laravel-ignition) - A beautiful error page for Laravel applications.
 * [spatie/laravel-login-link](https://github.com/spatie/laravel-login-link) - Quickly login to your local environment
 * [spatie/laravel-stubs](https://github.com/spatie/laravel-stubs) - Opinionated Laravel stubs
-* [spaze/phpstan-disallowed-calls](https://github.com/spaze/phpstan-disallowed-calls) - PHPStan rules to detect disallowed method & function calls, constant, namespace, attribute & superglobal usages, with powerful rules to re-allow a call or a usage in places where it should be allowed.
+* [spaze/phpstan-disallowed-calls](https://github.com/spaze/phpstan-disallowed-calls) - PHPStan rules to detect disallowed method & function calls, constant, namespace, attribute, property & superglobal usages, with powerful rules to re-allow a call or a usage in places where it should be allowed.
 * [sti3bas/laravel-scout-array-driver](https://github.com/Sti3bas/laravel-scout-array-driver) - Array driver for Laravel Scout
 * [symfony/thanks](https://github.com/symfony/thanks) - Encourages sending ⭐ and 💵 to fellow PHP package maintainers (not limited to Symfony components)!
 * [symplify/easy-coding-standard](https://github.com/easy-coding-standard/easy-coding-standard) - Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer
