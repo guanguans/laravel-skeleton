@@ -31,6 +31,7 @@ use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Lottery;
 use Illuminate\Validation\ValidationException;
+use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -74,6 +75,7 @@ return App\Application::configure(basePath: \dirname(__DIR__))
             ->web(
                 append: [
                     AddLinkHeadersForPreloadedAssets::class,
+                    // XssCleanInput::class,
                 ],
             )
             ->append([

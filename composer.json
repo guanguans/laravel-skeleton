@@ -128,6 +128,8 @@
         "proengsoft/laravel-jsvalidation": "^4.10",
         "propaganistas/laravel-disposable-email": "^2.4",
         "propaganistas/laravel-phone": "^6.0",
+        "protonemedia/laravel-cross-eloquent-search": "^3.7",
+        "protonemedia/laravel-xss-protection": "^1.11",
         "reinink/remember-query-strings": "^0.1",
         "rennokki/laravel-eloquent-query-cache": "^3.6",
         "robclancy/presenter": "^3.0",

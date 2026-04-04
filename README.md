@@ -326,6 +326,8 @@ composer zizmor
 * [proengsoft/laravel-jsvalidation](https://github.com/proengsoft/laravel-jsvalidation) - Validate forms transparently with Javascript reusing your Laravel Validation Rules, Messages, and FormRequest
 * [propaganistas/laravel-disposable-email](https://github.com/Propaganistas/Laravel-Disposable-Email) - Disposable email validator
 * [propaganistas/laravel-phone](https://github.com/Propaganistas/Laravel-Phone) - Adds phone number functionality to Laravel based on Google's libphonenumber API.
+* [protonemedia/laravel-cross-eloquent-search](https://github.com/protonemedia/laravel-cross-eloquent-search) - Laravel package to search through multiple Eloquent models. Supports pagination, eager loading relations, single/multiple columns, sorting and scoped queries.
+* [protonemedia/laravel-xss-protection](https://github.com/protonemedia/laravel-xss-protection) - Laravel XSS protection, middleware and sanitization
 * [reinink/remember-query-strings](https://github.com/reinink/remember-query-strings) - Laravel middleware that automatically remembers and restores query strings.
 * [rennokki/laravel-eloquent-query-cache](https://github.com/renoki-co/laravel-eloquent-query-cache) - Adding cache on your Laravel Eloquent queries' results is now a breeze.
 * [robclancy/presenter](https://github.com/robclancy/presenter) - Decorate your objects using presenters. Primarily to keep presentation logic out of your models.
