@@ -22,7 +22,7 @@ use Symfony\Component\Console\Style\OutputStyle;
 final readonly class ProgressBarFactory
 {
     public function __construct(
-        /** @var OutputStyle */
+        /** @var \Symfony\Component\Console\Style\OutputStyle */
         private OutputStyle $output
     ) {}
 

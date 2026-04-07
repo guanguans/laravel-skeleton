@@ -69,8 +69,8 @@ final class AutowiredServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                /** @var Autowired $autowired */
                 $autowired = $attributes[0]->newInstance();
+                \assert($autowired instanceof Autowired);
                 $property = "{$reflectionObject->getName()}::\${$reflectionProperty->getName()}";
                 $propertyType = value(static function () use ($autowired, $reflectionProperty, $property): string {
                     if ($autowired->propertyType) {

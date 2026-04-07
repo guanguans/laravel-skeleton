@@ -20,15 +20,13 @@
 ```shell
 composer actionlint
 composer app:fix-neon
+composer app:generate-gitleaks-ignore
 composer app:install-project
 composer app:lint-readme
 composer app:parse-phpdoc
 composer argtyper
 composer argtyper:add-types
-composer art
-composer art-xdebug
 composer artisan
-composer artisan:app-build
 composer artisan:envy-prune
 composer artisan:envy-sync
 composer artisan:ide-helper
@@ -48,7 +46,6 @@ composer class-leak
 composer class-leak:check
 composer composer-bump
 composer composer-bump:all
-composer composer-bump:require
 composer composer-bump:vendor-bin-common
 composer composer-bump:vendor-bin-php85
 composer composer-config:disable-process-timeout
@@ -418,6 +415,7 @@ composer zizmor
 * [wireui/wireui](https://github.com/wireui/wireui) - TallStack components
 * [yiisoft/injector](https://github.com/yiisoft/injector) - PSR-11 compatible injector. Executes a callable and makes an instances by injecting dependencies from a given DI container.
 * [zenstruck/stream](https://github.com/zenstruck/stream) - Object wrapper for PHP resources.
+* [adamwojs/php-cs-fixer-phpdoc-force-fqcn](https://github.com/adamwojs/php-cs-fixer-phpdoc-force-fqcn)
 * [amirami/localizator](https://github.com/amiranagram/localizator) - Localizator is a small tool for Laravel that gives you the ability to extract untranslated strings from project files. It works using the artisan command line and the provided localize command.
 * [andreaselia/laravel-api-to-postman](https://github.com/andreaselia/laravel-api-to-postman) - Generate a Postman collection automatically from your Laravel API
 * [bamarni/composer-bin-plugin](https://github.com/bamarni/composer-bin-plugin) - No conflicts for your bin dependencies
@@ -441,9 +439,9 @@ composer zizmor
 * [ergebnis/php-cs-fixer-config](https://github.com/ergebnis/php-cs-fixer-config) - Provides a configuration factory and rule set factories for friendsofphp/php-cs-fixer.
 * [ergebnis/rector-rules](https://github.com/ergebnis/rector-rules) - Provides rules for rector/rector.
 * [fakerphp/faker](https://github.com/FakerPHP/Faker) - Faker is a PHP library that generates fake data for you.
-* [guanguans/ai-commit](https://github.com/guanguans/ai-commit) - Automagically generate conventional git commit message with AI. - 使用 AI 自动生成约定式 git 提交信息。
 * [guanguans/laravel-soar](https://github.com/guanguans/laravel-soar) - SQL optimizer and rewriter for laravel. - laravel 的 SQL 优化器和重写器。
 * [guanguans/monorepo-builder-worker](https://github.com/guanguans/monorepo-builder-worker) - A set of additional release workers for symplify/monorepo-builder.
+* [guanguans/php-cs-fixer-custom-fixers](https://github.com/guanguans/php-cs-fixer-custom-fixers) - Use php-cs-fixer to format bats,blade.php,Dockerfile,env,json,md,mdx,sh,sql,tex,text,toml,txt,xml,yaml...files. - 使用 php-cs-fixer 去格式化 bats、blade.php、Dockerfile、env、json、md、mdx、sh、sql、tex、text、toml、txt、xml、yaml...文件。
 * [ion-bazan/composer-diff](https://github.com/IonBazan/composer-diff) - Compares composer.lock changes and generates Markdown report so you can use it in PR description.
 * [jasonmccreary/laravel-test-assertions](https://github.com/jasonmccreary/laravel-test-assertions) - A set of helpful assertions when testing Laravel applications.
 * [josezenem/laravel-make-migration-pivot](https://github.com/josezenem/laravel-make-migration-pivot) - Make Laravel pivot tables using the new Laravel 9 closure migrations.
@@ -801,7 +799,7 @@ app/
 |   |   `-- CallbackFilter.php
 |   |-- Rectors/
 |   |   |-- ClassHandleMethodRector.php
-|   |   `-- rector-rules-overview.md
+|   |   `-- rules-overview.md
 |   |-- Signers/
 |   |   |-- HmacSigner.php
 |   |   `-- Utils.php

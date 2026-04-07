@@ -30,9 +30,9 @@ final readonly class EnsureVerifiedEmailsForSignInUsers
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {

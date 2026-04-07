@@ -27,10 +27,10 @@ use Illuminate\Support\Collection;
 final class CollectionMixin
 {
     /**
+     * @see \Illuminate\Support\Traits\EnumeratesValues::fromJson()
+     *
      * @noinspection JsonEncodingApiUsageInspection
      * @noinspection PhpMethodParametersCountMismatchInspection
-     *
-     * @see \Illuminate\Support\Traits\EnumeratesValues::fromJson()
      */
     public static function fromJson(): \Closure
     {

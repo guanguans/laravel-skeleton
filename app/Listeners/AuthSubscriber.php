@@ -52,18 +52,21 @@ final class AuthSubscriber
             Validated::class,
             Verified::class,
         ])->mapWithKeys(static fn (string $eventClass): array => [
-            $eventClass => static function (object $event): void {
-                /** @var Attempting|Authenticated|CurrentDeviceLogout|Failed|Lockout|Login|Logout|OtherDeviceLogout|PasswordReset|PasswordResetLinkSent|Registered|Validated|Verified| $event */
-                Log::info(
-                    $event::class,
-                    collect($event->user ?? $event->credentials ?? $event->request ?? [])
-                        ->except([
-                            'password',
-                            'password_confirmation',
-                        ])
-                        ->all()
-                );
-            },
+            $eventClass =>
+                /**
+                 * @param \Illuminate\Auth\Events\Attempting|\Illuminate\Auth\Events\Authenticated|\Illuminate\Auth\Events\CurrentDeviceLogout|\Illuminate\Auth\Events\Failed|\Illuminate\Auth\Events\Lockout|\Illuminate\Auth\Events\Login|\Illuminate\Auth\Events\Logout|\Illuminate\Auth\Events\OtherDeviceLogout|\Illuminate\Auth\Events\PasswordReset|\Illuminate\Auth\Events\PasswordResetLinkSent|\Illuminate\Auth\Events\Registered|\Illuminate\Auth\Events\Validated|\Illuminate\Auth\Events\Verified $event
+                 */
+                static function (object $event): void {
+                    Log::info(
+                        $event::class,
+                        collect($event->user ?? $event->credentials ?? $event->request ?? [])
+                            ->except([
+                                'password',
+                                'password_confirmation',
+                            ])
+                            ->all()
+                    );
+                },
         ])->all();
     }
 }

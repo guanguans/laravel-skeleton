@@ -49,8 +49,8 @@ final class AppServiceProvider extends ServiceProvider
             // ->dd()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
                 foreach ($mixinReflectionClass->getAttributes(Mixin::class) as $mixinReflectionAttribute) {
-                    /** @var \App\Support\Attributes\Mixin $mixinAttribute */
                     $mixinAttribute = $mixinReflectionAttribute->newInstance();
+                    \assert($mixinAttribute instanceof Mixin);
 
                     /** @noinspection PhpAccessStaticViaInstanceInspection */
                     $mixinAttribute->class::mixin(resolve($mixinClass), $mixinAttribute->replace);

@@ -37,9 +37,9 @@ final class QueryBuilderMixin
     public function cache(): \Closure
     {
         /**
-         * @noinspection RedundantDocCommentTagInspection
-         *
          * @param \Closure(EloquentBuilder|QueryBuilder|RelationBuilder|self): mixed $callback
+         *
+         * @noinspection RedundantDocCommentTagInspection
          */
         return fn (
             string $key,

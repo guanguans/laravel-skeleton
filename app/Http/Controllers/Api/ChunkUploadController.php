@@ -24,10 +24,10 @@ final class ChunkUploadController extends Controller
      * @see https://github.com/pionl/laravel-chunk-upload
      * @see https://www.youtube.com/watch?v=Me3-o57Cprc
      *
+     * @throws \Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException
+     *
      * @noinspection NativeMemberUsageInspection
      * @noinspection PhpRedundantVariableDocTypeInspection
-     *
-     * @throws \Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException
      */
     public function __invoke(Request $request): JsonResponse
     {
@@ -35,8 +35,8 @@ final class ChunkUploadController extends Controller
         $save = $receiver->receive();
 
         if ($save->isFinished()) {
-            /** @var \Illuminate\Http\UploadedFile $file */
             $file = $save->getFile();
+            \assert($file instanceof \Illuminate\Http\UploadedFile);
             $newFileName = $file->hashName();
             $file->move(storage_path('app/chunks'), $newFileName);
         }

@@ -134,9 +134,9 @@ final class HealthCheckCommand extends Command implements Isolatable
     }
 
     /**
-     * @noinspection PhpSameParameterValueInspection
-     *
      * @param list<string>|string $checkedSqlModes
+     *
+     * @noinspection PhpSameParameterValueInspection
      */
     private function checkSqlMode(array|string $checkedSqlModes = 'strict_all_tables'): Result
     {

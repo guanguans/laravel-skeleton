@@ -66,12 +66,12 @@ trait Sanitizeable
     /**
      * Recursively intersects 2 arrays based on their keys.
      *
-     * @noinspection PhpVariableNamingConventionInspection
-     *
      * @param array $a first array (that keeps the values)
      * @param array $b second array to be compared with
      *
      * @return array an array containing all keys that are present in $a and $b. Only values from $a are returned
+     *
+     * @noinspection PhpVariableNamingConventionInspection
      */
     private function recursiveArrayIntersectKey(array $a, array $b): array
     {

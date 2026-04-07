@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Log;
 use Psr\Log\LoggerInterface;
 
 /**
- * @mixin \Illuminate\Http\Client\PendingRequest
- *
  * @see https://github.com/TheDragonCode/laravel-http-macros
+ *
+ * @mixin \Illuminate\Http\Client\PendingRequest
  */
 #[Mixin(PendingRequest::class)]
 final class PendingRequestMixin

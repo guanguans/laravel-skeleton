@@ -40,9 +40,9 @@ abstract class AbstractRule implements ValidationRule
      * @see https://github.com/vlucas/valitron
      * @see https://github.com/Wixel/GUMP
      *
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(string, null|string): \Illuminate\Translation\PotentiallyTranslatedString $fail
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {

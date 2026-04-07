@@ -29,11 +29,11 @@ final class VerifyJsonContent
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \Throwable
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {

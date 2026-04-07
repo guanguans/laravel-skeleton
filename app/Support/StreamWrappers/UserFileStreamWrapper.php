@@ -136,11 +136,11 @@ final class UserFileStreamWrapper extends StreamWrapper
     }
 
     /**
-     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
-     *
      * @throws \Throwable
      *
      * @return resource
+     *
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      */
     #[\Override]
     public function stream_cast(int $castAs): mixed

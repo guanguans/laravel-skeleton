@@ -61,8 +61,8 @@ final class AuthController extends Controller
 
         JWTUser::query()->create(Arr::except($validated, 'password_confirmation'));
 
-        /** @var string $token */
         $token = auth()->attempt($validated);
+        \assert(\is_string($token));
 
         return tap(
             $this->apiResponse()->success(JWTUser::wrapToken($token)),

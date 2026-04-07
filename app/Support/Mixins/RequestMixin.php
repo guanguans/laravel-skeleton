@@ -118,14 +118,15 @@ final class RequestMixin
     public function matchRoute(): \Closure
     {
         return function (bool $includingMethod = true) {
-            /** @var \Illuminate\Routing\RouteCollection $routeCollection */
             $routeCollection = resolve(Router::class)->getRoutes();
+            \assert($routeCollection instanceof \Illuminate\Routing\RouteCollection);
 
             $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
 
             [$fallbacks, $routes] = collect($routes)->partition(static fn (Route $route) => $route->isFallback);
 
-            /** @var \Illuminate\Support\Collection $routes */
+            \assert($routes instanceof \Illuminate\Support\Collection);
+
             return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
         };
     }

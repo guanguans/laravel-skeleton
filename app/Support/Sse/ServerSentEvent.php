@@ -154,7 +154,7 @@ final class ServerSentEvent implements \Stringable
         // }
 
         // Event loop.
-        while (true) {
+        for (; ;) {
             try {
                 // Echo server sent event.
                 $this->send();

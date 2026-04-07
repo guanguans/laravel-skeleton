@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace App\Support\Valinor\Converter;
 
 /**
- * @internal
- *
  * @see https://github.com/kreait/firebase-php/tree/7.x/src/Firebase/Valinor
  * @see https://valinor.cuyz.io/latest/how-to/convert-input/#converting-keys-format-from-snake_case-to-camelcase
+ *
+ * @internal
  */
 final class SnakeCaseToCamelCaseConverter
 {

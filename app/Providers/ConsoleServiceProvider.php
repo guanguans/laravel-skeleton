@@ -31,11 +31,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @property EventDispatcherInterface $symfonyDispatcher
+ * @property \Symfony\Component\EventDispatcher\EventDispatcherInterface $symfonyDispatcher
  */
 final class ConsoleServiceProvider extends ServiceProvider
 {

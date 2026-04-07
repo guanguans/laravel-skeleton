@@ -16,7 +16,6 @@ namespace App\Console\Commands;
 use Composer\Semver\Comparator;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
@@ -39,7 +38,7 @@ final class ShowUnsupportedRequiresCommand extends Command
     private PackagistClient $packagist;
 
     /**
-     * @throws FileNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function handle(): void
     {

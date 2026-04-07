@@ -26,9 +26,9 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 /**
- * @mixin \Illuminate\Console\Command
- *
  * @see https://github.com/nunomaduro/laravel-console-task
+ *
+ * @mixin \Illuminate\Console\Command
  *
  * @method toSymfonyProcess(null|array|string $command)
  */
@@ -56,8 +56,8 @@ final class CommandMixin
             int $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE,
             ?OutputInterface $output = null,
         ): Process {
-            /** @var Process $process */
             $process = $this->processHelperRun($cmd, $error, $callback, $verbosity, $output);
+            \assert($process instanceof Process);
             throw_unless($process->isSuccessful(), ProcessFailedException::class, $process);
 
             return $process;
@@ -81,8 +81,8 @@ final class CommandMixin
                 $cmd = (fn (): Process => $this->toSymfonyProcess(null))->call($cmd);
             }
 
-            /** @var \Symfony\Component\Console\Helper\ProcessHelper $helper */
             $helper = $this->getHelper('process');
+            \assert($helper instanceof \Symfony\Component\Console\Helper\ProcessHelper);
 
             return $helper->run($output ?? $this->output, $cmd, $error, $callback, $verbosity);
         };

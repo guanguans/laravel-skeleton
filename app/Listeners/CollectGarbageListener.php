@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Config;
 final class CollectGarbageListener
 {
     /**
-     * @noinspection PhpUnusedParameterInspection
-     *
      * @see \Illuminate\Console\Events\CommandFinished
      * @see \Illuminate\Foundation\Http\Events\RequestHandled
+     *
+     * @noinspection PhpUnusedParameterInspection
      */
     public function handle(object $event): void
     {

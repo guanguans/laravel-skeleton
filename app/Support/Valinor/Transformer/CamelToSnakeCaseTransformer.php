@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace App\Support\Valinor\Transformer;
 
 /**
- * @internal
- *
  * @see https://github.com/kreait/firebase-php/tree/7.x/src/Firebase/Valinor
  * @see https://valinor.cuyz.io/latest/serialization/common-transformers-examples/#transforming-property-name-to-snake_case
+ *
+ * @internal
  */
 final class CamelToSnakeCaseTransformer
 {

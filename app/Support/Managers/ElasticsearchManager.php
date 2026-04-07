@@ -16,8 +16,6 @@ namespace App\Support\Managers;
 use App\Exceptions\InvalidArgumentException;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
-use Elastic\Elasticsearch\Exception\ConfigException;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Manager;
@@ -45,12 +43,12 @@ final class ElasticsearchManager extends Manager
     }
 
     /**
+     * @throws \Elastic\Elasticsearch\Exception\ConfigException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
+     *
      * @noinspection PhpMissingParentCallCommonInspection
      * @noinspection MissingParentCallInspection
-     *
-     * @throws \Throwable
-     * @throws BindingResolutionException
-     * @throws ConfigException
      */
     #[\Override]
     protected function createDriver(mixed $driver): Client
@@ -81,7 +79,7 @@ final class ElasticsearchManager extends Manager
     }
 
     /**
-     * @throws BindingResolutionException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function prepareConfig(array $config): array
     {

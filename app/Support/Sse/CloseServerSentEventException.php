@@ -16,7 +16,7 @@ namespace App\Support\Sse;
 final class CloseServerSentEventException extends \RuntimeException
 {
     public function __construct(
-        public ?ServerSentEvent $serverSentEvent = null,
+        public readonly ?ServerSentEvent $serverSentEvent = null,
         int $code = 0,
         ?\Throwable $previous = null
     ) {

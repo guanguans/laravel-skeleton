@@ -30,11 +30,11 @@ final class IsRouteIgnored
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \ReflectionException
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {

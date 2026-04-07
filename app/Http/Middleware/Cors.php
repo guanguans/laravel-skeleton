@@ -28,11 +28,11 @@ final class Cors
     use WithPipeArgs;
 
     /**
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(Request $request, \Closure $next, string $allowedOriginPatterns = '*'): SymfonyResponse
     {

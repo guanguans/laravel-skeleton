@@ -76,19 +76,24 @@ final class ValidatorServiceProvider extends ServiceProvider
                 static fn (\ReflectionClass $reflectionClass): bool => $reflectionClass->isSubclassOf(AbstractRule::class)
                     && $reflectionClass->isInstantiable()
             )
-            ->each(static function (\ReflectionClass $ruleReflectionClass, string $ruleClass): void {
-                /** @var class-string<\App\Rules\AbstractRule> $ruleClass */
-                ValidatorFacade::{$ruleClass::extendMethod()}(
-                    $ruleClass::name(),
-                    static fn (string $attribute, mixed $value, array $parameters, Validator $validator): bool => tap(
-                        new $ruleClass(...$parameters),
-                        static function (AbstractRule $rule) use ($validator): void {
-                            $rule instanceof DataAwareRule and $rule->setData($validator->getData());
-                            $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
-                        }
-                    )->passes($attribute, $value),
-                    $ruleClass::message()
-                );
-            });
+            ->each(
+                /**
+                 * @param \ReflectionClass<\App\Rules\AbstractRule> $ruleReflectionClass
+                 * @param class-string<\App\Rules\AbstractRule> $ruleClass
+                 */
+                static function (\ReflectionClass $ruleReflectionClass, string $ruleClass): void {
+                    ValidatorFacade::{$ruleClass::extendMethod()}(
+                        $ruleClass::name(),
+                        static fn (string $attribute, mixed $value, array $parameters, Validator $validator): bool => tap(
+                            new $ruleClass(...$parameters),
+                            static function (AbstractRule $rule) use ($validator): void {
+                                $rule instanceof DataAwareRule and $rule->setData($validator->getData());
+                                $rule instanceof ValidatorAwareRule and $rule->setValidator($validator);
+                            }
+                        )->passes($attribute, $value),
+                        $ruleClass::message()
+                    );
+                }
+            );
     }
 }

@@ -23,14 +23,14 @@ trait Rescuer
     /**
      * @template TValue
      *
-     * @noinspection RedundantDocCommentTagInspection
-     *
      * @param callable(): TValue $callback
      * @param bool|callable(\Throwable): bool $report
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      *
      * @return \Throwable|TValue
+     *
+     * @noinspection RedundantDocCommentTagInspection
      */
     public function rescue(callable $callback, bool|callable $report = false): mixed
     {

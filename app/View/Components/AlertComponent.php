@@ -25,9 +25,9 @@ final class AlertComponent extends Component
 
     public function __construct(
         /** alert 类型。 */
-        public string $type,
+        public readonly string $type,
         /** alert 消息。 */
-        public string $message
+        public readonly string $message
     ) {}
 
     #[\Override]

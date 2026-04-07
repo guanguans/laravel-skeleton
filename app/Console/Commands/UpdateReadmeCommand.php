@@ -29,9 +29,9 @@ final class UpdateReadmeCommand extends Command
     protected $description = 'Update readme';
 
     /**
-     * @noinspection PhpMemberCanBePulledUpInspection
-     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     *
+     * @noinspection PhpMemberCanBePulledUpInspection
      */
     public function handle(): void
     {

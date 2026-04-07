@@ -26,8 +26,6 @@ use Rector\Comments\NodeDocBlock\DocBlockUpdater;
 use Rector\Rector\AbstractRector;
 use Symfony\Component\HttpFoundation\Response;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
-use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
@@ -39,10 +37,10 @@ final class ClassHandleMethodRector extends AbstractRector implements Documented
     ) {}
 
     /**
-     * @noinspection OverrideMissingInspection
+     * @throws \Symplify\RuleDocGenerator\Exception\PoorDocumentationException
+     * @throws \Symplify\RuleDocGenerator\Exception\ShouldNotHappenException
      *
-     * @throws PoorDocumentationException
-     * @throws ShouldNotHappenException
+     * @noinspection OverrideMissingInspection
      */
     public function getRuleDefinition(): RuleDefinition
     {
@@ -95,7 +93,7 @@ final class ClassHandleMethodRector extends AbstractRector implements Documented
     }
 
     /**
-     * @param Node\Stmt\ClassMethod $node
+     * @param \PhpParser\Node\Stmt\ClassMethod $node
      */
     #[\Override]
     public function refactor(Node $node): ?Node

@@ -95,12 +95,12 @@ if (!\function_exists('classes')) {
      * @see \PhpCsFixer\ExecutorWithoutErrorHandler
      * @see \Phrity\Util\ErrorHandler
      *
-     * @noinspection RedundantDocCommentTagInspection
-     * @noinspection PhpDocSignatureIsNotCompleteInspection
-     *
      * @param null|(callable(class-string, string): bool) $filter
      *
      * @return \Illuminate\Support\Collection<class-string, \ReflectionClass>
+     *
+     * @noinspection RedundantDocCommentTagInspection
+     * @noinspection PhpDocSignatureIsNotCompleteInspection
      */
     function classes(?callable $filter = null): Collection
     {
@@ -135,10 +135,10 @@ if (!\function_exists('resolve_callback')) {
      * @see https://github.com/PHP-DI/Invoker/blob/master/src/CallableResolver.php
      * @see \Illuminate\Container\Container::call()
      *
+     * @throws \Throwable
+     *
      * @noinspection RedundantDocCommentTagInspection
      * @noinspection DebugFunctionUsageInspection
-     *
-     * @throws \Throwable
      */
     function resolve_callback(callable|string $callback): callable
     {
@@ -381,7 +381,8 @@ if (!\function_exists('curry')) {
                 return $function(...$arguments);
             }
 
-            /** @var callable $accumulator */
+            \assert($accumulator instanceof Closure);
+
             return $accumulator($arguments);
         };
 

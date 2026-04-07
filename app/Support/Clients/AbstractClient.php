@@ -60,9 +60,9 @@ abstract class AbstractClient
      * @see \Illuminate\Http\Client\Factory::__call()
      * @see \Spatie\QueryBuilder\QueryBuilder::__call()
      *
-     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
+     * @return \Illuminate\Http\Client\PendingRequest|mixed|static
      *
-     * @return mixed|PendingRequest|static
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      */
     public function __call(string $name, array $arguments): mixed
     {
@@ -128,9 +128,9 @@ abstract class AbstractClient
     }
 
     /**
-     * @noinspection OffsetOperationsInspection
-     *
      * @return array<string, scalar>
+     *
+     * @noinspection OffsetOperationsInspection
      */
     protected function userAgentItems(): array
     {
@@ -154,11 +154,11 @@ abstract class AbstractClient
     }
 
     /**
-     * @param int $retries 重试次数
-     * @param int $baseIntervalMs 基础间隔（毫秒）
-     *
      * @see \GuzzleHttp\RetryMiddleware::exponentialDelay()
      * @see \retry()
+     *
+     * @param int $retries 重试次数
+     * @param int $baseIntervalMs 基础间隔（毫秒）
      */
     protected function fibonacciRetryIntervals(int $retries, int $baseIntervalMs = 1000): array
     {
