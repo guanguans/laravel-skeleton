@@ -1,7 +1,6 @@
-# total 12 errors
+# total 10 errors
 
 includes:
-    - arrayUnpacking.nonIterable.neon
     - callable.nonCallable.neon
     - nullsafe.neverNull.neon
     - offsetAccess.invalidOffset.neon

@@ -1,0 +1,13 @@
+# https://github.com/gitleaks/gitleaks/blob/master/.gitleaksignore
+storage/certs/jwt-rsa-4096-private.pem:private-key:1
+public/scribe-docs/openapi.yaml:generic-api-key:28
+public/scribe-docs/openapi.yaml:generic-api-key:97
+public/scribe-docs/openapi.yaml:generic-api-key:200
+public/vendor/orchid/js/vendor.js:generic-api-key:2
+app/Http/Controllers/Api/AuthController.php:generic-api-key:39
+config/exception-notify.php:generic-api-key:116
+app/Http/Controllers/Api/AuthController.php:generic-api-key:28
+app/Http/Controllers/Api/AuthController.php:generic-api-key:113
+config/exception-notify.php:generic-api-key:87
+config/exception-notify.php:generic-api-key:93
+

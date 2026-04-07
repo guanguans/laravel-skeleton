@@ -107,7 +107,7 @@ final class RunCommandInDebugModeListener
     {
         $tokens = $this->getTokensFromArgvInput($input);
 
-        return array_any($tokens, static fn ($token): bool => '--xdebug' === $token || '-x' === $token);
+        return array_any($tokens, static fn (string $token): bool => '--xdebug' === $token || '-x' === $token);
     }
 
     /**

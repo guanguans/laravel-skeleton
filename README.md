@@ -19,186 +19,203 @@
 
 ```shell
 composer actionlint
-composer ai-commit
-composer ai-commit-bito
-composer ai-commit-bito-no-verify
-composer ai-commit-github-copilot
-composer ai-commit-github-copilot-no-verify
-composer ai-commit-github-models
-composer ai-commit-github-models-no-verify
-composer ai-commit-no-verify
+composer app:fix-neon
+composer app:install-project
+composer app:lint-readme
+composer app:parse-phpdoc
+composer argtyper
+composer argtyper:add-types
 composer art
 composer art-xdebug
 composer artisan
-composer artisan-envy-prune
-composer artisan-envy-sync
-composer artisan-ide-helper
-composer artisan-solo
-composer artisan-solo-dumps
-composer artisan-xdebug
+composer artisan:app-build
+composer artisan:envy-prune
+composer artisan:envy-sync
+composer artisan:ide-helper
+composer artisan:solo
+composer artisan:solo-dumps
+composer artisan:xdebug
 composer benchmark
 composer blade-formatter
-composer blade-formatter-check-formatted
-composer blade-formatter-write
+composer blade-formatter:check-formatted
+composer blade-formatter:write
 composer cghooks
-composer cghooks-ignore
+composer cghooks:upsert
 composer checks
-composer checks-verbose
+composer checks:optional
+composer checks:required
 composer class-leak
-composer class-leak-check
-composer composer-bin-all-update
-composer composer-check-platform-reqs
+composer class-leak:check
+composer composer-bump
+composer composer-bump:all
+composer composer-bump:require
+composer composer-bump:vendor-bin-common
+composer composer-bump:vendor-bin-php85
+composer composer-config:disable-process-timeout
 composer composer-dependency-analyser
-composer composer-diff
-composer composer-disable-process-timeout
-composer composer-normalize
-composer composer-normalize
-composer composer-normalize-dry-run
-composer composer-normalize-dry-run
-composer composer-updater
-composer composer-updater-dry-run
-composer composer-updater-laravel10
-composer composer-updater-laravel11
-composer composer-validate
-composer composer-vendor-patches
+composer composer:audit
+composer composer:bin-all-update
+composer composer:check-platform-reqs
+composer composer:diff
+composer composer:normalize
+composer composer:normalize-dry-run
+composer composer:unlink
+composer composer:validate
 composer detect-collisions
 composer dev
-composer env-put-composer-memory-unlimited
-composer env-put-php
-composer env-put-xdebug-off
-composer env-put-xdebug-on
+composer ecs
+composer ecs:check
+composer ecs:check-output-format-json
+composer ecs:fix
+composer ecs:list-checkers
 composer envoy
-composer envoy-local
-composer envoy-ssh-testing
-composer envoy-testing
-composer facade-lint
-composer facade-update
-composer install-project
+composer envoy:local
+composer envoy:ssh-testing
+composer envoy:testing
+composer facade:lint
+composer facade:update
+composer git-chglog
+composer gitleaks
+composer gitleaks:generate-baseline
+composer grumphp
 composer jack
-composer jack-breakpoint
-composer jack-breakpoint-dev
-composer jack-open-versions
-composer jack-open-versions-dev
-composer jack-open-versions-dev-dry-run
-composer jack-open-versions-dry-run
-composer jack-raise-to-installed
-composer jack-raise-to-installed-dry-run
-composer json-lint
-composer lint
+composer jack:breakpoint
+composer jack:breakpoint-dev
+composer jack:open-versions
+composer jack:open-versions-dev
+composer jack:open-versions-dev-dry-run
+composer jack:open-versions-dry-run
+composer jack:raise-to-installed
+composer jack:raise-to-installed-dry-run
+composer jsonlint
+composer lint-md
+composer lint-md:fix
+composer lint-md:prototype
 composer mago
-composer mago-format
-composer mago-format-dry-run
-composer mago-init
-composer mago-lint
-composer mago-lint-compilation
-composer mago-lint-dry-run
-composer mago-lint-list-rules
-composer mago-lint-semantics-only
-composer md-fix
-composer md-lint
+composer mago:format
+composer mago:format-dry-run
+composer mago:init
+composer mago:lint
+composer mago:lint-compilation
+composer mago:lint-dry-run
+composer mago:lint-list-rules
+composer mago:lint-semantics-only
+composer monorepo-builder
+composer monorepo-builder:release
+composer monorepo-builder:release-1.0.0-BETA1
+composer monorepo-builder:release-1.0.0-BETA1-dry-run
+composer monorepo-builder:release-major
+composer monorepo-builder:release-major-dry-run
+composer monorepo-builder:release-minor
+composer monorepo-builder:release-minor-dry-run
+composer monorepo-builder:release-patch
+composer monorepo-builder:release-patch-dry-run
 composer neon-lint
-composer normalized
-composer normalized-dry-run
 composer peck
-composer peck-init
+composer peck:ignore-all
+composer peck:init
 composer pest
-composer pest-bail
-composer pest-coverage
-composer pest-disable-coverage-ignore
-composer pest-highest
-composer pest-migrate-configuration
-composer pest-parallel
-composer pest-profile
-composer pest-type-coverage
-composer pest-update-snapshots
+composer pest:bail
+composer pest:ci
+composer pest:coverage
+composer pest:debug
+composer pest:dirty
+composer pest:drift
+composer pest:generate-baseline
+composer pest:headed
+composer pest:highest
+composer pest:migrate-configuration
+composer pest:mutate
+composer pest:parallel
+composer pest:profanity
+composer pest:profile
+composer pest:retry
+composer pest:todos
+composer pest:type-coverage
+composer pest:update-snapshots
 composer php-cs-fixer
-composer phpcs
-composer phpcs:compatibility
-composer phpcs:help
-composer phpcs:i
-composer phploc
-composer phpmd
-composer phpmetrics
+composer php-cs-fixer:custom
+composer php-cs-fixer:custom-fix
+composer php-cs-fixer:custom-fix-dry-run
+composer php-cs-fixer:custom-list-files
+composer php-cs-fixer:custom-ln-config
+composer php-cs-fixer:fix
+composer php-cs-fixer:fix-dry-run
+composer php-cs-fixer:fix-dry-run-format-annotate-pull-request
+composer php-cs-fixer:list-files
+composer php-cs-fixer:list-sets
+composer php-lint
+composer phpbench
 composer phpmnd
 composer phpstan
-composer phpstan-baseline
-composer phpstan-split-baseline
+composer phpstan:analyse
+composer phpstan:analyse-error-format-annotate-pull-request
+composer phpstan:analyse-error-format-checkstyle
+composer phpstan:analyse-error-format-github
+composer phpstan:analyse-error-format-llm
+composer phpstan:analyse-error-format-sarif
+composer phpstan:analyse-generate-baseline
+composer phpstan:analyse-split-baseline
+composer phpstan:diagnose
+composer phpstan:dump-parameters
 composer pint
-composer pint-bail
-composer pint-dirty
-composer pint-dirty-bail
-composer pint-dirty-test
-composer pint-test
+composer pint:test
+composer pint:test-format-annotate-pull-request
+composer putenv:composer-memory-unlimited
+composer putenv:php
+composer putenv:xdebug-off
+composer putenv:xdebug-on
 composer rector
-composer rector-clear-cache
-composer rector-clear-cache-dry-run
-composer rector-custom-rule
-composer rector-detect-node
-composer rector-dry-run
-composer rector-list-rules
-composer rector-only
-composer rector-only-dry-run
-composer rector-setup-ci
-composer release
-composer release-1.0.0-BETA1
-composer release-1.0.0-BETA1-dry-run
-composer release-major
-composer release-major-dry-run
-composer release-minor
-composer release-minor-dry-run
-composer release-patch
-composer release-patch-dry-run
-composer roave-infection-static-analysis-plugin
-composer roave-no-leaks
-composer rule-doc
-composer rule-doc-rector
-composer rule-doc-rector-validate
+composer rector:custom-rule
+composer rector:list-rules
+composer rector:process
+composer rector:process-clear-cache
+composer rector:process-clear-cache-dry-run
+composer rector:process-dry-run
+composer rector:process-dry-run-output-format-github
+composer rector:process-only
+composer rector:process-only-dry-run
+composer roave-backward-compatibility-check
+composer roave-backward-compatibility-check:format-github-actions
+composer rule-doc-generator
+composer rule-doc-generator:generate
+composer rule-doc-generator:validate
 composer setup
 composer sk
-composer sk-alice-yaml-fixtures-to-php
-composer sk-check-commented-code
-composer sk-check-conflicts
-composer sk-dump-editorconfig
-composer sk-finalize-classes
-composer sk-finalize-classes-dry-run
-composer sk-find-multi-classes
-composer sk-generate-symfony-config-builders
-composer sk-multi-package-composer-stats
-composer sk-namespace-to-psr-4
-composer sk-pretty-json
-composer sk-pretty-json-dry-run
-composer sk-privatize-constants
-composer sk-search-regex
-composer sk-split-config-per-package
-composer sk-spot-lazy-traits
-composer style-fix
-composer style-lint
-composer style-tools-fix
-composer style-tools-lint
+composer sk:alice-yaml-fixtures-to-php
+composer sk:check-commented-code
+composer sk:check-conflicts
+composer sk:dump-editorconfig
+composer sk:finalize-classes
+composer sk:finalize-classes-dry-run
+composer sk:find-multi-classes
+composer sk:generate-symfony-config-builders
+composer sk:namespace-to-psr-4
+composer sk:namespace-to-psr-4-src
+composer sk:namespace-to-psr-4-tests
+composer sk:pretty-json
+composer sk:pretty-json-dry-run
+composer sk:privatize-constants
+composer sk:search-regex
+composer sk:split-config-per-package
+composer sk:spot-lazy-traits
 composer test
-composer test-bail
-composer test-coverage
-composer test-disable-coverage-ignore
-composer test-highest
-composer test-migrate-configuration
-composer test-parallel
-composer test-profile
-composer test-type-coverage
-composer test-update-snapshots
-composer text-fix
-composer text-lint
+composer test:coverage
 composer todo-lint
+composer touch:database-sqlite
 composer trap
 composer trufflehog
-composer user-composer
-composer user-php
-composer var-dump-server-cli
-composer var-dump-server-html
+composer typos
+composer typos:write-changes
+composer var-dump-server:cli
+composer var-dump-server:html
+composer vendor-patches
 composer vhs
 composer whatsdiff
 composer yaml-lint
-composer zh-fix
-composer zh-lint
+composer zhlint
+composer zhlint:fix
+composer zhlint:prototype
 composer zizmor
 ```
 
@@ -780,57 +797,10 @@ app/
 |   |   `-- Processor/
 |   |       |-- AppendExtraDataProcessor.php
 |   |       `-- EloquentLogHttpModelProcessor.php
-|   |-- PHPStan/
-|   |   `-- ForbiddenGlobalFunctionsRule.php
-|   |-- PhpCsFixer/
-|   |   |-- Fixer/
-|   |   |   |-- AbstractConfigurableFixer.php
-|   |   |   |-- AbstractFixer.php
-|   |   |   |-- BladeFixer.php
-|   |   |   |-- CommandLineTool/
-|   |   |   |   |-- AbstractCommandLineToolFixer.php
-|   |   |   |   |-- AutocorrectFixer.php
-|   |   |   |   |-- BladeFormatterFixer.php
-|   |   |   |   |-- Concerns/
-|   |   |   |   |   |-- FinalFileAware.php
-|   |   |   |   |   |-- PostFinalFileCommand.php
-|   |   |   |   |   `-- PreFinalFileCommand.php
-|   |   |   |   |-- DockerFmtFixer.php
-|   |   |   |   |-- DotenvLinterFixer.php
-|   |   |   |   |-- LintMdFixer.php
-|   |   |   |   |-- MarkdownLintCli2Fixer.php
-|   |   |   |   |-- MarkdownLintFixer.php
-|   |   |   |   |-- PintFixer.php
-|   |   |   |   |-- ShfmtFixer.php
-|   |   |   |   |-- SqRuffFixer.php
-|   |   |   |   |-- SqlFluffFixer.php
-|   |   |   |   |-- TextLintFixer.php
-|   |   |   |   |-- TombiFixer.php
-|   |   |   |   |-- XmlLintFixer.php
-|   |   |   |   |-- YamlFmtFixer.php
-|   |   |   |   `-- ZhLintFixer.php
-|   |   |   |-- Concerns/
-|   |   |   |   |-- AllowRisky.php
-|   |   |   |   |-- AlwaysCandidate.php
-|   |   |   |   |-- HighestPriority.php
-|   |   |   |   |-- InlineHtmlCandidate.php
-|   |   |   |   |-- LowestPriority.php
-|   |   |   |   |-- SupportsExtensions.php
-|   |   |   |   |-- SupportsExtensionsAndPathArg.php
-|   |   |   |   `-- SupportsPathArg.php
-|   |   |   |-- InlineHtml/
-|   |   |   |   |-- AbstractInlineHtmlFixer.php
-|   |   |   |   |-- DoctrineSqlFixer.php
-|   |   |   |   |-- JsonFixer.php
-|   |   |   |   `-- PhpMyAdminSqlFixer.php
-|   |   |   `-- SqlFixer.php
-|   |   |-- Fixers.php
-|   |   `-- Utils.php
 |   |-- PhpUserFilters/
 |   |   `-- CallbackFilter.php
 |   |-- Rectors/
 |   |   |-- ClassHandleMethodRector.php
-|   |   |-- RenameToPsrNameRector.php
 |   |   `-- rector-rules-overview.md
 |   |-- Signers/
 |   |   |-- HmacSigner.php
@@ -870,7 +840,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-65 directories, 300 files
+58 directories, 260 files
 
 ```
 

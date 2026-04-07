@@ -46,7 +46,6 @@ parameters:
 #      - vendor/lubusin/laravel-decomposer/src/controllers/DecomposerController.php
     excludePaths:
         - app/Support/StreamWrappers/
-        - app/Support/Rectors/RenameToPsrNameRector.php
         - *.blade.php
     level: max
 #    level: 10
@@ -106,7 +105,7 @@ parameters:
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
         - identifier: offsetAccess.nonOffsetAccessible
-        - identifier: offsetAccess.notFound
+#        - identifier: offsetAccess.notFound
         - identifier: return.type
         - identifier: shipmonk.deadConstant
         - identifier: shipmonk.deadMethod
@@ -118,10 +117,6 @@ parameters:
         - '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Auth\\AuthManager\:\:factory\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Foundation\\Application\:\:tap\(\)\.$#'
-        - '''
-            #^Call to method toString\(\) of deprecated class PhpCsFixer\\Utils\:
-            This is a God Class anti\-pattern\. Don't expand it\. It is fine to use logic that is already here \(that's why we don't trigger deprecation warnings\), but over time logic should be moved to dedicated, single\-responsibility classes\.$#
-          '''
         -
             message: '#^Call to an undefined method Symfony\\Component\\VarDumper\\Dumper\\DataDumperInterface\:\:dumpWithSource\(\)\.$#'
             path: app/Support/VarDumper/ServerDumper.php
@@ -141,7 +136,6 @@ parameters:
             paths:
                 - app/Models/BaseModel.php
                 - app/Rules/AbstractRule.php
-                - app/Support/PhpCsFixer/Fixer/AbstractFixer.php
         -
             messages:
                 - '#^Parameter \$class of method App\\Support\\Attributes\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'

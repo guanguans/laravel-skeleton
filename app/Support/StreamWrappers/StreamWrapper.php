@@ -144,7 +144,7 @@ abstract class StreamWrapper
     }
 
     /**
-     * Retrieve the underlaying resource.
+     * Retrieve the underlying resource.
      *
      * @see \stream_select()
      *

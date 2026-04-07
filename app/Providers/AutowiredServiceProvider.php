@@ -90,7 +90,7 @@ final class AutowiredServiceProvider extends ServiceProvider
                 });
 
                 try {
-                    $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
+                    // $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
                     $reflectionProperty->setValue($object, $app->make($propertyType, $autowired->parameters));
                 } catch (\Throwable $throwable) {
                     throw new \TypeError(

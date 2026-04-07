@@ -59,7 +59,7 @@ final class InflectorCommand extends Command
                                             [
                                                 'Laravel' => Pluralizer::class,
                                                 'Symfony' => EnglishInflector::class,
-                                            ][$parts->first()]
+                                            ][(string) $parts->first()]
                                         ),
                                         $parts->last(),
                                         [$phrase]

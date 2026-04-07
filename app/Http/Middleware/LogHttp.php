@@ -123,7 +123,7 @@ final class LogHttp
 
     private function shouldSkip(Request $request): bool
     {
-        return array_any(self::$skipCallbacks, static fn ($callback) => $callback($request));
+        return array_any(self::$skipCallbacks, static fn (\Closure $callback) => $callback($request));
     }
 
     /**
