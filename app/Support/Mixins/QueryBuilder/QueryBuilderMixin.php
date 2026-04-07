@@ -72,7 +72,7 @@ final class QueryBuilderMixin
                     }
                 );
 
-                (new Pipeline(app()))
+                new Pipeline(app())
                     ->send($builder)
                     ->through(...$pipes)
                     ->thenReturn();

@@ -58,6 +58,7 @@ use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php74\Rector\Ternary\ParenthesizeNestedTernaryRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\Php85\Rector\Property\AddOverrideAttributeToOverriddenPropertiesRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
@@ -138,10 +139,10 @@ return RectorConfig::configure()
     ->withTreatClassesAsFinal()
     ->withAttributesSets(phpunit: true, all: true)
     ->withComposerBased(phpunit: true, laravel: true)
-    ->withPhpVersion(PhpVersion::PHP_83)
+    ->withPhpVersion(PhpVersion::PHP_85)
     ->withSetProviders(LaravelSetProvider::class)
-    // ->withDowngradeSets(php83: true)
-    ->withPhpSets(php83: true)
+    // ->withDowngradeSets(php85: true)
+    ->withPhpSets(php85: true)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -158,7 +159,7 @@ return RectorConfig::configure()
     ->withSets([
         PHPUnitSetList::PHPUNIT_110,
         LaravelSetList::LARAVEL_120,
-        ...collect((new ReflectionClass(LaravelSetList::class))->getConstants(ReflectionClassConstant::IS_PUBLIC))
+        ...collect(new ReflectionClass(LaravelSetList::class)->getConstants(ReflectionClassConstant::IS_PUBLIC))
             ->reject(
                 static fn (string $constant, string $name): bool => \in_array(
                     $name,
@@ -312,6 +313,8 @@ return RectorConfig::configure()
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
+        AddOverrideAttributeToOverriddenPropertiesRector::class,
+
         ReplaceQueueTraitsWithQueueableRector::class,
         TablePropertyToTableAttributeRector::class,
         FillablePropertyToFillableAttributeRector::class,

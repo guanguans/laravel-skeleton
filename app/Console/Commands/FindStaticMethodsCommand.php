@@ -95,7 +95,7 @@ final class FindStaticMethodsCommand extends Command
                             SymfonyCommand::class,
                         ])->map(
                             static fn (string $exceptClass) => collect(
-                                (new \ReflectionClass($exceptClass))->getMethods(\ReflectionMethod::IS_STATIC)
+                                new \ReflectionClass($exceptClass)->getMethods(\ReflectionMethod::IS_STATIC)
                             )->map(
                                 static fn (\ReflectionMethod $reflectionMethod): string => $reflectionMethod->getName()
                             )
@@ -122,7 +122,7 @@ final class FindStaticMethodsCommand extends Command
 
                 $this->components->twoColumnDetail(
                     "<info>$class</info>",
-                    str((new \ReflectionClass($class))->getFileName())->remove(base_path('/'))
+                    str(new \ReflectionClass($class)->getFileName())->remove(base_path('/'))
                 );
 
                 $methods->each(function (\ReflectionMethod $reflectionMethod): void {

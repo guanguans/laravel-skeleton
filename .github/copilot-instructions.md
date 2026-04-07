@@ -1,10 +1,10 @@
-# Laravel PHP 8.3+ Package Copilot Instructions
+# Laravel PHP 8.5+ Package Copilot Instructions
 
 [//]: # (https://github.com/github/awesome-copilot)
 
 ## 项目背景
 
-- 技术栈：PHP (>=8.3), Laravel 12, Composer, NPM, JavaScript, Go, SQL
+- 技术栈：PHP (>=8.5), Laravel 12, Composer, NPM, JavaScript, Go, SQL
 - 代码风格：PSR-12，使用 Laravel Pint / PHP-CS-Fixer (仓库含自定义 Fixer)
 - 测试：Pest 优先；必要时 PHPUnit
 - 目标：可维护、类型明确、易测试、高性能
@@ -12,7 +12,7 @@
 ## PHP 代码规范
 
 - 严格遵守 PSR-12；必须使用 `declare(strict_types=1);`
-- 使用 PHP 8.3+ 新特性：readonly 类、枚举、联合类型、属性、泛型注解
+- 使用 PHP 8.5+ 新特性：readonly 类、枚举、联合类型、属性、泛型注解
 - 方法参数和返回值必须有类型声明，包括 nullable 类型使用 `?Type`
 - 优先使用命名参数和简短闭包语法 `fn() =>`
 - 使用新的 `match` 表达式替代简单的 `switch`

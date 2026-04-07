@@ -1,7 +1,7 @@
 # Mago configuration file
 # For more information, see https://mago.carthage.software/#/getting-started/configuration
 # https://github.com/tempestphp/tempest-framework/blob/main/mago.toml
-php_version = "8.3.0"
+php_version = "8.5.0"
 
 [source]
 paths = [

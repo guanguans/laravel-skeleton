@@ -48,7 +48,7 @@ final class IdeHelperChoresCommand extends Command
      */
     public function handle(): void
     {
-        collect((new \ReflectionObject($this))->getMethods())
+        collect(new \ReflectionObject($this)->getMethods())
             ->filter(static fn (\ReflectionMethod $method): bool => str($method->name)->endsWith(self::SUFFIX))
             ->when(
                 $this->option('only'),

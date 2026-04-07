@@ -74,7 +74,7 @@ final class VerifySignature
     private function validateSignature(Request $request, #[\SensitiveParameter] string $secret): void
     {
         throw_unless(
-            (new HmacSigner(secret: $secret))->validate(
+            new HmacSigner(secret: $secret)->validate(
                 $request->header('signature'),
                 [...(array) $request->input(), 'timestamp' => $request->header('timestamp'), 'nonce' => $request->header('nonce')]
             ),

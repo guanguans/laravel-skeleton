@@ -52,7 +52,7 @@ final class TraceEventListener
             ->map(static fn (array $trace) => Arr::except($trace, ['args', 'object']))
             // ->dd()
             ->sole(static fn (array $trace): bool => !str($trace['file'])->startsWith(
-                \dirname((new \ReflectionClass(Dispatcher::class))->getFileName())
+                \dirname(new \ReflectionClass(Dispatcher::class)->getFileName())
             ));
 
         file_put_contents(

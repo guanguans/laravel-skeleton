@@ -59,7 +59,7 @@ trait Pipeable
             );
         });
 
-        return (new Pipeline(app()))
+        return new Pipeline(app())
             ->send($builder)
             ->through(...$pipes)
             ->thenReturn();

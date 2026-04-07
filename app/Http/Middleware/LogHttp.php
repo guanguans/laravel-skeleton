@@ -123,13 +123,7 @@ final class LogHttp
 
     private function shouldSkip(Request $request): bool
     {
-        foreach (self::$skipCallbacks as $callback) {
-            if ($callback($request)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any(self::$skipCallbacks, static fn ($callback) => $callback($request));
     }
 
     /**

@@ -19,7 +19,7 @@ trait Singletonable
 
     protected function __clone() {}
 
-    final public function __wakeup(): void {}
+    final public function __unserialize(array $data): void {}
 
     public static function instance(mixed ...$parameters): object
     {

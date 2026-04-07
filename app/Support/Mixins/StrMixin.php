@@ -91,6 +91,6 @@ final class StrMixin
             bool $omitSeconds = true,
             bool $abbreviated = false,
             int $wordsPerMinute = 230
-        ): string => (new ReadTime($content, $omitSeconds, $abbreviated, $wordsPerMinute))->get();
+        ): string => new ReadTime($content, $omitSeconds, $abbreviated, $wordsPerMinute)->get();
     }
 }

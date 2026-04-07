@@ -60,12 +60,12 @@ return static function (MBConfig $mbConfig): void {
     ]);
 
     if (!(new ArgvInput)->hasParameterOption('--dry-run')) {
-        (new Process([
+        new Process([
             (new PhpExecutableFinder)->find(),
             (new ExecutableFinder)->find($composer = 'composer', $composer),
             'run',
             'checks',
-        ]))
+        ])
             ->setEnv(['COMPOSER_MEMORY_LIMIT' => -1])
             ->setTimeout(600)
             ->mustRun(static function (string $type, string $buffer): void {

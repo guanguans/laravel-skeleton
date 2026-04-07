@@ -70,7 +70,7 @@ final class RunCommandInDebugModeListener
         $output = $event->output;
         $output->writeln('<comment>Relaunching the command with xDebug...</comment>');
 
-        $exitCode = (new Process($this->buildCommandWithXDebugActivated()))
+        $exitCode = new Process($this->buildCommandWithXDebugActivated())
             ->setEnv([
                 'XDEBUG_SESSION' => '1',
                 'XDEBUG_MODE' => 'debug',
@@ -107,13 +107,7 @@ final class RunCommandInDebugModeListener
     {
         $tokens = $this->getTokensFromArgvInput($input);
 
-        foreach ($tokens as $token) {
-            if ('--xdebug' === $token || '-x' === $token) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($tokens, static fn ($token): bool => '--xdebug' === $token || '-x' === $token);
     }
 
     /**

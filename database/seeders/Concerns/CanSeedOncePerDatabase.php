@@ -30,7 +30,7 @@ trait CanSeedOncePerDatabase
     {
         if ($this->seederHasAlreadyBeenCalled($class)) {
             if (false === $silent && $this->command instanceof Command) {
-                (new TwoColumnDetail($this->command->getOutput()))->render(
+                new TwoColumnDetail($this->command->getOutput())->render(
                     $class,
                     '<fg=gray>Seeder had already run on this database</> <fg=yellow;options=bold>SKIPPING</>'
                 );

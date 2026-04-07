@@ -33,7 +33,7 @@ final class ShowUnsupportedRequiresCommand extends Command
         show-unsupported-requires
         {--cwd= : The current working directory.}
         {--package=* : The name of package.}
-        {--major-version=12 : The minimum major version of the package is required.}
+        {--major-version=13 : The minimum major version of the package is required.}
         EOF;
     protected $description = 'Show unsupported requires.';
     private PackagistClient $packagist;

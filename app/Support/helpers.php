@@ -406,7 +406,7 @@ if (!\function_exists('compose')) {
 if (!\function_exists('catch_query_log')) {
     function catch_query_log(callable $callback, mixed ...$parameters): array
     {
-        return (new Pipeline(app()))
+        return new Pipeline(app())
             ->send($callback)
             ->through(static function (callable $callback, Closure $next): Collection {
                 DB::enableQueryLog();

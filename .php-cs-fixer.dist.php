@@ -13,7 +13,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Support\PhpCsFixer\Fixer\CommandLineTool\PintFixer;
 use Ergebnis\License\Holder;
 use Ergebnis\License\Range;
 use Ergebnis\License\Type\MIT;
@@ -79,12 +78,6 @@ return Factory::fromRuleSet(Php83::create()
     //     },
     //     []
     // )))
-    ->withCustomFixers(Fixers::fromFixers(
-        new PintFixer
-    ))
-    ->withRules(Rules::fromArray([
-        PintFixer::name() => true,
-    ]))
     ->withRules(Rules::fromArray([
         // '@PHP70Migration' => true,
         // '@PHP70Migration:risky' => true,
@@ -97,8 +90,10 @@ return Factory::fromRuleSet(Php83::create()
         // '@PHP80Migration:risky' => true,
         // '@PHP81Migration' => true,
         // '@PHP82Migration' => true,
-        '@PHP8x3Migration' => true,
+        // '@PHP8x3Migration' => true,
         // '@PHP84Migration' => true,
+        '@PHP8x5Migration' => true,
+        '@PHP8x5Migration:risky' => true,
         // '@PHPUnit75Migration:risky' => true,
         // '@PHPUnit84Migration:risky' => true,
         // '@PHPUnit100Migration:risky' => true,

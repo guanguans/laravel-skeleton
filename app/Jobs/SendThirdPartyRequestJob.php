@@ -68,7 +68,7 @@ final class SendThirdPartyRequestJob implements ShouldQueue
             // Skip::unless(false),
             new SkipIfBatchCancelled,
             // Circuit Breaker Pattern - 断路器模式中间件
-            (new ThrottlesExceptions(maxAttempts: 3, decaySeconds: 300))
+            new ThrottlesExceptions(maxAttempts: 3, decaySeconds: 300)
                 ->by(self::class)
                 ->backoff(1)
                 ->when(static fn (\Throwable $e): bool => $e instanceof HttpClientException),

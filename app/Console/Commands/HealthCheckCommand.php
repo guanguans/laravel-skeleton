@@ -53,7 +53,7 @@ final class HealthCheckCommand extends Command implements Isolatable
 
     public function handle(): void
     {
-        collect((new \ReflectionObject($this))->getMethods(\ReflectionMethod::IS_PRIVATE))
+        collect(new \ReflectionObject($this)->getMethods(\ReflectionMethod::IS_PRIVATE))
             ->filter(static fn (\ReflectionMethod $method) => str($method->name)->startsWith('check'))
             ->when($this->only, fn (Collection $methods) => $methods->filter(
                 fn (\ReflectionMethod $method) => str($method->name)->is($this->only)
