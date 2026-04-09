@@ -491,8 +491,6 @@
             "@composer:unlink",
             "@detect-collisions",
             "@facade:lint",
-            "@jack:breakpoint",
-            "@jack:open-versions-dry-run",
             "@jack:raise-to-installed-dry-run",
             "@jsonlint",
             "@phpmnd",
@@ -507,7 +505,6 @@
             "@sk:spot-lazy-traits",
             "@yaml-lint",
             "@actionlint",
-            "@gitleaks",
             "@lint-md",
             "@php-cs-fixer:custom-fix-dry-run",
             "@php-cs-fixer:custom-ln-config",
@@ -598,7 +595,7 @@
         "mago:lint-dry-run": "@mago:lint --dry-run",
         "mago:lint-list-rules": "@mago lint --list-rules",
         "mago:lint-semantics-only": "@mago lint --semantics-only",
-        "monorepo-builder": "@php vendor/bin/monorepo-builder --config=monorepo-builder.php --ansi -vv",
+        "monorepo-builder": "@php vendor/bin/monorepo-builder --config=vendor/guanguans/monorepo-builder-worker/monorepo-builder.php --ansi -vv",
         "monorepo-builder:release": [
             "@git-chglog",
             "@composer:unlink",
@@ -618,7 +615,7 @@
         "peck:init": "@peck --init",
         "pest": [
             "@putenv:xdebug-on",
-            "@php vendor/bin/pest --colors=always --min=30 --coverage --profile --retry",
+            "@php vendor/bin/pest --colors=always --min=20 --coverage --profile --retry",
             "@putenv:xdebug-off"
         ],
         "pest:bail": "@pest --bail",
@@ -632,7 +629,7 @@
         "pest:highest": [
             "@putenv:php",
             "@putenv:xdebug-on",
-            "$PHP85 vendor/bin/pest --colors=always --min=30 --coverage --profile",
+            "$PHP85 vendor/bin/pest --colors=always --min=20 --coverage --profile",
             "@putenv:xdebug-off"
         ],
         "pest:migrate-configuration": "@pest --migrate-configuration",

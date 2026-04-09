@@ -17,8 +17,10 @@ use App\Support\Attributes\Mixin;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Route;
+use Illuminate\Routing\RouteCollection;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request as RequestFacade;
 
 /**
@@ -119,13 +121,13 @@ final class RequestMixin
     {
         return function (bool $includingMethod = true) {
             $routeCollection = resolve(Router::class)->getRoutes();
-            \assert($routeCollection instanceof \Illuminate\Routing\RouteCollection);
+            \assert($routeCollection instanceof RouteCollection);
 
             $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
 
             [$fallbacks, $routes] = collect($routes)->partition(static fn (Route $route) => $route->isFallback);
 
-            \assert($routes instanceof \Illuminate\Support\Collection);
+            \assert($routes instanceof Collection);
 
             return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
         };

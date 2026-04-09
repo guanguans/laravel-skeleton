@@ -381,8 +381,6 @@ if (!\function_exists('curry')) {
                 return $function(...$arguments);
             }
 
-            \assert($accumulator instanceof Closure);
-
             return $accumulator($arguments);
         };
 

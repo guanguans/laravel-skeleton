@@ -1,8 +1,14 @@
 {
     "excludeFiles": [
+        ".build/",
+        "baselines/",
+        "config/",
+        "resources/",
+        "routes/",
         "src/",
         "tests/",
         "vendor/",
+        "vendor-bin/",
         "CHANGELOG.md"
     ],
     "rules": {
@@ -24,7 +30,7 @@
         "no-long-code": [
             1,
             {
-                "length": 120,
+                "length": 200,
                 "exclude": [
                     "dot"
                 ]

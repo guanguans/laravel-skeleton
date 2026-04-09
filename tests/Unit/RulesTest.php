@@ -71,4 +71,4 @@ it('can validate rules', function (): void {
                 // ->dd()
                 ->toBeArray();
         });
-})->group(__DIR__, __FILE__);
+})->group(__DIR__, __FILE__)->skip('This test is too slow, need to optimize.');

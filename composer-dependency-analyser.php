@@ -17,31 +17,23 @@ use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 return (new Configuration)
     ->addPathsToScan(
         [
-            __DIR__.'/app/',
             __DIR__.'/bootstrap/',
             __DIR__.'/config/',
             __DIR__.'/database/',
             __DIR__.'/public/',
             __DIR__.'/resources/',
             __DIR__.'/routes/',
-            __DIR__.'/tests/',
         ],
         false
     )
     ->addPathsToExclude([
-        __DIR__.'/app/Support/Rectors/',
+        __DIR__.'/app/Support/',
         __DIR__.'/tests/',
     ])
     ->ignoreErrors([
-        ErrorType::UNUSED_DEPENDENCY,
         ErrorType::SHADOW_DEPENDENCY,
+        ErrorType::UNUSED_DEPENDENCY,
     ])
-    ->ignoreErrorsOnPackages(
-        [
-            'guanguans/ai-commit',
-        ],
-        [ErrorType::DEV_DEPENDENCY_IN_PROD]
-    )
     ->ignoreErrorsOnPaths(
         [
             __DIR__.'/app/Providers/PackageServiceProvider.php',
@@ -49,7 +41,5 @@ return (new Configuration)
             __DIR__.'/app/Providers/WhenLocalAggregateServiceProvider.php',
             __DIR__.'/app/Providers/WhenTestingAggregateServiceProvider.php',
         ],
-        [
-            ErrorType::DEV_DEPENDENCY_IN_PROD,
-        ]
+        [ErrorType::DEV_DEPENDENCY_IN_PROD]
     );

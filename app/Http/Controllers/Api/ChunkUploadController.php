@@ -15,6 +15,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Pion\Laravel\ChunkUpload\Handler\ResumableJSUploadHandler;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
@@ -36,7 +37,7 @@ final class ChunkUploadController extends Controller
 
         if ($save->isFinished()) {
             $file = $save->getFile();
-            \assert($file instanceof \Illuminate\Http\UploadedFile);
+            \assert($file instanceof UploadedFile);
             $newFileName = $file->hashName();
             $file->move(storage_path('app/chunks'), $newFileName);
         }

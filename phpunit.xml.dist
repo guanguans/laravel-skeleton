@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+  bootstrap="vendor/autoload.php"
+  cacheDirectory=".build/phpunit/"
+  colors="true"
+  failOnDeprecation="true"
+  failOnPhpunitWarning="false"
+  failOnRisky="true"
+  failOnWarning="true"
+>
+  <php>
+    <ini name="error_reporting" value="-1"/>
+    <!--<env name="SYMFONY_DEPRECATIONS_HELPER" value="/PDO::MYSQL_ATTR_SSL_CA/"/>-->
+    <env name="DUMP_LIGHT_ARRAY" value=""/>
+    <env name="DUMP_STRING_LENGTH" value=""/>
+    <env name="ENV" value="testing"/>
+    <env name="ENV_EXPLODE_EMPTY" value="empty"/>
+    <env name="ENV_EXPLODE_FALSE" value="false"/>
+    <env name="ENV_EXPLODE_NULL" value="null"/>
+    <env name="ENV_EXPLODE_STRING" value="log,null"/>
+    <env name="ENV_EXPLODE_TRUE" value="true"/>
+    <env name="APP_BASE_PATH" value="./"/>
+    <env name="APP_ENV" value="testing"/>
+    <env name="APP_DEBUG" value="false"/>
+    <env name="APP_KEY" value="base64:UZ5sDPZSB7DSLKY+DYlU8G/V1e/qW+Ag0WF03VNxiSg="/>
+    <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+    <env name="BCRYPT_ROUNDS" value="4"/>
+    <env name="CACHE_STORE" value="array"/>
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="DB_DATABASE" value=":memory:"/>
+    <env name="MAIL_MAILER" value="array"/>
+    <env name="PULSE_ENABLED" value="false"/>
+    <env name="QUEUE_CONNECTION" value="sync"/>
+    <env name="SESSION_DRIVER" value="array"/>
+    <env name="TELESCOPE_ENABLED" value="false"/>
+    <env name="TELESCOPE_ENABLED" value="false"/>
+    <env name="APP_BASE_PATH" value="./"/>
+    <env name="AUTH_GUARD" value="api"/>
+    <env name="AUTH_PASSWORD_BROKER" value="jwtUsers"/>
+    <env name="JWT_PRIVATE_KEY" value="file://storage/certs/jwt-rsa-4096-private.pem"/>
+    <env name="JWT_PUBLIC_KEY" value="file://storage/certs/jwt-rsa-4096-public.pem"/>
+    <env name="PUSHDEER_KEY" value="PDU3062THLWPFpHEmFQrKhFp9Tlz9q0qE9Nfz"/>
+    <env name="SOAR_SCORE_ENABLED" value="false"/>
+  </php>
+  <testsuites>
+    <testsuite name="Arch">
+      <directory>tests/Arch/</directory>
+    </testsuite>
+    <testsuite name="Feature">
+      <directory>tests/Feature/</directory>
+    </testsuite>
+    <testsuite name="Unit">
+      <directory>tests/Unit/</directory>
+    </testsuite>
+    <testsuite name="Integration">
+      <directory>tests/Integration/</directory>
+    </testsuite>
+  </testsuites>
+  <!--<source ignoreIndirectDeprecations="true">-->
+  <source>
+    <include>
+      <directory>app/</directory>
+      <directory>bootstrap/</directory>
+    </include>
+    <exclude>
+      <directory>bootstrap/cache/</directory>
+      <!--<file>app/Support/ComposerScripts.php</file>-->
+    </exclude>
+  </source>
+</phpunit>

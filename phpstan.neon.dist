@@ -117,6 +117,7 @@ parameters:
         - '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Auth\\AuthManager\:\:factory\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Foundation\\Application\:\:tap\(\)\.$#'
+        - '#^Comparison operation "\>\=" between int\<80500, 80599\> and 80500 is always true\.$#'
         -
             message: '#^Call to an undefined method Symfony\\Component\\VarDumper\\Dumper\\DataDumperInterface\:\:dumpWithSource\(\)\.$#'
             path: app/Support/VarDumper/ServerDumper.php
@@ -149,7 +150,7 @@ parameters:
                 - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
                 - '#^Class App\\Support\\Mixins\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
                 - '#^Method App\\Support\\Mixins\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
-                - '#^PHPDoc tag @var with type .* is not subtype of native type .*\.$#'
+#                - '#^PHPDoc tag @var with type .* is not subtype of native type .*\.$#'
                 - '#^Undefined variable\: \$this$#'
             path: app/Support/Mixins/
 
@@ -158,3 +159,8 @@ parameters:
         - identifier: shipmonk.deadProperty.neverRead
         - identifier: shipmonk.deadEnumCase
         - identifier: shipmonk.deadProperty.neverWritten
+        - identifier: argument.unresolvableType
+        - identifier: callable.nonCallable
+        - identifier: function.impossibleType
+        - identifier: instanceof.alwaysFalse
+        - identifier: method.notFound

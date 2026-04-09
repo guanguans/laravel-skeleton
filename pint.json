@@ -65,19 +65,32 @@
         },
         "phpdoc_order": {
             "order": [
-                "noinspection",
-                "phan-suppress",
-                "phpcsSuppress",
-                "phpstan-ignore",
-                "psalm-suppress",
+                "see",
+                "template",
+                "template-covariant",
+                "template-extends",
+                "template-implements",
+                "extends",
+                "implements",
+                "mixin",
+                "api",
+                "api-extendable",
                 "deprecated",
+                "final",
                 "internal",
+                "readonly",
                 "covers",
                 "uses",
                 "dataProvider",
                 "param",
                 "throws",
-                "return"
+                "return",
+                "codeCoverageIgnore",
+                "noinspection",
+                "phan-suppress",
+                "phpcsSuppress",
+                "phpstan-ignore",
+                "psalm-suppress"
             ]
         },
         "phpdoc_separation": {

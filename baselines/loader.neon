@@ -1,7 +1,6 @@
-# total 10 errors
+# total 9 errors
 
 includes:
-    - callable.nonCallable.neon
     - nullsafe.neverNull.neon
     - offsetAccess.invalidOffset.neon
     - property.nonObject.neon

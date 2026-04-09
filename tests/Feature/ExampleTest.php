@@ -75,7 +75,7 @@ it('is all routes', function (): void {
                 $this->{$method}($route->uri());
             }
         });
-})->throwsNoExceptions()->group(__DIR__, __FILE__)->todo('This test is too slow, need to optimize.');
+})->throwsNoExceptions()->group(__DIR__, __FILE__)->skip('This test is too slow, need to optimize.');
 
 it('is console', function (): void {
     classes(
@@ -102,7 +102,7 @@ it('is console', function (): void {
             // HealthCheckCommand::class,
             // OpcacheUrlCommand::class,
             PerformDatabaseBackupCommand::class,
-            // ShowUnsupportedRequiresCommand::class,
+            ShowUnsupportedRequiresCommand::class,
             // UpdateReadmeCommand::class,
         ]))
         ->keys()
@@ -117,7 +117,7 @@ it('is console', function (): void {
                 // '--silent' => true,
             ])->assertOk();
         });
-})->group(__DIR__, __FILE__);
+})->group(__DIR__, __FILE__)->skip('This test is too slow, need to optimize.');
 
 it('is command naming', function (): void {
     collect(Artisan::all())

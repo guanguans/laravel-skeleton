@@ -20,6 +20,7 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Log\Logger;
 use Illuminate\Process\PendingProcess;
+use Symfony\Component\Console\Helper\ProcessHelper;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -82,7 +83,7 @@ final class CommandMixin
             }
 
             $helper = $this->getHelper('process');
-            \assert($helper instanceof \Symfony\Component\Console\Helper\ProcessHelper);
+            \assert($helper instanceof ProcessHelper);
 
             return $helper->run($output ?? $this->output, $cmd, $error, $callback, $verbosity);
         };

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\Managers;
 
-use App\Exceptions\InvalidArgumentException;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
 use Illuminate\Support\Arr;
@@ -61,7 +60,7 @@ final class ElasticsearchManager extends Manager
 
         throw_unless(
             $this->config->has($driverKey),
-            InvalidArgumentException::class,
+            \InvalidArgumentException::class,
             "Connection [$driver] not supported."
         );
 

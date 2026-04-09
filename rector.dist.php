@@ -111,7 +111,6 @@ return RectorConfig::configure()
             ], true)
         ),
         __DIR__.'/artisan',
-        __DIR__.'/composer-updater',
     ])
     ->withRootFiles()
     // ->withSkipPath(__DIR__.'/tests.php')

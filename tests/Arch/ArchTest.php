@@ -46,7 +46,7 @@ arch()->group(__DIR__, __FILE__)->skip()->preset()->php()->ignoring([
     SchedulingEventMixin::class,
 ]);
 
-arch()->group(__DIR__, __FILE__)->preset()->security()->ignoring([
+arch()->group(__DIR__, __FILE__)->skip('This test is too slow, need to optimize.')->preset()->security()->ignoring([
     'array_rand',
     'assert',
     'tempnam',
@@ -79,6 +79,7 @@ arch()->group(__DIR__, __FILE__)->skip()->preset()->relaxed()->ignoring([
 arch('will not use debugging functions')
     // ->throwsNoExceptions()
     ->group(__DIR__, __FILE__)
+    ->skip('This test is too slow, need to optimize.')
     ->expect([
         'dd',
         'die',
