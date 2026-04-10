@@ -24,9 +24,9 @@ final class TraceEventListener
 
     public function __invoke(string $event): void
     {
-        // if (!$this->requestHasTrigger()) {
-        //     return;
-        // }
+        if (!$this->requestHasTrigger()) {
+            return;
+        }
 
         static $clear = false;
 

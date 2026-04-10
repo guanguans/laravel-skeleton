@@ -77,28 +77,24 @@ use RectorPest\Set\PestSetList;
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/app/',
-        __DIR__.'/bootstrap/',
+        // __DIR__.'/bootstrap/',
+        __DIR__.'/bootstrap/app.php',
         // __DIR__.'/config/',
         __DIR__.'/database/',
-        __DIR__.'/public/',
-        __DIR__.'/resources/',
+        // __DIR__.'/public/',
+        // __DIR__.'/resources/',
         __DIR__.'/routes/',
         __DIR__.'/tests/',
-        __DIR__.'/composer-bump',
         __DIR__.'/artisan',
+        __DIR__.'/composer-bump',
     ])
     ->withRootFiles()
     ->withSkip([
         '*.blade.php',
         '*/Fixtures/*',
-        '*/vendor/*',
-        __DIR__.'/app/Listeners/TraceEventListener.php',
-        __DIR__.'/app/Providers/EventServiceProvider.php',
-        __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
-        __DIR__.'/bootstrap/cache/',
-        __DIR__.'/bootstrap/providers.php',
-        __DIR__.'/resources/lang/',
         __DIR__.'/_ide_helper_.php',
+        __DIR__.'/app/Listeners/TraceEventListener.php',
+        __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
     // ->withoutParallel()
@@ -257,11 +253,8 @@ return RectorConfig::configure()
         ],
         SortAssociativeArrayByKeyRector::class => [
             __DIR__.'/app/',
-            __DIR__.'/bootstrap/',
             __DIR__.'/config/',
             __DIR__.'/database/',
-            __DIR__.'/public/',
-            __DIR__.'/resources/',
             __DIR__.'/routes/',
             __DIR__.'/tests/',
         ],

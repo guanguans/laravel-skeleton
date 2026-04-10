@@ -33,6 +33,7 @@ final class EventServiceProvider extends ServiceProvider
      *
      * @noinspection PhpFullyQualifiedNameUsageInspection
      */
+    #[\Override]
     protected $listen = [
         \Illuminate\Auth\Events\Registered::class => [
             \Illuminate\Auth\Listeners\SendEmailVerificationNotification::class,
@@ -40,6 +41,7 @@ final class EventServiceProvider extends ServiceProvider
     ];
 
     /** {@inheritDoc} */
+    #[\Override]
     protected $subscribe = [
         AuthSubscriber::class,
         ContextSubscriber::class,
@@ -50,6 +52,7 @@ final class EventServiceProvider extends ServiceProvider
      *
      * @noinspection PhpFullyQualifiedNameUsageInspection
      */
+    #[\Override]
     protected $observers = [
         \App\Models\User::class => UserObserver::class,
     ];
