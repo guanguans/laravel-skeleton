@@ -24,6 +24,8 @@ final class ContextSubscriber
      * @see \Symfony\Component\Console\DataCollector\CommandDataCollector
      * @see \Symfony\Component\Console\Debug\CliRequest
      * @see \Symfony\Component\Console\Command\TraceableCommand
+     *
+     * @return array<class-string, callable(object $event): void>
      */
     public function subscribe(): array
     {

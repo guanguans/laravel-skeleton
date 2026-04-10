@@ -32,6 +32,8 @@ final class SlowQueryLoggedNotification extends Notification implements ShouldQu
     ) {}
 
     /**
+     * @return list<string>
+     *
      * @noinspection PhpUnusedParameterInspection
      */
     public function via(mixed $notifiable): array

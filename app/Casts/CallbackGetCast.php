@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CallbackGetCast implements CastsAttributes
 {
+    /** @var list<mixed> */
     private array $callbackArgs;
 
     public function __construct(

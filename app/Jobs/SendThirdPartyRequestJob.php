@@ -17,17 +17,14 @@ namespace App\Jobs;
 
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Queue\Attributes\WithoutRelations;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\FailOnException;
 use Illuminate\Queue\Middleware\Skip;
 use Illuminate\Queue\Middleware\SkipIfBatchCancelled;
 use Illuminate\Queue\Middleware\ThrottlesExceptions;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -36,10 +33,7 @@ use Illuminate\Support\Facades\Http;
  */
 final class SendThirdPartyRequestJob implements ShouldQueue
 {
-    use Dispatchable;
-    use InteractsWithQueue;
     use Queueable;
-    use SerializesModels;
     public int $tires = 3;
 
     /** Delete the job if its models no longer exist. */

@@ -15,14 +15,17 @@ namespace App\Console\Commands;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Pluralizer;
-use Illuminate\Support\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Symfony\Component\String\Inflector\EnglishInflector;
 
 final class InflectorCommand extends Command
 {
     use ForwardsCalls;
+
+    #[\Override]
     protected $signature = 'inflector {phrase? : The word or phrase to be inflected}';
+
+    #[\Override]
     protected $description = 'Inflector pluralizes and singularizes English nouns.';
 
     public function handle(): void
@@ -51,7 +54,7 @@ final class InflectorCommand extends Command
                     ->reduce(
                         fn (Collection $results, string $type) => $results->add([
                             'type' => $type,
-                            'result' => Str::of($type)
+                            'result' => str($type)
                                 ->explode(':', 2)
                                 ->pipe(
                                     fn (Collection $parts): mixed => \is_array($result = $this->forwardCallTo(
@@ -74,6 +77,9 @@ final class InflectorCommand extends Command
             });
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function rules(): array
     {

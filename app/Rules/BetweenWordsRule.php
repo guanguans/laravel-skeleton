@@ -27,7 +27,7 @@ final class BetweenWordsRule extends AbstractRule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        $count = str_word_count($value);
+        $count = str_word_count((string) $value);
 
         return $count >= $this->min && $count <= $this->max;
     }

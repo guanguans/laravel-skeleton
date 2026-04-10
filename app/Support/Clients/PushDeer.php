@@ -37,6 +37,9 @@ final class PushDeer extends AbstractClient
         ));
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function configRules(): array
     {

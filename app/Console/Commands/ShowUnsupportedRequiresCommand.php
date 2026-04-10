@@ -28,14 +28,17 @@ use function Illuminate\Filesystem\join_paths;
 
 final class ShowUnsupportedRequiresCommand extends Command
 {
+    #[\Override]
     protected $signature = <<<'EOF'
         show-unsupported-requires
         {--cwd= : The current working directory.}
         {--package=* : The name of package.}
         {--major-version=13 : The minimum major version of the package is required.}
         EOF;
+
+    #[\Override]
     protected $description = 'Show unsupported requires.';
-    private PackagistClient $packagist;
+    private PackagistClient $packagistClient;
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -64,7 +67,7 @@ final class ShowUnsupportedRequiresCommand extends Command
                 Sleep::usleep(100);
 
                 try {
-                    $package = $this->packagist->getPackage($name);
+                    $package = $this->packagistClient->getPackage($name);
                 } catch (\Throwable $throwable) {
                     $this->components->warn("$name [{$throwable->getMessage()}]");
 
@@ -102,7 +105,7 @@ final class ShowUnsupportedRequiresCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->packagist = new PackagistClient(
+        $this->packagistClient = new PackagistClient(
             new Client([RequestOptions::VERIFY => false]),
             new PackagistUrlGenerator
         );
@@ -110,6 +113,9 @@ final class ShowUnsupportedRequiresCommand extends Command
         $this->input->setOption('cwd', $this->option('cwd') ?: base_path());
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function rules(): array
     {
         return [
@@ -120,6 +126,10 @@ final class ShowUnsupportedRequiresCommand extends Command
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
+    #[\Override]
     protected function messages(): array
     {
         return [

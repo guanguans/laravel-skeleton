@@ -22,11 +22,11 @@ final class ImeiRule extends AbstractRule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        if (\strlen($value) !== self::LENGTH || !ctype_digit($value)) {
+        if (\strlen((string) $value) !== self::LENGTH || !ctype_digit((string) $value)) {
             return false;
         }
 
-        $digits = str_split($value); // Get digits
+        $digits = str_split((string) $value); // Get digits
         $imeiLast = array_pop($digits); // Remove last digit, and store it
         $log = [];
 

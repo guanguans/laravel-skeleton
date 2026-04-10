@@ -23,8 +23,14 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
 {
     use ConfirmableTrait;
     use Prohibitable;
+
+    #[\Override]
     protected $signature = 'clear:all {--f|force : Force clear optimized.}';
+
+    #[\Override]
     protected $aliases = ['ca'];
+
+    #[\Override]
     protected $description = 'clear optimized all.';
 
     public function handle(): int
@@ -65,8 +71,11 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
     }
 
     /**
+     * @return array<string, string>
+     *
      * @noinspection PhpMissingParentCallCommonInspection
      */
+    #[\Override]
     protected function promptForMissingArgumentsUsing(): array
     {
         return [

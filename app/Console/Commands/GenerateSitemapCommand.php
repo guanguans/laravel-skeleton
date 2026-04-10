@@ -24,7 +24,10 @@ use Spatie\Sitemap\Tags\Url;
  */
 final class GenerateSitemapCommand extends Command
 {
+    #[\Override]
     protected $signature = 'generate:sitemap';
+
+    #[\Override]
     protected $description = 'Generate the sitemap';
 
     public function handle(): void

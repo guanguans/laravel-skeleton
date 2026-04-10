@@ -23,12 +23,9 @@ final class WelcomeNotification extends Notification implements ShouldQueue
     use Queueable;
 
     /**
-     * Create a new notification instance.
-     */
-    public function __construct() {}
-
-    /**
      * Get the notification's delivery channels.
+     *
+     * @return list<string>
      *
      * @noinspection PhpUnusedParameterInspection
      */
@@ -52,6 +49,8 @@ final class WelcomeNotification extends Notification implements ShouldQueue
 
     /**
      * Get the array representation of the notification.
+     *
+     * @return array{}
      *
      * @noinspection PhpUnusedParameterInspection
      */

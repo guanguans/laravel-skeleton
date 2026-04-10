@@ -331,15 +331,15 @@ final class ServerSentEvent implements \Stringable
 
     public function callBeforeCallbacks(): void
     {
-        foreach ($this->beforeCallbacks as $callback) {
-            $callback($this);
+        foreach ($this->beforeCallbacks as $beforeCallback) {
+            $beforeCallback($this);
         }
     }
 
     public function callAfterCallbacks(): void
     {
-        foreach ($this->afterCallbacks as $callback) {
-            $callback($this);
+        foreach ($this->afterCallbacks as $afterCallback) {
+            $afterCallback($this);
         }
     }
 }

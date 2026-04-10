@@ -143,6 +143,9 @@ final class LogHttp
         );
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function contextFor(Request $request, SymfonyResponse $response): array
     {
         return [

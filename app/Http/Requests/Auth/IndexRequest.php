@@ -27,6 +27,9 @@ final class IndexRequest extends FormRequest
         return true;
     }
 
+    /**
+     * @return array<string, list<string>>
+     */
     public function rules(): array
     {
         return [
@@ -36,6 +39,8 @@ final class IndexRequest extends FormRequest
     }
 
     /**
+     * @return array<string, string>
+     *
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]

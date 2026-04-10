@@ -40,12 +40,12 @@ final class AuthController extends Controller
     {
         $validated = $request->validated();
 
-        $users = User::query()
+        $paginator = User::query()
             ->simplePaginate($validated['per_page'] ?? null)
             ->appends([])
             ->withQueryString();
 
-        return $this->apiResponse()->success(UserCollection::make($users));
+        return $this->apiResponse()->success(UserCollection::make($paginator));
     }
 
     public function register(Request $request): JsonResponse

@@ -20,12 +20,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CheckServiceProviderCommand extends Command
 {
+    #[\Override]
     protected $signature = <<<'SIGNATURE'
         check:service-provider
         {--except=* : The list of packages to exclude from the service provider check.}
         {--r|reset : Reset the composer dont-discover}
         SIGNATURE;
+
+    #[\Override]
     protected $description = 'Check service providers and ensure they are correctly registered.';
+
+    /** @var list<string> */
     private array $except = [
         'blade-ui-kit/blade-heroicons',
         'blade-ui-kit/blade-icons',
@@ -121,6 +126,9 @@ final class CheckServiceProviderCommand extends Command
         $this->except = [...$this->except, ...$this->option('except')];
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function rules(): array
     {

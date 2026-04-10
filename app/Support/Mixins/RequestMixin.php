@@ -46,7 +46,7 @@ final class RequestMixin
 
     public function isWechat(): \Closure
     {
-        return fn (): bool => str_contains($this->userAgent(), 'MicroMessenger');
+        return fn (): bool => str_contains((string) $this->userAgent(), 'MicroMessenger');
     }
 
     /**

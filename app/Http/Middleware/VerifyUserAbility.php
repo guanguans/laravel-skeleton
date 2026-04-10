@@ -31,7 +31,7 @@ final readonly class VerifyUserAbility
     /**
      * @noinspection SensitiveParameterInspection
      */
-    public function __construct(private Guard $auth) {}
+    public function __construct(private Guard $guard) {}
 
     /**
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
@@ -41,7 +41,7 @@ final readonly class VerifyUserAbility
     public function handle(Request $request, \Closure $next, string $ability, string $message = ''): SymfonyResponse
     {
         abort_if(
-            $this->auth->guest() || !$this->auth->user()?->can($ability),
+            $this->guard->guest() || !$this->guard->user()?->can($ability),
             403,
             $message ?: '你没有权限执行该操作'
         );

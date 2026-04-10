@@ -48,6 +48,8 @@ final class AuthRequest extends FormRequest
     }
 
     /**
+     * @return array<string, string>
+     *
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]

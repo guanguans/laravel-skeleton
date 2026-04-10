@@ -1,10 +1,8 @@
 <?php
 
-/** @noinspection PhpMissingParentCallCommonInspection */
-/** @noinspection PhpMethodNamingConventionInspection */
-
 /** @noinspection MissingParentCallInspection */
-
+/** @noinspection PhpMethodNamingConventionInspection */
+/** @noinspection PhpMissingParentCallCommonInspection */
 declare(strict_types=1);
 
 /**

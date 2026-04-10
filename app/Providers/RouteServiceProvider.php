@@ -27,6 +27,8 @@ final class RouteServiceProvider extends ServiceProvider
     use Conditionable {
         Conditionable::when as whenever;
     }
+
+    /** @var array<int|string, class-string<\Illuminate\Database\Eloquent\Model>> */
     private array $routeModels = [
         'user' => User::class,
         JWTUser::class,

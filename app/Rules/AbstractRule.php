@@ -17,7 +17,6 @@ namespace App\Rules;
 
 use App\Support\Traits\Makeable;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Support\Str;
 use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
 
@@ -55,7 +54,7 @@ abstract class AbstractRule implements ValidationRule
 
     public static function name(): string
     {
-        return Str::of(class_basename(static::class))->replaceLast('Rule', '')->snake()->toString();
+        return str(class_basename(static::class))->replaceLast('Rule', '')->snake()->toString();
     }
 
     public static function message(): string
@@ -113,6 +112,9 @@ abstract class AbstractRule implements ValidationRule
         return $fail($attribute, static::message());
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function replace(string $attribute, mixed $value): array
     {
         return [

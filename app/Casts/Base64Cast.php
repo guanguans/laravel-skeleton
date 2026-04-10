@@ -25,11 +25,11 @@ final readonly class Base64Cast implements CastsAttributes
 
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $this->isCastGet ? base64_encode($value) : $value;
+        return $this->isCastGet ? base64_encode((string) $value) : $value;
     }
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $this->isCastSet ? base64_decode($value, true) : $value;
+        return $this->isCastSet ? base64_decode((string) $value, true) : $value;
     }
 }

@@ -32,8 +32,8 @@ final class ChunkUploadController extends Controller
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $receiver = new FileReceiver($request->post('file'), $request, ResumableJSUploadHandler::class);
-        $save = $receiver->receive();
+        $fileReceiver = new FileReceiver($request->post('file'), $request, ResumableJSUploadHandler::class);
+        $save = $fileReceiver->receive();
 
         if ($save->isFinished()) {
             $file = $save->getFile();

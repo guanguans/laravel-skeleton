@@ -20,7 +20,10 @@ use Symfony\Component\Finder\SplFileInfo;
 
 final class ClearLogsCommand extends Command
 {
+    #[\Override]
     protected $signature = 'clear:logs {days=30 : The number of days to keep}';
+
+    #[\Override]
     protected $description = 'Clear logs';
 
     /**
@@ -50,6 +53,9 @@ final class ClearLogsCommand extends Command
         File::delete($files);
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function rules(): array
     {

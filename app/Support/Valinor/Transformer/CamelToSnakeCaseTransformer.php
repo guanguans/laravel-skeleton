@@ -32,7 +32,7 @@ final class CamelToSnakeCaseTransformer
         $snakeCased = [];
 
         foreach ($result as $key => $value) {
-            $newKey = preg_replace('/[A-Z]/', '_$0', lcfirst($key));
+            $newKey = preg_replace('/[A-Z]/', '_$0', lcfirst((string) $key));
             \assert(\is_string($newKey));
 
             $newKey = strtolower($newKey);

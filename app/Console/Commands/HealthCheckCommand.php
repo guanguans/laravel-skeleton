@@ -42,11 +42,15 @@ final class HealthCheckCommand extends Command implements Isolatable
 {
     private const string RESULT_SUCCESS = '<info>ok</info>';
     private const string RESULT_ERROR = '<error>failing</error>';
+
+    #[\Override]
     protected $signature = <<<'SIGNATURE'
         health:check
         {--only=* : Only check methods with the given name}
         {--except=* : Do not check methods with the given name}
         SIGNATURE;
+
+    #[\Override]
     protected $description = 'Health check.';
     private array $only = [];
     private array $except = [];

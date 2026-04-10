@@ -26,7 +26,10 @@ use function Illuminate\Filesystem\join_paths;
 final class OpcacheUrlCommand extends Command
 {
     // use CreatesRequest;
+    #[\Override]
     protected $signature = 'opcache:url {route=compile} {--force}';
+
+    #[\Override]
     protected $description = 'Show OPCache URL';
 
     /**
@@ -46,13 +49,15 @@ final class OpcacheUrlCommand extends Command
     }
 
     /**
+     * @param array<string, mixed> $parameters
+     *
      * @throws \Illuminate\Http\Client\ConnectionException
      */
     public function sendRequest(string $url, array $parameters = []): PromiseInterface|Response
     {
         $baseUri = join_paths(
-            rtrim(config('opcache.url', config('app.url')), '/'),
-            trim(config('opcache.prefix', 'opcache-api'), '/'),
+            rtrim((string) config('opcache.url', config('app.url')), '/'),
+            trim((string) config('opcache.prefix', 'opcache-api'), '/'),
             ltrim($url, '/')
         );
 
@@ -79,6 +84,9 @@ final class OpcacheUrlCommand extends Command
             );
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function rules(): array
     {

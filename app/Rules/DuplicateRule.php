@@ -20,7 +20,7 @@ final class DuplicateRule extends AbstractRule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        return collect(null === $this->delimiter ? str_split($value) : explode($this->delimiter, $value))
+        return collect(null === $this->delimiter ? str_split((string) $value) : explode($this->delimiter, (string) $value))
             ->duplicates()
             ->isEmpty();
     }

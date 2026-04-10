@@ -25,6 +25,9 @@ final class EloquentLogHttpModelFormatter extends NormalizerFormatter
         return $this->sanitizeContext(parent::format($record)['context']);
     }
 
+    /**
+     * @param array<string, mixed> $context
+     */
     private function sanitizeContext(array $context): array
     {
         return collect($context)

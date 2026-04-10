@@ -18,7 +18,7 @@ abstract class AbstractRegexRule extends AbstractRule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        return (bool) preg_match($this->pattern(), $value);
+        return (bool) preg_match($this->pattern(), (string) $value);
     }
 
     /**

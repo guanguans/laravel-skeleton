@@ -21,6 +21,8 @@ use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
 final class PersonalAccessToken extends SanctumPersonalAccessToken
 {
     use HasFactory;
+
+    #[\Override]
     protected $fillable = [
         'name',
         'token',

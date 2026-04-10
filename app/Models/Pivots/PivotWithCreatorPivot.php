@@ -20,6 +20,7 @@ final class PivotWithCreatorPivot extends Pivot
 {
     use HasFactory;
 
+    #[\Override]
     public function fill(array $attributes): self
     {
         return parent::fill([...$attributes, 'creator_id' => $attributes['creator_id'] ?? auth()->id()]);

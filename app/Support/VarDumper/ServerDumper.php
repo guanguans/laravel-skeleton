@@ -84,7 +84,7 @@ final readonly class ServerDumper implements DataDumperInterface
         $host = $_SERVER['VAR_DUMPER_SERVER'] ?? '127.0.0.1:9912';
 
         isset($_SERVER[$formatIndex = 'VAR_DUMPER_FORMAT'])
-        and 'tcp' === parse_url($format = $_SERVER[$formatIndex], \PHP_URL_SCHEME)
+        and 'tcp' === parse_url((string) $format = $_SERVER[$formatIndex], \PHP_URL_SCHEME)
         and $host = $format;
 
         $dumper = new self($host, $fallbackDumper, $contextProviders);

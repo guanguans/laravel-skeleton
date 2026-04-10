@@ -28,10 +28,10 @@ trait Configurable
 
     public function configureOptions(array $options, \Closure $closure): array
     {
-        $resolver = new OptionsResolver;
+        $optionsResolver = new OptionsResolver;
 
-        $closure($resolver);
+        $closure($optionsResolver);
 
-        return $resolver->resolve($options);
+        return $optionsResolver->resolve($options);
     }
 }

@@ -53,10 +53,10 @@ final class ResponseFactoryMixin
             $client ??= new Client;
 
             return $this->streamDownload(static function () use ($client, $url, $chunk): void {
-                $body = $client->get($url, ['stream' => true])->getBody();
+                $stream = $client->get($url, ['stream' => true])->getBody();
 
-                while (!$body->eof()) {
-                    echo $body->read($chunk);
+                while (!$stream->eof()) {
+                    echo $stream->read($chunk);
                 }
             }, $name, $headers, $disposition);
         };

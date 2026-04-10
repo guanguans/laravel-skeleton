@@ -115,6 +115,9 @@ abstract class AbstractClient
     abstract protected function extendPendingRequest(PendingRequest $pendingRequest): PendingRequest;
 
     /**
+     * @param array<string, string> $messages
+     * @param array<string, string> $customAttributes
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     protected function validate(array $data, array $rules, array $messages = [], array $customAttributes = []): array
@@ -143,11 +146,17 @@ abstract class AbstractClient
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function configMessages(): array
     {
         return [];
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function configAttributes(): array
     {
         return [];
@@ -159,6 +168,8 @@ abstract class AbstractClient
      *
      * @param int $retries 重试次数
      * @param int $baseIntervalMs 基础间隔（毫秒）
+     *
+     * @return list<int>
      */
     protected function fibonacciRetryIntervals(int $retries, int $baseIntervalMs = 1000): array
     {
@@ -225,6 +236,9 @@ abstract class AbstractClient
         );
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function defaultConfig(): array
     {
         return [
@@ -248,6 +262,9 @@ abstract class AbstractClient
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function defaultConfigRules(): array
     {
         return [

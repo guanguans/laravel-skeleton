@@ -23,6 +23,164 @@ use Phrity\Util\ErrorHandler;
 use Symfony\Component\VarDumper\VarDumper;
 use Yiisoft\Injector\Injector;
 
+if (!\function_exists('catch_query_log')) {
+    function catch_query_log(callable $callback, mixed ...$parameters): array
+    {
+        return new Pipeline(app())
+            ->send($callback)
+            ->through(static function (callable $callback, Closure $next): Collection {
+                DB::enableQueryLog();
+                DB::flushQueryLog();
+
+                $queryLog = $next($callback);
+
+                DB::disableQueryLog();
+
+                return $queryLog;
+            })
+            ->then(static function (callable $callback) use ($parameters): Collection {
+                $callback(...$parameters);
+
+                return collect(DB::getRawQueryLog());
+            });
+    }
+}
+
+if (!\function_exists('classes')) {
+    /**
+     * @see https://github.com/alekitto/class-finder
+     * @see https://github.com/ergebnis/classy
+     * @see https://gitlab.com/hpierce1102/ClassFinder
+     * @see https://packagist.org/packages/haydenpierce/class-finder
+     * @see \get_declared_classes()
+     * @see \get_declared_interfaces()
+     * @see \get_declared_traits()
+     * @see \DG\BypassFinals::enable()
+     * @see \Composer\Util\ErrorHandler
+     * @see \Monolog\ErrorHandler
+     * @see \PhpCsFixer\ExecutorWithoutErrorHandler
+     * @see \Phrity\Util\ErrorHandler
+     *
+     * @param null|(callable(class-string, string): bool) $filter
+     *
+     * @return \Illuminate\Support\Collection<class-string, \ReflectionClass>
+     *
+     * @noinspection RedundantDocCommentTagInspection
+     * @noinspection PhpDocSignatureIsNotCompleteInspection
+     */
+    function classes(?callable $filter = null): Collection
+    {
+        static $classes;
+
+        $classes ??= collect(spl_autoload_functions())->flatMap(
+            static fn (mixed $loader): array => \is_array($loader) && $loader[0] instanceof ClassLoader
+                ? $loader[0]->getClassMap()
+                : []
+        );
+
+        return $classes
+            ->when(
+                \is_callable($filter),
+                static fn (Collection $classes): Collection => $classes->filter(
+                    static fn (string $file, string $class) => $filter($class, $file)
+                )
+            )
+            ->mapWithKeys(static function (string $file, string $class): array {
+                try {
+                    // return [$class => (new ErrorHandler)->with(static fn () => new ReflectionClass($class))];
+                    return [$class => new ReflectionClass($class)];
+                } catch (Throwable $throwable) {
+                    return [$class => $throwable];
+                }
+            });
+    }
+}
+
+if (!\function_exists('compose')) {
+    /**
+     * 合成函数.
+     */
+    function compose(callable ...$functions): callable
+    {
+        return array_reduce(
+            $functions,
+            static fn (callable $carry, callable $function): Closure => static fn (mixed $x) => $function($carry($x)),
+            static fn (mixed $x): mixed => $x
+        );
+    }
+}
+
+if (!\function_exists('curry')) {
+    /**
+     * 柯里化函数.
+     */
+    function curry(callable $function): callable
+    {
+        $accumulator = static fn (array $arguments): Closure => static function (mixed ...$args) use (
+            $arguments,
+            $function,
+            &$accumulator
+        ) {
+            $arguments = [...$arguments, ...$args];
+            $reflection = new ReflectionFunction($function);
+            $totalArguments = $reflection->getNumberOfRequiredParameters();
+
+            if (\count($arguments) >= $totalArguments) {
+                return $function(...$arguments);
+            }
+
+            return $accumulator($arguments);
+        };
+
+        return $accumulator([]);
+    }
+}
+
+if (!\function_exists('deference')) {
+    /**
+     * @see https://github.com/php-defer/php-defer
+     *
+     * @param-out SplStack $context
+     */
+    function deference(?SplStack &$context, callable $callback): void
+    {
+        $context ??= new class extends SplStack {
+            public function __destruct()
+            {
+                while ($this->count() > 0) {
+                    /** @phpstan-ignore-next-line  */
+                    ($this->pop())();
+                }
+            }
+        };
+
+        $context->push($callback);
+    }
+}
+
+if (!\function_exists('dump_to_server')) {
+    /**
+     * @see \Symfony\Component\VarDumper\VarDumper::register()
+     *
+     * ```
+     * ./vendor/bin/var-dump-server
+     * ```.
+     *
+     * @noinspection GlobalVariableUsageInspection
+     * @noinspection ForgottenDebugOutputInspection
+     * @noinspection DebugFunctionUsageInspection
+     */
+    function dump_to_server(mixed ...$vars): mixed
+    {
+        $_SERVER['VAR_DUMPER_FORMAT'] = null;
+        VarDumper::setHandler(null);
+        $_SERVER['VAR_DUMPER_FORMAT'] = 'server';
+        // $_SERVER['VAR_DUMPER_SERVER'] = '0.0.0.0:9912';
+
+        return dump(...$vars);
+    }
+}
+
 if (!\function_exists('env_explode')) {
     /**
      * @noinspection LaravelFunctionsInspection
@@ -77,179 +235,6 @@ if (!\function_exists('env_json_decode')) {
         }
 
         return $env;
-    }
-}
-
-if (!\function_exists('classes')) {
-    /**
-     * @see https://github.com/alekitto/class-finder
-     * @see https://github.com/ergebnis/classy
-     * @see https://gitlab.com/hpierce1102/ClassFinder
-     * @see https://packagist.org/packages/haydenpierce/class-finder
-     * @see \get_declared_classes()
-     * @see \get_declared_interfaces()
-     * @see \get_declared_traits()
-     * @see \DG\BypassFinals::enable()
-     * @see \Composer\Util\ErrorHandler
-     * @see \Monolog\ErrorHandler
-     * @see \PhpCsFixer\ExecutorWithoutErrorHandler
-     * @see \Phrity\Util\ErrorHandler
-     *
-     * @param null|(callable(class-string, string): bool) $filter
-     *
-     * @return \Illuminate\Support\Collection<class-string, \ReflectionClass>
-     *
-     * @noinspection RedundantDocCommentTagInspection
-     * @noinspection PhpDocSignatureIsNotCompleteInspection
-     */
-    function classes(?callable $filter = null): Collection
-    {
-        static $classes;
-
-        $classes ??= collect(spl_autoload_functions())->flatMap(
-            static fn (mixed $loader): array => \is_array($loader) && $loader[0] instanceof ClassLoader
-                ? $loader[0]->getClassMap()
-                : []
-        );
-
-        return $classes
-            ->when(
-                \is_callable($filter),
-                static fn (Collection $classes): Collection => $classes->filter(
-                    static fn (string $file, string $class) => $filter($class, $file)
-                )
-            )
-            ->mapWithKeys(static function (string $file, string $class): array {
-                try {
-                    // return [$class => (new ErrorHandler)->with(static fn () => new ReflectionClass($class))];
-                    return [$class => new ReflectionClass($class)];
-                } catch (Throwable $throwable) {
-                    return [$class => $throwable];
-                }
-            });
-    }
-}
-
-if (!\function_exists('resolve_callback')) {
-    /**
-     * @see https://github.com/PHP-DI/Invoker/blob/master/src/CallableResolver.php
-     * @see \Illuminate\Container\Container::call()
-     *
-     * @throws \Throwable
-     *
-     * @noinspection RedundantDocCommentTagInspection
-     * @noinspection DebugFunctionUsageInspection
-     */
-    function resolve_callback(callable|string $callback): callable
-    {
-        if (\is_callable($callback)) {
-            return $callback;
-        }
-
-        if (\is_callable($segments = explode('@', $callback, 2))) {
-            return $segments;
-        }
-
-        $exportedCallback = var_export($callback, true);
-
-        throw_if(
-            \count($segments) !== 2 || !method_exists($segments[0], $segments[1]),
-            InvalidArgumentException::class,
-            "Invalid callback: $exportedCallback."
-        );
-
-        try {
-            return [resolve($segments[0]), $segments[1]];
-        } catch (Throwable $throwable) {
-            throw new InvalidArgumentException(
-                "Invalid callback: $exportedCallback, Error message: {$throwable->getMessage()}.",
-                $throwable->getCode(),
-                $throwable
-            );
-        }
-    }
-}
-
-if (!\function_exists('rescuer')) {
-    /**
-     * @see \Composer\Util\Silencer::call()
-     * @see \Illuminate\Foundation\Bootstrap\HandleExceptions::bootstrap()
-     */
-    function rescuer(callable $callback, ?callable $rescuer = null): mixed
-    {
-        /** @phpstan-ignore-next-line  */
-        set_error_handler(static function (
-            int $errNo,
-            string $errStr,
-            string $errFile = '',
-            int $errLine = 0
-        ) use ($rescuer, &$result): void {
-            $rescuer and $result = $rescuer(new ErrorException($errStr, 0, $errNo, $errFile, $errLine));
-        });
-
-        // set_exception_handler(static function (\Throwable $throwable) use ($rescuer, &$result): void {
-        //     $rescuer and $result = $rescuer($throwable);
-        // });
-
-        try {
-            $result = $callback();
-        } catch (Throwable $throwable) {
-            $rescuer and $result = $rescuer($throwable);
-        } finally {
-            restore_error_handler();
-        }
-
-        return $result;
-    }
-}
-
-if (!\function_exists('str_random')) {
-    /**
-     * @throws \Random\RandomException
-     */
-    function str_random(int $length = 16): string
-    {
-        return substr(bin2hex(random_bytes((int) ceil($length / 2))), 0, $length);
-    }
-}
-
-if (!\function_exists('timezone_offset_name')) {
-    /**
-     * Gets the time offset from the provided timezone relative to UTC as a number. This
-     * is used in the database configuration since we can't always rely on there being support
-     * for named timezones in MySQL.
-     *
-     * Returns the timezone as a string like +08:00 or -05:00 depending on the app timezone.
-     *
-     * @see https://github.com/pelican-dev/panel/blob/3.x/app/Helpers/Time.php
-     */
-    function timezone_offset_name(null|DateTimeZone|false|int|string $timezone = null): string
-    {
-        // return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
-        // return CarbonImmutable::now($timezone ?? config('app.timezone'))->format('P');
-        return CarbonTimeZone::instance($timezone ?? config('app.timezone'))?->toOffsetName();
-    }
-}
-
-if (!\function_exists('deference')) {
-    /**
-     * @see https://github.com/php-defer/php-defer
-     *
-     * @param-out SplStack $context
-     */
-    function deference(?SplStack &$context, callable $callback): void
-    {
-        $context ??= new class extends SplStack {
-            public function __destruct()
-            {
-                while ($this->count() > 0) {
-                    /** @phpstan-ignore-next-line  */
-                    ($this->pop())();
-                }
-            }
-        };
-
-        $context->push($callback);
     }
 }
 
@@ -330,6 +315,110 @@ if (!\function_exists('make')) {
     }
 }
 
+if (!\function_exists('partical')) {
+    /**
+     * 偏函数.
+     */
+    function partical(callable $function, mixed ...$args): callable
+    {
+        return static fn (...$moreArgs) => $function(...$args, ...$moreArgs);
+    }
+}
+
+if (!\function_exists('pd')) {
+    function pd(mixed ...$vars): never
+    {
+        pp(...$vars);
+
+        exit(1);
+    }
+}
+
+if (!\function_exists('pp')) {
+    /**
+     * @noinspection DebugFunctionUsageInspection
+     */
+    function pp(mixed ...$vars): void
+    {
+        foreach ($vars as $var) {
+            highlight_string(\sprintf("\n<?php\n\$var = %s;\n?>\n", var_export($var, true)));
+        }
+    }
+}
+
+if (!\function_exists('rescuer')) {
+    /**
+     * @see \Composer\Util\Silencer::call()
+     * @see \Illuminate\Foundation\Bootstrap\HandleExceptions::bootstrap()
+     */
+    function rescuer(callable $callback, ?callable $rescuer = null): mixed
+    {
+        /** @phpstan-ignore-next-line  */
+        set_error_handler(static function (
+            int $errNo,
+            string $errStr,
+            string $errFile = '',
+            int $errLine = 0
+        ) use ($rescuer, &$result): void {
+            $rescuer and $result = $rescuer(new ErrorException($errStr, 0, $errNo, $errFile, $errLine));
+        });
+
+        // set_exception_handler(static function (\Throwable $throwable) use ($rescuer, &$result): void {
+        //     $rescuer and $result = $rescuer($throwable);
+        // });
+
+        try {
+            $result = $callback();
+        } catch (Throwable $throwable) {
+            $rescuer and $result = $rescuer($throwable);
+        } finally {
+            restore_error_handler();
+        }
+
+        return $result;
+    }
+}
+
+if (!\function_exists('resolve_callback')) {
+    /**
+     * @see https://github.com/PHP-DI/Invoker/blob/master/src/CallableResolver.php
+     * @see \Illuminate\Container\Container::call()
+     *
+     * @throws \Throwable
+     *
+     * @noinspection RedundantDocCommentTagInspection
+     * @noinspection DebugFunctionUsageInspection
+     */
+    function resolve_callback(callable|string $callback): callable
+    {
+        if (\is_callable($callback)) {
+            return $callback;
+        }
+
+        if (\is_callable($segments = explode('@', $callback, 2))) {
+            return $segments;
+        }
+
+        $exportedCallback = var_export($callback, true);
+
+        throw_if(
+            \count($segments) !== 2 || !method_exists($segments[0], $segments[1]),
+            InvalidArgumentException::class,
+            "Invalid callback: $exportedCallback."
+        );
+
+        try {
+            return [resolve($segments[0]), $segments[1]];
+        } catch (Throwable $throwable) {
+            throw new InvalidArgumentException(
+                "Invalid callback: $exportedCallback, Error message: {$throwable->getMessage()}.",
+                $throwable->getCode(),
+                $throwable
+            );
+        }
+    }
+}
+
 if (!\function_exists('resolve_class_from')) {
     /**
      * @param string $path 文件路径
@@ -352,119 +441,30 @@ if (!\function_exists('resolve_class_from')) {
     }
 }
 
-if (!\function_exists('partical')) {
+if (!\function_exists('str_random')) {
     /**
-     * 偏函数.
+     * @throws \Random\RandomException
      */
-    function partical(callable $function, mixed ...$args): callable
+    function str_random(int $length = 16): string
     {
-        return static fn (...$moreArgs) => $function(...$args, ...$moreArgs);
+        return substr(bin2hex(random_bytes((int) ceil($length / 2))), 0, $length);
     }
 }
 
-if (!\function_exists('curry')) {
+if (!\function_exists('timezone_offset_name')) {
     /**
-     * 柯里化函数.
-     */
-    function curry(callable $function): callable
-    {
-        $accumulator = static fn (array $arguments): Closure => static function (mixed ...$args) use (
-            $arguments,
-            $function,
-            &$accumulator
-        ) {
-            $arguments = [...$arguments, ...$args];
-            $reflection = new ReflectionFunction($function);
-            $totalArguments = $reflection->getNumberOfRequiredParameters();
-
-            if (\count($arguments) >= $totalArguments) {
-                return $function(...$arguments);
-            }
-
-            return $accumulator($arguments);
-        };
-
-        return $accumulator([]);
-    }
-}
-
-if (!\function_exists('compose')) {
-    /**
-     * 合成函数.
-     */
-    function compose(callable ...$functions): callable
-    {
-        return array_reduce(
-            $functions,
-            static fn (callable $carry, callable $function): Closure => static fn (mixed $x) => $function($carry($x)),
-            static fn (mixed $x): mixed => $x
-        );
-    }
-}
-
-if (!\function_exists('catch_query_log')) {
-    function catch_query_log(callable $callback, mixed ...$parameters): array
-    {
-        return new Pipeline(app())
-            ->send($callback)
-            ->through(static function (callable $callback, Closure $next): Collection {
-                DB::enableQueryLog();
-                DB::flushQueryLog();
-
-                $queryLog = $next($callback);
-
-                DB::disableQueryLog();
-
-                return $queryLog;
-            })
-            ->then(static function (callable $callback) use ($parameters): Collection {
-                $callback(...$parameters);
-
-                return collect(DB::getRawQueryLog());
-            });
-    }
-}
-
-if (!\function_exists('dump_to_server')) {
-    /**
-     * @see \Symfony\Component\VarDumper\VarDumper::register()
+     * Gets the time offset from the provided timezone relative to UTC as a number. This
+     * is used in the database configuration since we can't always rely on there being support
+     * for named timezones in MySQL.
      *
-     * ```
-     * ./vendor/bin/var-dump-server
-     * ```.
+     * Returns the timezone as a string like +08:00 or -05:00 depending on the app timezone.
      *
-     * @noinspection GlobalVariableUsageInspection
-     * @noinspection ForgottenDebugOutputInspection
-     * @noinspection DebugFunctionUsageInspection
+     * @see https://github.com/pelican-dev/panel/blob/3.x/app/Helpers/Time.php
      */
-    function dump_to_server(mixed ...$vars): mixed
+    function timezone_offset_name(null|DateTimeZone|false|int|string $timezone = null): string
     {
-        $_SERVER['VAR_DUMPER_FORMAT'] = null;
-        VarDumper::setHandler(null);
-        $_SERVER['VAR_DUMPER_FORMAT'] = 'server';
-        // $_SERVER['VAR_DUMPER_SERVER'] = '0.0.0.0:9912';
-
-        return dump(...$vars);
-    }
-}
-
-if (!\function_exists('pd')) {
-    function pd(mixed ...$vars): never
-    {
-        pp(...$vars);
-
-        exit(1);
-    }
-}
-
-if (!\function_exists('pp')) {
-    /**
-     * @noinspection DebugFunctionUsageInspection
-     */
-    function pp(mixed ...$vars): void
-    {
-        foreach ($vars as $var) {
-            highlight_string(\sprintf("\n<?php\n\$var = %s;\n?>\n", var_export($var, true)));
-        }
+        // return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
+        // return CarbonImmutable::now($timezone ?? config('app.timezone'))->format('P');
+        return CarbonTimeZone::instance($timezone ?? config('app.timezone'))?->toOffsetName();
     }
 }

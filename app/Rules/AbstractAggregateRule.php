@@ -42,11 +42,17 @@ abstract class AbstractAggregateRule extends AbstractRule
         );
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function messages(): array
     {
         return [];
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function attributes(): array
     {
         return [];

@@ -46,6 +46,9 @@ abstract class AbortIf
         return '';
     }
 
+    /**
+     * @return array<string, null|list<null|string>|string>
+     */
     protected function headers(): array
     {
         return [];

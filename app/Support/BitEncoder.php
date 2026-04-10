@@ -166,7 +166,7 @@ final class BitEncoder implements BitEncoderContract
      */
     public function getHasCombinationsValues(array $set, int $length = 1024): array
     {
-        return array_map(fn (array $set): int => $this->encode($set), $this->getHasCombinations($set, $length));
+        return array_map($this->encode(...), $this->getHasCombinations($set, $length));
     }
 
     /**
@@ -176,7 +176,7 @@ final class BitEncoder implements BitEncoderContract
      */
     public function getLackCombinationsValues(array $set, int $length = 1024): array
     {
-        return array_map(fn (array $set): int => $this->encode($set), $this->getLackCombinations($set, $length));
+        return array_map($this->encode(...), $this->getLackCombinations($set, $length));
     }
 
     /**
@@ -314,6 +314,9 @@ final class BitEncoder implements BitEncoderContract
         return 2 ** \count($this->set) - 1;
     }
 
+    /**
+     * @return list<mixed>
+     */
     public function getSet(): array
     {
         return $this->set;
@@ -341,6 +344,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 组合生成器.
+     *
+     * @param list<mixed> $set
      */
     private function combinationGenerator(array $set, int $length): \Generator
     {

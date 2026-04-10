@@ -30,6 +30,8 @@ final class SupportServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
     public array $bindings = [];
+
+    /** @var array<int|string, string> */
     public array $singletons = [
         ElasticsearchManager::class,
     ];
@@ -57,6 +59,8 @@ final class SupportServiceProvider extends ServiceProvider
     }
 
     /**
+     * @return list<class-string>
+     *
      * @noinspection SenselessMethodDuplicationInspection
      * @noinspection PhpMissingParentCallCommonInspection
      */

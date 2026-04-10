@@ -31,7 +31,7 @@ trait Observable
         $class = static::class;
 
         foreach ($events as $event) {
-            $method = 'on'.ucfirst($event);
+            $method = 'on'.ucfirst((string) $event);
 
             if (method_exists($class, $method)) {
                 static::registerModelEvent($event, $class.'@'.$method);

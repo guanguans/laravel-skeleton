@@ -17,15 +17,17 @@ declare(strict_types=1);
 
 use App\Listeners\PrepareRequestListener;
 use App\Support\Rectors\ClassHandleMethodRector;
-use Carbon\Carbon;
-use Ergebnis\Rector\Rules\Arrays\SortAssociativeArrayByKeyRector;
-use Guanguans\MonorepoBuilderWorker\Support\Rectors\RenameToPsrNameRector;
-use Illuminate\Support\Carbon as IlluminateCarbon;
-use Illuminate\Support\Str;
+use Ergebnis\Rector\Rules\Expressions\Arrays\SortAssociativeArrayByKeyRector;
+use Ergebnis\Rector\Rules\Faker\GeneratorPropertyFetchToMethodCallRector;
+use Ergebnis\Rector\Rules\Files\ReferenceNamespacedSymbolsRelativeToNamespacePrefixRector;
+use Guanguans\RectorRules\Rector\ClassMethod\PrivateToProtectedVisibilityForTraitRector;
+use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
+use Guanguans\RectorRules\Rector\FunctionLike\RenameGarbageParamNameRector;
+use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
+use Guanguans\RectorRules\Set\SetList;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\Class_\ConvertStaticToSelfRector;
-use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodeQuality\Rector\New_\NewStaticToNewSelfRector;
@@ -35,61 +37,42 @@ use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
 use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
+use Rector\CodingStyle\Rector\Enum_\EnumCaseToPascalCaseRector;
 use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
-use Rector\CodingStyle\Rector\FunctionLike\FunctionLikeToFirstClassCallableRector;
-use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Config\RectorConfig;
-use Rector\DeadCode\Rector\ClassLike\RemoveAnnotationRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
-use Rector\DeadCode\Rector\Property\RemoveUnusedPrivatePropertyRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
-use Rector\Naming\Rector\Assign\RenameVariableToMatchMethodCallReturnTypeRector;
 use Rector\Naming\Rector\Class_\RenamePropertyToMatchTypeRector;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
-use Rector\Naming\Rector\ClassMethod\RenameVariableToMatchNewTypeRector;
-use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchExprVariableRector;
-use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchMethodCallReturnTypeRector;
-use Rector\NodeTypeResolver\PHPStan\Scope\Contract\NodeVisitor\ScopeResolverNodeVisitorInterface;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
-use Rector\Php74\Rector\Ternary\ParenthesizeNestedTernaryRector;
-use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
-use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
-use Rector\Php85\Rector\Property\AddOverrideAttributeToOverriddenPropertiesRector;
+use Rector\Php82\Rector\Param\AddSensitiveParameterAttributeRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\PHPUnit\Set\PHPUnitSetList;
-use Rector\Renaming\Rector\FuncCall\RenameFunctionRector;
 use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
-use Rector\Transform\Rector\ClassMethod\ReturnTypeWillChangeRector;
-use Rector\Transform\Rector\FuncCall\FuncCallToStaticCallRector;
-use Rector\Transform\Rector\StaticCall\StaticCallToFuncCallRector;
+use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\Transform\Rector\String_\StringToClassConstantRector;
-use Rector\Transform\ValueObject\ClassMethodReference;
-use Rector\Transform\ValueObject\FuncCallToStaticCall;
-use Rector\Transform\ValueObject\StaticCallToFuncCall;
 use Rector\Transform\ValueObject\StringToClassConstant;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
-use RectorLaravel\Rector\ArrayDimFetch\EnvVariableToEnvHelperRector;
 use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
 use RectorLaravel\Rector\Class_\FillablePropertyToFillableAttributeRector;
 use RectorLaravel\Rector\Class_\HiddenPropertyToHiddenAttributeRector;
-use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
-use RectorLaravel\Rector\Class_\ReplaceQueueTraitsWithQueueableRector;
 use RectorLaravel\Rector\Class_\TablePropertyToTableAttributeRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\If_\ThrowIfRector;
+use RectorLaravel\Rector\MethodCall\ContainerBindConcreteWithClosureOnlyRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
-use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
+use RectorPest\Rules\ChainExpectCallsRector;
+use RectorPest\Set\PestLevelSetList;
+use RectorPest\Set\PestSetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -101,45 +84,34 @@ return RectorConfig::configure()
         __DIR__.'/resources/',
         __DIR__.'/routes/',
         __DIR__.'/tests/',
-        ...array_filter(
-            glob(__DIR__.'/{*,.*}.php', \GLOB_BRACE),
-            static fn (string $filename): bool => !\in_array($filename, [
-                __DIR__.'/.phpstorm.meta.php',
-                __DIR__.'/_ide_helper.php',
-                __DIR__.'/_ide_helper_actions.php',
-                __DIR__.'/_ide_helper_models.php',
-            ], true)
-        ),
+        __DIR__.'/composer-bump',
         __DIR__.'/artisan',
     ])
     ->withRootFiles()
-    // ->withSkipPath(__DIR__.'/tests.php')
     ->withSkip([
-        '**.blade.php',
-        '**/__snapshots__/*',
-        '**/Fixtures/*',
-        '**/vendor/*',
-        __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
+        '*.blade.php',
+        '*/Fixtures/*',
+        '*/vendor/*',
         __DIR__.'/app/Listeners/TraceEventListener.php',
         __DIR__.'/app/Providers/EventServiceProvider.php',
         __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
         __DIR__.'/bootstrap/cache/',
         __DIR__.'/bootstrap/providers.php',
         __DIR__.'/resources/lang/',
-        __FILE__,
+        __DIR__.'/_ide_helper_.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
-    ->withParallel()
     // ->withoutParallel()
-    // ->withImportNames(importNames: false)
+    ->withParallel()
     ->withImportNames(importDocBlockNames: false, importShortClasses: false)
+    // ->withImportNames(importNames: false)
     // ->withEditorUrl()
     ->withFluentCallNewLine()
     ->withTreatClassesAsFinal()
     ->withAttributesSets(phpunit: true, all: true)
     ->withComposerBased(phpunit: true, laravel: true)
-    ->withPhpVersion(PhpVersion::PHP_85)
     ->withSetProviders(LaravelSetProvider::class)
+    ->withPhpVersion(PhpVersion::PHP_85)
     // ->withDowngradeSets(php85: true)
     ->withPhpSets(php85: true)
     ->withPreparedSets(
@@ -147,193 +119,113 @@ return RectorConfig::configure()
         codeQuality: true,
         codingStyle: true,
         typeDeclarations: true,
+        typeDeclarationDocblocks: true,
         privatization: true,
         naming: true,
         instanceOf: true,
         earlyReturn: true,
+        // strictBooleans: true,
         carbon: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
     )
     ->withSets([
-        PHPUnitSetList::PHPUNIT_110,
-        LaravelSetList::LARAVEL_120,
-        ...collect(new ReflectionClass(LaravelSetList::class)->getConstants(ReflectionClassConstant::IS_PUBLIC))
-            ->reject(
-                static fn (string $constant, string $name): bool => \in_array(
-                    $name,
-                    ['LARAVEL_STATIC_TO_INJECTION', 'LARAVEL_'],
-                    true
-                ) || preg_match('/^LARAVEL_\d{2,3}$/', $name)
-            )
-            // ->dd()
-            ->values()
-            ->all(),
+        SetList::ALL,
+        PestLevelSetList::UP_TO_PEST_40,
+        PestSetList::PEST_CHAIN,
+        PestSetList::PEST_CODE_QUALITY,
+        PestSetList::PEST_LARAVEL,
+        PestSetList::PEST_MIGRATION,
     ])
     ->withRules([
-        // AddOverrideAttributeToOverriddenMethodsRector::class,
         ArraySpreadInsteadOfArrayMergeRector::class,
         ClassHandleMethodRector::class,
-        // JsonThrowOnErrorRector::class,
+        EnumCaseToPascalCaseRector::class,
+        GeneratorPropertyFetchToMethodCallRector::class,
+        JsonThrowOnErrorRector::class,
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,
-        ...classes(static fn (string $class): bool => str_starts_with($class, 'RectorLaravel\Rector'))
-            ->keys()
-            ->all(),
     ])
-    ->withConfiguredRule(RemoveAnnotationRector::class, [
-        'codeCoverageIgnore',
-        'phpstan-ignore',
-        'phpstan-ignore-next-line',
-        'psalm-suppress',
+    ->withConfiguredRule(AddNoinspectionDocblockToFileFirstStmtRector::class, [
+        '*/tests/*' => [
+            'AnonymousFunctionStaticInspection',
+            'NullPointerExceptionInspection',
+            'PhpPossiblePolymorphicInvocationInspection',
+            'PhpUndefinedClassInspection',
+            'PhpUnhandledExceptionInspection',
+            'PhpVoidFunctionResultUsedInspection',
+            'StaticClosureCanBeUsedInspection',
+        ],
     ])
-    // ->withConfiguredRule(ReturnTypeWillChangeRector::class, [
-    //     new ClassMethodReference(ArrayAccess::class, 'offsetGet'),
-    // ])
-    ->registerService(className: ParentConnectingVisitor::class, tag: ScopeResolverNodeVisitorInterface::class)
-    // ->withConfiguredRule(RenameToPsrNameRector::class, [
-    //     // '*',
-    //     'static::PARENT_ID',
-    //     'parent',
-    //     'DB',
-    //     'URL',
-    //     'Debug',
-    //     'Info',
-    //     'Notice',
-    //     'Warning',
-    //     'Error',
-    //     'Critical',
-    //     'Alert',
-    //     'Emergency',
-    //     'PDO',
-    //     'OK',
-    //     'FAILING',
-    //     'WARNING',
-    //     'Value',
-    //     'MIT',
-    //     'new_password',
-    //     'current_password',
-    //     'OS',
-    //     'deleted_at',
-    //     'False',
-    //     'True',
-    //     'DAILY',
-    //     'WEEKLY',
-    //     'MONTHLY',
-    //     'string',
-    //     'range_keys',
-    //     'extra_attributes',
-    //     'creator_id',
-    //     'seen_at',
-    //     'CSP',
-    //     'email_verified_at',
-    //     'created_at',
-    //     'updated_at',
-    //     'is_developer',
-    //     'pStmt_ClassMethod',
-    //     'FALSE',
-    //     'TRUE',
-    //     'ROLE',
-    //     'USER',
-    //     'PRODUCT',
-    //     'CATEGORY',
-    //     'beforeEach',
-    //     'IntegerBooleanEnum',
-    // ])
-    ->withConfiguredRule(RenameClassRector::class, [
-        Carbon::class => IlluminateCarbon::class,
+    ->registerDecoratingNodeVisitor(ParentConnectingVisitor::class)
+    ->withConfiguredRule(RenameToConventionalCaseNameRector::class, [
+        'afterEach',
+        'beforeEach',
+        'current_password',
+        'DB',
+        'Debug',
+        'MIT',
+        'new_password',
+        'PDO',
+        'URL',
+        'Value',
+    ])
+    ->withConfiguredRule(ReferenceNamespacedSymbolsRelativeToNamespacePrefixRector::class, [
+        // 'namespacePrefixes' => ['App'],
     ])
     ->withConfiguredRule(StringToClassConstantRector::class, [
         new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),
     ])
-    // ->withConfiguredRule(FuncCallToStaticCallRector::class, [
-    //     new FuncCallToStaticCall('request', Illuminate\Support\Facades\Request::class, 'getFacadeRoot'),
-    //     new FuncCallToStaticCall('str', Str::class, 'of'),
-    // ])
-    // ->withConfiguredRule(StaticCallToFuncCallRector::class, [
-    //     new StaticCallToFuncCall(Str::class, 'of', 'str'),
-    // ])
-    // ->withConfiguredRule(
-    //     RenameFunctionRector::class,
-    //     [
-    //         // 'app' => 'resolve',
-    //         'faker' => 'fake',
-    //         'Pest\Faker\fake' => 'fake',
-    //         'Pest\Faker\faker' => 'faker',
-    //         'test' => 'it',
-    //     ] + array_reduce(
-    //         [
-    //             'env_explode',
-    //             'json_pretty_encode',
-    //             'make',
-    //             'rescue',
-    //         ],
-    //         static function (array $carry, string $func): array {
-    //             /** @see https://github.com/laravel/framework/blob/11.x/src/Illuminate/Support/functions.php */
-    //             $carry[$func] = "App\\Support\\$func";
-    //
-    //             return $carry;
-    //         },
-    //         []
-    //     )
-    // )
     ->withSkip([
-        // finalize classes
-        RemoveEmptyClassMethodRector::class,
-        RemoveUnusedPrivateMethodRector::class,
-        RemoveUnusedPrivatePropertyRector::class,
-        RemoveUnusedPublicMethodParameterRector::class,
+        AddSensitiveParameterAttributeRector::class,
+        ChainExpectCallsRector::class,
+        PrivateToProtectedVisibilityForTraitRector::class,
+        RenameGarbageParamNameRector::class,
+        RenameParamToMatchTypeRector::class,
+        ScalarValueToConstFetchRector::class,
+        StringToClassConstantRector::class,
 
-        // first class callable
-        // FunctionLikeToFirstClassCallableRector::class,
-        ArrowFunctionDelegatingCallToFirstClassCallableRector::class,
-
-        AddOverrideAttributeToOverriddenMethodsRector::class,
         ChangeOrIfContinueToMultiContinueRector::class,
         DisallowedEmptyRuleFixerRector::class,
-        NullToStrictStringFuncCallArgRector::class,
-        PreferPHPUnitThisCallRector::class,
-        RenameForeachValueVariableToMatchExprVariableRector::class,
-        RenameForeachValueVariableToMatchMethodCallReturnTypeRector::class,
-        RenameParamToMatchTypeRector::class,
-        RenamePropertyToMatchTypeRector::class,
-        RenameVariableToMatchMethodCallReturnTypeRector::class,
-        RenameVariableToMatchNewTypeRector::class,
-
         EncapsedStringsToSprintfRector::class,
         ExplicitBoolCompareRector::class,
-        LocallyCalledStaticMethodToNonStaticRector::class,
         LogicalToBooleanRector::class,
-        NewlineAfterStatementRector::class,
         NewlineBetweenClassLikeStmtsRector::class,
-        ParenthesizeNestedTernaryRector::class,
+        PreferPHPUnitThisCallRector::class,
         ReturnBinaryOrToEarlyReturnRector::class,
         WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
-        AddOverrideAttributeToOverriddenPropertiesRector::class,
-
-        ReplaceQueueTraitsWithQueueableRector::class,
-        TablePropertyToTableAttributeRector::class,
+        ContainerBindConcreteWithClosureOnlyRector::class,
         FillablePropertyToFillableAttributeRector::class,
         HiddenPropertyToHiddenAttributeRector::class,
-
-        EnvVariableToEnvHelperRector::class,
-        ServerVariableToRequestFacadeRector::class,
+        TablePropertyToTableAttributeRector::class,
+        ValidationRuleArrayStringValueToArrayRector::class,
 
         ArrayToArrGetRector::class,
         DispatchToHelperFunctionsRector::class,
         EmptyToBlankAndFilledFuncRector::class,
         HelperFuncCallToFacadeClassRector::class,
-        ModelCastsPropertyToCastsMethodRector::class,
         ThrowIfRector::class,
-        TypeHintTappableCallRector::class,
-        ValidationRuleArrayStringValueToArrayRector::class,
     ])
     ->withSkip([
+        ArrowFunctionDelegatingCallToFirstClassCallableRector::class => [
+            __DIR__.'/app/Support/Mixins/',
+            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
+        ],
+        CompleteDynamicPropertiesRector::class => $mixinsPath = [
+            __DIR__.'/app/Support/Clients/AbstractClient.php',
+            __DIR__.'/app/Support/Mixins/',
+        ],
         ConvertStaticToSelfRector::class => [
             __DIR__.'/database/factories/UserFactory.php',
+        ],
+        JsonThrowOnErrorRector::class => [
+            __DIR__.'/app/Support/helpers.php',
+            __DIR__.'/app/Support/Mixins/CollectionMixin.php',
+            __DIR__.'/app/Support/Sse/ServerSentEvent.php',
+            __DIR__.'/tests/Pest.php',
         ],
         NewStaticToNewSelfRector::class => [
             __DIR__.'/app/Models/BaseModel.php',
@@ -341,20 +233,28 @@ return RectorConfig::configure()
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/app/Support/Mixins/SchedulingEventMixin.php',
         ],
-        StringToClassConstantRector::class => [
-            __DIR__.'/app/Listeners/PrepareRequestListener.php',
-        ],
-        CompleteDynamicPropertiesRector::class => $mixinsPath = [
-            __DIR__.'/app/Support/Clients/AbstractClient.php',
-            __DIR__.'/app/Support/Mixins/',
+        RemoveEmptyClassMethodRector::class => [
+            __DIR__.'/app/Observers/UserObserver.php',
         ],
         RemoveExtraParametersRector::class => $mixinsPath,
-        StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
-            __DIR__.'/app/Support/helpers.php',
-            // __DIR__.'/routes/console.php',
-            __DIR__.'/tests/',
+        RemoveUnusedPublicMethodParameterRector::class => [
+            __DIR__.'/app/Listeners/',
+            __DIR__.'/app/Observers/UserObserver.php',
         ],
-        StaticClosureRector::class => $staticClosureSkipPaths,
+        RenameClassRector::class => [
+            __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
+        ],
+        RenamePropertyToMatchTypeRector::class => [
+            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
+        ],
+        RenameToConventionalCaseNameRector::class => [
+            __DIR__.'/app/Enums/',
+            __DIR__.'/app/Models/',
+        ],
+        ServerVariableToRequestFacadeRector::class => [
+            __DIR__.'/app/Listeners/RunCommandInDebugModeListener.php',
+            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
+        ],
         SortAssociativeArrayByKeyRector::class => [
             __DIR__.'/app/',
             __DIR__.'/bootstrap/',
@@ -364,5 +264,14 @@ return RectorConfig::configure()
             __DIR__.'/resources/',
             __DIR__.'/routes/',
             __DIR__.'/tests/',
+        ],
+        StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
+            __DIR__.'/tests/*Test.php',
+            __DIR__.'/tests/Pest.php',
+        ],
+        StaticClosureRector::class => $staticClosureSkipPaths,
+        TypeHintTappableCallRector::class => [
+            __DIR__.'/app/Support/Mixins/QueryBuilder/QueryBuilderMixin.php',
+            __DIR__.'/app/Providers/ValidatorServiceProvider.php',
         ],
     ]);

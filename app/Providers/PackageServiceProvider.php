@@ -19,6 +19,7 @@ use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Request as RequestFacade;
@@ -103,6 +104,6 @@ final class PackageServiceProvider extends ServiceProvider
      */
     private function isOctaneHttpServer(): bool
     {
-        return isset($_SERVER['LARAVEL_OCTANE']) || isset($_ENV['OCTANE_DATABASE_SESSION_TTL']);
+        return isset($_SERVER['LARAVEL_OCTANE']) || Env::get('OCTANE_DATABASE_SESSION_TTL');
     }
 }

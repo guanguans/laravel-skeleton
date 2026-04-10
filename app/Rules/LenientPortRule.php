@@ -15,6 +15,9 @@ namespace App\Rules;
 
 final class LenientPortRule extends AbstractAggregateRule
 {
+    /**
+     * @return list<string>
+     */
     #[\Override]
     protected function rules(): array
     {

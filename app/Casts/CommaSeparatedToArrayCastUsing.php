@@ -31,7 +31,7 @@ final class CommaSeparatedToArrayCastUsing implements Castable
 
             public function get(Model $model, string $key, mixed $value, array $attributes): array
             {
-                return $value ? explode($this->separator, $value) : [];
+                return $value ? explode($this->separator, (string) $value) : [];
             }
 
             public function set(Model $model, string $key, mixed $value, array $attributes): mixed

@@ -28,6 +28,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
      *
      * @noinspection ClassOverridesFieldOfSuperClassInspection
      */
+    #[\Override]
     protected $stopOnFirstFailure = true;
 
     #[\Override]

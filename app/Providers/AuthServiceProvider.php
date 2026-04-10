@@ -31,6 +31,7 @@ final class AuthServiceProvider extends ServiceProvider
     }
 
     /** {@inheritDoc} */
+    #[\Override]
     protected $policies = [
         JWTUser::class => UserPolicy::class,
     ];

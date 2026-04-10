@@ -29,7 +29,7 @@ enum ConfigurationKey: string
     use Enumerates;
     use ExtrasTrait;
     use ReadableEnumTrait;
-    case DAILY = 'daily';
-    case WEEKLY = 'weekly';
-    case MONTHLY = 'monthly';
+    case Daily = 'daily';
+    case Weekly = 'weekly';
+    case Monthly = 'monthly';
 }

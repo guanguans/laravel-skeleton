@@ -20,5 +20,8 @@ use Laravel\Sanctum\Events\TokenAuthenticated;
  */
 final class RecordRequestIdentifiersListener
 {
-    public function handle(#[\SensitiveParameter] TokenAuthenticated $tokenAuthenticated): void {}
+    public function handle(#[\SensitiveParameter] TokenAuthenticated $tokenAuthenticated): void
+    {
+        // todo
+    }
 }

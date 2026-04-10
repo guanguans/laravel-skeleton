@@ -18,6 +18,6 @@ final class Base64Rule extends AbstractRule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        return base64_encode(base64_decode($value, true)) === $value;
+        return base64_encode(base64_decode((string) $value, true)) === $value;
     }
 }

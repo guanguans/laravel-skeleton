@@ -69,10 +69,10 @@ trait CanSeedOncePerDatabase
             return;
         }
 
-        $schema = DB::connection()->getSchemaBuilder();
+        $builder = DB::connection()->getSchemaBuilder();
 
-        if (!$schema->hasTable($this->seedersTable)) {
-            $schema->create($this->seedersTable, static function (Blueprint $table): void {
+        if (!$builder->hasTable($this->seedersTable)) {
+            $builder->create($this->seedersTable, static function (Blueprint $table): void {
                 $table->string('seeder')->unique();
             });
         }

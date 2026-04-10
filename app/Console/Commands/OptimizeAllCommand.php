@@ -23,7 +23,10 @@ use Symfony\Component\Process\ExecutableFinder;
 
 final class OptimizeAllCommand extends Command
 {
+    #[\Override]
     protected $signature = 'optimize:all {--f|force : Force optimize.}';
+
+    #[\Override]
     protected $description = 'Optimize all.';
 
     /**

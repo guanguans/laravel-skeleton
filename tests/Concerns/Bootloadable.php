@@ -5,11 +5,10 @@
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
 /** @noinspection DebugFunctionUsageInspection */
 /** @noinspection PhpInternalEntityUsedInspection */
-/** @noinspection PhpUndefinedClassInspection */
-
 declare(strict_types=1);
 
 /**
@@ -23,7 +22,6 @@ declare(strict_types=1);
 
 namespace Tests\Concerns;
 
-use Illuminate\Support\Str;
 use Pest\TestSuite;
 
 /**
@@ -77,7 +75,7 @@ trait Bootloadable
         foreach ($repository->getFilenames() as $file) {
             $factory = $repository->get($file);
 
-            $filename = Str::of($file)->basename()->explode('.')->first();
+            $filename = str($file)->basename()->explode('.')->first();
 
             if (self::class === $factory->class) {
                 $data = [...$data, ...[$filename => \count($factory->methods)]];

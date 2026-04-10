@@ -24,6 +24,7 @@ final class IdeHelperChoresCommand extends Command
     private const string SUFFIX = 'Chore';
 
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
+    #[\Override]
     protected $signature = <<<'EOD'
         ide-helper:chores
         {--only=* : Only output chores with the given name}
@@ -32,6 +33,7 @@ final class IdeHelperChoresCommand extends Command
         EOD;
 
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
+    #[\Override]
     protected $description = 'Generate chores for the Laravel-Idea-JSON file.';
 
     /**
@@ -82,6 +84,9 @@ final class IdeHelperChoresCommand extends Command
             ->tap(fn (Collection $routeUris) => $this->output($routeUris));
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function rules(): array
     {

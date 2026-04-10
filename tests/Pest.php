@@ -5,11 +5,9 @@
 /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 /** @noinspection PhpUndefinedClassInspection */
 /** @noinspection PhpUnhandledExceptionInspection */
+/** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
-/** @noinspection PhpInconsistentReturnPointsInspection */
-/** @noinspection PhpInternalEntityUsedInspection */
 /** @noinspection PhpUnused */
-/** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 
 /**
@@ -21,13 +19,25 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use Faker\Factory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Client\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Testing\TestResponse;
 use Pest\Expectation;
-use Symfony\Component\Finder\Finder;
 use Tests\TestCase;
 
-uses(TestCase::class)
+// pest()
+//     ->browser()
+//     // ->headed()
+//     // ->inFirefox()
+//     // ->inSafari()
+//     ->timeout(10000);
+// pest()->only();
+// pest()->printer()->compact();
+pest()->project()->github('guanguans/laravel-skeleton');
+pest()
+    ->extend(TestCase::class)
     ->beforeAll(function (): void {})
     ->beforeEach(function (): void {
         $this->withoutVite();
@@ -37,13 +47,15 @@ uses(TestCase::class)
         $this->withDefer();
     })
     ->afterAll(function (): void {})
+    ->group(__DIR__)
     ->in(
         // __DIR__,
-        __DIR__.'/Arch',
-        __DIR__.'/Feature',
-        __DIR__.'/Integration',
-        __DIR__.'/Unit'
+        __DIR__.'/Arch/',
+        __DIR__.'/Feature/',
+        __DIR__.'/Integration/',
+        __DIR__.'/Unit/'
     );
+
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -53,12 +65,68 @@ uses(TestCase::class)
 | "expect()" function gives you access to a set of "expectations" methods that you can use
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
+*/
+
+/**
+ * @see Expectation::toBeBetween()
  */
+expect()->extend(
+    'toAssert',
+    function (Closure $assertions): Expectation {
+        $assertions($this->value);
 
-expect()->extend('toAssert', function (Closure $assertions): Expectation {
-    $assertions($this->value);
+        return $this;
+    }
+);
 
-    return $this;
+/**
+ * @see Expectation::toBeBetween()
+ */
+expect()->extend(
+    'toBetween',
+    fn (int $min, int $max): Expectation => expect($this->value)
+        ->toBeGreaterThanOrEqual($min)
+        ->toBeLessThanOrEqual($max)
+);
+
+expect()->intercept('toBe', Model::class, function (Model $expected): void {
+    expect($this->value->id)->toBe($expected->id);
+});
+
+expect()->pipe('toBe', function (Closure $next, mixed $expected): ?Expectation {
+    if ($this->value instanceof Model) {
+        return expect($this->value->id)->toBe($expected->id);
+    }
+
+    return $next();
+});
+
+/**
+ * @see Expectation::toMatchSnapshot()
+ */
+expect()->pipe('toMatchSnapshot', function (Closure $next): void {
+    $flags = \JSON_INVALID_UTF8_IGNORE |
+        \JSON_INVALID_UTF8_SUBSTITUTE |
+        \JSON_PARTIAL_OUTPUT_ON_ERROR |
+        \JSON_PRESERVE_ZERO_FRACTION |
+        \JSON_PRETTY_PRINT |
+        \JSON_THROW_ON_ERROR |
+        \JSON_UNESCAPED_SLASHES |
+        \JSON_UNESCAPED_UNICODE;
+    $basePath = \dirname(__DIR__).\DIRECTORY_SEPARATOR;
+    $this->value = match (true) {
+        $this->value instanceof JsonResponse,
+        $this->value instanceof TestResponse => str($this->value->getContent())->remove($basePath)->toString(),
+        \is_object($this->value) && method_exists($this->value, '__toString'),
+        \is_string($this->value) => str($this->value)->remove($basePath)->toString(),
+        \is_array($this->value) => json_encode($this->value, $flags),
+        $this->value instanceof Traversable => json_encode(iterator_to_array($this->value), $flags),
+        $this->value instanceof JsonSerializable => json_encode($this->value->jsonSerialize(), $flags),
+        \is_object($this->value) && method_exists($this->value, 'toArray') => json_encode($this->value->toArray(), $flags),
+        default => $this->value,
+    };
+
+    $next();
 });
 
 /*
@@ -70,7 +138,7 @@ expect()->extend('toAssert', function (Closure $assertions): Expectation {
 | project that you don't want to repeat in every file. Here you can also expose helpers as
 | global functions to help you to reduce the number of lines of code in your test files.
 |
- */
+*/
 
 /**
  * @throws ReflectionException
@@ -87,30 +155,14 @@ function fixtures_path(string $path = ''): string
     return __DIR__.\DIRECTORY_SEPARATOR.'Fixtures'.($path ? \DIRECTORY_SEPARATOR.$path : $path);
 }
 
-function faker(string $locale = Factory::DEFAULT_LOCALE): Generator
-{
-    return fake($locale);
-}
-
-function running_in_github_action(): bool
-{
-    return 'true' === getenv('GITHUB_ACTIONS');
-}
-
-function reset_http_fake(?Illuminate\Http\Client\Factory $factory = null): void
+function reset_http_fake(?Factory $factory = null): void
 {
     (function (): void {
         $this->stubCallbacks = collect();
     })->call($factory ?? Http::getFacadeRoot());
 }
 
-function clear_same_namespace(): void
+function running_in_github_action(): bool
 {
-    foreach (
-        Finder::create()
-            ->in(__DIR__.'/../vendor/guanguans/ai-commit/app')
-            ->name('*.php') as $splFileInfo
-    ) {
-        file_put_contents($splFileInfo->getPathname(), '');
-    }
+    return 'true' === getenv('GITHUB_ACTIONS');
 }

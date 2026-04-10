@@ -18,6 +18,6 @@ final class HtmlCleanRule extends AbstractRule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        return strip_tags($value) === $value;
+        return strip_tags((string) $value) === $value;
     }
 }

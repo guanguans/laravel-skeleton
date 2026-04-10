@@ -78,6 +78,8 @@ final class ElasticsearchManager extends Manager
     }
 
     /**
+     * @param array<string, mixed> $config
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function prepareConfig(array $config): array

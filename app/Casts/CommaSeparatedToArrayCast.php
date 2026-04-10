@@ -22,7 +22,7 @@ class CommaSeparatedToArrayCast implements CastsAttributes
 
     public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
-        return $value ? explode(',', $value) : [];
+        return $value ? explode(',', (string) $value) : [];
     }
 
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed

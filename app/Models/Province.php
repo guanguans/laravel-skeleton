@@ -22,6 +22,9 @@ final class Province extends Model
     use HasFactory;
     use Sushi;
 
+    /**
+     * @return list<array<string, mixed>>
+     */
     public function getRows(): array
     {
         return [

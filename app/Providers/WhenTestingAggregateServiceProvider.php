@@ -29,6 +29,7 @@ final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
         Conditionable::when as whenever;
     }
 
+    #[\Override]
     public function register(): void
     {
         if ($this->app->runningUnitTests()) {

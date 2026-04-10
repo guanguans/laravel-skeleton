@@ -43,8 +43,6 @@ final class StrMixin
 
     public static function mbSubstrCount(): \Closure
     {
-        // return fn($haystack, $needle, $encoding = null) => mb_substr_count($haystack, $needle, $encoding);
-
         return static fn (string $haystack, string $needle, ?string $encoding = null): int => mb_substr_count($haystack, $needle, $encoding);
     }
 

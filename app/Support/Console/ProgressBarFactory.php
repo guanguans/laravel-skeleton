@@ -23,22 +23,22 @@ final readonly class ProgressBarFactory
 {
     public function __construct(
         /** @var \Symfony\Component\Console\Style\OutputStyle */
-        private OutputStyle $output
+        private OutputStyle $outputStyle
     ) {}
 
     public function create(int $max = 0): ProgressBar
     {
-        $bar = $this->output->createProgressBar($max);
-        $bar->setBarCharacter('<fg=green>⚬</>');
-        $bar->setEmptyBarCharacter('<fg=red>⚬</>');
-        $bar->setProgressCharacter('<fg=green>➤</>');
-        $bar->setRedrawFrequency(1);
-        $bar->maxSecondsBetweenRedraws(0);
-        $bar->minSecondsBetweenRedraws(0);
-        $bar->setFormat(
+        $progressBar = $this->outputStyle->createProgressBar($max);
+        $progressBar->setBarCharacter('<fg=green>⚬</>');
+        $progressBar->setEmptyBarCharacter('<fg=red>⚬</>');
+        $progressBar->setProgressCharacter('<fg=green>➤</>');
+        $progressBar->setRedrawFrequency(1);
+        $progressBar->maxSecondsBetweenRedraws(0);
+        $progressBar->minSecondsBetweenRedraws(0);
+        $progressBar->setFormat(
             "%message%\n%current%/%max% [%bar%] %percent:3s%%\n"
         );
 
-        return $bar;
+        return $progressBar;
     }
 }

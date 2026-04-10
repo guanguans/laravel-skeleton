@@ -22,6 +22,9 @@ use Laravel\Sanctum\NewAccessToken;
  */
 trait HasWrappedApiTokens
 {
+    /**
+     * @return array<string, scalar>
+     */
     public static function wrapToken(#[\SensitiveParameter] string $token): array
     {
         return [

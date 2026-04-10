@@ -29,6 +29,8 @@ final class Movie extends Model
     use SerializeDate;
     use SoftDeletes;
     public static string $driver = 'json';
+
+    #[\Override]
     protected $fillable = [
         'name',
         'director',

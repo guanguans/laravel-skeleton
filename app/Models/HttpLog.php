@@ -27,6 +27,9 @@ final class HttpLog extends Model
     use SerializeDate;
     // use SoftDeletes;
 
+    #[\Override]
     protected $table = 'http_log';
+
+    #[\Override]
     protected $guarded = [];
 }

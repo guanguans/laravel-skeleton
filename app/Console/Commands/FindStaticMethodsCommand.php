@@ -36,7 +36,10 @@ use function Laravel\Prompts\select;
 
 final class FindStaticMethodsCommand extends Command
 {
+    #[\Override]
     protected $signature = 'find:static-methods';
+
+    #[\Override]
     protected $description = 'Find static methods';
 
     /**
@@ -49,6 +52,9 @@ final class FindStaticMethodsCommand extends Command
         $this->findStaticMethods();
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function rules(): array
     {

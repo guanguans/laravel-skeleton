@@ -25,7 +25,10 @@ use Symfony\Component\Process\ExecutableFinder;
 
 final class UpdateReadmeCommand extends Command
 {
+    #[\Override]
     protected $signature = 'readme:update {path? : The path of readme}';
+
+    #[\Override]
     protected $description = 'Update readme';
 
     /**
@@ -50,6 +53,9 @@ final class UpdateReadmeCommand extends Command
         )->throw();
     }
 
+    /**
+     * @return array<string, string>
+     */
     #[\Override]
     protected function rules(): array
     {
@@ -114,7 +120,7 @@ final class UpdateReadmeCommand extends Command
                     return 1;
                 }
 
-                return strcmp($a['name'], $b['name']);
+                return strcmp((string) $a['name'], (string) $b['name']);
             })
             ->map(
                 static fn (array $package): string => str(\sprintf(

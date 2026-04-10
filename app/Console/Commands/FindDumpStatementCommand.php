@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use PhpParser\Error;
 use PhpParser\Node;
@@ -34,6 +33,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 final class FindDumpStatementCommand extends Command
 {
+    #[\Override]
     protected $signature = <<<'SIGNATURE'
         find:dump-statement
         {--dir=* : The directories to search for files}
@@ -45,6 +45,8 @@ final class FindDumpStatementCommand extends Command
         {--f|func=* : The functions to search}
         {--M|memory-limit= : The memory limit to use for the PHP parser}
         SIGNATURE;
+
+    #[\Override]
     protected $description = 'Find dump statements in PHP files.';
 
     /** @var array<string, list<string>> */
@@ -68,12 +70,13 @@ final class FindDumpStatementCommand extends Command
     private ?Finder $fileFinder = null;
     private ?Parser $parser = null;
     private ?NodeFinder $nodeFinder = null;
-    private ?Standard $prettyPrinter = null;
+    private ?Standard $standard = null;
     private ?ResourceUsageFormatter $resourceUsageFormatter = null;
 
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
+    #[\Override]
     public function isEnabled(): bool
     {
         return !$this->laravel->isProduction();
@@ -102,7 +105,8 @@ final class FindDumpStatementCommand extends Command
                     return true;
                 }
 
-                return Str::of(class_basename($node::class))
+                return str($node::class)
+                    ->classBasename()
                     ->lower()
                     ->replaceLast('_', '')
                     ->is($this->statements['struct']);
@@ -133,7 +137,7 @@ final class FindDumpStatementCommand extends Command
         }, $findInfos = array_merge([], ...$findInfos), array_keys($findInfos));
 
         $this->table(
-            array_map(static fn (string $name) => Str::of($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])),
+            array_map(static fn (string $name) => str($name)->snake()->replace('_', ' ')->title(), array_keys($findInfos[0])),
             $findInfos
         );
 
@@ -153,6 +157,8 @@ final class FindDumpStatementCommand extends Command
     }
 
     /**
+     * @param list<\PhpParser\Node> $dumpNodes
+     *
      * @return list<array>
      */
     private function findInfo(SplFileInfo $fileInfo, array $dumpNodes, bool $odd): array
@@ -167,19 +173,19 @@ final class FindDumpStatementCommand extends Command
                     $name = "<fg=cyan>{$dumpNode->expr->name->getFirst()}</>";
                     $type = '<fg=cyan>func</>';
                 } else {
-                    $name = Str::of(class_basename($dumpNode::class))->lower()->replaceLast('_', '')->pipe(
+                    $name = str($dumpNode::class)->classBasename()->lower()->replaceLast('_', '')->pipe(
                         static fn (Stringable $name): string => "<fg=red>$name</>"
                     );
                     $type = '<fg=red>struct</>';
                 }
 
-                $file = Str::of($fileInfo->getRealPath())->replace(base_path().\DIRECTORY_SEPARATOR, '')->pipe(
+                $file = str($fileInfo->getRealPath())->replace(base_path().\DIRECTORY_SEPARATOR, '')->pipe(
                     static fn (Stringable $file): string => $odd ? "<fg=green>$file</>" : "<fg=blue>$file</>"
                 );
-                $startLine = Str::of($dumpNode->getAttribute('startLine'))->pipe(
+                $startLine = str($dumpNode->getAttribute('startLine'))->pipe(
                     static fn (Stringable $startLine): string => $odd ? "<fg=green>$startLine</>" : "<fg=blue>$startLine</>"
                 );
-                $formattedCode = Str::of($this->prettyPrinter->prettyPrint([$dumpNode]))->pipe(
+                $formattedCode = str($this->standard->prettyPrint([$dumpNode]))->pipe(
                     static fn (
                         #[\SensitiveParameter]
                         Stringable $formattedCode
@@ -236,7 +242,7 @@ final class FindDumpStatementCommand extends Command
 
         $this->parser = (new ParserFactory)->createForHostVersion();
         $this->nodeFinder = new NodeFinder;
-        $this->prettyPrinter = new Standard;
+        $this->standard = new Standard;
         $this->resourceUsageFormatter = new ResourceUsageFormatter;
     }
 }

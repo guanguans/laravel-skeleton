@@ -1,9 +1,7 @@
 <?php
 
-/** @noinspection PhpUnusedAliasInspection */
-
 /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-
+/** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 
 /**
@@ -47,6 +45,7 @@ class User extends Authenticatable
     use ValidatingTrait;
 
     /** @var list<string> */
+    #[\Override]
     protected $fillable = [
         'name',
         'email',
@@ -54,6 +53,7 @@ class User extends Authenticatable
     ];
 
     /** @var list<string> */
+    #[\Override]
     protected $hidden = [
         'password',
         'remember_token',
@@ -104,6 +104,8 @@ class User extends Authenticatable
     }
 
     /**
+     * @return array<string, string>
+     *
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]

@@ -44,9 +44,9 @@ final class IsRouteIgnored
             return $next($request);
         }
 
-        $reflection = new \ReflectionMethod($route->getControllerClass(), $route->getActionMethod());
+        $reflectionMethod = new \ReflectionMethod($route->getControllerClass(), $route->getActionMethod());
 
-        $attributes = $reflection->getAttributes(Ignore::class);
+        $attributes = $reflectionMethod->getAttributes(Ignore::class);
 
         abort_if([] !== $attributes && \in_array(config('app.env'), $attributes[0]->newInstance()->in, true), 404);
 

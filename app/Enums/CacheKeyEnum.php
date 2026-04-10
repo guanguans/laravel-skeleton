@@ -26,8 +26,8 @@ enum CacheKeyEnum: string
     use Enumerates;
     use ExtrasTrait;
     use ReadableEnumTrait;
-    case ROLE = 'role_';
-    case USER = 'user_';
-    case PRODUCT = 'product_';
-    case CATEGORY = 'category_';
+    case Role = 'role_';
+    case User = 'user_';
+    case Product = 'product_';
+    case Category = 'category_';
 }

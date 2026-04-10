@@ -84,9 +84,9 @@ final class RunCommandInDebugModeListener
 
     private function getActualCommandFromHelpCommand(HelpCommand $command): Command
     {
-        $reflection = new \ReflectionClass($command);
-        $property = $reflection->getProperty('command');
-        $actualCommand = $property->getValue($command);
+        $reflectionClass = new \ReflectionClass($command);
+        $reflectionProperty = $reflectionClass->getProperty('command');
+        $actualCommand = $reflectionProperty->getValue($command);
 
         try {
             throw_unless(
@@ -117,9 +117,9 @@ final class RunCommandInDebugModeListener
      */
     private function getTokensFromArgvInput(ArgvInput $input): array
     {
-        $reflection = new \ReflectionClass($input);
-        $tokensProperty = $reflection->getProperty('tokens');
-        $tokens = $tokensProperty->getValue($input);
+        $reflectionClass = new \ReflectionClass($input);
+        $reflectionProperty = $reflectionClass->getProperty('tokens');
+        $tokens = $reflectionProperty->getValue($input);
 
         throw_unless(
             \is_array($tokens),

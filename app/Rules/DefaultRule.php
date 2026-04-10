@@ -30,6 +30,7 @@ final class DefaultRule extends AbstractRule implements ValidatorAwareRule
      *
      * @noinspection ClassOverridesFieldOfSuperClassInspection
      */
+    #[\Override]
     public bool $implicit = true;
 
     public function __construct(private readonly mixed $default) {}

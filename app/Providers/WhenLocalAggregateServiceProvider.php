@@ -24,10 +24,12 @@ final class WhenLocalAggregateServiceProvider extends AggregateServiceProvider
     }
 
     /** {@inheritDoc} */
+    #[\Override]
     protected $providers = [
         SoarServiceProvider::class,
     ];
 
+    #[\Override]
     public function register(): void
     {
         if ($this->app->isLocal()) {

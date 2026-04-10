@@ -26,14 +26,17 @@ use Illuminate\Support\Facades\DB;
  */
 final class CachePruneCommand extends Command
 {
+    #[\Override]
     protected $signature = 'cache:prune';
+
+    #[\Override]
     protected $description = 'Prune expired cache entries from the database cache store';
 
     public function handle(): void
     {
-        $cache = Cache::getStore();
+        $store = Cache::getStore();
 
-        if (!$cache instanceof DatabaseStore) {
+        if (!$store instanceof DatabaseStore) {
             $this->components->error('The cache:prune command only supports the DatabaseStore driver.');
 
             return;
