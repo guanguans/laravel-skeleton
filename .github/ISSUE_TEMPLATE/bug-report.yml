@@ -29,7 +29,7 @@ body:
     attributes:
       label: Package Version
       description: What version of our Package are you running? Please be as specific as possible
-      placeholder: 2.0.0
+      placeholder: 13.0.0
     validations:
       required: true
   - type: input
@@ -37,17 +37,17 @@ body:
     attributes:
       label: PHP Version
       description: What version of PHP are you running? Please be as specific as possible
-      placeholder: 8.2.0
+      placeholder: 8.5.0
     validations:
       required: true
-  # - type: input
-  #   id: laravel-version
-  #   attributes:
-  #     label: Laravel Version
-  #     description: What version of Laravel are you running? Please be as specific as possible
-  #     placeholder: 9.0.0
-  #   validations:
-  #     required: true
+  - type: input
+    id: laravel-version
+    attributes:
+      label: Laravel Version
+      description: What version of Laravel are you running? Please be as specific as possible
+      placeholder: 13.0.0
+    validations:
+      required: true
   - type: dropdown
     id: operating-systems
     attributes:

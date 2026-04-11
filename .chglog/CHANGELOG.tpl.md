@@ -6,13 +6,11 @@ All notable changes to this project will be documented in this file.
 
 {{ if .Versions -}}
 <a name="unreleased"></a>
-
 ## [Unreleased]
 
 {{ if .Unreleased.CommitGroups -}}
 {{ range .Unreleased.CommitGroups -}}
 ### {{ .Title }}
-
 {{ range .Commits -}}
 - {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }} ([{{ .Hash.Short }}]({{ $.Info.RepositoryURL }}/commit/{{ .Hash.Short }}))
 {{ end }}
@@ -22,12 +20,9 @@ All notable changes to this project will be documented in this file.
 
 {{ range .Versions }}
 <a name="{{ .Tag.Name }}"></a>
-
 ## {{ if .Tag.Previous }}[{{ .Tag.Name }}]{{ else }}{{ .Tag.Name }}{{ end }} - {{ datetime "2006-01-02" .Tag.Date }}
-
 {{ range .CommitGroups -}}
 ### {{ .Title }}
-
 {{ range .Commits -}}
 - {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }} ([{{ .Hash.Short }}]({{ $.Info.RepositoryURL }}/commit/{{ .Hash.Short }}))
 {{ end }}
@@ -35,7 +30,6 @@ All notable changes to this project will be documented in this file.
 
 {{- if .RevertCommits -}}
 ### Reverts
-
 {{ range .RevertCommits -}}
 - {{ .Revert.Header }}
 {{ end }}
@@ -43,7 +37,6 @@ All notable changes to this project will be documented in this file.
 
 {{- if .MergeCommits -}}
 ### Pull Requests
-
 {{ range .MergeCommits -}}
 - {{ .Header }}
 {{ end }}
