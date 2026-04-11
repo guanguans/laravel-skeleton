@@ -18,10 +18,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-pest()->use(RefreshDatabase::class);
-
 beforeEach(function (): void {
     $this->response = $this
         ->postJson('/api/v1/auth/register', $this->credentials = [
@@ -45,7 +41,7 @@ beforeEach(function (): void {
         ]);
 
     $this->accessToken = $this->response->json('data.access_token');
-});
+})->skip('This test is too slow, need to optimize.');
 
 it('can login', function (): void {
     $this

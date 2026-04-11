@@ -20,8 +20,10 @@ declare(strict_types=1);
  */
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\TestResponse;
 use Pest\Expectation;
@@ -36,25 +38,60 @@ use Tests\TestCase;
 // pest()->only();
 // pest()->printer()->compact();
 pest()->project()->github('guanguans/laravel-skeleton');
+
+/**
+ * @see https://masteringlaravel.io/daily/2024-10-09-what-is-a-feature-test
+ * @see https://masteringlaravel.io/daily/2024-10-10-what-is-a-unit-test
+ * @see https://masteringlaravel.io/daily/2024-10-11-what-is-an-integration-test
+ */
 pest()
     ->extend(TestCase::class)
     ->beforeAll(function (): void {})
     ->beforeEach(function (): void {
-        $this->withoutVite();
+        /** @see https://github.com/OussamaMater/Laravel-Tips#tip-167--time-travel-in-your-tests */
+        // $this->travel(5)->years();
+        DB::listen(static fn (QueryExecuted $queryExecuted) => throw_if(
+            str($queryExecuted->toRawSql())->is([]),
+            "Database access detected: {$queryExecuted->toRawSql()}"
+        ));
+
+        /** @var \Tests\TestCase $this */
         $this->withoutDefer();
+        $this->withoutVite();
     })
     ->afterEach(function (): void {
         $this->withDefer();
     })
     ->afterAll(function (): void {})
-    ->group(__DIR__)
-    ->in(
-        // __DIR__,
-        __DIR__.'/Arch/',
-        __DIR__.'/Feature/',
-        __DIR__.'/Integration/',
-        __DIR__.'/Unit/'
-    );
+    ->group(__DIR__.'/Feature/')
+    ->in(__DIR__.'/Feature/');
+
+pest()
+    ->extend(PHPUnit\Framework\TestCase::class)
+    ->beforeAll(function (): void {})
+    ->beforeEach(function (): void {})
+    ->afterEach(function (): void {})
+    ->afterAll(function (): void {})
+    ->group(__DIR__.'/Arch/')
+    ->in(__DIR__.'/Arch/');
+
+pest()
+    ->extend(PHPUnit\Framework\TestCase::class)
+    ->beforeAll(function (): void {})
+    ->beforeEach(function (): void {})
+    ->afterEach(function (): void {})
+    ->afterAll(function (): void {})
+    ->group(__DIR__.'/Integration/')
+    ->in(__DIR__.'/Integration/');
+
+pest()
+    ->extend(PHPUnit\Framework\TestCase::class)
+    ->beforeAll(function (): void {})
+    ->beforeEach(function (): void {})
+    ->afterEach(function (): void {})
+    ->afterAll(function (): void {})
+    ->group(__DIR__.'/Unit/')
+    ->in(__DIR__.'/Unit/');
 
 /*
 |--------------------------------------------------------------------------

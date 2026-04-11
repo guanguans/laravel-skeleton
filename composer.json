@@ -705,7 +705,7 @@
         "phpstan:dump-parameters": "@phpstan dump-parameters",
         "pint": [
             "@putenv:xdebug-off",
-            "@php vendor/bin/pint --ansi -vv"
+            "@php -d error_reporting='E_ALL &~E_DEPRECATED' vendor/bin/pint --ansi -vv"
         ],
         "pint:test": "@pint --test",
         "pint:test-format-annotate-pull-request": [
@@ -739,7 +739,7 @@
         "rector:process-only-dry-run": "@rector:process-only --dry-run",
         "roave-backward-compatibility-check": "@php vendor/bin/roave-backward-compatibility-check --install-development-dependencies --ansi -vv",
         "roave-backward-compatibility-check:format-github-actions": "@roave-backward-compatibility-check --format=github-actions",
-        "rule-doc-generator": "@php rule-doc-generator --ansi -vv",
+        "rule-doc-generator": "@php -d error_reporting='E_ALL &~E_DEPRECATED' rule-doc-generator --ansi -vv",
         "rule-doc-generator:generate": "@rule-doc-generator generate app/Support/Rectors/ --output-file=app/Support/Rectors/rules-overview.md",
         "rule-doc-generator:validate": "@rule-doc-generator validate app/Support/Rectors/",
         "setup": [

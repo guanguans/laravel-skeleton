@@ -29,12 +29,10 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithCachedConfig;
 use Illuminate\Foundation\Testing\WithCachedRoutes;
 use JMac\Testing\Traits\AdditionalAssertions;
-use Tests\Concerns\Bootloadable;
 
 abstract class TestCase extends BaseTestCase
 {
-    use AdditionalAssertions;
-    // use Bootloadable;
+    // use AdditionalAssertions;
     // use DatabaseMigrations;
     // use DatabaseTruncation;
     // use FastRefreshDatabase;
@@ -42,19 +40,12 @@ abstract class TestCase extends BaseTestCase
     // use RefreshDatabase;
     // use WithCachedConfig;
     // use WithCachedRoutes;
+    use AdditionalAssertions;
+    use RefreshDatabase;
 
     // /** 在测试前指定要运行的 seeder. */
     // protected string $seeder = OrderStatusSeeder::class;
 
     /** Indicates whether the default seeder should run before each test. */
     protected bool $seed = false;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->withoutVite();
-
-        /** @see https://github.com/OussamaMater/Laravel-Tips#tip-167--time-travel-in-your-tests */
-        // $this->travel(5)->years();
-    }
 }

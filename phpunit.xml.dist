@@ -58,8 +58,7 @@
       <directory>tests/Integration/</directory>
     </testsuite>
   </testsuites>
-  <!--<source ignoreIndirectDeprecations="true">-->
-  <source>
+  <source ignoreIndirectDeprecations="true">
     <include>
       <directory>app/</directory>
       <directory>bootstrap/</directory>
