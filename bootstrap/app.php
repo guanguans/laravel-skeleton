@@ -100,7 +100,7 @@ return App\Application::configure(basePath: \dirname(__DIR__))
             ]);
     })
     ->withSchedule(static function (Schedule $schedule): void {
-        $schedule->command('inspire')->dailyAppendOutputTo()->doNotMonitor()->everyMinute()->withoutOverlapping(60);
+        $schedule->command('inspire')->dailyAppendOutputTo()/* ->doNotMonitor() */ ->everyMinute()->withoutOverlapping(60);
         // $schedule->command('inspire')->daily()->atRandom('07:15', '11:42')->withoutOverlapping(60);
         // $schedule->command('backup:clean')->daily()->at('05:15')->withoutOverlapping();
         // $schedule->command('backup:run')->daily()->at('05:30')->withoutOverlapping();
