@@ -31,6 +31,7 @@ use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 use Opcodes\LogViewer\Facades\LogViewer;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 final class PackageServiceProvider extends ServiceProvider
 {
@@ -80,7 +81,7 @@ final class PackageServiceProvider extends ServiceProvider
              * @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php
              */
             EnsureFeaturesAreActive::whenInactive(
-                static fn (Request $request, array $features): Response => new Response(status: 403)
+                static fn (Request $request, array $features): Response => new Response(status: SymfonyResponse::HTTP_FORBIDDEN)
             );
 
             $this->whenever($this->isOctaneHttpServer(), static function (): void {

@@ -17,10 +17,11 @@ use App\Models\HttpLog;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 Route::get('user', static fn (Request $request) => $request->user())->name('user')->middleware('auth:sanctum');
 
-Route::fallback(static fn () => abort(404, 'Not Found Api'))->name('fallback');
+Route::fallback(static fn () => abort(SymfonyResponse::HTTP_NOT_FOUND, 'Not Found Api'))->name('fallback');
 
 /**
  * @see https://www.harrisrafto.eu/streaming-large-json-datasets-in-laravel-with-streamjson/

@@ -32,7 +32,7 @@ final class RedirectUppercase
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         if (($lower = strtolower($path = $request->path())) !== $path) {
-            return redirect(url()->query($lower, $request->query()), 301);
+            return redirect(url()->query($lower, $request->query()), SymfonyResponse::HTTP_MOVED_PERMANENTLY);
         }
 
         return $next($request);

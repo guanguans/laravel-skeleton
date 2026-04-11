@@ -38,6 +38,6 @@ final class IsDeveloper
             return $next($request);
         }
 
-        abort(403);
+        abort(SymfonyResponse::HTTP_FORBIDDEN);
     }
 }

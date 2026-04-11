@@ -25,6 +25,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 beforeEach(function (): void {
     // Carbon::setTestNow(now());
@@ -58,7 +59,7 @@ it('can push message', function (): void {
     );
 
     Http::fake([
-        '*://api2.pushdeer.com/message/no-content' => Http::response(status: 204),
+        '*://api2.pushdeer.com/message/no-content' => Http::response(status: SymfonyResponse::HTTP_NO_CONTENT),
     ]);
     PushDeer::asJson()->get('message/no-content');
     Http::assertSentCount(1);

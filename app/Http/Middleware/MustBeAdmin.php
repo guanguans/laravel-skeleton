@@ -31,7 +31,7 @@ final class MustBeAdmin
      */
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {
-        abort_if(auth()->guest() || !$request->user()->isAdmin(), 403, '非法访问！');
+        abort_if(auth()->guest() || !$request->user()->isAdmin(), SymfonyResponse::HTTP_FORBIDDEN, '非法访问！');
 
         return $next($request);
     }

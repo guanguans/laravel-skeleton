@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Overtrue\LaravelUploader\LaravelUploader;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ use Overtrue\LaravelUploader\LaravelUploader;
 */
 
 Route::get('/', static fn (): Factory|View => view('welcome'))->name('index');
-Route::fallback(static fn () => abort(404))->name('fallback');
+Route::fallback(static fn () => abort(SymfonyResponse::HTTP_NOT_FOUND))->name('fallback');
 
 LaravelUploader::routes();
 
@@ -49,7 +50,7 @@ LaravelUploader::routes();
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet
  */
 Route::get('acting-as/{id}', static function (int $id): RedirectResponse {
-    abort_unless(app()->isLocal() && app()->hasDebugModeEnabled(), 404);
+    abort_unless(app()->isLocal() && app()->hasDebugModeEnabled(), SymfonyResponse::HTTP_NOT_FOUND);
 
     Auth::loginUsingId($id);
 

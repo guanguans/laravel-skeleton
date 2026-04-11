@@ -18,6 +18,7 @@ namespace App\Providers;
 use App\Listeners\PrepareRequestListener;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -49,9 +50,9 @@ final class HttpServiceProvider extends ServiceProvider
             ResourceCollection::withoutWrapping();
 
             Http::globalOptions([
-                'connect_timeout' => 10,
-                'timeout' => 30,
-                'headers' => [
+                RequestOptions::CONNECT_TIMEOUT => 10,
+                RequestOptions::TIMEOUT => 30,
+                RequestOptions::HEADERS => [
                     PrepareRequestListener::X_REQUEST_ID => TRACE_ID,
                 ],
             ]);

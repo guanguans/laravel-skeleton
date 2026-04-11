@@ -42,7 +42,7 @@ final readonly class VerifyUserAbility
     {
         abort_if(
             $this->guard->guest() || !$this->guard->user()?->can($ability),
-            403,
+            SymfonyResponse::HTTP_FORBIDDEN,
             $message ?: '你没有权限执行该操作'
         );
 

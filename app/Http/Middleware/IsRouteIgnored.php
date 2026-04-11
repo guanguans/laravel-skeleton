@@ -48,7 +48,7 @@ final class IsRouteIgnored
 
         $attributes = $reflectionMethod->getAttributes(Ignore::class);
 
-        abort_if([] !== $attributes && \in_array(config('app.env'), $attributes[0]->newInstance()->in, true), 404);
+        abort_if([] !== $attributes && \in_array(config('app.env'), $attributes[0]->newInstance()->in, true), SymfonyResponse::HTTP_NOT_FOUND);
 
         return $next($request);
     }

@@ -17,6 +17,7 @@ namespace App\Console\Commands;
 
 use Appstract\Opcache\CreatesRequest;
 use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Crypt;
@@ -66,7 +67,7 @@ final class OpcacheUrlCommand extends Command
         ]);
 
         return Http::withHeaders(config('opcache.headers', []))
-            ->withOptions(['verify' => config('opcache.verify', false)])
+            ->withOptions([RequestOptions::VERIFY => config('opcache.verify', false)])
             ->retry(0)
             ->beforeSending(function (Request $request): void {
                 static $isPrinted = false;

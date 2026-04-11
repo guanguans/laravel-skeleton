@@ -16,6 +16,7 @@ namespace App\Models\Concerns;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @property \App\Models\User $creator
@@ -38,7 +39,7 @@ trait BelongsToCreator
 
         static::updating(
             static function (Model $model): void {
-                abort_if($model->isDirty('creator_id'), 403, '创建者不可更新');
+                abort_if($model->isDirty('creator_id'), Response::HTTP_FORBIDDEN, '创建者不可更新');
             }
         );
     }

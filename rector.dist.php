@@ -27,10 +27,8 @@ use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
 use Guanguans\RectorRules\Set\SetList;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
-use Rector\CodeQuality\Rector\Class_\ConvertStaticToSelfRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
-use Rector\CodeQuality\Rector\New_\NewStaticToNewSelfRector;
 use Rector\CodingStyle\Rector\ArrowFunction\ArrowFunctionDelegatingCallToFirstClassCallableRector;
 use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
 use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
@@ -214,17 +212,11 @@ return RectorConfig::configure()
             __DIR__.'/app/Support/Clients/AbstractClient.php',
             __DIR__.'/app/Support/Mixins/',
         ],
-        ConvertStaticToSelfRector::class => [
-            __DIR__.'/database/factories/UserFactory.php',
-        ],
         JsonThrowOnErrorRector::class => [
             __DIR__.'/app/Support/helpers.php',
             __DIR__.'/app/Support/Mixins/CollectionMixin.php',
             __DIR__.'/app/Support/Sse/ServerSentEvent.php',
             __DIR__.'/tests/Pest.php',
-        ],
-        NewStaticToNewSelfRector::class => [
-            __DIR__.'/app/Models/BaseModel.php',
         ],
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/app/Support/Mixins/SchedulingEventMixin.php',

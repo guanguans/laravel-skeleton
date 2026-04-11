@@ -15,6 +15,7 @@ namespace App\Support\Mixins;
 
 use App\Support\Attributes\Mixin;
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Routing\ResponseFactory;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -53,7 +54,7 @@ final class ResponseFactoryMixin
             $client ??= new Client;
 
             return $this->streamDownload(static function () use ($client, $url, $chunk): void {
-                $stream = $client->get($url, ['stream' => true])->getBody();
+                $stream = $client->get($url, [RequestOptions::STREAM => true])->getBody();
 
                 while (!$stream->eof()) {
                     echo $stream->read($chunk);
