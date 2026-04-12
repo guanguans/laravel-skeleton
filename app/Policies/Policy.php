@@ -31,7 +31,7 @@ class Policy
     }
 
     /**
-     * @see https://laravel.com/docs/12.x/authorization#policy-filters
+     * @see https://laravel.com/docs/13.x/authorization#policy-filters
      */
     public function before(JWTUser $user): ?bool
     {
@@ -43,7 +43,7 @@ class Policy
     }
 
     /**
-     * @see https://laravel.com/docs/12.x/authorization#intercepting-gate-checks
+     * @see https://laravel.com/docs/13.x/authorization#intercepting-gate-checks
      */
     public function after(JWTUser $user): ?bool
     {

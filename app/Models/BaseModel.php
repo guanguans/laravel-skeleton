@@ -30,12 +30,12 @@ use Watson\Validating\ValidatingTrait;
  */
 class BaseModel extends Model
 {
-    use HasCamelCasing;
+    // use HasCamelCasing;
     use HasFactory;
     use HasSchemalessAttributes;
     use SerializeDate;
     use SoftDeletes;
-    use ValidatingTrait;
+    // use ValidatingTrait;
 
     public static function getTableName(): \Closure
     {

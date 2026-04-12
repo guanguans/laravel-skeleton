@@ -44,7 +44,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 Route::get('/', static fn (): Factory|View => view('welcome'))->name('index');
 Route::fallback(static fn () => abort(SymfonyResponse::HTTP_NOT_FOUND))->name('fallback');
 
-LaravelUploader::routes();
+// LaravelUploader::routes();
 
 /**
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet

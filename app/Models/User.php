@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     use Notifiable;
     use SerializeDate;
-    use ValidatingTrait;
+    // use ValidatingTrait;
 
     /** @var list<string> */
     #[\Override]

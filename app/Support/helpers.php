@@ -272,7 +272,7 @@ if (!\function_exists('invoke')) {
 
 if (!\function_exists('make')) {
     /**
-     * @see https://github.com/laravel/framework/blob/12.x/src/Illuminate/Foundation/helpers.php
+     * @see https://github.com/laravel/framework/blob/13.x/src/Illuminate/Foundation/helpers.php
      * @see https://github.com/yiisoft/yii2/blob/master/framework/BaseYii.php
      *
      * @template TClass of object

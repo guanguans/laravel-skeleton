@@ -17,7 +17,6 @@ use App\Rules\AbstractRule;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
-use Laragear\Discover\Facades\Discover;
 
 final class IdeHelperChoresCommand extends Command
 {
@@ -101,9 +100,14 @@ final class IdeHelperChoresCommand extends Command
 
     private function ruleChore(): void
     {
-        Discover::in('Rules')
-            ->instancesOf(AbstractRule::class)
-            ->allClasses()
+        classes(
+            static fn (string $class, string $file): bool => str($class)->is('App\\Rules\\*')
+                && str($file)->is('*/../../app/Rules/*')
+        )
+            ->filter(
+                static fn (\ReflectionClass $reflectionClass): bool => $reflectionClass->isSubclassOf(AbstractRule::class)
+                    && $reflectionClass->isInstantiable()
+            )
             ->map(
                 /**
                  * @param class-string<\App\Rules\AbstractRule> $ruleClass

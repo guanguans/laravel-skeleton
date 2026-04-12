@@ -57,8 +57,7 @@ return [
         'quiet' => false,
         'logger' => 'daily-elasticsearch',
         /** @see \GuzzleHttp\RequestOptions */
-        'httpClientOptions' => [
-        ],
+        'httpClientOptions' => [],
         'connections' => [
             'read' => [
                 'hosts' => [

@@ -21,7 +21,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Validator;
-use Laragear\Discover\Facades\Discover;
 
 final class ValidatorServiceProvider extends ServiceProvider
 {
@@ -65,9 +64,6 @@ final class ValidatorServiceProvider extends ServiceProvider
 
     private function extendValidator(): void
     {
-        // Discover::in('Rules')
-        //     ->instancesOf(AbstractRule::class)
-        //     ->classes()
         classes(
             static fn (string $class, string $file): bool => str($class)->is('App\\Rules\\*')
                 && str($file)->is('*/../../app/Rules/*')

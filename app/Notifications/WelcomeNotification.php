@@ -56,7 +56,6 @@ final class WelcomeNotification extends Notification implements ShouldQueue
      */
     public function toArray(mixed $notifiable): array
     {
-        return [
-        ];
+        return [];
     }
 }

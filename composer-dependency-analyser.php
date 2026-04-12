@@ -28,12 +28,21 @@ return (new Configuration)
     )
     ->addPathsToExclude([
         __DIR__.'/app/Support/',
-        __DIR__.'/tests/',
     ])
-    ->ignoreErrors([
-        ErrorType::SHADOW_DEPENDENCY,
-        ErrorType::UNUSED_DEPENDENCY,
+    ->ignoreUnknownClasses([
+        'Pion\Laravel\ChunkUpload\Handler\ResumableJSUploadHandler',
+        'Pion\Laravel\ChunkUpload\Receiver\FileReceiver',
     ])
+    ->ignoreErrors([ErrorType::SHADOW_DEPENDENCY])
+    ->ignoreErrorsOnPackages(
+        [
+            'clue/stream-filter',
+            'elasticsearch/elasticsearch',
+            'guanguans/laravel-exception-notify',
+            'laravel/tinker',
+        ],
+        [ErrorType::UNUSED_DEPENDENCY]
+    )
     ->ignoreErrorsOnPaths(
         [
             __DIR__.'/app/Providers/PackageServiceProvider.php',

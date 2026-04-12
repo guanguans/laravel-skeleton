@@ -4,7 +4,7 @@
 
 ## 项目背景
 
-- 技术栈：PHP (>=8.5), Laravel 12, Composer, NPM, JavaScript, Go, SQL
+- 技术栈：PHP (>=8.5), Laravel 13, Composer, NPM, JavaScript, Go, SQL
 - 代码风格：PSR-12，使用 Laravel Pint / PHP-CS-Fixer (仓库含自定义 Fixer)
 - 测试：Pest 优先；必要时 PHPUnit
 - 目标：可维护、类型明确、易测试、高性能

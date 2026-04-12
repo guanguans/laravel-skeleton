@@ -138,10 +138,8 @@ return App\Application::configure(basePath: \dirname(__DIR__))
             // ->throttle(static fn (Throwable $throwable) => Lottery::odds(1, 10))
             ->truncateRequestExceptionsAt(256)
             ->dontTruncateRequestExceptions()
-            ->dontReport([
-            ])
-            ->dontFlash([
-            ])
+            ->dontReport([])
+            ->dontFlash([])
             ->shouldRenderJsonWhen(static function (Request $request): bool {
                 if ($request->is('api/*')) {
                     return true;

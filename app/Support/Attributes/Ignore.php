@@ -19,7 +19,5 @@ namespace App\Support\Attributes;
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD)]
 final readonly class Ignore
 {
-    public function __construct(
-        public array $in = ['production']
-    ) {}
+    public function __construct(public array $in = ['production']) {}
 }
