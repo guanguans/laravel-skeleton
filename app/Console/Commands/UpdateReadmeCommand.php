@@ -39,7 +39,7 @@ final class UpdateReadmeCommand extends Command
     public function handle(): void
     {
         $this->updateComposerScripts();
-        $this->updatePackages();
+        // $this->updatePackages();
         $this->updateAppTree();
 
         Process::run(

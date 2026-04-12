@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
+namespace App\Support\Mixin;
+
+use App\Support\Attribute\Mixin;
+use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\Middleware;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Psr\Log\LoggerInterface;
+
+/**
+ * @see https://github.com/TheDragonCode/laravel-http-macros
+ *
+ * @mixin \Illuminate\Http\Client\PendingRequest
+ */
+#[Mixin(PendingRequest::class)]
+final class PendingRequestMixin
+{
+    public function withLogger(): \Closure
+    {
+        return function (
+            null|LoggerInterface|string $logger = null,
+            ?MessageFormatter $formatter = null,
+            string $logLevel = 'info'
+        ): PendingRequest {
+            if (!$logger instanceof LoggerInterface) {
+                $logger = Log::channel($logger);
+            }
+
+            if (!$logger instanceof Logger) {
+                $logger = new Logger($logger, Event::getFacadeRoot());
+            }
+
+            return $this->withMiddleware(
+                Middleware::log($logger, $formatter ?: new MessageFormatter(MessageFormatter::DEBUG), $logLevel)
+            );
+        };
+    }
+}

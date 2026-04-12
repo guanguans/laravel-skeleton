@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Attributes\Autowired;
+use App\Support\Attribute\Autowired;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;

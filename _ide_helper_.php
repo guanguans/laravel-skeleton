@@ -21,7 +21,7 @@ namespace Illuminate\Support\Facades {
     // class Redis extends Facade {}
 }
 
-namespace App\Support\Facades {
+namespace App\Support\Facade {
 }
 
 namespace Illuminate\Support {

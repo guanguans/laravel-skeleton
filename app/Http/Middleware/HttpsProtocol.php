@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Support\Traits\WithPipeArgs;
+use App\Support\Trait\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

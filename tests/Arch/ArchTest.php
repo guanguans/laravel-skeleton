@@ -31,7 +31,7 @@ use App\Listeners\PrepareRequestListener;
 use App\Listeners\RunCommandInDebugModeListener;
 use App\Listeners\TraceEventListener;
 use App\Models\BaseModel;
-use App\Support\Mixins\SchedulingEventMixin;
+use App\Support\Mixin\SchedulingEventMixin;
 use App\Support\Sse\CloseServerSentEventException;
 
 arch()

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use App\Support\Contracts\BitEncoderContract;
+use App\Support\Contract\BitEncoderContract;
 
 /**
  * @see https://github.com/izniburak/bit-permission

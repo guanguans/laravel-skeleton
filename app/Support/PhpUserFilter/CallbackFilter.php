@@ -1,0 +1,24 @@
+<?php
+
+/** @noinspection EmptyClassInspection */
+/** @noinspection PhpInternalEntityUsedInspection */
+
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
+namespace App\Support\PhpUserFilter;
+
+/**
+ * @see https://github.com/clue/stream-filter
+ * @see https://www.php.net/manual/zh/book.stream.php
+ * @see https://www.php.net/manual/zh/class.php-user-filter.php
+ */
+final class CallbackFilter extends \Clue\StreamFilter\CallbackFilter {}

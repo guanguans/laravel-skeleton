@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Clients\PushDeer;
-use App\Support\Managers\ElasticsearchManager;
+use App\Support\Client\PushDeer;
+use App\Support\Manager\ElasticsearchManager;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Env;

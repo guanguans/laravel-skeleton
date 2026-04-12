@@ -7,10 +7,9 @@
 [![tests](https://github.com/guanguans/laravel-skeleton/actions/workflows/tests.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions/workflows/tests.yml)
 [![php-cs-fixer](https://github.com/guanguans/laravel-skeleton/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/guanguans/laravel-skeleton/actions/workflows/php-cs-fixer.yml)
 [![codecov](https://codecov.io/gh/guanguans/laravel-skeleton/branch/main/graph/badge.svg?token=URGFAWS6S4)](https://codecov.io/gh/guanguans/laravel-skeleton)
-[![Latest Stable Version](https://poser.pugx.org/guanguans/laravel-skeleton/v)](https://packagist.org/packages/guanguans/laravel-skeleton)
-[![GitHub release (with filter)](https://img.shields.io/github/v/release/guanguans/laravel-skeleton)](https://github.com/guanguans/laravel-skeleton/releases)
-[![Total Downloads](https://poser.pugx.org/guanguans/laravel-skeleton/downloads)](https://packagist.org/packages/guanguans/laravel-skeleton)
-[![License](https://poser.pugx.org/guanguans/laravel-skeleton/license)](https://packagist.org/packages/guanguans/laravel-skeleton)
+![GitHub Tag](https://img.shields.io/github/v/tag/guanguans/laravel-skeleton)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/guanguans/laravel-skeleton)
+![GitHub License](https://img.shields.io/github/license/guanguans/laravel-skeleton)
 
 ## Reference
 
@@ -208,7 +207,6 @@ composer var-dump-server:cli
 composer var-dump-server:html
 composer vendor-patches
 composer vhs
-composer whatsdiff
 composer yaml-lint
 composer zhlint
 composer zhlint:fix
@@ -437,11 +435,14 @@ composer zizmor
 * [ergebnis/composer-normalize](https://github.com/ergebnis/composer-normalize) - Provides a composer plugin for normalizing composer.json.
 * [ergebnis/license](https://github.com/ergebnis/license) - Provides an abstraction of an open-source license.
 * [ergebnis/php-cs-fixer-config](https://github.com/ergebnis/php-cs-fixer-config) - Provides a configuration factory and rule set factories for friendsofphp/php-cs-fixer.
+* [ergebnis/phpstan-rules](https://github.com/ergebnis/phpstan-rules) - Provides rules for phpstan/phpstan.
 * [ergebnis/rector-rules](https://github.com/ergebnis/rector-rules) - Provides rules for rector/rector.
 * [fakerphp/faker](https://github.com/FakerPHP/Faker) - Faker is a PHP library that generates fake data for you.
 * [guanguans/laravel-soar](https://github.com/guanguans/laravel-soar) - SQL optimizer and rewriter for laravel. - laravel 的 SQL 优化器和重写器。
 * [guanguans/monorepo-builder-worker](https://github.com/guanguans/monorepo-builder-worker) - A set of additional release workers for symplify/monorepo-builder.
 * [guanguans/php-cs-fixer-custom-fixers](https://github.com/guanguans/php-cs-fixer-custom-fixers) - Use php-cs-fixer to format bats,blade.php,Dockerfile,env,json,md,mdx,sh,sql,tex,text,toml,txt,xml,yaml...files. - 使用 php-cs-fixer 去格式化 bats、blade.php、Dockerfile、env、json、md、mdx、sh、sql、tex、text、toml、txt、xml、yaml...文件。
+* [guanguans/phpstan-rules](https://github.com/guanguans/phpstan-rules) - A set of additional rules for phpstan/phpstan. - 一套针对 `phpstan/phpstan` 的附加规则。
+* [guanguans/rector-rules](https://github.com/guanguans/rector-rules) - A set of additional rules for rector/rector. - 一套针对 `rector/rector` 的附加规则。
 * [ion-bazan/composer-diff](https://github.com/IonBazan/composer-diff) - Compares composer.lock changes and generates Markdown report so you can use it in PR description.
 * [jasonmccreary/laravel-test-assertions](https://github.com/jasonmccreary/laravel-test-assertions) - A set of helpful assertions when testing Laravel applications.
 * [josezenem/laravel-make-migration-pivot](https://github.com/josezenem/laravel-make-migration-pivot) - Make Laravel pivot tables using the new Laravel 9 closure migrations.
@@ -475,6 +476,7 @@ composer zizmor
 * [phpstan/extension-installer](https://github.com/phpstan/extension-installer) - Composer plugin for automatic installation of PHPStan extensions
 * [phpstan/phpstan-deprecation-rules](https://github.com/phpstan/phpstan-deprecation-rules) - PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.
 * [phpstan/phpstan-mockery](https://github.com/phpstan/phpstan-mockery) - PHPStan Mockery extension
+* [phpstan/phpstan-strict-rules](https://github.com/phpstan/phpstan-strict-rules) - Extra strict and opinionated rules for PHPStan
 * [phpstan/phpstan-webmozart-assert](https://github.com/phpstan/phpstan-webmozart-assert) - PHPStan webmozart/assert extension
 * [povils/phpmnd](https://github.com/povils/phpmnd) - A tool to detect Magic numbers in codebase
 * [rakutentech/laravel-request-docs](https://github.com/rakutentech/laravel-request-docs) - Automatically generate Laravel docs from request rules, controllers and routes
@@ -499,6 +501,7 @@ composer zizmor
 * [spaze/phpstan-disallowed-calls](https://github.com/spaze/phpstan-disallowed-calls) - PHPStan rules to detect disallowed method & function calls, constant, namespace, attribute, property & superglobal usages, with powerful rules to re-allow a call or a usage in places where it should be allowed.
 * [sti3bas/laravel-scout-array-driver](https://github.com/Sti3bas/laravel-scout-array-driver) - Array driver for Laravel Scout
 * [symfony/thanks](https://github.com/symfony/thanks) - Encourages sending ⭐ and 💵 to fellow PHP package maintainers (not limited to Symfony components)!
+* [symplify/coding-standard](https://github.com/symplify/coding-standard) - Set of Symplify rules for PHP_CodeSniffer and PHP CS Fixer.
 * [symplify/easy-coding-standard](https://github.com/easy-coding-standard/easy-coding-standard) - Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer
 * [symplify/phpstan-rules](https://github.com/symplify/phpstan-rules) - Set of Symplify rules for PHPStan
 * [symplify/rule-doc-generator-contracts](https://github.com/symplify/rule-doc-generator-contracts) - Contracts for production code of RuleDocGenerator
@@ -506,6 +509,7 @@ composer zizmor
 * [thedoctor0/laravel-factory-generator](https://github.com/TheDoctor0/laravel-factory-generator) - Automatically generate Laravel factories for your models.
 * [tomasvotruba/class-leak](https://github.com/TomasVotruba/class-leak) - Detect leaking classes
 * [tomasvotruba/cognitive-complexity](https://github.com/TomasVotruba/cognitive-complexity) - PHPStan rules to measure cognitive complexity of your classes and methods
+* [tomasvotruba/ctor](https://github.com/TomasVotruba/ctor) - Prefer constructor over always called setters
 * [tomasvotruba/type-coverage](https://github.com/TomasVotruba/type-coverage) - Measure type coverage of your project
 * [vcian/laravel-db-auditor](https://github.com/vcian/laravel-db-auditor) - Database DB Auditor provide leverage to audit your MySql,sqlite, PostgreSQL database standards and also provide options to add constraints in table.
 * [whatsdiff/whatsdiff](https://github.com/whatsdiff/whatsdiff) - See what's changed in your project's dependencies
@@ -735,7 +739,7 @@ app/
 |   |-- UuidRule.php
 |   `-- WithoutWhitespaceRule.php
 |-- Support/
-|   |-- Attributes/
+|   |-- Attribute/
 |   |   |-- Autowired.php
 |   |   |-- Elasticsearch.php
 |   |   |-- Ignore.php
@@ -745,23 +749,24 @@ app/
 |   |   `-- OutOfMemoryBootstrap.php
 |   |-- Carbon/
 |   |   `-- NullCarbon.php
-|   |-- Clients/
+|   |-- Client/
 |   |   |-- AbstractClient.php
 |   |   `-- PushDeer.php
+|   |-- ComposerScripts.php
 |   |-- Console/
 |   |   |-- ProgressBarFactory.php
 |   |   `-- SymfonyStyleFactory.php
-|   |-- Contracts/
+|   |-- Contract/
 |   |   |-- BitEncoderContract.php
 |   |   `-- SignerContract.php
-|   |-- Facades/
+|   |-- Facade/
 |   |   |-- Elasticsearch.php
 |   |   `-- PushDeer.php
 |   |-- Guzzle/
 |   |   `-- CircuitBreakerMiddleware.php
-|   |-- Managers/
+|   |-- Manager/
 |   |   `-- ElasticsearchManager.php
-|   |-- Mixins/
+|   |-- Mixin/
 |   |   |-- BlueprintMixin.php
 |   |   |-- CarbonMixin.php
 |   |   |-- CollectionMixin.php
@@ -795,25 +800,25 @@ app/
 |   |   `-- Processor/
 |   |       |-- AppendExtraDataProcessor.php
 |   |       `-- EloquentLogHttpModelProcessor.php
-|   |-- PhpUserFilters/
+|   |-- PhpUserFilter/
 |   |   `-- CallbackFilter.php
-|   |-- Rectors/
+|   |-- Rector/
 |   |   |-- ClassHandleMethodRector.php
 |   |   `-- rules-overview.md
-|   |-- Signers/
+|   |-- Signer/
 |   |   |-- HmacSigner.php
 |   |   `-- Utils.php
 |   |-- Sse/
 |   |   |-- CloseServerSentEventException.php
 |   |   `-- ServerSentEvent.php
-|   |-- StreamWrappers/
+|   |-- StreamWrapper/
 |   |   |-- Concerns/
 |   |   |   |-- HasContext.php
 |   |   |   `-- Nameable.php
 |   |   |-- GlobStreamWrapper.php
 |   |   |-- StreamWrapper.php
 |   |   `-- UserFileStreamWrapper.php
-|   |-- Traits/
+|   |-- Trait/
 |   |   |-- Configurable.php
 |   |   |-- Copyable.php
 |   |   |-- Immutable.php
@@ -838,7 +843,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-58 directories, 260 files
+58 directories, 261 files
 
 ```
 

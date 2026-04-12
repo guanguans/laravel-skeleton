@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-use App\Support\Traits\Makeable;
+use App\Support\Trait\Makeable;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Concerns\ValidatesAttributes;

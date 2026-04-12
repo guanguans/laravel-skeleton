@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 
 use App\Listeners\PrepareRequestListener;
-use App\Support\Rectors\ClassHandleMethodRector;
+use App\Support\Rector\ClassHandleMethodRector;
 use Ergebnis\Rector\Rules\Expressions\Arrays\SortAssociativeArrayByKeyRector;
 use Ergebnis\Rector\Rules\Faker\GeneratorPropertyFetchToMethodCallRector;
 use Ergebnis\Rector\Rules\Files\ReferenceNamespacedSymbolsRelativeToNamespacePrefixRector;
@@ -205,21 +205,21 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         ArrowFunctionDelegatingCallToFirstClassCallableRector::class => [
-            __DIR__.'/app/Support/Mixins/',
+            __DIR__.'/app/Support/Mixin/',
             __DIR__.'/app/Support/VarDumper/ServerDumper.php',
         ],
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
-            __DIR__.'/app/Support/Clients/AbstractClient.php',
-            __DIR__.'/app/Support/Mixins/',
+            __DIR__.'/app/Support/Client/AbstractClient.php',
+            __DIR__.'/app/Support/Mixin/',
         ],
         JsonThrowOnErrorRector::class => [
             __DIR__.'/app/Support/helpers.php',
-            __DIR__.'/app/Support/Mixins/CollectionMixin.php',
+            __DIR__.'/app/Support/Mixin/CollectionMixin.php',
             __DIR__.'/app/Support/Sse/ServerSentEvent.php',
             __DIR__.'/tests/Pest.php',
         ],
         RemoveDumpDataDeadCodeRector::class => [
-            __DIR__.'/app/Support/Mixins/SchedulingEventMixin.php',
+            __DIR__.'/app/Support/Mixin/SchedulingEventMixin.php',
         ],
         RemoveEmptyClassMethodRector::class => [
             __DIR__.'/app/Observers/UserObserver.php',
@@ -256,7 +256,7 @@ return RectorConfig::configure()
         ],
         StaticClosureRector::class => $staticClosureSkipPaths,
         TypeHintTappableCallRector::class => [
-            __DIR__.'/app/Support/Mixins/QueryBuilder/QueryBuilderMixin.php',
+            __DIR__.'/app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php',
             __DIR__.'/app/Providers/ValidatorServiceProvider.php',
         ],
     ]);

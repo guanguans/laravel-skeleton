@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2021-2026 guanguans<ityaozm@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/guanguans/laravel-skeleton
+ */
+
+namespace App\Support\Attribute;
+
+/**
+ * @see https://blog.oussama-mater.tech/php-attributes/
+ */
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD)]
+final readonly class Ignore
+{
+    public function __construct(public array $in = ['production']) {}
+}

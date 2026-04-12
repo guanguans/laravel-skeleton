@@ -5,4 +5,4 @@ parameters:
         -
             message: '#^Possibly invalid array key type mixed\.$#'
             count: 1
-            path: ../app/Support/Mixins/QueryBuilder/QueryBuilderMixin.php
+            path: ../app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php

@@ -59,8 +59,8 @@ parameters:
     scanFiles:
         - vendor/composer/InstalledVersions.php
     excludePaths:
-        - app/Support/Rectors/
-        - app/Support/StreamWrappers/
+        - app/Support/Rector/
+        - app/Support/StreamWrapper/
         - app/Support/ComposerScripts.php
         - *.blade.php
     tmpDir: .build/phpstan/
@@ -212,7 +212,7 @@ parameters:
         - identifier: symplify.noDynamicName
         - identifier: symplify.noReference
         - identifier: symplify.noReturnSetterMethod
-        - identifier: symplify.requireAttributeNamespace
+#        - identifier: symplify.requireAttributeNamespace
         - identifier: symplify.requireExceptionNamespace
         - identifier: typePerfect.narrowPublicClassMethodParamType
         - identifier: typePerfect.noArrayAccessOnObject
@@ -257,19 +257,19 @@ parameters:
                 - app/Rules/AbstractRule.php
         -
             messages:
-                - '#^Parameter \$class of method App\\Support\\Attributes\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
-                - '#^Property App\\Support\\Attributes\\Mixin\:\:\$class has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
-            path: app/Support/Attributes/Mixin.php
+                - '#^Parameter \$class of method App\\Support\\Attribute\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
+                - '#^Property App\\Support\\Attribute\\Mixin\:\:\$class has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
+            path: app/Support/Attribute/Mixin.php
         -
             messages:
-                - '#^Access to an undefined property App\\Support\\Mixins\\.*Mixin\:\:\$.*\.$#'
-                - '#^Call to method App\\Support\\Mixins\\.*Mixin\:\:dump.*\(\) on a separate line has no effect\.$#'
+                - '#^Access to an undefined property App\\Support\\Mixin\\.*Mixin\:\:\$.*\.$#'
+                - '#^Call to method App\\Support\\Mixin\\.*Mixin\:\:dump.*\(\) on a separate line has no effect\.$#'
                 - '#^Call to protected method .*\(\) of class Illuminate\\.*\.$#'
                 - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
-                - '#^Class App\\Support\\Mixins\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
-                - '#^Method App\\Support\\Mixins\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
+                - '#^Class App\\Support\\Mixin\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
+                - '#^Method App\\Support\\Mixin\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
                 - '#^Undefined variable\: \$this$#'
-            path: app/Support/Mixins/
+            path: app/Support/Mixin/
 
 
 

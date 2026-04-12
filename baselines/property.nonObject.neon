@@ -15,9 +15,9 @@ parameters:
         -
             message: '#^Cannot access property \$stubCallbacks on mixed\.$#'
             count: 1
-            path: ../app/Support/Clients/AbstractClient.php
+            path: ../app/Support/Client/AbstractClient.php
 
         -
             message: '#^Cannot access property \$id on mixed\.$#'
             count: 1
-            path: ../app/Support/Mixins/RequestMixin.php
+            path: ../app/Support/Mixin/RequestMixin.php

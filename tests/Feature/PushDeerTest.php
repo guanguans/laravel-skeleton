@@ -20,7 +20,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Support\Facades\PushDeer;
+use App\Support\Facade\PushDeer;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Carbon;

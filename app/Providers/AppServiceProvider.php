@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Support\Attributes\Mixin;
+use App\Support\Attribute\Mixin;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 
@@ -43,7 +43,7 @@ final class AppServiceProvider extends ServiceProvider
             static fn (
                 string $class,
                 string $file
-            ): bool => str($class)->is('App\\Support\\Mixins\\*') && str($file)->is('*/../../app/Support/Mixins/*')
+            ): bool => str($class)->is('App\\Support\\Mixin\\*') && str($file)->is('*/../../app/Support/Mixin/*')
         )
             // ->keys()
             // ->dd()
