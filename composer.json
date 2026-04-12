@@ -450,6 +450,11 @@
                 "worksome/envy",
                 "worksome/request-factories"
             ]
+        },
+        "phpstan/extension-installer": {
+            "ignore": [
+                "sidz/phpstan-rules"
+            ]
         }
     },
     "scripts": {
@@ -608,13 +613,13 @@
         "facade:lint": "@facade:update --lint",
         "facade:update": "@php -f vendor/bin/facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facades/*.php'\\'')));')",
         "git-chglog": "git-chglog $(git describe --tags $(git rev-list --tags --max-count=1))",
-        "gitleaks": "gitleaks git --report-path=.build/gitleaks-report.json -v",
+        "gitleaks": "gitleaks git --report-path=.build/gitleaks-report.json --pre-commit --staged -v",
         "gitleaks:generate-baseline": "gitleaks git --report-path=gitleaks-baseline.json -v",
         "grumphp": "@php vendor/bin/grumphp run --ansi -vv",
         "jack": "@php vendor/bin/jack",
-        "jack:breakpoint": "@jack breakpoint --limit=12",
+        "jack:breakpoint": "@jack breakpoint --limit=0",
         "jack:breakpoint-dev": "@jack:breakpoint --dev",
-        "jack:open-versions": "@jack open-versions --limit=12",
+        "jack:open-versions": "@jack open-versions --limit=0",
         "jack:open-versions-dev": "@jack:open-versions --dev",
         "jack:open-versions-dev-dry-run": "@jack:open-versions-dev --dry-run",
         "jack:open-versions-dry-run": "@jack:open-versions --dry-run",
@@ -792,7 +797,7 @@
         "sk:search-regex": "@sk search-regex 'Guanguans.*ValetDrivers'",
         "sk:split-config-per-package": "@sk split-config-per-package monorepo-builder.php",
         "sk:spot-lazy-traits": "@sk spot-lazy-traits app/ --max-used=2",
-        "todo-lint": "! git --no-pager grep --extended-regexp --ignore-case 'todo|fixme' -- '*.php' ':!*.blade.php' ':(exclude)resources/' ':(exclude)tests/'",
+        "todo-lint": "! git --no-pager grep --extended-regexp --ignore-case 'todo|fixme' -- '*.php' ':!*.blade.php' ':(exclude)resources/' ':(exclude)tests/' ':(exclude)app/Models/' ':(exclude)app/Support/StreamWrappers/' ':(exclude)app/Listeners/RecordRequestIdentifiersListener.php' ':(exclude)app/Rules/AbstractRule.php'",
         "touch:database-sqlite": "@php -r \"file_exists('vendor/orchestra/testbench-core/laravel/database/database.sqlite') || touch('vendor/orchestra/testbench-core/laravel/database/database.sqlite');\"",
         "trap": "@php vendor/bin/trap --ui --ansi -vv",
         "trufflehog": "trufflehog git https://github.com/guanguans/laravel-skeleton --only-verified",

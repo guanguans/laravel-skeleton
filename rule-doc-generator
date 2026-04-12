@@ -14,4 +14,4 @@ declare(strict_types=1);
 
 require __DIR__.'/vendor/autoload.php';
 
-require __DIR__.'/vendor-bin/laravel11/vendor/symplify/rule-doc-generator/bin/rule-doc-generator.php';
+require __DIR__.'/vendor-bin/common/vendor/symplify/rule-doc-generator/bin/rule-doc-generator.php';

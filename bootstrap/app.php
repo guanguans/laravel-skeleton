@@ -58,7 +58,7 @@ return App\Application::configure(basePath: \dirname(__DIR__))
                 'secret',
                 'token',
             ])
-            ->validateCsrfTokens(except: [
+            ->preventRequestForgery(except: [
                 'livewire/*',
             ])
             ->validateSignatures(except: [
