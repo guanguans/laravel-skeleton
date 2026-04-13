@@ -13,7 +13,7 @@
         "cerbero/command-validator": "^3.0",
         "cerbero/enum": "^2.3",
         "clue/stream-filter": "^1.7",
-        "elao/enum": "^2.5",
+        "elao/enum": "^3.0",
         "elasticsearch/elasticsearch": "^9.3",
         "guanguans/laravel-api-response": "^4.0",
         "guanguans/laravel-exception-notify": "^7.0",
