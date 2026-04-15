@@ -112,6 +112,7 @@
         "alexandre-daubois/monolog-processor-collection": "production",
         "algolia/scout-extended": "production",
         "algoyounes/circuit-breaker": "production",
+        "algoyounes/idempotency": "production",
         "amirami/localizator": "development",
         "andreaselia/laravel-api-to-postman": "development",
         "appstract/laravel-blade-directives": "production",

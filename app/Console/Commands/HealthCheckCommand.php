@@ -294,7 +294,7 @@ final class HealthCheckCommand extends Command implements Isolatable
         return $this->createSuccessResult();
     }
 
-    private function createSuccessResult(): Result
+    private function createSuccessResult(): Success
     {
         return Success::create(self::RESULT_SUCCESS);
     }
