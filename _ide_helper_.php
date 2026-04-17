@@ -13,14 +13,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-namespace Illuminate\Support\Facades {
-    // /**
-    //  * @mixin \Predis\Client
-    //  * @mixin \Redis
-    //  */
-    // class Redis extends Facade {}
-}
-
 namespace App\Support\Facade {
 }
 

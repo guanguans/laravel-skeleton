@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Support\HigherOrderTapProxy|\App\Support\Manager\ElasticsearchManager tap(callable|null $callback = null)
  * @method static mixed driver(\UnitEnum|string|null $driver = null)
  * @method static \App\Support\Manager\ElasticsearchManager extend(string $driver, \Closure $callback)
- * @method static array<string, mixed> getDrivers()
+ * @method static array getDrivers()
  * @method static \Illuminate\Contracts\Container\Container getContainer()
  * @method static \App\Support\Manager\ElasticsearchManager setContainer(\Illuminate\Contracts\Container\Container $container)
  * @method static \App\Support\Manager\ElasticsearchManager forgetDrivers()
