@@ -53,7 +53,7 @@ final class PackageServiceProvider extends ServiceProvider
     {
         $this->whenever(true, static function (): void {
             Scramble::configure()->withDocumentTransformers(
-                static function (#[\SensitiveParameter] OpenApi $openApi): void {
+                static function (OpenApi $openApi): void {
                     $openApi->secure(SecurityScheme::http('bearer'));
                 }
             );
@@ -71,7 +71,7 @@ final class PackageServiceProvider extends ServiceProvider
 
             Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
-            LogViewer::auth(static fn (): bool => RequestFacade::user()?->isDeveloper());
+            // LogViewer::auth(static fn (): bool => RequestFacade::user()?->isDeveloper());
 
             if (class_exists(Telescope::class)) {
                 Telescope::auth(static fn (): bool => RequestFacade::user()?->isDeveloper());

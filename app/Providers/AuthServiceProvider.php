@@ -82,9 +82,7 @@ final class AuthServiceProvider extends ServiceProvider
             $url = url()->temporarySignedRoute(
                 'email.verify',
                 now()->addMinutes(config('auth.verification.expire', 60)),
-                [
-                    'user' => $user->id,
-                ],
+                ['user' => $user->id],
                 false
             );
 

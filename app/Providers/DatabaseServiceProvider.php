@@ -102,10 +102,10 @@ final class DatabaseServiceProvider extends ServiceProvider
             // $alias = $post->getMorphClass();
             // $class = Relation::getMorphedModel($alias);
 
-            User::resolveRelationUsing(
-                'province',
-                static fn (User $user) => $user->belongsTo(Province::class, 'province_id')
-            );
+            // User::resolveRelationUsing(
+            //     'province',
+            //     static fn (User $user) => $user->belongsTo(Province::class, 'province_id')
+            // );
 
             Event::listen(StatementPrepared::class, static function (StatementPrepared $event): void {
                 $event->statement->setFetchMode(\PDO::FETCH_ASSOC);

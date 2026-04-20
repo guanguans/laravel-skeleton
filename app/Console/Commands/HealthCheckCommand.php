@@ -219,16 +219,7 @@ final class HealthCheckCommand extends Command implements Isolatable
      */
     private function checkPhpExtensions(): Result
     {
-        $missingExtensions = collect([
-            'curl',
-            'gd',
-            'mbstring',
-            'openssl',
-            'pdo',
-            'pdo_mysql',
-            'xml',
-            'zip',
-        ])->reduce(
+        $missingExtensions = collect(['curl', 'gd', 'mbstring', 'openssl', 'pdo', 'pdo_mysql', 'xml', 'zip'])->reduce(
             static fn (Collection $missingExtensions, string $extension) => $missingExtensions->unless(
                 \extension_loaded($extension),
                 static fn (Collection $missingExtensions) => $missingExtensions->add($extension)

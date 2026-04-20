@@ -46,6 +46,7 @@ final class CheckServiceProviderCommand extends Command
         'laravel-lang/publisher',
         'laravel-lang/routes',
         'laravel-lang/starter-kits',
+        'laravel/sentinel',
         'laravel/socialite',
         'laravel/ui',
         'livewire/livewire',

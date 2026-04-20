@@ -36,6 +36,7 @@ return (new Configuration)
     ->ignoreErrors([ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackages(
         [
+            'ackintosh/ganesha',
             'clue/stream-filter',
             'elasticsearch/elasticsearch',
             'guanguans/laravel-exception-notify',

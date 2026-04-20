@@ -88,6 +88,7 @@ final class AutowiredServiceProvider extends ServiceProvider
                         Autowired::class,
                     ));
                 });
+                \assert(\is_string($propertyType));
 
                 try {
                     // $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);

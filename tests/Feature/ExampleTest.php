@@ -22,9 +22,7 @@ use App\Console\Commands\CachePruneCommand;
 use App\Console\Commands\CheckServiceProviderCommand;
 use App\Console\Commands\ClearAllCommand;
 use App\Console\Commands\ClearLogsCommand;
-use App\Console\Commands\FindDumpStatementCommand;
 use App\Console\Commands\FindStaticMethodsCommand;
-use App\Console\Commands\GenerateSitemapCommand;
 use App\Console\Commands\HealthCheckCommand;
 use App\Console\Commands\IdeHelperChoresCommand;
 use App\Console\Commands\InflectorCommand;
@@ -81,9 +79,7 @@ it('is console', function (): void {
     )
         ->filter(fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
         ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([
-            FindDumpStatementCommand::class,
             FindStaticMethodsCommand::class,
-            GenerateSitemapCommand::class,
             IdeHelperChoresCommand::class,
             InflectorCommand::class,
             InitCommand::class,

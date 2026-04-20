@@ -77,9 +77,7 @@ final class IdeHelperChoresCommand extends Command
     {
         collect($router->getRoutes())
             ->map(static fn (Route $route): string => $route->uri())
-            ->unique()
-            ->sort()
-            ->values()
+            ->unique()->sort()->values()
             ->tap(fn (Collection $routeUris) => $this->output($routeUris));
     }
 

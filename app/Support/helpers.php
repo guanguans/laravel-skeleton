@@ -19,9 +19,7 @@ use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Phrity\Util\ErrorHandler;
 use Symfony\Component\VarDumper\VarDumper;
-use Yiisoft\Injector\Injector;
 
 if (!\function_exists('catch_query_log')) {
     function catch_query_log(callable $callback, mixed ...$parameters): array
@@ -48,6 +46,7 @@ if (!\function_exists('catch_query_log')) {
 
 if (!\function_exists('classes')) {
     /**
+     * @see https://github.com/illuminate/collections
      * @see https://github.com/alekitto/class-finder
      * @see https://github.com/ergebnis/classy
      * @see https://gitlab.com/hpierce1102/ClassFinder
@@ -55,42 +54,88 @@ if (!\function_exists('classes')) {
      * @see \get_declared_classes()
      * @see \get_declared_interfaces()
      * @see \get_declared_traits()
-     * @see \DG\BypassFinals::enable()
      * @see \Composer\Util\ErrorHandler
+     * @see \Composer\Util\Silencer::call()
+     * @see \DG\BypassFinals::enable()
+     * @see \Illuminate\Foundation\Bootstrap\HandleExceptions::bootstrap()
      * @see \Monolog\ErrorHandler
      * @see \PhpCsFixer\ExecutorWithoutErrorHandler
      * @see \Phrity\Util\ErrorHandler
      *
-     * @param null|(callable(class-string, string): bool) $filter
+     * @template TObject of object
      *
-     * @return \Illuminate\Support\Collection<class-string, \ReflectionClass>
+     * @internal
      *
-     * @noinspection RedundantDocCommentTagInspection
-     * @noinspection PhpDocSignatureIsNotCompleteInspection
+     * @param null|(callable(class-string<TObject>, string): bool) $filter
+     *
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     *
+     * @return \Illuminate\Support\Collection<class-string<TObject>, \ReflectionClass<TObject>>
+     *
+     * @noinspection PhpUndefinedNamespaceInspection
      */
     function classes(?callable $filter = null): Collection
     {
-        static $classes;
+        $func = __FUNCTION__;
+        $errorMessenger = static fn (
+            string $file,
+            string $class
+        ): string => "Failed to reflect the class [$class] in the file [$file]. "
+            ."You may need to filter out the class or file using the callback parameter of the function [$func()].";
 
+        /** @var null|array{file: string, class: class-string<TObject>, line: int} $context */
+        static $context = null;
+        static $registered = false;
+
+        if (!$registered) {
+            register_shutdown_function(
+                static function () use (&$context, $errorMessenger): void {
+                    // @codeCoverageIgnoreStart
+                    if (
+                        null === $context
+                        || null === ($error = error_get_last())
+                        || !\in_array($error['type'], [\E_COMPILE_ERROR, \E_CORE_ERROR, \E_ERROR, \E_PARSE], true)
+                    ) {
+                        return;
+                    }
+
+                    // trigger_error($errorMessenger($context['file'], $context['class']), \E_USER_ERROR);
+                    throw new ErrorException(
+                        $errorMessenger($context['file'], $context['class']),
+                        0,
+                        $error['type'],
+                        __FILE__,
+                        $context['line'],
+                        new ErrorException($error['message'], 0, $error['type'], $error['file'], $error['line'])
+                    );
+                    // @codeCoverageIgnoreEnd
+                }
+            );
+            $registered = true;
+        }
+
+        /** @var null|\Illuminate\Support\Collection<string, class-string> $classes */
+        static $classes;
         $classes ??= collect(spl_autoload_functions())->flatMap(
-            static fn (mixed $loader): array => \is_array($loader) && $loader[0] instanceof ClassLoader
+            static fn (callable $loader): array => \is_array($loader) && $loader[0] instanceof ClassLoader
                 ? $loader[0]->getClassMap()
                 : []
         );
+        $filter ??= static fn (string $_, string $__): bool => true;
 
         return $classes
-            ->when(
-                \is_callable($filter),
-                static fn (Collection $classes): Collection => $classes->filter(
-                    static fn (string $file, string $class) => $filter($class, $file)
-                )
-            )
-            ->mapWithKeys(static function (string $file, string $class): array {
+            ->filter(static fn (string $file, string $class): bool => $filter($class, $file))
+            ->mapWithKeys(static function (string $file, string $class) use (&$context, $errorMessenger): array {
                 try {
-                    // return [$class => (new ErrorHandler)->with(static fn () => new ReflectionClass($class))];
+                    $context = ['file' => $file, 'class' => $class, 'line' => __LINE__ + 2];
+
                     return [$class => new ReflectionClass($class)];
                 } catch (Throwable $throwable) {
-                    return [$class => $throwable];
+                    // return [$class => $throwable];
+                    throw new ReflectionException($errorMessenger($file, $class), 0, $throwable);
+                } finally {
+                    $context = null;
                 }
             });
     }
@@ -256,33 +301,13 @@ if (!\function_exists('humans_milliseconds')) {
     }
 }
 
-if (!\function_exists('invoke')) {
-    /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \ReflectionException
-     */
-    function invoke(callable $callable, array $arguments = [], bool $cacheReflections = false): mixed
-    {
-        return tap(
-            new Injector(app()),
-            static fn (Injector $injector): bool => $cacheReflections and $injector->withCacheReflections($cacheReflections)
-        )->invoke($callable, $arguments);
-    }
-}
-
 if (!\function_exists('make')) {
     /**
-     * @see https://github.com/laravel/framework/blob/13.x/src/Illuminate/Foundation/helpers.php
+     * @see https://github.com/laravel/framework/blob/12.x/src/Illuminate/Foundation/helpers.php
      * @see https://github.com/yiisoft/yii2/blob/master/framework/BaseYii.php
      *
-     * @template TClass of object
-     *
-     * @param array<string, mixed>|class-string<TClass>|string $name
+     * @param array<string, mixed>|string $name
      * @param array<string, mixed> $parameters
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     *
-     * @return ($name is class-string<TClass> ? TClass : mixed)
      */
     function make(array|string $name, array $parameters = []): mixed
     {
@@ -291,16 +316,10 @@ if (!\function_exists('make')) {
         }
 
         foreach (
-            $keys = [
-                '__abstract',
-                '__class',
-                '__name',
-                '_abstract',
-                '_class',
-                '_name',
-                'abstract',
-                'class',
-                'name',
+            $keys ??= [
+                '__abstract', '__class', '__name',
+                '_abstract', '_class', '_name',
+                'abstract', 'class', 'name',
             ] as $key
         ) {
             if (isset($name[$key])) {
@@ -308,10 +327,9 @@ if (!\function_exists('make')) {
             }
         }
 
-        throw new InvalidArgumentException(\sprintf(
-            'The argument of abstract must be an array containing a `%s` element.',
-            implode('` or `', $keys)
-        ));
+        throw new InvalidArgumentException(
+            \sprintf('The argument of name must be an array containing a `%s` element.', implode('` or `', $keys))
+        );
     }
 }
 
@@ -325,15 +343,6 @@ if (!\function_exists('partical')) {
     }
 }
 
-if (!\function_exists('pd')) {
-    function pd(mixed ...$vars): never
-    {
-        pp(...$vars);
-
-        exit(1);
-    }
-}
-
 if (!\function_exists('pp')) {
     /**
      * @noinspection DebugFunctionUsageInspection
@@ -343,39 +352,6 @@ if (!\function_exists('pp')) {
         foreach ($vars as $var) {
             highlight_string(\sprintf("\n<?php\n\$var = %s;\n?>\n", var_export($var, true)));
         }
-    }
-}
-
-if (!\function_exists('rescuer')) {
-    /**
-     * @see \Composer\Util\Silencer::call()
-     * @see \Illuminate\Foundation\Bootstrap\HandleExceptions::bootstrap()
-     */
-    function rescuer(callable $callback, ?callable $rescuer = null): mixed
-    {
-        /** @phpstan-ignore-next-line  */
-        set_error_handler(static function (
-            int $errNo,
-            string $errStr,
-            string $errFile = '',
-            int $errLine = 0
-        ) use ($rescuer, &$result): void {
-            $rescuer and $result = $rescuer(new ErrorException($errStr, 0, $errNo, $errFile, $errLine));
-        });
-
-        // set_exception_handler(static function (\Throwable $throwable) use ($rescuer, &$result): void {
-        //     $rescuer and $result = $rescuer($throwable);
-        // });
-
-        try {
-            $result = $callback();
-        } catch (Throwable $throwable) {
-            $rescuer and $result = $rescuer($throwable);
-        } finally {
-            restore_error_handler();
-        }
-
-        return $result;
     }
 }
 

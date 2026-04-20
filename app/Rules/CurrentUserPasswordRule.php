@@ -20,6 +20,8 @@ final class CurrentUserPasswordRule extends AbstractRule
     #[\Override]
     public function passes(string $attribute, mixed $value): bool
     {
-        return Hash::check($value, auth()->user()?->getAuthPassword());
+        $authPassword = auth()->user()?->getAuthPassword();
+
+        return $authPassword && Hash::check($value, $authPassword);
     }
 }

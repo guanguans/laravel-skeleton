@@ -23,9 +23,7 @@ use App\Console\Commands\IdeHelperChoresCommand;
 use App\Console\Commands\InitCommand;
 use App\Console\Commands\MigrateFromMysqlToSqlite;
 use App\Http\Controllers\Api\AuthController;
-use App\Jobs\Middleware\EnsureTokenIsValid;
 use App\Jobs\Middleware\RateLimitedForJob;
-use App\Listeners\AuthSubscriber;
 use App\Listeners\ContextSubscriber;
 use App\Listeners\PrepareRequestListener;
 use App\Listeners\RunCommandInDebugModeListener;
@@ -48,12 +46,10 @@ arch()
     ->skip()
     ->preset()->laravel()->ignoring([
         AuthController::class,
-        AuthSubscriber::class,
         BaseModel::class,
         CloseServerSentEventException::class,
         Command::class,
         ContextSubscriber::class,
-        EnsureTokenIsValid::class,
         InitCommand::class,
         MigrateFromMysqlToSqlite::class,
         PrepareRequestListener::class,

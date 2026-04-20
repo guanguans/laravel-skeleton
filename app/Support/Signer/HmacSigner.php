@@ -40,7 +40,7 @@ final readonly class HmacSigner implements SignerContract
     }
 
     /**
-     * @see \simple_http_build_query()
+     * @see \App\Support\Signer\Utils::simpleHttpBuildQuery()
      */
     private function hashingDataFor(array $payload): string
     {

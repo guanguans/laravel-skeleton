@@ -117,9 +117,6 @@ abstract class AbstractRule implements ValidationRule
      */
     protected function replace(string $attribute, mixed $value): array
     {
-        return [
-            'attribute' => $attribute,
-            'value' => $value,
-        ];
+        return ['attribute' => $attribute, 'value' => $value];
     }
 }

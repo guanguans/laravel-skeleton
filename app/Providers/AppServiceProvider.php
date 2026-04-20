@@ -29,8 +29,6 @@ final class AppServiceProvider extends ServiceProvider
     #[\Override]
     public function register(): void
     {
-        // $this->registerMixins();
-        // $this->registerProviders();
         $this->booting(function (): void {
             $this->registerMixins();
             $this->registerProviders();
@@ -40,10 +38,8 @@ final class AppServiceProvider extends ServiceProvider
     private function registerMixins(): void
     {
         classes(
-            static fn (
-                string $class,
-                string $file
-            ): bool => str($class)->is('App\\Support\\Mixin\\*') && str($file)->is('*/../../app/Support/Mixin/*')
+            static fn (string $class, string $file): bool => str($class)->is('App\\Support\\Mixin\\*')
+                && str($file)->is('*/../../app/Support/Mixin/*')
         )
             // ->keys()
             // ->dd()
@@ -61,17 +57,11 @@ final class AppServiceProvider extends ServiceProvider
     private function registerProviders(): void
     {
         classes(
-            static fn (
-                string $class,
-                string $file
-            ): bool => str($class)->is('App\\Providers\\*') && str($file)->is('*/../../app/Providers/*')
+            static fn (string $class, string $file): bool => str($class)->is('App\\Providers\\*')
+                && str($file)->is('*/../../app/Providers/*')
         )
             // ->keys()
             // ->dd()
-            ->each(
-                fn (\ReflectionClass $reflectionClass): ServiceProvider => $this->app->register(
-                    $reflectionClass->getName()
-                )
-            );
+            ->each(fn (\ReflectionClass $reflectionClass): ServiceProvider => $this->app->register($reflectionClass->getName()));
     }
 }

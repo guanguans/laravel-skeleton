@@ -48,7 +48,6 @@ use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php82\Rector\Param\AddSensitiveParameterAttributeRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\Renaming\Rector\Name\RenameClassRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\Transform\Rector\String_\StringToClassConstantRector;
@@ -228,9 +227,6 @@ return RectorConfig::configure()
         RemoveUnusedPublicMethodParameterRector::class => [
             __DIR__.'/app/Listeners/',
             __DIR__.'/app/Observers/UserObserver.php',
-        ],
-        RenameClassRector::class => [
-            __DIR__.'/app/Console/Commands/FindDumpStatementCommand.php',
         ],
         RenamePropertyToMatchTypeRector::class => [
             __DIR__.'/app/Support/VarDumper/ServerDumper.php',

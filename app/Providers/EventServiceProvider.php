@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Listeners\AuthSubscriber;
 use App\Listeners\ContextSubscriber;
 use App\Observers\UserObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -43,7 +42,6 @@ final class EventServiceProvider extends ServiceProvider
     /** {@inheritDoc} */
     #[\Override]
     protected $subscribe = [
-        AuthSubscriber::class,
         ContextSubscriber::class,
     ];
 
