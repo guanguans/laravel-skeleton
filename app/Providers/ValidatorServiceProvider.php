@@ -34,6 +34,10 @@ final class ValidatorServiceProvider extends ServiceProvider
         $this->never();
     }
 
+    /**
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
     private function ever(): void
     {
         $this->whenever(true, function (): void {
@@ -62,6 +66,10 @@ final class ValidatorServiceProvider extends ServiceProvider
             ));
     }
 
+    /**
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
     private function extendValidator(): void
     {
         classes(

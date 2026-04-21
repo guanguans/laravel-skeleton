@@ -28,9 +28,6 @@ final readonly class VerifyUserAbility
 {
     use WithPipeArgs;
 
-    /**
-     * @noinspection SensitiveParameterInspection
-     */
     public function __construct(private Guard $guard) {}
 
     /**

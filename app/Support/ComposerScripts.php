@@ -87,7 +87,6 @@ final class ComposerScripts
 
                     foreach (file($readme) as $lineNumber => $line) {
                         /** @noinspection NotOptimalIfConditionsInspection */
-                        /** @noinspection OffsetOperationsInspection */
                         if (
                             $line !== $translatedReadmeFile[$lineNumber]
                             && str($line)->trim()->isNotEmpty()
@@ -140,7 +139,6 @@ final class ComposerScripts
                             ])
                             && !str($translatedReadmeFile[$lineNumber])->startsWith(str($line)->before(' ')->append(' '))
                         ) {
-                            /** @noinspection OffsetOperationsInspection */
                             $event->getIO()->writeErrorRaw([$line, $translatedReadmeFile[$lineNumber]]);
 
                             return Error::create(\sprintf(

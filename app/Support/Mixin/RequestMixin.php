@@ -125,7 +125,7 @@ final class RequestMixin
 
             $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
 
-            [$fallbacks, $routes] = collect($routes)->partition(static fn (Route $route) => $route->isFallback);
+            [$fallbacks, $routes] = collect($routes)->partition(static fn (Route $route) => $route->isFallback)->all();
 
             \assert($routes instanceof Collection);
 

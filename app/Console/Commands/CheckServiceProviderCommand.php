@@ -122,6 +122,10 @@ final class CheckServiceProviderCommand extends Command
         return 0;
     }
 
+    /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->except = [...$this->except, ...$this->option('except')];

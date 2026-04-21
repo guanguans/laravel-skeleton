@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpLackOfCohesionInspection */
-
 declare(strict_types=1);
 
 /**
@@ -93,7 +91,11 @@ final class ServerSentEvent implements \Stringable
      * @noinspection PropertyAnnotationInspection
      */
     private $tapper;
-    private bool $headersSent = false;
+    private bool $headersSent = false {
+        get {
+            return $this->headersSent;
+        }
+    }
 
     /** @var list<callable(self): void> */
     private array $beforeCallbacks = [];
@@ -193,11 +195,6 @@ final class ServerSentEvent implements \Stringable
         };
 
         return $this;
-    }
-
-    public function isHeadersSent(): bool
-    {
-        return $this->headersSent;
     }
 
     public function getEvent(): null|string|\Stringable

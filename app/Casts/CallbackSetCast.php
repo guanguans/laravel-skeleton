@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
 final class CallbackSetCast extends CallbackGetCast
 {
     /**
+     * @throws \Throwable
+     *
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]

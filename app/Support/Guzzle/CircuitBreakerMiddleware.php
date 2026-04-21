@@ -26,7 +26,11 @@ final class CircuitBreakerMiddleware
 {
     use Conditionable;
     use Tappable;
-    private Ganesha $ganesha;
+    private Ganesha $ganesha {
+        get {
+            return $this->ganesha;
+        }
+    }
 
     public function __construct(
         array $configuration = [],
@@ -58,16 +62,7 @@ final class CircuitBreakerMiddleware
     public function __invoke(callable $handler): \Closure
     {
         // @throws \Ackintosh\Ganesha\Exception\RejectedException
-        return (new GuzzleMiddleware(
-            $this->ganesha,
-            $this->serviceNameExtractor,
-            $this->failureDetector
-        ))($handler);
-    }
-
-    public function getGanesha(): Ganesha
-    {
-        return $this->ganesha;
+        return new GuzzleMiddleware($this->ganesha, $this->serviceNameExtractor, $this->failureDetector)($handler);
     }
 
     public function setServiceNameExtractor(?ServiceNameExtractorInterface $serviceNameExtractor): self

@@ -41,6 +41,6 @@ final class ImeiRule extends AbstractRule
 
         $sum = array_sum($log) * 9; // Sum log & multiply by 9
 
-        return Str::endsWith($sum, $imeiLast);
+        return Str::endsWith((string) $sum, $imeiLast);
     }
 }

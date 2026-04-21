@@ -38,9 +38,6 @@ final class ClassHandleMethodRector extends AbstractRector implements Documented
 
     /**
      * @throws \Symplify\RuleDocGenerator\Exception\PoorDocumentationException
-     * @throws \Symplify\RuleDocGenerator\Exception\ShouldNotHappenException
-     *
-     * @noinspection OverrideMissingInspection
      */
     public function getRuleDefinition(): RuleDefinition
     {

@@ -45,7 +45,7 @@ final class IdeHelperChoresCommand extends Command
     }
 
     /**
-     * @noinspection PhpMemberCanBePulledUpInspection
+     * @throws \ReflectionException
      */
     public function handle(): void
     {
@@ -96,6 +96,10 @@ final class IdeHelperChoresCommand extends Command
         ];
     }
 
+    /**
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
     private function ruleChore(): void
     {
         classes(
@@ -117,9 +121,6 @@ final class IdeHelperChoresCommand extends Command
             ->tap(fn (Collection $rules) => $this->output($rules));
     }
 
-    /**
-     * @noinspection DebugFunctionUsageInspection
-     */
     private function output(Collection $chore): void
     {
         $trace = collect(debug_backtrace())->first(

@@ -544,9 +544,7 @@ app/
 |       |   |-- AskForPassword.php
 |       |   |-- Graceful.php
 |       |   `-- Rescuer.php
-|       |-- FindDumpStatementCommand.php
 |       |-- FindStaticMethodsCommand.php
-|       |-- GenerateSitemapCommand.php
 |       |-- HealthCheckCommand.php
 |       |-- IdeHelperChoresCommand.php
 |       |-- InflectorCommand.php
@@ -611,16 +609,11 @@ app/
 |       `-- UserResource.php
 |-- Jobs/
 |   |-- Middleware/
-|   |   |-- EnsureTokenIsValid.php
 |   |   `-- RateLimitedForJob.php
 |   `-- SendThirdPartyRequestJob.php
 |-- Listeners/
-|   |-- AuthSubscriber.php
 |   |-- CollectGarbageListener.php
 |   |-- ContextSubscriber.php
-|   |-- LogMailListener.php
-|   |-- MaintenanceModeDisabledNotificationListener.php
-|   |-- MaintenanceModeEnabledNotificationListener.php
 |   |-- PrepareRequestListener.php
 |   |-- RecordRequestIdentifiersListener.php
 |   |-- RunCommandInDebugModeListener.php
@@ -647,12 +640,10 @@ app/
 |   |-- Example.php
 |   |-- HttpLog.php
 |   |-- JWTUser.php
-|   |-- Movie.php
 |   |-- PersonalAccessToken.php
 |   |-- Pivots/
 |   |   |-- MorphPivotWithCreatorPivot.php
 |   |   `-- PivotWithCreatorPivot.php
-|   |-- Province.php
 |   `-- User.php
 |-- Notifications/
 |   |-- SlowQueryLoggedNotification.php
@@ -754,8 +745,7 @@ app/
 |   |   `-- PushDeer.php
 |   |-- ComposerScripts.php
 |   |-- Console/
-|   |   |-- ProgressBarFactory.php
-|   |   `-- SymfonyStyleFactory.php
+|   |   `-- ProgressBarFactory.php
 |   |-- Contract/
 |   |   |-- BitEncoderContract.php
 |   |   `-- SignerContract.php
@@ -827,11 +817,6 @@ app/
 |   |   |-- SetStateable.php
 |   |   |-- Singletonable.php
 |   |   `-- WithPipeArgs.php
-|   |-- Valinor/
-|   |   |-- Converter/
-|   |   |   `-- SnakeCaseToCamelCaseConverter.php
-|   |   `-- Transformer/
-|   |       `-- CamelToSnakeCaseTransformer.php
 |   |-- VarDumper/
 |   |   `-- ServerDumper.php
 |   `-- helpers.php
@@ -843,7 +828,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-58 directories, 261 files
+55 directories, 249 files
 
 ```
 

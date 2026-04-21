@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection ParameterImplicitlyNullableInspection */
+
 /** @noinspection PhpFullyQualifiedNameUsageInspection */
 
 declare(strict_types=1);

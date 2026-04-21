@@ -29,7 +29,6 @@ final class CollectionMixin
     /**
      * @see \Illuminate\Support\Traits\EnumeratesValues::fromJson()
      *
-     * @noinspection JsonEncodingApiUsageInspection
      * @noinspection PhpMethodParametersCountMismatchInspection
      */
     public static function fromJson(): \Closure

@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -33,8 +31,6 @@ final class UpdateReadmeCommand extends Command
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     *
-     * @noinspection PhpMemberCanBePulledUpInspection
      */
     public function handle(): void
     {

@@ -55,6 +55,9 @@ final class HealthCheckCommand extends Command implements Isolatable
     private array $only = [];
     private array $except = [];
 
+    /**
+     * @throws \ReflectionException
+     */
     public function handle(): void
     {
         collect(new \ReflectionObject($this)->getMethods(\ReflectionMethod::IS_PRIVATE))
@@ -102,6 +105,7 @@ final class HealthCheckCommand extends Command implements Isolatable
     /**
      * @noinspection PhpMissingParentCallCommonInspection
      */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->only = [...$this->only, ...$this->option('only')];

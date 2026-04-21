@@ -44,8 +44,6 @@ final class AutowiredServiceProvider extends ServiceProvider
 
     /**
      * @see https://github.com/spring-projects/spring-framework/blob/main/spring-beans/src/main/java/org/springframework/beans/factory/annotation/Autowired.java
-     *
-     * @noinspection PhpExpressionResultUnusedInspection
      */
     private function autowire(): void
     {

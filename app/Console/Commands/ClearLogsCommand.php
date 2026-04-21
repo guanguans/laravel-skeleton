@@ -26,9 +26,6 @@ final class ClearLogsCommand extends Command
     #[\Override]
     protected $description = 'Clear logs';
 
-    /**
-     * @noinspection PhpMemberCanBePulledUpInspection
-     */
     public function handle(): void
     {
         $files = array_keys(iterator_to_array(

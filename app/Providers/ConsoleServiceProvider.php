@@ -31,7 +31,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputOption;
-use Webmozart\Assert\Assert;
 
 /**
  * @property \Symfony\Component\EventDispatcher\EventDispatcherInterface $symfonyDispatcher

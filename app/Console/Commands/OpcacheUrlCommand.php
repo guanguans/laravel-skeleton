@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -33,9 +31,6 @@ final class OpcacheUrlCommand extends Command
     #[\Override]
     protected $description = 'Show OPCache URL';
 
-    /**
-     * @noinspection PhpMemberCanBePulledUpInspection
-     */
     /**
      * @throws \Illuminate\Http\Client\ConnectionException
      */

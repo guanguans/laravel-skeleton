@@ -26,9 +26,6 @@ final class ChunkUploadController extends Controller
      * @see https://www.youtube.com/watch?v=Me3-o57Cprc
      *
      * @throws \Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException
-     *
-     * @noinspection NativeMemberUsageInspection
-     * @noinspection PhpRedundantVariableDocTypeInspection
      */
     public function __invoke(Request $request): JsonResponse
     {

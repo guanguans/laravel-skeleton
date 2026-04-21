@@ -35,6 +35,10 @@ final class AppServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
     private function registerMixins(): void
     {
         classes(
@@ -54,6 +58,10 @@ final class AppServiceProvider extends ServiceProvider
             });
     }
 
+    /**
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
     private function registerProviders(): void
     {
         classes(

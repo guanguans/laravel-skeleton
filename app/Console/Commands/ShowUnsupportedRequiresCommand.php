@@ -86,11 +86,11 @@ final class ShowUnsupportedRequiresCommand extends Command
             ->dump()
             ->tap(static fn (Collection $packages) => str($packages->implode(' '))->dump())
             ->groupBy(static function (string $name) use ($requires): string {
-                if (\array_key_exists($name, $requires->get('require'))) {
+                if (\array_key_exists($name, (array) $requires->get('require'))) {
                     return 'require';
                 }
 
-                if (\array_key_exists($name, $requires->get('require-dev'))) {
+                if (\array_key_exists($name, (array) $requires->get('require-dev'))) {
                     return 'require-dev';
                 }
 
@@ -103,6 +103,7 @@ final class ShowUnsupportedRequiresCommand extends Command
      * @noinspection MethodVisibilityInspection
      * @noinspection PhpMissingParentCallCommonInspection
      */
+    #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->packagistClient = new PackagistClient(
@@ -116,6 +117,7 @@ final class ShowUnsupportedRequiresCommand extends Command
     /**
      * @return array<string, string>
      */
+    #[\Override]
     protected function rules(): array
     {
         return [
@@ -128,6 +130,8 @@ final class ShowUnsupportedRequiresCommand extends Command
 
     /**
      * @return array<string, string>
+     *
+     * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]
     protected function messages(): array

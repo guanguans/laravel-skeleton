@@ -39,9 +39,6 @@ final class TraceEventListener
             file_put_contents($file, Carbon::now()->format("Y-m-d H:i:s\n\n"));
         }
 
-        /**
-         * @noinspection DebugFunctionUsageInspection
-         */
         $trace = collect(debug_backtrace())
             ->filter(
                 static fn (array $trace): bool => isset($trace['file'], $trace['line'])

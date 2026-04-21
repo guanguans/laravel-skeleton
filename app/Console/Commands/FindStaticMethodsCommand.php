@@ -43,9 +43,8 @@ final class FindStaticMethodsCommand extends Command
     protected $description = 'Find static methods';
 
     /**
+     * @throws \ErrorException
      * @throws \ReflectionException
-     *
-     * @noinspection PhpMemberCanBePulledUpInspection
      */
     public function handle(): void
     {
@@ -62,6 +61,7 @@ final class FindStaticMethodsCommand extends Command
     }
 
     /**
+     * @throws \ErrorException
      * @throws \ReflectionException
      */
     private function findStaticMethods(): void
