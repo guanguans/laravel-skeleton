@@ -28,6 +28,7 @@ use function Illuminate\Filesystem\join_paths;
 
 final class ShowUnsupportedRequiresCommand extends Command
 {
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = <<<'EOF'
         show-unsupported-requires
@@ -36,6 +37,7 @@ final class ShowUnsupportedRequiresCommand extends Command
         {--major-version=13 : The minimum major version of the package is required.}
         EOF;
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Show unsupported requires.';
     private PackagistClient $packagistClient;

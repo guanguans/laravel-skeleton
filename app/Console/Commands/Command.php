@@ -20,9 +20,11 @@ use App\Console\Commands\Concerns\Rescuer;
 use Cerbero\CommandValidator\ValidatesInput;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Console\Prohibitable;
-use PerryvanderMeer\LaravelConsoleValidator\ValidatesArguments;
 use Symfony\Component\Console\Command\LockableTrait;
 
+/**
+ * @see https://github.com/PerryvanderMeer/laravel-console-validator
+ */
 abstract class Command extends \Illuminate\Console\Command
 {
     // use Prohibitable;

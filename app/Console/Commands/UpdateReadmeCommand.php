@@ -23,9 +23,11 @@ use Symfony\Component\Process\ExecutableFinder;
 
 final class UpdateReadmeCommand extends Command
 {
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'readme:update {path? : The path of readme}';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Update readme';
 

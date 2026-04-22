@@ -20,9 +20,11 @@ use Symfony\Component\Finder\SplFileInfo;
 
 final class ClearLogsCommand extends Command
 {
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'clear:logs {days=30 : The number of days to keep}';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Clear logs';
 
@@ -30,9 +32,11 @@ final class ClearLogsCommand extends Command
     {
         $files = array_keys(iterator_to_array(
             Finder::create()
-                ->in(storage_path('logs'))
-                ->ignoreDotFiles(true)
+                ->in(storage_path('logs/'))
+                ->ignoreDotFiles(false)
+                ->ignoreUnreadableDirs(false)
                 ->ignoreVCS(true)
+                ->ignoreVCSIgnored(false)
                 ->name('*.log')
                 ->filter(function (SplFileInfo $fileInfo): bool {
                     $isDaily = preg_match('/^.*-\d{4}-\d{2}-\d{2}.log$/', $fileInfo->getBasename());
@@ -46,7 +50,7 @@ final class ClearLogsCommand extends Command
                 ->files()
         ));
 
-        $this->output->listing($files);
+        $this->components->bulletList($files);
         File::delete($files);
     }
 

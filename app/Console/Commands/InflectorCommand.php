@@ -22,9 +22,11 @@ final class InflectorCommand extends Command
 {
     use ForwardsCalls;
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'inflector {phrase? : The word or phrase to be inflected}';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Inflector pluralizes and singularizes English nouns.';
 

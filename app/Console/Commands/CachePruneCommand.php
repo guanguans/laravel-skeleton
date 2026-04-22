@@ -26,9 +26,11 @@ use Illuminate\Support\Facades\DB;
  */
 final class CachePruneCommand extends Command
 {
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'cache:prune';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Prune expired cache entries from the database cache store';
 
@@ -42,12 +44,9 @@ final class CachePruneCommand extends Command
             return;
         }
 
-        $table = Config::get('cache.stores.database.table', 'cache');
-
-        $deleted = DB::table($table)
+        $deleted = DB::table(Config::get('cache.stores.database.table', 'cache'))
             ->where('expiration', '<=', Date::now()->getTimestamp())
             ->delete();
-
         $this->components->info("Successfully pruned $deleted expired cache entries from the database.");
     }
 }

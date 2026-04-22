@@ -23,9 +23,11 @@ use Symfony\Component\Process\ExecutableFinder;
 
 final class OptimizeAllCommand extends Command
 {
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'optimize:all {--f|force : Force optimize.}';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Optimize all.';
 

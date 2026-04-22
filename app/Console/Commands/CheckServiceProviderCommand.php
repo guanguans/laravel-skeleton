@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PropertyCanBeStaticInspection */
+
 declare(strict_types=1);
 
 /**
@@ -20,6 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class CheckServiceProviderCommand extends Command
 {
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = <<<'SIGNATURE'
         check:service-provider
@@ -27,6 +30,7 @@ final class CheckServiceProviderCommand extends Command
         {--r|reset : Reset the composer dont-discover}
         SIGNATURE;
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Check service providers and ensure they are correctly registered.';
 
@@ -103,10 +107,9 @@ final class CheckServiceProviderCommand extends Command
                     %s
                     WARN,
                 $shouldntDiscoverPackages->keys()->pipe(
-                    $piper = static fn (Collection $collection) => $collection
-                        ->sort()
-                        ->values()
-                        ->toJson(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES)
+                    $piper = static fn (Collection $collection) => $collection->sort()->values()->toJson(
+                        \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES
+                    )
                 ),
                 $shouldntDiscoverPackages->pluck('providers')->flatten()->pipe($piper),
                 $indirectDiscoveredPackages->pipe($piper),

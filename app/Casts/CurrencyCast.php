@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
 final readonly class CurrencyCast implements CastsAttributes
 {
     /**
+     * @param int<0, 8> $digits
+     *
      * @throws \Throwable
      */
     public function __construct(private int $digits = 2)

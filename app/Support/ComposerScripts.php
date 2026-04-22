@@ -19,16 +19,30 @@ use Composer\Script\Event;
 use GrahamCampbell\ResultType\Error;
 use GrahamCampbell\ResultType\Result;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Console\OutputStyle;
+use Illuminate\Console\View\Components\Factory;
+use Illuminate\Database\Schema\Builder;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Traits\EnumeratesValues;
+use Illuminate\Support\Traits\Macroable;
+use PHPUnit\Framework\Assert;
 use Rector\Config\RectorConfig;
 use Rector\DependencyInjection\LazyContainerFactory;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use function Laravel\Prompts\select;
 
 /**
  * @see https://github.com/laravel/framework/blob/12.x/src/Illuminate/Foundation/ComposerScripts.php
@@ -46,6 +60,91 @@ final class ComposerScripts
      * @see \PhpCsFixer\Utils
      */
     private function __construct() {}
+
+    public static function findStaticMethods(Event $event): int
+    {
+        self::requireAutoload($event);
+        \Illuminate\Foundation\Application::configure(basePath: \dirname(__DIR__, 2))->create();
+
+        classes(
+            static fn (string $class): bool => str($class)->is([
+                'Illuminate\\*',
+            ]) && !str($class)->is([
+                // Arr::class,
+                // Number::class,
+                // Str::class,
+                Carbon::class,
+                OutputStyle::class,
+            ]) && !collect([
+                // Model::class,
+                // Connection::class,
+                // Relation::class,
+                Builder::class,
+            ])->contains(static fn (string $exceptClass): bool => is_subclass_of($class, $exceptClass))
+        )
+            ->reject(
+                static fn (\ReflectionClass $reflectionClass): bool => $reflectionClass->isInterface()
+                    || ($reflectionClass->isInstantiable() && !$reflectionClass->getConstructor())
+            )
+            ->map(
+                static fn (\ReflectionClass $reflectionClass) => collect($reflectionClass->getMethods(\ReflectionMethod::IS_STATIC))
+                    ->filter(
+                        static fn (\ReflectionMethod $reflectionMethod): bool => $reflectionMethod->isPublic()
+                            && !str($reflectionMethod->getName())->is(
+                                collect([
+                                    Assert::class,
+                                    Dispatchable::class,
+                                    Enumerable::class,
+                                    EnumeratesValues::class,
+                                    Facade::class,
+                                    Macroable::class,
+                                    ServiceProvider::class,
+                                    SymfonyCommand::class,
+                                ])->flatMap(
+                                    static fn (string $exceptClass) => collect(new \ReflectionClass($exceptClass)->getMethods(\ReflectionMethod::IS_STATIC))
+                                        ->map(static fn (\ReflectionMethod $reflectionMethod): string => $reflectionMethod->getName())
+                                )
+                            )
+                    )
+            )
+            ->filter(static fn (Collection $methods) => $methods->isNotEmpty())
+            ->pipe(static function (Collection $allMethods): Collection {
+                $module = select(
+                    label: 'Please select Module',
+                    options: $allMethods
+                        ->groupBy(static fn (Collection $methods, string $class) => str($class)->explode('\\')->get(1))
+                        ->keys(),
+                    scroll: 15,
+                );
+
+                return $allMethods->filter(
+                    static fn (Collection $methods, string $class) => str($class)->contains($module)
+                );
+            })
+            // ->dump()
+            ->each(function (Collection $methods, string $class) use ($event): void {
+                // $this->newLine();
+                $event->getIO()->info('');
+                $components = new Factory((fn () => $this->output)->call($event->getIO()));
+                $components->twoColumnDetail(
+                    "<info>$class</info>",
+                    str(new \ReflectionClass($class)->getFileName())->chopStart(base_path(\DIRECTORY_SEPARATOR))
+                );
+
+                $methods->each(function (\ReflectionMethod $reflectionMethod) use ($components): void {
+                    $components->twoColumnDetail(
+                        $reflectionMethod->getName(),
+                        str($reflectionMethod->getFileName())
+                            ->chopStart(base_path(\DIRECTORY_SEPARATOR))
+                            ->append(':', $reflectionMethod->getStartLine())
+                    );
+                });
+            });
+
+        $event->getIO()->info('No errors');
+
+        return 0;
+    }
 
     public static function lintReadme(Event $event): int
     {

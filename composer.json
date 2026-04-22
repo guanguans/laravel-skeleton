@@ -459,6 +459,7 @@
             "@artisan jwt:secret --force"
         ],
         "app:lint-readme": "App\\Support\\ComposerScripts::lintReadme",
+        "app:find-static-methods": "App\\Support\\ComposerScripts::findStaticMethods",
         "app:parse-phpdoc": "Guanguans\\RectorRules\\Support\\ComposerScripts::parsePhpdoc",
         "argtyper": "@php vendor/bin/argtyper --ansi -vv",
         "argtyper:add-types": "@argtyper add-types .",

@@ -24,12 +24,15 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
     use ConfirmableTrait;
     use Prohibitable;
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'clear:all {--f|force : Force clear optimized.}';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $aliases = ['ca'];
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'clear optimized all.';
 
@@ -38,7 +41,7 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
         /**
          * @see \Illuminate\Database\Console\Migrations\RefreshCommand
          */
-        if (/* $this->isProhibited() || */ !$this->confirmToProceed()) {
+        if ($this->isProhibited() || !$this->confirmToProceed()) {
             return self::FAILURE;
         }
 
@@ -54,17 +57,16 @@ final class ClearAllCommand extends Command implements Isolatable, PromptsForMis
         \function_exists('opcache_invalidate') and opcache_invalidate(app()->getCachedConfigPath());
 
         $this->output->success('✅ All cleared.');
+
+        // $this->output->error('❌ All cleared.');
         // $this->output->info('ℹ️ All cleared.');
         // $this->output->info('⏳ Please wait...');
-        // $this->output->warning('⚠️ All cleared.');
-        // $this->output->error('❌ All cleared.');
         // $this->output->success('✅ All cleared.');
-
+        // $this->output->warning('⚠️ All cleared.');
         // $this->fail('❌ Whoops! looks like something went wrong.');
-
         // $this->trap([\SIGTERM, \SIGQUIT], function (int $signal): void {
         //     $this->shouldKeepRunning = false;
-        //     dump($signal);
+        //     $this->info($signal);
         // });
 
         return self::SUCCESS;

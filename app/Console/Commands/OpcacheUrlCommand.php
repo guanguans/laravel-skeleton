@@ -25,9 +25,11 @@ use function Illuminate\Filesystem\join_paths;
 final class OpcacheUrlCommand extends Command
 {
     // use CreatesRequest;
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'opcache:url {route=compile} {--force}';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Show OPCache URL';
 

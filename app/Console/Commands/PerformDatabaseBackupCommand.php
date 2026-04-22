@@ -21,9 +21,11 @@ use Illuminate\Support\Facades\File;
  */
 final class PerformDatabaseBackupCommand extends Command
 {
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'perform:database-backup';
 
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Perform a database backup.';
 
