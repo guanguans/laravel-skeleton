@@ -20,7 +20,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
-use Webmozart\Assert\Assert;
 
 /**
  * @see https://github.com/pinkary-project/pinkary.com
@@ -33,6 +32,7 @@ final readonly class EnsureVerifiedEmailsForSignInUsers
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @noinspection RedundantDocCommentTagInspection
+     * @noinspection LaravelUnknownRouteNameInspection
      */
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {
@@ -41,7 +41,7 @@ final readonly class EnsureVerifiedEmailsForSignInUsers
         }
 
         // $user = type($request->user())->as(User::class);
-        Assert::isInstanceOf($user = $request->user(), User::class);
+        \assert(($user = $request->user()) instanceof User);
 
         if ($user->hasVerifiedEmail()) {
             return $next($request);

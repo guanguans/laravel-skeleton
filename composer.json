@@ -11,9 +11,7 @@
         "php": "^8.5",
         "ackintosh/ganesha": "^4.0",
         "cerbero/command-validator": "^3.0",
-        "cerbero/enum": "^2.3",
         "clue/stream-filter": "^1.7",
-        "elao/enum": "^3.0",
         "elasticsearch/elasticsearch": "^9.3",
         "guanguans/laravel-api-response": "^4.0",
         "guanguans/laravel-exception-notify": "^7.0",
@@ -23,7 +21,7 @@
         "laravel/pennant": "^1.23",
         "laravel/sanctum": "^4.3",
         "laravel/tinker": "^3.0",
-        "overtrue/laravel-uploader": "dev-master",
+        "overtrue/laravel-uploader": "^3.4",
         "php-open-source-saver/jwt-auth": "^2.9",
         "spatie/laravel-schemaless-attributes": "^2.6",
         "spatie/packagist-api": "^2.1",
@@ -452,6 +450,7 @@
             "@php artisan migrate --graceful --ansi -vv"
         ],
         "actionlint": "actionlint -ignore=SC2035 -ignore=SC2046 -ignore=SC2086 -color -oneline -verbose",
+        "app:find-static-methods": "App\\Support\\ComposerScripts::findStaticMethods",
         "app:fix-neon": "Guanguans\\PHPStanRules\\Support\\ComposerScripts::fixNeon",
         "app:generate-gitleaks-ignore": "Guanguans\\Notify\\Foundation\\Support\\ComposerScripts::generateGitleaksIgnore",
         "app:install-project": [
@@ -459,7 +458,6 @@
             "@artisan jwt:secret --force"
         ],
         "app:lint-readme": "App\\Support\\ComposerScripts::lintReadme",
-        "app:find-static-methods": "App\\Support\\ComposerScripts::findStaticMethods",
         "app:parse-phpdoc": "Guanguans\\RectorRules\\Support\\ComposerScripts::parsePhpdoc",
         "argtyper": "@php vendor/bin/argtyper --ansi -vv",
         "argtyper:add-types": "@argtyper add-types .",

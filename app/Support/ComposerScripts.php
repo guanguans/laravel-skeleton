@@ -75,12 +75,12 @@ final class ComposerScripts
                 // Str::class,
                 Carbon::class,
                 OutputStyle::class,
-            ]) && !collect([
+            ]) && collect([
                 // Model::class,
                 // Connection::class,
                 // Relation::class,
                 Builder::class,
-            ])->contains(static fn (string $exceptClass): bool => is_subclass_of($class, $exceptClass))
+            ])->doesntContain(static fn (string $exceptClass): bool => is_subclass_of($class, $exceptClass))
         )
             ->reject(
                 static fn (\ReflectionClass $reflectionClass): bool => $reflectionClass->isInterface()
@@ -125,14 +125,14 @@ final class ComposerScripts
             ->each(function (Collection $methods, string $class) use ($event): void {
                 // $this->newLine();
                 $event->getIO()->info('');
-                $components = new Factory((fn () => $this->output)->call($event->getIO()));
-                $components->twoColumnDetail(
+                $factory = new Factory((fn () => $this->output)->call($event->getIO()));
+                $factory->twoColumnDetail(
                     "<info>$class</info>",
                     str(new \ReflectionClass($class)->getFileName())->chopStart(base_path(\DIRECTORY_SEPARATOR))
                 );
 
-                $methods->each(function (\ReflectionMethod $reflectionMethod) use ($components): void {
-                    $components->twoColumnDetail(
+                $methods->each(static function (\ReflectionMethod $reflectionMethod) use ($factory): void {
+                    $factory->twoColumnDetail(
                         $reflectionMethod->getName(),
                         str($reflectionMethod->getFileName())
                             ->chopStart(base_path(\DIRECTORY_SEPARATOR))

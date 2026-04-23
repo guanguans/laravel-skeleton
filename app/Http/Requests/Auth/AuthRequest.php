@@ -20,8 +20,7 @@ final class AuthRequest extends FormRequest
 {
     public function rules(): array
     {
-        $this->is('api/v1/auth/login');
-
+        // $this->is('api/v1/auth/login');
         return match (true) {
             $this->routeIs('auth.register') => [
                 'email' => 'required|email|unique:App\Models\JWTUser,email',

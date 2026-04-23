@@ -123,8 +123,8 @@ final class ShowUnsupportedRequiresCommand extends Command
     protected function rules(): array
     {
         return [
-            'package' => 'array',
-            // 'package.*' => 'nullable|string|contains:/',
+            'package' => 'list',
+            // 'package.*' => 'string|contains:/',
             'major-version' => 'integer|min:0',
             'cwd' => 'nullable|string|callback:is_dir',
         ];
@@ -143,6 +143,9 @@ final class ShowUnsupportedRequiresCommand extends Command
         ];
     }
 
+    /**
+     * @noinspection CallableParameterUseCaseInTypeContextInspection
+     */
     private function isUnsupported(string $name, string $version): bool
     {
         if (!str($name)->is($this->option('package') ?: ['laravel/framework', 'illuminate/*'])) {
@@ -159,9 +162,7 @@ final class ShowUnsupportedRequiresCommand extends Command
             ->filter()
             ->map(
                 static fn (string $version): ?string => str($version)
-                    ->trim(" \n\r\t\v\0<=>^~v!.*")
-                    ->explode('.')
-                    ->first()
+                    ->trim(" \n\r\t\v\0<=>^~v!.*")->explode('.')->first()
             )
             ->max();
 

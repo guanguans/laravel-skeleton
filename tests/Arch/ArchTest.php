@@ -20,8 +20,7 @@ declare(strict_types=1);
 
 use App\Console\Commands\Command;
 use App\Console\Commands\IdeHelperChoresCommand;
-use App\Console\Commands\InitCommand;
-use App\Console\Commands\MigrateFromMysqlToSqlite;
+use App\Console\Commands\ReferenceCommand;
 use App\Http\Controllers\Api\AuthController;
 use App\Jobs\Middleware\RateLimitedForJob;
 use App\Listeners\ContextSubscriber;
@@ -50,8 +49,7 @@ arch()
         CloseServerSentEventException::class,
         Command::class,
         ContextSubscriber::class,
-        InitCommand::class,
-        MigrateFromMysqlToSqlite::class,
+        ReferenceCommand::class,
         PrepareRequestListener::class,
         RateLimitedForJob::class,
         RunCommandInDebugModeListener::class,

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\BadRequestHttpException;
 use App\Support\Trait\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -40,9 +39,9 @@ final class VerifyJsonContent
         $acceptHeader = $request->header('accept');
         $contentType = 'application/json';
 
-        throw_unless(
+        abort_unless(
             str_contains($acceptHeader, $contentType),
-            BadRequestHttpException::class,
+            SymfonyResponse::HTTP_BAD_REQUEST,
             'Your request must contain [Accept = application/json].'
         );
 

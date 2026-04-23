@@ -32,25 +32,28 @@ final class Cors
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      *
+     * ```
+     * \App\Http\Middleware\Cors::with('*.foo.com|*.bar.com');
+     * ```
+     *
      * @noinspection RedundantDocCommentTagInspection
      */
     public function handle(Request $request, \Closure $next, string $allowedOriginPatterns = '*'): SymfonyResponse
     {
-        return tap($next($request), static function () use ($allowedOriginPatterns): void {
-            if (class_exists(RequestHandled::class) && app()->bound('events')) {
-                app()->make(Dispatcher::class)->listen(
-                    RequestHandled::class,
-                    static function (RequestHandled $event) use ($allowedOriginPatterns): void {
-                        /**
-                         * 仅设置 `Access-Control-Allow-Origin`， 其他由 @see \Illuminate\Http\Middleware\HandleCors 处理。
-                         * 跨域访问的时候才会存在 `HTTP_ORIGIN` 字段。
-                         */
-                        Str::is(explode('|', $allowedOriginPatterns), $origin = $event->request->server('HTTP_ORIGIN', ''))
-                            ? $event->response->headers->set('Access-Control-Allow-Origin', $origin)
-                            : $event->response->headers->remove('Access-Control-Allow-Origin');
-                    }
-                );
-            }
-        });
+        return tap(
+            $next($request),
+            static fn (): null => app()->make(Dispatcher::class)->listen(
+                RequestHandled::class,
+                /**
+                 * 仅设置 `Access-Control-Allow-Origin`， 其他由 @see \Illuminate\Http\Middleware\HandleCors 处理。
+                 * 跨域访问的时候才会存在 `HTTP_ORIGIN` 字段。
+                 */
+                static function (RequestHandled $requestHandled) use ($allowedOriginPatterns): void {
+                    Str::is(explode('|', $allowedOriginPatterns), $origin = $requestHandled->request->server('HTTP_ORIGIN'))
+                        ? $requestHandled->response->headers->set('Access-Control-Allow-Origin', $origin)
+                        : $requestHandled->response->headers->remove('Access-Control-Allow-Origin');
+                }
+            )
+        );
     }
 }

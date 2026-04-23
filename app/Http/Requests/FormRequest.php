@@ -24,6 +24,8 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
      * 指示验证是否应在第一个规则失败后停止。
      *
      * @var bool
+     *
+     * @noinspection ClassOverridesFieldOfSuperClassInspection
      */
     #[\Override]
     protected $stopOnFirstFailure = true;
@@ -61,12 +63,16 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         return $this->call(__FUNCTION__, \func_get_args(), $this->createDefaultValidator($factory));
     }
 
+    /**
+     * @noinspection MissingParentCallInspection
+     */
     #[\Override]
     protected function failedValidation(Validator $validator): void
     {
         $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
+    #[\Override]
     protected function failedAuthorization(): void
     {
         $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
@@ -105,7 +111,10 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 
     protected function call(string $method, array $args = [], mixed $default = null): mixed
     {
-        if (method_exists($this, $actionMethod = $this->route()?->getActionMethod().ucfirst($method))) {
+        if (
+            ($rawActionMethod = $this->route()?->getActionMethod())
+            && method_exists($this, $actionMethod = $rawActionMethod.ucfirst($method))
+        ) {
             return $this->{$actionMethod}(...$args);
         }
 

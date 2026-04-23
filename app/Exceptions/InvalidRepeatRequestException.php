@@ -13,22 +13,18 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
-final class InvalidRepeatRequestException extends AccessDeniedHttpException
+final class InvalidRepeatRequestException extends ConflictHttpException
 {
     /**
+     * @see https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Status
      * @see self::fromStatusCode()
      *
      * @noinspection SensitiveParameterInspection
      */
     public function __construct(string $message = '', ?\Throwable $previous = null, int $code = 0, array $headers = [])
     {
-        parent::__construct(
-            $message ?: 'Invalid Repeat Request',
-            $previous,
-            $code,
-            $headers
-        );
+        parent::__construct($message ?: 'Invalid Repeat Request', $previous, $code, $headers);
     }
 }

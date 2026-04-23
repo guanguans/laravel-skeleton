@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Appstract\Opcache\CreatesRequest;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Client\Request;
@@ -24,7 +23,6 @@ use function Illuminate\Filesystem\join_paths;
 
 final class OpcacheUrlCommand extends Command
 {
-    // use CreatesRequest;
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $signature = 'opcache:url {route=compile} {--force}';
@@ -40,13 +38,13 @@ final class OpcacheUrlCommand extends Command
     {
         $preventStrayRequests = Http::preventingStrayRequests();
         Http::preventStrayRequests();
-
         $this->sendRequest($this->argument('route'), ['force' => $this->option('force')]);
-
         Http::preventStrayRequests($preventStrayRequests);
     }
 
     /**
+     * @see https://github.com/appstract/laravel-opcache/blob/master/src/CreatesRequest.php
+     *
      * @param array<string, mixed> $parameters
      *
      * @throws \Illuminate\Http\Client\ConnectionException
@@ -59,27 +57,12 @@ final class OpcacheUrlCommand extends Command
             ltrim($url, '/')
         );
 
-        Http::fake([
-            "$baseUri?key=*" => Http::response(),
-        ]);
+        Http::fake(["$baseUri?key=*" => Http::response()]);
 
         return Http::withHeaders(config('opcache.headers', []))
             ->withOptions([RequestOptions::VERIFY => config('opcache.verify', false)])
-            ->retry(0)
-            ->beforeSending(function (Request $request): void {
-                static $isPrinted = false;
-
-                if ($isPrinted) {
-                    return;
-                }
-
-                $this->line($request->url());
-                $isPrinted = true;
-            })
-            ->get(
-                $baseUri,
-                ['key' => Crypt::encrypt('opcache'), ...$parameters]
-            );
+            ->beforeSending(fn (Request $request): null => $this->newLine()->line($request->url()))
+            ->get($baseUri, ['key' => Crypt::encrypt('opcache'), ...$parameters]);
     }
 
     /**

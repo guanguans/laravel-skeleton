@@ -59,7 +59,10 @@ final class CommandMixin
         ): Process {
             $process = $this->processHelperRun($cmd, $error, $callback, $verbosity, $output);
             \assert($process instanceof Process);
-            throw_unless($process->isSuccessful(), ProcessFailedException::class, $process);
+
+            if (!$process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
 
             return $process;
         };

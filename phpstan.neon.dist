@@ -201,7 +201,7 @@ parameters:
         - identifier: shipmonk.iteratorToArrayWithoutPreserveKeys
         - identifier: shipmonk.nonNormalizedType
         - identifier: shipmonk.variableTypeOverwritten
-        - identifier: symplify.classNameRespectsParentSuffix
+#        - identifier: symplify.classNameRespectsParentSuffix
         - identifier: symplify.explicitAbstractPrefixName
         - identifier: symplify.explicitInterfaceSuffixName
         - identifier: symplify.explicitTraitSuffixName
@@ -273,7 +273,7 @@ parameters:
 
 
 
-        - identifier: argument.unresolvableType
+#        - identifier: argument.unresolvableType
         - identifier: arrayFilter.strict
         - identifier: callable.nonCallable
         - identifier: class.notFound
@@ -305,7 +305,7 @@ parameters:
         - identifier: staticMethod.dynamicName
         - identifier: symplify.requireAttributeName
         - identifier: throws.notThrowable
-        - identifier: variable.undefined
+#        - identifier: variable.undefined
         - identifier: nullCoalesce.variable
         - identifier: staticMethod.notFound
 

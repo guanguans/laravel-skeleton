@@ -20,12 +20,8 @@ final class PingController extends Controller
 {
     public function __invoke(Request $request, bool $bad = false): JsonResponse
     {
-        $validatedParameters = $request->validate(['bad' => 'bool']) + ['bad' => $bad];
+        $validated = $request->validate(['bad' => 'bool']) + ['bad' => $bad];
 
-        if ($validatedParameters['bad']) {
-            return $this->apiResponse()->badRequest();
-        }
-
-        return $this->apiResponse()->ok();
+        return $validated['bad'] ? $this->apiResponse()->badRequest() : $this->apiResponse()->ok();
     }
 }

@@ -24,21 +24,21 @@ abstract class CurdController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        return $this->apiResponse()->success(
+        return $this->apiResponse()->ok(
             $this->modelClass::query()->simplePaginate($request->query('per_page'))
         );
     }
 
     public function store(Request $request): JsonResponse
     {
-        return $this->apiResponse()->success(
+        return $this->apiResponse()->ok(
             $this->modelClass::query()->create($request->post())
         );
     }
 
     public function show(int $id): JsonResponse
     {
-        return $this->apiResponse()->success($this->findModel($id));
+        return $this->apiResponse()->ok($this->findModel($id));
     }
 
     /**
@@ -49,14 +49,17 @@ abstract class CurdController extends Controller
         $model = $this->findModel($id);
         $model->updateOrFail($request->post());
 
-        return $this->apiResponse()->success($model);
+        return $this->apiResponse()->ok($model);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function destroy(int $id): JsonResponse
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id)->deleteOrFail();
 
-        return $this->apiResponse()->ok();
+        return $this->apiResponse()->noContent();
     }
 
     protected function findModel(int $id, array $columns = ['*']): Model

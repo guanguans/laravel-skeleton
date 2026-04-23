@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpUnusedPrivateMethodInspection */
 declare(strict_types=1);
 
 /**
@@ -76,7 +77,6 @@ final class HealthCheckCommand extends Command implements Isolatable
                     ->setProcessTitle('Health checking...')
                     ->withProgressBar($methods, function (\ReflectionMethod $method) use (&$checks): void {
                         $result = $this->{$method->name}();
-
                         \assert($result instanceof Result);
 
                         $checks[] = [
@@ -164,7 +164,6 @@ final class HealthCheckCommand extends Command implements Isolatable
                     ->transform(static fn (string $checkedSqlMode) => str($checkedSqlMode)->lower())
                     ->diff($sqlModes)
             );
-
         \assert($diffSqlModes instanceof Collection);
 
         if ($diffSqlModes->isNotEmpty()) {
@@ -207,7 +206,7 @@ final class HealthCheckCommand extends Command implements Isolatable
     private function checkPing(?string $url = null): Result
     {
         try {
-            $response = Http::get($url ?: config('app.url'));
+            $response = Http::connectTimeout(5)->timeout(10)->get($url ?: config('app.url'));
 
             if ($response->serverError()) {
                 // return Error::create("Could not connect to the application: `{$response->body()}`");
@@ -232,7 +231,6 @@ final class HealthCheckCommand extends Command implements Isolatable
             ),
             collect()
         );
-
         \assert($missingExtensions instanceof Collection);
 
         if ($missingExtensions->isNotEmpty()) {
@@ -253,6 +251,9 @@ final class HealthCheckCommand extends Command implements Isolatable
         return $this->createSuccessResult();
     }
 
+    /**
+     * @noinspection PhpSameParameterValueInspection
+     */
     private function checkDiskSpace(int $limit = 100): Result
     {
         $freeSpace = disk_free_space(base_path());

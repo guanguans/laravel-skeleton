@@ -25,13 +25,17 @@ use Illuminate\Routing\Controllers\Middleware;
 /**
  * @see https://github.com/laravel/laravel/blob/9.x/app/Http/Controllers/Controller.php
  * @see https://github.com/laravel/laravel/blob/10.x/app/Http/Controllers/Controller.php
+ * @see https://github.com/laravel/laravel/blob/11.x/app/Http/Controllers/Controller.php
  */
-class Controller extends BaseController // implements HasMiddleware
+class Controller extends BaseController /* implements HasMiddleware */
 {
     use AuthorizesRequests;
     use DispatchesJobs;
     use ValidatesRequests;
 
+    // /**
+    //  * @see \Illuminate\Routing\Route::controllerMiddleware()
+    //  */
     // public static function middleware(): array
     // {
     //     return [

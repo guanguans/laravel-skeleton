@@ -21,7 +21,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
- * @see https://github.com/laravelio/laravel.io
+ * @see https://github.com/laravelio/laravel.io/blob/main/app/Http/Middleware/DisableFloc.php
  */
 final class DisableFloc
 {

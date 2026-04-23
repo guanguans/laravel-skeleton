@@ -32,6 +32,7 @@ final class VerifySignature
 
     /**
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
+     * @param non-empty-string $secret
      *
      * @throws \Throwable
      *
@@ -41,7 +42,7 @@ final class VerifySignature
         Request $request,
         \Closure $next,
         #[\SensitiveParameter]
-        string $secret = '',
+        string $secret,
         int $effectiveTime = 60,
         bool $checkRepeatRequest = true
     ): SymfonyResponse {
@@ -92,7 +93,8 @@ final class VerifySignature
             InvalidRepeatRequestException::class
         );
 
-        // Cache::put($signature, $request->fingerprint(), $effectiveTime);
+        // Cache::put($signature, $signature);
+        // Cache::put($signature, $request->fingerprint(), $effectiveTime * 60);
         Cache::put($signature, spl_object_hash($request), $effectiveTime * 60);
     }
 }

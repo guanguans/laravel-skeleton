@@ -23,7 +23,6 @@ final class IndexRequest extends FormRequest
     public function authorize(): bool
     {
         // return $this->user()->can('viewAny', JWTUser::class);
-
         return true;
     }
 

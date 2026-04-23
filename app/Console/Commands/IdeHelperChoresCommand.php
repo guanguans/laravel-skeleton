@@ -125,11 +125,7 @@ final class IdeHelperChoresCommand extends Command
     {
         $trace = collect(debug_backtrace())->first(
             static function (array $trace): bool {
-                $trace += [
-                    'class' => null,
-                    'type' => null,
-                    'function' => null,
-                ];
+                $trace += ['class' => null, 'type' => null, 'function' => null];
 
                 return self::class === $trace['class']
                     && '->' === $trace['type']

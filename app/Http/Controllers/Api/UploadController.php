@@ -15,6 +15,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Overtrue\LaravelUploader\StrategyResolver;
 
 final class UploadController extends Controller
@@ -22,8 +23,8 @@ final class UploadController extends Controller
     public function __invoke(string $strategy, Request $request): JsonResponse
     {
         $response = StrategyResolver::resolveFromRequest($request, $strategy)->upload()->toArray();
-        // unset($response['url'], $response['disk'], $response['location']);
+        // Arr::except($response, ['url', 'disk', 'location']);
 
-        return $this->apiResponse()->success($response);
+        return $this->apiResponse()->ok($response);
     }
 }

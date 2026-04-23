@@ -33,50 +33,25 @@ final class InflectorCommand extends Command
     public function handle(): void
     {
         collect()
-            ->pipe(function () {
+            ->tap(function () use (&$phrase): void {
                 while (blank($phrase = $this->argument('phrase'))) {
                     if (filled($phrase = $this->ask('Please enter a phrase to inflect.'))) {
                         break;
                     }
                 }
-
-                $type = $this->choice(
-                    'Please choose the inflector type',
-                    $types = [
-                        'all',
-                        'Laravel:plural',
-                        'Laravel:singular',
-                        'Symfony:pluralize',
-                        'Symfony:singularize',
-                    ],
-                    'all'
-                );
-
-                return collect('all' === $type ? \array_slice($types, 1) : [$type])
-                    ->reduce(
-                        fn (Collection $results, string $type) => $results->add([
-                            'type' => $type,
-                            'result' => str($type)
-                                ->explode(':', 2)
-                                ->pipe(
-                                    fn (Collection $parts): mixed => \is_array($result = $this->forwardCallTo(
-                                        resolve(
-                                            [
-                                                'Laravel' => Pluralizer::class,
-                                                'Symfony' => EnglishInflector::class,
-                                            ][(string) $parts->first()]
-                                        ),
-                                        $parts->last(),
-                                        [$phrase]
-                                    )) ? implode('、', $result) : $result
-                                ),
-                        ]),
-                        collect()
-                    );
             })
-            ->tap(function (Collection $results): void {
-                $this->table(['Type', 'Result'], $results->toArray());
-            });
+            ->pipe(
+                static fn (): Collection => collect([
+                    'Laravel:plural' => Pluralizer::plural(...),
+                    'Laravel:singular' => Pluralizer::singular(...),
+                    'Symfony:pluralize' => (new EnglishInflector)->pluralize(...),
+                    'Symfony:singularize' => (new EnglishInflector)->singularize(...),
+                ])->map(static fn (callable $callback, string $type): array => [
+                    'type' => $type,
+                    'result' => collect($callback($phrase))->implode('、'),
+                ])
+            )
+            ->tap(fn (Collection $results) => $this->table(['Type', 'Result'], $results));
     }
 
     /**

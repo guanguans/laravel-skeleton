@@ -52,7 +52,8 @@ final class BasicAuthentication
      */
     private function validateCredentials(array $credentials): bool
     {
-        // throw new RuntimeException('Not implemented');
+        // For demonstration purposes, we will simply check if the credentials are not empty.
+        // In a real application, you would typically check the credentials against a database or another data source.
         return (bool) $credentials;
     }
 }

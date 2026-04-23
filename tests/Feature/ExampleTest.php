@@ -22,15 +22,12 @@ use App\Console\Commands\CachePruneCommand;
 use App\Console\Commands\CheckServiceProviderCommand;
 use App\Console\Commands\ClearAllCommand;
 use App\Console\Commands\ClearLogsCommand;
-use App\Console\Commands\FindStaticMethodsCommand;
 use App\Console\Commands\HealthCheckCommand;
 use App\Console\Commands\IdeHelperChoresCommand;
 use App\Console\Commands\InflectorCommand;
-use App\Console\Commands\InitCommand;
-use App\Console\Commands\MigrateFromMysqlToSqlite;
 use App\Console\Commands\OpcacheUrlCommand;
 use App\Console\Commands\OptimizeAllCommand;
-use App\Console\Commands\PerformDatabaseBackupCommand;
+use App\Console\Commands\ReferenceCommand;
 use App\Console\Commands\ShowUnsupportedRequiresCommand;
 use App\Console\Commands\UpdateReadmeCommand;
 use Illuminate\Foundation\Console\RouteListCommand;
@@ -79,11 +76,9 @@ it('is console', function (): void {
     )
         ->filter(fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
         ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([
-            FindStaticMethodsCommand::class,
             IdeHelperChoresCommand::class,
             InflectorCommand::class,
-            InitCommand::class,
-            MigrateFromMysqlToSqlite::class,
+            ReferenceCommand::class,
             OptimizeAllCommand::class,
 
             // CachePruneCommand::class,
@@ -92,7 +87,6 @@ it('is console', function (): void {
             // ClearLogsCommand::class,
             // HealthCheckCommand::class,
             // OpcacheUrlCommand::class,
-            PerformDatabaseBackupCommand::class,
             ShowUnsupportedRequiresCommand::class,
             // UpdateReadmeCommand::class,
         ]))

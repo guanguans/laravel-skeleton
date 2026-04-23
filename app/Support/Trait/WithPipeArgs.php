@@ -16,7 +16,7 @@ namespace App\Support\Trait;
 /**
  * @see \Guanguans\LaravelApiResponse\Support\Traits\WithPipeArgs
  * @see \Guanguans\LaravelExceptionNotify\Support\Traits\WithPipeArgs
- * @see \TiMacDonald\Middleware\HasParameters
+ * @see https://github.com/timacdonald/has-parameters
  */
 trait WithPipeArgs
 {

@@ -13,20 +13,19 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use Cerbero\Enum\Concerns\Enumerates;
-use Elao\Enum\ExtrasTrait;
-use Elao\Enum\ReadableEnumTrait;
-use EmreYarligan\EnumConcern\EnumConcern;
-
 /**
+ * @see https://github.com/cerbero90/enum
+ * @see https://github.com/Elao/PhpEnums
+ * @see https://github.com/emreyarligan/enum-concern
  * @see https://masteringlaravel.io/daily/2024-10-14-a-use-case-for-the-value-of-phpdoc-type
+ * @see https://github.com/anisAronno/laravel-starter/blob/develop/app/Helpers/CacheKey.php
  */
 enum ConfigurationKey: string
 {
     // use EnumConcern;
-    use Enumerates;
-    use ExtrasTrait;
-    use ReadableEnumTrait;
+    // use Enumerates;
+    // use ExtrasTrait;
+    // use ReadableEnumTrait;
     case Daily = 'daily';
     case Weekly = 'weekly';
     case Monthly = 'monthly';

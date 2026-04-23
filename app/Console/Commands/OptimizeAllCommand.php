@@ -15,11 +15,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Application;
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\ExecutableFinder;
 
 final class OptimizeAllCommand extends Command
 {
@@ -44,14 +41,7 @@ final class OptimizeAllCommand extends Command
 
         $this->components->info('Optimizing all...');
 
-        foreach (
-            [
-                'config:cache',
-                'event:cache',
-                'route:cache',
-                'view:cache',
-            ] as $command
-        ) {
+        foreach (['config:cache', 'event:cache', 'route:cache', 'view:cache'] as $command) {
             try {
                 $this->components->task($command, fn () => $this->call($command, ['--ansi' => true, '-v' => true]));
             } catch (\Throwable $throwable) {
@@ -61,18 +51,13 @@ final class OptimizeAllCommand extends Command
         }
 
         try {
-            $command = \sprintf(
-                '%s %s dump-autoload --no-interaction --optimize --ansi -v',
-                (new ExecutableFinder)->find('php8.1') ?: Application::phpBinary(),
-                (new ExecutableFinder)->find('composer2')
-                    ?: (new ExecutableFinder)->find('composer')
-                    ?: implode(' ', resolve(Composer::class)->findComposer()),
-            );
+            $command = [
+                ...resolve(Composer::class)->findComposer(),
+                'dump-autoload', '--no-interaction', '--optimize', '--ansi', '-v',
+            ];
 
-            $this->components->task($command, fn () => $this->processHelperMustRun(
-                cmd: $command,
-                // verbosity: OutputInterface::VERBOSITY_NORMAL
-            ));
+            // $this->components->task('composer:dump-autoload-optimize', fn () => resolve(Composer::class)->dumpOptimized());
+            $this->components->task(implode(' ', $command), fn () => $this->processHelperMustRun($command));
         } catch (\Throwable $throwable) {
             $this->components->error($throwable->getMessage());
         }

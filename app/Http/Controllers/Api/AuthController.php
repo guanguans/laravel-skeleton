@@ -25,6 +25,7 @@ use App\Notifications\WelcomeNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Defer\DeferredCallback;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Timebox;
@@ -45,7 +46,7 @@ final class AuthController extends Controller
             ->appends([])
             ->withQueryString();
 
-        return $this->apiResponse()->success(UserCollection::make($paginator));
+        return $this->apiResponse()->ok(UserCollection::make($paginator));
     }
 
     public function register(Request $request): JsonResponse
@@ -56,22 +57,18 @@ final class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required|same:password',
         ]);
-
         $validated['name'] = fake()->name();
 
         JWTUser::query()->create(Arr::except($validated, 'password_confirmation'));
-
         $token = auth()->attempt($validated);
         \assert(\is_string($token));
 
         return tap(
-            $this->apiResponse()->success(JWTUser::wrapToken($token)),
-            static function (): void {
-                defer(static function (): void {
-                    // Mail::to($user)->queue(new UserRegisteredMail);
-                    // $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
-                });
-            }
+            $this->apiResponse()->ok(JWTUser::wrapToken($token)),
+            static fn (): DeferredCallback => defer(static function (): void {
+                // Mail::to($user)->queue(new UserRegisteredMail);
+                // $user->notify((new WelcomeNotification)->delay(now()->addSeconds(60)));
+            })
         );
     }
 
@@ -102,11 +99,11 @@ final class AuthController extends Controller
         );
 
         if (!$token) {
-            return $this->apiResponse()->badRequest('邮箱或者密码错误');
+            return $this->apiResponse()->unprocessableEntity('邮箱或者密码错误');
         }
 
         return tap(
-            $this->apiResponse()->success(JWTUser::wrapToken($token)),
+            $this->apiResponse()->ok(JWTUser::wrapToken($token)),
             static function (): void {
                 // auth('web')->logoutOtherDevices(auth()->user()->password);
             }
@@ -115,21 +112,24 @@ final class AuthController extends Controller
 
     public function me(Request $request): JsonResponse
     {
-        return $this->apiResponse()->success(UserResource::make($request->user()));
+        return $this->apiResponse()->ok(UserResource::make($request->user()));
     }
 
+    /**
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     */
     public function refresh(Request $request): JsonResponse
     {
         if ($request->user()->cant('update', $request->user())) {
             return $this->apiResponse()->forbidden();
         }
 
-        return $this->apiResponse()->success(JWTUser::wrapToken(Auth::guard()->refresh()));
+        return $this->apiResponse()->ok(JWTUser::wrapToken(Auth::guard()->refresh()));
     }
 
     public function logout(): JsonResponse
     {
-        return tap($this->apiResponse()->ok('退出成功'), function (): void {
+        return tap($this->apiResponse()->noContent('退出成功'), function (): void {
             $this->authorize('update', auth()->user());
             // auth()->user()->currentAccessToken()->delete();
             // auth()->logoutCurrentDevice();

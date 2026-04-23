@@ -18,6 +18,7 @@
 
 ```shell
 composer actionlint
+composer app:find-static-methods
 composer app:fix-neon
 composer app:generate-gitleaks-ignore
 composer app:install-project
@@ -534,7 +535,6 @@ app/
 |   `-- CurrencyCast.php
 |-- Console/
 |   `-- Commands/
-|       |-- CachePruneCommand.php
 |       |-- CheckServiceProviderCommand.php
 |       |-- ClearAllCommand.php
 |       |-- ClearLogsCommand.php
@@ -543,22 +543,17 @@ app/
 |       |   |-- AskForPassword.php
 |       |   |-- Graceful.php
 |       |   `-- Rescuer.php
-|       |-- FindStaticMethodsCommand.php
 |       |-- HealthCheckCommand.php
 |       |-- IdeHelperChoresCommand.php
 |       |-- InflectorCommand.php
-|       |-- InitCommand.php
-|       |-- MigrateFromMysqlToSqlite.php
 |       |-- OpcacheUrlCommand.php
 |       |-- OptimizeAllCommand.php
-|       |-- PerformDatabaseBackupCommand.php
+|       |-- ReferenceCommand.php
 |       |-- ShowUnsupportedRequiresCommand.php
 |       `-- UpdateReadmeCommand.php
 |-- Enums/
-|   |-- CacheKeyEnum.php
 |   `-- ConfigurationKey.php
 |-- Exceptions/
-|   |-- BadRequestHttpException.php
 |   |-- InvalidRepeatRequestException.php
 |   `-- VerifyEmailException.php
 |-- Http/
@@ -827,7 +822,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-55 directories, 248 files
+55 directories, 242 files
 
 ```
 
