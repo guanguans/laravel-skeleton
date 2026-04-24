@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -13,7 +15,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Models\PersonalAccessToken;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
@@ -22,7 +23,6 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
@@ -30,7 +30,6 @@ use Laravel\Octane\Events\RequestReceived;
 use Laravel\Pennant\Middleware\EnsureFeaturesAreActive;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
-use Opcodes\LogViewer\Facades\LogViewer;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 final class PackageServiceProvider extends ServiceProvider
@@ -67,19 +66,12 @@ final class PackageServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, function (): void {
-            // Passport::enablePasswordGrant();
+            // Laravel\Passport\Passport::enablePasswordGrant();
+            // Sanctum::usePersonalAccessTokenModel(\App\Models\PersonalAccessToken::class);
+            // Opcodes\LogViewer\Facades\LogViewer::auth(static fn (): bool => request()->user()?->isDeveloper());
+            class_exists(Telescope::class) and Telescope::auth(static fn (): bool => request()->user()?->isDeveloper());
 
-            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
-
-            // LogViewer::auth(static fn (): bool => RequestFacade::user()?->isDeveloper());
-
-            if (class_exists(Telescope::class)) {
-                Telescope::auth(static fn (): bool => RequestFacade::user()?->isDeveloper());
-            }
-
-            /**
-             * @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php
-             */
+            /** @see https://github.com/AnimeThemes/animethemes-server/blob/main/app/Providers/AppServiceProvider.php */
             EnsureFeaturesAreActive::whenInactive(
                 static fn (Request $request, array $features): Response => new Response(status: SymfonyResponse::HTTP_FORBIDDEN)
             );
@@ -100,11 +92,8 @@ final class PackageServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * @noinspection GlobalVariableUsageInspection
-     */
     private function isOctaneHttpServer(): bool
     {
-        return isset($_SERVER['LARAVEL_OCTANE']) || Env::get('OCTANE_DATABASE_SESSION_TTL');
+        return request()->server->has('LARAVEL_OCTANE') || Env::get('OCTANE_DATABASE_SESSION_TTL');
     }
 }

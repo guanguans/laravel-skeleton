@@ -49,40 +49,25 @@ final class ConsoleServiceProvider extends ServiceProvider
     private function ever(): void
     {
         $this->whenever(true, function (): void {
-            AboutCommand::add('Application', [
-                'author' => 'guanguans',
-                'homepage' => 'https://github.com/guanguans/laravel-skeleton',
-                'name' => 'laravel-skeleton',
-            ]);
-
-            /**
-             * @see https://github.com/OussamaMater/Laravel-Tips#tip-266--the-new-optimizes-method
-             */
-            $this->optimizes(
-                optimize: 'filament:optimize',
-                key: 'filament'
-            );
-
-            ServerDumper::register();
-            Event::listen(ArtisanStarting::class, static function (ArtisanStarting $artisanStarting): void {});
-            Artisan::whenCommandLifecycleIsLongerThan(CarbonInterval::seconds(3), static function (): void {});
-            Application::starting(static function (Application $application): void {});
+            /** @see https://github.com/OussamaMater/Laravel-Tips#tip-266--the-new-optimizes-method */
+            $this->optimizes(optimize: 'filament:optimize', key: 'filament');
             $this->addDefaultInputDefinition();
-
-            $this->whenProduction();
+            Application::starting(static function (Application $application): void {});
+            Artisan::whenCommandLifecycleIsLongerThan(CarbonInterval::seconds(3), static function (): void {});
+            ClearAllCommand::prohibit($this->app->isProduction());
+            Event::listen(ArtisanStarting::class, static function (ArtisanStarting $artisanStarting): void {});
+            ServerDumper::register();
+            AboutCommand::add('Application', [
+                'Author' => 'guanguans',
+                'Homepage' => 'https://github.com/guanguans/laravel-skeleton',
+                'Name' => 'laravel-skeleton',
+            ]);
         });
     }
 
     private function never(): void
     {
         $this->whenever(false, static function (): void {});
-    }
-
-    private function whenProduction(): void
-    {
-        $this->whenever($this->app->isProduction(), static function (): void {
-            ClearAllCommand::prohibit();
-        });
     }
 
     /**
@@ -143,7 +128,6 @@ final class ConsoleServiceProvider extends ServiceProvider
                             ->mapWithKeys(static function (string $configuration): array {
                                 // Assert::contains($configuration, '=', "The configurable option [$configuration] must be formatted as key=value.");
                                 \assert(str_contains($configuration, '='), "The configurable option [$configuration] must be formatted as key=value.");
-
                                 [$key, $value] = str($configuration)->explode('=', 2)->all();
 
                                 return [$key => $value];

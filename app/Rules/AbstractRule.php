@@ -72,15 +72,9 @@ abstract class AbstractRule implements ValidationRule
      */
     public static function extendMethod(): string
     {
-        $ruleReflectionClass = new \ReflectionClass(static::class);
-
-        $implicit = $ruleReflectionClass->getDefaultProperties()['implicit'] ?? false;
-
-        if ($implicit) {
-            return 'extendImplicit';
-        }
-
-        return 'extend';
+        return (new \ReflectionClass(static::class)->getDefaultProperties()['implicit'] ?? false)
+            ? 'extendImplicit'
+            : 'extend';
     }
 
     protected static function fallbackMessage(): string

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\ParallelTesting;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Traits\Conditionable;
 
 final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
@@ -61,12 +62,14 @@ final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
     private function whenTesting(): void
     {
         $this->whenever($this->app->runningUnitTests(), function (): void {
-            Date::setTestNow();
-            Date::setTestNowAndTimezone();
             CarbonImmutable::setTestNow();
             CarbonImmutable::setTestNowAndTimezone();
+            Date::setTestNow();
+            Date::setTestNowAndTimezone();
             Http::preventStrayRequests();
             Mail::alwaysTo('example@example.com');
+            Mail::fake();
+            Queue::fake();
             ParallelTesting::setUpTestDatabase(static function (): void {
                 Artisan::call('db:seed');
             });
@@ -74,27 +77,32 @@ final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
         });
     }
 
+    /**
+     * @see \fake()
+     */
     private function extendFaker(): void
     {
         $this->app->resolving(static function (mixed $object): void {
-            if ($object instanceof Generator) {
-                $object->addProvider(
-                    new class {
-                        public function imageUrl(int $width = 640, int $height = 480): string
-                        {
-                            return \sprintf('https://placekitten.com/%d/%d', $width, $height);
-                        }
-
-                        /**
-                         * @param string $format string<'raw', 'full', 'small', 'thumb', 'regular', 'small_s3'>
-                         */
-                        public function imageRandomUrl(string $format = 'small'): string
-                        {
-                            return \sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
-                        }
-                    }
-                );
+            if (!$object instanceof Generator) {
+                return;
             }
+
+            $object->addProvider(
+                new class {
+                    public function imageUrl(int $width = 640, int $height = 480): string
+                    {
+                        return \sprintf('https://placekitten.com/%d/%d', $width, $height);
+                    }
+
+                    /**
+                     * @param string $format string<'raw', 'full', 'small', 'thumb', 'regular', 'small_s3'>
+                     */
+                    public function imageRandomUrl(string $format = 'small'): string
+                    {
+                        return \sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
+                    }
+                }
+            );
         });
     }
 }

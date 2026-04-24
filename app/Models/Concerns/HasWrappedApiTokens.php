@@ -34,18 +34,18 @@ trait HasWrappedApiTokens
         ];
     }
 
-    public static function getDevice(?string $userAgent = null): string
+    public function createWrappedPlainTextTokenWithoutName(array $abilities = ['*'], ?\DateTimeInterface $expiresAt = null): array
+    {
+        return self::wrapToken($this->createTokenWithoutName($abilities, $expiresAt)->plainTextToken);
+    }
+
+    public function createTokenWithoutName(array $abilities = ['*'], ?\DateTimeInterface $expiresAt = null): NewAccessToken
+    {
+        return $this->createToken(self::device(), $abilities, $expiresAt);
+    }
+
+    protected static function device(?string $userAgent = null): string
     {
         return Agent::device($userAgent) ?: 'unknown';
-    }
-
-    public function createTokenWithoutName(array $abilities = ['*']): NewAccessToken
-    {
-        return $this->createToken(self::getDevice(), $abilities);
-    }
-
-    public function createWrappedPlainTextTokenWithoutName(array $abilities = ['*']): array
-    {
-        return self::wrapToken($this->createTokenWithoutName($abilities)->plainTextToken);
     }
 }

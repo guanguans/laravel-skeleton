@@ -24,8 +24,7 @@
         "overtrue/laravel-uploader": "^3.4",
         "php-open-source-saver/jwt-auth": "^2.9",
         "spatie/laravel-schemaless-attributes": "^2.6",
-        "spatie/packagist-api": "^2.1",
-        "tightenco/parental": "^1.6"
+        "spatie/packagist-api": "^2.1"
     },
     "require-dev": {
         "adamwojs/php-cs-fixer-phpdoc-force-fqcn": "^2.0",

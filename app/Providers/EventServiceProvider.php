@@ -74,11 +74,9 @@ final class EventServiceProvider extends ServiceProvider
     {
         $this->whenever(false, static function (): void {
             Event::listen('*', static function (string $event, array $data): void {
-                if (MessageLogged::class === $event) {
-                    return;
+                if (MessageLogged::class !== $event) {
+                    Log::debug($event, $data);
                 }
-
-                Log::channel('daily-deprecations')->info($event, $data);
             });
         });
     }

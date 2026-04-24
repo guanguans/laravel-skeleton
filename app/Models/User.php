@@ -18,7 +18,7 @@ namespace App\Models;
 use App\Models\Concerns\SerializeDate;
 use App\Observers\UserObserver;
 use Database\Factories\UserFactory;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -27,14 +27,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Parental\HasChildren;
-use Watson\Validating\ValidatingTrait;
 
 #[ObservedBy(UserObserver::class)]
 #[UseFactory(UserFactory::class)]
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    // use HasChildren;
+    // use Parental\HasChildren;
+
     use HasApiTokens;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -42,7 +41,6 @@ class User extends Authenticatable
 
     use Notifiable;
     use SerializeDate;
-    // use ValidatingTrait;
 
     /** @var list<string> */
     #[\Override]
@@ -65,36 +63,29 @@ class User extends Authenticatable
         'password' => 'required|string',
     ];
 
-    /**
-     * @todo implement
-     */
     public function isAdmin(): bool
     {
-        return false;
+        // return (bool) $this->is_admin;
+        throw new \LogicException('Not implemented yet.');
     }
 
-    /**
-     * @todo implement
-     */
     public function isDeveloper(): bool
     {
-        return false;
+        // return str($this->name)->is(config('services.developer.names'))
+        //     && str($this->email)->is(config('services.developer.emails'));
+        throw new \LogicException('Not implemented yet.');
     }
 
-    /**
-     * @todo implement
-     */
     public function locale(): string
     {
-        return $this->locale ?? app()->currentLocale();
+        // return $this->locale ?? app()->currentLocale();
+        throw new \LogicException('Not implemented yet.');
     }
 
-    /**
-     * @todo implement
-     */
     public function timezone(): string
     {
-        return $this->timezone ?? config('app.timezone');
+        // return $this->timezone ?? config('app.timezone');
+        throw new \LogicException('Not implemented yet.');
     }
 
     #[Scope]

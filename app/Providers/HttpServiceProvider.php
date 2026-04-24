@@ -20,13 +20,11 @@ use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Foundation\Http\Events\RequestHandled;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,21 +54,16 @@ final class HttpServiceProvider extends ServiceProvider
                     PrepareRequestListener::X_REQUEST_ID => TRACE_ID,
                 ],
             ]);
-            // Http::globalMiddleware(
-            //     Middleware::log(Log::channel(), new MessageFormatter(MessageFormatter::DEBUG))
-            // );
+            Http::globalMiddleware(
+                Middleware::log(Log::channel('daily-http'), new MessageFormatter(MessageFormatter::DEBUG)),
+            );
 
+            request()->is('api/*') and request()->headers->set('Accept', 'application/json');
             Event::listen(RequestHandled::class, static function (RequestHandled $event): void {
                 if ($event->response instanceof JsonResponse) {
-                    $event->response->setEncodingOptions(
-                        $event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE
-                    );
+                    $event->response->setEncodingOptions($event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE);
                 }
             });
-
-            if (RequestFacade::is('api/*')) {
-                resolve(Request::class)->headers->set('Accept', 'application/json');
-            }
         });
     }
 

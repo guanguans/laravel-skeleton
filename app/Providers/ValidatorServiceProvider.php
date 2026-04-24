@@ -28,6 +28,10 @@ final class ValidatorServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
+    /**
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
     public function boot(): void
     {
         $this->ever();
@@ -53,22 +57,22 @@ final class ValidatorServiceProvider extends ServiceProvider
 
     private function defaultPassword(): void
     {
-        Password::defaults(fn (): Password => Password::min(8)
-            ->max(255)
-            ->when(
-                $this->app->isProduction(),
-                static fn (#[\SensitiveParameter] Password $password) => $password
-                    ->letters()
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-                    ->uncompromised()
-            ));
+        Password::defaults(fn (): Password => Password::min(8)->max(64)->when(
+            $this->app->isProduction(),
+            static fn (#[\SensitiveParameter] Password $password) => $password
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()
+        ));
     }
 
     /**
      * @throws \ErrorException
      * @throws \ReflectionException
+     *
+     * @noinspection PhpUndefinedMethodInspection
      */
     private function extendValidator(): void
     {
@@ -80,6 +84,7 @@ final class ValidatorServiceProvider extends ServiceProvider
                 static fn (\ReflectionClass $reflectionClass): bool => $reflectionClass->isSubclassOf(AbstractRule::class)
                     && $reflectionClass->isInstantiable()
             )
+            // ->keys()->dd()
             ->each(
                 /**
                  * @param \ReflectionClass<\App\Rules\AbstractRule> $ruleReflectionClass

@@ -615,7 +615,7 @@ app/
 |-- Mail/
 |   `-- UserRegisteredMail.php
 |-- Models/
-|   |-- BaseModel.php
+|   |-- Model.php
 |   |-- Concerns/
 |   |   |-- BelongsToCreator.php
 |   |   |-- CacheCleaner.php

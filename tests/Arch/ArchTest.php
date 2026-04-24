@@ -26,7 +26,7 @@ use App\Jobs\Middleware\RateLimitedForJob;
 use App\Listeners\ContextSubscriber;
 use App\Listeners\PrepareRequestListener;
 use App\Listeners\TraceEventListener;
-use App\Models\BaseModel;
+use App\Models\Model;
 use App\Support\Mixin\SchedulingEventMixin;
 use App\Support\Sse\CloseServerSentEventException;
 
@@ -44,13 +44,13 @@ arch()
     ->skip()
     ->preset()->laravel()->ignoring([
         AuthController::class,
-        BaseModel::class,
         CloseServerSentEventException::class,
         Command::class,
         ContextSubscriber::class,
-        ReferenceCommand::class,
+        Model::class,
         PrepareRequestListener::class,
         RateLimitedForJob::class,
+        ReferenceCommand::class,
         SchedulingEventMixin::class,
         TraceEventListener::class,
     ]);

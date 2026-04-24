@@ -45,7 +45,6 @@ trait ForceUseIndexable
 
         $raw = "`$table` ".implode(' ', $this->from);
 
-        // @var Builder $query
         return $query->from(DB::raw($raw));
     }
 
@@ -62,7 +61,6 @@ trait ForceUseIndexable
 
         $raw = "`$table` ".implode(' ', $this->from);
 
-        // @var Builder $query
         return $query->from(DB::raw($raw));
     }
 
@@ -79,7 +77,6 @@ trait ForceUseIndexable
 
         $raw = "`$table` ".implode(' ', $this->from);
 
-        // @var Builder $query
         return $query->from(DB::raw($raw));
     }
 

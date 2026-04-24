@@ -16,7 +16,6 @@ namespace App\Providers;
 use App\Models\JWTUser;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -48,10 +47,7 @@ final class RouteServiceProvider extends ServiceProvider
     {
         $this->whenever(true, function (): void {
             Route::pattern('id', '[0-9]+');
-            Route::patterns([
-                'id' => '[0-9]+',
-            ]);
-
+            Route::patterns(['id' => '[0-9]+']);
             $this->bindRouteModels();
         });
     }
@@ -59,16 +55,12 @@ final class RouteServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, static function (): void {
+            Config::set('session.secure', true);
+            request()->server->set('HTTPS', 'on');
+            request()->server->set('SERVER_PORT', 443);
             URL::forceHttps();
             URL::forceScheme('https');
-            resolve(Request::class)->server->set('HTTPS', 'on');
-            resolve(Request::class)->server->set('SERVER_PORT', 443);
-            Config::set('session.secure', true);
-
-            Route::resourceVerbs([
-                'create' => 'creator',
-                'edit' => 'editor',
-            ]);
+            Route::resourceVerbs(['create' => 'creator', 'edit' => 'editor']);
         });
     }
 

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Request;
 
 /**
  * @see https://github.com/Zakarialabib/myStockMaster/tree/master/app/Traits
@@ -24,20 +23,18 @@ use Illuminate\Support\Facades\Request;
 trait Trashed
 {
     /**
-     * Scope a query to get with transed or only transhed resource.
-     *
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * Scope a query to get with trashed or only trashed resource.
      */
     protected function scopeTrashed(Builder $query): Builder
     {
-        if (!empty(Request::getFacadeRoot()->get('trashed')) && Request::getFacadeRoot()->get('trashed') === 'with') {
-            return $query->withTrashed();
-        }
-
-        if (!empty(Request::getFacadeRoot()->get('trashed')) && Request::getFacadeRoot()->get('trashed') === 'only') {
-            return $query->onlyTrashed();
-        }
+        request()->whenFilled(
+            'trashed',
+            static fn (string $trashed): Builder => match ($trashed) {
+                'with' => $query->withTrashed(),
+                'only' => $query->onlyTrashed(),
+                default => $query,
+            }
+        );
 
         return $query;
     }

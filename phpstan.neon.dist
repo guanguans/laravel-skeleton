@@ -253,7 +253,7 @@ parameters:
         -
             identifier: new.static
             paths:
-                - app/Models/BaseModel.php
+                - app/Models/Model.php
                 - app/Rules/AbstractRule.php
         -
             messages:

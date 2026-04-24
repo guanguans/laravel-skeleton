@@ -33,7 +33,6 @@ trait SerializeDate
         // return $date->format($this->dateFormat ?: Carbon::DEFAULT_TO_STRING_FORMAT);
         // return $date->format('Y-m-d H:i:s.vP');
         // return $date->format('Y-m-d H:i:sP');
-
         return $date->inAppTimezone()->format($this->getDateFormat());
     }
 }

@@ -89,7 +89,8 @@ final class AutowiredServiceProvider extends ServiceProvider
                 \assert(\is_string($propertyType));
 
                 try {
-                    // $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
+                    /** @noinspection PhpExpressionResultUnusedInspection */
+                    \PHP_VERSION_ID >= 80100 or $reflectionProperty->isPublic() or $reflectionProperty->setAccessible(true);
                     $reflectionProperty->setValue($object, $app->make($propertyType, $autowired->parameters));
                 } catch (\Throwable $throwable) {
                     throw new \TypeError(

@@ -29,7 +29,7 @@ final class AppServiceProvider extends ServiceProvider
     #[\Override]
     public function register(): void
     {
-        $this->booting(function (): void {
+        $this->app->booting(function (): void {
             $this->registerMixins();
             $this->registerProviders();
         });
@@ -38,6 +38,8 @@ final class AppServiceProvider extends ServiceProvider
     /**
      * @throws \ErrorException
      * @throws \ReflectionException
+     *
+     * @noinspection PhpAccessStaticViaInstanceInspection
      */
     private function registerMixins(): void
     {
@@ -45,14 +47,11 @@ final class AppServiceProvider extends ServiceProvider
             static fn (string $class, string $file): bool => str($class)->is('App\\Support\\Mixin\\*')
                 && str($file)->is('*/../../app/Support/Mixin/*')
         )
-            // ->keys()
-            // ->dd()
+            // ->keys()->dd()
             ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
                 foreach ($mixinReflectionClass->getAttributes(Mixin::class) as $mixinReflectionAttribute) {
                     $mixinAttribute = $mixinReflectionAttribute->newInstance();
                     \assert($mixinAttribute instanceof Mixin);
-
-                    /** @noinspection PhpAccessStaticViaInstanceInspection */
                     $mixinAttribute->class::mixin(resolve($mixinClass), $mixinAttribute->replace);
                 }
             });
@@ -68,8 +67,7 @@ final class AppServiceProvider extends ServiceProvider
             static fn (string $class, string $file): bool => str($class)->is('App\\Providers\\*')
                 && str($file)->is('*/../../app/Providers/*')
         )
-            // ->keys()
-            // ->dd()
+            // ->keys()->dd()
             ->each(fn (\ReflectionClass $reflectionClass): ServiceProvider => $this->app->register($reflectionClass->getName()));
     }
 }

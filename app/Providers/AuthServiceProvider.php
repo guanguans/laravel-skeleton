@@ -42,6 +42,9 @@ final class AuthServiceProvider extends ServiceProvider
         $this->never();
     }
 
+    /**
+     * @noinspection LaravelUnknownRouteNameInspection
+     */
     private function ever(): void
     {
         $this->whenever(true, function (): void {
@@ -61,51 +64,37 @@ final class AuthServiceProvider extends ServiceProvider
     /**
      * @see https://github.com/koel/koel/blob/master/app/Providers/AuthServiceProvider.php
      * @see https://github.com/nandi95/laravel-starter/blob/main/app/Providers/AppServiceProvider.php
+     *
+     * @noinspection LaravelUnknownRouteNameInspection
      */
     private function createUrlUsings(): void
     {
-        ResetPassword::createUrlUsing(static function (User $user, #[\SensitiveParameter] string $token): string {
-            $payload = base64_encode("{$user->getEmailForPasswordReset()}|$token");
-
-            return url("/#/reset-password/$payload");
-        });
-
-        ResetPassword::createUrlUsing(
-            static fn (
-                User $user,
-                #[\SensitiveParameter]
-                string $token
-            ): string => url("/#/auth/reset/$token?email={$user->getEmailForPasswordReset()}")
-        );
-
-        VerifyEmail::createUrlUsing(static function (User $user): string {
-            $url = url()->temporarySignedRoute(
+        ResetPassword::createUrlUsing(static fn (User $user, #[\SensitiveParameter] string $token): string => url(
+            \sprintf('/#/reset-password/%s', base64_encode("{$user->getEmailForPasswordReset()}|$token"))
+        ));
+        ResetPassword::createUrlUsing(static fn (User $user, #[\SensitiveParameter] string $token): string => url(
+            "/#/auth/reset/$token?email={$user->getEmailForPasswordReset()}"
+        ));
+        VerifyEmail::createUrlUsing(static fn (User $user): string => url(\sprintf(
+            '/#/auth/verify?verify_url=%s',
+            urlencode(url()->temporarySignedRoute(
                 'email.verify',
                 now()->addMinutes(config('auth.verification.expire', 60)),
                 ['user' => $user->id],
                 false
-            );
-
-            return url('/#/auth/verify?verify_url='.urlencode($url));
-        });
+            ))
+        )));
     }
 
     /**
      * Intercept any Gate and check if it's super admin, Or if you use some permissions package...
-     *
-     * @noinspection PhpUnusedParameterInspection
      */
     private function gateBefore(): void
     {
-        Gate::before(static function (User $user, string $ability): ?true {
-            if (
-                $user->isAdmin()
-                // || $user->hasPermission('root')
-            ) {
-                return true;
-            }
-
-            return null;
-        });
+        Gate::before(
+            static fn (User $user, string $ability): ?true => $user->isAdmin() /* || $user->hasPermission('root') */
+                ? true
+                : null
+        );
     }
 }

@@ -35,11 +35,7 @@ class Policy
      */
     public function before(JWTUser $user): ?bool
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
-
-        return null;
+        return $user->isAdmin() ? true : null;
     }
 
     /**
@@ -47,10 +43,6 @@ class Policy
      */
     public function after(JWTUser $user): ?bool
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
-
-        return null;
+        return $user->isAdmin() ? true : null;
     }
 }

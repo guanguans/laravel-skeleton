@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Parental\HasParent;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
+#[Table('users')]
 final class JWTUser extends User implements JWTSubject
 {
-    use HasParent;
+    // use Parental\HasParent;
 
     public function getJWTIdentifier(): mixed
     {
@@ -35,6 +36,7 @@ final class JWTUser extends User implements JWTSubject
 
     /**
      * @see https://laravel-jwt-auth.readthedocs.io/en/latest/quick-start/
+     * @see \App\Models\Concerns\HasWrappedApiTokens::wrapToken()
      *
      * @return array<string, scalar>
      */

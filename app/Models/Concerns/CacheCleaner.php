@@ -24,16 +24,10 @@ trait CacheCleaner
 {
     public static function bootCacheCleaner(): void
     {
-        self::created(static function (): void {
+        self::created($callback = static function (): void {
             Artisan::call('cache:clear');
         });
-
-        self::updated(static function (): void {
-            Artisan::call('cache:clear');
-        });
-
-        self::deleted(static function (): void {
-            Artisan::call('cache:clear');
-        });
+        self::updated($callback);
+        self::deleted($callback);
     }
 }

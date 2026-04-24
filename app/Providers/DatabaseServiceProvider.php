@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 
 /**
@@ -13,7 +14,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Models\Province;
 use App\Models\User;
 use App\Notifications\SlowQueryLoggedNotification;
 use Carbon\CarbonInterval;
@@ -65,7 +65,15 @@ final class DatabaseServiceProvider extends ServiceProvider
             $this->listenQueryExecuted();
             Json::encodeUsing(static fn (mixed $value): string => json_encode(
                 $value,
-                \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_LINE_TERMINATORS
+                \JSON_INVALID_UTF8_IGNORE |
+                \JSON_INVALID_UTF8_SUBSTITUTE |
+                \JSON_PARTIAL_OUTPUT_ON_ERROR |
+                \JSON_PRESERVE_ZERO_FRACTION |
+                // \JSON_PRETTY_PRINT |
+                \JSON_THROW_ON_ERROR |
+                \JSON_UNESCAPED_LINE_TERMINATORS |
+                \JSON_UNESCAPED_SLASHES |
+                \JSON_UNESCAPED_UNICODE
             ));
         });
     }
@@ -73,43 +81,34 @@ final class DatabaseServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, static function (): void {
-            /**
-             * 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。
-             */
+            /** 低版本 MySQL(< 5.7.7) 或 MariaDB(< 10.2.2)，则可能需要手动配置迁移生成的默认字符串长度，以便按顺序为它们创建索引。*/
             Schema::defaultStringLength(191);
-
             Builder::defaultMorphKeyType('uuid');
             Builder::morphUsingUlids();
             Builder::morphUsingUuids();
             Model::unguard();
             Model::withoutEvents(static function (): void {});
-
             Model::handleLazyLoadingViolationUsing(static function (Model $model, string $relation): void {
                 info(\sprintf('Attempted to lazy load [%s] on model [%s].', $relation, $model::class));
             });
+            Event::listen(StatementPrepared::class, static function (StatementPrepared $event): void {
+                $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
+            });
 
-            /**
-             * 自定义多态类型.
-             */
-            Relation::enforceMorphMap([
-                'post' => 'App\Models\Post',
-                'video' => 'App\Models\Video',
-            ]);
+            // /** 自定义多态类型. */
+            // Relation::enforceMorphMap([
+            //     'post' => App\Models\Post::class,
+            //     'video' => App\Models\Video::class,
+            // ]);
 
-            // /**
-            //  * @var Model $post
-            //  */
+            // /** @var Model $post */
             // $alias = $post->getMorphClass();
             // $class = Relation::getMorphedModel($alias);
 
             // User::resolveRelationUsing(
             //     'province',
-            //     static fn (User $user) => $user->belongsTo(Province::class, 'province_id')
+            //     static fn (User $user) => $user->belongsTo(App\Models\Province::class, 'province_id')
             // );
-
-            Event::listen(StatementPrepared::class, static function (StatementPrepared $event): void {
-                $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
-            });
         });
     }
 
@@ -160,9 +159,7 @@ final class DatabaseServiceProvider extends ServiceProvider
     private function whenSQLiteConnection(): void
     {
         $this->whenever(DB::connection() instanceof SQLiteConnection, static function (): void {
-            /**
-             * Enable on delete cascade for sqlite connections.
-             */
+            /** Enable on delete cascade for sqlite connections. */
             DB::statement(DB::raw('PRAGMA foreign_keys = ON')->getValue(DB::getQueryGrammar()));
         });
     }

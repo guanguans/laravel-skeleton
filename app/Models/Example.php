@@ -18,11 +18,6 @@ namespace App\Models;
 
 use App\Models\Concerns\Pipeable;
 use App\Models\Concerns\SerializeDate;
-use Awobaz\Compoships\Compoships;
-use Eloquence\Behaviours\CountCache\HasCounts;
-use Eloquence\Behaviours\HasCamelCasing;
-use Eloquence\Behaviours\HasSlugs;
-use Eloquence\Behaviours\SumCache\HasSums;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,31 +25,34 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Traits\Macroable;
-use Kleemans\AttributeEvents;
-use Rennokki\QueryCache\Traits\QueryCacheable;
-use Sushi\Sushi;
-use Watson\Validating\ValidatingTrait;
 
 /**
  * @see https://github.com/LaravelDaily/laravel-tips
  * @see https://github.com/OussamaMater/Laravel-Tips
  * @see https://github.com/kirkbushell/eloquence
  */
-final class Example extends BaseModel
+final class Example extends Model
 {
-    // use AttributeEvents;
-    // use Compoships;
-    // use HasCamelCasing;
-    // use HasCounts;
+    // use Awobaz\Compoships\Compoships;
+    // use Eloquence\Behaviours\CountCache\HasCounts;
+    // use Eloquence\Behaviours\HasCamelCasing;
+    // use Eloquence\Behaviours\HasSlugs;
+    // use Eloquence\Behaviours\SumCache\HasSums;
+    // use Kleemans\AttributeEvents;
+    // use Orbit\Concerns\Orbital;
+    // use Parental\HasChildren;
+    // use Parental\HasParent;
+    // use Rennokki\QueryCache\Traits\QueryCacheable;
+    // use Sushi\Sushi;
+    // use Watson\Validating\ValidatingTrait;
+
     // use HasFactory;
-    // use HasSlugs;
-    // use HasSums;
     // use HasUlids;
     // use HasUuids;
     // use Macroable;
@@ -62,18 +60,17 @@ final class Example extends BaseModel
     // use Notifiable;
     // use Pipeable;
     // use Prunable;
-    // use QueryCacheable;
     // use SerializeDate;
     // use SoftDeletes;
-    // use Sushi;
-    // use ValidatingTrait;
+
+    use HasFactory;
     use Notifiable;
 
     // protected static $unguarded = true;
     // protected $attributes = [];
 
     #[\Override]
-    public function resolveRouteBinding($value, $field = null): Model
+    public function resolveRouteBinding($value, $field = null): EloquentModel
     {
         return parent::resolveRouteBinding($value, $field);
     }
@@ -90,13 +87,10 @@ final class Example extends BaseModel
         return parent::query();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany<\App\Models\DatabaseNotification, $this>
-     */
-    public function notifications(): MorphMany
-    {
-        return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
-    }
+    // public function notifications(): MorphMany
+    // {
+    //     return parent::notifications();
+    // }
 
     #[\Override]
     public function newEloquentBuilder($query): Builder

@@ -18,7 +18,6 @@ use App\Support\Monolog\Processor\AppendExtraDataProcessor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Monolog\Logger as MonologLogger;
@@ -39,6 +38,7 @@ final class LogServiceProvider extends ServiceProvider
     {
         $this->whenever(true, function (): void {
             /**
+             * @see \Guanguans\LaravelExceptionNotify\Collectors\ApplicationCollector
              * @see \Illuminate\Log\Context\ContextServiceProvider::boot()
              */
             Context::add([
@@ -63,10 +63,10 @@ final class LogServiceProvider extends ServiceProvider
     private function never(): void
     {
         $this->whenever(false, static function (): void {
-            Log::withContext(RequestFacade::header());
+            Log::withContext(request()->header());
 
             if (($logger = Log::getLogger()) instanceof MonologLogger) {
-                $logger->pushProcessor(new AppendExtraDataProcessor(RequestFacade::header()));
+                $logger->pushProcessor(new AppendExtraDataProcessor(request()->header()));
             }
         });
     }
@@ -75,11 +75,11 @@ final class LogServiceProvider extends ServiceProvider
     {
         $this->unless($this->app->runningInConsole(), static function (): void {
             Context::add([
-                'user-id' => RequestFacade::user()?->id,
-                'url' => RequestFacade::url(),
-                'ip' => RequestFacade::ip(),
-                'method' => RequestFacade::method(),
-                'action' => RequestFacade::route()?->getActionName(),
+                'user-id' => request()->user()?->id,
+                'url' => request()->url(),
+                'ip' => request()->ip(),
+                'method' => request()->method(),
+                'action' => request()->route()?->getActionName(),
             ]);
         });
     }

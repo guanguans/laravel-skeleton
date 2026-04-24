@@ -29,9 +29,15 @@ final class SupportServiceProvider extends ServiceProvider
     use Conditionable {
         Conditionable::when as whenever;
     }
+
+    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     public array $bindings = [];
 
-    /** @var array<int|string, string> */
+    /**
+     * @var array<int|string, string>
+     *
+     * @noinspection ClassOverridesFieldOfSuperClassInspection
+     */
     public array $singletons = [
         ElasticsearchManager::class,
     ];
@@ -77,17 +83,15 @@ final class SupportServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            PushDeer::class,
             ElasticsearchManager::class,
+            PushDeer::class,
         ];
     }
 
     private function ever(): void
     {
         $this->whenever(true, static function (): void {
-            /**
-             * PHP 8.3.
-             */
+            /** @since PHP 8.3 */
             ini_set('json.exceptions', '1');
 
             /**
@@ -112,17 +116,10 @@ final class SupportServiceProvider extends ServiceProvider
                     : $result
             );
 
-            /**
-             * @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly
-             */
-            // env(
-            //     'DB_HOST',
-            //     static fn () => throw new \RuntimeException('The environment variable [DB_HOST] has no value.')
-            // );
+            /** @see https://masteringlaravel.io/daily/2024-11-13-how-can-you-make-sure-the-environment-is-configured-correctly */
             Env::getOrFail('DB_HOST');
-
-            Number::useLocale($this->app->getLocale());
             Date::setLocale($this->app->getLocale());
+            Number::useLocale($this->app->getLocale());
         });
     }
 
