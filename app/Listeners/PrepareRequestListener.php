@@ -18,9 +18,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 /**
+ * @see \Illuminate\Foundation\Application::bootstrapWith()
+ * @see \Illuminate\Foundation\Console\Kernel::$bootstrappers
  * @see \Illuminate\Foundation\Http\Kernel::$bootstrappers
  * @see \Illuminate\Foundation\Http\Kernel::bootstrappers()
- * @see \Illuminate\Foundation\Application::bootstrapWith()
  */
 final class PrepareRequestListener
 {
@@ -31,14 +32,17 @@ final class PrepareRequestListener
      */
     public function __invoke(Application $app): void
     {
-        \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid());
+        \defined('TRACE_ID') or \define('TRACE_ID', (string) Str::uuid7());
 
-        if (!$app->runningInConsole()) {
-            $app->make(Request::class)->headers->set(self::X_REQUEST_ID, TRACE_ID);
-
-            if ($app->make(Request::class)->is('api/*')) {
-                $app->make(Request::class)->headers->set('Accept', 'application/json');
-            }
+        /**
+         * @see \Illuminate\Foundation\Bootstrap\SetRequestForConsole
+         */
+        if ($app->runningInConsole()) {
+            return;
         }
+
+        $request = $app->make(Request::class);
+        $request->headers->set(self::X_REQUEST_ID, TRACE_ID);
+        $request->is('api/*') and $request->headers->set('Accept', 'application/json');
     }
 }

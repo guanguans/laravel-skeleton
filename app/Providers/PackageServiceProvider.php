@@ -86,7 +86,7 @@ final class PackageServiceProvider extends ServiceProvider
 
             $this->whenever($this->isOctaneHttpServer(), static function (): void {
                 Event::listen(RequestReceived::class, static function (): void {
-                    $uuid = Str::uuid()->toString();
+                    $uuid = Str::uuid7()->toString();
 
                     if (config('octane.server') === 'roadrunner') {
                         Cache::put($uuid, microtime(true));

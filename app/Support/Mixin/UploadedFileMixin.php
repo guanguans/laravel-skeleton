@@ -38,7 +38,7 @@ final class UploadedFileMixin
                 return null;
             }
 
-            $tempFile = sys_get_temp_dir().\DIRECTORY_SEPARATOR.Str::uuid()->toString();
+            $tempFile = sys_get_temp_dir().\DIRECTORY_SEPARATOR.Str::uuid7()->toString();
 
             File::put($tempFile, $response->body());
 

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Console\Commands\ClearAllCommand;
-use App\Listeners\RunCommandInDebugModeListener;
 use App\Support\VarDumper\ServerDumper;
 use Carbon\CarbonInterval;
 use Composer\XdebugHandler\XdebugHandler;
@@ -76,14 +75,7 @@ final class ConsoleServiceProvider extends ServiceProvider
 
     private function never(): void
     {
-        $this->whenever(false, function (): void {
-            $this->app->booted(static function (): void {
-                /**
-                 * @see \Illuminate\Foundation\Console\Kernel::rerouteSymfonyCommandEvents()
-                 */
-                Event::listen(CommandStarting::class, RunCommandInDebugModeListener::class);
-            });
-        });
+        $this->whenever(false, static function (): void {});
     }
 
     private function whenProduction(): void

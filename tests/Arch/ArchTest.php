@@ -25,7 +25,6 @@ use App\Http\Controllers\Api\AuthController;
 use App\Jobs\Middleware\RateLimitedForJob;
 use App\Listeners\ContextSubscriber;
 use App\Listeners\PrepareRequestListener;
-use App\Listeners\RunCommandInDebugModeListener;
 use App\Listeners\TraceEventListener;
 use App\Models\BaseModel;
 use App\Support\Mixin\SchedulingEventMixin;
@@ -52,7 +51,6 @@ arch()
         ReferenceCommand::class,
         PrepareRequestListener::class,
         RateLimitedForJob::class,
-        RunCommandInDebugModeListener::class,
         SchedulingEventMixin::class,
         TraceEventListener::class,
     ]);
@@ -91,6 +89,5 @@ arch('will not use debugging functions')
     // ->each
     ->not->toBeUsed()
     ->ignoring([
-        RunCommandInDebugModeListener::class,
         SchedulingEventMixin::class,
     ]);

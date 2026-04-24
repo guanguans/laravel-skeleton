@@ -15,7 +15,6 @@ namespace App\Listeners;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 
 final class TraceEventListener
@@ -41,23 +40,30 @@ final class TraceEventListener
 
         $trace = collect(debug_backtrace())
             ->filter(
-                static fn (array $trace): bool => isset($trace['file'], $trace['line'])
-                    && collect($trace['args'] ?? [])->first(
-                        static fn (mixed $arg): bool => $arg === $event
+                static fn (array $trace): bool => isset($trace['file'], $trace['line'], $trace['args'])
+                    && collect($trace['args'])->containsStrict(
+                        static fn (mixed $arg): bool => (\is_object($arg) ? $arg::class : $arg) === $event
                     )
             )
-            ->map(static fn (array $trace) => Arr::except($trace, ['args', 'object']))
-            // ->dd()
-            ->sole(static fn (array $trace): bool => !str($trace['file'])->startsWith(
+            // ->map(static fn (array $trace) => Arr::except($trace, ['args', 'object']))
+            // ->dump()
+            // ->sole(static fn (array $trace): bool => !str($trace['file'])->startsWith(
+            //     \dirname(new \ReflectionClass(Dispatcher::class)->getFileName())
+            // ))
+            // ->firstOrFail(static fn (array $trace): bool => !str($trace['file'])->startsWith(
+            //     \dirname(new \ReflectionClass(Dispatcher::class)->getFileName())
+            // ))
+            ->last(static fn (array $trace): bool => !str($trace['file'])->startsWith(
                 \dirname(new \ReflectionClass(Dispatcher::class)->getFileName())
             ));
+        \assert(\is_array($trace));
 
         file_put_contents(
             $file,
             \sprintf(
                 '%s [%s:%s]%s',
                 $event,
-                str($trace['file'])->remove(\dirname(__DIR__, 2))->ltrim('/'),
+                str($trace['file'])->chopStart(\dirname(__DIR__, 2).\DIRECTORY_SEPARATOR),
                 $trace['line'],
                 \PHP_EOL
             ),

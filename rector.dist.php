@@ -25,6 +25,7 @@ use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRect
 use Guanguans\RectorRules\Rector\FunctionLike\RenameGarbageParamNameRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
 use Guanguans\RectorRules\Set\SetList;
+use Illuminate\Support\Str;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
@@ -48,6 +49,8 @@ use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php82\Rector\Param\AddSensitiveParameterAttributeRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
+use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
+use Rector\Renaming\ValueObject\RenameStaticMethod;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\Transform\Rector\String_\StringToClassConstantRector;
@@ -166,6 +169,10 @@ return RectorConfig::configure()
     ])
     ->withConfiguredRule(ReferenceNamespacedSymbolsRelativeToNamespacePrefixRector::class, [
         // 'namespacePrefixes' => ['App'],
+    ])
+    ->withConfiguredRule(RenameStaticMethodRector::class, [
+        new RenameStaticMethod(Str::class, 'orderedUuid', Str::class, 'uuid7'),
+        new RenameStaticMethod(Str::class, 'uuid', Str::class, 'uuid7'),
     ])
     ->withConfiguredRule(StringToClassConstantRector::class, [
         new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),
