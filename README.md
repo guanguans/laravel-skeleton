@@ -609,13 +609,10 @@ app/
 |   |-- CollectGarbageListener.php
 |   |-- ContextSubscriber.php
 |   |-- PrepareRequestListener.php
-|   |-- RecordRequestIdentifiersListener.php
-|   |-- RunCommandInDebugModeListener.php
 |   `-- TraceEventListener.php
 |-- Mail/
 |   `-- UserRegisteredMail.php
 |-- Models/
-|   |-- Model.php
 |   |-- Concerns/
 |   |   |-- BelongsToCreator.php
 |   |   |-- CacheCleaner.php
@@ -630,11 +627,10 @@ app/
 |   |   |-- SerializeDate.php
 |   |   |-- Trashed.php
 |   |   `-- UuidGenerator.php
-|   |-- DatabaseNotification.php
 |   |-- Example.php
 |   |-- HttpLog.php
 |   |-- JWTUser.php
-|   |-- PersonalAccessToken.php
+|   |-- Model.php
 |   |-- Pivots/
 |   |   |-- MorphPivotWithCreatorPivot.php
 |   |   `-- PivotWithCreatorPivot.php
@@ -822,7 +818,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-55 directories, 242 files
+55 directories, 238 files
 
 ```
 

@@ -91,7 +91,7 @@ final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
                 new class {
                     public function imageUrl(int $width = 640, int $height = 480): string
                     {
-                        return \sprintf('https://placekitten.com/%d/%d', $width, $height);
+                        return "https://placekitten.com/$width/$height";
                     }
 
                     /**
@@ -99,7 +99,7 @@ final class WhenTestingAggregateServiceProvider extends AggregateServiceProvider
                      */
                     public function imageRandomUrl(string $format = 'small'): string
                     {
-                        return \sprintf('https://random.danielpetrica.com/api/random?format=%s', $format);
+                        return "https://random.danielpetrica.com/api/random?format=$format";
                     }
                 }
             );

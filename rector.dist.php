@@ -69,6 +69,7 @@ use RectorLaravel\Rector\If_\ThrowIfRector;
 use RectorLaravel\Rector\MethodCall\ContainerBindConcreteWithClosureOnlyRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
+use RectorLaravel\Rector\StaticCall\RequestStaticValidateToInjectRector;
 use RectorLaravel\Set\LaravelSetProvider;
 use RectorPest\Rules\ChainExpectCallsRector;
 use RectorPest\Set\PestLevelSetList;
@@ -200,6 +201,7 @@ return RectorConfig::configure()
         ContainerBindConcreteWithClosureOnlyRector::class,
         FillablePropertyToFillableAttributeRector::class,
         HiddenPropertyToHiddenAttributeRector::class,
+        RequestStaticValidateToInjectRector::class,
         TablePropertyToTableAttributeRector::class,
         ValidationRuleArrayStringValueToArrayRector::class,
 

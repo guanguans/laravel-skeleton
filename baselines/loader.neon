@@ -1,6 +1,5 @@
-# total 9 errors
+# total 7 errors
 
 includes:
-    - nullsafe.neverNull.neon
     - offsetAccess.invalidOffset.neon
     - property.nonObject.neon

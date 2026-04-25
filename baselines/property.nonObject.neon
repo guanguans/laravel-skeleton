@@ -1,4 +1,4 @@
-# total 7 errors
+# total 6 errors
 
 parameters:
     ignoreErrors:
@@ -6,11 +6,6 @@ parameters:
             message: '#^Cannot access property \$Value on mixed\.$#'
             count: 4
             path: ../app/Console/Commands/HealthCheckCommand.php
-
-        -
-            message: '#^Cannot access property \$id on mixed\.$#'
-            count: 1
-            path: ../app/Providers/LogServiceProvider.php
 
         -
             message: '#^Cannot access property \$stubCallbacks on mixed\.$#'

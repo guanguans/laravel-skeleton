@@ -57,15 +57,8 @@ final class ElasticsearchManager extends Manager
         }
 
         $driverKey = "services.elasticsearch.connections.$driver";
-
-        throw_unless(
-            $this->config->has($driverKey),
-            \InvalidArgumentException::class,
-            "Connection [$driver] not supported."
-        );
-
+        throw_unless($this->config->has($driverKey), \InvalidArgumentException::class, "Connection [$driver] not supported.");
         $config = $this->prepareConfig($this->config->get($driverKey));
-
         $method = \sprintf('create%sDriver', Str::studly($driver));
 
         if (method_exists($this, $method)) {
@@ -81,35 +74,33 @@ final class ElasticsearchManager extends Manager
      * @param array<string, mixed> $config
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     private function prepareConfig(array $config): array
     {
-        $default = [
-            'quiet' => false,
-        ];
-
+        $default = ['quiet' => false];
         $main = Arr::except($this->config->get('services.elasticsearch', []), ['default', 'connections']);
-
         $config = array_replace_recursive($default, $main, $config);
 
         if (isset($config['hosts'])) {
-            $config['hosts'] = collect($config['hosts'])
-                ->reject(function (array|string $host, int|string $index): bool {
-                    \is_string($index) and $environment = $index;
-                    \is_array($host) and isset($host['env']) and $environment = $host['env'];
-
-                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-                    return isset($environment) && !$this->container->environment($environment);
-                })
-                ->all();
+            $config['hosts'] = array_filter(
+                $config['hosts'],
+                fn (array|string $host, int|string $indexOrEnv): bool => $this->container->environment(match (true) {
+                    \is_string($indexOrEnv) => $indexOrEnv,
+                    \is_array($host) and isset($host['env']) => $host['env'],
+                    default => $this->container->environment(),
+                }),
+                \ARRAY_FILTER_USE_BOTH
+            );
         }
 
         if (isset($config['logger'])) {
-            $value = $config['logger'];
+            $logger = $config['logger'];
 
-            $config['logger'] = \is_string($value) && $this->config->has("logging.channels.$value")
-                ? Log::channel($value)
-                : make($value);
+            $config['logger'] = \is_string($logger) && $this->config->has("logging.channels.$logger")
+                ? Log::channel($logger)
+                : make($logger);
         }
 
         return $config;
