@@ -1,7 +1,7 @@
 <?php
 
+/** @noinspection ContractViolationInspection */
 /** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -28,11 +28,6 @@ abstract class AbstractRule implements ValidationRule
     public bool $implicit = false;
 
     /**
-     * Determine if the validation rule passes.
-     */
-    abstract public function passes(string $attribute, mixed $value): bool;
-
-    /**
      * @see https://github.com/egulias/EmailValidator
      * @see https://github.com/Respect/Validation
      * @see https://github.com/ronanguilloux/IsoCodes
@@ -43,6 +38,7 @@ abstract class AbstractRule implements ValidationRule
      *
      * @noinspection RedundantDocCommentTagInspection
      */
+    #[\Override]
     public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (!$this->passes($attribute, $value)) {
@@ -52,17 +48,10 @@ abstract class AbstractRule implements ValidationRule
         }
     }
 
-    public static function name(): string
-    {
-        return str(class_basename(static::class))->replaceLast('Rule', '')->snake()->toString();
-    }
-
-    public static function message(): string
-    {
-        $transMessage = __($transKey = \sprintf('validation.%s', static::name()));
-
-        return $transMessage === $transKey ? static::fallbackMessage() : $transMessage;
-    }
+    /**
+     * Determine if the validation rule passes.
+     */
+    abstract public function passes(string $attribute, mixed $value): bool;
 
     /**
      * @see \Illuminate\Support\Facades\Validator
@@ -72,22 +61,32 @@ abstract class AbstractRule implements ValidationRule
      */
     public static function extendMethod(): string
     {
-        return (new \ReflectionClass(static::class)->getDefaultProperties()['implicit'] ?? false)
-            ? 'extendImplicit'
-            : 'extend';
+        return (new \ReflectionClass(static::class)->getDefaultProperties()['implicit'] ?? false) ? 'extendImplicit' : 'extend';
+    }
+
+    public static function name(): string
+    {
+        return str(static::class)->classBasename()->chopEnd('Rule')->snake()->toString();
+    }
+
+    public static function message(): string
+    {
+        $transKey = \sprintf('validation.%s', static::name());
+        $transMessage = __($transKey);
+
+        return $transMessage !== $transKey ? $transMessage : static::fallbackMessage();
     }
 
     protected static function fallbackMessage(): string
     {
         return __(
-            app()->isLocale('zh_CN')
-                ? ':Attribute [:input] 必须是有效的 :Name。'
-                : 'The :attribute [:input] must be a valid :Name.',
+            app()->isLocale('zh_CN') ? ':Attribute [:input] 必须是有效的 :Name。' : 'The :attribute [:input] must be a valid :Name.',
             [
                 'name' => value(static function () {
-                    $name = __($key = \sprintf('validation.attributes.%s', static::name()));
+                    $transNameKey = \sprintf('validation.attributes.%s', static::name());
+                    $transNameMessage = __($transNameKey);
 
-                    return $name === $key ? str(static::name())->replace('_', ' ') : $name;
+                    return $transNameMessage !== $transNameKey ? $transNameMessage : str(static::name())->replace('_', ' ');
                 }),
             ]
         );
@@ -98,11 +97,8 @@ abstract class AbstractRule implements ValidationRule
      * @see \Illuminate\Validation\ClosureValidationRule::passes()
      * @see \Illuminate\Validation\InvokableValidationRule::passes()
      */
-    protected function createPotentiallyTranslatedString(
-        string $attribute,
-        mixed $value,
-        \Closure $fail
-    ): PotentiallyTranslatedString {
+    protected function createPotentiallyTranslatedString(string $attribute, mixed $value, \Closure $fail): PotentiallyTranslatedString
+    {
         return $fail($attribute, static::message());
     }
 

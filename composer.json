@@ -575,6 +575,7 @@
         "envoy:testing": "@envoy run testing",
         "facade:lint": "@facade:update --lint",
         "facade:update": "@php -f vendor/bin/facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facade/*.php'\\'')));')",
+        "ghalint": "ghalint run",
         "git-chglog": "git-chglog $(git describe --tags $(git rev-list --tags --max-count=1))",
         "gitleaks": "gitleaks git --report-path=.build/gitleaks-report.json --pre-commit --staged -v",
         "gitleaks:generate-baseline": "gitleaks git --report-path=gitleaks-baseline.json -v",

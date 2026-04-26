@@ -19,6 +19,8 @@ trait DataAware
 
     /**
      * Set the data under validation.
+     *
+     * @see \Illuminate\Contracts\Validation\DataAwareRule
      */
     public function setData(array $data): self
     {

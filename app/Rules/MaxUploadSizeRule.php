@@ -13,28 +13,23 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 /**
  * @see https://github.com/antoninmasek/laravel-max-upload-size-rule
  * @see https://tonymasek.com/blog/easily-validate-max-file-size-based-on-your-settings-in-phpini
  */
-final class MaxUploadSizeRule extends AbstractRule
+final class MaxUploadSizeRule extends AbstractProxyRule
 {
     #[\Override]
-    public function passes(string $attribute, mixed $value): bool
+    protected function rules(string $attribute): array
     {
-        if (0 > ($maxUploadSizeInBytes = $this->maxUploadSize())) {
-            return true;
-        }
-
-        return Validator::make(
-            [$attribute => $value],
-            [$attribute => Rule::file()->max($maxUploadSizeInBytes / 1024)]
-        )->passes();
+        return [$attribute => Rule::file()->max($this->maxUploadSize() / 1024)];
     }
 
+    /**
+     * @return positive-int
+     */
     private function maxUploadSize(): int
     {
         // We know, that `upload_max_filesize` has to have a lower value
@@ -55,6 +50,7 @@ final class MaxUploadSizeRule extends AbstractRule
         }
 
         // Limit is disabled
-        return -1;
+        // return -1;
+        return \PHP_INT_MAX;
     }
 }

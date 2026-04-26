@@ -17,5 +17,6 @@ use Illuminate\Support\Traits\Tappable;
 
 final class Application extends \Illuminate\Foundation\Application
 {
+    /** @see https://github.com/laravel/framework/pull/54936 */
     use Tappable;
 }

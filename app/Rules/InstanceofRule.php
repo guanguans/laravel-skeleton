@@ -15,6 +15,9 @@ namespace App\Rules;
 
 final class InstanceofRule extends AbstractRule
 {
+    /**
+     * @param class-string $class
+     */
     public function __construct(private readonly string $class) {}
 
     #[\Override]

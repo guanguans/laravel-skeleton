@@ -44,8 +44,7 @@ final class DefaultRule extends AbstractRule implements ValidatorAwareRule
         if (null === $value) {
             $data = $this->validator->getData();
             // $data[$attribute] = $this->default;
-            Arr::set($data, $attribute, $this->default);
-            $this->validator->setData($data);
+            $this->validator->setData(Arr::set($data, $attribute, $this->default));
         }
 
         return true;

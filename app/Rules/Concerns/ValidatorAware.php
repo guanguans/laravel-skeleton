@@ -21,7 +21,10 @@ trait ValidatorAware
 
     /**
      * Set the current validator.
+     *
+     * @see \Illuminate\Contracts\Validation\ValidatorAwareRule
      */
+    #[\Override]
     public function setValidator(Validator $validator): self
     {
         $this->validator = $validator;

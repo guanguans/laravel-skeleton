@@ -13,17 +13,11 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-final class LenientPortRule extends AbstractAggregateRule
+final class LenientPortRule extends AbstractProxyRule
 {
-    /**
-     * @return list<string>
-     */
     #[\Override]
-    protected function rules(): array
+    protected function rules(string $attribute): array
     {
-        return [
-            'int',
-            'between:1,65535',
-        ];
+        return [$attribute => 'int|between:1,65535'];
     }
 }

@@ -308,4 +308,5 @@ parameters:
 #        - identifier: variable.undefined
         - identifier: nullCoalesce.variable
         - identifier: staticMethod.notFound
+        - identifier: return.deprecatedInterface
 
