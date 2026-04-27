@@ -1,7 +1,7 @@
 <?php
 
+/** @noinspection OverrideMissingInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
-
 declare(strict_types=1);
 
 /**

@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection PhpFullyQualifiedNameUsageInspection */
-
 declare(strict_types=1);
 
 /**
@@ -21,8 +20,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Http\Client\Response messagePush(string $text, string $desp = '', string $type = 'markdown')
  * @method static \App\Support\Client\PushDeer ddPendingRequest(mixed ...$args)
  * @method static \App\Support\Client\PushDeer dumpPendingRequest(mixed ...$args)
- * @method static \Illuminate\Http\Client\PendingRequest clonePendingRequest(callable|null $callback = null)
- * @method static \Illuminate\Http\Client\PendingRequest pendingRequest(callable|null $callback = null, bool $clone = false)
+ * @method static \Illuminate\Http\Client\PendingRequest clonePendingRequest()
+ * @method static \Illuminate\Http\Client\PendingRequest pendingRequest(bool $clone = false)
  * @method static \App\Support\Client\PushDeer|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \App\Support\Client\PushDeer|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static never dd(mixed ...$args)

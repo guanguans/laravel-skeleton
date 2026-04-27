@@ -21,6 +21,7 @@ use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\RetryMiddleware;
 use Illuminate\Config\Repository;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Collection;
@@ -35,6 +36,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
+ * @property list<string> $allowedStrayRequestUrls
  * @property \Illuminate\Support\Collection $stubCallbacks
  *
  * @mixin \Illuminate\Http\Client\PendingRequest
@@ -63,6 +65,7 @@ abstract class AbstractClient
      * @return \Illuminate\Http\Client\PendingRequest|mixed|static
      *
      * @noinspection PhpMixedReturnTypeCanBeReducedInspection
+     * @noinspection PhpUndefinedNamespaceInspection
      */
     public function __call(string $name, array $arguments): mixed
     {
@@ -89,25 +92,22 @@ abstract class AbstractClient
         return $this;
     }
 
-    public function clonePendingRequest(?callable $callback = null): PendingRequest
+    public function clonePendingRequest(): PendingRequest
     {
-        return $this->pendingRequest($callback, true);
+        return $this->pendingRequest(true);
     }
 
-    public function pendingRequest(?callable $callback = null, bool $clone = false): PendingRequest
+    /**
+     * @see \Illuminate\Http\Client\Factory::createPendingRequest()
+     *
+     * ?callable $callback = null
+     */
+    public function pendingRequest(bool $clone = false): PendingRequest
     {
-        return tap(
-            tap(
-                $clone ? clone $this->pendingRequest : $this->pendingRequest,
-                function (PendingRequest $pendingRequest): void {
-                    /** @see \Illuminate\Http\Client\Factory::createPendingRequest() */
-                    $pendingRequest
-                        ->stub((fn (): Collection => $this->stubCallbacks)->call(Http::getFacadeRoot()))
-                        ->preventStrayRequests(Http::preventingStrayRequests());
-                }
-            ),
-            $callback ?? static fn (): null => null
-        );
+        return ($clone ? clone $this->pendingRequest : $this->pendingRequest)
+            ->stub((fn (): Collection => $this->stubCallbacks)->call(Http::getFacadeRoot()))
+            ->preventStrayRequests(Http::preventingStrayRequests())
+            ->allowStrayRequests((fn (): array => $this->allowedStrayRequestUrls)->call(Http::getFacadeRoot()));
     }
 
     abstract protected function configRules(): array;
@@ -162,38 +162,12 @@ abstract class AbstractClient
         return [];
     }
 
-    /**
-     * @see \GuzzleHttp\RetryMiddleware::exponentialDelay()
-     * @see \retry()
-     *
-     * @param int $retries 重试次数
-     * @param int $baseIntervalMs 基础间隔（毫秒）
-     *
-     * @return list<int>
-     */
-    protected function fibonacciRetryIntervals(int $retries, int $baseIntervalMs = 1000): array
-    {
-        $intervals = [];
-        $prev = 0;
-        $curr = 1;
-
-        for ($index = 0; $index < $retries; ++$index) {
-            $intervals[] = $curr * $baseIntervalMs;
-            [$prev, $curr] = [$curr, $prev + $curr];
-        }
-
-        return $intervals;
-    }
-
     private function defaultPendingRequest(): PendingRequest
     {
         return Http::baseUrl($this->configRepository->get('base_url'))
             ->when(
                 $this->getUserAgent(),
-                static fn (
-                    PendingRequest $pendingRequest,
-                    string $userAgent
-                ) => $pendingRequest->withUserAgent($userAgent)
+                static fn (PendingRequest $pendingRequest, string $userAgent) => $pendingRequest->withUserAgent($userAgent)
             )
             ->withOptions($this->configRepository->get('http_options'))
             ->retry(
@@ -204,10 +178,7 @@ abstract class AbstractClient
             )
             ->when(
                 $this->requestId(),
-                static fn (
-                    PendingRequest $pendingRequest,
-                    string $requestId
-                ) => $pendingRequest->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
+                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
             )
             ->withMiddleware(Middleware::mapRequest(
                 static fn (RequestInterface $request): RequestInterface => $request->withHeader('X-Date-Time', now()->toDateTimeString('m'))
@@ -218,11 +189,9 @@ abstract class AbstractClient
             ))
             ->when(
                 $this->requestId(),
-                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withMiddleware(
-                    Middleware::mapResponse(
-                        static fn (ResponseInterface $response): ResponseInterface => $response->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
-                    )
-                )
+                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withMiddleware(Middleware::mapResponse(
+                    static fn (ResponseInterface $response): ResponseInterface => $response->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
+                ))
             );
     }
 
@@ -249,11 +218,13 @@ abstract class AbstractClient
                 // RequestOptions::TIMEOUT => 30,
             ],
             /**
-             * @see PendingRequest::retry()
+             * @see \GuzzleHttp\RetryMiddleware::exponentialDelay()
+             * @see \retry()
              * @see PendingRequest::$tries
+             * @see PendingRequest::retry()
              */
             'retry' => [
-                'times' => $this->fibonacciRetryIntervals(1),
+                'times' => [RetryMiddleware::exponentialDelay(1)],
                 'sleep' => 1000,
                 // 'when' => static fn (\Throwable $throwable): bool => $throwable instanceof ConnectException,
                 'when' => null,

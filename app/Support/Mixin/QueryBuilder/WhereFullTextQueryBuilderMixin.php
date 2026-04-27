@@ -1,8 +1,8 @@
 <?php
 
+/** @noinspection OverrideMissingInspection */
 /** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
-
 declare(strict_types=1);
 
 /**
@@ -26,9 +26,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  * @mixin \Illuminate\Database\Query\Builder
  */
-#[Mixin(EloquentBuilder::class)]
-#[Mixin(QueryBuilder::class)]
-#[Mixin(RelationBuilder::class)]
+#[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
 final class WhereFullTextQueryBuilderMixin
 {
     public function whereFullText(): \Closure
@@ -47,6 +45,7 @@ final class WhereFullTextQueryBuilderMixin
 
             $this->wheres[] = ['type' => $type, 'columns' => $columns, 'value' => $value, 'options' => $options, 'boolean' => $boolean];
 
+            /** @noinspection UnusedFunctionResultInspection */
             $this->addBinding($value);
 
             return $this;

@@ -21,6 +21,8 @@
         "laravel/pennant": "^1.23",
         "laravel/sanctum": "^4.3",
         "laravel/tinker": "^3.0",
+        "lorisleiva/cron-translator": "^0.5.1",
+        "mtownsend/read-time": "^2.0",
         "overtrue/laravel-uploader": "^3.4",
         "php-open-source-saver/jwt-auth": "^2.9",
         "spatie/laravel-schemaless-attributes": "^2.6",

@@ -45,6 +45,7 @@ final class PendingRequestMixin
                 $logger = new Logger($logger, Event::getFacadeRoot());
             }
 
+            /** @noinspection NullableArgumentPassedInspection */
             return $this->withMiddleware(
                 Middleware::log($logger, $formatter ?: new MessageFormatter(MessageFormatter::DEBUG), $logLevel)
             );

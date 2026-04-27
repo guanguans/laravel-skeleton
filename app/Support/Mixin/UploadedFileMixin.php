@@ -18,6 +18,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use function Illuminate\Filesystem\join_paths;
 
 /**
  * @mixin \Illuminate\Http\UploadedFile
@@ -38,7 +39,7 @@ final class UploadedFileMixin
                 return null;
             }
 
-            $tempFile = sys_get_temp_dir().\DIRECTORY_SEPARATOR.Str::uuid7()->toString();
+            $tempFile = join_paths(sys_get_temp_dir(), Str::uuid7()->toString());
 
             File::put($tempFile, $response->body());
 

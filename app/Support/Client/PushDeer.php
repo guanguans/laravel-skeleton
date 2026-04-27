@@ -51,12 +51,8 @@ final class PushDeer extends AbstractClient
     #[\Override]
     protected function extendPendingRequest(PendingRequest $pendingRequest): PendingRequest
     {
-        return $pendingRequest
-            ->throw()
-            ->withOptions([
-                RequestOptions::JSON => [
-                    'pushkey' => $this->configRepository->get('key'),
-                ],
-            ]);
+        return $pendingRequest->throw()->withOptions([
+            RequestOptions::JSON => ['pushkey' => $this->configRepository->get('key')],
+        ]);
     }
 }

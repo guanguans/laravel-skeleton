@@ -48,11 +48,15 @@ final class AppServiceProvider extends ServiceProvider
                 && str($file)->is('*/../../app/Support/Mixin/*')
         )
             // ->keys()->dd()
-            ->each(static function (\ReflectionClass $mixinReflectionClass, string $mixinClass): void {
-                foreach ($mixinReflectionClass->getAttributes(Mixin::class) as $mixinReflectionAttribute) {
-                    $mixinAttribute = $mixinReflectionAttribute->newInstance();
-                    \assert($mixinAttribute instanceof Mixin);
-                    $mixinAttribute->class::mixin(resolve($mixinClass), $mixinAttribute->replace);
+            ->each(static function (\ReflectionClass $reflectionClass, string $class): void {
+                $reflectionAttributes = $reflectionClass->getAttributes(Mixin::class);
+                \assert(\count($reflectionAttributes) === 1);
+
+                $mixinAttribute = $reflectionAttributes[0]->newInstance();
+                \assert($mixinAttribute instanceof Mixin);
+
+                foreach ($mixinAttribute->classes as $targetClass) {
+                    $targetClass::mixin(resolve($class), $mixinAttribute->replace);
                 }
             });
     }

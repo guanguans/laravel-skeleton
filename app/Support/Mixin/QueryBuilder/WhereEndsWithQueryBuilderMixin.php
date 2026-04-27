@@ -27,9 +27,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  * @mixin \Illuminate\Database\Query\Builder
  */
-#[Mixin(EloquentBuilder::class)]
-#[Mixin(QueryBuilder::class)]
-#[Mixin(RelationBuilder::class)]
+#[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
 final class WhereEndsWithQueryBuilderMixin
 {
     public function whereEndsWith(): \Closure

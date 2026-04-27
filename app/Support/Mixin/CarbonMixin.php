@@ -15,7 +15,6 @@ namespace App\Support\Mixin;
 
 use App\Support\Attribute\Mixin;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Request as RequestFacade;
 
 /**
  * @mixin \Illuminate\Support\Carbon
@@ -25,14 +24,16 @@ final class CarbonMixin
 {
     public function inAppTimezone(): \Closure
     {
-        return fn (): self => $this->setTimezone(config('app.timezone'));
+        return fn (): self => $this->setTimezone(config()->string('app.timezone'));
     }
 
     public function inUserTimezone(): \Closure
     {
-        return fn (?string $guard = null): self => $this->setTimezone(
-            RequestFacade::user($guard)?->timezone()
-        );
+        return function (?string $guard = null): self {
+            $timezone = request()->user($guard)?->timezone();
+
+            return null === $timezone ? $this : $this->setTimezone($timezone);
+        };
     }
 
     public function toFormattedDateTimeString(): \Closure

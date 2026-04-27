@@ -1,7 +1,7 @@
 <?php
 
+/** @noinspection MissingParentCallInspection */
 /** @noinspection PhpMissingParentCallCommonInspection */
-
 declare(strict_types=1);
 
 /**
@@ -22,11 +22,13 @@ use Illuminate\Support\Carbon;
  */
 final class NullCarbon extends Carbon implements \Stringable
 {
+    #[\Override]
     public function __toString(): string
     {
         return '';
     }
 
+    #[\Override]
     public function format(string $format): string
     {
         return '';
@@ -35,6 +37,7 @@ final class NullCarbon extends Carbon implements \Stringable
     /**
      * @throws \JsonException
      */
+    #[\Override]
     public function jsonSerialize(): string
     {
         return json_encode(null, \JSON_THROW_ON_ERROR);

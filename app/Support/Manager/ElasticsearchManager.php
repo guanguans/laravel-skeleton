@@ -18,7 +18,6 @@ use Elastic\Elasticsearch\ClientBuilder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Manager;
-use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
 
@@ -42,32 +41,45 @@ final class ElasticsearchManager extends Manager
     }
 
     /**
+     * @see \Illuminate\Log\LogManager::resolve()
+     *
      * @throws \Elastic\Elasticsearch\Exception\ConfigException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Throwable
-     *
-     * @noinspection PhpMissingParentCallCommonInspection
-     * @noinspection MissingParentCallInspection
      */
     #[\Override]
     protected function createDriver(mixed $driver): Client
     {
-        if (isset($this->customCreators[$driver])) {
-            return $this->callCustomCreator($driver);
+        try {
+            return parent::createDriver($driver);
+        } catch (\InvalidArgumentException $invalidArgumentException) {
+            if ($invalidArgumentException->getMessage() !== "Driver [$driver] not supported.") {
+                throw $invalidArgumentException;
+            }
+
+            $config = $this->configurationFor($driver);
+            $quiet = (bool) Arr::pull($config, 'quiet');
+
+            return ClientBuilder::fromConfig($config, $quiet);
+        }
+    }
+
+    /**
+     * @see \Illuminate\Log\LogManager::resolve()
+     * @see \Illuminate\Log\LogManager::configurationFor()
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
+     */
+    private function configurationFor(string $driver): array
+    {
+        $configKey = "services.elasticsearch.connections.$driver";
+
+        if (!$this->config->has($configKey)) {
+            throw new \InvalidArgumentException("Connection [$driver] is not defined.");
         }
 
-        $driverKey = "services.elasticsearch.connections.$driver";
-        throw_unless($this->config->has($driverKey), \InvalidArgumentException::class, "Connection [$driver] not supported.");
-        $config = $this->prepareConfig($this->config->get($driverKey));
-        $method = \sprintf('create%sDriver', Str::studly($driver));
-
-        if (method_exists($this, $method)) {
-            return $this->{$method}($config);
-        }
-
-        $quiet = (bool) Arr::pull($config, 'quiet');
-
-        return ClientBuilder::fromConfig($config, $quiet);
+        return $this->prepareConfig($this->config->array($configKey));
     }
 
     /**
@@ -79,18 +91,17 @@ final class ElasticsearchManager extends Manager
      */
     private function prepareConfig(array $config): array
     {
-        $default = ['quiet' => false];
-        $main = Arr::except($this->config->get('services.elasticsearch', []), ['default', 'connections']);
-        $config = array_replace_recursive($default, $main, $config);
+        $defaultConfig = ['quiet' => false];
+        $mainConfig = Arr::except($this->config->get('services.elasticsearch', []), ['default', 'connections']);
+        // $config = array_replace($defaultConfig, $mainConfig, $config);
+        $config += ($mainConfig + $defaultConfig);
 
         if (isset($config['hosts'])) {
             $config['hosts'] = array_filter(
                 $config['hosts'],
-                fn (array|string $host, int|string $indexOrEnv): bool => $this->container->environment(match (true) {
-                    \is_string($indexOrEnv) => $indexOrEnv,
-                    \is_array($host) and isset($host['env']) => $host['env'],
-                    default => $this->container->environment(),
-                }),
+                fn (string $host, int|string $indexOrEnv): bool => $this->container->environment(
+                    \is_string($indexOrEnv) ? $indexOrEnv : $this->container->environment()
+                ),
                 \ARRAY_FILTER_USE_BOTH
             );
         }

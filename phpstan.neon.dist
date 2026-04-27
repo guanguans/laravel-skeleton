@@ -257,8 +257,8 @@ parameters:
                 - app/Rules/AbstractRule.php
         -
             messages:
-                - '#^Parameter \$class of method App\\Support\\Attribute\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
-                - '#^Property App\\Support\\Attribute\\Mixin\:\:\$class has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
+                - '#^Parameter \$classes of method App\\Support\\Attribute\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
+                - '#^Property App\\Support\\Attribute\\Mixin\:\:\$classes has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
             path: app/Support/Attribute/Mixin.php
         -
             messages:

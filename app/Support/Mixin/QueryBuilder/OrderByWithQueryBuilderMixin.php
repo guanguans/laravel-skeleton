@@ -26,9 +26,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  * @mixin \Illuminate\Database\Query\Builder
  */
-#[Mixin(EloquentBuilder::class)]
-#[Mixin(QueryBuilder::class)]
-#[Mixin(RelationBuilder::class)]
+#[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
 final class OrderByWithQueryBuilderMixin
 {
     public function orderByWith(): \Closure
@@ -41,11 +39,7 @@ final class OrderByWithQueryBuilderMixin
             \assert($relation instanceof RelationBuilder);
 
             return $this->orderBy(
-                $relation->getRelationExistenceQuery(
-                    $relation->getRelated()->newQueryWithoutRelationships(),
-                    $this,
-                    $column
-                ),
+                $relation->getRelationExistenceQuery($relation->getRelated()->newQueryWithoutRelationships(), $this, $column),
                 $direction
             );
         };

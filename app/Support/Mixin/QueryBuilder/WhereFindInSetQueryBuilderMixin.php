@@ -28,9 +28,7 @@ use Illuminate\Support\Facades\DB;
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  * @mixin \Illuminate\Database\Query\Builder
  */
-#[Mixin(EloquentBuilder::class)]
-#[Mixin(QueryBuilder::class)]
-#[Mixin(RelationBuilder::class)]
+#[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
 final class WhereFindInSetQueryBuilderMixin
 {
     public function whereFindInSet(): \Closure
@@ -45,6 +43,7 @@ final class WhereFindInSetQueryBuilderMixin
             $values instanceof Arrayable and $values = $values->toArray();
             \is_array($values) and $values = implode(',', $values);
 
+            /** @noinspection PhpParamsInspection */
             return $this->whereRaw($sql, $values, $boolean);
         };
     }

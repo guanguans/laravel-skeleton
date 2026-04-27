@@ -1,9 +1,8 @@
 <?php
 
 /** @noinspection ParameterImplicitlyNullableInspection */
-
 /** @noinspection PhpFullyQualifiedNameUsageInspection */
-
+/** @noinspection TypoSafeNamingInspection */
 declare(strict_types=1);
 
 /**

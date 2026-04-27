@@ -28,9 +28,7 @@ use Illuminate\Support\Facades\DB;
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  * @mixin \Illuminate\Database\Query\Builder
  */
-#[Mixin(EloquentBuilder::class)]
-#[Mixin(QueryBuilder::class)]
-#[Mixin(RelationBuilder::class)]
+#[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
 final class WhereInsQueryBuilderMixin
 {
     public function whereIns(): \Closure
@@ -68,6 +66,7 @@ final class WhereInsQueryBuilderMixin
 
             $raw = "($rawColumns) $operator ($rawValues)";
 
+            /** @noinspection PhpParamsInspection */
             return $this->whereRaw($raw, $values, $boolean);
         };
     }

@@ -13,17 +13,24 @@ declare(strict_types=1);
 
 namespace App\Support\Attribute;
 
+use Illuminate\Support\Arr;
+
 /**
  * @see https://github.com/TheFlowByte/laravel-macro-attribute
  */
-#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
+#[\Attribute(\Attribute::TARGET_CLASS)]
 final readonly class Mixin
 {
+    /** @var list<class-string<\Illuminate\Support\Traits\Macroable>> */
+    public array $classes;
+
     /**
-     * @param class-string<\Illuminate\Support\Traits\Macroable> $class
+     * @param class-string<\Illuminate\Support\Traits\Macroable>|list<class-string<\Illuminate\Support\Traits\Macroable>> $classes
      */
     public function __construct(
-        public string $class,
+        array|string $classes,
         public bool $replace = true
-    ) {}
+    ) {
+        $this->classes = Arr::wrap($classes);
+    }
 }

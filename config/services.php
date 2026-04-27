@@ -54,10 +54,8 @@ return [
 
     'elasticsearch' => [
         'default' => env('ELASTICSEARCH_DEFAULT', 'read'),
-        'quiet' => false,
         'logger' => 'daily-elasticsearch',
-        /** @see \GuzzleHttp\RequestOptions */
-        'httpClientOptions' => [],
+        'httpClientOptions' => [], /** @see \GuzzleHttp\RequestOptions */
         'connections' => [
             'read' => [
                 'hosts' => [

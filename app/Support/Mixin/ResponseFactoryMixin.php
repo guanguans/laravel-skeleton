@@ -38,7 +38,6 @@ final class ResponseFactoryMixin
      * );
      * ```.
      *
-     * @noinspection SensitiveParameterInspection
      * @noinspection PhpTooManyParametersInspection
      */
     public function streamRemoteDownload(): \Closure
@@ -53,13 +52,18 @@ final class ResponseFactoryMixin
         ): StreamedResponse {
             $client ??= new Client;
 
-            return $this->streamDownload(static function () use ($client, $url, $chunk): void {
-                $stream = $client->get($url, [RequestOptions::STREAM => true])->getBody();
+            return $this->streamDownload(
+                static function () use ($client, $url, $chunk): void {
+                    $stream = $client->get($url, [RequestOptions::STREAM => true])->getBody();
 
-                while (!$stream->eof()) {
-                    echo $stream->read($chunk);
-                }
-            }, $name, $headers, $disposition);
+                    while (!$stream->eof()) {
+                        echo $stream->read($chunk);
+                    }
+                },
+                $name,
+                $headers,
+                $disposition
+            );
         };
     }
 }

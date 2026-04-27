@@ -34,10 +34,11 @@ final class SchedulingEventMixin
      * @noinspection ForgottenDebugOutputInspection
      * @noinspection PhpExpressionResultUnusedInspection
      */
-    public function ddHumanlyExpression(): \Closure
+    public function ddExpression(): \Closure
     {
         return function (?string $locale = null, bool $timeFormat24hours = false): never {
-            $this->dumpHumanlyExpression($locale, $timeFormat24hours);
+            /** @noinspection UnusedFunctionResultInspection */
+            $this->dumpExpression($locale, $timeFormat24hours);
 
             exit(1);
         };
@@ -47,41 +48,21 @@ final class SchedulingEventMixin
      * @noinspection ForgottenDebugOutputInspection
      * @noinspection DebugFunctionUsageInspection
      */
-    public function dumpHumanlyExpression(): \Closure
-    {
-        return function (?string $locale = null, bool $timeFormat24hours = false): Event {
-            dump(CronTranslator::translate(
-                $this->expression,
-                match ($locale ??= config('app.locale', 'en')) {
-                    'zh_CN' => 'zh',
-                    'zh_TW' => 'zh-TW',
-                    default => $locale,
-                },
-                $timeFormat24hours
-            ));
-
-            return $this;
-        };
-    }
-
-    /**
-     * @noinspection ForgottenDebugOutputInspection
-     */
-    public function ddExpression(): \Closure
-    {
-        return function (): never {
-            dd($this->expression);
-        };
-    }
-
-    /**
-     * @noinspection ForgottenDebugOutputInspection
-     * @noinspection DebugFunctionUsageInspection
-     */
     public function dumpExpression(): \Closure
     {
-        return function (): Event {
-            dump($this->expression);
+        return function (?string $locale = null, bool $timeFormat24hours = false): Event {
+            dump(
+                $this->expression,
+                CronTranslator::translate(
+                    $this->expression,
+                    match ($locale ??= config()->string('app.locale', 'en')) {
+                        'zh_CN' => 'zh',
+                        'zh_TW' => 'zh-TW',
+                        default => $locale,
+                    },
+                    $timeFormat24hours
+                )
+            );
 
             return $this;
         };
@@ -138,6 +119,7 @@ final class SchedulingEventMixin
     public function userAppendOutputTo(): \Closure
     {
         return function (?string $directory = null, ?string $filename = null, ?string $suffix = null): Event {
+            /** @noinspection NullableArgumentPassedInspection */
             $filename = value(
                 function (?string $filename): string {
                     if ($filename) {
@@ -173,19 +155,14 @@ final class SchedulingEventMixin
             $location = join_paths(
                 $directory ?? join_paths(storage_path('logs'), 'schedules', $filename),
                 str($filename)
-                    ->when(
-                        $suffix,
-                        static fn (Stringable $filename): Stringable => $filename->finish('-')->finish($suffix)
-                    )
+                    ->when($suffix, static fn (Stringable $filename): Stringable => $filename->finish('-')->finish($suffix))
                     ->finish('.log')
             );
 
             // dump($location);
 
             return $this
-                ->before(static function () use ($location): void {
-                    Log::build(['path' => $location] + config('logging.channels.single'))->info('>>>>>>>>');
-                })
+                ->before(static fn () => Log::build(['path' => $location] + config()->array('logging.channels.single'))->info('>>>>>>>>'))
                 ->appendOutputTo($location);
         };
     }

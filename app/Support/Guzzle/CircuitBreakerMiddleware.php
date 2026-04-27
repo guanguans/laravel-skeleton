@@ -27,6 +27,7 @@ final class CircuitBreakerMiddleware
     use Conditionable;
     use Tappable;
     private Ganesha $ganesha {
+        /** @noinspection PhpMethodNamingConventionInspection */
         get {
             return $this->ganesha;
         }
@@ -49,11 +50,7 @@ final class CircuitBreakerMiddleware
 
         $this->ganesha = collect($configuration)
             ->reduce(
-                static fn (
-                    Builder $builder,
-                    mixed $parameter,
-                    string $method
-                ): Builder => $builder->{$method}($parameter),
+                static fn (Builder $builder, mixed $parameter, string $method): Builder => $builder->{$method}($parameter),
                 Ganesha\Builder::withRateStrategy()
             )
             ->build();

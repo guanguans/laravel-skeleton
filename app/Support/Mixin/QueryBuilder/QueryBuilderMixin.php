@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection OverrideMissingInspection */
 declare(strict_types=1);
 
 /**
@@ -26,20 +27,18 @@ use Illuminate\Support\Facades\Cache;
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation
  * @mixin \Illuminate\Database\Query\Builder
  */
-#[Mixin(EloquentBuilder::class)]
-#[Mixin(QueryBuilder::class)]
-#[Mixin(RelationBuilder::class)]
+#[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
 final class QueryBuilderMixin
 {
     /**
      * @see https://medium.com/@developerawam/laravel-too-slow-just-add-these-few-lines-of-cache-cf2893e50eef
+     *
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      */
     public function cache(): \Closure
     {
         /**
-         * @param \Closure(EloquentBuilder|QueryBuilder|RelationBuilder|self): mixed $callback
-         *
-         * @noinspection RedundantDocCommentTagInspection
+         * @param \Closure(EloquentBuilder|QueryBuilder|RelationBuilder|self $query): mixed $callback
          */
         return fn (
             string $key,

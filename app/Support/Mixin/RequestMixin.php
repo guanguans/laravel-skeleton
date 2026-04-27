@@ -21,7 +21,6 @@ use Illuminate\Routing\RouteCollection;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Request as RequestFacade;
 
 /**
  * @mixin \Illuminate\Http\Request
@@ -36,12 +35,12 @@ final class RequestMixin
 
     public function isAdmin(): \Closure
     {
-        return static fn (): bool => (bool) RequestFacade::user()?->isAdmin();
+        return fn (): bool => (bool) $this->user()?->isAdmin();
     }
 
-    public static function isDeveloper(): \Closure
+    public function isDeveloper(): \Closure
     {
-        return static fn (): bool => (bool) RequestFacade::user()?->isDeveloper();
+        return fn (): bool => (bool) $this->user()?->isDeveloper();
     }
 
     public function isWechat(): \Closure
@@ -49,16 +48,9 @@ final class RequestMixin
         return fn (): bool => str_contains((string) $this->userAgent(), 'MicroMessenger');
     }
 
-    /**
-     * @noinspection SensitiveParameterInspection
-     */
     public function headers(): \Closure
     {
-        return fn (?string $key = null, ?string $default = null) => null === $key
-            ? collect($this->header())
-                ->map(static fn (array $header) => $header[0])
-                ->toArray()
-            : $this->header($key, $default);
+        return fn () => array_map(static fn (array $header) => $header[0], $this->header());
     }
 
     public function whenRouteIs(): \Closure
@@ -139,6 +131,7 @@ final class RequestMixin
      * @see \App\Support\Mixin\UploadedFileMixin::makeFromUrl()
      *
      * @noinspection PhpUndefinedMethodInspection
+     * @noinspection BypassedUrlValidationInspection
      */
     public function resolveFileFromUrl(): \Closure
     {
@@ -147,9 +140,8 @@ final class RequestMixin
                 $file = UploadedFile::makeFromUrl((string) $this->string($field));
 
                 if ($file instanceof UploadedFile) {
-                    $this->merge([
-                        $field => $file,
-                    ]);
+                    /** @noinspection UnusedFunctionResultInspection */
+                    $this->merge([$field => $file]);
                 }
             }
         };

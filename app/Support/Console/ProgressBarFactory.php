@@ -21,10 +21,7 @@ use Symfony\Component\Console\Style\OutputStyle;
  */
 final readonly class ProgressBarFactory
 {
-    public function __construct(
-        /** @var \Symfony\Component\Console\Style\OutputStyle */
-        private OutputStyle $outputStyle
-    ) {}
+    public function __construct(private OutputStyle $outputStyle) {}
 
     public function create(int $max = 0): ProgressBar
     {
@@ -35,9 +32,7 @@ final readonly class ProgressBarFactory
         $progressBar->setRedrawFrequency(1);
         $progressBar->maxSecondsBetweenRedraws(0);
         $progressBar->minSecondsBetweenRedraws(0);
-        $progressBar->setFormat(
-            "%message%\n%current%/%max% [%bar%] %percent:3s%%\n"
-        );
+        $progressBar->setFormat("%message%\n%current%/%max% [%bar%] %percent:3s%%\n");
 
         return $progressBar;
     }
