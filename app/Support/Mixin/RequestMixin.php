@@ -50,7 +50,7 @@ final class RequestMixin
 
     public function headers(): \Closure
     {
-        return fn () => array_map(static fn (array $header) => $header[0], $this->header());
+        return fn (): array => array_map(static fn (array $header): mixed => $header[0], $this->header());
     }
 
     public function whenRouteIs(): \Closure

@@ -11,7 +11,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use Carbon\CarbonImmutable;
 use Carbon\CarbonInterval;
 use Carbon\CarbonTimeZone;
 use Composer\Autoload\ClassLoader;
@@ -22,16 +21,14 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\VarDumper;
 
 if (!\function_exists('catch_query_log')) {
-    function catch_query_log(callable $callback, mixed ...$parameters): array
+    function catch_query_log(callable $callback, mixed ...$parameters): Collection
     {
         return new Pipeline(app())
             ->send($callback)
             ->through(static function (callable $callback, Closure $next): Collection {
                 DB::enableQueryLog();
                 DB::flushQueryLog();
-
                 $queryLog = $next($callback);
-
                 DB::disableQueryLog();
 
                 return $queryLog;
@@ -167,8 +164,7 @@ if (!\function_exists('curry')) {
             &$accumulator
         ) {
             $arguments = [...$arguments, ...$args];
-            $reflection = new ReflectionFunction($function);
-            $totalArguments = $reflection->getNumberOfRequiredParameters();
+            $totalArguments = new ReflectionFunction($function)->getNumberOfRequiredParameters();
 
             if (\count($arguments) >= $totalArguments) {
                 return $function(...$arguments);
@@ -193,7 +189,6 @@ if (!\function_exists('deference')) {
             public function __destruct()
             {
                 while ($this->count() > 0) {
-                    /** @phpstan-ignore-next-line  */
                     ($this->pop())();
                 }
             }
@@ -409,7 +404,7 @@ if (!\function_exists('resolve_class_from')) {
 
         return str(realpath($path))
             ->replaceFirst($vendorPath, $vendorNamespace)
-            ->replaceLast('.php', '')
+            ->beforeLast('.php')
             ->replace(\DIRECTORY_SEPARATOR, '\\')
             ->replace('\\\\', '\\')
             ->start('\\')
@@ -439,8 +434,8 @@ if (!\function_exists('timezone_offset_name')) {
      */
     function timezone_offset_name(null|DateTimeZone|false|int|string $timezone = null): string
     {
-        // return CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
-        // return CarbonImmutable::now($timezone ?? config('app.timezone'))->format('P');
+        // return \Carbon\CarbonImmutable::now($timezone ?: config('app.timezone'))->getTimezone()->toOffsetName();
+        // return \Carbon\CarbonImmutable::now($timezone ?? config('app.timezone'))->format('P');
         return CarbonTimeZone::instance($timezone ?? config('app.timezone'))?->toOffsetName();
     }
 }

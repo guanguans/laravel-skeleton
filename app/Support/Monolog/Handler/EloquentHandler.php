@@ -20,7 +20,7 @@ use Monolog\LogRecord;
 final class EloquentHandler extends AbstractProcessingHandler
 {
     /**
-     * @param class-string $modelClass
+     * @param class-string<\Illuminate\Database\Eloquent\Model> $modelClass
      */
     public function __construct(
         private readonly string $modelClass,
@@ -30,6 +30,9 @@ final class EloquentHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
     }
 
+    /**
+     * @noinspection UnusedFunctionResultInspection
+     */
     #[\Override]
     protected function write(LogRecord $record): void
     {

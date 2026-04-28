@@ -20,6 +20,9 @@ namespace App\Support\Trait;
  */
 trait WithPipeArgs
 {
+    /**
+     * @noinspection OverrideMissingInspection
+     */
     public static function with(mixed ...$args): string
     {
         return [] === $args ? static::class : static::class.':'.implode(',', $args);

@@ -15,6 +15,7 @@
         "elasticsearch/elasticsearch": "^9.3",
         "guanguans/laravel-api-response": "^4.0",
         "guanguans/laravel-exception-notify": "^7.0",
+        "hamidrezaniazi/pecs": "^2.0",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^13.6",
         "laravel/octane": "^2.17",

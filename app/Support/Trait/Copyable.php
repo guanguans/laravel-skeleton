@@ -24,7 +24,7 @@ trait Copyable
 
     public function deepCopy(): static
     {
-        // return unserialize(serialize($this), [get_class($this)]);
+        // return unserialize(serialize($this), [static::class]);
         return deep_copy($this);
     }
 }

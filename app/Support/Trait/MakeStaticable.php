@@ -16,10 +16,11 @@ namespace App\Support\Trait;
 /**
  * @see \DragonCode\Support\Concerns\Makeable
  */
-trait Makeable
+trait MakeStaticable
 {
     /**
      * @noinspection PhpMethodParametersCountMismatchInspection
+     * @noinspection OverrideMissingInspection
      */
     public static function make(mixed ...$parameters): static
     {

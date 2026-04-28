@@ -19,6 +19,7 @@ use Monolog\Processor\ProcessorInterface;
 
 final class EloquentLogHttpModelProcessor implements ProcessorInterface
 {
+    #[\Override]
     public function __invoke(LogRecord $record): LogRecord
     {
         return $record->with(context: Arr::only($record->context, [

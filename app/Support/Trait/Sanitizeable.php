@@ -32,6 +32,8 @@ trait Sanitizeable
      * @throws \Exception
      *
      * @return array an array containing the values if the field was present in the request and the intersection array
+     *
+     * @noinspection UnusedFunctionResultInspection
      */
     public function sanitizeInput(array $fields): array
     {

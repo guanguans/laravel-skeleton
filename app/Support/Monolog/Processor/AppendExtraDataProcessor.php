@@ -28,6 +28,7 @@ final readonly class AppendExtraDataProcessor implements ProcessorInterface
 {
     public function __construct(private array $extraData) {}
 
+    #[\Override]
     public function __invoke(LogRecord $record): LogRecord
     {
         $record['extra'] += $this->extraData;

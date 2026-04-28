@@ -74,6 +74,7 @@ final readonly class ServerDumper implements DataDumperInterface
      *
      * @noinspection PhpVoidFunctionResultUsedInspection
      * @noinspection GlobalVariableUsageInspection
+     * @noinspection IssetArgumentExistenceInspection
      */
     public static function register(
         ?DataDumperInterface $fallbackDumper = null,
@@ -121,6 +122,7 @@ final readonly class ServerDumper implements DataDumperInterface
     /**
      * @noinspection PhpVoidFunctionResultUsedInspection
      */
+    #[\Override]
     public function dump(Data $data): ?string
     {
         if (!$this->connection->write($data)) {

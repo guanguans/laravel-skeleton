@@ -1,7 +1,7 @@
 <?php
 
 /** @noinspection MethodVisibilityInspection */
-
+/** @noinspection OverrideMissingInspection */
 declare(strict_types=1);
 
 /**
@@ -32,6 +32,8 @@ trait HasContext
      * @see static::stream_open()
      *
      * @return resource
+     *
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      */
     protected function getContext(): mixed
     {

@@ -19,6 +19,9 @@ use Monolog\LogRecord;
 
 final class EloquentLogHttpModelFormatter extends NormalizerFormatter
 {
+    /**
+     * @noinspection NullableArgumentPassedInspection
+     */
     #[\Override]
     public function format(LogRecord $record): array
     {
@@ -27,6 +30,8 @@ final class EloquentLogHttpModelFormatter extends NormalizerFormatter
 
     /**
      * @param array<string, mixed> $context
+     *
+     * @noinspection NullableArgumentPassedInspection
      */
     private function sanitizeContext(array $context): array
     {

@@ -92,6 +92,7 @@ final class ServerSentEvent implements \Stringable
      */
     private $tapper;
     private bool $headersSent = false {
+        /** @noinspection PhpMethodNamingConventionInspection */
         get {
             return $this->headersSent;
         }
@@ -116,6 +117,7 @@ final class ServerSentEvent implements \Stringable
         $this->setData($data);
     }
 
+    #[\Override]
     public function __toString(): string
     {
         $event = [];
@@ -175,6 +177,7 @@ final class ServerSentEvent implements \Stringable
 
                 // Break the loop if the client aborted the connection.
                 if (isset($closeServerSentEventException) || connection_aborted()) {
+                    /** @noinspection SuspiciousReturnInspection */
                     return;
                 }
 

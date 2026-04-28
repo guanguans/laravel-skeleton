@@ -27,7 +27,7 @@ return (new Configuration)
         false
     )
     ->addPathsToExclude([
-        __DIR__.'/app/Support/',
+        // __DIR__.'/app/Support/',
     ])
     ->ignoreUnknownClasses([
         'Pion\Laravel\ChunkUpload\Handler\ResumableJSUploadHandler',
@@ -36,9 +36,6 @@ return (new Configuration)
     ->ignoreErrors([ErrorType::SHADOW_DEPENDENCY])
     ->ignoreErrorsOnPackages(
         [
-            'ackintosh/ganesha',
-            'clue/stream-filter',
-            'elasticsearch/elasticsearch',
             'guanguans/laravel-exception-notify',
             'laravel/tinker',
         ],

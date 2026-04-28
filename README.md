@@ -71,6 +71,7 @@ composer envoy:ssh-testing
 composer envoy:testing
 composer facade:lint
 composer facade:update
+composer ghalint
 composer git-chglog
 composer gitleaks
 composer gitleaks:generate-baseline
@@ -577,7 +578,6 @@ app/
 |   |   |-- HasValidSignature.php
 |   |   |-- HttpsProtocol.php
 |   |   |-- IsDeveloper.php
-|   |   |-- IsRouteIgnored.php
 |   |   |-- Localization.php
 |   |   |-- LogHttp.php
 |   |   |-- MustBeAdmin.php
@@ -664,7 +664,7 @@ app/
 |   |-- WhenLocalAggregateServiceProvider.php
 |   `-- WhenTestingAggregateServiceProvider.php
 |-- Rules/
-|   |-- AbstractAggregateRule.php
+|   |-- AbstractProxyRule.php
 |   |-- AbstractRegexRule.php
 |   |-- AbstractRule.php
 |   |-- AddressIpV4Rule.php
@@ -723,7 +723,6 @@ app/
 |   |-- Attribute/
 |   |   |-- Autowired.php
 |   |   |-- Elasticsearch.php
-|   |   |-- Ignore.php
 |   |   `-- Mixin.php
 |   |-- BitEncoder.php
 |   |-- Bootstrap/
@@ -802,7 +801,7 @@ app/
 |   |   |-- Configurable.php
 |   |   |-- Copyable.php
 |   |   |-- Immutable.php
-|   |   |-- Makeable.php
+|   |   |-- MakeStaticable.php
 |   |   |-- Sanitizeable.php
 |   |   |-- SetStateable.php
 |   |   |-- Singletonable.php
@@ -818,7 +817,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-55 directories, 238 files
+55 directories, 236 files
 
 ```
 
