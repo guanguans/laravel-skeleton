@@ -667,8 +667,6 @@ app/
 |   |-- AbstractProxyRule.php
 |   |-- AbstractRegexRule.php
 |   |-- AbstractRule.php
-|   |-- AddressIpV4Rule.php
-|   |-- AddressIpV6Rule.php
 |   |-- BankCardRule.php
 |   |-- Base64Rule.php
 |   |-- BetweenWordsRule.php
@@ -681,43 +679,28 @@ app/
 |   |-- Concerns/
 |   |   |-- DataAware.php
 |   |   `-- ValidatorAware.php
-|   |-- CurrentUserPasswordRule.php
 |   |-- DefaultRule.php
 |   |-- DomainRule.php
 |   |-- DuplicateRule.php
-|   |-- EmailRule.php
 |   |-- EvenNumberRule.php
-|   |-- HexColorRule.php
-|   |-- HexRule.php
 |   |-- HtmlCleanRule.php
 |   |-- HtmlTagRule.php
 |   |-- IdCardRule.php
 |   |-- ImeiRule.php
 |   |-- InstanceofRule.php
 |   |-- IntegerBooleanRule.php
-|   |-- IpRule.php
 |   |-- JwtRule.php
 |   |-- KebabCaseRule.php
-|   |-- LenientPortRule.php
 |   |-- LocationCoordinatesRule.php
-|   |-- MacAddressRule.php
 |   |-- MaxUploadSizeRule.php
-|   |-- MimeTypeRule.php
 |   |-- NotDisposableEmailRule.php
 |   |-- OddNumberRule.php
-|   |-- PhoneCisRule.php
 |   |-- PhoneRule.php
-|   |-- PhoneWorldRule.php
 |   |-- PortRule.php
 |   |-- PostalCodeRule.php
 |   |-- SemverRule.php
 |   |-- SlugRule.php
 |   |-- SnakeCaseRule.php
-|   |-- StrongPassword.php
-|   |-- TimezoneRule.php
-|   |-- UlidRule.php
-|   |-- UrlRule.php
-|   |-- UuidRule.php
 |   `-- WithoutWhitespaceRule.php
 |-- Support/
 |   |-- Attribute/
@@ -817,7 +800,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-55 directories, 236 files
+55 directories, 219 files
 
 ```
 

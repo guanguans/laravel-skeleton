@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Rules\AbstractRule;
+use App\Rules\MaxUploadSizeRule;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
+use Illuminate\Validation\Rules\Email;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Validator;
 
@@ -45,7 +48,7 @@ final class ValidatorServiceProvider extends ServiceProvider
     private function ever(): void
     {
         $this->whenever(true, function (): void {
-            $this->defaultPassword();
+            $this->defaults();
             $this->extendValidator();
         });
     }
@@ -55,8 +58,23 @@ final class ValidatorServiceProvider extends ServiceProvider
         $this->whenever(false, static function (): void {});
     }
 
-    private function defaultPassword(): void
+    private function defaults(): void
     {
+        Email::defaults(fn (): Email => Email::default()->when(
+            $this->app->isProduction(),
+            static fn (Email $email) => $email
+                // ->rfcCompliant()
+                ->strict()
+                ->validateMxRecord()
+                ->preventSpoofing()
+                ->withNativeValidation()
+        ));
+
+        File::defaults(fn (): File => File::default()->when(
+            $this->app->isProduction(),
+            static fn (File $file) => $file->rules([MaxUploadSizeRule::make()])
+        ));
+
         Password::defaults(fn (): Password => Password::min(8)->max(64)->when(
             $this->app->isProduction(),
             static fn (#[\SensitiveParameter] Password $password) => $password

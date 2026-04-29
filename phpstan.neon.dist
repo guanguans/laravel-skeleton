@@ -310,4 +310,5 @@ parameters:
         - identifier: staticMethod.notFound
         - identifier: return.deprecatedInterface
         - identifier: booleanAnd.alwaysFalse
+        - identifier: classConstant.deprecated
 

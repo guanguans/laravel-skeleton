@@ -129,10 +129,7 @@ final class SchedulingEventMixin
                 if ($this->command) {
                     return str($this->command)
                         ->pipe(Event::normalizeCommand(...))
-                        ->whenStartsWith(
-                            $needle = 'php artisan',
-                            static fn (Stringable $command): Stringable => $command->replaceFirst($needle, 'artisan')
-                        )
+                        ->replaceFirst('php artisan', 'artisan')
                         ->toString();
                 }
 
