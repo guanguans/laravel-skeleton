@@ -20,8 +20,6 @@ final class InvalidRepeatRequestException extends ConflictHttpException
     /**
      * @see https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Status
      * @see self::fromStatusCode()
-     *
-     * @noinspection SensitiveParameterInspection
      */
     public function __construct(string $message = '', ?\Throwable $previous = null, int $code = 0, array $headers = [])
     {

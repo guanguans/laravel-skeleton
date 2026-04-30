@@ -30,9 +30,6 @@ final class EloquentHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
     }
 
-    /**
-     * @noinspection UnusedFunctionResultInspection
-     */
     #[\Override]
     protected function write(LogRecord $record): void
     {

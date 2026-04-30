@@ -184,7 +184,7 @@ final class DatabaseServiceProvider extends ServiceProvider
 
         Event::listen(QueryExecuted::class, static function (QueryExecuted $query): void {
             if (
-                Config::get('logging.query.slower_than', 0) > $query->time
+                Config::integer('logging.query.slower_than', 0) > (float) $query->time
                 || str($query->sql)->is(Config::get('logging.query.except', []))
             ) {
                 return;

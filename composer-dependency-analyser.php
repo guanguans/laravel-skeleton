@@ -27,7 +27,8 @@ return (new Configuration)
         false
     )
     ->addPathsToExclude([
-        // __DIR__.'/app/Support/',
+        __DIR__.'/app/Support/Rector/',
+        __DIR__.'/app/Support/ComposerScripts.php',
     ])
     ->ignoreUnknownClasses([
         'Pion\Laravel\ChunkUpload\Handler\ResumableJSUploadHandler',

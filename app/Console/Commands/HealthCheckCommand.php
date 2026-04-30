@@ -283,7 +283,7 @@ final class HealthCheckCommand extends Command implements Isolatable
             return Error::create('The memory limit is not set.');
         }
 
-        $localValue = $inis->first()['local_value'];
+        $localValue = (int) $inis->first()['local_value'];
 
         if (0 < $localValue && $localValue < $limit) {
             return Error::create("The memory limit is less than {$limit}M: `$localValue`.");

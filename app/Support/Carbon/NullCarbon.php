@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection MissingParentCallInspection */
 /** @noinspection PhpMissingParentCallCommonInspection */
 declare(strict_types=1);
 

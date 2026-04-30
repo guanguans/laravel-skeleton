@@ -44,7 +44,7 @@ final class CacheServiceProvider extends ServiceProvider
                 'login',
                 static fn (Request $request): array => [
                     Limit::perMinute(500),
-                    Limit::perMinute(5)->by($request->ip()),
+                    Limit::perMinute(50)->by($request->ip()),
                     Limit::perMinute(5)->by($request->input('email')),
                 ]
             );

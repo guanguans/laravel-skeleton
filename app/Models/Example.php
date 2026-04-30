@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection ClassReusesParentTraitInspection */
 /** @noinspection PhpMissingDocCommentInspection */
 /** @noinspection PhpUnusedAliasInspection */
 
@@ -124,6 +125,8 @@ final class Example extends Model
 
     /**
      * @see https://github.com/LaravelDaily/laravel-tips/blob/master/db-models-and-eloquent.md#change-format-of-created_at-and-updated_at
+     *
+     * @noinspection LowerAccessLevelInspection
      */
     protected function createdAtFormatted(): Attribute
     {
@@ -134,6 +137,8 @@ final class Example extends Model
 
     /**
      * @see https://github.com/LaravelDaily/laravel-tips/blob/master/db-models-and-eloquent.md#change-format-of-created_at-and-updated_at
+     *
+     * @noinspection LowerAccessLevelInspection
      */
     protected function updatedAtFormatted(): Attribute
     {

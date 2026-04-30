@@ -63,7 +63,7 @@ trait Nullable
      */
     public function checkNullableValue(mixed $value): bool
     {
-        if (0 === $value || '0' === $value || 0.0 === $value || false === $value) {
+        if (\in_array($value, [0, 0.0, '0', false], true)) {
             return false;
         }
 

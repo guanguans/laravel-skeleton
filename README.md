@@ -667,41 +667,21 @@ app/
 |   |-- AbstractProxyRule.php
 |   |-- AbstractRegexRule.php
 |   |-- AbstractRule.php
-|   |-- BankCardRule.php
 |   |-- Base64Rule.php
 |   |-- BetweenWordsRule.php
-|   |-- BitcoinAddressRule.php
 |   |-- CallbackRule.php
-|   |-- CamelCaseRule.php
-|   |-- CapitalCharWithNumberRule.php
-|   |-- CarNumberRule.php
-|   |-- ChineseNameRule.php
 |   |-- Concerns/
 |   |   |-- DataAware.php
 |   |   `-- ValidatorAware.php
 |   |-- DefaultRule.php
-|   |-- DomainRule.php
 |   |-- DuplicateRule.php
-|   |-- EvenNumberRule.php
 |   |-- HtmlCleanRule.php
-|   |-- HtmlTagRule.php
-|   |-- IdCardRule.php
 |   |-- ImeiRule.php
 |   |-- InstanceofRule.php
 |   |-- IntegerBooleanRule.php
-|   |-- JwtRule.php
-|   |-- KebabCaseRule.php
-|   |-- LocationCoordinatesRule.php
 |   |-- MaxUploadSizeRule.php
 |   |-- NotDisposableEmailRule.php
-|   |-- OddNumberRule.php
-|   |-- PhoneRule.php
-|   |-- PortRule.php
-|   |-- PostalCodeRule.php
-|   |-- SemverRule.php
-|   |-- SlugRule.php
-|   |-- SnakeCaseRule.php
-|   `-- WithoutWhitespaceRule.php
+|   `-- PhoneRule.php
 |-- Support/
 |   |-- Attribute/
 |   |   |-- Autowired.php
@@ -800,7 +780,7 @@ app/
     `-- Creators/
         `-- RequestCreator.php
 
-55 directories, 219 files
+55 directories, 199 files
 
 ```
 

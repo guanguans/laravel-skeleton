@@ -45,7 +45,6 @@ final class WhereFullTextQueryBuilderMixin
 
             $this->wheres[] = ['type' => $type, 'columns' => $columns, 'value' => $value, 'options' => $options, 'boolean' => $boolean];
 
-            /** @noinspection UnusedFunctionResultInspection */
             $this->addBinding($value);
 
             return $this;

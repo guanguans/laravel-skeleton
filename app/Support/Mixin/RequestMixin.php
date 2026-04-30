@@ -140,7 +140,6 @@ final class RequestMixin
                 $file = UploadedFile::makeFromUrl((string) $this->string($field));
 
                 if ($file instanceof UploadedFile) {
-                    /** @noinspection UnusedFunctionResultInspection */
                     $this->merge([$field => $file]);
                 }
             }

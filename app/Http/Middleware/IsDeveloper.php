@@ -35,6 +35,7 @@ final class IsDeveloper
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         if (auth()->check() && auth()->user()->isDeveloper()) {
+            /** @noinspection PhpUnreachableStatementInspection */
             return $next($request);
         }
 

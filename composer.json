@@ -461,6 +461,7 @@
         ],
         "app:lint-readme": "App\\Support\\ComposerScripts::lintReadme",
         "app:parse-phpdoc": "Guanguans\\RectorRules\\Support\\ComposerScripts::parsePhpdoc",
+        "app:update-mixin-ide-helper": "App\\Support\\ComposerScripts::updateMixinIdeHelper",
         "argtyper": "@php vendor/bin/argtyper --ansi -vv",
         "argtyper:add-types": "@argtyper add-types .",
         "artisan": "@php artisan --ansi -vv",

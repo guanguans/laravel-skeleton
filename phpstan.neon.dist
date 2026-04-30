@@ -311,4 +311,5 @@ parameters:
         - identifier: return.deprecatedInterface
         - identifier: booleanAnd.alwaysFalse
         - identifier: classConstant.deprecated
+        - identifier: cast.int
 

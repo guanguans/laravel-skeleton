@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use App\Support\Attribute\Mixin;
 use Composer\Script\Event;
 use GrahamCampbell\ResultType\Error;
 use GrahamCampbell\ResultType\Result;
@@ -61,10 +62,44 @@ final class ComposerScripts
      */
     private function __construct() {}
 
+    /**
+     * @todo
+     *
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
+    public static function updateMixinIdeHelper(Event $event): int
+    {
+        self::requireAutoload($event);
+
+        classes(
+            static fn (string $class, string $file): bool => str($class)->is('App\\Support\\Mixin\\*')
+                && str($file)->is('*/../../app/Support/Mixin/*')
+        )
+            // ->keys()->dd()
+            ->each(static function (\ReflectionClass $reflectionClass, string $class): void {
+                $reflectionAttributes = $reflectionClass->getAttributes(Mixin::class);
+                \assert(\count($reflectionAttributes) === 1);
+
+                $mixinAttribute = $reflectionAttributes[0]->newInstance();
+                \assert($mixinAttribute instanceof Mixin);
+
+                foreach ($mixinAttribute->classes as $targetClass) {
+                    $targetClass::mixin(resolve($class), $mixinAttribute->replace);
+                }
+            });
+
+        // $event->getIO()->info('No errors');
+        return 0;
+    }
+
+    /**
+     * @throws \ErrorException
+     * @throws \ReflectionException
+     */
     public static function findStaticMethods(Event $event): int
     {
         self::requireAutoload($event);
-        \Illuminate\Foundation\Application::configure(basePath: \dirname(__DIR__, 2))->create();
 
         classes(
             static fn (string $class): bool => str($class)->is([
@@ -122,17 +157,16 @@ final class ComposerScripts
                 );
             })
             // ->dump()
-            ->each(function (Collection $methods, string $class) use ($event): void {
+            ->each(static function (Collection $methods, string $class) use ($event): void {
                 // $this->newLine();
                 $event->getIO()->info('');
-                $factory = new Factory((fn () => $this->output)->call($event->getIO()));
-                $factory->twoColumnDetail(
+                resolve(Factory::class)->twoColumnDetail(
                     "<info>$class</info>",
                     str(new \ReflectionClass($class)->getFileName())->chopStart(base_path(\DIRECTORY_SEPARATOR))
                 );
 
-                $methods->each(static function (\ReflectionMethod $reflectionMethod) use ($factory): void {
-                    $factory->twoColumnDetail(
+                $methods->each(static function (\ReflectionMethod $reflectionMethod): void {
+                    resolve(Factory::class)->twoColumnDetail(
                         $reflectionMethod->getName(),
                         str($reflectionMethod->getFileName())
                             ->chopStart(base_path(\DIRECTORY_SEPARATOR))
@@ -141,8 +175,7 @@ final class ComposerScripts
                 });
             });
 
-        $event->getIO()->info('No errors');
-
+        // $event->getIO()->info('No errors');
         return 0;
     }
 
@@ -275,6 +308,11 @@ final class ComposerScripts
         (fn () => $this->output->setVerbosity(OutputInterface::VERBOSITY_DEBUG))->call($event->getIO());
 
         require_once $event->getComposer()->getConfig()->get('vendor-dir').\DIRECTORY_SEPARATOR.'autoload.php';
+
+        $app = \Illuminate\Foundation\Application::configure(\dirname(__DIR__, 2))->create();
+        $app->singleton(ConsoleOutput::class, static fn () => (fn () => $this->output)->call($event->getIO()));
+        $app->bindIf(OutputInterface::class, ConsoleOutput::class);
+        $app->singleton(Factory::class, static fn (): Factory => new Factory(resolve(ConsoleOutput::class)));
     }
 
     /**

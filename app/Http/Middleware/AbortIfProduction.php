@@ -13,14 +13,11 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Support\Trait\WithPipeArgs;
 use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpFoundation\Response;
 
 final class AbortIfProduction extends AbortIf
 {
-    use WithPipeArgs;
-
     #[\Override]
     protected function when(): bool
     {

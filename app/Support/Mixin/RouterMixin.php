@@ -32,7 +32,6 @@ final class RouterMixin
     public function files(): \Closure
     {
         return function (array $files): void {
-            /** @noinspection UnusedFunctionResultInspection */
             collect($files)->each(fn (\SplFileInfo|string $file): Router => $this->file($file));
         };
     }

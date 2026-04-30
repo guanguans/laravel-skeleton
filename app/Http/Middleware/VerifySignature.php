@@ -63,7 +63,7 @@ final class VerifySignature
             'nonce' => ['required', 'string', 'size:16'],
             'timestamp' => \sprintf(
                 'required|int|max:%s|min:%s',
-                $time = Date::now()->timestamp + 1,
+                $time = (Date::now()->timestamp + 1),
                 $time - $effectiveTime
             ),
         ])->validate();

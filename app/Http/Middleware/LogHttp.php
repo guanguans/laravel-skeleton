@@ -165,9 +165,6 @@ final class LogHttp
         ];
     }
 
-    /**
-     * @noinspection SensitiveParameterInspection
-     */
     private function headerFor(Request|SymfonyResponse $requestOrResponse): array
     {
         return collect($requestOrResponse->headers->all())

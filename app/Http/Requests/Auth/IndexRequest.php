@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection OverrideIllegalInspection */
 /** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 

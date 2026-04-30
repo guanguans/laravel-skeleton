@@ -38,15 +38,10 @@ final class ClearLogsCommand extends Command
                 ->ignoreVCS(true)
                 ->ignoreVCSIgnored(false)
                 ->name('*.log')
-                ->filter(function (SplFileInfo $fileInfo): bool {
-                    $isDaily = preg_match('/^.*-\d{4}-\d{2}-\d{2}.log$/', $fileInfo->getBasename());
-
-                    if (!$isDaily) {
-                        return false;
-                    }
-
-                    return Date::createFromTimestamp($fileInfo->getMTime())->diffInDays(now()) > $this->argument('days');
-                })
+                ->filter(
+                    fn (SplFileInfo $fileInfo): bool => preg_match('/^.*-\d{4}-\d{2}-\d{2}.log$/', $fileInfo->getBasename())
+                        && Date::createFromTimestamp($fileInfo->getMTime())->diffInDays(now()) > (int) $this->argument('days')
+                )
                 ->files()
         ));
 
