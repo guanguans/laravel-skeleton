@@ -36,7 +36,7 @@ final class CarbonMixin
         };
     }
 
-    public function toFormattedDateTimeString(): \Closure
+    public static function toFormattedDateTimeString(): \Closure
     {
         return static fn (): string => self::this()->format('Y-m-d H:i:s');
     }

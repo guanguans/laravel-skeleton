@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 use App\Listeners\PrepareRequestListener;
 use App\Support\Rector\ClassHandleMethodRector;
+use App\Support\Rector\MixinStaticRector;
 use Ergebnis\Rector\Rules\Expressions\Arrays\SortAssociativeArrayByKeyRector;
 use Ergebnis\Rector\Rules\Faker\GeneratorPropertyFetchToMethodCallRector;
 use Ergebnis\Rector\Rules\Files\ReferenceNamespacedSymbolsRelativeToNamespacePrefixRector;
@@ -140,6 +141,7 @@ return RectorConfig::configure()
         EnumCaseToPascalCaseRector::class,
         GeneratorPropertyFetchToMethodCallRector::class,
         JsonThrowOnErrorRector::class,
+        MixinStaticRector::class,
         SortAssociativeArrayByKeyRector::class,
         StaticArrowFunctionRector::class,
         StaticClosureRector::class,

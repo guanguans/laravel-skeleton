@@ -32,9 +32,10 @@
     "require-dev": {
         "adamwojs/php-cs-fixer-phpdoc-force-fqcn": "^2.0",
         "bamarni/composer-bin-plugin": "^1.9",
+        "barryvdh/laravel-ide-helper": "^3.7",
         "brainmaestro/composer-git-hooks": "^3.0",
         "canvural/larastan-strict-rules": "^3.0",
-        "carthage-software/mago": "^1.24",
+        "carthage-software/mago": "^1.25",
         "dedoc/scramble": "^0.13",
         "defstudio/pest-plugin-laravel-expectations": "^2.6",
         "dragon-code/pretty-routes": "^3.9",
@@ -409,11 +410,13 @@
         },
         "laravel": {
             "dont-discover": [
+                "barryvdh/laravel-ide-helper",
                 "dedoc/scramble",
                 "dragon-code/pretty-routes",
                 "guanguans/laravel-soar",
                 "jasonmccreary/laravel-test-assertions",
                 "laravel/pail",
+                "laravel/pao",
                 "laravel/telescope",
                 "nunomaduro/collision"
             ]
@@ -432,6 +435,7 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -vv",
             "@artisan vendor:publish --tag=laravel-errors",
+            "@artisan:ide-helper",
             "@cghooks:upsert",
             "@composer:normalize"
         ],
@@ -461,7 +465,6 @@
         ],
         "app:lint-readme": "App\\Support\\ComposerScripts::lintReadme",
         "app:parse-phpdoc": "Guanguans\\RectorRules\\Support\\ComposerScripts::parsePhpdoc",
-        "app:update-mixin-ide-helper": "App\\Support\\ComposerScripts::updateMixinIdeHelper",
         "argtyper": "@php vendor/bin/argtyper --ansi -vv",
         "argtyper:add-types": "@argtyper add-types .",
         "artisan": "@php artisan --ansi -vv",
@@ -471,7 +474,7 @@
             "@artisan ide-helper:eloquent",
             "@artisan ide-helper:generate",
             "@artisan ide-helper:meta",
-            "@artisan ide-helper:models --nowrite"
+            "@artisan ide-helper:models --reset --nowrite"
         ],
         "artisan:solo": "@artisan solo",
         "artisan:solo-dumps": "@artisan solo:dumps",
@@ -729,7 +732,7 @@
         "rector:process-clear-cache-dry-run": "@rector:process-clear-cache --dry-run",
         "rector:process-dry-run": "@rector:process --dry-run",
         "rector:process-dry-run-output-format-github": "@rector:process-dry-run --output-format=github",
-        "rector:process-only": "@rector:process-clear-cache app/ --only=App\\Support\\Rector\\MessageRector",
+        "rector:process-only": "@rector:process-clear-cache app/ --only=App\\Support\\Rector\\MixinStaticRector",
         "rector:process-only-dry-run": "@rector:process-only --dry-run",
         "roave-backward-compatibility-check": "@php vendor/bin/roave-backward-compatibility-check --install-development-dependencies --ansi -vv",
         "roave-backward-compatibility-check:format-github-actions": "@roave-backward-compatibility-check --format=github-actions",

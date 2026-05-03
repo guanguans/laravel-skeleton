@@ -29,10 +29,12 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
      * @noinspection SpellCheckingInspection
      */
     protected $providers = [
+        'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
         'Dedoc\\Scramble\\ScrambleServiceProvider',
         'Guanguans\\LaravelSoar\\SoarServiceProvider',
         'JMac\\Testing\\AdditionalAssertionsServiceProvider',
         'Laravel\\Pail\\PailServiceProvider',
+        'Laravel\\Pao\\Laravel\\ServiceProvider',
         'Laravel\\Telescope\\TelescopeServiceProvider',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
         'PrettyRoutes\\ServiceProvider',

@@ -35,9 +35,11 @@ vendor/
 !/vendor-bin/*/composer.json
 
 .php-cs-fixer.php
+.phpstorm.meta.php
 /*.zip
 /laravel
 /tests.*
+_ide_helper_models.php
 composer.lock
 phpbench.json
 phpstan.neon

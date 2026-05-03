@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use App\Support\Attribute\Mixin;
 use Composer\Script\Event;
 use GrahamCampbell\ResultType\Error;
 use GrahamCampbell\ResultType\Result;
@@ -61,37 +60,6 @@ final class ComposerScripts
      * @see \PhpCsFixer\Utils
      */
     private function __construct() {}
-
-    /**
-     * @todo
-     *
-     * @throws \ErrorException
-     * @throws \ReflectionException
-     */
-    public static function updateMixinIdeHelper(Event $event): int
-    {
-        self::requireAutoload($event);
-
-        classes(
-            static fn (string $class, string $file): bool => str($class)->is('App\\Support\\Mixin\\*')
-                && str($file)->is('*/../../app/Support/Mixin/*')
-        )
-            // ->keys()->dd()
-            ->each(static function (\ReflectionClass $reflectionClass, string $class): void {
-                $reflectionAttributes = $reflectionClass->getAttributes(Mixin::class);
-                \assert(\count($reflectionAttributes) === 1);
-
-                $mixinAttribute = $reflectionAttributes[0]->newInstance();
-                \assert($mixinAttribute instanceof Mixin);
-
-                foreach ($mixinAttribute->classes as $targetClass) {
-                    $targetClass::mixin(resolve($class), $mixinAttribute->replace);
-                }
-            });
-
-        // $event->getIO()->info('No errors');
-        return 0;
-    }
 
     /**
      * @throws \ErrorException

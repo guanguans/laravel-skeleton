@@ -268,7 +268,6 @@ parameters:
                 - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
                 - '#^Class App\\Support\\Mixin\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
                 - '#^Method App\\Support\\Mixin\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
-                - '#^Undefined variable\: \$this$#'
             path: app/Support/Mixin/
 
 

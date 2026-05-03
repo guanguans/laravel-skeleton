@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Listeners\ContextSubscriber;
+use App\Models\User;
 use App\Observers\UserObserver;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\Event;
@@ -27,15 +30,11 @@ final class EventServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @noinspection PhpFullyQualifiedNameUsageInspection
-     */
+    /** {@inheritDoc} */
     #[\Override]
     protected $listen = [
-        \Illuminate\Auth\Events\Registered::class => [
-            \Illuminate\Auth\Listeners\SendEmailVerificationNotification::class,
+        Registered::class => [
+            SendEmailVerificationNotification::class,
         ],
     ];
 
@@ -45,14 +44,10 @@ final class EventServiceProvider extends ServiceProvider
         ContextSubscriber::class,
     ];
 
-    /**
-     * {@inheritDoc}
-     *
-     * @noinspection PhpFullyQualifiedNameUsageInspection
-     */
+    /** {@inheritDoc} */
     #[\Override]
     protected $observers = [
-        \App\Models\User::class => UserObserver::class,
+        User::class => UserObserver::class,
     ];
 
     /**

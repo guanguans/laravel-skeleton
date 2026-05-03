@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 /**
@@ -39,22 +40,22 @@ final class NotDisposableEmailRule extends AbstractRule
         try {
             $vendor = Str::after($value, '@');
 
-            return self::$vendorCache[$vendor] ?? self::$vendorCache[$vendor] = $this->isNotDisposable($vendor);
+            return self::$vendorCache[$vendor] ??= $this->isNotDisposable($vendor);
         } catch (\Throwable) {
             return $this->default;
         }
     }
 
     /**
-     * @throws \JsonException
+     * @throws \Illuminate\Http\Client\ConnectionException
+     * @throws \Illuminate\Http\Client\RequestException
      */
     private function isNotDisposable(string $vendor): bool
     {
-        return !json_decode(
-            file_get_contents("https://open.kickbox.com/v1/disposable/$vendor"),
-            true,
-            512,
-            \JSON_THROW_ON_ERROR
-        )['disposable'];
+        return !Http::connectTimeout(3)
+            ->timeout(5)
+            ->get("https://open.kickbox.com/v1/disposable/$vendor")
+            ->throw()
+            ->json('disposable', $this->default);
     }
 }
