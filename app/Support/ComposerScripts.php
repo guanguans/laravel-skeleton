@@ -65,7 +65,7 @@ final class ComposerScripts
      * @throws \ErrorException
      * @throws \ReflectionException
      */
-    public static function findStaticMethods(Event $event): int
+    public static function findStaticMethod(Event $event): int
     {
         self::requireAutoload($event);
 
@@ -124,9 +124,7 @@ final class ComposerScripts
                     static fn (Collection $methods, string $class) => str($class)->contains($module)
                 );
             })
-            // ->dump()
             ->each(static function (Collection $methods, string $class) use ($event): void {
-                // $this->newLine();
                 $event->getIO()->info('');
                 resolve(Factory::class)->twoColumnDetail(
                     "<info>$class</info>",
@@ -144,6 +142,7 @@ final class ComposerScripts
             });
 
         // $event->getIO()->info('No errors');
+
         return 0;
     }
 

@@ -18,7 +18,7 @@
 
 ```shell
 composer actionlint
-composer app:find-static-methods
+composer app:find-static-method
 composer app:fix-neon
 composer app:generate-gitleaks-ignore
 composer app:install-project
@@ -667,7 +667,6 @@ app/
 |   |-- AbstractProxyRule.php
 |   |-- AbstractRegexRule.php
 |   |-- AbstractRule.php
-|   |-- Base64Rule.php
 |   |-- BetweenWordsRule.php
 |   |-- CallbackRule.php
 |   |-- Concerns/
@@ -746,6 +745,7 @@ app/
 |   |   `-- CallbackFilter.php
 |   |-- Rector/
 |   |   |-- ClassHandleMethodRector.php
+|   |   |-- MixinStaticRector.php
 |   |   `-- rules-overview.md
 |   |-- Signer/
 |   |   |-- HmacSigner.php

@@ -27,7 +27,6 @@ final class CheckServiceProviderCommand extends Command
     protected $signature = <<<'SIGNATURE'
         check:service-provider
         {--except=* : The list of packages to exclude from the service provider check.}
-        {--r|reset : Reset the composer dont-discover}
         SIGNATURE;
 
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
