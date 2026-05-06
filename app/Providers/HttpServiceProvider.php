@@ -52,9 +52,9 @@ final class HttpServiceProvider extends ServiceProvider
                     PrepareRequestListener::X_REQUEST_ID => TRACE_ID,
                 ],
             ]);
-            Http::globalMiddleware(
-                Middleware::log(Log::channel('daily-http'), new MessageFormatter(MessageFormatter::DEBUG)),
-            );
+            // Http::globalMiddleware(
+            //     Middleware::log(Log::channel('daily-http'), new MessageFormatter(MessageFormatter::DEBUG)),
+            // );
 
             request()->is('api/*') and request()->headers->set('Accept', 'application/json');
             Event::listen(RequestHandled::class, static function (RequestHandled $event): void {

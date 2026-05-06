@@ -30,7 +30,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Dumpable;
 use Illuminate\Support\Traits\ForwardsCalls;
-use Illuminate\Support\Traits\Localizable;
 use Illuminate\Support\Traits\Tappable;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -46,16 +45,13 @@ abstract class AbstractClient
     use Conditionable;
     use Dumpable;
     use ForwardsCalls;
-    use Localizable;
     use Tappable;
     protected readonly Repository $configRepository;
     private ?string $userAgent = null;
-    private readonly PendingRequest $pendingRequest;
 
     public function __construct(array $config)
     {
         $this->configRepository = new Repository($this->validateConfig($config));
-        $this->pendingRequest = $this->extendPendingRequest($this->defaultPendingRequest());
     }
 
     /**
@@ -64,18 +60,12 @@ abstract class AbstractClient
      *
      * @return \Illuminate\Http\Client\PendingRequest|mixed|static
      *
-     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      * @noinspection PhpUndefinedNamespaceInspection
+     * @noinspection OverrideMissingInspection
      */
     public function __call(string $name, array $arguments): mixed
     {
-        $result = $this->forwardCallTo($this->pendingRequest(), $name, $arguments);
-
-        if ($result === $this->pendingRequest) {
-            return $this;
-        }
-
-        return $result;
+        return $this->forwardCallTo($this->pendingRequest(), $name, $arguments);
     }
 
     public function ddPendingRequest(mixed ...$args): static
@@ -92,27 +82,15 @@ abstract class AbstractClient
         return $this;
     }
 
-    public function clonePendingRequest(): PendingRequest
-    {
-        return $this->pendingRequest(true);
-    }
-
     /**
-     * @see \Illuminate\Http\Client\Factory::createPendingRequest()
-     *
-     * ?callable $callback = null
+     * @param null|callable(PendingRequest $pendingRequest): void $callback
      */
-    public function pendingRequest(bool $clone = false): PendingRequest
+    public function pendingRequest(?callable $callback = null): PendingRequest
     {
-        return ($clone ? clone $this->pendingRequest : $this->pendingRequest)
-            ->stub((fn (): Collection => $this->stubCallbacks)->call(Http::getFacadeRoot()))
-            ->preventStrayRequests(Http::preventingStrayRequests())
-            ->allowStrayRequests((fn (): array => $this->allowedStrayRequestUrls)->call(Http::getFacadeRoot()));
+        return tap($this->configureDefaultPendingRequest($this->defaultPendingRequest()), $callback ?? static fn () => null);
     }
 
-    abstract protected function configRules(): array;
-
-    abstract protected function extendPendingRequest(PendingRequest $pendingRequest): PendingRequest;
+    abstract protected function configureDefaultPendingRequest(PendingRequest $pendingRequest): PendingRequest;
 
     /**
      * @param array<string, string> $messages
@@ -146,6 +124,8 @@ abstract class AbstractClient
         ];
     }
 
+    abstract protected function configRules(): array;
+
     /**
      * @return array<string, string>
      */
@@ -162,13 +142,16 @@ abstract class AbstractClient
         return [];
     }
 
+    /**
+     * @see \Illuminate\Http\Client\Factory::createPendingRequest()
+     */
     private function defaultPendingRequest(): PendingRequest
     {
         return Http::baseUrl($this->configRepository->get('base_url'))
-            ->when(
-                $this->getUserAgent(),
-                static fn (PendingRequest $pendingRequest, string $userAgent) => $pendingRequest->withUserAgent($userAgent)
-            )
+            // ->stub((fn (): Collection => $this->stubCallbacks)->call(Http::getFacadeRoot()))
+            // ->preventStrayRequests(Http::preventingStrayRequests())
+            // ->allowStrayRequests((fn (): array => $this->allowedStrayRequestUrls)->call(Http::getFacadeRoot()))
+            ->withAttributes($this->configRepository->get('attributes'))
             ->withOptions($this->configRepository->get('http_options'))
             ->retry(
                 times: $this->configRepository->get('retry.times'),
@@ -177,21 +160,23 @@ abstract class AbstractClient
                 throw: $this->configRepository->get('retry.throw')
             )
             ->when(
-                $this->requestId(),
-                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
+                $this->userAgent(),
+                static fn (PendingRequest $pendingRequest, string $userAgent) => $pendingRequest->withUserAgent($userAgent)
             )
-            ->withMiddleware(Middleware::mapRequest(
-                static fn (RequestInterface $request): RequestInterface => $request->withHeader('X-Date-Time', now()->toDateTimeString('m'))
-            ))
-            ->withMiddleware($this->makeLoggerMiddleware($this->configRepository->get('logger')))
-            ->withMiddleware(Middleware::mapResponse(
-                static fn (ResponseInterface $response): ResponseInterface => $response->withHeader('X-Date-Time', now()->toDateTimeString('m'))
-            ))
             ->when(
                 $this->requestId(),
-                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withMiddleware(Middleware::mapResponse(
+                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withRequestMiddleware(
+                    static fn (RequestInterface $request): RequestInterface => $request->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
+                )
+            )
+            ->withRequestMiddleware(static fn (RequestInterface $request): RequestInterface => $request->withHeader('X-Date-Time', now()->toDateTimeString('m')))
+            ->withMiddleware(Middleware::log(Log::channel($this->configRepository->get('logger')), new MessageFormatter(MessageFormatter::DEBUG)))
+            ->withResponseMiddleware(static fn (ResponseInterface $response): ResponseInterface => $response->withHeader('X-Date-Time', now()->toDateTimeString('m')))
+            ->when(
+                $this->requestId(),
+                static fn (PendingRequest $pendingRequest, string $requestId) => $pendingRequest->withResponseMiddleware(
                     static fn (ResponseInterface $response): ResponseInterface => $response->withHeader(PrepareRequestListener::X_REQUEST_ID, $requestId)
-                ))
+                )
             );
     }
 
@@ -213,6 +198,7 @@ abstract class AbstractClient
         return [
             // 'base_url' => null,
             'logger' => 'null',
+            'attributes' => [],
             'http_options' => [
                 // RequestOptions::CONNECT_TIMEOUT => 10,
                 // RequestOptions::TIMEOUT => 30,
@@ -241,20 +227,16 @@ abstract class AbstractClient
         return [
             'base_url' => 'required|string',
             'logger' => 'nullable|string',
+            'attributes' => 'array',
             'http_options' => 'array',
             'retry' => 'array',
         ];
     }
 
-    private function getUserAgent(): string
+    private function userAgent(): string
     {
         return $this->userAgent ??= collect($this->userAgentItems())
             ->map(static fn (mixed $value, string $name): string => "$name/$value")
             ->implode(' ');
-    }
-
-    private function makeLoggerMiddleware(?string $logger = null): callable
-    {
-        return Middleware::log(Log::channel($logger), new MessageFormatter(MessageFormatter::DEBUG));
     }
 }

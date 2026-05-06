@@ -43,13 +43,11 @@ final class PushDeer extends AbstractClient
     #[\Override]
     protected function configRules(): array
     {
-        return [
-            'key' => 'required|string',
-        ];
+        return ['key' => 'required|string'];
     }
 
     #[\Override]
-    protected function extendPendingRequest(PendingRequest $pendingRequest): PendingRequest
+    protected function configureDefaultPendingRequest(PendingRequest $pendingRequest): PendingRequest
     {
         return $pendingRequest->throw()->withOptions([
             RequestOptions::JSON => ['pushkey' => $this->configRepository->get('key')],
