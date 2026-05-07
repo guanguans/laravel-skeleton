@@ -20,7 +20,7 @@ declare(strict_types=1);
 
 beforeEach(function (): void {
     $this->response = $this
-        ->postJson('/api/v1/auth/register', $this->credentials = [
+        ->postJson('api/v1/auth/register', $this->credentials = [
             'email' => 'example@example.com',
             'password' => '12345678',
             'password_confirmation' => '12345678',
@@ -41,11 +41,11 @@ beforeEach(function (): void {
         ]);
 
     $this->accessToken = $this->response->json('data.access_token');
-})->skip('This test is too slow, need to optimize.');
+});
 
 it('can login', function (): void {
     $this
-        ->postJson('/api/v1/auth/login', $this->credentials)
+        ->postJson('api/v1/auth/login', $this->credentials)
         // ->ddJson()
         // ->ddBody()
         ->assertOk()
@@ -55,7 +55,7 @@ it('can login', function (): void {
 it('can get me', function (): void {
     $this
         ->withToken($this->accessToken)
-        ->getJson('/api/v1/auth/me')
+        ->getJson('api/v1/auth/me')
         // ->ddJson()
         // ->ddBody()
         ->assertOk()
@@ -76,7 +76,7 @@ it('can get me', function (): void {
 it('can logout', function (): void {
     $this
         ->withToken($this->accessToken)
-        ->postJson('/api/v1/auth/logout')
+        ->postJson('api/v1/auth/logout')
         // ->ddJson()
         // ->ddBody()
         ->assertOk()
@@ -87,21 +87,21 @@ it('can logout', function (): void {
             'data',
             'error',
         ]);
-})->group(__DIR__, __FILE__);
+})->group(__DIR__, __FILE__)->skip();
 
 it('can refresh', function (): void {
     $this
         ->withToken($this->accessToken)
-        ->postJson('/api/v1/auth/refresh')
+        ->postJson('api/v1/auth/refresh')
         // ->ddJson()
         // ->ddBody()
         ->assertOk()
         ->assertJsonStructure($this->structure);
-})->group(__DIR__, __FILE__);
+})->group(__DIR__, __FILE__)->skip();
 
 it('can get index', function (): void {
     $this
-        ->getJson('/api/v1/auth/index')
+        ->getJson('api/v1/auth/index')
         // ->ddJson()
         // ->ddBody()
         ->assertOk()

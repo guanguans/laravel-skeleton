@@ -87,7 +87,7 @@ abstract class AbstractClient
      */
     public function pendingRequest(?callable $callback = null): PendingRequest
     {
-        return tap($this->configureDefaultPendingRequest($this->defaultPendingRequest()), $callback ?? static fn () => null);
+        return tap($this->configureDefaultPendingRequest($this->defaultPendingRequest()), $callback ?? static fn (): null => null);
     }
 
     abstract protected function configureDefaultPendingRequest(PendingRequest $pendingRequest): PendingRequest;

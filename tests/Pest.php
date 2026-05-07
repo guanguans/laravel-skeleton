@@ -60,6 +60,7 @@ pest()
         $this->withoutVite();
     })
     ->afterEach(function (): void {
+        /** @var \Tests\TestCase $this */
         $this->withDefer();
     })
     ->afterAll(function (): void {})
@@ -67,7 +68,7 @@ pest()
     ->in(__DIR__.'/Feature/');
 
 pest()
-    ->extend(PHPUnit\Framework\TestCase::class)
+    ->extend(TestCase::class)
     ->beforeAll(function (): void {})
     ->beforeEach(function (): void {})
     ->afterEach(function (): void {})

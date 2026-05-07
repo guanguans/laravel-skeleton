@@ -16,9 +16,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
+    #[Override]
     public function shouldRun(): bool
     {
-        return true;
+        return !Schema::hasTable('users') && parent::shouldRun();
     }
 
     /**

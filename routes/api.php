@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnusedAliasInspection */
+
 declare(strict_types=1);
 
 /**
@@ -20,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 Route::get('user', static fn (Request $request) => $request->user())->name('user')->middleware('auth:sanctum');
-
 Route::fallback(static fn () => abort(SymfonyResponse::HTTP_NOT_FOUND, 'Not Found Api'))->name('fallback');
 
 /**

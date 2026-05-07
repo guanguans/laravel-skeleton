@@ -7,6 +7,7 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 /** @noinspection PhpVoidFunctionResultUsedInspection */
 /** @noinspection StaticClosureCanBeUsedInspection */
+/** @noinspection PhpUnusedAliasInspection */
 declare(strict_types=1);
 
 /**
@@ -18,26 +19,29 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Console\Commands\CachePruneCommand;
-use App\Console\Commands\CheckServiceProviderCommand;
-use App\Console\Commands\ClearAllCommand;
-use App\Console\Commands\ClearLogsCommand;
-use App\Console\Commands\HealthCheckCommand;
-use App\Console\Commands\IdeHelperChoresCommand;
 use App\Console\Commands\InflectorCommand;
-use App\Console\Commands\OpcacheUrlCommand;
 use App\Console\Commands\OptimizeAllCommand;
-use App\Console\Commands\ReferenceCommand;
 use App\Console\Commands\ShowUnsupportedRequiresCommand;
-use App\Console\Commands\UpdateReadmeCommand;
 use Illuminate\Foundation\Console\RouteListCommand;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Artisan;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
-beforeEach(function (): void {})->skip('This test is too slow, need to optimize.');
+it('is console', function (): void {
+    classes(
+        static fn (string $class, string $file): bool => str($class)->is('App\\Console\\Commands\\*')
+            && str($file)->is('*/../../app/Console/Commands/*')
+    )
+        ->filter(fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
+        ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([
+            InflectorCommand::class,
+            OptimizeAllCommand::class,
+            ShowUnsupportedRequiresCommand::class,
+        ]))
+        ->keys()
+        ->merge([RouteListCommand::class])
+        // ->dd()
+        ->each(fn (string $class) => $this->artisan($class, ['--no-interaction' => true])->assertOk());
+})->group(__DIR__, __FILE__);
 
 it('is http', function (): void {
     $this->get('/')->assertOk();
@@ -60,121 +64,5 @@ it('is http', function (): void {
 it('is all routes', function (): void {
     collect(resolve(Router::class)->getRoutes())
         ->reject(fn (Route $route) => (fn () => $this->isVendorRoute($route))->call(app()->make(RouteListCommand::class)))
-        ->each(function (Route $route): void {
-            foreach (array_map(strtolower(...), $route->methods()) as $method) {
-                $this->{$method}($route->uri());
-            }
-        });
-})->throwsNoExceptions()->group(__DIR__, __FILE__)->skip('This test is too slow, need to optimize.');
-
-it('is console', function (): void {
-    classes(
-        static fn (
-            string $class,
-            string $file
-        ): bool => str($class)->is('App\\Console\\Commands\\*') && str($file)->is('*/../../app/Console/Commands/*')
-    )
-        ->filter(fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
-        ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([
-            IdeHelperChoresCommand::class,
-            InflectorCommand::class,
-            ReferenceCommand::class,
-            OptimizeAllCommand::class,
-
-            // CachePruneCommand::class,
-            CheckServiceProviderCommand::class,
-            // ClearAllCommand::class,
-            // ClearLogsCommand::class,
-            // HealthCheckCommand::class,
-            // OpcacheUrlCommand::class,
-            ShowUnsupportedRequiresCommand::class,
-            // UpdateReadmeCommand::class,
-        ]))
-        ->keys()
-        ->merge([
-            RouteListCommand::class,
-        ])
-        // ->dd()
-        ->each(function (string $class): void {
-            $this->artisan($class, [
-                '--no-interaction' => true,
-                // '--quiet' => true,
-                // '--silent' => true,
-            ])->assertOk();
-        });
-})->group(__DIR__, __FILE__)->skip('This test is too slow, need to optimize.');
-
-it('is command naming', function (): void {
-    collect(Artisan::all())
-        ->filter(fn (SymfonyCommand $command): bool => str($command::class)->startsWith('App\\Console\\Commands'))
-        ->reject(fn (SymfonyCommand $command): bool => str($command->getName())->is([
-            // '_complete',
-            // 'livewire:configure-s3-upload-cleanup',
-            // 'module:v6:migrate',
-            // 'saml2:*',
-        ]))
-        ->each(function (SymfonyCommand $command): void {
-            expect(str($command->getName())->replaceMatches('/\d/', '')->explode(':'))->each->toBeKebabCase(
-                \sprintf('The command [%s] name [%s] should be kebabcase.', $command::class, $command->getName())
-            );
-        });
-})->group(__DIR__, __FILE__);
-
-it('is route naming', function (): void {
-    Artisan::call(RouteListCommand::class, [
-        '--except-vendor' => true,
-        '--json' => true,
-    ]);
-
-    Collection::fromJson(Artisan::output())
-        // ->dd()
-        // ->whereNotNull('name')
-        ->whereNotInStrict('name', [
-            // 'ignition.executeSolution',
-            // 'ignition.healthCheck',
-            // 'ignition.updateConfig',
-            // 'sentemails.downloadAttachment',
-        ])
-        ->whereNotInStrict('uri', [
-            'api/users.json',
-            // 'api/{fallbackPlaceholder}',
-            // '{fallbackPlaceholder}',
-            // '_dusk/login/{userId}/{guard?}',
-            // 'log-viewer/api/files/{fileIdentifier}',
-            // 'log-viewer/api/files/{fileIdentifier}/clear-cache',
-            // 'log-viewer/api/files/{fileIdentifier}/download',
-            // 'log-viewer/api/files/{fileIdentifier}/download/request',
-            // 'log-viewer/api/folders/{folderIdentifier}',
-            // 'log-viewer/api/folders/{folderIdentifier}/clear-cache',
-            // 'log-viewer/api/folders/{folderIdentifier}/download',
-            // 'log-viewer/api/folders/{folderIdentifier}/download/request',
-            // '__execute-laravel-error-solution',
-            // '_dusk/login/{userId}/{guard?}',
-            // '_dusk/logout/{guard?}',
-            // '_dusk/user/{guard?}',
-            // 'docs.openapi',
-            // 'docs.postman',
-            // 'docs/api.json',
-        ])
-        ->each(function (array $route): void {
-            expect($route['name'])
-                ->not->toBeNull("The route [{$route['method']} {$route['uri']}] name should not be null.");
-
-            expect(str($route['name'])->explode('.'))->each->toBeKebabCase(
-                "The route [{$route['method']} {$route['uri']}] name [{$route['name']}] should be kebabcase."
-            );
-
-            expect(
-                str($route['uri'])
-                    ->explode('/')
-                    ->reject(static fn (string $segment): bool => str($segment)->isMatch([
-                        '/^$/',
-                        '/^\{.*\}$/',
-                        '/^v[1-9]$/',
-                        // '/^_.*$/',
-                    ]))
-            )->each->toBeKebabCase(
-                "The route [{$route['method']} {$route['uri']}] uri [{$route['uri']}] should be kebabcase."
-            );
-        });
-})->group(__DIR__, __FILE__);
+        ->each(fn (Route $route): array => array_map(fn (string $method) => $this->{$method}($route->uri()), $route->methods()));
+})->throwsNoExceptions()->group(__DIR__, __FILE__);

@@ -20,6 +20,8 @@ class UsersTableSeeder extends Seeder
 {
     /**
      * Auto generated seed file.
+     *
+     * @noinspection RepetitiveMethodCallsInspection
      */
     public function run(): void
     {

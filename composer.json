@@ -439,6 +439,9 @@
             "@cghooks:upsert",
             "@composer:normalize"
         ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
         "pre-autoload-dump": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\""
@@ -569,7 +572,7 @@
         "detect-collisions": "@php vendor/bin/detect-collisions config/ app/",
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
         ],
         "ecs": "@php vendor/bin/ecs --ansi -vv",
         "ecs:check": "@ecs check",
@@ -632,7 +635,7 @@
         "peck:init": "@peck --init",
         "pest": [
             "@putenv:xdebug-on",
-            "@php vendor/bin/pest --colors=always --min=20 --coverage --profile --retry",
+            "@php vendor/bin/pest --colors=always --min=30 --coverage --profile --retry",
             "@putenv:xdebug-off"
         ],
         "pest:bail": "@pest --bail",
@@ -646,7 +649,7 @@
         "pest:highest": [
             "@putenv:php",
             "@putenv:xdebug-on",
-            "$PHP85 vendor/bin/pest --colors=always --min=20 --coverage --profile",
+            "$PHP85 vendor/bin/pest --colors=always --min=30 --coverage --profile",
             "@putenv:xdebug-off"
         ],
         "pest:migrate-configuration": "@pest --migrate-configuration",
@@ -744,7 +747,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
             "@php artisan migrate --force",
-            "npm install",
+            "npm install --ignore-scripts",
             "npm run build"
         ],
         "sk": "@php vendor/bin/swiss-knife --ansi -vv",

@@ -1,13 +1,12 @@
 <?php
 
 /** @noinspection PhpUnhandledExceptionInspection */
-
+/** @noinspection PhpUnusedAliasInspection */
 /**
  * @routeNamespace("App\Http\Controllers")
  *
  * @routePrefix("")
  */
-
 declare(strict_types=1);
 
 /**
@@ -30,21 +29,10 @@ use Illuminate\Support\Facades\Route;
 use Overtrue\LaravelUploader\LaravelUploader;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', static fn (): Factory|View => view('welcome'))->name('index');
 Route::fallback(static fn () => abort(SymfonyResponse::HTTP_NOT_FOUND))->name('fallback');
 
-// LaravelUploader::routes();
+LaravelUploader::routes();
 
 /**
  * @see https://caesardev.se/blogg/god-mode-my-most-commonly-used-laravel-snippet

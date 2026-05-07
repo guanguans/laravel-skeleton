@@ -20,6 +20,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Listeners\PrepareRequestListener;
 use App\Support\Facade\PushDeer;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
@@ -54,7 +55,9 @@ it('can push message', function (): void {
     Http::assertSentCount(1);
     Http::assertSent(
         fn (Request $request, Response $response): bool => $request->isJson()
+            && $request->hasHeader('User-Agent')
             && $request->hasHeader('X-Date-Time', now()->toDateTimeString('m'))
+            && $request->hasHeader(PrepareRequestListener::X_REQUEST_ID, TRACE_ID)
             && $response->ok()
     );
 
@@ -65,7 +68,9 @@ it('can push message', function (): void {
     Http::assertSentCount(1);
     Http::assertSent(
         fn (Request $request, Response $response): bool => $request->isJson()
+            && $request->hasHeader('User-Agent')
             && $request->hasHeader('X-Date-Time', now()->toDateTimeString('m'))
+            && $request->hasHeader(PrepareRequestListener::X_REQUEST_ID, TRACE_ID)
             && $response->noContent()
     );
 })->group(__DIR__, __FILE__);

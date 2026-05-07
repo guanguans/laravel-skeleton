@@ -1,7 +1,8 @@
 <?php
 
+/** @noinspection PhpUndefinedMethodInspection */
 /** @noinspection PhpUnusedAliasInspection */
-
+/** @noinspection SummerTimeUnsafeTimeManipulationInspection */
 declare(strict_types=1);
 
 /**
@@ -18,7 +19,6 @@ use App\Http\Middleware\Localization;
 use App\Http\Middleware\SetJsonResponseEncodingOptions;
 use App\Listeners\PrepareRequestListener;
 use App\Listeners\TraceEventListener;
-use Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Database\QueryException;
@@ -31,9 +31,6 @@ use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Lottery;
 use Illuminate\Validation\ValidationException;
-use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
-use Spatie\Health\Commands\RunHealthChecksCommand;
-use Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 return App\Application::configure(basePath: \dirname(__DIR__))
@@ -43,6 +40,7 @@ return App\Application::configure(basePath: \dirname(__DIR__))
         api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         channels: __DIR__.'/../routes/channels.php',
+        // pages: null,
         health: '/up',
         // apiPrefix: 'api/v1',
         then: static function (): void {},
@@ -75,22 +73,16 @@ return App\Application::configure(basePath: \dirname(__DIR__))
             ->web(
                 append: [
                     AddLinkHeadersForPreloadedAssets::class,
-                    // XssCleanInput::class,
+                    // ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput::class,
                 ],
             )
             ->append([
                 // Localization::class,
-                SetCacheHeaders::using([
-                    'etag',
-                    'max_age' => 24 * 60 * 60,
-                    'private',
-                ]),
+                SetCacheHeaders::using(['etag', 'max_age' => 24 * 60 * 60, 'private']),
             ])
-            // ->redirectGuestsTo('/account/login')
+            // ->redirectGuestsTo('account/login')
             // ->redirectUsersTo(
-            //     static fn (Request $request): string => $request->user()->isAdmin()
-            //         ? route('admin.dashboard')
-            //         : route('account.dashboard')
+            //     static fn (Request $request): string => $request->user()->isAdmin() ? route('admin.dashboard') : route('account.dashboard')
             // )
             ->statefulApi()
             ->throttleApi()
@@ -101,23 +93,23 @@ return App\Application::configure(basePath: \dirname(__DIR__))
     })
     ->withSchedule(static function (Schedule $schedule): void {
         $schedule->command('inspire')->daily()/* ->atRandom('07:15', '11:42') */ /* ->doNotMonitor() */ /* ->ddExpression() */ ->dailyAppendOutputTo()->runInBackground()->withoutOverlapping(60);
-        $schedule->command('backup:clean')->daily()->at('05:15')->dailyAppendOutputTo()->withoutOverlapping();
-        $schedule->command('backup:run')->daily()->at('05:30')->dailyAppendOutputTo()->withoutOverlapping();
-        $schedule->command('backup:monitor')->daily()->at('05:45')->dailyAppendOutputTo()->withoutOverlapping();
-        // $schedule->command('model:prune', ['--model' => MonitoredScheduledTaskLogItem::class])->daily()->withoutOverlapping();
-        $schedule->command('telescope:prune')->daily()->skip(app()->isProduction())->dailyAppendOutputTo()->withoutOverlapping();
-        $schedule->command(ClearLogsCommand::class)->daily()->dailyAppendOutputTo()->withoutOverlapping();
-        // $schedule->command(ClearExpiredCommand::class)->daily()->withoutOverlapping();
-        $schedule->command('disposable:update')->weekly()->at('04:00')->dailyAppendOutputTo()->withoutOverlapping();
-        $schedule->command('db:monitor', ['--databases' => 'mysql', '--max' => 100])->dailyAppendOutputTo()->everyMinute()->withoutOverlapping();
-        // $schedule->command(RunHealthChecksCommand::class)->everyMinute()->withoutOverlapping();
-        $schedule->exec('php', ['-v'])->everyMinute()->dailyAppendOutputTo();
-        $schedule->job(static function (ConsoleOutput $consoleOutput): void {
-            $consoleOutput->writeln(Inspiring::quote());
-        })->everyMinute()->dailyAppendOutputTo();
-        $schedule->call(static function (ConsoleOutput $consoleOutput): void {
-            $consoleOutput->writeln(Inspiring::quote());
-        })->everyMinute()->dailyAppendOutputTo();
+        // $schedule->command('backup:clean')->daily()->at('05:15')->dailyAppendOutputTo()->withoutOverlapping();
+        // $schedule->command('backup:run')->daily()->at('05:30')->dailyAppendOutputTo()->withoutOverlapping();
+        // $schedule->command('backup:monitor')->daily()->at('05:45')->dailyAppendOutputTo()->withoutOverlapping();
+        // $schedule->command('model:prune', ['--model' => Spatie\ScheduleMonitor\Models\MonitoredScheduledTaskLogItem::class])->daily()->withoutOverlapping();
+        // $schedule->command('telescope:prune')->daily()->skip(app()->isProduction())->dailyAppendOutputTo()->withoutOverlapping();
+        // $schedule->command(ClearLogsCommand::class)->daily()->dailyAppendOutputTo()->withoutOverlapping();
+        // $schedule->command(Arifhp86\ClearExpiredCacheFile\ClearExpiredCommand::class)->daily()->withoutOverlapping();
+        // $schedule->command('disposable:update')->weekly()->at('04:00')->dailyAppendOutputTo()->withoutOverlapping();
+        // $schedule->command('db:monitor', ['--databases' => 'mysql', '--max' => 100])->dailyAppendOutputTo()->everyMinute()->withoutOverlapping();
+        // $schedule->command(Spatie\Health\Commands\RunHealthChecksCommand::class)->everyMinute()->withoutOverlapping();
+        // $schedule->exec('php', ['-v'])->everyMinute()->dailyAppendOutputTo();
+        // $schedule->job(static function (ConsoleOutput $consoleOutput): void {
+        //     $consoleOutput->writeln(Inspiring::quote());
+        // })->everyMinute()->dailyAppendOutputTo();
+        // $schedule->call(static function (ConsoleOutput $consoleOutput): void {
+        //     $consoleOutput->writeln(Inspiring::quote());
+        // })->everyMinute()->dailyAppendOutputTo();
     })
     ->withExceptions(static function (Exceptions $exceptions): void {
         $exceptions
@@ -139,13 +131,7 @@ return App\Application::configure(basePath: \dirname(__DIR__))
             ->dontTruncateRequestExceptions()
             ->dontReport([])
             ->dontFlash([])
-            ->shouldRenderJsonWhen(static function (Request $request): bool {
-                if ($request->is('api/*')) {
-                    return true;
-                }
-
-                return $request->expectsJson();
-            });
+            ->shouldRenderJsonWhen(static fn (Request $request): bool => $request->is('api/*') ? true : $request->expectsJson());
 
         $exceptions->reportable(static function (QueryException $queryException): void {});
         $exceptions->renderable(static function (QueryException $queryException): void {});

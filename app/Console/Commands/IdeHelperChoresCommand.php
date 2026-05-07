@@ -41,7 +41,7 @@ final class IdeHelperChoresCommand extends Command
     #[\Override]
     public function isEnabled(): bool
     {
-        return $this->laravel->isLocal();
+        return !$this->laravel->isProduction();
     }
 
     /**
