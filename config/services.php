@@ -63,8 +63,8 @@ return [
                     env('ELASTICSEARCH_READ_HOST', 'http://127.0.0.1:9200'),
                 ],
                 'basicAuthentication' => [
-                    env('ELASTICSEARCH_READ_USERNAME'),
-                    env('ELASTICSEARCH_READ_PASSWORD'),
+                    env('ELASTICSEARCH_READ_USERNAME', ''),
+                    env('ELASTICSEARCH_READ_PASSWORD', ''),
                 ],
             ],
         ],

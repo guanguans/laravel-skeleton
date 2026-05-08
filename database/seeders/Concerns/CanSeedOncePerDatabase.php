@@ -28,6 +28,7 @@ trait CanSeedOncePerDatabase
 
     /**
      * @param class-string<\Illuminate\Database\Seeder> $class
+     * @param array<string, mixed> $parameters
      */
     public function callOncePerDatabase(string $class, bool $silent = false, array $parameters = []): void
     {

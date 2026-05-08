@@ -46,7 +46,10 @@ jobs:
 
       - name: Run phpstan with sarif error format
         continue-on-error: true
-        run: composer phpstan:analyse-error-format-sarif
+        run: |
+          # composer artisan:ide-helper
+          composer phpstan:analyse
+          composer phpstan:analyse-error-format-sarif
 
       - name: Upload the analysis results of sarif to GitHub
         uses: github/codeql-action/upload-sarif@v4

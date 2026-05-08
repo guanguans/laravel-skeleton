@@ -52,20 +52,9 @@ final class UpdateReadmeCommand extends AbstractCommand
     }
 
     /**
-     * @return array<string, string>
-     */
-    #[\Override]
-    protected function rules(): array
-    {
-        return [
-            'path' => 'nullable|string',
-        ];
-    }
-
-    /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function updatePackages(): void
+    public function updatePackages(): void
     {
         $packages = Collection::fromJson(
             Process::run([
@@ -120,6 +109,17 @@ final class UpdateReadmeCommand extends AbstractCommand
                 $packages
                 PACKAGES
         );
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    #[\Override]
+    protected function rules(): array
+    {
+        return [
+            'path' => 'nullable|string',
+        ];
     }
 
     /**

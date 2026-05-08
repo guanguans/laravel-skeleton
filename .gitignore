@@ -40,6 +40,7 @@ vendor/
 /laravel
 /tests.*
 _ide_helper_models.php
+cghooks.lock
 composer.lock
 phpbench.json
 phpstan.neon

@@ -214,6 +214,7 @@ parameters:
         - identifier: symplify.noDynamicName
         - identifier: symplify.noReference
         - identifier: symplify.noReturnSetterMethod
+        - identifier: symplify.requireAttributeName
         - identifier: symplify.requireExceptionNamespace
         - identifier: typePerfect.noArrayAccessOnObject
         - identifier: typePerfect.noMixedPropertyFetcher
@@ -230,15 +231,13 @@ parameters:
         - identifier: logicalOr.resultUnused
         - identifier: method.dynamicName
         - identifier: method.nonObject
-#        - identifier: missingType.generics
-        - identifier: missingType.iterableValue
+#        - identifier: missingType.iterableValue
         - identifier: offsetAccess.nonOffsetAccessible
         - identifier: property.dynamicName
         - identifier: public.property.unused
         - identifier: return.type
         - identifier: staticMethod.dynamicCall
         - identifier: staticMethod.dynamicName
-        - identifier: symplify.requireAttributeName
         - identifier: trait.unused
 #        - message: '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
 #        - message: '#^Call to an undefined method Illuminate\\Foundation\\Application\:\:tap\(\)\.$#'

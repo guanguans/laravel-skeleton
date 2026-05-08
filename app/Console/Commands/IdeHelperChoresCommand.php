@@ -82,25 +82,10 @@ final class IdeHelperChoresCommand extends AbstractCommand
     }
 
     /**
-     * @return array<string, string>
-     */
-    #[\Override]
-    protected function rules(): array
-    {
-        return [
-            'only' => 'array',
-            'only.*' => 'string',
-            'except' => 'array',
-            'except.*' => 'string',
-            'json' => 'bool',
-        ];
-    }
-
-    /**
      * @throws \ErrorException
      * @throws \ReflectionException
      */
-    protected function ruleChore(): void
+    public function ruleChore(): void
     {
         classes(
             static fn (string $class, string $file): bool => str($class)->is('App\\Rules\\*')
@@ -119,6 +104,21 @@ final class IdeHelperChoresCommand extends AbstractCommand
             ->sort()
             ->values()
             ->tap(fn (Collection $rules) => $this->output($rules));
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    #[\Override]
+    protected function rules(): array
+    {
+        return [
+            'only' => 'array',
+            'only.*' => 'string',
+            'except' => 'array',
+            'except.*' => 'string',
+            'json' => 'bool',
+        ];
     }
 
     /**
