@@ -32,10 +32,11 @@ final class SetDefaultLocaleForUrls
      * @param \Closure(\Illuminate\Http\Request): (JsonResponse|RedirectResponse|Response) $next
      *
      * @noinspection RedundantDocCommentTagInspection
+     * @noinspection PhpUnreachableStatementInspection
      */
     public function handle(Request $request, \Closure $next): SymfonyResponse
     {
-        URL::defaults(['locale' => $request->user()->locale ?? config('app.locale')]);
+        URL::defaults(['locale' => $request->user()->locale()]);
 
         return $next($request);
     }

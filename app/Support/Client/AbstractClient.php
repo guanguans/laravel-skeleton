@@ -24,6 +24,7 @@ use GuzzleHttp\RequestOptions;
 use GuzzleHttp\RetryMiddleware;
 use Illuminate\Config\Repository;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -36,7 +37,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @property list<string> $allowedStrayRequestUrls
- * @property \Illuminate\Support\Collection $stubCallbacks
+ * @property \Illuminate\Support\Collection<int, \Closure(Request $request, array $options): ResponseInterface> $stubCallbacks
  *
  * @mixin \Illuminate\Http\Client\PendingRequest
  */
@@ -57,8 +58,6 @@ abstract class AbstractClient
     /**
      * @see \Illuminate\Http\Client\Factory::__call()
      * @see \Spatie\QueryBuilder\QueryBuilder::__call()
-     *
-     * @return \Illuminate\Http\Client\PendingRequest|mixed|static
      *
      * @noinspection PhpUndefinedNamespaceInspection
      * @noinspection OverrideMissingInspection

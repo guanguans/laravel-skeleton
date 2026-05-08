@@ -26,9 +26,6 @@ final class OptimizeAllCommand extends Command
     #[\Override]
     protected $description = 'Optimize all.';
 
-    /**
-     * @noinspection PhpUndefinedMethodInspection
-     */
     public function handle(): void
     {
         if (!$this->option('force') && $this->getLaravel()->isProduction()) {

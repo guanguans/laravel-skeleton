@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection OverrideMissingInspection */
 declare(strict_types=1);
 
 /**
@@ -115,10 +116,9 @@ final class RequestMixin
             $routeCollection = resolve(Router::class)->getRoutes();
             \assert($routeCollection instanceof RouteCollection);
 
-            $routes = Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []);
-
-            [$fallbacks, $routes] = collect($routes)->partition(static fn (Route $route) => $route->isFallback)->all();
-
+            [$fallbacks, $routes] = collect(Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []))
+                ->partition(static fn (Route $route) => $route->isFallback)
+                ->all();
             \assert($routes instanceof Collection);
 
             return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
@@ -130,7 +130,6 @@ final class RequestMixin
      * @see https://github.com/MrPunyapal/basic-crud/blob/main/app/Http/Requests/
      * @see \App\Support\Mixin\UploadedFileMixin::makeFromUrl()
      *
-     * @noinspection PhpUndefinedMethodInspection
      * @noinspection BypassedUrlValidationInspection
      */
     public function resolveFileFromUrl(): \Closure

@@ -115,6 +115,8 @@ final class HealthCheckCommand extends Command implements Isolatable
     }
 
     /**
+     * @return \GrahamCampbell\ResultType\Result<string, string>
+     *
      * @noinspection PhpSameParameterValueInspection
      */
     private function checkDatabase(?string $connection = null): Result
@@ -128,6 +130,9 @@ final class HealthCheckCommand extends Command implements Isolatable
         return $this->createSuccessResult();
     }
 
+    /**
+     * @return \GrahamCampbell\ResultType\Result<string, string>
+     */
     private function checkSqlSafeUpdates(): Result
     {
         if (config('database.default') !== 'mysql') {
@@ -146,6 +151,8 @@ final class HealthCheckCommand extends Command implements Isolatable
     /**
      * @param list<string>|string $checkedSqlModes
      *
+     * @return \GrahamCampbell\ResultType\Result<string, string>
+     *
      * @noinspection PhpSameParameterValueInspection
      */
     private function checkSqlMode(array|string $checkedSqlModes = 'strict_all_tables'): Result
@@ -156,14 +163,11 @@ final class HealthCheckCommand extends Command implements Isolatable
 
         $sqlModes = DB::select("SHOW VARIABLES LIKE 'sql_mode' ")[0];
 
-        $diffSqlModes = str($sqlModes->Value)
-            ->lower()
-            ->explode(',')
-            ->pipe(
-                static fn (Collection $sqlModes): Collection => collect($checkedSqlModes)
-                    ->transform(static fn (string $checkedSqlMode) => str($checkedSqlMode)->lower())
-                    ->diff($sqlModes)
-            );
+        $diffSqlModes = str($sqlModes->Value)->lower()->explode(',')->pipe(
+            static fn (Collection $sqlModes): Collection => collect($checkedSqlModes)
+                ->transform(static fn (string $checkedSqlMode) => str($checkedSqlMode)->lower())
+                ->diff($sqlModes)
+        );
         \assert($diffSqlModes instanceof Collection);
 
         if ($diffSqlModes->isNotEmpty()) {
@@ -175,6 +179,8 @@ final class HealthCheckCommand extends Command implements Isolatable
 
     /**
      * @throws \Exception
+     *
+     * @return \GrahamCampbell\ResultType\Result<string, string>
      */
     private function checkTimeZone(): Result
     {
@@ -201,6 +207,8 @@ final class HealthCheckCommand extends Command implements Isolatable
     }
 
     /**
+     * @return \GrahamCampbell\ResultType\Result<string, string>
+     *
      * @noinspection PhpSameParameterValueInspection
      */
     private function checkPing(?string $url = null): Result
@@ -221,6 +229,8 @@ final class HealthCheckCommand extends Command implements Isolatable
 
     /**
      * @throws \JsonException
+     *
+     * @return \GrahamCampbell\ResultType\Result<string, string>
      */
     private function checkPhpExtensions(): Result
     {
@@ -252,18 +262,20 @@ final class HealthCheckCommand extends Command implements Isolatable
     }
 
     /**
+     * @return \GrahamCampbell\ResultType\Result<string, string>
+     *
      * @noinspection PhpSameParameterValueInspection
      */
     private function checkDiskSpace(int $limit = 100): Result
     {
-        $freeSpace = disk_free_space(base_path());
-        $diskSpace = \sprintf('%.1f', $freeSpace / (1024 * 1024));
+        $freeSpace = (float) disk_free_space(base_path());
+        $diskSpace = (float) \sprintf('%.1f', $freeSpace / (1024 * 1024));
 
         if ($limit > $diskSpace) {
             return Error::create("The disk space is less than 100MB: `$diskSpace`.");
         }
 
-        $diskSpace = \sprintf('%.1f', $freeSpace / (1024 * 1024 * 1024));
+        $diskSpace = (float) \sprintf('%.1f', $freeSpace / (1024 * 1024 * 1024));
 
         if (1 > $diskSpace) {
             return Error::create("The disk space is less than 1GB: `$diskSpace`.");
@@ -273,6 +285,8 @@ final class HealthCheckCommand extends Command implements Isolatable
     }
 
     /**
+     * @return \GrahamCampbell\ResultType\Result<string, string>
+     *
      * @noinspection PhpSameParameterValueInspection
      */
     private function checkMemoryLimit(int $limit = 256): Result
@@ -292,6 +306,9 @@ final class HealthCheckCommand extends Command implements Isolatable
         return $this->createSuccessResult();
     }
 
+    /**
+     * @return \GrahamCampbell\ResultType\Success<string, never>
+     */
     private function createSuccessResult(): Success
     {
         return Success::create(self::RESULT_SUCCESS);

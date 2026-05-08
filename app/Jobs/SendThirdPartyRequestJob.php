@@ -54,6 +54,9 @@ final class SendThirdPartyRequestJob implements ShouldQueue
         // Use the response to run the business logic ...
     }
 
+    /**
+     * @return list<object>
+     */
     public function middleware(): array
     {
         return [

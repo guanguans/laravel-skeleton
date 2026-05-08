@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use function Illuminate\Filesystem\join_paths;
 
-final class OpcacheUrlCommand extends Command
+final class OpcacheUrlCommand extends AbstractCommand
 {
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]

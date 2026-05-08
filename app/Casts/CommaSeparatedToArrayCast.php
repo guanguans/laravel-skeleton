@@ -16,15 +16,23 @@ namespace App\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @implements CastsAttributes<list<string>, string>
+ */
 class CommaSeparatedToArrayCast implements CastsAttributes
 {
     public bool $withoutObjectCaching = true;
 
+    /**
+     * @return list<string>
+     */
+    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): array
     {
         return $value ? explode(',', (string) $value) : [];
     }
 
+    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $value;

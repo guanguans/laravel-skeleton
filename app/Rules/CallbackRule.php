@@ -15,7 +15,7 @@ namespace App\Rules;
 
 final class CallbackRule extends AbstractRule
 {
-    /** @var list<mixed> */
+    /** @var array<int|string, mixed> */
     private array $callbackArgs;
 
     /**

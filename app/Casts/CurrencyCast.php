@@ -16,27 +16,30 @@ namespace App\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @implements CastsAttributes<?float, int>
+ */
 final readonly class CurrencyCast implements CastsAttributes
 {
     /**
      * @param int<0, 8> $digits
-     *
-     * @throws \Throwable
      */
     public function __construct(private int $digits = 2)
     {
-        throw_if(1 > $digits, \InvalidArgumentException::class, 'Digits should be a number larger than zero.');
+        if (1 > $digits) {
+            throw new \InvalidArgumentException('Digits should be a number larger than zero.');
+        }
     }
 
+    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): ?float
     {
-        return null !== $value
-            ? round($value / (10 ** $this->digits), $this->digits)
-            : null;
+        return null !== $value ? round($value / (10 ** $this->digits), $this->digits) : null;
     }
 
+    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): int
     {
-        return $value * (10 ** $this->digits);
+        return (int) $value * (10 ** $this->digits);
     }
 }

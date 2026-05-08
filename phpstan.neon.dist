@@ -194,15 +194,17 @@ parameters:
 #        - identifier: typePerfect.noMixedMethodCaller
 #        - message: '#^Unused Guanguans\\Notify\\Rector\\.*\\.*\:\:__construct$#'
 
+        - identifier: shipmonk.arithmeticOnNonNumber
         - identifier: shipmonk.binaryOperationWithNull
         - identifier: shipmonk.checkedExceptionInCallable
         - identifier: shipmonk.deadMethod
+        - identifier: shipmonk.deadProperty.neverRead
+        - identifier: shipmonk.deadProperty.neverWritten
         - identifier: shipmonk.forbiddenCast
         - identifier: shipmonk.iteratorToArrayWithoutPreserveKeys
-        - identifier: shipmonk.nonNormalizedType
+        - identifier: shipmonk.publicPropertyNotReadonly
+        - identifier: shipmonk.unusedParameter
         - identifier: shipmonk.variableTypeOverwritten
-#        - identifier: symplify.classNameRespectsParentSuffix
-        - identifier: symplify.explicitAbstractPrefixName
         - identifier: symplify.explicitInterfaceSuffixName
         - identifier: symplify.explicitTraitSuffixName
         - identifier: symplify.forbiddenExtendOfNonAbstractClass
@@ -212,30 +214,34 @@ parameters:
         - identifier: symplify.noDynamicName
         - identifier: symplify.noReference
         - identifier: symplify.noReturnSetterMethod
-#        - identifier: symplify.requireAttributeNamespace
         - identifier: symplify.requireExceptionNamespace
-        - identifier: typePerfect.narrowPublicClassMethodParamType
         - identifier: typePerfect.noArrayAccessOnObject
         - identifier: typePerfect.noMixedPropertyFetcher
 
         - identifier: argument.templateType
         - identifier: argument.type
-        - identifier: assign.propertyType
         - identifier: binaryOp.invalid
+        - identifier: cast.int
         - identifier: cast.string
+        - identifier: empty.notAllowed
         - identifier: encapsedStringPart.nonString
+        - identifier: larastanStrictRules.noValidationInController
         - identifier: logicalAnd.resultUnused
         - identifier: logicalOr.resultUnused
-        - identifier: method.childParameterType
+        - identifier: method.dynamicName
         - identifier: method.nonObject
-        - identifier: method.unused
-        - identifier: missingType.generics
+#        - identifier: missingType.generics
         - identifier: missingType.iterableValue
         - identifier: offsetAccess.nonOffsetAccessible
+        - identifier: property.dynamicName
+        - identifier: public.property.unused
         - identifier: return.type
+        - identifier: staticMethod.dynamicCall
+        - identifier: staticMethod.dynamicName
+        - identifier: symplify.requireAttributeName
         - identifier: trait.unused
-        - message: '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
-        - message: '#^Call to an undefined method Illuminate\\Foundation\\Application\:\:tap\(\)\.$#'
+#        - message: '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
+#        - message: '#^Call to an undefined method Illuminate\\Foundation\\Application\:\:tap\(\)\.$#'
         -
             message: '#^Call to an undefined method Symfony\\Component\\VarDumper\\Dumper\\DataDumperInterface\:\:dumpWithSource\(\)\.$#'
             path: app/Support/VarDumper/ServerDumper.php
@@ -269,46 +275,62 @@ parameters:
                 - '#^Class App\\Support\\Mixin\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
                 - '#^Method App\\Support\\Mixin\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
             path: app/Support/Mixin/
+        - message: '#^Call to an undefined static method object\:\:(name|extendMethod|message)\(\)\.$#'
+        -
+            identifier: class.notFound
+            path: app/Http/Controllers/Api/ChunkUploadController.php
+        -
+            message: '#^Null value involved in string interpolation with \$suffix$#'
+            path: app/Support/Mixin/SchedulingEventMixin.php
+        -
+            identifier: throws.notThrowable
+            path: app/Http/Controllers/Api/ChunkUploadController.php
+        -
+            identifier: return.deprecatedInterface
+            paths:
+                - app/Rules/AbstractProxyRule.php
+                - app/Rules/MaxUploadSizeRule.php
+        -
+            identifier: nullCoalesce.variable
+            path: app/Support/helpers.php
+        -
+            identifier: booleanAnd.alwaysFalse
+            path: app/Support/Mixin/SchedulingEventMixin.php
+        -
+            identifier: classConstant.deprecated
+            path: config/database.php
 
-
-
-#        - identifier: argument.unresolvableType
-        - identifier: arrayFilter.strict
-        - identifier: callable.nonCallable
-        - identifier: class.notFound
-        - identifier: complexity.functionLike
-        - identifier: div.leftNonNumeric
-        - identifier: empty.notAllowed
-        - identifier: function.impossibleType
-        - identifier: instanceof.alwaysFalse
-        - identifier: larastanStrictRules.noValidationInController
-        - identifier: method.dynamicName
-        - identifier: method.notFound
-        - identifier: mul.leftNonNumeric
-        - identifier: property.dynamicName
-        - identifier: property.notFound
-        - identifier: public.classConstant.unused
-        - identifier: public.property.unused
-        - identifier: shipmonk.arithmeticOnNonNumber
-        - identifier: shipmonk.comparingNonComparableTypes
-        - identifier: shipmonk.deadEnumCase
-        - identifier: shipmonk.deadProperty.neverRead
-        - identifier: shipmonk.deadProperty.neverWritten
-        - identifier: shipmonk.publicPropertyNotReadonly
-        - identifier: shipmonk.returnListNotUsed
-        - identifier: shipmonk.stringInterpolationWithNull
-        - identifier: shipmonk.unknownClosureParamType
-        - identifier: shipmonk.unsafeArrayKey
-        - identifier: shipmonk.unusedParameter
-        - identifier: staticMethod.dynamicCall
-        - identifier: staticMethod.dynamicName
-        - identifier: symplify.requireAttributeName
-        - identifier: throws.notThrowable
-#        - identifier: variable.undefined
-        - identifier: nullCoalesce.variable
-        - identifier: staticMethod.notFound
-        - identifier: return.deprecatedInterface
-        - identifier: booleanAnd.alwaysFalse
-        - identifier: classConstant.deprecated
-        - identifier: cast.int
+        -
+            identifier: shipmonk.deadEnumCase
+            path: app/Enums/ConfigurationKey.php
+        -
+            identifier: complexity.functionLike
+            paths:
+                - app/Support/Signer/Utils.php
+                - app/Providers/AutowiredServiceProvider.php
+        -
+            identifier: complexity.classLike
+            path: app/Support/BitEncoder.php
+        -
+            identifier: typePerfect.narrowPublicClassMethodParamType
+            path: database/seeders/DatabaseSeeder.php
+        -
+            identifier: assign.propertyType
+            path: app/Console/Commands/CheckServiceProviderCommand.php
+        -
+            identifier: function.impossibleType
+            path: app/Support/Mixin/CommandMixin.php
+        -
+            identifier: missingType.generics
+            path: app/Support/Facade/
+        -
+            identifier: instanceof.alwaysFalse
+            paths:
+                - app/Support/Mixin/CommandMixin.php
+                - app/Support/Mixin/SchedulingEventMixin.php
+        -
+            identifier: arrayFilter.strict
+            paths:
+                - config/database.php
+                - config/app.php
 

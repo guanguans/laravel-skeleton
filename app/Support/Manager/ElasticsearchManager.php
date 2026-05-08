@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection StaticInvocationViaThisInspection */
 declare(strict_types=1);
 
 /**
@@ -45,7 +46,6 @@ final class ElasticsearchManager extends Manager
      *
      * @throws \Elastic\Elasticsearch\Exception\ConfigException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     * @throws \Throwable
      */
     #[\Override]
     protected function createDriver(mixed $driver): Client
@@ -69,7 +69,6 @@ final class ElasticsearchManager extends Manager
      * @see \Illuminate\Log\LogManager::configurationFor()
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     * @throws \Throwable
      */
     private function configurationFor(string $driver): array
     {

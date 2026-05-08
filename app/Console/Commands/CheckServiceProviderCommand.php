@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class CheckServiceProviderCommand extends Command
+final class CheckServiceProviderCommand extends AbstractCommand
 {
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]

@@ -18,9 +18,6 @@ use Illuminate\View\View;
 
 final readonly class RequestComposer
 {
-    /**
-     * @noinspection InterfacesAsConstructorDependenciesInspection
-     */
     public function __construct(private Request $request) {}
 
     /**

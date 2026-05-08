@@ -30,7 +30,9 @@ class Model extends EloquentModel
 {
     // use Eloquence\Behaviours\HasCamelCasing;
     // use Watson\Validating\ValidatingTrait;
+    /** @use HasFactory<\Illuminate\Database\Eloquent\Factories\Factory<self>> */
     use HasFactory;
+
     use HasSchemalessAttributes;
     use SerializeDate;
     use SoftDeletes;

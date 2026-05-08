@@ -18,7 +18,7 @@ use Illuminate\Support\Pluralizer;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Symfony\Component\String\Inflector\EnglishInflector;
 
-final class InflectorCommand extends Command
+final class InflectorCommand extends AbstractCommand
 {
     use ForwardsCalls;
 

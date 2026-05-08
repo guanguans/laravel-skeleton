@@ -39,9 +39,6 @@ final class BitEncoder implements BitEncoderContract
      */
     private array $set;
 
-    /**
-     * @throws \Throwable
-     */
     public function __construct(array $set)
     {
         $this->setSet($set);
@@ -49,9 +46,6 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 编码.
-     *
-     * @throws \InvalidArgumentException
-     * @throws \Throwable
      */
     #[\Override]
     public function encode(array $set): int
@@ -61,9 +55,6 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 解码.
-     *
-     * @throws \InvalidArgumentException
-     * @throws \Throwable
      */
     #[\Override]
     public function decode(int $value): array
@@ -74,13 +65,10 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 附加.
      *
-     * @throws \InvalidArgumentException
-     * @throws \Throwable
+     * @param positive-int $value
      */
     public function attach(int $value, int ...$set): int
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
-
         return array_reduce(
             $set,
             function (int $value, mixed $item): int {
@@ -99,13 +87,10 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 移除.
      *
-     * @throws \InvalidArgumentException
-     * @throws \Throwable
+     * @param positive-int $value
      */
     public function detach(int $value, int ...$set): int
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
-
         return array_reduce(
             $set,
             function (int $value, mixed $item): int {
@@ -124,13 +109,10 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 包含.
      *
-     * @throws \InvalidArgumentException
-     * @throws \Throwable
+     * @param positive-int $value
      */
     public function has(int $value, mixed $item): bool
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
-
         $index = array_search($item, $this->set, true);
 
         if (false === $index) {
@@ -145,13 +127,10 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 缺少.
      *
-     * @throws \InvalidArgumentException
-     * @throws \Throwable
+     * @param positive-int $value
      */
     public function lack(int $value, mixed $item): bool
     {
-        throw_if(0 > $value, \InvalidArgumentException::class, "The value [$value] is an invalid positive integer.");
-
         $index = array_search($item, $this->set, true);
 
         if (false === $index) {
@@ -165,6 +144,8 @@ final class BitEncoder implements BitEncoderContract
      * 获取包含该集合的所有组合的编码值.
      *
      * @throws \Throwable
+     *
+     * @return list<mixed>
      */
     public function getHasCombinationsValues(array $set, int $length = 1024): array
     {
@@ -175,6 +156,8 @@ final class BitEncoder implements BitEncoderContract
      * 获取缺少该集合的所有组合的编码值.
      *
      * @throws \Throwable
+     *
+     * @return list<mixed>
      */
     public function getLackCombinationsValues(array $set, int $length = 1024): array
     {
@@ -183,6 +166,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取包含该集合的所有组合.
+     *
+     * @return list<mixed>
      */
     public function getHasCombinations(array $set, int $length = 1024): array
     {
@@ -207,6 +192,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取缺少该集合的所有组合.
+     *
+     * @return list<mixed>
      */
     public function getLackCombinations(array $set, int $length = 1024): array
     {
@@ -231,6 +218,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取包含该集合的所有组合的生成器.
+     *
+     * @return \Generator<int, mixed>
      */
     public function getHasCombinationsGenerator(array $set): \Generator
     {
@@ -254,6 +243,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取缺少该集合的所有组合的生成器.
+     *
+     * @return \Generator<int, mixed>
      */
     public function getLackCombinationsGenerator(array $set): \Generator
     {
@@ -324,18 +315,15 @@ final class BitEncoder implements BitEncoderContract
         return $this->set;
     }
 
-    /**
-     * @throws \Throwable
-     */
     public function setSet(array $set): void
     {
-        throw_unless(array_is_list($set), \InvalidArgumentException::class, 'The set is not an array of lists.');
+        if (!array_is_list($set)) {
+            throw new \InvalidArgumentException('The set is not an array of lists.');
+        }
 
-        throw_if(
-            array_filter(array_count_values($set), static fn (int $count): bool => 1 < $count),
-            \InvalidArgumentException::class,
-            'The set must be an array with no duplicate elements.'
-        );
+        if (array_filter(array_count_values($set), static fn (int $count): bool => 1 < $count)) {
+            throw new \InvalidArgumentException('The set must be an array with no duplicate elements.');
+        }
 
         if (($count = \count($set)) > ($maxCount = \PHP_INT_SIZE === 4 ? 31 : 63)) {
             throw new \LengthException("The number [$maxCount] of elements is greater than the maximum length [$count].");

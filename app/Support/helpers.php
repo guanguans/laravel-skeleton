@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\VarDumper;
 
 if (!\function_exists('catch_query_log')) {
+    /**
+     * @return \Illuminate\Support\Collection<int, array{raw_query: string, time: float}>
+     */
     function catch_query_log(callable $callback, mixed ...$parameters): Collection
     {
         return new Pipeline(app())
@@ -158,11 +161,7 @@ if (!\function_exists('curry')) {
      */
     function curry(callable $function): callable
     {
-        $accumulator = static fn (array $arguments): Closure => static function (mixed ...$args) use (
-            $arguments,
-            $function,
-            &$accumulator
-        ) {
+        $accumulator = static fn (array $arguments): Closure => static function (mixed ...$args) use ($arguments, $function) {
             $arguments = [...$arguments, ...$args];
             $totalArguments = new ReflectionFunction($function)->getNumberOfRequiredParameters();
 
@@ -170,7 +169,7 @@ if (!\function_exists('curry')) {
                 return $function(...$arguments);
             }
 
-            return $accumulator($arguments);
+            return Closure::getCurrent()($arguments);
         };
 
         return $accumulator([]);
@@ -181,13 +180,17 @@ if (!\function_exists('deference')) {
     /**
      * @see https://github.com/php-defer/php-defer
      *
-     * @param-out SplStack $context
+     * @param null|SplStack<callable> $context
+     *
+     * @param-out SplStack<callable> $context
      */
     function deference(?SplStack &$context, callable $callback): void
     {
+        /** @var SplStack<callable> $context */
         $context ??= new class extends SplStack {
             public function __destruct()
             {
+                /** @var SplStack<callable> $this */
                 while ($this->count() > 0) {
                     ($this->pop())();
                 }
@@ -334,7 +337,7 @@ if (!\function_exists('partical')) {
      */
     function partical(callable $function, mixed ...$args): callable
     {
-        return static fn (...$moreArgs) => $function(...$args, ...$moreArgs);
+        return static fn (mixed ...$moreArgs) => $function(...$args, ...$moreArgs);
     }
 }
 

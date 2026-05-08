@@ -16,9 +16,12 @@ namespace App\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @implements CastsAttributes<mixed, mixed>
+ */
 class CallbackGetCast implements CastsAttributes
 {
-    /** @var list<mixed> */
+    /** @var array<int|string, mixed> */
     private array $callbackArgs;
 
     public function __construct(
@@ -29,6 +32,7 @@ class CallbackGetCast implements CastsAttributes
         $this->callbackArgs = $callbackArgs;
     }
 
+    #[\Override]
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return $value;
@@ -37,6 +41,7 @@ class CallbackGetCast implements CastsAttributes
     /**
      * @throws \Throwable
      */
+    #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         array_splice($this->callbackArgs, $this->idxOfAttrValInCallbackArgs, 0, $value);

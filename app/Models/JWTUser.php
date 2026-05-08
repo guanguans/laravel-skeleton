@@ -21,6 +21,7 @@ final class JWTUser extends User implements JWTSubject
 {
     // use Parental\HasParent;
 
+    #[\Override]
     public function getJWTIdentifier(): mixed
     {
         return $this->getKey();
@@ -29,6 +30,7 @@ final class JWTUser extends User implements JWTSubject
     /**
      * @see \PHPOpenSourceSaver\JWTAuth\JWTGuard::payload()
      */
+    #[\Override]
     public function getJWTCustomClaims(): array
     {
         return $this->only(['id', 'name']);
@@ -46,7 +48,7 @@ final class JWTUser extends User implements JWTSubject
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => (int) auth()->factory()->getTTL() * 60,
         ];
     }
 }

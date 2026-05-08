@@ -23,7 +23,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class HttpLog extends Model
 {
+    /** @use HasFactory<\Illuminate\Database\Eloquent\Factories\Factory<self>> */
     use HasFactory;
+
     use SerializeDate;
     // use SoftDeletes;
 

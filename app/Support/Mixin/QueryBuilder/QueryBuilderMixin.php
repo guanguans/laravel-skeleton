@@ -17,14 +17,16 @@ namespace App\Support\Mixin\QueryBuilder;
 use App\Support\Attribute\Mixin;
 use Illuminate\Contracts\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * @mixin \Illuminate\Database\Eloquent\Builder
- * @mixin \Illuminate\Database\Eloquent\Relations\Relation
+ * @mixin \Illuminate\Database\Eloquent\Builder<Model>
+ * @mixin \Illuminate\Database\Eloquent\Relations\Relation<Model, Model, Model|Collection<int, Model>|null>
  * @mixin \Illuminate\Database\Query\Builder
  */
 #[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
@@ -121,8 +123,8 @@ final class QueryBuilderMixin
             $result = [];
 
             foreach ($rows as $row) {
+                /** @var list<int> $values */
                 $values = array_values($row);
-
                 $result[$values[0]] = $values[1];
             }
 

@@ -25,7 +25,7 @@ trait SerializeDate
     /**
      * 为数组 / JSON 序列化准备日期。(Laravel 7).
      *
-     * @param \DateTimeInterface&\Illuminate\Support\Carbon $date
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     #[\Override]
     protected function serializeDate(\DateTimeInterface $date): string

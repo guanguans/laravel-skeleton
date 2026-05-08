@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Support\Attribute;
 
-use Illuminate\Support\Arr;
-
 /**
  * @see https://github.com/TheFlowByte/laravel-macro-attribute
  */
@@ -31,6 +29,6 @@ final readonly class Mixin
         array|string $classes,
         public bool $replace = true
     ) {
-        $this->classes = Arr::wrap($classes);
+        $this->classes = (array) $classes;
     }
 }

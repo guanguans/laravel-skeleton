@@ -64,8 +64,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin(): bool
     {
+        // throw new \LogicException('Not implemented yet.');
         // return (bool) $this->is_admin;
-        throw new \LogicException('Not implemented yet.');
+        return false;
     }
 
     public function isDeveloper(): bool
@@ -87,6 +88,9 @@ class User extends Authenticatable implements MustVerifyEmail
         throw new \LogicException('Not implemented yet.');
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<self> $query
+     */
     #[Scope]
     protected function verifiedEmail(Builder $query): void
     {

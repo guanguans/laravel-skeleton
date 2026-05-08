@@ -1,5 +1,5 @@
-# total 6 errors
+# total 11 errors
 
 includes:
-    - offsetAccess.invalidOffset.neon
+    - method.notFound.neon
     - property.nonObject.neon

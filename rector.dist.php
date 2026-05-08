@@ -147,6 +147,9 @@ return RectorConfig::configure()
         StaticClosureRector::class,
     ])
     ->withConfiguredRule(AddNoinspectionDocblockToFileFirstStmtRector::class, [
+        '*/app/Support/Mixin/*' => [
+            'OverrideMissingInspection',
+        ],
         '*/tests/*' => [
             'AnonymousFunctionStaticInspection',
             'NullPointerExceptionInspection',

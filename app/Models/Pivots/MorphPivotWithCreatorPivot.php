@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
 final class MorphPivotWithCreatorPivot extends MorphPivot
 {
+    /** @use HasFactory<\Illuminate\Database\Eloquent\Factories\Factory<self>> */
     use HasFactory;
 
     #[\Override]

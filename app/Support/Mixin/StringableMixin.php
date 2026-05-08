@@ -1,7 +1,6 @@
 <?php
 
-/** @noinspection PhpUndefinedMethodInspection */
-
+/** @noinspection OverrideMissingInspection */
 declare(strict_types=1);
 
 /**

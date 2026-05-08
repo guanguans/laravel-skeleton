@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pipeline\Pipeline;
 
 /**
- * @method static Builder|static pipe(...$pipes)
+ * @method static Builder<static>|static pipe(...$pipes)
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  */
@@ -45,6 +45,7 @@ trait Pipeable
      *     ->get();
      * ```
      *
+     * @param \Illuminate\Database\Eloquent\Builder<static> $builder
      * @param list<callable> $pipes
      *
      * @throws \Throwable

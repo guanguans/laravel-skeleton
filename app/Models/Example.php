@@ -64,7 +64,9 @@ final class Example extends Model
     // use SerializeDate;
     // use SoftDeletes;
 
+    /** @use HasFactory<\Illuminate\Database\Eloquent\Factories\Factory<self>> */
     use HasFactory;
+
     use Notifiable;
 
     // protected static $unguarded = true;
@@ -126,6 +128,8 @@ final class Example extends Model
     /**
      * @see https://github.com/LaravelDaily/laravel-tips/blob/master/db-models-and-eloquent.md#change-format-of-created_at-and-updated_at
      *
+     * @return Attribute<string, never>
+     *
      * @noinspection LowerAccessLevelInspection
      */
     protected function createdAtFormatted(): Attribute
@@ -137,6 +141,8 @@ final class Example extends Model
 
     /**
      * @see https://github.com/LaravelDaily/laravel-tips/blob/master/db-models-and-eloquent.md#change-format-of-created_at-and-updated_at
+     *
+     * @return Attribute<string, never>
      *
      * @noinspection LowerAccessLevelInspection
      */

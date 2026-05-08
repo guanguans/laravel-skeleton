@@ -1,8 +1,8 @@
 <?php
 
+/** @noinspection OverrideMissingInspection */
 /** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
-
 declare(strict_types=1);
 
 /**
@@ -18,12 +18,14 @@ namespace App\Support\Mixin\QueryBuilder;
 
 use App\Support\Attribute\Mixin;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation as RelationBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
 /**
- * @mixin \Illuminate\Database\Eloquent\Builder
- * @mixin \Illuminate\Database\Eloquent\Relations\Relation
+ * @mixin \Illuminate\Database\Eloquent\Builder<Model>
+ * @mixin \Illuminate\Database\Eloquent\Relations\Relation<Model, Model, Model|Collection<int, Model>|null>
  * @mixin \Illuminate\Database\Query\Builder
  */
 #[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]

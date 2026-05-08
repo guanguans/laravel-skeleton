@@ -36,6 +36,9 @@ trait HasSchemalessAttributes
     //     return $this->extra_attributes->modelScope();
     // }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder<static>
+     */
     #[Scope]
     protected function withExtraAttributes(): Builder
     {

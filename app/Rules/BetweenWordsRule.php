@@ -15,14 +15,18 @@ namespace App\Rules;
 
 final class BetweenWordsRule extends AbstractRule
 {
+    private readonly int $min;
+    private readonly int $max;
+
     /**
      * @param int|numeric-string $min
      * @param int|numeric-string $max
      */
-    public function __construct(
-        private readonly int|string $min,
-        private readonly int|string $max
-    ) {}
+    public function __construct(int|string $min, int|string $max)
+    {
+        $this->max = (int) $max;
+        $this->min = (int) $min;
+    }
 
     #[\Override]
     public function passes(string $attribute, mixed $value): bool

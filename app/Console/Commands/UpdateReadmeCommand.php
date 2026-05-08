@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Stringable;
 use Symfony\Component\Process\ExecutableFinder;
 
-final class UpdateReadmeCommand extends Command
+final class UpdateReadmeCommand extends AbstractCommand
 {
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
@@ -65,35 +65,7 @@ final class UpdateReadmeCommand extends Command
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function updateComposerScripts(): void
-    {
-        $composerScripts = $this->composerJsonCollection()
-            ->pipe(static fn (Collection $collection): Collection => collect([
-                ...array_keys($collection->get('scripts', [])),
-                ...Arr::flatten($collection->get('scripts-aliases')),
-            ]))
-            ->reject(static fn (string $script): bool => str($script)->is([
-                'post-*',
-                'pre-*',
-            ]))
-            ->map(static fn (string $script): Stringable => str($script)->prepend('composer '))
-            ->sort()
-            ->implode(\PHP_EOL);
-
-        $this->replaceMatchesReadmeDetails(
-            'Composer scripts',
-            <<<COMPOSER_SCRIPTS
-                ```shell
-                $composerScripts
-                ```
-                COMPOSER_SCRIPTS
-        );
-    }
-
-    /**
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     */
-    private function updatePackages(): void
+    protected function updatePackages(): void
     {
         $packages = Collection::fromJson(
             Process::run([
@@ -110,6 +82,8 @@ final class UpdateReadmeCommand extends Command
                 $require = $this->composerJsonCollection()->get('require', []);
                 $requireDev = $this->composerJsonCollection()->get('require-dev', []);
 
+                /** @var array{name: string, direct-dependency: bool, homepage: ?string, source: string, version: string, description: string, abandoned: bool} $a */
+                /** @var array{name: string, direct-dependency: bool, homepage: ?string, source: string, version: string, description: string, abandoned: bool} $b */
                 if (isset($require[$a['name']], $requireDev[$b['name']])) {
                     return -1;
                 }
@@ -145,6 +119,34 @@ final class UpdateReadmeCommand extends Command
             <<<PACKAGES
                 $packages
                 PACKAGES
+        );
+    }
+
+    /**
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    private function updateComposerScripts(): void
+    {
+        $composerScripts = $this->composerJsonCollection()
+            ->pipe(static fn (Collection $collection): Collection => collect([
+                ...array_keys($collection->get('scripts', [])),
+                ...Arr::flatten($collection->get('scripts-aliases')),
+            ]))
+            ->reject(static fn (string $script): bool => str($script)->is([
+                'post-*',
+                'pre-*',
+            ]))
+            ->map(static fn (string $script): Stringable => str($script)->prepend('composer '))
+            ->sort()
+            ->implode(\PHP_EOL);
+
+        $this->replaceMatchesReadmeDetails(
+            'Composer scripts',
+            <<<COMPOSER_SCRIPTS
+                ```shell
+                $composerScripts
+                ```
+                COMPOSER_SCRIPTS
         );
     }
 
@@ -191,6 +193,8 @@ final class UpdateReadmeCommand extends Command
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     *
+     * @return \Illuminate\Support\Collection<string, mixed>
      */
     private function composerJsonCollection(): Collection
     {

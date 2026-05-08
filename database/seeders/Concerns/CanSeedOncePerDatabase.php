@@ -26,6 +26,9 @@ trait CanSeedOncePerDatabase
     protected string $seedersTable = 'seeders';
     protected bool $seedersTableExists = false;
 
+    /**
+     * @param class-string<\Illuminate\Database\Seeder> $class
+     */
     public function callOncePerDatabase(string $class, bool $silent = false, array $parameters = []): void
     {
         if ($this->seederHasAlreadyBeenCalled($class)) {
@@ -42,25 +45,26 @@ trait CanSeedOncePerDatabase
         }
 
         $this->call($class, $silent, $parameters);
-
         $this->markSeederAsCalled($class);
     }
 
+    /**
+     * @param class-string<\Illuminate\Database\Seeder> $class
+     */
     protected function seederHasAlreadyBeenCalled(string $class): bool
     {
         $this->createSeedersTableIfNotExists();
 
-        return DB::table($this->seedersTable)
-            ->where('seeder', $class)
-            ->exists();
+        return DB::table($this->seedersTable)->where('seeder', $class)->exists();
     }
 
+    /**
+     * @param class-string<\Illuminate\Database\Seeder> $class
+     */
     protected function markSeederAsCalled(string $class): void
     {
         $this->createSeedersTableIfNotExists();
-
-        DB::table($this->seedersTable)
-            ->insert(['seeder' => $class]);
+        DB::table($this->seedersTable)->insert(['seeder' => $class]);
     }
 
     protected function createSeedersTableIfNotExists(): void

@@ -16,7 +16,7 @@ namespace App\Http\Middleware;
 use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpFoundation\Response;
 
-final class AbortIfProduction extends AbortIf
+final class AbortIfProduction extends AbstractAbortIf
 {
     #[\Override]
     protected function when(): bool

@@ -536,10 +536,10 @@ app/
 |   `-- CurrencyCast.php
 |-- Console/
 |   `-- Commands/
+|       |-- AbstractCommand.php
 |       |-- CheckServiceProviderCommand.php
 |       |-- ClearAllCommand.php
 |       |-- ClearLogsCommand.php
-|       |-- Command.php
 |       |-- Concerns/
 |       |   |-- AskForPassword.php
 |       |   |-- Graceful.php
@@ -560,16 +560,16 @@ app/
 |-- Http/
 |   |-- Controllers/
 |   |   |-- Api/
+|   |   |   |-- AbstractCurdController.php
 |   |   |   |-- AuthController.php
 |   |   |   |-- ChunkUploadController.php
 |   |   |   |-- Controller.php
-|   |   |   |-- CurdController.php
 |   |   |   |-- PingController.php
 |   |   |   `-- UploadController.php
 |   |   `-- Controller.php
 |   |-- Middleware/
-|   |   |-- AbortIf.php
 |   |   |-- AbortIfProduction.php
+|   |   |-- AbstractAbortIf.php
 |   |   |-- AddContentLength.php
 |   |   |-- BasicAuthentication.php
 |   |   |-- Cors.php

@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 final class PivotWithCreatorPivot extends Pivot
 {
+    /** @use HasFactory<\Illuminate\Database\Eloquent\Factories\Factory<self>> */
     use HasFactory;
 
     #[\Override]

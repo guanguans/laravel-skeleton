@@ -18,7 +18,7 @@ use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
 
-final class IdeHelperChoresCommand extends Command
+final class IdeHelperChoresCommand extends AbstractCommand
 {
     private const string SUFFIX = 'Chore';
 
@@ -100,7 +100,7 @@ final class IdeHelperChoresCommand extends Command
      * @throws \ErrorException
      * @throws \ReflectionException
      */
-    private function ruleChore(): void
+    protected function ruleChore(): void
     {
         classes(
             static fn (string $class, string $file): bool => str($class)->is('App\\Rules\\*')
@@ -121,6 +121,9 @@ final class IdeHelperChoresCommand extends Command
             ->tap(fn (Collection $rules) => $this->output($rules));
     }
 
+    /**
+     * @param \Illuminate\Support\Collection<int, string> $chore
+     */
     private function output(Collection $chore): void
     {
         $trace = collect(debug_backtrace())->first(

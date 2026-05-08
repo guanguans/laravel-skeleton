@@ -77,6 +77,8 @@ final class SupportServiceProvider extends ServiceProvider
     }
 
     /**
+     * @return list<string>
+     *
      * @noinspection PhpMissingParentCallCommonInspection
      */
     #[\Override]

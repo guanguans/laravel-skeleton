@@ -20,8 +20,11 @@ use Illuminate\Database\Eloquent\Model;
 final class CommaSeparatedToArrayCastUsing implements Castable
 {
     /**
-     * @param list<mixed> $arguments
+     * {@inheritDoc}
+     *
+     * @return CastsAttributes<list<string>, string>
      */
+    #[\Override]
     public static function castUsing(array $arguments): CastsAttributes
     {
         return new class(...$arguments) implements CastsAttributes {
@@ -29,11 +32,16 @@ final class CommaSeparatedToArrayCastUsing implements Castable
 
             public function __construct(private readonly string $separator = ',') {}
 
+            /**
+             * @return list<string>
+             */
+            #[\Override]
             public function get(Model $model, string $key, mixed $value, array $attributes): array
             {
                 return $value ? explode($this->separator, (string) $value) : [];
             }
 
+            #[\Override]
             public function set(Model $model, string $key, mixed $value, array $attributes): mixed
             {
                 return $value;

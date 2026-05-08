@@ -21,12 +21,18 @@ use Illuminate\Support\Carbon;
  */
 final class NullCarbon extends Carbon implements \Stringable
 {
+    /**
+     * @noinspection MissingParentCallInspection
+     */
     #[\Override]
     public function __toString(): string
     {
         return '';
     }
 
+    /**
+     * @noinspection MissingParentCallInspection
+     */
     #[\Override]
     public function format(string $format): string
     {
@@ -35,6 +41,8 @@ final class NullCarbon extends Carbon implements \Stringable
 
     /**
      * @throws \JsonException
+     *
+     * @noinspection MissingParentCallInspection
      */
     #[\Override]
     public function jsonSerialize(): string

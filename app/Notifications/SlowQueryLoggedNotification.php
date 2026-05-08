@@ -52,11 +52,14 @@ final class SlowQueryLoggedNotification extends Notification implements ShouldQu
             ->line($this->content());
     }
 
+    /**
+     * @noinspection ProperNullCoalescingOperatorUsageInspection
+     */
     private function content(): string
     {
         $content = "*Slow query logged!*\n\n";
         $content .= "```$this->query```\n\n";
-        $content .= "Duration: {$this->duration}ms\n";
+        $content .= \sprintf("Duration: %sms\n", $this->duration ?? 'unknown');
 
         return $content."URL: $this->url";
     }

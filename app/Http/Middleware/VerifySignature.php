@@ -57,7 +57,6 @@ final class VerifySignature
 
     private function validateCommonParameters(Request $request, int $effectiveTime): void
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         Validator::make($request->headers(), [
             'signature' => ['required', 'string'],
             'nonce' => ['required', 'string', 'size:16'],

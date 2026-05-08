@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-final class ClearLogsCommand extends Command
+final class ClearLogsCommand extends AbstractCommand
 {
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]

@@ -50,7 +50,7 @@ abstract class AbstractProxyRule extends AbstractRule
     }
 
     /**
-     * @return array<string, (\Closure(string $attribute, mixed $value, Closure $fail): void)|list<mixed>|Rule|string|\Stringable|ValidationRule>
+     * @return array<string, (\Closure(string $attribute, mixed $value, \Closure $fail): void)|list<mixed>|Rule|string|\Stringable|ValidationRule>
      */
     abstract protected function rules(string $attribute): array;
 

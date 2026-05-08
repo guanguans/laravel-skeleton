@@ -25,7 +25,7 @@ use Symfony\Component\Console\Command\LockableTrait;
 /**
  * @see https://github.com/PerryvanderMeer/laravel-console-validator
  */
-abstract class Command extends \Illuminate\Console\Command
+abstract class AbstractCommand extends \Illuminate\Console\Command
 {
     // use Prohibitable;
     // use ValidatesArguments;

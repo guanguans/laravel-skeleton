@@ -21,7 +21,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 
 /**
- * @mixin \Illuminate\Support\Collection
+ * @mixin \Illuminate\Support\Collection<array-key, mixed>
  */
 #[Mixin(Collection::class)]
 final class CollectionMixin

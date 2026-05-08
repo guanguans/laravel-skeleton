@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection OverrideMissingInspection */
 /** @noinspection PhpIncompatibleReturnTypeInspection */
 /** @noinspection PhpMethodParametersCountMismatchInspection */
 declare(strict_types=1);

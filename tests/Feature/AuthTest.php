@@ -18,6 +18,9 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use Illuminate\Testing\Assert as PHPUnit;
+use Illuminate\Testing\TestResponse;
+
 beforeEach(function (): void {
     $this->response = $this
         ->postJson('api/v1/auth/register', $this->credentials = [
@@ -79,7 +82,11 @@ it('can logout', function (): void {
         ->postJson('api/v1/auth/logout')
         // ->ddJson()
         // ->ddBody()
-        ->assertOk()
+        // ->assertNoContent()
+        ->tap(function (TestResponse $response): void {
+            PHPUnit::assertSame(204, $response->getStatusCode());
+            PHPUnit::assertEmpty($response->json('data'), 'Response content is not empty.');
+        })
         ->assertJsonStructure([
             'status',
             'code',
@@ -87,7 +94,7 @@ it('can logout', function (): void {
             'data',
             'error',
         ]);
-})->group(__DIR__, __FILE__)->skip();
+})->group(__DIR__, __FILE__);
 
 it('can refresh', function (): void {
     $this
@@ -97,7 +104,7 @@ it('can refresh', function (): void {
         // ->ddBody()
         ->assertOk()
         ->assertJsonStructure($this->structure);
-})->group(__DIR__, __FILE__)->skip();
+})->group(__DIR__, __FILE__);
 
 it('can get index', function (): void {
     $this

@@ -78,7 +78,7 @@ use Illuminate\Support\Sleep;
  */
 final class ServerSentEvent implements \Stringable
 {
-    public const array HEADERS = [
+    private const array HEADERS = [
         'Content-Type' => 'text/event-stream',
         'Connection' => 'keep-alive',
         'Cache-Control' => 'no-cache, no-store, must-revalidate, pre-check=0, post-check=0',
@@ -98,10 +98,10 @@ final class ServerSentEvent implements \Stringable
         }
     }
 
-    /** @var list<callable(self): void> */
+    /** @var list<\Closure(self): void> */
     private array $beforeCallbacks = [];
 
-    /** @var list<callable(self): void> */
+    /** @var list<\Closure(self): void> */
     private array $afterCallbacks = [];
 
     public function __construct(
@@ -221,6 +221,7 @@ final class ServerSentEvent implements \Stringable
     {
         if (\is_array($data)) {
             $data = json_encode($data, $options);
+            \assert(\is_string($data));
         }
 
         $this->data = $data;
@@ -276,6 +277,9 @@ final class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    /**
+     * @param \Closure(self): void $callback
+     */
     public function before(\Closure $callback): self
     {
         $this->beforeCallbacks[] = $callback;
@@ -283,11 +287,17 @@ final class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    /**
+     * @param \Closure(self): void $callback
+     */
     public function after(\Closure $callback): self
     {
         return $this->then($callback);
     }
 
+    /**
+     * @param \Closure(self): void $callback
+     */
     public function then(\Closure $callback): self
     {
         $this->afterCallbacks[] = $callback;

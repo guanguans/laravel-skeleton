@@ -40,7 +40,6 @@ final class PackageServiceProvider extends ServiceProvider
 
     /**
      * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function boot(): void
     {
@@ -61,7 +60,6 @@ final class PackageServiceProvider extends ServiceProvider
 
     /**
      * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     private function never(): void
     {

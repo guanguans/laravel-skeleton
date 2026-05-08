@@ -26,7 +26,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use function Illuminate\Filesystem\join_paths;
 
-final class ShowUnsupportedRequiresCommand extends Command
+final class ShowUnsupportedRequiresCommand extends AbstractCommand
 {
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
