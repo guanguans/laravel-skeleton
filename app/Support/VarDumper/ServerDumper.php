@@ -72,6 +72,8 @@ final readonly class ServerDumper implements DataDumperInterface
      * @see \Illuminate\Foundation\Console\CliDumper::register()
      * @see \Illuminate\Foundation\Http\HtmlDumper::register()
      *
+     * @param null|list<ContextProviderInterface> $contextProviders
+     *
      * @noinspection PhpVoidFunctionResultUsedInspection
      * @noinspection GlobalVariableUsageInspection
      * @noinspection IssetArgumentExistenceInspection
@@ -112,6 +114,8 @@ final readonly class ServerDumper implements DataDumperInterface
     }
 
     /**
+     * @return list<ContextProviderInterface>
+     *
      * @noinspection PhpUnused
      */
     public function getContextProviders(): array

@@ -231,7 +231,6 @@ parameters:
         - identifier: logicalOr.resultUnused
         - identifier: method.dynamicName
         - identifier: method.nonObject
-#        - identifier: missingType.iterableValue
         - identifier: offsetAccess.nonOffsetAccessible
         - identifier: property.dynamicName
         - identifier: public.property.unused
@@ -239,8 +238,6 @@ parameters:
         - identifier: staticMethod.dynamicCall
         - identifier: staticMethod.dynamicName
         - identifier: trait.unused
-#        - message: '#^Call to an undefined method Illuminate\\.*Guard\:\:refresh\(\)\.$#'
-#        - message: '#^Call to an undefined method Illuminate\\Foundation\\Application\:\:tap\(\)\.$#'
         -
             message: '#^Call to an undefined method Symfony\\Component\\VarDumper\\Dumper\\DataDumperInterface\:\:dumpWithSource\(\)\.$#'
             path: app/Support/VarDumper/ServerDumper.php
@@ -285,10 +282,16 @@ parameters:
             identifier: throws.notThrowable
             path: app/Http/Controllers/Api/ChunkUploadController.php
         -
+            identifier: parameter.deprecatedInterface
+            paths:
+                - app/Support/Client/AbstractClient.php
+        -
             identifier: return.deprecatedInterface
             paths:
                 - app/Rules/AbstractProxyRule.php
                 - app/Rules/MaxUploadSizeRule.php
+                - app/Support/Client/AbstractClient.php
+                - app/Http/Requests/FormRequest.php
         -
             identifier: nullCoalesce.variable
             path: app/Support/helpers.php
@@ -320,6 +323,9 @@ parameters:
             identifier: function.impossibleType
             path: app/Support/Mixin/CommandMixin.php
         -
+            identifier: missingType.iterableValue
+            path: app/Support/Facade/
+        -
             identifier: missingType.generics
             path: app/Support/Facade/
         -
@@ -332,4 +338,3 @@ parameters:
             paths:
                 - config/database.php
                 - config/app.php
-

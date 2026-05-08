@@ -21,6 +21,9 @@ final class TraceEventListener
 {
     private const string TRIGGER = 'DEBUG_EVENT';
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function __invoke(string $event, array $data): void
     {
         if (!$this->requestHasTrigger()) {

@@ -18,7 +18,11 @@ use Illuminate\View\View;
 
 final class AlertComponent extends Component
 {
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
+    /**
+     * @noinspection ClassOverridesFieldOfSuperClassInspection
+     *
+     * @var array<array-key, mixed>
+     */
     #[\Override]
     protected $except = [
         'type',

@@ -104,6 +104,9 @@ final class ServerSentEvent implements \Stringable
     /** @var list<\Closure(self): void> */
     private array $afterCallbacks = [];
 
+    /**
+     * @param null|array<array-key, mixed>|string|\Stringable $data
+     */
     public function __construct(
         ?callable $tapper = null,
         private null|string|\Stringable $event = null,
@@ -212,11 +215,17 @@ final class ServerSentEvent implements \Stringable
         return $this;
     }
 
+    /**
+     * @return null|array<array-key, mixed>|string|\Stringable
+     */
     public function getData(): null|array|string|\Stringable
     {
         return $this->data;
     }
 
+    /**
+     * @param null|array<array-key, mixed>|string|\Stringable $data
+     */
     public function setData(null|array|string|\Stringable $data, int $options = \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE): self
     {
         if (\is_array($data)) {

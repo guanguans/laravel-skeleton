@@ -69,6 +69,8 @@ final class ElasticsearchManager extends Manager
      * @see \Illuminate\Log\LogManager::configurationFor()
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return array<string, mixed>
      */
     private function configurationFor(string $driver): array
     {
@@ -85,6 +87,8 @@ final class ElasticsearchManager extends Manager
      * @param array<string, mixed> $config
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return array<string, mixed>
      *
      * @noinspection PhpPossiblePolymorphicInvocationInspection
      */

@@ -55,7 +55,11 @@ final class HealthCheckCommand extends Command implements Isolatable
     /** @noinspection ClassOverridesFieldOfSuperClassInspection */
     #[\Override]
     protected $description = 'Health check.';
+
+    /** @var list<null|string> */
     private array $only = [];
+
+    /** @var list<null|string> */
     private array $except = [];
 
     /**

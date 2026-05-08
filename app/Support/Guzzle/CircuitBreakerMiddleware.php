@@ -33,6 +33,9 @@ final class CircuitBreakerMiddleware
         }
     }
 
+    /**
+     * @param array<string, mixed> $configuration
+     */
     public function __construct(
         array $configuration = [],
         private ?ServiceNameExtractorInterface $serviceNameExtractor = null,

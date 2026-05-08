@@ -26,6 +26,9 @@ use Monolog\Processor\ProcessorInterface;
  */
 final readonly class AppendExtraDataProcessor implements ProcessorInterface
 {
+    /**
+     * @param array<string, mixed> $extraData
+     */
     public function __construct(private array $extraData) {}
 
     #[\Override]

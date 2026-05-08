@@ -23,6 +23,8 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\RetryMiddleware;
 use Illuminate\Config\Repository;
+use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Collection;
@@ -37,7 +39,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @property list<string> $allowedStrayRequestUrls
- * @property \Illuminate\Support\Collection<int, \Closure(Request $request, array $options): ResponseInterface> $stubCallbacks
+ * @property \Illuminate\Support\Collection<int, \Closure(Request $request, array<string, mixed> $options): ResponseInterface> $stubCallbacks
  *
  * @mixin \Illuminate\Http\Client\PendingRequest
  */
@@ -50,6 +52,9 @@ abstract class AbstractClient
     protected readonly Repository $configRepository;
     private ?string $userAgent = null;
 
+    /**
+     * @param array<string, mixed> $config
+     */
     public function __construct(array $config)
     {
         $this->configRepository = new Repository($this->validateConfig($config));
@@ -58,6 +63,8 @@ abstract class AbstractClient
     /**
      * @see \Illuminate\Http\Client\Factory::__call()
      * @see \Spatie\QueryBuilder\QueryBuilder::__call()
+     *
+     * @param array<int|string, mixed> $arguments
      *
      * @noinspection PhpUndefinedNamespaceInspection
      * @noinspection OverrideMissingInspection
@@ -92,10 +99,14 @@ abstract class AbstractClient
     abstract protected function configureDefaultPendingRequest(PendingRequest $pendingRequest): PendingRequest;
 
     /**
+     * @param array<string, mixed> $data
+     * @param array<string, (\Closure(string $attribute, mixed $value, \Closure $fail): void)|list<mixed>|Rule|string|\Stringable|ValidationRule> $rules
      * @param array<string, string> $messages
      * @param array<string, string> $customAttributes
      *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return array<string, mixed>
      */
     protected function validate(array $data, array $rules, array $messages = [], array $customAttributes = []): array
     {
@@ -123,6 +134,9 @@ abstract class AbstractClient
         ];
     }
 
+    /**
+     * @return array<string, (\Closure(string $attribute, mixed $value, \Closure $fail): void)|list<mixed>|Rule|string|\Stringable|ValidationRule>
+     */
     abstract protected function configRules(): array;
 
     /**
@@ -179,6 +193,11 @@ abstract class AbstractClient
             );
     }
 
+    /**
+     * @param array<string, mixed> $config
+     *
+     * @return array<string, mixed>
+     */
     private function validateConfig(array $config): array
     {
         return $this->validate(

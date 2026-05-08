@@ -62,6 +62,9 @@ abstract class AbstractCurdController extends Controller
         return $this->apiResponse()->noContent();
     }
 
+    /**
+     * @param list<string> $columns
+     */
     protected function findModel(int $id, array $columns = ['*']): Model
     {
         return $this->modelClass::query()->findOrFail($id, $columns);

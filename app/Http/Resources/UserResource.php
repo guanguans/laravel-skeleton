@@ -24,7 +24,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 final class UserResource extends JsonResource
 {
     /**
-     * @return array|\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|\JsonSerializable
+     * @return array<array-key, mixed>|\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|\JsonSerializable
      */
     #[\Override]
     public function toArray(Request $request): array|Arrayable|\JsonSerializable

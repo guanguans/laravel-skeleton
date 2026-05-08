@@ -45,6 +45,9 @@ class Model extends EloquentModel
         return (new static)->getTable();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toDotArray(): array
     {
         return collect($this->toArray())->dot()->all();

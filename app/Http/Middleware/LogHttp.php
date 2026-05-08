@@ -165,6 +165,9 @@ final class LogHttp
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function headerFor(Request|SymfonyResponse $requestOrResponse): array
     {
         return collect($requestOrResponse->headers->all())
@@ -172,6 +175,11 @@ final class LogHttp
             ->all();
     }
 
+    /**
+     * @param array<string, mixed> $post
+     *
+     * @return array<string, mixed>
+     */
     private function postFor(array $post): array
     {
         return collect($post)
@@ -180,6 +188,8 @@ final class LogHttp
     }
 
     /**
+     * @return array<string, array<string, string>|list<array<string, string>>>
+     *
      * @noinspection CallableParameterUseCaseInTypeContextInspection
      */
     private function filesFor(Request $request): array

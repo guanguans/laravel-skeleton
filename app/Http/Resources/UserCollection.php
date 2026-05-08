@@ -24,7 +24,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 final class UserCollection extends ResourceCollection
 {
     /**
-     * @return array|\Illuminate\Contracts\Support\Arrayable<int, \Illuminate\Database\Eloquent\Model>|\JsonSerializable
+     * @return \Illuminate\Contracts\Support\Arrayable<int, \Illuminate\Database\Eloquent\Model>|\JsonSerializable|list<\Illuminate\Database\Eloquent\Model>
      */
     #[\Override]
     public function toArray(Request $request): array|Arrayable|\JsonSerializable

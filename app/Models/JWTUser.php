@@ -29,6 +29,8 @@ final class JWTUser extends User implements JWTSubject
 
     /**
      * @see \PHPOpenSourceSaver\JWTAuth\JWTGuard::payload()
+     *
+     * @return array<string, mixed>
      */
     #[\Override]
     public function getJWTCustomClaims(): array

@@ -21,6 +21,7 @@ use Illuminate\Support\Str;
  */
 final class NotDisposableEmailRule extends AbstractRule
 {
+    /** @var array<string, bool> */
     private static array $vendorCache = [];
     private readonly bool $default;
 

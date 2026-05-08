@@ -17,6 +17,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 final class AuthRequest extends FormRequest
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         // $this->is('api/v1/auth/login');

@@ -38,7 +38,11 @@ final class EventServiceProvider extends ServiceProvider
         ],
     ];
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     *
+     * @var array<array-key, mixed>
+     */
     #[\Override]
     protected $subscribe = [
         ContextSubscriber::class,

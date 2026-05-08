@@ -283,6 +283,10 @@ if (!\function_exists('env_json_decode')) {
 
 if (!\function_exists('humans_milliseconds')) {
     /**
+     * @param array<string, mixed> $syntax
+     *
+     * @throws \Exception
+     *
      * @noinspection PhpUnhandledExceptionInspection
      */
     function humans_milliseconds(float|int $milliseconds, array $syntax = []): string

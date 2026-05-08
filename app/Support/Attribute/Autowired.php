@@ -20,6 +20,9 @@ namespace App\Support\Attribute;
 // #️⃣[\Attribute(\Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
 final readonly class Autowired
 {
+    /**
+     * @param array<string, mixed> $parameters
+     */
     public function __construct(
         public ?string $propertyType = null,
         public array $parameters = []

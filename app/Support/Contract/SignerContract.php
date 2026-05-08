@@ -15,7 +15,13 @@ namespace App\Support\Contract;
 
 interface SignerContract
 {
+    /**
+     * @param array<array-key, mixed> $payload
+     */
     public function sign(array $payload): string;
 
+    /**
+     * @param array<array-key, mixed> $payload
+     */
     public function validate(string $signature, array $payload): bool;
 }

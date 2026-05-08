@@ -29,12 +29,18 @@ final readonly class HmacSigner implements SignerContract
         private string $algo = 'sha256'
     ) {}
 
+    /**
+     * @param array<array-key, mixed> $payload
+     */
     #[\Override]
     public function sign(array $payload): string
     {
         return hash_hmac($this->algo, $this->hashingDataFor($payload), $this->secret);
     }
 
+    /**
+     * @param array<array-key, mixed> $payload
+     */
     #[\Override]
     public function validate(string $signature, array $payload): bool
     {
@@ -43,12 +49,19 @@ final readonly class HmacSigner implements SignerContract
 
     /**
      * @see \App\Support\Signer\Utils::simpleHttpBuildQuery()
+     *
+     * @param array<array-key, mixed> $payload
      */
     private function hashingDataFor(array $payload): string
     {
         return urldecode(http_build_query($this->sort($payload)));
     }
 
+    /**
+     * @param array<array-key, mixed> $payload
+     *
+     * @return array<array-key, mixed>
+     */
     private function sort(array $payload): array
     {
         ksort($payload);

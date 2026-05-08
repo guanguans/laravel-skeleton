@@ -17,6 +17,9 @@ final class Utils
 {
     private function __construct() {}
 
+    /**
+     * @param array<array-key, mixed>|object $data
+     */
     public static function simpleHttpBuildQuery(array|object $data): string
     {
         if (!$data instanceof \Traversable) {
@@ -43,6 +46,9 @@ final class Utils
         return substr($query, 1);
     }
 
+    /**
+     * @param array<array-key, mixed>|object $data
+     */
     public static function defaultHttpBuildQuery(array|object $data): string
     {
         $toQuery = static function (?string $mainKey, mixed $data) use (&$toQuery): string {
@@ -86,6 +92,8 @@ final class Utils
      * @see https://github.com/ljharb/qs
      * @see https://github.com/sindresorhus/query-string
      * @see https://laravel-news.com/retrieve-the-currently-executing-closure-in-php-85
+     *
+     * @param array<array-key, mixed>|object $data
      *
      * @noinspection D
      *

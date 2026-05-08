@@ -20,6 +20,8 @@ use Monolog\LogRecord;
 final class EloquentLogHttpModelFormatter extends NormalizerFormatter
 {
     /**
+     * @return array<string, mixed>
+     *
      * @noinspection NullableArgumentPassedInspection
      */
     #[\Override]
@@ -30,6 +32,8 @@ final class EloquentLogHttpModelFormatter extends NormalizerFormatter
 
     /**
      * @param array<string, mixed> $context
+     *
+     * @return array<string, mixed>
      *
      * @noinspection NullableArgumentPassedInspection
      */

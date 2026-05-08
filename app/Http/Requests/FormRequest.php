@@ -15,6 +15,8 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 
 class FormRequest extends \Illuminate\Foundation\Http\FormRequest
@@ -29,6 +31,9 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     #[\Override]
     protected $stopOnFirstFailure = true;
 
+    /**
+     * @return array<string, mixed>
+     */
     #[\Override]
     public function validationData(): array
     {
@@ -40,6 +45,9 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         return $this->call(__FUNCTION__, \func_get_args(), true);
     }
 
+    /**
+     * @return array<string, (\Closure(string $attribute, mixed $value, \Closure $fail): void)|list<mixed>|Rule|string|\Stringable|ValidationRule>
+     */
     public function rules(): array
     {
         return $this->call(__FUNCTION__, \func_get_args(), []);
@@ -108,6 +116,9 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
     }
 
+    /**
+     * @param array<int|string, mixed> $args
+     */
     protected function call(string $method, array $args = [], mixed $default = null): mixed
     {
         if (

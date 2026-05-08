@@ -31,7 +31,7 @@ use Symfony\Component\Process\Process;
  *
  * @mixin \Illuminate\Console\Command
  *
- * @method toSymfonyProcess(null|array|string $command)
+ * @method toSymfonyProcess(null|list<string>|string $command)
  */
 #[Mixin(Command::class)]
 final class CommandMixin

@@ -30,8 +30,8 @@ final class SupportServiceProvider extends ServiceProvider
         Conditionable::when as whenever;
     }
 
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    public array $bindings = [];
+    // /** @noinspection ClassOverridesFieldOfSuperClassInspection */
+    // public array $bindings = [];
 
     /**
      * @var array<int|string, string>

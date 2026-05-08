@@ -47,6 +47,9 @@ final class BasicAuthentication
         return $next($request);
     }
 
+    /**
+     * @param array<string, mixed> $credentials
+     */
     private function validateCredentials(array $credentials): bool
     {
         // For demonstration purposes, we will simply check if the credentials are not empty.

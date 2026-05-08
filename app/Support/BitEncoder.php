@@ -39,6 +39,9 @@ final class BitEncoder implements BitEncoderContract
      */
     private array $set;
 
+    /**
+     * @param list<mixed> $set
+     */
     public function __construct(array $set)
     {
         $this->setSet($set);
@@ -143,6 +146,8 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 获取包含该集合的所有组合的编码值.
      *
+     * @param list<mixed> $set
+     *
      * @throws \Throwable
      *
      * @return list<mixed>
@@ -155,6 +160,8 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 获取缺少该集合的所有组合的编码值.
      *
+     * @param list<mixed> $set
+     *
      * @throws \Throwable
      *
      * @return list<mixed>
@@ -166,6 +173,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取包含该集合的所有组合.
+     *
+     * @param list<mixed> $set
      *
      * @return list<mixed>
      */
@@ -193,6 +202,8 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 获取缺少该集合的所有组合.
      *
+     * @param list<mixed> $set
+     *
      * @return list<mixed>
      */
     public function getLackCombinations(array $set, int $length = 1024): array
@@ -219,6 +230,8 @@ final class BitEncoder implements BitEncoderContract
     /**
      * 获取包含该集合的所有组合的生成器.
      *
+     * @param list<mixed> $set
+     *
      * @return \Generator<int, mixed>
      */
     public function getHasCombinationsGenerator(array $set): \Generator
@@ -243,6 +256,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取缺少该集合的所有组合的生成器.
+     *
+     * @param list<mixed> $set
      *
      * @return \Generator<int, mixed>
      */
@@ -274,6 +289,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取包含该集合的所有组合的数量.
+     *
+     * @param list<mixed> $set
      */
     public function getHasCombinationsCount(array $set): int
     {
@@ -286,6 +303,8 @@ final class BitEncoder implements BitEncoderContract
 
     /**
      * 获取缺少该集合的所有组合的数量.
+     *
+     * @param list<mixed> $set
      */
     public function getLackCombinationsCount(array $set): int
     {
@@ -315,6 +334,9 @@ final class BitEncoder implements BitEncoderContract
         return $this->set;
     }
 
+    /**
+     * @param list<mixed> $set
+     */
     public function setSet(array $set): void
     {
         if (!array_is_list($set)) {
