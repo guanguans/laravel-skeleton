@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 use App\Http\Middleware\LogHttp;
 use App\Http\Middleware\VerifySignature;
-use App\Models\HttpLog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +27,7 @@ Route::fallback(static fn () => abort(SymfonyResponse::HTTP_NOT_FOUND, 'Not Foun
 /**
  * @see https://www.harrisrafto.eu/streaming-large-json-datasets-in-laravel-with-streamjson/
  */
-Route::get('users.json', static fn () => response()->streamJson([
-    'users' => HttpLog::query()->cursor(),
-]))->name('users.json');
+Route::get('users.json', static fn () => response()->streamJson(['users' => User::query()->cursor()]))->name('users.json');
 
 Route::group([
     'as' => 'api.',
@@ -37,7 +35,8 @@ Route::group([
     'prefix' => 'v1',
     'middleware' => [
         // VerifySignature::with(config('services.signer.default.secret')),
-        LogHttp::with('daily'),
+        // LogHttp::with('daily'),
+        LogHttp::make('daily')::class,
     ],
 ], static function (Router $router): void {
     $router->get('ping/{bad?}', 'PingController')->name('ping');

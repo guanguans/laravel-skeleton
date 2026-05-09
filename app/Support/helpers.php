@@ -17,6 +17,7 @@ use Composer\Autoload\ClassLoader;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -414,6 +415,13 @@ if (!\function_exists('resolve_class_from')) {
             ->replace('\\\\', '\\')
             ->start('\\')
             ->toString();
+    }
+}
+
+if (!\function_exists('running_in_octane')) {
+    function running_in_octane(): bool
+    {
+        return isset($_SERVER['LARAVEL_OCTANE']) || Env::get('OCTANE_DATABASE_SESSION_TTL');
     }
 }
 

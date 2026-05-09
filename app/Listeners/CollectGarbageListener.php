@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Config;
 final class CollectGarbageListener
 {
     /**
+     * @see https://github.com/laravel/octane/blob/2.x/src/Listeners/CollectGarbage.php
      * @see \Illuminate\Console\Events\CommandFinished
      * @see \Illuminate\Foundation\Http\Events\RequestHandled
      *

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Support\Trait\MakeStaticable;
 use App\Support\Trait\WithPipeArgs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -31,6 +32,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
  */
 final class LogHttp
 {
+    use MakeStaticable;
     use WithPipeArgs;
 
     /** @var list<\Closure> */
@@ -56,17 +58,28 @@ final class LogHttp
         'password_confirmation',
     ];
     private Logger $logger;
-    private string $level;
 
-    public function __construct()
-    {
+    public function __construct(
+        null|LoggerInterface|string $logger,
+        private readonly string $level = 'info'
+    ) {
         /**
          * 默认情况下，Laravel 会为 terminate 方法解析中间件的新实例。
          * 需要保持 handle 和 terminate 之间的状态。
          *
+         * @see \Illuminate\Foundation\Http\Kernel::terminateMiddleware()
+         * @see \Illuminate\Foundation\Http\Kernel::parseMiddleware()
+         * @see \Illuminate\Pipeline\Pipeline::carry()
+         * @see \Illuminate\Pipeline\Pipeline::parsePipeString()
          * @see https://www.harrisrafto.eu/mastering-laravels-terminable-middleware-post-response-magic/
+         *
+         * ```usage
+         * \App\Http\Middleware\LogHttp::make('daily')::class
+         * ```
          */
+        // app()->singletonIf(self::class);
         app()->instance(self::class, $this);
+        $this->setLogger($logger);
     }
 
     /**
@@ -85,11 +98,11 @@ final class LogHttp
     public function handle(
         Request $request,
         \Closure $next,
-        null|LoggerInterface|string $logger,
-        string $level = 'info'
+        // null|LoggerInterface|string $logger,
+        // string $level = 'info'
     ): SymfonyResponse {
-        $this->setLogger($logger);
-        $this->level = $level;
+        // $this->setLogger($logger);
+        // $this->level = $level;
         // $this->terminate($request, $next($request));
 
         return $next($request);
@@ -231,9 +244,7 @@ final class LogHttp
             return $content;
         }
 
-        return str(\sprintf('%s: %s', $response->headers->get('Content-Type'), $content))
-            ->limit()
-            ->toString();
+        return str(\sprintf('%s: %s', $response->headers->get('Content-Type'), $content))->limit()->toString();
     }
 
     /**
@@ -241,6 +252,6 @@ final class LogHttp
      */
     private function duration(): float
     {
-        return (microtime(true) - LARAVEL_START) * 1000;
+        return running_in_octane() ? 0 : (microtime(true) - LARAVEL_START) * 1000;
     }
 }

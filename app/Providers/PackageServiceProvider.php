@@ -20,7 +20,6 @@ use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -74,7 +73,7 @@ final class PackageServiceProvider extends ServiceProvider
                 static fn (Request $request, array $features): Response => new Response(status: SymfonyResponse::HTTP_FORBIDDEN)
             );
 
-            $this->whenever($this->isOctaneHttpServer(), static function (): void {
+            $this->whenever(running_in_octane(), static function (): void {
                 Event::listen(RequestReceived::class, static function (): void {
                     $uuid = Str::uuid7()->toString();
 
@@ -88,10 +87,5 @@ final class PackageServiceProvider extends ServiceProvider
                 });
             });
         });
-    }
-
-    private function isOctaneHttpServer(): bool
-    {
-        return request()->server->has('LARAVEL_OCTANE') || Env::get('OCTANE_DATABASE_SESSION_TTL');
     }
 }

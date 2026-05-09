@@ -48,11 +48,7 @@ final class EloquentLogHttpModelFormatter extends NormalizerFormatter
                 'request_header' => $this->textFor($newContext['request_header']),
                 'input' => $this->textFor($newContext['input']),
                 'response_header' => $this->textFor($newContext['response_header']),
-                'response' => $this->textFor(
-                    json_validate($newContext['response'])
-                        ? $newContext['response']
-                        : implode(', ', $context['response_header']['content-type'] ?? [])
-                ),
+                'response' => $this->textFor($newContext['response']),
                 'ip' => substr($newContext['ip'], 0, 16),
                 'duration' => substr($newContext['duration'], 0, 10),
             ]);

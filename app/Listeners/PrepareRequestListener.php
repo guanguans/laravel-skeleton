@@ -37,7 +37,7 @@ final class PrepareRequestListener
         /**
          * @see \Illuminate\Foundation\Bootstrap\SetRequestForConsole
          */
-        if ($app->runningInConsole()) {
+        if ($app->runningInConsole() || running_in_octane()) {
             return;
         }
 

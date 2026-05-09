@@ -39,6 +39,8 @@ return (new Configuration)
         [
             'guanguans/laravel-exception-notify',
             'laravel/tinker',
+            'spiral/roadrunner-cli',
+            'spiral/roadrunner-http',
         ],
         [ErrorType::UNUSED_DEPENDENCY]
     )

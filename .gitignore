@@ -36,6 +36,7 @@ vendor/
 
 .php-cs-fixer.php
 .phpstorm.meta.php
+.rr.yaml
 /*.zip
 /laravel
 /tests.*
@@ -45,3 +46,4 @@ composer.lock
 phpbench.json
 phpstan.neon
 phpunit.xml
+rr
