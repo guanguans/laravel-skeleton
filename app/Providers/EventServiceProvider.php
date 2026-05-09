@@ -41,7 +41,7 @@ final class EventServiceProvider extends ServiceProvider
     /**
      * {@inheritDoc}
      *
-     * @var array<array-key, mixed>
+     * @var list<class-string>
      */
     #[\Override]
     protected $subscribe = [

@@ -38,6 +38,8 @@ trait HasSchemalessAttributes
 
     /**
      * @return \Illuminate\Database\Eloquent\Builder<static>
+     *
+     * @noinspection PhpAttributeCanBeAddedToOverriddenMemberInspection
      */
     #[Scope]
     protected function withExtraAttributes(): Builder

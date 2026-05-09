@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection SenselessArrayUnpackingInspection */
 declare(strict_types=1);
 
 /**

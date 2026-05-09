@@ -27,7 +27,7 @@ use Illuminate\Routing\Controllers\Middleware;
  * @see https://github.com/laravel/laravel/blob/10.x/app/Http/Controllers/Controller.php
  * @see https://github.com/laravel/laravel/blob/11.x/app/Http/Controllers/Controller.php
  */
-class Controller extends BaseController /* implements HasMiddleware */
+abstract class AbstractController extends BaseController /* implements HasMiddleware */
 {
     use AuthorizesRequests;
     use DispatchesJobs;

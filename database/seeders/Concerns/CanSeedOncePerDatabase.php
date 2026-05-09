@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection OverrideMissingInspection */
 declare(strict_types=1);
 
 /**

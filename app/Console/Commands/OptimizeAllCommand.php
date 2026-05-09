@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection LowerAccessLevelInspection */
 declare(strict_types=1);
 
 /**

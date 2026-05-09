@@ -19,7 +19,7 @@ use Illuminate\Http\UploadedFile;
 use Pion\Laravel\ChunkUpload\Handler\ResumableJSUploadHandler;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
-final class ChunkUploadController extends Controller
+final class ChunkUploadController extends AbstractController
 {
     /**
      * @see https://github.com/pionl/laravel-chunk-upload

@@ -25,7 +25,7 @@ final class CollectGarbageListener
      */
     public function handle(object $event): void
     {
-        // mega bytes
+        // megabytes
         $garbage = Config::integer('app.garbage', 50);
 
         if (0 < $garbage && (memory_get_usage() / 1024 / 1024) > $garbage) {

@@ -1,5 +1,3 @@
-# total 11 errors
+# total 0 errors
 
-includes:
-    - method.notFound.neon
-    - property.nonObject.neon
+includes: []

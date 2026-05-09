@@ -1,5 +1,6 @@
 <?php
 
+/** @noinspection LowerAccessLevelInspection */
 /** @noinspection PhpUnusedPrivateMethodInspection */
 declare(strict_types=1);
 
@@ -56,10 +57,10 @@ final class HealthCheckCommand extends Command implements Isolatable
     #[\Override]
     protected $description = 'Health check.';
 
-    /** @var list<null|string> */
+    /** @var list<string> */
     private array $only = [];
 
-    /** @var list<null|string> */
+    /** @var list<string> */
     private array $except = [];
 
     /**

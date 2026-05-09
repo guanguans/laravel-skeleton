@@ -1,7 +1,7 @@
 <?php
 
+/** @noinspection PhpDeprecationInspection */
 /** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -100,7 +100,7 @@ abstract class AbstractClient
 
     /**
      * @param array<string, mixed> $data
-     * @param array<string, (\Closure(string $attribute, mixed $value, \Closure $fail): void)|list<mixed>|Rule|string|\Stringable|ValidationRule> $rules
+     * @param array<string, mixed> $rules
      * @param array<string, string> $messages
      * @param array<string, string> $customAttributes
      *

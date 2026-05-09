@@ -18,7 +18,6 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -56,7 +55,7 @@ Route::post('order', static function (): void {
 //  * @see https://laravel-news.com/route-shallow-resource
 //  * @see https://laravel-news.com/route-resource-scoped
 //  */
-// Route::resource('order.items', Controller::class)->shallow()->scoped([
+// Route::resource('order.items', App\Http\Controllers\OrderController::class)->shallow()->scoped([
 //     'item' => 'sku',
 // ]);
 

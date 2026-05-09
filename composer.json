@@ -9,6 +9,7 @@
     ],
     "require": {
         "php": "^8.5",
+        "ext-pdo": "*",
         "ackintosh/ganesha": "^4.0",
         "cerbero/command-validator": "^3.0",
         "clue/stream-filter": "^1.7",

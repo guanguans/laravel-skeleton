@@ -15,13 +15,19 @@ namespace App\Rules\Concerns;
 
 trait DataAware
 {
+    /** @var array<string, mixed> */
     protected array $data;
 
     /**
      * Set the data under validation.
      *
      * @see \Illuminate\Contracts\Validation\DataAwareRule
+     *
+     * {@inheritDoc}
+     *
+     * @param array<string, mixed> $data
      */
+    #[\Override]
     public function setData(array $data): self
     {
         $this->data = $data;

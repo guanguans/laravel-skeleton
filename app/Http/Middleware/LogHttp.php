@@ -95,6 +95,9 @@ final class LogHttp
         return $next($request);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function terminate(Request $request, SymfonyResponse $response): void
     {
         if ($this->shouldSkip($request)) {
@@ -144,6 +147,8 @@ final class LogHttp
     }
 
     /**
+     * @throws \Exception
+     *
      * @return array<string, mixed>
      */
     private function contextFor(Request $request, SymfonyResponse $response): array

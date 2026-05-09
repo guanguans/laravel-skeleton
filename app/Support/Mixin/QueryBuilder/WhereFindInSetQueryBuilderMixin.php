@@ -45,7 +45,6 @@ final class WhereFindInSetQueryBuilderMixin
             $values instanceof Arrayable and $values = $values->toArray();
             \is_array($values) and $values = implode(',', $values);
 
-            /** @noinspection PhpParamsInspection */
             return $this->whereRaw($sql, $values, $boolean);
         };
     }

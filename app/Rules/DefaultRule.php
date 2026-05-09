@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -17,12 +15,13 @@ namespace App\Rules;
 
 use App\Rules\Concerns\DataAware;
 use App\Rules\Concerns\ValidatorAware;
+use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Support\Arr;
 
-final class DefaultRule extends AbstractRule implements ValidatorAwareRule
+final class DefaultRule extends AbstractRule implements DataAwareRule, ValidatorAwareRule
 {
-    // use DataAware;
+    use DataAware;
     use ValidatorAware;
 
     /**
@@ -39,13 +38,9 @@ final class DefaultRule extends AbstractRule implements ValidatorAwareRule
      * Determine if the validation rule passes.
      */
     #[\Override]
-    public function passes(string $attribute, mixed $value): bool
+    public function passes(string $attribute, mixed $value): true
     {
-        if (null === $value) {
-            $data = $this->validator->getData();
-            // $data[$attribute] = $this->default;
-            $this->validator->setData(Arr::set($data, $attribute, $this->default));
-        }
+        null === $value and $this->validator->setData(Arr::set($this->data, $attribute, $this->default));
 
         return true;
     }

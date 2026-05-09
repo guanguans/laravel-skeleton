@@ -239,102 +239,123 @@ parameters:
         - identifier: staticMethod.dynamicName
         - identifier: trait.unused
         -
-            message: '#^Call to an undefined method Symfony\\Component\\VarDumper\\Dumper\\DataDumperInterface\:\:dumpWithSource\(\)\.$#'
-            path: app/Support/VarDumper/ServerDumper.php
+            identifiers:
+                - missingType.generics
+                - missingType.iterableValue
+            path: app/Support/Facade/
         -
-            identifier: larastan.noEnvCallsOutsideOfConfig
-            count: 3
+            identifiers:
+                - arguments.count
+                - booleanAnd.alwaysFalse
+                - function.impossibleType
+                - instanceof.alwaysFalse
+                - method.protected
+                - new.noConstructor
+                - property.notFound
+                - staticMethod.protected
+            path: app/Support/Mixin/
+        -
+            identifiers:
+                - larastan.noEnvCallsOutsideOfConfig
+                - nullCoalesce.variable
             path: app/Support/helpers.php
         -
-            message: '#^Calling env_explode\(\) is forbidden, use config\(\) instead\.$#'
-            path: config/logging.php
+            identifiers:
+                - parameter.trait
+                - property.trait
+            path: app/Support/Attribute/Mixin.php
         -
-            identifier: typeCoverage.paramTypeCoverage
-            count: 5
-            path: app/Models/Example.php
+            identifiers:
+                - class.notFound
+                - throws.notThrowable
+            path: app/Http/Controllers/Api/ChunkUploadController.php
+        -
+            message: '#^Cannot access property \$(id|Value) on mixed\.$#'
+            paths:
+                - app/Console/Commands/HealthCheckCommand.php
+                - app/Support/Mixin/RequestMixin.php
+        -
+            message: '#^Call to an undefined static method object\:\:(extendMethod|name|message)\(\)\.$#'
+            paths:
+                - app/Console/Commands/IdeHelperChoresCommand.php
+                - app/Providers/ValidatorServiceProvider.php
         -
             identifier: new.static
             paths:
                 - app/Models/Model.php
                 - app/Rules/AbstractRule.php
         -
-            messages:
-                - '#^Parameter \$classes of method App\\Support\\Attribute\\Mixin\:\:__construct\(\) has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
-                - '#^Property App\\Support\\Attribute\\Mixin\:\:\$classes has invalid type Illuminate\\Support\\Traits\\Macroable\.$#'
-            path: app/Support/Attribute/Mixin.php
-        -
-            messages:
-                - '#^Access to an undefined property App\\Support\\Mixin\\.*Mixin\:\:\$.*\.$#'
-                - '#^Call to method App\\Support\\Mixin\\.*Mixin\:\:dump.*\(\) on a separate line has no effect\.$#'
-                - '#^Call to protected method .*\(\) of class Illuminate\\.*\.$#'
-                - '#^Call to protected static method this\(\) of class .*\\.*\.$#'
-                - '#^Class App\\Support\\Mixin\\.*Mixin does not have a constructor and must be instantiated without any parameters\.$#'
-                - '#^Method App\\Support\\Mixin\\.*Mixin\:\:.*\(\) invoked with \d parameters?, 0 required\.$#'
-            path: app/Support/Mixin/
-        - message: '#^Call to an undefined static method object\:\:(name|extendMethod|message)\(\)\.$#'
-        -
-            identifier: class.notFound
-            path: app/Http/Controllers/Api/ChunkUploadController.php
-        -
-            message: '#^Null value involved in string interpolation with \$suffix$#'
-            path: app/Support/Mixin/SchedulingEventMixin.php
-        -
-            identifier: throws.notThrowable
-            path: app/Http/Controllers/Api/ChunkUploadController.php
-        -
-            identifier: parameter.deprecatedInterface
+            identifier: property.phpDocType
             paths:
-                - app/Support/Client/AbstractClient.php
+                - app/Providers/EventServiceProvider.php
+                - app/View/Components/AlertComponent.php
+        -
+            identifier: assign.propertyType
+            paths:
+                - app/Console/Commands/CheckServiceProviderCommand.php
+                - app/Console/Commands/HealthCheckCommand.php
+                - app/Rules/DefaultRule.php
+        -
+            identifier: method.childParameterType
+            paths:
+                - app/Rules/Concerns/DataAware.php
         -
             identifier: return.deprecatedInterface
             paths:
+                - app/Http/Requests/FormRequest.php
                 - app/Rules/AbstractProxyRule.php
                 - app/Rules/MaxUploadSizeRule.php
                 - app/Support/Client/AbstractClient.php
-                - app/Http/Requests/FormRequest.php
         -
-            identifier: nullCoalesce.variable
-            path: app/Support/helpers.php
-        -
-            identifier: booleanAnd.alwaysFalse
-            path: app/Support/Mixin/SchedulingEventMixin.php
-        -
-            identifier: classConstant.deprecated
-            path: config/database.php
-
-        -
-            identifier: shipmonk.deadEnumCase
-            path: app/Enums/ConfigurationKey.php
+            identifier: complexity.classLike
+            paths:
+                - app/Support/BitEncoder.php
         -
             identifier: complexity.functionLike
             paths:
-                - app/Support/Signer/Utils.php
                 - app/Providers/AutowiredServiceProvider.php
-        -
-            identifier: complexity.classLike
-            path: app/Support/BitEncoder.php
-        -
-            identifier: typePerfect.narrowPublicClassMethodParamType
-            path: database/seeders/DatabaseSeeder.php
-        -
-            identifier: assign.propertyType
-            path: app/Console/Commands/CheckServiceProviderCommand.php
-        -
-            identifier: function.impossibleType
-            path: app/Support/Mixin/CommandMixin.php
-        -
-            identifier: missingType.iterableValue
-            path: app/Support/Facade/
-        -
-            identifier: missingType.generics
-            path: app/Support/Facade/
-        -
-            identifier: instanceof.alwaysFalse
-            paths:
-                - app/Support/Mixin/CommandMixin.php
-                - app/Support/Mixin/SchedulingEventMixin.php
+                - app/Support/Signer/Utils.php
         -
             identifier: arrayFilter.strict
             paths:
-                - config/database.php
                 - config/app.php
+                - config/database.php
+        -
+            identifier: typeCoverage.paramTypeCoverage
+            paths:
+                - app/Models/Example.php
+        -
+            identifier: classConstant.deprecated
+            paths:
+                - config/database.php
+        -
+            identifier: shipmonk.deadEnumCase
+            paths:
+                - app/Enums/ConfigurationKey.php
+        -
+            identifier: typePerfect.narrowPublicClassMethodParamType
+            paths:
+                - database/seeders/DatabaseSeeder.php
+        -
+            message: '#^Calling env_explode\(\) is forbidden, use config\(\) instead\.$#'
+            path: config/
+        -
+            message: '#^Call to method App\\Support\\Mixin\\SchedulingEventMixin\:\:dumpExpression\(\) on a separate line has no effect\.$#'
+            path: app/Support/Mixin/SchedulingEventMixin.php
+        -
+            message: '#^Null value involved in string interpolation with \$suffix$#'
+            path: app/Support/Mixin/SchedulingEventMixin.php
+
+
+
+        -
+            identifier: method.notFound
+            paths:
+                - app/Http/Controllers/Api/AuthController.php
+                - app/Models/HttpLog.php
+#                - app/Models/JWTUser.php
+                - app/Models/Model.php
+                - app/Models/User.php
+                - app/Providers/ValidatorServiceProvider.php
+                - app/Support/VarDumper/ServerDumper.php
+                - bootstrap/app.php

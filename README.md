@@ -559,14 +559,14 @@ app/
 |   `-- VerifyEmailException.php
 |-- Http/
 |   |-- Controllers/
-|   |   |-- Api/
-|   |   |   |-- AbstractCurdController.php
-|   |   |   |-- AuthController.php
-|   |   |   |-- ChunkUploadController.php
-|   |   |   |-- Controller.php
-|   |   |   |-- PingController.php
-|   |   |   `-- UploadController.php
-|   |   `-- Controller.php
+|   |   |-- AbstractController.php
+|   |   `-- Api/
+|   |       |-- AbstractController.php
+|   |       |-- AbstractCurdController.php
+|   |       |-- AuthController.php
+|   |       |-- ChunkUploadController.php
+|   |       |-- PingController.php
+|   |       `-- UploadController.php
 |   |-- Middleware/
 |   |   |-- AbortIfProduction.php
 |   |   |-- AbstractAbortIf.php

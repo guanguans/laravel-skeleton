@@ -18,6 +18,7 @@ namespace App\Console\Commands;
 use App\Console\Commands\Concerns\AskForPassword;
 use App\Console\Commands\Concerns\Rescuer;
 use Cerbero\CommandValidator\ValidatesInput;
+use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Console\Prohibitable;
 use Symfony\Component\Console\Command\LockableTrait;
@@ -25,7 +26,7 @@ use Symfony\Component\Console\Command\LockableTrait;
 /**
  * @see https://github.com/PerryvanderMeer/laravel-console-validator
  */
-abstract class AbstractCommand extends \Illuminate\Console\Command
+abstract class AbstractCommand extends Command
 {
     // use Prohibitable;
     // use ValidatesArguments;

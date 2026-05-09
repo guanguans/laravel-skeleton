@@ -33,11 +33,10 @@ final class CollectionMixin
      */
     public static function fromJson(): \Closure
     {
-        return static fn (
-            string $json,
-            int $depth = 512,
-            int $flags = 0
-        ): self => new self(json_decode($json, true, $depth, $flags));
+        return static fn (string $json, int $depth = 512, int $flags = 0, mixed ...$args): self => new self(
+            json_decode($json, true, $depth, $flags),
+            ...$args
+        );
     }
 
     public function head(): \Closure

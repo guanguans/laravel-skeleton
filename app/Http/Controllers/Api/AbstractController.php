@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\AbstractController as BaseController;
 use App\Support\Attribute\Autowired;
 use Guanguans\LaravelApiResponse\ApiResponse;
 use Guanguans\LaravelApiResponse\Support\Traits\ApiResponseFactory;
 
-class Controller extends \App\Http\Controllers\Controller
+abstract class AbstractController extends BaseController
 {
     use ApiResponseFactory;
 

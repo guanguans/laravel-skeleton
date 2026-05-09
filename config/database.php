@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
-
 declare(strict_types=1);
 
 /**
@@ -46,6 +44,8 @@ return [
         /**
          * @see \NunoMaduro\LaravelOptimizeDatabase\LaravelOptimizeDatabaseServiceProvider
          * @see \SwissDevjoy\LaravelOptimizeSqlite\LaravelOptimizeSqliteServiceProvider
+         *
+         * @noinspection PhpUndefinedNamespaceInspection
          */
         'sqlite' => [
             'driver' => 'sqlite',

@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-abstract class AbstractCurdController extends Controller
+abstract class AbstractCurdController extends AbstractController
 {
     /** @var class-string<\Illuminate\Database\Eloquent\Model> */
     protected string $modelClass;

@@ -68,7 +68,6 @@ final class WhereInsQueryBuilderMixin
 
             $raw = "($rawColumns) $operator ($rawValues)";
 
-            /** @noinspection PhpParamsInspection */
             return $this->whereRaw($raw, $values, $boolean);
         };
     }

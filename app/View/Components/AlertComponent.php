@@ -21,7 +21,7 @@ final class AlertComponent extends Component
     /**
      * @noinspection ClassOverridesFieldOfSuperClassInspection
      *
-     * @var array<array-key, mixed>
+     * @var list<string>
      */
     #[\Override]
     protected $except = [

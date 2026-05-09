@@ -50,7 +50,7 @@ final class JWTUser extends User implements JWTSubject
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => (int) auth()->factory()->getTTL() * 60,
+            'expires_in' => (int) auth()->factory()->getTTL() * 60, // @phpstan-ignore-line  method.notFound
         ];
     }
 }

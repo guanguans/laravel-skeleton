@@ -38,8 +38,6 @@ final class AppServiceProvider extends ServiceProvider
     /**
      * @throws \ErrorException
      * @throws \ReflectionException
-     *
-     * @noinspection PhpAccessStaticViaInstanceInspection
      */
     private function registerMixins(): void
     {

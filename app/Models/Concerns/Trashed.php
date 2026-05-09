@@ -24,6 +24,8 @@ trait Trashed
 {
     /**
      * Scope a query to get with trashed or only trashed resource.
+     *
+     * @noinspection PhpUndefinedMethodInspection
      */
     protected function scopeTrashed(Builder $query): Builder
     {
