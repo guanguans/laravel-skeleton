@@ -18,7 +18,7 @@ namespace App\Policies;
 use App\Models\JWTUser;
 use App\Models\User;
 
-final class UserPolicy extends Policy
+final class UserPolicy extends AbstractPolicy
 {
     /**
      * Determine whether the user can view any models.

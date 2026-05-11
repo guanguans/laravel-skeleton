@@ -22,6 +22,6 @@ abstract class AbstractController extends BaseController
 {
     use ApiResponseFactory;
 
-    #[Autowired(ApiResponse::class)]
+    #[Autowired(propertyType: ApiResponse::class)]
     protected ApiResponse $apiResponse;
 }

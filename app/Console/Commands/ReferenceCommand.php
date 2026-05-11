@@ -16,7 +16,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand('reference')]
+#[AsCommand(name: 'reference')]
 final class ReferenceCommand extends Command
 {
     /**

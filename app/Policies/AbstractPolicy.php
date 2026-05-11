@@ -17,7 +17,7 @@ use App\Models\JWTUser;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Gate;
 
-class Policy
+abstract class AbstractPolicy
 {
     use HandlesAuthorization;
 

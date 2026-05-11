@@ -22,7 +22,7 @@ use Illuminate\Routing\Router;
 /**
  * @mixin \Illuminate\Routing\Router
  */
-#[Mixin(Router::class)]
+#[Mixin(classes: Router::class)]
 final class RouterMixin
 {
     /**

@@ -90,6 +90,7 @@ parameters:
     larastanStrictRules:
         noFacade: false
         noGlobalLaravelFunction: false
+        noValidationInController: false
     configDirectories:
         - config/
     checkOctaneCompatibility: true
@@ -194,7 +195,6 @@ parameters:
 #        - identifier: typePerfect.noMixedMethodCaller
 #        - message: '#^Unused Guanguans\\Notify\\Rector\\.*\\.*\:\:__construct$#'
 
-        - identifier: shipmonk.arithmeticOnNonNumber
         - identifier: shipmonk.binaryOperationWithNull
         - identifier: shipmonk.checkedExceptionInCallable
         - identifier: shipmonk.deadMethod
@@ -207,30 +207,23 @@ parameters:
         - identifier: shipmonk.variableTypeOverwritten
         - identifier: symplify.explicitInterfaceSuffixName
         - identifier: symplify.explicitTraitSuffixName
-        - identifier: symplify.forbiddenExtendOfNonAbstractClass
         - identifier: symplify.forbiddenFuncCall
         - identifier: symplify.forbiddenNode
         - identifier: symplify.forbiddenStaticClassConstFetch
         - identifier: symplify.noDynamicName
-        - identifier: symplify.noReference
         - identifier: symplify.noReturnSetterMethod
-        - identifier: symplify.requireAttributeName
         - identifier: symplify.requireExceptionNamespace
         - identifier: typePerfect.noArrayAccessOnObject
-        - identifier: typePerfect.noMixedPropertyFetcher
 
-        - identifier: argument.templateType
         - identifier: argument.type
-        - identifier: binaryOp.invalid
+        - identifier: cast.double
         - identifier: cast.int
         - identifier: cast.string
         - identifier: empty.notAllowed
         - identifier: encapsedStringPart.nonString
-        - identifier: larastanStrictRules.noValidationInController
         - identifier: logicalAnd.resultUnused
         - identifier: logicalOr.resultUnused
         - identifier: method.dynamicName
-        - identifier: method.nonObject
         - identifier: offsetAccess.nonOffsetAccessible
         - identifier: property.dynamicName
         - identifier: public.property.unused
@@ -238,6 +231,7 @@ parameters:
         - identifier: staticMethod.dynamicCall
         - identifier: staticMethod.dynamicName
         - identifier: trait.unused
+        - message: '#^Unable to resolve the template type (TKey|TValue|TObject) in call to function (collect|classes)$#'
         -
             identifiers:
                 - missingType.generics
@@ -280,9 +274,20 @@ parameters:
                 - app/Console/Commands/IdeHelperChoresCommand.php
                 - app/Providers/ValidatorServiceProvider.php
         -
+            identifier: symplify.noReference
+            paths:
+                - app/Support/Signer/HmacSigner.php
+                - app/Support/helpers.php
+        -
+            identifier: symplify.forbiddenExtendOfNonAbstractClass
+            paths:
+                - app/Casts/CallbackSetCast.php
+                - app/Casts/CommaSeparatedToIntegerArrayCast.php
+                - app/Models/JWTUser.php
+        -
             identifier: new.static
             paths:
-                - app/Models/Model.php
+                - app/Models/AbstractModel.php
                 - app/Rules/AbstractRule.php
         -
             identifier: property.phpDocType
@@ -321,6 +326,11 @@ parameters:
                 - config/app.php
                 - config/database.php
         -
+            identifier: binaryOp.invalid
+            paths:
+                - app/Providers/HttpServiceProvider.php
+                - app/Support/Mixin/SchedulingEventMixin.php
+        -
             identifier: typeCoverage.paramTypeCoverage
             paths:
                 - app/Models/Example.php
@@ -332,6 +342,11 @@ parameters:
             identifier: shipmonk.deadEnumCase
             paths:
                 - app/Enums/ConfigurationKey.php
+        -
+            identifier: typePerfect.noMixedPropertyFetcher
+            paths:
+                - app/Console/Commands/HealthCheckCommand.php
+                - app/Support/Mixin/RequestMixin.php
         -
             identifier: typePerfect.narrowPublicClassMethodParamType
             paths:
@@ -352,9 +367,9 @@ parameters:
             identifier: method.notFound
             paths:
                 - app/Http/Controllers/Api/AuthController.php
+                - app/Models/AbstractModel.php
                 - app/Models/HttpLog.php
 #                - app/Models/JWTUser.php
-                - app/Models/Model.php
                 - app/Models/User.php
                 - app/Providers/ValidatorServiceProvider.php
                 - app/Support/VarDumper/ServerDumper.php

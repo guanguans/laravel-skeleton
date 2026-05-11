@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Cache;
  * @mixin \Illuminate\Database\Eloquent\Relations\Relation<Model, Model, Model|Collection<int, Model>|null>
  * @mixin \Illuminate\Database\Query\Builder
  */
-#[Mixin([EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
+#[Mixin(classes: [EloquentBuilder::class, QueryBuilder::class, RelationBuilder::class])]
 final class QueryBuilderMixin
 {
     /**

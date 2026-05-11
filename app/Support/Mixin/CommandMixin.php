@@ -33,7 +33,7 @@ use Symfony\Component\Process\Process;
  *
  * @method toSymfonyProcess(null|list<string>|string $command)
  */
-#[Mixin(Command::class)]
+#[Mixin(classes: Command::class)]
 final class CommandMixin
 {
     public function consoleLogger(): \Closure

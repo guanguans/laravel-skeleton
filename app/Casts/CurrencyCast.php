@@ -34,7 +34,7 @@ final readonly class CurrencyCast implements CastsAttributes
     #[\Override]
     public function get(Model $model, string $key, mixed $value, array $attributes): ?float
     {
-        return null !== $value ? round($value / (10 ** $this->digits), $this->digits) : null;
+        return null !== $value ? round((float) $value / (10 ** $this->digits), $this->digits) : null;
     }
 
     #[\Override]

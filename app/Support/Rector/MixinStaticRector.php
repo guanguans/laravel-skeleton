@@ -80,7 +80,7 @@ final class MixinStaticRector extends AbstractRector
                     use Illuminate\Support\Str;
                     use Mtownsend\ReadTime\ReadTime;
 
-                    #[Mixin(Str::class)]
+                    #[Mixin(classes: Str::class)]
                     final class StrMixin
                     {
                         public function readTime(): \Closure
@@ -104,7 +104,7 @@ final class MixinStaticRector extends AbstractRector
                     use Illuminate\Support\Str;
                     use Mtownsend\ReadTime\ReadTime;
 
-                    #[Mixin(Str::class)]
+                    #[Mixin(classes: Str::class)]
                     final class StrMixin
                     {
                         public static function readTime(): \Closure
@@ -130,7 +130,7 @@ final class MixinStaticRector extends AbstractRector
                     use Illuminate\Support\Str;
                     use Illuminate\Support\Stringable;
 
-                    #[Mixin(Stringable::class)]
+                    #[Mixin(classes: Stringable::class)]
                     final class StringableMixin
                     {
                         public static function readTime(): \Closure
@@ -152,7 +152,7 @@ final class MixinStaticRector extends AbstractRector
                     use Illuminate\Support\Str;
                     use Illuminate\Support\Stringable;
 
-                    #[Mixin(Stringable::class)]
+                    #[Mixin(classes: Stringable::class)]
                     final class StringableMixin
                     {
                         public function readTime(): \Closure

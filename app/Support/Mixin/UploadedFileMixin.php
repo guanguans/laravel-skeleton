@@ -24,7 +24,7 @@ use function Illuminate\Filesystem\join_paths;
 /**
  * @mixin \Illuminate\Http\UploadedFile
  */
-#[Mixin(UploadedFile::class)]
+#[Mixin(classes: UploadedFile::class)]
 final class UploadedFileMixin
 {
     /**

@@ -24,7 +24,7 @@ use Illuminate\Database\Schema\ColumnDefinition;
  *
  * @mixin \Illuminate\Database\Schema\Blueprint
  */
-#[Mixin(Blueprint::class)]
+#[Mixin(classes: Blueprint::class)]
 final class BlueprintMixin
 {
     /**

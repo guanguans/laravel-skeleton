@@ -16,7 +16,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-#[Table('users')]
+#[Table(name: 'users')]
 final class JWTUser extends User implements JWTSubject
 {
     // use Parental\HasParent;

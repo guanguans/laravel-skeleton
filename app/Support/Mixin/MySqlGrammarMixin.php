@@ -21,7 +21,7 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 /**
  * @mixin \Illuminate\Database\Query\Grammars\MySqlGrammar
  */
-#[Mixin(MySqlGrammar::class)]
+#[Mixin(classes: MySqlGrammar::class)]
 final class MySqlGrammarMixin
 {
     public function whereFullText(): \Closure

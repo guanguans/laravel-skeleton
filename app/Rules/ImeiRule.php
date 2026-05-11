@@ -32,7 +32,7 @@ final class ImeiRule extends AbstractRule
 
         foreach ($digits as $key => $digit) {
             if ($key & 1) {
-                $double = str_split((string) ($digit * 2)); // Get double digits
+                $double = str_split((string) ((int) $digit * 2)); // Get double digits
                 $digit = array_sum($double); // Sum double digits
             }
 

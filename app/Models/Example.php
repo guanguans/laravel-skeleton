@@ -38,7 +38,7 @@ use Illuminate\Support\Traits\Macroable;
  * @see https://github.com/OussamaMater/Laravel-Tips
  * @see https://github.com/kirkbushell/eloquence
  */
-final class Example extends Model
+final class Example extends AbstractModel
 {
     // use Awobaz\Compoships\Compoships;
     // use Eloquence\Behaviours\CountCache\HasCounts;

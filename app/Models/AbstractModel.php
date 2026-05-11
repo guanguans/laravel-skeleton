@@ -18,7 +18,7 @@ namespace App\Models;
 use App\Models\Concerns\HasSchemalessAttributes;
 use App\Models\Concerns\SerializeDate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @see https://github.com/LaravelDaily/laravel-tips
  * @see https://github.com/OussamaMater/Laravel-Tips
  */
-class Model extends EloquentModel
+abstract class AbstractModel extends Model
 {
     // use Eloquence\Behaviours\HasCamelCasing;
     // use Watson\Validating\ValidatingTrait;

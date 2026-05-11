@@ -27,8 +27,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-#[ObservedBy(UserObserver::class)]
-#[UseFactory(UserFactory::class)]
+#[ObservedBy(classes: UserObserver::class)]
+#[UseFactory(factoryClass: UserFactory::class)]
 class User extends Authenticatable implements MustVerifyEmail
 {
     // use Parental\HasChildren;

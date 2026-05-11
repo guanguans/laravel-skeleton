@@ -21,7 +21,7 @@ use Mtownsend\ReadTime\ReadTime;
 /**
  * @mixin \Illuminate\Support\Str
  */
-#[Mixin(Str::class)]
+#[Mixin(classes: Str::class)]
 final class StrMixin
 {
     /**

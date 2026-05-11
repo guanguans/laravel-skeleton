@@ -49,7 +49,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # composer remove spiral/roadrunner-cli spiral/roadrunner-http --no-interaction --ansi -v
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --ansi -v
           composer app:install-project
 

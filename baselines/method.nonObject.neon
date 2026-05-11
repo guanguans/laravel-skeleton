@@ -1,0 +1,98 @@
+# total 20 errors
+
+parameters:
+    ignoreErrors:
+        -
+            message: '#^Cannot call method whenEmpty\(\) on Illuminate\\Support\\Collection\<int\<0, max\>, array\<string, mixed\>\>\|null\.$#'
+            count: 1
+            path: ../app/Console/Commands/HealthCheckCommand.php
+
+        -
+            message: '#^Cannot call method whenNotEmpty\(\) on Illuminate\\Support\\Collection\<int, ReflectionMethod\>\|null\.$#'
+            count: 1
+            path: ../app/Console/Commands/IdeHelperChoresCommand.php
+
+        -
+            message: '#^Cannot call method cant\(\) on App\\Models\\User\|null\.$#'
+            count: 1
+            path: ../app/Http/Controllers/Api/AuthController.php
+
+        -
+            message: '#^Cannot call method getFile\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Http/Controllers/Api/ChunkUploadController.php
+
+        -
+            message: '#^Cannot call method getPercentageDone\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Http/Controllers/Api/ChunkUploadController.php
+
+        -
+            message: '#^Cannot call method handler\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Http/Controllers/Api/ChunkUploadController.php
+
+        -
+            message: '#^Cannot call method isFinished\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Http/Controllers/Api/ChunkUploadController.php
+
+        -
+            message: '#^Cannot call method isDeveloper\(\) on App\\Models\\User\|null\.$#'
+            count: 1
+            path: ../app/Http/Middleware/IsDeveloper.php
+
+        -
+            message: '#^Cannot call method isAdmin\(\) on App\\Models\\User\|null\.$#'
+            count: 1
+            path: ../app/Http/Middleware/MustBeAdmin.php
+
+        -
+            message: '#^Cannot call method locale\(\) on App\\Models\\User\|null\.$#'
+            count: 1
+            path: ../app/Http/Middleware/SetDefaultLocaleForUrls.php
+
+        -
+            message: '#^Cannot call method can\(\) on App\\Models\\User\|null\.$#'
+            count: 1
+            path: ../app/Http/Requests/Auth/AuthRequest.php
+
+        -
+            message: '#^Cannot call method format\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Models/AbstractModel.php
+
+        -
+            message: '#^Cannot call method format\(\) on mixed\.$#'
+            count: 2
+            path: ../app/Models/Example.php
+
+        -
+            message: '#^Cannot call method format\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Models/HttpLog.php
+
+        -
+            message: '#^Cannot call method format\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Models/User.php
+
+        -
+            message: '#^Cannot call method isAdmin\(\) on App\\Models\\User\|null\.$#'
+            count: 1
+            path: ../app/Providers/CacheServiceProvider.php
+
+        -
+            message: '#^Cannot call method isAdmin\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixin/RequestMixin.php
+
+        -
+            message: '#^Cannot call method isDeveloper\(\) on mixed\.$#'
+            count: 1
+            path: ../app/Support/Mixin/RequestMixin.php
+
+        -
+            message: '#^Cannot call method delete\(\) on App\\Models\\User\|null\.$#'
+            count: 1
+            path: ../routes/web.php

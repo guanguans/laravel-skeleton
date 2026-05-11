@@ -26,7 +26,7 @@ use App\Jobs\Middleware\RateLimitedForJob;
 use App\Listeners\ContextSubscriber;
 use App\Listeners\PrepareRequestListener;
 use App\Listeners\TraceEventListener;
-use App\Models\Model;
+use App\Models\AbstractModel;
 use App\Support\ComposerScripts;
 use App\Support\Mixin\SchedulingEventMixin;
 use App\Support\Sse\CloseServerSentEventException;
@@ -48,12 +48,12 @@ arch()
     ->group(__DIR__, __FILE__)
     ->skip()
     ->preset()->laravel()->ignoring([
+        AbstractCommand::class,
+        AbstractModel::class,
         AuthController::class,
         CloseServerSentEventException::class,
-        AbstractCommand::class,
         ComposerScripts::class,
         ContextSubscriber::class,
-        Model::class,
         PrepareRequestListener::class,
         RateLimitedForJob::class,
         ReferenceCommand::class,

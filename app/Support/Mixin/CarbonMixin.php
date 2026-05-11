@@ -20,7 +20,7 @@ use Illuminate\Support\Carbon;
 /**
  * @mixin \Illuminate\Support\Carbon
  */
-#[Mixin(Carbon::class)]
+#[Mixin(classes: Carbon::class)]
 final class CarbonMixin
 {
     public function inAppTimezone(): \Closure

@@ -31,7 +31,7 @@ use function Illuminate\Filesystem\join_paths;
  *
  * @method string getClosureLocation(CallbackEvent $event)
  */
-#[Mixin(Event::class)]
+#[Mixin(classes: Event::class)]
 final class SchedulingEventMixin
 {
     /**

@@ -613,6 +613,7 @@ app/
 |-- Mail/
 |   `-- UserRegisteredMail.php
 |-- Models/
+|   |-- AbstractModel.php
 |   |-- Concerns/
 |   |   |-- BelongsToCreator.php
 |   |   |-- CacheCleaner.php
@@ -630,7 +631,6 @@ app/
 |   |-- Example.php
 |   |-- HttpLog.php
 |   |-- JWTUser.php
-|   |-- Model.php
 |   |-- Pivots/
 |   |   |-- MorphPivotWithCreatorPivot.php
 |   |   `-- PivotWithCreatorPivot.php
@@ -641,7 +641,7 @@ app/
 |-- Observers/
 |   `-- UserObserver.php
 |-- Policies/
-|   |-- Policy.php
+|   |-- AbstractPolicy.php
 |   `-- UserPolicy.php
 |-- Providers/
 |   |-- AppServiceProvider.php

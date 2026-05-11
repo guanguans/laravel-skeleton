@@ -30,7 +30,7 @@
         "spatie/laravel-schemaless-attributes": "^2.6",
         "spatie/packagist-api": "^2.1",
         "spiral/roadrunner-cli": "^2.7",
-        "spiral/roadrunner-http": "^3.6 || ^4.0"
+        "spiral/roadrunner-http": "^4.1"
     },
     "require-dev": {
         "adamwojs/php-cs-fixer-phpdoc-force-fqcn": "^2.0",

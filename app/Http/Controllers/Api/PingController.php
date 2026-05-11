@@ -20,7 +20,9 @@ final class PingController extends AbstractController
 {
     public function __invoke(Request $request, bool $bad = false): JsonResponse
     {
-        $validated = $request->validate(['bad' => 'bool']) + ['bad' => $bad];
+        /** @var array<string, mixed> $validated */
+        $validated = $request->validate(['bad' => 'bool']);
+        $validated += ['bad' => $bad];
 
         return $validated['bad'] ? $this->apiResponse()->badRequest() : $this->apiResponse()->ok();
     }

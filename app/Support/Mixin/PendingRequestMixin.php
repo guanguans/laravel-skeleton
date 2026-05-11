@@ -28,7 +28,7 @@ use Psr\Log\LoggerInterface;
  *
  * @mixin \Illuminate\Http\Client\PendingRequest
  */
-#[Mixin(PendingRequest::class)]
+#[Mixin(classes: PendingRequest::class)]
 final class PendingRequestMixin
 {
     public function withLogger(): \Closure

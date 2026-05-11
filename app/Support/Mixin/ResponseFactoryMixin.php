@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  *
  * @mixin \Illuminate\Routing\ResponseFactory
  */
-#[Mixin(ResponseFactory::class)]
+#[Mixin(classes: ResponseFactory::class)]
 final class ResponseFactoryMixin
 {
     /**

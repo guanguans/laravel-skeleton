@@ -26,7 +26,7 @@ use Illuminate\Support\Collection;
 /**
  * @mixin \Illuminate\Http\Request
  */
-#[Mixin(Request::class)]
+#[Mixin(classes: Request::class)]
 final class RequestMixin
 {
     public function userId(): \Closure

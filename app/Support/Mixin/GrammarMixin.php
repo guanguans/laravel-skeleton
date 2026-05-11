@@ -23,7 +23,7 @@ use Illuminate\Support\Fluent;
 /**
  * @mixin \Illuminate\Database\Schema\Grammars\Grammar
  */
-#[Mixin(Grammar::class)]
+#[Mixin(classes: Grammar::class)]
 final class GrammarMixin
 {
     /**
