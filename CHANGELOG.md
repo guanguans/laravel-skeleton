@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="13.1.0"></a>
+## [13.1.0] - 2026-05-11
+### ✨ Features
+- **octane:** Add initial Octane configuration file ([af02959d](https://github.com/guanguans/laravel-skeleton/commit/af02959d))
+
+
 <a name="13.0.0"></a>
 ## [13.0.0] - 2026-05-09
 ### ✨ Features
@@ -3181,7 +3187,8 @@ The addition of new commands and modifications to existing
 ones may affect users who rely on the previous structure and functionality.
 
 
-[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/13.0.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/13.1.0...HEAD
+[13.1.0]: https://github.com/guanguans/laravel-skeleton/compare/13.0.0...13.1.0
 [13.0.0]: https://github.com/guanguans/laravel-skeleton/compare/12.3.0...13.0.0
 [12.3.0]: https://github.com/guanguans/laravel-skeleton/compare/12.2.0...12.3.0
 [12.2.0]: https://github.com/guanguans/laravel-skeleton/compare/12.1.0...12.2.0
