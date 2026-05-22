@@ -3,7 +3,7 @@
         "php": ">=8.5"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.51",
+        "ergebnis/composer-normalize": "^2.52",
         "symplify/rule-doc-generator": "^12.2"
     },
     "suggest": {
