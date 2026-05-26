@@ -57,7 +57,7 @@
         "ion-bazan/composer-diff": "^1.13",
         "jasonmccreary/laravel-test-assertions": "^2.9",
         "jbelien/phpstan-sarif-formatter": "^1.2",
-        "kayw-geek/phpstan-type-trace": "^0.1",
+        "kayw-geek/phpstan-type-trace": "^0.2",
         "larastan/larastan": "^3.9",
         "laravel/facade-documenter": "dev-main",
         "laravel/pail": "^1.2",
