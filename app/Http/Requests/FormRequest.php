@@ -20,18 +20,9 @@ use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 
+#[\Illuminate\Foundation\Http\Attributes\StopOnFirstFailure]
 class FormRequest extends \Illuminate\Foundation\Http\FormRequest
 {
-    /**
-     * 指示验证是否应在第一个规则失败后停止。
-     *
-     * @var bool
-     *
-     * @noinspection ClassOverridesFieldOfSuperClassInspection
-     */
-    #[\Override]
-    protected $stopOnFirstFailure = true;
-
     /**
      * @return array<string, mixed>
      */

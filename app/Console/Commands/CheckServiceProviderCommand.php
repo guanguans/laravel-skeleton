@@ -20,19 +20,15 @@ use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class CheckServiceProviderCommand extends AbstractCommand
-{
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = <<<'SIGNATURE'
+#[\Illuminate\Console\Attributes\Description('Check service providers and ensure they are correctly registered.')]
+#[\Illuminate\Console\Attributes\Signature(
+    <<<'SIGNATURE'
         check:service-provider
         {--except=* : The list of packages to exclude from the service provider check.}
-        SIGNATURE;
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Check service providers and ensure they are correctly registered.';
-
+        SIGNATURE
+)]
+final class CheckServiceProviderCommand extends AbstractCommand
+{
     /** @var list<string> */
     private array $except = [
         'blade-ui-kit/blade-heroicons',

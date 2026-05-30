@@ -94,6 +94,10 @@ return RectorConfig::configure()
         __DIR__.'/_ide_helper_.php',
         __DIR__.'/app/Listeners/TraceEventListener.php',
         __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
+
+        __DIR__.'/app/Models/Example.php',
+        __DIR__.'/app/Models/Pivots/MorphPivotWithCreatorPivot.php',
+        __DIR__.'/app/Models/Pivots/PivotWithCreatorPivot.php',
     ])
     ->withCache(__DIR__.'/.build/rector/')
     // ->withoutParallel()

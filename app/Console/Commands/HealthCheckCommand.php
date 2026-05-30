@@ -40,22 +40,18 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @see https://github.com/spatie/laravel-health
  * @see https://laravel-news.com/isolatable
  */
+#[\Illuminate\Console\Attributes\Description('Health check.')]
+#[\Illuminate\Console\Attributes\Signature(
+    <<<'SIGNATURE'
+        health:check
+        {--only=* : Only check methods with the given name}
+        {--except=* : Do not check methods with the given name}
+        SIGNATURE
+)]
 final class HealthCheckCommand extends Command implements Isolatable
 {
     private const string RESULT_SUCCESS = '<info>ok</info>';
     private const string RESULT_ERROR = '<error>failing</error>';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = <<<'SIGNATURE'
-        health:check
-        {--only=* : Only check methods with the given name}
-        {--except=* : Do not check methods with the given name}
-        SIGNATURE;
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Health check.';
 
     /** @var list<string> */
     private array $only = [];

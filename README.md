@@ -146,6 +146,7 @@ composer php-lint
 composer phpbench
 composer phpmnd
 composer phpstan
+composer phpstan-trace
 composer phpstan:analyse
 composer phpstan:analyse-error-format-annotate-pull-request
 composer phpstan:analyse-error-format-checkstyle

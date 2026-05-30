@@ -18,17 +18,11 @@ use Illuminate\Support\Pluralizer;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Symfony\Component\String\Inflector\EnglishInflector;
 
+#[\Illuminate\Console\Attributes\Description('Inflector pluralizes and singularizes English nouns.')]
+#[\Illuminate\Console\Attributes\Signature('inflector {phrase? : The word or phrase to be inflected}')]
 final class InflectorCommand extends AbstractCommand
 {
     use ForwardsCalls;
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = 'inflector {phrase? : The word or phrase to be inflected}';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Inflector pluralizes and singularizes English nouns.';
 
     public function handle(): void
     {

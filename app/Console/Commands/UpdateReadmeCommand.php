@@ -21,16 +21,10 @@ use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Stringable;
 use Symfony\Component\Process\ExecutableFinder;
 
+#[\Illuminate\Console\Attributes\Description('Update readme')]
+#[\Illuminate\Console\Attributes\Signature('readme:update {path? : The path of readme}')]
 final class UpdateReadmeCommand extends AbstractCommand
 {
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = 'readme:update {path? : The path of readme}';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Update readme';
-
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */

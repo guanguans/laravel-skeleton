@@ -18,16 +18,10 @@ use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
+#[\Illuminate\Console\Attributes\Description('Clear logs')]
+#[\Illuminate\Console\Attributes\Signature('clear:logs {days=30 : The number of days to keep}')]
 final class ClearLogsCommand extends AbstractCommand
 {
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = 'clear:logs {days=30 : The number of days to keep}';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Clear logs';
-
     public function handle(): void
     {
         $files = array_keys(iterator_to_array(

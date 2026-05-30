@@ -17,16 +17,10 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
 
+#[\Illuminate\Console\Attributes\Description('Optimize all.')]
+#[\Illuminate\Console\Attributes\Signature('optimize:all {--f|force : Force optimize.}')]
 final class OptimizeAllCommand extends Command
 {
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = 'optimize:all {--f|force : Force optimize.}';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Optimize all.';
-
     public function handle(): void
     {
         if (!$this->option('force') && $this->getLaravel()->isProduction()) {

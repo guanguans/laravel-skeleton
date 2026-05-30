@@ -31,13 +31,11 @@ use Illuminate\Support\Facades\Http;
  * @see https://ammar-aldwayma.me/blog/dealing-with-an-unstable-services-in-laravel
  * @see https://www.harrisrafto.eu/enhancing-your-laravel-job-handling-with-middleware-managing-httpclientexception
  */
+#[\Illuminate\Queue\Attributes\DeleteWhenMissingModels]
 final class SendThirdPartyRequestJob implements ShouldQueue
 {
     use Queueable;
     public int $tires = 3;
-
-    /** Delete the job if its models no longer exist. */
-    public bool $deleteWhenMissingModels = true;
 
     public function __construct(
         #[WithoutRelations]

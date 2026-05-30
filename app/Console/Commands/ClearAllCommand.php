@@ -20,22 +20,13 @@ use Illuminate\Console\Prohibitable;
 use Illuminate\Contracts\Console\Isolatable;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 
+#[\Illuminate\Console\Attributes\Aliases(['ca'])]
+#[\Illuminate\Console\Attributes\Description('clear optimized all.')]
+#[\Illuminate\Console\Attributes\Signature('clear:all {--f|force : Force clear optimized.}')]
 final class ClearAllCommand extends Command implements Isolatable, PromptsForMissingInput
 {
     use ConfirmableTrait;
     use Prohibitable;
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = 'clear:all {--f|force : Force clear optimized.}';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $aliases = ['ca'];
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'clear optimized all.';
 
     public function handle(): int
     {

@@ -18,22 +18,18 @@ use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
 
-final class IdeHelperChoresCommand extends AbstractCommand
-{
-    private const string SUFFIX = 'Chore';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = <<<'EOD'
+#[\Illuminate\Console\Attributes\Description('Generate chores for the Laravel-Idea-JSON file.')]
+#[\Illuminate\Console\Attributes\Signature(
+    <<<'SIGNATURE'
         ide-helper:chores
         {--only=* : Only output chores with the given name}
         {--except=* : Do not output chores with the given name}
         {--json : Output as JSON.}
-        EOD;
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Generate chores for the Laravel-Idea-JSON file.';
+        SIGNATURE
+)]
+final class IdeHelperChoresCommand extends AbstractCommand
+{
+    private const string SUFFIX = 'Chore';
 
     /**
      * @noinspection PhpMissingParentCallCommonInspection

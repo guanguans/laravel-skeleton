@@ -285,6 +285,10 @@ parameters:
                 - app/Casts/CommaSeparatedToIntegerArrayCast.php
                 - app/Models/JWTUser.php
         -
+            identifier: symplify.requireAttributeName
+            paths:
+                - app/Console/Commands/
+        -
             identifier: new.static
             paths:
                 - app/Models/AbstractModel.php
@@ -330,10 +334,6 @@ parameters:
             paths:
                 - app/Providers/HttpServiceProvider.php
                 - app/Support/Mixin/SchedulingEventMixin.php
-        -
-            identifier: typeCoverage.paramTypeCoverage
-            paths:
-                - app/Models/Example.php
         -
             identifier: classConstant.deprecated
             paths:

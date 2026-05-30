@@ -26,20 +26,17 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use function Illuminate\Filesystem\join_paths;
 
-final class ShowUnsupportedRequiresCommand extends AbstractCommand
-{
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = <<<'EOF'
+#[\Illuminate\Console\Attributes\Description('Show unsupported requires.')]
+#[\Illuminate\Console\Attributes\Signature(
+    <<<'SIGNATURE'
         show-unsupported-requires
         {--cwd= : The current working directory.}
         {--package=* : The name of package.}
         {--major-version=13 : The minimum major version of the package is required.}
-        EOF;
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Show unsupported requires.';
+        SIGNATURE
+)]
+final class ShowUnsupportedRequiresCommand extends AbstractCommand
+{
     private PackagistClient $packagistClient;
 
     /**

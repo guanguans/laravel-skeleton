@@ -21,16 +21,10 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use function Illuminate\Filesystem\join_paths;
 
+#[\Illuminate\Console\Attributes\Description('Show OPCache URL')]
+#[\Illuminate\Console\Attributes\Signature('opcache:url {route=compile} {--force}')]
 final class OpcacheUrlCommand extends AbstractCommand
 {
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $signature = 'opcache:url {route=compile} {--force}';
-
-    /** @noinspection ClassOverridesFieldOfSuperClassInspection */
-    #[\Override]
-    protected $description = 'Show OPCache URL';
-
     /**
      * @throws \Illuminate\Http\Client\ConnectionException
      */
