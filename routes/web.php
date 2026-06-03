@@ -28,7 +28,8 @@ use Illuminate\Support\Facades\Route;
 use Overtrue\LaravelUploader\LaravelUploader;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-Route::get('/', static fn (): Factory|View => view('welcome'))->name('index');
+// Route::get('/', static fn (): Factory|View => view('welcome'))->name('index');
+Route::get('/', static fn (): RedirectResponse => redirect('routes'))->name('index');
 Route::fallback(static fn () => abort(SymfonyResponse::HTTP_NOT_FOUND))->name('fallback');
 
 LaravelUploader::routes();

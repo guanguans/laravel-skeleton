@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Testing\TestResponse;
@@ -195,9 +196,7 @@ function fixtures_path(string $path = ''): string
 
 function reset_http_fake(?Factory $factory = null): void
 {
-    (function (): void {
-        $this->stubCallbacks = collect();
-    })->call($factory ?? Http::getFacadeRoot());
+    (fn (): Collection => $this->stubCallbacks = collect())->call($factory ?? Http::getFacadeRoot());
 }
 
 function running_in_github_action(): bool

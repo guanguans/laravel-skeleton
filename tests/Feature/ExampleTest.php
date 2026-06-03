@@ -44,7 +44,8 @@ it('is console', function (): void {
 })->group(__DIR__, __FILE__);
 
 it('is http', function (): void {
-    $this->get('/')->assertOk();
+    // $this->get('/')->assertOk();
+    $this->get('/')->assertRedirect('routes');
 
     $this->get('/api/v1/ping')
         // ->ddBody()
