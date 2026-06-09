@@ -24,8 +24,6 @@ composer app:generate-gitleaks-ignore
 composer app:install-project
 composer app:lint-readme
 composer app:parse-phpdoc
-composer argtyper
-composer argtyper:add-types
 composer artisan
 composer artisan:envy-prune
 composer artisan:envy-sync
