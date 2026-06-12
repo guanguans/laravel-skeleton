@@ -152,7 +152,7 @@ final class ViewServiceProvider extends ServiceProvider
         ViewFacade::composer('*', static function (View $view): void {
             $view->with('request', request())
                 ->with('user', auth()->user())
-                ->with('config', config());
+                ->with('configuration', config());
         });
 
         /** 构造器. */
@@ -160,12 +160,12 @@ final class ViewServiceProvider extends ServiceProvider
         ViewFacade::creator('*', static function (View $view): void {
             $view->with('request', request())
                 ->with('user', auth()->user())
-                ->with('config', config());
+                ->with('configuration', config());
         });
 
         /** 共享数据. */
         ViewFacade::share('request', request());
         ViewFacade::share('user', auth()->user());
-        ViewFacade::share('config', config());
+        ViewFacade::share('configuration', config());
     }
 }
