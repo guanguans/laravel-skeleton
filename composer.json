@@ -103,6 +103,7 @@
         "tomasvotruba/ctor": "^2.2",
         "tomasvotruba/type-coverage": "^2.2",
         "tomasvotruba/unused-public": "^2.2",
+        "volt-test/laravel-performance-testing": "^1.3",
         "yamadashy/phpstan-friendly-formatter": "^1.4"
     },
     "suggest": {
@@ -424,7 +425,8 @@
                 "laravel/pao",
                 "laravel/telescope",
                 "nunomaduro/collision",
-                "spatie/laravel-ignition"
+                "spatie/laravel-ignition",
+                "volt-test/laravel-performance-testing"
             ]
         },
         "phpstan/extension-installer": {
@@ -541,7 +543,7 @@
             "@pint:test",
             "@pest"
         ],
-        "class-leak": "@php vendor/bin/class-leak --ansi -vv",
+        "class-leak": "@php vendor/bin/class-leak",
         "class-leak:check": "@class-leak check config/",
         "composer-bump": [
             "@putenv:php",

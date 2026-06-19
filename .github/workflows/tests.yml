@@ -49,7 +49,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --ansi -v
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --ignore-platform-req=ext-pcntl --ansi -v
           composer app:install-project
 
       - name: Execute tests

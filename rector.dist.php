@@ -99,6 +99,7 @@ return RectorConfig::configure()
         __DIR__.'/app/Models/Pivots/MorphPivotWithCreatorPivot.php',
         __DIR__.'/app/Models/Pivots/PivotWithCreatorPivot.php',
     ])
+    ->reportUnusedSkips()
     ->withCache(__DIR__.'/.build/rector/')
     // ->withoutParallel()
     ->withParallel()
@@ -223,7 +224,6 @@ return RectorConfig::configure()
             __DIR__.'/app/Support/VarDumper/ServerDumper.php',
         ],
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
-            __DIR__.'/app/Support/Client/AbstractClient.php',
             __DIR__.'/app/Support/Mixin/',
         ],
         JsonThrowOnErrorRector::class => [
@@ -251,15 +251,14 @@ return RectorConfig::configure()
             __DIR__.'/app/Models/',
         ],
         ServerVariableToRequestFacadeRector::class => [
-            __DIR__.'/app/Listeners/RunCommandInDebugModeListener.php',
             __DIR__.'/app/Support/VarDumper/ServerDumper.php',
         ],
         SortAssociativeArrayByKeyRector::class => [
             __DIR__.'/app/',
-            __DIR__.'/config/',
+            // __DIR__.'/config/',
             __DIR__.'/database/',
             __DIR__.'/routes/',
-            __DIR__.'/tests/',
+            // __DIR__.'/tests/',
         ],
         StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
             __DIR__.'/tests/*Test.php',
