@@ -54,7 +54,7 @@
         "guanguans/php-cs-fixer-custom-fixers": "^1.2",
         "guanguans/phpstan-rules": "^1.1",
         "guanguans/rector-rules": "^1.7",
-        "ion-bazan/composer-diff": "^1.13",
+        "ion-bazan/composer-diff": "^2.0",
         "jasonmccreary/laravel-test-assertions": "^2.9",
         "jbelien/phpstan-sarif-formatter": "^1.2",
         "kayw-geek/phpstan-type-trace": "^0.2",
