@@ -39,6 +39,7 @@ use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
+use Rector\DeadCode\Rector\StmtsAwareInterface\RemoveDeadInstanceOfAssertRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Naming\Rector\Class_\RenamePropertyToMatchTypeRector;
@@ -140,13 +141,13 @@ return RectorConfig::configure()
     ->withRules([
         ArraySpreadInsteadOfArrayMergeRector::class,
         ClassHandleMethodRector::class,
-        EnumCaseToPascalCaseRector::class,
+        // EnumCaseToPascalCaseRector::class,
         GeneratorPropertyFetchToMethodCallRector::class,
         JsonThrowOnErrorRector::class,
         MixinStaticRector::class,
         SortAssociativeArrayByKeyRector::class,
-        StaticArrowFunctionRector::class,
-        StaticClosureRector::class,
+        // StaticArrowFunctionRector::class,
+        // StaticClosureRector::class,
     ])
     ->withConfiguredRule(AddNoinspectionDocblockToFileFirstStmtRector::class, [
         '*/app/Support/Mixin/*' => [
@@ -189,6 +190,7 @@ return RectorConfig::configure()
         AddSensitiveParameterAttributeRector::class,
         ChainExpectCallsRector::class,
         PrivateToProtectedVisibilityForTraitRector::class,
+        RemoveDeadInstanceOfAssertRector::class,
         RenameGarbageParamNameRector::class,
         RenameParamToMatchTypeRector::class,
         ScalarValueToConstFetchRector::class,
@@ -260,11 +262,11 @@ return RectorConfig::configure()
             __DIR__.'/routes/',
             // __DIR__.'/tests/',
         ],
-        StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
-            __DIR__.'/tests/*Test.php',
-            __DIR__.'/tests/Pest.php',
-        ],
-        StaticClosureRector::class => $staticClosureSkipPaths,
+        // StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
+        //     __DIR__.'/tests/*Test.php',
+        //     __DIR__.'/tests/Pest.php',
+        // ],
+        // StaticClosureRector::class => $staticClosureSkipPaths,
         TypeHintTappableCallRector::class => [
             __DIR__.'/app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php',
             __DIR__.'/app/Providers/ValidatorServiceProvider.php',

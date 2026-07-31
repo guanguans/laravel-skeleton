@@ -119,7 +119,7 @@ final class RequestMixin
             [$fallbacks, $routes] = collect(Arr::get($routeCollection->getRoutesByMethod(), $this->method(), []))
                 ->partition(static fn (Route $route) => $route->isFallback)
                 ->all();
-            \assert($routes instanceof Collection);
+            // \assert($routes instanceof Collection);
 
             return $routes->merge($fallbacks)->first(fn (Route $route) => $route->matches($this, $includingMethod));
         };

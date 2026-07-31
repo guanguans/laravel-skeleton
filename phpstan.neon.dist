@@ -116,6 +116,9 @@ parameters:
         no_mixed: false
         no_mixed_property: true
         no_mixed_caller: false
+        no_param_type_removal: true
+        no_isset_on_object: true
+        no_empty_on_object: true
     unused_public:
         constants: true
         properties: true
@@ -213,7 +216,7 @@ parameters:
         - identifier: symplify.noDynamicName
         - identifier: symplify.noReturnSetterMethod
         - identifier: symplify.requireExceptionNamespace
-        - identifier: typePerfect.noArrayAccessOnObject
+#        - identifier: typePerfect.noArrayAccessOnObject
 
         - identifier: argument.type
         - identifier: cast.double
