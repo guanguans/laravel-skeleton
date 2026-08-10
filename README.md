@@ -126,6 +126,7 @@ composer pest:parallel
 composer pest:profanity
 composer pest:profile
 composer pest:retry
+composer pest:tia
 composer pest:todos
 composer pest:type-coverage
 composer pest:update-snapshots

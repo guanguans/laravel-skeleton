@@ -24,6 +24,8 @@ use Guanguans\RectorRules\Rector\FunctionLike\RenameGarbageParamNameRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
 use Guanguans\RectorRules\Set\SetList;
 use Illuminate\Support\Str;
+use Pest\Rector\Rules\ChainExpectCallsRector;
+use Pest\Rector\Set\PestSetList;
 use PhpParser\NodeVisitor\ParentConnectingVisitor;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
 use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
@@ -70,9 +72,6 @@ use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Rector\StaticCall\RequestStaticValidateToInjectRector;
 use RectorLaravel\Set\LaravelSetProvider;
-use RectorPest\Rules\ChainExpectCallsRector;
-use RectorPest\Set\PestLevelSetList;
-use RectorPest\Set\PestSetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -132,14 +131,10 @@ return RectorConfig::configure()
     )
     ->withSets([
         SetList::ALL,
-        PestLevelSetList::UP_TO_PEST_40,
-        PestSetList::PEST_CHAIN,
-        PestSetList::PEST_CODE_QUALITY,
-        PestSetList::PEST_LARAVEL,
-        PestSetList::PEST_MIGRATION,
+        PestSetList::CODING_STYLE,
     ])
     ->withRules([
-        ArraySpreadInsteadOfArrayMergeRector::class,
+        // ArraySpreadInsteadOfArrayMergeRector::class,
         ClassHandleMethodRector::class,
         // EnumCaseToPascalCaseRector::class,
         GeneratorPropertyFetchToMethodCallRector::class,
@@ -198,13 +193,13 @@ return RectorConfig::configure()
 
         ChangeOrIfContinueToMultiContinueRector::class,
         DisallowedEmptyRuleFixerRector::class,
-        EncapsedStringsToSprintfRector::class,
-        ExplicitBoolCompareRector::class,
+        // EncapsedStringsToSprintfRector::class,
+        // ExplicitBoolCompareRector::class,
         LogicalToBooleanRector::class,
         NewlineBetweenClassLikeStmtsRector::class,
         PreferPHPUnitThisCallRector::class,
         ReturnBinaryOrToEarlyReturnRector::class,
-        WrapEncapsedVariableInCurlyBracesRector::class,
+        // WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
         ContainerBindConcreteWithClosureOnlyRector::class,
