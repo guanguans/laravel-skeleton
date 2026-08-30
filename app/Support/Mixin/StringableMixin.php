@@ -1,7 +1,7 @@
 <?php
 
-/** @noinspection OverrideMissingInspection */
 /** @noinspection Annotator */
+/** @noinspection OverrideMissingInspection */
 declare(strict_types=1);
 
 /**

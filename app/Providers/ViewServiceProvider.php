@@ -96,6 +96,7 @@ final class ViewServiceProvider extends ServiceProvider
     private function extendBlade(): void
     {
         /** 注册组件. */
+        // Blade::aliasComponent('alert', AlertComponent::class);
         Blade::component('alert', AlertComponent::class);
 
         /**

@@ -89,7 +89,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder<self> $query
+     * @param \Illuminate\Database\Eloquent\Builder<static> $query
      */
     #[Scope]
     protected function verifiedEmail(Builder $query): void

@@ -50,6 +50,7 @@ use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
 use Rector\Php82\Rector\Param\AddSensitiveParameterAttributeRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
+use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
 use Rector\Renaming\ValueObject\RenameStaticMethod;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
@@ -71,7 +72,6 @@ use RectorLaravel\Rector\MethodCall\ContainerBindConcreteWithClosureOnlyRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Rector\StaticCall\RequestStaticValidateToInjectRector;
-use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -110,7 +110,6 @@ return RectorConfig::configure()
     ->withTreatClassesAsFinal()
     ->withAttributesSets(phpunit: true, all: true)
     ->withComposerBased(phpunit: true, laravel: true)
-    ->withSetProviders(LaravelSetProvider::class)
     ->withPhpVersion(PhpVersion::PHP_85)
     // ->withDowngradeSets(php85: true)
     ->withPhpSets(php85: true)
@@ -138,7 +137,7 @@ return RectorConfig::configure()
         ClassHandleMethodRector::class,
         // EnumCaseToPascalCaseRector::class,
         GeneratorPropertyFetchToMethodCallRector::class,
-        JsonThrowOnErrorRector::class,
+        // JsonThrowOnErrorRector::class,
         MixinStaticRector::class,
         SortAssociativeArrayByKeyRector::class,
         // StaticArrowFunctionRector::class,
@@ -182,23 +181,23 @@ return RectorConfig::configure()
         new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),
     ])
     ->withSkip([
-        AddSensitiveParameterAttributeRector::class,
+        // AddSensitiveParameterAttributeRector::class,
         ChainExpectCallsRector::class,
         PrivateToProtectedVisibilityForTraitRector::class,
         RemoveDeadInstanceOfAssertRector::class,
         RenameGarbageParamNameRector::class,
         RenameParamToMatchTypeRector::class,
-        ScalarValueToConstFetchRector::class,
+        // ScalarValueToConstFetchRector::class,
         StringToClassConstantRector::class,
 
-        ChangeOrIfContinueToMultiContinueRector::class,
-        DisallowedEmptyRuleFixerRector::class,
+        // ChangeOrIfContinueToMultiContinueRector::class,
+        // DisallowedEmptyRuleFixerRector::class,
         // EncapsedStringsToSprintfRector::class,
         // ExplicitBoolCompareRector::class,
         LogicalToBooleanRector::class,
         NewlineBetweenClassLikeStmtsRector::class,
         PreferPHPUnitThisCallRector::class,
-        ReturnBinaryOrToEarlyReturnRector::class,
+        // ReturnBinaryOrToEarlyReturnRector::class,
         // WrapEncapsedVariableInCurlyBracesRector::class,
     ])
     ->withSkip([
@@ -223,12 +222,12 @@ return RectorConfig::configure()
         CompleteDynamicPropertiesRector::class => $mixinsPath = [
             __DIR__.'/app/Support/Mixin/',
         ],
-        JsonThrowOnErrorRector::class => [
-            __DIR__.'/app/Support/helpers.php',
-            __DIR__.'/app/Support/Mixin/CollectionMixin.php',
-            __DIR__.'/app/Support/Sse/ServerSentEvent.php',
-            __DIR__.'/tests/Pest.php',
-        ],
+        // JsonThrowOnErrorRector::class => [
+        //     __DIR__.'/app/Support/helpers.php',
+        //     __DIR__.'/app/Support/Mixin/CollectionMixin.php',
+        //     __DIR__.'/app/Support/Sse/ServerSentEvent.php',
+        //     __DIR__.'/tests/Pest.php',
+        // ],
         RemoveDumpDataDeadCodeRector::class => [
             __DIR__.'/app/Support/Mixin/SchedulingEventMixin.php',
         ],
@@ -239,6 +238,9 @@ return RectorConfig::configure()
         RemoveUnusedPublicMethodParameterRector::class => [
             __DIR__.'/app/Listeners/',
             __DIR__.'/app/Observers/UserObserver.php',
+        ],
+        RenameMethodRector::class => [
+            __DIR__.'/app/Providers/ViewServiceProvider.php',
         ],
         RenamePropertyToMatchTypeRector::class => [
             __DIR__.'/app/Support/VarDumper/ServerDumper.php',

@@ -308,7 +308,7 @@ final class HealthCheckCommand extends Command implements Isolatable
     }
 
     /**
-     * @return \GrahamCampbell\ResultType\Success<string, never>
+     * @return \GrahamCampbell\ResultType\Success<string>
      */
     private function createSuccessResult(): Success
     {
