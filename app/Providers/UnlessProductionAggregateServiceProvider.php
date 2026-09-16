@@ -33,6 +33,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
         'Dedoc\\Scramble\\ScrambleServiceProvider',
         'Guanguans\\LaravelSoar\\SoarServiceProvider',
         'JMac\\Testing\\AdditionalAssertionsServiceProvider',
+        'Laravel\\Doctor\\DoctorServiceProvider',
         'Laravel\\Pail\\PailServiceProvider',
         'Laravel\\Pao\\Laravel\\ServiceProvider',
         'Laravel\\Telescope\\TelescopeServiceProvider',

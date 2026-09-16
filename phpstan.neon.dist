@@ -359,6 +359,10 @@ parameters:
             paths:
                 - database/seeders/DatabaseSeeder.php
         -
+            identifier: booleanNot.alwaysFalse
+            paths:
+                - app/Support/Mixin/CommandMixin.php
+        -
             message: '#^Calling env_explode\(\) is forbidden, use config\(\) instead\.$#'
             path: config/
         -
