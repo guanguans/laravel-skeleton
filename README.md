@@ -218,6 +218,16 @@ composer zizmor
 </details>
 
 <details>
+<summary>Npm scripts</summary>
+
+```shell
+npm run build
+npm run dev
+```
+
+</details>
+
+<details>
 <summary>Packages</summary>
 
 * [24slides/laravel-saml2](https://github.com/scaler-tech/laravel-saml2) - SAML2 Service Provider integration for Laravel applications, based on OneLogin toolkit
