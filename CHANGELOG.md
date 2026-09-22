@@ -8,6 +8,40 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="13.2.0"></a>
+## [13.2.0] - 2026-09-22
+### 📖 Documents
+- improve README ([2a937716](https://github.com/guanguans/laravel-skeleton/commit/2a937716))
+
+### 📦 Builds
+- **deps:** bump github/codeql-action from 4 to 4.37.3 ([9032aaca](https://github.com/guanguans/laravel-skeleton/commit/9032aaca))
+- **deps:** bump github/codeql-action from 4.37.4 to 4.37.5 ([cb486f8a](https://github.com/guanguans/laravel-skeleton/commit/cb486f8a))
+- **deps:** bump github/codeql-action from 4.37.8 to 4.37.9 ([f9407c66](https://github.com/guanguans/laravel-skeleton/commit/f9407c66))
+- **deps:** bump github/codeql-action from 4.37.7 to 4.37.8 ([d2ad6b3f](https://github.com/guanguans/laravel-skeleton/commit/d2ad6b3f))
+- **deps:** Bump package versions in composer.json ([d4621dcf](https://github.com/guanguans/laravel-skeleton/commit/d4621dcf))
+- **deps:** bump github/codeql-action from 4.37.5 to 4.37.6 ([33dd19e9](https://github.com/guanguans/laravel-skeleton/commit/33dd19e9))
+- **deps:** bump github/codeql-action from 4.37.9 to 4.38.0 ([da4d7d2c](https://github.com/guanguans/laravel-skeleton/commit/da4d7d2c))
+- **deps:** bump github/codeql-action from 4.37.3 to 4.37.4 ([e52b349f](https://github.com/guanguans/laravel-skeleton/commit/e52b349f))
+- **deps:** bump github/codeql-action from 4.37.6 to 4.37.7 ([4737bdd8](https://github.com/guanguans/laravel-skeleton/commit/4737bdd8))
+- **deps:** bump actions/stale from 10 to 11 ([317ef2f8](https://github.com/guanguans/laravel-skeleton/commit/317ef2f8))
+- **deps:** bump codecov/codecov-action from 6 to 7 ([faf5cb44](https://github.com/guanguans/laravel-skeleton/commit/faf5cb44))
+- **deps:** bump actions/setup-node from 6 to 7 ([616f3142](https://github.com/guanguans/laravel-skeleton/commit/616f3142))
+- **deps:** bump actions/cache from 5 to 6 ([680840b5](https://github.com/guanguans/laravel-skeleton/commit/680840b5))
+- **deps:** bump actions/checkout from 6 to 7 ([1fc33d7f](https://github.com/guanguans/laravel-skeleton/commit/1fc33d7f))
+- **deps-dev:** update ion-bazan/composer-diff requirement ([c3ea5b43](https://github.com/guanguans/laravel-skeleton/commit/c3ea5b43))
+- **deps-dev:** update kayw-geek/phpstan-type-trace requirement ([b88cd5df](https://github.com/guanguans/laravel-skeleton/commit/b88cd5df))
+
+### Pull Requests
+- Merge pull request [#1649](https://github.com/guanguans/laravel-skeleton/issues/1649) from guanguans/dependabot/github_actions/github/codeql-action-4.38.0
+- Merge pull request [#1648](https://github.com/guanguans/laravel-skeleton/issues/1648) from guanguans/dependabot/github_actions/github/codeql-action-4.37.9
+- Merge pull request [#1647](https://github.com/guanguans/laravel-skeleton/issues/1647) from guanguans/dependabot/github_actions/github/codeql-action-4.37.8
+- Merge pull request [#1646](https://github.com/guanguans/laravel-skeleton/issues/1646) from guanguans/dependabot/github_actions/github/codeql-action-4.37.7
+- Merge pull request [#1645](https://github.com/guanguans/laravel-skeleton/issues/1645) from guanguans/dependabot/github_actions/github/codeql-action-4.37.6
+- Merge pull request [#1643](https://github.com/guanguans/laravel-skeleton/issues/1643) from guanguans/dependabot/github_actions/github/codeql-action-4.37.4
+- Merge pull request [#1642](https://github.com/guanguans/laravel-skeleton/issues/1642) from guanguans/dependabot/github_actions/github/codeql-action-4.37.3
+- Merge pull request [#1635](https://github.com/guanguans/laravel-skeleton/issues/1635) from guanguans/dependabot/composer/kayw-geek/phpstan-type-trace-tw-0.2
+
+
 <a name="13.1.0"></a>
 ## [13.1.0] - 2026-05-11
 ### ✨ Features
@@ -3187,7 +3221,8 @@ The addition of new commands and modifications to existing
 ones may affect users who rely on the previous structure and functionality.
 
 
-[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/13.1.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/13.2.0...HEAD
+[13.2.0]: https://github.com/guanguans/laravel-skeleton/compare/13.1.0...13.2.0
 [13.1.0]: https://github.com/guanguans/laravel-skeleton/compare/13.0.0...13.1.0
 [13.0.0]: https://github.com/guanguans/laravel-skeleton/compare/12.3.0...13.0.0
 [12.3.0]: https://github.com/guanguans/laravel-skeleton/compare/12.2.0...12.3.0
