@@ -22,21 +22,21 @@ abstract class AbstractCurdController extends AbstractController
     /** @var class-string<\Illuminate\Database\Eloquent\Model> */
     protected string $modelClass;
 
-    public function index(Request $request): JsonResponse
+    final public function index(Request $request): JsonResponse
     {
         return $this->apiResponse()->ok(
             $this->modelClass::query()->simplePaginate($request->query('per_page'))
         );
     }
 
-    public function store(Request $request): JsonResponse
+    final public function store(Request $request): JsonResponse
     {
         return $this->apiResponse()->ok(
             $this->modelClass::query()->create($request->post())
         );
     }
 
-    public function show(int $id): JsonResponse
+    final public function show(int $id): JsonResponse
     {
         return $this->apiResponse()->ok($this->findModel($id));
     }
@@ -44,7 +44,7 @@ abstract class AbstractCurdController extends AbstractController
     /**
      * @throws \Throwable
      */
-    public function update(Request $request, int $id): JsonResponse
+    final public function update(Request $request, int $id): JsonResponse
     {
         $model = $this->findModel($id);
         $model->updateOrFail($request->post());
@@ -55,7 +55,7 @@ abstract class AbstractCurdController extends AbstractController
     /**
      * @throws \Throwable
      */
-    public function destroy(int $id): JsonResponse
+    final public function destroy(int $id): JsonResponse
     {
         $this->findModel($id)->deleteOrFail();
 

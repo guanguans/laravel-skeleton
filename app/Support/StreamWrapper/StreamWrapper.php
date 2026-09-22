@@ -3,7 +3,6 @@
 /** @noinspection OverrideMissingInspection */
 /** @noinspection PhpMethodNamingConventionInspection */
 /** @noinspection PhpUnusedParameterInspection */
-
 declare(strict_types=1);
 
 /**

@@ -32,12 +32,6 @@ class CallbackGetCast implements CastsAttributes
         $this->callbackArgs = $callbackArgs;
     }
 
-    #[\Override]
-    public function set(Model $model, string $key, mixed $value, array $attributes): mixed
-    {
-        return $value;
-    }
-
     /**
      * @throws \Throwable
      */
@@ -47,5 +41,11 @@ class CallbackGetCast implements CastsAttributes
         array_splice($this->callbackArgs, $this->idxOfAttrValInCallbackArgs, 0, $value);
 
         return \call_user_func_array(resolve_callback($this->callback), $this->callbackArgs);
+    }
+
+    #[\Override]
+    public function set(Model $model, string $key, mixed $value, array $attributes): mixed
+    {
+        return $value;
     }
 }

@@ -65,18 +65,6 @@ final class SupportServiceProvider extends ServiceProvider
     }
 
     /**
-     * @return list<class-string>
-     *
-     * @noinspection SenselessMethodDuplicationInspection
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    public function when(): array
-    {
-        return [];
-    }
-
-    /**
      * @return list<string>
      *
      * @noinspection PhpMissingParentCallCommonInspection
@@ -88,6 +76,18 @@ final class SupportServiceProvider extends ServiceProvider
             ElasticsearchManager::class,
             PushDeer::class,
         ];
+    }
+
+    /**
+     * @return list<class-string>
+     *
+     * @noinspection SenselessMethodDuplicationInspection
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    public function when(): array
+    {
+        return [];
     }
 
     private function ever(): void

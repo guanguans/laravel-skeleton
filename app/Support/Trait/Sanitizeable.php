@@ -75,7 +75,7 @@ trait Sanitizeable
      *
      * @noinspection PhpVariableNamingConventionInspection
      */
-    private function recursiveArrayIntersectKey(array $a, array $b): array
+    protected function recursiveArrayIntersectKey(array $a, array $b): array
     {
         $a = array_intersect_key($a, $b);
 

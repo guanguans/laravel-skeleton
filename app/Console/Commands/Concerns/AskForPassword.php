@@ -20,7 +20,7 @@ namespace App\Console\Commands\Concerns;
  */
 trait AskForPassword
 {
-    private function askForPassword(): string
+    protected function askForPassword(): string
     {
         do {
             $password = $this->secret('Your desired password');
@@ -37,7 +37,7 @@ trait AskForPassword
         return $password;
     }
 
-    private function comparePasswords(
+    protected function comparePasswords(
         #[\SensitiveParameter]
         ?string $password,
         #[\SensitiveParameter]

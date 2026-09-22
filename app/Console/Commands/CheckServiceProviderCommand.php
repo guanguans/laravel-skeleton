@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection PropertyCanBeStaticInspection */
-
 declare(strict_types=1);
 
 /**

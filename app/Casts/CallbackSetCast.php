@@ -18,6 +18,16 @@ use Illuminate\Database\Eloquent\Model;
 final class CallbackSetCast extends CallbackGetCast
 {
     /**
+     * @noinspection PhpMissingParentCallCommonInspection
+     * @noinspection MissingParentCallInspection
+     */
+    #[\Override]
+    public function get(Model $model, string $key, mixed $value, array $attributes): mixed
+    {
+        return parent::set($model, $key, $value, $attributes);
+    }
+
+    /**
      * @throws \Throwable
      *
      * @noinspection PhpMissingParentCallCommonInspection
@@ -26,15 +36,5 @@ final class CallbackSetCast extends CallbackGetCast
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         return parent::get($model, $key, $value, $attributes);
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     * @noinspection MissingParentCallInspection
-     */
-    #[\Override]
-    public function get(Model $model, string $key, mixed $value, array $attributes): mixed
-    {
-        return parent::set($model, $key, $value, $attributes);
     }
 }

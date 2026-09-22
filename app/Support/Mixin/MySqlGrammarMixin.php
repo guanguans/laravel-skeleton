@@ -26,11 +26,12 @@ final class MySqlGrammarMixin
 {
     public function whereFullText(): \Closure
     {
-        /*
+        /**
          * Compile a "where fulltext" clause.
          *
-         * @param  \Illuminate\Database\Query\Builder  $query
-         * @param  array  $where
+         * @param \Illuminate\Database\Query\Builder $query
+         * @param array $where
+         *
          * @return string
          */
         return function (Builder $query, array $where): string {

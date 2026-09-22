@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -69,7 +68,7 @@ final class ViewServiceProvider extends ServiceProvider
             Vite::useAggressivePrefetching();
             Vite::useBuildDirectory('.build');
             Vite::usePrefetchStrategy('waterfall', ['concurrency' => 1]);
-            Vite::useWaterfallPrefetching(concurrency: 10);
+            Vite::useWaterfallPrefetching(10);
             Blade::withoutDoubleEncoding(); // 禁用 HTML 实体双重编码
 
             /** @see https://www.harrisrafto.eu/simplifying-view-path-management-with-laravels-prependlocation/ */

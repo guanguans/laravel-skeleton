@@ -140,7 +140,8 @@
         "vendor-bin/"
     ],
     "notPath": [
-        "foo/bar.php"
+        "foo/bar.php",
+        "tests.php"
     ],
     "notName": [
         "*.blade.php",

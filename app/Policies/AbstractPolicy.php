@@ -27,7 +27,7 @@ abstract class AbstractPolicy
      *
      * @return list<string>
      */
-    public static function all(): array
+    final public static function all(): array
     {
         return array_keys(Gate::abilities());
     }
@@ -35,7 +35,7 @@ abstract class AbstractPolicy
     /**
      * @see https://laravel.com/docs/13.x/authorization#policy-filters
      */
-    public function before(JWTUser $user): ?bool
+    final public function before(JWTUser $user): ?bool
     {
         return $user->isAdmin() ? true : null;
     }
@@ -43,7 +43,7 @@ abstract class AbstractPolicy
     /**
      * @see https://laravel.com/docs/13.x/authorization#intercepting-gate-checks
      */
-    public function after(JWTUser $user): ?bool
+    final public function after(JWTUser $user): ?bool
     {
         return $user->isAdmin() ? true : null;
     }

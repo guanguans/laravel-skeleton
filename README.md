@@ -61,6 +61,11 @@ composer dev
 composer ecs
 composer ecs:check
 composer ecs:check-output-format-json
+composer ecs:custom
+composer ecs:custom-check
+composer ecs:custom-check-output-format-json
+composer ecs:custom-fix
+composer ecs:custom-list-checkers
 composer ecs:fix
 composer ecs:list-checkers
 composer envoy
@@ -69,11 +74,9 @@ composer envoy:ssh-testing
 composer envoy:testing
 composer facade:lint
 composer facade:update
-composer ghalint
 composer git-chglog
 composer gitleaks
 composer gitleaks:generate-baseline
-composer grumphp
 composer jack
 composer jack:breakpoint
 composer jack:breakpoint-dev
@@ -107,9 +110,6 @@ composer monorepo-builder:release-minor-dry-run
 composer monorepo-builder:release-patch
 composer monorepo-builder:release-patch-dry-run
 composer neon-lint
-composer peck
-composer peck:ignore-all
-composer peck:init
 composer pest
 composer pest:bail
 composer pest:ci
@@ -135,7 +135,6 @@ composer php-cs-fixer:custom
 composer php-cs-fixer:custom-fix
 composer php-cs-fixer:custom-fix-dry-run
 composer php-cs-fixer:custom-list-files
-composer php-cs-fixer:custom-ln-config
 composer php-cs-fixer:fix
 composer php-cs-fixer:fix-dry-run
 composer php-cs-fixer:fix-dry-run-format-annotate-pull-request
@@ -163,8 +162,7 @@ composer putenv:php
 composer putenv:xdebug-off
 composer putenv:xdebug-on
 composer rector
-composer rector:custom-rule
-composer rector:list-rules
+composer rector:composer-based
 composer rector:process
 composer rector:process-clear-cache
 composer rector:process-clear-cache-dry-run
@@ -172,6 +170,7 @@ composer rector:process-dry-run
 composer rector:process-dry-run-output-format-github
 composer rector:process-only
 composer rector:process-only-dry-run
+composer rector:validate-config
 composer roave-backward-compatibility-check
 composer roave-backward-compatibility-check:format-github-actions
 composer rule-doc-generator
@@ -187,6 +186,7 @@ composer sk:finalize-classes
 composer sk:finalize-classes-dry-run
 composer sk:find-multi-classes
 composer sk:generate-symfony-config-builders
+composer sk:generate-symfony-smoke-tests
 composer sk:namespace-to-psr-4
 composer sk:namespace-to-psr-4-src
 composer sk:namespace-to-psr-4-tests
@@ -200,10 +200,10 @@ composer test
 composer test:coverage
 composer todo-lint
 composer touch:database-sqlite
-composer trap
 composer trufflehog
 composer typos
 composer typos:write-changes
+composer user-php
 composer var-dump-server:cli
 composer var-dump-server:html
 composer vendor-patches

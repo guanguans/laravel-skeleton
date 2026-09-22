@@ -27,6 +27,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+#[\Illuminate\Database\Eloquent\Attributes\Fillable([
+    'name',
+    'email',
+    'password',
+])]
+#[\Illuminate\Database\Eloquent\Attributes\Hidden([
+    'password',
+    'remember_token',
+])]
 #[ObservedBy(classes: UserObserver::class)]
 #[UseFactory(factoryClass: UserFactory::class)]
 class User extends Authenticatable implements MustVerifyEmail
@@ -40,21 +49,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     use Notifiable;
     use SerializeDate;
-
-    /** @var list<string> */
-    #[\Override]
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /** @var list<string> */
-    #[\Override]
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
     /** @var array<string, mixed> */
     protected array $rules = [

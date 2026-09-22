@@ -2,7 +2,6 @@
 
 /** @noinspection ClassOverridesFieldOfSuperClassInspection */
 /** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -21,6 +20,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[\Illuminate\Database\Eloquent\Attributes\Table(name: 'http_log')]
 #[\Illuminate\Database\Eloquent\Attributes\Unguarded]
 final class HttpLog extends Model
 {
@@ -29,7 +29,4 @@ final class HttpLog extends Model
 
     use SerializeDate;
     // use SoftDeletes;
-
-    #[\Override]
-    protected $table = 'http_log';
 }

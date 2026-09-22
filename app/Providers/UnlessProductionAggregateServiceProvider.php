@@ -28,6 +28,7 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
      * @noinspection ClassOverridesFieldOfSuperClassInspection
      * @noinspection SpellCheckingInspection
      */
+    #[\Override]
     protected $providers = [
         'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
         'Dedoc\\Scramble\\ScrambleServiceProvider',

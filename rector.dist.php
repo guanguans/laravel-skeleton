@@ -16,10 +16,8 @@ use App\Listeners\PrepareRequestListener;
 use App\Support\Rector\ClassHandleMethodRector;
 use App\Support\Rector\MixinStaticRector;
 use Ergebnis\Rector\Rules\Expressions\Arrays\SortAssociativeArrayByKeyRector;
-use Ergebnis\Rector\Rules\Faker\GeneratorPropertyFetchToMethodCallRector;
-use Ergebnis\Rector\Rules\Files\ReferenceNamespacedSymbolsRelativeToNamespacePrefixRector;
+use Guanguans\PhpCsFixerCustomFixers\Support\Utils;
 use Guanguans\RectorRules\NodeVisitor\ParentConnectingVisitor;
-use Guanguans\RectorRules\Rector\ClassMethod\PrivateToProtectedVisibilityForTraitRector;
 use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
 use Guanguans\RectorRules\Rector\FunctionLike\RenameGarbageParamNameRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
@@ -28,50 +26,39 @@ use Illuminate\Support\Str;
 use Pest\Rector\Rules\ChainExpectCallsRector;
 use Pest\Rector\Set\PestSetList;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
-use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
 use Rector\CodeQuality\Rector\LogicalAnd\LogicalToBooleanRector;
 use Rector\CodingStyle\Rector\ArrowFunction\ArrowFunctionDelegatingCallToFirstClassCallableRector;
-use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
+use Rector\CodingStyle\Rector\Assign\SplitDoubleAssignRector;
 use Rector\CodingStyle\Rector\ClassLike\NewlineBetweenClassLikeStmtsRector;
-use Rector\CodingStyle\Rector\Closure\StaticClosureRector;
-use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
-use Rector\CodingStyle\Rector\Encapsed\WrapEncapsedVariableInCurlyBracesRector;
-use Rector\CodingStyle\Rector\Enum_\EnumCaseToPascalCaseRector;
-use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveEmptyClassMethodRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
 use Rector\DeadCode\Rector\StmtsAwareInterface\RemoveDeadInstanceOfAssertRector;
-use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
-use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Naming\Rector\Class_\RenamePropertyToMatchTypeRector;
 use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
+use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
-use Rector\Php73\Rector\FuncCall\JsonThrowOnErrorRector;
-use Rector\Php82\Rector\Param\AddSensitiveParameterAttributeRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
 use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
 use Rector\Renaming\ValueObject\RenameStaticMethod;
-use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
-use Rector\Transform\Rector\Scalar\ScalarValueToConstFetchRector;
 use Rector\Transform\Rector\String_\StringToClassConstantRector;
 use Rector\Transform\ValueObject\StringToClassConstant;
 use Rector\ValueObject\PhpVersion;
 use RectorLaravel\Rector\ArrayDimFetch\ArrayToArrGetRector;
 use RectorLaravel\Rector\ArrayDimFetch\ServerVariableToRequestFacadeRector;
-use RectorLaravel\Rector\Class_\FillablePropertyToFillableAttributeRector;
-use RectorLaravel\Rector\Class_\HiddenPropertyToHiddenAttributeRector;
-use RectorLaravel\Rector\Class_\TablePropertyToTableAttributeRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\If_\ThrowIfRector;
-use RectorLaravel\Rector\MethodCall\ContainerBindConcreteWithClosureOnlyRector;
+use RectorLaravel\Rector\MethodCall\DateWhereClauseToShorthandRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
+use RectorLaravel\Rector\StaticCall\CarbonToDateFacadeRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
 use RectorLaravel\Rector\StaticCall\RequestStaticValidateToInjectRector;
+
+error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
 
 return RectorConfig::configure()
     ->withPaths([
@@ -84,30 +71,105 @@ return RectorConfig::configure()
         // __DIR__.'/resources/',
         __DIR__.'/routes/',
         __DIR__.'/tests/',
-        __DIR__.'/artisan',
-        __DIR__.'/composer-bump',
+        ...Utils::defaultRootFiles(),
     ])
     ->withRootFiles()
     ->withSkip([
         '*.blade.php',
         '*/Fixtures/*',
-        __DIR__.'/_ide_helper_.php',
-        __DIR__.'/app/Listeners/TraceEventListener.php',
-        __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
 
         __DIR__.'/app/Models/Example.php',
         __DIR__.'/app/Models/Pivots/MorphPivotWithCreatorPivot.php',
         __DIR__.'/app/Models/Pivots/PivotWithCreatorPivot.php',
     ])
-    ->reportUnusedSkips()
+    ->withSkip([
+        RenameGarbageParamNameRector::class,
+        RenameParamToMatchTypeRector::class,
+        StringToClassConstantRector::class,
+
+        ChainExpectCallsRector::class,
+        LogicalToBooleanRector::class,
+        NewlineBetweenClassLikeStmtsRector::class,
+        PreferPHPUnitThisCallRector::class,
+        SplitDoubleAssignRector::class,
+    ])
+    ->withSkip([
+        ArrayToArrGetRector::class,
+        DispatchToHelperFunctionsRector::class,
+        EmptyToBlankAndFilledFuncRector::class,
+        HelperFuncCallToFacadeClassRector::class,
+        RequestStaticValidateToInjectRector::class,
+        ThrowIfRector::class,
+        ValidationRuleArrayStringValueToArrayRector::class,
+    ])
+    ->withSkip([
+        ArrowFunctionDelegatingCallToFirstClassCallableRector::class => [
+            __DIR__.'/app/Support/Mixin/',
+            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
+        ],
+        CarbonToDateFacadeRector::class => [
+            __DIR__.'/app/Listeners/TraceEventListener.php',
+        ],
+        CompleteDynamicPropertiesRector::class => [
+            __DIR__.'/app/Support/Mixin/',
+        ],
+        DateWhereClauseToShorthandRector::class => [
+            // __DIR__.'/app/Models/Example.php',
+            // __DIR__.'/app/Models/Pivots/MorphPivotWithCreatorPivot.php',
+            // __DIR__.'/app/Models/Pivots/PivotWithCreatorPivot.php',
+        ],
+        RemoveDeadInstanceOfAssertRector::class => [
+            __DIR__.'/app/Providers/AppServiceProvider.php',
+            __DIR__.'/app/Providers/AutowiredServiceProvider.php',
+        ],
+        RemoveDumpDataDeadCodeRector::class => [
+            __DIR__.'/app/Support/Mixin/SchedulingEventMixin.php',
+        ],
+        RemoveEmptyClassMethodRector::class => [
+            __DIR__.'/app/Observers/UserObserver.php',
+        ],
+        RemoveExtraParametersRector::class => [
+            __DIR__.'/app/Support/Mixin/',
+        ],
+        RemoveUnusedPublicMethodParameterRector::class => [
+            __DIR__.'/app/Listeners/',
+            __DIR__.'/app/Observers/UserObserver.php',
+        ],
+        RenameMethodRector::class => [
+            __DIR__.'/app/Providers/ViewServiceProvider.php',
+        ],
+        RenamePropertyToMatchTypeRector::class => [
+            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
+        ],
+        RenameToConventionalCaseNameRector::class => [
+            __DIR__.'/app/Enums/',
+            __DIR__.'/app/Models/',
+        ],
+        ServerVariableToRequestFacadeRector::class => [
+            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
+        ],
+        SortAssociativeArrayByKeyRector::class => [
+            __DIR__.'/app/',
+            __DIR__.'/database/',
+            __DIR__.'/routes/',
+        ],
+        StringClassNameToClassConstantRector::class => [
+            __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
+        ],
+        TypeHintTappableCallRector::class => [
+            __DIR__.'/app/Providers/ValidatorServiceProvider.php',
+            __DIR__.'/app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php',
+        ],
+    ])
     ->withCache(__DIR__.'/.build/rector/')
     // ->withoutParallel()
     ->withParallel()
-    ->withImportNames(importDocBlockNames: false, importShortClasses: false)
-    // ->withImportNames(importNames: false)
-    // ->withEditorUrl()
+    ->withImportNames(importDocBlockNames: false, importShortClasses: false, removeUnusedImports: false)
+    // ->withImportNames(true, false, false, false)
+    ->reportUnusedSkips()
     ->withFluentCallNewLine()
     ->withTreatClassesAsFinal()
+    ->withTypeGuardedClasses([])
     ->withAttributesSets(phpunit: true, all: true)
     ->withComposerBased(phpunit: true, laravel: true)
     ->withPhpVersion(PhpVersion::PHP_85)
@@ -121,27 +183,20 @@ return RectorConfig::configure()
         typeDeclarationDocblocks: true,
         privatization: true,
         naming: true,
-        instanceOf: true,
-        earlyReturn: true,
-        // strictBooleans: true,
+        // namedArgs: true,
         carbon: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
+        phpunitNarrowAsserts: true,
+        phpunitMockToStub: true,
     )
     ->withSets([
         SetList::ALL,
         PestSetList::CODING_STYLE,
     ])
     ->withRules([
-        // ArraySpreadInsteadOfArrayMergeRector::class,
         ClassHandleMethodRector::class,
-        // EnumCaseToPascalCaseRector::class,
-        GeneratorPropertyFetchToMethodCallRector::class,
-        // JsonThrowOnErrorRector::class,
         MixinStaticRector::class,
-        SortAssociativeArrayByKeyRector::class,
-        // StaticArrowFunctionRector::class,
-        // StaticClosureRector::class,
     ])
     ->withConfiguredRule(AddNoinspectionDocblockToFileFirstStmtRector::class, [
         '*/app/Support/Mixin/*' => [
@@ -170,102 +225,10 @@ return RectorConfig::configure()
         'URL',
         'Value',
     ])
-    ->withConfiguredRule(ReferenceNamespacedSymbolsRelativeToNamespacePrefixRector::class, [
-        // 'namespacePrefixes' => ['App'],
-    ])
     ->withConfiguredRule(RenameStaticMethodRector::class, [
         new RenameStaticMethod(Str::class, 'orderedUuid', Str::class, 'uuid7'),
         new RenameStaticMethod(Str::class, 'uuid', Str::class, 'uuid7'),
     ])
     ->withConfiguredRule(StringToClassConstantRector::class, [
         new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),
-    ])
-    ->withSkip([
-        // AddSensitiveParameterAttributeRector::class,
-        ChainExpectCallsRector::class,
-        PrivateToProtectedVisibilityForTraitRector::class,
-        RemoveDeadInstanceOfAssertRector::class,
-        RenameGarbageParamNameRector::class,
-        RenameParamToMatchTypeRector::class,
-        // ScalarValueToConstFetchRector::class,
-        StringToClassConstantRector::class,
-
-        // ChangeOrIfContinueToMultiContinueRector::class,
-        // DisallowedEmptyRuleFixerRector::class,
-        // EncapsedStringsToSprintfRector::class,
-        // ExplicitBoolCompareRector::class,
-        LogicalToBooleanRector::class,
-        NewlineBetweenClassLikeStmtsRector::class,
-        PreferPHPUnitThisCallRector::class,
-        // ReturnBinaryOrToEarlyReturnRector::class,
-        // WrapEncapsedVariableInCurlyBracesRector::class,
-    ])
-    ->withSkip([
-        ContainerBindConcreteWithClosureOnlyRector::class,
-        FillablePropertyToFillableAttributeRector::class,
-        HiddenPropertyToHiddenAttributeRector::class,
-        RequestStaticValidateToInjectRector::class,
-        TablePropertyToTableAttributeRector::class,
-        ValidationRuleArrayStringValueToArrayRector::class,
-
-        ArrayToArrGetRector::class,
-        DispatchToHelperFunctionsRector::class,
-        EmptyToBlankAndFilledFuncRector::class,
-        HelperFuncCallToFacadeClassRector::class,
-        ThrowIfRector::class,
-    ])
-    ->withSkip([
-        ArrowFunctionDelegatingCallToFirstClassCallableRector::class => [
-            __DIR__.'/app/Support/Mixin/',
-            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
-        ],
-        CompleteDynamicPropertiesRector::class => $mixinsPath = [
-            __DIR__.'/app/Support/Mixin/',
-        ],
-        // JsonThrowOnErrorRector::class => [
-        //     __DIR__.'/app/Support/helpers.php',
-        //     __DIR__.'/app/Support/Mixin/CollectionMixin.php',
-        //     __DIR__.'/app/Support/Sse/ServerSentEvent.php',
-        //     __DIR__.'/tests/Pest.php',
-        // ],
-        RemoveDumpDataDeadCodeRector::class => [
-            __DIR__.'/app/Support/Mixin/SchedulingEventMixin.php',
-        ],
-        RemoveEmptyClassMethodRector::class => [
-            __DIR__.'/app/Observers/UserObserver.php',
-        ],
-        RemoveExtraParametersRector::class => $mixinsPath,
-        RemoveUnusedPublicMethodParameterRector::class => [
-            __DIR__.'/app/Listeners/',
-            __DIR__.'/app/Observers/UserObserver.php',
-        ],
-        RenameMethodRector::class => [
-            __DIR__.'/app/Providers/ViewServiceProvider.php',
-        ],
-        RenamePropertyToMatchTypeRector::class => [
-            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
-        ],
-        RenameToConventionalCaseNameRector::class => [
-            __DIR__.'/app/Enums/',
-            __DIR__.'/app/Models/',
-        ],
-        ServerVariableToRequestFacadeRector::class => [
-            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
-        ],
-        SortAssociativeArrayByKeyRector::class => [
-            __DIR__.'/app/',
-            // __DIR__.'/config/',
-            __DIR__.'/database/',
-            __DIR__.'/routes/',
-            // __DIR__.'/tests/',
-        ],
-        // StaticArrowFunctionRector::class => $staticClosureSkipPaths = [
-        //     __DIR__.'/tests/*Test.php',
-        //     __DIR__.'/tests/Pest.php',
-        // ],
-        // StaticClosureRector::class => $staticClosureSkipPaths,
-        TypeHintTappableCallRector::class => [
-            __DIR__.'/app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php',
-            __DIR__.'/app/Providers/ValidatorServiceProvider.php',
-        ],
     ]);

@@ -1,13 +1,11 @@
 {
     "require": {
-        "php": ">=8.5"
-    },
-    "require-dev": {
+        "php": ">=8.5",
         "ergebnis/composer-normalize": "^2.53",
         "symplify/rule-doc-generator": "^12.2"
     },
     "suggest": {
-        "peckphp/peck": "development"
+        "foo/bar": "php > 8.5"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

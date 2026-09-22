@@ -115,6 +115,19 @@ final class ShowUnsupportedRequiresCommand extends AbstractCommand
 
     /**
      * @return array<string, string>
+     *
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    #[\Override]
+    protected function messages(): array
+    {
+        return [
+            'cwd.callback' => 'The :attribute [:input] is not a directory.',
+        ];
+    }
+
+    /**
+     * @return array<string, string>
      */
     #[\Override]
     protected function rules(): array
@@ -124,19 +137,6 @@ final class ShowUnsupportedRequiresCommand extends AbstractCommand
             // 'package.*' => 'string|contains:/',
             'major-version' => 'integer|min:0',
             'cwd' => 'nullable|string|callback:is_dir',
-        ];
-    }
-
-    /**
-     * @return array<string, string>
-     *
-     * @noinspection PhpMissingParentCallCommonInspection
-     */
-    #[\Override]
-    protected function messages(): array
-    {
-        return [
-            'cwd.callback' => 'The :attribute [:input] is not a directory.',
         ];
     }
 

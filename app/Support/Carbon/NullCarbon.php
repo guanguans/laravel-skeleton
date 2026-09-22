@@ -27,12 +27,6 @@ final class NullCarbon extends Carbon implements \Stringable
         return '';
     }
 
-    #[\Override]
-    public function format(string $format): string
-    {
-        return '';
-    }
-
     /**
      * @throws \JsonException
      */
@@ -40,5 +34,11 @@ final class NullCarbon extends Carbon implements \Stringable
     public function jsonSerialize(): string
     {
         return json_encode(null, \JSON_THROW_ON_ERROR);
+    }
+
+    #[\Override]
+    public function format(string $format): string
+    {
+        return '';
     }
 }

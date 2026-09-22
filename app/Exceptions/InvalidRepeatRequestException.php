@@ -23,8 +23,12 @@ final class InvalidRepeatRequestException extends ConflictHttpException
      *
      * @param array<string, null|list<null|string>|string> $headers
      */
-    public function __construct(string $message = '', ?\Throwable $previous = null, int $code = 0, array $headers = [])
-    {
+    public function __construct(
+        string $message = '',
+        ?\Throwable $previous = null,
+        int $code = 0,
+        array $headers = []
+    ) {
         parent::__construct($message ?: 'Invalid Repeat Request', $previous, $code, $headers);
     }
 }

@@ -37,6 +37,14 @@ final class PushDeer extends AbstractClient
         ));
     }
 
+    #[\Override]
+    protected function configureDefaultPendingRequest(PendingRequest $pendingRequest): PendingRequest
+    {
+        return $pendingRequest->throw()->withOptions([
+            RequestOptions::JSON => ['pushkey' => $this->configRepository->get('key')],
+        ]);
+    }
+
     /**
      * @return array<string, string>
      */
@@ -44,13 +52,5 @@ final class PushDeer extends AbstractClient
     protected function configRules(): array
     {
         return ['key' => 'required|string'];
-    }
-
-    #[\Override]
-    protected function configureDefaultPendingRequest(PendingRequest $pendingRequest): PendingRequest
-    {
-        return $pendingRequest->throw()->withOptions([
-            RequestOptions::JSON => ['pushkey' => $this->configRepository->get('key')],
-        ]);
     }
 }

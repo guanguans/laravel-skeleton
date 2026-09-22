@@ -42,7 +42,7 @@ final class JWTUser extends User implements JWTSubject
      * @see https://laravel-jwt-auth.readthedocs.io/en/latest/quick-start/
      * @see \App\Models\Concerns\HasWrappedApiTokens::wrapToken()
      *
-     * @return array<string, scalar>
+     * @return array{access_token: string, token_type: string, expires_in: int}
      */
     public static function wrapToken(#[\SensitiveParameter] string $token): array
     {

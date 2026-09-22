@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection All */
-
 declare(strict_types=1);
 
 /**
@@ -12,9 +11,6 @@ declare(strict_types=1);
  *
  * @see https://github.com/guanguans/laravel-skeleton
  */
-
-namespace App\Support\Facade {
-}
 
 namespace Illuminate\Support {
     /**

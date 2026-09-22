@@ -74,14 +74,14 @@ abstract class AbstractClient
         return $this->forwardCallTo($this->pendingRequest(), $name, $arguments);
     }
 
-    public function ddPendingRequest(mixed ...$args): static
+    final public function ddPendingRequest(mixed ...$args): static
     {
         $this->pendingRequest()->dd(...$args);
 
         return $this;
     }
 
-    public function dumpPendingRequest(mixed ...$args): static
+    final public function dumpPendingRequest(mixed ...$args): static
     {
         $this->pendingRequest()->dump(...$args);
 
@@ -91,7 +91,7 @@ abstract class AbstractClient
     /**
      * @param null|callable(PendingRequest $pendingRequest): void $callback
      */
-    public function pendingRequest(?callable $callback = null): PendingRequest
+    final public function pendingRequest(?callable $callback = null): PendingRequest
     {
         return tap($this->configureDefaultPendingRequest($this->defaultPendingRequest()), $callback ?? static fn (): null => null);
     }

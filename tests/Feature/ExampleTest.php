@@ -20,6 +20,7 @@ declare(strict_types=1);
  */
 
 use App\Console\Commands\InflectorCommand;
+use App\Console\Commands\OpcacheUrlCommand;
 use App\Console\Commands\OptimizeAllCommand;
 use App\Console\Commands\ShowUnsupportedRequiresCommand;
 use Illuminate\Foundation\Console\RouteListCommand;
@@ -34,6 +35,7 @@ it('is console', function (): void {
         ->filter(fn (ReflectionClass $reflectionClass): bool => $reflectionClass->isInstantiable())
         ->reject(fn (ReflectionClass $reflectionClass): bool => str($reflectionClass->getName())->is([
             InflectorCommand::class,
+            OpcacheUrlCommand::class,
             OptimizeAllCommand::class,
             ShowUnsupportedRequiresCommand::class,
         ]))

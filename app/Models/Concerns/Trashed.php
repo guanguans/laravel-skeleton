@@ -32,8 +32,8 @@ trait Trashed
         request()->whenFilled(
             'trashed',
             static fn (string $trashed): Builder => match ($trashed) {
-                'with' => $query->withTrashed(),
                 'only' => $query->onlyTrashed(),
+                'with' => $query->withTrashed(),
                 default => $query,
             }
         );

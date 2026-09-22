@@ -3,7 +3,6 @@
 /** @noinspection ClassReusesParentTraitInspection */
 /** @noinspection PhpMissingDocCommentInspection */
 /** @noinspection PhpUnusedAliasInspection */
-
 declare(strict_types=1);
 
 /**
@@ -69,6 +68,12 @@ final class Example extends AbstractModel
 
     use Notifiable;
 
+    #[\Override]
+    public function getRouteKeyName(): string
+    {
+        return parent::getRouteKeyName();
+    }
+
     // protected static $unguarded = true;
     // protected $attributes = [];
 
@@ -76,12 +81,6 @@ final class Example extends AbstractModel
     public function resolveRouteBinding($value, $field = null): EloquentModel
     {
         return parent::resolveRouteBinding($value, $field);
-    }
-
-    #[\Override]
-    public function getRouteKeyName(): string
-    {
-        return parent::getRouteKeyName();
     }
 
     #[\Override]
@@ -102,12 +101,6 @@ final class Example extends AbstractModel
     }
 
     #[\Override]
-    public function newCollection(array $models = []): Collection
-    {
-        return parent::newCollection($models);
-    }
-
-    #[\Override]
     public function is($model): bool
     {
         return parent::is($model);
@@ -117,6 +110,12 @@ final class Example extends AbstractModel
     public function isNot($model): bool
     {
         return parent::isNot($model);
+    }
+
+    #[\Override]
+    public function newCollection(array $models = []): Collection
+    {
+        return parent::newCollection($models);
     }
 
     #[\Override]

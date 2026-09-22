@@ -242,7 +242,6 @@ final class HealthCheckCommand extends Command implements Isolatable
             ),
             collect()
         );
-        \assert($missingExtensions instanceof Collection);
 
         if ($missingExtensions->isNotEmpty()) {
             return Error::create("The following PHP extensions are missing: `{$missingExtensions->implode('、')}`.");

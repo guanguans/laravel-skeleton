@@ -1,7 +1,6 @@
 <?php
 
 /** @noinspection LaravelUnknownEloquentFactoryInspection */
-
 declare(strict_types=1);
 
 /**
@@ -40,7 +39,7 @@ abstract class AbstractModel extends Model
     /**
      * @see self::__callStatic()
      */
-    public static function getTableName(): string
+    final public static function getTableName(): string
     {
         return (new static)->getTable();
     }
@@ -48,7 +47,7 @@ abstract class AbstractModel extends Model
     /**
      * @return array<string, mixed>
      */
-    public function toDotArray(): array
+    final public function toDotArray(): array
     {
         return collect($this->toArray())->dot()->all();
     }

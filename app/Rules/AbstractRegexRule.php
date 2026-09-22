@@ -16,7 +16,7 @@ namespace App\Rules;
 abstract class AbstractRegexRule extends AbstractRule
 {
     #[\Override]
-    public function passes(string $attribute, mixed $value): bool
+    final public function passes(string $attribute, mixed $value): bool
     {
         return (bool) preg_match($this->pattern(), (string) $value);
     }

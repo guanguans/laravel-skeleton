@@ -36,6 +36,43 @@ final class ClassHandleMethodRector extends AbstractRector implements Documented
         private readonly PhpDocInfoFactory $phpDocInfoFactory
     ) {}
 
+    #[\Override]
+    public function getNodeTypes(): array
+    {
+        return [
+            ClassMethod::class,
+        ];
+    }
+
+    /**
+     * @param \PhpParser\Node\Stmt\ClassMethod $node
+     */
+    #[\Override]
+    public function refactor(Node $node): ?Node
+    {
+        if (!$this->isName($node, 'handle')) {
+            return null;
+        }
+
+        if (
+            \count($node->params) >= 2
+            && $node->params[0]->type
+            && $node->params[1]->type
+            && $this->getName($node->params[0]->type) === Request::class
+            && $this->getName($node->params[1]->type) === 'Closure'
+        ) {
+            $this->updateDocBlock($node);
+
+            if (null === $node->returnType || $this->getName($node->returnType) !== Response::class) {
+                $node->returnType = new FullyQualified(Response::class);
+
+                return $node;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @throws \Symplify\RuleDocGenerator\Exception\PoorDocumentationException
      */
@@ -80,43 +117,6 @@ final class ClassHandleMethodRector extends AbstractRector implements Documented
                 ),
             ],
         );
-    }
-
-    #[\Override]
-    public function getNodeTypes(): array
-    {
-        return [
-            ClassMethod::class,
-        ];
-    }
-
-    /**
-     * @param \PhpParser\Node\Stmt\ClassMethod $node
-     */
-    #[\Override]
-    public function refactor(Node $node): ?Node
-    {
-        if (!$this->isName($node, 'handle')) {
-            return null;
-        }
-
-        if (
-            \count($node->params) >= 2
-            && $node->params[0]->type
-            && $node->params[1]->type
-            && $this->getName($node->params[0]->type) === Request::class
-            && $this->getName($node->params[1]->type) === 'Closure'
-        ) {
-            $this->updateDocBlock($node);
-
-            if (null === $node->returnType || $this->getName($node->returnType) !== Response::class) {
-                $node->returnType = new FullyQualified(Response::class);
-
-                return $node;
-            }
-        }
-
-        return null;
     }
 
     private function updateDocBlock(ClassMethod $node): void

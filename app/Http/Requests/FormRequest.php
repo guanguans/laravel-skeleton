@@ -45,6 +45,11 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
         return $this->call(__FUNCTION__, \func_get_args(), []);
     }
 
+    public function validator(ValidationFactory $factory): Validator
+    {
+        return $this->call(__FUNCTION__, \func_get_args(), $this->createDefaultValidator($factory));
+    }
+
     #[\Override]
     public function messages(): array
     {
@@ -55,11 +60,6 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     public function attributes(): array
     {
         return $this->call(__FUNCTION__, $args = \func_get_args(), parent::{__FUNCTION__}(...$args));
-    }
-
-    public function validator(ValidationFactory $factory): Validator
-    {
-        return $this->call(__FUNCTION__, \func_get_args(), $this->createDefaultValidator($factory));
     }
 
     /**

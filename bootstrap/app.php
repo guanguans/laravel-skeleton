@@ -33,7 +33,7 @@ use Illuminate\Support\Lottery;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-return App\Application::configure(basePath: \dirname(__DIR__))
+return App\Application::configure(\dirname(__DIR__))
     ->booting(static function (Application $app): void {})
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -48,10 +48,10 @@ return App\Application::configure(basePath: \dirname(__DIR__))
     ->withEvents(false)
     ->withMiddleware(static function (Middleware $middleware): void {
         $middleware
-            ->convertEmptyStringsToNull(except: [
+            ->convertEmptyStringsToNull([
                 static fn (Request $request): bool => $request->is('api/*'),
             ])
-            ->trimStrings(except: [
+            ->trimStrings([
                 static fn (Request $request): bool => $request->is('api/*'),
                 'secret',
                 'token',
@@ -59,7 +59,7 @@ return App\Application::configure(basePath: \dirname(__DIR__))
             ->preventRequestForgery(except: [
                 'livewire/*',
             ])
-            ->validateSignatures(except: [
+            ->validateSignatures([
                 'livewire/*',
             ])
             ->api(

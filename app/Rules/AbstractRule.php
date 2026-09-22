@@ -39,7 +39,7 @@ abstract class AbstractRule implements ValidationRule
      * @noinspection RedundantDocCommentTagInspection
      */
     #[\Override]
-    public function validate(string $attribute, mixed $value, \Closure $fail): void
+    final public function validate(string $attribute, mixed $value, \Closure $fail): void
     {
         if (!$this->passes($attribute, $value)) {
             $this
@@ -59,19 +59,19 @@ abstract class AbstractRule implements ValidationRule
      *
      * @todo extendDependent、replacer
      */
-    public static function extendMethod(): string
+    final public static function extendMethod(): string
     {
         return (new \ReflectionClass(static::class)->getDefaultProperties()['implicit'] ?? false) ? 'extendImplicit' : 'extend';
     }
 
-    public static function name(): string
+    final public static function name(): string
     {
         return str(static::class)->classBasename()->chopEnd('Rule')->snake()->toString();
     }
 
-    public static function message(): string
+    final public static function message(): string
     {
-        $transKey = \sprintf('validation.%s', static::name());
+        $transKey = \sprintf('validation.%s', self::name());
         $transMessage = __($transKey);
 
         return $transMessage !== $transKey ? $transMessage : static::fallbackMessage();
@@ -83,10 +83,10 @@ abstract class AbstractRule implements ValidationRule
             app()->isLocale('zh_CN') ? ':Attribute [:input] 必须是有效的 :Name。' : 'The :attribute [:input] must be a valid :Name.',
             [
                 'name' => value(static function () {
-                    $transNameKey = \sprintf('validation.attributes.%s', static::name());
+                    $transNameKey = \sprintf('validation.attributes.%s', self::name());
                     $transNameMessage = __($transNameKey);
 
-                    return $transNameMessage !== $transNameKey ? $transNameMessage : str(static::name())->replace('_', ' ');
+                    return $transNameMessage !== $transNameKey ? $transNameMessage : str(self::name())->replace('_', ' ');
                 }),
             ]
         );
@@ -99,11 +99,11 @@ abstract class AbstractRule implements ValidationRule
      */
     protected function createPotentiallyTranslatedString(string $attribute, mixed $value, \Closure $fail): PotentiallyTranslatedString
     {
-        return $fail($attribute, static::message());
+        return $fail($attribute, self::message());
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array{attribute: string, value: mixed}
      */
     protected function replace(string $attribute, mixed $value): array
     {

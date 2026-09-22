@@ -30,7 +30,7 @@ abstract class AbstractAbortIf
      *
      * @noinspection RedundantDocCommentTagInspection
      */
-    public function handle(Request $request, \Closure $next): SymfonyResponse
+    final public function handle(Request $request, \Closure $next): SymfonyResponse
     {
         return tap($next($request), function (): void {
             abort_if($this->when(), $this->code(), $this->message(), $this->headers());

@@ -25,7 +25,7 @@ abstract class AbstractProxyRule extends AbstractRule
     protected ?Validator $proxyValidator = null;
 
     #[\Override]
-    public function passes(string $attribute, mixed $value): bool
+    final public function passes(string $attribute, mixed $value): bool
     {
         return $this->makeProxyValidator($attribute, $value)->passes();
     }

@@ -39,7 +39,7 @@ trait Observable
         }
     }
 
-    private static function collectEventsRegisteredByTraits(): ?array
+    protected static function collectEventsRegisteredByTraits(): ?array
     {
         $class = static::class;
         $events = [];

@@ -38,8 +38,6 @@ final class OrderByWithQueryBuilderMixin
                 $relation = $this->getRelationWithoutConstraints($relation);
             }
 
-            \assert($relation instanceof RelationBuilder);
-
             return $this->orderBy(
                 $relation->getRelationExistenceQuery($relation->getRelated()->newQueryWithoutRelationships(), $this, $column),
                 $direction
