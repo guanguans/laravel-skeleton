@@ -20,6 +20,7 @@ use App\Http\Middleware\SetJsonResponseEncodingOptions;
 use App\Listeners\PrepareRequestListener;
 use App\Listeners\TraceEventListener;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
@@ -29,12 +30,20 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Lottery;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 return App\Application::configure(\dirname(__DIR__))
-    ->booting(static function (Application $app): void {})
+    ->booting(static function (Application $app): void {
+        File::ensureDirectoryExists(base_path('vendor/_laravel_ide_helper/'));
+        $app->make(Repository::class)->set([
+            'ide-helper.filename' => base_path('vendor/_laravel_ide_helper/_ide_helper.php'),
+            'ide-helper.meta_filename' => base_path('vendor/_laravel_ide_helper/.phpstorm.meta.php'),
+            'ide-helper.models_filename' => base_path('vendor/_laravel_ide_helper/_ide_helper_models.php'),
+        ]);
+    })
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
