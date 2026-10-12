@@ -20,6 +20,7 @@ declare(strict_types=1);
 
 use Illuminate\Testing\Assert as PHPUnit;
 use Illuminate\Testing\TestResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 beforeEach(function (): void {
     $this->response = $this
@@ -84,7 +85,7 @@ it('can logout', function (): void {
         // ->ddBody()
         // ->assertNoContent()
         ->tap(function (TestResponse $response): void {
-            PHPUnit::assertSame(204, $response->getStatusCode());
+            PHPUnit::assertSame(Response::HTTP_NO_CONTENT, $response->getStatusCode());
             PHPUnit::assertEmpty($response->json('data'), 'Response content is not empty.');
         })
         ->assertJsonStructure([

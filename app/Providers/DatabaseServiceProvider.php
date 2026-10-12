@@ -65,9 +65,9 @@ final class DatabaseServiceProvider extends ServiceProvider
             $this->listenQueryExecuted();
             Json::encodeUsing(static fn (mixed $value): string => json_encode(
                 $value,
-                \JSON_INVALID_UTF8_IGNORE |
+                // \JSON_INVALID_UTF8_IGNORE |
                 \JSON_INVALID_UTF8_SUBSTITUTE |
-                \JSON_PARTIAL_OUTPUT_ON_ERROR |
+                // \JSON_PARTIAL_OUTPUT_ON_ERROR |
                 \JSON_PRESERVE_ZERO_FRACTION |
                 // \JSON_PRETTY_PRINT |
                 \JSON_THROW_ON_ERROR |

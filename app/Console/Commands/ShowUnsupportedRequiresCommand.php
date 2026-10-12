@@ -145,13 +145,13 @@ final class ShowUnsupportedRequiresCommand extends AbstractCommand
      */
     private function isUnsupported(string $name, string $version): bool
     {
-        if (!str($name)->is($this->option('package') ?: ['laravel/framework', 'illuminate/*'])) {
+        if (!str($name)->is($this->option('package') ?: ['illuminate/*', 'laravel/framework'])) {
             return false;
         }
 
         $version = str($version);
 
-        if ($version->trim()->startsWith(['>', '*'])) {
+        if ($version->trim()->startsWith(['*', '>'])) {
             return false;
         }
 

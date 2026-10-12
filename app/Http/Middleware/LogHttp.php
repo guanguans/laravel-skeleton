@@ -40,13 +40,13 @@ final class LogHttp
 
     /** @var list<string> */
     private static array $headerHidden = [
+        'access_token',
         'api-key',
         'authorization',
         'cookie',
         'set-cookie',
         'token',
         'x-xsrf-token',
-        'access_token',
     ];
 
     /** @var list<string> */

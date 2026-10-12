@@ -1,7 +1,7 @@
 {
     "require": {
         "php": ">=8.5",
-        "ergebnis/composer-normalize": "^2.53",
+        "ergebnis/composer-normalize": "^2.54",
         "symplify/rule-doc-generator": "^12.2"
     },
     "suggest": {

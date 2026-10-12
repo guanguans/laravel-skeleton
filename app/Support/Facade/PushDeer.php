@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \App\Support\Client\PushDeer ddPendingRequest(mixed ...$args)
  * @method static \App\Support\Client\PushDeer dumpPendingRequest(mixed ...$args)
  * @method static \Illuminate\Http\Client\PendingRequest pendingRequest(null|callable $callback = null)
+ * @method static int exponentialDelay(int $retries)
  * @method static \App\Support\Client\PushDeer|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static \App\Support\Client\PushDeer|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
  * @method static never dd(mixed ...$args)

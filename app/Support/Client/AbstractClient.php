@@ -96,6 +96,14 @@ abstract class AbstractClient
         return tap($this->configureDefaultPendingRequest($this->defaultPendingRequest()), $callback ?? static fn (): null => null);
     }
 
+    /**
+     * @see https://github.com/guzzle/guzzle/blob/7.15/src/RetryMiddleware.php
+     */
+    final public static function exponentialDelay(int $retries): int
+    {
+        return 2 ** ($retries - 1) * 1000;
+    }
+
     abstract protected function configureDefaultPendingRequest(PendingRequest $pendingRequest): PendingRequest;
 
     /**
@@ -228,7 +236,7 @@ abstract class AbstractClient
              * @see PendingRequest::retry()
              */
             'retry' => [
-                'times' => [RetryMiddleware::exponentialDelay(1)],
+                'times' => [self::exponentialDelay(1)],
                 'sleep' => 1000,
                 // 'when' => static fn (\Throwable $throwable): bool => $throwable instanceof ConnectException,
                 'when' => null,

@@ -28,8 +28,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 #[\Illuminate\Database\Eloquent\Attributes\Fillable([
-    'name',
     'email',
+    'name',
     'password',
 ])]
 #[\Illuminate\Database\Eloquent\Attributes\Hidden([

@@ -17,12 +17,12 @@ use App\Support\Rector\ClassHandleMethodRector;
 use App\Support\Rector\MixinStaticRector;
 use Ergebnis\Rector\Rules\Expressions\Arrays\SortAssociativeArrayByKeyRector;
 use Guanguans\PhpCsFixerCustomFixers\Support\Utils;
-use Guanguans\RectorRules\NodeVisitor\ParentConnectingVisitor;
+use Guanguans\RectorRules\Rector\Array_\SortListItemOfSameScalarTypeRector;
 use Guanguans\RectorRules\Rector\File\AddNoinspectionDocblockToFileFirstStmtRector;
 use Guanguans\RectorRules\Rector\FunctionLike\RenameGarbageParamNameRector;
 use Guanguans\RectorRules\Rector\Name\RenameToConventionalCaseNameRector;
+use Guanguans\RectorRules\Rector\Scalar\ScalarValueToConstFetchRector;
 use Guanguans\RectorRules\Set\SetList;
-use Illuminate\Support\Str;
 use Pest\Rector\Rules\ChainExpectCallsRector;
 use Pest\Rector\Set\PestSetList;
 use Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector;
@@ -39,9 +39,8 @@ use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
+use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 use Rector\Renaming\Rector\MethodCall\RenameMethodRector;
-use Rector\Renaming\Rector\StaticCall\RenameStaticMethodRector;
-use Rector\Renaming\ValueObject\RenameStaticMethod;
 use Rector\Transform\Rector\String_\StringToClassConstantRector;
 use Rector\Transform\ValueObject\StringToClassConstant;
 use Rector\ValueObject\PhpVersion;
@@ -52,7 +51,6 @@ use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
 use RectorLaravel\Rector\If_\ThrowIfRector;
-use RectorLaravel\Rector\MethodCall\DateWhereClauseToShorthandRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\CarbonToDateFacadeRector;
 use RectorLaravel\Rector\StaticCall\DispatchToHelperFunctionsRector;
@@ -61,19 +59,7 @@ use RectorLaravel\Rector\StaticCall\RequestStaticValidateToInjectRector;
 error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
 
 return RectorConfig::configure()
-    ->withPaths([
-        __DIR__.'/app/',
-        // __DIR__.'/bootstrap/',
-        __DIR__.'/bootstrap/app.php',
-        // __DIR__.'/config/',
-        __DIR__.'/database/',
-        // __DIR__.'/public/',
-        // __DIR__.'/resources/',
-        __DIR__.'/routes/',
-        __DIR__.'/tests/',
-        ...Utils::defaultRootFiles(),
-    ])
-    ->withRootFiles()
+    ->withPaths([...Utils::defaultRootDirectories(), ...Utils::defaultRootFiles(), __DIR__.'/bootstrap/app.php'])
     ->withSkip([
         '*.blade.php',
         '*/Fixtures/*',
@@ -85,8 +71,8 @@ return RectorConfig::configure()
     ->withSkip([
         RenameGarbageParamNameRector::class,
         RenameParamToMatchTypeRector::class,
-        StringToClassConstantRector::class,
 
+        // Skip common rules.
         ChainExpectCallsRector::class,
         LogicalToBooleanRector::class,
         NewlineBetweenClassLikeStmtsRector::class,
@@ -113,11 +99,6 @@ return RectorConfig::configure()
         CompleteDynamicPropertiesRector::class => [
             __DIR__.'/app/Support/Mixin/',
         ],
-        DateWhereClauseToShorthandRector::class => [
-            // __DIR__.'/app/Models/Example.php',
-            // __DIR__.'/app/Models/Pivots/MorphPivotWithCreatorPivot.php',
-            // __DIR__.'/app/Models/Pivots/PivotWithCreatorPivot.php',
-        ],
         RemoveDeadInstanceOfAssertRector::class => [
             __DIR__.'/app/Providers/AppServiceProvider.php',
             __DIR__.'/app/Providers/AutowiredServiceProvider.php',
@@ -135,6 +116,9 @@ return RectorConfig::configure()
             __DIR__.'/app/Listeners/',
             __DIR__.'/app/Observers/UserObserver.php',
         ],
+        RenameClassConstFetchRector::class => [
+            __DIR__.'/config/database.php',
+        ],
         RenameMethodRector::class => [
             __DIR__.'/app/Providers/ViewServiceProvider.php',
         ],
@@ -145,16 +129,32 @@ return RectorConfig::configure()
             __DIR__.'/app/Enums/',
             __DIR__.'/app/Models/',
         ],
+        ScalarValueToConstFetchRector::class => [
+            __DIR__.'/config/database.php',
+        ],
         ServerVariableToRequestFacadeRector::class => [
             __DIR__.'/app/Support/VarDumper/ServerDumper.php',
         ],
         SortAssociativeArrayByKeyRector::class => [
             __DIR__.'/app/',
+            __DIR__.'/config/',
             __DIR__.'/database/',
             __DIR__.'/routes/',
         ],
+        SortListItemOfSameScalarTypeRector::class => [
+            __DIR__.'/app/Console/Commands/HealthCheckCommand.php',
+            __DIR__.'/app/Console/Commands/InflectorCommand.php',
+            __DIR__.'/app/Http/Middleware/VerifySignature.php',
+            __DIR__.'/app/Providers/ViewServiceProvider.php',
+            __DIR__.'/config/',
+            __DIR__.'/tests/Feature/AuthTest.php',
+        ],
         StringClassNameToClassConstantRector::class => [
             __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
+        ],
+        StringToClassConstantRector::class => [
+            __DIR__.'/app/Listeners/PrepareRequestListener.php',
+            __FILE__,
         ],
         TypeHintTappableCallRector::class => [
             __DIR__.'/app/Providers/ValidatorServiceProvider.php',
@@ -191,8 +191,8 @@ return RectorConfig::configure()
         phpunitMockToStub: true,
     )
     ->withSets([
-        SetList::ALL,
         PestSetList::CODING_STYLE,
+        SetList::ALL,
     ])
     ->withRules([
         ClassHandleMethodRector::class,
@@ -212,22 +212,17 @@ return RectorConfig::configure()
             'StaticClosureCanBeUsedInspection',
         ],
     ])
-    ->registerDecoratingNodeVisitor(ParentConnectingVisitor::class)
     ->withConfiguredRule(RenameToConventionalCaseNameRector::class, [
-        'afterEach',
-        'beforeEach',
-        'current_password',
         'DB',
         'Debug',
         'MIT',
-        'new_password',
         'PDO',
         'URL',
         'Value',
-    ])
-    ->withConfiguredRule(RenameStaticMethodRector::class, [
-        new RenameStaticMethod(Str::class, 'orderedUuid', Str::class, 'uuid7'),
-        new RenameStaticMethod(Str::class, 'uuid', Str::class, 'uuid7'),
+        'afterEach',
+        'beforeEach',
+        'current_password',
+        'new_password',
     ])
     ->withConfiguredRule(StringToClassConstantRector::class, [
         new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),

@@ -23,14 +23,14 @@ final class EloquentLogHttpModelProcessor implements ProcessorInterface
     public function __invoke(LogRecord $record): LogRecord
     {
         return $record->with(context: Arr::only($record->context, [
+            'duration',
+            'input',
+            'ip',
             'method',
             'path',
             'request_header',
-            'input',
-            'response_header',
             'response',
-            'ip',
-            'duration',
+            'response_header',
         ]));
     }
 }

@@ -40,7 +40,7 @@ final class EloquentLogHttpModelFormatter extends NormalizerFormatter
     private function sanitizeContext(array $context): array
     {
         return collect($context)
-            ->only(['method', 'path', 'request_header', 'input', 'response_header', 'response', 'ip', 'duration'])
+            ->only(['duration', 'input', 'ip', 'method', 'path', 'request_header', 'response', 'response_header'])
             ->map(fn (mixed $value): string => \is_string($value) ? $value : $this->strFor($value))
             ->pipe(fn (Collection $newContext): array => [
                 'method' => substr($newContext['method'], 0, 10),

@@ -95,7 +95,7 @@ final class ElasticsearchManager extends Manager
     private function prepareConfig(array $config): array
     {
         $defaultConfig = ['quiet' => false];
-        $mainConfig = Arr::except($this->config->get('services.elasticsearch', []), ['default', 'connections']);
+        $mainConfig = Arr::except($this->config->get('services.elasticsearch', []), ['connections', 'default']);
         // $config = array_replace($defaultConfig, $mainConfig, $config);
         $config += ($mainConfig + $defaultConfig);
 

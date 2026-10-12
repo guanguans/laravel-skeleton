@@ -139,7 +139,7 @@ final class SchedulingEventMixin
                  */
                 $command = Event::normalizeCommand($this->getSummaryForDisplay());
 
-                if ($this instanceof CallbackEvent && \in_array($command, ['Closure', 'Callback'], true)) {
+                if ($this instanceof CallbackEvent && \in_array($command, ['Callback', 'Closure'], true)) {
                     $callbackEvent = $this;
                     $command = 'Closure at: '.(fn () => $this->getClosureLocation($callbackEvent))->call(
                         tap(resolve(ScheduleListCommand::class))->setLaravel(app())
@@ -152,7 +152,7 @@ final class SchedulingEventMixin
             $filename = str($filename)
                 // ->dump()
                 ->replace(
-                    ['<', '>', '/', '\\', '"', '|', ':', '?', '*', ' ', "\n", "\r", "\t", "\v"],
+                    [' ', "\n", "\r", "\t", "\v", '"', '*', '/', ':', '<', '>', '?', '\\', '|'],
                     '-'
                 )
                 ->replaceMatches('/-{3,}/', '--')

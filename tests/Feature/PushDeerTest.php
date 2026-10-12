@@ -50,7 +50,7 @@ it('can push message', function (): void {
     PushDeer::messagePush(
         fake()->text(),
         fake()->text(),
-        fake()->randomElement(['markdown', 'text', 'image'])
+        fake()->randomElement(['image', 'markdown', 'text'])
     );
     Http::assertSentCount(1);
     Http::assertSent(

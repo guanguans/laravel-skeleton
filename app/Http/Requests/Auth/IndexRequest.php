@@ -31,7 +31,7 @@ final class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'per_page' => ['integer', 'min:5', 'max:50'],
+            'per_page' => ['integer', 'max:50', 'min:5'],
             'page' => ['integer', 'min:1'],
         ];
     }
