@@ -61,11 +61,11 @@
   <source ignoreIndirectDeprecations="true">
     <include>
       <directory>app/</directory>
-      <directory>bootstrap/</directory>
+      <file>bootstrap/app.php</file>
     </include>
     <exclude>
-      <directory>bootstrap/cache/</directory>
-      <!--<file>app/Support/ComposerScripts.php</file>-->
+      <directory>app/Support/Rector/</directory>
+      <file>app/Support/ComposerScripts.php</file>
     </exclude>
   </source>
 </phpunit>

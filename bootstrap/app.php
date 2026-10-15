@@ -20,7 +20,6 @@ use App\Http\Middleware\SetJsonResponseEncodingOptions;
 use App\Listeners\PrepareRequestListener;
 use App\Listeners\TraceEventListener;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
@@ -33,15 +32,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Lottery;
 use Illuminate\Validation\ValidationException;
+use Laravel\Doctor\Diagnostics\ComposerAuditPasses;
+use Laravel\Doctor\Diagnostics\ComposerAutoloadIsValid;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use function Illuminate\Filesystem\join_paths;
 
 return App\Application::configure(\dirname(__DIR__))
-    ->booting(static function (Application $app): void {
-        File::ensureDirectoryExists(base_path('vendor/_laravel_ide_helper/'));
-        $app->make(Repository::class)->set([
-            'ide-helper.filename' => base_path('vendor/_laravel_ide_helper/_ide_helper.php'),
-            'ide-helper.meta_filename' => base_path('vendor/_laravel_ide_helper/.phpstorm.meta.php'),
-            'ide-helper.models_filename' => base_path('vendor/_laravel_ide_helper/_ide_helper_models.php'),
+    ->booting(static function (): void {
+        File::ensureDirectoryExists($directory = base_path('vendor/_laravel_ide_helper/'));
+        config([
+            'ide-helper.filename' => join_paths($directory, '_ide_helper.php'),
+            'ide-helper.meta_filename' => join_paths($directory, '.phpstorm.meta.php'),
+            'ide-helper.models_filename' => join_paths($directory, '_ide_helper_models.php'),
+        ]);
+
+        config([
+            'doctor.except' => [
+                ComposerAuditPasses::class,
+                ComposerAutoloadIsValid::class,
+            ],
         ]);
     })
     ->withRouting(

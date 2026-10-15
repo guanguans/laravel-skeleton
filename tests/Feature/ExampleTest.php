@@ -19,6 +19,7 @@ declare(strict_types=1);
  * @see https://github.com/guanguans/laravel-skeleton
  */
 
+use App\Console\Commands\CheckServiceProviderCommand;
 use App\Console\Commands\InflectorCommand;
 use App\Console\Commands\OpcacheUrlCommand;
 use App\Console\Commands\OptimizeAllCommand;
@@ -42,7 +43,12 @@ it('is console', function (): void {
         ->keys()
         ->merge([RouteListCommand::class])
         // ->dd()
-        ->each(fn (string $class) => $this->artisan($class, ['--no-interaction' => true])->assertOk());
+        ->each(function (string $class): void {
+            $parameters = ['--no-interaction' => true];
+            CheckServiceProviderCommand::class === $class and $parameters += ['--ignore-indirect' => true];
+
+            $this->artisan($class, $parameters)->assertOk();
+        });
 })->group(__DIR__, __FILE__);
 
 it('is http', function (): void {

@@ -126,13 +126,6 @@ parameters:
         no_param_type_removal: true
         no_isset_on_object: true
         no_empty_on_object: true
-    unused_public:
-        constants: true
-        properties: true
-        methods: false
-        local_methods: false
-        template_paths:
-#            - resources/views/
     disallowedFunctionCalls:
         -
             function: 'env_explode()'
@@ -215,12 +208,13 @@ parameters:
         - identifier: shipmonk.publicPropertyNotReadonly
         - identifier: shipmonk.unusedParameter
         - identifier: shipmonk.variableTypeOverwritten
-        - identifier: symplify.commandHasAsCommandAttribute
+        - identifier: symfony.noPublicNonActionMethodInController
+#        - identifier: symplify.commandHasAsCommandAttribute
         - identifier: symplify.explicitInterfaceSuffixName
         - identifier: symplify.explicitTraitSuffixName
         - identifier: symplify.forbiddenFuncCall
 #        - identifier: symplify.forbiddenNode
-        - identifier: symplify.forbiddenStaticClassConstFetch
+#        - identifier: symplify.forbiddenStaticClassConstFetch
         - identifier: symplify.forbiddenTrait
         - identifier: symplify.noDynamicName
         - identifier: symplify.requireAttributeName
@@ -237,7 +231,6 @@ parameters:
         - identifier: method.dynamicName
         - identifier: offsetAccess.nonOffsetAccessible
         - identifier: property.dynamicName
-        - identifier: public.property.unused
         - identifier: return.type
         - identifier: staticMethod.dynamicCall
         - identifier: staticMethod.dynamicName
@@ -295,6 +288,10 @@ parameters:
                 - app/Casts/CallbackSetCast.php
                 - app/Casts/CommaSeparatedToIntegerArrayCast.php
                 - app/Models/JWTUser.php
+        -
+            identifier: symplify.requireArrayShapeReturn
+            paths:
+                - app/Jobs/SendThirdPartyRequestJob.php
         -
             identifier: new.static
             paths:
@@ -378,10 +375,6 @@ parameters:
             identifier: method.notFound
             paths:
                 - app/Http/Controllers/Api/AuthController.php
-                - app/Models/AbstractModel.php
-                - app/Models/HttpLog.php
-#                - app/Models/JWTUser.php
-                - app/Models/User.php
                 - app/Providers/ValidatorServiceProvider.php
                 - app/Support/VarDumper/ServerDumper.php
                 - bootstrap/app.php

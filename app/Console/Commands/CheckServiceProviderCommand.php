@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection PropertyCanBeStaticInspection */
 declare(strict_types=1);
 
 /**
@@ -24,42 +23,13 @@ use Symfony\Component\Console\Output\OutputInterface;
     <<<'SIGNATURE'
         check:service-provider
         {--except=* : The list of packages to exclude from the service provider check.}
+        {--ignore-indirect : Ignore indirect discovered packages.}
         SIGNATURE
 )]
 final class CheckServiceProviderCommand extends AbstractCommand
 {
     /** @var list<string> */
-    private array $except = [
-        'blade-ui-kit/blade-heroicons',
-        'blade-ui-kit/blade-icons',
-        'kitloong/laravel-app-logger',
-        'laravel-lang/actions',
-        'laravel-lang/attributes',
-        'laravel-lang/config',
-        'laravel-lang/http-statuses',
-        'laravel-lang/lang',
-        'laravel-lang/locales',
-        'laravel-lang/models',
-        'laravel-lang/moonshine',
-        'laravel-lang/publisher',
-        'laravel-lang/routes',
-        'laravel-lang/starter-kits',
-        'laravel/sentinel',
-        'laravel/socialite',
-        'laravel/ui',
-        'livewire/livewire',
-        'nesbot/carbon',
-        'nunomaduro/termwind',
-        'orchestra/canvas',
-        'orchestra/canvas-core',
-        'pestphp/pest-plugin-laravel',
-        'socialiteproviders/manager',
-        'spatie/laravel-http-logger',
-        'spatie/laravel-signal-aware-command',
-        'spatie/php-structure-discoverer',
-        'wilderborn/partyline',
-        'wireui/heroicons',
-    ];
+    private array $except = [];
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -75,16 +45,18 @@ final class CheckServiceProviderCommand extends AbstractCommand
 
         /** @noinspection UsingInclusionReturnValueInspection */
         $discoveredPackages = collect(require base_path('bootstrap/cache/packages.php'))->reject(
-            fn (array $map, string $package): bool => str($package)->is($this->except)
+            fn (array $_, string $package): bool => str($package)->is($this->except)
         );
         $shouldntDiscoverPackages = $discoveredPackages->filter(static fn (
-            array $map,
+            array $_,
             string $package
         ): bool => \in_array($package, $devPackages, true) && !\in_array($package, $dontDiscoverPackages, true));
-        $indirectDiscoveredPackages = $discoveredPackages->filter(static fn (
-            array $map,
-            string $package
-        ): bool => !\in_array($package, $prodPackages, true) && !\in_array($package, $devPackages, true));
+        $indirectDiscoveredPackages = $discoveredPackages
+            ->filter(static fn (
+                array $_,
+                string $package
+            ): bool => !\in_array($package, $prodPackages, true) && !\in_array($package, $devPackages, true))
+            ->when($this->option('ignore-indirect'), static fn (): Collection => Collection::empty());
 
         if ($shouldntDiscoverPackages->isNotEmpty() || $indirectDiscoveredPackages->isNotEmpty()) {
             $this->warn(\sprintf(
@@ -125,7 +97,7 @@ final class CheckServiceProviderCommand extends AbstractCommand
     #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->except = [...$this->except, ...$this->option('except')];
+        $this->except = [...$this->except, ...(array) $this->option('except')];
     }
 
     /**
@@ -135,7 +107,9 @@ final class CheckServiceProviderCommand extends AbstractCommand
     protected function rules(): array
     {
         return [
-            'except' => 'array',
+            'except' => 'list',
+            'except.*' => 'required|string|distinct',
+            'ignore-indirect' => 'boolean',
         ];
     }
 }

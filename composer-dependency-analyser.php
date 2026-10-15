@@ -39,6 +39,7 @@ return (new Configuration)
         [
             'guanguans/laravel-exception-notify',
             'laravel/tinker',
+            'spatie/laravel-image-optimizer',
             'spiral/roadrunner-cli',
             'spiral/roadrunner-http',
         ],
@@ -50,6 +51,13 @@ return (new Configuration)
             // __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
             __DIR__.'/app/Providers/WhenLocalAggregateServiceProvider.php',
             __DIR__.'/app/Providers/WhenTestingAggregateServiceProvider.php',
+        ],
+        [ErrorType::DEV_DEPENDENCY_IN_PROD]
+    )
+    ->ignoreErrorsOnPackageAndPaths(
+        'laravel/doctor',
+        [
+            __DIR__.'/bootstrap/app.php',
         ],
         [ErrorType::DEV_DEPENDENCY_IN_PROD]
     );

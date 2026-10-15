@@ -20,6 +20,7 @@ use App\Support\Attribute\Mixin;
 use Illuminate\Console\Scheduling\CallbackEvent;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Console\Scheduling\ScheduleListCommand;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Stringable;
@@ -57,7 +58,7 @@ final class SchedulingEventMixin
         return function (?string $locale = null, bool $timeFormat24hours = false): Event {
             dump($this->expression.': '.CronTranslator::translate(
                 $this->expression,
-                match ($locale ??= config()->string('app.locale', 'en')) {
+                match ($locale ??= Config::string('app.locale', 'en')) {
                     'zh_CN' => 'zh',
                     'zh_TW' => 'zh-TW',
                     default => $locale,
@@ -169,7 +170,7 @@ final class SchedulingEventMixin
             // dump($location);
 
             return $this
-                ->before(static fn () => Log::build(['path' => $location] + config()->array('logging.channels.single'))->info('>>>>>>>>'))
+                ->before(static fn () => Log::build(['path' => $location] + Config::array('logging.channels.single'))->info('>>>>>>>>'))
                 ->appendOutputTo($location);
         };
     }

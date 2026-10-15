@@ -32,14 +32,19 @@ final class UnlessProductionAggregateServiceProvider extends AggregateServicePro
     protected $providers = [
         'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider',
         'Dedoc\\Scramble\\ScrambleServiceProvider',
-        'Guanguans\\LaravelSoar\\SoarServiceProvider',
+        // 'Guanguans\\LaravelSoar\\SoarServiceProvider',
         'JMac\\Testing\\AdditionalAssertionsServiceProvider',
+        'Laravel\\Boost\\BoostServiceProvider',
         'Laravel\\Doctor\\DoctorServiceProvider',
         'Laravel\\Pail\\PailServiceProvider',
         'Laravel\\Pao\\Laravel\\ServiceProvider',
         'Laravel\\Telescope\\TelescopeServiceProvider',
+        'Msamgan\\LaravelEnvKeysChecker\\LaravelEnvKeysCheckerServiceProvider',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+        'Pest\\Laravel\\PestServiceProvider',
         'PrettyRoutes\\ServiceProvider',
+        'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
+        'VoltTest\\Laravel\\VoltTestServiceProvider',
     ];
 
     public function register(): void

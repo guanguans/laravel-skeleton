@@ -16,6 +16,7 @@ namespace App\Support\Mixin;
 
 use App\Support\Attribute\Mixin;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
 
 /**
  * @mixin \Illuminate\Support\Carbon
@@ -25,7 +26,7 @@ final class CarbonMixin
 {
     public function inAppTimezone(): \Closure
     {
-        return fn (): self => $this->setTimezone(config()->string('app.timezone'));
+        return fn (): self => $this->setTimezone(Config::string('app.timezone'));
     }
 
     public function inUserTimezone(): \Closure

@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --ignore-platform-req=ext-pcntl --ansi -v
-          composer app:install-project
+          composer app:install
 
       - name: Execute tests
         run: composer test:coverage

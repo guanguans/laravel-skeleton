@@ -1,6 +1,7 @@
 {
     "excludeFiles": [
         ".build/**",
+        "app/**",
         "baselines/**",
         "config/**",
         "node_modules/**",

@@ -1,4 +1,4 @@
-# total 20 errors
+# total 17 errors
 
 parameters:
     ignoreErrors:
@@ -59,23 +59,8 @@ parameters:
 
         -
             message: '#^Cannot call method format\(\) on mixed\.$#'
-            count: 1
-            path: ../app/Models/AbstractModel.php
-
-        -
-            message: '#^Cannot call method format\(\) on mixed\.$#'
             count: 2
             path: ../app/Models/Example.php
-
-        -
-            message: '#^Cannot call method format\(\) on mixed\.$#'
-            count: 1
-            path: ../app/Models/HttpLog.php
-
-        -
-            message: '#^Cannot call method format\(\) on mixed\.$#'
-            count: 1
-            path: ../app/Models/User.php
 
         -
             message: '#^Cannot call method isAdmin\(\) on App\\Models\\User\|null\.$#'

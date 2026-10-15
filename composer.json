@@ -18,8 +18,8 @@
         "guanguans/laravel-exception-notify": "^7.0",
         "hamidrezaniazi/pecs": "^2.0",
         "jenssegers/agent": "^2.6",
-        "laravel/framework": "^13.35",
-        "laravel/octane": "^2.21",
+        "laravel/framework": "^13.38",
+        "laravel/octane": "^2.22",
         "laravel/pennant": "^1.26",
         "laravel/sanctum": "^4.3",
         "laravel/tinker": "^3.0",
@@ -27,10 +27,11 @@
         "mtownsend/read-time": "^2.0",
         "overtrue/laravel-uploader": "^3.4",
         "php-open-source-saver/jwt-auth": "^2.9",
+        "spatie/laravel-image-optimizer": "^1.8",
         "spatie/laravel-schemaless-attributes": "^2.6",
         "spatie/packagist-api": "^2.1",
-        "spiral/roadrunner-cli": "^2.7",
-        "spiral/roadrunner-http": "^4.1"
+        "spiral/roadrunner-cli": "^3.0",
+        "spiral/roadrunner-http": "^4.2"
     },
     "require-dev": {
         "adamwojs/php-cs-fixer-phpdoc-force-fqcn": "^2.0",
@@ -38,10 +39,10 @@
         "barryvdh/laravel-ide-helper": "^3.7",
         "brainmaestro/composer-git-hooks": "^3.0",
         "canvural/larastan-strict-rules": "^3.0",
-        "carthage-software/mago": "^1.56",
+        "carthage-software/mago": "^1.58",
         "dedoc/scramble": "^0.13",
         "dragon-code/pretty-routes": "^3.9",
-        "driftingly/rector-laravel": "^2.6",
+        "driftingly/rector-laravel": "^2.7",
         "ergebnis/composer-normalize": "^2.54",
         "ergebnis/license": "^2.8",
         "ergebnis/php-cs-fixer-config": "^6.64",
@@ -49,7 +50,7 @@
         "ergebnis/rector-rules": "^1.18",
         "fakerphp/faker": "^1.24",
         "guanguans/laravel-soar": "^6.0",
-        "guanguans/monorepo-builder-worker": "^3.3",
+        "guanguans/monorepo-builder-worker": "^3.4",
         "guanguans/php-cs-fixer-custom-fixers": "dev-main",
         "guanguans/phpstan-rules": "^1.1",
         "guanguans/rector-rules": "^1.9",
@@ -57,13 +58,15 @@
         "jasonmccreary/laravel-test-assertions": "^2.9",
         "jbelien/phpstan-sarif-formatter": "^1.2",
         "larastan/larastan": "^3.13",
+        "laravel/boost": "^2.10",
         "laravel/doctor": "^0.1",
         "laravel/facade-documenter": "dev-main",
         "laravel/pail": "^1.2",
         "laravel/pao": "^1.1",
         "laravel/pint": "^1.32",
-        "laravel/telescope": "^5.25",
+        "laravel/telescope": "^5.26",
         "mockery/mockery": "^1.6",
+        "msamgan/laravel-env-keys-checker": "^2.0",
         "nicksdot/phpstan-phpstorm-error-identifiers": "^0.3",
         "nunomaduro/collision": "^8.9",
         "pestphp/pest": "^5.3",
@@ -77,7 +80,6 @@
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "phpunit/phpunit": "^13.4",
         "povils/phpmnd": "^3.6",
-        "rector/jack": "^1.2",
         "rector/swiss-knife": "^2.7",
         "roave/backward-compatibility-check": "^8.23",
         "roave/no-floaters": "^1.16",
@@ -88,18 +90,17 @@
         "shipmonk/phpstan-rules": "^4.4",
         "sidz/phpstan-rules": "^0.5",
         "spatie/laravel-ignition": "^2.12",
-        "spaze/phpstan-disallowed-calls": "^4.14",
+        "spaze/phpstan-disallowed-calls": "^4.15",
         "staabm/annotate-pull-request-from-checkstyle": "^1.8",
         "staabm/phpstan-todo-by": "^0.3",
         "staabm/side-effects-detector": "^1.0",
         "symfony/thanks": "^1.4",
         "symplify/easy-coding-standard": "^13.3",
-        "symplify/phpstan-rules": "^14.18",
+        "symplify/phpstan-rules": "^14.19",
         "symplify/vendor-patches": "^12.2",
         "tomasvotruba/class-leak": "^2.3",
         "tomasvotruba/cognitive-complexity": "^1.3",
         "tomasvotruba/type-coverage": "^2.5",
-        "tomasvotruba/unused-public": "^2.2",
         "volt-test/laravel-performance-testing": "^1.3",
         "yamadashy/phpstan-friendly-formatter": "^1.5"
     },
@@ -420,11 +421,14 @@
                 "dragon-code/pretty-routes",
                 "guanguans/laravel-soar",
                 "jasonmccreary/laravel-test-assertions",
+                "laravel/boost",
                 "laravel/doctor",
                 "laravel/pail",
                 "laravel/pao",
                 "laravel/telescope",
+                "msamgan/laravel-env-keys-checker",
                 "nunomaduro/collision",
+                "pestphp/pest-plugin-laravel",
                 "spatie/laravel-ignition",
                 "volt-test/laravel-performance-testing"
             ]
@@ -437,15 +441,11 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@cghooks:upsert",
-            "@composer:normalize"
+            "@cghooks:upsert"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --force --ansi -vv",
-            "@artisan vendor:publish --tag=laravel-errors",
-            "@artisan:ide-helper",
-            "@cghooks:upsert",
-            "@composer:normalize"
+            "@cghooks:upsert"
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
@@ -470,8 +470,11 @@
         "app:find-static-method": "App\\Support\\ComposerScripts::findStaticMethod",
         "app:fix-neon": "Guanguans\\PHPStanRules\\Support\\ComposerScripts::fixNeon",
         "app:generate-gitleaks-ignore": "Guanguans\\Notify\\Foundation\\Support\\ComposerScripts::generateGitleaksIgnore",
-        "app:install-project": [
+        "app:install": [
             "@post-create-project-cmd",
+            "@artisan env",
+            "@artisan storage:link",
+            "@artisan about",
             "@artisan jwt:secret --force"
         ],
         "app:lint-readme": "App\\Support\\ComposerScripts::lintReadme",
@@ -485,8 +488,8 @@
             "@artisan ide-helper:meta",
             "@artisan ide-helper:models --reset --nowrite"
         ],
-        "artisan:solo": "@artisan solo",
-        "artisan:solo-dumps": "@artisan solo:dumps",
+        "artisan:lang-add": "@artisan lang:add en zh_CN",
+        "artisan:lang-update": "@artisan lang:update",
         "artisan:xdebug": [
             "@env-put-xdebug-on",
             "@artisan"
@@ -494,14 +497,25 @@
         "blade-formatter": "blade-formatter resources/views/*.blade.php resources/views/**/*.blade.php --ignore-path= --php-version=8.5 --progress",
         "blade-formatter:check-formatted": "@blade-formatter --check-formatted",
         "blade-formatter:write": "@blade-formatter --write",
-        "cghooks": "@php vendor/bin/cghooks --ansi -vv",
+        "cghooks": "[ ! -f \"vendor/bin/cghooks\" ] && exit 0 || php vendor/bin/cghooks --ansi -vv",
         "cghooks:upsert": [
             "@cghooks add --ignore-lock",
             "@cghooks update"
         ],
         "checks": [
             "@checks:required",
-            "@checks:optional"
+            "@checks:optional",
+            "@checks:artisan"
+        ],
+        "checks:artisan": [
+            "@putenv:xdebug-off",
+            "@artisan:ide-helper",
+            "@artisan boost:update",
+            "@artisan check:service-provider --ignore-indirect",
+            "@artisan doctor",
+            "@artisan env:in-git-ignore",
+            "@artisan env:keys-check --auto-add",
+            "@artisan env:sync-keys"
         ],
         "checks:optional": [
             "@putenv:xdebug-off",
@@ -513,19 +527,19 @@
             "@composer:unlink",
             "@detect-collisions",
             "@facade:lint",
-            "@jack:breakpoint",
-            "@jack:open-versions-dry-run",
-            "@jack:raise-to-installed-dry-run",
             "@jsonlint",
             "@phpmnd",
             "@phpstan:analyse",
             "@rector:process-dry-run",
+            "@sk:breakpoint",
             "@sk:check-commented-code",
             "@sk:check-conflicts",
             "@sk:finalize-classes-dry-run",
             "@sk:find-multi-classes",
             "@sk:namespace-to-psr-4",
+            "@sk:open-versions-dry-run",
             "@sk:privatize-constants",
+            "@sk:raise-to-installed-dry-run",
             "@todo-lint",
             "@yaml-lint",
             "@actionlint",
@@ -582,7 +596,7 @@
         "detect-collisions": "@php vendor/bin/detect-collisions config/ app/",
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+            "@php artisan dev"
         ],
         "ecs": "@user-php vendor/bin/ecs --ansi -vv",
         "ecs:check": "@ecs check",
@@ -600,19 +614,10 @@
         "envoy:testing": "@envoy run testing",
         "facade:lint": "@facade:update --lint",
         "facade:update": "@php -f vendor/bin/facade.php -- $(php -r 'echo implode('\\'' '\\'', array_map(fn ($f) => str_replace(['\\''app'\\'', '\\''/'\\'', '\\''.php'\\''], ['\\''App'\\'', '\\''\\\\'\\'', '\\'''\\''], $f), glob('\\''app/Support/Facade/*.php'\\'')));')",
-        "git-chglog": "git-chglog $(git describe --tags $(git rev-list --tags --max-count=1))",
+        "git-chglog": "sh -c 'latest_tag=$(git describe --tags --abbrev=0 2>/dev/null); [ -z \"$latest_tag\" ] || git-chglog \"$latest_tag\"' --",
         "gitleaks": "gitleaks git --report-path=.build/gitleaks-report.json --pre-commit --staged -v",
         "gitleaks:generate-baseline": "gitleaks git --report-path=gitleaks-baseline.json -v",
-        "jack": "@php vendor/bin/jack",
-        "jack:breakpoint": "@jack breakpoint --limit=2",
-        "jack:breakpoint-dev": "@jack:breakpoint --dev",
-        "jack:open-versions": "@jack open-versions --limit=2",
-        "jack:open-versions-dev": "@jack:open-versions --dev",
-        "jack:open-versions-dev-dry-run": "@jack:open-versions-dev --dry-run",
-        "jack:open-versions-dry-run": "@jack:open-versions --dry-run",
-        "jack:raise-to-installed": "@jack raise-to-installed",
-        "jack:raise-to-installed-dry-run": "@jack:raise-to-installed --dry-run",
-        "jsonlint": "@php vendor/bin/jsonlint *.json .*rc",
+        "jsonlint": "@php vendor/bin/jsonlint --allow-comments --detect-key-conflicts --validate-utf8-encoding *.json",
         "lint-md": [
             "if ! command -v lint-md >/dev/null 2>&1; then echo 'lint-md not found, installing...'; npm install -g @lint-md/cli; fi",
             "@lint-md:prototype"
@@ -745,7 +750,7 @@
         "rector:validate-config": "@rector validate-config",
         "roave-backward-compatibility-check": "@php vendor/bin/roave-backward-compatibility-check --install-development-dependencies --ansi -vv",
         "roave-backward-compatibility-check:format-github-actions": "@roave-backward-compatibility-check --format=github-actions",
-        "rule-doc-generator": "@php -d error_reporting='E_ALL &~E_DEPRECATED' rule-doc-generator --ansi -vv",
+        "rule-doc-generator": "@user-php rule-doc-generator --ansi -vv",
         "rule-doc-generator:generate": "@rule-doc-generator generate app/Support/Rector/ --output-file=app/Support/Rector/rules-overview.md",
         "rule-doc-generator:validate": "@rule-doc-generator validate app/Support/Rector/",
         "setup": [
@@ -758,6 +763,8 @@
         ],
         "sk": "@user-php vendor/bin/swiss-knife",
         "sk:alice-yaml-fixtures-to-php": "@sk alice-yaml-fixtures-to-php --help",
+        "sk:breakpoint": "@sk breakpoint --limit=5",
+        "sk:breakpoint-dev": "@sk:breakpoint --dev",
         "sk:check-commented-code": "@sk check-commented-code app/ --line-limit=20",
         "sk:check-conflicts": "@sk check-conflicts config/ app/",
         "sk:dump-editorconfig": "@sk dump-editorconfig",
@@ -772,12 +779,22 @@
         ],
         "sk:namespace-to-psr-4-src": "@sk namespace-to-psr-4 app/ --namespace-root=App\\",
         "sk:namespace-to-psr-4-tests": "@sk namespace-to-psr-4 tests/ --namespace-root=Tests\\",
+        "sk:open-versions": "@sk open-versions --limit=5",
+        "sk:open-versions-dev": "@sk:open-versions --dev",
+        "sk:open-versions-dev-dry-run": "@sk:open-versions-dev --dry-run",
+        "sk:open-versions-dry-run": "@sk:open-versions --dry-run",
         "sk:pretty-json": "@sk pretty-json .lintmdrc",
         "sk:pretty-json-dry-run": "@sk:pretty-json --dry-run",
         "sk:privatize-constants": "@sk privatize-constants config/ app/",
+        "sk:raise-to-installed": "@sk raise-to-installed",
+        "sk:raise-to-installed-dry-run": "@sk:raise-to-installed --dry-run",
         "sk:search-regex": "@sk search-regex 'Guanguans.*ValetDrivers'",
         "sk:split-config-per-package": "@sk split-config-per-package monorepo-builder.php",
         "sk:spot-lazy-traits": "@sk spot-lazy-traits app/ --max-used=2",
+        "test:original": [
+            "@php artisan config:clear --ansi @no_additional_args",
+            "@php artisan test"
+        ],
         "todo-lint": "! git --no-pager grep --extended-regexp --ignore-case 'todo|fixme' -- '*.php' ':!*.blade.php' ':(exclude)resources/' ':(exclude)tests/' ':(exclude)app/Models/' ':(exclude)app/Support/StreamWrapper/' ':(exclude)app/Listeners/RecordRequestIdentifiersListener.php' ':(exclude)app/Rules/AbstractRule.php'",
         "touch:database-sqlite": "@php -r \"file_exists('vendor/orchestra/testbench-core/laravel/database/database.sqlite') || touch('vendor/orchestra/testbench-core/laravel/database/database.sqlite');\"",
         "trufflehog": "trufflehog git https://github.com/guanguans/laravel-skeleton --only-verified",

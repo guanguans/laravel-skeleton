@@ -111,8 +111,8 @@ final class HealthCheckCommand extends Command implements Isolatable
     #[\Override]
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->only = [...$this->only, ...$this->option('only')];
-        $this->except = [...$this->except, ...$this->option('except')];
+        $this->only = [...$this->only, ...(array) $this->option('only')];
+        $this->except = [...$this->except, ...(array) $this->option('except')];
     }
 
     /**

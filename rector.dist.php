@@ -50,6 +50,7 @@ use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\HelperFuncCallToFacadeClassRector;
 use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\FuncCall\TypeHintTappableCallRector;
+use RectorLaravel\Rector\FuncCall\UnlinkFuncCallToFileFacadeDeleteRector;
 use RectorLaravel\Rector\If_\ThrowIfRector;
 use RectorLaravel\Rector\MethodCall\ValidationRuleArrayStringValueToArrayRector;
 use RectorLaravel\Rector\StaticCall\CarbonToDateFacadeRector;
@@ -159,6 +160,11 @@ return RectorConfig::configure()
         TypeHintTappableCallRector::class => [
             __DIR__.'/app/Providers/ValidatorServiceProvider.php',
             __DIR__.'/app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php',
+        ],
+        UnlinkFuncCallToFileFacadeDeleteRector::class => [
+            __DIR__.'/app/Listeners/TraceEventListener.php',
+            __DIR__.'/app/Support/StreamWrapper/',
+            __DIR__.'/composer-bump',
         ],
     ])
     ->withCache(__DIR__.'/.build/rector/')

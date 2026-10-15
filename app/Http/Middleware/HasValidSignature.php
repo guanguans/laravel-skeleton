@@ -18,6 +18,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
@@ -67,7 +68,7 @@ final class HasValidSignature
 
         $validSignature = hash_equals(
             $givenSignature,
-            hash_hmac('sha256', $request->getContent(), config()->string('auth.encrypt_pass'))
+            hash_hmac('sha256', $request->getContent(), Config::string('auth.encrypt_pass'))
         );
 
         // abort if the signature is invalid

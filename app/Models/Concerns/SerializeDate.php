@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace App\Models\Concerns;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Model
@@ -23,8 +25,6 @@ trait SerializeDate
 {
     /**
      * 为数组 / JSON 序列化准备日期。(Laravel 7).
-     *
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     #[\Override]
     protected function serializeDate(\DateTimeInterface $date): string
@@ -32,6 +32,9 @@ trait SerializeDate
         // return $date->format($this->dateFormat ?: Carbon::DEFAULT_TO_STRING_FORMAT);
         // return $date->format('Y-m-d H:i:s.vP');
         // return $date->format('Y-m-d H:i:sP');
-        return $date->inAppTimezone()->format($this->getDateFormat());
+
+        return ($date instanceof \DateTimeImmutable ? CarbonImmutable::instance($date) : Date::instance($date))
+            ->inAppTimezone()
+            ->format($this->getDateFormat());
     }
 }
