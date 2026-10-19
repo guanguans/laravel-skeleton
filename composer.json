@@ -29,7 +29,7 @@
         "php-open-source-saver/jwt-auth": "^2.9",
         "spatie/laravel-schemaless-attributes": "^2.6",
         "spatie/packagist-api": "^2.1",
-        "spiral/roadrunner-cli": "^2.7",
+        "spiral/roadrunner-cli": "^3.0",
         "spiral/roadrunner-http": "^4.1"
     },
     "require-dev": {
