@@ -8,6 +8,18 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="13.3.0"></a>
+## [13.3.0] - 2026-10-15
+### ✨ Features
+- **command:** Add option to ignore indirect discovered packages ([9f36129f](https://github.com/guanguans/laravel-skeleton/commit/9f36129f))
+
+### 💅 Code Refactorings
+- **client:** Implement exponential backoff for retries ([9e17d42b](https://github.com/guanguans/laravel-skeleton/commit/9e17d42b))
+
+### 🤖 Continuous Integrations
+- **app:** configure IDE helper file paths ([6e6cce9c](https://github.com/guanguans/laravel-skeleton/commit/6e6cce9c))
+
+
 <a name="13.2.0"></a>
 ## [13.2.0] - 2026-09-22
 ### 📖 Documents
@@ -3221,7 +3233,8 @@ The addition of new commands and modifications to existing
 ones may affect users who rely on the previous structure and functionality.
 
 
-[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/13.2.0...HEAD
+[Unreleased]: https://github.com/guanguans/laravel-skeleton/compare/13.3.0...HEAD
+[13.3.0]: https://github.com/guanguans/laravel-skeleton/compare/13.2.0...13.3.0
 [13.2.0]: https://github.com/guanguans/laravel-skeleton/compare/13.1.0...13.2.0
 [13.1.0]: https://github.com/guanguans/laravel-skeleton/compare/13.0.0...13.1.0
 [13.0.0]: https://github.com/guanguans/laravel-skeleton/compare/12.3.0...13.0.0
