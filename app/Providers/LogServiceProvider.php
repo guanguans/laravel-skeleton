@@ -18,6 +18,7 @@ use App\Support\Monolog\Processor\AppendExtraDataProcessor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Monolog\Logger as MonologLogger;
@@ -39,21 +40,40 @@ final class LogServiceProvider extends ServiceProvider
         $this->whenever(true, function (): void {
             /**
              * @see \Guanguans\LaravelExceptionNotify\Collectors\ApplicationCollector
+             * @see \Guanguans\LaravelExceptionNotify\Collectors\RequestBasicCollector
              * @see \Illuminate\Log\Context\ContextServiceProvider::boot()
              */
             Context::add([
-                'php-version' => \PHP_VERSION,
-                'php-interface' => \PHP_SAPI,
-                'laravel-version' => $this->app->version(),
-                'running-in-console' => $this->app->runningInConsole(),
-                'trace-id' => TRACE_ID,
+                'Trace Id' => TRACE_ID,
+                // 'Time' => Date::now()->format('Y-m-d H:i:s'),
+                'Name' => config('app.name'),
+                'Version' => app()->version(),
+                'PHP Version' => \PHP_VERSION,
+                'Php Interface' => \PHP_SAPI,
+                'Environment' => app()->environment(),
+                'In Console' => app()->runningInConsole(),
+                'Debug Mode' => app()->hasDebugModeEnabled(),
+                'Maintenance Mode' => app()->isDownForMaintenance(),
+                'Timezone' => config('app.timezone'),
+                'Locale' => config('app.locale'),
+            ]);
+
+            app()->runningInConsole() or Context::add([
+                'User Id' => request()->user()?->id,
+                'URL' => request()->url(),
+                'IP' => request()->ip(),
+                'Method' => request()->method(),
+                'Controller Action' => request()->route()?->getActionName(),
+                // 'Command' => null,
+                // 'Memory' => Number::fileSize(memory_get_peak_usage(true)),
+                // 'Duration' => blank(
+                //     $startTime = \defined('LARAVEL_START') ? LARAVEL_START : request()->server('REQUEST_TIME_FLOAT')
+                // ) ? 'Unknown' : humans_milliseconds((microtime(true) - (float) $startTime) * 1000),
             ]);
 
             LogHttp::skipWhen(
                 fn (Request $request): bool => $this->app->runningUnitTests() /* || $request->isMethodSafe() */
             );
-
-            $this->unlessConsole();
         });
     }
 
@@ -68,19 +88,6 @@ final class LogServiceProvider extends ServiceProvider
             if (($logger = Log::getLogger()) instanceof MonologLogger) {
                 $logger->pushProcessor(new AppendExtraDataProcessor(request()->header()));
             }
-        });
-    }
-
-    private function unlessConsole(): void
-    {
-        $this->unless($this->app->runningInConsole(), static function (): void {
-            Context::add([
-                'user-id' => request()->user()?->id,
-                'url' => request()->url(),
-                'ip' => request()->ip(),
-                'method' => request()->method(),
-                'action' => request()->route()?->getActionName(),
-            ]);
         });
     }
 }

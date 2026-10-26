@@ -71,7 +71,8 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         RenameGarbageParamNameRector::class,
-        RenameParamToMatchTypeRector::class,
+        // RenameParamToMatchTypeRector::class,
+        StringToClassConstantRector::class,
 
         // Skip common rules.
         ChainExpectCallsRector::class,
@@ -97,9 +98,9 @@ return RectorConfig::configure()
         CarbonToDateFacadeRector::class => [
             __DIR__.'/app/Listeners/TraceEventListener.php',
         ],
-        CompleteDynamicPropertiesRector::class => [
-            __DIR__.'/app/Support/Mixin/',
-        ],
+        // CompleteDynamicPropertiesRector::class => [
+        //     __DIR__.'/app/Support/Mixin/',
+        // ],
         RemoveDeadInstanceOfAssertRector::class => [
             __DIR__.'/app/Providers/AppServiceProvider.php',
             __DIR__.'/app/Providers/AutowiredServiceProvider.php',
@@ -123,9 +124,9 @@ return RectorConfig::configure()
         RenameMethodRector::class => [
             __DIR__.'/app/Providers/ViewServiceProvider.php',
         ],
-        RenamePropertyToMatchTypeRector::class => [
-            __DIR__.'/app/Support/VarDumper/ServerDumper.php',
-        ],
+        // RenamePropertyToMatchTypeRector::class => [
+        //     __DIR__.'/app/Support/VarDumper/ServerDumper.php',
+        // ],
         RenameToConventionalCaseNameRector::class => [
             __DIR__.'/app/Enums/',
             __DIR__.'/app/Models/',
@@ -153,10 +154,10 @@ return RectorConfig::configure()
         StringClassNameToClassConstantRector::class => [
             __DIR__.'/app/Providers/UnlessProductionAggregateServiceProvider.php',
         ],
-        StringToClassConstantRector::class => [
-            __DIR__.'/app/Listeners/PrepareRequestListener.php',
-            __FILE__,
-        ],
+        // StringToClassConstantRector::class => [
+        //     __DIR__.'/app/Listeners/PrepareRequestListener.php',
+        //     __FILE__,
+        // ],
         TypeHintTappableCallRector::class => [
             __DIR__.'/app/Providers/ValidatorServiceProvider.php',
             __DIR__.'/app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php',
@@ -188,7 +189,7 @@ return RectorConfig::configure()
         typeDeclarations: true,
         typeDeclarationDocblocks: true,
         privatization: true,
-        naming: true,
+        // naming: true,
         // namedArgs: true,
         carbon: true,
         rectorPreset: true,
@@ -218,6 +219,9 @@ return RectorConfig::configure()
             'StaticClosureCanBeUsedInspection',
         ],
     ])
+    // ->withConfiguredRule(StringToClassConstantRector::class, [
+    //     new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),
+    // ])
     ->withConfiguredRule(RenameToConventionalCaseNameRector::class, [
         'DB',
         'Debug',
@@ -229,7 +233,4 @@ return RectorConfig::configure()
         'beforeEach',
         'current_password',
         'new_password',
-    ])
-    ->withConfiguredRule(StringToClassConstantRector::class, [
-        new StringToClassConstant('X-Request-Id', PrepareRequestListener::class, 'X_REQUEST_ID'),
     ]);

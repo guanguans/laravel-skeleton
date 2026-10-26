@@ -15,9 +15,15 @@ namespace App\Listeners;
 
 use Illuminate\Console\Events\CommandStarting;
 use Illuminate\Console\Events\ScheduledTaskStarting;
+use Illuminate\Console\Scheduling\CallbackEvent;
+use Illuminate\Console\Scheduling\Event;
+use Illuminate\Console\Scheduling\ScheduleListCommand;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Context;
 
+/**
+ * @method string getClosureLocation(CallbackEvent $event)
+ */
 final class ContextSubscriber
 {
     /**
@@ -25,27 +31,55 @@ final class ContextSubscriber
      * @see \Symfony\Component\Console\Debug\CliRequest
      * @see \Symfony\Component\Console\Command\TraceableCommand
      *
+     * @api
+     *
      * @return array<class-string, callable(object $event): void>
      */
     public function subscribe(): array
     {
         return [
-            RouteMatched::class => static function (RouteMatched $event): void {
-                Context::add([
-                    'action' => $event->route->getActionName(),
-                ]);
+            CommandStarting::class => static function (CommandStarting $commandStarting): void {
+                Context::add(
+                    'Command',
+                    // $commandStarting->command ?? $commandStarting->input->getArguments()['command'] ?? 'default',
+                    // Event::normalizeCommand((string) $commandStarting->input),
+                    (string) $commandStarting->input
+                );
             },
-            CommandStarting::class => static function (CommandStarting $event): void {
-                Context::add([
-                    'command' => $event->command ?? $event->input->getArguments()['command'] ?? 'default',
-                ]);
+            RouteMatched::class => static function (RouteMatched $routeMatched): void {
+                Context::add('Controller Action', $routeMatched->route->getActionName());
             },
-            ScheduledTaskStarting::class => static function (ScheduledTaskStarting $event): void {
-                /** @noinspection NestedTernaryOperatorInspection */
-                Context::add([
-                    'command' => ($event->task->command ?: $event->task->description) ?: 'Closure',
-                ]);
+            ScheduledTaskStarting::class => static function (ScheduledTaskStarting $scheduledTaskStarting): void {
+                Context::add('Command', self::resolveCommand($scheduledTaskStarting->task));
             },
         ];
+    }
+
+    /**
+     * @see \Illuminate\Console\Scheduling\ScheduleListCommand::displayJson()
+     */
+    private static function resolveCommand(Event $schedulingEvent): string
+    {
+        /**
+         * @see \Illuminate\Console\Scheduling\Schedule::command()
+         * @see \Illuminate\Console\Scheduling\Schedule::exec()
+         */
+        if ($schedulingEvent->command) {
+            return Event::normalizeCommand($schedulingEvent->command);
+        }
+
+        /**
+         * @see \Illuminate\Console\Scheduling\Schedule::call()
+         * @see \Illuminate\Console\Scheduling\Schedule::job()
+         */
+        $command = Event::normalizeCommand($schedulingEvent->getSummaryForDisplay());
+
+        if (!$schedulingEvent instanceof CallbackEvent || !\in_array($command, ['Callback', 'Closure'], true)) {
+            return $command;
+        }
+
+        return 'Closure at: '.(fn () => $this->getClosureLocation($schedulingEvent))->call(
+            tap(resolve(ScheduleListCommand::class))->setLaravel(app())
+        );
     }
 }
