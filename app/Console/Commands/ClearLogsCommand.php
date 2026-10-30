@@ -24,7 +24,7 @@ final class ClearLogsCommand extends AbstractCommand
 {
     public function handle(): void
     {
-        $files = array_keys(iterator_to_array(
+        $files = collect(
             Finder::create()
                 ->in(storage_path('logs/'))
                 ->ignoreDotFiles(false)
@@ -37,10 +37,11 @@ final class ClearLogsCommand extends AbstractCommand
                         && Date::createFromTimestamp($fileInfo->getMTime())->diffInDays(now()) > (int) $this->argument('days')
                 )
                 ->files()
-        ));
+        )->keys()->all();
 
         $this->components->bulletList($files);
         File::delete($files);
+        $this->components->info($files ? 'Cleared.' : "No log files to clear that are older than {$this->argument('days')} days.");
     }
 
     /**

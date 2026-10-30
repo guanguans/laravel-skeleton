@@ -72,7 +72,7 @@ return RectorConfig::configure()
     ->withSkip([
         RenameGarbageParamNameRector::class,
         // RenameParamToMatchTypeRector::class,
-        StringToClassConstantRector::class,
+        // StringToClassConstantRector::class,
 
         // Skip common rules.
         ChainExpectCallsRector::class,

@@ -51,6 +51,7 @@ final class ContextSubscriber
             },
             ScheduledTaskStarting::class => static function (ScheduledTaskStarting $scheduledTaskStarting): void {
                 Context::add('Command', self::resolveCommand($scheduledTaskStarting->task));
+                Context::add('In Schedule', true);
             },
         ];
     }

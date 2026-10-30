@@ -19,11 +19,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 final class IndexRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        // return $this->user()->can('viewAny', JWTUser::class);
-        return true;
-    }
+    // public function authorize(): bool
+    // {
+    //     // return $this->user()->can('viewAny', JWTUser::class);
+    //     return true;
+    // }
 
     /**
      * @return array<string, list<string>>

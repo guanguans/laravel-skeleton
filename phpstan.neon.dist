@@ -204,7 +204,7 @@ parameters:
         - identifier: shipmonk.deadProperty.neverRead
         - identifier: shipmonk.deadProperty.neverWritten
         - identifier: shipmonk.forbiddenCast
-        - identifier: shipmonk.iteratorToArrayWithoutPreserveKeys
+#        - identifier: shipmonk.iteratorToArrayWithoutPreserveKeys
         - identifier: shipmonk.publicPropertyNotReadonly
         - identifier: shipmonk.unusedParameter
         - identifier: shipmonk.variableTypeOverwritten
