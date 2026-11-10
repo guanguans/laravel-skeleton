@@ -67,7 +67,7 @@ final class OpcacheUrlCommand extends AbstractCommand
     {
         return [
             'route' => 'in:clear,compile,config,status',
-            'force' => 'boolean',
+            'force' => 'sometimes|bool',
         ];
     }
 }

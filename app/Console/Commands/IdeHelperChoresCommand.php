@@ -113,7 +113,7 @@ final class IdeHelperChoresCommand extends AbstractCommand
             'only.*' => 'string',
             'except' => 'array',
             'except.*' => 'string',
-            'json' => 'bool',
+            'json' => 'sometimes|bool',
         ];
     }
 

@@ -47,15 +47,15 @@ final class CheckServiceProviderCommand extends AbstractCommand
         $discoveredPackages = collect(require base_path('bootstrap/cache/packages.php'))->reject(
             fn (array $_, string $package): bool => str($package)->is($this->except)
         );
-        $shouldntDiscoverPackages = $discoveredPackages->filter(static fn (
-            array $_,
-            string $package
-        ): bool => \in_array($package, $devPackages, true) && !\in_array($package, $dontDiscoverPackages, true));
+        $shouldntDiscoverPackages = $discoveredPackages->filter(
+            static fn (array $_, string $package): bool => \in_array($package, $devPackages, true)
+                && !\in_array($package, $dontDiscoverPackages, true)
+        );
         $indirectDiscoveredPackages = $discoveredPackages
-            ->filter(static fn (
-                array $_,
-                string $package
-            ): bool => !\in_array($package, $prodPackages, true) && !\in_array($package, $devPackages, true))
+            ->filter(
+                static fn (array $_, string $package): bool => !\in_array($package, $prodPackages, true)
+                    && !\in_array($package, $devPackages, true)
+            )
             ->when($this->option('ignore-indirect'), static fn (): Collection => Collection::empty());
 
         if ($shouldntDiscoverPackages->isNotEmpty() || $indirectDiscoveredPackages->isNotEmpty()) {
@@ -109,7 +109,7 @@ final class CheckServiceProviderCommand extends AbstractCommand
         return [
             'except' => 'list',
             'except.*' => 'required|string|distinct',
-            'ignore-indirect' => 'boolean',
+            'ignore-indirect' => 'sometimes|bool',
         ];
     }
 }
