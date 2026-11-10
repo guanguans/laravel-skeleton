@@ -40,10 +40,11 @@ Artisan::command(
                 $this->option('path')
                     ? array_reduce(
                         $this->option('path'),
-                        static fn (
-                            Finder $finder,
-                            string $path
-                        ): Finder => is_dir($path) ? $finder->in($path) : $finder->append([$path]),
+                        static fn (Finder $finder, string $path): Finder => match (true) {
+                            is_dir($path) => $finder->in($path),
+                            is_file($path) => $finder->append([$path]),
+                            default => throw new InvalidArgumentException("The path [$path] is not a directory or file."),
+                        },
                         $finder
                     )
                     : $finder
