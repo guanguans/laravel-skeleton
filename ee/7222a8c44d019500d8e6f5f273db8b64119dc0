@@ -1,0 +1,19 @@
+routes/console.php
+  s_ac4a4ee30f25e8::t_2528e0693a8891 43-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "ee7222a8c44d019500d8e6f5f273db8b64119dc0",
+  "prompts": {},
+  "sessions": {
+    "s_ac4a4ee30f25e8": {
+      "agent_id": {
+        "tool": "github-copilot-jetbrains",
+        "id": "1794280968671",
+        "model": "unknown"
+      },
+      "human_author": "guanguans <ityaozm@gmail.com>"
+    }
+  }
+}
