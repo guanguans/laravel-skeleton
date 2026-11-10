@@ -15,6 +15,7 @@ namespace App\Providers;
 
 use App\Http\Middleware\LogHttp;
 use App\Support\Monolog\Processor\AppendExtraDataProcessor;
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Log;
@@ -22,6 +23,7 @@ use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Monolog\Logger as MonologLogger;
+use Symfony\Component\Console\Input\ArgvInput;
 
 final class LogServiceProvider extends ServiceProvider
 {
@@ -60,14 +62,14 @@ final class LogServiceProvider extends ServiceProvider
 
             Context::add(
                 app()->runningInConsole()
-                    ? ['Command' => null, 'In Schedule' => false]
+                    ? ['Command' => Event::normalizeCommand((string) new ArgvInput), 'In Schedule' => false]
                     : [
                         'User Id' => request()->user()?->id,
-                        'URL' => request()->url(),
+                        'Url' => request()->url(),
                         'IP' => request()->ip(),
                         'Method' => request()->method(),
                         'Controller Action' => request()->route()?->getActionName(),
-                        // 'Command' => null,
+                        // 'Command' => Event::normalizeCommand((string) new ArgvInput),
                         // 'In Schedule' => false,
                         // 'Memory' => Number::fileSize(memory_get_peak_usage(true)),
                         // 'Duration' => blank(

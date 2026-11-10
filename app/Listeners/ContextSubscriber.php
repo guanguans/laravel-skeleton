@@ -39,12 +39,7 @@ final class ContextSubscriber
     {
         return [
             CommandStarting::class => static function (CommandStarting $commandStarting): void {
-                Context::add(
-                    'Command',
-                    // $commandStarting->command ?? $commandStarting->input->getArguments()['command'] ?? 'default',
-                    // Event::normalizeCommand((string) $commandStarting->input),
-                    (string) $commandStarting->input
-                );
+                Context::add('Command', Event::normalizeCommand((string) $commandStarting->input));
             },
             RouteMatched::class => static function (RouteMatched $routeMatched): void {
                 Context::add('Controller Action', $routeMatched->route->getActionName());

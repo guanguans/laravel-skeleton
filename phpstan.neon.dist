@@ -328,6 +328,7 @@ parameters:
             identifier: complexity.functionLike
             paths:
                 - app/Providers/AutowiredServiceProvider.php
+                - app/Providers/ConsoleServiceProvider.php
                 - app/Support/BitEncoder.php
                 - app/Support/helpers.php
                 - app/Support/Mixin/QueryBuilder/QueryBuilderMixin.php
