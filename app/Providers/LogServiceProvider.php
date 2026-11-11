@@ -19,7 +19,6 @@ use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Traits\Conditionable;
 use Monolog\Logger as MonologLogger;
@@ -62,19 +61,16 @@ final class LogServiceProvider extends ServiceProvider
 
             Context::add(
                 app()->runningInConsole()
-                    ? ['Command' => Event::normalizeCommand((string) new ArgvInput), 'In Schedule' => false]
+                    ? [
+                        'Command' => Event::normalizeCommand((string) new ArgvInput),
+                        'In Schedule' => false,
+                    ]
                     : [
                         'User Id' => request()->user()?->id,
                         'Url' => request()->url(),
                         'IP' => request()->ip(),
                         'Method' => request()->method(),
                         'Controller Action' => request()->route()?->getActionName(),
-                        // 'Command' => Event::normalizeCommand((string) new ArgvInput),
-                        // 'In Schedule' => false,
-                        // 'Memory' => Number::fileSize(memory_get_peak_usage(true)),
-                        // 'Duration' => blank(
-                        //     $startTime = \defined('LARAVEL_START') ? LARAVEL_START : request()->server('REQUEST_TIME_FLOAT')
-                        // ) ? 'Unknown' : humans_milliseconds((microtime(true) - (float) $startTime) * 1000),
                     ]
             );
 

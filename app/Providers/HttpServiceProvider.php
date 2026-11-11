@@ -15,9 +15,11 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Listeners\PrepareRequestListener;
+use Carbon\CarbonInterval;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -63,6 +65,13 @@ final class HttpServiceProvider extends ServiceProvider
                     $event->response->setEncodingOptions($event->response->getEncodingOptions() | \JSON_UNESCAPED_UNICODE);
                 }
             });
+
+            resolve(Kernel::class)->whenRequestLifecycleIsLongerThan(
+                CarbonInterval::milliseconds(1000),
+                static function (): void {
+                    Log::channel('daily')->warning('Request lifecycle is longer than 1000 milliseconds.');
+                }
+            );
         });
     }
 

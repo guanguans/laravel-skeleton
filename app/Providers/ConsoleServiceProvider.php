@@ -20,6 +20,7 @@ use Composer\XdebugHandler\XdebugHandler;
 use Illuminate\Console\Application;
 use Illuminate\Console\Events\ArtisanStarting;
 use Illuminate\Console\Events\CommandStarting;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
@@ -52,7 +53,6 @@ final class ConsoleServiceProvider extends ServiceProvider
             $this->optimizes(optimize: 'filament:optimize', key: 'filament');
             $this->addDefaultInputDefinition();
             Application::starting(static function (Application $application): void {});
-            Artisan::whenCommandLifecycleIsLongerThan(CarbonInterval::seconds(3), static function (): void {});
             ClearAllCommand::prohibit($this->app->isProduction());
             Event::listen(ArtisanStarting::class, static function (ArtisanStarting $artisanStarting): void {});
             ServerDumper::register();
@@ -61,6 +61,13 @@ final class ConsoleServiceProvider extends ServiceProvider
                 'Homepage' => 'https://github.com/guanguans/laravel-skeleton',
                 'Name' => 'laravel-skeleton',
             ]);
+            resolve(Kernel::class)->whenCommandLifecycleIsLongerThan(CarbonInterval::milliseconds(1000), static function (): void {});
+            Artisan::whenCommandLifecycleIsLongerThan(
+                CarbonInterval::milliseconds(1000),
+                static function (): void {
+                    Log::channel('daily')->warning('Command lifecycle is longer than 1000 milliseconds.');
+                }
+            );
         });
     }
 
