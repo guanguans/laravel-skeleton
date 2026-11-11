@@ -1,0 +1,19 @@
+app/Listeners/CollectGarbageListener.php
+  h_f374ed0b3ee0f5 24
+app/Listeners/ContextSubscriber.php
+  h_f374ed0b3ee0f5 21,24,53-64
+  h_f374ed0b3ee0f5 65
+app/Providers/LogServiceProvider.php
+  h_f374ed0b3ee0f5 64-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "1b5fb1d0cd66a7119f7d83c0e2cb8a0749c2b338",
+  "prompts": {},
+  "humans": {
+    "h_f374ed0b3ee0f5": {
+      "author": "guanguans <ityaozm@gmail.com>"
+    }
+  }
+}
