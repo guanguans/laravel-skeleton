@@ -62,7 +62,6 @@ composer dev
 composer ecs
 composer ecs:check
 composer ecs:check-output-format-json
-composer ecs:custom
 composer ecs:custom-check
 composer ecs:custom-check-output-format-json
 composer ecs:custom-fix
